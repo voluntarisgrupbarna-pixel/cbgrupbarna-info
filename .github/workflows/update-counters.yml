@@ -1,0 +1,46 @@
+name: Update counters (JotForm Campus + 3x3)
+
+on:
+  schedule:
+    - cron: '15 * * * *'   # cada hora a :15
+  workflow_dispatch:        # botó manual a Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Update data.json
+        env:
+          JOTFORM_API_KEY: ${{ secrets.JOTFORM_API_KEY }}
+          TRES_X_TRES_COUNT_URL: ${{ secrets.TRES_X_TRES_COUNT_URL }}
+        run: |
+          if [ -z "$JOTFORM_API_KEY" ]; then
+            echo "::warning::JOTFORM_API_KEY secret no configurat. Vés a Settings → Secrets and variables → Actions → New repository secret amb nom 'JOTFORM_API_KEY' i el valor de jotform.com/myaccount/api"
+            echo "::notice::Saltant aquesta execució fins que el secret estigui configurat"
+            exit 0
+          fi
+          python3 .github/scripts/update-counters.py
+
+      - name: Commit canvis si hi han
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet data.json; then
+            echo "Sense canvis a data.json"
+          else
+            git add data.json
+            git commit -m "chore(data): auto-update counters from JotForm [skip ci]"
+            git push
+            echo "Commit i push fets"
+          fi
