@@ -23,8 +23,141 @@
 <meta name="twitter:title" content="LO CALENT · CB Grup Barna">
 <meta name="twitter:description" content="Portes Obertes · Campus 26 · 3x3 Westfield · Tot el bàsquet del Clot.">
 <meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
+<link rel="canonical" href="https://cbgrupbarna.info/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="CB Grup Barna">
+<meta name="keywords" content="bàsquet base Barcelona, CB Grup Barna, Clot bàsquet, Sant Martí esport, escoleta bàsquet, campus estiu bàsquet, 3x3 Westfield Glòries, portes obertes bàsquet, club bàsquet Sant Martí">
+<meta name="geo.region" content="ES-CT">
+<meta name="geo.placename" content="Barcelona, Districte de Sant Martí">
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
+
+<!-- Google Analytics 4 (mateixa propietat que el site del 3x3) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R6XYR7G1WF', { send_page_view: true, page_title: document.title, page_location: location.href });
+</script>
+
+<!-- JSON-LD: SportsClub + WebSite + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SportsClub",
+      "@id": "https://cbgrupbarna.info/#club",
+      "name": "CB Grup Barna",
+      "alternateName": ["Club Bàsquet Grup Barna", "Grup Barna", "Barna del Clot"],
+      "description": "Club de bàsquet base al Districte de Sant Martí, Barcelona. 60 anys formant esportistes des de 1965. +34 equips, 450 socis, més de 5.000 seguidors.",
+      "foundingDate": "1965",
+      "url": "https://cbgrupbarna.info/",
+      "logo": "https://cbgrupbarna.info/logo.png",
+      "image": "https://cbgrupbarna.info/og-image.jpg",
+      "telephone": "+34698425153",
+      "email": "info@cbgrupbarna.com",
+      "sport": "Basketball",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Barcelona",
+        "addressRegion": "Catalunya",
+        "addressCountry": "ES",
+        "postalCode": "08018",
+        "streetAddress": "Districte de Sant Martí, Clot"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Barcelona"
+      },
+      "memberOf": {
+        "@type": "SportsOrganization",
+        "name": "Federació Catalana de Bàsquet"
+      },
+      "sameAs": [
+        "https://www.instagram.com/cbgrupbarna/",
+        "https://twitter.com/cbgrupbarna",
+        "https://www.cbgrupbarna.com",
+        "https://cbgrupbarna-3x3timechamber.com"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cbgrupbarna.info/#website",
+      "url": "https://cbgrupbarna.info/",
+      "name": "CB Grup Barna · Lo Calent",
+      "description": "Dashboard ràpid del CB Grup Barna · Portes Obertes, Campus, 3x3 Westfield, Escoleta",
+      "inLanguage": "ca-ES",
+      "publisher": { "@id": "https://cbgrupbarna.info/#club" }
+    },
+    {
+      "@type": "Event",
+      "name": "Portes Obertes 25-26 · CB Grup Barna",
+      "description": "Vine a entrenar gratis al CB Grup Barna. Una sessió sense compromís per a noies i nois de 4 a 18 anys.",
+      "startDate": "2026-09-01",
+      "endDate": "2026-12-31",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "La Nau del Clot",
+        "address": { "@type": "PostalAddress", "addressLocality": "Barcelona", "addressRegion": "Catalunya", "addressCountry": "ES" }
+      },
+      "organizer": { "@id": "https://cbgrupbarna.info/#club" },
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "url": "https://forms.gle/6gfapjYDVtrjqTMM7",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Event",
+      "name": "Campus Time Chamber Estiu 26",
+      "description": "Campus d'estiu de bàsquet amb tecnificació intensiva. Quatre setmanes a juliol 2026.",
+      "startDate": "2026-07-01",
+      "endDate": "2026-07-26",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": { "@type": "Place", "name": "La Nau del Clot, Barcelona" },
+      "organizer": { "@id": "https://cbgrupbarna.info/#club" },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://form.jotform.com/260962500106347",
+        "availability": "https://schema.org/LimitedAvailability",
+        "priceCurrency": "EUR"
+      }
+    },
+    {
+      "@type": "Event",
+      "name": "3x3 Westfield Glòries · 4ª edició",
+      "description": "Torneig urbà 3x3 al centre comercial Westfield Glòries. Time Chamber × CB Grup Barna × Eix Clot.",
+      "startDate": "2026-06-06T09:00",
+      "endDate": "2026-06-07T22:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "Westfield Glòries",
+        "address": { "@type": "PostalAddress", "addressLocality": "Barcelona", "addressRegion": "Catalunya", "addressCountry": "ES" }
+      },
+      "organizer": { "@id": "https://cbgrupbarna.info/#club" },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://cbgrupbarna-3x3timechamber.com/",
+        "price": "75",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -373,17 +506,37 @@ body::after {
 .ig-mega-s { font-size: 12px; opacity: 0.92; margin-top: 4px; }
 .ig-mega-pill { background: white; color: #cc2366; padding: 9px 16px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; flex-shrink: 0; }
 
-.share-cta {
-  width: 100%; padding: 14px 18px; border-radius: 14px;
-  background: rgba(255,255,255,0.04); border: 1px dashed rgba(227,30,36,0.5);
-  color: white; text-align: center;
-  font-weight: 700; font-size: 14px;
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+/* SHARE ROW (multi-channel viral) */
+.share-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
   margin-bottom: 12px;
 }
-.share-cta:hover { background: rgba(227,30,36,0.10); border-color: var(--red); transform: translateY(-1px); }
-.share-cta svg { width: 16px; height: 16px; fill: currentColor; }
+.share-row .share-btn:first-child { grid-column: 1 / -1; }
+.share-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 14px; border-radius: 12px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-2);
+  color: white; font-weight: 700; font-size: 13px;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.share-btn:hover { background: rgba(255,255,255,0.08); transform: translateY(-1px); }
+.share-btn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+.share-btn.wa { background: linear-gradient(135deg, #25D366, #128C7E); border-color: transparent; }
+.share-btn.wa:hover { background: linear-gradient(135deg, #128C7E, #075E54); }
+.share-btn.x { background: #000; border-color: var(--border-2); }
+.share-btn.x:hover { background: #1a1a1a; border-color: white; }
+
+/* INSTAGRAM EMBED WRAPPER */
+.ig-embed-wrap {
+  margin-bottom: 16px;
+}
+.ig-embed-wrap blockquote.instagram-media {
+  background: var(--gray-1) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 16px !important;
+  margin: 0 0 12px !important;
+  overflow: hidden;
+}
 
 /* ==== FOOTER ==== */
 .foot { text-align: center; padding: 32px 18px 100px; font-family: 'JetBrains Mono', monospace; }
@@ -634,6 +787,20 @@ body::after {
     </a>
   </div>
 
+  <!-- ==== INSTAGRAM EMBED FEED ==== -->
+  <div class="feed-title">
+    <span style="font-size:18px">📸</span>
+    <span class="feed-title-main">Lo últim a Instagram</span>
+    <span class="feed-title-meta">@cbgrupbarna</span>
+  </div>
+
+  <div class="ig-embed-wrap">
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/cbgrupbarna/p/DXrdqL5iIlT/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#000; border:0; border-radius:16px; box-shadow:none; margin:0 0 12px; max-width:540px; min-width:280px; padding:0; width:100%"></blockquote>
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#000; border:0; border-radius:16px; box-shadow:none; margin:0 0 12px; max-width:540px; min-width:280px; padding:0; width:100%"></blockquote>
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#000; border:0; border-radius:16px; box-shadow:none; margin:0 0 12px; max-width:540px; min-width:280px; padding:0; width:100%"></blockquote>
+  </div>
+  <script async src="//www.instagram.com/embed.js"></script>
+
   <!-- ==== VIRAL ==== -->
   <div class="viral reveal">
 
@@ -660,10 +827,20 @@ body::after {
       </div>
     </a>
 
-    <button class="share-cta" id="shareBtn">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-      <span>Comparteix amb famílies del barri</span>
-    </button>
+    <div class="share-row">
+      <a href="https://api.whatsapp.com/send?text=Mira%20tot%20lo%20calent%20del%20CB%20Grup%20Barna%20%F0%9F%8F%80%20https%3A%2F%2Fcbgrupbarna.info" target="_blank" rel="noopener" class="share-btn wa" data-cta="share-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://twitter.com/intent/tweet?text=Mira%20tot%20lo%20calent%20del%20%40cbgrupbarna%20%F0%9F%8F%80&url=https%3A%2F%2Fcbgrupbarna.info&hashtags=somclot,b%C3%A0squet" target="_blank" rel="noopener" class="share-btn x" data-cta="share-x">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Comparteix a X
+      </a>
+      <button class="share-btn" id="shareBtn" data-cta="share-native">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+        Copiar link
+      </button>
+    </div>
 
   </div>
 </main>
