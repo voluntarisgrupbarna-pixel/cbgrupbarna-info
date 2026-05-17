@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#E31E24">
+<meta name="application-name" content="CB Grup Barna">
+<meta name="classification" content="Club de basquet base, club de baloncesto base, Barcelona, Sant Marti, El Clot">
 <title>CB Grup Barna · Club de Bàsquet i Baloncesto Base · Barcelona</title>
 <meta name="description" content="Club de bàsquet base de Barcelona des del 1965 — Club de baloncesto base en Barcelona desde 1965. +34 equips, 450 socis · Campus estiu · 3x3 Westfield Glòries · Portes Obertes · Escoleta · Streaming en directe.">
 
@@ -32,6 +34,8 @@
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/">
 <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://cbgrupbarna.info/sitemap.xml">
+<link rel="alternate" type="text/plain" title="LLMs.txt" href="https://cbgrupbarna.info/llms.txt">
 <!-- Indexació i geo -->
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="author" content="CB Grup Barna">
@@ -101,6 +105,15 @@
       },
       "telephone": "+34698425153",
       "email": "info@cbgrupbarna.com",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "informacio del club, portes obertes, campus i patrocinis",
+          "telephone": "+34698425153",
+          "email": "info@cbgrupbarna.com",
+          "availableLanguage": ["ca", "es"]
+        }
+      ],
       "sport": "Basketball",
       "keywords": "baloncesto base Barcelona, club baloncesto Barcelona, bàsquet base Barcelona, CB Grup Barna, Grup Barna, basket infantil Barcelona, campus baloncesto verano, 3x3 Barcelona, El Clot basket",
       "address": {
@@ -151,6 +164,83 @@
         "target": "https://cbgrupbarna.info/?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://cbgrupbarna.info/#webpage",
+      "url": "https://cbgrupbarna.info/",
+      "name": "CB Grup Barna · Bàsquet base i baloncesto base a Barcelona",
+      "description": "Portada oficial del CB Grup Barna amb informació actualitzada de portes obertes, campus d'estiu, escoleta, 3x3 Westfield Glòries, streaming i contacte del club.",
+      "inLanguage": ["ca-ES", "es-ES"],
+      "isPartOf": { "@id": "https://cbgrupbarna.info/#website" },
+      "about": { "@id": "https://cbgrupbarna.info/#club" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://cbgrupbarna.info/og-image.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".head-tag", ".spw-sub", "#faq-ai-title"]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://cbgrupbarna.info/#faq",
+      "inLanguage": ["ca-ES", "es-ES"],
+      "isPartOf": { "@id": "https://cbgrupbarna.info/#website" },
+      "about": { "@id": "https://cbgrupbarna.info/#club" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Què és el CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CB Grup Barna és un club de bàsquet base del Clot, al Districte de Sant Martí de Barcelona, fundat el 1965. També es pot trobar com Club Bàsquet Grup Barna, Grup Barna o club de baloncesto base en Barcelona."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "On està el CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El club està vinculat al barri del Clot i al Districte de Sant Martí, Barcelona. La Nau del Clot és el punt esportiu principal per a activitats, entrenaments i esdeveniments del club."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Com puc apuntar un infant a portes obertes o a l'escoleta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les famílies poden contactar amb el CB Grup Barna per WhatsApp al +34 698 425 153 o consultar els enllaços de Portes Obertes i Escoleta disponibles a la portada oficial cbgrupbarna.info."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Què és el Campus Time Chamber Estiu 26?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "És el campus d'estiu de bàsquet i tecnificació del CB Grup Barna amb Time Chamber, previst per al juliol de 2026 i orientat a jugadors i jugadores de base."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Què és el 3x3 Westfield Glòries?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El 3x3 Westfield Glòries és un torneig urbà de bàsquet 3x3 organitzat amb CB Grup Barna, Time Chamber i l'entorn del Clot-Glòries de Barcelona."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "El CB Grup Barna treballa el bàsquet femení?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. El club impulsa una línia femenina forta i documenta el seu model al dossier Premi Dona i Esport, amb dades, recerca pròpia i propostes per al bàsquet femení de Barcelona."
+          }
+        }
+      ]
     },
     {
       "@type": "Event",
@@ -716,6 +806,38 @@ body::after {
 .sc-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border-2); color: rgba(255,255,255,0.7); padding: 13px 20px; border-radius: 999px; font-weight: 700; font-size: 13px; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
 .sc-ghost:hover { border-color: white; color: white; }
 .sponsor-note { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px; }
+
+/* ==== AI / SEARCH FAQ ==== */
+.ai-faq {
+  margin: 32px 0 18px; padding: 26px 22px;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--border); border-radius: 18px;
+}
+.ai-faq-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.ai-faq h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(26px, 7vw, 38px);
+  line-height: 1; letter-spacing: 0.8px; margin-bottom: 8px;
+}
+.ai-faq-intro { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
+.ai-faq details {
+  border-top: 1px solid var(--border);
+  padding: 13px 0;
+}
+.ai-faq details:last-child { padding-bottom: 0; }
+.ai-faq summary {
+  cursor: pointer; list-style: none;
+  font-size: 13.5px; font-weight: 800; color: #fff;
+}
+.ai-faq summary::-webkit-details-marker { display: none; }
+.ai-faq summary::after { content: '+'; float: right; color: var(--red); font-family: 'JetBrains Mono', monospace; }
+.ai-faq details[open] summary::after { content: '-'; }
+.ai-faq p { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.6; margin-top: 8px; }
+.ai-faq a { color: white; text-decoration: underline; text-decoration-color: rgba(227,30,36,0.65); text-underline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -744,7 +866,7 @@ body::after {
 <!-- ==== HEADER ==== -->
 <header class="head">
   <div class="head-logo"><img src="logo.png" alt="Escut CB Grup Barna" width="80" height="80" fetchpriority="high" decoding="async"></div>
-  <div class="head-name">CB Grup Barna</div>
+  <h1 class="head-name">CB Grup Barna</h1>
   <div class="head-tag">Bàsquet al Clot · Sant Martí, Barcelona · des de 1965</div>
   <div class="head-stats">
     <span><b>1965</b></span><span class="sep">·</span>
@@ -950,6 +1072,37 @@ body::after {
       <span class="spw-partner">MyPlay</span>
     </div>
   </div>
+
+  <!-- ==== FAQ indexable per cercadors i IA ==== -->
+  <section class="ai-faq reveal" aria-labelledby="faq-ai-title">
+    <div class="ai-faq-kicker">Informació oficial · Cercadors · IA</div>
+    <h2 id="faq-ai-title">Preguntes freqüents sobre CB Grup Barna</h2>
+    <p class="ai-faq-intro">Respostes breus perquè famílies, buscadors i assistents d'IA identifiquin correctament el club, les activitats i el contacte oficial.</p>
+    <details>
+      <summary>Què és el CB Grup Barna?</summary>
+      <p>CB Grup Barna és un club de bàsquet base del Clot, al Districte de Sant Martí de Barcelona, fundat el 1965. També es pot buscar com Club Bàsquet Grup Barna, Grup Barna o club de baloncesto base en Barcelona.</p>
+    </details>
+    <details>
+      <summary>On està el club?</summary>
+      <p>El club està vinculat al barri del Clot i al Districte de Sant Martí. La Nau del Clot és el punt esportiu principal per a activitats, entrenaments i esdeveniments del CB Grup Barna.</p>
+    </details>
+    <details>
+      <summary>Com puc apuntar un infant a Portes Obertes o a l'Escoleta?</summary>
+      <p>Les famílies poden contactar per WhatsApp al <a href="https://wa.me/34698425153">+34 698 425 153</a> o utilitzar els enllaços de Portes Obertes i Escoleta disponibles en aquesta portada.</p>
+    </details>
+    <details>
+      <summary>Què és el Campus Time Chamber Estiu 26?</summary>
+      <p>És el campus d'estiu de bàsquet i tecnificació del CB Grup Barna amb Time Chamber, previst per al juliol de 2026 i orientat a jugadors i jugadores de base.</p>
+    </details>
+    <details>
+      <summary>Què és el 3x3 Westfield Glòries?</summary>
+      <p>És un torneig urbà de bàsquet 3x3 organitzat amb CB Grup Barna, Time Chamber i l'entorn del Clot-Glòries. La informació d'inscripció està enllaçada des d'aquesta web oficial.</p>
+    </details>
+    <details>
+      <summary>El club treballa el bàsquet femení?</summary>
+      <p>Sí. El CB Grup Barna impulsa una línia femenina forta i documenta el seu model al dossier <a href="/premidonaesport/">Premi Dona i Esport</a>, amb dades, recerca pròpia i propostes per al bàsquet femení de Barcelona.</p>
+    </details>
+  </section>
 
   <!-- ==== COUNTDOWN 3x3 ==== -->
   <div class="countdown-bar reveal">
