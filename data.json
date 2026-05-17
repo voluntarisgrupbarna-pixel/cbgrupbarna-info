@@ -1,19 +1,86 @@
 {
-  "lastUpdate": "2026-05-02T20:30:00+02:00",
+  "_comment": "Hub de dades compartit del CB Grup Barna. Totes les apps llegiran d'aquí. Actualitzar en UN SOL LLOC, propagar a tot arreu.",
+  "lastUpdate": "2026-05-17T12:00:00+02:00",
+
+  "club": {
+    "nom": "CB Grup Barna",
+    "nomComplet": "Club de Bàsquet Grup Barna",
+    "fundacioAny": 1965,
+    "barri": "Sant Martí",
+    "ciutat": "Barcelona",
+    "web": "https://cbgrupbarna.com",
+    "whatsapp": "+34698425153",
+    "whatsappLink": "https://wa.me/34698425153",
+    "email": "cbgrupbarna@gmail.com",
+    "instagram": "@cbgrupbarna",
+    "instagramUrl": "https://instagram.com/cbgrupbarna",
+    "github": "voluntarisgrupbarna-pixel"
+  },
+
+  "temporada": {
+    "id": "2025-2026",
+    "inici": "2025-09-01",
+    "final": "2026-06-30",
+    "categoriesActives": [
+      "Premini", "Mini", "Preinfantil", "Infantil", "Cadet", "Júnior", "Sub-22", "Sènior", "Open"
+    ]
+  },
+
   "campus": {
+    "actiu": true,
+    "nom": "Campus Time Chamber Estiu 2026",
+    "site": "https://timechamber.skywork.website",
     "form": "https://wa.me/34698425153?text=Hola!%20Vull%20inscriure%27m%20al%20Campus%20Time%20Chamber%20Estiu%2026.%20Codi:%20CAMPUS_INFO_CAMPUS",
     "limitPerWeek": 50,
     "weeks": [
-      { "id": 1, "label": "SET 1 · 1-5 jul",   "filled": 18 },
-      { "id": 2, "label": "SET 2 · 8-12 jul",  "filled": 22 },
-      { "id": 3, "label": "SET 3 · 15-19 jul", "filled": 25 },
-      { "id": 4, "label": "SET 4 · 22-26 jul", "filled": 12 }
+      { "id": 1, "label": "SET 1 · 1-5 jul",   "filled": 18, "dates": "2026-07-01/2026-07-05" },
+      { "id": 2, "label": "SET 2 · 8-12 jul",  "filled": 22, "dates": "2026-07-08/2026-07-12" },
+      { "id": 3, "label": "SET 3 · 15-19 jul", "filled": 25, "dates": "2026-07-15/2026-07-19" },
+      { "id": 4, "label": "SET 4 · 22-26 jul", "filled": 12, "dates": "2026-07-22/2026-07-26" }
     ]
   },
+
   "tres_x_tres": {
+    "actiu": true,
+    "nom": "3x3 Westfield Glòries 2026",
+    "edicio": 4,
     "site": "https://cbgrupbarna-3x3timechamber.com",
+    "dates": ["2026-06-06", "2026-06-07"],
+    "lloc": "Westfield Glòries, Barcelona",
     "filled": 42,
     "limit": 60,
-    "deadlineNote": "Aviat tancarem inscripcions"
-  }
+    "deadlineNote": "Aviat tancarem inscripcions",
+    "categories": 10
+  },
+
+  "events": {
+    "calendari": [
+      { "id": "3x3",          "nom": "3x3 Westfield Glòries", "inici": "2026-06-06", "final": "2026-06-07", "tipus": "torneig" },
+      { "id": "mesOrgull",    "nom": "Mes de l'Orgull",        "inici": "2026-06-01", "final": "2026-06-30", "tipus": "campanya" },
+      { "id": "campus",       "nom": "Campus Time Chamber",    "inici": "2026-07-01", "final": "2026-07-26", "tipus": "campus" },
+      { "id": "littleBasket", "nom": "Little Basket Day",      "inici": "2026-06-23", "final": "2026-06-23", "tipus": "jornada" }
+    ]
+  },
+
+  "contactesClub": {
+    "_note": "Contactes institucionals públics del club. Dades de famílies/jugadors NO aquí (RGPD — al Sheets privat).",
+    "coordinadora": { "nom": "Ana", "whatsapp": "+34698425153", "email": "cbgrupbarna@gmail.com" }
+  },
+
+  "patrocinadors": {
+    "_note": "Llistat simplificat. Detall complet a Drive: CB Grup Barna / Patrocinadors / [Any].gsheet",
+    "gold": [],
+    "silver": [],
+    "bronze": [],
+    "_todoAna": "Omplir aquest llistat amb els patrocinadors actuals de la temporada 2025-2026"
+  },
+
+  "xarxes": {
+    "instagram": { "handle": "@cbgrupbarna", "url": "https://instagram.com/cbgrupbarna" },
+    "whatsapp":  { "numero": "+34698425153", "link": "https://wa.me/34698425153" },
+    "web":       { "url": "https://cbgrupbarna.com" },
+    "microsite3x3": { "url": "https://cbgrupbarna-3x3timechamber.com" }
+  },
+
+  "_howToUpdate": "Actualitza aquest fitxer quan canviï qualsevol dada del club (places campus, inscripcions 3x3, etc.). Totes les apps llegiran d'aquí automàticament si estan connectades."
 }
