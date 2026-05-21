@@ -11,24 +11,15 @@
       color: #fff;
       font-family: Arial, Helvetica, sans-serif;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: flex; flex-direction: column; align-items: center;
       padding: 20px 16px 40px;
       overflow-x: hidden;
     }
     .header { text-align:center; padding:20px 0 12px; width:100%; max-width:500px; }
     .badge {
-      display: inline-block;
-      background: #ff1f4f;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      padding: 5px 16px;
-      border-radius: 20px;
-      margin-bottom: 14px;
+      display: inline-block; background:#ff1f4f; color:#fff;
+      font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:2px;
+      padding:5px 16px; border-radius:20px; margin-bottom:14px;
     }
     .header h1 { font-size:30px; font-weight:900; text-transform:uppercase; line-height:1.15; margin-bottom:8px; }
     .header h1 span { color:#ff1f4f; }
@@ -36,61 +27,61 @@
     .header .sub   { font-size:14px; color:#7a8a9e; font-weight:700; letter-spacing:1px; }
 
     /* Wheel */
-    .wheel-wrap {
-      position: relative;
-      width: 300px; height: 300px;
-      margin: 20px auto 8px;
-    }
+    .wheel-wrap { position:relative; width:300px; height:300px; margin:20px auto 8px; }
     .pointer {
-      position: absolute;
-      top: -16px; left: 50%;
-      transform: translateX(-50%);
+      position:absolute; top:-16px; left:50%; transform:translateX(-50%);
       width:0; height:0;
-      border-left: 13px solid transparent;
-      border-right: 13px solid transparent;
-      border-top: 26px solid #ff1f4f;
-      z-index: 10;
-      filter: drop-shadow(0 3px 8px rgba(255,31,79,0.9));
+      border-left:13px solid transparent; border-right:13px solid transparent;
+      border-top:26px solid #ff1f4f;
+      z-index:10; filter:drop-shadow(0 3px 8px rgba(255,31,79,0.9));
     }
-    canvas {
-      display: block;
-      border-radius: 50%;
-      box-shadow: 0 0 50px rgba(255,31,79,.35), 0 0 100px rgba(255,204,102,.08);
-    }
+    canvas { display:block; border-radius:50%; box-shadow:0 0 50px rgba(255,31,79,.35),0 0 100px rgba(255,204,102,.08); }
 
     /* Spin button */
     .spin-btn {
-      display: block;
-      margin: 16px auto 10px;
-      background: linear-gradient(135deg,#ff1f4f 0%,#ff6b35 100%);
-      color: #fff;
-      font-family: Arial, sans-serif;
-      font-size: 20px; font-weight:900;
-      text-transform: uppercase; letter-spacing:2px;
-      border: none; border-radius: 50px;
-      padding: 18px 52px;
-      cursor: pointer;
-      box-shadow: 0 8px 28px rgba(255,31,79,.5);
-      transition: transform .15s, box-shadow .15s;
+      display:block; margin:16px auto 6px;
+      background:linear-gradient(135deg,#ff1f4f 0%,#ff6b35 100%);
+      color:#fff; font-family:Arial,sans-serif; font-size:20px; font-weight:900;
+      text-transform:uppercase; letter-spacing:2px;
+      border:none; border-radius:50px; padding:18px 52px;
+      cursor:pointer; box-shadow:0 8px 28px rgba(255,31,79,.5);
+      transition:transform .15s, box-shadow .15s;
     }
     .spin-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 12px 36px rgba(255,31,79,.65); }
     .spin-btn:disabled { opacity:.45; cursor:not-allowed; transform:none; }
-    .hint { font-size:12px; color:#3a4a5e; text-align:center; margin-bottom:24px; }
+
+    /* Spin counter */
+    .spin-counter {
+      text-align:center; margin-bottom:6px; font-size:12px; font-weight:700;
+    }
+    .spin-counter .dots { display:inline-flex; gap:5px; vertical-align:middle; margin-left:6px; }
+    .spin-counter .dot {
+      width:10px; height:10px; border-radius:50%;
+      background:#1e2a3a; border:1px solid #2a3a50;
+      transition: background .3s;
+    }
+    .spin-counter .dot.used { background:#ff1f4f; border-color:#ff1f4f; }
+
+    .hint { font-size:11px; color:#3a4a5e; text-align:center; margin-bottom:22px; }
+
+    /* No spins message */
+    .no-spins {
+      display:none; text-align:center;
+      background:#0d1018; border:1px solid #1e2a3a; border-radius:12px;
+      padding:16px 20px; max-width:320px; margin:0 auto 24px;
+    }
+    .no-spins p { font-size:14px; color:#7a8a9e; margin-bottom:12px; }
+    .no-spins a {
+      display:block; background:#ff1f4f; color:#fff; font-weight:900;
+      text-decoration:none; border-radius:50px; padding:12px 24px; font-size:15px;
+      text-transform:uppercase;
+    }
 
     /* Prizes grid */
-    .prizes-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      width: 100%; max-width: 380px;
-      margin: 0 auto 28px;
-    }
+    .prizes-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; max-width:380px; margin:0 auto 28px; }
     .prize-chip {
-      background: #0d1018;
-      border: 1px solid #1e2a3a;
-      border-radius: 10px;
-      padding: 10px 12px;
-      display: flex; align-items: center; gap:8px;
+      background:#0d1018; border:1px solid #1e2a3a; border-radius:10px;
+      padding:10px 12px; display:flex; align-items:center; gap:8px;
     }
     .prize-chip.highlight { border-color:#2a4fa8; background:#0d1528; }
     .prize-chip .ico { font-size:20px; flex-shrink:0; }
@@ -104,65 +95,57 @@
 
     /* Modal */
     .overlay {
-      display: none;
-      position: fixed; inset:0;
-      background: rgba(5,6,10,.92);
-      z-index: 200;
-      align-items: center; justify-content: center;
-      padding: 20px;
+      display:none; position:fixed; inset:0;
+      background:rgba(5,6,10,.93); z-index:200;
+      align-items:center; justify-content:center; padding:20px;
     }
     .overlay.show { display:flex; }
     .modal {
-      background: #0d1018;
-      border: 2px solid #ff1f4f;
-      border-radius: 22px;
-      padding: 36px 28px;
-      text-align: center;
-      max-width: 360px; width: 100%;
-      box-shadow: 0 0 70px rgba(255,31,79,.35);
-      animation: popIn .45s cubic-bezier(.175,.885,.32,1.275);
+      background:#0d1018; border:2px solid #ff1f4f; border-radius:22px;
+      padding:32px 24px; text-align:center; max-width:340px; width:100%;
+      box-shadow:0 0 70px rgba(255,31,79,.35);
+      animation:popIn .45s cubic-bezier(.175,.885,.32,1.275);
     }
     @keyframes popIn { from{transform:scale(.5);opacity:0;} to{transform:scale(1);opacity:1;} }
-    .modal .tag { font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:3px; color:#ffcc66; margin-bottom:10px; }
-    .modal .big-emoji { font-size:66px; display:block; margin:6px 0 10px; }
-    .modal .code-box {
-      display: none;
-      background: #1a2a5e;
-      border: 2px dashed #4a6fc8;
-      border-radius: 10px;
-      padding: 12px 24px;
-      margin: 0 auto 14px;
-      font-size: 28px; font-weight:900; letter-spacing:6px;
-      color: #fff;
+    .modal .tag { font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:3px; color:#ffcc66; margin-bottom:8px; }
+    .modal .big-emoji { font-size:58px; display:block; margin:4px 0 10px; }
+
+    /* Code box */
+    .code-box {
+      display:none;
+      background:#0a1428; border:2px dashed #3a5fc0; border-radius:12px;
+      padding:10px 20px; margin:0 auto 14px;
     }
-    .modal .code-box .code-label { font-size:10px; letter-spacing:2px; color:#7a8a9e; display:block; margin-bottom:4px; font-weight:400; }
-    .modal h2 { font-size:26px; font-weight:900; text-transform:uppercase; line-height:1.1; margin-bottom:8px; }
-    .modal .desc { font-size:14px; color:#7a8a9e; margin-bottom:24px; line-height:1.5; }
+    .code-label { font-size:10px; letter-spacing:2px; color:#6a8ab8; display:block; margin-bottom:5px; font-weight:700; text-transform:uppercase; }
+    .code-value { font-size:26px; font-weight:900; letter-spacing:5px; color:#fff; display:block; }
+    .code-copy {
+      margin-top:8px; font-size:11px; color:#4a6a98; cursor:pointer;
+      background:none; border:none; font-family:inherit; display:block; width:100%; text-align:center;
+    }
+    .code-copy:hover { color:#a0b8e0; }
+
+    .modal h2 { font-size:22px; font-weight:900; text-transform:uppercase; line-height:1.1; margin-bottom:8px; }
+    .modal .desc { font-size:13px; color:#7a8a9e; margin-bottom:20px; line-height:1.5; }
     .modal .cta {
-      display: block;
-      background: linear-gradient(135deg,#ff1f4f,#ff6b35);
-      color: #fff; font-size:15px; font-weight:900;
-      text-transform:uppercase; letter-spacing:1px;
-      text-decoration:none; border-radius:50px;
-      padding: 16px 28px; margin-bottom:12px;
-      box-shadow: 0 6px 22px rgba(255,31,79,.4);
+      display:block; background:linear-gradient(135deg,#ff1f4f,#ff6b35);
+      color:#fff; font-size:14px; font-weight:900; text-transform:uppercase; letter-spacing:1px;
+      text-decoration:none; border-radius:50px; padding:14px 24px; margin-bottom:10px;
+      box-shadow:0 6px 22px rgba(255,31,79,.4);
     }
     .modal .close-btn {
-      background: none; border:1px solid #1e2a3a; color:#7a8a9e;
-      font-size:13px; font-family:inherit; border-radius:50px;
-      padding:10px 24px; cursor:pointer; width:100%;
-      transition: border-color .15s, color .15s;
+      background:none; border:1px solid #1e2a3a; color:#7a8a9e;
+      font-size:12px; font-family:inherit; border-radius:50px;
+      padding:9px 20px; cursor:pointer; width:100%;
+      transition:border-color .15s,color .15s;
     }
     .modal .close-btn:hover { border-color:#7a8a9e; color:#fff; }
+    .modal .spins-left-note { font-size:11px; color:#3a4a5e; margin-top:8px; }
 
     /* Footer */
     .footer { text-align:center; color:#2a3540; font-size:11px; padding-top:8px; line-height:1.8; }
     .footer a { color:#3a4a5e; }
 
-    @media (max-width:340px) {
-      .wheel-wrap { width:270px; height:270px; }
-      .header h1 { font-size:24px; }
-    }
+    @media (max-width:340px) { .wheel-wrap{width:270px;height:270px;} .header h1{font-size:24px;} }
   </style>
 </head>
 <body>
@@ -179,7 +162,22 @@
   </div>
 
   <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎰 GIRA LA RULETA</button>
-  <p class="hint">Cada equip té 1 gir. El premi s'envia per correu.</p>
+
+  <div class="spin-counter" id="spinCounter">
+    Girs restants:&nbsp;
+    <span class="dots" id="spinDots">
+      <span class="dot" id="d0"></span>
+      <span class="dot" id="d1"></span>
+      <span class="dot" id="d2"></span>
+    </span>
+  </div>
+
+  <div class="no-spins" id="noSpins">
+    <p>Has usat els teus 3 girs 🎰<br>Usa el codi que has guanyat i inscriu-te!</p>
+    <a href="https://cbgrupbarna-3x3timechamber.com/#inscripcio">🏀 INSCRIU-TE AL 3×3</a>
+  </div>
+
+  <p class="hint">Màxim 3 girs per persona · El codi s'ha de fer servir en inscriure't</p>
 
   <div class="prizes-grid" id="prizesGrid"></div>
 
@@ -189,242 +187,229 @@
       <div class="tag">🎉 Has guanyat!</div>
       <span class="big-emoji" id="mEmoji">🎫</span>
       <div class="code-box" id="mCodeBox">
-        <span class="code-label">EL TEU CODI PROMO</span>
-        <span id="mCode">BARNAR</span>
+        <span class="code-label">El teu codi promo · Tu código</span>
+        <span class="code-value" id="mCode">BARNAR5</span>
+        <button class="code-copy" id="mCopyBtn" onclick="copyCode()">📋 Copiar codi</button>
       </div>
       <h2 id="mTitle">5% DESCOMPTE</h2>
-      <p class="desc" id="mDesc">Usa el codi BARNAR en inscriure't.</p>
-      <a href="#" class="cta" id="mCta">🎫 INSCRIU-TE ARA</a>
-      <button class="close-btn" onclick="closeOverlay()">Tornar a girar</button>
+      <p class="desc" id="mDesc">Usa el codi en inscriure't al torneig.</p>
+      <a href="#" class="cta" id="mCta">🏀 INSCRIU-TE ARA</a>
+      <button class="close-btn" onclick="closeOverlay()" id="mCloseBtn">Tornar a girar</button>
+      <p class="spins-left-note" id="mSpinsNote"></p>
     </div>
   </div>
 
   <div class="footer">
     <img src="https://cbgrupbarna-3x3timechamber.com/cb-grup-barna-logo-512.png" width="36" alt="CB Grup Barna"
-      style="opacity:.35; margin-bottom:6px; display:block; margin-left:auto; margin-right:auto;"><br>
+      style="opacity:.35;margin-bottom:6px;display:block;margin-left:auto;margin-right:auto;"><br>
     © CB Grup Barna 2026 · <a href="https://cbgrupbarna.com">cbgrupbarna.com</a><br>
-    Subjecte a bases legals. 1 gir per correu. Places limitades.
+    Subjecte a bases legals. Màxim 3 girs per correu. Places limitades.
   </div>
 
 <script>
-/* ==========================================================
-   PRIZES — weight controls probability (not sector size)
-   Total weight = 101 → 5% BARNAR ≈ 89%, rest ≈ 11%
-   ========================================================== */
+/* ============================================================
+   CONFIGURACIÓ DE PREMIS
+   weight = probabilitat relativa (total=101 → 5% ≈ 89%)
+   code   = codi a posar a la web del 3x3
+   ============================================================ */
 const PRIZES = [
   {
-    label:"5%\nDESCOMPTE", short:"5% DESCOMPTE",
-    desc:"Usa el codi BARNAR en inscriure't al torneig.",
+    label:"5%\nDESCOMPTE",  short:"5% DESCOMPTE",
+    desc:"Usa el codi BARNAR5 al completar la inscripció al 3×3.",
     color:"#2a4fa8", tc:"#fff", emoji:"🎫",
-    weight:90, code:"BARNAR",
-    cta:"🎫 Inscriu-te amb el -5%!",
-    link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
-    showInGrid: true
+    weight:90, code:"BARNAR5",
+    cta:"🎫 Inscriu-te amb el -5%!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    showInGrid:true
   },
   {
     label:"10%\nDESCOMPTE", short:"10% DESCOMPTE",
-    desc:"Codi de descompte al teu correu en menys de 5 minuts.",
+    desc:"Usa el codi BARNAR10 al completar la inscripció al 3×3.",
     color:"#ff6b35", tc:"#fff", emoji:"🏀",
-    weight:3, code:null,
-    cta:"🏀 Aplica el -10% ara",
-    link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
-    showInGrid: true
+    weight:3, code:"BARNAR10",
+    cta:"🏀 Aplica el -10% ara!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    showInGrid:true
   },
   {
     label:"SAMARRETA\nCBGB", short:"SAMARRETA CBGB",
-    desc:"Recull la teva samarreta oficial el dia de l'event!",
+    desc:"Usa el codi CAMISETA3X3 en inscriure't. Recull-la el dia de l'event!",
     color:"#1d2d5f", tc:"#fff", emoji:"👕",
-    weight:2, code:null,
-    cta:"👕 Inscriu-te i recull-la!",
-    link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
-    showInGrid: true
+    weight:2, code:"CAMISETA3X3",
+    cta:"👕 Inscriu-te i recull-la!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    showInGrid:true
   },
   {
     label:"REGAL\nSORPRESA", short:"REGAL SORPRESA",
-    desc:"Un regal especial t'espera el dia de l'event!",
+    desc:"Usa el codi REGAL3X3 en inscriure't. El regal t'espera a l'event!",
     color:"#c89a00", tc:"#090b12", emoji:"🎁",
-    weight:2, code:null,
-    cta:"🎁 Inscriu-te i recull-lo!",
-    link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
-    showInGrid: true
+    weight:2, code:"REGAL3X3",
+    cta:"🎁 Inscriu-te i recull-lo!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    showInGrid:true
   },
   {
     label:"SENSE\nPREMI", short:"SENSE PREMI",
-    desc:"Millor sort un altre cop. Vine i juga de totes formes!",
+    desc:"Millor sort un altre cop. Vine i juga de totes formes — el 3×3 t'espera!",
     color:"#1e2535", tc:"#6a7a8e", emoji:"😅",
     weight:2, code:null,
-    cta:"🏀 Vine igualment!",
-    link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
-    showInGrid: false  // no apareix a la graella de premis
+    cta:"🏀 Vine igualment!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    showInGrid:false
   },
   {
     label:"INSCRIPCIÓ\nINDIVIDUAL", short:"INSCRIPCIÓ INDIVIDUAL GRATIS",
-    desc:"1 jugador inscrit gratis! Places molt limitades.",
+    desc:"Usa el codi INDIVIDUAL3X3. 1 jugador inscrit gratis — places molt limitades!",
     color:"#ffcc66", tc:"#090b12", emoji:"⭐",
-    weight:1, code:null,
-    cta:"⭐ Reclama la teva plaça!",
-    link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
-    showInGrid: true
+    weight:1, code:"INDIVIDUAL3X3",
+    cta:"⭐ Reclama la teva plaça!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    showInGrid:true
   },
   {
-    label:"EQUIP\nCOMPLET GRATIS", short:"INSCRIPCIÓ EQUIP GRATIS",
-    desc:"Equip de 4 jugadors inscrit gratis! Única plaça disponible.",
+    label:"EQUIP\nCOMPLET GRATIS", short:"EQUIP COMPLET GRATIS",
+    desc:"Usa el codi EQUIP3X3. 4 jugadors inscrits gratis — 1 única plaça disponible!",
     color:"#ff1f4f", tc:"#fff", emoji:"🏆",
-    weight:1, code:null,
-    cta:"🏆 Reclama la inscripció!",
-    link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
-    showInGrid: true
+    weight:1, code:"EQUIP3X3",
+    cta:"🏆 Reclama la inscripció!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    showInGrid:true
   },
 ];
 
-/* ---- Build prizes grid (excluding showInGrid:false) ---- */
+/* ============================================================
+   LIMIT DE GIRS PER EMAIL (3 màxim)
+   La URL ha de contenir ?ref=email (Brevo posa {{contact.EMAIL}})
+   ============================================================ */
+const MAX_SPINS = 3;
+const params  = new URLSearchParams(window.location.search);
+const userRef = params.get('ref') || 'anon';
+const storeKey = 'ruleta3x3_' + btoa(encodeURIComponent(userRef)).replace(/[^a-z0-9]/gi,'').substring(0,24);
+
+function getSpinsUsed()  { return parseInt(localStorage.getItem(storeKey) || '0'); }
+function addSpin()       { localStorage.setItem(storeKey, getSpinsUsed() + 1); }
+function getSpinsLeft()  { return Math.max(0, MAX_SPINS - getSpinsUsed()); }
+
+/* ---- Update spin counter UI ---- */
+function updateCounter() {
+  const used = getSpinsUsed();
+  const left = getSpinsLeft();
+  for (let i = 0; i < MAX_SPINS; i++) {
+    document.getElementById('d' + i).classList.toggle('used', i < used);
+  }
+  if (left === 0) {
+    document.getElementById('spinBtn').style.display  = 'none';
+    document.getElementById('spinCounter').style.display = 'none';
+    document.getElementById('noSpins').style.display  = 'block';
+    document.getElementById('spinBtn').disabled = true;
+  }
+}
+
+/* ---- Build prizes grid ---- */
 const grid = document.getElementById('prizesGrid');
 PRIZES.filter(p => p.showInGrid).forEach(p => {
   const chip = document.createElement('div');
-  chip.className = 'prize-chip' + (p.code ? ' highlight' : '');
+  chip.className = 'prize-chip' + (p.code && p.weight >= 80 ? ' highlight' : '');
   chip.innerHTML = `
     <span class="ico">${p.emoji}</span>
     <div class="txt">
       ${p.short}
-      ${p.code ? `<span class="badge-code">${p.code}</span>` : `<small>${p.desc.substring(0,34)}…</small>`}
+      ${p.code
+        ? `<span class="badge-code">${p.code}</span>`
+        : `<small>${p.desc.substring(0,34)}…</small>`}
     </div>`;
   grid.appendChild(chip);
 });
 
-/* ---- Canvas ---- */
+/* ---- Canvas setup ---- */
 const canvas = document.getElementById('wheel');
 const ctx    = canvas.getContext('2d');
 const N      = PRIZES.length;
 const SLICE  = (2 * Math.PI) / N;
-let   angle  = -Math.PI / 2;  // primer sector centrat a dalt
+let   angle  = -Math.PI / 2;
 let   spinning = false;
 
 function drawWheel(a) {
   const cx = canvas.width  / 2;
   const cy = canvas.height / 2;
   const R  = cx - 5;
-
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // outer ring
-  ctx.beginPath();
-  ctx.arc(cx, cy, R + 5, 0, 2*Math.PI);
-  ctx.fillStyle = '#1a2240';
-  ctx.fill();
+  ctx.beginPath(); ctx.arc(cx, cy, R + 5, 0, 2*Math.PI); ctx.fillStyle='#1a2240'; ctx.fill();
 
   for (let i = 0; i < N; i++) {
-    const s = a + i * SLICE;
-    const e = s + SLICE;
+    const s = a + i * SLICE, e = s + SLICE;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,s,e); ctx.closePath();
+    ctx.fillStyle = PRIZES[i].color; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+R*Math.cos(e), cy+R*Math.sin(e));
+    ctx.strokeStyle='#090b12'; ctx.lineWidth=2; ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, R, s, e);
-    ctx.closePath();
-    ctx.fillStyle = PRIZES[i].color;
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + R * Math.cos(e), cy + R * Math.sin(e));
-    ctx.strokeStyle = '#090b12';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    // text
-    const mid = s + SLICE / 2;
-    const tr  = R * 0.62;
+    const mid=s+SLICE/2, tr=R*0.62;
     ctx.save();
-    ctx.translate(cx + tr * Math.cos(mid), cy + tr * Math.sin(mid));
-    ctx.rotate(mid + Math.PI / 2);
-    ctx.textAlign = 'center';
-
-    ctx.font = '15px serif';
-    ctx.fillText(PRIZES[i].emoji, 0, -18);
-
-    const lines = PRIZES[i].label.split('\n');
-    ctx.fillStyle = PRIZES[i].tc;
-    ctx.font = `bold ${lines[0].length > 7 ? 8 : 9}px Arial,sans-serif`;
-    ctx.fillText(lines[0], 0, -4);
-    if (lines[1]) ctx.fillText(lines[1], 0, 8);
-
+    ctx.translate(cx+tr*Math.cos(mid), cy+tr*Math.sin(mid));
+    ctx.rotate(mid+Math.PI/2); ctx.textAlign='center';
+    ctx.font='14px serif'; ctx.fillText(PRIZES[i].emoji, 0, -17);
+    const lines=PRIZES[i].label.split('\n');
+    ctx.fillStyle=PRIZES[i].tc;
+    ctx.font=`bold ${lines[0].length>7?8:9}px Arial,sans-serif`;
+    ctx.fillText(lines[0],0,-4);
+    if(lines[1]) ctx.fillText(lines[1],0,7);
     ctx.restore();
   }
 
-  // inner rim
-  ctx.beginPath();
-  ctx.arc(cx, cy, R - 10, 0, 2*Math.PI);
-  ctx.strokeStyle = 'rgba(255,255,255,.06)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  // center cap
-  ctx.beginPath();
-  ctx.arc(cx, cy, 26, 0, 2*Math.PI);
-  ctx.fillStyle = '#090b12';
-  ctx.fill();
-  ctx.strokeStyle = '#ffcc66';
-  ctx.lineWidth = 3;
-  ctx.stroke();
-
-  ctx.font = '18px serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('🏀', cx, cy);
-  ctx.textBaseline = 'alphabetic';
+  ctx.beginPath(); ctx.arc(cx,cy,R-10,0,2*Math.PI); ctx.strokeStyle='rgba(255,255,255,.06)'; ctx.lineWidth=1; ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx,cy,26,0,2*Math.PI); ctx.fillStyle='#090b12'; ctx.fill(); ctx.strokeStyle='#ffcc66'; ctx.lineWidth=3; ctx.stroke();
+  ctx.font='18px serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('🏀',cx,cy); ctx.textBaseline='alphabetic';
 }
 
 drawWheel(angle);
+updateCounter();
 
 /* ---- Easing ---- */
-function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+function easeOut(t) { return 1 - Math.pow(1-t, 4); }
 
-/* ---- Spin with pre-determined weighted outcome ---- */
+/* ---- Spin amb pesos pre-determinats ---- */
 function spinWheel() {
-  if (spinning) return;
+  if (spinning || getSpinsLeft() <= 0) return;
   spinning = true;
   document.getElementById('spinBtn').disabled = true;
 
-  // 1. Pick winner by weight (BEFORE animation starts)
-  const totalW = PRIZES.reduce((s, p) => s + p.weight, 0);
+  // 1. Pesos: tria guanyador ABANS de l'animació
+  const totalW = PRIZES.reduce((s,p) => s+p.weight, 0);
   let r = Math.random() * totalW;
   let chosen = PRIZES.length - 1;
-  for (let i = 0; i < PRIZES.length; i++) {
-    r -= PRIZES[i].weight;
-    if (r <= 0) { chosen = i; break; }
-  }
+  for (let i = 0; i < PRIZES.length; i++) { r -= PRIZES[i].weight; if (r <= 0){ chosen=i; break; } }
 
-  // 2. Calculate exact stop angle so chosen sector center is under pointer (top = -π/2)
-  //    sectorCenter(i) = angle + (i + 0.5) * SLICE
-  //    We want: finalAngle + (chosen + 0.5) * SLICE = -π/2 + k·2π
-  const base   = -Math.PI / 2 - (chosen + 0.5) * SLICE;
-  const minEnd = angle + 6 * 2 * Math.PI;           // at least 6 full spins
-  const k      = Math.ceil((minEnd - base) / (2 * Math.PI));
-  const target = base + k * 2 * Math.PI;
+  // 2. Angle exacte perquè el sector chosen quedi al puntero (top = -π/2)
+  const base   = -Math.PI/2 - (chosen+0.5)*SLICE;
+  const minEnd = angle + 6*2*Math.PI;
+  const k      = Math.ceil((minEnd - base) / (2*Math.PI));
+  const target = base + k*2*Math.PI;
 
-  // 3. Animate easeOut → target
-  const duration  = 4000 + Math.random() * 1500;
-  const startAng  = angle;
-  let   startTs   = null;
+  // 3. Animació
+  const duration = 4000 + Math.random()*1500;
+  const startAng = angle;
+  let startTs = null;
 
   function frame(ts) {
     if (!startTs) startTs = ts;
-    const prog = Math.min((ts - startTs) / duration, 1);
-    angle = startAng + (target - startAng) * easeOut(prog);
+    const prog = Math.min((ts-startTs)/duration, 1);
+    angle = startAng + (target-startAng)*easeOut(prog);
     drawWheel(angle);
-    if (prog < 1) {
-      requestAnimationFrame(frame);
-    } else {
-      angle = angle % (2 * Math.PI);
+    if (prog < 1) { requestAnimationFrame(frame); }
+    else {
+      angle = angle % (2*Math.PI);
       spinning = false;
+      addSpin();           // registra el gir
+      updateCounter();     // actualitza comptador
       showResult(chosen);
     }
   }
   requestAnimationFrame(frame);
 }
 
-/* ---- Show result modal ---- */
+/* ---- Modal de resultat ---- */
+let lastCode = null;
+
 function showResult(idx) {
   const p = PRIZES[idx];
+  lastCode = p.code;
+
   document.getElementById('mEmoji').textContent = p.emoji;
   document.getElementById('mTitle').textContent = p.short;
   document.getElementById('mDesc').textContent  = p.desc;
@@ -432,21 +417,49 @@ function showResult(idx) {
   const codeBox = document.getElementById('mCodeBox');
   if (p.code) {
     document.getElementById('mCode').textContent = p.code;
+    document.getElementById('mCopyBtn').textContent = '📋 Copiar codi';
     codeBox.style.display = 'block';
   } else {
     codeBox.style.display = 'none';
   }
 
   const cta = document.getElementById('mCta');
-  cta.textContent = p.cta;
-  cta.href = p.link;
+  cta.textContent = p.cta; cta.href = p.link;
+
+  const left = getSpinsLeft();
+  const note = document.getElementById('mSpinsNote');
+  const close = document.getElementById('mCloseBtn');
+  if (left > 0) {
+    note.textContent = `Et queden ${left} gir${left===1?'':'s'} · Te quedan ${left} giro${left===1?'':'s'}`;
+    close.style.display = 'block';
+  } else {
+    note.textContent = 'Has esgotat els 3 girs · Has agotado los 3 giros';
+    close.textContent = 'Tancar';
+    close.style.display = 'block';
+  }
 
   document.getElementById('overlay').classList.add('show');
 }
 
+function copyCode() {
+  if (!lastCode) return;
+  navigator.clipboard.writeText(lastCode).then(() => {
+    document.getElementById('mCopyBtn').textContent = '✅ Copiat!';
+    setTimeout(() => { document.getElementById('mCopyBtn').textContent = '📋 Copiar codi'; }, 2000);
+  }).catch(() => {
+    // fallback: seleccionar text
+    const el = document.getElementById('mCode');
+    const range = document.createRange(); range.selectNode(el);
+    window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
+    document.getElementById('mCopyBtn').textContent = '✅ Seleccionat!';
+  });
+}
+
 function closeOverlay() {
   document.getElementById('overlay').classList.remove('show');
-  document.getElementById('spinBtn').disabled = false;
+  if (getSpinsLeft() > 0) {
+    document.getElementById('spinBtn').disabled = false;
+  }
 }
 </script>
 </body>
