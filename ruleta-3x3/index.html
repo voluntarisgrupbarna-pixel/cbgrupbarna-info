@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Gira la Ruleta · 3×3 Westfield Glòries 2026</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: #05060a;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 40px;
+      overflow-x: hidden;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px 0 12px;
+      width: 100%;
+      max-width: 500px;
+    }
+    .badge {
+      display: inline-block;
+      background: #ff1f4f;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .header h1 {
+      font-size: 30px;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .header h1 span { color: #ff1f4f; }
+    .header h1 em { color: #ffcc66; font-style: normal; font-size: 24px; }
+    .header .sub {
+      font-size: 14px;
+      color: #7a8a9e;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* Wheel */
+    .wheel-wrap {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 20px auto 8px;
+    }
+    .pointer {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-top: 26px solid #ff1f4f;
+      z-index: 10;
+      filter: drop-shadow(0 3px 8px rgba(255,31,79,0.9));
+    }
+    canvas {
+      display: block;
+      border-radius: 50%;
+      box-shadow: 0 0 50px rgba(255,31,79,0.35), 0 0 100px rgba(255,204,102,0.08);
+    }
+
+    /* Buttons */
+    .spin-btn {
+      display: block;
+      margin: 16px auto 10px;
+      background: linear-gradient(135deg, #ff1f4f 0%, #ff6b35 100%);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border: none;
+      border-radius: 50px;
+      padding: 18px 52px;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(255,31,79,0.5);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .spin-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(255,31,79,0.65);
+    }
+    .spin-btn:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+
+    .hint { font-size:12px; color:#3a4a5e; text-align:center; margin-bottom:24px; }
+
+    /* Prizes grid */
+    .prizes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto 28px;
+    }
+    .prize-chip {
+      background: #0d1018;
+      border: 1px solid #1e2a3a;
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prize-chip .ico { font-size:20px; flex-shrink:0; }
+    .prize-chip .txt { font-size:12px; font-weight:700; color:#fff; line-height:1.3; }
+    .prize-chip .txt small { color:#7a8a9e; font-weight:400; font-size:10px; display:block; }
+
+    /* Modal */
+    .overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(5,6,10,.92);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .overlay.show { display:flex; }
+    .modal {
+      background: #0d1018;
+      border: 2px solid #ff1f4f;
+      border-radius: 22px;
+      padding: 36px 28px;
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 0 70px rgba(255,31,79,.35);
+      animation: popIn .45s cubic-bezier(.175,.885,.32,1.275);
+    }
+    @keyframes popIn {
+      from { transform:scale(.5); opacity:0; }
+      to   { transform:scale(1);  opacity:1; }
+    }
+    .modal .tag { font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:3px; color:#ffcc66; margin-bottom:10px; }
+    .modal .big-emoji { font-size:66px; display:block; margin:6px 0 12px; }
+    .modal h2 { font-size:28px; font-weight:900; text-transform:uppercase; line-height:1.1; margin-bottom:8px; }
+    .modal .desc { font-size:14px; color:#7a8a9e; margin-bottom:26px; line-height:1.5; }
+    .modal .cta {
+      display: block;
+      background: linear-gradient(135deg,#ff1f4f,#ff6b35);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      border-radius: 50px;
+      padding: 16px 28px;
+      margin-bottom: 12px;
+      box-shadow: 0 6px 22px rgba(255,31,79,.4);
+    }
+    .modal .close-btn {
+      background: none;
+      border: 1px solid #1e2a3a;
+      color: #7a8a9e;
+      font-size: 13px;
+      font-family: inherit;
+      border-radius: 50px;
+      padding: 10px 24px;
+      cursor: pointer;
+      width: 100%;
+      transition: border-color .15s, color .15s;
+    }
+    .modal .close-btn:hover { border-color:#7a8a9e; color:#fff; }
+
+    /* Footer */
+    .footer { text-align:center; color:#2a3540; font-size:11px; padding-top:8px; line-height:1.8; }
+    .footer a { color:#3a4a5e; }
+
+    @media (max-width:340px) {
+      .wheel-wrap { width:270px; height:270px; }
+      .header h1 { font-size:24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="badge">🏀 CB Grup Barna × Westfield Glòries</div>
+    <h1>GIRA LA <span>RULETA</span><br><em>I GUANYA!</em></h1>
+    <p class="sub">3×3 Streetball · 6–7 de juny 2026 · Barcelona</p>
+  </div>
+
+  <div class="wheel-wrap">
+    <div class="pointer"></div>
+    <canvas id="wheel" width="300" height="300"></canvas>
+  </div>
+
+  <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎰 GIRA LA RULETA</button>
+  <p class="hint">Cada equip té 1 gir. El premi s'envia per correu.</p>
+
+  <div class="prizes-grid" id="prizesGrid"></div>
+
+  <!-- Modal de resultat -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="tag">🎉 Has guanyat!</div>
+      <span class="big-emoji" id="mEmoji">🎫</span>
+      <h2 id="mTitle">INSCRIPCIÓ GRATIS!</h2>
+      <p class="desc" id="mDesc">Hem enviat el teu premi al correu.</p>
+      <a href="#" class="cta" id="mCta">🏀 INSCRIU-TE ARA</a>
+      <button class="close-btn" onclick="closeOverlay()">Tornar a girar</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <img src="https://cbgrupbarna-3x3timechamber.com/cb-grup-barna-logo-512.png" width="36" alt="CB Grup Barna" style="opacity:.35; margin-bottom:6px; display:block; margin-left:auto; margin-right:auto;"><br>
+    © CB Grup Barna 2026 · <a href="https://cbgrupbarna.com">cbgrupbarna.com</a><br>
+    Subjecte a bases legals. 1 gir per persona.
+  </div>
+
+<script>
+const PRIZES = [
+  { label:"INSCRIPCIÓ\nGRATIS!",  desc:"Hem enviat el codi al teu correu. Inscriu l'equip ara!",       color:"#ff1f4f", tc:"#fff",    emoji:"🎫", cta:"🎫 Inscriu l'equip gratis!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio" },
+  { label:"-30%\nINSCRIPCIÓ",    desc:"Codi de descompte al teu correu en menys de 5 minuts.",          color:"#ffcc66", tc:"#090b12", emoji:"🏀", cta:"🏀 Aplica el -30% ara",      link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio" },
+  { label:"SAMARRETA\nCBGB",      desc:"Recull la teva samarreta oficial el dia de l'event!",            color:"#1d2d5f", tc:"#fff",    emoji:"👕", cta:"👕 Inscriu-te i recull-la!",  link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio" },
+  { label:"-20%\nCAMPUS",         desc:"20% de descompte al Campus Timechamber d'estiu 2026.",           color:"#ff6b35", tc:"#fff",    emoji:"⭐", cta:"⭐ Apunta't al Campus!",      link:"https://timechamber.skywork.website" },
+  { label:"BALÓN\nOFICIAL 3×3",  desc:"Balón oficial 3×3 Streetball. Recull-lo el dia de l'event.",    color:"#c89a00", tc:"#090b12", emoji:"🏆", cta:"🏆 Inscriu-te i recull-lo!",  link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio" },
+  { label:"-15%\nINSCRIPCIÓ",    desc:"Codi de descompte al teu correu en menys de 5 minuts.",          color:"#c91040", tc:"#fff",    emoji:"🎁", cta:"🎁 Aplica el -15% ara",      link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio" },
+  { label:"BEGUDA\nGRATIS",       desc:"Una beguda gratis a la barra el dia de l'event. Salut!",         color:"#0d3b6e", tc:"#fff",    emoji:"🥤", cta:"🥤 Inscriu-te i recull-la!",  link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio" },
+  { label:"-10%\nINSCRIPCIÓ",    desc:"Codi de descompte al teu correu en menys de 5 minuts.",          color:"#2a4fa8", tc:"#fff",    emoji:"🎯", cta:"🎯 Aplica el -10% ara",      link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio" },
+];
+
+// Build prizes grid
+const grid = document.getElementById('prizesGrid');
+PRIZES.forEach(p => {
+  const chip = document.createElement('div');
+  chip.className = 'prize-chip';
+  chip.innerHTML = `<span class="ico">${p.emoji}</span><div class="txt">${p.label.replace('\n',' ')}<small>${p.desc.substring(0,36)}…</small></div>`;
+  grid.appendChild(chip);
+});
+
+// Canvas setup
+const canvas  = document.getElementById('wheel');
+const ctx     = canvas.getContext('2d');
+const N       = PRIZES.length;
+const SLICE   = (2 * Math.PI) / N;
+let   angle   = -Math.PI / 2; // start so first sector top-center
+let   spinning = false;
+
+function drawWheel(a) {
+  const cx = canvas.width  / 2;
+  const cy = canvas.height / 2;
+  const R  = cx - 5;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // outer ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, R + 5, 0, 2*Math.PI);
+  ctx.fillStyle = '#1a2240';
+  ctx.fill();
+
+  for (let i = 0; i < N; i++) {
+    const s = a + i * SLICE;
+    const e = s + SLICE;
+
+    // sector fill
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, R, s, e);
+    ctx.closePath();
+    ctx.fillStyle = PRIZES[i].color;
+    ctx.fill();
+
+    // divider line
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + R * Math.cos(e), cy + R * Math.sin(e));
+    ctx.strokeStyle = '#090b12';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // text in sector
+    const mid = s + SLICE / 2;
+    const tr  = R * 0.62;
+    const tx  = cx + tr * Math.cos(mid);
+    const ty  = cy + tr * Math.sin(mid);
+
+    ctx.save();
+    ctx.translate(tx, ty);
+    ctx.rotate(mid + Math.PI / 2); // perpendicular to radius
+    ctx.textAlign = 'center';
+
+    // emoji
+    ctx.font = '15px serif';
+    ctx.fillText(PRIZES[i].emoji, 0, -18);
+
+    // label lines
+    const lines = PRIZES[i].label.split('\n');
+    ctx.fillStyle = PRIZES[i].tc;
+    ctx.font = `bold ${lines[0].length > 7 ? 8 : 9}px Arial,sans-serif`;
+    ctx.fillText(lines[0], 0, -4);
+    if (lines[1]) ctx.fillText(lines[1], 0, 8);
+
+    ctx.restore();
+  }
+
+  // inner decorative dots on rim
+  ctx.beginPath();
+  ctx.arc(cx, cy, R - 10, 0, 2*Math.PI);
+  ctx.strokeStyle = 'rgba(255,255,255,.08)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // center cap
+  ctx.beginPath();
+  ctx.arc(cx, cy, 26, 0, 2*Math.PI);
+  ctx.fillStyle = '#090b12';
+  ctx.fill();
+  ctx.strokeStyle = '#ffcc66';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  ctx.font = '18px serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('🏀', cx, cy);
+  ctx.textBaseline = 'alphabetic';
+}
+
+drawWheel(angle);
+
+function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+
+function spinWheel() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById('spinBtn').disabled = true;
+
+  const totalRot = (6 + Math.random() * 4) * 2 * Math.PI + Math.random() * 2 * Math.PI;
+  const duration = 4200 + Math.random() * 1600;
+  const startAngle = angle;
+  let startTs = null;
+
+  function frame(ts) {
+    if (!startTs) startTs = ts;
+    const prog  = Math.min((ts - startTs) / duration, 1);
+    angle = startAngle + totalRot * easeOut(prog);
+    drawWheel(angle);
+    if (prog < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      angle = angle % (2 * Math.PI);
+      spinning = false;
+      showResult();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function showResult() {
+  // pointer at top = -π/2. Which sector is there after spin?
+  const pointer = -Math.PI / 2;
+  const norm    = ((pointer - angle) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
+  const idx     = Math.floor(norm / SLICE) % N;
+  const p       = PRIZES[idx];
+
+  document.getElementById('mEmoji').textContent = p.emoji;
+  document.getElementById('mTitle').textContent = p.label.replace('\n', ' ');
+  document.getElementById('mDesc').textContent  = p.desc;
+  const cta = document.getElementById('mCta');
+  cta.textContent = p.cta;
+  cta.href = p.link;
+
+  document.getElementById('overlay').classList.add('show');
+}
+
+function closeOverlay() {
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('spinBtn').disabled = false;
+}
+</script>
+</body>
+</html>
