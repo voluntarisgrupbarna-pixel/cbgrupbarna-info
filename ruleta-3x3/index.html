@@ -15,7 +15,9 @@
       padding: 20px 16px 40px;
       overflow-x: hidden;
     }
-    .header { text-align:center; padding:20px 0 12px; width:100%; max-width:500px; }
+
+    /* ── Capçalera compartida ── */
+    .header { text-align:center; padding:20px 0 16px; width:100%; max-width:500px; }
     .badge {
       display: inline-block; background:#ff1f4f; color:#fff;
       font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:2px;
@@ -26,7 +28,71 @@
     .header h1 em  { color:#ffcc66; font-style:normal; font-size:24px; }
     .header .sub   { font-size:14px; color:#7a8a9e; font-weight:700; letter-spacing:1px; }
 
-    /* Wheel */
+    /* ── Formulari de registre ── */
+    #formScreen { width:100%; max-width:420px; }
+    .form-card {
+      background:#0d1018; border:1px solid #1e2a3a; border-radius:18px;
+      padding:28px 24px; margin-top:4px;
+    }
+    .form-card h2 {
+      font-size:18px; font-weight:900; text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:6px;
+    }
+    .form-card h2 span { color:#ffcc66; }
+    .form-card .sub-form {
+      font-size:13px; color:#7a8a9e; margin-bottom:22px; line-height:1.5;
+    }
+    .row-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .field { margin-bottom:14px; }
+    .field label {
+      display:block; font-size:10px; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; color:#5a6a7e; margin-bottom:6px;
+    }
+    .field input {
+      width:100%; background:#080c12; border:1px solid #1e2a3a; color:#fff;
+      font-family:Arial,sans-serif; font-size:15px; border-radius:10px;
+      padding:12px 14px; outline:none; transition:border-color .15s;
+      -webkit-appearance:none;
+    }
+    .field input:focus { border-color:#2a4fa8; background:#091020; }
+    .field input::placeholder { color:#2a3545; }
+    .field input[type="tel"] { letter-spacing:.5px; }
+
+    .rgpd-row {
+      display:flex; gap:10px; align-items:flex-start;
+      margin-bottom:20px; padding:12px 14px;
+      background:#080c12; border:1px solid #1a2535; border-radius:10px;
+    }
+    .rgpd-row input[type="checkbox"] {
+      width:18px; height:18px; min-width:18px; flex-shrink:0;
+      margin-top:1px; accent-color:#ff1f4f; cursor:pointer;
+    }
+    .rgpd-row label {
+      font-size:11px; color:#4a5a6e; line-height:1.55; cursor:pointer;
+    }
+    .rgpd-row label a { color:#3a6a98; text-decoration:underline; }
+
+    .form-error {
+      color:#ff7070; font-size:12px; margin-bottom:12px;
+      padding:8px 12px; background:#1a0a0a; border-radius:8px;
+      display:none; line-height:1.4;
+    }
+    .submit-btn {
+      display:block; width:100%;
+      background:linear-gradient(135deg,#ff1f4f 0%,#ff6b35 100%);
+      color:#fff; font-family:Arial,sans-serif; font-size:17px; font-weight:900;
+      text-transform:uppercase; letter-spacing:2px;
+      border:none; border-radius:50px; padding:17px 24px;
+      cursor:pointer; box-shadow:0 8px 28px rgba(255,31,79,.4);
+      transition:transform .15s, box-shadow .15s;
+    }
+    .submit-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 12px 36px rgba(255,31,79,.55); }
+    .submit-btn:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+    .form-note { text-align:center; font-size:11px; color:#2a3545; margin-top:12px; line-height:1.5; }
+
+    /* ── Roda i continguts ── */
+    #wheelScreen { width:100%; display:flex; flex-direction:column; align-items:center; }
+
     .wheel-wrap { position:relative; width:300px; height:300px; margin:20px auto 8px; }
     .pointer {
       position:absolute; top:-16px; left:50%; transform:translateX(-50%);
@@ -37,7 +103,6 @@
     }
     canvas { display:block; border-radius:50%; box-shadow:0 0 50px rgba(255,31,79,.35),0 0 100px rgba(255,204,102,.08); }
 
-    /* Spin button */
     .spin-btn {
       display:block; margin:16px auto 6px;
       background:linear-gradient(135deg,#ff1f4f 0%,#ff6b35 100%);
@@ -50,21 +115,16 @@
     .spin-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 12px 36px rgba(255,31,79,.65); }
     .spin-btn:disabled { opacity:.45; cursor:not-allowed; transform:none; }
 
-    /* Spin counter */
-    .spin-counter {
-      text-align:center; margin-bottom:6px; font-size:12px; font-weight:700;
-    }
+    .spin-counter { text-align:center; margin-bottom:6px; font-size:12px; font-weight:700; }
     .spin-counter .dots { display:inline-flex; gap:5px; vertical-align:middle; margin-left:6px; }
     .spin-counter .dot {
       width:10px; height:10px; border-radius:50%;
-      background:#1e2a3a; border:1px solid #2a3a50;
-      transition: background .3s;
+      background:#1e2a3a; border:1px solid #2a3a50; transition:background .3s;
     }
     .spin-counter .dot.used { background:#ff1f4f; border-color:#ff1f4f; }
 
     .hint { font-size:11px; color:#3a4a5e; text-align:center; margin-bottom:22px; }
 
-    /* No spins message */
     .no-spins {
       display:none; text-align:center;
       background:#0d1018; border:1px solid #1e2a3a; border-radius:12px;
@@ -77,7 +137,7 @@
       text-transform:uppercase;
     }
 
-    /* Prizes grid */
+    /* ── Grid de premis ── */
     .prizes-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; max-width:380px; margin:0 auto 28px; }
     .prize-chip {
       background:#0d1018; border:1px solid #1e2a3a; border-radius:10px;
@@ -93,7 +153,7 @@
       padding:1px 6px; border-radius:4px; margin-top:2px;
     }
 
-    /* Modal */
+    /* ── Modal ── */
     .overlay {
       display:none; position:fixed; inset:0;
       background:rgba(5,6,10,.93); z-index:200;
@@ -110,14 +170,13 @@
     .modal .tag { font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:3px; color:#ffcc66; margin-bottom:8px; }
     .modal .big-emoji { font-size:58px; display:block; margin:4px 0 10px; }
 
-    /* Code box */
     .code-box {
       display:none;
       background:#0a1428; border:2px dashed #3a5fc0; border-radius:12px;
       padding:10px 20px; margin:0 auto 14px;
     }
     .code-label { font-size:10px; letter-spacing:2px; color:#6a8ab8; display:block; margin-bottom:5px; font-weight:700; text-transform:uppercase; }
-    .code-value { font-size:26px; font-weight:900; letter-spacing:5px; color:#fff; display:block; }
+    .code-value { font-size:26px; font-weight:900; letter-spacing:5px; color:#fff; display:block; font-family:monospace; }
     .code-copy {
       margin-top:8px; font-size:11px; color:#4a6a98; cursor:pointer;
       background:none; border:none; font-family:inherit; display:block; width:100%; text-align:center;
@@ -126,6 +185,11 @@
 
     .modal h2 { font-size:22px; font-weight:900; text-transform:uppercase; line-height:1.1; margin-bottom:8px; }
     .modal .desc { font-size:13px; color:#7a8a9e; margin-bottom:20px; line-height:1.5; }
+    .modal .wa-link {
+      display:block; background:#1a2a1a; border:1px solid #25D366; color:#4ade80;
+      font-size:12px; font-weight:700; text-decoration:none; border-radius:50px;
+      padding:9px 20px; margin-bottom:10px; text-transform:uppercase; letter-spacing:1px;
+    }
     .modal .cta {
       display:block; background:linear-gradient(135deg,#ff1f4f,#ff6b35);
       color:#fff; font-size:14px; font-weight:900; text-transform:uppercase; letter-spacing:1px;
@@ -141,7 +205,7 @@
     .modal .close-btn:hover { border-color:#7a8a9e; color:#fff; }
     .modal .spins-left-note { font-size:11px; color:#3a4a5e; margin-top:8px; }
 
-    /* Footer */
+    /* ── Peu de pàgina ── */
     .footer { text-align:center; color:#2a3540; font-size:11px; padding-top:8px; line-height:1.8; }
     .footer a { color:#3a4a5e; }
 
@@ -150,41 +214,100 @@
 </head>
 <body>
 
+  <!-- ── Capçalera (sempre visible) ── -->
   <div class="header">
     <div class="badge">🏀 CB Grup Barna × Westfield Glòries</div>
     <h1>GIRA LA <span>RULETA</span><br><em>I GUANYA!</em></h1>
     <p class="sub">3×3 Streetball · 6–7 de juny 2026 · Barcelona</p>
   </div>
 
-  <div class="wheel-wrap">
-    <div class="pointer"></div>
-    <canvas id="wheel" width="300" height="300"></canvas>
+  <!-- ══════════════════════════════════════════════
+       STEP 1 — Formulari de registre
+  ══════════════════════════════════════════════ -->
+  <div id="formScreen">
+    <div class="form-card">
+      <h2>Accedeix a la <span>ruleta</span> 🎰</h2>
+      <p class="sub-form">
+        Registra't per participar i rebre el teu premi per email.<br>
+        <em style="color:#3a4a5e">Regístrate para participar y recibir tu premio por email.</em>
+      </p>
+
+      <div id="formError" class="form-error"></div>
+
+      <div class="row-2">
+        <div class="field">
+          <label for="fNom">Nom *</label>
+          <input type="text" id="fNom" placeholder="Anna" autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="fCognom">Cognom *</label>
+          <input type="text" id="fCognom" placeholder="García" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="field">
+        <label for="fEmail">Correu electrònic *</label>
+        <input type="email" id="fEmail" placeholder="anna@exemple.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="fMobil">Mòbil / Móvil *</label>
+        <input type="tel" id="fMobil" placeholder="+34 600 000 000" autocomplete="tel">
+      </div>
+
+      <div class="rgpd-row">
+        <input type="checkbox" id="fRgpd">
+        <label for="fRgpd">
+          Accepto que CB Grup Barna tracti les meves dades per gestionar la participació en aquesta promoció i enviar-me informació sobre el 3×3 Westfield Glòries 2026.
+          <em style="display:block;margin-top:3px;color:#2a3545">Acepto que CB Grup Barna trate mis datos para gestionar la participación en esta promoción.</em>
+          <!-- <a href="https://cbgrupbarna.com/privacitat" target="_blank">Política de privacitat</a> -->
+        </label>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">
+        🎰 ACCEDIR A LA RULETA
+      </button>
+      <p class="form-note">
+        Màxim 3 girs per persona · Màx. 3 giros por persona<br>
+        Rebrà el codi per email al guanyar · Recibirás el código por email al ganar
+      </p>
+    </div>
   </div>
 
-  <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎰 GIRA LA RULETA</button>
+  <!-- ══════════════════════════════════════════════
+       STEP 2 — Roda i premis
+  ══════════════════════════════════════════════ -->
+  <div id="wheelScreen" style="display:none">
 
-  <div class="spin-counter" id="spinCounter">
-    Girs restants:&nbsp;
-    <span class="dots" id="spinDots">
-      <span class="dot" id="d0"></span>
-      <span class="dot" id="d1"></span>
-      <span class="dot" id="d2"></span>
-    </span>
-  </div>
+    <div class="wheel-wrap">
+      <div class="pointer"></div>
+      <canvas id="wheel" width="300" height="300"></canvas>
+    </div>
 
-  <div class="no-spins" id="noSpins">
-    <p>Has usat els teus 3 girs 🎰<br>Usa el codi que has guanyat i inscriu-te!</p>
-    <a href="https://cbgrupbarna-3x3timechamber.com/#inscripcio">🏀 INSCRIU-TE AL 3×3</a>
-  </div>
+    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎰 GIRA LA RULETA</button>
 
-  <p class="hint">Màxim 3 girs per persona · El codi s'ha de fer servir en inscriure't</p>
+    <div class="spin-counter" id="spinCounter">
+      Girs restants:&nbsp;
+      <span class="dots" id="spinDots">
+        <span class="dot" id="d0"></span>
+        <span class="dot" id="d1"></span>
+        <span class="dot" id="d2"></span>
+      </span>
+    </div>
 
-  <div class="prizes-grid" id="prizesGrid"></div>
+    <div class="no-spins" id="noSpins">
+      <p>Has usat els teus 3 girs 🎰<br>Usa el codi que has guanyat i inscriu-te!</p>
+      <a href="https://cbgrupbarna-3x3timechamber.com/#inscripcio">🏀 INSCRIU-TE AL 3×3</a>
+    </div>
 
-  <!-- Modal -->
+    <p class="hint">Màxim 3 girs per persona · El codi s'ha de fer servir en inscriure't</p>
+
+    <div class="prizes-grid" id="prizesGrid"></div>
+
+  </div><!-- /wheelScreen -->
+
+  <!-- ── Modal de resultat (fora dels dos passos) ── -->
   <div class="overlay" id="overlay">
     <div class="modal">
-      <div class="tag">🎉 Has guanyat!</div>
+      <div class="tag">🎉 Has guanyat! · ¡Has ganado!</div>
       <span class="big-emoji" id="mEmoji">🎫</span>
       <div class="code-box" id="mCodeBox">
         <span class="code-label">El teu codi promo · Tu código</span>
@@ -193,6 +316,9 @@
       </div>
       <h2 id="mTitle">5% DESCOMPTE</h2>
       <p class="desc" id="mDesc">Usa el codi en inscriure't al torneig.</p>
+      <a href="https://wa.me/34698425153" class="wa-link" id="mWa" target="_blank">
+        💬 Dubtes? WhatsApp +34 698 425 153
+      </a>
       <a href="#" class="cta" id="mCta">🏀 INSCRIU-TE ARA</a>
       <button class="close-btn" onclick="closeOverlay()" id="mCloseBtn">Tornar a girar</button>
       <p class="spins-left-note" id="mSpinsNote"></p>
@@ -208,9 +334,21 @@
 
 <script>
 /* ============================================================
-   CONFIGURACIÓ DE PREMIS
-   weight = probabilitat relativa (total=101 → 5% ≈ 89%)
-   code   = codi a posar a la web del 3x3
+   CONFIGURACIÓ
+   ============================================================ */
+
+// ⚠️  IMPORTANT: Substitueix per la URL del teu Apps Script Web App
+// Guia al final del fitxer Code.gs
+const API_URL = 'POSA_AQUI_LA_URL_APPS_SCRIPT';
+// Exemple: 'https://script.google.com/macros/s/AKfycbxxxxxxx/exec'
+
+const MAX_SPINS  = 3;
+const WA_NUMBER  = '34698425153';
+const EVENT_URL  = 'https://cbgrupbarna-3x3timechamber.com/#inscripcio';
+
+/* ============================================================
+   PREMIS — han de coincidir amb Code.gs
+   weight = probabilitat relativa
    ============================================================ */
 const PRIZES = [
   {
@@ -218,7 +356,7 @@ const PRIZES = [
     desc:"Usa el codi BARNAR5 al completar la inscripció al 3×3.",
     color:"#2a4fa8", tc:"#fff", emoji:"🎫",
     weight:90, code:"BARNAR5",
-    cta:"🎫 Inscriu-te amb el -5%!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    cta:"🎫 Inscriu-te amb el -5%!", link: EVENT_URL,
     showInGrid:true
   },
   {
@@ -226,7 +364,7 @@ const PRIZES = [
     desc:"Usa el codi BARNAR10 al completar la inscripció al 3×3.",
     color:"#ff6b35", tc:"#fff", emoji:"🏀",
     weight:3, code:"BARNAR10",
-    cta:"🏀 Aplica el -10% ara!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    cta:"🏀 Aplica el -10% ara!", link: EVENT_URL,
     showInGrid:true
   },
   {
@@ -234,7 +372,7 @@ const PRIZES = [
     desc:"Usa el codi CAMISETA3X3 en inscriure't. Recull-la el dia de l'event!",
     color:"#1d2d5f", tc:"#fff", emoji:"👕",
     weight:2, code:"CAMISETA3X3",
-    cta:"👕 Inscriu-te i recull-la!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    cta:"👕 Inscriu-te i recull-la!", link: EVENT_URL,
     showInGrid:true
   },
   {
@@ -242,7 +380,7 @@ const PRIZES = [
     desc:"Usa el codi REGAL3X3 en inscriure't. El regal t'espera a l'event!",
     color:"#c89a00", tc:"#090b12", emoji:"🎁",
     weight:2, code:"REGAL3X3",
-    cta:"🎁 Inscriu-te i recull-lo!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    cta:"🎁 Inscriu-te i recull-lo!", link: EVENT_URL,
     showInGrid:true
   },
   {
@@ -250,7 +388,7 @@ const PRIZES = [
     desc:"Millor sort un altre cop. Vine i juga de totes formes — el 3×3 t'espera!",
     color:"#1e2535", tc:"#6a7a8e", emoji:"😅",
     weight:2, code:null,
-    cta:"🏀 Vine igualment!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    cta:"🏀 Vine igualment!", link: EVENT_URL,
     showInGrid:false
   },
   {
@@ -258,7 +396,7 @@ const PRIZES = [
     desc:"Usa el codi INDIVIDUAL3X3. 1 jugador inscrit gratis — places molt limitades!",
     color:"#ffcc66", tc:"#090b12", emoji:"⭐",
     weight:1, code:"INDIVIDUAL3X3",
-    cta:"⭐ Reclama la teva plaça!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    cta:"⭐ Reclama la teva plaça!", link: EVENT_URL,
     showInGrid:true
   },
   {
@@ -266,56 +404,141 @@ const PRIZES = [
     desc:"Usa el codi EQUIP3X3. 4 jugadors inscrits gratis — 1 única plaça disponible!",
     color:"#ff1f4f", tc:"#fff", emoji:"🏆",
     weight:1, code:"EQUIP3X3",
-    cta:"🏆 Reclama la inscripció!", link:"https://cbgrupbarna-3x3timechamber.com/#inscripcio",
+    cta:"🏆 Reclama la inscripció!", link: EVENT_URL,
+    showInGrid:true
+  },
+  {
+    label:"10%\nFIDELITAT 2025", short:"10% FIDELITAT EQUIPS 2025",
+    desc:"Exclusiu per a equips que van jugar el 2025. Usa el codi EQUIPS2025 en inscriure't.",
+    color:"#1a4a2e", tc:"#4ade80", emoji:"🔄",
+    weight:5, code:"EQUIPS2025",
+    cta:"🔄 Inscriu-te amb el -10%!", link: EVENT_URL,
     showInGrid:true
   },
 ];
 
 /* ============================================================
-   LIMIT DE GIRS PER EMAIL (3 màxim)
-   La URL ha de contenir ?ref=email (Brevo posa {{contact.EMAIL}})
+   GESTIÓ D'ESTAT (localStorage)
    ============================================================ */
-const MAX_SPINS = 3;
-const params  = new URLSearchParams(window.location.search);
-const userRef = params.get('ref') || 'anon';
-const storeKey = 'ruleta3x3_' + btoa(encodeURIComponent(userRef)).replace(/[^a-z0-9]/gi,'').substring(0,24);
+const params   = new URLSearchParams(window.location.search);
+const urlRef   = params.get('ref') || '';
+let   userEmail = '';
 
-function getSpinsUsed()  { return parseInt(localStorage.getItem(storeKey) || '0'); }
-function addSpin()       { localStorage.setItem(storeKey, getSpinsUsed() + 1); }
-function getSpinsLeft()  { return Math.max(0, MAX_SPINS - getSpinsUsed()); }
-
-/* ---- Update spin counter UI ---- */
-function updateCounter() {
-  const used = getSpinsUsed();
-  const left = getSpinsLeft();
-  for (let i = 0; i < MAX_SPINS; i++) {
-    document.getElementById('d' + i).classList.toggle('used', i < used);
-  }
-  if (left === 0) {
-    document.getElementById('spinBtn').style.display  = 'none';
-    document.getElementById('spinCounter').style.display = 'none';
-    document.getElementById('noSpins').style.display  = 'block';
-    document.getElementById('spinBtn').disabled = true;
-  }
+function getStoreKey(email) {
+  return 'ruleta3x3_' + btoa(encodeURIComponent(email || 'anon')).replace(/[^a-z0-9]/gi,'').substring(0,24);
 }
+function getSpinsUsed(email)  { return parseInt(localStorage.getItem(getStoreKey(email)) || '0'); }
+function setSpinsUsed(email, n) { localStorage.setItem(getStoreKey(email), n); }
+function getSpinsLeft(email)  { return Math.max(0, MAX_SPINS - getSpinsUsed(email)); }
 
-/* ---- Build prizes grid ---- */
-const grid = document.getElementById('prizesGrid');
-PRIZES.filter(p => p.showInGrid).forEach(p => {
-  const chip = document.createElement('div');
-  chip.className = 'prize-chip' + (p.code && p.weight >= 80 ? ' highlight' : '');
-  chip.innerHTML = `
-    <span class="ico">${p.emoji}</span>
-    <div class="txt">
-      ${p.short}
-      ${p.code
-        ? `<span class="badge-code">${p.code}</span>`
-        : `<small>${p.desc.substring(0,34)}…</small>`}
-    </div>`;
-  grid.appendChild(chip);
+/* ============================================================
+   INICIALITZACIÓ — comprovem si ja hi ha registre
+   ============================================================ */
+window.addEventListener('DOMContentLoaded', () => {
+  if (urlRef) {
+    document.getElementById('fEmail').value = urlRef;
+  }
+
+  // Si ja hi ha girs guardats, podríem saltar el formulari
+  const storedEmail = localStorage.getItem('ruleta3x3_email');
+  if (storedEmail && getSpinsUsed(storedEmail) < MAX_SPINS) {
+    userEmail = storedEmail;
+    // Pre-omplim correu per si el vol canviar
+    document.getElementById('fEmail').value = storedEmail;
+  } else if (storedEmail && getSpinsUsed(storedEmail) >= MAX_SPINS) {
+    // Ha esgotat tots els girs — saltar directament al missatge
+    userEmail = storedEmail;
+    showWheelScreen();
+  }
 });
 
-/* ---- Canvas setup ---- */
+/* ============================================================
+   STEP 1 — Submit del formulari
+   ============================================================ */
+async function submitForm() {
+  const nom    = document.getElementById('fNom').value.trim();
+  const cognom = document.getElementById('fCognom').value.trim();
+  const email  = document.getElementById('fEmail').value.trim().toLowerCase();
+  const mobil  = document.getElementById('fMobil').value.trim();
+  const rgpd   = document.getElementById('fRgpd').checked;
+
+  const errEl = document.getElementById('formError');
+  errEl.style.display = 'none';
+
+  // Validació bàsica
+  if (!nom)   return showFormError('Cal indicar el nom. · Indica tu nombre.');
+  if (!email || !email.includes('@')) return showFormError('Cal un correu vàlid. · Introduce un email válido.');
+  if (!mobil) return showFormError('Cal indicar el mòbil. · Indica tu móvil.');
+  if (!rgpd)  return showFormError('Cal acceptar la política de privacitat per continuar.');
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Un moment...';
+
+  userEmail = email;
+  localStorage.setItem('ruleta3x3_email', email);
+
+  // Crida a l'API (si no està configurada, mode local)
+  if (isApiConfigured()) {
+    try {
+      const url = `${API_URL}?action=register&nom=${enc(nom)}&cognom=${enc(cognom)}&email=${enc(email)}&mobil=${enc(mobil)}`;
+      const res = await fetchApi(url);
+      if (res && res.ok) {
+        // Sincronitza girs del servidor
+        if (res.spinsUsed !== undefined) {
+          setSpinsUsed(email, res.spinsUsed);
+        }
+      }
+    } catch (_) {
+      // Si falla l'API, continuem en mode local
+      console.warn('API no disponible — mode local activat');
+    }
+  }
+
+  showWheelScreen();
+}
+
+function showFormError(msg) {
+  const el = document.getElementById('formError');
+  el.textContent = msg;
+  el.style.display = 'block';
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = false;
+  btn.textContent = '🎰 ACCEDIR A LA RULETA';
+}
+
+function showWheelScreen() {
+  document.getElementById('formScreen').style.display = 'none';
+  document.getElementById('wheelScreen').style.display = 'flex';
+  buildPrizesGrid();
+  drawWheel(angle);
+  updateCounter();
+}
+
+/* ============================================================
+   STEP 2 — Roda
+   ============================================================ */
+
+/* ── Grid de premis ── */
+function buildPrizesGrid() {
+  const grid = document.getElementById('prizesGrid');
+  grid.innerHTML = '';
+  PRIZES.filter(p => p.showInGrid).forEach(p => {
+    const chip = document.createElement('div');
+    chip.className = 'prize-chip' + (p.code && p.weight >= 80 ? ' highlight' : '');
+    chip.innerHTML = `
+      <span class="ico">${p.emoji}</span>
+      <div class="txt">
+        ${p.short}
+        ${p.code
+          ? `<span class="badge-code">${p.code}</span>`
+          : `<small>${p.desc.substring(0,34)}…</small>`}
+      </div>`;
+    grid.appendChild(chip);
+  });
+}
+
+/* ── Canvas ── */
 const canvas = document.getElementById('wheel');
 const ctx    = canvas.getContext('2d');
 const N      = PRIZES.length;
@@ -329,10 +552,10 @@ function drawWheel(a) {
   const R  = cx - 5;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.beginPath(); ctx.arc(cx, cy, R + 5, 0, 2*Math.PI); ctx.fillStyle='#1a2240'; ctx.fill();
+  ctx.beginPath(); ctx.arc(cx,cy,R+5,0,2*Math.PI); ctx.fillStyle='#1a2240'; ctx.fill();
 
   for (let i = 0; i < N; i++) {
-    const s = a + i * SLICE, e = s + SLICE;
+    const s = a + i*SLICE, e = s + SLICE;
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,s,e); ctx.closePath();
     ctx.fillStyle = PRIZES[i].color; ctx.fill();
     ctx.beginPath(); ctx.moveTo(cx,cy);
@@ -357,53 +580,99 @@ function drawWheel(a) {
   ctx.font='18px serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('🏀',cx,cy); ctx.textBaseline='alphabetic';
 }
 
-drawWheel(angle);
-updateCounter();
+/* ── Comptador de girs ── */
+function updateCounter() {
+  const used = getSpinsUsed(userEmail);
+  const left = getSpinsLeft(userEmail);
+  for (let i = 0; i < MAX_SPINS; i++) {
+    const dot = document.getElementById('d' + i);
+    if (dot) dot.classList.toggle('used', i < used);
+  }
+  if (left === 0) {
+    document.getElementById('spinBtn').style.display = 'none';
+    document.getElementById('spinCounter').style.display = 'none';
+    document.getElementById('noSpins').style.display   = 'block';
+  }
+}
 
-/* ---- Easing ---- */
+/* ── Easing ── */
 function easeOut(t) { return 1 - Math.pow(1-t, 4); }
 
-/* ---- Spin amb pesos pre-determinats ---- */
-function spinWheel() {
-  if (spinning || getSpinsLeft() <= 0) return;
-  spinning = true;
-  document.getElementById('spinBtn').disabled = true;
-
-  // 1. Pesos: tria guanyador ABANS de l'animació
-  const totalW = PRIZES.reduce((s,p) => s+p.weight, 0);
-  let r = Math.random() * totalW;
-  let chosen = PRIZES.length - 1;
-  for (let i = 0; i < PRIZES.length; i++) { r -= PRIZES[i].weight; if (r <= 0){ chosen=i; break; } }
-
-  // 2. Angle exacte perquè el sector chosen quedi al puntero (top = -π/2)
-  const base   = -Math.PI/2 - (chosen+0.5)*SLICE;
-  const minEnd = angle + 6*2*Math.PI;
-  const k      = Math.ceil((minEnd - base) / (2*Math.PI));
-  const target = base + k*2*Math.PI;
-
-  // 3. Animació
-  const duration = 4000 + Math.random()*1500;
+/* ── Animació: deixa rodar fins a l'angle donat ── */
+function animateToAngle(target, duration, onDone) {
   const startAng = angle;
   let startTs = null;
-
   function frame(ts) {
     if (!startTs) startTs = ts;
-    const prog = Math.min((ts-startTs)/duration, 1);
-    angle = startAng + (target-startAng)*easeOut(prog);
+    const prog = Math.min((ts - startTs) / duration, 1);
+    angle = startAng + (target - startAng) * easeOut(prog);
     drawWheel(angle);
     if (prog < 1) { requestAnimationFrame(frame); }
-    else {
-      angle = angle % (2*Math.PI);
-      spinning = false;
-      addSpin();           // registra el gir
-      updateCounter();     // actualitza comptador
-      showResult(chosen);
-    }
+    else { angle = angle % (2 * Math.PI); onDone(); }
   }
   requestAnimationFrame(frame);
 }
 
-/* ---- Modal de resultat ---- */
+/* ── Spin local (fallback si API no disponible) ── */
+function localPick() {
+  const totalW = PRIZES.reduce((s,p) => s+p.weight, 0);
+  let r = Math.random() * totalW;
+  let chosen = PRIZES.length - 1;
+  for (let i = 0; i < PRIZES.length; i++) { r -= PRIZES[i].weight; if (r <= 0){ chosen=i; break; } }
+  return chosen;
+}
+
+/* ── Spin principal ── */
+async function spinWheel() {
+  if (spinning || getSpinsLeft(userEmail) <= 0) return;
+  spinning = true;
+  document.getElementById('spinBtn').disabled = true;
+
+  let chosenIdx = localPick(); // per defecte, pick local
+
+  // Si l'API està configurada, demana el resultat al servidor
+  if (isApiConfigured() && userEmail) {
+    try {
+      const res = await fetchApi(`${API_URL}?action=spin&email=${enc(userEmail)}`);
+      if (res && res.ok && res.prize) {
+        // Troba l'índex del premi retornat pel servidor
+        const idx = PRIZES.findIndex(p => p.code === res.prize);
+        if (idx >= 0) chosenIdx = idx;
+        // Actualitza girs des del servidor
+        if (res.spinsUsed !== undefined) {
+          setSpinsUsed(userEmail, res.spinsUsed);
+        }
+      } else if (res && res.error === 'max_spins') {
+        spinning = false;
+        updateCounter();
+        return;
+      }
+    } catch (_) {
+      console.warn('Spin API error — usant resultat local');
+    }
+  }
+
+  // Calcula angle exacte perquè sector chosen quedi al puntero
+  const base   = -Math.PI/2 - (chosenIdx + 0.5) * SLICE;
+  const minEnd = angle + 6 * 2 * Math.PI;
+  const k      = Math.ceil((minEnd - base) / (2 * Math.PI));
+  const target = base + k * 2 * Math.PI;
+
+  const duration = 4000 + Math.random() * 1500;
+
+  animateToAngle(target, duration, () => {
+    spinning = false;
+    // Si el servidor ja ha registrat el gir, no el sumem aquí;
+    // si estem en mode local, el registrem nosaltres
+    if (!isApiConfigured() || !userEmail) {
+      setSpinsUsed(userEmail, getSpinsUsed(userEmail) + 1);
+    }
+    updateCounter();
+    showResult(chosenIdx);
+  });
+}
+
+/* ── Modal de resultat ── */
 let lastCode = null;
 
 function showResult(idx) {
@@ -423,18 +692,26 @@ function showResult(idx) {
     codeBox.style.display = 'none';
   }
 
+  // Link WhatsApp amb el premi pre-escrit
+  const waMsg = encodeURIComponent(
+    `Hola! He girat la ruleta del 3x3 Glòries i he guanyat: ${p.short}` +
+    (p.code ? `. El meu codi és ${p.code}` : '') + `. Necessito ajuda.`
+  );
+  document.getElementById('mWa').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
+
   const cta = document.getElementById('mCta');
   cta.textContent = p.cta; cta.href = p.link;
 
-  const left = getSpinsLeft();
-  const note = document.getElementById('mSpinsNote');
+  const left  = getSpinsLeft(userEmail);
+  const note  = document.getElementById('mSpinsNote');
   const close = document.getElementById('mCloseBtn');
   if (left > 0) {
     note.textContent = `Et queden ${left} gir${left===1?'':'s'} · Te quedan ${left} giro${left===1?'':'s'}`;
+    close.textContent = 'Tornar a girar';
     close.style.display = 'block';
   } else {
     note.textContent = 'Has esgotat els 3 girs · Has agotado los 3 giros';
-    close.textContent = 'Tancar';
+    close.textContent = 'Tancar · Cerrar';
     close.style.display = 'block';
   }
 
@@ -447,7 +724,6 @@ function copyCode() {
     document.getElementById('mCopyBtn').textContent = '✅ Copiat!';
     setTimeout(() => { document.getElementById('mCopyBtn').textContent = '📋 Copiar codi'; }, 2000);
   }).catch(() => {
-    // fallback: seleccionar text
     const el = document.getElementById('mCode');
     const range = document.createRange(); range.selectNode(el);
     window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
@@ -457,8 +733,28 @@ function copyCode() {
 
 function closeOverlay() {
   document.getElementById('overlay').classList.remove('show');
-  if (getSpinsLeft() > 0) {
+  if (getSpinsLeft(userEmail) > 0) {
     document.getElementById('spinBtn').disabled = false;
+  }
+}
+
+/* ============================================================
+   UTILITATS API
+   ============================================================ */
+function isApiConfigured() {
+  return API_URL && !API_URL.includes('POSA_AQUI') && API_URL.startsWith('https://');
+}
+
+function enc(s) { return encodeURIComponent(s || ''); }
+
+async function fetchApi(url) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
   }
 }
 </script>
