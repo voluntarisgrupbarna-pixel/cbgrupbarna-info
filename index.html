@@ -714,6 +714,12 @@ body::after {
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
+/* ==== TOP GRID: Portes Obertes + Galeria costat a costat ==== */
+.top-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 12px; }
+@media (min-width: 560px) { .top-grid { grid-template-columns: 1fr 1fr; } }
+.top-grid .item { margin-bottom: 0; }
+.feed-wrap { max-width: 720px; }
+
 /* ==== SOCIAL GRID · Link in Bio ==== */
 .sg-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 8px; }
 @media (min-width: 720px) { .sg-grid { grid-template-columns: 1fr 1fr; } }
@@ -844,7 +850,7 @@ body::after {
 
 <!-- ==== TICKER ==== -->
 <div class="ticker">
-  <div class="tk-lab"><span class="pdot"></span>Lo Calent</div>
+  <div class="tk-lab"><span class="pdot"></span>Novetat</div>
   <div class="tk-trk">
     <div class="tk-cnt">
       <span class="tk-it"><span class="tk-d r"></span>PORTES OBERTES 25-26 · INSCRIPCIONS OBERTES</span>
@@ -879,12 +885,15 @@ body::after {
 <main class="feed-wrap">
 
   <div class="feed-title">
-    <span>🔥</span>
-    <span class="feed-title-main">Lo Calent ara</span>
+    <span>⚡</span>
+    <span class="feed-title-main">Novetats</span>
     <span class="feed-title-meta">Tot el necessari · 1 cop d'ull</span>
   </div>
 
-  <!-- ==== ITEM 1 · PORTES OBERTES (with IG hashtag preview) ==== -->
+  <!-- ==== TOP GRID: Portes Obertes + Galeria 3x3 costat a costat ==== -->
+  <div class="top-grid">
+
+  <!-- ITEM 1 · PORTES OBERTES -->
   <div class="item p1 reveal">
     <div class="item-head">
       <span class="badge open"><span class="bdot"></span>Inscripcions obertes</span>
@@ -913,7 +922,24 @@ body::after {
         <a href="https://www.instagram.com/explore/tags/portesobertes/" target="_blank" rel="noopener" class="ig-hash-tile has-emoji">📸</a>
       </div>
     </div>
-  </div>
+  </div><!-- fi ITEM 1 Portes Obertes -->
+
+  <!-- GALERIA 3x3 · banner al costat de Portes Obertes -->
+  <a href="/galeria-3x3-glories/" class="item reveal" data-cta="galeria-3x3-top" style="background:linear-gradient(135deg,rgba(255,214,0,0.12),rgba(255,214,0,0.02));border-color:rgba(255,214,0,0.40);display:flex;flex-direction:column;justify-content:space-between">
+    <div>
+      <div class="item-head">
+        <span class="badge new"><span class="bdot"></span>Nou · 522 fotos</span>
+        <span class="item-meta">6 i 7 JUNY 2026</span>
+      </div>
+      <h2 class="item-title">📸 Galeria 3×3 Westfield Glòries</h2>
+      <p class="item-desc">Totes les fotos del torneig. <b>Registra't i accedeix gratis.</b> Westfield Glòries × Grup Barna × Time Chamber.</p>
+    </div>
+    <div class="item-foot">
+      <span class="cta-pill" style="background:var(--yellow);color:#000">Veure les fotos <span class="arrow">→</span></span>
+    </div>
+  </a>
+
+  </div><!-- fi top-grid -->
 
   <!-- ==== VCARD · Guarda'ns als contactes (clau per a broadcast lists) ==== -->
   <a href="cbgrupbarna.vcf" download="CB Grup Barna.vcf" class="item vcard-cta reveal" data-cta="vcard-download">
@@ -1004,19 +1030,6 @@ body::after {
       </button>
     </div>
   </div>
-
-  <!-- ==== ITEM 3b · GALERIA OFICIAL 3x3 WESTFIELD GLÒRIES 2026 ==== -->
-  <a href="/galeria-3x3-glories/" class="item reveal" data-cta="galeria-3x3-2026" style="background:linear-gradient(135deg,rgba(255,214,0,0.10),rgba(255,214,0,0.02));border-color:rgba(255,214,0,0.32)">
-    <div class="item-head">
-      <span class="badge new"><span class="bdot"></span>Acabat de publicar</span>
-      <span class="item-meta">6 i 7 JUNY 2026</span>
-    </div>
-    <h2 class="item-title">📸 Galeria oficial 3×3 Westfield Glòries</h2>
-    <p class="item-desc"><b>522 fotografies oficials.</b> Reviu cada moment del torneig: partits, equips, ambient i premis. Westfield Glòries × Grup Barna × Time Chamber.</p>
-    <div class="item-foot">
-      <span class="cta-pill" style="background:var(--yellow);color:#000">Veure la galeria <span class="arrow">→</span></span>
-    </div>
-  </a>
 
   <!-- ==== ITEM 4 · ESCOLETA ==== -->
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSdg74pd-JaZr0a2AXhaT_sB762NuIHZ5Vtcx1G-oJ6GnqrfGw/viewform" target="_blank" rel="noopener" class="item reveal" data-cta="escoleta">
