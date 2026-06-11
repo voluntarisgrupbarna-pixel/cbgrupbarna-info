@@ -1,0 +1,19 @@
+{
+  "name": "CB Grup Barna",
+  "short_name": "Grup Barna",
+  "description": "Club de bàsquet i baloncesto base de Barcelona des del 1965. Sant Martí · El Clot.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070707",
+  "theme_color": "#E31E24",
+  "lang": "ca",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["sports", "entertainment"],
+  "screenshots": [
+    { "src": "/og-image.jpg", "sizes": "1200x630", "type": "image/jpeg", "form_factor": "wide" }
+  ]
+}
