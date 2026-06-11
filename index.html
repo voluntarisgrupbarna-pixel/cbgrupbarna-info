@@ -29,6 +29,8 @@
 <meta name="twitter:title" content="CB Grup Barna · Bàsquet i Baloncesto Base · Barcelona">
 <meta name="twitter:description" content="Club de baloncesto base en Barcelona desde 1965 · Campus verano · 3x3 Westfield Glòries · Portes Obertes · +34 equipos.">
 <meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
+<meta name="twitter:image:alt" content="CB Grup Barna · Club de bàsquet i baloncesto base a Barcelona des del 1965">
+<meta name="twitter:creator" content="@cbgrupbarna">
 <!-- Canonical + hreflang -->
 <link rel="canonical" href="https://cbgrupbarna.info/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/">
@@ -45,6 +47,11 @@
 <meta name="geo.position" content="41.4036;2.1878">
 <meta name="ICBM" content="41.4036, 2.1878">
 <!-- Icones -->
+<link rel="manifest" href="/manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CB Grup Barna">
 <link rel="icon" type="image/png" sizes="192x192" href="logo.png">
 <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
 <link rel="shortcut icon" href="logo.png">
@@ -259,7 +266,7 @@
       "isAccessibleForFree": true,
       "offers": {
         "@type": "Offer",
-        "url": "https://wa.me/34698425153?text=Hola%21%20Vull%20reservar%20una%20prova%20a%20Portes%20Obertes.%20Codi:%20CAMPUS_INFO_PORTES",
+        "url": "https://wa.me/34657601298?text=Hola%21%20Vull%20reservar%20una%20prova%20a%20Portes%20Obertes.%20Codi:%20CAMPUS_INFO_PORTES",
         "price": "0",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock"
@@ -667,6 +674,27 @@ body::after {
 .ig-mega-s { font-size: 12px; opacity: 0.92; margin-top: 4px; }
 .ig-mega-pill { background: white; color: #cc2366; padding: 9px 16px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; flex-shrink: 0; }
 
+.tt-mega {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px; border-radius: 18px;
+  background: linear-gradient(135deg, #010101 0%, #161823 50%, #010101 100%);
+  color: white;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.55);
+  border: 1.5px solid rgba(105,201,208,0.30);
+  margin-bottom: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative; overflow: hidden;
+}
+.tt-mega::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(105,201,208,0.12) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.7s; }
+.tt-mega:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(105,201,208,0.28); }
+.tt-mega:hover::after { transform: translateX(100%); }
+.tt-mega-icon { width: 52px; height: 52px; flex-shrink: 0; background: rgba(105,201,208,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+.tt-mega-icon svg { width: 28px; height: 28px; fill: white; }
+.tt-mega-c { flex: 1; min-width: 0; }
+.tt-mega-t { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; line-height: 1; }
+.tt-mega-s { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+.tt-mega-pill { background: linear-gradient(90deg,#69c9d0,#ee1d52); color: #fff; padding: 9px 16px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; flex-shrink: 0; }
+
 /* SHARE ROW (multi-channel viral) */
 .share-row {
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
@@ -914,8 +942,8 @@ body::after {
     <h2 class="item-title">Portes Obertes 25-26</h2>
     <p class="item-desc"><b>Necessitem molt talent. Vine a entrenar gratis.</b> 1 sessió, sense compromís. Si tens entre 4 i 18 anys, vine, prova i decideix.</p>
     <div class="item-foot">
-      <a href="https://wa.me/34698425153?text=Hola!%20Vull%20reservar%20una%20prova%20a%20Portes%20Obertes.%20Codi:%20CAMPUS_INFO_PORTES" target="_blank" rel="noopener" class="cta-pill" data-cta="portes-wa-prova">Reservar prova <span class="arrow">→</span></a>
-      <a href="https://wa.me/34698425153?text=Hola!%20Vull%20info%20de%20Portes%20Obertes" target="_blank" rel="noopener" class="cta-pill green" data-cta="portes-wa">WhatsApp</a>
+      <a href="https://wa.me/34657601298?text=Hola!%20Vull%20reservar%20una%20prova%20a%20Portes%20Obertes.%20Codi:%20CAMPUS_INFO_PORTES" target="_blank" rel="noopener" class="cta-pill" data-cta="portes-wa-prova">Reservar prova <span class="arrow">→</span></a>
+      <a href="https://wa.me/34657601298?text=Hola!%20Vull%20info%20de%20Portes%20Obertes" target="_blank" rel="noopener" class="cta-pill green" data-cta="portes-wa">WhatsApp</a>
       <button class="share-mini" aria-label="Compartir Portes Obertes" onclick="shareIt('portes', 'Portes Obertes CB Grup Barna · Vine a entrenar gratis')">
         <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
       </button>
@@ -952,6 +980,32 @@ body::after {
   </a>
 
   </div><!-- fi top-grid -->
+
+  <!-- ==== PREMI DONA I ESPORT ==== -->
+  <a href="/premidonaesport/" class="item reveal" data-cta="premidonaesport" style="background:linear-gradient(135deg,rgba(212,175,55,0.13),rgba(212,175,55,0.03));border-color:rgba(212,175,55,0.38);margin-bottom:12px">
+    <div class="item-head">
+      <span class="badge" style="background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.40);color:#d4af37">🏆 Nominació oficial 2026</span>
+      <span class="item-meta">FCBQ · PREMI DONA I ESPORT</span>
+    </div>
+    <h2 class="item-title">19è Premi Dona i Esport · El Mètode Barna</h2>
+    <p class="item-desc">60 anys de bàsquet femení a El Clot. El CB Grup Barna, nominat al <b>19è Premi Dona i Esport 2026</b> per El Mètode Barna — un model de tecnificació femení de referència a Barcelona.</p>
+    <div class="item-foot">
+      <span class="cta-pill" style="background:rgba(212,175,55,0.16);color:#d4af37;border:1px solid rgba(212,175,55,0.38)">Veure el projecte <span class="arrow">→</span></span>
+    </div>
+  </a>
+
+  <!-- ==== PRESENTACIÓ CLUB ==== -->
+  <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" class="item reveal" data-cta="presentacio-club" style="background:linear-gradient(135deg,rgba(30,64,175,0.14),rgba(30,64,175,0.04));border-color:rgba(96,165,250,0.35);margin-bottom:12px">
+    <div class="item-head">
+      <span class="badge" style="background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.35);color:#60a5fa">📋 Club · Des del 1965</span>
+      <span class="item-meta">PRESENTACIÓ EMPRESA</span>
+    </div>
+    <h2 class="item-title">Coneix el CB Grup Barna</h2>
+    <p class="item-desc">Presentació oficial del club: missió, valors, equips, impacte social i oportunitats de col·laboració. Per a empreses, institucions i partners.</p>
+    <div class="item-foot">
+      <span class="cta-pill" style="background:rgba(96,165,250,0.18);color:#60a5fa;border:1px solid rgba(96,165,250,0.35)">Veure Presentació <span class="arrow">→</span></span>
+    </div>
+  </a>
 
   <!-- ==== VCARD · Guarda'ns als contactes (clau per a broadcast lists) ==== -->
   <a href="cbgrupbarna.vcf" download="CB Grup Barna.vcf" class="item vcard-cta reveal" data-cta="vcard-download">
@@ -1040,54 +1094,17 @@ body::after {
     </div>
   </div>
 
-  <!-- ==== ITEM 3 · 3x3 amb COMPTADOR D'EQUIPS ==== -->
-  <div class="item p1 reveal">
-    <div class="item-head">
-      <span class="badge new"><span class="bdot"></span>Torneig urbà</span>
-      <span class="item-meta">WESTFIELD GLÒRIES</span>
-    </div>
-    <h2 class="item-title">3x3 Westfield Glòries</h2>
-    <p class="item-desc">El torneig 3x3 del Districte Sant Martí · Time Chamber × CB Grup Barna. <b>Mira quants equips ja estan dins.</b></p>
-
-    <div class="counter-block">
-      <div class="counter-num" data-counter="42">0</div>
-      <div class="counter-of">EQUIPS INSCRITS · DE <b>60 places</b></div>
-      <div class="counter-bar"><div class="counter-bar-fill" data-pct="70"></div></div>
-      <div class="counter-pct">70% PLE · ⏱ Aviat tancarem inscripcions</div>
-    </div>
-
-    <div class="item-foot" style="margin-top:14px">
-      <a href="https://cbgrupbarna-3x3timechamber.com" target="_blank" rel="noopener" class="cta-pill" data-cta="3x3-site">Apunta el teu equip <span class="arrow">→</span></a>
-      <a href="/galeria-3x3-glories/" class="cta-pill" data-cta="3x3-galeria-2026" style="background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.4)">📸 Galeria oficial 522 fotos <span class="arrow">→</span></a>
-      <button class="share-mini" aria-label="Compartir 3x3" onclick="shareIt('3x3', '3x3 Westfield Glòries · 42/60 equips inscrits')">
-        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- ==== ITEM · FOTOS D'ESDEVENIMENTS ==== -->
-  <a href="/fotos-esdeveniments/" class="item reveal" data-cta="fotos-esdeveniments" style="background:linear-gradient(135deg,rgba(200,16,46,0.10),rgba(200,16,46,0.02));border-color:rgba(200,16,46,0.32)">
-    <div class="item-head">
-      <span class="badge new"><span class="bdot"></span>Nou · Galeries</span>
-      <span class="item-meta">FOTOS DEL CLUB</span>
-    </div>
-    <h2 class="item-title">📸 Fotos d'esdeveniments</h2>
-    <p class="item-desc">Reviu els nostres tornejos i activitats. Totes les fotos i vídeos del <b>3x3 Westfield Glòries</b> i molt més. Accés gratis amb registre.</p>
-    <div class="item-foot">
-      <span class="cta-pill">Veure les galeries <span class="arrow">→</span></span>
-    </div>
-  </a>
 
   <!-- ==== ITEM 4 · ESCOLETA ==== -->
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdg74pd-JaZr0a2AXhaT_sB762NuIHZ5Vtcx1G-oJ6GnqrfGw/viewform" target="_blank" rel="noopener" class="item reveal" data-cta="escoleta">
+  <a href="https://wa.me/34646205526?text=Hola!%20Vull%20informaci%C3%B3%20de%20l%27Escoleta%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna%20%F0%9F%8F%80" target="_blank" rel="noopener" class="item reveal" data-cta="escoleta">
     <div class="item-head">
       <span class="badge info">4 a 7 anys</span>
       <span class="item-meta">INICIACIÓ</span>
     </div>
     <h2 class="item-title">Escoleta de bàsquet</h2>
-    <p class="item-desc">El primer pas amb la pilota. Diversió, motricitat i bàsquet base per als més petits del Clot.</p>
+    <p class="item-desc">El primer pas amb la pilota. Diversió, motricitat i bàsquet base per als més petits del Clot. <b>Contacta per WhatsApp:</b> +34 646 20 55 26</p>
     <div class="item-foot">
-      <span class="cta-pill">Apunta't <span class="arrow">→</span></span>
+      <span class="cta-pill green">WhatsApp Escoleta <span class="arrow">→</span></span>
     </div>
   </a>
 
@@ -1162,7 +1179,7 @@ body::after {
     </details>
     <details>
       <summary>Com puc apuntar un infant a Portes Obertes o a l'Escoleta?</summary>
-      <p>Les famílies poden contactar per WhatsApp al <a href="https://wa.me/34698425153">+34 698 425 153</a> o utilitzar els enllaços de Portes Obertes i Escoleta disponibles en aquesta portada.</p>
+      <p>Les famílies poden contactar per WhatsApp al <a href="https://wa.me/34657601298">+34 657 60 12 98</a> o utilitzar els enllaços de Portes Obertes i Escoleta disponibles en aquesta portada.</p>
     </details>
     <details>
       <summary>Què és el Campus Time Chamber Estiu 26?</summary>
@@ -1178,18 +1195,6 @@ body::after {
     </details>
   </section>
 
-  <!-- ==== COUNTDOWN 3x3 ==== -->
-  <div class="countdown-bar reveal">
-    <div class="cd-label">3x3 Westfield<br>Glòries</div>
-    <div class="cd-units">
-      <div class="cd-unit"><span class="cd-n" id="cd-d">--</span><span class="cd-u">dies</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-n" id="cd-h">--</span><span class="cd-u">hores</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-n" id="cd-m">--</span><span class="cd-u">min</span></div>
-    </div>
-    <a href="https://cbgrupbarna-3x3timechamber.com" target="_blank" rel="noopener" class="cd-cta" data-cta="cd-3x3">Apunta't →</a>
-  </div>
 
   <!-- ==== FORMA PART DEL BARNA ==== -->
   <div class="feed-title">
@@ -1248,15 +1253,25 @@ body::after {
       </div>
     </div>
     <div class="sponsor-ctas">
-      <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20per%20ser%20Patrocinador%2FPartner%20del%20CB%20Grup%20Barna%20%F0%9F%A4%9D%20Codi:%20SPONSOR_INFO" target="_blank" rel="noopener" class="sc-primary" data-cta="sponsor-wa">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-        Parla amb nosaltres →
+      <a href="https://dossierpatrocinis.skywork.website" target="_blank" rel="noopener" class="sc-primary" data-cta="sponsor-dossier">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zm-7-7H9v-2h2v2zm4 0h-2v-2h2v2zm-4 4H9v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+        Dossier Partners →
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20per%20ser%20Patrocinador%2FPartner%20del%20CB%20Grup%20Barna%20%F0%9F%A4%9D%20Codi:%20SPONSOR_INFO" target="_blank" rel="noopener" class="sc-ghost" data-cta="sponsor-wa">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+        WhatsApp →
+      </a>
+    </div>
+    <div class="sponsor-ctas" style="margin-top:-4px">
+      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" class="sc-ghost" data-cta="sponsor-presentacio" style="flex:1;justify-content:center">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        Presentació del club →
       </a>
       <a href="mailto:info@cbgrupbarna.com?subject=Patrocini%20CB%20Grup%20Barna" class="sc-ghost" data-cta="sponsor-email">
         info@cbgrupbarna.com
       </a>
     </div>
-    <div class="sponsor-note">· Dossier de patrocini disponible per WhatsApp · Respostem en menys de 24h</div>
+    <div class="sponsor-note">· Respostem en menys de 24h · Dossier i presentació disponibles online</div>
   </div>
 
   <!-- ==== SOCIAL GRID · Link in Bio ==== -->
@@ -1313,6 +1328,17 @@ body::after {
       <span class="ig-mega-pill">Segueix</span>
     </a>
 
+    <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener" class="tt-mega" data-cta="tt-follow">
+      <div class="tt-mega-icon">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.19 8.19 0 004.79 1.53V6.77a4.85 4.85 0 01-1.02-.08z"/></svg>
+      </div>
+      <div class="tt-mega-c">
+        <div class="tt-mega-t">Segueix-nos a TikTok</div>
+        <div class="tt-mega-s">@cbgrupbarna · vídeos del club · bàsquet base</div>
+      </div>
+      <span class="tt-mega-pill">Segueix</span>
+    </a>
+
     <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20rebre%20novetats%20del%20CB%20Grup%20Barna%20pel%20WhatsApp%20%F0%9F%93%A9" target="_blank" rel="noopener" class="item" data-cta="wa-newsletter" style="background:linear-gradient(135deg,rgba(37,211,102,0.10),rgba(37,211,102,0.02));border-color:rgba(37,211,102,0.32);margin-bottom:12px">
       <div class="item-head">
         <span class="badge live"><span class="bdot"></span>WhatsApp</span>
@@ -1334,7 +1360,7 @@ body::after {
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         Comparteix a X
       </a>
-      <button class="share-btn" id="shareBtn" data-cta="share-native">
+      <button class="share-btn" id="shareBtn" aria-label="Copiar enllaç o compartir" data-cta="share-native">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
         Copiar link
       </button>
