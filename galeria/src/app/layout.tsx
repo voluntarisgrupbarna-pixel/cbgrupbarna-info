@@ -1,6 +1,10 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { Navbar } from '@/components/Navbar'
+
+export const viewport: Viewport = {
+  themeColor: '#C8102E',
+}
 
 export const metadata: Metadata = {
   title: 'Galeria Fotos · CB Grup Barna',
@@ -13,7 +17,6 @@ export const metadata: Metadata = {
     locale: 'ca_ES',
     type: 'website',
   },
-  themeColor: '#C8102E',
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',

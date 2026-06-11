@@ -4,7 +4,7 @@ import { EventCard } from '@/components/EventCard'
 import { ArrowRight, Camera, Images, Users, Calendar } from 'lucide-react'
 import type { Event } from '@/lib/types'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   const supabase = await createClient()

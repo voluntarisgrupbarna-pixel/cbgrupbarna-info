@@ -4,7 +4,7 @@ import { SearchBar } from '@/components/SearchBar'
 import { Suspense } from 'react'
 import type { Event } from '@/lib/types'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 interface EventsPageProps {
   searchParams: Promise<{ q?: string; season?: string }>

@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 import type { Photo } from '@/lib/types'
 
-export const revalidate = 30
+export const dynamic = 'force-dynamic'
 
 interface EventPageProps {
   params: Promise<{ eventId: string }>
