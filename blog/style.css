@@ -1,0 +1,126 @@
+:root {
+  --red: #E31E24;
+  --black: #050505;
+  --gray-1: #181818;
+  --border: rgba(255,255,255,0.08);
+  --border-2: rgba(255,255,255,0.18);
+  --text: #ffffff;
+  --muted: #8a8a8a;
+  --green: #22c55e;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--black); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+img { max-width: 100%; height: auto; display: block; }
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(227,30,36,0.13) 0%, transparent 60%),
+    linear-gradient(180deg, #1a0606 0%, var(--black) 30%, var(--black) 100%);
+}
+
+/* NAV */
+.blog-nav {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 24px; border-bottom: 1px solid var(--border);
+  max-width: 780px; margin: 0 auto;
+}
+.blog-nav-back { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; transition: color .2s; }
+.blog-nav-back:hover { color: var(--text); }
+.blog-nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; margin-left: auto; }
+.blog-nav-logo span { color: var(--red); }
+
+/* HERO */
+.blog-hero { max-width: 780px; margin: 0 auto; padding: 48px 24px 28px; }
+.blog-hero-kicker { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 14px; }
+.blog-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 7vw, 58px); letter-spacing: 1px; line-height: 1; margin-bottom: 14px; }
+.blog-hero-sub { font-size: 16px; color: rgba(255,255,255,0.65); max-width: 520px; }
+
+/* ARTICLE GRID */
+.blog-grid { max-width: 780px; margin: 0 auto; padding: 8px 24px 80px; display: grid; gap: 14px; }
+.blog-card {
+  background: var(--gray-1); border: 1px solid var(--border);
+  border-radius: 16px; padding: 22px 24px;
+  display: block; transition: border-color .2s, background .2s;
+}
+.blog-card:hover { border-color: var(--border-2); background: #1c1c1c; }
+.blog-card-cat { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 9px; }
+.blog-card h2 { font-size: 19px; font-weight: 700; line-height: 1.3; margin-bottom: 9px; }
+.blog-card p { font-size: 14px; color: rgba(255,255,255,0.58); line-height: 1.55; margin-bottom: 16px; }
+.blog-card-meta { display: flex; align-items: center; gap: 12px; font-size: 11px; color: var(--muted); }
+.blog-card-read { margin-left: auto; color: var(--red); font-weight: 600; font-size: 12px; }
+
+/* ARTICLE */
+.blog-article-wrap { max-width: 700px; margin: 0 auto; padding: 0 24px 80px; }
+.article-meta { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--muted); margin-bottom: 28px; flex-wrap: wrap; }
+.article-cat {
+  background: rgba(227,30,36,0.14); color: var(--red);
+  padding: 3px 10px; border-radius: 6px; font-weight: 700;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.blog-article-wrap h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(30px, 6vw, 50px); letter-spacing: 1px; line-height: 1.05;
+  margin-bottom: 18px;
+}
+.article-intro {
+  font-size: 16px; color: rgba(255,255,255,0.78); line-height: 1.7;
+  margin-bottom: 32px; border-left: 3px solid var(--red); padding-left: 18px;
+}
+.blog-article-wrap h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px, 4vw, 32px); letter-spacing: 0.5px;
+  margin: 40px 0 12px; color: var(--text);
+}
+.blog-article-wrap h3 { font-size: 16px; font-weight: 700; margin: 24px 0 8px; }
+.blog-article-wrap p { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.72; margin-bottom: 18px; }
+.blog-article-wrap ul { margin: 0 0 18px 22px; }
+.blog-article-wrap li { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 6px; }
+.blog-article-wrap strong { color: var(--text); font-weight: 600; }
+.blog-article-wrap a.inlink { color: var(--red); text-decoration: underline; text-decoration-color: rgba(227,30,36,0.35); }
+.blog-article-wrap a.inlink:hover { text-decoration-color: var(--red); }
+
+/* CTA BLOCK */
+.article-cta {
+  background: #111; border: 1px solid rgba(227,30,36,0.28);
+  border-radius: 16px; padding: 26px 24px; margin: 40px 0;
+  text-align: center;
+}
+.article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; margin-bottom: 8px; }
+.article-cta p { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.article-cta-btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--green); color: #fff; font-weight: 700;
+  font-size: 14px; padding: 13px 26px; border-radius: 12px;
+  transition: opacity .2s; letter-spacing: 0.3px;
+}
+.article-cta-btn:hover { opacity: .88; }
+
+/* RELATED */
+.article-related { margin-top: 52px; padding-top: 28px; border-top: 1px solid var(--border); }
+.article-related-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.related-grid { display: grid; gap: 10px; }
+.related-card {
+  background: var(--gray-1); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px;
+  display: flex; align-items: center; gap: 12px;
+  transition: border-color .2s;
+}
+.related-card:hover { border-color: var(--border-2); }
+.related-card-cat { font-size: 10px; color: var(--red); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 3px; }
+.related-card-title { font-size: 13px; font-weight: 600; line-height: 1.35; }
+.related-arrow { margin-left: auto; color: var(--muted); font-size: 14px; flex-shrink: 0; }
+
+/* FOOTER */
+.blog-footer {
+  border-top: 1px solid var(--border); max-width: 780px; margin: 0 auto;
+  padding: 22px 24px; font-size: 12px; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 20px;
+}
+.blog-footer a { color: var(--muted); transition: color .2s; }
+.blog-footer a:hover { color: var(--text); }
