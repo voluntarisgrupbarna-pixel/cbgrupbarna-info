@@ -389,7 +389,8 @@ async function submitGate(){
   try{
     var url=API_URL+'?action=register&nom='+enc(nom)+'&cognom='+enc(cognom)+'&email='+enc(email)
       +'&mobil='+enc(mobil)+'&club='+enc(club)+'&instagram='+(ig?'si':'no')
-      +'&event='+enc(EVENT_ID)+'&font=galeria-esdeveniments-3x3';
+      +'&event='+enc(EVENT_ID)
+      +'&font='+enc('galeria-esdeveniments-3x3 · ev:'+EVENT_ID+' · club:'+club+' · ig:'+(ig?'si':'no'));
     var ctrl=new AbortController();var t=setTimeout(function(){ctrl.abort();},9000);
     await fetch(url,{signal:ctrl.signal});clearTimeout(t);
   }catch(e){}
