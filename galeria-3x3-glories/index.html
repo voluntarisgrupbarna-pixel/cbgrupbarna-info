@@ -79,9 +79,17 @@ input:focus{outline:none;border-color:#E8002D!important;box-shadow:0 0 0 3px rgb
 
   <form id="gate-form" class="animate-in form-card" novalidate
     style="width:100%;max-width:480px;background:#111;border:1px solid #1e1e1e;border-radius:20px;padding:34px 28px;z-index:1;box-shadow:0 32px 80px rgba(0,0,0,.7)">
-    <p style="font-size:11px;font-weight:700;color:#E8002D;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px">Pas 1 de 2</p>
-    <h2 style="font-size:20px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">🔒 Accés a la Galeria</h2>
-    <p style="font-size:13px;color:#666;margin-bottom:24px;line-height:1.6">Introdueix les teves dades per accedir a les 522 fotografies oficials. Gratuït i immediat.</p>
+    <p style="font-size:11px;font-weight:700;color:#E8002D;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px">Newsletter · Accés Gratuït</p>
+    <h2 style="font-size:20px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">📧 Subscriu-te a la Newsletter</h2>
+    <p style="font-size:13px;color:#666;margin-bottom:18px;line-height:1.6">Accedeix a les 522 fotos oficials i rep cada mes les novetats del <strong style="color:#fff">CB Grup Barna</strong>: resultats, campus, tornejos i tot el que passa al bàsquet barceloní.</p>
+
+    <div style="background:#0c0c0c;border:1px solid #1a1a1a;border-radius:10px;padding:10px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="font-size:18px;flex-shrink:0;margin-top:2px">📬</div>
+      <div>
+        <p style="font-size:10px;font-weight:700;color:#555;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Rebràs cada mes</p>
+        <p style="font-size:11px;color:#666;line-height:1.5">Novetats del club · Resultats · Campus i tornejos · Bàsquet femení BCN · Contingut exclusiu</p>
+      </div>
+    </div>
 
     <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
       <div>
@@ -117,7 +125,7 @@ input:focus{outline:none;border-color:#E8002D!important;box-shadow:0 0 0 3px rgb
       <div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📷</div>
       <div>
         <p style="font-size:10px;font-weight:700;color:#555;letter-spacing:.1em;text-transform:uppercase">Pas 2: Instagram</p>
-        <p style="font-size:12px;color:#888;margin-top:2px">Et demanarem que segueixis <strong style="color:#fff">@cbgrupbarna</strong></p>
+        <p style="font-size:12px;color:#888;margin-top:2px">Et demanarem que segueixis <strong style="color:#fff">@cbgrupbarna</strong> per accedir a les fotos</p>
       </div>
     </div>
 
@@ -125,7 +133,7 @@ input:focus{outline:none;border-color:#E8002D!important;box-shadow:0 0 0 3px rgb
       style="width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#444;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s">
       Omple tots els camps
     </button>
-    <p style="font-size:11px;color:#2e2e2e;text-align:center;margin-top:14px;line-height:1.6">🔐 Dades per a gestió interna. No es comparteixen amb tercers.</p>
+    <p style="font-size:11px;color:#2e2e2e;text-align:center;margin-top:14px;line-height:1.6">🔐 Subscripció gratuïta. Pots donar-te de baixa en qualsevol moment. Dades no compartides amb tercers.</p>
   </form>
 
   <div class="animate-in" style="margin-top:32px;z-index:1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center">
@@ -244,7 +252,7 @@ function validateGate() {
   if (valid) {
     btn.className = 'btn-green';
     btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#00FF57;color:#000;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(0,255,87,.35)';
-    btn.textContent = 'Continuar → Seguir al Barna';
+    btn.textContent = '📧 Subscriure\'m i accedir a les fotos →';
   } else {
     btn.className = '';
     btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#444;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s';
@@ -295,7 +303,7 @@ async function handleFollow() {
     timestamp: new Date().toLocaleString('ca-ES', { timeZone: 'Europe/Madrid' }),
     nom: formData.nom, cognoms: formData.cognoms,
     email: formData.email, mobil: formData.mobil,
-    club: formData.club, ig_follow: 'Sí',
+    club: formData.club, ig_follow: 'Sí', newsletter: 'Sí',
   };
   try {
     await fetch(APPS_SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
