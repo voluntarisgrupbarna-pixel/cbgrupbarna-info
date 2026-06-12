@@ -411,10 +411,16 @@ async function handleFollow() {
   }
   showView('loading');
   const payload = {
+    action: 'subscribe',
     timestamp: new Date().toLocaleString('ca-ES', { timeZone: 'Europe/Madrid' }),
-    nom: formData.nom, cognoms: formData.cognoms,
-    email: formData.email, mobil: formData.mobil,
-    club: formData.club, ig_follow: 'Sí', newsletter: 'Sí',
+    data: new Date().toLocaleString('ca-ES', { timeZone: 'Europe/Madrid' }),
+    nom: (formData.nom || '') + ' ' + (formData.cognoms || ''),
+    email: formData.email,
+    mobil: formData.mobil,
+    club: formData.club,
+    ig_follow: 'Sí',
+    newsletter: 'Sí',
+    source: 'galeria-3x3-2026',
   };
   try {
     await fetch(APPS_SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
