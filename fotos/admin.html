@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Galeria · CB Grup Barna</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #C8102E; --red-dark: #a81318;
+      --black: #040404; --gray1: #181818; --gray2: #252525; --gray3: #2e2e2e;
+      --cream: #F2EDE6; --green: #22c55e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--black); color: var(--cream); font-family: 'Outfit', sans-serif; min-height: 100vh; }
+    ::selection { background: var(--red); color: #fff; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(4,4,4,.96); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      height: 58px; display: flex; align-items: center;
+      padding: 0 1.25rem; gap: 1rem;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .1em; color: var(--cream); display: flex; align-items: center; gap: .5rem; }
+    .nav-logo span { color: var(--red); }
+    .badge-admin { font-size: .65rem; background: rgba(200,16,46,.15); color: var(--red); border: 1px solid rgba(200,16,46,.3); padding: .2rem .5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: .08em; }
+    .nav-user { margin-left: auto; display: flex; align-items: center; gap: .75rem; font-size: .8rem; color: rgba(255,255,255,.4); }
+    .btn-logout { background: none; border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.4); padding: .3rem .75rem; border-radius: 5px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: .75rem; transition: all .15s; }
+    .btn-logout:hover { border-color: rgba(255,255,255,.25); color: rgba(255,255,255,.7); }
+    .nav-gallery-link { color: rgba(255,255,255,.35); text-decoration: none; font-size: .8rem; transition: color .15s; }
+    .nav-gallery-link:hover { color: rgba(255,255,255,.7); }
+
+    /* LOGIN */
+    #login-screen {
+      min-height: 85vh; display: flex; align-items: center; justify-content: center; padding: 1rem;
+    }
+    .login-box {
+      background: var(--gray1); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px; padding: 2rem; width: 100%; max-width: 420px;
+    }
+    .login-icon { width: 52px; height: 52px; background: rgba(200,16,46,.1); border: 1px solid rgba(200,16,46,.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+    .login-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: .1em; margin-bottom: .3rem; }
+    .login-sub { font-size: .85rem; color: rgba(255,255,255,.35); margin-bottom: 1.5rem; }
+    .field-label { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.35); margin-bottom: .4rem; }
+    .field-input {
+      width: 100%; background: var(--gray2); border: 1px solid rgba(255,255,255,.1);
+      color: var(--cream); border-radius: 7px; padding: .65rem .85rem;
+      font-family: 'Outfit', sans-serif; font-size: .9rem; outline: none; transition: border-color .15s;
+    }
+    .field-input:focus { border-color: var(--red); }
+    .field-input::placeholder { color: rgba(255,255,255,.2); }
+    .field-hint { font-size: .72rem; color: rgba(255,255,255,.25); margin-top: .4rem; line-height: 1.4; }
+    .field-hint a { color: rgba(200,16,46,.6); }
+    .btn-primary { width: 100%; background: var(--red); color: #fff; border: none; border-radius: 7px; padding: .75rem 1rem; font-family: 'Outfit', sans-serif; font-size: .9rem; font-weight: 500; cursor: pointer; transition: background .15s; margin-top: 1.25rem; display: flex; align-items: center; justify-content: center; gap: .4rem; }
+    .btn-primary:hover { background: var(--red-dark); }
+    .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+    .login-error { background: rgba(200,16,46,.12); border: 1px solid rgba(200,16,46,.25); color: #f87171; border-radius: 7px; padding: .65rem .85rem; font-size: .82rem; margin-top: .75rem; display: none; }
+
+    /* MAIN */
+    #main-screen { display: none; padding: 1.5rem 1.25rem 4rem; max-width: 1100px; margin: 0 auto; }
+
+    /* TOOLBAR */
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .toolbar h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .06em; }
+    .toolbar h1 span { color: var(--red); }
+    .btn-new-event { background: var(--red); color: #fff; border: none; border-radius: 7px; padding: .6rem 1.1rem; font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; transition: background .15s; display: flex; align-items: center; gap: .4rem; }
+    .btn-new-event:hover { background: var(--red-dark); }
+
+    /* MODAL */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-backdrop.open { display: flex; }
+    .modal { background: var(--gray1); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 1.75rem; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; }
+    .modal h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .06em; margin-bottom: 1.25rem; }
+    .field-group { display: grid; gap: .85rem; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .modal-actions { display: flex; gap: .6rem; margin-top: 1.25rem; }
+    .btn-cancel { flex: 1; background: transparent; border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.5); border-radius: 7px; padding: .65rem 1rem; font-family: 'Outfit', sans-serif; font-size: .85rem; cursor: pointer; transition: all .15s; }
+    .btn-cancel:hover { border-color: rgba(255,255,255,.25); color: rgba(255,255,255,.8); }
+    .btn-save { flex: 2; background: var(--red); color: #fff; border: none; border-radius: 7px; padding: .65rem 1rem; font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; transition: background .15s; display: flex; align-items: center; justify-content: center; gap: .4rem; }
+    .btn-save:hover { background: var(--red-dark); }
+    .btn-save:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* EVENTS LIST */
+    .events-list { display: grid; gap: .7rem; }
+    .event-row {
+      background: var(--gray1); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;
+      display: grid; grid-template-columns: 72px 1fr auto; align-items: center; gap: 1rem;
+      overflow: hidden; cursor: pointer; transition: border-color .15s;
+    }
+    .event-row:hover { border-color: rgba(255,255,255,.12); }
+    .event-thumb-mini { width: 72px; height: 72px; object-fit: cover; background: var(--gray2); display: block; flex-shrink: 0; }
+    .event-thumb-empty { width: 72px; height: 72px; background: var(--gray2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .event-row-info { padding: .75rem 0; min-width: 0; }
+    .event-row-title { font-size: .95rem; font-weight: 500; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .event-row-meta { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: .2rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    .event-row-actions { display: flex; gap: .4rem; padding-right: .75rem; flex-shrink: 0; }
+    .btn-icon { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.5); border-radius: 6px; padding: .4rem; cursor: pointer; transition: all .15s; display: flex; align-items: center; }
+    .btn-icon:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.9); }
+    .btn-icon.danger:hover { background: rgba(200,16,46,.15); border-color: rgba(200,16,46,.3); color: #f87171; }
+    .season-chip { font-size: .65rem; background: rgba(200,16,46,.15); color: var(--red); border: 1px solid rgba(200,16,46,.25); padding: .15rem .4rem; border-radius: 3px; }
+
+    /* UPLOAD PANEL */
+    #upload-panel { display: none; }
+    .upload-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .btn-back { background: none; border: none; color: rgba(255,255,255,.4); cursor: pointer; font-family: 'Outfit', sans-serif; font-size: .85rem; display: flex; align-items: center; gap: .3rem; transition: color .15s; padding: .4rem 0; }
+    .btn-back:hover { color: rgba(255,255,255,.8); }
+    .upload-event-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .06em; }
+    .upload-event-title span { color: var(--red); }
+
+    /* DROP ZONE */
+    .drop-zone {
+      border: 2px dashed rgba(255,255,255,.12); border-radius: 12px; padding: 3rem 1.5rem;
+      text-align: center; transition: all .2s; cursor: pointer; position: relative; margin-bottom: 1.25rem;
+    }
+    .drop-zone.drag-over { border-color: var(--red); background: rgba(200,16,46,.05); }
+    .drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .drop-zone-icon { color: rgba(255,255,255,.15); margin-bottom: .75rem; }
+    .drop-zone p { color: rgba(255,255,255,.45); font-size: .9rem; }
+    .drop-zone p span { color: var(--red); cursor: pointer; }
+    .drop-zone small { color: rgba(255,255,255,.2); font-size: .75rem; }
+
+    /* UPLOAD QUEUE */
+    .upload-queue { display: grid; gap: .5rem; margin-bottom: 1.5rem; }
+    .upload-item {
+      background: var(--gray1); border: 1px solid rgba(255,255,255,.06); border-radius: 8px;
+      display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: .75rem; padding: .5rem;
+    }
+    .upload-item-thumb { width: 52px; height: 52px; object-fit: cover; border-radius: 5px; background: var(--gray2); }
+    .upload-item-name { font-size: .8rem; color: rgba(255,255,255,.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .upload-item-size { font-size: .7rem; color: rgba(255,255,255,.25); margin-top: .15rem; }
+    .upload-item-status { font-size: .75rem; display: flex; align-items: center; gap: .3rem; white-space: nowrap; flex-shrink: 0; padding-right: .25rem; }
+    .status-pending { color: rgba(255,255,255,.3); }
+    .status-uploading { color: #60a5fa; }
+    .status-done { color: var(--green); }
+    .status-error { color: #f87171; }
+    .progress-bar { height: 2px; background: rgba(255,255,255,.08); border-radius: 1px; margin-top: .3rem; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--red); border-radius: 1px; transition: width .3s; }
+
+    /* UPLOAD ACTIONS */
+    .upload-actions { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+    .btn-upload-all { background: var(--red); color: #fff; border: none; border-radius: 7px; padding: .65rem 1.25rem; font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; transition: background .15s; display: flex; align-items: center; gap: .4rem; }
+    .btn-upload-all:hover { background: var(--red-dark); }
+    .btn-upload-all:disabled { opacity: .5; cursor: not-allowed; }
+    .upload-status-text { font-size: .8rem; color: rgba(255,255,255,.35); }
+    .success-banner { background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.25); color: #4ade80; border-radius: 8px; padding: .75rem 1rem; font-size: .85rem; display: flex; align-items: center; gap: .5rem; display: none; margin-bottom: 1rem; }
+
+    /* UPLOADED PHOTOS GRID */
+    .uploaded-grid { columns: 3; column-gap: .5rem; margin-top: 1.5rem; }
+    @media (min-width: 640px) { .uploaded-grid { columns: 4; } }
+    @media (min-width: 900px) { .uploaded-grid { columns: 6; } }
+    .uploaded-photo { break-inside: avoid; margin-bottom: .5rem; position: relative; border-radius: 6px; overflow: hidden; background: var(--gray2); }
+    .uploaded-photo img { width: 100%; height: auto; display: block; }
+    .uploaded-photo .del-btn {
+      position: absolute; top: .3rem; right: .3rem; background: rgba(0,0,0,.65); border: none;
+      color: #f87171; cursor: pointer; border-radius: 4px; padding: .25rem; display: none;
+      align-items: center; transition: background .15s;
+    }
+    .uploaded-photo:hover .del-btn { display: flex; }
+    .uploaded-photo .del-btn:hover { background: rgba(200,16,46,.6); color: #fff; }
+
+    /* SPINNER */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spin { animation: spin .8s linear infinite; }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .shimmer { background: linear-gradient(90deg, var(--gray2) 25%, var(--gray3) 50%, var(--gray2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+
+    /* TOAST */
+    #toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: .5rem; }
+    .toast-item { background: var(--gray1); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; padding: .65rem 1rem; font-size: .82rem; color: var(--cream); display: flex; align-items: center; gap: .5rem; animation: slideIn .2s ease; max-width: 320px; }
+    .toast-item.success { border-color: rgba(34,197,94,.3); }
+    .toast-item.error { border-color: rgba(200,16,46,.3); color: #f87171; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+    @media (max-width: 500px) {
+      .field-row { grid-template-columns: 1fr; }
+      .event-row { grid-template-columns: 56px 1fr auto; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2">
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+      <circle cx="12" cy="13" r="4"/>
+    </svg>
+    CB GRUP BARNA <span>·</span> GALERIA
+    <span class="badge-admin">Admin</span>
+  </div>
+  <div class="nav-user" id="nav-user">
+    <a href="/fotos/" class="nav-gallery-link">← Veure galeria</a>
+    <span id="nav-username"></span>
+    <button class="btn-logout" onclick="logout()">Sortir</button>
+  </div>
+</nav>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2">
+        <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    </div>
+    <div class="login-title">Accés Admin</div>
+    <div class="login-sub">Introdueix el token de GitHub per gestionar la galeria</div>
+
+    <label class="field-label" for="token-input">GitHub Personal Access Token</label>
+    <input class="field-input" type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+    <p class="field-hint">
+      Crea un token a
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=CB+Grup+Barna+Galeria" target="_blank" rel="noopener">
+        github.com/settings/tokens
+      </a>
+      → selecciona l'abast <strong>repo</strong>.
+    </p>
+    <div id="login-error" class="login-error"></div>
+
+    <button class="btn-primary" id="login-btn" onclick="doLogin()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+        <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+      </svg>
+      Entrar
+    </button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main-screen">
+
+  <!-- Events panel -->
+  <div id="events-panel">
+    <div class="toolbar">
+      <h1>Gestionar <span>Esdeveniments</span></h1>
+      <button class="btn-new-event" onclick="openNewEventModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Nou Esdeveniment
+      </button>
+    </div>
+    <div class="events-list" id="events-list">
+      <div style="text-align:center;padding:3rem;color:rgba(255,255,255,.2);">Carregant…</div>
+    </div>
+  </div>
+
+  <!-- Upload panel -->
+  <div id="upload-panel">
+    <div class="upload-header">
+      <button class="btn-back" onclick="showEventsPanel()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Tots els esdeveniments
+      </button>
+      <div class="upload-event-title" id="upload-event-title">Carregant…</div>
+    </div>
+
+    <div class="success-banner" id="success-banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      <span id="success-text"></span>
+    </div>
+
+    <div class="drop-zone" id="drop-zone">
+      <input type="file" id="file-input" accept="image/*" multiple>
+      <div class="drop-zone-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+      </div>
+      <p>Arrossega les fotos aquí o <span>selecciona-les</span></p>
+      <small>JPG, PNG, WebP · Fins a 25 MB per foto</small>
+    </div>
+
+    <div class="upload-queue" id="upload-queue"></div>
+
+    <div class="upload-actions" id="upload-actions" style="display:none">
+      <button class="btn-upload-all" id="upload-btn" onclick="uploadAll()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <span id="upload-btn-text">Pujar fotos</span>
+      </button>
+      <span class="upload-status-text" id="upload-status"></span>
+    </div>
+
+    <div id="uploaded-section" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;margin-top:1.5rem;">
+        <p style="font-size:.85rem;color:rgba(255,255,255,.4);">
+          Fotos pujades: <strong id="uploaded-count" style="color:var(--cream)">0</strong>
+        </p>
+      </div>
+      <div class="uploaded-grid" id="uploaded-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NEW EVENT MODAL -->
+<div class="modal-backdrop" id="new-event-modal">
+  <div class="modal">
+    <h2>Nou Esdeveniment</h2>
+    <div class="field-group">
+      <div>
+        <label class="field-label">Títol *</label>
+        <input class="field-input" type="text" id="ev-title" placeholder="Ex: Torneig 3x3 Glòries 2026">
+      </div>
+      <div>
+        <label class="field-label">Descripció</label>
+        <textarea class="field-input" id="ev-desc" rows="2" placeholder="Breu descripció de l'event…" style="resize:vertical"></textarea>
+      </div>
+      <div class="field-row">
+        <div>
+          <label class="field-label">Data</label>
+          <input class="field-input" type="date" id="ev-date">
+        </div>
+        <div>
+          <label class="field-label">Temporada</label>
+          <input class="field-input" type="text" id="ev-season" placeholder="Ex: 2025-2026">
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Lloc</label>
+        <input class="field-input" type="text" id="ev-location" placeholder="Ex: Parc de les Glòries, Barcelona">
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem;">
+        <input type="checkbox" id="ev-dl" checked style="accent-color:var(--red);width:15px;height:15px;">
+        <label for="ev-dl" style="font-size:.85rem;color:rgba(255,255,255,.6);cursor:pointer;">Permetre descàrrega de fotos</label>
+      </div>
+    </div>
+    <div id="modal-error" class="login-error"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeNewEventModal()">Cancel·lar</button>
+      <button class="btn-save" id="save-event-btn" onclick="saveNewEvent()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Crear Esdeveniment
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ── CONFIG ──
+const OWNER = 'voluntarisgrupbarna-pixel';
+const REPO  = 'cbgrupbarna-info';
+const BRANCH = 'main';
+const EVENTS_PATH = 'fotos/events.js';
+
+// ── STATE ──
+let ghToken = null;
+let events = [];
+let currentEvent = null;
+let uploadQueue = [];
+
+// ── AUTH ──
+function getToken() { return localStorage.getItem('gh_admin_token'); }
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const tok = getToken();
+  if (tok) {
+    ghToken = tok;
+    const ok = await verifyToken();
+    if (ok) showMain();
+    else showLogin();
+  } else {
+    showLogin();
+  }
+
+  // Drop zone
+  const dz = document.getElementById('drop-zone');
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+  dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+  document.getElementById('file-input').addEventListener('change', e => addFiles(e.target.files));
+});
+
+async function verifyToken() {
+  try {
+    const res = await gh('/user');
+    document.getElementById('nav-username').textContent = res.login;
+    return true;
+  } catch { return false; }
+}
+
+async function doLogin() {
+  const input = document.getElementById('token-input');
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-error');
+  err.style.display = 'none';
+  ghToken = input.value.trim();
+  if (!ghToken) return;
+
+  btn.disabled = true;
+  btn.innerHTML = `<svg class="spin" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Verificant…`;
+
+  try {
+    const ok = await verifyToken();
+    if (ok) {
+      localStorage.setItem('gh_admin_token', ghToken);
+      showMain();
+    } else {
+      throw new Error('Token invàlid o sense permisos');
+    }
+  } catch(e) {
+    err.textContent = e.message || 'Token invàlid. Comprova els permisos.';
+    err.style.display = 'block';
+    ghToken = null;
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg> Entrar`;
+}
+
+function logout() {
+  localStorage.removeItem('gh_admin_token');
+  ghToken = null;
+  showLogin();
+}
+
+// ── VIEWS ──
+function showLogin() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('main-screen').style.display = 'none';
+  document.getElementById('nav-user').style.display = 'none';
+}
+
+async function showMain() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-screen').style.display = 'block';
+  document.getElementById('nav-user').style.display = 'flex';
+  await loadEvents();
+  showEventsPanel();
+}
+
+function showEventsPanel() {
+  document.getElementById('events-panel').style.display = 'block';
+  document.getElementById('upload-panel').style.display = 'none';
+  currentEvent = null;
+  uploadQueue = [];
+}
+
+function showUploadPanel(ev) {
+  currentEvent = ev;
+  uploadQueue = [];
+  document.getElementById('events-panel').style.display = 'none';
+  document.getElementById('upload-panel').style.display = 'block';
+  document.getElementById('upload-queue').innerHTML = '';
+  document.getElementById('upload-actions').style.display = 'none';
+  document.getElementById('success-banner').style.display = 'none';
+  document.getElementById('file-input').value = '';
+
+  const titleEl = document.getElementById('upload-event-title');
+  titleEl.innerHTML = `Fotos: <span>${ev.title}</span>`;
+
+  renderUploadedPhotos(ev);
+}
+
+// ── GITHUB API ──
+async function gh(path, method = 'GET', body = null) {
+  const url = path.startsWith('http') ? path : `https://api.github.com${path}`;
+  const res = await fetch(url, {
+    method,
+    headers: {
+      'Authorization': `Bearer ${ghToken}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+      ...(body ? { 'Content-Type': 'application/json' } : {}),
+    },
+    body: body ? JSON.stringify(body) : null,
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`GitHub API ${res.status}: ${text}`);
+  }
+  if (res.status === 204) return null;
+  return res.json();
+}
+
+async function getFileSHA(path) {
+  try {
+    const data = await gh(`/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`);
+    return data.sha;
+  } catch { return null; }
+}
+
+async function writeFile(path, content, message, sha = null) {
+  const body = {
+    message,
+    content: btoa(unescape(encodeURIComponent(content))),
+    branch: BRANCH,
+  };
+  if (sha) body.sha = sha;
+  return gh(`/repos/${OWNER}/${REPO}/contents/${path}`, 'PUT', body);
+}
+
+async function writeFileBinary(path, base64Content, message, sha = null) {
+  const body = { message, content: base64Content, branch: BRANCH };
+  if (sha) body.sha = sha;
+  return gh(`/repos/${OWNER}/${REPO}/contents/${path}`, 'PUT', body);
+}
+
+async function deleteFile(path, message) {
+  const sha = await getFileSHA(path);
+  if (!sha) return;
+  return gh(`/repos/${OWNER}/${REPO}/contents/${path}`, 'DELETE', { message, sha, branch: BRANCH });
+}
+
+// ── EVENTS DATA ──
+async function loadEvents() {
+  try {
+    const data = await gh(`/repos/${OWNER}/${REPO}/contents/${EVENTS_PATH}?ref=${BRANCH}`);
+    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+    // Parse window.GALERIA_EVENTS from JS
+    const match = raw.match(/window\.GALERIA_EVENTS\s*=\s*(\[[\s\S]*?\]);/);
+    if (match) {
+      events = JSON.parse(match[1]);
+    }
+  } catch(e) {
+    console.warn('Could not load events:', e);
+    events = [];
+  }
+  renderEventsList();
+}
+
+async function saveEvents() {
+  const sha = await getFileSHA(EVENTS_PATH);
+  const js = `// CB Grup Barna · Galeria · Dades d'esdeveniments\n// Actualitzat: ${new Date().toISOString().slice(0,10)}\n\nwindow.GALERIA_EVENTS = ${JSON.stringify(events, null, 2)};\n`;
+  await writeFile(EVENTS_PATH, js, `data: update events.js [skip ci]`, sha);
+}
+
+// ── EVENTS UI ──
+function renderEventsList() {
+  const list = document.getElementById('events-list');
+  if (!events.length) {
+    list.innerHTML = `<div style="text-align:center;padding:3rem;color:rgba(255,255,255,.2);">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:.75rem;opacity:.3">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+      <p>Encara no hi ha esdeveniments.<br>Crea el primer!</p>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = '';
+  events.forEach((ev, i) => {
+    const row = document.createElement('div');
+    row.className = 'event-row';
+    const photoCount = (ev.photos || []).length;
+    const coverUrl = ev.cover ? photoUrl(ev, ev.cover) : null;
+    const dateStr = ev.date ? new Date(ev.date + 'T12:00:00').toLocaleDateString('ca-ES', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+
+    row.innerHTML = `
+      ${coverUrl
+        ? `<img class="event-thumb-mini" src="${coverUrl}" alt="${ev.title}" loading="lazy">`
+        : `<div class="event-thumb-empty"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`}
+      <div class="event-row-info">
+        <div class="event-row-title">${ev.title}</div>
+        <div class="event-row-meta">
+          ${dateStr ? `<span>${dateStr}</span>` : ''}
+          ${ev.season ? `<span class="season-chip">${ev.season}</span>` : ''}
+          ${ev.location ? `<span>${ev.location}</span>` : ''}
+          <span style="color:rgba(200,16,46,.6)">${photoCount} foto${photoCount !== 1 ? 's' : ''}</span>
+        </div>
+      </div>
+      <div class="event-row-actions">
+        <button class="btn-icon" title="Afegir fotos" onclick="event.stopPropagation(); openUploadForEvent(${i})">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </button>
+        <button class="btn-icon danger" title="Eliminar" onclick="event.stopPropagation(); deleteEvent(${i})">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6"/><path d="M14 11v6"/>
+          </svg>
+        </button>
+      </div>`;
+
+    row.addEventListener('click', () => openUploadForEvent(i));
+    list.appendChild(row);
+  });
+}
+
+function openUploadForEvent(index) {
+  showUploadPanel(events[index]);
+}
+
+// ── NEW EVENT MODAL ──
+function openNewEventModal() {
+  document.getElementById('new-event-modal').classList.add('open');
+  document.getElementById('ev-title').focus();
+  // Default season
+  const now = new Date();
+  const season = now.getMonth() >= 8
+    ? `${now.getFullYear()}-${now.getFullYear()+1}`
+    : `${now.getFullYear()-1}-${now.getFullYear()}`;
+  document.getElementById('ev-season').value = season;
+}
+
+function closeNewEventModal() {
+  document.getElementById('new-event-modal').classList.remove('open');
+  document.getElementById('modal-error').style.display = 'none';
+}
+
+async function saveNewEvent() {
+  const title = document.getElementById('ev-title').value.trim();
+  if (!title) {
+    const err = document.getElementById('modal-error');
+    err.textContent = 'El títol és obligatori.';
+    err.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('save-event-btn');
+  btn.disabled = true;
+  btn.innerHTML = `<svg class="spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Guardant…`;
+
+  const id = title.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '') + '-' + Date.now().toString(36);
+
+  const newEvent = {
+    id,
+    title,
+    description: document.getElementById('ev-desc').value.trim() || null,
+    date: document.getElementById('ev-date').value || null,
+    season: document.getElementById('ev-season').value.trim() || null,
+    location: document.getElementById('ev-location').value.trim() || null,
+    cover: null,
+    photos: [],
+    allow_download: document.getElementById('ev-dl').checked,
+    source: 'repo',
+  };
+
+  events.unshift(newEvent);
+
+  try {
+    await saveEvents();
+    closeNewEventModal();
+    renderEventsList();
+    toast('Esdeveniment creat! Ara pots pujar les fotos.', 'success');
+
+    // Reset form
+    ['ev-title','ev-desc','ev-date','ev-location'].forEach(id => document.getElementById(id).value = '');
+
+    // Open upload panel for this event
+    showUploadPanel(events[0]);
+  } catch(e) {
+    events.shift(); // rollback
+    const err = document.getElementById('modal-error');
+    err.textContent = 'Error guardant: ' + e.message;
+    err.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Crear Esdeveniment`;
+}
+
+// ── DELETE EVENT ──
+async function deleteEvent(index) {
+  const ev = events[index];
+  if (!confirm(`Eliminar "${ev.title}" i totes les seves fotos?`)) return;
+
+  // Delete all photo files
+  const paths = (ev.photos || []).map(p => `fotos/uploads/${ev.id}/${p}`);
+  for (const path of paths) {
+    try { await deleteFile(path, `foto: remove from ${ev.id} [skip ci]`); } catch {}
+  }
+
+  events.splice(index, 1);
+  await saveEvents();
+  renderEventsList();
+  toast('Esdeveniment eliminat', 'success');
+}
+
+// ── FILE UPLOAD ──
+function addFiles(fileList) {
+  const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+  if (!files.length) return;
+
+  files.forEach(file => {
+    uploadQueue.push({ file, status: 'pending', progress: 0 });
+  });
+
+  renderUploadQueue();
+  document.getElementById('upload-actions').style.display = 'flex';
+  document.getElementById('upload-btn-text').textContent = `Pujar ${uploadQueue.filter(f=>f.status==='pending').length} foto${uploadQueue.filter(f=>f.status==='pending').length !== 1 ? 's' : ''}`;
+}
+
+function renderUploadQueue() {
+  const container = document.getElementById('upload-queue');
+  container.innerHTML = '';
+  uploadQueue.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'upload-item';
+    div.id = `qi-${i}`;
+
+    const preview = URL.createObjectURL(item.file);
+    const size = item.file.size < 1024*1024
+      ? `${(item.file.size/1024).toFixed(0)} KB`
+      : `${(item.file.size/1024/1024).toFixed(1)} MB`;
+
+    const statusHtml = {
+      pending: `<span class="upload-item-status status-pending"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Pendent</span>`,
+      uploading: `<span class="upload-item-status status-uploading"><svg class="spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Pujant…</span>`,
+      done: `<span class="upload-item-status status-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Pujat</span>`,
+      error: `<span class="upload-item-status status-error"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Error</span>`,
+    }[item.status];
+
+    div.innerHTML = `
+      <img class="upload-item-thumb" src="${preview}" alt="">
+      <div>
+        <div class="upload-item-name">${item.file.name}</div>
+        <div class="upload-item-size">${size}</div>
+        ${item.status === 'uploading' ? `<div class="progress-bar"><div class="progress-fill" id="prog-${i}" style="width:${item.progress}%"></div></div>` : ''}
+      </div>
+      ${statusHtml}`;
+    container.appendChild(div);
+  });
+}
+
+async function uploadAll() {
+  const pending = uploadQueue.filter(f => f.status === 'pending');
+  if (!pending.length) return;
+
+  const btn = document.getElementById('upload-btn');
+  btn.disabled = true;
+  document.getElementById('success-banner').style.display = 'none';
+
+  let done = 0, errors = 0;
+
+  for (let i = 0; i < uploadQueue.length; i++) {
+    const item = uploadQueue[i];
+    if (item.status !== 'pending') continue;
+
+    item.status = 'uploading';
+    renderUploadQueue();
+    document.getElementById('upload-status').textContent = `${done + 1} / ${pending.length}`;
+
+    try {
+      const filename = await uploadPhoto(item.file, i);
+      item.status = 'done';
+
+      // Add to event
+      const ev = currentEvent;
+      if (!ev.photos) ev.photos = [];
+      ev.photos.push(filename);
+      if (!ev.cover) ev.cover = filename;
+
+      // Update events index entry
+      const idx = events.findIndex(e => e.id === ev.id);
+      if (idx !== -1) events[idx] = ev;
+
+      done++;
+    } catch(e) {
+      item.status = 'error';
+      errors++;
+      console.error(e);
+    }
+
+    renderUploadQueue();
+  }
+
+  // Save events.js once after all uploads
+  if (done > 0) {
+    try {
+      await saveEvents();
+    } catch(e) {
+      console.error('Error saving events:', e);
+    }
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> <span id="upload-btn-text">Pujar fotos</span>`;
+
+  document.getElementById('upload-status').textContent = '';
+  document.getElementById('upload-actions').style.display = 'none';
+
+  if (done > 0) {
+    const banner = document.getElementById('success-banner');
+    const text = document.getElementById('success-text');
+    text.textContent = `${done} foto${done !== 1 ? 's' : ''} pujada${done !== 1 ? 's' : ''} correctament! Visibles a cbgrupbarna.info/fotos/ en 1-2 minuts.`;
+    banner.style.display = 'flex';
+    uploadQueue = uploadQueue.filter(f => f.status !== 'done');
+    renderUploadQueue();
+    renderUploadedPhotos(currentEvent);
+    renderEventsList();
+  }
+
+  if (errors > 0) toast(`${errors} foto${errors !== 1 ? 's' : ''} no s'han pogut pujar`, 'error');
+}
+
+async function uploadPhoto(file, queueIndex) {
+  const ev = currentEvent;
+  const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+  const filename = `${Date.now()}-${Math.random().toString(36).slice(2,7)}.${ext}`;
+  const path = `fotos/uploads/${ev.id}/${filename}`;
+
+  const base64 = await fileToBase64(file);
+
+  // Simulate progress (GitHub API doesn't give real progress)
+  let prog = 0;
+  const progInterval = setInterval(() => {
+    prog = Math.min(prog + 15, 85);
+    const el = document.getElementById(`prog-${queueIndex}`);
+    if (el) el.style.width = prog + '%';
+  }, 200);
+
+  try {
+    await writeFileBinary(path, base64, `foto: add ${filename} to ${ev.id} [skip ci]`);
+    clearInterval(progInterval);
+    const el = document.getElementById(`prog-${queueIndex}`);
+    if (el) el.style.width = '100%';
+    return filename;
+  } catch(e) {
+    clearInterval(progInterval);
+    throw e;
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result;
+      resolve(result.split(',')[1]); // remove data:image/...;base64,
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── UPLOADED PHOTOS ──
+function renderUploadedPhotos(ev) {
+  const section = document.getElementById('uploaded-section');
+  const grid = document.getElementById('uploaded-grid');
+  const count = document.getElementById('uploaded-count');
+  const photos = ev.photos || [];
+
+  count.textContent = photos.length;
+  section.style.display = photos.length ? 'block' : 'none';
+  grid.innerHTML = '';
+
+  photos.forEach((filename, i) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'uploaded-photo';
+    const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`;
+    wrapper.innerHTML = `
+      <img src="${url}" alt="Foto ${i+1}" loading="lazy">
+      <button class="del-btn" title="Eliminar foto" onclick="deleteUploadedPhoto('${ev.id}', '${filename}', ${i})">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>`;
+    grid.appendChild(wrapper);
+  });
+}
+
+async function deleteUploadedPhoto(eventId, filename, photoIndex) {
+  if (!confirm('Eliminar aquesta foto?')) return;
+
+  const path = `fotos/uploads/${eventId}/${filename}`;
+  try {
+    await deleteFile(path, `foto: remove ${filename} [skip ci]`);
+    const ev = events.find(e => e.id === eventId);
+    if (ev) {
+      ev.photos.splice(photoIndex, 1);
+      if (ev.cover === filename) ev.cover = ev.photos[0] || null;
+      await saveEvents();
+      if (currentEvent && currentEvent.id === eventId) {
+        currentEvent = ev;
+        renderUploadedPhotos(ev);
+      }
+      renderEventsList();
+    }
+    toast('Foto eliminada', 'success');
+  } catch(e) {
+    toast('Error eliminant: ' + e.message, 'error');
+  }
+}
+
+// ── PHOTO URL ──
+function photoUrl(ev, filename) {
+  if (!filename) return null;
+  if (ev.source === 'repo' || filename.includes('.')) {
+    return `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`;
+  }
+  return `https://drive.google.com/thumbnail?id=${filename}&sz=w400`; // Drive fallback
+}
+
+// ── TOAST ──
+function toast(msg, type = '') {
+  const container = document.getElementById('toast');
+  const item = document.createElement('div');
+  item.className = `toast-item ${type}`;
+  const icon = type === 'success'
+    ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>`
+    : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+  item.innerHTML = icon + msg;
+  container.appendChild(item);
+  setTimeout(() => item.remove(), 4000);
+}
+</script>
+</body>
+</html>
