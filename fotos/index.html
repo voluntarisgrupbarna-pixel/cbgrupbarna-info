@@ -467,7 +467,34 @@
 const THUMB = id => `https://drive.google.com/thumbnail?id=${id}&sz=w500`;
 const FULL  = id => `https://lh3.googleusercontent.com/d/${id}`;
 const DL    = id => `https://drive.google.com/uc?export=download&id=${id}`;
+const REPO_RAW = 'https://raw.githubusercontent.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/main';
+const PLACEHOLDER = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23222' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' fill='%23555' font-family='sans-serif' font-size='14' text-anchor='middle' dy='.3em'%3ESense fotos%3C/text%3E%3C/svg%3E`;
 const BATCH = 40; // photos per load
+
+function isRepo(ev) { return ev.source === 'repo'; }
+function photoThumb(ev, ref) {
+  if (!ref) return PLACEHOLDER;
+  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  return THUMB(ref);
+}
+function photoFull(ev, ref) {
+  if (!ref) return PLACEHOLDER;
+  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  return FULL(ref);
+}
+function photoDl(ev, ref) {
+  if (!ref) return '#';
+  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  return DL(ref);
+}
+function eventCover(ev) {
+  if (isRepo(ev)) {
+    const ref = ev.cover || ev.photos[0];
+    if (!ref) return PLACEHOLDER;
+    return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  }
+  return THUMB(ev.cover);
+}
 
 // ── STATE ──
 let currentEvent = null;
@@ -574,7 +601,7 @@ function renderEvents() {
 
     card.innerHTML = `
       <div class="event-thumb">
-        <img src="${THUMB(ev.cover)}" alt="${ev.title}" loading="lazy">
+        <img src="${eventCover(ev)}" alt="${ev.title}" loading="lazy">
         <div class="event-thumb-overlay"></div>
         ${ev.season ? `<div class="event-season-tag">${ev.season}</div>` : ''}
         <div class="event-thumb-count">
@@ -644,7 +671,7 @@ function loadMorePhotos() {
     img.loading = 'lazy';
     img.onload = () => { shimmer.remove(); item.appendChild(img); };
     img.onerror = () => { shimmer.style.opacity = '.3'; };
-    img.src = THUMB(id);
+    img.src = photoThumb(ev, id);
 
     // Hover actions
     const hover = document.createElement('div');
@@ -653,7 +680,7 @@ function loadMorePhotos() {
     if (ev.allow_download) {
       const dlBtn = document.createElement('a');
       dlBtn.className = 'photo-action-btn';
-      dlBtn.href = DL(id);
+      dlBtn.href = photoDl(ev, id);
       dlBtn.download = true;
       dlBtn.target = '_blank';
       dlBtn.rel = 'noopener';
@@ -711,12 +738,12 @@ function updateLightbox() {
   const img = document.getElementById('lb-img');
   img.classList.add('loading');
   img.onload = () => img.classList.remove('loading');
-  img.src = FULL(id);
+  img.src = photoFull(currentEvent, id);
   document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${photos.length}`;
 
   const dlLink = document.getElementById('lb-dl');
   if (currentEvent.allow_download) {
-    dlLink.href = DL(id);
+    dlLink.href = photoDl(currentEvent, id);
     dlLink.style.display = 'flex';
   } else {
     dlLink.style.display = 'none';
