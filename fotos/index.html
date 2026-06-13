@@ -571,6 +571,7 @@ const BATCH = 40; // photos per load
 
 function isRepo(ev) { return ev.source === 'repo'; }
 function isFlickr(ev) { return ev.source === 'flickr'; }
+function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
 
 function photoThumb(ev, ref) {
   if (!ref) return PLACEHOLDER;
@@ -591,6 +592,7 @@ function photoDl(ev, ref) {
   return DL(ref);
 }
 function eventCover(ev) {
+  if (isFlickrEmbed(ev)) return ev.cover_url || PLACEHOLDER;
   if (isFlickr(ev)) {
     if (!ev.cover) return PLACEHOLDER;
     return `https://live.staticflickr.com/${ev.cover}_q.jpg`;
@@ -802,7 +804,7 @@ function renderEvents() {
             <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
             <polyline points="21 15 16 10 5 21"/>
           </svg>
-          ${ev.photos.length}
+          ${isFlickrEmbed(ev) ? 'Flickr' : ev.photos.length}
         </div>
       </div>
       <div class="event-info">
@@ -840,6 +842,28 @@ function showPhotos(ev) {
   // Render first batch
   const grid = document.getElementById('photo-grid');
   grid.innerHTML = '';
+
+  // Flickr album embed
+  if (isFlickrEmbed(ev)) {
+    document.getElementById('ev-count').innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Àlbum Flickr`;
+    grid.style.columns = 'initial';
+    grid.innerHTML = `
+      <iframe src="https://embedr.flickr.com/photosets/${ev.flickr_album_id}"
+        width="100%" height="620" frameborder="0" allowfullscreen
+        webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen
+        style="border-radius:10px;background:var(--gray2);display:block">
+      </iframe>
+      <div style="text-align:center;margin-top:1rem">
+        <a href="https://www.flickr.com/photos/202771466@N06/albums/${ev.flickr_album_id}"
+           target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:.4rem;color:rgba(200,16,46,.6);font-size:.85rem;text-decoration:none;border:1px solid rgba(200,16,46,.25);padding:.5rem 1.1rem;border-radius:6px;">
+          Veure l'àlbum complet a Flickr →
+        </a>
+      </div>`;
+    document.getElementById('load-more-wrap').style.display = 'none';
+    return;
+  }
+
   if (ev.photos.length === 0) {
     grid.innerHTML = `<div class="empty-state" style="width:100%;padding:4rem 1rem">
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
