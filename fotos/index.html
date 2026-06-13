@@ -307,6 +307,67 @@
     }
     .empty-state svg { margin-bottom: 1rem; opacity: .3; }
 
+    /* ── ACCESS GATE ── */
+    #access-gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(4,4,4,.97);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.25rem;
+      backdrop-filter: blur(4px);
+    }
+    #access-gate.hidden { display: none; }
+    .gate-box {
+      background: var(--gray1); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px; width: 100%; max-width: 420px;
+      padding: 2.5rem 2rem; text-align: center;
+    }
+    .gate-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: .15em; color: var(--cream);
+      margin-bottom: .25rem;
+    }
+    .gate-logo span { color: var(--red); }
+    .gate-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; color: var(--cream); margin: 1rem 0 .4rem;
+    }
+    .gate-subtitle {
+      font-size: .8rem; color: rgba(255,255,255,.35); margin-bottom: 1.75rem; line-height: 1.5;
+    }
+    .gate-tabs {
+      display: flex; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 1.5rem;
+    }
+    .gate-tab {
+      flex: 1; background: none; border: none; color: rgba(255,255,255,.35);
+      font-family: 'Outfit', sans-serif; font-size: .8rem; font-weight: 500;
+      cursor: pointer; padding: .7rem .5rem; letter-spacing: .03em;
+      border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s;
+    }
+    .gate-tab.active { color: var(--cream); border-bottom-color: var(--red); }
+    .gate-panel { display: none; }
+    .gate-panel.active { display: block; }
+    .gate-input {
+      width: 100%; background: var(--gray2); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px; color: var(--cream); font-family: 'Outfit', sans-serif;
+      font-size: .9rem; padding: .7rem 1rem; margin-bottom: .75rem;
+      outline: none; transition: border-color .2s;
+    }
+    .gate-input:focus { border-color: rgba(200,16,46,.5); }
+    .gate-input.error { border-color: var(--red); }
+    .gate-btn {
+      width: 100%; background: var(--red); color: #fff;
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 600;
+      letter-spacing: .04em; padding: .8rem 1rem; margin-top: .25rem;
+      transition: background .2s; text-transform: uppercase;
+    }
+    .gate-btn:hover { background: var(--red-dark); }
+    .gate-btn:disabled { opacity: .5; cursor: not-allowed; }
+    .gate-error { color: #ff6b6b; font-size: .78rem; margin: -.25rem 0 .5rem; text-align: left; }
+    .gate-success { color: #6bffb8; font-size: .82rem; margin-top: .75rem; }
+    .gate-form-row { display: flex; gap: .5rem; }
+    .gate-form-row .gate-input { flex: 1; }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid rgba(255,255,255,.05);
@@ -335,6 +396,42 @@
   </style>
 </head>
 <body>
+
+<!-- ACCESS GATE -->
+<div id="access-gate">
+  <div class="gate-box">
+    <div class="gate-logo">CB <span>Grup</span> Barna</div>
+    <div class="gate-title">Galeria Fotogràfica</div>
+    <div class="gate-subtitle">Per accedir, introdueix el codi d'accés del club<br>o subscriu-te al nostre newsletter gratuït.</div>
+
+    <div class="gate-tabs">
+      <button class="gate-tab active" onclick="switchTab('pin')">Codi d'accés</button>
+      <button class="gate-tab" onclick="switchTab('subscribe')">Newsletter</button>
+    </div>
+
+    <!-- PIN TAB -->
+    <div class="gate-panel active" id="tab-pin">
+      <input class="gate-input" id="pin-input" type="password" placeholder="Codi d'accés" maxlength="20"
+        onkeydown="if(event.key==='Enter')checkPin()">
+      <div class="gate-error" id="pin-error" style="display:none">Codi incorrecte. Torna-ho a intentar.</div>
+      <button class="gate-btn" onclick="checkPin()">Accedir</button>
+    </div>
+
+    <!-- SUBSCRIBE TAB -->
+    <div class="gate-panel" id="tab-subscribe">
+      <div class="gate-form-row">
+        <input class="gate-input" id="sub-nom" type="text" placeholder="Nom" required>
+        <input class="gate-input" id="sub-cognoms" type="text" placeholder="Cognoms" required>
+      </div>
+      <input class="gate-input" id="sub-email" type="email" placeholder="Correu electrònic" required>
+      <input class="gate-input" id="sub-mobil" type="tel" placeholder="Telèfon mòbil">
+      <input class="gate-input" id="sub-club" type="text" placeholder="Club o entitat">
+      <div class="gate-error" id="sub-error" style="display:none"></div>
+      <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Subscriure'm i accedir</button>
+      <div class="gate-success" id="sub-success" style="display:none">Gràcies! Benvingut/da a la galeria.</div>
+    </div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -458,9 +555,10 @@
 <!-- FOOTER -->
 <footer>
   <p>CB Grup Barna · Bàsquet al Clot · Sant Martí, Barcelona · des de 1965</p>
-  <p style="margin-top:.4rem">#somclot · <a href="/">cbgrupbarna.info</a></p>
+  <p style="margin-top:.4rem">#somclot · <a href="/">cbgrupbarna.info</a> · <a href="admin.html" style="color:rgba(255,255,255,.2);font-size:.72rem">Admin</a></p>
 </footer>
 
+<script src="config.js"></script>
 <script src="events.js"></script>
 <script>
 // ── CONSTANTS ──
@@ -502,8 +600,94 @@ let displayedCount = 0;
 let activeSeason = 'all';
 let searchQuery = '';
 
+// ── ACCESS GATE ──
+const CFG = window.GALERIA_CONFIG || {};
+const GATE_KEY = 'cbgb_access_v1';
+
+function grantAccess() {
+  localStorage.setItem(GATE_KEY, '1');
+  document.getElementById('access-gate').classList.add('hidden');
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.gate-tab').forEach((t, i) => t.classList.toggle('active', (tab === 'pin' ? i === 0 : i === 1)));
+  document.getElementById('tab-pin').classList.toggle('active', tab === 'pin');
+  document.getElementById('tab-subscribe').classList.toggle('active', tab === 'subscribe');
+  document.getElementById('pin-error').style.display = 'none';
+  document.getElementById('sub-error').style.display = 'none';
+}
+
+function checkPin() {
+  const val = document.getElementById('pin-input').value.trim();
+  const correct = CFG.access_pin || '1965';
+  if (val === correct) { grantAccess(); }
+  else {
+    const err = document.getElementById('pin-error');
+    err.style.display = 'block';
+    document.getElementById('pin-input').classList.add('error');
+    setTimeout(() => { err.style.display = 'none'; document.getElementById('pin-input').classList.remove('error'); }, 3000);
+  }
+}
+
+async function submitSubscription() {
+  const nom = document.getElementById('sub-nom').value.trim();
+  const cognoms = document.getElementById('sub-cognoms').value.trim();
+  const email = document.getElementById('sub-email').value.trim();
+  const mobil = document.getElementById('sub-mobil').value.trim();
+  const club = document.getElementById('sub-club').value.trim();
+  const err = document.getElementById('sub-error');
+
+  if (!nom || !cognoms || !email) {
+    err.textContent = 'Nom, cognoms i correu són obligatoris.';
+    err.style.display = 'block';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    err.textContent = 'El correu no té un format vàlid.';
+    err.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('sub-btn');
+  btn.disabled = true;
+  btn.textContent = 'Enviant…';
+  err.style.display = 'none';
+
+  const endpoint = `https://formsubmit.co/ajax/${CFG.newsletter_email || 'voluntarisgrupbarna@gmail.com'}`;
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        Nom: nom, Cognoms: cognoms, Correu: email,
+        Mòbil: mobil || '—', Club: club || '—',
+        _subject: 'Nova subscripció Galeria CB Grup Barna',
+        _captcha: 'false',
+      }),
+    });
+    const data = await res.json();
+    if (data.success === 'true' || data.success === true) {
+      document.getElementById('sub-success').style.display = 'block';
+      btn.style.display = 'none';
+      setTimeout(() => grantAccess(), 1500);
+    } else { throw new Error('KO'); }
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Subscriure\'m i accedir';
+    err.textContent = 'Error en enviar. Torna-ho a intentar.';
+    err.style.display = 'block';
+  }
+}
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
+  // Check gate
+  if (CFG.require_access && !localStorage.getItem(GATE_KEY)) {
+    // Gate stays visible
+  } else {
+    document.getElementById('access-gate').classList.add('hidden');
+  }
+
   buildStats();
   buildSeasonFilters();
   renderEvents();
@@ -647,6 +831,17 @@ function showPhotos(ev) {
   // Render first batch
   const grid = document.getElementById('photo-grid');
   grid.innerHTML = '';
+  if (ev.photos.length === 0) {
+    grid.innerHTML = `<div class="empty-state" style="width:100%;padding:4rem 1rem">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      <p>Encara no hi ha fotos en aquest esdeveniment.</p>
+    </div>`;
+    document.getElementById('load-more-wrap').style.display = 'none';
+    return;
+  }
   loadMorePhotos();
 }
 

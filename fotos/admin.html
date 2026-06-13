@@ -241,12 +241,20 @@
   <div id="events-panel">
     <div class="toolbar">
       <h1>Gestionar <span>Esdeveniments</span></h1>
-      <button class="btn-new-event" onclick="openNewEventModal()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-        </svg>
-        Nou Esdeveniment
-      </button>
+      <div style="display:flex;gap:.5rem;align-items:center;">
+        <button class="btn-cancel" onclick="openSettingsModal()" style="padding:.55rem .9rem;display:flex;align-items:center;gap:.4rem;font-size:.78rem;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          Configuració
+        </button>
+        <button class="btn-new-event" onclick="openNewEventModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Nou Esdeveniment
+        </button>
+      </div>
     </div>
     <div class="events-list" id="events-list">
       <div style="text-align:center;padding:3rem;color:rgba(255,255,255,.2);">Carregant…</div>
@@ -354,6 +362,41 @@
 </div>
 
 <!-- TOAST -->
+<!-- SETTINGS MODAL -->
+<div class="modal-backdrop" id="settings-modal">
+  <div class="modal">
+    <h2>Configuració de la Galeria</h2>
+    <div class="field-group">
+      <div style="display:flex;align-items:center;gap:.75rem;padding:.5rem 0;">
+        <input type="checkbox" id="cfg-require" checked style="accent-color:var(--red);width:16px;height:16px;cursor:pointer;">
+        <label for="cfg-require" style="font-size:.85rem;color:rgba(255,255,255,.7);cursor:pointer;">
+          Requerir accés (PIN o subscripció) per veure la galeria
+        </label>
+      </div>
+      <div>
+        <label class="field-label">Codi d'accés (PIN)</label>
+        <input class="field-input" type="text" id="cfg-pin" placeholder="Ex: 1965" maxlength="20">
+        <p style="font-size:.72rem;color:rgba(255,255,255,.25);margin-top:.3rem;">Comparteix-lo amb socis i famílies del club.</p>
+      </div>
+      <div>
+        <label class="field-label">Correu per rebre subscripcions newsletter</label>
+        <input class="field-input" type="email" id="cfg-email" placeholder="Ex: info@cbgrupbarna.info">
+        <p style="font-size:.72rem;color:rgba(255,255,255,.25);margin-top:.3rem;">S'usa FormSubmit.co — el primer correu rebrà una confirmació d'activació.</p>
+      </div>
+    </div>
+    <div id="settings-error" class="login-error"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeSettingsModal()">Cancel·lar</button>
+      <button class="btn-save" id="save-settings-btn" onclick="saveSettings()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Desar canvis
+      </button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script>
@@ -906,6 +949,65 @@ function photoUrl(ev, filename) {
     return `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`;
   }
   return `https://drive.google.com/thumbnail?id=${filename}&sz=w400`; // Drive fallback
+}
+
+// ── SETTINGS ──
+const CONFIG_PATH = 'fotos/config.js';
+
+async function openSettingsModal() {
+  // Load current config from GitHub
+  try {
+    const data = await gh(`/repos/${OWNER}/${REPO}/contents/${CONFIG_PATH}?ref=${BRANCH}`);
+    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+    // Extract values via regex
+    const pinMatch = raw.match(/access_pin:\s*['"]([^'"]*)['"]/);
+    const emailMatch = raw.match(/newsletter_email:\s*['"]([^'"]*)['"]/);
+    const reqMatch = raw.match(/require_access:\s*(true|false)/);
+    document.getElementById('cfg-pin').value = pinMatch ? pinMatch[1] : '1965';
+    document.getElementById('cfg-email').value = emailMatch ? emailMatch[1] : '';
+    document.getElementById('cfg-require').checked = reqMatch ? reqMatch[1] === 'true' : true;
+  } catch {
+    document.getElementById('cfg-pin').value = '1965';
+    document.getElementById('cfg-email').value = '';
+    document.getElementById('cfg-require').checked = true;
+  }
+  document.getElementById('settings-error').style.display = 'none';
+  document.getElementById('settings-modal').classList.add('open');
+}
+
+function closeSettingsModal() {
+  document.getElementById('settings-modal').classList.remove('open');
+}
+
+async function saveSettings() {
+  const pin = document.getElementById('cfg-pin').value.trim();
+  const email = document.getElementById('cfg-email').value.trim();
+  const require_access = document.getElementById('cfg-require').checked;
+  const errEl = document.getElementById('settings-error');
+
+  if (require_access && !pin) {
+    errEl.textContent = 'El codi d\'accés no pot estar buit.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('save-settings-btn');
+  btn.disabled = true;
+  errEl.style.display = 'none';
+
+  const content = `// CB Grup Barna · Galeria · Configuració\n// Editable des del panell d'administrador: /fotos/admin.html\n\nwindow.GALERIA_CONFIG = {\n  require_access: ${require_access},\n  access_pin: '${pin.replace(/'/g, "\\'")}',\n  newsletter_email: '${email.replace(/'/g, "\\'")}',\n};\n`;
+
+  try {
+    const sha = await getFileSHA(CONFIG_PATH);
+    await writeFile(CONFIG_PATH, content, 'galeria: update access settings', sha);
+    closeSettingsModal();
+    toast('Configuració desada correctament', 'success');
+  } catch (e) {
+    errEl.textContent = 'Error desant: ' + e.message;
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 // ── TOAST ──
