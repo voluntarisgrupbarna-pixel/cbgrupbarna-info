@@ -3,7 +3,7 @@ import './globals.css'
 import { Navbar } from '@/components/Navbar'
 
 export const viewport: Viewport = {
-  themeColor: '#C8102E',
+  themeColor: '#E4002B',
 }
 
 export const metadata: Metadata = {

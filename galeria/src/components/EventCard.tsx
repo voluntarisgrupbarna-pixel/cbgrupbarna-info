@@ -38,10 +38,8 @@ export function EventCard({ event, supabaseUrl }: EventCardProps) {
             <Images className="w-12 h-12 text-white/10" />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-
         {/* Photo count badge */}
-        <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white/80 text-xs font-mono px-2 py-1 rounded flex items-center gap-1">
+        <div className="absolute bottom-3 right-3 bg-black text-white/80 text-xs font-mono px-2 py-1 flex items-center gap-1">
           <Images className="w-3 h-3" />
           {event.photos_count ?? 0}
         </div>
@@ -56,7 +54,7 @@ export function EventCard({ event, supabaseUrl }: EventCardProps) {
 
       {/* Info */}
       <div className="p-4">
-        <h3 className="font-heading text-lg font-semibold text-club-cream group-hover:text-white transition-colors line-clamp-2">
+        <h3 className="font-heading text-lg text-club-cream group-hover:text-white transition-colors line-clamp-2">
           {event.title}
         </h3>
 

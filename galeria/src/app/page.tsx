@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { EventCard } from '@/components/EventCard'
-import { ArrowRight, Camera, Images, Users, Calendar } from 'lucide-react'
+import { ArrowRight, Images, Users, Calendar } from 'lucide-react'
 import type { Event } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
@@ -39,24 +39,17 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-club-red/10 via-transparent to-transparent" />
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(200,16,46,0.4) 1px, transparent 0)',
-            backgroundSize: '32px 32px',
-          }}
-        />
-        <div className="relative text-center px-4 py-20">
-          <div className="inline-flex items-center gap-2 tag mb-6">
-            <Camera className="w-3 h-3" />
-            CB Grup Barna · des de 1965
-          </div>
-          <h1 className="font-display text-6xl md:text-8xl text-club-cream tracking-wider mb-4">
-            GALERIA <span className="text-club-red">FOTOS</span>
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-black border-b border-white/5">
+        {/* Red accent bar — top */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-club-red" />
+        <div className="relative text-center px-4 py-24">
+          <p className="font-mono text-xs text-white/30 tracking-[0.35em] uppercase mb-8">
+            CB Grup Barna · Bàsquet al Clot · des de 1965
+          </p>
+          <h1 className="font-display text-7xl md:text-9xl text-white tracking-wider leading-none mb-8 uppercase">
+            GALERIA<br /><span className="text-club-red">FOTOS</span>
           </h1>
-          <p className="font-body text-white/50 text-lg max-w-lg mx-auto mb-8">
+          <p className="font-body text-white/40 max-w-md mx-auto mb-10">
             El repositori fotogràfic oficial del club. Tots els esdeveniments, totes les temporades.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -72,7 +65,7 @@ export default async function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="border-b border-white/5 bg-club-gray-1/30">
+      <section className="border-b border-white/5 bg-club-gray-1">
         <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-3 gap-4">
           {[
             { icon: Images, value: totalPhotos ?? 0, label: 'Fotos' },

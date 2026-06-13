@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=Barlow+Condensed:wght@500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,12 +6,51 @@
 
 @layer base {
   :root {
-    --red: #C8102E;
-    --red-dark: #a81318;
-    --black: #040404;
-    --gray-1: #181818;
-    --gray-2: #252525;
-    --cream: #F2EDE6;
+    /* ---- BRAND CORE ---- */
+    --barna-red:        #E4002B;
+    --barna-black:      #121212;
+    --barna-white:      #FFFFFF;
+
+    /* ---- RED RAMP ---- */
+    --red-700:          #A4001F;
+    --red-600:          #C30024;
+    --red:              #E4002B;
+    --red-tint:         #FBE4E8;
+
+    /* ---- INK / BLACKS ---- */
+    --ink-black:        #000000;
+    --ink-900:          #121212;
+    --ink-800:          #1E1E1E;
+    --ink-700:          #2B2B2B;
+
+    /* ---- NEUTRAL GRAYS ---- */
+    --gray-600:         #5A5A5A;
+    --gray-400:         #9A9A9A;
+    --gray-300:         #C9C9C9;
+    --gray-200:         #E6E4E0;
+    --bone:             #F2EFE9;
+
+    /* ---- SEMANTIC ALIASES ---- */
+    --bg-base:          var(--barna-white);
+    --bg-poster:        var(--ink-black);
+    --surface-card:     var(--barna-white);
+    --surface-sunken:   var(--bone);
+    --text-primary:     var(--barna-black);
+    --text-secondary:   var(--gray-600);
+    --text-muted:       var(--gray-400);
+    --text-on-dark:     var(--barna-white);
+    --text-on-red:      var(--barna-white);
+    --accent:           var(--barna-red);
+    --accent-hover:     var(--red-600);
+    --accent-press:     var(--red-700);
+    --on-accent:        var(--barna-white);
+    --border-strong:    var(--barna-black);
+    --border-soft:      var(--gray-300);
+    --divider:          var(--gray-200);
+    --focus-ring:       var(--barna-red);
+    --status-live:      var(--barna-red);
+    --status-win:       var(--barna-black);
+    --status-info:      var(--gray-600);
   }
 
   * {
@@ -23,40 +62,54 @@
   }
 
   body {
-    background-color: #040404;
-    color: #F2EDE6;
-    font-family: 'Outfit', sans-serif;
+    background-color: #121212;
+    color: #F2EFE9;
+    font-family: 'Archivo', sans-serif;
   }
 
   ::selection {
-    background-color: #C8102E;
-    color: #F2EDE6;
+    background-color: #E4002B;
+    color: #FFFFFF;
   }
+}
+
+/* ---- POSTER / DARK SCOPE ---- */
+.poster,
+[data-theme="poster"] {
+  --bg-base:        var(--ink-black);
+  --surface-card:   var(--ink-900);
+  --surface-sunken: var(--ink-800);
+  --text-primary:   var(--barna-white);
+  --text-secondary: var(--gray-300);
+  --text-muted:     var(--gray-400);
+  --border-strong:  var(--barna-white);
+  --border-soft:    var(--ink-700);
+  --divider:        var(--ink-700);
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-club-red hover:bg-club-red-dark text-white font-body font-medium px-6 py-2.5 rounded transition-colors duration-200 inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-club-red hover:bg-club-red-light active:bg-club-red-dark text-white font-body font-semibold px-6 py-2.5 transition-colors duration-150 inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-ghost {
-    @apply border border-club-cream/20 hover:border-club-cream/50 text-club-cream font-body font-medium px-6 py-2.5 rounded transition-colors duration-200 inline-flex items-center gap-2;
+    @apply border border-white/20 hover:border-white/50 text-white font-body font-semibold px-6 py-2.5 transition-colors duration-150 inline-flex items-center gap-2;
   }
 
   .card {
-    @apply bg-club-gray-1 border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-colors duration-200;
+    @apply bg-club-gray-1 border border-white/5 overflow-hidden hover:border-white/15 transition-colors duration-200;
   }
 
   .input {
-    @apply bg-club-gray-2 border border-white/10 rounded px-4 py-2.5 text-club-cream placeholder-white/30 focus:outline-none focus:border-club-red transition-colors w-full font-body;
+    @apply bg-club-gray-2 border border-white/10 px-4 py-2.5 text-club-cream placeholder-white/30 focus:outline-none focus:border-club-red transition-colors w-full font-body;
   }
 
   .section-title {
-    @apply font-display text-4xl text-club-cream tracking-wide;
+    @apply font-display text-5xl text-white tracking-wider uppercase;
   }
 
   .tag {
-    @apply font-mono text-xs bg-club-red/20 text-club-red border border-club-red/30 px-2 py-0.5 rounded;
+    @apply font-mono text-xs bg-club-red text-white px-2 py-0.5 tracking-wide uppercase;
   }
 }
 
@@ -91,7 +144,7 @@
 
 /* Lightbox custom styles */
 .yarl__root {
-  --yarl__color_backdrop: rgba(4, 4, 4, 0.97) !important;
+  --yarl__color_backdrop: rgba(0, 0, 0, 0.98) !important;
 }
 
 /* Scrollbar */
@@ -99,11 +152,11 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #181818;
+  background: #1E1E1E;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C8102E;
-  border-radius: 3px;
+  background: #E4002B;
+  border-radius: 0;
 }
 
 /* Loading shimmer */
@@ -113,7 +166,7 @@
 }
 
 .shimmer {
-  background: linear-gradient(90deg, #181818 25%, #252525 50%, #181818 75%);
+  background: linear-gradient(90deg, #1E1E1E 25%, #2B2B2B 50%, #1E1E1E 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }

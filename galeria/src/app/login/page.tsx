@@ -92,8 +92,8 @@ function LoginForm() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-club-red/10 border border-club-red/20 rounded-lg mb-4">
-            <Camera className="w-6 h-6 text-club-red" />
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-club-red mb-4">
+            <Camera className="w-6 h-6 text-white" />
           </div>
           <h1 className="font-display text-3xl tracking-wider text-club-cream">
             CB GRUP BARNA
