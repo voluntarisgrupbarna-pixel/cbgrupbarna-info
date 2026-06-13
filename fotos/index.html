@@ -570,22 +570,31 @@ const PLACEHOLDER = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 const BATCH = 40; // photos per load
 
 function isRepo(ev) { return ev.source === 'repo'; }
+function isFlickr(ev) { return ev.source === 'flickr'; }
+
 function photoThumb(ev, ref) {
   if (!ref) return PLACEHOLDER;
   if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_q.jpg`;
   return THUMB(ref);
 }
 function photoFull(ev, ref) {
   if (!ref) return PLACEHOLDER;
   if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_b.jpg`;
   return FULL(ref);
 }
 function photoDl(ev, ref) {
   if (!ref) return '#';
   if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_o.jpg`;
   return DL(ref);
 }
 function eventCover(ev) {
+  if (isFlickr(ev)) {
+    if (!ev.cover) return PLACEHOLDER;
+    return `https://live.staticflickr.com/${ev.cover}_q.jpg`;
+  }
   if (isRepo(ev)) {
     const ref = ev.cover || ev.photos[0];
     if (!ref) return PLACEHOLDER;
