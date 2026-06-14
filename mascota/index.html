@@ -190,6 +190,32 @@
     justify-content: center;
   }
 
+  /* Banner activa so */
+  .unmute-banner {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(227,30,36,0.92);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 10px 22px;
+    border-radius: 30px;
+    z-index: 10;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    animation: pulse-banner 1.5s ease-in-out infinite;
+    border: none;
+    font-family: inherit;
+  }
+  .unmute-banner.hidden { display: none; }
+  @keyframes pulse-banner {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+  }
+
   /* ── INFO CARD ── */
   .info-card {
     width: 100%;
@@ -436,7 +462,7 @@
       poster="../og-image.jpg"
       aria-label="Vídeo de la mascota del CB Grup Barna - Escola de bàsquet per a nens de 4 a 7 anys"
     >
-      <source src="mascota.mp4" type="video/mp4">
+      <source src="mascota-reel.mp4" type="video/mp4">
       <track
         kind="subtitles"
         src="subtitols.vtt"
@@ -454,6 +480,7 @@
     </div>
 
     <button class="sound-btn" id="soundBtn" aria-label="Activar so" title="Activar so">🔇</button>
+    <button class="unmute-banner" id="unmuteBanner">🔊 Toca per sentir la veu!</button>
   </div>
 
   <!-- ── INFO CARD ── -->
@@ -536,39 +563,39 @@
   const vid = document.getElementById('vid');
   const playBtn = document.getElementById('playBtn');
   const soundBtn = document.getElementById('soundBtn');
+  const unmuteBanner = document.getElementById('unmuteBanner');
 
-  // Autoplay silenciós (TikTok-style)
-  vid.addEventListener('canplay', () => {
-    vid.play().catch(() => {});
-  });
+  // Autoplay silenciós (navegadors exigeixen muted per autoplay)
+  vid.addEventListener('canplay', () => { vid.play().catch(() => {}); });
 
-  // Ocultar/mostrar botó play
-  function updatePlayBtn() {
-    playBtn.classList.toggle('hidden', !vid.paused);
-  }
+  function updatePlayBtn() { playBtn.classList.toggle('hidden', !vid.paused); }
   vid.addEventListener('play', updatePlayBtn);
   vid.addEventListener('pause', updatePlayBtn);
 
-  // Clic a qualsevol lloc del vídeo: pause/play
+  function unmute() {
+    vid.muted = false;
+    soundBtn.textContent = '🔊';
+    soundBtn.setAttribute('aria-label', 'Silenciar');
+    unmuteBanner.classList.add('hidden');
+    if (vid.paused) vid.play();
+  }
+
+  unmuteBanner.addEventListener('click', unmute);
+
+  let hasUnmuted = false;
+  function toggle() {
+    if (!hasUnmuted) { hasUnmuted = true; unmute(); return; }
+    if (vid.paused) { vid.play(); } else { vid.pause(); }
+  }
+
   playBtn.addEventListener('click', toggle);
   playBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggle(); });
   vid.addEventListener('click', toggle);
 
-  function toggle() {
-    if (vid.paused) {
-      vid.play();
-    } else {
-      vid.pause();
-    }
-  }
-
-  // Botó so
-  soundBtn.addEventListener('click', () => {
-    vid.muted = !vid.muted;
-    soundBtn.textContent = vid.muted ? '🔇' : '🔊';
-    soundBtn.setAttribute('aria-label', vid.muted ? 'Activar so' : 'Silenciar');
-    // Si el vídeo estava aturat per no tenir so, ara el reproduïm
-    if (!vid.muted && vid.paused) vid.play();
+  soundBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (vid.muted) { unmute(); }
+    else { vid.muted = true; soundBtn.textContent = '🔇'; soundBtn.setAttribute('aria-label', 'Activar so'); }
   });
 
   // Activar subtítols automàticament
