@@ -311,10 +311,11 @@
     #access-gate {
       position: fixed; inset: 0; z-index: 9999;
       background: rgba(4,4,4,.97);
-      display: flex; align-items: center; justify-content: center;
+      display: none; align-items: center; justify-content: center;
       padding: 1.25rem;
       backdrop-filter: blur(4px);
     }
+    #access-gate.visible { display: flex; }
     #access-gate.hidden { display: none; }
     .gate-box {
       background: var(--gray1); border: 1px solid rgba(255,255,255,.07);
@@ -369,6 +370,23 @@
     .gate-form-row .gate-input { flex: 1; }
 
     /* ── FOOTER ── */
+    /* SPONSOR */
+    .sponsor-bar {
+      text-align: center; padding: 1.5rem 1rem 0; margin-top: .5rem;
+    }
+    .sponsor-label { font-size: .62rem; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.2); margin-bottom: .6rem; }
+    .sponsor-card {
+      display: inline-flex; align-items: center; gap: .75rem;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 10px; padding: .55rem 1rem .55rem .6rem;
+      text-decoration: none; transition: border-color .15s, background .15s;
+    }
+    .sponsor-card:hover { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.07); }
+    .sponsor-logo { width: 42px; height: 42px; object-fit: contain; border-radius: 6px; background: #fff; }
+    .sponsor-info { text-align: left; }
+    .sponsor-name { font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.8); line-height: 1.2; }
+    .sponsor-handle { font-size: .7rem; color: rgba(255,255,255,.3); }
+
     footer {
       border-top: 1px solid rgba(255,255,255,.05);
       padding: 2rem 1.25rem; text-align: center;
@@ -552,6 +570,18 @@
   </div>
 </div>
 
+<!-- SPONSOR -->
+<div class="sponsor-bar">
+  <div class="sponsor-label">Fotografia oficial</div>
+  <a href="https://www.instagram.com/foto_jane/" target="_blank" rel="noopener" class="sponsor-card">
+    <img class="sponsor-logo" src="sponsors/fotojane-logo.png" alt="Foto Jané" onerror="this.style.display='none'">
+    <div class="sponsor-info">
+      <div class="sponsor-name">Foto Jané</div>
+      <div class="sponsor-handle">@foto_jane · newborn &amp; family</div>
+    </div>
+  </a>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p>CB Grup Barna · Bàsquet al Clot · Sant Martí, Barcelona · des de 1965</p>
@@ -692,11 +722,9 @@ async function submitSubscription() {
 
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
-  // Check gate
+  // Check gate — hidden by default, only show if access required
   if (CFG.require_access && !localStorage.getItem(GATE_KEY)) {
-    // Gate stays visible
-  } else {
-    document.getElementById('access-gate').classList.add('hidden');
+    document.getElementById('access-gate').classList.add('visible');
   }
 
   buildStats();
