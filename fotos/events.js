@@ -1,7 +1,19 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Actualitzat: 2026-06-14
+// Actualitzat: 2026-06-16
 
 window.GALERIA_EVENTS = [
+  {
+    "id": "fotos-equips-temporada-25-26-records",
+    "title": "Fotos Equips Temporada 25-26 · Rècords",
+    "description": "Fotos oficials dels equips del CB Grup Barna de la temporada 2025-2026. Una temporada plena de rècords.",
+    "date": "2026-06-16",
+    "location": "Barcelona",
+    "season": "2025-2026",
+    "cover": null,
+    "source": "repo",
+    "photos": [],
+    "allow_download": true
+  },
   {
     "id": "cistella-petita-2a-edicio-2026",
     "title": "Cistella Petita 2a Edició 2026",
