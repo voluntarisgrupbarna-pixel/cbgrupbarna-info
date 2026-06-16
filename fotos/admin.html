@@ -8,6 +8,7 @@
   <link rel="icon" href="/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
   <style>
     :root {
       --red: #C8102E; --red-dark: #a81318;
@@ -117,7 +118,7 @@
     /* DROP ZONE */
     .drop-zone {
       border: 2px dashed rgba(255,255,255,.12); border-radius: 12px; padding: 3rem 1.5rem;
-      text-align: center; transition: all .2s; cursor: pointer; position: relative; margin-bottom: 1.25rem;
+      text-align: center; transition: all .2s; cursor: pointer; position: relative; margin-bottom: .75rem;
     }
     .drop-zone.drag-over { border-color: var(--red); background: rgba(200,16,46,.05); }
     .drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
@@ -125,6 +126,16 @@
     .drop-zone p { color: rgba(255,255,255,.45); font-size: .9rem; }
     .drop-zone p span { color: var(--red); cursor: pointer; }
     .drop-zone small { color: rgba(255,255,255,.2); font-size: .75rem; }
+
+    /* ZIP UPLOAD */
+    .zip-row { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .zip-divider { flex: 1; height: 1px; background: rgba(255,255,255,.07); }
+    .zip-label { font-size: .72rem; color: rgba(255,255,255,.2); text-transform: uppercase; letter-spacing: .08em; flex-shrink: 0; }
+    .btn-zip { position: relative; overflow: hidden; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.55); border-radius: 7px; padding: .5rem 1rem; font-family: 'Outfit', sans-serif; font-size: .82rem; cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: .4rem; white-space: nowrap; }
+    .btn-zip:hover { border-color: rgba(200,16,46,.4); color: var(--red); background: rgba(200,16,46,.06); }
+    .btn-zip input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .zip-progress { display: none; background: var(--gray1); border: 1px solid rgba(255,255,255,.07); border-radius: 8px; padding: .75rem 1rem; margin-bottom: .75rem; font-size: .82rem; color: rgba(255,255,255,.5); display: none; align-items: center; gap: .6rem; }
+    .zip-progress.active { display: flex; }
 
     /* UPLOAD QUEUE */
     .upload-queue { display: grid; gap: .5rem; margin-bottom: 1.5rem; }
@@ -292,6 +303,25 @@
       <small>JPG, PNG, WebP · Fins a 25 MB per foto</small>
     </div>
 
+    <!-- ZIP upload -->
+    <div class="zip-row">
+      <div class="zip-divider"></div>
+      <span class="zip-label">o</span>
+      <div class="zip-divider"></div>
+      <label class="btn-zip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        Pujar fitxer ZIP
+        <input type="file" id="zip-input" accept=".zip,application/zip" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+      </label>
+    </div>
+    <div class="zip-progress" id="zip-progress">
+      <svg class="spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+      <span id="zip-progress-text">Descomprimint ZIP…</span>
+    </div>
+
     <div class="upload-queue" id="upload-queue"></div>
 
     <div class="upload-actions" id="upload-actions" style="display:none">
@@ -435,8 +465,17 @@ window.addEventListener('DOMContentLoaded', async () => {
   const dz = document.getElementById('drop-zone');
   dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
   dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
-  dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('drag-over');
+    const files = e.dataTransfer.files;
+    if (files.length === 1 && files[0].name.toLowerCase().endsWith('.zip')) handleZip(files[0]);
+    else addFiles(files);
+  });
   document.getElementById('file-input').addEventListener('change', e => addFiles(e.target.files));
+  document.getElementById('zip-input').addEventListener('change', e => {
+    if (e.target.files[0]) handleZip(e.target.files[0]);
+    e.target.value = '';
+  });
 });
 
 async function verifyToken() {
@@ -769,9 +808,59 @@ async function deleteEvent(index) {
   toast('Esdeveniment eliminat', 'success');
 }
 
+// ── ZIP HANDLER ──
+async function handleZip(zipFile) {
+  const progressEl = document.getElementById('zip-progress');
+  const progressText = document.getElementById('zip-progress-text');
+  progressEl.classList.add('active');
+  progressText.textContent = 'Llegint ZIP…';
+
+  try {
+    if (typeof JSZip === 'undefined') {
+      throw new Error('JSZip no carregat. Refresca la pàgina i torna a intentar-ho.');
+    }
+    const zip = await JSZip.loadAsync(zipFile);
+    const imageExts = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?)$/i;
+    const entries = [];
+
+    zip.forEach((relativePath, entry) => {
+      if (!entry.dir && imageExts.test(relativePath) && !relativePath.startsWith('__MACOSX')) {
+        entries.push({ path: relativePath, entry });
+      }
+    });
+
+    if (!entries.length) {
+      progressEl.classList.remove('active');
+      toast('El ZIP no conté imatges reconegudes (JPG, PNG, WebP…)', 'error');
+      return;
+    }
+
+    progressText.textContent = `Descomprimint ${entries.length} imatge${entries.length !== 1 ? 's' : ''}…`;
+
+    const files = [];
+    for (let i = 0; i < entries.length; i++) {
+      const { path, entry } = entries[i];
+      progressText.textContent = `Descomprimint ${i + 1} / ${entries.length}…`;
+      const blob = await entry.async('blob');
+      const name = path.split('/').pop();
+      const mimeMap = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', heic: 'image/heic', bmp: 'image/bmp', tif: 'image/tiff', tiff: 'image/tiff' };
+      const ext = name.split('.').pop().toLowerCase();
+      const type = mimeMap[ext] || 'image/jpeg';
+      files.push(new File([blob], name, { type }));
+    }
+
+    progressEl.classList.remove('active');
+    addFiles(files);
+    toast(`ZIP descomprimit: ${files.length} imatge${files.length !== 1 ? 's' : ''} afegides a la cua`, 'success');
+  } catch (e) {
+    progressEl.classList.remove('active');
+    toast('Error llegint ZIP: ' + e.message, 'error');
+  }
+}
+
 // ── FILE UPLOAD ──
 function addFiles(fileList) {
-  const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+  const files = Array.from(fileList).filter(f => f.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name));
   if (!files.length) return;
 
   files.forEach(file => {
