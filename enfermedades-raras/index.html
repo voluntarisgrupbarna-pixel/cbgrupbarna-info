@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CB Grup Barna y FEDER se unen para divulgar sobre enfermedades raras desde el deporte. Acuerdo de colaboración para visibilizar la realidad de 3 millones de personas en España.">
+<meta name="theme-color" content="#1B3FAB">
+<meta property="og:title" content="CB Grup Barna × FEDER · El deporte contra el olvido">
+<meta property="og:description" content="Acuerdo de colaboración para divulgar sobre enfermedades raras desde el baloncesto base.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.cbgrupbarna.info/enfermedades-raras/">
+<meta property="og:locale" content="es_ES">
+<link rel="canonical" href="https://www.cbgrupbarna.info/enfermedades-raras/">
+<title>CB Grup Barna × FEDER · El deporte contra el olvido · Enfermedades Raras</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #1B3FAB;
+  --blue-light: #2E5CE8;
+  --blue-dark: #112677;
+  --blue-soft: #EEF2FF;
+  --red: #E31E24;
+  --purple: #7B3FA9;
+  --purple-soft: #F5EEFF;
+  --teal: #0EA5A0;
+  --cream: #FAFBFF;
+  --black: #1A1A1A;
+  --grey: #6B6B6B;
+  --light-grey: #E8E8F0;
+  --zebra-1: #1B3FAB;
+  --zebra-2: #7B3FA9;
+  --max-width: 1200px;
+  --gutter: clamp(20px, 5vw, 70px);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--cream);
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--black);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* === FRANJA CEBRA === */
+.zebra-bar {
+  height: 8px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--zebra-1) 0px,
+    var(--zebra-1) 40px,
+    var(--zebra-2) 40px,
+    var(--zebra-2) 80px
+  );
+}
+
+/* === NAV === */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 251, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(27, 63, 171, 0.1);
+}
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 14px var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--blue);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-logo .sep { color: var(--grey); font-weight: 400; margin: 0 6px; }
+.nav-logo .feder { color: var(--purple); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  color: var(--black);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-cta {
+  padding: 10px 20px;
+  background: var(--blue);
+  color: white;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--blue);
+}
+.nav-toggle svg { width: 28px; height: 28px; }
+@media (max-width: 860px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: block; }
+  .nav.open .nav-links {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--cream);
+    padding: 20px var(--gutter);
+    gap: 18px;
+    border-bottom: 1px solid rgba(27, 63, 171, 0.1);
+  }
+  .nav.open .nav-cta {
+    display: inline-block;
+    margin: 0 var(--gutter);
+    text-align: center;
+  }
+}
+
+/* === HERO === */
+.hero {
+  background: var(--blue);
+  color: white;
+  padding: clamp(60px, 12vw, 120px) var(--gutter) clamp(80px, 14vw, 140px);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent 60%);
+  top: -350px;
+  right: -300px;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,63,169,0.15), transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.kicker {
+  font-size: clamp(11px, 1.4vw, 13px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 20px;
+}
+.partner-badges {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+.badge-club {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+}
+.badge-x {
+  color: rgba(255,255,255,0.5);
+  font-size: 18px;
+  font-weight: 300;
+}
+.badge-feder {
+  background: var(--purple);
+  color: white;
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(52px, 13vw, 152px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.hero h1 .accent {
+  font-style: italic;
+  background: linear-gradient(135deg, #A78BFA, #C084FC, #F472B6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: clamp(17px, 2.4vw, 26px);
+  margin-top: 24px;
+  font-weight: 500;
+  opacity: 0.92;
+  max-width: 700px;
+  line-height: 1.45;
+}
+.hero .date-tag {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.hero-cta-row {
+  margin-top: clamp(32px, 5vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-white { background: white; color: var(--blue); }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.btn-ghost {
+  background: transparent;
+  color: white;
+  border-color: rgba(255,255,255,0.4);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+/* === INTRO === */
+.intro {
+  padding: clamp(50px, 8vw, 90px) var(--gutter) clamp(40px, 6vw, 60px);
+  background: var(--cream);
+}
+.intro-inner { max-width: 900px; margin: 0 auto; }
+.intro p {
+  font-size: clamp(19px, 2.5vw, 28px);
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--black);
+}
+.intro p .highlight {
+  background: linear-gradient(180deg, transparent 60%, rgba(123,63,169,0.25) 60%);
+  padding: 0 4px;
+  font-weight: 700;
+}
+.intro p + p { margin-top: 20px; }
+
+/* === SECTION TITLES === */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 40px;
+}
+.section-title .dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.section-title h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(32px, 5vw, 50px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+
+/* === FEDER SECTION === */
+.feder-section {
+  padding: clamp(50px, 7vw, 80px) var(--gutter);
+  background: var(--cream);
+}
+.feder-inner { max-width: var(--max-width); margin: 0 auto; }
+.feder-section .section-title .dot { background: var(--purple); }
+.feder-section .section-title h2 { color: var(--purple); }
+
+.feder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) {
+  .feder-grid { grid-template-columns: 1fr; }
+}
+.feder-card {
+  background: white;
+  border-radius: 24px;
+  padding: clamp(24px, 3.5vw, 36px);
+  border: 2px solid var(--light-grey);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.feder-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(123,63,169,0.12);
+  border-color: var(--purple);
+}
+.feder-card.featured {
+  grid-column: span 1;
+  background: var(--purple);
+  color: white;
+  border-color: var(--purple);
+}
+.feder-card.featured h3 { color: white; }
+.feder-card.featured p { opacity: 0.92; }
+.achievement-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+.feder-card .achievement-icon { background: var(--purple-soft); }
+.feder-card.featured .achievement-icon { background: rgba(255,255,255,0.2); }
+.feder-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 900;
+  color: var(--purple);
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+}
+.feder-card p {
+  font-size: clamp(15px, 1.6vw, 17px);
+  line-height: 1.5;
+  color: var(--grey);
+  font-weight: 500;
+}
+.feder-card.featured p { color: rgba(255,255,255,0.85); }
+.feder-stat {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--light-grey);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.feder-card.featured .feder-stat {
+  border-top-color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.8);
+}
+
+.feder-callout {
+  margin-top: 32px;
+  background: var(--blue-soft);
+  border-left: 5px solid var(--blue);
+  border-radius: 0 16px 16px 0;
+  padding: clamp(20px, 2.5vw, 28px) clamp(20px, 3vw, 32px);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.feder-callout .callout-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+.feder-callout p {
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--black);
+}
+.feder-callout strong { color: var(--blue); }
+
+/* === QUÉ SON LAS ENFERMEDADES RARAS === */
+.er-section {
+  background: var(--blue);
+  color: white;
+  padding: clamp(70px, 10vw, 110px) var(--gutter);
+  position: relative;
+  overflow: hidden;
+}
+.er-section::before {
+  content: '';
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+  top: -250px;
+  right: -200px;
+  pointer-events: none;
+}
+.er-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.er-section .section-title .dot { background: #A78BFA; }
+.er-section .section-title h2 { color: white; }
+
+.er-definition {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: clamp(24px, 3vw, 36px);
+  margin-bottom: 36px;
+}
+.er-definition p {
+  font-size: clamp(18px, 2.3vw, 24px);
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+.er-definition p strong {
+  color: #A78BFA;
+  font-weight: 800;
+}
+
+.er-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+@media (max-width: 900px) {
+  .er-facts { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .er-facts { grid-template-columns: 1fr; }
+}
+.er-fact {
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: clamp(20px, 2.5vw, 28px);
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.2s;
+}
+.er-fact:hover { background: rgba(255,255,255,0.12); }
+.er-fact .num {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(38px, 5vw, 60px);
+  font-weight: 900;
+  color: #A78BFA;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+.er-fact .label {
+  font-size: clamp(13px, 1.5vw, 15px);
+  font-weight: 600;
+  line-height: 1.35;
+  opacity: 0.88;
+}
+
+.er-characteristics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 680px) {
+  .er-characteristics { grid-template-columns: 1fr; }
+}
+.er-char {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: clamp(18px, 2.5vw, 24px);
+  background: rgba(255,255,255,0.07);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.er-char .char-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.er-char h4 {
+  font-size: clamp(15px, 1.7vw, 18px);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.er-char p {
+  font-size: clamp(13px, 1.5vw, 15px);
+  opacity: 0.8;
+  line-height: 1.45;
+}
+
+.er-zebra {
+  margin-top: 36px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: clamp(18px, 2.5vw, 24px) clamp(20px, 3vw, 32px);
+  background: rgba(255,255,255,0.06);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.er-zebra .zebra-emoji { font-size: 36px; flex-shrink: 0; }
+.er-zebra p {
+  font-size: clamp(14px, 1.6vw, 17px);
+  font-weight: 500;
+  opacity: 0.88;
+  line-height: 1.45;
+}
+.er-zebra strong { color: #A78BFA; }
+
+/* === COMPROMISO DEL CLUB === */
+.commitment-section {
+  padding: clamp(70px, 10vw, 110px) var(--gutter);
+  background: var(--cream);
+}
+.commitment-inner { max-width: var(--max-width); margin: 0 auto; }
+.commitment-section .section-title .dot { background: var(--red); }
+.commitment-section .section-title h2 { color: var(--blue); }
+
+.commitment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+.commitment-item {
+  display: flex;
+  gap: clamp(20px, 3vw, 32px);
+  align-items: flex-start;
+  padding: clamp(22px, 3vw, 28px) 0;
+  border-bottom: 1px solid var(--light-grey);
+}
+.commitment-item:last-child { border-bottom: none; }
+.c-num {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(54px, 7vw, 80px);
+  font-weight: 900;
+  color: var(--blue-soft);
+  line-height: 0.85;
+  flex-shrink: 0;
+  min-width: clamp(60px, 8vw, 96px);
+  letter-spacing: -2px;
+  -webkit-text-stroke: 2px var(--blue);
+}
+.c-text { flex: 1; padding-top: 6px; }
+.c-text h4 {
+  font-size: clamp(17px, 2.2vw, 24px);
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.c-text p {
+  font-size: clamp(14px, 1.6vw, 17px);
+  color: var(--grey);
+  line-height: 1.5;
+}
+
+.agreement-card {
+  background: var(--blue);
+  color: white;
+  border-radius: 24px;
+  padding: clamp(32px, 5vw, 56px);
+  display: flex;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.agreement-icon {
+  font-size: clamp(48px, 7vw, 80px);
+  flex-shrink: 0;
+}
+.agreement-text h3 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(24px, 3.5vw, 38px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+.agreement-text p {
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* === DEPORTE Y VISIBILIDAD === */
+.sport-section {
+  padding: clamp(60px, 9vw, 100px) var(--gutter);
+  background: linear-gradient(180deg, var(--cream) 0%, var(--blue-soft) 100%);
+}
+.sport-inner { max-width: var(--max-width); margin: 0 auto; }
+.sport-section .section-title .dot { background: var(--teal); }
+.sport-section .section-title h2 { color: var(--blue); }
+
+.sport-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 720px) {
+  .sport-grid { grid-template-columns: 1fr; }
+}
+.sport-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(27, 63, 171, 0.1);
+  transition: transform 0.25s, box-shadow 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.sport-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(27, 63, 171, 0.12);
+}
+.sport-banner {
+  height: 6px;
+}
+.sport-card:nth-child(1) .sport-banner { background: var(--blue); }
+.sport-card:nth-child(2) .sport-banner { background: var(--purple); }
+.sport-card:nth-child(3) .sport-banner { background: var(--teal); }
+.sport-card:nth-child(4) .sport-banner { background: var(--red); }
+.sport-body {
+  padding: clamp(24px, 3.5vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+.sport-icon { font-size: 32px; }
+.sport-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(20px, 2.6vw, 28px);
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1.1;
+}
+.sport-card p {
+  font-size: clamp(14px, 1.6vw, 17px);
+  color: var(--grey);
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* === CLOSING === */
+.closing {
+  background: var(--blue-dark);
+  color: white;
+  padding: clamp(80px, 12vw, 130px) var(--gutter);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.closing::before, .closing::after {
+  content: '';
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,139,250,0.08), transparent 70%);
+  pointer-events: none;
+}
+.closing::before { top: -120px; left: -120px; }
+.closing::after { bottom: -120px; right: -120px; }
+.closing-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.closing .big-icon { font-size: clamp(48px, 7vw, 72px); margin-bottom: 14px; }
+.closing h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(44px, 8vw, 88px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+}
+.closing h2 .accent-closing {
+  font-style: italic;
+  background: linear-gradient(135deg, #A78BFA, #C084FC, #F472B6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.closing .punchline {
+  font-size: clamp(17px, 2.2vw, 24px);
+  opacity: 0.9;
+  font-weight: 500;
+  margin-bottom: 32px;
+  line-height: 1.45;
+}
+.closing .meta-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 26px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.closing .dot-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+
+/* === FOOTER === */
+.footer {
+  background: #0D1A3A;
+  color: white;
+  padding: clamp(40px, 6vw, 56px) var(--gutter) clamp(28px, 3vw, 36px);
+}
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+}
+.footer h4 {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  color: rgba(255,255,255,0.5);
+}
+.footer p, .footer a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  line-height: 1.7;
+  display: block;
+}
+.footer a:hover { color: white; }
+.footer-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45) !important;
+  margin-top: 4px;
+}
+.footer-bottom {
+  max-width: var(--max-width);
+  margin: 32px auto 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+}
+.footer-bottom .hashtag {
+  font-weight: 800;
+  color: #A78BFA;
+  font-size: 14px;
+}
+
+:focus-visible {
+  outline: 3px solid #A78BFA;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- FRANJA CEBRA -->
+<div class="zebra-bar" role="presentation"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">CB GRUP BARNA<span class="sep">×</span><span class="feder">FEDER</span></a>
+    <ul class="nav-links">
+      <li><a href="#feder">Quiénes son</a></li>
+      <li><a href="#que-son">Enf. Raras</a></li>
+      <li><a href="#compromiso">Compromiso</a></li>
+      <li><a href="#contacte">Contacto</a></li>
+    </ul>
+    <a href="#compromiso" class="nav-cta">Nuestro compromiso</a>
+    <button class="nav-toggle" aria-label="Abrir menú" onclick="document.getElementById('nav').classList.toggle('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">CB GRUP BARNA · EL CLOT · BARCELONA · JUNIO 2026</div>
+    <div class="partner-badges">
+      <span class="badge badge-club">CB Grup Barna</span>
+      <span class="badge-x" aria-hidden="true">×</span>
+      <span class="badge badge-feder">FEDER</span>
+    </div>
+    <h1>El deporte<br>contra el <span class="accent">olvido.</span></h1>
+    <p class="subtitle">CB Grup Barna y la Federación Española de Enfermedades Raras firman un acuerdo de colaboración para visibilizar desde el baloncesto base la realidad de 3 millones de personas en España.</p>
+    <div class="date-tag">
+      <span aria-hidden="true">📅</span>
+      <span>Acuerdo firmado · Junio 2026</span>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#que-son" class="btn btn-white">¿Qué son las enfermedades raras?</a>
+      <a href="#compromiso" class="btn btn-ghost">Ver el compromiso del club</a>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-inner">
+    <p>
+      Un club de baloncesto base no solo enseña a tirar a canasta.
+      Enseña a ver el mundo con los ojos abiertos.
+      <span class="highlight">Desde hoy, la pista del CB Grup Barna también es un altavoz.</span>
+    </p>
+    <p>
+      Hemos sellado un acuerdo con FEDER —la Federación Española de Enfermedades Raras—
+      para llevar la divulgación sobre enfermedades minoritarias a nuestros equipos, familias
+      y a todo el barrio del Clot.
+      Porque <span class="highlight">nombrar lo invisible es el primer paso para combatirlo.</span>
+    </p>
+  </div>
+</section>
+
+<!-- FEDER -->
+<section class="feder-section" id="feder">
+  <div class="feder-inner">
+    <div class="section-title">
+      <div class="dot" aria-hidden="true"></div>
+      <h2>Quién es FEDER</h2>
+    </div>
+
+    <div class="feder-grid">
+
+      <article class="feder-card">
+        <div class="achievement-icon" aria-hidden="true">🏛️</div>
+        <h3>Pleno unánime en el Congreso</h3>
+        <p>FEDER logró recientemente que el Congreso de los Diputados aprobara por unanimidad una proposición no de ley en favor de las personas con enfermedades raras. Un hito histórico que demuestra el poder de la perseverancia y la organización de la sociedad civil.</p>
+        <div class="feder-stat">Hito histórico · 2026</div>
+      </article>
+
+      <article class="feder-card featured">
+        <div class="achievement-icon" aria-hidden="true">🤝</div>
+        <h3>Reunión con la Ministra de Sanidad</h3>
+        <p>La presidenta de FEDER se reunió con la Ministra de Sanidad para trasladar las demandas del colectivo: acceso al diagnóstico, tratamientos, coordinación autonómica y reconocimiento legal. Un encuentro que abre la puerta a cambios reales en las políticas de salud.</p>
+        <div class="feder-stat">Representación · Ministerio de Sanidad</div>
+      </article>
+
+      <article class="feder-card">
+        <div class="achievement-icon" aria-hidden="true">🌐</div>
+        <h3>La voz de 3 millones de personas</h3>
+        <p>FEDER es la organización que aglutina y da voz a las personas con enfermedades raras en España. Más de 300 asociaciones miembro, presencia en todas las comunidades autónomas y décadas de trabajo para que nadie quede atrás por tener una enfermedad poco conocida.</p>
+        <div class="feder-stat">+300 asociaciones · Toda España</div>
+      </article>
+
+    </div>
+
+    <div class="feder-callout">
+      <div class="callout-icon" aria-hidden="true">💡</div>
+      <p>FEDER es mucho más que una federación: es el corazón organizado de quienes viven la rare disease desde dentro. Su labor de <strong>incidencia política, apoyo a las familias y divulgación científica</strong> es imprescindible en un país donde el 65% de las enfermedades raras no tienen tratamiento disponible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ SON LAS ENFERMEDADES RARAS -->
+<section class="er-section" id="que-son">
+  <div class="er-inner">
+    <div class="section-title">
+      <div class="dot" aria-hidden="true"></div>
+      <h2>¿Qué son las enfermedades raras?</h2>
+    </div>
+
+    <div class="er-definition">
+      <p>
+        Una enfermedad se considera <strong>rara o minoritaria</strong> cuando afecta a
+        <strong>menos de 5 personas por cada 10.000 habitantes</strong>.
+        Individualmente son raras. Juntas, afectan a más de 300 millones de personas en el mundo
+        y a cerca de <strong>3 millones de personas en España</strong>.
+      </p>
+    </div>
+
+    <div class="er-facts">
+      <div class="er-fact">
+        <div class="num">+7.000</div>
+        <div class="label">enfermedades raras descritas en el mundo</div>
+      </div>
+      <div class="er-fact">
+        <div class="num">3M</div>
+        <div class="label">personas afectadas en España</div>
+      </div>
+      <div class="er-fact">
+        <div class="num">72%</div>
+        <div class="label">de origen genético</div>
+      </div>
+      <div class="er-fact">
+        <div class="num">65%</div>
+        <div class="label">sin tratamiento disponible actualmente</div>
+      </div>
+    </div>
+
+    <div class="er-characteristics">
+
+      <div class="er-char">
+        <div class="char-icon" aria-hidden="true">🧬</div>
+        <div>
+          <h4>Origen mayoritariamente genético</h4>
+          <p>Más del 70% tienen causa genética. Muchas se manifiestan en la infancia, aunque algunas aparecen en la edad adulta. Son crónicas y a menudo degenerativas.</p>
+        </div>
+      </div>
+
+      <div class="er-char">
+        <div class="char-icon" aria-hidden="true">🔬</div>
+        <div>
+          <h4>Diagnóstico tardío o inexistente</h4>
+          <p>Una persona con una enfermedad rara tarda una media de 4 a 5 años en recibir un diagnóstico correcto, si es que llega a recibirlo. La falta de conocimiento médico genera incertidumbre y sufrimiento evitables.</p>
+        </div>
+      </div>
+
+      <div class="er-char">
+        <div class="char-icon" aria-hidden="true">👧</div>
+        <div>
+          <h4>Impacto en niños y niñas</h4>
+          <p>El 50% de los casos se diagnostican en la infancia. Los niños y niñas con enfermedades raras tienen los mismos sueños que el resto. A veces solo necesitan que alguien los vea.</p>
+        </div>
+      </div>
+
+      <div class="er-char">
+        <div class="char-icon" aria-hidden="true">🏥</div>
+        <div>
+          <h4>Escasez de tratamientos</h4>
+          <p>Solo un pequeño porcentaje cuenta con tratamientos específicos aprobados. La investigación científica y la presión social son fundamentales para acelerar el desarrollo de terapias.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="er-zebra">
+      <div class="zebra-emoji" aria-hidden="true">🦓</div>
+      <p>
+        <strong>La cebra es el símbolo universal de las enfermedades raras.</strong>
+        En medicina se enseña: "cuando oigas cascos, piensa en caballos, no en cebras". Las personas con ER son esas cebras: únicas, distintas entre sí, tan extraordinarias como invisibles para el sistema. Nombrarlas es empezar a cuidarlas.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPROMISO DEL CLUB -->
+<section class="commitment-section" id="compromiso">
+  <div class="commitment-inner">
+    <div class="section-title">
+      <div class="dot" aria-hidden="true"></div>
+      <h2>El compromiso del CB Grup Barna</h2>
+    </div>
+
+    <div class="commitment-list">
+
+      <div class="commitment-item">
+        <div class="c-num" aria-hidden="true">1</div>
+        <div class="c-text">
+          <h4>Divulgación en cada equipo</h4>
+          <p>Llevaremos materiales de divulgación sobre enfermedades raras a todos los equipos del club. Entrenadores, jugadores y familias recibirán información clara y cercana sobre qué son, cómo afectan y cómo ayudar.</p>
+        </div>
+      </div>
+
+      <div class="commitment-item">
+        <div class="c-num" aria-hidden="true">2</div>
+        <div class="c-text">
+          <h4>El 28 de febrero en el marcador</h4>
+          <p>El Día Mundial de las Enfermedades Raras (28 de febrero) tendrá visibilidad oficial en la web, redes sociales y entrenamientos del CB Grup Barna. Porque las fechas que importan se marcan antes de que lleguen.</p>
+        </div>
+      </div>
+
+      <div class="commitment-item">
+        <div class="c-num" aria-hidden="true">3</div>
+        <div class="c-text">
+          <h4>La pista como espacio de concienciación</h4>
+          <p>Actividades específicas, charlas abiertas y momentos de visibilidad en partidos y torneos. El baloncesto convoca familias: ese es el mejor escenario para hablar de lo que casi nadie habla.</p>
+        </div>
+      </div>
+
+      <div class="commitment-item">
+        <div class="c-num" aria-hidden="true">4</div>
+        <div class="c-text">
+          <h4>Contenido digital con rigor</h4>
+          <p>Compartiremos en nuestros canales —web e Instagram— información verificada con FEDER sobre enfermedades concretas, testimonios, avances científicos y recursos para las familias afectadas del barrio y de toda Barcelona.</p>
+        </div>
+      </div>
+
+      <div class="commitment-item">
+        <div class="c-num" aria-hidden="true">5</div>
+        <div class="c-text">
+          <h4>Un club que camina con las familias</h4>
+          <p>Si hay una familia en el club con un hijo o hija con una enfermedad rara, no están solos. El CB Grup Barna y FEDER estarán ahí. Con información, con acompañamiento y con la canasta siempre abierta.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="agreement-card">
+      <div class="agreement-icon" aria-hidden="true">📋</div>
+      <div class="agreement-text">
+        <h3>Acuerdo de colaboración CB Grup Barna × FEDER</h3>
+        <p>Un compromiso formal para que el deporte base sea un vehículo real de concienciación social. Porque cambiar la realidad de las personas con enfermedades raras también se hace desde la cancha de un barrio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ EL DEPORTE -->
+<section class="sport-section">
+  <div class="sport-inner">
+    <div class="section-title">
+      <div class="dot" aria-hidden="true"></div>
+      <h2>Por qué el deporte es clave</h2>
+    </div>
+
+    <div class="sport-grid">
+
+      <article class="sport-card">
+        <div class="sport-banner" aria-hidden="true"></div>
+        <div class="sport-body">
+          <div class="sport-icon" aria-hidden="true">👨‍👩‍👧‍👦</div>
+          <h3>Llega a las familias</h3>
+          <p>El deporte base reúne cada semana a miles de familias en las gradas. Esas familias pueden ser las primeras en reconocer síntomas, en escuchar a un niño o en derivar a quien lo necesita.</p>
+        </div>
+      </article>
+
+      <article class="sport-card">
+        <div class="sport-banner" aria-hidden="true"></div>
+        <div class="sport-body">
+          <div class="sport-icon" aria-hidden="true">🗣️</div>
+          <h3>Genera conversaciones reales</h3>
+          <p>En el vestuario, en el banquillo, después del partido. El entorno deportivo genera conversaciones auténticas en las que la información sobre enfermedades raras puede llegar de manera natural y sin barreras.</p>
+        </div>
+      </article>
+
+      <article class="sport-card">
+        <div class="sport-banner" aria-hidden="true"></div>
+        <div class="sport-body">
+          <div class="sport-icon" aria-hidden="true">🌍</div>
+          <h3>Construye comunidad</h3>
+          <p>El club no es solo un sitio donde se juega. Es un tejido social. Ese tejido puede proteger, incluir y visibilizar a quienes viven situaciones difíciles, entre ellas tener o convivir con una enfermedad rara.</p>
+        </div>
+      </article>
+
+      <article class="sport-card">
+        <div class="sport-banner" aria-hidden="true"></div>
+        <div class="sport-body">
+          <div class="sport-icon" aria-hidden="true">💪</div>
+          <h3>El deporte también es salud</h3>
+          <p>Para muchas personas con enfermedades raras, el acceso al deporte adaptado y a entornos deportivos inclusivos es parte fundamental de su calidad de vida. CB Grup Barna quiere ser ese espacio.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="closing-inner">
+    <div class="big-icon" aria-hidden="true">🏀🦓</div>
+    <h2>Raro no es<br><span class="accent-closing">sinónimo de solo.</span></h2>
+    <p class="punchline">
+      Con FEDER, el CB Grup Barna se compromete a que ninguna familia
+      con una enfermedad rara se sienta invisible en nuestro barrio.
+    </p>
+    <div class="meta-row">
+      <span>CB Grup Barna</span>
+      <span class="dot-sep" aria-hidden="true"></span>
+      <span>FEDER · feder.es</span>
+      <span class="dot-sep" aria-hidden="true"></span>
+      <span>Junio 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="contacte">
+  <div class="footer-inner">
+
+    <div>
+      <div class="footer-brand">CB Grup Barna</div>
+      <p>Club de baloncesto del Clot.<br>Sant Martí, Barcelona.</p>
+      <p class="footer-tagline">Con FEDER · Junio 2026</p>
+    </div>
+
+    <div>
+      <h4>Contacto</h4>
+      <a href="mailto:voluntarisgrupbarna@gmail.com">voluntarisgrupbarna@gmail.com</a>
+      <a href="https://www.cbgrupbarna.info" target="_blank" rel="noopener">www.cbgrupbarna.info</a>
+      <a href="https://instagram.com/cbgrupbarna" target="_blank" rel="noopener">@cbgrupbarna</a>
+    </div>
+
+    <div>
+      <h4>Sobre FEDER</h4>
+      <a href="https://www.feder.es" target="_blank" rel="noopener">www.feder.es</a>
+      <p>Federación Española de Enfermedades Raras</p>
+      <p>+300 asociaciones en toda España</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 CB Grup Barna · Tots els drets reservats</span>
+    <span class="hashtag">#EnfermedadesRaras · #DeporteContraElOlvido</span>
+  </div>
+</footer>
+
+<!-- FRANJA CEBRA -->
+<div class="zebra-bar" role="presentation"></div>
+
+<script>
+  document.querySelectorAll('.nav-links a, .nav-cta').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('nav').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
