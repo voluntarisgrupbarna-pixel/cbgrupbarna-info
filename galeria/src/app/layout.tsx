@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import { Navbar } from '@/components/Navbar'
 
@@ -31,6 +32,16 @@ export default function RootLayout({
   return (
     <html lang="ca">
       <body className="min-h-screen bg-club-black text-club-cream antialiased">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-galeria" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-R6XYR7G1WF', { send_page_view: true });
+        `}</Script>
         <Navbar />
         <main className="pt-16">
           {children}

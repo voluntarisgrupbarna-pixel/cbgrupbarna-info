@@ -74,6 +74,17 @@
   gtag('config', 'G-R6XYR7G1WF', { send_page_view: true, page_title: document.title, page_location: location.href });
 </script>
 
+<!-- Microsoft Clarity · Mapes de calor + Gravació de sessions -->
+<!-- PASSOS: 1) Ves a https://clarity.microsoft.com → New Project → cbgrupbarna.info -->
+<!--         2) Copia el teu Project ID i substitueix CLARITY_PROJECT_ID aquí sota  -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+</script>
+
 <!-- JSON-LD: SportsClub + WebSite + Events -->
 <script type="application/ld+json">
 {
@@ -934,7 +945,7 @@ body::after {
   <div class="top-grid">
 
   <!-- ITEM 1 · PORTES OBERTES -->
-  <div class="item p1 reveal">
+  <div class="item p1 reveal" data-section="portes-obertes">
     <div class="item-head">
       <span class="badge open"><span class="bdot"></span>Inscripcions obertes</span>
       <span class="item-meta">PRIORITAT 01</span>
@@ -1022,7 +1033,7 @@ body::after {
   </a>
 
   <!-- ==== ITEM 2 · CAMPUS amb omplint-se en directe ==== -->
-  <div class="item p1 reveal">
+  <div class="item p1 reveal" data-section="campus-estiu">
     <div class="item-head">
       <span class="badge open"><span class="bdot"></span>Places obrint-se</span>
       <span class="item-meta">JULIOL 26 · PRIORITAT 02</span>
@@ -1651,6 +1662,75 @@ body::after {
       });
     })
     .catch(function () {});
+})();
+</script>
+
+<script>
+// ===== ANALYTICS AVANÇAT · CB Grup Barna =====
+(function(){
+  if (!window.gtag) return;
+
+  // 1. Seguiment global de CTAs — tots els elements [data-cta]
+  document.addEventListener('click', function(e){
+    var el = e.target && e.target.closest && e.target.closest('[data-cta]');
+    if (!el) return;
+    var cta = el.getAttribute('data-cta') || '';
+    // Evitar duplicat amb el tracking del social grid
+    if (cta.indexOf('sg-') === 0) return;
+    var href = el.getAttribute('href') || '';
+    var isWA = href.indexOf('wa.me') > -1 || href.indexOf('whatsapp') > -1;
+    gtag('event', isWA ? 'whatsapp_click' : 'cta_click', {
+      cta_id: cta,
+      cta_text: (el.textContent || '').trim().slice(0, 60),
+      destination: href.split('?')[0]
+    });
+  }, true);
+
+  // 2. Profunditat de desplaçament — 25 / 50 / 75 / 90 %
+  var sdMarks = [25, 50, 75, 90];
+  var sdFired = {};
+  window.addEventListener('scroll', function(){
+    var top = window.scrollY || document.documentElement.scrollTop || 0;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    if (total <= 0) return;
+    var pct = Math.round((top / total) * 100);
+    sdMarks.forEach(function(m){
+      if (!sdFired[m] && pct >= m){
+        sdFired[m] = true;
+        gtag('event', 'scroll_depth', { percent_scrolled: m });
+      }
+    });
+  }, { passive: true });
+
+  // 3. Temps a la pàgina — 30s / 1min / 3min / 5min
+  [
+    { s: 30,  l: '30s'  },
+    { s: 60,  l: '1min' },
+    { s: 180, l: '3min' },
+    { s: 300, l: '5min' }
+  ].forEach(function(m){
+    setTimeout(function(){
+      gtag('event', 'time_on_page', { duration_label: m.l, duration_seconds: m.s });
+    }, m.s * 1000);
+  });
+
+  // 4. Visibilitat de seccions principals (zones calentes per secció)
+  if (!('IntersectionObserver' in window)) return;
+  var sio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      var name = el.getAttribute('data-section')
+               || el.getAttribute('data-cta')
+               || el.className.replace(/\s+/g,' ').trim().split(' ')[0];
+      gtag('event', 'section_view', { section_name: name });
+      sio.unobserve(el);
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll(
+    '.item.reveal, .ai-faq.reveal, .sponsor-card.reveal, .spw.reveal'
+  ).forEach(function(el){ sio.observe(el); });
 })();
 </script>
 
