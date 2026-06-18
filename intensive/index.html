@@ -425,6 +425,76 @@
   .pack .per { color: rgba(255,255,255,0.45); font-size: 0.8rem; margin-top: 2px; }
   .pack .btn { margin-top: 22px; width: 100%; }
 
+  /* ── FORMULARIO ── */
+  .form-sec { background: var(--negre); }
+  .form-card {
+    background: var(--gris);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 22px;
+    padding: 30px 26px;
+    margin-top: 30px;
+  }
+  .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.2); }
+  .btn-ghost:hover { border-color: #fff; color: #fff; }
+
+  .steps-bar { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 26px; }
+  .step-dot { display: flex; align-items: center; gap: 7px; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.45); }
+  .step-dot span {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
+    font-size: 0.82rem; transition: background .2s, color .2s;
+  }
+  .step-dot.active { color: #fff; }
+  .step-dot.active span { background: var(--vermell); color: #fff; }
+  .step-dot.done span { background: var(--wa); color: #fff; }
+  .step-line { flex: 0 1 36px; height: 2px; background: rgba(255,255,255,0.12); }
+
+  .fstep-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 18px; color: #fff; }
+
+  .pack-options { display: flex; flex-direction: column; gap: 12px; }
+  .tipo-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .radio-card {
+    position: relative; display: block; cursor: pointer;
+    border: 1.5px solid rgba(255,255,255,0.14); border-radius: 14px;
+    padding: 16px 18px; transition: border-color .2s, background .2s;
+  }
+  .radio-card:hover { border-color: rgba(227,30,36,0.5); }
+  .radio-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .radio-card .rc-body { display: flex; flex-direction: column; gap: 2px; }
+  .radio-card .rc-body strong { font-size: 1rem; color: #fff; font-weight: 800; }
+  .radio-card .rc-body small { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+  .radio-card:has(input:checked) { border-color: var(--vermell); background: rgba(227,30,36,0.1); }
+  .radio-card.sm { padding: 13px 14px; }
+  @media (max-width: 460px) { .tipo-toggle { grid-template-columns: 1fr; } }
+
+  .contact-label { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #ff8b8f; margin-bottom: 14px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.8); margin-bottom: 7px; }
+  .field input, .field select {
+    width: 100%; padding: 13px 14px; border-radius: 11px;
+    background: #0d0d0d; border: 1.5px solid rgba(255,255,255,0.14);
+    color: #fff; font-family: inherit; font-size: 1rem; transition: border-color .2s;
+  }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--vermell); }
+  .field input::placeholder { color: rgba(255,255,255,0.35); }
+  .field select { appearance: none; -webkit-appearance: none; }
+  .field.invalid input, .field.invalid select { border-color: var(--vermell); background: rgba(227,30,36,0.08); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 460px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .fnav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 24px; }
+  .fnav .btn { min-width: 130px; }
+  .form-error { color: #ff8b8f; font-size: 0.9rem; font-weight: 600; text-align: center; margin-top: 16px; }
+
+  .fdone { text-align: center; padding: 10px 0; }
+  .done-ico {
+    width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px;
+    background: var(--wa); color: #fff; font-size: 2rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+  }
+
   /* ── VIDEO ── */
   .video-sec { background: var(--gris); }
   .video-frame {
@@ -557,10 +627,7 @@
   </div>
 
   <div class="hero-cta">
-    <a class="btn btn-wa" href="https://wa.me/34627874766?text=Hola%20Leo!%20Quiero%20reservar%20plaza%20en%20el%20programa%20Intensive%20de%20verano." target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.16-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.44-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.51l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47 0 1.46 1.06 2.87 1.21 3.07.15.2 2.09 3.2 5.07 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z"/></svg>
-      Reservar plaza
-    </a>
+    <a class="btn btn-red" href="#reserva-form">📝 Reservar plaza</a>
     <a class="btn btn-outline" href="#packs">Ver packs y precios</a>
     <a class="btn btn-ig" href="https://instagram.com/timechamber_es" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 4.78a5.06 5.06 0 100 10.12 5.06 5.06 0 000-10.12zm0 1.62a3.68 3.68 0 110 7.36 3.68 3.68 0 010-7.36zm5.5-2.13a1.24 1.24 0 110 2.48 1.24 1.24 0 010-2.48z"/></svg>
@@ -595,7 +662,7 @@
         <div class="desc">1 hora de perfeccionamiento de pista por sesión.</div>
         <div class="price">350€</div>
         <div class="per">35€ por sesión</div>
-        <a class="btn btn-red" href="https://wa.me/34627874766?text=Hola%20Leo!%20Me%20interesa%20el%20PACK%2010%20sesiones%20Intensive%20Basic%20(350%E2%82%AC).%20%C2%BFHay%20plaza%20disponible%3F" target="_blank" rel="noopener">Reservar Pack 10</a>
+        <button type="button" class="btn btn-red" onclick="abrirReserva('Pack 10 sesiones · Intensive Basic — 350€')">Reservar Pack 10</button>
       </div>
 
       <!-- Pack 20 (destacado) -->
@@ -606,7 +673,7 @@
         <div class="desc">1 hora de perfeccionamiento de pista por sesión.</div>
         <div class="price">650€</div>
         <div class="per">32,50€ por sesión</div>
-        <a class="btn btn-red" href="https://wa.me/34627874766?text=Hola%20Leo!%20Me%20interesa%20el%20PACK%2020%20sesiones%20Intensive%20Basic%20(650%E2%82%AC).%20%C2%BFHay%20plaza%20disponible%3F" target="_blank" rel="noopener">Reservar Pack 20</a>
+        <button type="button" class="btn btn-red" onclick="abrirReserva('Pack 20 sesiones · Intensive Basic — 650€')">Reservar Pack 20</button>
       </div>
 
       <!-- Pack 30 -->
@@ -616,8 +683,137 @@
         <div class="desc">1 hora de perfeccionamiento de pista por sesión.</div>
         <div class="price">900€</div>
         <div class="per">30€ por sesión · mejor precio</div>
-        <a class="btn btn-red" href="https://wa.me/34627874766?text=Hola%20Leo!%20Me%20interesa%20el%20PACK%2030%20sesiones%20Intensive%20Basic%20(900%E2%82%AC).%20%C2%BFHay%20plaza%20disponible%3F" target="_blank" rel="noopener">Reservar Pack 30</a>
+        <button type="button" class="btn btn-red" onclick="abrirReserva('Pack 30 sesiones · Intensive Basic — 900€')">Reservar Pack 30</button>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FORMULARIO DE RESERVA ════════ -->
+<section class="form-sec" id="reserva-form">
+  <div class="wrap" style="max-width:640px;">
+    <span class="section-tag" style="text-align:center;display:block;">Reserva tu plaza</span>
+    <h2 class="title" style="text-align:center;">Formulario de inscripción</h2>
+    <p class="section-intro" style="text-align:center;margin:0 auto 6px;">Completa los datos en 3 pasos. Recibiremos tu solicitud al instante y Leo te confirmará la disponibilidad de plaza.</p>
+
+    <div class="form-card">
+      <!-- Barra de progreso -->
+      <div class="steps-bar">
+        <div class="step-dot active" data-dot="1"><span>1</span> Pack</div>
+        <div class="step-line"></div>
+        <div class="step-dot" data-dot="2"><span>2</span> Contacto</div>
+        <div class="step-line"></div>
+        <div class="step-dot" data-dot="3"><span>3</span> Jugador/a</div>
+      </div>
+
+      <form id="reservaForm" novalidate>
+        <!-- Campos de control FormSubmit -->
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+
+        <!-- ── PASO 1: PACK ── -->
+        <div class="fstep" data-step="1">
+          <h3 class="fstep-title">1 · Elige tu pack</h3>
+          <div class="pack-options">
+            <label class="radio-card">
+              <input type="radio" name="pack" value="Pack 10 sesiones · Intensive Basic — 350€" required>
+              <span class="rc-body"><strong>Pack 10 sesiones</strong><small>Intensive Basic · 350€</small></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="pack" value="Pack 20 sesiones · Intensive Basic — 650€">
+              <span class="rc-body"><strong>Pack 20 sesiones</strong><small>Intensive Basic · 650€</small></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="pack" value="Pack 30 sesiones · Intensive Basic — 900€">
+              <span class="rc-body"><strong>Pack 30 sesiones</strong><small>Intensive Basic · 900€</small></span>
+            </label>
+          </div>
+          <div class="fnav">
+            <span></span>
+            <button type="button" class="btn btn-red fnext" data-next="1">Continuar →</button>
+          </div>
+        </div>
+
+        <!-- ── PASO 2: TIPO + CONTACTO ── -->
+        <div class="fstep" data-step="2" hidden>
+          <h3 class="fstep-title">2 · Datos de contacto</h3>
+          <div class="tipo-toggle">
+            <label class="radio-card sm">
+              <input type="radio" name="tipo" value="Menor de edad" checked>
+              <span class="rc-body"><strong>Menor de edad</strong><small>Inscribe un padre/madre/tutor</small></span>
+            </label>
+            <label class="radio-card sm">
+              <input type="radio" name="tipo" value="Mayor de edad (jugador/a adulto)">
+              <span class="rc-body"><strong>Mayor de edad</strong><small>Se inscribe el propio jugador/a</small></span>
+            </label>
+          </div>
+
+          <p class="contact-label" id="contactLabel">Datos del padre / madre / tutor</p>
+          <div class="field">
+            <label for="f_nombre">Nombre y apellidos *</label>
+            <input type="text" id="f_nombre" name="nombre_contacto" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f_movil">Móvil *</label>
+            <input type="tel" id="f_movil" name="movil" inputmode="tel" autocomplete="tel" placeholder="Ej. 612 345 678" required>
+          </div>
+          <div class="field">
+            <label for="f_correo">Correo electrónico *</label>
+            <input type="email" id="f_correo" name="correo" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+          </div>
+          <div class="fnav">
+            <button type="button" class="btn btn-ghost fprev">← Atrás</button>
+            <button type="button" class="btn btn-red fnext" data-next="2">Continuar →</button>
+          </div>
+        </div>
+
+        <!-- ── PASO 3: DATOS JUGADOR/A ── -->
+        <div class="fstep" data-step="3" hidden>
+          <h3 class="fstep-title">3 · Datos del jugador/a</h3>
+          <div class="field" id="wrapNombreJugador">
+            <label for="f_jugador">Nombre y apellidos del jugador/a *</label>
+            <input type="text" id="f_jugador" name="nombre_jugador">
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="f_anio">Año de nacimiento *</label>
+              <input type="number" id="f_anio" name="anio_nacimiento" min="1950" max="2026" placeholder="Ej. 2014" required>
+            </div>
+            <div class="field">
+              <label for="f_talla">Talla de camiseta *</label>
+              <select id="f_talla" name="talla_camiseta" required>
+                <option value="" disabled selected>Selecciona…</option>
+                <option>4 años</option><option>6 años</option><option>8 años</option>
+                <option>10 años</option><option>12 años</option><option>14 años</option>
+                <option>16 años</option>
+                <option>XS</option><option>S</option><option>M</option>
+                <option>L</option><option>XL</option><option>XXL</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f_club">Club de procedencia *</label>
+            <input type="text" id="f_club" name="club_procedencia" placeholder="Escribe 'Ninguno' si no tienes club" required>
+          </div>
+          <div class="fnav">
+            <button type="button" class="btn btn-ghost fprev">← Atrás</button>
+            <button type="submit" class="btn btn-wa" id="submitBtn">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Enviar reserva
+            </button>
+          </div>
+        </div>
+
+        <!-- ── PANTALLA DE ÉXITO ── -->
+        <div class="fstep fdone" data-step="done" hidden>
+          <div class="done-ico">✓</div>
+          <h3 class="fstep-title" style="text-align:center;">¡Reserva enviada!</h3>
+          <p style="text-align:center;color:rgba(255,255,255,0.75);">Hemos recibido tu solicitud. <strong>Leo</strong> te contactará para confirmar la disponibilidad de plaza. ¿Quieres adelantarte?</p>
+          <a class="btn btn-wa" id="doneWa" href="https://wa.me/34627874766" target="_blank" rel="noopener" style="margin-top:8px;">Escribir a Leo por WhatsApp</a>
+        </div>
+
+        <p class="form-error" id="formError" hidden></p>
+      </form>
     </div>
   </div>
 </section>
@@ -640,9 +836,9 @@
 <!-- ════════ RESERVA ════════ -->
 <section class="reserva" id="reserva">
   <div class="wrap">
-    <span class="section-tag" style="color:#fff; opacity:.85;">Formaliza tu reserva</span>
-    <h2 class="title">¿Listo/a para empezar?</h2>
-    <p class="section-intro">📋 Para formalizar la reserva únicamente tenéis que contactar con el director de admisiones de la academia y él os confirmará la disponibilidad de plaza.</p>
+    <span class="section-tag" style="color:#fff; opacity:.85;">¿Prefieres WhatsApp?</span>
+    <h2 class="title">Habla directamente con Leo</h2>
+    <p class="section-intro">📋 También puedes formalizar la reserva contactando directamente con el director de admisiones de la academia, que te confirmará la disponibilidad de plaza.</p>
 
     <div class="contact-card">
       <div class="role">Director de admisiones</div>
@@ -735,12 +931,179 @@
     <a href="https://instagram.com/timechamber_es" target="_blank" rel="noopener">Instagram</a>
   </div>
   <small>
-    Programa Intensive Verano · Timechamber Basketball Academy<br>
-    Grup Barna · Barcelona · Lunes a viernes 19h–22h<br>
-    © <span id="year"></span> CB Grup Barna · #SomClot
+    <strong>Time Chamber Basketball Academy</strong><br>
+    Programa Intensive Verano · Grup Barna · Barcelona · Lunes a viernes 19h–22h<br>
+    © <span id="year"></span> Time Chamber Basketball Academy
   </small>
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<script>
+/* ════════ FORMULARIO DE RESERVA MULTI-PASO ════════ */
+(function () {
+  // Email destino: FormSubmit.co envía a este correo (Leo debe confirmar el
+  // primer email de activación una sola vez para empezar a recibir correos).
+  var FORM_ENDPOINT = "https://formsubmit.co/ajax/leotimechamber@gmail.com";
+
+  var form = document.getElementById('reservaForm');
+  if (!form) return;
+
+  // Referencia única para correlacionar los correos del mismo registro
+  var REF = 'TC-' + Math.random().toString(36).slice(2, 7).toUpperCase();
+
+  var steps = Array.prototype.slice.call(form.querySelectorAll('.fstep'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.step-dot'));
+  var errBox = document.getElementById('formError');
+  var current = 1;
+
+  function showStep(n) {
+    steps.forEach(function (s) { s.hidden = (s.dataset.step !== String(n)); });
+    dots.forEach(function (d) {
+      var dn = parseInt(d.dataset.dot, 10);
+      d.classList.toggle('active', dn === n);
+      d.classList.toggle('done', dn < n || n === 'done');
+    });
+    if (typeof n === 'number') current = n;
+    var card = document.querySelector('.form-card');
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Abrir el formulario con un pack preseleccionado (desde los botones de packs)
+  window.abrirReserva = function (packValue) {
+    var radios = form.querySelectorAll('input[name="pack"]');
+    radios.forEach(function (r) { if (r.value === packValue) r.checked = true; });
+    document.getElementById('reserva-form').scrollIntoView({ behavior: 'smooth' });
+    showStep(1);
+  };
+
+  // Etiqueta dinámica según menor/adulto
+  var tipoRadios = form.querySelectorAll('input[name="tipo"]');
+  var contactLabel = document.getElementById('contactLabel');
+  var wrapNombreJugador = document.getElementById('wrapNombreJugador');
+  var inputNombreJugador = document.getElementById('f_jugador');
+  function syncTipo() {
+    var adulto = form.querySelector('input[name="tipo"]:checked').value.indexOf('Mayor') === 0;
+    contactLabel.textContent = adulto ? 'Tus datos (jugador/a)' : 'Datos del padre / madre / tutor';
+    // Si es adulto, el nombre del jugador = nombre de contacto (se oculta el campo)
+    wrapNombreJugador.style.display = adulto ? 'none' : 'block';
+  }
+  tipoRadios.forEach(function (r) { r.addEventListener('change', syncTipo); });
+  syncTipo();
+
+  // Validación de los campos requeridos de un paso
+  function validateStep(n) {
+    var stepEl = form.querySelector('.fstep[data-step="' + n + '"]');
+    var fields = stepEl.querySelectorAll('input, select');
+    var ok = true, firstBad = null;
+    fields.forEach(function (el) {
+      var wrap = el.closest('.field');
+      if (wrap) wrap.classList.remove('invalid');
+      if (el.type === 'radio') return; // radios validados aparte
+      if (el.offsetParent === null) return; // campo oculto (p.ej. nombre jugador en adulto)
+      if (el.hasAttribute('required') && !el.value.trim()) {
+        ok = false; if (wrap) wrap.classList.add('invalid'); if (!firstBad) firstBad = el;
+      }
+      if (el.type === 'email' && el.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value)) {
+        ok = false; if (wrap) wrap.classList.add('invalid'); if (!firstBad) firstBad = el;
+      }
+    });
+    if (n === 1 && !form.querySelector('input[name="pack"]:checked')) ok = false;
+    if (!ok) {
+      errBox.hidden = false;
+      errBox.textContent = 'Por favor, completa los campos obligatorios.';
+      if (firstBad) firstBad.focus();
+    } else {
+      errBox.hidden = true;
+    }
+    return ok;
+  }
+
+  // Construye un enlace de WhatsApp a partir del móvil introducido
+  function waLink(movil) {
+    if (!movil) return '';
+    var d = movil.replace(/\D/g, '');
+    if (!d) return '';
+    if (d.indexOf('34') !== 0 && d.length === 9) d = '34' + d;
+    return 'https://wa.me/' + d;
+  }
+
+  // Recoge todos los datos introducidos hasta el momento
+  function collect() {
+    var fd = new FormData(form);
+    var movil = (fd.get('movil') || '').toString();
+    var adulto = (fd.get('tipo') || '').toString().indexOf('Mayor') === 0;
+    if (adulto) fd.set('nombre_jugador', fd.get('nombre_contacto') || '');
+    var data = {
+      Referencia: REF,
+      Pack: fd.get('pack') || '—',
+      Tipo: fd.get('tipo') || '—',
+      Nombre_contacto: fd.get('nombre_contacto') || '—',
+      Movil: movil || '—',
+      Correo: fd.get('correo') || '—',
+      Nombre_jugador: fd.get('nombre_jugador') || '—',
+      Anio_nacimiento: fd.get('anio_nacimiento') || '—',
+      Club_procedencia: fd.get('club_procedencia') || '—',
+      Talla_camiseta: fd.get('talla_camiseta') || '—'
+    };
+    var wa = waLink(movil);
+    if (wa) data['WhatsApp_directo'] = wa + '?text=' +
+      encodeURIComponent('Hola! Soy de Time Chamber, te contacto por tu reserva del programa Intensive (' + REF + ').');
+    return data;
+  }
+
+  // Envía un correo (fire-and-forget) a Leo con los datos de este paso
+  function sendStep(pasoNombre) {
+    var data = collect();
+    var payload = Object.assign({
+      _subject: 'Reserva Intensive · ' + pasoNombre + ' · ' + data.Nombre_contacto + ' (' + REF + ')',
+      _template: 'table',
+      _captcha: 'false',
+      Paso: pasoNombre
+    }, data);
+    return fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function () { /* silencioso: no bloquea la navegación */ });
+  }
+
+  // Navegación entre pasos
+  form.querySelectorAll('.fnext').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var n = parseInt(btn.dataset.next, 10);
+      if (!validateStep(n)) return;
+      sendStep('Paso ' + n + ' completado');
+      showStep(n + 1);
+    });
+  });
+  form.querySelectorAll('.fprev').forEach(function (btn) {
+    btn.addEventListener('click', function () { showStep(current - 1); });
+  });
+
+  // Envío final
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validateStep(3)) return;
+    var submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+    sendStep('RESERVA COMPLETA').then(function () {
+      // Personaliza el botón de WhatsApp de la pantalla de éxito
+      var data = collect();
+      if (data.WhatsApp_directo) {
+        document.getElementById('doneWa').href =
+          'https://wa.me/34627874766?text=' + encodeURIComponent(
+            'Hola Leo! Acabo de enviar la reserva del programa Intensive. Ref: ' + REF +
+            '. Jugador/a: ' + data.Nombre_jugador + '. ' + data.Pack);
+      }
+      showStep('done');
+    }).finally(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar reserva';
+    });
+  });
+})();
+</script>
 </body>
 </html>
