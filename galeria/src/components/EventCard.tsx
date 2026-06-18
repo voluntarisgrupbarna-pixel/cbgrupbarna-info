@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, MapPin, Images, Download } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
 import type { Event } from '@/lib/types'
 
 interface EventCardProps {
@@ -22,7 +25,17 @@ export function EventCard({ event, supabaseUrl }: EventCardProps) {
     : null
 
   return (
-    <Link href={`/events/${event.id}`} className="card group block">
+    <Link
+      href={`/events/${event.id}`}
+      className="card group block"
+      onClick={() =>
+        trackEvent('event_card_click', {
+          event_id: event.id,
+          event_title: event.title,
+          photos_count: event.photos_count ?? 0,
+        })
+      }
+    >
       {/* Cover image */}
       <div className="aspect-[4/3] bg-club-gray-2 relative overflow-hidden">
         {coverUrl ? (

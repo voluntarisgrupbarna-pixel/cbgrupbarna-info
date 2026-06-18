@@ -9,8 +9,9 @@ import Captions from 'yet-another-react-lightbox/plugins/captions'
 import 'yet-another-react-lightbox/plugins/captions.css'
 import Counter from 'yet-another-react-lightbox/plugins/counter'
 import 'yet-another-react-lightbox/plugins/counter.css'
-import { Heart, MessageCircle, Download as DownloadIcon, Trash2 } from 'lucide-react'
+import { Heart, Download as DownloadIcon, Trash2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
+import { trackEvent } from '@/lib/analytics'
 import type { Photo } from '@/lib/types'
 
 interface PhotoGridProps {
@@ -19,6 +20,8 @@ interface PhotoGridProps {
   allowDownloads: boolean
   currentUserId?: string
   currentUserRole?: string
+  eventId?: number
+  eventTitle?: string
   onPhotoDeleted?: (photoId: number) => void
 }
 
@@ -28,6 +31,8 @@ export function PhotoGrid({
   allowDownloads,
   currentUserId,
   currentUserRole,
+  eventId,
+  eventTitle,
   onPhotoDeleted,
 }: PhotoGridProps) {
   const [lightboxIndex, setLightboxIndex] = useState(-1)
@@ -50,6 +55,16 @@ export function PhotoGrid({
     height: photo.height ?? undefined,
   }))
 
+  const handleOpenLightbox = (index: number, photoId: number) => {
+    setLightboxIndex(index)
+    trackEvent('photo_open', {
+      photo_id: photoId,
+      photo_index: index,
+      ...(eventId !== undefined && { event_id: eventId }),
+      ...(eventTitle && { event_title: eventTitle }),
+    })
+  }
+
   const handleLike = async (e: React.MouseEvent, photoId: number) => {
     e.stopPropagation()
     if (!currentUserId) return
@@ -65,6 +80,10 @@ export function PhotoGrid({
       setLikedPhotos(prev => new Set(prev).add(photoId))
       setLikeCounts(prev => ({ ...prev, [photoId]: (prev[photoId] ?? 0) + 1 }))
       await supabase.from('photo_likes').insert({ photo_id: photoId, user_id: currentUserId })
+      trackEvent('photo_like', {
+        photo_id: photoId,
+        ...(eventId !== undefined && { event_id: eventId }),
+      })
     }
   }
 
@@ -81,6 +100,14 @@ export function PhotoGrid({
     }
     await supabase.from('photos').delete().eq('id', photoId)
     onPhotoDeleted?.(photoId)
+  }
+
+  const handleDownloadClick = (e: React.MouseEvent, photoId: number) => {
+    e.stopPropagation()
+    trackEvent('photo_download', {
+      photo_id: photoId,
+      ...(eventId !== undefined && { event_id: eventId }),
+    })
   }
 
   const canDelete = (photo: Photo) =>
@@ -109,7 +136,7 @@ export function PhotoGrid({
             <div
               key={photo.id}
               className="photo-grid-item relative group cursor-pointer rounded overflow-hidden"
-              onClick={() => setLightboxIndex(index)}
+              onClick={() => handleOpenLightbox(index, photo.id)}
             >
               <Image
                 src={src}
@@ -140,7 +167,7 @@ export function PhotoGrid({
                       <a
                         href={`${supabaseUrl}/storage/v1/object/public/photos/${photo.storage_path}`}
                         download={photo.original_name ?? true}
-                        onClick={e => e.stopPropagation()}
+                        onClick={e => handleDownloadClick(e, photo.id)}
                         className="bg-black/60 text-white/80 hover:bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-xs flex items-center gap-1 transition-colors"
                       >
                         <DownloadIcon className="w-3 h-3" />

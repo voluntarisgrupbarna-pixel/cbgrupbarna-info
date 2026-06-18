@@ -158,6 +158,8 @@ export default async function EventPage({ params }: EventPageProps) {
         allowDownloads={event.allow_downloads}
         currentUserId={user?.id}
         currentUserRole={userProfile?.role}
+        eventId={event.id}
+        eventTitle={event.title}
       />
 
       {/* Upload CTA for non-logged users */}

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import { Navbar } from '@/components/Navbar'
 
@@ -54,6 +55,7 @@ export default function RootLayout({
             #somclot
           </p>
         </footer>
+        <Analytics />
       </body>
     </html>
   )
