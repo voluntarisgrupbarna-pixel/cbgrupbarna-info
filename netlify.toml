@@ -1,0 +1,22 @@
+# Despliegue gratuito en Netlify (timechamber.netlify.app o dominio propio).
+# La home sirve directamente el programa Intensive (sin iframe = mejor SEO).
+[build]
+  publish = "."
+
+# Rewrite (status 200): la URL queda en "/" pero se sirve el programa.
+[[redirects]]
+  from = "/"
+  to = "/intensive/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/reservar"
+  to = "/intensive/index.html"
+  status = 301
+
+# Cabeceras de seguridad razonables para un sitio estático.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

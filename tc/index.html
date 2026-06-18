@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E31E24">
+<title>Time Chamber Basketball Academy · Programa Intensive Verano</title>
+<meta name="description" content="Time Chamber Basketball Academy · Tecnificación de basket y programa Intensive de verano en Barcelona. Packs de 10, 20 y 30 sesiones. Reserva tu plaza.">
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Time Chamber Basketball Academy">
+<meta property="og:title" content="Time Chamber Basketball Academy · Intensive Verano">
+<meta property="og:description" content="Tecnificación de basket y programa Intensive de verano en Barcelona. Packs de 10, 20 y 30 sesiones. Reserva tu plaza.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Time Chamber Basketball Academy · Intensive Verano">
+<meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
+
+<link rel="icon" type="image/png" sizes="192x192" href="https://cbgrupbarna.info/logo.png">
+<link rel="apple-touch-icon" href="https://cbgrupbarna.info/logo.png">
+
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #0a0a0a; overflow: hidden; }
+  /* La página real, enmascarada bajo este dominio (Time Chamber) */
+  iframe#tc {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    border: 0; display: block;
+  }
+  /* Fallback por si el navegador bloquea el iframe */
+  .fallback {
+    position: fixed; inset: 0; display: none;
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; color: #fff; font-family: 'Helvetica Neue', Arial, sans-serif; padding: 24px;
+  }
+  .fallback a {
+    margin-top: 18px; background: #E31E24; color: #fff; text-decoration: none;
+    font-weight: 800; padding: 14px 26px; border-radius: 50px;
+  }
+</style>
+</head>
+<body>
+  <iframe id="tc" title="Time Chamber Basketball Academy · Programa Intensive Verano"
+          src="https://cbgrupbarna.info/intensive/"
+          allow="fullscreen"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  <div class="fallback" id="fb">
+    <h1>Time Chamber Basketball Academy</h1>
+    <p>Programa Intensive de Verano · Tecnificación de basket</p>
+    <a href="https://cbgrupbarna.info/intensive/">Entrar</a>
+  </div>
+
+  <script>
+    // Si el iframe no carga (bloqueado), mostramos el enlace de respaldo.
+    var fired = false;
+    var ifr = document.getElementById('tc');
+    ifr.addEventListener('load', function () { fired = true; });
+    setTimeout(function () {
+      if (!fired) {
+        ifr.style.display = 'none';
+        document.getElementById('fb').style.display = 'flex';
+      }
+    }, 3500);
+  </script>
+</body>
+</html>
