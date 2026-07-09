@@ -15,11 +15,21 @@ Antes de responder, evalúa el contexto de la tarea e invoca **todas las skills 
 
 ### Tareas de diseño y visualización
 - Gráficos, dashboards, datos → `dataviz` + `artifact-design`
-- Diseño visual (poster, slide, flyer) → `artifact-design` + `create_visual_design_express_skill`
+- Diseño visual (poster, slide, flyer, presentación) → `artifact-design` + `create_visual_design_express_skill`
+- Diseño con plantillas Canva → `artifact-design` + herramientas `mcp__Canva__*`
+- Diseño con Adobe → `artifact-design` + herramientas `mcp__Adobe_for_creativity__*`
+- Imágenes: fondo, recorte, vectorizar, efectos → `mcp__Adobe_for_creativity__image_*`
+- Vídeo: corte rápido, resize, render → `mcp__Adobe_for_creativity__video_*`
 
 ### Tareas de investigación
 - Investigación multi-fuente → `deep-research`
-- Investigación + presentación de resultados → `deep-research` + `dataviz` + `artifact-design`
+- Investigación + presentación → `deep-research` + `dataviz` + `artifact-design`
+
+### Tareas de productividad (Google / Gmail)
+- Buscar o redactar email → `mcp__Gmail__*`
+- Consultar o crear eventos de calendario → `mcp__Google_Calendar__*`
+- Buscar, leer o crear archivos → `mcp__Google_Drive__*`
+- Formularios → `mcp__Jotform__*`
 
 ### Tareas de configuración
 - Hooks, permisos, settings → `update-config`
@@ -38,3 +48,4 @@ Antes de responder, evalúa el contexto de la tarea e invoca **todas las skills 
 3. Invoca cada skill relevante **antes** de empezar a trabajar, en el orden indicado arriba.
 4. Si una skill ya fue invocada en este turno, no la repitas — combina sus instrucciones.
 5. Nunca esperes a que el usuario escriba `/skill-name`. Actívalas tú proactivamente.
+6. Para herramientas MCP no cargadas, usa `ToolSearch` para cargar el schema antes de llamarlas.
