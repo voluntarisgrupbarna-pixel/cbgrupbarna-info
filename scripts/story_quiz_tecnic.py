@@ -50,6 +50,32 @@ MID_GRAY = (120, 120, 120)
 LINE_GRAY = (225, 225, 225)
 GREEN = (34, 197, 94)
 
+# Temes de color: la mateixa maqueta, pero alternant el fons (blanc / vermell /
+# negre) per donar varietat visual entre series sense canviar el disseny.
+THEMES = {
+    "blanc": dict(
+        bg=WHITE, border=RED, kicker=RED, title1=BLACK, title2=RED,
+        subtitle=DARK_GRAY, divider=LINE_GRAY, rule=BLACK, footer=BLACK,
+        opt_circle=RED, opt_text=BLACK,
+        box_bg=BLACK, box_title=WHITE, box_text=(225, 225, 225),
+        icon_bg=WHITE, icon_fg=RED,
+    ),
+    "vermell": dict(
+        bg=RED, border=BLACK, kicker=WHITE, title1=WHITE, title2=BLACK,
+        subtitle=(250, 210, 214), divider=(224, 110, 122), rule=WHITE, footer=WHITE,
+        opt_circle=BLACK, opt_text=WHITE,
+        box_bg=BLACK, box_title=WHITE, box_text=(225, 225, 225),
+        icon_bg=WHITE, icon_fg=RED,
+    ),
+    "negre": dict(
+        bg=BLACK, border=RED, kicker=RED, title1=WHITE, title2=RED,
+        subtitle=(210, 210, 210), divider=(70, 70, 70), rule=WHITE, footer=WHITE,
+        opt_circle=RED, opt_text=WHITE,
+        box_bg=WHITE, box_title=BLACK, box_text=(50, 50, 50),
+        icon_bg=BLACK, icon_fg=RED,
+    ),
+}
+
 FONT_DIR = "/usr/share/fonts/truetype/liberation"
 F_BOLD = os.path.join(FONT_DIR, "LiberationSans-Bold.ttf")
 F_REG = os.path.join(FONT_DIR, "LiberationSans-Regular.ttf")
@@ -94,11 +120,11 @@ def draw_multiline(draw, xy, lines, f, fill, line_gap=8):
     return y
 
 
-def draw_frame(canvas):
+def draw_frame(canvas, theme):
     draw = ImageDraw.Draw(canvas)
     draw.rectangle(
         [BORDER_MARGIN, BORDER_MARGIN, W - BORDER_MARGIN, H - BORDER_MARGIN],
-        outline=RED, width=BORDER_WIDTH,
+        outline=theme["border"], width=BORDER_WIDTH,
     )
 
 
@@ -136,7 +162,8 @@ def paste_logo_badge(canvas):
 
 
 def build(args):
-    canvas = Image.new("RGB", (W, H), WHITE)
+    theme = THEMES[args.theme]
+    canvas = Image.new("RGB", (W, H), theme["bg"])
     draw = ImageDraw.Draw(canvas)
     content_w = W - 2 * MARGIN
 
@@ -144,20 +171,20 @@ def build(args):
     f_kicker = font(F_BOLD, 34)
     kicker = args.kicker.upper() if args.kicker else f"QUIZ TÈCNIC · {args.tema.upper()}"
     y = 96
-    draw.text((MARGIN, y), kicker, font=f_kicker, fill=RED)
+    draw.text((MARGIN, y), kicker, font=f_kicker, fill=theme["kicker"])
     y += 58
-    draw.line([(MARGIN, y), (MARGIN + 60, y)], fill=RED, width=6)
+    draw.line([(MARGIN, y), (MARGIN + 60, y)], fill=theme["kicker"], width=6)
     y += 34
 
-    # --- Titol: primera part negra, resta vermella ---
+    # --- Titol: primera part en title1, resta en title2 ---
     f_title = font(F_BOLD, 62)
     black_lines = wrap_text(draw, args.titol_negre.upper(), f_title, content_w)
     red_lines = wrap_text(draw, args.titol_vermell.upper(), f_title, content_w)
-    y = draw_multiline(draw, (MARGIN, y), black_lines, f_title, BLACK, line_gap=6)
-    y = draw_multiline(draw, (MARGIN, y), red_lines, f_title, RED, line_gap=6)
+    y = draw_multiline(draw, (MARGIN, y), black_lines, f_title, theme["title1"], line_gap=6)
+    y = draw_multiline(draw, (MARGIN, y), red_lines, f_title, theme["title2"], line_gap=6)
     y += 26
 
-    draw.line([(MARGIN, y), (MARGIN + 60, y)], fill=BLACK, width=6)
+    draw.line([(MARGIN, y), (MARGIN + 60, y)], fill=theme["rule"], width=6)
     y += 30
 
     # --- Subtitol ---
@@ -169,7 +196,7 @@ def build(args):
     else:
         subtitol = ["TRIA LA MILLOR OPCIÓ", "I DESCOBREIX LA RESPOSTA!"]
     for line in subtitol:
-        draw.text((MARGIN, y), line.upper(), font=f_sub, fill=DARK_GRAY)
+        draw.text((MARGIN, y), line.upper(), font=f_sub, fill=theme["subtitle"])
         y += f_sub.size + 8
     y += 34
 
@@ -183,8 +210,8 @@ def build(args):
     circ_d = 60
     for i, text in enumerate(args.opcio):
         is_correct = args.mode == "resposta" and i == args.correcta
-        color = GREEN if is_correct else RED
-        text_color = GREEN if is_correct else BLACK
+        color = GREEN if is_correct else theme["opt_circle"]
+        text_color = GREEN if is_correct else theme["opt_text"]
 
         avail_w = content_w - (circ_d + 30) - (70 if is_correct else 0)
         opt_lines = wrap_text(draw, text.upper(), f_opt, avail_w)
@@ -206,11 +233,11 @@ def build(args):
 
         y += row_h + 26
         if i < len(args.opcio) - 1:
-            draw.line([(MARGIN, y - 13), (MARGIN + content_w, y - 13)], fill=LINE_GRAY, width=2)
+            draw.line([(MARGIN, y - 13), (MARGIN + content_w, y - 13)], fill=theme["divider"], width=2)
 
     y += 14
 
-    # --- Caixa negra: "Per que" en mode resposta, crida a comentar en mode pregunta ---
+    # --- Caixa: "Per que" en mode resposta, crida a comentar en mode pregunta ---
     if args.caixa_titol or args.caixa_text:
         box_title = args.caixa_titol or ""
         box_body = args.caixa_text or ""
@@ -226,41 +253,41 @@ def build(args):
     why_lines = wrap_text(draw, box_body, f_why, content_w - 170)
     box_h = 60 + len(why_lines) * (f_why.size + 10) + 30
     box = [MARGIN, y, MARGIN + content_w, y + box_h]
-    draw.rounded_rectangle(box, radius=26, fill=BLACK)
+    draw.rounded_rectangle(box, radius=26, fill=theme["box_bg"])
 
     icon_d = 60
     icx, icy = box[0] + 44, box[1] + 44
-    draw.ellipse([icx - icon_d / 2, icy - icon_d / 2, icx + icon_d / 2, icy + icon_d / 2], fill=WHITE)
+    draw.ellipse([icx - icon_d / 2, icy - icon_d / 2, icx + icon_d / 2, icy + icon_d / 2], fill=theme["icon_bg"])
     if args.mode == "resposta":
         bar_w, gap = 8, 6
         bars = [14, 22, 16]
         bx = icx - (len(bars) * bar_w + (len(bars) - 1) * gap) / 2
         base_y = icy + 16
         for h in bars:
-            draw.rectangle([bx, base_y - h, bx + bar_w, base_y], fill=RED)
+            draw.rectangle([bx, base_y - h, bx + bar_w, base_y], fill=theme["icon_fg"])
             bx += bar_w + gap
     else:
         f_qmark = font(F_BOLD, 40)
         qw = draw.textlength("?", font=f_qmark)
-        draw.text((icx - qw / 2, icy - f_qmark.size / 2 - 4), "?", font=f_qmark, fill=RED)
+        draw.text((icx - qw / 2, icy - f_qmark.size / 2 - 4), "?", font=f_qmark, fill=theme["icon_fg"])
 
     tx = box[0] + 44 + icon_d + 26
     ty = box[1] + 30
-    draw.text((tx, ty), box_title, font=f_why_title, fill=WHITE)
-    draw_multiline(draw, (tx, ty + f_why_title.size + 12), why_lines, f_why, (225, 225, 225), line_gap=10)
+    draw.text((tx, ty), box_title, font=f_why_title, fill=theme["box_title"])
+    draw_multiline(draw, (tx, ty + f_why_title.size + 12), why_lines, f_why, theme["box_text"], line_gap=10)
 
     y = box[3] + 40
 
     # --- Peu ---
-    draw.line([(MARGIN, y), (MARGIN + content_w, y)], fill=BLACK, width=3)
+    draw.line([(MARGIN, y), (MARGIN + content_w, y)], fill=theme["rule"], width=3)
     y += 24
     f_foot = font(F_BOLD, 28)
     foot = "CB GRUP BARNA — EL CLOT, BARCELONA"
     fw = draw.textlength(foot, font=f_foot)
-    draw.text((MARGIN + (content_w - fw) / 2, y), foot, font=f_foot, fill=BLACK)
+    draw.text((MARGIN + (content_w - fw) / 2, y), foot, font=f_foot, fill=theme["footer"])
 
     # --- Marc + logo: sempre per sobre de tota la resta ---
-    draw_frame(canvas)
+    draw_frame(canvas, theme)
     paste_logo_badge(canvas)
 
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
@@ -282,6 +309,8 @@ def parse_args(argv):
     p.add_argument("--caixa-titol", dest="caixa_titol", default="", help="Sobreescriu el titol de la caixa negra")
     p.add_argument("--caixa-text", dest="caixa_text", default="", help="Sobreescriu el text de la caixa negra")
     p.add_argument("--mode", choices=["pregunta", "resposta"], default="resposta")
+    p.add_argument("--theme", choices=list(THEMES.keys()), default="blanc",
+                    help="Color de fons de la peça: blanc, vermell o negre (mateix disseny)")
     p.add_argument("--out", required=True)
     args = p.parse_args(argv)
     if len(args.opcio) != 3:
