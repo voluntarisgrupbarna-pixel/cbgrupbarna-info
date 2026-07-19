@@ -157,9 +157,16 @@ def build(args):
     lines = [ln.strip() for ln in args.title.split("|") if ln.strip()]
     max_w = W - MARGE - FRAME - 60
     f_tit, size = fit_title_font(lines, max_w)
-    leading = round(size * 1.0)
+    leading = round(size * 1.06)  # aire per a accents (À, Í) entre línies
 
-    y = 600  # kicker: terç superior-centre, dins zona segura de la graella
+    # Alçada total del bloc (kicker + titular + punch) per recol·locar-lo:
+    # com més gran el bloc, més amunt comença, i el peu sempre respira.
+    f_p = font("Anton.ttf", 92)
+    ph = text_size(f_p, args.punch)[1] if args.punch else 0
+    block_h = (96 if args.kicker else 0) + leading * len(lines)
+    if args.punch:
+        block_h += round(size * 0.30) + ph + 30
+    y = max(470, min(600, 1400 - block_h - 70))
     if args.kicker:
         f_kick = font("Inter.ttf", 42)
         draw_tracked(d, (MARGE, y), args.kicker.upper(), f_kick, BLANC,
@@ -171,12 +178,11 @@ def build(args):
         d.text((MARGE + 7, y + 11), ln, font=f_tit, fill=OMBRA)
         d.text((MARGE, y), ln, font=f_tit, fill=BLANC)
         y += leading
-    y += 18
+    y += round(size * 0.30)  # gap perquè el punch no trepitgi el titular
 
     # Punch: barra vermella + text amb cursiva falsa (shear)
     if args.punch:
-        f_p = font("Anton.ttf", 92)
-        pw, ph = text_size(f_p, args.punch)
+        pw = text_size(f_p, args.punch)[0]
         layer = Image.new("RGBA", (pw + 60, ph + 20), (0, 0, 0, 0))
         dl = ImageDraw.Draw(layer)
         dl.text((30, 0), args.punch, font=f_p, fill=BLANC)
@@ -194,7 +200,7 @@ def build(args):
     f_foot = font("Inter.ttf", 40)
     foot = args.footer.upper()
     d = ImageDraw.Draw(canvas)
-    y_foot = min(y + 60, H - FRAME - 420)  # res crític al 22% inferior
+    y_foot = max(1432, y + 40)  # sota el bloc, sobre la franja de la UI
     draw_tracked(d, (MARGE, y_foot), foot, f_foot, BLANC, tracking=4)
 
     canvas.save(args.out, quality=92)
