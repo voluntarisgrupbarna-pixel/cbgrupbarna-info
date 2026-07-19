@@ -162,7 +162,12 @@ def build(args):
 
     # --- Subtitol ---
     f_sub = font(F_BOLD, 32)
-    subtitol = args.subtitol if args.subtitol else ["TRIA LA MILLOR OPCIÓ", "I RESPON A L'ENQUESTA!"]
+    if args.subtitol:
+        subtitol = args.subtitol
+    elif args.mode == "pregunta":
+        subtitol = ["TRIA LA TEVA OPCIÓ", "I COMENTA-LA AQUÍ SOTA!"]
+    else:
+        subtitol = ["TRIA LA MILLOR OPCIÓ", "I DESCOBREIX LA RESPOSTA!"]
     for line in subtitol:
         draw.text((MARGIN, y), line.upper(), font=f_sub, fill=DARK_GRAY)
         y += f_sub.size + 8
@@ -205,7 +210,7 @@ def build(args):
 
     y += 14
 
-    # --- Caixa negra: "Per que" en mode resposta, crida a votar en mode pregunta ---
+    # --- Caixa negra: "Per que" en mode resposta, crida a comentar en mode pregunta ---
     if args.caixa_titol or args.caixa_text:
         box_title = args.caixa_titol or ""
         box_body = args.caixa_text or ""
@@ -213,9 +218,8 @@ def build(args):
         box_title = "MOLT BÉ!"
         box_body = args.perque
     else:
-        box_title = "VOTA ARA!"
-        box_body = ("Vota a l'enquesta, comenta A, B o C i dona-li like "
-                    "perquè fem aquesta sèrie!")
+        box_title = "DIGUES LA TEVA!"
+        box_body = "Comenta A, B o C aquí sota i dona-li like si vols que fem aquesta sèrie!"
 
     f_why_title = font(F_BOLD, 38)
     f_why = font(F_REG, 32)
