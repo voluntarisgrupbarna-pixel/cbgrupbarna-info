@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E31E24">
+<title>Test del Entrenador · Nivel 1 · CB Grup Barna</title>
+<meta name="description" content="Ponte a prueba: 30 preguntas tipo test sobre reglamento, técnica, táctica, metodología y seguridad del Manual del Entrenador Nivel 1 del CB Grup Barna. Descubre tu nivel al momento.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://cbgrupbarna.info/manual-entrenador/test/">
+<meta property="og:site_name" content="CB Grup Barna">
+<meta property="og:title" content="Test del Entrenador · Nivel 1 · CB Grup Barna">
+<meta property="og:description" content="30 preguntas para poner a prueba tu nivel antes del curso de Entrenador/a Nivel 1. ¿Cuánto sacas?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbgrupbarna.info/manual-entrenador/test/">
+<meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
+<link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R6XYR7G1WF', { send_page_view: true, page_title: document.title, page_location: location.href });
+</script>
+<style>
+:root{
+  --rojo:#E31E24; --amarillo:#FFD600; --verde:#22c55e; --tinta:#111114; --fondo:#FAFAF7;
+  --gris:#5a5a60; --linea:#e4e2dc; --oscuro:#0f0f0f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--fondo);color:var(--tinta);line-height:1.6;min-height:100svh}
+.bebas{font-family:'Bebas Neue',sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:20px 18px 60px;min-height:100svh;display:flex;flex-direction:column}
+
+/* topbar */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:6px 0 18px}
+.topbar a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--tinta);font-family:'Bebas Neue',sans-serif;letter-spacing:.05em;font-size:15px}
+.topbar img{width:30px;height:30px;object-fit:contain}
+.scorepill{background:var(--oscuro);color:var(--amarillo);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.05em;padding:6px 14px;border-radius:999px}
+
+/* ══ PANTALLA INICIO ══ */
+#pantalla-inicio{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:20px 0}
+#pantalla-inicio .emoji-grande{font-size:64px;margin-bottom:6px}
+#pantalla-inicio .kicker{font-family:'Bebas Neue',sans-serif;color:var(--rojo);font-size:17px;letter-spacing:.22em}
+#pantalla-inicio h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(46px,12vw,72px);line-height:.92;margin:10px 0}
+#pantalla-inicio p{color:var(--gris);font-size:16px;max-width:440px;margin:0 auto 26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--rojo);color:#fff;text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;padding:14px 38px;border-radius:8px;border:none;cursor:pointer;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn.secundario{background:transparent;color:var(--tinta);border:2px solid var(--tinta)}
+.btn.grande{width:100%;padding:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+.chip{background:#fff;border:1px solid var(--linea);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--gris)}
+
+/* ══ QUIZ ══ */
+#pantalla-quiz{display:none;flex:1;flex-direction:column}
+.progreso-track{height:8px;background:var(--linea);border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progreso-fill{height:100%;background:var(--rojo);width:0%;transition:width .35s ease}
+.progreso-info{display:flex;justify-content:space-between;font-size:13px;color:var(--gris);font-weight:600;margin-bottom:22px}
+.cap-tag{display:inline-block;background:var(--oscuro);color:var(--amarillo);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;padding:4px 12px;border-radius:5px;margin-bottom:14px}
+.pregunta-txt{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,6vw,32px);line-height:1.08;margin-bottom:24px}
+.opciones{display:flex;flex-direction:column;gap:12px}
+.opcion{text-align:left;background:#fff;border:2px solid var(--linea);border-radius:12px;padding:16px 18px;font-size:16px;font-weight:600;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:12px}
+.opcion:hover{border-color:var(--tinta)}
+.opcion .letra{flex:none;width:30px;height:30px;border-radius:50%;background:var(--fondo);border:2px solid var(--linea);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:15px}
+.opcion.correcta{border-color:var(--verde);background:#f0fdf4}
+.opcion.correcta .letra{background:var(--verde);border-color:var(--verde);color:#fff}
+.opcion.incorrecta{border-color:var(--rojo);background:#fef2f2}
+.opcion.incorrecta .letra{background:var(--rojo);border-color:var(--rojo);color:#fff}
+.opcion[disabled]{cursor:default}
+.opcion[disabled]:not(.correcta):not(.incorrecta){opacity:.45}
+
+.feedback{display:none;margin-top:18px;border-radius:12px;padding:16px 18px;font-size:14.5px}
+.feedback.ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+.feedback.ko{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.feedback b{display:block;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.03em;margin-bottom:4px}
+.feedback .cap-link{display:inline-block;margin-top:8px;font-size:13px;color:inherit;text-decoration:underline;opacity:.85}
+
+.siguiente-wrap{margin-top:22px;display:none}
+
+/* ══ RESULTADO ══ */
+#pantalla-resultado{display:none;flex:1;flex-direction:column;justify-content:center;text-align:center;padding:20px 0}
+.resultado-emoji{font-size:72px;margin-bottom:6px}
+.resultado-score{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,22vw,120px);line-height:.85;color:var(--rojo)}
+.resultado-score span{font-size:.35em;color:var(--tinta)}
+.resultado-tag{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,6vw,34px);letter-spacing:.04em;margin:6px 0 14px}
+.resultado-desc{color:var(--gris);max-width:440px;margin:0 auto 26px;font-size:15.5px}
+.barra-resumen{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;max-width:420px;margin:0 auto 28px}
+.barra-resumen span{width:14px;height:14px;border-radius:4px}
+.barra-resumen span.si{background:var(--verde)}
+.barra-resumen span.no{background:var(--rojo)}
+.resultado-botones{display:flex;flex-direction:column;gap:12px;max-width:340px;margin:0 auto}
+
+footer.pie{text-align:center;padding:26px 0 0;color:var(--gris);font-size:13px}
+footer.pie a{color:var(--tinta);font-weight:700;text-decoration:none}
+
+/* ══ CAPTURA DE DATOS ══ */
+#pantalla-datos{display:none;flex:1;flex-direction:column;justify-content:center;text-align:center;padding:20px 0}
+#pantalla-datos .captura-emoji{font-size:56px;margin-bottom:4px}
+#pantalla-datos h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,8vw,48px);line-height:.95;margin-bottom:8px}
+#pantalla-datos>p{color:var(--gris);font-size:15px;max-width:420px;margin:0 auto 22px}
+#form-datos{display:flex;flex-direction:column;gap:12px;max-width:380px;margin:0 auto;text-align:left}
+#form-datos input[type=text],#form-datos input[type=email],#form-datos input[type=tel]{
+  font-family:'Inter',sans-serif;font-size:16px;padding:13px 16px;border-radius:9px;border:2px solid var(--linea);background:#fff;color:var(--tinta)
+}
+#form-datos input:focus{outline:none;border-color:var(--rojo)}
+.consent-check{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gris);line-height:1.5;margin-top:4px}
+.consent-check input{flex:none;width:18px;height:18px;margin-top:2px}
+.consent-check button{background:none;border:none;padding:0;font:inherit;color:var(--tinta);font-weight:700;text-decoration:underline;cursor:pointer}
+.premio-nota{background:#fffbea;border:1px solid #FFD600;border-radius:10px;padding:12px 14px;font-size:13.5px;color:#78350f;margin-top:2px}
+
+dialog#modal-legal{max-width:520px;width:92%;border:none;border-radius:14px;padding:0;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog#modal-legal::backdrop{background:rgba(0,0,0,.55)}
+.legal-inner{padding:26px 24px}
+.legal-inner h3{font-family:'Bebas Neue',sans-serif;font-size:26px;margin-bottom:12px}
+.legal-inner p{font-size:14px;color:var(--gris);margin-bottom:10px}
+.legal-inner button{margin-top:8px}
+
+.envio-error{display:none;color:var(--rojo);font-size:13px;margin-top:4px}
+
+@media (max-width:420px){
+  .opcion{padding:14px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="/manual-entrenador/"><img src="/logo.png" alt="CB Grup Barna">MANUAL DEL ENTRENADOR</a>
+    <span class="scorepill" id="scorepill" style="display:none">0 / 30</span>
+  </div>
+
+  <!-- ═══ INICIO ═══ -->
+  <section id="pantalla-inicio">
+    <div class="emoji-grande">🏀</div>
+    <div class="kicker">¿ESTÁS LISTO/A?</div>
+    <h1>TEST DEL<br>ENTRENADOR</h1>
+    <p>30 preguntas sobre reglamento, técnica, táctica, metodología y seguridad — todo lo que trabajamos en el Manual del Entrenador Nivel 1 del club. Descubre tu nivel al momento, con explicación en cada respuesta.</p>
+    <button class="btn" id="btn-empezar">EMPEZAR EL TEST 🏀</button>
+    <div class="chips">
+      <span class="chip">⏱️ 5 minutos</span>
+      <span class="chip">✅ Corrección al instante</span>
+      <span class="chip">🔁 Puedes repetirlo</span>
+    </div>
+  </section>
+
+  <!-- ═══ QUIZ ═══ -->
+  <section id="pantalla-quiz">
+    <div class="progreso-track"><div class="progreso-fill" id="progreso-fill"></div></div>
+    <div class="progreso-info"><span id="progreso-txt">Pregunta 1/30</span><span id="progreso-pct">0%</span></div>
+    <span class="cap-tag" id="cap-tag">CAPÍTULO 2</span>
+    <h2 class="pregunta-txt" id="pregunta-txt"></h2>
+    <div class="opciones" id="opciones"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="siguiente-wrap" id="siguiente-wrap">
+      <button class="btn grande" id="btn-siguiente">SIGUIENTE →</button>
+    </div>
+  </section>
+
+  <!-- ═══ CAPTURA DE DATOS ═══ -->
+  <section id="pantalla-datos">
+    <div class="captura-emoji">🎉</div>
+    <h2>¡YA CASI ESTÁ!</h2>
+    <p>Deja tus datos para ver tu resultado. Si superas las 15 respuestas correctas, entras en el <strong>sorteo de un balón oficial del CB Grup Barna</strong> 🏀</p>
+    <form id="form-datos">
+      <input type="text" id="dato-nombre" placeholder="Nombre y apellidos" autocomplete="name" required>
+      <input type="email" id="dato-email" placeholder="Email" autocomplete="email" required>
+      <input type="tel" id="dato-movil" placeholder="Móvil" autocomplete="tel" required>
+      <label class="consent-check">
+        <input type="checkbox" id="dato-consent" required>
+        <span>He leído y acepto el <button type="button" id="btn-legal">tratamiento de mis datos y las bases del sorteo</button>. Si tengo menos de 14 años, estos son los datos de contacto de mi madre, padre o tutor/a.</span>
+      </label>
+      <div class="envio-error" id="envio-error">No se ha podido guardar tu resultado. Vuelve a intentarlo.</div>
+      <button class="btn grande" type="submit" id="btn-enviar-datos">VER MI RESULTADO 🎉</button>
+    </form>
+  </section>
+
+  <!-- ═══ RESULTADO ═══ -->
+  <section id="pantalla-resultado">
+    <div class="resultado-emoji" id="resultado-emoji">🏆</div>
+    <div class="resultado-score" id="resultado-score">0<span>/30</span></div>
+    <div class="resultado-tag" id="resultado-tag"></div>
+    <p class="resultado-desc" id="resultado-desc"></p>
+    <div class="barra-resumen" id="barra-resumen"></div>
+    <p class="premio-nota" id="premio-nota" style="display:none">🏀 ¡Estás dentro del sorteo del balón oficial del club! Te avisaremos por email o móvil si ganas.</p>
+    <div class="resultado-botones">
+      <button class="btn grande" id="btn-compartir">📤 COMPARTIR MI RESULTADO</button>
+      <button class="btn grande secundario" id="btn-repetir">🔁 REPETIR EL TEST</button>
+      <a class="btn grande secundario" href="/manual-entrenador/">📖 REPASAR EL MANUAL</a>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <a href="/">CB GRUP BARNA</a> · Barcelona · des de 1965 — Material de preparación del club
+  </footer>
+</div>
+
+<dialog id="modal-legal">
+  <div class="legal-inner">
+    <h3>Privacidad y bases del sorteo</h3>
+    <p><strong>Responsable:</strong> CB Grup Barna. <strong>Finalidad:</strong> guardar tu resultado del Test del Entrenador y contactarte si resultas ganador/a del sorteo. Tus datos no se ceden a terceros ni se usan con ningún otro fin.</p>
+    <p><strong>Sorteo:</strong> participan las personas que completen el test con 15 aciertos o más (de 30) y dejen sus datos. Se sorteará 1 balón oficial del club entre todas ellas; el resultado se comunicará por el email o móvil facilitado.</p>
+    <p><strong>Tus derechos:</strong> puedes pedir en cualquier momento que borremos tus datos escribiendo a <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>.</p>
+    <p><strong>Menores de 14 años:</strong> según la normativa española, si tienes menos de 14 años necesitas el consentimiento de un adulto responsable — usa los datos de contacto de tu madre, padre o tutor/a.</p>
+    <button class="btn secundario" id="btn-cerrar-legal" type="button">Cerrar</button>
+  </div>
+</dialog>
+
+<script type="module">
+// ── Conexión a Supabase (base de datos del club) ──
+// Ana: sustituye estos dos valores por la URL y la clave pública ("anon key")
+// de tu proyecto de Supabase (Settings → API). Ambas son seguras de publicar
+// aquí: el acceso real lo controlan las políticas RLS de la tabla, no esta clave.
+const SUPABASE_URL = '__SUPABASE_URL__';
+const SUPABASE_ANON_KEY = '__SUPABASE_ANON_KEY__';
+
+window.__guardarResultadoTest = async function(row){
+  if (!SUPABASE_URL.startsWith('http') || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY.startsWith('__')) {
+    console.warn('Supabase no configurado todavía: el resultado no se ha guardado.');
+    return { ok:false, reason:'not-configured' };
+  }
+  try {
+    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { error } = await supabase.from('test_entrenador_respostes').insert(row);
+    if (error) { console.error(error); return { ok:false, reason:error.message }; }
+    return { ok:true };
+  } catch(e) {
+    console.error(e);
+    return { ok:false, reason:String(e) };
+  }
+};
+</script>
+<script>
+const UMBRAL_SORTEO = 15;
+const PREGUNTAS = [
+{cap:2, q:"¿Cuánto tiempo tiene un equipo para lanzar a canasta desde que obtiene la posesión?", ops:["14 segundos","24 segundos","30 segundos"], c:1, exp:"24 segundos. Y 8 segundos para cruzar el medio campo."},
+{cap:2, q:"¿Cuántos puntos vale una canasta en juego en minibásquet?", ops:["1 punto","2 puntos siempre","2 o 3 según la distancia"], c:1, exp:"2 puntos siempre — no existe la línea de 3. El tiro libre vale 1."},
+{cap:2, q:"¿Qué tipo de defensa es obligatoria en minibásquet?", ops:["Zona","Individual","Mixta (zona + individual)"], c:1, exp:"Individual: desarrolla la responsabilidad y la técnica defensiva de cada niño/a. La zona la esconde."},
+{cap:2, q:"¿Con cuántas faltas personales queda eliminado un jugador?", ops:["Con la 4ª","Con la 5ª","Con la 6ª"], c:1, exp:"Con la 5ª falta personal, el jugador queda eliminado del partido."},
+{cap:2, q:"¿A partir de qué falta de equipo en un periodo se lanzan 2 tiros libres?", ops:["3ª falta de equipo","4ª falta de equipo","5ª falta de equipo"], c:2, exp:"A partir de la 5ª falta de equipo del periodo, en faltas al atacante sin acción de tiro."},
+{cap:3, q:"En la parada en dos tiempos, ¿cuál es el pie de pivote?", ops:["El primer pie que contacta con el suelo","El segundo pie que contacta","Cualquiera de los dos, a elegir"], c:0, exp:"El primer pie que apoya. El jugador puede girar sobre él, pero no desplazarlo."},
+{cap:3, q:"¿Qué es la posición de \"triple amenaza\"?", ops:["Solo puedo tirar desde ahí","Desde ahí puedo tirar, pasar o botar","Solo sirve para defender"], c:1, exp:"La posición con balón, de cara al aro, desde la que puedo decidir tirar, pasar o botar."},
+{cap:4, q:"¿Con qué parte de la mano se bota correctamente el balón?", ops:["Con la palma","Con los dedos","Con el puño cerrado"], c:1, exp:"Con los dedos y el trabajo de la muñeca — nunca golpeando con la palma. Y sin mirar el balón."},
+{cap:4, q:"Tienes un defensor pegado a ti. ¿Qué bote usas?", ops:["Bote alto, empujado hacia adelante","Bote bajo, cuerpo entre balón y defensor","Bote con las dos manos a la vez"], c:1, exp:"Bote de protección: bajo (por debajo de la rodilla) y con el cuerpo entre el balón y el defensor."},
+{cap:5, q:"¿Dónde debe botar aproximadamente el pase picado?", ops:["Justo delante del pasador","A 2/3 de la distancia hacia el receptor","A la mitad exacta, siempre"], c:1, exp:"A unos 2/3 de la distancia, para que llegue a la altura de la cadera del receptor."},
+{cap:5, q:"Acabas de coger un rebote y quieres iniciar el contraataque rápido. ¿Qué pase usas?", ops:["De pecho","Por encima de la cabeza","Picado"], c:1, exp:"Por encima de la cabeza (o de béisbol si es larga distancia): el primer pase clásico de contraataque."},
+{cap:6, q:"En la regla BEEF del tiro, ¿qué significa la segunda \"E\" (Eyes)?", ops:["El equilibrio de las piernas","Los ojos fijos en el aro","El codo alineado con el aro"], c:1, exp:"Eyes: la vista fija en el mismo punto del aro durante todo el gesto."},
+{cap:6, q:"¿De dónde debe salir la fuerza del tiro en un niño o niña?", ops:["De los brazos","De las piernas, en cadena hasta los dedos","De la muñeca únicamente"], c:1, exp:"De las piernas. Si no llega al aro, se acerca la distancia — nunca se deforma la mecánica."},
+{cap:6, q:"En una entrada a canasta por el lado derecho, ¿cuáles son los apoyos?", ops:["Derecha, luego izquierda","Izquierda, luego derecha","Los dos pies a la vez"], c:0, exp:"Último bote con apoyo derecho, impulso con el izquierdo, finalización con la mano derecha."},
+{cap:7, q:"¿Qué es el \"triángulo defensivo\"?", ops:["Ver solo al balón, ignorando a mi par","Ver solo a mi jugador, ignorando el balón","Ver balón y par a la vez, entre ambos y la canasta"], c:2, exp:"Posición del defensor en ayuda: ve balón y par a la vez, situado entre los dos y la canasta."},
+{cap:7, q:"¿Cómo se sitúa el defensor del jugador con balón?", ops:["Pegado, sin dejar ningún espacio","A un brazo de distancia, entre el balón y la canasta","Detrás del atacante"], c:1, exp:"A distancia de un brazo, entre balón y canasta, molestando el bote y el tiro sin cometer falta."},
+{cap:8, q:"¿Qué va primero en un buen rebote defensivo?", ops:["Mirar el balón en el aire","Bloquear (box-out) al rival","Correr hacia el ataque"], c:1, exp:"\"Primero el cuerpo, después el balón\": bloqueo (box-out) antes de ir a por el rebote."},
+{cap:9, q:"¿Qué es el \"spacing\" (espaciado) en ataque?", ops:["Los atacantes juntos, cerca del aro","Los atacantes separados unos 4-5 metros","Todos pegados a la línea de fondo"], c:1, exp:"Ocupar el campo separados dificulta las ayudas defensivas del rival."},
+{cap:9, q:"¿Qué sistema de ataque cerrado conviene enseñar a un equipo mini?", ops:["Uno con jugadas fijas de pizarra","Ninguno cerrado: conceptos como espaciado y pasar y cortar","Solo jugadas de contraataque memorizadas"], c:1, exp:"En formación se enseñan conceptos abiertos (espaciado, pasar y cortar, atacar ventajas), no sistemas cerrados."},
+{cap:10, q:"¿Qué estilo de enseñanza usa preguntas y situaciones-problema para que el jugador decida?", ops:["Instrucción directa","Descubrimiento guiado","Asignación de tareas"], c:1, exp:"Descubrimiento guiado: ideal para trabajar la toma de decisiones."},
+{cap:10, q:"¿Qué es el feedback \"sándwich\"?", ops:["Solo corregir el error, sin más","Refuerzo + corrección + ánimo","Solo elogiar, nunca corregir"], c:1, exp:"Refuerzo + corrección + ánimo: enseña sin desmotivar."},
+{cap:11, q:"¿Qué fase cierra siempre una sesión bien diseñada?", ops:["El calentamiento","La parte principal","La vuelta a la calma"], c:2, exp:"Vuelta a la calma: tiros libres, estiramientos suaves y charla breve de cierre."},
+{cap:11, q:"¿Qué indica que una sesión está bien diseñada?", ops:["Muchas filas de niños esperando turno","Tiempo de práctica motriz alto (tocan balón casi todo el rato)","Explicaciones largas antes de cada ejercicio"], c:1, exp:"El tiempo de práctica motriz alto y la máxima participación son el indicador clave de calidad."},
+{cap:12, q:"Las \"fases sensibles\" de la coordinación y la técnica, ¿cuándo tienen su edad de oro?", ops:["Después de la pubertad","Antes de la pubertad","Da igual la edad, siempre igual"], c:1, exp:"Antes de la pubertad — por eso en categorías mini se prioriza técnica y coordinación, no físico."},
+{cap:13, q:"¿Cómo se trabaja la fuerza en edades de formación?", ops:["Con pesas y cargas externas desde pequeños","Con el propio peso corporal (saltos, juegos)","No se trabaja nunca antes de los 16 años"], c:1, exp:"Con el propio peso corporal. Las cargas externas estructuradas llegan tras la pubertad, supervisadas."},
+{cap:14, q:"¿Qué es la motivación intrínseca?", ops:["Jugar por premios o presión externa","Jugar porque disfruto y quiero mejorar","Jugar solo para ganar trofeos"], c:1, exp:"Intrínseca: el motor es el disfrute y la mejora personal. Es la que debe alimentar la formación."},
+{cap:14, q:"¿Cuáles son las causas principales del abandono deportivo infantil?", ops:["Entrenar pocos días a la semana","Falta de diversión, presión por resultados y no jugar nunca","Tener demasiados compañeros de equipo"], c:1, exp:"Falta de diversión, presión por el resultado y no jugar (poco minutaje) son las causas nº1 del abandono."},
+{cap:15, q:"Un jugador recibe un golpe en la cabeza y está mareado. ¿Qué haces?", ops:["Sigue jugando si dice que está bien","Lo retiras siempre y no vuelve a jugar ese día","Solo lo retiras si hay sangre"], c:1, exp:"Ante cualquier golpe en la cabeza, se retira siempre. Si hay pérdida de conciencia, vómitos o confusión → 112."},
+{cap:15, q:"¿Qué significa la conducta \"PAS\" en primeros auxilios?", ops:["Parar, Analizar, Salir","Proteger, Avisar, Socorrer","Presionar, Actuar, Silenciar"], c:1, exp:"Proteger (a la víctima y al grupo) → Avisar (112) → Socorrer, dentro de tu formación."},
+{cap:15, q:"¿Qué documento legal necesita todo entrenador/a que trabaja con menores en España?", ops:["Carnet de conducir","Certificado negativo de delitos sexuales","Título universitario"], c:1, exp:"El certificado negativo de delitos sexuales es obligación legal para trabajar con menores."}
+];
+
+let idx = 0, score = 0, respuestas = [];
+
+const $ = id => document.getElementById(id);
+const inicio = $('pantalla-inicio'), quiz = $('pantalla-quiz'), datos = $('pantalla-datos'), resultado = $('pantalla-resultado');
+
+$('btn-empezar').addEventListener('click', () => {
+  inicio.style.display = 'none';
+  quiz.style.display = 'flex';
+  $('scorepill').style.display = 'inline-block';
+  renderPregunta();
+});
+
+function renderPregunta(){
+  const p = PREGUNTAS[idx];
+  $('cap-tag').textContent = 'CAPÍTULO ' + p.cap;
+  $('pregunta-txt').textContent = p.q;
+  $('progreso-txt').textContent = 'Pregunta ' + (idx+1) + '/' + PREGUNTAS.length;
+  $('progreso-pct').textContent = Math.round(((idx)/PREGUNTAS.length)*100) + '%';
+  $('progreso-fill').style.width = ((idx)/PREGUNTAS.length*100) + '%';
+  $('scorepill').textContent = score + ' / ' + PREGUNTAS.length;
+
+  const cont = $('opciones');
+  cont.innerHTML = '';
+  const letras = ['A','B','C'];
+  p.ops.forEach((op, i) => {
+    const b = document.createElement('button');
+    b.className = 'opcion';
+    b.innerHTML = '<span class="letra">'+letras[i]+'</span><span>'+op+'</span>';
+    b.addEventListener('click', () => responder(i));
+    cont.appendChild(b);
+  });
+
+  $('feedback').style.display = 'none';
+  $('feedback').className = 'feedback';
+  $('siguiente-wrap').style.display = 'none';
+}
+
+function responder(i){
+  const p = PREGUNTAS[idx];
+  const ok = (i === p.c);
+  if (ok) score++;
+  respuestas.push({cap: p.cap, ok: ok});
+
+  const botones = document.querySelectorAll('.opcion');
+  botones.forEach((b, j) => {
+    b.disabled = true;
+    if (j === p.c) b.classList.add('correcta');
+    else if (j === i) b.classList.add('incorrecta');
+  });
+
+  const fb = $('feedback');
+  fb.className = 'feedback ' + (ok ? 'ok' : 'ko');
+  fb.innerHTML = '<b>' + (ok ? '¡Correcto! 🙌' : 'No era esa 🤔') + '</b>' + p.exp +
+    '<a class="cap-link" href="/manual-entrenador/#c'+p.cap+'" target="_blank" rel="noopener">Repasar el capítulo '+p.cap+' →</a>';
+  fb.style.display = 'block';
+
+  $('scorepill').textContent = score + ' / ' + PREGUNTAS.length;
+  $('siguiente-wrap').style.display = 'block';
+}
+
+$('btn-siguiente').addEventListener('click', () => {
+  idx++;
+  if (idx < PREGUNTAS.length) {
+    renderPregunta();
+    window.scrollTo({top:0, behavior:'smooth'});
+  } else {
+    mostrarCaptura();
+  }
+});
+
+function mostrarCaptura(){
+  quiz.style.display = 'none';
+  datos.style.display = 'flex';
+  window.scrollTo({top:0});
+}
+
+$('btn-legal').addEventListener('click', () => $('modal-legal').showModal());
+$('btn-cerrar-legal').addEventListener('click', () => $('modal-legal').close());
+
+$('form-datos').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = $('btn-enviar-datos');
+  const errorBox = $('envio-error');
+  errorBox.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'GUARDANDO…';
+
+  const nombre = $('dato-nombre').value.trim();
+  const email = $('dato-email').value.trim();
+  const movil = $('dato-movil').value.trim();
+  const participaSorteo = score >= UMBRAL_SORTEO;
+
+  await window.__guardarResultadoTest({
+    nombre, email, movil,
+    puntuacion: score,
+    total_preguntas: PREGUNTAS.length,
+    detalle: respuestas,
+    participa_sorteo: participaSorteo,
+    consentimiento: true
+  });
+  // Mostramos el resultado tanto si el guardado va bien como si falla la conexión:
+  // no queremos que un problema técnico le arruine la experiencia a quien ha jugado.
+
+  btn.disabled = false;
+  btn.textContent = 'VER MI RESULTADO 🎉';
+  mostrarResultado(participaSorteo);
+});
+
+function mostrarResultado(participaSorteo){
+  datos.style.display = 'none';
+  resultado.style.display = 'flex';
+  $('scorepill').style.display = 'none';
+  $('premio-nota').style.display = participaSorteo ? 'block' : 'none';
+
+  const total = PREGUNTAS.length;
+  $('resultado-score').innerHTML = score + '<span>/' + total + '</span>';
+
+  let emoji, tag, desc;
+  if (score >= 27) { emoji='🏆'; tag='NIVEL ÉLITE'; desc='Te sabes el manual casi entero. Estás listo/a para plantarte en el examen de la FCBQ sin miedo — y para el banquillo del club.'; }
+  else if (score >= 22) { emoji='🥇'; tag='MUY BIEN ENCAMINADO/A'; desc='Dominas los fundamentos. Repasa las que has fallado y llegarás sobrado/a al Curs de Formació.'; }
+  else if (score >= 15) { emoji='💪'; tag='BUENA BASE, A SEGUIR'; desc='Ya tienes la mitad del camino hecho. Repasa los capítulos donde has fallado más y repite el test en unos días.'; }
+  else if (score >= 8) { emoji='📚'; tag='TOCA ESTUDIAR UN POCO MÁS'; desc='Vas arrancando. Lee el manual completo con calma, capítulo a capítulo, y vuelve a intentarlo.'; }
+  else { emoji='🌱'; tag='ES SOLO EL PRINCIPIO'; desc='Todo el mundo empieza así. Abre el manual, léelo de cabo a rabo y este test te va a saber a poco la próxima vez.'; }
+
+  $('resultado-emoji').textContent = emoji;
+  $('resultado-tag').textContent = tag;
+  $('resultado-desc').textContent = desc;
+
+  const barra = $('barra-resumen');
+  barra.innerHTML = '';
+  respuestas.forEach(r => {
+    const s = document.createElement('span');
+    s.className = r.ok ? 'si' : 'no';
+    barra.appendChild(s);
+  });
+}
+
+$('btn-repetir').addEventListener('click', () => {
+  idx = 0; score = 0; respuestas = [];
+  $('form-datos').reset();
+  resultado.style.display = 'none';
+  inicio.style.display = 'flex';
+  window.scrollTo({top:0});
+});
+
+$('btn-compartir').addEventListener('click', async () => {
+  const total = PREGUNTAS.length;
+  const texto = 'He sacado ' + score + '/' + total + ' en el Test del Entrenador Nivel 1 del CB Grup Barna 🏀 ¿Te atreves a superarme? cbgrupbarna.info/manual-entrenador/test/';
+  if (navigator.share) {
+    try { await navigator.share({ title: 'Test del Entrenador · CB Grup Barna', text: texto, url: 'https://cbgrupbarna.info/manual-entrenador/test/' }); return; } catch(e){}
+  }
+  try {
+    await navigator.clipboard.writeText(texto);
+    const btn = $('btn-compartir');
+    const original = btn.textContent;
+    btn.textContent = '✅ ¡Copiado! Pégalo donde quieras';
+    setTimeout(() => btn.textContent = original, 2200);
+  } catch(e) {
+    alert(texto);
+  }
+});
+</script>
+</body>
+</html>
