@@ -9,11 +9,16 @@ Patro fix (definit per l'usuari, no negociable, val per a totes les peces d'aque
   - Foto real d'un jugador/a, ample de contingut, MAI retallada per dalt (el cap/cara no es
     talla mai mai: si la foto es massa alta pel forat, el retall nomes menja per la part
     de baix, no per dalt).
-  - 3 opcions A/B/C: cercle vermell + text negre per les incorrectes, cercle verd + text
-    verd + check per la correcta.
-  - Caixa negra arrodonida "MOLT BE!" amb l'explicacio de la resposta.
+  - 3 opcions A/B/C.
   - Peu "CB GRUP BARNA — EL CLOT, BARCELONA".
   - El logo del club sempre surt sencer a la dreta (badge fix a dalt a la dreta, mai tapat).
+
+Dos modes (mateixos arguments, nomes canvia --mode):
+  --mode pregunta  -> les 3 opcions surten totes neutres (cercle vermell, sense marcar
+                      la correcta) i la caixa negra conte una crida a votar a l'enquesta
+                      nativa d'Instagram. Es publica primer, per fer participar la gent.
+  --mode resposta  -> la mateixa peca pero amb la opcio correcta en verd + check, i la
+                      caixa negra amb el "Per que". Es publica en una story posterior.
 
 Us:
   python3 story_quiz_tecnic.py \
@@ -26,7 +31,8 @@ Us:
       --opcio "Peus molt oberts i en parallel" \
       --correcta 2 \
       --perque "La posicio correcta dels peus dona estabilitat, equilibri i et permet un bon control del tir." \
-      --out out/quiz_tir_01.png
+      --mode pregunta \
+      --out out/quiz_tir_01_pregunta.png
 """
 import argparse
 import os
@@ -170,7 +176,7 @@ def build(args):
     labels = ["A", "B", "C"]
     circ_d = 60
     for i, text in enumerate(args.opcio):
-        is_correct = i == args.correcta
+        is_correct = args.mode == "resposta" and i == args.correcta
         color = GREEN if is_correct else RED
         text_color = GREEN if is_correct else BLACK
 
@@ -198,10 +204,17 @@ def build(args):
 
     y += 14
 
-    # --- Caixa "MOLT BE!" ---
+    # --- Caixa negra: "Per que" en mode resposta, crida a votar en mode pregunta ---
+    if args.mode == "resposta":
+        box_title = "MOLT BÉ!"
+        box_body = args.perque
+    else:
+        box_title = "VOTA ARA!"
+        box_body = "Tria la teva opció a l'enquesta d'aquesta mateixa història."
+
     f_why_title = font(F_BOLD, 38)
     f_why = font(F_REG, 32)
-    why_lines = wrap_text(draw, args.perque, f_why, content_w - 130)
+    why_lines = wrap_text(draw, box_body, f_why, content_w - 170)
     box_h = 60 + len(why_lines) * (f_why.size + 10) + 30
     box = [MARGIN, y, MARGIN + content_w, y + box_h]
     draw.rounded_rectangle(box, radius=26, fill=BLACK)
@@ -209,17 +222,22 @@ def build(args):
     icon_d = 60
     icx, icy = box[0] + 44, box[1] + 44
     draw.ellipse([icx - icon_d / 2, icy - icon_d / 2, icx + icon_d / 2, icy + icon_d / 2], fill=WHITE)
-    bar_w, gap = 8, 6
-    bars = [14, 22, 16]
-    bx = icx - (len(bars) * bar_w + (len(bars) - 1) * gap) / 2
-    base_y = icy + 16
-    for h in bars:
-        draw.rectangle([bx, base_y - h, bx + bar_w, base_y], fill=RED)
-        bx += bar_w + gap
+    if args.mode == "resposta":
+        bar_w, gap = 8, 6
+        bars = [14, 22, 16]
+        bx = icx - (len(bars) * bar_w + (len(bars) - 1) * gap) / 2
+        base_y = icy + 16
+        for h in bars:
+            draw.rectangle([bx, base_y - h, bx + bar_w, base_y], fill=RED)
+            bx += bar_w + gap
+    else:
+        f_qmark = font(F_BOLD, 40)
+        qw = draw.textlength("?", font=f_qmark)
+        draw.text((icx - qw / 2, icy - f_qmark.size / 2 - 4), "?", font=f_qmark, fill=RED)
 
     tx = box[0] + 44 + icon_d + 26
     ty = box[1] + 30
-    draw.text((tx, ty), "MOLT BÉ!", font=f_why_title, fill=WHITE)
+    draw.text((tx, ty), box_title, font=f_why_title, fill=WHITE)
     draw_multiline(draw, (tx, ty + f_why_title.size + 12), why_lines, f_why, (225, 225, 225), line_gap=10)
 
     y = box[3] + 40
