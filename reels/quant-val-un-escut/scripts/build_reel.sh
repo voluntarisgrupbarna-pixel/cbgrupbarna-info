@@ -5,7 +5,9 @@ cd "$(dirname "$0")/.."   # arrel de reels/quant-val-un-escut/
 FPS=30
 mkdir -p clips
 
-declare -A FR=( [s0_hook]=75 [s1_stat61]=60 [s2_stat34]=60 [s3_stat450]=66 [s4_build]=105 [s5_drop]=120 [s6_cta]=75 )
+# durades ajustades EXACTAMENT a la veu en off (ES) generada amb Higgsfield seed_audio:
+# s0=3.10s s1=2.58s s2=2.17s s3=3.08s s4=4.18s s5=2.20s s6=1.34s (+ marges + espera final de 2s a s6)
+declare -A FR=( [s0_hook]=114 [s1_stat61]=92 [s2_stat34]=80 [s3_stat450]=107 [s4_build]=140 [s5_drop]=87 [s6_cta]=106 )
 declare -A ZMAX=( [s0_hook]=1.09 [s1_stat61]=1.10 [s2_stat34]=1.10 [s3_stat450]=1.08 [s4_build]=1.04 [s5_drop]=1.06 [s6_cta]=1.00 )
 ORDER="s0_hook s1_stat61 s2_stat34 s3_stat450 s4_build s5_drop s6_cta"
 
