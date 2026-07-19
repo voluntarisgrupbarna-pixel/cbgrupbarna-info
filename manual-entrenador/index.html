@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E31E24">
+<title>Manual del Entrenador · Nivel 1 · CB Grup Barna</title>
+<meta name="description" content="Libro de preparación del CB Grup Barna para el curso de Entrenador/a de Baloncesto Nivel 1: reglamento, técnica individual, táctica, metodología, planificación, preparación física, psicología y seguridad. Con test de autoevaluación.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://cbgrupbarna.info/manual-entrenador/">
+<meta property="og:site_name" content="CB Grup Barna">
+<meta property="og:title" content="Manual del Entrenador · Nivel 1 · CB Grup Barna">
+<meta property="og:description" content="El libro del club para preparar el título de Entrenador/a de Baloncesto Nivel 1: 15 capítulos + test de autoevaluación.">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://cbgrupbarna.info/manual-entrenador/">
+<meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
+<link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R6XYR7G1WF', { send_page_view: true, page_title: document.title, page_location: location.href });
+</script>
+<style>
+:root{
+  --rojo:#E31E24; --amarillo:#FFD600; --tinta:#111114; --fondo:#FAFAF7;
+  --gris:#5a5a60; --linea:#e4e2dc; --oscuro:#0f0f0f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--fondo);color:var(--tinta);line-height:1.65;font-size:17px}
+.bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.01em}
+
+/* barra de progreso */
+#progress{position:fixed;top:0;left:0;height:4px;background:var(--rojo);width:0;z-index:99}
+
+/* ══ PORTADA ══ */
+.portada{min-height:100svh;background:var(--oscuro);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:48px 24px;position:relative;overflow:hidden}
+.portada::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(227,30,36,.35),transparent 60%)}
+.portada>*{position:relative}
+.portada img{width:110px;height:110px;object-fit:contain;margin-bottom:28px}
+.portada .kicker{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,2.5vw,24px);color:var(--amarillo);letter-spacing:.25em}
+.portada h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,12vw,150px);line-height:.92;margin:14px 0 8px}
+.portada h1 .n1{color:var(--rojo)}
+.portada .sub{max-width:560px;color:#c9c9c9;font-size:clamp(15px,2vw,18px);margin-top:14px}
+.portada .club{margin-top:36px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.15em;color:#fff}
+.portada .club span{color:var(--rojo)}
+.portada .cta{margin-top:34px;display:inline-block;background:var(--rojo);color:#fff;text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.08em;padding:12px 36px;border-radius:4px}
+.portada .cta:hover{background:#ff2b31}
+
+/* ══ LAYOUT LIBRO ══ */
+.libro{max-width:820px;margin:0 auto;padding:0 22px 80px}
+.aviso{background:#fff8dc;border-left:5px solid var(--amarillo);padding:16px 20px;border-radius:0 8px 8px 0;margin:40px 0;font-size:15px}
+.parte{margin-top:90px;padding-top:30px}
+.parte .ptag{font-family:'Bebas Neue',sans-serif;color:var(--rojo);font-size:22px;letter-spacing:.2em}
+.parte h2.ptitulo{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,64px);line-height:.95;border-bottom:5px solid var(--tinta);padding-bottom:14px}
+.cap{margin-top:64px}
+.cap h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,5vw,42px);line-height:1;margin-bottom:6px;scroll-margin-top:70px}
+.cap h3 .num{color:var(--rojo);margin-right:10px}
+.cap h4{font-family:'Bebas Neue',sans-serif;font-size:24px;margin:34px 0 8px;letter-spacing:.02em}
+.cap p{margin:14px 0}
+.cap ul,.cap ol{margin:14px 0 14px 26px}
+.cap li{margin:7px 0}
+.cap strong{font-weight:700}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}
+th{background:var(--tinta);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.05em;text-align:left;padding:10px 12px}
+td{border:1px solid var(--linea);padding:9px 12px;vertical-align:top;background:#fff}
+tr:nth-child(even) td{background:#f6f5f1}
+.clave{background:#fff;border:1px solid var(--linea);border-top:5px solid var(--rojo);border-radius:0 0 10px 10px;padding:18px 22px;margin:26px 0}
+.clave .ctag{font-family:'Bebas Neue',sans-serif;color:var(--rojo);font-size:19px;letter-spacing:.12em}
+.pista{background:var(--oscuro);color:#fff;border-radius:10px;padding:20px 24px;margin:26px 0}
+.pista .ctag{font-family:'Bebas Neue',sans-serif;color:var(--amarillo);font-size:19px;letter-spacing:.12em}
+.pista p{color:#ddd}
+
+/* índice */
+.indice{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:28px 30px;margin-top:44px}
+.indice h2{font-family:'Bebas Neue',sans-serif;font-size:34px;margin-bottom:12px}
+.indice ol{list-style:none;counter-reset:cap}
+.indice li{border-bottom:1px dashed var(--linea);padding:8px 0}
+.indice li.gr{border:0;padding-top:18px;font-family:'Bebas Neue',sans-serif;color:var(--rojo);font-size:19px;letter-spacing:.15em}
+.indice a{color:var(--tinta);text-decoration:none;font-weight:600}
+.indice a:hover{color:var(--rojo)}
+
+/* test */
+.preg{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:16px 20px;margin:14px 0}
+.preg summary{cursor:pointer;font-weight:700;list-style:none}
+.preg summary::before{content:"▸ ";color:var(--rojo)}
+.preg[open] summary::before{content:"▾ "}
+.preg .resp{margin-top:10px;padding-top:10px;border-top:1px dashed var(--linea);color:var(--gris)}
+.preg .resp b{color:var(--rojo)}
+
+/* pie */
+footer{background:var(--oscuro);color:#bbb;text-align:center;padding:44px 20px;font-size:14px}
+footer a{color:var(--amarillo);text-decoration:none}
+.volver{position:fixed;bottom:18px;right:18px;background:var(--rojo);color:#fff;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:20px;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:50}
+
+@media print{
+  #progress,.volver,.portada .cta{display:none}
+  .portada{min-height:auto;padding:60px 0}
+  body{font-size:12px;background:#fff}
+  .parte{break-before:page;margin-top:0}
+  .cap{break-inside:avoid-page}
+  .preg{break-inside:avoid}
+  .preg .resp{display:block}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- ═══════════ PORTADA ═══════════ -->
+<header class="portada">
+  <img src="/logo.png" alt="Escudo CB Grup Barna">
+  <div class="kicker">EL LIBRO DEL CLUB PARA FUTUROS ENTRENADORES Y ENTRENADORAS</div>
+  <h1>MANUAL DEL<br>ENTRENADOR<br><span class="n1">NIVEL 1</span></h1>
+  <p class="sub">Todo lo que necesitas para preparar el curso de Entrenador/a de Baloncesto de Nivel 1: reglamento, técnica, táctica, metodología, planificación, preparación física, psicología y seguridad. Con test de autoevaluación final.</p>
+  <div class="club">CB <span>GRUP BARNA</span> · BARCELONA · DES DE 1965</div>
+  <a class="cta" href="#indice">EMPEZAR A LEER ↓</a>
+</header>
+
+<main class="libro">
+
+<div class="aviso"><strong>Antes de empezar:</strong> este libro es el material de estudio y preparación del CB Grup Barna. La titulación oficial la expiden la <strong>FCBQ</strong> (Federació Catalana de Basquetbol) y la <strong>FEB</strong> a través de sus escuelas de entrenadores. Los requisitos exactos, horas, tasas y fechas de convocatoria pueden cambiar cada temporada: <strong>consulta siempre la convocatoria oficial vigente</strong> antes de matricularte. Si eres del club, habla con la coordinación deportiva: te ayudamos con la inscripción y con las prácticas.</div>
+
+<!-- ═══════════ ÍNDICE ═══════════ -->
+<nav class="indice" id="indice">
+  <h2>ÍNDICE</h2>
+  <ol>
+    <li class="gr">PARTE 0 · EL TÍTULO</li>
+    <li><a href="#c0">Capítulo 0 — Cómo se saca el título de Nivel 1</a></li>
+    <li class="gr">PARTE I · EL ENTRENADOR</li>
+    <li><a href="#c1">Capítulo 1 — El rol del entrenador/a en formación</a></li>
+    <li class="gr">PARTE II · EL JUEGO</li>
+    <li><a href="#c2">Capítulo 2 — Reglamento de juego y minibásquet</a></li>
+    <li class="gr">PARTE III · TÉCNICA INDIVIDUAL</li>
+    <li><a href="#c3">Capítulo 3 — Posición básica y desplazamientos</a></li>
+    <li><a href="#c4">Capítulo 4 — El bote</a></li>
+    <li><a href="#c5">Capítulo 5 — El pase</a></li>
+    <li><a href="#c6">Capítulo 6 — El tiro y la entrada a canasta</a></li>
+    <li><a href="#c7">Capítulo 7 — La defensa individual</a></li>
+    <li><a href="#c8">Capítulo 8 — El rebote</a></li>
+    <li class="gr">PARTE IV · TÁCTICA</li>
+    <li><a href="#c9">Capítulo 9 — Conceptos colectivos básicos</a></li>
+    <li class="gr">PARTE V · ENSEÑAR</li>
+    <li><a href="#c10">Capítulo 10 — Metodología de la enseñanza</a></li>
+    <li><a href="#c11">Capítulo 11 — La sesión de entrenamiento</a></li>
+    <li><a href="#c12">Capítulo 12 — Planificación de la temporada</a></li>
+    <li class="gr">PARTE VI · LA PERSONA</li>
+    <li><a href="#c13">Capítulo 13 — Preparación física en edades de formación</a></li>
+    <li><a href="#c14">Capítulo 14 — Psicología aplicada al baloncesto de formación</a></li>
+    <li><a href="#c15">Capítulo 15 — Seguridad, primeros auxilios y protección del menor</a></li>
+    <li class="gr">PARTE VII · EL EXAMEN</li>
+    <li><a href="#test">Test de autoevaluación (30 preguntas con solución)</a></li>
+    <li><a href="#glosario">Glosario del entrenador</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════ PARTE 0 ═══════════ -->
+<section class="parte">
+  <div class="ptag">PARTE 0</div>
+  <h2 class="ptitulo">EL TÍTULO</h2>
+
+  <article class="cap" id="c0">
+    <h3><span class="num">0.</span>CÓMO SE SACA EL TÍTULO DE NIVEL 1</h3>
+
+    <h4>QUÉ ES EL NIVEL 1</h4>
+    <p>El título de <strong>Entrenador/a de Baloncesto de Nivel 1</strong> (en Catalunya, el curso de la Escola de la FCBQ; en el resto de España, las escuelas autonómicas y la FEB) es la primera titulación federativa que habilita para dirigir equipos en competición oficial, principalmente en <strong>baloncesto de formación y minibásquet</strong>. Es el primer escalón del itinerario: Nivel 1 → Nivel 2 → Nivel 3 (Superior).</p>
+
+    <h4>REQUISITOS HABITUALES DE ACCESO</h4>
+    <ul>
+      <li>Edad mínima (habitualmente <strong>16 años</strong> cumplidos en el año del curso).</li>
+      <li>Título de <strong>ESO</strong> o equivalente (o acreditación académica que pida la convocatoria).</li>
+      <li>Inscripción y pago de tasas dentro del plazo de la convocatoria.</li>
+      <li>No se exige experiencia previa como jugador/a.</li>
+    </ul>
+
+    <h4>ESTRUCTURA TÍPICA DEL CURSO</h4>
+    <table>
+      <tr><th>Bloque</th><th>Contenido</th><th>Qué te encontrarás</th></tr>
+      <tr><td><strong>Bloque específico</strong></td><td>Reglamento, técnica individual, táctica, metodología, dirección de equipo</td><td>Clases teóricas + sesiones prácticas en pista. Es el corazón del curso y de este libro (capítulos 2 a 12).</td></tr>
+      <tr><td><strong>Bloque común / transversal</strong></td><td>Bases anatómicas y fisiológicas, psicología, pedagogía, primeros auxilios</td><td>Contenido compartido con otros deportes (capítulos 13 a 15).</td></tr>
+      <tr><td><strong>Periodo de prácticas</strong></td><td>Horas dirigiendo o ayudando en un equipo federado, con tutor/a</td><td>En el CB Grup Barna las puedes hacer con nuestros equipos de base, con seguimiento de la coordinación.</td></tr>
+    </table>
+
+    <h4>CÓMO SE EVALÚA</h4>
+    <ul>
+      <li><strong>Asistencia obligatoria</strong> (suele exigirse un mínimo, alrededor del 80%).</li>
+      <li><strong>Exámenes teóricos</strong> por asignatura (tipo test y/o preguntas cortas).</li>
+      <li><strong>Evaluación práctica</strong>: dirigir ejercicios o una sesión ante el profesorado.</li>
+      <li><strong>Memoria de prácticas</strong> firmada por el club y el tutor/a.</li>
+    </ul>
+
+    <div class="clave">
+      <div class="ctag">IDEA CLAVE</div>
+      <p>El Nivel 1 no te examina de ser un genio de la táctica: te examina de <strong>saber enseñar los fundamentos a niños y niñas</strong>, con seguridad, método y valores. Todo este libro está orientado a eso.</p>
+    </div>
+
+    <h4>EL ITINERARIO COMPLETO</h4>
+    <table>
+      <tr><th>Nivel</th><th>Habilita para</th></tr>
+      <tr><td><strong>Nivel 1</strong></td><td>Minibásquet y categorías de formación; ayudante en categorías superiores.</td></tr>
+      <tr><td><strong>Nivel 2</strong></td><td>Categorías de competición autonómica y primer banquillo en niveles superiores de base.</td></tr>
+      <tr><td><strong>Nivel 3 / Superior</strong></td><td>Máxima titulación: competiciones nacionales y profesionales (ACB, LF).</td></tr>
+    </table>
+  </article>
+</section>
+
+<!-- ═══════════ PARTE I ═══════════ -->
+<section class="parte">
+  <div class="ptag">PARTE I</div>
+  <h2 class="ptitulo">EL ENTRENADOR</h2>
+
+  <article class="cap" id="c1">
+    <h3><span class="num">1.</span>EL ROL DEL ENTRENADOR/A EN FORMACIÓN</h3>
+    <p>En baloncesto de formación, el entrenador es antes que nada un <strong>educador que enseña a través del baloncesto</strong>. El resultado del sábado es una herramienta; el objetivo real es que cada jugador/a mejore, disfrute y quiera volver mañana.</p>
+
+    <h4>LAS CUATRO FUNCIONES DEL ENTRENADOR DE NIVEL 1</h4>
+    <ol>
+      <li><strong>Enseñar</strong>: transmitir los fundamentos técnicos y tácticos con progresiones adecuadas a la edad.</li>
+      <li><strong>Educar</strong>: valores — esfuerzo, respeto (a rivales, árbitros y compañeros), compromiso, humildad, trabajo en equipo.</li>
+      <li><strong>Gestionar</strong>: el grupo, los minutos de juego, las familias, el material, la comunicación con el club.</li>
+      <li><strong>Proteger</strong>: la salud física y emocional de cada niño/a está por encima de cualquier resultado.</li>
+    </ol>
+
+    <h4>PERFIL Y CONDUCTA</h4>
+    <ul>
+      <li><strong>Puntualidad y preparación</strong>: cada entreno se lleva escrito. Improvisar es faltar al respeto al grupo.</li>
+      <li><strong>Lenguaje positivo</strong>: se corrige la acción, nunca a la persona ("ese pase ha llegado tarde", no "eres malo pasando").</li>
+      <li><strong>Modelo de comportamiento</strong>: el equipo imita al banquillo. Si el entrenador protesta al árbitro, los niños protestarán.</li>
+      <li><strong>Equidad</strong>: en formación, todos los jugadores tienen derecho a jugar y a equivocarse. Los minutos se reparten con criterio formativo.</li>
+      <li><strong>Comunicación con familias</strong>: cordial, con límites claros: los padres animan desde la grada; las decisiones deportivas son del entrenador y del club.</li>
+    </ul>
+
+    <div class="pista">
+      <div class="ctag">PARA EL EXAMEN</div>
+      <p>Suele caer la diferencia entre <strong>entrenador de formación</strong> (prioriza el desarrollo a largo plazo de todos) y <strong>entrenador de rendimiento</strong> (prioriza el resultado inmediato). En Nivel 1, la respuesta correcta siempre orbita alrededor de la formación integral del jugador.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ═══════════ PARTE II ═══════════ -->
+<section class="parte">
+  <div class="ptag">PARTE II</div>
+  <h2 class="ptitulo">EL JUEGO</h2>
+
+  <article class="cap" id="c2">
+    <h3><span class="num">2.</span>REGLAMENTO DE JUEGO Y MINIBÁSQUET</h3>
+    <p>No hace falta saberse el reglamento FIBA de memoria artículo por artículo, pero sí dominar con soltura las reglas que condicionan cómo se enseña y se dirige.</p>
+
+    <h4>REGLAS BÁSICAS DEL BALONCESTO (FIBA)</h4>
+    <table>
+      <tr><th>Concepto</th><th>Regla</th></tr>
+      <tr><td>Jugadores</td><td>5 en pista por equipo; hasta 12 en acta (según competición).</td></tr>
+      <tr><td>Duración</td><td>4 periodos de 10 minutos (FIBA). Prórrogas de 5 minutos.</td></tr>
+      <tr><td>Valor de las canastas</td><td>1 punto (tiro libre), 2 puntos (dentro de la línea de 6,75 m), 3 puntos (fuera de ella).</td></tr>
+      <tr><td>24 segundos</td><td>Tiempo máximo de posesión para lanzar a canasta.</td></tr>
+      <tr><td>8 segundos</td><td>Tiempo máximo para cruzar el medio campo.</td></tr>
+      <tr><td>5 segundos</td><td>Máximo para sacar de banda, o con balón controlado sin botar, pasar ni tirar ante presión defensiva.</td></tr>
+      <tr><td>3 segundos</td><td>Máximo de permanencia del atacante en la zona restringida rival.</td></tr>
+      <tr><td>Campo atrás</td><td>El equipo con control en pista delantera no puede devolver el balón a su pista trasera.</td></tr>
+      <tr><td>Pasos</td><td>Desplazamiento ilegal del pie de pivote con el balón controlado y sin botar.</td></tr>
+      <tr><td>Dobles</td><td>Volver a botar tras haber finalizado el bote, o botar con las dos manos a la vez.</td></tr>
+      <tr><td>Faltas personales</td><td>Al llegar a la 5ª falta personal, el jugador queda eliminado del partido.</td></tr>
+      <tr><td>Faltas de equipo</td><td>A partir de la 5ª falta del equipo en un periodo, cada falta al atacante sin acción de tiro se sanciona con 2 tiros libres.</td></tr>
+    </table>
+
+    <h4>MINIBÁSQUET: LO QUE CAMBIA</h4>
+    <p>El minibásquet (hasta 12 años, aprox.) adapta el juego al niño, no al revés. Diferencias clave respecto al baloncesto FIBA:</p>
+    <ul>
+      <li><strong>Balón y canasta adaptados</strong>: balón de talla 5 y aro a 2,60 m.</li>
+      <li><strong>Sin línea de 3 puntos</strong>: todas las canastas en juego valen 2 puntos (1 punto el tiro libre).</li>
+      <li><strong>Periodos</strong>: el partido se divide en más periodos cortos (según normativa de la competición) para facilitar la participación de todos.</li>
+      <li><strong>Participación mínima obligatoria</strong>: la normativa obliga a que todos los jugadores convocados jueguen un mínimo de periodos. ¡Apúntalo: es pregunta de examen y obligación real de banquillo!</li>
+      <li><strong>Sin defensas en zona</strong>: en minibásquet (y en muchas categorías de formación) la defensa debe ser individual. El objetivo es formativo: que aprendan a defender a su par.</li>
+      <li><strong>Espíritu</strong>: la filosofía del minibásquet es participación, diversión y aprendizaje por encima de la victoria.</li>
+    </ul>
+
+    <div class="clave">
+      <div class="ctag">IDEA CLAVE</div>
+      <p>Las reglas del minibásquet <strong>protegen el proceso de formación</strong>: participación mínima, defensa individual y material adaptado existen para que ningún niño se quede sin aprender. El entrenador que las esquiva está entrenando contra sus propios jugadores.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ═══════════ PARTE III ═══════════ -->
+<section class="parte">
+  <div class="ptag">PARTE III</div>
+  <h2 class="ptitulo">TÉCNICA INDIVIDUAL</h2>
+
+  <article class="cap" id="c3">
+    <h3><span class="num">3.</span>POSICIÓN BÁSICA Y DESPLAZAMIENTOS</h3>
+    <p>Todo fundamento nace de la <strong>posición básica</strong> (o "posición de triple amenaza" cuando se tiene el balón). Sin una buena base, no hay bote, tiro ni defensa que funcione.</p>
+
+    <h4>POSICIÓN BÁSICA</h4>
+    <ul>
+      <li>Pies separados a la anchura de los hombros, uno ligeramente adelantado.</li>
+      <li>Rodillas flexionadas, peso sobre la parte delantera de los pies (nunca talones).</li>
+      <li>Tronco recto e inclinado ligeramente adelante, cabeza levantada, ojos al juego.</li>
+      <li>Con balón: <strong>triple amenaza</strong> — desde esa posición puedo tirar, pasar o botar. Balón protegido cerca del cuerpo, junto a la cadera del lado del pie retrasado.</li>
+    </ul>
+
+    <h4>EL PIE DE PIVOTE</h4>
+    <p>Al detenerse con el balón, el jugador establece un <strong>pie de pivote</strong> que debe mantener en contacto con el suelo (puede girar sobre él, no desplazarlo). Enseñar los dos tipos de parada:</p>
+    <ul>
+      <li><strong>Parada en un tiempo</strong> (salto): los dos pies contactan a la vez; se puede elegir pie de pivote.</li>
+      <li><strong>Parada en dos tiempos</strong> (uno-dos): el primer pie que apoya es el pie de pivote.</li>
+    </ul>
+
+    <h4>DESPLAZAMIENTOS</h4>
+    <ul>
+      <li><strong>Ofensivos</strong>: carrera, cambios de ritmo, cambios de dirección, arrancadas, paradas, pivotes, fintas de recepción (cortes en V y en L).</li>
+      <li><strong>Defensivos</strong>: <strong>desplazamiento lateral</strong> (pasos cortos y rápidos deslizando los pies, sin cruzarlos ni juntarlos), carrera defensiva, paso de caída (drop step).</li>
+    </ul>
+
+    <div class="pista">
+      <div class="ctag">CÓMO ENSEÑARLO</div>
+      <p>En minibásquet, la posición básica se enseña <strong>jugando</strong>: juegos de persecución con paradas a la señal, "estatuas" en posición básica, espejos por parejas. Nunca con filas estáticas de 10 niños esperando turno.</p>
+    </div>
+  </article>
+
+  <article class="cap" id="c4">
+    <h3><span class="num">4.</span>EL BOTE</h3>
+    <p>El bote sirve para <strong>avanzar, superar a un defensor, abrir líneas de pase o sacar el balón de una zona de peligro</strong>. Regla de oro formativa: se bota con un propósito, no por vicio.</p>
+
+    <h4>TÉCNICA DEL BOTE</h4>
+    <ul>
+      <li>El balón se empuja con los <strong>dedos y la muñeca</strong> (no se golpea con la palma).</li>
+      <li>Flexión-extensión de muñeca y codo; el brazo acompaña al balón.</li>
+      <li>Cabeza levantada: <strong>se bota sin mirar el balón</strong>, la vista al juego.</li>
+      <li>El cuerpo protege el balón: bote con la mano alejada del defensor, pierna y brazo contrarios como escudo.</li>
+    </ul>
+
+    <h4>TIPOS DE BOTE</h4>
+    <table>
+      <tr><th>Tipo</th><th>Cuándo</th><th>Cómo</th></tr>
+      <tr><td><strong>De avance / velocidad</strong></td><td>Campo abierto, contraataque</td><td>Bote alto (cintura-cadera), empujado hacia adelante, largo.</td></tr>
+      <tr><td><strong>De protección</strong></td><td>Defensor cerca</td><td>Bote bajo (por debajo de la rodilla), cuerpo entre balón y defensor.</td></tr>
+      <tr><td><strong>Cambios de mano</strong></td><td>Para superar al defensor</td><td>Por delante (crossover), entre las piernas, por la espalda, con reverso (giro).</td></tr>
+    </table>
+
+    <h4>PROGRESIÓN DE ENSEÑANZA</h4>
+    <ol>
+      <li>Familiarización con el balón (dominios, balonmanejo, dos balones).</li>
+      <li>Bote estático con cada mano, sin mirar el balón.</li>
+      <li>Bote en desplazamiento (líneas, zig-zag, cambios de ritmo).</li>
+      <li>Bote con oposición pasiva → activa (1x1).</li>
+      <li>Aplicación al juego real (2x2, 3x3, situaciones de ventaja).</li>
+    </ol>
+
+    <div class="clave">
+      <div class="ctag">ERRORES TÍPICOS A CORREGIR</div>
+      <p>Mirar el balón al botar · botar con la palma · abusar del bote sin propósito · botar siempre con la mano dominante · dejar de botar sin saber qué hacer después ("matar el bote").</p>
+    </div>
+  </article>
+
+  <article class="cap" id="c5">
+    <h3><span class="num">5.</span>EL PASE</h3>
+    <p>El pase es el fundamento <strong>más colectivo</strong> del juego: mueve el balón más rápido que cualquier bote y construye el concepto de equipo. Un equipo de formación que pasa bien está bien entrenado.</p>
+
+    <h4>PRINCIPIOS DEL BUEN PASE</h4>
+    <ul>
+      <li>Tenso y preciso: al <strong>blanco</strong> (las manos del receptor, lejos del defensor).</li>
+      <li>En el <strong>momento oportuno</strong>: cuando el receptor está desmarcado y lo espera.</li>
+      <li>Con los <strong>dedos</strong>: el pase termina con extensión de brazos y muñecas (pulgares hacia abajo en el pase de pecho).</li>
+      <li>El receptor "pide" el balón con las manos preparadas y va a su encuentro.</li>
+    </ul>
+
+    <h4>TIPOS DE PASE</h4>
+    <table>
+      <tr><th>Pase</th><th>Uso principal</th></tr>
+      <tr><td><strong>De pecho</strong></td><td>El más usado. Distancias cortas y medias sin defensor en la línea de pase.</td></tr>
+      <tr><td><strong>Picado</strong></td><td>Con defensor entre medias; bota aproximadamente a 2/3 de la distancia. Ideal para pasar al poste bajo o en penetración.</td></tr>
+      <tr><td><strong>Por encima de la cabeza</strong></td><td>Tras rebote, contra defensores más bajos, primer pase de contraataque.</td></tr>
+      <tr><td><strong>De béisbol</strong></td><td>Larga distancia (contraataque). Una mano, gesto de lanzamiento.</td></tr>
+      <tr><td><strong>Con una mano (de mano a mano, extensión)</strong></td><td>Distancias cortas, continuaciones, juego avanzado.</td></tr>
+    </table>
+
+    <h4>PROGRESIÓN DE ENSEÑANZA</h4>
+    <ol>
+      <li>Por parejas, estático, sin oposición (mecánica del gesto).</li>
+      <li>Con desplazamiento (pasar y moverse; ruedas de pase sencillas).</li>
+      <li>Con oposición (juegos de 10 pases, 2x1, 3x2).</li>
+      <li>En el juego real (pasar y cortar; premio al pase de canasta — la asistencia).</li>
+    </ol>
+
+    <div class="pista">
+      <div class="ctag">CÓMO ENSEÑARLO</div>
+      <p>El juego de los <strong>10 pases</strong> y las situaciones de <strong>superioridad (2x1, 3x2)</strong> enseñan más que cualquier rueda estática: obligan a decidir <em>a quién</em>, <em>cuándo</em> y <em>qué tipo</em> de pase dar. La rueda enseña el gesto; el juego enseña el pase.</p>
+    </div>
+  </article>
+
+  <article class="cap" id="c6">
+    <h3><span class="num">6.</span>EL TIRO Y LA ENTRADA A CANASTA</h3>
+    <p>El tiro es el fundamento que decide el juego y el que más motiva a los niños. La prioridad del Nivel 1: construir una <strong>mecánica correcta desde el principio</strong>, porque un vicio de tiro adquirido a los 10 años cuesta años corregirlo.</p>
+
+    <h4>MECÁNICA DEL TIRO (REGLA MNEMOTÉCNICA "BEEF")</h4>
+    <ul>
+      <li><strong>B — Balance (equilibrio)</strong>: pies a la anchura de los hombros, pie del brazo tirador ligeramente adelantado, rodillas flexionadas.</li>
+      <li><strong>E — Eyes (ojos)</strong>: la vista fija en el aro (parte delantera o trasera, pero siempre el mismo punto).</li>
+      <li><strong>E — Elbow (codo)</strong>: el codo debajo del balón, alineado con el aro; el balón descansa sobre los dedos (no la palma), la mano no dominante solo acompaña.</li>
+      <li><strong>F — Follow-through (acompañamiento)</strong>: extensión completa de brazo y muñeca, "la mano dentro del aro", dedos apuntando abajo tras soltar. El balón sale con rotación hacia atrás (backspin).</li>
+    </ul>
+    <p>La fuerza sube <strong>de las piernas</strong> en cadena: piernas → tronco → brazo → muñeca → dedos. En minibásquet, si al niño le falta fuerza, se acerca la distancia; nunca se deja que deforme la mecánica para llegar al aro.</p>
+
+    <h4>LA ENTRADA A CANASTA (BANDEJA)</h4>
+    <p>Es el tiro más cercano y el primero que se enseña en movimiento. Por el lado derecho:</p>
+    <ol>
+      <li>Último bote coordinado con el apoyo del pie <strong>derecho</strong>.</li>
+      <li>Segundo apoyo con el pie <strong>izquierdo</strong>, que impulsa el salto hacia arriba.</li>
+      <li>Rodilla derecha sube; el balón se eleva con la mano derecha y se deposita suave, normalmente con apoyo en el tablero.</li>
+    </ol>
+    <p>Por el lado izquierdo, invertido (apoyos izquierda-derecha, finaliza la mano izquierda). Se enseñan <strong>los dos lados desde el primer día</strong>.</p>
+
+    <h4>PROGRESIÓN DE ENSEÑANZA DEL TIRO</h4>
+    <ol>
+      <li>Gesto sin balón y tiro a corta distancia (1-2 metros), atendiendo solo a la mecánica.</li>
+      <li>Tiro tras autopase y parada; tiro tras recepción.</li>
+      <li>Entradas desde ambos lados, primero sin bote (dos apoyos tras recepción), luego con bote.</li>
+      <li>Tiro tras bote y parada; tiro con oposición; tiro con fatiga y en juego real.</li>
+    </ol>
+
+    <div class="clave">
+      <div class="ctag">ERRORES TÍPICOS A CORREGIR</div>
+      <p>Tirar "de pecho" con dos manos por falta de fuerza (acercar la distancia) · codo abierto · empujar con la mano de apoyo · no acabar el gesto · tirar en desequilibrio · en la entrada: pasos cambiados y mirar el balón en vez del aro.</p>
+    </div>
+  </article>
+
+  <article class="cap" id="c7">
+    <h3><span class="num">7.</span>LA DEFENSA INDIVIDUAL</h3>
+    <p>En formación se enseña <strong>defensa individual</strong> (obligatoria en minibásquet): cada jugador es responsable de su par, y la defensa es una actitud antes que una técnica.</p>
+
+    <h4>POSICIÓN DEFENSIVA</h4>
+    <ul>
+      <li>Piernas flexionadas, más abiertas que los hombros, peso repartido.</li>
+      <li>Espalda recta, cabeza alta, brazos activos (una mano molesta el balón, la otra tapa línea de pase).</li>
+      <li>Distancia: "un brazo" del atacante con balón; ajustar según su velocidad.</li>
+      <li>Desplazamiento lateral sin cruzar ni juntar los pies.</li>
+    </ul>
+
+    <h4>LOS TRES MOMENTOS DEL DEFENSOR</h4>
+    <table>
+      <tr><th>Situación</th><th>Concepto</th></tr>
+      <tr><td><strong>Al jugador con balón</strong></td><td>Entre el balón y la canasta, presionar el bote hacia su lado débil, molestar el tiro sin cometer falta, no "morder" las fintas.</td></tr>
+      <tr><td><strong>Al jugador sin balón cerca del balón (1 pase)</strong></td><td><strong>Línea de pase</strong>: brazo y pierna adelantados negando la recepción.</td></tr>
+      <tr><td><strong>Al jugador sin balón lejos del balón (2+ pases)</strong></td><td><strong>Ayuda</strong>: posición balón-jugador-canasta ("triángulo defensivo"), viendo balón y par a la vez, listo para ayudar y recuperar.</td></tr>
+    </table>
+
+    <h4>CONCEPTOS BÁSICOS A ENSEÑAR</h4>
+    <ul>
+      <li><strong>Balance defensivo</strong>: correr atrás antes de que ataque el rival.</li>
+      <li><strong>Ayuda y recuperación</strong>: acudo a parar el balón y vuelvo a mi par.</li>
+      <li><strong>El bloqueo del rebote (box-out)</strong>: ver capítulo 8.</li>
+      <li>La defensa se valora y se premia en los entrenos igual que el ataque: es cuestión de cultura de equipo.</li>
+    </ul>
+
+    <div class="pista">
+      <div class="ctag">PARA EL EXAMEN</div>
+      <p>Memoriza el <strong>triángulo defensivo</strong> (yo-mi par-el balón, viendo los dos) y por qué el minibásquet <strong>prohíbe las zonas</strong>: porque la defensa individual desarrolla la responsabilidad y la técnica defensiva de cada niño, mientras la zona la esconde.</p>
+    </div>
+  </article>
+
+  <article class="cap" id="c8">
+    <h3><span class="num">8.</span>EL REBOTE</h3>
+    <p>El rebote decide posesiones y partidos, y es pura voluntad + técnica sencilla: ideal para trabajar en formación.</p>
+
+    <h4>TÉCNICA DEL REBOTE DEFENSIVO</h4>
+    <ol>
+      <li><strong>Contacto y bloqueo (box-out)</strong>: al lanzamiento, giro (pivote) y pongo mi cuerpo entre mi par y el aro, brazos abiertos, culo bajo.</li>
+      <li><strong>Ir a por el balón</strong>: salto con las dos manos, atrapo el balón fuerte y lo protejo a la altura de la barbilla, codos fuera.</li>
+      <li><strong>Primer pase</strong>: abrir el balón rápido al exterior (inicio del contraataque).</li>
+    </ol>
+
+    <h4>REBOTE OFENSIVO</h4>
+    <p>Es esfuerzo y anticipación: fintar y ganar la posición al defensor que me bloquea, ir siempre al rebote tras el tiro propio y de los compañeros (con equilibrio: alguien debe hacer el balance defensivo).</p>
+
+    <div class="clave">
+      <div class="ctag">IDEA CLAVE</div>
+      <p>Regla de oro para enseñarlo: <strong>"primero el cuerpo, después el balón"</strong>. El niño que aprende a bloquear antes de mirar el balón será reboteador toda su vida.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ═══════════ PARTE IV ═══════════ -->
+<section class="parte">
+  <div class="ptag">PARTE IV</div>
+  <h2 class="ptitulo">TÁCTICA</h2>
+
+  <article class="cap" id="c9">
+    <h3><span class="num">9.</span>CONCEPTOS COLECTIVOS BÁSICOS</h3>
+    <p>En Nivel 1 la táctica no son sistemas de pizarra complejos: son <strong>conceptos de juego</strong> que ordenan el ataque y la defensa sin robar la libertad de decidir. En formación se enseña a <strong>jugar</strong>, no a ejecutar jugadas.</p>
+
+    <h4>PRINCIPIOS OFENSIVOS</h4>
+    <ul>
+      <li><strong>Espaciado (spacing)</strong>: ocupar el campo separados (4-5 metros entre compañeros) para que la defensa no pueda ayudar fácil.</li>
+      <li><strong>Pasar y cortar</strong>: el gesto colectivo más antiguo y más formativo. Paso y corto hacia canasta pidiendo el balón; si no lo recibo, ocupo un espacio libre.</li>
+      <li><strong>Ocupación y reemplazo</strong>: cuando un compañero corta o penetra, se reequilibran los espacios.</li>
+      <li><strong>Jugar de cara al aro</strong>: recibir en triple amenaza mirando la canasta, leer antes de botar.</li>
+      <li><strong>Ventajas</strong>: reconocer y atacar la superioridad (2x1, 3x2) — la esencia del contraataque.</li>
+      <li><strong>El contraataque</strong>: rebote → primer pase rápido → carriles (calles laterales y central) → finalizar la ventaja antes de que la defensa se recupere.</li>
+    </ul>
+
+    <h4>PRINCIPIOS DEFENSIVOS</h4>
+    <ul>
+      <li><strong>Balance defensivo</strong>: nadie mira su tiro; se corre atrás.</li>
+      <li><strong>Parar el balón</strong>: primero el balón, después los demás ajustes.</li>
+      <li><strong>Línea de pase y ayudas</strong> (capítulo 7) aplicadas en equipo.</li>
+      <li><strong>Comunicación</strong>: la defensa habla ("¡balón!", "¡ayuda!", "¡rebote!").</li>
+    </ul>
+
+    <h4>DIRECCIÓN DE PARTIDO EN FORMACIÓN</h4>
+    <ul>
+      <li>Convocatoria y minutos con criterio formativo (y las rotaciones obligatorias del minibásquet).</li>
+      <li>Instrucciones pocas y claras; en los tiempos muertos, 1-2 ideas máximo.</li>
+      <li>El marcador no cambia el comportamiento del banquillo: ni euforia humillante ni broncas.</li>
+      <li>Al acabar: saludar al rival y a los árbitros, siempre. Valoración en positivo del esfuerzo.</li>
+    </ul>
+
+    <div class="pista">
+      <div class="ctag">PARA EL EXAMEN</div>
+      <p>Si te preguntan "¿qué sistema de ataque enseñarías a un equipo mini?", la respuesta de Nivel 1 es: <strong>ninguno cerrado</strong> — conceptos de espaciado + pasar y cortar + atacar ventajas. Los sistemas cerrados llegan más tarde en la formación.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ═══════════ PARTE V ═══════════ -->
+<section class="parte">
+  <div class="ptag">PARTE V</div>
+  <h2 class="ptitulo">ENSEÑAR</h2>
+
+  <article class="cap" id="c10">
+    <h3><span class="num">10.</span>METODOLOGÍA DE LA ENSEÑANZA</h3>
+    <p>Saber baloncesto no es saber enseñarlo. La metodología es la asignatura que diferencia a un entrenador de un ex-jugador con silbato.</p>
+
+    <h4>ESTILOS DE ENSEÑANZA</h4>
+    <table>
+      <tr><th>Estilo</th><th>Qué es</th><th>Cuándo usarlo</th></tr>
+      <tr><td><strong>Instrucción directa (mando directo)</strong></td><td>El entrenador explica, demuestra y el jugador reproduce.</td><td>Gestos técnicos nuevos con mecánica concreta (tiro, apoyos de entrada).</td></tr>
+      <tr><td><strong>Asignación de tareas</strong></td><td>El jugador trabaja tareas propuestas a su ritmo.</td><td>Perfeccionamiento con grupos numerosos (circuitos, estaciones).</td></tr>
+      <tr><td><strong>Descubrimiento guiado</strong></td><td>El entrenador plantea preguntas y situaciones-problema; el jugador encuentra la solución.</td><td>Toma de decisiones y táctica ("¿dónde hay más espacio si tu defensor te presiona?").</td></tr>
+      <tr><td><strong>Juegos modificados (enfoque comprensivo)</strong></td><td>Juegos reducidos con reglas que provocan el aprendizaje (ej.: canasta doble si viene de pase tras corte).</td><td>La base del entrenamiento en formación: aprender jugando.</td></tr>
+    </table>
+
+    <h4>CÓMO SE PRESENTA UNA TAREA</h4>
+    <ol>
+      <li><strong>Explicación breve</strong> (menos de 1 minuto, todos viendo al entrenador, sin balones botando).</li>
+      <li><strong>Demostración</strong> (visual: los niños aprenden mucho más viendo que escuchando).</li>
+      <li><strong>Práctica</strong> inmediata con máxima participación.</li>
+      <li><strong>Feedback</strong> individual y colectivo mientras practican.</li>
+    </ol>
+
+    <h4>EL FEEDBACK (LA HERRAMIENTA Nº1)</h4>
+    <ul>
+      <li><strong>Positivo y específico</strong>: "muy bien ese codo debajo del balón" enseña; "¡bien!" a secas, no.</li>
+      <li><strong>Método sándwich</strong>: refuerzo + corrección + ánimo ("Buena arrancada — suelta el balón un poco antes — así, ¡ya lo tienes!").</li>
+      <li>Corregir <strong>un error cada vez</strong>, el más importante primero.</li>
+      <li>Ratio orientativo: muchas más interacciones de refuerzo que de corrección (los niños repiten lo que se les premia).</li>
+    </ul>
+
+    <h4>PRINCIPIOS METODOLÓGICOS DE ORO</h4>
+    <ul>
+      <li><strong>De lo simple a lo complejo</strong>, de lo conocido a lo nuevo, de lo global a lo específico.</li>
+      <li><strong>Máxima participación</strong>: mínimo un balón por pareja; nada de filas de 12 niños esperando.</li>
+      <li><strong>Transferencia al juego</strong>: todo gesto acaba practicándose con oposición y decisión.</li>
+      <li><strong>Repetición variada</strong>: el mismo fundamento en contextos distintos, no el mismo ejercicio 40 veces.</li>
+    </ul>
+  </article>
+
+  <article class="cap" id="c11">
+    <h3><span class="num">11.</span>LA SESIÓN DE ENTRENAMIENTO</h3>
+    <p>La sesión es la unidad básica de trabajo. <strong>Siempre se lleva escrita</strong>, con objetivos, ejercicios, tiempos y material.</p>
+
+    <h4>ESTRUCTURA DE UNA SESIÓN (EJEMPLO 75-90')</h4>
+    <table>
+      <tr><th>Fase</th><th>Duración</th><th>Contenido</th></tr>
+      <tr><td><strong>1. Calentamiento</strong></td><td>10-15'</td><td>Activación general (carrera, movilidad) + activación con balón (balonmanejo, ruedas suaves). En niños, jugado.</td></tr>
+      <tr><td><strong>2. Parte principal</strong></td><td>45-60'</td><td>1-2 objetivos técnicos/tácticos de la sesión, con progresión: gesto → oposición → juego. Lo nuevo o lo más exigente cognitivamente, al principio (frescos).</td></tr>
+      <tr><td><strong>3. Juego real</strong></td><td>15-20'</td><td>Partido o juego modificado aplicando el objetivo del día (con reglas-premio).</td></tr>
+      <tr><td><strong>4. Vuelta a la calma</strong></td><td>5'</td><td>Tiros libres, estiramientos suaves, charla breve: qué hemos aprendido hoy. Rutina de cierre.</td></tr>
+    </table>
+
+    <h4>CRITERIOS DE CALIDAD DE UNA SESIÓN</h4>
+    <ul>
+      <li><strong>Tiempo de práctica motriz</strong> alto: los niños tocan balón la mayor parte de la sesión; las explicaciones son breves; las transiciones entre ejercicios, rápidas.</li>
+      <li>Cada ejercicio tiene <strong>objetivo</strong> conocido por el entrenador (y a menudo por los jugadores).</li>
+      <li>Organización prevista: grupos, campos, balones, conos — antes de empezar.</li>
+      <li>Intensidad alternada: esfuerzo y pausa bien repartidos.</li>
+      <li>Termina en juego: la sesión que acaba sin jugar deja el fundamento sin transferir.</li>
+    </ul>
+
+    <div class="clave">
+      <div class="ctag">PLANTILLA DE SESIÓN (PARA COPIAR)</div>
+      <p><strong>Equipo · Fecha · Nº sesión · Objetivo principal · Material</strong> → Calentamiento (ejercicio, tiempo, organización) → Parte principal (2-3 tareas con progresión y variantes) → Juego de aplicación (regla-premio) → Vuelta a la calma → Observaciones post-sesión (qué funcionó, qué ajustar).</p>
+    </div>
+  </article>
+
+  <article class="cap" id="c12">
+    <h3><span class="num">12.</span>PLANIFICACIÓN DE LA TEMPORADA</h3>
+    <p>Planificar es decidir <strong>qué se enseña, cuándo y en qué orden</strong>, en lugar de improvisar semana a semana. En Nivel 1 basta una planificación sencilla y realista.</p>
+
+    <h4>PASOS</h4>
+    <ol>
+      <li><strong>Evaluación inicial</strong>: qué nivel tiene el grupo (primeras 2-3 semanas: observar, no sentenciar).</li>
+      <li><strong>Objetivos de temporada</strong> por bloques: técnicos, tácticos, físicos y de valores. Pocos y evaluables ("todos finalizan entradas por ambos lados en marzo").</li>
+      <li><strong>Calendario por periodos</strong>: pretemporada (septiembre), periodo 1 (oct-dic), periodo 2 (ene-mar), cierre (abr-may). Cada periodo con 2-3 prioridades.</li>
+      <li><strong>Del periodo a la semana (microciclo)</strong>: cada semana desarrolla las prioridades del periodo, ajustada al partido y al estado del grupo.</li>
+      <li><strong>Evaluación continua</strong>: revisar cada mes; la planificación es una brújula, no una jaula.</li>
+    </ol>
+
+    <h4>QUÉ TOCA A CADA EDAD (ORIENTATIVO)</h4>
+    <table>
+      <tr><th>Etapa</th><th>Prioridad</th></tr>
+      <tr><td><strong>Escoleta / premini (5-8)</strong></td><td>Psicomotricidad, familiarización con el balón, juegos. Todo jugado, cero pizarra.</td></tr>
+      <tr><td><strong>Mini (8-12)</strong></td><td><strong>Edad de oro del aprendizaje motor</strong>: todos los fundamentos técnicos (bote ambas manos, pase, entrada ambos lados, mecánica de tiro), 1x1, defensa individual, pasar y cortar.</td></tr>
+      <tr><td><strong>Infantil-cadete (12-16)</strong></td><td>Perfeccionamiento técnico, conceptos colectivos, lectura de juego, inicio del trabajo físico estructurado.</td></tr>
+    </table>
+
+    <div class="pista">
+      <div class="ctag">PARA EL EXAMEN</div>
+      <p>Concepto que siempre cae: las <strong>fases sensibles</strong> — periodos en que una capacidad se desarrolla mejor. La coordinación y el aprendizaje técnico tienen su fase de oro <strong>antes de la pubertad</strong>; la fuerza y la resistencia se entrenan de forma estructurada después. Por eso en mini se prioriza técnica y coordinación, no físico.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ═══════════ PARTE VI ═══════════ -->
+<section class="parte">
+  <div class="ptag">PARTE VI</div>
+  <h2 class="ptitulo">LA PERSONA</h2>
+
+  <article class="cap" id="c13">
+    <h3><span class="num">13.</span>PREPARACIÓN FÍSICA EN EDADES DE FORMACIÓN</h3>
+    <p>El entrenador de Nivel 1 no es un preparador físico, pero debe conocer las bases para <strong>no hacer daño y aprovechar cada etapa</strong>.</p>
+
+    <h4>CAPACIDADES FÍSICAS BÁSICAS</h4>
+    <ul>
+      <li><strong>Resistencia</strong>: capacidad de mantener un esfuerzo. En niños, se trabaja jugando (esfuerzos intermitentes, como el propio baloncesto), no con carrera continua aburrida.</li>
+      <li><strong>Fuerza</strong>: en formación, con el <strong>propio peso corporal</strong> (saltos, desplazamientos, ejercicios genéricos, juegos de lucha). Las cargas externas serias llegan tras la pubertad y con técnica supervisada.</li>
+      <li><strong>Velocidad</strong>: reacciones, arrancadas y frecuencia; se desarrolla muy bien en edades tempranas con juegos y relevos cortos con pausas completas.</li>
+      <li><strong>Movilidad/flexibilidad</strong>: mantenerla desde pequeños; se pierde si no se trabaja.</li>
+    </ul>
+    <p>La capacidad reina en formación es la <strong>coordinación</strong> (equilibrio, ritmo, disociación, orientación espacial): su edad de oro es antes de la pubertad y el balón es la mejor herramienta.</p>
+
+    <h4>EL CALENTAMIENTO Y LA PREVENCIÓN</h4>
+    <ul>
+      <li>Calentamiento siempre: general (movilidad, activación cardiovascular) + específico (con balón, gestos del juego).</li>
+      <li>Prevención básica de lesiones habituales del básquet: tobillos (propiocepción, equilibrios a una pierna), rodillas (técnica de salto y caída: caer flexionando, rodillas alineadas).</li>
+      <li>Crecer no es excusa para el dolor: molestias persistentes en rodilla o talón en edades de crecimiento (típicas de estirones) → avisar a la familia y derivar a valoración médica; ajustar cargas.</li>
+      <li>Hidratación y descanso forman parte del entrenamiento.</li>
+    </ul>
+
+    <div class="clave">
+      <div class="ctag">IDEA CLAVE</div>
+      <p>En formación, el mejor "físico" es un entreno bien diseñado: <strong>alta participación, esfuerzos intermitentes y mucha coordinación con balón</strong>. Nada de castigos físicos: correr no es un castigo, es parte del juego que amamos.</p>
+    </div>
+  </article>
+
+  <article class="cap" id="c14">
+    <h3><span class="num">14.</span>PSICOLOGÍA APLICADA AL BALONCESTO DE FORMACIÓN</h3>
+    <p>Los niños no son adultos pequeños. Entender cómo piensan y qué les motiva es media asignatura de este curso — y media vida del entrenador.</p>
+
+    <h4>QUÉ NECESITA UN NIÑO/A DEL DEPORTE</h4>
+    <ul>
+      <li><strong>Diversión</strong>: la razón nº1 por la que juegan — y su ausencia, la razón nº1 por la que abandonan.</li>
+      <li><strong>Sentirse competente</strong>: notar que mejora. El entrenador diseña éxito alcanzable (tareas a su nivel).</li>
+      <li><strong>Pertenencia</strong>: ser parte del grupo. Rituales de equipo, nadie excluido.</li>
+      <li><strong>Autonomía</strong>: poder decidir dentro del juego (por eso enseñamos conceptos y no jugadas-robot).</li>
+    </ul>
+
+    <h4>MOTIVACIÓN Y CLIMA</h4>
+    <ul>
+      <li><strong>Clima orientado a la tarea</strong> (mejorar, esforzarse) frente a clima orientado al ego (compararse, ganar a toda costa). El clima de tarea produce jugadores que perseveran; el de ego, jugadores que temen fallar.</li>
+      <li>El error es <strong>información, no delito</strong>: un equipo que teme fallar deja de intentar cosas — y sin intentos no hay aprendizaje.</li>
+      <li>Elogiar el <strong>esfuerzo y el proceso</strong>, no el talento ("cómo has luchado ese rebote", mejor que "qué bueno eres").</li>
+      <li>Normas de equipo pocas, claras y aplicadas a todos por igual.</li>
+    </ul>
+
+    <h4>COMUNICACIÓN CON EL JUGADOR</h4>
+    <ul>
+      <li>A la altura de sus ojos con los pequeños; nombre propio; escuchar antes de sentenciar.</li>
+      <li>Instrucciones en positivo: "protege el balón" funciona mejor que "no lo pierdas".</li>
+      <li>Gestionar la frustración y las lágrimas con calma: validar la emoción, redirigir a la siguiente acción.</li>
+    </ul>
+
+    <h4>LAS FAMILIAS</h4>
+    <ul>
+      <li>Reunión de inicio de temporada: presentar objetivos, normas y canales de comunicación.</li>
+      <li>Los padres animan a <strong>todos</strong>, no dan instrucciones técnicas desde la grada.</li>
+      <li>Los temas se hablan en frío y en privado, nunca al acabar el partido en caliente.</li>
+    </ul>
+
+    <div class="pista">
+      <div class="ctag">PARA EL EXAMEN</div>
+      <p>Conceptos estrella: <strong>motivación intrínseca</strong> (juego porque disfruto) vs <strong>extrínseca</strong> (juego por premios/presión) — la formación debe alimentar la intrínseca; y <strong>clima tarea vs clima ego</strong>. Si la pregunta va de abandono deportivo: sus causas principales son la falta de diversión, la presión por resultados y no jugar nunca.</p>
+    </div>
+  </article>
+
+  <article class="cap" id="c15">
+    <h3><span class="num">15.</span>SEGURIDAD, PRIMEROS AUXILIOS Y PROTECCIÓN DEL MENOR</h3>
+    <p>La primera responsabilidad del entrenador es que todos vuelvan a casa bien. Este bloque es materia de examen y, sobre todo, de vida real.</p>
+
+    <h4>PREVENCIÓN EN PISTA</h4>
+    <ul>
+      <li>Revisar el espacio antes de entrenar: suelo seco, canastas ancladas y protegidas, material recogido, objetos fuera de las líneas.</li>
+      <li>Sin joyas ni relojes; cordones atados; balones parados cuando se explica.</li>
+      <li>Conocer el protocolo del pabellón: botiquín, salidas, teléfono de emergencias (<strong>112</strong>), desfibrilador (DEA) más cercano.</li>
+      <li>Fichas médicas y alergias del equipo: conocerlas y llevarlas a mano (con confidencialidad).</li>
+    </ul>
+
+    <h4>ACTUACIÓN BÁSICA ANTE LESIONES FRECUENTES</h4>
+    <table>
+      <tr><th>Situación</th><th>Actuación del entrenador</th></tr>
+      <tr><td><strong>Esguince de tobillo</strong></td><td>Parar la actividad; frío, compresión, elevación, reposo; no obligar a apoyar; avisar a la familia y recomendar valoración médica.</td></tr>
+      <tr><td><strong>Golpe en la cabeza</strong></td><td>Máxima prudencia: retirar del juego <strong>siempre</strong>. Si hay pérdida de conciencia, vómitos, confusión o somnolencia → 112. Ante la duda, nunca vuelve a jugar ese día.</td></tr>
+      <tr><td><strong>Sangrado (nariz, heridas)</strong></td><td>Guantes, compresión, limpieza; en la nariz: cabeza ligeramente adelante, presionar; el jugador no vuelve hasta cortar el sangrado.</td></tr>
+      <tr><td><strong>Golpe en dientes/boca</strong></td><td>Si un diente definitivo se desprende: conservarlo en suero o leche y acudir de urgencia al dentista.</td></tr>
+      <tr><td><strong>Desvanecimiento / parada</strong></td><td>Llamar al 112, iniciar <strong>RCP</strong> (30 compresiones / 2 ventilaciones, 100-120 compresiones por minuto) y pedir el DEA. El curso incluye práctica: apréndela de verdad.</td></tr>
+    </table>
+    <p><strong>Conducta PAS</strong>: <strong>P</strong>roteger (a la víctima y al grupo) → <strong>A</strong>visar (112) → <strong>S</strong>ocorrer (dentro de tu formación). El entrenador nunca diagnostica ni medica: primeros auxilios y derivación.</p>
+
+    <h4>PROTECCIÓN DEL MENOR</h4>
+    <ul>
+      <li>Los entrenadores que trabajan con menores deben aportar el <strong>certificado negativo de delitos sexuales</strong> (obligación legal en España).</li>
+      <li>Conocer al <strong>Delegado/a de Protección</strong> de la entidad y el protocolo del club ante cualquier indicio de acoso, abuso o maltrato (dentro o fuera del club): escuchar, no investigar por tu cuenta, comunicar de inmediato al canal establecido.</li>
+      <li>Buenas prácticas: no quedarse a solas con un menor en espacios cerrados; comunicaciones con menores siempre por canales del club/grupos con adultos; imágenes de menores solo con autorización (RGPD y derechos de imagen).</li>
+      <li>Tolerancia cero con el lenguaje humillante, los castigos físicos y las novatadas.</li>
+    </ul>
+
+    <div class="clave">
+      <div class="ctag">IDEA CLAVE</div>
+      <p>Ante cualquier duda de salud, la decisión correcta del entrenador de Nivel 1 es siempre la <strong>conservadora</strong>: parar, avisar, derivar. Nunca perderás nada por prudente; puedes perderlo todo por temerario.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ═══════════ PARTE VII ═══════════ -->
+<section class="parte">
+  <div class="ptag">PARTE VII</div>
+  <h2 class="ptitulo">EL EXAMEN</h2>
+
+  <article class="cap" id="test">
+    <h3><span class="num">✓</span>TEST DE AUTOEVALUACIÓN — 30 PREGUNTAS</h3>
+    <p>Responde mentalmente y despliega cada pregunta para ver la solución. Si aciertas 25 o más, vas muy bien encaminado/a.</p>
+
+    <details class="preg"><summary>1. ¿Cuánto tiempo tiene un equipo para lanzar a canasta desde que obtiene la posesión?</summary><div class="resp"><b>24 segundos.</b> Y 8 segundos para cruzar el medio campo (cap. 2).</div></details>
+    <details class="preg"><summary>2. ¿Cuántos puntos vale una canasta en juego en minibásquet?</summary><div class="resp"><b>2 puntos siempre</b> (no existe la línea de 3); el tiro libre vale 1 (cap. 2).</div></details>
+    <details class="preg"><summary>3. ¿Qué tipo de defensa es obligatoria en minibásquet y por qué?</summary><div class="resp"><b>Individual.</b> Porque desarrolla la responsabilidad y la técnica defensiva de cada niño; la zona esconde esas carencias (caps. 2 y 7).</div></details>
+    <details class="preg"><summary>4. ¿Con cuántas faltas personales queda eliminado un jugador?</summary><div class="resp"><b>Con la 5ª falta personal</b> (cap. 2).</div></details>
+    <details class="preg"><summary>5. ¿A partir de qué falta de equipo en un periodo se lanzan 2 tiros libres?</summary><div class="resp"><b>A partir de la 5ª falta de equipo</b> del periodo, en faltas al atacante sin acción de tiro (cap. 2).</div></details>
+    <details class="preg"><summary>6. En la parada en dos tiempos, ¿cuál es el pie de pivote?</summary><div class="resp"><b>El primer pie que contacta con el suelo</b> (cap. 3).</div></details>
+    <details class="preg"><summary>7. ¿Qué es la triple amenaza?</summary><div class="resp">La posición con balón desde la que puedo <b>tirar, pasar o botar</b>, de cara al aro (cap. 3).</div></details>
+    <details class="preg"><summary>8. ¿Con qué parte de la mano se bota el balón?</summary><div class="resp">Con <b>los dedos</b> (y el trabajo de la muñeca), nunca golpeando con la palma. Y sin mirar el balón (cap. 4).</div></details>
+    <details class="preg"><summary>9. ¿Qué bote usarías con un defensor encima y cuál en contraataque?</summary><div class="resp"><b>Bote de protección</b> (bajo, cuerpo entre balón y defensor) con presión; <b>bote de velocidad</b> (alto, empujado adelante) en campo abierto (cap. 4).</div></details>
+    <details class="preg"><summary>10. ¿Dónde debe botar el pase picado?</summary><div class="resp">Aproximadamente a <b>2/3 de la distancia</b> entre pasador y receptor, para que llegue a la altura de la cadera (cap. 5).</div></details>
+    <details class="preg"><summary>11. ¿Qué pase usarías para el primer pase de contraataque tras rebote?</summary><div class="resp"><b>Por encima de la cabeza</b> (o de béisbol si la distancia es larga) (cap. 5).</div></details>
+    <details class="preg"><summary>12. Enumera los 4 puntos de la regla BEEF del tiro.</summary><div class="resp"><b>Balance</b> (equilibrio), <b>Eyes</b> (ojos al aro), <b>Elbow</b> (codo debajo del balón), <b>Follow-through</b> (acompañamiento final del gesto) (cap. 6).</div></details>
+    <details class="preg"><summary>13. ¿De dónde sale la fuerza del tiro en un niño?</summary><div class="resp">De <b>las piernas</b>, en cadena hacia brazo, muñeca y dedos. Si no llega al aro, se acerca la distancia; no se deforma la mecánica (cap. 6).</div></details>
+    <details class="preg"><summary>14. ¿Cuáles son los apoyos de una entrada por el lado derecho?</summary><div class="resp"><b>Derecha-izquierda</b>: último bote con apoyo derecho, impulso con el izquierdo, finalización con mano derecha (cap. 6).</div></details>
+    <details class="preg"><summary>15. ¿Qué es el triángulo defensivo?</summary><div class="resp">La posición del defensor del lado de ayuda: <b>ver a la vez balón y par</b>, situado entre ambos y la canasta (cap. 7).</div></details>
+    <details class="preg"><summary>16. ¿Qué hace el defensor del jugador con balón?</summary><div class="resp">Se sitúa <b>entre el balón y la canasta</b>, a un brazo de distancia, molesta el bote y el tiro sin hacer falta y no muerde las fintas (cap. 7).</div></details>
+    <details class="preg"><summary>17. ¿Cuál es la secuencia del rebote defensivo?</summary><div class="resp"><b>Bloqueo (box-out) → atrapar con dos manos → proteger el balón → primer pase.</b> "Primero el cuerpo, después el balón" (cap. 8).</div></details>
+    <details class="preg"><summary>18. ¿Qué es el espaciado (spacing)?</summary><div class="resp">Ocupar el campo <b>separados (4-5 m)</b> para dificultar las ayudas defensivas (cap. 9).</div></details>
+    <details class="preg"><summary>19. ¿Qué "sistema" de ataque conviene a un equipo mini?</summary><div class="resp"><b>Ninguno cerrado</b>: conceptos — espaciado, pasar y cortar, atacar ventajas 2x1/3x2 (cap. 9).</div></details>
+    <details class="preg"><summary>20. ¿Qué estilo de enseñanza usa preguntas y situaciones-problema?</summary><div class="resp">El <b>descubrimiento guiado</b>. Ideal para la toma de decisiones (cap. 10).</div></details>
+    <details class="preg"><summary>21. ¿Qué es el feedback "sándwich"?</summary><div class="resp"><b>Refuerzo + corrección + ánimo.</b> Y siempre específico, un error cada vez (cap. 10).</div></details>
+    <details class="preg"><summary>22. Ordena las 4 fases de una sesión.</summary><div class="resp"><b>Calentamiento → parte principal → juego de aplicación → vuelta a la calma</b> (cap. 11).</div></details>
+    <details class="preg"><summary>23. ¿Qué indicador dice si una sesión está bien diseñada?</summary><div class="resp">El <b>tiempo de práctica motriz</b>: los niños tocan balón la mayor parte del tiempo, con explicaciones breves y máxima participación (cap. 11).</div></details>
+    <details class="preg"><summary>24. ¿Qué son las fases sensibles?</summary><div class="resp">Periodos en que una capacidad se desarrolla mejor. La <b>coordinación y la técnica</b> tienen su edad de oro <b>antes de la pubertad</b> — por eso el mini prioriza fundamentos (caps. 12 y 13).</div></details>
+    <details class="preg"><summary>25. ¿Cómo se trabaja la fuerza en edades de formación?</summary><div class="resp">Con el <b>propio peso corporal</b> (saltos, juegos, ejercicios genéricos); cargas externas estructuradas, tras la pubertad y supervisadas (cap. 13).</div></details>
+    <details class="preg"><summary>26. Diferencia motivación intrínseca y extrínseca.</summary><div class="resp"><b>Intrínseca</b>: juego porque disfruto y quiero mejorar. <b>Extrínseca</b>: por premios o presión externa. La formación alimenta la intrínseca (cap. 14).</div></details>
+    <details class="preg"><summary>27. ¿Cuáles son las causas principales del abandono deportivo infantil?</summary><div class="resp"><b>Falta de diversión, presión por resultados y no jugar nunca</b> (cap. 14).</div></details>
+    <details class="preg"><summary>28. Un jugador recibe un golpe en la cabeza y está mareado. ¿Qué haces?</summary><div class="resp">Lo <b>retiro del juego siempre</b> y no vuelve a jugar ese día. Si hay pérdida de conciencia, vómitos o confusión → <b>112</b> (cap. 15).</div></details>
+    <details class="preg"><summary>29. ¿Qué significa la conducta PAS?</summary><div class="resp"><b>Proteger, Avisar (112), Socorrer.</b> En ese orden (cap. 15).</div></details>
+    <details class="preg"><summary>30. ¿Qué documento legal necesita todo entrenador que trabaja con menores?</summary><div class="resp">El <b>certificado negativo de delitos sexuales</b>. Además: conocer el protocolo de protección del menor de su club (cap. 15).</div></details>
+  </article>
+
+  <article class="cap" id="glosario">
+    <h3><span class="num">A-Z</span>GLOSARIO DEL ENTRENADOR</h3>
+    <table>
+      <tr><th>Término</th><th>Definición</th></tr>
+      <tr><td><strong>Balance defensivo</strong></td><td>Repliegue rápido a defender tras perder la posesión o lanzar.</td></tr>
+      <tr><td><strong>Box-out (bloqueo de rebote)</strong></td><td>Poner el cuerpo entre el rival y el aro antes de ir a por el rebote.</td></tr>
+      <tr><td><strong>Campo atrás</strong></td><td>Violación por devolver el balón a pista trasera teniendo el control en la delantera.</td></tr>
+      <tr><td><strong>Contraataque</strong></td><td>Transición rápida defensa→ataque buscando finalizar antes del repliegue rival.</td></tr>
+      <tr><td><strong>Crossover</strong></td><td>Cambio de mano por delante del cuerpo para superar al defensor.</td></tr>
+      <tr><td><strong>Finta</strong></td><td>Gesto de engaño (de tiro, de pase, de salida o de recepción).</td></tr>
+      <tr><td><strong>Línea de pase</strong></td><td>Trayectoria imaginaria balón-receptor; el defensor la "niega" interponiendo brazo y pierna.</td></tr>
+      <tr><td><strong>Microciclo</strong></td><td>Unidad de planificación semanal (entrenos + partido).</td></tr>
+      <tr><td><strong>Pie de pivote</strong></td><td>Pie que debe mantenerse en el suelo al detenerse con el balón; girar sí, desplazarse no.</td></tr>
+      <tr><td><strong>Spacing (espaciado)</strong></td><td>Distribución de los atacantes ocupando el campo separados.</td></tr>
+      <tr><td><strong>Superioridad / ventaja</strong></td><td>Situación con más atacantes que defensores (2x1, 3x2) o con defensor batido.</td></tr>
+      <tr><td><strong>Triple amenaza</strong></td><td>Posición con balón de cara al aro que permite tirar, pasar o botar.</td></tr>
+    </table>
+
+    <div class="clave">
+      <div class="ctag">CONSEJOS FINALES PARA APROBAR</div>
+      <p>1) <strong>Asiste a todo</strong>: la asistencia es requisito y en clase se dice qué cae en el examen. 2) En cada pregunta dudosa, elige la respuesta <strong>más formativa y más prudente</strong> (participación, salud, valores). 3) Prepara la parte práctica con una sesión escrita y ensayada. 4) Haz las prácticas con ganas: es donde de verdad te haces entrenador/a. 5) Cuando tengas el título… el CB Grup Barna tiene banquillos esperándote. 🏀</p>
+    </div>
+  </article>
+</section>
+
+</main>
+
+<a class="volver" href="#indice" aria-label="Volver al índice">↑</a>
+
+<footer>
+  <p><strong>MANUAL DEL ENTRENADOR · NIVEL 1</strong> — CB Grup Barna · Barcelona · des de 1965</p>
+  <p style="margin-top:8px">Material de preparación del club. La titulación oficial la expiden FCBQ / FEB — consulta la convocatoria vigente.</p>
+  <p style="margin-top:8px"><a href="/">← Volver a cbgrupbarna.info</a></p>
+</footer>
+
+<script>
+const bar=document.getElementById('progress');
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
