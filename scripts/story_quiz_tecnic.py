@@ -142,7 +142,7 @@ def build(args):
 
     # --- Kicker ---
     f_kicker = font(F_BOLD, 34)
-    kicker = f"QUIZ TÈCNIC · {args.tema.upper()}"
+    kicker = args.kicker.upper() if args.kicker else f"QUIZ TÈCNIC · {args.tema.upper()}"
     y = 96
     draw.text((MARGIN, y), kicker, font=f_kicker, fill=RED)
     y += 58
@@ -162,8 +162,9 @@ def build(args):
 
     # --- Subtitol ---
     f_sub = font(F_BOLD, 32)
-    for line in ["TRIA LA MILLOR OPCIÓ", "I RESPON A L'ENQUESTA!"]:
-        draw.text((MARGIN, y), line, font=f_sub, fill=DARK_GRAY)
+    subtitol = args.subtitol if args.subtitol else ["TRIA LA MILLOR OPCIÓ", "I RESPON A L'ENQUESTA!"]
+    for line in subtitol:
+        draw.text((MARGIN, y), line.upper(), font=f_sub, fill=DARK_GRAY)
         y += f_sub.size + 8
     y += 34
 
@@ -205,12 +206,16 @@ def build(args):
     y += 14
 
     # --- Caixa negra: "Per que" en mode resposta, crida a votar en mode pregunta ---
-    if args.mode == "resposta":
+    if args.caixa_titol or args.caixa_text:
+        box_title = args.caixa_titol or ""
+        box_body = args.caixa_text or ""
+    elif args.mode == "resposta":
         box_title = "MOLT BÉ!"
         box_body = args.perque
     else:
         box_title = "VOTA ARA!"
-        box_body = "Tria la teva opció a l'enquesta d'aquesta mateixa història."
+        box_body = ("Vota a l'enquesta, comenta A, B o C i dona-li like "
+                    "perquè fem aquesta sèrie!")
 
     f_why_title = font(F_BOLD, 38)
     f_why = font(F_REG, 32)
@@ -261,19 +266,28 @@ def build(args):
 
 def parse_args(argv):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--tema", required=True, help="Tema del quiz (p.ex. TIR, DEFENSA, PASSADA)")
-    p.add_argument("--foto", required=True, help="Ruta a la foto real del jugador/a")
+    p.add_argument("--tema", default="", help="Tema del quiz (p.ex. TIR, DEFENSA, PASSADA)")
+    p.add_argument("--kicker", default="", help="Sobreescriu el kicker sencer (p.ex. per stories que no son quiz)")
+    p.add_argument("--foto", required=True, help="Ruta a la foto real")
     p.add_argument("--titol-negre", dest="titol_negre", required=True)
     p.add_argument("--titol-vermell", dest="titol_vermell", required=True)
+    p.add_argument("--subtitol", action="append", help="Linia de subtitol (repetir per cada linia, max 2)")
     p.add_argument("--opcio", action="append", required=True, help="Repetir 3 cops")
-    p.add_argument("--correcta", type=int, required=True, help="Index (0-based) de la opcio correcta")
-    p.add_argument("--perque", required=True)
+    p.add_argument("--correcta", type=int, default=0, help="Index (0-based) de la opcio correcta (nomes cal en mode resposta)")
+    p.add_argument("--perque", default="", help="Obligatori en mode resposta")
+    p.add_argument("--caixa-titol", dest="caixa_titol", default="", help="Sobreescriu el titol de la caixa negra")
+    p.add_argument("--caixa-text", dest="caixa_text", default="", help="Sobreescriu el text de la caixa negra")
+    p.add_argument("--mode", choices=["pregunta", "resposta"], default="resposta")
     p.add_argument("--out", required=True)
     args = p.parse_args(argv)
     if len(args.opcio) != 3:
         p.error("cal exactament 3 --opcio")
     if not (0 <= args.correcta < 3):
         p.error("--correcta ha de ser 0, 1 o 2")
+    if not args.tema and not args.kicker:
+        p.error("cal --tema o --kicker")
+    if args.mode == "resposta" and not args.perque and not args.caixa_text:
+        p.error("--perque es obligatori en --mode resposta (o be dona --caixa-text)")
     return args
 
 
