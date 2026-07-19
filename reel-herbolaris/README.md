@@ -31,3 +31,16 @@ a 1080×1920 (9:16) amb reducció de soroll i àudio normalitzat a -14 LUFS.
 
 Versions upscalejades per IA (ByteDance UGC, 1080p/30fps) disponibles a la
 biblioteca de Higgsfield del compte del club.
+
+### Temps de cada clip dins dels masters IA (per tallar a CapCut)
+
+Master 1 (Gerson): 00 → 0:00,3–0:03,6 · 01 → 0:03,6–0:11,0 · 02 → 0:11,0–0:19,0 ·
+03 → 0:25,0–0:32,5 · 04 → 0:32,8–0:35,8
+
+Master 2 (Herson): 05a → 0:00,3–0:04,0 · 05b → 0:04,0–0:09,5 · 06 → 0:09,5–0:17,5 ·
+07 → 0:17,5–0:21,0 · 08 → 0:21,0–0:32,0 · 09 → 0:32,0–0:49,0 · 10 → 0:49,0–0:57,5 ·
+11 → 0:57,5–1:11,0 · 12 → 1:14,0–1:17,2
+
+Nota: entre els clips 02–03 (master 1) hi ha notificacions d'Instagram a pantalla
+i al tram final de cada master apareixen els controls del reproductor — evitar
+aquests trams si es talla directament del master.
