@@ -79,6 +79,10 @@ THEMES = {
 FONT_DIR = "/usr/share/fonts/truetype/liberation"
 F_BOLD = os.path.join(FONT_DIR, "LiberationSans-Bold.ttf")
 F_REG = os.path.join(FONT_DIR, "LiberationSans-Regular.ttf")
+# Display condensada de marca (sistema-visual-cbgb): nomes per a kicker/titol/
+# titol de caixa. La resta de text (opcions, peu, cos) es queda amb una sans
+# neutra i llegible (LiberationSans), tal com demana la skill.
+F_DISPLAY = "/usr/share/fonts/opentype/bebas-neue/BebasNeue-Bold.otf"
 # LiberationSans-Bold no te un glif real de "check" (mostra un requadre buit);
 # DejaVu si que en te un, s'usa nomes per aquest simbol.
 F_SYMBOL = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
@@ -168,16 +172,16 @@ def build(args):
     content_w = W - 2 * MARGIN
 
     # --- Kicker ---
-    f_kicker = font(F_BOLD, 34)
+    f_kicker = font(F_DISPLAY, 42)
     kicker = args.kicker.upper() if args.kicker else f"QUIZ TÈCNIC · {args.tema.upper()}"
     y = 96
     draw.text((MARGIN, y), kicker, font=f_kicker, fill=theme["kicker"])
-    y += 58
+    y += 50
     draw.line([(MARGIN, y), (MARGIN + 60, y)], fill=theme["kicker"], width=6)
     y += 34
 
     # --- Titol: primera part en title1, resta en title2 ---
-    f_title = font(F_BOLD, 62)
+    f_title = font(F_DISPLAY, 82)
     black_lines = wrap_text(draw, args.titol_negre.upper(), f_title, content_w)
     red_lines = wrap_text(draw, args.titol_vermell.upper(), f_title, content_w)
     y = draw_multiline(draw, (MARGIN, y), black_lines, f_title, theme["title1"], line_gap=6)
