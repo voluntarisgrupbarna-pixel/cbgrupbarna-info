@@ -1,4 +1,4 @@
-# Recapitulación detallada — últimos 6 meses de trabajo en Claude
+# Recapitulación detallada — trabajo reciente en Claude (ventana de 3 meses)
 
 **Ventana actual:** mayo 2026 → julio 2026 (todo lo anterior, resumido en "Archivo")
 **Última actualización:** 2026-07-22
@@ -58,8 +58,8 @@ Unas **35 skills** organizadas en capas, orquestadas por la mestra `/cbgb`. Es e
 
 ## Archivo (fuera de ventana)
 
-Regla automática: cuando un mes del timeline supere los **6 meses de antigüedad**, se resume aquí en 2-3 líneas y se elimina su detalle de la ventana activa. Esto se hace en cada uso de la skill, sin que Ana tenga que pedirlo. Las doctrinas que sigan vigentes no se archivan: viven en la sección 2.
+Regla automática: cuando un mes del timeline supere los **3 meses de antigüedad**, se resume aquí en 2-3 líneas y se elimina su detalle de la ventana activa. Esto se hace en cada uso de la skill, sin que Ana tenga que pedirlo. Las doctrinas que sigan vigentes no se archivan: viven en la sección 2.
 
 **Anterior a mayo 2026 — construcción del ecosistema de skills.** Se creó y refinó el sistema de ~35 skills del club orquestado por `/cbgb`: identidad y método de Ana, sistema visual y carteles, reels/vídeo, crecimiento IG, benchmarks (Barça Basket, clubs de barrio, femenino, Pau Gasol Academy), lógica de lujo y sponsors. Decisión de arquitectura destacada: fusión de las 5 skills de códigos de lujo individuales (Dior, Vogue, Elie Saab, Bvlgari, Jordan Roth) en `codis-lux-cbgb` para reducir carga de contexto. El inventario vigente vive en la sección 1; las doctrinas nacidas en este periodo siguen vigentes y viven en la sección 2.
 
-*(Próximo archivado por antigüedad: en noviembre 2026, mayo se resumirá aquí y su detalle saldrá del timeline.)*
+*(Próximo archivado por antigüedad: en agosto 2026, mayo cumplirá 3 meses — se resumirá aquí y su detalle saldrá del timeline.)*
