@@ -59,4 +59,6 @@ Decisión de arquitectura del periodo: las 5 skills de códigos de lujo individu
 
 ## Archivo (fuera de ventana)
 
-*(Vacío por ahora. Cuando un mes supere los 6 meses de antigüedad, resumirlo aquí en 2-3 líneas en lugar de borrarlo.)*
+Regla automática: cuando un mes del timeline supere los **6 meses de antigüedad**, se resume aquí en 2-3 líneas y se elimina su detalle de la ventana activa. Esto se hace en cada uso de la skill, sin que Ana tenga que pedirlo. Las doctrinas que sigan vigentes no se archivan: viven en la sección 2.
+
+*(Vacío por ahora: el trabajo documentado más antiguo es de mayo 2026, así que el primer archivado tocará en noviembre 2026 — mayo se resumirá aquí y su detalle saldrá del timeline.)*

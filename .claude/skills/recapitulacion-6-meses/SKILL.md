@@ -1,6 +1,6 @@
 ---
 name: recapitulacion-6-meses
-description: Memoria viva de CB Grup Barna — recapitulación RODANTE de los últimos 6 meses de trabajo de Ana con Claude (web cbgrupbarna.info, ecosistema de ~35 skills, doctrinas de crecimiento IG, sponsors, vídeo, eventos). Cargar SIEMPRE al empezar cualquier sesión o tarea del club para arrancar con el contexto de lo ya hecho y no repetir ni contradecir trabajo previo. Cargar también siempre que Ana pregunte "qué hemos hecho", "recuérdame dónde estábamos", "resumen de estos meses", "qué skills tenemos", "cuándo hicimos X", "dónde lo dejamos", o pida un informe de actividad para la Junta. Incluye el protocolo para MANTENER la recapitulación al día — cada trabajo significativo que se cierre se anota aquí, y la ventana avanza (lo que supera 6 meses se archiva).
+description: Memoria viva de CB Grup Barna — recapitulación RODANTE de los últimos 6 meses de trabajo de Ana con Claude (web cbgrupbarna.info, ecosistema de ~35 skills, doctrinas de crecimiento IG, sponsors, vídeo, eventos). Cargar SIEMPRE al empezar cualquier sesión o tarea del club para arrancar con el contexto de lo ya hecho y no repetir ni contradecir trabajo previo. Cargar también siempre que Ana pregunte "qué hemos hecho", "recuérdame dónde estábamos", "resumen de estos meses", "qué skills tenemos", "cuándo hicimos X", "dónde lo dejamos", o pida un informe de actividad para la Junta. Incluye el protocolo para MANTENER la recapitulación al día — cada trabajo significativo que se cierre se anota aquí, y la ventana avanza automáticamente (lo que supera 6 meses se resume en 2-3 líneas y se mueve al archivo en cada uso, sin que haya que pedirlo).
 ---
 
 # Recapitulación 6 meses — memoria viva del club
@@ -33,9 +33,9 @@ Lo esencial en 30 segundos:
 
 Una memoria que no se actualiza caduca en un mes. Por eso el mantenimiento es parte de la skill:
 
-1. **Al cerrar un trabajo significativo** (nueva skill, sección web, campaña, dossier, decisión doctrinal): añadir una entrada de 1-3 líneas en el mes correspondiente de `references/recap-actual.md` — qué se hizo, fecha y dónde vive (skill, URL, carpeta). Los micro-ajustes (typos, una foto subida) no se anotan.
-2. **Ventana rodante:** al tocar el archivo, si el mes más antiguo supera los 6 meses, moverlo a la sección "Archivo (fuera de ventana)" al final del archivo — se resume en 2-3 líneas, no se borra: la historia del club también es un activo.
-3. **Actualizar la fecha de "última actualización"** en la cabecera del archivo.
+1. **Archivado automático (obligatorio en cada uso).** Cada vez que se cargue esta skill y se vaya a leer o tocar `references/recap-actual.md`, comparar la fecha de hoy con los meses del timeline. Todo mes que supere los **6 meses de antigüedad** se saca de la ventana activa SIN esperar a que Ana lo pida: se **resume en 2-3 líneas** (hitos y decisiones que siguen vigentes, nada de detalle) y se mueve a la sección "Archivo (fuera de ventana)" al final del archivo. No se borra nunca — la historia del club también es un activo — pero el detalle desaparece de la ventana activa para que la recapitulación siga siendo ligera. Si una doctrina nacida en un mes archivado sigue vigente, vive en la sección de doctrinas (sección 2), no en el archivo.
+2. **Al cerrar un trabajo significativo** (nueva skill, sección web, campaña, dossier, decisión doctrinal): añadir una entrada de 1-3 líneas en el mes correspondiente de `references/recap-actual.md` — qué se hizo, fecha y dónde vive (skill, URL, carpeta). Los micro-ajustes (typos, una foto subida) no se anotan.
+3. **Actualizar la fecha de "última actualización"** y la ventana actual en la cabecera del archivo tras cualquier cambio.
 4. **Fuentes para reconstruir o verificar** si algo falta:
    - `git log` del repo `cbgrupbarna-info` (la web y sus fechas exactas).
    - El listado de skills instaladas y sus descripciones (el ecosistema y sus doctrinas).
