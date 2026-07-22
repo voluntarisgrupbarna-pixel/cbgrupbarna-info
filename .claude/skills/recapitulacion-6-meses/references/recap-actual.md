@@ -1,14 +1,14 @@
 # Recapitulación detallada — últimos 6 meses de trabajo en Claude
 
-**Ventana actual:** ~febrero 2026 → julio 2026
+**Ventana actual:** mayo 2026 → julio 2026 (todo lo anterior, resumido en "Archivo")
 **Última actualización:** 2026-07-22
 **Cómo mantener este archivo:** ver "Protocolo de mantenimiento" en `../SKILL.md`.
 
 ---
 
-## 1. Ecosistema de skills del club (construido a lo largo del periodo)
+## 1. Ecosistema de skills del club (inventario actual)
 
-Unas **35 skills** organizadas en capas, orquestadas por la mestra `/cbgb`. Es el activo más importante del periodo: convierte a Claude en un departamento de marketing con criterio propio del club.
+Unas **35 skills** organizadas en capas, orquestadas por la mestra `/cbgb`. Es el activo más importante del proyecto: convierte a Claude en un departamento de marketing con criterio propio del club. Su construcción es anterior a mayo 2026 y está resumida en el Archivo; esta tabla es el **estado vigente**, no historia.
 
 | Capa | Skills | Qué aportan |
 |---|---|---|
@@ -20,7 +20,6 @@ Unas **35 skills** organizadas en capas, orquestadas por la mestra `/cbgb`. Es e
 | Códigos de lujo | `codis-lux-cbgb` (fusión de Dior, Vogue, Elie Saab, Bvlgari, Jordan Roth), `luxury-logic-cbgb` | Lógica de deseo y pertenencia de marca de lujo aplicada a escala de barrio |
 | Sponsors | `patrocinis-club`, `captacio-pack-cbgb` | Estrategia Oro/Plata/Bronce, dossier, targets, scripts; pack de producción (Word + PPTX + Excel con pipeline) |
 
-Decisión de arquitectura del periodo: las 5 skills de códigos de lujo individuales se **fusionaron en `codis-lux-cbgb`** para reducir carga de contexto.
 
 ## 2. Doctrinas y decisiones establecidas (no contradecir sin nueva evidencia)
 
@@ -61,4 +60,6 @@ Decisión de arquitectura del periodo: las 5 skills de códigos de lujo individu
 
 Regla automática: cuando un mes del timeline supere los **6 meses de antigüedad**, se resume aquí en 2-3 líneas y se elimina su detalle de la ventana activa. Esto se hace en cada uso de la skill, sin que Ana tenga que pedirlo. Las doctrinas que sigan vigentes no se archivan: viven en la sección 2.
 
-*(Vacío por ahora: el trabajo documentado más antiguo es de mayo 2026, así que el primer archivado tocará en noviembre 2026 — mayo se resumirá aquí y su detalle saldrá del timeline.)*
+**Anterior a mayo 2026 — construcción del ecosistema de skills.** Se creó y refinó el sistema de ~35 skills del club orquestado por `/cbgb`: identidad y método de Ana, sistema visual y carteles, reels/vídeo, crecimiento IG, benchmarks (Barça Basket, clubs de barrio, femenino, Pau Gasol Academy), lógica de lujo y sponsors. Decisión de arquitectura destacada: fusión de las 5 skills de códigos de lujo individuales (Dior, Vogue, Elie Saab, Bvlgari, Jordan Roth) en `codis-lux-cbgb` para reducir carga de contexto. El inventario vigente vive en la sección 1; las doctrinas nacidas en este periodo siguen vigentes y viven en la sección 2.
+
+*(Próximo archivado por antigüedad: en noviembre 2026, mayo se resumirá aquí y su detalle saldrá del timeline.)*
