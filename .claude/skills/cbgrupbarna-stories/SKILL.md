@@ -1,18 +1,33 @@
 ---
 name: cbgrupbarna-stories
-description: Generate on-brand vertical (9:16) Instagram/TikTok story graphics for CB Grup Barna. Use whenever asked to create a "story", "reel" cover, or vertical social graphic for the club — encodes the club's real colors, typography and two fixed layout rules (logo top-right, red frame on light backgrounds).
+description: Generate on-brand vertical (9:16) Instagram/TikTok story and reel-cover graphics for CB Grup Barna. Use whenever asked to create a "story", "portada"/cover, or vertical social graphic for the club — encodes the club's real colors, typography, the unified pill+tag+eyebrow+headline+accent+footer layout, and the two background rules (red frame on white, red/black veil on reel-cover photos).
 ---
 
-# CB Grup Barna — Stories
+# CB Grup Barna — Stories & portades
 
-Brand system for vertical (1080×1920) story graphics, reverse-engineered from the
-club's real site (`index.html` at the repo root) and its published social pieces —
-not invented. Reuse this system for every new story instead of improvising colors
-or fonts each time.
+Brand system for vertical (1080×1920) story/cover graphics, reverse-engineered
+from the club's real site (`index.html` at the repo root) and from actual
+published pieces the club uses — not invented. Reuse this system for every new
+piece instead of improvising colors, fonts, or layout each time.
 
-A worked reference implementation (style-kit + 3 example stories, fonts inlined as
-base64) lives at `.claude/skills/cbgrupbarna-stories/reference.html` — open it to
-see the full CSS and copy patterns before generating new pieces.
+**Related club skills** (if present on the machine, prefer them as the
+authority and treat this skill as the repo-local fallback):
+- `sistema-visual-cbgb` — the club's general design-token skill. Its
+  `tokens.conf` is the intended single source of truth for color/type/logo
+  values, but at the time this skill was written that file didn't exist yet
+  (placeholder only) — so the tokens below are derived directly from
+  `index.html` instead. **If `tokens.conf` exists when you read this, use its
+  values and treat the table below as out of date.**
+- `portada-reels-cbgb` — the club's criteria for reel-cover thumbnails
+  specifically (safe zones, grid-cropping, the ≤5-word rule, logo at vertical
+  center). This skill's layout was built from direct, repeated user
+  instructions that differ from that playbook in one place — see rule ④ below,
+  don't silently "fix" it to match the other skill.
+
+A worked reference implementation (style-kit + 5 example pieces, fonts and
+photos inlined as base64) lives at
+`.claude/skills/cbgrupbarna-stories/reference.html` — open it to see the full
+CSS and copy patterns before generating new pieces.
 
 ## Brand tokens
 
@@ -20,76 +35,101 @@ Colors (from `index.html` `:root`, do not substitute other reds/blacks):
 
 | Token | Hex | Use |
 |---|---|---|
-| `--red` | `#E31E24` | Shield red. Accent word in the headline, divider line, CTA pill, **and the mandatory frame on light backgrounds**. |
-| `--black` | `#0A0A0C` | "Declaration" backgrounds (results, confirmations). Never pure `#000` — kept a hair warm so the red doesn't vibrate against it. |
-| light bg | `#F2F0EC` | Info/CTA backgrounds (sign-ups, calls to trial). Off-white, never `#FFFFFF` flat. |
-| muted | `#6B6F76` | Footer / metadata line only. Always de-emphasized (lower opacity or smaller size). |
+| `--red` | `#E31E24` | Shield red. Hook pill, accent bar, mandatory frame on white backgrounds, mandatory veil on reel-cover photos. |
+| `--black` | `#0A0A0C` | Context tag, "declaration" flat background, base tone of the reel-cover veil. Never pure `#000`. |
+| white bg | `#FFFFFF` | Flat background for informative/CTA pieces. Pure white, not cream — **always paired with rule ①**. |
+| muted | `#6B6F76` / `rgba(255,255,255,.6–.85)` | Eyebrow (on white) and footer line. Always de-emphasized, never protagonist. |
 
 Typography (same families the site already loads via Google Fonts — see the
 `<link>` in `index.html`):
 
 | Role | Font | Weight | Notes |
 |---|---|---|---|
-| Headline | Inter | 900 | Big two-line statement, uppercase, tight letter-spacing (`-0.02em`). Second line is the `--red` (or black-on-red) accent word. |
-| Eyebrow / footer label | JetBrains Mono | 700 | Tracked uppercase (2–3px letter-spacing), small. This is the club's "meta" voice used site-wide for tags/timestamps. |
-| Supporting line / CTA | Inter | 800 | Uppercase, shorter line under the divider. |
-| Reserved accent | Bebas Neue | 400 | The club's display face used elsewhere on the site for names/big stat numbers — not used in the 3 reference stories, but available for a stat-forward variant (e.g. a big "34" or "450"). |
+| Headline | Inter | 900 | Big statement, uppercase, tight letter-spacing (`-0.02em`). |
+| Hook pill / tag / kickline / CTA | Inter | 800 | Uppercase, short — the chip and closing-line text. |
+| Eyebrow / footer | JetBrains Mono | 700 | Tracked uppercase, small. The club's "meta" voice used site-wide for tags/timestamps. |
+| Reserved accent | Bebas Neue | 400 | The club's display face, used elsewhere on the site for names/big stat numbers — not used in the reference pieces, but available for a stat-forward variant. |
 
-## Fixed layout rules (non-negotiable)
+## The unified cover block
 
-1. **Logo always top-right.** `logo.png` (repo root), ~150px wide on a 1080px canvas,
-   64px from the top and right edges. Never centered, never top-left — it must
-   leave the upper-left corner clear for the headline to breathe.
-2. **Light background ⇒ mandatory red frame.** Any story using the light/off-white
-   background (`#F2F0EC`) gets a solid `26px` border in `--red` (`#E31E24`) around
-   the *entire* canvas, matching the shield's own red trim. A light-background
-   story with no border is a bug, not a style choice. Black and red backgrounds do
-   not get this frame — they already carry the accent through text/divider.
-3. **One accent per piece.** Red marks only the headline's key word, the divider,
-   and (if present) the CTA pill — it does not spread through body copy or bullet
-   lists.
-
-## Canvas structure
-
-Root class `.story` at `1080×1920`, one background variant per piece:
-`bg-black` / `bg-red` / `bg-light`. Inside, in this order:
+One layout, used on **every** piece — flat or photo. Top to bottom:
 
 ```
-.story.bg-{black|red|light}
-├── img.logo            top:64px right:64px width:150px   (rule 1)
-├── .content            anchored to bottom third
-│   ├── .eyebrow        JetBrains Mono 700, tracked, small
-│   ├── .headline       Inter 900, 2 lines, line 2 wrapped in .accent
-│   ├── .divider        6px bar, 150px wide
-│   ├── .sub            Inter 800, uppercase, supporting line(s)
-│   └── .cta            optional — red pill, only on info/CTA pieces
-└── .foot               bottom:70px, JetBrains Mono 700, ~60% opacity
+.story.bg-{white|red|black|photo}
+├── img.photo + .veil     ONLY on bg-photo — full-bleed photo + red/black veil (rule ②)
+├── img.logo              top:64px right:64px, ~140px wide          (rule ④)
+├── .pill                 top:64px left:64px — the hook, 3–4 words  (rule ③, fixed chip)
+├── .tag                  right under .pill — context/series/date   (rule ③, fixed chip)
+├── .content              anchored to the lower third
+│   ├── .eyebrow          JetBrains Mono 700, tracked, small
+│   ├── .headline         Inter 900, the main message
+│   └── .kickline         red/black bar + short closing phrase
+└── .foot                 bottom:70px, JetBrains Mono 700, reduced opacity
 ```
 
-Color mapping per background (headline/divider/sub base color, with the accent
-flipped for contrast):
+Four background variants share this exact block — only the canvas background
+and the chip/text color mapping change:
 
-- `bg-black`: text white, accent word/divider red.
-- `bg-red`: text white, accent word/divider black (`#141416`).
-- `bg-light` (+ mandatory red frame): text black (`#141416`), accent word red.
+- **`bg-white`** — pure white + mandatory red frame (rule ①). Headline/kickline
+  dark (`#141416`), eyebrow/footer muted grey.
+- **`bg-red`** — flat `--red`. Headline/kickline white; pill and kickline bar
+  flip to black so they don't disappear into the same hue.
+- **`bg-black`** — flat `--black`. Headline/kickline white; tag flips to
+  white-on-black for the same reason.
+- **`bg-photo`** — real club photo, full-bleed, **+ mandatory veil** (rule ②).
+  Same white-based palette as `bg-black`.
 
-## Producing a new story
+The pill and tag are brand chips, not page-colored elements: they stay
+red/black regardless of the canvas, and only invert when they'd otherwise sit
+on their own color. This is what makes them read as the same "stamp" across
+every piece in the grid.
 
-1. Pick the message and match it to a background variant by intent — a
-   result/confirmation reads as `bg-black`, a barri/identity statement as
-   `bg-red`, a recruitment/CTA piece as `bg-light` (remember rule 2, the frame).
-2. Write two-line headline copy: line 1 neutral, line 2 the punch word/phrase in
-   the accent color. Keep it terse — this is a display headline, not a sentence.
-3. Copy the markup skeleton above (or lift a `<div class="story ...">` block
-   straight out of `reference.html`) and swap in the new eyebrow/headline/sub/cta/
-   foot text. Don't restyle — reuse the existing classes so every story stays
-   visually consistent with the rest.
+## Fixed rules
+
+1. **White background ⇒ mandatory red frame.** Any `bg-white` piece gets a
+   solid `26px` border in `--red` around the entire canvas. A white piece with
+   no border is a bug.
+2. **Reel-cover portada ⇒ mandatory photo + red/black veil.** A reel cover
+   never uses a flat background — always a real club photo (from `img/` or
+   equivalent) with the veil gradient (red → near-black, see `reference.html`
+   `.veil` rule) so the text stays legible. Flat backgrounds (white/red/black)
+   are for stories/announcements that aren't reel-cover thumbnails.
+3. **Pill/tag are fixed brand chips.** Always red/black, never tinted to match
+   the page background — they only invert (see mapping above) when they'd
+   otherwise blend into a same-colored canvas.
+4. **Logo top-right — known tension with `portada-reels-cbgb`.** This series
+   fixes the logo at top-right, ~140px, 64px from the edges, per direct and
+   repeated user instruction. The club's reel-cover playbook (`portada-reels-cbgb`)
+   instead calls for the logo at **vertical center, never a corner**, because
+   the profile grid (3:4/1:1 crop) eats the corners. If a piece from this
+   system is actually uploaded as a reel's custom cover (not just posted as a
+   story), re-check this against the grid crop before a big rollout — don't
+   silently resolve the conflict one way or the other.
+5. **One accent per piece.** Red marks only the pill, the kickline bar, and
+   (on `bg-white`) the frame — it does not spread through body copy.
+
+## Producing a new piece
+
+1. Decide reel-cover vs. story: reel-cover → `bg-photo` + a real photo (rule
+   ②); story/announcement → pick `bg-white` / `bg-red` / `bg-black` by intent
+   (result/confirmation → black, barri/identity → red, recruitment/CTA →
+   white + frame).
+2. Write the copy in this order: **pill** (3–4 word hook) → **tag** (context/
+   date/series) → **eyebrow** (who/what this is about) → **headline** (the
+   main statement) → **kickline** (one short closing phrase after the bar).
+   Keep every field terse — this is a display system, not paragraphs.
+3. Copy a `<div class="story ...">` block straight out of `reference.html` and
+   swap in the new text/photo. Don't restyle — reuse the existing classes so
+   every piece stays visually consistent with the rest.
 4. Fonts:
    - **Delivering as a Claude Artifact**: the Artifact CSP blocks font CDNs, so
-     inline Bebas Neue / Inter / JetBrains Mono as base64 `@font-face` data URIs
-     (see `reference.html` for the exact `@font-face` blocks — the same base64
-     payloads can be reused verbatim, no need to re-fetch).
-   - **Delivering as a page inside this repo**: link Google Fonts the same way
-     `index.html` already does — `family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700` — no need to inline.
-5. Embed `logo.png` from the repo root (or its base64, already captured in
+     inline Bebas Neue / Inter / JetBrains Mono as base64 `@font-face` data
+     URIs — reuse the exact payloads already in `reference.html`, no need to
+     re-fetch.
+   - **Delivering as a page inside this repo**: link Google Fonts the way
+     `index.html` already does instead of inlining.
+5. Photo (reel-cover only): pull a real club photo (e.g. `img/hero-player.webp`,
+   `img/team-action.webp`, or a new upload) — never a stock or generic image —
+   and apply the `.veil` gradient from `reference.html` verbatim.
+6. Embed `logo.png` from the repo root (or its base64, already captured in
    `reference.html`) — never redraw or substitute the shield.
