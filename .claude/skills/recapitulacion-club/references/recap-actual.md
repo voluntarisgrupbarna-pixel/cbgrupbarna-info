@@ -47,7 +47,7 @@ Unas **35 skills** organizadas en capas, orquestadas por la mestra `/cbgb`. Es e
 - **14–18 jun:** enlace a galería y SEO en portada (primer fold), soporte de subida por **ZIP** en el admin (JSZip), eventos publicados: Cistella Petita 2a Edició, Fotos Equips Temporada 25-26, Senior Femení Sessió Instax. **Primer sponsor visible: Foto Jané** (banner + logo SVG en la galería).
 
 ### Julio 2026
-- **22 jul:** creada esta skill de recapitulación (`recapitulacion-6-meses`) como memoria viva del proyecto.
+- **22-23 jul:** creada esta skill de recapitulación como memoria viva del proyecto (nacida como `recapitulacion-6-meses`, renombrada a `recapitulacion-club` al pasar la ventana de archivado automático de 6 a 3 meses).
 
 ## 4. Estado actual y frentes abiertos
 

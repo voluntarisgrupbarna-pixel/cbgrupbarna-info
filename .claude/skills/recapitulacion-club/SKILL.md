@@ -1,5 +1,5 @@
 ---
-name: recapitulacion-6-meses
+name: recapitulacion-club
 description: Memoria viva de CB Grup Barna — recapitulación RODANTE del trabajo de Ana con Claude, con detalle de los últimos 3 meses y archivo histórico resumido (web cbgrupbarna.info, ecosistema de ~35 skills, doctrinas de crecimiento IG, sponsors, vídeo, eventos). Cargar SIEMPRE al empezar cualquier sesión o tarea del club para arrancar con el contexto de lo ya hecho y no repetir ni contradecir trabajo previo. Cargar también siempre que Ana pregunte "qué hemos hecho", "recuérdame dónde estábamos", "resumen de estos meses", "qué skills tenemos", "cuándo hicimos X", "dónde lo dejamos", o pida un informe de actividad para la Junta. Incluye el protocolo para MANTENER la recapitulación al día — cada trabajo significativo que se cierre se anota aquí, y la ventana avanza automáticamente (lo que supera 3 meses se resume en 2-3 líneas y se mueve al archivo en cada uso, sin que haya que pedirlo).
 ---
 
