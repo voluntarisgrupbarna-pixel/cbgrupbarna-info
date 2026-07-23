@@ -97,14 +97,13 @@ every piece in the grid.
 3. **Pill/tag are fixed brand chips.** Always red/black, never tinted to match
    the page background — they only invert (see mapping above) when they'd
    otherwise blend into a same-colored canvas.
-4. **Logo top-right — known tension with `portada-reels-cbgb`.** This series
-   fixes the logo at top-right, ~140px, 64px from the edges, per direct and
-   repeated user instruction. The club's reel-cover playbook (`portada-reels-cbgb`)
-   instead calls for the logo at **vertical center, never a corner**, because
-   the profile grid (3:4/1:1 crop) eats the corners. If a piece from this
-   system is actually uploaded as a reel's custom cover (not just posted as a
-   story), re-check this against the grid crop before a big rollout — don't
-   silently resolve the conflict one way or the other.
+4. **Logo top-right — confirmed, overrides `portada-reels-cbgb`.** The logo
+   always goes top-right, ~140px, 64px from the top and right edges. This was
+   flagged as a tension with the club's general reel-cover playbook
+   (`portada-reels-cbgb`), which calls for the logo at vertical center to
+   survive the profile grid's 3:4/1:1 crop — asked directly, the answer was to
+   keep top-right regardless. Treat top-right as final for this system, not an
+   open question; don't "fix" it back to center.
 5. **One accent per piece.** Red marks only the pill, the kickline bar, and
    (on `bg-white`) the frame — it does not spread through body copy.
 
