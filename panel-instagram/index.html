@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Panell Instagram · CB Grup Barna</title>
+<link rel="icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#E31E24; --red-dark:#a81318; --black:#050505; --panel:#0e0e10; --panel2:#141417;
+    --border:#232327; --text:#ffffff; --muted:#8a8a8a; --dim:#5a5a60;
+    --green:#22c55e; --yellow:#FFD600; --blue:#3b82f6; --orange:#f97316; --pink:#cc2366;
+    --mono:'JetBrains Mono',monospace; --display:'Bebas Neue',sans-serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--black);color:var(--text);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.4}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px 80px}
+
+  /* Topbar */
+  .top{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .top img{height:34px;width:auto}
+  .top .titles{line-height:1}
+  .kicker{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+  .top h1{font-family:var(--display);font-size:26px;letter-spacing:1px;font-weight:400}
+  .top .spacer{flex:1}
+  .badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;padding:5px 10px;border-radius:999px;border:1px solid var(--border);text-transform:uppercase}
+  .badge.demo{color:var(--yellow);border-color:#4a3f0a;background:#191506}
+  .badge.live{color:var(--green);border-color:#0f3d22;background:#06170e}
+  .badge .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .badge.demo .dot{background:var(--yellow)}
+  .badge.live .dot{background:var(--green);box-shadow:0 0 6px var(--green)}
+  .handle{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .updated{font-family:var(--mono);font-size:11px;color:var(--dim)}
+
+  .banner{margin-top:14px;padding:11px 14px;border:1px solid #4a3f0a;background:#14110340;border-radius:10px;font-size:12.5px;color:#d9c98a;display:flex;gap:9px;align-items:flex-start}
+  .banner b{color:var(--yellow)}
+  .banner a{color:var(--yellow);text-decoration:underline}
+
+  section{margin-top:30px}
+  .sec-title{font-family:var(--display);font-size:18px;letter-spacing:1.5px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .sec-title::before{content:'';width:3px;height:16px;background:var(--red);display:inline-block}
+
+  /* KPI grid */
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:15px 15px 16px;position:relative;overflow:hidden}
+  .kpi::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--red);opacity:.7}
+  .kpi .k-lab{font-family:var(--mono);font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .kpi .k-val{font-family:var(--display);font-size:34px;line-height:.9;letter-spacing:.5px}
+  .kpi .k-sub{font-family:var(--mono);font-size:11px;margin-top:7px;color:var(--dim)}
+  .k-sub .up{color:var(--green)}.k-sub .down{color:var(--red)}
+
+  .grid2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}
+  .card h3{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:500}
+  .chart{width:100%;height:auto;display:block}
+
+  /* Content mix bars */
+  .mix-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-family:var(--mono);font-size:12px}
+  .mix-row .mlab{width:64px;color:var(--muted);text-transform:uppercase;font-size:10px;letter-spacing:1px}
+  .mix-bar{flex:1;height:9px;background:var(--panel2);border-radius:999px;overflow:hidden}
+  .mix-fill{height:100%;border-radius:999px}
+  .mix-row .mn{width:22px;text-align:right;color:var(--text)}
+
+  /* Posts */
+  .posts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .post{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s,transform .15s}
+  .post:hover{border-color:var(--red);transform:translateY(-2px)}
+  .post .thumb{height:118px;background:var(--panel2) center/cover no-repeat;position:relative;display:flex;align-items:flex-end}
+  .post .ptype{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:9px;letter-spacing:.5px;padding:3px 7px;border-radius:6px;background:#000000cc;text-transform:uppercase}
+  .post .pcap{padding:10px 11px 4px;font-size:11.5px;color:#d4d4d8;height:52px;overflow:hidden;line-height:1.35}
+  .post .pstats{display:flex;flex-wrap:wrap;gap:8px 12px;padding:8px 11px 12px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .post .pstats b{color:var(--text);font-weight:500}
+  .post .per{padding:0 11px 11px;font-family:var(--mono);font-size:10px;color:var(--green)}
+
+  /* Mentions feed */
+  .feed{display:flex;flex-direction:column;gap:10px}
+  .ment{display:flex;gap:12px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:13px 15px;align-items:flex-start;transition:border-color .2s}
+  .ment:hover{border-color:var(--pink)}
+  .ment .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#cc2366,#f97316);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:17px;flex-shrink:0}
+  .ment .mbody{flex:1;min-width:0}
+  .ment .mhead{display:flex;align-items:center;gap:8px;margin-bottom:3px;flex-wrap:wrap}
+  .ment .muser{font-weight:700;font-size:13px}
+  .ment .mtime{font-family:var(--mono);font-size:10px;color:var(--dim)}
+  .ment .mcap{font-size:12.5px;color:#c4c4c8;line-height:1.4}
+  .ment .mstat{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:5px}
+  .ment .mgo{font-family:var(--mono);font-size:10px;color:var(--pink);white-space:nowrap;align-self:center}
+
+  .foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .foot a{color:var(--muted)}
+
+  #err{display:none;margin-top:12px;padding:10px 13px;border:1px solid #4a1010;background:#1a0606;border-radius:10px;font-family:var(--mono);font-size:11px;color:#ff9a9a}
+
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)}.grid2{grid-template-columns:1fr}.posts{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.kpis{grid-template-columns:repeat(2,1fr)}.posts{grid-template-columns:1fr}.top h1{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <img src="../logo.png" alt="CB Grup Barna">
+    <div class="titles">
+      <div class="kicker">Panell de xarxes</div>
+      <h1>INSTAGRAM · CB GRUP BARNA</h1>
+    </div>
+    <div class="spacer"></div>
+    <div style="text-align:right">
+      <div id="modeBadge" class="badge demo"><span class="dot"></span>DEMO</div>
+      <div class="handle" id="handle">@cbgrupbarna</div>
+      <div class="updated" id="updated">—</div>
+    </div>
+  </div>
+
+  <div class="banner" id="demoBanner">
+    <span>⚠️</span>
+    <div><b>Estàs veient dades de demostració.</b> Connecta el token de la Instagram Graph API
+    (guia a <a href="./README.md">README</a>) i el panell mostrarà dades reals de <b>@cbgrupbarna</b>,
+    actualitzades automàticament cada dia pel GitHub Action.</div>
+  </div>
+
+  <div id="err"></div>
+
+  <!-- KPIs -->
+  <section>
+    <div class="sec-title">Resum del compte</div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <!-- Charts -->
+  <section>
+    <div class="grid2">
+      <div class="card">
+        <h3>Creixement de seguidors · 30 dies</h3>
+        <svg class="chart" id="growthChart" viewBox="0 0 600 220" preserveAspectRatio="none"></svg>
+      </div>
+      <div class="card">
+        <h3>Barreja de contingut</h3>
+        <div id="mix"></div>
+        <h3 style="margin-top:22px">Abast &amp; visites (30 dies)</h3>
+        <div id="reachBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best posts -->
+  <section>
+    <div class="sec-title">Millors publicacions</div>
+    <div class="posts" id="posts"></div>
+  </section>
+
+  <!-- Mentions -->
+  <section>
+    <div class="sec-title">Qui ens etiqueta <span style="font-family:var(--mono);font-size:11px;letter-spacing:0;color:var(--muted);font-weight:400" id="mentCount"></span></div>
+    <div class="feed" id="feed"></div>
+  </section>
+
+  <!-- Demographics -->
+  <section id="demoSec">
+    <div class="sec-title">On és la nostra audiència</div>
+    <div class="card"><div id="cities"></div></div>
+  </section>
+
+  <div class="foot">
+    <div>CB GRUP BARNA · Panell intern · #somclot</div>
+    <div><a href="../">← Tornar a cbgrupbarna.info</a> · <span id="apiInfo"></span></div>
+  </div>
+
+</div>
+
+<script>
+const $ = (s)=>document.querySelector(s);
+const fmt = (n)=> n==null ? '—' : n.toLocaleString('ca-ES');
+const esc = (s)=> (s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function timeAgo(ts){
+  if(!ts) return '';
+  const d=(Date.now()-new Date(ts))/1000;
+  if(d<3600) return Math.floor(d/60)+' min';
+  if(d<86400) return Math.floor(d/3600)+' h';
+  return Math.floor(d/86400)+' d';
+}
+
+async function load(){
+  let data;
+  try{
+    const res = await fetch('./data.json?t='+Date.now());
+    data = await res.json();
+  }catch(e){
+    $('#err').style.display='block';
+    $('#err').textContent='No s\'ha pogut carregar data.json: '+e.message;
+    return;
+  }
+  render(data);
+}
+
+function render(d){
+  const m = d.meta||{};
+  const k = d.kpis||{};
+
+  // Mode badge
+  const live = m.mode==='live';
+  const badge = $('#modeBadge');
+  badge.className = 'badge '+(live?'live':'demo');
+  badge.innerHTML = '<span class="dot"></span>'+(live?'EN DIRECTE':'DEMO');
+  $('#demoBanner').style.display = live ? 'none' : 'flex';
+  $('#handle').textContent = m.account||'@cbgrupbarna';
+  $('#updated').textContent = m.generatedAt ? 'Actualitzat '+new Date(m.generatedAt).toLocaleString('ca-ES',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
+  $('#apiInfo').textContent = 'Graph API '+(m.apiVersion||'');
+
+  if(m.errors && m.errors.length){
+    $('#err').style.display='block';
+    $('#err').innerHTML='⚠️ Avisos de l\'API ('+m.errors.length+'): '+esc(m.errors.join(' · '));
+  }
+
+  // KPIs
+  const dl = k.followersDelta;
+  const dlHtml = dl==null ? '' : `<span class="${dl>=0?'up':'down'}">${dl>=0?'▲':'▼'} ${Math.abs(dl)}</span> avui`;
+  const kpis = [
+    {lab:'Seguidors', val:fmt(k.followers), sub:dlHtml},
+    {lab:'Abast 30d', val:fmt(k.reach30), sub:'comptes assolits'},
+    {lab:'Visites perfil', val:fmt(k.profileViews30), sub:'últims 30 dies'},
+    {lab:'Engagement', val:(k.avgEngagementRate!=null?k.avgEngagementRate+'%':'—'), sub:'mitjana per post'},
+    {lab:'Mencions', val:fmt(k.mentionsCount), sub:'ens etiqueten'},
+    {lab:'Publicacions', val:fmt(k.posts), sub:'total al perfil'},
+  ];
+  $('#kpis').innerHTML = kpis.map(x=>`
+    <div class="kpi"><div class="k-lab">${x.lab}</div><div class="k-val">${x.val}</div><div class="k-sub">${x.sub||''}</div></div>`).join('');
+
+  // Growth chart (SVG line)
+  drawGrowth(d.history||[]);
+
+  // Reach box
+  $('#reachBox').innerHTML = `
+    <div style="display:flex;gap:20px;font-family:var(--mono);margin-top:4px">
+      <div><div style="font-size:10px;color:var(--muted);letter-spacing:1px">ABAST</div><div style="font-family:var(--display);font-size:30px">${fmt(k.reach30)}</div></div>
+      <div><div style="font-size:10px;color:var(--muted);letter-spacing:1px">VISITES</div><div style="font-family:var(--display);font-size:30px">${fmt(k.profileViews30)}</div></div>
+    </div>`;
+
+  // Content mix
+  const mix = d.contentMix||{};
+  const colors = {Reels:'var(--red)',Vídeo:'var(--orange)',Carrusel:'var(--blue)',Imatge:'var(--yellow)'};
+  const total = Object.values(mix).reduce((a,b)=>a+b,0)||1;
+  $('#mix').innerHTML = Object.entries(mix).sort((a,b)=>b[1]-a[1]).map(([lab,n])=>`
+    <div class="mix-row"><span class="mlab">${lab}</span>
+      <span class="mix-bar"><span class="mix-fill" style="width:${(n/total*100).toFixed(0)}%;background:${colors[lab]||'var(--muted)'}"></span></span>
+      <span class="mn">${n}</span></div>`).join('') || '<div style="color:var(--dim);font-size:12px">Sense dades</div>';
+
+  // Best posts
+  const posts = (d.media||[]).slice(0,8);
+  $('#posts').innerHTML = posts.map(p=>{
+    const bg = p.thumb ? `background-image:url('${esc(p.thumb)}')` : '';
+    const typeLab = p.type==='REELS'?'▶ REEL':p.mediaType==='CAROUSEL_ALBUM'?'▤ CARRUSEL':p.mediaType==='VIDEO'?'▶ VÍDEO':'IMATGE';
+    return `<a class="post" href="${esc(p.permalink)}" target="_blank" rel="noopener">
+      <div class="thumb" style="${bg}"><span class="ptype">${typeLab}</span></div>
+      <div class="pcap">${esc(p.caption)||'—'}</div>
+      <div class="pstats"><span>❤ <b>${fmt(p.likes)}</b></span><span>💬 <b>${fmt(p.comments)}</b></span><span>🔖 <b>${fmt(p.saved)}</b></span><span>↗ <b>${fmt(p.shares)}</b></span></div>
+      ${p.engagementRate!=null?`<div class="per">Abast ${fmt(p.reach)} · ${p.engagementRate}% engagement</div>`:''}
+    </a>`;
+  }).join('');
+
+  // Mentions feed
+  const ments = d.mentions||[];
+  $('#mentCount').textContent = ments.length ? '('+ments.length+')' : '';
+  $('#feed').innerHTML = ments.length ? ments.map(t=>`
+    <a class="ment" href="${esc(t.permalink)}" target="_blank" rel="noopener">
+      <div class="av">${esc((t.username||'?')[0].toUpperCase())}</div>
+      <div class="mbody">
+        <div class="mhead"><span class="muser">@${esc(t.username)}</span><span class="mtime">${timeAgo(t.timestamp)}</span></div>
+        <div class="mcap">${esc(t.caption)||'(sense text)'}</div>
+        <div class="mstat">❤ ${fmt(t.likes)} · 💬 ${fmt(t.comments)}</div>
+      </div>
+      <div class="mgo">VEURE →</div>
+    </a>`).join('') : '<div style="color:var(--dim);font-size:13px;font-family:var(--mono)">Encara no hi ha etiquetes recents.</div>';
+
+  // Demographics
+  const cities = d.demographics?.byCity||[];
+  if(cities.length){
+    const max = Math.max(...cities.map(c=>c.value));
+    $('#cities').innerHTML = cities.map(c=>`
+      <div class="mix-row"><span class="mlab" style="width:120px">${esc(c.label)}</span>
+        <span class="mix-bar"><span class="mix-fill" style="width:${(c.value/max*100).toFixed(0)}%;background:var(--red)"></span></span>
+        <span class="mn" style="width:44px">${fmt(c.value)}</span></div>`).join('');
+  } else { $('#demoSec').style.display='none'; }
+}
+
+function drawGrowth(hist){
+  const svg = $('#growthChart');
+  const W=600,H=220,pad={l:8,r:8,t:16,b:22};
+  if(hist.length<2){ svg.innerHTML='<text x="20" y="40" fill="#5a5a60" font-size="12">Encara no hi ha prou historial. S\'acumula cada dia.</text>'; return; }
+  const vals = hist.map(h=>h.followers).filter(v=>v!=null);
+  const min=Math.min(...vals), max=Math.max(...vals);
+  const range=(max-min)||1;
+  const x=(i)=> pad.l + i*(W-pad.l-pad.r)/(hist.length-1);
+  const y=(v)=> pad.t + (1-(v-min)/range)*(H-pad.t-pad.b);
+  let path='', area='';
+  hist.forEach((h,i)=>{ const px=x(i),py=y(h.followers); path+=(i?'L':'M')+px.toFixed(1)+' '+py.toFixed(1)+' '; });
+  area = path + `L${x(hist.length-1)} ${H-pad.b} L${x(0)} ${H-pad.b} Z`;
+  // gridlines (3)
+  let grid='';
+  for(let g=0;g<=2;g++){ const gv=min+range*g/2; const gy=y(gv); grid+=`<line x1="${pad.l}" y1="${gy}" x2="${W-pad.r}" y2="${gy}" stroke="#232327" stroke-width="1"/><text x="${W-pad.r}" y="${gy-3}" fill="#5a5a60" font-size="9" text-anchor="end" font-family="monospace">${Math.round(gv).toLocaleString('ca-ES')}</text>`; }
+  const first=hist[0].date?.slice(5), lastD=hist[hist.length-1].date?.slice(5);
+  const lastPt=`<circle cx="${x(hist.length-1)}" cy="${y(hist[hist.length-1].followers)}" r="4" fill="#E31E24"/><circle cx="${x(hist.length-1)}" cy="${y(hist[hist.length-1].followers)}" r="8" fill="#E31E24" opacity="0.25"/>`;
+  svg.innerHTML = `
+    <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E31E24" stop-opacity="0.28"/><stop offset="1" stop-color="#E31E24" stop-opacity="0"/></linearGradient></defs>
+    ${grid}
+    <path d="${area}" fill="url(#ga)"/>
+    <path d="${path}" fill="none" stroke="#E31E24" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${lastPt}
+    <text x="${pad.l}" y="${H-6}" fill="#5a5a60" font-size="9" font-family="monospace">${first||''}</text>
+    <text x="${W-pad.r}" y="${H-6}" fill="#5a5a60" font-size="9" text-anchor="end" font-family="monospace">${lastD||''}</text>`;
+}
+
+load();
+</script>
+</body>
+</html>

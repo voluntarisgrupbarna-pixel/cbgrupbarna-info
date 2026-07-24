@@ -1,0 +1,93 @@
+# Panell d'Instagram · CB Grup Barna
+
+Panell tipus **Hootsuite** per analitzar, controlar i monitoritzar el compte
+[@cbgrupbarna](https://instagram.com/cbgrupbarna): seguidors, abast, engagement,
+millors publicacions, barreja de contingut, audiència i **qui ens etiqueta**.
+
+- **Panell:** [`index.html`](./index.html) → publicat a `https://cbgrupbarna.info/panel-instagram/`
+- **Dades:** [`data.json`](./data.json) — l'omple un GitHub Action cada dia
+- **Fetcher:** [`../scripts/fetch-instagram.mjs`](../scripts/fetch-instagram.mjs)
+- **Automatització:** [`../.github/workflows/instagram-panel.yml`](../.github/workflows/instagram-panel.yml)
+
+## Arquitectura (per què és així)
+
+La web és estàtica (GitHub Pages), així que **no hi ha servidor on amagar el token**.
+La solució segura, sense servidor i sense cost:
+
+```
+GitHub Action (cada dia)  →  crida la Graph API amb el token (a Secrets)
+        │                     └─ escriu panel-instagram/data.json  →  git commit
+        ▼
+Pàgina estàtica index.html  →  llegeix data.json  →  pinta el panell
+```
+
+El token **mai** és al codi ni a la pàgina: viu a **GitHub → Settings → Secrets**.
+Fins que no el connectis, el panell funciona en **mode DEMO** amb dades d'exemple.
+
+## Com connectar-ho a dades reals (una sola vegada)
+
+### 1. Requisits del compte
+- @cbgrupbarna ha de ser un compte **Business** o **Creator**.
+- Ha d'estar **vinculat a una pàgina de Facebook** (Instagram → Configuració →
+  Compte → Comptes vinculats).
+
+### 2. Crear l'app de Meta i el token
+1. Entra a [developers.facebook.com](https://developers.facebook.com/) → **My Apps** → **Create App** (tipus *Business*).
+2. Afegeix el producte **Instagram Graph API**.
+3. A **Graph API Explorer** (o via *System User* a Business Settings) genera un token amb aquests permisos:
+   - `instagram_basic`
+   - `instagram_manage_insights`
+   - `instagram_manage_comments`  *(necessari per a "qui ens etiqueta")*
+   - `pages_read_engagement`
+   - `pages_show_list`
+4. Converteix-lo a **token de llarga durada** (60 dies) o, millor, un **System User token** (no caduca):
+   ```
+   https://graph.facebook.com/v21.0/oauth/access_token?grant_type=fb_exchange_token&client_id=APP_ID&client_secret=APP_SECRET&fb_exchange_token=TOKEN_CURT
+   ```
+
+### 3. Trobar l'IG_USER_ID
+```
+https://graph.facebook.com/v21.0/me/accounts?access_token=EL_TEU_TOKEN
+   → agafa l'id de la pàgina de Facebook
+https://graph.facebook.com/v21.0/PAGE_ID?fields=instagram_business_account&access_token=EL_TEU_TOKEN
+   → et retorna instagram_business_account.id  ← aquest és IG_USER_ID
+```
+
+### 4. Guardar-ho a GitHub Secrets
+Al repo → **Settings → Secrets and variables → Actions → New repository secret**:
+
+| Nom | Valor |
+|-----|-------|
+| `IG_ACCESS_TOKEN` | el token de llarga durada / system user |
+| `IG_USER_ID` | l'id numèric del compte de Instagram |
+
+Opcional, com a *Variable* (no secret): `IG_API_VERSION` (per defecte `v21.0`).
+
+### 5. Executar
+- **Actions → "Panell Instagram (fetch dades)" → Run workflow** per provar-ho a l'instant.
+- A partir d'aquí s'executa **sol cada dia** i el panell passa a mode **EN DIRECTE**.
+
+## Què mostra el panell
+
+| Bloc | Contingut |
+|------|-----------|
+| **Resum** | Seguidors (+Δ del dia), abast 30d, visites al perfil, engagement mitjà, mencions, nº de publicacions |
+| **Creixement** | Corba de seguidors dels últims 30 dies (sèrie que acumulem nosaltres, dia a dia) |
+| **Barreja de contingut** | Reels vs vídeo vs carrusel vs imatge |
+| **Millors publicacions** | Top posts per engagement, amb abast, likes, comentaris, guardats i compartits |
+| **Qui ens etiqueta** | Comptes que ens etiqueten (monitorització estil Hootsuite) |
+| **Audiència** | Top ciutats dels seguidors |
+
+## Notes i límits
+
+- La **corba de creixement** es construeix acumulant un snapshot diari: al principi
+  es veurà curta i s'anirà omplint (la Graph API no dona històric de seguidors llarg).
+- **"Qui ens etiqueta"** usa l'endpoint `/tags` (posts on ens etiqueten). Les mencions
+  dins de *comentaris* requereixen el webhook de mencions de Meta; es pot afegir més endavant.
+- Algunes mètriques a nivell de compte canvien segons la versió de l'API; el fetcher
+  captura cada error i el panell segueix funcionant amb la resta de dades.
+- El token de llarga durada **caduca als ~60 dies** si no és de System User: renova'l o
+  automatitza la renovació.
+
+---
+Fet per al CB Grup Barna · #somclot
