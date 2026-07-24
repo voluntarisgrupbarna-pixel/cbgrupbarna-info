@@ -1,7 +1,207 @@
 {
-  "_instruccions": "Dades mensuals de MESOS PASSATS per a la comparativa any-rere-any. L'API d'Instagram NO dona historic de fa anys, aixo ho omples tu (una vegada) amb el que ja tinguis a Meta Business Suite → Estadistiques → exporta per mes. El panell ho combina amb els mesos que el propi panell va acumulant sol. Format de clau: 'AAAA-MM'. Camps: followers (seguidors a final de mes), newFollowers (nous del mes), reach (abast del mes), profileViews (visites del mes), posts (publicacions del mes), avgEngagement (% engagement mitja del mes). Deixa a null el que no sapigues.",
+  "_instruccions": "Dades mensuals de MESOS PASSATS per a la comparativa any-rere-any. La API d'Instagram NO dona historic de fa anys: aixo ho omples tu (una vegada) amb el que ja tinguis a Meta Business Suite -> Estadistiques -> exporta per mes. El panell ho combina amb els mesos que el propi panell va acumulant sol. Omple nomes les caselles que sapigues i deixa la resta a null. Camps: followers = seguidors a final de mes; newFollowers = nous del mes; reach = abast del mes; profileViews = visites del mes; posts = publicacions del mes; avgEngagement = % engagement mitja del mes.",
+  "_exemple": {
+    "2025-07": {
+      "followers": 2680,
+      "newFollowers": 49,
+      "reach": 35200,
+      "profileViews": 4600,
+      "posts": 10,
+      "avgEngagement": 5.9
+    }
+  },
   "months": {
-    "2025-07": { "followers": 2680, "newFollowers": 49, "reach": 35200, "profileViews": 4600, "posts": 10, "avgEngagement": 5.9 },
-    "2024-07": { "followers": 2180, "newFollowers": 41, "reach": 28800, "profileViews": 3700, "posts": 9, "avgEngagement": 5.4 }
+    "2024-01": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-02": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-03": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-04": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-05": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-06": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-07": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-08": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-09": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-10": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-11": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2024-12": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-01": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-02": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-03": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-04": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-05": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-06": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-07": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-08": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-09": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-10": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-11": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    },
+    "2025-12": {
+      "followers": null,
+      "newFollowers": null,
+      "reach": null,
+      "profileViews": null,
+      "posts": null,
+      "avgEngagement": null
+    }
   }
 }
