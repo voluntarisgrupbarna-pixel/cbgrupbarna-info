@@ -70,6 +70,13 @@ Formato de fichaje/renovación de jugador con aire de **portada de revista**.
 Diferencia con el formato entrenador: aquí manda la **tipografía editorial y
 el color claro**, no la pizarra. Es más "moda/revista", menos "táctica".
 
+**Variante femenina** (misma estructura, colores invertidos): **fondo Roig
+Barna `#E31E24`**, **apellido gigante en BLANCO**, nombre en blanco y
+"renovació." en negro `#0A0A0C` como acento. Categoría al pie en blanco. Así el
+sènior B masculino (crema + apellido rojo) y el femenino (rojo + apellido
+blanco) son un **par reconocible** que comparte layout y se diferencia por
+color. Plantilla: slide "SÈNIOR B FEMENÍ" del deck 9:16.
+
 ---
 
 ## 4 · Portada Sènior A / event — épico
@@ -92,6 +99,19 @@ primer equipo. 9:16, negro y épico.
 
 Es el formato de más autoridad (regla del manual "menys elements, més
 autoritat"): el mensaje tipográfico manda.
+
+**Dos tratamientos para el sènior A** (mismo evento, distinta piel):
+- **Épico oscuro** (ej. Supercopa Femenina): negro + humo rojo, como arriba.
+- **Editorial claro** (ej. Supercopa Sènior A Masculí): **fondo blanco con
+  textura de pista** (líneas de cancha en rojo muy tenue). 4:5, publicado como
+  carrusel 1/6. Estructura: arriba centrado "TEMPORADA 26·27" (gris) +
+  "SÈNIOR A MASCULÍ" (negro, tracking); escudo arriba derecha + indicador
+  "1/6"; **palabra gigante en rojo "SUPER / COPA"** partida en dos líneas, con
+  el **jugador recortado DELANTE** tapándola parcialmente; abajo centrado el
+  **nombre** ("CARLOS" en rojo / "RODRÍGUEZ DE LA HERA" en negro); pie
+  "FORMAT AL BARNA · NOU FITXATGE 26/27". Plantilla: slide "SUPERCOPA SÈNIOR A
+  MASCULÍ" del deck 4:5. Es la misma familia editorial que el sènior B, pero la
+  palabra gigante es la **competición** (SUPERCOPA), no el apellido.
 
 ---
 
