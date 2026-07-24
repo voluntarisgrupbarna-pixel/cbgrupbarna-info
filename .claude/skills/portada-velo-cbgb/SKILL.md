@@ -114,11 +114,23 @@ Fuentes oficiales (Bebas Neue, Montserrat) y escudo en `assets/`.
 
 ## Plantilla PowerPoint editable
 
-Para editar a mano en vez de por código, `assets/Portades_Reel_CBGB.pptx`
-trae las 3 portadas (institucional, serie con palabra clave, serie con
-protagonista) como slides 9:16 editables: duplicar una, cambiar foto, etiqueta
-y título. Mismos valores del manual. Revisar el PNG a tamaño miniatura
-(~300 px de alto) antes de dar por buena.
+Para editar a mano en vez de por código, `assets/Plantilles_CBGB_9x16.pptx`
+trae las 3 portadas de reel (institucional, serie con palabra clave, serie con
+protagonista) como slides 9:16 editables — junto con el resto de formatos del
+club (ver abajo): duplicar una, cambiar foto, etiqueta y título. Mismos valores
+del manual. Revisar el PNG a tamaño miniatura (~300 px) antes de dar por buena.
+
+## Otros formatos del club (catálogo)
+
+La portada de reel es un formato de una familia mayor. El resto de formatos que
+el club ya publica con éxito — **entrenador/a (edición PLAYBOOK), sènior B
+(editorial), portada sènior A / event (épico) y carrusel (divulgativo)** — están
+documentados con su anatomía exacta en `references/cataleg-formats.md`, y como
+plantillas editables en `assets/Plantilles_CBGB_9x16.pptx` (reels + entrenador +
+sènior B + event) y `assets/Carrusel_CBGB_4x5.pptx` (carrusel). Cargar esa
+referencia siempre que se haga una pieza de fichaje/renovación, cobertura de
+competición o un carrusel. Los fondos artísticos (pizarra, humo, apellido
+gigante) se completan con el recorte del protagonista sin fondo (PNG).
 
 ## Checklist "lo que siempre me dejo" (repasar ANTES de publicar)
 
