@@ -127,8 +127,24 @@ every piece in the grid.
      re-fetch.
    - **Delivering as a page inside this repo**: link Google Fonts the way
      `index.html` already does instead of inlining.
-5. Photo (reel-cover only): pull a real club photo (e.g. `img/hero-player.webp`,
-   `img/team-action.webp`, or a new upload) — never a stock or generic image —
-   and apply the `.veil` gradient from `reference.html` verbatim.
+5. Photo (reel-cover only): use a real photo of the actual person/team — never
+   stock or generic. `reference.html` currently features 5 real people (Jordi
+   Vives, a Sènior femení dorsal-33 player, David Alegre, Carlos Rodríguez de
+   la Hera, Nora Serra), sourced from screenshots of the club's own past
+   Instagram posts. If the only source is a finished graphic like that (title
+   text baked in above the subject, name baked in below), crop tightly to just
+   the person — head to torso/waist — excluding those baked-in text bands
+   entirely, rather than relying on the veil to hide them; the veil is strong
+   at the bottom but light at the top, so top-baked titles will still show
+   through if left in. Also crop out any baked-in carousel badges ("1/6") or
+   watermark logos sitting in the same top-right corner as this system's own
+   escut, to avoid a double-logo look.
+   - True background-removal (isolating just the person, no backdrop at all)
+     was attempted via the higgsfield MCP's `remove_background`, but the
+     sandbox's egress proxy blocks direct uploads to `upload.higgsfield.ai`
+     (403 on CONNECT) — not fixable from inside the session. If that path
+     opens up later (different environment, or a proxy allowlist change),
+     prefer real cutouts over cropped rectangles; until then, tight cropping +
+     the veil is the working substitute.
 6. Embed `logo.png` from the repo root (or its base64, already captured in
    `reference.html`) — never redraw or substitute the shield.
