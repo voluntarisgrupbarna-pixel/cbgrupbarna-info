@@ -148,3 +148,38 @@ every piece in the grid.
      the veil is the working substitute.
 6. Embed `logo.png` from the repo root (or its base64, already captured in
    `reference.html`) — never redraw or substitute the shield.
+
+## Beyond social graphics: office formats
+
+The same tokens (red `#E31E24` / ink `#141416` / muted `#6B6F76`, Arial as the
+safe cross-platform stand-in for Inter in tools that can't embed webfonts)
+carry into PPTX/DOCX/XLSX deliverables — a renewal or signing doesn't have to
+stay a story graphic. `examples/` has one worked sample of each, all built
+around David Alegre's real renovació:
+
+- `cbgb-anunci-renovacio.pptx` — 2-slide deck: a dark cover slide reusing the
+  pill/tag/eyebrow/headline/kickline block over his photo + veil, then a
+  light "fitxa ràpida" facts slide (red-framed per rule ①).
+- `cbgb-nota-premsa-renovacio.docx` — a one-page press-release layout:
+  logo letterhead, red rule, headline, body, pull-quote, quick-facts table.
+- `cbgb-fitxatges-26-27.xlsx` — a fitxatges/renovacions tracking sheet (red
+  header row, one row per real person from `reference.html`) with `COUNTA`/
+  `COUNTIF` summary formulas and a `Tipus`/`Estat` dropdown so it doubles as a
+  fill-in template.
+
+Notes for next time:
+- **`pptxgenjs`, `docx`, `openpyxl`, `defusedxml`, `markitdown` were not
+  actually preinstalled** in this environment despite the office skills
+  saying so — `npm install pptxgenjs` / `npm install docx` / `pip install
+  openpyxl pandas defusedxml lxml "markitdown[pptx,docx,xlsx]"` were all
+  needed first.
+- **LibreOffice (`soffice`) cannot convert anything in this sandbox** — even
+  a one-line `.txt` to PDF fails with "source file could not be loaded", and
+  `xlsx`'s `recalc.py` times out rather than recalculating. This is
+  environment-wide, not a defect in these files. That means: no visual
+  render/QA was possible for the pptx/docx here (schema `validate.py` +
+  `markitdown` content checks stood in instead), and the xlsx formulas
+  (`COUNTA`/`COUNTIF`, both safe pre-2007 functions) are written correctly
+  but unverified by recalculation — they should compute normally in real
+  Excel/PowerPoint/Word. If `soffice --headless --convert-to pdf` works in a
+  future session, use it for real visual QA before trusting layout precisely.
