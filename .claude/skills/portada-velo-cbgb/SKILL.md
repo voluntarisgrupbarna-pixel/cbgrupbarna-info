@@ -5,15 +5,16 @@ description: >
   funcionando, alineada con el Manual de Identitat Visual v1.1: foto del
   protagonista + VELO ROJO (Roig Barna #E31E24 semitransparente) + LÍNEA ROJA
   COLOR LOGO alrededor + ESCUDO ARRIBA A LA DERECHA + título Bebas Neue
-  centrado, con letra y cabeza del jugador CENTRADAS para que quepan en la
-  graella en formato post y en Reels se vea completo. Incluye script Python
-  que la genera en un comando y el checklist de "lo que siempre me dejo".
+  grande alineado a la IZQUIERDA + etiqueta-gancho arriba a la izquierda, con
+  título y cabeza del jugador dentro de la franja central para que quepan en la
+  graella en formato post y en Reels se vea completo. Incluye script Python y
+  plantilla PowerPoint editable, y el checklist de "lo que siempre me dejo".
   Cargar SIEMPRE que se haga la portada/carátula/miniatura de un reel, se diga
   "la portada como las que estamos haciendo", "con el velo rojo", "capa roja",
   "la línea roja alrededor", "logo arriba a la derecha", "el estilo de
   nuestros reels", o al publicar cualquier reel (la portada custom es parte
-  del flujo). Es la EJECUCIÓN del estilo ganador; la teoría de conversión vive
-  en `portada-reels-cbgb`, el contenido del reel en `reels-cbgb`.
+  del flujo). Es la EJECUCIÓN del estilo ganador; la teoría vive en
+  `portada-reels-cbgb` y el contenido del reel en `reels-cbgb`.
 ---
 
 # portada-velo-cbgb — La portada que está funcionando (receta exacta)
@@ -39,61 +40,85 @@ vistazo, incluso a 300 px. Un detalle olvidado en una portada rompe la serie.
   de ancho. Mínimo digital 64 px.
 - Proporción de color: 55% negro/fondo · 30% rojo/acento · 15% blanco/aire.
 
-## La receta — 6 capas, en este orden
+## El layout validado (el de las portadas reales del club)
 
-Lienzo **1080×1920 (9:16), siempre vertical**. Las capas, de abajo arriba:
+Lienzo **1080×1920 (9:16), siempre vertical**. Los elementos, por zonas:
 
+**Fondo (de abajo arriba):**
 1. **FOTO protagonista a sangre.** Persona real del club (nunca IA — norma
-   crítica del manual). Ligera desaturación (×0.85) y contraste (×1.05) para
-   que el velo unifique fotos dispares.
+   crítica del manual). Ligera desaturación + contraste para que el velo
+   unifique fotos dispares.
 2. **VELO ROJO** — la firma. Capa plana Roig Barna `#E31E24` sobre TODA la
-   foto, **opacidad 38%** (rango útil 32–45%: menos = no se reconoce la serie,
-   más = se pierde la cara). Es un velo, no un duotono: la foto respira debajo.
-   (Es el "tractament roig" que el manual pide para foto de series.)
-3. **CAPA OSCURA sutil.** `#0A0A0C` al **15%** global + degradado inferior
-   suave, para que el texto blanco lea sobre cualquier foto.
-4. **LÍNEA ROJA ALREDEDOR — color logo.** Marco rectangular interior **Roig
-   Barna `#E31E24`, grosor 6 px, a 44 px del borde** por los cuatro lados.
-   Es el "marc roig" del manual y cierra la pieza. Nada la pisa: todo el
-   contenido vive dentro. **Va en TODAS las portadas de reel, sin excepción.**
-5. **ESCUDO ARRIBA A LA DERECHA.** `assets/escut_transp.png` (archivo
-   oficial), **altura 150 px**, esquina superior derecha, **a 80 px del borde
-   derecho y 88 px del superior** (dentro de la línea). Mismo tamaño y
-   posición en TODAS — es un sello, no decoración.
-6. **TÍTULO Bebas Neue.** Mayúsculas, blanco `#FFFFFF`, gigante (arranca a
-   190 pt y se auto-encoge hasta caber), **≤5 palabras, una idea**, dos líneas
-   máximo (separar con `|`). Barra corta blanca de remate y subtítulo en
-   Montserrat con la **firma fija del manual: "CB GRUP BARNA · EL CLOT"**.
+   foto, **opacidad 38–42%** (rango útil 32–45%: menos = no se reconoce la
+   serie, más = se pierde la cara). Es un velo, no un duotono. En portadas
+   institucionales/tentpole el velo puede ir más fuerte (~55–60%) para el
+   look de "bandera roja".
+3. **CAPA OSCURA** `#0A0A0C` ~15% + viñeta inferior, para que el texto blanco
+   lea sobre cualquier foto.
+4. **LÍNEA ROJA ALREDEDOR — color logo.** Marco Roig Barna `#E31E24`, 6 px, a
+   44 px del borde. Es el "marc roig" del manual. Va en TODAS, sin excepción.
 
-## La regla de ORO del centrado (graella ↔ Reels)
+**Arriba a la izquierda (el gancho):**
+5. **ETIQUETA** — caja roja rellena con frase corta en Bebas blanco:
+   "L'EFECTE CLARK.", "JA LA CONEIXEU.", "DUES ESTRELLES." Es el hook que para
+   el scroll.
+6. **CHIP "CAP. 01"** (caja negra) debajo, solo en series.
 
-**La letra Y la cabeza del jugador van CENTRADAS en el lienzo.** Motivo: la
-graella en formato post recorta el 9:16 a la **franja central 1080×1350**
-(se pierden ~285 px arriba y ~285 px abajo). Diseñando al centro:
+**Arriba a la derecha:**
+7. **ESCUDO** oficial `assets/escut_transp.png`, **altura 150 px**, a 80 px
+   del borde derecho y 88 px del superior. Mismo tamaño y sitio en TODAS.
 
-- **En la graella (post)** → título y cara caben enteros en el recorte.
-- **En Reels** → se ve el 9:16 completo, con la línea y el escudo.
+**Centro-abajo (el mensaje), TODO alineado a la IZQUIERDA:**
+8. **ANTETÍTULO** — línea pequeña en Montserrat gris con tracking:
+   "SUBCAMPIONES I CAMPIONS DEL MÓN", "SÈRIE · BÀSQUET FEMENÍ".
+9. **TÍTULO Bebas Neue** gigante, blanco, **alineado a la izquierda**, 2–4
+   líneas cortas (separar con `|`). El título grande manda.
+10. **ACENTO**, una de dos:
+    - **Caja roja con palabra clave** ("SUPERCOPA."), o
+    - **Barra roja vertical + subtítulo** en Bebas ("| DOBLE HISTÒRIA AL
+      MUNDIAL.", "| AQUÍ, TAMBÉ.").
 
-Cómo cumplirla: el script ya centra el título; la cara se encuadra con
-`--vbias` (0=arriba, 1=abajo) **hasta que la cabeza quede en el centro del
-lienzo**, y se comprueba con `--guies`, que dibuja las dos líneas del recorte
-de graella (solo QA — nunca publicar con guías). Nada crítico fuera de la
-franja central.
+**Abajo:**
+11. **FIRMA fija** del manual: "CB GRUP BARNA · EL CLOT", Montserrat, izquierda.
+
+## La regla de ORO: título y cara dentro de la franja central
+
+La graella en formato post recorta el 9:16 a la **franja central 1080×1350**
+(se pierden ~285 px arriba y ~285 px abajo). Por eso el **bloque de título va
+en la banda central** y la **cara del protagonista se encuadra con `--vbias`**
+hasta quedar también en esa banda. Así:
+
+- **En la graella (post)** → título y cara caben enteros.
+- **En Reels** → se ve el 9:16 completo, con etiqueta, línea y escudo.
+
+Lo único que el recorte de graella puede comerse es la etiqueta y el escudo
+(están arriba); asumido, porque en la graella la serie ya se reconoce por el
+velo + la línea + el título. `--vbias`: 0 = foto arriba, 1 = foto abajo.
 
 ## Generarla en un comando
 
 ```bash
-python3 scripts/portada.py --foto jugadora.jpg --titulo "FITXATGE|26/27" --out portada.png
+python3 scripts/portada.py --foto jugadora.jpg \
+    --etiqueta "L'EFECTE CLARK." --cap "CAP. 01" \
+    --antetitol "SÈRIE · BÀSQUET FEMENÍ" \
+    --titol "QUÈ ESTÀ|PASSANT AL|BÀSQUET|FEMENÍ?" \
+    --caixa "AQUÍ, TAMBÉ." --barra --out portada.png
 ```
 
-Opciones: `--sub` (default: firma "CB GRUP BARNA · EL CLOT"), `--velo 0.38`,
-`--vbias 0.30` (subir/bajar la foto hasta centrar la cabeza), `--dark 0.15`,
-`--logo-y 88`, `--guies` (dibuja el recorte de graella para comprobar el
-centrado), `--sinlinia` / `--sinvelo` solo para pruebas A/B — la versión
-publicada lleva SIEMPRE velo y línea.
+- `--caixa "SUPERCOPA."` sin `--barra` → palabra clave en caja roja.
+- `--caixa "AQUÍ, TAMBÉ." --barra` → barra roja vertical + subtítulo.
+- `--cap`, `--antetitol`, `--caixa` son opcionales.
+- `--sub` (default: firma), `--velo`, `--vbias`, `--dark`, `--logo-y`.
 
-Fuentes oficiales (Bebas Neue, Montserrat) y escudo en `assets/`. Revisar el
-PNG a tamaño miniatura (~300 px de alto) antes de dar por buena.
+Fuentes oficiales (Bebas Neue, Montserrat) y escudo en `assets/`.
+
+## Plantilla PowerPoint editable
+
+Para editar a mano en vez de por código, `assets/Portades_Reel_CBGB.pptx`
+trae las 3 portadas (institucional, serie con palabra clave, serie con
+protagonista) como slides 9:16 editables: duplicar una, cambiar foto, etiqueta
+y título. Mismos valores del manual. Revisar el PNG a tamaño miniatura
+(~300 px de alto) antes de dar por buena.
 
 ## Checklist "lo que siempre me dejo" (repasar ANTES de publicar)
 
@@ -101,24 +126,17 @@ PNG a tamaño miniatura (~300 px de alto) antes de dar por buena.
    automático — es el error nº1 y el más caro.)
 2. ¿**Velo rojo** puesto? Sin velo la portada no pertenece a la serie.
 3. ¿**Línea roja color logo** entera alrededor, sin nada pisándola?
-4. ¿**Título y cabeza del jugador centrados** — caben en el recorte de
-   graella (comprobado con `--guies` o mirando el preview de post)?
-5. ¿**Escudo oficial arriba a la derecha**, 150 px, mismos márgenes que las
-   demás portadas?
-6. ¿Título **≤5 palabras**, Bebas Neue, legible a 300 px?
-7. ¿Se reconoce como Barna **sin leer nada** (velo + línea + escudo)?
-8. ¿Al lado de las 8 casillas vecinas de la graella parece la misma mano?
-9. Portada decidida **antes** de montar el reel, no después (`reels-cbgb`).
+4. ¿**Etiqueta-gancho** arriba a la izquierda, en caja roja?
+5. ¿**Título (izquierda) y cabeza del jugador** dentro de la franja central —
+   caben en el recorte de graella?
+6. ¿**Escudo oficial arriba a la derecha**, 150 px, mismos márgenes?
+7. ¿Título en **Bebas Neue**, 2–4 líneas cortas, legible a 300 px?
+8. ¿**Firma "CB GRUP BARNA · EL CLOT"** abajo?
+9. ¿Se reconoce como Barna **sin leer nada** (velo + línea + escudo)?
+10. ¿Al lado de las 8 casillas vecinas de la graella parece la misma mano?
+11. Portada decidida **antes** de montar el reel, no después (`reels-cbgb`).
 
 Si fallan 2 o más → rehacer antes de publicar.
-
-## El escudo y la graella
-
-Con título y cara centrados, lo único que el recorte de graella puede comerse
-es el escudo (está arriba) y la parte alta de la línea. Correcto y asumido: en
-la graella la serie se reconoce por el velo + la línea lateral + el título
-centrado; en Reels y feed el escudo se ve entero. Si una portada va a ser PIN
-y el escudo debe verse sí o sí también en graella, bajarlo con `--logo-y 260`.
 
 ## Los detalles del reel que acompañan a esta portada
 
