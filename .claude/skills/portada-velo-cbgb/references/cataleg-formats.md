@@ -115,6 +115,39 @@ autoritat"): el mensaje tipográfico manda.
 
 ---
 
+## 4b · Fitxatge premium — "ÉS BARNA" (rèplica del "és culer")
+
+El formato de **bienvenida/fichaje más premium**, réplica directa del cartel
+"MARTIN · ÉS CULER" del Barça Basket. Cuando llega un fichaje importante y
+quieres que se sienta de **club grande**, cinematográfico y sobrio. Disponible
+en **4:5** (feed, la del cartel original) y **9:16** (story).
+
+**Elementos:**
+- **Foto a sangre, cinematográfica**: el/la protagonista sobre fondo casi
+  negro, con **rim light rojo a la izquierda y azul (blaugrana) a la derecha**,
+  mirada a cámara y luz lateral dura. La foto es TODO el fondo (se sustituye el
+  fondo default por la foto editada).
+- **UNA sola línea de texto** a media altura (~54 %): **tipografía SERIF en
+  DORADO** (`#C7A24C`), en versalitas y con tracking. A la izquierda el
+  **nombre/apellido** del fichaje, a la derecha **"ÉS BARNA"** (equivalente
+  culé del club; alternativas: "ÉS DEL CLOT", "JA ÉS DEL BARNA").
+- **ESCUDO centrado ENTRE las dos palabras**, actuando de separador (como el
+  crest del Barça en el original).
+- **Pie discreto** en dorado apagado: "BENVINGUT AL CLOT · NOU FITXATGE ·
+  TEMPORADA 26·27".
+- **Sin marco rojo, sin más elementos**: es el formato de máxima contención.
+  Aquí manda la foto y el oro. "Menys elements, més autoritat" llevado al
+  extremo.
+
+Es la **única pieza del club que usa serif y dorado** — reservada a fichajes
+premium para que no pierda fuerza. Fuente por defecto **Georgia** (segura en
+todo PowerPoint); para subir aún más el nivel, Playfair Display SC o Cormorant
+Garamond. El dorado NO entra en el resto del sistema (que es rojo/negro/crema):
+es el sello exclusivo del "és barna". Plantilla: slide "FITXATGE · ÉS BARNA" en
+ambos decks (4:5 y 9:16).
+
+---
+
 ## 5 · Carrusel — divulgativo
 
 Serie educativa/reflexión (ej. "LA TRÍADA INVISIBLE"). Formato **POST 4:5,
