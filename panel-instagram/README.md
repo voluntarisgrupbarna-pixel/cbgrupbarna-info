@@ -75,8 +75,30 @@ Opcional, com a *Variable* (no secret): `IG_API_VERSION` (per defecte `v21.0`).
 | **Creixement** | Corba de seguidors dels últims 30 dies (sèrie que acumulem nosaltres, dia a dia) |
 | **Barreja de contingut** | Reels vs vídeo vs carrusel vs imatge |
 | **Millors publicacions** | Top posts per engagement, amb abast, likes, comentaris, guardats i compartits |
+| **Comparativa any rere any** | Un mes (p. ex. Juliol) comparat entre anys — nous seguidors, seguidors, abast o engagement, amb variació interanual |
 | **Qui ens etiqueta** | Comptes que ens etiqueten (monitorització estil Hootsuite) |
 | **Audiència** | Top ciutats dels seguidors |
+
+## Comparativa any rere any (`historic.json`)
+
+L'API d'Instagram **no dona històric de fa anys**, així que la comparativa mensual
+s'alimenta de dues fonts que el panell combina soles:
+
+1. **Mesos que el panell acumula sol** — cada execució desa el mes vigent a `data.json` → `monthly`.
+   Amb el temps es va omplint any rere any.
+2. **[`historic.json`](./historic.json)** — mesos passats que **omples tu una vegada** amb el
+   que ja tinguis a **Meta Business Suite → Estadístiques** (es pot exportar per mes).
+
+Per afegir un any anterior, edita `historic.json` i afegeix entrades a `months`:
+
+```json
+"months": {
+  "2025-07": { "followers": 2680, "newFollowers": 49, "reach": 35200, "profileViews": 4600, "posts": 10, "avgEngagement": 5.9 }
+}
+```
+
+Deixa a `null` el que no sàpigues; el panell ho ignora. Els mesos mesurats en directe
+tenen prioritat sobre `historic.json` (no els sobreescriu).
 
 ## Notes i límits
 

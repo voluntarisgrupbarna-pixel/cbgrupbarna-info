@@ -93,6 +93,18 @@
   .foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
   .foot a{color:var(--muted)}
 
+  /* YoY comparativa */
+  .yoy-ctrl{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:8px}
+  .yoy-group{display:flex;align-items:center;gap:10px}
+  .yoy-lab{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+  #yoyMonth{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-family:var(--mono);font-size:12px;cursor:pointer}
+  .seg{display:inline-flex;background:var(--panel2);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .seg button{background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:11px;padding:7px 12px;cursor:pointer;transition:.15s}
+  .seg button:hover{color:var(--text)}
+  .seg button.on{background:var(--red);color:#fff}
+  .yoy-delta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
+  .yoy-delta b.up{color:var(--green)}.yoy-delta b.down{color:var(--red)}
+
   #err{display:none;margin-top:12px;padding:10px 13px;border:1px solid #4a1010;background:#1a0606;border-radius:10px;font-family:var(--mono);font-size:11px;color:#ff9a9a}
 
   @media(max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)}.grid2{grid-template-columns:1fr}.posts{grid-template-columns:repeat(2,1fr)}}
@@ -144,6 +156,30 @@
         <h3 style="margin-top:22px">Abast &amp; visites (30 dies)</h3>
         <div id="reachBox"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- Comparativa any rere any -->
+  <section id="yoySec">
+    <div class="sec-title">Comparativa mensual · any rere any</div>
+    <div class="card">
+      <div class="yoy-ctrl">
+        <div class="yoy-group">
+          <span class="yoy-lab">Mes</span>
+          <select id="yoyMonth"></select>
+        </div>
+        <div class="yoy-group">
+          <span class="yoy-lab">Mètrica</span>
+          <div class="seg" id="yoyMetric">
+            <button data-m="newFollowers" class="on">Nous seguidors</button>
+            <button data-m="followers">Seguidors</button>
+            <button data-m="reach">Abast</button>
+            <button data-m="avgEngagement">Engagement</button>
+          </div>
+        </div>
+      </div>
+      <svg class="chart" id="yoyChart" viewBox="0 0 600 240"></svg>
+      <div id="yoyDelta" class="yoy-delta"></div>
     </div>
   </section>
 
@@ -276,6 +312,9 @@ function render(d){
       <div class="mgo">VEURE →</div>
     </a>`).join('') : '<div style="color:var(--dim);font-size:13px;font-family:var(--mono)">Encara no hi ha etiquetes recents.</div>';
 
+  // Comparativa any rere any
+  setupYoY(d.monthly||{});
+
   // Demographics
   const cities = d.demographics?.byCity||[];
   if(cities.length){
@@ -285,6 +324,68 @@ function render(d){
         <span class="mix-bar"><span class="mix-fill" style="width:${(c.value/max*100).toFixed(0)}%;background:var(--red)"></span></span>
         <span class="mn" style="width:44px">${fmt(c.value)}</span></div>`).join('');
   } else { $('#demoSec').style.display='none'; }
+}
+
+// ── Comparativa any rere any ──────────────────────────────────────────────
+const MONTH_NAMES=['Gener','Febrer','Març','Abril','Maig','Juny','Juliol','Agost','Setembre','Octubre','Novembre','Desembre'];
+const METRIC_LABELS={newFollowers:'Nous seguidors',followers:'Seguidors (final de mes)',reach:'Abast',avgEngagement:'Engagement mitjà (%)'};
+let YOY_DATA={}, yoyMonth=null, yoyMetric='newFollowers';
+
+function setupYoY(monthly){
+  YOY_DATA=monthly;
+  const keys=Object.keys(monthly);
+  if(!keys.length){ $('#yoySec').style.display='none'; return; }
+  $('#yoySec').style.display='';
+  // mesos disponibles (1-12) que tinguin com a mínim un any de dades
+  const monthsAvail=[...new Set(keys.map(k=>+k.slice(5,7)))].sort((a,b)=>a-b);
+  const sel=$('#yoyMonth');
+  sel.innerHTML=monthsAvail.map(m=>`<option value="${m}">${MONTH_NAMES[m-1]}</option>`).join('');
+  // per defecte, el mes més recent que tinguem
+  const latest=keys.sort().pop();
+  yoyMonth=+latest.slice(5,7);
+  sel.value=yoyMonth;
+  sel.onchange=()=>{ yoyMonth=+sel.value; drawYoY(); };
+  $('#yoyMetric').querySelectorAll('button').forEach(b=>{
+    b.onclick=()=>{ yoyMetric=b.dataset.m; $('#yoyMetric').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); drawYoY(); };
+  });
+  drawYoY();
+}
+
+function drawYoY(){
+  const mm=String(yoyMonth).padStart(2,'0');
+  const rows=Object.entries(YOY_DATA)
+    .filter(([k])=>k.slice(5,7)===mm)
+    .map(([k,v])=>({year:+k.slice(0,4), val:v[yoyMetric]}))
+    .filter(r=>r.val!=null)
+    .sort((a,b)=>a.year-b.year);
+  const svg=$('#yoyChart'), W=600,H=240,pad={l:8,r:8,t:20,b:34};
+  if(!rows.length){ svg.innerHTML=`<text x="20" y="40" fill="#5a5a60" font-size="12">Sense dades per a ${MONTH_NAMES[yoyMonth-1]}.</text>`; $('#yoyDelta').innerHTML=''; return; }
+  const max=Math.max(...rows.map(r=>r.val))*1.15||1;
+  const bw=Math.min(90,(W-pad.l-pad.r)/rows.length-24);
+  const gap=(W-pad.l-pad.r)/rows.length;
+  const isPct=yoyMetric==='avgEngagement';
+  const fmtV=(v)=> isPct? v+'%' : v.toLocaleString('ca-ES');
+  let bars='';
+  rows.forEach((r,i)=>{
+    const h=(r.val/max)*(H-pad.t-pad.b);
+    const x=pad.l+i*gap+gap/2-bw/2;
+    const y=H-pad.b-h;
+    const isLast=i===rows.length-1;
+    const col=isLast?'#E31E24':'#3a3a40';
+    bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${col}"/>
+      <text x="${(x+bw/2).toFixed(1)}" y="${(y-8).toFixed(1)}" fill="${isLast?'#fff':'#c4c4c8'}" font-size="14" font-weight="700" text-anchor="middle" font-family="'JetBrains Mono',monospace">${fmtV(r.val)}</text>
+      <text x="${(x+bw/2).toFixed(1)}" y="${H-12}" fill="#8a8a8a" font-size="12" text-anchor="middle" font-family="'JetBrains Mono',monospace">${r.year}</text>`;
+  });
+  svg.innerHTML=`<text x="${pad.l}" y="14" fill="#5a5a60" font-size="10" font-family="'JetBrains Mono',monospace">${METRIC_LABELS[yoyMetric].toUpperCase()} · ${MONTH_NAMES[yoyMonth-1].toUpperCase()}</text>${bars}`;
+  // delta últim any vs anterior
+  if(rows.length>=2){
+    const a=rows[rows.length-2], b=rows[rows.length-1];
+    const diff=b.val-a.val, pct=a.val? (diff/a.val*100):0;
+    const up=diff>=0;
+    $('#yoyDelta').innerHTML=`${MONTH_NAMES[yoyMonth-1]} ${b.year} vs ${a.year}: <b class="${up?'up':'down'}">${up?'▲':'▼'} ${fmtV(Math.abs(diff))} (${up?'+':'−'}${Math.abs(pct).toFixed(1)}%)</b>`;
+  } else {
+    $('#yoyDelta').innerHTML=`Només tenim dades d'un any per a ${MONTH_NAMES[yoyMonth-1]}. Omple <code style="color:#8a8a8a">historic.json</code> per comparar amb anys anteriors.`;
+  }
 }
 
 function drawGrowth(hist){

@@ -27,6 +27,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const OUT_DIR = join(ROOT, 'panel-instagram');
 const OUT_FILE = join(OUT_DIR, 'data.json');
+const HISTORIC_FILE = join(OUT_DIR, 'historic.json');
 
 const TOKEN = process.env.IG_ACCESS_TOKEN;
 const IG_ID = process.env.IG_USER_ID;
@@ -199,6 +200,35 @@ async function main() {
     ? +(withReach.reduce((a, b) => a + b.engagementRate, 0) / withReach.length).toFixed(2)
     : null;
 
+  // ── Comparativa mensual (any rere any) ────────────────────────────────────
+  // Base: mesos passats que hem posat a historic.json (Meta Business Suite).
+  // A sobre: el mes vigent, que acumulem sol des dels snapshots i les publicacions.
+  let monthly = {};
+  if (existsSync(HISTORIC_FILE)) {
+    try { monthly = { ...(JSON.parse(readFileSync(HISTORIC_FILE, 'utf8')).months || {}) }; } catch { /* ignore */ }
+  }
+  if (existsSync(OUT_FILE)) {
+    try { monthly = { ...monthly, ...(JSON.parse(readFileSync(OUT_FILE, 'utf8')).monthly || {}) }; } catch { /* ignore */ }
+  }
+  const monKey = today.slice(0, 7); // AAAA-MM
+  const monthStart = `${monKey}-01`;
+  // snapshots d'aquest mes per calcular nous seguidors del mes
+  const monHist = history.filter((h) => h.date >= monthStart);
+  const monPosts = media.filter((m) => (m.timestamp || '').slice(0, 7) === monKey);
+  const monWithReach = monPosts.filter((m) => m.engagementRate != null);
+  monthly[monKey] = {
+    followers: snapshot.followers,
+    newFollowers: monHist.length > 1 && monHist[0].followers != null
+      ? snapshot.followers - monHist[0].followers
+      : (monthly[monKey]?.newFollowers ?? null),
+    reach: accountInsights.reach?.total ?? monthly[monKey]?.reach ?? null,
+    profileViews: accountInsights.profile_views?.total ?? monthly[monKey]?.profileViews ?? null,
+    posts: monPosts.length || monthly[monKey]?.posts || null,
+    avgEngagement: monWithReach.length
+      ? +(monWithReach.reduce((a, b) => a + b.engagementRate, 0) / monWithReach.length).toFixed(2)
+      : (monthly[monKey]?.avgEngagement ?? null),
+  };
+
   // ── 6. Escriure data.json ────────────────────────────────────────────────
   const out = {
     meta: {
@@ -223,6 +253,7 @@ async function main() {
     media: media.sort((a, b) => b.engagement - a.engagement),
     contentMix,
     mentions,
+    monthly,
     demographics,
   };
 

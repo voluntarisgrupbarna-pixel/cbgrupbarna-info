@@ -2,6 +2,7 @@
 import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildMonthly } from './_gen-monthly.mjs';
 const __d = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = join(__d, '..', 'panel-instagram');
 const REF = new Date('2026-07-24T09:00:00Z');
@@ -55,6 +56,7 @@ const out = {
   media: posts.sort((a,b)=>b.engagement-a.engagement),
   contentMix: posts.reduce((a,m)=>{const k=m.type==='REELS'?'Reels':m.mediaType==='CAROUSEL_ALBUM'?'Carrusel':m.mediaType==='VIDEO'?'Vídeo':'Imatge';a[k]=(a[k]||0)+1;return a;},{}),
   mentions,
+  monthly: buildMonthly(),
   demographics: { byCity:[
     {label:'Barcelona',value:1840},{label:'Badalona',value:280},{label:'L\'Hospitalet',value:190},
     {label:'Sant Adrià',value:120},{label:'Santa Coloma',value:96},{label:'Cornellà',value:64},
