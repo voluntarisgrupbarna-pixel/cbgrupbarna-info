@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>BI · Instagram · CB Grup Barna</title>
+<link rel="icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#E31E24; --red-dark:#a81318; --blue:#4d9fff; --black:#050505; --panel:#0e0e10; --panel2:#141417;
+    --border:#232327; --text:#ffffff; --muted:#8a8a8a; --dim:#5a5a60;
+    --g1:#c9c9d0; --g2:#8a8a92; --g3:#55555c; --g4:#3a3a40;
+    --green:#22c55e; --mono:'JetBrains Mono',monospace; --display:'Bebas Neue',sans-serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--black);color:var(--text);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.4}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 18px 90px}
+
+  .top{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .top img{height:32px}
+  .kicker{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+  .top h1{font-family:var(--display);font-size:25px;letter-spacing:1px;font-weight:400}
+  .top .spacer{flex:1}
+  .badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;padding:5px 10px;border-radius:999px;border:1px solid var(--border);text-transform:uppercase}
+  .badge.demo{color:#FFD600;border-color:#4a3f0a;background:#191506}
+  .badge.live{color:var(--green);border-color:#0f3d22;background:#06170e}
+  .badge .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
+  .badge.demo .dot{background:#FFD600}.badge.live .dot{background:var(--green)}
+  .navlink{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border);padding:6px 11px;border-radius:8px}
+  .navlink:hover{color:var(--text);border-color:var(--red)}
+
+  /* Controls */
+  .controls{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end;margin-top:20px;padding:16px 18px;background:var(--panel);border:1px solid var(--border);border-radius:14px}
+  .ctrl{display:flex;flex-direction:column;gap:7px}
+  .ctrl label{font-family:var(--mono);font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+  select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-family:var(--mono);font-size:12px;cursor:pointer;min-width:170px}
+  .seg{display:inline-flex;background:var(--panel2);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .seg button{background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:11px;padding:8px 13px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .seg button:hover{color:var(--text)}.seg button.on{background:var(--red);color:#fff}
+  .years{display:flex;gap:6px;flex-wrap:wrap}
+  .ychip{font-family:var(--mono);font-size:11px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:var(--panel2);color:var(--muted);cursor:pointer;transition:.15s;display:flex;align-items:center;gap:7px}
+  .ychip .sw{width:9px;height:9px;border-radius:2px;background:var(--g3)}
+  .ychip.on{color:var(--text);border-color:#3a3a40}
+  .ctrl-note{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:2px}
+
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 15px;position:relative;overflow:hidden}
+  .kpi::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--red);opacity:.7}
+  .kpi .kl{font-family:var(--mono);font-size:9.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .kpi .kv{font-family:var(--display);font-size:32px;line-height:.9}
+  .kpi .ks{font-family:var(--mono);font-size:11px;margin-top:6px;color:var(--dim)}
+  .ks .up{color:var(--green)}.ks .down{color:var(--red)}
+
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:16px}
+  .card h3{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:500;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+  .chart-wrap{position:relative}
+  svg.chart{width:100%;height:auto;display:block;overflow:visible}
+  .tip{position:absolute;pointer-events:none;background:#000000ee;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-family:var(--mono);font-size:11px;color:var(--text);opacity:0;transition:opacity .1s;white-space:nowrap;z-index:5}
+  .tip b{color:var(--red)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+
+  /* Table */
+  table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;margin-top:6px}
+  th,td{text-align:right;padding:8px 10px;border-bottom:1px solid var(--border)}
+  th:first-child,td:first-child{text-align:left;color:var(--muted)}
+  th{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:500;position:sticky;top:0;background:var(--panel)}
+  td b.up{color:var(--green)}td b.down{color:var(--red)}
+  .tbl-scroll{max-height:360px;overflow:auto}
+  .btn{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border);padding:6px 11px;border-radius:8px;background:var(--panel2);cursor:pointer}
+  .btn:hover{color:var(--text);border-color:var(--red)}
+
+  .banner{margin-top:14px;padding:11px 14px;border:1px solid #4a3f0a;background:#14110340;border-radius:10px;font-size:12.5px;color:#d9c98a;display:flex;gap:9px;align-items:flex-start}
+  .banner b{color:#FFD600}.banner a{color:#FFD600;text-decoration:underline}
+
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <img src="../logo.png" alt="CB Grup Barna">
+    <div>
+      <div class="kicker">Business Intelligence</div>
+      <h1>BI · INSTAGRAM</h1>
+    </div>
+    <div class="spacer"></div>
+    <a class="navlink" href="./">← Panell resum</a>
+    <div id="modeBadge" class="badge demo"><span class="dot"></span>DEMO</div>
+  </div>
+
+  <div class="banner" id="demoBanner">
+    <span>⚠️</span>
+    <div><b>Dades de demostració.</b> Connecta el token de la Graph API (<a href="./README.md">guia</a>)
+    perquè les mètriques siguin reals. La sèrie diària d'anys anteriors s'acumula sola i es completa
+    amb <b>historic.json</b>.</div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="ctrl">
+      <label>Mètrica</label>
+      <select id="metric"></select>
+    </div>
+    <div class="ctrl">
+      <label>Granularitat</label>
+      <div class="seg" id="gran">
+        <button data-g="day">Dia</button>
+        <button data-g="week">Setmana</button>
+        <button data-g="month" class="on">Mes</button>
+      </div>
+    </div>
+    <div class="ctrl">
+      <label>Vista</label>
+      <div class="seg" id="view">
+        <button data-v="trend">Tendència</button>
+        <button data-v="yoy" class="on">Comparativa anual</button>
+      </div>
+    </div>
+    <div class="ctrl" id="rangeCtrl" style="display:none">
+      <label>Rang</label>
+      <div class="seg" id="range">
+        <button data-r="30">30 d</button>
+        <button data-r="90">90 d</button>
+        <button data-r="365" class="on">12 m</button>
+        <button data-r="all">Tot</button>
+      </div>
+    </div>
+    <div class="ctrl" id="yearsCtrl">
+      <label>Anys a comparar</label>
+      <div class="years" id="years"></div>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpis" id="kpis"></div>
+
+  <!-- Main chart -->
+  <div class="card">
+    <h3><span id="chartTitle">—</span><button class="btn" id="csvBtn">Exporta CSV</button></h3>
+    <div class="legend" id="legend"></div>
+    <div class="chart-wrap">
+      <svg class="chart" id="mainChart" viewBox="0 0 900 340"></svg>
+      <div class="tip" id="tip"></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <!-- Weekday profile -->
+    <div class="card" id="wdCard">
+      <h3>Rendiment per dia de la setmana</h3>
+      <div class="chart-wrap"><svg class="chart" id="wdChart" viewBox="0 0 440 240"></svg></div>
+      <div class="ctrl-note" id="wdNote"></div>
+    </div>
+    <!-- Table -->
+    <div class="card">
+      <h3>Taula de dades</h3>
+      <div class="tbl-scroll"><table id="table"></table></div>
+    </div>
+  </div>
+
+  <div class="ctrl-note" style="margin-top:18px" id="avail"></div>
+
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmtInt=n=>n==null?'—':Math.round(n).toLocaleString('ca-ES');
+const fmtPct=n=>n==null?'—':n.toFixed(2)+'%';
+const MONTHS=['Gen','Feb','Mar','Abr','Mai','Jun','Jul','Ago','Set','Oct','Nov','Des'];
+const WD=['Dl','Dt','Dc','Dj','Dv','Ds','Dg'];
+
+const MEASURES=[
+  {id:'newFollowers',label:'Nous seguidors',agg:'sum',fmt:'int',src:'series'},
+  {id:'followers',   label:'Seguidors totals',agg:'last',fmt:'int',src:'series'},
+  {id:'reach',       label:'Abast',           agg:'sum',fmt:'int',src:'series'},
+  {id:'profileViews',label:'Visites al perfil',agg:'sum',fmt:'int',src:'series'},
+  {id:'posts',       label:'Publicacions',    agg:'sum',fmt:'int',src:'mixed'},
+  {id:'avgEngagement',label:'Engagement mitjà',agg:'avg',fmt:'pct',src:'mixed'},
+];
+const MEA=id=>MEASURES.find(m=>m.id===id);
+
+let DATA={}, state={metric:'newFollowers',gran:'month',view:'yoy',range:'365',years:new Set()};
+
+async function boot(){
+  try{ DATA=await (await fetch('./data.json?t='+Date.now())).json(); }
+  catch(e){ document.body.innerHTML='<p style="padding:40px;font-family:monospace;color:#ff9a9a">No s\'ha pogut carregar data.json: '+e.message+'</p>'; return; }
+
+  const live=DATA.meta?.mode==='live';
+  const b=$('#modeBadge'); b.className='badge '+(live?'live':'demo'); b.innerHTML='<span class="dot"></span>'+(live?'EN DIRECTE':'DEMO');
+  $('#demoBanner').style.display=live?'none':'flex';
+
+  // metric options
+  $('#metric').innerHTML=MEASURES.map(m=>`<option value="${m.id}">${m.label}</option>`).join('');
+  $('#metric').value=state.metric;
+
+  // available years
+  const yrs=availableYears();
+  state.years=new Set(yrs); // tots per defecte
+  renderYearChips(yrs);
+
+  // listeners
+  $('#metric').onchange=e=>{state.metric=e.target.value;render();};
+  bindSeg('#gran','g','gran');
+  bindSeg('#view','v','view',()=>toggleViewCtrls());
+  bindSeg('#range','r','range');
+  $('#csvBtn').onclick=exportCSV;
+  toggleViewCtrls();
+  render();
+}
+function bindSeg(sel,attr,key,after){
+  $$(sel+' button').forEach(btn=>btn.onclick=()=>{
+    $$(sel+' button').forEach(x=>x.classList.toggle('on',x===btn));
+    state[key]=btn.dataset[attr]; if(after)after(); render();
+  });
+}
+function toggleViewCtrls(){
+  const yoy=state.view==='yoy';
+  $('#yearsCtrl').style.display=yoy?'':'none';
+  $('#rangeCtrl').style.display=yoy?'none':'';
+  $('#wdCard').style.display=(state.gran==='day')?'':'';
+}
+
+// ── Data prep ─────────────────────────────────────────────────────────────
+function daily(){ return DATA.daily||DATA.history||[]; }
+function availableYears(){
+  const ys=new Set();
+  daily().forEach(d=>ys.add(+d.date.slice(0,4)));
+  Object.keys(DATA.monthly||{}).forEach(k=>ys.add(+k.slice(0,4)));
+  return [...ys].sort();
+}
+function renderYearChips(yrs){
+  const cols=yearColors(yrs);
+  $('#years').innerHTML=yrs.map(y=>`<div class="ychip on" data-y="${y}"><span class="sw" style="background:${cols[y]}"></span>${y}</div>`).join('');
+  $$('#years .ychip').forEach(c=>c.onclick=()=>{
+    const y=+c.dataset.y;
+    if(state.years.has(y)&&state.years.size>1){state.years.delete(y);c.classList.remove('on');}
+    else{state.years.add(y);c.classList.add('on');}
+    render();
+  });
+}
+// any més recent = vermell marca; anteriors = grisos per antiguitat
+function yearColors(yrs){
+  const sorted=[...yrs].sort((a,b)=>b-a); const grays=['#8a8a92','#55555c','#3a3a40','#2a2a30'];
+  const map={}; sorted.forEach((y,i)=>map[y]= i===0?'#E31E24':(grays[i-1]||'#2a2a30')); return map;
+}
+
+// agrega la sèrie diària per granularitat → [{key,label,date,year,followers,newFollowers,reach,profileViews}]
+function aggSeries(gran){
+  const rows=daily(); if(!rows.length) return [];
+  if(gran==='day') return rows.map(r=>({key:r.date,label:r.date,date:r.date,year:+r.date.slice(0,4),...r}));
+  const buckets={};
+  for(const r of rows){
+    let key,label;
+    if(gran==='month'){ key=r.date.slice(0,7); label=MONTHS[+key.slice(5,7)-1]+' '+key.slice(0,4); }
+    else { const d=new Date(r.date+'T00:00:00Z'); const wk=isoWeek(d); key=wk.y+'-W'+String(wk.w).padStart(2,'0'); label=key; }
+    const b=buckets[key]||(buckets[key]={key,label,date:r.date,year:+r.date.slice(0,4),newFollowers:0,reach:0,profileViews:0,followers:0});
+    b.newFollowers+=r.newFollowers||0; b.reach+=r.reach||0; b.profileViews+=r.profileViews||0;
+    b.followers=r.followers; b.date=r.date;
+  }
+  return Object.values(buckets).sort((a,b)=>a.key<b.key?-1:1);
+}
+function isoWeek(d){const t=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()));const day=(t.getUTCDay()+6)%7;t.setUTCDate(t.getUTCDate()-day+3);const first=new Date(Date.UTC(t.getUTCFullYear(),0,4));const w=1+Math.round(((t-first)/864e5-3+((first.getUTCDay()+6)%7))/7);return{y:t.getUTCFullYear(),w};}
+
+// valor d'una mètrica per a una fila agregada
+function measureVal(row,id,gran){
+  const m=MEA(id);
+  if(m.src==='series') return row[id];
+  // posts / avgEngagement: mes → monthly; dia/setmana → des de media
+  if(gran==='month'){ const mm=(DATA.monthly||{})[row.key]; return mm?mm[id]:null; }
+  const media=(DATA.media||[]).filter(p=>inPeriod(p.timestamp,row,gran));
+  if(id==='posts') return media.length||null;
+  if(id==='avgEngagement'){ const v=media.filter(p=>p.engagementRate!=null); return v.length?+(v.reduce((a,b)=>a+b.engagementRate,0)/v.length).toFixed(2):null; }
+  return null;
+}
+function inPeriod(ts,row,gran){ if(!ts)return false; const s=ts.slice(0,10); if(gran==='day')return s===row.key; if(gran==='month')return s.slice(0,7)===row.key; const d=new Date(s+'T00:00:00Z');const wk=isoWeek(d);return (wk.y+'-W'+String(wk.w).padStart(2,'0'))===row.key; }
+
+// monthly directe (per YoY en granularitat mes, inclou historic)
+function monthlyRows(){
+  const out=[]; for(const [k,v] of Object.entries(DATA.monthly||{})) out.push({key:k,year:+k.slice(0,4),m:+k.slice(5,7),...v});
+  return out.sort((a,b)=>a.key<b.key?-1:1);
+}
+
+// ── Render ────────────────────────────────────────────────────────────────
+function render(){
+  const m=MEA(state.metric); const fmt=m.fmt==='pct'?fmtPct:fmtInt;
+  $('#chartTitle').textContent=m.label+' · '+({day:'per dia',week:'per setmana',month:'per mes'})[state.gran];
+  if(state.view==='yoy') renderYoY(m,fmt); else renderTrend(m,fmt);
+  renderWeekday(m,fmt);
+  $('#avail').innerHTML='Dades: sèrie diària <b style="color:#8a8a8a">'+(daily().length)+'</b> dies · '+
+    (Object.keys(DATA.monthly||{}).length)+' mesos. Publicacions i engagement per dia/setmana només on hi ha posts recents; per mes, tot l\'històric.';
+}
+
+function renderYoY(m,fmt){
+  const gran=state.gran;
+  // construïm sèries per any: X = període dins l'any
+  const series=[]; const yrs=[...state.years].sort();
+  const cols=yearColors(availableYears());
+  let xLabels=[], xCount=0;
+  if(gran==='month'){
+    xCount=12; xLabels=MONTHS;
+    const rows=(m.src==='mixed')?monthlyRows():aggSeries('month').map(r=>({...r,year:r.year,m:+r.key.slice(5,7)}));
+    for(const y of yrs){
+      const pts=Array(12).fill(null);
+      rows.filter(r=>r.year===y).forEach(r=>{ const mi=(r.m||+r.key.slice(5,7))-1; pts[mi]=measureVal(r,m.id,'month'); });
+      series.push({name:y,color:cols[y],pts});
+    }
+  } else {
+    // dia/setmana: X = índex de període dins l'any (dia de l'any / setmana ISO)
+    const agg=aggSeries(gran);
+    xCount=gran==='week'?53:366;
+    xLabels=gran==='week'?Array.from({length:53},(_,i)=>i%4===0?('S'+(i+1)):''):[];
+    for(const y of yrs){
+      const pts=Array(xCount).fill(null);
+      agg.filter(r=>r.year===y).forEach(r=>{ const idx=gran==='week'?(isoWeek(new Date(r.date+'T00:00:00Z')).w-1):(dayOfYear(r.date)-1); pts[idx]=measureVal(r,m.id,gran); });
+      series.push({name:y,color:cols[y],pts});
+    }
+    if(gran==='day'){ xLabels=Array.from({length:366},(_,i)=>''); for(let mo=0;mo<12;mo++){xLabels[Math.round(mo*30.4)]=MONTHS[mo];} }
+  }
+  drawLines(series,xLabels,fmt,m,true);
+  renderLegend(series);
+  // KPIs — comparació JUSTA (YTD): alineem tots els anys als períodes on l'any
+  // més recent té dades, per no comparar un any parcial amb un de complet.
+  const aggFn=m.agg==='avg'?(a=>avg(a)):(a=>sum(a));
+  const lastS=series[series.length-1];
+  const activeIdx=lastS?lastS.pts.map((v,i)=>v!=null?i:-1).filter(i=>i>=0):[];
+  const alignedTotal=s=>aggFn(activeIdx.map(i=>s.pts[i]).filter(v=>v!=null));
+  const perYear=series.map(s=>({y:s.name,v:alignedTotal(s),full:aggFn(s.pts.filter(v=>v!=null)),color:s.color}));
+  const cur=perYear[perYear.length-1], prev=perYear[perYear.length-2];
+  const partial=activeIdx.length && activeIdx.length < lastS.pts.filter(v=>v!=null).length ? '' : '';
+  const ytdNote=(state.gran==='month'&&activeIdx.length<12)?` · fins ${MONTHS[activeIdx[activeIdx.length-1]]}`:'';
+  kpis([
+    {l:'Total '+cur.y,v:fmt(cur.full),s:activeIdx.length? 'any en curs':''},
+    prev?{l:`${cur.y} vs ${prev.y}${ytdNote}`,v:deltaTxt(cur.v,prev.v,m.fmt),s:'mateix període (YTD)'}:{l:'—',v:'—'},
+    {l:'Millor any (YTD)',v:(()=>{const b=[...perYear].sort((a,b)=>b.v-a.v)[0];return b?b.y:'—';})()},
+    {l:'Mitjana/any (YTD)',v:fmt(avg(perYear.map(p=>p.v)))},
+  ]);
+  buildYoYTable(series,xLabels,fmt,m);
+}
+
+function renderTrend(m,fmt){
+  let rows=aggSeries(state.gran);
+  if(state.range!=='all'){ const days=+state.range; const cut=new Date(Date.now()-days*864e5).toISOString().slice(0,10); rows=rows.filter(r=>r.date>=cut); }
+  const pts=rows.map(r=>measureVal(r,m.id,state.gran));
+  const series=[{name:m.label,color:'#E31E24',pts}];
+  const xLabels=rows.map((r,i)=>{ const step=Math.ceil(rows.length/8); return i%step===0?shortLabel(r,state.gran):''; });
+  drawLines(series,xLabels,fmt,m,false,rows);
+  renderLegend([]);
+  const vals=pts.filter(v=>v!=null);
+  const total=m.agg==='avg'?avg(vals):(m.agg==='last'?vals[vals.length-1]:sum(vals));
+  const half=Math.floor(vals.length/2);
+  const cur=m.agg==='avg'?avg(vals.slice(half)):sum(vals.slice(half));
+  const prv=m.agg==='avg'?avg(vals.slice(0,half)):sum(vals.slice(0,half));
+  const best=Math.max(...vals);
+  kpis([
+    {l:(m.agg==='avg'?'Mitjana':'Total')+' del rang',v:fmt(total)},
+    {l:'2a meitat vs 1a',v:deltaTxt(cur,prv,m.fmt)},
+    {l:'Millor període',v:fmt(best)},
+    {l:'Mitjana/període',v:fmt(avg(vals))},
+  ]);
+  buildTrendTable(rows,pts,fmt,m);
+}
+
+// ── Chart: multi-line SVG amb hover ───────────────────────────────────────
+function drawLines(series,xLabels,fmt,m,isYoY,trendRows){
+  const svg=$('#mainChart'), W=900,H=340,pad={l:52,r:70,t:18,b:34};
+  const n=Math.max(...series.map(s=>s.pts.length),1);
+  const allv=series.flatMap(s=>s.pts).filter(v=>v!=null);
+  if(!allv.length){ svg.innerHTML='<text x="20" y="40" fill="#5a5a60" font-size="13" font-family="monospace">Sense dades per a aquesta selecció.</text>'; return; }
+  let min=Math.min(...allv), max=Math.max(...allv); if(m.fmt!=='pct'&&m.agg!=='last')min=Math.min(0,min);
+  const rng=(max-min)||1;
+  const X=i=>pad.l+(n<=1?0:i*(W-pad.l-pad.r)/(n-1));
+  const Y=v=>pad.t+(1-(v-min)/rng)*(H-pad.t-pad.b);
+  let g='';
+  for(let k=0;k<=4;k++){const gv=min+rng*k/4,gy=Y(gv);g+=`<line x1="${pad.l}" y1="${gy}" x2="${W-pad.r}" y2="${gy}" stroke="#1c1c20"/><text x="${pad.l-8}" y="${gy+3}" fill="#5a5a60" font-size="9.5" text-anchor="end" font-family="monospace">${m.fmt==='pct'?gv.toFixed(1):Math.round(gv).toLocaleString('ca-ES')}</text>`;}
+  let xt='';
+  xLabels.forEach((lb,i)=>{ if(lb){const x=X(i);xt+=`<text x="${x}" y="${H-12}" fill="#5a5a60" font-size="9.5" text-anchor="middle" font-family="monospace">${lb}</text>`;} });
+  let paths='';
+  series.forEach(s=>{
+    let d='',started=false;
+    s.pts.forEach((v,i)=>{ if(v==null){started=false;return;} const x=X(i),y=Y(v); d+=(started?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' '; started=true; });
+    const w=s.color==='#E31E24'?2.6:1.8;
+    paths+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+    // etiqueta directa al final de la línia
+    let li=-1; for(let i=s.pts.length-1;i>=0;i--){if(s.pts[i]!=null){li=i;break;}}
+    if(li>=0&&isYoY) paths+=`<text x="${X(li)+6}" y="${Y(s.pts[li])+3}" fill="${s.color==='#E31E24'?'#fff':s.color}" font-size="11" font-weight="700" font-family="monospace">${s.name}</text>`;
+  });
+  svg.innerHTML=`${g}${xt}${paths}<rect id="hit" x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" fill="transparent"/><line id="cross" y1="${pad.t}" y2="${H-pad.b}" stroke="#E31E24" stroke-width="1" opacity="0"/>`;
+  // hover
+  const tip=$('#tip'), cross=svg.querySelector('#cross'), hit=svg.querySelector('#hit');
+  hit.addEventListener('mousemove',ev=>{
+    const r=svg.getBoundingClientRect(); const sx=(ev.clientX-r.left)/r.width*W;
+    const i=Math.round((sx-pad.l)/((W-pad.l-pad.r)/(n-1||1)));
+    if(i<0||i>=n)return;
+    cross.setAttribute('x1',X(i));cross.setAttribute('x2',X(i));cross.setAttribute('opacity','0.5');
+    const lbl=isYoY?(xLabels[i]||('#'+(i+1))):(trendRows?shortLabel(trendRows[i],state.gran):i);
+    let html=`<div style="color:#8a8a8a;margin-bottom:3px">${lbl}</div>`;
+    series.forEach(s=>{ if(s.pts[i]!=null) html+=`<div><span style="color:${s.color}">■</span> ${isYoY?s.name:''} <b style="color:#fff">${fmt(s.pts[i])}</b></div>`; });
+    tip.innerHTML=html; tip.style.opacity=1;
+    const px=X(i)/W*r.width; tip.style.left=Math.min(px+12,r.width-140)+'px'; tip.style.top='20px';
+  });
+  hit.addEventListener('mouseleave',()=>{tip.style.opacity=0;cross.setAttribute('opacity','0');});
+}
+function renderLegend(series){
+  $('#legend').innerHTML=series.length?series.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join(''):'';
+}
+
+// ── Weekday profile ───────────────────────────────────────────────────────
+function renderWeekday(m,fmt){
+  if(m.src!=='series'){ $('#wdChart').innerHTML='<text x="16" y="40" fill="#5a5a60" font-size="12" font-family="monospace">Només per a mètriques de sèrie.</text>'; $('#wdNote').textContent=''; return; }
+  const rows=daily(); if(!rows.length)return;
+  // filtra pel context: si YoY, anys seleccionats; si trend, el rang
+  let sel=rows;
+  if(state.view==='yoy') sel=rows.filter(r=>state.years.has(+r.date.slice(0,4)));
+  else if(state.range!=='all'){const cut=new Date(Date.now()-(+state.range)*864e5).toISOString().slice(0,10);sel=rows.filter(r=>r.date>=cut);}
+  const sums=Array(7).fill(0),cnt=Array(7).fill(0);
+  sel.forEach(r=>{const wd=(new Date(r.date+'T00:00:00Z').getUTCDay()+6)%7;sums[wd]+=r[m.id]||0;cnt[wd]++;});
+  const avgs=sums.map((s,i)=>cnt[i]?s/cnt[i]:0);
+  const svg=$('#wdChart'),W=440,H=240,pad={l:44,r:14,t:16,b:28};
+  const max=Math.max(...avgs)||1; const bw=(W-pad.l-pad.r)/7-10;
+  const axFmt=v=>m.fmt==='pct'?v.toFixed(1):(max<10?v.toFixed(1):Math.round(v).toString());
+  let g='';for(let k=0;k<=3;k++){const gv=max*k/3,gy=pad.t+(1-k/3)*(H-pad.t-pad.b);g+=`<line x1="${pad.l}" y1="${gy}" x2="${W-pad.r}" y2="${gy}" stroke="#1c1c20"/><text x="${pad.l-6}" y="${gy+3}" fill="#5a5a60" font-size="9" text-anchor="end" font-family="monospace">${axFmt(gv)}</text>`;}
+  let bars='';const best=avgs.indexOf(Math.max(...avgs));
+  avgs.forEach((v,i)=>{const h=(v/max)*(H-pad.t-pad.b),x=pad.l+i*((W-pad.l-pad.r)/7)+5,y=H-pad.b-h;
+    bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${i===best?'#E31E24':'#3a3a40'}"/>
+      <text x="${(x+bw/2).toFixed(1)}" y="${H-10}" fill="#8a8a8a" font-size="10" text-anchor="middle" font-family="monospace">${WD[i]}</text>`;});
+  svg.innerHTML=g+bars;
+  $('#wdNote').innerHTML='Millor dia: <b style="color:#E31E24">'+['Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte','Diumenge'][best]+'</b> (mitjana de '+m.label.toLowerCase()+').';
+}
+
+// ── Tables ────────────────────────────────────────────────────────────────
+let CSV=[];
+function buildYoYTable(series,xLabels,fmt,m){
+  const yrs=series.map(s=>s.name);
+  let head='<tr><th>Període</th>'+yrs.map(y=>`<th>${y}</th>`).join('')+'<th>Δ últim</th></tr>';
+  let body='',csv=[['Període',...yrs,'Delta']];
+  const n=Math.max(...series.map(s=>s.pts.length));
+  for(let i=0;i<n;i++){
+    const lbl=xLabels[i]; if(m.src!=='series'&&state.gran!=='month'){}
+    if(!lbl&&state.gran!=='month')continue;
+    const cells=series.map(s=>s.pts[i]);
+    if(cells.every(v=>v==null))continue;
+    const cur=cells[cells.length-1],prev=cells[cells.length-2];
+    const dlt=(cur!=null&&prev!=null)?deltaTxt(cur,prev,m.fmt):'—';
+    body+=`<tr><td>${lbl||('#'+(i+1))}</td>${cells.map(v=>`<td>${v==null?'—':fmt(v)}</td>`).join('')}<td>${dlt}</td></tr>`;
+    csv.push([lbl||('#'+(i+1)),...cells.map(v=>v==null?'':v),'']);
+  }
+  $('#table').innerHTML=head+body; CSV=csv;
+}
+function buildTrendTable(rows,pts,fmt,m){
+  let head='<tr><th>Període</th><th>'+m.label+'</th><th>Δ</th></tr>',body='',csv=[['Període',m.label,'Delta']];
+  rows.forEach((r,i)=>{const v=pts[i],pv=i>0?pts[i-1]:null;const dlt=(v!=null&&pv!=null)?deltaTxt(v,pv,m.fmt):'—';
+    body+=`<tr><td>${shortLabel(r,state.gran)}</td><td>${v==null?'—':fmt(v)}</td><td>${dlt}</td></tr>`;
+    csv.push([shortLabel(r,state.gran),v==null?'':v,'']);});
+  $('#table').innerHTML=head+body; CSV=csv;
+}
+function exportCSV(){
+  const txt=CSV.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/csv'}));
+  a.download='bi-instagram-'+state.metric+'-'+state.gran+'.csv';a.click();
+}
+
+// ── helpers ───────────────────────────────────────────────────────────────
+function kpis(arr){$('#kpis').innerHTML=arr.map(x=>`<div class="kpi"><div class="kl">${x.l}</div><div class="kv">${x.v}</div>${x.s?`<div class="ks">${x.s}</div>`:''}</div>`).join('');}
+function sum(a){return a.reduce((x,y)=>x+(y||0),0);}
+function avg(a){const v=a.filter(x=>x!=null);return v.length?v.reduce((x,y)=>x+y,0)/v.length:0;}
+function deltaTxt(cur,prev,fmt){if(prev==null||cur==null||prev===0)return '—';const d=cur-prev,p=d/prev*100,up=d>=0;const val=fmt==='pct'?(Math.abs(d).toFixed(2)+'pt'):Math.round(Math.abs(d)).toLocaleString('ca-ES');return `<b class="${up?'up':'down'}">${up?'▲':'▼'} ${val} (${up?'+':'−'}${Math.abs(p).toFixed(1)}%)</b>`;}
+function dayOfYear(s){const d=new Date(s+'T00:00:00Z');return Math.floor((d-new Date(Date.UTC(d.getUTCFullYear(),0,0)))/864e5);}
+function shortLabel(r,gran){if(!r)return'';if(gran==='month')return r.label;if(gran==='week')return r.key;return r.date.slice(5);}
+
+boot();
+</script>
+</body>
+</html>

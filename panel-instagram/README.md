@@ -4,7 +4,8 @@ Panell tipus **Hootsuite** per analitzar, controlar i monitoritzar el compte
 [@cbgrupbarna](https://instagram.com/cbgrupbarna): seguidors, abast, engagement,
 millors publicacions, barreja de contingut, audiència i **qui ens etiqueta**.
 
-- **Panell:** [`index.html`](./index.html) → publicat a `https://cbgrupbarna.info/panel-instagram/`
+- **Panell resum:** [`index.html`](./index.html) → publicat a `https://cbgrupbarna.info/panel-instagram/`
+- **Explorador BI:** [`bi.html`](./bi.html) → `https://cbgrupbarna.info/panel-instagram/bi.html`
 - **Dades:** [`data.json`](./data.json) — l'omple un GitHub Action cada dia
 - **Fetcher:** [`../scripts/fetch-instagram.mjs`](../scripts/fetch-instagram.mjs)
 - **Automatització:** [`../.github/workflows/instagram-panel.yml`](../.github/workflows/instagram-panel.yml)
@@ -78,6 +79,25 @@ Opcional, com a *Variable* (no secret): `IG_API_VERSION` (per defecte `v21.0`).
 | **Comparativa any rere any** | Un mes (p. ex. Juliol) comparat entre anys — nous seguidors, seguidors, abast o engagement, amb variació interanual |
 | **Qui ens etiqueta** | Comptes que ens etiqueten (monitorització estil Hootsuite) |
 | **Audiència** | Top ciutats dels seguidors |
+
+## Explorador BI (`bi.html`)
+
+Eina d'anàlisi lliure, estil Business Intelligence, per **analitzar qualsevol mètrica
+i comparar dies i mesos d'anys anteriors**:
+
+- **Mètrica**: nous seguidors · seguidors totals · abast · visites al perfil · publicacions · engagement.
+- **Granularitat**: dia · setmana · mes.
+- **Dues vistes**:
+  - *Tendència* — evolució en un rang (30 d / 90 d / 12 m / tot).
+  - *Comparativa anual* — superposa una línia per any (X = mes o dia de l'any). L'any en curs
+    es ressalta en vermell; els anteriors, en gris. Comparació **YTD justa** (mateix període,
+    no un any parcial contra un de complet).
+- **Rendiment per dia de la setmana** — quin dia rendeix més.
+- **Taula de dades** amb variació i **exportació a CSV**.
+
+Tot es calcula al navegador des de `data.json` (sèrie diària + mensual). Els mesos passats
+d'anys anteriors surten de `historic.json`; els dies/setmanes d'anys anteriors s'acumulen
+sols a mesura que el panell funciona.
 
 ## Comparativa any rere any (`historic.json`)
 
