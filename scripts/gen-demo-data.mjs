@@ -84,25 +84,58 @@ const history = daily.slice(-30); // el panell overview fa servir 30 dies
 const reach30 = history.reduce((a, b) => a + b.reach, 0);
 const pv30 = history.reduce((a, b) => a + b.profileViews, 0);
 
+// ── Blocs addicionals (demo): audiència completa, stories, hashtag, benchmark ──
+const audience = {
+  byCity:[{label:'Barcelona',value:1840},{label:'Badalona',value:280},{label:"L'Hospitalet",value:190},{label:'Sant Adrià',value:120},{label:'Santa Coloma',value:96},{label:'Cornellà',value:64},{label:'Terrassa',value:41},{label:'Girona',value:33}],
+  byCountry:[{label:'ES',value:2980},{label:'FR',value:96},{label:'AD',value:54},{label:'IT',value:38},{label:'US',value:31}],
+  byAge:[{label:'13-17',value:512},{label:'18-24',value:734},{label:'25-34',value:889},{label:'35-44',value:701},{label:'45-54',value:298},{label:'55-64',value:98},{label:'65+',value:30}],
+  byGender:[{label:'F',value:1712},{label:'M',value:1498},{label:'U',value:52}],
+};
+const stories = [
+  { id:'s1', type:'IMAGE', thumb:'', permalink:'https://instagram.com/cbgrupbarna', timestamp:'2026-07-24T08:10:00Z', reach:1240, replies:18, shares:22, interactions:63 },
+  { id:'s2', type:'VIDEO', thumb:'', permalink:'https://instagram.com/cbgrupbarna', timestamp:'2026-07-24T08:40:00Z', reach:1180, replies:9, shares:14, interactions:41 },
+  { id:'s3', type:'IMAGE', thumb:'', permalink:'https://instagram.com/cbgrupbarna', timestamp:'2026-07-24T09:05:00Z', reach:1090, replies:5, shares:7, interactions:28 },
+];
+const hashtag = { tag:'#somclot', recent:[
+  { id:'h1', caption:'Quin ambient al Clot avui amb el bàsquet! #somclot', type:'IMAGE', permalink:'https://instagram.com/explore/tags/somclot', likes:143, comments:6 },
+  { id:'h2', caption:'Orgull de barri 🧡🖤 #somclot', type:'VIDEO', permalink:'https://instagram.com/explore/tags/somclot', likes:98, comments:4 },
+  { id:'h3', caption:'Festa major i cistelles #somclot', type:'CAROUSEL_ALBUM', permalink:'https://instagram.com/explore/tags/somclot', likes:76, comments:3 },
+]};
+const benchmark = { generatedAt: REF+'T09:00:00Z', rivals:[
+  { username:'cbgrupbarna', name:'CB Grup Barna', followers:last.followers, posts:612 },
+  { username:'sese_bc', name:'AE Sant Andreu (SESE)', followers:2410, posts:734 },
+  { username:'uehorta', name:'UE Horta', followers:1980, posts:521 },
+  { username:'cbroser', name:'CB Roser', followers:1460, posts:389 },
+]};
+const accountInsights = {
+  reach:{total:reach30}, profile_views:{total:pv30}, accounts_engaged:{total:8420}, total_interactions:{total:12960},
+  website_clicks:{total:640}, email_contacts:{total:88}, phone_call_clicks:{total:37}, get_directions_clicks:{total:54},
+  likes:{total:9870}, comments:{total:820}, saves:{total:1740}, shares:{total:1290}, views:{total:88400},
+};
+
 const out = {
   meta: { generatedAt: REF + 'T09:00:00.000Z', mode:'demo', account:'@cbgrupbarna', apiVersion:'v21.0',
+    coverage:{profile:'ok',accountInsights:'12/17 mètriques',audience:'byCity,byCountry,byAge,byGender',media:'8 publicacions',stories:'3 actives',mentions:'7 etiquetes',hashtag:'3 publicacions #somclot',benchmark:'4 rivals'},
     errors:[], note:'DADES DE DEMOSTRACIÓ — connecta el token de la Graph API perquè es substitueixin per dades reals.' },
   profile: { username:'cbgrupbarna', name:'CB Grup Barna', biography:'🏀 Club de bàsquet base · El Clot, BCN · Des de 1965 · #somclot',
     followers_count:last.followers, follows_count:218, media_count:last.followers>0?612:612, website:'https://cbgrupbarna.info' },
   kpis: { followers:last.followers, followersDelta:last.newFollowers, following:218, posts:612,
-    reach30, profileViews30:pv30,
-    avgEngagementRate:+(posts.reduce((a,b)=>a+b.engagementRate,0)/posts.length).toFixed(2), mentionsCount:mentions.length },
+    reach30, profileViews30:pv30, accountsEngaged30:8420, totalInteractions30:12960, websiteClicks30:640,
+    avgEngagementRate:+(posts.reduce((a,b)=>a+b.engagementRate,0)/posts.length).toFixed(2),
+    mentionsCount:mentions.length, storiesCount:stories.length },
+  kpisExtra: { accountsEngaged30:8420, totalInteractions30:12960, websiteClicks30:640, storiesCount:stories.length },
+  accountInsights,
   history,
   daily,
   media: posts.sort((a,b)=>b.engagement-a.engagement),
   contentMix: posts.reduce((a,m)=>{const k=m.type==='REELS'?'Reels':m.mediaType==='CAROUSEL_ALBUM'?'Carrusel':m.mediaType==='VIDEO'?'Vídeo':'Imatge';a[k]=(a[k]||0)+1;return a;},{}),
+  stories,
   mentions,
+  hashtag,
+  benchmark,
   monthly,
-  demographics: { byCity:[
-    {label:'Barcelona',value:1840},{label:'Badalona',value:280},{label:"L'Hospitalet",value:190},
-    {label:'Sant Adrià',value:120},{label:'Santa Coloma',value:96},{label:'Cornellà',value:64},
-    {label:'Terrassa',value:41},{label:'Girona',value:33},
-  ]},
+  demographics: { byCity: audience.byCity },
+  audience,
 };
 if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive:true });
 writeFileSync(join(OUT_DIR,'data.json'), JSON.stringify(out,null,2));

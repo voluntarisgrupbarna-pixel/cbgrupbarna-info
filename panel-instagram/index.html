@@ -57,6 +57,25 @@
   .k-sub .up{color:var(--green)}.k-sub .down{color:var(--red)}
 
   .grid2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px}
+  .strip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .st{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 13px}
+  .st .sl{font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .st .sv{font-family:var(--display);font-size:24px;line-height:.9}
+  .story-row{display:flex;gap:10px;flex-wrap:wrap}
+  .story{flex:1;min-width:90px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px;font-family:var(--mono);font-size:11px}
+  .story .sh{font-family:var(--display);font-size:20px;color:#fff}
+  .story .sl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .htag{display:block;padding:9px 0;border-bottom:1px solid var(--border);font-size:12.5px;color:#c4c4c8}
+  .htag:last-child{border:none}
+  .htag .hm{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:3px}
+  .bench-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-family:var(--mono);font-size:12px}
+  .bench-row .bn{width:150px;color:#c4c4c8;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bench-row.me .bn{color:var(--red);font-weight:700}
+  .bench-bar{flex:1;height:14px;background:var(--panel2);border-radius:999px;overflow:hidden}
+  .bench-fill{height:100%;border-radius:999px;background:#3a3a40}
+  .bench-row.me .bench-fill{background:var(--red)}
+  .bench-row .bv{width:52px;text-align:right;color:var(--text)}
+  @media(max-width:900px){.strip{grid-template-columns:repeat(2,1fr)}}
   .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}
   .card h3{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:500}
   .chart{width:100%;height:auto;display:block}
@@ -146,6 +165,12 @@
     <div class="kpis" id="kpis"></div>
   </section>
 
+  <!-- Activitat (30 dies) -->
+  <section>
+    <div class="sec-title">Activitat · 30 dies</div>
+    <div class="strip" id="strip"></div>
+  </section>
+
   <!-- Charts -->
   <section>
     <div class="grid2">
@@ -198,10 +223,34 @@
     <div class="feed" id="feed"></div>
   </section>
 
-  <!-- Demographics -->
+  <!-- Stories + Hashtag -->
+  <section>
+    <div class="grid2">
+      <div class="card" id="storiesCard">
+        <h3>Stories actives</h3>
+        <div id="stories"></div>
+      </div>
+      <div class="card" id="hashtagCard">
+        <h3>Qui parla del barri · #somclot</h3>
+        <div id="hashtag"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benchmark -->
+  <section id="benchSec">
+    <div class="sec-title">Com anem vs els rivals</div>
+    <div class="card"><div id="bench"></div></div>
+  </section>
+
+  <!-- Audiència -->
   <section id="demoSec">
-    <div class="sec-title">On és la nostra audiència</div>
-    <div class="card"><div id="cities"></div></div>
+    <div class="sec-title">Qui ens segueix</div>
+    <div class="grid2">
+      <div class="card"><h3>Edat</h3><div id="age"></div></div>
+      <div class="card"><h3>Gènere</h3><div id="gender"></div><h3 style="margin-top:20px">País</h3><div id="country"></div></div>
+    </div>
+    <div class="card" style="margin-top:16px"><h3>Ciutats</h3><div id="cities"></div></div>
   </section>
 
   <div class="foot">
@@ -318,15 +367,71 @@ function render(d){
   // Comparativa any rere any
   setupYoY(d.monthly||{});
 
-  // Demographics
-  const cities = d.demographics?.byCity||[];
-  if(cities.length){
-    const max = Math.max(...cities.map(c=>c.value));
-    $('#cities').innerHTML = cities.map(c=>`
-      <div class="mix-row"><span class="mlab" style="width:120px">${esc(c.label)}</span>
-        <span class="mix-bar"><span class="mix-fill" style="width:${(c.value/max*100).toFixed(0)}%;background:var(--red)"></span></span>
-        <span class="mn" style="width:44px">${fmt(c.value)}</span></div>`).join('');
-  } else { $('#demoSec').style.display='none'; }
+  // Activitat strip
+  $('#strip').innerHTML = [
+    {l:'Comptes assolits',v:k.reach30},
+    {l:'Comptes que interactuen',v:k.accountsEngaged30},
+    {l:'Interaccions totals',v:k.totalInteractions30},
+    {l:'Clics a la web',v:k.websiteClicks30},
+    {l:'Stories actives',v:k.storiesCount},
+  ].map(x=>`<div class="st"><div class="sl">${x.l}</div><div class="sv">${fmt(x.v)}</div></div>`).join('');
+
+  // Stories
+  const stories = d.stories||[];
+  if(stories.length){
+    $('#stories').innerHTML = '<div class="story-row">'+stories.slice(0,4).map(s=>`
+      <div class="story"><div class="sl">${esc(s.type)}</div>
+        <div class="sh">${fmt(s.reach)}</div><div class="sl">abast</div>
+        <div style="margin-top:6px;color:var(--muted)">💬 ${fmt(s.replies)} · ↗ ${fmt(s.shares)}</div></div>`).join('')+'</div>';
+  } else { $('#storiesCard').style.display='none'; }
+
+  // Hashtag #somclot
+  const ht = d.hashtag?.recent||[];
+  if(ht.length){
+    $('#hashtag').innerHTML = ht.slice(0,5).map(h=>`
+      <a class="htag" href="${esc(h.permalink)}" target="_blank" rel="noopener">${esc(h.caption)||'(sense text)'}
+        <div class="hm">❤ ${fmt(h.likes)} · 💬 ${fmt(h.comments)} · ${esc(h.type)}</div></a>`).join('');
+  } else { $('#hashtagCard').style.display='none'; }
+
+  // Benchmark
+  const rivals = d.benchmark?.rivals||[];
+  if(rivals.length){
+    const max = Math.max(...rivals.map(r=>r.followers));
+    const meUser = (m.account||'').replace('@','');
+    $('#bench').innerHTML = rivals.map(r=>{
+      const me = r.username===meUser;
+      return `<div class="bench-row ${me?'me':''}"><span class="bn">${esc(r.name||r.username)}</span>
+        <span class="bench-bar"><span class="bench-fill" style="width:${(r.followers/max*100).toFixed(0)}%"></span></span>
+        <span class="bv">${fmt(r.followers)}</span></div>`;
+    }).join('');
+  } else { $('#benchSec').style.display='none'; }
+
+  // Audiència (edat, gènere, país, ciutat)
+  const au = d.audience || (d.demographics?{byCity:d.demographics.byCity}:{});
+  bars('#age', au.byAge, 'var(--blue)', 120);
+  bars('#country', au.byCountry, 'var(--orange)', 120);
+  bars('#cities', au.byCity, 'var(--red)', 120);
+  // Gènere com a barra apilada
+  const g = au.byGender||[];
+  if(g.length){
+    const tot = g.reduce((a,b)=>a+b.value,0)||1;
+    const gc = {F:'#cc2366',M:'#3b82f6',U:'#8a8a8a'};
+    $('#gender').innerHTML = '<div style="display:flex;height:16px;border-radius:999px;overflow:hidden;margin-bottom:8px">'+
+      g.map(x=>`<div style="width:${(x.value/tot*100)}%;background:${gc[x.label]||'#8a8a8a'}"></div>`).join('')+'</div>'+
+      '<div style="display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--muted)">'+
+      g.map(x=>`<span><span style="color:${gc[x.label]||'#8a8a8a'}">■</span> ${x.label==='F'?'Dones':x.label==='M'?'Homes':'Altres'} ${(x.value/tot*100).toFixed(0)}%</span>`).join('')+'</div>';
+  }
+  if(!au.byAge && !au.byCity) $('#demoSec').style.display='none';
+}
+
+function bars(sel, data, color, labw){
+  const el = document.querySelector(sel); if(!el) return;
+  if(!data || !data.length){ el.innerHTML='<div style="color:var(--dim);font-size:12px">Sense dades</div>'; return; }
+  const max = Math.max(...data.map(c=>c.value));
+  el.innerHTML = data.map(c=>`
+    <div class="mix-row"><span class="mlab" style="width:${labw}px">${esc(c.label)}</span>
+      <span class="mix-bar"><span class="mix-fill" style="width:${(c.value/max*100).toFixed(0)}%;background:${color}"></span></span>
+      <span class="mn" style="width:46px">${fmt(c.value)}</span></div>`).join('');
 }
 
 // ── Comparativa any rere any ──────────────────────────────────────────────

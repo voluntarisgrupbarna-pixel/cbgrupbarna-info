@@ -41,6 +41,7 @@ Fins que no el connectis, el panell funciona en **mode DEMO** amb dades d'exempl
    - `instagram_manage_comments`  *(necessari per a "qui ens etiqueta")*
    - `pages_read_engagement`
    - `pages_show_list`
+   - `business_management`  *(necessari per al benchmark de rivals)*
 4. Converteix-lo a **token de llarga durada** (60 dies) o, millor, un **System User token** (no caduca):
    ```
    https://graph.facebook.com/v21.0/oauth/access_token?grant_type=fb_exchange_token&client_id=APP_ID&client_secret=APP_SECRET&fb_exchange_token=TOKEN_CURT
@@ -79,6 +80,35 @@ Opcional, com a *Variable* (no secret): `IG_API_VERSION` (per defecte `v21.0`).
 | **Comparativa any rere any** | Un mes (p. ex. Juliol) comparat entre anys — nous seguidors, seguidors, abast o engagement, amb variació interanual |
 | **Qui ens etiqueta** | Comptes que ens etiqueten (monitorització estil Hootsuite) |
 | **Audiència** | Top ciutats dels seguidors |
+
+## Tot el que treu de l'API (`fetch-instagram.mjs`)
+
+L'extractor treu **tot el que la Graph API ofereix** per a un compte Business, amb
+degradació robusta (cada bloc va dins d'un try/catch; el que no arriba es registra a
+`meta.coverage` i la resta segueix). Blocs:
+
+| Bloc | Contingut |
+|------|-----------|
+| **Perfil** | usuari, nom, bio, seguidors, seguits, nº publicacions, web, foto, `ig_id` |
+| **Límit de publicació** | quota d'API restant (`content_publishing_limit`) |
+| **Insights de compte (30 d)** | abast, visites al perfil, clics web/email/telèfon/direccions, comptes que interactuen, interaccions totals, likes, comentaris, guardats, compartits, respostes, taps a enllaços, follows/unfollows, vistes |
+| **Sèries diàries** | abast per dia i nous seguidors per dia |
+| **Audiència** | per **ciutat, país, edat i gènere** |
+| **Publicacions (totes)** | paginades, amb insights per tipus (reels: reproduccions i temps de visionat; feed: guardats, visites al perfil, follows) |
+| **Stories** | actives, amb abast, respostes, compartits, navegació |
+| **Etiquetes** | comptes que ens etiqueten (`/tags`) |
+| **Hashtag `#somclot`** | publicacions recents del barri (`ig_hashtag_search`) |
+| **Benchmark** | seguidors i publicacions dels rivals via `business_discovery` (vegeu `benchmark.json`) |
+| **Acumulació** | sèrie diària i mensual pròpia, per a tendències i any-rere-any |
+
+La cobertura de cada execució queda a `data.json → meta.coverage`, així saps què ha
+arribat i què no (per permisos o versió de l'API).
+
+### Benchmark de rivals (`benchmark.json`)
+
+Posa a [`benchmark.json`](./benchmark.json) els noms d'usuari **públics** dels rivals
+(SESE, UE Horta, CB Roser…). El fetcher en treu seguidors i publicacions per comparar-los
+amb el Barna. Necessita el permís `business_management` al token.
 
 ## Explorador BI (`bi.html`)
 
