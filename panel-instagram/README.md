@@ -55,6 +55,24 @@ https://graph.facebook.com/v21.0/PAGE_ID?fields=instagram_business_account&acces
    → et retorna instagram_business_account.id  ← aquest és IG_USER_ID
 ```
 
+### ⚡ Via ràpida (recomanada): l'ajudant fa els passos 2-3 sol
+
+El pas humà (iniciar sessió a Meta i generar un token) no es pot automatitzar, però
+un cop tinguis un **token curt** de l'Explorer, l'script fa la resta: el converteix en
+token de llarga durada i troba l'`IG_USER_ID` sol.
+
+```bash
+APP_ID=xxx APP_SECRET=yyy SHORT_TOKEN=zzz node scripts/setup-token.mjs
+```
+
+- `APP_ID` / `APP_SECRET`: developers.facebook.com → la teva app → Configuració → Bàsica
+- `SHORT_TOKEN`: developers.facebook.com/tools/explorer → tria l'app, afegeix els permisos
+  de dalt, **Generate Access Token** (copia'l).
+
+T'imprimeix `IG_ACCESS_TOKEN` i `IG_USER_ID` a punt d'enganxar a Secrets.
+**⚠️ No enganxis mai el token ni l'APP_SECRET al xat ni al repositori** — executa-ho al teu
+ordinador i copia el resultat directament a GitHub.
+
 ### 4. Guardar-ho a GitHub Secrets
 Al repo → **Settings → Secrets and variables → Actions → New repository secret**:
 
