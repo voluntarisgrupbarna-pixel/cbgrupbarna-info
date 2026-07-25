@@ -17,6 +17,17 @@ photos inlined as base64) lives at
 `.claude/skills/cbgrupbarna-stories/reference.html` — open it to see the full
 CSS and copy patterns before generating new pieces.
 
+> **If the user shares a finished, real piece the club already published or
+> designed (a post, story, or reel cover) — do not regenerate, redesign, or
+> "correct" it against this system.** This skill is for producing *new*
+> pieces from scratch. A real piece the user shares is already correct by
+> definition; the only acceptable action is to use it as-is (crop out phone/
+> app chrome if it's a screenshot, nothing else) or to study it as a reference
+> for a *new* piece's composition. Rebuilding it in this skill's template and
+> handing that back is a mistake this skill has made before — e.g. the
+> Supercopa Femenina/Masculina posts and reels are real official pieces;
+> deliver those files themselves, never a recreation.
+
 **Related club skills** (if present on the machine, prefer them for anything
 this skill doesn't cover):
 - `sistema-visual-cbgb` — general design-token skill; superseded by the PDF
