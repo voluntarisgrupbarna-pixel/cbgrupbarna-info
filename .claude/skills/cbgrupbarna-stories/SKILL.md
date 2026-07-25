@@ -23,6 +23,15 @@ authority and treat this skill as the repo-local fallback):
   center). This skill's layout was built from direct, repeated user
   instructions that differ from that playbook in one place — see rule ④ below,
   don't silently "fix" it to match the other skill.
+- `aparador-perfil-cbgb` — the club's real conversion data and the **3 pins**
+  strategy (profile-pinned posts: Nivell / Ganxo extern / Amplitud — see
+  `reference.html` §04). It also documents a real failure directly relevant
+  here: the flat red/black + epic-text pattern this skill produces got **748
+  views vs. 3K–12K for everything else** when overused — "l'èpica en estàtic
+  es mor." **Do not default every flat-background piece to `bg-red`/`bg-black`
+  with epic text** — reserve that register for 3–4 pieces max and prefer
+  `bg-white` or a photo-backed piece otherwise. See the warning box in
+  `reference.html` before generating a batch of flat pieces.
 
 A worked reference implementation (style-kit + 5 example pieces, fonts and
 photos inlined as base64) lives at
@@ -114,6 +123,12 @@ every piece in the grid.
    open question; don't "fix" it back to center.
 5. **One accent per piece.** Red marks only the pill, the kickline bar, and
    (on `bg-white`) the frame — it does not spread through body copy.
+6. **Don't overuse flat `bg-red`/`bg-black` + epic text.** Real data
+   (`aparador-perfil-cbgb`) shows this exact register cratered to 748 views
+   vs. 3K–12K elsewhere when it was the pattern of nearly every piece —
+   repetition fatigue kills it. Cap it at 3–4 Feed pieces at a time; lean on
+   `bg-white`, `bg-photo`, or (better, for a genuinely epic statement) an
+   actual video/reel instead of another static red/black tile.
 
 ## Producing a new piece
 

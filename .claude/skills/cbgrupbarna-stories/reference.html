@@ -63,6 +63,24 @@
   .rule .body h3{font-size:14px;margin-bottom:4px;}
   .rule .body p{font-size:13px;color:var(--muted);line-height:1.55;}
 
+  .pinmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:14px;}
+  .pin{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:18px 20px;}
+  .pin .job{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;letter-spacing:1.4px;color:var(--red);text-transform:uppercase;margin-bottom:8px;}
+  .pin h3{font-size:15px;margin-bottom:6px;}
+  .pin p{font-size:13px;color:var(--muted);line-height:1.55;}
+  .pin .piece{display:inline-block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--code-bg);border:1px solid var(--panel-border);border-radius:6px;padding:4px 10px;color:var(--text);}
+
+  .lesson{
+    background:var(--panel); border:1px solid rgba(227,30,36,0.35); border-radius:10px;
+    padding:20px 22px; margin-bottom:14px; display:flex; gap:16px;
+  }
+  .lesson .ico{flex-shrink:0;width:30px;height:30px;border-radius:7px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;}
+  .lesson h3{font-size:15px;margin-bottom:6px;}
+  .lesson p{font-size:13.5px;color:var(--text);line-height:1.6;margin-bottom:8px;}
+  .lesson p:last-child{margin-bottom:0;}
+  .lesson .stat{color:var(--red);font-weight:700;}
+  .lesson .src{font-size:11px;color:var(--muted);}
+
   .anatomy{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:22px 24px;margin-bottom:14px;}
   .anatomy ol{padding-left:20px;font-size:13.5px;line-height:1.9;color:var(--text);}
   .anatomy ol b{color:var(--red);}
@@ -224,6 +242,50 @@
         <div class="flag">④</div>
         <div class="body"><h3>Escut top-right — confirmat, per sobre de <code>portada-reels-cbgb</code></h3>
         <p>El playbook general de portades de reel del club recomana el logo al centre vertical (la graella 3:4/1:1 retalla les cantonades). Preguntat directament, la resposta ha estat mantenir-lo a dalt-dreta igualment. És una decisió final d'aquesta sèrie, no una pregunta oberta.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2><span class="n">04</span> · Els 3 pins</h2></div>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:18px;max-width:74ch">
+      No es pot reordenar la graella del perfil, però sí fixar 3 posts — són l'aparador real per a qui no et segueix.
+      Segons <code>aparador-perfil-cbgb</code>, cada pin fa una feina diferent. Les 3 stories informatives d'aquesta
+      guia (fons pla) encaixen exactament en aquest paper:
+    </p>
+    <div class="pinmap">
+      <div class="pin">
+        <div class="job">Pin 1 · Nivell</div>
+        <h3>"Això és un club seriós"</h3>
+        <p>Un resultat o fita confirmada, en 1 segon, sense necessitat de conèixer cap nom.</p>
+        <span class="piece">Fons negre — "Hi van els dos" (Confirmat Supercopa)</span>
+      </div>
+      <div class="pin">
+        <div class="job">Pin 2 · Ganxo extern</div>
+        <h3>Raó per seguir, sense context</h3>
+        <p>S'entén sense saber cap nom. Idealment un testimoni o "des de ben petits" — una CTA d'accés hi funciona però és el pin més fluix dels 3 si no hi ha cara/emoció.</p>
+        <span class="piece">Fons blanc + marc — "Vols jugar?"</span>
+      </div>
+      <div class="pin">
+        <div class="job">Pin 3 · Amplitud</div>
+        <h3>"Hi ha més d'un equip"</h3>
+        <p>Trenca la idea que el club és una sola cara — un barri, 34 equips, un sol escut.</p>
+        <span class="piece">Fons vermell — "Som Clot"</span>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <div class="ico">!</div>
+      <div>
+        <h3>La lliçó "Som Clot" — <span class="stat">748 visualitzacions</span> vs. 3K–12K de la resta</h3>
+        <p>Quan <strong>cada peça és vermell/negre + text èpic</strong>, l'èpica deixa de destacar i l'algoritme
+          deixa d'empènyer-la — és fatiga per repetició, el mateix patró que aquesta guia genera si es fa servir a
+          totes les peces. <strong>L'èpica en estàtic es mor:</strong> si el missatge és èpic, hauria d'anar amb
+          moviment o cara (vídeo/reel), no com a tile estàtic més.</p>
+        <p>Regla pràctica: reservar el registre "fons pla vermell/negre + titular èpic" per a <strong>3–4 peces de
+          Feed com a molt</strong> — mai encadenar-lo peça rere peça — i, quan es pugui, portar el missatge èpic a
+          vídeo en lloc de story estàtica.</p>
+        <span class="src">Font: aparador-perfil-cbgb — dades reals del perfil @cbgrupbarna, juliol 2026.</span>
       </div>
     </div>
   </section>
@@ -409,7 +471,7 @@
   </div>
 
   <section style="margin-top:56px">
-    <div class="section-head"><h2><span class="n">04</span> · Recepta reutilitzable</h2></div>
+    <div class="section-head"><h2><span class="n">05</span> · Recepta reutilitzable</h2></div>
     <div class="code"><pre><span class="c1">&lt;div class="story bg-{white|red|black|photo}"&gt;</span>
   <span class="c1">&lt;!-- només bg-photo --&gt;</span>
   &lt;img class="photo" src="foto-real.jpg"&gt;
