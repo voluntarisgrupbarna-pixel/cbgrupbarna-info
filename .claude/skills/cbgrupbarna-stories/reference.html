@@ -181,6 +181,13 @@
   .code .c1{color:var(--muted);} .code .c2{color:var(--red);}
 
   footer.page{max-width:1220px;margin:64px auto 0;padding-top:24px;border-top:1px solid var(--panel-border);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media print{
+    .story-slot,.story-frame,.swatch,.rule,.pin,.lesson,.anatomy,.type-panel,.code,.nope div{break-inside:avoid;}
+    section{break-inside:auto;}
+    .section-head{break-after:avoid;}
+    .groupline{break-after:avoid;}
+  }
 </style>
 
 <div class="wrap">
@@ -251,7 +258,7 @@
       Quines lletres i quina mida porta cada element, i en quin ordre es llegeixen — de dalt a baix, per a
       cadascuna de les dues plantilles.
     </p>
-    <div class="tokens" style="grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
+    <div class="tokens" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:start;">
       <div class="anatomy">
         <h3 style="font-size:14px;margin-bottom:12px;color:var(--red)">Plantilla A — Sèrie</h3>
         <ol style="padding-left:20px;font-size:13px;line-height:2;color:var(--text)">
@@ -274,6 +281,19 @@
           <li><b>Text secundari</b> — <i>Montserrat 700</i>, centrat, màxim 2–3 línies.</li>
           <li><b>CTA</b> — opcional. Botó <i>Montserrat 800</i>, xip vermell.</li>
           <li><b>Peu</b> — <i>mono 700</i>, centrat. Firma fixa.</li>
+        </ol>
+      </div>
+      <div class="anatomy" style="border-color:rgba(227,30,36,0.35)">
+        <h3 style="font-size:14px;margin-bottom:4px;color:var(--red)">Plantilla C — Gameday <span style="color:var(--muted);font-weight:400;font-size:11px">(pendent)</span></h3>
+        <p style="font-size:11.5px;color:var(--muted);margin-bottom:10px">3 variants reals compartides per l'usuari (matchup, "Dia de partit", "Game day") — encara no incrustades com a arxiu, documentat de moment només l'estructura observada.</p>
+        <ol style="padding-left:20px;font-size:13px;line-height:2;color:var(--text)">
+          <li><b>Escut</b> — top-right, imatge oficial.</li>
+          <li><b>Matchup</b> — escut rival (esquerra) + "VS" + escut Barna (dreta), noms d'equip a sota.</li>
+          <li><b>Data/hora/lloc</b> — 3 línies, <i>Montserrat 700</i>, icones opcionals (calendari/rellotge/pin).</li>
+          <li><b>Foto</b> — jugador/a en acció, sencera, sense vel ni placa.</li>
+          <li><b>Titular opcional</b> — <i>Bebas Neue</i>, "DIA DE PARTIT" / "GAME DAY".</li>
+          <li><b>Dorsal + nom</b> — crida opcional, cantonada inferior.</li>
+          <li><b>Tagline</b> — "Som del Clot. Som Barna.", peu.</li>
         </ol>
       </div>
     </div>
@@ -472,7 +492,43 @@
   </section>
 
   <section>
-    <div class="section-head"><h2><span class="n">08</span> · Recepta reutilitzable</h2></div>
+    <div class="section-head"><h2><span class="n">08</span> · Per què es dissenya així</h2></div>
+    <p style="font-size:13px;color:var(--muted);max-width:76ch;margin-bottom:16px">
+      Cada decisió d'aquesta guia respon a una raó concreta, no a preferència estètica. El fil que lliga totes
+      les portades i cartells:
+    </p>
+    <div class="rules" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <div class="rule"><div class="flag">①</div><div class="body"><h3>Negre domina (55%), no el vermell</h3>
+        <p>Un fons majoritàriament negre és el que fa que una peça llegeixi "club seriós, no cridaner". El vermell
+        només guanya força perquè és escàs — si fos el color base, deixaria de significar res.</p></div></div>
+      <div class="rule"><div class="flag">②</div><div class="body"><h3>Un accent roig, mai més</h3>
+        <p>La lliçó "Som Clot" (748 visualitzacions vs. 3K–12K) ho demostra amb dades: quan tot és vermell/negre +
+        text èpic, l'ull deixa de distingir què és important. Un sol accent per peça manté el contrast útil.</p></div></div>
+      <div class="rule"><div class="flag">③</div><div class="body"><h3>Bebas Neue = autoritat esportiva</h3>
+        <p>Una condensada gegant és el registre visual dels pòsters NBA/Nike — comunica impacte en poc espai,
+        ideal per a miniatures que s'han de llegir a 300px. Montserrat no competeix mai amb ella: és neutra
+        expressament, perquè la informació es llegeixi sense soroll.</p></div></div>
+      <div class="rule"><div class="flag">④</div><div class="body"><h3>Escut top-right = la persona és la protagonista</h3>
+        <p>A les peces amb foto (sèrie, gameday), l'escut és una insígnia discreta a la cantonada — la cara de qui
+        surt a la peça no hi ha de competir. A les peces institucionals no hi ha foto, així que l'escut centrat
+        pot ser part de la composició simètrica sense robar protagonisme a ningú.</p></div></div>
+      <div class="rule"><div class="flag">⑤</div><div class="body"><h3>Placa vs. vel — foto neta per a persones, consistència per a sèries</h3>
+        <p>Un anunci d'una persona ha de semblar ella mateixa, sense filtre — la placa només toca la zona de text.
+        Un capítol de sèrie recurrent es beneficia del vel perquè la graella s'ha de llegir com "un sol programa",
+        sigui quina sigui la foto d'aquella setmana.</p></div></div>
+      <div class="rule"><div class="flag">⑥</div><div class="body"><h3>Gameday és una plantilla pròpia</h3>
+        <p>Un partit té una necessitat d'informació diferent (dos escuts, dia, hora, lloc) que no encaixa ni al
+        llenguatge de sèrie ni a l'institucional — forçar-lo en un dels dos trencaria la jerarquia lògica del
+        cartell.</p></div></div>
+      <div class="rule"><div class="flag">⑦</div><div class="body"><h3>Els 3 pins no són decoració, són conversió</h3>
+        <p>Nivell + ganxo extern + amplitud és la seqüència mínima perquè un desconegut decideixi seguir el club en
+        3 segons. No és una tria estètica — és la resposta directa al diagnòstic real (0,03% de conversió) que va
+        motivar aquest sistema.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2><span class="n">09</span> · Recepta reutilitzable</h2></div>
     <div class="code"><pre><span class="c1">/* SÈRIE — escut top-right, pastilla+etiqueta */</span>
 &lt;div class="story bg-{white|red|black|photo}"&gt;
   &lt;img class="photo" src="foto-real.jpg"&gt;
