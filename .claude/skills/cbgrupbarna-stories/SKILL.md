@@ -1,6 +1,6 @@
 ---
 name: cbgrupbarna-stories
-description: Generate on-brand vertical (9:16) Instagram/TikTok story and reel-cover graphics for CB Grup Barna. Use whenever asked to create a "story", "portada"/cover, or vertical social graphic for the club — encodes the club's real colors, typography, the unified pill+tag+eyebrow+headline+accent+footer layout, and the two background rules (red frame on white, red/black veil on reel-cover photos).
+description: Generate on-brand vertical (9:16) Instagram/TikTok story and reel-cover graphics for CB Grup Barna. Use whenever asked to create a "story", "portada"/cover, or vertical social graphic for the club — encodes the club's real colors, typography, the unified pill+tag+eyebrow+headline+accent+footer layout, and the background rules (red frame on white; player/coach announcement photos stay clean with only a bottom plate; the red/black veil is reserved for recurring content series).
 ---
 
 # CB Grup Barna — Stories & portades
@@ -35,8 +35,8 @@ Colors (from `index.html` `:root`, do not substitute other reds/blacks):
 
 | Token | Hex | Use |
 |---|---|---|
-| `--red` | `#E31E24` | Shield red. Hook pill, accent bar, mandatory frame on white backgrounds, mandatory veil on reel-cover photos. |
-| `--black` | `#0A0A0C` | Context tag, "declaration" flat background, base tone of the reel-cover veil. Never pure `#000`. |
+| `--red` | `#E31E24` | Shield red. Hook pill, accent bar, mandatory frame on white backgrounds, base tone of the content-series veil. |
+| `--black` | `#0A0A0C` | Context tag, "declaration" flat background, base tone of both the announcement plate and the content-series veil. Never pure `#000`. |
 | white bg | `#FFFFFF` | Flat background for informative/CTA pieces. Pure white, not cream — **always paired with rule ①**. |
 | muted | `#6B6F76` / `rgba(255,255,255,.6–.85)` | Eyebrow (on white) and footer line. Always de-emphasized, never protagonist. |
 
@@ -56,7 +56,7 @@ One layout, used on **every** piece — flat or photo. Top to bottom:
 
 ```
 .story.bg-{white|red|black|photo}
-├── img.photo + .veil     ONLY on bg-photo — full-bleed photo + red/black veil (rule ②)
+├── img.photo + .plate/.veil  ONLY on bg-photo — see below which one (rule ②)
 ├── img.logo              top:64px right:64px, ~140px wide          (rule ④)
 ├── .pill                 top:64px left:64px — the hook, 3–4 words  (rule ③, fixed chip)
 ├── .tag                  right under .pill — context/series/date   (rule ③, fixed chip)
@@ -76,8 +76,12 @@ and the chip/text color mapping change:
   flip to black so they don't disappear into the same hue.
 - **`bg-black`** — flat `--black`. Headline/kickline white; tag flips to
   white-on-black for the same reason.
-- **`bg-photo`** — real club photo, full-bleed, **+ mandatory veil** (rule ②).
-  Same white-based palette as `bg-black`.
+- **`bg-photo`** — real photo, full-bleed. **Two sub-cases, not interchangeable**
+  (rule ②): a **`.plate`** (solid `--black`, bottom ~36% only, short fade at its
+  top edge) for player/coach announcement covers — the photo itself stays
+  completely clean above it; or a **`.veil`** (red→black gradient wash over the
+  *entire* photo) for recurring content-series covers only. Same white-based
+  text palette either way.
 
 The pill and tag are brand chips, not page-colored elements: they stay
 red/black regardless of the canvas, and only invert when they'd otherwise sit
@@ -89,11 +93,15 @@ every piece in the grid.
 1. **White background ⇒ mandatory red frame.** Any `bg-white` piece gets a
    solid `26px` border in `--red` around the entire canvas. A white piece with
    no border is a bug.
-2. **Reel-cover portada ⇒ mandatory photo + red/black veil.** A reel cover
-   never uses a flat background — always a real club photo (from `img/` or
-   equivalent) with the veil gradient (red → near-black, see `reference.html`
-   `.veil` rule) so the text stays legible. Flat backgrounds (white/red/black)
-   are for stories/announcements that aren't reel-cover thumbnails.
+2. **The veil is only for content series — announcement covers stay clean.**
+   A player/coach announcement (fitxatge, renovació) uses a real photo with
+   **no veil**: just a `.plate` (solid, bottom ~36% of the canvas, short fade
+   at its top edge) behind the text so the photo above it stays fully clean —
+   face, jersey, everything undimmed. The red/black `.veil` wash over the
+   *whole* photo is reserved for recurring **content series** (tips, POV,
+   "cap. 01" formats) — never apply it to an individual player/coach cover.
+   Flat backgrounds (white/red/black, no photo at all) are a third option for
+   stories/announcements that don't center on a photo.
 3. **Pill/tag are fixed brand chips.** Always red/black, never tinted to match
    the page background — they only invert (see mapping above) when they'd
    otherwise blend into a same-colored canvas.
@@ -109,10 +117,14 @@ every piece in the grid.
 
 ## Producing a new piece
 
-1. Decide reel-cover vs. story: reel-cover → `bg-photo` + a real photo (rule
-   ②); story/announcement → pick `bg-white` / `bg-red` / `bg-black` by intent
-   (result/confirmation → black, barri/identity → red, recruitment/CTA →
-   white + frame).
+1. Decide the type first, it picks the background (rule ②):
+   - **Player/coach announcement** (fitxatge, renovació) → `bg-photo` + `.plate`,
+     no veil.
+   - **Recurring content series** (tips, POV, "cap. 01" formats) → `bg-photo` +
+     `.veil`.
+   - **Story/announcement with no photo** → `bg-white` / `bg-red` / `bg-black`
+     by intent (result/confirmation → black, barri/identity → red,
+     recruitment/CTA → white + frame).
 2. Write the copy in this order: **pill** (3–4 word hook) → **tag** (context/
    date/series) → **eyebrow** (who/what this is about) → **headline** (the
    main statement) → **kickline** (one short closing phrase after the bar).
@@ -127,18 +139,20 @@ every piece in the grid.
      re-fetch.
    - **Delivering as a page inside this repo**: link Google Fonts the way
      `index.html` already does instead of inlining.
-5. Photo (reel-cover only): use a real photo of the actual person/team — never
+5. Photo (`bg-photo` only): use a real photo of the actual person/team — never
    stock or generic. `reference.html` currently features 5 real people (Jordi
    Vives, a Sènior femení dorsal-33 player, David Alegre, Carlos Rodríguez de
-   la Hera, Nora Serra), sourced from screenshots of the club's own past
-   Instagram posts. If the only source is a finished graphic like that (title
-   text baked in above the subject, name baked in below), crop tightly to just
-   the person — head to torso/waist — excluding those baked-in text bands
-   entirely, rather than relying on the veil to hide them; the veil is strong
-   at the bottom but light at the top, so top-baked titles will still show
-   through if left in. Also crop out any baked-in carousel badges ("1/6") or
-   watermark logos sitting in the same top-right corner as this system's own
-   escut, to avoid a double-logo look.
+   la Hera, Nora Serra) on `.plate` for announcements, plus one `.veil`
+   content-series example, all sourced from screenshots of the club's own
+   past Instagram posts. If the only source is a finished graphic like that
+   (title text baked in above the subject, name baked in below), crop tightly
+   to just the person — head to torso/waist — excluding those baked-in text
+   bands entirely. This matters more on `.plate` pieces than it used to on the
+   old full-photo veil: the plate only covers the bottom ~36%, so a top-baked
+   title has nothing hiding it and will show through in full if left in. Also
+   crop out any baked-in carousel badges ("1/6") or watermark logos sitting in
+   the same top-right corner as this system's own escut, to avoid a
+   double-logo look.
    - True background-removal (isolating just the person, no backdrop at all)
      was attempted via the higgsfield MCP's `remove_background`, but the
      sandbox's egress proxy blocks direct uploads to `upload.higgsfield.ai`
@@ -158,7 +172,9 @@ stay a story graphic. `examples/` has one worked sample of each, all built
 around David Alegre's real renovació:
 
 - `cbgb-anunci-renovacio.pptx` — 2-slide deck: a dark cover slide reusing the
-  pill/tag/eyebrow/headline/kickline block over his photo + veil, then a
+  pill/tag/eyebrow/headline/kickline block over his photo with a dark scrim
+  approximating `.plate` (this predates rule ② being split into plate/veil —
+  a re-export should double check it didn't drift into a full veil), then a
   light "fitxa ràpida" facts slide (red-framed per rule ①).
 - `cbgb-nota-premsa-renovacio.docx` — a one-page press-release layout:
   logo letterhead, red rule, headline, body, pull-quote, quick-facts table.
