@@ -866,6 +866,17 @@ body::after {
 .partners-tier.silver .partner-chip { border-color: rgba(198,203,212,0.22); }
 .partners-tier.inkind .partner-chip { border-color: rgba(34,197,94,0.22); }
 .partners-tier.inst .partner-chip { border-color: rgba(59,130,246,0.22); }
+.partners-pos { position: relative; margin: 0 0 22px; padding: 20px 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; }
+.pp-kicker { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.pp-claim { font-family: 'Bebas Neue', sans-serif; font-size: clamp(24px, 7vw, 36px); color: white; line-height: 1.05; letter-spacing: 0.5px; margin-bottom: 12px; }
+.pp-claim em { color: var(--red); font-style: normal; }
+.pp-txt { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.pp-txt strong { color: rgba(255,255,255,0.88); font-weight: 700; }
+.pp-pillars { display: grid; gap: 10px; }
+.pp-pillar { padding: 12px 14px; background: rgba(255,255,255,0.03); border-left: 2px solid var(--red); border-radius: 0 10px 10px 0; }
+.pp-pillar-t { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--red); margin-bottom: 5px; }
+.pp-pillar-d { font-size: 12px; color: rgba(255,255,255,0.72); line-height: 1.5; }
+@media (min-width: 560px) { .pp-pillars { grid-template-columns: repeat(3, 1fr); } }
 .partner-feature {
   position: relative; margin: 0 0 22px; padding: 20px 18px;
   background: linear-gradient(135deg, rgba(227,30,36,0.10), rgba(255,255,255,0.02));
@@ -1235,7 +1246,7 @@ body::after {
       <span class="spw-partner">Eix Clot</span>
       <span class="spw-partner">Ajuntament BCN</span>
       <span class="spw-partner">MyPlay</span>
-      <a href="#partners" class="spw-partner" style="color:var(--red);text-decoration:none">Veure els 23 →</a>
+      <a href="#partners" class="spw-partner" style="color:var(--red);text-decoration:none">Veure els 25 →</a>
     </div>
   </div>
 
@@ -1312,15 +1323,15 @@ body::after {
 
     <div class="partners-stats">
       <div class="partners-stat">
-        <div class="partners-stat-n"><em>30</em></div>
+        <div class="partners-stat-n"><em>32</em></div>
         <div class="partners-stat-l">Marques i entitats</div>
       </div>
       <div class="partners-stat">
-        <div class="partners-stat-n">23</div>
+        <div class="partners-stat-n">25</div>
         <div class="partners-stat-l">Partners i col·laboradors</div>
       </div>
       <div class="partners-stat">
-        <div class="partners-stat-n">19</div>
+        <div class="partners-stat-n">21</div>
         <div class="partners-stat-l">Empreses i comerços</div>
       </div>
       <div class="partners-stat">
@@ -1334,6 +1345,27 @@ body::after {
       <div class="partners-stat">
         <div class="partners-stat-n">4</div>
         <div class="partners-stat-l">Institucions i tècnics</div>
+      </div>
+    </div>
+
+    <div class="partners-pos">
+      <div class="pp-kicker">Posicionament · Què som per a una marca</div>
+      <div class="pp-claim">No venem publicitat.<br>Oferim <em>pertinença</em>.</div>
+      <p class="pp-txt">El CB Grup Barna és el club de bàsquet base <strong>més gran de Sant Martí</strong>: 60 anys al Clot, 34 equips i 450 famílies. Una marca que entra al Barna no compra un espai en una lona — entra a la conversa diària d'un barri sencer, cada setmana, tot l'any.</p>
+      <p class="pp-txt">Per això treballem com un club gran encara que siguem de barri: <strong>contingut propi cada setmana</strong>, presència als mitjans del territori i a les institucions, i una comunitat que respon. I el que entra, torna: els nostres partners financen el club, i el club retorna premis i experiències a les famílies.</p>
+      <div class="pp-pillars">
+        <div class="pp-pillar">
+          <div class="pp-pillar-t">Comunitat</div>
+          <div class="pp-pillar-d">450 famílies i 34 equips al Clot i Sant Martí, des de 1965.</div>
+        </div>
+        <div class="pp-pillar">
+          <div class="pp-pillar-t">Comunicació</div>
+          <div class="pp-pillar-d">Contingut propi i 10 posts publicats a canals de mitjans i institucions.</div>
+        </div>
+        <div class="pp-pillar">
+          <div class="pp-pillar-t">Reciprocitat</div>
+          <div class="pp-pillar-d">Sortejos, entrades i experiències que tornen a les famílies sòcies.</div>
+        </div>
       </div>
     </div>
 
@@ -1416,6 +1448,18 @@ body::after {
         <span class="partner-chip">FCBQ</span>
         <span class="partner-chip">Time Chamber</span>
         <span class="partner-chip">MyPlay</span>
+      </div>
+    </div>
+
+    <div class="partners-tier inkind">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Premis i experiències per a les famílies</span>
+        <span class="partners-tier-what">Sortejos · Entrades · Activacions</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Hoops<small>Sorteig de regals</small></span>
+        <span class="partner-chip">Isla Fantasía<small>25 entrades · 13 € Campus · Entrenadors gratis</small></span>
+        <span class="partner-chip">Wilson<small>Material de concursos</small></span>
       </div>
     </div>
 
