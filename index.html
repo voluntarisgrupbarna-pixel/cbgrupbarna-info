@@ -824,6 +824,59 @@ body::after {
 .cd-cta { background: var(--red); color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: 800; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
 .cd-cta:hover { background: var(--red-dark); }
 
+/* ==== PARTNERS 25-26 ==== */
+.partners-sec {
+  position: relative; overflow: hidden;
+  margin: 8px 0; padding: 28px 22px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 20px;
+}
+.partners-sec::before {
+  content: '25/26'; position: absolute;
+  font-family: 'Bebas Neue', sans-serif; font-size: 190px; line-height: 1;
+  color: rgba(227,30,36,0.05); right: -30px; top: -60px; pointer-events: none;
+}
+.partners-kicker { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; position: relative; }
+.partners-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 8vw, 44px); color: white; line-height: 1.05; margin-bottom: 10px; letter-spacing: 0.5px; position: relative; }
+.partners-title em { color: var(--red); font-style: normal; }
+.partners-sub { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 20px; position: relative; }
+.partners-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 22px; position: relative; }
+.partners-stat { padding: 12px 8px; text-align: center; border-left: 1px solid rgba(255,255,255,0.08); }
+.partners-stat:first-child { border-left: 0; }
+.partners-stat-n { font-family: 'Bebas Neue', sans-serif; font-size: clamp(26px, 7vw, 38px); color: white; line-height: 1; }
+.partners-stat-n em { color: var(--red); font-style: normal; }
+.partners-stat-l { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+.partners-tier { margin-bottom: 18px; position: relative; }
+.partners-tier-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.partners-tier-name { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; line-height: 1; }
+.partners-tier-what { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.partners-tier.gold .partners-tier-name { color: #E8B84B; }
+.partners-tier.silver .partners-tier-name { color: #C6CBD4; }
+.partners-tier.bronze .partners-tier-name { color: #C08457; }
+.partners-tier.inkind .partners-tier-name { color: var(--green); }
+.partners-tier.inst .partners-tier-name { color: var(--blue); }
+.partners-list { display: flex; gap: 8px; flex-wrap: wrap; }
+.partner-chip {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.4px;
+  color: rgba(255,255,255,0.72); white-space: nowrap; transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.partner-chip:hover { background: rgba(255,255,255,0.09); color: white; }
+.partners-tier.gold .partner-chip { border-color: rgba(232,184,75,0.32); color: rgba(255,255,255,0.92); font-size: 14px; padding: 10px 16px; }
+.partners-tier.silver .partner-chip { border-color: rgba(198,203,212,0.22); }
+.partners-tier.inkind .partner-chip { border-color: rgba(34,197,94,0.22); }
+.partners-tier.inst .partner-chip { border-color: rgba(59,130,246,0.22); }
+.partners-foot {
+  position: relative; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.partners-foot-txt { font-size: 12px; color: var(--muted); flex: 1; min-width: 180px; line-height: 1.5; }
+.partners-cta {
+  background: var(--red); color: #fff; padding: 10px 18px; border-radius: 999px;
+  font-size: 12px; font-weight: 800; text-decoration: none; white-space: nowrap; transition: background 0.2s;
+}
+.partners-cta:hover { background: var(--red-dark); }
+
 /* ==== SPONSOR SECTION ==== */
 .sponsor-card {
   margin: 8px 0 8px; padding: 28px 22px;
@@ -1161,6 +1214,7 @@ body::after {
       <span class="spw-partner">Eix Clot</span>
       <span class="spw-partner">Ajuntament BCN</span>
       <span class="spw-partner">MyPlay</span>
+      <a href="#partners" class="spw-partner" style="color:var(--red);text-decoration:none">Veure els 22 →</a>
     </div>
   </div>
 
@@ -1228,6 +1282,99 @@ body::after {
       <div class="quick-c"><div class="quick-t">WhatsApp del club</div><div class="quick-s">+34 698 425 153</div></div>
     </a>
   </div>
+
+  <!-- ==== PARTNERS I COL·LABORACIONS 25-26 ==== -->
+  <section class="partners-sec reveal" id="partners" aria-labelledby="partners-title">
+    <div class="partners-kicker">Temporada 2025-2026 · Partners · Col·laboracions</div>
+    <h2 class="partners-title" id="partners-title">Ells fan possible<br>el <em>Barna</em></h2>
+    <p class="partners-sub">El comerç i les empreses del Clot i Sant Martí que sostenen 34 equips i 450 famílies. No compren un logo: formen part del barri.</p>
+
+    <div class="partners-stats">
+      <div class="partners-stat">
+        <div class="partners-stat-n"><em>22</em></div>
+        <div class="partners-stat-l">Partners 25-26</div>
+      </div>
+      <div class="partners-stat">
+        <div class="partners-stat-n">18</div>
+        <div class="partners-stat-l">Empreses i comerços</div>
+      </div>
+      <div class="partners-stat">
+        <div class="partners-stat-n">4</div>
+        <div class="partners-stat-l">Institucions i tècnics</div>
+      </div>
+    </div>
+
+    <div class="partners-tier gold">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Or</span>
+        <span class="partners-tier-what">Lona · Equipació · Samarreta · Xarxes</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Westfield Glòries</span>
+        <span class="partner-chip">GBK</span>
+        <span class="partner-chip">Instax</span>
+      </div>
+    </div>
+
+    <div class="partners-tier silver">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Plata</span>
+        <span class="partners-tier-what">Lona · Samarreta · Xarxes</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Clínica Dental</span>
+        <span class="partner-chip">Farmàcies</span>
+        <span class="partner-chip">Celia</span>
+        <span class="partner-chip">Herbolari</span>
+      </div>
+    </div>
+
+    <div class="partners-tier bronze">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Bronze</span>
+        <span class="partners-tier-what">Lona · Xarxes</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Melosa</span>
+        <span class="partner-chip">Eix Clot</span>
+        <span class="partner-chip">Òptiques</span>
+        <span class="partner-chip">Romeo</span>
+        <span class="partner-chip">Aquàtica</span>
+        <span class="partner-chip">Jane</span>
+        <span class="partner-chip">Step Back</span>
+      </div>
+    </div>
+
+    <div class="partners-tier inkind">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Col·laboracions</span>
+        <span class="partners-tier-what">Material · Producte · Premis d'esdeveniments</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Wilson</span>
+        <span class="partner-chip">Tot Salut</span>
+        <span class="partner-chip">Ovella</span>
+        <span class="partner-chip">Lands</span>
+      </div>
+    </div>
+
+    <div class="partners-tier inst">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Institucions i partners tècnics</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Ajuntament de Barcelona</span>
+        <span class="partner-chip">FCBQ</span>
+        <span class="partner-chip">Time Chamber</span>
+        <span class="partner-chip">MyPlay</span>
+      </div>
+    </div>
+
+    <div class="partners-foot">
+      <p class="partners-foot-txt">Vols que la teva marca hi sigui la temporada vinent? Encara queden espais de lona, samarreta i esdeveniments.</p>
+      <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20ser%20Partner%20del%20CB%20Grup%20Barna%20la%20temporada%20vinent%20%F0%9F%A4%9D%20Codi:%20PARTNERS_2526" target="_blank" rel="noopener" class="partners-cta" data-cta="partners-wa">Vull ser partner →</a>
+    </div>
+  </section>
 
   <!-- ==== SPONSOR SECTION ==== -->
   <div class="sponsor-card reveal">

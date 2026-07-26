@@ -70,11 +70,19 @@
   },
 
   "patrocinadors": {
-    "_note": "Llistat simplificat. Detall complet a Drive: CB Grup Barna / Patrocinadors / [Any].gsheet",
-    "gold": [],
-    "silver": [],
-    "bronze": [],
-    "_todoAna": "Omplir aquest llistat amb els patrocinadors actuals de la temporada 2025-2026"
+    "_note": "Llistat PUBLIC de la temporada 2025-2026. IMPORTS I CONDICIONS ECONOMIQUES NO van aqui (repositori public) — detall complet a Drive: CB Grup Barna / Patrocinadors / 2025-2026.gsheet",
+    "temporada": "2025-2026",
+    "gold": ["Westfield Glories", "GBK", "Instax"],
+    "silver": ["Clinica Dental", "Farmacies", "Celia", "Herbolari"],
+    "bronze": ["Melosa", "Eix Clot", "Optiques", "Romeo", "Aquatica", "Jane", "Step Back"],
+    "colaboracions": [
+      { "nom": "Wilson", "tipus": "material", "detall": "Condicions especials en pilotes i cessio de material per a concursos i esdeveniments" },
+      { "nom": "Tot Salut", "tipus": "material" },
+      { "nom": "Ovella", "tipus": "material" },
+      { "nom": "Lands", "tipus": "material" }
+    ],
+    "institucionals": ["Ajuntament de Barcelona", "FCBQ", "Time Chamber", "MyPlay"],
+    "totalPartners": 22
   },
 
   "xarxes": {
