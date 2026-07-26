@@ -866,6 +866,14 @@ body::after {
 .partners-tier.silver .partner-chip { border-color: rgba(198,203,212,0.22); }
 .partners-tier.inkind .partner-chip { border-color: rgba(34,197,94,0.22); }
 .partners-tier.inst .partner-chip { border-color: rgba(59,130,246,0.22); }
+.partners-tier.media .partners-tier-name { color: var(--yellow); }
+.partners-tier.media .partner-chip { border-color: rgba(255,214,0,0.22); }
+.partner-chip small { display: block; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+.partners-block-div { position: relative; height: 1px; background: var(--border); margin: 24px 0 18px; }
+.partners-block-head { position: relative; margin-bottom: 16px; }
+.partners-block-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px, 6vw, 32px); color: white; line-height: 1.05; letter-spacing: 0.5px; margin-bottom: 6px; }
+.partners-block-title em { color: var(--red); font-style: normal; }
+.partners-block-sub { font-size: 12px; color: var(--muted); line-height: 1.55; }
 .partners-foot {
   position: relative; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
   display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
@@ -1291,12 +1299,24 @@ body::after {
 
     <div class="partners-stats">
       <div class="partners-stat">
-        <div class="partners-stat-n"><em>22</em></div>
-        <div class="partners-stat-l">Partners 25-26</div>
+        <div class="partners-stat-n"><em>29</em></div>
+        <div class="partners-stat-l">Marques i entitats</div>
+      </div>
+      <div class="partners-stat">
+        <div class="partners-stat-n">22</div>
+        <div class="partners-stat-l">Partners i col·laboradors</div>
       </div>
       <div class="partners-stat">
         <div class="partners-stat-n">18</div>
         <div class="partners-stat-l">Empreses i comerços</div>
+      </div>
+      <div class="partners-stat">
+        <div class="partners-stat-n"><em>9</em></div>
+        <div class="partners-stat-l">Xarxa de contingut</div>
+      </div>
+      <div class="partners-stat">
+        <div class="partners-stat-n">10</div>
+        <div class="partners-stat-l">Posts col·laboratius</div>
       </div>
       <div class="partners-stat">
         <div class="partners-stat-n">4</div>
@@ -1367,6 +1387,51 @@ body::after {
         <span class="partner-chip">FCBQ</span>
         <span class="partner-chip">Time Chamber</span>
         <span class="partner-chip">MyPlay</span>
+      </div>
+    </div>
+
+    <div class="partners-block-div"></div>
+
+    <div class="partners-block-head">
+      <h3 class="partners-block-title">Xarxa de <em>contingut</em></h3>
+      <p class="partners-block-sub">Mitjans, institucions i marques que ens obren les seves xarxes: el contingut el produïm nosaltres i ells només l'aproven. Temporada 25-26.</p>
+    </div>
+
+    <div class="partners-tier media">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Mitjans i comunitat</span>
+        <span class="partners-tier-what">Publiquem al seu canal</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Canal Disset<small>Mitjà</small></span>
+        <span class="partner-chip">Penjats de l'Aro<small>Mitjà bàsquet</small></span>
+        <span class="partner-chip">El Clotenc<small>Mitjà de barri</small></span>
+        <span class="partner-chip">Gràcia Multiesport<small>Club</small></span>
+        <span class="partner-chip">Nil López<small>Creador</small></span>
+      </div>
+    </div>
+
+    <div class="partners-tier inst">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Institucional</span>
+        <span class="partners-tier-what">Ajuntament de Barcelona</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Alcaldia de Barcelona<small>1 post</small></span>
+        <span class="partner-chip">David Escudé<small>Regidor d'Esports · 2 posts</small></span>
+      </div>
+    </div>
+
+    <div class="partners-tier gold">
+      <div class="partners-tier-head">
+        <span class="partners-tier-name">Partners amb post col·laboratiu</span>
+        <span class="partners-tier-what">Contingut conjunt</span>
+      </div>
+      <div class="partners-list">
+        <span class="partner-chip">Westfield Glòries<small>3x3</small></span>
+        <span class="partner-chip">Time Chamber<small>Campus</small></span>
+        <span class="partner-chip">Instax<small>Sessió Sènior Femení</small></span>
+        <span class="partner-chip">Foto Jane<small>Fotografia</small></span>
       </div>
     </div>
 
