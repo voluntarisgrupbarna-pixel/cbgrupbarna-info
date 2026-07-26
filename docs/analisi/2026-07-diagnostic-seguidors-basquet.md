@@ -31,6 +31,15 @@ superpuestos**, y sólo uno de ellos es plenamente corregible:
    pensando en irse del suyo**. El mercado no está compartido entre clubs: está
    **particionado**. *Corregible sólo cambiando qué es la cuenta.*
 
+Y por debajo de las cuatro hay un hecho estructural que las conecta: **el bàsquet
+español produce practicantes, no público**. Con **453.092 licencias** es la 2ª
+federación del país, en máximo histórico — pero la **final de la ACB reunió a
+170.000 espectadores**: hay más jugadores federados de bàsquet en España que
+espectadores tuvo la final de su liga. El fútbol tiene millones de personas que
+no juegan y miran; el bàsquet apenas las tiene. Quien se interesa por el bàsquet
+**juega**, y si juega **ya pertenece a un club**, y si pertenece **está bloqueado
+por la capa 4**. Las capas 1 y 4 no se suman: se multiplican (§3).
+
 La consecuencia visible —mucha gente ve las publicaciones y casi nadie sigue la
 cuenta— **no es una anomalía del CB Grup Barna: es la firma del sector entero**.
 Barça y Joventut son las dos únicas excepciones relevantes en España, y lo son
@@ -112,7 +121,99 @@ un fallo de gestión lleva a la decisión equivocada: producir más.
 
 ---
 
-## 3. Capa 2 — El producto no es de suscripción
+## 3. El hermano pequeño del fútbol — la brecha, medida
+
+La capa 1 dice que el sector es pequeño. Esta sección lo cuantifica, y de paso
+corrige una intuición errónea: **el bàsquet español no es pequeño en
+practicantes. Es pequeño en público.** Y eso cambia por completo el diagnóstico.
+
+### 3.1 Cuánta gente juega
+
+| Indicador | Cifra |
+|---|---|
+| Licencias de baloncesto en España (2025) | **453.092** — récord histórico |
+| Licencias de baloncesto (2024) | 440.427 (+7 % interanual) |
+| — masculinas / femeninas (2024) | 289.322 / **163.770** (≈ 37 % femenino) |
+| Total de licencias federadas en España | 4.381.174 (primera vez por encima de 4M) |
+| Peso del baloncesto sobre el total | **10,3 % — 2ª federación de España** |
+| Peso del fútbol sobre el total | ≈ un tercio (≈ 1,4 millones) |
+
+**Ratio de práctica fútbol : bàsquet ≈ 3 : 1.** En la cancha, el bàsquet no es un
+deporte minoritario: es el segundo deporte federado del país, en máximo
+histórico y creciendo. Y con una proporción femenina (≈ 37 %) muy por encima de
+la media del deporte español —dato relevante para el Barna, que tiene paridad
+real.
+
+### 3.2 Cuánta gente mira
+
+| Indicador | Cifra |
+|---|---|
+| **Final ACB 2025** (R. Madrid–Valencia, partido 1, 20 jun) | **170.000 espectadores** (1,9 % cuota) |
+| LaLiga 24-25, media por partido — **FC Barcelona** | **1.570.000 espectadores únicos** |
+| LaLiga 24-25 — Real Madrid / Sevilla / Atlético | 1.468.000 / 1.090.000 / 938.000 |
+| Supercopa de fútbol (enero 2025) | 1.600.000 (13,1 % cuota) |
+| Asistencia media Liga Endesa 25-26 | 6.807 por partido |
+| Asistencia media playoffs ACB 2025 | 8.601 por partido (163.417 en 19 partidos) |
+
+**Un partido corriente de liga del Barça de fútbol multiplica por ~9 la audiencia
+de la FINAL de la liga de bàsquet.** No es final contra final: es rutina de
+fútbol contra acontecimiento máximo del bàsquet.
+
+### 3.3 El dato que lo resume todo
+
+> **Hay más jugadores federados de bàsquet en España (453.092) que espectadores
+> tuvo la final de la ACB (170.000).**
+
+Puesto como ratio audiencia por practicante:
+
+| Deporte | Audiencia de referencia | Licencias | Espectadores por licencia |
+|---|---|---|---|
+| Fútbol | 1.570.000 (partido **medio** del club top) | ~1.400.000 | **≈ 1,1** |
+| Bàsquet | 170.000 (**final** de liga) | 453.092 | **≈ 0,38** |
+
+El fútbol convierte cada practicante en **más de un** espectador. El bàsquet, en
+**poco más de un tercio** — y eso midiendo su mejor día del año contra un día
+cualquiera del fútbol.
+
+*Aproximación deliberadamente gruesa: audiencia televisiva y licencias no son
+poblaciones equivalentes ni comparables una a una. Sirve como orden de magnitud,
+no como estadístico.*
+
+### 3.4 La cascada: la brecha se multiplica en cada escalón
+
+| Escalón | Fútbol | Bàsquet | Brecha |
+|---|---|---|---|
+| Practicantes federados | ~1.400.000 | 453.092 | **~3×** |
+| Audiencia televisiva | 1.570.000 (partido medio) | 170.000 (final) | **~9×** |
+| Seguidores IG del club top | 146.000.000 (FC Barcelona) | ~1.000.000 (Barça Basket) | **~150×** |
+| Seguidores IG del top **sin marca paraguas** | 146.000.000 | ~113.000 (Baskonia) | **~1.300×** |
+
+El bàsquet no es "el hermano pequeño" en una proporción constante. Es **3 veces
+más pequeño en la cancha, ~9 en televisión y entre 150 y 1.300 en atención
+digital**. La desventaja no se hereda intacta: **se amplifica en cada capa**. Es
+el efecto Mateo operando por escalones (marco teórico en §7).
+
+### 3.5 La conclusión estructural: deporte de practicantes, no de público
+
+El bàsquet español tiene mucha **base** y poca **audiencia**. El fútbol tiene
+millones de personas que **no juegan y miran**: espectadores puros, aficionados
+sin licencia. El bàsquet apenas los tiene. En España, quien se interesa por el
+bàsquet, mayoritariamente **juega**. Y si juega, **pertenece a un club**. Y si
+pertenece a un club, **está bloqueado por la capa 4** (§6).
+
+Aquí las capas 1 y 4 dejan de ser independientes y **se multiplican**: el mercado
+de aficionados neutrales —el único terreno donde un club puede crecer sin coste
+social— es en bàsquet estructuralmente diminuto. En fútbol existe y es enorme;
+en bàsquet casi no existe.
+
+Ésta es, probablemente, la razón de fondo de todo el documento:
+
+> **Un club de bàsquet no compite por una audiencia. Compite por repartirse a los
+> practicantes. Y los practicantes ya están repartidos.**
+
+---
+
+## 4. Capa 2 — El producto no es de suscripción
 
 Un *follow* es una suscripción. Un usuario sólo la paga cuando se cumplen dos
 condiciones a la vez:
@@ -146,7 +247,7 @@ club produce contenido que se ve muy bien y no se suscribe**.
 
 ---
 
-## 4. Capa 3 — Instagram desacopló alcance y follow
+## 5. Capa 3 — Instagram desacopló alcance y follow
 
 Hasta hace unos años, el alcance de una cuenta dependía básicamente de sus
 seguidores: alcance alto ⇒ audiencia propia grande. Con el giro de Instagram a
@@ -172,13 +273,13 @@ suscribirse.
 
 ---
 
-## 5. Capa 4 — El coste social del follow: el mercado está particionado
+## 6. Capa 4 — El coste social del follow: el mercado está particionado
 
 Las tres capas anteriores explican por qué es difícil que alguien **quiera**
 seguir a un club. Falta la más específica del sector, y probablemente la más
 determinante: por qué alguien que sí querría **no puede permitírselo**.
 
-### 5.1 El follow no es consumo, es adscripción
+### 6.1 El follow no es consumo, es adscripción
 
 En casi todos los sectores, seguir una cuenta es un acto privado y sin coste. Se
 puede seguir a Nike y a Adidas, a quince restaurantes, a veinte cuentas de
@@ -194,7 +295,7 @@ De ahí la observación de campo que motiva esta sección: **quien está dentro 
 club no sigue a los demás. Empieza a seguirlos cuando ya está pensando en
 marcharse del suyo.** El follow no acompaña al interés: acompaña a la decisión.
 
-### 5.2 Consecuencia 1 — el mercado no está compartido, está repartido
+### 6.2 Consecuencia 1 — el mercado no está compartido, está repartido
 
 El mercado direccionable de un club de bàsquet no es "las personas interesadas en
 bàsquet de Barcelona". Es:
@@ -213,7 +314,7 @@ neutral, que es pequeña y rota lentamente.
 Esto reduce el techo estimado en la capa 1 todavía más: no es "cuánta gente
 sigue el bàsquet", es "cuánta gente puede permitirse seguirte".
 
-### 5.3 Consecuencia 2 — el no-follow es una decisión activa, no apatía
+### 6.3 Consecuencia 2 — el no-follow es una decisión activa, no apatía
 
 Es el matiz que distingue al deporte de cualquier otro sector con conversión
 baja. Cuando una familia de otro club ve un reel del Barna, disfruta la jugada y
@@ -226,7 +327,7 @@ Dicho de otro modo: una parte del 0,03 % de conversión **no se puede recuperar
 con mejor contenido**, porque el freno no está en la pieza, está en lo que
 implica seguirla.
 
-### 5.4 Consecuencia 3 — el seguidor vale más de lo que la cifra sugiere
+### 6.4 Consecuencia 3 — el seguidor vale más de lo que la cifra sugiere
 
 Si el follow es una declaración, entonces **5.329 seguidores no equivalen a 5.329
 impresiones de interés: equivalen a ~5.329 personas comprometidas o dispuestas a
@@ -236,9 +337,9 @@ con seguidores de una marca de ropa es comparar dos cosas distintas con el mismo
 nombre.
 
 Corolario: la métrica de seguidores **subvalora sistemáticamente** a los clubs, y
-lo hace por partida doble —techo de mercado pequeño (§2) y follows caros (§5).
+lo hace por partida doble —techo de mercado pequeño (§2) y follows caros (§6).
 
-### 5.5 Consecuencia 4 — el follow externo es señal anticipada de captación
+### 6.5 Consecuencia 4 — el follow externo es señal anticipada de captación
 
 Si la gente de otros clubs sigue cuando está pensando en irse, entonces **un
 seguidor nuevo procedente del entorno de otro club es un indicador adelantado de
@@ -252,9 +353,9 @@ Junio 2026 —3x3, Campus, campeonato y +103 seguidores— encaja en ese patrón
 tanto como en el efecto del formato reel.
 
 *Advertencia: es una hipótesis coherente con la observación, no un dato medido.
-En §10 se indica qué haría falta para confirmarla.*
+En §12 se indica qué haría falta para confirmarla.*
 
-### 5.6 Consecuencia 5 — el problema no es sólo dar motivo, es dar permiso
+### 6.6 Consecuencia 5 — el problema no es sólo dar motivo, es dar permiso
 
 Si el freno es la adscripción, entonces existe una asimetría útil: **se puede
 seguir a un medio sin traicionar a tu club; no se puede seguir a un club rival
@@ -270,7 +371,158 @@ de producción puede tocar.
 
 ---
 
-## 6. Las dos excepciones y qué demuestran
+## 7. Marco teórico — qué dicen la sociología y la psicología
+
+Las cuatro capas descritas no son intuiciones sueltas: son fenómenos con nombre
+propio en sociología y psicología social, estudiados desde hace décadas en otros
+contextos. Esta sección los ordena. Sirve para dos cosas: **comprobar que el
+diagnóstico no es una racionalización a posteriori** y **defenderlo ante Junta con
+algo más que datos de Instagram**.
+
+> Aviso de método: una teoría no demuestra nada sobre este club. Explica un
+> mecanismo plausible y predice qué debería observarse si opera. Se usan como
+> **lentes**, no como pruebas.
+
+### 7.1 Por qué seguir a un club es adscribirse (capa 4)
+
+**Teoría de la identidad social — Tajfel y Turner (1979)** y **teoría de la
+autocategorización — Turner (1987).** Pertenecer a un grupo forma parte del
+autoconcepto; la autoestima se sostiene diferenciando el endogrupo del exogrupo.
+*Predicción:* seguir públicamente a un club rival amenaza la distintividad del
+propio grupo, y por tanto se evita aunque el contenido guste. Es la base teórica
+de toda la capa 4.
+
+**La presentación de la persona en la vida cotidiana — Goffman (1959).** La
+conducta social es actuación ante una audiencia, con "escenario frontal" y
+"trasfondo". *Aplicación:* la lista de cuentas seguidas es escenario frontal —
+visible, legible por la propia comunidad. El follow no es consumo privado: es
+**gestión de impresiones**. Explica por qué el coste es social y no de atención.
+
+**Señales costosas — Zahavi (1975), Spence (1973).** Una señal informa
+precisamente porque emitirla cuesta. *Aplicación:* como seguir a un rival tiene
+coste reputacional, sólo lo hace quien ya ha decidido moverse. De ahí que el
+follow externo **escasee** (§6.3) y a la vez **informe muchísimo** (§6.5). Las dos
+cosas por la misma razón.
+
+**Disonancia cognitiva — Festinger (1957).** Sostener a la vez "estoy en mi club"
+y "creo que otro club es mejor" produce tensión, que se resuelve con conducta.
+*Aplicación:* seguir al otro club es un acto de reducción de disonancia y de
+**preparación de la salida**. La conducta antecede a la decisión formal — es
+exactamente lo que se observa en campo.
+
+**Salida, voz y lealtad — Hirschman (1970).** Ante el descontento en una
+organización, se puede salir, protestar o callar por lealtad; la lealtad retrasa
+la salida. *Aplicación:* el follow a otro club es **salida exploratoria de bajo
+coste**: el primer movimiento reversible antes del cambio real. Es la base
+teórica de tratar los seguidores externos como indicador adelantado (§6.5).
+
+**Fusión de identidad — Swann y Whitehouse (2012).** En contextos de vínculo
+intenso —deporte incluido— la identidad personal y la grupal se funden, y la
+lealtad se vuelve exclusiva. *Aplicación (y paradoja):* cuanto mejor construye un
+club la pertenencia, más blindado queda su mercado… y más cerrado le queda el del
+vecino. **Todos los clubs se protegen mutuamente el techo.**
+
+### 7.2 Por qué el contenido no convierte (capa 2 y capa 3)
+
+**Usos y gratificaciones — Katz, Blumler y Gurevitch (1973).** No se consume
+medios por lo que son, sino por las gratificaciones que dan: información,
+identidad, integración social, entretenimiento. *Aplicación:* el boletín de club
+ofrece **sólo vigilancia informativa y sólo a los de dentro**. Para un externo la
+gratificación esperada es cero: no hay suscripción posible.
+
+**Efecto de mera exposición — Zajonc (1968).** La exposición repetida aumenta el
+agrado sin necesidad de conducta. *Aplicación:* es la explicación literal de
+439.000 visualizaciones con simpatía y sin altas. **Gustar no es comprometerse**,
+y el alcance sólo compra lo primero.
+
+**Modelo de probabilidad de elaboración — Petty y Cacioppo (1986).** Sin
+implicación previa, los mensajes se procesan por la "ruta periférica" y no
+generan cambio de actitud duradero. *Aplicación:* el scroll es ruta periférica
+pura. Un reel puede ganar 6 segundos de atención y no mover ninguna actitud. Para
+la ruta central hace falta una implicación que el desconocido no tiene.
+
+**Capital social vinculante y puente — Putnam (2000).** Las comunidades densas
+generan capital *bonding* (hacia dentro, homogéneo); crecer requiere *bridging*
+(hacia fuera, heterogéneo). *Aplicación:* un club de barrio produce bonding **por
+diseño y por incentivos**. Es la formulación teórica de la endogamia de
+incentivos (§9.2): el sistema premia justo el contenido que no tiende puentes.
+
+**La fuerza de los vínculos débiles — Granovetter (1973).** La información nueva
+y las oportunidades viajan por lazos débiles, no por los fuertes. *Aplicación:*
+el algoritmo ya entrega a lazos débiles (47 % de alcance externo), pero el
+contenido está escrito para lazos fuertes. **Hay un desajuste entre el canal y el
+mensaje**, y ése es el desperdicio.
+
+### 7.3 Por qué el fútbol se lo lleva todo (capa 1 y §3)
+
+**Efecto Mateo — Merton (1968)** y **conexión preferencial — Barabási y Albert
+(1999).** La atención y el reconocimiento se acumulan donde ya los hay; las redes
+producen distribuciones de ley de potencia, no normales. *Aplicación:* "pocos
+seguidores" **es el estado esperado de casi cualquier nodo** de una red. Unos
+pocos concentran casi todo. No es un fallo de gestión: es la forma matemática de
+la distribución. Y explica la cascada de §3.4 — cada escalón amplifica la ventaja
+del que ya la tenía.
+
+**Economía de las superestrellas — Rosen (1981)** y **la sociedad del ganador se
+lo lleva todo — Frank y Cook (1995).** En mercados de atención, diferencias
+pequeñas de notoriedad producen diferencias enormes de recompensa. *Aplicación:*
+la brecha 3× en practicantes se convierte en 9× en televisión y en 150–1.300× en
+seguidores. La desproporción es el comportamiento normal del mercado, no una
+anomalía.
+
+**Establecimiento de agenda — McCombs y Shaw (1972)** y **teoría del cultivo —
+Gerbner (1976).** Los medios no dicen qué pensar: dicen **sobre qué** pensar, y la
+exposición acumulada construye la realidad percibida. *Aplicación:* en España la
+agenda deportiva por defecto es el fútbol; el bàsquet entra por excepción
+(títulos, selección). Sin agenda no hay conversación espontánea, y sin
+conversación no hay follow espontáneo.
+
+**Hegemonía cultural — Gramsci.** El fútbol no es "un deporte más": es el sentido
+común deportivo, y todo lo demás queda como categoría residual ("otros
+deportes"). *Aplicación:* el bàsquet compite contra una categoría por defecto,
+no contra un rival.
+
+**El espacio social de los deportes — Bourdieu (1978, 1988).** Cada deporte ocupa
+una posición ligada a clase, cuerpo, capital cultural y modo de transmisión.
+*Aplicación:* el fútbol se **hereda** (habitus familiar: se es del Madrid o del
+Barça antes de elegir); el bàsquet se **adquiere**, casi siempre por la vía
+escolar o del club. Un deporte que se adquiere practicándolo genera practicantes;
+uno que se hereda genera público. Es la raíz sociológica de §3.5.
+
+**Dependencia de trayectoria — David (1985), Arthur (1989).** Las ventajas
+históricas se autorrefuerzan y se vuelven irreversibles: derechos de TV → dinero
+→ estrellas → cobertura → más audiencia → más derechos. *Aplicación:* la posición
+del bàsquet español está **bloqueada por historia**, no por calidad de producto.
+Ningún club puede desbloquearla, ni siquiera la ACB entera a corto plazo.
+
+**Comunidades imaginadas — Anderson (1983).** Una afición de masas es una
+comunidad imaginada sostenida por un medio que la construye a diario.
+*Aplicación:* el fútbol tiene ese medio; el bàsquet tiene uno mucho más débil; un
+club de barrio no tiene ninguno **salvo el que se fabrique él mismo**. Es la
+única puerta teórica que este documento deja abierta.
+
+### 7.4 Síntesis teórica
+
+Traducido a una sola frase por capa:
+
+| Capa | Mecanismo | Teoría principal |
+|---|---|---|
+| 1 — Sector | La atención se acumula donde ya está | Efecto Mateo · Superestrellas · Dependencia de trayectoria |
+| 1 bis — Fútbol | Se hereda un club, se adquiere un deporte | Bourdieu (habitus) · Agenda-setting · Hegemonía |
+| 2 — Producto | Sin gratificación esperada no hay suscripción | Usos y gratificaciones · ELM · Putnam (bonding) |
+| 3 — Algoritmo | Exposición sin implicación produce agrado, no conducta | Mera exposición · Granovetter (lazos débiles) |
+| 4 — Demanda | Seguir es declarar pertenencia ante testigos | Identidad social · Goffman · Señales costosas · Hirschman |
+
+Y el punto donde todo converge: **el bàsquet produce practicantes, no público**
+(Bourdieu), **los practicantes ya están adscritos** (Tajfel), **la adscripción es
+pública y por tanto cara** (Goffman), y **la atención residual se la queda quien
+ya la tiene** (Merton). Las cuatro cosas a la vez explican, sin necesidad de
+culpar a nadie, por qué todos los clubs de bàsquet dibujan exactamente la misma
+curva.
+
+---
+
+## 8. Las dos excepciones y qué demuestran
 
 ### Barça Basket (~1M)
 El seguidor **no se gana, se hereda**. Es una cuenta bajo una marca global de
@@ -298,7 +550,7 @@ la calidad, esa cuenta sería enorme. No lo es. **La calidad no rompe el techo.*
 
 ---
 
-## 7. Agravantes específicos del bàsquet formativo
+## 9. Agravantes específicos del bàsquet formativo
 
 Sobre las tres capas, un club de cantera acumula cinco frenos adicionales:
 
@@ -332,7 +584,7 @@ Sobre las tres capas, un club de cantera acumula cinco frenos adicionales:
 
 ---
 
-## 8. Qué NO es el problema
+## 10. Qué NO es el problema
 
 Descartes explícitos, para que ninguna decisión posterior vaya por ahí:
 
@@ -349,13 +601,13 @@ Descartes explícitos, para que ninguna decisión posterior vaya por ahí:
 - **No es el bàsquet femenino.** La brecha femenina es real, pero es un caso
   particular del punto 3 (fragmentación de cuentas), no una causa autónoma.
 - **No es desinterés.** Buena parte de quien ve el contenido y no sigue **sí
-  está interesado**: está bloqueado por pertenencia a otro club (§5). Tratar ese
+  está interesado**: está bloqueado por pertenencia a otro club (§6). Tratar ese
   no-follow como falta de interés lleva a "hacer contenido más atractivo" cuando
   el freno no está en el atractivo.
 
 ---
 
-## 9. Por qué esto importa (consecuencias de no nombrarlo bien)
+## 11. Por qué esto importa (consecuencias de no nombrarlo bien)
 
 Si el problema se enuncia como *"tenemos pocos seguidores"*, la respuesta
 instintiva es **producir más**. Los datos de abril y mayo muestran a dónde lleva
@@ -373,13 +625,13 @@ bàsquet parecerá siempre pequeño, incluida la élite. Dos ejemplos del sesgo:
 - El club ya ha superado con holgura su mercado natural: ~450 familias × ~3,5
   personas ≈ 1.600 personas de núcleo duro, frente a 5.329 seguidores reales.
   Es decir, **ya ha captado unas 3.700 personas fuera de su comunidad directa**,
-  que es exactamente donde el follow es caro (§5).
+  que es exactamente donde el follow es caro (§6).
 
 Es decir: **medido contra su mercado, el club no rinde mal; medido contra un
 KPI ajeno, parece que sí**. Ese error de encuadre es, en sí mismo, parte del
 problema, porque orienta mal las decisiones y desmoraliza al equipo.
 
-Hay un segundo error de encuadre, derivado de §5: **se está usando una métrica de
+Hay un segundo error de encuadre, derivado de §6: **se está usando una métrica de
 audiencia para medir algo que en parte es un embudo de captación deportiva**. Si
 una fracción de los seguidores nuevos son familias en fase de salida de otro
 club, esos seguidores no valen lo que vale un seguidor de marca: valen lo que
@@ -388,7 +640,7 @@ vale una inscripción potencial. Medirlos juntos, en la misma cifra, oculta el
 
 ---
 
-## 10. Límites de este análisis
+## 12. Límites de este análisis
 
 Honestidad metodológica, para que el documento aguante una revisión de Junta:
 
@@ -405,9 +657,18 @@ Honestidad metodológica, para que el documento aguante una revisión de Junta:
   cuidado.
 - La penetración de barrio usa **estimaciones de población** del Clot–Camp de
   l'Arpa y de Badalona; no está calculada con padrón oficial.
+- **La comparación fútbol/bàsquet de §3 mezcla fuentes y unidades.** Licencias
+  federadas y audiencia televisiva miden poblaciones distintas; las audiencias de
+  LaLiga son medias de temporada por club y la de la ACB es un partido concreto;
+  la cifra de licencias de fútbol es una estimación derivada del porcentaje
+  publicado por el CSD, no un dato directo de la RFEF. Los órdenes de magnitud
+  son sólidos; los ratios exactos, no. Usar como argumento, no como estadístico.
+- **Las teorías de §7 no prueban nada sobre este club.** Describen mecanismos
+  verificados en otros contextos que encajan con lo observado. Sirven para
+  estructurar el diagnóstico y defenderlo, no para darlo por demostrado.
 - No hay datos propios sobre **por qué** un usuario que ve un reel no sigue: la
   causa está inferida del comportamiento agregado, no medida directamente.
-- **La capa 4 (§5) es la parte menos verificada del documento.** Nace de
+- **La capa 4 (§6) es la parte menos verificada del documento.** Nace de
   observación de campo —gente de otros clubs que empieza a seguir justo antes de
   moverse—, es coherente con la conducta conocida en deporte de club y explica
   bien la conversión plana, pero **no está medida**. Es la hipótesis con más
@@ -429,7 +690,7 @@ Honestidad metodológica, para que el documento aguante una revisión de Junta:
 
 ---
 
-## 11. Conclusión — el enunciado correcto del problema
+## 13. Conclusión — el enunciado correcto del problema
 
 > El CB Grup Barna, como el resto de clubs de bàsquet, **no tiene un problema de
 > alcance ni de producción**. Opera dentro de un sector con un techo de audiencia
@@ -438,6 +699,11 @@ Honestidad metodológica, para que el documento aguante una revisión de Junta:
 > y no promete nada a los de fuera** (capa 2), agravado por la imposibilidad de
 > construir personajes estables, por un sistema de incentivos internos que premia
 > el contenido que no capta y por la fragmentación de cuentas.
+>
+> Bajo todo ello hay un hecho estructural del deporte: **el bàsquet español
+> produce practicantes, no público** —453.092 licencias federadas frente a
+> 170.000 espectadores en la final de su liga—, y un practicante ya pertenece a
+> un club.
 >
 > Y por debajo de todo eso opera el freno decisivo (capa 4): **en el deporte de
 > club, seguir es adscribirse**. La mayoría de quien podría seguirte ya pertenece
@@ -460,7 +726,20 @@ Honestidad metodológica, para que el documento aguante una revisión de Junta:
 
 ### Fuentes
 
+**Datos**
+
 - Resúmenes mensuales in-app de @cbgrupbarna, abril–junio 2026 (datos propios).
+- Licencias de baloncesto 2024 y 2025 — Federación Española de Baloncesto:
+  https://www.feb.es/2025/2/10/baloncesto/las-mas-440000-licencias-2024-dan-baloncesto-espanol-crecimiento-del-situan-maximo-historico/101335.aspx
+- España supera los 4 millones de deportistas federados / Anuario de Estadísticas
+  Deportivas — Consejo Superior de Deportes:
+  https://www.csd.gob.es/es/espana-supera-por-primera-vez-en-su-historia-los-4-millones-de-deportistas-federados
+- Audiencia de la final ACB 2025 (170.000 espectadores, 1,9 %) — FormulaTV:
+  https://www.formulatv.com/audiencias/2025-06-20/tematicas-pago/
+- Audiencias televisivas de LaLiga 2024-25 por club — Fútbol en la TV:
+  https://www.futbolenlatv.es/noticias/audiencias-futbol-2024-25
+- Playoffs ACB 2025, asistencia — Wikipedia:
+  https://en.wikipedia.org/wiki/2025_ACB_Playoffs
 - Asistencia Liga Endesa 2025-26 — Gigantes:
   https://www.gigantes.com/liga-endesa/la-radiografia-de-la-asistencia-acb-el-roig-arena-dispara-las-cifras-en-la-liga-endesa/
 - Temporada ACB 2025-26 — Wikipedia:
@@ -473,3 +752,27 @@ Honestidad metodológica, para que el documento aguante una revisión de Junta:
   Sciences Communications: https://www.nature.com/articles/s41599-023-02357-8
 - Seguidores de clubs de Lliga Femenina Endesa y de clubs de barrio: recopilación
   interna del club (perfiles públicos de Instagram, mediados de 2026).
+
+**Marco teórico (§7)**
+
+- Tajfel, H. y Turner, J. (1979) — *An Integrative Theory of Intergroup Conflict*.
+- Turner, J. (1987) — *Rediscovering the Social Group: A Self-Categorization Theory*.
+- Goffman, E. (1959) — *La presentación de la persona en la vida cotidiana*.
+- Spence, M. (1973) — *Job Market Signaling*; Zahavi, A. (1975) — *Mate selection: a selection for a handicap*.
+- Festinger, L. (1957) — *Teoría de la disonancia cognitiva*.
+- Hirschman, A. O. (1970) — *Exit, Voice, and Loyalty*.
+- Swann, W. y Whitehouse, H. (2012) — *Identity fusion*.
+- Katz, E., Blumler, J. y Gurevitch, M. (1973) — *Uses and Gratifications Research*.
+- Zajonc, R. (1968) — *Attitudinal Effects of Mere Exposure*.
+- Petty, R. y Cacioppo, J. (1986) — *Elaboration Likelihood Model*.
+- Putnam, R. (2000) — *Bowling Alone* (capital social bonding / bridging).
+- Granovetter, M. (1973) — *The Strength of Weak Ties*.
+- Merton, R. (1968) — *The Matthew Effect in Science*.
+- Barabási, A.-L. y Albert, R. (1999) — *Emergence of Scaling in Random Networks*.
+- Rosen, S. (1981) — *The Economics of Superstars*; Frank, R. y Cook, P. (1995) — *The Winner-Take-All Society*.
+- McCombs, M. y Shaw, D. (1972) — *The Agenda-Setting Function of Mass Media*.
+- Gerbner, G. (1976) — *Teoría del cultivo*.
+- Gramsci, A. — *Cuadernos de la cárcel* (hegemonía cultural).
+- Bourdieu, P. (1978, 1988) — *¿Cómo se puede ser deportista?* / *Programa para una sociología del deporte*.
+- David, P. (1985) y Arthur, W. B. (1989) — dependencia de trayectoria y *lock-in*.
+- Anderson, B. (1983) — *Comunidades imaginadas*.
