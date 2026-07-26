@@ -11,8 +11,8 @@ Ana Fernández · Dirección de Marketing · CB Grup Barna
 
 ## 0. Resumen ejecutivo
 
-El bàsquet no tiene un problema de comunicación. Tiene **tres techos
-superpuestos**, y sólo uno de ellos es corregible:
+El bàsquet no tiene un problema de comunicación. Tiene **cuatro techos
+superpuestos**, y sólo uno de ellos es plenamente corregible:
 
 1. **Techo de mercado (sector).** El bàsquet español mueve una audiencia
    estructuralmente pequeña. El club más grande fuera del paraguas del Barça no
@@ -24,6 +24,12 @@ superpuestos**, y sólo uno de ellos es corregible:
 3. **Techo de plataforma (algoritmo).** Instagram desacopló alcance y follow: el
    contenido se sirve masivamente a no-seguidores sin que eso genere altas. El
    alcance dejó de ser señal de audiencia. *No corregible, pero sí explotable.*
+4. **Techo de demanda (pertenencia).** En el deporte de club, seguir una cuenta
+   **no es un acto de consumo, es una declaración de pertenencia**, y es pública.
+   A quien ya está en un club le cuesta seguir a otro: el coste no es de
+   atención, es social. La gente de otros clubs suele seguirte **cuando ya está
+   pensando en irse del suyo**. El mercado no está compartido entre clubs: está
+   **particionado**. *Corregible sólo cambiando qué es la cuenta.*
 
 La consecuencia visible —mucha gente ve las publicaciones y casi nadie sigue la
 cuenta— **no es una anomalía del CB Grup Barna: es la firma del sector entero**.
@@ -32,9 +38,12 @@ por activos que ningún otro club puede replicar (marca paraguas global e
 identidad de ciudad consolidada), no por comunicar mejor.
 
 **Enunciado correcto del problema:** el club no tiene un déficit de alcance ni
-de producción. Tiene un **déficit de motivo**. Nadie sigue una cuenta porque le
-haya gustado una pieza; la sigue porque espera más de algo que le importa. Hoy,
-para un desconocido, el club no promete nada repetible.
+de producción. Tiene un **déficit de motivo** y un **déficit de permiso**. Nadie
+sigue una cuenta porque le haya gustado una pieza; la sigue porque espera más de
+algo que le importa —y, en el deporte de club, porque seguirla no le obliga a
+declarar de qué lado está. Hoy, para un desconocido, el club no promete nada
+repetible; y para la familia de otro club, seguirnos significa algo que no
+quiere significar todavía.
 
 ---
 
@@ -163,7 +172,105 @@ suscribirse.
 
 ---
 
-## 5. Las dos excepciones y qué demuestran
+## 5. Capa 4 — El coste social del follow: el mercado está particionado
+
+Las tres capas anteriores explican por qué es difícil que alguien **quiera**
+seguir a un club. Falta la más específica del sector, y probablemente la más
+determinante: por qué alguien que sí querría **no puede permitírselo**.
+
+### 5.1 El follow no es consumo, es adscripción
+
+En casi todos los sectores, seguir una cuenta es un acto privado y sin coste. Se
+puede seguir a Nike y a Adidas, a quince restaurantes, a veinte cuentas de
+fitness. Nadie interpreta nada.
+
+En el deporte de club, no. El follow es **visible y legible por tu propia
+comunidad**: Instagram muestra a quién sigues y quién más lo sigue, y en un
+entorno pequeño —un barrio, un pabellón, un grupo de WhatsApp de familias— esa
+señal se lee. Seguir la cuenta de otro club no es consumir contenido: es
+**declarar afinidad con un rival**. El coste no es de atención; es social.
+
+De ahí la observación de campo que motiva esta sección: **quien está dentro de un
+club no sigue a los demás. Empieza a seguirlos cuando ya está pensando en
+marcharse del suyo.** El follow no acompaña al interés: acompaña a la decisión.
+
+### 5.2 Consecuencia 1 — el mercado no está compartido, está repartido
+
+El mercado direccionable de un club de bàsquet no es "las personas interesadas en
+bàsquet de Barcelona". Es:
+
+- su propia comunidad (familias, jugadores, ex-jugadores, staff, entorno), y
+- la franja **no comprometida**: gente sin club, familias que buscan por primera
+  vez, aficionados neutrales del barrio, y quien está en fase de salida de otro
+  club.
+
+Todo lo demás —la inmensa mayoría de quienes practican o siguen bàsquet en la
+ciudad— está **bloqueado por pertenencia**, no por desinterés. Cada club opera
+en una parcela cerrada, no en un mercado común. Y como la propia comunidad ya te
+sigue prácticamente al 100 %, el margen de crecimiento real es sólo esa franja
+neutral, que es pequeña y rota lentamente.
+
+Esto reduce el techo estimado en la capa 1 todavía más: no es "cuánta gente
+sigue el bàsquet", es "cuánta gente puede permitirse seguirte".
+
+### 5.3 Consecuencia 2 — el no-follow es una decisión activa, no apatía
+
+Es el matiz que distingue al deporte de cualquier otro sector con conversión
+baja. Cuando una familia de otro club ve un reel del Barna, disfruta la jugada y
+no sigue, **no es indiferencia: es una decisión deliberada de no adscribirse**.
+El algoritmo hace su trabajo (por eso el 47 % de alcance externo), el contenido
+hace el suyo (por eso se ve entero), y aun así el follow se retiene
+conscientemente.
+
+Dicho de otro modo: una parte del 0,03 % de conversión **no se puede recuperar
+con mejor contenido**, porque el freno no está en la pieza, está en lo que
+implica seguirla.
+
+### 5.4 Consecuencia 3 — el seguidor vale más de lo que la cifra sugiere
+
+Si el follow es una declaración, entonces **5.329 seguidores no equivalen a 5.329
+impresiones de interés: equivalen a ~5.329 personas comprometidas o dispuestas a
+comprometerse**. La cifra es más pequeña que la de otros sectores, pero cada
+unidad tiene una carga de intención mucho mayor. Comparar seguidores de un club
+con seguidores de una marca de ropa es comparar dos cosas distintas con el mismo
+nombre.
+
+Corolario: la métrica de seguidores **subvalora sistemáticamente** a los clubs, y
+lo hace por partida doble —techo de mercado pequeño (§2) y follows caros (§5).
+
+### 5.5 Consecuencia 4 — el follow externo es señal anticipada de captación
+
+Si la gente de otros clubs sigue cuando está pensando en irse, entonces **un
+seguidor nuevo procedente del entorno de otro club es un indicador adelantado de
+intención de cambio**, y precede a la solicitud de prueba o inscripción.
+
+Eso convierte una parte del crecimiento de seguidores en un **pipeline de
+captación deportiva**, no en una métrica de marca. Y explica por qué el
+crecimiento se concentra en ventanas concretas: los meses de decisión de
+temporada (finales de curso, campus, portes obertes) coinciden con los picos.
+Junio 2026 —3x3, Campus, campeonato y +103 seguidores— encaja en ese patrón
+tanto como en el efecto del formato reel.
+
+*Advertencia: es una hipótesis coherente con la observación, no un dato medido.
+En §10 se indica qué haría falta para confirmarla.*
+
+### 5.6 Consecuencia 5 — el problema no es sólo dar motivo, es dar permiso
+
+Si el freno es la adscripción, entonces existe una asimetría útil: **se puede
+seguir a un medio sin traicionar a tu club; no se puede seguir a un club rival
+sin hacerlo.** Una cuenta que se percibe como "el club X" activa el coste social.
+Una cuenta que se percibe como "lo que pasa en el bàsquet del barrio" no lo
+activa, o lo activa mucho menos.
+
+No es una propuesta —este documento no las hace—, pero sí una parte del
+diagnóstico: el techo de demanda **depende de cómo se percibe la cuenta**, y esa
+percepción es hoy inequívocamente la de un club. Mientras lo sea, el mercado
+seguirá particionado y la conversión seguirá topada por algo que ninguna mejora
+de producción puede tocar.
+
+---
+
+## 6. Las dos excepciones y qué demuestran
 
 ### Barça Basket (~1M)
 El seguidor **no se gana, se hereda**. Es una cuenta bajo una marca global de
@@ -191,7 +298,7 @@ la calidad, esa cuenta sería enorme. No lo es. **La calidad no rompe el techo.*
 
 ---
 
-## 6. Agravantes específicos del bàsquet formativo
+## 7. Agravantes específicos del bàsquet formativo
 
 Sobre las tres capas, un club de cantera acumula cinco frenos adicionales:
 
@@ -225,7 +332,7 @@ Sobre las tres capas, un club de cantera acumula cinco frenos adicionales:
 
 ---
 
-## 7. Qué NO es el problema
+## 8. Qué NO es el problema
 
 Descartes explícitos, para que ninguna decisión posterior vaya por ahí:
 
@@ -241,10 +348,14 @@ Descartes explícitos, para que ninguna decisión posterior vaya por ahí:
   del sector, no de la comparación local.
 - **No es el bàsquet femenino.** La brecha femenina es real, pero es un caso
   particular del punto 3 (fragmentación de cuentas), no una causa autónoma.
+- **No es desinterés.** Buena parte de quien ve el contenido y no sigue **sí
+  está interesado**: está bloqueado por pertenencia a otro club (§5). Tratar ese
+  no-follow como falta de interés lleva a "hacer contenido más atractivo" cuando
+  el freno no está en el atractivo.
 
 ---
 
-## 8. Por qué esto importa (consecuencias de no nombrarlo bien)
+## 9. Por qué esto importa (consecuencias de no nombrarlo bien)
 
 Si el problema se enuncia como *"tenemos pocos seguidores"*, la respuesta
 instintiva es **producir más**. Los datos de abril y mayo muestran a dónde lleva
@@ -261,14 +372,23 @@ bàsquet parecerá siempre pequeño, incluida la élite. Dos ejemplos del sesgo:
   *(Estimaciones; verificar población y seguidores antes de usarlas fuera.)*
 - El club ya ha superado con holgura su mercado natural: ~450 familias × ~3,5
   personas ≈ 1.600 personas de núcleo duro, frente a 5.329 seguidores reales.
+  Es decir, **ya ha captado unas 3.700 personas fuera de su comunidad directa**,
+  que es exactamente donde el follow es caro (§5).
 
 Es decir: **medido contra su mercado, el club no rinde mal; medido contra un
 KPI ajeno, parece que sí**. Ese error de encuadre es, en sí mismo, parte del
 problema, porque orienta mal las decisiones y desmoraliza al equipo.
 
+Hay un segundo error de encuadre, derivado de §5: **se está usando una métrica de
+audiencia para medir algo que en parte es un embudo de captación deportiva**. Si
+una fracción de los seguidores nuevos son familias en fase de salida de otro
+club, esos seguidores no valen lo que vale un seguidor de marca: valen lo que
+vale una inscripción potencial. Medirlos juntos, en la misma cifra, oculta el
+único dato que de verdad importaría para la Junta.
+
 ---
 
-## 9. Límites de este análisis
+## 10. Límites de este análisis
 
 Honestidad metodológica, para que el documento aguante una revisión de Junta:
 
@@ -287,10 +407,29 @@ Honestidad metodológica, para que el documento aguante una revisión de Junta:
   l'Arpa y de Badalona; no está calculada con padrón oficial.
 - No hay datos propios sobre **por qué** un usuario que ve un reel no sigue: la
   causa está inferida del comportamiento agregado, no medida directamente.
+- **La capa 4 (§5) es la parte menos verificada del documento.** Nace de
+  observación de campo —gente de otros clubs que empieza a seguir justo antes de
+  moverse—, es coherente con la conducta conocida en deporte de club y explica
+  bien la conversión plana, pero **no está medida**. Es la hipótesis con más
+  poder explicativo y la que más conviene confirmar antes de decidir nada sobre
+  ella.
+
+  Confirmarla no requiere herramientas nuevas. Bastaría con:
+  1. **Cruzar altas de seguidores con solicitudes de prueba/inscripción** en la
+     misma ventana temporal (marzo–junio). Si la correlación existe, la capa 4
+     está operando.
+  2. **Revisar el origen de los seguidores nuevos** de un mes concreto: cuántos
+     pertenecen al entorno de otro club (seguidores de SESE, Roser, Horta u
+     otros).
+  3. **Preguntar en las pruebas y portes obertes** desde cuándo siguen la cuenta.
+     Una pregunta en el formulario de inscripción resuelve el punto entero.
+  4. **Mirar las bajas de seguidores** tras el cierre de temporada: si los
+     *unfollows* coinciden con familias que dejan el club, confirma que el follow
+     funciona como adscripción y no como consumo.
 
 ---
 
-## 10. Conclusión — el enunciado correcto del problema
+## 11. Conclusión — el enunciado correcto del problema
 
 > El CB Grup Barna, como el resto de clubs de bàsquet, **no tiene un problema de
 > alcance ni de producción**. Opera dentro de un sector con un techo de audiencia
@@ -300,11 +439,22 @@ Honestidad metodológica, para que el documento aguante una revisión de Junta:
 > construir personajes estables, por un sistema de incentivos internos que premia
 > el contenido que no capta y por la fragmentación de cuentas.
 >
-> La única de las tres capas sobre la que el club decide es la segunda. Por
-> tanto, el problema accionable se enuncia así: **el club no le da a un
-> desconocido ninguna razón repetible para volver.** Todo lo demás —número de
-> publicaciones, horarios, calidad de edición, comparación con rivales de
-> barrio— es ruido respecto a esa frase.
+> Y por debajo de todo eso opera el freno decisivo (capa 4): **en el deporte de
+> club, seguir es adscribirse**. La mayoría de quien podría seguirte ya pertenece
+> a otro club y no puede permitirse la señal; sigue cuando está pensando en
+> marcharse. El mercado no está compartido: está particionado, y la propia
+> comunidad ya te sigue entera.
+>
+> De las cuatro capas, el club sólo decide sobre la segunda por completo, y sobre
+> la cuarta de forma indirecta —a través de cómo se percibe la cuenta—. Por
+> tanto, el problema accionable tiene dos mitades y se enuncia así:
+>
+> **(a) El club no le da a un desconocido ninguna razón repetible para volver.
+> (b) Y a quien sí tendría la razón, seguirle le cuesta declarar algo que no
+> quiere declarar.**
+>
+> Todo lo demás —número de publicaciones, horarios, calidad de edición,
+> comparación con rivales de barrio— es ruido respecto a esas dos frases.
 
 ---
 
