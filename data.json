@@ -72,8 +72,17 @@
   "patrocinadors": {
     "_note": "Llistat PUBLIC de la temporada 2025-2026. IMPORTS I CONDICIONS ECONOMIQUES NO van aqui (repositori public) — detall complet a Drive: CB Grup Barna / Patrocinadors / 2025-2026.gsheet",
     "temporada": "2025-2026",
-    "gold": ["Westfield Glories", "GBK", "Instax"],
-    "silver": ["Clinica Dental", "Farmacies", "Celia", "Herbolari"],
+    "gold": [
+      { "nom": "Westfield Glories", "abast": "3x3 i esdeveniments", "desDe": "2023", "temporades": 3 },
+      { "nom": "Globasket", "alies": "GBK", "equip": "Senior A Masculi", "modalitat": "intercanvi per difusio" },
+      { "nom": "Instax", "equip": "Senior A Femeni", "modalitat": "intercanvi per difusio", "durada": "1 any" }
+    ],
+    "silver": [
+      { "nom": "Clinica Dental", "abast": "3 equips" },
+      { "nom": "Farmacies" },
+      { "nom": "Celia", "equip": "Magics" },
+      { "nom": "Herbolari" }
+    ],
     "bronze": ["Melosa", "Eix Clot", "Optiques", "Romeo", "Aquatica", "Jane", "Step Back"],
     "colaboracions": [
       { "nom": "Wilson", "tipus": "material", "detall": "Condicions especials en pilotes i cessio de material per a concursos i esdeveniments" },
@@ -102,7 +111,8 @@
     "postsColaboratius": [
       { "nom": "Westfield Glories", "projecte": "3x3 Westfield Glories" },
       { "nom": "Time Chamber", "projecte": "Campus Time Chamber" },
-      { "nom": "Instax", "projecte": "Sessio de fotos Senior Femeni" },
+      { "nom": "Instax", "projecte": "Sessio de fotos Senior A Femeni" },
+      { "nom": "Globasket", "projecte": "Senior A Masculi" },
       { "nom": "Foto Jane", "projecte": "Fotografia" }
     ],
     "totalEntitats": 9,
