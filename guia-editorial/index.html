@@ -1,0 +1,966 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Guia editorial de CB Grup Barna: color, tipografia, plantilles de cartell per secció, catàleg de sèries i benchmark del sector.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Guia Editorial · CB Grup Barna</title>
+<style>
+  :root{
+    --red:#E31E24; --red-dark:#a81318;
+    --ink:#0d0d0f; --paper:#f4f5f7; --panel:#ffffff; --panel-border:rgba(13,13,15,0.10);
+    --text:#16171b; --muted:#6b6f76; --code-bg:#eceef1;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#111214; --panel:#18191c; --panel-border:rgba(255,255,255,0.10);
+      --text:#eceef1; --muted:#9a9ea6; --code-bg:#1e1f23; }
+  }
+  :root[data-theme="dark"]{ --paper:#111214; --panel:#18191c; --panel-border:rgba(255,255,255,0.10);
+    --text:#eceef1; --muted:#9a9ea6; --code-bg:#1e1f23; }
+  :root[data-theme="light"]{ --paper:#f4f5f7; --panel:#ffffff; --panel-border:rgba(13,13,15,0.10);
+    --text:#16171b; --muted:#6b6f76; --code-bg:#eceef1; }
+
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--text);font-family:'Montserrat',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;line-height:1.5;padding:56px 24px 96px;}
+  .wrap{max-width:1220px;margin:0 auto;}
+
+  .kicker0{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .kicker0::before{content:"";width:22px;height:2px;background:var(--red);display:block;}
+  h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(30px,4.4vw,46px);letter-spacing:-0.02em;text-wrap:balance;margin-bottom:10px;}
+  h1 em{color:var(--red);font-style:normal;}
+  .lede{max-width:70ch;color:var(--muted);font-size:15.5px;line-height:1.65;margin-bottom:12px;}
+  .source{
+    max-width:70ch; font-size:13px; color:var(--text); background:var(--panel); border:1px solid var(--panel-border);
+    border-radius:10px; padding:14px 16px; margin-bottom:44px; line-height:1.6;
+  }
+  .source b{color:var(--red);}
+
+  section{margin-bottom:56px;}
+  .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;}
+  .section-head h2{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);}
+  .section-head .n{color:var(--red);}
+  .section-head::after{content:"";flex:1;height:1px;background:var(--panel-border);}
+
+  .tokens{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .swatch{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;}
+  .swatch .chip{width:100%;height:52px;border-radius:7px;border:1px solid rgba(0,0,0,0.08);}
+  .swatch .meta{display:flex;justify-content:space-between;align-items:baseline;}
+  .swatch .name{font-weight:700;font-size:13.5px;}
+  .swatch .hex{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);}
+  .swatch .role{font-size:11.5px;color:var(--muted);line-height:1.5;}
+  .swatch .pct{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--red);letter-spacing:1px;}
+
+  .type-panel{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:18px;margin-bottom:14px;}
+  .type-row{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;border-bottom:1px solid var(--panel-border);padding-bottom:16px;}
+  .type-row:last-child{border-bottom:0;padding-bottom:0;}
+  .type-row .label{width:190px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;line-height:1.5;}
+  .type-row .sample{flex:1;min-width:220px;}
+  .s-bebas{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:1.5px;color:var(--text);}
+  .s-mont900{font-family:'Montserrat',sans-serif;font-weight:900;font-size:24px;color:var(--text);}
+  .s-mont700{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;color:var(--text);}
+  .s-mont600{font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:var(--muted);}
+
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;}
+  .rule{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:18px 20px;display:flex;gap:14px;}
+  .rule.warn{border-color:rgba(227,30,36,0.35);}
+  .rule .flag{flex-shrink:0;width:26px;height:26px;border-radius:6px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;}
+  .rule.warn .flag{background:#141416;}
+  .rule .body h3{font-size:14px;margin-bottom:4px;}
+  .rule .body p{font-size:13px;color:var(--muted);line-height:1.55;}
+
+  .pinmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:14px;}
+  .pin{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:18px 20px;}
+  .pin .job{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;letter-spacing:1.4px;color:var(--red);text-transform:uppercase;margin-bottom:8px;}
+  .pin h3{font-size:15px;margin-bottom:6px;}
+  .pin p{font-size:13px;color:var(--muted);line-height:1.55;}
+  .pin .piece{display:inline-block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--code-bg);border:1px solid var(--panel-border);border-radius:6px;padding:4px 10px;color:var(--text);}
+
+  .lesson{background:var(--panel);border:1px solid rgba(227,30,36,0.35);border-radius:10px;padding:20px 22px;margin-bottom:14px;display:flex;gap:16px;}
+  .lesson .ico{flex-shrink:0;width:30px;height:30px;border-radius:7px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;}
+  .lesson h3{font-size:15px;margin-bottom:6px;}
+  .lesson p{font-size:13.5px;color:var(--text);line-height:1.6;margin-bottom:8px;}
+  .lesson p:last-child{margin-bottom:0;}
+  .lesson .stat{color:var(--red);font-weight:700;}
+  .lesson .src{font-size:11px;color:var(--muted);}
+
+  .nope{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;}
+  .nope div{background:var(--panel);border:1px solid var(--panel-border);border-radius:8px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text);text-align:center;}
+  .nope div::before{content:"✕";display:block;color:var(--red);font-weight:900;font-size:18px;margin-bottom:6px;}
+
+  .groupline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin:38px 0 16px;display:flex;align-items:center;gap:10px;}
+  .groupline b{color:var(--text);}
+  .groupline::after{content:"";flex:1;height:1px;background:var(--panel-border);}
+
+  .stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;justify-items:center;}
+  .story-slot{display:flex;flex-direction:column;gap:12px;width:100%;max-width:360px;}
+  .story-slot .tag0{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;}
+  .story-slot .tag0 b{color:var(--red);font-weight:700;}
+
+  .story-frame{width:360px;height:640px;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 18px 40px -18px rgba(0,0,0,0.45);}
+  .story{width:1080px;height:1920px;transform:scale(0.33333);transform-origin:top left;position:relative;overflow:hidden;font-family:'Montserrat',sans-serif;}
+
+  .story.bg-white{background:#ffffff;border:26px solid var(--red);}
+  .story.bg-red{background:var(--red);}
+  .story.bg-black{background:#0a0a0c;}
+  .story.bg-photo{background:#0a0a0c;}
+  .story.bg-photo .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+
+
+  /* ---------- landing chrome ---------- */
+  .topbar{position:sticky;top:0;z-index:50;background:var(--panel);border-bottom:1px solid var(--panel-border);}
+  .topbar-in{max-width:1220px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .topbar .brand{display:flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;color:var(--text);text-decoration:none;}
+  .topbar .brand img{width:26px;height:auto;}
+  .topbar nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto;}
+  .topbar nav a{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;padding:6px 9px;border-radius:6px;}
+  .topbar nav a:hover{color:var(--text);background:var(--code-bg);}
+  .topbar nav a.pdf{background:var(--red);color:#fff;font-weight:700;}
+  .topbar nav a.pdf:hover{background:var(--red-dark);color:#fff;}
+  .topbar nav a:focus-visible,.topbar .brand:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+  .hero{background:var(--ink);color:#fff;padding:64px 24px 56px;}
+  .hero-in{max-width:1220px;margin:0 auto;}
+  .hero .eyebrow{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;letter-spacing:2.2px;
+    text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+  .hero .eyebrow::before{content:"";width:22px;height:2px;background:var(--red);}
+  .hero h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(32px,5.4vw,54px);
+    line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px;text-wrap:balance;color:#fff;}
+  .hero h1 em{color:var(--red);font-style:normal;}
+  .hero p{max-width:62ch;color:rgba(255,255,255,.72);font-size:15.5px;line-height:1.7;margin-bottom:26px;}
+  .hero .facts{display:flex;gap:26px;flex-wrap:wrap;}
+  .hero .fact{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+  .hero .fact b{display:block;font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;letter-spacing:0;color:#fff;margin-bottom:2px;}
+  @media (max-width:720px){ .topbar nav{margin-left:0;width:100%;} }
+  /* Portades de sèrie — placa opaca (anuncis d'una persona) o vel (sèrie recurrent) */
+  .story.bg-photo .plate{position:absolute;left:0;right:0;bottom:0;height:36%;
+    background:linear-gradient(to bottom, rgba(10,10,12,0) 0%, rgba(10,10,12,.92) 22%, #0a0a0c 46%, #0a0a0c 100%);}
+  .story.bg-photo .veil{position:absolute;inset:0;
+    background:linear-gradient(to bottom, rgba(10,0,0,.10) 0%, rgba(120,8,10,.38) 46%, rgba(20,0,2,.94) 100%),
+      radial-gradient(ellipse at 50% 30%, rgba(227,30,36,.28), rgba(10,0,0,0) 62%);}
+
+  /* Escut — top-right a peces de sèrie/editorial, centrat a peces institucionals */
+  .story .logo{position:absolute;top:64px;right:64px;width:150px;height:auto;z-index:6;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.4));}
+  .story.inst .logo{left:50%;right:auto;transform:translateX(-50%);}
+
+  .story .pill{position:absolute;top:64px;left:64px;z-index:6;background:var(--red);color:#fff;
+    font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;letter-spacing:.3px;text-transform:uppercase;padding:14px 26px;border-radius:8px;}
+  .story.bg-red .pill{background:#141416;}
+  .story .tag1{position:absolute;top:150px;left:64px;z-index:6;background:#141416;color:#fff;
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;letter-spacing:1.6px;text-transform:uppercase;padding:10px 20px;border-radius:6px;}
+  .story.bg-black .tag1, .story.bg-photo .tag1{background:#fff;color:#141416;}
+
+  .story .content{position:absolute;left:64px;right:64px;bottom:190px;}
+  .eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:26px;letter-spacing:2.6px;text-transform:uppercase;margin-bottom:22px;}
+  .story.bg-white .eyebrow{color:#3a3d43;}
+  .story.bg-red .eyebrow, .story.bg-black .eyebrow, .story.bg-photo .eyebrow{color:rgba(255,255,255,.82);}
+
+  .headline{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:132px;line-height:.9;letter-spacing:1px;text-transform:uppercase;text-wrap:balance;margin-bottom:34px;}
+  .story.bg-white .headline{color:#141416;}
+  .story.bg-red .headline, .story.bg-black .headline, .story.bg-photo .headline{color:#fff;}
+
+  .kickline{display:flex;align-items:flex-start;gap:18px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;letter-spacing:.2px;text-transform:uppercase;line-height:1.25;}
+  .kickline .bar{flex-shrink:0;width:8px;height:44px;background:var(--red);margin-top:4px;}
+  .story.bg-red .kickline .bar{background:#141416;}
+  .story.bg-white .kickline{color:#141416;}
+  .story.bg-red .kickline, .story.bg-black .kickline, .story.bg-photo .kickline{color:#fff;}
+
+  .story .foot{position:absolute;left:64px;right:64px;bottom:70px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;letter-spacing:1.4px;text-transform:uppercase;}
+  .story.bg-white .foot{color:#141416;opacity:.55;}
+  .story.bg-red .foot, .story.bg-black .foot{color:#fff;opacity:.6;}
+  .story.bg-photo .foot{color:#fff;opacity:.7;}
+  .story.inst .foot{left:0;right:0;text-align:center;}
+
+  /* ---- Institucional: escut centrat, sense pastilla/etiqueta ---- */
+  .story.inst .ieyebrow{position:absolute;left:0;right:0;top:270px;text-align:center;z-index:6;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:28px;letter-spacing:3px;text-transform:uppercase;}
+  .story.inst.bg-white .ieyebrow{color:#6b6f76;}
+  .story.inst.bg-red .ieyebrow, .story.inst.bg-black .ieyebrow{color:rgba(255,255,255,.78);}
+
+  .story.inst .ititle{position:absolute;left:64px;right:64px;top:360px;z-index:6;text-align:center;
+    font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:180px;line-height:.88;letter-spacing:1px;text-transform:uppercase;}
+  .story.inst.bg-white .ititle{color:#141416;}
+  .story.inst.bg-red .ititle, .story.inst.bg-black .ititle{color:#fff;}
+  .story.inst .ititle .acc{color:var(--red);}
+  .story.inst.bg-red .ititle .acc{color:#141416;}
+
+  .story.inst .isecondary{position:absolute;left:64px;right:64px;top:800px;z-index:6;text-align:center;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:34px;line-height:1.4;letter-spacing:.3px;}
+  .story.inst.bg-white .isecondary{color:#4a4d52;}
+  .story.inst.bg-red .isecondary, .story.inst.bg-black .isecondary{color:rgba(255,255,255,.85);}
+
+  .story.inst .icta{position:absolute;left:0;right:0;top:1000px;text-align:center;z-index:6;}
+  .story.inst .icta span{display:inline-block;background:var(--red);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;
+    font-size:30px;letter-spacing:1.5px;text-transform:uppercase;padding:20px 48px;border-radius:60px;}
+
+  .code{background:var(--code-bg);border:1px solid var(--panel-border);border-radius:10px;padding:22px 24px;overflow-x:auto;}
+  .code pre{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:var(--text);white-space:pre;}
+  .code .c1{color:var(--muted);} .code .c2{color:var(--red);}
+
+  footer.page{max-width:1220px;margin:64px auto 0;padding-top:24px;border-top:1px solid var(--panel-border);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  /* ---- fitxes per cartell (una pàgina per peça al PDF) ---- */
+  .sheet{
+    display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:start;
+    background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;
+    padding:24px;margin-bottom:22px;
+  }
+  .sheet-img img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--panel-border);}
+  .sheet-cat{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+  .sheet-body h3{font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;margin-bottom:14px;color:var(--text);}
+  .sheet-block{margin-bottom:12px;}
+  .sheet-block h4{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+  .sheet-block p{font-size:13px;line-height:1.6;color:var(--text);}
+  .sheet-block p b{color:var(--red);}
+  .sheetgroup{margin:30px 0 14px;padding:18px 22px;background:var(--code-bg);border-left:5px solid var(--red);border-radius:8px;}
+  .sheetgroup h3{font-family:'Montserrat',sans-serif;font-weight:900;font-size:19px;color:var(--text);margin-bottom:7px;}
+  .sheetgroup p{font-size:13px;line-height:1.65;color:var(--muted);max-width:80ch;}
+  .sheetgroup p b{color:var(--text);}
+  .seriesgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:14px;}
+  .serie{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:18px 20px;}
+  .serie .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px;}
+  .serie h4{font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;color:var(--text);}
+  .serie .st{flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+  .serie .st.real{background:var(--red);color:#fff;}
+  .serie .st.nova{background:var(--code-bg);color:var(--muted);border:1px solid var(--panel-border);}
+  .serie .news{font-size:12.5px;color:var(--text);margin-bottom:7px;}
+  .serie .news b{color:var(--red);}
+  .serie p{font-size:12.5px;line-height:1.6;color:var(--muted);}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .vscol{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:18px 20px;}
+  .vscol.bad{border-color:rgba(227,30,36,0.4);}
+  .vscol .who{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+  .vscol h4{font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;margin-bottom:10px;color:var(--text);}
+  .vscol ul{list-style:none;padding:0;}
+  .vscol li{font-size:12.5px;line-height:1.55;color:var(--muted);padding:5px 0;border-bottom:1px solid var(--panel-border);}
+  .vscol li:last-child{border-bottom:0;}
+  .vscol li b{color:var(--text);}
+  .verdict{background:var(--code-bg);border-left:5px solid var(--red);border-radius:8px;padding:18px 22px;margin-bottom:14px;}
+  .verdict h4{font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;margin-bottom:8px;color:var(--text);}
+  .verdict p{font-size:13px;line-height:1.65;color:var(--muted);max-width:82ch;margin-bottom:8px;}
+  .verdict p:last-child{margin-bottom:0;}
+  .verdict b{color:var(--text);}
+  .verdict .hit{color:var(--red);font-weight:700;}
+  .noart{width:100%;aspect-ratio:9/16;border:2px dashed var(--panel-border);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.7;color:var(--muted);letter-spacing:.6px;}
+
+  @media print{
+    .story-slot,.story-frame,.swatch,.rule,.pin,.lesson,.anatomy,.type-panel,.code,.nope div{break-inside:avoid;}
+    section{break-inside:auto;}
+    .section-head{break-after:avoid;}
+    .groupline{break-after:avoid;}
+    .sheetgroup{break-before:page;break-after:avoid;}
+    .sheet{break-inside:avoid;margin-bottom:18px;}
+  }
+  /* ---------- responsive fixes ---------- */
+  code{overflow-wrap:anywhere;word-break:break-word;}
+  @media (max-width:860px){
+    .sheet{grid-template-columns:1fr;}
+    .sheet-img{max-width:280px;}
+    .vs{grid-template-columns:1fr !important;}
+  }
+  @media (max-width:560px){
+    body{padding-left:16px;padding-right:16px;}
+    .story-frame{width:100%;max-width:320px;height:auto;aspect-ratio:9/16;}
+    .story{transform:scale(0.2963);}
+  }
+</style>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="/"><img src="/logo.png" alt=""> CB Grup Barna</a>
+    <nav>
+      <a href="#s-color">Color</a>
+      <a href="#s-tipo">Tipografia</a>
+      <a href="#s-fitxes">Fitxes</a>
+      <a href="#s-series">Sèries</a>
+      <a href="#s-bench">Benchmark</a>
+      <a href="#s-recepta">Recepta</a>
+      <a class="pdf" href="guia-editorial-cbgb.pdf" download>Descarrega PDF</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-in">
+    <div class="eyebrow">Guia editorial · Ús intern</div>
+    <h1>Com es fa un cartell <em>del Barna</em></h1>
+    <p>Tot el sistema visual del club en un sol lloc: la paleta i la tipografia exactes, l'anatomia de cada
+    plantilla, una fitxa per cartell explicant per què està fet així, el catàleg de sèries de contingut i
+    com ho estan fent els altres clubs. Pensat per obrir-lo abans de dissenyar, no després.</p>
+    <div class="facts">
+      <div class="fact"><b>10</b>Fitxes de cartell</div>
+      <div class="fact"><b>6</b>Sèries de contingut</div>
+      <div class="fact"><b>4</b>Clubs analitzats</div>
+      <div class="fact"><b>30</b>Pàgines en PDF</div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="kicker0">Style kit v3 · CB Grup Barna</div>
+  <h1>Alineat amb el <em>Manual d'Identitat Visual</em></h1>
+  <p class="lede">
+    Aquesta guia s'ha reconstruït sobre el manual oficial del club (<code>CB_Grup_Barna_Identitat_Visual_2026_v1.1.pdf</code>,
+    juliol 2026) — ja no és una reconstrucció des de zero, és la seva aplicació directa als formats de story/portada.
+  </p>
+  <div class="source">
+    <b>Canvis respecte v2</b> — corregits contra el manual: la tipografia passa de <b>Inter</b> a
+    <b>Bebas Neue (titulars) + Montserrat (text)</b>, que és el sistema oficial. S'identifiquen <b>dues plantilles
+    de logo diferents</b>: <b>editorial/sèrie → escut top-right</b>, <b>institucional (grans anuncis) → escut centrat</b> —
+    abans totes les peces portaven l'escut a dalt-dreta, cosa que el manual només prescriu per a peces editorials.
+    Les 3 peces de fons pla ("Hi van els dos", "Som Clot", "Vols jugar?") es reconstrueixen com a
+    <b>portades institucionals</b> (sense pastilla/etiqueta, escut centrat) perquè és exactament la categoria on encaixen
+    segons el manual — de fet "SOM CLOT" hi apareix com a exemple oficial literal.
+  </div>
+
+  <section id="s-color">
+    <div class="section-head"><h2><span class="n">01</span> · Color</h2></div>
+    <div class="tokens">
+      <div class="swatch">
+        <div class="chip" style="background:#E31E24"></div>
+        <div class="meta"><span class="name">Roig Barna</span><span class="hex">#E31E24</span></div>
+        <div class="pct">30%</div>
+        <div class="role">Identitat, no decoració. Energia · CTA · marcs. Un únic accent roig per peça.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#0a0a0c"></div>
+        <div class="meta"><span class="name">Negre</span><span class="hex">#0A0A0C</span></div>
+        <div class="pct">55%</div>
+        <div class="role">Contrast, premium. És el color dominant del sistema — no el vermell.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#ffffff;border:1px solid rgba(0,0,0,.14)"></div>
+        <div class="meta"><span class="name">Blanc</span><span class="hex">#FFFFFF</span></div>
+        <div class="pct">15%</div>
+        <div class="role">Blanc pur. Claredat, respiració. Fons clar = marc roig obligatori.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#6b6f76"></div>
+        <div class="meta"><span class="name">Gris</span><span class="hex">#6B6F76</span></div>
+        <div class="pct">—</div>
+        <div class="role">Metadades / text secundari. Mai protagonista. No compta en la proporció 55/30/15.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s-tipo">
+    <div class="section-head"><h2><span class="n">02</span> · Tipografia</h2></div>
+    <div class="type-panel">
+      <div class="type-row"><div class="label">Bebas Neue — titulars, noms, xifres</div><div class="sample s-bebas">HI VAN ELS DOS</div></div>
+      <div class="type-row"><div class="label">Montserrat 900 — accent de text</div><div class="sample s-mont900">Confirmat Supercopa</div></div>
+      <div class="type-row"><div class="label">Montserrat 700 — cos / CTA</div><div class="sample s-mont700">Escoleta · Base · Femení · Sènior</div></div>
+      <div class="type-row"><div class="label">Montserrat 600 — jerarquia secundària</div><div class="sample s-mont600">No cal experiència · Enllaç a la bio</div></div>
+    </div>
+    <div class="rules">
+      <div class="rule"><div class="flag">①</div><div class="body"><h3>Màxim 2 famílies per peça</h3><p>Bebas Neue pel titular, Montserrat per a tota la resta. Mai una tercera font.</p></div></div>
+      <div class="rule"><div class="flag">②</div><div class="body"><h3>Titular: 1–2 línies, no cinc</h3><p>Bebas Neue mai per a paràgrafs llargs — és una font de titular, no de lectura.</p></div></div>
+      <div class="rule"><div class="flag">③</div><div class="body"><h3>Sense efectes gratuïts</h3><p>Evitar contorns, ombres i inclinacions decoratives sobre el text.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2><span class="n">03</span> · Anatomia de la composició</h2></div>
+    <p style="font-size:13px;color:var(--muted);max-width:74ch;margin-bottom:16px">
+      Quines lletres i quina mida porta cada element, i en quin ordre es llegeixen — de dalt a baix, per a
+      cadascuna de les dues plantilles.
+    </p>
+    <div class="tokens" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:start;">
+      <div class="anatomy">
+        <h3 style="font-size:14px;margin-bottom:12px;color:var(--red)">Plantilla A — Sèrie</h3>
+        <ol style="padding-left:20px;font-size:13px;line-height:2;color:var(--text)">
+          <li><b>Escut</b> — top-right, imatge oficial (no és text).</li>
+          <li><b>Foto</b> — real, sencera; <code>.plate</code> (anunci d'una persona) o <code>.veil</code> (sèrie recurrent) al davant.</li>
+          <li><b>Pastilla</b> — <i>Montserrat 800</i>, majúscules, xip vermell/negre fix. El ganxo, 3–4 paraules.</li>
+          <li><b>Etiqueta</b> — <i>Montserrat/mono 700</i>, xip fix. "Cap. XX" o context.</li>
+          <li><b>Eyebrow</b> — <i>Montserrat 700</i>, tracked, petita. Qui/què.</li>
+          <li><b>Titular</b> — <i>Bebas Neue</i>, gran, 1–2 línies. El missatge.</li>
+          <li><b>Kickline</b> — barra + <i>Montserrat 800</i>. Frase de tancament.</li>
+          <li><b>Peu</b> — <i>mono 700</i>, opacitat reduïda. Firma fixa.</li>
+        </ol>
+      </div>
+      <div class="anatomy">
+        <h3 style="font-size:14px;margin-bottom:12px;color:var(--red)">Plantilla B — Institucional</h3>
+        <ol style="padding-left:20px;font-size:13px;line-height:2;color:var(--text)">
+          <li><b>Escut</b> — centrat a dalt, imatge oficial.</li>
+          <li><b>Eyebrow</b> — <i>Montserrat 700</i>, tracked, centrada. Context breu.</li>
+          <li><b>Titular</b> — <i>Bebas Neue</i>, gegant, centrat, 1–2 línies. Un sol mot en vermell (l'accent).</li>
+          <li><b>Text secundari</b> — <i>Montserrat 700</i>, centrat, màxim 2–3 línies.</li>
+          <li><b>CTA</b> — opcional. Botó <i>Montserrat 800</i>, xip vermell.</li>
+          <li><b>Peu</b> — <i>mono 700</i>, centrat. Firma fixa.</li>
+        </ol>
+      </div>
+      <div class="anatomy" style="border-color:rgba(227,30,36,0.35)">
+        <h3 style="font-size:14px;margin-bottom:4px;color:var(--red)">Plantilla C — Gameday</h3>
+        <p style="font-size:11.5px;color:var(--muted);margin-bottom:10px">Plantilla confirmada amb peces reals (“GAMEDAY” i “DIA DE PARTIT”, Sènior vs C.E. Sant Nicolau). Neix d'una referència explícita: el matchday de <b>@fcbbasket</b> — mà estesa a càmera i els dos escuts com a element central. L'artwork encara no està incrustat en aquest arxiu.</p>
+        <ol style="padding-left:20px;font-size:13px;line-height:2;color:var(--text)">
+          <li><b>Escut</b> — top-right, imatge oficial.</li>
+          <li><b>Matchup</b> — escut rival (esquerra) + "VS" + escut Barna (dreta), noms d'equip a sota.</li>
+          <li><b>Data/hora/lloc</b> — 3 línies, <i>Montserrat 700</i>, icones opcionals (calendari/rellotge/pin).</li>
+          <li><b>Foto</b> — jugador/a en acció, sencera, sense vel ni placa.</li>
+          <li><b>Titular opcional</b> — <i>Bebas Neue</i>, "DIA DE PARTIT" / "GAME DAY".</li>
+          <li><b>Dorsal + nom</b> — crida opcional, cantonada inferior.</li>
+          <li><b>Tagline</b> — "Som del Clot. Som Barna.", peu.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2><span class="n">04</span> · Escut — dues posicions, no una</h2></div>
+    <div class="rules">
+      <div class="rule">
+        <div class="flag">①</div>
+        <div class="body"><h3>Editorial / sèrie → top-right</h3>
+        <p>Portades amb foto (fitxatges, renovacions, sèries recurrents): escut a dalt-dreta, ~150px sobre canvas de 1080px, marge 64px.</p></div>
+      </div>
+      <div class="rule">
+        <div class="flag">②</div>
+        <div class="body"><h3>Institucional → centrat a dalt</h3>
+        <p>Grans anuncis de fons pla (ascensos, campanyes de pertinença, presentacions de temporada): escut centrat a la part superior. No dalt-dreta.</p></div>
+      </div>
+      <div class="rule">
+        <div class="flag">③</div>
+        <div class="body"><h3>Arxiu oficial, sempre</h3>
+        <p>Mai reconstruir, redibuixar o aproximar l'escut amb IA. Zona de protecció: x = 20% de l'amplada de l'escut. Mida mínima 18mm impressió / 64px digital.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="groupline"><b>Portades de sèrie</b> — peces reals del club, sense retocar</div>
+  <p style="font-size:13px;color:var(--muted);max-width:70ch;margin:-6px 0 16px">
+    Aquestes són peces ja publicades pel club, tal com són — no s'han reconstruït amb el sistema
+    d'aquesta guia. Es mostren aquí com a referència real de com queda cada categoria (entrenador/a,
+    Sènior B, Supercopa). Per generar una peça <strong>nova</strong>, fes servir la recepta de la
+    secció 08 amb el bloc pastilla+etiqueta — no reconstrueixis aquestes.
+  </p>
+  <div class="stories">
+
+    <div class="story-slot">
+      <div class="tag0"><span>Sèrie entrenadors</span><b>Peça real</b></div>
+      <div class="story-frame" style="background:#0a0a0c">
+        <img loading="lazy" decoding="async" src="img/31bb8654ed.jpg" alt="Jordi Vives — renovació coordinador cistella petita" style="width:100%;height:100%;object-fit:contain;">
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);text-align:center">Jordi Vives — renovació coordinador cistella petita</div>
+    </div>
+
+    <div class="story-slot">
+      <div class="tag0"><span>Sèrie entrenadores</span><b>Peça real</b></div>
+      <div class="story-frame" style="background:#0a0a0c">
+        <img loading="lazy" decoding="async" src="img/9a76f83a35.jpg" alt="Nora Serra — renovació entrenadora PMBM" style="width:100%;height:100%;object-fit:contain;">
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);text-align:center">Nora Serra — renovació entrenadora PMBM</div>
+    </div>
+
+    <div class="story-slot">
+      <div class="tag0"><span>Sènior B Masculí</span><b>Peça real</b></div>
+      <div class="story-frame" style="background:#0a0a0c">
+        <img loading="lazy" decoding="async" src="img/be34533703.jpg" alt="David Alegre — renovació" style="width:100%;height:100%;object-fit:contain;">
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);text-align:center">David Alegre — renovació</div>
+    </div>
+
+    <div class="story-slot">
+      <div class="tag0"><span>Supercopa masculina</span><b>Peça real</b></div>
+      <div class="story-frame" style="background:#0a0a0c">
+        <img loading="lazy" decoding="async" src="img/1eb43f550a.jpg" alt="Carlos Rodríguez de la Hera — nou fitxatge" style="width:100%;height:100%;object-fit:contain;">
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);text-align:center">Carlos Rodríguez de la Hera — nou fitxatge</div>
+    </div>
+
+    <div class="story-slot">
+      <div class="tag0"><span>Supercopa femenina</span><b>Peça real</b></div>
+      <div class="story-frame" style="background:#0a0a0c">
+        <img loading="lazy" decoding="async" src="img/f85a055217.jpg" alt="Dorsal 33 — sènior femení" style="width:100%;height:100%;object-fit:contain;">
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);text-align:center">Dorsal 33 — sènior femení</div>
+    </div>
+
+  </div>
+
+  <div class="groupline"><b>Plantilla per a peces noves</b> — bloc pastilla+etiqueta, escut top-right</div>
+  <p style="font-size:13px;color:var(--muted);max-width:70ch;margin:-6px 0 16px">
+    Aquest sí és el sistema d'aquesta guia — fes-lo servir quan es generi una peça nova des de zero
+    (sèrie recurrent, cap. XX). Foto real + vel, nom de la sèrie i capítol sempre visibles.
+  </p>
+  <div class="stories" style="grid-template-columns:minmax(300px,360px)">
+
+    <div class="story-slot">
+      <div class="tag0"><span>Radar Barna · Cap. 01</span><b>Exemple de plantilla</b></div>
+      <div class="story-frame">
+        <div class="story bg-photo">
+          <img class="photo" src="img/db65b03dff.jpg" alt="">
+          <div class="veil"></div>
+          <img class="logo" src="img/0b4ac1d400.png" alt="CB Grup Barna">
+          <div class="pill">Radar Barna.</div>
+          <div class="tag1">Cap. 01</div>
+          <div class="content">
+            <div class="eyebrow">Sèrie entrenament · Fonaments</div>
+            <div class="headline">L'ull sempre<br>a la cistella.</div>
+            <div class="kickline"><span class="bar"></span>Repeteix-ho cada dia, 10 minuts.</div>
+          </div>
+          <div class="foot">CB Grup Barna — El Clot</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="groupline"><b>Portades institucionals</b> — grans anuncis, escut centrat, fons pla</div>
+  <p style="font-size:13px;color:var(--muted);max-width:70ch;margin:-6px 0 16px">
+    Per a ascensos, campanyes de pertinença, presentacions de temporada i fites del club. El missatge tipogràfic
+    és el protagonista — fons pla (roig/negre/blanc), escut centrat a dalt, titular central gran i condensat,
+    un sol bloc cromàtic d'accent, text secundari màxim 2–3 línies, firma inferior constant.
+    <strong>No barrejar amb el llenguatge de sèrie</strong> (sense pastilla, sense etiqueta CAP.).
+  </p>
+  <div class="stories">
+
+    <div class="story-slot">
+      <div class="tag0"><span>Fons negre</span><b>Resultat confirmat</b></div>
+      <div class="story-frame">
+        <div class="story inst bg-black">
+          <img class="logo" src="img/0b4ac1d400.png" alt="CB Grup Barna">
+          <div class="ieyebrow">Confirmat · Temporada 26/27</div>
+          <div class="ititle">HI VAN<br><span class="acc">ELS DOS.</span></div>
+          <div class="isecondary">Sènior masculí ✓<br>Sènior femení ✓</div>
+          <div class="foot">CB Grup Barna — El Clot, Barcelona</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-slot">
+      <div class="tag0"><span>Fons vermell</span><b>Identitat de barri</b></div>
+      <div class="story-frame">
+        <div class="story inst bg-red">
+          <img class="logo" src="img/0b4ac1d400.png" alt="CB Grup Barna">
+          <div class="ieyebrow">CB Grup Barna · Des de 1965</div>
+          <div class="ititle">SOM<br><span class="acc">CLOT.</span></div>
+          <div class="isecondary">34 equips · 450 famílies<br>Un sol barri</div>
+          <div class="foot">CB Grup Barna — El Clot, Barcelona</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-slot">
+      <div class="tag0"><span>Fons blanc + marc</span><b>Captació</b></div>
+      <div class="story-frame">
+        <div class="story inst bg-white">
+          <img class="logo" src="img/0b4ac1d400.png" alt="CB Grup Barna">
+          <div class="ieyebrow">Temporada 26/27</div>
+          <div class="ititle">VOLS<br><span class="acc">JUGAR?</span></div>
+          <div class="isecondary">Escoleta · Base<br>Femení · Sènior</div>
+          <div class="icta"><span>Places obertes</span></div>
+          <div class="foot" style="bottom:70px;color:#141416;opacity:.55">No cal experiència · Enllaç a la bio</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <section>
+    <div class="section-head"><h2><span class="n">05</span> · Els 3 pins</h2></div>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:18px;max-width:74ch">
+      Segons <code>aparador-perfil-cbgb</code>, els 3 posts fixats al perfil fan una feina diferent cadascun.
+      Les 3 portades institucionals hi encaixen exactament:
+    </p>
+    <div class="pinmap">
+      <div class="pin"><div class="job">Pin 1 · Nivell</div><h3>"Això és un club seriós"</h3><p>Resultat confirmat, sense necessitat de conèixer cap nom.</p><span class="piece">Fons negre — "Hi van els dos"</span></div>
+      <div class="pin"><div class="job">Pin 2 · Ganxo extern</div><h3>Raó per seguir, sense context</h3><p>S'entén sense saber cap nom — el pin més fluix dels 3 si no hi ha cara/emoció.</p><span class="piece">Fons blanc + marc — "Vols jugar?"</span></div>
+      <div class="pin"><div class="job">Pin 3 · Amplitud</div><h3>"Hi ha més d'un equip"</h3><p>Un barri, 34 equips, un sol escut.</p><span class="piece">Fons vermell — "Som Clot"</span></div>
+    </div>
+    
+  </section>
+
+  <section>
+    <div class="section-head"><h2><span class="n">06</span> · Cobranding i patrocinis</h2></div>
+    <div class="rules">
+      <div class="rule"><div class="flag">①</div><div class="body"><h3>El club primer</h3><p>Quan el Barna organitza, el seu logo va primer.</p></div></div>
+      <div class="rule"><div class="flag">②</div><div class="body"><h3>Alçada òptica, no mida idèntica</h3><p>Mateix pes visual entre marques, no necessàriament la mateixa mida en px.</p></div></div>
+      <div class="rule"><div class="flag">③</div><div class="body"><h3>Mai dins l'escut</h3><p>Cap logo de partner s'insereix dins la forma de l'escut del Barna. Separació mínima = zona x de l'escut.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2><span class="n">07</span> · Usos incorrectes</h2></div>
+    <div class="nope">
+      <div>No estirar</div><div>No girar</div><div>No recolorir</div>
+      <div>No afegir ombres</div><div>No tapar el logo</div><div>No recrear amb IA</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2><span class="n">08</span> · Per què es dissenya així</h2></div>
+    <p style="font-size:13px;color:var(--muted);max-width:76ch;margin-bottom:16px">
+      Cada decisió d'aquesta guia respon a una raó concreta, no a preferència estètica. El fil que lliga totes
+      les portades i cartells:
+    </p>
+    <div class="rules" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <div class="rule"><div class="flag">①</div><div class="body"><h3>Negre domina (55%), no el vermell</h3>
+        <p>Un fons majoritàriament negre és el que fa que una peça llegeixi "club seriós, no cridaner". El vermell
+        només guanya força perquè és escàs — si fos el color base, deixaria de significar res.</p></div></div>
+      <div class="rule"><div class="flag">②</div><div class="body"><h3>Un accent roig, mai més</h3>
+        <p>Quan tot és vermell/negre + text èpic, l'ull deixa de distingir què és important. Un sol accent per peça
+        manté el contrast útil.</p></div></div>
+      <div class="rule"><div class="flag">③</div><div class="body"><h3>Bebas Neue = autoritat esportiva</h3>
+        <p>Una condensada gegant és el registre visual dels pòsters NBA/Nike — comunica impacte en poc espai,
+        ideal per a miniatures que s'han de llegir a 300px. Montserrat no competeix mai amb ella: és neutra
+        expressament, perquè la informació es llegeixi sense soroll.</p></div></div>
+      <div class="rule"><div class="flag">④</div><div class="body"><h3>Escut top-right = la persona és la protagonista</h3>
+        <p>A les peces amb foto (sèrie, gameday), l'escut és una insígnia discreta a la cantonada — la cara de qui
+        surt a la peça no hi ha de competir. A les peces institucionals no hi ha foto, així que l'escut centrat
+        pot ser part de la composició simètrica sense robar protagonisme a ningú.</p></div></div>
+      <div class="rule"><div class="flag">⑤</div><div class="body"><h3>Placa vs. vel — foto neta per a persones, consistència per a sèries</h3>
+        <p>Un anunci d'una persona ha de semblar ella mateixa, sense filtre — la placa només toca la zona de text.
+        Un capítol de sèrie recurrent es beneficia del vel perquè la graella s'ha de llegir com "un sol programa",
+        sigui quina sigui la foto d'aquella setmana.</p></div></div>
+      <div class="rule"><div class="flag">⑥</div><div class="body"><h3>Gameday és una plantilla pròpia</h3>
+        <p>Un partit té una necessitat d'informació diferent (dos escuts, dia, hora, lloc) que no encaixa ni al
+        llenguatge de sèrie ni a l'institucional — forçar-lo en un dels dos trencaria la jerarquia lògica del
+        cartell.</p></div></div>
+      <div class="rule"><div class="flag">⑦</div><div class="body"><h3>Els 3 pins no són decoració, són conversió</h3>
+        <p>Nivell + ganxo extern + amplitud és la seqüència mínima perquè un desconegut decideixi seguir el club en
+        3 segons. No és una tria estètica — és la resposta directa al diagnòstic real (0,03% de conversió) que va
+        motivar aquest sistema.</p></div></div>
+    </div>
+
+    <div class="groupline" style="margin-top:34px"><b>Nota per a Junta</b> — per què hi ha plantilles diferents per categoria</div>
+    <p style="font-size:13px;color:var(--muted);max-width:76ch;margin:-2px 0 16px">
+      Pot semblar que cada anunci s'ha dissenyat "diferent perquè sí". És el contrari: totes les peces comparteixen
+      el mateix ADN (escut oficial, Bebas Neue, paleta roig/negre/blanc, firma fixa) i el que varia és <strong>una
+      sola cosa cada vegada</strong>, escollida amb criteri. El detall:
+    </p>
+    <div class="rules">
+      <div class="rule"><div class="flag">A</div><div class="body"><h3>Entrenador i entrenadora: una mateixa plantilla, dos fons</h3>
+        <p>L'staff tècnic s'anuncia amb el seu llenguatge propi — la <strong>pissarra tàctica</strong> de fons, que
+        diu "aquesta persona pensa el joc" i el distingeix a l'instant d'un anunci de jugador. Jordi Vives va sobre
+        pissarra fosca i Nora Serra sobre pissarra clara: <strong>no són dos dissenys, és el mateix amb el fons
+        invertit</strong>. Això manté el reconeixement de sèrie (qualsevol soci veu que són "de la mateixa
+        col·lecció") i alhora evita que a la graella semblin la mateixa peça repetida.</p></div></div>
+      <div class="rule"><div class="flag">B</div><div class="body"><h3>Sènior A i Sènior B: la notícia mana sobre el disseny</h3>
+        <p>Les dues plantilles sènior fan servir el mateix mecanisme — un <strong>wordmark condensat gegant</strong>
+        darrere la foto — però amb subjecte diferent, perquè la notícia és diferent. A la Supercopa, la notícia és
+        <strong>la competició</strong>: el wordmark és "SUPERCOPA" i s'hi afegeix el cobranding oficial. A la
+        renovació de Sènior B, la notícia és <strong>la persona</strong>: el wordmark és el cognom del jugador
+        ("ALEGRE"). Resultat: mateixa família visual, però qualsevol persona distingeix a primer cop d'ull — sense
+        llegir res — si el club anuncia una fita d'equip o una renovació individual.</p></div></div>
+      <div class="rule"><div class="flag">C</div><div class="body"><h3>Supercopa masculina i femenina: paritat per disseny, no per discurs</h3>
+        <p>Mateixa escala tipogràfica, mateix nivell de producció i d'acabat; l'única variació és la inversió de
+        fons (clar el masculí, fosc amb textura vermella el femení). Cap secció és la versió "reduïda" de l'altra
+        — la paritat que el manual declara com a valor ("el femení és estructura, no campanya") aquí és una
+        <strong>decisió de disseny verificable</strong>, no una frase. I la inversió clar/fosc fa que les dues
+        peces convisquin a la graella sense anul·lar-se mútuament.</p></div></div>
+      <div class="rule"><div class="flag">D</div><div class="body"><h3>Per què no una sola plantilla per a tot</h3>
+        <p>Amb una plantilla única, la graella cau en fatiga per repetició. Amb una plantilla nova per a cada peça, es perd el reconeixement de marca. El sistema resol
+        l'equilibri: <strong>ADN fix</strong> (escut, tipografia, paleta, firma) + <strong>una variació controlada
+        per categoria</strong> (el fons a l'staff, el subjecte del wordmark als sèniors). Cada categoria té
+        identitat pròpia i tot segueix sent, inconfusiblement, Barna.</p></div></div>
+    </div>
+  </section>
+
+  <section id="s-fitxes">
+    <div class="section-head"><h2><span class="n">09</span> · Fitxes per secció — el perquè de cada cartell</h2></div>
+    <p style="font-size:13px;color:var(--muted);max-width:76ch;margin-bottom:18px">
+      Els cartells s'agrupen per <b>secció del club</b>, no per estil. Cada grup té un registre propi
+      — el que canvia entre grups no és el gust, és <b>què és la notícia</b>: la persona, la fita, el contingut o el club.
+      Dins de cada grup, una fitxa per peça amb la composició, el fons, les lletres i la raó de cada decisió.
+    </p>
+    <div class="sheetgroup">
+      <h3>Cos tècnic — entrenadors i entrenadores</h3>
+      <p>La notícia és <b>qui dirigeix</b>. Plantilla de pissarra tàctica: el llenguatge propi de l'staff — un jugador s'anuncia amb el cos, un entrenador amb el que pensa. Una sola arquitectura amb dos fons (fosc i clar) perquè el parell no es repeteixi a la graella.<br><br><b>Aquí hi ha el diferencial del club:</b> el CB Grup Barna anuncia entrenadores amb la mateixa plantilla, escala i producció que els entrenadors. La majoria de clubs del nostre entorn <b>no anuncien entrenadores</b> — només publiquen cos tècnic masculí.</p>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/a83e0adf1b.jpg" alt="Jordi Vives — pissarra fosca"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Peça real · Renovació · Cos tècnic</div>
+        <h3>Jordi Vives — pissarra fosca</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>Eix central simètric: “RENOVACIÓ” espaiat a dalt, escut a la dreta, figura centrada amb els braços creuats mirant a càmera, i el nom gegant tocant la vora inferior. Als dos marges verticals hi ha marginalia en petit (“PLAYBOOK · 26·27” a l'esquerra, “X · O · MIN” a la dreta) que reforça la metàfora de quadern tàctic. La postura i l'eix central transmeten autoritat tranquil·la — no cal acció per dir “aquest home mana a la pista”.</p></div><div class="sheet-block"><h4>Fons</h4><p>Pissarra tàctica negra amb jugades guixades en blanc i marques en vermell: <b>el llenguatge propi de l'staff</b>. Un jugador s'anuncia amb el cos; un entrenador, amb el que pensa. El halo vermell darrere el cap desenganxa la figura del negre.</p></div><div class="sheet-block"><h4>Lletres</h4><p>“RENOVACIÓ” en condensada espaiada (registre solemne), nom en condensada gegant blanca, càrrec en tracked petit. El peu és una <b>escala de quatre línies</b>: nom gegant → càrrec (“COORDINADOR CISTELLA PETITA”, vermell i entre filets) → estat en cursiva pesada (“ENTRENADOR RENOVAT”) → claim entre filets (“CONTINUEM JUNTS”). La cursiva inclinada és l'únic moment de tot el sistema on la tipografia es permet un gest, i queda reservada a la línia d'estat.</p></div><div class="sheet-block"><h4>Per què així</h4><p>Distingeix el cos tècnic dels jugadors a primer cop d'ull sense sortir de la marca. El fons fosc dona pes i veterania al perfil sènior de l'staff.</p></div>
+      </div>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/3b9b0a0d75.jpg" alt="Nora Serra — pissarra clara"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Peça real · Renovació · Cos tècnic</div>
+        <h3>Nora Serra — pissarra clara</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>Mateixa arquitectura exacta que la peça de Jordi Vives: “RENOVACIÓ” dalt, escut dreta, figura central braços creuats, nom gegant baix amb el càrrec a sota (“ENTRENADORA · PMBM · PREMINI FEMENÍ”) i la firma al peu.</p></div><div class="sheet-block"><h4>Fons</h4><p>La mateixa pissarra tàctica, invertida: traç fosc i vermell sobre clar, amb el mateix halo vermell. <b>No són dos dissenys: és un de sol amb el fons girat.</b></p></div><div class="sheet-block"><h4>Lletres</h4><p>Mateixa escala i jerarquia que la peça masculina — mateix cos de nom, mateixa posició, mateixa producció. El peu s'adapta al contingut de cada peça: aquesta tanca amb la firma del club i el hashtag (“CB GRUP BARNA · EL CERVELL DEL JOC · #somclot”). <b>Que una entrenadora s'anunciï amb la mateixa plantilla que un entrenador és el diferencial del club</b>: la majoria de clubs del nostre entorn només publiquen cos tècnic masculí.</p></div><div class="sheet-block"><h4>Per què així</h4><p>El parell fosc/clar manté el reconeixement de col·lecció i evita que a la graella semblin la mateixa peça repetida (fatiga per repetició). I la paritat és literal: mateixa producció, mateixa escala, cap versió “menor”.</p></div>
+      </div>
+    </div>
+    <div class="sheetgroup">
+      <h3>Sènior A — fites de competició</h3>
+      <p>La notícia és <b>la fita</b>, no la persona. Registre Supercopa: la competició mana sobre el nom, hi ha cobranding quan l'organitza una entitat externa, i el jugador o jugadora hi surt com a representant de l'equip. És el registre més alt del sistema i per això queda reservat: si s'usés per a cada renovació, deixaria de significar res.</p>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/77e17311fb.jpg" alt="Carlos Rodríguez de la Hera — clar"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Peça real · Supercopa Masculina</div>
+        <h3>Carlos Rodríguez de la Hera — clar</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>“SUPER COPA” gegant en vermell, amb el jugador col·locat <b>entre</b> el text i el fons — la superposició crea profunditat i integra persona i competició en un sol pla. Kicker superior amb temporada i categoria; nom en vermell + cognoms en negre a baix.</p></div><div class="sheet-block"><h4>Fons</h4><p>Blanc amb línies de pista subtils en vermell: aire, claredat i un context esportiu sense soroll.</p></div><div class="sheet-block"><h4>Lletres</h4><p>El wordmark és la competició, no el jugador — condensada gegant. El nom va en condensada mitjana a baix: primer la fita, després qui la protagonitza (“FORMAT AL BARNA · NOU FITXATGE 26/27”).</p></div><div class="sheet-block"><h4>Per què així</h4><p>Quan la notícia és <b>la competició</b>, el wordmark gegant és el seu nom. Mateix mecanisme que el cartell d'Alegre (wordmark + foto), subjecte diferent — la família visual es manté i el tipus de notícia es distingeix sense llegir res.</p></div>
+      </div>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/a075a96dc7.jpg" alt="Dorsal 33 — fosc amb cobranding"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Peça real · Supercopa Femenina</div>
+        <h3>Dorsal 33 — fosc amb cobranding</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>Jugadora centrada de cos sencer, “SUPERCOPA / FEMENINA” a dalt en dues línies, “GRUP BARNA” vertical gegant com a textura lateral, i el claim (“LA NOSTRA FORÇA. / EL NOSTRE ORIGEN.”) alineat a la dreta a l'alçada de la jugadora.</p></div><div class="sheet-block"><h4>Fons</h4><p>Negre amb textures i llums vermelles — ambient d'esdeveniment gran. La profunditat del fons fa que la peça sembli de competició professional.</p></div><div class="sheet-block"><h4>Lletres</h4><p>“SUPERCOPA” en blanc i “FEMENINA” en vermell: el mot que distingeix la fita és el que porta el color. Cobranding correcte segons manual: escut Barna centrat a dalt (el club primer) i logo oficial de la Supercopa a la cantonada, mai dins l'escut.</p></div><div class="sheet-block"><h4>Per què així</h4><p>La inversió fosc/clar respecte del cartell masculí és <b>paritat per disseny</b>: mateixa escala tipogràfica, mateixa producció, cap secció és la versió reduïda de l'altra — i les dues peces conviuen a la graella sense anul·lar-se.</p></div>
+      </div>
+    </div>
+    <div class="sheetgroup">
+      <h3>Sènior B — renovacions de plantilla</h3>
+      <p>La notícia és <b>la persona</b>. Registre editorial, proper i premium, no d'espectacle: el cognom es converteix en el monument tipogràfic i la resta d'informació es queda petita i ordenada. Diu “aquest jugador importa” sense demanar prestada l'èpica de la Supercopa.<br><br>És un <b>parell de colorways</b>, igual que el cos tècnic amb la pissarra fosca i clara: <b>masculí = fons crema amb el cognom en vermell</b>, <b>femení = fons vermell amb el cognom en blanc</b>. Mateixa retícula, mateixa línia vertical blanca, mateix bloc informatiu, mateix peu — només s'inverteix el color. Convenció de nom: primer el <b>cognom</b> com a wordmark gegant, el nom de pila a sota.</p>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/0bfe6d5a90.jpg" alt="David Alegre — editorial clar"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Peça real · Renovació · Sènior B Masculí</div>
+        <h3>David Alegre — editorial clar</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>El cognom “ALEGRE” com a wordmark gegant vermell omplint tot el llenç, amb la foto neta per davant. El bloc informatiu és petit i va a baix a l'esquerra; una línia vertical fina blanca travessa la peça — un gest d'editorial de revista, no de cartell d'estadi.</p></div><div class="sheet-block"><h4>Fons</h4><p>Clar i calmat. La renovació d'un jugador de Sènior B no és una fita de competició: el registre és proper i premium, no d'espectacle.</p></div><div class="sheet-block"><h4>Lletres</h4><p>Aquí el protagonisme tipogràfic és el wordmark; per això el nom al bloc informatiu va en una grotesca rodona amb punt final (“David Alegre.”, “renovació.”) — el punt dona to de declaració serena, i no competeix amb el cognom gegant.</p></div><div class="sheet-block"><h4>Per què així</h4><p>Quan la notícia és <b>la persona</b>, el seu cognom es converteix en el monument tipogràfic. Diu “aquest jugador importa” sense inflar-ho amb èpica prestada — i deixa el registre Supercopa reservat per a les fites d'equip.</p></div>
+      </div>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/7e1cf3c0a4.jpg" alt="Nora García — editorial vermell"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Peça real · Renovació · Sènior B Femení</div>
+        <h3>Nora García — editorial vermell</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>Idèntica a la peça de David Alegre: “CB GRUP BARNA” centrat a dalt, cognom gegant de vora a vora, jugadora retallada al centre-dreta, línia vertical fina que travessa la peça, bloc informatiu a baix-esquerra, escut petit a baix-esquerra i peu “RENOVACIÓ · #SOMCLOT”. El cognom (“GARCIA”) va damunt del nom de pila (“NORA”), com a l'altra peça.</p></div>
+        <div class="sheet-block"><h4>Fons</h4><p><b>Vermell ple amb el cognom en blanc</b> — la inversió exacta del colorway masculí (crema amb el cognom en vermell). No és una peça diferent: és la mateixa plantilla amb els dos colors intercanviats.</p></div>
+        <div class="sheet-block"><h4>Lletres</h4><p>Mateixa jerarquia que la peça masculina: wordmark condensat gegant, nom en grotesca rodona amb punt final (“RENOVADA.”), i el bloc de categoria en mono petit (SÈNIOR B · FEMENÍ · 2a Catalana · Temporada 26·27). El participi es concorda — “renovació.” / “RENOVADA.”</p></div>
+        <div class="sheet-block"><h4>Per què així</h4><p>El parell crema/vermell fa la mateixa feina que el parell fosc/clar del cos tècnic: evita que dues renovacions seguides es llegeixin com la mateixa peça repetida a la graella, i manté la <b>paritat literal</b> — mateixa escala, mateixa producció, cap secció amb versió reduïda.</p></div>
+      </div>
+    </div>
+    <div class="sheetgroup">
+      <h3>Portades de sèries de contingut</h3>
+      <p>La notícia és <b>el contingut</b>, no qui hi surt. És l'única família amb vel vermell/negre sobre tota la foto, i l'única amb capçalera fixa (nom de sèrie + capítol): el que fa que capítols diferents es llegeixin com una col·lecció i no com peces soltes.</p>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/5013cc956a.jpg" alt="Radar Barna"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Plantilla de sèrie · Contingut recurrent</div>
+        <h3>Radar Barna — capçalera fixa i vel</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>Pastilla amb el <b>nom de la sèrie</b> a dalt-esquerra i etiqueta de capítol just a sota (“CAP. 01”), escut top-right, i el missatge del capítol a baix. La capçalera no canvia mai entre capítols: només el número i el text de baix.</p></div>
+        <div class="sheet-block"><h4>Fons</h4><p>Única família de peces que porta <b>vel vermell/negre sobre tota la foto</b>. No és decoració: és el que fa que 20 capítols amb 20 fotos diferents es llegeixin com una sola col·lecció a la graella.</p></div>
+        <div class="sheet-block"><h4>Lletres</h4><p>Mateixa escala que la resta del sistema, però el titular baixa de mida respecte un anunci de fitxatge: aquí la notícia és <b>el contingut</b>, no la persona que surt a la foto.</p></div>
+        <div class="sheet-block"><h4>Per què així</h4><p>Una sèrie només funciona si es reconeix abans de llegir-la. La pastilla fixa + el vel constant fan de “capçalera de programa”; el lector sap que és Radar Barna d'un cop d'ull, com qui reconeix la sintonia d'un programa.</p></div>
+      </div>
+    </div>
+    <div class="sheetgroup" id="s-series">
+      <h3>Catàleg de sèries del club</h3>
+      <p>Totes comparteixen la mateixa plantilla (pastilla amb el nom de la sèrie + etiqueta de capítol + vel):
+      el que canvia entre elles és <b>de què va la notícia</b>. Les marcades com a “peça real” ja s'han publicat;
+      la resta hereten exactament la mateixa plantilla i encara estan per produir.</p>
+    </div>
+    <div class="seriesgrid">
+      <div class="serie">
+        <div class="top"><h4>Bàsquet femení</h4><span class="st real">Peça real</span></div>
+        <div class="news">La notícia és: què està passant al bàsquet femení — i que <b>aquí també passa</b></div>
+        <p>Connecta una onada global (WNBA, Caitlin Clark) amb el que fa el club. Foto de referència externa amb vel, i la baixada a terra al kickline: “Aquí, també.” És la sèrie que dona context i ambició al projecte femení sense inventar-se fites pròpies.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>La feina que no es veu</h4><span class="st real">Peça real</span></div>
+        <div class="news">La notícia és: <b>el procés</b>, no el resultat</div>
+        <p>Entrenaments, matinades, la banqueta, el que no surt al marcador. Fotos d'acció real, sense posar. És la sèrie que construeix pertinença: qui la veu entén que darrere d'un resultat hi ha mesos de gent.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>Escoleta</h4><span class="st real">Peça real</span></div>
+        <div class="news">La notícia és: <b>els primers passos</b> — i el públic real són <b>els pares i mares</b></div>
+        <p>Format <b>il·lustrat</b>, no fotogràfic: escena de pavelló dibuixada amb text superposat
+        (“Ara el pavelló també és seu · Hi ha equip. Hi ha entrenadores. Hi ha camí.”).
+        Registre càlid, sense marcadors ni estadístiques.
+        <b>Funciona:</b> és de les peces amb més interacció de la sèrie.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>Cantera</h4><span class="st nova">A produir</span></div>
+        <div class="news">La notícia és: <b>la progressió</b> — d'on surt un jugador del primer equip</div>
+        <p>Uneix escoleta i sènior en un sol relat: el mateix escut a totes les edats. Funciona amb parells (abans/ara, petit/gran) i és la prova visual del “pipeline” del club.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>Entrenadores cantera</h4><span class="st nova">A produir</span></div>
+        <div class="news">La notícia és: <b>qui forma</b> les que vindran</div>
+        <p>Variant de la plantilla de cos tècnic aplicada a la base femenina. Mateixa pissarra tàctica, mateixa escala que un entrenador sènior — la paritat es demostra no fent-ne una versió reduïda.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>Bàsquet masculí</h4><span class="st nova">A produir</span></div>
+        <div class="news">La notícia és: <b>el joc</b> de la secció masculina, no un resultat concret</div>
+        <p>Contrapès de la sèrie femenina perquè cap de les dues sembli l'excepció. Mateixa plantilla i mateixa freqüència: si una secció té sèrie pròpia i l'altra no, el sistema ja està dient alguna cosa que no volem dir.</p>
+      </div>
+    </div>
+    <div class="sheetgroup">
+      <h3>Institucional — els 3 pins</h3>
+      <p>La notícia és <b>el club</b>. Fons pla sense foto, escut centrat a dalt: registre d'anunci gran. Cadascuna fa una feina de pin diferent al perfil (nivell, ganxo extern, amplitud). És el registre que es desgasta més ràpid si s'abusa: convé reservar-lo per als anuncis que realment ho són.</p>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/c2b104d2d8.png" alt="“Hi van els dos.” — resultat confirmat"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Plantilla institucional · Fons negre</div>
+        <h3>“Hi van els dos.” — resultat confirmat</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>Escut centrat a dalt, eyebrow de context, titular central gegant i els dos checks com a únic text secundari. Tot a l'eix — cap element flotant.</p></div><div class="sheet-block"><h4>Fons</h4><p>Negre pla: solemnitat. Un resultat confirmat no necessita decoració, necessita pes.</p></div><div class="sheet-block"><h4>Lletres</h4><p>Titular en condensada gegant amb l'accent vermell només a “ELS DOS.” — la dada que importa. Secundari en Montserrat, dues línies.</p></div><div class="sheet-block"><h4>Per què així</h4><p>És el pin de NIVELL de l'aparador: un desconegut ha d'entendre en un segon que el club juga al màxim nivell català, sense conèixer cap nom.</p></div>
+      </div>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/f798165183.png" alt="“Som Clot.” — identitat de barri"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Plantilla institucional · Fons vermell</div>
+        <h3>“Som Clot.” — identitat de barri</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>La més despullada de totes: escut, dues paraules, tres dades. El buit és el missatge — no cal justificar la pertinença.</p></div><div class="sheet-block"><h4>Fons</h4><p>L'única peça del sistema on el vermell és el fons sencer: el crit d'identitat es permet el color d'identitat. L'accent s'inverteix a negre (“CLOT.”) perquè hi hagi contrast.</p></div><div class="sheet-block"><h4>Lletres</h4><p>Condensada gegant centrada; “34 equips · 450 famílies” en Montserrat com a única prova factual.</p></div><div class="sheet-block"><h4>Per què així</h4><p>És el pin d'AMPLITUD: diu “hi ha més d'un equip, això és un barri sencer”. <b>Advertència d'ús</b>: el registre èpic en estàtic es desgasta si es repeteix — reservar-lo, no fer-ne el fons de pantalla del perfil.</p></div>
+      </div>
+    </div>
+    <div class="sheet">
+      <div class="sheet-img"><img loading="lazy" decoding="async" src="img/28db396bf5.png" alt="“Vols jugar?” — captació"></div>
+      <div class="sheet-body">
+        <div class="sheet-cat">Plantilla institucional · Fons blanc + marc</div>
+        <h3>“Vols jugar?” — captació</h3>
+        <div class="sheet-block"><h4>Composició</h4><p>Escut centrat, pregunta directa com a titular, les quatre etapes del club com a resposta, i l'únic botó CTA de tot el sistema (“PLACES OBERTES”).</p></div><div class="sheet-block"><h4>Fons</h4><p>Blanc pur amb el marc vermell obligatori del manual: la peça més oberta i respirada, perquè el missatge és una invitació, no una declaració.</p></div><div class="sheet-block"><h4>Lletres</h4><p>“VOLS” en negre, “JUGAR?” en vermell — la pregunta sencera es llegeix en un cop d'ull i l'accent cau al verb. Peu en mono petit: “No cal experiència”, la frase que treu la por.</p></div><div class="sheet-block"><h4>Per què així</h4><p>És el pin de GANXO EXTERN i l'única peça de conversió directa: per això és l'única amb botó. Tot el disseny treballa perquè la resposta mental del lector sigui “sí”.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s-bench">
+    <div class="section-head"><h2><span class="n">10</span> · Benchmark — com ho fan els altres</h2></div>
+    <p style="font-size:13px;color:var(--muted);max-width:78ch;margin-bottom:18px">
+      Peces reals d'altres clubs, mirades per situar les nostres decisions.
+      <span style="color:var(--muted)">(Descrites a partir de les peces publicades; artwork no incrustat.)</span>
+    </p>
+
+    <div class="sheetgroup"><h3>CB Boet Mataró — Supercopa 26/27</h3>
+      <p>Mateix club, mateixa competició, mateixa temporada, dues peces amb <b>nivell de producció diferent</b>.</p>
+    </div>
+
+    <div class="vs">
+      <div class="vscol">
+        <div class="who">Boet Mataró · Masculí</div>
+        <h4>Pau Moreno — renovació</h4>
+        <ul>
+          <li><b>Fons:</b> escenografia completa — cel dramàtic al capvespre, pista urbana, cistella, silueta al fons</li>
+          <li><b>Tractament:</b> il·luminació atmosfèrica, textura, profunditat de camp</li>
+          <li><b>Escut del club:</b> present, a dalt-esquerra</li>
+          <li><b>Ganxo:</b> “HA ARRIBAT EL MOMENT” — èpica, expectació</li>
+        </ul>
+      </div>
+      <div class="vscol bad">
+        <div class="who">Boet Mataró · Femení</div>
+        <h4>Marina Iborra — Supercopa</h4>
+        <ul>
+          <li><b>Fons:</b> taronja pla amb textura mínima — <b>cap escena, cap context</b></li>
+          <li><b>Tractament:</b> retall sobre color, sense atmosfera ni profunditat</li>
+          <li><b>Escut del club:</b> <b>no hi és</b></li>
+          <li><b>Ganxo:</b> “PUJA DE LA CANTERA” — la situa com a promesa, no com a protagonista</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <h4>El patró del sector: el femení produït com una categoria B</h4>
+      <p>Ningú escriu “fes la femenina més senzilla”, però el resultat visual ho diu igualment, i és el que llegeix
+      qui passa per la graella. <b>És el patró dominant del bàsquet de base:</b> el femení surt amb menys producció,
+      i les <b>entrenadores pràcticament no s'anuncien</b> — la majoria de clubs només publiquen cos tècnic masculí.</p>
+      <p class="hit">Aquí hi ha el nostre diferencial real: el CB Grup Barna anuncia entrenadores amb <b>la mateixa
+      plantilla, la mateixa escala i la mateixa producció</b> que els entrenadors. No és un detall d'estil — és
+      pràcticament l'única cosa que cap altre club del nostre entorn està fent.</p>
+    </div>
+
+    <div class="sheetgroup"><h3>La normalització de la imatge generada</h3>
+      <p>Els clubs de referència ja treballen amb <b>IA i retoc de cara</b> a les peces d'anunci. No és una drecera
+      nostra: és l'estàndard actual del sector.</p>
+    </div>
+
+    <div class="vs" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <div class="vscol">
+        <div class="who">FC Barcelona Bàsquet</div>
+        <h4>Fitxatges i cos tècnic</h4>
+        <ul>
+          <li><b>Peça heroica generada:</b> escenes impossibles — Sagrada Família al capvespre, pavelló ple, llum irreal (Balcerowski, Sekulić, Gibson)</li>
+          <li><b>Cara retocada:</b> pell, llum i mirada tractades fins a semblar un render</li>
+          <li><b>Alternança:</b> després publiquen la <b>foto real</b> del mateix jugador amb el lockup “ÉS CULER”</li>
+          <li><b>Lectura:</b> la peça generada crea l'esdeveniment; la real el confirma</li>
+        </ul>
+      </div>
+      <div class="vscol">
+        <div class="who">CB Cornellà</div>
+        <h4>Felicitació a la selecció</h4>
+        <ul>
+          <li><b>Peça 100% generada:</b> plantilla sencera composta amb trofeu, confeti i estadi irreal</li>
+          <li><b>Cares generades</b> de jugadors que no són del club ni del seu esport</li>
+          <li><b>Ús:</b> un club de bàsquet felicitant la selecció de futbol — contingut d'actualitat, no propi</li>
+          <li><b>Lectura:</b> la imatge generada ja s'usa fins i tot per a peces de conversa, no només d'anunci</li>
+        </ul>
+      </div>
+      <div class="vscol">
+        <div class="who">CB Boet Mataró</div>
+        <h4>“Som diferents. Aquesta és la nostra identitat.”</h4>
+        <ul>
+          <li><b>Quatre jugadors de base</b>, nois i noies barrejats a la mateixa escala</li>
+          <li><b>Cares modificades amb IA</b> — no són retrats documentals</li>
+          <li><b>Missatge de club</b> sostingut per persones, no per text sobre fons pla</li>
+          <li><b>Lectura:</b> fins i tot la peça “de valors” es construeix amb imatge generada</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict" style="border-left-color:#141416">
+      <h4>La il·lustració, per a contingut de base</h4>
+      <p>A l'escoleta i la base hi ha una raó que no tenen les altres seccions: <b>són menors</b>. La il·lustració
+      permet explicar l'escena — el pavelló ple, l'equip, l'entrenadora acompanyant — <b>sense exposar la cara de
+      cap nen ni de cap nena</b>, i sense dependre de permisos d'imatge de cada família.</p>
+      <p>A més, el públic real d'aquestes peces <b>no són els nens: són els pares i mares</b>. El dibuix permet
+      mostrar el club com voldrien que fos l'experiència del seu fill o filla, que és exactament el que estan
+      decidint quan miren el perfil.</p>
+    </div>
+
+    <div class="verdict">
+      <h4>Per què això valida el nostre mètode</h4>
+      <p>Si el Barça genera l'escena i retoca la cara per a un fitxatge, i el Boet ho fa fins i tot a la peça
+      d'identitat, <b>la imatge generada ja no és una excepció a justificar: és el llenguatge corrent del sector</b>.</p>
+      <p>El que sí que cal mantenir és <b>l'alternança</b> — peça generada per crear l'esdeveniment, foto real
+      després per confirmar-lo. És el que fa el Barça i és la manera de fer servir la IA sense que el club deixi
+      de semblar real.</p>
+    </div>
+
+    <div class="sheetgroup"><h3>Quan un format nostre l'adopta la competència</h3>
+      <p>El Sant Feliuenc ha reproduït un format de vídeo nostre, com abans havia passat amb l'activació del partner
+      Armand Òptics. Que un rival copiï un format vol dir que funciona — el risc no és la còpia, és que el recurs
+      es desgasti per repetició. <b>Quan passa, toca evolucionar el format, no defensar-lo.</b><br>
+      Referència: <a href="https://www.instagram.com/reel/DZtvAoQR_7L/" style="color:var(--red)">instagram.com/reel/DZtvAoQR_7L</a></p>
+    </div>
+  </section>
+
+  <section id="s-recepta">
+    <div class="section-head"><h2><span class="n">11</span> · Recepta reutilitzable</h2></div>
+    <div class="code"><pre><span class="c1">/* SÈRIE — escut top-right, pastilla+etiqueta */</span>
+&lt;div class="story bg-{white|red|black|photo}"&gt;
+  &lt;img class="photo" src="foto-real.jpg"&gt;
+  &lt;div class="plate"&gt;&lt;/div&gt;  <span class="c1">// anunci d'una persona</span>
+  &lt;div class="veil"&gt;&lt;/div&gt;   <span class="c1">// sèrie recurrent</span>
+  &lt;img class="logo" src="escut.png"&gt;
+  &lt;div class="pill"&gt;<span class="c2">Nom de la sèrie.</span>&lt;/div&gt;
+  &lt;div class="tag1"&gt;<span class="c2">Cap. XX</span>&lt;/div&gt;
+  &lt;div class="content"&gt;
+    &lt;div class="eyebrow"&gt;<span class="c2">De qui/què va</span>&lt;/div&gt;
+    &lt;div class="headline"&gt;<span class="c2">Titular (Bebas Neue).</span>&lt;/div&gt;
+    &lt;div class="kickline"&gt;&lt;span class="bar"&gt;&lt;/span&gt;<span class="c2">Frase de tancament.</span>&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="foot"&gt;<span class="c2">CB Grup Barna · El Clot</span>&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="c1">/* INSTITUCIONAL — escut centrat, sense pastilla/etiqueta */</span>
+&lt;div class="story inst bg-{white|red|black}"&gt;
+  &lt;img class="logo" src="escut.png"&gt;  <span class="c1">// .inst el centra automàticament</span>
+  &lt;div class="ieyebrow"&gt;<span class="c2">Context breu</span>&lt;/div&gt;
+  &lt;div class="ititle"&gt;<span class="c2">Titular</span>&lt;br&gt;&lt;span class="acc"&gt;<span class="c2">Accent.</span>&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="isecondary"&gt;<span class="c2">Text secundari, 2-3 línies</span>&lt;/div&gt;
+  &lt;div class="icta"&gt;&lt;span&gt;<span class="c2">CTA opcional</span>&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="foot"&gt;<span class="c2">CB Grup Barna · El Clot, Barcelona</span>&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="c1">/* obligatòria en bg-white */</span>
+.story.bg-white { border: 26px solid <span class="c2">#E31E24</span>; }</pre></div>
+  </section>
+</div>
+
+<footer class="page">
+  <span>CB Grup Barna · Sistema de portades v3 · font: Identitat Visual 2026 v1.1</span>
+  <span>Canvas natiu 1080×1920px — previsualitzat a escala 1:3</span>
+</footer>
