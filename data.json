@@ -74,25 +74,24 @@
     "temporada": "2025-2026",
     "destacat": {
       "nom": "Alsea",
-      "rol": "Impulsor del 3x3 Westfield Glories",
-      "descripcio": "Operador multinacional de restauracio, companyia cotitzada, present a Espanya, Europa i America Llatina.",
+      "rol": "Impulsor del 3x3 Westfield Glòries",
+      "descripcio": "Operador multinacional de restauració, companyia cotitzada, present a Espanya, Europa i Amèrica Llatina.",
       "marquesEspanya": ["Domino's Pizza", "Starbucks", "Foster's Hollywood", "Ginos", "VIPS"],
       "_verificarAna": "Confirmar el llistat de marques i el redactat amb Alsea abans de qualsevol us comercial."
     },
     "gold": [
-      { "nom": "Westfield Glories", "abast": "3x3 i esdeveniments", "desDe": "2023", "temporades": 3 },
-      { "nom": "Globasket", "alies": "GBK", "equip": "Senior A Masculi", "modalitat": "intercanvi per difusio" },
-      { "nom": "Instax", "equip": "Senior A Femeni", "modalitat": "intercanvi per difusio", "durada": "1 any" }
+      { "nom": "Westfield Glòries", "abast": "3x3 i esdeveniments", "desDe": "2023", "temporades": 3 },
+      { "nom": "Globasket", "alies": "GBK", "equip": "Sènior A Masculí", "modalitat": "intercanvi per difusió" },
+      { "nom": "Instax", "equip": "Sènior A Femení", "modalitat": "intercanvi per difusió", "durada": "1 any" }
     ],
     "silver": [
-      { "nom": "Clinica Dental", "abast": "3 equips" },
-      { "nom": "Farmacies" },
-      { "nom": "Celia", "equip": "Magics" },
+      { "nom": "Clínica Dental", "abast": "3 equips" },
+      { "nom": "Farmàcies" },
+      { "nom": "Celia", "equip": "Màgics" },
       { "nom": "Herbolari" }
     ],
-    "bronze": ["Melosa", "Eix Clot", "Optiques", "Romeo", "Aquatica", "Jane", "Step Back"],
+    "bronze": ["Melosa", "Eix Clot", "Òptiques", "Romeo", "Aquàtica", "Jane", "Step Back"],
     "colaboracions": [
-      { "nom": "Wilson", "tipus": "material", "detall": "Condicions especials en pilotes i cessio de material per a concursos i esdeveniments" },
       { "nom": "Tot Salut", "tipus": "material" },
       { "nom": "Ovella", "tipus": "material" },
       { "nom": "Lands", "tipus": "material" }
@@ -107,12 +106,39 @@
       }
     ],
     "avantatgesFamilies": [
-      { "nom": "Hoops", "acord": "Sorteig de regals entre les families del club" },
-      { "nom": "Isla Fantasia", "acord": "25 entrades de regal, preu reduit de 13 EUR per nen del Campus i entrada gratuita per als entrenadors", "_verificarAna": "Confirmar amb Isla Fantasia que es pot publicar la tarifa de 13 EUR." },
+      { "nom": "Hoops", "acord": "Sorteig de regals entre les famílies del club" },
+      { "nom": "Isla Fantasía", "acord": "25 entrades de regal, preu reduït de 13 € per nen del Campus i entrada gratuïta per als entrenadors", "_verificarAna": "Confirmar amb Isla Fantasia que es pot publicar la tarifa de 13 EUR." },
       { "nom": "Wilson", "acord": "Material per a concursos i esdeveniments" }
     ],
-    "totalPartners": 25
+    "totalPartners": 26,
+    "resum": {
+      "_note": "Comptadors per al dashboard de marqueting i xarxes i per a la landing /partners/.",
+      "marquesIEntitats": 33,
+      "partnersIColaboradors": 26,
+      "empresesIComercos": 22,
+      "xarxaContingut": 9,
+      "postsColaboratius": 10,
+      "institucionsITecnics": 4
+    },
+    "landing": "https://cbgrupbarna.info/partners/"
   },
+
+  "programesInstitucionals": [
+    {
+      "id": "fede-mentoria-entrenadores",
+      "nom": "Mentoria i beques per a entrenadores",
+      "entitat": "Federació",
+      "impulsa": {
+        "nom": "Olga Praderas",
+        "rol": "Lidera el programa de bàsquet femení dins de la Federació",
+        "_verificarAna": "Confirmar amb Olga Praderas / la Federacio el carrec exacte i la ressenya abans de publicar. NO afegir dades biografiques sense confirmar."
+      },
+      "quan": "2026-09",
+      "lloc": "La Nau · CB Grup Barna",
+      "descripcio": "Sessió a la Nau per explicar el programa de mentoria i beques perquè més dones es treguin el títol d'entrenadora.",
+      "estat": "confirmat"
+    }
+  ],
 
   "colaboracionsContingut": {
     "_note": "Xarxa de contingut 25-26: mitjans, institucions i marques on el club publica als SEUS canals (produim nosaltres, ells aproven) o amb qui s'ha fet post col·laboratiu.",
@@ -121,18 +147,18 @@
       { "nom": "Canal Disset", "tipus": "mitja", "posts": 1 },
       { "nom": "Penjats de l'Aro", "tipus": "mitja-basquet", "posts": 1 },
       { "nom": "El Clotenc", "tipus": "mitja-barri", "posts": 1 },
-      { "nom": "Gracia Multiesport", "tipus": "club", "posts": 1 },
-      { "nom": "Nil Lopez", "tipus": "creador", "posts": 1 }
+      { "nom": "Gràcia Multiesport", "tipus": "club", "posts": 1 },
+      { "nom": "Nil López", "tipus": "creador", "posts": 1 }
     ],
     "institucional": [
       { "nom": "Alcaldia de Barcelona", "tipus": "institucional", "posts": 1 },
-      { "nom": "David Escude", "carrec": "Regidor d'Esports de Barcelona", "tipus": "institucional", "posts": 2 }
+      { "nom": "David Escudé", "carrec": "Regidor d'Esports de Barcelona", "tipus": "institucional", "posts": 2 }
     ],
     "postsColaboratius": [
-      { "nom": "Westfield Glories", "projecte": "3x3 Westfield Glories" },
+      { "nom": "Westfield Glòries", "projecte": "3x3 Westfield Glories" },
       { "nom": "Time Chamber", "projecte": "Campus Time Chamber" },
-      { "nom": "Instax", "projecte": "Sessio de fotos Senior A Femeni" },
-      { "nom": "Globasket", "projecte": "Senior A Masculi" },
+      { "nom": "Instax", "projecte": "Sessió de fotos Sènior A Femení" },
+      { "nom": "Globasket", "projecte": "Sènior A Masculí" },
       { "nom": "Foto Jane", "projecte": "Fotografia" }
     ],
     "totalEntitats": 9,
