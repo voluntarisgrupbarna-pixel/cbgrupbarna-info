@@ -199,6 +199,16 @@
   .sheetgroup h3{font-family:'Montserrat',sans-serif;font-weight:900;font-size:19px;color:var(--text);margin-bottom:7px;}
   .sheetgroup p{font-size:13px;line-height:1.65;color:var(--muted);max-width:80ch;}
   .sheetgroup p b{color:var(--text);}
+  .seriesgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:14px;}
+  .serie{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:18px 20px;}
+  .serie .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px;}
+  .serie h4{font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;color:var(--text);}
+  .serie .st{flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+  .serie .st.real{background:var(--red);color:#fff;}
+  .serie .st.nova{background:var(--code-bg);color:var(--muted);border:1px solid var(--panel-border);}
+  .serie .news{font-size:12.5px;color:var(--text);margin-bottom:7px;}
+  .serie .news b{color:var(--red);}
+  .serie p{font-size:12.5px;line-height:1.6;color:var(--muted);}
 
   @media print{
     .story-slot,.story-frame,.swatch,.rule,.pin,.lesson,.anatomy,.type-panel,.code,.nope div{break-inside:avoid;}
@@ -654,6 +664,44 @@
         <div class="sheet-block"><h4>Fons</h4><p>Única família de peces que porta <b>vel vermell/negre sobre tota la foto</b>. No és decoració: és el que fa que 20 capítols amb 20 fotos diferents es llegeixin com una sola col·lecció a la graella.</p></div>
         <div class="sheet-block"><h4>Lletres</h4><p>Mateixa escala que la resta del sistema, però el titular baixa de mida respecte un anunci de fitxatge: aquí la notícia és <b>el contingut</b>, no la persona que surt a la foto.</p></div>
         <div class="sheet-block"><h4>Per què així</h4><p>Una sèrie només funciona si es reconeix abans de llegir-la. La pastilla fixa + el vel constant fan de “capçalera de programa”; el lector sap que és Radar Barna d'un cop d'ull, com qui reconeix la sintonia d'un programa.</p></div>
+      </div>
+    </div>
+    <div class="sheetgroup">
+      <h3>Catàleg de sèries del club</h3>
+      <p>Totes comparteixen la mateixa plantilla (pastilla amb el nom de la sèrie + etiqueta de capítol + vel):
+      el que canvia entre elles és <b>de què va la notícia</b>. Les marcades com a “peça real” ja s'han publicat;
+      la resta hereten exactament la mateixa plantilla i encara estan per produir.</p>
+    </div>
+    <div class="seriesgrid">
+      <div class="serie">
+        <div class="top"><h4>Bàsquet femení</h4><span class="st real">Peça real</span></div>
+        <div class="news">La notícia és: què està passant al bàsquet femení — i que <b>aquí també passa</b></div>
+        <p>Connecta una onada global (WNBA, Caitlin Clark) amb el que fa el club. Foto de referència externa amb vel, i la baixada a terra al kickline: “Aquí, també.” És la sèrie que dona context i ambició al projecte femení sense inventar-se fites pròpies.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>La feina que no es veu</h4><span class="st real">Peça real</span></div>
+        <div class="news">La notícia és: <b>el procés</b>, no el resultat</div>
+        <p>Entrenaments, matinades, la banqueta, el que no surt al marcador. Fotos d'acció real, sense posar. És la sèrie que construeix pertinença: qui la veu entén que darrere d'un resultat hi ha mesos de gent.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>Escoleta</h4><span class="st nova">A produir</span></div>
+        <div class="news">La notícia és: <b>els primers passos</b> — el club des de baix de tot</div>
+        <p>El registre més càlid del sistema: cares petites, joc, cap discurs competitiu. Sense marcadors ni estadístiques. És la porta d'entrada per a famílies noves, i per això ha de fer sentir acollida abans que nivell.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>Cantera</h4><span class="st nova">A produir</span></div>
+        <div class="news">La notícia és: <b>la progressió</b> — d'on surt un jugador del primer equip</div>
+        <p>Uneix escoleta i sènior en un sol relat: el mateix escut a totes les edats. Funciona amb parells (abans/ara, petit/gran) i és la prova visual del “pipeline” del club.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>Entrenadores cantera</h4><span class="st nova">A produir</span></div>
+        <div class="news">La notícia és: <b>qui forma</b> les que vindran</div>
+        <p>Variant de la plantilla de cos tècnic aplicada a la base femenina. Mateixa pissarra tàctica, mateixa escala que un entrenador sènior — la paritat es demostra no fent-ne una versió reduïda.</p>
+      </div>
+      <div class="serie">
+        <div class="top"><h4>Bàsquet masculí</h4><span class="st nova">A produir</span></div>
+        <div class="news">La notícia és: <b>el joc</b> de la secció masculina, no un resultat concret</div>
+        <p>Contrapès de la sèrie femenina perquè cap de les dues sembli l'excepció. Mateixa plantilla i mateixa freqüència: si una secció té sèrie pròpia i l'altra no, el sistema ja està dient alguna cosa que no volem dir.</p>
       </div>
     </div>
     <div class="sheetgroup">
