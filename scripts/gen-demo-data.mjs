@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const __d = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = join(__d, '..', 'panel-instagram');
-const REF = '2026-07-24';
+const REF = '2026-07-26';
 
 // ── Deterministic pseudo-noise (sense Math.random) ────────────────────────
 function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return ((h >>> 0) % 1000) / 1000; }
