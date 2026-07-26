@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dashboard Màrqueting i Xarxes · CB Grup Barna</title>
+<meta name="description" content="Panell intern de màrqueting i xarxes socials del CB Grup Barna: guia editorial, galeries, eines d'activació i accessos ràpids.">
+<link rel="icon" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#E31E24; --red-dark:#a81318;
+    --ink:#0d0d0f; --paper:#f4f5f7; --panel:#ffffff; --panel-border:rgba(13,13,15,0.10);
+    --text:#16171b; --muted:#6b6f76; --code-bg:#eceef1;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#111214; --panel:#18191c; --panel-border:rgba(255,255,255,0.12);
+      --text:#eceef1; --muted:#9a9ea6; --code-bg:#1e1f23; }
+  }
+  :root[data-theme="dark"]{ --paper:#111214; --panel:#18191c; --panel-border:rgba(255,255,255,0.12);
+    --text:#eceef1; --muted:#9a9ea6; --code-bg:#1e1f23; }
+  :root[data-theme="light"]{ --paper:#f4f5f7; --panel:#ffffff; --panel-border:rgba(13,13,15,0.10);
+    --text:#16171b; --muted:#6b6f76; --code-bg:#eceef1; }
+
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{background:var(--paper);color:var(--text);
+    font-family:'Montserrat',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;line-height:1.5;}
+  a{color:inherit;}
+  a:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px;}
+
+  /* ---- topbar ---- */
+  .topbar{position:sticky;top:0;z-index:50;background:var(--panel);border-bottom:1px solid var(--panel-border);}
+  .topbar-in{max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:14px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:14px;text-decoration:none;}
+  .brand img{width:26px;height:auto;}
+  .badge-int{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.2px;
+    text-transform:uppercase;color:var(--muted);border:1px solid var(--panel-border);padding:4px 9px;border-radius:20px;}
+
+  /* ---- hero ---- */
+  .hero{background:var(--ink);color:#fff;padding:52px 24px 46px;}
+  .hero-in{max-width:1180px;margin:0 auto;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;letter-spacing:2.2px;
+    text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--red);}
+  .hero h1{font-weight:900;font-size:clamp(28px,4.6vw,44px);line-height:1.06;letter-spacing:-0.02em;
+    margin-bottom:12px;color:#fff;text-wrap:balance;}
+  .hero h1 em{color:var(--red);font-style:normal;}
+  .hero p{max-width:60ch;color:rgba(255,255,255,.72);font-size:15px;line-height:1.7;}
+
+  main{max-width:1180px;margin:0 auto;padding:40px 24px 80px;}
+
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:34px 0 16px;}
+  .sec-head:first-of-type{margin-top:0;}
+  .sec-head h2{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:1.6px;
+    text-transform:uppercase;color:var(--muted);}
+  .sec-head .n{color:var(--red);}
+  .sec-head::after{content:"";flex:1;height:1px;background:var(--panel-border);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;}
+
+  .card{background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;padding:20px 22px;
+    display:flex;flex-direction:column;gap:8px;text-decoration:none;
+    transition:border-color .15s, transform .15s;}
+  .card:hover{border-color:var(--red);transform:translateY(-2px);}
+  .card .tag{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:9.5px;letter-spacing:1.4px;
+    text-transform:uppercase;color:var(--red);}
+  .card h3{font-weight:900;font-size:16.5px;line-height:1.25;}
+  .card p{font-size:13px;color:var(--muted);line-height:1.6;}
+  .card .go{margin-top:auto;padding-top:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    letter-spacing:.8px;color:var(--muted);}
+  .card:hover .go{color:var(--red);}
+
+  .card.feature{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .card.feature h3{font-size:22px;}
+  .card.feature p{color:rgba(255,255,255,.72);}
+  .card.feature .tag{color:#fff;}
+  .card.feature .go{color:rgba(255,255,255,.6);}
+  .card.feature:hover{border-color:var(--red);}
+  .card.feature:hover .go{color:#fff;}
+
+  .linkrow{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--panel-border);
+    border-radius:30px;padding:9px 16px;font-size:13px;font-weight:600;text-decoration:none;
+    transition:border-color .15s;}
+  .chip:hover{border-color:var(--red);}
+  .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;}
+
+  .note{background:var(--code-bg);border-left:4px solid var(--red);border-radius:8px;padding:16px 20px;
+    font-size:13px;line-height:1.65;color:var(--muted);max-width:80ch;}
+  .note b{color:var(--text);}
+
+  footer{max-width:1180px;margin:0 auto;padding:22px 24px 50px;border-top:1px solid var(--panel-border);
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.8px;color:var(--muted);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="/"><img src="/logo.png" alt=""> CB Grup Barna</a>
+    <span class="badge-int">Ús intern</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-in">
+    <div class="eyebrow">Dashboard · Màrqueting i xarxes</div>
+    <h1>Tot el que fa falta per <em>publicar</em></h1>
+    <p>Accés ràpid a la guia editorial, les galeries de fotos, les eines d'activació i els perfils del club.
+    Si has de dissenyar o publicar qualsevol cosa, comença per la guia.</p>
+  </div>
+</section>
+
+<main>
+
+  <div class="sec-head"><h2><span class="n">01</span> · Marca i criteri</h2></div>
+  <div class="grid">
+    <a class="card feature" href="/guia-editorial/">
+      <span class="tag">Comença aquí</span>
+      <h3>Guia editorial</h3>
+      <p>Color i tipografia exactes, anatomia de cada plantilla, una fitxa per cartell explicant per què està
+      fet així, catàleg de sèries i benchmark del sector. També descarregable en PDF.</p>
+      <span class="go">Obrir la guia →</span>
+    </a>
+    <a class="card" href="/guia-editorial/guia-editorial-cbgb.pdf" download>
+      <span class="tag">Descàrrega</span>
+      <h3>Guia editorial (PDF)</h3>
+      <p>La mateixa guia en A4, amb cada secció de fitxes a pàgina nova. Per imprimir o passar a Junta.</p>
+      <span class="go">Descarregar PDF →</span>
+    </a>
+    <a class="card" href="/">
+      <span class="tag">Web pública</span>
+      <h3>cbgrupbarna.info</h3>
+      <p>La web del club: equips, inscripcions, calendari i el feed de xarxes.</p>
+      <span class="go">Obrir el site →</span>
+    </a>
+  </div>
+
+  <div class="sec-head"><h2><span class="n">02</span> · Fotos i galeries</h2></div>
+  <div class="grid">
+    <a class="card" href="/fotos/">
+      <span class="tag">Galeria</span>
+      <h3>Galeria de fotos</h3>
+      <p>Fotos per equips, temporades i esdeveniments. El material de partida per a qualsevol cartell.</p>
+      <span class="go">Obrir galeria →</span>
+    </a>
+    <a class="card" href="/fotos/admin.html">
+      <span class="tag">Gestió</span>
+      <h3>Admin galeria</h3>
+      <p>Pujar fotos, crear esdeveniments i ordenar el material.</p>
+      <span class="go">Obrir admin →</span>
+    </a>
+    <a class="card" href="/fotos-esdeveniments/">
+      <span class="tag">Esdeveniments</span>
+      <h3>Fotos d'esdeveniments</h3>
+      <p>Cobertures per esdeveniment, ja seleccionades.</p>
+      <span class="go">Veure →</span>
+    </a>
+    <a class="card" href="/galeria-3x3-glories/">
+      <span class="tag">3×3 Glòries</span>
+      <h3>Galeria 3×3 Westfield</h3>
+      <p>522 fotos oficials del torneig 3×3 a Westfield Glòries.</p>
+      <span class="go">Veure →</span>
+    </a>
+  </div>
+
+  <div class="sec-head"><h2><span class="n">03</span> · Activacions i campanyes</h2></div>
+  <div class="grid">
+    <a class="card" href="/ruleta-3x3/">
+      <span class="tag">Joc · Captació</span>
+      <h3>Ruleta 3×3</h3>
+      <p>Mecànica de sorteig amb registre: 3 tirades, premi reclamable i seguiment obligatori a IG i TikTok.</p>
+      <span class="go">Obrir ruleta →</span>
+    </a>
+    <a class="card" href="/mascota/">
+      <span class="tag">Contingut</span>
+      <h3>Mascota</h3>
+      <p>Vídeos i material de la mascota del club, en català i castellà.</p>
+      <span class="go">Veure →</span>
+    </a>
+    <a class="card" href="/orgull/">
+      <span class="tag">Campanya</span>
+      <h3>Mes de l'Orgull</h3>
+      <p>Campanya “bàsquet per a tothom”.</p>
+      <span class="go">Veure →</span>
+    </a>
+    <a class="card" href="/premidonaesport/">
+      <span class="tag">Institucional</span>
+      <h3>Premi Dona i Esport</h3>
+      <p>Dossier del Mètode Barna per al 19è Premi Dona i Esport: pipeline femení, investigació i patrocinis.</p>
+      <span class="go">Obrir dossier →</span>
+    </a>
+  </div>
+
+  <div class="sec-head"><h2><span class="n">04</span> · Perfils i canals</h2></div>
+  <div class="linkrow">
+    <a class="chip" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener"><span class="dot"></span>Instagram @cbgrupbarna</a>
+    <a class="chip" href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener"><span class="dot"></span>TikTok @cbgrupbarna</a>
+    <a class="chip" href="https://cbgrupbarna-3x3timechamber.com/" target="_blank" rel="noopener"><span class="dot"></span>3×3 Time Chamber</a>
+    <a class="chip" href="https://wa.me/34698425153" target="_blank" rel="noopener"><span class="dot"></span>WhatsApp club</a>
+  </div>
+
+  <div class="sec-head"><h2><span class="n">05</span> · Abans de publicar</h2></div>
+  <div class="note">
+    <b>Quatre comprovacions ràpides</b> — si en fallen dues, val la pena reformular la peça.<br><br>
+    1. Un desconegut entén aquesta peça <b>sense saber cap nom</b>?<br>
+    2. Es veu el <b>vermell del club o l'escut</b>?<br>
+    3. <b>Trenca el mur</b> — no és el cinquè fitxatge seguit a la graella?<br>
+    4. Si és text èpic, <b>té moviment o cara</b>? El registre institucional en estàtic es desgasta si es repeteix.
+  </div>
+
+</main>
+
+<footer>
+  <span>CB Grup Barna · Dashboard intern de màrqueting</span>
+  <span>El Clot, Barcelona</span>
+</footer>
+
+</body>
+</html>
