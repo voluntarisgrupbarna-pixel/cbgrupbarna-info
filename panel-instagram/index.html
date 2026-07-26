@@ -48,6 +48,17 @@
   .premise-body b{color:#fff}
   .premise-need{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   .premise-need span{font-family:var(--mono);font-size:11px;color:#d4d4d8;background:var(--panel2);border:1px solid var(--border);border-radius:999px;padding:6px 12px}
+  .premise-evo{margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+  .evo-lab{font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .evo-steps{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+  .evo-step{flex:1;min-width:150px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 13px;display:flex;flex-direction:column;gap:3px}
+  .evo-step .evo-y{font-family:var(--display);font-size:17px;letter-spacing:.5px;color:var(--muted)}
+  .evo-step .evo-t{font-size:12px;color:#c4c4c8}
+  .evo-step.now{border-color:var(--red);background:linear-gradient(180deg,#1a060740,var(--panel2))}
+  .evo-step.now .evo-y{color:var(--red)}
+  .evo-step.now .evo-t{color:#fff;font-weight:600}
+  .evo-arrow{align-self:center;color:var(--dim);font-family:var(--mono)}
+  @media(max-width:600px){.evo-arrow{display:none}}
   .banner{margin-top:14px;padding:11px 14px;border:1px solid #4a3f0a;background:#14110340;border-radius:10px;font-size:12.5px;color:#d9c98a;display:flex;gap:9px;align-items:flex-start}
   .banner b{color:var(--yellow)}
   .banner a{color:var(--yellow);text-decoration:underline}
@@ -180,6 +191,16 @@
       <span>✔ Data i rival / esdeveniment</span>
       <span>✔ Resultat o context</span>
       <span>✔ Fotos/vídeos en bona qualitat</span>
+    </div>
+    <div class="premise-evo">
+      <div class="evo-lab">Evolució de la implicació de les famílies</div>
+      <div class="evo-steps">
+        <div class="evo-step"><span class="evo-y">Any 1</span><span class="evo-t">No arribava res</span></div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-step"><span class="evo-y">Any 2</span><span class="evo-t">Més, després d'avisar els pares</span></div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-step now"><span class="evo-y">Any 3 · actual</span><span class="evo-t">Implicació màxima</span></div>
+      </div>
     </div>
   </div>
 
