@@ -39,6 +39,15 @@
   .navlink:hover{color:var(--text);border-color:var(--red)}
   .updated{font-family:var(--mono);font-size:11px;color:var(--dim)}
 
+  .premise{margin-top:16px;padding:16px 18px;border:1px solid var(--red);border-left:4px solid var(--red);background:linear-gradient(90deg,#1a060740,#0e0e10);border-radius:12px}
+  .premise-head{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+  .premise-ico{font-size:22px;line-height:1}
+  .premise-kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:3px}
+  .premise-title{font-family:var(--display);font-size:19px;letter-spacing:.5px;line-height:1}
+  .premise-body{font-size:13px;color:#c4c4c8;line-height:1.55;max-width:820px}
+  .premise-body b{color:#fff}
+  .premise-need{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .premise-need span{font-family:var(--mono);font-size:11px;color:#d4d4d8;background:var(--panel2);border:1px solid var(--border);border-radius:999px;padding:6px 12px}
   .banner{margin-top:14px;padding:11px 14px;border:1px solid #4a3f0a;background:#14110340;border-radius:10px;font-size:12.5px;color:#d9c98a;display:flex;gap:9px;align-items:flex-start}
   .banner b{color:var(--yellow)}
   .banner a{color:var(--yellow);text-decoration:underline}
@@ -147,6 +156,30 @@
       <div id="modeBadge" class="badge demo"><span class="dot"></span>DEMO</div>
       <div class="handle" id="handle">@cbgrupbarna</div>
       <div class="updated" id="updated">—</div>
+    </div>
+  </div>
+
+  <!-- PREMISSA: font del contingut -->
+  <div class="premise">
+    <div class="premise-head">
+      <span class="premise-ico">📥</span>
+      <div>
+        <div class="premise-kicker">Premissa · font del contingut</div>
+        <div class="premise-title">Publiquem el que ens ENVIEN. Informació parcial = risc d'error.</div>
+      </div>
+    </div>
+    <p class="premise-body">
+      El que publiquem surt del que les <b>famílies</b> ens fan arribar per <b>WhatsApp o DM</b>
+      (fotos i informació). Sort d'elles: <b>dels entrenadors gairebé no arriba res</b>, tret d'excepcions
+      que volen sortir. Treballar amb informació <b>esbiaixada o incompleta</b> genera errors d'interpretació.
+      Per fer-ho bé, necessitem que ens donin la informació <b>completa</b>:
+    </p>
+    <div class="premise-need">
+      <span>✔ Equip i categoria</span>
+      <span>✔ Noms (i qui NO vol sortir)</span>
+      <span>✔ Data i rival / esdeveniment</span>
+      <span>✔ Resultat o context</span>
+      <span>✔ Fotos/vídeos en bona qualitat</span>
     </div>
   </div>
 
