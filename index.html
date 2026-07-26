@@ -809,6 +809,39 @@ body::after {
 .spw-partner { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; color: rgba(255,255,255,0.55); white-space: nowrap; transition: background 0.2s, color 0.2s; }
 .spw-partner:hover { background: rgba(255,255,255,0.09); color: white; }
 
+/* ==== GRÀCIES · COL·LABORADORS NO ECONÒMICS ==== */
+.thx {
+  margin: 24px 0 20px; padding: 28px 22px 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 22px;
+  position: relative; overflow: hidden;
+}
+.thx::before {
+  content: 'GRÀCIES'; position: absolute;
+  font-family: 'Bebas Neue', sans-serif; font-size: 150px; line-height: 1;
+  color: rgba(255,255,255,0.028); right: -30px; bottom: -40px; pointer-events: none; white-space: nowrap;
+}
+.thx-kicker { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--red); text-transform: uppercase; margin-bottom: 10px; }
+.thx-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(24px, 7vw, 38px); line-height: 1.05; color: white; margin-bottom: 6px; letter-spacing: 0.5px; }
+.thx-headline em { color: var(--red); font-style: normal; }
+.thx-sub { font-size: 12.5px; color: var(--muted); line-height: 1.55; margin-bottom: 18px; }
+.thx-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-bottom: 18px; }
+.thx-item {
+  display: block; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 13px 11px; text-decoration: none; color: inherit;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+a.thx-item:hover { background: rgba(255,255,255,0.08); border-color: var(--border-2); transform: translateY(-1px); }
+.thx-name { font-size: 13px; font-weight: 800; color: white; letter-spacing: 0.2px; line-height: 1.25; }
+.thx-type { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--red); margin: 5px 0 4px; }
+.thx-what { font-size: 11px; color: var(--muted); line-height: 1.45; }
+.thx-divider { height: 1px; background: var(--border); margin: 0 0 14px; }
+.thx-crew-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
+.thx-crew { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.thx-crew span { background: rgba(227,30,36,0.10); border: 1px solid rgba(227,30,36,0.28); border-radius: 8px; padding: 6px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; color: rgba(255,255,255,0.72); white-space: nowrap; }
+.thx-status { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.6px; line-height: 1.6; color: rgba(255,255,255,0.72); border-left: 2px solid var(--red); padding-left: 12px; }
+.thx-status[hidden] { display: none; }
+
 /* ==== COUNTDOWN BAR ==== */
 .countdown-bar {
   margin: 0 0 12px; padding: 14px 18px;
@@ -1164,6 +1197,35 @@ body::after {
     </div>
   </div>
 
+  <!-- ==== GRÀCIES · COL·LABORADORS NO ECONÒMICS (es pinta des de data.json → collaboradors) ==== -->
+  <section class="thx reveal" id="thanks" aria-labelledby="thx-title">
+    <div class="thx-kicker">Col·laboració no econòmica · #somclot</div>
+    <h2 class="thx-headline" id="thx-title"><em>Gràcies</em><br>a qui ens ha ajudat<br>a arribar més lluny</h2>
+    <p class="thx-sub" id="thxSub">Qui ens ha ajudat a arribar a més gent sense demanar res a canvi</p>
+
+    <div class="thx-list" id="thxList">
+      <div class="thx-item"><div class="thx-name">El Clotenc</div><div class="thx-type">Mitjà de barri</div><div class="thx-what">Difusió del projecte al Clot</div></div>
+      <div class="thx-item"><div class="thx-name">Penkats Aro</div><div class="thx-type">Comunitat</div><div class="thx-what">Divulgació i altaveu a xarxes</div></div>
+      <div class="thx-item"><div class="thx-name">Eix Clot</div><div class="thx-type">Eix comercial</div><div class="thx-what">Barri, comerç i suport als esdeveniments</div></div>
+      <div class="thx-item"><div class="thx-name">Federació d'Entitats</div><div class="thx-type">Teixit associatiu</div><div class="thx-what">Xarxa d'entitats i difusió al districte</div></div>
+      <div class="thx-item"><div class="thx-name">Canal Disset</div><div class="thx-type">Mitjà</div><div class="thx-what">Cobertura i divulgació del club</div></div>
+      <div class="thx-item"><div class="thx-name">El nostre locutor</div><div class="thx-type">Veu del club</div><div class="thx-what">Veu dels partits i dels esdeveniments</div></div>
+      <div class="thx-item"><div class="thx-name">Vila Olímpica</div><div class="thx-type">Entitat veïna</div><div class="thx-what">Suport i col·laboració esportiva</div></div>
+    </div>
+
+    <div class="thx-divider"></div>
+    <div class="thx-crew-label">I la gent que fa anar el club</div>
+    <div class="thx-crew" id="thxCrew">
+      <span>Partners</span>
+      <span>Voluntariat</span>
+      <span>Jugadores i jugadors</span>
+      <span>Entrenadores i entrenadors</span>
+      <span>Famílies</span>
+      <span>Junta i staff</span>
+    </div>
+    <p class="thx-status" id="thxStatus">Tanquem la porta i els llums fins a mitjans d'agost. Tornem amb més força.</p>
+  </section>
+
   <!-- ==== FAQ indexable per cercadors i IA ==== -->
   <section class="ai-faq reveal" aria-labelledby="faq-ai-title">
     <div class="ai-faq-kicker">Informació oficial · Cercadors · IA</div>
@@ -1480,6 +1542,39 @@ body::after {
         if (bar) bar.dataset.pct = pct;
         if (ofText) ofText.innerHTML = `EQUIPS INSCRITS · DE <b>${t.limit} places</b>`;
         if (pctText) pctText.textContent = `${pct}% PLE${t.deadlineNote ? ' · ⏱ ' + t.deadlineNote : ''}`;
+      }
+
+      // Col·laboradors no econòmics: pintar la secció "Gràcies" des de data.json
+      if (data.collaboradors) {
+        const c = data.collaboradors;
+        const esc = s => String(s ?? '').replace(/[&<>"]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[m]));
+        const sub = document.getElementById('thxSub');
+        if (sub && c.subtitol) sub.textContent = c.subtitol;
+
+        const list = document.getElementById('thxList');
+        const items = (c.llista || []).filter(x => x && x.actiu !== false);
+        if (list && items.length) {
+          list.innerHTML = items.map(x => {
+            const href = x.url || (x.instagram ? 'https://instagram.com/' + String(x.instagram).replace(/^@/, '') : '');
+            const inner = `<div class="thx-name">${esc(x.nom)}</div>`
+              + (x.tipus ? `<div class="thx-type">${esc(x.tipus)}</div>` : '')
+              + (x.aporta ? `<div class="thx-what">${esc(x.aporta)}</div>` : '');
+            return href
+              ? `<a class="thx-item" href="${esc(href)}" target="_blank" rel="noopener">${inner}</a>`
+              : `<div class="thx-item">${inner}</div>`;
+          }).join('');
+        }
+
+        const crew = document.getElementById('thxCrew');
+        if (crew && Array.isArray(c.gentDelClub) && c.gentDelClub.length) {
+          crew.innerHTML = c.gentDelClub.map(n => `<span>${esc(n)}</span>`).join('');
+        }
+
+        const status = document.getElementById('thxStatus');
+        if (status) {
+          if (c.estatActiu && c.estat) { status.textContent = c.estat; status.hidden = false; }
+          else { status.hidden = true; }
+        }
       }
 
       // Última actualització visible

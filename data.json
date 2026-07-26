@@ -1,6 +1,6 @@
 {
   "_comment": "Hub de dades compartit del CB Grup Barna. Totes les apps llegiran d'aquí. Actualitzar en UN SOL LLOC, propagar a tot arreu.",
-  "lastUpdate": "2026-06-10T10:00:00+02:00",
+  "lastUpdate": "2026-07-26T12:00:00+02:00",
 
   "club": {
     "nom": "CB Grup Barna",
@@ -75,6 +75,27 @@
     "silver": [],
     "bronze": [],
     "_todoAna": "Omplir aquest llistat amb els patrocinadors actuals de la temporada 2025-2026"
+  },
+
+  "collaboradors": {
+    "_note": "COL·LABORADORS NO ECONÒMICS: qui ens ha ajudat a arribar a més gent i a divulgar el projecte sense facturar. Editar NOMÉS aquí — la portada (index.html) es pinta sola des d'aquest fitxer.",
+    "titol": "Gràcies",
+    "subtitol": "Qui ens ha ajudat a arribar a més gent sense demanar res a canvi",
+    "estat": "Tanquem la porta i els llums fins a mitjans d'agost. Tornem amb més força.",
+    "estatActiu": true,
+    "llista": [
+      { "id": "clotenc",       "nom": "El Clotenc",              "tipus": "Mitjà de barri",      "aporta": "Difusió del projecte al Clot",              "instagram": "", "url": "", "actiu": true, "darrerAgraiment": "2026-07-26" },
+      { "id": "penkats-aro",   "nom": "Penkats Aro",             "tipus": "Comunitat",           "aporta": "Divulgació i altaveu a xarxes",             "instagram": "", "url": "", "actiu": true, "darrerAgraiment": "2026-07-26" },
+      { "id": "eix-clot",      "nom": "Eix Clot",                "tipus": "Eix comercial",       "aporta": "Barri, comerç i suport als esdeveniments",  "instagram": "", "url": "", "actiu": true, "darrerAgraiment": "2026-07-26" },
+      { "id": "fed-entitats",  "nom": "Federació d'Entitats",    "tipus": "Teixit associatiu",   "aporta": "Xarxa d'entitats i difusió al districte",   "instagram": "", "url": "", "actiu": true, "darrerAgraiment": "2026-07-26" },
+      { "id": "canal-disset",  "nom": "Canal Disset",            "tipus": "Mitjà",               "aporta": "Cobertura i divulgació del club",           "instagram": "", "url": "", "actiu": true, "darrerAgraiment": "2026-07-26" },
+      { "id": "locutor",       "nom": "El nostre locutor",       "tipus": "Veu del club",        "aporta": "Veu dels partits i dels esdeveniments",     "instagram": "", "url": "", "actiu": true, "darrerAgraiment": "2026-07-26" },
+      { "id": "vila-olimpica", "nom": "Vila Olímpica",           "tipus": "Entitat veïna",       "aporta": "Suport i col·laboració esportiva",          "instagram": "", "url": "", "actiu": true, "darrerAgraiment": "2026-07-26" }
+    ],
+    "gentDelClub": [
+      "Partners", "Voluntariat", "Jugadores i jugadors", "Entrenadores i entrenadors", "Famílies", "Junta i staff"
+    ],
+    "_todoAna": "Completar els handles d'Instagram i l'enllaç de cada col·laborador, i posar el nom real del locutor. Actualitzar 'darrerAgraiment' cada cop que se'ls agraeixi públicament (control per no repetir ni oblidar ningú)."
   },
 
   "xarxes": {
