@@ -1,0 +1,44 @@
+{
+  "_comment": "Seguidors d'Instagram de clubs de bàsquet de Catalunya. Ús intern de màrqueting (benchmark). Xifres públiques recollides via cerca web sobre perfils públics d'IG — fotografia aproximada, verificar al perfil real abans de citar en dossier, premsa o candidatura.",
+  "dataRecollida": "2026-07-26",
+  "metode": "Cerca web sobre perfils públics d'Instagram (no API oficial, no scraping autenticat). Els comptes multiesport inclouen audiència d'altres seccions.",
+  "referencia": "CB Grup Barna = @cbgrupbarna",
+
+  "elit": [
+    { "club": "Barça Basket",                "handle": "@fcbbasket",       "seguidors": 1000000, "aprox": true,  "nota": "1M; secció bàsquet del FC Barcelona" },
+    { "club": "Club Joventut Badalona",      "handle": "@penya1930",       "seguidors": 68000,   "aprox": true,  "nota": "compte compartit masculí+femení" },
+    { "club": "Kids&Us Manresa (BAXI)",      "handle": "@basquetmanresa",  "seguidors": 36000,   "aprox": true,  "nota": "ACB" },
+    { "club": "Bàsquet Girona",              "handle": "@basquetgirona",   "seguidors": 35000,   "aprox": true,  "nota": "ACB" },
+    { "club": "FCBQ (federació catalana)",   "handle": "@basquetcatala",   "seguidors": 32000,   "aprox": true,  "nota": "federació, no club" },
+    { "club": "Hiopos Lleida (Força Lleida)","handle": "@flleida",         "seguidors": 27000,   "aprox": true,  "nota": "ACB" },
+    { "club": "Spar Girona",                 "handle": "@unigirona",       "seguidors": 24000,   "aprox": true,  "nota": "compte exclusivament femení; Lliga Femenina Endesa + Eurolliga" },
+    { "club": "Cadí La Seu (Sedis Bàsquet)", "handle": "@sedisbasquet",    "seguidors": 9400,    "aprox": true,  "nota": "NO verificat en aquesta recollida; xifra heretada del benchmark femení anterior" }
+  ],
+
+  "formatius": [
+    { "club": "Bàsquet Femení Sant Adrià",    "handle": "@femenisantadria",          "seguidors": 8517, "aprox": false, "nota": "exclusiu femení" },
+    { "club": "CB Prat",                      "handle": "@cbprat",                   "seguidors": 7451, "aprox": false, "nota": "vinculat a la Penya" },
+    { "club": "CB Cornellà",                  "handle": "@cbcornella",               "seguidors": 7233, "aprox": false, "nota": "" },
+    { "club": "Fundació del Bàsquet Català",  "handle": "@fundaciodelbasquetcatala",  "seguidors": 7803, "aprox": false, "nota": "entitat, no club" },
+    { "club": "CB Granollers",                "handle": "@cbgranollers",             "seguidors": 6108, "aprox": false, "nota": "fundador ACB" },
+    { "club": "CB Boet Maresme Mataró",       "handle": "@cbboetmaresme",            "seguidors": 5946, "aprox": false, "nota": "" },
+    { "club": "CB Grup Barna",                "handle": "@cbgrupbarna",              "seguidors": 5313, "aprox": false, "nota": "NOSALTRES — Sant Martí, Barcelona" },
+    { "club": "CE Laietà",                    "handle": "@clublaieta",               "seguidors": 5302, "aprox": false, "nota": "compte del club multiesport; secció bàsquet @basquetlaieta = 1.247" },
+    { "club": "SESE",                         "handle": "@sese_basquet",             "seguidors": 5114, "aprox": false, "nota": "Virrei Amat, Barcelona — rival de paritat" },
+    { "club": "TGN Bàsquet Club",             "handle": "@tgnbasquet",               "seguidors": 4850, "aprox": false, "nota": "Tarragona" },
+    { "club": "Força Lleida Base",            "handle": "@flleidabase",              "seguidors": 3864, "aprox": false, "nota": "planter del club ACB" },
+    { "club": "JAC Sants",                    "handle": "@jacsants1935",             "seguidors": 3839, "aprox": false, "nota": "Sants, Barcelona" },
+    { "club": "CB Roser",                     "handle": "@cbroser1933",              "seguidors": 3471, "aprox": false, "nota": "Fort Pienc, Barcelona — tradició des de 1933" },
+    { "club": "CE Pla d'en Boet Mataró",      "handle": "@cepladenboet",             "seguidors": 3232, "aprox": false, "nota": "" },
+    { "club": "UE Horta (club)",              "handle": "@uehorta",                  "seguidors": 3065, "aprox": false, "nota": "club poliesportiu" },
+    { "club": "AE Boet Mataró",               "handle": "@aeboetmataro",             "seguidors": 2926, "aprox": false, "nota": "" },
+    { "club": "Bàsquet Lluïsos de Gràcia",    "handle": "@basquetlluisosdegracia",   "seguidors": 2878, "aprox": false, "nota": "Gràcia, Barcelona" },
+    { "club": "UE Sant Andreu Basket",        "handle": "@uesabasket",               "seguidors": 2122, "aprox": false, "nota": "Sant Andreu, Barcelona" },
+    { "club": "UE Horta — secció bàsquet",    "handle": "@basquetueh",               "seguidors": 2007, "aprox": false, "nota": "compte específic de bàsquet" }
+  ],
+
+  "_pendents": [
+    "Verificar @sedisbasquet (Cadí La Seu) — l'única xifra no confirmada d'aquesta recollida.",
+    "Afegir CB Sant Josep Badalona, UB Llefià, Bàsquet Sitges, CB Martorell i CB Cardedeu si es vol ampliar el mapa."
+  ]
+}
