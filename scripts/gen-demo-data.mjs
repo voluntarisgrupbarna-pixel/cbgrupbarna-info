@@ -101,11 +101,13 @@ const hashtag = { tag:'#somclot', recent:[
   { id:'h2', caption:'Orgull de barri 🧡🖤 #somclot', type:'VIDEO', permalink:'https://instagram.com/explore/tags/somclot', likes:98, comments:4 },
   { id:'h3', caption:'Festa major i cistelles #somclot', type:'CAROUSEL_ALBUM', permalink:'https://instagram.com/explore/tags/somclot', likes:76, comments:3 },
 ]};
-const benchmark = { generatedAt: REF+'T09:00:00Z', rivals:[
-  { username:'cbgrupbarna', name:'CB Grup Barna', followers:last.followers, posts:612 },
-  { username:'sese_bc', name:'AE Sant Andreu (SESE)', followers:2410, posts:734 },
-  { username:'uehorta', name:'UE Horta', followers:1980, posts:521 },
-  { username:'cbroser', name:'CB Roser', followers:1460, posts:389 },
+const jan1 = daily.find(d=>d.date==='2026-01-01')?.followers ?? null;
+const benchmark = { generatedAt: REF+'T09:00:00Z', season:'2025-2026', rivals:[
+  { username:'cbboet', name:'CB Boet', followersStart:5400, followers:null },
+  { username:'sese_bc', name:'AE Sant Andreu (SESE)', followersStart:3800, followers:null },
+  { username:'cbgrupbarna', name:'CB Grup Barna', followersStart:jan1, followers:last.followers },
+  { username:'uehorta', name:'UE Horta', followersStart:null, followers:null },
+  { username:'cbroser', name:'CB Roser', followersStart:null, followers:null },
 ]};
 const accountInsights = {
   reach:{total:reach30}, profile_views:{total:pv30}, accounts_engaged:{total:8420}, total_interactions:{total:12960},

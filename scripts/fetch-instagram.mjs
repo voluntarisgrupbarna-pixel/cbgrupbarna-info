@@ -252,17 +252,37 @@ async function main() {
   let benchmark = null;
   if (existsSync(BENCHMARK_FILE)) {
     try {
-      const usernames = JSON.parse(readFileSync(BENCHMARK_FILE, 'utf8')).usernames || [];
+      const bcfg = JSON.parse(readFileSync(BENCHMARK_FILE, 'utf8'));
+      const usernames = bcfg.usernames || [];
+      const manual = bcfg.manual || {};
       const rivals = [];
+      // El nostre propi compte, per comparar
+      rivals.push({
+        username: profile.username, name: profile.name || 'CB Grup Barna',
+        followers: profile.followers_count ?? null,
+        followersStart: manual[profile.username]?.followersStart ?? null, self: true,
+      });
       for (const u of usernames) {
         const r = await ig(IG_ID, {
-          fields: `business_discovery.username(${u}){username,name,followers_count,media_count,follows_count}`,
+          fields: `business_discovery.username(${u}){username,name,followers_count,media_count}`,
         });
         const bd = r?.business_discovery;
-        if (bd) rivals.push({ username: bd.username, name: bd.name, followers: bd.followers_count, posts: bd.media_count });
+        rivals.push({
+          username: u,
+          name: manual[u]?.name || bd?.name || u,
+          followers: bd?.followers_count ?? null,
+          followersStart: manual[u]?.followersStart ?? null,
+          posts: bd?.media_count ?? null,
+        });
       }
-      if (rivals.length) benchmark = { generatedAt: now.toISOString(), rivals: rivals.sort((a, b) => b.followers - a.followers) };
-      coverage.benchmark = `${rivals.length} rivals`;
+      // creixement des de l'inici de temporada
+      for (const r of rivals) {
+        r.growth = (r.followers != null && r.followersStart != null) ? r.followers - r.followersStart : null;
+        r.growthPct = (r.growth != null && r.followersStart) ? +((r.growth / r.followersStart) * 100).toFixed(1) : null;
+      }
+      rivals.sort((a, b) => (b.followers ?? b.followersStart ?? 0) - (a.followers ?? a.followersStart ?? 0));
+      benchmark = { generatedAt: now.toISOString(), season: bcfg.season || null, rivals };
+      coverage.benchmark = `${rivals.length - 1} rivals`;
     } catch (e) { errors.push(`benchmark: ${e.message}`); coverage.benchmark = 'error'; }
   } else { coverage.benchmark = 'sense benchmark.json'; }
 

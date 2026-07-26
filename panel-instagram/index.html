@@ -95,12 +95,16 @@
   .htag:last-child{border:none}
   .htag .hm{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:3px}
   .bench-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-family:var(--mono);font-size:12px}
-  .bench-row .bn{width:150px;color:#c4c4c8;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bench-row .bn{width:190px;color:#c4c4c8;font-size:11px;display:flex;flex-direction:column;gap:2px}
+  .bench-row .bn-sub{font-size:9px;color:var(--dim)}
   .bench-row.me .bn{color:var(--red);font-weight:700}
-  .bench-bar{flex:1;height:14px;background:var(--panel2);border-radius:999px;overflow:hidden}
+  .bench-bar{flex:1;height:14px;background:var(--panel2);border-radius:999px;overflow:hidden;min-width:60px}
   .bench-fill{height:100%;border-radius:999px;background:#3a3a40}
   .bench-row.me .bench-fill{background:var(--red)}
-  .bench-row .bv{width:52px;text-align:right;color:var(--text)}
+  .bench-meta{width:120px;text-align:right}
+  .bench-meta .bg{font-size:10px}
+  .bg.up{color:var(--green)}.bg.down{color:var(--red)}.bg.pend{color:var(--dim)}
+  .bench-row .bv{width:56px;text-align:right;color:var(--text)}
   @media(max-width:900px){.strip{grid-template-columns:repeat(2,1fr)}}
   .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}
   .card h3{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:500}
@@ -460,16 +464,26 @@ function render(d){
         <div class="hm">❤ ${fmt(h.likes)} · 💬 ${fmt(h.comments)} · ${esc(h.type)}</div></a>`).join('');
   } else { $('#hashtagCard').style.display='none'; }
 
-  // Benchmark
+  // Benchmark · creixement (inici de temporada → actual)
   const rivals = d.benchmark?.rivals||[];
   if(rivals.length){
-    const max = Math.max(...rivals.map(r=>r.followers));
     const meUser = (m.account||'').replace('@','');
+    const max = Math.max(...rivals.map(r=>r.followers ?? r.followersStart ?? 0)) || 1;
     $('#bench').innerHTML = rivals.map(r=>{
-      const me = r.username===meUser;
-      return `<div class="bench-row ${me?'me':''}"><span class="bn">${esc(r.name||r.username)}</span>
-        <span class="bench-bar"><span class="bench-fill" style="width:${(r.followers/max*100).toFixed(0)}%"></span></span>
-        <span class="bv">${fmt(r.followers)}</span></div>`;
+      const me = r.self || r.username===meUser;
+      const cur = r.followers, st = r.followersStart;
+      const val = cur ?? st ?? 0;
+      let growth='';
+      if(cur!=null && st!=null){ const g=cur-st, p=st?g/st*100:0, up=g>=0;
+        growth=`<span class="bg ${up?'up':'down'}">${up?'▲':'▼'} ${fmt(Math.abs(g))} (${up?'+':'−'}${Math.abs(p).toFixed(0)}%)</span>`; }
+      const rightNum = cur!=null ? fmt(cur) : (st!=null ? fmt(st) : '—');
+      const startTxt = st!=null ? `inici ${fmt(st)}` : (cur!=null?'':'sense dades');
+      const pend = cur==null ? '<span class="bg pend">actual pendent</span>' : '';
+      return `<div class="bench-row ${me?'me':''}">
+        <span class="bn">${esc(r.name||r.username)}<span class="bn-sub">${startTxt}</span></span>
+        <span class="bench-bar"><span class="bench-fill" style="width:${(val/max*100).toFixed(0)}%"></span></span>
+        <span class="bench-meta">${growth||pend}</span>
+        <span class="bv">${rightNum}</span></div>`;
     }).join('');
   } else { $('#benchSec').style.display='none'; }
 

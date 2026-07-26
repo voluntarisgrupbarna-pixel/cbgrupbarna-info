@@ -1,8 +1,15 @@
 {
-  "_instruccions": "Rivals i referents a monitoritzar via business_discovery de la Graph API. Posa els noms d'usuari EXACTES de Instagram (sense @) de comptes Business/Creator PÚBLICS. El fetcher en treu seguidors i nombre de publicacions per comparar-los amb el Barna. Requereix el permís business_management al token. Substitueix els exemples pels rivals reals (SESE, UE Horta, CB Roser...).",
+  "_instruccions": "Rivals i referents a monitoritzar via business_discovery de la Graph API. A 'usernames' posa els noms d'usuari EXACTES d'Instagram (sense @) de comptes Business/Creator PÚBLICS: el fetcher en treu els seguidors ACTUALS. A 'manual' pots afegir el nom bonic i els seguidors a INICI de temporada (followersStart) per calcular el creixement — l'API no dona històric de rivals, això ho poses tu. Requereix el permís business_management al token.",
   "usernames": [
+    "cbboet",
     "sese_bc",
     "uehorta",
     "cbroser"
-  ]
+  ],
+  "manual": {
+    "cbboet": { "name": "CB Boet", "followersStart": 5400, "_nota": "compte a confirmar; Boet va començar l'any amb 5400" },
+    "sese_bc": { "name": "AE Sant Andreu (SESE)", "followersStart": 3800, "_nota": "SESE va créixer des de 3800" },
+    "uehorta": { "name": "UE Horta", "followersStart": null },
+    "cbroser": { "name": "CB Roser", "followersStart": null }
+  }
 }
