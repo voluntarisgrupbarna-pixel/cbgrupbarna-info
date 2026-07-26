@@ -866,6 +866,19 @@ body::after {
 .partners-tier.silver .partner-chip { border-color: rgba(198,203,212,0.22); }
 .partners-tier.inkind .partner-chip { border-color: rgba(34,197,94,0.22); }
 .partners-tier.inst .partner-chip { border-color: rgba(59,130,246,0.22); }
+.partner-feature {
+  position: relative; margin: 0 0 22px; padding: 20px 18px;
+  background: linear-gradient(135deg, rgba(227,30,36,0.10), rgba(255,255,255,0.02));
+  border: 1px solid rgba(227,30,36,0.28); border-radius: 16px;
+}
+.pf-kicker { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+.pf-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px, 9vw, 46px); color: white; line-height: 1; letter-spacing: 1px; margin-bottom: 4px; }
+.pf-role { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.62); margin-bottom: 12px; }
+.pf-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.pf-desc strong { color: rgba(255,255,255,0.88); font-weight: 700; }
+.pf-brands-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.pf-brands { display: flex; gap: 6px; flex-wrap: wrap; }
+.pf-brand { background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.6); white-space: nowrap; }
 .partners-tier.media .partners-tier-name { color: var(--yellow); }
 .partners-tier.media .partner-chip { border-color: rgba(255,214,0,0.22); }
 .partner-chip small { display: block; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
@@ -1222,7 +1235,7 @@ body::after {
       <span class="spw-partner">Eix Clot</span>
       <span class="spw-partner">Ajuntament BCN</span>
       <span class="spw-partner">MyPlay</span>
-      <a href="#partners" class="spw-partner" style="color:var(--red);text-decoration:none">Veure els 22 →</a>
+      <a href="#partners" class="spw-partner" style="color:var(--red);text-decoration:none">Veure els 23 →</a>
     </div>
   </div>
 
@@ -1299,15 +1312,15 @@ body::after {
 
     <div class="partners-stats">
       <div class="partners-stat">
-        <div class="partners-stat-n"><em>29</em></div>
+        <div class="partners-stat-n"><em>30</em></div>
         <div class="partners-stat-l">Marques i entitats</div>
       </div>
       <div class="partners-stat">
-        <div class="partners-stat-n">22</div>
+        <div class="partners-stat-n">23</div>
         <div class="partners-stat-l">Partners i col·laboradors</div>
       </div>
       <div class="partners-stat">
-        <div class="partners-stat-n">18</div>
+        <div class="partners-stat-n">19</div>
         <div class="partners-stat-l">Empreses i comerços</div>
       </div>
       <div class="partners-stat">
@@ -1321,6 +1334,22 @@ body::after {
       <div class="partners-stat">
         <div class="partners-stat-n">4</div>
         <div class="partners-stat-l">Institucions i tècnics</div>
+      </div>
+    </div>
+
+    <div class="partner-feature">
+      <div class="pf-kicker">Nou acord · Temporada 25-26</div>
+      <div class="pf-name">Alsea</div>
+      <div class="pf-role">Impulsor del 3x3 Westfield Glòries</div>
+      <p class="pf-desc">Alsea és un <strong>operador multinacional de restauració</strong> que gestiona algunes de les marques més conegudes del món a Espanya, Europa i Amèrica Llatina. És una companyia cotitzada, amb milers de restaurants i desenes de milers de treballadors.</p>
+      <p class="pf-desc">Que una companyia d'aquesta dimensió decideixi impulsar el <strong>3x3 del Clot</strong> diu on és avui el CB Grup Barna: un club de barri amb estàndards, dades i comunicació de club gran.</p>
+      <div class="pf-brands-label">Marques que opera a Espanya</div>
+      <div class="pf-brands">
+        <span class="pf-brand">Domino's Pizza</span>
+        <span class="pf-brand">Starbucks</span>
+        <span class="pf-brand">Foster's Hollywood</span>
+        <span class="pf-brand">Ginos</span>
+        <span class="pf-brand">VIPS</span>
       </div>
     </div>
 
