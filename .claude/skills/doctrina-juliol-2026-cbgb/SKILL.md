@@ -10,6 +10,13 @@ a ninguna**: da la tesis, el numero y el orden en una sola lectura, y enruta a l
 skill de detalle para ejecutar. Todo lo que hay aqui esta medido con **datos del
 propio perfil**, no con principios generales de Instagram.
 
+> **Los datos no viven aqui.** Viven en la BBDD de conocimiento del repo
+> `cbgrupbarna-info` → `.claude/knowledge/` (serie mensual, decisiones, leyes,
+> autopsias de reels, preguntas abiertas). Esta skill es la **lectura** de esos
+> datos; para consultarlos o anadir filas → `memoria-cbgb`. Si un numero de aqui
+> y uno de la BBDD no coinciden, **manda la BBDD**.
+> El mes narrado: `.claude/knowledge/historico/2026-07.md`.
+
 ## La tesis del mes (una linea)
 
 > **El alcance nunca fue el problema.** El club tiene motor de sobra (439K
@@ -168,6 +175,7 @@ Se deja escrito a proposito; el error es parte de la leccion.
 | `codis-lux-cbgb` | los 5 codigos de lujo, en tabla | "que quede premium/pro" |
 | `reel-fotos-cbgb` · `reel-illustrat-cbgb` · `efecto-brutalismo-cbgb` | produccion por codigo | "montame un reel con esto" |
 | `arranque-eficiente` | como se arranca cualquier encargo | siempre, al empezar |
+| `memoria-cbgb` | la BBDD: numeros, decisiones cerradas, historico | citar una cifra, registrar un reel, cerrar el mes |
 
 Ejecucion y valores no cambian: `reels-cbgb` (que grabar), `video-club-cbgb` /
 `capcut-reels-cbgb` (montaje), `sistema-visual-cbgb` (tokens). Angulo nuevo:
@@ -175,16 +183,19 @@ Ejecucion y valores no cambian: `reels-cbgb` (que grabar), `video-club-cbgb` /
 
 ## Como se actualiza esta skill
 
-Es un **snapshot fechado**. En el cierre de agosto 2026:
+Es un **snapshot fechado**. En el cierre de agosto 2026 (procedimiento completo en
+`memoria-cbgb`):
 
-1. Rehacer la tabla mensual de `crecimiento-ig-cbgb` (reels/pubs, views, % externos,
-   seguidores nuevos, seguidores/pieza).
+1. Una fila nueva en `.claude/knowledge/bbdd/metriques.csv` desde el resumen mensual
+   in-app (reels/pubs, views, % externos, seguidores nuevos, seguidores/pieza).
 2. Recalcular la **metrica-jefe**: conversion = seguidores nuevos ÷ alcance.
    Baseline a batir: **0,03 %**. Objetivo: ×3-×5 **sin producir mas**.
 3. **La prueba limpia**: si sube la conversion sin subir la produccion, el aparador
-   era el problema — confirmado, y se escribe como ley.
-4. Anadir las filas nuevas a la tabla de registro de arrancadas (meta: 10 reels).
-5. Duplicar esta skill como `doctrina-agost-2026-cbgb` y dejar esta como historico.
+   era el problema — confirmado, y se escribe como ley en `bbdd/lleis.csv`.
+4. Anadir las autopsias nuevas a `bbdd/reels.csv` (meta: 10 filas = benchmark propio).
+5. Escribir `.claude/knowledge/historico/2026-08.md` con el mes narrado y los cambios
+   de opinion.
+6. Duplicar esta skill como `doctrina-agost-2026-cbgb` y dejar esta como historico.
 
 ---
 
