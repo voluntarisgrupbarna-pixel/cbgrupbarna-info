@@ -209,6 +209,21 @@
   .serie .news{font-size:12.5px;color:var(--text);margin-bottom:7px;}
   .serie .news b{color:var(--red);}
   .serie p{font-size:12.5px;line-height:1.6;color:var(--muted);}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .vscol{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:18px 20px;}
+  .vscol.bad{border-color:rgba(227,30,36,0.4);}
+  .vscol .who{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+  .vscol h4{font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;margin-bottom:10px;color:var(--text);}
+  .vscol ul{list-style:none;padding:0;}
+  .vscol li{font-size:12.5px;line-height:1.55;color:var(--muted);padding:5px 0;border-bottom:1px solid var(--panel-border);}
+  .vscol li:last-child{border-bottom:0;}
+  .vscol li b{color:var(--text);}
+  .verdict{background:var(--code-bg);border-left:5px solid var(--red);border-radius:8px;padding:18px 22px;margin-bottom:14px;}
+  .verdict h4{font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;margin-bottom:8px;color:var(--text);}
+  .verdict p{font-size:13px;line-height:1.65;color:var(--muted);max-width:82ch;margin-bottom:8px;}
+  .verdict p:last-child{margin-bottom:0;}
+  .verdict b{color:var(--text);}
+  .verdict .hit{color:var(--red);font-weight:700;}
   .noart{width:100%;aspect-ratio:9/16;border:2px dashed var(--panel-border);border-radius:8px;
     display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;
     font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.7;color:var(--muted);letter-spacing:.6px;}
@@ -749,7 +764,66 @@
   </section>
 
   <section>
-    <div class="section-head"><h2><span class="n">10</span> · Recepta reutilitzable</h2></div>
+    <div class="section-head"><h2><span class="n">10</span> · Benchmark — la competència</h2></div>
+    <p style="font-size:13px;color:var(--muted);max-width:78ch;margin-bottom:18px">
+      Peces reals de <b>CB Boet Mataró</b> (Supercopa 26/27), un club del nostre nivell competitiu.
+      Es miren aquí no per copiar-les, sinó perquè mostren amb claredat <b>un error que és fàcil de cometre sense voler</b>.
+      <span style="color:var(--muted)">(Descrites a partir de les peces publicades; artwork no incrustat.)</span>
+    </p>
+
+    <div class="vs">
+      <div class="vscol">
+        <div class="who">Boet Mataró · Masculí</div>
+        <h4>Pau Moreno — renovació</h4>
+        <ul>
+          <li><b>Fons:</b> escenografia completa — cel dramàtic al capvespre, pista urbana, cistella, silueta d'un jugador al fons</li>
+          <li><b>Tractament:</b> il·luminació atmosfèrica, textura, profunditat de camp</li>
+          <li><b>Escut del club:</b> present, a dalt-esquerra</li>
+          <li><b>Ganxo:</b> “HA ARRIBAT EL MOMENT” — èpica, expectació</li>
+          <li><b>Wordmark:</b> “SUPERCOPA” gegant en diagonal, integrat amb la figura</li>
+        </ul>
+      </div>
+      <div class="vscol bad">
+        <div class="who">Boet Mataró · Femení</div>
+        <h4>Marina Iborra — Supercopa</h4>
+        <ul>
+          <li><b>Fons:</b> taronja pla amb una textura mínima — <b>cap escena, cap context</b></li>
+          <li><b>Tractament:</b> retall sobre color, sense atmosfera ni profunditat</li>
+          <li><b>Escut del club:</b> <b>no hi és</b></li>
+          <li><b>Ganxo:</b> “PUJA DE LA CANTERA” — la situa com a promesa, no com a protagonista</li>
+          <li><b>Wordmark:</b> mateix “SUPERCOPA”, però sense res amb què dialogar</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <h4>El patró: el femení produït com una categoria B</h4>
+      <p>Les dues peces són de la <b>mateixa competició, del mateix club i de la mateixa temporada</b>. La masculina
+      té escenografia, atmosfera, escut i un ganxo d'expectació; la femenina té un fons pla, cap escut i un ganxo que
+      la presenta com a jove promesa. <b>Ningú ha escrit “fes la femenina més senzilla”</b> — però el resultat visual
+      diu exactament això, i és el que llegeix qui passa per la graella.</p>
+      <p>Per això la paritat d'aquesta guia no es formula com un valor, sinó com una <b>especificació verificable</b>:
+      mateix fons, mateixa escenografia, mateix escut, mateix nombre de línies al peu, mateixa escala tipogràfica.
+      Un principi sense especificació es perd a la tercera peça amb presses.</p>
+      <p class="hit">I la mateixa vara de mesurar cap a dins: en aquesta guia, la peça de cos tècnic masculina té un
+      esglaó de jerarquia (línia d'estat en cursiva) que la femenina no té. És el mateix mecanisme, a escala petita —
+      i està pendent de decidir, no resolt.</p>
+    </div>
+
+    <div class="verdict" style="border-left-color:#141416">
+      <h4>El que sí que val la pena mirar-se d'ells</h4>
+      <p><b>La peça institucional “SOM DIFERENTS. AQUESTA ÉS LA NOSTRA IDENTITAT.”</b> — quatre jugadors de base,
+      nois i noies barrejats i a la mateixa escala, mirada a càmera, sense cap nom propi. Diu el projecte educatiu
+      del club (“Formem esportistes de present. Eduquem persones de futur.”) amb <b>persones reals de la casa</b>
+      en comptes d'un text sobre un fons pla.</p>
+      <p>És exactament el que aquesta guia recomana per a l'ús institucional i que nosaltres encara resolem amb
+      fons pla i tipografia (“Som Clot”, 748 visualitzacions). <b>La lliçó no és l'estètica taronja: és que el
+      missatge de club es defensa millor amb cares que amb text.</b></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2><span class="n">11</span> · Recepta reutilitzable</h2></div>
     <div class="code"><pre><span class="c1">/* SÈRIE — escut top-right, pastilla+etiqueta */</span>
 &lt;div class="story bg-{white|red|black|photo}"&gt;
   &lt;img class="photo" src="foto-real.jpg"&gt;
