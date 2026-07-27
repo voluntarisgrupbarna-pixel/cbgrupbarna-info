@@ -116,6 +116,34 @@ body {
 .tier.inst .tier-name { color: var(--blue); } .tier.inst .chip { border-color: rgba(59,130,246,0.22); }
 .tier.media .tier-name { color: var(--yellow); } .tier.media .chip { border-color: rgba(255,214,0,0.22); }
 
+/* ==== NAV INDEX ==== */
+.nav { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 34px; }
+.nav-t { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.nav-l { display: flex; flex-wrap: wrap; gap: 8px; }
+.nav-l a { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.78); text-decoration: none; transition: background 0.2s, color 0.2s; }
+.nav-l a:hover { background: rgba(255,255,255,0.09); color: #fff; }
+.nav-l a b { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 400; color: var(--red); }
+
+/* ==== DATA TABLE ==== */
+.tbl-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 540px; }
+th { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); font-weight: 400; }
+td { padding: 11px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: rgba(255,255,255,0.78); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td.lvl { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.8px; white-space: nowrap; }
+td.lvl.or { color: var(--gold); } td.lvl.pl { color: var(--silver); }
+td.lvl.br { color: var(--bronze); } td.lvl.es { color: var(--green); }
+.yes { color: var(--green); font-weight: 700; }
+.no { color: rgba(255,255,255,0.22); }
+
+/* ==== STEPS ==== */
+.steps { display: grid; gap: 10px; counter-reset: s; }
+@media (min-width: 700px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+.step { position: relative; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; }
+.step::before { counter-increment: s; content: counter(s); font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--red); line-height: 1; display: block; margin-bottom: 8px; }
+.step-t { font-weight: 700; font-size: 13.5px; margin-bottom: 4px; }
+.step-d { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
 /* ==== PROJECTS ==== */
 .projects { display: grid; gap: 10px; }
 @media (min-width: 640px) { .projects { grid-template-columns: repeat(2, 1fr); } }
@@ -188,8 +216,42 @@ body {
     <div class="kpi"><div class="kpi-n">4</div><div class="kpi-l">Institucions i tècnics</div></div>
   </div>
 
-  <section class="block">
-    <div class="block-kicker">Posicionament · Què som per a una marca</div>
+  <nav class="nav">
+    <div class="nav-t">Índex del dossier</div>
+    <div class="nav-l">
+      <a href="#club"><b>01</b> El club</a>
+      <a href="#posicionament"><b>02</b> Posicionament</a>
+      <a href="#partners"><b>03</b> Els partners</a>
+      <a href="#nivells"><b>04</b> Què inclou cada nivell</a>
+      <a href="#contingut"><b>05</b> Xarxa de contingut</a>
+      <a href="#federacio"><b>06</b> La Federació al Barna</a>
+      <a href="#projectes"><b>07</b> Projectes</a>
+      <a href="#colaborar"><b>08</b> Com col·laborar</a>
+    </div>
+  </nav>
+
+  <section class="block" id="club">
+    <div class="block-kicker">01 · El club en dades</div>
+    <h2 class="block-title">Qui <em>som</em></h2>
+    <p class="block-txt">El CB Grup Barna és un club de bàsquet base fundat el <strong>1965</strong> al barri del Clot, al Districte de Sant Martí de Barcelona. Sis dècades formant jugadors i jugadores al mateix barri, amb equips a totes les categories i un projecte femení amb mètode i recerca pròpia.</p>
+    <div class="tbl-scroll">
+      <table>
+        <tbody>
+          <tr><td style="width:38%"><strong>Fundació</strong></td><td>1965 · 60 anys de història</td></tr>
+          <tr><td><strong>Ubicació</strong></td><td>El Clot · Districte de Sant Martí · Barcelona</td></tr>
+          <tr><td><strong>Equips</strong></td><td>Més de 34 equips actius</td></tr>
+          <tr><td><strong>Comunitat</strong></td><td>Unes 450 famílies sòcies</td></tr>
+          <tr><td><strong>Categories</strong></td><td>Premini, Mini, Preinfantil, Infantil, Cadet, Júnior, Sub-22, Sènior i Open</td></tr>
+          <tr><td><strong>Instal·lació</strong></td><td>La Nau · pista pròpia amb imatge renovada el 25-26</td></tr>
+          <tr><td><strong>Comunicació</strong></td><td>Instagram, TikTok, YouTube, web pròpia i streaming de partits</td></tr>
+          <tr><td><strong>Esdeveniments propis</strong></td><td>3x3 Westfield Glòries, Campus d'estiu, Little Basket Day, Mes de l'Orgull</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="posicionament">
+    <div class="block-kicker">02 · Posicionament · Què som per a una marca</div>
     <h2 class="block-title">No venem publicitat.<br>Oferim <em>pertinença</em>.</h2>
     <p class="block-txt">El CB Grup Barna és el club de bàsquet base <strong>més gran de Sant Martí</strong>: 60 anys al Clot, 34 equips i 450 famílies. Una marca que entra al Barna no compra un espai en una lona — entra a la conversa diària d'un barri sencer, cada setmana, tot l'any.</p>
     <p class="block-txt">Per això treballem com un club gran encara que siguem de barri: <strong>contingut propi cada setmana</strong>, presència als mitjans del territori i a les institucions, i una comunitat que respon. I el que entra, torna: els nostres partners financen el club, i el club retorna premis i experiències a les famílies.</p>
@@ -202,21 +264,41 @@ body {
 
   <div id="feature"></div>
 
-  <section class="block">
-    <div class="block-kicker">Temporada 25-26</div>
+  <section class="block" id="partners">
+    <div class="block-kicker">03 · Temporada 25-26</div>
     <h2 class="block-title">Els <em>partners</em></h2>
     <div id="tiers"><div class="loading">Carregant dades del club…</div></div>
   </section>
 
-  <section class="block">
-    <div class="block-kicker">Mitjans · Institucions · Marques</div>
+  <section class="block" id="nivells">
+    <div class="block-kicker">04 · Contraprestacions</div>
+    <h2 class="block-title">Què inclou<br>cada <em>nivell</em></h2>
+    <p class="block-txt">Cada nivell defineix la presència de la marca al club. Les col·laboracions en espècie es valoren a preu de mercat i s'assignen al nivell que els correspon.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>Nivell</th><th>Lona a la Nau</th><th>Samarreta</th><th>Equipació</th><th>Xarxes</th><th>Esdeveniments</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="lvl or">Or</td><td class="yes">Sí</td><td class="yes">Sí</td><td class="yes">Sí</td><td class="yes">Sí</td><td class="yes">Sí</td></tr>
+          <tr><td class="lvl pl">Plata</td><td class="yes">Sí</td><td class="yes">Sí</td><td class="no">—</td><td class="yes">Sí</td><td class="no">—</td></tr>
+          <tr><td class="lvl br">Bronze</td><td class="yes">Sí</td><td class="no">—</td><td class="no">—</td><td class="yes">Sí</td><td class="no">—</td></tr>
+          <tr><td class="lvl es">Espècie</td><td>Segons acord</td><td>Segons acord</td><td>Segons acord</td><td class="yes">Sí</td><td class="yes">Sí</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="block-txt" style="margin-top:14px">A més del nivell, cada partner pot vincular-se a <strong>un equip concret</strong> — com Globasket amb el Sènior A Masculí o Celia amb els Màgics — o a <strong>un projecte</strong>, com Alsea amb el 3x3.</p>
+  </section>
+
+  <section class="block" id="contingut">
+    <div class="block-kicker">05 · Mitjans · Institucions · Marques</div>
     <h2 class="block-title">Xarxa de <em>contingut</em></h2>
     <p class="block-txt">Canals que no són nostres i on publiquem: el contingut el produïm nosaltres i ells només l'aproven. És l'abast que el club aconsegueix sense pagar mitjans.</p>
     <div id="content-network"></div>
   </section>
 
-  <section class="block">
-    <div class="block-kicker">Pròxima fita · Setembre 2026</div>
+  <section class="block" id="federacio">
+    <div class="block-kicker">06 · Pròxima fita · Setembre 2026</div>
     <h2 class="block-title">La Federació,<br>al <em>Barna</em></h2>
     <p class="block-txt">Al setembre la Federació ve a la Nau per explicar de primera mà el seu programa de <strong>mentoria i beques per a entrenadores</strong>: ajudes perquè més dones es treguin el títol d'entrenadora i arribin a les banquetes.</p>
     <p class="block-txt">Que la Federació triï el CB Grup Barna per presentar-ho al territori no és casual: és el reconeixement d'un club que porta anys treballant el bàsquet femení amb dades, mètode i dossier propi.</p>
@@ -228,8 +310,8 @@ body {
     </div>
   </section>
 
-  <section class="block">
-    <div class="block-kicker">Què hem fet aquesta temporada</div>
+  <section class="block" id="projectes">
+    <div class="block-kicker">07 · Què hem fet aquesta temporada</div>
     <h2 class="block-title">Els <em>projectes</em></h2>
     <div class="projects">
       <div class="project"><div class="project-t">3x3 Westfield Glòries</div><div class="project-d">4a edició del torneig urbà al Clot-Glòries, amb web pròpia i 10 categories.</div></div>
@@ -240,6 +322,29 @@ body {
       <div class="project"><div class="project-t">Little Basket Day</div><div class="project-d">Jornada de bàsquet per als més petits del club i del barri.</div></div>
       <div class="project"><div class="project-t">Streaming i galeria</div><div class="project-d">Partits en directe amb MyPlay i galeria de fotos de tots els equips.</div></div>
       <div class="project"><div class="project-t">Imatge de la Nau</div><div class="project-d">Renovació completa de les pancartes de la pista i dos fotocalls nous.</div></div>
+    </div>
+  </section>
+
+  <section class="block" id="colaborar">
+    <div class="block-kicker">08 · Com col·laborar</div>
+    <h2 class="block-title">Quatre passos,<br>sense <em>compromís</em></h2>
+    <p class="block-txt">No cal ser una gran empresa ni tancar una xifra alta. La meitat dels nostres acords són col·laboracions en espècie: material, producte, serveis o experiències per a les famílies.</p>
+    <div class="steps">
+      <div class="step"><div class="step-t">Escriu-nos</div><div class="step-d">Un WhatsApp o un correu. Et responem en menys de 24 hores.</div></div>
+      <div class="step"><div class="step-t">Ens veiem</div><div class="step-d">Vine a la Nau, coneix el club i els equips. Sense presentació de venda.</div></div>
+      <div class="step"><div class="step-t">Proposta a mida</div><div class="step-d">Et proposem el nivell i el format que encaixi amb el teu negoci i el teu pressupost.</div></div>
+      <div class="step"><div class="step-t">Activació</div><div class="step-d">Lona, samarreta, contingut i presència als esdeveniments, amb seguiment durant tota la temporada.</div></div>
+    </div>
+    <div class="tbl-scroll" style="margin-top:18px">
+      <table>
+        <tbody>
+          <tr><td style="width:38%"><strong>WhatsApp</strong></td><td><a href="https://wa.me/34698425153" style="color:var(--red)">+34 698 425 153</a></td></tr>
+          <tr><td><strong>Correu</strong></td><td><a href="mailto:info@cbgrupbarna.com" style="color:var(--red)">info@cbgrupbarna.com</a></td></tr>
+          <tr><td><strong>Web</strong></td><td><a href="https://cbgrupbarna.info" style="color:var(--red)">cbgrupbarna.info</a></td></tr>
+          <tr><td><strong>Instagram</strong></td><td><a href="https://instagram.com/cbgrupbarna" style="color:var(--red)">@cbgrupbarna</a></td></tr>
+          <tr><td><strong>Temps de resposta</strong></td><td>Menys de 24 hores</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
