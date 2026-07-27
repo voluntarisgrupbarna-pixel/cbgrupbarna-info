@@ -83,6 +83,29 @@
     "_todoAna": "Omplir aquest llistat amb els patrocinadors actuals de la temporada 2025-2026"
   },
 
+  "colaboracions": [
+    { "nom": "Westfield Glòries", "rol": "Seu del torneig 3x3", "tipus": "Espai / esdeveniment" },
+    { "nom": "Time Chamber", "rol": "Campus d'estiu i tecnificació", "tipus": "Programa" },
+    { "nom": "Foto Jané", "rol": "Fotografia del club", "tipus": "Serveis" }
+  ],
+
+  "identitatVisual": {
+    "_note": "Valors de marca (sistema visual del club). Font: sistema-visual-cbgb.",
+    "colors": [
+      { "nom": "Vermell Barna", "hex": "#E31E24", "us": "Color primari / accent" },
+      { "nom": "Vermell fosc",  "hex": "#A81318", "us": "Hover / profunditat" },
+      { "nom": "Negre",         "hex": "#050505", "us": "Tinta sobre clar" },
+      { "nom": "Groc",          "hex": "#FFD600", "us": "Avisos / destacats" },
+      { "nom": "Blanc",         "hex": "#FFFFFF", "us": "Fons / espai negatiu" }
+    ],
+    "tipografies": [
+      { "nom": "Bebas Neue",   "rol": "Display / titulars", "mostra": "CB GRUP BARNA" },
+      { "nom": "Inter",        "rol": "Text corrent",       "mostra": "Bàsquet base des de 1965" },
+      { "nom": "JetBrains Mono","rol": "Dades / etiquetes",  "mostra": "0123456789 · #somclot" }
+    ],
+    "hashtag": "#somclot"
+  },
+
   "xarxes": {
     "instagram": { "handle": "@cbgrupbarna", "url": "https://instagram.com/cbgrupbarna" },
     "whatsapp":  { "numero": "+34698425153", "link": "https://wa.me/34698425153" },

@@ -4,88 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Dashboard Màrqueting · CB Grup Barna</title>
+<title>Màrqueting · CB Grup Barna</title>
 <link rel="icon" href="../logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --red:#E31E24; --red-dark:#a81318; --black:#050505; --panel:#0e0e10; --panel2:#141417;
-    --border:#232327; --text:#ffffff; --muted:#8a8a8a; --dim:#5a5a60;
-    --green:#22c55e; --yellow:#FFD600; --blue:#3b82f6; --orange:#f97316; --pink:#cc2366;
-    --mono:'JetBrains Mono',monospace; --display:'Bebas Neue','Arial Narrow',sans-serif; --body:'Inter',sans-serif;
+    color-scheme:light;
+    --cream:#F4EFE4; --paper:#FCFAF4; --paper2:#F0E9DA;
+    --ink:#211C17; --muted:#8A8175; --dim:#B3AA9A; --line:#E4DCCB;
+    --red:#E31E24; --red-dark:#A81318; --gold:#B8863B; --green:#3F8A4E;
+    --mono:'JetBrains Mono',monospace; --display:'Bebas Neue','Arial Narrow',sans-serif; --body:'Inter',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--black);color:var(--text);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.4}
+  body{background:var(--cream);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.45}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 18px 80px}
-  .top{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
-  .top img{height:52px;filter:drop-shadow(0 2px 8px #00000060)}
-  .kicker{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:4px}
-  .top h1{font-family:var(--display);font-size:27px;letter-spacing:1px;font-weight:400}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px 90px}
+
+  /* Header */
+  .top{display:flex;align-items:center;gap:16px;padding:22px 0 20px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+  .top img{height:56px}
+  .kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:5px}
+  .top h1{font-family:var(--display);font-size:34px;letter-spacing:1px;font-weight:400;line-height:.9}
   .top .spacer{flex:1}
-  .navlink{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border);padding:7px 12px;border-radius:8px;white-space:nowrap}
-  .navlink:hover{color:var(--text);border-color:var(--red)}
+  .navlink{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line);background:var(--paper);padding:8px 13px;border-radius:9px;white-space:nowrap;transition:.15s}
+  .navlink:hover{color:var(--ink);border-color:var(--red)}
   .season{font-family:var(--mono);font-size:11px;color:var(--dim)}
 
-  section{margin-top:30px}
-  .sec-title{font-family:var(--display);font-size:19px;letter-spacing:1.5px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-  .sec-title::before{content:'';width:3px;height:16px;background:var(--red);display:inline-block}
-  .sec-title small{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase;font-weight:400}
+  section{margin-top:36px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+  .sec-n{font-family:var(--mono);font-size:12px;color:var(--red);font-weight:700}
+  .sec-title{font-family:var(--display);font-size:24px;letter-spacing:1px}
+  .sec-sub{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-left:auto}
 
-  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-  .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:15px;position:relative;overflow:hidden}
-  .kpi::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;opacity:.75}
-  .kpi.c-red::after{background:var(--red)}.kpi.c-blue::after{background:var(--blue)}.kpi.c-green::after{background:var(--green)}.kpi.c-orange::after{background:var(--orange)}.kpi.c-yellow::after{background:var(--yellow)}.kpi.c-pink::after{background:var(--pink)}
-  .kpi .kl{font-family:var(--mono);font-size:9.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-  .kpi .kv{font-family:var(--display);font-size:33px;line-height:.9}
-  .kpi .ks{font-family:var(--mono);font-size:11px;margin-top:6px;color:var(--dim)}
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:13px}
+  .kpi{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:15px 16px;position:relative;overflow:hidden;box-shadow:0 1px 2px #0000000a}
+  .kpi::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--red)}
+  .kpi .kl{font-family:var(--mono);font-size:9px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .kpi .kv{font-family:var(--display);font-size:34px;line-height:.85;color:var(--ink)}
+  .kpi .ks{font-family:var(--mono);font-size:10.5px;margin-top:7px;color:var(--dim)}
   .ks .up{color:var(--green)}.ks .down{color:var(--red)}
 
-  .grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}
+  .grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:20px;box-shadow:0 1px 2px #0000000a}
   .card h3{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
   .card h3 a{color:var(--red);font-size:10px}
 
-  .big-pct{font-family:var(--display);font-size:52px;line-height:.85}
-  .big-sub{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px}
-  .cap-bar{height:12px;background:var(--panel2);border-radius:999px;overflow:hidden;margin:14px 0 6px}
-  .cap-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--red),#ff5a5f)}
-  .split{display:flex;gap:6px;margin-top:14px;font-family:var(--mono);font-size:11px}
-  .split .seg{height:10px;border-radius:3px}
-  .row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-family:var(--mono);font-size:12px}
-  .row .rl{width:150px;color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .row .rbar{flex:1;height:9px;background:var(--panel2);border-radius:999px;overflow:hidden}
-  .row .rfill{height:100%;border-radius:999px;background:var(--red)}
-  .row .rv{width:60px;text-align:right}
+  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .stat .sl{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  .stat .sv{font-family:var(--display);font-size:30px;line-height:1}
 
-  .events{display:flex;flex-direction:column;gap:0}
-  .ev{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);align-items:center}
-  .ev:last-child{border:none}
-  .ev .ed{font-family:var(--mono);font-size:11px;color:var(--red);width:110px;flex-shrink:0}
-  .ev .en{font-size:13px;font-weight:600}
-  .ev .et{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-left:auto;border:1px solid var(--border);padding:3px 8px;border-radius:999px}
-
-  .bench-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-family:var(--mono);font-size:12px}
-  .bench-row .bn{width:150px;color:#c4c4c8;font-size:11px;display:flex;flex-direction:column;gap:2px}
+  /* Benchmark */
+  .bench-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-family:var(--mono);font-size:12px}
+  .bench-row .bn{width:150px;color:var(--ink);font-size:11px;display:flex;flex-direction:column;gap:2px}
   .bench-row .bn-sub{font-size:9px;color:var(--dim)}
   .bench-row.me .bn{color:var(--red);font-weight:700}
-  .bench-bar{flex:1;height:12px;background:var(--panel2);border-radius:999px;overflow:hidden;min-width:50px}
-  .bench-fill{height:100%;border-radius:999px;background:#3a3a40}
+  .bench-bar{flex:1;height:12px;background:var(--paper2);border-radius:999px;overflow:hidden;min-width:50px}
+  .bench-fill{height:100%;border-radius:999px;background:#D8CDB6}
   .bench-row.me .bench-fill{background:var(--red)}
-  .bench-meta{width:110px;text-align:right;font-size:10px}
+  .bench-meta{width:100px;text-align:right;font-size:10px}
   .bg.up{color:var(--green)}.bg.down{color:var(--red)}.bg.pend{color:var(--dim)}
-  .bench-row .bv{width:52px;text-align:right}
+  .bench-row .bv{width:50px;text-align:right}
 
-  .spons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .sp{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
-  .sp .spt{font-family:var(--display);font-size:18px;letter-spacing:1px}
-  .sp.gold .spt{color:#d4af37}.sp.silver .spt{color:#c0c0c0}.sp.bronze .spt{color:#cd7f32}
-  .sp .spn{font-family:var(--display);font-size:34px}
-  .sp .spp{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
-  .spons-note{margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--yellow);background:#14110340;border:1px solid #4a3f0a;border-radius:8px;padding:10px 12px}
+  /* Identitat visual */
+  .brand{display:grid;grid-template-columns:0.9fr 1.1fr 1fr;gap:16px}
+  .logo-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:26px}
+  .logo-box img{height:96px}
+  .logo-box .tag{font-family:var(--display);font-size:22px;letter-spacing:4px;color:var(--red)}
+  .swatches{display:flex;flex-direction:column;gap:9px}
+  .sw{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:9px 12px}
+  .sw .chip{width:34px;height:34px;border-radius:8px;border:1px solid #00000018;flex-shrink:0}
+  .sw .sw-n{font-weight:600;font-size:13px}
+  .sw .sw-h{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .sw .sw-u{font-family:var(--mono);font-size:9.5px;color:var(--dim);margin-left:auto;text-align:right;max-width:110px}
+  .type-list{display:flex;flex-direction:column;gap:11px}
+  .type-item{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .type-item .tm{font-size:22px;line-height:1.1;color:var(--ink)}
+  .type-item .tn{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px;display:flex;justify-content:space-between}
+  .t-bebas{font-family:var(--display);letter-spacing:1px;font-size:28px}
+  .t-inter{font-family:var(--body);font-weight:600}
+  .t-mono{font-family:var(--mono)}
 
-  .foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-  @media(max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)}.grid2{grid-template-columns:1fr}}
+  /* Sponsors */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+  .tier{border:1px solid var(--line);border-radius:13px;padding:16px;background:var(--paper)}
+  .tier .th{font-family:var(--display);font-size:19px;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+  .tier.gold .th{color:var(--gold)}.tier.silver .th{color:#8C8C8C}.tier.bronze .th{color:#A9713B}
+  .tier .tc{font-family:var(--display);font-size:38px;line-height:1;margin:6px 0}
+  .tier .tp{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--dim)}
+  .tier .tslot{font-family:var(--mono);font-size:10px;color:var(--red);margin-top:8px}
+  .collab{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+  .col{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:15px;display:flex;flex-direction:column;gap:5px}
+  .col .cn{font-family:var(--display);font-size:20px;letter-spacing:.5px}
+  .col .cr{font-size:12px;color:var(--muted)}
+  .col .ct{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--red);border:1px solid var(--line);border-radius:999px;padding:3px 9px;align-self:flex-start;margin-top:4px}
+  .note{margin-top:14px;font-family:var(--mono);font-size:11px;color:#8a6d1a;background:#FBF3D6;border:1px solid #EAD9A0;border-radius:9px;padding:11px 13px}
+
+  .foot{margin-top:48px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)}.grid2,.brand{grid-template-columns:1fr}.collab,.tiers{grid-template-columns:1fr}}
   @media(max-width:520px){.kpis{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -94,8 +110,8 @@
   <div class="top">
     <img src="../logo.png" alt="CB Grup Barna">
     <div>
-      <div class="kicker">Direcció de màrqueting</div>
-      <h1>DASHBOARD · MÀRQUETING</h1>
+      <div class="kicker">Direcció de màrqueting · CB Grup Barna</div>
+      <h1>DASHBOARD DE MÀRQUETING</h1>
     </div>
     <div class="spacer"></div>
     <a class="navlink" href="./">Panell IG →</a>
@@ -104,33 +120,16 @@
   </div>
 
   <section>
-    <div class="sec-title">Indicadors clau <small id="upd"></small></div>
+    <div class="sec-head"><span class="sec-title">Indicadors clau</span><span class="sec-sub" id="upd"></span></div>
     <div class="kpis" id="kpis"></div>
   </section>
 
   <section>
-    <div class="sec-title">Captació &amp; ocupació</div>
+    <div class="sec-head"><span class="sec-n">01</span><span class="sec-title">Xarxes socials</span><span class="sec-sub">Instagram · @cbgrupbarna</span></div>
     <div class="grid2">
       <div class="card">
-        <h3>Campus d'estiu · ocupació</h3>
-        <div id="campusTop"></div>
-        <div id="campusWeeks" style="margin-top:16px"></div>
-      </div>
-      <div class="card">
-        <h3>3x3 Westfield Glòries</h3>
-        <div id="tres"></div>
-        <h3 style="margin-top:22px">Comunitat</h3>
-        <div id="comunitat"></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-title">Xarxes socials</div>
-    <div class="grid2">
-      <div class="card">
-        <h3>Instagram · @cbgrupbarna <a href="./">obrir panell →</a></h3>
-        <div id="igsum"></div>
+        <h3>Rendiment d'Instagram <a href="./">obrir panell →</a></h3>
+        <div class="statgrid" id="igsum"></div>
       </div>
       <div class="card">
         <h3>Creixement vs rivals</h3>
@@ -140,15 +139,28 @@
   </section>
 
   <section>
-    <div class="sec-title">Calendari d'esdeveniments</div>
-    <div class="card"><div class="events" id="events"></div></div>
+    <div class="sec-head"><span class="sec-n">02</span><span class="sec-title">Identitat visual</span><span class="sec-sub">Sistema de marca</span></div>
+    <div class="brand">
+      <div class="logo-box">
+        <img src="../logo.png" alt="CB Grup Barna">
+        <div class="tag" id="tag">#SOMCLOT</div>
+      </div>
+      <div>
+        <div class="swatches" id="colors"></div>
+      </div>
+      <div>
+        <div class="type-list" id="types"></div>
+      </div>
+    </div>
   </section>
 
   <section>
-    <div class="sec-title">Patrocinis</div>
+    <div class="sec-head"><span class="sec-n">03</span><span class="sec-title">Patrocinadors i col·laboracions</span><span class="sec-sub">Temporada <span id="seasonId"></span></span></div>
     <div class="card">
-      <div class="spons" id="spons"></div>
-      <div class="spons-note" id="sponsNote" style="display:none"></div>
+      <div class="tiers" id="tiers"></div>
+      <h3 style="margin-top:6px">Col·laboradors actuals</h3>
+      <div class="collab" id="collab"></div>
+      <div class="note" id="sponsNote" style="display:none"></div>
     </div>
   </section>
 
@@ -166,98 +178,50 @@ const pct=(a,b)=>b?Math.round(a/b*100):0;
 
 async function boot(){
   let club,ig;
-  try{
-    club = window.__CLUB__ || await (await fetch('../data.json?t='+Date.now())).json();
-  }catch(e){ club={}; }
-  try{
-    ig = window.__IG__ || await (await fetch('./data.json?t='+Date.now())).json();
-  }catch(e){ ig={kpis:{}}; }
+  try{ club = window.__CLUB__ || await (await fetch('../data.json?t='+Date.now())).json(); }catch(e){ club={}; }
+  try{ ig = window.__IG__ || await (await fetch('./data.json?t='+Date.now())).json(); }catch(e){ ig={kpis:{}}; }
   render(club, ig);
 }
 
 function render(club, ig){
-  const k = ig.kpis||{};
-  const cm = club.comunitat||{};
-  const camp = club.campus||{weeks:[]};
-  const weeks = camp.weeks||[];
-  const capacity = (camp.limitPerWeek||50)*weeks.length;
-  const filled = weeks.reduce((a,w)=>a+(w.filled||0),0);
-  const barna = weeks.reduce((a,w)=>a+(w.barna||0),0);
-  const ext = weeks.reduce((a,w)=>a+(w.ext||0),0);
-  const occ = pct(filled,capacity);
+  const k=ig.kpis||{}, camp=club.campus||{weeks:[]};
+  const weeks=camp.weeks||[];
+  const capacity=(camp.limitPerWeek||50)*weeks.length;
+  const filled=weeks.reduce((a,w)=>a+(w.filled||0),0);
+  const p=club.patrocinadors||{};
+  const collab=club.colaboracions||[];
+  const nSpons=(p.gold||[]).length+(p.silver||[]).length+(p.bronze||[]).length;
 
-  $('#season').textContent = 'Temporada '+(club.temporada?.id||'');
-  $('#upd').textContent = ig.meta?.generatedAt ? 'IG actualitzat '+new Date(ig.meta.generatedAt).toLocaleDateString('ca-ES',{day:'2-digit',month:'short'}) : '';
-  $('#src').textContent = 'Dades: hub del club + panell IG'+(ig.meta?.mode==='demo'?' (IG en demo)':'');
+  $('#season').textContent='Temporada '+(club.temporada?.id||'');
+  $('#seasonId').textContent=club.temporada?.id||'';
+  $('#upd').textContent=ig.meta?.generatedAt?('IG · '+new Date(ig.meta.generatedAt).toLocaleDateString('ca-ES',{day:'2-digit',month:'short'})):'';
+  $('#src').textContent='Dades: hub del club + panell IG'+(ig.meta?.mode==='demo'?' (IG en demo)':'');
 
   // KPIs
   const dl=k.followersDelta;
   const kpis=[
-    {c:'red',l:'Seguidors IG',v:fmt(k.followers),s:dl!=null?`<span class="${dl>=0?'up':'down'}">${dl>=0?'▲':'▼'} ${Math.abs(dl)}</span> avui`:''},
-    {c:'pink',l:'Engagement',v:k.avgEngagementRate!=null?k.avgEngagementRate+'%':'—',s:'mitjana per post'},
-    {c:'blue',l:'Abast 30d',v:fmt(k.reach30),s:'comptes assolits'},
-    {c:'orange',l:'Ocupació campus',v:occ+'%',s:`${fmt(filled)} de ${fmt(capacity)}`},
-    {c:'green',l:'Equips',v:fmt(cm.equips),s:'a la temporada'},
-    {c:'yellow',l:'Famílies',v:fmt(cm.families),s:'comunitat del club'},
+    {l:'Seguidors IG',v:fmt(k.followers),s:dl!=null?`<span class="${dl>=0?'up':'down'}">${dl>=0?'▲':'▼'} ${Math.abs(dl)}</span> avui`:''},
+    {l:'Engagement',v:k.avgEngagementRate!=null?k.avgEngagementRate+'%':'—',s:'mitjana per post'},
+    {l:'Abast 30d',v:fmt(k.reach30),s:'comptes assolits'},
+    {l:'Ocupació campus',v:pct(filled,capacity)+'%',s:`${fmt(filled)}/${fmt(capacity)}`},
+    {l:'Patrocinadors',v:nSpons,s:'actius'},
+    {l:'Col·laboradors',v:collab.length,s:'en especie'},
   ];
-  $('#kpis').innerHTML = kpis.map(x=>`<div class="kpi c-${x.c}"><div class="kl">${x.l}</div><div class="kv">${x.v}</div><div class="ks">${x.s||''}</div></div>`).join('');
-
-  // Campus
-  $('#campusTop').innerHTML = `
-    <div style="display:flex;align-items:flex-end;gap:12px">
-      <div class="big-pct">${occ}%</div>
-      <div class="big-sub">${fmt(filled)} inscrits<br>de ${fmt(capacity)} places ${occ>=100?'· <span style="color:var(--green)">llista d’espera</span>':''}</div>
-    </div>
-    <div class="cap-bar"><div class="cap-fill" style="width:${Math.min(100,occ)}%"></div></div>
-    <div class="split">
-      <div class="seg" style="width:${pct(barna,filled)}%;background:var(--red)"></div>
-      <div class="seg" style="width:${pct(ext,filled)}%;background:#3a3a40"></div>
-    </div>
-    <div style="display:flex;gap:16px;margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--muted)">
-      <span><span style="color:var(--red)">■</span> Del club ${fmt(barna)} (${pct(barna,filled)}%)</span>
-      <span><span style="color:#3a3a40">■</span> Externs ${fmt(ext)} (${pct(ext,filled)}%)</span>
-    </div>`;
-  const maxw=Math.max(...weeks.map(w=>w.filled||0),1);
-  $('#campusWeeks').innerHTML = weeks.map(w=>`
-    <div class="row"><span class="rl">${esc(w.label||('S'+w.id))}</span>
-      <span class="rbar"><span class="rfill" style="width:${(w.filled/maxw*100).toFixed(0)}%;background:${w.filled>=(camp.limitPerWeek||50)?'var(--green)':'var(--red)'}"></span></span>
-      <span class="rv">${fmt(w.filled)}</span></div>`).join('');
-
-  // 3x3
-  const t=club.tres_x_tres;
-  if(t){
-    $('#tres').innerHTML = `
-      <div style="display:flex;align-items:flex-end;gap:12px">
-        <div class="big-pct" style="font-size:40px">${pct(t.filled,t.limit)}%</div>
-        <div class="big-sub">${fmt(t.filled)} de ${fmt(t.limit)} equips<br>${esc(t.deadlineNote||'')}</div>
-      </div>
-      <div class="cap-bar"><div class="cap-fill" style="width:${Math.min(100,pct(t.filled,t.limit))}%"></div></div>`;
-  } else $('#tres').innerHTML='<div style="color:var(--dim);font-size:12px">Sense dades</div>';
-
-  // Comunitat
-  $('#comunitat').innerHTML = `
-    <div style="display:flex;gap:24px;font-family:var(--mono)">
-      <div><div style="font-size:10px;color:var(--muted);letter-spacing:1px">EQUIPS</div><div class="big-pct" style="font-size:34px">${fmt(cm.equips)}</div></div>
-      <div><div style="font-size:10px;color:var(--muted);letter-spacing:1px">FAMÍLIES</div><div class="big-pct" style="font-size:34px">${fmt(cm.families)}</div></div>
-      <div><div style="font-size:10px;color:var(--muted);letter-spacing:1px">CATEGORIES</div><div class="big-pct" style="font-size:34px">${fmt((club.temporada?.categoriesActives||[]).length)}</div></div>
-    </div>`;
+  $('#kpis').innerHTML=kpis.map(x=>`<div class="kpi"><div class="kl">${x.l}</div><div class="kv">${x.v}</div><div class="ks">${x.s||''}</div></div>`).join('');
 
   // IG summary
-  $('#igsum').innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-family:var(--mono)">
-      ${[['Seguidors',fmt(k.followers)],['Abast 30d',fmt(k.reach30)],['Visites perfil',fmt(k.profileViews30)],['Mencions',fmt(k.mentionsCount)],['Interaccions 30d',fmt(k.totalInteractions30)],['Publicacions',fmt(k.posts)]]
-        .map(([l,v])=>`<div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">${l}</div><div class="big-pct" style="font-size:28px">${v}</div></div>`).join('')}
-    </div>`;
+  $('#igsum').innerHTML=[['Seguidors',fmt(k.followers)],['Abast 30d',fmt(k.reach30)],['Visites perfil',fmt(k.profileViews30)],['Interaccions 30d',fmt(k.totalInteractions30)],['Mencions',fmt(k.mentionsCount)],['Publicacions',fmt(k.posts)]]
+    .map(([l,v])=>`<div class="stat"><div class="sl">${l}</div><div class="sv">${v}</div></div>`).join('');
 
   // Benchmark
   const rivals=ig.benchmark?.rivals||[];
   if(rivals.length){
     const meUser=(ig.meta?.account||'').replace('@','');
     const max=Math.max(...rivals.map(r=>r.followers??r.followersStart??0))||1;
-    $('#bench').innerHTML = rivals.map(r=>{
+    $('#bench').innerHTML=rivals.map(r=>{
       const me=r.self||r.username===meUser; const cur=r.followers, st=r.followersStart; const val=cur??st??0;
       let meta='';
-      if(cur!=null&&st!=null){const g=cur-st,p=st?g/st*100:0,up=g>=0;meta=`<span class="bg ${up?'up':'down'}">${up?'▲':'▼'} ${Math.abs(p).toFixed(0)}%</span>`;}
+      if(cur!=null&&st!=null){const g=cur-st,pp=st?g/st*100:0,up=g>=0;meta=`<span class="bg ${up?'up':'down'}">${up?'▲':'▼'} ${Math.abs(pp).toFixed(0)}%</span>`;}
       else if(cur==null) meta='<span class="bg pend">pendent</span>';
       const num=cur!=null?fmt(cur):(st!=null?fmt(st):'—');
       const sub=st!=null?`inici ${fmt(st)}`:'';
@@ -267,23 +231,30 @@ function render(club, ig){
     }).join('');
   } else $('#bench').innerHTML='<div style="color:var(--dim);font-size:12px">Sense dades de rivals</div>';
 
-  // Events
-  const evs=(club.events?.calendari||[]).slice().sort((a,b)=>(a.inici||'')<(b.inici||'')?-1:1);
-  const TIPUS={torneig:'Torneig',campanya:'Campanya',campus:'Campus',jornada:'Jornada'};
-  $('#events').innerHTML = evs.length? evs.map(e=>{
-    const d=new Date(e.inici+'T00:00:00'); const dl=d.toLocaleDateString('ca-ES',{day:'2-digit',month:'short'});
-    return `<div class="ev"><span class="ed">${dl}</span><span class="en">${esc(e.nom)}</span><span class="et">${TIPUS[e.tipus]||e.tipus}</span></div>`;
-  }).join('') : '<div style="color:var(--dim);font-size:12px">Sense esdeveniments</div>';
+  // Identitat visual
+  const iv=club.identitatVisual||{};
+  $('#tag').textContent=(iv.hashtag||'#somclot').toUpperCase();
+  $('#colors').innerHTML=(iv.colors||[]).map(c=>`
+    <div class="sw"><span class="chip" style="background:${esc(c.hex)}"></span>
+      <span><div class="sw-n">${esc(c.nom)}</div><div class="sw-h">${esc(c.hex)}</div></span>
+      <span class="sw-u">${esc(c.us||'')}</span></div>`).join('');
+  const tclass={'Bebas Neue':'t-bebas','Inter':'t-inter','JetBrains Mono':'t-mono'};
+  $('#types').innerHTML=(iv.tipografies||[]).map(t=>`
+    <div class="type-item"><div class="tm ${tclass[t.nom]||''}">${esc(t.mostra)}</div>
+      <div class="tn"><span>${esc(t.nom)}</span><span>${esc(t.rol)}</span></div></div>`).join('');
 
-  // Patrocinis
-  const p=club.patrocinadors||{};
-  const tiers=[['gold','Gold'],['silver','Silver'],['bronze','Bronze']];
-  const totalSp=(p.gold||[]).length+(p.silver||[]).length+(p.bronze||[]).length;
-  $('#spons').innerHTML = tiers.map(([key,lab])=>`
-    <div class="sp ${key}"><div class="spt">${lab}</div><div class="spn">${(p[key]||[]).length}</div><div class="spp">patrocinadors</div></div>`).join('');
-  if(totalSp===0){
+  // Patrocinadors + col·laboracions
+  const tiers=[['gold','Or','◆'],['silver','Plata','◆'],['bronze','Bronze','◆']];
+  $('#tiers').innerHTML=tiers.map(([key,lab,ic])=>{
+    const n=(p[key]||[]).length;
+    return `<div class="tier ${key}"><div class="th">${ic} ${lab}</div><div class="tc">${n}</div><div class="tp">patrocinadors</div>${n===0?'<div class="tslot">Disponible →</div>':''}</div>`;
+  }).join('');
+  $('#collab').innerHTML=collab.length?collab.map(c=>`
+    <div class="col"><div class="cn">${esc(c.nom)}</div><div class="cr">${esc(c.rol||'')}</div><span class="ct">${esc(c.tipus||'')}</span></div>`).join('')
+    :'<div style="color:var(--dim);font-size:12px">Encara no hi ha col·laboradors carregats.</div>';
+  if(nSpons===0){
     $('#sponsNote').style.display='block';
-    $('#sponsNote').innerHTML='⚠ Encara no hi ha patrocinadors carregats. Omple <b>data.json → patrocinadors</b> per veure aquí el pipeline i les contraprestacions.';
+    $('#sponsNote').innerHTML='⚠ Els nivells de patrocini estan buits. Omple <b>data.json → patrocinadors</b> (or/plata/bronze) per veure aquí el pipeline i les contraprestacions.';
   }
 }
 boot();
