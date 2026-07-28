@@ -23,6 +23,9 @@ mes siguiente. El error es parte del conocimiento.
 | `bbdd/decisions.csv` | Decisiones tomadas y prácticas matadas, con su estado | Cada vez que se cierra un debate o se prohíbe una práctica |
 | `bbdd/lleis.csv` | Reglas que damos por buenas, con su nivel de confianza | Cuando un patrón se verifica con datos propios |
 | `bbdd/reels.csv` | Autopsia de cada reel publicado (frame 0, guardados, retención) | 24-48 h después de publicar cada reel |
+| `bbdd/analisis.csv` | Qué hemos analizado (datos propios, benchmarks, referencias) y qué salió de ahí | Al terminar un análisis o benchmark |
+| `bbdd/correccions.csv` | Qué creíamos, qué sabemos ahora y con qué prueba | Cada vez que cambiamos de opinión |
+| `bbdd/skills.csv` | Inventario del ecosistema de skills, con estado de cada una | Al crear, fusionar o jubilar una skill |
 | `bbdd/obertes.md` | Preguntas sin responder e inconsistencias sin resolver | En cuanto aparece una; se borra al cerrarla |
 | `historico/AAAA-MM.md` | El mes narrado: qué pasó, qué cambió de opinión, qué se decidió | Al cerrar mes |
 
