@@ -137,8 +137,11 @@ centered logo on a sèrie cover.
 
 ## Fixed rules
 
-1. **White background ⇒ mandatory red frame.** Any `bg-white` piece (either
-   template) gets a solid `26px` border in `--red` around the entire canvas.
+1. **Every piece ⇒ mandatory red frame, not just white.** Every `.story`,
+   whatever its background, gets a solid `26px` border in `--red` around the
+   entire canvas. On `bg-red` add an inner dark keyline (`box-shadow: inset 0
+   0 0 8px rgba(0,0,0,.55)`) so the frame still reads as a frame instead of
+   disappearing into a same-hue background.
 2. **Plate for one person, veil for a series — see Template A above.** Getting
    this backwards is the most common mistake with this system.
 3. **Pill/tag are fixed brand chips** (Template A only). Always red/black,
@@ -155,6 +158,17 @@ centered logo on a sèrie cover.
    exact register cratered to 748 views vs. 3K–12K elsewhere when it was
    nearly every piece — repetition fatigue. Cap it at 3–4 Feed pieces at a
    time; lean on Template A or an actual video for anything more frequent.
+8. **Keep the headline block inside the grid-crop safe zone.** `.content`
+   anchors at `bottom:480px` (not `190px`) precisely so the message survives
+   Instagram's own crops of the 1080×1920 canvas: the feed's 4:5 crop keeps
+   only the center 1080×1350 (cutting ~285px off top and bottom), and the
+   legacy 1:1 grid crop keeps only the center 1080×1080 (cutting ~420px off
+   each). Escut/pill/tag sit in the top strip and the footer sits in the
+   bottom strip — both are accepted losses in a grid thumbnail (that's the
+   known cost of rule 4's top-right escut), but the headline itself must not
+   be one of them. This rule governs the **reusable template** (Template A/B,
+   Radar Barna) — it does not apply retroactively to the "Portades de sèrie"
+   gallery, which shows real, already-published pieces unmodified on purpose.
 
 ## Producing a new piece
 
