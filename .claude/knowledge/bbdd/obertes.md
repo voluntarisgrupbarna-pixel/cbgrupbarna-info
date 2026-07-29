@@ -10,9 +10,14 @@ conclusión a `lleis.csv` / `decisions.csv` y borrándola de aquí.
 | **O-01** | El rojo de marca: `benchmark-clubs-barri-cbgb` dice `#CC0000`; el resto del ecosistema usa `#E63329` | Alto — afecta a toda pieza gráfica | Abrir `tokens.conf` (fuente de verdad de `sistema-visual-cbgb`), fijar el valor y corregir la skill desviada |
 | **O-02** | `assets/tokens.conf` no está en la carpeta de `sistema-visual-cbgb`: la skill apunta a un archivo que no acompaña | Alto — nadie puede verificar un token | Localizarlo en el knowledge "Barna" y dejarlo junto a la skill |
 | **O-03** | `aparador-perfil-cbgb` y `aparador-ig-cbgb` cubren lo mismo en dos idiomas | Medio — carga de contexto duplicada y riesgo de divergencia | Fusionar en una, como se hizo con `codis-lux-cbgb` |
-| **O-11** | **8 skills están referenciadas pero NO instaladas**: `cb-grup-barna`, `mi-rol-coordinadora`, `millorar-club-top-bcn`, `disseny-estetic-club`, `psicologia-social-club`, `referent-basquet-espanyol`, `crear-apps-webs-club`, `xarxes-socials-club` | **Alto** — `/cbgb` enruta a skills que no existen, y `arranque-eficiente` obliga a entrar por ahí | Recuperarlas o quitar la referencia. Ver `bbdd/skills.csv` (estado `FALTA`) |
-| **O-12** | El ecosistema de skills vive en `~/.claude/skills/` **sin control de versiones**: un borrado accidental no se recupera | **Alto** — es el activo de conocimiento del club | Espejarlas en el repo o en un repo propio de skills |
-| **O-13** | El índice de `/cbgb` no incluye ninguna skill de julio (doctrina, memoria, ganxos, aparador, arrencada, portada) | Alto — el punto de entrada no encuentra lo nuevo | Actualizar la tabla de enrutado de `/cbgb` |
+| **O-11** | **9 skills están referenciadas pero NO instaladas**: `cb-grup-barna`, `mi-rol-coordinadora`, `millorar-club-top-bcn`, `disseny-estetic-club`, `psicologia-social-club`, `referent-basquet-espanyol`, `crear-apps-webs-club`, `xarxes-socials-club`, `guions-virals-cbgb` | **Alto** — `/cbgb` enruta a skills que no existen, y `arranque-eficiente` obliga a entrar por ahí | Recuperarlas o quitar la referencia. Ver `bbdd/skills.csv` (estado `FALTA`). Mientras tanto, `/cbgb` las marca con ⚠️ para que se avise en vez de improvisar |
+
+**Cerradas** — se dejan escritas con su fecha, no se borran:
+
+| # | Qué era | Cómo se cerró |
+|---|---|---|
+| ~~O-12~~ | El ecosistema vivía en `~/.claude/skills/` sin control de versiones | **2026-07-29**: espejado en `.claude/skills-backup/` del repo (36 skills) y pusheado a GitHub |
+| ~~O-13~~ | El índice de `/cbgb` no incluía ninguna skill de julio | **2026-07-29**: tabla de enrutado rehecha + flujo "Publicar un reel (la cadena de conversión)" |
 
 ## Datos por confirmar
 
