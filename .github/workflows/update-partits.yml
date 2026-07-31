@@ -8,7 +8,10 @@ name: update-partits
 
 on:
   schedule:
+    # dilluns: recollir resultats del cap de setmana
     - cron: "0 5 * * 1"
+    # dijous de matinada: partits del cap de setmana carregats abans de les 9:00
+    - cron: "0 5 * * 4"
   workflow_dispatch:
 
 permissions:

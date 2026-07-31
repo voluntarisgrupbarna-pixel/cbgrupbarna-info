@@ -346,6 +346,9 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
         <label class="c-lab">Foto jugador/a (tu la puges)
           <input type="file" id="c-photo" accept="image/*">
         </label>
+        <label class="c-lab">…o tria de la plantilla
+          <select id="c-player"><option value="">—</option></select>
+        </label>
         <label class="c-lab">Logo rival (opcional)
           <input type="file" id="c-rival" accept="image/*">
         </label>
@@ -356,6 +359,7 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
       <p style="font-size:11px">💡 Si puges una <b>plantilla pròpia</b> (el disseny que tu vulguis, 1080×1350), la app només hi escriu a sobre les dades del partit: marcador si s'ha jugat, o dia i hora si és prèvia. Res més.</p>
       <button class="g-btn" id="c-gen">⚡ Generar cartell</button>
       <button class="g-btn ghost" id="c-down" style="display:none">⬇ Descarregar PNG</button>
+      <button class="g-btn ghost" id="c-gamedays" title="Genera i descarrega el UN DIA DE PARTIT de cada sènior del proper cap de setmana, rotant jugadors/es">🎮 Game days sèniors del finde</button>
     </div>
     <canvas id="c-canvas" width="1080" height="1350" style="width:100%;border-radius:16px;border:1px solid var(--border);display:none"></canvas>
     </div><!-- fi cartells-open -->
@@ -375,6 +379,17 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
         <p>Arrossega aquí el <b>Calendari Global Equip</b> (PDF de basquetcatala.cat) de qualsevol equip. Es detecten sols els partits, la categoria, casa/fora i la pista. Els partits nous s'afegeixen i els existents s'actualitzen (canvis d'hora, aplaçaments).</p>
         <div class="drop" id="drop">Deixa anar el PDF aquí<br>o <label style="color:var(--red);cursor:pointer;text-decoration:underline">tria un arxiu<input type="file" id="pdf-file" accept="application/pdf" hidden multiple></label></div>
         <div class="g-log" id="pdf-log"></div>
+      </div>
+      <div class="g-box">
+        <h3>🏃 Jugadors i jugadores per als cartells</h3>
+        <p>Puja la foto amb nom i equip. <b>No es poden repetir</b>: el sistema no deixa duplicar noms i el botó de game days va rotant perquè no surti sempre la mateixa persona. Les fotos queden guardades en aquest dispositiu.</p>
+        <div class="c-grid">
+          <label class="c-lab">Nom<input type="text" id="j-nom" placeholder="Nom i cognom"></label>
+          <label class="c-lab">Equip<select id="j-equip"></select></label>
+          <label class="c-lab" style="grid-column:1/-1">Foto<input type="file" id="j-foto" accept="image/*"></label>
+        </div>
+        <button class="g-btn" id="j-add">➕ Afegir jugador/a</button>
+        <div id="j-list" style="margin-top:12px"></div>
       </div>
       <div class="g-box">
         <h3>💾 Publicar canvis</h3>
@@ -413,8 +428,9 @@ let editMode = false;
 let state = { wk: null, filter: 'tots', team: null };
 
 function loadOverrides() {
-  try { return Object.assign({resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{}}, JSON.parse(localStorage.getItem(LS_KEY)||'{}')); }
-  catch(e){ return {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{}}; }
+  const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[]};
+  try { return Object.assign(def, JSON.parse(localStorage.getItem(LS_KEY)||'{}')); }
+  catch(e){ return def; }
 }
 function saveOverrides(){ localStorage.setItem(LS_KEY, JSON.stringify(OV)); }
 
@@ -860,9 +876,69 @@ function exportJson() {
 }
 
 /* =========================================================
+   🏃 PLANTILLA DE JUGADORS/ES (úniques, amb rotació)
+   ========================================================= */
+function normNom(s){ return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function compressPhoto(file) {
+  return fileToImg(file).then(img=>{
+    const c = document.createElement('canvas');
+    const s = Math.min(1, 1080/Math.max(img.width,img.height));
+    c.width = img.width*s; c.height = img.height*s;
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    return c.toDataURL('image/jpeg',0.82);
+  });
+}
+async function addJugador() {
+  const nom = document.getElementById('j-nom').value.trim();
+  const equipId = document.getElementById('j-equip').value;
+  const file = document.getElementById('j-foto').files[0];
+  if (!nom) { alert('Posa el nom'); return; }
+  if (!file) { alert('Puja la foto'); return; }
+  if (OV.jugadors.some(j=>normNom(j.nom)===normNom(nom))) { alert(`"${nom}" ja existeix — no es poden repetir jugadors/es.`); return; }
+  const foto = await compressPhoto(file);
+  OV.jugadors.push({ id: slugify(nom), nom, equipId, foto, cops: 0, ultimUs: null });
+  saveOverrides(); renderJugadors();
+  document.getElementById('j-nom').value=''; document.getElementById('j-foto').value='';
+}
+function renderJugadors() {
+  const m = model();
+  // selector d'equips del formulari
+  const je = document.getElementById('j-equip');
+  je.innerHTML = m.equips.map(e=>`<option value="${e.id}">${e.emoji||''} ${e.nom}</option>`).join('');
+  // llista
+  document.getElementById('j-list').innerHTML = OV.jugadors.map(j=>{
+    const e = m.equips.find(x=>x.id===j.equipId)||{};
+    return `<div class="team-row"><img src="${j.foto}" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
+      <span class="nm"><b>${j.nom}</b><small>${e.nom||''} · sortides al cartell: ${j.cops}</small></span>
+      <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delJugador('${j.id}')">✕</button></div>`;
+  }).join('') || '<p style="font-size:11px;color:var(--muted)">Encara no hi ha jugadors/es pujats.</p>';
+  // selector del generador de cartells
+  const cp = document.getElementById('c-player');
+  cp.innerHTML = '<option value="">—</option>' + OV.jugadors.map(j=>`<option value="${j.id}">${j.nom}</option>`).join('');
+}
+function delJugador(id){ OV.jugadors = OV.jugadors.filter(j=>j.id!==id); saveOverrides(); renderJugadors(); }
+function pickRotacio(equipId) {
+  // tria qui fa més temps que no surt (mai repetir fins que tothom hagi sortit)
+  const cands = OV.jugadors.filter(j=>j.equipId===equipId);
+  if (!cands.length) return null;
+  cands.sort((a,b)=>(a.cops-b.cops) || ((a.ultimUs||'').localeCompare(b.ultimUs||'')));
+  return cands[0];
+}
+
+/* =========================================================
    🎨 GENERADOR DE CARTELLS (canvas 1080×1350, estil CBGB)
    ========================================================= */
 let cPhoto = null, cRivalLogo = null, cClubLogo = null, cBgTpl = null;
+let LOGOMAP = null; const logoCache = {};
+async function rivalLogoFor(p, nomesAuto) {
+  if (cRivalLogo && !nomesAuto) return cRivalLogo;        // pujat a mà: mana (excepte al calendari)
+  if (!LOGOMAP) { try { LOGOMAP = await (await fetch('logos/map.json')).json(); } catch(e){ LOGOMAP = {}; } }
+  const rival = p.casa ? p.visitant : p.local;
+  const f = (LOGOMAP[p.equipId]||{})[rival];
+  if (!f) return null;
+  if (!logoCache[f]) { try { logoCache[f] = await loadImg(f); } catch(e){ logoCache[f] = null; } }
+  return logoCache[f];
+}
 
 function fillCartellSelect() {
   const m = model();
@@ -916,6 +992,7 @@ async function genCartell() {
   const { e, s, rival, prev } = previaData(p, m);
   await document.fonts.load("80px 'Bebas Neue'"); await document.fonts.load("700 30px 'JetBrains Mono'");
   if (!cClubLogo) { try { cClubLogo = await loadImg('../logo.png'); } catch(err){} }
+  const autoRival = await rivalLogoFor(p);   // logo del rival automàtic des de logos/map.json
   const cv = document.getElementById('c-canvas'), ctx = cv.getContext('2d');
   const W=1080, H=1350;
   const RED='#E31E24', BLACK='#050505', WHITE='#ffffff';
@@ -969,7 +1046,8 @@ async function genCartell() {
     ctx.font = fitText(ctx, MESOS_LL[parseInt(month.slice(5,7))-1], 460, "{px}px 'Bebas Neue'", 150);
     ctx.fillText(MESOS_LL[parseInt(month.slice(5,7))-1], 60, H*0.56);
     ctx.shadowBlur=0;
-    // graella de partits a la dreta (2 columnes)
+    // graella de partits a la dreta (2 columnes), amb el logo del rival com al Barça
+    const rlogos = await Promise.all(monthMatches.map(x=>rivalLogoFor(x, true)));
     ctx.textAlign='center';
     const col = [W-390, W-150], rowH = Math.min(190, (H-320)/Math.ceil(monthMatches.length/2));
     monthMatches.forEach((x,idx)=>{
@@ -977,8 +1055,9 @@ async function genCartell() {
       const d = new Date(x.data+'T12:00:00');
       ctx.fillStyle = x.casa ? RED : WHITE;
       ctx.font = "92px 'Bebas Neue'";
-      ctx.fillText(String(d.getDate()), cx, cy);
-      ctx.fillStyle = WHITE;
+      ctx.textAlign='right'; ctx.fillText(String(d.getDate()), cx-14, cy);
+      if (rlogos[idx]) drawLogo(ctx, rlogos[idx], cx+48, cy-32, 92);
+      ctx.textAlign='center'; ctx.fillStyle = WHITE;
       ctx.font = "600 22px 'JetBrains Mono'";
       ctx.fillText(`${DIES_AB[d.getDay()]} ${x.hora}`, cx, cy+34);
       ctx.font = "30px 'Bebas Neue'";
@@ -1004,8 +1083,8 @@ async function genCartell() {
     ctx.fillText(dataFmt, W/2, 265);
     ctx.font = "30px 'JetBrains Mono'";
     ctx.fillText(p.pista.slice(0,42), W/2, 315);
-    drawLogo(ctx, p.casa?cClubLogo:cRivalLogo, 200, 430, 190, p.casa?'CBGB':rivalInit, true);
-    drawLogo(ctx, p.casa?cRivalLogo:cClubLogo, W-200, 430, 190, p.casa?rivalInit:'CBGB', true);
+    drawLogo(ctx, p.casa?cClubLogo:autoRival, 200, 430, 190, p.casa?'CBGB':rivalInit, true);
+    drawLogo(ctx, p.casa?autoRival:cClubLogo, W-200, 430, 190, p.casa?rivalInit:'CBGB', true);
     ctx.fillStyle = RED; ctx.font = "60px 'Bebas Neue'"; ctx.fillText('VS', W/2, 450);
     ctx.fillStyle = BLACK; ctx.font = "26px 'Inter'";
     const nmL = (p.local.length>24?p.local.slice(0,23)+'…':p.local), nmV = (p.visitant.length>24?p.visitant.slice(0,23)+'…':p.visitant);
@@ -1047,8 +1126,8 @@ async function genCartell() {
     ctx.font = "225px 'Bebas Neue'";
     ctx.fillText('UN DIA', W/2, 205);
     ctx.fillText('DE PARTIT', W/2, H-150);
-    drawLogo(ctx, p.casa?cClubLogo:cRivalLogo, W/2-110, H-410, 124, p.casa?'CBGB':rivalInit);
-    drawLogo(ctx, p.casa?cRivalLogo:cClubLogo, W/2+110, H-410, 124, p.casa?rivalInit:'CBGB');
+    drawLogo(ctx, p.casa?cClubLogo:autoRival, W/2-110, H-410, 124, p.casa?'CBGB':rivalInit);
+    drawLogo(ctx, p.casa?autoRival:cClubLogo, W/2+110, H-410, 124, p.casa?rivalInit:'CBGB');
     ctx.fillStyle = WHITE; ctx.font = "34px 'Bebas Neue'"; ctx.fillText('V', W/2, H-398);
     ctx.fillStyle = RED; ctx.fillRect(0,H-64,W,64);
     ctx.fillStyle = WHITE; ctx.font = "600 26px 'JetBrains Mono'";
@@ -1069,8 +1148,8 @@ async function genCartell() {
     ctx.textAlign='center'; ctx.fillStyle = WHITE;
     ctx.font = fitText(ctx, word, W-80, "{px}px 'Bebas Neue'", 250);
     ctx.fillText(word, W/2, 240);
-    drawLogo(ctx, p.casa?cClubLogo:cRivalLogo, W/2-100, H-390, 112, p.casa?'CBGB':rivalInit);
-    drawLogo(ctx, p.casa?cRivalLogo:cClubLogo, W/2+100, H-390, 112, p.casa?rivalInit:'CBGB');
+    drawLogo(ctx, p.casa?cClubLogo:autoRival, W/2-100, H-390, 112, p.casa?'CBGB':rivalInit);
+    drawLogo(ctx, p.casa?autoRival:cClubLogo, W/2+100, H-390, 112, p.casa?rivalInit:'CBGB');
     ctx.fillStyle = WHITE; ctx.font = "30px 'Bebas Neue'"; ctx.fillText('V', W/2, H-380);
     ctx.font = "260px 'Bebas Neue'";
     ctx.fillText(`${p.puntsLocal ?? ''} ${p.puntsVisitant ?? ''}`, W/2, H-110);
@@ -1087,7 +1166,7 @@ function showView(v) {
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
 }
-function renderAll(){ renderJornada(); renderResultats(); renderEquips(); }
+function renderAll(){ renderJornada(); renderResultats(); renderEquips(); renderJugadors(); }
 
 /* ---------- listeners ---------- */
 document.getElementById('tabs').addEventListener('click', e=>{
@@ -1100,6 +1179,43 @@ document.getElementById('c-tpl').addEventListener('change', fillCartellSelect);
 document.getElementById('c-photo').addEventListener('change', async e=>{ if(e.target.files[0]) cPhoto = await fileToImg(e.target.files[0]); });
 document.getElementById('c-rival').addEventListener('change', async e=>{ if(e.target.files[0]) cRivalLogo = await fileToImg(e.target.files[0]); });
 document.getElementById('c-bg').addEventListener('change', async e=>{ cBgTpl = e.target.files[0] ? await fileToImg(e.target.files[0]) : null; });
+document.getElementById('c-player').addEventListener('change', async e=>{
+  const j = OV.jugadors.find(x=>x.id===e.target.value);
+  cPhoto = j ? await loadImg(j.foto) : null;
+});
+document.getElementById('j-add').addEventListener('click', ()=>addJugador().catch(err=>alert('Error: '+err.message)));
+/* 🎮 GAME DAYS SÈNIORS: un clic → cartell "UN DIA DE PARTIT" de cada sènior
+   del proper cap de setmana, rotant jugadors/es perquè no es repeteixin */
+document.getElementById('c-gamedays').addEventListener('click', async ()=>{
+  const m = model();
+  const seniors = m.equips.filter(e=>/s[eè]nior/i.test(e.nom));
+  if (!seniors.length) { alert('No hi ha equips sèniors a les dades.'); return; }
+  const wks = weekends(m.partits.filter(p=>!p.jugat && p.data>=todayStr()));
+  if (!wks.length) { alert('No hi ha partits pendents.'); return; }
+  const wk = wks[0];
+  const wkEnd = new Date(wk+'T12:00:00'); wkEnd.setDate(wkEnd.getDate()+6);
+  let fets = 0, sense = [];
+  for (const eq of seniors) {
+    const p = m.partits.find(x=>x.equipId===eq.id && !x.jugat && x.data>=wk && x.data<=wkEnd.toISOString().slice(0,10));
+    if (!p) continue;
+    const j = pickRotacio(eq.id);
+    if (j) { cPhoto = await loadImg(j.foto); j.cops++; j.ultimUs = new Date().toISOString(); }
+    else { cPhoto = null; sense.push(eq.nom); }
+    document.getElementById('c-tpl').value = 'dia';
+    fillCartellSelect();
+    document.getElementById('c-match').value = p.id;
+    await genCartell();
+    const a = document.createElement('a');
+    a.href = document.getElementById('c-canvas').toDataURL('image/png');
+    a.download = `cbgb-gameday-${eq.id}-${p.data}${j?'-'+j.id:''}.png`;
+    a.click();
+    fets++;
+    await new Promise(r=>setTimeout(r,600));
+  }
+  saveOverrides(); renderJugadors();
+  alert(`🎮 ${fets} game day(s) del finde ${wkLabel(wk)} descarregats.`
+    + (sense.length?`\n⚠️ Sense jugadors/es pujats per: ${sense.join(', ')} (surten sense foto).`:''));
+});
 document.getElementById('c-gen').addEventListener('click', ()=>genCartell().catch(err=>alert('Error generant: '+err.message)));
 document.getElementById('c-down').addEventListener('click', ()=>{
   const p = model().partits.find(x=>x.id===document.getElementById('c-match').value);
