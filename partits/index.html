@@ -7,6 +7,11 @@
 <meta name="description" content="Calendari de partits, resultats i ratxes de tots els equips del CB Grup Barna. Jornada a jornada, dissabte i diumenge, casa i fora.">
 <meta name="theme-color" content="#050505">
 <link rel="icon" href="../logo.png">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="../logo.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CBGB Partits">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -270,7 +275,8 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
   <img src="../logo.png" alt="Escut CB Grup Barna">
   <h1>Partits <span>&amp;</span> Resultats</h1>
   <div class="head-tag">CB Grup Barna · Temporada 2026-2027 · #SomClot</div>
-  <br><a class="back" href="../">← Tornar a cbgrupbarna.com</a>
+  <br><a class="back" href="../">← Tornar a cbgrupbarna.info</a>
+  <br><button class="back" id="pwa-btn" style="display:none;border:1px solid var(--border);border-radius:99px;padding:6px 14px;margin-top:8px">📲 INSTAL·LAR L'APP AL MÒBIL</button>
 </header>
 
 <nav class="tabs" id="tabs">
@@ -314,6 +320,13 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
 
   <!-- ===== VISTA CARTELLS ===== -->
   <section class="view" id="v-cartells">
+    <div class="g-box" id="cartells-lock">
+      <h3>🔐 Cartells del club</h3>
+      <p>La generació i descàrrega de cartells és només per a l'staff de comunicació. Els anàlisis i resultats són públics a les altres pestanyes.</p>
+      <input type="password" id="c-pass" placeholder="Clau d'accés" autocomplete="off">
+      <button class="g-btn" id="c-unlock">Entrar</button>
+    </div>
+    <div id="cartells-open" style="display:none">
     <div class="g-box">
       <h3>🎨 Generador de cartells per Instagram</h3>
       <p>Estètica de club gran (referència Barça Basket) amb els colors CBGB: vermell, negre i blanc. Tria plantilla i partit, puja la foto del jugador/a i descarrega el post llest per publicar (1080×1350).</p>
@@ -321,6 +334,7 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
         <label class="c-lab">Plantilla
           <select id="c-tpl">
             <option value="dia">🗓 UN DIA DE PARTIT (prèvia del dia)</option>
+            <option value="calendari">📆 CALENDARI MENSUAL (per al carrusel)</option>
             <option value="previa">📊 PRÈVIA amb estadístiques</option>
             <option value="victoria">🏆 VICTÒRIA (resultat guanyat)</option>
             <option value="final">⏱ FINAL (qualsevol resultat)</option>
@@ -335,11 +349,16 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
         <label class="c-lab">Logo rival (opcional)
           <input type="file" id="c-rival" accept="image/*">
         </label>
+        <label class="c-lab">Plantilla pròpia de fons (opcional)
+          <input type="file" id="c-bg" accept="image/*">
+        </label>
       </div>
+      <p style="font-size:11px">💡 Si puges una <b>plantilla pròpia</b> (el disseny que tu vulguis, 1080×1350), la app només hi escriu a sobre les dades del partit: marcador si s'ha jugat, o dia i hora si és prèvia. Res més.</p>
       <button class="g-btn" id="c-gen">⚡ Generar cartell</button>
       <button class="g-btn ghost" id="c-down" style="display:none">⬇ Descarregar PNG</button>
     </div>
     <canvas id="c-canvas" width="1080" height="1350" style="width:100%;border-radius:16px;border:1px solid var(--border);display:none"></canvas>
+    </div><!-- fi cartells-open -->
   </section>
 
   <!-- ===== VISTA GESTIÓ ===== -->
@@ -843,7 +862,7 @@ function exportJson() {
 /* =========================================================
    🎨 GENERADOR DE CARTELLS (canvas 1080×1350, estil CBGB)
    ========================================================= */
-let cPhoto = null, cRivalLogo = null, cClubLogo = null;
+let cPhoto = null, cRivalLogo = null, cClubLogo = null, cBgTpl = null;
 
 function fillCartellSelect() {
   const m = model();
@@ -868,15 +887,21 @@ function drawCover(ctx,img,x,y,w,h){
   ctx.drawImage(img, x+(w-iw)/2, y+(h-ih)*0.25, iw, ih); // lleuger biaix cap amunt (cares)
   ctx.restore();
 }
-function drawLogoCircle(ctx, img, cx, cy, r, fallbackTxt) {
+function drawLogo(ctx, img, cx, cy, size, fallbackTxt, dark) {
+  // logo tal qual, sense cercle de fons (estil Barça); ombra suau per llegir-se sobre foto
   ctx.save();
-  ctx.beginPath(); ctx.arc(cx,cy,r,0,7); ctx.fillStyle='white'; ctx.fill();
-  if (img) { ctx.beginPath(); ctx.arc(cx,cy,r-4,0,7); ctx.clip();
-    const s=Math.min((r*1.7)/img.width,(r*1.7)/img.height);
-    ctx.drawImage(img,cx-img.width*s/2,cy-img.height*s/2,img.width*s,img.height*s); }
-  else { ctx.fillStyle='#050505'; ctx.font=`700 ${r*0.9}px 'Bebas Neue'`; ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText(fallbackTxt||'?',cx,cy+3); }
+  if (img) {
+    ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 18;
+    const s = Math.min(size/img.width, size/img.height);
+    ctx.drawImage(img, cx-img.width*s/2, cy-img.height*s/2, img.width*s, img.height*s);
+  } else {
+    ctx.fillStyle = dark ? '#050505' : '#ffffff';
+    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 10;
+    ctx.font = `${size*0.55}px 'Bebas Neue'`; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(fallbackTxt||'?', cx, cy);
+  }
   ctx.restore();
+  ctx.textBaseline='alphabetic';
 }
 function fitText(ctx, txt, maxW, font, startPx) {
   let px = startPx;
@@ -900,7 +925,74 @@ async function genCartell() {
   // fons
   ctx.fillStyle = BLACK; ctx.fillRect(0,0,W,H);
 
-  if (tpl==='previa') {
+  /* ---- PLANTILLA PRÒPIA: només s'hi escriuen les dades a sobre ---- */
+  if (cBgTpl) {
+    drawCover(ctx, cBgTpl, 0, 0, W, H);
+    ctx.textAlign='center'; ctx.fillStyle=WHITE;
+    ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=16;
+    if (p.jugat) {
+      ctx.font = "240px 'Bebas Neue'";
+      ctx.fillText(`${p.puntsLocal} ${p.puntsVisitant}`, W/2, H-140);
+      ctx.shadowBlur=0;
+      ctx.font = "600 24px 'JetBrains Mono'";
+      ctx.fillText(`${e.nom.toUpperCase()} · ${p.categoria}`, W/2, H-60);
+    } else {
+      ctx.font = "80px 'Bebas Neue'";
+      ctx.fillText(dataFmt, W/2, H-120);
+      ctx.shadowBlur=0;
+      ctx.font = "600 24px 'JetBrains Mono'";
+      ctx.fillText(`${e.nom.toUpperCase()} · ${p.pista.slice(0,32)}`, W/2, H-60);
+    }
+    cv.style.display='block';
+    document.getElementById('c-down').style.display='inline-flex';
+    return;
+  }
+
+  if (tpl==='calendari') {
+    /* ---- CALENDARI MENSUAL (estil Barça: foto + mes gegant + graella de dies) ---- */
+    const month = p.data.slice(0,7);
+    const monthMatches = m.partits.filter(x=>x.equipId===p.equipId && x.data.startsWith(month));
+    const MESOS_LL = ['GENER','FEBRER','MARÇ','ABRIL','MAIG','JUNY','JULIOL','AGOST','SETEMBRE','OCTUBRE','NOVEMBRE','DESEMBRE'];
+    const DIES_AB = ['DG.','DL.','DT.','DC.','DJ.','DV.','DS.'];
+    if (cPhoto) { drawCover(ctx, cPhoto, 0, 0, W, H);
+      const g = ctx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,'rgba(5,5,5,0.25)'); g.addColorStop(0.5,'rgba(5,5,5,0.45)'); g.addColorStop(1,'rgba(5,5,5,0.82)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    } else {
+      const g = ctx.createRadialGradient(W*0.3,H*0.4,80,W*0.3,H*0.4,1000);
+      g.addColorStop(0,'#3a0a0c'); g.addColorStop(1,BLACK);
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    }
+    // mes gegant a l'esquerra
+    ctx.textAlign='left'; ctx.fillStyle=WHITE;
+    ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=14;
+    ctx.font = fitText(ctx, MESOS_LL[parseInt(month.slice(5,7))-1], 460, "{px}px 'Bebas Neue'", 150);
+    ctx.fillText(MESOS_LL[parseInt(month.slice(5,7))-1], 60, H*0.56);
+    ctx.shadowBlur=0;
+    // graella de partits a la dreta (2 columnes)
+    ctx.textAlign='center';
+    const col = [W-390, W-150], rowH = Math.min(190, (H-320)/Math.ceil(monthMatches.length/2));
+    monthMatches.forEach((x,idx)=>{
+      const cx = col[idx%2], cy = 190 + Math.floor(idx/2)*rowH;
+      const d = new Date(x.data+'T12:00:00');
+      ctx.fillStyle = x.casa ? RED : WHITE;
+      ctx.font = "92px 'Bebas Neue'";
+      ctx.fillText(String(d.getDate()), cx, cy);
+      ctx.fillStyle = WHITE;
+      ctx.font = "600 22px 'JetBrains Mono'";
+      ctx.fillText(`${DIES_AB[d.getDay()]} ${x.hora}`, cx, cy+34);
+      ctx.font = "30px 'Bebas Neue'";
+      ctx.fillStyle = x.casa ? WHITE : 'rgba(255,255,255,0.75)';
+      ctx.fillText(x.casa ? 'LOCAL' : 'VISITANT', cx, cy+70);
+      const rv = (x.casa ? x.visitant : x.local).split(/\s+/).slice(0,2).join(' ');
+      ctx.font = "600 16px 'JetBrains Mono'"; ctx.fillStyle='rgba(255,255,255,0.55)';
+      ctx.fillText(rv.slice(0,20), cx, cy+96);
+    });
+    ctx.fillStyle = RED; ctx.fillRect(0,H-64,W,64);
+    ctx.fillStyle = WHITE; ctx.font = "600 26px 'JetBrains Mono'";
+    ctx.fillText(`${e.nom.toUpperCase()} · ${MESOS_LL[parseInt(month.slice(5,7))-1]} · #SOMCLOT`, W/2, H-22);
+  }
+  else if (tpl==='previa') {
     /* ---- PRÈVIA amb estadístiques ---- */
     ctx.fillStyle = RED; ctx.fillRect(0,0,W,150);
     ctx.fillStyle = WHITE; ctx.textAlign='center'; ctx.textBaseline='alphabetic';
@@ -912,8 +1004,8 @@ async function genCartell() {
     ctx.fillText(dataFmt, W/2, 265);
     ctx.font = "30px 'JetBrains Mono'";
     ctx.fillText(p.pista.slice(0,42), W/2, 315);
-    drawLogoCircle(ctx, p.casa?cClubLogo:cRivalLogo, 200, 430, 95, p.casa?'CBGB':rivalInit);
-    drawLogoCircle(ctx, p.casa?cRivalLogo:cClubLogo, W-200, 430, 95, p.casa?rivalInit:'CBGB');
+    drawLogo(ctx, p.casa?cClubLogo:cRivalLogo, 200, 430, 190, p.casa?'CBGB':rivalInit, true);
+    drawLogo(ctx, p.casa?cRivalLogo:cClubLogo, W-200, 430, 190, p.casa?rivalInit:'CBGB', true);
     ctx.fillStyle = RED; ctx.font = "60px 'Bebas Neue'"; ctx.fillText('VS', W/2, 450);
     ctx.fillStyle = BLACK; ctx.font = "26px 'Inter'";
     const nmL = (p.local.length>24?p.local.slice(0,23)+'…':p.local), nmV = (p.visitant.length>24?p.visitant.slice(0,23)+'…':p.visitant);
@@ -955,8 +1047,8 @@ async function genCartell() {
     ctx.font = "225px 'Bebas Neue'";
     ctx.fillText('UN DIA', W/2, 205);
     ctx.fillText('DE PARTIT', W/2, H-150);
-    drawLogoCircle(ctx, p.casa?cClubLogo:cRivalLogo, W/2-110, H-410, 62, p.casa?'CBGB':rivalInit);
-    drawLogoCircle(ctx, p.casa?cRivalLogo:cClubLogo, W/2+110, H-410, 62, p.casa?rivalInit:'CBGB');
+    drawLogo(ctx, p.casa?cClubLogo:cRivalLogo, W/2-110, H-410, 124, p.casa?'CBGB':rivalInit);
+    drawLogo(ctx, p.casa?cRivalLogo:cClubLogo, W/2+110, H-410, 124, p.casa?rivalInit:'CBGB');
     ctx.fillStyle = WHITE; ctx.font = "34px 'Bebas Neue'"; ctx.fillText('V', W/2, H-398);
     ctx.fillStyle = RED; ctx.fillRect(0,H-64,W,64);
     ctx.fillStyle = WHITE; ctx.font = "600 26px 'JetBrains Mono'";
@@ -977,8 +1069,8 @@ async function genCartell() {
     ctx.textAlign='center'; ctx.fillStyle = WHITE;
     ctx.font = fitText(ctx, word, W-80, "{px}px 'Bebas Neue'", 250);
     ctx.fillText(word, W/2, 240);
-    drawLogoCircle(ctx, p.casa?cClubLogo:cRivalLogo, W/2-100, H-390, 56, p.casa?'CBGB':rivalInit);
-    drawLogoCircle(ctx, p.casa?cRivalLogo:cClubLogo, W/2+100, H-390, 56, p.casa?rivalInit:'CBGB');
+    drawLogo(ctx, p.casa?cClubLogo:cRivalLogo, W/2-100, H-390, 112, p.casa?'CBGB':rivalInit);
+    drawLogo(ctx, p.casa?cRivalLogo:cClubLogo, W/2+100, H-390, 112, p.casa?rivalInit:'CBGB');
     ctx.fillStyle = WHITE; ctx.font = "30px 'Bebas Neue'"; ctx.fillText('V', W/2, H-380);
     ctx.font = "260px 'Bebas Neue'";
     ctx.fillText(`${p.puntsLocal ?? ''} ${p.puntsVisitant ?? ''}`, W/2, H-110);
@@ -1007,6 +1099,7 @@ document.getElementById('tabs').addEventListener('click', e=>{
 document.getElementById('c-tpl').addEventListener('change', fillCartellSelect);
 document.getElementById('c-photo').addEventListener('change', async e=>{ if(e.target.files[0]) cPhoto = await fileToImg(e.target.files[0]); });
 document.getElementById('c-rival').addEventListener('change', async e=>{ if(e.target.files[0]) cRivalLogo = await fileToImg(e.target.files[0]); });
+document.getElementById('c-bg').addEventListener('change', async e=>{ cBgTpl = e.target.files[0] ? await fileToImg(e.target.files[0]) : null; });
 document.getElementById('c-gen').addEventListener('click', ()=>genCartell().catch(err=>alert('Error generant: '+err.message)));
 document.getElementById('c-down').addEventListener('click', ()=>{
   const p = model().partits.find(x=>x.id===document.getElementById('c-match').value);
@@ -1024,16 +1117,23 @@ document.getElementById('wk-prev').addEventListener('click', ()=>{ const w=weeke
 document.getElementById('wk-next').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i<w.length-1){state.wk=w[i+1]; renderJornada();} });
 document.getElementById('wk-today').addEventListener('click', ()=>{ state.wk=null; renderJornada(); });
 
-document.getElementById('g-unlock').addEventListener('click', ()=>{
-  if (document.getElementById('g-pass').value === EDIT_KEY) {
+function applyStaffUI() {
+  document.getElementById('g-lock').style.display='none';
+  document.getElementById('g-open').style.display='block';
+  document.getElementById('cartells-lock').style.display='none';
+  document.getElementById('cartells-open').style.display='block';
+  document.getElementById('edit-pill').classList.add('on');
+}
+function tryUnlock(inputId) {
+  if (document.getElementById(inputId).value === EDIT_KEY) {
     editMode = true; sessionStorage.setItem('cbgbEdit','1');
-    document.getElementById('g-lock').style.display='none';
-    document.getElementById('g-open').style.display='block';
-    document.getElementById('edit-pill').classList.add('on');
-    renderAll();
+    applyStaffUI(); renderAll();
   } else alert('Clau incorrecta');
-});
-document.getElementById('g-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('g-unlock').click(); });
+}
+document.getElementById('g-unlock').addEventListener('click', ()=>tryUnlock('g-pass'));
+document.getElementById('g-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('g-pass'); });
+document.getElementById('c-unlock').addEventListener('click', ()=>tryUnlock('c-pass'));
+document.getElementById('c-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('c-pass'); });
 document.getElementById('g-download').addEventListener('click', ()=>{
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([exportJson()],{type:'application/json'}));
@@ -1059,13 +1159,19 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
   } catch(e) {
     document.getElementById('jornada-list').innerHTML = '<div class="empty">No s\'ha pogut carregar data.json 😕</div>';
   }
-  if (sessionStorage.getItem('cbgbEdit')==='1') {
-    editMode = true;
-    document.getElementById('g-lock').style.display='none';
-    document.getElementById('g-open').style.display='block';
-    document.getElementById('edit-pill').classList.add('on');
-  }
+  if (sessionStorage.getItem('cbgbEdit')==='1') { editMode = true; applyStaffUI(); }
   renderAll();
+  // PWA: instal·lable a Android/iPhone
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  let deferredPrompt = null;
+  const pwaBtn = document.getElementById('pwa-btn');
+  window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); deferredPrompt=e; pwaBtn.style.display='inline-block'; });
+  pwaBtn.addEventListener('click', async ()=>{
+    if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; pwaBtn.style.display='none'; }
+    else alert('A iPhone: obre aquesta pàgina a Safari → botó Compartir → "Afegir a pantalla d\'inici". Tindràs la app amb l\'escut del club.');
+  });
+  // a iOS no existeix beforeinstallprompt: mostra el botó amb instruccions
+  if (/iphone|ipad/i.test(navigator.userAgent) && !navigator.standalone) pwaBtn.style.display='inline-block';
 })();
 </script>
 </body>
