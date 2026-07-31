@@ -362,6 +362,11 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
       <button class="g-btn ghost" id="c-gamedays" title="Genera i descarrega el UN DIA DE PARTIT de cada sènior del proper cap de setmana, rotant jugadors/es">🎮 Game days sèniors del finde</button>
     </div>
     <canvas id="c-canvas" width="1080" height="1350" style="width:100%;border-radius:16px;border:1px solid var(--border);display:none"></canvas>
+    <div class="g-box" id="c-cap-box" style="display:none;margin-top:12px">
+      <h3>✍️ Caption per publicar (amb el rival etiquetat)</h3>
+      <textarea id="c-caption" rows="9" style="width:100%;background:var(--black);border:1px solid var(--border);border-radius:10px;color:white;font-size:12px;padding:10px;line-height:1.5"></textarea>
+      <button class="g-btn ghost" id="c-cap-copy" style="margin-top:8px">📋 Copiar caption</button>
+    </div>
     </div><!-- fi cartells-open -->
   </section>
 
@@ -678,10 +683,26 @@ function renderEquips() {
       <button onclick="downloadICS('${e.id}')">📅 Calendari .ics</button>
     </div>
     ${s.next?`<div class="sec-t">⏭ Proper partit</div>${matchCard(s.next,m,true)}`:''}
+    <div id="td-rivals"></div>
     <div class="sec-t">📋 Calendari complet</div>
     ${teamMatches.map(p=>matchCard(p,m,true)).join('')}`;
 }
-function openTeam(id){ state.team=id; showView('equips'); renderEquips(); window.scrollTo({top:0}); }
+function openTeam(id){ state.team=id; showView('equips'); renderEquips(); fillRivals(id); window.scrollTo({top:0}); }
+async function fillRivals(eqId) {
+  await loadRivals();
+  const box = document.getElementById('td-rivals');
+  const data = RIVALS[eqId];
+  if (!box || !data) return;
+  const rows = Object.entries(data).sort((a,b)=>b[1].seguidors-a[1].seguidors);
+  const handles = rows.map(([,r])=>r.instagram).join(' ');
+  box.innerHTML = `<div class="sec-t">📣 Rivals a Instagram (per prioritzar etiquetats)</div>`
+    + rows.map(([nom,r])=>`<a class="team-row" style="text-decoration:none" href="https://instagram.com/${r.instagram.slice(1)}" target="_blank" rel="noopener">
+        <img src="${r.logo}" style="width:34px;height:34px;object-fit:contain" alt="">
+        <span class="nm"><b>${r.nomCurt}</b><small>${r.instagram}</small></span>
+        <span class="rec">${(r.seguidors/1000).toFixed(1).replace('.',',')}K<small>seguidors</small></span>
+      </a>`).join('')
+    + `<button class="g-btn ghost" style="margin-top:4px" onclick="navigator.clipboard.writeText('${handles}').then(()=>alert('Handles copiats ✅'))">📋 Copiar tots els @ per etiquetar</button>`;
+}
 function closeTeam(){ state.team=null; renderEquips(); }
 function savePos(eqId) {
   const pos = parseInt(document.getElementById('pos-in').value)||null;
@@ -930,6 +951,9 @@ function pickRotacio(equipId) {
    ========================================================= */
 let cPhoto = null, cRivalLogo = null, cClubLogo = null, cBgTpl = null;
 let LOGOMAP = null; const logoCache = {};
+let RIVALS = null;
+async function loadRivals(){ if(!RIVALS){ try { RIVALS = await (await fetch('rivals.json')).json(); } catch(e){ RIVALS = {}; } } return RIVALS; }
+async function rivalInfo(p){ await loadRivals(); return (RIVALS[p.equipId]||{})[p.casa?p.visitant:p.local] || null; }
 async function rivalLogoFor(p, nomesAuto) {
   if (cRivalLogo && !nomesAuto) return cRivalLogo;        // pujat a mà: mana (excepte al calendari)
   if (!LOGOMAP) { try { LOGOMAP = await (await fetch('logos/map.json')).json(); } catch(e){ LOGOMAP = {}; } }
@@ -993,6 +1017,7 @@ async function genCartell() {
   await document.fonts.load("80px 'Bebas Neue'"); await document.fonts.load("700 30px 'JetBrains Mono'");
   if (!cClubLogo) { try { cClubLogo = await loadImg('../logo.png'); } catch(err){} }
   const autoRival = await rivalLogoFor(p);   // logo del rival automàtic des de logos/map.json
+  const rinfoTop = await rivalInfo(p);       // IG i seguidors del rival (rivals.json)
   const cv = document.getElementById('c-canvas'), ctx = cv.getContext('2d');
   const W=1080, H=1350;
   const RED='#E31E24', BLACK='#050505', WHITE='#ffffff';
@@ -1046,26 +1071,32 @@ async function genCartell() {
     ctx.font = fitText(ctx, MESOS_LL[parseInt(month.slice(5,7))-1], 460, "{px}px 'Bebas Neue'", 150);
     ctx.fillText(MESOS_LL[parseInt(month.slice(5,7))-1], 60, H*0.56);
     ctx.shadowBlur=0;
-    // graella de partits a la dreta (2 columnes), amb el logo del rival com al Barça
+    // graella de partits a la dreta (2 columnes): escut del Barna VS rival, logos grans
     const rlogos = await Promise.all(monthMatches.map(x=>rivalLogoFor(x, true)));
     ctx.textAlign='center';
-    const col = [W-390, W-150], rowH = Math.min(190, (H-320)/Math.ceil(monthMatches.length/2));
+    const col = [W-400, W-150], rowH = Math.min(260, (H-330)/Math.ceil(monthMatches.length/2));
     monthMatches.forEach((x,idx)=>{
-      const cx = col[idx%2], cy = 190 + Math.floor(idx/2)*rowH;
+      const cx = col[idx%2], cy = 200 + Math.floor(idx/2)*rowH;
       const d = new Date(x.data+'T12:00:00');
       ctx.fillStyle = x.casa ? RED : WHITE;
-      ctx.font = "92px 'Bebas Neue'";
-      ctx.textAlign='right'; ctx.fillText(String(d.getDate()), cx-14, cy);
-      if (rlogos[idx]) drawLogo(ctx, rlogos[idx], cx+48, cy-32, 92);
-      ctx.textAlign='center'; ctx.fillStyle = WHITE;
+      ctx.font = "96px 'Bebas Neue'";
+      ctx.fillText(String(d.getDate()), cx, cy);
+      // escut Barna a cada partit + rival, en ordre local-visitant
+      const esq = x.casa ? cClubLogo : rlogos[idx];
+      const dre = x.casa ? rlogos[idx] : cClubLogo;
+      drawLogo(ctx, esq, cx-58, cy+72, 108, x.casa?'CBGB':'?');
+      drawLogo(ctx, dre, cx+58, cy+72, 108, x.casa?'?':'CBGB');
+      ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.font="26px 'Bebas Neue'";
+      ctx.fillText('VS', cx, cy+80);
+      ctx.fillStyle = WHITE;
       ctx.font = "600 22px 'JetBrains Mono'";
-      ctx.fillText(`${DIES_AB[d.getDay()]} ${x.hora}`, cx, cy+34);
+      ctx.fillText(`${DIES_AB[d.getDay()]} ${x.hora}`, cx, cy+160);
       ctx.font = "30px 'Bebas Neue'";
       ctx.fillStyle = x.casa ? WHITE : 'rgba(255,255,255,0.75)';
-      ctx.fillText(x.casa ? 'LOCAL' : 'VISITANT', cx, cy+70);
+      ctx.fillText(x.casa ? 'LOCAL' : 'VISITANT', cx, cy+194);
       const rv = (x.casa ? x.visitant : x.local).split(/\s+/).slice(0,2).join(' ');
       ctx.font = "600 16px 'JetBrains Mono'"; ctx.fillStyle='rgba(255,255,255,0.55)';
-      ctx.fillText(rv.slice(0,20), cx, cy+96);
+      ctx.fillText(rv.slice(0,20), cx, cy+220);
     });
     ctx.fillStyle = RED; ctx.fillRect(0,H-64,W,64);
     ctx.fillStyle = WHITE; ctx.font = "600 26px 'JetBrains Mono'";
@@ -1089,24 +1120,28 @@ async function genCartell() {
     ctx.fillStyle = BLACK; ctx.font = "26px 'Inter'";
     const nmL = (p.local.length>24?p.local.slice(0,23)+'…':p.local), nmV = (p.visitant.length>24?p.visitant.slice(0,23)+'…':p.visitant);
     ctx.font = "700 26px 'Inter'"; ctx.fillText(nmL, 200, 575); ctx.fillText(nmV, W-200, 575);
-    // taula d'estadístiques del CBGB (files: posició, jugats, victòries, derrotes, ratxa)
+    // estadístiques en dues columnes (posició, jugats, victòries, derrotes, ratxa, IG rival)
+    const rinfo = rinfoTop;
     const rows = [
-      ['POSICIÓ CLASSIFICACIÓ', e.posicio ? `${e.posicio}a${e.equipsGrup?` de ${e.equipsGrup}`:''}` : '—'],
-      ['PARTITS JUGATS', `${s.pj}`],
-      ['VICTÒRIES', `${s.w}`],
-      ['DERROTES', `${s.l}`],
-      ['RATXA', s.sType ? `${s.streak} ${s.sType==='W'?'victòries':'derrotes'} seguides` : '—'],
+      [['POSICIÓ CLASSIFICACIÓ', e.posicio ? `${e.posicio}a${e.equipsGrup?` de ${e.equipsGrup}`:''}` : '—'],
+       ['PARTITS JUGATS', `${s.pj}`]],
+      [['VICTÒRIES', `${s.w}`], ['DERROTES', `${s.l}`]],
+      [['RATXA', s.sType ? `${s.streak}${s.sType==='W'?'V':'D'} SEGUIDES` : '—'],
+       ['SEGUIDORS IG RIVAL', rinfo ? `${(rinfo.seguidors/1000).toFixed(1).replace('.',',')} MIL` : '—']],
     ];
-    let y = 680;
-    for (const [lab,val] of rows) {
-      ctx.fillStyle = '#777'; ctx.font = "600 24px 'JetBrains Mono'"; ctx.fillText(lab, W/2, y);
-      ctx.fillStyle = BLACK; ctx.font = "64px 'Bebas Neue'"; ctx.fillText(val, W/2, y+62);
-      y += 118;
+    let y = 690;
+    for (const parell of rows) {
+      parell.forEach(([lab,val],ci)=>{
+        const cx = ci===0 ? W/2-240 : W/2+240;
+        ctx.fillStyle = '#777'; ctx.font = "600 22px 'JetBrains Mono'"; ctx.fillText(lab, cx, y);
+        ctx.fillStyle = BLACK; ctx.font = "62px 'Bebas Neue'"; ctx.fillText(val, cx, y+62);
+      });
+      y += 140;
     }
     ctx.fillStyle = RED; ctx.font = "44px 'Bebas Neue'";
-    ctx.fillText('ÚLTIM ENFRONTAMENT', W/2, y+10);
+    ctx.fillText('ÚLTIM ENFRONTAMENT', W/2, y+20);
     ctx.fillStyle = BLACK; ctx.font = "56px 'Bebas Neue'";
-    ctx.fillText(prev ? `${prev.local.slice(0,16)} ${prev.puntsLocal} - ${prev.puntsVisitant} ${prev.visitant.slice(0,16)}` : 'PRIMER DUEL DE LA TEMPORADA', W/2, y+75);
+    ctx.fillText(prev ? `${prev.local.slice(0,16)} ${prev.puntsLocal} - ${prev.puntsVisitant} ${prev.visitant.slice(0,16)}` : 'PRIMER DUEL DE LA TEMPORADA', W/2, y+85);
     ctx.fillStyle = BLACK; ctx.fillRect(0,H-60,W,60);
     ctx.fillStyle = WHITE; ctx.font = "600 22px 'JetBrains Mono'";
     ctx.fillText('#SOMCLOT · @CBGRUPBARNA', W/2, H-22);
@@ -1159,6 +1194,24 @@ async function genCartell() {
   }
   cv.style.display='block';
   document.getElementById('c-down').style.display='inline-flex';
+  showCaption(tpl, p, e, rinfoTop, m);
+}
+
+/* ---------- caption suggerit per publicar ---------- */
+function showCaption(tpl, p, e, rinfo, m) {
+  const rival = p.casa ? p.visitant : p.local;
+  const tag = rinfo ? ` ${rinfo.instagram}` : '';
+  const cta = `\n➡️ Segueix @cbgrupbarna per no perdre't cap partit\n❤️ Dona-li like, guarda-la i comparteix-la amb la família Barna`;
+  const hash = `\n\n#SomClot #CBGrupBarna #BàsquetCatalà #Basquet #Clot #SantMartí`;
+  let txt = '';
+  if (tpl==='dia') txt = `🔴⚫ UN DIA DE PARTIT.\n\n🏀 ${e.nom} · ${p.casa?'juguem A CASA':'sortim de gira'}\n🗓 ${fmtDia(p.data)} · ${p.hora}h\n🆚 ${rival}${tag}\n📍 ${p.pista}${p.casa?'\n\n🔊 Vine a la Nau i fes que se senti el Clot.':''}${cta}${hash}`;
+  else if (tpl==='calendari') { const mes = p.data.slice(0,7); const n = m.partits.filter(x=>x.equipId===e.id && x.data.startsWith(mes)).length;
+    txt = `📆 Els dies de partit del ${e.nom}.\n\n${n} batalles aquest mes. Quantes vindràs a veure?\n\n📍 Les de LOCAL, a la Nau del Clot.${cta}${hash}`; }
+  else if (tpl==='previa') txt = `📊 PRÈVIA · ${e.nom}\n\n🗓 ${fmtDia(p.data)} · ${p.hora}h\n🆚 ${rival}${tag}\n📍 ${p.pista}\n\nTot el que has de saber abans del salt inicial, a la imatge. 👆${cta}${hash}`;
+  else if (tpl==='victoria') txt = `🏆 VICTÒRIA!\n\n${p.local} ${p.puntsLocal} - ${p.puntsVisitant} ${p.visitant}\n\nOrgull de ${e.nom}. Això es treballa cada dia al Clot. 🔴⚫${tag?`\n🤝 Gran partit,${tag}`:''}${cta}${hash}`;
+  else txt = `⏱ FINAL\n\n${p.local} ${p.puntsLocal ?? ''} - ${p.puntsVisitant ?? ''} ${p.visitant}\n\nSeguim treballant. Aquest club no s'atura. 🔴⚫${cta}${hash}`;
+  document.getElementById('c-caption').value = txt;
+  document.getElementById('c-cap-box').style.display='block';
 }
 
 /* ---------- navegació ---------- */
@@ -1184,6 +1237,10 @@ document.getElementById('c-player').addEventListener('change', async e=>{
   cPhoto = j ? await loadImg(j.foto) : null;
 });
 document.getElementById('j-add').addEventListener('click', ()=>addJugador().catch(err=>alert('Error: '+err.message)));
+document.getElementById('c-cap-copy').addEventListener('click', async ()=>{
+  await navigator.clipboard.writeText(document.getElementById('c-caption').value);
+  alert('Caption copiat ✅');
+});
 /* 🎮 GAME DAYS SÈNIORS: un clic → cartell "UN DIA DE PARTIT" de cada sènior
    del proper cap de setmana, rotant jugadors/es perquè no es repeteixin */
 document.getElementById('c-gamedays').addEventListener('click', async ()=>{
