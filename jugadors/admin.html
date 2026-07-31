@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Jugadors · CB Grup Barna</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
+  .bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav .brand{display:flex;align-items:center;gap:.6rem}
+  nav img{width:34px;height:34px;object-fit:contain}
+  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t span{color:var(--red)}
+  .nav-user{display:none;align-items:center;gap:.7rem;font-size:.8rem;color:var(--muted)}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .btn.small{padding:.35rem .7rem;font-size:.75rem}
+  .wrap{max-width:860px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  /* login */
+  #login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;gap:.9rem;padding:1rem}
+  .login-title{font-family:'Bebas Neue',sans-serif;font-size:2rem}
+  .login-sub{color:var(--muted);font-size:.85rem;text-align:center}
+  .field-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .field-input,select.field-input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.65rem .8rem;font-family:'Outfit',sans-serif;font-size:.9rem}
+  .field-input:focus{outline:none;border-color:var(--red)}
+  #login-box{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.6rem}
+  .err{display:none;background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.82rem}
+  .hint{font-size:.72rem;color:var(--muted)}
+  .hint a{color:rgba(200,16,46,.8);text-decoration:none}
+  /* main */
+  #main-screen{display:none}
+  h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;margin:1.4rem 0 .8rem}
+  h2 span{color:var(--red)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  .grid .full{grid-column:1/-1}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .fgroup{display:flex;flex-direction:column;gap:.3rem}
+  .ok-banner{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.82rem;margin-top:.8rem}
+  /* list */
+  .team-block{margin-top:1.2rem}
+  .team-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--red);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.5rem}
+  .player-row{display:flex;align-items:center;gap:.8rem;padding:.5rem 0;border-bottom:1px dashed var(--line);font-size:.88rem}
+  .player-row:last-child{border-bottom:none}
+  .dorsal{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;min-width:2.2rem;text-align:center;background:rgba(200,16,46,.15);border-radius:6px;padding:.15rem 0}
+  .pname{flex:1}
+  .ppos{color:var(--muted);font-size:.75rem}
+  .pfoto{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#222}
+  .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
+  .del:hover{color:#ff8fa0}
+  .count-pill{font-size:.72rem;color:var(--muted);margin-left:.5rem}
+  .empty{color:var(--muted);font-size:.85rem;padding:1rem 0}
+  .spin{animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <img src="/logo.png" alt="CB Grup Barna">
+    <div class="t">ADMIN <span>JUGADORS</span></div>
+  </div>
+  <div class="nav-user" id="nav-user">
+    <span id="nav-username"></span>
+    <button class="btn ghost small" onclick="logout()">Sortir</button>
+  </div>
+</nav>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-title">ACCÉS <span style="color:var(--red)">ADMIN</span></div>
+  <div class="login-sub">Introdueix el token de GitHub per gestionar la plantilla</div>
+  <div id="login-box">
+    <label class="field-label" for="token-input">GitHub Personal Access Token</label>
+    <input class="field-input" type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+    <div class="hint">
+      El mateix token que fas servir a l'admin de la galeria. Crea'n un a
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=CB+Grup+Barna+Admin" target="_blank" rel="noopener">github.com/settings/tokens</a>
+      amb permís <b>repo</b>.
+    </div>
+    <div class="err" id="login-error"></div>
+    <button class="btn" id="login-btn" onclick="doLogin()">Entrar</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main-screen">
+  <div class="wrap">
+
+    <h2>AFEGIR <span>JUGADOR/A</span></h2>
+    <div class="card">
+      <div class="grid">
+        <div class="fgroup"><label class="field-label">Nom *</label><input class="field-input" id="f-nom" placeholder="Nom"></div>
+        <div class="fgroup"><label class="field-label">Cognoms *</label><input class="field-input" id="f-cognoms" placeholder="Cognoms"></div>
+        <div class="fgroup">
+          <label class="field-label">Categoria *</label>
+          <select class="field-input" id="f-categoria">
+            <option>Sènior</option><option>Sub-22</option><option>Júnior</option><option>Cadet</option>
+            <option>Infantil</option><option>Preinfantil</option><option>Mini</option><option>Premini</option><option>Open</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label class="field-label">Equip *</label>
+          <select class="field-input" id="f-genere">
+            <option>Masculí</option><option>Femení</option><option>Mixt</option>
+          </select>
+        </div>
+        <div class="fgroup"><label class="field-label">Dorsal</label><input class="field-input" id="f-dorsal" type="number" min="0" max="99" placeholder="—"></div>
+        <div class="fgroup">
+          <label class="field-label">Posició</label>
+          <select class="field-input" id="f-posicio">
+            <option value="">—</option><option>Base</option><option>Escorta</option><option>Aler</option><option>Ala-pivot</option><option>Pivot</option>
+          </select>
+        </div>
+        <div class="fgroup full"><label class="field-label">Foto (opcional, JPG/PNG/WebP)</label><input class="field-input" id="f-foto" type="file" accept="image/jpeg,image/png,image/webp"></div>
+      </div>
+      <div class="err" id="form-error" style="margin-top:.8rem"></div>
+      <div class="ok-banner" id="form-ok"></div>
+      <div style="margin-top:1rem;display:flex;gap:.6rem">
+        <button class="btn" id="save-btn" onclick="savePlayer()">Guardar jugador/a</button>
+      </div>
+      <div class="hint" style="margin-top:.6rem">
+        ⚠ No es poden repetir jugadors: el mateix nom complet només pot existir un cop al club,
+        i dins d'un equip no es pot repetir dorsal.
+      </div>
+    </div>
+
+    <h2 style="margin-top:2rem">PLANTILLA <span>ACTUAL</span><span class="count-pill" id="total-count"></span></h2>
+    <div class="card" id="players-list"><div class="empty">Carregant…</div></div>
+
+  </div>
+</div>
+
+<script src="/jugadors/jugadors.js"></script>
+<script>
+const OWNER = 'voluntarisgrupbarna-pixel';
+const REPO  = 'cbgrupbarna-info';
+const BRANCH = 'main';
+const DATA_PATH = 'jugadors/jugadors.js';
+const FOTOS_DIR = 'jugadors/fotos';
+
+let ghToken = null;
+let jugadors = Array.isArray(window.JUGADORS) ? window.JUGADORS.slice() : [];
+
+// ── AUTH (mateix token que l'admin de la galeria) ──
+function getToken(){ return localStorage.getItem('gh_admin_token'); }
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const tok = getToken();
+  if (tok) {
+    ghToken = tok;
+    const ok = await verifyToken();
+    if (ok) { showMain(); return; }
+  }
+  showLogin();
+});
+
+async function verifyToken(){
+  try {
+    const res = await gh('/user');
+    document.getElementById('nav-username').textContent = res.login;
+    return true;
+  } catch { return false; }
+}
+
+async function doLogin(){
+  const input = document.getElementById('token-input');
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-error');
+  err.style.display = 'none';
+  ghToken = input.value.trim();
+  if (!ghToken) return;
+  btn.disabled = true; btn.textContent = 'Verificant…';
+  const ok = await verifyToken();
+  if (ok) { localStorage.setItem('gh_admin_token', ghToken); showMain(); }
+  else { err.textContent = 'Token invàlid o sense permisos.'; err.style.display = 'block'; ghToken = null; }
+  btn.disabled = false; btn.textContent = 'Entrar';
+}
+
+function logout(){ localStorage.removeItem('gh_admin_token'); ghToken = null; showLogin(); }
+
+function showLogin(){
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('main-screen').style.display = 'none';
+  document.getElementById('nav-user').style.display = 'none';
+}
+
+async function showMain(){
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-screen').style.display = 'block';
+  document.getElementById('nav-user').style.display = 'flex';
+  await reloadData();
+  renderList();
+}
+
+// ── GITHUB API ──
+async function gh(path, method = 'GET', body = null){
+  const url = path.startsWith('http') ? path : `https://api.github.com${path}`;
+  const res = await fetch(url, {
+    method,
+    headers: {
+      'Authorization': `Bearer ${ghToken}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+      ...(body ? { 'Content-Type': 'application/json' } : {}),
+    },
+    body: body ? JSON.stringify(body) : null,
+  });
+  if (!res.ok) throw new Error(`GitHub API ${res.status}: ${await res.text()}`);
+  if (res.status === 204) return null;
+  return res.json();
+}
+
+async function getFile(path){
+  try { return await gh(`/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`); }
+  catch { return null; }
+}
+
+async function writeFile(path, contentB64, message, sha = null){
+  const body = { message, content: contentB64, branch: BRANCH };
+  if (sha) body.sha = sha;
+  return gh(`/repos/${OWNER}/${REPO}/contents/${path}`, 'PUT', body);
+}
+
+function b64Text(s){ return btoa(unescape(encodeURIComponent(s))); }
+
+// Sempre llegim l'última versió del fitxer al repo abans de tocar res,
+// per no trepitjar altes fetes des d'un altre dispositiu.
+async function reloadData(){
+  const f = await getFile(DATA_PATH);
+  if (f && f.content) {
+    const src = decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
+    const m = src.match(/window\.JUGADORS\s*=\s*(\[[\s\S]*\]);/);
+    if (m) { try { jugadors = JSON.parse(m[1]); } catch { jugadors = []; } }
+    else jugadors = [];
+  } else jugadors = [];
+}
+
+// ── DEDUP ──
+function norm(s){
+  return (s || '').toLowerCase().trim().replace(/\s+/g,' ')
+    .normalize('NFD').replace(/[̀-ͯ]/g,'');
+}
+function equipLabel(cat, gen){ return `${cat} ${gen}`; }
+
+function findDuplicate(nomComplet, equip, dorsal){
+  const n = norm(nomComplet);
+  const dup = jugadors.find(j => norm(`${j.nom} ${j.cognoms}`) === n);
+  if (dup) return `Aquest jugador/a JA EXISTEIX al club (${dup.nom} ${dup.cognoms} · ${dup.equip}). No es poden repetir jugadors.`;
+  if (dorsal !== null) {
+    const d = jugadors.find(j => j.equip === equip && j.dorsal === dorsal);
+    if (d) return `El dorsal ${dorsal} ja està ocupat a l'equip ${equip} per ${d.nom} ${d.cognoms}.`;
+  }
+  return null;
+}
+
+// ── SAVE ──
+async function savePlayer(){
+  const err = document.getElementById('form-error');
+  const okb = document.getElementById('form-ok');
+  const btn = document.getElementById('save-btn');
+  err.style.display = 'none'; okb.style.display = 'none';
+
+  const nom = document.getElementById('f-nom').value.trim();
+  const cognoms = document.getElementById('f-cognoms').value.trim();
+  const categoria = document.getElementById('f-categoria').value;
+  const genere = document.getElementById('f-genere').value;
+  const dorsalRaw = document.getElementById('f-dorsal').value;
+  const dorsal = dorsalRaw === '' ? null : parseInt(dorsalRaw, 10);
+  const posicio = document.getElementById('f-posicio').value || null;
+  const fotoInput = document.getElementById('f-foto');
+
+  if (!nom || !cognoms) { err.textContent = 'Falten el nom i/o els cognoms.'; err.style.display = 'block'; return; }
+  if (dorsal !== null && (isNaN(dorsal) || dorsal < 0 || dorsal > 99)) { err.textContent = 'Dorsal invàlid (0-99).'; err.style.display = 'block'; return; }
+
+  btn.disabled = true; btn.textContent = 'Guardant…';
+  try {
+    // Re-llegir dades fresques del repo abans de validar duplicats
+    await reloadData();
+    const equip = equipLabel(categoria, genere);
+    const dupMsg = findDuplicate(`${nom} ${cognoms}`, equip, dorsal);
+    if (dupMsg) throw new Error(dupMsg);
+
+    const id = `${norm(`${nom}-${cognoms}`).replace(/ /g,'-').replace(/[^a-z0-9-]/g,'')}`;
+
+    // Foto opcional
+    let fotoName = null;
+    const file = fotoInput.files[0];
+    if (file) {
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+      fotoName = `${id}.${ext}`;
+      const b64 = await new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result.split(',')[1]);
+        r.onerror = rej;
+        r.readAsDataURL(file);
+      });
+      const existing = await getFile(`${FOTOS_DIR}/${fotoName}`);
+      await writeFile(`${FOTOS_DIR}/${fotoName}`, b64, `jugadors: foto ${nom} ${cognoms} [skip ci]`, existing ? existing.sha : null);
+    }
+
+    jugadors.push({ id, nom, cognoms, equip, categoria, genere, dorsal, posicio, foto: fotoName, alta: new Date().toISOString().slice(0,10) });
+    jugadors.sort((a,b) => a.equip.localeCompare(b.equip) || (a.dorsal ?? 999) - (b.dorsal ?? 999));
+    await pushData(`jugadors: alta ${nom} ${cognoms} (${equip}) [skip ci]`);
+
+    okb.textContent = `✔ ${nom} ${cognoms} guardat/da a ${equip}.`;
+    okb.style.display = 'block';
+    ['f-nom','f-cognoms','f-dorsal'].forEach(i => document.getElementById(i).value = '');
+    fotoInput.value = '';
+    renderList();
+  } catch(e) {
+    err.textContent = e.message || 'Error guardant.';
+    err.style.display = 'block';
+  }
+  btn.disabled = false; btn.textContent = 'Guardar jugador/a';
+}
+
+async function pushData(message){
+  const header = `// CB Grup Barna · Plantilla · Dades de jugadors/es\n// Gestionat des de /jugadors/admin.html — NO editar a mà si no cal.\n// Regla: un jugador/a NO es pot repetir (nom complet normalitzat únic al club;\n// dorsal únic dins del mateix equip).\n\n`;
+  const src = header + 'window.JUGADORS = ' + JSON.stringify(jugadors, null, 2) + ';\n';
+  const existing = await getFile(DATA_PATH);
+  await writeFile(DATA_PATH, b64Text(src), message, existing ? existing.sha : null);
+}
+
+async function deletePlayer(id){
+  const j = jugadors.find(x => x.id === id);
+  if (!j) return;
+  if (!confirm(`Segur que vols eliminar ${j.nom} ${j.cognoms} (${j.equip})?`)) return;
+  await reloadData();
+  jugadors = jugadors.filter(x => x.id !== id);
+  await pushData(`jugadors: baixa ${j.nom} ${j.cognoms} [skip ci]`);
+  renderList();
+}
+
+// ── RENDER ──
+function renderList(){
+  const box = document.getElementById('players-list');
+  document.getElementById('total-count').textContent = jugadors.length ? `${jugadors.length} jugadors/es` : '';
+  if (!jugadors.length) { box.innerHTML = '<div class="empty">Encara no hi ha cap jugador/a. Afegeix el primer 👆</div>'; return; }
+  const byTeam = {};
+  jugadors.forEach(j => { (byTeam[j.equip] = byTeam[j.equip] || []).push(j); });
+  box.innerHTML = Object.keys(byTeam).sort().map(t => `
+    <div class="team-block">
+      <div class="team-name">${t} <span class="count-pill">${byTeam[t].length}</span></div>
+      ${byTeam[t].map(j => `
+        <div class="player-row">
+          ${j.foto ? `<img class="pfoto" src="/jugadors/fotos/${j.foto}" alt="">` : `<div class="pfoto"></div>`}
+          <div class="dorsal">${j.dorsal ?? '—'}</div>
+          <div class="pname">${j.nom} ${j.cognoms}${j.posicio ? ` <span class="ppos">· ${j.posicio}</span>` : ''}</div>
+          <button class="del" title="Eliminar" onclick="deletePlayer('${j.id}')">✕</button>
+        </div>`).join('')}
+    </div>`).join('');
+}
+</script>
+</body>
+</html>
