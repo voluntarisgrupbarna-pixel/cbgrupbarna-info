@@ -1,0 +1,37 @@
+name: update-partits
+
+# Robot FCBQ: cada dilluns a les 07:00 (05:00 UTC) intenta baixar el calendari
+# mensual del club (basquetcatala.cat/partits/calendari_club_mensual/24) i
+# fusionar partits i resultats a partits/data.json. Si la federació no respon
+# o bloqueja el robot, no passa res: la via PDF de /partits/ segueix activa.
+# També es pot llançar a mà des de la pestanya Actions (workflow_dispatch).
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Baixar i fusionar partits FCBQ
+        run: python .github/scripts/update-partits.py
+      - name: Commit si hi ha canvis
+        run: |
+          if git diff --quiet partits/data.json; then
+            echo "Sense canvis"
+          else
+            git config user.name "cbgb-robot"
+            git config user.email "cbgrupbarna@gmail.com"
+            git add partits/data.json
+            git commit -m "partits: actualització automàtica FCBQ [skip ci]"
+            git push
+          fi
