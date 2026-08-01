@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Partits i resultats del CB Grup Barna. Els partits del cap de setmana dels equips sèniors i els resultats de la jornada.">
+<meta name="theme-color" content="#E63329">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Partits i Resultats · CB Grup Barna">
+<meta property="og:description" content="Els partits del cap de setmana i els resultats de la jornada.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbgrupbarna.info/partits/">
+<meta property="og:locale" content="ca_ES">
+<link rel="canonical" href="https://cbgrupbarna.info/partits/">
+<title>Partits i Resultats · CB Grup Barna</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #E63329;
+  --ink: #0E1116;
+  --ink-soft: #1A1F26;
+  --line: #2A313B;
+  --paper: #FFFFFF;
+  --grey: #8A929C;
+  --green: #1DB954;
+  --max: 900px;
+  --gutter: clamp(16px, 4vw, 32px);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  background: var(--ink);
+  color: var(--paper);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ── HEADER ── */
+.head { text-align: center; padding: 32px 0 20px; }
+.head img { width: 64px; height: 64px; object-fit: contain; }
+.head-name {
+  font-family: Anton, Impact, sans-serif;
+  font-size: clamp(28px, 7vw, 44px);
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.head-name span { color: var(--red); }
+.head-tag { color: var(--grey); font-size: 13px; margin-top: 4px; }
+
+/* ── TABS ── */
+.tabs {
+  display: flex; gap: 6px; border-bottom: 1px solid var(--line);
+  margin: 20px 0 24px; align-items: flex-end;
+}
+.tab {
+  background: none; border: 0; color: var(--grey); cursor: pointer;
+  font: 600 14px/1 Inter, sans-serif; padding: 12px 14px;
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+}
+.tab:hover { color: var(--paper); }
+.tab.active { color: var(--paper); border-bottom-color: var(--red); }
+.tab-cfg { margin-left: auto; font-size: 16px; padding: 12px; }
+
+.panel { display: none; padding-bottom: 60px; }
+.panel.active { display: block; }
+
+/* ── MATCH CARDS ── */
+.jornada-title {
+  font-family: Anton, sans-serif; text-transform: uppercase;
+  font-size: 22px; letter-spacing: 0.5px; margin: 0 0 14px;
+}
+.jornada-title small { display: block; font: 400 13px Inter, sans-serif; color: var(--grey); letter-spacing: 0; text-transform: none; }
+
+.match {
+  background: var(--ink-soft); border: 1px solid var(--line); border-left: 4px solid var(--red);
+  border-radius: 10px; padding: 16px; margin-bottom: 12px;
+}
+.match-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+.match-team { font-family: Anton, sans-serif; font-size: 17px; text-transform: uppercase; letter-spacing: 0.3px; }
+.match-when { color: var(--grey); font-size: 13px; white-space: nowrap; }
+.match-vs { font-size: 15px; font-weight: 600; }
+.match-vs em { color: var(--grey); font-style: normal; font-weight: 400; }
+.match-where { color: var(--grey); font-size: 13px; margin-top: 6px; }
+.match-hook { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 14px; font-style: italic; color: #D8DDE4; }
+.score { font-family: Anton, sans-serif; font-size: 26px; letter-spacing: 1px; }
+.score .w { color: var(--green); }
+.score .l { color: var(--grey); }
+.tag-home { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  background: var(--red); color: #fff; border-radius: 4px; padding: 2px 6px; vertical-align: middle; margin-left: 6px; }
+.tag-away { background: var(--line); }
+
+.empty { color: var(--grey); text-align: center; padding: 40px 20px; border: 1px dashed var(--line); border-radius: 10px; }
+
+/* ── GATE ── */
+.gate { max-width: 380px; margin: 40px auto; text-align: center; }
+.gate h2 { font-family: Anton, sans-serif; text-transform: uppercase; font-size: 22px; margin-bottom: 6px; }
+.gate p { color: var(--grey); font-size: 13px; margin-bottom: 18px; }
+.gate-row { display: flex; gap: 8px; }
+.gate-err { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+
+input, select, textarea {
+  width: 100%; background: var(--ink-soft); border: 1px solid var(--line); color: var(--paper);
+  border-radius: 8px; padding: 10px 12px; font: 400 14px Inter, sans-serif;
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--red); outline-offset: 1px; }
+label { display: block; font-size: 12px; font-weight: 600; color: var(--grey); margin: 12px 0 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+button.btn {
+  background: var(--red); color: #fff; border: 0; border-radius: 8px;
+  font: 700 14px Inter, sans-serif; padding: 11px 18px; cursor: pointer; white-space: nowrap;
+}
+button.btn:hover { filter: brightness(1.1); }
+button.btn.ghost { background: transparent; border: 1px solid var(--line); color: var(--paper); }
+button.btn.small { padding: 8px 12px; font-size: 13px; }
+
+/* ── CONFIG ── */
+.cfg-section { border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 16px; background: var(--ink-soft); }
+.cfg-section h3 { font-family: Anton, sans-serif; text-transform: uppercase; font-size: 16px; letter-spacing: 0.5px; margin-bottom: 4px; }
+.cfg-section .hint { color: var(--grey); font-size: 12px; margin-bottom: 10px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+@media (max-width: 600px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+.row-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.warn { background: #3A1D1B; border: 1px solid var(--red); color: #FFD9D6; font-size: 13px; border-radius: 8px; padding: 10px 12px; margin-top: 10px; display: none; }
+.ok { color: var(--green); font-size: 13px; margin-top: 10px; display: none; }
+
+.preview { margin-top: 16px; text-align: center; }
+.preview canvas { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; }
+
+.foot { border-top: 1px solid var(--line); padding: 20px 0 40px; color: var(--grey); font-size: 12px; text-align: center; }
+.foot a { color: var(--grey); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="head">
+    <img src="../logo.png" alt="Escut CB Grup Barna" width="64" height="64">
+    <h1 class="head-name">Partits <span>i Resultats</span></h1>
+    <div class="head-tag">CB Grup Barna · Bàsquet al Clot · #SomClot</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-panel="jornada">Aquesta jornada</button>
+    <button class="tab" data-panel="resultats">Resultats</button>
+    <button class="tab tab-cfg" data-panel="config" title="Configuració" aria-label="Configuració">⚙</button>
+  </nav>
+
+  <!-- ══ JORNADA ══ -->
+  <section class="panel active" id="panel-jornada">
+    <div class="jornada-title">Cap de setmana
+      <small id="jornada-range">—</small>
+    </div>
+    <div id="list-jornada"></div>
+  </section>
+
+  <!-- ══ RESULTATS ══ -->
+  <section class="panel" id="panel-resultats">
+    <div class="jornada-title">Resultats
+      <small>Els últims partits jugats</small>
+    </div>
+    <div id="list-resultats"></div>
+  </section>
+
+  <!-- ══ CONFIG ══ -->
+  <section class="panel" id="panel-config">
+
+    <div class="gate" id="gate">
+      <h2>Configuració</h2>
+      <p>Zona de gestió del club. Introdueix el codi.</p>
+      <div class="gate-row">
+        <input type="password" id="gate-input" placeholder="Codi" autocomplete="off">
+        <button class="btn" id="gate-btn">Entrar</button>
+      </div>
+      <div class="gate-err" id="gate-err">Codi incorrecte.</div>
+    </div>
+
+    <div id="cfg" hidden>
+
+      <div class="cfg-section">
+        <h3>Els partits del cap de setmana</h3>
+        <p class="hint">Un partit per equip. El que escriguis a <b>“Què ens hi juguem”</b> és el ganxo del cartell — la frase que et va passar l'entrenador. Sense ganxo, el cartell surt buit de tensió.</p>
+        <div id="rows"></div>
+        <div class="row-actions">
+          <button class="btn ghost small" id="add-row">+ Afegir partit</button>
+          <button class="btn small" id="save">Desar</button>
+          <button class="btn ghost small" id="export">Descarregar partits.json</button>
+        </div>
+        <div class="warn" id="warn"></div>
+        <div class="ok" id="ok">Desat al navegador. Per publicar-ho a la web: descarrega el JSON i puja'l al repositori.</div>
+      </div>
+
+      <div class="cfg-section">
+        <h3>Cartells</h3>
+        <p class="hint">Genera el cartell de cada partit. <b>Dia de partit</b> abans de jugar; <b>Resultat</b> quan hi hagi marcador.</p>
+        <label for="poster-match">Partit</label>
+        <select id="poster-match"></select>
+        <div class="grid3" style="margin-top:12px">
+          <div>
+            <label for="poster-kind">Tipus</label>
+            <select id="poster-kind">
+              <option value="matchday">Dia de partit</option>
+              <option value="result">Resultat</option>
+            </select>
+          </div>
+          <div>
+            <label for="poster-size">Format</label>
+            <select id="poster-size">
+              <option value="1080x1350">Feed 4:5 (1080×1350)</option>
+              <option value="1080x1920">Story / Reel 9:16 (1080×1920)</option>
+            </select>
+          </div>
+          <div>
+            <label for="poster-lang">Idioma</label>
+            <select id="poster-lang">
+              <option value="ca">Català</option>
+              <option value="es">Castellà</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="btn" id="gen">Generar cartell</button>
+          <button class="btn ghost" id="gen-all">Generar els 4</button>
+          <button class="btn ghost" id="dl">Descarregar PNG</button>
+        </div>
+        <div class="preview"><canvas id="cv" width="1080" height="1350"></canvas></div>
+      </div>
+
+      <div class="cfg-section">
+        <h3>Canviar el codi</h3>
+        <p class="hint">El codi es guarda com a hash SHA-256, no en text pla. Escriu el codi nou, copia el hash i substitueix la constant <code>GATE_HASH</code> d'aquesta pàgina.</p>
+        <div class="grid2">
+          <div><label for="newcode">Codi nou</label><input type="text" id="newcode" autocomplete="off"></div>
+          <div><label for="newhash">Hash a copiar</label><input type="text" id="newhash" readonly></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="foot">
+    <a href="../">← Tornar a cbgrupbarna.info</a>
+  </footer>
+
+</div>
+
+<script>
+/* ══════════ CONFIG ══════════
+   GATE_HASH = SHA-256 del codi d'accés. El codi NO viu al codi font.
+   Codi inicial: clot1965 — canvia'l des de la secció "Canviar el codi".
+   ⚠️ Això és una cortina, no un pany: la web és estàtica i tot el que hi ha
+   darrere viatja al navegador. No hi posis mai dades personals ni sensibles.
+*/
+const GATE_HASH = '67637ec4fb0613e1a78a7b043853c61afc38269098cf3bf5188161ca50f2c7b8';
+const GATE_KEY  = 'cbgb_partits_gate_v1';
+const DATA_KEY  = 'cbgb_partits_data_v1';
+const EQUIPS_DEFAULT = ['Sènior A Masculí', 'Sènior B Masculí', 'Sènior A Femení', 'Sènior B Femení'];
+
+const DISPLAY = 'Anton, Impact, "Arial Narrow Bold", "Arial Black", sans-serif';
+const DIES = ['diumenge','dilluns','dimarts','dimecres','dijous','divendres','dissabte'];
+const MESOS = ['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
+
+/* Ganxos morts — banned by ganxos-cbgb (M-02). No es publiquen. */
+const GANXOS_MORTS = [
+  /us hi esperem/i, /aquest dissabte juguem/i, /aquest diumenge juguem/i,
+  /vine a animar/i, /os esperamos/i, /ja estan obertes/i, /un dia més/i,
+  /resum de la jornada/i, /pov:/i
+];
+
+let DATA = { temporada: '', equips: EQUIPS_DEFAULT.slice(), partits: [] };
+
+/* ══════════ UTILS ══════════ */
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function sha256(txt) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function fmtDate(iso, lang) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  if (isNaN(d)) return iso;
+  if (lang === 'es') {
+    const DS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    const MS = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    return `${DS[d.getDay()]} ${d.getDate()} de ${MS[d.getMonth()]}`;
+  }
+  const mes = MESOS[d.getMonth()];
+  const prep = /^[aeiouh]/i.test(mes) ? "d'" : 'de ';   // 8 d'agost, no 8 de agost
+  return `${DIES[d.getDay()]} ${d.getDate()} ${prep}${mes}`;
+}
+
+function weekendRange() {
+  const now = new Date();
+  const day = now.getDay();                    // 0 diu … 6 dis
+  const toSat = (6 - day + 7) % 7;
+  const sat = new Date(now); sat.setDate(now.getDate() + toSat);
+  const sun = new Date(sat);  sun.setDate(sat.getDate() + 1);
+  return [sat, sun];
+}
+
+/* ══════════ TABS ══════════ */
+$$('.tab').forEach(t => t.addEventListener('click', () => {
+  $$('.tab').forEach(x => x.classList.remove('active'));
+  $$('.panel').forEach(p => p.classList.remove('active'));
+  t.classList.add('active');
+  $('#panel-' + t.dataset.panel).classList.add('active');
+}));
+
+/* ══════════ DADES ══════════ */
+async function loadData() {
+  const local = localStorage.getItem(DATA_KEY);
+  if (local) { try { DATA = JSON.parse(local); } catch (e) {} }
+  else {
+    try {
+      const r = await fetch('partits.json', { cache: 'no-store' });
+      if (r.ok) {
+        const j = await r.json();
+        DATA = { temporada: j.temporada || '', equips: j.equips || EQUIPS_DEFAULT.slice(), partits: j.partits || [] };
+      }
+    } catch (e) {}
+  }
+  if (!DATA.equips || !DATA.equips.length) DATA.equips = EQUIPS_DEFAULT.slice();
+  render();
+}
+
+function saveLocal() {
+  localStorage.setItem(DATA_KEY, JSON.stringify(DATA));
+}
+
+/* ══════════ RENDER PÚBLIC ══════════ */
+function matchCard(p, withScore) {
+  const home = p.local !== false;
+  const local = home ? 'CB Grup Barna' : (p.rival || '—');
+  const visit = home ? (p.rival || '—') : 'CB Grup Barna';
+  let scoreHtml = '';
+  if (withScore && p.marcadorNostre != null && p.marcadorRival != null) {
+    const a = Number(p.marcadorNostre), b = Number(p.marcadorRival);
+    const ours = `<span class="${a > b ? 'w' : 'l'}">${a}</span>`;
+    const theirs = `<span class="${b > a ? 'w' : 'l'}">${b}</span>`;
+    scoreHtml = `<div class="score">${home ? ours + ' – ' + theirs : theirs + ' – ' + ours}</div>`;
+  }
+  return `<article class="match">
+    <div class="match-top">
+      <div class="match-team">${esc(p.equip)}<span class="tag-home ${home ? '' : 'tag-away'}">${home ? 'Local' : 'Visitant'}</span></div>
+      ${scoreHtml || `<div class="match-when">${esc(fmtDate(p.data, 'ca'))}${p.hora ? ' · ' + esc(p.hora) : ''}</div>`}
+    </div>
+    <div class="match-vs">${esc(local)} <em>vs</em> ${esc(visit)}</div>
+    ${p.pavello ? `<div class="match-where">📍 ${esc(p.pavello)}</div>` : ''}
+    ${p.ganxo ? `<div class="match-hook">“${esc(p.ganxo)}”</div>` : ''}
+  </article>`;
+}
+
+function render() {
+  const jugats  = DATA.partits.filter(p => p.marcadorNostre != null && p.marcadorRival != null);
+  const pendents = DATA.partits.filter(p => !(p.marcadorNostre != null && p.marcadorRival != null));
+
+  const [sat, sun] = weekendRange();
+  $('#jornada-range').textContent = DATA.partits.length
+    ? `${fmtDate(sat.toISOString().slice(0,10),'ca')} i ${fmtDate(sun.toISOString().slice(0,10),'ca')}`
+    : 'Encara no hi ha partits publicats';
+
+  $('#list-jornada').innerHTML = pendents.length
+    ? pendents.sort((a,b) => (a.data+a.hora||'').localeCompare(b.data+b.hora||'')).map(p => matchCard(p, false)).join('')
+    : `<div class="empty">Encara no hi ha partits publicats per aquest cap de setmana.</div>`;
+
+  $('#list-resultats').innerHTML = jugats.length
+    ? jugats.sort((a,b) => (b.data||'').localeCompare(a.data||'')).map(p => matchCard(p, true)).join('')
+    : `<div class="empty">Encara no hi ha resultats.</div>`;
+
+  if (!$('#cfg').hidden) { renderRows(); fillPosterSelect(); }
+}
+
+/* ══════════ GATE ══════════ */
+async function tryGate() {
+  const val = $('#gate-input').value.trim();
+  if (!val) return;
+  const h = await sha256(val);
+  if (h === GATE_HASH) { sessionStorage.setItem(GATE_KEY, '1'); openCfg(); }
+  else { $('#gate-err').style.display = 'block'; $('#gate-input').select(); }
+}
+function openCfg() {
+  $('#gate').hidden = true;
+  $('#cfg').hidden = false;
+  renderRows(); fillPosterSelect();
+}
+$('#gate-btn').addEventListener('click', tryGate);
+$('#gate-input').addEventListener('keydown', e => { if (e.key === 'Enter') tryGate(); });
+if (sessionStorage.getItem(GATE_KEY)) { addEventListener('DOMContentLoaded', openCfg); }
+
+/* ══════════ FILES D'EDICIÓ ══════════ */
+function rowHtml(p, i) {
+  const eqOpts = DATA.equips.map(e => `<option ${e === p.equip ? 'selected' : ''}>${esc(e)}</option>`).join('');
+  return `<div class="cfg-row" data-i="${i}" style="border-top:1px solid var(--line);padding-top:12px;margin-top:12px">
+    <div class="grid2">
+      <div><label>Equip</label><select data-f="equip">${eqOpts}</select></div>
+      <div><label>Rival</label><input data-f="rival" value="${esc(p.rival)}" placeholder="Nom del rival"></div>
+    </div>
+    <div class="grid3">
+      <div><label>Data</label><input data-f="data" type="date" value="${esc(p.data)}"></div>
+      <div><label>Hora</label><input data-f="hora" type="time" value="${esc(p.hora)}"></div>
+      <div><label>On juguem</label><select data-f="local">
+        <option value="1" ${p.local !== false ? 'selected' : ''}>A casa</option>
+        <option value="0" ${p.local === false ? 'selected' : ''}>Fora</option>
+      </select></div>
+    </div>
+    <label>Pavelló</label><input data-f="pavello" value="${esc(p.pavello)}" placeholder="Poliesportiu…">
+    <label>Què ens hi juguem (ganxo del cartell)</label>
+    <input data-f="ganxo" value="${esc(p.ganxo)}" placeholder="Ex.: Una victòria i som a dalt.">
+    <div class="grid2">
+      <div><label>Punts CB Grup Barna</label><input data-f="marcadorNostre" type="number" min="0" value="${p.marcadorNostre ?? ''}" placeholder="—"></div>
+      <div><label>Punts rival</label><input data-f="marcadorRival" type="number" min="0" value="${p.marcadorRival ?? ''}" placeholder="—"></div>
+    </div>
+    <div class="row-actions"><button class="btn ghost small" data-del="${i}">Esborrar aquest partit</button></div>
+  </div>`;
+}
+
+function renderRows() {
+  if (!DATA.partits.length) {
+    DATA.partits = DATA.equips.slice(0, 4).map(e => ({ equip: e, rival: '', data: '', hora: '', pavello: '', ganxo: '', local: true, marcadorNostre: null, marcadorRival: null }));
+  }
+  $('#rows').innerHTML = DATA.partits.map(rowHtml).join('');
+  $$('#rows [data-del]').forEach(b => b.addEventListener('click', () => {
+    DATA.partits.splice(Number(b.dataset.del), 1); renderRows(); fillPosterSelect();
+  }));
+}
+
+function collectRows() {
+  DATA.partits = $$('#rows .cfg-row').map(row => {
+    const g = f => { const el = row.querySelector(`[data-f="${f}"]`); return el ? el.value.trim() : ''; };
+    const num = f => { const v = g(f); return v === '' ? null : Number(v); };
+    return {
+      equip: g('equip'), rival: g('rival'), data: g('data'), hora: g('hora'),
+      pavello: g('pavello'), ganxo: g('ganxo'), local: g('local') === '1',
+      marcadorNostre: num('marcadorNostre'), marcadorRival: num('marcadorRival')
+    };
+  });
+}
+
+function checkGanxos() {
+  const bad = DATA.partits.filter(p => p.ganxo && GANXOS_MORTS.some(rx => rx.test(p.ganxo)));
+  const buits = DATA.partits.filter(p => p.rival && !p.ganxo);
+  const msgs = [];
+  if (bad.length)  msgs.push(`⚠️ Ganxo mort a: ${bad.map(p => p.equip).join(', ')}. Frases tipus “us hi esperem” estan marcades com a pràctica morta — declara què hi ha en joc.`);
+  if (buits.length) msgs.push(`⚠️ Sense ganxo: ${buits.map(p => p.equip).join(', ')}. El cartell sortirà sense la frase que fa la feina.`);
+  const w = $('#warn');
+  w.innerHTML = msgs.join('<br>');
+  w.style.display = msgs.length ? 'block' : 'none';
+}
+
+$('#add-row').addEventListener('click', () => {
+  collectRows();
+  DATA.partits.push({ equip: DATA.equips[0], rival: '', data: '', hora: '', pavello: '', ganxo: '', local: true, marcadorNostre: null, marcadorRival: null });
+  renderRows(); fillPosterSelect();
+});
+
+$('#save').addEventListener('click', () => {
+  collectRows(); checkGanxos(); saveLocal(); render(); fillPosterSelect();
+  const ok = $('#ok'); ok.style.display = 'block'; setTimeout(() => ok.style.display = 'none', 6000);
+});
+
+$('#export').addEventListener('click', () => {
+  collectRows(); saveLocal();
+  const out = {
+    _comment: "Partits i resultats del CB Grup Barna. S'edita des de la pestanya Configuracio de /partits/ i es publica pujant aquest fitxer al repositori.",
+    lastUpdate: new Date().toISOString().slice(0, 10),
+    temporada: DATA.temporada || '',
+    equips: DATA.equips,
+    partits: DATA.partits
+  };
+  const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'partits.json'; a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+/* ══════════ CARTELLS ══════════ */
+function fillPosterSelect() {
+  const sel = $('#poster-match');
+  sel.innerHTML = DATA.partits.map((p, i) => `<option value="${i}">${esc(p.equip)}${p.rival ? ' · ' + esc(p.rival) : ''}</option>`).join('');
+}
+
+function fitText(ctx, text, maxW, startSize, font, minSize) {
+  let size = startSize;
+  do { ctx.font = `${size}px ${font}`; size -= 2; }
+  while (ctx.measureText(text).width > maxW && size > minSize);
+  return ctx.font;
+}
+
+function wrapLines(ctx, text, maxW) {
+  const words = String(text).split(/\s+/);
+  const lines = []; let line = '';
+  for (const w of words) {
+    const t = line ? line + ' ' + w : w;
+    if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; }
+    else line = t;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+const logoImg = new Image();
+logoImg.src = '../logo.png';
+
+async function drawPoster(idx) {
+  const p = DATA.partits[idx];
+  if (!p) return;
+  const lang = $('#poster-lang').value;
+  const kind = $('#poster-kind').value;
+  const [W, H] = $('#poster-size').value.split('x').map(Number);
+  const cv = $('#cv'); cv.width = W; cv.height = H;
+  const ctx = cv.getContext('2d');
+
+  try { await document.fonts.load('100px Anton'); await document.fonts.ready; } catch (e) {}
+
+  /* fons */
+  ctx.fillStyle = '#0E1116'; ctx.fillRect(0, 0, W, H);
+  /* banda vermella diagonal */
+  ctx.save();
+  ctx.fillStyle = '#E63329';
+  ctx.beginPath();
+  ctx.moveTo(0, H * 0.60); ctx.lineTo(W, H * 0.52); ctx.lineTo(W, H * 0.545); ctx.lineTo(0, H * 0.625);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+  /* marc */
+  ctx.strokeStyle = '#E63329'; ctx.lineWidth = 10; ctx.strokeRect(24, 24, W - 48, H - 48);
+
+  const cx = W / 2, M = 90, maxW = W - M * 2;
+  ctx.textAlign = 'center';
+
+  /* escut */
+  if (logoImg.complete && logoImg.naturalWidth) {
+    const lw = W * 0.16, lh = lw * (logoImg.naturalHeight / logoImg.naturalWidth);
+    ctx.drawImage(logoImg, cx - lw / 2, H * 0.055, lw, lh);
+  }
+
+  /* etiqueta */
+  const label = kind === 'result'
+    ? (lang === 'es' ? 'RESULTADO' : 'RESULTAT')
+    : (lang === 'es' ? 'DÍA DE PARTIDO' : 'DIA DE PARTIT');
+  ctx.font = '700 34px Inter, sans-serif';
+  ctx.fillStyle = '#E63329';
+  ctx.letterSpacing = '6px';
+  ctx.fillText(label.toUpperCase(), cx, H * 0.255);
+  ctx.letterSpacing = '0px';
+
+  /* ganxo o marcador — la zona central protegida */
+  ctx.fillStyle = '#FFFFFF';
+  if (kind === 'result' && p.marcadorNostre != null && p.marcadorRival != null) {
+    const a = Number(p.marcadorNostre), b = Number(p.marcadorRival);
+    ctx.font = `${Math.round(H * 0.13)}px ${DISPLAY}`;
+    ctx.fillText(`${a} – ${b}`, cx, H * 0.40);
+    const verdict = a > b ? (lang === 'es' ? 'VICTORIA' : 'VICTÒRIA') : (lang === 'es' ? 'DERROTA' : 'DERROTA');
+    ctx.fillStyle = a > b ? '#FFFFFF' : '#8A929C';
+    ctx.font = `${Math.round(H * 0.045)}px ${DISPLAY}`;
+    ctx.fillText(verdict, cx, H * 0.47);
+  } else {
+    const hook = (p.ganxo || (lang === 'es' ? 'NOS LO JUGAMOS TODO' : 'ENS HO JUGUEM TOT')).toUpperCase();
+    ctx.font = `${Math.round(H * 0.075)}px ${DISPLAY}`;
+    let lines = wrapLines(ctx, hook, maxW);
+    if (lines.length > 3) { ctx.font = `${Math.round(H * 0.058)}px ${DISPLAY}`; lines = wrapLines(ctx, hook, maxW); }
+    const lh = parseInt(ctx.font) * 1.06;
+    const top = H * 0.42 - (lines.length - 1) * lh / 2;
+    lines.forEach((l, i) => ctx.fillText(l, cx, top + i * lh));
+  }
+
+  /* equips */
+  const home = p.local !== false;
+  const nostre = 'CB GRUP BARNA';
+  const rival = (p.rival || '—').toUpperCase();
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = fitText(ctx, home ? nostre : rival, maxW, Math.round(H * 0.042), DISPLAY, 24);
+  ctx.fillText(home ? nostre : rival, cx, H * 0.675);
+  ctx.fillStyle = '#E63329';
+  ctx.font = `${Math.round(H * 0.030)}px ${DISPLAY}`;
+  ctx.fillText('VS', cx, H * 0.723);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = fitText(ctx, home ? rival : nostre, maxW, Math.round(H * 0.042), DISPLAY, 24);
+  ctx.fillText(home ? rival : nostre, cx, H * 0.772);
+
+  /* equip del club */
+  ctx.fillStyle = '#8A929C';
+  ctx.font = '600 30px Inter, sans-serif';
+  ctx.fillText(p.equip || '', cx, H * 0.815);
+
+  /* quan i on */
+  const when = [fmtDate(p.data, lang), p.hora, p.pavello].filter(Boolean).join(' · ');
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = fitText(ctx, when.toUpperCase(), maxW, 32, '700 Inter, sans-serif', 18);
+  ctx.fillText(when.toUpperCase(), cx, H * 0.885);
+
+  /* peu */
+  ctx.fillStyle = '#E63329';
+  ctx.font = fitText(ctx, '#SOMCLOT · @CBGRUPBARNA', maxW, 30, '800 Inter, sans-serif', 18);
+  ctx.fillText('#SOMCLOT · @CBGRUPBARNA', cx, H * 0.945);
+}
+
+$('#gen').addEventListener('click', () => { collectRows(); checkGanxos(); drawPoster(Number($('#poster-match').value)); });
+
+$('#gen-all').addEventListener('click', async () => {
+  collectRows(); checkGanxos();
+  for (let i = 0; i < DATA.partits.length; i++) {
+    await drawPoster(i);
+    await new Promise(r => setTimeout(r, 150));
+    const p = DATA.partits[i];
+    const a = document.createElement('a');
+    a.href = $('#cv').toDataURL('image/png');
+    a.download = `cartell-${(p.equip || 'equip').toLowerCase().replace(/\s+/g, '-')}-${$('#poster-kind').value}.png`;
+    a.click();
+  }
+});
+
+$('#dl').addEventListener('click', () => {
+  const p = DATA.partits[Number($('#poster-match').value)] || {};
+  const a = document.createElement('a');
+  a.href = $('#cv').toDataURL('image/png');
+  a.download = `cartell-${(p.equip || 'equip').toLowerCase().replace(/\s+/g, '-')}-${$('#poster-kind').value}.png`;
+  a.click();
+});
+
+/* ══════════ CANVIAR EL CODI ══════════ */
+$('#newcode').addEventListener('input', async e => {
+  const v = e.target.value.trim();
+  $('#newhash').value = v ? await sha256(v) : '';
+});
+
+loadData();
+</script>
+</body>
+</html>
