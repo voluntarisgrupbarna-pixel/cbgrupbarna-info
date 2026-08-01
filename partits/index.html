@@ -7,6 +7,20 @@
 <meta name="description" content="Calendari de partits, resultats i ratxes de tots els equips del CB Grup Barna. Jornada a jornada, dissabte i diumenge, casa i fora.">
 <meta name="theme-color" content="#050505">
 <link rel="icon" href="../logo.png">
+<link rel="canonical" href="https://cbgrupbarna.info/partits/"/>
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="keywords" content="partits CB Grup Barna, resultats Grup Barna, calendari basquet Clot, Supercopa Catalana, bàsquet Barcelona, La Nau del Clot, classificació Grup Barna">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CB Grup Barna">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:url" content="https://cbgrupbarna.info/partits/">
+<meta property="og:title" content="Partits i resultats · CB Grup Barna">
+<meta property="og:description" content="Calendari de tots els equips del CB Grup Barna: dia, hora, rival, casa o fora i pista. Resultats, ratxes i classificació, jornada a jornada.">
+<meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cbgrupbarna">
+<meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CBGB Partits i Resultats","url":"https://cbgrupbarna.info/partits/","applicationCategory":"SportsApplication","operatingSystem":"Android, iOS, Web","inLanguage":"ca","description":"Calendari de partits i resultats de tots els equips del CB Grup Barna: data, hora, equip local, equip visitant, categoria, pista, resultats, ratxes i posició a la lliga.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"SportsOrganization","name":"CB Grup Barna","url":"https://cbgrupbarna.info","logo":"https://cbgrupbarna.info/logo.png","sameAs":["https://www.instagram.com/cbgrupbarna/","https://www.basquetcatala.cat/club/24"]},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CB Grup Barna","item":"https://cbgrupbarna.info/"},{"@type":"ListItem","position":2,"name":"Partits i resultats","item":"https://cbgrupbarna.info/partits/"}]}}</script>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="../logo.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -276,6 +290,7 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
   <h1>Partits <span>&amp;</span> Resultats</h1>
   <div class="head-tag">CB Grup Barna · Temporada 2026-2027 · #SomClot</div>
   <br><a class="back" href="../">← Tornar a cbgrupbarna.info</a>
+  <br><a class="back" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="border:1px solid rgba(227,30,36,.45);border-radius:99px;padding:6px 14px;margin-top:8px;color:#E31E24">📸 SEGUEIX @CBGRUPBARNA</a>
   <br><button class="back" id="pwa-btn" style="display:none;border:1px solid var(--border);border-radius:99px;padding:6px 14px;margin-top:8px">📲 INSTAL·LAR L'APP AL MÒBIL</button>
 </header>
 
@@ -304,6 +319,7 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
   <!-- ===== VISTA RESULTATS ===== -->
   <section class="view" id="v-resultats">
     <div id="winners-box"></div>
+    <div id="millors-box"></div>
     <div class="stat-row" id="club-stats"></div>
     <div class="sec-t">🔥 Ratxes per equip</div>
     <div id="ratxes-list"></div>
@@ -416,7 +432,11 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
 
 <div class="edit-pill" id="edit-pill">✏️ MODE GESTIÓ ACTIU</div>
 
-<footer>CB Grup Barna · Bàsquet al Clot des de 1965<br>Dades: FCBQ · basquetcatala.cat/club/24</footer>
+<footer>
+  <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="display:inline-block;background:#E31E24;color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;margin-bottom:14px">📸 SEGUEIX EL BARNA A INSTAGRAM</a><br>
+  <a href="/" style="color:#8a8a8a;text-decoration:none">CB GRUP BARNA · BÀSQUET AL CLOT DES DE 1965</a><br>
+  Dades: FCBQ · basquetcatala.cat/club/24
+</footer>
 
 <script>
 /* =========================================================
@@ -620,6 +640,13 @@ function renderResultats() {
   // ratxes ordenades: millors primer
   const rows = m.equips.map(e=>({e, s: teamStats(e.id, m.partits)}))
     .sort((a,b)=> (b.s.sType==='W'?b.s.streak:-b.s.streak) - (a.s.sType==='W'?a.s.streak:-a.s.streak));
+  // equips que millor van → destacats amb CTA de seguiment
+  const enRatxa = rows.filter(r=>r.s.sType==='W' && r.s.streak>=2);
+  document.getElementById('millors-box').innerHTML = enRatxa.length ? `<div class="winners" style="background:linear-gradient(135deg,rgba(34,197,94,.10),var(--panel) 60%);border-color:rgba(34,197,94,.35)">
+    <h3 style="color:var(--green)">🔥 Equips que van millor ara mateix</h3>
+    ${enRatxa.map(({e,s})=>`<div class="wrow">${e.emoji||'🏀'} ${e.nom}<small>${s.streak} victòries seguides · ${s.w}-${s.l}</small></div>`).join('')}
+    <a class="g-btn" style="text-decoration:none;background:#E31E24" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">📸 Segueix-los a @cbgrupbarna</a>
+  </div>` : '';
   document.getElementById('ratxes-list').innerHTML = rows.map(({e,s})=>{
     let stk = '<span class="streak">Sense partits jugats</span>';
     if (s.sType==='W') stk = `<span class="streak hot">🔥 ${s.streak} victòri${s.streak>1?'es':'a'} seguid${s.streak>1?'es':'a'}</span>`;
