@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Partits · CB Grup Barna</title>
-<meta name="description" content="Partits del cap de setmana del CB Grup Barna: horaris, pavellons i resultats de tots els equips, locals i visitants.">
+<title>Partits i resultats · CB Grup Barna</title>
+<meta name="description" content="Partits i resultats del CB Grup Barna: horaris, pavellons i marcadors de tots els equips, masculins i femenins, com a locals i visitants.">
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -17,14 +17,28 @@
   header .t{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.06em}
   header .t span{color:var(--red)}
   header a.back{margin-left:auto;color:var(--muted);font-size:.8rem;text-decoration:none}
-  .wrap{max-width:820px;margin:0 auto;padding:2rem 1.2rem 4rem}
+  .wrap{max-width:860px;margin:0 auto;padding:2rem 1.2rem 4rem}
   h1{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;line-height:1}
   h1 span{color:var(--red)}
-  .sub{color:var(--muted);font-size:.92rem;margin:.4rem 0 2rem}
-  .day{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.04em;margin:2rem 0 .3rem}
+  .sub{color:var(--muted);font-size:.92rem;margin:.4rem 0 1.6rem}
+
+  /* filtres */
+  .filters{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem;margin-bottom:1.6rem}
+  .frow{display:flex;gap:.5rem;flex-wrap:wrap;align-items:flex-end}
+  .fg{display:flex;flex-direction:column;gap:.3rem;flex:1;min-width:150px}
+  .fg label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+  select{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.55rem .7rem;font-family:'Outfit',sans-serif;font-size:.86rem}
+  select:focus{outline:none;border-color:var(--red)}
+  .segs{display:flex;gap:.35rem;flex-wrap:wrap}
+  .segs button{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:.42rem .85rem;font-family:inherit;font-size:.75rem;cursor:pointer;transition:.15s}
+  .segs button.on{border-color:var(--red);color:var(--txt);background:rgba(200,16,46,.12)}
+  .clearf{background:none;border:none;color:var(--muted);font-size:.72rem;cursor:pointer;text-decoration:underline;margin-top:.7rem}
+  .count{font-size:.75rem;color:var(--muted);margin-bottom:.8rem}
+
+  .day{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.04em;margin:1.8rem 0 .3rem}
   .day span{color:var(--red)}
-  .block{margin-top:1rem}
-  .block h3{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+  .block{margin-top:.9rem}
+  .block h3{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
   .p{display:flex;align-items:center;gap:.9rem;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;margin-bottom:.55rem;flex-wrap:wrap}
   .p.local{border-left:3px solid var(--red)}
   .hora{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;min-width:3.4rem;flex:none;letter-spacing:.03em}
@@ -46,9 +60,36 @@
   <a class="back" href="/">← Tornar a la web</a>
 </header>
 <div class="wrap">
-  <h1>ELS <span>PARTITS</span></h1>
-  <p class="sub">Horaris i resultats de tots els equips del club, com a locals i com a visitants.</p>
-  <div id="list"><div class="empty">Carregant partits…</div></div>
+  <h1>PARTITS I <span>RESULTATS</span></h1>
+  <p class="sub">Horaris i marcadors de tots els equips del club, com a locals i com a visitants.</p>
+
+  <div class="filters">
+    <div class="segs" id="seg-quan" style="margin-bottom:.9rem">
+      <button data-q="propers" class="on">Propers</button>
+      <button data-q="resultats">Resultats</button>
+      <button data-q="tots">Tots</button>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label>Categoria</label>
+        <select id="f-cat"><option value="">Totes</option></select>
+      </div>
+      <div class="fg">
+        <label>Equip</label>
+        <select id="f-equip"><option value="">Tots els equips</option></select>
+      </div>
+    </div>
+    <div class="segs" id="seg-gen" style="margin-top:.9rem">
+      <button data-g="" class="on">Tots</button>
+      <button data-g="Masculí">Masculí</button>
+      <button data-g="Femení">Femení</button>
+      <button data-g="Mixt">Mixt</button>
+    </div>
+    <button class="clearf" onclick="clearFilters()">Netejar filtres</button>
+  </div>
+
+  <div class="count" id="count"></div>
+  <div id="list"></div>
 </div>
 <footer>CB Grup Barna · El Clot · Barcelona · #somclot</footer>
 
@@ -65,41 +106,100 @@ function etiquetaDia(d){
   return `${DIES[dt.getDay()]} <span>${dt.getDate()} de ${MESOS[dt.getMonth()]}</span>`;
 }
 
-const partits = window.PARTITS || [];
-const box = document.getElementById('list');
-// Mostrem des d'ahir (per veure resultats del cap de setmana) i cap endavant.
-const ahir = new Date(Date.now() - 36*3600*1000).toISOString().slice(0,10);
-const visibles = partits.filter(p => p.data >= ahir);
+const PARTITS = window.PARTITS || [];
+const state = { quan:'propers', cat:'', genere:'', equip:'' };
 
-if(!visibles.length){
-  box.innerHTML = '<div class="empty">Encara no hi ha partits publicats per als propers dies.<br>'
-    + 'Segueix-nos a <a href="https://instagram.com/cbgrupbarna" target="_blank" rel="noopener">@cbgrupbarna</a> per no perdre\'t cap jornada.</div>';
-} else {
-  const byDay = {};
-  visibles.forEach(p => { (byDay[p.data] = byDay[p.data] || []).push(p); });
-  box.innerHTML = Object.keys(byDay).sort().map(d => {
-    const locals = byDay[d].filter(p => p.condicio === 'local').sort((a,b)=>a.hora.localeCompare(b.hora));
-    const fora   = byDay[d].filter(p => p.condicio !== 'local').sort((a,b)=>a.hora.localeCompare(b.hora));
-    function bloc(titol, arr){
+// ── Omplir desplegables a partir de les dades reals ──
+function omplirCategories(){
+  const sel=document.getElementById('f-cat');
+  const cats=[...new Set(PARTITS.map(p=>p.categoria).filter(Boolean))];
+  const ordre=['Sènior','Sub-22','Júnior','Cadet','Infantil','Preinfantil','Mini','Premini','Open'];
+  cats.sort((a,b)=>{const ia=ordre.indexOf(a),ib=ordre.indexOf(b);
+    return (ia<0?99:ia)-(ib<0?99:ib) || a.localeCompare(b);});
+  sel.innerHTML='<option value="">Totes</option>'+cats.map(c=>`<option>${c}</option>`).join('');
+}
+function omplirEquips(){
+  const sel=document.getElementById('f-equip');
+  let base=PARTITS;
+  if(state.cat) base=base.filter(p=>p.categoria===state.cat);
+  if(state.genere) base=base.filter(p=>p.genere===state.genere);
+  const eq=[...new Set(base.map(p=>p.equip).filter(Boolean))].sort();
+  const prev=state.equip;
+  sel.innerHTML='<option value="">Tots els equips</option>'+eq.map(e=>`<option>${e}</option>`).join('');
+  if(eq.includes(prev)) sel.value=prev; else state.equip='';
+}
+
+function clearFilters(){
+  state.cat=''; state.genere=''; state.equip='';
+  document.getElementById('f-cat').value='';
+  document.querySelectorAll('#seg-gen button').forEach(b=>b.classList.toggle('on', b.dataset.g===''));
+  omplirEquips(); render();
+}
+
+document.getElementById('f-cat').addEventListener('change',e=>{
+  state.cat=e.target.value; omplirEquips(); render();});
+document.getElementById('f-equip').addEventListener('change',e=>{
+  state.equip=e.target.value; render();});
+document.querySelectorAll('#seg-gen button').forEach(b=>b.addEventListener('click',()=>{
+  state.genere=b.dataset.g;
+  document.querySelectorAll('#seg-gen button').forEach(x=>x.classList.toggle('on',x===b));
+  omplirEquips(); render();}));
+document.querySelectorAll('#seg-quan button').forEach(b=>b.addEventListener('click',()=>{
+  state.quan=b.dataset.q;
+  document.querySelectorAll('#seg-quan button').forEach(x=>x.classList.toggle('on',x===b));
+  render();}));
+
+function filtrats(){
+  const avui=new Date().toISOString().slice(0,10);
+  const ahir=new Date(Date.now()-36*3600*1000).toISOString().slice(0,10);
+  let l=PARTITS.slice();
+  if(state.quan==='propers')   l=l.filter(p=>p.data>=ahir && !p.resultat);
+  if(state.quan==='resultats') l=l.filter(p=>p.resultat);
+  if(state.cat)    l=l.filter(p=>p.categoria===state.cat);
+  if(state.genere) l=l.filter(p=>p.genere===state.genere);
+  if(state.equip)  l=l.filter(p=>p.equip===state.equip);
+  l.sort((a,b)=> state.quan==='resultats'
+    ? (b.data+b.hora).localeCompare(a.data+a.hora)
+    : (a.data+a.hora).localeCompare(b.data+b.hora));
+  return l;
+}
+
+function render(){
+  const box=document.getElementById('list'), cnt=document.getElementById('count');
+  const list=filtrats();
+  cnt.textContent = list.length ? `${list.length} partit${list.length>1?'s':''}` : '';
+  if(!list.length){
+    box.innerHTML='<div class="empty">No hi ha partits amb aquests filtres.<br>'
+      +'Prova a <a href="#" onclick="clearFilters();return false">netejar els filtres</a> o segueix-nos a '
+      +'<a href="https://instagram.com/cbgrupbarna" target="_blank" rel="noopener">@cbgrupbarna</a>.</div>';
+    return;
+  }
+  const byDay={};
+  list.forEach(p=>{ (byDay[p.data]=byDay[p.data]||[]).push(p); });
+  const dies=Object.keys(byDay);
+  dies.sort((a,b)=> state.quan==='resultats' ? b.localeCompare(a) : a.localeCompare(b));
+  box.innerHTML=dies.map(d=>{
+    const locals=byDay[d].filter(p=>p.condicio==='local');
+    const fora=byDay[d].filter(p=>p.condicio!=='local');
+    function bloc(titol,arr){
       if(!arr.length) return '';
-      return `<div class="block"><h3>${titol}</h3>` + arr.map(p => {
-        let res = '';
+      return `<div class="block"><h3>${titol}</h3>`+arr.map(p=>{
+        let res='';
         if(p.resultat){
-          const win = p.resultat.nostre > p.resultat.seu;
-          res = `<span class="res ${win?'win':'loss'}">${p.resultat.nostre}-${p.resultat.seu}</span>`;
+          const win=p.resultat.nostre>p.resultat.seu;
+          res=`<span class="res ${win?'win':'loss'}">${p.resultat.nostre}-${p.resultat.seu}</span>`;
         }
         return `<div class="p ${p.condicio}">
           <span class="hora">${p.hora}</span>
           <span class="info"><b>${p.equip} · ${p.rival}</b><small>${p.lloc}${p.competicio?' · '+p.competicio:''}</small></span>
           ${res}
-        </div>`;
-      }).join('') + '</div>';
+        </div>`;}).join('')+'</div>';
     }
-    return `<div class="day">${etiquetaDia(d)}</div>`
-      + bloc('A casa', locals)
-      + bloc('A fora', fora);
+    return `<div class="day">${etiquetaDia(d)}</div>`+bloc('A casa',locals)+bloc('A fora',fora);
   }).join('');
 }
+
+omplirCategories(); omplirEquips(); render();
 </script>
 </body>
 </html>

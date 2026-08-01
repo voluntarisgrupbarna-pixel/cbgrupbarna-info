@@ -117,6 +117,12 @@
     <div class="hint">No es pot repetir el mateix equip amb el mateix rival el mateix dia.</div>
   </div>
 
+  <div id="winalert" style="display:none;background:linear-gradient(135deg,rgba(46,160,67,.16),rgba(200,16,46,.12));border:1px solid rgba(46,160,67,.45);border-radius:12px;padding:1rem 1.1rem;margin-top:1.5rem">
+    <b style="font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.04em;color:#3ddc84;display:block" id="winalert-t"></b>
+    <p style="font-size:.84rem;color:rgba(255,255,255,.7);margin-top:.2rem;line-height:1.5" id="winalert-p"></p>
+    <a class="btn" style="margin-top:.8rem;text-decoration:none" href="/partits/cartell.html">Generar cartell i copy →</a>
+  </div>
+
   <h2>PARTITS <span>CARREGATS</span></h2>
   <div class="filters">
     <button id="fb-props" class="on" onclick="setFilter('props')">Propers</button>
@@ -248,7 +254,21 @@ function etiquetaDia(d){
   return `${DIES[dt.getDay()]} ${dt.getDate()} de ${MESOS[dt.getMonth()]}`;
 }
 
+function checkVictories(){
+  const limit=new Date(Date.now()-3*24*3600*1000).toISOString().slice(0,10);
+  const wins=partits.filter(p=>p.resultat && p.resultat.nostre>p.resultat.seu && p.data>=limit);
+  const a=document.getElementById('winalert');
+  if(!wins.length){ a.style.display='none'; return; }
+  a.style.display='block';
+  document.getElementById('winalert-t').textContent =
+    wins.length>1 ? `🏀 ${wins.length} VICTÒRIES AQUESTS DIES` : '🏀 TENIM UNA VICTÒRIA';
+  document.getElementById('winalert-p').textContent =
+    wins.map(w=>`${w.equip} ${w.resultat.nostre}-${w.resultat.seu} ${w.rival}`).join('  ·  ')
+    + '. Puja una foto i genera el cartell mentre és notícia.';
+}
+
 function render(){
+  checkVictories();
   const box=document.getElementById('list');
   const avui=new Date().toISOString().slice(0,10);
   let list=partits.slice();
@@ -262,7 +282,8 @@ function render(){
       let res='<button class="btn ghost small" onclick="setRes(\''+p.id+'\')">+ Resultat</button>';
       if(p.resultat){
         const win=p.resultat.nostre>p.resultat.seu;
-        res=`<span class="res ${win?'win':'loss'}" title="Clica per editar" onclick="setRes('${p.id}')" style="cursor:pointer">${p.resultat.nostre}-${p.resultat.seu}</span>`;
+        res=`<span class="res ${win?'win':'loss'}" title="Clica per editar" onclick="setRes('${p.id}')" style="cursor:pointer">${p.resultat.nostre}-${p.resultat.seu}</span>`
+            + (win ? ` <a class="btn ghost small" style="text-decoration:none" href="/partits/cartell.html">Cartell</a>` : '');
       }
       return `<div class="prow">
         <span class="cond ${p.condicio}">${p.condicio}</span>
