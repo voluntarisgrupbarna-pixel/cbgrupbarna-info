@@ -338,9 +338,11 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
   <section class="view" id="v-cartells">
     <div class="g-box" id="cartells-lock">
       <h3>🔐 Cartells del club</h3>
-      <p>La generació i descàrrega de cartells és només per a l'staff de comunicació. Els anàlisis i resultats són públics a les altres pestanyes.</p>
+      <p>La generació i descàrrega de cartells és només per a l'staff de comunicació. Entra amb el Google del club. Els anàlisis i resultats són públics a les altres pestanyes.</p>
+      <div id="c-gbtn" style="margin-bottom:12px"></div>
+      <details><summary style="font-size:11px;color:var(--muted);cursor:pointer;margin-bottom:8px">O entrar amb clau</summary>
       <input type="password" id="c-pass" placeholder="Clau d'accés" autocomplete="off">
-      <button class="g-btn" id="c-unlock">Entrar</button>
+      <button class="g-btn" id="c-unlock">Entrar</button></details>
     </div>
     <div id="cartells-open" style="display:none">
     <div class="g-box">
@@ -390,9 +392,11 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
   <section class="view" id="v-gestio">
     <div class="g-box" id="g-lock">
       <h3>🔐 Mode gestió</h3>
-      <p>Zona per introduir resultats, pujar els PDF de la federació i actualitzar posicions de lliga. Només staff.</p>
+      <p>Zona per introduir resultats, pujar els PDF de la federació i actualitzar posicions de lliga. Entra amb el Google del club (<b>voluntarisgrupbarna@gmail.com</b>).</p>
+      <div id="g-gbtn" style="margin-bottom:12px"></div>
+      <details><summary style="font-size:11px;color:var(--muted);cursor:pointer;margin-bottom:8px">O entrar amb clau</summary>
       <input type="password" id="g-pass" placeholder="Clau d'accés" autocomplete="off">
-      <button class="g-btn" id="g-unlock">Entrar</button>
+      <button class="g-btn" id="g-unlock">Entrar</button></details>
     </div>
     <div id="g-open" style="display:none">
       <div class="g-box">
@@ -430,14 +434,17 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
   </section>
 </div>
 
-<div class="edit-pill" id="edit-pill">✏️ MODE GESTIÓ ACTIU</div>
+<button class="edit-pill" id="edit-pill">✏️ MODE GESTIÓ ACTIU · SORTIR</button>
 
 <footer>
+  <a href="../admin/" style="color:#8a8a8a;text-decoration:none;font-size:9px">⚙️ PANELL STAFF</a><br><br>
   <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="display:inline-block;background:#E31E24;color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;margin-bottom:14px">📸 SEGUEIX EL BARNA A INSTAGRAM</a><br>
   <a href="/" style="color:#8a8a8a;text-decoration:none">CB GRUP BARNA · BÀSQUET AL CLOT DES DE 1965</a><br>
   Dades: FCBQ · basquetcatala.cat/club/24
 </footer>
 
+<script src="../admin/config.js"></script>
+<script src="../admin/auth.js"></script>
 <script>
 /* =========================================================
    PARTITS & RESULTATS CBGB · vanilla JS, sense dependències
@@ -1326,7 +1333,7 @@ function applyStaffUI() {
 }
 function tryUnlock(inputId) {
   if (document.getElementById(inputId).value === EDIT_KEY) {
-    editMode = true; sessionStorage.setItem('cbgbEdit','1');
+    editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','clau');
     applyStaffUI(); renderAll();
   } else alert('Clau incorrecta');
 }
@@ -1340,6 +1347,13 @@ document.getElementById('g-download').addEventListener('click', ()=>{
   a.download='data.json'; a.click();
 });
 document.getElementById('g-copy').addEventListener('click', async ()=>{ await navigator.clipboard.writeText(exportJson()); alert('JSON copiat ✅'); });
+document.getElementById('edit-pill').addEventListener('click', ()=>{
+  if (confirm('Vols sortir del mode gestió?')) {
+    sessionStorage.removeItem('cbgbEdit'); sessionStorage.removeItem('cbgbEditSrc');
+    if (window.CBGBAuth) CBGBAuth.logout();
+    location.reload();
+  }
+});
 document.getElementById('g-reset').addEventListener('click', ()=>{
   if (confirm('Segur? S\'esborraran els resultats i canvis guardats NOMÉS en aquest dispositiu (el data.json publicat no es toca).')) {
     localStorage.removeItem(LS_KEY); OV=loadOverrides(); renderAll();
@@ -1359,7 +1373,27 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
   } catch(e) {
     document.getElementById('jornada-list').innerHTML = '<div class="empty">No s\'ha pogut carregar data.json 😕</div>';
   }
-  if (sessionStorage.getItem('cbgbEdit')==='1') { editMode = true; applyStaffUI(); }
+  // si el mode gestió venia d'un login de Google i la sessió ja no és vàlida, es tanca
+  if (sessionStorage.getItem('cbgbEditSrc')==='google' && !(window.CBGBAuth && CBGBAuth.isStaff())) {
+    sessionStorage.removeItem('cbgbEdit'); sessionStorage.removeItem('cbgbEditSrc');
+  }
+  if (window.CBGBAuth && CBGBAuth.isStaff()) {
+    editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','google'); applyStaffUI();
+  }
+  else if (sessionStorage.getItem('cbgbEdit')==='1') { editMode = true; applyStaffUI(); }
+  else if (window.CBGBAuth) {
+    const onGoogle = (err, sess) => {
+      if (err === 'NO_CONFIG') {
+        document.querySelectorAll('#g-gbtn,#c-gbtn').forEach(el=>{
+          el.innerHTML = '<a href="../admin/" style="color:var(--red);font-size:12px">⚙️ Connecta el Google del club al panell d\'administració →</a>'; });
+        return;
+      }
+      if (err) { alert(err); return; }
+      editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','google'); applyStaffUI(); renderAll();
+    };
+    CBGBAuth.renderButton('g-gbtn', onGoogle);
+    CBGBAuth.renderButton('c-gbtn', onGoogle);
+  }
   renderAll();
   // PWA: instal·lable a Android/iPhone
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});

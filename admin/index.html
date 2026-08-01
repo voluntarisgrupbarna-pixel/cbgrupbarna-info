@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Panell d'administració · CB Grup Barna</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../logo.png">
+<link rel="apple-touch-icon" href="../logo.png">
+<meta name="theme-color" content="#050505">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#E31E24;--black:#050505;--panel:#101010;--panel2:#171717;--border:rgba(255,255,255,.08);--muted:#8a8a8a;--green:#22c55e;--yellow:#FFD600}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:#fff;font-family:'Inter',system-ui,sans-serif;min-height:100vh;padding-bottom:60px}
+a{color:inherit}button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+header{text-align:center;padding:30px 16px 12px;background:radial-gradient(ellipse at top,rgba(227,30,36,.16),transparent 65%)}
+header img{width:60px;height:60px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,7vw,42px);letter-spacing:1.5px;line-height:1;margin-top:8px}
+h1 span{color:var(--red)}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.wrap{max-width:720px;margin:0 auto;padding:18px 14px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:14px}
+.card h2{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:1.2px;margin-bottom:10px}
+.card p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:12px}
+.card p b{color:#fff}
+.gate{text-align:center;padding:34px 22px}
+.gate .lock{font-size:44px}
+.gate h2{font-size:26px;margin:12px 0 6px}
+#gbtn{display:flex;justify-content:center;margin:18px 0 6px;min-height:44px}
+.err{color:var(--red);font-size:12.5px;margin-top:10px;line-height:1.6}
+.setup{text-align:left;background:var(--panel2);border:1px dashed rgba(255,214,0,.4);border-radius:14px;padding:16px;margin-top:16px}
+.setup h3{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--yellow);margin-bottom:8px}
+.setup ol{margin:0 0 0 18px;font-size:12.5px;color:var(--muted);line-height:1.85}
+.setup code{background:#000;border:1px solid var(--border);border-radius:5px;padding:1px 6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff}
+.who{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:12px 16px;margin-bottom:16px}
+.who img{width:40px;height:40px;border-radius:50%;background:#222}
+.who .nm{flex:1;min-width:0}
+.who .nm b{display:block;font-size:14px}
+.who .nm small{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.who button{background:var(--panel2);border:1px solid var(--border);border-radius:99px;padding:8px 14px;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:.8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:150px;padding:20px;
+ background:var(--panel);border:1px solid var(--border);border-radius:18px;text-decoration:none;transition:.16s}
+.tile:hover{border-color:var(--red);transform:translateY(-2px);background:var(--panel2)}
+.tile.lead{background:linear-gradient(135deg,rgba(227,30,36,.20),var(--panel) 62%);border-color:rgba(227,30,36,.42)}
+.tile .k{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--red)}
+.tile h3{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:1px;margin:8px 0 6px}
+.tile p{font-size:12.5px;color:var(--muted);line-height:1.55}
+.tile .go{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:14px;text-align:center;padding:12px 4px}
+.stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:26px;line-height:1}
+.stat span{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.stat .g{color:var(--green)}.stat .r{color:var(--red)}
+.hint{font-size:11.5px;color:var(--muted);line-height:1.7}
+footer{text-align:center;padding:26px 16px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;line-height:2}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="../logo.png" alt="Escut CB Grup Barna">
+  <h1>Panell <span>d'administració</span></h1>
+  <div class="tag">CB Grup Barna · Només staff</div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== PORTA D'ACCÉS ===== -->
+  <section id="gate" class="card gate">
+    <div class="lock">🔐</div>
+    <h2>Accés amb Google</h2>
+    <p>Entra amb el compte <b>voluntarisgrupbarna@gmail.com</b> per gestionar els partits, els resultats i els cartells del club.</p>
+    <div id="gbtn"></div>
+    <div class="err" id="gerr"></div>
+    <div class="setup" id="setup" style="display:none">
+      <h3>⚙️ Falta connectar Google (5 minuts, un sol cop)</h3>
+      <ol>
+        <li>Entra a <code>console.cloud.google.com/apis/credentials</code> amb el compte <b>voluntarisgrupbarna@gmail.com</b>.</li>
+        <li>Crear credencials → <b>ID de client d'OAuth</b> → Tipus: <b>Aplicació web</b>.</li>
+        <li>A "Orígens autoritzats de JavaScript" afegeix-hi <code>https://cbgrupbarna.info</code> i <code>https://www.cbgrupbarna.info</code>.</li>
+        <li>Copia l'ID que acaba en <code>.apps.googleusercontent.com</code>.</li>
+        <li>A GitHub, obre <code>admin/config.js</code>, enganxa'l a <code>GOOGLE_CLIENT_ID</code> i desa. Ja funciona.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== PANELL ===== -->
+  <main id="panel" style="display:none">
+    <div class="who">
+      <img id="u-pic" alt="">
+      <span class="nm"><b id="u-name"></b><small id="u-mail"></small></span>
+      <button id="logout">SORTIR</button>
+    </div>
+
+    <div class="stat-row" id="stats"></div>
+
+    <div class="grid">
+      <a class="tile lead" href="../partits/#gestio">
+        <div><span class="k">Cada cap de setmana</span><h3>Partits i resultats</h3>
+        <p>Introduir marcadors, pujar els PDF de la federació, actualitzar posicions i veure les ratxes de cada equip.</p></div>
+        <span class="go">Obrir gestió →</span></a>
+
+      <a class="tile" href="../partits/#cartells">
+        <div><span class="k">Instagram</span><h3>Cartells i game days</h3>
+        <p>Generar el dia de partit, la prèvia, la victòria i el calendari mensual. Rotació automàtica de jugadors/es.</p></div>
+        <span class="go">Obrir cartells →</span></a>
+
+      <a class="tile" href="../partits/">
+        <div><span class="k">Públic</span><h3>Veure la app</h3>
+        <p>El que veuen les famílies: jornada, resultats i fitxes d'equip.</p></div>
+        <span class="go">Obrir app →</span></a>
+
+      <a class="tile" href="../">
+        <div><span class="k">Web</span><h3>Portada del club</h3>
+        <p>Hub públic: partits, projectes, patrocinadors i contacte.</p></div>
+        <span class="go">Obrir web →</span></a>
+
+      <a class="tile" href="https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/upload/main/partits" target="_blank" rel="noopener">
+        <div><span class="k">Publicar</span><h3>Pujar data.json</h3>
+        <p>Després de guardar resultats, puja aquí el fitxer descarregat perquè ho vegi tothom.</p></div>
+        <span class="go">Anar a GitHub →</span></a>
+
+      <a class="tile" href="https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/actions/workflows/update-partits.yml" target="_blank" rel="noopener">
+        <div><span class="k">Automatismes</span><h3>Robot FCBQ</h3>
+        <p>Estat del robot que baixa els partits cada dilluns i dijous. També es pot llançar a mà.</p></div>
+        <span class="go">Veure robot →</span></a>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h2>📋 Rutina del cap de setmana</h2>
+      <p class="hint">
+        <b>Dijous 9:00</b> · comprovar que hi ha tots els partits del finde i publicar-los (dissabte i diumenge, local i visitant).<br>
+        <b>Dijous/divendres</b> · generar els game days dels sèniors des de Cartells.<br>
+        <b>Dissabte i diumenge</b> · introduir els resultats a mesura que arriben.<br>
+        <b>Diumenge nit</b> · publicar la menció als equips guanyadors i descarregar el <b>data.json</b> per pujar-lo a GitHub.
+      </p>
+    </div>
+  </main>
+</div>
+
+<footer>CB Grup Barna · El club de bàsquet més gran de Barcelona<br>Panell intern · no indexat</footer>
+
+<script src="config.js"></script>
+<script src="auth.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+
+function showPanel(sess) {
+  $('gate').style.display = 'none';
+  $('panel').style.display = 'block';
+  $('u-name').textContent = sess.name;
+  $('u-mail').textContent = sess.email;
+  if (sess.picture) $('u-pic').src = sess.picture;
+  loadStats();
+}
+
+async function loadStats() {
+  try {
+    const d = await (await fetch('../partits/data.json', {cache:'no-store'})).json();
+    let ov = {};
+    try { ov = JSON.parse(localStorage.getItem('cbgbPartitsV1') || '{}'); } catch(e) {}
+    const res = ov.resultats || {};
+    const partits = d.partits.map(p => {
+      const r = res[p.id];
+      const pl = r ? r.pl : p.puntsLocal, pv = r ? r.pv : p.puntsVisitant;
+      if (pl == null || pv == null) return {...p, jugat:false};
+      const meu = p.casa ? pl : pv, seu = p.casa ? pv : pl;
+      return {...p, jugat:true, win: meu > seu};
+    });
+    const jugats = partits.filter(p => p.jugat);
+    const avui = new Date().toISOString().slice(0,10);
+    const pend = partits.filter(p => !p.jugat && p.data < avui).length;
+    $('stats').innerHTML = `
+      <div class="stat"><b>${d.equips.length}</b><span>Equips</span></div>
+      <div class="stat"><b class="g">${jugats.filter(p=>p.win).length}</b><span>Victòries</span></div>
+      <div class="stat"><b class="r">${jugats.filter(p=>!p.win).length}</b><span>Derrotes</span></div>
+      <div class="stat"><b${pend?' class="r"':''}>${pend}</b><span>Res. pendents</span></div>`;
+  } catch (e) {
+    $('stats').innerHTML = '<div class="stat" style="grid-column:1/-1"><span>No s\'han pogut carregar les dades de partits</span></div>';
+  }
+}
+
+$('logout').addEventListener('click', () => { CBGBAuth.logout(); location.reload(); });
+
+// sessió ja iniciada?
+const s = CBGBAuth.session();
+if (s) showPanel(s);
+else CBGBAuth.renderButton('gbtn', (err, sess) => {
+  if (err === 'NO_CONFIG') { $('setup').style.display = 'block'; return; }
+  if (err) { $('gerr').textContent = err; return; }
+  showPanel(sess);
+});
+</script>
+</body>
+</html>
