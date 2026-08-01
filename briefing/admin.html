@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Briefing · CB Grup Barna</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
+  nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav img{width:34px;height:34px;object-fit:contain}
+  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t span{color:var(--red)}
+  .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--muted)}
+  .wrap{max-width:860px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:2rem}
+  h1 span{color:var(--red)}
+  .sub{color:var(--muted);font-size:.88rem;margin:.3rem 0 1.6rem}
+  h2{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;margin:1.6rem 0 .8rem}
+  h2 span{color:var(--red)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  .grid .full{grid-column:1/-1}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .fgroup{display:flex;flex-direction:column;gap:.3rem}
+  .field-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .field-input,select.field-input,textarea.field-input{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.65rem .8rem;font-family:'Outfit',sans-serif;font-size:.9rem}
+  .field-input:focus{outline:none;border-color:var(--red)}
+  textarea.field-input{min-height:70px;resize:vertical}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .btn.small{padding:.35rem .7rem;font-size:.72rem}
+  .err{display:none;background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .hint{font-size:.72rem;color:var(--muted);margin-top:.6rem;line-height:1.5}
+  .hint a{color:rgba(200,16,46,.85)}
+  .mrow{display:flex;align-items:center;gap:.8rem;padding:.65rem 0;border-bottom:1px dashed var(--line);font-size:.86rem}
+  .mrow:last-child{border-bottom:none}
+  .mic{font-size:1.2rem;flex:none}
+  .mmeta{flex:1;min-width:0}
+  .mmeta b{display:block;font-weight:500}
+  .mmeta small{color:var(--muted);font-size:.72rem}
+  .mtag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);border:1px solid rgba(200,16,46,.35);border-radius:20px;padding:.15rem .55rem;flex:none}
+  .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
+  .del:hover{color:#ff8fa0}
+  .empty{color:var(--muted);font-size:.85rem;padding:1rem 0}
+  #tokbox{display:none}
+</style>
+</head>
+<body>
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="t">ADMIN <span>BRIEFING</span></div>
+  <div class="who" id="who"></div>
+</nav>
+
+<div class="wrap">
+  <h1>INFORMACIÓ PER A <span>COL·LABORADORS</span></h1>
+  <p class="sub">Puja aquí els materials que es presenten als partners: dossiers, informes de retorn, logos, fotos i dades. Apareixen a <a href="/briefing/materials.html" style="color:var(--red)">la pàgina de materials</a> i es poden enviar a qualsevol empresa.</p>
+
+  <div class="card" id="tokbox">
+    <div class="fgroup">
+      <label class="field-label">Token de GitHub (només el primer cop)</label>
+      <input class="field-input" type="password" id="tok" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+    </div>
+    <div class="hint">Cal per poder guardar els fitxers al web. Crea'l a
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=CB+Grup+Barna+Admin" target="_blank" rel="noopener">github.com/settings/tokens</a> amb permís <b>repo</b>.</div>
+    <div style="margin-top:.8rem"><button class="btn" onclick="saveTok()">Guardar token</button></div>
+  </div>
+
+  <h2>PUJAR <span>MATERIAL</span></h2>
+  <div class="card">
+    <div class="grid">
+      <div class="fgroup full"><label class="field-label">Títol *</label><input class="field-input" id="f-titol" placeholder="Ex: Informe de retorn 25-26"></div>
+      <div class="fgroup full"><label class="field-label">Descripció</label><textarea class="field-input" id="f-desc" placeholder="Què és i per a què serveix davant d'un partner"></textarea></div>
+      <div class="fgroup">
+        <label class="field-label">Tipus *</label>
+        <select class="field-input" id="f-tipus">
+          <option>Dossier</option><option>Informe de retorn</option><option>Dades del club</option>
+          <option>Fotos</option><option>Logos i marca</option><option>Contracte</option><option>Altres</option>
+        </select>
+      </div>
+      <div class="fgroup"><label class="field-label">Col·laborador (opcional)</label><input class="field-input" id="f-partner" placeholder="Ex: Foto Jané · deixa buit si és genèric"></div>
+      <div class="fgroup full"><label class="field-label">Fitxer * (PDF, imatge, Word, Excel, PPT)</label><input class="field-input" id="f-file" type="file"></div>
+    </div>
+    <div class="err" id="err"></div>
+    <div class="ok" id="ok"></div>
+    <div style="margin-top:1rem"><button class="btn" id="save-btn" onclick="save()">Pujar material</button></div>
+    <div class="hint">Els fitxers es guarden al web del club. No pugis dades personals de menors ni documents confidencials: qui tingui l'enllaç hi podrà accedir.</div>
+  </div>
+
+  <h2>MATERIALS <span>PUJATS</span></h2>
+  <div class="card" id="list"><div class="empty">Carregant…</div></div>
+</div>
+
+<script src="/briefing/materials.js"></script>
+<script src="/scripts/google-gate.js"></script>
+<script>
+const OWNER='voluntarisgrupbarna-pixel', REPO='cbgrupbarna-info', BRANCH='main';
+const DATA_PATH='briefing/materials.js', DIR='briefing/materials';
+let ghToken=null, mats=[];
+
+CBGBGate.protect(function(user){
+  document.getElementById('who').innerHTML =
+    (user.picture?'<img src="'+user.picture+'" style="width:24px;height:24px;border-radius:50%">':'')+
+    '<span>'+(user.email||'')+'</span>'+
+    '<button class="btn ghost small" onclick="CBGBGate.signOut()">Sortir</button>';
+  ghToken = localStorage.getItem('gh_admin_token');
+  if(!ghToken) document.getElementById('tokbox').style.display='block';
+  reload().then(render);
+});
+
+function saveTok(){
+  const v=document.getElementById('tok').value.trim();
+  if(!v) return;
+  localStorage.setItem('gh_admin_token', v); ghToken=v;
+  document.getElementById('tokbox').style.display='none';
+  reload().then(render);
+}
+
+async function gh(path, method='GET', body=null){
+  const res = await fetch(path.startsWith('http')?path:`https://api.github.com${path}`,{
+    method, headers:{'Authorization':`Bearer ${ghToken}`,'Accept':'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28', ...(body?{'Content-Type':'application/json'}:{})},
+    body: body?JSON.stringify(body):null});
+  if(!res.ok) throw new Error(`GitHub ${res.status}: ${(await res.text()).slice(0,200)}`);
+  return res.status===204?null:res.json();
+}
+async function getFile(p){ try{ return await gh(`/repos/${OWNER}/${REPO}/contents/${p}?ref=${BRANCH}`);}catch(e){return null;} }
+async function put(p,c,msg,sha){ const b={message:msg,content:c,branch:BRANCH}; if(sha)b.sha=sha;
+  return gh(`/repos/${OWNER}/${REPO}/contents/${p}`,'PUT',b); }
+function b64(s){ return btoa(unescape(encodeURIComponent(s))); }
+
+async function reload(){
+  if(!ghToken){ mats = window.BRIEFING_MATERIALS||[]; return; }
+  const f=await getFile(DATA_PATH);
+  if(f&&f.content){
+    const src=decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
+    const m=src.match(/window\.BRIEFING_MATERIALS\s*=\s*(\[[\s\S]*\]);/);
+    mats = m ? (()=>{try{return JSON.parse(m[1]);}catch(e){return [];}})() : [];
+  } else mats=[];
+}
+
+const ICONS={'pdf':'📄','doc':'📝','docx':'📝','xls':'📊','xlsx':'📊','ppt':'📽','pptx':'📽',
+  'jpg':'🖼','jpeg':'🖼','png':'🖼','webp':'🖼','svg':'🖼','zip':'🗂'};
+
+async function save(){
+  const err=document.getElementById('err'), okb=document.getElementById('ok'), btn=document.getElementById('save-btn');
+  err.style.display='none'; okb.style.display='none';
+  const titol=document.getElementById('f-titol').value.trim();
+  const desc=document.getElementById('f-desc').value.trim();
+  const tipus=document.getElementById('f-tipus').value;
+  const partner=document.getElementById('f-partner').value.trim();
+  const file=document.getElementById('f-file').files[0];
+
+  if(!ghToken){ err.textContent='Primer has de guardar el token de GitHub.'; err.style.display='block';
+    document.getElementById('tokbox').style.display='block'; return; }
+  if(!titol||!file){ err.textContent='Falta el títol o el fitxer.'; err.style.display='block'; return; }
+  if(file.size>25*1024*1024){ err.textContent='El fitxer supera els 25 MB. Comprimeix-lo abans de pujar-lo.'; err.style.display='block'; return; }
+
+  btn.disabled=true; btn.textContent='Pujant…';
+  try{
+    await reload();
+    const ext=(file.name.split('.').pop()||'bin').toLowerCase();
+    const slug=titol.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60);
+    let name=`${slug}.${ext}`;
+    if(mats.some(m=>m.fitxer===name)) name=`${slug}-${Date.now().toString(36)}.${ext}`;
+
+    const content=await new Promise((res,rej)=>{const r=new FileReader();
+      r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(file);});
+    await put(`${DIR}/${name}`, content, `briefing: material ${titol} [skip ci]`, null);
+
+    mats.unshift({titol,desc,tipus,partner:partner||null,fitxer:name,ext,
+      mida:Math.round(file.size/1024), data:new Date().toISOString().slice(0,10)});
+    await pushData(`briefing: alta material ${titol} [skip ci]`);
+
+    okb.textContent=`✔ "${titol}" pujat. Ja apareix a la pàgina de materials.`; okb.style.display='block';
+    ['f-titol','f-desc','f-partner'].forEach(i=>document.getElementById(i).value='');
+    document.getElementById('f-file').value='';
+    render();
+  }catch(e){ err.textContent=e.message||'Error pujant el material.'; err.style.display='block'; }
+  btn.disabled=false; btn.textContent='Pujar material';
+}
+
+async function pushData(msg){
+  const src='// CB Grup Barna · Briefing de col·laboradors · Materials\n'
+    +'// Gestionat des de /briefing/admin.html — NO editar a mà si no cal.\n\n'
+    +'window.BRIEFING_MATERIALS = '+JSON.stringify(mats,null,2)+';\n';
+  const f=await getFile(DATA_PATH);
+  await put(DATA_PATH, b64(src), msg, f?f.sha:null);
+}
+
+async function del(fitxer){
+  const m=mats.find(x=>x.fitxer===fitxer); if(!m) return;
+  if(!confirm(`Eliminar "${m.titol}"?`)) return;
+  await reload();
+  mats=mats.filter(x=>x.fitxer!==fitxer);
+  await pushData(`briefing: baixa material ${m.titol} [skip ci]`);
+  const f=await getFile(`${DIR}/${fitxer}`);
+  if(f) await gh(`/repos/${OWNER}/${REPO}/contents/${DIR}/${fitxer}`,'DELETE',
+    {message:`briefing: elimina ${fitxer} [skip ci]`,sha:f.sha,branch:BRANCH});
+  render();
+}
+
+function render(){
+  const box=document.getElementById('list');
+  if(!mats.length){ box.innerHTML='<div class="empty">Encara no hi ha materials. Puja el primer 👆</div>'; return; }
+  box.innerHTML=mats.map(m=>`
+    <div class="mrow">
+      <div class="mic">${ICONS[m.ext]||'📎'}</div>
+      <div class="mmeta">
+        <b>${m.titol}</b>
+        <small>${m.data} · ${m.mida} KB${m.partner?' · '+m.partner:''}${m.desc?' · '+m.desc:''}</small>
+      </div>
+      <span class="mtag">${m.tipus}</span>
+      <a class="btn ghost small" href="/${DIR}/${m.fitxer}" target="_blank">Obrir</a>
+      <button class="del" title="Eliminar" onclick="del('${m.fitxer}')">✕</button>
+    </div>`).join('');
+}
+</script>
+</body>
+</html>
