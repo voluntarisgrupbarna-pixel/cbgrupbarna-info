@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partits · CB Grup Barna</title>
+<meta name="description" content="Partits del cap de setmana del CB Grup Barna: horaris, pavellons i resultats de tots els equips, locals i visitants.">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#3ddc84}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif}
+  header{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  header img{width:38px;height:38px;object-fit:contain}
+  header .t{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.06em}
+  header .t span{color:var(--red)}
+  header a.back{margin-left:auto;color:var(--muted);font-size:.8rem;text-decoration:none}
+  .wrap{max-width:820px;margin:0 auto;padding:2rem 1.2rem 4rem}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;line-height:1}
+  h1 span{color:var(--red)}
+  .sub{color:var(--muted);font-size:.92rem;margin:.4rem 0 2rem}
+  .day{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.04em;margin:2rem 0 .3rem}
+  .day span{color:var(--red)}
+  .block{margin-top:1rem}
+  .block h3{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+  .p{display:flex;align-items:center;gap:.9rem;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;margin-bottom:.55rem;flex-wrap:wrap}
+  .p.local{border-left:3px solid var(--red)}
+  .hora{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;min-width:3.4rem;flex:none;letter-spacing:.03em}
+  .info{flex:1;min-width:170px}
+  .info b{display:block;font-weight:500;font-size:.95rem}
+  .info small{color:var(--muted);font-size:.76rem}
+  .res{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.04em;flex:none}
+  .res.win{color:var(--green)}
+  .res.loss{color:var(--muted)}
+  .empty{color:var(--muted);padding:2rem 0;line-height:1.7}
+  .empty a{color:var(--red)}
+  footer{text-align:center;color:rgba(255,255,255,.25);font-size:.72rem;padding:2rem 1rem;border-top:1px solid var(--line);margin-top:2rem}
+</style>
+</head>
+<body>
+<header>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="t">CB GRUP <span>BARNA</span></div>
+  <a class="back" href="/">← Tornar a la web</a>
+</header>
+<div class="wrap">
+  <h1>ELS <span>PARTITS</span></h1>
+  <p class="sub">Horaris i resultats de tots els equips del club, com a locals i com a visitants.</p>
+  <div id="list"><div class="empty">Carregant partits…</div></div>
+</div>
+<footer>CB Grup Barna · El Clot · Barcelona · #somclot</footer>
+
+<script src="/partits/partits.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-R6XYR7G1WF',{anonymize_ip:true});
+
+const DIES=['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
+const MESOS=['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
+function etiquetaDia(d){
+  const dt=new Date(d+'T12:00:00');
+  return `${DIES[dt.getDay()]} <span>${dt.getDate()} de ${MESOS[dt.getMonth()]}</span>`;
+}
+
+const partits = window.PARTITS || [];
+const box = document.getElementById('list');
+// Mostrem des d'ahir (per veure resultats del cap de setmana) i cap endavant.
+const ahir = new Date(Date.now() - 36*3600*1000).toISOString().slice(0,10);
+const visibles = partits.filter(p => p.data >= ahir);
+
+if(!visibles.length){
+  box.innerHTML = '<div class="empty">Encara no hi ha partits publicats per als propers dies.<br>'
+    + 'Segueix-nos a <a href="https://instagram.com/cbgrupbarna" target="_blank" rel="noopener">@cbgrupbarna</a> per no perdre\'t cap jornada.</div>';
+} else {
+  const byDay = {};
+  visibles.forEach(p => { (byDay[p.data] = byDay[p.data] || []).push(p); });
+  box.innerHTML = Object.keys(byDay).sort().map(d => {
+    const locals = byDay[d].filter(p => p.condicio === 'local').sort((a,b)=>a.hora.localeCompare(b.hora));
+    const fora   = byDay[d].filter(p => p.condicio !== 'local').sort((a,b)=>a.hora.localeCompare(b.hora));
+    function bloc(titol, arr){
+      if(!arr.length) return '';
+      return `<div class="block"><h3>${titol}</h3>` + arr.map(p => {
+        let res = '';
+        if(p.resultat){
+          const win = p.resultat.nostre > p.resultat.seu;
+          res = `<span class="res ${win?'win':'loss'}">${p.resultat.nostre}-${p.resultat.seu}</span>`;
+        }
+        return `<div class="p ${p.condicio}">
+          <span class="hora">${p.hora}</span>
+          <span class="info"><b>${p.equip} · ${p.rival}</b><small>${p.lloc}${p.competicio?' · '+p.competicio:''}</small></span>
+          ${res}
+        </div>`;
+      }).join('') + '</div>';
+    }
+    return `<div class="day">${etiquetaDia(d)}</div>`
+      + bloc('A casa', locals)
+      + bloc('A fora', fora);
+  }).join('');
+}
+</script>
+</body>
+</html>
