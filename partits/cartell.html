@@ -275,12 +275,12 @@ function descarregar(){
 
 // ── COPY ──
 const GANXOS=[
-  p=>`No era un partit qualsevol. I l'hem guanyat.`,
-  p=>`Hi havia més en joc del que semblava. ${p.resultat.nostre}-${p.resultat.seu}.`,
+  p=>`Hi ha victòries que expliquen qui som.`,
+  p=>`No era un partit qualsevol. I l'hem sabut jugar.`,
   p=>`Aquesta la volíem. I aquesta és nostra.`,
-  p=>`El ${p.condicio==='local'?'nostre pavelló':'desplaçament'} torna a tenir final feliç.`,
-  p=>`Quaranta minuts per demostrar-ho. ${p.resultat.nostre}-${p.resultat.seu}.`,
-  p=>`Ens hem deixat la pell. I s'ha notat al marcador.`
+  p=>`El treball de tota la setmana, en quaranta minuts.`,
+  p=>`${p.condicio==='local'?'A casa':'Lluny de casa'}, amb la mateixa ambició de sempre.`,
+  p=>`Créixer també és guanyar així.`
 ];
 
 function ferCopy(){
@@ -290,14 +290,14 @@ function ferCopy(){
   const dt=new Date(p.data+'T12:00:00');
   const MESOS=['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
   const ganxo=GANXOS[ganxoIdx%GANXOS.length](p);
-  const on = p.condicio==='local' ? `a casa, a ${p.lloc}` : `a la pista de ${p.rival}`;
-  const marge = dif>=15 ? 'Un partit dominat de principi a fi.'
-              : dif<=5  ? 'Fins l\'últim segon. Així es guanya.'
+  const on = p.condicio==='local' ? `a casa, a ${p.lloc}` : `com a visitant, a ${p.lloc}`;
+  const marge = dif>=15 ? 'Un partit rodó, de principi a fi.'
+              : dif<=5  ? 'Decidit als detalls, i els detalls van ser nostres.'
               : 'Partit seriós, treballat i ben tancat.';
   box.textContent =
 `${ganxo}
 
-El ${p.equip} guanya ${on} per ${r.nostre}-${r.seu} contra el ${p.rival}. ${marge}
+El ${p.equip} guanya ${on} per ${r.nostre}-${r.seu} davant el ${p.rival}. ${marge}
 
 ${dt.getDate()} de ${MESOS[dt.getMonth()]}${p.competicio?' · '+p.competicio:''}
 
