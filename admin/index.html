@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Administració · CB Grup Barna</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
+  nav{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav img{width:36px;height:36px;object-fit:contain}
+  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.06em}
+  nav .t span{color:var(--red)}
+  .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--muted)}
+  .who img{width:26px;height:26px;border-radius:50%}
+  .btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:.4rem .8rem;font-family:inherit;font-size:.75rem;cursor:pointer}
+  .btn:hover{border-color:var(--red);color:var(--txt)}
+  .wrap{max-width:900px;margin:0 auto;padding:2rem 1.2rem 4rem}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1}
+  h1 span{color:var(--red)}
+  .sub{color:var(--muted);font-size:.92rem;margin:.4rem 0 2rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+  a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
+  a.card:hover{border-color:var(--red);transform:translateY(-2px)}
+  .card .ic{font-size:1.6rem;margin-bottom:.6rem}
+  .card h2{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.03em;margin-bottom:.3rem}
+  .card p{color:var(--muted);font-size:.82rem;line-height:1.5}
+  .card .tag{display:inline-block;margin-top:.7rem;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+  .soon{opacity:.5;pointer-events:none}
+  h3.sec{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--muted);letter-spacing:.06em;margin:2.5rem 0 .9rem;border-bottom:1px solid var(--line);padding-bottom:.4rem}
+</style>
+</head>
+<body>
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="t">CB GRUP <span>BARNA</span> · ADMIN</div>
+  <div class="who" id="who"></div>
+</nav>
+<div class="wrap">
+  <h1>ÀREA D'<span>ADMINISTRACIÓ</span></h1>
+  <p class="sub">Tot el que gestiona el club des d'un sol lloc. Accés només per a comptes autoritzats.</p>
+
+  <h3 class="sec">GESTIÓ DEL CLUB</h3>
+  <div class="grid">
+    <a class="card" href="/jugadors/admin.html">
+      <div class="ic">🏀</div>
+      <h2>Jugadors i jugadores</h2>
+      <p>Donar d'alta la plantilla per equips, amb dorsal, posició i foto. No permet repetir jugadors ni dorsals.</p>
+      <span class="tag">Gestionar plantilla →</span>
+    </a>
+    <a class="card" href="/fotos/admin.html">
+      <div class="ic">📸</div>
+      <h2>Galeria de fotos</h2>
+      <p>Pujar fotos i vídeos dels partits i esdeveniments, crear àlbums i gestionar l'accés.</p>
+      <span class="tag">Gestionar galeria →</span>
+    </a>
+    <a class="card" href="/briefing/admin.html">
+      <div class="ic">🤝</div>
+      <h2>Briefing de col·laboradors</h2>
+      <p>Pujar la informació que es presenta als partners: materials, dades i seguiment de cada col·laborador.</p>
+      <span class="tag">Gestionar briefing →</span>
+    </a>
+  </div>
+
+  <h3 class="sec">WEBS DEL CLUB</h3>
+  <div class="grid">
+    <a class="card" href="/patrocinis/" target="_blank">
+      <div class="ic">💼</div>
+      <h2>Club i Patrocinis 26/27</h2>
+      <p>Dossier públic per a empreses: club, impacte, projectes i packs de col·laboració.</p>
+      <span class="tag">Veure web →</span>
+    </a>
+    <a class="card" href="/jugadors/" target="_blank">
+      <div class="ic">👥</div>
+      <h2>Plantilla pública</h2>
+      <p>Pàgina pública amb tots els equips i jugadors del club.</p>
+      <span class="tag">Veure web →</span>
+    </a>
+    <a class="card" href="/premidonaesport/" target="_blank">
+      <div class="ic">🏆</div>
+      <h2>Premi Dona i Esport</h2>
+      <p>Candidatura del club al 19è Premi Dona i Esport.</p>
+      <span class="tag">Veure web →</span>
+    </a>
+  </div>
+</div>
+
+<script src="/scripts/google-gate.js"></script>
+<script>
+CBGBGate.protect(function(user){
+  var w = document.getElementById('who');
+  w.innerHTML = (user.picture ? '<img src="'+user.picture+'" alt="">' : '')
+    + '<span>' + (user.email || '') + '</span>'
+    + '<button class="btn" onclick="CBGBGate.signOut()">Sortir</button>';
+});
+</script>
+</body>
+</html>
