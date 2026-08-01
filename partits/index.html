@@ -351,6 +351,7 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
       <div class="c-grid">
         <label class="c-lab">Plantilla
           <select id="c-tpl">
+            <option value="finde">📅 PARTITS DEL CAP DE SETMANA (llista)</option>
             <option value="dia">🗓 UN DIA DE PARTIT (prèvia del dia)</option>
             <option value="calendari">📆 CALENDARI MENSUAL (per al carrusel)</option>
             <option value="previa">📊 PRÈVIA amb estadístiques</option>
@@ -360,6 +361,13 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
         </label>
         <label class="c-lab">Partit
           <select id="c-match"></select>
+        </label>
+        <label class="c-lab">Format
+          <select id="c-fmt">
+            <option value="1080x1080">◼ Post quadrat IG · 1080×1080</option>
+            <option value="1080x1920">▮ Story / Reel · 1080×1920</option>
+            <option value="1080x1350">▯ Vertical 4:5 · 1080×1350</option>
+          </select>
         </label>
         <label class="c-lab">Foto jugador/a (tu la puges)
           <input type="file" id="c-photo" accept="image/*">
@@ -401,7 +409,7 @@ footer { text-align:center; padding:30px 16px; font-family:'JetBrains Mono', mon
     <div id="g-open" style="display:none">
       <div class="g-box">
         <h3>📄 Pujar PDF de la federació</h3>
-        <p>Arrossega aquí el <b>Calendari Global Equip</b> (PDF de basquetcatala.cat) de qualsevol equip. Es detecten sols els partits, la categoria, casa/fora i la pista. Els partits nous s'afegeixen i els existents s'actualitzen (canvis d'hora, aplaçaments).</p>
+        <p>Arrossega aquí els <b>Calendari Global Equip</b> (PDF de basquetcatala.cat). <b>Pots deixar-los tots de cop</b>: un per equip — sèniors A i B, júnior, cadet, infantil, mini… Es distingeix sol si l'equip és A o B. Es detecten sols els partits, la categoria, casa/fora i la pista. Els partits nous s'afegeixen i els existents s'actualitzen (canvis d'hora, aplaçaments).</p>
         <div class="drop" id="drop">Deixa anar el PDF aquí<br>o <label style="color:var(--red);cursor:pointer;text-decoration:underline">tria un arxiu<input type="file" id="pdf-file" accept="application/pdf" hidden multiple></label></div>
         <div class="g-log" id="pdf-log"></div>
       </div>
@@ -855,6 +863,7 @@ function parseFcbqText(lines) {
     else if (ma) { local=ma[1]; visitant=ma[2]; casa=false; }
     else { const parts=partit.split(' - '); local=parts[0]; visitant=parts.slice(1).join(' - '); casa=null; }
     out.push({ data:`${dm[3]}-${dm[2]}-${dm[1]}`, hora:dm[4], local, visitant, casa, categoria, pista, adreca,
+               clubNom: (casa ? local : visitant).trim(),
                puntsLocal:null, puntsVisitant:null, estat:'pendent' });
   }
   return out;
@@ -892,10 +901,17 @@ async function importPdf(files) {
       // equip: per categoria
       const m = model();
       const cat = ms[0].categoria;
-      let eq = m.equips.find(e=>(e.competicio||'').toUpperCase()===cat.toUpperCase());
+      const clubNom = ms[0].clubNom || '';
+      const lletra = (clubNom.match(/\b([A-Z])\s*$/) || [])[1] || '';
+      // primer per nom exacte de l'equip del club (distingeix A / B), després per competició
+      let eq = m.equips.find(e=>(e.clubNom||'').toUpperCase()===clubNom.toUpperCase())
+            || m.equips.find(e=>(e.competicio||'').toUpperCase()===cat.toUpperCase() && !e.clubNom);
       if (!eq) {
-        const nom = prompt(`Equip nou detectat (${cat}).\nQuin nom li posem? (ex: "Júnior Masculí B")`, cat) || cat;
-        eq = { id: slugify(nom), nom, curt: nom.toUpperCase().slice(0,14), emoji:'🏀', competicio: cat, posicio:null, equipsGrup:null };
+        const suggerit = cat.replace(/^SUPER COPA /i,'Sènior ').replace(/FEMENINA/i,'Femení').replace(/MASCULINA/i,'Masculí')
+                          + (lletra ? ' ' + lletra : '');
+        const nom = prompt(`Equip nou detectat: ${clubNom || cat}\n(${cat})\n\nQuin nom li posem?`, suggerit) || suggerit;
+        eq = { id: slugify(nom), nom, curt: nom.toUpperCase().slice(0,14), emoji: /fem/i.test(nom)?'🔴':'⚫',
+               competicio: cat, clubNom, posicio:null, equipsGrup:null };
         OV.extraEquips.push(eq);
       }
       let nNew=0, nUpd=0;
@@ -1001,6 +1017,18 @@ async function rivalLogoFor(p, nomesAuto) {
 function fillCartellSelect() {
   const m = model();
   const tpl = document.getElementById('c-tpl').value;
+  const sel0 = document.getElementById('c-match');
+  if (tpl === 'finde') {
+    const wks = weekends(m.partits);
+    const cur = weekKey(todayStr());
+    const def = wks.find(k => k >= cur) || wks[wks.length-1];
+    sel0.innerHTML = wks.map(k => {
+      const fi = new Date(k+'T12:00:00'); fi.setDate(fi.getDate()+6);
+      const n = m.partits.filter(p => p.data >= k && p.data <= fi.toISOString().slice(0,10)).length;
+      return `<option value="${k}" ${k===def?'selected':''}>${wkLabel(k)} · ${n} partit${n===1?'':'s'}</option>`;
+    }).join('');
+    return;
+  }
   const wantPlayed = (tpl==='victoria' || tpl==='final');
   const list = m.partits.filter(p => wantPlayed ? p.jugat : !p.jugat);
   const sel = document.getElementById('c-match');
@@ -1045,6 +1073,7 @@ function fitText(ctx, txt, maxW, font, startPx) {
 async function genCartell() {
   const m = model();
   const tpl = document.getElementById('c-tpl').value;
+  if (tpl === 'finde') { await genFinde(m); return; }
   const p = m.partits.find(x=>x.id===document.getElementById('c-match').value);
   if (!p) { alert('Tria un partit'); return; }
   const { e, s, rival, prev } = previaData(p, m);
@@ -1053,7 +1082,10 @@ async function genCartell() {
   const autoRival = await rivalLogoFor(p);   // logo del rival automàtic des de logos/map.json
   const rinfoTop = await rivalInfo(p);       // IG i seguidors del rival (rivals.json)
   const cv = document.getElementById('c-canvas'), ctx = cv.getContext('2d');
-  const W=1080, H=1350;
+  const [W, H] = (document.getElementById('c-fmt').value || '1080x1080').split('x').map(Number);
+  cv.width = W; cv.height = H;
+  const S = H / 1350;                    // escala respecte al disseny original
+  const px = n => Math.round(n * S);     // mides tipogràfiques proporcionals
   const RED='#E31E24', BLACK='#050505', WHITE='#ffffff';
   const dataFmt = `${fmtDia(p.data)} · ${p.hora}H`;
   const rivalInit = rival.split(/\s+/).map(w=>w[0]).join('').slice(0,3);
@@ -1067,17 +1099,17 @@ async function genCartell() {
     ctx.textAlign='center'; ctx.fillStyle=WHITE;
     ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=16;
     if (p.jugat) {
-      ctx.font = "240px 'Bebas Neue'";
-      ctx.fillText(`${p.puntsLocal} ${p.puntsVisitant}`, W/2, H-140);
+      ctx.font = `${px(240)}px 'Bebas Neue'`;
+      ctx.fillText(`${p.puntsLocal} ${p.puntsVisitant}`, W/2, H-px(140));
       ctx.shadowBlur=0;
-      ctx.font = "600 24px 'JetBrains Mono'";
-      ctx.fillText(`${e.nom.toUpperCase()} · ${p.categoria}`, W/2, H-60);
+      ctx.font = `600 ${px(24)}px 'JetBrains Mono'`;
+      ctx.fillText(`${e.nom.toUpperCase()} · ${p.categoria}`, W/2, H-px(60));
     } else {
-      ctx.font = "80px 'Bebas Neue'";
-      ctx.fillText(dataFmt, W/2, H-120);
+      ctx.font = `${px(80)}px 'Bebas Neue'`;
+      ctx.fillText(dataFmt, W/2, H-px(120));
       ctx.shadowBlur=0;
-      ctx.font = "600 24px 'JetBrains Mono'";
-      ctx.fillText(`${e.nom.toUpperCase()} · ${p.pista.slice(0,32)}`, W/2, H-60);
+      ctx.font = `600 ${px(24)}px 'JetBrains Mono'`;
+      ctx.fillText(`${e.nom.toUpperCase()} · ${p.pista.slice(0,32)}`, W/2, H-px(60));
     }
     cv.style.display='block';
     document.getElementById('c-down').style.display='inline-flex';
@@ -1102,58 +1134,58 @@ async function genCartell() {
     // mes gegant a l'esquerra
     ctx.textAlign='left'; ctx.fillStyle=WHITE;
     ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=14;
-    ctx.font = fitText(ctx, MESOS_LL[parseInt(month.slice(5,7))-1], 460, "{px}px 'Bebas Neue'", 150);
-    ctx.fillText(MESOS_LL[parseInt(month.slice(5,7))-1], 60, H*0.56);
+    ctx.font = fitText(ctx, MESOS_LL[parseInt(month.slice(5,7))-1], px(460), "{px}px 'Bebas Neue'", px(150));
+    ctx.fillText(MESOS_LL[parseInt(month.slice(5,7))-1], px(60), H*0.56);
     ctx.shadowBlur=0;
     // graella de partits a la dreta (2 columnes): escut del Barna VS rival, logos grans
     const rlogos = await Promise.all(monthMatches.map(x=>rivalLogoFor(x, true)));
     ctx.textAlign='center';
-    const col = [W-400, W-150], rowH = Math.min(260, (H-330)/Math.ceil(monthMatches.length/2));
+    const col = [W-px(400), W-px(150)], rowH = Math.min(px(260), (H-px(330))/Math.ceil(monthMatches.length/2));
     monthMatches.forEach((x,idx)=>{
-      const cx = col[idx%2], cy = 200 + Math.floor(idx/2)*rowH;
+      const cx = col[idx%2], cy = px(200) + Math.floor(idx/2)*rowH;
       const d = new Date(x.data+'T12:00:00');
       ctx.fillStyle = x.casa ? RED : WHITE;
-      ctx.font = "96px 'Bebas Neue'";
+      ctx.font = `${px(96)}px 'Bebas Neue'`;
       ctx.fillText(String(d.getDate()), cx, cy);
       // escut Barna a cada partit + rival, en ordre local-visitant
       const esq = x.casa ? cClubLogo : rlogos[idx];
       const dre = x.casa ? rlogos[idx] : cClubLogo;
-      drawLogo(ctx, esq, cx-58, cy+72, 108, x.casa?'CBGB':'?');
-      drawLogo(ctx, dre, cx+58, cy+72, 108, x.casa?'?':'CBGB');
-      ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.font="26px 'Bebas Neue'";
-      ctx.fillText('VS', cx, cy+80);
+      drawLogo(ctx, esq, cx-px(58), cy+px(72), px(108), x.casa?'CBGB':'?');
+      drawLogo(ctx, dre, cx+px(58), cy+px(72), px(108), x.casa?'?':'CBGB');
+      ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.font=`${px(26)}px 'Bebas Neue'`;
+      ctx.fillText('VS', cx, cy+px(80));
       ctx.fillStyle = WHITE;
-      ctx.font = "600 22px 'JetBrains Mono'";
-      ctx.fillText(`${DIES_AB[d.getDay()]} ${x.hora}`, cx, cy+160);
-      ctx.font = "30px 'Bebas Neue'";
+      ctx.font = `600 ${px(22)}px 'JetBrains Mono'`;
+      ctx.fillText(`${DIES_AB[d.getDay()]} ${x.hora}`, cx, cy+px(160));
+      ctx.font = `${px(30)}px 'Bebas Neue'`;
       ctx.fillStyle = x.casa ? WHITE : 'rgba(255,255,255,0.75)';
-      ctx.fillText(x.casa ? 'LOCAL' : 'VISITANT', cx, cy+194);
+      ctx.fillText(x.casa ? 'LOCAL' : 'VISITANT', cx, cy+px(194));
       const rv = (x.casa ? x.visitant : x.local).split(/\s+/).slice(0,2).join(' ');
-      ctx.font = "600 16px 'JetBrains Mono'"; ctx.fillStyle='rgba(255,255,255,0.55)';
-      ctx.fillText(rv.slice(0,20), cx, cy+220);
+      ctx.font = `600 ${px(16)}px 'JetBrains Mono'`; ctx.fillStyle='rgba(255,255,255,0.55)';
+      ctx.fillText(rv.slice(0,20), cx, cy+px(220));
     });
-    ctx.fillStyle = RED; ctx.fillRect(0,H-64,W,64);
-    ctx.fillStyle = WHITE; ctx.font = "600 26px 'JetBrains Mono'";
-    ctx.fillText(`${e.nom.toUpperCase()} · ${MESOS_LL[parseInt(month.slice(5,7))-1]} · #SOMCLOT`, W/2, H-22);
+    ctx.fillStyle = RED; ctx.fillRect(0,H-px(64),W,px(64));
+    ctx.fillStyle = WHITE; ctx.font = `600 ${px(26)}px 'JetBrains Mono'`;
+    ctx.fillText(`${e.nom.toUpperCase()} · ${MESOS_LL[parseInt(month.slice(5,7))-1]} · #SOMCLOT`, W/2, H-px(22));
   }
   else if (tpl==='previa') {
     /* ---- PRÈVIA amb estadístiques ---- */
-    ctx.fillStyle = RED; ctx.fillRect(0,0,W,150);
+    ctx.fillStyle = RED; ctx.fillRect(0,0,W,px(150));
     ctx.fillStyle = WHITE; ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-    ctx.font = fitText(ctx, `PRÈVIA ${e.nom.toUpperCase()}`, W-100, "{px}px 'Bebas Neue'", 92);
-    ctx.fillText(`PRÈVIA ${e.nom.toUpperCase()}`, W/2, 105);
-    ctx.fillStyle = WHITE; ctx.fillRect(40, 180, W-80, H-260);
+    ctx.font = fitText(ctx, `PRÈVIA ${e.nom.toUpperCase()}`, W-px(100), "{px}px 'Bebas Neue'", px(92));
+    ctx.fillText(`PRÈVIA ${e.nom.toUpperCase()}`, W/2, px(105));
+    ctx.fillStyle = WHITE; ctx.fillRect(px(40), px(180), W-px(80), H-px(260));
     ctx.fillStyle = BLACK;
-    ctx.font = "600 34px 'JetBrains Mono'";
-    ctx.fillText(dataFmt, W/2, 265);
-    ctx.font = "30px 'JetBrains Mono'";
-    ctx.fillText(p.pista.slice(0,42), W/2, 315);
-    drawLogo(ctx, p.casa?cClubLogo:autoRival, 200, 430, 190, p.casa?'CBGB':rivalInit, true);
-    drawLogo(ctx, p.casa?autoRival:cClubLogo, W-200, 430, 190, p.casa?rivalInit:'CBGB', true);
-    ctx.fillStyle = RED; ctx.font = "60px 'Bebas Neue'"; ctx.fillText('VS', W/2, 450);
-    ctx.fillStyle = BLACK; ctx.font = "26px 'Inter'";
+    ctx.font = `600 ${px(34)}px 'JetBrains Mono'`;
+    ctx.fillText(dataFmt, W/2, px(265));
+    ctx.font = `${px(30)}px 'JetBrains Mono'`;
+    ctx.fillText(p.pista.slice(0,42), W/2, px(315));
+    drawLogo(ctx, p.casa?cClubLogo:autoRival, px(200), px(430), px(190), p.casa?'CBGB':rivalInit, true);
+    drawLogo(ctx, p.casa?autoRival:cClubLogo, W-px(200), px(430), px(190), p.casa?rivalInit:'CBGB', true);
+    ctx.fillStyle = RED; ctx.font = `${px(60)}px 'Bebas Neue'`; ctx.fillText('VS', W/2, px(450));
+    ctx.fillStyle = BLACK;
     const nmL = (p.local.length>24?p.local.slice(0,23)+'…':p.local), nmV = (p.visitant.length>24?p.visitant.slice(0,23)+'…':p.visitant);
-    ctx.font = "700 26px 'Inter'"; ctx.fillText(nmL, 200, 575); ctx.fillText(nmV, W-200, 575);
+    ctx.font = `700 ${px(26)}px 'Inter'`; ctx.fillText(nmL, px(200), px(575)); ctx.fillText(nmV, W-px(200), px(575));
     // estadístiques en dues columnes (posició, jugats, victòries, derrotes, ratxa, IG rival)
     const rinfo = rinfoTop;
     const rows = [
@@ -1163,44 +1195,54 @@ async function genCartell() {
       [['RATXA', s.sType ? `${s.streak}${s.sType==='W'?'V':'D'} SEGUIDES` : '—'],
        ['SEGUIDORS IG RIVAL', rinfo ? `${(rinfo.seguidors/1000).toFixed(1).replace('.',',')} MIL` : '—']],
     ];
-    let y = 690;
+    let y = px(690);
     for (const parell of rows) {
       parell.forEach(([lab,val],ci)=>{
-        const cx = ci===0 ? W/2-240 : W/2+240;
-        ctx.fillStyle = '#777'; ctx.font = "600 22px 'JetBrains Mono'"; ctx.fillText(lab, cx, y);
-        ctx.fillStyle = BLACK; ctx.font = "62px 'Bebas Neue'"; ctx.fillText(val, cx, y+62);
+        const cx = ci===0 ? W/2-px(240) : W/2+px(240);
+        ctx.fillStyle = '#777'; ctx.font = `600 ${px(22)}px 'JetBrains Mono'`; ctx.fillText(lab, cx, y);
+        ctx.fillStyle = BLACK; ctx.font = `${px(62)}px 'Bebas Neue'`; ctx.fillText(val, cx, y+px(62));
       });
-      y += 140;
+      y += px(140);
     }
-    ctx.fillStyle = RED; ctx.font = "44px 'Bebas Neue'";
-    ctx.fillText('ÚLTIM ENFRONTAMENT', W/2, y+20);
-    ctx.fillStyle = BLACK; ctx.font = "56px 'Bebas Neue'";
-    ctx.fillText(prev ? `${prev.local.slice(0,16)} ${prev.puntsLocal} - ${prev.puntsVisitant} ${prev.visitant.slice(0,16)}` : 'PRIMER DUEL DE LA TEMPORADA', W/2, y+85);
-    ctx.fillStyle = BLACK; ctx.fillRect(0,H-60,W,60);
-    ctx.fillStyle = WHITE; ctx.font = "600 22px 'JetBrains Mono'";
-    ctx.fillText('#SOMCLOT · @CBGRUPBARNA', W/2, H-22);
+    ctx.fillStyle = RED; ctx.font = `${px(44)}px 'Bebas Neue'`;
+    ctx.fillText('ÚLTIM ENFRONTAMENT', W/2, y+px(20));
+    ctx.fillStyle = BLACK; ctx.font = `${px(56)}px 'Bebas Neue'`;
+    ctx.fillText(prev ? `${prev.local.slice(0,16)} ${prev.puntsLocal} - ${prev.puntsVisitant} ${prev.visitant.slice(0,16)}` : 'PRIMER DUEL DE LA TEMPORADA', W/2, y+px(85));
+    ctx.fillStyle = BLACK; ctx.fillRect(0,H-px(60),W,px(60));
+    ctx.fillStyle = WHITE; ctx.font = `600 ${px(22)}px 'JetBrains Mono'`;
+    ctx.fillText('#SOMCLOT · @CBGRUPBARNA', W/2, H-px(22));
   }
   else if (tpl==='dia') {
-    /* ---- UN DIA DE PARTIT ---- */
-    if (cPhoto) { drawCover(ctx, cPhoto, 0, 130, W, H-360);
-      const g = ctx.createLinearGradient(0,H-500,0,H-230);
-      g.addColorStop(0,'rgba(5,5,5,0)'); g.addColorStop(1,'rgba(5,5,5,0.92)');
-      ctx.fillStyle=g; ctx.fillRect(0,H-500,W,270);
+    /* ---- UN DIA DE PARTIT · foto a dalt, escuts i títol a sota ---- */
+    const peu = px(64);                          // franja vermella inferior
+    const lh = px(132);                          // interlineat del títol
+    const bLogos = px(150), bTitol = lh * 2 + px(24);
+    const bloc = bLogos + bTitol + px(30);
+    const fotoH = H - peu - bloc;
+    if (cPhoto) {
+      drawCover(ctx, cPhoto, 0, 0, W, fotoH);
+      const g = ctx.createLinearGradient(0, fotoH - px(260), 0, fotoH);
+      g.addColorStop(0,'rgba(5,5,5,0)'); g.addColorStop(1,'rgba(5,5,5,0.88)');
+      ctx.fillStyle=g; ctx.fillRect(0, fotoH - px(260), W, px(260));
     } else {
-      const g = ctx.createRadialGradient(W/2,H/2,100,W/2,H/2,900);
+      const g = ctx.createRadialGradient(W/2, fotoH/2, px(100), W/2, fotoH/2, Math.max(W,fotoH));
       g.addColorStop(0,'#3a0a0c'); g.addColorStop(1,BLACK);
-      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,fotoH);
     }
+    ctx.fillStyle = BLACK; ctx.fillRect(0, fotoH, W, H - fotoH);
+    // escuts a la seva banda, sota la foto
+    const yLogos = fotoH + bLogos/2;
+    drawLogo(ctx, p.casa?cClubLogo:autoRival, W/2-px(112), yLogos, px(112), p.casa?'CBGB':rivalInit);
+    drawLogo(ctx, p.casa?autoRival:cClubLogo, W/2+px(112), yLogos, px(112), p.casa?rivalInit:'CBGB');
     ctx.fillStyle = WHITE; ctx.textAlign='center';
-    ctx.font = "225px 'Bebas Neue'";
-    ctx.fillText('UN DIA', W/2, 205);
-    ctx.fillText('DE PARTIT', W/2, H-150);
-    drawLogo(ctx, p.casa?cClubLogo:autoRival, W/2-110, H-410, 124, p.casa?'CBGB':rivalInit);
-    drawLogo(ctx, p.casa?autoRival:cClubLogo, W/2+110, H-410, 124, p.casa?rivalInit:'CBGB');
-    ctx.fillStyle = WHITE; ctx.font = "34px 'Bebas Neue'"; ctx.fillText('V', W/2, H-398);
-    ctx.fillStyle = RED; ctx.fillRect(0,H-64,W,64);
-    ctx.fillStyle = WHITE; ctx.font = "600 26px 'JetBrains Mono'";
-    ctx.fillText(`${e.nom.toUpperCase()} | ${dataFmt} | ${p.pista.slice(0,26)}`, W/2, H-22);
+    ctx.font = `${px(32)}px 'Bebas Neue'`; ctx.fillText('V', W/2, yLogos + px(11));
+    // títol sencer sota la jugadora
+    ctx.font = fitText(ctx, 'DE PARTIT', W - px(80), "{px}px 'Bebas Neue'", px(150));
+    ctx.fillText('UN DIA', W/2, fotoH + bLogos + lh);
+    ctx.fillText('DE PARTIT', W/2, fotoH + bLogos + lh * 2);
+    ctx.fillStyle = RED; ctx.fillRect(0, H-peu, W, peu);
+    ctx.fillStyle = WHITE; ctx.font = `600 ${px(26)}px 'JetBrains Mono'`;
+    ctx.fillText(`${e.nom.toUpperCase()} | ${dataFmt} | ${p.pista.slice(0,26)}`, W/2, H - peu/2 + px(9));
   }
   else {
     /* ---- VICTÒRIA / FINAL ---- */
@@ -1215,20 +1257,127 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     ctx.textAlign='center'; ctx.fillStyle = WHITE;
-    ctx.font = fitText(ctx, word, W-80, "{px}px 'Bebas Neue'", 250);
-    ctx.fillText(word, W/2, 240);
-    drawLogo(ctx, p.casa?cClubLogo:autoRival, W/2-100, H-390, 112, p.casa?'CBGB':rivalInit);
-    drawLogo(ctx, p.casa?autoRival:cClubLogo, W/2+100, H-390, 112, p.casa?rivalInit:'CBGB');
-    ctx.fillStyle = WHITE; ctx.font = "30px 'Bebas Neue'"; ctx.fillText('V', W/2, H-380);
-    ctx.font = "260px 'Bebas Neue'";
-    ctx.fillText(`${p.puntsLocal ?? ''} ${p.puntsVisitant ?? ''}`, W/2, H-110);
-    ctx.fillStyle = RED; ctx.fillRect(0,H-56,W,56);
-    ctx.fillStyle = WHITE; ctx.font = "600 24px 'JetBrains Mono'";
-    ctx.fillText(`${e.nom.toUpperCase()} · ${p.categoria} · #SOMCLOT`, W/2, H-18);
+    ctx.font = fitText(ctx, word, W-px(80), "{px}px 'Bebas Neue'", px(250));
+    ctx.fillText(word, W/2, px(240));
+    drawLogo(ctx, p.casa?cClubLogo:autoRival, W/2-px(100), H-px(390), px(112), p.casa?'CBGB':rivalInit);
+    drawLogo(ctx, p.casa?autoRival:cClubLogo, W/2+px(100), H-px(390), px(112), p.casa?rivalInit:'CBGB');
+    ctx.fillStyle = WHITE; ctx.font = `${px(30)}px 'Bebas Neue'`; ctx.fillText('V', W/2, H-px(380));
+    ctx.font = fitText(ctx, `${p.puntsLocal ?? ''} ${p.puntsVisitant ?? ''}`, W-px(120), "{px}px 'Bebas Neue'", px(260));
+    ctx.fillText(`${p.puntsLocal ?? ''} ${p.puntsVisitant ?? ''}`, W/2, H-px(110));
+    ctx.fillStyle = RED; ctx.fillRect(0,H-px(56),W,px(56));
+    ctx.fillStyle = WHITE; ctx.font = `600 ${px(24)}px 'JetBrains Mono'`;
+    ctx.fillText(`${e.nom.toUpperCase()} · ${p.categoria} · #SOMCLOT`, W/2, H-px(18));
   }
   cv.style.display='block';
   document.getElementById('c-down').style.display='inline-flex';
   showCaption(tpl, p, e, rinfoTop, m);
+}
+
+/* ---------- 📅 CARTELL DELS PARTITS DEL CAP DE SETMANA ----------
+   Estètica de calendari: foto + títol gran a l'esquerra, llista a la dreta.
+   Per cada partit: hora, escut del rival, LOCAL/VISITANT, equip, categoria i pista.
+   Agrupat per dissabte i diumenge, i dins de cada dia, primer els de casa. */
+async function genFinde(m) {
+  const wk = document.getElementById('c-match').value;
+  if (!wk) { alert('Tria un cap de setmana'); return; }
+  const fi = new Date(wk+'T12:00:00'); fi.setDate(fi.getDate()+6);
+  const tots = m.partits.filter(p => p.data >= wk && p.data <= fi.toISOString().slice(0,10));
+  if (!tots.length) { alert('Aquest cap de setmana no té partits.'); return; }
+  await document.fonts.load("80px 'Bebas Neue'"); await document.fonts.load("700 30px 'JetBrains Mono'");
+  if (!cClubLogo) { try { cClubLogo = await loadImg(window.__CLUB_LOGO__ || '../logo.png'); } catch(err){} }
+  const logos = await Promise.all(tots.map(x => rivalLogoFor(x, true)));
+
+  const cv = document.getElementById('c-canvas'), ctx = cv.getContext('2d');
+  const [W, H] = (document.getElementById('c-fmt').value || '1080x1080').split('x').map(Number);
+  cv.width = W; cv.height = H;
+  const S = H / 1350, px = n => Math.round(n * S);
+  const RED='#E31E24', BLACK='#050505', WHITE='#ffffff';
+
+  // fons: foto a l'esquerra si n'hi ha, si no degradat
+  ctx.fillStyle = BLACK; ctx.fillRect(0,0,W,H);
+  if (cPhoto) {
+    drawCover(ctx, cPhoto, 0, 0, W, H);
+    const g = ctx.createLinearGradient(0,0,W,0);
+    g.addColorStop(0,'rgba(5,5,5,.30)'); g.addColorStop(.42,'rgba(5,5,5,.72)'); g.addColorStop(.62,'rgba(5,5,5,.94)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  } else {
+    const g = ctx.createRadialGradient(W*0.26,H*0.42,px(80),W*0.26,H*0.42,Math.max(W,H));
+    g.addColorStop(0,'#3a0a0c'); g.addColorStop(1,BLACK);
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  }
+
+  // títol a l'esquerra
+  const peu = px(64);
+  ctx.textAlign='left'; ctx.fillStyle=WHITE;
+  ctx.shadowColor='rgba(0,0,0,.6)'; ctx.shadowBlur=px(14);
+  ctx.font = fitText(ctx, 'CAP DE', W*0.34, "{px}px 'Bebas Neue'", px(118));
+  ctx.fillText('CAP DE', px(52), H*0.44);
+  ctx.fillText('SETMANA', px(52), H*0.44 + px(104));
+  ctx.shadowBlur=0;
+  ctx.fillStyle = RED; ctx.fillRect(px(54), H*0.44 + px(140), px(120), px(7));
+  ctx.fillStyle='rgba(255,255,255,.82)'; ctx.font = `600 ${px(24)}px 'JetBrains Mono'`;
+  ctx.fillText(wkLabel(wk).toUpperCase(), px(52), H*0.44 + px(190));
+  ctx.fillStyle='rgba(255,255,255,.5)'; ctx.font = `600 ${px(20)}px 'JetBrains Mono'`;
+  ctx.fillText(`${tots.length} PARTITS · ${tots.filter(p=>p.casa).length} A CASA`, px(52), H*0.44 + px(226));
+
+  // llista a la dreta
+  const x0 = W*0.40, xw = W - x0 - px(44);
+  const dies = [...new Set(tots.map(p=>p.data))].sort();
+  // alçada disponible i mida de fila segons quants partits hi ha
+  const nCaps = dies.length, avail = H - px(120) - peu;
+  const capH = px(56);
+  const rowH = Math.max(px(62), Math.min(px(104), (avail - nCaps*capH) / tots.length));
+  const rs = Math.max(0.62, Math.min(1, rowH / px(96)));   // escala del contingut de cada fila
+  const necessari = nCaps*capH + tots.length*rowH + nCaps*px(10) + (nCaps-1)*px(38);
+  let y = px(112) + Math.max(0, (avail - necessari) / 2);  // centrat vertical si sobra espai
+  let primerDia = true;
+  for (const d of dies) {
+    if (!primerDia) y += px(38);      // aire abans del capçal del dia següent
+    primerDia = false;
+    const dd = new Date(d+'T12:00:00');
+    ctx.fillStyle = dd.getDay()===0 ? '#FFD600' : RED;
+    ctx.font = `${px(46)}px 'Bebas Neue'`; ctx.textAlign='left';
+    ctx.fillText(fmtDia(d), x0, y);
+    ctx.fillStyle='rgba(255,255,255,.16)'; ctx.fillRect(x0, y+px(12), xw, Math.max(1,px(2)));
+    y += px(56);
+    const delDia = tots.filter(p=>p.data===d).sort((a,b)=> (b.casa?1:0)-(a.casa?1:0) || a.hora.localeCompare(b.hora));
+    for (const p of delDia) {
+      const idx = tots.indexOf(p), lg = logos[idx];
+      const eq = m.equips.find(e=>e.id===p.equipId) || {};
+      const rival = p.casa ? p.visitant : p.local;
+      // hora
+      const r = n => Math.round(px(n) * rs);
+      const xt = x0 + r(150);                       // columna de text
+      ctx.textAlign='left'; ctx.fillStyle=WHITE;
+      ctx.font = `${r(40)}px 'Bebas Neue'`;
+      ctx.fillText(p.hora, x0, y + r(28));
+      drawLogo(ctx, lg, x0 + r(110), y + r(20), r(56), rival.slice(0,3).toUpperCase());
+      ctx.fillStyle = p.casa ? RED : 'rgba(255,255,255,.55)';
+      ctx.font = `600 ${r(15)}px 'JetBrains Mono'`;
+      ctx.fillText(p.casa ? 'LOCAL · A CASA' : 'VISITANT · FORA', xt, y + r(8));
+      ctx.fillStyle = WHITE; ctx.font = `700 ${r(20)}px 'Inter'`;
+      ctx.fillText((p.casa ? 'vs ' : '@ ') + rival.slice(0,26), xt, y + r(32));
+      ctx.fillStyle = 'rgba(255,255,255,.58)'; ctx.font = `600 ${r(14)}px 'JetBrains Mono'`;
+      ctx.fillText(`${(eq.curt||eq.nom||'').slice(0,16)} · ${p.categoria.slice(0,22)}`, xt, y + r(52));
+      ctx.fillStyle = 'rgba(255,255,255,.42)';
+      ctx.fillText('📍 ' + p.pista.slice(0,32), xt, y + r(70));
+      y += rowH;
+    }
+    y += px(10);
+  }
+
+  ctx.fillStyle = RED; ctx.fillRect(0,H-peu,W,peu);
+  ctx.fillStyle = WHITE; ctx.textAlign='center'; ctx.font = `600 ${px(24)}px 'JetBrains Mono'`;
+  ctx.fillText('CB GRUP BARNA · @CBGRUPBARNA · #SOMCLOT', W/2, H-peu/2+px(9));
+
+  cv.style.display='block';
+  document.getElementById('c-down').style.display='inline-flex';
+  // caption
+  const txt = buildWaText(tots, m, `🔴⚫ *ELS PARTITS DEL CAP DE SETMANA* · ${wkLabel(wk)}`)
+    .replace('#SomClot 🔴⚫ cbgrupbarna.com/partits/',
+      '➡️ Tots els partits a cbgrupbarna.info/partits/\\n❤️ Segueix @cbgrupbarna i vine a animar\\n\\n#SomClot #CBGrupBarna #BàsquetCatalà #Clot');
+  document.getElementById('c-caption').value = txt;
+  document.getElementById('c-cap-box').style.display='block';
 }
 
 /* ---------- caption suggerit per publicar ---------- */
@@ -1312,7 +1461,8 @@ document.getElementById('c-down').addEventListener('click', ()=>{
   const p = model().partits.find(x=>x.id===document.getElementById('c-match').value);
   const a = document.createElement('a');
   a.href = document.getElementById('c-canvas').toDataURL('image/png');
-  a.download = `cbgb-${document.getElementById('c-tpl').value}-${p?p.id:'cartell'}.png`;
+  const tplv = document.getElementById('c-tpl').value;
+  a.download = `cbgb-${tplv}-${document.getElementById('c-fmt').value}-${tplv==='finde'?document.getElementById('c-match').value:(p?p.id:'cartell')}.png`;
   a.click();
 });
 document.getElementById('filters').addEventListener('click', e=>{
