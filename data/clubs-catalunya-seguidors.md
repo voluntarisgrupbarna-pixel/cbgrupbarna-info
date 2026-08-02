@@ -28,9 +28,9 @@
 | — | Fundació del Bàsquet Català *(entitat)* | @fundaciodelbasquetcatala | 7.803 |
 | 2 | CB Prat | @cbprat | 7.451 |
 | 3 | CB Cornellà | @cbcornella | 7.233 |
-| 4 | CB Granollers | @cbgranollers | 6.108 |
-| 5 | CB Boet Maresme Mataró | @cbboetmaresme | 5.946 |
-| **6** | **CB Grup Barna** | **@cbgrupbarna** | **5.313** |
+| **4** | **CB Grup Barna** | **@cbgrupbarna** | **6.993** ✅ |
+| 5 | CB Granollers | @cbgranollers | 6.108 |
+| 6 | CB Boet Maresme Mataró | @cbboetmaresme | 5.946 |
 | 7 | CE Laietà *(club multiesport)* | @clublaieta | 5.302 |
 | 8 | SESE | @sese_basquet | 5.114 |
 | 9 | TGN Bàsquet Club (Tarragona) | @tgnbasquet | 4.850 |
@@ -45,23 +45,30 @@
 | 18 | UE Horta — secció bàsquet | @basquetueh | 2.007 |
 | — | Bàsquet Laietà *(secció)* | @basquetlaieta | 1.247 |
 
+✅ **6.993 = dada interna del club a 02/08/2026.** L'índex del cercador donava 5.313
+(desactualitzat). La resta de xifres de la taula surten del mateix índex, o sigui que
+també poden anar endarrerides: la nostra posició real és, com a mínim, la que es veu
+aquí, probablement millor.
+
 ## Lectura ràpida
 
-1. **Dins Barcelona ciutat som primers entre els clubs de barri**, però per poc:
-   5.313 vs 5.302 (Laietà, que suma totes les seccions) i 5.114 (SESE). Roser
-   (3.471), Horta (2.007 la secció de bàsquet) i Lluïsos (2.878) queden clarament
-   per sota. La foto confirma el benchmark de barri que ja teníem.
-2. **El sostre real no és Barcelona ciutat, és l'àrea metropolitana formativa.**
-   Sant Adrià femení (8.517), Prat (7.451), Cornellà (7.233), Granollers (6.108) i
-   Boet Maresme (5.946) ens passen sense ser clubs ACB. Aquest és el grup on hem de
-   voler entrar el curs que ve: entre 6K i 8,5K.
-3. **Sant Adrià és el cas a estudiar**: és el compte de barri més gran de la llista
+1. **A Barcelona ciutat ja no hi ha discussió.** 6.993 vs SESE 5.114 (+1.879, +37 %)
+   i Laietà 5.302 (i això que Laietà suma totes les seccions). Roser (3.471),
+   Lluïsos (2.878) i Horta (2.007 la secció de bàsquet) queden molt lluny. La lliga
+   de barri de Barcelona està guanyada; deixa de ser la vara de mesurar.
+2. **Ja hem entrat al grup metropolità formatiu**, que era l'objectiu de curs:
+   passem Granollers (6.108) i Boet Maresme (5.946). Només tenim per davant
+   Sant Adrià femení (8.517), Prat (7.451) i Cornellà (7.233).
+3. **Cornellà és a 240 seguidors i Prat a 458.** Són distàncies d'una sola peça que
+   funcioni. El nou objectiu realista de temporada és **ser el club formatiu català
+   amb més seguidors (8.500+)**, no "créixer una mica".
+4. **Sant Adrià és el cas a estudiar**: és el compte formatiu més gran de la llista
    i és **exclusivament femení**. Reforça la tesi del projecte femení com a motor de
    creixement, no com a secció secundària.
-4. **Els comptes multiesport enganyen**: Laietà (5.302) i UE Horta (3.065) inclouen
+5. **Els comptes multiesport enganyen**: Laietà (5.302) i UE Horta (3.065) inclouen
    audiència d'altres esports. Comparats bàsquet contra bàsquet, la distància real a
    favor nostre és molt més gran (@basquetlaieta 1.247, @basquetueh 2.007).
-5. El salt de 5,3K a 8K no surt de publicar més: surt de **conversió** (aparador,
+6. El salt de 7K a 8,5K no surt de publicar més: surt de **conversió** (aparador,
    bio, pins, primers 9) — vegeu `crecimiento-ig-cbgb` i `aparador-perfil-cbgb`.
 
 ## Pendents
