@@ -1107,7 +1107,7 @@ function pickRotacio(equipId) {
    🎨 GENERADOR DE CARTELLS (canvas 1080×1350, estil CBGB)
    ========================================================= */
 let cPhoto = null, cRivalLogo = null, cClubLogo = null, cBgTpl = null;
-let LOGOMAP = null, LOGOIDX = null; const logoCache = {};
+let LOGOMAP = null, LOGOIDX = null, LOGOALIAS = null; const logoCache = {};
 /* Emparellament AUTOMÀTIC del rival amb el seu escut, pel nom.
    Regla estricta: totes les paraules significatives del fitxer han de sortir al nom
    del rival (així "CB BOET MATARÓ 2012" troba cb_boet_mataro.png, però "SANT ANDREU"
@@ -1140,10 +1140,11 @@ async function rivalLogoFor(p, nomesAuto) {
   if (cRivalLogo && !nomesAuto) return cRivalLogo;        // pujat a mà: mana (excepte al calendari)
   if (!LOGOMAP) { try { LOGOMAP = await (await fetch('logos/map.json')).json(); } catch(e){ LOGOMAP = {}; } }
   if (!LOGOIDX) { try { LOGOIDX = (await (await fetch('logos/index.json')).json()).fitxers; } catch(e){ LOGOIDX = []; } }
+  if (!LOGOALIAS) { try { LOGOALIAS = (await (await fetch('logos/alias.json')).json()).alias; } catch(e){ LOGOALIAS = {}; } }
   const rival = p.casa ? p.visitant : p.local;
   const eqp = model().equips.find(e=>e.id===p.equipId) || {};
-  // 1r: excepció escrita a mà · 2n: emparellament automàtic pel nom
-  const f = (LOGOMAP[p.equipId]||{})[rival] || trobaLogoPerNom(rival, eqp.genere);
+  // 1r: alias exacte de l'inventari · 2n: excepció manual · 3r: emparellament pel nom
+  const f = LOGOALIAS[rival.toUpperCase()] || (LOGOMAP[p.equipId]||{})[rival] || trobaLogoPerNom(rival, eqp.genere);
   if (!f) return null;
   if (!logoCache[f]) { try { logoCache[f] = await loadImg(f); } catch(e){ logoCache[f] = null; } }
   return logoCache[f];
