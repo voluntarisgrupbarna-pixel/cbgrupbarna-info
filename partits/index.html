@@ -1611,7 +1611,9 @@ async function genFinde(m) {
     ctx.textAlign='left'; ctx.fillStyle=WHITE;
     ctx.font = `${r(62)}px 'Anton'`;
     ctx.fillText(p.hora, cx, cy + r(50));
-    drawLogo(ctx, logos[i], cx + r(158), cy + r(28), r(60), (p.casa?p.visitant:p.local).slice(0,3).toUpperCase());
+    // l'escut es col·loca després de l'hora segons el seu ample real, mai a sobre
+    const wHora = ctx.measureText(p.hora).width;
+    drawLogo(ctx, logos[i], cx + wHora + r(46), cy + r(26), r(58), (p.casa?p.visitant:p.local).slice(0,3).toUpperCase());
     // dia · local/visitant
     ctx.font = `800 ${r(17)}px 'Inter'`;
     ctx.fillStyle = W60; ctx.fillText(DIES_AB[d.getDay()], cx, cy + r(78));
