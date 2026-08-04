@@ -364,7 +364,10 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
             <option value="finde">📅 PARTITS DEL CAP DE SETMANA (llista)</option>
             <option value="dia">🗓 UN DIA DE PARTIT (prèvia del dia)</option>
             <option value="calendari">📆 CALENDARI MENSUAL (per al carrusel)</option>
-            <option value="previa">📊 PRÈVIA amb estadístiques</option>
+            <option value="duel">⚔️ DUEL · escuts enfrontats</option>
+            <option value="stats">📊 ESTADÍSTIQUES comparades</option>
+            <option value="serie">🔢 ELIMINATÒRIA · marcador de sèrie</option>
+            <option value="previa">📋 PRÈVIA amb estadístiques</option>
             <option value="victoria">🏆 VICTÒRIA (resultat guanyat)</option>
             <option value="final">⏱ FINAL (qualsevol resultat)</option>
           </select>
@@ -398,6 +401,23 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
         <label class="c-lab">Plantilla pròpia de fons (opcional)
           <input type="file" id="c-bg" accept="image/*">
         </label>
+      </div>
+      <div id="c-rivalstats" style="display:none;margin:10px 0;padding:12px;background:var(--panel2);border-radius:12px">
+        <p style="font-size:11px;margin-bottom:8px">📊 Dades del rival per a la comparativa (opcional, es guarden per a la propera vegada):</p>
+        <div class="c-grid">
+          <label class="c-lab">Posició<input type="number" id="rs-pos" min="1" max="30"></label>
+          <label class="c-lab">Jugats<input type="number" id="rs-pj" min="0"></label>
+          <label class="c-lab">Victòries<input type="number" id="rs-v" min="0"></label>
+          <label class="c-lab">Derrotes<input type="number" id="rs-d" min="0"></label>
+        </div>
+      </div>
+      <div id="c-serie" style="display:none;margin:10px 0;padding:12px;background:var(--panel2);border-radius:12px">
+        <p style="font-size:11px;margin-bottom:8px">🔢 Marcador de l'eliminatòria:</p>
+        <div class="c-grid">
+          <label class="c-lab">Barna<input type="number" id="se-nos" min="0" max="9" value="1"></label>
+          <label class="c-lab">Rival<input type="number" id="se-ells" min="0" max="9" value="0"></label>
+          <label class="c-lab" style="grid-column:1/-1">Ronda<input type="text" id="se-ronda" placeholder="Ex: SEMIFINALS · FASE D'ASCENS"></label>
+        </div>
       </div>
       <p style="font-size:11px">💡 Si puges una <b>plantilla pròpia</b> (el disseny que tu vulguis, 1080×1350), la app només hi escriu a sobre les dades del partit: marcador si s'ha jugat, o dia i hora si és prèvia. Res més.</p>
       <button class="g-btn" id="c-gen">⚡ Generar cartell</button>
@@ -1223,6 +1243,131 @@ async function genCartell() {
     ctx.fillStyle = BART; ctx.font = `700 ${px(24)}px 'Inter'`;
     ctx.fillText(`${e.nom.toUpperCase()} · ${MESOS_LL[parseInt(month.slice(5,7))-1]} · #SOMCLOT`, W/2, H-px(22));
   }
+
+  else if (tpl==='duel') {
+    /* ---- DUEL · escuts enfrontats sobre foto (referència: FCB vs Baskonia) ---- */
+    if (cPhoto) {
+      drawCover(ctx, cPhoto, 0, 0, W, H);
+      const t = mode==='cream'?'244,241,236':'14,17,22';
+      const g = ctx.createLinearGradient(0,0,0,H);
+      g.addColorStop(0,`rgba(${t},.55)`); g.addColorStop(.45,`rgba(${t},.28)`); g.addColorStop(1,`rgba(${t},.92)`);
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    } else {
+      const g = ctx.createRadialGradient(W/2,H*0.42,px(80),W/2,H*0.42,Math.max(W,H));
+      g.addColorStop(0, mode==='cream'?'#EDE7DE':'#2a0709'); g.addColorStop(1,BG);
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    }
+    ctx.textAlign='center';
+    // competició a dalt
+    ctx.fillStyle = ACC; ctx.font = `${px(38)}px 'Anton'`;
+    ctx.fillText(p.categoria.toUpperCase().slice(0,34), W/2, px(150));
+    ctx.fillStyle = FG2; ctx.font = `700 ${px(22)}px 'Inter'`;
+    ctx.fillText(dataFmt, W/2, px(196));
+    // escuts grans enfrontats, com la referència
+    const yE = H*0.50, r = px(300);
+    drawLogo(ctx, p.casa?cClubLogo:autoRival, W/2-px(230), yE, r, p.casa?'CBGB':rivalInit, mode==='cream');
+    drawLogo(ctx, p.casa?autoRival:cClubLogo, W/2+px(230), yE, r, p.casa?rivalInit:'CBGB', mode==='cream');
+    ctx.fillStyle = ACC; ctx.font = `${px(64)}px 'Anton'`;
+    ctx.fillText('V', W/2, yE+px(22));
+    // noms sota cada escut
+    ctx.fillStyle = FG; ctx.font = `800 ${px(25)}px 'Inter'`;
+    const nl = p.local.length>20 ? p.local.slice(0,19)+'…' : p.local;
+    const nv = p.visitant.length>20 ? p.visitant.slice(0,19)+'…' : p.visitant;
+    ctx.fillText(nl.toUpperCase(), W/2-px(230), yE+px(215));
+    ctx.fillText(nv.toUpperCase(), W/2+px(230), yE+px(215));
+    // pista
+    ctx.fillStyle = FG2; ctx.font = `600 ${px(24)}px 'Inter'`;
+    ctx.fillText('📍 ' + p.pista.slice(0,40), W/2, H-px(130));
+    ctx.fillStyle = BAR; ctx.fillRect(0,H-px(64),W,px(64));
+    ctx.fillStyle = BART; ctx.textAlign='center'; ctx.font = `700 ${px(23)}px 'Inter'`;
+    ctx.fillText(`${e.nom.toUpperCase()} · #SOMCLOT`, W/2, H-px(22));
+  }
+  else if (tpl==='serie') {
+    /* ---- ELIMINATÒRIA · marcador de sèrie amb escuts als costats ---- */
+    const nos = parseInt(document.getElementById('se-nos').value) || 0;
+    const ells = parseInt(document.getElementById('se-ells').value) || 0;
+    const ronda = (document.getElementById('se-ronda').value || p.categoria).toUpperCase();
+    if (cPhoto) {
+      drawCover(ctx, cPhoto, 0, 0, W, H);
+      const t = mode==='cream'?'244,241,236':'14,17,22';
+      const g = ctx.createLinearGradient(0,0,0,H);
+      g.addColorStop(0,`rgba(${t},.42)`); g.addColorStop(.5,`rgba(${t},.18)`); g.addColorStop(1,`rgba(${t},.86)`);
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    } else {
+      const g = ctx.createRadialGradient(W/2,H/2,px(80),W/2,H/2,Math.max(W,H));
+      g.addColorStop(0, mode==='cream'?'#EDE7DE':'#2a0709'); g.addColorStop(1,BG);
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    }
+    ctx.textAlign='center';
+    // marcador gegant de la sèrie al centre
+    ctx.fillStyle = FG;
+    ctx.font = fitText(ctx, `${nos}-${ells}`, W*0.52, "{px}px 'Anton'", px(300));
+    ctx.fillText(`${nos}-${ells}`, W/2, H*0.56);
+    // escuts als costats
+    drawLogo(ctx, cClubLogo, px(150), H*0.5, px(150), 'CBGB', mode==='cream');
+    drawLogo(ctx, autoRival, W-px(150), H*0.5, px(150), rivalInit, mode==='cream');
+    ctx.fillStyle = ACC; ctx.font = `${px(36)}px 'Anton'`;
+    ctx.fillText(ronda.slice(0,40), W/2, px(130));
+    ctx.fillStyle = FG2; ctx.font = `700 ${px(20)}px 'Inter'`;
+    ctx.fillText(`${p.local} · ${p.visitant}`.slice(0,52), W/2, H-px(120));
+    ctx.fillStyle = BAR; ctx.fillRect(0,H-px(64),W,px(64));
+    ctx.fillStyle = BART; ctx.font = `700 ${px(23)}px 'Inter'`;
+    ctx.fillText(`${e.nom.toUpperCase()} · #SOMCLOT`, W/2, H-px(22));
+  }
+  else if (tpl==='stats') {
+    /* ---- ESTADÍSTIQUES comparades (referència: taula del Barça) ---- */
+    const rival = p.casa ? p.visitant : p.local;
+    const rs = (OV.rivalStats||{})[rival] || {};
+    if (cPhoto) {
+      drawCover(ctx, cPhoto, 0, 0, W, H);
+      const t = mode==='cream'?'244,241,236':'14,17,22';
+      ctx.fillStyle=`rgba(${t},.90)`; ctx.fillRect(0,0,W,H);
+    }
+    ctx.textAlign='center';
+    ctx.fillStyle = FG2; ctx.font = `700 ${px(20)}px 'Inter'`;
+    ctx.fillText(p.categoria.toUpperCase().slice(0,40), W/2, px(76));
+    ctx.fillStyle = FG; ctx.font = fitText(ctx,'ESTADÍSTIQUES', W-px(140), "{px}px 'Anton'", px(78));
+    ctx.fillText('ESTADÍSTIQUES', W/2, px(150));
+    ctx.fillStyle = ACC; ctx.fillRect(W/2-px(60), px(178), px(120), px(6));
+    // escuts de cada columna
+    const xL = W*0.19, xR = W*0.81;
+    drawLogo(ctx, p.casa?cClubLogo:autoRival, xL, px(280), px(150), p.casa?'CBGB':rivalInit, mode==='cream');
+    drawLogo(ctx, p.casa?autoRival:cClubLogo, xR, px(280), px(150), p.casa?rivalInit:'CBGB', mode==='cream');
+    // punts de mitjana del Barna, calculats amb els resultats introduïts
+    const jugats = m.partits.filter(x=>x.equipId===p.equipId && x.jugat);
+    const pf = jugats.length ? Math.round(jugats.reduce((a,x)=>a+(x.casa?x.puntsLocal:x.puntsVisitant),0)/jugats.length) : null;
+    const pc = jugats.length ? Math.round(jugats.reduce((a,x)=>a+(x.casa?x.puntsVisitant:x.puntsLocal),0)/jugats.length) : null;
+    const nostre = { pos: e.posicio, pj: s.pj, v: s.w, d: s.l, pf, pc };
+    const seu    = { pos: rs.pos, pj: rs.pj, v: rs.v, d: rs.d, pf: null, pc: null };
+    const files = [
+      ['POSICIÓ',        nostre.pos, seu.pos],
+      ['PARTITS JUGATS', nostre.pj,  seu.pj],
+      ['VICTÒRIES',      nostre.v,   seu.v],
+      ['DERROTES',       nostre.d,   seu.d],
+      ['PUNTS A FAVOR',  nostre.pf,  seu.pf],
+      ['PUNTS EN CONTRA',nostre.pc,  seu.pc],
+    ];
+    const esqNostre = p.casa;                      // el Barna va a la columna que li toca
+    let y = px(430);
+    const pas = Math.min(px(108), (H - px(600)) / files.length);
+    for (const [lab, a, b] of files) {
+      const va = a==null?'—':String(a), vb = b==null?'—':String(b);
+      ctx.fillStyle = FG; ctx.font = `${px(62)}px 'Anton'`;
+      ctx.fillText(esqNostre?va:vb, xL, y);
+      ctx.fillText(esqNostre?vb:va, xR, y);
+      ctx.fillStyle = FG2; ctx.font = `700 ${px(19)}px 'Inter'`;
+      ctx.fillText(lab, W/2, y-px(16));
+      y += pas;
+    }
+    // últim enfrontament
+    ctx.fillStyle = ACC; ctx.font = `${px(30)}px 'Anton'`;
+    ctx.fillText('ÚLTIM ENFRONTAMENT', W/2, H-px(150));
+    ctx.fillStyle = FG; ctx.font = `${px(44)}px 'Anton'`;
+    ctx.fillText(prev ? `${prev.puntsLocal} - ${prev.puntsVisitant}` : 'PRIMER DUEL DE LA TEMPORADA', W/2, H-px(104));
+    ctx.fillStyle = BAR; ctx.fillRect(0,H-px(64),W,px(64));
+    ctx.fillStyle = BART; ctx.font = `700 ${px(23)}px 'Inter'`;
+    ctx.fillText(`${dataFmt} · ${p.pista.slice(0,24)}`, W/2, H-px(22));
+  }
   else if (tpl==='previa') {
     /* ---- PRÈVIA amb estadístiques ---- */
     ctx.fillStyle = ACC; ctx.fillRect(0,0,W,px(150));
@@ -1337,7 +1482,8 @@ async function genFinde(m) {
   const wk = document.getElementById('c-match').value;
   if (!wk) { alert('Tria un cap de setmana'); return; }
   const fi = new Date(wk+'T12:00:00'); fi.setDate(fi.getDate()+6);
-  const tots = m.partits.filter(p => p.data >= wk && p.data <= fi.toISOString().slice(0,10));
+  const tots = m.partits.filter(p => p.data >= wk && p.data <= fi.toISOString().slice(0,10))
+                        .sort((a,b)=> (a.data+a.hora).localeCompare(b.data+b.hora));
   if (!tots.length) { alert('Aquest cap de setmana no té partits.'); return; }
   await document.fonts.load("80px 'Anton'"); await document.fonts.load("700 30px 'Inter'");
   if (!cClubLogo) { try { cClubLogo = await loadImg(window.__CLUB_LOGO__ || '../logo.png'); } catch(err){} }
@@ -1347,101 +1493,74 @@ async function genFinde(m) {
   const [W, H] = (document.getElementById('c-fmt').value || '1080x1080').split('x').map(Number);
   cv.width = W; cv.height = H;
   const S = H / 1350, px = n => Math.round(n * S);
-  const RED='#E63329', INK='#0E1116', CREAM='#F4F1EC', WHITE='#ffffff';
-  const mode = document.getElementById('c-bgm').value || 'cream';
-  const BG   = mode==='red' ? RED : mode==='ink' ? INK : CREAM;      // fons de la peça
-  const FG   = mode==='cream' ? INK : WHITE;                          // tinta principal
-  const FG2  = mode==='cream' ? 'rgba(14,17,22,.60)' : 'rgba(255,255,255,.68)';
-  const ACC  = mode==='red' ? INK : RED;                              // accent
-  const BAR  = mode==='red' ? INK : RED;                              // franja de peu
-  const BART = mode==='red' ? CREAM : WHITE;
-  const BLACK = BG;                                                   // compatibilitat
+  const RED='#E63329', INK='#0E1116', WHITE='#ffffff';
+  const W60 = 'rgba(255,255,255,.62)', W40 = 'rgba(255,255,255,.42)';
 
-  // fons: foto a l'esquerra si n'hi ha, si no degradat
-  ctx.fillStyle = BG; ctx.fillRect(0,0,W,H);
+  /* Fons: foto a sangre amb vel fosc (el text sempre en blanc, com la referència) */
   if (cPhoto) {
     drawCover(ctx, cPhoto, 0, 0, W, H);
     const g = ctx.createLinearGradient(0,0,W,0);
-    const t = mode==='cream'?'244,241,236':'14,17,22';
-    g.addColorStop(0,`rgba(${t},.3)`); g.addColorStop(.42,`rgba(${t},.75)`); g.addColorStop(.62,`rgba(${t},.96)`);
+    g.addColorStop(0,'rgba(14,17,22,.55)'); g.addColorStop(.45,'rgba(14,17,22,.55)'); g.addColorStop(1,'rgba(14,17,22,.72)');
     ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
   } else {
-    const g = ctx.createRadialGradient(W*0.26,H*0.42,px(80),W*0.26,H*0.42,Math.max(W,H));
-    g.addColorStop(0, mode==='cream'?'#EDE7DE':'#3a0a0c'); g.addColorStop(1, BG);
+    const g = ctx.createRadialGradient(W*0.3,H*0.45,px(80),W*0.3,H*0.45,Math.max(W,H));
+    g.addColorStop(0,'#2a0709'); g.addColorStop(1,INK);
     ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
   }
 
-  // títol a l'esquerra
-  const peu = px(64);
-  ctx.textAlign='left'; ctx.fillStyle=FG;
-  if (cPhoto) { ctx.shadowColor = mode==='cream'?'rgba(244,241,236,.9)':'rgba(0,0,0,.6)'; ctx.shadowBlur=px(14); }
-  ctx.font = fitText(ctx, 'CAP DE', W*0.34, "{px}px 'Anton'", px(118));
-  ctx.fillText('CAP DE', px(52), H*0.44);
-  ctx.fillText('SETMANA', px(52), H*0.44 + px(104));
+  /* Paraula gran a l'esquerra */
+  const DIES_AB = ['DG.','DL.','DT.','DC.','DJ.','DV.','DS.'];
+  ctx.textAlign='left'; ctx.fillStyle=WHITE;
+  ctx.shadowColor='rgba(0,0,0,.55)'; ctx.shadowBlur=px(16);
+  ctx.font = fitText(ctx, 'SETMANA', W*0.33, "{px}px 'Anton'", px(120));
+  ctx.fillText('CAP DE', px(56), H*0.50);
+  ctx.fillText('SETMANA', px(56), H*0.50 + px(106));
   ctx.shadowBlur=0;
-  ctx.fillStyle = ACC; ctx.fillRect(px(54), H*0.44 + px(140), px(120), px(7));
-  ctx.fillStyle = mode==='cream'?'rgba(14,17,22,.78)':'rgba(255,255,255,.82)'; ctx.font = `600 ${px(24)}px 'Inter'`;
-  ctx.fillText(wkLabel(wk).toUpperCase(), px(52), H*0.44 + px(190));
-  ctx.fillStyle = FG2; ctx.font = `600 ${px(20)}px 'Inter'`;
-  ctx.fillText(`${tots.length} PARTITS · ${tots.filter(p=>p.casa).length} A CASA`, px(52), H*0.44 + px(226));
+  ctx.fillStyle = RED; ctx.fillRect(px(58), H*0.50 + px(142), px(110), px(7));
+  ctx.fillStyle = W60; ctx.font = `700 ${px(22)}px 'Inter'`;
+  ctx.fillText(wkLabel(wk).toUpperCase(), px(56), H*0.50 + px(192));
+  ctx.fillText(`${tots.length} PARTITS · ${tots.filter(p=>p.casa).length} A CASA`, px(56), H*0.50 + px(226));
 
-  // llista a la dreta
-  const x0 = W*0.40, xw = W - x0 - px(44);
-  const dies = [...new Set(tots.map(p=>p.data))].sort();
-  // alçada disponible i mida de fila segons quants partits hi ha
-  const nCaps = dies.length, avail = H - px(120) - peu;
-  const capH = px(56);
-  const extres = nCaps*px(10) + Math.max(0, nCaps-1)*px(38);   // aire entre dies
-  const rowH = Math.max(px(52), Math.min(px(104), (avail - nCaps*capH - extres) / tots.length));
-  const rs = Math.max(0.62, Math.min(1, rowH / px(96)));   // escala del contingut de cada fila
-  const necessari = nCaps*capH + tots.length*rowH + nCaps*px(10) + (nCaps-1)*px(38);
-  let y = px(112) + Math.max(0, (avail - necessari) / 2);  // centrat vertical si sobra espai
-  let primerDia = true;
-  for (const d of dies) {
-    if (!primerDia) y += px(38);      // aire abans del capçal del dia següent
-    primerDia = false;
-    const dd = new Date(d+'T12:00:00');
-    ctx.fillStyle = dd.getDay()===0 ? (mode==='red'?CREAM:INK) : ACC;
-    ctx.font = `${px(46)}px 'Anton'`; ctx.textAlign='left';
-    ctx.fillText(fmtDia(d), x0, y);
-    ctx.fillStyle = mode==='cream'?'rgba(14,17,22,.14)':'rgba(255,255,255,.16)'; ctx.fillRect(x0, y+px(12), xw, Math.max(1,px(2)));
-    y += px(56);
-    const delDia = tots.filter(p=>p.data===d).sort((a,b)=> (b.casa?1:0)-(a.casa?1:0) || a.hora.localeCompare(b.hora));
-    for (const p of delDia) {
-      const idx = tots.indexOf(p), lg = logos[idx];
-      const eq = m.equips.find(e=>e.id===p.equipId) || {};
-      const rival = p.casa ? p.visitant : p.local;
-      // hora
-      const r = n => Math.round(px(n) * rs);
-      const xt = x0 + r(150);                       // columna de text
-      ctx.textAlign='left'; ctx.fillStyle=FG;
-      ctx.font = `${r(40)}px 'Anton'`;
-      ctx.fillText(p.hora, x0, y + r(28));
-      drawLogo(ctx, lg, x0 + r(110), y + r(20), r(56), rival.slice(0,3).toUpperCase(), mode==='cream');
-      ctx.fillStyle = p.casa ? ACC : FG2;
-      ctx.font = `600 ${r(15)}px 'Inter'`;
-      ctx.fillText(p.casa ? 'LOCAL · A CASA' : 'VISITANT · FORA', xt, y + r(8));
-      ctx.fillStyle = FG; ctx.font = `800 ${r(20)}px 'Inter'`;
-      ctx.fillText((p.casa ? 'vs ' : '@ ') + rival.slice(0,26), xt, y + r(32));
-      ctx.fillStyle = FG2; ctx.font = `600 ${r(14)}px 'Inter'`;
-      ctx.fillText(`${(eq.curt||eq.nom||'').slice(0,16)} · ${p.categoria.slice(0,22)}`, xt, y + r(52));
-      ctx.fillStyle = mode==='cream'?'rgba(14,17,22,.45)':'rgba(255,255,255,.42)';
-      ctx.fillText('📍 ' + p.pista.slice(0,32), xt, y + r(70));
-      y += rowH;
-    }
-    y += px(10);
-  }
+  /* Graella compacta a la dreta: 2 columnes, com la referència */
+  const x0 = W*0.415, ample = W - x0 - px(40);
+  const colW = ample/2, files = Math.ceil(tots.length/2);
+  const dalt = px(96), baix = H - px(96);
+  const rowH = Math.min(px(230), (baix - dalt) / files);
+  const rs = Math.max(0.6, Math.min(1, rowH/px(210)));
+  const r = n => Math.round(px(n) * rs);
+  tots.forEach((p, i) => {
+    const cx = x0 + (i%2)*colW, cy = dalt + Math.floor(i/2)*rowH;
+    const d = new Date(p.data+'T12:00:00');
+    const eq = m.equips.find(e=>e.id===p.equipId) || {};
+    // hora gran + escut del rival al costat
+    ctx.textAlign='left'; ctx.fillStyle=WHITE;
+    ctx.font = `${r(62)}px 'Anton'`;
+    ctx.fillText(p.hora, cx, cy + r(50));
+    drawLogo(ctx, logos[i], cx + r(158), cy + r(28), r(60), (p.casa?p.visitant:p.local).slice(0,3).toUpperCase());
+    // dia · local/visitant
+    ctx.font = `800 ${r(17)}px 'Inter'`;
+    ctx.fillStyle = W60; ctx.fillText(DIES_AB[d.getDay()], cx, cy + r(78));
+    ctx.fillStyle = p.casa ? RED : WHITE;
+    ctx.fillText(p.casa ? 'LOCAL' : 'VISITANT', cx + r(46), cy + r(78));
+    // rival
+    ctx.fillStyle = WHITE; ctx.font = `800 ${r(19)}px 'Inter'`;
+    ctx.fillText((p.casa?'vs ':'@ ') + (p.casa?p.visitant:p.local).slice(0,22), cx, cy + r(106));
+    // equip i categoria
+    ctx.fillStyle = W60; ctx.font = `700 ${r(15)}px 'Inter'`;
+    ctx.fillText((eq.curt||eq.nom||'').slice(0,20), cx, cy + r(130));
+    ctx.fillStyle = W40; ctx.font = `600 ${r(13)}px 'Inter'`;
+    ctx.fillText(p.categoria.slice(0,26), cx, cy + r(150));
+  });
 
-  ctx.fillStyle = BAR; ctx.fillRect(0,H-peu,W,peu);
-  ctx.fillStyle = BART; ctx.textAlign='center'; ctx.font = `700 ${px(23)}px 'Inter'`;
-  ctx.fillText('CB GRUP BARNA · @CBGRUPBARNA · #SOMCLOT', W/2, H-peu/2+px(9));
+  ctx.fillStyle = RED; ctx.fillRect(0,H-px(64),W,px(64));
+  ctx.fillStyle = WHITE; ctx.textAlign='center'; ctx.font = `700 ${px(23)}px 'Inter'`;
+  ctx.fillText('CB GRUP BARNA · @CBGRUPBARNA · #SOMCLOT', W/2, H-px(22));
 
   cv.style.display='block';
   document.getElementById('c-down').style.display='inline-flex';
-  // caption
   const txt = buildWaText(tots, m, `🔴⚫ *ELS PARTITS DEL CAP DE SETMANA* · ${wkLabel(wk)}`)
     .replace('#SomClot 🔴⚫ cbgrupbarna.com/partits/',
-      '➡️ Tots els partits a cbgrupbarna.info/partits/\\n❤️ Segueix @cbgrupbarna i vine a animar\\n\\n#SomClot #CBGrupBarna #BàsquetCatalà #Clot');
+      '➡️ Tots els partits a cbgrupbarna.info/partits/\n❤️ Segueix @cbgrupbarna i vine a animar\n\n#SomClot #CBGrupBarna #BàsquetCatalà #Clot');
   document.getElementById('c-caption').value = txt;
   document.getElementById('c-cap-box').style.display='block';
 }
@@ -1477,7 +1596,35 @@ document.getElementById('tabs').addEventListener('click', e=>{
   if (t.dataset.v==='equips') renderEquips();
   if (t.dataset.v==='cartells') fillCartellSelect();
 });
-document.getElementById('c-tpl').addEventListener('change', fillCartellSelect);
+function toggleCamps() {
+  const t = document.getElementById('c-tpl').value;
+  document.getElementById('c-rivalstats').style.display = t==='stats' ? 'block' : 'none';
+  document.getElementById('c-serie').style.display     = t==='serie' ? 'block' : 'none';
+  if (t==='stats') carregaRivalStats();
+}
+function rivalDelSelect() {
+  const p = model().partits.find(x=>x.id===document.getElementById('c-match').value);
+  return p ? (p.casa ? p.visitant : p.local) : null;
+}
+function carregaRivalStats() {
+  const r = rivalDelSelect(); if (!r) return;
+  const rs = (OV.rivalStats||{})[r] || {};
+  document.getElementById('rs-pos').value = rs.pos ?? '';
+  document.getElementById('rs-pj').value  = rs.pj  ?? '';
+  document.getElementById('rs-v').value   = rs.v   ?? '';
+  document.getElementById('rs-d').value   = rs.d   ?? '';
+}
+function desaRivalStats() {
+  const r = rivalDelSelect(); if (!r) return;
+  OV.rivalStats = OV.rivalStats || {};
+  const num = id => { const v = document.getElementById(id).value; return v==='' ? null : parseInt(v); };
+  OV.rivalStats[r] = { pos:num('rs-pos'), pj:num('rs-pj'), v:num('rs-v'), d:num('rs-d') };
+  saveOverrides();
+}
+['rs-pos','rs-pj','rs-v','rs-d'].forEach(id =>
+  document.getElementById(id).addEventListener('change', desaRivalStats));
+document.getElementById('c-match').addEventListener('change', ()=>{ if (document.getElementById('c-tpl').value==='stats') carregaRivalStats(); });
+document.getElementById('c-tpl').addEventListener('change', ()=>{ fillCartellSelect(); toggleCamps(); });
 document.getElementById('c-photo').addEventListener('change', async e=>{ if(e.target.files[0]) cPhoto = await fileToImg(e.target.files[0]); });
 document.getElementById('c-rival').addEventListener('change', async e=>{ if(e.target.files[0]) cRivalLogo = await fileToImg(e.target.files[0]); });
 document.getElementById('c-bg').addEventListener('change', async e=>{ cBgTpl = e.target.files[0] ? await fileToImg(e.target.files[0]) : null; });
