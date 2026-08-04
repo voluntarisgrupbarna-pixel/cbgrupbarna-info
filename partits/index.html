@@ -1018,15 +1018,43 @@ function pickRotacio(equipId) {
    🎨 GENERADOR DE CARTELLS (canvas 1080×1350, estil CBGB)
    ========================================================= */
 let cPhoto = null, cRivalLogo = null, cClubLogo = null, cBgTpl = null;
-let LOGOMAP = null; const logoCache = {};
+let LOGOMAP = null, LOGOIDX = null; const logoCache = {};
+/* Emparellament AUTOMÀTIC del rival amb el seu escut, pel nom.
+   Regla estricta: totes les paraules significatives del fitxer han de sortir al nom
+   del rival (així "CB BOET MATARÓ 2012" troba cb_boet_mataro.png, però "SANT ANDREU"
+   mai agafa l'escut del "SANT ADRIÀ"). Desempat: la secció del gènere de l'equip. */
+const LOGO_NOISE = new Set(['CB','CE','AE','UE','AEC','CBU','CBF','EB','BC','BQ','CLUB','BASQUET',
+  'BASKET','BALONCESTO','FEMENI','MASCULI','A','B','C','D','SAF','SAM','ASSOCIACIO','ESPORTIU','ESPORTIVA','DE','DEL','LA','EL']);
+function logoToks(s) {
+  return (s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^A-Z0-9 ]/g,' ').split(/\s+/)
+    .filter(t => t.length>1 && !LOGO_NOISE.has(t) && !/^(U\d+[FM]?|F\d+[A-Z]?|\d+)$/.test(t));
+}
+function trobaLogoPerNom(rival, genere) {
+  if (!LOGOIDX) return null;
+  const rt = new Set(logoToks(rival));
+  let millor = null, millorLen = 0, millorPref = -1;
+  for (const f of LOGOIDX) {
+    const lt = logoToks(f.split('/').pop().replace(/\.png$/i,'').replace(/_/g,' '));
+    if (!lt.length || !lt.every(t => rt.has(t))) continue;      // totes hi han de ser
+    const pref = ((genere==='F' && f.includes('/saf/')) || (genere==='M' && f.includes('/sam/'))) ? 1 : 0;
+    if (lt.length > millorLen || (lt.length === millorLen && pref > millorPref)) {
+      millor = f; millorLen = lt.length; millorPref = pref;
+    }
+  }
+  return millor;
+}
 let RIVALS = null;
 async function loadRivals(){ if(!RIVALS){ try { RIVALS = await (await fetch('rivals.json')).json(); } catch(e){ RIVALS = {}; } } return RIVALS; }
 async function rivalInfo(p){ await loadRivals(); return (RIVALS[p.equipId]||{})[p.casa?p.visitant:p.local] || null; }
 async function rivalLogoFor(p, nomesAuto) {
   if (cRivalLogo && !nomesAuto) return cRivalLogo;        // pujat a mà: mana (excepte al calendari)
   if (!LOGOMAP) { try { LOGOMAP = await (await fetch('logos/map.json')).json(); } catch(e){ LOGOMAP = {}; } }
+  if (!LOGOIDX) { try { LOGOIDX = (await (await fetch('logos/index.json')).json()).fitxers; } catch(e){ LOGOIDX = []; } }
   const rival = p.casa ? p.visitant : p.local;
-  const f = (LOGOMAP[p.equipId]||{})[rival];
+  const eqp = model().equips.find(e=>e.id===p.equipId) || {};
+  // 1r: excepció escrita a mà · 2n: emparellament automàtic pel nom
+  const f = (LOGOMAP[p.equipId]||{})[rival] || trobaLogoPerNom(rival, eqp.genere);
   if (!f) return null;
   if (!logoCache[f]) { try { logoCache[f] = await loadImg(f); } catch(e){ logoCache[f] = null; } }
   return logoCache[f];
@@ -1363,7 +1391,8 @@ async function genFinde(m) {
   // alçada disponible i mida de fila segons quants partits hi ha
   const nCaps = dies.length, avail = H - px(120) - peu;
   const capH = px(56);
-  const rowH = Math.max(px(62), Math.min(px(104), (avail - nCaps*capH) / tots.length));
+  const extres = nCaps*px(10) + Math.max(0, nCaps-1)*px(38);   // aire entre dies
+  const rowH = Math.max(px(52), Math.min(px(104), (avail - nCaps*capH - extres) / tots.length));
   const rs = Math.max(0.62, Math.min(1, rowH / px(96)));   // escala del contingut de cada fila
   const necessari = nCaps*capH + tots.length*rowH + nCaps*px(10) + (nCaps-1)*px(38);
   let y = px(112) + Math.max(0, (avail - necessari) / 2);  // centrat vertical si sobra espai
