@@ -14,7 +14,7 @@ from pathlib import Path
 
 CLUB_ID = 24
 DATA = Path(__file__).resolve().parents[2] / "partits" / "data.json"
-CLUB_RE = re.compile(r"C\.?B\.?\s*GRUP\s*BARNA(?:\s+[A-Z0-9]{1,3})?", re.I)
+CLUB_RE = re.compile(r"(?:[A-Z0-9]+-)?C[.,]?\s*B[.,]?\s*GRUP\s*BARNA(?:\s+[A-Z0-9]{1,3})?", re.I)
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 
