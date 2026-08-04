@@ -460,6 +460,26 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
         <div class="g-log" id="pdf-log"></div>
       </div>
       <div class="g-box">
+        <h3>➕ Equips i partits d'un altre calendari</h3>
+        <p>Per als equips que <b>no surten al calendari de la federació</b>: el <b>Barna Màgics</b> (Lliga ACELL), amistosos, tornejos o el 3x3. Un cop afegits, surten a la jornada, als resultats i als cartells com qualsevol altre equip.</p>
+        <div class="c-grid">
+          <label class="c-lab">Equip
+            <select id="mx-equip"><option value="__nou__">➕ Equip nou…</option></select>
+          </label>
+          <label class="c-lab">Nom de l'equip nou<input type="text" id="mx-nom" placeholder="Ex: Barna Màgics"></label>
+          <label class="c-lab">Competició<input type="text" id="mx-comp" placeholder="Ex: Lliga ACELL"></label>
+          <label class="c-lab">Rival<input type="text" id="mx-rival" placeholder="Ex: CE Mare de Déu"></label>
+          <label class="c-lab">Data<input type="date" id="mx-data"></label>
+          <label class="c-lab">Hora<input type="time" id="mx-hora" value="10:00"></label>
+          <label class="c-lab">On es juga
+            <select id="mx-casa"><option value="1">🏠 A casa</option><option value="0">🚌 Fora</option></select>
+          </label>
+          <label class="c-lab">Pista<input type="text" id="mx-pista" placeholder="Ex: Nau Parc Clot"></label>
+        </div>
+        <button class="g-btn" id="mx-add">➕ Afegir partit</button>
+        <div id="mx-list" style="margin-top:12px"></div>
+      </div>
+      <div class="g-box">
         <h3>🖼️ Fons dels cartells (fotos de la Nau)</h3>
         <p>Puja aquí les fotos de la Nau del Clot i de partits que vulguis fer servir de fons. Després, a Cartells, tries quina va a cada peça.</p>
         <div class="c-grid">
@@ -1043,6 +1063,75 @@ function renderJugadors() {
   // el selector de fons del generador es refresca sol
   if (typeof omplirFons === 'function') omplirFons();
 }
+/* ── Equips i partits d'un altre calendari (Barna Màgics, amistosos, 3x3) ── */
+function addPartitManual() {
+  const sel = document.getElementById('mx-equip').value;
+  const data = document.getElementById('mx-data').value;
+  const hora = document.getElementById('mx-hora').value || '10:00';
+  const rival = document.getElementById('mx-rival').value.trim();
+  const casa = document.getElementById('mx-casa').value === '1';
+  const pista = document.getElementById('mx-pista').value.trim() || (casa ? 'NAU PARC CLOT' : '');
+  if (!data) { alert('Posa la data del partit'); return; }
+  if (!rival) { alert('Posa el rival'); return; }
+  let eq;
+  if (sel === '__nou__') {
+    const nom = document.getElementById('mx-nom').value.trim();
+    const comp = document.getElementById('mx-comp').value.trim();
+    if (!nom) { alert("Posa el nom de l'equip nou"); return; }
+    if (model().equips.some(e => normNom(e.nom) === normNom(nom))) { alert(`L'equip "${nom}" ja existeix.`); return; }
+    eq = { id: slugify(nom), nom, curt: nom.toUpperCase().slice(0,16),
+           genere: /fem|nia|dona/i.test(nom) ? 'F' : 'M',
+           emoji: /magic|màgic/i.test(nom) ? '⭐' : (/fem/i.test(nom) ? '🔴' : '⚫'),
+           competicio: comp || 'Altres competicions', clubNom: 'C.B GRUP BARNA',
+           posicio: null, equipsGrup: null, notaLliga: '', manual: true };
+    OV.extraEquips.push(eq);
+  } else {
+    eq = model().equips.find(e => e.id === sel);
+    if (!eq) { alert('Tria un equip'); return; }
+  }
+  const base = `${eq.id}_${data}`;
+  let id = base, n = 1;
+  while (model().partits.some(p => p.id === id)) id = `${base}_${++n}`;
+  OV.extraPartits.push({
+    id, equipId: eq.id, data, hora,
+    local: casa ? 'C.B GRUP BARNA' : rival, visitant: casa ? rival : 'C.B GRUP BARNA',
+    casa, categoria: eq.competicio, pista, adreca: '',
+    puntsLocal: null, puntsVisitant: null, estat: 'pendent', manual: true });
+  saveOverrides(); renderAll();
+  document.getElementById('mx-rival').value = ''; document.getElementById('mx-nom').value = '';
+  alert(`✅ Partit afegit: ${eq.nom} · ${fmtDia(data)} ${hora}`);
+}
+function renderManuals() {
+  const box = document.getElementById('mx-list'); if (!box) return;
+  const m = model();
+  // selector d'equips (tots, per poder afegir també partits extra a equips existents)
+  const sel = document.getElementById('mx-equip');
+  if (sel) {
+    const v = sel.value;
+    sel.innerHTML = '<option value="__nou__">➕ Equip nou…</option>'
+      + m.equips.map(e=>`<option value="${e.id}">${e.emoji||''} ${e.nom}</option>`).join('');
+    if ([...sel.options].some(o=>o.value===v)) sel.value = v;
+  }
+  const manuals = m.partits.filter(p => p.manual).sort((a,b)=>(a.data+a.hora).localeCompare(b.data+b.hora));
+  box.innerHTML = manuals.length ? manuals.map(p=>{
+    const e = m.equips.find(x=>x.id===p.equipId) || {};
+    return `<div class="team-row"><span class="em">${e.emoji||'🏀'}</span>
+      <span class="nm"><b>${e.nom} · ${p.casa?'vs':'@'} ${p.casa?p.visitant:p.local}</b>
+      <small>${fmtDia(p.data)} · ${p.hora} · ${p.pista||'sense pista'}</small></span>
+      <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delPartitManual('${p.id}')">✕</button></div>`;
+  }).join('') : '<p style="font-size:11px;color:var(--muted)">Encara no hi ha partits afegits a mà.</p>';
+}
+function delPartitManual(id) {
+  const p = OV.extraPartits.find(x=>x.id===id);
+  OV.extraPartits = OV.extraPartits.filter(x=>x.id!==id);
+  // si l'equip es queda sense cap partit i era manual, també s'esborra
+  if (p && !OV.extraPartits.some(x=>x.equipId===p.equipId)) {
+    const eq = OV.extraEquips.find(e=>e.id===p.equipId && e.manual);
+    if (eq) OV.extraEquips = OV.extraEquips.filter(e=>e.id!==eq.id);
+  }
+  saveOverrides(); renderAll();
+}
+
 async function addFons() {
   const nom = document.getElementById('f-nom').value.trim();
   const files = [...document.getElementById('f-foto').files];
@@ -1672,7 +1761,7 @@ function showView(v) {
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
 }
-function renderAll(){ renderJornada(); renderResultats(); renderEquips(); renderJugadors(); renderFons(); omplirFons(); }
+function renderAll(){ renderJornada(); renderResultats(); renderEquips(); renderJugadors(); renderFons(); renderManuals(); omplirFons(); }
 
 /* ---------- listeners ---------- */
 document.getElementById('tabs').addEventListener('click', e=>{
@@ -1724,6 +1813,7 @@ document.getElementById('c-fons').addEventListener('change', async e=>{
   cFonsSel = item ? {tipus, id} : null;
 });
 document.getElementById('f-add').addEventListener('click', ()=>addFons().catch(err=>alert('Error: '+err.message)));
+document.getElementById('mx-add').addEventListener('click', ()=>{ try { addPartitManual(); } catch(e){ alert('Error: '+e.message); } });
 document.getElementById('j-add').addEventListener('click', ()=>addJugador().catch(err=>alert('Error: '+err.message)));
 document.getElementById('c-cap-copy').addEventListener('click', async ()=>{
   await navigator.clipboard.writeText(document.getElementById('c-caption').value);
