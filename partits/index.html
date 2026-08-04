@@ -389,11 +389,11 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
             <option value="1080x1350">▯ Vertical 4:5 · 1080×1350</option>
           </select>
         </label>
-        <label class="c-lab">Foto jugador/a (tu la puges)
-          <input type="file" id="c-photo" accept="image/*">
+        <label class="c-lab">Fons del cartell
+          <select id="c-fons"><option value="">— Sense foto (color de marca) —</option></select>
         </label>
-        <label class="c-lab">…o tria de la plantilla
-          <select id="c-player"><option value="">—</option></select>
+        <label class="c-lab">…o puja una foto ara
+          <input type="file" id="c-photo" accept="image/*">
         </label>
         <label class="c-lab">Logo rival (opcional)
           <input type="file" id="c-rival" accept="image/*">
@@ -419,6 +419,15 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
           <label class="c-lab" style="grid-column:1/-1">Ronda<input type="text" id="se-ronda" placeholder="Ex: SEMIFINALS · FASE D'ASCENS"></label>
         </div>
       </div>
+      <div id="c-sugg" style="font-size:12px;padding:10px 12px;background:#EAF4EE;border:1px solid rgba(27,127,75,.3);border-radius:10px;margin-bottom:10px;display:none"></div>
+      <details style="margin-bottom:10px"><summary style="font-size:12px;cursor:pointer;color:var(--red-ink)"><b>✏️ Editar la peça</b> (títol, enquadrament i posició de la foto)</summary>
+        <div class="c-grid" style="margin-top:10px">
+          <label class="c-lab">Títol (buit = automàtic)<input type="text" id="c-titol" placeholder="Ex: DIA DE PARTIT"></label>
+          <label class="c-lab">Subtítol / peu<input type="text" id="c-sub" placeholder="Ex: VINE A LA NAU"></label>
+          <label class="c-lab">Zoom de la foto<input type="range" id="c-zoom" min="100" max="200" value="100"></label>
+          <label class="c-lab">Enquadrament vertical<input type="range" id="c-pany" min="0" max="100" value="25"></label>
+        </div>
+      </details>
       <p style="font-size:11px">💡 Si puges una <b>plantilla pròpia</b> (el disseny que tu vulguis, 1080×1350), la app només hi escriu a sobre les dades del partit: marcador si s'ha jugat, o dia i hora si és prèvia. Res més.</p>
       <button class="g-btn" id="c-gen">⚡ Generar cartell</button>
       <button class="g-btn ghost" id="c-down" style="display:none">⬇ Descarregar PNG</button>
@@ -449,6 +458,16 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
         <p>Arrossega aquí els <b>Calendari Global Equip</b> (PDF de basquetcatala.cat). <b>Pots deixar-los tots de cop</b>: un per equip — sèniors A i B, júnior, cadet, infantil, mini… Es distingeix sol si l'equip és A o B. Es detecten sols els partits, la categoria, casa/fora i la pista. Els partits nous s'afegeixen i els existents s'actualitzen (canvis d'hora, aplaçaments).</p>
         <div class="drop" id="drop">Deixa anar el PDF aquí<br>o <label style="color:var(--red);cursor:pointer;text-decoration:underline">tria un arxiu<input type="file" id="pdf-file" accept="application/pdf" hidden multiple></label></div>
         <div class="g-log" id="pdf-log"></div>
+      </div>
+      <div class="g-box">
+        <h3>🖼️ Fons dels cartells (fotos de la Nau)</h3>
+        <p>Puja aquí les fotos de la Nau del Clot i de partits que vulguis fer servir de fons. Després, a Cartells, tries quina va a cada peça.</p>
+        <div class="c-grid">
+          <label class="c-lab">Nom<input type="text" id="f-nom" placeholder="Ex: Nau plena, graderia"></label>
+          <label class="c-lab">Foto<input type="file" id="f-foto" accept="image/*" multiple></label>
+        </div>
+        <button class="g-btn" id="f-add">➕ Afegir fons</button>
+        <div id="f-list" style="margin-top:12px"></div>
       </div>
       <div class="g-box">
         <h3>🏃 Jugadors i jugadores per als cartells</h3>
@@ -506,7 +525,7 @@ let editMode = false;
 let state = { wk: null, filter: 'tots', team: null };
 
 function loadOverrides() {
-  const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[]};
+  const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[],fons:[],rivalStats:{}};
   try { return Object.assign(def, JSON.parse(localStorage.getItem(LS_KEY)||'{}')); }
   catch(e){ return def; }
 }
@@ -1021,9 +1040,59 @@ function renderJugadors() {
       <span class="nm"><b>${j.nom}</b><small>${e.nom||''} · sortides al cartell: ${j.cops}</small></span>
       <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delJugador('${j.id}')">✕</button></div>`;
   }).join('') || '<p style="font-size:11px;color:var(--muted)">Encara no hi ha jugadors/es pujats.</p>';
-  // selector del generador de cartells
-  const cp = document.getElementById('c-player');
-  cp.innerHTML = '<option value="">—</option>' + OV.jugadors.map(j=>`<option value="${j.id}">${j.nom}</option>`).join('');
+  // el selector de fons del generador es refresca sol
+  if (typeof omplirFons === 'function') omplirFons();
+}
+async function addFons() {
+  const nom = document.getElementById('f-nom').value.trim();
+  const files = [...document.getElementById('f-foto').files];
+  if (!files.length) { alert('Tria una o més fotos'); return; }
+  for (let i=0; i<files.length; i++) {
+    const base = nom || files[i].name.replace(/\.[^.]+$/,'');
+    const etiqueta = files.length>1 ? `${base} ${i+1}` : base;
+    if (OV.fons.some(f=>normNom(f.nom)===normNom(etiqueta))) continue;
+    OV.fons.push({ id: slugify(etiqueta)+'-'+OV.fons.length, nom: etiqueta, foto: await compressPhoto(files[i]) });
+  }
+  saveOverrides(); renderFons(); omplirFons();
+  document.getElementById('f-nom').value=''; document.getElementById('f-foto').value='';
+}
+function renderFons() {
+  const box = document.getElementById('f-list'); if (!box) return;
+  box.innerHTML = OV.fons.map(f=>`<div class="team-row"><img src="${f.foto}" style="width:52px;height:38px;border-radius:8px;object-fit:cover">
+    <span class="nm"><b>${f.nom}</b><small>fons de cartell</small></span>
+    <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delFons('${f.id}')">✕</button></div>`).join('')
+    || '<p style="font-size:11px;color:var(--muted)">Encara no hi ha fons pujats.</p>';
+}
+function delFons(id){ OV.fons = OV.fons.filter(f=>f.id!==id); saveOverrides(); renderFons(); omplirFons(); }
+
+/* Selector únic de fons: fotos de la Nau + jugadors/es, amb comptador d'usos */
+function omplirFons() {
+  const sel = document.getElementById('c-fons'); if (!sel) return;
+  const val = sel.value;
+  const sugg = suggerimentJugador();
+  sel.innerHTML = '<option value="">— Sense foto (color de marca) —</option>'
+    + (OV.fons.length ? `<optgroup label="🖼️ Fons de la Nau">${OV.fons.map(f=>`<option value="fons:${f.id}">${f.nom}</option>`).join('')}</optgroup>` : '')
+    + (OV.jugadors.length ? `<optgroup label="🏃 Jugadors i jugadores">${OV.jugadors
+        .slice().sort((a,b)=>(a.cops-b.cops)||((a.ultimUs||'').localeCompare(b.ultimUs||'')))
+        .map(j=>`<option value="jug:${j.id}">${j.id===sugg?.id ? '⭐ ' : ''}${j.nom} · ${j.cops===0?'mai publicat':`${j.cops} cop${j.cops>1?'s':''}`}</option>`).join('')}</optgroup>` : '');
+  if ([...sel.options].some(o=>o.value===val)) sel.value = val;
+  mostraSuggeriment();
+}
+function suggerimentJugador(eqId) {
+  const p = model().partits.find(x=>x.id===document.getElementById('c-match')?.value);
+  const cands = OV.jugadors.filter(j => !eqId ? (!p || j.equipId===p.equipId) : j.equipId===eqId);
+  const llista = cands.length ? cands : OV.jugadors;
+  if (!llista.length) return null;
+  return llista.slice().sort((a,b)=>(a.cops-b.cops)||((a.ultimUs||'').localeCompare(b.ultimUs||'')))[0];
+}
+function mostraSuggeriment() {
+  const box = document.getElementById('c-sugg'); if (!box) return;
+  const j = suggerimentJugador();
+  if (!j) { box.style.display='none'; return; }
+  const usats = OV.jugadors.filter(x=>x.cops>0).length;
+  box.style.display='block';
+  box.innerHTML = `⭐ <b>Et toca posar: ${j.nom}</b> — ${j.cops===0?'encara no ha sortit mai':'fa més temps que no surt'}.`
+    + ` <span style="color:var(--muted)">(${usats}/${OV.jugadors.length} ja publicats · no es repeteix ningú fins que hagin sortit tots)</span>`;
 }
 function delJugador(id){ OV.jugadors = OV.jugadors.filter(j=>j.id!==id); saveOverrides(); renderJugadors(); }
 function pickRotacio(equipId) {
@@ -1109,10 +1178,12 @@ function fillCartellSelect() {
 function loadImg(src){ return new Promise((res,rej)=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=rej; i.src=src; }); }
 function fileToImg(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>loadImg(r.result).then(res,rej); r.readAsDataURL(file); }); }
 function drawCover(ctx,img,x,y,w,h){
-  const s = Math.max(w/img.width, h/img.height);
+  const zoom = (parseInt(document.getElementById('c-zoom')?.value) || 100) / 100;
+  const pan  = (parseInt(document.getElementById('c-pany')?.value ?? 25)) / 100;   // 0 = dalt, 1 = baix
+  const s = Math.max(w/img.width, h/img.height) * zoom;
   const iw = img.width*s, ih = img.height*s;
   ctx.save(); ctx.beginPath(); ctx.rect(x,y,w,h); ctx.clip();
-  ctx.drawImage(img, x+(w-iw)/2, y+(h-ih)*0.25, iw, ih); // lleuger biaix cap amunt (cares)
+  ctx.drawImage(img, x+(w-iw)/2, y+(h-ih)*pan, iw, ih);
   ctx.restore();
 }
 function drawLogo(ctx, img, cx, cy, size, fallbackTxt, dark) {
@@ -1437,16 +1508,19 @@ async function genCartell() {
     ctx.fillStyle = FG; ctx.textAlign='center';
     ctx.font = `${px(32)}px 'Anton'`; ctx.fillText('V', W/2, yLogos + px(11));
     // títol sencer sota la jugadora
-    ctx.font = fitText(ctx, 'DE PARTIT', W - px(80), "{px}px 'Anton'", px(150));
-    ctx.fillText('UN DIA', W/2, fotoH + bLogos + lh);
-    ctx.fillText('DE PARTIT', W/2, fotoH + bLogos + lh * 2);
+    const tCustom = (document.getElementById('c-titol').value || '').trim().toUpperCase();
+    const l1 = tCustom ? (tCustom.split(' ').slice(0, Math.ceil(tCustom.split(' ').length/2)).join(' ')) : 'UN DIA';
+    const l2 = tCustom ? (tCustom.split(' ').slice(Math.ceil(tCustom.split(' ').length/2)).join(' ')) : 'DE PARTIT';
+    ctx.font = fitText(ctx, l2 || l1, W - px(80), "{px}px 'Anton'", px(150));
+    ctx.fillText(l1, W/2, fotoH + bLogos + lh);
+    if (l2) ctx.fillText(l2, W/2, fotoH + bLogos + lh * 2);
     ctx.fillStyle = BAR; ctx.fillRect(0, H-peu, W, peu);
     ctx.fillStyle = BART; ctx.font = `700 ${px(24)}px 'Inter'`;
     ctx.fillText(`${e.nom.toUpperCase()} | ${dataFmt} | ${p.pista.slice(0,26)}`, W/2, H - peu/2 + px(9));
   }
   else {
     /* ---- VICTÒRIA / FINAL ---- */
-    const word = tpl==='victoria' ? 'VICTÒRIA' : 'FINAL';
+    const word = (document.getElementById('c-titol').value || '').trim().toUpperCase() || (tpl==='victoria' ? 'VICTÒRIA' : 'FINAL');
     if (cPhoto) { drawCover(ctx, cPhoto, 0, 0, W, H);
       const g = ctx.createLinearGradient(0,0,0,H);
       const t0 = mode==='cream'?'244,241,236':'14,17,22';
@@ -1554,7 +1628,8 @@ async function genFinde(m) {
 
   ctx.fillStyle = RED; ctx.fillRect(0,H-px(64),W,px(64));
   ctx.fillStyle = WHITE; ctx.textAlign='center'; ctx.font = `700 ${px(23)}px 'Inter'`;
-  ctx.fillText('CB GRUP BARNA · @CBGRUPBARNA · #SOMCLOT', W/2, H-px(22));
+  const sub = (document.getElementById('c-sub').value || '').trim().toUpperCase();
+  ctx.fillText(sub || 'CB GRUP BARNA · @CBGRUPBARNA · #SOMCLOT', W/2, H-px(22));
 
   cv.style.display='block';
   document.getElementById('c-down').style.display='inline-flex';
@@ -1587,7 +1662,7 @@ function showView(v) {
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
 }
-function renderAll(){ renderJornada(); renderResultats(); renderEquips(); renderJugadors(); }
+function renderAll(){ renderJornada(); renderResultats(); renderEquips(); renderJugadors(); renderFons(); omplirFons(); }
 
 /* ---------- listeners ---------- */
 document.getElementById('tabs').addEventListener('click', e=>{
@@ -1601,6 +1676,7 @@ function toggleCamps() {
   document.getElementById('c-rivalstats').style.display = t==='stats' ? 'block' : 'none';
   document.getElementById('c-serie').style.display     = t==='serie' ? 'block' : 'none';
   if (t==='stats') carregaRivalStats();
+  mostraSuggeriment();
 }
 function rivalDelSelect() {
   const p = model().partits.find(x=>x.id===document.getElementById('c-match').value);
@@ -1628,10 +1704,16 @@ document.getElementById('c-tpl').addEventListener('change', ()=>{ fillCartellSel
 document.getElementById('c-photo').addEventListener('change', async e=>{ if(e.target.files[0]) cPhoto = await fileToImg(e.target.files[0]); });
 document.getElementById('c-rival').addEventListener('change', async e=>{ if(e.target.files[0]) cRivalLogo = await fileToImg(e.target.files[0]); });
 document.getElementById('c-bg').addEventListener('change', async e=>{ cBgTpl = e.target.files[0] ? await fileToImg(e.target.files[0]) : null; });
-document.getElementById('c-player').addEventListener('change', async e=>{
-  const j = OV.jugadors.find(x=>x.id===e.target.value);
-  cPhoto = j ? await loadImg(j.foto) : null;
+let cFonsSel = null;   // {tipus:'jug'|'fons', id}
+document.getElementById('c-fons').addEventListener('change', async e=>{
+  const v = e.target.value;
+  if (!v) { cPhoto = null; cFonsSel = null; return; }
+  const [tipus, id] = v.split(':');
+  const item = tipus==='jug' ? OV.jugadors.find(x=>x.id===id) : OV.fons.find(x=>x.id===id);
+  cPhoto = item ? await loadImg(item.foto) : null;
+  cFonsSel = item ? {tipus, id} : null;
 });
+document.getElementById('f-add').addEventListener('click', ()=>addFons().catch(err=>alert('Error: '+err.message)));
 document.getElementById('j-add').addEventListener('click', ()=>addJugador().catch(err=>alert('Error: '+err.message)));
 document.getElementById('c-cap-copy').addEventListener('click', async ()=>{
   await navigator.clipboard.writeText(document.getElementById('c-caption').value);
@@ -1670,8 +1752,18 @@ document.getElementById('c-gamedays').addEventListener('click', async ()=>{
     + (sense.length?`\n⚠️ Sense jugadors/es pujats per: ${sense.join(', ')} (surten sense foto).`:''));
 });
 document.getElementById('c-gen').addEventListener('click', ()=>genCartell().catch(err=>alert('Error generant: '+err.message)));
+['c-zoom','c-pany'].forEach(id => document.getElementById(id).addEventListener('input', ()=>{
+  if (document.getElementById('c-canvas').style.display==='block') genCartell().catch(()=>{});
+}));
+['c-titol','c-sub'].forEach(id => document.getElementById(id).addEventListener('change', ()=>{
+  if (document.getElementById('c-canvas').style.display==='block') genCartell().catch(()=>{});
+}));
 document.getElementById('c-down').addEventListener('click', ()=>{
   const p = model().partits.find(x=>x.id===document.getElementById('c-match').value);
+  if (cFonsSel && cFonsSel.tipus==='jug') {           // queda registrat perquè no es repeteixi
+    const j = OV.jugadors.find(x=>x.id===cFonsSel.id);
+    if (j) { j.cops++; j.ultimUs = new Date().toISOString(); saveOverrides(); renderJugadors(); omplirFons(); }
+  }
   const a = document.createElement('a');
   a.href = document.getElementById('c-canvas').toDataURL('image/png');
   const tplv = document.getElementById('c-tpl').value;
