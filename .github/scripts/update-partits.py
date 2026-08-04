@@ -71,6 +71,7 @@ def parse_lines(lines):
             continue
         dd, mm, yyyy, hora = dm.groups()
         out.append({
+            "clubNom": (local if casa else visitant).strip(),
             "data": f"{yyyy}-{mm}-{dd}", "hora": hora, "local": local.strip(),
             "visitant": visitant.strip(), "casa": casa, "categoria": categoria,
             "pista": pista, "adreca": adreca,
@@ -85,7 +86,8 @@ def slugify(s):
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 def main():
-    urls = [f"https://www.basquetcatala.cat/partits/calendari_club_mensual/{CLUB_ID}"]
+    urls = [f"https://www.basquetcatala.cat/partits/calendari_club_global/{CLUB_ID}",
+            f"https://www.basquetcatala.cat/partits/calendari_club_mensual/{CLUB_ID}"]
     scraped = []
     for url in urls:
         try:
@@ -102,18 +104,23 @@ def main():
 
     data = json.loads(DATA.read_text(encoding="utf-8"))
     by_cat = {(e.get("competicio") or "").upper(): e for e in data["equips"]}
+    # clau forta: nom exacte de l'equip a la FCBQ (distingeix A de B dins la mateixa categoria)
+    by_club = {(e.get("clubNom") or "").upper(): e for e in data["equips"] if e.get("clubNom")}
     index = {p["id"]: p for p in data["partits"]}
     added = updated = results = 0
     for s in scraped:
-        eq = by_cat.get(s["categoria"].upper())
+        eq = by_club.get(s.get("clubNom", "").upper()) or by_cat.get(s["categoria"].upper())
         if not eq:
             if not s["categoria"]:
                 continue
-            eq = {"id": slugify(s["categoria"]), "nom": s["categoria"].title(),
-                  "curt": s["categoria"][:14], "emoji": "🏀", "competicio": s["categoria"],
+            eq = {"id": slugify(s["categoria"] + " " + s.get("clubNom", "")[-1:]),
+                  "nom": s["categoria"].title(), "curt": s["categoria"][:14], "emoji": "🏀",
+                  "competicio": s["categoria"], "clubNom": s.get("clubNom", ""),
                   "posicio": None, "equipsGrup": None, "notaLliga": ""}
             data["equips"].append(eq)
             by_cat[s["categoria"].upper()] = eq
+            if eq["clubNom"]:
+                by_club[eq["clubNom"].upper()] = eq
         pid = f"{eq['id']}_{s['data']}"
         if pid in index:
             p = index[pid]
