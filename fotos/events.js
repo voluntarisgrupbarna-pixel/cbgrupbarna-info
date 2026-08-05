@@ -181,7 +181,7 @@ window.GALERIA_EVENTS = [
   {
     "id": "3x3-westfield-glories-2026",
     "title": "3x3 Westfield Glòries 2026",
-    "description": "4a edició del torneig 3x3 al Westfield Glòries. 377 fotos de FotoJane.",
+    "description": "3a edició del torneig 3x3 al Westfield Glòries. 377 fotos de FotoJane.",
     "date": "2026-06-06",
     "location": "Westfield Glòries, Barcelona",
     "season": "2025-2026",

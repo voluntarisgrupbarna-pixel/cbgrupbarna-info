@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Gestió de partits · CB Grup Barna</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#2ea043}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
+  nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav img{width:34px;height:34px;object-fit:contain}
+  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t span{color:var(--red)}
+  .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--muted)}
+  .wrap{max-width:900px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:2rem}
+  h1 span{color:var(--red)}
+  .sub{color:var(--muted);font-size:.88rem;margin:.3rem 0 1.5rem;line-height:1.55}
+  .sub a{color:var(--red)}
+  h2{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;margin:1.6rem 0 .8rem}
+  h2 span{color:var(--red)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem}
+  .grid .full{grid-column:1/-1}
+  .grid .half{grid-column:span 2}
+  @media(max-width:660px){.grid{grid-template-columns:1fr}.grid .half{grid-column:auto}}
+  .fgroup{display:flex;flex-direction:column;gap:.3rem}
+  .field-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .field-input{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Outfit',sans-serif;font-size:.88rem}
+  .field-input:focus{outline:none;border-color:var(--red)}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .btn.small{padding:.3rem .65rem;font-size:.72rem}
+  .err{display:none;background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .hint{font-size:.72rem;color:var(--muted);margin-top:.6rem;line-height:1.5}
+  .hint a{color:rgba(200,16,46,.85)}
+  .day{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--red);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin:1.2rem 0 .5rem;letter-spacing:.04em}
+  .prow{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px dashed var(--line);font-size:.85rem;flex-wrap:wrap}
+  .prow:last-child{border-bottom:none}
+  .cond{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:.15rem .55rem;flex:none}
+  .cond.local{background:rgba(200,16,46,.18);color:#ff8fa0}
+  .cond.visitant{background:rgba(255,255,255,.07);color:var(--muted)}
+  .pinfo{flex:1;min-width:180px}
+  .pinfo b{display:block;font-weight:500}
+  .pinfo small{color:var(--muted);font-size:.73rem}
+  .res{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;flex:none;letter-spacing:.05em}
+  .res.win{color:var(--green)}
+  .res.loss{color:var(--muted)}
+  .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
+  .del:hover{color:#ff8fa0}
+  .empty{color:var(--muted);font-size:.85rem;padding:1rem 0}
+  #tokbox{display:none;margin-bottom:1rem}
+  .filters{display:flex;gap:.5rem;margin-bottom:.5rem;flex-wrap:wrap}
+  .filters button{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:.3rem .8rem;font-family:inherit;font-size:.72rem;cursor:pointer}
+  .filters button.on{border-color:var(--red);color:var(--txt)}
+</style>
+</head>
+<body>
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="t">GESTIÓ DE <span>PARTITS</span></div>
+  <div class="who" id="who"></div>
+</nav>
+
+<div class="wrap">
+  <h1>PARTITS DEL <span>CLUB</span></h1>
+  <p class="sub">Carrega aquí els partits de la jornada i afegeix el resultat quan s'acabin.
+    Es publiquen automàticament a <a href="/partits/">la pàgina de partits</a>.</p>
+
+  <div class="card" id="tokbox">
+    <div class="fgroup">
+      <label class="field-label">Token de GitHub (només el primer cop)</label>
+      <input class="field-input" type="password" id="tok" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+    </div>
+    <div class="hint">Crea'l a <a href="https://github.com/settings/tokens/new?scopes=repo&description=CB+Grup+Barna+Admin" target="_blank" rel="noopener">github.com/settings/tokens</a> amb permís <b>repo</b>.</div>
+    <div style="margin-top:.8rem"><button class="btn" onclick="saveTok()">Guardar token</button></div>
+  </div>
+
+  <h2>AFEGIR <span>PARTIT</span></h2>
+  <div class="card">
+    <div class="grid">
+      <div class="fgroup">
+        <label class="field-label">Categoria *</label>
+        <select class="field-input" id="f-cat">
+          <option>Sènior</option><option>Sub-22</option><option>Júnior</option><option>Cadet</option>
+          <option>Infantil</option><option>Preinfantil</option><option>Mini</option><option>Premini</option><option>Open</option>
+        </select>
+      </div>
+      <div class="fgroup">
+        <label class="field-label">Equip *</label>
+        <select class="field-input" id="f-gen"><option>Masculí</option><option>Femení</option><option>Mixt</option></select>
+      </div>
+      <div class="fgroup">
+        <label class="field-label">Lletra / grup</label>
+        <input class="field-input" id="f-lletra" placeholder="Ex: A, B…">
+      </div>
+      <div class="fgroup half"><label class="field-label">Rival *</label><input class="field-input" id="f-rival" placeholder="Nom del club rival"></div>
+      <div class="fgroup">
+        <label class="field-label">Condició *</label>
+        <select class="field-input" id="f-cond"><option value="local">Local</option><option value="visitant">Visitant</option></select>
+      </div>
+      <div class="fgroup"><label class="field-label">Data *</label><input class="field-input" id="f-data" type="date"></div>
+      <div class="fgroup"><label class="field-label">Hora *</label><input class="field-input" id="f-hora" type="time"></div>
+      <div class="fgroup"><label class="field-label">Competició</label><input class="field-input" id="f-comp" placeholder="Lliga, Copa…"></div>
+      <div class="fgroup full"><label class="field-label">Pavelló / lloc *</label><input class="field-input" id="f-lloc" placeholder="Ex: Nau del Clot"></div>
+    </div>
+    <div class="err" id="err"></div>
+    <div class="ok" id="ok"></div>
+    <div style="margin-top:1rem"><button class="btn" id="save-btn" onclick="save()">Afegir partit</button></div>
+    <div class="hint">No es pot repetir el mateix equip amb el mateix rival el mateix dia.</div>
+  </div>
+
+  <div id="winalert" style="display:none;background:linear-gradient(135deg,rgba(46,160,67,.16),rgba(200,16,46,.12));border:1px solid rgba(46,160,67,.45);border-radius:12px;padding:1rem 1.1rem;margin-top:1.5rem">
+    <b style="font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.04em;color:#3ddc84;display:block" id="winalert-t"></b>
+    <p style="font-size:.84rem;color:rgba(255,255,255,.7);margin-top:.2rem;line-height:1.5" id="winalert-p"></p>
+    <a class="btn" style="margin-top:.8rem;text-decoration:none" href="/partits/cartell.html">Generar cartell i copy →</a>
+  </div>
+
+  <h2>PARTITS <span>CARREGATS</span></h2>
+  <div class="filters">
+    <button id="fb-props" class="on" onclick="setFilter('props')">Propers</button>
+    <button id="fb-tots" onclick="setFilter('tots')">Tots</button>
+  </div>
+  <div class="card" id="list"><div class="empty">Carregant…</div></div>
+</div>
+
+<script src="/partits/partits.js"></script>
+<script src="/scripts/google-gate.js"></script>
+<script>
+const OWNER='voluntarisgrupbarna-pixel', REPO='cbgrupbarna-info', BRANCH='main';
+const DATA_PATH='partits/partits.js';
+let ghToken=null, partits=[], filter='props';
+
+CBGBGate.protect(function(user){
+  document.getElementById('who').innerHTML =
+    (user.picture?'<img src="'+user.picture+'" style="width:24px;height:24px;border-radius:50%">':'')+
+    '<span>'+(user.email||'')+'</span>'+
+    '<button class="btn ghost small" onclick="CBGBGate.signOut()">Sortir</button>';
+  ghToken=localStorage.getItem('gh_admin_token');
+  if(!ghToken) document.getElementById('tokbox').style.display='block';
+  reload().then(render);
+});
+
+function saveTok(){
+  const v=document.getElementById('tok').value.trim(); if(!v) return;
+  localStorage.setItem('gh_admin_token',v); ghToken=v;
+  document.getElementById('tokbox').style.display='none';
+  reload().then(render);
+}
+
+async function gh(path,method='GET',body=null){
+  const res=await fetch(path.startsWith('http')?path:`https://api.github.com${path}`,{
+    method,headers:{'Authorization':`Bearer ${ghToken}`,'Accept':'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},
+    body:body?JSON.stringify(body):null});
+  if(!res.ok) throw new Error(`GitHub ${res.status}: ${(await res.text()).slice(0,180)}`);
+  return res.status===204?null:res.json();
+}
+async function getFile(p){ try{return await gh(`/repos/${OWNER}/${REPO}/contents/${p}?ref=${BRANCH}`);}catch(e){return null;} }
+function b64(s){ return btoa(unescape(encodeURIComponent(s))); }
+
+async function reload(){
+  if(!ghToken){ partits=window.PARTITS||[]; return; }
+  const f=await getFile(DATA_PATH);
+  if(f&&f.content){
+    const src=decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
+    const m=src.match(/window\.PARTITS\s*=\s*(\[[\s\S]*\]);/);
+    partits=m?(()=>{try{return JSON.parse(m[1]);}catch(e){return [];}})():[];
+  } else partits=[];
+}
+
+async function pushData(msg){
+  partits.sort((a,b)=> (a.data+a.hora).localeCompare(b.data+b.hora));
+  const src='// CB Grup Barna · Gestió de partits\n'
+   +'// Gestionat des de /partits/admin.html — NO editar a mà si no cal.\n\n'
+   +'window.PARTITS = '+JSON.stringify(partits,null,2)+';\n';
+  const f=await getFile(DATA_PATH);
+  const b={message:msg,content:b64(src),branch:BRANCH}; if(f)b.sha=f.sha;
+  await gh(`/repos/${OWNER}/${REPO}/contents/${DATA_PATH}`,'PUT',b);
+}
+
+async function save(){
+  const err=document.getElementById('err'), okb=document.getElementById('ok'), btn=document.getElementById('save-btn');
+  err.style.display='none'; okb.style.display='none';
+  const cat=document.getElementById('f-cat').value, gen=document.getElementById('f-gen').value;
+  const lletra=document.getElementById('f-lletra').value.trim();
+  const rival=document.getElementById('f-rival').value.trim();
+  const cond=document.getElementById('f-cond').value;
+  const data=document.getElementById('f-data').value, hora=document.getElementById('f-hora').value;
+  const lloc=document.getElementById('f-lloc').value.trim();
+  const comp=document.getElementById('f-comp').value.trim();
+
+  if(!ghToken){ err.textContent='Primer has de guardar el token de GitHub.'; err.style.display='block';
+    document.getElementById('tokbox').style.display='block'; return; }
+  if(!rival||!data||!hora||!lloc){ err.textContent='Falten camps obligatoris (rival, data, hora o pavelló).'; err.style.display='block'; return; }
+
+  const equip=`${cat} ${gen}${lletra?' '+lletra:''}`;
+  btn.disabled=true; btn.textContent='Guardant…';
+  try{
+    await reload();
+    if(partits.some(p=>p.equip===equip && p.data===data && p.rival.toLowerCase()===rival.toLowerCase()))
+      throw new Error(`Aquest partit ja està carregat: ${equip} vs ${rival} el ${data}.`);
+    partits.push({id:`${data}-${equip}-${rival}`.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-'),
+      equip,categoria:cat,genere:gen,rival,data,hora,lloc,condicio:cond,competicio:comp||null,resultat:null});
+    await pushData(`partits: ${equip} vs ${rival} (${data}) [skip ci]`);
+    okb.textContent=`✔ Partit afegit: ${equip} vs ${rival}.`; okb.style.display='block';
+    ['f-rival','f-lloc'].forEach(i=>document.getElementById(i).value='');
+    render();
+  }catch(e){ err.textContent=e.message; err.style.display='block'; }
+  btn.disabled=false; btn.textContent='Afegir partit';
+}
+
+async function setRes(id){
+  const p=partits.find(x=>x.id===id); if(!p) return;
+  const v=prompt(`Resultat de ${p.equip} vs ${p.rival}\nEscriu:  nosaltres-ells   (ex: 68-54)`,
+    p.resultat?`${p.resultat.nostre}-${p.resultat.seu}`:'');
+  if(v===null) return;
+  const m=v.trim().match(/^(\d{1,3})\s*[-–:]\s*(\d{1,3})$/);
+  if(!m){ alert('Format no vàlid. Escriu-ho com 68-54.'); return; }
+  await reload();
+  const t=partits.find(x=>x.id===id); if(!t) return;
+  t.resultat={nostre:parseInt(m[1],10), seu:parseInt(m[2],10)};
+  await pushData(`partits: resultat ${t.equip} ${m[1]}-${m[2]} [skip ci]`);
+  render();
+}
+
+async function del(id){
+  const p=partits.find(x=>x.id===id); if(!p) return;
+  if(!confirm(`Eliminar ${p.equip} vs ${p.rival} (${p.data})?`)) return;
+  await reload();
+  partits=partits.filter(x=>x.id!==id);
+  await pushData(`partits: elimina ${p.equip} vs ${p.rival} [skip ci]`);
+  render();
+}
+
+function setFilter(f){
+  filter=f;
+  document.getElementById('fb-props').classList.toggle('on',f==='props');
+  document.getElementById('fb-tots').classList.toggle('on',f==='tots');
+  render();
+}
+
+const DIES=['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
+const MESOS=['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
+function etiquetaDia(d){
+  const dt=new Date(d+'T12:00:00');
+  return `${DIES[dt.getDay()]} ${dt.getDate()} de ${MESOS[dt.getMonth()]}`;
+}
+
+function checkVictories(){
+  const limit=new Date(Date.now()-3*24*3600*1000).toISOString().slice(0,10);
+  const wins=partits.filter(p=>p.resultat && p.resultat.nostre>p.resultat.seu && p.data>=limit);
+  const a=document.getElementById('winalert');
+  if(!wins.length){ a.style.display='none'; return; }
+  a.style.display='block';
+  document.getElementById('winalert-t').textContent =
+    wins.length>1 ? `🏀 ${wins.length} VICTÒRIES AQUESTS DIES` : '🏀 TENIM UNA VICTÒRIA';
+  document.getElementById('winalert-p').textContent =
+    wins.map(w=>`${w.equip} ${w.resultat.nostre}-${w.resultat.seu} ${w.rival}`).join('  ·  ')
+    + '. Puja una foto i genera el cartell mentre és notícia.';
+}
+
+function render(){
+  checkVictories();
+  const box=document.getElementById('list');
+  const avui=new Date().toISOString().slice(0,10);
+  let list=partits.slice();
+  if(filter==='props') list=list.filter(p=>p.data>=avui);
+  if(!list.length){ box.innerHTML='<div class="empty">'+(filter==='props'?'No hi ha partits propers carregats.':'Encara no hi ha partits.')+'</div>'; return; }
+  const byDay={};
+  list.forEach(p=>{ (byDay[p.data]=byDay[p.data]||[]).push(p); });
+  box.innerHTML=Object.keys(byDay).sort().map(d=>`
+    <div class="day">${etiquetaDia(d)}</div>
+    ${byDay[d].map(p=>{
+      let res='<button class="btn ghost small" onclick="setRes(\''+p.id+'\')">+ Resultat</button>';
+      if(p.resultat){
+        const win=p.resultat.nostre>p.resultat.seu;
+        res=`<span class="res ${win?'win':'loss'}" title="Clica per editar" onclick="setRes('${p.id}')" style="cursor:pointer">${p.resultat.nostre}-${p.resultat.seu}</span>`
+            + (win ? ` <a class="btn ghost small" style="text-decoration:none" href="/partits/cartell.html">Cartell</a>` : '');
+      }
+      return `<div class="prow">
+        <span class="cond ${p.condicio}">${p.condicio}</span>
+        <span class="pinfo"><b>${p.equip} · ${p.rival}</b><small>${p.hora} · ${p.lloc}${p.competicio?' · '+p.competicio:''}</small></span>
+        ${res}
+        <button class="del" title="Eliminar" onclick="del('${p.id}')">✕</button>
+      </div>`;
+    }).join('')}`).join('');
+}
+</script>
+</body>
+</html>
