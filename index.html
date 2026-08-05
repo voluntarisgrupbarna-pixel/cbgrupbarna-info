@@ -653,7 +653,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <section class="section band-soft" id="calendari">
     <div class="wrap">
       <div class="sec-head reveal">
-        <p class="eyebrow">Temporada 2025 · 2026</p>
+        <p class="eyebrow" id="cal-season">Temporada 2026 · 2027</p>
         <div class="rule"></div>
         <h2>Calendari del Barna</h2>
         <p>Els propers partits de tots els equips del club. Horaris, pista i competició.</p>
@@ -866,9 +866,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- Dades de partits · gestionades des de /partits/admin.html -->
-<script src="/partits/partits.js"></script>
-
 <script>
   // ==== MENÚ ====
   (function () {
@@ -929,28 +926,37 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         + 'Consulta el <a href="/partits/">calendari complet</a> o segueix-nos a '
         + '<a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</div>';
     }
-    function render() {
-      var all = window.PARTITS || [];
+    function render(data) {
+      var season = document.getElementById('cal-season');
+      if (season && data.temporada) season.textContent = 'Temporada ' + data.temporada.replace('-', ' · ');
+      var equips = {};
+      (data.equips || []).forEach(function (e) { equips[e.id] = e; });
       var ahir = new Date(Date.now() - 36 * 3600 * 1000).toISOString().slice(0, 10);
-      var props = all.filter(function (p) { return p && p.data >= ahir && !p.resultat; })
+      var props = (data.partits || [])
+        .filter(function (p) { return p && p.data >= ahir && p.puntsLocal == null; })
         .sort(function (a, b) { return (a.data + (a.hora || '')).localeCompare(b.data + (b.hora || '')); })
         .slice(0, 6);
       if (!props.length) return buit();
       box.innerHTML = props.map(function (p) {
         var dt = new Date(p.data + 'T12:00:00');
+        var eq = equips[p.equipId];
+        var nostre = eq ? eq.nom : (p.casa ? p.local : p.visitant);
+        var rival = p.casa ? p.visitant : p.local;
         return '<div class="cal-row">'
           + '<span class="cal-date"><b>' + dt.getDate() + '</b>' + MESOS[dt.getMonth()] + '</span>'
           + '<span class="cal-main">'
-            + '<span class="cal-team">' + esc(p.equip) + ' · ' + esc(p.rival) + '</span>'
-            + '<span class="cal-meta">' + esc(p.lloc || '') + (p.competicio ? ' · ' + esc(p.competicio) : '') + '</span>'
+            + '<span class="cal-team">' + esc(nostre) + ' · ' + esc(rival) + '</span>'
+            + '<span class="cal-meta">' + esc(p.pista || '') + '</span>'
           + '</span>'
           + '<span class="cal-when">' + DIES[dt.getDay()] + (p.hora ? ' · ' + esc(p.hora) : '') + '</span>'
-          + '<span class="cal-cond">' + (p.condicio === 'local' ? 'A casa' : 'A fora') + '</span>'
+          + '<span class="cal-cond">' + (p.casa ? 'A casa' : 'A fora') + '</span>'
           + '</div>';
       }).join('');
     }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render);
-    else render();
+    fetch('/partits/data.json?t=' + Math.floor(Date.now() / 3600000))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d) render(d); else buit(); })
+      .catch(buit);
   })();
 
   // ==== VALORACIÓ DE LA WEB ====
