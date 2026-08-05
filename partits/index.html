@@ -97,6 +97,36 @@ h1 span { color: var(--red); }
 .tab.on { background: var(--red); color:#fff; border-color:var(--red); }
 
 .wrap { max-width: 680px; margin: 0 auto; padding: 16px 12px; }
+/* barra superior fixa: sortida a la web i entrada al panell */
+.topbar {
+  display:flex; align-items:center; gap:10px; padding:9px 14px;
+  background:var(--paper); border-bottom:1px solid var(--border);
+  font-size:12px; font-weight:600;
+}
+.tb-home { color:var(--muted); text-decoration:none; }
+.tb-home:hover { color:var(--ink); }
+.tb-admin {
+  margin-left:auto; text-decoration:none; color:#fff; background:var(--ink);
+  padding:7px 14px; border-radius:99px; letter-spacing:.2px;
+}
+.tb-admin:hover { background:var(--red); }
+/* acabats més suaus i airejats */
+.match, .team-row, .g-box, .winners, .stat, .tile { border-radius:16px; }
+.match { padding:16px; margin-bottom:12px; box-shadow:0 1px 2px rgba(14,17,22,.04); }
+.team-row { padding:14px 16px; margin-bottom:10px; box-shadow:0 1px 2px rgba(14,17,22,.04); transition:.15s; }
+.team-row:hover { border-color:rgba(230,51,41,.35); transform:translateY(-1px); }
+.g-box { padding:22px; margin-bottom:16px; box-shadow:0 1px 2px rgba(14,17,22,.04); }
+.tab { transition:.15s; }
+.chip { transition:.12s; }
+.sec-t { margin:26px 0 12px; }
+/* capçaleres de secció dins de Gestió */
+.g-step { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.g-step i {
+  font-style:normal; width:26px; height:26px; flex:0 0 26px; border-radius:50%;
+  background:var(--red); color:#fff; font-size:12px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+.g-step h3 { margin:0 !important; }
 .view { display:none; }
 .view.on { display:block; animation: fade .25s; }
 @keyframes fade { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
@@ -124,6 +154,14 @@ h1 span { color: var(--red); }
 
 /* ===== FILTRES ===== */
 .chips { display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:8px; scrollbar-width:none; }
+.seg { display:flex; gap:4px; background:var(--panel2); border-radius:99px; padding:4px; margin-bottom:10px; }
+.seg button { flex:1; border-radius:99px; padding:9px 10px; font-size:12.5px; font-weight:700; color:var(--muted); transition:.15s; }
+.seg button.on { background:var(--paper); color:var(--ink); box-shadow:0 1px 3px rgba(14,17,22,.10); }
+.m-rival { margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); font-size:12px; }
+.m-rival b { color:var(--ink); }
+.m-rival .r-tit { font-size:9.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.m-rival .r-fila { display:flex; gap:14px; flex-wrap:wrap; color:var(--muted); }
+.m-rival .r-fila span b { display:block; font-family:'Anton',sans-serif; font-size:19px; color:var(--ink); line-height:1.1; }
 .chips::-webkit-scrollbar { display:none; }
 .chip {
   flex-shrink:0; padding:6px 12px; border-radius:99px; font-size:12px; font-weight:600;
@@ -295,11 +333,15 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 </head>
 <body>
 
+<div class="topbar">
+  <a class="tb-home" href="/">← cbgrupbarna.info</a>
+  <a class="tb-admin" href="/admin/">⚙️ Panell d'administració</a>
+</div>
+
 <header>
   <img src="../logo.png" alt="Escut CB Grup Barna">
   <h1>Partits <span>&amp;</span> Resultats</h1>
   <div class="head-tag">El club de bàsquet més gran de Barcelona · Temporada 2026-2027 · #SomClot</div>
-  <br><a class="back" href="../">← Tornar a cbgrupbarna.info</a>
   <br><a class="back" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="border:1px solid rgba(227,30,36,.45);border-radius:99px;padding:6px 14px;margin-top:8px;color:#E31E24">📸 SEGUEIX @CBGRUPBARNA</a>
   <br><button class="back" id="pwa-btn" style="display:none;border:1px solid var(--border);border-radius:99px;padding:6px 14px;margin-top:8px">📲 INSTAL·LAR L'APP AL MÒBIL</button>
 </header>
@@ -307,6 +349,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 <nav class="tabs" id="tabs">
   <button class="tab on" data-v="jornada">🗓 Jornada</button>
   <button class="tab" data-v="resultats">📊 Resultats i ratxes</button>
+  <button class="tab" data-v="analisi">📈 Anàlisi</button>
   <button class="tab" data-v="equips">👥 Equips</button>
   <button class="tab" data-v="cartells">🎨 Cartells</button>
   <button class="tab" data-v="gestio">⚙️ Gestió</button>
@@ -321,6 +364,12 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       <button class="wk-btn" id="wk-next">›</button>
     </div>
     <button class="wk-today" id="wk-today">▶ Anar al proper cap de setmana amb partits</button>
+    <div class="seg" id="seg-abast">
+      <button class="on" data-abast="setmana">Cap de setmana</button>
+      <button data-abast="mes">Tot el mes</button>
+    </div>
+    <div class="chips" id="filters-genere"></div>
+    <div class="chips" id="filters-cat"></div>
     <div class="chips" id="filters"></div>
     <div id="jornada-list"></div>
     <a class="wa-btn" id="wa-share" target="_blank" rel="noopener">📲 Enviar el finde per WhatsApp</a>
@@ -338,6 +387,15 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <div id="pendents-list"></div>
   </section>
 
+  <!-- ===== VISTA ANÀLISI ===== -->
+  <section class="view" id="v-analisi">
+    <div id="an-avis"></div>
+    <div id="an-setmana"></div>
+    <div id="an-equips"></div>
+    <div id="an-pistes"></div>
+    <div id="an-rivals"></div>
+  </section>
+
   <!-- ===== VISTA EQUIPS ===== -->
   <section class="view" id="v-equips">
     <div id="equips-list"></div>
@@ -351,7 +409,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       <p>La generació i descàrrega de cartells és només per a l'staff de comunicació. Entra amb el Google del club. Els anàlisis i resultats són públics a les altres pestanyes.</p>
       <div id="c-gbtn" style="margin-bottom:12px"></div>
       <details><summary style="font-size:11px;color:var(--muted);cursor:pointer;margin-bottom:8px">O entrar amb clau</summary>
-      <input type="password" id="c-pass" placeholder="Clau d'accés" autocomplete="off">
+      <input type="password" id="c-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
       <button class="g-btn" id="c-unlock">Entrar</button></details>
     </div>
     <div id="cartells-open" style="display:none">
@@ -449,18 +507,24 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       <p>Zona per introduir resultats, pujar els PDF de la federació i actualitzar posicions de lliga. Entra amb el Google del club (<b>voluntarisgrupbarna@gmail.com</b>).</p>
       <div id="g-gbtn" style="margin-bottom:12px"></div>
       <details><summary style="font-size:11px;color:var(--muted);cursor:pointer;margin-bottom:8px">O entrar amb clau</summary>
-      <input type="password" id="g-pass" placeholder="Clau d'accés" autocomplete="off">
+      <input type="password" id="g-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
       <button class="g-btn" id="g-unlock">Entrar</button></details>
     </div>
     <div id="g-open" style="display:none">
+      <div class="g-box" style="background:linear-gradient(135deg,rgba(230,51,41,.10),var(--paper) 60%);border-color:rgba(230,51,41,.30)">
+        <h3>🗓️ La rutina del cap de setmana</h3>
+        <p><b>1.</b> Dijous, comprovar que hi ha tots els partits · <b>2.</b> Generar el cartell de la jornada i els game days ·
+        <b>3.</b> Dissabte i diumenge, posar els resultats · <b>4.</b> Diumenge a la nit, publicar la menció als guanyadors
+        i pujar el <b>data.json</b> perquè ho vegi tothom.</p>
+      </div>
       <div class="g-box">
-        <h3>📄 Pujar PDF de la federació</h3>
+        <div class="g-step"><i>1</i><h3>📄 Carregar els partits</h3></div>
         <p>Arrossega aquí els <b>Calendari Global Equip</b> (PDF de basquetcatala.cat). <b>Pots deixar-los tots de cop</b>: un per equip — sèniors A i B, júnior, cadet, infantil, mini… Es distingeix sol si l'equip és A o B. Es detecten sols els partits, la categoria, casa/fora i la pista. Els partits nous s'afegeixen i els existents s'actualitzen (canvis d'hora, aplaçaments).</p>
         <div class="drop" id="drop">Deixa anar el PDF aquí<br>o <label style="color:var(--red);cursor:pointer;text-decoration:underline">tria un arxiu<input type="file" id="pdf-file" accept="application/pdf" hidden multiple></label></div>
         <div class="g-log" id="pdf-log"></div>
       </div>
       <div class="g-box">
-        <h3>➕ Equips i partits d'un altre calendari</h3>
+        <div class="g-step"><i>2</i><h3>➕ Equips fora del calendari FCBQ</h3></div>
         <p>Per als equips que <b>no surten al calendari de la federació</b>: el <b>Barna Màgics</b> (Lliga ACELL), amistosos, tornejos o el 3x3. Un cop afegits, surten a la jornada, als resultats i als cartells com qualsevol altre equip.</p>
         <div class="c-grid">
           <label class="c-lab">Equip
@@ -480,7 +544,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
         <div id="mx-list" style="margin-top:12px"></div>
       </div>
       <div class="g-box">
-        <h3>🖼️ Fons dels cartells (fotos de la Nau)</h3>
+        <div class="g-step"><i>3</i><h3>🖼️ Fons per als cartells</h3></div>
         <p>Puja aquí les fotos de la Nau del Clot i de partits que vulguis fer servir de fons. Després, a Cartells, tries quina va a cada peça.</p>
         <div class="c-grid">
           <label class="c-lab">Nom<input type="text" id="f-nom" placeholder="Ex: Nau plena, graderia"></label>
@@ -490,7 +554,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
         <div id="f-list" style="margin-top:12px"></div>
       </div>
       <div class="g-box">
-        <h3>🏃 Jugadors i jugadores per als cartells</h3>
+        <div class="g-step"><i>4</i><h3>🏃 Jugadors i jugadores</h3></div>
         <p>Puja la foto amb nom i equip. <b>No es poden repetir</b>: el sistema no deixa duplicar noms i el botó de game days va rotant perquè no surti sempre la mateixa persona. Les fotos queden guardades en aquest dispositiu.</p>
         <div class="c-grid">
           <label class="c-lab">Nom<input type="text" id="j-nom" placeholder="Nom i cognom"></label>
@@ -501,12 +565,12 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
         <div id="j-list" style="margin-top:12px"></div>
       </div>
       <div class="g-box">
-        <h3>💾 Publicar canvis</h3>
+        <div class="g-step"><i>5</i><h3>💾 Publicar a la web</h3></div>
         <p>Els resultats i canvis es guarden en aquest dispositiu a l'instant. Perquè els vegi tothom: descarrega el <b>data.json</b> i puja'l a GitHub (carpeta <b>partits/</b>, botó "Add file → Upload files"). En 1 minut la web s'actualitza.</p>
         <button class="g-btn" id="g-download">⬇ Descarregar data.json</button>
         <button class="g-btn ghost" id="g-copy">📋 Copiar JSON</button>
       </div>
-      <div class="g-box">
+      <div class="g-box" style="display:none">
         <h3>🤖 Robot de la federació</h3>
         <p>Hi ha un robot programat (GitHub Actions · <b>update-partits</b>) que cada dilluns intenta baixar el calendari mensual del club de <b>basquetcatala.cat/partits/calendari_club_mensual/24</b> i actualitzar-ho tot sol. Si la federació el bloqueja, aquesta pantalla de PDF és el pla B garantit.</p>
       </div>
@@ -514,14 +578,12 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
         <h3>🧹 Manteniment</h3>
         <button class="g-btn warn" id="g-reset">Esborrar canvis locals d'aquest dispositiu</button>
       </div>
-    </div>
-  </section>
+    </section>
 </div>
 
 <button class="edit-pill" id="edit-pill">✏️ MODE GESTIÓ ACTIU · SORTIR</button>
 
 <footer>
-  <a href="../admin/" style="color:#8a8a8a;text-decoration:none;font-size:9px">⚙️ PANELL STAFF</a><br><br>
   <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="display:inline-block;background:#E31E24;color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font-family:'Anton',sans-serif;font-size:16px;letter-spacing:1px;margin-bottom:14px">📸 SEGUEIX EL BARNA A INSTAGRAM</a><br>
   <a href="/" style="color:#8a8a8a;text-decoration:none">CB GRUP BARNA · BÀSQUET AL CLOT DES DE 1965</a><br>
   Dades: FCBQ · basquetcatala.cat/club/24
@@ -535,14 +597,49 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
    Dades: partits/data.json (+ canvis locals a localStorage)
    ========================================================= */
 const LS_KEY = 'cbgbPartitsV1';
-const EDIT_KEY = 'clot1965'; // clau del mode gestió — canviar aquí si cal
+/* El codi d'accés NO és al fitxer: només se'n guarda l'empremta SHA-256, així
+   ningú el pot llegir mirant el codi font de la pàgina. Per canviar-lo, calcula
+   la nova empremta i substitueix-la aquí. */
+const EDIT_KEY_HASH = '28debfa10a50cfd9b5f78fd5e1f5e68bdaa4ffe6512e1e24489c6d9c34aa292b';
+function sha256(msg){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+  0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+  0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+  0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+  0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+  0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+  0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+  0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  let H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const b=new TextEncoder().encode(msg), l=b.length*8;
+  const n=((b.length+8)>>6)+1, w=new Uint32Array(n*16);
+  for(let i=0;i<b.length;i++) w[i>>2]|=b[i]<<(24-(i%4)*8);
+  w[b.length>>2]|=0x80<<(24-(b.length%4)*8); w[n*16-1]=l;
+  const R=(x,c)=>(x>>>c)|(x<<(32-c));
+  for(let j=0;j<n*16;j+=16){
+    const s=new Uint32Array(64);
+    for(let i=0;i<16;i++) s[i]=w[j+i];
+    for(let i=16;i<64;i++){
+      const a=s[i-15],b2=s[i-2];
+      s[i]=(s[i-16]+(R(a,7)^R(a,18)^(a>>>3))+s[i-7]+(R(b2,17)^R(b2,19)^(b2>>>10)))>>>0;
+    }
+    let [a,b3,c,d,e,f,g,h]=H;
+    for(let i=0;i<64;i++){
+      const t1=(h+(R(e,6)^R(e,11)^R(e,25))+((e&f)^(~e&g))+K[i]+s[i])>>>0;
+      const t2=((R(a,2)^R(a,13)^R(a,22))+((a&b3)^(a&c)^(b3&c)))>>>0;
+      h=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b3;b3=a;a=(t1+t2)>>>0;
+    }
+    H=[H[0]+a,H[1]+b3,H[2]+c,H[3]+d,H[4]+e,H[5]+f,H[6]+g,H[7]+h].map(x=>x>>>0);
+  }
+  return H.map(x=>x.toString(16).padStart(8,'0')).join('');
+}
 // admet prefix de patrocinador (GBK-…) i les variants C.B / C,B / CB
 const CLUB_RE = /(?:[A-Z0-9]+-)?C[.,]?\s*B[.,]?\s*GRUP\s*BARNA(?:\s+[A-Z0-9]{1,3})?/i;
 
 let BASE = { equips: [], partits: [] };
 let OV = loadOverrides();       // { resultats:{id:{pl,pv}}, posicions:{eqId:{posicio,equipsGrup}}, extraEquips:[], extraPartits:[], editsPartits:{id:{...}} }
 let editMode = false;
-let state = { wk: null, filter: 'tots', team: null };
+let state = { wk: null, filter: 'tots', team: null, abast: 'setmana', genere: 'tots', cat: 'totes' };
 
 function loadOverrides() {
   const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[],fons:[],rivalStats:{}};
@@ -631,13 +728,48 @@ function renderWeekNav(m) {
   document.getElementById('wk-next').disabled = i>=wks.length-1;
 }
 function renderFilters(m) {
+  // gènere
+  const gb = document.getElementById('filters-genere');
+  gb.innerHTML = [['tots','Tots'],['F','🔴 Femení'],['M','⚫ Masculí']]
+    .map(([id,txt])=>`<button class="chip ${state.genere===id?'on':''}" data-g="${id}">${txt}</button>`).join('');
+  // categoria (nivell: sènior, júnior, cadet…)
+  const cats = [...new Set(m.equips.map(e=>e.nom.split(' ')[0]))].sort();
+  const cb = document.getElementById('filters-cat');
+  cb.innerHTML = `<button class="chip ${state.cat==='totes'?'on':''}" data-c="totes">Totes les categories</button>`
+    + cats.map(c=>`<button class="chip ${state.cat===c?'on':''}" data-c="${c}">${c}</button>`).join('');
   const box = document.getElementById('filters');
+  const visibles = m.equips.filter(e =>
+    (state.genere==='tots' || e.genere===state.genere) &&
+    (state.cat==='totes'  || e.nom.split(' ')[0]===state.cat));
   const chips = [
-    {id:'tots', txt:'Tots'},
-    ...m.equips.map(e=>({id:'eq:'+e.id, txt:`${e.emoji} ${e.curt||e.nom}`})),
+    {id:'tots', txt:'Tots els equips'},
+    ...visibles.map(e=>({id:'eq:'+e.id, txt:`${e.emoji} ${e.curt||e.nom}`})),
     {id:'casa', txt:'🏠 Casa'}, {id:'fora', txt:'🚌 Fora'},
   ];
   box.innerHTML = chips.map(c=>`<button class="chip ${state.filter===c.id?'on':''}" data-f="${c.id}">${c.txt}</button>`).join('');
+}
+/* Dades del contrincant: com ens ha anat contra ell, la seva posició si la tenim
+   i el seu Instagram. Només surt el que sabem de veritat. */
+function dadesRival(p, m) {
+  const rival = p.casa ? p.visitant : p.local;
+  const previs = m.partits.filter(x => x.equipId===p.equipId && x.jugat && x.data < p.data
+    && (x.local===rival || x.visitant===rival));
+  const rs = (OV.rivalStats||{})[rival] || {};
+  const ig = (RIVALS && (RIVALS[p.equipId]||{})[rival]) || null;
+  const bits = [];
+  if (previs.length) {
+    const g = previs.filter(x=>x.res==='W').length;
+    const ult = previs[previs.length-1];
+    bits.push(`<span><b>${g}-${previs.length-g}</b>Nostre balanç</span>`);
+    bits.push(`<span><b>${ult.puntsLocal}-${ult.puntsVisitant}</b>Últim duel</span>`);
+  }
+  if (rs.pos)  bits.push(`<span><b>${rs.pos}a</b>Posició seva</span>`);
+  if (rs.pj != null && rs.v != null) bits.push(`<span><b>${rs.v}-${rs.d ?? 0}</b>El seu balanç</span>`);
+  return `<div class="m-rival"><div class="r-tit">El contrincant · ${rival}</div>
+    ${bits.length ? `<div class="r-fila">${bits.join('')}</div>` : ''}
+    ${!previs.length ? '<div style="color:var(--muted);font-size:11.5px;margin-top:4px">Primer enfrontament de la temporada. Les dades apareixeran quan hi hagi resultats.</div>' : ''}
+    ${ig ? `<div style="margin-top:6px"><a href="https://instagram.com/${ig.instagram.slice(1)}" target="_blank" rel="noopener" style="color:var(--red-ink);text-decoration:none;font-size:11.5px">📸 ${ig.instagram} · ${(ig.seguidors/1000).toFixed(1).replace('.',',')}K seguidors</a></div>` : ''}
+  </div>`;
 }
 function matchCard(p, m, showDate) {
   const eq = m.equips.find(e=>e.id===p.equipId) || {};
@@ -671,6 +803,7 @@ function matchCard(p, m, showDate) {
     </div>
     <div class="m-loc">📍 ${p.pista}${p.adreca?` · ${p.adreca}`:''}<a href="https://maps.google.com/?q=${mapsQ}" target="_blank" rel="noopener">COM ARRIBAR-HI →</a></div>
     <div class="m-cat">${p.categoria}</div>
+    ${dadesRival(p, m)}
     ${editRow}
   </div>`;
 }
@@ -678,9 +811,19 @@ function renderJornada() {
   const m = model();
   renderWeekNav(m);
   renderFilters(m);
-  const wkEnd = new Date(state.wk+'T12:00:00'); wkEnd.setDate(wkEnd.getDate()+6);
-  const wkEndStr = wkEnd.toISOString().slice(0,10);
-  let list = m.partits.filter(p => p.data>=state.wk && p.data<=wkEndStr);
+  let list;
+  if (state.abast === 'mes') {
+    const mes = state.wk.slice(0,7);
+    const seg = new Date(state.wk+'T12:00:00'); seg.setDate(seg.getDate()+6);
+    const mesFi = seg.toISOString().slice(0,7);           // si el cap de setmana canvia de mes
+    list = m.partits.filter(p => p.data.slice(0,7)===mes || p.data.slice(0,7)===mesFi);
+  } else {
+    const wkEnd = new Date(state.wk+'T12:00:00'); wkEnd.setDate(wkEnd.getDate()+6);
+    list = m.partits.filter(p => p.data>=state.wk && p.data<=wkEnd.toISOString().slice(0,10));
+  }
+  const eqOk = e => (state.genere==='tots' || e.genere===state.genere)
+                 && (state.cat==='totes'  || e.nom.split(' ')[0]===state.cat);
+  list = list.filter(p => { const e = m.equips.find(x=>x.id===p.equipId); return e && eqOk(e); });
   if (state.filter.startsWith('eq:')) list = list.filter(p=>p.equipId===state.filter.slice(3));
   if (state.filter==='casa') list = list.filter(p=>p.casa);
   if (state.filter==='fora') list = list.filter(p=>!p.casa);
@@ -757,6 +900,191 @@ function renderResultats() {
   document.getElementById('pendents-list').innerHTML = pend.length
     ? pend.map(p=>matchCard(p,m,true)).join('')
     : `<div class="empty">Tot al dia. Cap resultat pendent. ✅</div>`;
+}
+
+
+/* =========================================================
+   📈 ANÀLISI · lectura dels resultats propis del club
+   Tot es calcula amb els partits que hi ha a la app. Cap dada
+   inventada: si no hi ha prou mostra, es diu i no s'afirma res.
+   ========================================================= */
+const MIN_MOSTRA = 3;          // per sota d'això no traiem conclusions
+
+function analitzaEquip(eqId, m) {
+  const tots = m.partits.filter(p => p.equipId === eqId);
+  const jug = tots.filter(p => p.jugat);
+  const w = jug.filter(p => p.res === 'W'), l = jug.filter(p => p.res === 'L');
+  const pts = p => ({ nostres: p.casa ? p.puntsLocal : p.puntsVisitant,
+                      seus:    p.casa ? p.puntsVisitant : p.puntsLocal });
+  const mitjana = arr => arr.length ? Math.round(arr.reduce((a,b)=>a+b,0)/arr.length) : null;
+  const casa = jug.filter(p=>p.casa), fora = jug.filter(p=>!p.casa);
+  const bal = arr => ({ pj: arr.length, w: arr.filter(p=>p.res==='W').length, l: arr.filter(p=>p.res==='L').length });
+  // ratxa actual i millor/pitjor ratxa
+  let millorW = 0, pitjorL = 0, cW = 0, cL = 0;
+  for (const p of jug) {
+    if (p.res==='W') { cW++; cL=0; millorW=Math.max(millorW,cW); }
+    else if (p.res==='L') { cL++; cW=0; pitjorL=Math.max(pitjorL,cL); }
+  }
+  // tendència: primera meitat vs segona meitat dels partits jugats
+  let tendencia = null;
+  if (jug.length >= 6) {
+    const tall = Math.floor(jug.length/2);
+    const pct = arr => arr.filter(p=>p.res==='W').length / arr.length;
+    const d = Math.round((pct(jug.slice(tall)) - pct(jug.slice(0,tall))) * 100);
+    tendencia = { delta: d, txt: d >= 15 ? 'a més' : d <= -15 ? 'a menys' : 'estable' };
+  }
+  // rendiment per pista
+  const perPista = {};
+  for (const p of jug) {
+    const k = p.pista || '—';
+    (perPista[k] = perPista[k] || { pj:0, w:0, l:0, casa: p.casa })
+    perPista[k].pj++; perPista[k][p.res==='W'?'w':'l']++;
+  }
+  // rivals: com ens ha anat contra cadascun
+  const perRival = {};
+  for (const p of jug) {
+    const r = p.casa ? p.visitant : p.local;
+    (perRival[r] = perRival[r] || { pj:0, w:0, l:0, dif:0 });
+    const q = pts(p);
+    perRival[r].pj++; perRival[r][p.res==='W'?'w':'l']++; perRival[r].dif += q.nostres - q.seus;
+  }
+  const propers = tots.filter(p => !p.jugat && p.data >= todayStr()).slice(0, 5);
+  return {
+    pj: jug.length, w: w.length, l: l.length,
+    pf: mitjana(jug.map(p=>pts(p).nostres)), pc: mitjana(jug.map(p=>pts(p).seus)),
+    casa: bal(casa), fora: bal(fora), millorW, pitjorL, tendencia,
+    perPista, perRival, propers, restants: tots.filter(p=>!p.jugat).length, total: tots.length,
+  };
+}
+
+/* Lectures automàtiques: només s'escriuen quan la mostra ho aguanta */
+function lecturesEquip(a, e) {
+  const out = [];
+  if (a.pj < MIN_MOSTRA) return out;
+  const pct = Math.round(a.w / a.pj * 100);
+  if (a.casa.pj >= MIN_MOSTRA && a.fora.pj >= MIN_MOSTRA) {
+    const pc = a.casa.w / a.casa.pj, pf = a.fora.w / a.fora.pj;
+    if (pc - pf >= 0.3) out.push({ t:'🏠', txt:`<b>Molt fort a casa.</b> ${a.casa.w}-${a.casa.l} a la Nau i ${a.fora.w}-${a.fora.l} fora. Els partits de casa són on es guanya la temporada.` });
+    else if (pf - pc >= 0.3) out.push({ t:'🚌', txt:`<b>Millor fora que a casa</b> (${a.fora.w}-${a.fora.l} fora, ${a.casa.w}-${a.casa.l} a casa). Val la pena revisar què passa a la Nau.` });
+  }
+  if (a.pf != null && a.pc != null) {
+    const d = a.pf - a.pc;
+    if (d >= 8) out.push({ t:'📈', txt:`<b>Domini clar:</b> ${a.pf} punts de mitjana a favor i ${a.pc} en contra (+${d}).` });
+    else if (d <= -8) out.push({ t:'📉', txt:`<b>Encaixa massa:</b> ${a.pc} punts en contra per ${a.pf} a favor (${d}). El problema és defensiu.` });
+    else if (a.pj >= 5) out.push({ t:'⚖️', txt:`<b>Partits ajustats:</b> ${a.pf} a favor i ${a.pc} en contra. Cada possessió compta.` });
+  }
+  if (a.tendencia) {
+    if (a.tendencia.txt === 'a més') out.push({ t:'🚀', txt:`<b>Va a més:</b> ${a.tendencia.delta > 0 ? '+' : ''}${a.tendencia.delta} punts de percentatge de victòries a la segona meitat del calendari jugat.` });
+    if (a.tendencia.txt === 'a menys') out.push({ t:'⚠️', txt:`<b>Va a menys:</b> ${a.tendencia.delta} punts de percentatge respecte al començament. Toca reaccionar.` });
+  }
+  if (a.millorW >= 3) out.push({ t:'🔥', txt:`<b>Millor ratxa de la temporada:</b> ${a.millorW} victòries seguides.` });
+  if (a.pitjorL >= 3) out.push({ t:'🧊', txt:`Pitjor moment: ${a.pitjorL} derrotes seguides.` });
+  // rivals que se'ns han donat malament
+  const negres = Object.entries(a.perRival).filter(([,v]) => v.pj >= 2 && v.w === 0);
+  if (negres.length) out.push({ t:'🎯', txt:`<b>Bèstia negra:</b> ${negres.map(([r,v])=>`${r} (${v.pj} partits, ${v.pj} derrotes)`).join(' · ')}.` });
+  // pistes on no guanyem
+  const males = Object.entries(a.perPista).filter(([,v]) => v.pj >= 2 && v.w === 0 && !v.casa);
+  if (males.length) out.push({ t:'📍', txt:`<b>Pista complicada:</b> ${males.map(([p,v])=>`${p} (${v.l} derrotes de ${v.pj})`).join(' · ')}.` });
+  if (pct >= 70 && a.pj >= 5) out.push({ t:'🏆', txt:`<b>${pct}% de victòries.</b> Ritme de zona alta del grup.` });
+  if (pct <= 30 && a.pj >= 5) out.push({ t:'🛟', txt:`<b>${pct}% de victòries.</b> Ritme de zona baixa: els punts que queden són vitals.` });
+  return out;
+}
+
+/* Objectius: quants dels partits que queden cal guanyar */
+function objectiusEquip(a, e) {
+  if (!a.pj || !a.restants) return null;
+  const ritme = a.w / a.pj;
+  const projeccio = Math.round(a.w + ritme * a.restants);
+  const assequibles = a.propers.filter(p => {
+    const r = p.casa ? p.visitant : p.local;
+    const h = a.perRival[r];
+    return p.casa || (h && h.w > h.l);          // a casa, o rival a qui ja hem guanyat
+  });
+  return { projeccio, total: a.total, assequibles, ritme: Math.round(ritme*100) };
+}
+
+function analitzaClub(m) {
+  const jug = m.partits.filter(p => p.jugat);
+  const perPista = {}, perRival = {};
+  for (const p of jug) {
+    const k = p.pista || '—';
+    (perPista[k] = perPista[k] || { pj:0, w:0, l:0, casa:p.casa });
+    perPista[k].pj++; perPista[k][p.res==='W'?'w':'l']++;
+    const r = p.casa ? p.visitant : p.local;
+    (perRival[r] = perRival[r] || { pj:0, w:0, l:0 });
+    perRival[r].pj++; perRival[r][p.res==='W'?'w':'l']++;
+  }
+  return { jug, perPista, perRival };
+}
+
+function renderAnalisi() {
+  const m = model();
+  const club = analitzaClub(m);
+  const avis = document.getElementById('an-avis'); if (!avis) return;
+
+  if (!club.jug.length) {
+    avis.innerHTML = `<div class="g-box"><h3>📈 Encara no hi ha res a analitzar</h3>
+      <p>L'anàlisi es construeix amb <b>els resultats reals</b> dels partits. A mesura que els vagis introduint a Gestió,
+      aquí apareixeran les ratxes de cada equip, la tendència, les pistes on costa guanyar, les bèsties negres i
+      quants partits calen per pujar posicions.<br><br>
+      <b>${m.partits.length} partits</b> carregats i <b>0 jugats</b> · la temporada comença el 5 de setembre.</p></div>`;
+    ['an-setmana','an-equips','an-pistes','an-rivals'].forEach(id=>document.getElementById(id).innerHTML='');
+    return;
+  }
+  avis.innerHTML = '';
+
+  // ── resum de la setmana ──
+  const wks = [...new Set(club.jug.map(p=>weekKey(p.data)))].sort();
+  const ultima = wks[wks.length-1];
+  const fi = new Date(ultima+'T12:00:00'); fi.setDate(fi.getDate()+6);
+  const dUlt = club.jug.filter(p=>p.data>=ultima && p.data<=fi.toISOString().slice(0,10));
+  const wUlt = dUlt.filter(p=>p.res==='W').length;
+  document.getElementById('an-setmana').innerHTML = `
+    <div class="winners"><h3>📅 L'última jornada · ${wkLabel(ultima)}</h3>
+      <div class="wrow">Balanç del club<small>${wUlt}V - ${dUlt.length-wUlt}D</small></div>
+      ${dUlt.map(p=>{const e=m.equips.find(x=>x.id===p.equipId)||{};
+        return `<div class="wrow">${p.res==='W'?'✅':'❌'} ${e.nom}<small>${p.puntsLocal}-${p.puntsVisitant}</small></div>`}).join('')}
+    </div>`;
+
+  // ── equip a equip ──
+  const rows = m.equips.map(e => ({ e, a: analitzaEquip(e.id, m) })).filter(x => x.a.pj > 0)
+    .sort((x,y) => (y.a.w/Math.max(1,y.a.pj)) - (x.a.w/Math.max(1,x.a.pj)));
+  document.getElementById('an-equips').innerHTML = `<div class="sec-t">🧠 Lectura de cada equip</div>` + rows.map(({e,a}) => {
+    const lect = lecturesEquip(a, e), obj = objectiusEquip(a, e);
+    return `<div class="g-box">
+      <div class="g-step" style="margin-bottom:10px"><span style="font-size:20px">${e.emoji||'🏀'}</span>
+        <h3 style="flex:1">${e.nom}</h3>
+        <span style="font-family:'Anton',sans-serif;font-size:20px">${a.w}-${a.l}</span></div>
+      <div class="stat-row" style="margin-bottom:12px">
+        <div class="stat"><b>${a.pj}</b><span>Jugats</span></div>
+        <div class="stat"><b>${a.casa.w}-${a.casa.l}</b><span>A casa</span></div>
+        <div class="stat"><b>${a.fora.w}-${a.fora.l}</b><span>Fora</span></div>
+        <div class="stat"><b>${a.pf!=null?a.pf:'—'}</b><span>Punts/partit</span></div>
+      </div>
+      ${lect.length ? lect.map(x=>`<p style="font-size:12.5px;line-height:1.6;margin-bottom:7px">${x.t} ${x.txt}</p>`).join('')
+        : `<p style="font-size:12px;color:var(--muted)">Amb ${a.pj} partit${a.pj>1?'s':''} encara no es poden treure conclusions fiables (calen ${MIN_MOSTRA}).</p>`}
+      ${obj && a.pj >= MIN_MOSTRA ? `<div style="margin-top:10px;padding:12px;background:var(--panel2);border-radius:12px;font-size:12.5px;line-height:1.6">
+        🎯 <b>Al ritme actual (${obj.ritme}% de victòries)</b> acabaria amb unes <b>${obj.projeccio} victòries</b> de ${obj.total} partits.
+        ${obj.assequibles.length ? `<br>Dels propers, els més al seu abast: ${obj.assequibles.map(p=>`<b>${p.casa?'vs':'@'} ${(p.casa?p.visitant:p.local).slice(0,24)}</b> (${fmtDia(p.data).toLowerCase()})`).join(' · ')}.` : ''}
+        ${a.restants ? `<br>Queden <b>${a.restants} partits</b>: cada victòria val ${Math.round(100/a.total)}% del calendari.` : ''}
+      </div>` : ''}
+    </div>`;
+  }).join('');
+
+  // ── pistes ──
+  const pistes = Object.entries(club.perPista).filter(([,v])=>v.pj>=2)
+    .sort((a,b)=>(a[1].w/a[1].pj)-(b[1].w/b[1].pj));
+  document.getElementById('an-pistes').innerHTML = pistes.length ? `<div class="sec-t">📍 Pistes: on costa i on no</div>`
+    + pistes.map(([nom,v])=>`<div class="team-row"><span class="em">${v.casa?'🏠':'🚌'}</span>
+        <span class="nm"><b>${nom}</b><small>${v.pj} partits</small></span>
+        <span class="rec" style="color:${v.w>v.l?'var(--win)':v.l>v.w?'var(--loss)':'inherit'}">${v.w}-${v.l}<small>V - D</small></span></div>`).join('') : '';
+
+  // ── rivals ──
+  const rivals = Object.entries(club.perRival).filter(([,v])=>v.pj>=2)
+    .sort((a,b)=>(a[1].w/a[1].pj)-(b[1].w/b[1].pj)).slice(0,10);
+  document.getElementById('an-rivals').innerHTML = rivals.length ? `<div class="sec-t">🎯 Rivals repetits</div>`
+    + rivals.map(([nom,v])=>`<div class="team-row"><span class="nm"><b>${nom}</b><small>${v.pj} enfrontaments</small></span>
+        <span class="rec" style="color:${v.w>v.l?'var(--win)':v.l>v.w?'var(--loss)':'inherit'}">${v.w}-${v.l}<small>V - D</small></span></div>`).join('') : '';
 }
 
 /* ---------- render: equips ---------- */
@@ -1761,7 +2089,7 @@ function showView(v) {
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
 }
-function renderAll(){ renderJornada(); renderResultats(); renderEquips(); renderJugadors(); renderFons(); renderManuals(); omplirFons(); }
+function renderAll(){ renderJornada(); renderResultats(); renderAnalisi(); renderEquips(); renderJugadors(); renderFons(); renderManuals(); omplirFons(); }
 
 /* ---------- listeners ---------- */
 document.getElementById('tabs').addEventListener('click', e=>{
@@ -1874,6 +2202,20 @@ document.getElementById('filters').addEventListener('click', e=>{
   const c = e.target.closest('.chip'); if (!c) return;
   state.filter = c.dataset.f; renderJornada();
 });
+document.getElementById('filters-genere').addEventListener('click', e=>{
+  const c = e.target.closest('.chip'); if (!c) return;
+  state.genere = c.dataset.g; state.filter = 'tots'; renderJornada();
+});
+document.getElementById('filters-cat').addEventListener('click', e=>{
+  const c = e.target.closest('.chip'); if (!c) return;
+  state.cat = c.dataset.c; state.filter = 'tots'; renderJornada();
+});
+document.getElementById('seg-abast').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if (!b) return;
+  state.abast = b.dataset.abast;
+  document.querySelectorAll('#seg-abast button').forEach(x=>x.classList.toggle('on', x===b));
+  renderJornada();
+});
 document.getElementById('wk-select').addEventListener('change', e=>{ state.wk=e.target.value; renderJornada(); });
 document.getElementById('wk-prev').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i>0){state.wk=w[i-1]; renderJornada();} });
 document.getElementById('wk-next').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i<w.length-1){state.wk=w[i+1]; renderJornada();} });
@@ -1887,7 +2229,7 @@ function applyStaffUI() {
   document.getElementById('edit-pill').classList.add('on');
 }
 function tryUnlock(inputId) {
-  if (document.getElementById(inputId).value === EDIT_KEY) {
+  if (sha256(document.getElementById(inputId).value.trim()) === EDIT_KEY_HASH) {
     editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','clau');
     applyStaffUI(); renderAll();
   } else alert('Clau incorrecta');
@@ -1949,6 +2291,7 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
     CBGBAuth.renderButton('g-gbtn', onGoogle);
     CBGBAuth.renderButton('c-gbtn', onGoogle);
   }
+  await loadRivals();
   renderAll();
   // PWA: instal·lable a Android/iPhone
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
