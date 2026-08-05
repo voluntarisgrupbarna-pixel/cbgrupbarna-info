@@ -7,12 +7,12 @@
 <meta name="application-name" content="CB Grup Barna">
 <meta name="classification" content="Club de basquet base, club de baloncesto base, Barcelona, Sant Marti, El Clot">
 <title>CB Grup Barna · Club de Bàsquet i Baloncesto Base · Barcelona</title>
-<meta name="description" content="Club de bàsquet base de Barcelona des del 1965 — Club de baloncesto base en Barcelona desde 1965. més de 34 equips federats, ~450 jugadores i jugadors (temporada 2026-27) · Galeria de fotos · Campus estiu · 3x3 Westfield Glòries · Portes Obertes · Escoleta · Streaming en directe.">
+<meta name="description" content="Club de bàsquet base de Barcelona des del 1965 — Club de baloncesto base en Barcelona desde 1965. més de 34 equips federats, ~450 jugadores i jugadors (temporada 2026-27) · Escoleta 4-7 anys · Calendari de partits · Galeria de fotos · Streaming en directe · Bàsquet femení.">
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:title" content="CB Grup Barna · Club de Bàsquet i Baloncesto de Barcelona">
-<meta property="og:description" content="Club de bàsquet i baloncesto base al Districte de Sant Martí, Barcelona. Campus estiu, 3x3 Westfield Glòries, Portes Obertes, Escoleta i partits en directe.">
+<meta property="og:description" content="Club de bàsquet i baloncesto base al Districte de Sant Martí, Barcelona. Escoleta de 4 a 7 anys, calendari de partits, galeria de fotos i streaming en directe.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info">
 <meta property="og:locale" content="ca_ES">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@cbgrupbarna">
 <meta name="twitter:title" content="CB Grup Barna · Bàsquet i Baloncesto Base · Barcelona">
-<meta name="twitter:description" content="Club de baloncesto base en Barcelona desde 1965 · Campus verano · 3x3 Westfield Glòries · Portes Obertes · +34 equipos.">
+<meta name="twitter:description" content="Club de baloncesto base en Barcelona desde 1965 · Escoleta 4-7 años · Calendario de partidos · Galería de fotos · +34 equipos.">
 <meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta name="twitter:image:alt" content="CB Grup Barna · Club de bàsquet i baloncesto base a Barcelona des del 1965">
 <meta name="twitter:creator" content="@cbgrupbarna">
@@ -328,9 +328,9 @@
 
 <style>
 /* ============================================================
-   CB GRUP BARNA · Sistema visual "maison"
-   Estètica editorial de luxe (aire Chanel) amb els colors del Barna:
-   tinta negra, paper blanc i el vermell del club com a únic accent.
+   CB GRUP BARNA · Portada-hub
+   Estètica editorial de luxe (aire maison) amb els colors del club:
+   paper blanc, tinta negra i el vermell Barna com a únic accent.
    ============================================================ */
 :root {
   --ink: #0a0a0a;
@@ -362,32 +362,20 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ==== ESTRUCTURA ==== */
 .wrap { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
-.section { padding: clamp(58px, 9vw, 128px) 0; }
-.section.tight { padding: clamp(40px, 6vw, 78px) 0; }
-.band-dark { background: var(--ink); color: #fff; }
+.section { padding: clamp(48px, 7vw, 104px) 0; }
+.section.tight { padding: clamp(34px, 5vw, 66px) 0; }
 .band-soft { background: var(--paper-2); }
 .center { text-align: center; }
 
 /* ==== TIPOGRAFIA ==== */
 h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.3; }
-.eyebrow {
-  font-family: var(--display); font-size: 9.5px; font-weight: 400;
-  letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted);
-}
+.eyebrow { font-family: var(--display); font-size: 9.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted); }
 .eyebrow.red { color: var(--red); }
-.band-dark .eyebrow { color: rgba(255,255,255,0.55); }
-.band-dark .eyebrow.red { color: var(--red); }
-.rule { width: 1px; height: clamp(30px, 5vw, 52px); background: var(--line); margin: 20px auto; }
-.rule.red { background: var(--red); }
-.band-dark .rule { background: var(--line-dark); }
-
-.sec-head { text-align: center; margin-bottom: clamp(34px, 5vw, 66px); }
-.sec-head h2 { font-size: clamp(19px, 2.7vw, 31px); margin-top: 16px; }
-.sec-head p { max-width: 56ch; margin: 20px auto 0; font-size: 14px; color: var(--ink-2); }
-.band-dark .sec-head p { color: rgba(255,255,255,0.62); }
-
+.rule { width: 1px; height: clamp(26px, 4vw, 46px); background: var(--line); margin: 18px auto; }
+.sec-head { text-align: center; margin-bottom: clamp(30px, 4.4vw, 56px); }
+.sec-head h2 { font-size: clamp(18px, 2.5vw, 28px); margin-top: 14px; }
+.sec-head p { max-width: 56ch; margin: 18px auto 0; font-size: 13.5px; color: var(--ink-2); }
 .lede { font-size: 14.5px; color: var(--ink-2); }
-.band-dark .lede { color: rgba(255,255,255,0.66); }
 
 /* ==== ENLLAÇOS I BOTONS ==== */
 .cta {
@@ -397,12 +385,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   transition: color 0.35s var(--ease), border-color 0.35s var(--ease);
 }
 .cta:hover { color: var(--red); border-color: var(--red); }
-.band-dark .cta, .cta.light { color: #fff; }
-.band-dark .cta:hover, .cta.light:hover { color: #fff; border-color: var(--red); }
-
+.cta.light { color: #fff; }
+.cta.light:hover { color: #fff; border-color: var(--red); }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 16px clamp(22px, 3vw, 34px);
+  padding: 15px clamp(20px, 3vw, 32px);
   font-family: var(--display); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
   background: var(--ink); color: #fff; border: 1px solid var(--ink);
   transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
@@ -412,273 +399,155 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .btn.red:hover { background: var(--ink); border-color: var(--ink); }
 .btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn.ghost:hover { background: var(--ink); color: #fff; }
-.band-dark .btn { background: #fff; color: var(--ink); border-color: #fff; }
-.band-dark .btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
-.band-dark .btn.ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.4); }
-.band-dark .btn.ghost:hover { background: #fff; color: var(--ink); border-color: #fff; }
 .btn svg { width: 13px; height: 13px; fill: currentColor; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
 /* ==== TICKER ==== */
-.ticker {
-  position: relative; z-index: 120; height: 32px;
-  background: var(--ink); display: flex; align-items: center; overflow: hidden;
-}
+.ticker { position: relative; z-index: 120; height: 32px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
 .tk-lab {
-  flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px);
-  background: var(--red); color: #fff;
+  flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px); background: var(--red); color: #fff;
   display: flex; align-items: center; gap: 9px;
   font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase;
 }
 .tk-lab .pdot { width: 5px; height: 5px; border-radius: 50%; background: #fff; animation: pulseDot 2.2s ease-in-out infinite; }
 @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { box-shadow: 0 0 0 6px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
 .tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
-.tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 52s linear infinite; }
+.tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
 .tk-it { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ==== CAPÇALERA ==== */
-.head {
-  position: sticky; top: 0; z-index: 110;
-  background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
-}
-.head-in {
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px;
-  max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 74px;
-}
-.head-side { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 30px); }
+.head { position: sticky; top: 0; z-index: 110; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+.head-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
+.head-side { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 28px); }
 .head-side.r { justify-content: flex-end; }
-.head-nav { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 30px); }
-.head-nav a {
-  position: relative; padding: 7px 0;
-  font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase;
-}
+.head-nav { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 28px); }
+.head-nav a { position: relative; padding: 7px 0; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
 .head-brand { display: flex; align-items: center; gap: 12px; justify-self: center; }
-.head-brand img { width: 34px; height: 34px; object-fit: contain; }
+.head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--display); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
-.head-burger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
-.head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease), opacity 0.25s; }
+.head-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
+.head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
 .menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
 .menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
-@media (max-width: 1080px) {
-  .head-side .head-nav { display: none; }
-  .head-burger { display: flex; }
-}
+@media (max-width: 1080px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
 
-/* Menú desplegat */
-.menu {
-  position: fixed; inset: 0; z-index: 105; background: var(--paper);
-  padding: 96px clamp(22px, 7vw, 80px) 48px;
-  transform: translateY(-101%); transition: transform 0.65s var(--ease);
-  overflow-y: auto; visibility: hidden;
-}
+/* Menú desplegat · el mapa complet del club */
+.menu { position: fixed; inset: 0; z-index: 105; background: var(--paper); padding: 126px clamp(20px, 6vw, 70px) 48px; transform: translateY(-101%); transition: transform 0.6s var(--ease); overflow-y: auto; visibility: hidden; }
 .menu.open { transform: none; visibility: visible; }
-.menu a {
-  display: block; padding: clamp(14px, 2.4vw, 22px) 0; border-bottom: 1px solid var(--line);
-  font-family: var(--display); font-weight: 300; font-size: clamp(17px, 4.6vw, 26px);
-  letter-spacing: 0.18em; text-transform: uppercase;
-  transition: color 0.3s, padding-left 0.4s var(--ease);
-}
-.menu a:hover { color: var(--red); padding-left: 12px; }
-.menu .menu-foot { margin-top: 32px; font-family: var(--display); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); }
+.menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
+@media (min-width: 780px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+.menu-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: var(--red); margin-bottom: 14px; }
+.menu-col a { display: flex; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 300; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.16em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
+.menu-col a:hover { color: var(--red); padding-left: 10px; }
+.menu-col a small { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.06em; text-transform: none; color: var(--muted); margin-left: auto; white-space: nowrap; }
+.menu-foot { margin-top: 34px; text-align: center; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
 
-/* ==== HERO ==== */
-.hero {
-  position: relative; display: flex; align-items: flex-end; justify-content: center;
-  min-height: min(86vh, 800px); overflow: hidden; background: var(--ink); color: #fff; text-align: center;
-}
-.hero-media { position: absolute; inset: 0; }
-.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 32%; opacity: 0.78; animation: heroZoom 20s var(--ease) both; }
-.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.12) 42%, rgba(10,10,10,0.82) 100%); }
-@keyframes heroZoom { from { transform: scale(1.1); } to { transform: scale(1); } }
-.hero-in { position: relative; z-index: 2; max-width: 900px; padding: 0 24px clamp(52px, 9vw, 100px); }
-.hero-in .rule { background: var(--red); margin: 0 auto 22px; height: clamp(26px, 4vw, 44px); }
-.hero .eyebrow { color: rgba(255,255,255,0.78); }
-.hero h1 { font-size: clamp(31px, 8.4vw, 84px); font-weight: 200; letter-spacing: 0.16em; margin-top: 20px; }
-.hero-sub { margin-top: 18px; font-family: var(--display); font-size: clamp(11px, 1.5vw, 14px); letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.82); }
-.hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(18px, 4vw, 46px); margin-top: clamp(28px, 4.5vw, 48px); }
+/* ==== LEAD · Escoleta ==== */
+.lead { display: grid; grid-template-columns: 1.02fr 1fr; align-items: stretch; }
+.lead-media { position: relative; overflow: hidden; background: var(--paper-2); min-height: min(76vh, 700px); }
+.lead-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 26%; animation: leadZoom 16s var(--ease) both; }
+@keyframes leadZoom { from { transform: scale(1.07); } to { transform: scale(1); } }
+.lead-media .tagline { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
+.lead-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 6vw, 88px) clamp(22px, 5vw, 76px); }
+.lead-body h1 { font-size: clamp(25px, 3.4vw, 44px); margin: 18px 0 0; }
+.lead-body h1 small { display: block; margin-top: 14px; font-size: 0.44em; letter-spacing: 0.32em; color: var(--muted); font-weight: 300; }
+.lead-body .lede { margin-top: 24px; }
+.lead-body .btn-row { margin-top: 30px; }
+.lead-url { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; align-self: flex-start; font-family: var(--display); font-size: 11px; letter-spacing: 0.16em; color: var(--red); border-bottom: 1px solid var(--red); padding-bottom: 6px; transition: color 0.3s, border-color 0.3s; }
+.lead-url:hover { color: var(--ink); border-color: var(--ink); }
+.lead-tel { margin-top: 20px; font-size: 13px; color: var(--ink-2); }
+.lead-tel b { font-family: var(--display); font-weight: 400; letter-spacing: 0.1em; color: var(--ink); }
+@media (max-width: 900px) { .lead { grid-template-columns: 1fr; } .lead-media { min-height: 0; aspect-ratio: 4 / 5; } .lead-media img { object-position: center 20%; } }
+@media (max-width: 560px) { .lead-body .btn-row .btn { flex: 1 1 100%; } }
 
-/* ==== XIFRES ==== */
-.figures { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
-.figures.c3 { grid-template-columns: repeat(3, 1fr); }
-.figure { padding: clamp(24px, 3.6vw, 44px) 10px; text-align: center; border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.figure b { display: block; font-family: var(--display); font-weight: 200; font-size: clamp(24px, 4.2vw, 44px); letter-spacing: 0.06em; }
-.figure b em { font-style: normal; color: var(--red); }
-.figure span { display: block; margin-top: 12px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); }
-.band-dark .figures, .band-dark .figure { border-color: var(--line-dark); }
-.band-dark .figure span { color: rgba(255,255,255,0.5); }
-@media (min-width: 761px) {
-  .figures.c4 .figure:nth-child(4n+1) { border-left: 0; }
-  .figures.c3 .figure:nth-child(3n+1) { border-left: 0; }
-}
-@media (max-width: 760px) { .figures { grid-template-columns: repeat(2, 1fr); } .figure:nth-child(odd) { border-left: 0; } }
-
-/* ==== FEATURE PARTIT (imatge + text) ==== */
-.split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(28px, 6vw, 92px); }
-.split-media { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: var(--paper-2); }
-.split-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s var(--ease); }
-.split:hover .split-media img { transform: scale(1.045); }
-.split-media .tagline {
-  position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff;
-  font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase;
-}
-.split-body { max-width: 46ch; }
-.split-body h2 { font-size: clamp(21px, 3.1vw, 34px); letter-spacing: 0.16em; margin: 16px 0 22px; }
-.split-body p + p { margin-top: 14px; }
-.split-body .btn-row, .split-body .cta { margin-top: 30px; }
-.split.rev .split-media { order: 2; }
-@media (max-width: 860px) { .split { grid-template-columns: 1fr; } .split.rev .split-media { order: 0; } .split-media { aspect-ratio: 3 / 2; } }
-
-/* ==== GRAELLA EDITORIAL ==== */
-.ed-grid { display: grid; grid-template-columns: 1fr; gap: clamp(30px, 3.6vw, 56px) clamp(18px, 2.6vw, 40px); }
-@media (min-width: 620px) { .ed-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1000px) { .ed-grid { grid-template-columns: repeat(3, 1fr); } }
-.ed { display: flex; flex-direction: column; text-align: center; }
-.ed-media { position: relative; overflow: hidden; aspect-ratio: 3 / 4; background: var(--paper-2); }
-.ed-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s var(--ease); }
-.ed:hover .ed-media img { transform: scale(1.055); }
-.ed-plate { display: flex; align-items: center; justify-content: center; height: 100%; padding: 24px; background: var(--ink); color: #fff; transition: background 0.5s var(--ease); }
-.ed-plate.red { background: var(--red); }
-.ed-plate.soft { background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
-.ed:hover .ed-plate { background: var(--red); color: #fff; border-color: var(--red); }
-.ed:hover .ed-plate.red { background: var(--ink); }
-.ed-plate span { font-family: var(--display); font-weight: 300; font-size: clamp(13px, 1.8vw, 18px); letter-spacing: 0.3em; text-transform: uppercase; line-height: 1.9; }
-.ed-tag { margin-top: 20px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); }
-.ed-title { margin-top: 12px; font-family: var(--display); font-weight: 400; font-size: clamp(13.5px, 1.4vw, 16px); letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.6; }
-.ed-desc { margin-top: 12px; font-size: 13px; color: var(--ink-2); line-height: 1.8; }
-.ed .cta { margin: 20px auto 0; }
-
-/* ==== CAMPUS · taula de places ==== */
-.fill-block { margin-top: clamp(30px, 4vw, 48px); }
-.fill-block-title {
-  display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
-  padding: 0 0 14px; border-bottom: 1px solid var(--ink);
-  font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
-}
-.fill-block-title .live-tag { display: inline-flex; align-items: center; gap: 8px; color: var(--red); }
-.fill-block-title .live-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--red); animation: pulseRed 2.2s ease-in-out infinite; }
-@keyframes pulseRed { 0% { box-shadow: 0 0 0 0 rgba(227,30,36,0.6); } 70% { box-shadow: 0 0 0 6px rgba(227,30,36,0); } 100% { box-shadow: 0 0 0 0 rgba(227,30,36,0); } }
-.fill-row { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(12px, 2.4vw, 34px); padding: 20px 0; border-bottom: 1px solid var(--line); }
-.fill-left { width: 176px; flex-shrink: 0; }
-.fill-week { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
-.fill-name { display: block; margin-top: 5px; font-family: var(--display); font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.fill-bar { flex: 1 1 130px; position: relative; height: 1px; background: var(--line); }
-.fill-fill { position: absolute; left: 0; top: 0; height: 1px; width: 100%; background: var(--ink); transform-origin: left; transform: scaleX(0); transition: transform 1.5s var(--ease); }
-.fill-fill.over, .fill-fill.full { background: var(--red); height: 2px; top: -0.5px; }
-.fill-num { width: 104px; text-align: right; font-family: var(--display); font-size: 12px; letter-spacing: 0.1em; }
-.fill-num .fill-pct { color: var(--muted); font-size: 9.5px; letter-spacing: 0.16em; }
-.fill-num.over { color: var(--red); }
-.fill-badge { width: 122px; text-align: right; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
-.fill-badge.fill-calent { color: var(--red); }
-.fill-badge.fill-disponible, .fill-badge.fill-actiu { color: var(--ink); }
-.fill-note { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px 0; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
-@media (max-width: 680px) {
-  .fill-left { width: auto; flex: 1 1 auto; }
-  .fill-num { width: auto; }
-  .fill-badge { width: auto; flex: 1 1 100%; text-align: left; }
-  .fill-bar { flex-basis: 100%; order: 3; }
-}
-
-/* ==== LLISTA DE CONTACTE / ACCESSOS ==== */
-.list { display: grid; grid-template-columns: 1fr; column-gap: clamp(24px, 4vw, 70px); border-top: 1px solid var(--line); }
-@media (min-width: 860px) { .list { grid-template-columns: repeat(2, 1fr); } }
-.list a { display: flex; align-items: center; gap: 18px; padding: 22px 6px; border-bottom: 1px solid var(--line); transition: padding-left 0.4s var(--ease), color 0.3s; }
-.list a:hover { padding-left: 16px; color: var(--red); }
-.list-t { font-family: var(--display); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; }
-.list-s { margin-left: auto; text-align: right; font-family: var(--display); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
-.list a:hover .list-s { color: var(--red); }
-
-/* ==== SEGUEIX / XARXES ==== */
-.follow { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: clamp(16px, 2vw, 26px); }
-.follow a { display: flex; flex-direction: column; gap: 12px; padding: clamp(26px, 3.4vw, 40px); border: 1px solid var(--line); transition: background 0.45s var(--ease), color 0.45s var(--ease), border-color 0.45s var(--ease); }
-.follow a:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
-.follow a.accent:hover { background: var(--red); border-color: var(--red); }
-.follow svg { width: 18px; height: 18px; fill: currentColor; }
-.follow-t { font-family: var(--display); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; }
-.follow-s { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
-.follow a:hover .follow-s { color: rgba(255,255,255,0.7); }
-.follow-k { margin-top: auto; padding-top: 14px; font-family: var(--display); font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; }
-
-/* ==== SOCIAL GRID · Link in Bio ==== */
-.sg-grid { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 2.6vw, 34px); }
-@media (min-width: 780px) { .sg-grid { grid-template-columns: repeat(3, 1fr); } }
-.sg-tile { border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; }
-.sg-tile-embed-wrap { position: relative; min-height: 440px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-.sg-tile-embed-wrap iframe { width: 100%; min-height: 440px; border: none; display: block; }
-.sg-tile-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); pointer-events: none; transition: opacity 0.4s; }
-.sg-spinner { width: 26px; height: 26px; border: 1px solid var(--line); border-top-color: var(--red); border-radius: 50%; animation: sg-spin 0.9s linear infinite; }
-@keyframes sg-spin { to { transform: rotate(360deg); } }
-.sg-tile-loading.hidden { opacity: 0; }
-.sg-tile-fallback { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 40px 20px; text-align: center; }
-.sg-tile-fallback.visible { display: flex; }
-.sg-tile-fallback-icon { font-family: var(--display); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
-.sg-tile-fallback a { font-family: var(--display); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; border-bottom: 1px solid var(--red); padding-bottom: 5px; }
-.sg-tile-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 18px; border-top: 1px solid var(--line); margin-top: auto; }
-.sg-tile-badge { margin-left: auto; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); }
-.sg-action { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; padding-bottom: 5px; border-bottom: 1px solid currentColor; transition: color 0.3s, border-color 0.3s; }
-.sg-action.primary:hover { color: var(--red); }
-.sg-action.ghost { color: var(--muted); }
+/* ==== CALENDARI ==== */
+.cal { border-top: 1px solid var(--ink); }
+.cal-row { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 30px); padding: 17px 0; border-bottom: 1px solid var(--line); }
+.cal-date { width: 68px; flex-shrink: 0; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+.cal-date b { display: block; font-size: 25px; font-weight: 200; letter-spacing: 0.02em; color: var(--ink); line-height: 1.1; }
+.cal-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.cal-team { font-family: var(--display); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+.cal-meta { font-size: 12px; color: var(--muted); }
+.cal-when { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-align: right; white-space: nowrap; }
+.cal-cond { width: 66px; flex-shrink: 0; text-align: right; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
+.cal-empty { padding: 34px 4px; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); text-align: center; }
+.cal-empty a { border-bottom: 1px solid var(--red); }
+@media (max-width: 640px) { .cal-when { display: none; } .cal-cond { width: auto; } }
 
 /* ==== INSTAGRAM EMBED ==== */
-.ig-embed-wrap { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); }
-@media (min-width: 880px) { .ig-embed-wrap { grid-template-columns: repeat(3, 1fr); } }
+.ig-embed-wrap { display: grid; grid-template-columns: 1fr; gap: clamp(16px, 2.2vw, 28px); }
+@media (min-width: 700px) { .ig-embed-wrap.two { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 880px) { .ig-embed-wrap.three { grid-template-columns: repeat(3, 1fr); } }
 .ig-embed-wrap blockquote.instagram-media {
   background: var(--paper) !important; border: 1px solid var(--line) !important;
   border-radius: 0 !important; box-shadow: none !important;
   margin: 0 !important; max-width: 100% !important; min-width: 0 !important; width: 100% !important;
 }
 
+/* ==== OPINIONS ==== */
+.opi { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); }
+@media (min-width: 780px) { .opi { grid-template-columns: 1fr 1fr; } }
+.opi-card { display: flex; flex-direction: column; gap: 14px; padding: clamp(26px, 3.6vw, 44px); border: 1px solid var(--line); background: var(--paper); text-align: center; align-items: center; }
+.opi-card h3 { font-size: 12.5px; letter-spacing: 0.22em; }
+.opi-card p { font-size: 13px; color: var(--ink-2); max-width: 40ch; }
+.opi-card .cta, .opi-card .btn { margin-top: auto; }
+.stars { display: inline-flex; gap: 12px; margin: 4px 0 2px; }
+.stars button { font-size: 27px; line-height: 1; color: var(--line); transition: color 0.2s, transform 0.2s; }
+.stars button:hover { transform: translateY(-2px); }
+.stars button.on { color: var(--red); }
+.stars-note { font-family: var(--display); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
+
+/* ==== LLISTA · accés ràpid ==== */
+.list { display: grid; grid-template-columns: 1fr; column-gap: clamp(24px, 4vw, 70px); border-top: 1px solid var(--line); }
+@media (min-width: 860px) { .list { grid-template-columns: repeat(2, 1fr); } }
+.list a { display: flex; align-items: center; gap: 18px; padding: 19px 6px; border-bottom: 1px solid var(--line); transition: padding-left 0.4s var(--ease), color 0.3s; }
+.list a:hover { padding-left: 16px; color: var(--red); }
+.list-t { font-family: var(--display); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+.list-s { margin-left: auto; text-align: right; font-family: var(--display); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.list a:hover .list-s { color: var(--red); }
+
 /* ==== PARTNERS ==== */
-.partners { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(18px, 3.4vw, 48px); }
-.partners span { font-family: var(--display); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
-.band-dark .partners span { color: rgba(255,255,255,0.55); }
+.partners { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(16px, 3vw, 42px); }
+.partners span { font-family: var(--display); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
 
 /* ==== FAQ ==== */
 .faq { max-width: 940px; margin: 0 auto; border-top: 1px solid var(--line); }
 .faq details { border-bottom: 1px solid var(--line); }
-.faq summary { position: relative; list-style: none; cursor: pointer; padding: 22px 44px 22px 0; font-family: var(--display); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; transition: color 0.3s; }
+.faq summary { position: relative; list-style: none; cursor: pointer; padding: 20px 44px 20px 0; font-family: var(--display); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; transition: color 0.3s; }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary:hover { color: var(--red); }
 .faq summary::after { content: ''; position: absolute; right: 8px; top: 50%; width: 12px; height: 1px; background: var(--red); transform: translateY(-50%); }
 .faq summary::before { content: ''; position: absolute; right: 13.5px; top: 50%; width: 1px; height: 12px; background: var(--red); transform: translateY(-50%); transition: opacity 0.3s; }
 .faq details[open] summary::before { opacity: 0; }
-.faq p { padding: 0 0 26px; font-size: 14px; color: var(--ink-2); max-width: 74ch; }
+.faq p { padding: 0 0 24px; font-size: 13.5px; color: var(--ink-2); max-width: 74ch; }
 .faq p a { border-bottom: 1px solid var(--red); padding-bottom: 1px; }
 
-/* ==== HASHTAG ==== */
-.hash-line { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); }
-.hash-line > span { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
-.hash-line .hash-acts { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 30px); flex-wrap: wrap; }
-
 /* ==== PEU ==== */
-.foot { background: var(--ink); color: #fff; padding: clamp(52px, 8vw, 96px) 0 36px; }
-.foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: clamp(28px, 4vw, 56px); padding-bottom: clamp(38px, 6vw, 68px); border-bottom: 1px solid var(--line-dark); }
-.foot-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: rgba(255,255,255,0.45); margin-bottom: 18px; }
-.foot-col a, .foot-col p { display: block; padding: 7px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
+.foot { background: var(--ink); color: #fff; padding: clamp(46px, 7vw, 86px) 0 34px; }
+.foot-partners { padding-bottom: clamp(32px, 5vw, 54px); border-bottom: 1px solid var(--line-dark); text-align: center; }
+.foot-partners .eyebrow { color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+.foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: clamp(26px, 4vw, 52px); padding: clamp(34px, 5vw, 58px) 0; border-bottom: 1px solid var(--line-dark); }
+.foot-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+.foot-col a, .foot-col p { display: block; padding: 6px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
 .foot-col a { transition: color 0.3s; }
 .foot-col a:hover { color: var(--red); }
-.foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 32px; }
+.foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
 .foot-mark { font-family: var(--display); font-weight: 300; font-size: clamp(12px, 2vw, 16px); letter-spacing: 0.4em; text-transform: uppercase; }
 .foot-mark em { font-style: normal; color: var(--red); }
 .foot-legal { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
 /* ==== FAB WHATSAPP ==== */
-.fab-wa {
-  position: fixed; right: clamp(14px, 3vw, 30px); bottom: clamp(14px, 3vw, 30px); z-index: 90;
-  width: 54px; height: 54px; display: flex; align-items: center; justify-content: center;
-  background: var(--ink); color: #fff; border: 1px solid var(--ink);
-  transition: background 0.35s var(--ease), border-color 0.35s var(--ease);
-}
+.fab-wa { position: fixed; right: clamp(14px, 3vw, 30px); bottom: clamp(14px, 3vw, 30px); z-index: 90; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--ink); color: #fff; border: 1px solid var(--ink); transition: background 0.35s var(--ease), border-color 0.35s var(--ease); }
 .fab-wa:hover { background: var(--red); border-color: var(--red); }
-.fab-wa svg { width: 22px; height: 22px; fill: currentColor; }
+.fab-wa svg { width: 21px; height: 21px; fill: currentColor; }
 
 /* ==== REVELAT ==== */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -695,17 +564,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <div class="tk-lab"><span class="pdot"></span>Novetats</div>
   <div class="tk-trk">
     <div class="tk-cnt">
-      <span class="tk-it">Portes Obertes 25-26 · Inscripcions obertes</span>
-      <span class="tk-it">Campus Estiu 26 · Places omplint-se</span>
-      <span class="tk-it">3x3 Westfield Glòries · 42 equips inscrits</span>
-      <span class="tk-it">MyPlay · Partits en directe</span>
-      <span class="tk-it">Escoleta · 4 a 7 anys</span>
+      <span class="tk-it">Escoleta 4-7 anys · Inscripcions obertes</span>
+      <span class="tk-it">Sèniors · Nova temporada</span>
+      <span class="tk-it">Calendari de partits actualitzat</span>
+      <span class="tk-it">Galeria de fotos del club</span>
       <span class="tk-it">#SomClot · 60 anys de bàsquet</span>
-      <span class="tk-it">Portes Obertes 25-26 · Inscripcions obertes</span>
-      <span class="tk-it">Campus Estiu 26 · Places omplint-se</span>
-      <span class="tk-it">3x3 Westfield Glòries · 42 equips inscrits</span>
-      <span class="tk-it">MyPlay · Partits en directe</span>
-      <span class="tk-it">Escoleta · 4 a 7 anys</span>
+      <span class="tk-it">Escoleta 4-7 anys · Inscripcions obertes</span>
+      <span class="tk-it">Sèniors · Nova temporada</span>
+      <span class="tk-it">Calendari de partits actualitzat</span>
+      <span class="tk-it">Galeria de fotos del club</span>
       <span class="tk-it">#SomClot · 60 anys de bàsquet</span>
     </div>
   </div>
@@ -717,14 +584,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     <div class="head-side">
       <button class="head-burger" id="burger" aria-label="Obrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <nav class="head-nav" aria-label="Navegació principal">
-        <a href="#portes">Portes obertes</a>
-        <a href="#agenda">La temporada</a>
-        <a href="#club">El club</a>
-        <a href="#patrocini">Partners</a>
+        <a href="#escoleta">Escoleta</a>
+        <a href="#calendari">Calendari</a>
+        <a href="/fotos/">Galeria</a>
+        <a href="#acces">El Barna</a>
       </nav>
     </div>
     <a class="head-brand" href="#top" aria-label="CB Grup Barna · inici">
-      <img src="logo.png" alt="Escut del CB Grup Barna" width="34" height="34" fetchpriority="high" decoding="async">
+      <img src="logo.png" alt="Escut del CB Grup Barna" width="32" height="32" fetchpriority="high" decoding="async">
       <span>CB Grup Barna</span>
     </a>
     <div class="head-side r">
@@ -736,357 +603,168 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   </div>
 </header>
 
-<!-- ==== MENÚ ==== -->
+<!-- ==== MENÚ · el mapa complet del club ==== -->
 <nav class="menu" id="menu" aria-label="Menú complet">
-  <a href="#portes">Portes obertes</a>
-  <a href="#agenda">La temporada</a>
-  <a href="#campus">Campus estiu</a>
-  <a href="#club">El club</a>
-  <a href="#clot">Al Clot</a>
-  <a href="#patrocini">Partners</a>
-  <a href="#contacte">Contacte</a>
+  <div class="menu-grid">
+    <div class="menu-col">
+      <h3>Aquest mes</h3>
+      <a href="#escoleta">Escoleta <small>4 a 7 anys</small></a>
+      <a href="#calendari">Calendari de partits</a>
+      <a href="#seniors">Els sèniors</a>
+      <a href="/fotos/" data-cta="menu-galeria">Galeria de fotos</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#opinions">Ressenyes i valoració</a>
+    </div>
+    <div class="menu-col">
+      <h3>El Barna</h3>
+      <a href="/grup-barna-dades-oficials/" data-cta="menu-club">El club <small>dades oficials</small></a>
+      <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
+      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Presentació del club</a>
+      <a href="https://dossierpatrocinis.skywork.website" target="_blank" rel="noopener" data-cta="menu-partners">Partners i patrocini</a>
+      <a href="https://www.cbgrupbarna.com/noticies/" target="_blank" rel="noopener" data-cta="menu-noticies">Notícies</a>
+      <a href="#acces">Tots els accessos</a>
+    </div>
+  </div>
   <div class="menu-foot">@cbgrupbarna · +34 698 425 153 · El Clot, Barcelona</div>
 </nav>
 
 <main>
 
-  <!-- ==== HERO ==== -->
-  <section class="hero">
-    <div class="hero-media">
-      <img src="hero-bg.jpg" alt="Equip del CB Grup Barna fent pinya durant un partit al Clot, Barcelona" fetchpriority="high" decoding="async">
+  <!-- ==== ESCOLETA · el que toca aquest mes ==== -->
+  <section class="lead" id="escoleta">
+    <div class="lead-media">
+      <img src="img/escoleta.webp" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota i la mascota del club" fetchpriority="high" decoding="async">
+      <span class="tagline">Inscripcions obertes</span>
     </div>
-    <div class="hero-in">
-      <div class="rule"></div>
-      <p class="eyebrow">El Clot · Sant Martí · Barcelona</p>
-      <h1>CB Grup Barna</h1>
-      <p class="hero-sub">Club de bàsquet base des de 1965</p>
-      <div class="hero-cta">
-        <a href="#portes" class="cta light">Portes obertes</a>
-        <a href="#club" class="cta light">Descobrir el club</a>
+    <div class="lead-body">
+      <p class="eyebrow red">El primer bot comença aquí · 4 a 7 anys</p>
+      <h1>Escoleta de bàsquet<small>CB Grup Barna · El Clot</small></h1>
+      <p class="lede">Equips mixtos, tres grups per edat i trobades amb altres clubs. Vine a provar un entrenament sense compromís: seixanta anys formant nens i nenes del barri.</p>
+      <div class="btn-row">
+        <a href="https://wa.me/34646205526?text=Hola%20Julio!%20M%27interessa%20l%27Escoleta%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna%20per%20a%20nens%20i%20nenes%20de%204%20a%207%20anys.%20Podeu%20informar-me%3F" target="_blank" rel="noopener" class="btn red" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
+        <a href="tel:+34646205526" class="btn ghost" data-cta="escoleta-tel">646 205 526</a>
       </div>
+      <p class="lead-tel">Contacte de l'Escoleta: <b>Julio Torralba</b> · 646 205 526</p>
+      <a href="/escoleta/" class="lead-url" data-cta="escoleta">cbgrupbarna.info/escoleta <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
-  <!-- ==== XIFRES ==== -->
-  <section class="band-dark">
-    <div class="wrap">
-      <div class="figures c4" style="border-top:0">
-        <div class="figure"><b>1965</b><span>Any de fundació</span></div>
-        <div class="figure"><b>+34</b><span>Equips federats</span></div>
-        <div class="figure"><b>450</b><span>Jugadores i jugadors</span></div>
-        <div class="figure"><b><em>60</em></b><span>Anys al Clot</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==== PORTES OBERTES ==== -->
-  <section class="section" id="portes">
-    <div class="wrap">
-      <div class="split reveal">
-        <div class="split-media">
-          <img src="img/escoleta.webp" alt="Nena del CB Grup Barna amb la pilota i la mascota del club a la pista" loading="lazy" decoding="async">
-          <span class="tagline">Prioritat 01</span>
-        </div>
-        <div class="split-body">
-          <p class="eyebrow red">Inscripcions obertes · 4 a 18 anys</p>
-          <h2>Portes Obertes<br>25 · 26</h2>
-          <p class="lede">Necessitem molt talent. Vine a entrenar gratis: una sessió, sense compromís. Si tens entre 4 i 18 anys, vine, prova i decideix.</p>
-          <p class="lede">Bàsquet base al Clot, amb totes les categories des de l'Escoleta fins al sènior, i la mateixa aposta per la línia femenina i la masculina.</p>
-          <div class="btn-row">
-            <a href="https://wa.me/34657601298?text=Hola!%20Vull%20reservar%20una%20prova%20a%20Portes%20Obertes.%20Codi:%20CAMPUS_INFO_PORTES" target="_blank" rel="noopener" class="btn red" data-cta="portes-wa-prova">Reservar prova</a>
-            <a href="https://wa.me/34657601298?text=Hola!%20Vull%20info%20de%20Portes%20Obertes" target="_blank" rel="noopener" class="btn ghost" data-cta="portes-wa">Vull informació</a>
-          </div>
-          <div class="hash-line">
-            <span>#portesobertes · @cbgrupbarna</span>
-            <span class="hash-acts">
-              <a href="https://www.instagram.com/explore/tags/portesobertes/" target="_blank" rel="noopener" class="cta" data-cta="ig-hashtag">Veure a Instagram</a>
-              <button class="cta" data-cta="share-portes" onclick="shareIt('portes', 'Portes Obertes CB Grup Barna · Vine a entrenar gratis')">Compartir</button>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==== LA TEMPORADA ==== -->
-  <section class="section band-soft" id="agenda">
+  <!-- ==== CALENDARI DEL BARNA ==== -->
+  <section class="section band-soft" id="calendari">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow">Temporada 2025 · 2026</p>
         <div class="rule"></div>
-        <h2>La temporada</h2>
-        <p>Tot el que passa al club aquesta temporada: la galeria, l'Escoleta, el projecte femení, les dades oficials i els partits en directe.</p>
+        <h2>Calendari del Barna</h2>
+        <p>Els propers partits de tots els equips del club. Horaris, pista i competició.</p>
       </div>
-
-      <div class="ed-grid reveal">
-
-        <a href="/fotos/" class="ed" data-cta="galeria-fotos">
-          <div class="ed-media"><img src="img/club.webp" alt="Equips i famílies del CB Grup Barna a la pista del Clot" loading="lazy" decoding="async"></div>
-          <p class="ed-tag">Nou · 2025-2026</p>
-          <h3 class="ed-title">Galeria de fotos del club</h3>
-          <p class="ed-desc">Totes les fotos dels partits i esdeveniments: Cistella Petita, 3×3 Westfield Glòries i molt més. Accés lliure per a tothom.</p>
-          <span class="cta">Veure les fotos</span>
-        </a>
-
-        <a href="/escoleta/" class="ed" data-cta="escoleta">
-          <div class="ed-media"><img src="img/escoleta.webp" alt="Escoleta de bàsquet del CB Grup Barna per a nens i nenes de 4 a 7 anys" loading="lazy" decoding="async"></div>
-          <p class="ed-tag">Escoleta · 4 a 7 anys</p>
-          <h3 class="ed-title">Escoleta de bàsquet al Clot</h3>
-          <p class="ed-desc">El primer pas amb la pilota. Seixanta anys formant nens i nenes del barri: d'aquesta mateixa pista han sortit jugadors d'ACB, de Lliga Femenina Endesa i del Barça.</p>
-          <span class="cta">Portes obertes</span>
-        </a>
-
-        <a href="/premidonaesport/" class="ed" data-cta="premidonaesport">
-          <div class="ed-media"><img src="img/team-action.webp" alt="Dues jugadores del CB Grup Barna amb la samarreta del club" loading="lazy" decoding="async"></div>
-          <p class="ed-tag">FCBQ · Nominació 2026</p>
-          <h3 class="ed-title">19è Premi Dona i Esport · El Mètode Barna</h3>
-          <p class="ed-desc">60 anys de bàsquet femení a El Clot. Un model de tecnificació femenina de referència a Barcelona.</p>
-          <span class="cta">Veure el projecte</span>
-        </a>
-
-        <a href="/grup-barna-dades-oficials/" class="ed" data-cta="dades-oficials">
-          <div class="ed-media"><span class="ed-plate soft"><span>Font<br>oficial</span></span></div>
-          <p class="ed-tag">Dades del club</p>
-          <h3 class="ed-title">Dades oficials del CB Grup Barna</h3>
-          <p class="ed-desc">Equips, categories, Escoleta, Barna Màgics, xarxes i reconeixements institucionals, amb la data d'actualització.</p>
-          <span class="cta">Veure les dades</span>
-        </a>
-
-        <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" class="ed" data-cta="presentacio-club">
-          <div class="ed-media"><span class="ed-plate"><span>Des de<br>1965</span></span></div>
-          <p class="ed-tag">Presentació institucional</p>
-          <h3 class="ed-title">Coneix el CB Grup Barna</h3>
-          <p class="ed-desc">Missió, valors, equips, impacte social i oportunitats de col·laboració. Per a empreses, institucions i partners.</p>
-          <span class="cta">Veure la presentació</span>
-        </a>
-
-        <a href="https://app.myplay.com/public-live?liveId=CBgrupBarna" target="_blank" rel="noopener" class="ed" data-cta="myplay">
-          <div class="ed-media"><span class="ed-plate red"><span>En<br>directe</span></span></div>
-          <p class="ed-tag">Cap de setmana</p>
-          <h3 class="ed-title">Els partits, en streaming</h3>
-          <p class="ed-desc">Tots els partits del Barna a MyPlay. Si no hi pots ser, hi ets igualment.</p>
-          <span class="cta">Veure ara</span>
-        </a>
-
+      <div class="cal reveal" id="cal-list" aria-live="polite">
+        <div class="cal-empty">Carregant el calendari…</div>
       </div>
+      <p class="center reveal" style="margin-top:clamp(26px,4vw,42px)">
+        <a href="/partits/" class="cta" data-cta="calendari-partits">Calendari i resultats complets</a>
+      </p>
     </div>
   </section>
 
-  <!-- ==== CAMPUS ==== -->
-  <section class="section" id="campus">
+  <!-- ==== SÈNIORS ==== -->
+  <section class="section" id="seniors">
     <div class="wrap">
       <div class="sec-head reveal">
-        <p class="eyebrow red">Juliol 26 · Prioritat 02</p>
+        <p class="eyebrow red">Anunci oficial</p>
         <div class="rule"></div>
-        <h2>Campus Time Chamber<br>Estiu 26</h2>
-        <p>Campus d'estiu amb tecnificació intensiva. Mira com s'omple en directe i reserva la teva setmana.</p>
+        <h2>Els sèniors</h2>
+        <p>La presentació dels equips sèniors del CB Grup Barna, directament des d'Instagram.</p>
       </div>
-
-      <div class="reveal">
-        <div class="fill-block">
-          <div class="fill-block-title">
-            <span>Places per setmana <small data-last-update style="letter-spacing:0.12em"></small></span>
-            <span class="live-tag">En directe</span>
-          </div>
-          <div class="fill-row">
-            <div class="fill-left"><span class="fill-week">S1 · 22-26 juny</span><span class="fill-name">Flow Camp</span></div>
-            <div class="fill-bar"><div class="fill-fill over" data-pct="100"></div></div>
-            <span class="fill-num over">58/50 <small class="fill-pct">(116%)</small></span>
-            <span class="fill-badge fill-calent">Complet</span>
-          </div>
-          <div class="fill-row">
-            <div class="fill-left"><span class="fill-week">S2 · 29 juny–3 jul</span><span class="fill-name">TC Basics</span></div>
-            <div class="fill-bar"><div class="fill-fill over" data-pct="100"></div></div>
-            <span class="fill-num over">60/50 <small class="fill-pct">(120%)</small></span>
-            <span class="fill-badge fill-calent">Complet</span>
-          </div>
-          <div class="fill-row">
-            <div class="fill-left"><span class="fill-week">S3 · 6-10 juliol</span><span class="fill-name">Shooting Academy</span></div>
-            <div class="fill-bar"><div class="fill-fill over" data-pct="100"></div></div>
-            <span class="fill-num over">55/50 <small class="fill-pct">(110%)</small></span>
-            <span class="fill-badge fill-calent">Complet</span>
-          </div>
-          <div class="fill-row">
-            <div class="fill-left"><span class="fill-week">S4 · 13-17 juliol</span><span class="fill-name">One &amp; One Mastery</span></div>
-            <div class="fill-bar"><div class="fill-fill over" data-pct="100"></div></div>
-            <span class="fill-num over">54/50 <small class="fill-pct">(108%)</small></span>
-            <span class="fill-badge fill-calent">Complet</span>
-          </div>
-          <div class="fill-row">
-            <div class="fill-left"><span class="fill-week">S5 · 20-24 juliol</span><span class="fill-name">Ballhandling Lab</span></div>
-            <div class="fill-bar"><div class="fill-fill high" data-pct="90"></div></div>
-            <span class="fill-num">45/50 <small class="fill-pct">(90%)</small></span>
-            <span class="fill-badge fill-disponible">Últimes places</span>
-          </div>
-          <div class="fill-row">
-            <div class="fill-left"><span class="fill-week">S6 · 27-31 juliol</span><span class="fill-name">Skills Lab Exp.</span></div>
-            <div class="fill-bar"><div class="fill-fill high" data-pct="90"></div></div>
-            <span class="fill-num">45/50 <small class="fill-pct">(90%)</small></span>
-            <span class="fill-badge fill-disponible">Últimes places</span>
-          </div>
-          <div class="fill-note">
-            <span>T'has quedat sense plaça? Contacta'ns i et posem a la llista d'espera.</span>
-            <a href="https://wa.me/34698425153?text=Hola!%20M%27he%20quedat%20sense%20pla%C3%A7a%20al%20Campus%20Estiu%2026%20i%20vull%20entrar%20a%20la%20llista%20d%27espera%20%F0%9F%93%9D" target="_blank" rel="noopener" class="cta" data-cta="campus-waitlist">Llista d'espera</a>
-          </div>
-        </div>
-
-        <div class="btn-row" style="margin-top:clamp(28px,4vw,44px);justify-content:center">
-          <a href="https://wa.me/34698425153?text=Hola!%20Vull%20inscriure%27m%20al%20Campus%20Time%20Chamber%20Estiu%2026.%20Codi:%20CAMPUS_INFO_CAMPUS" target="_blank" rel="noopener" class="btn red" data-cta="campus-wa-inscripcio">Inscriu-te ara</a>
-          <button class="btn ghost" data-cta="share-campus" onclick="shareIt('campus', 'Campus Time Chamber Estiu 26 · Places omplint-se')">Compartir</button>
-        </div>
+      <div class="ig-embed-wrap two">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbgJvwuCCNv/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbiuXarCIpz/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
       </div>
     </div>
   </section>
 
-  <!-- ==== EL CLUB ==== -->
-  <section class="section band-soft" id="club">
-    <div class="wrap">
-      <div class="split rev reveal">
-        <div class="split-media">
-          <img src="img/hero-player.webp" alt="Jugador del CB Grup Barna amb la samarreta del club, retrat en blanc i negre" loading="lazy" decoding="async">
-        </div>
-        <div class="split-body">
-          <p class="eyebrow red">El club · Des de 1965 · #somclot</p>
-          <h2>El club de bàsquet base més gran de Sant Martí</h2>
-          <p class="lede">Club de baloncesto base de referencia en Barcelona · Distrito de Sant Martí. Més de 34 equips federats i unes 450 jugadores i jugadors.</p>
-          <p class="lede">Paritat real: mateix nombre de jugadores i jugadors, i mateix pressupost per a la línia femenina i la masculina.</p>
-          <a href="/grup-barna-dades-oficials/" class="cta" data-cta="club-dades">Dades oficials del club</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="wrap" style="margin-top:clamp(46px,7vw,86px)">
-      <div class="figures c3 reveal">
-        <div class="figure"><b><em>60</em></b><span>Anys d'història</span></div>
-        <div class="figure"><b>+34</b><span>Equips actius</span></div>
-        <div class="figure"><b>450</b><span>Famílies sòcies</span></div>
-        <div class="figure"><b>7,1<em>K</em></b><span>Seguidors Instagram</span></div>
-        <div class="figure"><b>4</b><span>Grans events / any</span></div>
-        <div class="figure"><b>BCN</b><span>Sant Martí · Clot</span></div>
-      </div>
-      <div class="partners reveal" style="margin-top:clamp(34px,5vw,54px)">
-        <span>Westfield Glòries</span>
-        <span>FCBQ</span>
-        <span>Time Chamber</span>
-        <span>Eix Clot</span>
-        <span>Ajuntament BCN</span>
-        <span>MyPlay</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==== AL CLOT · XARXES ==== -->
-  <section class="section" id="clot">
+  <!-- ==== POSTS FIXATS D'INSTAGRAM ==== -->
+  <section class="section band-soft" id="instagram">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow">@cbgrupbarna</p>
         <div class="rule"></div>
-        <h2 id="sg-title">Lo que passa al Clot</h2>
+        <h2>Posts fixats</h2>
+        <p>El que sempre has de tenir a mà del club.</p>
       </div>
-
-      <div id="social-grid" class="sg-grid" aria-label="Posts destacats del club"></div>
-
-      <div class="sec-head reveal" style="margin-top:clamp(50px,7vw,90px)">
-        <p class="eyebrow">Instagram</p>
-        <div class="rule"></div>
-        <h2>Lo últim a Instagram</h2>
-      </div>
-
-      <div class="ig-embed-wrap">
+      <div class="ig-embed-wrap three">
         <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXonCiBiPcW/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
         <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
         <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
       </div>
-
-      <div class="follow reveal" style="margin-top:clamp(40px,6vw,72px)">
-        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="ig-follow">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 2c-3.1 0-3.5 0-4.7.05-1 .05-1.6.2-2 .4-.5.2-.8.4-1.2.7-.3.3-.5.7-.7 1.2-.2.4-.3 1-.4 2C3 9.5 3 9.9 3 13s0 3.5.05 4.7c.05 1 .2 1.6.4 2 .2.5.4.8.7 1.2.3.3.7.5 1.2.7.4.2 1 .3 2 .4 1.2.05 1.6.05 4.7.05s3.5 0 4.7-.05c1-.05 1.6-.2 2-.4.5-.2.8-.4 1.2-.7.3-.3.5-.7.7-1.2.2-.4.3-1 .4-2 .05-1.2.05-1.6.05-4.7s0-3.5-.05-4.7c-.05-1-.2-1.6-.4-2-.2-.5-.4-.8-.7-1.2-.3-.3-.7-.5-1.2-.7-.4-.2-1-.3-2-.4C15.5 4.2 15.1 4.2 12 4.2zm0 3.4a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm0 2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg>
-          <span class="follow-t">Instagram</span>
-          <span class="follow-s">@cbgrupbarna · +7.100 seguidors · contingut diari del club.</span>
-          <span class="follow-k">Segueix-nos</span>
-        </a>
-        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener" data-cta="tt-follow">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.19 8.19 0 004.79 1.53V6.77a4.85 4.85 0 01-1.02-.08z"/></svg>
-          <span class="follow-t">TikTok</span>
-          <span class="follow-s">@cbgrupbarna · vídeos del club i bàsquet base.</span>
-          <span class="follow-k">Segueix-nos</span>
-        </a>
-        <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20rebre%20novetats%20del%20CB%20Grup%20Barna%20pel%20WhatsApp%20%F0%9F%93%A9" target="_blank" rel="noopener" class="accent" data-cta="wa-newsletter">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-          <span class="follow-t">Novetats al WhatsApp</span>
-          <span class="follow-s">Només info important: partits, esdeveniments i anuncis. Guarda abans el nostre contacte o no et podrem escriure.</span>
-          <span class="follow-k">Vull rebre-les</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==== PATROCINI ==== -->
-  <section class="section band-dark" id="patrocini">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <p class="eyebrow red">Patrocini · Partnership · Visibilitat</p>
-        <div class="rule"></div>
-        <h2>Connecta la teva marca<br>amb 450+ famílies de Sant Martí</h2>
-        <p>Club de baloncesto base de referencia en Barcelona desde 1965. Presencia en eventos, redes sociales, streaming y comunicación directa con familias del Distrito de Sant Martí.</p>
-      </div>
-
-      <div class="figures c4 reveal">
-        <div class="figure"><b>7,1<em>K</em></b><span>Seguidors Instagram</span></div>
-        <div class="figure"><b>450</b><span>Famílies sòcies</span></div>
-        <div class="figure"><b>4</b><span>Grans events / any</span></div>
-        <div class="figure"><b>+34</b><span>Equips · totes edats</span></div>
-      </div>
-
-      <div class="btn-row reveal" style="justify-content:center;margin-top:clamp(34px,5vw,54px)">
-        <a href="https://dossierpatrocinis.skywork.website" target="_blank" rel="noopener" class="btn" data-cta="sponsor-dossier">Dossier partners</a>
-        <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20per%20ser%20Patrocinador%2FPartner%20del%20CB%20Grup%20Barna%20%F0%9F%A4%9D%20Codi:%20SPONSOR_INFO" target="_blank" rel="noopener" class="btn ghost" data-cta="sponsor-wa">WhatsApp</a>
-        <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" class="btn ghost" data-cta="sponsor-presentacio">Presentació del club</a>
-      </div>
-      <p class="center reveal" style="margin-top:26px">
-        <a href="mailto:info@cbgrupbarna.com?subject=Patrocini%20CB%20Grup%20Barna" class="cta" data-cta="sponsor-email">info@cbgrupbarna.com</a>
+      <p class="center reveal" style="margin-top:clamp(26px,4vw,42px)">
+        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" class="cta" data-cta="ig-follow">Segueix @cbgrupbarna</a>
       </p>
-      <p class="eyebrow center reveal" style="margin-top:26px">Responem en menys de 24 h · Dossier i presentació disponibles online</p>
     </div>
   </section>
 
-  <!-- ==== FORMA PART · CONTACTE ==== -->
-  <section class="section band-soft" id="contacte">
+  <!-- ==== OPINIONS ==== -->
+  <section class="section" id="opinions">
     <div class="wrap">
       <div class="sec-head reveal">
-        <p class="eyebrow">Vols col·laborar</p>
+        <p class="eyebrow">La teva opinió</p>
         <div class="rule"></div>
-        <h2>Forma part del Barna</h2>
+        <h2>Ressenyes i valoració</h2>
+        <p>Si el club t'aporta alguna cosa, explica-ho. Ens ajuda a arribar a més famílies del barri.</p>
+      </div>
+      <div class="opi reveal">
+        <div class="opi-card">
+          <h3>Ressenya del club</h3>
+          <p>Deixa la teva ressenya del CB Grup Barna a Google. Un minut teu val per moltes famílies que ens busquen.</p>
+          <a href="https://www.google.com/search?sca_esv=dfc72c22119838cc&amp;aep=1&amp;cs=0&amp;sxsrf=APpeQnsRbzMzlQPi3VcILWKbb_g7DwsOAA:1785941053029&amp;q=C.B.+Grup+Barna+Ressenyes&amp;rflfq=1&amp;num=20&amp;stick=H4sIAAAAAAAAAONgkxK2MDIwsjAxNTIxMjIzMjYyNTAy2sDI-IpR0lnPSU_Bvai0QMEpsSgvUSEotbg4Na8ytXgRK245AIsXnG5SAAAA&amp;rldimm=8202845242262325022&amp;tbm=lcl&amp;hl=ca-ES&amp;sa=X&amp;ved=2ahUKEwipybjw3ImWAxWtP_sDHf9hHLEQ9fQKegQIRRAG&amp;biw=1440&amp;bih=650&amp;dpr=2#lkt=LocalPoiReviews" target="_blank" rel="noopener" class="btn red" data-cta="ressenya-google">Escriure una ressenya</a>
+        </div>
+        <div class="opi-card">
+          <h3>Valora aquesta web</h3>
+          <p>Què et sembla cbgrupbarna.info? Puntua-la i ens arriba el teu vot per WhatsApp.</p>
+          <div class="stars" id="webStars" role="group" aria-label="Valora aquesta web de l'1 al 5">
+            <button type="button" data-v="1" aria-label="1 estrella">&#9733;</button>
+            <button type="button" data-v="2" aria-label="2 estrelles">&#9733;</button>
+            <button type="button" data-v="3" aria-label="3 estrelles">&#9733;</button>
+            <button type="button" data-v="4" aria-label="4 estrelles">&#9733;</button>
+            <button type="button" data-v="5" aria-label="5 estrelles">&#9733;</button>
+          </div>
+          <span class="stars-note" id="starsNote">Tria una puntuació</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== ACCÉS RÀPID · tot el club a mà ==== -->
+  <section class="section band-soft" id="acces">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Tot a mà</p>
+        <div class="rule"></div>
+        <h2>El Barna, punt per punt</h2>
       </div>
 
       <div class="list reveal">
-        <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20per%20ser%20Patrocinador%2FPartner%20del%20club%20%F0%9F%A4%9D" target="_blank" rel="noopener" data-cta="patrocinador">
-          <span class="list-t">Ser patrocinador</span><span class="list-s">WhatsApp</span>
-        </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTWHA0XyTnL2hz1BFuCdvnxQj9MYYaEbB4XA5pcojE9TkkUg/viewform" target="_blank" rel="noopener" data-cta="entrenador">
-          <span class="list-t">Entrenador / a</span><span class="list-s">Formulari</span>
-        </a>
-        <a href="https://wa.me/34646205526?text=Hola!%20Vull%20informaci%C3%B3%20de%20l%27Escoleta%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna%20%F0%9F%8F%80" target="_blank" rel="noopener" data-cta="escoleta-wa">
-          <span class="list-t">Escoleta · 4 a 7 anys</span><span class="list-s">+34 646 20 55 26</span>
-        </a>
-        <a href="/premidonaesport/" data-cta="premi-dona">
-          <span class="list-t">Premi Dona i Esport</span><span class="list-s">Dossier</span>
-        </a>
-        <a href="https://www.cbgrupbarna.com/noticies/" target="_blank" rel="noopener" data-cta="noticies">
-          <span class="list-t">Notícies del club</span><span class="list-s">cbgrupbarna.com</span>
-        </a>
-        <a href="https://www.basquetcatala.cat/pagina/9043" target="_blank" rel="noopener" data-cta="protocol">
-          <span class="list-t">Protocol de lesions</span><span class="list-s">FCBQ</span>
-        </a>
-        <a href="https://api.whatsapp.com/send?phone=+34698425153" target="_blank" rel="noopener" data-cta="wa-general">
-          <span class="list-t">WhatsApp del club</span><span class="list-s">+34 698 425 153</span>
-        </a>
-        <a href="cbgrupbarna.vcf" download="CB Grup Barna.vcf" data-cta="vcard-download">
-          <span class="list-t">Afegeix-nos als contactes</span><span class="list-s">vCard · iOS i Android</span>
-        </a>
+        <a href="/fotos/" data-cta="galeria-fotos"><span class="list-t">Galeria de fotos</span><span class="list-s">Partits i events</span></a>
+        <a href="/partits/" data-cta="partits"><span class="list-t">Partits i resultats</span><span class="list-s">Calendari</span></a>
+        <a href="/grup-barna-dades-oficials/" data-cta="dades-oficials"><span class="list-t">El club · dades oficials</span><span class="list-s">Font oficial</span></a>
+        <a href="/premidonaesport/" data-cta="premidonaesport"><span class="list-t">Premi Dona i Esport</span><span class="list-s">El Mètode Barna</span></a>
+        <a href="/escoleta/" data-cta="escoleta-pagina"><span class="list-t">Escoleta · 4 a 7 anys</span><span class="list-s">cbgrupbarna.info/escoleta</span></a>
+        <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="presentacio-club"><span class="list-t">Presentació del club</span><span class="list-s">Empreses i institucions</span></a>
+        <a href="https://dossierpatrocinis.skywork.website" target="_blank" rel="noopener" data-cta="sponsor-dossier"><span class="list-t">Dossier de partners</span><span class="list-s">Patrocini</span></a>
+        <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20per%20ser%20Patrocinador%2FPartner%20del%20club%20%F0%9F%A4%9D" target="_blank" rel="noopener" data-cta="patrocinador"><span class="list-t">Ser patrocinador</span><span class="list-s">WhatsApp</span></a>
+        <a href="https://app.myplay.com/public-live?liveId=CBgrupBarna" target="_blank" rel="noopener" data-cta="myplay"><span class="list-t">Partits en directe</span><span class="list-s">MyPlay</span></a>
+        <a href="https://www.cbgrupbarna.com/noticies/" target="_blank" rel="noopener" data-cta="noticies"><span class="list-t">Notícies del club</span><span class="list-s">cbgrupbarna.com</span></a>
+        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="ig-follow-list"><span class="list-t">Instagram</span><span class="list-s">@cbgrupbarna</span></a>
+        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener" data-cta="tt-follow"><span class="list-t">TikTok</span><span class="list-s">@cbgrupbarna</span></a>
+        <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20rebre%20novetats%20del%20CB%20Grup%20Barna%20pel%20WhatsApp%20%F0%9F%93%A9" target="_blank" rel="noopener" data-cta="wa-newsletter"><span class="list-t">Novetats per WhatsApp</span><span class="list-s">Sense spam</span></a>
+        <a href="cbgrupbarna.vcf" download="CB Grup Barna.vcf" data-cta="vcard-download"><span class="list-t">Afegeix-nos als contactes</span><span class="list-s">vCard · iOS i Android</span></a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTWHA0XyTnL2hz1BFuCdvnxQj9MYYaEbB4XA5pcojE9TkkUg/viewform" target="_blank" rel="noopener" data-cta="entrenador"><span class="list-t">Entrenador / a</span><span class="list-s">Formulari</span></a>
+        <a href="https://www.basquetcatala.cat/pagina/9043" target="_blank" rel="noopener" data-cta="protocol"><span class="list-t">Protocol de lesions</span><span class="list-s">FCBQ</span></a>
+        <a href="https://api.whatsapp.com/send?phone=+34698425153" target="_blank" rel="noopener" data-cta="wa-general"><span class="list-t">WhatsApp del club</span><span class="list-s">+34 698 425 153</span></a>
+        <a href="mailto:info@cbgrupbarna.com" data-cta="email-club"><span class="list-t">Correu del club</span><span class="list-s">info@cbgrupbarna.com</span></a>
       </div>
 
-      <div class="btn-row reveal" style="justify-content:center;margin-top:clamp(34px,5vw,56px)">
+      <div class="btn-row reveal" style="justify-content:center;margin-top:clamp(30px,4.5vw,50px)">
         <a href="https://api.whatsapp.com/send?text=Mira%20tot%20lo%20calent%20del%20CB%20Grup%20Barna%20%F0%9F%8F%80%20https%3A%2F%2Fcbgrupbarna.info" target="_blank" rel="noopener" class="btn ghost" data-cta="share-wa">Compartir per WhatsApp</a>
         <a href="https://twitter.com/intent/tweet?text=Mira%20tot%20lo%20calent%20del%20%40cbgrupbarna%20%F0%9F%8F%80&url=https%3A%2F%2Fcbgrupbarna.info&hashtags=somclot,b%C3%A0squet" target="_blank" rel="noopener" class="btn ghost" data-cta="share-x">Compartir a X</a>
         <button class="btn ghost" id="shareBtn" data-cta="share-native">Copiar enllaç</button>
@@ -1101,7 +779,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <p class="eyebrow">Informació oficial · Cercadors · IA</p>
         <div class="rule"></div>
         <h2 id="faq-ai-title">Preguntes freqüents</h2>
-        <p>Respostes breus perquè famílies, buscadors i assistents d'IA identifiquin correctament el club, les activitats i el contacte oficial.</p>
       </div>
       <div class="faq reveal">
         <details>
@@ -1113,20 +790,20 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
           <p>El club està vinculat al barri del Clot i al Districte de Sant Martí. La Nau del Clot és el punt esportiu principal per a activitats, entrenaments i esdeveniments del CB Grup Barna.</p>
         </details>
         <details>
-          <summary>Com puc apuntar un infant a Portes Obertes o a l'Escoleta?</summary>
-          <p>Les famílies poden contactar per WhatsApp al <a href="https://wa.me/34657601298">+34 657 60 12 98</a> o utilitzar els enllaços de Portes Obertes i Escoleta disponibles en aquesta portada.</p>
+          <summary>Com puc apuntar un infant a l'Escoleta?</summary>
+          <p>L'Escoleta és per a nens i nenes de 4 a 7 anys. Pots contactar amb en Julio Torralba per WhatsApp o telèfon al <a href="tel:+34646205526">646 205 526</a>, o veure tota la informació a <a href="/escoleta/">cbgrupbarna.info/escoleta</a>.</p>
         </details>
         <details>
-          <summary>Què és el Campus Time Chamber Estiu 26?</summary>
-          <p>És el campus d'estiu de bàsquet i tecnificació del CB Grup Barna amb Time Chamber, previst per al juliol de 2026 i orientat a jugadors i jugadores de base.</p>
-        </details>
-        <details>
-          <summary>Què és el 3x3 Westfield Glòries?</summary>
-          <p>És un torneig urbà de bàsquet 3x3 organitzat amb CB Grup Barna, Time Chamber i l'entorn del Clot-Glòries. La informació d'inscripció està enllaçada des d'aquesta web oficial.</p>
+          <summary>On puc veure el calendari de partits?</summary>
+          <p>Els propers partits de tots els equips es publiquen en aquesta portada i el calendari complet amb resultats està a <a href="/partits/">cbgrupbarna.info/partits</a>. Els partits també es poden seguir en streaming a MyPlay.</p>
         </details>
         <details>
           <summary>El club treballa el bàsquet femení?</summary>
           <p>Sí. El CB Grup Barna impulsa una línia femenina forta i documenta el seu model al dossier <a href="/premidonaesport/">Premi Dona i Esport</a>, amb dades, recerca pròpia i propostes per al bàsquet femení de Barcelona.</p>
+        </details>
+        <details>
+          <summary>Com puc col·laborar o patrocinar el club?</summary>
+          <p>Les empreses i entitats poden consultar el dossier de partners i escriure al WhatsApp del club (<a href="https://wa.me/34698425153">+34 698 425 153</a>) o a <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>. Responem en menys de 24 hores.</p>
         </details>
       </div>
     </div>
@@ -1137,25 +814,37 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 <!-- ==== PEU ==== -->
 <footer class="foot">
   <div class="wrap">
+    <div class="foot-partners">
+      <p class="eyebrow">Partners i col·laboradors</p>
+      <div class="partners">
+        <span>Westfield Glòries</span>
+        <span>FCBQ</span>
+        <span>Time Chamber</span>
+        <span>Eix Clot</span>
+        <span>Ajuntament BCN</span>
+        <span>MyPlay</span>
+      </div>
+    </div>
     <div class="foot-grid">
       <div class="foot-col">
-        <h3>El club</h3>
+        <h3>El Barna</h3>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
         <a href="/escoleta/">Escoleta</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/fotos/">Galeria de fotos</a>
       </div>
       <div class="foot-col">
-        <h3>Activitats</h3>
-        <a href="#portes">Portes Obertes</a>
-        <a href="#campus">Campus Estiu 26</a>
+        <h3>Temporada</h3>
+        <a href="/partits/">Partits i resultats</a>
         <a href="https://app.myplay.com/public-live?liveId=CBgrupBarna" target="_blank" rel="noopener">Partits en directe</a>
         <a href="https://www.cbgrupbarna.com/noticies/" target="_blank" rel="noopener">Notícies</a>
+        <a href="https://dossierpatrocinis.skywork.website" target="_blank" rel="noopener">Partners i patrocini</a>
       </div>
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
+        <a href="tel:+34646205526">Escoleta · 646 205 526</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
       </div>
       <div class="foot-col">
@@ -1177,8 +866,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<!-- Dades de partits · gestionades des de /partits/admin.html -->
+<script src="/partits/partits.js"></script>
+
 <script>
-  // Menú mòbil
+  // ==== MENÚ ====
   (function () {
     var burger = document.getElementById('burger');
     var menu = document.getElementById('menu');
@@ -1191,278 +883,133 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       burger.setAttribute('aria-label', open ? 'Tancar el menú' : 'Obrir el menú');
     }
     burger.addEventListener('click', function () { toggle(!menu.classList.contains('open')); });
-    menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') toggle(false); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
   })();
-</script>
 
-<script>
-  // CTA tracking
-  document.querySelectorAll('[data-cta]').forEach(el => {
-    el.addEventListener('click', () => {
-      const cta = el.getAttribute('data-cta');
+  // ==== CTA tracking ====
+  document.querySelectorAll('[data-cta]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var cta = el.getAttribute('data-cta');
       if (window.gtag) window.gtag('event', 'cta_click', { cta_id: cta });
-      try { console.log('[cta]', cta); } catch (_) {}
     });
   });
 
-  // Share helpers
+  // ==== Compartir ====
   async function shareIt(id, text) {
-    const url = location.href.split('?')[0];
+    var url = location.href.split('?')[0];
     try {
-      if (navigator.share) await navigator.share({ url, title: 'CB Grup Barna', text });
-      else { await navigator.clipboard.writeText(url); flash(); }
+      if (navigator.share) await navigator.share({ url: url, title: 'CB Grup Barna', text: text });
+      else { await navigator.clipboard.writeText(url); flash('Enllaç copiat'); }
     } catch (_) {}
   }
-  function flash() {
-    const t = document.createElement('div');
-    t.textContent = 'Enllaç copiat';
+  function flash(msg) {
+    var t = document.createElement('div');
+    t.textContent = msg;
     t.style.cssText = "position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#0a0a0a;color:#fff;padding:14px 26px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;z-index:1000";
     document.body.appendChild(t);
-    setTimeout(() => t.remove(), 1800);
+    setTimeout(function () { t.remove(); }, 2200);
   }
-  const sb = document.getElementById('shareBtn');
-  if (sb) sb.addEventListener('click', () => shareIt('main', 'Mira tot lo calent del CB Grup Barna'));
+  var sb = document.getElementById('shareBtn');
+  if (sb) sb.addEventListener('click', function () { shareIt('main', 'Mira tot lo calent del CB Grup Barna'); });
 
-  // ===== LIVE DATA from /data.json (edita aquest fitxer per actualitzar números reals) =====
-  async function loadLiveData() {
-    try {
-      const r = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
-      if (!r.ok) return;
-      const data = await r.json();
-
-      // Campus: actualitzar barres setmanals
-      if (data.campus?.weeks) {
-        const rows = document.querySelectorAll('.fill-row');
-        const limit = data.campus.limitPerWeek || 50;
-        data.campus.weeks.forEach((w, i) => {
-          const row = rows[i]; if (!row) return;
-          const wLimit = w.limit || limit;
-          const rawPct = Math.round((w.filled / wLimit) * 100);
-          const barPct = Math.min(100, rawPct);
-          const isOver = rawPct > 100;
-          const isHigh = rawPct >= 80 && rawPct <= 100;
-          const lliures = wLimit - w.filled;
-
-          const lab  = row.querySelector('.fill-week');
-          const name = row.querySelector('.fill-name');
-          const bar  = row.querySelector('.fill-fill');
-          const num  = row.querySelector('.fill-num');
-          const badge = row.querySelector('.fill-badge');
-          const bdBarna = row.querySelector('.fill-breakdown span:first-child');
-          const bdLliures = row.querySelector('.fill-breakdown span:last-child');
-
-          if (lab)  lab.textContent = w.label;
-          if (name) name.textContent = w.name || '';
-          if (bar) {
-            bar.dataset.pct = barPct;
-            bar.classList.remove('over','high','full');
-            if (isOver) bar.classList.add('over');
-            else if (isHigh) bar.classList.add('high');
-          }
-          if (num) {
-            const pctEl = num.querySelector('.fill-pct');
-            if (pctEl) pctEl.textContent = '(' + rawPct + '%)';
-            const textNode = num.childNodes[0];
-            if (textNode && textNode.nodeType === 3) textNode.textContent = w.filled + '/' + wLimit + ' ';
-            num.classList.toggle('over', isOver);
-          }
-          if (badge) {
-            badge.className = 'fill-badge ' + (isOver ? 'fill-calent' : lliures <= 5 && lliures > 0 ? 'fill-disponible' : lliures <= 0 ? 'fill-calent' : lliures <= 15 ? 'fill-actiu' : 'fill-disponible');
-            badge.textContent = isOver || lliures <= 0 ? 'Complet' : lliures <= 10 ? 'Últimes places' : 'Disponible';
-          }
-          if (bdBarna && w.barna != null) bdBarna.textContent = '🏀 ' + w.barna + ' · 🔵 ' + (w.ext ?? '');
-          if (bdLliures) {
-            bdLliures.textContent = 'Lliures: ' + (lliures >= 0 ? lliures : lliures);
-            bdLliures.className = lliures < 0 ? 'fill-lliures-neg' : 'fill-lliures-pos';
-          }
-        });
-      }
-
-      // 3x3: actualitzar comptador i barra
-      if (data.tres_x_tres) {
-        const t = data.tres_x_tres;
-        const counter = document.querySelector('.counter-num');
-        const bar = document.querySelector('.counter-bar-fill');
-        const ofText = document.querySelector('.counter-of');
-        const pctText = document.querySelector('.counter-pct');
-        const pct = Math.round((t.filled / t.limit) * 100);
-        if (counter) counter.dataset.counter = t.filled;
-        if (bar) bar.dataset.pct = pct;
-        if (ofText) ofText.innerHTML = `EQUIPS INSCRITS · DE <b>${t.limit} places</b>`;
-        if (pctText) pctText.textContent = `${pct}% PLE${t.deadlineNote ? ' · ⏱ ' + t.deadlineNote : ''}`;
-      }
-
-      // Última actualització visible
-      if (data.lastUpdate) {
-        const dt = new Date(data.lastUpdate);
-        const fmt = dt.toLocaleString('ca-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
-        document.querySelectorAll('[data-last-update]').forEach(el => { el.textContent = 'Actualitzat: ' + fmt; });
-      }
-    } catch (e) { try { console.warn('[data.json]', e); } catch(_){} }
-  }
-
-  // Reveal + animate progress bars + counter (run after live data is ready)
-  function setupReveal() {
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('visible');
-        // animate fill bars within
-        e.target.querySelectorAll('.fill-fill, .counter-bar-fill').forEach(b => {
-          const pct = parseInt(b.dataset.pct || '0', 10);
-          requestAnimationFrame(() => { b.style.transform = `scaleX(${pct/100})`; });
-        });
-        // animate counter
-        e.target.querySelectorAll('[data-counter]').forEach(c => {
-          const target = parseInt(c.dataset.counter || '0', 10);
-          const dur = 1400; const start = performance.now();
-          const tick = (t) => {
-            const p = Math.min(1, (t - start) / dur);
-            const eased = 1 - Math.pow(1 - p, 3);
-            c.textContent = Math.round(target * eased);
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        });
-        io.unobserve(e.target);
+  // ==== CALENDARI · propers partits des de /partits/partits.js ====
+  (function () {
+    var box = document.getElementById('cal-list');
+    if (!box) return;
+    var DIES = ['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
+    var MESOS = ['gen','febr','març','abr','maig','juny','jul','ag','set','oct','nov','des'];
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
       });
-    }, { threshold: 0.18 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  } else {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-    document.querySelectorAll('.fill-fill, .counter-bar-fill').forEach(b => {
-      b.style.transform = `scaleX(${(parseInt(b.dataset.pct||'0',10))/100})`;
+    }
+    function buit() {
+      box.innerHTML = '<div class="cal-empty">Encara no hi ha propers partits publicats. '
+        + 'Consulta el <a href="/partits/">calendari complet</a> o segueix-nos a '
+        + '<a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</div>';
+    }
+    function render() {
+      var all = window.PARTITS || [];
+      var ahir = new Date(Date.now() - 36 * 3600 * 1000).toISOString().slice(0, 10);
+      var props = all.filter(function (p) { return p && p.data >= ahir && !p.resultat; })
+        .sort(function (a, b) { return (a.data + (a.hora || '')).localeCompare(b.data + (b.hora || '')); })
+        .slice(0, 6);
+      if (!props.length) return buit();
+      box.innerHTML = props.map(function (p) {
+        var dt = new Date(p.data + 'T12:00:00');
+        return '<div class="cal-row">'
+          + '<span class="cal-date"><b>' + dt.getDate() + '</b>' + MESOS[dt.getMonth()] + '</span>'
+          + '<span class="cal-main">'
+            + '<span class="cal-team">' + esc(p.equip) + ' · ' + esc(p.rival) + '</span>'
+            + '<span class="cal-meta">' + esc(p.lloc || '') + (p.competicio ? ' · ' + esc(p.competicio) : '') + '</span>'
+          + '</span>'
+          + '<span class="cal-when">' + DIES[dt.getDay()] + (p.hora ? ' · ' + esc(p.hora) : '') + '</span>'
+          + '<span class="cal-cond">' + (p.condicio === 'local' ? 'A casa' : 'A fora') + '</span>'
+          + '</div>';
+      }).join('');
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render);
+    else render();
+  })();
+
+  // ==== VALORACIÓ DE LA WEB ====
+  (function () {
+    var box = document.getElementById('webStars');
+    if (!box) return;
+    var note = document.getElementById('starsNote');
+    var btns = [].slice.call(box.querySelectorAll('button'));
+    function paint(n) { btns.forEach(function (b, i) { b.classList.toggle('on', i < n); }); }
+    btns.forEach(function (b) {
+      b.addEventListener('mouseenter', function () { paint(+b.dataset.v); });
+      b.addEventListener('focus', function () { paint(+b.dataset.v); });
+      b.addEventListener('click', function () {
+        var v = +b.dataset.v;
+        paint(v);
+        if (note) note.textContent = 'Gràcies · ' + v + ' de 5';
+        if (window.gtag) window.gtag('event', 'web_rating', { rating: v });
+        var txt = encodeURIComponent('Valoro la web cbgrupbarna.info amb ' + v + '/5 estrelles.');
+        window.open('https://api.whatsapp.com/send?phone=+34698425153&text=' + txt, '_blank', 'noopener');
+      });
     });
-    document.querySelectorAll('[data-counter]').forEach(c => c.textContent = c.dataset.counter);
-  }
-  } // end setupReveal
+    box.addEventListener('mouseleave', function () { paint(0); });
+  })();
 
-  // Bootstrap: load live data first, then render animations
-  loadLiveData().finally(setupReveal);
-</script>
-
-<script>
-// ==== COUNTDOWN 3x3 Westfield Glòries · 6 juny 2026 ====
-(function(){
-  var target = new Date('2026-06-06T09:00:00');
-  var dEl = document.getElementById('cd-d');
-  var hEl = document.getElementById('cd-h');
-  var mEl = document.getElementById('cd-m');
-  if (!dEl) return;
-  function pad(n){ return n < 10 ? '0'+n : ''+n; }
-  function tick(){
-    var now = new Date();
-    var diff = target - now;
-    if (diff <= 0) {
-      dEl.textContent = '00'; hEl.textContent = '00'; mEl.textContent = '00';
+  // ==== REVELAT ====
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
       return;
     }
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    dEl.textContent = pad(d);
-    hEl.textContent = pad(h);
-    mEl.textContent = pad(m);
-  }
-  tick();
-  setInterval(tick, 30000);
-})();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  })();
 
-// ==== SOCIAL GRID · Link in Bio ====
-(function () {
-  var GRID = document.getElementById('social-grid');
-  if (!GRID) return;
-
-  function igUrl(sc) { return 'https://www.instagram.com/p/' + sc + '/embed/captioned/'; }
-  function ttUrl(id) { return 'https://www.tiktok.com/embed/v2/' + id; }
-  function igPostUrl(sc) { return 'https://www.instagram.com/p/' + sc + '/'; }
-  function ttPostUrl(id) { return 'https://www.tiktok.com/@cbgrupbarna/video/' + id; }
-
-  function renderTile(tile) {
-    var isIG = tile.platform !== 'tiktok';
-    var embedSrc = isIG ? igUrl(tile.shortcode) : ttUrl(tile.shortcode);
-    var postHref = isIG ? igPostUrl(tile.shortcode) : ttPostUrl(tile.shortcode);
-
-    var actions = (tile.actions || []).map(function (a) {
-      return '<a href="' + a.url + '" target="_blank" rel="noopener" class="sg-action ' + (a.style || 'primary') + '" data-cta="sg-' + tile.id + '">' + a.label + '</a>';
-    }).join('');
-    var badge = tile.badge ? '<span class="sg-tile-badge">' + tile.badge + '</span>' : '';
-
-    var wrap = document.createElement('div');
-    wrap.className = 'sg-tile';
-    wrap.innerHTML =
-      '<div class="sg-tile-embed-wrap">' +
-        '<div class="sg-tile-loading"><div class="sg-spinner"></div><span>Carregant</span></div>' +
-        '<div class="sg-tile-fallback"><span class="sg-tile-fallback-icon">Contingut no disponible</span>' +
-          '<a href="' + postHref + '" target="_blank" rel="noopener">Veure a Instagram</a></div>' +
-      '</div>' +
-      '<div class="sg-tile-actions">' + actions + badge + '</div>';
-
-    var embedWrap = wrap.querySelector('.sg-tile-embed-wrap');
-    var loading   = wrap.querySelector('.sg-tile-loading');
-    var fallback  = wrap.querySelector('.sg-tile-fallback');
-    var injected  = false;
-    var timer;
-
-    function inject() {
-      if (injected) return;
-      injected = true;
-      var iframe = document.createElement('iframe');
-      iframe.setAttribute('allowtransparency', 'true');
-      iframe.setAttribute('allowfullscreen', 'true');
-      iframe.setAttribute('loading', 'lazy');
-      iframe.setAttribute('scrolling', 'no');
-      iframe.src = embedSrc;
-      iframe.onload = function () {
-        clearTimeout(timer);
-        loading.classList.add('hidden');
-      };
-      embedWrap.appendChild(iframe);
-      timer = setTimeout(function () {
-        if (!loading.classList.contains('hidden')) {
-          iframe.remove();
-          loading.classList.add('hidden');
-          fallback.classList.add('visible');
-        }
-      }, 8000);
+  // ==== Instagram embed · càrrega diferida ====
+  (function () {
+    var seccions = document.querySelectorAll('.ig-embed-wrap');
+    if (!seccions.length) return;
+    var loaded = false;
+    function loadIG() {
+      if (loaded) return; loaded = true;
+      var s = document.createElement('script');
+      s.src = 'https://www.instagram.com/embed.js';
+      s.async = true;
+      document.head.appendChild(s);
     }
-
     if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { inject(); io.disconnect(); }
-      }, { rootMargin: '200px' });
-      io.observe(wrap);
-    } else {
-      inject();
-    }
-
-    return wrap;
-  }
-
-  fetch('social-grid.json?t=' + Math.floor(Date.now() / 60000))
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (data) {
-      if (!data || !data.tiles) return;
-      var titleEl = document.getElementById('sg-title');
-      if (titleEl && data.sectionTitle) titleEl.textContent = data.sectionTitle;
-      data.tiles.forEach(function (tile) {
-        var el = renderTile(tile);
-        if (el) GRID.appendChild(el);
-      });
-      GRID.addEventListener('click', function (e) {
-        var a = e.target.closest && e.target.closest('[data-cta^="sg-"]');
-        if (a && window.gtag) {
-          gtag('event', 'select_content', {
-            content_type: 'link_in_bio',
-            item_id: a.getAttribute('data-cta').replace('sg-', '')
-          });
-        }
-      });
-    })
-    .catch(function () {});
-})();
+      var io = new IntersectionObserver(function (e) {
+        if (e[0].isIntersecting) { loadIG(); io.disconnect(); }
+      }, { rootMargin: '400px' });
+      io.observe(seccions[0]);
+    } else { loadIG(); }
+  })();
 </script>
 
 </body>
