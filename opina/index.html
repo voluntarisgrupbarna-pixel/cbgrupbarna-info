@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>Deixa la teva ressenya · CB Grup Barna</title>
+<meta name="description" content="Ajuda el CB Grup Barna a arribar a 300 ressenyes a Google. Menys d'1 minut: toca el botó, tria 5 estrelles i escriu dues línies. Ayuda al CB Grup Barna con tu reseña en Google.">
+
+<link rel="canonical" href="https://cbgrupbarna.info/opina/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:site_name" content="CB Grup Barna">
+<meta property="og:title" content="Ens ajudes en menys d'1 minut? · Ressenyes CB Grup Barna">
+<meta property="og:description" content="No tenim pressupost de publicitat. Et tenim a tu. Deixa la teva ressenya a Google i ajuda'ns a arribar a 300.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbgrupbarna.info/opina/">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
+
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R6XYR7G1WF', { send_page_view: true, page_title: 'Opina · Ressenyes Google' });
+</script>
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --red:#E31E24; --red-dark:#a81318;
+    --black:#050505; --panel:#101010; --panel-2:#171717;
+    --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.2);
+    --txt:#fff; --muted:#8f8f8f;
+    --gold:#FFC107; --green:#25D366;
+    --gutter:clamp(18px,5vw,32px);
+    --display:'Bebas Neue','Oswald','Arial Narrow',Impact,sans-serif;
+  }
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+  body{
+    background:var(--black); color:var(--txt); line-height:1.55;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    overflow-x:hidden; padding-bottom:84px;
+  }
+  img,svg{max-width:100%;display:block}
+  a{color:inherit}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit;-webkit-tap-highlight-color:transparent}
+  .wrap{max-width:760px;margin:0 auto;padding:0 var(--gutter)}
+  .display{font-family:var(--display);letter-spacing:.02em;line-height:.92;text-transform:uppercase}
+
+  /* ---------- nav ---------- */
+  nav{display:flex;align-items:center;gap:10px;padding:12px var(--gutter);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60;background:rgba(5,5,5,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  nav img{width:34px;height:34px;object-fit:contain}
+  nav .nm{font-family:var(--display);font-size:1.2rem;letter-spacing:.06em}
+  nav .nm span{color:var(--red)}
+  .langs{margin-left:auto;display:flex;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px}
+  .langs button{font-size:11px;font-weight:800;letter-spacing:.08em;padding:5px 11px;border-radius:999px;color:var(--muted)}
+  .langs button[aria-pressed="true"]{background:var(--red);color:#fff}
+
+  /* ---------- hero ---------- */
+  header.hero{position:relative;padding:clamp(38px,9vw,72px) 0 clamp(30px,7vw,48px);overflow:hidden}
+  header.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(120% 70% at 50% 0%,rgba(227,30,36,.22),transparent 62%);pointer-events:none}
+  .hero .wrap{position:relative}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:1px solid rgba(227,30,36,.45);background:rgba(227,30,36,.1);padding:6px 12px;border-radius:999px;margin-bottom:18px}
+  .hook{font-size:clamp(17px,4.4vw,22px);font-weight:700;line-height:1.3;margin-bottom:12px}
+  h1{font-family:var(--display);text-transform:uppercase;line-height:.9;letter-spacing:.01em;font-size:clamp(42px,12vw,86px);margin-bottom:16px;overflow-wrap:break-word}
+  h1 em{font-style:normal;color:var(--red)}
+  .sub{color:#c9c9c9;font-size:clamp(15px,3.9vw,17.5px);max-width:34em;margin-bottom:26px}
+  .stars{letter-spacing:.12em;color:var(--gold);font-size:20px;margin-bottom:10px}
+
+  /* ---------- botó principal ---------- */
+  .cta-main{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    width:100%;background:var(--red);color:#fff;border-radius:16px;
+    padding:20px 22px;text-decoration:none;text-align:center;
+    box-shadow:0 14px 38px rgba(227,30,36,.34);
+    transition:transform .15s ease,background .15s ease,box-shadow .15s ease;
+  }
+  .cta-main:hover,.cta-main:focus-visible{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 18px 46px rgba(227,30,36,.42)}
+  .cta-main:active{transform:translateY(0)}
+  .cta-main b{font-family:var(--display);font-size:clamp(26px,7vw,34px);letter-spacing:.04em;line-height:1}
+  .cta-main small{font-size:12.5px;opacity:.9;font-weight:600;letter-spacing:.02em}
+  .cta-note{color:var(--muted);font-size:12.5px;margin-top:12px;line-height:1.5}
+  .cta-note b{color:#ddd}
+
+  /* ---------- comptador ---------- */
+  .counter{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin:30px 0 0}
+  .counter-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .counter-top .n{font-family:var(--display);font-size:44px;line-height:.85;color:var(--red)}
+  .counter-top .of{font-family:var(--display);font-size:26px;color:var(--muted);line-height:.85}
+  .counter-top .lbl{margin-left:auto;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .bar{height:12px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;border:1px solid var(--line)}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),#ff6b2c);border-radius:999px;transition:width 1.1s cubic-bezier(.2,.7,.3,1)}
+  .counter-foot{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+
+  /* ---------- seccions ---------- */
+  section{padding:clamp(38px,8vw,60px) 0;border-top:1px solid var(--line)}
+  h2{font-family:var(--display);text-transform:uppercase;font-size:clamp(30px,7.5vw,44px);line-height:.95;letter-spacing:.02em;margin-bottom:8px}
+  h2 em{font-style:normal;color:var(--red)}
+  .lead{color:var(--muted);font-size:15px;margin-bottom:26px;max-width:38em}
+
+  .cards{display:grid;gap:12px;grid-template-columns:1fr}
+  @media(min-width:720px){.cards{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .card .ic{font-size:24px;margin-bottom:10px}
+  .card h3{font-family:var(--display);font-size:20px;letter-spacing:.03em;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+  .steps{display:grid;gap:12px;counter-reset:s}
+  .step{display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .step .num{font-family:var(--display);font-size:30px;line-height:1;color:var(--red);min-width:34px}
+  .step h3{font-size:15.5px;font-weight:800;margin-bottom:3px}
+  .step p{color:var(--muted);font-size:14px}
+  .warn{margin-top:16px;border-left:3px solid var(--red);background:rgba(227,30,36,.07);padding:14px 16px;border-radius:0 12px 12px 0;font-size:14px;color:#ddd;line-height:1.6}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .chip{border:1px solid var(--line-2);border-radius:999px;padding:9px 14px;font-size:13.5px;color:#ddd;background:rgba(255,255,255,.03)}
+
+  /* ---------- vídeo ---------- */
+  #videoSection{display:none}
+  .video-box{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#000}
+  .video-box video{width:100%;height:auto;display:block}
+  .video-cap{color:var(--muted);font-size:12.5px;padding:12px 16px;border-top:1px solid var(--line)}
+
+  /* ---------- compartir ---------- */
+  .share-grid{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+  @media(min-width:600px){.share-grid{grid-template-columns:repeat(4,1fr)}}
+  .share-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 10px;font-size:13.5px;font-weight:700;text-decoration:none;transition:border-color .15s,transform .15s}
+  .share-btn:hover{border-color:var(--line-2);transform:translateY(-1px)}
+  .share-btn.wa{border-color:rgba(37,211,102,.35)}
+  .share-btn.wa:hover{border-color:var(--green)}
+
+  .qr-box{display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:14px}
+  .qr-box .qr{background:#fff;border-radius:12px;padding:8px;width:150px;flex:none}
+  .qr-box .qr img{width:100%;height:auto}
+  .qr-box .txt{flex:1;min-width:200px}
+  .qr-box h3{font-family:var(--display);font-size:22px;letter-spacing:.03em;margin-bottom:6px}
+  .qr-box p{color:var(--muted);font-size:13.5px;line-height:1.6;margin-bottom:12px}
+  .btn-ghost{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line-2);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700;text-decoration:none;transition:border-color .15s,background .15s}
+  .btn-ghost:hover{border-color:var(--red);background:rgba(227,30,36,.1)}
+
+  /* ---------- plantilles ---------- */
+  details.tpl{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:0;overflow:hidden}
+  details.tpl summary{padding:18px 20px;font-weight:800;font-size:15px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px}
+  details.tpl summary::-webkit-details-marker{display:none}
+  details.tpl summary::after{content:'+';margin-left:auto;color:var(--red);font-size:22px;line-height:1}
+  details.tpl[open] summary::after{content:'–'}
+  .tpl-body{padding:0 20px 20px}
+  .tpl-msg{background:#0a0a0a;border:1px solid var(--line);border-radius:12px;padding:16px;font-size:14px;line-height:1.7;white-space:pre-wrap;color:#ddd;margin-bottom:10px}
+  .copy-row{display:flex;align-items:center;gap:10px}
+  .copied{color:var(--green);font-size:12.5px;font-weight:700;margin-left:10px;opacity:0;transition:opacity .2s}
+  .copied.on{opacity:1}
+
+  /* ---------- sticky ---------- */
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));background:rgba(5,5,5,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);transform:translateY(115%);transition:transform .25s ease;visibility:hidden}
+  .sticky.show{transform:none;visibility:visible}
+  .sticky a{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--red);color:#fff;border-radius:12px;padding:15px;text-decoration:none;font-family:var(--display);font-size:21px;letter-spacing:.05em;max-width:760px;margin:0 auto}
+  .sticky a:hover{background:var(--red-dark)}
+
+  footer{border-top:1px solid var(--line);padding:34px var(--gutter) 30px;text-align:center;color:var(--muted);font-size:12.5px}
+  footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-2)}
+  footer a:hover{color:#fff}
+  footer .fl{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="nm">CB GRUP <span>BARNA</span></div>
+  <div class="langs" role="group" aria-label="Idioma">
+    <button type="button" data-lang="ca" aria-pressed="true">CAT</button>
+    <button type="button" data-lang="es" aria-pressed="false">CAST</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker" data-t="kicker">⭐ 1 minut · Google</span>
+    <p class="hook" data-t="hook">No tenim pressupost de publicitat. Et tenim a tu.</p>
+    <h1><span data-t="h1a">Deixa'ns una</span> <em data-t="h1b">ressenya</em> <span data-t="h1c">a Google</span></h1>
+    <p class="sub" data-t="sub">Quan una família busca un club de bàsquet a Barcelona, Google li ensenya primer els clubs més ben valorats. Ara mateix, aquesta decisió depèn de tu i de dues línies teves.</p>
+
+    <a class="cta-main" id="ctaHero" href="#" rel="noopener">
+      <b data-t="ctaMain">Deixar la meva ressenya</b>
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <small data-t="ctaSmall">S'obre directament el formulari de Google</small>
+    </a>
+    <p class="cta-note" data-t="ctaNote">Si no tens la sessió iniciada, Google et demanarà entrar amb el teu compte i tornaràs aquí mateix. <b>Triga menys d'1 minut.</b></p>
+
+    <div class="counter" id="counter">
+      <div class="counter-top">
+        <span class="n" id="cNow">—</span>
+        <span class="of" id="cOf">/ 300</span>
+        <span class="lbl" data-t="cLbl">Objectiu de la temporada</span>
+      </div>
+      <div class="bar"><i id="cBar"></i></div>
+      <div class="counter-foot">
+        <span id="cLeft" data-t="cGoal">Objectiu: 300 ressenyes a Google</span>
+        <span id="cUpd"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="perque">
+  <div class="wrap">
+    <h2><span data-t="s1t">Per què</span> <em data-t="s1te">importa tant</em></h2>
+    <p class="lead" data-t="s1l">Tres raons molt concretes. Cap d'elles és "quedar bé".</p>
+    <div class="cards">
+      <div class="card">
+        <div class="ic" aria-hidden="true">🏀</div>
+        <h3 data-t="c1t">Perquè ens trobin</h3>
+        <p data-t="c1p">Qui busca "bàsquet base Barcelona" o "baloncesto Sant Martí" veu primer els clubs amb més ressenyes i millor nota. Cada ressenya ens acosta a aparèixer abans que ningú.</p>
+      </div>
+      <div class="card">
+        <div class="ic" aria-hidden="true">🤝</div>
+        <h3 data-t="c2t">Perquè ens obre portes</h3>
+        <p data-t="c2p">Empreses del barri, institucions i possibles patrocinadors miren la fitxa del club abans de dir que sí. Les ressenyes són el nostre currículum públic.</p>
+      </div>
+      <div class="card">
+        <div class="ic" aria-hidden="true">❤️</div>
+        <h3 data-t="c3t">Perquè és de tots</h3>
+        <p data-t="c3p">Som més de 450 famílies. Si una de cada dues escriu dues línies, el Barna passa a ser el club de barri més ben valorat de Barcelona. Literalment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="com">
+  <div class="wrap">
+    <h2><span data-t="s2t">Com es fa</span> <em data-t="s2te">en 1 minut</em></h2>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><div><h3 data-t="p1t">Toca el botó vermell</h3><p data-t="p1p">S'obre la finestra de valoració del CB Grup Barna a Google. No has de buscar res.</p></div></div>
+      <div class="step"><div class="num">02</div><div><h3 data-t="p2t">Tria les estrelles i escriu 2 o 3 línies</h3><p data-t="p2p">Explica què hi trobes al club: l'equip, els entrenadors, l'ambient, el tracte amb les famílies.</p></div></div>
+      <div class="step"><div class="num">03</div><div><h3 data-t="p3t">Publica</h3><p data-t="p3p">Ja està. Es publica al moment i pots editar-la o esborrar-la quan vulguis des del teu compte de Google.</p></div></div>
+    </div>
+    <p class="warn" data-t="warn"><b>Important:</b> escriu el que penses de veritat i amb les teves paraules. No volem ressenyes calcades ni inventades — Google les detecta, les esborra i perjudiquen el club. Una opinió sincera val per deu de copiades.</p>
+  </div>
+</section>
+
+<section id="idees">
+  <div class="wrap">
+    <h2><span data-t="s3t">No saps</span> <em data-t="s3te">què escriure?</em></h2>
+    <p class="lead" data-t="s3l">Pensa en una d'aquestes coses i explica-la amb les teves paraules:</p>
+    <div class="chips">
+      <span class="chip" data-t="i1">L'entrenador o entrenadora del teu fill o filla</span>
+      <span class="chip" data-t="i2">El primer dia que va entrar al pavelló</span>
+      <span class="chip" data-t="i3">Com ha canviat des que juga al Barna</span>
+      <span class="chip" data-t="i4">L'ambient de les grades un dissabte al matí</span>
+      <span class="chip" data-t="i5">El tracte del club amb les famílies</span>
+      <span class="chip" data-t="i6">Un moment concret que recordareu sempre</span>
+      <span class="chip" data-t="i7">Per què recomanaries el club a una altra família</span>
+    </div>
+  </div>
+</section>
+
+<section id="videoSection">
+  <div class="wrap">
+    <h2><span data-t="s4t">Un minut</span> <em data-t="s4te">de part nostra</em></h2>
+    <div class="video-box">
+      <video id="opinaVideo" controls playsinline preload="none"></video>
+      <div class="video-cap" id="videoCap"></div>
+    </div>
+  </div>
+</section>
+
+<section id="comparteix">
+  <div class="wrap">
+    <h2><span data-t="s5t">Comparteix-ho amb</span> <em data-t="s5te">3 famílies</em></h2>
+    <p class="lead" data-t="s5l">Aquesta és la part que multiplica. Envia l'enllaç al grup del teu equip: cbgrupbarna.info/opina</p>
+    <div class="share-grid">
+      <a class="share-btn wa" id="shWa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="share-btn" id="shTg" href="#" target="_blank" rel="noopener">✈️ Telegram</a>
+      <a class="share-btn" id="shMail" href="#">✉️ <span data-t="shMail">Correu</span></a>
+      <button class="share-btn" id="shCopy" type="button">🔗 <span data-t="shCopy">Copiar enllaç</span><span class="copied" id="copiedLink">OK</span></button>
+    </div>
+
+    <div class="qr-box">
+      <div class="qr"><img src="qr.svg" alt="Codi QR cap a cbgrupbarna.info/opina" width="150" height="150" loading="lazy"></div>
+      <div class="txt">
+        <h3 data-t="qrT">Codi QR per imprimir</h3>
+        <p data-t="qrP">Per al taulell del pavelló, els cartells del partit, la samarreta del delegat o la pantalla del descans. És vectorial: es pot ampliar tant com calgui sense perdre qualitat.</p>
+        <a class="btn-ghost" href="qr.svg" download="qr-opina-cbgrupbarna.svg" data-t="qrD">Descarregar el QR</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="delegats">
+  <div class="wrap">
+    <h2><span data-t="s6t">Per a delegats,</span> <em data-t="s6te">entrenadors i junta</em></h2>
+    <p class="lead" data-t="s6l">Missatge llest per enviar al grup de WhatsApp de l'equip. Copia'l i envia'l tal qual.</p>
+    <details class="tpl">
+      <summary data-t="tplCa">💬 Missatge en català</summary>
+      <div class="tpl-body">
+        <div class="tpl-msg" id="msgCa">💬 Ens ajudes en menys d'1 minut?
+
+Si el CB Grup Barna forma part del vostre camí, ens ajudaria molt que ens deixéssiu una ressenya a Google.
+
+La vostra opinió ajuda altres famílies a trobar-nos i a fer créixer el club.
+
+⭐ Deixa la teva ressenya aquí:
+https://cbgrupbarna.info/opina
+
+Moltes gràcies per formar part de la família Barna ❤️🖤</div>
+        <div class="copy-row"><button class="btn-ghost" type="button" data-copy="msgCa" data-t="copyBtn">Copiar el missatge</button><span class="copied">OK</span></div>
+      </div>
+    </details>
+    <details class="tpl" style="margin-top:10px">
+      <summary data-t="tplEs">💬 Mensaje en castellano</summary>
+      <div class="tpl-body">
+        <div class="tpl-msg" id="msgEs">💬 ¿Nos ayudas en menos de 1 minuto?
+
+Si el CB Grup Barna forma parte de vuestro camino, nos ayudaría muchísimo que nos dejarais una reseña en Google.
+
+Vuestra opinión ayuda a otras familias a encontrarnos y a hacer crecer el club.
+
+⭐ Deja tu reseña aquí:
+https://cbgrupbarna.info/opina
+
+¡Gracias por formar parte de la familia Barna! ❤️🖤</div>
+        <div class="copy-row"><button class="btn-ghost" type="button" data-copy="msgEs" data-t="copyBtn">Copiar el missatge</button><span class="copied">OK</span></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">
+    <a href="/">cbgrupbarna.info</a>
+    <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>
+    <a href="https://cbgrupbarna.com" target="_blank" rel="noopener">cbgrupbarna.com</a>
+  </div>
+  <p>CB Grup Barna · El Clot, Districte de Sant Martí · Barcelona · Des del 1965</p>
+</footer>
+
+<div class="sticky">
+  <a id="ctaSticky" href="#" rel="noopener" data-t="ctaSticky">Deixar la meva ressenya ⭐</a>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var PAGE_URL = 'https://cbgrupbarna.info/opina';
+  var DEFAULTS = {
+    placeId: '',
+    reviewUrl: '',
+    fallbackUrl: 'https://www.google.com/maps/search/?api=1&query=CB%20Grup%20Barna%20Barcelona',
+    goal: 300,
+    current: null,
+    updated: '',
+    video: { enabled: false, src: '', poster: '', caption: '' }
+  };
+
+  // ---------------------------------------------------------------- i18n ---
+  var ES = {
+    kicker: '⭐ 1 minuto · Google',
+    hook: 'No tenemos presupuesto de publicidad. Te tenemos a ti.',
+    h1a: 'Déjanos una', h1b: 'reseña', h1c: 'en Google',
+    sub: 'Cuando una familia busca un club de baloncesto en Barcelona, Google le enseña primero los clubes mejor valorados. Ahora mismo, esa decisión depende de ti y de dos líneas tuyas.',
+    ctaMain: 'Dejar mi reseña',
+    ctaSmall: 'Se abre directamente el formulario de Google',
+    ctaNote: 'Si no tienes la sesión iniciada, Google te pedirá entrar con tu cuenta y volverás aquí mismo. Tarda menos de 1 minuto.',
+    cLbl: 'Objetivo de la temporada',
+    cGoal: 'Objetivo: 300 reseñas en Google',
+    s1t: 'Por qué', s1te: 'importa tanto',
+    s1l: 'Tres razones muy concretas. Ninguna de ellas es "quedar bien".',
+    c1t: 'Para que nos encuentren',
+    c1p: 'Quien busca "baloncesto base Barcelona" o "bàsquet Sant Martí" ve primero los clubes con más reseñas y mejor nota. Cada reseña nos acerca a aparecer antes que nadie.',
+    c2t: 'Para que se nos abran puertas',
+    c2p: 'Empresas del barrio, instituciones y posibles patrocinadores miran la ficha del club antes de decir que sí. Las reseñas son nuestro currículum público.',
+    c3t: 'Porque es de todos',
+    c3p: 'Somos más de 450 familias. Si una de cada dos escribe dos líneas, el Barna pasa a ser el club de barrio mejor valorado de Barcelona. Literalmente.',
+    s2t: 'Cómo se hace', s2te: 'en 1 minuto',
+    p1t: 'Toca el botón rojo',
+    p1p: 'Se abre la ventana de valoración del CB Grup Barna en Google. No tienes que buscar nada.',
+    p2t: 'Elige las estrellas y escribe 2 o 3 líneas',
+    p2p: 'Cuenta qué encuentras en el club: el equipo, los entrenadores, el ambiente, el trato con las familias.',
+    p3t: 'Publica',
+    p3p: 'Ya está. Se publica al momento y puedes editarla o borrarla cuando quieras desde tu cuenta de Google.',
+    warn: 'Importante: escribe lo que piensas de verdad y con tus palabras. No queremos reseñas calcadas ni inventadas — Google las detecta, las borra y perjudican al club. Una opinión sincera vale por diez copiadas.',
+    s3t: '¿No sabes', s3te: 'qué escribir?',
+    s3l: 'Piensa en una de estas cosas y cuéntala con tus palabras:',
+    i1: 'El entrenador o entrenadora de tu hijo o hija',
+    i2: 'El primer día que entró en el pabellón',
+    i3: 'Cómo ha cambiado desde que juega en el Barna',
+    i4: 'El ambiente de las gradas un sábado por la mañana',
+    i5: 'El trato del club con las familias',
+    i6: 'Un momento concreto que recordaréis siempre',
+    i7: 'Por qué recomendarías el club a otra familia',
+    s4t: 'Un minuto', s4te: 'de nuestra parte',
+    s5t: 'Compártelo con', s5te: '3 familias',
+    s5l: 'Esta es la parte que multiplica. Envía el enlace al grupo de tu equipo: cbgrupbarna.info/opina',
+    shMail: 'Correo', shCopy: 'Copiar enlace',
+    qrT: 'Código QR para imprimir',
+    qrP: 'Para el tablón del pabellón, los carteles del partido, la camiseta del delegado o la pantalla del descanso. Es vectorial: se puede ampliar todo lo que haga falta sin perder calidad.',
+    qrD: 'Descargar el QR',
+    s6t: 'Para delegados,', s6te: 'entrenadores y junta',
+    s6l: 'Mensaje listo para enviar al grupo de WhatsApp del equipo. Cópialo y envíalo tal cual.',
+    tplCa: '💬 Mensaje en catalán', tplEs: '💬 Mensaje en castellano',
+    copyBtn: 'Copiar el mensaje',
+    ctaSticky: 'Dejar mi reseña ⭐'
+  };
+
+  var CA = {};
+  document.querySelectorAll('[data-t]').forEach(function (el) {
+    CA[el.getAttribute('data-t')] = el.textContent;
+  });
+
+  var lang = 'ca';
+
+  function applyLang(next) {
+    lang = next === 'es' ? 'es' : 'ca';
+    var dict = lang === 'es' ? ES : CA;
+    document.querySelectorAll('[data-t]').forEach(function (el) {
+      var key = el.getAttribute('data-t');
+      if (!dict[key]) return;
+      var badge = el.querySelector('.copied');
+      el.textContent = dict[key];
+      if (badge) el.appendChild(badge);
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.langs button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang));
+    });
+    try { localStorage.setItem('opina-lang', lang); } catch (e) {}
+    renderCounter();
+    buildShare();
+  }
+
+  document.querySelectorAll('.langs button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      applyLang(b.getAttribute('data-lang'));
+      track('language_change', { language: lang });
+    });
+  });
+
+  // --------------------------------------------------------------- utils ---
+  function track(name, params) {
+    if (window.gtag) window.gtag('event', name, params || {});
+  }
+
+  function flash(node) {
+    if (!node) return;
+    node.classList.add('on');
+    setTimeout(function () { node.classList.remove('on'); }, 1800);
+  }
+
+  function copyText(text, badge) {
+    var done = function () { flash(badge); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done, function () { legacyCopy(text, done); });
+    } else {
+      legacyCopy(text, done);
+    }
+  }
+
+  function legacyCopy(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:absolute;left:-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  // ------------------------------------------------------------- config ----
+  var CFG = JSON.parse(JSON.stringify(DEFAULTS));
+
+  function reviewLink() {
+    if (CFG.reviewUrl) return CFG.reviewUrl;
+    if (CFG.placeId) return 'https://search.google.com/local/writereview?placeid=' + encodeURIComponent(CFG.placeId);
+    return CFG.fallbackUrl || DEFAULTS.fallbackUrl;
+  }
+
+  function applyConfig() {
+    var url = reviewLink();
+    var direct = Boolean(CFG.reviewUrl || CFG.placeId);
+    ['ctaHero', 'ctaSticky'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.setAttribute('href', url);
+      el.setAttribute('target', '_blank');
+      el.addEventListener('click', function () {
+        track('review_click', { link_id: id, direct_link: direct, language: lang });
+      });
+    });
+    if (!direct) {
+      // Sense enllaç directe configurat s'obre la fitxa del club: cal avisar
+      // que l'usuari ha de prémer "Escriu una ressenya".
+      var note = document.querySelector('.cta-note');
+      if (note) {
+        var extra = document.createElement('b');
+        extra.style.display = 'block';
+        extra.style.marginTop = '6px';
+        extra.textContent = lang === 'es'
+          ? 'Se abre la ficha del club en Google: pulsa "Escribir una reseña".'
+          : 'S\'obre la fitxa del club a Google: prem "Escriu una ressenya".';
+        note.appendChild(extra);
+      }
+    }
+    renderCounter();
+    setupVideo();
+  }
+
+  function renderCounter() {
+    var goal = Number(CFG.goal) || 300;
+    var now = CFG.current;
+    var elNow = document.getElementById('cNow');
+    var elOf = document.getElementById('cOf');
+    var elBar = document.getElementById('cBar');
+    var elLeft = document.getElementById('cLeft');
+    var elUpd = document.getElementById('cUpd');
+    var bar = elBar ? elBar.parentNode : null;
+
+    elOf.textContent = '/ ' + goal;
+
+    if (typeof now !== 'number' || isNaN(now) || now < 0) {
+      elNow.textContent = goal;
+      elOf.textContent = '';
+      if (bar) bar.style.display = 'none';
+      elLeft.textContent = lang === 'es'
+        ? 'Objetivo: ' + goal + ' reseñas en Google'
+        : 'Objectiu: ' + goal + ' ressenyes a Google';
+      elUpd.textContent = '';
+      return;
+    }
+
+    if (bar) bar.style.display = '';
+    elNow.textContent = now;
+    var pct = Math.max(0, Math.min(100, Math.round((now / goal) * 100)));
+    setTimeout(function () { elBar.style.width = pct + '%'; }, 220);
+    var left = Math.max(0, goal - now);
+    elLeft.textContent = left === 0
+      ? (lang === 'es' ? '¡Objetivo conseguido! Gracias 🖤' : 'Objectiu assolit! Gràcies 🖤')
+      : (lang === 'es' ? 'Faltan ' + left + ' reseñas · ' + pct + '%' : 'En falten ' + left + ' · ' + pct + '%');
+    elUpd.textContent = CFG.updated
+      ? (lang === 'es' ? 'Actualizado: ' + CFG.updated : 'Actualitzat: ' + CFG.updated)
+      : '';
+  }
+
+  function setupVideo() {
+    var v = CFG.video || {};
+    if (!v.enabled || !v.src) return;
+    var section = document.getElementById('videoSection');
+    var video = document.getElementById('opinaVideo');
+    video.src = v.src;
+    if (v.poster) video.poster = v.poster;
+    document.getElementById('videoCap').textContent = v.caption || '';
+    section.style.display = 'block';
+    video.addEventListener('play', function () { track('video_start', { language: lang }); }, { once: true });
+  }
+
+  // ------------------------------------------------------------ compartir --
+  function buildShare() {
+    var msg = lang === 'es'
+      ? '💬 ¿Nos ayudas en menos de 1 minuto? Deja tu reseña del CB Grup Barna en Google — nos ayuda a que otras familias nos encuentren. ⭐ ' + PAGE_URL
+      : '💬 Ens ajudes en menys d\'1 minut? Deixa la teva ressenya del CB Grup Barna a Google — ajuda altres famílies a trobar-nos. ⭐ ' + PAGE_URL;
+    var subject = lang === 'es' ? 'Ayuda al CB Grup Barna con una reseña' : 'Ajuda el CB Grup Barna amb una ressenya';
+
+    document.getElementById('shWa').href = 'https://wa.me/?text=' + encodeURIComponent(msg);
+    document.getElementById('shTg').href = 'https://t.me/share/url?url=' + encodeURIComponent(PAGE_URL) + '&text=' + encodeURIComponent(msg);
+    document.getElementById('shMail').href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(msg);
+  }
+
+  document.getElementById('shCopy').addEventListener('click', function () {
+    copyText(PAGE_URL, document.getElementById('copiedLink'));
+    track('share', { method: 'copy_link', language: lang });
+  });
+  ['shWa', 'shTg', 'shMail'].forEach(function (id) {
+    document.getElementById(id).addEventListener('click', function () {
+      track('share', { method: id.replace('sh', '').toLowerCase(), language: lang });
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var src = document.getElementById(btn.getAttribute('data-copy'));
+      if (!src) return;
+      copyText(src.textContent.trim(), btn.parentNode.querySelector('.copied'));
+      track('share', { method: 'copy_template_' + btn.getAttribute('data-copy'), language: lang });
+    });
+  });
+
+  // ------------------------------------------------------------- arrencada -
+  var params = new URLSearchParams(location.search);
+  if (params.get('s')) track('opina_source', { source: params.get('s') });
+  var initial = params.get('lang');
+  if (!initial) {
+    try { initial = localStorage.getItem('opina-lang'); } catch (e) {}
+  }
+  if (!initial && (navigator.language || '').toLowerCase().indexOf('es') === 0) initial = 'es';
+  if (initial === 'es') applyLang('es');
+
+  buildShare();
+
+  // La barra fixa nomes apareix quan el boto gran del hero ja no es veu.
+  var sticky = document.querySelector('.sticky');
+  var hero = document.getElementById('ctaHero');
+  if ('IntersectionObserver' in window && sticky && hero) {
+    new IntersectionObserver(function (entries) {
+      sticky.classList.toggle('show', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(hero);
+  } else if (sticky) {
+    sticky.classList.add('show');
+  }
+
+  fetch('opina.json?t=' + Math.floor(Date.now() / 60000))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      if (data) {
+        Object.keys(DEFAULTS).forEach(function (k) {
+          if (data[k] !== undefined && data[k] !== null && data[k] !== '') CFG[k] = data[k];
+        });
+        if (data.current === null) CFG.current = null;
+      }
+    })
+    .catch(function () {})
+    .then(applyConfig);
+})();
+</script>
+
+</body>
+</html>
