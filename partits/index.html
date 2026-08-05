@@ -133,6 +133,16 @@ button.btn.small { padding: 8px 12px; font-size: 13px; }
 .warn { background: #3A1D1B; border: 1px solid var(--red); color: #FFD9D6; font-size: 13px; border-radius: 8px; padding: 10px 12px; margin-top: 10px; display: none; }
 .ok { color: var(--green); font-size: 13px; margin-top: 10px; display: none; }
 
+.logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+.logo-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 8px;
+  text-align: center; cursor: pointer; text-decoration: none; color: var(--ink); display: block;
+}
+.logo-card:hover { border-color: var(--red); transform: translateY(-2px); }
+.logo-card img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+.logo-card span { display: block; font-size: 11px; font-weight: 600; margin-top: 6px; line-height: 1.25; }
+.logo-card.pend { outline: 1px dashed var(--red); }
+
 .preview { margin-top: 16px; text-align: center; }
 .preview canvas { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; }
 
@@ -153,6 +163,7 @@ button.btn.small { padding: 8px 12px; font-size: 13px; }
   <nav class="tabs">
     <button class="tab active" data-panel="jornada">Aquesta jornada</button>
     <button class="tab" data-panel="resultats">Resultats</button>
+    <button class="tab" data-panel="rivals">Rivals</button>
     <button class="tab tab-cfg" data-panel="config" title="Configuració" aria-label="Configuració">⚙</button>
   </nav>
 
@@ -170,6 +181,20 @@ button.btn.small { padding: 8px 12px; font-size: 13px; }
       <small>Els últims partits jugats</small>
     </div>
     <div id="list-resultats"></div>
+  </section>
+
+  <!-- ══ RIVALS ══ -->
+  <section class="panel" id="panel-rivals">
+    <div class="jornada-title">Escuts dels rivals
+      <small id="rivals-count">Temporada 2026-27</small>
+    </div>
+    <input type="search" id="rivals-q" placeholder="Buscar un club…" autocomplete="off" style="margin-bottom:14px">
+    <div class="logo-grid" id="logo-grid"></div>
+    <p class="hint" style="margin-top:18px;color:var(--grey);font-size:12px">
+      Clica un escut per descarregar-lo a 500 px amb fons transparent. Els marcats amb ⚠ són
+      provisionals: no fer-los servir en impressió ni en campanya comercial sense l'arxiu oficial del club.
+      <b>No recolorear, deformar ni alterar cap escut.</b>
+    </p>
   </section>
 
   <!-- ══ CONFIG ══ -->
@@ -248,6 +273,8 @@ button.btn.small { padding: 8px 12px; font-size: 13px; }
     </div>
   </section>
 
+  <datalist id="rivals-list"></datalist>
+
   <footer class="foot">
     <a href="../">← Tornar a cbgrupbarna.info</a>
   </footer>
@@ -278,6 +305,8 @@ const GANXOS_MORTS = [
 ];
 
 let DATA = { temporada: '', equips: EQUIPS_DEFAULT.slice(), partits: [] };
+let RIVALS = [];          // escuts dels clubs rivals (logos.json)
+const rivalImgs = {};     // cache d'imatges ja carregades
 
 /* ══════════ UTILS ══════════ */
 const $  = s => document.querySelector(s);
@@ -334,11 +363,61 @@ async function loadData() {
     } catch (e) {}
   }
   if (!DATA.equips || !DATA.equips.length) DATA.equips = EQUIPS_DEFAULT.slice();
+  await loadRivals();
   render();
 }
 
 function saveLocal() {
   localStorage.setItem(DATA_KEY, JSON.stringify(DATA));
+}
+
+/* ══════════ RIVALS ══════════ */
+async function loadRivals() {
+  try {
+    const r = await fetch('logos.json', { cache: 'no-store' });
+    if (!r.ok) return;
+    const j = await r.json();
+    RIVALS = j.rivals || [];
+  } catch (e) { return; }
+
+  $('#rivals-count').textContent = `${RIVALS.length} clubs · temporada ${'2026-27'} · ${RIVALS.filter(r => !r.validat).length} pendents de validació`;
+  $('#rivals-list').innerHTML = RIVALS.map(r => `<option value="${esc(r.club)}">`).join('');
+  drawGrid('');
+}
+
+function drawGrid(q) {
+  const norm = t => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const nq = norm(q);
+  const list = RIVALS.filter(r => !nq || norm(r.club).includes(nq) || norm(r.alies).includes(nq));
+  $('#logo-grid').innerHTML = list.length ? list.map(r => `
+    <a class="logo-card ${r.validat ? '' : 'pend'}" href="logos/${r.fitxer}" download
+       title="${esc(r.club)}${r.nota ? ' — ' + esc(r.nota) : ''}">
+      <img src="logos/thumb/${r.fitxer}" alt="Escut ${esc(r.club)}" loading="lazy">
+      <span>${r.validat ? '' : '⚠ '}${esc(r.club)}</span>
+    </a>`).join('') : `<div class="empty" style="grid-column:1/-1">Cap club amb aquest nom.</div>`;
+}
+
+/* Troba l'escut a partir del nom escrit al camp Rival */
+function findRival(name) {
+  if (!name) return null;
+  const norm = t => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+  const n = norm(name);
+  if (!n) return null;
+  return RIVALS.find(r => norm(r.club) === n)
+      || RIVALS.find(r => norm(r.alies) === n)
+      || RIVALS.find(r => norm(r.club).includes(n) || n.includes(norm(r.club)))
+      || null;
+}
+
+function rivalImage(r) {
+  if (!r) return Promise.resolve(null);
+  if (rivalImgs[r.fitxer]) return Promise.resolve(rivalImgs[r.fitxer]);
+  return new Promise(res => {
+    const im = new Image();
+    im.onload = () => { rivalImgs[r.fitxer] = im; res(im); };
+    im.onerror = () => res(null);
+    im.src = 'logos/' + r.fitxer;
+  });
 }
 
 /* ══════════ RENDER PÚBLIC ══════════ */
@@ -353,12 +432,14 @@ function matchCard(p, withScore) {
     const theirs = `<span class="${b > a ? 'w' : 'l'}">${b}</span>`;
     scoreHtml = `<div class="score">${home ? ours + ' – ' + theirs : theirs + ' – ' + ours}</div>`;
   }
+  const rv = findRival(p.rival);
+  const badge = rv ? `<img src="logos/thumb/${rv.fitxer}" alt="" width="28" height="28" style="vertical-align:middle;margin-right:7px;object-fit:contain;background:#fff;border-radius:4px;padding:2px">` : '';
   return `<article class="match">
     <div class="match-top">
       <div class="match-team">${esc(p.equip)}<span class="tag-home ${home ? '' : 'tag-away'}">${home ? 'Local' : 'Visitant'}</span></div>
       ${scoreHtml || `<div class="match-when">${esc(fmtDate(p.data, 'ca'))}${p.hora ? ' · ' + esc(p.hora) : ''}</div>`}
     </div>
-    <div class="match-vs">${esc(local)} <em>vs</em> ${esc(visit)}</div>
+    <div class="match-vs">${badge}${esc(local)} <em>vs</em> ${esc(visit)}</div>
     ${p.pavello ? `<div class="match-where">📍 ${esc(p.pavello)}</div>` : ''}
     ${p.ganxo ? `<div class="match-hook">“${esc(p.ganxo)}”</div>` : ''}
   </article>`;
@@ -407,7 +488,7 @@ function rowHtml(p, i) {
   return `<div class="cfg-row" data-i="${i}" style="border-top:1px solid var(--line);padding-top:12px;margin-top:12px">
     <div class="grid2">
       <div><label>Equip</label><select data-f="equip">${eqOpts}</select></div>
-      <div><label>Rival</label><input data-f="rival" value="${esc(p.rival)}" placeholder="Nom del rival"></div>
+      <div><label>Rival</label><input data-f="rival" list="rivals-list" value="${esc(p.rival)}" placeholder="Nom del rival"></div>
     </div>
     <div class="grid3">
       <div><label>Data</label><input data-f="data" type="date" value="${esc(p.data)}"></div>
@@ -528,21 +609,32 @@ async function drawPoster(idx) {
 
   /* fons */
   ctx.fillStyle = '#0E1116'; ctx.fillRect(0, 0, W, H);
-  /* banda vermella diagonal */
-  ctx.save();
-  ctx.fillStyle = '#E63329';
-  ctx.beginPath();
-  ctx.moveTo(0, H * 0.60); ctx.lineTo(W, H * 0.52); ctx.lineTo(W, H * 0.545); ctx.lineTo(0, H * 0.625);
-  ctx.closePath(); ctx.fill();
-  ctx.restore();
-  /* marc */
   ctx.strokeStyle = '#E63329'; ctx.lineWidth = 10; ctx.strokeRect(24, 24, W - 48, H - 48);
 
   const cx = W / 2, M = 90, maxW = W - M * 2;
   ctx.textAlign = 'center';
 
-  /* escut */
-  if (logoImg.complete && logoImg.naturalWidth) {
+  const home  = p.local !== false;
+  const rival = findRival(p.rival);
+  const rivalIm = await rivalImage(rival);
+  const duel  = !!rivalIm;            // tenim escut del rival -> cartell de duel
+
+  /* ancoratges verticals segons el mode */
+  const A = duel
+    ? { label: 0.135, center: 0.310, band: 0.395, crest: 0.590, names: 0.755, equip: 0.805 }
+    : { label: 0.255, center: 0.420, band: 0.545, crest: null,  names: 0.700, equip: 0.815 };
+
+  /* banda vermella diagonal */
+  ctx.save();
+  ctx.fillStyle = '#E63329';
+  ctx.beginPath();
+  ctx.moveTo(0, H * (A.band + 0.04)); ctx.lineTo(W, H * A.band);
+  ctx.lineTo(W, H * (A.band + 0.025)); ctx.lineTo(0, H * (A.band + 0.065));
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+
+  /* escut de marca a dalt — només quan no fem duel d'escuts */
+  if (!duel && logoImg.complete && logoImg.naturalWidth) {
     const lw = W * 0.16, lh = lw * (logoImg.naturalHeight / logoImg.naturalWidth);
     ctx.drawImage(logoImg, cx - lw / 2, H * 0.055, lw, lh);
   }
@@ -554,47 +646,88 @@ async function drawPoster(idx) {
   ctx.font = '700 34px Inter, sans-serif';
   ctx.fillStyle = '#E63329';
   ctx.letterSpacing = '6px';
-  ctx.fillText(label.toUpperCase(), cx, H * 0.255);
+  ctx.fillText(label.toUpperCase(), cx, H * A.label);
   ctx.letterSpacing = '0px';
 
-  /* ganxo o marcador — la zona central protegida */
+  /* ganxo o marcador — zona central protegida */
   ctx.fillStyle = '#FFFFFF';
   if (kind === 'result' && p.marcadorNostre != null && p.marcadorRival != null) {
     const a = Number(p.marcadorNostre), b = Number(p.marcadorRival);
     ctx.font = `${Math.round(H * 0.13)}px ${DISPLAY}`;
-    ctx.fillText(`${a} – ${b}`, cx, H * 0.40);
+    ctx.fillText(home ? `${a} – ${b}` : `${b} – ${a}`, cx, H * A.center);
     const verdict = a > b ? (lang === 'es' ? 'VICTORIA' : 'VICTÒRIA') : (lang === 'es' ? 'DERROTA' : 'DERROTA');
     ctx.fillStyle = a > b ? '#FFFFFF' : '#8A929C';
     ctx.font = `${Math.round(H * 0.045)}px ${DISPLAY}`;
-    ctx.fillText(verdict, cx, H * 0.47);
+    ctx.fillText(verdict, cx, H * (A.center + 0.07));
   } else {
     const hook = (p.ganxo || (lang === 'es' ? 'NOS LO JUGAMOS TODO' : 'ENS HO JUGUEM TOT')).toUpperCase();
     ctx.font = `${Math.round(H * 0.075)}px ${DISPLAY}`;
     let lines = wrapLines(ctx, hook, maxW);
     if (lines.length > 3) { ctx.font = `${Math.round(H * 0.058)}px ${DISPLAY}`; lines = wrapLines(ctx, hook, maxW); }
     const lh = parseInt(ctx.font) * 1.06;
-    const top = H * 0.42 - (lines.length - 1) * lh / 2;
+    const top = H * A.center - (lines.length - 1) * lh / 2;
     lines.forEach((l, i) => ctx.fillText(l, cx, top + i * lh));
   }
 
-  /* equips */
-  const home = p.local !== false;
   const nostre = 'CB GRUP BARNA';
-  const rival = (p.rival || '—').toUpperCase();
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = fitText(ctx, home ? nostre : rival, maxW, Math.round(H * 0.042), DISPLAY, 24);
-  ctx.fillText(home ? nostre : rival, cx, H * 0.675);
-  ctx.fillStyle = '#E63329';
-  ctx.font = `${Math.round(H * 0.030)}px ${DISPLAY}`;
-  ctx.fillText('VS', cx, H * 0.723);
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = fitText(ctx, home ? rival : nostre, maxW, Math.round(H * 0.042), DISPLAY, 24);
-  ctx.fillText(home ? rival : nostre, cx, H * 0.772);
+  const rivalTxt = (p.rival || '—').toUpperCase();
+
+  if (duel) {
+    /* ── duel d'escuts: nosaltres vs ells ── */
+    const S = W * 0.26, gap = W * 0.20;
+    const yTop = H * A.crest - S / 2;
+    const xL = cx - gap - S / 2, xR = cx + gap - S / 2;
+
+    const plate = (x) => {              // planxa blanca perquè cap escut es perdi sobre negre
+      ctx.save();
+      ctx.fillStyle = '#FFFFFF';
+      const r = 22, pad = 14, w = S + pad * 2, h = S + pad * 2, px = x - pad, py = yTop - pad;
+      ctx.beginPath();
+      ctx.moveTo(px + r, py); ctx.arcTo(px + w, py, px + w, py + h, r);
+      ctx.arcTo(px + w, py + h, px, py + h, r); ctx.arcTo(px, py + h, px, py, r);
+      ctx.arcTo(px, py, px + w, py, r); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    };
+    const fit = (im) => {               // encaixa mantenint proporcions
+      const s = Math.min(S / im.naturalWidth, S / im.naturalHeight);
+      return [im.naturalWidth * s, im.naturalHeight * s];
+    };
+
+    plate(home ? xL : xR); plate(home ? xR : xL);
+    if (logoImg.complete && logoImg.naturalWidth) {
+      const [w1, h1] = fit(logoImg);
+      ctx.drawImage(logoImg, (home ? xL : xR) + (S - w1) / 2, yTop + (S - h1) / 2, w1, h1);
+    }
+    const [w2, h2] = fit(rivalIm);
+    ctx.drawImage(rivalIm, (home ? xR : xL) + (S - w2) / 2, yTop + (S - h2) / 2, w2, h2);
+
+    ctx.fillStyle = '#E63329';
+    ctx.font = `${Math.round(H * 0.038)}px ${DISPLAY}`;
+    ctx.fillText('VS', cx, H * A.crest + H * 0.013);
+
+    ctx.fillStyle = '#FFFFFF';
+    const half = gap * 2 - 20;
+    ctx.font = fitText(ctx, home ? nostre : rivalTxt, half, Math.round(H * 0.026), DISPLAY, 15);
+    ctx.fillText(home ? nostre : rivalTxt, xL + S / 2, H * A.names);
+    ctx.font = fitText(ctx, home ? rivalTxt : nostre, half, Math.round(H * 0.026), DISPLAY, 15);
+    ctx.fillText(home ? rivalTxt : nostre, xR + S / 2, H * A.names);
+  } else {
+    /* ── sense escut del rival: només noms ── */
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = fitText(ctx, home ? nostre : rivalTxt, maxW, Math.round(H * 0.042), DISPLAY, 24);
+    ctx.fillText(home ? nostre : rivalTxt, cx, H * (A.names - 0.025));
+    ctx.fillStyle = '#E63329';
+    ctx.font = `${Math.round(H * 0.030)}px ${DISPLAY}`;
+    ctx.fillText('VS', cx, H * (A.names + 0.023));
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = fitText(ctx, home ? rivalTxt : nostre, maxW, Math.round(H * 0.042), DISPLAY, 24);
+    ctx.fillText(home ? rivalTxt : nostre, cx, H * (A.names + 0.072));
+  }
 
   /* equip del club */
   ctx.fillStyle = '#8A929C';
   ctx.font = '600 30px Inter, sans-serif';
-  ctx.fillText(p.equip || '', cx, H * 0.815);
+  ctx.fillText(p.equip || '', cx, H * A.equip);
 
   /* quan i on */
   const when = [fmtDate(p.data, lang), p.hora, p.pavello].filter(Boolean).join(' · ');
@@ -632,6 +765,8 @@ $('#dl').addEventListener('click', () => {
 });
 
 /* ══════════ CANVIAR EL CODI ══════════ */
+$('#rivals-q').addEventListener('input', e => drawGrid(e.target.value));
+
 $('#newcode').addEventListener('input', async e => {
   const v = e.target.value.trim();
   $('#newhash').value = v ? await sha256(v) : '';
