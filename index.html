@@ -484,7 +484,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-nav a { position: relative; padding: 7px 0; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
-.head-brand { display: flex; align-items: center; gap: 12px; justify-self: center; }
+.head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; justify-self: center; }
 .head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--display); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
 .head-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
@@ -516,7 +516,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .lead-body h1 small { display: block; margin-top: 14px; font-size: 0.44em; letter-spacing: 0.32em; color: var(--muted); font-weight: 300; }
 .lead-body .lede { margin-top: 24px; }
 .lead-body .btn-row { margin-top: 30px; }
-.lead-url { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; align-self: flex-start; font-family: var(--display); font-size: 11px; letter-spacing: 0.16em; color: var(--red); border-bottom: 1px solid var(--red); padding-bottom: 6px; transition: color 0.3s, border-color 0.3s; }
+.lead-url { display: inline-flex; align-items: center; min-height: 44px; gap: 8px; margin-top: 22px; align-self: flex-start; font-family: var(--display); font-size: 11px; letter-spacing: 0.16em; color: var(--red); border-bottom: 1px solid var(--red); padding-bottom: 6px; transition: color 0.3s, border-color 0.3s; }
 .lead-url:hover { color: var(--ink); border-color: var(--ink); }
 .lead-tel { margin-top: 20px; font-size: 13px; color: var(--ink-2); }
 .lead-tel b { font-family: var(--display); font-weight: 400; letter-spacing: 0.1em; color: var(--ink); }
@@ -547,6 +547,19 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   margin: 0 !important; max-width: 100% !important; min-width: 0 !important; width: 100% !important;
 }
 
+/* ==== FAÇANA D'INSTAGRAM · l'embed només es carrega si es demana ==== */
+.igf { border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 290px; padding: 34px 22px; text-align: center; }
+.igf-mark { width: 34px; height: 34px; }
+.igf-mark svg { width: 100%; height: 100%; fill: var(--ink); }
+.igf-t { font-family: var(--display); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.igf-s { font-size: 12.5px; color: var(--muted); max-width: 30ch; }
+.igf-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 4px; }
+.igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; padding: 12px 20px; border: 1px solid var(--ink); font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+.igf-btns button { background: var(--ink); color: #fff; border-color: var(--ink); }
+.igf-btns button:hover { background: var(--red); border-color: var(--red); }
+.igf-btns a:hover { background: var(--ink); color: #fff; }
+.igf-all { margin-top: 6px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+
 /* ==== OPINIONS ==== */
 .opi { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); align-items: stretch; }
 @media (min-width: 780px) { .opi { grid-template-columns: 1fr 1fr; } }
@@ -572,6 +585,59 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 /* ==== PARTNERS ==== */
 .partners { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(16px, 3vw, 42px); }
 .partners span { font-family: var(--display); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+
+/* ==== FORMULARI D'INFORMACIÓ ==== */
+.info { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 3.4vw, 52px); }
+@media (min-width: 940px) { .info { grid-template-columns: 0.85fr 1fr; align-items: start; } }
+.info-intro h2 { font-size: clamp(19px, 2.6vw, 28px); margin: 14px 0 18px; }
+.info-intro p { font-size: 14px; color: var(--ink-2); }
+.info-intro .direct { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 22px; }
+.info-intro .direct a { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; transition: padding-left 0.4s var(--ease), color 0.3s; }
+.info-intro .direct a:hover { padding-left: 12px; color: var(--red); }
+.info-intro .direct a span { margin-left: auto; font-size: 9px; letter-spacing: 0.22em; color: var(--muted); }
+
+.form { border: 1px solid var(--line); padding: clamp(22px, 3.2vw, 40px); background: var(--paper); }
+.form-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.field { min-width: 0; }
+.field input, .field select, .field textarea { max-width: 100%; }
+@media (min-width: 620px) { .form-grid.two { grid-template-columns: 1fr 1fr; } }
+.field label { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.field input, .field select, .field textarea {
+  width: 100%; min-height: 48px; padding: 13px 2px; border: 0; border-bottom: 1px solid var(--line);
+  background: transparent; font-family: var(--body); font-size: 15px; font-weight: 300; color: var(--ink);
+  border-radius: 0; -webkit-appearance: none; appearance: none; transition: border-color 0.3s;
+}
+.field textarea { min-height: 80px; resize: vertical; }
+.field select { background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: right 8px center, right 3px center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 22px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 0; border-bottom-color: var(--red); }
+.field input:invalid:not(:placeholder-shown) { border-bottom-color: var(--red); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips input { position: absolute; width: 1px; height: 1px; min-height: 0; margin: -1px; padding: 0;
+  border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.chips label { display: inline-flex; align-items: center; min-height: 44px; margin: 0; padding: 10px 16px; border: 1px solid var(--line); cursor: pointer; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); transition: background 0.3s, color 0.3s, border-color 0.3s; }
+.chips input:checked + label { background: var(--ink); border-color: var(--ink); color: #fff; }
+.chips input:focus-visible + label { outline: 1px solid var(--red); outline-offset: 3px; }
+.consent { display: flex; align-items: flex-start; gap: 11px; font-size: 12px; color: var(--muted); line-height: 1.65; }
+.consent input { width: 18px; height: 18px; min-height: 0; flex-shrink: 0; margin-top: 2px; accent-color: var(--red); }
+.consent a { border-bottom: 1px solid var(--line); }
+.form .btn { width: 100%; }
+.form-note { margin-top: 14px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-align: center; }
+.form-ok { display: none; padding: clamp(24px, 4vw, 44px); text-align: center; border: 1px solid var(--red); }
+.form-ok.on { display: block; }
+.form-ok h3 { font-size: 14px; letter-spacing: 0.18em; margin-bottom: 14px; }
+.form-ok p { font-size: 13.5px; color: var(--ink-2); }
+.form-ok a { border-bottom: 1px solid var(--red); }
+
+/* ==== BARRA D'ACCIÓ INFERIOR (mòbil) ==== */
+.actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 95; display: none; gap: 1px; background: var(--line); transform: translateY(100%); transition: transform 0.4s var(--ease); }
+.actionbar.on { transform: none; }
+.actionbar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; padding: 10px 8px; background: var(--ink); color: #fff; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; }
+.actionbar a.red { background: var(--red); }
+@media (max-width: 760px) {
+  .actionbar { display: flex; }
+  body { padding-bottom: 56px; }
+  .fab-wa { bottom: 70px; }
+}
 
 /* ==== EL CLUB EN BREU · text indexable ==== */
 .brief { display: grid; grid-template-columns: 1fr; gap: clamp(22px, 3vw, 44px); border: 1px solid var(--line); padding: clamp(26px, 4vw, 54px); background: var(--paper); }
@@ -604,6 +670,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: clamp(26px, 4vw, 52px); padding: clamp(34px, 5vw, 58px) 0; border-bottom: 1px solid var(--line-dark); }
 .foot-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
 .foot-col a, .foot-col p { display: block; padding: 6px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
+.foot-col a { display: flex; align-items: center; min-height: 44px; }
 .foot-col a { transition: color 0.3s; }
 .foot-col a:hover { color: var(--red); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
@@ -619,10 +686,22 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 /* ==== ACCESSIBILITAT I TOC ==== */
 .skip { position: absolute; left: -9999px; top: 0; z-index: 200; }
 .skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; padding: 12px 22px; font-family: var(--display); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; }
-@media (max-width: 900px) {
-  .cta { padding: 10px 0; }
-  .stars button { font-size: 32px; padding: 4px; }
+/* Objectius de toc: res per sota de 44 px a mòbil i tauleta. */
+.btn, .list a, .faq summary, .head-nav a, .menu-col a { min-height: 44px; }
+.head-nav a { display: inline-flex; align-items: center; }
+.list a { align-items: center; }
+@media (max-width: 1024px) {
+  .cta { display: inline-flex; align-items: center; min-height: 44px; padding: 12px 0 10px; }
+  .stars button { font-size: 32px; min-width: 44px; min-height: 44px; }
   .btn { padding: 17px clamp(20px, 5vw, 32px); }
+  .head-burger { width: 44px; height: 44px; align-items: flex-start; justify-content: center; padding: 12px 9px; }
+  .fab-wa { width: 56px; height: 56px; }
+  .sg-action, .igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; }
+}
+/* Tauleta: un sol punt de ruptura per a totes les graelles. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .opi, .list { grid-template-columns: repeat(2, 1fr); }
+  .ed-grid { grid-template-columns: repeat(2, 1fr); }
 }
 .fab-wa { opacity: 1; transform: none; transition: background 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.35s var(--ease), transform 0.35s var(--ease); }
 .fab-wa.hidden { opacity: 0; transform: translateY(14px) scale(0.9); pointer-events: none; }
@@ -666,9 +745,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <button class="head-burger" id="burger" aria-label="Obrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <nav class="head-nav" aria-label="Navegació principal">
         <a href="#escoleta">Escoleta</a>
+        <a href="/campus/">Campus</a>
+        <a href="/3x3/">3x3</a>
         <a href="#calendari">Calendari</a>
         <a href="/fotos/">Galeria</a>
-        <a href="#acces">El Barna</a>
+        <a href="#info">Informació</a>
       </nav>
     </div>
     <a class="head-brand" href="#top" aria-label="CB Grup Barna · inici">
@@ -689,6 +770,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <div class="menu-grid">
     <div class="menu-col">
       <h3>Aquest mes</h3>
+      <a href="#info">Demanar informació <small>formulari</small></a>
       <a href="#escoleta">Escoleta <small>4 a 7 anys</small></a>
       <a href="#calendari">Calendari de partits</a>
       <a href="#seniors">Els sèniors</a>
@@ -698,6 +780,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </div>
     <div class="menu-col">
       <h3>El Barna</h3>
+      <a href="/campus/" data-cta="menu-campus">Campus de bàsquet</a>
+      <a href="/3x3/" data-cta="menu-3x3">Torneig 3x3</a>
+      <a href="/blog/" data-cta="menu-blog">Blog <small>guies</small></a>
       <a href="/grup-barna-dades-oficials/" data-cta="menu-club">El club <small>dades oficials</small></a>
       <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
       <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Presentació del club</a>
@@ -732,6 +817,81 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </div>
   </section>
 
+  <!-- ==== INFORMACIÓ · formulari de contacte i avisos ==== -->
+  <section class="section band-soft" id="info">
+    <div class="wrap">
+      <div class="info">
+        <div class="info-intro reveal">
+          <p class="eyebrow red">Contacta amb el club</p>
+          <h2>Vols informació?</h2>
+          <p>Deixa'ns el nom i el contacte i t'escrivim amb la informació que necessitis: l'Escoleta,
+          les portes obertes, el campus, el 3x3 o l'equip que li toca al teu fill o filla. També
+          t'avisem quan s'obrin inscripcions, abans de publicar-les.</p>
+          <div class="direct">
+            <a href="https://wa.me/34646205526?text=Hola%20Julio!%20Vull%20informaci%C3%B3%20de%20l%27Escoleta" target="_blank" rel="noopener" data-cta="info-wa-escoleta">
+              Escoleta · Julio Torralba <span>646 205 526</span></a>
+            <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20informaci%C3%B3%20del%20club" target="_blank" rel="noopener" data-cta="info-wa-club">
+              WhatsApp del club <span>+34 698 425 153</span></a>
+            <a href="mailto:info@cbgrupbarna.com" data-cta="info-email">
+              Correu <span>info@cbgrupbarna.com</span></a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <form class="form" id="infoForm" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-nom">Nom i cognoms</label>
+                <input id="f-nom" name="nom" type="text" required autocomplete="name" placeholder="&nbsp;">
+              </div>
+            </div>
+            <div class="form-grid two" style="margin-top:18px">
+              <div class="field">
+                <label for="f-mobil">Mòbil</label>
+                <input id="f-mobil" name="mobil" type="tel" required autocomplete="tel"
+                       inputmode="tel" pattern="[0-9+ ]{9,}" placeholder="&nbsp;">
+              </div>
+              <div class="field">
+                <label for="f-mail">Correu electrònic</label>
+                <input id="f-mail" name="correu" type="email" required autocomplete="email"
+                       inputmode="email" placeholder="&nbsp;">
+              </div>
+            </div>
+            <div class="field" style="margin-top:24px">
+              <label id="f-int-label">M'interessa</label>
+              <div class="chips" role="group" aria-labelledby="f-int-label">
+                <input type="checkbox" id="i1" name="interes" value="Escoleta (4-7 anys)" checked><label for="i1">Escoleta 4-7</label>
+                <input type="checkbox" id="i2" name="interes" value="Portes obertes / equip federat"><label for="i2">Portes obertes</label>
+                <input type="checkbox" id="i3" name="interes" value="Campus de bàsquet"><label for="i3">Campus</label>
+                <input type="checkbox" id="i4" name="interes" value="Torneig 3x3"><label for="i4">3x3</label>
+                <input type="checkbox" id="i5" name="interes" value="Patrocini / empreses"><label for="i5">Patrocini</label>
+                <input type="checkbox" id="i6" name="interes" value="Altres"><label for="i6">Altres</label>
+              </div>
+            </div>
+            <div class="field" style="margin-top:22px">
+              <label for="f-msg">Alguna cosa més (opcional)</label>
+              <textarea id="f-msg" name="missatge" rows="2" placeholder="&nbsp;"></textarea>
+            </div>
+            <label class="consent" style="margin:24px 0 22px">
+              <input type="checkbox" id="f-ok" required>
+              <span>Accepto que el CB Grup Barna es posi en contacte amb mi i guardi aquestes dades
+              per informar-me de les seves activitats. Pots demanar-ne la baixa quan vulguis a
+              <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>.</span>
+            </label>
+            <button type="submit" class="btn red" data-cta="info-submit">Enviar i obrir WhatsApp</button>
+            <p class="form-note">S'obre el WhatsApp del club amb les teves dades. Respostem en menys de 24 h.</p>
+          </form>
+          <div class="form-ok" id="formOk" role="status">
+            <h3>Rebut. Gràcies!</h3>
+            <p>T'hem obert el WhatsApp amb les teves dades. Si no s'ha obert, escriu-nos directament al
+            <a href="https://wa.me/34698425153">+34 698 425 153</a> o a
+            <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ==== CALENDARI DEL BARNA ==== -->
   <section class="section band-soft" id="calendari">
     <div class="wrap">
@@ -760,8 +920,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <p>La presentació dels equips sèniors del CB Grup Barna, directament des d'Instagram.</p>
       </div>
       <div class="ig-embed-wrap two">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbgJvwuCCNv/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbiuXarCIpz/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
+        <div class="igf" data-ig="https://www.instagram.com/p/DbgJvwuCCNv/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbgJvwuCCNv/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
+        <div class="igf" data-ig="https://www.instagram.com/p/DbiuXarCIpz/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbiuXarCIpz/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
       </div>
     </div>
   </section>
@@ -776,9 +936,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <p>El que sempre has de tenir a mà del club.</p>
       </div>
       <div class="ig-embed-wrap three">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXonCiBiPcW/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
+        <div class="igf" data-ig="https://www.instagram.com/p/DXonCiBiPcW/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DXonCiBiPcW/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
+        <div class="igf" data-ig="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
+        <div class="igf" data-ig="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
       </div>
       <p class="center reveal" style="margin-top:clamp(26px,4vw,42px)">
         <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" class="cta" data-cta="ig-follow">Segueix @cbgrupbarna</a>
@@ -829,6 +989,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <div class="list reveal">
         <a href="/fotos/" data-cta="galeria-fotos"><span class="list-t">Galeria de fotos</span><span class="list-s">Partits i events</span></a>
         <a href="/partits/" data-cta="partits"><span class="list-t">Partits i resultats</span><span class="list-s">Calendari</span></a>
+        <a href="/campus/" data-cta="campus-pagina"><span class="list-t">Campus de bàsquet</span><span class="list-s">Tecnificació</span></a>
+        <a href="/3x3/" data-cta="3x3-pagina"><span class="list-t">Torneig 3x3 Barcelona</span><span class="list-s">Westfield Glòries</span></a>
+        <a href="/blog/" data-cta="blog"><span class="list-t">Blog · guies per a famílies</span><span class="list-s">Bàsquet base</span></a>
         <a href="/grup-barna-dades-oficials/" data-cta="dades-oficials"><span class="list-t">El club · dades oficials</span><span class="list-s">Font oficial</span></a>
         <a href="/premidonaesport/" data-cta="premidonaesport"><span class="list-t">Premi Dona i Esport</span><span class="list-s">El Mètode Barna</span></a>
         <a href="/escoleta/" data-cta="escoleta-pagina"><span class="list-t">Escoleta · 4 a 7 anys</span><span class="list-s">cbgrupbarna.info/escoleta</span></a>
@@ -935,7 +1098,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <div class="foot-col">
         <h3>El Barna</h3>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
-        <a href="/escoleta/">Escoleta</a>
+        <a href="/escoleta/">Escola de bàsquet</a>
+        <a href="/campus/">Campus de bàsquet</a>
+        <a href="/3x3/">Torneig 3x3</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/fotos/">Galeria de fotos</a>
       </div>
@@ -943,6 +1108,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <h3>Temporada</h3>
         <a href="/partits/">Partits i resultats</a>
         <a href="https://app.myplay.com/public-live?liveId=CBgrupBarna" target="_blank" rel="noopener">Partits en directe</a>
+        <a href="/blog/">Blog del club</a>
         <a href="https://www.cbgrupbarna.com/noticies/" target="_blank" rel="noopener">Notícies</a>
         <a href="https://dossierpatrocinis.skywork.website" target="_blank" rel="noopener">Partners i patrocini</a>
       </div>
@@ -967,6 +1133,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </div>
   </div>
 </footer>
+
+<nav class="actionbar" id="actionbar" aria-label="Accions ràpides">
+  <a href="#info" class="red" data-cta="bar-info">Vull informació</a>
+  <a href="https://wa.me/34646205526?text=Hola%20Julio!%20Vull%20info%20de%20l%27Escoleta" target="_blank" rel="noopener" data-cta="bar-wa">WhatsApp Escoleta</a>
+</nav>
 
 <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna%20%F0%9F%8F%80" target="_blank" rel="noopener" class="fab-wa" aria-label="Escriure'ns per WhatsApp" data-cta="fab-wa">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -1016,7 +1187,99 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   var sb = document.getElementById('shareBtn');
   if (sb) sb.addEventListener('click', function () { shareIt('main', 'Mira tot lo calent del CB Grup Barna'); });
 
-  // ==== CALENDARI · propers partits des de /partits/partits.js ====
+  // ══════════════════════════════════════════════════════════════════════
+  //  FORMULARI D'INFORMACIÓ
+  //
+  //  Funciona sense servidor: en enviar-lo obre el WhatsApp del club amb
+  //  totes les dades, de manera que arriben al mòbil a l'instant.
+  //
+  //  PER REBRE-HO TAMBÉ PER CORREU: enganxa a FORM_ENDPOINT la URL del
+  //  servei de formularis (per exemple https://formspree.io/f/XXXXXXX, o
+  //  la d'un Google Apps Script publicat com a aplicació web). Mentre
+  //  estigui buit només s'envia per WhatsApp i no falla res.
+  // ══════════════════════════════════════════════════════════════════════
+  var FORM_ENDPOINT = '';
+  var WA_CLUB_NUM = '34698425153';
+
+  (function () {
+    var form = document.getElementById('infoForm');
+    if (!form) return;
+    var ok = document.getElementById('formOk');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nom = form.nom.value.trim();
+      var mobil = form.mobil.value.trim();
+      var correu = form.correu.value.trim();
+      var msg = form.missatge.value.trim();
+      var consent = document.getElementById('f-ok').checked;
+      var interes = [].slice.call(form.querySelectorAll('input[name=interes]:checked'))
+                      .map(function (i) { return i.value; });
+
+      if (!nom || !mobil || !correu || !consent) {
+        (!nom ? form.nom : !mobil ? form.mobil : !correu ? form.correu
+              : document.getElementById('f-ok')).focus();
+        flash('Falten dades per omplir');
+        return;
+      }
+      if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(correu)) {
+        form.correu.focus(); flash('Revisa el correu'); return;
+      }
+
+      var interesTxt = interes.join(', ') || 'Sense especificar';
+
+      // 1 · Correu, si hi ha endpoint configurat. No bloqueja el WhatsApp.
+      if (FORM_ENDPOINT) {
+        try {
+          fetch(FORM_ENDPOINT, {
+            method: 'POST', mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              _subject: "Nova sol·licitud d'informació · " + nom,
+              nom: nom, mobil: mobil, correu: correu,
+              interes: interesTxt, missatge: msg, origen: location.pathname
+            })
+          }).catch(function () {});
+        } catch (_) {}
+      }
+
+      // 2 · WhatsApp al club amb totes les dades
+      var txt = "Hola! Vull informació del CB Grup Barna.\n\n"
+              + "Nom: " + nom + "\n"
+              + "Mòbil: " + mobil + "\n"
+              + "Correu: " + correu + "\n"
+              + "M'interessa: " + interesTxt
+              + (msg ? "\n\n" + msg : "");
+      window.open('https://api.whatsapp.com/send?phone=' + WA_CLUB_NUM
+                  + '&text=' + encodeURIComponent(txt), '_blank', 'noopener');
+
+      if (window.gtag) window.gtag('event', 'generate_lead', { method: 'form_info', interes: interesTxt });
+      form.style.display = 'none';
+      if (ok) { ok.classList.add('on'); ok.scrollIntoView({ block: 'center' }); }
+    });
+  })();
+
+  // ==== BARRA D'ACCIÓ INFERIOR ====
+  // Apareix quan l'usuari ja ha passat l'Escoleta i s'aparta quan té el
+  // formulari a pantalla: allà ja hi ha la crida i taparia els camps.
+  (function () {
+    var bar = document.getElementById('actionbar');
+    var lead = document.getElementById('escoleta');
+    var info = document.getElementById('info');
+    if (!bar || !lead || !('IntersectionObserver' in window)) return;
+    var passatLead = false, formVisible = false;
+    function pinta() { bar.classList.toggle('on', passatLead && !formVisible); }
+    new IntersectionObserver(function (e) {
+      passatLead = !e[0].isIntersecting; pinta();
+    }, { threshold: 0.2 }).observe(lead);
+    if (info) {
+      new IntersectionObserver(function (e) {
+        formVisible = e[0].isIntersecting; pinta();
+      }, { threshold: 0.12 }).observe(info);
+    }
+  })();
+
+  // ==== CALENDARI · propers partits des de /partits/data.json ====
   (function () {
     var box = document.getElementById('cal-list');
     if (!box) return;
@@ -1090,11 +1353,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   // ==== El botó flotant s'aparta on ja hi ha un WhatsApp visible ====
   (function () {
     var fab = document.querySelector('.fab-wa');
-    var lead = document.getElementById('escoleta');
-    if (!fab || !lead || !('IntersectionObserver' in window)) return;
-    new IntersectionObserver(function (e) {
-      fab.classList.toggle('hidden', e[0].isIntersecting);
-    }, { threshold: 0.35 }).observe(lead);
+    if (!fab || !('IntersectionObserver' in window)) return;
+    var zones = ['escoleta', 'info'].map(function (id) { return document.getElementById(id); })
+                                    .filter(Boolean);
+    var dins = zones.map(function () { return false; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { dins[zones.indexOf(e.target)] = e.isIntersecting; });
+      fab.classList.toggle('hidden', dins.some(Boolean));
+    }, { threshold: 0.3 });
+    zones.forEach(function (z) { io.observe(z); });
   })();
 
   // ==== REVELAT ====
@@ -1113,24 +1380,33 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   })();
 
-  // ==== Instagram embed · càrrega diferida ====
+  // ==== Instagram · façana. L'iframe només es crea si l'usuari ho demana. ====
   (function () {
-    var seccions = document.querySelectorAll('.ig-embed-wrap');
-    if (!seccions.length) return;
     var loaded = false;
-    function loadIG() {
-      if (loaded) return; loaded = true;
-      var s = document.createElement('script');
-      s.src = 'https://www.instagram.com/embed.js';
-      s.async = true;
-      document.head.appendChild(s);
+    function loadScript(cb) {
+      if (loaded) { cb(); return; }
+      loaded = true;
+      var sc = document.createElement('script');
+      sc.src = 'https://www.instagram.com/embed.js';
+      sc.async = true;
+      sc.onload = cb;
+      document.head.appendChild(sc);
     }
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (e) {
-        if (e[0].isIntersecting) { loadIG(); io.disconnect(); }
-      }, { rootMargin: '400px' });
-      io.observe(seccions[0]);
-    } else { loadIG(); }
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.igf button');
+      if (!btn) return;
+      var box = btn.closest('.igf');
+      var link = box.getAttribute('data-ig');
+      var bq = document.createElement('blockquote');
+      bq.className = 'instagram-media';
+      bq.setAttribute('data-instgrm-permalink', link + '?utm_source=ig_embed');
+      bq.setAttribute('data-instgrm-version', '14');
+      box.replaceWith(bq);
+      loadScript(function () {
+        if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+      });
+      if (window.gtag) window.gtag('event', 'ig_embed_open', { url: link });
+    });
   })();
 </script>
 

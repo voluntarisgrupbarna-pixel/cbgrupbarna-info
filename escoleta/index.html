@@ -3,12 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deu van començar en aquesta pista · Escoleta CB Grup Barna</title>
-<meta name="description" content="Deu jugadors i entrenadors van començar en la mateixa pista de barri. Cap d'ells ho sabia als sis anys. La història de l'Escoleta del CB Grup Barna, des de 1965.">
-<meta property="og:title" content="Deu van començar en aquesta pista · Escoleta CB Grup Barna">
-<meta property="og:description" content="Un entrenador i una capitana de la Lliga Femenina Endesa, un jugador d'ACB, un campió de la Tercera FEB i quatre del Barça. Cap d'ells ho sabia als sis anys.">
-<meta property="og:image" content="img/equip-anys90-julio.jpg">
-<meta property="og:type" content="website">
+<title>Escola de bàsquet a Barcelona · Escoleta CB Grup Barna (4 a 7 anys) | El Clot</title>
 <link rel="preload" href="fonts/anton-400-2686.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* Tipografies auto-allotjades (Anton + Inter). Sense CDN de Google:
@@ -99,7 +94,7 @@ body{
   font-family:'Inter',system-ui,-apple-system,sans-serif;
   font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
 }
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
@@ -164,12 +159,12 @@ body[data-active="es"] [data-lang="ca"]{display:none !important}
   display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
   color:#fff;background:var(--red);padding:7px 13px;border-radius:2px;margin-bottom:26px;
 }
-h1{
+h1,.h1-alt{
   font-family:'Anton',sans-serif;font-weight:400;
   font-size:clamp(46px,8.6vw,118px);line-height:.88;letter-spacing:-.02em;
   text-transform:uppercase;
 }
-h1 em{font-style:normal;color:var(--red)}
+h1 em,.h1-alt em{font-style:normal;color:var(--red)}
 .subhook{
   display:inline-block;margin-top:24px;font-family:'Anton',sans-serif;text-transform:uppercase;
   font-size:clamp(19px,2.6vw,30px);letter-spacing:.01em;color:var(--paper);line-height:1.15;
@@ -303,14 +298,169 @@ footer a{color:#CFCBC4}
   .doc dl{grid-template-columns:1fr;gap:4px 0}
   .doc dd{margin-bottom:12px}
 }
+
+/* FAQ visible · ha de coincidir sempre amb el FAQPage del JSON-LD */
+.faq-sec{padding:clamp(40px,6vw,84px) 0;border-top:1px solid rgba(255,255,255,.12)}
+.faq-sec h2{font-size:clamp(18px,4vw,26px);margin-bottom:26px}
+.faq-q{border-bottom:1px solid rgba(255,255,255,.12)}
+.faq-q summary{list-style:none;cursor:pointer;min-height:48px;display:flex;align-items:center;
+  padding:14px 40px 14px 0;position:relative;font-weight:600;font-size:15px}
+.faq-q summary::-webkit-details-marker{display:none}
+.faq-q summary::after{content:'+';position:absolute;right:6px;color:var(--red);font-weight:400;font-size:20px}
+.faq-q[open] summary::after{content:'–'}
+.faq-q p{padding:0 0 20px;font-size:14.5px;opacity:.8;line-height:1.75;max-width:70ch}
 </style>
 <meta name="description" content="Escoleta del CB Grup Barna (4 a 7 anys) al Clot, Barcelona. Portes Obertes: vine a provar un entrenament sense compromís. 60 anys formant jugadors i jugadores al barri.">
 <link rel="canonical" href="https://cbgrupbarna.info/escoleta/">
-<meta property="og:title" content="Escoleta CB Grup Barna · Portes Obertes">
-<meta property="og:description" content="Vine a provar un entrenament sense compromís. Escoleta de 4 a 7 anys al Clot, Barcelona.">
+<meta property="og:title" content="Escola de bàsquet a Barcelona · Escoleta CB Grup Barna (4 a 7 anys)">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbgrupbarna.info/escoleta/">
+<meta property="og:image" content="https://cbgrupbarna.info/escoleta/img/equip-anys90-julio.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="Escola de bàsquet per a nens i nenes de 4 a 7 anys al Clot, Barcelona. D'aquesta pista han sortit jugadors d'ACB, de Lliga Femenina Endesa i del Barça.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info/escoleta/">
 <link rel="icon" type="image/png" href="/logo.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://cbgrupbarna.info/#julio-torralba",
+      "name": "Julio Torralba",
+      "jobTitle": "Responsable de l'Escoleta de bàsquet del CB Grup Barna",
+      "description": "Responsable de l'Escoleta del CB Grup Barna, l'escola de bàsquet del club per a nens i nenes de 4 a 7 anys al barri del Clot, Barcelona.",
+      "worksFor": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
+      "telephone": "+34646205526",
+      "knowsAbout": [
+        "Bàsquet base",
+        "Iniciació esportiva",
+        "Escola de bàsquet",
+        "Minibàsquet"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://cbgrupbarna.info/escoleta/#escoleta",
+      "name": "Escola de bàsquet · Escoleta CB Grup Barna",
+      "alternateName": [
+        "Escoleta CB Grup Barna",
+        "Escuela de baloncesto en Barcelona",
+        "Escola de bàsquet Barna"
+      ],
+      "description": "Escola de bàsquet a Barcelona per a nens i nenes de 4 a 7 anys. L'Escoleta del CB Grup Barna, al barri del Clot (Districte de Sant Martí), funciona amb equips mixtos, tres grups per edat i trobades amb altres clubs de la ciutat i la província. D'aquesta mateixa pista han sortit jugadors i jugadores que han arribat a l'ACB, a la Lliga Femenina Endesa i al FC Barcelona. La dirigeix Julio Torralba.",
+      "serviceType": "Escola de bàsquet base",
+      "url": "https://cbgrupbarna.info/escoleta/",
+      "provider": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
+      "employee": {
+        "@id": "https://cbgrupbarna.info/#julio-torralba"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Barcelona"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Província de Barcelona"
+        }
+      ],
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 4,
+        "suggestedMaxAge": 7
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://cbgrupbarna.info/escoleta/",
+        "servicePhone": {
+          "@type": "ContactPoint",
+          "telephone": "+34646205526",
+          "contactType": "Escoleta",
+          "name": "Julio Torralba",
+          "availableLanguage": [
+            "ca",
+            "es"
+          ]
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "category": "Prova gratuïta",
+        "description": "Primer entrenament de prova sense compromís.",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://cbgrupbarna.info/escoleta/#webpage",
+      "url": "https://cbgrupbarna.info/escoleta/",
+      "name": "Escola de bàsquet a Barcelona · Escoleta CB Grup Barna (4 a 7 anys)",
+      "inLanguage": [
+        "ca-ES",
+        "es-ES"
+      ],
+      "about": {
+        "@id": "https://cbgrupbarna.info/escoleta/#escoleta"
+      },
+      "isPartOf": {
+        "@id": "https://cbgrupbarna.info/#website"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://cbgrupbarna.info/escoleta/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quina és l'escola de bàsquet del CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L'Escoleta és l'escola de bàsquet del CB Grup Barna per a nens i nenes de 4 a 7 anys, al barri del Clot, Districte de Sant Martí de Barcelona. Funciona amb equips mixtos i tres grups per edat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qui dirigeix l'Escoleta del CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L'Escoleta la dirigeix Julio Torralba. Es pot contactar amb ell per telèfon o WhatsApp al 646 205 526."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A partir de quina edat es pot començar a jugar a bàsquet al Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Des dels 4 anys. L'Escoleta acull nens i nenes de 4 a 7 anys i, a partir dels 8, passen als equips federats del club (premini, mini i la resta de categories)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Es pot provar un entrenament abans d'apuntar-s'hi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. El primer entrenament és de prova i sense compromís. Cal escriure o trucar a Julio Torralba al 646 205 526 per reservar dia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "On entrena l'Escoleta del CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Al barri del Clot, al Districte de Sant Martí de Barcelona. La Nau del Clot és el punt esportiu principal del club."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body data-active="ca">
 
@@ -327,14 +477,14 @@ footer a{color:#CFCBC4}
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="hero-img">
-    <img src="img/equip-anys90-julio.jpg" alt="Equip mini del Grup Barna als anys 90 en una pista de pati, amb Julio Torralba">
+    <img src="img/equip-anys90-julio.webp" alt="Equip mini del Grup Barna als anys 90 en una pista de pati, amb Julio Torralba" fetchpriority="high" decoding="async" width="1200" height="836">
   </div>
   <div class="wrap">
     <div class="eyebrow" data-lang="ca">Escoleta CB Grup Barna · des de 1965</div>
     <div class="eyebrow" data-lang="es">Escoleta CB Grup Barna · desde 1965</div>
 
     <h1 data-lang="ca">Deu van<br>començar en<br><em>aquesta pista</em></h1>
-    <h1 data-lang="es">Diez empezaron<br>en <em>esta misma<br>pista</em></h1>
+    <div class="h1-alt" data-lang="es" role="heading" aria-level="1">Diez empezaron<br>en <em>esta misma<br>pista</em></div>
 
     <p class="subhook" data-lang="ca">I cap d’ells ho sabia als sis anys.</p>
     <p class="subhook" data-lang="es">Y ninguno lo sabía a los seis años.</p>
@@ -398,19 +548,19 @@ footer a{color:#CFCBC4}
     </div>
 
     <figure>
-      <img src="img/partit-pati-anys90.jpg" alt="Partit de bàsquet en una pista de pati als anys 90">
+      <img src="img/partit-pati-anys90.webp" alt="Partit de bàsquet en una pista de pati als anys 90" loading="lazy" decoding="async" width="1200" height="900">
       <figcaption data-lang="ca"><b>Anys 90.</b> El nen que porta la pilota és en <b>Javier Torralba</b>, avui entrenador del Valencia Basket Femení a la Lliga Femenina Endesa. Partit en pista exterior; el públic, assegut a la vorera.</figcaption>
       <figcaption data-lang="es"><b>Años 90.</b> El niño que lleva el balón es <b>Javier Torralba</b>, hoy entrenador del Valencia Basket Femenino en la Liga Femenina Endesa. Partido en pista exterior; el público, sentado en el bordillo.</figcaption>
     </figure>
 
     <div class="grid2">
       <figure>
-        <img src="img/campions-anys90.jpg" alt="Nens del Grup Barna celebrant amb un trofeu als anys 90">
+        <img src="img/campions-anys90.webp" alt="Nens del Grup Barna celebrant amb un trofeu als anys 90" loading="lazy" decoding="async" width="1200" height="865">
         <figcaption data-lang="ca"><b>Un trofeu, deu mans.</b> La celebració no ha canviat gens.</figcaption>
         <figcaption data-lang="es"><b>Un trofeo, diez manos.</b> La celebración no ha cambiado nada.</figcaption>
       </figure>
       <figure>
-        <img src="img/equip-medalles.jpg" alt="Equip del Grup Barna amb medalles i Julio Torralba">
+        <img src="img/equip-medalles.webp" alt="Equip del Grup Barna amb medalles i Julio Torralba" loading="lazy" decoding="async" width="863" height="638">
         <figcaption data-lang="ca"><b>Generació rere generació.</b> En Julio, a la dreta, en una altra promoció.</figcaption>
         <figcaption data-lang="es"><b>Generación tras generación.</b> Julio, a la derecha, en otra promoción.</figcaption>
       </figure>
@@ -436,7 +586,7 @@ footer a{color:#CFCBC4}
     <div class="doc">
       <span class="tag" data-lang="ca">Document original</span>
       <span class="tag" data-lang="es">Documento original</span>
-      <img src="img/fitxa-federativa-xavier-torralba.jpg" alt="Llicència federativa de la Federació Catalana de Basquetbol de Xavier Torralba Liso, Grup Barna, temporada 1993-94">
+      <img src="img/fitxa-federativa-xavier-torralba.webp" alt="Llicència federativa de la Federació Catalana de Basquetbol de Xavier Torralba Liso, Grup Barna, temporada 1993-94" loading="lazy" decoding="async" width="1200" height="899">
       <dl>
         <dt data-lang="ca">Jugador</dt><dt data-lang="es">Jugador</dt>
         <dd>Torralba Liso, Xavier</dd>
@@ -479,7 +629,7 @@ footer a{color:#CFCBC4}
     <div class="alumni">
 
       <div class="alum">
-        <div class="shot"><img src="img/alumni-javier-torralba.jpg" alt="Javier Torralba de nen, foto de la seva primera llicència federativa"></div>
+        <div class="shot"><img src="img/alumni-javier-torralba.webp" alt="Javier Torralba de nen, foto de la seva primera llicència federativa" loading="lazy" decoding="async" width="900" height="1200"></div>
         <div class="txt">
           <div class="who">Javier Torralba</div>
           <div class="now" data-lang="ca">Entrenador · Valencia Basket · LF Endesa</div>
@@ -492,7 +642,7 @@ footer a{color:#CFCBC4}
       </div>
 
       <div class="alum">
-        <div class="shot"><img src="img/alumni-roger-fornas.jpg" alt="Roger Fornas, pivot professional"></div>
+        <div class="shot"><img src="img/alumni-roger-fornas.webp" alt="Roger Fornas, pivot professional" loading="lazy" decoding="async" width="900" height="1200"></div>
         <div class="txt">
           <div class="who">Roger Fornas</div>
           <div class="now" data-lang="ca">Pivot · ACB i LEB Or</div>
@@ -505,7 +655,7 @@ footer a{color:#CFCBC4}
       </div>
 
       <div class="alum">
-        <div class="shot"><img src="img/alumni-david-mejia.jpg" alt="David Mejía amb el trofeu de campió de la Tercera FEB"></div>
+        <div class="shot"><img src="img/alumni-david-mejia.webp" alt="David Mejía amb el trofeu de campió de la Tercera FEB" loading="lazy" decoding="async" width="900" height="1200"></div>
         <div class="txt">
           <div class="who">David Mejía</div>
           <div class="now" data-lang="ca">Campió Tercera FEB 2026</div>
@@ -518,7 +668,7 @@ footer a{color:#CFCBC4}
       </div>
 
       <div class="alum">
-        <div class="shot"><img src="img/alumni-ainhoa-lopez.jpg" alt="Ainhoa López, entrenadora de l'Escoleta del CB Grup Barna"></div>
+        <div class="shot"><img src="img/alumni-ainhoa-lopez.webp" alt="Ainhoa López, entrenadora de l'Escoleta del CB Grup Barna" loading="lazy" decoding="async" width="900" height="1200"></div>
         <div class="txt">
           <div class="who">Ainhoa López</div>
           <div class="now" data-lang="ca">Escorta · Spar Girona · LF Endesa</div>
@@ -531,7 +681,7 @@ footer a{color:#CFCBC4}
       </div>
 
       <div class="alum">
-        <div class="shot"><img src="img/alumni-dario-naharro.jpg" alt="Darío Naharro, entrenador i divulgador de bàsquet formatiu"></div>
+        <div class="shot"><img src="img/alumni-dario-naharro.webp" alt="Darío Naharro, entrenador i divulgador de bàsquet formatiu" loading="lazy" decoding="async" width="900" height="1200"></div>
         <div class="txt">
           <div class="who">Darío Naharro</div>
           <div class="now" data-lang="ca">DCA Academy · tecnificació</div>
@@ -544,7 +694,7 @@ footer a{color:#CFCBC4}
       </div>
 
       <div class="alum">
-        <div class="shot"><img src="img/alumni-daniel-iruela.jpg" alt="Daniel Iruela, jugador format al FC Barcelona"></div>
+        <div class="shot"><img src="img/alumni-daniel-iruela.webp" alt="Daniel Iruela, jugador format al FC Barcelona" loading="lazy" decoding="async" width="900" height="1200"></div>
         <div class="txt">
           <div class="who">Daniel Iruela</div>
           <div class="now" data-lang="ca">Formació FC Barcelona</div>
@@ -573,7 +723,7 @@ footer a{color:#CFCBC4}
       </div>
 
       <div class="alum">
-        <div class="shot"><img src="img/alumni-seleccio-3x3.jpg" alt="Exjugador de l'Escoleta amb la samarreta de la selecció espanyola de 3x3"></div>
+        <div class="shot"><img src="img/alumni-seleccio-3x3.webp" alt="Exjugador de l'Escoleta amb la samarreta de la selecció espanyola de 3x3" loading="lazy" decoding="async" width="900" height="1200"></div>
         <div class="txt">
           <div class="who" data-lang="ca">Selecció 3x3</div>
           <div class="who" data-lang="es">Selección 3x3</div>
@@ -623,12 +773,12 @@ footer a{color:#CFCBC4}
 
     <div class="grid2">
       <figure>
-        <img src="img/ainhoa-premini-2004.jpg" alt="Equip pre-mini femení del CB Grup Barna, temporada 2004-2005">
+        <img src="img/ainhoa-premini-2004.webp" alt="Equip pre-mini femení del CB Grup Barna, temporada 2004-2005" loading="lazy" decoding="async" width="1200" height="900">
         <figcaption data-lang="ca"><b>Pre-mini femení, 2004-05.</b> Set anys. La seva primera temporada al club.</figcaption>
         <figcaption data-lang="es"><b>Pre-mini femenino, 2004-05.</b> Siete años. Su primera temporada en el club.</figcaption>
       </figure>
       <figure>
-        <img src="img/ainhoa-equip-barna.jpg" alt="Equip femení de formació del CB Grup Barna">
+        <img src="img/ainhoa-equip-barna.webp" alt="Equip femení de formació del CB Grup Barna" loading="lazy" decoding="async" width="1200" height="900">
         <figcaption data-lang="ca"><b>Formació al Barna.</b> Abans del Sant Adrià, del Barça CBS i de Fontajau.</figcaption>
         <figcaption data-lang="es"><b>Formación en el Barna.</b> Antes del Sant Adrià, del Barça CBS y de Fontajau.</figcaption>
       </figure>
@@ -636,19 +786,19 @@ footer a{color:#CFCBC4}
 
     <div class="grid2">
       <figure>
-        <img src="img/ainhoa-jugant.jpg" alt="Partit de bàsquet femení de formació del CB Grup Barna">
+        <img src="img/ainhoa-jugant.webp" alt="Partit de bàsquet femení de formació del CB Grup Barna" loading="lazy" decoding="async" width="1200" height="900">
         <figcaption data-lang="ca"><b>Jugant.</b> Bàsquet femení de formació al Barna, fa més de vint anys.</figcaption>
         <figcaption data-lang="es"><b>Jugando.</b> Baloncesto femenino de formación en el Barna, hace más de veinte años.</figcaption>
       </figure>
       <figure>
-        <img src="img/ainhoa-escoleta-grup.jpg" alt="L'Escoleta del CB Grup Barna al complet">
+        <img src="img/ainhoa-escoleta-grup.webp" alt="L'Escoleta del CB Grup Barna al complet" loading="lazy" decoding="async" width="1200" height="900">
         <figcaption data-lang="ca"><b>L’Escoleta.</b> Enmig d’aquests nens hi havia una futura capitana de LF Endesa.</figcaption>
         <figcaption data-lang="es"><b>La Escoleta.</b> Entre estos niños había una futura capitana de LF Endesa.</figcaption>
       </figure>
     </div>
 
     <figure>
-      <img src="img/equip-anys90-julio.jpg" alt="Equip mini del Grup Barna dels anys 90">
+      <img src="img/equip-anys90-julio.webp" alt="Equip mini del Grup Barna dels anys 90" loading="lazy" decoding="async" width="1200" height="836">
       <figcaption data-lang="ca"><b>La mateixa foto, dues carreres.</b> En aquest equip dels anys 90 hi ha en Javier Torralba i en Roger Fornas. Cap dels dos ho sabia encara.</figcaption>
       <figcaption data-lang="es"><b>La misma foto, dos carreras.</b> En este equipo de los años 90 están Javier Torralba y Roger Fornas. Ninguno de los dos lo sabía todavía.</figcaption>
     </figure>
@@ -669,25 +819,25 @@ footer a{color:#CFCBC4}
 
     <div class="grid2">
       <figure class="tall">
-        <img src="img/david-mejia-nen-2007.jpg" alt="David Mejía de nen a l'Escola de Bàsquet Grup Barna, febrer de 2007">
+        <img src="img/david-mejia-nen-2007.webp" alt="David Mejía de nen a l'Escola de Bàsquet Grup Barna, febrer de 2007" loading="lazy" decoding="async" width="1050" height="1400">
         <figcaption data-lang="ca"><b>24 · 02 · 2007.</b> Escola de Bàsquet Grup Barna.</figcaption>
         <figcaption data-lang="es"><b>24 · 02 · 2007.</b> Escuela de Baloncesto Grup Barna.</figcaption>
       </figure>
       <figure class="tall">
-        <img src="img/david-mejia-trofeu.jpg" alt="David Mejía amb el trofeu de campió de la Fase Final Tercera FEB 2025/26">
+        <img src="img/david-mejia-trofeu.webp" alt="David Mejía amb el trofeu de campió de la Fase Final Tercera FEB 2025/26" loading="lazy" decoding="async" width="789" height="1400">
         <figcaption data-lang="ca"><b>Juny de 2026.</b> Campió de la Fase Final Tercera FEB. Ascens a Segona FEB.</figcaption>
         <figcaption data-lang="es"><b>Junio de 2026.</b> Campeón de la Fase Final Tercera FEB. Ascenso a Segunda FEB.</figcaption>
       </figure>
     </div>
 
     <figure>
-      <img src="img/julio-david-retrobament.jpg" alt="Julio Torralba i David Mejía retrobant-se">
+      <img src="img/julio-david-retrobament.webp" alt="Julio Torralba i David Mejía retrobant-se" loading="lazy" decoding="async" width="833" height="1400">
       <figcaption data-lang="ca"><b>El retrobament.</b> L’entrenador que el va rebre amb 4 anys i el jugador que acaba de pujar de categoria. Hi ha històries que defineixen què és el Barna.</figcaption>
       <figcaption data-lang="es"><b>El reencuentro.</b> El entrenador que lo recibió con 4 años y el jugador que acaba de ascender de categoría. Hay historias que definen lo que es el Barna.</figcaption>
     </figure>
 
     <figure>
-      <img src="img/campions-tercera-feb.jpg" alt="Celebració del campionat de la Fase Final Tercera FEB 2025/26">
+      <img src="img/campions-tercera-feb.webp" alt="Celebració del campionat de la Fase Final Tercera FEB 2025/26" loading="lazy" decoding="async" width="1200" height="800">
       <figcaption data-lang="ca"><b>«Hemos vuelto».</b> Fase Final Tercera FEB 2025/26, Badajoz.</figcaption>
       <figcaption data-lang="es"><b>«Hemos vuelto».</b> Fase Final Tercera FEB 2025/26, Badajoz.</figcaption>
     </figure>
@@ -708,12 +858,12 @@ footer a{color:#CFCBC4}
 
     <div class="grid2">
       <figure>
-        <img src="img/marta-18-escoleta.jpg" alt="Els nens i nenes de l'Escoleta asseguts a la pista escoltant">
+        <img src="img/marta-18-escoleta.webp" alt="Els nens i nenes de l'Escoleta asseguts a la pista escoltant" loading="lazy" decoding="async" width="1200" height="1066">
         <figcaption data-lang="ca"><b>Els petits miren.</b> El que veuen avui és el que voldran ser demà.</figcaption>
         <figcaption data-lang="es"><b>Los pequeños miran.</b> Lo que ven hoy es lo que querrán ser mañana.</figcaption>
       </figure>
       <figure>
-        <img src="img/marta-felicitats.jpg" alt="L'Escoleta felicitant la Marta pels seus 18 anys">
+        <img src="img/marta-felicitats.webp" alt="L'Escoleta felicitant la Marta pels seus 18 anys" loading="lazy" decoding="async" width="1200" height="1051">
         <figcaption data-lang="ca"><b>Divuit.</b> L’Escoleta al complet, en Julio al mig.</figcaption>
         <figcaption data-lang="es"><b>Dieciocho.</b> La Escoleta al completo, Julio en medio.</figcaption>
       </figure>
@@ -741,19 +891,19 @@ footer a{color:#CFCBC4}
     </div>
 
     <figure>
-      <img src="img/cistella-petita.jpg" alt="Dia de la Cistella Petita 2026 al CB Grup Barna">
+      <img src="img/cistella-petita.webp" alt="Dia de la Cistella Petita 2026 al CB Grup Barna" loading="lazy" decoding="async" width="1200" height="808">
       <figcaption data-lang="ca"><b>Dia de la Cistella Petita · 13.06.2026.</b> Segona edició. Petits grans jugadors.</figcaption>
       <figcaption data-lang="es"><b>Día de la Cistella Petita · 13.06.2026.</b> Segunda edición. Pequeños grandes jugadores.</figcaption>
     </figure>
 
     <div class="grid2">
       <figure>
-        <img src="img/trobada-solozabal.jpg" alt="Trobada de l'Escola Grup Barna amb l'Escola Nacho Solozabal">
+        <img src="img/trobada-solozabal.webp" alt="Trobada de l'Escola Grup Barna amb l'Escola Nacho Solozabal" loading="lazy" decoding="async" width="1200" height="637">
         <figcaption data-lang="ca"><b>21.05.2026.</b> Trobada amb l’Escola Nacho Solozabal.</figcaption>
         <figcaption data-lang="es"><b>21.05.2026.</b> Encuentro con la Escuela Nacho Solozabal.</figcaption>
       </figure>
       <figure>
-        <img src="img/visita-alcalde.jpg" alt="Visita de l'alcalde de Barcelona Jaume Collboni al CB Grup Barna">
+        <img src="img/visita-alcalde.webp" alt="Visita de l'alcalde de Barcelona Jaume Collboni al CB Grup Barna" loading="lazy" decoding="async" width="1199" height="946">
         <figcaption data-lang="ca"><b>14.02.2026.</b> Visita de l’alcalde de Barcelona, Sr. Collboni, i del regidor d’Esports, Sr. Escudé.</figcaption>
         <figcaption data-lang="es"><b>14.02.2026.</b> Visita del alcalde de Barcelona, Sr. Collboni, y del concejal de Deportes, Sr. Escudé.</figcaption>
       </figure>
@@ -814,6 +964,13 @@ footer a{color:#CFCBC4}
       </a>
       <a class="btn ghost" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>
     </div>
+  </div>
+</section>
+
+<section class="faq-sec" aria-labelledby="faq-escoleta">
+  <div class="wrap">
+    <h2 id="faq-escoleta">Preguntes freqüents sobre l'Escoleta</h2>
+    <details class="faq-q"><summary>Quina és l'escola de bàsquet del CB Grup Barna?</summary><p>L'Escoleta és l'escola de bàsquet del CB Grup Barna per a nens i nenes de 4 a 7 anys, al barri del Clot, Districte de Sant Martí de Barcelona. Funciona amb equips mixtos i tres grups per edat.</p></details><details class="faq-q"><summary>Qui dirigeix l'Escoleta del CB Grup Barna?</summary><p>L'Escoleta la dirigeix Julio Torralba. Es pot contactar amb ell per telèfon o WhatsApp al 646 205 526.</p></details><details class="faq-q"><summary>A partir de quina edat es pot començar a jugar a bàsquet al Barna?</summary><p>Des dels 4 anys. L'Escoleta acull nens i nenes de 4 a 7 anys i, a partir dels 8, passen als equips federats del club (premini, mini i la resta de categories).</p></details><details class="faq-q"><summary>Es pot provar un entrenament abans d'apuntar-s'hi?</summary><p>Sí. El primer entrenament és de prova i sense compromís. Cal escriure o trucar a Julio Torralba al 646 205 526 per reservar dia.</p></details><details class="faq-q"><summary>On entrena l'Escoleta del CB Grup Barna?</summary><p>Al barri del Clot, al Districte de Sant Martí de Barcelona. La Nau del Clot és el punt esportiu principal del club.</p></details>
   </div>
 </section>
 
