@@ -62,6 +62,9 @@ body {
   min-height: 100vh;
   padding-bottom: 90px;
 }
+@media (max-width: 760px) {
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+}
 button { font-family:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; border:0; background:none; color:inherit; }
 a { color:inherit; }
 .mono { font-family:'Inter', sans-serif; }
@@ -329,6 +332,34 @@ h1 span { color: var(--red); }
 }
 .edit-pill.on { display:block; }
 footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; font-size:9px; letter-spacing:1px; color:var(--muted); text-transform:uppercase; line-height:2; }
+
+/* ===== NAVEGACIÓ INFERIOR (mòbil) =====
+   En una PWA instal·lada en mode standalone no hi ha barra del navegador:
+   la navegació de dalt obliga a estirar el polze. Aquesta barra fixa deixa
+   les 3 vistes del dia a dia (Jornada, Resultats, Equips) i la tornada al
+   club a un sol toc, sense amagar mai la resta de pestanyes de dalt. */
+.bottomnav {
+  display: none;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+  background: rgba(244,241,236,0.96); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-shadow: 0 -2px 14px rgba(14,17,22,.06);
+}
+.bottomnav-in { display: flex; }
+.bn-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; min-height: 60px; padding: 8px 4px 7px;
+  font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: .3px;
+  text-transform: uppercase; color: var(--muted); text-decoration: none;
+  border-top: 2px solid transparent;
+}
+.bn-item .bn-ic { font-size: 19px; line-height: 1; }
+.bn-item.on { color: var(--red-ink); border-top-color: var(--red); }
+@media (max-width: 760px) {
+  .bottomnav { display: block; }
+  .edit-pill { bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 10px); }
+}
 </style>
 </head>
 <body>
@@ -588,6 +619,15 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   <a href="/" style="color:#8a8a8a;text-decoration:none">CB GRUP BARNA · BÀSQUET AL CLOT DES DE 1965</a><br>
   Dades: FCBQ · basquetcatala.cat/club/24
 </footer>
+
+<nav class="bottomnav" id="bottomnav" aria-label="Navegació principal">
+  <div class="bottomnav-in">
+    <button class="bn-item on" data-v="jornada"><span class="bn-ic">🗓</span>Jornada</button>
+    <button class="bn-item" data-v="resultats"><span class="bn-ic">📊</span>Resultats</button>
+    <button class="bn-item" data-v="equips"><span class="bn-ic">👥</span>Equips</button>
+    <a class="bn-item" href="/" data-cta="bn-club"><span class="bn-ic">🏀</span>El Barna</a>
+  </div>
+</nav>
 
 <script src="../admin/config.js"></script>
 <script src="../admin/auth.js"></script>
@@ -2087,16 +2127,26 @@ function showCaption(tpl, p, e, rinfo, m) {
 /* ---------- navegació ---------- */
 function showView(v) {
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
+  document.querySelectorAll('.bn-item[data-v]').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
 }
 function renderAll(){ renderJornada(); renderResultats(); renderAnalisi(); renderEquips(); renderJugadors(); renderFons(); renderManuals(); omplirFons(); }
+function goView(v) {
+  showView(v);
+  if (v==='equips') renderEquips();
+  if (v==='cartells') fillCartellSelect();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 /* ---------- listeners ---------- */
 document.getElementById('tabs').addEventListener('click', e=>{
   const t = e.target.closest('.tab'); if (!t) return;
-  showView(t.dataset.v);
-  if (t.dataset.v==='equips') renderEquips();
-  if (t.dataset.v==='cartells') fillCartellSelect();
+  goView(t.dataset.v);
+});
+document.getElementById('bottomnav').addEventListener('click', e=>{
+  const t = e.target.closest('.bn-item[data-v]'); if (!t) return;
+  goView(t.dataset.v);
+  if (window.gtag) window.gtag('event', 'bottomnav_click', { view: t.dataset.v });
 });
 function toggleCamps() {
   const t = document.getElementById('c-tpl').value;
