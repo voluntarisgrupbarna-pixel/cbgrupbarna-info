@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://cbgrupbarna.info"
 WA_CLUB = "https://api.whatsapp.com/send?phone=+34698425153"
 WA_ESCOLETA = "https://wa.me/34646205526"
+WEB_3X3 = "https://cbgrupbarna-3x3timechamber.com"
+WEB_3X3_INSCRIPCIO = WEB_3X3 + "/#inscripcio"
 
 # ─────────────────────────────────────────────────────────────── esquelet ────
 
@@ -308,9 +310,9 @@ def build_3x3():
          "seguits, així que en un mateix dia un equip juga diverses eliminatòries. És el format "
          "olímpic del bàsquet des dels Jocs de Tòquio."),
         ("Quan és la propera edició?",
-         "Les dates s'anuncien en aquesta pàgina i a Instagram (@cbgrupbarna). El torneig se sol fer "
-         "a l'inici de l'estiu. Qui vulgui rebre l'avís d'obertura d'inscripcions pot demanar-ho pel "
-         "WhatsApp del club."),
+         "Les dates s'anuncien en aquesta pàgina, a la web oficial cbgrupbarna-3x3timechamber.com i a "
+         "Instagram (@cbgrupbarna). El torneig se sol fer a l'inici de l'estiu. Qui vulgui rebre "
+         "l'avís d'obertura d'inscripcions pot demanar-ho pel WhatsApp del club."),
         ("On és exactament?",
          "A Westfield Glòries, a la plaça de les Glòries Catalanes de Barcelona, a tocar del barri "
          "del Clot i del Districte de Sant Martí."),
@@ -326,7 +328,9 @@ def build_3x3():
          "location": {"@type": "Place", "name": "Westfield Glòries",
                       "address": {"@type": "PostalAddress", "streetAddress": "Av. Diagonal, 208",
                                   "addressLocality": "Barcelona", "postalCode": "08018",
-                                  "addressRegion": "Catalunya", "addressCountry": "ES"}}},
+                                  "addressRegion": "Catalunya", "addressCountry": "ES"}},
+         "offers": {"@type": "Offer", "url": WEB_3X3_INSCRIPCIO,
+                    "availability": "https://schema.org/InStock", "category": "Inscripció per equip"}},
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
          "description": desc, "inLanguage": ["ca-ES", "es-ES"],
          "about": {"@id": url + "#torneig"}, "isPartOf": {"@id": SITE + "/#website"}},
@@ -344,9 +348,10 @@ def build_3x3():
     tocar del Clot. Format urbà, partits curts i seguits, categories de base i categories obertes
     per a colles d'amics.</p>
     <div class="btn-row" style="margin-top:28px">
+      <a href="{WEB_3X3_INSCRIPCIO}" class="btn red" target="_blank" rel="noopener"
+         data-cta="3x3-inscripcio">Inscriu el teu equip</a>
       <a href="{WA_CLUB}&amp;text=Hola!%20Vull%20informaci%C3%B3%20del%20torneig%203x3%20de%20Barcelona"
-         class="btn red" target="_blank" rel="noopener" data-cta="3x3-wa">Demanar informació</a>
-      <a href="/#info" class="btn ghost" data-cta="3x3-form">Avisa'm de la propera edició</a>
+         class="btn ghost" target="_blank" rel="noopener" data-cta="3x3-wa">Demanar informació</a>
     </div>
   </div>
 
@@ -382,18 +387,20 @@ def build_3x3():
     </ul>
 
     <h2>Com apuntar-hi un equip</h2>
-    <p>Les inscripcions s'obren unes setmanes abans de cada edició i es fan per equip, no per jugador.
-    Les places són limitades i les darreres edicions s'han omplert, així que el més segur és demanar
-    l'avís previ pel WhatsApp del club o deixant el contacte al
-    <a href="/#info">formulari d'informació</a>: el club escriu a la llista quan s'obren les places.</p>
+    <p>Les inscripcions es fan directament a la web oficial del torneig,
+    <a href="{WEB_3X3}" target="_blank" rel="noopener">cbgrupbarna-3x3timechamber.com</a>, per equip
+    i no per jugador. Les places són limitades i les darreres edicions s'han omplert abans de
+    començar, així que com més aviat es formalitzi la inscripció, més segur. Si encara no s'han
+    obert les inscripcions de la propera edició, es pot demanar l'avís previ pel WhatsApp del club
+    o deixant el contacte al <a href="/#info">formulari d'informació</a>.</p>
 
     <h2>Preguntes freqüents</h2>
     {faq_html}
 
     <div style="margin-top:clamp(34px,5vw,60px)">
     {closer("Vull apuntar un equip al proper 3x3",
-            "Deixa'ns el contacte i t'avisem quan s'obrin les inscripcions de la propera edició.",
-            [("Demanar informació", "/#info", "red", "3x3-closer-form"),
+            "La inscripció es fa per equip a la web oficial del torneig.",
+            [("Inscriure's a cbgrupbarna-3x3timechamber.com", WEB_3X3_INSCRIPCIO, "red", "3x3-closer-inscripcio"),
              ("WhatsApp del club", WA_CLUB + "&amp;text=Hola!%20Vull%20apuntar%20un%20equip%20al%203x3", "ghost", "3x3-closer-wa")])}
     </div>
   </div>
