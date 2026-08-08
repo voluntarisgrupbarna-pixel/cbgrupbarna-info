@@ -102,6 +102,20 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.18
 .facts b em { font-style: normal; color: var(--red); }
 .facts span { display: block; margin-top: 8px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
 
+/* ==== PREMSA · galeria de pàgines i cita de l'article ==== */
+.press-badge { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 10px 18px; border: 1px solid var(--line); font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
+.press-badge b { color: var(--ink); font-weight: 500; }
+.press-grid { display: grid; grid-template-columns: 1fr; gap: clamp(14px, 2vw, 22px); margin: clamp(28px, 4vw, 46px) 0; }
+@media (min-width: 680px) { .press-grid.two { grid-template-columns: 1fr 1fr; } }
+.press-grid figure { margin: 0; }
+.press-grid img { width: 100%; border: 1px solid var(--line); }
+.press-quote { position: relative; margin: clamp(28px, 4vw, 46px) 0; padding: clamp(24px, 4vw, 40px) clamp(22px, 4vw, 40px); border: 1px solid var(--line); border-left: 3px solid var(--red); background: var(--paper-2); }
+.press-quote .eyebrow { margin-bottom: 16px; }
+.press-quote p { font-size: 15px; color: var(--ink); }
+.press-quote p + p { margin-top: 14px; }
+.press-quote-by { display: block; margin-top: 22px; font-family: var(--display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.press-quote-by b { color: var(--ink); }
+
 /* ==== TAULA DE DADES ==== */
 .dl { border-top: 1px solid var(--ink); margin: clamp(24px, 3.4vw, 40px) 0; }
 .dl-row { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding: 15px 2px; border-bottom: 1px solid var(--line); }

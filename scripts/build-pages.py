@@ -65,6 +65,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None):
       <a href="/campus/" class="opt">Campus</a>
       <a href="/3x3/" class="opt">3x3</a>
       <a href="/blog/" class="opt">Blog</a>
+      <a href="/premsa/" class="opt">Premsa</a>
       <a href="/#info">Informació</a>
     </nav>
   </div>
@@ -96,6 +97,7 @@ FOOT = f"""</main>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
+        <a href="/premsa/">Articles i premsa</a>
       </div>
       <div class="foot-col">
         <h3>Contacte</h3>
@@ -841,6 +843,220 @@ def build_blog_index():
                  + body + FOOT)
 
 
+# ═══════════════════════════════════════════════════════════════ /premsa/ ════
+
+PRESS = [
+ {
+  "slug": "guia-clot-seixanta-anys-fent-bategar-el-clot",
+  "date": "2026-08-08",
+  "outlet": "Guia Clot · Camp de l'Arpa",
+  "publisher": "Eix Clot",
+  "author": "Gemma Collell",
+  "title": "«El CB Grup Barna: seixanta anys fent bategar el Clot», a Guia Clot",
+  "seo_title": "El CB Grup Barna a Guia Clot · Gràcies, Eix Clot i Gemma Collell",
+  "desc": ("Gràcies a Eix Clot i a la periodista Gemma Collell per l'article que la revista Guia Clot "
+           "ha dedicat al CB Grup Barna pels seus 60 anys. Article complet i fotos de la revista."),
+  "kw": "CB Grup Barna premsa, Guia Clot, Eix Clot, Gemma Collell, revista Camp de l'Arpa, "
+        "60 anys CB Grup Barna, bàsquet Clot premsa",
+  "lede": ("La revista Guia Clot, editada per Eix Clot, ha dedicat el seu article més destacat al "
+           "CB Grup Barna pels 60 anys del club. Gràcies, Eix Clot. Gràcies, Gemma Collell."),
+  "images": [
+    ("article-guia-clot-pagina-1.webp",
+     "Portada de l'article «El CB Grup Barna: seixanta anys fent bategar el Clot» a la revista Guia Clot, amb foto de l'equip infantil davant el bàner del club"),
+    ("article-guia-clot-pagina-2.webp",
+     "Segona pàgina de l'article a Guia Clot, amb foto de l'equip sènior masculí i el text sobre el compromís social del club"),
+  ],
+  "body": """
+<p>Al Clot ens coneixem tots, i quan algú del barri es fixa en la feina que fas cada dia, això
+val més que qualsevol titular. Per això volem donar-li les gràcies, amb nom i cognoms, a
+<strong>Eix Clot</strong> i a la periodista <strong>Gemma Collell</strong>, que ha escrit
+l'article més destacat de la revista <em>Guia Clot · Camp de l'Arpa</em> sobre el CB Grup Barna:
+seixanta anys de bàsquet base al barri, explicats amb cura i amb dades certes.</p>
+<p>Reproduïm aquí el text complet de l'article, tal com va sortir publicat, perquè qui no hagi
+tingut la revista a les mans també el pugui llegir.</p>
+""",
+  "quote_title": "El CB Grup Barna · Seixanta anys fent bategar el Clot",
+  "quote_lede": ("El Club Bàsquet Grup Barna s'ha convertit en un autèntic pilar social i esportiu "
+                 "dins del districte de Sant Martí. Amb la inclusió i l'arrelament com a bandera, "
+                 "l'entitat fa accessible l'esport a tothom des de la mítica pista de la Nau del Clot."),
+  "quote_paras": [
+    ("Parlar del Club Bàsquet Grup Barna és parlar de la història viva del Clot. Fundat l'any 1965, "
+     "aquest emblemàtic club celebra ja seixanta anys de trajectòria, consolidant-se com un dels "
+     "clubs de bàsquet de base més grans i actius de tot el districte de Sant Martí. Al llarg de sis "
+     "dècades, l'entitat no només ha vist créixer milers de jugadors i jugadores a les seves pistes, "
+     "sinó que ha sabut transformar l'esport en una eina d'articulació social inestimable per a tot "
+     "el veïnat. Amb prop de 450 sòcies i socis i prop de 40 equips federats en competició, destaca "
+     "a més per una paritat total entre les seves seccions masculina i femenina."),
+    ("La clau de l'èxit i de la longevitat del Grup Barna rau en la seva manera única d'entendre la "
+     "pràctica esportiva. Lluny de centrar-se exclusivament en els marcadors o la pressió "
+     "competitiva, el club s'ha regit sempre per principis innegociables: l'accés universal al "
+     "bàsquet, la igualtat real d'oportunitats, la diversitat i un profund arrelament al barri. Per "
+     "al Barna, el bàsquet és un dret de tothom i un espai idoni on fer amistats per a tota la vida, "
+     "compartint valors com el respecte, la cooperació, la salut, la constància i el compromís "
+     "col·lectiu."),
+    ("Aquesta ferma filosofia inclusiva es tradueix en fets concrets que omplen d'orgull el "
+     "territori. El millor exemple d'això és el projecte del Barna Màgics, un equip de bàsquet "
+     "especialment dissenyat per a persones amb discapacitat intel·lectual. Aquesta secció demostra "
+     "setmana rere setmana que les barreres no existeixen quan hi ha passió i ganes de fer pinya, "
+     "esdevenint un referent d'integració a la ciutat. A més, el club manté un lligam constant amb "
+     "la vida comunitària del barri, col·laborant de forma habitual amb l'Eix Comercial del Clot, "
+     "les escoles de la zona i l'associacionisme local, participant en activitats solidàries i "
+     "festives que dinamitzen el teixit veïnal."),
+    ("Aquest valuós i constant compromís social va rebre un important reconeixement oficial per "
+     "part de les institucions de la ciutat de Barcelona. El febrer de 2026, l'alcalde de Barcelona, "
+     "Jaume Collboni, va visitar personalment la seu oficial del club a la coneguda Nau del Clot. "
+     "Durant aquesta trobada formal, l'alcalde va voler conèixer de primera mà els detalls d'aquest "
+     "gran projecte esportiu, celebrar formalment els seus 60 anys d'història i lloar la gran "
+     "implantació comunitària que l'entitat manté al barri."),
+    ("La seva activitat no s'atura mai i es manté ben viva en qualsevol època de l'any. Aquest "
+     "mateix estiu, el club s'ha convertit un cop més en el gran dinamitzador dels mesos de calor "
+     "gràcies a l'organització del seu aclamat Campus d'Estiu «Time Chamber», on els infants "
+     "combinen la millora tècnica de les seves habilitats amb tallers de convivència, a més "
+     "d'impulsar els espectaculars torneigs de bàsquet 3x3 al recinte de Westfield Glòries, "
+     "dinamitzant tot l'entorn. Si voleu conèixer més a fons la seva tasca, formar part de la seva "
+     "gran família de bàsquet base o consultar els seus propers esdeveniments, no dubteu a visitar "
+     "el seu lloc web oficial a cbgrupbarna.com. El bàsquet al Clot té un passat gloriós, un present "
+     "vibrant i un futur que no para de créixer."),
+  ],
+  "after": """
+<p>El club també apareix al directori de <em>Comerços i serveis de referència</em> de la mateixa
+revista, amb l'adreça oficial —Llacuna, 172— i el WhatsApp del club, al costat d'altres negocis i
+entitats del barri. Un article i una fitxa al mateix número: gràcies per fer-nos costat, Eix Clot.</p>
+""",
+  "faq": [
+   ("Qui ha escrit l'article sobre el CB Grup Barna a Guia Clot?",
+    "L'article «El CB Grup Barna: seixanta anys fent bategar el Clot» l'ha escrit la periodista "
+    "Gemma Collell, per a la revista Guia Clot · Camp de l'Arpa, editada per Eix Clot."),
+   ("On es va publicar l'article?",
+    "A la revista Guia Clot · Camp de l'Arpa (número 1), editada per l'associació de comerciants "
+    "Eix Clot, dins la secció de reportatges destacats del barri."),
+   ("De què parla l'article?",
+    "Explica els 60 anys d'història del CB Grup Barna com a pilar social i esportiu del Clot i de "
+    "Sant Martí: la paritat entre la secció masculina i la femenina, el projecte inclusiu Barna "
+    "Màgics, la relació del club amb el barri i el reconeixement de l'Ajuntament de Barcelona."),
+   ("El club surt en algun altre lloc de la revista?",
+    "Sí. A més de l'article, el CB Grup Barna apareix al directori de comerços i serveis de "
+    "referència del mateix número, amb l'adreça del club (Llacuna, 172) i el contacte de WhatsApp."),
+  ],
+ },
+]
+
+
+def build_press_article(a):
+    url = f"{SITE}/premsa/{a['slug']}/"
+    faq_html, faq_ld = faq_block(a["faq"])
+
+    gallery = ''.join(
+        f'<figure><img src="/premsa/img/{fn}" alt="{alt}" loading="lazy" decoding="async" '
+        f'width="1400" height="1750"><figcaption>{alt}</figcaption></figure>'
+        for fn, alt in a["images"])
+
+    quote_paras = ''.join(f'<p>{p}</p>' for p in a["quote_paras"])
+    quote = f"""
+<div class="press-quote">
+  <p class="eyebrow red">Article complet · {a["outlet"]}</p>
+  <h3 style="margin-bottom:14px">{a["quote_title"]}</h3>
+  <p style="font-weight:500;margin-bottom:14px">{a["quote_lede"]}</p>
+  {quote_paras}
+  <span class="press-quote-by">Text de <b>{a["author"]}</b> · {a["outlet"]} ({a["publisher"]})</span>
+</div>
+"""
+
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "Article", "@id": url + "#article",
+         "headline": a["title"], "description": a["desc"], "url": url,
+         "datePublished": a["date"], "dateModified": a["date"], "inLanguage": "ca-ES",
+         "author": {"@id": SITE + "/#club"}, "publisher": {"@id": SITE + "/#club"},
+         "image": SITE + f"/premsa/img/{a['images'][0][0]}",
+         "isPartOf": {"@id": SITE + "/premsa/#premsa"},
+         "mainEntityOfPage": {"@type": "WebPage", "@id": url},
+         "citation": {
+           "@type": "Article",
+           "name": a["quote_title"],
+           "author": {"@type": "Person", "name": a["author"]},
+           "isPartOf": {"@type": "Periodical", "name": a["outlet"]},
+           "publisher": {"@type": "Organization", "name": a["publisher"]},
+         },
+         "about": {"@id": SITE + "/#club"}},
+        faq_ld,
+        BREADCRUMB([("CB Grup Barna", "/"), ("Premsa", "/premsa/"), (a["title"], "/premsa/" + a["slug"] + "/")]),
+    ]}
+
+    body = f"""
+{crumbs([("Inici", "/"), ("Premsa", "/premsa/"), (a["title"][:34] + "…", None)])}
+<div class="wrap">
+  <div class="phead narrow">
+    <p class="eyebrow red">Premsa · {a["outlet"]}</p>
+    <h1>Gràcies, Eix Clot</h1>
+    <p class="lede">{a["lede"]}</p>
+    <div class="press-badge">Text de <b>{a["author"]}</b> · {a["outlet"]} · <time datetime="{a["date"]}">{a["date"]}</time></div>
+    <div class="phead-media">
+      <img src="/premsa/img/gracies-eix-clot-portada.webp"
+           alt="Gràcies, Eix Clot: gràfica d'agraïment del CB Grup Barna per l'article de la revista Guia Clot pels 60 anys del club"
+           width="1400" height="1750" fetchpriority="high">
+    </div>
+  </div>
+  <article class="narrow prose">
+    {a["body"]}
+    <div class="press-grid two">{gallery}</div>
+    {quote}
+    {a["after"]}
+    <figure>
+      <img src="/premsa/img/reconeixement-60-anys.webp"
+           alt="El CB Grup Barna amb la revista Guia Clot i el reconeixement de la Federació Catalana de Basquetbol pel 60è aniversari del club, Barcelona 2025"
+           loading="lazy" decoding="async" width="1400" height="1750">
+      <figcaption>Un curs ple d'agraïments: la revista Guia Clot d'Eix Clot i, per una altra banda,
+      el reconeixement de la Federació Catalana de Basquetbol pel 60è aniversari del club.</figcaption>
+    </figure>
+    <h2>Preguntes freqüents</h2>
+    {faq_html}
+    <div style="margin-top:clamp(34px,5vw,60px)">
+    {closer("Vols saber més del CB Grup Barna?",
+            "Seixanta anys de bàsquet base al Clot, explicats amb dades oficials.",
+            [("Dades oficials del club", "/grup-barna-dades-oficials/", "red", "premsa-closer-dades"),
+             ("Demanar informació", "/#info", "ghost", "premsa-closer-info")])}
+    </div>
+  </article>
+</div>
+"""
+    return write(f"premsa/{a['slug']}/index.html",
+                 head(a["seo_title"], a["desc"], url, SITE + f"/premsa/img/{a['images'][0][0]}", ld, a["kw"])
+                 + body + FOOT)
+
+
+def build_premsa_index():
+    url = SITE + "/premsa/"
+    title = "Articles i premsa · CB Grup Barna"
+    desc = ("El CB Grup Barna als mitjans del barri: articles, reportatges i mencions de premsa sobre "
+            "el club de bàsquet base del Clot, Districte de Sant Martí de Barcelona.")
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "CollectionPage", "@id": url + "#premsa", "name": title, "description": desc, "url": url,
+         "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"},
+         "hasPart": [{"@type": "Article", "headline": a["title"], "url": f"{SITE}/premsa/{a['slug']}/",
+                      "datePublished": a["date"]} for a in PRESS]},
+        BREADCRUMB([("CB Grup Barna", "/"), ("Premsa", "/premsa/")]),
+    ]}
+    cards = ''.join(
+        f'<a class="card" href="/premsa/{a["slug"]}/">'
+        f'<div class="card-media"><img src="/premsa/img/{a["images"][0][0]}" alt="{a["images"][0][1]}" loading="lazy" decoding="async"></div>'
+        f'<div class="card-body"><span class="card-tag">{a["outlet"]}</span><h3>{a["title"]}</h3>'
+        f'<p>{a["lede"]}</p><span class="cta">Llegir l\'article</span></div></a>' for a in PRESS)
+    body = f"""
+{crumbs([("Inici", "/"), ("Premsa", None)])}
+<div class="wrap">
+  <div class="phead narrow center">
+    <p class="eyebrow red">El Barna als mitjans</p>
+    <h1 style="margin-left:auto;margin-right:auto">Articles i premsa</h1>
+    <p class="lede" style="margin-left:auto;margin-right:auto">Reportatges i mencions del club a la
+    premsa del barri. Gràcies a qui ens dedica el seu temps i la seva feina per explicar el Barna.</p>
+  </div>
+  <div class="cards" style="padding-bottom:clamp(40px,6vw,80px)">{cards}</div>
+</div>
+"""
+    return write("premsa/index.html", head(title, desc, url, SITE + f"/premsa/img/{PRESS[0]['images'][0][0]}", ld,
+                 "premsa CB Grup Barna, Guia Clot, Eix Clot, articles bàsquet Clot") + body + FOOT)
+
+
 if __name__ == "__main__":
     print("Generant pàgines:")
     print(build_campus())
@@ -848,4 +1064,7 @@ if __name__ == "__main__":
     print(build_blog_index())
     for a in ARTICLES:
         print(build_article(a))
-    print(f"\n{len(ARTICLES) + 3} pàgines generades.")
+    print(build_premsa_index())
+    for a in PRESS:
+        print(build_press_article(a))
+    print(f"\n{len(ARTICLES) + len(PRESS) + 4} pàgines generades.")
