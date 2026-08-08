@@ -851,6 +851,8 @@ PRESS = [
   "date": "2026-08-08",
   "outlet": "Guia Clot · Camp de l'Arpa",
   "publisher": "Eix Clot",
+  "publisher_url": "https://www.eixclot.cat/",
+  "publisher_ig": "https://www.instagram.com/eixclot/",
   "author": "Gemma Collell",
   "title": "«El CB Grup Barna: seixanta anys fent bategar el Clot», a Guia Clot",
   "seo_title": "El CB Grup Barna a Guia Clot · Gràcies, Eix Clot i Gemma Collell",
@@ -869,9 +871,11 @@ PRESS = [
   "body": """
 <p>Al Clot ens coneixem tots, i quan algú del barri es fixa en la feina que fas cada dia, això
 val més que qualsevol titular. Per això volem donar-li les gràcies, amb nom i cognoms, a
-<strong>Eix Clot</strong> i a la periodista <strong>Gemma Collell</strong>, que ha escrit
-l'article més destacat de la revista <em>Guia Clot · Camp de l'Arpa</em> sobre el CB Grup Barna:
-seixanta anys de bàsquet base al barri, explicats amb cura i amb dades certes.</p>
+<a href="https://www.eixclot.cat/" target="_blank" rel="noopener"><strong>Eix Clot</strong></a>
+—l'associació de comerciants i emprenedors del barri— i a la periodista
+<strong>Gemma Collell</strong>, que ha escrit l'article més destacat de la revista
+<em>Guia Clot · Camp de l'Arpa</em> sobre el CB Grup Barna: seixanta anys de bàsquet base al
+barri, explicats amb cura i amb dades certes.</p>
 <p>Reproduïm aquí el text complet de l'article, tal com va sortir publicat, perquè qui no hagi
 tingut la revista a les mans també el pugui llegir.</p>
 """,
@@ -921,7 +925,12 @@ tingut la revista a les mans també el pugui llegir.</p>
   "after": """
 <p>El club també apareix al directori de <em>Comerços i serveis de referència</em> de la mateixa
 revista, amb l'adreça oficial —Llacuna, 172— i el WhatsApp del club, al costat d'altres negocis i
-entitats del barri. Un article i una fitxa al mateix número: gràcies per fer-nos costat, Eix Clot.</p>
+entitats del barri. Un article i una fitxa al mateix número: gràcies per fer-nos costat,
+<a href="https://www.eixclot.cat/" target="_blank" rel="noopener">Eix Clot</a>.</p>
+<p class="eyebrow">
+  <a href="https://www.eixclot.cat/" target="_blank" rel="noopener">eixclot.cat</a> ·
+  <a href="https://www.instagram.com/eixclot/" target="_blank" rel="noopener">@eixclot</a>
+</p>
 """,
   "faq": [
    ("Qui ha escrit l'article sobre el CB Grup Barna a Guia Clot?",
@@ -975,7 +984,8 @@ def build_press_article(a):
            "name": a["quote_title"],
            "author": {"@type": "Person", "name": a["author"]},
            "isPartOf": {"@type": "Periodical", "name": a["outlet"]},
-           "publisher": {"@type": "Organization", "name": a["publisher"]},
+           "publisher": {"@type": "Organization", "name": a["publisher"],
+                        "url": a["publisher_url"], "sameAs": [a["publisher_ig"]]},
          },
          "about": {"@id": SITE + "/#club"}},
         faq_ld,
