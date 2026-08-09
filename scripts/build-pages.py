@@ -1210,8 +1210,11 @@ def build_calendaris():
     document.getElementById('cal-groups').innerHTML = html || '<p class="narrow lede">Encara no hi ha cap '
       + 'calendari publicat. Torna-hi properament.</p>';
 
+    var avui = new Date().toISOString().slice(0, 10);
     var canvis = {{}};
-    (d.partits || []).forEach(function (p) {{ if (p.avisCanvi) canvis[p.equipId] = true; }});
+    (d.partits || []).forEach(function (p) {{
+      if (p.avis && p.avis.expira >= avui) canvis[p.equipId] = true;
+    }});
     Object.keys(canvis).forEach(function (equipId) {{
       var el = document.querySelector('.cal-notice[data-notice="' + equipId + '"]');
       if (el) el.classList.add('on');
