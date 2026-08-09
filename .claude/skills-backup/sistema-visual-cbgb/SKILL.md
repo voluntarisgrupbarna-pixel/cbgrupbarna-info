@@ -8,6 +8,7 @@ description: >
   Es la fuente de verdad de los valores; `disseny-estetic-club` define los
   principios de uso y esta skill los números literales. Combinar con
   `disseny-cartells-cbgb` y `produccio-cartells` para diseño y producción de carteles.
+  NORMA OBLIGATORIA: tota peca de video del club es tanca amb la CARTELA DE PARTNERS de `partners-outro-cbgb` (tots els partners, 3 s, 9:16). Sense cartela, no es publica.
 ---
 
 # Sistema visual CB Grup Barna — tokens exactos
@@ -97,3 +98,29 @@ Vale para reel, story y cualquier pieza 9:16 con texto.
 
 Si falla uno, corregir antes de publicar. La inconsistencia es el error que más
 rebaja el nivel percibido.
+
+
+## Cartela de partners (cierre de vídeo) — valores
+
+Pieza fija del sistema visual: la cartela que cierra **toda** pieza de vídeo del
+club. Playbook completo y assets en **`partners-outro-cbgb`**.
+
+| Token | Valor |
+|---|---|
+| Lienzo | 1080×1920 (9:16), 30 fps, 3 s |
+| Fondo por defecto | negro `#0A0A0A` (variante clara: blanco `#FFFFFF`) |
+| **Vermell Barna** | **`#FD030C`** — muestreado del escudo oficial `LOGO_BARNA_HD.png` |
+| Tipografía título | Anton, mayúsculas, en rojo Barna |
+| Tipografía pies | Inter, 22-26 px |
+| Logos partner | **monocromo blanco** sobre fondo oscuro; color original sobre claro |
+| Retícula | 4 columnas, márgenes 70 px, última fila centrada |
+| Institucionales | bloque separado, bajo filete rojo, con la fórmula "amb el suport de" |
+| Zona segura | contenido entre y=150 y y=1560; nada esencial bajo el 22 % inferior |
+
+**Jerarquía de logos de sponsor (regla general del sistema):** los partners
+comerciales van en una retícula de igual peso óptico (nadie destaca sobre nadie
+salvo pacto por escrito); los institucionales van **separados** y precedidos de
+"amb el suport de", como exigen los convenios públicos.
+
+Añadir al **filtro de consistencia** un punto 6: si la pieza es vídeo, ¿cierra
+con la cartela de partners actualizada?

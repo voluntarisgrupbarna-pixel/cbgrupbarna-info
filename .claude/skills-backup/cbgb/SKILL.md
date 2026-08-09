@@ -37,6 +37,10 @@ una lectura da la tesis, los números y a qué eslabón enviar el trabajo.
 | Frame 0, guardados/compartidos, autopsia de un reel publicado | `arrencada-reels-cbgb` |
 | La carátula del reel y la coherencia de la graella | `portada-reels-cbgb` |
 | Qué grabar y por qué funciona (criterio de contenido) | `reels-cbgb` |
+| **Calendario IG, qué color/pin lleva una pieza, dónde está un archivo, modo prueba** | `master-instagram-cbgb` |
+| Un post de feed (imagen única + caption) | `post-cbgb` |
+| Un carrusel | `carrusel-cbgb` |
+| **Cerrar cualquier vídeo con la cartela de partners** (norma eliminatoria) | `partners-outro-cbgb` |
 | Guion narrativo y transiciones por acción, ganchos de lista | `transicions-virals-cbgb` |
 | Innovar y proponer ángulos novedosos/avanzados en cualquier función | `ana-innovacio-barna` |
 | Valores visuales exactos (paleta hex, tipografía, retícula, lockups, tokens) | `sistema-visual-cbgb` |

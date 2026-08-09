@@ -2,17 +2,18 @@
 name: reels-cbgb
 description: >
   Playbook per fer reels / vídeo vertical curt (TikTok + IG Reels) del CB Grup
-  Barna a nivell referent. Neix del benchmark real de la Pau Gasol Academy
-  (@academypaugasol): els 8 formats que més abast generen i la recepta tècnica
-  exacta (ganxo, text en pantalla, so, durada, subtítols, CTA). Carregar SEMPRE
-  que es pensi, guionitzi, editi o avaluï un reel/short del club: "fes-me un
-  reel de…", "què gravem del partit/campus", "com muntem aquest clip", "idea
-  per a TikTok/IG", cobertura d'esdeveniment, presentació de jugador/a, tip
-  tècnic, contingut de planter. Aporta el CRITERI de contingut (què gravar i
-  per què funciona); s'EXECUTA amb `video-club-cbgb` (muntatge) i fa servir
-  `sistema-visual-cbgb` (tipografia/color). Combinar amb
-  `benchmark-clubs-femenins-cbgb` quan el reel sigui de la secció femenina i amb
-  `ana-innovacio-barna` per a l'angle nou.
+  Barna a nivell referent. Neix del benchmark real de la Pau Gasol Academy:
+  els 8 formats que més abast generen i la recepta tècnica exacta (ganxo, text
+  en pantalla, so, durada, subtítols, CTA). Carregar SEMPRE que es pensi,
+  guionitzi, editi o avaluï un reel/short del club: "fes-me un reel de…", "què
+  gravem del partit/campus", "com muntem aquest clip", cobertura
+  d'esdeveniment, presentació de jugador/a, tip tècnic, planter. Aporta el
+  CRITERI (què gravar i per què funciona); s'EXECUTA amb `video-club-cbgb` i
+  usa `sistema-visual-cbgb`. Combinar amb `benchmark-clubs-femenins-cbgb` per
+  a la secció femenina i `ana-innovacio-barna` per a l'angle nou. NORMA
+  OBLIGATÒRIA: cada reel porta DIVERSOS ganxos del banc estudiat de
+  `ganxos-cbgb` (verbal + subhook + visual) i CTA explícit de creixement
+  (segueix @cbgrupbarna + like/guarda). Sense això, no es publica.
 ---
 
 # reels-cbgb — Playbook de reels del CB Grup Barna
@@ -49,6 +50,38 @@ explotar "les vostres estrelles" — jugador/a referent, entrenador/a
 carismàtic/a, ex-alumne que va arribar lluny, i el planter tractat com a
 estrella — i posar-los davant de la càmera de manera sistemàtica, no anecdòtica.
 
+## Norma obligatòria — diversos ganxos + CTA a CADA reel
+
+**Cap reel del club surt sense això. No és estil: és la palanca de conversió**
+(0,03 % avui, segons `crecimiento-ig-cbgb`). Dues obligacions:
+
+**1. DIVERSOS ganxos del banc estudiat (`ganxos-cbgb`)** — mínim 2 de les 3
+capes, ideal les 3:
+
+- **Ganxo verbal** — ≤12 paraules, sortit del **banc de 8 fórmules** de
+  `ganxos-cbgb` (no inventat ni plantilla prestada). Passa el test dels 3 segons.
+- **Subhook** — segona línia que puja la tensió abans que comenci el contingut.
+- **Ganxo visual** — un dels 10 arranques visuals per guanyar el segon 0 (el
+  ~80 % mira sense so).
+
+El ganxo verbal viu **als 3 llocs alhora**: dit en àudio, escrit en pantalla
+(Anton, vermell Barna) i a la portada + primera línia del caption. En reels
+llargs (>30 s), **re-ganxo** a mitja peça per aguantar la retenció.
+
+**2. CTA de creixement al tancament** — sempre, verbal + ròtul + caption:
+
+- **Seguir (prioritari):** "Segueix @cbgrupbarna per [promesa concreta: veure
+  com acaba la temporada / més bàsquet del Clot / el pròxim capítol]." El CTA
+  de seguiment és el que ataca directament la conversió.
+- **Like / guarda / comparteix (secundari):** demanar-lo amb motiu, no per
+  demanar: "Doble tap si tu també hi eres", "Guarda-ho per l'entreno",
+  "Envia-ho a qui hi havia de ser". (Recorda `arrencada-reels-cbgb`: guardats i
+  compartits pesen més que likes — el like es demana, però no es mesura l'èxit
+  amb ell.)
+
+**Regla dura:** ganxos del banc ✚ CTA són **eliminatoris**. Si falten, el reel
+no es publica — es reescriu primer.
+
 ## Com fer-la servir
 
 - **Abans de cobrir un esdeveniment (partit, campus, 3x3):** llegir
@@ -83,6 +116,11 @@ Barna.
    d'artifici d'un dia?
 6. **Funnel/pilar:** en quin nivell (atracció/connexió/conversió) i pilar
    (competició/comunitat/formació/lifestyle/marca) encaixa?
+7. **Ganxos del banc (ELIMINATORI):** porta mínim 2 de les 3 capes (verbal del
+   banc de `ganxos-cbgb` + subhook + visual)?
+8. **CTA de creixement (ELIMINATORI):** tanca demanant seguir @cbgrupbarna amb
+   promesa concreta + like/guarda/comparteix amb motiu?
 
-Si no supera **4 de 6**, reformular abans de gastar temps d'edició. (Mateix
-esperit que el filtre de `/cbgb` i `ana-innovacio-barna`.)
+Si no supera **4 dels 6 primers**, reformular abans de gastar temps d'edició.
+Si falla el **7 o el 8, no es publica** — es reescriu. (Mateix esperit que el
+filtre de `/cbgb` i `ana-innovacio-barna`.)

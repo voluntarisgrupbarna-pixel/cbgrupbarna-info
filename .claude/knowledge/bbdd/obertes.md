@@ -12,6 +12,8 @@ conclusión a `lleis.csv` / `decisions.csv` y borrándola de aquí.
 | **O-03** | `aparador-perfil-cbgb` y `aparador-ig-cbgb` cubren lo mismo en dos idiomas | Medio — carga de contexto duplicada y riesgo de divergencia | Fusionar en una, como se hizo con `codis-lux-cbgb` |
 | **O-11** | **9 skills están referenciadas pero NO instaladas**: `cb-grup-barna`, `mi-rol-coordinadora`, `millorar-club-top-bcn`, `disseny-estetic-club`, `psicologia-social-club`, `referent-basquet-espanyol`, `crear-apps-webs-club`, `xarxes-socials-club`, `guions-virals-cbgb` | **Alto** — `/cbgb` enruta a skills que no existen, y `arranque-eficiente` obliga a entrar por ahí | Recuperarlas o quitar la referencia. Ver `bbdd/skills.csv` (estado `FALTA`). Mientras tanto, `/cbgb` las marca con ⚠️ para que se avise en vez de improvisar |
 
+| **O-14** | `~/.claude/skills/` **se resincroniza desde fuera** y pisa las ediciones locales: el enrutado de `/cbgb` actualizado el 29/07 volvió a la versión antigua el 05/08 | **Alto** — cualquier arreglo hecho ahí se pierde sin avisar | La copia buena de `cbgb/SKILL.md` es la del repo (`.claude/skills-backup/`). Después de cada resync, volver a copiarla al directorio de skills. **Nunca sincronizar backup→repo a ciegas**: comprobar antes `git diff` por si el resync ha revertido algo |
+
 **Cerradas** — se dejan escritas con su fecha, no se borran:
 
 | # | Qué era | Cómo se cerró |

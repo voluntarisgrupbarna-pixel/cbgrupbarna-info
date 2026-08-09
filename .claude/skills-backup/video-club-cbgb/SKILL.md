@@ -10,6 +10,7 @@ description: >
   "pásame esto a reel vertical", "haz un recap del 3x3", "ponle el logo y
   subtítulos a este clip", "vídeo de presentación de jugadora", aunque no se diga
   la palabra "editar". Combinar con disseny-estetic-club para criterio visual.
+  NORMA OBLIGATORIA: tota peca de video del club es tanca amb la CARTELA DE PARTNERS de `partners-outro-cbgb` (tots els partners, 3 s, 9:16). Sense cartela, no es publica.
 ---
 
 # Edición de vídeo — CB Grup Barna
@@ -107,3 +108,25 @@ Si no supera 4 de 5, se reedita antes de publicar.
 - Audio normalizado a ~ -14 LUFS para que no suene bajo en IG.
 - Nombre de archivo: `AAAA-MM-DD_equipo_formato_vX.mp4` (ej.
   `2026-06-21_3x3-westfield_recap_v1.mp4`) para el DAM por temporada > equipo > evento.
+
+
+## ⛔ Cierre obligatorio — cartela de partners
+
+**Toda pieza de vídeo del club termina con la cartela de partners** (3 s, 9:16).
+Asset y especificación completa en **`partners-outro-cbgb`**.
+
+Concatenar con ffmpeg:
+
+```bash
+ffmpeg -i reel.mp4 -i outro_partners_dark.mp4 \
+  -filter_complex "[0:v][0:a][1:v][1:a]concat=n=2:v=1:a=1[v][a]" \
+  -map "[v]" -map "[a]" -c:v libx264 -crf 18 -preset slow -c:a aac -b:a 128k \
+  reel_amb_partners.mp4
+```
+
+Añadir al **filtro mínimo antes de exportar** como punto 6 (eliminatorio):
+*¿lleva la cartela de partners completa y actualizada al final?*
+
+Si el reel y la cartela tienen distinto perfil de codec, normalizar antes con
+`-vf scale=1080:1920,fps=30` en ambos. La cartela ya lleva pista de audio
+silenciosa para que el concat no falle.
