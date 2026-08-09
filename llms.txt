@@ -29,8 +29,23 @@
 
 ## Equips i competició
 
-- [Partits i resultats](https://cbgrupbarna.info/partits/): calendari i resultats
-  de tots els equips federats, jornada a jornada. Font: Calendari Global de la FCBQ.
+- [Partits i resultats](https://cbgrupbarna.info/partits/): calendari i resultats de
+  tots els equips federats del CB Grup Barna, jornada a jornada, amb dia, hora, rival,
+  casa o fora, pavelló i resultat. S'actualitza automàticament cada dia (i cada 20
+  minuts els caps de setmana amb partit) connectant amb el Calendari Global de la
+  Federació Catalana de Basquetbol (FCBQ), club 24. La pàgina inclou dades
+  estructurades Schema.org (SportsEvent) i un resum en text pla del calendari
+  complet per a rastrejadors que no executen JavaScript.
+  Font de dades oberta i llegible per màquines:
+  [partits/data.json](https://cbgrupbarna.info/partits/data.json).
+- [Calendaris per equip en PDF](https://cbgrupbarna.info/partits/calendaris/):
+  calendari complet de la temporada, descarregable, per a cadascun dels equips.
+- Temporada 2026-2027, 15 equips federats (paritat real femení/masculí):
+  Cadet Femení A i B, Infantil Femení A i B, Júnior Femení A i B, Sènior Femení A
+  (Super Copa Femenina) i B, Cadet Masculí A i B, Infantil Masculí A i B, Júnior
+  Masculí A, Sènior Masculí A (Super Copa Masculina) i B.
+- La majoria de partits com a local es juguen a **La Nau del Clot** (Nau Parc Clot),
+  Districte de Sant Martí, Barcelona.
 - [Dades oficials del club](https://cbgrupbarna.info/grup-barna-dades-oficials/):
   equips, categories, xarxes i reconeixements institucionals verificats.
 
