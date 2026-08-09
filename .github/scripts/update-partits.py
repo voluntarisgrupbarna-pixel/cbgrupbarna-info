@@ -1,22 +1,28 @@
 #!/usr/bin/env python3
 """
 Robot FCBQ · CB Grup Barna (club 24)
-Baixa el calendari mensual del club de basquetcatala.cat i fusiona els partits
-(nous, canvis d'hora/pista i resultats) dins partits/data.json.
+Cada dia baixa el calendari global del club de basquetcatala.cat, el compara
+amb el que ja teníem i actualitza partits/data.json amb els canvis: hora,
+pista, data o resultat. Cada canvi es marca al propi partit (camp "avis")
+perquè la app mostri un rètol "MODIFICAT" durant uns dies, i queda registrat
+a partits/canvis.json com a historial per a l'avís diari.
 
 Disseny defensiu: si la federació no respon, bloqueja el robot o el format
 canvia i no es troba cap partit, surt amb codi 0 SENSE tocar res — la via
 manual (pujar el PDF a /partits/ → Gestió) sempre segueix funcionant.
 """
 import json, re, sys, unicodedata, urllib.request
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 CLUB_ID = 24
-DATA = Path(__file__).resolve().parents[2] / "partits" / "data.json"
+ROOT = Path(__file__).resolve().parents[2]
+DATA = ROOT / "partits" / "data.json"
+CANVIS = ROOT / "partits" / "canvis.json"
 CLUB_RE = re.compile(r"(?:[A-Z0-9]+-)?C[.,]?\s*B[.,]?\s*GRUP\s*BARNA(?:\s+[A-Z0-9]{1,3})?", re.I)
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+DIES_AVIS = 7          # quants dies es manté el rètol "MODIFICAT" a la fitxa
 
 def fetch(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "ca,es;q=0.8"})
@@ -85,6 +91,8 @@ def slugify(s):
     s = "".join(c for c in s if unicodedata.category(c) != "Mn")
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
+CAMPS_SEGUITS = [("data", "Data"), ("hora", "Hora"), ("pista", "Pista")]
+
 def main():
     urls = [f"https://www.basquetcatala.cat/partits/calendari_club_global/{CLUB_ID}",
             f"https://www.basquetcatala.cat/partits/calendari_club_mensual/{CLUB_ID}"]
@@ -98,16 +106,19 @@ def main():
         found = parse_lines(strip_tags(html))
         print(f"[robot] {url}: {len(found)} partits detectats")
         scraped += found
+    avui = date.today().isoformat()
     if not scraped:
         print("[robot] cap partit trobat — no es toca data.json (via PDF segueix activa)")
+        _actualitza_canvis([], avui, contactat=False)
         return 0
 
     data = json.loads(DATA.read_text(encoding="utf-8"))
     by_cat = {(e.get("competicio") or "").upper(): e for e in data["equips"]}
-    # clau forta: nom exacte de l'equip a la FCBQ (distingeix A de B dins la mateixa categoria)
     by_club = {(e.get("clubNom") or "").upper(): e for e in data["equips"] if e.get("clubNom")}
     index = {p["id"]: p for p in data["partits"]}
     added = updated = results = 0
+    canvis_avui = []
+
     for s in scraped:
         eq = by_club.get(s.get("clubNom", "").upper()) or by_cat.get(s["categoria"].upper())
         if not eq:
@@ -124,8 +135,15 @@ def main():
         pid = f"{eq['id']}_{s['data']}"
         if pid in index:
             p = index[pid]
-            if (p["hora"], p["pista"]) != (s["hora"], s["pista"]) and s["pista"]:
-                p["hora"], p["pista"], p["adreca"] = s["hora"], s["pista"], s["adreca"]
+            canviats = [(label, p.get(camp), s[camp]) for camp, label in CAMPS_SEGUITS
+                        if s.get(camp) and p.get(camp) != s[camp]]
+            if canviats:
+                for label, abans, despres in canviats:
+                    canvis_avui.append({"equip": eq["nom"], "rival": s["visitant"] if s["casa"] else s["local"],
+                                         "camp": label, "abans": abans, "despres": despres, "partitId": pid})
+                p["data"], p["hora"], p["pista"], p["adreca"] = s["data"], s["hora"], s["pista"], s["adreca"]
+                p["avis"] = {"detectat": avui, "expira": (date.today() + timedelta(days=DIES_AVIS)).isoformat(),
+                             "resum": " · ".join(f"{l}: {a} → {d}" for l, a, d in canviats)}
                 updated += 1
             if s["puntsLocal"] is not None and p.get("puntsLocal") is None:
                 p["puntsLocal"], p["puntsVisitant"], p["estat"] = s["puntsLocal"], s["puntsVisitant"], "jugat"
@@ -135,14 +153,41 @@ def main():
             data["partits"].append(s)
             index[pid] = s
             added += 1
+            canvis_avui.append({"equip": eq["nom"], "rival": s["visitant"] if s["casa"] else s["local"],
+                                 "camp": "Nou partit", "abans": "—", "despres": f"{s['data']} {s['hora']}", "partitId": pid})
+
+    # neteja els avisos caducats perquè el fitxer no creixi indefinidament
+    for p in data["partits"]:
+        if p.get("avis") and p["avis"]["expira"] < avui:
+            del p["avis"]
+
+    _actualitza_canvis(canvis_avui, avui, contactat=True)
+
     if not (added or updated or results):
         print("[robot] res de nou — no es fa commit")
         return 0
     data["partits"].sort(key=lambda p: (p["data"], p["hora"]))
-    data["lastUpdate"] = date.today().isoformat()
+    data["lastUpdate"] = avui
     DATA.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"[robot] OK → {added} nous, {updated} actualitzats, {results} resultats")
+    for c in canvis_avui:
+        print(f"    · {c['equip']} vs {c['rival']}: {c['camp']} {c['abans']} → {c['despres']}")
     return 0
+
+def _actualitza_canvis(canvis_avui, avui, contactat):
+    """Manté un historial curt (30 dies) dels canvis detectats, per a la app i l'avís diari."""
+    hist = {"ultimaComprovacio": avui, "connexioOk": contactat, "canvis": []}
+    if CANVIS.exists():
+        try:
+            hist_previ = json.loads(CANVIS.read_text(encoding="utf-8"))
+            hist["canvis"] = hist_previ.get("canvis", [])
+        except Exception:
+            pass
+    if canvis_avui:
+        hist["canvis"].append({"data": avui, "items": canvis_avui})
+    fa_30_dies = (date.today() - timedelta(days=30)).isoformat()
+    hist["canvis"] = [c for c in hist["canvis"] if c["data"] >= fa_30_dies]
+    CANVIS.write_text(json.dumps(hist, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 if __name__ == "__main__":
     sys.exit(main())

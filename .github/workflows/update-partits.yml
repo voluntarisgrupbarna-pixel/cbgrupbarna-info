@@ -1,17 +1,16 @@
 name: update-partits
 
-# Robot FCBQ: cada dilluns a les 07:00 (05:00 UTC) intenta baixar el calendari
-# mensual del club (basquetcatala.cat/partits/calendari_club_mensual/24) i
-# fusionar partits i resultats a partits/data.json. Si la federació no respon
-# o bloqueja el robot, no passa res: la via PDF de /partits/ segueix activa.
-# També es pot llançar a mà des de la pestanya Actions (workflow_dispatch).
+# Robot FCBQ: CADA DIA a les 07:00 (05:00 UTC) es connecta a basquetcatala.cat
+# (calendari global del club 24), compara amb partits/data.json i actualitza
+# hores, pistes, dates i resultats. Els canvis queden marcats a cada partit
+# (rètol "MODIFICAT" durant 7 dies) i registrats a partits/canvis.json perquè
+# la app els mostri i perquè la rutina diària n'informi. Si la federació no
+# respon o bloqueja el robot, no passa res: la via PDF de /partits/ segueix
+# activa. També es pot llançar a mà des de la pestanya Actions.
 
 on:
   schedule:
-    # dilluns: recollir resultats del cap de setmana
-    - cron: "0 5 * * 1"
-    # dijous de matinada: partits del cap de setmana carregats abans de les 9:00
-    - cron: "0 5 * * 4"
+    - cron: "0 5 * * *"
   workflow_dispatch:
 
 permissions:
@@ -25,16 +24,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Baixar i fusionar partits FCBQ
+      - name: Baixar i comparar el calendari FCBQ
         run: python .github/scripts/update-partits.py
       - name: Commit si hi ha canvis
         run: |
-          if git diff --quiet partits/data.json; then
+          git config user.name "cbgb-robot"
+          git config user.email "cbgrupbarna@gmail.com"
+          git add partits/data.json partits/canvis.json
+          if git diff --cached --quiet; then
             echo "Sense canvis"
           else
-            git config user.name "cbgb-robot"
-            git config user.email "cbgrupbarna@gmail.com"
-            git add partits/data.json
-            git commit -m "partits: actualització automàtica FCBQ [skip ci]"
+            git commit -m "partits: actualitzacio diaria FCBQ [skip ci]"
             git push
           fi

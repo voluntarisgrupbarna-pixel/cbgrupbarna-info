@@ -394,6 +394,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       <div class="wk-sel"><select id="wk-select"></select></div>
       <button class="wk-btn" id="wk-next">›</button>
     </div>
+    <div id="canvis-banner"></div>
     <button class="wk-today" id="wk-today">▶ Anar al proper cap de setmana amb partits</button>
     <div class="seg" id="seg-abast">
       <button class="on" data-abast="setmana">Cap de setmana</button>
@@ -677,12 +678,13 @@ function sha256(msg){
 const CLUB_RE = /(?:[A-Z0-9]+-)?C[.,]?\s*B[.,]?\s*GRUP\s*BARNA(?:\s+[A-Z0-9]{1,3})?/i;
 
 let BASE = { equips: [], partits: [] };
+let CANVIS = null;
 let OV = loadOverrides();       // { resultats:{id:{pl,pv}}, posicions:{eqId:{posicio,equipsGrup}}, extraEquips:[], extraPartits:[], editsPartits:{id:{...}} }
 let editMode = false;
 let state = { wk: null, filter: 'tots', team: null, abast: 'setmana', genere: 'tots', cat: 'totes' };
 
 function loadOverrides() {
-  const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[],fons:[],rivalStats:{}};
+  const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[],fons:[],rivalStats:{},statsPartit:{}};
   try { return Object.assign(def, JSON.parse(localStorage.getItem(LS_KEY)||'{}')); }
   catch(e){ return def; }
 }
@@ -811,6 +813,11 @@ function dadesRival(p, m) {
     ${ig ? `<div style="margin-top:6px"><a href="https://instagram.com/${ig.instagram.slice(1)}" target="_blank" rel="noopener" style="color:var(--red-ink);text-decoration:none;font-size:11.5px">📸 ${ig.instagram} · ${(ig.seguidors/1000).toFixed(1).replace('.',',')}K seguidors</a></div>` : ''}
   </div>`;
 }
+function avisModificacio(p) {
+  if (!p.avis || p.avis.expira < todayStr()) return '';
+  return `<div style="margin-top:8px;padding:8px 10px;background:rgba(230,51,41,.10);border:1px solid rgba(230,51,41,.30);border-radius:10px;font-size:11.5px;color:var(--red-ink)">
+    ✏️ <b>MODIFICAT</b> el ${fmtDia(p.avis.detectat).toLowerCase()} · ${p.avis.resum}</div>`;
+}
 function matchCard(p, m, showDate) {
   const eq = m.equips.find(e=>e.id===p.equipId) || {};
   const homeIsBarna = p.casa===true, awayIsBarna = p.casa===false;
@@ -843,9 +850,34 @@ function matchCard(p, m, showDate) {
     </div>
     <div class="m-loc">📍 ${p.pista}${p.adreca?` · ${p.adreca}`:''}<a href="https://maps.google.com/?q=${mapsQ}" target="_blank" rel="noopener">COM ARRIBAR-HI →</a></div>
     <div class="m-cat">${p.categoria}</div>
+    ${avisModificacio(p)}
     ${dadesRival(p, m)}
     ${editRow}
   </div>`;
+}
+function renderCanvisBanner() {
+  const el = document.getElementById('canvis-banner');
+  if (!el) return;
+  if (!CANVIS || !CANVIS.canvis || !CANVIS.canvis.length) { el.innerHTML = ''; return; }
+  const vist = localStorage.getItem('cbgbCanvisVist') || '';
+  const nous = CANVIS.canvis.filter(c => c.data > vist);
+  if (!nous.length) { el.innerHTML = ''; return; }
+  const items = nous.flatMap(c => c.items);
+  const resum = items.slice(0, 6).map(it =>
+    `<li>${it.equip} vs ${it.rival}: <b>${it.camp}</b> ${it.abans!=='—' ? `${it.abans} → ` : ''}${it.despres}</li>`
+  ).join('');
+  el.innerHTML = `
+  <div style="margin-bottom:14px;padding:12px 14px;background:rgba(230,51,41,.08);border:1px solid rgba(230,51,41,.25);border-radius:14px;font-size:12.5px;color:var(--ink)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <b>📣 El robot FCBQ ha detectat ${items.length} canvi${items.length===1?'':'s'} de calendari</b>
+      <button onclick="marcarCanvisVistos()" style="border:none;background:none;color:var(--red-ink);font-size:12px;cursor:pointer;text-decoration:underline">D'acord, entesos</button>
+    </div>
+    <ul style="margin:8px 0 0;padding-left:18px">${resum}</ul>
+  </div>`;
+}
+function marcarCanvisVistos() {
+  localStorage.setItem('cbgbCanvisVist', todayStr());
+  renderCanvisBanner();
 }
 function renderJornada() {
   const m = model();
@@ -2130,7 +2162,7 @@ function showView(v) {
   document.querySelectorAll('.bn-item[data-v]').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
 }
-function renderAll(){ renderJornada(); renderResultats(); renderAnalisi(); renderEquips(); renderJugadors(); renderFons(); renderManuals(); omplirFons(); }
+function renderAll(){ renderJornada(); renderCanvisBanner(); renderResultats(); renderAnalisi(); renderEquips(); renderJugadors(); renderFons(); renderManuals(); omplirFons(); }
 function goView(v) {
   showView(v);
   if (v==='equips') renderEquips();
@@ -2320,6 +2352,7 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
   } catch(e) {
     document.getElementById('jornada-list').innerHTML = '<div class="empty">No s\'ha pogut carregar data.json 😕</div>';
   }
+  try { CANVIS = await (await fetch('canvis.json', {cache:'no-store'})).json(); } catch(e) { CANVIS = {canvis:[]}; }
   // si el mode gestió venia d'un login de Google i la sessió ja no és vàlida, es tanca
   if (sessionStorage.getItem('cbgbEditSrc')==='google' && !(window.CBGBAuth && CBGBAuth.isStaff())) {
     sessionStorage.removeItem('cbgbEdit'); sessionStorage.removeItem('cbgbEditSrc');
