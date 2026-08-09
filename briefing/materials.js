@@ -9,8 +9,8 @@ window.BRIEFING_MATERIALS = [
     "partner": null,
     "fitxer": "briefing-cb-grup-barna-collaboradors.pdf",
     "ext": "pdf",
-    "mida": 1969,
-    "data": "2026-08-01"
+    "mida": 1977,
+    "data": "2026-08-09"
   },
   {
     "titol": "Dossier de premsa CB Grup Barna 2026",
