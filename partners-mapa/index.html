@@ -31,14 +31,18 @@ h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(20px,
 .map-head span{font-size:13px;color:rgba(14,17,22,0.55);}
 #map-barri,#map-fora{width:100%;height:420px;border-radius:10px;border:1px solid var(--line);}
 .partner-list{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
-.partner-list li{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:14px;}
+.partner-list li{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;font-size:14px;display:flex;gap:12px;}
+.partner-list li .body{flex:1;min-width:0;}
 .partner-list li b{display:block;font-size:14.5px;margin-bottom:2px;}
 .partner-list li .addr{color:rgba(14,17,22,0.6);display:block;margin-bottom:6px;}
 .partner-list li a.ig{color:var(--red);text-decoration:none;font-weight:700;font-size:13px;}
 .partner-list li a.gmaps{margin-left:10px;font-size:13px;text-decoration:none;color:rgba(14,17,22,0.55);}
+.logo-badge{flex:none;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.02em;color:var(--cream);overflow:hidden;}
+.logo-badge img{width:100%;height:100%;object-fit:contain;background:#fff;}
 .no-pin{margin-top:56px;}
 .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
-.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;display:flex;align-items:center;gap:8px;}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 16px 6px 6px;font-size:14px;display:flex;align-items:center;gap:10px;}
+.chip .logo-badge{width:30px;height:30px;font-size:11px;border-radius:50%;}
 .chip a{color:var(--red);text-decoration:none;font-weight:700;}
 .chip .tag{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:rgba(14,17,22,0.45);}
 footer.foot{padding:30px 0 60px;text-align:center;font-size:13px;color:rgba(14,17,22,0.5);}
@@ -59,7 +63,7 @@ footer.foot a{color:var(--red);text-decoration:none;}
   <h1>Mapa de partners i col·laboradors</h1>
   <p class="lede">On són els comerços, entitats i col·laboradors que fan possible el CB Grup Barna: primer els del barri del Clot · Camp de l'Arpa, i després la resta.</p>
 
-  <div class="notice">📍 Les ubicacions dels pins són aproximades (il·lustratives). Toca <b>«Veure a Google Maps»</b> a cada fitxa per obtenir l'adreça exacta i com arribar-hi.</div>
+  <div class="notice">📍 Les ubicacions dels pins són aproximades (il·lustratives). Toca <b>«Veure a Google Maps»</b> a cada fitxa per obtenir l'adreça exacta i com arribar-hi.<br>🎨 Els logotips són provisionals (inicials del partner) fins que en tinguem el fitxer oficial — envieu-nos-el i el canviem.</div>
 
   <section class="map-block">
     <div class="map-head">
@@ -93,8 +97,26 @@ footer.foot a{color:var(--red);text-decoration:none;}
 <script src="/partners-mapa/vendor/leaflet/leaflet.js"></script>
 <script>
 const RED = '#E63329';
+const INK = '#0E1116';
+const STOP = new Set(['de','del','la','el','les','els','i','d','l','the','of']);
 
 function gmaps(addr){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr); }
+
+// Logotip provisional: monograma d'inicials sobre un fons vermell/tinta (sistema visual del club).
+// logo:"/ruta/al/fitxer.png" al registre d'un partner el substitueix per la imatge real quan la tinguem.
+function initials(nom){
+  const words = nom.replace(/[·().]/g,' ').split(/\s+/).filter(w => w && !STOP.has(w.toLowerCase()));
+  const pick = words.length ? words : nom.split(/\s+/);
+  if (pick.length === 1) return pick[0].slice(0,2).toUpperCase();
+  return (pick[0][0] + pick[1][0]).toUpperCase();
+}
+function hash(str){ let h = 0; for (let i=0;i<str.length;i++){ h = (h*31 + str.charCodeAt(i)) >>> 0; } return h; }
+function logoBadge(p, size){
+  const s = size || 44;
+  if (p.logo) return `<div class="logo-badge" style="width:${s}px;height:${s}px;"><img src="${p.logo}" alt="Logo de ${p.nom}" loading="lazy"></div>`;
+  const bg = (hash(p.nom) % 2 === 0) ? RED : INK;
+  return `<div class="logo-badge" style="width:${s}px;height:${s}px;background:${bg};">${initials(p.nom)}</div>`;
+}
 
 function pinIcon(){
   return L.divIcon({
@@ -153,14 +175,14 @@ function buildMap(elId, listId, countId, data, center, zoom){
   data.forEach(p => {
     const m = L.marker([p.lat, p.lng], { icon: pinIcon() }).addTo(map);
     const igLine = p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">Instagram →</a>` : (p.ig_note || '');
-    m.bindPopup(`<b>${p.nom}</b><br>${p.addr}<br>${igLine}<br><a href="${gmaps(p.addr)}" target="_blank" rel="noopener">Veure a Google Maps</a>`);
+    m.bindPopup(`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">${logoBadge(p,32)}<b>${p.nom}</b></div>${p.addr}<br>${igLine}<br><a href="${gmaps(p.addr)}" target="_blank" rel="noopener">Veure a Google Maps</a>`);
     markers.push(m);
 
     const li = document.createElement('li');
-    li.innerHTML = `<b>${p.nom}</b><span class="addr">${p.addr}</span>` +
+    li.innerHTML = logoBadge(p) + `<div class="body"><b>${p.nom}</b><span class="addr">${p.addr}</span>` +
       (p.ig ? `<a class="ig" href="${p.ig}" target="_blank" rel="noopener">Instagram</a>` : `<span style="color:rgba(14,17,22,.4);font-size:13px;">${p.ig_note || 'Instagram pendent'}</span>`) +
-      `<a class="gmaps" href="${gmaps(p.addr)}" target="_blank" rel="noopener">Google Maps →</a>`;
-    li.addEventListener('click', () => { map.flyTo([p.lat, p.lng], 16); m.openPopup(); });
+      `<a class="gmaps" href="${gmaps(p.addr)}" target="_blank" rel="noopener">Google Maps →</a></div>`;
+    li.addEventListener('click', (e) => { if (e.target.tagName !== 'A') { map.flyTo([p.lat, p.lng], 16); m.openPopup(); } });
     li.style.cursor = 'pointer';
     list.appendChild(li);
   });
@@ -176,7 +198,7 @@ const chipRow = document.getElementById('chip-row');
 noPin.forEach(p => {
   const chip = document.createElement('div');
   chip.className = 'chip';
-  chip.innerHTML = `<span>${p.nom}</span>` + (p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">IG</a>` : `<span class="tag">IG pendent</span>`);
+  chip.innerHTML = logoBadge(p, 30) + `<span>${p.nom}</span>` + (p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">IG</a>` : `<span class="tag">IG pendent</span>`);
   chipRow.appendChild(chip);
 });
 </script>
