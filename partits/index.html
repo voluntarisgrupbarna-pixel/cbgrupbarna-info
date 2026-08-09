@@ -222,8 +222,9 @@ h1 span { color: var(--red); }
 .m-score .w { color:var(--green); } .m-score .l { color:var(--red); }
 .m-vs { flex-shrink:0; color:var(--muted); font-family:'Anton', sans-serif; font-size:16px; min-width:74px; text-align:center; }
 .m-loc { display:flex; align-items:center; gap:6px; margin-top:10px; font-size:11.5px; color:var(--muted); flex-wrap:wrap; }
+.m-loc-actions { margin-left:auto; display:flex; gap:6px; flex-wrap:wrap; }
 .m-loc a {
-  margin-left:auto; flex-shrink:0; text-decoration:none;
+  flex-shrink:0; text-decoration:none; white-space:nowrap;
   font-family:'Inter', sans-serif; font-size:9px; letter-spacing:0.8px;
   color:var(--red-ink); border:1px solid rgba(230,51,41,0.30); padding:4px 9px; border-radius:99px;
 }
@@ -857,6 +858,9 @@ function matchCard(p, m, showDate) {
   const eq = m.equips.find(e=>e.id===p.equipId) || {};
   const homeIsBarna = p.casa===true, awayIsBarna = p.casa===false;
   const mapsQ = encodeURIComponent(`${p.pista}, ${p.adreca||''}`);
+  const mapsViewUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQ}`;
+  const mapsCarUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQ}&travelmode=driving`;
+  const mapsTransitUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQ}&travelmode=transit`;
   let center;
   if (p.jugat) {
     const cls = p.res==='W'?'w':(p.res==='L'?'l':'');
@@ -883,7 +887,12 @@ function matchCard(p, m, showDate) {
       ${center}
       <div class="m-t right ${awayIsBarna?'barna':'rival'}">${p.visitant}</div>
     </div>
-    <div class="m-loc">📍 ${p.pista}${p.adreca?` · ${p.adreca}`:''}<a href="https://maps.google.com/?q=${mapsQ}" target="_blank" rel="noopener">COM ARRIBAR-HI →</a></div>
+    <div class="m-loc">📍 <a href="${mapsViewUrl}" target="_blank" rel="noopener" style="border:none;padding:0;color:var(--muted);text-decoration:underline;font-family:inherit;font-size:inherit;letter-spacing:normal">${p.pista}${p.adreca?` · ${p.adreca}`:''}</a>
+      <span class="m-loc-actions">
+        <a href="${mapsCarUrl}" target="_blank" rel="noopener">🚗 COTXE</a>
+        <a href="${mapsTransitUrl}" target="_blank" rel="noopener">🚌 BUS/TREN</a>
+      </span>
+    </div>
     <div class="m-cat">${p.categoria}</div>
     ${avisModificacio(p)}
     ${dadesRival(p, m)}
