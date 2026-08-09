@@ -1,7 +1,20 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Actualitzat: 2026-06-16
+// Actualitzat: 2026-08-09
 
 window.GALERIA_EVENTS = [
+  {
+    "id": "summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9",
+    "title": "SUMMER CAMP 2526  GRUP BARNA-TIME CHAMBER EXPERIENCE",
+    "description": "CAMPUS ESTIU I TECNIFICACIONS",
+    "date": "2026-06-29",
+    "season": "2025-2026",
+    "location": "LA NAU DEL CLOT",
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo"
+  },
   {
     "id": "senior-femeni-sessio-fotos-instax",
     "title": "Sènior Femení · Sessió Fotos Instax",
