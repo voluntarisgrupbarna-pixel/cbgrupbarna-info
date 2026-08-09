@@ -9,9 +9,14 @@ window.GALERIA_EVENTS = [
     "date": "2026-06-29",
     "season": "2025-2026",
     "location": "LA NAU DEL CLOT",
-    "cover": null,
+    "cover": "1786285987638-gyt6r.jpeg",
     "cover_url": null,
-    "photos": [],
+    "photos": [
+      "1786285987638-gyt6r.jpeg",
+      "1786285990692-fuuap.jpeg",
+      "1786285993501-6m7ev.jpeg",
+      "1786285996944-8kfb9.jpeg"
+    ],
     "allow_download": true,
     "source": "repo"
   },
