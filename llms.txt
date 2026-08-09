@@ -29,23 +29,19 @@
 
 ## Equips i competició
 
-- [Partits i resultats](https://cbgrupbarna.info/partits/): calendari i resultats de
-  tots els equips federats del CB Grup Barna, jornada a jornada, amb dia, hora, rival,
-  casa o fora, pavelló i resultat. S'actualitza automàticament cada dia (i cada 20
-  minuts els caps de setmana amb partit) connectant amb el Calendari Global de la
-  Federació Catalana de Basquetbol (FCBQ), club 24. La pàgina inclou dades
-  estructurades Schema.org (SportsEvent) i un resum en text pla del calendari
-  complet per a rastrejadors que no executen JavaScript.
-  Font de dades oberta i llegible per màquines:
-  [partits/data.json](https://cbgrupbarna.info/partits/data.json).
-- [Calendaris per equip en PDF](https://cbgrupbarna.info/partits/calendaris/):
-  calendari complet de la temporada, descarregable, per a cadascun dels equips.
-- Temporada 2026-2027, 15 equips federats (paritat real femení/masculí):
-  Cadet Femení A i B, Infantil Femení A i B, Júnior Femení A i B, Sènior Femení A
-  (Super Copa Femenina) i B, Cadet Masculí A i B, Infantil Masculí A i B, Júnior
-  Masculí A, Sènior Masculí A (Super Copa Masculina) i B.
-- La majoria de partits com a local es juguen a **La Nau del Clot** (Nau Parc Clot),
-  Districte de Sant Martí, Barcelona.
+- [Partits i resultats](https://cbgrupbarna.info/partits/): calendari, horaris,
+  pavellons, resultats i ratxes de tots els equips federats del CB Grup Barna,
+  jornada a jornada, filtrable per gènere, categoria i equip. Categories: Cadet,
+  Infantil, Júnior i Sènior, femení i masculí (A i B). Es sincronitza cada dia amb
+  el Calendari Global de la FCBQ (basquetcatala.cat/club/24) i, els caps de setmana,
+  cada 20 minuts per recollir els resultats abans. Si la federació canvia l'hora o
+  la pista d'un partit ja publicat, la fitxa mostra un avís "MODIFICAT" durant 7 dies.
+  Inclou anàlisi de tendències, pistes difícils i previsió estadística (no una IA
+  de caixa negra) de cada partit encara no jugat, a partir del rendiment casa/fora
+  i l'historial directe contra el rival.
+- [Calendaris per equip, per descarregar](https://cbgrupbarna.info/partits/calendaris/):
+  una fitxa (imatge o PDF) amb el calendari complet de la temporada de cada equip,
+  generada cada dia a partir del calendari oficial de la FCBQ.
 - [Dades oficials del club](https://cbgrupbarna.info/grup-barna-dades-oficials/):
   equips, categories, xarxes i reconeixements institucionals verificats.
 
@@ -64,6 +60,16 @@
 
 ## Premsa
 
+- [Briefing del club · kit de premsa](https://cbgrupbarna.info/briefing/):
+  document oficial de referència per a premsa, patrocinadors i institucions. Hi consten la
+  història des de 1965 al Clot, els dos equips sènior a la Supercopa FCBQ, la paritat real
+  (68% de dones a l'staff tècnic, més de 200 noies en competició), la inclusió (Barna Màgics
+  i beques socials), els esdeveniments propis (3x3 Westfield Glòries, Cistella Petita, Campus)
+  i la protecció del menor (LOPIVI). Accés lliure, sense registre.
+- [Briefing en PDF](https://cbgrupbarna.info/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf):
+  mateixa informació en 16 pàgines A4, llest per citar, imprimir o enviar.
+- [Materials per a col·laboradors](https://cbgrupbarna.info/briefing/materials.html):
+  briefing, dossier de premsa i altres documents descarregables.
 - [Articles i premsa](https://cbgrupbarna.info/premsa/): reportatges i mencions del club
   als mitjans del barri. La revista Guia Clot · Camp de l'Arpa, editada per Eix Clot, hi ha
   dedicat el seu article més destacat: «El CB Grup Barna: seixanta anys fent bategar el
