@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #040404;
+    color: #F2EDE6;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  ::selection {
+    background-color: #C8102E;
+    color: #F2EDE6;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-club-red hover:bg-club-red-dark text-white font-body font-medium px-6 py-2.5 rounded transition-colors duration-200 inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply border border-club-cream/20 hover:border-club-cream/50 text-club-cream font-body font-medium px-6 py-2.5 rounded transition-colors duration-200 inline-flex items-center justify-center gap-2;
+  }
+
+  .card {
+    @apply bg-club-gray-1 border border-white/5 rounded-lg overflow-hidden;
+  }
+
+  .input {
+    @apply bg-club-gray-2 border border-white/10 rounded px-4 py-2.5 text-club-cream placeholder-white/30 focus:outline-none focus:border-club-red transition-colors w-full font-body;
+  }
+
+  .section-title {
+    @apply font-display text-4xl text-club-cream tracking-wide;
+  }
+
+  .tag {
+    @apply font-mono text-xs bg-club-red/20 text-club-red border border-club-red/30 px-2 py-0.5 rounded;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+  }
+}
