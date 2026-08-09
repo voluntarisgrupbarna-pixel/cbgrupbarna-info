@@ -10,6 +10,10 @@ name: update-partits
 # rutina diària n'informi. Després, regenera les fitxes descarregables de
 # /partits/calendaris/ (una imatge o PDF per equip): només es torna a
 # dibuixar la fitxa d'un equip si les seves dades han canviat de debò.
+# Finalment, torna a escriure el resum estàtic (SEO/SEO-IA) de propers
+# partits, resultats i JSON-LD dins partits/index.html i els enllaços de
+# descàrrega dins partits/calendaris/index.html, perquè els bots que no
+# executen JavaScript vegin dades reals i actuals.
 #
 # Cap de setmana, quan hi ha partits, es repeteix cada 20 minuts entre les
 # 08:00 i les 21:00 (hora de Barcelona, aprox. — GitHub Actions treballa en
@@ -44,11 +48,13 @@ jobs:
         run: python .github/scripts/update-partits.py
       - name: Regenerar fitxes de calendari per equip
         run: python .github/scripts/generate-calendaris.py
+      - name: Actualitzar resum estàtic per a SEO / SEO-IA
+        run: python .github/scripts/generate-seo-snapshot.py
       - name: Commit si hi ha canvis
         run: |
           git config user.name "cbgb-robot"
           git config user.email "cbgrupbarna@gmail.com"
-          git add partits/data.json partits/canvis.json partits/calendaris/
+          git add partits/data.json partits/canvis.json partits/calendaris/ partits/index.html
           if git diff --cached --quiet; then
             echo "Sense canvis"
           else
