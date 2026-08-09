@@ -223,7 +223,7 @@ def build_campus():
       <a href="/#info" class="btn ghost" data-cta="campus-form">Avisa'm de la propera edició</a>
     </div>
     <div class="phead-media">
-      <img src="/img/team-action.webp" alt="Jugadores del CB Grup Barna amb la samarreta del club" width="1200" height="675" fetchpriority="high">
+      <img src="/img/campus-hero.webp" alt="Jugadores del campus de bàsquet del CB Grup Barna amb la samarreta del campus" width="1200" height="675" fetchpriority="high">
     </div>
   </div>
 
@@ -285,7 +285,7 @@ def build_campus():
 </div>
 """
     return write("campus/index.html",
-                 head(title, desc, url, SITE + "/img/team-action.webp", ld,
+                 head(title, desc, url, SITE + "/img/campus-hero.webp", ld,
                       "campus bàsquet Barcelona, campus baloncesto Barcelona, campus estiu bàsquet, "
                       "grup barna campus, campus tecnificació bàsquet Barcelona") + body + FOOT)
 
