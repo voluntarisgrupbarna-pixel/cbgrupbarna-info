@@ -1,17 +1,24 @@
 name: update-partits
 
-# Robot FCBQ: cada dilluns a les 07:00 (05:00 UTC) intenta baixar el calendari
-# mensual del club (basquetcatala.cat/partits/calendari_club_mensual/24) i
-# fusionar partits i resultats a partits/data.json. Si la federació no respon
-# o bloqueja el robot, no passa res: la via PDF de /partits/ segueix activa.
+# Robot FCBQ: cada dia a les 06:00 UTC (8:00 a Barcelona en horari d'estiu;
+# 7:00 en horari d'hivern — GitHub Actions només programa en UTC, no hi ha
+# manera de seguir el canvi d'hora espanyol amb un sol cron) baixa el
+# calendari global i el mensual del club
+# (basquetcatala.cat/partits/calendari_club_global/24 i
+# .../calendari_club_mensual/24), fusiona partits nous, canvis d'hora/pista
+# i resultats a partits/data.json, i regenera les fitxes descarregables de
+# /partits/calendaris/ (una imatge o PDF per equip, sempre amb les dades del
+# dia). Els canvis d'hora o pista queden marcats amb "avisCanvi" al propi
+# partit (data de detecció + valors abans/després), perquè la pàgina de
+# calendaris avisi si una fitxa ja generada ha quedat desactualitzada.
+#
+# Si la federació no respon o bloqueja el robot, no passa res: la via manual
+# de /partits/ → Gestió segueix activa i no es toca res.
 # També es pot llançar a mà des de la pestanya Actions (workflow_dispatch).
 
 on:
   schedule:
-    # dilluns: recollir resultats del cap de setmana
-    - cron: "0 5 * * 1"
-    # dijous de matinada: partits del cap de setmana carregats abans de les 9:00
-    - cron: "0 5 * * 4"
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -25,16 +32,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Instal·lar dependències
+        run: pip install --quiet pillow
       - name: Baixar i fusionar partits FCBQ
         run: python .github/scripts/update-partits.py
+      - name: Regenerar fitxes de calendari per equip
+        run: python .github/scripts/generate-calendaris.py
       - name: Commit si hi ha canvis
         run: |
-          if git diff --quiet partits/data.json; then
+          git add partits/data.json partits/calendaris/
+          if git diff --cached --quiet; then
             echo "Sense canvis"
           else
             git config user.name "cbgb-robot"
             git config user.email "cbgrupbarna@gmail.com"
-            git add partits/data.json
-            git commit -m "partits: actualització automàtica FCBQ [skip ci]"
+            MSG="$(cat /tmp/update-partits-summary.txt 2>/dev/null || echo 'calendaris actualitzats')"
+            git commit -m "partits: actualització automàtica FCBQ · $MSG [skip ci]"
             git push
           fi

@@ -96,6 +96,7 @@ FOOT = f"""</main>
       <div class="foot-col">
         <h3>Temporada</h3>
         <a href="/partits/">Partits i resultats</a>
+        <a href="/partits/calendaris/">Calendaris per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
@@ -1074,6 +1075,159 @@ def build_premsa_index():
                  "premsa CB Grup Barna, Guia Clot, Eix Clot, articles bàsquet Clot") + body + FOOT)
 
 
+# ═══════════════════════════════════════════════════════════ /partits/calendaris/ ════
+#
+# La pàgina és una carcassa estàtica: la llista d'equips es dibuixa amb JS a
+# partir de partits/data.json (sempre al dia, actualitzat cada dia pel robot
+# de la FCBQ) i partits/calendaris/manifest.json (què hi ha generat per a
+# cada equip). Així un equip nou —o un de promoció que acaba de rebre
+# calendari— apareix sol, sense haver de tornar a executar aquest script.
+
+CATEGORY_PREFIXES = ["Sènior", "Júnior", "Cadet", "Infantil", "Preinfantil", "Mini", "Premini"]
+
+
+def build_calendaris():
+    url = SITE + "/partits/calendaris/"
+    title = "Calendaris per equip · descarrega'l en PDF | CB Grup Barna"
+    desc = ("Descarrega el calendari complet de la temporada del teu equip: sèniors, júniors, cadets i "
+            "infantils del CB Grup Barna. Es genera cada dia a partir del calendari oficial de la FCBQ.")
+
+    faq_html, faq_ld = faq_block([
+        ("Com descarrego el calendari del meu equip?",
+         "Busca l'equip a la llista, toca la imatge o el botó de descàrrega i es desa al mòbil o ordinador: "
+         "una imatge per als equips amb una sola fitxa, un PDF de diverses pàgines per als sèniors, que juguen "
+         "lliga d'ida i tornada."),
+        ("Per què no hi ha calendari del meu equip?",
+         "Els equips de promoció (premini, mini, preinfantil) reben el calendari de la FCBQ més tard que la "
+         "resta de categories. Es publicarà aquí en el moment que la federació el faci oficial."),
+        ("Què faig si un partit ha canviat d'hora o de pista?",
+         "Si la Federació Catalana de Basquetbol modifica un partit després que s'hagi fet la fitxa descarregable, "
+         "la targeta de l'equip mostra un avís perquè comprovis les dades actualitzades a "
+         "l'aplicació de partits del club, que es revisa cada dia."),
+        ("Amb quina freqüència s'actualitzen els calendaris?",
+         "El calendari en directe de /partits/ es sincronitza cada dia amb el calendari oficial de la FCBQ. "
+         "Les fitxes descarregables són fixes: si un partit concret canvia, l'app sempre té la dada correcta."),
+    ])
+
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "CollectionPage", "@id": url + "#calendaris", "name": title, "description": desc, "url": url,
+         "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"}},
+        faq_ld,
+        BREADCRUMB([("CB Grup Barna", "/"), ("Partits i resultats", "/partits/"), ("Calendaris per equip", "/partits/calendaris/")]),
+    ]}
+
+    body = f"""
+{crumbs([("Inici", "/"), ("Partits i resultats", "/partits/"), ("Calendaris per equip", None)])}
+<div class="wrap">
+  <div class="phead narrow">
+    <p class="eyebrow red" id="cal-temporada">Temporada</p>
+    <h1>Calendaris per equip</h1>
+    <p class="lede">El calendari complet de cada equip, llest per descarregar i desar. Es genera cada dia a
+    partir del calendari oficial de la FCBQ: els equips de promoció (premini, mini, preinfantil) hi apareixen
+    sols en el moment que la federació en publiqui el calendari.</p>
+  </div>
+
+  <div id="cal-groups"></div>
+  <p id="cal-loading" class="narrow lede">Carregant els calendaris…</p>
+  <p id="cal-error" class="narrow lede" style="display:none">No s'han pogut carregar els calendaris ara mateix.
+    Torna-ho a provar més tard o consulta'ls directament a <a href="/partits/">l'app de partits</a>.</p>
+
+  <div class="narrow">
+    <h2 style="font-family:var(--display);font-size:clamp(16px,2.1vw,22px);margin:0 0 18px">Preguntes freqüents</h2>
+    {faq_html}
+    <div style="margin-top:clamp(34px,5vw,60px)">
+    {closer("Vols el calendari en directe?",
+            "L'aplicació de partits es sincronitza cada dia amb la FCBQ: resultats, ratxes i classificacions.",
+            [("Veure l'app de partits", "/partits/", "red", "cal-closer-app"),
+             ("Demanar informació", "/#info", "ghost", "cal-closer-info")])}
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {{
+  var CATEGORIES = {json.dumps(CATEGORY_PREFIXES, ensure_ascii=False)};
+  var t = Math.floor(Date.now() / 3600000);
+
+  function esc(s) {{
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {{
+      return {{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }}[c];
+    }});
+  }}
+
+  function categoria(nom) {{
+    for (var i = 0; i < CATEGORIES.length; i++) {{
+      if (nom.indexOf(CATEGORIES[i]) === 0) return CATEGORIES[i] === 'Sènior' ? 'Sènior' : CATEGORIES[i];
+    }}
+    return 'Altres';
+  }}
+
+  function card(equipId, nom, info) {{
+    var fitxer = '/partits/calendaris/descarrega/' + equipId + '.' + info.tipus;
+    var etiqueta = info.tipus === 'pdf'
+      ? "Descarrega el PDF · " + info.pagines + " pàgines"
+      : 'Desa la imatge';
+    return '<div class="cal-card" data-equip="' + equipId + '">'
+      + '<a href="' + fitxer + '" target="_blank" rel="noopener" data-cta="cal-img-' + equipId + '">'
+      + '<img src="/partits/calendaris/img/' + equipId + '.webp?v=' + t + '" alt="Calendari de ' + esc(nom)
+      + '" loading="lazy" decoding="async"></a>'
+      + '<div class="cal-card-body">'
+      + '<span class="cal-card-tag">CB Grup Barna</span><h3>' + esc(nom) + '</h3>'
+      + '<span class="cal-card-meta">' + info.jornades + ' jornades</span>'
+      + '<div class="cal-notice" data-notice="' + equipId + '">⚠ La FCBQ ha canviat l\\'hora o la pista d\\'algun '
+      + 'partit d\\'aquest equip després de fer aquesta fitxa. <a href="/partits/#equips">Comprova-ho a l\\'app</a>.</div>'
+      + '<a href="' + fitxer + '" target="_blank" rel="noopener" class="btn ghost" data-cta="cal-dl-' + equipId
+      + '">' + etiqueta + '</a></div></div>';
+  }}
+
+  Promise.all([
+    fetch('/partits/data.json?t=' + t).then(function (r) {{ return r.ok ? r.json() : null; }}),
+    fetch('/partits/calendaris/manifest.json?t=' + t).then(function (r) {{ return r.ok ? r.json() : {{}}; }}),
+  ]).then(function (res) {{
+    var d = res[0], manifest = res[1] || {{}};
+    document.getElementById('cal-loading').style.display = 'none';
+    if (!d) {{ document.getElementById('cal-error').style.display = 'block'; return; }}
+
+    var seasonEl = document.getElementById('cal-temporada');
+    if (seasonEl && d.temporada) seasonEl.textContent = 'Temporada ' + d.temporada.replace('-', ' · ');
+
+    var equips = d.equips || [];
+    var groups = {{}};
+    equips.forEach(function (e) {{
+      if (!manifest[e.id]) return;
+      var cat = categoria(e.nom);
+      (groups[cat] = groups[cat] || []).push(e);
+    }});
+
+    var order = CATEGORIES.concat(['Altres']);
+    var html = '';
+    order.forEach(function (cat) {{
+      var list = groups[cat];
+      if (!list || !list.length) return;
+      var cards = list.map(function (e) {{ return card(e.id, e.nom, manifest[e.id]); }}).join('');
+      html += '<div class="cal-group"><h2>' + esc(cat) + '</h2><div class="cal-grid">' + cards + '</div></div>';
+    }});
+    document.getElementById('cal-groups').innerHTML = html || '<p class="narrow lede">Encara no hi ha cap '
+      + 'calendari publicat. Torna-hi properament.</p>';
+
+    var canvis = {{}};
+    (d.partits || []).forEach(function (p) {{ if (p.avisCanvi) canvis[p.equipId] = true; }});
+    Object.keys(canvis).forEach(function (equipId) {{
+      var el = document.querySelector('.cal-notice[data-notice="' + equipId + '"]');
+      if (el) el.classList.add('on');
+    }});
+  }}).catch(function () {{
+    document.getElementById('cal-loading').style.display = 'none';
+    document.getElementById('cal-error').style.display = 'block';
+  }});
+}})();
+</script>
+"""
+    return write("partits/calendaris/index.html",
+                 head(title, desc, url, SITE + "/partits/calendaris/img/scf.webp", ld,
+                      "calendari CB Grup Barna, calendari bàsquet base, descarregar calendari equip") + body + FOOT)
+
+
 if __name__ == "__main__":
     print("Generant pàgines:")
     print(build_campus())
@@ -1084,4 +1238,5 @@ if __name__ == "__main__":
     print(build_premsa_index())
     for a in PRESS:
         print(build_press_article(a))
-    print(f"\n{len(ARTICLES) + len(PRESS) + 4} pàgines generades.")
+    print(build_calendaris())
+    print(f"\n{len(ARTICLES) + len(PRESS) + 5} pàgines generades.")

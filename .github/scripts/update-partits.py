@@ -108,6 +108,7 @@ def main():
     by_club = {(e.get("clubNom") or "").upper(): e for e in data["equips"] if e.get("clubNom")}
     index = {p["id"]: p for p in data["partits"]}
     added = updated = results = 0
+    canvis_detall = []
     for s in scraped:
         eq = by_club.get(s.get("clubNom", "").upper()) or by_cat.get(s["categoria"].upper())
         if not eq:
@@ -125,7 +126,17 @@ def main():
         if pid in index:
             p = index[pid]
             if (p["hora"], p["pista"]) != (s["hora"], s["pista"]) and s["pista"]:
+                # No sobreescriure en silenci: es guarda el canvi perquè
+                # /partits/calendaris/ pugui avisar que la fitxa descarregable
+                # (imatge/PDF fixa) pot haver quedat desactualitzada.
+                canvi = {
+                    "detectat": date.today().isoformat(),
+                    "abans": {"hora": p["hora"], "pista": p["pista"]},
+                    "despres": {"hora": s["hora"], "pista": s["pista"]},
+                }
                 p["hora"], p["pista"], p["adreca"] = s["hora"], s["pista"], s["adreca"]
+                p["avisCanvi"] = canvi
+                canvis_detall.append(f"{eq['nom']} {s['data']}: {canvi['abans']} → {canvi['despres']}")
                 updated += 1
             if s["puntsLocal"] is not None and p.get("puntsLocal") is None:
                 p["puntsLocal"], p["puntsVisitant"], p["estat"] = s["puntsLocal"], s["puntsVisitant"], "jugat"
@@ -141,7 +152,16 @@ def main():
     data["partits"].sort(key=lambda p: (p["data"], p["hora"]))
     data["lastUpdate"] = date.today().isoformat()
     DATA.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"[robot] OK → {added} nous, {updated} actualitzats, {results} resultats")
+    resum = f"{added} nous, {updated} canvis d'hora/pista, {results} resultats"
+    print(f"[robot] OK → {resum}")
+    if canvis_detall:
+        print("[robot] canvis detectats:")
+        for c in canvis_detall:
+            print("  -", c)
+    try:
+        Path("/tmp/update-partits-summary.txt").write_text(resum, encoding="utf-8")
+    except OSError:
+        pass
     return 0
 
 if __name__ == "__main__":
