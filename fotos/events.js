@@ -3,6 +3,18 @@
 
 window.GALERIA_EVENTS = [
   {
+    "id": "summer-camp-timechamber-experience-2026",
+    "title": "Summer Camp · TimeChamber Experience",
+    "description": "Fotos i vídeos del Summer Camp del CB Grup Barna, edició TimeChamber Experience.",
+    "date": "2026-08-09",
+    "location": "Barcelona",
+    "season": "2025-2026",
+    "cover": null,
+    "source": "repo",
+    "photos": [],
+    "allow_download": true
+  },
+  {
     "id": "senior-femeni-sessio-fotos-instax",
     "title": "Sènior Femení · Sessió Fotos Instax",
     "description": "Sessió de fotos Instax de l'equip Sènior Femení del CB Grup Barna. Temporada 2025-2026.",
