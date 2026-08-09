@@ -71,25 +71,30 @@
       hide.textContent = '';
       document.body.style.visibility = 'visible';
 
-      var gate = el('div', 'position:fixed;inset:0;z-index:99999;background:#0A0A0A;display:flex;align-items:center;justify-content:center;padding:2rem;font-family:Outfit,system-ui,sans-serif;color:#F5F5F5');
+      var fontLink = document.createElement('link');
+      fontLink.rel = 'stylesheet';
+      fontLink.href = 'https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500;600&display=swap';
+      document.head.appendChild(fontLink);
+
+      var gate = el('div', 'position:fixed;inset:0;z-index:99999;background:#ffffff;display:flex;align-items:center;justify-content:center;padding:2rem;font-family:Inter,-apple-system,system-ui,sans-serif;font-weight:300;color:#0a0a0a');
       gate.id = 'cbgb-ggate';
 
       var box = el('div', 'text-align:center;max-width:400px;width:100%');
-      box.appendChild(el('img', 'height:64px;margin-bottom:1.4rem'));
+      box.appendChild(el('img', 'height:60px;margin-bottom:1.5rem'));
       box.firstChild.src = '/logo.png';
       box.firstChild.alt = 'CB Grup Barna';
-      box.appendChild(el('div', 'font-family:\'Bebas Neue\',sans-serif;font-size:1.9rem;letter-spacing:.05em', 'ÀREA D\'<span style="color:#C8102E">ADMINISTRACIÓ</span>'));
-      box.appendChild(el('p', 'color:rgba(255,255,255,.45);font-size:.85rem;margin:.4rem 0 1.6rem', 'Identifica\'t amb el compte de Google del club per continuar.'));
+      box.appendChild(el('div', 'font-family:Jost,\'Futura\',sans-serif;font-weight:300;text-transform:uppercase;font-size:1.4rem;letter-spacing:.08em', 'ÀREA D\'<span style="color:#E31E24">ADMINISTRACIÓ</span>'));
+      box.appendChild(el('p', 'color:#46433f;font-size:.85rem;margin:.6rem 0 1.75rem', 'Identifica\'t amb el compte de Google del club per continuar.'));
 
       var slot = el('div', 'display:flex;justify-content:center;min-height:44px');
       slot.id = 'cbgb-gbtn';
       box.appendChild(slot);
 
-      var err = el('p', 'display:none;color:#ff8fa0;font-size:.8rem;margin-top:1rem;line-height:1.4');
+      var err = el('p', 'display:none;color:#E31E24;font-size:.8rem;margin-top:1rem;line-height:1.4');
       err.id = 'cbgb-gerr';
       box.appendChild(err);
 
-      box.appendChild(el('p', 'color:rgba(255,255,255,.25);font-size:.7rem;margin-top:2rem;line-height:1.5',
+      box.appendChild(el('p', 'font-family:Jost,sans-serif;color:#8a8681;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-top:2rem;line-height:1.6',
         'Accés reservat a l\'equip del CB Grup Barna.'));
 
       gate.appendChild(box);
@@ -97,12 +102,12 @@
 
       if (!CLIENT_ID) {
         slot.innerHTML = '';
-        var warn = el('div', 'text-align:left;background:rgba(200,16,46,.1);border:1px solid rgba(200,16,46,.35);border-radius:10px;padding:.9rem 1rem;font-size:.78rem;line-height:1.55;color:rgba(255,255,255,.75)',
-          '<b>Falta configurar Google.</b><br>Obre <code>scripts/google-gate.js</code> i enganxa el teu <i>Client ID</i> a la línia <code>CLIENT_ID</code>. ' +
-          'El crees a <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener" style="color:#ff8fa0">console.cloud.google.com</a> ' +
+        var warn = el('div', 'text-align:left;background:#f6f4f1;border:1px solid #e4e1dd;padding:1rem 1.1rem;font-size:.78rem;line-height:1.6;color:#46433f',
+          '<b style="color:#0a0a0a">Falta configurar Google.</b><br>Obre <code>scripts/google-gate.js</code> i enganxa el teu <i>Client ID</i> a la línia <code>CLIENT_ID</code>. ' +
+          'El crees a <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener" style="color:#E31E24">console.cloud.google.com</a> ' +
           '(Aplicació web · origen autoritzat <code>https://cbgrupbarna.info</code>).');
         slot.appendChild(warn);
-        var cont = el('button', 'margin-top:1rem;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);border-radius:8px;padding:.6rem 1.2rem;font-family:inherit;font-size:.8rem;cursor:pointer', 'Continuar sense Google');
+        var cont = el('button', 'margin-top:1rem;background:#0a0a0a;border:1px solid #0a0a0a;color:#fff;padding:.75rem 1.4rem;font-family:Jost,sans-serif;font-size:10px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer', 'Continuar sense Google');
         cont.onclick = function () { unlock({ email: 'sense-google', name: 'Admin' }); };
         box.appendChild(cont);
         return;
@@ -133,7 +138,7 @@
           }
         });
         global.google.accounts.id.renderButton(document.getElementById('cbgb-gbtn'), {
-          theme: 'filled_black', size: 'large', text: 'signin_with', shape: 'pill'
+          theme: 'outline', size: 'large', text: 'signin_with', shape: 'pill'
         });
       };
       s.onerror = function () {

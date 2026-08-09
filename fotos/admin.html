@@ -7,187 +7,204 @@
   <meta name="robots" content="noindex">
   <link rel="icon" href="/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
   <style>
     :root {
-      --red: #C8102E; --red-dark: #a81318;
-      --black: #040404; --gray1: #181818; --gray2: #252525; --gray3: #2e2e2e;
-      --cream: #F2EDE6; --green: #22c55e;
+      --ink: #0a0a0a; --ink-2: #46433f; --muted: #8a8681; --line: #e4e1dd;
+      --paper: #ffffff; --paper-2: #f6f4f1;
+      --red: #E31E24; --red-dark: #a81318;
+      --green: #1a7a3c;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --display: 'Jost', 'Futura', 'Century Gothic', -apple-system, sans-serif;
+      --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--black); color: var(--cream); font-family: 'Outfit', sans-serif; min-height: 100vh; }
+    body { background: var(--paper); color: var(--ink); font-family: var(--body); font-weight: 300; min-height: 100vh; -webkit-font-smoothing: antialiased; }
     ::selection { background: var(--red); color: #fff; }
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
 
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(4,4,4,.96); backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      height: 58px; display: flex; align-items: center;
-      padding: 0 1.25rem; gap: 1rem;
+      background: rgba(255,255,255,.94); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      height: 68px; display: flex; align-items: center;
+      padding: 0 clamp(16px, 4vw, 44px); gap: 1rem;
     }
-    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .1em; color: var(--cream); display: flex; align-items: center; gap: .5rem; }
+    .nav-logo { font-family: var(--display); font-size: .8rem; font-weight: 400; letter-spacing: .24em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: .5rem; }
     .nav-logo span { color: var(--red); }
-    .badge-admin { font-size: .65rem; background: rgba(200,16,46,.15); color: var(--red); border: 1px solid rgba(200,16,46,.3); padding: .2rem .5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: .08em; }
-    .nav-user { margin-left: auto; display: flex; align-items: center; gap: .75rem; font-size: .8rem; color: rgba(255,255,255,.4); }
-    .btn-logout { background: none; border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.4); padding: .3rem .75rem; border-radius: 5px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: .75rem; transition: all .15s; }
-    .btn-logout:hover { border-color: rgba(255,255,255,.25); color: rgba(255,255,255,.7); }
-    .nav-gallery-link { color: rgba(255,255,255,.35); text-decoration: none; font-size: .8rem; transition: color .15s; }
-    .nav-gallery-link:hover { color: rgba(255,255,255,.7); }
+    .badge-admin { font-family: var(--display); font-size: 8.5px; letter-spacing: .16em; text-transform: uppercase; background: var(--ink); color: #fff; padding: .25rem .5rem; }
+    .nav-user { margin-left: auto; display: flex; align-items: center; gap: .75rem; font-size: .8rem; color: var(--muted); }
+    .btn-logout { background: none; border: 1px solid var(--line); color: var(--ink-2); padding: .4rem .8rem; cursor: pointer; font-family: var(--display); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; transition: all .15s; }
+    .btn-logout:hover { border-color: var(--ink); color: var(--ink); }
+    .nav-gallery-link { color: var(--muted); text-decoration: none; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; transition: color .15s; }
+    .nav-gallery-link:hover { color: var(--red); }
 
     /* LOGIN */
     #login-screen {
       min-height: 85vh; display: flex; align-items: center; justify-content: center; padding: 1rem;
     }
     .login-box {
-      background: var(--gray1); border: 1px solid rgba(255,255,255,.07);
-      border-radius: 14px; padding: 2rem; width: 100%; max-width: 420px;
+      background: var(--paper); border: 1px solid var(--line);
+      padding: 2.25rem; width: 100%; max-width: 420px;
     }
-    .login-icon { width: 52px; height: 52px; background: rgba(200,16,46,.1); border: 1px solid rgba(200,16,46,.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
-    .login-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: .1em; margin-bottom: .3rem; }
-    .login-sub { font-size: .85rem; color: rgba(255,255,255,.35); margin-bottom: 1.5rem; }
-    .field-label { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.35); margin-bottom: .4rem; }
+    .login-icon { width: 52px; height: 52px; background: var(--paper-2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+    .login-title { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.5rem; letter-spacing: .08em; margin-bottom: .4rem; }
+    .login-sub { font-size: .85rem; color: var(--ink-2); margin-bottom: 1.5rem; }
+    .field-label { display: block; font-family: var(--display); font-size: 9px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); margin-bottom: .5rem; }
     .field-input {
-      width: 100%; background: var(--gray2); border: 1px solid rgba(255,255,255,.1);
-      color: var(--cream); border-radius: 7px; padding: .65rem .85rem;
-      font-family: 'Outfit', sans-serif; font-size: .9rem; outline: none; transition: border-color .15s;
+      width: 100%; background: var(--paper-2); border: 1px solid var(--line);
+      color: var(--ink); padding: .7rem .85rem;
+      font-family: var(--body); font-size: .9rem; outline: none; transition: border-color .15s;
     }
     .field-input:focus { border-color: var(--red); }
-    .field-input::placeholder { color: rgba(255,255,255,.2); }
-    .field-hint { font-size: .72rem; color: rgba(255,255,255,.25); margin-top: .4rem; line-height: 1.4; }
-    .field-hint a { color: rgba(200,16,46,.6); }
-    .btn-primary { width: 100%; background: var(--red); color: #fff; border: none; border-radius: 7px; padding: .75rem 1rem; font-family: 'Outfit', sans-serif; font-size: .9rem; font-weight: 500; cursor: pointer; transition: background .15s; margin-top: 1.25rem; display: flex; align-items: center; justify-content: center; gap: .4rem; }
-    .btn-primary:hover { background: var(--red-dark); }
+    .field-input::placeholder { color: var(--muted); }
+    .field-hint { font-size: .74rem; color: var(--muted); margin-top: .5rem; line-height: 1.5; }
+    .field-hint a { color: var(--red); }
+    .btn-primary { width: 100%; background: var(--ink); color: #fff; border: 1px solid var(--ink); padding: .8rem 1rem; font-family: var(--display); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); margin-top: 1.25rem; display: flex; align-items: center; justify-content: center; gap: .4rem; }
+    .btn-primary:hover { background: var(--red); border-color: var(--red); }
     .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
-    .login-error { background: rgba(200,16,46,.12); border: 1px solid rgba(200,16,46,.25); color: #f87171; border-radius: 7px; padding: .65rem .85rem; font-size: .82rem; margin-top: .75rem; display: none; }
+    .login-error { background: rgba(227,30,36,.06); border: 1px solid rgba(227,30,36,.3); color: var(--red-dark); padding: .65rem .85rem; font-size: .82rem; margin-top: .75rem; display: none; }
 
     /* MAIN */
-    #main-screen { display: none; padding: 1.5rem 1.25rem 4rem; max-width: 1100px; margin: 0 auto; }
+    #main-screen { display: none; padding: 2rem 1.25rem 4rem; max-width: 1100px; margin: 0 auto; }
 
     /* TOOLBAR */
-    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .toolbar h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .06em; }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+    .toolbar h1 { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.7rem; letter-spacing: .08em; }
     .toolbar h1 span { color: var(--red); }
-    .btn-new-event { background: var(--red); color: #fff; border: none; border-radius: 7px; padding: .6rem 1.1rem; font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; transition: background .15s; display: flex; align-items: center; gap: .4rem; }
-    .btn-new-event:hover { background: var(--red-dark); }
+    .btn-new-event { background: var(--red); color: #fff; border: 1px solid var(--red); padding: .7rem 1.2rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); display: flex; align-items: center; gap: .4rem; }
+    .btn-new-event:hover { background: var(--ink); border-color: var(--ink); }
 
     /* MODAL */
-    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,10,10,.7); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
     .modal-backdrop.open { display: flex; }
-    .modal { background: var(--gray1); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 1.75rem; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; }
-    .modal h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .06em; margin-bottom: 1.25rem; }
-    .field-group { display: grid; gap: .85rem; }
+    .modal { background: var(--paper); border: 1px solid var(--line); padding: 2rem; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; }
+    .modal h2 { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.4rem; letter-spacing: .06em; margin-bottom: 1.5rem; }
+    .field-group { display: grid; gap: .9rem; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
-    .modal-actions { display: flex; gap: .6rem; margin-top: 1.25rem; }
-    .btn-cancel { flex: 1; background: transparent; border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.5); border-radius: 7px; padding: .65rem 1rem; font-family: 'Outfit', sans-serif; font-size: .85rem; cursor: pointer; transition: all .15s; }
-    .btn-cancel:hover { border-color: rgba(255,255,255,.25); color: rgba(255,255,255,.8); }
-    .btn-save { flex: 2; background: var(--red); color: #fff; border: none; border-radius: 7px; padding: .65rem 1rem; font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; transition: background .15s; display: flex; align-items: center; justify-content: center; gap: .4rem; }
-    .btn-save:hover { background: var(--red-dark); }
+    .modal-actions { display: flex; gap: .6rem; margin-top: 1.5rem; }
+    .btn-cancel { flex: 1; background: transparent; border: 1px solid var(--line); color: var(--ink-2); padding: .7rem 1rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; transition: all .15s; }
+    .btn-cancel:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-save { flex: 2; background: var(--ink); color: #fff; border: 1px solid var(--ink); padding: .7rem 1rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); display: flex; align-items: center; justify-content: center; gap: .4rem; }
+    .btn-save:hover { background: var(--red); border-color: var(--red); }
     .btn-save:disabled { opacity: .5; cursor: not-allowed; }
 
     /* EVENTS LIST */
     .events-list { display: grid; gap: .7rem; }
     .event-row {
-      background: var(--gray1); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;
+      background: var(--paper); border: 1px solid var(--line);
       display: grid; grid-template-columns: 72px 1fr auto; align-items: center; gap: 1rem;
       overflow: hidden; cursor: pointer; transition: border-color .15s;
     }
-    .event-row:hover { border-color: rgba(255,255,255,.12); }
-    .event-thumb-mini { width: 72px; height: 72px; object-fit: cover; background: var(--gray2); display: block; flex-shrink: 0; }
-    .event-thumb-empty { width: 72px; height: 72px; background: var(--gray2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .event-row:hover { border-color: var(--ink); }
+    .event-thumb-mini { width: 72px; height: 72px; object-fit: cover; background: var(--paper-2); display: block; flex-shrink: 0; }
+    .event-thumb-empty { width: 72px; height: 72px; background: var(--paper-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .event-row-info { padding: .75rem 0; min-width: 0; }
-    .event-row-title { font-size: .95rem; font-weight: 500; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .event-row-meta { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: .2rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    .event-row-title { font-family: var(--display); font-size: .9rem; letter-spacing: .04em; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .event-row-meta { font-family: var(--display); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: .35rem; display: flex; gap: .75rem; flex-wrap: wrap; }
     .event-row-actions { display: flex; gap: .4rem; padding-right: .75rem; flex-shrink: 0; }
-    .btn-icon { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.5); border-radius: 6px; padding: .4rem; cursor: pointer; transition: all .15s; display: flex; align-items: center; }
-    .btn-icon:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.9); }
-    .btn-icon.danger:hover { background: rgba(200,16,46,.15); border-color: rgba(200,16,46,.3); color: #f87171; }
-    .season-chip { font-size: .65rem; background: rgba(200,16,46,.15); color: var(--red); border: 1px solid rgba(200,16,46,.25); padding: .15rem .4rem; border-radius: 3px; }
+    .btn-icon { background: transparent; border: 1px solid var(--line); color: var(--ink-2); padding: .4rem; cursor: pointer; transition: all .15s; display: flex; align-items: center; }
+    .btn-icon:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-icon.danger:hover { background: rgba(227,30,36,.06); border-color: var(--red); color: var(--red); }
+    .season-chip { font-family: var(--display); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--red); border: 1px solid var(--line); padding: .2rem .4rem; }
 
     /* UPLOAD PANEL */
     #upload-panel { display: none; }
-    .upload-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
-    .btn-back { background: none; border: none; color: rgba(255,255,255,.4); cursor: pointer; font-family: 'Outfit', sans-serif; font-size: .85rem; display: flex; align-items: center; gap: .3rem; transition: color .15s; padding: .4rem 0; }
-    .btn-back:hover { color: rgba(255,255,255,.8); }
-    .upload-event-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .06em; }
+    .upload-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .btn-back { background: none; border: none; color: var(--muted); cursor: pointer; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; display: flex; align-items: center; gap: .3rem; transition: color .15s; padding: .4rem 0; }
+    .btn-back:hover { color: var(--red); }
+    .upload-event-title { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.4rem; letter-spacing: .06em; }
     .upload-event-title span { color: var(--red); }
 
     /* DROP ZONE */
     .drop-zone {
-      border: 2px dashed rgba(255,255,255,.12); border-radius: 12px; padding: 3rem 1.5rem;
+      border: 1px dashed var(--line); padding: 3rem 1.5rem;
       text-align: center; transition: all .2s; cursor: pointer; position: relative; margin-bottom: .75rem;
     }
-    .drop-zone.drag-over { border-color: var(--red); background: rgba(200,16,46,.05); }
+    .drop-zone.drag-over { border-color: var(--red); background: rgba(227,30,36,.04); }
     .drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .drop-zone-icon { color: rgba(255,255,255,.15); margin-bottom: .75rem; }
-    .drop-zone p { color: rgba(255,255,255,.45); font-size: .9rem; }
+    .drop-zone-icon { color: var(--muted); margin-bottom: .75rem; }
+    .drop-zone p { color: var(--ink-2); font-size: .9rem; }
     .drop-zone p span { color: var(--red); cursor: pointer; }
-    .drop-zone small { color: rgba(255,255,255,.2); font-size: .75rem; }
+    .drop-zone small { color: var(--muted); font-size: .75rem; }
 
     /* ZIP UPLOAD */
     .zip-row { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
-    .zip-divider { flex: 1; height: 1px; background: rgba(255,255,255,.07); }
-    .zip-label { font-size: .72rem; color: rgba(255,255,255,.2); text-transform: uppercase; letter-spacing: .08em; flex-shrink: 0; }
-    .btn-zip { position: relative; overflow: hidden; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.55); border-radius: 7px; padding: .5rem 1rem; font-family: 'Outfit', sans-serif; font-size: .82rem; cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: .4rem; white-space: nowrap; }
-    .btn-zip:hover { border-color: rgba(200,16,46,.4); color: var(--red); background: rgba(200,16,46,.06); }
+    .zip-divider { flex: 1; height: 1px; background: var(--line); }
+    .zip-label { font-family: var(--display); font-size: 8.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .16em; flex-shrink: 0; }
+    .btn-zip { position: relative; overflow: hidden; background: transparent; border: 1px solid var(--line); color: var(--ink-2); padding: .55rem 1rem; font-family: var(--display); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: .4rem; white-space: nowrap; }
+    .btn-zip:hover { border-color: var(--red); color: var(--red); }
     .btn-zip input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .zip-progress { display: none; background: var(--gray1); border: 1px solid rgba(255,255,255,.07); border-radius: 8px; padding: .75rem 1rem; margin-bottom: .75rem; font-size: .82rem; color: rgba(255,255,255,.5); display: none; align-items: center; gap: .6rem; }
+    .zip-progress { display: none; background: var(--paper-2); border: 1px solid var(--line); padding: .75rem 1rem; margin-bottom: .75rem; font-size: .82rem; color: var(--ink-2); display: none; align-items: center; gap: .6rem; }
     .zip-progress.active { display: flex; }
 
     /* UPLOAD QUEUE */
     .upload-queue { display: grid; gap: .5rem; margin-bottom: 1.5rem; }
     .upload-item {
-      background: var(--gray1); border: 1px solid rgba(255,255,255,.06); border-radius: 8px;
+      background: var(--paper); border: 1px solid var(--line);
       display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: .75rem; padding: .5rem;
     }
-    .upload-item-thumb { width: 52px; height: 52px; object-fit: cover; border-radius: 5px; background: var(--gray2); }
-    .upload-item-name { font-size: .8rem; color: rgba(255,255,255,.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .upload-item-size { font-size: .7rem; color: rgba(255,255,255,.25); margin-top: .15rem; }
-    .upload-item-status { font-size: .75rem; display: flex; align-items: center; gap: .3rem; white-space: nowrap; flex-shrink: 0; padding-right: .25rem; }
-    .status-pending { color: rgba(255,255,255,.3); }
-    .status-uploading { color: #60a5fa; }
+    .upload-item-thumb { width: 52px; height: 52px; object-fit: cover; background: var(--paper-2); }
+    .upload-item-name { font-size: .8rem; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .upload-item-size { font-size: .7rem; color: var(--muted); margin-top: .15rem; }
+    .upload-item-status { font-family: var(--display); font-size: 8.5px; letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: .3rem; white-space: nowrap; flex-shrink: 0; padding-right: .25rem; }
+    .status-pending { color: var(--muted); }
+    .status-uploading { color: #1d6fd6; }
     .status-done { color: var(--green); }
-    .status-error { color: #f87171; }
-    .progress-bar { height: 2px; background: rgba(255,255,255,.08); border-radius: 1px; margin-top: .3rem; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--red); border-radius: 1px; transition: width .3s; }
+    .status-error { color: var(--red); }
+    .status-duplicate { color: #b8860b; }
+    .upload-item.is-duplicate { opacity: .55; }
+    .progress-bar { height: 2px; background: var(--line); margin-top: .3rem; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--red); transition: width .3s; }
+    .video-thumb-badge {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 18px; height: 18px; background: rgba(10,10,10,.55); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; pointer-events: none;
+    }
+    .upload-item-thumb-wrap { position: relative; width: 52px; height: 52px; }
+    .uploaded-photo-media-wrap { position: relative; }
 
     /* UPLOAD ACTIONS */
     .upload-actions { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
-    .btn-upload-all { background: var(--red); color: #fff; border: none; border-radius: 7px; padding: .65rem 1.25rem; font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; transition: background .15s; display: flex; align-items: center; gap: .4rem; }
-    .btn-upload-all:hover { background: var(--red-dark); }
+    .btn-upload-all { background: var(--red); color: #fff; border: 1px solid var(--red); padding: .7rem 1.35rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); display: flex; align-items: center; gap: .4rem; }
+    .btn-upload-all:hover { background: var(--ink); border-color: var(--ink); }
     .btn-upload-all:disabled { opacity: .5; cursor: not-allowed; }
-    .upload-status-text { font-size: .8rem; color: rgba(255,255,255,.35); }
-    .success-banner { background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.25); color: #4ade80; border-radius: 8px; padding: .75rem 1rem; font-size: .85rem; display: flex; align-items: center; gap: .5rem; display: none; margin-bottom: 1rem; }
+    .upload-status-text { font-size: .8rem; color: var(--muted); }
+    .success-banner { background: rgba(26,122,60,.07); border: 1px solid rgba(26,122,60,.3); color: var(--green); padding: .8rem 1rem; font-size: .85rem; display: flex; align-items: center; gap: .5rem; display: none; margin-bottom: 1rem; }
 
     /* UPLOADED PHOTOS GRID */
     .uploaded-grid { columns: 3; column-gap: .5rem; margin-top: 1.5rem; }
     @media (min-width: 640px) { .uploaded-grid { columns: 4; } }
     @media (min-width: 900px) { .uploaded-grid { columns: 6; } }
-    .uploaded-photo { break-inside: avoid; margin-bottom: .5rem; position: relative; border-radius: 6px; overflow: hidden; background: var(--gray2); }
-    .uploaded-photo img { width: 100%; height: auto; display: block; }
+    .uploaded-photo { break-inside: avoid; margin-bottom: .5rem; position: relative; overflow: hidden; background: var(--paper-2); border: 1px solid var(--line); }
+    .uploaded-photo img, .uploaded-photo-media-wrap video { width: 100%; height: auto; display: block; }
     .uploaded-photo .del-btn {
-      position: absolute; top: .3rem; right: .3rem; background: rgba(0,0,0,.65); border: none;
-      color: #f87171; cursor: pointer; border-radius: 4px; padding: .25rem; display: none;
+      position: absolute; top: .3rem; right: .3rem; background: rgba(10,10,10,.7); border: none;
+      color: #fff; cursor: pointer; padding: .3rem; display: none;
       align-items: center; transition: background .15s;
     }
     .uploaded-photo:hover .del-btn { display: flex; }
-    .uploaded-photo .del-btn:hover { background: rgba(200,16,46,.6); color: #fff; }
+    .uploaded-photo .del-btn:hover { background: var(--red); }
 
     /* SPINNER */
     @keyframes spin { to { transform: rotate(360deg); } }
     .spin { animation: spin .8s linear infinite; }
     @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-    .shimmer { background: linear-gradient(90deg, var(--gray2) 25%, var(--gray3) 50%, var(--gray2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    .shimmer { background: linear-gradient(90deg, var(--paper-2) 25%, var(--line) 50%, var(--paper-2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
 
     /* TOAST */
     #toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: .5rem; }
-    .toast-item { background: var(--gray1); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; padding: .65rem 1rem; font-size: .82rem; color: var(--cream); display: flex; align-items: center; gap: .5rem; animation: slideIn .2s ease; max-width: 320px; }
-    .toast-item.success { border-color: rgba(34,197,94,.3); }
-    .toast-item.error { border-color: rgba(200,16,46,.3); color: #f87171; }
+    .toast-item { background: var(--ink); border: 1px solid var(--ink); padding: .7rem 1.1rem; font-size: .82rem; color: #fff; display: flex; align-items: center; gap: .5rem; animation: slideIn .2s ease; max-width: 320px; }
+    .toast-item.success { border-color: var(--green); }
+    .toast-item.error { border-color: var(--red); }
     @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
 
     @media (max-width: 500px) {
       .field-row { grid-template-columns: 1fr; }
@@ -270,7 +287,7 @@
       </div>
     </div>
     <div class="events-list" id="events-list">
-      <div style="text-align:center;padding:3rem;color:rgba(255,255,255,.2);">Carregant…</div>
+      <div style="text-align:center;padding:3rem;color:#8a8681;">Carregant…</div>
     </div>
   </div>
 
@@ -294,15 +311,15 @@
     </div>
 
     <div class="drop-zone" id="drop-zone">
-      <input type="file" id="file-input" accept="image/*" multiple>
+      <input type="file" id="file-input" accept="image/*,video/*" multiple>
       <div class="drop-zone-icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
         </svg>
       </div>
-      <p>Arrossega les fotos aquí o <span>selecciona-les</span></p>
-      <small>JPG, PNG, WebP · Fins a 25 MB per foto</small>
+      <p>Arrossega les fotos i vídeos aquí o <span>selecciona-les</span></p>
+      <small>JPG, PNG, WebP, MP4, MOV, WebM · Fins a 90 MB per fitxer · Els duplicats se salten automàticament</small>
     </div>
 
     <!-- ZIP upload -->
@@ -339,8 +356,8 @@
 
     <div id="uploaded-section" style="display:none">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;margin-top:1.5rem;">
-        <p style="font-size:.85rem;color:rgba(255,255,255,.4);">
-          Fotos pujades: <strong id="uploaded-count" style="color:var(--cream)">0</strong>
+        <p style="font-size:.85rem;color:#46433f;">
+          Fotos pujades: <strong id="uploaded-count" style="color:var(--ink)">0</strong>
         </p>
       </div>
       <div class="uploaded-grid" id="uploaded-grid"></div>
@@ -376,13 +393,13 @@
         <input class="field-input" type="text" id="ev-location" placeholder="Ex: Parc de les Glòries, Barcelona">
       </div>
       <div>
-        <label class="field-label">URL Àlbum Flickr <span style="color:rgba(255,255,255,.25);font-size:.68rem">(opcional)</span></label>
+        <label class="field-label">URL Àlbum Flickr <span style="color:#8a8681;font-size:.68rem">(opcional)</span></label>
         <input class="field-input" type="url" id="ev-flickr-url" placeholder="https://www.flickr.com/photos/.../albums/XXXXXXXXX">
-        <p style="font-size:.72rem;color:rgba(255,255,255,.2);margin-top:.3rem;">Omple si l'event té fotos a Flickr. Deixa buit per pujar fotos directament.</p>
+        <p style="font-size:.72rem;color:#8a8681;margin-top:.3rem;">Omple si l'event té fotos a Flickr. Deixa buit per pujar fotos directament.</p>
       </div>
       <div style="display:flex;align-items:center;gap:.75rem;">
         <input type="checkbox" id="ev-dl" checked style="accent-color:var(--red);width:15px;height:15px;">
-        <label for="ev-dl" style="font-size:.85rem;color:rgba(255,255,255,.6);cursor:pointer;">Permetre descàrrega de fotos</label>
+        <label for="ev-dl" style="font-size:.85rem;color:#46433f;cursor:pointer;">Permetre descàrrega de fotos</label>
       </div>
     </div>
     <div id="modal-error" class="login-error"></div>
@@ -406,19 +423,19 @@
     <div class="field-group">
       <div style="display:flex;align-items:center;gap:.75rem;padding:.5rem 0;">
         <input type="checkbox" id="cfg-require" checked style="accent-color:var(--red);width:16px;height:16px;cursor:pointer;">
-        <label for="cfg-require" style="font-size:.85rem;color:rgba(255,255,255,.7);cursor:pointer;">
+        <label for="cfg-require" style="font-size:.85rem;color:#46433f;cursor:pointer;">
           Requerir accés (PIN o subscripció) per veure la galeria
         </label>
       </div>
       <div>
         <label class="field-label">Codi d'accés (PIN)</label>
         <input class="field-input" type="text" id="cfg-pin" placeholder="Ex: 1965" maxlength="20">
-        <p style="font-size:.72rem;color:rgba(255,255,255,.25);margin-top:.3rem;">Comparteix-lo amb socis i famílies del club.</p>
+        <p style="font-size:.72rem;color:#8a8681;margin-top:.3rem;">Comparteix-lo amb socis i famílies del club.</p>
       </div>
       <div>
         <label class="field-label">Correu per rebre subscripcions newsletter</label>
         <input class="field-input" type="email" id="cfg-email" placeholder="Ex: info@cbgrupbarna.info">
-        <p style="font-size:.72rem;color:rgba(255,255,255,.25);margin-top:.3rem;">S'usa FormSubmit.co — el primer correu rebrà una confirmació d'activació.</p>
+        <p style="font-size:.72rem;color:#8a8681;margin-top:.3rem;">S'usa FormSubmit.co — el primer correu rebrà una confirmació d'activació.</p>
       </div>
     </div>
     <div id="settings-error" class="login-error"></div>
@@ -448,6 +465,38 @@ let ghToken = null;
 let events = [];
 let currentEvent = null;
 let uploadQueue = [];
+let existingShas = new Set();
+let shasReadyPromise = Promise.resolve();
+
+// ── MEDIA HELPERS ──
+const MAX_FILE_SIZE = 90 * 1024 * 1024; // 90 MB
+const VIDEO_EXT_RE = /\.(mp4|mov|webm|m4v|avi)$/i;
+const MEDIA_EXT_RE = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?|mp4|mov|webm|m4v|avi)$/i;
+
+function isVideoFile(name) { return VIDEO_EXT_RE.test(name); }
+function isMediaFile(f) { return f.type.startsWith('image/') || f.type.startsWith('video/') || MEDIA_EXT_RE.test(f.name); }
+
+// Git's blob SHA-1: sha1("blob " + byteLength + "\0" + content). Same value
+// GitHub returns as `sha` for a file with identical content, so it doubles
+// as a free content-hash for duplicate detection.
+async function gitBlobSha1(file) {
+  const buf = await file.arrayBuffer();
+  const header = new TextEncoder().encode(`blob ${buf.byteLength}\0`);
+  const combined = new Uint8Array(header.byteLength + buf.byteLength);
+  combined.set(header, 0);
+  combined.set(new Uint8Array(buf), header.byteLength);
+  const digest = await crypto.subtle.digest('SHA-1', combined);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function loadExistingShas(ev) {
+  try {
+    const data = await gh(`/repos/${OWNER}/${REPO}/contents/fotos/uploads/${ev.id}?ref=${BRANCH}`);
+    existingShas = new Set((Array.isArray(data) ? data : []).filter(f => f.type === 'file').map(f => f.sha));
+  } catch (e) {
+    existingShas = new Set();
+  }
+}
 
 // ── AUTH ──
 function getToken() { return localStorage.getItem('gh_admin_token'); }
@@ -548,6 +597,8 @@ function showEventsPanel() {
 function showUploadPanel(ev) {
   currentEvent = ev;
   uploadQueue = [];
+  existingShas = new Set();
+  shasReadyPromise = loadExistingShas(ev);
   document.getElementById('events-panel').style.display = 'none';
   document.getElementById('upload-panel').style.display = 'block';
   document.getElementById('upload-queue').innerHTML = '';
@@ -565,12 +616,12 @@ function showUploadPanel(ev) {
     section.style.display = 'block';
     document.getElementById('uploaded-count').textContent = '—';
     document.getElementById('uploaded-grid').innerHTML = `
-      <div style="grid-column:1/-1;padding:1.5rem;text-align:center;color:rgba(255,255,255,.35);font-size:.85rem;">
+      <div style="grid-column:1/-1;padding:1.5rem;text-align:center;color:#46433f;font-size:.85rem;">
         <p>Aquest event mostra un àlbum de Flickr.</p>
         <p style="margin-top:.5rem">
           <a href="https://www.flickr.com/photos/202771466@N06/albums/${ev.flickr_album_id}"
              target="_blank" rel="noopener"
-             style="color:rgba(200,16,46,.7);text-decoration:none;">
+             style="color:#E31E24;text-decoration:none;">
             Veure l'àlbum a Flickr →
           </a>
         </p>
@@ -658,7 +709,7 @@ async function saveEvents() {
 function renderEventsList() {
   const list = document.getElementById('events-list');
   if (!events.length) {
-    list.innerHTML = `<div style="text-align:center;padding:3rem;color:rgba(255,255,255,.2);">
+    list.innerHTML = `<div style="text-align:center;padding:3rem;color:#8a8681;">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:.75rem;opacity:.3">
         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
         <circle cx="12" cy="13" r="4"/>
@@ -679,7 +730,7 @@ function renderEventsList() {
     row.innerHTML = `
       ${coverUrl
         ? `<img class="event-thumb-mini" src="${coverUrl}" alt="${ev.title}" loading="lazy">`
-        : `<div class="event-thumb-empty"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`}
+        : `<div class="event-thumb-empty"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b5b0a9" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`}
       <div class="event-row-info">
         <div class="event-row-title">${ev.title}</div>
         <div class="event-row-meta">
@@ -687,8 +738,8 @@ function renderEventsList() {
           ${ev.season ? `<span class="season-chip">${ev.season}</span>` : ''}
           ${ev.location ? `<span>${ev.location}</span>` : ''}
           ${photoCount !== null
-            ? `<span style="color:rgba(200,16,46,.6)">${photoCount} foto${photoCount !== 1 ? 's' : ''}</span>`
-            : `<span style="color:rgba(200,16,46,.6)">Flickr</span>`}
+            ? `<span style="color:#E31E24">${photoCount} foto${photoCount !== 1 ? 's' : ''}</span>`
+            : `<span style="color:#E31E24">Flickr</span>`}
         </div>
       </div>
       <div class="event-row-actions">
@@ -822,22 +873,21 @@ async function handleZip(zipFile) {
       throw new Error('JSZip no carregat. Refresca la pàgina i torna a intentar-ho.');
     }
     const zip = await JSZip.loadAsync(zipFile);
-    const imageExts = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?)$/i;
     const entries = [];
 
     zip.forEach((relativePath, entry) => {
-      if (!entry.dir && imageExts.test(relativePath) && !relativePath.startsWith('__MACOSX')) {
+      if (!entry.dir && MEDIA_EXT_RE.test(relativePath) && !relativePath.startsWith('__MACOSX')) {
         entries.push({ path: relativePath, entry });
       }
     });
 
     if (!entries.length) {
       progressEl.classList.remove('active');
-      toast('El ZIP no conté imatges reconegudes (JPG, PNG, WebP…)', 'error');
+      toast('El ZIP no conté fotos ni vídeos reconeguts (JPG, PNG, WebP, MP4, MOV, WebM…)', 'error');
       return;
     }
 
-    progressText.textContent = `Descomprimint ${entries.length} imatge${entries.length !== 1 ? 's' : ''}…`;
+    progressText.textContent = `Descomprimint ${entries.length} fitxer${entries.length !== 1 ? 's' : ''}…`;
 
     const files = [];
     for (let i = 0; i < entries.length; i++) {
@@ -845,7 +895,10 @@ async function handleZip(zipFile) {
       progressText.textContent = `Descomprimint ${i + 1} / ${entries.length}…`;
       const blob = await entry.async('blob');
       const name = path.split('/').pop();
-      const mimeMap = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', heic: 'image/heic', bmp: 'image/bmp', tif: 'image/tiff', tiff: 'image/tiff' };
+      const mimeMap = {
+        jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', heic: 'image/heic', bmp: 'image/bmp', tif: 'image/tiff', tiff: 'image/tiff',
+        mp4: 'video/mp4', mov: 'video/quicktime', webm: 'video/webm', m4v: 'video/x-m4v', avi: 'video/x-msvideo',
+      };
       const ext = name.split('.').pop().toLowerCase();
       const type = mimeMap[ext] || 'image/jpeg';
       files.push(new File([blob], name, { type }));
@@ -853,7 +906,7 @@ async function handleZip(zipFile) {
 
     progressEl.classList.remove('active');
     addFiles(files);
-    toast(`ZIP descomprimit: ${files.length} imatge${files.length !== 1 ? 's' : ''} afegides a la cua`, 'success');
+    toast(`ZIP descomprimit: ${files.length} fitxer${files.length !== 1 ? 's' : ''} afegits a la cua`, 'success');
   } catch (e) {
     progressEl.classList.remove('active');
     toast('Error llegint ZIP: ' + e.message, 'error');
@@ -861,17 +914,35 @@ async function handleZip(zipFile) {
 }
 
 // ── FILE UPLOAD ──
-function addFiles(fileList) {
-  const files = Array.from(fileList).filter(f => f.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name));
-  if (!files.length) return;
+async function addFiles(fileList) {
+  const candidates = Array.from(fileList).filter(isMediaFile);
+  if (!candidates.length) return;
 
-  files.forEach(file => {
-    uploadQueue.push({ file, status: 'pending', progress: 0 });
-  });
+  await shasReadyPromise;
+
+  let dupCount = 0, oversizeCount = 0;
+  for (const file of candidates) {
+    if (file.size > MAX_FILE_SIZE) { oversizeCount++; continue; }
+
+    let sha = null;
+    try { sha = await gitBlobSha1(file); } catch (e) { /* SubtleCrypto unavailable: skip dedup for this file */ }
+
+    const isDup = sha && (existingShas.has(sha) || uploadQueue.some(q => q.sha === sha));
+    uploadQueue.push({ file, sha, status: isDup ? 'duplicate' : 'pending', progress: 0 });
+    if (isDup) dupCount++;
+  }
 
   renderUploadQueue();
-  document.getElementById('upload-actions').style.display = 'flex';
-  document.getElementById('upload-btn-text').textContent = `Pujar ${uploadQueue.filter(f=>f.status==='pending').length} foto${uploadQueue.filter(f=>f.status==='pending').length !== 1 ? 's' : ''}`;
+  const pendingCount = uploadQueue.filter(f => f.status === 'pending').length;
+  document.getElementById('upload-actions').style.display = uploadQueue.length ? 'flex' : 'none';
+  const btn = document.getElementById('upload-btn');
+  btn.disabled = pendingCount === 0;
+  document.getElementById('upload-btn-text').textContent = pendingCount
+    ? `Pujar ${pendingCount} fitxer${pendingCount !== 1 ? 's' : ''}`
+    : 'Res per pujar';
+
+  if (dupCount) toast(`${dupCount} fitxer${dupCount !== 1 ? 's' : ''} ja existia${dupCount !== 1 ? 'n' : ''} a l'esdeveniment i s'ha${dupCount !== 1 ? 'n' : ''} omès`, 'error');
+  if (oversizeCount) toast(`${oversizeCount} fitxer${oversizeCount !== 1 ? 's' : ''} superava${oversizeCount !== 1 ? 'n' : ''} els 90 MB i s'ha${oversizeCount !== 1 ? 'n' : ''} omès`, 'error');
 }
 
 function renderUploadQueue() {
@@ -879,23 +950,29 @@ function renderUploadQueue() {
   container.innerHTML = '';
   uploadQueue.forEach((item, i) => {
     const div = document.createElement('div');
-    div.className = 'upload-item';
+    div.className = 'upload-item' + (item.status === 'duplicate' ? ' is-duplicate' : '');
     div.id = `qi-${i}`;
 
     const preview = URL.createObjectURL(item.file);
     const size = item.file.size < 1024*1024
       ? `${(item.file.size/1024).toFixed(0)} KB`
       : `${(item.file.size/1024/1024).toFixed(1)} MB`;
+    const isVideo = isVideoFile(item.file.name);
 
     const statusHtml = {
       pending: `<span class="upload-item-status status-pending"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Pendent</span>`,
       uploading: `<span class="upload-item-status status-uploading"><svg class="spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Pujant…</span>`,
       done: `<span class="upload-item-status status-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Pujat</span>`,
       error: `<span class="upload-item-status status-error"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Error</span>`,
+      duplicate: `<span class="upload-item-status status-duplicate"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Ja existeix</span>`,
     }[item.status];
 
+    const thumbHtml = isVideo
+      ? `<div class="upload-item-thumb-wrap"><video class="upload-item-thumb" src="${preview}" muted preload="metadata"></video><div class="video-thumb-badge"><svg width="9" height="9" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
+      : `<img class="upload-item-thumb" src="${preview}" alt="">`;
+
     div.innerHTML = `
-      <img class="upload-item-thumb" src="${preview}" alt="">
+      ${thumbHtml}
       <div>
         <div class="upload-item-name">${item.file.name}</div>
         <div class="upload-item-size">${size}</div>
@@ -927,12 +1004,13 @@ async function uploadAll() {
     try {
       const filename = await uploadPhoto(item.file, i);
       item.status = 'done';
+      if (item.sha) existingShas.add(item.sha);
 
       // Add to event
       const ev = currentEvent;
       if (!ev.photos) ev.photos = [];
       ev.photos.push(filename);
-      if (!ev.cover) ev.cover = filename;
+      if (!ev.cover && !isVideoFile(filename)) ev.cover = filename;
 
       // Update events index entry
       const idx = events.findIndex(e => e.id === ev.id);
@@ -958,15 +1036,14 @@ async function uploadAll() {
   }
 
   btn.disabled = false;
-  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> <span id="upload-btn-text">Pujar fotos</span>`;
+  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> <span id="upload-btn-text">Pujar fotos i vídeos</span>`;
 
   document.getElementById('upload-status').textContent = '';
-  document.getElementById('upload-actions').style.display = 'none';
 
   if (done > 0) {
     const banner = document.getElementById('success-banner');
     const text = document.getElementById('success-text');
-    text.textContent = `${done} foto${done !== 1 ? 's' : ''} pujada${done !== 1 ? 's' : ''} correctament! Visibles a cbgrupbarna.info/fotos/ en 1-2 minuts.`;
+    text.textContent = `${done} fitxer${done !== 1 ? 's' : ''} pujat${done !== 1 ? 's' : ''} correctament! Visibles a cbgrupbarna.info/fotos/ en 1-2 minuts.`;
     banner.style.display = 'flex';
     uploadQueue = uploadQueue.filter(f => f.status !== 'done');
     renderUploadQueue();
@@ -974,7 +1051,10 @@ async function uploadAll() {
     renderEventsList();
   }
 
-  if (errors > 0) toast(`${errors} foto${errors !== 1 ? 's' : ''} no s'han pogut pujar`, 'error');
+  document.getElementById('upload-actions').style.display = uploadQueue.length ? 'flex' : 'none';
+  btn.disabled = uploadQueue.filter(f => f.status === 'pending').length === 0;
+
+  if (errors > 0) toast(`${errors} fitxer${errors !== 1 ? 's' : ''} no s'ha${errors !== 1 ? 'n' : ''} pogut pujar`, 'error');
 }
 
 async function uploadPhoto(file, queueIndex) {
@@ -1032,9 +1112,12 @@ function renderUploadedPhotos(ev) {
     const wrapper = document.createElement('div');
     wrapper.className = 'uploaded-photo';
     const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`;
+    const mediaHtml = isVideoFile(filename)
+      ? `<div class="uploaded-photo-media-wrap"><video src="${url}" muted preload="metadata"></video><div class="video-thumb-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
+      : `<img src="${url}" alt="Foto ${i+1}" loading="lazy">`;
     wrapper.innerHTML = `
-      <img src="${url}" alt="Foto ${i+1}" loading="lazy">
-      <button class="del-btn" title="Eliminar foto" onclick="deleteUploadedPhoto('${ev.id}', '${filename}', ${i})">
+      ${mediaHtml}
+      <button class="del-btn" title="Eliminar" onclick="deleteUploadedPhoto('${ev.id}', '${filename}', ${i})">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 6 6 18M6 6l12 12"/>
         </svg>
@@ -1052,11 +1135,12 @@ async function deleteUploadedPhoto(eventId, filename, photoIndex) {
     const ev = events.find(e => e.id === eventId);
     if (ev) {
       ev.photos.splice(photoIndex, 1);
-      if (ev.cover === filename) ev.cover = ev.photos[0] || null;
+      if (ev.cover === filename) ev.cover = ev.photos.find(p => !isVideoFile(p)) || null;
       await saveEvents();
       if (currentEvent && currentEvent.id === eventId) {
         currentEvent = ev;
         renderUploadedPhotos(ev);
+        shasReadyPromise = loadExistingShas(ev); // re-sync so the same file can be re-uploaded
       }
       renderEventsList();
     }
