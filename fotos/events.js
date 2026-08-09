@@ -15,7 +15,11 @@ window.GALERIA_EVENTS = [
       "1786285987638-gyt6r.jpeg",
       "1786285990692-fuuap.jpeg",
       "1786285993501-6m7ev.jpeg",
-      "1786285996944-8kfb9.jpeg"
+      "1786285996944-8kfb9.jpeg",
+      "1786287100619-z4010.jpg",
+      "1786287102303-axvxn.jpg",
+      "1786287103943-a9h06.jpg",
+      "1786287105577-14ktm.jpg"
     ],
     "allow_download": true,
     "source": "repo"
