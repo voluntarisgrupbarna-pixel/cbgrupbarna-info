@@ -604,7 +604,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       </div>
       <div class="g-box" style="display:none">
         <h3>🤖 Robot de la federació</h3>
-        <p>Hi ha un robot programat (GitHub Actions · <b>update-partits</b>) que cada dilluns intenta baixar el calendari mensual del club de <b>basquetcatala.cat/partits/calendari_club_mensual/24</b> i actualitzar-ho tot sol. Si la federació el bloqueja, aquesta pantalla de PDF és el pla B garantit.</p>
+        <p>Hi ha un robot programat (GitHub Actions · <b>update-partits</b>) que es connecta <b>cada dia</b> al calendari del club a <b>basquetcatala.cat/partits/calendari_club_global/24</b> i, els caps de setmana, també cada 20 minuts durant el matí i la tarda per intentar recollir els resultats abans. Compara hores, pistes, dates i resultats amb el que ja hi ha i, si detecta un canvi, marca la fitxa afectada amb un avís "MODIFICAT" durant 7 dies i ho registra perquè aparegui a la pestanya Jornada. Si la federació el bloqueja, aquesta pantalla de PDF és el pla B garantit.</p>
       </div>
       <div class="g-box">
         <h3>🧹 Manteniment</h3>
@@ -813,6 +813,30 @@ function dadesRival(p, m) {
     ${ig ? `<div style="margin-top:6px"><a href="https://instagram.com/${ig.instagram.slice(1)}" target="_blank" rel="noopener" style="color:var(--red-ink);text-decoration:none;font-size:11.5px">📸 ${ig.instagram} · ${(ig.seguidors/1000).toFixed(1).replace('.',',')}K seguidors</a></div>` : ''}
   </div>`;
 }
+/* Previsió d'un partit encara no jugat: estimació estadística transparent
+   (rendiment casa/fora de la temporada + historial directe contra el rival),
+   MAI una "IA" de caixa negra — i només si la mostra ho aguanta. */
+function previsioPartit(p, m) {
+  if (p.jugat) return '';
+  const rival = p.casa ? p.visitant : p.local;
+  const a = analitzaEquip(p.equipId, m);
+  const previs = m.partits.filter(x => x.equipId===p.equipId && x.jugat && x.data < p.data
+    && (x.local===rival || x.visitant===rival));
+  const ctx = p.casa ? a.casa : a.fora;
+  const h2h = previs.length >= 2 ? previs.filter(x=>x.res==='W').length / previs.length : null;
+  const ambient = ctx.pj >= MIN_MOSTRA ? ctx.w/ctx.pj : (a.pj >= MIN_MOSTRA ? a.w/a.pj : null);
+  if (h2h == null && ambient == null) return '';
+  const prob = (h2h != null && ambient != null) ? h2h*0.6 + ambient*0.4 : (h2h != null ? h2h : ambient);
+  const pct = Math.round(prob*100);
+  const etiqueta = pct >= 65 ? 'favorits' : pct <= 35 ? 'partit costerut' : 'partit igualat';
+  const base = h2h != null
+    ? `l'historial contra ${rival} i el rendiment ${p.casa?'a casa':'fora'} aquesta temporada`
+    : `el rendiment ${p.casa?'a casa':'fora'} aquesta temporada`;
+  return `<div style="margin-top:8px;padding:8px 10px;background:var(--panel2);border-radius:10px;font-size:11.5px;line-height:1.5">
+    🔮 <b>Previsió: ${pct}% de victòria</b> · ${etiqueta}
+    <br><span style="color:var(--muted)">Estimació a partir de ${base} — dades pròpies del club, no una predicció garantida.</span>
+  </div>`;
+}
 function avisModificacio(p) {
   if (!p.avis || p.avis.expira < todayStr()) return '';
   return `<div style="margin-top:8px;padding:8px 10px;background:rgba(230,51,41,.10);border:1px solid rgba(230,51,41,.30);border-radius:10px;font-size:11.5px;color:var(--red-ink)">
@@ -852,6 +876,7 @@ function matchCard(p, m, showDate) {
     <div class="m-cat">${p.categoria}</div>
     ${avisModificacio(p)}
     ${dadesRival(p, m)}
+    ${previsioPartit(p, m)}
     ${editRow}
   </div>`;
 }
