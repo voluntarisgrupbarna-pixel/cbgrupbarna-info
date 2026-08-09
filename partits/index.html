@@ -85,12 +85,21 @@ h1 span { color: var(--red); }
 /* ===== TABS ===== */
 .tabs {
   position:sticky; top:0; z-index:50;
-  display:flex; gap:6px; padding:10px 12px; overflow-x:auto;
+  display:flex; gap:6px; padding:10px 12px; overflow-x:auto; scroll-behavior:smooth;
   background: rgba(244,241,236,0.94); backdrop-filter: blur(10px);
   border-bottom:1px solid var(--border);
   scrollbar-width:none;
+  /* a tauleta/mòbil (on encara no caben totes les pestanyes) s'indica amb un
+     esvaïment que hi ha més contingut a la dreta cap on es pot lliscar */
+  mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
 }
 .tabs::-webkit-scrollbar { display:none; }
+@media (min-width: 900px) {
+  /* al ser prou ample per encabir-les totes, centrem la barra en comptes de
+     deixar-la enganxada a l'esquerra amb un buit enorme a la dreta */
+  .tabs { justify-content:center; mask-image:none; -webkit-mask-image:none; }
+}
 .tab {
   flex-shrink:0; padding:9px 16px; border-radius:99px;
   font-family:'Anton', sans-serif; font-size:16px; letter-spacing:1.2px;
@@ -137,17 +146,18 @@ h1 span { color: var(--red); }
 /* ===== SELECTOR CAP DE SETMANA ===== */
 .wk-nav { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
 .wk-btn {
-  width:42px; height:42px; border-radius:12px; flex-shrink:0;
+  width:38px; height:38px; border-radius:12px; flex-shrink:0;
   background:var(--panel); border:1px solid var(--border);
   font-size:18px; color:white;
 }
 .wk-btn:disabled { opacity:.25; }
-.wk-sel { flex:1; position:relative; }
+.wk-sel { flex:1; position:relative; min-width:0; }
 .wk-sel select {
   width:100%; appearance:none; text-align:center;
   background:var(--panel); border:1px solid var(--border); border-radius:12px;
-  color:var(--ink); font-family:'Anton', sans-serif; font-size:19px; letter-spacing:1px;
-  padding:10px 12px;
+  color:var(--ink); font-family:'Anton', sans-serif; font-size:clamp(12px, 5vw, 19px); letter-spacing:.2px;
+  text-overflow:ellipsis; overflow:hidden; white-space:nowrap;
+  padding:10px 6px;
 }
 .wk-today {
   width:100%; margin-bottom:12px; padding:8px; border-radius:10px;
@@ -2183,7 +2193,11 @@ function showCaption(tpl, p, e, rinfo, m) {
 
 /* ---------- navegació ---------- */
 function showView(v) {
-  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
+  document.querySelectorAll('.tab').forEach(t=>{
+    const on = t.dataset.v===v;
+    t.classList.toggle('on', on);
+    if (on) t.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+  });
   document.querySelectorAll('.bn-item[data-v]').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
 }
