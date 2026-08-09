@@ -93,7 +93,24 @@ abans d'escriure el fitxer (`python3 scripts/qr.py` sense arguments les executa)
 
 ---
 
-## 5. Paràmetres d'URL útils per a la difusió
+## 5. Cartell imprès i imatge per a xarxes
+
+Dins de `print/`:
+
+| Fitxer | Què és |
+|---|---|
+| `cartell-opina-a4.pdf` | **Cartell A4 llest per imprimir.** Per al taulell del pavelló, el vestidor, el bar i la porta d'entrada. |
+| `cartell-a4.html` | Font editable del cartell. Obre'l al navegador i **Ctrl/Cmd + P → Desar com a PDF**, mida A4, marges "cap" i marcant "Gràfics de fons". Els textos a canviar estan marcats amb `<!-- text -->` (per fer-ne la versió en castellà, per exemple). |
+| `og-1200x630.html` | Font de la imatge de previsualització. |
+| `BigShoulders-Bold.ttf` | Tipografia condensada del cartell, incrustada perquè imprimeixi igual a qualsevol ordinador (llicència SIL OFL, inclosa). Substitueix Bebas Neue, que no es pot redistribuir dins del repositori. |
+
+`og-opina.png` (1200×630) és la imatge que apareix quan s'envia l'enllaç per
+WhatsApp, Telegram, Instagram o correu. Compta tant com la landing: és el que
+decideix si obren l'enllaç. Si canvies el titular de la pàgina, canvia-la també.
+
+---
+
+## 6. Paràmetres d'URL útils per a la difusió
 
 Serveixen per saber quin canal funciona, a Google Analytics (esdeveniment
 `opina_source`):
@@ -110,7 +127,7 @@ La pàgina detecta sola l'idioma del navegador i recorda l'últim triat.
 
 ---
 
-## 6. Regla que no es pot saltar
+## 7. Regla que no es pot saltar
 
 No es reparteixen textos de ressenya escrits pel club perquè les famílies els
 copiïn i enganxin. Google detecta les ressenyes calcades, les esborra i pot
