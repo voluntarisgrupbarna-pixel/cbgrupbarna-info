@@ -155,8 +155,17 @@
     .status-uploading { color: #1d6fd6; }
     .status-done { color: var(--green); }
     .status-error { color: var(--red); }
+    .status-duplicate { color: #b8860b; }
+    .upload-item.is-duplicate { opacity: .55; }
     .progress-bar { height: 2px; background: var(--line); margin-top: .3rem; overflow: hidden; }
     .progress-fill { height: 100%; background: var(--red); transition: width .3s; }
+    .video-thumb-badge {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 18px; height: 18px; background: rgba(10,10,10,.55); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; pointer-events: none;
+    }
+    .upload-item-thumb-wrap { position: relative; width: 52px; height: 52px; }
+    .uploaded-photo-media-wrap { position: relative; }
 
     /* UPLOAD ACTIONS */
     .upload-actions { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
@@ -171,7 +180,7 @@
     @media (min-width: 640px) { .uploaded-grid { columns: 4; } }
     @media (min-width: 900px) { .uploaded-grid { columns: 6; } }
     .uploaded-photo { break-inside: avoid; margin-bottom: .5rem; position: relative; overflow: hidden; background: var(--paper-2); border: 1px solid var(--line); }
-    .uploaded-photo img { width: 100%; height: auto; display: block; }
+    .uploaded-photo img, .uploaded-photo-media-wrap video { width: 100%; height: auto; display: block; }
     .uploaded-photo .del-btn {
       position: absolute; top: .3rem; right: .3rem; background: rgba(10,10,10,.7); border: none;
       color: #fff; cursor: pointer; padding: .3rem; display: none;
@@ -302,15 +311,15 @@
     </div>
 
     <div class="drop-zone" id="drop-zone">
-      <input type="file" id="file-input" accept="image/*" multiple>
+      <input type="file" id="file-input" accept="image/*,video/*" multiple>
       <div class="drop-zone-icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
         </svg>
       </div>
-      <p>Arrossega les fotos aquí o <span>selecciona-les</span></p>
-      <small>JPG, PNG, WebP · Fins a 25 MB per foto</small>
+      <p>Arrossega les fotos i vídeos aquí o <span>selecciona-les</span></p>
+      <small>JPG, PNG, WebP, MP4, MOV, WebM · Fins a 90 MB per fitxer · Els duplicats se salten automàticament</small>
     </div>
 
     <!-- ZIP upload -->
@@ -456,6 +465,38 @@ let ghToken = null;
 let events = [];
 let currentEvent = null;
 let uploadQueue = [];
+let existingShas = new Set();
+let shasReadyPromise = Promise.resolve();
+
+// ── MEDIA HELPERS ──
+const MAX_FILE_SIZE = 90 * 1024 * 1024; // 90 MB
+const VIDEO_EXT_RE = /\.(mp4|mov|webm|m4v|avi)$/i;
+const MEDIA_EXT_RE = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?|mp4|mov|webm|m4v|avi)$/i;
+
+function isVideoFile(name) { return VIDEO_EXT_RE.test(name); }
+function isMediaFile(f) { return f.type.startsWith('image/') || f.type.startsWith('video/') || MEDIA_EXT_RE.test(f.name); }
+
+// Git's blob SHA-1: sha1("blob " + byteLength + "\0" + content). Same value
+// GitHub returns as `sha` for a file with identical content, so it doubles
+// as a free content-hash for duplicate detection.
+async function gitBlobSha1(file) {
+  const buf = await file.arrayBuffer();
+  const header = new TextEncoder().encode(`blob ${buf.byteLength}\0`);
+  const combined = new Uint8Array(header.byteLength + buf.byteLength);
+  combined.set(header, 0);
+  combined.set(new Uint8Array(buf), header.byteLength);
+  const digest = await crypto.subtle.digest('SHA-1', combined);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function loadExistingShas(ev) {
+  try {
+    const data = await gh(`/repos/${OWNER}/${REPO}/contents/fotos/uploads/${ev.id}?ref=${BRANCH}`);
+    existingShas = new Set((Array.isArray(data) ? data : []).filter(f => f.type === 'file').map(f => f.sha));
+  } catch (e) {
+    existingShas = new Set();
+  }
+}
 
 // ── AUTH ──
 function getToken() { return localStorage.getItem('gh_admin_token'); }
@@ -556,6 +597,8 @@ function showEventsPanel() {
 function showUploadPanel(ev) {
   currentEvent = ev;
   uploadQueue = [];
+  existingShas = new Set();
+  shasReadyPromise = loadExistingShas(ev);
   document.getElementById('events-panel').style.display = 'none';
   document.getElementById('upload-panel').style.display = 'block';
   document.getElementById('upload-queue').innerHTML = '';
@@ -830,22 +873,21 @@ async function handleZip(zipFile) {
       throw new Error('JSZip no carregat. Refresca la pàgina i torna a intentar-ho.');
     }
     const zip = await JSZip.loadAsync(zipFile);
-    const imageExts = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?)$/i;
     const entries = [];
 
     zip.forEach((relativePath, entry) => {
-      if (!entry.dir && imageExts.test(relativePath) && !relativePath.startsWith('__MACOSX')) {
+      if (!entry.dir && MEDIA_EXT_RE.test(relativePath) && !relativePath.startsWith('__MACOSX')) {
         entries.push({ path: relativePath, entry });
       }
     });
 
     if (!entries.length) {
       progressEl.classList.remove('active');
-      toast('El ZIP no conté imatges reconegudes (JPG, PNG, WebP…)', 'error');
+      toast('El ZIP no conté fotos ni vídeos reconeguts (JPG, PNG, WebP, MP4, MOV, WebM…)', 'error');
       return;
     }
 
-    progressText.textContent = `Descomprimint ${entries.length} imatge${entries.length !== 1 ? 's' : ''}…`;
+    progressText.textContent = `Descomprimint ${entries.length} fitxer${entries.length !== 1 ? 's' : ''}…`;
 
     const files = [];
     for (let i = 0; i < entries.length; i++) {
@@ -853,7 +895,10 @@ async function handleZip(zipFile) {
       progressText.textContent = `Descomprimint ${i + 1} / ${entries.length}…`;
       const blob = await entry.async('blob');
       const name = path.split('/').pop();
-      const mimeMap = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', heic: 'image/heic', bmp: 'image/bmp', tif: 'image/tiff', tiff: 'image/tiff' };
+      const mimeMap = {
+        jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', heic: 'image/heic', bmp: 'image/bmp', tif: 'image/tiff', tiff: 'image/tiff',
+        mp4: 'video/mp4', mov: 'video/quicktime', webm: 'video/webm', m4v: 'video/x-m4v', avi: 'video/x-msvideo',
+      };
       const ext = name.split('.').pop().toLowerCase();
       const type = mimeMap[ext] || 'image/jpeg';
       files.push(new File([blob], name, { type }));
@@ -861,7 +906,7 @@ async function handleZip(zipFile) {
 
     progressEl.classList.remove('active');
     addFiles(files);
-    toast(`ZIP descomprimit: ${files.length} imatge${files.length !== 1 ? 's' : ''} afegides a la cua`, 'success');
+    toast(`ZIP descomprimit: ${files.length} fitxer${files.length !== 1 ? 's' : ''} afegits a la cua`, 'success');
   } catch (e) {
     progressEl.classList.remove('active');
     toast('Error llegint ZIP: ' + e.message, 'error');
@@ -869,17 +914,35 @@ async function handleZip(zipFile) {
 }
 
 // ── FILE UPLOAD ──
-function addFiles(fileList) {
-  const files = Array.from(fileList).filter(f => f.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name));
-  if (!files.length) return;
+async function addFiles(fileList) {
+  const candidates = Array.from(fileList).filter(isMediaFile);
+  if (!candidates.length) return;
 
-  files.forEach(file => {
-    uploadQueue.push({ file, status: 'pending', progress: 0 });
-  });
+  await shasReadyPromise;
+
+  let dupCount = 0, oversizeCount = 0;
+  for (const file of candidates) {
+    if (file.size > MAX_FILE_SIZE) { oversizeCount++; continue; }
+
+    let sha = null;
+    try { sha = await gitBlobSha1(file); } catch (e) { /* SubtleCrypto unavailable: skip dedup for this file */ }
+
+    const isDup = sha && (existingShas.has(sha) || uploadQueue.some(q => q.sha === sha));
+    uploadQueue.push({ file, sha, status: isDup ? 'duplicate' : 'pending', progress: 0 });
+    if (isDup) dupCount++;
+  }
 
   renderUploadQueue();
-  document.getElementById('upload-actions').style.display = 'flex';
-  document.getElementById('upload-btn-text').textContent = `Pujar ${uploadQueue.filter(f=>f.status==='pending').length} foto${uploadQueue.filter(f=>f.status==='pending').length !== 1 ? 's' : ''}`;
+  const pendingCount = uploadQueue.filter(f => f.status === 'pending').length;
+  document.getElementById('upload-actions').style.display = uploadQueue.length ? 'flex' : 'none';
+  const btn = document.getElementById('upload-btn');
+  btn.disabled = pendingCount === 0;
+  document.getElementById('upload-btn-text').textContent = pendingCount
+    ? `Pujar ${pendingCount} fitxer${pendingCount !== 1 ? 's' : ''}`
+    : 'Res per pujar';
+
+  if (dupCount) toast(`${dupCount} fitxer${dupCount !== 1 ? 's' : ''} ja existia${dupCount !== 1 ? 'n' : ''} a l'esdeveniment i s'ha${dupCount !== 1 ? 'n' : ''} omès`, 'error');
+  if (oversizeCount) toast(`${oversizeCount} fitxer${oversizeCount !== 1 ? 's' : ''} superava${oversizeCount !== 1 ? 'n' : ''} els 90 MB i s'ha${oversizeCount !== 1 ? 'n' : ''} omès`, 'error');
 }
 
 function renderUploadQueue() {
@@ -887,23 +950,29 @@ function renderUploadQueue() {
   container.innerHTML = '';
   uploadQueue.forEach((item, i) => {
     const div = document.createElement('div');
-    div.className = 'upload-item';
+    div.className = 'upload-item' + (item.status === 'duplicate' ? ' is-duplicate' : '');
     div.id = `qi-${i}`;
 
     const preview = URL.createObjectURL(item.file);
     const size = item.file.size < 1024*1024
       ? `${(item.file.size/1024).toFixed(0)} KB`
       : `${(item.file.size/1024/1024).toFixed(1)} MB`;
+    const isVideo = isVideoFile(item.file.name);
 
     const statusHtml = {
       pending: `<span class="upload-item-status status-pending"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Pendent</span>`,
       uploading: `<span class="upload-item-status status-uploading"><svg class="spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Pujant…</span>`,
       done: `<span class="upload-item-status status-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Pujat</span>`,
       error: `<span class="upload-item-status status-error"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Error</span>`,
+      duplicate: `<span class="upload-item-status status-duplicate"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Ja existeix</span>`,
     }[item.status];
 
+    const thumbHtml = isVideo
+      ? `<div class="upload-item-thumb-wrap"><video class="upload-item-thumb" src="${preview}" muted preload="metadata"></video><div class="video-thumb-badge"><svg width="9" height="9" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
+      : `<img class="upload-item-thumb" src="${preview}" alt="">`;
+
     div.innerHTML = `
-      <img class="upload-item-thumb" src="${preview}" alt="">
+      ${thumbHtml}
       <div>
         <div class="upload-item-name">${item.file.name}</div>
         <div class="upload-item-size">${size}</div>
@@ -935,12 +1004,13 @@ async function uploadAll() {
     try {
       const filename = await uploadPhoto(item.file, i);
       item.status = 'done';
+      if (item.sha) existingShas.add(item.sha);
 
       // Add to event
       const ev = currentEvent;
       if (!ev.photos) ev.photos = [];
       ev.photos.push(filename);
-      if (!ev.cover) ev.cover = filename;
+      if (!ev.cover && !isVideoFile(filename)) ev.cover = filename;
 
       // Update events index entry
       const idx = events.findIndex(e => e.id === ev.id);
@@ -966,15 +1036,14 @@ async function uploadAll() {
   }
 
   btn.disabled = false;
-  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> <span id="upload-btn-text">Pujar fotos</span>`;
+  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> <span id="upload-btn-text">Pujar fotos i vídeos</span>`;
 
   document.getElementById('upload-status').textContent = '';
-  document.getElementById('upload-actions').style.display = 'none';
 
   if (done > 0) {
     const banner = document.getElementById('success-banner');
     const text = document.getElementById('success-text');
-    text.textContent = `${done} foto${done !== 1 ? 's' : ''} pujada${done !== 1 ? 's' : ''} correctament! Visibles a cbgrupbarna.info/fotos/ en 1-2 minuts.`;
+    text.textContent = `${done} fitxer${done !== 1 ? 's' : ''} pujat${done !== 1 ? 's' : ''} correctament! Visibles a cbgrupbarna.info/fotos/ en 1-2 minuts.`;
     banner.style.display = 'flex';
     uploadQueue = uploadQueue.filter(f => f.status !== 'done');
     renderUploadQueue();
@@ -982,7 +1051,10 @@ async function uploadAll() {
     renderEventsList();
   }
 
-  if (errors > 0) toast(`${errors} foto${errors !== 1 ? 's' : ''} no s'han pogut pujar`, 'error');
+  document.getElementById('upload-actions').style.display = uploadQueue.length ? 'flex' : 'none';
+  btn.disabled = uploadQueue.filter(f => f.status === 'pending').length === 0;
+
+  if (errors > 0) toast(`${errors} fitxer${errors !== 1 ? 's' : ''} no s'ha${errors !== 1 ? 'n' : ''} pogut pujar`, 'error');
 }
 
 async function uploadPhoto(file, queueIndex) {
@@ -1040,9 +1112,12 @@ function renderUploadedPhotos(ev) {
     const wrapper = document.createElement('div');
     wrapper.className = 'uploaded-photo';
     const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`;
+    const mediaHtml = isVideoFile(filename)
+      ? `<div class="uploaded-photo-media-wrap"><video src="${url}" muted preload="metadata"></video><div class="video-thumb-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
+      : `<img src="${url}" alt="Foto ${i+1}" loading="lazy">`;
     wrapper.innerHTML = `
-      <img src="${url}" alt="Foto ${i+1}" loading="lazy">
-      <button class="del-btn" title="Eliminar foto" onclick="deleteUploadedPhoto('${ev.id}', '${filename}', ${i})">
+      ${mediaHtml}
+      <button class="del-btn" title="Eliminar" onclick="deleteUploadedPhoto('${ev.id}', '${filename}', ${i})">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 6 6 18M6 6l12 12"/>
         </svg>
@@ -1060,11 +1135,12 @@ async function deleteUploadedPhoto(eventId, filename, photoIndex) {
     const ev = events.find(e => e.id === eventId);
     if (ev) {
       ev.photos.splice(photoIndex, 1);
-      if (ev.cover === filename) ev.cover = ev.photos[0] || null;
+      if (ev.cover === filename) ev.cover = ev.photos.find(p => !isVideoFile(p)) || null;
       await saveEvents();
       if (currentEvent && currentEvent.id === eventId) {
         currentEvent = ev;
         renderUploadedPhotos(ev);
+        shasReadyPromise = loadExistingShas(ev); // re-sync so the same file can be re-uploaded
       }
       renderEventsList();
     }
