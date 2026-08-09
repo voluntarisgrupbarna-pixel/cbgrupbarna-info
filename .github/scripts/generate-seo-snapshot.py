@@ -83,6 +83,34 @@ def build_snapshot(data, avui):
     return "".join(out), len(setmana), len(jugats)
 
 
+def resultat(p):
+    """Mateixa lògica que model() al JS: W/L/E des del punt de vista del Barna."""
+    if p.get("puntsLocal") is None or p.get("puntsVisitant") is None:
+        return None
+    barna = p["puntsLocal"] if p["casa"] else p["puntsVisitant"]
+    rival = p["puntsVisitant"] if p["casa"] else p["puntsLocal"]
+    return "W" if barna > rival else ("L" if barna < rival else "E")
+
+
+def build_equips_fallback(data):
+    """Llista de tots els equips amb categoria/competició i balanç V-D —
+    contingut estàtic amb el nom de cada equip, que és el que la gent busca
+    ("Cadet Femení A CB Grup Barna", "Sènior Masculí B Grup Barna"...)."""
+    items = []
+    for e in data["equips"]:
+        jugats = [resultat(p) for p in data["partits"] if p["equipId"] == e["id"]]
+        jugats = [r for r in jugats if r]
+        w, l = jugats.count("W"), jugats.count("L")
+        posicio = f" · {e['posicio']}a posició" if e.get("posicio") else ""
+        items.append(
+            f"<li><strong>{esc(e['nom'])}</strong> — {esc(e.get('competicio', ''))} "
+            f"· {w}-{l} (V-D){posicio}</li>"
+        )
+    if not items:
+        return ""
+    return "<ul>" + "".join(items) + "</ul>"
+
+
 def build_events(data, avui):
     equips = {e["id"]: e.get("nom", "") for e in data["equips"]}
     fi = (date.fromisoformat(avui) + timedelta(days=FINESTRA_EVENTS_DIES)).isoformat()
@@ -163,15 +191,19 @@ def main():
     avui = date.today().isoformat()
     snapshot, n_propers, n_resultats = build_snapshot(data, avui)
     events_html, n_events = build_events(data, avui)
+    equips_html = build_equips_fallback(data)
 
     html = HTML.read_text(encoding="utf-8")
     if "<!-- SEO-SNAPSHOT:START -->" not in html or "<!-- SEO-EVENTS:START -->" not in html:
         print("[seo] falten els marcadors SEO-SNAPSHOT/SEO-EVENTS a index.html — no es toca res")
         return 0
+    if "<!-- SEO-EQUIPS:START -->" in html:
+        html = replace_between(html, "SEO-EQUIPS", equips_html)
     html = replace_between(html, "SEO-SNAPSHOT", snapshot)
     html = replace_between(html, "SEO-EVENTS", events_html)
     HTML.write_text(html, encoding="utf-8")
-    print(f"[seo] OK → {n_propers} partits al resum, {n_resultats} resultats, {n_events} events JSON-LD")
+    print(f"[seo] OK → {n_propers} partits al resum, {n_resultats} resultats, {n_events} events JSON-LD, "
+          f"{len(data['equips'])} equips al llistat estàtic")
 
     if CAL_HTML.exists():
         cal_html = CAL_HTML.read_text(encoding="utf-8")
