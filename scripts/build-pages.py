@@ -1305,14 +1305,25 @@ def build_press_article(a):
 
 def build_premsa_index():
     url = SITE + "/premsa/"
-    title = "Articles i premsa · CB Grup Barna"
-    desc = ("El CB Grup Barna als mitjans del barri: articles, reportatges i mencions de premsa sobre "
-            "el club de bàsquet base del Clot, Districte de Sant Martí de Barcelona.")
+    title = "Sala de premsa i kit de premsa · CB Grup Barna"
+    desc = ("Sala de premsa del CB Grup Barna: kit de premsa i briefing del club descarregable en PDF, "
+            "més els articles i reportatges dels mitjans del barri sobre el club de bàsquet base del "
+            "Clot, Sant Martí, Barcelona.")
     ld = {"@context": "https://schema.org", "@graph": [
-        {"@type": "CollectionPage", "@id": url + "#premsa", "name": title, "description": desc, "url": url,
+        {"@type": "CollectionPage", "@id": url + "#premsa", "name": "Sala de premsa · CB Grup Barna",
+         "description": desc, "url": url,
          "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"},
          "hasPart": [{"@type": "Article", "headline": a["title"], "url": f"{SITE}/premsa/{a['slug']}/",
-                      "datePublished": a["date"]} for a in PRESS]},
+                      "datePublished": a["date"]} for a in PRESS] + [
+             {"@type": "DigitalDocument",
+              "@id": SITE + "/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf#pdf",
+              "name": "Briefing de club CB Grup Barna (PDF)",
+              "description": "Kit de premsa del CB Grup Barna: 16 pàgines amb història des de 1965, "
+                             "els dos sèniors a la Supercopa FCBQ, paritat real, inclusió, esdeveniments "
+                             "propis i protecció del menor.",
+              "url": SITE + "/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf",
+              "encodingFormat": "application/pdf", "inLanguage": "ca", "isAccessibleForFree": True,
+              "datePublished": "2026-08-09"}]},
         BREADCRUMB([("CB Grup Barna", "/"), ("Premsa", "/premsa/")]),
     ]}
     cards = ''.join(
@@ -1329,11 +1340,27 @@ def build_premsa_index():
     <p class="lede" style="margin-left:auto;margin-right:auto">Reportatges i mencions del club a la
     premsa del barri. Gràcies a qui ens dedica el seu temps i la seva feina per explicar el Barna.</p>
   </div>
+  <!-- KIT DE PREMSA · BRIEFING DEL CLUB -->
+  <section class="closer" id="kit-de-premsa" style="margin-bottom:clamp(40px,6vw,72px)" aria-labelledby="kit-title">
+    <p class="eyebrow red">Kit de premsa</p>
+    <h2 id="kit-title" style="margin-top:14px">Briefing del CB Grup Barna</h2>
+    <p>Tot el que cal per escriure sobre el club amb dades verificades: 60 anys al Clot, els dos
+    sèniors a la Supercopa FCBQ, la paritat real, la inclusió, els esdeveniments propis i la
+    protecció del menor. Accés lliure, sense registre.</p>
+    <div class="btn-row">
+      <a class="btn red" href="/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf" download
+         data-cta="premsa-briefing-pdf">Descarregar el briefing (PDF · 16 pàg.)</a>
+      <a class="btn ghost" href="/briefing/" data-cta="premsa-briefing-web">Llegir-lo al web</a>
+      <a class="btn ghost" href="/briefing/materials.html" data-cta="premsa-materials">Altres materials</a>
+    </div>
+  </section>
+
   <div class="cards" style="padding-bottom:clamp(40px,6vw,80px)">{cards}</div>
 </div>
 """
     return write("premsa/index.html", head(title, desc, url, SITE + f"/premsa/img/{PRESS[0]['images'][0][0]}", ld,
-                 "premsa CB Grup Barna, Guia Clot, Eix Clot, articles bàsquet Clot") + body + FOOT)
+                 "premsa CB Grup Barna, kit de premsa, briefing del club, dossier de premsa bàsquet "
+                 "Barcelona, Guia Clot, Eix Clot, articles bàsquet Clot") + body + FOOT)
 
 
 # ═══════════════════════════════════════════════════════════ /partits/calendaris/ ════
