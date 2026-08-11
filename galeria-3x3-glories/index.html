@@ -16,7 +16,8 @@
 <!-- Canonical + hreflang -->
 <link rel="canonical" href="https://cbgrupbarna.info/galeria-3x3-glories/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/galeria-3x3-glories/">
-<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/galeria-3x3-glories/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/galeria-3x3-glories/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/galeria-3x3-glories/">
 <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/galeria-3x3-glories/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://cbgrupbarna.info/sitemap.xml">
 <!-- Open Graph -->
@@ -27,6 +28,7 @@
 <meta property="og:description" content="522 fotografies oficials del 3×3 Westfield Glòries 2026. Bàsquet 3×3 a Barcelona, organitzat per Grup Barna i Time Chamber. Accedeix a totes les fotos.">
 <meta property="og:locale" content="ca_ES">
 <meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta property="og:image:secure_url" content="https://cbgrupbarna.info/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -98,9 +100,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Galeria 3×3 Glòries">
-<link rel="icon" type="image/png" sizes="192x192" href="../logo.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../logo.png">
-<link rel="shortcut icon" href="../logo.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
+<link rel="shortcut icon" href="/logo.png">
 <!-- Preload + DNS prefetch -->
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -141,27 +143,38 @@ input:focus{outline:none;border-color:#E8002D!important;box-shadow:0 0 0 3px rgb
 }
 /* views */
 #view-gate,#view-follow,#view-loading,#view-gallery{display:none}
+
+/* SELECTOR D'IDIOMA */
+.lang-switch{position:fixed;top:14px;right:16px;z-index:500;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.lang-switch a{padding:7px 2px;opacity:.55;color:rgba(255,255,255,.7);transition:opacity .3s,color .3s}
+.lang-switch a.active{opacity:1;color:#fff}
+.lang-switch a:hover{opacity:1;color:#E8002D}
+.lang-switch .sep{opacity:.3}
 </style>
 </head>
 <body>
+
+<div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+  <a href="/galeria-3x3-glories/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/galeria-3x3-glories/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/galeria-3x3-glories/" hreflang="en">EN</a>
+</div>
 
 <!-- ── GATE ─────────────────────────────────────────── -->
 <div id="view-gate" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden">
 
   <!-- fons de fotos -->
   <div aria-hidden="true" style="position:fixed;inset:0;z-index:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr)">
-    <div style="background:url('../img/team-action.webp') center/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
-    <div style="background:url('../og-image.jpg') center/cover no-repeat;filter:blur(3px) brightness(.28) saturate(.7)"></div>
-    <div style="background:url('../img/hero-player.webp') center/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
-    <div style="background:url('../hero-bg.jpg') center 30%/cover no-repeat;filter:blur(3px) brightness(.3) saturate(.7)"></div>
-    <div style="background:url('../img/club.webp') center/cover no-repeat;filter:blur(3px) brightness(.28) saturate(.7)"></div>
-    <div style="background:url('../img/team-action.webp') center 70%/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
-    <div style="background:url('../img/hero-player.webp') center/cover no-repeat;filter:blur(3px) brightness(.30) saturate(.7)"></div>
-    <div style="background:url('../hero-bg.jpg') center/cover no-repeat;filter:blur(3px) brightness(.28) saturate(.7)"></div>
-    <div style="background:url('../og-image.jpg') center/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
-    <div style="background:url('../img/club.webp') center/cover no-repeat;filter:blur(3px) brightness(.30) saturate(.7)"></div>
-    <div style="background:url('../img/team-action.webp') top/cover no-repeat;filter:blur(3px) brightness(.28) saturate(.7)"></div>
-    <div style="background:url('../img/hero-player.webp') bottom/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
+    <div style="background:url('/img/team-action.webp') center/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
+    <div style="background:url('/og-image.jpg') center/cover no-repeat;filter:blur(3px) brightness(.28) saturate(.7)"></div>
+    <div style="background:url('/img/hero-player.webp') center/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
+    <div style="background:url('/hero-bg.jpg') center 30%/cover no-repeat;filter:blur(3px) brightness(.3) saturate(.7)"></div>
+    <div style="background:url('/img/club.webp') center/cover no-repeat;filter:blur(3px) brightness(.28) saturate(.7)"></div>
+    <div style="background:url('/img/team-action.webp') center 70%/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
+    <div style="background:url('/img/hero-player.webp') center/cover no-repeat;filter:blur(3px) brightness(.30) saturate(.7)"></div>
+    <div style="background:url('/hero-bg.jpg') center/cover no-repeat;filter:blur(3px) brightness(.28) saturate(.7)"></div>
+    <div style="background:url('/og-image.jpg') center/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
+    <div style="background:url('/img/club.webp') center/cover no-repeat;filter:blur(3px) brightness(.30) saturate(.7)"></div>
+    <div style="background:url('/img/team-action.webp') top/cover no-repeat;filter:blur(3px) brightness(.28) saturate(.7)"></div>
+    <div style="background:url('/img/hero-player.webp') bottom/cover no-repeat;filter:blur(3px) brightness(.32) saturate(.7)"></div>
   </div>
   <!-- overlay vermell fosc -->
   <div aria-hidden="true" style="position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 0%,rgba(232,0,45,.22) 0%,rgba(7,7,7,.72) 55%,rgba(7,7,7,.88) 100%)"></div>

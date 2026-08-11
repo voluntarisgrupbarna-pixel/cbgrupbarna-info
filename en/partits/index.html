@@ -769,8 +769,8 @@ function weekKey(dateStr) {
   d.setDate(d.getDate()-dow);
   return d.toISOString().slice(0,10);
 }
-const MESOS = ['gen','feb','març','abr','maig','juny','jul','ago','set','oct','nov','des'];
-const DIES = ['DIUMENGE','DILLUNS','DIMARTS','DIMECRES','DIJOUS','DIVENDRES','DISSABTE'];
+const MESOS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DIES = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
 function fmtDia(dateStr){ const d=new Date(dateStr+'T12:00:00'); return `${DIES[d.getDay()]} ${d.getDate()} ${MESOS[d.getMonth()].toUpperCase()}`; }
 function wkLabel(mondayStr) {
   const sat = new Date(mondayStr+'T12:00:00'); sat.setDate(sat.getDate()+5);
@@ -794,7 +794,7 @@ function renderWeekNav(m) {
     state.wk = wks.find(k=>k>=cur) || wks[wks.length-1];
   }
   const sel = document.getElementById('wk-select');
-  sel.innerHTML = wks.map(k=>`<option value="${k}" ${k===state.wk?'selected':''}>Cap de setmana ${wkLabel(k)}</option>`).join('');
+  sel.innerHTML = wks.map(k=>`<option value="${k}" ${k===state.wk?'selected':''}>Weekend ${wkLabel(k)}</option>`).join('');
   const i = wks.indexOf(state.wk);
   document.getElementById('wk-prev').disabled = i<=0;
   document.getElementById('wk-next').disabled = i>=wks.length-1;
@@ -802,21 +802,21 @@ function renderWeekNav(m) {
 function renderFilters(m) {
   // gènere
   const gb = document.getElementById('filters-genere');
-  gb.innerHTML = [['tots','Tots'],['F','🔴 Femení'],['M','⚫ Masculí']]
+  gb.innerHTML = [['tots','All'],['F','🔴 Women'],['M','⚫ Men']]
     .map(([id,txt])=>`<button class="chip ${state.genere===id?'on':''}" data-g="${id}">${txt}</button>`).join('');
   // categoria (nivell: sènior, júnior, cadet…)
   const cats = [...new Set(m.equips.map(e=>e.nom.split(' ')[0]))].sort();
   const cb = document.getElementById('filters-cat');
-  cb.innerHTML = `<button class="chip ${state.cat==='totes'?'on':''}" data-c="totes">Totes les categories</button>`
+  cb.innerHTML = `<button class="chip ${state.cat==='totes'?'on':''}" data-c="totes">All categories</button>`
     + cats.map(c=>`<button class="chip ${state.cat===c?'on':''}" data-c="${c}">${c}</button>`).join('');
   const box = document.getElementById('filters');
   const visibles = m.equips.filter(e =>
     (state.genere==='tots' || e.genere===state.genere) &&
     (state.cat==='totes'  || e.nom.split(' ')[0]===state.cat));
   const chips = [
-    {id:'tots', txt:'Tots els equips'},
+    {id:'tots', txt:'All teams'},
     ...visibles.map(e=>({id:'eq:'+e.id, txt:`${e.emoji} ${e.curt||e.nom}`})),
-    {id:'casa', txt:'🏠 Casa'}, {id:'fora', txt:'🚌 Fora'},
+    {id:'casa', txt:'🏠 Home'}, {id:'fora', txt:'🚌 Away'},
   ];
   box.innerHTML = chips.map(c=>`<button class="chip ${state.filter===c.id?'on':''}" data-f="${c.id}">${c.txt}</button>`).join('');
 }
@@ -832,15 +832,15 @@ function dadesRival(p, m) {
   if (previs.length) {
     const g = previs.filter(x=>x.res==='W').length;
     const ult = previs[previs.length-1];
-    bits.push(`<span><b>${g}-${previs.length-g}</b>Nostre balanç</span>`);
-    bits.push(`<span><b>${ult.puntsLocal}-${ult.puntsVisitant}</b>Últim duel</span>`);
+    bits.push(`<span><b>${g}-${previs.length-g}</b>Our record</span>`);
+    bits.push(`<span><b>${ult.puntsLocal}-${ult.puntsVisitant}</b>Last meeting</span>`);
   }
-  if (rs.pos)  bits.push(`<span><b>${rs.pos}a</b>Posició seva</span>`);
-  if (rs.pj != null && rs.v != null) bits.push(`<span><b>${rs.v}-${rs.d ?? 0}</b>El seu balanç</span>`);
-  return `<div class="m-rival"><div class="r-tit">El contrincant · ${rival}</div>
+  if (rs.pos)  bits.push(`<span><b>${rs.pos}</b>Their position</span>`);
+  if (rs.pj != null && rs.v != null) bits.push(`<span><b>${rs.v}-${rs.d ?? 0}</b>Their record</span>`);
+  return `<div class="m-rival"><div class="r-tit">The opponent · ${rival}</div>
     ${bits.length ? `<div class="r-fila">${bits.join('')}</div>` : ''}
-    ${!previs.length ? '<div style="color:var(--muted);font-size:11.5px;margin-top:4px">Primer enfrontament de la temporada. Les dades apareixeran quan hi hagi resultats.</div>' : ''}
-    ${ig ? `<div style="margin-top:6px"><a href="https://instagram.com/${ig.instagram.slice(1)}" target="_blank" rel="noopener" style="color:var(--red-ink);text-decoration:none;font-size:11.5px">📸 ${ig.instagram} · ${(ig.seguidors/1000).toFixed(1).replace('.',',')}K seguidors</a></div>` : ''}
+    ${!previs.length ? '<div style="color:var(--muted);font-size:11.5px;margin-top:4px">First meeting of the season. Data will appear once there are results.</div>' : ''}
+    ${ig ? `<div style="margin-top:6px"><a href="https://instagram.com/${ig.instagram.slice(1)}" target="_blank" rel="noopener" style="color:var(--red-ink);text-decoration:none;font-size:11.5px">📸 ${ig.instagram} · ${(ig.seguidors/1000).toFixed(1)}K followers</a></div>` : ''}
   </div>`;
 }
 /* Previsió d'un partit encara no jugat: estimació estadística transparent
@@ -858,19 +858,19 @@ function previsioPartit(p, m) {
   if (h2h == null && ambient == null) return '';
   const prob = (h2h != null && ambient != null) ? h2h*0.6 + ambient*0.4 : (h2h != null ? h2h : ambient);
   const pct = Math.round(prob*100);
-  const etiqueta = pct >= 65 ? 'favorits' : pct <= 35 ? 'partit costerut' : 'partit igualat';
+  const etiqueta = pct >= 65 ? 'favourites' : pct <= 35 ? 'uphill match' : 'even match';
   const base = h2h != null
-    ? `l'historial contra ${rival} i el rendiment ${p.casa?'a casa':'fora'} aquesta temporada`
-    : `el rendiment ${p.casa?'a casa':'fora'} aquesta temporada`;
+    ? `the head-to-head vs ${rival} and the ${p.casa?'home':'away'} record this season`
+    : `the ${p.casa?'home':'away'} record this season`;
   return `<div style="margin-top:8px;padding:8px 10px;background:var(--panel2);border-radius:10px;font-size:11.5px;line-height:1.5">
-    🔮 <b>Previsió: ${pct}% de victòria</b> · ${etiqueta}
-    <br><span style="color:var(--muted)">Estimació a partir de ${base} — dades pròpies del club, no una predicció garantida.</span>
+    🔮 <b>Forecast: ${pct}% chance of winning</b> · ${etiqueta}
+    <br><span style="color:var(--muted)">Estimate based on ${base} — the club's own data, not a guaranteed prediction.</span>
   </div>`;
 }
 function avisModificacio(p) {
   if (!p.avis || p.avis.expira < todayStr()) return '';
   return `<div style="margin-top:8px;padding:8px 10px;background:rgba(230,51,41,.10);border:1px solid rgba(230,51,41,.30);border-radius:10px;font-size:11.5px;color:var(--red-ink)">
-    ✏️ <b>MODIFICAT</b> el ${fmtDia(p.avis.detectat).toLowerCase()} · ${p.avis.resum}</div>`;
+    ✏️ <b>CHANGED</b> on ${fmtDia(p.avis.detectat).toLowerCase()} · ${p.avis.resum}</div>`;
 }
 function matchCard(p, m, showDate) {
   const eq = m.equips.find(e=>e.id===p.equipId) || {};
@@ -882,7 +882,7 @@ function matchCard(p, m, showDate) {
   let center;
   if (p.jugat) {
     const cls = p.res==='W'?'w':(p.res==='L'?'l':'');
-    center = `<div class="m-score"><span class="${cls}">${p.puntsLocal} · ${p.puntsVisitant}</span><small class="${cls}">${p.res==='W'?'VICTÒRIA':p.res==='L'?'DERROTA':'EMPAT'}</small></div>`;
+    center = `<div class="m-score"><span class="${cls}">${p.puntsLocal} · ${p.puntsVisitant}</span><small class="${cls}">${p.res==='W'?'WIN':p.res==='L'?'LOSS':'DRAW'}</small></div>`;
   } else {
     center = `<div class="m-vs">VS</div>`;
   }
@@ -1687,13 +1687,13 @@ function trobaLogoPerNom(rival, genere) {
   return millor;
 }
 let RIVALS = null;
-async function loadRivals(){ if(!RIVALS){ try { RIVALS = await (await fetch('rivals.json')).json(); } catch(e){ RIVALS = {}; } } return RIVALS; }
+async function loadRivals(){ if(!RIVALS){ try { RIVALS = await (await fetch('/partits/rivals.json')).json(); } catch(e){ RIVALS = {}; } } return RIVALS; }
 async function rivalInfo(p){ await loadRivals(); return (RIVALS[p.equipId]||{})[p.casa?p.visitant:p.local] || null; }
 async function rivalLogoFor(p, nomesAuto) {
   if (cRivalLogo && !nomesAuto) return cRivalLogo;        // pujat a mà: mana (excepte al calendari)
-  if (!LOGOMAP) { try { LOGOMAP = await (await fetch('logos/map.json')).json(); } catch(e){ LOGOMAP = {}; } }
-  if (!LOGOIDX) { try { LOGOIDX = (await (await fetch('logos/index.json')).json()).fitxers; } catch(e){ LOGOIDX = []; } }
-  if (!LOGOALIAS) { try { LOGOALIAS = (await (await fetch('logos/alias.json')).json()).alias; } catch(e){ LOGOALIAS = {}; } }
+  if (!LOGOMAP) { try { LOGOMAP = await (await fetch('/partits/logos/map.json')).json(); } catch(e){ LOGOMAP = {}; } }
+  if (!LOGOIDX) { try { LOGOIDX = (await (await fetch('/partits/logos/index.json')).json()).fitxers; } catch(e){ LOGOIDX = []; } }
+  if (!LOGOALIAS) { try { LOGOALIAS = (await (await fetch('/partits/logos/alias.json')).json()).alias; } catch(e){ LOGOALIAS = {}; } }
   const rival = p.casa ? p.visitant : p.local;
   const eqp = model().equips.find(e=>e.id===p.equipId) || {};
   // 1r: alias exacte de l'inventari · 2n: excepció manual · 3r: emparellament pel nom
@@ -1769,7 +1769,7 @@ async function genCartell() {
   if (!p) { alert('Tria un partit'); return; }
   const { e, s, rival, prev } = previaData(p, m);
   await document.fonts.load("80px 'Anton'"); await document.fonts.load("700 30px 'Inter'");
-  if (!cClubLogo) { try { cClubLogo = await loadImg('../logo.png'); } catch(err){} }
+  if (!cClubLogo) { try { cClubLogo = await loadImg('/logo.png'); } catch(err){} }
   const autoRival = await rivalLogoFor(p);   // logo del rival automàtic des de logos/map.json
   const rinfoTop = await rivalInfo(p);       // IG i seguidors del rival (rivals.json)
   const cv = document.getElementById('c-canvas'), ctx = cv.getContext('2d');
@@ -2114,7 +2114,7 @@ async function genFinde(m) {
                         .sort((a,b)=> (a.data+a.hora).localeCompare(b.data+b.hora));
   if (!tots.length) { alert('Aquest cap de setmana no té partits.'); return; }
   await document.fonts.load("80px 'Anton'"); await document.fonts.load("700 30px 'Inter'");
-  if (!cClubLogo) { try { cClubLogo = await loadImg(window.__CLUB_LOGO__ || '../logo.png'); } catch(err){} }
+  if (!cClubLogo) { try { cClubLogo = await loadImg(window.__CLUB_LOGO__ || '/logo.png'); } catch(err){} }
   const logos = await Promise.all(tots.map(x => rivalLogoFor(x, true)));
 
   const cv = document.getElementById('c-canvas'), ctx = cv.getContext('2d');
@@ -2415,12 +2415,12 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
 /* ---------- init ---------- */
 (async function init(){
   try {
-    const r = await fetch('data.json', {cache:'no-store'});
+    const r = await fetch('/partits/data.json', {cache:'no-store'});
     BASE = await r.json();
   } catch(e) {
-    document.getElementById('jornada-list').innerHTML = '<div class="empty">No s\'ha pogut carregar data.json 😕</div>';
+    document.getElementById('jornada-list').innerHTML = '<div class="empty">Could not load data.json 😕</div>';
   }
-  try { CANVIS = await (await fetch('canvis.json', {cache:'no-store'})).json(); } catch(e) { CANVIS = {canvis:[]}; }
+  try { CANVIS = await (await fetch('/partits/canvis.json', {cache:'no-store'})).json(); } catch(e) { CANVIS = {canvis:[]}; }
   // si el mode gestió venia d'un login de Google i la sessió ja no és vàlida, es tanca
   if (sessionStorage.getItem('cbgbEditSrc')==='google' && !(window.CBGBAuth && CBGBAuth.isStaff())) {
     sessionStorage.removeItem('cbgbEdit'); sessionStorage.removeItem('cbgbEditSrc');
@@ -2445,13 +2445,13 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
   await loadRivals();
   renderAll();
   // PWA: instal·lable a Android/iPhone
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/partits/sw.js').catch(()=>{});
   let deferredPrompt = null;
   const pwaBtn = document.getElementById('pwa-btn');
   window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); deferredPrompt=e; pwaBtn.style.display='inline-block'; });
   pwaBtn.addEventListener('click', async ()=>{
     if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; pwaBtn.style.display='none'; }
-    else alert('A iPhone: obre aquesta pàgina a Safari → botó Compartir → "Afegir a pantalla d\'inici". Tindràs la app amb l\'escut del club.');
+    else alert('On iPhone: open this page in Safari → Share button → "Add to Home Screen". You\'ll get the app with the club crest.');
   });
   // a iOS no existeix beforeinstallprompt: mostra el botó amb instruccions
   if (/iphone|ipad/i.test(navigator.userAgent) && !navigator.standalone) pwaBtn.style.display='inline-block';
