@@ -225,9 +225,16 @@
       position: relative; cursor: pointer; border-radius: 6px; overflow: hidden;
       display: block; background: var(--gray2);
     }
-    .photo-item img {
+    .photo-item img, .photo-item video {
       width: 100%; height: auto; display: block;
       transition: opacity .2s; border-radius: 6px;
+    }
+    .photo-item .vid-badge {
+      position: absolute; top: .4rem; right: .4rem; z-index: 1;
+      background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+      color: #fff; border-radius: 50%; width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
     }
     .photo-item .photo-hover {
       position: absolute; inset: 0; background: rgba(0,0,0,0);
@@ -264,7 +271,7 @@
       background: rgba(4,4,4,.97); align-items: center; justify-content: center;
     }
     #lightbox.open { display: flex; }
-    #lightbox img#lb-img {
+    #lightbox img#lb-img, #lightbox video#lb-video {
       max-width: min(92vw, 1200px); max-height: 85vh;
       object-fit: contain; border-radius: 4px;
       transition: opacity .15s;
@@ -599,6 +606,7 @@
     </svg>
   </button>
   <img id="lb-img" src="" alt="Foto del club" loading="eager">
+  <video id="lb-video" controls playsinline style="display:none"></video>
   <button class="lb-next" id="lb-next" aria-label="Següent">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="m9 18 6-6-6-6"/>
@@ -645,6 +653,7 @@ const REPO_RAW = 'https://raw.githubusercontent.com/voluntarisgrupbarna-pixel/cb
 const PLACEHOLDER = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23222' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' fill='%23555' font-family='sans-serif' font-size='14' text-anchor='middle' dy='.3em'%3ESense fotos%3C/text%3E%3C/svg%3E`;
 const BATCH = 40; // photos per load
 
+function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v)$/i.test(ref || ''); }
 function isRepo(ev) { return ev.source === 'repo'; }
 function isFlickr(ev) { return ev.source === 'flickr'; }
 function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
@@ -968,12 +977,26 @@ function loadMorePhotos() {
     shimmer.className = 'shimmer';
     item.appendChild(shimmer);
 
-    const img = new Image();
-    img.alt = `Foto ${i + 1}`;
-    img.loading = 'lazy';
-    img.onload = () => { shimmer.remove(); item.appendChild(img); };
-    img.onerror = () => { shimmer.style.opacity = '.3'; };
-    img.src = photoThumb(ev, id);
+    if (isVideoRef(id)) {
+      const vid = document.createElement('video');
+      vid.muted = true;
+      vid.playsInline = true;
+      vid.preload = 'metadata';
+      vid.onloadeddata = () => { shimmer.remove(); item.appendChild(vid); };
+      vid.onerror = () => { shimmer.style.opacity = '.3'; };
+      vid.src = photoThumb(ev, id) + '#t=0.1';
+      const badge = document.createElement('div');
+      badge.className = 'vid-badge';
+      badge.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
+      item.appendChild(badge);
+    } else {
+      const img = new Image();
+      img.alt = `Foto ${i + 1}`;
+      img.loading = 'lazy';
+      img.onload = () => { shimmer.remove(); item.appendChild(img); };
+      img.onerror = () => { shimmer.style.opacity = '.3'; };
+      img.src = photoThumb(ev, id);
+    }
 
     // Hover actions
     const hover = document.createElement('div');
@@ -1023,6 +1046,10 @@ function openLightbox(index) {
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
+  const video = document.getElementById('lb-video');
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
 }
 
 function navigateLightbox(dir) {
@@ -1038,9 +1065,23 @@ function updateLightbox() {
   const photos = currentEvent.photos;
   const id = photos[lbIndex];
   const img = document.getElementById('lb-img');
-  img.classList.add('loading');
-  img.onload = () => img.classList.remove('loading');
-  img.src = photoFull(currentEvent, id);
+  const video = document.getElementById('lb-video');
+
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
+
+  if (isVideoRef(id)) {
+    img.style.display = 'none';
+    video.style.display = 'block';
+    video.src = photoFull(currentEvent, id);
+  } else {
+    video.style.display = 'none';
+    img.style.display = 'block';
+    img.classList.add('loading');
+    img.onload = () => img.classList.remove('loading');
+    img.src = photoFull(currentEvent, id);
+  }
   document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${photos.length}`;
 
   const dlLink = document.getElementById('lb-dl');

@@ -167,7 +167,7 @@
     @media (min-width: 640px) { .uploaded-grid { columns: 4; } }
     @media (min-width: 900px) { .uploaded-grid { columns: 6; } }
     .uploaded-photo { break-inside: avoid; margin-bottom: .5rem; position: relative; border-radius: 6px; overflow: hidden; background: var(--gray2); }
-    .uploaded-photo img { width: 100%; height: auto; display: block; }
+    .uploaded-photo img, .uploaded-photo video { width: 100%; height: auto; display: block; }
     .uploaded-photo .del-btn {
       position: absolute; top: .3rem; right: .3rem; background: rgba(0,0,0,.65); border: none;
       color: #f87171; cursor: pointer; border-radius: 4px; padding: .25rem; display: none;
@@ -294,15 +294,15 @@
     </div>
 
     <div class="drop-zone" id="drop-zone">
-      <input type="file" id="file-input" accept="image/*" multiple>
+      <input type="file" id="file-input" accept="image/*,video/*" multiple>
       <div class="drop-zone-icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
         </svg>
       </div>
-      <p>Arrossega les fotos aquí o <span>selecciona-les</span></p>
-      <small>JPG, PNG, WebP · Fins a 25 MB per foto</small>
+      <p>Arrossega fotos o vídeos aquí o <span>selecciona'ls</span></p>
+      <small>Fotos: JPG, PNG, WebP · fins a 25 MB &nbsp;·&nbsp; Vídeos: MP4, MOV, WebM · fins a 90 MB</small>
     </div>
 
     <!-- ZIP upload -->
@@ -822,22 +822,22 @@ async function handleZip(zipFile) {
       throw new Error('JSZip no carregat. Refresca la pàgina i torna a intentar-ho.');
     }
     const zip = await JSZip.loadAsync(zipFile);
-    const imageExts = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?)$/i;
+    const mediaExts = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?|mp4|mov|webm|m4v)$/i;
     const entries = [];
 
     zip.forEach((relativePath, entry) => {
-      if (!entry.dir && imageExts.test(relativePath) && !relativePath.startsWith('__MACOSX')) {
+      if (!entry.dir && mediaExts.test(relativePath) && !relativePath.startsWith('__MACOSX')) {
         entries.push({ path: relativePath, entry });
       }
     });
 
     if (!entries.length) {
       progressEl.classList.remove('active');
-      toast('El ZIP no conté imatges reconegudes (JPG, PNG, WebP…)', 'error');
+      toast('El ZIP no conté fotos o vídeos reconeguts (JPG, PNG, WebP, MP4, MOV…)', 'error');
       return;
     }
 
-    progressText.textContent = `Descomprimint ${entries.length} imatge${entries.length !== 1 ? 's' : ''}…`;
+    progressText.textContent = `Descomprimint ${entries.length} fitxer${entries.length !== 1 ? 's' : ''}…`;
 
     const files = [];
     for (let i = 0; i < entries.length; i++) {
@@ -845,7 +845,7 @@ async function handleZip(zipFile) {
       progressText.textContent = `Descomprimint ${i + 1} / ${entries.length}…`;
       const blob = await entry.async('blob');
       const name = path.split('/').pop();
-      const mimeMap = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', heic: 'image/heic', bmp: 'image/bmp', tif: 'image/tiff', tiff: 'image/tiff' };
+      const mimeMap = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', heic: 'image/heic', bmp: 'image/bmp', tif: 'image/tiff', tiff: 'image/tiff', mp4: 'video/mp4', mov: 'video/quicktime', webm: 'video/webm', m4v: 'video/x-m4v' };
       const ext = name.split('.').pop().toLowerCase();
       const type = mimeMap[ext] || 'image/jpeg';
       files.push(new File([blob], name, { type }));
@@ -853,7 +853,7 @@ async function handleZip(zipFile) {
 
     progressEl.classList.remove('active');
     addFiles(files);
-    toast(`ZIP descomprimit: ${files.length} imatge${files.length !== 1 ? 's' : ''} afegides a la cua`, 'success');
+    toast(`ZIP descomprimit: ${files.length} fitxer${files.length !== 1 ? 's' : ''} afegit${files.length !== 1 ? 's' : ''} a la cua`, 'success');
   } catch (e) {
     progressEl.classList.remove('active');
     toast('Error llegint ZIP: ' + e.message, 'error');
@@ -861,8 +861,26 @@ async function handleZip(zipFile) {
 }
 
 // ── FILE UPLOAD ──
+const IMAGE_MAX_MB = 25;
+const VIDEO_MAX_MB = 90;
+function isVideoFile(f) { return f.type.startsWith('video/') || /\.(mp4|mov|webm|m4v)$/i.test(f.name); }
+function isImageFile(f) { return f.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name); }
+
 function addFiles(fileList) {
-  const files = Array.from(fileList).filter(f => f.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name));
+  const all = Array.from(fileList).filter(f => isImageFile(f) || isVideoFile(f));
+  if (!all.length) return;
+
+  const files = [];
+  let tooBig = 0;
+  all.forEach(f => {
+    const maxMB = isVideoFile(f) ? VIDEO_MAX_MB : IMAGE_MAX_MB;
+    if (f.size > maxMB * 1024 * 1024) { tooBig++; return; }
+    files.push(f);
+  });
+  if (tooBig > 0) {
+    const plural = tooBig !== 1;
+    toast(`${tooBig} fitxer${plural ? 's' : ''} massa gran${plural ? 's' : ''} (màx. ${IMAGE_MAX_MB} MB fotos / ${VIDEO_MAX_MB} MB vídeos). Comprimeix-${plural ? 'los' : 'lo'} abans de pujar-${plural ? 'los' : 'lo'}.`, 'error');
+  }
   if (!files.length) return;
 
   files.forEach(file => {
@@ -883,6 +901,7 @@ function renderUploadQueue() {
     div.id = `qi-${i}`;
 
     const preview = URL.createObjectURL(item.file);
+    const isVid = isVideoFile(item.file);
     const size = item.file.size < 1024*1024
       ? `${(item.file.size/1024).toFixed(0)} KB`
       : `${(item.file.size/1024/1024).toFixed(1)} MB`;
@@ -895,9 +914,11 @@ function renderUploadQueue() {
     }[item.status];
 
     div.innerHTML = `
-      <img class="upload-item-thumb" src="${preview}" alt="">
+      ${isVid
+        ? `<video class="upload-item-thumb" src="${preview}#t=0.1" muted playsinline preload="metadata"></video>`
+        : `<img class="upload-item-thumb" src="${preview}" alt="">`}
       <div>
-        <div class="upload-item-name">${item.file.name}</div>
+        <div class="upload-item-name">${isVid ? '🎬 ' : ''}${item.file.name}</div>
         <div class="upload-item-size">${size}</div>
         ${item.status === 'uploading' ? `<div class="progress-bar"><div class="progress-fill" id="prog-${i}" style="width:${item.progress}%"></div></div>` : ''}
       </div>
@@ -932,7 +953,7 @@ async function uploadAll() {
       const ev = currentEvent;
       if (!ev.photos) ev.photos = [];
       ev.photos.push(filename);
-      if (!ev.cover) ev.cover = filename;
+      if (!ev.cover && !isVideoFile(item.file)) ev.cover = filename;
 
       // Update events index entry
       const idx = events.findIndex(e => e.id === ev.id);
@@ -1032,9 +1053,12 @@ function renderUploadedPhotos(ev) {
     const wrapper = document.createElement('div');
     wrapper.className = 'uploaded-photo';
     const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`;
+    const isVid = /\.(mp4|mov|webm|m4v)$/i.test(filename);
     wrapper.innerHTML = `
-      <img src="${url}" alt="Foto ${i+1}" loading="lazy">
-      <button class="del-btn" title="Eliminar foto" onclick="deleteUploadedPhoto('${ev.id}', '${filename}', ${i})">
+      ${isVid
+        ? `<video src="${url}#t=0.1" muted playsinline preload="metadata"></video>`
+        : `<img src="${url}" alt="Foto ${i+1}" loading="lazy">`}
+      <button class="del-btn" title="Eliminar" onclick="deleteUploadedPhoto('${ev.id}', '${filename}', ${i})">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 6 6 18M6 6l12 12"/>
         </svg>
