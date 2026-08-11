@@ -327,7 +327,6 @@ PARTNERS = [
     ("gbk-globabasket.png", "GBK · Globasket", "https://www.instagram.com/globasket/"),
     ("illa-fantasia.png", "Illa Fantasia", "https://www.instagram.com/illafantasia/"),
     ("panteres-grogues.png", "Panteres Grogues", None),
-    ("zapic-ai.png", "Zapic AI", None),
 ]
 
 
