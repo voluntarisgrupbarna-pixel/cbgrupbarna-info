@@ -425,9 +425,23 @@
       #search-input { width: 150px; font-size: .8rem; }
       .nav-logo span { display: none; }
     }
+
+    /* ── SELECTOR D'IDIOMA ── */
+    .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+    .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+    .lang-switch a.active { opacity: 1; font-weight: 600; }
+    .lang-switch a:hover { opacity: 1; }
+    .lang-switch .sep { opacity: 0.25; }
   </style>
   <link rel="canonical" href="https://cbgrupbarna.info/fotos/">
+  <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/fotos/">
+  <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/fotos/">
+  <link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/fotos/">
+  <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/fotos/">
   <meta property="og:url" content="https://cbgrupbarna.info/fotos/">
+  <meta property="og:locale" content="ca_ES">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="en_US">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -525,6 +539,9 @@
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
     <input type="search" id="search-input" placeholder="Cerca un event…" autocomplete="off">
+  </div>
+  <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+    <a href="/fotos/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/fotos/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/fotos/" hreflang="en">EN</a>
   </div>
   <a href="/" class="nav-back">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

@@ -8,6 +8,10 @@
 <meta name="description" content="Sala de premsa del CB Grup Barna: kit de premsa i briefing del club descarregable en PDF, més els articles i reportatges dels mitjans del barri sobre el club de bàsquet base del Clot, Sant Martí, Barcelona.">
 <meta name="keywords" content="premsa CB Grup Barna, kit de premsa, briefing del club, dossier de premsa bàsquet Barcelona, Guia Clot, Eix Clot, articles bàsquet Clot">
 <link rel="canonical" href="https://cbgrupbarna.info/premsa/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/premsa/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/premsa/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/premsa/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/premsa/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -25,6 +29,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
+<style>
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; }
+.lang-switch a { padding: 7px 2px; color: var(--muted); transition: color 0.3s; }
+.lang-switch a.active { color: var(--ink); }
+.lang-switch a:hover { color: var(--red); }
+.lang-switch .sep { color: var(--line); }
+.lang-switch.light a { color: rgba(255,255,255,0.45); }
+.lang-switch.light a.active { color: #fff; }
+.lang-switch.light a:hover { color: var(--red); }
+.lang-switch.light .sep { color: rgba(255,255,255,0.2); }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -100,6 +115,9 @@
       <a href="/patrocinadors/" class="opt">Patrocinadors</a>
       <a href="/#info">Informació</a>
     </nav>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/premsa/" hreflang="ca" class="active" data-cta="lang-ca">CA</a><span class="sep">·</span><a href="/es/premsa/" hreflang="es" data-cta="lang-es">ES</a><span class="sep">·</span><a href="/en/premsa/" hreflang="en" data-cta="lang-en">EN</a>
+    </div>
   </div>
 </header>
 <main id="main">
@@ -165,6 +183,9 @@
     </div>
     <div class="foot-btm">
       <div class="foot-mark">#Som<em>Clot</em></div>
+      <div class="lang-switch light" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/premsa/" hreflang="ca" class="active" data-cta="foot-lang-ca">Català</a><span class="sep">·</span><a href="/es/premsa/" hreflang="es" data-cta="foot-lang-es">Castellano</a><span class="sep">·</span><a href="/en/premsa/" hreflang="en" data-cta="foot-lang-en">English</a>
+      </div>
       <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965</div>
     </div>
   </div>

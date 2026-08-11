@@ -138,6 +138,15 @@ body{padding-bottom:66px}
 .langs button:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 .langs button[aria-pressed="true"]{background:var(--red);color:#fff;border-color:var(--red)}
 
+/* ---------- SELECTOR D'IDIOMA (CA/ES/EN, navegacio entre paguines) ---------- */
+.langbar-right{display:flex;align-items:center;gap:16px}
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch a { padding: 7px 2px; opacity: 0.55; color: var(--paper); transition: opacity 0.3s, color 0.3s; }
+.lang-switch a.active { opacity: 1; font-weight: 700; color: var(--red); }
+.lang-switch a:hover { opacity: 1; color: var(--red); }
+.lang-switch .sep { opacity: 0.25; }
+@media(max-width:520px){ .langbar .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:8px;gap:6px} .langbar-right{gap:10px} }
+
 /* Bilingue: nomes s'amaga l'idioma inactiu, aixi cada element conserva
    el seu display natural (block, inline-block, grid...). */
 body[data-active="ca"] [data-lang="es"],
@@ -312,6 +321,10 @@ footer a{color:#CFCBC4}
 </style>
 <meta name="description" content="Escoleta del CB Grup Barna (4 a 8 anys) al Clot, Barcelona. Portes Obertes: vine a provar un entrenament sense compromís. 60 anys formant jugadors i jugadores al barri.">
 <link rel="canonical" href="https://cbgrupbarna.info/escoleta/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/escoleta/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/escoleta/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/escoleta/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/escoleta/">
 <meta property="og:title" content="Escola de bàsquet a Barcelona · Escoleta CB Grup Barna (4 a 8 anys)">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info/escoleta/">
@@ -467,9 +480,14 @@ footer a{color:#CFCBC4}
 <div class="langbar">
   <div class="wrap">
     <div class="brandmark">CB Grup Barna <span>·</span> Escoleta</div>
-    <div class="langs">
-      <button type="button" data-set="ca" aria-pressed="true">CAT</button>
-      <button type="button" data-set="es" aria-pressed="false">CAST</button>
+    <div class="langbar-right">
+      <div class="langs">
+        <button type="button" data-set="ca" aria-pressed="true">CAT</button>
+        <button type="button" data-set="es" aria-pressed="false">CAST</button>
+      </div>
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/escoleta/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/escoleta/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/escoleta/" hreflang="en">EN</a>
+      </div>
     </div>
   </div>
 </div>
