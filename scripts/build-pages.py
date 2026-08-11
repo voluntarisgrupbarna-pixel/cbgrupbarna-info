@@ -423,9 +423,8 @@ def build_patrocinadors():
     partners_grid = ''.join(
         ('<span class="partner-logo" title="Wilson · Balón oficial"><span style="font-family:var(--display);font-size:15px;letter-spacing:.14em;color:var(--ink-2)">WILSON</span></span>'
          if img is None else
-         (f'<a class="partner-logo" href="{ig}" target="_blank" rel="noopener" title="{nom} · Segueix a Instagram"><img src="/partners/{img}" alt="{nom}" loading="lazy"></a>'
-          if ig else
-          f'<span class="partner-logo" title="{nom}"><img src="/partners/{img}" alt="{nom}" loading="lazy"></span>'))
+         f'<a class="partner-logo" href="/patrocinadors/partners/{img[:-4]}/" title="{nom} · Veure fitxa">'
+         f'<img src="/partners/{img}" alt="{nom}" loading="lazy"></a>')
         for img, nom, ig in PARTNERS)
 
     body = f"""
@@ -549,6 +548,66 @@ def build_patrocinadors():
                  head(title, desc, url, SITE + ph + "hero_sf16.jpg", ld,
                       "patrocinadores CB Grup Barna, patrocinio baloncesto Barcelona, partners club "
                       "de baloncesto, esponsorización deportiva Barcelona, dossier de colaboración") + body + FOOT)
+
+
+def build_partner_landing(img, nom, ig):
+    """Fitxa individual d'un partner: /patrocinadors/partners/<slug>/. No
+    inventem descripció del negoci (no en tenim dades verificades) — la
+    pàgina presenta el partner dins l'ecosistema del club i el botó de
+    seguir-lo, no un text de màrqueting sobre la seva activitat."""
+    slug = img[:-4]
+    url = SITE + f"/patrocinadors/partners/{slug}/"
+    title = f"{nom} · Partner del CB Grup Barna"
+    desc = (f"{nom} forma part de l'ecosistema de partners i col·laboradors del CB Grup Barna, "
+            f"el club de bàsquet base del Clot, Barcelona.")
+
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
+         "description": desc, "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}},
+        BREADCRUMB([("CB Grup Barna", "/"), ("Patrocinadors", "/patrocinadors/"), (nom, f"/patrocinadors/partners/{slug}/")]),
+    ]}
+
+    follow_btn = (f'<a href="{ig}" class="btn red" target="_blank" rel="noopener" data-cta="partner-ig">'
+                  f'Seguir {nom} a Instagram</a>' if ig else '')
+    follow_note = ('' if ig else
+                   '<p style="font-size:13px;color:var(--muted)">Encara no tenim confirmat el seu '
+                   'Instagram — si el coneixes, escriu-nos i el publiquem.</p>')
+
+    body = f"""
+{crumbs([("Inici", "/"), ("Patrocinadors", "/patrocinadors/"), (nom, None)])}
+<div class="wrap">
+  <div class="phead narrow center">
+    <p class="eyebrow red">Partner del CB Grup Barna</p>
+    <h1 style="margin-left:auto;margin-right:auto">{nom}</h1>
+    <div class="phead-media" style="aspect-ratio:16/9;max-width:420px;margin-left:auto;margin-right:auto;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid var(--line)">
+      <img src="/partners/{img}" alt="{nom}" style="max-width:70%;max-height:60%;object-fit:contain" width="300" height="169">
+    </div>
+    <p class="lede" style="margin-left:auto;margin-right:auto">{nom} forma part de l'ecosistema de
+    partners i col·laboradors que fan possible el CB Grup Barna, el club de bàsquet base del Clot,
+    Barcelona. Segueix-los: cada follow que reben des del club forma part del que els oferim a canvi.</p>
+    <div class="btn-row" style="justify-content:center;margin-top:28px">
+      {follow_btn}
+      <a href="/patrocinadors/" class="btn ghost" data-cta="partner-back">Veure tots els partners</a>
+    </div>
+    {follow_note}
+  </div>
+
+  <div class="narrow prose" style="margin-top:clamp(20px,3vw,32px)">
+    <div class="closer">
+      <h2>Vols que la teva marca hi sigui, com {nom}?</h2>
+      <p>El club ofereix diversos nivells de col·laboració, des de presència digital fins a
+      patrocini d'equip, més la col·laboració en espècie per a qui aporta producte o servei.</p>
+      <div class="btn-row">
+        <a href="{WA_CLUB}&amp;text={wa('Hola, quiero información sobre las colaboraciones del CB Grup Barna.')}" class="btn red" target="_blank" rel="noopener" data-cta="partner-closer-wa">Hablar por WhatsApp</a>
+        <a href="/patrocinadors/#colaborar" class="btn ghost" data-cta="partner-closer-niveles">Veure els nivells</a>
+      </div>
+    </div>
+  </div>
+</div>
+"""
+    return write(f"patrocinadors/partners/{slug}/index.html",
+                 head(title, desc, url, SITE + "/partners/" + img, ld,
+                      f"{nom}, partner CB Grup Barna, patrocinadors bàsquet Barcelona") + body + FOOT)
 
 
 # ═══════════════════════════════════════════════════════════════ /3x3/ ════
@@ -1523,6 +1582,9 @@ if __name__ == "__main__":
     print("Generant pàgines:")
     print(build_campus())
     print(build_patrocinadors())
+    partner_pages = [p for p in PARTNERS if p[0]]
+    for img, nom, ig in partner_pages:
+        print(build_partner_landing(img, nom, ig))
     print(build_3x3())
     print(build_blog_index())
     for a in ARTICLES:
@@ -1531,4 +1593,4 @@ if __name__ == "__main__":
     for a in PRESS:
         print(build_press_article(a))
     print(build_calendaris())
-    print(f"\n{len(ARTICLES) + len(PRESS) + 5} pàgines generades.")
+    print(f"\n{len(ARTICLES) + len(PRESS) + len(partner_pages) + 5} pàgines generades.")
