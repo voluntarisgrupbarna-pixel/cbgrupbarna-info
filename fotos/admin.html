@@ -764,6 +764,7 @@ async function saveNewEvent() {
     cover: null,
     cover_url: null,
     photos: [],
+    hashes: {},
     allow_download: document.getElementById('ev-dl').checked,
     source: flickrAlbumId ? 'flickr-embed' : 'repo',
     ...(flickrAlbumId ? { flickr_album_id: flickrAlbumId } : {}),
@@ -866,7 +867,14 @@ const VIDEO_MAX_MB = 90;
 function isVideoFile(f) { return f.type.startsWith('video/') || /\.(mp4|mov|webm|m4v)$/i.test(f.name); }
 function isImageFile(f) { return f.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name); }
 
-function addFiles(fileList) {
+// ── DUPLICATE DETECTION (per event, per contingut) ──
+async function hashFile(file) {
+  const buf = await file.arrayBuffer();
+  const digest = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function addFiles(fileList) {
   const all = Array.from(fileList).filter(f => isImageFile(f) || isVideoFile(f));
   if (!all.length) return;
 
@@ -883,13 +891,27 @@ function addFiles(fileList) {
   }
   if (!files.length) return;
 
-  files.forEach(file => {
-    uploadQueue.push({ file, status: 'pending', progress: 0 });
-  });
+  const knownHashes = new Set([
+    ...(currentEvent && currentEvent.hashes ? Object.keys(currentEvent.hashes) : []),
+    ...uploadQueue.map(q => q.hash).filter(Boolean),
+  ]);
+
+  let dupCount = 0;
+  for (const file of files) {
+    const hash = await hashFile(file);
+    if (knownHashes.has(hash)) { dupCount++; continue; }
+    knownHashes.add(hash);
+    uploadQueue.push({ file, status: 'pending', progress: 0, hash });
+  }
+  if (dupCount > 0) {
+    const plural = dupCount !== 1;
+    toast(`${dupCount} fitxer${plural ? 's' : ''} ${plural ? 'són' : 'és'} idèntic${plural ? 's' : ''} a un ja pujat en aquest esdeveniment i no s'ha${plural ? 'n' : ''} afegit.`, 'error');
+  }
 
   renderUploadQueue();
-  document.getElementById('upload-actions').style.display = 'flex';
-  document.getElementById('upload-btn-text').textContent = `Pujar ${uploadQueue.filter(f=>f.status==='pending').length} foto${uploadQueue.filter(f=>f.status==='pending').length !== 1 ? 's' : ''}`;
+  const pending = uploadQueue.filter(f => f.status === 'pending').length;
+  document.getElementById('upload-actions').style.display = pending ? 'flex' : 'none';
+  document.getElementById('upload-btn-text').textContent = `Pujar ${pending} fitxer${pending !== 1 ? 's' : ''}`;
 }
 
 function renderUploadQueue() {
@@ -954,6 +976,10 @@ async function uploadAll() {
       if (!ev.photos) ev.photos = [];
       ev.photos.push(filename);
       if (!ev.cover && !isVideoFile(item.file)) ev.cover = filename;
+      if (item.hash) {
+        if (!ev.hashes) ev.hashes = {};
+        ev.hashes[item.hash] = filename;
+      }
 
       // Update events index entry
       const idx = events.findIndex(e => e.id === ev.id);
@@ -1077,6 +1103,10 @@ async function deleteUploadedPhoto(eventId, filename, photoIndex) {
     if (ev) {
       ev.photos.splice(photoIndex, 1);
       if (ev.cover === filename) ev.cover = ev.photos[0] || null;
+      if (ev.hashes) {
+        const h = Object.keys(ev.hashes).find(k => ev.hashes[k] === filename);
+        if (h) delete ev.hashes[h];
+      }
       await saveEvents();
       if (currentEvent && currentEvent.id === eventId) {
         currentEvent = ev;
