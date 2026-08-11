@@ -890,14 +890,14 @@ function matchCard(p, m, showDate) {
     <div class="m-edit">
       <input type="number" inputmode="numeric" min="0" max="300" id="pl-${p.id}" placeholder="local" value="${p.puntsLocal ?? ''}">
       <span class="sep">–</span>
-      <input type="number" inputmode="numeric" min="0" max="300" id="pv-${p.id}" placeholder="visit." value="${p.puntsVisitant ?? ''}">
-      <button onclick="saveResult('${p.id}')">Guardar</button>
+      <input type="number" inputmode="numeric" min="0" max="300" id="pv-${p.id}" placeholder="away" value="${p.puntsVisitant ?? ''}">
+      <button onclick="saveResult('${p.id}')">Save</button>
     </div>` : '';
   return `
   <div class="match ${p.casa?'casa':'fora'} ${p.jugat ? (p.res==='W'?'win':p.res==='L'?'loss':'') : ''}">
     <div class="m-top">
       <span class="m-hora">${showDate?fmtDia(p.data)+' · ':''}${p.hora}</span>
-      <span class="m-badge ${p.casa?'casa':'fora'}">${p.casa?'Casa':'Fora'}</span>
+      <span class="m-badge ${p.casa?'casa':'fora'}">${p.casa?'Home':'Away'}</span>
       <span class="m-eq">${eq.emoji||''} ${eq.curt||eq.nom||''}</span>
     </div>
     <div class="m-teams">
@@ -907,8 +907,8 @@ function matchCard(p, m, showDate) {
     </div>
     <div class="m-loc">📍 <a href="${mapsViewUrl}" target="_blank" rel="noopener" style="border:none;padding:0;color:var(--muted);text-decoration:underline;font-family:inherit;font-size:inherit;letter-spacing:normal">${p.pista}${p.adreca?` · ${p.adreca}`:''}</a>
       <span class="m-loc-actions">
-        <a href="${mapsCarUrl}" target="_blank" rel="noopener">🚗 COTXE</a>
-        <a href="${mapsTransitUrl}" target="_blank" rel="noopener">🚌 BUS/TREN</a>
+        <a href="${mapsCarUrl}" target="_blank" rel="noopener">🚗 CAR</a>
+        <a href="${mapsTransitUrl}" target="_blank" rel="noopener">🚌 BUS/TRAIN</a>
       </span>
     </div>
     <div class="m-cat">${p.categoria}</div>
@@ -932,8 +932,8 @@ function renderCanvisBanner() {
   el.innerHTML = `
   <div style="margin-bottom:14px;padding:12px 14px;background:rgba(230,51,41,.08);border:1px solid rgba(230,51,41,.25);border-radius:14px;font-size:12.5px;color:var(--ink)">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-      <b>📣 El robot FCBQ ha detectat ${items.length} canvi${items.length===1?'':'s'} de calendari</b>
-      <button onclick="marcarCanvisVistos()" style="border:none;background:none;color:var(--red-ink);font-size:12px;cursor:pointer;text-decoration:underline">D'acord, entesos</button>
+      <b>📣 The FCBQ robot has detected ${items.length} schedule change${items.length===1?'':'s'}</b>
+      <button onclick="marcarCanvisVistos()" style="border:none;background:none;color:var(--red-ink);font-size:12px;cursor:pointer;text-decoration:underline">Got it</button>
     </div>
     <ul style="margin:8px 0 0;padding-left:18px">${resum}</ul>
   </div>`;
@@ -963,20 +963,20 @@ function renderJornada() {
   if (state.filter==='casa') list = list.filter(p=>p.casa);
   if (state.filter==='fora') list = list.filter(p=>!p.casa);
   const box = document.getElementById('jornada-list');
-  if (!list.length) { box.innerHTML = `<div class="empty">Cap partit aquest cap de setmana amb aquest filtre. 🏖</div>`; }
+  if (!list.length) { box.innerHTML = `<div class="empty">No matches this weekend with this filter. 🏖</div>`; }
   else {
     const days = [...new Set(list.map(p=>p.data))].sort();
     box.innerHTML = days.map(d=>{
       const dow = new Date(d+'T12:00:00').getDay();
       const cls = dow===6?'sat':(dow===0?'sun':'');
       const dayList = list.filter(p=>p.data===d);
-      return `<div class="day-h ${cls}"><span>${fmtDia(d)}</span><span class="line"></span><span class="n">${dayList.length} partit${dayList.length>1?'s':''}</span></div>`
+      return `<div class="day-h ${cls}"><span>${fmtDia(d)}</span><span class="line"></span><span class="n">${dayList.length} match${dayList.length>1?'es':''}</span></div>`
         + dayList.map(p=>matchCard(p,m,false)).join('');
     }).join('');
   }
   // WhatsApp del finde
   const wa = document.getElementById('wa-share');
-  const txt = buildWaText(list, m, `🏀 *CB GRUP BARNA · Cap de setmana ${wkLabel(state.wk)}*`);
+  const txt = buildWaText(list, m, `🏀 *CB GRUP BARNA · Weekend ${wkLabel(state.wk)}*`);
   wa.href = 'https://wa.me/?text='+encodeURIComponent(txt);
   wa.style.display = list.length?'flex':'none';
 }
@@ -1003,38 +1003,38 @@ function renderResultats() {
   const pct = played.length? Math.round(w/played.length*100) : 0;
   renderWinners(m);
   document.getElementById('club-stats').innerHTML = `
-    <div class="stat"><b>${played.length}</b><span>Jugats</span></div>
-    <div class="stat"><b class="g">${w}</b><span>Victòries</span></div>
-    <div class="stat"><b class="p">${l}</b><span>Derrotes</span></div>
-    <div class="stat"><b>${pct}%</b><span>% Vict.</span></div>`;
+    <div class="stat"><b>${played.length}</b><span>Played</span></div>
+    <div class="stat"><b class="g">${w}</b><span>Wins</span></div>
+    <div class="stat"><b class="p">${l}</b><span>Losses</span></div>
+    <div class="stat"><b>${pct}%</b><span>% Win</span></div>`;
   // ratxes ordenades: millors primer
   const rows = m.equips.map(e=>({e, s: teamStats(e.id, m.partits)}))
     .sort((a,b)=> (b.s.sType==='W'?b.s.streak:-b.s.streak) - (a.s.sType==='W'?a.s.streak:-a.s.streak));
   // equips que millor van → destacats amb CTA de seguiment
   const enRatxa = rows.filter(r=>r.s.sType==='W' && r.s.streak>=2);
   document.getElementById('millors-box').innerHTML = enRatxa.length ? `<div class="winners" style="background:linear-gradient(135deg,rgba(34,197,94,.10),var(--panel) 60%);border-color:rgba(34,197,94,.35)">
-    <h3 style="color:var(--green)">🔥 Equips que van millor ara mateix</h3>
-    ${enRatxa.map(({e,s})=>`<div class="wrow">${e.emoji||'🏀'} ${e.nom}<small>${s.streak} victòries seguides · ${s.w}-${s.l}</small></div>`).join('')}
-    <a class="g-btn" style="text-decoration:none;background:#E31E24" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">📸 Segueix-los a @cbgrupbarna</a>
+    <h3 style="color:var(--green)">🔥 Teams on the best run right now</h3>
+    ${enRatxa.map(({e,s})=>`<div class="wrow">${e.emoji||'🏀'} ${e.nom}<small>${s.streak} wins in a row · ${s.w}-${s.l}</small></div>`).join('')}
+    <a class="g-btn" style="text-decoration:none;background:#E31E24" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">📸 Follow them at @cbgrupbarna</a>
   </div>` : '';
   document.getElementById('ratxes-list').innerHTML = rows.map(({e,s})=>{
-    let stk = '<span class="streak">Sense partits jugats</span>';
-    if (s.sType==='W') stk = `<span class="streak hot">🔥 ${s.streak} victòri${s.streak>1?'es':'a'} seguid${s.streak>1?'es':'a'}</span>`;
-    if (s.sType==='L') stk = `<span class="streak cold">🧊 ${s.streak} derrot${s.streak>1?'es':'a'} seguid${s.streak>1?'es':'a'}</span>`;
+    let stk = '<span class="streak">No matches played</span>';
+    if (s.sType==='W') stk = `<span class="streak hot">🔥 ${s.streak} win${s.streak>1?'s':''} in a row</span>`;
+    if (s.sType==='L') stk = `<span class="streak cold">🧊 ${s.streak} loss${s.streak>1?'es':''} in a row</span>`;
     return `<button class="team-row" onclick="openTeam('${e.id}')">
       <span class="em">${e.emoji||'🏀'}</span>
-      <span class="nm"><b>${e.nom}</b><small>${e.competicio||''}${e.posicio?` · ${e.posicio}a posició`:''}</small>
+      <span class="nm"><b>${e.nom}</b><small>${e.competicio||''}${e.posicio?` · position ${e.posicio}`:''}</small>
         <span class="dots">${s.last5.map(r=>`<span class="dot ${r==='W'?'w':'l'}"></span>`).join('')}</span>
         ${stk}
       </span>
-      <span class="rec">${s.w}-${s.l}<small>V - D</small></span>
+      <span class="rec">${s.w}-${s.l}<small>W - L</small></span>
     </button>`;
   }).join('');
   // pendents
   const pend = m.partits.filter(p=>!p.jugat && p.data < todayStr()).slice(-12).reverse();
   document.getElementById('pendents-list').innerHTML = pend.length
     ? pend.map(p=>matchCard(p,m,true)).join('')
-    : `<div class="empty">Tot al dia. Cap resultat pendent. ✅</div>`;
+    : `<div class="empty">All caught up. No pending results. ✅</div>`;
 }
 
 
@@ -1099,29 +1099,29 @@ function lecturesEquip(a, e) {
   const pct = Math.round(a.w / a.pj * 100);
   if (a.casa.pj >= MIN_MOSTRA && a.fora.pj >= MIN_MOSTRA) {
     const pc = a.casa.w / a.casa.pj, pf = a.fora.w / a.fora.pj;
-    if (pc - pf >= 0.3) out.push({ t:'🏠', txt:`<b>Molt fort a casa.</b> ${a.casa.w}-${a.casa.l} a la Nau i ${a.fora.w}-${a.fora.l} fora. Els partits de casa són on es guanya la temporada.` });
-    else if (pf - pc >= 0.3) out.push({ t:'🚌', txt:`<b>Millor fora que a casa</b> (${a.fora.w}-${a.fora.l} fora, ${a.casa.w}-${a.casa.l} a casa). Val la pena revisar què passa a la Nau.` });
+    if (pc - pf >= 0.3) out.push({ t:'🏠', txt:`<b>Very strong at home.</b> ${a.casa.w}-${a.casa.l} at the Nau and ${a.fora.w}-${a.fora.l} away. Home matches are where the season is won.` });
+    else if (pf - pc >= 0.3) out.push({ t:'🚌', txt:`<b>Better away than at home</b> (${a.fora.w}-${a.fora.l} away, ${a.casa.w}-${a.casa.l} at home). Worth checking what's happening at the Nau.` });
   }
   if (a.pf != null && a.pc != null) {
     const d = a.pf - a.pc;
-    if (d >= 8) out.push({ t:'📈', txt:`<b>Domini clar:</b> ${a.pf} punts de mitjana a favor i ${a.pc} en contra (+${d}).` });
-    else if (d <= -8) out.push({ t:'📉', txt:`<b>Encaixa massa:</b> ${a.pc} punts en contra per ${a.pf} a favor (${d}). El problema és defensiu.` });
-    else if (a.pj >= 5) out.push({ t:'⚖️', txt:`<b>Partits ajustats:</b> ${a.pf} a favor i ${a.pc} en contra. Cada possessió compta.` });
+    if (d >= 8) out.push({ t:'📈', txt:`<b>Clear dominance:</b> ${a.pf} points for on average and ${a.pc} against (+${d}).` });
+    else if (d <= -8) out.push({ t:'📉', txt:`<b>Conceding too much:</b> ${a.pc} points against for ${a.pf} for (${d}). The problem is defensive.` });
+    else if (a.pj >= 5) out.push({ t:'⚖️', txt:`<b>Tight matches:</b> ${a.pf} for and ${a.pc} against. Every possession counts.` });
   }
   if (a.tendencia) {
-    if (a.tendencia.txt === 'a més') out.push({ t:'🚀', txt:`<b>Va a més:</b> ${a.tendencia.delta > 0 ? '+' : ''}${a.tendencia.delta} punts de percentatge de victòries a la segona meitat del calendari jugat.` });
-    if (a.tendencia.txt === 'a menys') out.push({ t:'⚠️', txt:`<b>Va a menys:</b> ${a.tendencia.delta} punts de percentatge respecte al començament. Toca reaccionar.` });
+    if (a.tendencia.txt === 'a més') out.push({ t:'🚀', txt:`<b>Trending up:</b> ${a.tendencia.delta > 0 ? '+' : ''}${a.tendencia.delta} percentage points of wins in the second half of the schedule played.` });
+    if (a.tendencia.txt === 'a menys') out.push({ t:'⚠️', txt:`<b>Trending down:</b> ${a.tendencia.delta} percentage points versus the start. Time to react.` });
   }
-  if (a.millorW >= 3) out.push({ t:'🔥', txt:`<b>Millor ratxa de la temporada:</b> ${a.millorW} victòries seguides.` });
-  if (a.pitjorL >= 3) out.push({ t:'🧊', txt:`Pitjor moment: ${a.pitjorL} derrotes seguides.` });
+  if (a.millorW >= 3) out.push({ t:'🔥', txt:`<b>Best streak of the season:</b> ${a.millorW} wins in a row.` });
+  if (a.pitjorL >= 3) out.push({ t:'🧊', txt:`Worst spell: ${a.pitjorL} losses in a row.` });
   // rivals que se'ns han donat malament
   const negres = Object.entries(a.perRival).filter(([,v]) => v.pj >= 2 && v.w === 0);
-  if (negres.length) out.push({ t:'🎯', txt:`<b>Bèstia negra:</b> ${negres.map(([r,v])=>`${r} (${v.pj} partits, ${v.pj} derrotes)`).join(' · ')}.` });
+  if (negres.length) out.push({ t:'🎯', txt:`<b>Bogey team:</b> ${negres.map(([r,v])=>`${r} (${v.pj} matches, ${v.pj} losses)`).join(' · ')}.` });
   // pistes on no guanyem
   const males = Object.entries(a.perPista).filter(([,v]) => v.pj >= 2 && v.w === 0 && !v.casa);
-  if (males.length) out.push({ t:'📍', txt:`<b>Pista complicada:</b> ${males.map(([p,v])=>`${p} (${v.l} derrotes de ${v.pj})`).join(' · ')}.` });
-  if (pct >= 70 && a.pj >= 5) out.push({ t:'🏆', txt:`<b>${pct}% de victòries.</b> Ritme de zona alta del grup.` });
-  if (pct <= 30 && a.pj >= 5) out.push({ t:'🛟', txt:`<b>${pct}% de victòries.</b> Ritme de zona baixa: els punts que queden són vitals.` });
+  if (males.length) out.push({ t:'📍', txt:`<b>Tough court:</b> ${males.map(([p,v])=>`${p} (${v.l} losses out of ${v.pj})`).join(' · ')}.` });
+  if (pct >= 70 && a.pj >= 5) out.push({ t:'🏆', txt:`<b>${pct}% wins.</b> Top-of-group pace.` });
+  if (pct <= 30 && a.pj >= 5) out.push({ t:'🛟', txt:`<b>${pct}% wins.</b> Bottom-of-group pace: the remaining points are vital.` });
   return out;
 }
 
@@ -1158,11 +1158,11 @@ function renderAnalisi() {
   const avis = document.getElementById('an-avis'); if (!avis) return;
 
   if (!club.jug.length) {
-    avis.innerHTML = `<div class="g-box"><h3>📈 Encara no hi ha res a analitzar</h3>
-      <p>L'anàlisi es construeix amb <b>els resultats reals</b> dels partits. A mesura que els vagis introduint a Gestió,
-      aquí apareixeran les ratxes de cada equip, la tendència, les pistes on costa guanyar, les bèsties negres i
-      quants partits calen per pujar posicions.<br><br>
-      <b>${m.partits.length} partits</b> carregats i <b>0 jugats</b> · la temporada comença el 5 de setembre.</p></div>`;
+    avis.innerHTML = `<div class="g-box"><h3>📈 Nothing to analyze yet</h3>
+      <p>The analysis is built from the teams' <b>real results</b>. As you enter them in Management,
+      you'll see each team's streaks, trend, courts where it's hard to win, bogey teams and
+      how many matches are needed to climb positions.<br><br>
+      <b>${m.partits.length} matches</b> loaded and <b>0 played</b> · the season starts on 5 September.</p></div>`;
     ['an-setmana','an-equips','an-pistes','an-rivals'].forEach(id=>document.getElementById(id).innerHTML='');
     return;
   }
@@ -1175,8 +1175,8 @@ function renderAnalisi() {
   const dUlt = club.jug.filter(p=>p.data>=ultima && p.data<=fi.toISOString().slice(0,10));
   const wUlt = dUlt.filter(p=>p.res==='W').length;
   document.getElementById('an-setmana').innerHTML = `
-    <div class="winners"><h3>📅 L'última jornada · ${wkLabel(ultima)}</h3>
-      <div class="wrow">Balanç del club<small>${wUlt}V - ${dUlt.length-wUlt}D</small></div>
+    <div class="winners"><h3>📅 The latest matchday · ${wkLabel(ultima)}</h3>
+      <div class="wrow">Club record<small>${wUlt}W - ${dUlt.length-wUlt}L</small></div>
       ${dUlt.map(p=>{const e=m.equips.find(x=>x.id===p.equipId)||{};
         return `<div class="wrow">${p.res==='W'?'✅':'❌'} ${e.nom}<small>${p.puntsLocal}-${p.puntsVisitant}</small></div>`}).join('')}
     </div>`;
@@ -1184,24 +1184,24 @@ function renderAnalisi() {
   // ── equip a equip ──
   const rows = m.equips.map(e => ({ e, a: analitzaEquip(e.id, m) })).filter(x => x.a.pj > 0)
     .sort((x,y) => (y.a.w/Math.max(1,y.a.pj)) - (x.a.w/Math.max(1,x.a.pj)));
-  document.getElementById('an-equips').innerHTML = `<div class="sec-t">🧠 Lectura de cada equip</div>` + rows.map(({e,a}) => {
+  document.getElementById('an-equips').innerHTML = `<div class="sec-t">🧠 Team-by-team read</div>` + rows.map(({e,a}) => {
     const lect = lecturesEquip(a, e), obj = objectiusEquip(a, e);
     return `<div class="g-box">
       <div class="g-step" style="margin-bottom:10px"><span style="font-size:20px">${e.emoji||'🏀'}</span>
         <h3 style="flex:1">${e.nom}</h3>
         <span style="font-family:'Anton',sans-serif;font-size:20px">${a.w}-${a.l}</span></div>
       <div class="stat-row" style="margin-bottom:12px">
-        <div class="stat"><b>${a.pj}</b><span>Jugats</span></div>
-        <div class="stat"><b>${a.casa.w}-${a.casa.l}</b><span>A casa</span></div>
-        <div class="stat"><b>${a.fora.w}-${a.fora.l}</b><span>Fora</span></div>
-        <div class="stat"><b>${a.pf!=null?a.pf:'—'}</b><span>Punts/partit</span></div>
+        <div class="stat"><b>${a.pj}</b><span>Played</span></div>
+        <div class="stat"><b>${a.casa.w}-${a.casa.l}</b><span>Home</span></div>
+        <div class="stat"><b>${a.fora.w}-${a.fora.l}</b><span>Away</span></div>
+        <div class="stat"><b>${a.pf!=null?a.pf:'—'}</b><span>Points/game</span></div>
       </div>
       ${lect.length ? lect.map(x=>`<p style="font-size:12.5px;line-height:1.6;margin-bottom:7px">${x.t} ${x.txt}</p>`).join('')
-        : `<p style="font-size:12px;color:var(--muted)">Amb ${a.pj} partit${a.pj>1?'s':''} encara no es poden treure conclusions fiables (calen ${MIN_MOSTRA}).</p>`}
+        : `<p style="font-size:12px;color:var(--muted)">With ${a.pj} match${a.pj>1?'es':''} played there's not yet enough sample for reliable conclusions (need ${MIN_MOSTRA}).</p>`}
       ${obj && a.pj >= MIN_MOSTRA ? `<div style="margin-top:10px;padding:12px;background:var(--panel2);border-radius:12px;font-size:12.5px;line-height:1.6">
-        🎯 <b>Al ritme actual (${obj.ritme}% de victòries)</b> acabaria amb unes <b>${obj.projeccio} victòries</b> de ${obj.total} partits.
-        ${obj.assequibles.length ? `<br>Dels propers, els més al seu abast: ${obj.assequibles.map(p=>`<b>${p.casa?'vs':'@'} ${(p.casa?p.visitant:p.local).slice(0,24)}</b> (${fmtDia(p.data).toLowerCase()})`).join(' · ')}.` : ''}
-        ${a.restants ? `<br>Queden <b>${a.restants} partits</b>: cada victòria val ${Math.round(100/a.total)}% del calendari.` : ''}
+        🎯 <b>At the current pace (${obj.ritme}% wins)</b> it would finish with around <b>${obj.projeccio} wins</b> out of ${obj.total} matches.
+        ${obj.assequibles.length ? `<br>Of the upcoming ones, the most within reach: ${obj.assequibles.map(p=>`<b>${p.casa?'vs':'@'} ${(p.casa?p.visitant:p.local).slice(0,24)}</b> (${fmtDia(p.data).toLowerCase()})`).join(' · ')}.` : ''}
+        ${a.restants ? `<br>There are <b>${a.restants} matches</b> left: each win is worth ${Math.round(100/a.total)}% of the schedule.` : ''}
       </div>` : ''}
     </div>`;
   }).join('');
@@ -1209,17 +1209,17 @@ function renderAnalisi() {
   // ── pistes ──
   const pistes = Object.entries(club.perPista).filter(([,v])=>v.pj>=2)
     .sort((a,b)=>(a[1].w/a[1].pj)-(b[1].w/b[1].pj));
-  document.getElementById('an-pistes').innerHTML = pistes.length ? `<div class="sec-t">📍 Pistes: on costa i on no</div>`
+  document.getElementById('an-pistes').innerHTML = pistes.length ? `<div class="sec-t">📍 Courts: where it's hard and where it isn't</div>`
     + pistes.map(([nom,v])=>`<div class="team-row"><span class="em">${v.casa?'🏠':'🚌'}</span>
-        <span class="nm"><b>${nom}</b><small>${v.pj} partits</small></span>
-        <span class="rec" style="color:${v.w>v.l?'var(--win)':v.l>v.w?'var(--loss)':'inherit'}">${v.w}-${v.l}<small>V - D</small></span></div>`).join('') : '';
+        <span class="nm"><b>${nom}</b><small>${v.pj} matches</small></span>
+        <span class="rec" style="color:${v.w>v.l?'var(--win)':v.l>v.w?'var(--loss)':'inherit'}">${v.w}-${v.l}<small>W - L</small></span></div>`).join('') : '';
 
   // ── rivals ──
   const rivals = Object.entries(club.perRival).filter(([,v])=>v.pj>=2)
     .sort((a,b)=>(a[1].w/a[1].pj)-(b[1].w/b[1].pj)).slice(0,10);
-  document.getElementById('an-rivals').innerHTML = rivals.length ? `<div class="sec-t">🎯 Rivals repetits</div>`
-    + rivals.map(([nom,v])=>`<div class="team-row"><span class="nm"><b>${nom}</b><small>${v.pj} enfrontaments</small></span>
-        <span class="rec" style="color:${v.w>v.l?'var(--win)':v.l>v.w?'var(--loss)':'inherit'}">${v.w}-${v.l}<small>V - D</small></span></div>`).join('') : '';
+  document.getElementById('an-rivals').innerHTML = rivals.length ? `<div class="sec-t">🎯 Repeated opponents</div>`
+    + rivals.map(([nom,v])=>`<div class="team-row"><span class="nm"><b>${nom}</b><small>${v.pj} meetings</small></span>
+        <span class="rec" style="color:${v.w>v.l?'var(--win)':v.l>v.w?'var(--loss)':'inherit'}">${v.w}-${v.l}<small>W - L</small></span></div>`).join('') : '';
 }
 
 /* ---------- render: equips ---------- */
@@ -1233,7 +1233,7 @@ function renderEquips() {
       return `<button class="team-row" onclick="openTeam('${e.id}')">
         <span class="em">${e.emoji||'🏀'}</span>
         <span class="nm"><b>${e.nom}</b><small>${e.competicio||''}</small></span>
-        <span class="rec">${s.w}-${s.l}<small>${e.posicio?`${e.posicio}a posició`:'V - D'}</small></span>
+        <span class="rec">${s.w}-${s.l}<small>${e.posicio?`Pos. ${e.posicio}`:'W - L'}</small></span>
       </button>`;
     }).join('');
     return;
@@ -1245,29 +1245,29 @@ function renderEquips() {
   const posEdit = editMode
     ? `<input type="number" min="1" max="20" value="${e.posicio||''}" id="pos-in" placeholder="?"> de <input type="number" min="2" max="20" value="${e.equipsGrup||''}" id="grp-in" placeholder="?"> <button class="g-btn" style="padding:6px 12px" onclick="savePos('${e.id}')">OK</button>`
     : (e.posicio ? `<b>${e.posicio}${e.equipsGrup?`<span style="font-size:16px;color:var(--muted)">/${e.equipsGrup}</span>`:''}</b>` : `<b style="color:var(--muted);font-size:18px">—</b>`);
-  const waTxt = buildWaText(teamMatches.filter(p=>!p.jugat).slice(0,5), m, `🏀 *${e.nom} · Propers partits*`);
+  const waTxt = buildWaText(teamMatches.filter(p=>!p.jugat).slice(0,5), m, `🏀 *${e.nom} · Upcoming matches*`);
   document.getElementById('equip-detall').innerHTML = `
-    <button class="back-btn" onclick="closeTeam()">← TOTS ELS EQUIPS</button>
+    <button class="back-btn" onclick="closeTeam()">← ALL TEAMS</button>
     <div class="td-head">
       <div class="em">${e.emoji||'🏀'}</div>
       <h2>${e.nom}</h2>
       <div class="comp">${e.competicio||''}</div>
     </div>
     <div class="stat-row">
-      <div class="stat"><b>${s.pj}</b><span>Jugats</span></div>
-      <div class="stat"><b class="g">${s.w}</b><span>Vict.</span></div>
-      <div class="stat"><b class="p">${s.l}</b><span>Derr.</span></div>
-      <div class="stat"><b>${s.sType?`${s.streak}${s.sType==='W'?'V':'D'}`:'—'}</b><span>Ratxa</span></div>
+      <div class="stat"><b>${s.pj}</b><span>Played</span></div>
+      <div class="stat"><b class="g">${s.w}</b><span>W.</span></div>
+      <div class="stat"><b class="p">${s.l}</b><span>L.</span></div>
+      <div class="stat"><b>${s.sType?`${s.streak}${s.sType==='W'?'W':'L'}`:'—'}</b><span>Streak</span></div>
     </div>
-    <div class="pos-box">${posEdit}<span>posició a la lliga<br><small style="color:var(--muted)">${editMode?'edita i prem OK':'s\'actualitza des de gestió'}</small></span></div>
+    <div class="pos-box">${posEdit}<span>league position<br><small style="color:var(--muted)">${editMode?'edita i prem OK':'updates from management'}</small></span></div>
     <div class="td-actions">
       <a href="https://wa.me/?text=${encodeURIComponent(waTxt)}" target="_blank" rel="noopener">📲 WhatsApp</a>
-      <button onclick="downloadICS('${e.id}')">📅 Descarregar .ics</button>
-      <a href="webcal://cbgrupbarna.info/partits/calendaris/ics/${e.id}.ics" title="S'obre a l'app de calendari del mòbil o ordinador i s'actualitza sola cada dia">🔔 Subscriu-te al calendari</a>
+      <button onclick="downloadICS('${e.id}')">📅 Download .ics</button>
+      <a href="webcal://cbgrupbarna.info/partits/calendaris/ics/${e.id}.ics" title="Opens in your phone or computer's calendar app and updates itself every day">🔔 Subscribe to calendar</a>
     </div>
-    ${s.next?`<div class="sec-t">⏭ Proper partit</div>${matchCard(s.next,m,true)}`:''}
+    ${s.next?`<div class="sec-t">⏭ Next match</div>${matchCard(s.next,m,true)}`:''}
     <div id="td-rivals"></div>
-    <div class="sec-t">📋 Calendari complet</div>
+    <div class="sec-t">📋 Full schedule</div>
     ${teamMatches.map(p=>matchCard(p,m,true)).join('')}`;
 }
 function openTeam(id){ state.team=id; showView('equips'); renderEquips(); fillRivals(id); window.scrollTo({top:0}); }
@@ -1278,13 +1278,13 @@ async function fillRivals(eqId) {
   if (!box || !data) return;
   const rows = Object.entries(data).sort((a,b)=>b[1].seguidors-a[1].seguidors);
   const handles = rows.map(([,r])=>r.instagram).join(' ');
-  box.innerHTML = `<div class="sec-t">📣 Rivals a Instagram (per prioritzar etiquetats)</div>`
+  box.innerHTML = `<div class="sec-t">📣 Opponents on Instagram (to prioritize tagging)</div>`
     + rows.map(([nom,r])=>`<a class="team-row" style="text-decoration:none" href="https://instagram.com/${r.instagram.slice(1)}" target="_blank" rel="noopener">
         <img src="${r.logo}" style="width:34px;height:34px;object-fit:contain" alt="">
         <span class="nm"><b>${r.nomCurt}</b><small>${r.instagram}</small></span>
-        <span class="rec">${(r.seguidors/1000).toFixed(1).replace('.',',')}K<small>seguidors</small></span>
+        <span class="rec">${(r.seguidors/1000).toFixed(1)}K<small>followers</small></span>
       </a>`).join('')
-    + `<button class="g-btn ghost" style="margin-top:4px" onclick="navigator.clipboard.writeText('${handles}').then(()=>alert('Handles copiats ✅'))">📋 Copiar tots els @ per etiquetar</button>`;
+    + `<button class="g-btn ghost" style="margin-top:4px" onclick="navigator.clipboard.writeText('${handles}').then(()=>alert('Handles copied ✅'))">📋 Copy all @ handles to tag</button>`;
 }
 function closeTeam(){ state.team=null; renderEquips(); }
 function savePos(eqId) {
@@ -1308,17 +1308,17 @@ function renderWinners(m) {
     const e = m.equips.find(x=>x.id===p.equipId)||{};
     return `<div class="wrow">${e.emoji||'🏆'} ${e.nom}<small>${p.puntsLocal}-${p.puntsVisitant} vs ${p.casa?p.visitant:p.local}</small></div>`;
   }).join('');
-  const txt = `🏆 *MENCIÓ ESPECIAL DEL CAP DE SETMANA ${wkLabel(wk)}*\n\n`
+  const txt = `🏆 *WEEKEND SPECIAL MENTION ${wkLabel(wk)}*\n\n`
     + (winners.length ? winners.map(p=>{ const e=m.equips.find(x=>x.id===p.equipId)||{};
         return `✅ *${e.nom}* — ${p.puntsLocal}-${p.puntsVisitant} vs ${p.casa?p.visitant:p.local} ${p.casa?'🏠':'🚌'}`; }).join('\n')
-      : 'Cap victòria aquest cap de setmana. La setmana que ve, més fort 💪')
+      : 'No wins this weekend. Next week, stronger 💪')
     + `\n\n#SomClot 🔴⚫ cbgrupbarna.com/partits/`;
   box.innerHTML = `<div class="winners">
-    <h3>🏆 Menció especial · Guanyadors del finde ${wkLabel(wk)}</h3>
-    ${rows || '<div class="wrow">Cap victòria aquest finde 🧊</div>'}
-    <div class="wrow" style="opacity:.6">Balanç del finde: ${winners.length}V - ${losers.length}D</div>
-    <a class="g-btn" style="text-decoration:none" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">📲 Compartir menció</a>
-    <button class="g-btn ghost" onclick="navigator.clipboard.writeText(decodeURIComponent('${encodeURIComponent(txt)}')).then(()=>alert('Text copiat ✅'))">📋 Copiar text</button>
+    <h3>🏆 Special mention · Weekend winners ${wkLabel(wk)}</h3>
+    ${rows || '<div class="wrow">No wins this weekend 🧊</div>'}
+    <div class="wrow" style="opacity:.6">Weekend record: ${winners.length}W - ${losers.length}L</div>
+    <a class="g-btn" style="text-decoration:none" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">📲 Share mention</a>
+    <button class="g-btn ghost" onclick="navigator.clipboard.writeText(decodeURIComponent('${encodeURIComponent(txt)}')).then(()=>alert('Text copied ✅'))">📋 Copy text</button>
   </div>`;
 }
 
