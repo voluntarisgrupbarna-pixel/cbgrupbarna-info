@@ -550,15 +550,30 @@ def build_patrocinadors():
                       "de baloncesto, esponsorización deportiva Barcelona, dossier de colaboración") + body + FOOT)
 
 
+# Dades pròpies de cada partner (descripció, oferta per a socis, posts
+# d'Instagram a incrustar): NO en tenim cap de verificada encara — cap
+# d'aquestes és una dada inventada, són forats pendents d'omplir amb el
+# partner. Clau = slug (el mateix nom de fitxer del logo sense ".png").
+# Format:
+#   "slug": {
+#       "desc": "Text real que ha donat el partner sobre qui és.",
+#       "oferta": "Descompte o avantatge real per a la família del Barna.",
+#       "posts": ["https://www.instagram.com/p/XXXXXXXXXXX/", ...],
+#   }
+PARTNER_INFO = {}
+
+
 def build_partner_landing(img, nom, ig):
-    """Fitxa individual d'un partner: /patrocinadors/partners/<slug>/. No
-    inventem descripció del negoci (no en tenim dades verificades) — la
-    pàgina presenta el partner dins l'ecosistema del club i el botó de
-    seguir-lo, no un text de màrqueting sobre la seva activitat."""
+    """Fitxa individual d'un partner: /patrocinadors/partners/<slug>/.
+    Estructura fixa (empresa, descripció, oferta per a socis, Instagram)
+    però només s'hi escriu contingut verificat: on falta dada real es
+    mostra un estat pendent honest, mai un text inventat sobre el negoci."""
     slug = img[:-4]
     url = SITE + f"/patrocinadors/partners/{slug}/"
+    info = PARTNER_INFO.get(slug, {})
     title = f"{nom} · Partner del CB Grup Barna"
-    desc = (f"{nom} forma part de l'ecosistema de partners i col·laboradors del CB Grup Barna, "
+    desc = (info.get("desc") or
+            f"{nom} forma part de l'ecosistema de partners i col·laboradors del CB Grup Barna, "
             f"el club de bàsquet base del Clot, Barcelona.")
 
     ld = {"@context": "https://schema.org", "@graph": [
@@ -572,6 +587,41 @@ def build_partner_landing(img, nom, ig):
     follow_note = ('' if ig else
                    '<p style="font-size:13px;color:var(--muted)">Encara no tenim confirmat el seu '
                    'Instagram — si el coneixes, escriu-nos i el publiquem.</p>')
+
+    wa_ask = lambda text, cta: (f'<a href="{WA_CLUB}&amp;text={wa(text)}" class="btn ghost" '
+                                f'target="_blank" rel="noopener" data-cta="{cta}">Escriure al club per WhatsApp</a>')
+
+    # ── Sobre l'empresa ──
+    sobre_html = (f'<p>{info["desc"]}</p>' if info.get("desc") else
+        f'<p style="color:var(--muted)">Encara no tenim la descripció que {nom} ens vulgui donar '
+        f'del seu negoci. La publiquem en el moment que la confirmem amb ells.</p>')
+
+    # ── Oferta per a socis ──
+    if info.get("oferta"):
+        oferta_html = f'<p>{info["oferta"]}</p>'
+    else:
+        oferta_html = (
+            f'<p style="color:var(--muted)">{nom} encara no té cap avantatge publicat per a la '
+            f'família del Barna. Si en vols oferir un, escriu-nos i el publiquem aquí.</p>'
+            f'<div class="btn-row">{wa_ask(f"Hola, soy de {nom} y quiero ofrecer una ventaja a la familia del CB Grup Barna.", "partner-oferta-wa")}</div>')
+
+    # ── Instagram: posts reals si en tenim, si no targeta de seguiment ──
+    posts = info.get("posts") or []
+    if posts:
+        cards = ''.join(
+            f'<blockquote class="instagram-media" data-instgrm-permalink="{p}" data-instgrm-version="14" style="margin:0"></blockquote>'
+            for p in posts)
+        ig_html = (f'<div class="cards c3">{cards}</div>'
+                   f'<script async src="https://www.instagram.com/embed.js"></script>')
+    elif ig:
+        handle = "@" + ig.rstrip("/").rsplit("/", 1)[-1]
+        ig_html = (f'<div class="closer" style="text-align:left">'
+                   f'<p class="eyebrow red">Instagram</p>'
+                   f'<h3 style="margin:10px 0 14px">{handle}</h3>'
+                   f'<p>Encara no tenim posts concrets seleccionats per incrustar aquí. Mentrestant, '
+                   f'segueix-los directament.</p>{follow_btn}</div>')
+    else:
+        ig_html = ''
 
     body = f"""
 {crumbs([("Inici", "/"), ("Patrocinadors", "/patrocinadors/"), (nom, None)])}
@@ -591,6 +641,16 @@ def build_partner_landing(img, nom, ig):
     </div>
     {follow_note}
   </div>
+
+  <div class="narrow prose" style="margin-top:clamp(10px,2vw,20px)">
+    <h2>Sobre {nom}</h2>
+    {sobre_html}
+
+    <h2>Oferta per a la família del Barna</h2>
+    {oferta_html}
+  </div>
+
+  {f'<div class="wrap section band-soft">{ig_html}</div>' if ig_html else ''}
 
   <div class="narrow prose" style="margin-top:clamp(20px,3vw,32px)">
     <div class="closer">
