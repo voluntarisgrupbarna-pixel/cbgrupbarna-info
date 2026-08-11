@@ -165,7 +165,8 @@ def build_calendaris_fallback():
         items.append(
             f'<li><a href="/partits/calendaris/descarrega/{esc(fitxer)}">'
             f'{esc(info.get("nom", eq_id))} — descarrega el calendari ({tipus}, '
-            f'{info.get("jornades", "?")} jornades)</a></li>'
+            f'{info.get("jornades", "?")} jornades)</a> · '
+            f'<a href="/partits/calendaris/ics/{esc(eq_id)}.ics">subscriu-te al calendari (.ics)</a></li>'
         )
     if not items:
         return "", 0
