@@ -408,7 +408,7 @@
 :root {
   --ink: #0a0a0a;
   --ink-2: #46433f;
-  --muted: #8a8681;
+  --muted: #6b6560;
   --line: #e4e1dd;
   --line-dark: rgba(255,255,255,0.15);
   --paper: #ffffff;
@@ -506,7 +506,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
 .menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
 .menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
-@media (max-width: 1080px) { .head-side .head-nav { display: none; } }
+@media (max-width: 1080px) { .head-nav a.opt { display: none; } }
+@media (max-width: 700px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
 
 /* Menú desplegat · el mapa complet del club */
@@ -760,8 +761,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <button class="head-burger" id="burger" aria-label="Obrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <nav class="head-nav" aria-label="Navegació principal">
         <a href="#escoleta">Escoleta</a>
-        <a href="/campus/">Campus</a>
-        <a href="/3x3/">3x3</a>
+        <a href="/campus/" class="opt">Campus</a>
+        <a href="/3x3/" class="opt">3x3</a>
         <a href="#calendari">Calendari</a>
         <a href="/fotos/">Galeria</a>
         <a href="/premsa/" class="opt">Premsa</a>
