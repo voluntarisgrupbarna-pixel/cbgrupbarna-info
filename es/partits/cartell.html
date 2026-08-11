@@ -65,7 +65,7 @@
 <nav>
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CARTEL DE <span>VICTORIA</span></div>
-  <a href="/es/partits/admin.html">← Gestión de partidos</a>
+  <a href="/partits/admin.html">← Gestión de partidos</a>
   <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
     <a href="/partits/cartell.html" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/partits/cartell.html" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/partits/cartell.html" hreflang="en">EN</a>
   </div>
@@ -160,7 +160,7 @@ function init(){
   if(!guanyats.length){
     document.querySelector('.cols').insertAdjacentHTML('afterbegin',
       '<div class="empty">Todavía no hay ningún partido ganado con resultado cargado.<br>'
-      +'Añade los resultados en <a href="/es/partits/admin.html">Gestión de partidos</a> y vuelve aquí.</div>');
+      +'Añade los resultados en <a href="/partits/admin.html">Gestión de partidos</a> y vuelve aquí.</div>');
   }
   sel.addEventListener('change',()=>{ triar(sel.value); });
   document.getElementById('f-foto').addEventListener('change',carregarFoto);

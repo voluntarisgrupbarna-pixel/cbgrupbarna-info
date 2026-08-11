@@ -65,7 +65,7 @@
 <nav>
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">VICTORY <span>POSTER</span></div>
-  <a href="/en/partits/admin.html">← Match management</a>
+  <a href="/partits/admin.html">← Match management</a>
   <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
     <a href="/partits/cartell.html" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/partits/cartell.html" hreflang="es">ES</a><span class="sep">·</span><a href="/en/partits/cartell.html" hreflang="en" class="active">EN</a>
   </div>
@@ -160,7 +160,7 @@ function init(){
   if(!guanyats.length){
     document.querySelector('.cols').insertAdjacentHTML('afterbegin',
       '<div class="empty">There are no won matches with a loaded result yet.<br>'
-      +'Add the results in <a href="/en/partits/admin.html">Match management</a> and come back here.</div>');
+      +'Add the results in <a href="/partits/admin.html">Match management</a> and come back here.</div>');
   }
   sel.addEventListener('change',()=>{ triar(sel.value); });
   document.getElementById('f-foto').addEventListener('change',carregarFoto);
