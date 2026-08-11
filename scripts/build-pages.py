@@ -560,99 +560,113 @@ def build_patrocinadors():
 #       "posts": ["https://www.instagram.com/p/XXXXXXXXXXX/", ...],
 #   }
 PARTNER_INFO = {
-    "instax-fujifilm": {"desc":
+    "instax-fujifilm": {"web": "https://instax.eu/es/", "desc":
         "Instax és la línia de càmeres i pel·lícules fotogràfiques instantànies de la marca "
         "japonesa Fujifilm. El seu compte oficial a Espanya, @instaxcamara, promociona càmeres, "
         "impressores i films instantanis. No es tracta d'un comerç local, sinó de la marca "
         "global de producte d'electrònica de consum."},
-    "westfield-glories": {"desc":
+    "westfield-glories": {"web": "https://www.westfield.com/es/spain/glories",
+        "phone": "93 486 04 04", "email": "atencionalclientewestfield@glories.com", "desc":
         "Westfield Glòries és un centre comercial situat a l'Avinguda Diagonal 208, a Barcelona "
         "(districte de Sant Martí), obert des de 1995 i reformat el 2017. Compta amb més de 100 "
         "botigues, un supermercat, una trentena de restaurants i cinemes, amb oferta de moda, "
         "complements, bellesa, esport i tecnologia. Obre tots els dies de l'any."},
-    "time-chamber": {"desc":
+    "time-chamber": {"web": "https://www.timechamber.es/", "email": "time.chamber.es@gmail.com", "desc":
         "Time Chamber és una acadèmia de formació i alt rendiment en bàsquet amb seu principal al "
         "Velòdrom d'Horta de Barcelona i presència en altres municipis catalans. Ofereix "
         "entrenament individualitzat que combina treball tècnic, físic i mental, i té un acord de "
         "col·laboració amb el CB Grup Barna amb qui ha organitzat campus i showcases."},
-    "eix-clot": {"desc":
+    "eix-clot": {"web": "https://www.eixclot.cat/", "phone": "686 033 161", "email": "info@eixclot.cat", "desc":
         "Eix Clot és l'Associació d'Emprenedors del Clot – Camp de l'Arpa, amb seu al Carrer de "
         "Sant Antoni Maria Claret 358, Barcelona. És una entitat de comerciants creada el 2009 que "
         "promou el comerç de proximitat del barri amb campanyes comercials, fires temàtiques i "
         "activitats culturals."},
-    "herbolaris-montserrat": {"desc":
+    "herbolaris-montserrat": {"web": "https://www.herbolarismontserrat.com/", "desc":
         "Herbolaris Montserrat és un herbolari situat al Carrer de Guipúscoa 77, Barcelona, en "
         "funcionament des de 1982. Ofereix alimentació natural i ecològica, cosmètica, nutrició "
         "esportiva i un ampli catàleg de vitamines i suplements."},
-    "clinica-dental-bac-de-roda": {"desc":
+    "clinica-dental-bac-de-roda": {"web": "https://centrebacderoda.com/", "phone": "93 527 17 95", "desc":
         "Clínica Dental Bac de Roda és una clínica dental situada al Carrer del Concili de Trento "
         "110, Barcelona. Ofereix odontologia general, implantologia, endodòncia, ortodòncia "
         "(inclòs Invisalign), estètica dental i odontopediatria."},
-    "stepback-podologia": {"desc":
+    "stepback-podologia": {"web": "https://www.stepbackpodologia.es/", "phone": "620 76 29 93",
+        "email": "stepbackpodologia@gmail.com", "desc":
         "Stepback Podologia Avançada és una clínica de podologia esportiva a l'Avinguda de la "
         "Riera de Cassoles 8 bis, Gràcia (Barcelona), especialitzada en l'atenció a esportistes de "
         "bàsquet. Ofereix estudis biomecànics de la marxa, plantilles personalitzades i programes "
         "de prevenció de lesions."},
-    "aquamiga": {"desc":
+    "aquamiga": {"web": "https://aquamiga.com/", "phone": "695 70 06 00", "email": "hola@aquamiga.com", "desc":
         "Aquamiga és una empresa amb seu al Carrer de Bailén 92, Barcelona, que ofereix sistemes "
         "de filtració d'aigua per osmosi inversa en règim de lloguer per a domicilis, amb "
         "instal·lació i manteniment inclosos."},
-    "armand-optics": {"desc":
+    "armand-optics": {"web": "https://armandoptics.com/", "phone": "932 45 21 55",
+        "email": "clot@armandoptics.com", "desc":
         "Armand Òptics és una cadena d'òptiques fundada el 1988 a Barcelona, amb establiment al "
         "Carrer del Clot 66. Ofereix graduació i venda d'ulleres graduades i de sol, adaptació de "
         "lents de contacte, i serveis d'audiologia i audiòfons."},
-    "manual-colors": {"desc":
+    "manual-colors": {"web": "https://www.manualcolor.com/", "phone": "934 94 97 80",
+        "email": "manualandco@manualandco.com", "desc":
         "Manual Colors és una empresa d'impressió digital de gran format amb seu al Carrer de "
         "Rocafort 215, Barcelona, fundada el 1976 originalment com a laboratori fotogràfic. "
         "Ofereix impressió fotogràfica i de gran format, suports rígids i PLV (lones, vinils, "
         "forex, dibond), impressió tèxtil i senyalística."},
-    "melosa-hamburgueseria": {"desc":
+    "melosa-hamburgueseria": {"web": "https://melosa.co/", "phone": "931 87 99 38",
+        "email": "hola@melosa.co", "desc":
         "La Melosa és un restaurant d'hamburgueses situat al Carrer del Clot 163, Barcelona. "
         "Ofereix hamburgueses smash i amb formatge amb pa de brioix elaborades amb producte de "
         "proximitat, patates fregides, croquetes i opcions vegan."},
-    "foto-jane": {"desc":
+    "foto-jane": {"web": "https://www.fotojane.es/", "phone": "629 59 31 35",
+        "email": "carles@fotojane.es", "desc":
         "Foto Jané és un estudi de fotografia al Carrer de Ciutat de Granada 52, Barcelona, amb un "
         "equip de fotògrafs i dissenyadors especialitzats en fotoreportatge de casaments, "
         "embaràs, nadons i família, a més de fotografia publicitària i d'interiorisme."},
-    "mercat-dels-encants": {"desc":
+    "mercat-dels-encants": {"web": "https://encantsbarcelona.com/", "phone": "932 45 22 99",
+        "email": "info@encantsbarcelona.com", "desc":
         "El Mercat dels Encants és un dels mercats més antics i emblemàtics de Barcelona, a la "
         "plaça de les Glòries Catalanes. Combina botigues, parades i espais de subhasta on es ven "
         "moda vintage, decoració, objectes de segona mà, antiguitats i articles nous i d'ocasió."},
-    "tot-salut": {"desc":
+    "tot-salut": {"web": "http://centretotsalut.es/", "phone": "933 079 898",
+        "email": "info@centretotsalut.es", "desc":
         "Tot Salut és un centre sanitari multidisciplinari al carrer de Fluvià 290, Barcelona. "
         "Ofereix serveis de fisioteràpia, osteopatia, podologia, logopèdia i psicologia."},
-    "ovella-negra": {"desc":
+    "ovella-negra": {"web": "http://www.ovellanegrabcn.net/", "phone": "933 095 938", "desc":
         "L'Ovella Negra és un local d'oci del grup Ovella Negra al Poblenou (Sant Martí), en un "
         "antic edifici industrial de més de 2.000 m². Ofereix cervesa artesana, sangria, tapes, "
         "entrepans i hamburgueses, amb futbolí i billar."},
-    "romeo-abogados": {"desc":
+    "romeo-abogados": {"web": "https://www.romeoabogados.com/", "phone": "932 455 990", "desc":
         "Romeo Abogados y Consultores Inmobiliarios és un despatx d'advocats al carrer de Rossend "
         "Nobas 9, Barcelona, actiu des de fa uns 20 anys. Ofereix assessorament en dret "
         "immobiliari, dret civil, dret de família i successions, i gestoria fiscal, comptable i "
         "laboral per a particulars i petites empreses."},
-    "fundacio-mullor": {"desc":
+    "fundacio-mullor": {"web": "https://fundaciomullor.org/", "phone": "936 115 222",
+        "email": "hola@fundaciomullor.org", "desc":
         "La Fundació Mullor és una fundació sense ànim de lucre impulsada pel grup empresarial "
         "Mullor, amb seus a Barcelona, Lleida i Madrid. Desenvolupa programes de formació i "
         "inserció laboral per a joves en risc d'exclusió social i joves amb discapacitat "
         "intel·lectual."},
-    "l-aquarium-de-barcelona": {"desc":
+    "l-aquarium-de-barcelona": {"web": "https://www.aquariumbcn.com/", "phone": "932 217 474",
+        "email": "info@aquariumbcn.com", "desc":
         "L'Aquàrium de Barcelona és un centre marí al Port Vell, especialitzat en fauna del "
         "Mediterrani i un dels aquaris més grans d'Europa, amb més d'11.000 exemplars de 450 "
         "espècies. El seu Oceanari té un túnel submarí de vidre de 80 metres."},
-    "eix-comercial-sant-marti": {"desc":
+    "eix-comercial-sant-marti": {"web": "https://www.santmartieix.com/", "phone": "933 057 144",
+        "email": "hola@santmartieix.com", "desc":
         "L'Associació Sant Martí Eix Comercial és una associació de comerços i serveis del "
         "districte de Sant Martí de Barcelona, amb més de 200 establiments associats. Organitza "
         "activitats comercials, culturals i solidàries pel barri, com la Mostra de Comerç al "
         "Carrer anual."},
-    "gbk-globabasket": {"desc":
+    "gbk-globabasket": {"web": "https://globasket.com/", "phone": "934 74 80 35",
+        "email": "info@globasket.com", "desc":
         "Globasket (GBK) és un torneig internacional de bàsquet base per a categories U10 a U18, "
         "femení i masculí, que se celebra a Lloret de Mar (Girona). Combina la competició "
         "esportiva amb activitats formatives, culturals i de turisme esportiu en família."},
-    "illa-fantasia": {"desc":
+    "illa-fantasia": {"web": "https://illafantasia.com/", "phone": "937 514 553",
+        "email": "info@illafantasia.com", "desc":
         "Illa Fantasia és un parc aquàtic a Vilassar de Dalt (Maresme, Barcelona), inaugurat el "
         "1981. Disposa de més de 22 atraccions i tobogans aquàtics, 3 grans piscines, zona "
         "infantil, minigolf i zona verda amb pícnic. Obre de juny a setembre."},
-    "panteres-grogues": {"desc":
+    "panteres-grogues": {"web": "https://www.panteresgrogues.org/", "phone": "93 678 22 54",
+        "email": "administracio@panteresgrogues.cat", "desc":
         "Panteres Grogues és un club esportiu de Barcelona fundat el 1994, referent de visibilitat "
         "LGTBIQ+ en l'esport i el primer club d'aquest tipus creat a l'Estat espanyol. És una "
         "entitat sense ànim de lucre amb seu a l'Eixample, amb prop de 1.500 socis i unes 25 "
@@ -684,6 +698,20 @@ def build_partner_landing(img, nom, ig):
     follow_note = ('' if ig else
                    '<p style="font-size:13px;color:var(--muted)">Encara no tenim confirmat el seu '
                    'Instagram — si el coneixes, escriu-nos i el publiquem.</p>')
+    web_btn = (f'<a href="{info["web"]}" class="btn ghost" target="_blank" rel="noopener" '
+               f'data-cta="partner-web">Visitar la seva web</a>' if info.get("web") else '')
+
+    # ── Contacte: web / telèfon / email, només els camps que tenim confirmats ──
+    dl_rows = []
+    if info.get("web"):
+        web_label = info["web"].replace("https://", "").replace("http://", "").rstrip("/")
+        dl_rows.append(f'<div class="dl-row"><dt>Web</dt><dd><a href="{info["web"]}" target="_blank" rel="noopener">{web_label}</a></dd></div>')
+    if info.get("phone"):
+        tel = re.sub(r"[^\d+]", "", info["phone"])
+        dl_rows.append(f'<div class="dl-row"><dt>Telèfon</dt><dd><a href="tel:{tel}">{info["phone"]}</a></dd></div>')
+    if info.get("email"):
+        dl_rows.append(f'<div class="dl-row"><dt>Correu</dt><dd><a href="mailto:{info["email"]}">{info["email"]}</a></dd></div>')
+    contacte_html = f'<h2>Contacte</h2><div class="dl">{"".join(dl_rows)}</div>' if dl_rows else ''
 
     wa_ask = lambda text, cta: (f'<a href="{WA_CLUB}&amp;text={wa(text)}" class="btn ghost" '
                                 f'target="_blank" rel="noopener" data-cta="{cta}">Escriure al club per WhatsApp</a>')
@@ -733,6 +761,7 @@ def build_partner_landing(img, nom, ig):
     partners i col·laboradors que fan possible el CB Grup Barna, el club de bàsquet base del Clot,
     Barcelona. Segueix-los: cada follow que reben des del club forma part del que els oferim a canvi.</p>
     <div class="btn-row" style="justify-content:center;margin-top:28px">
+      {web_btn}
       {follow_btn}
       <a href="/patrocinadors/" class="btn ghost" data-cta="partner-back">Veure tots els partners</a>
     </div>
@@ -742,6 +771,8 @@ def build_partner_landing(img, nom, ig):
   <div class="narrow prose" style="margin-top:clamp(10px,2vw,20px)">
     <h2>Sobre {nom}</h2>
     {sobre_html}
+
+    {contacte_html}
 
     <h2>Oferta per a la família del Barna</h2>
     {oferta_html}
