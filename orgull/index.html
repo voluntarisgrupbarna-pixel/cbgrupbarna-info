@@ -11,6 +11,10 @@
 <meta property="og:url" content="https://www.cbgrupbarna.info/orgull/">
 <meta property="og:locale" content="ca_ES">
 <link rel="canonical" href="https://www.cbgrupbarna.info/orgull/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/orgull/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/orgull/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/orgull/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/orgull/">
 <title>Mes de l'Orgull 2026 · CB Grup Barna · Bàsquet per a tothom</title>
 
 <style>
@@ -768,6 +772,12 @@ img { max-width: 100%; display: block; }
     scroll-behavior: auto !important;
   }
 }
+
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+.lang-switch a.active { opacity: 1; font-weight: 600; }
+.lang-switch a:hover { opacity: 1; }
+.lang-switch .sep { opacity: 0.25; }
 </style>
 </head>
 <body>
@@ -786,6 +796,9 @@ img { max-width: 100%; display: block; }
       <li><a href="#contacte">Contacte</a></li>
     </ul>
     <a href="#activitats" class="nav-cta">Veure activitats</a>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/orgull/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/orgull/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/orgull/" hreflang="en">EN</a>
+    </div>
     <button class="nav-toggle" aria-label="Obrir menú" onclick="document.getElementById('nav').classList.toggle('open')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <line x1="3" y1="6" x2="21" y2="6"/>

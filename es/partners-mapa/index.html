@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mapa de partners i col·laboradors · CB Grup Barna</title>
-<meta name="description" content="Mapa dels partners i col·laboradors del CB Grup Barna: comerços del barri del Clot i col·laboradors de fora del barri.">
-<link rel="canonical" href="https://cbgrupbarna.info/partners-mapa/">
+<title>Mapa de partners y colaboradores · CB Grup Barna</title>
+<meta name="description" content="Mapa de los partners y colaboradores del CB Grup Barna: comercios del barrio del Clot y colaboradores de fuera del barrio.">
+<link rel="canonical" href="https://cbgrupbarna.info/es/partners-mapa/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/partners-mapa/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/partners-mapa/">
 <link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/partners-mapa/">
@@ -64,23 +64,23 @@ footer.foot a{color:var(--red);text-decoration:none;}
 
 <header class="top">
   <div class="wrap">
-    <a class="home" href="/">CB Grup Barna</a>
-    <a class="home" href="/" style="opacity:.7;font-family:'Inter',sans-serif;text-transform:none;font-size:13px;">← Tornar a l'inici</a>
+    <a class="home" href="/es/">CB Grup Barna</a>
+    <a class="home" href="/es/" style="opacity:.7;font-family:'Inter',sans-serif;text-transform:none;font-size:13px;">← Volver al inicio</a>
     <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-      <a href="/partners-mapa/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/partners-mapa/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/partners-mapa/" hreflang="en">EN</a>
+      <a href="/partners-mapa/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/partners-mapa/" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/partners-mapa/" hreflang="en">EN</a>
     </div>
   </div>
 </header>
 
 <div class="wrap">
-  <h1>Mapa de partners i col·laboradors</h1>
-  <p class="lede">On són els comerços, entitats i col·laboradors que fan possible el CB Grup Barna: primer els del barri del Clot · Camp de l'Arpa, i després la resta.</p>
+  <h1>Mapa de partners y colaboradores</h1>
+  <p class="lede">Dónde están los comercios, entidades y colaboradores que hacen posible el CB Grup Barna: primero los del barrio del Clot · Camp de l'Arpa, y después el resto.</p>
 
-  <div class="notice">📍 Les ubicacions dels pins són aproximades (il·lustratives). Toca <b>«Veure a Google Maps»</b> a cada fitxa per obtenir l'adreça exacta i com arribar-hi.<br>🎨 Els logotips són provisionals (inicials del partner) fins que en tinguem el fitxer oficial — envieu-nos-el i el canviem.</div>
+  <div class="notice">📍 Las ubicaciones de los pines son aproximadas (ilustrativas). Toca <b>«Ver en Google Maps»</b> en cada ficha para obtener la dirección exacta y cómo llegar.<br>🎨 Los logotipos son provisionales (iniciales del partner) hasta que tengamos el archivo oficial — envíanoslo y lo cambiamos.</div>
 
   <section class="map-block">
     <div class="map-head">
-      <h2>Partners del barri · El Clot / Camp de l'Arpa</h2>
+      <h2>Partners del barrio · El Clot / Camp de l'Arpa</h2>
       <span id="count-barri"></span>
     </div>
     <div id="map-barri"></div>
@@ -89,7 +89,7 @@ footer.foot a{color:var(--red);text-decoration:none;}
 
   <section class="map-block">
     <div class="map-head">
-      <h2>Partners fora del barri</h2>
+      <h2>Partners fuera del barrio</h2>
       <span id="count-fora"></span>
     </div>
     <div id="map-fora"></div>
@@ -97,14 +97,14 @@ footer.foot a{color:var(--red);text-decoration:none;}
   </section>
 
   <section class="no-pin">
-    <div class="map-head"><h2>Col·laboradors de premsa i institucions</h2></div>
-    <p class="lede" style="margin-bottom:6px;">Sense ubicació física pròpia — cobertura, difusió i suport institucional.</p>
+    <div class="map-head"><h2>Colaboradores de prensa e instituciones</h2></div>
+    <p class="lede" style="margin-bottom:6px;">Sin ubicación física propia — cobertura, difusión y apoyo institucional.</p>
     <div class="chip-row" id="chip-row"></div>
   </section>
 </div>
 
 <footer class="foot">
-  <div class="wrap">CB Grup Barna · Club de Bàsquet · El Clot, Barcelona · <a href="/">cbgrupbarna.info</a></div>
+  <div class="wrap">CB Grup Barna · Club de Baloncesto · El Clot, Barcelona · <a href="/es/">cbgrupbarna.info</a></div>
 </footer>
 
 <script src="/partners-mapa/vendor/leaflet/leaflet.js"></script>
@@ -115,8 +115,8 @@ const STOP = new Set(['de','del','la','el','les','els','i','d','l','the','of']);
 
 function gmaps(addr){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr); }
 
-// Logotip provisional: monograma d'inicials sobre un fons vermell/tinta (sistema visual del club).
-// logo:"/ruta/al/fitxer.png" al registre d'un partner el substitueix per la imatge real quan la tinguem.
+// Logotipo provisional: monograma de iniciales sobre un fondo rojo/tinta (sistema visual del club).
+// logo:"/ruta/al/fichero.png" en el registro de un partner lo sustituye por la imagen real cuando la tengamos.
 function initials(nom){
   const words = nom.replace(/[·().]/g,' ').split(/\s+/).filter(w => w && !STOP.has(w.toLowerCase()));
   const pick = words.length ? words : nom.split(/\s+/);
@@ -139,7 +139,7 @@ function pinIcon(){
   });
 }
 
-// Ubicacions aproximades (il·lustratives) — l'adreça de text i l'enllaç a Google Maps són la font exacta.
+// Ubicaciones aproximadas (ilustrativas) — la dirección de texto y el enlace a Google Maps son la fuente exacta.
 const barri = [
   { nom:"Eix Clot", addr:"Carrer de Sant Antoni Maria Claret, 358, Barcelona", ig:"https://www.instagram.com/eixclot/", lat:41.4133, lng:2.1789 },
   { nom:"Melosa", addr:"Carrer del Clot, 163, Barcelona", ig:"https://www.instagram.com/melosahamburgueseria/", lat:41.4082, lng:2.1857 },
@@ -151,7 +151,7 @@ const barri = [
   { nom:"Westfield Glòries", addr:"Avinguda Diagonal, 208, Barcelona", ig:"https://www.instagram.com/westfieldglories/", lat:41.4053, lng:2.1893 },
   { nom:"Clínica Dental Bac de Roda", addr:"Carrer del Concili de Trento, 110, Barcelona", ig:"https://www.instagram.com/clinicadentalbacderoda/", lat:41.4113, lng:2.1975 },
   { nom:"Ovella Negra (Encants)", addr:"Mercat dels Encants, Barcelona", ig:"https://www.instagram.com/ovellanegrabcn/", lat:41.4038, lng:2.1877 },
-  { nom:"Foto Jané", addr:"Carrer de Ciutat de Granada, 52, Barcelona", ig:null, ig_note:"Instagram per confirmar", lat:41.4095, lng:2.1935 }
+  { nom:"Foto Jané", addr:"Carrer de Ciutat de Granada, 52, Barcelona", ig:null, ig_note:"Instagram por confirmar", lat:41.4095, lng:2.1935 }
 ];
 
 const fora = [
@@ -160,9 +160,9 @@ const fora = [
   { nom:"Manual Color", addr:"Carrer de Rocafort, 215, Barcelona", ig:"https://www.instagram.com/manualcolor/", lat:41.3908, lng:2.1523 },
   { nom:"Time Chamber", addr:"Velòdrom d'Horta, Pg. de la Vall d'Hebron 187, Barcelona", ig:"https://www.instagram.com/timechamber_es/", lat:41.4270, lng:2.1480 },
   { nom:"Illa Fantasia", addr:"Finca Mas Brassó, s/n, Vilassar de Dalt", ig:"https://www.instagram.com/illafantasia/", lat:41.5257, lng:2.3577 },
-  { nom:"CE Vila Olímpica", addr:"Plaça Tirant lo Blanc, 3, Barcelona", ig:null, ig_note:"A confirmar amb Ana", lat:41.3908, lng:2.1968 },
+  { nom:"CE Vila Olímpica", addr:"Plaça Tirant lo Blanc, 3, Barcelona", ig:null, ig_note:"Por confirmar con Ana", lat:41.3908, lng:2.1968 },
   { nom:"GBK · Globasket", addr:"Torneig a Lloret de Mar (Girona)", ig:"https://www.instagram.com/globasket/", lat:41.6991, lng:2.8467 },
-  { nom:"Tot Salut", addr:"Carrer de Fluvià, 290, Barcelona", ig:null, ig_note:"A confirmar", lat:41.4088, lng:2.2010 }
+  { nom:"Tot Salut", addr:"Carrer de Fluvià, 290, Barcelona", ig:null, ig_note:"Por confirmar", lat:41.4088, lng:2.2010 }
 ];
 
 const noPin = [
@@ -188,12 +188,12 @@ function buildMap(elId, listId, countId, data, center, zoom){
   data.forEach(p => {
     const m = L.marker([p.lat, p.lng], { icon: pinIcon() }).addTo(map);
     const igLine = p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">Instagram →</a>` : (p.ig_note || '');
-    m.bindPopup(`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">${logoBadge(p,32)}<b>${p.nom}</b></div>${p.addr}<br>${igLine}<br><a href="${gmaps(p.addr)}" target="_blank" rel="noopener">Veure a Google Maps</a>`);
+    m.bindPopup(`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">${logoBadge(p,32)}<b>${p.nom}</b></div>${p.addr}<br>${igLine}<br><a href="${gmaps(p.addr)}" target="_blank" rel="noopener">Ver en Google Maps</a>`);
     markers.push(m);
 
     const li = document.createElement('li');
     li.innerHTML = logoBadge(p) + `<div class="body"><b>${p.nom}</b><span class="addr">${p.addr}</span>` +
-      (p.ig ? `<a class="ig" href="${p.ig}" target="_blank" rel="noopener">Instagram</a>` : `<span style="color:rgba(14,17,22,.4);font-size:13px;">${p.ig_note || 'Instagram pendent'}</span>`) +
+      (p.ig ? `<a class="ig" href="${p.ig}" target="_blank" rel="noopener">Instagram</a>` : `<span style="color:rgba(14,17,22,.4);font-size:13px;">${p.ig_note || 'Instagram pendiente'}</span>`) +
       `<a class="gmaps" href="${gmaps(p.addr)}" target="_blank" rel="noopener">Google Maps →</a></div>`;
     li.addEventListener('click', (e) => { if (e.target.tagName !== 'A') { map.flyTo([p.lat, p.lng], 16); m.openPopup(); } });
     li.style.cursor = 'pointer';
@@ -211,7 +211,7 @@ const chipRow = document.getElementById('chip-row');
 noPin.forEach(p => {
   const chip = document.createElement('div');
   chip.className = 'chip';
-  chip.innerHTML = logoBadge(p, 30) + `<span>${p.nom}</span>` + (p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">IG</a>` : `<span class="tag">IG pendent</span>`);
+  chip.innerHTML = logoBadge(p, 30) + `<span>${p.nom}</span>` + (p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">IG</a>` : `<span class="tag">IG pendiente</span>`);
   chipRow.appendChild(chip);
 });
 </script>

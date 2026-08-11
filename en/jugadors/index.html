@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plantilla · CB Grup Barna</title>
-<meta name="description" content="Jugadors i jugadores del CB Grup Barna per equips. Temporada 2025-2026.">
-<link rel="canonical" href="https://cbgrupbarna.info/jugadors/">
+<title>Roster · CB Grup Barna</title>
+<meta name="description" content="Players of CB Grup Barna by team. 2025-2026 season.">
+<link rel="canonical" href="https://cbgrupbarna.info/en/jugadors/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/jugadors/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/jugadors/">
 <link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/jugadors/">
@@ -46,22 +46,22 @@
 <header>
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CB GRUP <span>BARNA</span></div>
-  <a class="back" href="/">← Tornar a la web</a>
+  <a class="back" href="/en/">← Back to the website</a>
   <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-    <a href="/jugadors/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/jugadors/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/jugadors/" hreflang="en">EN</a>
+    <a href="/jugadors/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/jugadors/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/jugadors/" hreflang="en" class="active">EN</a>
   </div>
 </header>
 <div class="wrap">
-  <h1>LA <span>PLANTILLA</span></h1>
-  <div class="sub">Jugadors i jugadores del CB Grup Barna per equips · Temporada 2025-2026</div>
-  <div id="roster"><div class="empty">Carregant plantilla…</div></div>
+  <h1>THE <span>ROSTER</span></h1>
+  <div class="sub">CB Grup Barna players by team · 2025-2026 season</div>
+  <div id="roster"><div class="empty">Loading roster…</div></div>
 </div>
 <script src="/jugadors/jugadors.js"></script>
 <script>
   const jug = Array.isArray(window.JUGADORS) ? window.JUGADORS : [];
   const box = document.getElementById('roster');
   if (!jug.length) {
-    box.innerHTML = '<div class="empty">Ben aviat publicarem la plantilla. 🏀</div>';
+    box.innerHTML = '<div class="empty">We\'ll publish the roster very soon. 🏀</div>';
   } else {
     const byTeam = {};
     jug.forEach(j => { (byTeam[j.equip] = byTeam[j.equip] || []).push(j); });
