@@ -168,6 +168,13 @@
   ]
 }
 </script>
+<style>
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+.lang-switch a.active { opacity: 1; font-weight: 600; }
+.lang-switch a:hover { opacity: 1; }
+.lang-switch .sep { opacity: 0.25; }
+</style>
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -189,7 +196,11 @@
   </div>
 </header>
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <span>Patrocinadors</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <span>Patrocinadors</span></nav>
+<div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+  <a href="/patrocinadors/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/patrocinadors/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/patrocinadors/" hreflang="en">EN</a>
+</div>
+</div>
 <div class="wrap">
   <div class="phead">
     <p class="eyebrow red">Dossier de colaboración · Temporada 2026/27</p>

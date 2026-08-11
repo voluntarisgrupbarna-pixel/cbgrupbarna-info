@@ -794,7 +794,7 @@ function renderWeekNav(m) {
     state.wk = wks.find(k=>k>=cur) || wks[wks.length-1];
   }
   const sel = document.getElementById('wk-select');
-  sel.innerHTML = wks.map(k=>`<option value="${k}" ${k===state.wk?'selected':''}>Cap de setmana ${wkLabel(k)}</option>`).join('');
+  sel.innerHTML = wks.map(k=>`<option value="${k}" ${k===state.wk?'selected':''}>Fin de semana ${wkLabel(k)}</option>`).join('');
   const i = wks.indexOf(state.wk);
   document.getElementById('wk-prev').disabled = i<=0;
   document.getElementById('wk-next').disabled = i>=wks.length-1;
@@ -802,21 +802,21 @@ function renderWeekNav(m) {
 function renderFilters(m) {
   // gènere
   const gb = document.getElementById('filters-genere');
-  gb.innerHTML = [['tots','Tots'],['F','🔴 Femení'],['M','⚫ Masculí']]
+  gb.innerHTML = [['tots','Todos'],['F','🔴 Femenino'],['M','⚫ Masculino']]
     .map(([id,txt])=>`<button class="chip ${state.genere===id?'on':''}" data-g="${id}">${txt}</button>`).join('');
   // categoria (nivell: sènior, júnior, cadet…)
   const cats = [...new Set(m.equips.map(e=>e.nom.split(' ')[0]))].sort();
   const cb = document.getElementById('filters-cat');
-  cb.innerHTML = `<button class="chip ${state.cat==='totes'?'on':''}" data-c="totes">Totes les categories</button>`
+  cb.innerHTML = `<button class="chip ${state.cat==='totes'?'on':''}" data-c="totes">Todas las categorías</button>`
     + cats.map(c=>`<button class="chip ${state.cat===c?'on':''}" data-c="${c}">${c}</button>`).join('');
   const box = document.getElementById('filters');
   const visibles = m.equips.filter(e =>
     (state.genere==='tots' || e.genere===state.genere) &&
     (state.cat==='totes'  || e.nom.split(' ')[0]===state.cat));
   const chips = [
-    {id:'tots', txt:'Tots els equips'},
+    {id:'tots', txt:'Todos los equipos'},
     ...visibles.map(e=>({id:'eq:'+e.id, txt:`${e.emoji} ${e.curt||e.nom}`})),
-    {id:'casa', txt:'🏠 Casa'}, {id:'fora', txt:'🚌 Fora'},
+    {id:'casa', txt:'🏠 Casa'}, {id:'fora', txt:'🚌 Fuera'},
   ];
   box.innerHTML = chips.map(c=>`<button class="chip ${state.filter===c.id?'on':''}" data-f="${c.id}">${c.txt}</button>`).join('');
 }
