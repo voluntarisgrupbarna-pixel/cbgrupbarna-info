@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery · CB Grup Barna</title>
+  <meta name="description" content="Official photo repository of CB Grup Barna · Basketball in El Clot · Sant Martí, Barcelona · since 1965">
+  <meta name="theme-color" content="#E31E24">
+  <meta property="og:title" content="Photo Gallery · CB Grup Barna">
+  <meta property="og:description" content="All the club's photo events. #somclot">
+  <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --ink-2: #46433f;
+      --muted: #8a8681;
+      --line: #e4e1dd;
+      --line-dark: rgba(255,255,255,0.15);
+      --paper: #ffffff;
+      --paper-2: #f6f4f1;
+      --red: #E31E24;
+      --red-dark: #a81318;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --display: 'Jost', 'Futura', 'Century Gothic', -apple-system, sans-serif;
+      --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body); font-weight: 300;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--red); color: #fff; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--paper-2); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,.94); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      height: 68px; display: flex; align-items: center;
+      padding: 0 clamp(16px, 4vw, 44px); gap: 1rem;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .6rem;
+      text-decoration: none; font-family: var(--display);
+      font-size: .82rem; font-weight: 400; letter-spacing: .28em; text-transform: uppercase; color: var(--ink);
+      flex-shrink: 0;
+    }
+    .nav-logo svg { color: var(--red); flex-shrink: 0; }
+    .nav-back {
+      color: var(--muted); text-decoration: none;
+      font-family: var(--display); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+      display: flex; align-items: center; gap: .3rem;
+      transition: color .15s; margin-left: auto;
+    }
+    .nav-back:hover { color: var(--red); }
+    #search-input {
+      background: var(--paper-2); border: 1px solid var(--line);
+      color: var(--ink); padding: .5rem .85rem .5rem 2.2rem;
+      font-family: var(--body); font-size: .85rem; width: 220px;
+      transition: border-color .15s; outline: none;
+    }
+    #search-input:focus { border-color: var(--red); }
+    #search-input::placeholder { color: var(--muted); }
+    .search-wrap { position: relative; display: flex; align-items: center; }
+    .search-wrap svg { position: absolute; left: .6rem; color: var(--muted); pointer-events: none; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: calc(68px + 3rem) 1.25rem 3rem;
+      border-bottom: 1px solid var(--line);
+      position: relative; overflow: hidden;
+      background: var(--paper);
+    }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: var(--red); }
+    .hero-dot-grid { display: none; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-family: var(--display); font-size: 9.5px; font-weight: 400;
+      color: var(--red);
+      padding: 0; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .36em;
+    }
+    .hero h1 {
+      font-family: var(--display); font-weight: 300;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      letter-spacing: .1em; line-height: 1.15; text-transform: uppercase;
+      color: var(--ink);
+    }
+    .hero h1 span { color: var(--red); }
+    .hero p {
+      color: var(--ink-2); margin-top: .9rem;
+      font-size: .95rem; max-width: 480px;
+    }
+    .hero-stats {
+      display: flex; gap: 2.4rem; margin-top: 1.75rem;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: left; }
+    .stat-num {
+      font-family: var(--display); font-weight: 200;
+      font-size: 2rem; color: var(--ink); line-height: 1;
+    }
+    .stat-label { font-family: var(--display); font-size: 8.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .26em; margin-top: .4rem; }
+
+    /* ── SEASON FILTER ── */
+    .filters { padding: 1.25rem clamp(16px, 4vw, 44px); display: flex; gap: .5rem; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
+    .filter-btn {
+      font-family: var(--display); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase;
+      padding: .5rem .9rem;
+      border: 1px solid var(--line); background: transparent;
+      color: var(--ink-2); cursor: pointer; transition: all .15s;
+    }
+    .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .filter-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+    /* ── EVENT GRID ── */
+    #events-view { padding: 1.5rem 1.25rem 4rem; }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: clamp(18px, 2.4vw, 30px);
+    }
+    .event-card {
+      background: var(--paper); border: 1px solid var(--line);
+      overflow: hidden; cursor: pointer;
+      transition: border-color .3s var(--ease), transform .3s var(--ease);
+      text-decoration: none; color: inherit; display: block;
+    }
+    .event-card:hover { border-color: var(--ink); transform: translateY(-3px); }
+    .event-thumb {
+      aspect-ratio: 4/3; overflow: hidden; position: relative;
+      background: var(--paper-2);
+    }
+    .event-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1.4s var(--ease); display: block;
+    }
+    .event-card:hover .event-thumb img { transform: scale(1.05); }
+    .event-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 50%);
+    }
+    .event-thumb-count {
+      position: absolute; bottom: .6rem; right: .6rem;
+      background: rgba(10,10,10,.7); backdrop-filter: blur(4px);
+      color: rgba(255,255,255,.9); font-family: var(--display); font-size: 9px; letter-spacing: .1em;
+      padding: .3rem .55rem;
+      display: flex; align-items: center; gap: .3rem;
+    }
+    .event-season-tag {
+      position: absolute; top: .6rem; left: .6rem;
+      background: var(--red); color: #fff;
+      font-family: var(--display); font-size: 8.5px; padding: .25rem .5rem;
+      text-transform: uppercase; letter-spacing: .16em;
+    }
+    .event-info { padding: 1.15rem 1.25rem 1.4rem; }
+    .event-title {
+      font-family: var(--display); font-weight: 400;
+      font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink); margin-bottom: .55rem; line-height: 1.4;
+    }
+    .event-desc { font-size: .82rem; color: var(--ink-2); margin-bottom: .8rem; line-height: 1.5; }
+    .event-meta { display: flex; flex-wrap: wrap; gap: .8rem; font-family: var(--display); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .event-meta-item { display: flex; align-items: center; gap: .3rem; }
+    .event-meta-item.dl { color: var(--red); }
+
+    /* ── PHOTO VIEW ── */
+    #photos-view { display: none; padding: calc(68px + 1.5rem) 1.25rem 4rem; }
+    .photos-header {
+      display: flex; align-items: flex-start; gap: 1rem;
+      margin-bottom: 2rem; flex-wrap: wrap;
+      padding-bottom: 1.75rem; border-bottom: 1px solid var(--line);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: var(--muted); background: none; border: none;
+      cursor: pointer; font-family: var(--display); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase;
+      padding: .5rem 0; transition: color .15s;
+    }
+    .back-btn:hover { color: var(--red); }
+    .photos-header-info { flex: 1; }
+    .photos-season-tag {
+      display: inline-block; font-family: var(--display); font-size: 8.5px;
+      color: var(--red);
+      padding: 0; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .26em;
+    }
+    .photos-title {
+      font-family: var(--display); font-weight: 300; text-transform: uppercase;
+      font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+      color: var(--ink); line-height: 1.2; margin-bottom: .6rem; letter-spacing: .04em;
+    }
+    .photos-meta { display: flex; flex-wrap: wrap; gap: 1.2rem; font-family: var(--display); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .photos-meta-item { display: flex; align-items: center; gap: .35rem; }
+    .dl-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-family: var(--display); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--red);
+      border: 1px solid var(--line); padding: .3rem .6rem;
+    }
+
+    /* ── PHOTO GRID (masonry) ── */
+    .photo-grid {
+      columns: 2; column-gap: .6rem;
+    }
+    @media (min-width: 480px) { .photo-grid { columns: 3; } }
+    @media (min-width: 768px) { .photo-grid { columns: 4; } }
+    @media (min-width: 1100px) { .photo-grid { columns: 5; } }
+    @media (min-width: 1440px) { .photo-grid { columns: 6; } }
+
+    .photo-item {
+      break-inside: avoid; margin-bottom: .6rem;
+      position: relative; cursor: pointer; overflow: hidden;
+      display: block; background: var(--paper-2); border: 1px solid var(--line);
+    }
+    .photo-item img {
+      width: 100%; height: auto; display: block;
+      transition: opacity .2s;
+    }
+    .photo-item .photo-hover {
+      position: absolute; inset: 0; background: rgba(10,10,10,0);
+      transition: background .2s;
+      display: flex; align-items: flex-end; padding: .4rem;
+      gap: .3rem;
+    }
+    .photo-item:hover .photo-hover { background: rgba(10,10,10,.35); }
+    .photo-action-btn {
+      opacity: 0; transform: translateY(4px);
+      transition: opacity .15s, transform .15s;
+      background: rgba(10,10,10,.7); backdrop-filter: blur(4px);
+      border: none; color: #fff; cursor: pointer;
+      padding: .35rem; display: flex; align-items: center;
+    }
+    .photo-item:hover .photo-action-btn { opacity: 1; transform: translateY(0); }
+    .photo-item .shimmer {
+      aspect-ratio: 1; background: linear-gradient(90deg, var(--paper-2) 25%, var(--line) 50%, var(--paper-2) 75%);
+      background-size: 200% 100%; animation: shimmer 1.5s infinite;
+    }
+    .photo-item video { width: 100%; height: auto; display: block; }
+    .video-tile-badge {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 34px; height: 34px; background: rgba(10,10,10,.55); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; pointer-events: none;
+    }
+
+    /* ── LOAD MORE ── */
+    .load-more-wrap { text-align: center; margin-top: 2.5rem; }
+    .load-more-btn {
+      background: transparent; border: 1px solid var(--ink);
+      color: var(--ink); font-family: var(--display); font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+      padding: .85rem 2rem; cursor: pointer; transition: all .3s var(--ease);
+    }
+    .load-more-btn:hover { background: var(--ink); color: #fff; }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(10,10,10,.97); align-items: center; justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img#lb-img {
+      max-width: min(92vw, 1200px); max-height: 85vh;
+      object-fit: contain;
+      transition: opacity .15s;
+    }
+    #lightbox img.loading { opacity: 0; }
+    .lb-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(255,255,255,.08); border: none; color: rgba(255,255,255,.7);
+      cursor: pointer; padding: .5rem; transition: all .15s;
+      display: flex; align-items: center;
+    }
+    .lb-close:hover { background: rgba(255,255,255,.15); color: #fff; }
+    .lb-prev, .lb-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.07); border: none; color: rgba(255,255,255,.7);
+      cursor: pointer; padding: .8rem .6rem;
+      transition: all .15s; display: flex; align-items: center;
+    }
+    .lb-prev { left: .75rem; }
+    .lb-next { right: .75rem; }
+    .lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,.14); color: #fff; }
+    .lb-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
+      padding: 1.5rem 1.25rem .75rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .lb-counter { font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; color: rgba(255,255,255,.5); }
+    .lb-dl-btn {
+      display: flex; align-items: center; gap: .4rem;
+      background: var(--red); color: #fff; border: none; cursor: pointer;
+      padding: .55rem 1.1rem; font-family: var(--display);
+      font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; transition: background .15s;
+    }
+    .lb-dl-btn:hover { background: #fff; color: var(--ink); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center; padding: 5rem 1rem; color: var(--muted);
+    }
+    .empty-state svg { margin-bottom: 1rem; opacity: .4; }
+
+    /* ── ACCESS GATE ── */
+    #access-gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(10,10,10,.9);
+      display: none; align-items: center; justify-content: center;
+      padding: 1.25rem;
+      backdrop-filter: blur(4px);
+    }
+    #access-gate.visible { display: flex; }
+    #access-gate.hidden { display: none; }
+    .gate-box {
+      background: var(--paper); border: 1px solid var(--line);
+      width: 100%; max-width: 420px;
+      padding: 2.5rem 2rem; text-align: center;
+    }
+    .gate-logo {
+      font-family: var(--display); font-weight: 400;
+      font-size: 1rem; letter-spacing: .28em; text-transform: uppercase; color: var(--ink);
+      margin-bottom: .25rem;
+    }
+    .gate-logo span { color: var(--red); }
+    .gate-title {
+      font-family: var(--display); font-weight: 300; text-transform: uppercase;
+      font-size: 1.4rem; color: var(--ink); margin: 1.1rem 0 .5rem; letter-spacing: .06em;
+    }
+    .gate-subtitle {
+      font-size: .82rem; color: var(--ink-2); margin-bottom: 1.75rem; line-height: 1.6;
+    }
+    .gate-tabs {
+      display: flex; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem;
+    }
+    .gate-tab {
+      flex: 1; background: none; border: none; color: var(--muted);
+      font-family: var(--display); font-size: 9.5px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+      cursor: pointer; padding: .8rem .5rem;
+      border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s;
+    }
+    .gate-tab.active { color: var(--ink); border-bottom-color: var(--red); }
+    .gate-panel { display: none; }
+    .gate-panel.active { display: block; }
+    .gate-input {
+      width: 100%; background: var(--paper-2); border: 1px solid var(--line);
+      color: var(--ink); font-family: var(--body);
+      font-size: .9rem; padding: .7rem 1rem; margin-bottom: .75rem;
+      outline: none; transition: border-color .2s;
+    }
+    .gate-input:focus { border-color: var(--red); }
+    .gate-input.error { border-color: var(--red); }
+    .gate-btn {
+      width: 100%; background: var(--ink); color: #fff;
+      border: 1px solid var(--ink); cursor: pointer;
+      font-family: var(--display); font-size: 10px; font-weight: 400;
+      letter-spacing: .3em; padding: .85rem 1rem; margin-top: .25rem;
+      transition: all .3s var(--ease); text-transform: uppercase;
+    }
+    .gate-btn:hover { background: var(--red); border-color: var(--red); }
+    .gate-btn:disabled { opacity: .5; cursor: not-allowed; }
+    .gate-error { color: var(--red); font-size: .78rem; margin: -.25rem 0 .5rem; text-align: left; }
+    .gate-success { color: #1a7a3c; font-size: .82rem; margin-top: .75rem; }
+    .gate-form-row { display: flex; gap: .5rem; }
+    .gate-form-row .gate-input { flex: 1; }
+
+    /* ── SPONSOR ── */
+    .sponsor-bar {
+      text-align: center; padding: 2.5rem 1rem 0; margin-top: .5rem;
+    }
+    .sponsor-label { font-family: var(--display); font-size: 8.5px; text-transform: uppercase; letter-spacing: .26em; color: var(--muted); margin-bottom: .8rem; }
+    .sponsor-card {
+      display: inline-flex; align-items: center; gap: .75rem;
+      background: var(--paper); border: 1px solid var(--line);
+      padding: .6rem 1.1rem .6rem .6rem;
+      text-decoration: none; transition: border-color .15s;
+    }
+    .sponsor-card:hover { border-color: var(--ink); }
+    .sponsor-logo { width: 42px; height: 42px; object-fit: contain; background: #fff; }
+    .sponsor-info { text-align: left; }
+    .sponsor-name { font-family: var(--display); font-size: .78rem; letter-spacing: .04em; color: var(--ink); line-height: 1.3; }
+    .sponsor-handle { font-size: .72rem; color: var(--muted); margin-top: .1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); margin-top: 3rem;
+      padding: 2.5rem 1.25rem; text-align: center;
+    }
+    footer p { font-family: var(--display); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+    footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+    footer a:hover { color: var(--red); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .event-card { animation: fadeIn .3s ease both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ── RESPONSIVE NAV ── */
+    @media (max-width: 560px) {
+      #search-input { width: 150px; font-size: .8rem; }
+      .nav-logo span { display: none; }
+    }
+
+    /* ── SELECTOR D'IDIOMA ── */
+    .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+    .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+    .lang-switch a.active { opacity: 1; font-weight: 600; }
+    .lang-switch a:hover { opacity: 1; }
+    .lang-switch .sep { opacity: 0.25; }
+  </style>
+  <link rel="canonical" href="https://cbgrupbarna.info/en/fotos/">
+  <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/fotos/">
+  <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/fotos/">
+  <link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/fotos/">
+  <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/fotos/">
+  <meta property="og:url" content="https://cbgrupbarna.info/en/fotos/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ca_ES">
+  <meta property="og:locale:alternate" content="es_ES">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ImageGallery",
+      "@id": "https://cbgrupbarna.info/en/fotos/#galeria",
+      "name": "CB Grup Barna photo gallery",
+      "description": "Official photo repository of CB Grup Barna: photos of matches, events, camps and tournaments of the youth basketball club of El Clot, Sant Martí District, Barcelona. Free access for families.",
+      "url": "https://cbgrupbarna.info/en/fotos/",
+      "inLanguage": [
+        "ca-ES",
+        "es-ES"
+      ],
+      "isPartOf": {
+        "@id": "https://cbgrupbarna.info/#website"
+      },
+      "about": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
+      "publisher": {
+        "@id": "https://cbgrupbarna.info/#club"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CB Grup Barna",
+          "item": "https://cbgrupbarna.info/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Photo gallery",
+          "item": "https://cbgrupbarna.info/en/fotos/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- ACCESS GATE -->
+<div id="access-gate">
+  <div class="gate-box">
+    <div class="gate-logo">CB <span>Grup</span> Barna</div>
+    <div class="gate-title">Photo Gallery</div>
+    <div class="gate-subtitle">To access, enter the club's access code<br>or subscribe to our free newsletter.</div>
+
+    <div class="gate-tabs">
+      <button class="gate-tab active" onclick="switchTab('pin')">Access code</button>
+      <button class="gate-tab" onclick="switchTab('subscribe')">Newsletter</button>
+    </div>
+
+    <!-- PIN TAB -->
+    <div class="gate-panel active" id="tab-pin">
+      <input class="gate-input" id="pin-input" type="password" placeholder="Access code" maxlength="20"
+        onkeydown="if(event.key==='Enter')checkPin()">
+      <div class="gate-error" id="pin-error" style="display:none">Incorrect code. Please try again.</div>
+      <button class="gate-btn" onclick="checkPin()">Access</button>
+    </div>
+
+    <!-- SUBSCRIBE TAB -->
+    <div class="gate-panel" id="tab-subscribe">
+      <div class="gate-form-row">
+        <input class="gate-input" id="sub-nom" type="text" placeholder="First name" required>
+        <input class="gate-input" id="sub-cognoms" type="text" placeholder="Last name" required>
+      </div>
+      <input class="gate-input" id="sub-email" type="email" placeholder="Email" required>
+      <input class="gate-input" id="sub-mobil" type="tel" placeholder="Mobile phone">
+      <input class="gate-input" id="sub-club" type="text" placeholder="Club or organization">
+      <div class="gate-error" id="sub-error" style="display:none"></div>
+      <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Subscribe and access</button>
+      <div class="gate-success" id="sub-success" style="display:none">Thank you! Welcome to the gallery.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="/en/" class="nav-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+      <path d="M6.343 6.343a8 8 0 0 1 11.314 0"/><path d="M3.515 3.515a12 12 0 0 1 16.97 0"/>
+    </svg>
+    <span>CB GRUP BARNA · GALLERY</span>
+  </a>
+  <div class="search-wrap" id="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="search" id="search-input" placeholder="Search an event…" autocomplete="off">
+  </div>
+  <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+    <a href="/fotos/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/fotos/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/fotos/" hreflang="en" class="active">EN</a>
+  </div>
+  <a href="/en/" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="m15 18-6-6 6-6"/>
+    </svg>
+    cbgrupbarna.info
+  </a>
+</nav>
+
+<!-- EVENTS VIEW -->
+<div id="events-view">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-dot-grid"></div>
+    <div class="hero-tag">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+      CB Grup Barna · since 1965
+    </div>
+    <h1>PHOTO <span>GALLERY</span></h1>
+    <p>The club's official photo repository. All events, all seasons. #somclot</p>
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters" id="season-filters"></div>
+
+  <!-- Grid -->
+  <div style="padding: 1.5rem 1.25rem 0;">
+    <div id="events-grid" class="events-grid"></div>
+    <div id="no-results" class="empty-state" style="display:none">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <p>No results for this search.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTOS VIEW -->
+<div id="photos-view">
+  <button class="back-btn" id="back-btn" onclick="showEvents()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="m15 18-6-6 6-6"/>
+    </svg>
+    All events
+  </button>
+
+  <div class="photos-header">
+    <div class="photos-header-info">
+      <div class="photos-season-tag" id="ev-season"></div>
+      <h2 class="photos-title" id="ev-title"></h2>
+      <div class="photos-meta">
+        <span class="photos-meta-item" id="ev-date"></span>
+        <span class="photos-meta-item" id="ev-location"></span>
+        <span class="photos-meta-item" id="ev-count"></span>
+        <span class="dl-badge" id="ev-dl" style="display:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download available
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo-grid" id="photo-grid"></div>
+  <div class="load-more-wrap" id="load-more-wrap" style="display:none">
+    <button class="load-more-btn" id="load-more-btn">Load more photos</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" id="lb-close" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 6 6 18M6 6l12 12"/>
+    </svg>
+  </button>
+  <button class="lb-prev" id="lb-prev" aria-label="Previous">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="m15 18-6-6 6-6"/>
+    </svg>
+  </button>
+  <img id="lb-img" src="" alt="Club photo" loading="eager">
+  <video id="lb-video" src="" controls playsinline style="display:none;max-width:min(92vw, 1200px);max-height:85vh"></video>
+  <button class="lb-next" id="lb-next" aria-label="Next">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
+  </button>
+  <div class="lb-bottom">
+    <span class="lb-counter" id="lb-counter"></span>
+    <a id="lb-dl" href="#" class="lb-dl-btn" download target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download original
+    </a>
+  </div>
+</div>
+
+<!-- SPONSOR -->
+<div class="sponsor-bar">
+  <div class="sponsor-label">Official photography</div>
+  <a href="https://www.instagram.com/foto_jane/" target="_blank" rel="noopener" class="sponsor-card">
+    <img class="sponsor-logo" src="/fotos/sponsors/fotojane-logo.svg" alt="Foto Jané" onerror="this.style.display='none'">
+    <div class="sponsor-info">
+      <div class="sponsor-name">Foto Jané</div>
+      <div class="sponsor-handle">@foto_jane · newborn &amp; family</div>
+    </div>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>CB Grup Barna · Basketball in El Clot · Sant Martí, Barcelona · since 1965</p>
+  <p style="margin-top:.4rem">#somclot · <a href="/en/">cbgrupbarna.info</a> · <a href="/en/fotos/admin.html" style="color:rgba(255,255,255,.2);font-size:.72rem">Admin</a></p>
+</footer>
+
+<script src="/fotos/config.js"></script>
+<script src="/fotos/events.js"></script>
+<script>
+// ── CONSTANTS ──
+const THUMB = id => `https://drive.google.com/thumbnail?id=${id}&sz=w500`;
+const FULL  = id => `https://lh3.googleusercontent.com/d/${id}`;
+const DL    = id => `https://drive.google.com/uc?export=download&id=${id}`;
+const REPO_RAW = 'https://raw.githubusercontent.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/main';
+const PLACEHOLDER = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23f6f4f1' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' fill='%238a8681' font-family='sans-serif' font-size='14' text-anchor='middle' dy='.3em'%3ENo photos%3C/text%3E%3C/svg%3E`;
+const BATCH = 40; // photos per load
+
+function isRepo(ev) { return ev.source === 'repo'; }
+function isFlickr(ev) { return ev.source === 'flickr'; }
+function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
+function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v|avi)$/i.test(ref || ''); }
+
+function photoThumb(ev, ref) {
+  if (!ref) return PLACEHOLDER;
+  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_q.jpg`;
+  return THUMB(ref);
+}
+function photoFull(ev, ref) {
+  if (!ref) return PLACEHOLDER;
+  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_b.jpg`;
+  return FULL(ref);
+}
+function photoDl(ev, ref) {
+  if (!ref) return '#';
+  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_o.jpg`;
+  return DL(ref);
+}
+function eventCover(ev) {
+  if (isFlickrEmbed(ev)) return ev.cover_url || PLACEHOLDER;
+  if (isFlickr(ev)) {
+    if (!ev.cover) return PLACEHOLDER;
+    return `https://live.staticflickr.com/${ev.cover}_q.jpg`;
+  }
+  if (isRepo(ev)) {
+    const ref = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
+    if (!ref) return PLACEHOLDER;
+    return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  }
+  return THUMB(ev.cover);
+}
+
+// ── STATE ──
+let currentEvent = null;
+let displayedCount = 0;
+let activeSeason = 'all';
+let searchQuery = '';
+
+// ── ACCESS GATE ──
+const CFG = window.GALERIA_CONFIG || {};
+const GATE_KEY = 'cbgb_access_v1';
+
+function grantAccess() {
+  localStorage.setItem(GATE_KEY, '1');
+  document.getElementById('access-gate').classList.add('hidden');
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.gate-tab').forEach((t, i) => t.classList.toggle('active', (tab === 'pin' ? i === 0 : i === 1)));
+  document.getElementById('tab-pin').classList.toggle('active', tab === 'pin');
+  document.getElementById('tab-subscribe').classList.toggle('active', tab === 'subscribe');
+  document.getElementById('pin-error').style.display = 'none';
+  document.getElementById('sub-error').style.display = 'none';
+}
+
+function checkPin() {
+  const val = document.getElementById('pin-input').value.trim();
+  const correct = CFG.access_pin || '1965';
+  if (val === correct) { grantAccess(); }
+  else {
+    const err = document.getElementById('pin-error');
+    err.style.display = 'block';
+    document.getElementById('pin-input').classList.add('error');
+    setTimeout(() => { err.style.display = 'none'; document.getElementById('pin-input').classList.remove('error'); }, 3000);
+  }
+}
+
+async function submitSubscription() {
+  const nom = document.getElementById('sub-nom').value.trim();
+  const cognoms = document.getElementById('sub-cognoms').value.trim();
+  const email = document.getElementById('sub-email').value.trim();
+  const mobil = document.getElementById('sub-mobil').value.trim();
+  const club = document.getElementById('sub-club').value.trim();
+  const err = document.getElementById('sub-error');
+
+  if (!nom || !cognoms || !email) {
+    err.textContent = 'Name, last name and email are required.';
+    err.style.display = 'block';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    err.textContent = 'The email is not a valid format.';
+    err.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('sub-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  err.style.display = 'none';
+
+  const endpoint = `https://formsubmit.co/ajax/${CFG.newsletter_email || 'voluntarisgrupbarna@gmail.com'}`;
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        Nom: nom, Cognoms: cognoms, Correu: email,
+        Mòbil: mobil || '—', Club: club || '—',
+        _subject: 'Nova subscripció Galeria CB Grup Barna',
+        _captcha: 'false',
+      }),
+    });
+    const data = await res.json();
+    if (data.success === 'true' || data.success === true) {
+      document.getElementById('sub-success').style.display = 'block';
+      btn.style.display = 'none';
+      setTimeout(() => grantAccess(), 1500);
+    } else { throw new Error('KO'); }
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Subscribe and access';
+    err.textContent = 'Error sending. Please try again.';
+    err.style.display = 'block';
+  }
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  // Check gate — hidden by default, only show if access required
+  if (CFG.require_access && !localStorage.getItem(GATE_KEY)) {
+    document.getElementById('access-gate').classList.add('visible');
+  }
+
+  buildStats();
+  buildSeasonFilters();
+  renderEvents();
+
+  document.getElementById('search-input').addEventListener('input', e => {
+    searchQuery = e.target.value.trim().toLowerCase();
+    renderEvents();
+  });
+
+  // Lightbox controls
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', () => navigateLightbox(-1));
+  document.getElementById('lb-next').addEventListener('click', () => navigateLightbox(1));
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
+  });
+
+  document.getElementById('load-more-btn').addEventListener('click', loadMorePhotos);
+});
+
+// ── STATS ──
+function buildStats() {
+  const totalPhotos = window.GALERIA_EVENTS.reduce((s, e) => s + e.photos.length, 0);
+  const totalEvents = window.GALERIA_EVENTS.length;
+  const seasons = [...new Set(window.GALERIA_EVENTS.map(e => e.season).filter(Boolean))];
+  document.getElementById('hero-stats').innerHTML = [
+    { num: totalPhotos.toLocaleString('en'), label: 'Photos' },
+    { num: totalEvents, label: 'Events' },
+    { num: seasons.length, label: 'Seasons' },
+  ].map(s => `<div class="stat-item"><div class="stat-num">${s.num}</div><div class="stat-label">${s.label}</div></div>`).join('');
+}
+
+// ── SEASON FILTERS ──
+function buildSeasonFilters() {
+  const seasons = [...new Set(window.GALERIA_EVENTS.map(e => e.season).filter(Boolean))].sort().reverse();
+  const wrap = document.getElementById('season-filters');
+  if (!seasons.length) { wrap.style.display = 'none'; return; }
+
+  const all = document.createElement('button');
+  all.className = 'filter-btn active'; all.dataset.season = 'all'; all.textContent = 'All';
+  all.addEventListener('click', () => setSeasonFilter('all'));
+  wrap.appendChild(all);
+
+  seasons.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn'; btn.dataset.season = s; btn.textContent = s;
+    btn.addEventListener('click', () => setSeasonFilter(s));
+    wrap.appendChild(btn);
+  });
+}
+
+function setSeasonFilter(season) {
+  activeSeason = season;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.season === season);
+  });
+  renderEvents();
+}
+
+// ── EVENTS GRID ──
+function filteredEvents() {
+  return window.GALERIA_EVENTS.filter(e => {
+    const matchesSeason = activeSeason === 'all' || e.season === activeSeason;
+    const matchesSearch = !searchQuery ||
+      e.title.toLowerCase().includes(searchQuery) ||
+      (e.description || '').toLowerCase().includes(searchQuery) ||
+      (e.location || '').toLowerCase().includes(searchQuery);
+    return matchesSeason && matchesSearch;
+  });
+}
+
+function renderEvents() {
+  const grid = document.getElementById('events-grid');
+  const noResults = document.getElementById('no-results');
+  const events = filteredEvents();
+
+  grid.innerHTML = '';
+  noResults.style.display = events.length ? 'none' : 'block';
+
+  events.forEach((ev, i) => {
+    const card = document.createElement('a');
+    card.className = 'event-card';
+    card.href = '#';
+    card.style.animationDelay = `${i * 40}ms`;
+    card.addEventListener('click', e => { e.preventDefault(); showPhotos(ev); });
+
+    const dateStr = ev.date ? new Date(ev.date + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+
+    card.innerHTML = `
+      <div class="event-thumb">
+        <img src="${eventCover(ev)}" alt="${ev.title}" loading="lazy">
+        <div class="event-thumb-overlay"></div>
+        ${ev.season ? `<div class="event-season-tag">${ev.season}</div>` : ''}
+        <div class="event-thumb-count">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          ${isFlickrEmbed(ev) ? 'Flickr' : ev.photos.length}
+        </div>
+      </div>
+      <div class="event-info">
+        <div class="event-title">${ev.title}</div>
+        ${ev.description ? `<div class="event-desc">${ev.description}</div>` : ''}
+        <div class="event-meta">
+          ${dateStr ? `<span class="event-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${dateStr}</span>` : ''}
+          ${ev.location ? `<span class="event-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${ev.location}</span>` : ''}
+          ${ev.allow_download ? `<span class="event-meta-item dl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</span>` : ''}
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ── PHOTO VIEW ──
+function showPhotos(ev) {
+  currentEvent = ev;
+  displayedCount = 0;
+
+  document.getElementById('events-view').style.display = 'none';
+  document.getElementById('photos-view').style.display = 'block';
+  document.getElementById('search-wrap').style.display = 'none';
+  window.scrollTo(0, 0);
+
+  // Fill header
+  document.getElementById('ev-season').textContent = ev.season || '';
+  document.getElementById('ev-title').textContent = ev.title;
+  const dateStr = ev.date ? new Date(ev.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '';
+  document.getElementById('ev-date').innerHTML = dateStr ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span style="text-transform:capitalize">${dateStr}</span>` : '';
+  document.getElementById('ev-location').innerHTML = ev.location ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${ev.location}` : '';
+  document.getElementById('ev-count').innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>${ev.photos.length} photos`;
+  document.getElementById('ev-dl').style.display = ev.allow_download ? 'inline-flex' : 'none';
+
+  // Render first batch
+  const grid = document.getElementById('photo-grid');
+  grid.innerHTML = '';
+
+  // Flickr album embed
+  if (isFlickrEmbed(ev)) {
+    document.getElementById('ev-count').innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Flickr Album`;
+    grid.style.columns = 'initial';
+    grid.innerHTML = `
+      <iframe src="https://embedr.flickr.com/photosets/${ev.flickr_album_id}"
+        width="100%" height="620" frameborder="0" allowfullscreen
+        webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen
+        style="background:var(--paper-2);display:block;border:1px solid var(--line)">
+      </iframe>
+      <div style="text-align:center;margin-top:1.25rem">
+        <a href="https://www.flickr.com/photos/202771466@N06/albums/${ev.flickr_album_id}"
+           target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:.4rem;color:var(--ink);font-family:var(--display);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);padding:.75rem 1.4rem;">
+          View full album on Flickr →
+        </a>
+      </div>`;
+    document.getElementById('load-more-wrap').style.display = 'none';
+    return;
+  }
+
+  if (ev.photos.length === 0) {
+    grid.innerHTML = `<div class="empty-state" style="width:100%;padding:4rem 1rem">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      <p>There are no photos in this event yet.</p>
+    </div>`;
+    document.getElementById('load-more-wrap').style.display = 'none';
+    return;
+  }
+  loadMorePhotos();
+}
+
+function loadMorePhotos() {
+  const ev = currentEvent;
+  const grid = document.getElementById('photo-grid');
+  const end = Math.min(displayedCount + BATCH, ev.photos.length);
+
+  for (let i = displayedCount; i < end; i++) {
+    const id = ev.photos[i];
+    const item = document.createElement('div');
+    item.className = 'photo-item';
+    item.dataset.index = i;
+
+    // shimmer placeholder
+    const shimmer = document.createElement('div');
+    shimmer.className = 'shimmer';
+    item.appendChild(shimmer);
+
+    if (isVideoRef(id)) {
+      const video = document.createElement('video');
+      video.muted = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      video.addEventListener('loadeddata', () => {
+        shimmer.remove();
+        item.appendChild(video);
+        const badge = document.createElement('div');
+        badge.className = 'video-tile-badge';
+        badge.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>`;
+        item.appendChild(badge);
+      }, { once: true });
+      video.addEventListener('error', () => { shimmer.style.opacity = '.3'; }, { once: true });
+      video.src = photoThumb(ev, id);
+    } else {
+      const img = new Image();
+      img.alt = `Photo ${i + 1}`;
+      img.loading = 'lazy';
+      img.onload = () => { shimmer.remove(); item.appendChild(img); };
+      img.onerror = () => { shimmer.style.opacity = '.3'; };
+      img.src = photoThumb(ev, id);
+    }
+
+    // Hover actions
+    const hover = document.createElement('div');
+    hover.className = 'photo-hover';
+
+    if (ev.allow_download) {
+      const dlBtn = document.createElement('a');
+      dlBtn.className = 'photo-action-btn';
+      dlBtn.href = photoDl(ev, id);
+      dlBtn.download = true;
+      dlBtn.target = '_blank';
+      dlBtn.rel = 'noopener';
+      dlBtn.setAttribute('aria-label', 'Download');
+      dlBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+      dlBtn.addEventListener('click', e => e.stopPropagation());
+      hover.appendChild(dlBtn);
+    }
+
+    item.appendChild(hover);
+    item.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(item);
+  }
+
+  displayedCount = end;
+  const wrap = document.getElementById('load-more-wrap');
+  wrap.style.display = displayedCount < ev.photos.length ? 'block' : 'none';
+}
+
+function showEvents() {
+  currentEvent = null;
+  document.getElementById('photos-view').style.display = 'none';
+  document.getElementById('events-view').style.display = 'block';
+  document.getElementById('search-wrap').style.display = 'flex';
+  window.scrollTo(0, 0);
+}
+
+// ── LIGHTBOX ──
+let lbIndex = 0;
+
+function openLightbox(index) {
+  lbIndex = index;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+  const video = document.getElementById('lb-video');
+  video.pause();
+  video.src = '';
+}
+
+function navigateLightbox(dir) {
+  const photos = currentEvent.photos;
+  lbIndex = (lbIndex + dir + photos.length) % photos.length;
+
+  // Load more if approaching end
+  if (lbIndex >= displayedCount - 5) loadMorePhotos();
+  updateLightbox();
+}
+
+function updateLightbox() {
+  const photos = currentEvent.photos;
+  const id = photos[lbIndex];
+  const img = document.getElementById('lb-img');
+  const video = document.getElementById('lb-video');
+
+  if (isVideoRef(id)) {
+    img.style.display = 'none';
+    img.src = '';
+    video.style.display = 'block';
+    video.src = photoFull(currentEvent, id);
+    video.load();
+  } else {
+    video.pause();
+    video.style.display = 'none';
+    video.src = '';
+    img.style.display = '';
+    img.classList.add('loading');
+    img.onload = () => img.classList.remove('loading');
+    img.src = photoFull(currentEvent, id);
+  }
+
+  document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${photos.length}`;
+
+  const dlLink = document.getElementById('lb-dl');
+  if (currentEvent.allow_download) {
+    dlLink.href = photoDl(currentEvent, id);
+    dlLink.style.display = 'flex';
+  } else {
+    dlLink.style.display = 'none';
+  }
+}
+</script>
+</body>
+</html>
