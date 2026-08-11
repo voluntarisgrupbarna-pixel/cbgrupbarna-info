@@ -82,7 +82,7 @@ h1 { font-family:'Anton', sans-serif; letter-spacing:-0.5px; font-size: clamp(32
 h1 span { color: var(--red); }
 .head-tag { font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-top:6px; }
 .back { display:inline-flex; align-items:center; gap:6px; font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1px; color:var(--muted); text-decoration:none; margin-top:10px; }
-.back:hover { color:white; }
+.back:hover { color:var(--red-ink); }
 
 /* ===== TABS ===== */
 .tabs {
@@ -150,7 +150,7 @@ h1 span { color: var(--red); }
 .wk-btn {
   width:38px; height:38px; border-radius:12px; flex-shrink:0;
   background:var(--panel); border:1px solid var(--border);
-  font-size:18px; color:white;
+  font-size:18px; color:var(--ink);
 }
 .wk-btn:disabled { opacity:.25; }
 .wk-sel { flex:1; position:relative; min-width:0; }
@@ -214,7 +214,7 @@ h1 span { color: var(--red); }
 .m-teams { display:flex; align-items:center; gap:10px; }
 .m-t { flex:1; font-weight:600; font-size:14px; line-height:1.25; }
 .m-t.right { text-align:right; }
-.m-t.barna { color:white; }
+.m-t.barna { color:var(--ink); }
 .m-t.rival { color:var(--muted); }
 .m-score {
   flex-shrink:0; text-align:center; font-family:'Anton', sans-serif; font-size:26px; letter-spacing:1px;
@@ -295,7 +295,7 @@ h1 span { color: var(--red); }
 .td-actions a, .td-actions button {
   display:flex; align-items:center; justify-content:center; gap:6px;
   background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:11px;
-  font-family:'Anton', sans-serif; font-size:14px; letter-spacing:1px; text-decoration:none; color:white;
+  font-family:'Anton', sans-serif; font-size:14px; letter-spacing:1px; text-decoration:none; color:var(--ink);
 }
 .back-btn { font-family:'Inter',monospace; font-size:10px; letter-spacing:1px; color:var(--muted); margin-bottom:12px; display:inline-block; }
 
@@ -305,7 +305,7 @@ h1 span { color: var(--red); }
 .g-box p { font-size:12px; color:var(--muted); line-height:1.6; margin-bottom:10px; }
 .g-box input[type=password] {
   width:100%; background:var(--paper); border:1px solid var(--border); border-radius:10px;
-  color:white; padding:11px; font-size:14px; margin-bottom:10px;
+  color:var(--ink); padding:11px; font-size:14px; margin-bottom:10px;
 }
 .g-btn {
   display:inline-flex; align-items:center; gap:6px;
@@ -318,7 +318,7 @@ h1 span { color: var(--red); }
   border:2px dashed rgba(14,17,22,0.16); border-radius:14px; padding:26px 14px;
   text-align:center; color:var(--muted); font-size:12px; transition:all .15s;
 }
-.drop.over { border-color:var(--red); background:rgba(227,30,36,0.06); color:white; }
+.drop.over { border-color:var(--red); background:rgba(227,30,36,0.06); color:var(--red-ink); }
 .g-log { font-family:'Inter', sans-serif; font-size:10px; color:var(--win); margin-top:10px; white-space:pre-wrap; line-height:1.7; }
 /* ===== CARTELLS ===== */
 .c-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
@@ -540,7 +540,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <canvas id="c-canvas" width="1080" height="1350" style="width:100%;border-radius:16px;border:1px solid var(--border);display:none"></canvas>
     <div class="g-box" id="c-cap-box" style="display:none;margin-top:12px">
       <h3>✍️ Caption per publicar (amb el rival etiquetat)</h3>
-      <textarea id="c-caption" rows="9" style="width:100%;background:var(--paper);border:1px solid var(--border);border-radius:10px;color:white;font-size:12px;padding:10px;line-height:1.5"></textarea>
+      <textarea id="c-caption" rows="9" style="width:100%;background:var(--paper);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:12px;padding:10px;line-height:1.5"></textarea>
       <button class="g-btn ghost" id="c-cap-copy" style="margin-top:8px">📋 Copiar caption</button>
     </div>
     </div><!-- fi cartells-open -->
@@ -1246,7 +1246,8 @@ function renderEquips() {
     <div class="pos-box">${posEdit}<span>posició a la lliga<br><small style="color:var(--muted)">${editMode?'edita i prem OK':'s\'actualitza des de gestió'}</small></span></div>
     <div class="td-actions">
       <a href="https://wa.me/?text=${encodeURIComponent(waTxt)}" target="_blank" rel="noopener">📲 WhatsApp</a>
-      <button onclick="downloadICS('${e.id}')">📅 Calendari .ics</button>
+      <button onclick="downloadICS('${e.id}')">📅 Descarregar .ics</button>
+      <a href="webcal://cbgrupbarna.info/partits/calendaris/ics/${e.id}.ics" title="S'obre a l'app de calendari del mòbil o ordinador i s'actualitza sola cada dia">🔔 Subscriu-te al calendari</a>
     </div>
     ${s.next?`<div class="sec-t">⏭ Proper partit</div>${matchCard(s.next,m,true)}`:''}
     <div id="td-rivals"></div>

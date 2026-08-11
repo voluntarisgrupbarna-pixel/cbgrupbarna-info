@@ -13,7 +13,9 @@ name: update-partits
 # Finalment, torna a escriure el resum estàtic (SEO/SEO-IA) de propers
 # partits, resultats i JSON-LD dins partits/index.html i els enllaços de
 # descàrrega dins partits/calendaris/index.html, perquè els bots que no
-# executen JavaScript vegin dades reals i actuals.
+# executen JavaScript vegin dades reals i actuals. També regenera un
+# calendari .ics per equip (partits/calendaris/ics/) perquè les famílies
+# s'hi subscriguin des de Google/Apple/Outlook i rebin sols els canvis.
 #
 # Cap de setmana, quan hi ha partits, es repeteix cada 20 minuts entre les
 # 08:00 i les 21:00 (hora de Barcelona, aprox. — GitHub Actions treballa en
@@ -50,6 +52,8 @@ jobs:
         run: python .github/scripts/generate-calendaris.py
       - name: Actualitzar resum estàtic per a SEO / SEO-IA
         run: python .github/scripts/generate-seo-snapshot.py
+      - name: Regenerar calendaris .ics per equip
+        run: python .github/scripts/generate-ics.py
       - name: Commit si hi ha canvis
         run: |
           git config user.name "cbgb-robot"
