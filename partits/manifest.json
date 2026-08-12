@@ -1,0 +1,35 @@
+{
+  "name": "CBGB Partits i Resultats",
+  "short_name": "CBGB Partits",
+  "description": "Partits, resultats, ratxes i classificacions de tots els equips del CB Grup Barna, jornada a jornada.",
+  "start_url": "/partits/",
+  "scope": "/partits/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#E31E24",
+  "lang": "ca",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": [
+    "sports"
+  ]
+}
