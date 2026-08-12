@@ -13,6 +13,7 @@ a mà perquè tenen lògica pròpia.
 import json
 import re
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://cbgrupbarna.info"
@@ -20,6 +21,11 @@ WA_CLUB = "https://api.whatsapp.com/send?phone=+34698425153"
 WA_ESCOLETA = "https://wa.me/34646205526"
 WEB_3X3 = "https://cbgrupbarna-3x3timechamber.com"
 WEB_3X3_INSCRIPCIO = WEB_3X3 + "/#inscripcio"
+
+
+def wa(text):
+    """Text codificat per a un enllaç de WhatsApp (?text=...)."""
+    return quote(text)
 
 # ─────────────────────────────────────────────────────────────── esquelet ────
 
@@ -68,6 +74,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None):
       <a href="/3x3/" class="opt">3x3</a>
       <a href="/blog/" class="opt">Blog</a>
       <a href="/premsa/" class="opt">Premsa</a>
+      <a href="/patrocinadors/" class="opt">Patrocinadors</a>
       <a href="/#info">Informació</a>
     </nav>
   </div>
@@ -91,6 +98,7 @@ FOOT = f"""</main>
         <a href="/escoleta/">Escola de bàsquet</a>
         <a href="/campus/">Campus de bàsquet</a>
         <a href="/3x3/">Torneig 3x3</a>
+        <a href="/patrocinadors/">Patrocinadors i partners</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
       </div>
       <div class="foot-col">
@@ -288,6 +296,506 @@ def build_campus():
                  head(title, desc, url, SITE + "/img/campus-hero.webp", ld,
                       "campus bàsquet Barcelona, campus baloncesto Barcelona, campus estiu bàsquet, "
                       "grup barna campus, campus tecnificació bàsquet Barcelona") + body + FOOT)
+
+
+# ═══════════════════════════════════════════════════════ /patrocinadors/ ════
+
+# (fitxer del logo, nom, Instagram real si el tenim confirmat — si no, None
+#  i es mostra sense enllaç. Verificat a partners-mapa/index.html i al dossier
+#  patrocinis/index.html. Wilson no té fitxer de logo: és un wordmark de text.)
+PARTNERS = [
+    ("instax-fujifilm.png", "Instax Fujifilm", "https://www.instagram.com/instaxcamara/"),
+    ("westfield-glories.png", "Westfield Glòries", "https://www.instagram.com/westfieldglories/"),
+    ("time-chamber.png", "Time Chamber", "https://www.instagram.com/timechamber_es/"),
+    ("eix-clot.png", "Eix Clot", "https://www.instagram.com/eixclot/"),
+    ("herbolaris-montserrat.png", "Herbolaris Montserrat", "https://www.instagram.com/herbolari.montserrat/"),
+    ("clinica-dental-bac-de-roda.png", "Clínica Dental Bac de Roda", "https://www.instagram.com/clinicadentalbacderoda/"),
+    ("stepback-podologia.png", "Stepback Podologia", "https://www.instagram.com/stepback.podologia/"),
+    ("aquamiga.png", "Aquamiga", "https://www.instagram.com/aquamiga_oficial/"),
+    ("armand-optics.png", "Armand Òptics", "https://www.instagram.com/armandoptics/"),
+    ("manual-colors.png", "Manual Colors", "https://www.instagram.com/manualcolor/"),
+    ("melosa-hamburgueseria.png", "La Melosa", "https://www.instagram.com/melosahamburgueseria/"),
+    ("foto-jane.png", "Foto Jané", None),
+    ("mercat-dels-encants.png", "Mercat dels Encants", None),
+    ("tot-salut.png", "Tot Salut", None),
+    ("ovella-negra.png", "Ovella Negra", "https://www.instagram.com/ovellanegrabcn/"),
+    ("romeo-abogados.png", "Romeo Abogados", "https://www.instagram.com/romeoabogados/"),
+    ("fundacio-mullor.png", "Fundació Mullor", None),
+    ("l-aquarium-de-barcelona.png", "L'Aquàrium de Barcelona", None),
+    (None, "Wilson", None),
+    ("eix-comercial-sant-marti.png", "Eix Comercial Sant Martí", None),
+    ("gbk-globabasket.png", "GBK · Globasket", "https://www.instagram.com/globasket/"),
+    ("illa-fantasia.png", "Illa Fantasia", "https://www.instagram.com/illafantasia/"),
+    ("panteres-grogues.png", "Panteres Grogues", None),
+]
+
+
+def build_patrocinadors():
+    """Rèplica nativa (barna.css, dins del domini) del dossier de patrocinis
+    2026/27, fins ara servit com a bundle extern a /patrocinis/. Mateix
+    contingut, xifres, preus i missatges de contacte que el dossier original;
+    només canvia el sistema visual, que passa a ser el del club."""
+    url = SITE + "/patrocinadors/"
+    title = "CB Grup Barna · Dossier de patrocinio y colaboraciones 2026/27"
+    desc = ("Dossier público del CB Grup Barna: club, impacto, proyectos y oportunidades de "
+            "colaboración para la temporada 2026/27. Niveles desde 300€, partners actuales y "
+            "contacto directo por WhatsApp.")
+    ph = "/patrocinis/photos/"
+
+    faq_html, faq_ld = faq_block([
+        ("¿Cómo me hago patrocinador o partner del CB Grup Barna?",
+         "Escribe por WhatsApp (+34 698 425 153) o envía un correo a info@cbgrupbarna.com. "
+         "Preparamos una propuesta concreta según lo que quiera conseguir tu marca, sin packs "
+         "de relleno ni promesas imposibles de medir."),
+        ("¿Qué formas de colaborar hay?",
+         "Tres puntos de partida transparentes —Presencia digital, Marca en movimiento y "
+         "Patrocinio deportivo— más la colaboración a medida para marcas que quieren un "
+         "objetivo y unos entregables muy concretos."),
+        ("¿Puedo colaborar con producto o servicio en vez de dinero?",
+         "Sí. Muchas colaboraciones del club son en especie: material deportivo, transporte, "
+         "fisioterapia, catering de eventos o imprenta. Se valoran igual que una aportación "
+         "económica y se adaptan a un nivel de contraprestación equivalente."),
+        ("¿Qué recibe mi empresa a cambio?",
+         "Contenido con contexto (no un logo aislado), presencia física en La Nau, equipaciones, "
+         "torneos y campus, acceso a una comunidad de más de 450 familias y una propuesta a "
+         "medida con entregables concretos para cada marca."),
+        ("¿Producción de lonas o material específico incluida?",
+         "No, salvo acuerdo expreso: se presupuesta aparte según lo que necesite la activación."),
+    ])
+
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "SportsOrganization", "@id": SITE + "/#club", "name": "CB Grup Barna",
+         "alternateName": "Club Bàsquet Grup Barna", "url": SITE, "logo": SITE + "/logo.png",
+         "foundingDate": "1965", "email": "info@cbgrupbarna.com",
+         "address": {"@type": "PostalAddress", "streetAddress": "Carrer de la Llacuna, 172",
+                    "addressLocality": "Barcelona", "postalCode": "08018", "addressCountry": "ES"},
+         "sameAs": ["https://www.instagram.com/cbgrupbarna/", "https://www.tiktok.com/@cbgrupbarna"]},
+        {"@type": "Service", "@id": url + "#patrocini", "name": "Dossier de patrocinio · CB Grup Barna",
+         "alternateName": ["Patrocinadors CB Grup Barna", "Sponsoring club de bàsquet Barcelona"],
+         "description": desc, "serviceType": "Patrocini esportiu",
+         "url": url, "provider": {"@id": SITE + "/#club"},
+         "areaServed": [{"@type": "City", "name": "Barcelona"}],
+         "availableChannel": {"@type": "ServiceChannel", "serviceUrl": url,
+                              "servicePhone": {"@type": "ContactPoint", "telephone": "+34698425153",
+                                               "contactType": "Patrocinis i col·laboracions"}}},
+        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
+         "description": desc, "inLanguage": ["es-ES", "ca-ES"],
+         "about": {"@id": url + "#patrocini"}, "isPartOf": {"@id": SITE + "/#website"}},
+        faq_ld,
+        BREADCRUMB([("CB Grup Barna", "/"), ("Patrocinadors", "/patrocinadors/")]),
+    ]}
+
+    def wa_btn(label, text, css, cta):
+        return f'<a href="{WA_CLUB}&amp;text={wa(text)}" class="btn {css}" target="_blank" rel="noopener" data-cta="{cta}">{label}</a>'
+
+    projects = ''.join(f"""<div class="card"><div class="card-media"><img src="{ph}{img}" alt="{alt}" loading="lazy"></div><div class="card-body"><span class="card-tag">{n} · {tag}</span><h3>{h}</h3><p>{p}</p></div></div>""" for n, tag, img, alt, h, p in [
+        ("01", "Alto rendimiento", "team_sf15.jpg", "Equip del CB Grup Barna a la Supercopa",
+         "Supercopa 26/27",
+         "La temporada de mayor exigencia deportiva del club: primer equipo femenino y "
+         "masculino compitiendo en la máxima categoría catalana."),
+        ("02", "Evento de ciudad", "club_cbgb006.jpg", "Torneig 3x3 a Westfield Glòries",
+         "3x3 Westfield Glòries",
+         "Un torneo urbano registrado en FIBA 3x3 que conecta deporte, ciudad, marcas y "
+         "centenares de jugadores y jugadoras."),
+        ("03", "Formación", "player_caf01.jpg", "Jugador del campus de tecnificació",
+         "Campus × Time Chamber",
+         "Tecnificación en Navidad, Semana Santa y verano con turnos de alta ocupación y una "
+         "propuesta formativa reconocible."),
+        ("04", "Impacto social", "club_cbgb016.jpg", "Jugadora dels Barna Màgics amb representants del club",
+         "Barna Màgics",
+         "Baloncesto para personas con diversidad intelectual. Un proyecto que convierte la "
+         "inclusión en práctica semanal."),
+    ])
+
+    offers = ''.join(f"""<div class="card"><div class="card-body"><span class="card-tag">{tag}</span><h3>{h}</h3><div style="display:flex;align-items:baseline;gap:8px"><strong style="font-family:var(--display);font-size:clamp(19px,2.4vw,26px)">{price}</strong><span style="font-family:var(--display);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">{unit}</span></div><p>{p}</p><ul>{''.join(f'<li>{li}</li>' for li in items)}</ul>{wa_btn('Solicitar propuesta', f'Hola, quiero información sobre la colaboración “{h}” del CB Grup Barna.', 'ghost' if h != 'Marca en movimiento' else 'red', 'offer-' + h.lower().replace(' ', '-'))}</div></div>""" for tag, h, price, unit, p, items in [
+        ("Entrada", "Presencia digital", "Desde 300 €", "+ IVA / año",
+         "Para empresas que quieren entrar en el ecosistema del club con continuidad.",
+         ["Presencia en stories", "Menciones de marca", "Comunicación a la comunidad"]),
+        ("Activación · la más solicitada", "Marca en movimiento", "Desde 500 €", "+ IVA / acción",
+         "Para convertir un evento o contenido en una experiencia de marca medible.",
+         ["Activación presencial", "Contenido propio", "Cobertura antes, durante y después"]),
+        ("Equipo", "Patrocinio deportivo", "Desde 1.500 €", "+ IVA / equipo y año",
+         "Asocia tu marca a un equipo y a su recorrido durante toda la temporada.",
+         ["Visibilidad estable", "Contenido de competición", "Vinculación con familias y afición"]),
+    ])
+
+    partners_grid = ''.join(
+        ('<span class="partner-logo" title="Wilson · Balón oficial"><span style="font-family:var(--display);font-size:15px;letter-spacing:.14em;color:var(--ink-2)">WILSON</span></span>'
+         if img is None else
+         f'<a class="partner-logo" href="/patrocinadors/partners/{img[:-4]}/" title="{nom} · Veure fitxa">'
+         f'<img src="/partners/{img}" alt="{nom}" loading="lazy"></a>')
+        for img, nom, ig in PARTNERS)
+
+    body = f"""
+{crumbs([("Inici", "/"), ("Patrocinadors", None)])}
+<div class="wrap">
+  <div class="phead">
+    <p class="eyebrow red">Dossier de colaboración · Temporada 2026/27</p>
+    <h1>Hacemos barrio. <em>Jugamos</em> grande.</h1>
+    <p class="lede">60 años de baloncesto, más de 450 familias y una temporada histórica en
+    Supercopa. El Barna es una comunidad real en el centro de Barcelona.</p>
+    <div class="btn-row" style="margin-top:28px">
+      <a href="#colaborar" class="btn red" data-cta="patro-colaborar">Descubre cómo colaborar</a>
+      <a href="https://www.instagram.com/cbgrupbarna/" class="btn ghost" target="_blank" rel="noopener" data-cta="patro-ig">@cbgrupbarna</a>
+    </div>
+    <div class="phead-media">
+      <img src="{ph}hero_sf16.jpg" alt="Jugadoras del CB Grup Barna con equipación roja y negra" width="1600" height="2400" fetchpriority="high">
+    </div>
+  </div>
+
+  <div class="narrow prose">
+    <div class="facts">
+      <div><b>1965</b><span>Fundación</span></div>
+      <div><b>+450</b><span>Familias vinculadas</span></div>
+      <div><b><em>35</em>+</b><span>Equipos de formación y competición</span></div>
+      <div><b>465K</b><span>Visualizaciones, mejor mes Q2</span></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:-8px">Datos de comunidad y
+    rendimiento digital propios · Q2 2026. No vendemos cifras infladas: construimos
+    visibilidad con actividad deportiva diaria, eventos propios y una estrategia digital que
+    ya llega mucho más allá de nuestra base social.</p>
+
+    <h2>No somos solo un logo en una camiseta</h2>
+    <p>Somos un club de formación arraigado en el Clot, con presencia diaria en la vida de
+    centenares de familias y capacidad para convertir una colaboración en contenido,
+    experiencia y pertenencia.</p>
+    <div class="press-quote">
+      <p class="eyebrow red">Humildad · Esfuerzo · Equipo · Ambición</p>
+      <p>Del primer bote en la escoleta a la máxima categoría catalana.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap section band-soft" id="proyectos">
+  <p class="eyebrow red center">Proyectos con nombre propio</p>
+  <h2 class="center" style="margin-top:14px">Cuatro puertas para entrar en el Barna</h2>
+  <p class="narrow center lede" style="margin:18px auto 0">Cada proyecto ofrece una forma
+  distinta de conectar con deporte, familias, territorio e instituciones.</p>
+  <div class="cards" style="margin-top:clamp(28px,4vw,46px)">{projects}</div>
+  <p class="narrow center" style="margin-top:22px;font-size:13px;color:var(--muted)">
+  También impulsamos: Escoleta 4–7 · Premi Dona i Esport · Portes Obertes · Voluntariado</p>
+</div>
+
+<div class="wrap section">
+  <div class="narrow prose">
+    <p class="eyebrow red">Qué recibe una marca</p>
+    <h2>Visibilidad que se puede activar</h2>
+    <ol>
+      <li><strong>Contenido con contexto.</strong> Integramos la marca en historias, reels,
+      campañas y momentos del club. No la dejamos aislada en una esquina.</li>
+      <li><strong>Presencia física.</strong> La Nau, equipaciones, torneos y campus permiten
+      construir recuerdo más allá de la pantalla.</li>
+      <li><strong>Acceso a comunidad.</strong> Más de 450 familias, entrenadores, jugadores,
+      jugadoras y tejido comercial del distrito.</li>
+      <li><strong>Propuesta a medida.</strong> Diseñamos colaboraciones con un objetivo claro
+      y entregables concretos para cada marca.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrap section band-soft" id="colaborar">
+  <p class="eyebrow red center">Formas de colaborar</p>
+  <h2 class="center" style="margin-top:14px">Empieza por aquí. Después lo hacemos a medida</h2>
+  <p class="narrow center lede" style="margin:18px auto 0">Tres puntos de partida transparentes.
+  La propuesta final se adapta al objetivo, duración y capacidad de activación de cada empresa.</p>
+  <div class="cards c3" style="margin-top:clamp(28px,4vw,46px)">{offers}</div>
+  <p class="narrow center" style="margin-top:22px;font-size:12.5px;color:var(--muted)">
+  Producción de lonas, soportes o material específico no incluida salvo acuerdo expreso.</p>
+</div>
+
+<div class="wrap section">
+  <div class="narrow prose center">
+    <p class="eyebrow red">Ecosistema Barna</p>
+    <h2>Marcas que ya juegan con nosotros</h2>
+  </div>
+  <div class="partners-grid">{partners_grid}</div>
+  <p class="narrow center" style="margin-top:18px;font-size:13px;color:var(--muted)">
+  Nuevas incorporaciones 26/27 · Nova Farmàcia Clot · Clínica Dental 26</p>
+  <div class="btn-row center" style="justify-content:center;margin-top:24px">
+    <a href="https://www.instagram.com/cbgrupbarna/" class="btn ghost" target="_blank" rel="noopener" data-cta="patro-follow-club">Seguir a @cbgrupbarna</a>
+  </div>
+
+  <div class="narrow prose" style="margin-top:clamp(40px,6vw,72px)">
+    <h2>Ventajas para la familia del Barna</h2>
+    <p>Algunos partners activan descuentos y ventajas exclusivas para jugadoras, jugadores,
+    familias y seguidores del club: aquí irán apareciendo, partner a partner, a medida que se
+    confirmen. Si ya eres partner y quieres ofrecer uno, escríbenos y lo publicamos.</p>
+    {wa_btn("¿Qué ventajas tengo como familia del Barna?", "Hola! ¿Qué ventajas o descuentos tengo como familia o seguidor del CB Grup Barna?", 'ghost', 'patro-ventajas-wa')}
+  </div>
+
+  <div class="narrow prose">
+    <h2>Preguntas frecuentes</h2>
+    {faq_html}
+  </div>
+
+  <div style="margin-top:clamp(34px,5vw,60px)">
+  <div class="closer">
+    <h2>¿Tu marca también juega?</h2>
+    <p>Cuéntanos qué quieres conseguir. Prepararemos una propuesta concreta, sin packs de
+    relleno ni promesas imposibles de medir.</p>
+    <div class="btn-row">
+      <a href="https://wa.me/34698425153?text={wa('Hola, quiero información sobre las colaboraciones del CB Grup Barna para la temporada 2026/27.')}" class="btn red" target="_blank" rel="noopener" data-cta="patro-closer-wa">Hablar por WhatsApp</a>
+      <a href="mailto:info@cbgrupbarna.com?subject={wa('Colaboración CB Grup Barna 2026/27')}" class="btn ghost" data-cta="patro-closer-mail">Enviar email</a>
+    </div>
+    <p style="margin-top:22px;font-size:12.5px;color:var(--muted)">
+    Email: info@cbgrupbarna.com · Sede: La Nau del Clot · Llacuna 172 · Barcelona</p>
+  </div>
+  </div>
+</div>
+"""
+    return write("patrocinadors/index.html",
+                 head(title, desc, url, SITE + ph + "hero_sf16.jpg", ld,
+                      "patrocinadores CB Grup Barna, patrocinio baloncesto Barcelona, partners club "
+                      "de baloncesto, esponsorización deportiva Barcelona, dossier de colaboración") + body + FOOT)
+
+
+# Dades pròpies de cada partner (descripció, oferta per a socis, posts
+# d'Instagram a incrustar): NO en tenim cap de verificada encara — cap
+# d'aquestes és una dada inventada, són forats pendents d'omplir amb el
+# partner. Clau = slug (el mateix nom de fitxer del logo sense ".png").
+# Format:
+#   "slug": {
+#       "desc": "Text real que ha donat el partner sobre qui és.",
+#       "oferta": "Descompte o avantatge real per a la família del Barna.",
+#       "posts": ["https://www.instagram.com/p/XXXXXXXXXXX/", ...],
+#   }
+PARTNER_INFO = {
+    "instax-fujifilm": {"web": "https://instax.eu/es/", "desc":
+        "Instax és la línia de càmeres i pel·lícules fotogràfiques instantànies de la marca "
+        "japonesa Fujifilm. El seu compte oficial a Espanya, @instaxcamara, promociona càmeres, "
+        "impressores i films instantanis. No es tracta d'un comerç local, sinó de la marca "
+        "global de producte d'electrònica de consum."},
+    "westfield-glories": {"web": "https://www.westfield.com/es/spain/glories",
+        "phone": "93 486 04 04", "email": "atencionalclientewestfield@glories.com", "desc":
+        "Westfield Glòries és un centre comercial situat a l'Avinguda Diagonal 208, a Barcelona "
+        "(districte de Sant Martí), obert des de 1995 i reformat el 2017. Compta amb més de 100 "
+        "botigues, un supermercat, una trentena de restaurants i cinemes, amb oferta de moda, "
+        "complements, bellesa, esport i tecnologia. Obre tots els dies de l'any."},
+    "time-chamber": {"web": "https://www.timechamber.es/", "email": "time.chamber.es@gmail.com", "desc":
+        "Time Chamber és una acadèmia de formació i alt rendiment en bàsquet amb seu principal al "
+        "Velòdrom d'Horta de Barcelona i presència en altres municipis catalans. Ofereix "
+        "entrenament individualitzat que combina treball tècnic, físic i mental, i té un acord de "
+        "col·laboració amb el CB Grup Barna amb qui ha organitzat campus i showcases."},
+    "eix-clot": {"web": "https://www.eixclot.cat/", "phone": "686 033 161", "email": "info@eixclot.cat", "desc":
+        "Eix Clot és l'Associació d'Emprenedors del Clot – Camp de l'Arpa, amb seu al Carrer de "
+        "Sant Antoni Maria Claret 358, Barcelona. És una entitat de comerciants creada el 2009 que "
+        "promou el comerç de proximitat del barri amb campanyes comercials, fires temàtiques i "
+        "activitats culturals."},
+    "herbolaris-montserrat": {"web": "https://www.herbolarismontserrat.com/", "desc":
+        "Herbolaris Montserrat és un herbolari situat al Carrer de Guipúscoa 77, Barcelona, en "
+        "funcionament des de 1982. Ofereix alimentació natural i ecològica, cosmètica, nutrició "
+        "esportiva i un ampli catàleg de vitamines i suplements."},
+    "clinica-dental-bac-de-roda": {"web": "https://centrebacderoda.com/", "phone": "93 527 17 95", "desc":
+        "Clínica Dental Bac de Roda és una clínica dental situada al Carrer del Concili de Trento "
+        "110, Barcelona. Ofereix odontologia general, implantologia, endodòncia, ortodòncia "
+        "(inclòs Invisalign), estètica dental i odontopediatria."},
+    "stepback-podologia": {"web": "https://www.stepbackpodologia.es/", "phone": "620 76 29 93",
+        "email": "stepbackpodologia@gmail.com", "desc":
+        "Stepback Podologia Avançada és una clínica de podologia esportiva a l'Avinguda de la "
+        "Riera de Cassoles 8 bis, Gràcia (Barcelona), especialitzada en l'atenció a esportistes de "
+        "bàsquet. Ofereix estudis biomecànics de la marxa, plantilles personalitzades i programes "
+        "de prevenció de lesions."},
+    "aquamiga": {"web": "https://aquamiga.com/", "phone": "695 70 06 00", "email": "hola@aquamiga.com", "desc":
+        "Aquamiga és una empresa amb seu al Carrer de Bailén 92, Barcelona, que ofereix sistemes "
+        "de filtració d'aigua per osmosi inversa en règim de lloguer per a domicilis, amb "
+        "instal·lació i manteniment inclosos."},
+    "armand-optics": {"web": "https://armandoptics.com/", "phone": "932 45 21 55",
+        "email": "clot@armandoptics.com", "desc":
+        "Armand Òptics és una cadena d'òptiques fundada el 1988 a Barcelona, amb establiment al "
+        "Carrer del Clot 66. Ofereix graduació i venda d'ulleres graduades i de sol, adaptació de "
+        "lents de contacte, i serveis d'audiologia i audiòfons."},
+    "manual-colors": {"web": "https://www.manualcolor.com/", "phone": "934 94 97 80",
+        "email": "manualandco@manualandco.com", "desc":
+        "Manual Colors és una empresa d'impressió digital de gran format amb seu al Carrer de "
+        "Rocafort 215, Barcelona, fundada el 1976 originalment com a laboratori fotogràfic. "
+        "Ofereix impressió fotogràfica i de gran format, suports rígids i PLV (lones, vinils, "
+        "forex, dibond), impressió tèxtil i senyalística."},
+    "melosa-hamburgueseria": {"web": "https://melosa.co/", "phone": "931 87 99 38",
+        "email": "hola@melosa.co", "desc":
+        "La Melosa és un restaurant d'hamburgueses situat al Carrer del Clot 163, Barcelona. "
+        "Ofereix hamburgueses smash i amb formatge amb pa de brioix elaborades amb producte de "
+        "proximitat, patates fregides, croquetes i opcions vegan."},
+    "foto-jane": {"web": "https://www.fotojane.es/", "phone": "629 59 31 35",
+        "email": "carles@fotojane.es", "desc":
+        "Foto Jané és un estudi de fotografia al Carrer de Ciutat de Granada 52, Barcelona, amb un "
+        "equip de fotògrafs i dissenyadors especialitzats en fotoreportatge de casaments, "
+        "embaràs, nadons i família, a més de fotografia publicitària i d'interiorisme."},
+    "mercat-dels-encants": {"web": "https://encantsbarcelona.com/", "phone": "932 45 22 99",
+        "email": "info@encantsbarcelona.com", "desc":
+        "El Mercat dels Encants és un dels mercats més antics i emblemàtics de Barcelona, a la "
+        "plaça de les Glòries Catalanes. Combina botigues, parades i espais de subhasta on es ven "
+        "moda vintage, decoració, objectes de segona mà, antiguitats i articles nous i d'ocasió."},
+    "tot-salut": {"web": "http://centretotsalut.es/", "phone": "933 079 898",
+        "email": "info@centretotsalut.es", "desc":
+        "Tot Salut és un centre sanitari multidisciplinari al carrer de Fluvià 290, Barcelona. "
+        "Ofereix serveis de fisioteràpia, osteopatia, podologia, logopèdia i psicologia."},
+    "ovella-negra": {"web": "http://www.ovellanegrabcn.net/", "phone": "933 095 938", "desc":
+        "L'Ovella Negra és un local d'oci del grup Ovella Negra al Poblenou (Sant Martí), en un "
+        "antic edifici industrial de més de 2.000 m². Ofereix cervesa artesana, sangria, tapes, "
+        "entrepans i hamburgueses, amb futbolí i billar."},
+    "romeo-abogados": {"web": "https://www.romeoabogados.com/", "phone": "932 455 990", "desc":
+        "Romeo Abogados y Consultores Inmobiliarios és un despatx d'advocats al carrer de Rossend "
+        "Nobas 9, Barcelona, actiu des de fa uns 20 anys. Ofereix assessorament en dret "
+        "immobiliari, dret civil, dret de família i successions, i gestoria fiscal, comptable i "
+        "laboral per a particulars i petites empreses."},
+    "fundacio-mullor": {"web": "https://fundaciomullor.org/", "phone": "936 115 222",
+        "email": "hola@fundaciomullor.org", "desc":
+        "La Fundació Mullor és una fundació sense ànim de lucre impulsada pel grup empresarial "
+        "Mullor, amb seus a Barcelona, Lleida i Madrid. Desenvolupa programes de formació i "
+        "inserció laboral per a joves en risc d'exclusió social i joves amb discapacitat "
+        "intel·lectual."},
+    "l-aquarium-de-barcelona": {"web": "https://www.aquariumbcn.com/", "phone": "932 217 474",
+        "email": "info@aquariumbcn.com", "desc":
+        "L'Aquàrium de Barcelona és un centre marí al Port Vell, especialitzat en fauna del "
+        "Mediterrani i un dels aquaris més grans d'Europa, amb més d'11.000 exemplars de 450 "
+        "espècies. El seu Oceanari té un túnel submarí de vidre de 80 metres."},
+    "eix-comercial-sant-marti": {"web": "https://www.santmartieix.com/", "phone": "933 057 144",
+        "email": "hola@santmartieix.com", "desc":
+        "L'Associació Sant Martí Eix Comercial és una associació de comerços i serveis del "
+        "districte de Sant Martí de Barcelona, amb més de 200 establiments associats. Organitza "
+        "activitats comercials, culturals i solidàries pel barri, com la Mostra de Comerç al "
+        "Carrer anual."},
+    "gbk-globabasket": {"web": "https://globasket.com/", "phone": "934 74 80 35",
+        "email": "info@globasket.com", "desc":
+        "Globasket (GBK) és un torneig internacional de bàsquet base per a categories U10 a U18, "
+        "femení i masculí, que se celebra a Lloret de Mar (Girona). Combina la competició "
+        "esportiva amb activitats formatives, culturals i de turisme esportiu en família."},
+    "illa-fantasia": {"web": "https://illafantasia.com/", "phone": "937 514 553",
+        "email": "info@illafantasia.com", "desc":
+        "Illa Fantasia és un parc aquàtic a Vilassar de Dalt (Maresme, Barcelona), inaugurat el "
+        "1981. Disposa de més de 22 atraccions i tobogans aquàtics, 3 grans piscines, zona "
+        "infantil, minigolf i zona verda amb pícnic. Obre de juny a setembre."},
+    "panteres-grogues": {"web": "https://www.panteresgrogues.org/", "phone": "93 678 22 54",
+        "email": "administracio@panteresgrogues.cat", "desc":
+        "Panteres Grogues és un club esportiu de Barcelona fundat el 1994, referent de visibilitat "
+        "LGTBIQ+ en l'esport i el primer club d'aquest tipus creat a l'Estat espanyol. És una "
+        "entitat sense ànim de lucre amb seu a l'Eixample, amb prop de 1.500 socis i unes 25 "
+        "seccions esportives, entre elles bàsquet."},
+}
+
+
+def build_partner_landing(img, nom, ig):
+    """Fitxa individual d'un partner: /patrocinadors/partners/<slug>/.
+    Estructura fixa (empresa, descripció, oferta per a socis, Instagram)
+    però només s'hi escriu contingut verificat: on falta dada real es
+    mostra un estat pendent honest, mai un text inventat sobre el negoci."""
+    slug = img[:-4]
+    url = SITE + f"/patrocinadors/partners/{slug}/"
+    info = PARTNER_INFO.get(slug, {})
+    title = f"{nom} · Partner del CB Grup Barna"
+    desc = (info.get("desc") or
+            f"{nom} forma part de l'ecosistema de partners i col·laboradors del CB Grup Barna, "
+            f"el club de bàsquet base del Clot, Barcelona.")
+
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
+         "description": desc, "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}},
+        BREADCRUMB([("CB Grup Barna", "/"), ("Patrocinadors", "/patrocinadors/"), (nom, f"/patrocinadors/partners/{slug}/")]),
+    ]}
+
+    follow_btn = (f'<a href="{ig}" class="btn red" target="_blank" rel="noopener" data-cta="partner-ig">'
+                  f'Seguir {nom} a Instagram</a>' if ig else '')
+    follow_note = ('' if ig else
+                   '<p style="font-size:13px;color:var(--muted)">Encara no tenim confirmat el seu '
+                   'Instagram — si el coneixes, escriu-nos i el publiquem.</p>')
+    web_btn = (f'<a href="{info["web"]}" class="btn ghost" target="_blank" rel="noopener" '
+               f'data-cta="partner-web">Visitar la seva web</a>' if info.get("web") else '')
+
+    # ── Contacte: web / telèfon / email, només els camps que tenim confirmats ──
+    dl_rows = []
+    if info.get("web"):
+        web_label = info["web"].replace("https://", "").replace("http://", "").rstrip("/")
+        dl_rows.append(f'<div class="dl-row"><dt>Web</dt><dd><a href="{info["web"]}" target="_blank" rel="noopener">{web_label}</a></dd></div>')
+    if info.get("phone"):
+        tel = re.sub(r"[^\d+]", "", info["phone"])
+        dl_rows.append(f'<div class="dl-row"><dt>Telèfon</dt><dd><a href="tel:{tel}">{info["phone"]}</a></dd></div>')
+    if info.get("email"):
+        dl_rows.append(f'<div class="dl-row"><dt>Correu</dt><dd><a href="mailto:{info["email"]}">{info["email"]}</a></dd></div>')
+    contacte_html = f'<h2>Contacte</h2><div class="dl">{"".join(dl_rows)}</div>' if dl_rows else ''
+
+    wa_ask = lambda text, cta: (f'<a href="{WA_CLUB}&amp;text={wa(text)}" class="btn ghost" '
+                                f'target="_blank" rel="noopener" data-cta="{cta}">Escriure al club per WhatsApp</a>')
+
+    # ── Sobre l'empresa ──
+    sobre_html = (f'<p>{info["desc"]}</p>' if info.get("desc") else
+        f'<p style="color:var(--muted)">Encara no tenim la descripció que {nom} ens vulgui donar '
+        f'del seu negoci. La publiquem en el moment que la confirmem amb ells.</p>')
+
+    # ── Oferta per a socis ──
+    if info.get("oferta"):
+        oferta_html = f'<p>{info["oferta"]}</p>'
+    else:
+        oferta_html = (
+            f'<p style="color:var(--muted)">{nom} encara no té cap avantatge publicat per a la '
+            f'família del Barna. Si en vols oferir un, escriu-nos i el publiquem aquí.</p>'
+            f'<div class="btn-row">{wa_ask(f"Hola, soy de {nom} y quiero ofrecer una ventaja a la familia del CB Grup Barna.", "partner-oferta-wa")}</div>')
+
+    # ── Instagram: posts reals si en tenim, si no targeta de seguiment ──
+    posts = info.get("posts") or []
+    if posts:
+        cards = ''.join(
+            f'<blockquote class="instagram-media" data-instgrm-permalink="{p}" data-instgrm-version="14" style="margin:0"></blockquote>'
+            for p in posts)
+        ig_html = (f'<div class="cards c3">{cards}</div>'
+                   f'<script async src="https://www.instagram.com/embed.js"></script>')
+    elif ig:
+        handle = "@" + ig.rstrip("/").rsplit("/", 1)[-1]
+        ig_html = (f'<div class="closer" style="text-align:left">'
+                   f'<p class="eyebrow red">Instagram</p>'
+                   f'<h3 style="margin:10px 0 14px">{handle}</h3>'
+                   f'<p>Encara no tenim posts concrets seleccionats per incrustar aquí. Mentrestant, '
+                   f'segueix-los directament.</p>{follow_btn}</div>')
+    else:
+        ig_html = ''
+
+    body = f"""
+{crumbs([("Inici", "/"), ("Patrocinadors", "/patrocinadors/"), (nom, None)])}
+<div class="wrap">
+  <div class="phead narrow center">
+    <p class="eyebrow red">Partner del CB Grup Barna</p>
+    <h1 style="margin-left:auto;margin-right:auto">{nom}</h1>
+    <div class="phead-media" style="aspect-ratio:16/9;max-width:420px;margin-left:auto;margin-right:auto;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid var(--line)">
+      <img src="/partners/{img}" alt="{nom}" style="max-width:70%;max-height:60%;object-fit:contain" width="300" height="169">
+    </div>
+    <p class="lede" style="margin-left:auto;margin-right:auto">{nom} forma part de l'ecosistema de
+    partners i col·laboradors que fan possible el CB Grup Barna, el club de bàsquet base del Clot,
+    Barcelona. Segueix-los: cada follow que reben des del club forma part del que els oferim a canvi.</p>
+    <div class="btn-row" style="justify-content:center;margin-top:28px">
+      {web_btn}
+      {follow_btn}
+      <a href="/patrocinadors/" class="btn ghost" data-cta="partner-back">Veure tots els partners</a>
+    </div>
+    {follow_note}
+  </div>
+
+  <div class="narrow prose" style="margin-top:clamp(10px,2vw,20px)">
+    <h2>Sobre {nom}</h2>
+    {sobre_html}
+
+    {contacte_html}
+
+    <h2>Oferta per a la família del Barna</h2>
+    {oferta_html}
+  </div>
+
+  {f'<div class="wrap section band-soft">{ig_html}</div>' if ig_html else ''}
+
+  <div class="narrow prose" style="margin-top:clamp(20px,3vw,32px)">
+    <div class="closer">
+      <h2>Vols que la teva marca hi sigui, com {nom}?</h2>
+      <p>El club ofereix diversos nivells de col·laboració, des de presència digital fins a
+      patrocini d'equip, més la col·laboració en espècie per a qui aporta producte o servei.</p>
+      <div class="btn-row">
+        <a href="{WA_CLUB}&amp;text={wa('Hola, quiero información sobre las colaboraciones del CB Grup Barna.')}" class="btn red" target="_blank" rel="noopener" data-cta="partner-closer-wa">Hablar por WhatsApp</a>
+        <a href="/patrocinadors/#colaborar" class="btn ghost" data-cta="partner-closer-niveles">Veure els nivells</a>
+      </div>
+    </div>
+  </div>
+</div>
+"""
+    return write(f"patrocinadors/partners/{slug}/index.html",
+                 head(title, desc, url, SITE + "/partners/" + img, ld,
+                      f"{nom}, partner CB Grup Barna, patrocinadors bàsquet Barcelona") + body + FOOT)
 
 
 # ═══════════════════════════════════════════════════════════════ /3x3/ ════
@@ -1044,14 +1552,25 @@ def build_press_article(a):
 
 def build_premsa_index():
     url = SITE + "/premsa/"
-    title = "Articles i premsa · CB Grup Barna"
-    desc = ("El CB Grup Barna als mitjans del barri: articles, reportatges i mencions de premsa sobre "
-            "el club de bàsquet base del Clot, Districte de Sant Martí de Barcelona.")
+    title = "Sala de premsa i kit de premsa · CB Grup Barna"
+    desc = ("Sala de premsa del CB Grup Barna: kit de premsa i briefing del club descarregable en PDF, "
+            "més els articles i reportatges dels mitjans del barri sobre el club de bàsquet base del "
+            "Clot, Sant Martí, Barcelona.")
     ld = {"@context": "https://schema.org", "@graph": [
-        {"@type": "CollectionPage", "@id": url + "#premsa", "name": title, "description": desc, "url": url,
+        {"@type": "CollectionPage", "@id": url + "#premsa", "name": "Sala de premsa · CB Grup Barna",
+         "description": desc, "url": url,
          "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"},
          "hasPart": [{"@type": "Article", "headline": a["title"], "url": f"{SITE}/premsa/{a['slug']}/",
-                      "datePublished": a["date"]} for a in PRESS]},
+                      "datePublished": a["date"]} for a in PRESS] + [
+             {"@type": "DigitalDocument",
+              "@id": SITE + "/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf#pdf",
+              "name": "Briefing de club CB Grup Barna (PDF)",
+              "description": "Kit de premsa del CB Grup Barna: 16 pàgines amb història des de 1965, "
+                             "els dos sèniors a la Supercopa FCBQ, paritat real, inclusió, esdeveniments "
+                             "propis i protecció del menor.",
+              "url": SITE + "/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf",
+              "encodingFormat": "application/pdf", "inLanguage": "ca", "isAccessibleForFree": True,
+              "datePublished": "2026-08-09"}]},
         BREADCRUMB([("CB Grup Barna", "/"), ("Premsa", "/premsa/")]),
     ]}
     cards = ''.join(
@@ -1068,11 +1587,27 @@ def build_premsa_index():
     <p class="lede" style="margin-left:auto;margin-right:auto">Reportatges i mencions del club a la
     premsa del barri. Gràcies a qui ens dedica el seu temps i la seva feina per explicar el Barna.</p>
   </div>
+  <!-- KIT DE PREMSA · BRIEFING DEL CLUB -->
+  <section class="closer" id="kit-de-premsa" style="margin-bottom:clamp(40px,6vw,72px)" aria-labelledby="kit-title">
+    <p class="eyebrow red">Kit de premsa</p>
+    <h2 id="kit-title" style="margin-top:14px">Briefing del CB Grup Barna</h2>
+    <p>Tot el que cal per escriure sobre el club amb dades verificades: 60 anys al Clot, els dos
+    sèniors a la Supercopa FCBQ, la paritat real, la inclusió, els esdeveniments propis i la
+    protecció del menor. Accés lliure, sense registre.</p>
+    <div class="btn-row">
+      <a class="btn red" href="/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf" download
+         data-cta="premsa-briefing-pdf">Descarregar el briefing (PDF · 16 pàg.)</a>
+      <a class="btn ghost" href="/briefing/" data-cta="premsa-briefing-web">Llegir-lo al web</a>
+      <a class="btn ghost" href="/briefing/materials.html" data-cta="premsa-materials">Altres materials</a>
+    </div>
+  </section>
+
   <div class="cards" style="padding-bottom:clamp(40px,6vw,80px)">{cards}</div>
 </div>
 """
     return write("premsa/index.html", head(title, desc, url, SITE + f"/premsa/img/{PRESS[0]['images'][0][0]}", ld,
-                 "premsa CB Grup Barna, Guia Clot, Eix Clot, articles bàsquet Clot") + body + FOOT)
+                 "premsa CB Grup Barna, kit de premsa, briefing del club, dossier de premsa bàsquet "
+                 "Barcelona, Guia Clot, Eix Clot, articles bàsquet Clot") + body + FOOT)
 
 
 # ═══════════════════════════════════════════════════════════ /partits/calendaris/ ════
@@ -1234,6 +1769,10 @@ def build_calendaris():
 if __name__ == "__main__":
     print("Generant pàgines:")
     print(build_campus())
+    print(build_patrocinadors())
+    partner_pages = [p for p in PARTNERS if p[0]]
+    for img, nom, ig in partner_pages:
+        print(build_partner_landing(img, nom, ig))
     print(build_3x3())
     print(build_blog_index())
     for a in ARTICLES:
@@ -1242,4 +1781,4 @@ if __name__ == "__main__":
     for a in PRESS:
         print(build_press_article(a))
     print(build_calendaris())
-    print(f"\n{len(ARTICLES) + len(PRESS) + 5} pàgines generades.")
+    print(f"\n{len(ARTICLES) + len(PRESS) + len(partner_pages) + 5} pàgines generades.")

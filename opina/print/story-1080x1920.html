@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<title>Story 1080×1920 · Ressenyes CB Grup Barna</title>
+<style>
+  /* Story vertical per a Instagram. Zones segures respectades: res
+     essencial al 22% inferior ni als 180 px de la dreta (UI d'Instagram).
+     Versio en castella: afegeix ?lang=es a l'URL. */
+  @font-face{font-family:'CBGB Display';src:url('BigShoulders-Bold.ttf') format('truetype');font-weight:700}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1080px;height:1920px;overflow:hidden;background:#050505;color:#fff;
+       font-family:'Helvetica Neue',Arial,sans-serif;position:relative}
+  body::before{content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 60% 26% at 50% 0%, rgba(227,30,36,.30) 0%, transparent 62%),
+      radial-gradient(ellipse 60% 30% at 100% 100%, rgba(227,30,36,.14) 0%, transparent 62%)}
+  body::after{content:'';position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+    background-size:72px 72px}
+
+  .safe{position:relative;z-index:2;height:100%;padding:150px 190px 430px 90px;
+        display:flex;flex-direction:column}
+
+  .brand{display:flex;align-items:center;gap:26px;margin-bottom:76px}
+  .brand .ring{width:120px;height:120px;border:5px solid #fff;border-radius:50%;background:#050505;
+        display:flex;align-items:center;justify-content:center;padding:12px;flex:none}
+  .brand .ring img{width:100%;height:100%;object-fit:contain}
+  .brand .nm{font-family:'CBGB Display',Impact,sans-serif;font-size:56px;line-height:1;letter-spacing:1px}
+  .brand .nm span{color:#E31E24}
+  .brand .sub{font-size:20px;letter-spacing:3px;text-transform:uppercase;color:#8a8a8a;margin-top:8px}
+
+  .kick{display:inline-block;align-self:flex-start;background:#E31E24;color:#fff;
+        font-size:24px;font-weight:800;letter-spacing:6px;text-transform:uppercase;
+        padding:14px 26px;border-radius:8px;margin-bottom:40px}
+  h1{font-family:'CBGB Display',Impact,sans-serif;font-size:170px;line-height:.85;
+     text-transform:uppercase;letter-spacing:-2px}
+  h1 em{font-style:normal;color:#E31E24}
+  html[lang="es"] h1{font-size:150px}
+  .lead{font-size:38px;line-height:1.35;color:#cfcfcf;margin-top:38px;max-width:730px}
+  .lead b{color:#fff}
+
+  .card{margin-top:auto;display:flex;align-items:center;gap:34px;
+        background:#141414;border:2px solid rgba(255,255,255,.12);border-radius:34px;padding:36px}
+  .card .qr{background:#fff;border-radius:18px;padding:14px;width:200px;flex:none}
+  .card .qr img{width:100%;display:block}
+  .card .txt{min-width:0}
+  .card .txt .st{font-size:28px;color:#cfcfcf;line-height:1.45;margin-bottom:14px}
+  /* La URL ha de cabre sencera dins la targeta: no pot sortir cap a la
+     franja dreta, que és on Instagram posa els seus botons. */
+  .card .txt .url{font-family:'CBGB Display',Impact,sans-serif;font-size:44px;letter-spacing:.5px;line-height:1;white-space:nowrap}
+  .card .txt .url span{color:#E31E24}
+  .stars{color:#FFC107;font-size:44px;letter-spacing:12px;margin-top:34px}
+</style>
+</head>
+<body>
+  <div class="safe">
+    <div class="brand">
+      <div class="ring"><img src="../../logo.png" alt=""></div>
+      <div>
+        <div class="nm">CB GRUP <span>BARNA</span></div>
+        <div class="sub" data-ca="El Clot · Des del 1965" data-es="El Clot · Desde 1965">El Clot · Des del 1965</div>
+      </div>
+    </div>
+
+    <span class="kick" data-ca="1 minut · Google" data-es="1 minuto · Google">1 minut · Google</span>
+    <h1 data-ca="Ens ajudes en |1 minut|?" data-es="¿Nos ayudas//en |1 minuto|?">Ens ajudes en <em>1 minut</em>?</h1>
+    <p class="lead" data-ca="Deixa la teva ressenya del club a Google. |Dues línies teves ens fan visibles| per a les famílies que ens busquen."
+       data-es="Deja tu reseña del club en Google. |Dos líneas tuyas nos hacen visibles| para las familias que nos buscan.">
+      Deixa la teva ressenya del club a Google. <b>Dues línies teves ens fan visibles</b> per a les famílies que ens busquen.</p>
+    <div class="stars">★★★★★</div>
+
+    <div class="card">
+      <div class="qr"><img src="../qr.svg" alt="Codi QR"></div>
+      <div class="txt">
+        <div class="st" data-ca="Escaneja o entra a:" data-es="Escanea o entra en:">Escaneja o entra a:</div>
+        <div class="url">cbgrupbarna.info<span>/opina</span></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+// Canvi d'idioma per a la versio en castella: story-1080x1920.html?lang=es
+(function () {
+  if (new URLSearchParams(location.search).get('lang') !== 'es') return;
+  document.documentElement.lang = 'es';
+  document.querySelectorAll('[data-es]').forEach(function (el) {
+    // El separador | marca el tros que va en vermell (h1) o en blanc (lead).
+    // El separador | marca el tros destacat i // forca un salt de linia.
+    var parts = el.getAttribute('data-es').split('|');
+    var br = function (s) { return s.split('//').join('<br>'); };
+    if (parts.length === 3) {
+      var tag = el.tagName === 'H1' ? 'em' : 'b';
+      el.innerHTML = br(parts[0]) + '<' + tag + '>' + br(parts[1]) + '</' + tag + '>' + br(parts[2]);
+    } else {
+      el.innerHTML = br(parts[0]);
+    }
+  });
+})();
+</script>
+</body>
+</html>

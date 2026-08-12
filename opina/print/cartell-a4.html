@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<title>Cartell A4 · Ressenyes CB Grup Barna</title>
+<style>
+  /* Cartell A4 llest per imprimir: obre'l al navegador i fes Ctrl/Cmd + P
+     → "Desar com a PDF", mida A4, marges cap, i marca "Grafics de fons".
+     Per canviar l'idioma, edita els textos marcats amb <!-- text -->. */
+  @font-face{
+    font-family:'CBGB Display';
+    src:url('BigShoulders-Bold.ttf') format('truetype');
+    font-weight:700; font-display:swap;
+  }
+  @page{size:A4 portrait;margin:0}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#4a4a4a}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-family:'Helvetica Neue',Arial,sans-serif}
+
+  .sheet{
+    width:210mm;height:297mm;margin:0 auto;background:#050505;color:#fff;
+    position:relative;overflow:hidden;display:flex;flex-direction:column;
+    padding:18mm 16mm 14mm;
+  }
+  .sheet::before{
+    content:'';position:absolute;left:-30mm;top:-40mm;width:150mm;height:120mm;
+    background:radial-gradient(circle,rgba(227,30,36,.30),transparent 65%);
+  }
+  .sheet::after{
+    content:'';position:absolute;left:0;right:0;bottom:0;height:9mm;background:#E31E24;
+  }
+  .top{display:flex;align-items:center;gap:5mm;position:relative;z-index:2}
+  .top img{width:17mm;height:17mm;object-fit:contain}
+  .top .name{font-family:'CBGB Display','Bebas Neue',Impact,sans-serif;font-size:30pt;line-height:.9;letter-spacing:.5pt}
+  .top .name span{color:#E31E24}
+  .top .since{margin-left:auto;text-align:right;font-size:8pt;letter-spacing:2pt;text-transform:uppercase;color:#8f8f8f;line-height:1.6}
+
+  .body{flex:1;display:flex;flex-direction:column;justify-content:flex-start;position:relative;z-index:2;padding:14mm 0 0}
+  .eyebrow{display:inline-block;align-self:flex-start;border:.6mm solid rgba(227,30,36,.55);background:rgba(227,30,36,.12);color:#E31E24;
+    font-size:9.5pt;font-weight:800;letter-spacing:2.4pt;text-transform:uppercase;padding:2.5mm 5mm;border-radius:20mm;margin-bottom:7mm}
+  h1{font-family:'CBGB Display','Bebas Neue',Impact,sans-serif;font-size:64pt;line-height:.86;text-transform:uppercase;letter-spacing:-.5pt;margin-bottom:6mm}
+  h1 em{font-style:normal;color:#E31E24}
+  .lead{font-size:13pt;line-height:1.45;color:#d6d6d6;max-width:150mm}
+  .lead b{color:#fff}
+
+  .reasons{margin-top:auto;padding:6mm 0}
+  .rw{display:flex;align-items:center;gap:5mm;font-size:13pt;line-height:1.35;color:#cfcfcf;padding:3.5mm 0;border-top:.3mm solid rgba(255,255,255,.13)}
+  .rw:last-child{border-bottom:.3mm solid rgba(255,255,255,.13)}
+  .rw b{color:#fff}
+  .rw .ri{font-size:16pt;width:9mm;flex:none;text-align:center}
+
+  .qr-row{display:flex;align-items:center;gap:10mm;margin-top:6mm;background:#101010;border:.4mm solid rgba(255,255,255,.12);border-radius:6mm;padding:9mm 8mm}
+  .qr-row .qr{background:#fff;border-radius:3mm;padding:3mm;width:60mm;flex:none}
+  .qr-row .qr img{width:100%;display:block}
+  .qr-row .how .st{font-size:12pt;line-height:1.5;color:#e8e8e8;margin-bottom:3.5mm;display:flex;gap:4mm}
+  .qr-row .how .st b{font-family:'CBGB Display','Bebas Neue',Impact,sans-serif;color:#E31E24;font-size:18pt;line-height:1.05;min-width:8mm}
+  .url{font-family:'CBGB Display','Bebas Neue',Impact,sans-serif;font-size:25pt;letter-spacing:.6pt;margin-top:6mm;color:#fff}
+  .url span{color:#E31E24}
+
+  .foot{position:relative;z-index:2;display:flex;align-items:flex-end;gap:6mm;padding-bottom:6mm}
+  .foot .stars{color:#FFC107;font-size:18pt;letter-spacing:3pt}
+  .foot .thanks{margin-left:auto;text-align:right;font-size:9.5pt;color:#8f8f8f;line-height:1.5}
+
+  @media screen{ body{padding:10mm 0} .sheet{box-shadow:0 0 18mm rgba(0,0,0,.6)} }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="top">
+    <img src="../../logo.png" alt="">
+    <div class="name">CB GRUP <span>BARNA</span></div>
+    <div class="since">El Clot · Sant Martí<br>Des del 1965</div>
+  </div>
+
+  <div class="body">
+    <!-- text --><span class="eyebrow">⭐ 1 minut · Google</span>
+    <!-- text --><h1>Ens ajudes<br>en <em>1 minut</em>?</h1>
+    <!-- text --><p class="lead">Quan una família busca un club de bàsquet a Barcelona, Google li ensenya primer els clubs més ben valorats. <b>Dues línies teves ens fan visibles.</b></p>
+
+    <div class="reasons">
+      <!-- text --><div class="rw"><span class="ri">🏀</span><span>Perquè les famílies que ens busquen <b>ens trobin</b></span></div>
+      <!-- text --><div class="rw"><span class="ri">🤝</span><span>Perquè empreses i institucions <b>ens obrin la porta</b></span></div>
+      <!-- text --><div class="rw"><span class="ri">❤️</span><span>Perquè el club <b>és de tots</b>: objectiu 300 ressenyes</span></div>
+    </div>
+
+    <div class="qr-row">
+      <div class="qr"><img src="../qr.svg" alt="Codi QR"></div>
+      <div class="how">
+        <!-- text --><div class="st"><b>01</b><span>Escaneja el codi amb la càmera del mòbil.</span></div>
+        <!-- text --><div class="st"><b>02</b><span>Toca el botó vermell: s'obre Google.</span></div>
+        <!-- text --><div class="st"><b>03</b><span>5 estrelles i dues línies del que hi vius.</span></div>
+        <div class="url">cbgrupbarna.info<span>/opina</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="stars">★★★★★</div>
+    <!-- text --><div class="thanks">Gràcies per formar part<br>de la família Barna ❤️🖤</div>
+  </div>
+
+</div>
+</body>
+</html>
