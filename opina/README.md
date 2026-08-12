@@ -101,8 +101,15 @@ Dins de `print/`:
 |---|---|
 | `cartell-opina-a4.pdf` | **Cartell A4 llest per imprimir.** Per al taulell del pavelló, el vestidor, el bar i la porta d'entrada. |
 | `cartell-a4.html` | Font editable del cartell. Obre'l al navegador i **Ctrl/Cmd + P → Desar com a PDF**, mida A4, marges "cap" i marcant "Gràfics de fons". Els textos a canviar estan marcats amb `<!-- text -->` (per fer-ne la versió en castellà, per exemple). |
+| `targetes-qr-a4.pdf` | **8 targetes de butxaca per full A4**, per retallar i repartir a les grades, al taulell o de mà en mà als partits. |
+| `story-1080x1920.html` | Font de la story d'Instagram. Afegeix `?lang=es` a l'URL per a la versió en castellà. |
 | `og-1200x630.html` | Font de la imatge de previsualització. |
 | `BigShoulders-Bold.ttf` | Tipografia condensada del cartell, incrustada perquè imprimeixi igual a qualsevol ordinador (llicència SIL OFL, inclosa). Substitueix Bebas Neue, que no es pot redistribuir dins del repositori. |
+
+`story-opina.png` i `story-opina-es.png` (1080×1920) són les stories
+d'Instagram, amb les zones segures respectades: res essencial al 22 % inferior
+ni als 180 px de la dreta, on la interfície d'Instagram tapa el contingut.
+Publica-les amb l'adhesiu d'enllaç cap a cbgrupbarna.info/opina.
 
 `og-opina.png` (1200×630) és la imatge que apareix quan s'envia l'enllaç per
 WhatsApp, Telegram, Instagram o correu. Compta tant com la landing: és el que
