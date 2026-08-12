@@ -41,12 +41,15 @@
   .lead{font-size:38px;line-height:1.35;color:#cfcfcf;margin-top:38px;max-width:730px}
   .lead b{color:#fff}
 
-  .card{margin-top:auto;display:flex;align-items:center;gap:40px;
-        background:#141414;border:2px solid rgba(255,255,255,.12);border-radius:34px;padding:40px}
-  .card .qr{background:#fff;border-radius:18px;padding:16px;width:230px;flex:none}
+  .card{margin-top:auto;display:flex;align-items:center;gap:34px;
+        background:#141414;border:2px solid rgba(255,255,255,.12);border-radius:34px;padding:36px}
+  .card .qr{background:#fff;border-radius:18px;padding:14px;width:200px;flex:none}
   .card .qr img{width:100%;display:block}
-  .card .txt .st{font-size:30px;color:#cfcfcf;line-height:1.45;margin-bottom:16px}
-  .card .txt .url{font-family:'CBGB Display',Impact,sans-serif;font-size:56px;letter-spacing:1px;line-height:1}
+  .card .txt{min-width:0}
+  .card .txt .st{font-size:28px;color:#cfcfcf;line-height:1.45;margin-bottom:14px}
+  /* La URL ha de cabre sencera dins la targeta: no pot sortir cap a la
+     franja dreta, que és on Instagram posa els seus botons. */
+  .card .txt .url{font-family:'CBGB Display',Impact,sans-serif;font-size:44px;letter-spacing:.5px;line-height:1;white-space:nowrap}
   .card .txt .url span{color:#E31E24}
   .stars{color:#FFC107;font-size:44px;letter-spacing:12px;margin-top:34px}
 </style>
