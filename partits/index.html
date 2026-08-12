@@ -426,6 +426,9 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <div id="winners-box"></div>
     <div id="millors-box"></div>
     <div class="stat-row" id="club-stats"></div>
+    <div class="sec-t">🔍 Cerca un rival</div>
+    <input type="search" id="rival-search" placeholder="Nom d'un equip rival (p. ex. Sabadell, Hospitalet…)" autocomplete="off" style="width:100%;background:var(--paper);border:1px solid var(--border);border-radius:12px;color:var(--ink);padding:11px 14px;font-size:14px;margin-bottom:10px">
+    <div id="rival-search-results"></div>
     <div class="sec-t">🔥 Ratxes per equip</div>
     <div id="ratxes-list"></div>
     <div class="sec-t">⏳ Pendents de resultat</div>
@@ -695,7 +698,7 @@ let BASE = { equips: [], partits: [] };
 let CANVIS = null;
 let OV = loadOverrides();       // { resultats:{id:{pl,pv}}, posicions:{eqId:{posicio,equipsGrup}}, extraEquips:[], extraPartits:[], editsPartits:{id:{...}} }
 let editMode = false;
-let state = { wk: null, filter: 'tots', team: null, abast: 'setmana', genere: 'tots', cat: 'totes' };
+let state = { wk: null, filter: 'tots', team: null, abast: 'setmana', genere: 'tots', cat: 'totes', rivalSearch: '' };
 
 function loadOverrides() {
   const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[],fons:[],rivalStats:{},statsPartit:{}};
@@ -991,6 +994,7 @@ function renderResultats() {
     <div class="stat"><b class="g">${w}</b><span>Victòries</span></div>
     <div class="stat"><b class="p">${l}</b><span>Derrotes</span></div>
     <div class="stat"><b>${pct}%</b><span>% Vict.</span></div>`;
+  renderRivalSearch(m);
   // ratxes ordenades: millors primer
   const rows = m.equips.map(e=>({e, s: teamStats(e.id, m.partits)}))
     .sort((a,b)=> (b.s.sType==='W'?b.s.streak:-b.s.streak) - (a.s.sType==='W'?a.s.streak:-a.s.streak));
@@ -1019,6 +1023,30 @@ function renderResultats() {
   document.getElementById('pendents-list').innerHTML = pend.length
     ? pend.map(p=>matchCard(p,m,true)).join('')
     : `<div class="empty">Tot al dia. Cap resultat pendent. ✅</div>`;
+}
+
+/* cerca de rival: tots els enfrontaments de qualsevol equip del Barna
+   contra un rival pel nom, amb el balanç agregat i cada partit */
+function renderRivalSearch(m) {
+  const box = document.getElementById('rival-search-results');
+  const inp = document.getElementById('rival-search');
+  if (inp && document.activeElement !== inp) inp.value = state.rivalSearch;
+  const term = normNom(state.rivalSearch);
+  if (!term) { box.innerHTML = ''; return; }
+  const trobats = m.partits.filter(p => normNom(p.casa ? p.visitant : p.local).includes(term))
+    .sort((a,b) => b.data.localeCompare(a.data));
+  if (!trobats.length) {
+    box.innerHTML = `<div class="empty">Cap partit contra un rival que contingui "${state.rivalSearch}".</div>`;
+    return;
+  }
+  const jugats = trobats.filter(p=>p.jugat);
+  const w = jugats.filter(p=>p.res==='W').length, l = jugats.filter(p=>p.res==='L').length;
+  const balanc = jugats.length ? `<div class="stat-row" style="margin-bottom:10px">
+      <div class="stat"><b>${jugats.length}</b><span>Enfrontaments</span></div>
+      <div class="stat"><b class="g">${w}</b><span>Victòries</span></div>
+      <div class="stat"><b class="p">${l}</b><span>Derrotes</span></div>
+    </div>` : '';
+  box.innerHTML = balanc + trobats.slice(0,20).map(p=>matchCard(p, m, true)).join('');
 }
 
 
@@ -2352,6 +2380,7 @@ document.getElementById('seg-abast').addEventListener('click', e=>{
   renderJornada();
 });
 document.getElementById('wk-select').addEventListener('change', e=>{ state.wk=e.target.value; renderJornada(); });
+document.getElementById('rival-search').addEventListener('input', e=>{ state.rivalSearch=e.target.value; renderRivalSearch(model()); });
 document.getElementById('wk-prev').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i>0){state.wk=w[i-1]; renderJornada();} });
 document.getElementById('wk-next').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i<w.length-1){state.wk=w[i+1]; renderJornada();} });
 document.getElementById('wk-today').addEventListener('click', ()=>{ state.wk=null; renderJornada(); });
