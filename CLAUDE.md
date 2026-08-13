@@ -35,6 +35,8 @@ cat .claude/knowledge/bbdd/obertes.md                    # qué no sabemos aún
 ```
 
 Manual completo de la memoria: `.claude/knowledge/README.md`.
+Backup del ecosistema de skills: `.claude/skills-backup/` (las skills vivas están en
+`~/.claude/skills/synced/`, gestionadas por sincronización externa — ver O-14).
 
 ## Estado actual (julio 2026)
 

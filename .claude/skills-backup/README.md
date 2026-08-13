@@ -5,7 +5,7 @@ Ese directorio no tiene control de versiones: un borrado accidental o un cambio
 de máquina se lleva años de criterio acumulado. Esto lo arregla — cada push a
 GitHub es una copia fuera del ordenador.
 
-**Última sincronización: 2026-08-05.** Cierra la incidencia O-12 de
+**Última sincronización: 2026-08-13.** Cierra la incidencia O-12 de
 `.claude/knowledge/bbdd/obertes.md`.
 
 ## Qué hay y qué no
@@ -24,17 +24,24 @@ si se edita aquí, el cambio no lo ve nadie hasta que se copie de vuelta.
 `skills-backup/` (y no `skills/`) precisamente para que Claude no las cargue
 dos veces.
 
-## ⚠️ El directorio de skills se resincroniza solo
+## ⚠️ Las skills las gestiona una sincronización externa
 
-El 05/08 el enrutado de `/cbgb` que habíamos actualizado **volvió a su versión
-antigua**: algo resincroniza `~/.claude/skills/` desde fuera y pisa las ediciones
-locales. Dos consecuencias:
+**Viven en `~/.claude/skills/synced/`**, no en `~/.claude/skills/`. El 13/08 ese
+directorio se reorganizó y el enrutado de `/cbgb` que habíamos actualizado volvió
+a su versión antigua. Tres consecuencias:
 
-1. **Para `cbgb/SKILL.md`, la copia buena es la de aquí**, no la del directorio de
-   skills. Después de un resync, cópiala de vuelta.
-2. **Nunca sincronices backup→repo a ciegas.** Haz `git diff` antes de commitear:
-   si el resync revirtió algo, lo estarías guardando como si fuera un cambio bueno.
+1. **Editar dentro de `synced/` no dura.** La copia canónica de `cbgb/SKILL.md` es
+   la de aquí.
+2. **Sincronizar es FUSIONAR, no sobrescribir**, en las dos direcciones: la
+   sincronización también trae mejoras de verdad (así llegó la norma de la cartela
+   de partners a `sistema-visual` y `video-club`). Compara antes de copiar.
+3. **Nunca sincronices backup→repo a ciegas.** Haz `git diff` antes de commitear:
+   si el sync revirtió algo, lo estarías guardando como si fuera un cambio bueno.
    Así se detectó (incidencia O-14).
+
+`doctrina-juliol-2026-cbgb` y `memoria-cbgb` viven **fuera** de `synced/` (las
+creamos aquí): la sincronización no las toca, pero tampoco las respalda. Su única
+copia de seguridad es esta.
 
 ## Restaurar
 
