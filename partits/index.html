@@ -2175,14 +2175,17 @@ async function genFinde(m) {
   ctx.fillText(wkLabel(wk).toUpperCase(), px(56), H*0.50 + px(192));
   ctx.fillText(`${tots.length} PARTITS · ${tots.filter(p=>p.casa).length} A CASA`, px(56), H*0.50 + px(226));
 
-  /* Graella compacta a la dreta: 2 columnes, com la referència */
+  /* Graella a la dreta: 2 columnes, que ocupi tot l'espai vertical disponible */
   const x0 = W*0.415, ample = W - x0 - px(40);
   const colW = ample/2, files = Math.ceil(tots.length/2);
-  const dalt = px(96), baix = H - px(96);
-  const rowH = Math.min(px(240), (baix - dalt) / files);
-  const rs = Math.max(0.72, Math.min(1, rowH/px(210)));   // no baixem tant la lletra
+  const dalt0 = px(96), baix = H - px(96);
+  // les files creixen fins a omplir tot l'espai vertical disponible entre dalt0 i baix
+  const rowH = Math.min(px(340), Math.max(px(180), (baix - dalt0) / files));
+  const dalt = dalt0;
+  const rs = Math.max(0.72, Math.min(1, rowH/px(210)));   // mida de lletra/escuts: mai més gran que el disseny base (evita que el text no hi càpiga)
   if (cPhoto) { ctx.shadowColor = 'rgba(0,0,0,.75)'; ctx.shadowBlur = px(10); ctx.shadowOffsetY = px(2); }
   const r = n => Math.round(px(n) * rs);
+  const contentH = r(185);   // alçada aprox. del contingut fix; la resta de la fila es reparteix com a marge
   tots.forEach((p, i) => {
     const cx = x0 + (i%2)*colW, cy = dalt + Math.floor(i/2)*rowH;
     const d = new Date(p.data+'T12:00:00');
@@ -2190,6 +2193,7 @@ async function genFinde(m) {
     const gutter = r(14);
     const panelX = cx, panelY = cy, panelW = colW - gutter, panelH = rowH - gutter;
     const midX = panelX + panelW/2;
+    const baseY = panelY + Math.max(0, (panelH - contentH) / 2);   // centra el contingut si el panell és més alt
 
     // panell arrodonit per separar visualment cada partit
     ctx.save();
@@ -2204,12 +2208,12 @@ async function genFinde(m) {
     const dataTxt = `${DIES_AB[d.getDay()]} ${d.getDate()} · ${p.hora}`;
     ctx.textAlign = 'center';
     ctx.fillStyle = W80; ctx.font = `800 ${r(16)}px 'Inter'`;
-    ctx.fillText(dataTxt, midX, panelY + r(24));
+    ctx.fillText(dataTxt, midX, baseY + r(24));
 
     // duel d'escuts, grans i cara a cara: local — VS — visitant
     const barnaLogo = cClubLogo, rivalLogo = logos[i];
     const localLogo = p.casa ? barnaLogo : rivalLogo, visitantLogo = p.casa ? rivalLogo : barnaLogo;
-    const escutSize = r(58), off = r(42), duelY = panelY + r(68);
+    const escutSize = r(58), off = r(42), duelY = baseY + r(68);
     drawLogo(ctx, localLogo, midX - off, duelY, escutSize, 'B');
     drawLogo(ctx, visitantLogo, midX + off, duelY, escutSize, 'B');
     ctx.fillStyle = W60; ctx.font = `800 ${r(14)}px 'Inter'`;
