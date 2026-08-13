@@ -374,7 +374,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   .edit-pill { bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 10px); }
 }
 </style>
-</head>
+<script defer src="/assets/js/site-search.js"></script></head>
 <body>
 
 <div class="topbar">
@@ -447,6 +447,10 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 
   <!-- ===== VISTA EQUIPS ===== -->
   <section class="view" id="v-equips">
+    <div id="equip-search-wrap">
+      <div class="sec-t">🔍 Cerca el teu equip</div>
+      <input type="search" id="equip-search" placeholder="Nom d'un equip propi (p. ex. Cadet Femení A, Sènior...)" autocomplete="off" style="width:100%;background:var(--paper);border:1px solid var(--border);border-radius:12px;color:var(--ink);padding:11px 14px;font-size:14px;margin-bottom:10px">
+    </div>
     <div id="equips-list"><noscript><!-- SEO-EQUIPS:START --><ul><li><a href="/partits/equips/cadet-femeni-a/"><strong>Cadet Femení A</strong></a> — C.C. CADET FEMENÍ PREFERENT · 0-0 (V-D)</li><li><a href="/partits/equips/cadet-femeni-b/"><strong>Cadet Femení B</strong></a> — C.C. CADET FEMENí PREFERENT 1R. ANY · 0-0 (V-D)</li><li><a href="/partits/equips/infantil-femeni-a/"><strong>Infantil Femení A</strong></a> — C.C. INFANTIL FEMENÍ INTERTERRITORIAL · 0-0 (V-D)</li><li><a href="/partits/equips/infantil-femeni-b/"><strong>Infantil Femení B</strong></a> — C.C. INFANTIL FEMENÍ PREFERENT 1R. ANY · 0-0 (V-D)</li><li><a href="/partits/equips/junior-femeni-a/"><strong>Júnior Femení A</strong></a> — C. C. JÚNIOR FEMENÍ PREFERENT · 0-0 (V-D)</li><li><a href="/partits/equips/junior-femeni-b/"><strong>Júnior Femení B</strong></a> — C.C. JÚNIOR FEMENÍ PREFERENT 1R. ANY · 0-0 (V-D)</li><li><a href="/partits/equips/scf/"><strong>Sènior Femení A</strong></a> — SUPER COPA FEMENINA · 0-0 (V-D)</li><li><a href="/partits/equips/senior-femeni-b/"><strong>Sènior Femení B</strong></a> — C.C. PRIMERA CATEGORIA FEMENINA · 0-0 (V-D)</li><li><a href="/partits/equips/cadet-masculi-a/"><strong>Cadet Masculí A</strong></a> — C.C. CADET MASCULÍ INTERTERRITORIAL · 0-0 (V-D)</li><li><a href="/partits/equips/cadet-masculi-b/"><strong>Cadet Masculí B</strong></a> — C.C. CADET MASCULÍ PREFERENT 1R. ANY · 0-0 (V-D)</li><li><a href="/partits/equips/infantil-masculi-a/"><strong>Infantil Masculí A</strong></a> — C.C. INFANTIL MASCULÍ INTERTERRITORIAL · 0-0 (V-D)</li><li><a href="/partits/equips/junior-masculi-a/"><strong>Júnior Masculí A</strong></a> — C.C. JÚNIOR MASCULÍ INTERTERRITORIAL · 0-0 (V-D)</li><li><a href="/partits/equips/scm/"><strong>Sènior Masculí A</strong></a> — SUPER COPA MASCULINA · 0-0 (V-D)</li><li><a href="/partits/equips/senior-masculi-b/"><strong>Sènior Masculí B</strong></a> — 1A. TERRITORIAL SÈNIOR MASCULÍ · 0-0 (V-D)</li><li><a href="/partits/equips/infantil-masculi-b/"><strong>Infantil Masculí B</strong></a> — C.C. INFANTIL MASCULÍ PREFERENT 1R. ANY · 0-0 (V-D)</li></ul><!-- SEO-EQUIPS:END --></noscript></div>
     <div id="equip-detall" style="display:none"></div>
   </section>
@@ -698,7 +702,7 @@ let BASE = { equips: [], partits: [] };
 let CANVIS = null;
 let OV = loadOverrides();       // { resultats:{id:{pl,pv}}, posicions:{eqId:{posicio,equipsGrup}}, extraEquips:[], extraPartits:[], editsPartits:{id:{...}} }
 let editMode = false;
-let state = { wk: null, filter: 'tots', team: null, abast: 'setmana', genere: 'tots', cat: 'totes', rivalSearch: '' };
+let state = { wk: null, filter: 'tots', team: null, abast: 'setmana', genere: 'tots', cat: 'totes', rivalSearch: '', equipSearch: '' };
 
 function loadOverrides() {
   const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[],fons:[],rivalStats:{},statsPartit:{}};
@@ -1239,8 +1243,17 @@ function renderEquips() {
   const m = model();
   document.getElementById('equip-detall').style.display = state.team?'block':'none';
   document.getElementById('equips-list').style.display = state.team?'none':'block';
+  document.getElementById('equip-search-wrap').style.display = state.team?'none':'block';
   if (!state.team) {
-    document.getElementById('equips-list').innerHTML = m.equips.map(e=>{
+    const inp = document.getElementById('equip-search');
+    if (inp && document.activeElement !== inp) inp.value = state.equipSearch || '';
+    const term = normNom(state.equipSearch || '');
+    const equipsFiltrats = term ? m.equips.filter(e => normNom(e.nom).includes(term)) : m.equips;
+    if (!equipsFiltrats.length) {
+      document.getElementById('equips-list').innerHTML = `<div class="empty">Cap equip propi que contingui "${state.equipSearch}".</div>`;
+      return;
+    }
+    document.getElementById('equips-list').innerHTML = equipsFiltrats.map(e=>{
       const s = teamStats(e.id, m.partits);
       return `<button class="team-row" onclick="openTeam('${e.id}')">
         <span class="em">${e.emoji||'🏀'}</span>
@@ -2381,6 +2394,7 @@ document.getElementById('seg-abast').addEventListener('click', e=>{
 });
 document.getElementById('wk-select').addEventListener('change', e=>{ state.wk=e.target.value; renderJornada(); });
 document.getElementById('rival-search').addEventListener('input', e=>{ state.rivalSearch=e.target.value; renderRivalSearch(model()); });
+document.getElementById('equip-search').addEventListener('input', e=>{ state.equipSearch=e.target.value; renderEquips(); });
 document.getElementById('wk-prev').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i>0){state.wk=w[i-1]; renderJornada();} });
 document.getElementById('wk-next').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i<w.length-1){state.wk=w[i+1]; renderJornada();} });
 document.getElementById('wk-today').addEventListener('click', ()=>{ state.wk=null; renderJornada(); });
