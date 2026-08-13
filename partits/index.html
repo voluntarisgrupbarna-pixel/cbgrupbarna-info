@@ -1769,6 +1769,15 @@ function drawLogo(ctx, img, cx, cy, size, fallbackTxt, dark) {
   ctx.restore();
   ctx.textBaseline='alphabetic';
 }
+function roundRect(ctx, x, y, w, h, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x+radius, y);
+  ctx.arcTo(x+w, y, x+w, y+h, radius);
+  ctx.arcTo(x+w, y+h, x, y+h, radius);
+  ctx.arcTo(x, y+h, x, y, radius);
+  ctx.arcTo(x, y, x+w, y, radius);
+  ctx.closePath();
+}
 function fitText(ctx, txt, maxW, font, startPx) {
   let px = startPx;
   do { ctx.font = font.replace('{px}', px); px -= 4; } while (ctx.measureText(txt).width > maxW && px > 20);
@@ -2178,32 +2187,52 @@ async function genFinde(m) {
     const cx = x0 + (i%2)*colW, cy = dalt + Math.floor(i/2)*rowH;
     const d = new Date(p.data+'T12:00:00');
     const eq = m.equips.find(e=>e.id===p.equipId) || {};
-    ctx.textAlign='left';
-    // data (a dalt) + hora
+    const gutter = r(14);
+    const panelX = cx, panelY = cy, panelW = colW - gutter, panelH = rowH - gutter;
+    const midX = panelX + panelW/2;
+
+    // panell arrodonit per separar visualment cada partit
+    ctx.save();
+    ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+    roundRect(ctx, panelX, panelY, panelW, panelH, r(18));
+    ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fill();
+    ctx.lineWidth = 1.4; ctx.strokeStyle = 'rgba(255,255,255,.16)'; ctx.stroke();
+    ctx.restore();
+    if (cPhoto) { ctx.shadowColor = 'rgba(0,0,0,.75)'; ctx.shadowBlur = px(10); ctx.shadowOffsetY = px(2); }
+
+    // data + hora, centrat a dalt del panell
     const dataTxt = `${DIES_AB[d.getDay()]} ${d.getDate()} · ${p.hora}`;
-    ctx.fillStyle = W80; ctx.font = `800 ${r(19)}px 'Inter'`;
-    ctx.fillText(dataTxt, cx, cy + r(18));
+    ctx.textAlign = 'center';
+    ctx.fillStyle = W80; ctx.font = `800 ${r(16)}px 'Inter'`;
+    ctx.fillText(dataTxt, midX, panelY + r(24));
+
+    // duel d'escuts, grans i cara a cara: local — VS — visitant
     const barnaLogo = cClubLogo, rivalLogo = logos[i];
     const localLogo = p.casa ? barnaLogo : rivalLogo, visitantLogo = p.casa ? rivalLogo : barnaLogo;
-    // local (amb escut a l'esquerra del nom)
-    drawLogo(ctx, localLogo, cx + r(13), cy + r(42), r(26), 'B');
-    ctx.fillStyle = p.casa ? '#FF6A5F' : WHITE;      // vermell aclarit: llegible sobre foto fosca
-    ctx.font = `800 ${r(21)}px 'Inter'`;
-    ctx.fillText(p.local.slice(0,17), cx + r(30), cy + r(50));
-    // vs
-    ctx.fillStyle = W60; ctx.font = `700 ${r(14)}px 'Inter'`;
-    ctx.fillText('VS', cx, cy + r(70));
-    // visitant (amb escut a l'esquerra del nom)
-    drawLogo(ctx, visitantLogo, cx + r(13), cy + r(86), r(26), 'B');
+    const escutSize = r(58), off = r(42), duelY = panelY + r(68);
+    drawLogo(ctx, localLogo, midX - off, duelY, escutSize, 'B');
+    drawLogo(ctx, visitantLogo, midX + off, duelY, escutSize, 'B');
+    ctx.fillStyle = W60; ctx.font = `800 ${r(14)}px 'Inter'`;
+    ctx.fillText('VS', midX, duelY + r(5));
+
+    // noms: creixen cap enfora des del centre, mai xoquen entre ells
+    const nameY = duelY + r(46), nameGap = r(24);
+    ctx.font = `800 ${r(15)}px 'Inter'`;
+    ctx.textAlign = 'right';
+    ctx.fillStyle = p.casa ? '#FF6A5F' : WHITE;
+    ctx.fillText(p.local.slice(0,14), midX - nameGap, nameY);
+    ctx.textAlign = 'left';
     ctx.fillStyle = !p.casa ? '#FF6A5F' : WHITE;
-    ctx.font = `800 ${r(21)}px 'Inter'`;
-    ctx.fillText(p.visitant.slice(0,17), cx + r(30), cy + r(94));
+    ctx.fillText(p.visitant.slice(0,14), midX + nameGap, nameY);
+
     // equip i categoria
-    ctx.fillStyle = W80; ctx.font = `700 ${r(16)}px 'Inter'`;
-    ctx.fillText(`${(eq.curt||eq.nom||'').slice(0,16)} · ${p.categoria.slice(0,18)}`, cx, cy + r(120));
+    ctx.textAlign = 'center';
+    ctx.fillStyle = W80; ctx.font = `700 ${r(14)}px 'Inter'`;
+    ctx.fillText(`${(eq.curt||eq.nom||'').slice(0,18)} · ${p.categoria.slice(0,18)}`, midX, nameY + r(24));
     // ubicacio
-    ctx.fillStyle = W60; ctx.font = `600 ${r(15)}px 'Inter'`;
-    ctx.fillText(`📍 ${(p.pista||'Per confirmar').slice(0,26)}`, cx, cy + r(144));
+    ctx.fillStyle = W60; ctx.font = `600 ${r(13)}px 'Inter'`;
+    ctx.fillText(`📍 ${(p.pista||'Per confirmar').slice(0,28)}`, midX, nameY + r(48));
+    ctx.textAlign = 'left';
   });
 
   ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
