@@ -2178,27 +2178,32 @@ async function genFinde(m) {
     const cx = x0 + (i%2)*colW, cy = dalt + Math.floor(i/2)*rowH;
     const d = new Date(p.data+'T12:00:00');
     const eq = m.equips.find(e=>e.id===p.equipId) || {};
-    // hora gran + escut del rival al costat
-    ctx.textAlign='left'; ctx.fillStyle=WHITE;
-    ctx.font = `${r(62)}px 'Anton'`;
-    ctx.fillText(p.hora, cx, cy + r(50));
-    // l'escut es col·loca després de l'hora segons el seu ample real, mai a sobre
-    const wHora = ctx.measureText(p.hora).width;
-    drawLogo(ctx, logos[i], cx + wHora + r(46), cy + r(26), r(58), (p.casa?p.visitant:p.local).slice(0,3).toUpperCase());
-    // dia · local/visitant — més grans i amb més contrast
-    ctx.font = `800 ${r(21)}px 'Inter'`;
-    ctx.fillStyle = W80; ctx.fillText(DIES_AB[d.getDay()], cx, cy + r(84));
-    const wDia = ctx.measureText(DIES_AB[d.getDay()]).width;
+    ctx.textAlign='left';
+    // data (a dalt) + hora
+    const dataTxt = `${DIES_AB[d.getDay()]} ${d.getDate()} · ${p.hora}`;
+    ctx.fillStyle = W80; ctx.font = `800 ${r(19)}px 'Inter'`;
+    ctx.fillText(dataTxt, cx, cy + r(18));
+    const barnaLogo = cClubLogo, rivalLogo = logos[i];
+    const localLogo = p.casa ? barnaLogo : rivalLogo, visitantLogo = p.casa ? rivalLogo : barnaLogo;
+    // local (amb escut a l'esquerra del nom)
+    drawLogo(ctx, localLogo, cx + r(13), cy + r(42), r(26), 'B');
     ctx.fillStyle = p.casa ? '#FF6A5F' : WHITE;      // vermell aclarit: llegible sobre foto fosca
-    ctx.fillText(p.casa ? 'LOCAL' : 'VISITANT', cx + wDia + r(14), cy + r(84));
-    // rival
-    ctx.fillStyle = WHITE; ctx.font = `800 ${r(23)}px 'Inter'`;
-    ctx.fillText((p.casa?'vs ':'@ ') + (p.casa?p.visitant:p.local).slice(0,22), cx, cy + r(116));
+    ctx.font = `800 ${r(21)}px 'Inter'`;
+    ctx.fillText(p.local.slice(0,17), cx + r(30), cy + r(50));
+    // vs
+    ctx.fillStyle = W60; ctx.font = `700 ${r(14)}px 'Inter'`;
+    ctx.fillText('VS', cx, cy + r(70));
+    // visitant (amb escut a l'esquerra del nom)
+    drawLogo(ctx, visitantLogo, cx + r(13), cy + r(86), r(26), 'B');
+    ctx.fillStyle = !p.casa ? '#FF6A5F' : WHITE;
+    ctx.font = `800 ${r(21)}px 'Inter'`;
+    ctx.fillText(p.visitant.slice(0,17), cx + r(30), cy + r(94));
     // equip i categoria
-    ctx.fillStyle = W80; ctx.font = `700 ${r(18)}px 'Inter'`;
-    ctx.fillText((eq.curt||eq.nom||'').slice(0,20), cx, cy + r(142));
+    ctx.fillStyle = W80; ctx.font = `700 ${r(16)}px 'Inter'`;
+    ctx.fillText(`${(eq.curt||eq.nom||'').slice(0,16)} · ${p.categoria.slice(0,18)}`, cx, cy + r(120));
+    // ubicacio
     ctx.fillStyle = W60; ctx.font = `600 ${r(15)}px 'Inter'`;
-    ctx.fillText(p.categoria.slice(0,26), cx, cy + r(164));
+    ctx.fillText(`📍 ${(p.pista||'Per confirmar').slice(0,26)}`, cx, cy + r(144));
   });
 
   ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
