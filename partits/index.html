@@ -234,8 +234,10 @@ button.btn.small { padding: 8px 12px; font-size: 13px; }
           <div>
             <label for="poster-kind">Tipus</label>
             <select id="poster-kind">
-              <option value="matchday">Dia de partit</option>
-              <option value="result">Resultat</option>
+              <option value="matchday">Dia de partit (un equip)</option>
+              <option value="result">Resultat (un equip)</option>
+              <option value="jornada">La jornada sencera (els 4)</option>
+              <option value="jornada-result">Resultats de la jornada</option>
             </select>
           </div>
           <div>
@@ -259,6 +261,17 @@ button.btn.small { padding: 8px 12px; font-size: 13px; }
           <button class="btn ghost" id="dl">Descarregar PNG</button>
         </div>
         <div class="preview"><canvas id="cv" width="1080" height="1350"></canvas></div>
+      </div>
+
+      <div class="cfg-section">
+        <h3>Caption</h3>
+        <p class="hint">Ganxo a la primera línia i CTA explícit al final — norma D-10: sense això, no es publica.</p>
+        <textarea id="caption" rows="9"></textarea>
+        <div class="row-actions">
+          <button class="btn small" id="gen-caption">Generar caption</button>
+          <button class="btn ghost small" id="copy-caption">Copiar</button>
+        </div>
+        <div class="ok" id="caption-ok">Copiat.</div>
       </div>
 
       <div class="cfg-section">
@@ -294,6 +307,15 @@ const DATA_KEY  = 'cbgb_partits_data_v1';
 const EQUIPS_DEFAULT = ['Sènior A Masculí', 'Sènior B Masculí', 'Sènior A Femení', 'Sènior B Femení'];
 
 const DISPLAY = 'Anton, Impact, "Arial Narrow Bold", "Arial Black", sans-serif';
+function fmtShort(iso, lang) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  if (isNaN(d)) return iso;
+  const DS = lang === 'es' ? ['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'] : ['DG','DL','DT','DC','DJ','DV','DS'];
+  const MS = lang === 'es' ? ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
+                           : ['GEN','FEB','MAR','ABR','MAI','JUN','JUL','AGO','SET','OCT','NOV','DES'];
+  return `${DS[d.getDay()]} ${d.getDate()} ${MS[d.getMonth()]}`;
+}
 const DIES = ['diumenge','dilluns','dimarts','dimecres','dijous','divendres','dissabte'];
 const MESOS = ['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
 
@@ -403,9 +425,19 @@ function findRival(name) {
   const norm = t => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
   const n = norm(name);
   if (!n) return null;
-  return RIVALS.find(r => norm(r.club) === n)
-      || RIVALS.find(r => norm(r.alies) === n)
-      || RIVALS.find(r => norm(r.club).includes(n) || n.includes(norm(r.club)))
+  const exact = RIVALS.find(r => norm(r.club) === n) || RIVALS.find(r => norm(r.alies) === n);
+  if (exact) return exact;
+  const sub = RIVALS.find(r => norm(r.club).includes(n) || n.includes(norm(r.club)));
+  if (sub) return sub;
+  /* per paraules: ignora articles i preposicions, i demana que totes les
+     paraules significatives del que s'ha escrit surtin al nom del club */
+  const STOP = new Set(['de','del','la','el','les','els','i','d','ce','cb','ue','ae','ab','bc','club','basquet','basket']);
+  const toks = t => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                     .split(/[^a-z0-9]+/).filter(w => w && !STOP.has(w));
+  const q = toks(name);
+  if (!q.length) return null;
+  return RIVALS.find(r => { const c = toks(r.club); return q.every(w => c.includes(w)); })
+      || RIVALS.find(r => { const c = toks(r.alies); return q.every(w => c.includes(w)); })
       || null;
 }
 
@@ -741,7 +773,24 @@ async function drawPoster(idx) {
   ctx.fillText('#SOMCLOT · @CBGRUPBARNA', cx, H * 0.945);
 }
 
-$('#gen').addEventListener('click', () => { collectRows(); checkGanxos(); drawPoster(Number($('#poster-match').value)); });
+function generate() {
+  collectRows(); checkGanxos();
+  const k = $('#poster-kind').value;
+  if (k === 'jornada') return drawJornada(false);
+  if (k === 'jornada-result') return drawJornada(true);
+  return drawPoster(Number($('#poster-match').value));
+}
+$('#gen').addEventListener('click', generate);
+$('#gen-caption').addEventListener('click', () => { collectRows(); $('#caption').value = buildCaption(); });
+$('#copy-caption').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText($('#caption').value); } catch (e) {}
+  const ok = $('#caption-ok'); ok.style.display = 'block'; setTimeout(() => ok.style.display = 'none', 3000);
+});
+$('#poster-kind').addEventListener('change', () => {
+  const jor = $('#poster-kind').value.startsWith('jornada');
+  $('#poster-match').disabled = jor;
+  $('#gen-all').disabled = jor;
+});
 
 $('#gen-all').addEventListener('click', async () => {
   collectRows(); checkGanxos();
@@ -757,12 +806,151 @@ $('#gen-all').addEventListener('click', async () => {
 });
 
 $('#dl').addEventListener('click', () => {
+  const k = $('#poster-kind').value;
+  if (k.startsWith('jornada')) {
+    const a = document.createElement('a');
+    a.href = $('#cv').toDataURL('image/png');
+    a.download = `cartell-${k}.png`; a.click();
+    return;
+  }
   const p = DATA.partits[Number($('#poster-match').value)] || {};
   const a = document.createElement('a');
   a.href = $('#cv').toDataURL('image/png');
   a.download = `cartell-${(p.equip || 'equip').toLowerCase().replace(/\s+/g, '-')}-${$('#poster-kind').value}.png`;
   a.click();
 });
+
+
+/* ══════════ CARTELL DE JORNADA (els 4 en una imatge) ══════════ */
+async function drawJornada(withScores) {
+  const lang = $('#poster-lang').value;
+  const [W, H] = $('#poster-size').value.split('x').map(Number);
+  const cv = $('#cv'); cv.width = W; cv.height = H;
+  const ctx = cv.getContext('2d');
+  try { await document.fonts.load('100px Anton'); await document.fonts.ready; } catch (e) {}
+
+  const list = DATA.partits.filter(p => p.rival && (!withScores || (p.marcadorNostre != null && p.marcadorRival != null)));
+  ctx.fillStyle = '#0E1116'; ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = '#E63329'; ctx.lineWidth = 10; ctx.strokeRect(24, 24, W - 48, H - 48);
+  const cx = W / 2;
+  ctx.textAlign = 'center';
+
+  if (logoImg.complete && logoImg.naturalWidth) {
+    const lw = W * 0.13, lh = lw * (logoImg.naturalHeight / logoImg.naturalWidth);
+    ctx.drawImage(logoImg, cx - lw / 2, H * 0.035, lw, lh);
+  }
+
+  ctx.fillStyle = '#E63329';
+  ctx.font = '700 30px Inter, sans-serif';
+  ctx.letterSpacing = '6px';
+  ctx.fillText(withScores
+    ? (lang === 'es' ? 'RESULTADOS DE LA JORNADA' : 'RESULTATS DE LA JORNADA')
+    : (lang === 'es' ? 'ESTE FIN DE SEMANA' : 'AQUEST CAP DE SETMANA'), cx, H * 0.192);
+  ctx.letterSpacing = '0px';
+
+  /* ganxo de capçalera: el primer que hi hagi, o un de per defecte */
+  const headHook = (list.find(p => p.ganxo) || {}).ganxo
+    || (lang === 'es' ? 'CUATRO EQUIPOS. UN CLUB.' : 'QUATRE EQUIPS. UN CLUB.');
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = `${Math.round(H * 0.052)}px ${DISPLAY}`;
+  let hl = wrapLines(ctx, headHook.toUpperCase(), W - 160);
+  if (hl.length > 2) { ctx.font = `${Math.round(H * 0.040)}px ${DISPLAY}`; hl = wrapLines(ctx, headHook.toUpperCase(), W - 160); }
+  const hlh = parseInt(ctx.font) * 1.05;
+  hl.slice(0, 2).forEach((l, i) => ctx.fillText(l, cx, H * 0.245 + i * hlh));
+
+  if (!list.length) {
+    ctx.fillStyle = '#8A929C'; ctx.font = '600 30px Inter, sans-serif';
+    ctx.fillText(withScores ? 'Cap resultat encara' : 'Cap partit amb rival', cx, H * 0.5);
+    return;
+  }
+
+  /* files: escut + equip + rival + quan/marcador */
+  const top = H * 0.33, bottom = H * 0.86;
+  const rowH = Math.min((bottom - top) / list.length, H * 0.13);
+  const crest = Math.min(rowH * 0.72, W * 0.13);
+  const padX = 70;
+
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    const y = top + i * rowH;
+    const midY = y + rowH / 2;
+
+    ctx.fillStyle = i % 2 ? 'rgba(255,255,255,0.035)' : 'rgba(255,255,255,0.07)';
+    ctx.fillRect(padX - 14, y + 4, W - (padX - 14) * 2, rowH - 8);
+
+    const rv = findRival(p.rival);
+    const im = await rivalImage(rv);
+    if (im) {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(padX, midY - crest / 2 - 6, crest + 12, crest + 12);
+      const sc = Math.min(crest / im.naturalWidth, crest / im.naturalHeight);
+      ctx.drawImage(im, padX + 6 + (crest - im.naturalWidth * sc) / 2,
+                        midY - crest / 2 + (crest - im.naturalHeight * sc) / 2,
+                        im.naturalWidth * sc, im.naturalHeight * sc);
+    }
+
+    const textX = padX + crest + 34;
+    /* amplada reservada a la columna dreta perque res es trepitgi */
+    ctx.font = `700 ${Math.round(rowH * 0.22)}px Inter, sans-serif`;
+    const rightW = withScores
+      ? W * 0.20
+      : Math.max(ctx.measureText(fmtShort(p.data, lang)).width, ctx.measureText(p.hora || '').width) + 20;
+    const leftW = (W - padX) - textX - rightW - 28;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = fitText(ctx, (p.equip || '').toUpperCase(), leftW, Math.round(rowH * 0.30), DISPLAY, 16);
+    ctx.fillText((p.equip || '').toUpperCase(), textX, midY - rowH * 0.06);
+    ctx.fillStyle = '#8A929C';
+    const sub = `${p.local !== false ? 'vs ' : (lang === 'es' ? 'en ' : 'a ')}${(p.rival || '').toUpperCase()}`;
+    ctx.font = fitText(ctx, sub, leftW, Math.round(rowH * 0.20), '600 Inter, sans-serif', 13);
+    ctx.fillText(sub, textX, midY + rowH * 0.22);
+
+    ctx.textAlign = 'right';
+    if (withScores) {
+      const a = Number(p.marcadorNostre), b = Number(p.marcadorRival);
+      ctx.fillStyle = a > b ? '#FFFFFF' : '#8A929C';
+      ctx.font = `${Math.round(rowH * 0.42)}px ${DISPLAY}`;
+      ctx.fillText(`${a}–${b}`, W - padX, midY + rowH * 0.12);
+    } else {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = `700 ${Math.round(rowH * 0.22)}px Inter, sans-serif`;
+      ctx.fillText(fmtShort(p.data, lang), W - padX, midY - rowH * 0.06);
+      ctx.fillStyle = '#E63329';
+      ctx.font = `800 ${Math.round(rowH * 0.24)}px Inter, sans-serif`;
+      ctx.fillText(p.hora || '', W - padX, midY + rowH * 0.24);
+    }
+    ctx.textAlign = 'center';
+  }
+
+  /* CTA obligatori (D-10) */
+  ctx.fillStyle = '#E63329';
+  ctx.fillRect(24, H * 0.905, W - 48, H * 0.052);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = `700 ${Math.round(H * 0.024)}px Inter, sans-serif`;
+  ctx.fillText((lang === 'es' ? 'SÍGUENOS @CBGRUPBARNA · #SOMCLOT' : 'SEGUEIX-NOS @CBGRUPBARNA · #SOMCLOT'),
+               cx, H * 0.905 + H * 0.035);
+}
+
+/* ══════════ CAPTION (norma D-10: ganxo + CTA) ══════════ */
+function buildCaption() {
+  const lang = $('#poster-lang').value;
+  const list = DATA.partits.filter(p => p.rival);
+  const jugats = list.filter(p => p.marcadorNostre != null && p.marcadorRival != null);
+  const hook = (list.find(p => p.ganxo) || {}).ganxo
+    || (lang === 'es' ? 'Cuatro equipos. Un club. Un barrio.' : 'Quatre equips. Un club. Un barri.');
+  const linies = list.map(p => {
+    if (p.marcadorNostre != null && p.marcadorRival != null) {
+      const a = Number(p.marcadorNostre), b = Number(p.marcadorRival);
+      return `${a > b ? '✅' : '▪️'} ${p.equip} ${a}-${b} ${p.rival}`;
+    }
+    return `🏀 ${p.equip} ${p.local !== false ? 'vs' : 'a'} ${p.rival} · ${fmtDate(p.data, lang)}${p.hora ? ' · ' + p.hora : ''}${p.pavello ? ' · ' + p.pavello : ''}`;
+  });
+  const cta = lang === 'es'
+    ? '📲 Síguenos en @cbgrupbarna para no perderte ni un partido.\n💾 Guarda este post y compártelo con tu gente.'
+    : '📲 Segueix-nos a @cbgrupbarna per no perdre\'t cap partit.\n💾 Guarda aquest post i comparteix-lo amb la teva gent.';
+  const tags = '#SomClot #CBGrupBarna #bàsquet #ElClot #SantMartí #BasquetCatala';
+  return [hook, '', ...linies, '', cta, '', tags].join('\n');
+}
 
 /* ══════════ CANVIAR EL CODI ══════════ */
 $('#rivals-q').addEventListener('input', e => drawGrid(e.target.value));
