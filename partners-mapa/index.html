@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mapa de partners i col·laboradors · CB Grup Barna</title>
 <meta name="description" content="Mapa dels partners i col·laboradors del CB Grup Barna: comerços del barri del Clot i col·laboradors de fora del barri.">
+<link rel="canonical" href="https://cbgrupbarna.info/partners-mapa/">
 <link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
 <link rel="shortcut icon" href="/logo.png">
 <link rel="stylesheet" href="/partners-mapa/vendor/leaflet/leaflet.css">
@@ -48,6 +49,9 @@ h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(20px,
 footer.foot{padding:30px 0 60px;text-align:center;font-size:13px;color:rgba(14,17,22,0.5);}
 footer.foot a{color:var(--red);text-decoration:none;}
 .leaflet-popup-content b{font-family:'Inter',sans-serif;}
+.lang-switch{display:flex;gap:2px;background:rgba(244,241,236,0.12);border-radius:6px;padding:2px;}
+.lang-switch button{background:none;border:none;color:var(--cream);opacity:.55;font-family:'Inter',sans-serif;font-weight:700;font-size:12px;letter-spacing:.03em;padding:6px 10px;border-radius:5px;cursor:pointer;}
+.lang-switch button.active{opacity:1;background:rgba(244,241,236,0.14);}
 </style>
 </head>
 <body>
@@ -55,19 +59,26 @@ footer.foot a{color:var(--red);text-decoration:none;}
 <header class="top">
   <div class="wrap">
     <a class="home" href="/">CB Grup Barna</a>
-    <a class="home" href="/" style="opacity:.7;font-family:'Inter',sans-serif;text-transform:none;font-size:13px;">← Tornar a l'inici</a>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a class="home" data-i18n="back" href="/" style="opacity:.7;font-family:'Inter',sans-serif;text-transform:none;font-size:13px;">← Tornar a l'inici</a>
+      <div class="lang-switch" id="lang-switch">
+        <button data-lang="ca">CA</button><button data-lang="es">ES</button><button data-lang="en">EN</button>
+      </div>
+    </div>
   </div>
 </header>
 
 <div class="wrap">
-  <h1>Mapa de partners i col·laboradors</h1>
-  <p class="lede">On són els comerços, entitats i col·laboradors que fan possible el CB Grup Barna: primer els del barri del Clot · Camp de l'Arpa, i després la resta.</p>
+  <h1 data-i18n="h1">Mapa de partners i col·laboradors</h1>
+  <p class="lede" data-i18n="lede">On són els comerços, entitats i col·laboradors que fan possible el CB Grup Barna: primer els del barri del Clot · Camp de l'Arpa, i després la resta.</p>
 
-  <div class="notice">📍 Les ubicacions dels pins són aproximades (il·lustratives). Toca <b>«Veure a Google Maps»</b> a cada fitxa per obtenir l'adreça exacta i com arribar-hi.<br>🎨 Els logotips són provisionals (inicials del partner) fins que en tinguem el fitxer oficial — envieu-nos-el i el canviem.<br>✅ Els 21 partners comercials + 2 institucionals de dalt són els oficials de la <b>cartela de vídeo</b> (<code>partners-outro-cbgb</code>). La secció final són col·laboradors mencionats que encara no hi surten.</div>
+  <div class="notice" data-i18n="notice">📍 Les ubicacions dels pins són aproximades (il·lustratives). Toca <b>«Veure a Google Maps»</b> a cada fitxa per obtenir l'adreça exacta i com arribar-hi.<br>🖼️ Logotips oficials de <a href="/patrocinadors/">/patrocinadors/</a> — quan encara no en tenim, es mostra un monograma provisional.<br>📄 Toca <b>«Fitxa del partner»</b> per veure la seva pàgina completa al dossier de patrocinis (web extesa).</div>
+
+  <div class="btn-row" style="margin:0 0 34px;"><a href="/patrocinadors/" data-i18n="dossier-btn" style="display:inline-block;background:var(--ink);color:var(--cream);text-decoration:none;font-family:'Anton',sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.04em;padding:12px 22px;border-radius:6px;">Veure el dossier complet de patrocinis →</a></div>
 
   <section class="map-block">
     <div class="map-head">
-      <h2>Partners del barri · El Clot / Camp de l'Arpa</h2>
+      <h2 data-i18n="h2-barri">Partners del barri · El Clot / Camp de l'Arpa</h2>
       <span id="count-barri"></span>
     </div>
     <div id="map-barri"></div>
@@ -76,7 +87,7 @@ footer.foot a{color:var(--red);text-decoration:none;}
 
   <section class="map-block">
     <div class="map-head">
-      <h2>Partners fora del barri</h2>
+      <h2 data-i18n="h2-fora">Partners fora del barri</h2>
       <span id="count-fora"></span>
     </div>
     <div id="map-fora"></div>
@@ -84,26 +95,26 @@ footer.foot a{color:var(--red);text-decoration:none;}
   </section>
 
   <section class="no-pin">
-    <div class="map-head"><h2>Partners sense ubicació fixa</h2></div>
-    <p class="lede" style="margin-bottom:6px;">Part dels 21 oficials, però sense un local propi al barri.</p>
+    <div class="map-head"><h2 data-i18n="h2-sense">Partners sense ubicació fixa</h2></div>
+    <p class="lede" data-i18n="lede-sense" style="margin-bottom:6px;">Marques i entitats sense un local propi d'un sol comerç.</p>
     <div class="chip-row" id="chip-row-sense"></div>
   </section>
 
   <section class="no-pin">
-    <div class="map-head"><h2>Institucions</h2></div>
-    <p class="lede" style="margin-bottom:6px;">Bloc «amb el suport de» de la cartela — separat dels partners comercials.</p>
+    <div class="map-head"><h2 data-i18n="h2-inst">Institucions</h2></div>
+    <p class="lede" data-i18n="lede-inst" style="margin-bottom:6px;">Bloc «amb el suport de» de la cartela — separat dels partners comercials.</p>
     <div class="chip-row" id="chip-row-inst"></div>
   </section>
 
   <section class="no-pin">
-    <div class="map-head"><h2>Altres col·laboradors mencionats</h2></div>
-    <p class="lede" style="margin-bottom:6px;">Premsa, entitats i persones properes al club — encara no formen part de la cartela oficial de 21 partners (confirmar amb Ana si s'hi han d'afegir).</p>
+    <div class="map-head"><h2 data-i18n="h2-altres">Altres col·laboradors mencionats</h2></div>
+    <p class="lede" data-i18n="lede-altres" style="margin-bottom:6px;">Premsa, entitats i persones properes al club — encara no formen part de la cartela oficial de 21 partners (confirmar amb Ana si s'hi han d'afegir).</p>
     <div class="chip-row" id="chip-row"></div>
   </section>
 </div>
 
 <footer class="foot">
-  <div class="wrap">CB Grup Barna · Club de Bàsquet · El Clot, Barcelona · <a href="/">cbgrupbarna.info</a></div>
+  <div class="wrap"><span data-i18n="footer">CB Grup Barna · Club de Bàsquet · El Clot, Barcelona</span> · <a href="/">cbgrupbarna.info</a></div>
 </footer>
 
 <script src="/partners-mapa/vendor/leaflet/leaflet.js"></script>
@@ -111,6 +122,69 @@ footer.foot a{color:var(--red);text-decoration:none;}
 const RED = '#E63329';
 const INK = '#0E1116';
 const STOP = new Set(['de','del','la','el','les','els','i','d','l','the','of']);
+
+// i18n — català per defecte, amb selector ES/EN. Només aquesta pàgina (no la resta del web).
+const I18N = {
+  ca: {
+    back:"← Tornar a l'inici",
+    h1:"Mapa de partners i col·laboradors",
+    lede:"On són els comerços, entitats i col·laboradors que fan possible el CB Grup Barna: primer els del barri del Clot · Camp de l'Arpa, i després la resta.",
+    notice:'📍 Les ubicacions dels pins són aproximades (il·lustratives). Toca <b>«Veure a Google Maps»</b> a cada fitxa per obtenir l\'adreça exacta i com arribar-hi.<br>🖼️ Logotips oficials de <a href="/patrocinadors/">/patrocinadors/</a> — quan encara no en tenim, es mostra un monograma provisional.<br>📄 Toca <b>«Fitxa del partner»</b> per veure la seva pàgina completa al dossier de patrocinis (web extesa).',
+    "dossier-btn":"Veure el dossier complet de patrocinis →",
+    "h2-barri":"Partners del barri · El Clot / Camp de l'Arpa",
+    "h2-fora":"Partners fora del barri",
+    "h2-sense":"Partners sense ubicació fixa",
+    "lede-sense":"Marques i entitats sense un local propi d'un sol comerç.",
+    "h2-inst":"Institucions",
+    "lede-inst":"Bloc «amb el suport de» de la cartela — separat dels partners comercials.",
+    "h2-altres":"Altres col·laboradors mencionats",
+    "lede-altres":"Premsa, entitats i persones properes al club — encara no formen part de la cartela oficial de 21 partners (confirmar amb Ana si s'hi han d'afegir).",
+    footer:"CB Grup Barna · Club de Bàsquet · El Clot, Barcelona",
+    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Fitxa →", fitxaChip:"fitxa", fitxaPopup:"Fitxa del partner →",
+    igPendingCard:"Instagram pendent", igPendingChip:"IG pendent",
+    partner:"partner", partners:"partners"
+  },
+  es: {
+    back:"← Volver al inicio",
+    h1:"Mapa de partners y colaboradores",
+    lede:"Dónde están los comercios, entidades y colaboradores que hacen posible el CB Grup Barna: primero los del barrio del Clot · Camp de l'Arpa, y después el resto.",
+    notice:'📍 Las ubicaciones de los pines son aproximadas (ilustrativas). Toca <b>«Ver en Google Maps»</b> en cada ficha para obtener la dirección exacta y cómo llegar.<br>🖼️ Logotipos oficiales de <a href="/patrocinadors/">/patrocinadors/</a> — cuando aún no lo tenemos, se muestra un monograma provisional.<br>📄 Toca <b>«Ficha del partner»</b> para ver su página completa en el dosier de patrocinios (web extendida).',
+    "dossier-btn":"Ver el dosier completo de patrocinios →",
+    "h2-barri":"Partners del barrio · El Clot / Camp de l'Arpa",
+    "h2-fora":"Partners fuera del barrio",
+    "h2-sense":"Partners sin ubicación fija",
+    "lede-sense":"Marcas y entidades sin un local propio de un solo comercio.",
+    "h2-inst":"Instituciones",
+    "lede-inst":"Bloque «con el apoyo de» de la cartela — separado de los partners comerciales.",
+    "h2-altres":"Otros colaboradores mencionados",
+    "lede-altres":"Prensa, entidades y personas cercanas al club — todavía no forman parte de la cartela oficial de 21 partners (confirmar con Ana si hay que añadirlos).",
+    footer:"CB Grup Barna · Club de Baloncesto · El Clot, Barcelona",
+    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Ficha →", fitxaChip:"ficha", fitxaPopup:"Ficha del partner →",
+    igPendingCard:"Instagram pendiente", igPendingChip:"IG pendiente",
+    partner:"partner", partners:"partners"
+  },
+  en: {
+    back:"← Back home",
+    h1:"Partners & collaborators map",
+    lede:"Where the businesses, organisations and collaborators that make CB Grup Barna possible are located: first the ones in the Clot · Camp de l'Arpa neighbourhood, then the rest.",
+    notice:'📍 Pin locations are approximate (illustrative). Tap <b>«View on Google Maps»</b> on any card for the exact address and directions.<br>🖼️ Official logos from <a href="/patrocinadors/">/patrocinadors/</a> — when we don\'t have one yet, a placeholder monogram is shown.<br>📄 Tap <b>«Partner page»</b> to see its full page in the sponsorship dossier (extended site).',
+    "dossier-btn":"See the full sponsorship dossier →",
+    "h2-barri":"Neighbourhood partners · El Clot / Camp de l'Arpa",
+    "h2-fora":"Partners outside the neighbourhood",
+    "h2-sense":"Partners without a fixed location",
+    "lede-sense":"Brands and organisations without a single storefront.",
+    "h2-inst":"Institutions",
+    "lede-inst":"The video outro's «with the support of» block — kept separate from commercial partners.",
+    "h2-altres":"Other mentioned collaborators",
+    "lede-altres":"Press, organisations and people close to the club — not yet part of the official 21-partner outro (to confirm with Ana whether they should be added).",
+    footer:"CB Grup Barna · Basketball Club · El Clot, Barcelona",
+    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Partner page →", fitxaChip:"page", fitxaPopup:"Partner page →",
+    igPendingCard:"Instagram pending", igPendingChip:"IG pending",
+    partner:"partner", partners:"partners"
+  }
+};
+let LANG = localStorage.getItem('cbgb_partners_lang') || 'ca';
+function t(key){ return I18N[LANG][key]; }
 
 function gmaps(addr){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr); }
 
@@ -140,37 +214,41 @@ function pinIcon(institucional){
 }
 
 // Ubicacions aproximades (il·lustratives) — l'adreça de text i l'enllaç a Google Maps són la font exacta.
-// Llista canònica: references/partners.md de la skill partners-outro-cbgb (21 comercials + 2 institucionals).
+// Font de dades: fitxes reals de /patrocinadors/partners/ (la "web extesa" — dossier de patrocinis).
 const barri = [
-  { nom:"Eix Clot", addr:"Carrer de Sant Antoni Maria Claret, 358, Barcelona", ig:"https://www.instagram.com/eixclot/", lat:41.4133, lng:2.1789 },
-  { nom:"Melosa", addr:"Carrer del Clot, 163, Barcelona", ig:"https://www.instagram.com/melosahamburgueseria/", lat:41.4082, lng:2.1857 },
-  { nom:"Romeo Abogados", addr:"Carrer de Rossend Nobas, 9, Barcelona", ig:"https://www.instagram.com/romeoabogados/", lat:41.4059, lng:2.1911 },
-  { nom:"Armand", addr:"Carrer del Clot, 66, Barcelona", ig:"https://www.instagram.com/armandoptics/", lat:41.4055, lng:2.1897 },
-  { nom:"Herbolari Montserrat", addr:"Carrer de Guipúscoa, 77, Barcelona", ig:"https://www.instagram.com/herbolari.montserrat/", lat:41.4103, lng:2.1965 },
-  { nom:"Westfield Glòries", addr:"Avinguda Diagonal, 208, Barcelona", ig:"https://www.instagram.com/westfieldglories/", lat:41.4053, lng:2.1893 },
-  { nom:"Bac de Roda", addr:"Carrer del Concili de Trento, 110, Barcelona", ig:"https://www.instagram.com/clinicadentalbacderoda/", lat:41.4113, lng:2.1975 },
-  { nom:"Foto Jané", addr:"Carrer de Ciutat de Granada, 52, Barcelona", ig:null, ig_note:"Instagram per confirmar", lat:41.4095, lng:2.1935 },
-  { nom:"Mercat dels Encants", addr:"Avinguda Meridiana, 69, Barcelona", ig:"https://www.instagram.com/encantsbarcelona/", lat:41.4036, lng:2.1877 },
-  { nom:"L'Ovella Negra Marina", addr:"Carrer de Zamora, 78, Barcelona", ig:null, ig_note:"Instagram per confirmar", lat:41.4020, lng:2.1930 },
+  { nom:"Eix Clot", addr:"Carrer de Sant Antoni Maria Claret, 358, Barcelona", ig:"https://www.instagram.com/eixclot/", logo:"/partners/eix-clot.png", fitxa:"/patrocinadors/partners/eix-clot/", lat:41.4133, lng:2.1789 },
+  { nom:"La Melosa", addr:"Carrer del Clot, 163, Barcelona", ig:"https://www.instagram.com/melosahamburgueseria/", logo:"/partners/melosa-hamburgueseria.png", fitxa:"/patrocinadors/partners/melosa-hamburgueseria/", lat:41.4082, lng:2.1857 },
+  { nom:"Romeo Abogados", addr:"Carrer de Rossend Nobas, 9, Barcelona", ig:"https://www.instagram.com/romeoabogados/", logo:"/partners/romeo-abogados.png", fitxa:"/patrocinadors/partners/romeo-abogados/", lat:41.4059, lng:2.1911 },
+  { nom:"Armand Òptics", addr:"Carrer del Clot, 66, Barcelona", ig:"https://www.instagram.com/armandoptics/", logo:"/partners/armand-optics.png", fitxa:"/patrocinadors/partners/armand-optics/", lat:41.4055, lng:2.1897 },
+  { nom:"Herbolaris Montserrat", addr:"Carrer de Guipúscoa, 77, Barcelona", ig:"https://www.instagram.com/herbolari.montserrat/", logo:"/partners/herbolaris-montserrat.png", fitxa:"/patrocinadors/partners/herbolaris-montserrat/", lat:41.4103, lng:2.1965 },
+  { nom:"Westfield Glòries", addr:"Avinguda Diagonal, 208, Barcelona", ig:"https://www.instagram.com/westfieldglories/", logo:"/partners/westfield-glories.png", fitxa:"/patrocinadors/partners/westfield-glories/", lat:41.4053, lng:2.1893 },
+  { nom:"Clínica Dental Bac de Roda", addr:"Carrer del Concili de Trento, 110, Barcelona", ig:"https://www.instagram.com/clinicadentalbacderoda/", logo:"/partners/clinica-dental-bac-de-roda.png", fitxa:"/patrocinadors/partners/clinica-dental-bac-de-roda/", lat:41.4113, lng:2.1975 },
+  { nom:"Foto Jané", addr:"Carrer de Ciutat de Granada, 52, Barcelona", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/foto-jane.png", fitxa:"/patrocinadors/partners/foto-jane/", lat:41.4095, lng:2.1935 },
+  { nom:"Mercat dels Encants", addr:"Avinguda Meridiana, 69 (Plaça de les Glòries Catalanes), Barcelona", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/mercat-dels-encants.png", fitxa:"/patrocinadors/partners/mercat-dels-encants/", lat:41.4036, lng:2.1877 },
+  { nom:"Ovella Negra", addr:"Carrer de Zamora, 78, Barcelona", ig:"https://www.instagram.com/ovellanegrabcn/", logo:"/partners/ovella-negra.png", fitxa:"/patrocinadors/partners/ovella-negra/", lat:41.4020, lng:2.1930 },
+  { nom:"Nova Farmàcia Clot", addr:"Carrer del Clot, 88, Barcelona", ig:"https://www.instagram.com/novafarmaciaclot/", lat:41.4057, lng:2.1902 },
   { nom:"Districte de Sant Martí", addr:"Plaça de Valentí Almirall, 1, Barcelona", ig:"https://www.instagram.com/bcn_santmarti/", lat:41.4065, lng:2.1885, institucional:true }
 ];
 
 const fora = [
-  { nom:"Aquamiga", addr:"Carrer de Bailén, 92, Barcelona", ig:"https://www.instagram.com/aquamiga_oficial/", lat:41.3958, lng:2.1665 },
-  { nom:"Stepback", addr:"Av. de la Riera de Cassoles, 8 bis, Gràcia, Barcelona", ig:"https://www.instagram.com/stepback.podologia/", lat:41.4020, lng:2.1573 },
-  { nom:"Time Chamber", addr:"Velòdrom d'Horta, Pg. de la Vall d'Hebron 187, Barcelona", ig:"https://www.instagram.com/timechamber_es/", lat:41.4270, lng:2.1480 },
-  { nom:"Illa Fantasia", addr:"Finca Mas Brassó, s/n, Vilassar de Dalt", ig:"https://www.instagram.com/illafantasia/", lat:41.5257, lng:2.3577 },
-  { nom:"L'Aquàrium Barcelona", addr:"Moll d'Espanya, s/n, Port Vell, Barcelona", ig:"https://www.instagram.com/aquariumbarcelona/", lat:41.3766, lng:2.1841 },
-  { nom:"Mullor Fundació", addr:"Passatge de Planell, 6, Barcelona", ig:null, ig_note:"Instagram per confirmar", lat:41.3855, lng:2.1435 },
-  { nom:"Tot Salut", addr:"Carrer de Fluvià, 290, Barcelona", ig:null, ig_note:"A confirmar", lat:41.4088, lng:2.2010 },
-  { nom:"CE Vila Olímpica", addr:"Plaça Tirant lo Blanc, 3, Barcelona", ig:null, ig_note:"A confirmar amb Ana", lat:41.3908, lng:2.1968 },
-  { nom:"Globasket", addr:"Torneig a Lloret de Mar (Girona)", ig:"https://www.instagram.com/globasket/", lat:41.6991, lng:2.8467 }
+  { nom:"Aquamiga", addr:"Carrer de Bailén, 92, Barcelona", ig:"https://www.instagram.com/aquamiga_oficial/", logo:"/partners/aquamiga.png", fitxa:"/patrocinadors/partners/aquamiga/", lat:41.3958, lng:2.1665 },
+  { nom:"Stepback Podologia", addr:"Av. de la Riera de Cassoles, 8 bis, Gràcia, Barcelona", ig:"https://www.instagram.com/stepback.podologia/", logo:"/partners/stepback-podologia.png", fitxa:"/patrocinadors/partners/stepback-podologia/", lat:41.4020, lng:2.1573 },
+  { nom:"Manual Colors", addr:"Carrer de Rocafort, 215, Barcelona", ig:"https://www.instagram.com/manualcolor/", logo:"/partners/manual-colors.png", fitxa:"/patrocinadors/partners/manual-colors/", lat:41.3908, lng:2.1523 },
+  { nom:"Time Chamber", addr:"Velòdrom d'Horta, Barcelona", ig:"https://www.instagram.com/timechamber_es/", logo:"/partners/time-chamber.png", fitxa:"/patrocinadors/partners/time-chamber/", lat:41.4270, lng:2.1480 },
+  { nom:"Illa Fantasia", addr:"Vilassar de Dalt (Maresme)", ig:"https://www.instagram.com/illafantasia/", logo:"/partners/illa-fantasia.png", fitxa:"/patrocinadors/partners/illa-fantasia/", lat:41.5257, lng:2.3577 },
+  { nom:"L'Aquàrium de Barcelona", addr:"Moll d'Espanya, s/n, Port Vell, Barcelona", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/l-aquarium-de-barcelona.png", fitxa:"/patrocinadors/partners/l-aquarium-de-barcelona/", lat:41.3766, lng:2.1841 },
+  { nom:"Tot Salut", addr:"Carrer de Fluvià, 290, Barcelona", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/tot-salut.png", fitxa:"/patrocinadors/partners/tot-salut/", lat:41.4088, lng:2.2010 },
+  { nom:"Panteres Grogues", addr:"Eixample, Barcelona", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/panteres-grogues.png", fitxa:"/patrocinadors/partners/panteres-grogues/", lat:41.3917, lng:2.1649 },
+  { nom:"Globasket (GBK)", addr:"Torneig a Lloret de Mar (Girona)", ig:"https://www.instagram.com/globasket/", logo:"/partners/gbk-globabasket.png", fitxa:"/patrocinadors/partners/gbk-globabasket/", lat:41.6991, lng:2.8467 },
+  { nom:"CE Vila Olímpica", addr:"Plaça Tirant lo Blanc, 3, Barcelona", ig:null, ig_note:"A confirmar amb Ana", lat:41.3908, lng:2.1968 }
 ];
 
-// Part dels 21 oficials, sense local fix al barri.
+// Sense local fix propi — marca/entitat sense adreça d'un sol comerç.
 const senseUbicacio = [
-  { nom:"instax · Fujifilm", ig:"https://www.instagram.com/instaxcamara/" },
-  { nom:"Zapic", ig:null, ig_note:"Instagram per confirmar" }
+  { nom:"instax · Fujifilm", ig:"https://www.instagram.com/instaxcamara/", logo:"/partners/instax-fujifilm.png", fitxa:"/patrocinadors/partners/instax-fujifilm/" },
+  { nom:"Fundació Mullor", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/fundacio-mullor.png", fitxa:"/patrocinadors/partners/fundacio-mullor/" },
+  { nom:"Eix Comercial Sant Martí", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/eix-comercial-sant-marti.png", fitxa:"/patrocinadors/partners/eix-comercial-sant-marti/" },
+  { nom:"Wilson · Baló oficial", ig:null }
 ];
 
 // Bloc "amb el suport de" de la cartela.
@@ -178,9 +256,8 @@ const institucions = [
   { nom:"esportcat · Generalitat de Catalunya", ig:"https://www.instagram.com/esportcat/" }
 ];
 
-// Mencionats per Ana al xat — encara no confirmats a la llista oficial de 21 partners de la cartela.
+// Mencionats per Ana al xat — encara no són a la graella oficial de /patrocinadors/.
 const noPin = [
-  { nom:"Nova Farmàcia Clot", ig:"https://www.instagram.com/novafarmaciaclot/" },
   { nom:"Eix Clot · Federació d'Entitats (Clotfede)", ig:"https://www.instagram.com/clotfede/" },
   { nom:"Canal Disset", ig:"https://www.instagram.com/canaldisset/" },
   { nom:"Josep Maria Bigas i Puig", ig:"https://www.instagram.com/bigas_i_puig/" },
@@ -191,6 +268,24 @@ const noPin = [
   { nom:"Ajuntament de Barcelona", ig:"https://www.instagram.com/barcelona_cat/" }
 ];
 
+function cardHtml(p){
+  return logoBadge(p) + `<div class="body"><b>${p.nom}</b><span class="addr">${p.addr}</span>` +
+    (p.ig ? `<a class="ig" href="${p.ig}" target="_blank" rel="noopener">${t('instagram')}</a>` : `<span style="color:rgba(14,17,22,.4);font-size:13px;">${p.ig_note || t('igPendingCard')}</span>`) +
+    `<a class="gmaps" href="${gmaps(p.addr)}" target="_blank" rel="noopener">${t('gmaps')}</a>` +
+    (p.fitxa ? `<a class="gmaps" href="${p.fitxa}">${t('fitxa')}</a>` : '') + `</div>`;
+}
+function popupHtml(p){
+  const igLine = p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">${t('instagram')} →</a>` : (p.ig_note || '');
+  const fitxaLine = p.fitxa ? `<br><a href="${p.fitxa}">${t('fitxaPopup')}</a>` : '';
+  return `<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">${logoBadge(p,32)}<b>${p.nom}</b></div>${p.addr}<br>${igLine}<br><a href="${gmaps(p.addr)}" target="_blank" rel="noopener">${t('gmaps')}</a>${fitxaLine}`;
+}
+function chipHtml(p){
+  return logoBadge(p, 30) + `<span>${p.nom}</span>` + (p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">${t('ig')}</a>` : `<span class="tag">${p.ig_note || t('igPendingChip')}</span>`) + (p.fitxa ? ` <a href="${p.fitxa}" style="margin-left:4px;">${t('fitxaChip')}</a>` : '');
+}
+
+const mapEntries = [];
+const chipEntries = [];
+
 function buildMap(elId, listId, countId, data, center, zoom){
   const map = L.map(elId).setView(center, zoom);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -199,41 +294,71 @@ function buildMap(elId, listId, countId, data, center, zoom){
   }).addTo(map);
 
   const list = document.getElementById(listId);
-  const markers = [];
-  data.forEach(p => {
+  const items = data.map(p => {
     const m = L.marker([p.lat, p.lng], { icon: pinIcon(p.institucional) }).addTo(map);
-    const igLine = p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">Instagram →</a>` : (p.ig_note || '');
-    m.bindPopup(`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">${logoBadge(p,32)}<b>${p.nom}</b></div>${p.addr}<br>${igLine}<br><a href="${gmaps(p.addr)}" target="_blank" rel="noopener">Veure a Google Maps</a>`);
-    markers.push(m);
-
     const li = document.createElement('li');
-    li.innerHTML = logoBadge(p) + `<div class="body"><b>${p.nom}</b><span class="addr">${p.addr}</span>` +
-      (p.ig ? `<a class="ig" href="${p.ig}" target="_blank" rel="noopener">Instagram</a>` : `<span style="color:rgba(14,17,22,.4);font-size:13px;">${p.ig_note || 'Instagram pendent'}</span>`) +
-      `<a class="gmaps" href="${gmaps(p.addr)}" target="_blank" rel="noopener">Google Maps →</a></div>`;
     li.addEventListener('click', (e) => { if (e.target.tagName !== 'A') { map.flyTo([p.lat, p.lng], 16); m.openPopup(); } });
     li.style.cursor = 'pointer';
     list.appendChild(li);
+    return { p, m, li };
   });
 
-  document.getElementById(countId).textContent = data.length + (data.length === 1 ? ' partner' : ' partners');
-  return { map, markers };
+  mapEntries.push({ countId, items });
+  return { map };
+}
+
+function renderChips(rowId, data){
+  const row = document.getElementById(rowId);
+  const items = data.map(p => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    row.appendChild(chip);
+    return { p, chip };
+  });
+  chipEntries.push(items);
 }
 
 buildMap('map-barri', 'list-barri', 'count-barri', barri, [41.4075, 2.1900], 14);
 buildMap('map-fora', 'list-fora', 'count-fora', fora, [41.42, 2.20], 10);
-
-function renderChips(rowId, data){
-  const row = document.getElementById(rowId);
-  data.forEach(p => {
-    const chip = document.createElement('div');
-    chip.className = 'chip';
-    chip.innerHTML = logoBadge(p, 30) + `<span>${p.nom}</span>` + (p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">IG</a>` : `<span class="tag">${p.ig_note || 'IG pendent'}</span>`);
-    row.appendChild(chip);
-  });
-}
 renderChips('chip-row-sense', senseUbicacio);
 renderChips('chip-row-inst', institucions);
 renderChips('chip-row', noPin);
+
+function refreshDynamicText(){
+  mapEntries.forEach(({ countId, items }) => {
+    items.forEach(({ p, m, li }) => {
+      li.innerHTML = cardHtml(p);
+      m.setPopupContent(popupHtml(p));
+    });
+    document.getElementById(countId).textContent = items.length + ' ' + (items.length === 1 ? t('partner') : t('partners'));
+  });
+  chipEntries.forEach(items => {
+    items.forEach(({ p, chip }) => { chip.innerHTML = chipHtml(p); });
+  });
+}
+
+function applyStaticI18n(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.innerHTML = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('#lang-switch button').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === LANG);
+  });
+}
+
+function setLang(lang){
+  LANG = lang;
+  localStorage.setItem('cbgb_partners_lang', lang);
+  applyStaticI18n();
+  refreshDynamicText();
+}
+
+document.querySelectorAll('#lang-switch button').forEach(btn => {
+  btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang')));
+});
+
+setLang(LANG);
 </script>
 </body>
 </html>

@@ -636,6 +636,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .info-intro .direct a { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; transition: padding-left 0.4s var(--ease), color 0.3s; }
 .info-intro .direct a:hover { padding-left: 12px; color: var(--red); }
 .info-intro .direct a span { margin-left: auto; font-size: 9px; letter-spacing: 0.22em; color: var(--muted); }
+.wa-ic { width: 16px; height: 16px; flex-shrink: 0; fill: #25D366; }
 
 .form { border: 1px solid var(--line); padding: clamp(22px, 3.2vw, 40px); background: var(--paper); }
 .form-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
@@ -815,10 +816,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <h3>Aquest mes</h3>
       <a href="#info">Demanar informació <small>formulari</small></a>
       <a href="#escoleta">Escoleta <small>4 a 7 anys</small></a>
+      <a href="/escoleta/#historia" data-cta="menu-historia-escoleta">Història de l'Escoleta <small>1965</small></a>
       <a href="#calendari">Calendari de partits</a>
       <a href="#seniors">Els sèniors</a>
       <a href="/fotos/" data-cta="menu-galeria">Galeria de fotos</a>
-      <a href="#instagram">Instagram</a>
+      <a href="#instagram">Posts fixats d'Instagram</a>
       <a href="#opinions">Ressenyes i valoració</a>
     </div>
     <div class="menu-col">
@@ -829,7 +831,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <a href="/premsa/" data-cta="menu-premsa">Articles i premsa <small>Guia Clot</small></a>
       <a href="/grup-barna-dades-oficials/" data-cta="menu-club">El club <small>dades oficials</small></a>
       <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
-      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Presentació del club</a>
+      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Què és el Grup Barna <small>presentació</small></a>
       <a href="/patrocinadors/" data-cta="menu-partners">Patrocinadors i partners</a>
       <a href="https://www.cbgrupbarna.com/noticies/" target="_blank" rel="noopener" data-cta="menu-noticies">Notícies</a>
       <a href="#acces">Tots els accessos</a>
@@ -861,6 +863,25 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </div>
   </section>
 
+  <!-- ==== CALENDARI DEL BARNA ==== -->
+  <section class="section band-soft" id="calendari">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow" id="cal-season">Temporada 2026 · 2027</p>
+        <div class="rule"></div>
+        <h2>Calendari del Barna</h2>
+        <p>Els propers partits de tots els equips del club. Horaris, pista i competició.</p>
+      </div>
+      <div class="cal reveal" id="cal-list" aria-live="polite">
+        <div class="cal-empty">Carregant el calendari…</div>
+      </div>
+      <div class="btn-row reveal center" style="justify-content:center;margin-top:clamp(26px,4vw,42px)">
+        <a href="/partits/" class="btn red" data-cta="calendari-app">Obre l'app de partits</a>
+        <a href="/partits/" class="cta" data-cta="calendari-partits">Calendari i resultats complets</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ==== INFORMACIÓ · formulari de contacte i avisos ==== -->
   <section class="section band-soft" id="info">
     <div class="wrap">
@@ -873,8 +894,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
           t'avisem quan s'obrin inscripcions, abans de publicar-les.</p>
           <div class="direct">
             <a href="https://wa.me/34646205526?text=Hola%20Julio!%20Vull%20informaci%C3%B3%20de%20l%27Escoleta" target="_blank" rel="noopener" data-cta="info-wa-escoleta">
+              <svg class="wa-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Escoleta · Julio Torralba <span>646 205 526</span></a>
             <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20informaci%C3%B3%20del%20club" target="_blank" rel="noopener" data-cta="info-wa-club">
+              <svg class="wa-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               WhatsApp del club <span>+34 698 425 153</span></a>
             <a href="mailto:info@cbgrupbarna.com" data-cta="info-email">
               Correu <span>info@cbgrupbarna.com</span></a>
@@ -936,24 +959,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </div>
   </section>
 
-  <!-- ==== CALENDARI DEL BARNA ==== -->
-  <section class="section band-soft" id="calendari">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <p class="eyebrow" id="cal-season">Temporada 2026 · 2027</p>
-        <div class="rule"></div>
-        <h2>Calendari del Barna</h2>
-        <p>Els propers partits de tots els equips del club. Horaris, pista i competició.</p>
-      </div>
-      <div class="cal reveal" id="cal-list" aria-live="polite">
-        <div class="cal-empty">Carregant el calendari…</div>
-      </div>
-      <p class="center reveal" style="margin-top:clamp(26px,4vw,42px)">
-        <a href="/partits/" class="cta" data-cta="calendari-partits">Calendari i resultats complets</a>
-      </p>
-    </div>
-  </section>
-
   <!-- ==== SÈNIORS ==== -->
   <section class="section" id="seniors">
     <div class="wrap">
@@ -1007,8 +1012,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         </div>
         <div class="opi-card">
           <h3>Valora aquesta web</h3>
-          <p>Què et sembla cbgrupbarna.info? Puntua-la i ens arriba el teu vot per WhatsApp.</p>
-          <div class="stars" id="webStars" role="group" aria-label="Valora aquesta web de l'1 al 5">
+          <p>Què et sembla cbgrupbarna.info? Puntua-la: la valoració et porta a deixar la ressenya a Google.</p>
+          <div class="stars" id="webStars" role="group" aria-label="Valora aquesta web de l'1 al 5" data-review-url="https://www.google.com/search?sca_esv=dfc72c22119838cc&amp;aep=1&amp;cs=0&amp;sxsrf=APpeQnsRbzMzlQPi3VcILWKbb_g7DwsOAA:1785941053029&amp;q=C.B.+Grup+Barna+Ressenyes&amp;rflfq=1&amp;num=20&amp;stick=H4sIAAAAAAAAAONgkxK2MDIwsjAxNTIxMjIzMjYyNTAy2sDI-IpR0lnPSU_Bvai0QMEpsSgvUSEotbg4Na8ytXgRK245AIsXnG5SAAAA&amp;rldimm=8202845242262325022&amp;tbm=lcl&amp;hl=ca-ES&amp;sa=X&amp;ved=2ahUKEwipybjw3ImWAxWtP_sDHf9hHLEQ9fQKegQIRRAG&amp;biw=1440&amp;bih=650&amp;dpr=2#lkt=LocalPoiReviews">
             <button type="button" data-v="1" aria-label="1 estrella">&#9733;</button>
             <button type="button" data-v="2" aria-label="2 estrelles">&#9733;</button>
             <button type="button" data-v="3" aria-label="3 estrelles">&#9733;</button>
@@ -1146,7 +1151,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 <footer class="foot">
   <div class="wrap">
     <div class="foot-partners">
-      <p class="eyebrow"><a href="/partners-mapa/" style="color:inherit;text-decoration:none;">Partners i col·laboradors · Mapa →</a></p>
+      <p class="eyebrow">Partners i col·laboradors</p>
       <div class="partners">
         <span>Westfield Glòries</span>
         <span>FCBQ</span>
@@ -1391,11 +1396,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       .catch(buit);
   })();
 
-  // ==== VALORACIÓ DE LA WEB ====
+  // ==== VALORACIÓ DE LA WEB · porta a deixar la ressenya a Google, no per WhatsApp ====
   (function () {
     var box = document.getElementById('webStars');
     if (!box) return;
     var note = document.getElementById('starsNote');
+    var reviewUrl = box.getAttribute('data-review-url');
     var btns = [].slice.call(box.querySelectorAll('button'));
     function paint(n) { btns.forEach(function (b, i) { b.classList.toggle('on', i < n); }); }
     btns.forEach(function (b) {
@@ -1404,10 +1410,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       b.addEventListener('click', function () {
         var v = +b.dataset.v;
         paint(v);
-        if (note) note.textContent = 'Gràcies · ' + v + ' de 5';
+        if (note) note.textContent = 'Gràcies · ' + v + ' de 5 · obrint Google…';
         if (window.gtag) window.gtag('event', 'web_rating', { rating: v });
-        var txt = encodeURIComponent('Valoro la web cbgrupbarna.info amb ' + v + '/5 estrelles.');
-        window.open('https://api.whatsapp.com/send?phone=+34698425153&text=' + txt, '_blank', 'noopener');
+        if (reviewUrl) window.open(reviewUrl, '_blank', 'noopener');
       });
     });
     box.addEventListener('mouseleave', function () { paint(0); });
