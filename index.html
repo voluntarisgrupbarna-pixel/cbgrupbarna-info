@@ -61,12 +61,11 @@
 <!-- DNS prefetch per a recursos externs -->
 <link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
-<link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//www.instagram.com">
 <link rel="dns-prefetch" href="//www.tiktok.com">
 
 <!-- Google Analytics 4 (mateixa propietat que el site del 3x3) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script src="/js/galetes.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -532,6 +531,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
 .menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
 .menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+/* El menú de dalt topava amb l'escut centrat: els enllaços secundaris
+   (Premsa i Patrocinadors) surten només del menú complet i del peu. */
+.head-side .head-nav a.opt { display: none; }
 @media (max-width: 1080px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
 

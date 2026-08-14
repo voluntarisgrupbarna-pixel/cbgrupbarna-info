@@ -131,8 +131,11 @@ La conclusió no és «tornar enrere», és que la migració va deixar fora la p
    **FET (14/08/2026):** `/politica-de-privacitat/` i `/avis-legal/`, amb la columna «Legal» al peu
    de 59 pàgines i l'enllaç a la política dins de cada casella de consentiment. Les dues caselles
    que apuntaven a `/premidonaesport/` com si fos la política ara apunten a la política de debò.
-   **Queda pendent de l'Ana:** el NIF de l'entitat (no surt enlloc del repositori) i decidir què es
-   fa amb Google Analytics, que segueix carregant-se a 34 pàgines sense demanar consentiment.
+   **Completat el mateix dia:** NIF **G58432584** a les dues pàgines legals, i pantalla de
+   consentiment de galetes a tot el web. Google Analytics ja no es carrega fins que la persona
+   accepta: comprovat amb el registre de xarxa del navegador que abans d'acceptar no surt ni una
+   petició cap a Google, i que després d'acceptar sí. La decisió es pot canviar des de l'enllaç
+   «Galetes» del peu.
 2. **`/documents/`** — hub de documents del club, amb l'assegurança i el protocol d'accident.
 3. **`/instal·lacions/`** — les sis pistes, amb adreça i mapa.
 4. **Horaris de l'Escoleta** a `/escoleta/`.
