@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#2ea043}
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#2ea043}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
   nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
@@ -37,15 +37,15 @@
   .btn:disabled{opacity:.5;cursor:default}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
   .btn.small{padding:.3rem .65rem;font-size:.72rem}
-  .err{display:none;background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
   .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
   .hint{font-size:.72rem;color:var(--muted);margin-top:.6rem;line-height:1.5}
-  .hint a{color:rgba(200,16,46,.85)}
+  .hint a{color:rgba(226,6,19,.85)}
   .day{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--red);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin:1.2rem 0 .5rem;letter-spacing:.04em}
   .prow{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px dashed var(--line);font-size:.85rem;flex-wrap:wrap}
   .prow:last-child{border-bottom:none}
   .cond{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:.15rem .55rem;flex:none}
-  .cond.local{background:rgba(200,16,46,.18);color:#ff8fa0}
+  .cond.local{background:rgba(226,6,19,.18);color:#ff8fa0}
   .cond.visitant{background:rgba(255,255,255,.07);color:var(--muted)}
   .pinfo{flex:1;min-width:180px}
   .pinfo b{display:block;font-weight:500}
@@ -117,7 +117,7 @@
     <div class="hint">No es pot repetir el mateix equip amb el mateix rival el mateix dia.</div>
   </div>
 
-  <div id="winalert" style="display:none;background:linear-gradient(135deg,rgba(46,160,67,.16),rgba(200,16,46,.12));border:1px solid rgba(46,160,67,.45);border-radius:12px;padding:1rem 1.1rem;margin-top:1.5rem">
+  <div id="winalert" style="display:none;background:linear-gradient(135deg,rgba(46,160,67,.16),rgba(226,6,19,.12));border:1px solid rgba(46,160,67,.45);border-radius:12px;padding:1rem 1.1rem;margin-top:1.5rem">
     <b style="font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.04em;color:#3ddc84;display:block" id="winalert-t"></b>
     <p style="font-size:.84rem;color:rgba(255,255,255,.7);margin-top:.2rem;line-height:1.5" id="winalert-p"></p>
     <a class="btn" style="margin-top:.8rem;text-decoration:none" href="/partits/cartell.html">Generar cartell i copy →</a>

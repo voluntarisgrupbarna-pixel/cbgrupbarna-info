@@ -34,8 +34,8 @@
 <style>
 :root {
   /* Sistema visual CB Grup Barna — només 3 colors de marca */
-  --red: #E63329;          /* identitat, emoció */
-  --red-ink: #B7231B;      /* text vermell sobre crema, contrast AA */
+  --red: #E20613;          /* identitat, emoció */
+  --red-ink: #A8040E;      /* text vermell sobre crema, contrast AA */
   --ink: #0E1116;          /* negre premium */
   --cream: #F4F1EC;        /* crema, el que trenca el bloc */
   --paper: #FFFFFF;
@@ -46,7 +46,7 @@
   /* Semàntics de resultat. NO són colors de marca i no s'han de fer servir
      per decorar: només per dir si un partit s'ha guanyat o s'ha perdut. */
   --win: #1B7F4B;
-  --loss: #B7231B;
+  --loss: #A8040E;
   /* compatibilitat amb noms antics */
   --black: #F4F1EC;
   --panel: #FFFFFF;
@@ -73,7 +73,7 @@ a { color:inherit; }
 /* ===== HEADER ===== */
 header {
   text-align:center; padding: 26px 16px 10px;
-  background: linear-gradient(180deg, rgba(230,51,41,0.10), transparent 78%);
+  background: linear-gradient(180deg, rgba(226,6,19,0.10), transparent 78%);
 }
 header img { width:64px; height:64px; }
 h1 { font-family:'Anton', sans-serif; letter-spacing:-0.5px; font-size: clamp(32px, 8vw, 44px); letter-spacing:1.5px; line-height:1; margin-top:6px; }
@@ -126,7 +126,7 @@ h1 span { color: var(--red); }
 .match, .team-row, .g-box, .winners, .stat, .tile { border-radius:16px; }
 .match { padding:16px; margin-bottom:12px; box-shadow:0 1px 2px rgba(14,17,22,.04); }
 .team-row { padding:14px 16px; margin-bottom:10px; box-shadow:0 1px 2px rgba(14,17,22,.04); transition:.15s; }
-.team-row:hover { border-color:rgba(230,51,41,.35); transform:translateY(-1px); }
+.team-row:hover { border-color:rgba(226,6,19,.35); transform:translateY(-1px); }
 .g-box { padding:22px; margin-bottom:16px; box-shadow:0 1px 2px rgba(14,17,22,.04); }
 .tab { transition:.15s; }
 .chip { transition:.12s; }
@@ -161,7 +161,7 @@ h1 span { color: var(--red); }
 }
 .wk-today {
   width:100%; margin-bottom:12px; padding:8px; border-radius:10px;
-  background:rgba(227,30,36,0.12); border:1px dashed rgba(227,30,36,0.45);
+  background:rgba(226,6,19,0.12); border:1px dashed rgba(226,6,19,0.45);
   color:var(--red); font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1.2px; text-transform:uppercase;
 }
 
@@ -206,7 +206,7 @@ h1 span { color: var(--red); }
   font-family:'Inter', sans-serif; font-size:8.5px; letter-spacing:1px; font-weight:700;
   padding:3px 8px; border-radius:99px; text-transform:uppercase;
 }
-.m-badge.casa { background:rgba(230,51,41,0.14); color:var(--red-ink); }
+.m-badge.casa { background:rgba(226,6,19,0.14); color:var(--red-ink); }
 .m-badge.fora { background:rgba(14,17,22,0.07); color:var(--muted); }
 .m-eq { margin-left:auto; font-family:'Inter', sans-serif; font-size:9px; letter-spacing:0.8px; color:var(--muted); text-transform:uppercase; }
 .m-teams { display:flex; align-items:center; gap:10px; }
@@ -226,7 +226,7 @@ h1 span { color: var(--red); }
 .m-loc a {
   flex-shrink:0; text-decoration:none; white-space:nowrap;
   font-family:'Inter', sans-serif; font-size:9px; letter-spacing:0.8px;
-  color:var(--red-ink); border:1px solid rgba(230,51,41,0.30); padding:4px 9px; border-radius:99px;
+  color:var(--red-ink); border:1px solid rgba(226,6,19,0.30); padding:4px 9px; border-radius:99px;
 }
 .m-cat { font-family:'Inter', sans-serif; font-size:8.5px; letter-spacing:0.8px; color:var(--muted); text-transform:uppercase; margin-top:8px; }
 .m-edit { display:flex; align-items:center; gap:8px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); }
@@ -311,12 +311,12 @@ h1 span { color: var(--red); }
   font-family:'Anton', sans-serif; font-size:15px; letter-spacing:1px;
 }
 .g-btn.ghost { background:var(--panel2); border:1px solid var(--border); color:var(--ink); }
-.g-btn.warn { background:transparent; border:1px solid rgba(230,51,41,0.4); color:var(--red-ink); }
+.g-btn.warn { background:transparent; border:1px solid rgba(226,6,19,0.4); color:var(--red-ink); }
 .drop {
   border:2px dashed rgba(14,17,22,0.16); border-radius:14px; padding:26px 14px;
   text-align:center; color:var(--muted); font-size:12px; transition:all .15s;
 }
-.drop.over { border-color:var(--red); background:rgba(227,30,36,0.06); color:var(--red-ink); }
+.drop.over { border-color:var(--red); background:rgba(226,6,19,0.06); color:var(--red-ink); }
 .g-log { font-family:'Inter', sans-serif; font-size:10px; color:var(--win); margin-top:10px; white-space:pre-wrap; line-height:1.7; }
 /* ===== CARTELLS ===== */
 .c-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
@@ -385,7 +385,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   <img src="../logo.png" alt="Escut CB Grup Barna">
   <h1>Dies de <span>partit</span></h1>
   <div class="head-tag">El club de bàsquet més gran de Barcelona · Temporada 2026-2027 · #SomClot</div>
-  <br><a class="back" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="border:1px solid rgba(227,30,36,.45);border-radius:99px;padding:6px 14px;margin-top:8px;color:#E31E24">📸 SEGUEIX @CBGRUPBARNA</a>
+  <br><a class="back" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="border:1px solid rgba(226,6,19,.45);border-radius:99px;padding:6px 14px;margin-top:8px;color:#E20613">📸 SEGUEIX @CBGRUPBARNA</a>
   <br><button class="back" id="pwa-btn" style="display:none;border:1px solid var(--border);border-radius:99px;padding:6px 14px;margin-top:8px">📲 INSTAL·LAR L'APP AL MÒBIL</button>
 </header>
 
@@ -558,7 +558,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       <button class="g-btn" id="g-unlock">Entrar</button></details>
     </div>
     <div id="g-open" style="display:none">
-      <div class="g-box" style="background:linear-gradient(135deg,rgba(230,51,41,.10),var(--paper) 60%);border-color:rgba(230,51,41,.30)">
+      <div class="g-box" style="background:linear-gradient(135deg,rgba(226,6,19,.10),var(--paper) 60%);border-color:rgba(226,6,19,.30)">
         <h3>🗓️ La rutina del cap de setmana</h3>
         <p><b>1.</b> Dijous, comprovar que hi ha tots els partits · <b>2.</b> Generar el cartell de la jornada i els game days ·
         <b>3.</b> Dissabte i diumenge, posar els resultats · <b>4.</b> Diumenge a la nit, publicar la menció als guanyadors
@@ -631,7 +631,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 <button class="edit-pill" id="edit-pill">✏️ MODE GESTIÓ ACTIU · SORTIR</button>
 
 <footer>
-  <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="display:inline-block;background:#E31E24;color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font-family:'Anton',sans-serif;font-size:16px;letter-spacing:1px;margin-bottom:14px">📸 SEGUEIX EL BARNA A INSTAGRAM</a><br>
+  <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="display:inline-block;background:#E20613;color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font-family:'Anton',sans-serif;font-size:16px;letter-spacing:1px;margin-bottom:14px">📸 SEGUEIX EL BARNA A INSTAGRAM</a><br>
   <a href="/" style="color:#8a8a8a;text-decoration:none">CB GRUP BARNA · BÀSQUET AL CLOT DES DE 1965</a><br>
   Dades: FCBQ · basquetcatala.cat/club/24
 </footer>
@@ -854,7 +854,7 @@ function previsioPartit(p, m) {
 }
 function avisModificacio(p) {
   if (!p.avis || p.avis.expira < todayStr()) return '';
-  return `<div style="margin-top:8px;padding:8px 10px;background:rgba(230,51,41,.10);border:1px solid rgba(230,51,41,.30);border-radius:10px;font-size:11.5px;color:var(--red-ink)">
+  return `<div style="margin-top:8px;padding:8px 10px;background:rgba(226,6,19,.10);border:1px solid rgba(226,6,19,.30);border-radius:10px;font-size:11.5px;color:var(--red-ink)">
     ✏️ <b>MODIFICAT</b> el ${fmtDia(p.avis.detectat).toLowerCase()} · ${p.avis.resum}</div>`;
 }
 function matchCard(p, m, showDate) {
@@ -915,7 +915,7 @@ function renderCanvisBanner() {
     `<li>${it.equip} vs ${it.rival}: <b>${it.camp}</b> ${(it.abans && it.abans!=='—') ? `${it.abans} → ` : ''}${it.despres}</li>`
   ).join('');
   el.innerHTML = `
-  <div style="margin-bottom:14px;padding:12px 14px;background:rgba(230,51,41,.08);border:1px solid rgba(230,51,41,.25);border-radius:14px;font-size:12.5px;color:var(--ink)">
+  <div style="margin-bottom:14px;padding:12px 14px;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.25);border-radius:14px;font-size:12.5px;color:var(--ink)">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
       <b>📣 El robot FCBQ ha detectat ${items.length} canvi${items.length===1?'':'s'} de calendari</b>
       <button onclick="marcarCanvisVistos()" style="border:none;background:none;color:var(--red-ink);font-size:12px;cursor:pointer;text-decoration:underline">D'acord, entesos</button>
@@ -1001,7 +1001,7 @@ function renderResultats() {
   document.getElementById('millors-box').innerHTML = enRatxa.length ? `<div class="winners" style="background:linear-gradient(135deg,rgba(34,197,94,.10),var(--panel) 60%);border-color:rgba(34,197,94,.35)">
     <h3 style="color:var(--red)">🔥 Equips que van millor ara mateix</h3>
     ${enRatxa.map(({e,s})=>`<div class="wrow">${e.emoji||'🏀'} ${e.nom}<small>${s.streak} victòries seguides · ${s.w}-${s.l}</small></div>`).join('')}
-    <a class="g-btn" style="text-decoration:none;background:#E31E24" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">📸 Segueix-los a @cbgrupbarna</a>
+    <a class="g-btn" style="text-decoration:none;background:#E20613" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">📸 Segueix-los a @cbgrupbarna</a>
   </div>` : '';
   document.getElementById('ratxes-list').innerHTML = rows.map(({e,s})=>{
     let stk = '<span class="streak">Sense partits jugats</span>';
@@ -1797,7 +1797,7 @@ async function genCartell() {
   cv.width = W; cv.height = H;
   const S = H / 1350;                    // escala respecte al disseny original
   const px = n => Math.round(n * S);     // mides tipogràfiques proporcionals
-  const RED='#E63329', INK='#0E1116', CREAM='#F4F1EC', WHITE='#ffffff';
+  const RED='#E20613', INK='#0E1116', CREAM='#F4F1EC', WHITE='#ffffff';
   const mode = document.getElementById('c-bgm').value || 'cream';
   const BG   = mode==='red' ? RED : mode==='ink' ? INK : CREAM;      // fons de la peça
   const FG   = mode==='cream' ? INK : WHITE;                          // tinta principal
@@ -2141,7 +2141,7 @@ async function genFinde(m) {
   const [W, H] = (document.getElementById('c-fmt').value || '1080x1080').split('x').map(Number);
   cv.width = W; cv.height = H;
   const S = H / 1350, px = n => Math.round(n * S);
-  const RED='#E63329', INK='#0E1116', WHITE='#ffffff';
+  const RED='#E20613', INK='#0E1116', WHITE='#ffffff';
   const W80 = 'rgba(255,255,255,.86)', W60 = 'rgba(255,255,255,.68)';
 
   /* Fons: foto a sangre amb vel fosc (el text sempre en blanc, com la referència) */
