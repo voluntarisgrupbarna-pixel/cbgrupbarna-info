@@ -25,6 +25,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
+<style>
+.version-switch{display:inline-flex;border:1px solid var(--line);margin-top:4px}
+.vs-btn{font-family:var(--display);font-size:9.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;padding:9px 16px;color:var(--ink-2);text-decoration:none;transition:background .25s ease,color .25s ease}
+.vs-btn+.vs-btn{border-left:1px solid var(--line)}
+.vs-btn.is-active{background:var(--ink);color:#fff}
+.vs-btn:not(.is-active):hover{background:var(--paper-2);color:var(--ink)}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -108,7 +115,11 @@
 <div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/basquet-femeni/">Bàsquet femení</a> · <span>El Mètode Barna</span></nav></div>
 <div class="wrap">
   <div class="phead narrow">
-    <p class="eyebrow red">La història completa</p>
+    <div class="version-switch" role="tablist" aria-label="Versió de la pàgina">
+      <a href="/basquet-femeni/" class="vs-btn" role="tab" aria-selected="false">Light</a>
+      <a href="/basquet-femeni/el-metode-barna/" class="vs-btn is-active" role="tab" aria-selected="true" aria-current="page">B · Editorial</a>
+    </div>
+    <p class="eyebrow red" style="margin-top:16px">La història completa</p>
     <h1>El Mètode Barna: 60 anys de bàsquet femení al Clot</h1>
     <p class="lede">La versió llarga de com el bàsquet femení del Barna va passar de ser "l'altre
     equip" a ser mig club — amb dades, noms propis i la comparativa sencera amb els clubs que es
