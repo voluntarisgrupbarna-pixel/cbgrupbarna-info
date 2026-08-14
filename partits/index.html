@@ -421,40 +421,62 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 
   <!-- ===== VISTA RESULTATS ===== -->
   <section class="view" id="v-resultats">
-    <div id="winners-box"></div>
-    <div id="millors-box"></div>
-    <div class="stat-row" id="club-stats"></div>
-    <div class="sec-t">🔥 Ratxes per equip</div>
-    <div id="ratxes-list"></div>
-    <div class="sec-t">⏳ Pendents de resultat</div>
-    <p style="font-size:11px;color:var(--muted);margin-bottom:10px">Partits ja jugats sense marcador introduït. Activa el mode gestió per posar-los.</p>
-    <div id="pendents-list"></div>
+    <div class="g-box" id="resultats-lock">
+      <h3>🔐 Resultats i ratxes</h3>
+      <p>Aquesta secció és només per a l'staff del club.</p>
+      <input type="password" id="r-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
+      <button class="g-btn" id="r-unlock">Entrar</button>
+    </div>
+    <div id="resultats-open" style="display:none">
+      <div id="winners-box"></div>
+      <div id="millors-box"></div>
+      <div class="stat-row" id="club-stats"></div>
+      <div class="sec-t">🔥 Ratxes per equip</div>
+      <div id="ratxes-list"></div>
+      <div class="sec-t">⏳ Pendents de resultat</div>
+      <p style="font-size:11px;color:var(--muted);margin-bottom:10px">Partits ja jugats sense marcador introduït. Activa el mode gestió per posar-los.</p>
+      <div id="pendents-list"></div>
+    </div>
   </section>
 
   <!-- ===== VISTA ANÀLISI ===== -->
   <section class="view" id="v-analisi">
-    <div id="an-avis"></div>
-    <div id="an-setmana"></div>
-    <div id="an-equips"></div>
-    <div id="an-pistes"></div>
-    <div id="an-rivals"></div>
+    <div class="g-box" id="analisi-lock">
+      <h3>🔐 Anàlisi</h3>
+      <p>Aquesta secció és només per a l'staff del club.</p>
+      <input type="password" id="a-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
+      <button class="g-btn" id="a-unlock">Entrar</button>
+    </div>
+    <div id="analisi-open" style="display:none">
+      <div id="an-avis"></div>
+      <div id="an-setmana"></div>
+      <div id="an-equips"></div>
+      <div id="an-pistes"></div>
+      <div id="an-rivals"></div>
+    </div>
   </section>
 
   <!-- ===== VISTA EQUIPS ===== -->
   <section class="view" id="v-equips">
-    <div id="equips-list"></div>
-    <div id="equip-detall" style="display:none"></div>
+    <div class="g-box" id="equips-lock">
+      <h3>🔐 Equips</h3>
+      <p>Aquesta secció és només per a l'staff del club.</p>
+      <input type="password" id="e-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
+      <button class="g-btn" id="e-unlock">Entrar</button>
+    </div>
+    <div id="equips-open" style="display:none">
+      <div id="equips-list"></div>
+      <div id="equip-detall" style="display:none"></div>
+    </div>
   </section>
 
   <!-- ===== VISTA CARTELLS ===== -->
   <section class="view" id="v-cartells">
     <div class="g-box" id="cartells-lock">
       <h3>🔐 Cartells del club</h3>
-      <p>La generació i descàrrega de cartells és només per a l'staff de comunicació. Entra amb el Google del club. Els anàlisis i resultats són públics a les altres pestanyes.</p>
-      <div id="c-gbtn" style="margin-bottom:12px"></div>
-      <details><summary style="font-size:11px;color:var(--muted);cursor:pointer;margin-bottom:8px">O entrar amb clau</summary>
+      <p>La generació i descàrrega de cartells és només per a l'staff de comunicació.</p>
       <input type="password" id="c-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
-      <button class="g-btn" id="c-unlock">Entrar</button></details>
+      <button class="g-btn" id="c-unlock">Entrar</button>
     </div>
     <div id="cartells-open" style="display:none">
     <div class="g-box">
@@ -548,11 +570,9 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   <section class="view" id="v-gestio">
     <div class="g-box" id="g-lock">
       <h3>🔐 Mode gestió</h3>
-      <p>Zona per introduir resultats, pujar els PDF de la federació i actualitzar posicions de lliga. Entra amb el Google del club (<b>voluntarisgrupbarna@gmail.com</b>).</p>
-      <div id="g-gbtn" style="margin-bottom:12px"></div>
-      <details><summary style="font-size:11px;color:var(--muted);cursor:pointer;margin-bottom:8px">O entrar amb clau</summary>
+      <p>Zona per introduir resultats, pujar els PDF de la federació i actualitzar posicions de lliga.</p>
       <input type="password" id="g-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
-      <button class="g-btn" id="g-unlock">Entrar</button></details>
+      <button class="g-btn" id="g-unlock">Entrar</button>
     </div>
     <div id="g-open" style="display:none">
       <div class="g-box" style="background:linear-gradient(135deg,rgba(230,51,41,.10),var(--paper) 60%);border-color:rgba(230,51,41,.30)">
@@ -642,8 +662,6 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   </div>
 </nav>
 
-<script src="../admin/config.js"></script>
-<script src="../admin/auth.js"></script>
 <script>
 /* =========================================================
    PARTITS & RESULTATS CBGB · vanilla JS, sense dependències
@@ -653,7 +671,7 @@ const LS_KEY = 'cbgbPartitsV1';
 /* El codi d'accés NO és al fitxer: només se'n guarda l'empremta SHA-256, així
    ningú el pot llegir mirant el codi font de la pàgina. Per canviar-lo, calcula
    la nova empremta i substitueix-la aquí. */
-const EDIT_KEY_HASH = '28debfa10a50cfd9b5f78fd5e1f5e68bdaa4ffe6512e1e24489c6d9c34aa292b';
+const EDIT_KEY_HASH = '53df25f8b548edbd4a3239795a09db9dbddef94069ede069be8f9c27cb6a79c4';
 function sha256(msg){
   const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
   0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
@@ -2353,15 +2371,15 @@ document.getElementById('wk-next').addEventListener('click', ()=>{ const w=weeke
 document.getElementById('wk-today').addEventListener('click', ()=>{ state.wk=null; renderJornada(); });
 
 function applyStaffUI() {
-  document.getElementById('g-lock').style.display='none';
-  document.getElementById('g-open').style.display='block';
-  document.getElementById('cartells-lock').style.display='none';
-  document.getElementById('cartells-open').style.display='block';
+  ['g','cartells','resultats','analisi','equips'].forEach(k=>{
+    document.getElementById(k+'-lock').style.display='none';
+    document.getElementById(k+'-open').style.display='block';
+  });
   document.getElementById('edit-pill').classList.add('on');
 }
 function tryUnlock(inputId) {
   if (sha256(document.getElementById(inputId).value.trim()) === EDIT_KEY_HASH) {
-    editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','clau');
+    editMode = true; sessionStorage.setItem('cbgbEdit','1');
     applyStaffUI(); renderAll();
   } else alert('Clau incorrecta');
 }
@@ -2369,6 +2387,12 @@ document.getElementById('g-unlock').addEventListener('click', ()=>tryUnlock('g-p
 document.getElementById('g-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('g-pass'); });
 document.getElementById('c-unlock').addEventListener('click', ()=>tryUnlock('c-pass'));
 document.getElementById('c-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('c-pass'); });
+document.getElementById('r-unlock').addEventListener('click', ()=>tryUnlock('r-pass'));
+document.getElementById('r-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('r-pass'); });
+document.getElementById('a-unlock').addEventListener('click', ()=>tryUnlock('a-pass'));
+document.getElementById('a-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('a-pass'); });
+document.getElementById('e-unlock').addEventListener('click', ()=>tryUnlock('e-pass'));
+document.getElementById('e-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('e-pass'); });
 document.getElementById('g-download').addEventListener('click', ()=>{
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([exportJson()],{type:'application/json'}));
@@ -2377,8 +2401,7 @@ document.getElementById('g-download').addEventListener('click', ()=>{
 document.getElementById('g-copy').addEventListener('click', async ()=>{ await navigator.clipboard.writeText(exportJson()); alert('JSON copiat ✅'); });
 document.getElementById('edit-pill').addEventListener('click', ()=>{
   if (confirm('Vols sortir del mode gestió?')) {
-    sessionStorage.removeItem('cbgbEdit'); sessionStorage.removeItem('cbgbEditSrc');
-    if (window.CBGBAuth) CBGBAuth.logout();
+    sessionStorage.removeItem('cbgbEdit');
     location.reload();
   }
 });
@@ -2402,27 +2425,7 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
     document.getElementById('jornada-list').innerHTML = '<div class="empty">No s\'ha pogut carregar data.json 😕</div>';
   }
   try { CANVIS = await (await fetch('canvis.json', {cache:'no-store'})).json(); } catch(e) { CANVIS = {canvis:[]}; }
-  // si el mode gestió venia d'un login de Google i la sessió ja no és vàlida, es tanca
-  if (sessionStorage.getItem('cbgbEditSrc')==='google' && !(window.CBGBAuth && CBGBAuth.isStaff())) {
-    sessionStorage.removeItem('cbgbEdit'); sessionStorage.removeItem('cbgbEditSrc');
-  }
-  if (window.CBGBAuth && CBGBAuth.isStaff()) {
-    editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','google'); applyStaffUI();
-  }
-  else if (sessionStorage.getItem('cbgbEdit')==='1') { editMode = true; applyStaffUI(); }
-  else if (window.CBGBAuth) {
-    const onGoogle = (err, sess) => {
-      if (err === 'NO_CONFIG') {
-        document.querySelectorAll('#g-gbtn,#c-gbtn').forEach(el=>{
-          el.innerHTML = '<a href="../admin/" style="color:var(--red);font-size:12px">⚙️ Connecta el Google del club al panell d\'administració →</a>'; });
-        return;
-      }
-      if (err) { alert(err); return; }
-      editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','google'); applyStaffUI(); renderAll();
-    };
-    CBGBAuth.renderButton('g-gbtn', onGoogle);
-    CBGBAuth.renderButton('c-gbtn', onGoogle);
-  }
+  if (sessionStorage.getItem('cbgbEdit')==='1') { editMode = true; applyStaffUI(); }
   await loadRivals();
   renderAll();
   // PWA: instal·lable a Android/iPhone
