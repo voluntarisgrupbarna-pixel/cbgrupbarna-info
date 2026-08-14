@@ -1,5 +1,5 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Actualitzat: 2026-08-09
+// Actualitzat: 2026-08-12
 
 window.GALERIA_EVENTS = [
   {
@@ -92,7 +92,8 @@ window.GALERIA_EVENTS = [
       "1786288718066-nd87r.jpg",
       "1786288724131-6ch2y.jpg",
       "1786288731338-3xqu0.jpg",
-      "1786288737620-qg7lb.jpg"
+      "1786288737620-qg7lb.jpg",
+      "1786540011167-ax8a0.mov"
     ],
     "allow_download": true,
     "source": "repo"
