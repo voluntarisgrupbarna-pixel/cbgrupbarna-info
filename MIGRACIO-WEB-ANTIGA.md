@@ -127,7 +127,12 @@ La conclusió no és «tornar enrere», és que la migració va deixar fora la p
 
 ## Ordre que proposo
 
-1. **Legal** — política de privacitat i avís legal, enllaçats al peu i als formularis.
+1. ~~**Legal** — política de privacitat i avís legal, enllaçats al peu i als formularis.~~
+   **FET (14/08/2026):** `/politica-de-privacitat/` i `/avis-legal/`, amb la columna «Legal» al peu
+   de 59 pàgines i l'enllaç a la política dins de cada casella de consentiment. Les dues caselles
+   que apuntaven a `/premidonaesport/` com si fos la política ara apunten a la política de debò.
+   **Queda pendent de l'Ana:** el NIF de l'entitat (no surt enlloc del repositori) i decidir què es
+   fa amb Google Analytics, que segueix carregant-se a 34 pàgines sense demanar consentiment.
 2. **`/documents/`** — hub de documents del club, amb l'assegurança i el protocol d'accident.
 3. **`/instal·lacions/`** — les sis pistes, amb adreça i mapa.
 4. **Horaris de l'Escoleta** a `/escoleta/`.
