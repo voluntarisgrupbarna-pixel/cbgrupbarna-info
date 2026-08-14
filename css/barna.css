@@ -12,7 +12,7 @@
   --line-dark: rgba(255,255,255,0.15);
   --paper: #ffffff;
   --paper-2: #f6f4f1;
-  --red: #E31E24;
+  --red: #E20613;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Jost', 'Futura', 'Century Gothic', -apple-system, sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -130,7 +130,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.18
 .cal-card h3 { font-family: var(--display); font-size: 13.5px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; }
 .cal-card-meta { font-family: var(--display); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 .cal-card .btn { margin-top: 10px; width: 100%; }
-.cal-notice { display: none; align-items: center; gap: 8px; margin-top: 4px; padding: 8px 10px; border: 1px solid rgba(227,30,36,0.35); background: rgba(227,30,36,0.06); font-size: 11px; line-height: 1.5; color: var(--ink); }
+.cal-notice { display: none; align-items: center; gap: 8px; margin-top: 4px; padding: 8px 10px; border: 1px solid rgba(226,6,19,0.35); background: rgba(226,6,19,0.06); font-size: 11px; line-height: 1.5; color: var(--ink); }
 .cal-notice.on { display: flex; }
 .cal-notice a { border-bottom: 1px solid var(--red); white-space: nowrap; }
 .cal-pending { border-style: dashed; opacity: 0.6; }

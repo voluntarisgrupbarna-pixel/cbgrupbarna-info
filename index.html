@@ -41,7 +41,7 @@
 <!-- Indexació i geo -->
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="author" content="CB Grup Barna">
-<meta name="keywords" content="academia de baloncesto Barcelona, acadèmia de bàsquet Barcelona, baloncesto base Barcelona, club baloncesto Barcelona, baloncesto Sant Martí, escuela baloncesto Barcelona, campus baloncesto verano Barcelona, 3x3 Barcelona, baloncesto El Clot, bàsquet base Barcelona, CB Grup Barna, Grup Barna baloncesto, Clot bàsquet, escoleta bàsquet, campus estiu bàsquet, 3x3 Westfield Glòries, club esportiu Sant Martí, basket infantil Barcelona, baloncesto base infantil Barcelona">
+<meta name="keywords" content="academia de baloncesto Barcelona, acadèmia de bàsquet Barcelona, baloncesto base Barcelona, club baloncesto Barcelona, baloncesto Sant Martí, escuela baloncesto Barcelona, campus baloncesto verano Barcelona, 3x3 Barcelona, baloncesto El Clot, bàsquet base Barcelona, CB Grup Barna, Grup Barna baloncesto, Clot bàsquet, escoleta bàsquet, campus estiu bàsquet, 3x3 Westfield Glòries, club esportiu Sant Martí, basket infantil Barcelona, baloncesto base infantil Barcelona, bàsquet femení Barcelona, baloncesto femenino Barcelona, club de bàsquet femení Catalunya, Premi Dona i Esport, Mètode Barna">
 <meta name="geo.region" content="ES-CT">
 <meta name="geo.placename" content="Barcelona, Districte de Sant Martí, El Clot">
 <meta name="geo.position" content="41.4036;2.1878">
@@ -389,7 +389,7 @@
         {
           "@type": "SiteNavigationElement",
           "position": 2,
-          "name": "Calendari de partits i resultats",
+          "name": "Dies de partit",
           "url": "https://cbgrupbarna.info/partits/",
           "description": "Calendari i resultats de tots els equips federats del club."
         },
@@ -438,8 +438,8 @@
   --line-dark: rgba(255,255,255,0.15);
   --paper: #ffffff;
   --paper-2: #f6f4f1;
-  --red: #E31E24;
-  --red-dark: #a81318;
+  --red: #E20613;
+  --red-dark: #A8040E;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Jost', 'Futura', 'Century Gothic', -apple-system, sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -463,6 +463,59 @@ img { max-width: 100%; height: auto; display: block; }
 .section { padding: clamp(48px, 7vw, 104px) 0; }
 .section.tight { padding: clamp(34px, 5vw, 66px) 0; }
 .band-soft { background: var(--paper-2); }
+
+/* ==== FRANGES · navegació de portes, en rectangles apilats ====
+   Substitueix la llista plana d'enllaços com a primera porta de la web.
+   Fa servir fotos del club que ja eren al repositori sense usar-se. El
+   vermell hi és superfície, no només accent: veure sistema-visual-cbgb. */
+.franges { display: flex; flex-direction: column; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.franja { position: relative; display: grid; grid-template-columns: 190px minmax(0, 1fr) auto; align-items: stretch; background: var(--paper); min-height: 108px; overflow: hidden; transition: background 0.35s var(--ease); }
+.franja:nth-child(even):not(.franja--red):not(.franja--ink):hover { background: var(--ink); }
+.franja:nth-child(even):not(.franja--red):not(.franja--ink) { background: var(--paper-2); }
+.franja:hover { background: var(--ink); }
+.franja:hover .franja-t, .franja:hover .franja-go em { color: #fff; }
+.franja:hover .franja-s { color: rgba(255,255,255,0.7); }
+.franja:hover .franja-go i { background: var(--red); width: 46px; }
+.franja-ph { position: relative; overflow: hidden; background: var(--paper-2); }
+.franja-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.7s var(--ease); }
+.franja:hover .franja-ph img { transform: scale(1.05); }
+.franja-tx { padding: 20px 26px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.franja-t { display: block; font-family: var(--display); font-size: clamp(18px, 2.4vw, 27px); font-weight: 400; letter-spacing: 0.01em; text-transform: uppercase; line-height: 0.98; transition: color 0.3s; }
+.franja-s { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 6px; max-width: 46ch; }
+.franja-go { padding: 0 26px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.franja-go em { font-style: normal; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.franja-go i { display: block; width: 26px; height: 1px; background: var(--ink); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
+.franja--red { background: var(--red); }
+.franja--red .franja-t, .franja--red .franja-s, .franja--red .franja-go em { color: #fff; }
+.franja--red .franja-s { color: rgba(255,255,255,0.82); }
+.franja--red .franja-go i { background: #fff; }
+.franja--red:hover { background: var(--red-dark); }
+.franja--ink { background: var(--ink); }
+.franja--ink .franja-t { color: #fff; }
+.franja--ink .franja-s, .franja--ink .franja-go em { color: rgba(255,255,255,0.7); }
+.franja--ink .franja-go i { background: #fff; }
+.franja--ink:hover { background: #000; }
+/* La franja de paritat: no és un enllaç, és una dada. Vermell ple, partit
+   exactament pel mig, perquè l'estructura digui el que abans deia una xifra. */
+.franja-par { display: block; background: var(--red); color: #fff; min-height: 0; }
+.par-halves { display: grid; grid-template-columns: 1fr 1px 1fr; }
+.par-half { padding: 26px clamp(20px, 4vw, 40px); }
+.par-half span { display: block; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.82; }
+.par-half b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.6vw, 28px); text-transform: uppercase; line-height: 0.98; margin-top: 9px; }
+.par-rule { background: rgba(255,255,255,0.42); }
+.par-foot { border-top: 1px solid rgba(255,255,255,0.42); padding: 16px clamp(20px, 4vw, 40px); font-size: 13px; }
+.par-foot b { font-weight: 700; }
+@media (max-width: 720px) {
+  .franja { grid-template-columns: 92px minmax(0, 1fr); min-height: 90px; }
+  .franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr); }
+  .franja-go { display: none; }
+  .franja-tx { padding: 14px 16px; }
+  .par-halves { grid-template-columns: 1fr; }
+  .par-rule { height: 1px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .franja, .franja-ph img, .franja-go i { transition: none; }
+}
 .center { text-align: center; }
 
 /* ==== TIPOGRAFIA ==== */
@@ -518,10 +571,16 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 /* ==== CAPÇALERA ==== */
 .head { position: sticky; top: 0; z-index: 110; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
 .head-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
-.head-side { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 28px); }
+.head-side { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); }
 .head-side.r { justify-content: flex-end; }
-.head-nav { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 28px); }
-.head-nav a { position: relative; padding: 7px 0; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; }
+.head-nav { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); }
+.head-nav a { position: relative; padding: 7px 0; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; white-space: nowrap; }
+/* Icones socials: monocromes, vermell del club en passar-hi. Cap fitxer extern. */
+.soc { display: inline-flex; align-items: center; gap: 13px; }
+.soc a { padding: 0; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; color: var(--ink); transition: color 0.3s var(--ease), transform 0.3s var(--ease); }
+.soc a svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+.soc a:hover { color: var(--red); transform: translateY(-2px); }
+.soc a::after { content: none; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
 .head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; justify-self: center; }
@@ -531,9 +590,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
 .menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
 .menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
-/* El menú de dalt topava amb l'escut centrat: els enllaços secundaris
-   (Premsa i Patrocinadors) surten només del menú complet i del peu. */
-.head-side .head-nav a.opt { display: none; }
+/* Franja estreta: es retiren primer els enllaços secundaris (.opt), que per això
+   estan marcats, abans d'amagar tot el menú i deixar només el botó de menú. */
+@media (max-width: 1280px) { .head-side .head-nav a.opt { display: none; } }
 @media (max-width: 1080px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
 
@@ -552,7 +611,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .lead { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 0; }
 .lead-media { position: relative; overflow: hidden; background: var(--paper-2); aspect-ratio: 5 / 4; }
 .lead-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; animation: leadZoom 16s var(--ease) both; }
-@keyframes leadZoom { from { transform: scale(1.07); } to { transform: scale(1); } }
+/* Zoom molt contingut: la foto d'origen és de 375x500 i qualsevol ampliació
+   extra en delata la manca de definició. */
+@keyframes leadZoom { from { transform: scale(1.02); } to { transform: scale(1); } }
 .lead-media .tagline { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
 .lead-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 6vw, 88px) clamp(22px, 5vw, 76px); }
 .lead-body h1 { font-size: clamp(25px, 3.4vw, 44px); margin: 18px 0 0; }
@@ -638,6 +699,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .info-intro .direct a { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; transition: padding-left 0.4s var(--ease), color 0.3s; }
 .info-intro .direct a:hover { padding-left: 12px; color: var(--red); }
 .info-intro .direct a span { margin-left: auto; font-size: 9px; letter-spacing: 0.22em; color: var(--muted); }
+.wa-ic { width: 16px; height: 16px; flex-shrink: 0; fill: #25D366; }
 
 .form { border: 1px solid var(--line); padding: clamp(22px, 3.2vw, 40px); background: var(--paper); }
 .form-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
@@ -715,6 +777,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .foot-col a, .foot-col p { display: block; padding: 6px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
 .foot-col a { display: flex; align-items: center; min-height: 44px; }
 .foot-col a { transition: color 0.3s; }
+.foot-soc { gap: 10px; }
+.foot-soc svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 .foot-col a:hover { color: var(--red); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
 .foot-mark { font-family: var(--display); font-weight: 300; font-size: clamp(12px, 2vw, 16px); letter-spacing: 0.4em; text-transform: uppercase; }
@@ -769,12 +833,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     <div class="tk-cnt">
       <span class="tk-it">Escoleta 4-7 anys · Inscripcions obertes</span>
       <span class="tk-it">Sèniors · Nova temporada</span>
-      <span class="tk-it">Calendari de partits actualitzat</span>
+      <span class="tk-it">Dies de partit actualitzats</span>
       <span class="tk-it">Galeria de fotos del club</span>
       <span class="tk-it">#SomClot · 60 anys de bàsquet</span>
       <span class="tk-it">Escoleta 4-7 anys · Inscripcions obertes</span>
       <span class="tk-it">Sèniors · Nova temporada</span>
-      <span class="tk-it">Calendari de partits actualitzat</span>
+      <span class="tk-it">Dies de partit actualitzats</span>
       <span class="tk-it">Galeria de fotos del club</span>
       <span class="tk-it">#SomClot · 60 anys de bàsquet</span>
     </div>
@@ -791,7 +855,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <a href="/femeni/">Femení</a>
         <a href="/campus/">Campus</a>
         <a href="/3x3/">3x3</a>
-        <a href="#calendari">Calendari</a>
+        <a href="#calendari">Dies de partit</a>
         <a href="/fotos/">Galeria</a>
         <a href="/premsa/" class="opt">Premsa</a>
         <a href="/patrocinadors/" class="opt">Patrocinadors</a>
@@ -804,7 +868,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </a>
     <div class="head-side r">
       <nav class="head-nav" aria-label="Xarxes i contacte">
-        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="head-ig">Instagram</a>
+        <span class="soc">
+          <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="head-ig" aria-label="Instagram del CB Grup Barna · @cbgrupbarna">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 1.98c-3.15 0-3.5.01-4.74.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.4.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.39-.32-1.71a2.86 2.86 0 0 0-.69-1.06 2.86 2.86 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32-1.24-.06-1.59-.07-4.74-.07Zm0 3.37a4.49 4.49 0 1 1 0 8.98 4.49 4.49 0 0 1 0-8.98Zm0 7.4a2.91 2.91 0 1 0 0-5.82 2.91 2.91 0 0 0 0 5.82Zm5.72-7.58a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0Z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener" data-cta="head-tt" aria-label="TikTok del CB Grup Barna · @cbgrupbarna">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.5 2h-2.9v12.3a2.5 2.5 0 1 1-2.5-2.5c.2 0 .4 0 .6.06V8.9a5.6 5.6 0 0 0-.6-.03 5.44 5.44 0 1 0 5.44 5.44V8.2a6.7 6.7 0 0 0 3.96 1.28V6.6a3.9 3.9 0 0 1-2.6-1.06A3.9 3.9 0 0 1 16.5 2Z"/></svg>
+          </a>
+        </span>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="head-wa">Contacte</a>
       </nav>
     </div>
@@ -818,10 +889,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <h3>Aquest mes</h3>
       <a href="#info">Demanar informació <small>formulari</small></a>
       <a href="#escoleta">Escoleta <small>4 a 7 anys</small></a>
-      <a href="#calendari">Calendari de partits</a>
+      <a href="/escoleta/#historia" data-cta="menu-historia-escoleta">Història de l'Escoleta <small>1965</small></a>
+      <a href="#calendari">Dies de partit</a>
       <a href="#seniors">Els sèniors</a>
       <a href="/fotos/" data-cta="menu-galeria">Galeria de fotos</a>
-      <a href="#instagram">Instagram</a>
+      <a href="#instagram">Posts fixats d'Instagram</a>
       <a href="#opinions">Ressenyes i valoració</a>
     </div>
     <div class="menu-col">
@@ -834,7 +906,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <a href="/grup-barna-dades-oficials/" data-cta="menu-club">El club <small>dades oficials</small></a>
       <a href="/historia/" data-cta="menu-historia">Història del club <small>des de 1965</small></a>
       <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
-      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Presentació del club</a>
+      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Què és el Grup Barna <small>presentació</small></a>
       <a href="/patrocinadors/" data-cta="menu-partners">Patrocinadors i partners</a>
       <a href="https://www.cbgrupbarna.com/noticies/" target="_blank" rel="noopener" data-cta="menu-noticies">Notícies</a>
       <a href="#acces">Tots els accessos</a>
@@ -850,7 +922,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <!-- ==== ESCOLETA · el que toca aquest mes ==== -->
   <section class="lead" id="escoleta">
     <div class="lead-media">
-      <img src="img/escoleta.webp" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota i la mascota del club" fetchpriority="high" decoding="async">
+      <img src="img/escoleta.webp"
+           srcset="img/escoleta.webp 375w, img/escoleta@2x.webp 750w"
+           sizes="(max-width: 900px) 100vw, 50vw"
+           width="375" height="500"
+           alt="Nena de l'Escoleta del CB Grup Barna amb la pilota i la mascota del club" fetchpriority="high" decoding="async">
       <span class="tagline">Inscripcions obertes</span>
     </div>
     <div class="lead-body">
@@ -866,6 +942,65 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </div>
   </section>
 
+  <!-- ==== FRANGES · les portes del club, d'un cop d'ull ==== -->
+  <section class="franges" aria-label="Accés ràpid al club">
+    <a class="franja franja--red" href="/partits/" data-cta="franja-dies-partit">
+      <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">Calendari i resultats de tots els equips, cada setmana.</span></span>
+      <span class="franja-go"><em>Aquest cap de setmana</em><i></i></span>
+    </a>
+    <a class="franja" href="#seniors" data-cta="franja-seniors">
+      <span class="franja-ph"><img src="img/hero-player.webp" srcset="img/hero-player.webp 466w, img/hero-player@2x.webp 932w" sizes="190px" width="466" height="700" loading="lazy" decoding="async" alt="Jugador sènior del CB Grup Barna amb la pilota"></span>
+      <span class="franja-tx"><span class="franja-t">Els sèniors</span><span class="franja-s">La primera plantilla del club.</span></span>
+      <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
+    </a>
+    <div class="franja franja-par">
+      <div class="par-halves">
+        <div class="par-half"><span>Línia femenina</span><b>Mateix nombre de jugadores</b></div>
+        <div class="par-rule"></div>
+        <div class="par-half"><span>Línia masculina</span><b>Mateix nombre de jugadors</b></div>
+      </div>
+      <div class="par-foot"><b>I el mateix pressupost per a les dues.</b> La paritat del Barna no és una declaració d'intencions: es reparteix a parts iguals. <a href="/premidonaesport/" style="color:#fff;text-decoration:underline" data-cta="franja-premi-dona">El model, documentat al Premi Dona i Esport →</a></div>
+    </div>
+    <a class="franja" href="/fotos/" data-cta="franja-galeria">
+      <span class="franja-ph"><img src="img/team-action.webp" srcset="img/team-action.webp 375w, img/team-action@2x.webp 750w" sizes="190px" width="375" height="500" loading="lazy" decoding="async" alt="Jugadores del CB Grup Barna amb l'equipació del club"></span>
+      <span class="franja-tx"><span class="franja-t">Galeria</span><span class="franja-s">Les fotos de la temporada, dia de partit rere dia de partit.</span></span>
+      <span class="franja-go"><em>Dies de partit i events</em><i></i></span>
+    </a>
+    <a class="franja" href="/grup-barna-dades-oficials/" data-cta="franja-club">
+      <span class="franja-ph"><img src="img/club.webp" srcset="img/club.webp 550w, img/club@2x.webp 1100w" sizes="190px" width="550" height="366" loading="lazy" decoding="async" alt="Foto de grup del CB Grup Barna sota la pancarta del club"></span>
+      <span class="franja-tx"><span class="franja-t">El club</span><span class="franja-s">Seixanta anys formant nens i nenes del barri.</span></span>
+      <span class="franja-go"><em>Des de 1965</em><i></i></span>
+    </a>
+    <a class="franja franja--ink" href="#info" data-cta="franja-portes-obertes">
+      <span class="franja-tx"><span class="franja-t">Portes obertes</span><span class="franja-s">Un entrenament de prova, sense compromís.</span></span>
+      <span class="franja-go"><em>Tot l'any</em><i></i></span>
+    </a>
+    <a class="franja" href="/campus/" data-cta="franja-campus">
+      <span class="franja-ph"><img src="img/campus-hero.webp" srcset="img/campus-hero.webp 360w, img/campus-hero@2x.webp 720w" sizes="190px" width="360" height="202" loading="lazy" decoding="async" alt="Entrenament del Campus de bàsquet del CB Grup Barna"></span>
+      <span class="franja-tx"><span class="franja-t">Campus de bàsquet</span><span class="franja-s">Setmanes intensives de tecnificació a l'estiu.</span></span>
+      <span class="franja-go"><em>Cada estiu</em><i></i></span>
+    </a>
+  </section>
+
+  <!-- ==== CALENDARI DEL BARNA ==== -->
+  <section class="section band-soft" id="calendari">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow" id="cal-season">Temporada 2026 · 2027</p>
+        <div class="rule"></div>
+        <h2>Dies de partit</h2>
+        <p>Els propers partits de tots els equips del club. Horaris, pista i competició.</p>
+      </div>
+      <div class="cal reveal" id="cal-list" aria-live="polite">
+        <div class="cal-empty">Carregant el calendari…</div>
+      </div>
+      <div class="btn-row reveal center" style="justify-content:center;margin-top:clamp(26px,4vw,42px)">
+        <a href="/partits/" class="btn red" data-cta="calendari-app">Obre l'app de partits</a>
+        <a href="/partits/" class="cta" data-cta="calendari-partits">Tots els dies de partit</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ==== INFORMACIÓ · formulari de contacte i avisos ==== -->
   <section class="section band-soft" id="info">
     <div class="wrap">
@@ -878,8 +1013,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
           t'avisem quan s'obrin inscripcions, abans de publicar-les.</p>
           <div class="direct">
             <a href="https://wa.me/34646205526?text=Hola%20Julio!%20Vull%20informaci%C3%B3%20de%20l%27Escoleta" target="_blank" rel="noopener" data-cta="info-wa-escoleta">
+              <svg class="wa-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Escoleta · Julio Torralba <span>646 205 526</span></a>
             <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20informaci%C3%B3%20del%20club" target="_blank" rel="noopener" data-cta="info-wa-club">
+              <svg class="wa-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               WhatsApp del club <span>+34 698 425 153</span></a>
             <a href="mailto:info@cbgrupbarna.com" data-cta="info-email">
               Correu <span>info@cbgrupbarna.com</span></a>
@@ -942,24 +1079,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </div>
   </section>
 
-  <!-- ==== CALENDARI DEL BARNA ==== -->
-  <section class="section band-soft" id="calendari">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <p class="eyebrow" id="cal-season">Temporada 2026 · 2027</p>
-        <div class="rule"></div>
-        <h2>Calendari del Barna</h2>
-        <p>Els propers partits de tots els equips del club. Horaris, pista i competició.</p>
-      </div>
-      <div class="cal reveal" id="cal-list" aria-live="polite">
-        <div class="cal-empty">Carregant el calendari…</div>
-      </div>
-      <p class="center reveal" style="margin-top:clamp(26px,4vw,42px)">
-        <a href="/partits/" class="cta" data-cta="calendari-partits">Calendari i resultats complets</a>
-      </p>
-    </div>
-  </section>
-
   <!-- ==== SÈNIORS ==== -->
   <section class="section" id="seniors">
     <div class="wrap">
@@ -1013,8 +1132,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         </div>
         <div class="opi-card">
           <h3>Valora aquesta web</h3>
-          <p>Què et sembla cbgrupbarna.info? Puntua-la i ens arriba el teu vot per WhatsApp.</p>
-          <div class="stars" id="webStars" role="group" aria-label="Valora aquesta web de l'1 al 5">
+          <p>Què et sembla cbgrupbarna.info? Puntua-la: la valoració et porta a deixar la ressenya a Google.</p>
+          <div class="stars" id="webStars" role="group" aria-label="Valora aquesta web de l'1 al 5" data-review-url="https://www.google.com/search?sca_esv=dfc72c22119838cc&amp;aep=1&amp;cs=0&amp;sxsrf=APpeQnsRbzMzlQPi3VcILWKbb_g7DwsOAA:1785941053029&amp;q=C.B.+Grup+Barna+Ressenyes&amp;rflfq=1&amp;num=20&amp;stick=H4sIAAAAAAAAAONgkxK2MDIwsjAxNTIxMjIzMjYyNTAy2sDI-IpR0lnPSU_Bvai0QMEpsSgvUSEotbg4Na8ytXgRK245AIsXnG5SAAAA&amp;rldimm=8202845242262325022&amp;tbm=lcl&amp;hl=ca-ES&amp;sa=X&amp;ved=2ahUKEwipybjw3ImWAxWtP_sDHf9hHLEQ9fQKegQIRRAG&amp;biw=1440&amp;bih=650&amp;dpr=2#lkt=LocalPoiReviews">
             <button type="button" data-v="1" aria-label="1 estrella">&#9733;</button>
             <button type="button" data-v="2" aria-label="2 estrelles">&#9733;</button>
             <button type="button" data-v="3" aria-label="3 estrelles">&#9733;</button>
@@ -1041,9 +1160,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 <span class="list-t">Bàsquet femení</span>
 <span class="list-s">8 equips · El Mètode Barna</span>
 </a>
-        <a href="/fotos/" data-cta="galeria-fotos"><span class="list-t">Galeria de fotos</span><span class="list-s">Partits i events</span></a>
-        <a href="/partits/" data-cta="partits"><span class="list-t">Partits i resultats</span><span class="list-s">Calendari</span></a>
-        <a href="/partits/calendaris/" data-cta="calendaris-equip"><span class="list-t">Calendaris per equip</span><span class="list-s">Descarrega'l en PDF</span></a>
+        <a href="/fotos/" data-cta="galeria-fotos"><span class="list-t">Galeria de fotos</span><span class="list-s">Dies de partit i esdeveniments</span></a>
+        <a href="/partits/" data-cta="partits"><span class="list-t">Dies de partit</span><span class="list-s">Calendari i resultats</span></a>
+        <a href="/partits/calendaris/" data-cta="calendaris-equip"><span class="list-t">Dies de partit per equip</span><span class="list-s">Descarrega'l en PDF</span></a>
         <a href="/campus/" data-cta="campus-pagina"><span class="list-t">Campus de bàsquet</span><span class="list-s">Tecnificació</span></a>
         <a href="/3x3/" data-cta="3x3-pagina"><span class="list-t">Torneig 3x3 Barcelona</span><span class="list-s">Westfield Glòries</span></a>
         <a href="/blog/" data-cta="blog"><span class="list-t">Blog · guies per a famílies</span><span class="list-s">Bàsquet base</span></a>
@@ -1194,7 +1313,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 <footer class="foot">
   <div class="wrap">
     <div class="foot-partners">
-      <p class="eyebrow"><a href="/partners-mapa/" style="color:inherit;text-decoration:none;">Partners i col·laboradors · Mapa →</a></p>
+      <p class="eyebrow">Partners i col·laboradors</p>
       <div class="partners">
         <span>Westfield Glòries</span>
         <span>FCBQ</span>
@@ -1216,7 +1335,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Partits i resultats</a>
+        <a href="/partits/">Dies de partit</a>
         <a href="https://app.myplay.com/public-live?liveId=CBgrupBarna" target="_blank" rel="noopener">Partits en directe</a>
         <a href="/blog/">Blog del club</a>
         <a href="/premsa/">Articles i premsa</a>
@@ -1238,8 +1357,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>
-        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
+        <a class="foot-soc" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 1.98c-3.15 0-3.5.01-4.74.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.4.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.39-.32-1.71a2.86 2.86 0 0 0-.69-1.06 2.86 2.86 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32-1.24-.06-1.59-.07-4.74-.07Zm0 3.37a4.49 4.49 0 1 1 0 8.98 4.49 4.49 0 0 1 0-8.98Zm0 7.4a2.91 2.91 0 1 0 0-5.82 2.91 2.91 0 0 0 0 5.82Zm5.72-7.58a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0Z"/></svg>Instagram</a>
+        <a class="foot-soc" href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.5 2h-2.9v12.3a2.5 2.5 0 1 1-2.5-2.5c.2 0 .4 0 .6.06V8.9a5.6 5.6 0 0 0-.6-.03 5.44 5.44 0 1 0 5.44 5.44V8.2a6.7 6.7 0 0 0 3.96 1.28V6.6a3.9 3.9 0 0 1-2.6-1.06A3.9 3.9 0 0 1 16.5 2Z"/></svg>TikTok</a>
         <a href="https://twitter.com/cbgrupbarna" target="_blank" rel="noopener">X</a>
         <a href="https://www.cbgrupbarna.com" target="_blank" rel="noopener">cbgrupbarna.com</a>
       </div>
@@ -1445,11 +1564,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       .catch(buit);
   })();
 
-  // ==== VALORACIÓ DE LA WEB ====
+  // ==== VALORACIÓ DE LA WEB · porta a deixar la ressenya a Google, no per WhatsApp ====
   (function () {
     var box = document.getElementById('webStars');
     if (!box) return;
     var note = document.getElementById('starsNote');
+    var reviewUrl = box.getAttribute('data-review-url');
     var btns = [].slice.call(box.querySelectorAll('button'));
     function paint(n) { btns.forEach(function (b, i) { b.classList.toggle('on', i < n); }); }
     btns.forEach(function (b) {
@@ -1458,10 +1578,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       b.addEventListener('click', function () {
         var v = +b.dataset.v;
         paint(v);
-        if (note) note.textContent = 'Gràcies · ' + v + ' de 5';
+        if (note) note.textContent = 'Gràcies · ' + v + ' de 5 · obrint Google…';
         if (window.gtag) window.gtag('event', 'web_rating', { rating: v });
-        var txt = encodeURIComponent('Valoro la web cbgrupbarna.info amb ' + v + '/5 estrelles.');
-        window.open('https://api.whatsapp.com/send?phone=+34698425153&text=' + txt, '_blank', 'noopener');
+        if (reviewUrl) window.open(reviewUrl, '_blank', 'noopener');
       });
     });
     box.addEventListener('mouseleave', function () { paint(0); });
