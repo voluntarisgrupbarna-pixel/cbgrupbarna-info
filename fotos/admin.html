@@ -476,6 +476,46 @@ const MEDIA_EXT_RE = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?|mp4|mov|webm|m4v|avi)
 function isVideoFile(name) { return VIDEO_EXT_RE.test(name); }
 function isMediaFile(f) { return f.type.startsWith('image/') || f.type.startsWith('video/') || MEDIA_EXT_RE.test(f.name); }
 
+// Una foto de rèflex arriba a 15 MB i 5472px, però a la galeria no es veu mai
+// per sobre dels 2000px. Redimensionem al navegador abans de pujar: el repo no
+// s'infla i la galeria carrega ràpid. Els vídeos es pugen tal qual.
+const MAX_UPLOAD_SIDE = 2000;
+const UPLOAD_QUALITY = 0.82;
+const COMPRESSIBLE_RE = /^image\/(jpeg|png|webp)$/;
+
+async function compressImage(file) {
+  if (!COMPRESSIBLE_RE.test(file.type)) return file;
+
+  let bitmap;
+  try {
+    bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+  } catch (e) {
+    return file; // format que aquest navegador no sap descodificar (HEIC…)
+  }
+
+  const scale = Math.min(1, MAX_UPLOAD_SIDE / Math.max(bitmap.width, bitmap.height));
+  if (scale === 1 && file.type === 'image/jpeg') { bitmap.close(); return file; }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(bitmap.width * scale);
+  canvas.height = Math.round(bitmap.height * scale);
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff'; // perquè els PNG amb transparència no quedin negres
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close();
+
+  const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', UPLOAD_QUALITY));
+  if (!blob || blob.size >= file.size) return file; // no hi guanyem res
+
+  const name = file.name.replace(/\.[^.]+$/, '') + '.jpg';
+  return new File([blob], name, { type: 'image/jpeg', lastModified: file.lastModified });
+}
+
+function formatBytes(n) {
+  return n < 1024 * 1024 ? `${(n / 1024).toFixed(0)} KB` : `${(n / 1048576).toFixed(1)} MB`;
+}
+
 // Git's blob SHA-1: sha1("blob " + byteLength + "\0" + content). Same value
 // GitHub returns as `sha` for a file with identical content, so it doubles
 // as a free content-hash for duplicate detection.
@@ -920,8 +960,19 @@ async function addFiles(fileList) {
 
   await shasReadyPromise;
 
-  let dupCount = 0, oversizeCount = 0;
-  for (const file of candidates) {
+  const prepEl = document.getElementById('zip-progress');
+  const prepText = document.getElementById('zip-progress-text');
+  if (candidates.length > 1) prepEl.classList.add('active');
+
+  let dupCount = 0, oversizeCount = 0, bytesAbans = 0, bytesDespres = 0;
+  for (let i = 0; i < candidates.length; i++) {
+    prepText.textContent = `Preparant ${i + 1} / ${candidates.length}…`;
+
+    const original = candidates[i];
+    const file = await compressImage(original);
+    bytesAbans += original.size;
+    bytesDespres += file.size;
+
     if (file.size > MAX_FILE_SIZE) { oversizeCount++; continue; }
 
     let sha = null;
@@ -932,6 +983,7 @@ async function addFiles(fileList) {
     if (isDup) dupCount++;
   }
 
+  prepEl.classList.remove('active');
   renderUploadQueue();
   const pendingCount = uploadQueue.filter(f => f.status === 'pending').length;
   document.getElementById('upload-actions').style.display = uploadQueue.length ? 'flex' : 'none';
@@ -941,6 +993,8 @@ async function addFiles(fileList) {
     ? `Pujar ${pendingCount} fitxer${pendingCount !== 1 ? 's' : ''}`
     : 'Res per pujar';
 
+  const estalvi = bytesAbans - bytesDespres;
+  if (estalvi > 1024 * 1024) toast(`Fotos optimitzades: ${formatBytes(bytesAbans)} → ${formatBytes(bytesDespres)}`, 'success');
   if (dupCount) toast(`${dupCount} fitxer${dupCount !== 1 ? 's' : ''} ja existia${dupCount !== 1 ? 'n' : ''} a l'esdeveniment i s'ha${dupCount !== 1 ? 'n' : ''} omès`, 'error');
   if (oversizeCount) toast(`${oversizeCount} fitxer${oversizeCount !== 1 ? 's' : ''} superava${oversizeCount !== 1 ? 'n' : ''} els 90 MB i s'ha${oversizeCount !== 1 ? 'n' : ''} omès`, 'error');
 }
@@ -954,9 +1008,7 @@ function renderUploadQueue() {
     div.id = `qi-${i}`;
 
     const preview = URL.createObjectURL(item.file);
-    const size = item.file.size < 1024*1024
-      ? `${(item.file.size/1024).toFixed(0)} KB`
-      : `${(item.file.size/1024/1024).toFixed(1)} MB`;
+    const size = formatBytes(item.file.size);
     const isVideo = isVideoFile(item.file.name);
 
     const statusHtml = {
