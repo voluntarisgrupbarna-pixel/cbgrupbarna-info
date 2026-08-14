@@ -74,7 +74,26 @@ Construïda amb `/css/barna.css` (mateix sistema visual que Campus i 3x3), amb J
 —`WebPage`, `SportsOrganization`, `FAQPage` i `BreadcrumbList`— i donada d'alta al
 `sitemap.xml`, al `llms.txt`, al menú de la portada i a «El Barna, punt per punt».
 
-### 6. `noindex` a l'eina interna
+### 6. Sis articles nous al blog, a partir de la candidatura
+
+El PDF de la candidatura integral al 19è Premi Dona i Esport (53 pàgines) s'ha convertit en sis
+articles que no existien, escrits per a famílies i no com a resum del document:
+
+| Article | De quina part surt |
+|---|---|
+| Per què les noies deixen el bàsquet a l'adolescència | Els cinc mecanismes d'expulsió (4.3) |
+| Entrenadores: per què importa qui hi ha a la banqueta | L'escala de reconeixement (T2) i el Fons Barna 8M (7.1) |
+| El 0,75%: la paradoxa del bàsquet femení a Barcelona | Diagnòstic estructural i comparativa territorial (4.1-4.2) |
+| Onze preguntes per saber si un club cuida la teva filla | Pla d'Igualtat (Part IX) i Protocol anti-assetjament (Part X) |
+| «Shrink it and pink it»: quan l'equipació fa marxar jugadores | Línia Femenina d'equipació (5.3) |
+| Bàsquet inclusiu: com funciona un equip d'esport adaptat | Barna Màgics (2.4) |
+
+Cadascun porta FAQ indexable, JSON-LD (`BlogPosting` + `FAQPage` + `BreadcrumbList`) i enllaços
+interns creuats. El blog passa de 5 a 11 articles. Actualitzats també l'índex del blog, el
+`sitemap.xml` (96 URL) i el `llms.txt`. La xifra de l'staff tècnic femení s'unifica a **65,5%**
+(abans el briefing i les dades oficials deien 68%).
+
+### 7. `noindex` a l'eina interna
 
 `fotos/migrar-flickr.html` ja porta `noindex, nofollow` com la resta d'admins.
 
