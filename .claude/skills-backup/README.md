@@ -1,11 +1,13 @@
 # Backup del ecosistema de skills — CB Grup Barna
 
-Copia versionada de las **40 skills del club** que viven en `~/.claude/skills/`.
-Ese directorio no tiene control de versiones: un borrado accidental o un cambio
-de máquina se lleva años de criterio acumulado. Esto lo arregla — cada push a
-GitHub es una copia fuera del ordenador.
+Copia versionada de las **40 skills del club** que viven en
+`~/.claude/skills/synced/`. Ese directorio no tiene control de versiones y además
+lo pisa una sincronización externa: un borrado, un cambio de máquina o un sync
+se lleva años de criterio acumulado. Esto lo arregla — cada push a GitHub es una
+copia fuera del ordenador.
 
-**Última sincronización: 2026-08-13.** Cierra la incidencia O-12 de
+**Última sincronización: 2026-08-14 12:06 UTC** (sin cambios respecto al 13/08:
+las 38 skills del club estaban idénticas). Cierra la incidencia O-12 de
 `.claude/knowledge/bbdd/obertes.md`.
 
 ## Qué hay y qué no
@@ -19,10 +21,10 @@ GitHub es una copia fuera del ordenador.
 
 ## Esto es un backup, no la copia viva
 
-Las skills **se editan en `~/.claude/skills/`**. Este directorio es un espejo:
-si se edita aquí, el cambio no lo ve nadie hasta que se copie de vuelta.
-`skills-backup/` (y no `skills/`) precisamente para que Claude no las cargue
-dos veces.
+Las skills **se editan en `~/.claude/skills/synced/`**. Este directorio es un
+espejo: si se edita aquí, el cambio no lo ve nadie hasta que se copie de vuelta.
+Se llama `skills-backup/` (y no `skills/`) precisamente para que Claude no las
+cargue dos veces.
 
 ## ⚠️ Las skills las gestiona una sincronización externa
 
@@ -47,16 +49,16 @@ copia de seguridad es esta.
 
 ```bash
 # todo el ecosistema
-cp -r .claude/skills-backup/*/ ~/.claude/skills/
+cp -r .claude/skills-backup/*/ ~/.claude/skills/synced/
 
 # una sola skill
-cp -r .claude/skills-backup/ganxos-cbgb ~/.claude/skills/
+cp -r .claude/skills-backup/ganxos-cbgb ~/.claude/skills/synced/
 ```
 
 ## Volver a sincronizar (después de crear o editar skills)
 
 ```bash
-cd ~/.claude/skills
+cd ~/.claude/skills/synced
 cp -r $(ls -d *cbgb* *club* arranque-eficiente ana-innovacio-barna | sort -u) \
       <repo>/.claude/skills-backup/
 ```
