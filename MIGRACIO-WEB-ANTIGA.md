@@ -147,10 +147,10 @@ La conclusió no és «tornar enrere», és que la migració va deixar fora la p
    La Rambleta del Clot, Escola Casas, Claror Marítim), cadascuna amb enllaç directe a Google Maps.
    Només s'hi dona l'adreça completa de La Nau del Clot, que ja teníem verificada; per a la resta
    s'enllaça el cercador de Maps pel nom en lloc d'inventar-se un número de carrer.
-4. **Horaris de l'Escoleta** a `/escoleta/` — **pendent.** L'antiga deia dimecres 17:30-18:40 a
-   l'Escola Casas i dissabtes 09:00-10:30 a la Nau, però no ho he pogut confirmar com a vigent i
-   publicar un horari equivocat fa que una família s'hi planti el dia que no toca. Cal que la
-   confirmi l'Ana (o Julio Torralba) abans de publicar-lo.
+4. ~~**Horaris de l'Escoleta** a `/escoleta/`.~~ **FET (14/08/2026), confirmats per l'Ana:** dimecres
+   17:30-18:40 a l'Escola Casas i dissabtes 09:00-10:30 a La Nau del Clot. Afegits a la franja de
+   dades pràctiques de dalt de la pàgina, a la FAQ visible i al seu `FAQPage` del JSON-LD, i
+   enllaçats també des de `/instal-lacions/`.
 5. ~~**`/historia/`** — la pàgina d'història, amb l'origen del nom i dels colors.~~
    **FET.** Recuperada del contingut original de l'antiga: la fundació el 1965 com a secció del
    Centre Parroquial de Sant Martí del Clot, el tennis de taula (3 campionats de Barcelona + 1
