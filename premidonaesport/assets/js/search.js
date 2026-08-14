@@ -5,6 +5,11 @@
   var DATA = window.CBGB_SEARCH_INDEX || [];
   if (!DATA.length) return;
 
+  /* URL del Cloudflare Worker amb IA (Workers AI, gratuït). Buida = només cerca local.
+     Veure premidonaesport/cf-worker/README.md per desplegar-lo i omplir-la. */
+  var AI_ENDPOINT = '';
+  var AI_TIMEOUT_MS = 3500;
+
   /* ── Estils (injectats per no tocar main.css a 27 pàgines) ── */
   var css = ''
     + '#cbgb-search-ov{position:fixed;inset:0;z-index:200000;background:rgba(4,4,4,.72);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding:8vh 1.2rem 2rem;}'
@@ -25,7 +30,10 @@
     + '.cbgb-sr-c{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(242,237,230,.4);margin-top:.15rem;}'
     + '.cbgb-sr-go{flex-shrink:0;font-size:.7rem;color:rgba(242,237,230,.25);}'
     + '#cbgb-search-empty{padding:2.5rem 1rem;text-align:center;font-size:.82rem;color:rgba(242,237,230,.35);}'
-    + '#cbgb-search-hint{padding:.6rem 1.2rem;border-top:1px solid rgba(255,255,255,.06);font-size:.65rem;letter-spacing:.06em;color:rgba(242,237,230,.3);display:flex;gap:1rem;}'
+    + '#cbgb-search-hint{padding:.6rem 1.2rem;border-top:1px solid rgba(255,255,255,.06);font-size:.65rem;letter-spacing:.06em;color:rgba(242,237,230,.3);display:flex;gap:1rem;align-items:center;}'
+    + '#cbgb-search-ai-badge{margin-left:auto;display:none;align-items:center;gap:.3rem;color:#ff4d5a;}'
+    + '#cbgb-search-ai-badge.on{display:flex;}'
+    + '#cbgb-search-ai-badge.load{opacity:.5;}'
     + '#cbgb-search-trigger{display:flex;align-items:center;gap:.6rem;width:calc(100% - 1.6rem);margin:.9rem .8rem 0;padding:.65rem .85rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:rgba(242,237,230,.5);font-family:Outfit,system-ui,sans-serif;font-size:.8rem;cursor:pointer;text-align:left;}'
     + '#cbgb-search-trigger:hover{border-color:rgba(200,16,46,.5);color:#F2EDE6;}'
     + '#cbgb-search-trigger kbd{margin-left:auto;font-size:.62rem;border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.1rem .4rem;flex-shrink:0;}'
@@ -92,28 +100,61 @@
     + '<button id="cbgb-search-esc" type="button">ESC</button>'
     + '</div>'
     + '<div id="cbgb-search-results"></div>'
-    + '<div id="cbgb-search-hint"><span>↑↓ navegar</span><span>↵ obrir</span><span>' + DATA.length + ' resultats indexats</span></div>'
+    + '<div id="cbgb-search-hint"><span>↑↓ navegar</span><span>↵ obrir</span><span>' + DATA.length + ' resultats indexats</span><span id="cbgb-search-ai-badge">✨ cerca amb IA</span></div>'
     + '</div>';
   document.body.appendChild(ov);
 
   var input = ov.querySelector('#cbgb-search-in');
   var resultsBox = ov.querySelector('#cbgb-search-results');
+  var aiBadge = ov.querySelector('#cbgb-search-ai-badge');
   var active = 0;
   var current = [];
+  var aiTimer = null;
+  var aiAbort = null;
+  var aiQuerySeq = 0;
 
-  function render() {
-    var q = input.value;
-    current = search(q);
+  function renderList(list, q, aiPowered) {
+    current = list;
     active = 0;
+    aiBadge.classList.toggle('on', !!aiPowered);
+    aiBadge.classList.remove('load');
     if (!current.length) {
       resultsBox.innerHTML = '<div id="cbgb-search-empty">Cap resultat per «' + q + '». Prova amb un altre terme.</div>';
       return;
     }
     resultsBox.innerHTML = current.map(function (e, i) {
       return '<a href="' + e.u + '" class="cbgb-sr' + (i === 0 ? ' on' : '') + '" data-i="' + i + '">'
-        + '<div class="cbgb-sr-main"><div class="cbgb-sr-t">' + highlight(e.t, q) + '</div><div class="cbgb-sr-c">' + e.c + '</div></div>'
+        + '<div class="cbgb-sr-main"><div class="cbgb-sr-t">' + (aiPowered ? e.t : highlight(e.t, q)) + '</div><div class="cbgb-sr-c">' + e.c + '</div></div>'
         + '<div class="cbgb-sr-go">→</div></a>';
     }).join('');
+  }
+
+  function render() {
+    var q = input.value;
+    var seq = ++aiQuerySeq;
+    if (aiAbort) { aiAbort.abort(); aiAbort = null; }
+    clearTimeout(aiTimer);
+    aiBadge.classList.remove('on');
+
+    /* 1) resultat local instantani, sense esperar res */
+    renderList(search(q), q, false);
+
+    /* 2) si hi ha Worker d'IA configurat i la consulta té sentit, demana un resultat més intel·ligent */
+    if (!AI_ENDPOINT || q.trim().length < 2) return;
+    aiBadge.classList.add('load');
+    aiTimer = setTimeout(function () {
+      aiAbort = new AbortController();
+      var t = setTimeout(function () { aiAbort.abort(); }, AI_TIMEOUT_MS);
+      fetch(AI_ENDPOINT + '?q=' + encodeURIComponent(q), { signal: aiAbort.signal })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          clearTimeout(t);
+          if (!data || seq !== aiQuerySeq || input.value !== q) return; // consulta ja obsoleta
+          if (data.results && data.results.length) renderList(data.results, q, true);
+          else aiBadge.classList.remove('load');
+        })
+        .catch(function () { if (seq === aiQuerySeq) aiBadge.classList.remove('load'); });
+    }, 380); // debounce: no dispara una petició per cada tecla
   }
 
   function setActive(i) {
