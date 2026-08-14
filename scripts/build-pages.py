@@ -103,8 +103,8 @@ FOOT = f"""</main>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Partits i resultats</a>
-        <a href="/partits/calendaris/">Calendaris per equip</a>
+        <a href="/partits/">Dies de partit</a>
+        <a href="/partits/calendaris/">Dies de partit per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
@@ -1623,7 +1623,7 @@ CATEGORY_PREFIXES = ["Sènior", "Júnior", "Cadet", "Infantil", "Preinfantil", "
 
 def build_calendaris():
     url = SITE + "/partits/calendaris/"
-    title = "Calendaris per equip · descarrega'l en PDF | CB Grup Barna"
+    title = "Dies de partit per equip · calendari en PDF | CB Grup Barna"
     desc = ("Descarrega el calendari complet de la temporada del teu equip: sèniors, júniors, cadets i "
             "infantils del CB Grup Barna. Es genera cada dia a partir del calendari oficial de la FCBQ.")
 
@@ -1648,15 +1648,15 @@ def build_calendaris():
         {"@type": "CollectionPage", "@id": url + "#calendaris", "name": title, "description": desc, "url": url,
          "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"}},
         faq_ld,
-        BREADCRUMB([("CB Grup Barna", "/"), ("Partits i resultats", "/partits/"), ("Calendaris per equip", "/partits/calendaris/")]),
+        BREADCRUMB([("CB Grup Barna", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", "/partits/calendaris/")]),
     ]}
 
     body = f"""
-{crumbs([("Inici", "/"), ("Partits i resultats", "/partits/"), ("Calendaris per equip", None)])}
+{crumbs([("Inici", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", None)])}
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red" id="cal-temporada">Temporada</p>
-    <h1>Calendaris per equip</h1>
+    <h1>Dies de partit per equip</h1>
     <p class="lede">El calendari complet de cada equip, llest per descarregar i desar. Es genera cada dia a
     partir del calendari oficial de la FCBQ: els equips de promoció (premini, mini, preinfantil) hi apareixen
     sols en el moment que la federació en publiqui el calendari.</p>

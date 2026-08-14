@@ -9,7 +9,7 @@
 /* ── VARIABLES ───────────────────────────────────────────────── */
 :root {
   --black:  #040404;
-  --red:    #C8102E;
+  --red:    #E20613;
   --cream:  #F2EDE6;
   --wd:     rgba(242,237,230,.6);
   --s1:     #0a0a0a;
@@ -111,7 +111,7 @@ a { color: inherit; }
   letter-spacing: .2em; padding: 4px 8px; text-transform: uppercase;
   transition: all .2s ease;
 }
-.lang button.on { color: var(--cream); border-color: rgba(200,16,46,.5); }
+.lang button.on { color: var(--cream); border-color: rgba(226,6,19,.5); }
 
 /* ── OVERLAY (sidebar bg) ────────────────────────────────────── */
 .ov {
@@ -154,7 +154,7 @@ a { color: inherit; }
   border-left: 2px solid transparent;
 }
 .si:hover { background: rgba(242,237,230,.04); }
-.si.act { border-left-color: var(--red); background: rgba(200,16,46,.06); }
+.si.act { border-left-color: var(--red); background: rgba(226,6,19,.06); }
 .si-n { font-size: .52rem; letter-spacing: .15em; color: var(--red); min-width: 22px; font-family: monospace; }
 .si-t { font-size: .75rem; font-weight: 400; letter-spacing: .03em; }
 .si-s { font-size: .55rem; color: rgba(242,237,230,.35); margin-top: 1px; }
@@ -173,7 +173,7 @@ a { color: inherit; }
 #prog {
   position: fixed; top: 0; left: 0; height: 2px;
   background: var(--red); z-index: 9000; width: 0;
-  box-shadow: 0 0 8px rgba(200,16,46,.6);
+  box-shadow: 0 0 8px rgba(226,6,19,.6);
   transition: width .1s linear;
 }
 
@@ -220,12 +220,12 @@ a { color: inherit; }
   background: transparent; color: var(--cream);
   border: 1px solid rgba(242,237,230,.22);
 }
-.btn-o:hover { border-color: rgba(200,16,46,.6); color: var(--cream); }
+.btn-o:hover { border-color: rgba(226,6,19,.6); color: var(--cream); }
 .btn-ig {
   background: transparent; color: var(--cream);
   border: 1px solid rgba(242,237,230,.2);
 }
-.btn-ig:hover { border-color: rgba(200,16,46,.5); }
+.btn-ig:hover { border-color: rgba(226,6,19,.5); }
 
 /* ── DATA BLOCKS ─────────────────────────────────────────────── */
 .db {
@@ -252,7 +252,7 @@ a { color: inherit; }
 .bq {
   border-left: 2px solid var(--red);
   padding: 1.25rem 1.5rem;
-  background: rgba(200,16,46,.04);
+  background: rgba(226,6,19,.04);
   margin: 1.5rem 0;
 }
 .bq p { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2.5vw, 1.2rem); font-style: italic; line-height: 1.7; color: var(--cream); }
@@ -273,7 +273,7 @@ a { color: inherit; }
   font-size: .6rem; letter-spacing: .1em; text-decoration: none;
   color: var(--wd); transition: all .2s ease;
 }
-.pill:hover { border-color: rgba(200,16,46,.4); color: var(--cream); }
+.pill:hover { border-color: rgba(226,6,19,.4); color: var(--cream); }
 .pill-n { color: var(--red); font-size: .5rem; letter-spacing: .15em; }
 
 /* ── TEORIA CARDS ────────────────────────────────────────────── */
@@ -284,7 +284,7 @@ a { color: inherit; }
   transition: background .2s ease, border-color .2s ease;
   position: relative;
 }
-.tc:hover { background: rgba(242,237,230,.03); border-color: rgba(200,16,46,.25); }
+.tc:hover { background: rgba(242,237,230,.03); border-color: rgba(226,6,19,.25); }
 .tc-top { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
 .tc:hover .tc-top { transform: scaleX(1); }
 .tc-num { font-size: .55rem; letter-spacing: .2em; color: var(--red); margin-bottom: .5rem; font-family: monospace; }
@@ -322,7 +322,7 @@ footer { padding: 3rem 1.5rem; border-top: 1px solid var(--bd); background: #020
   padding: .35rem .6rem; backdrop-filter: blur(8px);
 }
 .logo-pill img { height: 22px; width: auto; display: block; }
-.lp-red { border-color: rgba(200,16,46,.3); }
+.lp-red { border-color: rgba(226,6,19,.3); }
 
 /* ── PAGE HERO (subpàgines) ──────────────────────────────────── */
 .page-hero {
@@ -379,7 +379,7 @@ footer { padding: 3rem 1.5rem; border-top: 1px solid var(--bd); background: #020
 /* Cards: transicions suaus */
 .re-card, .def-list li { transition: background .2s; }
 /* Sidebar actiu: color accent */
-.si.act { background: rgba(200,16,46,.08); border-left: 2px solid var(--red); }
+.si.act { background: rgba(226,6,19,.08); border-left: 2px solid var(--red); }
 .si.act .si-t { color: var(--red); }
 /* Mòbil: ig-cards menys altes */
 @media (max-width:640px) {
@@ -426,7 +426,7 @@ footer { padding-top: clamp(2.5rem, 5vw, 4rem); }
   margin-bottom: .75rem !important;
 }
 .crumb a {
-  color: rgba(200,16,46,.8) !important;
+  color: rgba(226,6,19,.8) !important;
 }
 .crumb a:hover {
   color: var(--red) !important;
@@ -563,7 +563,7 @@ footer { padding-top: clamp(2.5rem, 5vw, 4rem); }
   border-left: 3px solid var(--red);
   padding: 1.2rem 1.5rem;
   margin: 2rem 0;
-  background: rgba(200,16,46,.04);
+  background: rgba(226,6,19,.04);
   border-radius: 0 4px 4px 0;
 }
 .bq p {
@@ -595,14 +595,14 @@ table {
   font-size: .82rem;
 }
 th {
-  background: rgba(200,16,46,.12);
+  background: rgba(226,6,19,.12);
   color: var(--cream);
   font-weight: 600;
   font-size: .68rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   padding: .75rem 1rem;
-  border-bottom: 1px solid rgba(200,16,46,.2);
+  border-bottom: 1px solid rgba(226,6,19,.2);
   text-align: left;
 }
 td {

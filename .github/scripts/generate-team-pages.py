@@ -72,9 +72,9 @@ FOOTER = """<footer class="foot">
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Partits i resultats</a>
+        <a href="/partits/">Dies de partit</a>
         <a href="/partits/equips/">Tots els equips</a>
-        <a href="/partits/calendaris/">Calendaris per equip</a>
+        <a href="/partits/calendaris/">Dies de partit per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/blog/">Blog</a>
         <a href="/premsa/">Articles i premsa</a>
@@ -189,7 +189,7 @@ def team_page(e, data, avui):
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "CB Grup Barna", "item": f"{BASE_URL}/"},
-                    {"@type": "ListItem", "position": 2, "name": "Partits i resultats", "item": f"{BASE_URL}/partits/"},
+                    {"@type": "ListItem", "position": 2, "name": "Dies de partit", "item": f"{BASE_URL}/partits/"},
                     {"@type": "ListItem", "position": 3, "name": "Equips", "item": f"{BASE_URL}/partits/equips/"},
                     {"@type": "ListItem", "position": 4, "name": nom, "item": canonical},
                 ],
@@ -206,7 +206,7 @@ def team_page(e, data, avui):
 
     body = f"""{header_html()}
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Partits i resultats</a> · <a href="/partits/equips/">Equips</a> · <span>{esc(nom)}</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Dies de partit</a> · <a href="/partits/equips/">Equips</a> · <span>{esc(nom)}</span></nav></div>
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red">{esc(competicio)}</p>
@@ -269,14 +269,14 @@ def index_page(data, avui):
             {"@type": "CollectionPage", "name": title, "description": desc, "url": canonical, "inLanguage": "ca-ES"},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "CB Grup Barna", "item": f"{BASE_URL}/"},
-                {"@type": "ListItem", "position": 2, "name": "Partits i resultats", "item": f"{BASE_URL}/partits/"},
+                {"@type": "ListItem", "position": 2, "name": "Dies de partit", "item": f"{BASE_URL}/partits/"},
                 {"@type": "ListItem", "position": 3, "name": "Equips", "item": canonical},
             ]},
         ],
     }
     body = f"""{header_html()}
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Partits i resultats</a> · <span>Equips</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Dies de partit</a> · <span>Equips</span></nav></div>
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red">Temporada {esc(data.get('temporada', ''))}</p>
