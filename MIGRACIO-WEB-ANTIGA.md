@@ -136,8 +136,30 @@ La conclusió no és «tornar enrere», és que la migració va deixar fora la p
    accepta: comprovat amb el registre de xarxa del navegador que abans d'acceptar no surt ni una
    petició cap a Google, i que després d'acceptar sí. La decisió es pot canviar des de l'enllaç
    «Galetes» del peu.
-2. **`/documents/`** — hub de documents del club, amb l'assegurança i el protocol d'accident.
-3. **`/instal·lacions/`** — les sis pistes, amb adreça i mapa.
-4. **Horaris de l'Escoleta** a `/escoleta/`.
-5. **`/historia/`** — la pàgina d'història, amb l'origen del nom i dels colors.
-6. Enllaç a la botiga, organigrama i unificació de telèfon, correu i xarxes.
+2. ~~**`/documents/`** — hub de documents del club, amb l'assegurança i el protocol d'accident.~~
+   **FET (14/08/2026).** Hub amb assegurança esportiva (enllaç a la FCBQ), protecció del menor i
+   Pla d'Igualtat, briefing i materials, organigrama i instal·lacions. **Decisió presa:** no s'hi
+   republiquen les convocatòries i comunicats amb data concreta de l'antiga (eleccions, assemblees
+   2023-2024): alguns dels PDF ja donaven 404 fins i tot a l'antiga, i republicar una convocatòria
+   caducada com si fos vigent confon més que ajuda. Queden esmentats a la pàgina amb l'explicació.
+3. ~~**`/instal·lacions/`** — les sis pistes, amb adreça i mapa.~~
+   **FET.** Les sis pistes de l'antiga (La Nau del Clot, Escola Provençals, La Farigola del Clot,
+   La Rambleta del Clot, Escola Casas, Claror Marítim), cadascuna amb enllaç directe a Google Maps.
+   Només s'hi dona l'adreça completa de La Nau del Clot, que ja teníem verificada; per a la resta
+   s'enllaça el cercador de Maps pel nom en lloc d'inventar-se un número de carrer.
+4. **Horaris de l'Escoleta** a `/escoleta/` — **pendent.** L'antiga deia dimecres 17:30-18:40 a
+   l'Escola Casas i dissabtes 09:00-10:30 a la Nau, però no ho he pogut confirmar com a vigent i
+   publicar un horari equivocat fa que una família s'hi planti el dia que no toca. Cal que la
+   confirmi l'Ana (o Julio Torralba) abans de publicar-lo.
+5. ~~**`/historia/`** — la pàgina d'història, amb l'origen del nom i dels colors.~~
+   **FET.** Recuperada del contingut original de l'antiga: la fundació el 1965 com a secció del
+   Centre Parroquial de Sant Martí del Clot, el tennis de taula (3 campionats de Barcelona + 1
+   d'Espanya), l'origen del nom («Grup de Barcelona d'antics estudiants de la Universitat Laboral
+   de Tarragona» → «Grup Barna») i dels colors negre i vermell, i la pedrera del club.
+6. ~~Enllaç a la botiga, organigrama i unificació de telèfon, correu i xarxes.~~
+   **Organigrama fet** (`/organigrama/`), amb la junta i direccions tal com consta a la candidatura
+   oficial. **La resta, sense acció:** la botiga (wintym.com) no s'ha enllaçat perquè no es pot
+   confirmar si segueix activa; el telèfon i el correu de `.info` (698 425 153 /
+   info@cbgrupbarna.com) ja són consistents a tot el web nou i no calia tocar-los — és l'antiga la
+   que es contradiu a si mateixa; i Facebook/Flickr de l'antiga no s'afegeixen al peu perquè no hi
+   ha manera de saber si algú els segueix mantenint.
