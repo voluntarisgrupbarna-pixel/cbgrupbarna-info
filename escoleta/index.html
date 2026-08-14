@@ -258,6 +258,12 @@ figcaption b{color:#CFCBC4;font-weight:700}
 .alum .ara.pend .tag{background:#3A3F47}
 .alum .ara.pend .val{color:var(--grey);font-weight:400}
 
+/* ---------- CHECKS ---------- */
+.checks{display:flex;flex-wrap:wrap;gap:14px 30px;margin:32px 0 6px}
+.checks div{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--paper);font-weight:600}
+.checks i{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;
+  background:var(--red);color:#fff;font-style:normal;font-size:12px;font-weight:700;flex:0 0 auto}
+
 /* ---------- STATS ---------- */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:44px 0}
 .stat{background:var(--ink);padding:30px 24px;text-align:center}
@@ -278,6 +284,8 @@ figcaption b{color:#CFCBC4;font-weight:700}
 .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.75)}
 .btn.wa{display:inline-flex;align-items:center;gap:12px}
 .btn.wa svg{width:22px;height:22px;fill:currentColor;flex:0 0 auto}
+/* Botó sòlid sobre secció fosca (no vermella): cal contrast propi */
+#que-es-escoleta .btn:not(.ghost){background:var(--red);color:#fff}
 
 footer{padding:52px 0;font-size:13px;color:var(--grey);border-top:1px solid var(--line)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
@@ -516,8 +524,8 @@ footer a{color:#CFCBC4}
     <div class="cta">
       <a class="btn" data-lang="ca" href="https://wa.me/34698425153?text=Hola!%20Vull%20informaci%C3%B3%20de%20les%20Portes%20Obertes%20de%20l%27Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="portes-obertes">Apunta't a Portes Obertes</a>
       <a class="btn" data-lang="es" href="https://wa.me/34698425153?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20de%20las%20Puertas%20Abiertas%20de%20la%20Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="portes-obertes">Apúntate a Puertas Abiertas</a>
-      <a class="btn ghost" data-lang="ca" href="#historia">Coneix l'Escoleta</a>
-      <a class="btn ghost" data-lang="es" href="#historia">Conoce la Escoleta</a>
+      <a class="btn ghost" data-lang="ca" href="#que-es-escoleta">Coneix l'Escoleta</a>
+      <a class="btn ghost" data-lang="es" href="#que-es-escoleta">Conoce la Escoleta</a>
     </div>
 
     <div class="facts">
@@ -532,10 +540,64 @@ footer a{color:#CFCBC4}
 </section>
 
 
-<!-- ============ 01 EL PATI ============ -->
-<section>
+<!-- ============ 01 QUÈ ÉS L'ESCOLETA ============ -->
+<section id="que-es-escoleta">
   <div class="wrap">
     <div class="sec-num">01</div>
+    <h2 data-lang="ca">Què és<br>l’Escoleta</h2>
+    <h2 data-lang="es">Qué es<br>la Escoleta</h2>
+
+    <p class="lead" data-lang="ca">Bàsquet per als més petits: descobrir l’esport jugant, entre els 4 i els 7 anys.</p>
+    <p class="lead" data-lang="es">Baloncesto para los más pequeños: descubrir el deporte jugando, entre los 4 y los 7 años.</p>
+
+    <div class="body">
+      <p data-lang="ca">Un programa d’iniciació al bàsquet per introduir els nens i nenes en l’esport d’una manera divertida i educativa. Fomenta l’esforç, el treball en equip, la disciplina i el respecte, sempre en un entorn segur i saludable. Equips mixtos i tres grups per edat.</p>
+      <p data-lang="es">Un programa de iniciación al baloncesto para introducir a los niños y niñas en el deporte de forma divertida y educativa. Fomenta el esfuerzo, el trabajo en equipo, la disciplina y el respeto, siempre en un entorno seguro y saludable. Equipos mixtos y tres grupos por edad.</p>
+    </div>
+
+    <div class="checks">
+      <div data-lang="ca"><i>&#10003;</i>Desenvolupament d’habilitats</div>
+      <div data-lang="es"><i>&#10003;</i>Desarrollo de habilidades</div>
+      <div data-lang="ca"><i>&#10003;</i>Diversió i aprenentatge</div>
+      <div data-lang="es"><i>&#10003;</i>Diversión y aprendizaje</div>
+      <div data-lang="ca"><i>&#10003;</i>Equips mixtos, tres grups per edat</div>
+      <div data-lang="es"><i>&#10003;</i>Equipos mixtos, tres grupos por edad</div>
+    </div>
+
+    <div class="doc">
+      <span class="tag" data-lang="ca">Informació pràctica</span>
+      <span class="tag" data-lang="es">Información práctica</span>
+      <dl>
+        <dt data-lang="ca">Edat</dt><dt data-lang="es">Edad</dt>
+        <dd>4 a 7 anys</dd>
+        <dt data-lang="ca">Instal·lacions</dt><dt data-lang="es">Instalaciones</dt>
+        <dd data-lang="ca">Pavelló Cobert La Nau del Clot · Parc del Clot, C/ Llacuna 170, Barcelona</dd>
+        <dd data-lang="es">Pabellón Cubierto La Nau del Clot · Parque del Clot, C/ Llacuna 170, Barcelona</dd>
+        <dt data-lang="ca">Horaris</dt><dt data-lang="es">Horarios</dt>
+        <dd data-lang="ca">Dimecres de 17:45 a 19:00 · Dissabtes de 9:00 a 10:15</dd>
+        <dd data-lang="es">Miércoles de 17:45 a 19:00 · Sábados de 9:00 a 10:15</dd>
+        <dt data-lang="ca">Durada del curs</dt><dt data-lang="es">Duración del curso</dt>
+        <dd data-lang="ca">De setembre a juny</dd>
+        <dd data-lang="es">De septiembre a junio</dd>
+        <dt data-lang="ca">Contacte</dt><dt data-lang="es">Contacto</dt>
+        <dd>Julio Torralba · <a href="tel:+34646205526">646 205 526</a> · <a href="mailto:cbgrupbarna@gmail.com">cbgrupbarna@gmail.com</a></dd>
+      </dl>
+    </div>
+
+    <div class="btns">
+      <a class="btn" data-lang="ca" href="fulleto-escoleta-cbgrupbarna.pdf" download>Descarrega el fulletó (PDF)</a>
+      <a class="btn" data-lang="es" href="fulleto-escoleta-cbgrupbarna.pdf" download>Descarga el folleto (PDF)</a>
+      <a class="btn ghost" data-lang="ca" href="https://wa.me/34698425153?text=Hola!%20Vull%20informaci%C3%B3%20de%20l%27Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener">Escriu-nos per WhatsApp</a>
+      <a class="btn ghost" data-lang="es" href="https://wa.me/34698425153?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20de%20la%20Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ 02 EL PATI ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-num">02</div>
     <h2 data-lang="ca">Tot va començar<br>en un pati</h2>
     <h2 data-lang="es">Todo empezó<br>en un patio</h2>
 
@@ -571,10 +633,10 @@ footer a{color:#CFCBC4}
   </div>
 </section>
 
-<!-- ============ 02 LA FITXA ============ -->
+<!-- ============ 03 LA FITXA ============ -->
 <section>
   <div class="wrap">
-    <div class="sec-num">02</div>
+    <div class="sec-num">03</div>
     <h2 data-lang="ca">El document<br>que ho demostra</h2>
     <h2 data-lang="es">El documento<br>que lo demuestra</h2>
 
@@ -614,10 +676,10 @@ footer a{color:#CFCBC4}
   </div>
 </section>
 
-<!-- ============ 03 ELS QUE VAN ARRIBAR LLUNY ============ -->
+<!-- ============ 04 ELS QUE VAN ARRIBAR LLUNY ============ -->
 <section>
   <div class="wrap">
-    <div class="sec-num">03</div>
+    <div class="sec-num">04</div>
     <h2 data-lang="ca">Els que van<br>arribar lluny</h2>
     <h2 data-lang="es">Los que llegaron<br>lejos</h2>
 
@@ -805,10 +867,10 @@ footer a{color:#CFCBC4}
   </div>
 </section>
 
-<!-- ============ 04 DAVID MEJIA ============ -->
+<!-- ============ 05 DAVID MEJIA ============ -->
 <section>
   <div class="wrap">
-    <div class="sec-num">04</div>
+    <div class="sec-num">05</div>
     <h2 data-lang="ca">Dinou anys<br>després</h2>
     <h2 data-lang="es">Diecinueve años<br>después</h2>
 
@@ -844,10 +906,10 @@ footer a{color:#CFCBC4}
   </div>
 </section>
 
-<!-- ============ 05 ELS QUE VENEN ============ -->
+<!-- ============ 06 ELS QUE VENEN ============ -->
 <section>
   <div class="wrap">
-    <div class="sec-num">05</div>
+    <div class="sec-num">06</div>
     <h2 data-lang="ca">Els que<br>venen ara</h2>
     <h2 data-lang="es">Los que<br>vienen ahora</h2>
 
@@ -876,10 +938,10 @@ footer a{color:#CFCBC4}
   </div>
 </section>
 
-<!-- ============ 06 L'ESCOLETA AVUI ============ -->
+<!-- ============ 07 L'ESCOLETA AVUI ============ -->
 <section>
   <div class="wrap">
-    <div class="sec-num">06</div>
+    <div class="sec-num">07</div>
     <h2 data-lang="ca">L’Escoleta,<br>avui</h2>
     <h2 data-lang="es">La Escoleta,<br>hoy</h2>
 
@@ -914,10 +976,10 @@ footer a{color:#CFCBC4}
   </div>
 </section>
 
-<!-- ============ 07 LA NAU ============ -->
+<!-- ============ 08 LA NAU ============ -->
 <section id="la-nau">
   <div class="wrap">
-    <div class="sec-num">07</div>
+    <div class="sec-num">08</div>
     <h2 data-lang="ca">Qui entrena<br>a La Nau</h2>
     <h2 data-lang="es">Quién entrena<br>en La Nau</h2>
 
