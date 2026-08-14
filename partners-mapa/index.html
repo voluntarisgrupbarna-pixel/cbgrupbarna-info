@@ -49,6 +49,9 @@ h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(20px,
 footer.foot{padding:30px 0 60px;text-align:center;font-size:13px;color:rgba(14,17,22,0.5);}
 footer.foot a{color:var(--red);text-decoration:none;}
 .leaflet-popup-content b{font-family:'Inter',sans-serif;}
+.ig-embed-container{position:relative;width:100%;padding-bottom:125%;background:#0a0a0a;border-radius:8px;overflow:hidden;margin-top:8px;}
+.ig-embed-container iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.ig-play{display:inline-flex;align-items:center;gap:6px;color:var(--red);text-decoration:none;font-weight:700;font-size:13px;cursor:pointer;background:none;border:none;padding:0;font-family:'Inter',sans-serif;}
 .lang-switch{display:flex;gap:2px;background:rgba(244,241,236,0.12);border-radius:6px;padding:2px;}
 .lang-switch button{background:none;border:none;color:var(--cream);opacity:.55;font-family:'Inter',sans-serif;font-weight:700;font-size:12px;letter-spacing:.03em;padding:6px 10px;border-radius:5px;cursor:pointer;}
 .lang-switch button.active{opacity:1;background:rgba(244,241,236,0.14);}
@@ -140,7 +143,7 @@ const I18N = {
     "h2-altres":"Altres col·laboradors mencionats",
     "lede-altres":"Premsa, entitats i persones properes al club — encara no formen part de la cartela oficial de 21 partners (confirmar amb Ana si s'hi han d'afegir).",
     footer:"CB Grup Barna · Club de Bàsquet · El Clot, Barcelona",
-    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Fitxa →", fitxaChip:"fitxa", fitxaPopup:"Fitxa del partner →",
+    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Fitxa →", fitxaChip:"fitxa", fitxaPopup:"Fitxa del partner →", reel:"Veure la publicació",
     igPendingCard:"Instagram pendent", igPendingChip:"IG pendent",
     partner:"partner", partners:"partners"
   },
@@ -159,7 +162,7 @@ const I18N = {
     "h2-altres":"Otros colaboradores mencionados",
     "lede-altres":"Prensa, entidades y personas cercanas al club — todavía no forman parte de la cartela oficial de 21 partners (confirmar con Ana si hay que añadirlos).",
     footer:"CB Grup Barna · Club de Baloncesto · El Clot, Barcelona",
-    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Ficha →", fitxaChip:"ficha", fitxaPopup:"Ficha del partner →",
+    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Ficha →", fitxaChip:"ficha", fitxaPopup:"Ficha del partner →", reel:"Ver la publicación",
     igPendingCard:"Instagram pendiente", igPendingChip:"IG pendiente",
     partner:"partner", partners:"partners"
   },
@@ -178,7 +181,7 @@ const I18N = {
     "h2-altres":"Other mentioned collaborators",
     "lede-altres":"Press, organisations and people close to the club — not yet part of the official 21-partner outro (to confirm with Ana whether they should be added).",
     footer:"CB Grup Barna · Basketball Club · El Clot, Barcelona",
-    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Partner page →", fitxaChip:"page", fitxaPopup:"Partner page →",
+    instagram:"Instagram", ig:"IG", gmaps:"Google Maps →", fitxa:"Partner page →", fitxaChip:"page", fitxaPopup:"Partner page →", reel:"Watch the post",
     igPendingCard:"Instagram pending", igPendingChip:"IG pending",
     partner:"partner", partners:"partners"
   }
@@ -218,11 +221,11 @@ function pinIcon(institucional){
 const barri = [
   { nom:"Eix Clot", addr:"Carrer de Sant Antoni Maria Claret, 358, Barcelona", ig:"https://www.instagram.com/eixclot/", logo:"/partners/eix-clot.png", fitxa:"/patrocinadors/partners/eix-clot/", lat:41.4133, lng:2.1789 },
   { nom:"La Melosa", addr:"Carrer del Clot, 163, Barcelona", ig:"https://www.instagram.com/melosahamburgueseria/", logo:"/partners/melosa-hamburgueseria.png", fitxa:"/patrocinadors/partners/melosa-hamburgueseria/", lat:41.4082, lng:2.1857 },
-  { nom:"Romeo Abogados", addr:"Carrer de Rossend Nobas, 9, Barcelona", ig:"https://www.instagram.com/romeoabogados/", logo:"/partners/romeo-abogados.png", fitxa:"/patrocinadors/partners/romeo-abogados/", lat:41.4059, lng:2.1911 },
+  { nom:"Romeo Abogados", addr:"Carrer de Rossend Nobas, 9, Barcelona", ig:"https://www.instagram.com/romeoabogados/", logo:"/partners/romeo-abogados.png", fitxa:"/patrocinadors/partners/romeo-abogados/", reel:"DPURn8KiNYg", lat:41.4059, lng:2.1911 },
   { nom:"Armand Òptics", addr:"Carrer del Clot, 66, Barcelona", ig:"https://www.instagram.com/armandoptics/", logo:"/partners/armand-optics.png", fitxa:"/patrocinadors/partners/armand-optics/", lat:41.4055, lng:2.1897 },
   { nom:"Herbolaris Montserrat", addr:"Carrer de Guipúscoa, 77, Barcelona", ig:"https://www.instagram.com/herbolari.montserrat/", logo:"/partners/herbolaris-montserrat.png", fitxa:"/patrocinadors/partners/herbolaris-montserrat/", lat:41.4103, lng:2.1965 },
   { nom:"Westfield Glòries", addr:"Avinguda Diagonal, 208, Barcelona", ig:"https://www.instagram.com/westfieldglories/", logo:"/partners/westfield-glories.png", fitxa:"/patrocinadors/partners/westfield-glories/", lat:41.4053, lng:2.1893 },
-  { nom:"Clínica Dental Bac de Roda", addr:"Carrer del Concili de Trento, 110, Barcelona", ig:"https://www.instagram.com/clinicadentalbacderoda/", logo:"/partners/clinica-dental-bac-de-roda.png", fitxa:"/patrocinadors/partners/clinica-dental-bac-de-roda/", lat:41.4113, lng:2.1975 },
+  { nom:"Clínica Dental Bac de Roda", addr:"Carrer del Concili de Trento, 110, Barcelona", ig:"https://www.instagram.com/clinicadentalbacderoda/", logo:"/partners/clinica-dental-bac-de-roda.png", fitxa:"/patrocinadors/partners/clinica-dental-bac-de-roda/", reel:"DPjrVr6iO7B", lat:41.4113, lng:2.1975 },
   { nom:"Foto Jané", addr:"Carrer de Ciutat de Granada, 52, Barcelona", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/foto-jane.png", fitxa:"/patrocinadors/partners/foto-jane/", lat:41.4095, lng:2.1935 },
   { nom:"Mercat dels Encants", addr:"Avinguda Meridiana, 69 (Plaça de les Glòries Catalanes), Barcelona", ig:null, ig_note:"Instagram per confirmar", logo:"/partners/mercat-dels-encants.png", fitxa:"/patrocinadors/partners/mercat-dels-encants/", lat:41.4036, lng:2.1877 },
   { nom:"Ovella Negra", addr:"Carrer de Zamora, 78, Barcelona", ig:"https://www.instagram.com/ovellanegrabcn/", logo:"/partners/ovella-negra.png", fitxa:"/patrocinadors/partners/ovella-negra/", lat:41.4020, lng:2.1930 },
@@ -268,11 +271,18 @@ const noPin = [
   { nom:"Ajuntament de Barcelona", ig:"https://www.instagram.com/barcelona_cat/" }
 ];
 
+function playReel(btn, reelId){
+  const wrap = document.createElement('div');
+  wrap.className = 'ig-embed-container';
+  wrap.innerHTML = `<iframe src="https://www.instagram.com/reel/${reelId}/embed/" allowtransparency="true" allowfullscreen="true" frameborder="0" scrolling="no" loading="lazy"></iframe>`;
+  btn.replaceWith(wrap);
+}
 function cardHtml(p){
   return logoBadge(p) + `<div class="body"><b>${p.nom}</b><span class="addr">${p.addr}</span>` +
     (p.ig ? `<a class="ig" href="${p.ig}" target="_blank" rel="noopener">${t('instagram')}</a>` : `<span style="color:rgba(14,17,22,.4);font-size:13px;">${p.ig_note || t('igPendingCard')}</span>`) +
     `<a class="gmaps" href="${gmaps(p.addr)}" target="_blank" rel="noopener">${t('gmaps')}</a>` +
-    (p.fitxa ? `<a class="gmaps" href="${p.fitxa}">${t('fitxa')}</a>` : '') + `</div>`;
+    (p.fitxa ? `<a class="gmaps" href="${p.fitxa}">${t('fitxa')}</a>` : '') +
+    (p.reel ? `<br><button class="ig-play" onclick="playReel(this,'${p.reel}')">▶ ${t('reel')}</button>` : '') + `</div>`;
 }
 function popupHtml(p){
   const igLine = p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">${t('instagram')} →</a>` : (p.ig_note || '');
@@ -297,7 +307,7 @@ function buildMap(elId, listId, countId, data, center, zoom){
   const items = data.map(p => {
     const m = L.marker([p.lat, p.lng], { icon: pinIcon(p.institucional) }).addTo(map);
     const li = document.createElement('li');
-    li.addEventListener('click', (e) => { if (e.target.tagName !== 'A') { map.flyTo([p.lat, p.lng], 16); m.openPopup(); } });
+    li.addEventListener('click', (e) => { if (e.target.tagName !== 'A' && e.target.tagName !== 'BUTTON') { map.flyTo([p.lat, p.lng], 16); m.openPopup(); } });
     li.style.cursor = 'pointer';
     list.appendChild(li);
     return { p, m, li };
