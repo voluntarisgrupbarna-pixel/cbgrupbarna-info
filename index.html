@@ -523,6 +523,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-side.r { justify-content: flex-end; }
 .head-nav { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); }
 .head-nav a { position: relative; padding: 7px 0; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; white-space: nowrap; }
+/* Icones socials: monocromes, vermell del club en passar-hi. Cap fitxer extern. */
+.soc { display: inline-flex; align-items: center; gap: 13px; }
+.soc a { padding: 0; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; color: var(--ink); transition: color 0.3s var(--ease), transform 0.3s var(--ease); }
+.soc a svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+.soc a:hover { color: var(--red); transform: translateY(-2px); }
+.soc a::after { content: none; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
 .head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; justify-self: center; }
@@ -553,7 +559,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .lead { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 0; }
 .lead-media { position: relative; overflow: hidden; background: var(--paper-2); aspect-ratio: 5 / 4; }
 .lead-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; animation: leadZoom 16s var(--ease) both; }
-@keyframes leadZoom { from { transform: scale(1.07); } to { transform: scale(1); } }
+/* Zoom molt contingut: la foto d'origen és de 375x500 i qualsevol ampliació
+   extra en delata la manca de definició. */
+@keyframes leadZoom { from { transform: scale(1.02); } to { transform: scale(1); } }
 .lead-media .tagline { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
 .lead-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 6vw, 88px) clamp(22px, 5vw, 76px); }
 .lead-body h1 { font-size: clamp(25px, 3.4vw, 44px); margin: 18px 0 0; }
@@ -717,6 +725,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .foot-col a, .foot-col p { display: block; padding: 6px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
 .foot-col a { display: flex; align-items: center; min-height: 44px; }
 .foot-col a { transition: color 0.3s; }
+.foot-soc { gap: 10px; }
+.foot-soc svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 .foot-col a:hover { color: var(--red); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
 .foot-mark { font-family: var(--display); font-weight: 300; font-size: clamp(12px, 2vw, 16px); letter-spacing: 0.4em; text-transform: uppercase; }
@@ -805,7 +815,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </a>
     <div class="head-side r">
       <nav class="head-nav" aria-label="Xarxes i contacte">
-        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="head-ig">Instagram</a>
+        <span class="soc">
+          <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="head-ig" aria-label="Instagram del CB Grup Barna · @cbgrupbarna">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 1.98c-3.15 0-3.5.01-4.74.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.4.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.39-.32-1.71a2.86 2.86 0 0 0-.69-1.06 2.86 2.86 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32-1.24-.06-1.59-.07-4.74-.07Zm0 3.37a4.49 4.49 0 1 1 0 8.98 4.49 4.49 0 0 1 0-8.98Zm0 7.4a2.91 2.91 0 1 0 0-5.82 2.91 2.91 0 0 0 0 5.82Zm5.72-7.58a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0Z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener" data-cta="head-tt" aria-label="TikTok del CB Grup Barna · @cbgrupbarna">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.5 2h-2.9v12.3a2.5 2.5 0 1 1-2.5-2.5c.2 0 .4 0 .6.06V8.9a5.6 5.6 0 0 0-.6-.03 5.44 5.44 0 1 0 5.44 5.44V8.2a6.7 6.7 0 0 0 3.96 1.28V6.6a3.9 3.9 0 0 1-2.6-1.06A3.9 3.9 0 0 1 16.5 2Z"/></svg>
+          </a>
+        </span>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="head-wa">Contacte</a>
       </nav>
     </div>
@@ -850,7 +867,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <!-- ==== ESCOLETA · el que toca aquest mes ==== -->
   <section class="lead" id="escoleta">
     <div class="lead-media">
-      <img src="img/escoleta.webp" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota i la mascota del club" fetchpriority="high" decoding="async">
+      <img src="img/escoleta.webp"
+           srcset="img/escoleta.webp 375w, img/escoleta@2x.webp 750w"
+           sizes="(max-width: 900px) 100vw, 50vw"
+           width="375" height="500"
+           alt="Nena de l'Escoleta del CB Grup Barna amb la pilota i la mascota del club" fetchpriority="high" decoding="async">
       <span class="tagline">Inscripcions obertes</span>
     </div>
     <div class="lead-body">
@@ -1192,8 +1213,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>
-        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
+        <a class="foot-soc" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 1.98c-3.15 0-3.5.01-4.74.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.4.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.39-.32-1.71a2.86 2.86 0 0 0-.69-1.06 2.86 2.86 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32-1.24-.06-1.59-.07-4.74-.07Zm0 3.37a4.49 4.49 0 1 1 0 8.98 4.49 4.49 0 0 1 0-8.98Zm0 7.4a2.91 2.91 0 1 0 0-5.82 2.91 2.91 0 0 0 0 5.82Zm5.72-7.58a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0Z"/></svg>Instagram</a>
+        <a class="foot-soc" href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.5 2h-2.9v12.3a2.5 2.5 0 1 1-2.5-2.5c.2 0 .4 0 .6.06V8.9a5.6 5.6 0 0 0-.6-.03 5.44 5.44 0 1 0 5.44 5.44V8.2a6.7 6.7 0 0 0 3.96 1.28V6.6a3.9 3.9 0 0 1-2.6-1.06A3.9 3.9 0 0 1 16.5 2Z"/></svg>TikTok</a>
         <a href="https://twitter.com/cbgrupbarna" target="_blank" rel="noopener">X</a>
         <a href="https://www.cbgrupbarna.com" target="_blank" rel="noopener">cbgrupbarna.com</a>
       </div>
