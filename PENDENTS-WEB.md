@@ -60,7 +60,21 @@ amb `noindex` cap a `/patrocinadors/`. Posar-les al sitemap seria demanar-li a G
 indexi tres redireccions. Tampoc hi va `/fotos-esdeveniments/3x3-westfield-2026/`, que
 porta `noindex` propi.
 
-### 5. `noindex` a l'eina interna
+### 5. Landing de bàsquet femení · `/femeni/`
+
+Pàgina nova que **integra** el coneixement de la web oficial del Premi Dona i Esport sense
+replicar-la: text propi i resumit, i enllaç al document oficial per a la versió completa.
+
+Conté: els tres pilars del Mètode (50% del pressupost, 38 entrenadores / 65,5% de l'staff,
+53,7% d'audiència femenina), els 8 equips femenins federats de la 26-27 enllaçats a la seva
+fitxa de `/partits/equips/`, el Cicle de Lideratge en sis fases, l'Efecte Ainhoa, la Línia
+Femenina, la taula de documentació oficial, FAQ indexable i crida final.
+
+Construïda amb `/css/barna.css` (mateix sistema visual que Campus i 3x3), amb JSON-LD
+—`WebPage`, `SportsOrganization`, `FAQPage` i `BreadcrumbList`— i donada d'alta al
+`sitemap.xml`, al `llms.txt`, al menú de la portada i a «El Barna, punt per punt».
+
+### 6. `noindex` a l'eina interna
 
 `fotos/migrar-flickr.html` ja porta `noindex, nofollow` com la resta d'admins.
 
