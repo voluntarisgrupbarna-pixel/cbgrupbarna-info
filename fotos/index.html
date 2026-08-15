@@ -665,21 +665,28 @@ function isFlickr(ev) { return ev.source === 'flickr'; }
 function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
 function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v|avi)$/i.test(ref || ''); }
 
+// wsrv.nl: proxy gratuït que redimensiona i comprimeix a WebP al vol qualsevol
+// imatge pública. Les fotos pujades des de l'admin es guarden a mida original
+// (sovint 1-2 MB) i sense això la graella carregaria totes les fotos a mida
+// completa — d'aquí la lentitud. Els vídeos no es toquen (wsrv és només imatges).
+function repoUrl(ev, ref) { return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`; }
+function wsrv(url, w) { return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=${w}&q=75&output=webp`; }
+
 function photoThumb(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : wsrv(repoUrl(ev, ref), 400);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_q.jpg`;
   return THUMB(ref);
 }
 function photoFull(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : wsrv(repoUrl(ev, ref), 1600);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_b.jpg`;
   return FULL(ref);
 }
 function photoDl(ev, ref) {
   if (!ref) return '#';
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return repoUrl(ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_o.jpg`;
   return DL(ref);
 }
@@ -692,7 +699,7 @@ function eventCover(ev) {
   if (isRepo(ev)) {
     const ref = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
     if (!ref) return PLACEHOLDER;
-    return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+    return wsrv(repoUrl(ev, ref), 500);
   }
   return THUMB(ev.cover);
 }
