@@ -13,7 +13,7 @@
 (function (global) {
   'use strict';
 
-  var PASS_HASH = '9cbc3aa2b0d7c37b03bbd221d6ea5a24528524bedc4c560387f287907a91ddb9';
+  var PASS_HASH = '41d74e142b2d9d8b18514cfcc1154932370803ba82c30fb7f9088a1535312422';
   var KEY = 'cbgb_admin_pass_ok';
 
   function el(tag, css, html) {
