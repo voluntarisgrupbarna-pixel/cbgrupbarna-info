@@ -162,4 +162,5 @@ La conclusió no és «tornar enrere», és que la migració va deixar fora la p
    confirmar si segueix activa; el telèfon i el correu de `.info` (698 425 153 /
    info@cbgrupbarna.com) ja són consistents a tot el web nou i no calia tocar-los — és l'antiga la
    que es contradiu a si mateixa; i Facebook/Flickr de l'antiga no s'afegeixen al peu perquè no hi
-   ha manera de saber si algú els segueix mantenint.
+   ha manera de saber si algú els segueix mantenint. **Confirmat per l'Ana (15/08/2026): no enllaçar
+   Wintym, Flickr ni Facebook.**

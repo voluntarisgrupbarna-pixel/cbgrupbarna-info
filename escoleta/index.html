@@ -120,16 +120,22 @@ a{color:inherit}
 body{padding-bottom:66px}
 @media(max-width:520px){.pobar span{font-size:12px}.pobar{gap:10px}}
 
-/* ---------- LANG SWITCH ---------- */
+/* ---------- LANG SWITCH + SITE NAV (una sola barra fixa) ---------- */
 .langbar{
   position:fixed;top:0;left:0;right:0;z-index:60;
   background:rgba(14,17,22,.88);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.langbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
-.brandmark{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase}
+.langbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;height:56px}
+.brandmark{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:inherit}
 .brandmark span{color:var(--red)}
-.langs{display:flex;gap:4px}
+.site-nav{display:flex;align-items:center;gap:16px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.site-nav::-webkit-scrollbar{display:none}
+.site-nav a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);white-space:nowrap;text-decoration:none;transition:color .15s}
+.site-nav a:hover{color:#fff}
+@media(max-width:1080px){.site-nav a.opt{display:none}}
+@media(max-width:640px){.site-nav{display:none}}
+.langs{display:flex;gap:4px;flex-shrink:0}
 .langs button{
   font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;
   background:transparent;color:var(--grey);border:1px solid var(--line);
@@ -484,7 +490,18 @@ footer a{color:#CFCBC4}
 
 <div class="langbar">
   <div class="wrap">
-    <div class="brandmark">CB Grup Barna <span>·</span> Escoleta</div>
+    <a class="brandmark" href="/">CB Grup Barna <span>·</span> Escoleta</a>
+    <nav class="site-nav" aria-label="Navegació principal">
+      <a href="/club/">Club</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
+      <a href="/partits/">Dies de partit</a>
+      <a href="/patrocinadors/" class="opt">Patrocinadors</a>
+      <a href="/campus/" class="opt">Campus</a>
+      <a href="/3x3/" class="opt">3x3</a>
+      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/fotos/" class="opt">Galeria</a>
+      <a href="/premsa/">Premsa</a>
+    </nav>
     <div class="langs">
       <button type="button" data-set="ca" aria-pressed="true">CAT</button>
       <button type="button" data-set="es" aria-pressed="false">CAST</button>
