@@ -1,7 +1,20 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Actualitzat: 2026-08-12
+// Actualitzat: 2026-08-15
 
 window.GALERIA_EVENTS = [
+  {
+    "id": "escola-basquet-julio-torralba-msuey2fd",
+    "title": "ESCOLA BÀSQUET- JULIO TORRALBA",
+    "description": "Fotos de jugadors i jugadores, i esdeveniments realitzats",
+    "date": "2025-09-15",
+    "season": "2025-2026",
+    "location": "GRUP BARNA",
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo"
+  },
   {
     "id": "summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9",
     "title": "SUMMER CAMP 2526  GRUP BARNA-TIME CHAMBER EXPERIENCE",
