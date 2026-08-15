@@ -4,8 +4,11 @@
     "No hi entren publicacions pròpies ni fitxes de resultats.",
     "Serveix de base per al robot d'avisos: cada dia compara el que troba amb aquesta llista i",
     "només avisa del que no hi és. Quan trobi una peça nova, l'afegeix aquí i puja el canvi.",
-    "Els articles del bloc inicial venen de la recerca del 2026-08 i encara no tenen URL",
-    "verificada un per un: el camp url queda buit fins que algú el comprova."
+    "Els articles del bloc inicial venen de la recerca del 2026-08 i la majoria encara no tenen",
+    "URL verificada un per un: el camp url queda buit fins que algú el comprova. La versió",
+    "llegible d'aquest mateix arxiu és /premsa/arxiu/index.html (pàgina web, en HTML estàtic).",
+    "Aquest JSON és la font de dades que consulta el robot d'avisos diaris; si s'afegeix un",
+    "article nou aquí, cal afegir-lo també a index.html perquè es vegi al web."
   ],
   "actualitzat": "2026-08-14",
   "ultima_comprovacio": "2026-08-14",
@@ -23,8 +26,8 @@
   ],
   "articles": [
     {"data": "2026-07-13", "mitja": "El Clotenc", "titol": "El CB Grup Barna fa història amb els dos sèniors a la Supercopa FCBQ", "tema": "club", "protagonisme": "protagonista", "url": ""},
-    {"data": "2026-06-05", "mitja": "Metrópoli Abierta", "titol": "El baloncesto urbano toma Westfield Glòries: 300 jugadores se citan en la tercera edición de su torneo 3x3", "tema": "esdeveniment", "protagonisme": "coorganitzador", "url": ""},
-    {"data": "2025-12-26", "mitja": "L'Alqueria del Basket", "titol": "Somnis Cup kicks off its first edition in L'Alqueria", "tema": "torneig", "protagonisme": "participant", "url": ""},
+    {"data": "2026-06-05", "mitja": "Metrópoli Abierta", "titol": "El baloncesto urbano toma Westfield Glòries: 300 jugadores se citan en la tercera edición de su torneo 3x3", "tema": "esdeveniment", "protagonisme": "coorganitzador", "url": "https://metropoliabierta.elespanol.com/vivir-en-barcelona/20260605/baloncesto-urbano-toma-westfield-glories-jugadores-citan-tercera-edicion-torneo/1003742767855_0.html"},
+    {"data": "2025-12-26", "mitja": "L'Alqueria del Basket", "titol": "Somnis Cup kicks off its first edition in L'Alqueria", "tema": "torneig", "protagonisme": "participant", "url": "https://alqueriadelbasket.com/?id=1109&r=noticias%2Fvistaunica"},
     {"data": "2024-12-30", "mitja": "Mundo Deportivo", "titol": "El Molinet corona a sus nuevos campeones", "tema": "torneig", "protagonisme": "campió femení de categoria", "url": ""},
     {"data": "2024-11-21", "mitja": "Mundo Deportivo", "titol": "El basket regresa a La Modelo", "tema": "menció", "protagonisme": "menció a la trajectòria d'un participant", "url": ""},
     {"data": "2024-03-24", "mitja": "Mundo Deportivo", "titol": "El Barça Genuine da ejemplo: «Que ninguna discapacidad pueda…»", "tema": "menció", "protagonisme": "menció a la trajectòria del protagonista", "url": ""},
