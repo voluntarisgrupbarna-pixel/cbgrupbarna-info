@@ -25,6 +25,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
+<style>
+  .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 38px 0; }
+  .photo-strip figure { margin: 0; }
+  .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
+  @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -152,6 +158,7 @@
   ]
 }
 </script>
+<script src="/js/galetes.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -162,13 +169,15 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
-      <a href="/escoleta/">Escoleta</a>
+      <a href="/club/">Club</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
+      <a href="/partits/">Dies de partit</a>
+      <a href="/patrocinadors/" class="opt">Patrocinadors</a>
       <a href="/campus/" class="opt">Campus</a>
       <a href="/3x3/" class="opt">3x3</a>
-      <a href="/blog/" class="opt">Blog</a>
-      <a href="/premsa/" class="opt">Premsa</a>
-      <a href="/patrocinadors/" class="opt">Patrocinadors</a>
-      <a href="/#info">Informació</a>
+      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/fotos/" class="opt">Galeria</a>
+      <a href="/premsa/">Premsa</a>
     </nav>
   </div>
 </header>
@@ -220,6 +229,17 @@
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
 
+    <h2>El campus, en imatges</h2>
+    <p>Fotos de la darrera edició amb Time Chamber, a La Nau del Clot.</p>
+    <div class="photo-strip">
+      <figure><img src="img/campus-2026-01.jpg" alt="Sessió de vídeo amb l'entrenador durant el campus de bàsquet del CB Grup Barna" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="img/campus-2026-02.jpg" alt="Jugadors i jugadores del campus tirant a cistella a La Nau del Clot" loading="lazy" decoding="async" width="900" height="675"></figure>
+      <figure><img src="img/campus-2026-03.jpg" alt="Entrenador del campus explicant un exercici amb la pilota" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="img/campus-2026-04.jpg" alt="Jugadora del campus en posició de tir" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="img/campus-2026-05.jpg" alt="Jugador del campus botant la pilota entre companys" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="img/campus-2026-06.jpg" alt="Grup de jugadors del campus fent un exercici de tir" loading="lazy" decoding="async" width="900" height="1350"></figure>
+    </div>
+
     <div class="franges" aria-label="Altres portes del club">
       <a class="franja" href="/escoleta/" data-cta="campus-franja-escoleta">
         <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
@@ -253,7 +273,7 @@
     demanar l'avís previ: el club escriu a qui és a la llista quan s'obren les places, un dia abans
     de publicar-ho.</p>
 
-    <h2>Preguntes freqüents</h2>
+    <h2 id="faq">Preguntes freqüents</h2>
     <div class="faq"><details><summary>Per a quines edats és el campus de bàsquet?</summary><p>El campus del CB Grup Barna és per a jugadors i jugadores de base, des de l'edat de l'Escoleta fins a categories cadet i júnior. Els grups es fan per edat i nivell, de manera que un nen o nena que comença no entrena amb qui ja porta anys competint.</p></details><details><summary>Cal jugar al CB Grup Barna per apuntar-s'hi?</summary><p>No. El campus és obert a jugadors i jugadores de qualsevol club de Barcelona i de la província. Cada setmana hi ha places per a gent del Barna i places per a gent de fora.</p></details><details><summary>Quantes places hi ha per setmana?</summary><p>El campus treballa amb un límit aproximat de 50 places per setmana per mantenir la ràtio d'entrenador per jugador. Les setmanes s'omplen per ordre d'inscripció i les darreres edicions s'han completat abans de començar.</p></details><details><summary>On es fa el campus?</summary><p>Al barri del Clot, Districte de Sant Martí de Barcelona. La Nau del Clot és el punt esportiu principal del CB Grup Barna.</p></details><details><summary>Quan obren les inscripcions de la propera edició?</summary><p>Les dates de la propera edició s'anuncien a aquesta pàgina i a Instagram (@cbgrupbarna). Qui vulgui rebre l'avís abans que s'obri al públic pot demanar-ho pel WhatsApp del club (+34 698 425 153) i entra a la llista d'avisos.</p></details></div>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
@@ -270,7 +290,11 @@
         <a href="/escoleta/">Escola de bàsquet</a>
         <a href="/campus/">Campus de bàsquet</a>
         <a href="/3x3/">Torneig 3x3</a>
+        <a href="/cistella-petita/">Cistella Petita</a>
         <a href="/patrocinadors/">Patrocinadors i partners</a>
+        <a href="/instal-lacions/">Instal·lacions</a>
+        <a href="/organigrama/">Organigrama</a>
+        <a href="/posicionament/">Posicionament del club</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
       </div>
       <div class="foot-col">
@@ -285,9 +309,16 @@
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
+        <a href="/faq/">Preguntes freqüents</a>
         <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/politica-de-privacitat/">Política de privacitat</a>
+        <a href="/avis-legal/">Avís legal</a>
+        <a href="/politica-de-privacitat/#galetes">Galetes</a>
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>
