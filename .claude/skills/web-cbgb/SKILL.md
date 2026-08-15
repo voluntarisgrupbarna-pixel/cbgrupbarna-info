@@ -67,6 +67,10 @@ en pantalla retina calen el doble de píxels dels que ocupa. Si el fitxer no hi
 arriba, hi ha dues sortides honestes: canviar la foto o **fer més petit el marc**.
 Ampliar-la es nota sempre.
 
+**Només fotos de qualitat.** Nítides, ben exposades i sense gra ni desenfocament
+de moviment. Una foto fluixa abaixa tota la pàgina: si no n'hi ha cap de bona
+per a una peça, val més una franja de color pla que una foto dolenta.
+
 > Estat actual: les fotos de `img/` fan entre 360 i 550 px d'ample. No hi ha
 > originals més grans al repositori. Qualsevol maqueta amb marcs amples les
 > delatarà. I no hi ha **cap foto moderna en alta de l'Escoleta (4-7 anys)**:
