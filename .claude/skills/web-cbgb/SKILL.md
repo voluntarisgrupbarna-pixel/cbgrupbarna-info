@@ -67,10 +67,53 @@ en pantalla retina calen el doble de píxels dels que ocupa. Si el fitxer no hi
 arriba, hi ha dues sortides honestes: canviar la foto o **fer més petit el marc**.
 Ampliar-la es nota sempre.
 
-> Estat actual: les fotos de `img/` fan entre 360 i 550 px d'ample. No hi ha
-> originals més grans al repositori. Qualsevol maqueta amb marcs amples les
-> delatarà. I no hi ha **cap foto moderna en alta de l'Escoleta (4-7 anys)**:
-> això es resol amb una sessió de fotos, no amb codi.
+Les fotos ja retallades de `img/` fan entre 360 i 550 px d'ample: serveixen per a
+marcs petits i prou. **Els originals grans sí que hi són**, a `fotos/uploads/`:
+
+| Àlbum | Què hi ha | Mida |
+|---|---|---|
+| `summer-camp-2526-…` | Campus: entrenaments, tir, grups, entrenadors | fins a 3648 × 5472 |
+| `fotos-equips-temporada-25-26-records` | Foto oficial de cada equip, Escola inclosa | 1200 × 900 |
+| `cistella-petita-2a-edicio-2026` | Dia de la Cistella Petita | petites, de mòbil |
+
+També hi ha `photos/` (retrats d'estudi, sèniors, entrada de la pista, mascota),
+entre 700 i 1600 px.
+
+**No enllacis mai un original**: pesen fins a 14 MB. Passa'ls per
+`scripts/build-blog-images.py`, que retalla des de dalt, comprimeix a WebP i en
+treu dues mides (`nom.webp` i `nom@2x.webp`). Aquell script **es nega a generar**
+qualsevol peça que hagi de mostrar-se més gran del que és: si t'avisa, no forcis
+res, fes més petit el marc.
+
+> El que segueix faltant és **una foto moderna en alta de l'Escoleta (4-7 anys)**:
+> l'única que hi ha és `img/escoleta@2x.webp`, de 750 px. Això es resol amb una
+> sessió de fotos, no amb codi.
+
+---
+
+## 3b. Gràfics i dades
+
+**Un gràfic es fa amb HTML i CSS, no amb una imatge.** Una captura d'un gràfic
+es veu borrosa, no es pot seleccionar, no la llegeix un lector de pantalla i el
+text se n'hi fa il·legible al mòbil. Un SVG amb text a dins té el mateix
+problema: si l'SVG escala, la lletra escala amb ell.
+
+L'SVG només val per a **geometria pura i sense text** —una pista, un plànol— i
+amb `vector-effect: non-scaling-stroke` perquè les línies no s'aprimin.
+
+Els components ja fets viuen a `css/barna.css`: `.bars` (barres comparades),
+`.scale` (trams proporcionals: edats, mesos, setmanes), `.ratio` amb `.dots`
+(comptar persones d'una en una), `.gauge` (una escala amb la franja on la cosa
+es trenca), `.split` (un repartiment en dos trams), `table.vs` (comparativa) i
+`.court` (la pista). N'hi ha exemples de tots a `/blog/`.
+
+Tres regles que no es negocien:
+- **Un sol accent, el vermell**, i marca'n *una* cosa. Cinc barres vermelles no
+  destaquen res.
+- **Cap dada distingida només pel color.** Sempre porta el número o l'etiqueta al
+  costat: qui no distingeix el vermell del gris ha de poder llegir el gràfic.
+- **Cap llegenda que no correspongui al dibuix.** Si el vermell marca un llindar,
+  no el facis servir també per dir «per sota del llindar».
 
 ---
 
@@ -143,6 +186,13 @@ Cap color pot tenir la seva única definició dins d'un bloc de mode.
   recorda que `textContent` **no** interpreta entitats: allà fes servir `·`.
 - **Amplada del menú**: un text llarg pot partir la navegació en tres línies.
   Els enllaços secundaris porten `.opt` i cauen primer entre 1080 i 1280 px.
+- **Marges automàtics dins d'una graella**: un fill de `grid` amb
+  `margin-inline: auto` i sense `width` s'encongeix fins al contingut. Si el
+  contingut és una imatge en `position: absolute`, el marc queda a **zero** i no
+  se'n veu res. Posa-hi `width: 100%` al costat del `max-width`.
+- **Especificitat dins de `.prose`**: `.prose p` (0,1,1) guanya a una classe sola
+  (0,1,0). Qualsevol `<p>` d'un component que visqui dins d'un article s'ha
+  d'escriure `.chart p.la-classe`, si no s'hi perden la mida i el color.
 
 ## 9. Abans de publicar
 
@@ -153,3 +203,5 @@ Cap color pot tenir la seva única definició dins d'un bloc de mode.
 5. Funciona en clar i en fosc, i es veu en quin mode s'està?
 6. Si has tocat una pàgina generada, has editat el generador?
 7. Sense desbordament horitzontal, i amb focus visible al teclat?
+8. Si hi ha gràfics: cap dada es distingeix només pel color?
+9. Si hi ha versió en castellà o en anglès de la pàgina, l'has tocada també?
