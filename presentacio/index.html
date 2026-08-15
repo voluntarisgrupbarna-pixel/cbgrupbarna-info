@@ -110,11 +110,24 @@
 
   /* STATS */
   .stats-sec{padding:clamp(50px,7vw,80px) 0;border-top:1px solid var(--line)}
-  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
   .stat-cell{background:var(--ink);padding:26px 14px;text-align:center}
   .stat-cell b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(28px,3.6vw,42px);color:var(--red-ink)}
   .stat-cell span{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px}
   @media(max-width:700px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* SECTION WITH BACKGROUND PHOTO */
+  .sec-bg{position:relative;overflow:hidden}
+  .sec-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.25}
+  .sec-bg-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.86),rgba(10,10,10,.95));z-index:1}
+  .sec-bg>.wrap{position:relative;z-index:2}
+
+  /* STAFF STRIP */
+  .staff-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-top:none}
+  .staff-strip figure{background:var(--ink);margin:0}
+  .staff-strip img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top}
+  .staff-strip figcaption{padding:10px 6px;text-align:center;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  @media(max-width:700px){.staff-strip{grid-template-columns:repeat(2,1fr)}}
 
   /* QUOTE */
   .quote-sec{padding:clamp(50px,7vw,80px) 0;text-align:center;border-top:1px solid var(--line)}
@@ -213,43 +226,36 @@
   </div>
 </section>
 
-<!-- XIFRES -->
-<section class="stats-sec">
-  <div class="wrap">
-    <p class="eyebrow" style="text-align:center">· En xifres</p>
-    <div class="stat-grid">
-      <div class="stat-cell"><b>60</b><span>Anys</span></div>
-      <div class="stat-cell"><b>2</b><span>Barris</span></div>
-      <div class="stat-cell"><b>+450</b><span>Famílies</span></div>
-      <div class="stat-cell"><b>+40</b><span>Equips de formació</span></div>
-      <div class="stat-cell"><b>65,5%</b><span>Staff tècnic dones</span></div>
-      <div class="stat-cell"><b>38</b><span>Entrenadores actives</span></div>
-      <div class="stat-cell"><b>+110</b><span>Equips al 3×3 Barna</span></div>
-      <div class="stat-cell"><b>6</b><span>Escoles del barri</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- COMUNITAT -->
+<!-- COMUNITAT (xifra destacada) -->
 <div class="split">
-  <div class="split-media"><img src="img/comunitat-bg.jpg" alt="Famílies i jugadors del CB Grup Barna"></div>
+  <div class="split-media"><img src="img/gb-147.jpg" alt="Jugadors i jugadores del CB Grup Barna"></div>
   <div class="split-txt">
     <p class="eyebrow">· Comunitat</p>
-    <h2>+450 Famílies</h2>
-    <p>+450 famílies i +40 equips de formació masculins i femenins, impulsant el desenvolupament
-    esportiu i humà dels nens i nenes del Poblenou i el Clot.</p>
+    <h2 style="font-size:clamp(52px,9vw,120px);line-height:.85;color:var(--red-ink)">+450</h2>
+    <p style="font-family:var(--display);font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;color:#fff;margin-top:2px">Famílies</p>
+    <div style="display:flex;gap:30px;margin-top:26px">
+      <div><b style="display:block;font-family:var(--display);font-size:22px;color:#fff">+40</b><span style="display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Equips</span></div>
+      <div><b style="display:block;font-family:var(--display);font-size:22px;color:#fff">2</b><span style="display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Barris</span></div>
+      <div><b style="display:block;font-family:var(--display);font-size:22px;color:#fff">60</b><span style="display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Anys</span></div>
+    </div>
   </div>
 </div>
 
 <!-- LIDERATGE FEMENI -->
 <div class="split rev">
-  <div class="split-media"><img src="img/ent-42.jpg" alt="Jugadora de l'Escoleta del CB Grup Barna"></div>
+  <div class="split-media"><img src="img/torre-glories.jpg" alt="Barcelona, ciutat del CB Grup Barna"></div>
   <div class="split-txt">
     <p class="eyebrow">· Igualtat &amp; Lideratge</p>
     <h2>Igualtat i Lideratge Femení</h2>
     <p><strong style="color:#fff">65,5%</strong> del staff tècnic són dones — <strong style="color:#fff">38 entrenadores actives</strong> al club, amb un pla propi de formació i mentoria interna. Un model estructural, no estètic.</p>
     <p>Per al detall complet: <a class="inline-link" href="/femeni/">Bàsquet femení</a> i <a class="inline-link" href="/basquet-femeni/el-metode-barna/">El Mètode Barna</a>.</p>
   </div>
+</div>
+<div class="staff-strip">
+  <figure><img src="img/ent-42.jpg" alt="Entrenadora del CB Grup Barna"><figcaption>Entrenadores</figcaption></figure>
+  <figure><img src="img/ent-65.jpg" alt="Staff tècnic del CB Grup Barna"><figcaption>Staff tècnic</figcaption></figure>
+  <figure><img src="img/ent-36.jpg" alt="Equip formatiu del CB Grup Barna"><figcaption>Equip formatiu</figcaption></figure>
+  <figure><img src="img/ent-47.jpg" alt="Cos tècnic del CB Grup Barna"><figcaption>Cos tècnic</figcaption></figure>
 </div>
 
 <section class="quote-sec">
@@ -270,8 +276,9 @@
 </div>
 
 <!-- COMUNITAT I EDUCACIO -->
-<section class="plain-sec">
-  <div class="wrap">
+<div class="split">
+  <div class="split-media"><img src="img/comunitat-bg.jpg" alt="Comunitat del CB Grup Barna"></div>
+  <div class="split-txt">
     <p class="eyebrow">· Comunitat &amp; Educació</p>
     <h2>Comunitat i Educació</h2>
     <ul class="p-list">
@@ -280,7 +287,7 @@
       <li>Aprenentatge en valors, infants i famílies</li>
     </ul>
   </div>
-</section>
+</div>
 
 <section class="quote-sec">
   <div class="wrap">
@@ -327,10 +334,14 @@
   <div class="split-txt">
     <p class="eyebrow">· Implicats al Barri</p>
     <h2>Implicats al Barri</h2>
-    <p>Acords tancats amb els principals agents del territori, amb presència a 6 escoles del barri.</p>
+    <p>Hem tancat acords amb els principals agents del territori i estem presents a 6 escoles del barri:
+    <strong style="color:#fff">La Nau del Clot</strong>, <strong style="color:#fff">Escola Provençals</strong>,
+    <strong style="color:#fff">La Farigola del Clot</strong>, <strong style="color:#fff">La Rambleta del Clot</strong>,
+    <strong style="color:#fff">Escola Casas</strong> i <strong style="color:#fff">Claror Marítim</strong>.</p>
   </div>
 </div>
 <div class="wrap">
+  <p class="eyebrow" style="margin-top:30px">Acords signats</p>
   <div class="partners-grid">
     <div class="partner-card"><img src="img/logo-eix-clot.png" alt="Eix del Clot"><b>Eix del Clot</b><span>Acord de col·laboració tancat</span></div>
     <div class="partner-card"><img src="img/logo-sant-marti.png" alt="Districte Sant Martí"><b>Districte Sant Martí</b><span>Acord de col·laboració tancat</span></div>
@@ -362,8 +373,35 @@
   </div>
 </div>
 
+<!-- EN XIFRES -->
+<section class="stats-sec sec-bg">
+  <img src="img/escude-group.jpg" alt="Equip tècnic i directiu del CB Grup Barna" class="sec-bg-img">
+  <div class="sec-bg-veil"></div>
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center">· En xifres</p>
+    <div class="stat-grid">
+      <div class="stat-cell"><b>+450</b><span>Famílies</span></div>
+      <div class="stat-cell"><b>+40</b><span>Equips de formació</span></div>
+      <div class="stat-cell"><b>60</b><span>Anys</span></div>
+      <div class="stat-cell"><b>65,5%</b><span>Staff tècnic dones</span></div>
+      <div class="stat-cell"><b>38</b><span>Entrenadores actives</span></div>
+      <div class="stat-cell"><b>+110</b><span>Equips al 3×3 Barna</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESENTACIO / MODEL CATALA -->
+<section class="quote-sec">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center">· Model Català · Mètode Barna</p>
+    <blockquote style="max-width:20ch">60 Anys de Bàsquet i Valors</blockquote>
+  </div>
+</section>
+
 <!-- RECOLZAMENT INSTITUCIONAL -->
-<section class="plain-sec">
+<section class="plain-sec sec-bg">
+  <img src="img/torre-glories.jpg" alt="Barcelona" class="sec-bg-img">
+  <div class="sec-bg-veil"></div>
   <div class="wrap">
     <p class="eyebrow">· Recolzament Institucional</p>
     <h2>Recolzament Institucional</h2>
@@ -393,6 +431,7 @@
         </div>
       </div>
     </div>
+    <p style="margin-top:26px;color:var(--muted)">Col·laboradors &amp; Patrocinadors: <a class="inline-link" href="/patrocinadors/">Veure tots els patrocinadors →</a></p>
   </div>
 </section>
 
