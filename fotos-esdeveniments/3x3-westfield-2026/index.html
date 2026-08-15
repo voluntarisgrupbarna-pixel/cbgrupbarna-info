@@ -282,7 +282,6 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
 <script src="/scripts/formularis.js"></script>
 <script src="/fotos-3x3/fotos.js"></script>
 <script>
-var API_URL='https://script.google.com/macros/s/AKfycbyLOfEUjKpj3ezbLp1L_ZaZVQ3482dfYFoFOc_WvIH_nQfuDjU6_7hqn16g4uGcIz-Z/exec';
 var BASE='https://cbgrupbarna.info/fotos-esdeveniments/3x3-westfield-2026/';
 var EVENT_ID='3x3-westfield-glories-2026';
 var UNLOCK_KEY='fotos_esdev_3x3_2026';
@@ -386,8 +385,9 @@ async function submitGate(){
   if(!rgpd)return gerr('Cal acceptar la política de protecció de dades.');
 
   var btn=document.getElementById('gBtn');btn.disabled=true;btn.textContent='⏳ Un moment...';
-  // Full únic del club, pestanya «Fotos 3x3». Si falla, queda a la cua del
-  // navegador i es reintenta sol; l'accés a les fotos no s'hi juga res.
+  // Únic destí: el full de contactes del club, pestanya «Fotos 3x3». Si no es
+  // desa, el contacte queda a la cua del navegador i es reintenta sol; l'accés
+  // a les fotos no s'hi juga res.
   if(window.CBGBForms){
     CBGBForms.envia('fotos-3x3',{
       nom:nom, cognoms:cognom, mobil:mobil, correu:email, club:club,
@@ -395,15 +395,6 @@ async function submitGate(){
       consentiment:rgpd, font:'galeria-esdeveniments · '+EVENT_ID
     });
   }
-  // Script antic. Es manté fins confirmar que no alimenta res més.
-  try{
-    var url=API_URL+'?action=register&nom='+enc(nom)+'&cognom='+enc(cognom)+'&email='+enc(email)
-      +'&mobil='+enc(mobil)+'&club='+enc(club)+'&instagram='+(ig?'si':'no')
-      +'&event='+enc(EVENT_ID)
-      +'&font='+enc('galeria-esdeveniments-3x3 · ev:'+EVENT_ID+' · club:'+club+' · ig:'+(ig?'si':'no'));
-    var ctrl=new AbortController();var t=setTimeout(function(){ctrl.abort();},9000);
-    await fetch(url,{signal:ctrl.signal});clearTimeout(t);
-  }catch(e){}
   try{localStorage.setItem(UNLOCK_KEY,email);}catch(e){}
   gtag('event','lead_esdeveniment',{event:EVENT_ID});
   btn.disabled=false;btn.textContent='🔓 Accedir a la galeria';

@@ -339,7 +339,6 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
 
 <script src="/scripts/formularis.js"></script>
 <script>
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXY1zBr9TH-gwOS3fo6tUqj9Sj7ExHv33un3VLtBHz58QNThlR3DdUnrB-xjtQri9g/exec';
 const FLICKR_PLAYER   = 'https://www.flickr.com/photos/202771466@N06/sets/72177720334156609/player/';
 
 let formData = {};
@@ -411,21 +410,9 @@ async function handleFollow() {
     return;
   }
   showView('loading');
-  const payload = {
-    action: 'subscribe',
-    timestamp: new Date().toLocaleString('ca-ES', { timeZone: 'Europe/Madrid' }),
-    data: new Date().toLocaleString('ca-ES', { timeZone: 'Europe/Madrid' }),
-    nom: (formData.nom || '') + ' ' + (formData.cognoms || ''),
-    email: formData.email,
-    mobil: formData.mobil,
-    club: formData.club,
-    ig_follow: 'Sí',
-    newsletter: 'Sí',
-    source: 'galeria-3x3-2026',
-  };
-  // Full únic del club, pestanya «Galeria 3x3». A diferència de la crida de
-  // sota, aquesta sí que pot llegir la resposta: si no s'ha desat, el
-  // contacte queda a la cua del navegador i es reintenta tot sol.
+  // Únic destí: el full de contactes del club, pestanya «Galeria 3x3».
+  // No bloqueja l'accés a les fotos: si no es desa, el contacte queda a la
+  // cua del navegador i es reintenta sol.
   if (window.CBGBForms) {
     CBGBForms.envia('galeria-3x3', {
       nom: formData.nom, cognoms: formData.cognoms,
@@ -434,11 +421,6 @@ async function handleFollow() {
       consentiment: true, font: 'galeria-3x3-2026'
     });
   }
-  // Script antic. Es manté fins confirmar que no alimenta res més; llavors
-  // s'esborren aquestes quatre línies i prou.
-  try {
-    await fetch(APPS_SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-  } catch(_) {}
   document.getElementById('flickr-frame').src = FLICKR_PLAYER;
   showView('gallery');
 }

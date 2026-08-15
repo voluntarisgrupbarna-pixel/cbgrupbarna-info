@@ -1,7 +1,16 @@
 # Bústia única de formularis
 
-Tots els formularis de la web escriuen al mateix full de càlcul, cadascun a la
-seva pestanya, i cada enviament avisa per correu a **voluntarisgrupbarna@gmail.com**.
+**Un sol full de càlcul. Una pestanya per formulari. Cap altre destí.**
+
+Tots els formularis de la web escriuen al mateix full, cadascun a la seva
+pestanya, i cada enviament avisa per correu a **voluntarisgrupbarna@gmail.com**.
+
+> Dins d'un full de càlcul, les divisions es diuen **pestanyes** (o fulls): són
+> les etiquetes de sota de tot. Fan la mateixa feina que unes carpetes —cada
+> formulari té la seva— però tot viu en **un únic fitxer**, que és el que
+> permet buscar una persona a tot arreu i donar-la de baixa d'una sola vegada.
+> Les carpetes de Google Drive contenen fitxers separats, i això és justament
+> el que estem desfent.
 
 Es fa una vegada i ja no s'hi torna. Uns quinze minuts.
 
@@ -152,11 +161,40 @@ família tingui relació amb el club.
 
 ---
 
+## Portar-hi els formularis que no són de la web
+
+Els de la web ja hi apunten sols. Els que viuen fora també poden acabar en
+aquest mateix full, sense duplicar-lo:
+
+**Google Forms** (el d'Entrenador/a). Obre el formulari → pestanya
+**Respostes** → icona verda de full de càlcul → **Seleccionar un full de càlcul
+existent** → tria `Contactes web · CB Grup Barna`. Google hi afegeix una
+pestanya amb les respostes i la manté al dia sola. Cal ser-ne propietari o
+editor: per això primer s'ha de saber de quin compte és.
+
+**JotForm** (el Campus antic). A *Settings → Integrations → Google Sheets*,
+apuntant al mateix full. Els enviaments que ja hi ha es poden baixar en CSV i
+enganxar-los a la pestanya `Campus`.
+
+**Fillout**, si finalment és l'eina del Campus: té la mateixa integració amb
+Google Sheets. Mateix full, pestanya `Campus`.
+
+---
+
 ## El que encara no hi passa
 
-- **Campus.** Avui la inscripció és un enllaç de WhatsApp: no hi ha formulari
-  que es pugui redirigir. Quan n'hi hagi un, `tipus: 'campus'` i ja té pestanya.
-- **Entrenador/a.** És un Google Forms extern. Es pot fer que aboqui aquí, però
-  primer cal saber de quin compte és.
-- **JotForm del Campus.** Aturat des del juny. Si es recupera, els seus
-  enviaments es poden importar al full d'una tacada.
+- **Campus.** Avui la inscripció és un enllaç de WhatsApp: no hi ha cap
+  formulari que es pugui redirigir. El dia que n'hi hagi un, `tipus: 'campus'`
+  i ja té pestanya reservada.
+- **Entrenador/a** i **JotForm**: vegeu l'apartat de sobre. Són dos clics
+  cadascun, però els ha de fer qui en sigui propietari.
+
+## Què s'ha tret
+
+Les galeries del 3x3 enviaven a **dos scripts de Google diferents**, un per
+galeria, amb destins que no es podien veure des del repositori. Aquestes
+crides s'han eliminat: ara les tres portes de fotos escriuen només aquí.
+
+Si algun d'aquells scripts alimentava alguna altra cosa (una llista de correu,
+per exemple), deixarà de rebre files noves. El que ja tenia s'hi queda; només
+cal exportar-ho i enganxar-ho a la pestanya que toqui d'aquest full.

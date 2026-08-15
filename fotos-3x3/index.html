@@ -325,7 +325,6 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
 <script src="/fotos-3x3/fotos.js"></script>
 <script>
 /* ===== CONFIG ===== */
-var API_URL='https://script.google.com/macros/s/AKfycbyLOfEUjKpj3ezbLp1L_ZaZVQ3482dfYFoFOc_WvIH_nQfuDjU6_7hqn16g4uGcIz-Z/exec';
 var BASE='https://cbgrupbarna.info/fotos-3x3/';
 var FOTOS=(window.FOTOS_3X3||[]);
 var TOTAL=FOTOS.length;
@@ -454,20 +453,15 @@ async function submitGate(){
   if(!rgpd)return gerr('Cal acceptar el tractament de dades per continuar.');
 
   var btn=document.getElementById('gBtn');btn.disabled=true;btn.textContent='⏳ Un moment...';
-  // Full únic del club, pestanya «Fotos 3x3». Si falla, el contacte queda a
-  // la cua del navegador i es reintenta sol; les fotos no s'hi juguen res.
+  // Únic destí: el full de contactes del club, pestanya «Fotos 3x3». Si no es
+  // desa, el contacte queda a la cua del navegador i es reintenta sol; les
+  // fotos no s'hi juguen res i es poden descarregar igualment.
   if(window.CBGBForms){
     CBGBForms.envia('fotos-3x3',{
       nom:nom, cognoms:cognom, mobil:mobil, correu:email,
       consentiment:rgpd, font:'galeria-fotos-3x3'
     });
   }
-  // Script antic. Es manté fins confirmar que no alimenta res més.
-  try{
-    var url=API_URL+'?action=register&nom='+enc(nom)+'&cognom='+enc(cognom)+'&email='+enc(email)+'&mobil='+enc(mobil)+'&font=galeria-fotos-3x3';
-    var ctrl=new AbortController();var t=setTimeout(function(){ctrl.abort();},9000);
-    await fetch(url,{signal:ctrl.signal});clearTimeout(t);
-  }catch(e){/* fail-open */}
   try{localStorage.setItem('fotos3x3_lead',email);}catch(e){}
   gtag('event','lead_fotos',{});
   btn.disabled=false;btn.textContent='⬇ Desbloquejar i descarregar';
