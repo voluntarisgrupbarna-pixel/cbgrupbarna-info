@@ -675,29 +675,55 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .soc a::after { content: none; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
+.head-nav a[aria-current] { color: var(--red-dark); }
+.head-nav a[aria-current]::after { right: 0; }
 .head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; justify-self: center; }
 .head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--display); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
-.head-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
+/* flex-shrink:0 perquè el botó de menú no s'encongeixi mai: a light és
+   l'únic accés que queda a la navegació del lloc. */
+.head-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; flex-shrink: 0; }
 .head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
 .menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
 .menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
-/* Franja estreta: es retiren primer els enllaços secundaris (.opt), que per això
-   estan marcats, abans d'amagar tot el menú i deixar només el botó de menú. */
+/* Franja estreta: la barra es desmunta en tres passos, no en un. Primer cauen
+   els enllaços secundaris (.opt), després el llarg (.opt2), i només al final
+   es plega tot sota el botó de menú. Amb un sol pas, la barra de vuit enllaços
+   arribava a pintar-se a sobre del nom del club a 1320px. */
 @media (max-width: 1280px) { .head-side .head-nav a.opt { display: none; } }
+@media (max-width: 1180px) { .head-side .head-nav a.opt2 { display: none; } }
 @media (max-width: 1080px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
 
 /* Menú desplegat · el mapa complet del club */
 .menu { position: fixed; inset: 0; z-index: 105; background: var(--paper); padding: 126px clamp(20px, 6vw, 70px) 48px; transform: translateY(-101%); transition: transform 0.6s var(--ease); overflow-y: auto; visibility: hidden; }
 .menu.open { transform: none; visibility: visible; }
-.menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
-@media (min-width: 780px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+/* Tres columnes a partir de 1040px, dues a partir de 680px i una a mòbil.
+   A light la pila d'una columna és la navegació sencera del lloc, per això
+   cada grup porta títol: es llegeix com un índex, no com una llista llarga. */
+.menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 3.4vw, 44px) clamp(26px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
+@media (min-width: 680px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1040px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
 .menu-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: var(--red); margin-bottom: 14px; }
-.menu-col a { display: flex; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 300; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.16em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
+/* flex-wrap: quan la columna és justa, el que baixa de línia és l'aclariment
+   petit, no el nom de la secció partit per la meitat. */
+.menu-col a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 300; font-size: clamp(15px, 1.35vw, 18px); letter-spacing: 0.16em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
 .menu-col a:hover { color: var(--red); padding-left: 10px; }
 .menu-col a small { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.06em; text-transform: none; color: var(--muted); margin-left: auto; white-space: nowrap; }
-.menu-foot { margin-top: 34px; text-align: center; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
+/* L'única acció del menú que porta algú a parlar amb el club. */
+.menu-col a.is-cta { color: var(--red-dark); border-bottom-color: var(--red); }
+.menu-col a.is-cta:hover { color: var(--red); }
+.menu-col a[aria-current] { color: var(--red-dark); }
+.menu-col a[aria-current]::before { content: ''; flex-shrink: 0; align-self: center; width: 6px; height: 6px; background: var(--red); }
+
+/* Peu del menú: a ≤560px la capçalera ja no mostra ni les xarxes ni el botó de
+   contacte, i sense això el mòbil es quedava sense cap manera d'escriure al
+   club des de la navegació. */
+.menu-foot { margin-top: clamp(30px, 4vw, 44px); padding-top: 22px; border-top: 1px solid var(--line); text-align: center; }
+.menu-foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px clamp(16px, 2.4vw, 28px); }
+.menu-foot-links a { font-family: var(--display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; min-height: 44px; display: inline-flex; align-items: center; transition: color 0.3s var(--ease); }
+.menu-foot-links a:hover { color: var(--red); }
+.menu-foot-adr { margin-top: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
 
 /* ==== LEAD · Escoleta ==== */
 .lead { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 0; }
@@ -945,14 +971,17 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <div class="head-in">
     <div class="head-side">
       <button class="head-burger" id="burger" aria-label="Obrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+      <!-- Els mateixos enllaços a light i a extensa: cap d'ells apunta a una
+           secció que només existeix en una de les dues versions. "Dies de
+           partit" va a /partits/, que hi és sempre; #calendari només existia
+           a l'extensa i a light no duia enlloc. -->
       <nav class="head-nav" aria-label="Navegació principal">
         <a href="/escoleta/">Escoleta</a>
+        <a href="/partits/">Dies de partit</a>
+        <a href="/basquet-femeni/" class="opt2">Bàsquet femení</a>
         <a href="/campus/">Campus</a>
-        <a href="/3x3/">3x3</a>
-        <a href="#calendari">Dies de partit</a>
-        <a href="/fotos/">Galeria</a>
-        <a href="/premsa/" class="opt">Premsa</a>
-        <a href="/patrocinadors/" class="opt">Patrocinadors</a>
+        <a href="/3x3/" class="opt">3x3</a>
+        <a href="/fotos/" class="opt">Galeria</a>
         <a href="#info">Informació</a>
       </nav>
     </div>
@@ -981,35 +1010,52 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   </div>
 </header>
 
-<!-- ==== MENÚ · el mapa complet del club ==== -->
+<!-- ==== MENÚ · el mapa complet del club ====
+     És el mateix a light i a extensa, i a light (≤1080px) és l'ÚNICA
+     navegació que queda: la barra d'enllaços i les icones socials de la
+     capçalera es pleguen aquí. Per això hi ha d'haver contacte i xarxes al
+     peu del menú, i cap enllaç pot dependre d'una secció que només existeix
+     en una de les dues versions. -->
 <nav class="menu" id="menu" aria-label="Menú complet">
   <div class="menu-grid">
     <div class="menu-col">
-      <h3>Aquest mes</h3>
-      <a href="#info">Demanar informació <small>formulari</small></a>
-      <a href="/escoleta/">Escoleta <small>4 a 7 anys</small></a>
-      <a href="/escoleta/#historia" data-cta="menu-historia-escoleta">Història de l'Escoleta <small>1965</small></a>
-      <a href="#calendari">Dies de partit</a>
-      <a href="#seniors">Els sèniors</a>
+      <h3>Jugar al Barna</h3>
+      <a href="/escoleta/" data-cta="menu-escoleta">Escoleta <small>4 a 7 anys</small></a>
+      <a href="/basquet-femeni/" data-cta="menu-femeni">Bàsquet femení <small>el Mètode Barna</small></a>
+      <a href="#seniors">Els sèniors <small>primera plantilla</small></a>
+      <a href="/campus/" data-cta="menu-campus">Campus de bàsquet <small>estiu</small></a>
+      <a href="/3x3/" data-cta="menu-3x3">Torneig 3x3 <small>Glòries</small></a>
+      <a href="#info" class="is-cta">Demanar informació <small>formulari</small></a>
+    </div>
+    <div class="menu-col">
+      <h3>Dies de partit</h3>
+      <a href="/partits/" data-cta="menu-partits">Dies de partit <small>calendari i resultats</small></a>
+      <a href="/partits/calendaris/" data-cta="menu-calendaris">Dies de partit per equip <small>PDF</small></a>
+      <a href="https://app.myplay.com/public-live?liveId=CBgrupBarna" target="_blank" rel="noopener" data-cta="menu-myplay">Partits en directe <small>MyPlay</small></a>
       <a href="/fotos/" data-cta="menu-galeria">Galeria de fotos</a>
       <a href="#instagram">Posts fixats d'Instagram</a>
       <a href="#opinions">Ressenyes i valoració</a>
     </div>
     <div class="menu-col">
-      <h3>El Barna</h3>
-      <a href="/campus/" data-cta="menu-campus">Campus de bàsquet</a>
-      <a href="/3x3/" data-cta="menu-3x3">Torneig 3x3</a>
-      <a href="/blog/" data-cta="menu-blog">Blog <small>guies</small></a>
-      <a href="/premsa/" data-cta="menu-premsa">Articles i premsa <small>Guia Clot</small></a>
+      <h3>El club</h3>
       <a href="/grup-barna-dades-oficials/" data-cta="menu-club">El club <small>dades oficials</small></a>
+      <a href="/escoleta/#historia" data-cta="menu-historia-escoleta">Història de l'Escoleta <small>1965</small></a>
       <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
-      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Què és el Grup Barna <small>presentació</small></a>
+      <a href="/blog/" data-cta="menu-blog">Blog <small>guies per a famílies</small></a>
+      <a href="/premsa/" data-cta="menu-premsa">Articles i premsa <small>Guia Clot</small></a>
       <a href="/patrocinadors/" data-cta="menu-partners">Patrocinadors i partners</a>
-      <a href="https://www.cbgrupbarna.com/noticies/" target="_blank" rel="noopener" data-cta="menu-noticies">Notícies</a>
       <a href="#acces">Tots els accessos</a>
     </div>
   </div>
-  <div class="menu-foot">@cbgrupbarna · +34 698 425 153 · El Clot, Barcelona</div>
+  <div class="menu-foot">
+    <div class="menu-foot-links">
+      <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna%20%F0%9F%8F%80" target="_blank" rel="noopener" data-cta="menu-wa">WhatsApp · 698 425 153</a>
+      <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="menu-ig">Instagram</a>
+      <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener" data-cta="menu-tt">TikTok</a>
+      <a href="mailto:info@cbgrupbarna.com" data-cta="menu-mail">info@cbgrupbarna.com</a>
+    </div>
+    <p class="menu-foot-adr">La Nau del Clot · Sant Martí · 08018 Barcelona</p>
+  </div>
 </nav>
 
 <a href="#contingut" class="skip">Saltar al contingut</a>
@@ -1504,16 +1550,47 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     var burger = document.getElementById('burger');
     var menu = document.getElementById('menu');
     if (!burger || !menu) return;
-    function toggle(open) {
+    // mouFocus: cert quan es tanca amb el botó o amb Escape (el focus ha de
+    // tornar al botó), fals quan es tanca perquè s'ha seguit un enllaç (el
+    // focus se'n va amb la navegació).
+    function toggle(open, mouFocus) {
       menu.classList.toggle('open', open);
       document.body.classList.toggle('menu-open', open);
       document.body.style.overflow = open ? 'hidden' : '';
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       burger.setAttribute('aria-label', open ? 'Tancar el menú' : 'Obrir el menú');
+      if (!mouFocus) return;
+      if (open) { var primer = menu.querySelector('a'); if (primer) primer.focus(); }
+      else if (document.activeElement && menu.contains(document.activeElement)) burger.focus();
     }
-    burger.addEventListener('click', function () { toggle(!menu.classList.contains('open')); });
-    menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
+    // e.detail === 0 vol dir que el botó s'ha activat amb el teclat. Amb el dit
+    // o amb el ratolí el menú s'obre sense endur-se el focus, i així no surt
+    // el marc vermell damunt del primer enllaç sense que ningú l'hagi demanat.
+    burger.addEventListener('click', function (e) {
+      var obrir = !menu.classList.contains('open');
+      toggle(obrir, obrir ? e.detail === 0 : true);
+    });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false, false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false, true); });
+
+    // A light (≤1080px) el menú és l'única navegació que queda: qui hi arriba
+    // amb el teclat hi ha d'entrar en obrir-lo, no continuar per darrere, i
+    // ha de tornar al botó en tancar-lo.
+    menu.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      var f = menu.querySelectorAll('a');
+      if (!f.length) return;
+      var primer = f[0], ultim = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === primer) { e.preventDefault(); burger.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultim) { e.preventDefault(); burger.focus(); }
+    });
+
+    // Marca on som. A la portada no hi ha coincidència de pàgina i no es
+    // pinta res; serveix quan aquest mateix menú viatgi a una altra pàgina.
+    var aqui = location.pathname.replace(/index\.html$/, '');
+    document.querySelectorAll('.menu-col a[href^="/"], .head-nav a[href^="/"]').forEach(function (a) {
+      if (a.getAttribute('href') === aqui) a.setAttribute('aria-current', 'page');
+    });
   })();
 
   // ==== LA PORTADA · data real, no escrita a mà ====
