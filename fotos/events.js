@@ -3,6 +3,19 @@
 
 window.GALERIA_EVENTS = [
   {
+    "id": "magics-msui1pmu",
+    "title": "MÀGICS",
+    "description": null,
+    "date": "2026-08-07",
+    "season": "2025-2026",
+    "location": "NAU DEL CLOT",
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo"
+  },
+  {
     "id": "presentacio-equips-25-26-msufdc03",
     "title": "PRESENTACIO EQUIPS 25 26",
     "description": "ESDEVENIMENT",
