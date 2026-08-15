@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#F4F1EC">
+<meta name="theme-color" content="#0A0908">
 <title>CB Grup Barna · 60 Anys · Model Català | Presentació institucional</title>
 <meta name="description" content="Presentació institucional del CB Grup Barna: 60 anys de bàsquet i valors al Poblenou i el Clot. Xifres del club, lideratge femení, Barna Màgics, protecció del menor, implicació al barri, 3x3 Barna, reconeixements i patrocinadors.">
 <meta name="keywords" content="CB Grup Barna presentació, 60 anys bàsquet Clot, model català bàsquet, presentació institucional club bàsquet Barcelona">
@@ -52,34 +52,29 @@
 }
 </script>
 <style>
-  /* Tokens · guia "Light i Extensa". Paleta clara al :root pelat; els modes
-     només redefineixen tokens. */
+  /* Aquesta peça és fosca per decisió, no per l'hora del dia: sobre negre el
+     vermell de l'escut és el que mana i les fotos del club guanyen. Per això
+     el :root pelat ja porta la paleta fosca i no seguim el mode del sistema;
+     qui vulgui llegir-la en clar ho té al botó de la capçalera.
+     Els negres van lleugerament càlids perquè el crema del text hi lligui. */
   :root{
-    --red:#E20613; --red-ink:#A8040E;
-    --ink:#10100E; --paper:#FFFFFF; --cream:#F4F1EC; --muted:#6B6560;
-    --line:rgba(16,16,14,.14); --panel:#FFFFFF; --ground:#F4F1EC;
-    --shadow:0 24px 60px -28px rgba(16,16,14,.34);
-    /* Vermell ple amb text blanc a sobre. En fosc s'enfosqueix en comptes
-       d'aclarir-se: el #FF3B41 serveix per a text vermell, no per a fons
-       amb lletra blanca (només 3,1:1). */
-    --red-solid:#E20613;
+    --red:#FF3B41;        /* vermell de text sobre negre */
+    --red-ink:#FF9296;    /* enllaços dins de text */
+    --red-solid:#E20613;  /* el de l'escut: fons plens amb lletra blanca */
+    --ink:#F4F1EC; --muted:#A29B92;
+    --ground:#0A0908; --panel:#131211; --cream:#1B1917; --paper:#131211;
+    --line:rgba(244,241,236,.14);
+    --shadow:0 30px 70px -34px rgba(0,0,0,.9);
     --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
     --body:'Inter',system-ui,-apple-system,sans-serif;
     --ease:cubic-bezier(.22,1,.36,1);
   }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --red:#FF3B41; --red-ink:#FF7C80; --red-solid:#C00812;
-      --ink:#F2EFEA; --paper:#17171A; --cream:#1E1E22; --muted:#9C978F;
-      --line:rgba(242,239,234,.16); --panel:#17171A; --ground:#0E0E10;
-      --shadow:0 24px 60px -28px rgba(0,0,0,.8);
-    }
-  }
-  :root[data-theme="dark"]{
-    --red:#FF3B41; --red-ink:#FF7C80; --red-solid:#C00812;
-    --ink:#F2EFEA; --paper:#17171A; --cream:#1E1E22; --muted:#9C978F;
-    --line:rgba(242,239,234,.16); --panel:#17171A; --ground:#0E0E10;
-    --shadow:0 24px 60px -28px rgba(0,0,0,.8);
+  :root[data-theme="light"]{
+    --red:#E20613; --red-ink:#A8040E; --red-solid:#E20613;
+    --ink:#10100E; --muted:#6B6560;
+    --ground:#F4F1EC; --panel:#FFFFFF; --cream:#F4F1EC; --paper:#FFFFFF;
+    --line:rgba(16,16,14,.14);
+    --shadow:0 24px 60px -28px rgba(16,16,14,.34);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -104,7 +99,7 @@
   .head-nav a:hover{color:#fff}
   @media(max-width:900px){.head-nav a.opt{display:none}}
 
-  /* Selector de mode: tres estats, perquè "sistema" no és el mateix que "clar" */
+  /* Selector de mode: fosc (el d'aquesta peça) i clar, per a qui el necessiti */
   .theme{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;cursor:pointer;
     font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:8px 12px;transition:border-color .3s var(--ease)}
   .theme:hover{border-color:var(--red)}
@@ -139,14 +134,21 @@
   .crumb a:hover{color:var(--ink)}
   .crumb span{color:var(--ink)}
 
-  /* HERO · foto amb vel fosc: es llegeix igual en clar i en fosc */
-  .hero{position:relative;min-height:86vh;display:flex;align-items:center;overflow:hidden}
+  /* PORTADA · la foto es fon amb el negre de la pàgina en comptes d'acabar
+     amb un tall recte, i una resplendor vermella molt tènue seu darrere del
+     60 perquè la xifra no floti sobre un fons pla. */
+  .hero{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden;background:var(--ground)}
   .hero-bg{position:absolute;inset:0}
   .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center top}
-  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.38) 0%,rgba(10,10,10,.5) 55%,rgba(10,10,10,.9) 100%)}
+  .hero-bg::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(10,9,8,.42) 0%,rgba(10,9,8,.58) 48%,rgba(10,9,8,.94) 84%,#0A0908 100%)}
+  .hero-glow{position:absolute;left:50%;top:46%;width:min(900px,120vw);aspect-ratio:1;transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(226,6,19,.24) 0%,rgba(226,6,19,.08) 38%,transparent 68%);pointer-events:none;z-index:1}
   .hero-in{position:relative;z-index:2;text-align:center;width:100%;padding:90px 0 46px}
+  /* En bloc: un <span> en línia ignora amplada i alçada i el filet no es veu. */
+  .hero-rule{display:block;width:44px;height:2px;background:var(--red-solid);margin:0 auto 22px}
   .hero-badge{display:inline-block;font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.42);border-radius:99px;padding:8px 20px;margin-bottom:26px}
-  .hero-num{font-family:var(--display);font-weight:400;font-size:clamp(110px,20vw,220px);line-height:.85;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.5)}
+  .hero-num{font-family:var(--display);font-weight:400;font-size:clamp(110px,20vw,220px);line-height:.85;color:#fff;text-shadow:0 6px 60px rgba(0,0,0,.6)}
   .hero-sub{font-family:var(--display);font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:8px}
   .hero-name{font-family:var(--display);font-size:clamp(24px,4vw,38px);text-transform:uppercase;color:#FF3B41;margin-top:2px}
   .hero-tag{max-width:38ch;margin:22px auto 0;font-size:15px;color:rgba(255,255,255,.88)}
@@ -158,13 +160,16 @@
   .sec{padding:clamp(44px,7vw,80px) 0 0}
   .sec:last-of-type{padding-bottom:clamp(44px,7vw,80px)}
 
-  /* XIFRES · banda de números sobre tinta, tabulars */
-  .b-num{display:grid;grid-template-columns:repeat(4,1fr);background:#10100E;color:#fff;margin-top:26px}
+  /* XIFRES · marcador. Les caselles són forats de llum sobre el negre,
+     separats per filets d'un píxel, i les xifres que més diuen del club van
+     en vermell. */
+  .b-num{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:26px}
   @media(max-width:760px){.b-num{grid-template-columns:repeat(2,1fr)}}
-  .b-num div{padding:24px 16px;border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
-  .b-num b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(28px,4.6vw,52px);line-height:.9;font-variant-numeric:tabular-nums}
-  .b-num .r b{color:#FF3B41}
-  .b-num span{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.66)}
+  .b-num div{background:var(--panel);padding:26px 16px;transition:background .35s var(--ease)}
+  .b-num div:hover{background:var(--cream)}
+  .b-num b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(28px,4.6vw,52px);line-height:.9;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .b-num .r b{color:var(--red)}
+  .b-num span{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 
   /* SPLIT · foto + text sobre panell */
   .split{display:grid;grid-template-columns:1fr;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);margin-top:26px}
@@ -194,12 +199,16 @@
   .par .h{padding:30px 26px}
   .par .h span{display:block;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.85}
   .par .h b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(24px,3.6vw,40px);text-transform:uppercase;line-height:.96;margin-top:10px}
-  .par .foot{border-top:1px solid rgba(255,255,255,.42);padding:18px 26px;font-size:13.5px}
-  .par .foot b{font-weight:700}
+  /* .par-note i no .foot: el peu del lloc fa servir .foot amb fons negre i
+     li pintava una franja fosca al mig del vermell. */
+  .par-note{border-top:1px solid rgba(255,255,255,.42);padding:18px 26px;font-size:13.5px}
+  .par-note b{font-weight:700}
 
-  /* CITES */
-  .quote{padding:clamp(44px,7vw,72px) 0 0;text-align:center}
-  .quote blockquote{font-family:var(--display);font-weight:400;font-size:clamp(22px,3.4vw,36px);line-height:1.16;max-width:18ch;margin:0 auto;text-transform:uppercase}
+  /* CITES · l'aire i el filet vermell les separen de la secció anterior;
+     no calen cometes decoratives. */
+  .quote{padding:clamp(52px,8vw,84px) 0 clamp(8px,1vw,14px);text-align:center}
+  .quote::before{content:'';display:block;width:34px;height:2px;background:var(--red-solid);margin:0 auto clamp(24px,3vw,34px)}
+  .quote blockquote{font-family:var(--display);font-weight:400;font-size:clamp(24px,4vw,44px);line-height:1.12;max-width:18ch;margin:0 auto;text-transform:uppercase;text-wrap:balance}
   .quote blockquote em{font-style:normal;color:var(--red)}
   .quote cite{display:block;margin-top:16px;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
@@ -218,7 +227,10 @@
   /* BARRI · entitats i escoles */
   .partners-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:22px}
   .partner-card{background:var(--panel);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
-  .partner-card .pc-logo{height:44px;display:flex;align-items:center;background:#fff;border-radius:4px;padding:5px 10px}
+  /* Placa blanca sota els logos: són marques d'altri i sobre negre es farien
+     malbé. Hi fixem la tinta perquè res del que hi caigui a dins quedi
+     il·legible. */
+  .partner-card .pc-logo{height:44px;display:flex;align-items:center;background:#fff;color:#10100E;border-radius:4px;padding:5px 10px}
   .partner-card .pc-logo img{max-height:34px;width:auto;max-width:160px;object-fit:contain}
   .partner-card b{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.02em;text-transform:uppercase}
   .partner-card span{font-size:11.5px;color:var(--muted)}
@@ -249,11 +261,17 @@
   a.sponsor:hover{border-color:var(--red)}
   .sponsor img{max-width:88px;max-height:40px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.72;transition:filter .3s var(--ease),opacity .3s var(--ease)}
   a.sponsor:hover img{filter:none;opacity:1}
-  .sponsor.txt span{font-family:var(--display);font-size:15px;letter-spacing:.14em;color:#46433f;text-transform:uppercase}
+  .sponsor.txt span{font-family:var(--display);font-size:15px;letter-spacing:.14em;color:#10100E;text-transform:uppercase}
   .sponsor-note{margin-top:18px;font-size:13px;color:var(--muted)}
 
-  .inline-link{color:var(--red-ink);text-decoration:none;border-bottom:1px solid rgba(226,6,19,.4)}
-  .inline-link:hover{border-color:var(--red-ink)}
+  .inline-link{color:var(--red-ink);text-decoration:none;border-bottom:1px solid var(--red);border-bottom-color:color-mix(in srgb,var(--red) 45%,transparent)}
+  .inline-link:hover{border-bottom-color:var(--red-ink)}
+
+  /* Les peces entren en escena en comptes d'aparèixer de cop: llegir-la
+     avall s'assembla a passar diapositives. Sense JS o amb moviment reduït,
+     tot es veu igualment. */
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .rv.in{opacity:1;transform:none}
 
   /* TANCAMENT */
   /* El tancament ja porta el seu propi aire: la secció anterior no hi suma
@@ -276,7 +294,70 @@
   .foot-col a:hover{color:#fff}
   .foot-btm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:11.5px;color:rgba(255,255,255,.55)}
 
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}
+    .rv{opacity:1;transform:none}}
+
+  /* IMPRESSIÓ I PDF · el mateix full que genera el PDF descarregable. Aquí la
+     pàgina deixa de ser una tira llarga i es converteix en diapositives 16:9
+     apaïsades: cada secció ocupa una pàgina sencera i les cites, la franja de
+     paritat i les graelles amples se'n van a la seva. Fora la navegació, el
+     peu i tot el que només serveix per clicar. */
+  @page{size:1280px 720px;margin:0}
+  @media print{
+    /* footer.foot i no .foot: la franja de paritat fa servir la mateixa
+       classe per al seu peu i desapareixeria. */
+    .head,.idx,.crumb,.skip,.btn-row,.sponsor-note,footer.foot,.cbgb-gal{display:none!important}
+    .rv{opacity:1!important;transform:none!important}
+    html,body{background:#0A0908!important;font-size:13px}
+    .wrap{max-width:none;padding:0 62px}
+    .sec{padding:0}
+
+    /* Cada unitat obre pàgina. Cap no porta alçada fixa ni retall: si una
+       peça no hi cabés, passaria a la següent en comptes de perdre's. */
+    .hero{height:720px;min-height:0;break-before:avoid;break-after:page}
+    .hero-in{padding:0}
+    .hero-num{font-size:186px}
+    .sec>.wrap{break-before:page;min-height:720px;padding-top:58px;padding-bottom:58px;
+      display:flex;flex-direction:column;justify-content:center}
+    .quote{break-before:page;min-height:720px;display:flex;flex-direction:column;justify-content:center;padding:0 62px}
+    .quote::before{margin-bottom:34px}
+    .quote blockquote{font-size:52px;max-width:20ch}
+    .par{break-before:page;break-inside:avoid;height:720px;margin:0;padding:0;
+      display:flex;flex-direction:column;justify-content:center}
+    .par .h{padding:74px 62px}
+    .par-note{padding:26px 62px}
+    /* 560 i no 720: a l'alcada justa de la pagina, l'arrodoniment del
+       salt seguent n'obria una de buida al darrere. */
+    .partners-grid{break-before:page;min-height:560px;align-content:center;
+      grid-template-columns:repeat(2,1fr);gap:20px}
+    /* Aquestes dues seccions acaben amb un bloc que ocupa la pagina
+       sencera: el coixi de sota del contenidor hi sumaria 58 px i
+       generaria una pagina en blanc. */
+    #igualtat>.wrap,#barri>.wrap{padding-bottom:0}
+    .closer{break-before:page;min-height:720px;display:flex;flex-direction:column;justify-content:center;padding:0}
+
+    .sech{margin-bottom:20px}
+    .sech h2{font-size:31px}
+    .split{margin-top:0;height:452px;box-shadow:none}
+    .split-media{min-height:0}
+    .split-txt{padding:34px 42px}
+    .split-txt h3{font-size:35px}
+    .split-txt p{font-size:14px;max-width:44ch}
+    .b-num{margin-top:0}
+    .b-num div{padding:44px 18px}
+    .panel{margin-top:0;padding:34px 42px;box-shadow:none}
+    .visits-grid,.sponsor-grid{margin-top:0}
+    .visit-card{box-shadow:none}
+    .partner-card{padding:24px}
+    #proteccio .panel{padding:28px 34px}
+    #proteccio .panel>p{font-size:12.5px}
+    #proteccio .p-list li{padding:7px 0 7px 26px;font-size:12.5px}
+    #proteccio .two-col h4{margin-top:10px}
+    .p-list{margin-top:12px}
+    .p-list li{padding:10px 0 10px 28px}
+    .sponsor img{filter:none;opacity:1}
+    a{text-decoration:none}
+  }
 </style>
 </head>
 <body>
@@ -299,7 +380,7 @@
       <a href="/premsa/">Premsa</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
-      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode del sistema</span>
+      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
     </button>
   </div>
 </header>
@@ -322,6 +403,7 @@
       <a href="#patrocinadors">Patrocinadors</a>
       <a href="#contacte">Contacte</a>
     </div>
+    <a class="idx-more" href="/presentacio/cb-grup-barna-presentacio.pdf" download data-cta="presentacio-pdf-barra">PDF</a>
     <a class="idx-more" href="/presentacions/">Presentacions</a>
   </div>
 </nav>
@@ -332,7 +414,9 @@
 <!-- 01 · PORTADA -->
 <section class="hero" id="portada">
   <div class="hero-bg"><img src="img/hero-equip.jpg" alt="Jugadores del CB Grup Barna amb l'equipació del club" fetchpriority="high"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-in wrap">
+    <span class="hero-rule" aria-hidden="true"></span>
     <span class="hero-badge">Barcelona · Des de 1965</span>
     <div class="hero-num">60</div>
     <div class="hero-sub">Anys · Model Català del</div>
@@ -393,7 +477,7 @@
         <div class="rule"></div>
         <div class="h"><span>A pista</span><b>38 entrenadores</b></div>
       </div>
-      <div class="foot"><b>Pla propi de formació i mentoria interna.</b> Un model estructural, no estètic: per això aquesta franja és vermella i està partida pel mig.</div>
+      <div class="par-note"><b>Pla propi de formació i mentoria interna.</b> Un model estructural, no estètic: per això aquesta franja és vermella i està partida pel mig.</div>
     </div>
   </div>
   <div class="quote wrap">
@@ -514,7 +598,7 @@
   <div class="wrap">
     <div class="sech"><h2>3×3 Barna</h2><em>Esport al carrer</em></div>
     <div class="split rev">
-      <div class="split-media"><img src="img/carrer-bg.jpg" alt="Torneig 3x3 Barna a Barcelona, amb la Torre Glòries al fons" loading="lazy"></div>
+      <div class="split-media"><img src="img/torre-glories.jpg" alt="La Torre Glòries il·luminada de nit, on el club celebra el 3x3 Barna" loading="lazy"></div>
       <div class="split-txt">
         <p class="lab">· Esport al Carrer</p>
         <div class="stat-big">+110</div>
@@ -630,6 +714,7 @@
     <div class="btn-row">
       <a href="/#info" class="btn red" data-cta="presentacio-closer-form">Demanar informació</a>
       <a href="https://api.whatsapp.com/send?phone=+34698425153" class="btn ghost" target="_blank" rel="noopener" data-cta="presentacio-closer-wa">WhatsApp del club</a>
+      <a href="/presentacio/cb-grup-barna-presentacio.pdf" class="btn ghost" download data-cta="presentacio-closer-pdf">Descarregar en PDF</a>
       <a href="/basquet-femeni/el-metode-barna/" class="btn ghost" data-cta="presentacio-closer-metode">El Mètode Barna</a>
     </div>
   </div>
@@ -681,31 +766,38 @@
   </div>
 </footer>
 <script>
+/* Dos estats, no tres: aquesta pàgina és fosca per decisió i no segueix el
+   mode del sistema, així que un estat "sistema" no voldria dir res aquí. El
+   clar hi és per a qui el necessiti (llum forta, imprimir, preferència). */
 (function(){
-  var KEY='cbgb-theme', btn=document.getElementById('theme'), lbl=document.getElementById('theme-lbl');
-  var order=['system','light','dark'];
-  var mq=window.matchMedia('(prefers-color-scheme: dark)');
-  function current(){ try{ return localStorage.getItem(KEY)||'system'; }catch(e){ return 'system'; } }
-  function label(mode){
-    if(mode==='light') return 'Mode clar';
-    if(mode==='dark') return 'Mode fosc';
-    return 'Sistema · ara '+(mq.matches?'fosc':'clar');
-  }
+  var KEY='cbgb-presentacio-theme', btn=document.getElementById('theme'), lbl=document.getElementById('theme-lbl');
+  function current(){ try{ return localStorage.getItem(KEY)==='light'?'light':'dark'; }catch(e){ return 'dark'; } }
   function apply(mode){
-    if(mode==='light'||mode==='dark'){ document.documentElement.setAttribute('data-theme',mode); }
+    if(mode==='light'){ document.documentElement.setAttribute('data-theme','light'); }
     else{ document.documentElement.removeAttribute('data-theme'); }
-    lbl.textContent=label(mode);
+    lbl.textContent = (mode==='light') ? 'Mode clar' : 'Mode fosc';
+    btn.setAttribute('title', (mode==='light') ? 'Canviar a mode fosc' : 'Canviar a mode clar');
     var meta=document.querySelector('meta[name="theme-color"]');
-    var dark=(mode==='dark')||(mode==='system'&&mq.matches);
-    if(meta) meta.setAttribute('content', dark?'#0E0E10':'#F4F1EC');
+    if(meta) meta.setAttribute('content', mode==='light'?'#F4F1EC':'#0A0908');
   }
   btn.addEventListener('click',function(){
-    var next=order[(order.indexOf(current())+1)%order.length];
+    var next = current()==='light' ? 'dark' : 'light';
     try{ localStorage.setItem(KEY,next); }catch(e){}
     apply(next);
   });
-  mq.addEventListener('change',function(){ if(current()==='system') apply('system'); });
   apply(current());
+})();
+
+/* Entrada de les peces en baixar. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els=[].slice.call(document.querySelectorAll('.split,.panel,.b-num,.par,.visits-grid,.sponsor-grid,.partners-grid,.quote blockquote'));
+  els.forEach(function(el){ el.classList.add('rv'); });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -6% 0px',threshold:.08});
+  els.forEach(function(el){ io.observe(el); });
 })();
 
 /* Índex de la presentació: marca la secció que s'està llegint i arrossega la
