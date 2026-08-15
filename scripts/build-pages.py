@@ -264,6 +264,23 @@ def build_campus():
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
 
+    <div class="franges" aria-label="Altres portes del club">
+      <a class="franja" href="/escoleta/" data-cta="campus-franja-escoleta">
+        <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
+        <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Si encara no ha començat i té entre 4 i 7 anys, el camí és aquest.</span></span>
+        <span class="franja-go"><em>4 a 7 anys</em><i></i></span>
+      </a>
+      <a class="franja franja--red" href="/partits/" data-cta="campus-franja-dies-partit">
+        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
+      </a>
+      <a class="franja" href="/3x3/" data-cta="campus-franja-3x3">
+        <span class="franja-ph"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Jugadores del CB Grup Barna amb l'equipació del club"></span>
+        <span class="franja-tx"><span class="franja-t">3x3 Barcelona</span><span class="franja-s">El torneig urbà del club a Westfield Glòries.</span></span>
+        <span class="franja-go"><em>Cada estiu</em><i></i></span>
+      </a>
+    </div>
+
     <h2>A qui va dirigit</h2>
     <p>A nens i nenes que juguen a bàsquet o que hi volen començar, tant si són del CB Grup Barna com
     si vénen d'un altre club. Cada setmana el club reserva places per als seus jugadors i places
@@ -885,6 +902,23 @@ def build_3x3():
       <div><b>10</b><span>Categories</span></div>
       <div><b>60</b><span>Equips per edició</span></div>
       <div><b>BCN</b><span>Westfield Glòries</span></div>
+    </div>
+
+    <div class="franges" aria-label="Altres portes del club">
+      <a class="franja" href="/escoleta/" data-cta="3x3-franja-escoleta">
+        <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
+        <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Si encara no ha començat i té entre 4 i 7 anys, el camí és aquest.</span></span>
+        <span class="franja-go"><em>4 a 7 anys</em><i></i></span>
+      </a>
+      <a class="franja franja--red" href="/partits/" data-cta="3x3-franja-dies-partit">
+        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
+      </a>
+      <a class="franja" href="/campus/" data-cta="3x3-franja-campus">
+        <span class="franja-ph"><img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 360w, /img/campus-hero@2x.webp 720w" sizes="150px" width="360" height="202" loading="lazy" decoding="async" alt="Entrenament del Campus de bàsquet del CB Grup Barna"></span>
+        <span class="franja-tx"><span class="franja-t">Campus de bàsquet</span><span class="franja-s">Setmanes intensives de tecnificació a l'estiu.</span></span>
+        <span class="franja-go"><em>Cada estiu</em><i></i></span>
+      </a>
     </div>
 
     <h2>Edicions anteriors</h2>

@@ -7,12 +7,12 @@
 <meta name="application-name" content="CB Grup Barna">
 <meta name="classification" content="Club de basquet base, academia de baloncesto, acadèmia de bàsquet, club de baloncesto base, Barcelona, Sant Marti, El Clot">
 <title>CB Grup Barna · Acadèmia i Club de Bàsquet · Barcelona</title>
-<meta name="description" content="Acadèmia i club de bàsquet base a Barcelona (El Clot) des de 1965. +34 equips, 450 jugadores i jugadors, escoleta 4-7 anys, campus i bàsquet femení.">
+<meta name="description" content="Acadèmia i club de bàsquet base a Barcelona (El Clot) des de 1965. +34 equips, 450 jugadores i jugadors, escoleta 4-8 anys, campus i bàsquet femení.">
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:title" content="CB Grup Barna · Acadèmia i Club de Bàsquet a Barcelona">
-<meta property="og:description" content="Acadèmia i club de bàsquet i baloncesto base al Districte de Sant Martí, Barcelona, des de 1965. Escoleta 4-7 anys, campus, calendari i galeria.">
+<meta property="og:description" content="Acadèmia i club de bàsquet i baloncesto base al Districte de Sant Martí, Barcelona, des de 1965. Escoleta 4-8 anys, campus, calendari i galeria.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info">
 <meta property="og:locale" content="ca_ES">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@cbgrupbarna">
 <meta name="twitter:title" content="CB Grup Barna · Acadèmia de Bàsquet i Baloncesto · Barcelona">
-<meta name="twitter:description" content="Acadèmia y club de baloncesto base en Barcelona desde 1965 · Escoleta 4-7 años · Campus · Calendario · +34 equipos.">
+<meta name="twitter:description" content="Acadèmia y club de baloncesto base en Barcelona desde 1965 · Escoleta 4-8 años · Campus · Calendario · +34 equipos.">
 <meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta name="twitter:image:alt" content="CB Grup Barna · Club de bàsquet i baloncesto base a Barcelona des del 1965">
 <meta name="twitter:creator" content="@cbgrupbarna">
@@ -470,6 +470,8 @@ img { max-width: 100%; height: auto; display: block; }
    vermell hi és superfície, no només accent: veure sistema-visual-cbgb. */
 .franges { display: flex; flex-direction: column; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .franja { position: relative; display: grid; grid-template-columns: 190px minmax(0, 1fr) auto; align-items: stretch; background: var(--paper); min-height: 108px; overflow: hidden; transition: background 0.35s var(--ease); }
+/* Sense foto, la columna de 190px no s'ha de reservar: el text s'hi comprimia. */
+.franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr) auto; }
 .franja:nth-child(even):not(.franja--red):not(.franja--ink):hover { background: var(--ink); }
 .franja:nth-child(even):not(.franja--red):not(.franja--ink) { background: var(--paper-2); }
 .franja:hover { background: var(--ink); }
@@ -517,6 +519,95 @@ img { max-width: 100%; height: auto; display: block; }
   .franja, .franja-ph img, .franja-go i { transition: none; }
 }
 .center { text-align: center; }
+
+/* ==== Filets de secció, com un diari: titol a l'esquerra, dada a la dreta ==== */
+.e-sech-wrap { padding-top: clamp(20px, 3vw, 34px); }
+.e-sech { border-top: 2px solid var(--red); padding: 14px 0 12px; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.e-sech h2 { font-family: var(--display); font-weight: 400; font-size: clamp(15px, 2vw, 20px); letter-spacing: 0.16em; text-transform: uppercase; }
+.e-sech em { font-style: normal; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+/* ==== EL BARNA PER DINS · graella de peces, com la secció d'un mitjà ==== */
+.e-feat { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 3vw, 34px); padding: clamp(30px, 4.5vw, 54px) 0; }
+@media (min-width: 860px) { .e-feat { grid-template-columns: 1.4fr 1fr 1fr; } }
+.e-art { display: block; }
+.e-art .im { display: block; position: relative; overflow: hidden; background: var(--paper-2); aspect-ratio: 3 / 4; }
+.e-art .im img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.7s var(--ease); }
+.e-art:hover .im img { transform: scale(1.04); }
+.e-art .cap { display: block; padding: 14px 2px 0; }
+.e-art .kick { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
+.e-art h3 { font-size: clamp(17px, 2.1vw, 24px); letter-spacing: 0.02em; text-transform: none; font-weight: 500; margin: 8px 0 6px; line-height: 1.15; }
+.e-art.wide h3 { font-size: clamp(20px, 2.8vw, 32px); }
+.e-art p { font-size: 13px; color: var(--ink-2); }
+
+/* ==== GUIES PER A FAMÍLIES · targetes de text, del blog ==== */
+.e-guides { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: clamp(30px, 4.5vw, 54px); }
+@media (min-width: 760px) { .e-guides { grid-template-columns: repeat(3, 1fr); } }
+.e-guide { display: block; background: var(--paper); padding: clamp(20px, 2.6vw, 28px); transition: background 0.3s var(--ease); }
+.e-guide:hover { background: var(--paper-2); }
+.e-guide .kick { font-family: var(--display); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); }
+.e-guide h3 { font-size: 15.5px; font-weight: 500; text-transform: none; letter-spacing: 0.01em; margin: 9px 0 8px; line-height: 1.25; }
+.e-guide p { font-size: 12.5px; color: var(--ink-2); margin: 0; }
+
+/* ==== JORNADA fosca · el mateix #calendari, amb un altre vestit ==== */
+.e-jornada { background: var(--ink); padding: clamp(30px, 4.5vw, 54px) 0; margin: clamp(24px, 3.5vw, 40px) 0; }
+.e-jornada .sec-head { text-align: left; margin-bottom: clamp(18px, 2.6vw, 30px); }
+.e-jornada .eyebrow { color: rgba(255,255,255,0.6); }
+.e-jornada h2 { color: #fff; }
+.e-jornada .lede-p { color: rgba(255,255,255,0.7); font-size: 13.5px; margin-top: 10px; max-width: 56ch; }
+.e-jornada .cal { border-top-color: rgba(255,255,255,0.2); }
+.e-jornada .cal-row { border-bottom-color: rgba(255,255,255,0.14); }
+.e-jornada .cal-date, .e-jornada .cal-when { color: rgba(255,255,255,0.55); }
+.e-jornada .cal-date b { color: #fff; }
+.e-jornada .cal-team { color: #fff; }
+.e-jornada .cal-meta { color: rgba(255,255,255,0.55); }
+.e-jornada .cal-empty { color: rgba(255,255,255,0.7); border-bottom-color: rgba(255,255,255,0.14); }
+.e-jornada .cal-empty a { color: #fff; }
+.e-jornada .btn.ghost { border-color: rgba(255,255,255,0.4); color: #fff; }
+.e-jornada .btn.ghost:hover { background: #fff; color: var(--ink); }
+.e-jornada .rule { background: rgba(255,255,255,0.3); }
+.e-jornada .cta { color: #fff; }
+.e-jornada .cta:hover { color: rgba(255,255,255,0.7); }
+
+/* ==== Paritat, banda independent i partida pel mig ==== */
+.e-par { background: var(--red); color: #fff; margin: clamp(24px, 3.5vw, 40px) 0; }
+.e-par .halves { display: grid; grid-template-columns: 1fr 1px 1fr; }
+@media (max-width: 640px) { .e-par .halves { grid-template-columns: 1fr; } }
+.e-par .rule { background: rgba(255,255,255,0.4); }
+@media (max-width: 640px) { .e-par .rule { height: 1px; } }
+.e-par .h { padding: clamp(22px, 3.2vw, 32px) clamp(20px, 4vw, 40px); }
+.e-par .h span { display: block; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.82; }
+.e-par .h b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.8vw, 30px); text-transform: uppercase; line-height: 1; margin-top: 10px; }
+.e-par .foot { border-top: 1px solid rgba(255,255,255,0.4); padding: 16px clamp(20px, 4vw, 40px); font-size: 13px; }
+.e-par .foot a { color: #fff; }
+
+/* ==== LIGHT / EXTENSA · dues portades, un commutador ====
+   Per defecte (sense JS, o abans que corri): light a mòbil i tauleta,
+   extensa a escriptori. Un cop hi ha preferència (--view-toggle--), la tria
+   explícita mana a qualsevol amplada. Res es duplica: calendari, formulari
+   i la resta de la pàgina són els mateixos als dos modes. */
+.only-light { display: none; }
+.only-extensa { display: block; }
+@media (max-width: 900px) {
+  html:not([data-view]) .only-light { display: block; }
+  html:not([data-view]) .only-extensa { display: none; }
+}
+html[data-view="light"] .only-light { display: block; }
+html[data-view="light"] .only-extensa { display: none; }
+html[data-view="extensa"] .only-light { display: none; }
+html[data-view="extensa"] .only-extensa { display: block; }
+
+/* Al costat dret de la capçalera, sempre visible: és germà de .head-nav,
+   no fill seu, així no desapareix quan el nav es plega sota el burger. */
+.view-toggle { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-family: var(--display); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; padding: 8px 12px; min-height: 34px; transition: border-color 0.3s var(--ease), color 0.3s var(--ease); }
+.view-toggle:hover { border-color: var(--red); color: var(--red); }
+.view-toggle:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.view-toggle .vt-ic { width: 10px; height: 10px; border: 1.3px solid currentColor; display: block; flex-shrink: 0; }
+html[data-view="light"] .view-toggle .vt-ic { background: linear-gradient(90deg, currentColor 0 33%, transparent 33%); }
+html[data-view="extensa"] .view-toggle .vt-ic, html:not([data-view]) .view-toggle .vt-ic { background: linear-gradient(90deg, currentColor 0 66%, transparent 66%); }
+@media (max-width: 620px) { .view-toggle { padding: 7px 10px; font-size: 8.5px; gap: 6px; } .view-toggle span:last-child { display: none; } }
+
+.lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .lg-c, .lg-c img { transition: none; } }
 
 /* ==== TIPOGRAFIA ==== */
 h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.3; }
@@ -616,8 +707,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 @keyframes leadZoom { from { transform: scale(1.02); } to { transform: scale(1); } }
 .lead-media .tagline { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
 .lead-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 6vw, 88px) clamp(22px, 5vw, 76px); }
-.lead-body h1 { font-size: clamp(25px, 3.4vw, 44px); margin: 18px 0 0; }
-.lead-body h1 small { display: block; margin-top: 14px; font-size: 0.44em; letter-spacing: 0.32em; color: var(--muted); font-weight: 300; }
+.lead-body h1, .lead-body h2 { font-size: clamp(25px, 3.4vw, 44px); margin: 18px 0 0; }
+.lead-body h1 small, .lead-body h2 small { display: block; margin-top: 14px; font-size: 0.44em; letter-spacing: 0.32em; color: var(--muted); font-weight: 300; }
+/* Un sol H1 real per pàgina, sempre present per a SEO i lectors de pantalla,
+   encara que estigui amagat visualment: light i extensa fan servir h2. */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .lead-body .lede { margin-top: 24px; }
 .lead-body .btn-row { margin-top: 30px; }
 .lead-url { display: inline-flex; align-items: center; min-height: 44px; gap: 8px; margin-top: 22px; align-self: flex-start; font-family: var(--display); font-size: 11px; letter-spacing: 0.16em; color: var(--red); border-bottom: 1px solid var(--red); padding-bottom: 6px; transition: color 0.3s, border-color 0.3s; }
@@ -831,12 +925,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <div class="tk-lab"><span class="pdot"></span>Novetats</div>
   <div class="tk-trk">
     <div class="tk-cnt">
-      <span class="tk-it">Escoleta 4-7 anys · Inscripcions obertes</span>
+      <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
       <span class="tk-it">Sèniors · Nova temporada</span>
       <span class="tk-it">Dies de partit actualitzats</span>
       <span class="tk-it">Galeria de fotos del club</span>
       <span class="tk-it">#SomClot · 60 anys de bàsquet</span>
-      <span class="tk-it">Escoleta 4-7 anys · Inscripcions obertes</span>
+      <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
       <span class="tk-it">Sèniors · Nova temporada</span>
       <span class="tk-it">Dies de partit actualitzats</span>
       <span class="tk-it">Galeria de fotos del club</span>
@@ -878,6 +972,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         </span>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="head-wa">Contacte</a>
       </nav>
+      <!-- Sempre visible, a tots els amplades: light per defecte a mòbil
+           i tauleta, extensa a escriptori, i sempre es pot canviar. -->
+      <button class="view-toggle" id="viewToggle" type="button" aria-live="polite">
+        <span class="vt-ic" aria-hidden="true"></span><span id="viewToggleLbl">Light</span>
+      </button>
     </div>
   </div>
 </header>
@@ -915,12 +1014,19 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <div class="menu-foot">@cbgrupbarna · +34 698 425 153 · El Clot, Barcelona</div>
 </nav>
 
-<a href="#escoleta" class="skip">Saltar al contingut</a>
+<a href="#contingut" class="skip">Saltar al contingut</a>
 
 <main id="contingut">
 
+  <h1 class="sr-only">Acadèmia i Club de Bàsquet Base a Barcelona · CB Grup Barna · Escoleta 4-8 anys · El Clot</h1>
+
+  <!-- ==== LA PORTADA · capçalera d'article, mateix filet vermell que la resta ==== -->
+  <div class="wrap only-extensa e-sech-wrap">
+    <div class="e-sech"><h2>La portada</h2><em id="e-date"></em></div>
+  </div>
+
   <!-- ==== ESCOLETA · el que toca aquest mes ==== -->
-  <section class="lead" id="escoleta">
+  <section class="lead only-extensa" id="escoleta">
     <div class="lead-media">
       <img src="img/escoleta.webp"
            srcset="img/escoleta.webp 375w, img/escoleta@2x.webp 750w"
@@ -931,7 +1037,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     </div>
     <div class="lead-body">
       <p class="eyebrow red">El primer bot comença aquí · 4 a 8 anys</p>
-      <h1>Acadèmia i Club de Bàsquet Base a Barcelona<small>CB Grup Barna · Escoleta 4-7 anys · El Clot</small></h1>
+      <h2>Acadèmia i Club de Bàsquet Base a Barcelona<small>CB Grup Barna · Escoleta 4-8 anys · El Clot</small></h2>
       <p class="lede">Equips mixtos, tres grups per edat i trobades amb altres clubs. Vine a provar un entrenament sense compromís: seixanta anys formant nens i nenes del barri.</p>
       <div class="btn-row">
         <a href="https://wa.me/34646205526?text=Hola%20Julio!%20M%27interessa%20l%27Escoleta%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna%20per%20a%20nens%20i%20nenes%20de%204%20a%207%20anys.%20Podeu%20informar-me%3F" target="_blank" rel="noopener" class="btn red" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
@@ -943,7 +1049,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   </section>
 
   <!-- ==== FRANGES · les portes del club, d'un cop d'ull ==== -->
-  <section class="franges" aria-label="Accés ràpid al club">
+  <section class="franges only-light" aria-label="Accés ràpid al club">
     <a class="franja franja--red" href="/partits/" data-cta="franja-dies-partit">
       <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">Calendari i resultats de tots els equips, cada setmana.</span></span>
       <span class="franja-go"><em>Aquest cap de setmana</em><i></i></span>
@@ -980,16 +1086,21 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <span class="franja-tx"><span class="franja-t">Campus de bàsquet</span><span class="franja-s">Setmanes intensives de tecnificació a l'estiu.</span></span>
       <span class="franja-go"><em>Cada estiu</em><i></i></span>
     </a>
+    <a class="franja franja--red" href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="franja-whatsapp">
+      <span class="franja-tx"><span class="franja-t">Escriu-nos</span><span class="franja-s">Et responem el mateix dia.</span></span>
+      <span class="franja-go"><em>WhatsApp</em><i></i></span>
+    </a>
+    <p class="lg-foot">@cbgrupbarna · La Nau del Clot · Sant Martí · #SomClot</p>
   </section>
 
-  <!-- ==== CALENDARI DEL BARNA ==== -->
-  <section class="section band-soft" id="calendari">
+  <!-- ==== CALENDARI DEL BARNA · només a l'extensa, com la jornada d'un diari ==== -->
+  <section class="e-jornada only-extensa" id="calendari">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow" id="cal-season">Temporada 2026 · 2027</p>
         <div class="rule"></div>
-        <h2>Dies de partit</h2>
-        <p>Els propers partits de tots els equips del club. Horaris, pista i competició.</p>
+        <h2>Aquest cap de setmana</h2>
+        <p class="lede-p">Els propers partits de tots els equips del club. Horaris, pista i competició.</p>
       </div>
       <div class="cal reveal" id="cal-list" aria-live="polite">
         <div class="cal-empty">Carregant el calendari…</div>
@@ -1000,6 +1111,65 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       </div>
     </div>
   </section>
+
+  <!-- ==== PARITAT · una franja, no una xifra ==== -->
+  <div class="wrap only-extensa">
+    <div class="e-par">
+      <div class="halves">
+        <div class="h"><span>Línia femenina</span><b>Mateix nombre de jugadores</b></div>
+        <div class="rule"></div>
+        <div class="h"><span>Línia masculina</span><b>Mateix nombre de jugadors</b></div>
+      </div>
+      <div class="foot"><b>I el mateix pressupost per a les dues.</b> La paritat del Barna no és una declaració d'intencions: es reparteix a parts iguals. <a href="/premidonaesport/" data-cta="extensa-premi-dona">El model, documentat al Premi Dona i Esport →</a></div>
+    </div>
+  </div>
+
+  <!-- ==== EL BARNA PER DINS ==== -->
+  <div class="wrap only-extensa">
+    <div class="e-sech"><h2>El Barna per dins</h2><em>Quatre portes</em></div>
+    <div class="e-feat">
+      <a class="e-art wide" href="/escoleta/" data-cta="extensa-escoleta">
+        <span class="im"><img src="img/escoleta.webp" srcset="img/escoleta.webp 375w, img/escoleta@2x.webp 750w" sizes="(max-width:860px) 100vw, 40vw" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
+        <span class="cap"><span class="kick">Escoleta</span>
+          <h3>De 4 a 8 anys: per on comença tothom, sense saber-ne gens</h3>
+          <p>Equips mixtos, tres grups per edat i trobades amb altres clubs.</p></span>
+      </a>
+      <a class="e-art" href="#seniors" data-cta="extensa-seniors">
+        <span class="im"><img src="img/hero-player.webp" srcset="img/hero-player.webp 466w, img/hero-player@2x.webp 932w" sizes="(max-width:860px) 100vw, 25vw" width="466" height="700" loading="lazy" decoding="async" alt="Jugador sènior del CB Grup Barna amb la pilota"></span>
+        <span class="cap"><span class="kick">Sèniors</span>
+          <h3>La primera plantilla encara la temporada 26·27</h3>
+          <p>On acaba el camí que comença a l'Escoleta.</p></span>
+      </a>
+      <a class="e-art" href="/premidonaesport/" data-cta="extensa-femeni">
+        <span class="im"><img src="img/team-action.webp" srcset="img/team-action.webp 375w, img/team-action@2x.webp 750w" sizes="(max-width:860px) 100vw, 25vw" width="375" height="500" loading="lazy" decoding="async" alt="Jugadores del CB Grup Barna amb l'equipació del club"></span>
+        <span class="cap"><span class="kick">Femení</span>
+          <h3>El projecte femení, equip a equip</h3>
+          <p>De l'Escoleta al sènior, sense saltar-se cap graó.</p></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ==== GUIES PER A FAMÍLIES · articles reals del blog ==== -->
+  <div class="wrap only-extensa">
+    <div class="e-sech"><h2>Guies per a famílies</h2><em>Del blog del club</em></div>
+    <div class="e-guides">
+      <a class="e-guide" href="/blog/a-quina-edat-comencar-basquet/" data-cta="extensa-guia-edat">
+        <span class="kick">Bàsquet base</span>
+        <h3>A quina edat pot començar a jugar a bàsquet?</h3>
+        <p>La resposta curta és als quatre anys. La llarga té matisos que val la pena conèixer abans d'apuntar ningú enlloc.</p>
+      </a>
+      <a class="e-guide" href="/blog/com-triar-escola-basquet-barcelona/" data-cta="extensa-guia-escola">
+        <span class="kick">Guia</span>
+        <h3>Com triar una escola de bàsquet a Barcelona</h3>
+        <p>Set punts que diferencien de veritat una opció d'una altra, i que no surten a cap web.</p>
+      </a>
+      <a class="e-guide" href="/blog/basquet-base-sant-marti-clot/" data-cta="extensa-guia-barri">
+        <span class="kick">El barri</span>
+        <h3>Com funciona un club de barri al Clot</h3>
+        <p>Un club de barri no és una versió petita d'un club gran. És una altra cosa.</p>
+      </a>
+    </div>
+  </div>
 
   <!-- ==== INFORMACIÓ · formulari de contacte i avisos ==== -->
   <section class="section band-soft" id="info">
@@ -1046,7 +1216,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
             <div class="field" style="margin-top:24px">
               <label id="f-int-label">M'interessa</label>
               <div class="chips" role="group" aria-labelledby="f-int-label">
-                <input type="checkbox" id="i1" name="interes" value="Escoleta (4-7 anys)" checked><label for="i1">Escoleta 4-7</label>
+                <input type="checkbox" id="i1" name="interes" value="Escoleta (4-8 anys)" checked><label for="i1">Escoleta 4-8</label>
                 <input type="checkbox" id="i2" name="interes" value="Portes obertes / equip federat"><label for="i2">Portes obertes</label>
                 <input type="checkbox" id="i3" name="interes" value="Campus de bàsquet"><label for="i3">Campus</label>
                 <input type="checkbox" id="i4" name="interes" value="Torneig 3x3"><label for="i4">3x3</label>
@@ -1401,6 +1571,65 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     burger.addEventListener('click', function () { toggle(!menu.classList.contains('open')); });
     menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
+  })();
+
+  // ==== LA PORTADA · data real, no escrita a mà ====
+  (function () {
+    var el = document.getElementById('e-date');
+    if (!el) return;
+    var DIES = ['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
+    var MESOS = ['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
+    var VOCALS = ['abril','agost','octubre'];
+    var d = new Date();
+    var mes = MESOS[d.getMonth()];
+    var de = VOCALS.indexOf(mes) > -1 ? "d'" : 'de ';
+    el.textContent = DIES[d.getDay()] + ', ' + d.getDate() + ' ' + de + mes + ' de ' + d.getFullYear();
+  })();
+
+  // ==== COMMUTADOR LIGHT / EXTENSA ====
+  // Per defecte: light a mòbil i tauleta (≤900px), extensa a escriptori.
+  // Un cop es tria a mà, la preferència es desa i mana a qualsevol amplada.
+  (function () {
+    var btn = document.getElementById('viewToggle');
+    var lbl = document.getElementById('viewToggleLbl');
+    if (!btn || !lbl) return;
+    var root = document.documentElement;
+    var mq = window.matchMedia('(max-width: 900px)');
+    var KEY = 'cbgb-view';
+    var view = null;
+    try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'extensa') view = saved; } catch (e) {}
+
+    // Trànsit d'Instagram: sempre la versió light, sigui quin sigui el
+    // dispositiu o la preferència desada. Els enllaços que es comparteixen
+    // a Instagram són "de temporada" i han de ser sempre la versió curta.
+    // No es desa a localStorage: només val per aquesta visita, i qui hi
+    // entri després per un altre camí (o toqui el commutador) no en queda
+    // afectat.
+    function desInstagram() {
+      try {
+        if (/instagram/i.test(navigator.userAgent)) return true;
+        if (document.referrer && /instagram\.com/i.test(document.referrer)) return true;
+        var p = new URLSearchParams(location.search);
+        if (p.has('igsh') || p.has('igshid')) return true;
+      } catch (e) {}
+      return false;
+    }
+    if (desInstagram()) view = 'light';
+
+    function efectiu() { return view || (mq.matches ? 'light' : 'extensa'); }
+    function pinta() {
+      var actual = efectiu();
+      lbl.textContent = actual === 'light' ? 'Light' : 'Extensa';
+      btn.setAttribute('aria-label', 'Ara veus la versió ' + lbl.textContent.toLowerCase() + '. Toca per canviar a l\'altra.');
+      if (view) root.setAttribute('data-view', view); else root.removeAttribute('data-view');
+    }
+    btn.addEventListener('click', function () {
+      view = efectiu() === 'light' ? 'extensa' : 'light';
+      try { localStorage.setItem(KEY, view); } catch (e) {}
+      pinta();
+    });
+    mq.addEventListener('change', function () { if (!view) pinta(); });
+    pinta();
   })();
 
   // ==== CTA tracking ====

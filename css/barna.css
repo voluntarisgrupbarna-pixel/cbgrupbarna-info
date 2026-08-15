@@ -13,6 +13,7 @@
   --paper: #ffffff;
   --paper-2: #f6f4f1;
   --red: #E20613;
+  --red-dark: #A8040E;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Jost', 'Futura', 'Century Gothic', -apple-system, sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -101,6 +102,44 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.18
 .facts b { display: block; font-family: var(--display); font-weight: 200; font-size: clamp(20px, 3vw, 32px); letter-spacing: 0.05em; }
 .facts b em { font-style: normal; color: var(--red); }
 .facts span { display: block; margin-top: 8px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
+
+/* ==== FRANGES · altres portes del club, en rectangles apilats ====
+   Mateix component que a la portada (index.html): el vermell fa de
+   superfície, no només d'accent. Veure la skill web-cbgb. */
+.franges { display: flex; flex-direction: column; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: clamp(34px, 5vw, 60px) 0; }
+.franja { position: relative; display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; align-items: stretch; background: var(--paper); min-height: 96px; overflow: hidden; transition: background 0.35s var(--ease); }
+/* Sense foto, la columna de 150px no s'ha de reservar: el text s'hi comprimia. */
+.franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr) auto; }
+.franja:nth-child(even):not(.franja--red):not(.franja--ink) { background: var(--paper-2); }
+.franja:hover { background: var(--ink); }
+.franja:hover .franja-t, .franja:hover .franja-go em { color: #fff; }
+.franja:hover .franja-s { color: rgba(255,255,255,0.7); }
+.franja:hover .franja-go i { background: var(--red); width: 40px; }
+.franja-ph { position: relative; overflow: hidden; background: var(--paper-2); }
+.franja-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.7s var(--ease); }
+.franja:hover .franja-ph img { transform: scale(1.05); }
+.franja-tx { padding: 16px 22px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.franja-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(15px, 1.9vw, 19px); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.1; transition: color 0.3s; }
+.franja-s { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 6px; max-width: 46ch; }
+.franja-go { padding: 0 22px; display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.franja-go em { font-style: normal; font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.franja-go i { display: block; width: 22px; height: 1px; background: var(--ink); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
+.franja--red { background: var(--red); }
+.franja--red .franja-t, .franja--red .franja-s, .franja--red .franja-go em { color: #fff; }
+.franja--red .franja-s { color: rgba(255,255,255,0.82); }
+.franja--red .franja-go i { background: #fff; }
+.franja--red:hover { background: var(--red-dark); }
+.franja--ink { background: var(--ink); }
+.franja--ink .franja-t { color: #fff; }
+.franja--ink .franja-s, .franja--ink .franja-go em { color: rgba(255,255,255,0.7); }
+.franja--ink .franja-go i { background: #fff; }
+@media (max-width: 640px) {
+  .franja { grid-template-columns: 84px minmax(0, 1fr); min-height: 82px; }
+  .franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr); }
+  .franja-go { display: none; }
+  .franja-tx { padding: 12px 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .franja, .franja-ph img, .franja-go i { transition: none; } }
 
 /* ==== PREMSA · galeria de pàgines i cita de l'article ==== */
 .press-badge { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 10px 18px; border: 1px solid var(--line); font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
