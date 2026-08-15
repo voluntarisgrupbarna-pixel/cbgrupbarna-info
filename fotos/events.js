@@ -391,18 +391,6 @@ window.GALERIA_EVENTS = [
     "source": "repo"
   },
   {
-    "id": "senior-femeni-sessio-fotos-instax",
-    "title": "Sènior Femení · Sessió Fotos Instax",
-    "description": "Sessió de fotos Instax de l'equip Sènior Femení del CB Grup Barna. Temporada 2025-2026.",
-    "date": "2026-06-16",
-    "location": "Barcelona",
-    "season": "2025-2026",
-    "cover": null,
-    "source": "repo",
-    "photos": [],
-    "allow_download": true
-  },
-  {
     "id": "fotos-equips-temporada-25-26-records",
     "title": "Fotos Equips Temporada 25-26 · Rècords",
     "description": "Fotos oficials dels equips del CB Grup Barna de la temporada 2025-2026. Una temporada plena de rècords.",
