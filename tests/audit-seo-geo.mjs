@@ -91,8 +91,11 @@ function auditPage(rel) {
   const name = metas(html, 'name');
   const prop = metas(html, 'property');
   const ls = links(html);
-  const isAdmin = NOINDEX_OK.some((p) => url.startsWith(p) || url === p);
   const noindex = /noindex/i.test(name.robots || '');
+  // Una pàgina que demana no ser indexada no necessita Open Graph, ni
+  // descripció, ni dades estructurades: exigir-li-ho és soroll. Val tant per
+  // a les eines internes com per a les redireccions amb canonical.
+  const isAdmin = noindex || NOINDEX_OK.some((p) => url.startsWith(p) || url === p);
   r.info.noindex = noindex;
   r.info.admin = isAdmin;
 
@@ -117,15 +120,15 @@ function auditPage(rel) {
   r.info.title = title;
   if (!title) add('error', 'title', 'sense <title>');
   else {
-    if (title.length < 15) add('avís', 'title-curt', `títol de ${title.length} caràcters`, { title });
-    if (title.length > 65) add('avís', 'title-llarg', `títol de ${title.length} caràcters, Google el retallarà`, { title });
+    if (title.length < 15 && !isAdmin) add('avís', 'title-curt', `títol de ${title.length} caràcters`, { title });
+    if (title.length > 65 && !isAdmin) add('avís', 'title-llarg', `títol de ${title.length} caràcters, Google el retallarà`, { title });
   }
   const desc = name.description;
   r.info.description = desc;
   if (!desc) { if (!isAdmin) add('error', 'description', 'sense meta description'); }
   else {
-    if (desc.length < 70) add('avís', 'desc-curta', `descripció de ${desc.length} caràcters`);
-    if (desc.length > 165) add('avís', 'desc-llarga', `descripció de ${desc.length} caràcters, es retallarà`);
+    if (desc.length < 70 && !isAdmin) add('avís', 'desc-curta', `descripció de ${desc.length} caràcters`);
+    if (desc.length > 165 && !isAdmin) add('avís', 'desc-llarga', `descripció de ${desc.length} caràcters, es retallarà`);
   }
 
   // --- canonical ---
@@ -137,7 +140,9 @@ function auditPage(rel) {
     else {
       const expect = SITE + (url === '/' ? '/' : url);
       const got = canon.href.replace(/\/$/, '') || canon.href;
-      if (got.replace(/\/$/, '') !== expect.replace(/\/$/, '')) {
+      // Una redirecció amb noindex ha d'apuntar al seu destí: és el que la fa
+      // correcta, no un error.
+      if (!noindex && got.replace(/\/$/, '') !== expect.replace(/\/$/, '')) {
         add('avís', 'canonical-divergent', 'la canonical no apunta a la pròpia URL', { href: canon.href, expect });
       }
     }
@@ -157,7 +162,8 @@ function auditPage(rel) {
   // --- encapçalaments al codi font ---
   const h1s = (html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi) || []).map((h) => textOf(h));
   r.info.h1 = h1s;
-  if (h1s.length === 0) add('error', 'h1', 'cap <h1>');
+  // Una pàgina que no s'indexa pot no tenir <h1>: no és un problema de cerca.
+  if (h1s.length === 0 && !isAdmin) add('error', 'h1', 'cap <h1>');
   else if (h1s.length > 1) add('avís', 'h1-multiple', `${h1s.length} <h1>`, { h1s: h1s.slice(0, 4) });
 
   // --- imatges sense alt ---
@@ -204,9 +210,17 @@ function auditPage(rel) {
     try {
       const parsed = JSON.parse(raw.trim());
       const nodes = Array.isArray(parsed) ? parsed : (parsed['@graph'] || [parsed]);
-      for (const n of nodes) {
+      // Els tipus també compten quan van niats: un ImageObject dins d'una
+      // galeria o un HowTo dins de mainEntity valen igual per a qui ens llegeix.
+      const walk = (n) => {
+        if (Array.isArray(n)) { n.forEach(walk); return; }
+        if (!n || typeof n !== 'object') return;
         const t = Array.isArray(n['@type']) ? n['@type'].join('+') : n['@type'];
         if (t) types.push(t);
+        for (const [k, v] of Object.entries(n)) if (k !== '@type' && k !== '@context') walk(v);
+      };
+      for (const n of nodes) {
+        walk(n);
         r.info.jsonld.push(n);
       }
     } catch (e) {
@@ -224,7 +238,15 @@ function auditPage(rel) {
     es: ['con', 'esto', 'este', 'esta', 'estos', 'nosotros', 'también', 'pero', 'muy', 'años', 'niños', 'qué', 'son', 'más', 'del', 'las', 'sus', 'hasta', 'todos', 'nuestro'],
     en: ['with', 'this', 'these', 'we', 'also', 'but', 'very', 'years', 'children', 'what', 'are', 'more', 'of', 'the', 'their', 'until', 'all', 'our', 'and', 'for'],
   };
-  const bodyText = textOf((html.match(/<body[\s\S]*<\/body>/i) || [html])[0]).toLowerCase();
+  // Les citacions bibliogràfiques van en l'idioma de l'original i falsejarien
+  // el recompte: una pàgina de bibliografia en català plena de títols anglesos
+  // no és una pàgina en anglès.
+  const bodyText = textOf(
+    (html.match(/<body[\s\S]*<\/body>/i) || [html])[0]
+      .replace(/<li\b[\s\S]*?<\/li>/gi, ' ')
+      .replace(/<cite\b[\s\S]*?<\/cite>/gi, ' ')
+      .replace(/<blockquote\b[\s\S]*?<\/blockquote>/gi, ' ')
+  ).toLowerCase();
   const score = {};
   for (const [code, words] of Object.entries(MARKERS)) {
     score[code] = words.reduce((n, w) => n + (bodyText.match(new RegExp(`(^|[^\\p{L}])${w}([^\\p{L}]|$)`, 'giu')) || []).length, 0);
@@ -247,7 +269,7 @@ function auditPage(rel) {
 }
 
 // ---------- sitemap ----------
-function auditSitemap(pages) {
+function auditSitemap(pages, pageResults) {
   const out = { issues: [], urls: [] };
   const p = path.join(ROOT, 'sitemap.xml');
   if (!fs.existsSync(p)) { out.issues.push({ level: 'error', code: 'sitemap', msg: 'no hi ha sitemap.xml' }); return out; }
@@ -278,7 +300,8 @@ function auditSitemap(pages) {
   if (missing.length) out.issues.push({ level: 'error', code: 'sitemap-404', msg: `${missing.length} URLs del sitemap no existeixen al repositori`, sample: missing.slice(0, 8) });
 
   const inSitemap = new Set(locs.map((l) => (l.replace(SITE, '') || '/')));
-  const absent = [...siteFiles].filter((u) => !inSitemap.has(u) && !NOINDEX_OK.some((a) => u.startsWith(a)));
+  const noindexed = new Set(pageResults.filter((p) => p.info.admin).map((p) => p.url));
+  const absent = [...siteFiles].filter((u) => !inSitemap.has(u) && !noindexed.has(u));
   if (absent.length) out.issues.push({ level: 'avís', code: 'fora-del-sitemap', msg: `${absent.length} pàgines publicades que no són al sitemap`, sample: absent.slice(0, 12) });
 
   if (!/xmlns\s*=\s*["']http:\/\/www\.sitemaps\.org/i.test(xml)) {
@@ -566,7 +589,7 @@ const report = {
   generated: new Date().toISOString(),
   pages: pageResults.length,
   perPage: pageResults,
-  sitemap: auditSitemap(pages),
+  sitemap: auditSitemap(pages, pageResults),
   robots: auditRobots(),
   llms: auditLlms(),
   geo: auditGeo(pageResults),

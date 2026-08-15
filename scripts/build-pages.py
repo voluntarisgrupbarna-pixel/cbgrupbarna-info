@@ -15,6 +15,21 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
+
+def clamp_desc(text, limit=160):
+    """Google en mostra uns 160 caràcters. Retallem per final de frase perquè
+    el fragment de cerca no quedi penjat a mitja paraula."""
+    text = " ".join(text.split())
+    if len(text) <= limit:
+        return text
+    cut = text[:limit + 1]
+    end = max(cut.rfind(". "), cut.rfind("? "), cut.rfind("! "))
+    if end > limit * 0.55:
+        return text[:end + 1].strip()
+    sp = cut.rfind(" ")
+    return text[:sp if sp > 0 else limit].rstrip(" ,;:·") + "…"
+
+
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://cbgrupbarna.info"
 WA_CLUB = "https://api.whatsapp.com/send?phone=+34698425153"
@@ -29,11 +44,12 @@ def wa(text):
 
 # ─────────────────────────────────────────────────────────────── esquelet ────
 
-def head(title, desc, url, image, extra_ld=None, keywords=None):
+def head(title, desc, url, image, extra_ld=None, keywords=None, lang="ca"):
+    desc = clamp_desc(desc)
     ld = json.dumps(extra_ld, ensure_ascii=False, indent=2) if extra_ld else None
     kw = f'\n<meta name="keywords" content="{keywords}">' if keywords else ''
     return f"""<!DOCTYPE html>
-<html lang="ca">
+<html lang="{lang}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +60,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None):
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
-<meta property="og:locale" content="ca_ES">
+<meta property="og:locale" content="{lang}_{lang.upper()}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
@@ -563,7 +579,8 @@ def build_patrocinadors():
     return write("patrocinadors/index.html",
                  head(title, desc, url, SITE + ph + "hero_sf16.jpg", ld,
                       "patrocinadores CB Grup Barna, patrocinio baloncesto Barcelona, partners club "
-                      "de baloncesto, esponsorización deportiva Barcelona, dossier de colaboración") + body + FOOT)
+                      "de baloncesto, esponsorización deportiva Barcelona, dossier de colaboración",
+                      lang="es") + body + FOOT)
 
 
 # Dades pròpies de cada partner (descripció, oferta per a socis, posts
