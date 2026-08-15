@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#F4F1EC">
 <title>CB Grup Barna · 60 Anys · Model Català | Presentació institucional</title>
-<meta name="description" content="Presentació institucional del CB Grup Barna: 60 anys de bàsquet i valors al Poblenou i el Clot. Xifres del club, lideratge femení, Barna Màgics, protecció del menor, implicació al barri i reconeixements.">
+<meta name="description" content="Presentació institucional del CB Grup Barna: 60 anys de bàsquet i valors al Poblenou i el Clot. Xifres del club, lideratge femení, Barna Màgics, protecció del menor, implicació al barri, 3x3 Barna, reconeixements i patrocinadors.">
 <meta name="keywords" content="CB Grup Barna presentació, 60 anys bàsquet Clot, model català bàsquet, presentació institucional club bàsquet Barcelona">
 <link rel="canonical" href="https://cbgrupbarna.info/presentacio/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
@@ -52,128 +52,208 @@
 }
 </script>
 <style>
+  /* Tokens · guia "Light i Extensa". Paleta clara al :root pelat; els modes
+     només redefineixen tokens. */
   :root{
-    --red:#E20613; --red-ink:#FF3B41;
-    --ink:#0A0A0A; --panel:#141414; --line:rgba(255,255,255,.1);
-    --txt:#F5F5F5; --muted:rgba(255,255,255,.55);
-    --display:'Anton',sans-serif; --body:'Inter',-apple-system,sans-serif;
+    --red:#E20613; --red-ink:#A8040E;
+    --ink:#10100E; --paper:#FFFFFF; --cream:#F4F1EC; --muted:#6B6560;
+    --line:rgba(16,16,14,.14); --panel:#FFFFFF; --ground:#F4F1EC;
+    --shadow:0 24px 60px -28px rgba(16,16,14,.34);
+    /* Vermell ple amb text blanc a sobre. En fosc s'enfosqueix en comptes
+       d'aclarir-se: el #FF3B41 serveix per a text vermell, no per a fons
+       amb lletra blanca (només 3,1:1). */
+    --red-solid:#E20613;
+    --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
+    --body:'Inter',system-ui,-apple-system,sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --red:#FF3B41; --red-ink:#FF7C80; --red-solid:#C00812;
+      --ink:#F2EFEA; --paper:#17171A; --cream:#1E1E22; --muted:#9C978F;
+      --line:rgba(242,239,234,.16); --panel:#17171A; --ground:#0E0E10;
+      --shadow:0 24px 60px -28px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --red:#FF3B41; --red-ink:#FF7C80; --red-solid:#C00812;
+    --ink:#F2EFEA; --paper:#17171A; --cream:#1E1E22; --muted:#9C978F;
+    --line:rgba(242,239,234,.16); --panel:#17171A; --ground:#0E0E10;
+    --shadow:0 24px 60px -28px rgba(0,0,0,.8);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--ink);color:var(--txt);font-family:var(--body);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{background:var(--ground);color:var(--ink);font-family:var(--body);font-weight:400;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
   img{max-width:100%;display:block}
   a{color:inherit}
+  ::selection{background:var(--red);color:#fff}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px}
   .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
   .skip{position:absolute;left:-999px}
-  .skip:focus{left:16px;top:16px;background:var(--red);color:#fff;padding:10px 16px;z-index:999}
+  .skip:focus{left:16px;top:16px;background:var(--red-solid);color:#fff;padding:10px 16px;z-index:999}
+  .lab{font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
 
-  /* HEADER */
-  .head{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  /* HEADER · capçalera fosca constant, com a la resta de pàgines interiors */
+  .head{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}
   .head-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);height:60px;display:flex;align-items:center;gap:24px}
   .head-brand{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#fff;flex-shrink:0}
   .head-brand img{width:26px;height:26px}
-  .head-nav{display:flex;align-items:center;gap:18px;overflow-x:auto;scrollbar-width:none}
+  .head-nav{display:flex;align-items:center;gap:18px;overflow-x:auto;scrollbar-width:none;flex:1}
   .head-nav::-webkit-scrollbar{display:none}
-  .head-nav a{font-family:var(--display);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .15s}
+  .head-nav a{font-family:var(--display);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap;transition:color .15s}
   .head-nav a:hover{color:#fff}
   @media(max-width:900px){.head-nav a.opt{display:none}}
 
+  /* Selector de mode: tres estats, perquè "sistema" no és el mateix que "clar" */
+  .theme{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;cursor:pointer;
+    font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:8px 12px;transition:border-color .3s var(--ease)}
+  .theme:hover{border-color:var(--red)}
+  .theme .ic{width:11px;height:11px;border-radius:50%;border:1.5px solid currentColor;display:block;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);flex-shrink:0}
+  @media(max-width:620px){.theme{padding:7px 9px;font-size:8.5px}}
+
   .crumb{padding:14px 0;font-size:11.5px;color:var(--muted)}
   .crumb a{color:var(--muted);text-decoration:none}
-  .crumb a:hover{color:#fff}
-  .crumb span{color:#fff}
+  .crumb a:hover{color:var(--ink)}
+  .crumb span{color:var(--ink)}
 
-  /* HERO */
-  .hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden}
+  /* HERO · foto amb vel fosc: es llegeix igual en clar i en fosc */
+  .hero{position:relative;min-height:86vh;display:flex;align-items:center;overflow:hidden}
   .hero-bg{position:absolute;inset:0}
   .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center top}
-  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.35) 0%,rgba(10,10,10,.55) 55%,rgba(10,10,10,.94) 100%)}
-  .hero-in{position:relative;z-index:2;text-align:center;width:100%;padding:100px 0 40px}
-  .hero-badge{display:inline-block;font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:99px;padding:8px 20px;margin-bottom:26px}
+  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.38) 0%,rgba(10,10,10,.5) 55%,rgba(10,10,10,.9) 100%)}
+  .hero-in{position:relative;z-index:2;text-align:center;width:100%;padding:90px 0 46px}
+  .hero-badge{display:inline-block;font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.42);border-radius:99px;padding:8px 20px;margin-bottom:26px}
   .hero-num{font-family:var(--display);font-weight:400;font-size:clamp(110px,20vw,220px);line-height:.85;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.5)}
-  .hero-sub{font-family:var(--display);font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:8px}
-  .hero-name{font-family:var(--display);font-size:clamp(24px,4vw,38px);text-transform:uppercase;color:var(--red-ink);margin-top:2px}
-  .hero-tag{max-width:36ch;margin:22px auto 0;font-size:15px;color:rgba(255,255,255,.85)}
+  .hero-sub{font-family:var(--display);font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:8px}
+  .hero-name{font-family:var(--display);font-size:clamp(24px,4vw,38px);text-transform:uppercase;color:#FF3B41;margin-top:2px}
+  .hero-tag{max-width:38ch;margin:22px auto 0;font-size:15px;color:rgba(255,255,255,.88)}
 
-  /* SPLIT SECTIONS */
-  .split{display:grid;grid-template-columns:1fr;border-top:1px solid var(--line)}
-  @media(min-width:900px){.split{grid-template-columns:1fr 1fr;min-height:560px}}
+  /* FILETS DE SECCIÓ · el que fa que llegeixi com un diari */
+  .sech{border-top:2px solid var(--red);padding:16px 0 14px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .sech h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;letter-spacing:.05em;line-height:1}
+  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .sec{padding:clamp(44px,7vw,80px) 0 0}
+  .sec:last-of-type{padding-bottom:clamp(44px,7vw,80px)}
+
+  /* XIFRES · banda de números sobre tinta, tabulars */
+  .b-num{display:grid;grid-template-columns:repeat(4,1fr);background:#10100E;color:#fff;margin-top:26px}
+  @media(max-width:760px){.b-num{grid-template-columns:repeat(2,1fr)}}
+  .b-num div{padding:24px 16px;border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+  .b-num b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(28px,4.6vw,52px);line-height:.9;font-variant-numeric:tabular-nums}
+  .b-num .r b{color:#FF3B41}
+  .b-num span{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.66)}
+
+  /* SPLIT · foto + text sobre panell */
+  .split{display:grid;grid-template-columns:1fr;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);margin-top:26px}
+  @media(min-width:900px){.split{grid-template-columns:1fr 1fr;min-height:480px}}
   .split.rev{direction:rtl}
   .split.rev>*{direction:ltr}
-  .split-media{position:relative;min-height:280px;overflow:hidden;background:var(--panel)}
+  .split-media{position:relative;min-height:280px;overflow:hidden;background:var(--cream)}
   .split-media img{width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0}
-  .split-txt{padding:clamp(36px,5vw,64px);display:flex;flex-direction:column;justify-content:center}
-  .eyebrow{font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red-ink);margin-bottom:14px}
-  .split-txt h2{font-family:var(--display);font-weight:400;font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;line-height:1.05;margin-bottom:16px}
+  .split-txt{padding:clamp(30px,4.6vw,56px);display:flex;flex-direction:column;justify-content:center}
+  .split-txt h3{font-family:var(--display);font-weight:400;font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;line-height:1.02;margin:10px 0 14px}
   .split-txt p{font-size:15px;color:var(--muted);max-width:46ch}
   .split-txt p+p{margin-top:12px}
+  .split-txt p strong{color:var(--ink);font-weight:600}
+  .split-txt p em{font-style:italic}
 
-  /* STATS */
-  .stats-sec{padding:clamp(50px,7vw,80px) 0;border-top:1px solid var(--line)}
-  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-  .stat-cell{background:var(--ink);padding:26px 14px;text-align:center}
-  .stat-cell b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(28px,3.6vw,42px);color:var(--red-ink)}
-  .stat-cell span{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px}
-  @media(max-width:700px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+  /* LLISTES amb fletxa */
+  .p-list{list-style:none;margin-top:18px;max-width:640px}
+  .p-list li{position:relative;padding:12px 0 12px 30px;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink)}
+  .p-list li::before{content:'→';position:absolute;left:0;color:var(--red)}
 
-  /* QUOTE */
-  .quote-sec{padding:clamp(50px,7vw,80px) 0;text-align:center;border-top:1px solid var(--line)}
-  .quote-sec blockquote{font-family:var(--display);font-weight:400;font-size:clamp(22px,3.4vw,36px);line-height:1.2;max-width:16ch;margin:0 auto;text-transform:uppercase}
-  .quote-sec cite{display:block;margin-top:18px;font-family:var(--body);font-style:normal;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  /* PARITAT · la franja vermella partida pel mig, de la guia */
+  .par{margin-top:26px;background:var(--red-solid);color:#fff}
+  .par .halves{display:grid;grid-template-columns:1fr 1px 1fr}
+  @media(max-width:640px){.par .halves{grid-template-columns:1fr}}
+  .par .rule{background:rgba(255,255,255,.42)}
+  @media(max-width:640px){.par .rule{height:1px}}
+  .par .h{padding:30px 26px}
+  .par .h span{display:block;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.85}
+  .par .h b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(24px,3.6vw,40px);text-transform:uppercase;line-height:.96;margin-top:10px}
+  .par .foot{border-top:1px solid rgba(255,255,255,.42);padding:18px 26px;font-size:13.5px}
+  .par .foot b{font-weight:700}
 
-  /* LIST SECTION (Comunitat / Seguretat) */
-  .plain-sec{padding:clamp(50px,7vw,80px) 0;border-top:1px solid var(--line)}
-  .plain-sec h2{font-family:var(--display);font-weight:400;font-size:clamp(26px,3.6vw,40px);text-transform:uppercase;margin-bottom:10px}
-  .plain-sec .eyebrow{margin-bottom:14px}
-  .p-list{list-style:none;margin-top:26px;max-width:640px}
-  .p-list li{position:relative;padding:14px 0 14px 30px;border-bottom:1px solid var(--line);font-size:15px;color:rgba(255,255,255,.85)}
-  .p-list li::before{content:'→';position:absolute;left:0;color:var(--red-ink)}
-  .two-col{display:grid;grid-template-columns:1fr;gap:32px;margin-top:30px}
-  @media(min-width:700px){.two-col{grid-template-columns:1fr 1fr}}
-  .two-col h3{font-family:var(--display);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-  .badge-lopivi{display:inline-flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:8px 18px 8px 8px;margin-bottom:24px}
-  .badge-lopivi img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+  /* CITES */
+  .quote{padding:clamp(44px,7vw,72px) 0 0;text-align:center}
+  .quote blockquote{font-family:var(--display);font-weight:400;font-size:clamp(22px,3.4vw,36px);line-height:1.16;max-width:18ch;margin:0 auto;text-transform:uppercase}
+  .quote blockquote em{font-style:normal;color:var(--red)}
+  .quote cite{display:block;margin-top:16px;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+  /* PROTECCIÓ */
+  .panel{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);padding:clamp(28px,4.5vw,52px);margin-top:26px}
+  .badge-lopivi{display:inline-flex;align-items:center;gap:10px;background:var(--cream);border:1px solid var(--line);border-radius:99px;padding:8px 18px 8px 8px;margin-bottom:20px}
+  .badge-lopivi img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center top}
   .badge-lopivi span{font-family:var(--display);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .panel h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,3.2vw,36px);text-transform:uppercase;line-height:1.02;margin-bottom:12px}
+  .panel>p{font-size:15px;color:var(--muted);max-width:62ch}
+  .panel>p strong{color:var(--ink);font-weight:600}
+  .two-col{display:grid;grid-template-columns:1fr;gap:8px 40px;margin-top:14px}
+  @media(min-width:700px){.two-col{grid-template-columns:1fr 1fr}}
+  .two-col h4{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
 
-  /* PARTNERS */
-  .partners-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:30px}
-  .partner-card{background:var(--panel);border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
-  .partner-card img{max-height:34px;width:auto;filter:brightness(0) invert(1);opacity:.9}
-  .partner-card b{font-family:var(--display);font-size:13px;letter-spacing:.02em;text-transform:uppercase}
-  .partner-card span{font-size:11px;color:var(--muted)}
+  /* BARRI · entitats i escoles */
+  .partners-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:22px}
+  .partner-card{background:var(--panel);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .partner-card .pc-logo{height:44px;display:flex;align-items:center;background:#fff;border-radius:4px;padding:5px 10px}
+  .partner-card .pc-logo img{max-height:34px;width:auto;max-width:160px;object-fit:contain}
+  .partner-card b{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.02em;text-transform:uppercase}
+  .partner-card span{font-size:11.5px;color:var(--muted)}
+  .school-list{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;max-width:560px}
+  .school-list li{list-style:none;border:1px solid var(--line);background:var(--panel);padding:8px 13px;font-size:12px;letter-spacing:.04em}
+  .school-list li.on{background:var(--red-solid);border-color:var(--red-solid);color:#fff}
 
-  /* VISITS */
-  .visits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:30px}
-  .visit-card{background:var(--panel);border:1px solid var(--line);overflow:hidden}
+  /* 3x3 · xifra gran al costat de la foto */
+  .stat-big{font-family:var(--display);font-weight:400;font-size:clamp(64px,9vw,120px);line-height:.85;color:var(--red)}
+  .stat-big+span{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:8px 0 16px}
+
+  /* VISITES INSTITUCIONALS */
+  .visits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:26px}
+  .visit-card{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
   .visit-card .vc-img{aspect-ratio:4/3;overflow:hidden}
-  .visit-card .vc-img img{width:100%;height:100%;object-fit:cover;object-position:center top}
+  .visit-card .vc-img img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .6s var(--ease)}
+  .visit-card:hover .vc-img img{transform:scale(1.04)}
   .visit-card .vc-body{padding:18px}
-  .visit-card h3{font-family:var(--display);font-size:14px;letter-spacing:.02em;text-transform:uppercase;margin-bottom:6px}
+  .visit-card h3{font-family:var(--display);font-weight:400;font-size:14px;letter-spacing:.02em;text-transform:uppercase;margin-bottom:6px}
   .visit-card p{font-size:12.5px;color:var(--muted);margin-bottom:12px}
-  .visit-card a{font-family:var(--display);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink);text-decoration:none}
+  .visit-card a{font-family:var(--body);font-weight:700;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink);text-decoration:none}
 
-  /* CTA */
-  .closer-sec{padding:clamp(60px,8vw,100px) 0;text-align:center;border-top:1px solid var(--line);background:var(--panel)}
-  .closer-sec h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,44px);text-transform:uppercase;margin-bottom:14px}
-  .closer-sec p{color:var(--muted);max-width:44ch;margin:0 auto 30px}
-  .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:15px 30px;border-radius:2px;transition:all .2s}
-  .btn.red{background:var(--red);color:#fff}
-  .btn.red:hover{background:var(--red-ink)}
-  .btn.ghost{border:1px solid rgba(255,255,255,.3);color:#fff}
-  .btn.ghost:hover{border-color:#fff}
+  /* PATROCINADORS · mateixa graella i mides que /patrocinadors/, sobre placa
+     blanca perquè els logos no es facin malbé en mode fosc. Els fitxers fan
+     entre 80 i 180 px: el marc es queda petit a posta, no s'amplien. */
+  .sponsor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:12px;margin-top:26px}
+  .sponsor{display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);aspect-ratio:16/10;padding:14px;text-decoration:none;transition:border-color .3s var(--ease)}
+  a.sponsor:hover{border-color:var(--red)}
+  .sponsor img{max-width:88px;max-height:40px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.72;transition:filter .3s var(--ease),opacity .3s var(--ease)}
+  a.sponsor:hover img{filter:none;opacity:1}
+  .sponsor.txt span{font-family:var(--display);font-size:15px;letter-spacing:.14em;color:#46433f;text-transform:uppercase}
+  .sponsor-note{margin-top:18px;font-size:13px;color:var(--muted)}
 
-  /* MID LINKS */
   .inline-link{color:var(--red-ink);text-decoration:none;border-bottom:1px solid rgba(226,6,19,.4)}
   .inline-link:hover{border-color:var(--red-ink)}
 
-  /* FOOTER */
-  .foot{border-top:1px solid var(--line);padding:50px 0 30px}
+  /* TANCAMENT */
+  /* El tancament ja porta el seu propi aire: la secció anterior no hi suma
+     el seu coixí de sota, ni el peu deixa una franja crema entremig. */
+  .closer{background:var(--panel);border-top:1px solid var(--line);padding:clamp(56px,8vw,96px) 0;text-align:center}
+  .closer h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,44px);text-transform:uppercase;margin-bottom:14px}
+  .closer p{color:var(--muted);max-width:44ch;margin:0 auto 30px}
+  .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:15px 30px;transition:all .2s}
+  .btn.red{background:var(--red-solid);color:#fff}
+  .btn.red:hover{background:#A8040E;color:#fff}
+  .btn.ghost{border:1px solid var(--ink);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--red);color:var(--red)}
+
+  /* FOOTER · fosc constant, com a la resta del lloc */
+  .foot{background:#0A0A0A;color:#F5F5F5;border-top:1px solid rgba(255,255,255,.1);padding:50px 0 30px}
   .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;margin-bottom:34px}
-  .foot-col h3{font-family:var(--display);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .foot-col h3{font-family:var(--display);font-weight:400;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px}
   .foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px}
   .foot-col a:hover{color:#fff}
-  .foot-btm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:24px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted)}
+  .foot-btm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:11.5px;color:rgba(255,255,255,.55)}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -195,13 +275,16 @@
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
     </nav>
+    <button class="theme" id="theme" type="button" aria-live="polite">
+      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode del sistema</span>
+    </button>
   </div>
 </header>
 
 <main id="main">
 <div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/club/">El Club</a> · <span>Presentació</span></nav></div>
 
-<!-- HERO -->
+<!-- 01 · PORTADA -->
 <section class="hero">
   <div class="hero-bg"><img src="img/hero-equip.jpg" alt="Jugadores del CB Grup Barna amb l'equipació del club" fetchpriority="high"></div>
   <div class="hero-in wrap">
@@ -214,162 +297,225 @@
 </section>
 
 <!-- XIFRES -->
-<section class="stats-sec">
+<section class="sec">
   <div class="wrap">
-    <p class="eyebrow" style="text-align:center">· En xifres</p>
-    <div class="stat-grid">
-      <div class="stat-cell"><b>60</b><span>Anys</span></div>
-      <div class="stat-cell"><b>2</b><span>Barris</span></div>
-      <div class="stat-cell"><b>+450</b><span>Famílies</span></div>
-      <div class="stat-cell"><b>+40</b><span>Equips de formació</span></div>
-      <div class="stat-cell"><b>65,5%</b><span>Staff tècnic dones</span></div>
-      <div class="stat-cell"><b>38</b><span>Entrenadores actives</span></div>
-      <div class="stat-cell"><b>+110</b><span>Equips al 3×3 Barna</span></div>
-      <div class="stat-cell"><b>6</b><span>Escoles del barri</span></div>
+    <div class="sech"><h2>El club en xifres</h2><em>Poblenou i el Clot</em></div>
+    <div class="b-num">
+      <div class="r"><b>60</b><span>Anys</span></div>
+      <div><b>+450</b><span>Famílies</span></div>
+      <div><b>+40</b><span>Equips de formació</span></div>
+      <div><b>2</b><span>Barris: Poblenou i el Clot</span></div>
+      <div class="r"><b>65,5%</b><span>Staff tècnic dones</span></div>
+      <div><b>38</b><span>Entrenadores actives</span></div>
+      <div><b>+110</b><span>Equips al 3×3 Barna</span></div>
+      <div><b>6</b><span>Escoles del barri</span></div>
     </div>
   </div>
 </section>
 
-<!-- COMUNITAT -->
-<div class="split">
-  <div class="split-media"><img src="img/comunitat-bg.jpg" alt="Famílies i jugadors del CB Grup Barna"></div>
-  <div class="split-txt">
-    <p class="eyebrow">· Comunitat</p>
-    <h2>+450 Famílies</h2>
-    <p>+450 famílies i +40 equips de formació masculins i femenins, impulsant el desenvolupament
-    esportiu i humà dels nens i nenes del Poblenou i el Clot.</p>
-  </div>
-</div>
-
-<!-- LIDERATGE FEMENI -->
-<div class="split rev">
-  <div class="split-media"><img src="img/ent-42.jpg" alt="Jugadora de l'Escoleta del CB Grup Barna"></div>
-  <div class="split-txt">
-    <p class="eyebrow">· Igualtat &amp; Lideratge</p>
-    <h2>Igualtat i Lideratge Femení</h2>
-    <p><strong style="color:#fff">65,5%</strong> del staff tècnic són dones — <strong style="color:#fff">38 entrenadores actives</strong> al club, amb un pla propi de formació i mentoria interna. Un model estructural, no estètic.</p>
-    <p>Per al detall complet: <a class="inline-link" href="/femeni/">Bàsquet femení</a> i <a class="inline-link" href="/basquet-femeni/el-metode-barna/">El Mètode Barna</a>.</p>
-  </div>
-</div>
-
-<section class="quote-sec">
+<!-- 02 · FAMÍLIES -->
+<section class="sec">
   <div class="wrap">
-    <blockquote>«No fem campanyes.<br>Creem referents.»</blockquote>
+    <div class="sech"><h2>Comunitat</h2><em>Les famílies</em></div>
+    <div class="split">
+      <div class="split-media"><img src="img/comunitat-bg.jpg" alt="Famílies i jugadors del CB Grup Barna" loading="lazy"></div>
+      <div class="split-txt">
+        <p class="lab">· Comunitat</p>
+        <h3>+450 famílies</h3>
+        <p>+450 famílies i +40 equips de formació masculins i femenins, impulsant el
+        desenvolupament esportiu i humà dels nens i nenes del Poblenou i el Clot.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ELS MAGICS -->
-<div class="split">
-  <div class="split-media"><img src="img/magics-005.jpg" alt="Jugador de Barna Màgics, l'equip de bàsquet inclusiu del CB Grup Barna"></div>
-  <div class="split-txt">
-    <p class="eyebrow">· Diversitat &amp; Inclusió</p>
-    <h2>Els Màgics</h2>
-    <p>Integració social real, dins i fora de la pista. Bàsquet adaptat com a eina de vida.</p>
-    <p><em>L'esport no entén de barreres. Els Màgics, tampoc.</em></p>
-  </div>
-</div>
-
-<!-- COMUNITAT I EDUCACIO -->
-<section class="plain-sec">
+<!-- 03 · IGUALTAT & LIDERATGE -->
+<section class="sec">
   <div class="wrap">
-    <p class="eyebrow">· Comunitat &amp; Educació</p>
-    <h2>Comunitat i Educació</h2>
-    <ul class="p-list">
-      <li>Els clubs esportius són escoles de vida</li>
-      <li>Complement informal al sistema educatiu</li>
-      <li>Aprenentatge en valors, infants i famílies</li>
-    </ul>
+    <div class="sech"><h2>Igualtat i lideratge femení</h2><em>Model estructural, no estètic</em></div>
+    <div class="split rev">
+      <div class="split-media"><img src="img/ent-42.jpg" alt="Jugadora de l'Escoleta del CB Grup Barna" loading="lazy"></div>
+      <div class="split-txt">
+        <p class="lab">· Igualtat &amp; Lideratge</p>
+        <h3>Lideratge femení</h3>
+        <p><strong>65,5%</strong> del staff tècnic són dones — <strong>38 entrenadores actives</strong> al club, amb un pla propi de formació i mentoria interna.</p>
+        <p>Per al detall complet: <a class="inline-link" href="/femeni/">Bàsquet femení</a> i <a class="inline-link" href="/basquet-femeni/el-metode-barna/">El Mètode Barna</a>.</p>
+      </div>
+    </div>
+    <div class="par">
+      <div class="halves">
+        <div class="h"><span>Staff tècnic</span><b>65,5% dones</b></div>
+        <div class="rule"></div>
+        <div class="h"><span>A pista</span><b>38 entrenadores</b></div>
+      </div>
+      <div class="foot"><b>Pla propi de formació i mentoria interna.</b> Un model estructural, no estètic: per això aquesta franja és vermella i està partida pel mig.</div>
+    </div>
+  </div>
+  <div class="quote wrap">
+    <blockquote>«No fem campanyes.<br><em>Creem referents.»</em></blockquote>
   </div>
 </section>
 
-<section class="quote-sec">
+<!-- 04 · ELS MÀGICS -->
+<section class="sec">
   <div class="wrap">
-    <blockquote>«Cada nen necessita un equip.<br>Cada equip necessita<br>una comunitat.»</blockquote>
+    <div class="sech"><h2>Els Màgics</h2><em>Diversitat &amp; inclusió</em></div>
+    <div class="split">
+      <div class="split-media"><img src="img/magics-005.jpg" alt="Jugador de Barna Màgics, l'equip de bàsquet inclusiu del CB Grup Barna" loading="lazy"></div>
+      <div class="split-txt">
+        <p class="lab">· Diversitat &amp; Inclusió</p>
+        <h3>Els Màgics</h3>
+        <p>Oferim espais de pràctica esportiva a joves amb diversitat funcional. Equips inclusius
+        que van més enllà del bàsquet: aprenen valors, fan amics i formen part d'una comunitat real.</p>
+        <ul class="p-list">
+          <li>Integració social real, dins i fora de la pista</li>
+          <li>Bàsquet adaptat com a eina de vida</li>
+        </ul>
+        <p style="margin-top:14px"><em>L'esport no entén de barreres. Els Màgics, tampoc.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · COMUNITAT & EDUCACIÓ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sech"><h2>Comunitat i educació</h2><em>Escoles de vida</em></div>
+    <div class="split rev">
+      <div class="split-media"><img src="img/educacio-bg.jpg" alt="Entrenament de bàsquet formatiu del CB Grup Barna" loading="lazy"></div>
+      <div class="split-txt">
+        <p class="lab">· Comunitat &amp; Educació</p>
+        <h3>Escoles de vida</h3>
+        <ul class="p-list">
+          <li>Els clubs esportius són escoles de vida</li>
+          <li>Complement informal al sistema educatiu</li>
+          <li>Aprenentatge en valors, infants i famílies</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="quote wrap">
+    <blockquote>«Cada nen necessita un equip.<br>Cada equip necessita<br><em>una comunitat.»</em></blockquote>
     <cite>— CB Grup Barna</cite>
   </div>
 </section>
 
-<!-- SEGURETAT -->
-<section class="plain-sec">
+<!-- 06 · PROTECCIÓ -->
+<section class="sec">
   <div class="wrap">
-    <p class="eyebrow">· Seguretat &amp; Compromís</p>
-    <div class="badge-lopivi"><img src="img/logo-proteccio.jpg" alt="Protocol Marc de Protecció a la Infància"><span>Homologat LOPIVI</span></div>
-    <h2>Un entorn segur per créixer</h2>
-    <p style="max-width:60ch;color:var(--muted)">El club ha implementat un sistema de protecció integral per garantir un entorn segur per a tots
-    els infants i joves. <strong style="color:#fff">Objectiu:</strong> crear un entorn esportiu segur, educatiu i respectuós, on els infants
-    puguin créixer esportivament i personalment.</p>
-    <div class="two-col">
-      <div>
-        <h3>Mesures implementades</h3>
-        <ul class="p-list">
-          <li>Designació d'un responsable de protecció del menor</li>
-          <li>Protocols d'actuació davant situacions de risc</li>
-          <li>Formació del staff i entrenadors en protecció</li>
-          <li>Compromís ètic i de conducta per a tot el personal</li>
-        </ul>
+    <div class="sech"><h2>Un entorn segur per créixer</h2><em>Seguretat &amp; compromís</em></div>
+    <div class="panel">
+      <div class="badge-lopivi"><img src="img/logo-proteccio.jpg" alt="Protocol Marc de Protecció a la Infància"><span>Homologat LOPIVI</span></div>
+      <h3>Protecció del menor en l'esport</h3>
+      <p>El club ha implementat un sistema de protecció integral per garantir un entorn segur per a
+      tots els infants i joves. <strong>Objectiu:</strong> crear un entorn esportiu segur, educatiu
+      i respectuós, on els infants puguin créixer esportivament i personalment.</p>
+      <div class="two-col">
+        <div>
+          <h4>Mesures implementades</h4>
+          <ul class="p-list">
+            <li>Designació d'un responsable de protecció del menor</li>
+            <li>Protocols d'actuació davant situacions de risc</li>
+            <li>Formació del staff i entrenadors en protecció</li>
+            <li>Compromís ètic i de conducta per a tot el personal</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Canals de comunicació</h4>
+          <ul class="p-list">
+            <li>Canal confidencial per comunicar incidències</li>
+            <li>Contacte directe amb el responsable de protecció</li>
+            <li>Comunicació oberta amb famílies, jugadors i entrenadors</li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <h3>Canals de comunicació</h3>
-        <ul class="p-list">
-          <li>Canal confidencial per comunicar incidències</li>
-          <li>Contacte directe amb el responsable de protecció</li>
-          <li>Comunicació oberta amb famílies, jugadors i entrenadors</li>
-        </ul>
-      </div>
+      <p style="margin-top:22px">El protocol complet: <a class="inline-link" href="/proteccio-menor/">Protecció del menor</a> i <a class="inline-link" href="/documents/">Documents i protocols</a>.</p>
     </div>
-    <p style="margin-top:26px;color:var(--muted)">El protocol complet: <a class="inline-link" href="/proteccio-menor/">Protecció del menor</a> i <a class="inline-link" href="/documents/">Documents i protocols</a>.</p>
   </div>
 </section>
 
-<!-- IMPLICATS AL BARRI -->
-<div class="split">
-  <div class="split-media"><img src="img/mercat-clot.jpg" alt="Mercat del Clot, barri on juga i entrena el CB Grup Barna"></div>
-  <div class="split-txt">
-    <p class="eyebrow">· Implicats al Barri</p>
-    <h2>Implicats al Barri</h2>
-    <p>Acords tancats amb els principals agents del territori, amb presència a 6 escoles del barri.</p>
-  </div>
-</div>
-<div class="wrap">
-  <div class="partners-grid">
-    <div class="partner-card"><img src="img/logo-eix-clot.png" alt="Eix del Clot"><b>Eix del Clot</b><span>Acord de col·laboració tancat</span></div>
-    <div class="partner-card"><img src="img/logo-sant-marti.png" alt="Districte Sant Martí"><b>Districte Sant Martí</b><span>Acord de col·laboració tancat</span></div>
-    <div class="partner-card"><img src="img/logo-fede-clot.jpg" alt="Federació d'Entitats Clot-Camp de l'Arpa" style="filter:none;border-radius:4px"><b>Federació d'Entitats Clot-Camp de l'Arpa</b><span>Acord de col·laboració tancat</span></div>
-    <div class="partner-card"><img src="img/logo-eix-sant-marti.png" alt="Eix Sant Martí"><b>Eix Sant Martí</b><span>Acord de col·laboració tancat</span></div>
-  </div>
-</div>
-
-<!-- ESPORT AL CARRER -->
-<div class="split rev" style="margin-top:60px">
-  <div class="split-media"><img src="img/carrer-bg.jpg" alt="Torneig 3x3 Barna a Barcelona, amb la Torre Glòries al fons"></div>
-  <div class="split-txt">
-    <p class="eyebrow">· Esport al Carrer</p>
-    <h2>3×3 Barna</h2>
-    <p>Més de <strong style="color:#fff">110 equips participants</strong> al torneig urbà del club a Westfield Glòries.</p>
-    <p><a class="inline-link" href="/3x3/">Tota la informació del 3×3 Barna →</a></p>
-  </div>
-</div>
-
-<!-- PREMI DONA -->
-<div class="split">
-  <div class="split-media"><img src="img/premi-dona-1.jpg" alt="CB Grup Barna, finalista del Premi Dona i Esport"></div>
-  <div class="split-txt">
-    <p class="eyebrow">· 18è Premi Dona i Esport · BCN Esports</p>
-    <h2>Únic club de bàsquet finalista</h2>
-    <p>Finalistes de la convocatòria per al foment del bàsquet femení durant 60 anys — un
-    reconeixement a tota la família Barna.</p>
-    <p><a class="inline-link" href="/premidonaesport/">Veure la candidatura →</a></p>
-  </div>
-</div>
-
-<!-- RECOLZAMENT INSTITUCIONAL -->
-<section class="plain-sec">
+<!-- 07 · IMPLICATS AL BARRI -->
+<section class="sec">
   <div class="wrap">
-    <p class="eyebrow">· Recolzament Institucional</p>
-    <h2>Recolzament Institucional</h2>
+    <div class="sech"><h2>Implicats al barri</h2><em>El Clot · Camp de l'Arpa · Sant Martí</em></div>
+    <div class="split">
+      <div class="split-media"><img src="img/mercat-clot.jpg" alt="Mercat del Clot, barri on juga i entrena el CB Grup Barna" loading="lazy"></div>
+      <div class="split-txt">
+        <p class="lab">· Implicats al Barri</p>
+        <h3>Acords amb el territori</h3>
+        <p>Hem tancat acords amb els principals agents del territori i estem presents a
+        <strong>6 escoles del barri</strong>.</p>
+        <ul class="school-list">
+          <li class="on">La Nau del Clot</li>
+          <li>Escola Provençals</li>
+          <li>La Farigola del Clot</li>
+          <li>La Rambleta del Clot</li>
+          <li>Escola Casas</li>
+          <li>Claror Marítim</li>
+        </ul>
+      </div>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card"><span class="pc-logo"><img src="img/logo-eix-clot.png" alt="Eix del Clot" loading="lazy"></span><b>Eix del Clot</b><span>Acord de col·laboració tancat</span></div>
+      <div class="partner-card"><span class="pc-logo"><img src="img/logo-sant-marti.png" alt="Districte Sant Martí" loading="lazy"></span><b>Districte Sant Martí</b><span>Acord de col·laboració tancat</span></div>
+      <div class="partner-card"><span class="pc-logo"><img src="img/logo-fede-clot.jpg" alt="Federació d'Entitats Clot-Camp de l'Arpa" loading="lazy"></span><b>Federació d'Entitats Clot-Camp de l'Arpa</b><span>Acord de col·laboració tancat</span></div>
+      <div class="partner-card"><span class="pc-logo"><img src="img/logo-eix-sant-marti.png" alt="Eix Sant Martí" loading="lazy"></span><b>Eix Sant Martí</b><span>Acord de col·laboració tancat</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · ESPORT AL CARRER -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sech"><h2>3×3 Barna</h2><em>Esport al carrer</em></div>
+    <div class="split rev">
+      <div class="split-media"><img src="img/carrer-bg.jpg" alt="Torneig 3x3 Barna a Barcelona, amb la Torre Glòries al fons" loading="lazy"></div>
+      <div class="split-txt">
+        <p class="lab">· Esport al Carrer</p>
+        <div class="stat-big">+110</div>
+        <span>Equips participants</span>
+        <ul class="p-list">
+          <li>2 jornades amb pista al CC Westfield Glòries i al Barna</li>
+          <li>Activació comunitària intergeneracional</li>
+          <li>Comerç local, famílies i barri</li>
+        </ul>
+        <p style="margin-top:14px"><a class="inline-link" href="/3x3/">Tota la informació del 3×3 Barna →</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="quote wrap">
+    <blockquote>«L'esport és convivència,<br>salut i <em>orgull col·lectiu.»</em></blockquote>
+  </div>
+</section>
+
+<!-- 09 · PREMI DONA I ESPORT -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sech"><h2>Únic club de bàsquet finalista</h2><em>18è Premi Dona i Esport · BCN Esports</em></div>
+    <div class="split">
+      <div class="split-media"><img src="img/premi-dona-1.jpg" alt="CB Grup Barna, finalista del Premi Dona i Esport" loading="lazy"></div>
+      <div class="split-txt">
+        <p class="lab">· 18è Premi Dona i Esport</p>
+        <h3>Finalistes de la convocatòria</h3>
+        <p>El talent, la passió i el lideratge femení brillen al Clot. Molt contents d'haver estat
+        finalistes del Premi Dona i Esport lliurat al Saló de Cent de l'Ajuntament de Barcelona.</p>
+        <ul class="p-list">
+          <li>Foment del bàsquet femení durant 60 anys</li>
+          <li>Reconeixement a tota la família Barna</li>
+        </ul>
+        <p style="margin-top:14px"><a class="inline-link" href="/premidonaesport/">Veure la candidatura →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · RECOLZAMENT INSTITUCIONAL -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sech"><h2>Recolzament institucional</h2><em>Generalitat · Ajuntament · Federació</em></div>
     <div class="visits-grid">
       <div class="visit-card">
-        <div class="vc-img"><img src="img/inst-conseller.jpg" alt="Reunió amb el Conseller d'Esports"></div>
+        <div class="vc-img"><img src="img/inst-conseller.jpg" alt="Reunió amb el Conseller d'Esports" loading="lazy"></div>
         <div class="vc-body">
           <h3>Reunió amb el Conseller</h3>
           <p>Bernat Álvarez, Conseller d'Esports de la Generalitat de Catalunya.</p>
@@ -377,7 +523,7 @@
         </div>
       </div>
       <div class="visit-card">
-        <div class="vc-img"><img src="img/inst-alcalde.jpg" alt="Visita de l'Alcalde de Barcelona al CB Grup Barna"></div>
+        <div class="vc-img"><img src="img/inst-alcalde.jpg" alt="Visita de l'Alcalde de Barcelona al CB Grup Barna" loading="lazy"></div>
         <div class="vc-body">
           <h3>Visita de l'Alcalde de Barcelona</h3>
           <p>L'Alcalde de Barcelona visita el CB Grup Barna.</p>
@@ -385,7 +531,7 @@
         </div>
       </div>
       <div class="visit-card">
-        <div class="vc-img"><img src="img/inst-david.jpg" alt="David Escudé i el Vicepresident de la Federació Catalana de Bàsquet"></div>
+        <div class="vc-img"><img src="img/inst-david.jpg" alt="David Escudé i el Vicepresident de la Federació Catalana de Bàsquet" loading="lazy"></div>
         <div class="vc-body">
           <h3>David Escudé i VP Federació</h3>
           <p>Presentació d'equips amb David Escudé i el Vicepresident de la Federació Catalana de Bàsquet.</p>
@@ -396,14 +542,50 @@
   </div>
 </section>
 
-<!-- CLOSER -->
-<section class="closer-sec">
+<!-- 11 · COL·LABORADORS & PATROCINADORS -->
+<section class="sec">
   <div class="wrap">
-    <h2>Vols saber-ne més?</h2>
+    <div class="sech"><h2>Col·laboradors &amp; patrocinadors</h2><em>Qui ens acompanya</em></div>
+    <div class="sponsor-grid">
+      <a class="sponsor" href="/patrocinadors/partners/melosa-hamburgueseria/" title="La Melosa"><img src="/partners/melosa-hamburgueseria.png" alt="Melosa Hamburgueseria" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/stepback-podologia/" title="Stepback Podologia"><img src="/partners/stepback-podologia.png" alt="Stepback Podologia" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/aquamiga/" title="Aquamiga"><img src="/partners/aquamiga.png" alt="Aquamiga" loading="lazy"></a>
+      <span class="sponsor txt" title="Wilson · Pilota oficial"><span>Wilson</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/instax-fujifilm/" title="instax — FUJIFILM"><img src="/partners/instax-fujifilm.png" alt="instax — FUJIFILM" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/herbolaris-montserrat/" title="Herbolaris Montserrat"><img src="/partners/herbolaris-montserrat.png" alt="Herbolaris Montserrat" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/romeo-abogados/" title="Romeo Abogados"><img src="/partners/romeo-abogados.png" alt="Romeo Abogados" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/gbk-globabasket/" title="GBK — Globabasket"><img src="/partners/gbk-globabasket.png" alt="GBK — Globabasket" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/clinica-dental-bac-de-roda/" title="Clínica Dental Bac de Roda"><img src="/partners/clinica-dental-bac-de-roda.png" alt="Clínica Dental Bac de Roda" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/fundacio-mullor/" title="Fundació Mullor"><img src="/partners/fundacio-mullor.png" alt="Fundació Mullor" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/time-chamber/" title="Time Chamber"><img src="/partners/time-chamber.png" alt="Time Chamber" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/armand-optics/" title="Armand Òptics"><img src="/partners/armand-optics.png" alt="Armand Òptics" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/ovella-negra/" title="Ovella Negra"><img src="/partners/ovella-negra.png" alt="Ovella Negra" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/mercat-dels-encants/" title="Mercat dels Encants"><img src="/partners/mercat-dels-encants.png" alt="Mercat dels Encants" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/westfield-glories/" title="Westfield Glòries"><img src="/partners/westfield-glories.png" alt="Westfield Glòries" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/illa-fantasia/" title="Illa Fantasia"><img src="/partners/illa-fantasia.png" alt="Illa Fantasia" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/foto-jane/" title="Foto Jané"><img src="/partners/foto-jane.png" alt="Foto Jané" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/l-aquarium-de-barcelona/" title="L'Aquàrium de Barcelona"><img src="/partners/l-aquarium-de-barcelona.png" alt="L'Aquàrium de Barcelona" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/tot-salut/" title="Tot Salut"><img src="/partners/tot-salut.png" alt="Tot Salut" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/eix-clot/" title="Eix Clot"><img src="/partners/eix-clot.png" alt="Eix Clot" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/eix-comercial-sant-marti/" title="Eix Comercial Sant Martí"><img src="/partners/eix-comercial-sant-marti.png" alt="Eix Comercial Sant Martí" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/panteres-grogues/" title="Panteres Grogues"><img src="/partners/panteres-grogues.png" alt="Panteres Grogues" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/manual-colors/" title="Manual Colors"><img src="/partners/manual-colors.png" alt="Manual Colors" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/zapic-ai/" title="Zapic AI"><img src="/partners/zapic-ai.png" alt="Zapic AI" loading="lazy"></a>
+    </div>
+    <p class="sponsor-note">Tots els comptes i fitxes, a <a class="inline-link" href="/patrocinadors/">Patrocinadors</a> i al <a class="inline-link" href="/partners-mapa/">mapa de partners</a>.</p>
+  </div>
+</section>
+
+<!-- 12 · TANCAMENT -->
+<section class="closer">
+  <div class="wrap">
+    <p class="lab">· Model Català · Mètode Barna</p>
+    <h2 style="margin-top:10px">60 anys de bàsquet i valors</h2>
     <p>Explica'ns què necessites i t'enviem la informació que et faci falta del club.</p>
     <div class="btn-row">
       <a href="/#info" class="btn red" data-cta="presentacio-closer-form">Demanar informació</a>
       <a href="https://api.whatsapp.com/send?phone=+34698425153" class="btn ghost" target="_blank" rel="noopener" data-cta="presentacio-closer-wa">WhatsApp del club</a>
+      <a href="/basquet-femeni/el-metode-barna/" class="btn ghost" data-cta="presentacio-closer-metode">El Mètode Barna</a>
     </div>
   </div>
 </section>
@@ -452,6 +634,34 @@
     </div>
   </div>
 </footer>
+<script>
+(function(){
+  var KEY='cbgb-theme', btn=document.getElementById('theme'), lbl=document.getElementById('theme-lbl');
+  var order=['system','light','dark'];
+  var mq=window.matchMedia('(prefers-color-scheme: dark)');
+  function current(){ try{ return localStorage.getItem(KEY)||'system'; }catch(e){ return 'system'; } }
+  function label(mode){
+    if(mode==='light') return 'Mode clar';
+    if(mode==='dark') return 'Mode fosc';
+    return 'Sistema · ara '+(mq.matches?'fosc':'clar');
+  }
+  function apply(mode){
+    if(mode==='light'||mode==='dark'){ document.documentElement.setAttribute('data-theme',mode); }
+    else{ document.documentElement.removeAttribute('data-theme'); }
+    lbl.textContent=label(mode);
+    var meta=document.querySelector('meta[name="theme-color"]');
+    var dark=(mode==='dark')||(mode==='system'&&mq.matches);
+    if(meta) meta.setAttribute('content', dark?'#0E0E10':'#F4F1EC');
+  }
+  btn.addEventListener('click',function(){
+    var next=order[(order.indexOf(current())+1)%order.length];
+    try{ localStorage.setItem(KEY,next); }catch(e){}
+    apply(next);
+  });
+  mq.addEventListener('change',function(){ if(current()==='system') apply('system'); });
+  apply(current());
+})();
+</script>
 <script src="/js/galetes.js"></script>
 </body>
 </html>
