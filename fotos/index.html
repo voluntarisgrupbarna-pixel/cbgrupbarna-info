@@ -72,6 +72,11 @@
       transition: color .15s; margin-left: auto;
     }
     .nav-back:hover { color: var(--red); }
+    .site-nav { margin-top: 68px; background: var(--paper-2); border-bottom: 1px solid var(--line); }
+    .site-nav-in { max-width: 1100px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 44px); display: flex; align-items: center; gap: 18px; height: 36px; overflow-x: auto; scrollbar-width: none; }
+    .site-nav-in::-webkit-scrollbar { display: none; }
+    .site-nav-in a { font-family: var(--display); font-size: 9px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+    .site-nav-in a:hover { color: var(--red); }
     #search-input {
       background: var(--paper-2); border: 1px solid var(--line);
       color: var(--ink); padding: .5rem .85rem .5rem 2.2rem;
@@ -533,6 +538,18 @@
     cbgrupbarna.info
   </a>
 </nav>
+<nav class="site-nav" aria-label="Navegació principal">
+  <div class="site-nav-in">
+    <a href="/club/">Club</a>
+    <a href="/escoleta/">Escoleta</a>
+    <a href="/partits/">Dies de partit</a>
+    <a href="/patrocinadors/">Patrocinadors</a>
+    <a href="/campus/">Campus</a>
+    <a href="/3x3/">3x3</a>
+    <a href="/cistella-petita/">Cistella Petita</a>
+    <a href="/premsa/">Premsa</a>
+  </div>
+</nav>
 
 <!-- EVENTS VIEW -->
 <div id="events-view">
@@ -665,21 +682,28 @@ function isFlickr(ev) { return ev.source === 'flickr'; }
 function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
 function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v|avi)$/i.test(ref || ''); }
 
+// wsrv.nl: proxy gratuït que redimensiona i comprimeix a WebP al vol qualsevol
+// imatge pública. Les fotos pujades des de l'admin es guarden a mida original
+// (sovint 1-2 MB) i sense això la graella carregaria totes les fotos a mida
+// completa — d'aquí la lentitud. Els vídeos no es toquen (wsrv és només imatges).
+function repoUrl(ev, ref) { return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`; }
+function wsrv(url, w) { return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=${w}&q=75&output=webp`; }
+
 function photoThumb(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : wsrv(repoUrl(ev, ref), 400);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_q.jpg`;
   return THUMB(ref);
 }
 function photoFull(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : wsrv(repoUrl(ev, ref), 1600);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_b.jpg`;
   return FULL(ref);
 }
 function photoDl(ev, ref) {
   if (!ref) return '#';
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return repoUrl(ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_o.jpg`;
   return DL(ref);
 }
@@ -692,7 +716,7 @@ function eventCover(ev) {
   if (isRepo(ev)) {
     const ref = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
     if (!ref) return PLACEHOLDER;
-    return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+    return wsrv(repoUrl(ev, ref), 500);
   }
   return THUMB(ev.cover);
 }
