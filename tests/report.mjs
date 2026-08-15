@@ -195,25 +195,6 @@ if (occ.size) {
   say();
 }
 
-// Col·lisions
-const col = new Map();
-for (const r of br.results) for (const c of r.collisions || []) {
-  const k = `${c.a.split('«')[0].trim()} × ${c.b.split('«')[0].trim()}`;
-  if (!col.has(k)) col.set(k, { pages: new Set(), max: 0, ex: c });
-  col.get(k).pages.add(`${r.page} (${r.viewport})`);
-  col.get(k).max = Math.max(col.get(k).max, Math.min(c.x, c.y));
-}
-if (col.size) {
-  say('### Elements que es trepitgen');
-  say();
-  table(['Parella', 'Solapament', 'On'],
-    [...col.entries()].sort((a, b) => b[1].pages.size - a[1].pages.size).slice(0, 12)
-      .map(([k, v]) => [`\`${k}\``, `${v.ex.x}×${v.ex.y} px`, [...v.pages].slice(0, 2).join(', ') + (v.pages.size > 2 ? ` +${v.pages.size - 2}` : '')]));
-} else {
-  say('**Cap element es trepitja amb un altre.**');
-  say();
-}
-
 // Estructura
 say('### Estructura de les pàgines');
 say();

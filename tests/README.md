@@ -59,6 +59,20 @@ per aparèixer.
   (`main`, `nav`, `footer`), salts de nivell d'encapçalament, controls sense
   nom accessible, taules que desborden i pes del DOM.
 
+## El que s'ha provat i s'ha descartat
+
+Hi va haver una prova de **col·lisions** que buscava text damunt de text. Es va
+retirar: donava 133 avisos en només quatre pàgines, perquè tot el que viu dins
+d'una capçalera enganxada té coordenades de finestra i «trepitja» el que passa
+per sota en fer scroll. Un test que crida el llop 133 vegades fa que ningú miri
+la 134a. Aquesta mena de defecte es veu de seguida a `screenshots.mjs`, i és
+així com es va trobar el solapament de la capçalera a partir de 1366 px.
+
+La prova de **controls tapats** va passar pel mateix i s'ha pogut salvar: ara
+prova cinc punts de cada element, només mira els que caben sencers a la
+pantalla, i no compta les finestres modals ni les pantalles d'accés, que tapen
+la pàgina perquè és la seva feina. De ~180 avisos va baixar a 13.
+
 ## Límits coneguts
 
 - El contrast no es calcula sobre text que cau damunt d'una imatge de fons:

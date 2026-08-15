@@ -33,6 +33,14 @@ export function collect(opts) {
     return r.width > 0 && r.height > 0;
   };
 
+  // Text propi de l'element, no el dels seus fills.
+  const hasOwnText = (el) => {
+    for (const n of el.childNodes) {
+      if (n.nodeType === 3 && n.textContent.trim().length > 1) return true;
+    }
+    return false;
+  };
+
   const where = (el) => {
     const id = el.id ? `#${el.id}` : '';
     const cls = typeof el.className === 'string' && el.className
@@ -146,38 +154,12 @@ export function collect(opts) {
     if (out.occluded.length > 15) break;
   }
 
-  // ---------- coses que es trepitgen ----------
-  // Text damunt de text, o una icona damunt d'una paraula: el navegador no
-  // s'hi queixa i el test de desbordament tampoc, però es veu de seguida.
-  out.collisions = [];
-  const isLeaf = (el) => {
-    if (el.tagName === 'IMG' || el.tagName === 'SVG' || el.tagName === 'svg') return true;
-    if (!hasOwnText(el)) return false;
-    for (const c of el.children) if (hasOwnText(c) || c.tagName === 'IMG') return false;
-    return true;
-  };
-  const leaves = [];
-  for (const el of document.querySelectorAll('body *')) {
-    if (!visible(el) || !isLeaf(el)) continue;
-    const cs = getComputedStyle(el);
-    // El que se superposa a posta (capes, insígnies, marques d'aigua) no compta.
-    if (cs.position === 'absolute' || cs.position === 'fixed' || cs.position === 'sticky') continue;
-    if (cs.pointerEvents === 'none' || parseFloat(cs.opacity) < 0.5) continue;
-    const r = el.getBoundingClientRect();
-    if (r.width < 6 || r.height < 6 || r.top > vh * 3) continue;
-    leaves.push({ el, r });
-  }
-  for (let i = 0; i < leaves.length && out.collisions.length < 10; i++) {
-    for (let j = i + 1; j < leaves.length; j++) {
-      const a = leaves[i], b = leaves[j];
-      if (a.el.contains(b.el) || b.el.contains(a.el)) continue;
-      const ox = Math.min(a.r.right, b.r.right) - Math.max(a.r.left, b.r.left);
-      const oy = Math.min(a.r.bottom, b.r.bottom) - Math.max(a.r.top, b.r.top);
-      if (ox <= 3 || oy <= 3) continue;
-      out.collisions.push({ a: where(a.el), b: where(b.el), x: Math.round(ox), y: Math.round(oy) });
-      break;
-    }
-  }
+  // Nota: aquí hi va haver una prova de col·lisions (text damunt de text) que
+  // s'ha retirat. Donava 133 avisos en només 4 pàgines perquè tot el que hi ha
+  // dins d'una capçalera enganxada té les coordenades de la finestra i
+  // "trepitja" el que passa per sota en fer scroll. Un test que crida el llop
+  // 133 vegades fa que ningú miri la 134a. El solapament de la capçalera a
+  // partir de 1366 px es va trobar amb les captures i està a l'informe.
 
   // ---------- text: mida i contrast ----------
   const luminance = (r, g, b) => {
@@ -219,13 +201,6 @@ export function collect(opts) {
   const ratio = (a, b) => {
     const la = luminance(a.r, a.g, a.b), lb = luminance(b.r, b.g, b.b);
     return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
-  };
-
-  const hasOwnText = (el) => {
-    for (const n of el.childNodes) {
-      if (n.nodeType === 3 && n.textContent.trim().length > 1) return true;
-    }
-    return false;
   };
 
   const seenContrast = new Set();
