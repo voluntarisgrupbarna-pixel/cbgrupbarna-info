@@ -739,6 +739,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 /* Un sol H1 real per pàgina, sempre present per a SEO i lectors de pantalla,
    encara que estigui amagat visualment: light i extensa fan servir h2. */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+/* Camp trampa per a robots: fora de la pantalla, no amagat amb display:none,
+   perquè molts robots ignoren el que està amagat i sí que omplen això. */
+.hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 .lead-body .lede { margin-top: 24px; }
 .lead-body .btn-row { margin-top: 30px; }
 .lead-url { display: inline-flex; align-items: center; min-height: 44px; gap: 8px; margin-top: 22px; align-self: flex-start; font-family: var(--display); font-size: 11px; letter-spacing: 0.16em; color: var(--red); border-bottom: 1px solid var(--red); padding-bottom: 6px; transition: color 0.3s, border-color 0.3s; }
@@ -1239,6 +1242,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 
         <div class="reveal">
           <form class="form" id="infoForm" novalidate>
+            <!-- Trampa per a robots: invisible i fora del recorregut del
+                 teclat i dels lectors de pantalla. Si arriba omplerta, qui
+                 ho ha fet no és una persona i no es desa. -->
+            <div class="hp" aria-hidden="true">
+              <label for="f-web">No omplir aquest camp</label>
+              <input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-grid">
               <div class="field">
                 <label for="f-nom">Nom i cognoms</label>
@@ -1283,7 +1293,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
           </form>
           <div class="form-ok" id="formOk" role="status">
             <h3>Rebut. Gràcies!</h3>
-            <p>T'hem obert el WhatsApp amb les teves dades. Si no s'ha obert, escriu-nos directament al
+            <p data-form-avis>T'hem obert el WhatsApp amb les teves dades. Si no s'ha obert, escriu-nos directament al
             <a href="https://wa.me/34698425153">+34 698 425 153</a> o a
             <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>.</p>
           </div>
@@ -1544,6 +1554,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<!-- Enviament de formularis al full del club. La URL del desplegament és
+     dins d'aquest fitxer i només allà: cap pàgina la repeteix. -->
+<script src="/scripts/formularis.js" defer></script>
+
 <script>
   // ==== MENÚ ====
   (function () {
@@ -1664,15 +1678,16 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   // ══════════════════════════════════════════════════════════════════════
   //  FORMULARI D'INFORMACIÓ
   //
-  //  Funciona sense servidor: en enviar-lo obre el WhatsApp del club amb
-  //  totes les dades, de manera que arriben al mòbil a l'instant.
+  //  Dos camins alhora, i cap depèn de l'altre:
+  //   1. El contacte es desa al full del club (pestanya «Informació») i
+  //      arriba un avís per correu. Ho fa /scripts/formularis.js, que és on
+  //      hi ha la URL. Si encara no està configurada, no s'envia i no falla.
+  //   2. S'obre el WhatsApp del club amb les dades escrites, com sempre.
   //
-  //  PER REBRE-HO TAMBÉ PER CORREU: enganxa a FORM_ENDPOINT la URL del
-  //  servei de formularis (per exemple https://formspree.io/f/XXXXXXX, o
-  //  la d'un Google Apps Script publicat com a aplicació web). Mentre
-  //  estigui buit només s'envia per WhatsApp i no falla res.
+  //  El missatge de rebut ja NO surt passi el que passi: només diu «rebut»
+  //  quan el full ho confirma. Si no, ho diu clar i deixa el WhatsApp com a
+  //  camí segur, en comptes de donar les gràcies per un contacte perdut.
   // ══════════════════════════════════════════════════════════════════════
-  var FORM_ENDPOINT = '';
   var WA_CLUB_NUM = '34698425153';
 
   (function () {
@@ -1702,22 +1717,22 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 
       var interesTxt = interes.join(', ') || 'Sense especificar';
 
-      // 1 · Correu, si hi ha endpoint configurat. No bloqueja el WhatsApp.
-      if (FORM_ENDPOINT) {
-        try {
-          fetch(FORM_ENDPOINT, {
-            method: 'POST', mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              _subject: "Nova sol·licitud d'informació · " + nom,
-              nom: nom, mobil: mobil, correu: correu,
-              interes: interesTxt, missatge: msg, origen: location.pathname
-            })
-          }).catch(function () {});
-        } catch (_) {}
-      }
+      // 1 · Desar al full del club. Es dispara ABANS d'obrir el WhatsApp
+      //     perquè no bloquegi, però la resposta s'espera més avall per no
+      //     dir «rebut» sense saber-ho.
+      var desat = (window.CBGBForms && window.CBGBForms.actiu())
+        ? window.CBGBForms.envia('informacio', {
+            nom: nom, mobil: mobil, correu: correu,
+            interes: interesTxt, missatge: msg,
+            consentiment: consent,
+            web: form.web ? form.web.value : '',
+            font: 'portada'
+          })
+        : Promise.resolve(null);
 
-      // 2 · WhatsApp al club amb totes les dades
+      // 2 · WhatsApp al club amb totes les dades. Va aquí, de manera
+      //     síncrona, perquè si s'obre després d'esperar una resposta el
+      //     navegador ho pren per una finestra emergent i la bloqueja.
       var txt = "Hola! Vull informació del CB Grup Barna.\n\n"
               + "Nom: " + nom + "\n"
               + "Mòbil: " + mobil + "\n"
@@ -1730,6 +1745,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       if (window.gtag) window.gtag('event', 'generate_lead', { method: 'form_info', interes: interesTxt });
       form.style.display = 'none';
       if (ok) { ok.classList.add('on'); ok.scrollIntoView({ block: 'center' }); }
+
+      // 3 · Ajustar el missatge a la veritat quan se sàpiga.
+      desat.then(function (b) {
+        if (!ok || b !== false) return;
+        var avis = ok.querySelector('[data-form-avis]');
+        if (avis) avis.textContent = "No hem pogut desar-ho al primer intent, així que "
+          + "ho tornarem a provar sol. Per estar segura del tot, acaba d'enviar el "
+          + "WhatsApp que s'acaba d'obrir.";
+      });
     });
   })();
 

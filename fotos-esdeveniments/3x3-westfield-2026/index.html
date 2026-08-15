@@ -279,6 +279,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
 
 <div class="toast" id="toast"></div>
 
+<script src="/scripts/formularis.js"></script>
 <script src="/fotos-3x3/fotos.js"></script>
 <script>
 var API_URL='https://script.google.com/macros/s/AKfycbyLOfEUjKpj3ezbLp1L_ZaZVQ3482dfYFoFOc_WvIH_nQfuDjU6_7hqn16g4uGcIz-Z/exec';
@@ -385,6 +386,16 @@ async function submitGate(){
   if(!rgpd)return gerr('Cal acceptar la política de protecció de dades.');
 
   var btn=document.getElementById('gBtn');btn.disabled=true;btn.textContent='⏳ Un moment...';
+  // Full únic del club, pestanya «Fotos 3x3». Si falla, queda a la cua del
+  // navegador i es reintenta sol; l'accés a les fotos no s'hi juga res.
+  if(window.CBGBForms){
+    CBGBForms.envia('fotos-3x3',{
+      nom:nom, cognoms:cognom, mobil:mobil, correu:email, club:club,
+      interes:'Instagram: '+(ig?'sí':'no'),
+      consentiment:rgpd, font:'galeria-esdeveniments · '+EVENT_ID
+    });
+  }
+  // Script antic. Es manté fins confirmar que no alimenta res més.
   try{
     var url=API_URL+'?action=register&nom='+enc(nom)+'&cognom='+enc(cognom)+'&email='+enc(email)
       +'&mobil='+enc(mobil)+'&club='+enc(club)+'&instagram='+(ig?'si':'no')

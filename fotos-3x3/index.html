@@ -321,6 +321,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
 
 <div class="toast" id="toast"></div>
 
+<script src="/scripts/formularis.js"></script>
 <script src="/fotos-3x3/fotos.js"></script>
 <script>
 /* ===== CONFIG ===== */
@@ -453,7 +454,15 @@ async function submitGate(){
   if(!rgpd)return gerr('Cal acceptar el tractament de dades per continuar.');
 
   var btn=document.getElementById('gBtn');btn.disabled=true;btn.textContent='⏳ Un moment...';
-  // Lead capture (best-effort, fail-open: les fotos s'han de poder descarregar sempre)
+  // Full únic del club, pestanya «Fotos 3x3». Si falla, el contacte queda a
+  // la cua del navegador i es reintenta sol; les fotos no s'hi juguen res.
+  if(window.CBGBForms){
+    CBGBForms.envia('fotos-3x3',{
+      nom:nom, cognoms:cognom, mobil:mobil, correu:email,
+      consentiment:rgpd, font:'galeria-fotos-3x3'
+    });
+  }
+  // Script antic. Es manté fins confirmar que no alimenta res més.
   try{
     var url=API_URL+'?action=register&nom='+enc(nom)+'&cognom='+enc(cognom)+'&email='+enc(email)+'&mobil='+enc(mobil)+'&font=galeria-fotos-3x3';
     var ctrl=new AbortController();var t=setTimeout(function(){ctrl.abort();},9000);
