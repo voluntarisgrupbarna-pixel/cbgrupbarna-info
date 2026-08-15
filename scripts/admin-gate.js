@@ -29,7 +29,7 @@
   }
 
   function saved() {
-    try { return sessionStorage.getItem(KEY) === '1'; } catch (e) { return false; }
+    try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; }
   }
 
   /**
@@ -44,7 +44,7 @@
     (document.head || document.documentElement).appendChild(hide);
 
     function unlock() {
-      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
       var g = document.getElementById('cbgb-pgate');
       if (g) g.remove();
       hide.remove();
@@ -115,7 +115,7 @@
   }
 
   function signOut() {
-    try { sessionStorage.removeItem(KEY); } catch (e) {}
+    try { localStorage.removeItem(KEY); } catch (e) {}
     location.reload();
   }
 
