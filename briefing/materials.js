@@ -9,7 +9,7 @@ window.BRIEFING_MATERIALS = [
     "partner": null,
     "fitxer": "el-barna-con-datos-informe-maestro.pdf",
     "ext": "pdf",
-    "mida": 550,
+    "mida": 536,
     "data": "2026-08-16"
   },
   {
