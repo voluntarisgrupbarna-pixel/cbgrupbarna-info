@@ -30,6 +30,38 @@
   .photo-strip figure { margin: 0; }
   .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
   @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Programa setmanal en targetes: número + dates + focus, com el
+     calendari del microsite de Time Chamber però amb el llenguatge del Barna. */
+  .weeks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 720px) { .weeks { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1040px) { .weeks { grid-template-columns: repeat(3, 1fr); } }
+  .week { background: var(--paper); padding: clamp(20px, 2.6vw, 28px) clamp(18px, 2.4vw, 24px); }
+  .week b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; color: var(--red); line-height: 1; }
+  .week time { display: block; margin-top: 10px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .week h3 { font-size: 14px; letter-spacing: 0.1em; margin: 10px 0 6px; }
+  .week p { font-size: 13.5px; color: var(--ink-2); }
+
+  /* Preus: dues opcions, la recomanada amb vora vermella. */
+  .price-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 620px) { .price-cards { grid-template-columns: 1fr 1fr; } }
+  .price-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(22px, 3vw, 30px); }
+  .price-card.top { border-color: var(--red); position: relative; }
+  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .price-card.top .tag { color: var(--red); }
+  .price-card b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; margin: 8px 0 4px; }
+  .price-card .sched { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
+  .price-card ul { list-style: none; }
+  .price-card li { position: relative; padding: 7px 0 7px 18px; font-size: 13.5px; color: var(--ink-2); border-top: 1px solid var(--line); }
+  .price-card li:first-child { border-top: 0; }
+  .price-card li::before { content: '·'; position: absolute; left: 4px; color: var(--red); font-weight: 700; }
+  .price-note { font-size: 13.5px; color: var(--ink-2); max-width: 62ch; }
+
+  /* Crida forta a la galeria completa, no només les 6 fotos triades. */
+  .gal-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; justify-content: space-between;
+    border: 1px solid var(--line); background: var(--paper-2); padding: clamp(18px, 2.6vw, 26px); margin-top: 4px; }
+  .gal-cta p { font-size: 13.5px; color: var(--ink-2); margin: 0; max-width: 46ch; }
+  .gal-cta .btn { flex-shrink: 0; }
 </style>
 <script type="application/ld+json">
 {
@@ -213,14 +245,47 @@
     <h2>Com s'organitza</h2>
     <p>Cada setmana té un focus propi, de manera que qui ve més d'una setmana no repeteix continguts.
     Aquests són els mòduls que ha treballat el club en les darreres edicions:</p>
-    <ul>
-      <li><strong>Flow Camp</strong> — lectura de joc i presa de decisions.</li>
-      <li><strong>TC Basics</strong> — fonaments: peus, equilibri, mecànica.</li>
-      <li><strong>Shooting Academy</strong> — tir, en totes les seves situacions.</li>
-      <li><strong>One &amp; One Mastery</strong> — el joc d'un contra un.</li>
-      <li><strong>Ballhandling Lab</strong> — maneig de pilota i bot sota pressió.</li>
-      <li><strong>Skills Lab Experience</strong> — treball combinat d'habilitats.</li>
-    </ul>
+
+    <div class="weeks">
+      <div class="week">
+        <b>01</b>
+        <time>23–27 juny</time>
+        <h3>Flow Camp</h3>
+        <p>Lectura de joc i presa de decisions.</p>
+      </div>
+      <div class="week">
+        <b>02</b>
+        <time>30 juny–4 juliol</time>
+        <h3>TC Basics</h3>
+        <p>Fonaments: peus, equilibri, mecànica.</p>
+      </div>
+      <div class="week">
+        <b>03</b>
+        <time>7–11 juliol</time>
+        <h3>Shooting Academy</h3>
+        <p>Tir, en totes les seves situacions.</p>
+      </div>
+      <div class="week">
+        <b>04</b>
+        <time>14–18 juliol</time>
+        <h3>One &amp; One Mastery</h3>
+        <p>El joc d'un contra un: finta i creativitat ofensiva.</p>
+      </div>
+      <div class="week">
+        <b>05</b>
+        <time>21–25 juliol</time>
+        <h3>Ballhandling Lab</h3>
+        <p>Maneig de pilota i bot sota pressió.</p>
+      </div>
+      <div class="week">
+        <b>06</b>
+        <time>28 juliol–1 agost</time>
+        <h3>Skills Lab Experience</h3>
+        <p>Treball combinat d'habilitats: el broche de l'edició.</p>
+      </div>
+    </div>
+    <p class="tbl-note" style="font-size:13.5px;color:var(--ink-2)">Dates orientatives, calcades sobre l'edició
+    de referència. Es confirmen a aquesta pàgina i a Instagram abans de l'obertura d'inscripcions de cada any.</p>
 
     <div class="facts">
       <div><b><em>50</em></b><span>Places per setmana</span></div>
@@ -228,6 +293,33 @@
       <div><b>+34</b><span>Equips federats</span></div>
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
+
+    <h2>Preus</h2>
+    <p>Dues modalitats segons horari, amb àpat inclòs a la jornada completa. Places obertes a
+    jugadors i jugadores del Barna i de fora del club.</p>
+    <div class="price-cards">
+      <div class="price-card top">
+        <span class="tag">Recomanat</span>
+        <b>195 €</b>
+        <p class="sched">Setmana completa · 9h a 17h</p>
+        <ul>
+          <li>Àpat de migdia inclòs</li>
+          <li>Servei d'acollida des de les 9h</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tag">Mitja jornada</span>
+        <b>160 €</b>
+        <p class="sched">9h a 13:30h</p>
+        <ul>
+          <li>Mateixos grups i mateix focus setmanal</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">Reserva de plaça amb pagament fraccionat en fins a 3 terminis. Cada any s'obre un
+    descompte per inscripció anticipada; les dates i el codi es publiquen a aquesta pàgina i a
+    <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a> quan
+    s'obren les inscripcions.</p>
 
     <h2>El campus, en imatges</h2>
     <p>Fotos de la darrera edició amb Time Chamber, a La Nau del Clot.</p>
@@ -239,6 +331,16 @@
       <figure><img src="img/campus-2026-05.jpg" alt="Jugador del campus botant la pilota entre companys" loading="lazy" decoding="async" width="900" height="1350"></figure>
       <figure><img src="img/campus-2026-06.jpg" alt="Grup de jugadors del campus fent un exercici de tir" loading="lazy" decoding="async" width="900" height="1350"></figure>
     </div>
+    <div class="gal-cta">
+      <p><strong>Aquestes són sis fotos triades.</strong> La galeria completa de l'estiu — totes les setmanes,
+      amb foto i vídeo — és a la Galeria Fotogràfica del club.</p>
+      <a href="/fotos/" class="btn ghost" data-cta="campus-galeria-completa">Veure la galeria de l'estiu →</a>
+    </div>
+
+    <h2>La seu</h2>
+    <p><strong>La Nau del Clot</strong>, Carrer de la Llacuna 172, 08018 Barcelona — el punt esportiu
+    principal del CB Grup Barna, al barri del Clot. Horari del campus: 9h–13:30h en mitja jornada,
+    9h–17h en jornada completa, amb servei d'acollida i àpat de migdia inclòs a la jornada completa.</p>
 
     <div class="franges" aria-label="Altres portes del club">
       <a class="franja" href="/escoleta/" data-cta="campus-franja-escoleta">
