@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#F4F1EC">
+<meta name="theme-color" content="#060606">
 <title>Presentacions del CB Grup Barna</title>
 <meta name="description" content="Totes les presentacions del CB Grup Barna en un sol lloc: la presentació institucional dels 60 anys i les que anirem publicant per a famílies, patrocinadors i institucions.">
 <meta name="keywords" content="presentacions CB Grup Barna, dossier club bàsquet Barcelona, presentació institucional Clot">
@@ -52,29 +52,27 @@
 }
 </script>
 <style>
+  /* Negre, vermell i blanc. Peça fosca per decisió, no per l'hora del dia:
+     el :root pelat ja porta la paleta fosca i la pàgina no segueix el mode
+     del sistema; qui la vulgui en clar ho té al botó de la capçalera. */
   :root{
-    --red:#E20613; --red-ink:#A8040E;
-    --ink:#10100E; --paper:#FFFFFF; --cream:#F4F1EC; --muted:#6B6560;
-    --line:rgba(16,16,14,.14); --panel:#FFFFFF; --ground:#F4F1EC;
-    --shadow:0 24px 60px -28px rgba(16,16,14,.34);
-    --red-solid:#E20613;
+    --red:#FF2A30;        /* vermell de text sobre negre */
+    --red-ink:#FF8A8E;    /* enllaços dins de text */
+    --red-solid:#E20613;  /* el de l'escut: fons plens amb lletra blanca */
+    --ink:#FFFFFF; --muted:#9C9C9C;
+    --ground:#060606; --panel:#111111; --cream:#191919; --paper:#111111;
+    --line:rgba(255,255,255,.15);
+    --shadow:0 30px 70px -34px rgba(0,0,0,.95);
     --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
     --body:'Inter',system-ui,-apple-system,sans-serif;
     --ease:cubic-bezier(.22,1,.36,1);
   }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --red:#FF3B41; --red-ink:#FF7C80; --red-solid:#C00812;
-      --ink:#F2EFEA; --paper:#17171A; --cream:#1E1E22; --muted:#9C978F;
-      --line:rgba(242,239,234,.16); --panel:#17171A; --ground:#0E0E10;
-      --shadow:0 24px 60px -28px rgba(0,0,0,.8);
-    }
-  }
-  :root[data-theme="dark"]{
-    --red:#FF3B41; --red-ink:#FF7C80; --red-solid:#C00812;
-    --ink:#F2EFEA; --paper:#17171A; --cream:#1E1E22; --muted:#9C978F;
-    --line:rgba(242,239,234,.16); --panel:#17171A; --ground:#0E0E10;
-    --shadow:0 24px 60px -28px rgba(0,0,0,.8);
+  :root[data-theme="light"]{
+    --red:#E20613; --red-ink:#A8040E; --red-solid:#E20613;
+    --ink:#10100E; --muted:#6B6560;
+    --ground:#F4F1EC; --panel:#FFFFFF; --cream:#F4F1EC; --paper:#FFFFFF;
+    --line:rgba(16,16,14,.14);
+    --shadow:0 24px 60px -28px rgba(16,16,14,.34);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -113,7 +111,7 @@
   .top h1 em{font-style:normal;color:var(--red)}
   .top p{font-size:16px;color:var(--muted);max-width:56ch}
 
-  .sech{border-top:2px solid var(--red);padding:16px 0 14px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .sech{border-top:3px solid var(--red);padding:16px 0 14px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .sech h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;letter-spacing:.05em;line-height:1}
   .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
@@ -159,6 +157,48 @@
   .foot-btm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:11.5px;color:rgba(255,255,255,.55)}
 
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+  /* ---- Acabat del tauler de màrqueting ----
+     Mateix llenguatge que els dashboards del club: negre lleugerament fred,
+     targetes amb cantonada arrodonida i filet, xifres grans com a KPI, i la
+     franja vermella en degradat. Els valors de marca no canvien: el vermell
+     ple continua sent el de l'escut. */
+  :root{
+    --radius:14px;
+    --ground:#0A0A0C; --panel:#16161A; --cream:#1E1E24;
+    --line:rgba(255,255,255,.13);
+  }
+  :root[data-theme="light"]{--radius:14px}
+
+  .split,.panel,.visit-card,.partner-card,.sponsor,.pack,.facts,.tbl-wrap,.pres,.b-num{border-radius:var(--radius);overflow:hidden}
+  .badge-lopivi{border-radius:99px}
+
+  /* Xifres com a KPI: cada casella és una targeta, no una cel·la de graella. */
+  .b-num{gap:12px;background:transparent;border:0}
+  .b-num div{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+  .facts{gap:12px;background:transparent;border:0}
+  .facts div{border:1px solid var(--line);border-radius:var(--radius)}
+
+  /* Vinyeta en rombe a les llistes, com als informes. */
+  .p-list li::before{content:'';position:absolute;left:2px;top:19px;width:8px;height:8px;
+    background:var(--red);border-radius:2px;transform:rotate(45deg)}
+
+  /* La franja de paritat i els packs destacats, en degradat. */
+  .par{background:linear-gradient(135deg,#B91D17,var(--red-solid));border-radius:var(--radius);overflow:hidden}
+  .pack.top{background:linear-gradient(160deg,rgba(226,6,19,.14),var(--panel) 62%)}
+
+  /* Barres amb el mateix acabat que les del tauler. */
+  .bar .t{border-radius:6px}
+  .bar .f{border-radius:6px}
+
+  /* Botons i etiquetes de la barra d'índex, arrodonits. */
+  .btn{border-radius:8px}
+  .idx-more{border-radius:8px}
+  .sponsor-grid{gap:12px}
+
+  @media print{
+    .split,.panel,.visit-card,.partner-card,.sponsor,.pack,.facts,.tbl-wrap,.b-num div,.par{border-radius:10px}
+  }
 </style>
 </head>
 <body>
@@ -181,7 +221,7 @@
       <a href="/premsa/">Premsa</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
-      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode del sistema</span>
+      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
     </button>
   </div>
 </header>
@@ -212,6 +252,22 @@
           <span>Famílies, institucions i patrocinadors</span>
         </div>
         <span class="pres-go">Obrir la presentació <i></i></span>
+      </div>
+    </a>
+
+    <a class="pres" href="/presentacions/dossier-patrocinis/">
+      <div class="pres-media"><img src="/presentacio/img/carrer-bg.jpg" alt="Torneig 3x3 Barna a Westfield Glòries"></div>
+      <div class="pres-body">
+        <p class="lab">· Patrocinis</p>
+        <h3>Dossier de patrocinis</h3>
+        <p>El que enviem a una empresa que encara no ens coneix: qui som, a quanta gent
+        arribem i de quines maneres es pot col·laborar. Amb les xifres reals del panell
+        d'Instagram de la temporada 2025·26.</p>
+        <div class="pres-meta">
+          <span>14 seccions</span>
+          <span>Empreses i comerços</span>
+        </div>
+        <span class="pres-go">Obrir el dossier <i></i></span>
       </div>
     </a>
 
@@ -282,30 +338,25 @@
   </div>
 </footer>
 <script>
+/* Dos estats, no tres: aquesta pàgina és fosca per decisió i no segueix el
+   mode del sistema, així que un estat "sistema" no voldria dir res aquí. El
+   clar hi és per a qui el necessiti (llum forta, imprimir, preferència). */
 (function(){
-  var KEY='cbgb-theme', btn=document.getElementById('theme'), lbl=document.getElementById('theme-lbl');
-  var order=['system','light','dark'];
-  var mq=window.matchMedia('(prefers-color-scheme: dark)');
-  function current(){ try{ return localStorage.getItem(KEY)||'system'; }catch(e){ return 'system'; } }
-  function label(mode){
-    if(mode==='light') return 'Mode clar';
-    if(mode==='dark') return 'Mode fosc';
-    return 'Sistema · ara '+(mq.matches?'fosc':'clar');
-  }
+  var KEY='cbgb-presentacio-theme', btn=document.getElementById('theme'), lbl=document.getElementById('theme-lbl');
+  function current(){ try{ return localStorage.getItem(KEY)==='light'?'light':'dark'; }catch(e){ return 'dark'; } }
   function apply(mode){
-    if(mode==='light'||mode==='dark'){ document.documentElement.setAttribute('data-theme',mode); }
+    if(mode==='light'){ document.documentElement.setAttribute('data-theme','light'); }
     else{ document.documentElement.removeAttribute('data-theme'); }
-    lbl.textContent=label(mode);
+    lbl.textContent = (mode==='light') ? 'Mode clar' : 'Mode fosc';
+    btn.setAttribute('title', (mode==='light') ? 'Canviar a mode fosc' : 'Canviar a mode clar');
     var meta=document.querySelector('meta[name="theme-color"]');
-    var dark=(mode==='dark')||(mode==='system'&&mq.matches);
-    if(meta) meta.setAttribute('content', dark?'#0E0E10':'#F4F1EC');
+    if(meta) meta.setAttribute('content', mode==='light'?'#F4F1EC':'#0A0908');
   }
   btn.addEventListener('click',function(){
-    var next=order[(order.indexOf(current())+1)%order.length];
+    var next = current()==='light' ? 'dark' : 'light';
     try{ localStorage.setItem(KEY,next); }catch(e){}
     apply(next);
   });
-  mq.addEventListener('change',function(){ if(current()==='system') apply('system'); });
   apply(current());
 })();
 </script>
