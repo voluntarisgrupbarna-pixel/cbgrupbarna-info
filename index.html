@@ -585,17 +585,12 @@ img { max-width: 100%; height: auto; display: block; }
 .e-par .foot a { color: #fff; }
 
 /* ==== FRANGES / EXTENSA · dues portades, un commutador ====
-   Per defecte (sense JS, o abans que corri): franges a mòbil i tauleta
-   (≤1024px, que inclou el navegador d'Instagram), extensa a escriptori.
-   Un cop hi ha preferència (--view-toggle--), la tria explícita mana a
-   qualsevol amplada. Res es duplica: calendari, formulari i la resta de
-   la pàgina són els mateixos als dos modes. */
-.only-light { display: none; }
-.only-extensa { display: block; }
-@media (max-width: 1024px) {
-  html:not([data-view]) .only-light { display: block; }
-  html:not([data-view]) .only-extensa { display: none; }
-}
+   Per defecte, a qualsevol amplada i també sense JS: FRANGES. L'extensa
+   —la portada de diari— queda darrere el botó de la capçalera. Un cop hi
+   ha preferència, la tria explícita mana. Res es duplica: calendari,
+   formulari i la resta de la pàgina són els mateixos als dos modes. */
+.only-light { display: block; }
+.only-extensa { display: none; }
 html[data-view="light"] .only-light { display: block; }
 html[data-view="light"] .only-extensa { display: none; }
 html[data-view="extensa"] .only-light { display: none; }
@@ -614,11 +609,11 @@ html[data-view="extensa"] .only-extensa { display: block; }
    guia. Els enllaços del nav només surten a l'extensa: a franges tot el mapa
    del club ja és al menú i a les mateixes franges. */
 html[data-view="light"] .head-nav > a,
-html[data-view="light"] .head-nav > .opt { display: none; }
-@media (max-width: 1024px) {
-  html:not([data-view]) .head-nav > a,
-  html:not([data-view]) .head-nav > .opt { display: none; }
-}
+html[data-view="light"] .head-nav > .opt,
+html:not([data-view]) .head-nav > a,
+html:not([data-view]) .head-nav > .opt { display: none; }
+html[data-view="extensa"] .head-nav > a,
+html[data-view="extensa"] .head-nav > .opt { display: inline-flex; }
 
 /* Al costat dret de la capçalera, sempre visible: és germà de .head-nav,
    no fill seu, així no desapareix quan el nav es plega sota el burger. */
@@ -1620,7 +1615,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     var lbl = document.getElementById('viewToggleLbl');
     if (!btn || !lbl) return;
     var root = document.documentElement;
-    var mq = window.matchMedia('(max-width: 1024px)');
     var KEY = 'cbgb-view';
     var view = null;
     try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'extensa') view = saved; } catch (e) {}
@@ -1642,7 +1636,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     }
     if (desInstagram()) view = 'light';
 
-    function efectiu() { return view || (mq.matches ? 'light' : 'extensa'); }
+    // Franges per defecte a tothom i a qualsevol amplada. L'extensa —la
+    // portada de diari— només surt si es demana amb el botó.
+    function efectiu() { return view || 'light'; }
     function pinta() {
       var actual = efectiu();
       lbl.textContent = actual === 'light' ? 'Franges' : 'Extensa';
@@ -1655,7 +1651,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       try { localStorage.setItem(KEY, view); } catch (e) {}
       pinta();
     });
-    mq.addEventListener('change', function () { if (!view) pinta(); });
     pinta();
   })();
 
