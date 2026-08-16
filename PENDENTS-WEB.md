@@ -116,6 +116,26 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
 
+## Pendent de desenvolupar
+
+- **Dashboard d'analítica de la web.** Sistema que analitzi el trànsit i l'ús de
+  cbgrupbarna.info i ho presenti en un panell dins de `/admin/`: visites per pàgina
+  i per dia, d'on ve la gent (Instagram, cerca, directe), què es fa servir
+  (calendaris descarregats, `.ics`, clics als CTA `data-cta`, dies de partit vs
+  galeria), i evolució setmanal. Base disponible: ja hi ha **GA4** carregat amb
+  consentiment via `js/galetes.js` — el dashboard pot llegir la GA4 Data API, o
+  valorar una alternativa lleugera sense galetes (Plausible/GoatCounter) que
+  simplificaria el banner. Decidir eina, dissenyar el panell i connectar-lo.
+
+## Pendent de material de l'Ana · descàrregues
+
+- **Columna `newsletter` al full de càlcul.** La porta de descàrrega de PDF envia les
+  dades al mateix Apps Script que la galeria del 3x3 (`action=register`), amb dos camps
+  nous: `newsletter` (si/no) i el document demanat dins de `font`. Cal comprovar que
+  l'Apps Script els desa en una columna pròpia; si no, queden només dins de `font`.
+- **Butlletí:** encara no hi ha eina d'enviament (Mailchimp, Brevo o similar). De moment
+  només es recull el consentiment; cal decidir amb què s'envia.
+
 ## Pendent de decisió
 
 - **Els tres àudios de `/premidonaesport/patrocinis/`** (`musica.mp3`, `veu-jugadora.mp3`,
