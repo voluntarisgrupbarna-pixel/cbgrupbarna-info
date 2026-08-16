@@ -127,6 +127,15 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   valorar una alternativa lleugera sense galetes (Plausible/GoatCounter) que
   simplificaria el banner. Decidir eina, dissenyar el panell i connectar-lo.
 
+## Pendent de material de l'Ana · descàrregues
+
+- **Columna `newsletter` al full de càlcul.** La porta de descàrrega de PDF envia les
+  dades al mateix Apps Script que la galeria del 3x3 (`action=register`), amb dos camps
+  nous: `newsletter` (si/no) i el document demanat dins de `font`. Cal comprovar que
+  l'Apps Script els desa en una columna pròpia; si no, queden només dins de `font`.
+- **Butlletí:** encara no hi ha eina d'enviament (Mailchimp, Brevo o similar). De moment
+  només es recull el consentiment; cal decidir amb què s'envia.
+
 ## Pendent de decisió
 
 - **Els tres àudios de `/premidonaesport/patrocinis/`** (`musica.mp3`, `veu-jugadora.mp3`,
