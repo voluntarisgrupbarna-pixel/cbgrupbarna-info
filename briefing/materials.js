@@ -3,6 +3,16 @@
 
 window.BRIEFING_MATERIALS = [
   {
+    "titol": "Informe: Formació, evidència i Gasol (PDF)",
+    "desc": "La investigació del club sobre bàsquet de formació en tres parts: el resum executiu íntegre (15 troballes, pla de 10 moviments, argumentari i xifres vetades), el mapa de la tesi capítol a capítol, i el catàleg complet d'entrevistes verificades de Marc Gasol sobre formació (2014-2026).",
+    "tipus": "Informe",
+    "partner": null,
+    "fitxer": "informe-formacion-evidencia-gasol.pdf",
+    "ext": "pdf",
+    "mida": 270,
+    "data": "2026-08-16"
+  },
+  {
     "titol": "Briefing de club per a col·laboradors (PDF)",
     "desc": "El briefing definitiu: història, valors, els dos sèniors a la Supercopa FCBQ, esdeveniments propis, protecció del menor i com parlar del club. Document de referència per a premsa, patrocinadors i institucions.",
     "tipus": "Dossier",
