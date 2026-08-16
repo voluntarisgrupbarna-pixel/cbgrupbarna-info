@@ -33,8 +33,11 @@
 <meta name="twitter:creator" content="@cbgrupbarna">
 <!-- Canonical + hreflang -->
 <link rel="canonical" href="https://cbgrupbarna.info/">
+<!-- Només es declara el català: la portada encara no existeix en castellà ni en
+     anglès, i prometre-ho a Google amb un hreflang que apunta a la pàgina
+     catalana és dir-li que la traducció hi és quan no hi és. Quan es tradueixi,
+     s'afegeixen aquí les dues línies i s'apunta el grup a scripts/generate-idiomes.py. -->
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/">
-<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/">
 <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://cbgrupbarna.info/sitemap.xml">
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://cbgrupbarna.info/llms.txt">
@@ -686,11 +689,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
 .menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
 .menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
-/* Franja estreta: la barra es desmunta en tres passos, no en un. Primer cauen
-   els enllaços secundaris (.opt), després el llarg (.opt2), i només al final
-   es plega tot sota el botó de menú. Amb un sol pas, la barra de vuit enllaços
-   arribava a pintar-se a sobre del nom del club a 1320px. */
-@media (max-width: 1280px) { .head-side .head-nav a.opt { display: none; } }
+/* Franja estreta: la barra es desmunta en dos passos abans de plegar-se sota
+   el botó de menú. Amb el selector d'idioma a la dreta, el pressupost d'amplada
+   dóna per quatre enllaços fixos i un de llarg; amb més, els enllaços acaben
+   pintats a sobre del nom del club. 3x3 i Galeria viuen al menú desplegat. */
 @media (max-width: 1180px) { .head-side .head-nav a.opt2 { display: none; } }
 @media (max-width: 1080px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
@@ -947,6 +949,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   .reveal { opacity: 1; transform: none; }
 }
 </style>
+<script src="/scripts/idiomes.js" defer></script>
+<script src="/scripts/idioma.js" defer></script>
 </head>
 <body>
 
@@ -983,8 +987,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <a href="/partits/">Dies de partit</a>
         <a href="/basquet-femeni/" class="opt2">Bàsquet femení</a>
         <a href="/campus/">Campus</a>
-        <a href="/3x3/" class="opt">3x3</a>
-        <a href="/fotos/" class="opt">Galeria</a>
         <a href="#info">Informació</a>
       </nav>
     </div>
@@ -1004,6 +1006,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         </span>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="head-wa">Contacte</a>
       </nav>
+      <!-- El selector d'idioma es pinta aquí (scripts/idioma.js). Va abans del
+           commutador i fora del nav, com ell, perquè no es plegui amb el menú. -->
+      <span data-idioma></span>
       <!-- Sempre visible, a tots els amplades: light per defecte a mòbil
            i tauleta, extensa a escriptori, i sempre es pot canviar. -->
       <button class="view-toggle" id="viewToggle" type="button" aria-live="polite">

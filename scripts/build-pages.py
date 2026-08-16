@@ -59,6 +59,8 @@ def head(title, desc, url, image, extra_ld=None, keywords=None):
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
+<script src="/scripts/idiomes.js" defer></script>
+<script src="/scripts/idioma.js" defer></script>
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>

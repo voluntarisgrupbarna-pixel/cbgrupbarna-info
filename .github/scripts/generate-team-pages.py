@@ -129,6 +129,8 @@ def head_html(title, desc, canonical, og_image, extra_ld):
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 <script type="application/ld+json">{json.dumps(extra_ld, ensure_ascii=False)}</script>
+<script src="/scripts/idiomes.js" defer></script>
+<script src="/scripts/idioma.js" defer></script>
 </head>
 """
 
