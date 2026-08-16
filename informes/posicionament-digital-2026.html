@@ -1,0 +1,499 @@
+<title>El Barna en la tabla</title>
+<style>
+:root{
+  --paper:#F4F4F2; --surface:#FCFCFB; --surface-2:#EDEDEA;
+  --ink:#15181C; --ink-2:#3A4049; --muted:#5D6470;
+  --rule:#DFDFDB; --rule-strong:#C6C6C0;
+  --barna:#E31E24; --peer:#1D5FB5; --macro:#A87428;
+  --barna-wash:#FBEAEA;
+  --band:#15181C; --band-ink:#F4F4F2; --band-muted:#9AA0A8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131313; --surface:#1A1A19; --surface-2:#212121;
+    --ink:#EDECE8; --ink-2:#C4C3BD; --muted:#9A9A94;
+    --rule:#2C2C2A; --rule-strong:#3C3C39;
+    --barna:#EF5A50; --peer:#4E86D6; --macro:#B8822A;
+    --barna-wash:#2A1A19;
+    --band:#0C0C0C; --band-ink:#EDECE8; --band-muted:#8B8B85;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131313; --surface:#1A1A19; --surface-2:#212121;
+  --ink:#EDECE8; --ink-2:#C4C3BD; --muted:#9A9A94;
+  --rule:#2C2C2A; --rule-strong:#3C3C39;
+  --barna:#EF5A50; --peer:#4E86D6; --macro:#B8822A;
+  --barna-wash:#2A1A19;
+  --band:#0C0C0C; --band-ink:#EDECE8; --band-muted:#8B8B85;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Georgia,"Iowan Old Style","Times New Roman",serif;
+  font-size:17px; line-height:1.6;
+}
+.sheet{max-width:1080px;margin:0 auto;background:var(--surface);border-left:1px solid var(--rule);border-right:1px solid var(--rule)}
+
+/* ---------- type roles ---------- */
+.label,.eyebrow,th,.chip,.metarow span,.stat-label,.tag{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.num,.stat-value,td.v,.gap-figure{
+  font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  font-variant-numeric:tabular-nums;
+}
+h1,h2,h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;text-wrap:balance;margin:0}
+h1{font-size:clamp(38px,6.4vw,64px);line-height:.98;letter-spacing:-.035em;font-weight:800;text-transform:uppercase}
+h2{font-size:clamp(24px,3.2vw,32px);line-height:1.08;letter-spacing:-.02em;font-weight:800}
+h3{font-size:15px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;margin-bottom:8px}
+p{margin:0 0 16px;max-width:66ch}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+
+/* ---------- cover ---------- */
+.cover{background:var(--band);color:var(--band-ink);padding:56px 44px 40px;border-bottom:4px solid var(--barna)}
+.cover .eyebrow{color:var(--band-muted)}
+.cover h1{margin:22px 0 18px;max-width:16ch}
+.cover .deck{font-size:20px;line-height:1.45;color:var(--band-ink);opacity:.86;max-width:60ch;margin-bottom:30px}
+.metarow{display:flex;flex-wrap:wrap;gap:10px}
+.metarow span{
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;
+  border:1px solid rgba(255,255,255,.22);padding:7px 11px;color:var(--band-muted)
+}
+:root[data-theme="light"] .metarow span,
+:root .metarow span{border-color:rgba(255,255,255,.22)}
+
+/* ---------- sections ---------- */
+section{padding:44px 44px 40px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:64px 1fr;gap:0 24px}
+section > .rail{padding-top:6px}
+section > .body{min-width:0}
+.rail .n{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:800;font-size:22px;
+  letter-spacing:-.03em;color:var(--barna);display:block;line-height:1
+}
+.rail .n:after{content:"";display:block;width:26px;height:2px;background:var(--rule-strong);margin-top:12px}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0}
+.stat{background:var(--surface);padding:18px 18px 16px}
+.stat-label{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:10px}
+.stat-value{font-size:34px;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.stat-value.red{color:var(--barna)}
+.stat-note{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.4;font-family:Georgia,serif}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow-x:auto;margin:20px 0 10px;border:1px solid var(--rule)}
+table{width:100%;min-width:620px;border-collapse:collapse;font-size:15px}
+th{
+  background:var(--band);color:var(--band-ink);text-align:left;
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+  padding:11px 12px;white-space:nowrap
+}
+th.r,td.v{text-align:right}
+td{padding:9px 12px;border-top:1px solid var(--rule);vertical-align:middle;color:var(--ink-2)}
+td.club{color:var(--ink)}
+td.pos{color:var(--muted);width:34px}
+tbody tr:hover td{background:var(--surface-2)}
+tr.self td{background:var(--barna-wash);color:var(--ink);font-weight:700}
+tr.self:hover td{background:var(--barna-wash)}
+tr.self td.club{box-shadow:inset 3px 0 0 var(--barna)}
+td.v{width:88px;white-space:nowrap}
+td.h{font-size:13.5px;color:var(--muted);font-family:Georgia,serif}
+.barcell{width:180px;min-width:120px}
+.bar{height:9px;background:var(--surface-2);position:relative;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:0 3px 3px 0;background:var(--peer)}
+.bar i.self{background:var(--barna)}
+.bar i.macro{background:var(--macro);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.34) 0 3px,transparent 3px 7px)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin:6px 0 0;font-size:12px;color:var(--muted);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+.legend b{display:inline-block;width:11px;height:11px;margin-right:6px;vertical-align:-1px}
+.k-self{background:var(--barna)}.k-peer{background:var(--peer)}
+.k-macro{background:var(--macro);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.34) 0 3px,transparent 3px 7px)}
+.tnote{font-size:13.5px;color:var(--muted);margin:10px 0 0;max-width:72ch}
+
+/* ---------- devices ---------- */
+.verdict{border-left:4px solid var(--barna);background:var(--surface-2);padding:18px 22px;margin:24px 0;font-size:18.5px;line-height:1.5;max-width:70ch}
+.verdict strong{color:var(--barna)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px;margin-top:22px}
+.cols p{margin-bottom:0}
+.gap{display:flex;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.gap:last-child{border-bottom:0}
+.gap-figure{font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--barna);min-width:92px}
+.gap span{font-size:15px;color:var(--ink-2)}
+.tag{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:3px 7px;border:1px solid var(--rule-strong);color:var(--muted);white-space:nowrap}
+ul{margin:0 0 16px;padding-left:20px;max-width:66ch}
+li{margin-bottom:8px}
+.foot{background:var(--band);color:var(--band-ink);padding:40px 44px;display:block}
+.foot h2{color:var(--band-ink);margin-bottom:16px}
+.foot p{color:var(--band-muted);max-width:70ch}
+.foot .verdict{background:transparent;border-left-color:var(--barna);color:var(--band-ink)}
+a{color:var(--barna)}
+:focus-visible{outline:2px solid var(--barna);outline-offset:2px}
+@media (max-width:720px){
+  section{grid-template-columns:1fr;padding:34px 20px;gap:14px}
+  .rail{display:flex;align-items:center;gap:10px}
+  .rail .n:after{margin:0}
+  .cover{padding:40px 20px 30px}
+  .foot{padding:34px 20px}
+  body{font-size:16px}
+}
+@media print{
+  body{background:#fff}
+  .sheet{max-width:none;border:0}
+  section{page-break-inside:avoid}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="sheet">
+
+<header class="cover">
+  <div class="eyebrow">CB Grup Barna · Área de Marketing · Informe interno 01/2026</div>
+  <h1>El Barna en la tabla</h1>
+  <p class="deck">Dónde quedaría la comunidad de Instagram del club si la colocáramos en las clasificaciones del baloncesto español. Análisis de 78 cuentas verificadas una a una, para Junta y para el argumentario de patrocinio 2026/27.</p>
+  <div class="metarow">
+    <span>Base: agosto 2026</span>
+    <span>Cuenta: @cbgrupbarna</span>
+    <span>7.096 seguidores</span>
+    <span>78 cuentas verificadas</span>
+    <span>Cobertura 90%</span>
+  </div>
+</header>
+
+<!-- 01 -->
+<section>
+  <div class="rail"><span class="n">01</span></div>
+  <div class="body">
+    <h2>Resumen ejecutivo</h2>
+    <p>El CB Grup Barna tiene hoy una comunidad digital que no corresponde a su categoría deportiva. Con 7.096 seguidores compite en volumen con clubes de las tres divisiones nacionales femeninas y supera a todas las referencias masculinas de Primera y Segunda FEB que se han podido verificar. Esa es la anomalía, y es un activo comercial.</p>
+    <p>La lectura honesta tiene dos caras. Hacia arriba, el club está por encima de su liga. Hacia dentro, 7.096 seguidores siguen siendo pocos para una estructura de 34 equipos y unas 450 familias: la comunidad física del club es mayor que su comunidad digital.</p>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-label">Comunidad actual</span>
+        <div class="stat-value red">7.096</div>
+        <p class="stat-note">Seguidores en Instagram, agosto 2026.</p>
+      </div>
+      <div class="stat">
+        <span class="stat-label">LF Endesa</span>
+        <div class="stat-value">11.º</div>
+        <p class="stat-note">De 16 clubes de la máxima categoría femenina.</p>
+      </div>
+      <div class="stat">
+        <span class="stat-label">LF Challenge</span>
+        <div class="stat-value">3.º</div>
+        <p class="stat-note">1.º si se excluyen las dos macrocuentas de club.</p>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Liga Femenina 2</span>
+        <div class="stat-value">3.º</div>
+        <p class="stat-note">De 28 equipos, en dos grupos.</p>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Formación</span>
+        <div class="stat-value">5.º</div>
+        <p class="stat-note">Sobre 15 clubes formativos comparables verificados.</p>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Barcelona ciudad</span>
+        <div class="stat-value">1.º</div>
+        <p class="stat-note">Por delante de Laietà, SESE, JAC Sants, Roser, Horta.</p>
+      </div>
+    </div>
+
+    <div class="verdict">La posición digital del club está <strong>por encima de su posición deportiva</strong>. El objetivo del curso no es crecer: es convertir esa ventaja de tamaño en alcance, autoridad y contrato de patrocinio.</div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="rail"><span class="n">02</span></div>
+  <div class="body">
+    <h2>Metodología y control de datos</h2>
+    <p>Todas las cifras proceden de perfiles públicos de Instagram, consultados cuenta a cuenta en agosto de 2026. No se han usado estimaciones redondeadas ni cifras de terceros sin comprobar. Se han verificado 78 cuentas: los 60 equipos de LF Endesa, LF Challenge y LF2 2026-27, 18 clubes catalanes de formación y 10 referencias masculinas nacionales.</p>
+
+    <h3>Regla de comparación</h3>
+    <p>Una cuenta no es comparable a otra solo por tener seguidores. Se distinguen tres tipos, y se mantiene la distinción en todas las tablas:</p>
+    <ul>
+      <li><b>Cuenta de club</b> — publica de todas las secciones. Es el caso del Barna, y el término de comparación correcto.</li>
+      <li><b>Cuenta exclusivamente femenina</b> — solo el equipo femenino. Audiencia menor por definición.</li>
+      <li><b>Macrocuenta</b> — estructura profesional grande (Unicaja, Joventut, Valencia). Distorsiona cualquier ranking y se marca como fuera de escala.</li>
+    </ul>
+
+    <h3>Correcciones sobre el borrador anterior</h3>
+    <p>La verificación cuenta a cuenta corrige cifras del borrador previo. Las desviaciones son sistemáticas al alza en el bloque masculino, donde el borrador trabajaba con números redondeados. Se listan las materiales:</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Club</th><th class="r">Borrador</th><th class="r">Verificado</th><th class="r">Desvío</th><th>Cuenta</th></tr></thead>
+        <tbody>
+          <tr><td class="club">Amics / TAU Castelló</td><td class="v">11.000</td><td class="v">5.494</td><td class="v">−50%</td><td class="h">@taucastello</td></tr>
+          <tr><td class="club">Sant Antoni (Eivissa)</td><td class="v">9.000</td><td class="v">4.936</td><td class="v">−45%</td><td class="h">@basquet_santantoni</td></tr>
+          <tr><td class="club">Claret Benimaclet</td><td class="v">5.300</td><td class="v">1.196</td><td class="v">−77%</td><td class="h">@claretvalenciabenimaclet</td></tr>
+          <tr><td class="club">Fibwi Palma</td><td class="v">9.000</td><td class="v">5.906</td><td class="v">−34%</td><td class="h">@fibwimallorcabasquetpalma</td></tr>
+          <tr><td class="club">Albacete Basket</td><td class="v">8.000</td><td class="v">5.291</td><td class="v">−34%</td><td class="h">@albacetebasket</td></tr>
+          <tr><td class="club">Estudiantes Cartagena</td><td class="v">5.500</td><td class="v">2.620</td><td class="v">−52%</td><td class="h">@cbestuct</td></tr>
+          <tr><td class="club">Palmer Basket</td><td class="v">8.000</td><td class="v">6.176</td><td class="v">−23%</td><td class="h">@palmerbasket</td></tr>
+          <tr><td class="club">Clavijo</td><td class="v">6.000</td><td class="v">4.247</td><td class="v">−29%</td><td class="h">@cbclavijo</td></tr>
+          <tr><td class="club">Córdoba CB</td><td class="v">7.000</td><td class="v">5.415</td><td class="v">−23%</td><td class="h">@cordobacb</td></tr>
+          <tr><td class="club">Peñas Huesca</td><td class="v">7.000</td><td class="v">6.272</td><td class="v">−10%</td><td class="h">@cbphuesca</td></tr>
+          <tr><td class="club">CB Prat</td><td class="v">8.000</td><td class="v">7.451</td><td class="v">−7%</td><td class="h">@cbprat</td></tr>
+          <tr><td class="club">Bisbal Bàsquet</td><td class="v">4.000</td><td class="v">5.617</td><td class="v">+40%</td><td class="h">@bisbalbasquet</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Además: el club de Salamanca es <b>@cbavenida</b> (34.000), no @perfumeriasavenida (12.000, la cadena de perfumería). Y los 178.000 atribuidos a Valencia en LF Challenge corresponden a la cuenta general del club: la cuenta del equipo femenino tiene 6.954.</p>
+
+    <h3>Datos no recuperados</h3>
+    <p>Seis de las sesenta cuentas de liga nacional no devolvieron cifra: Cadí La Seu (@sedisbasquet), Siroko Gijón, ADBA Sanfer, CB Isla Bonita, UE Mataró y la cuenta principal de Claret Benimaclet. Ninguna altera la posición del Barna salvo, potencialmente, UE Mataró. Cobertura efectiva: 90%.</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="rail"><span class="n">03</span></div>
+  <div class="body">
+    <h2>Benchmark de formación</h2>
+    <p>Es la comparación que de verdad describe al club: entidades formativas con cantera, territorio y comunidad de familias. El borrador anterior situaba al Barna 2.º de este grupo, pero omitía tres clubes que están por encima. Con el universo completo verificado, la posición real es la 5.ª — y la 1.ª de Barcelona ciudad.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th class="r">#</th><th>Club</th><th class="r">Seguidores</th><th>Volumen</th><th>Nota</th></tr></thead>
+        <tbody>
+          <tr><td class="pos">1</td><td class="club">Bàsquet Femení Sant Adrià</td><td class="v">8.517</td><td class="barcell"><div class="bar"><i style="width:100%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">2</td><td class="club">Basket Almeda</td><td class="v">7.727</td><td class="barcell"><div class="bar"><i style="width:91%"></i></div></td><td class="h">Cornellà</td></tr>
+          <tr><td class="pos">3</td><td class="club">CB Prat</td><td class="v">7.451</td><td class="barcell"><div class="bar"><i style="width:88%"></i></div></td><td class="h">Vinculado a la Penya</td></tr>
+          <tr><td class="pos">4</td><td class="club">CB Cornellà</td><td class="v">7.233</td><td class="barcell"><div class="bar"><i style="width:85%"></i></div></td><td class="h">—</td></tr>
+          <tr class="self"><td class="pos">5</td><td class="club">CB GRUP BARNA</td><td class="v">7.096</td><td class="barcell"><div class="bar"><i class="self" style="width:83%"></i></div></td><td class="h">1.º de Barcelona ciudad</td></tr>
+          <tr><td class="pos">6</td><td class="club">Cesur Distrito Olímpico</td><td class="v">6.617</td><td class="barcell"><div class="bar"><i style="width:78%"></i></div></td><td class="h">Madrid</td></tr>
+          <tr><td class="pos">7</td><td class="club">CB Granollers</td><td class="v">6.108</td><td class="barcell"><div class="bar"><i style="width:72%"></i></div></td><td class="h">Fundador ACB</td></tr>
+          <tr><td class="pos">8</td><td class="club">CB Boet Maresme Mataró</td><td class="v">5.946</td><td class="barcell"><div class="bar"><i style="width:70%"></i></div></td><td class="h">—</td></tr>
+          <tr><td class="pos">9</td><td class="club">Bisbal Bàsquet</td><td class="v">5.617</td><td class="barcell"><div class="bar"><i style="width:66%"></i></div></td><td class="h">Girona</td></tr>
+          <tr><td class="pos">10</td><td class="club">CB Alcobendas</td><td class="v">5.543</td><td class="barcell"><div class="bar"><i style="width:65%"></i></div></td><td class="h">Madrid</td></tr>
+          <tr><td class="pos">11</td><td class="club">CE Laietà</td><td class="v">5.302</td><td class="barcell"><div class="bar"><i style="width:62%"></i></div></td><td class="h">Multideporte, Barcelona</td></tr>
+          <tr><td class="pos">12</td><td class="club">SESE</td><td class="v">5.114</td><td class="barcell"><div class="bar"><i style="width:60%"></i></div></td><td class="h">Barcelona</td></tr>
+          <tr><td class="pos">13</td><td class="club">CB Las Rozas</td><td class="v">4.898</td><td class="barcell"><div class="bar"><i style="width:58%"></i></div></td><td class="h">Madrid</td></tr>
+          <tr><td class="pos">14</td><td class="club">TGN Bàsquet</td><td class="v">4.850</td><td class="barcell"><div class="bar"><i style="width:57%"></i></div></td><td class="h">Tarragona</td></tr>
+          <tr><td class="pos">15</td><td class="club">Vilabàsquet Viladecans</td><td class="v">4.802</td><td class="barcell"><div class="bar"><i style="width:56%"></i></div></td><td class="h">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend"><span><b class="k-self"></b>CB Grup Barna</span><span><b class="k-peer"></b>Club comparable</span></div>
+
+    <h3>Las distancias que importan</h3>
+    <div class="gap"><span class="gap-figure">137</span><span>seguidores hasta <b>CB Cornellà</b>. Es el rival alcanzable de este trimestre.</span></div>
+    <div class="gap"><span class="gap-figure">355</span><span>hasta <b>CB Prat</b>. Dos piezas que funcionen.</span></div>
+    <div class="gap"><span class="gap-figure">631</span><span>hasta <b>Basket Almeda</b>, líder del grupo metropolitano.</span></div>
+    <div class="gap"><span class="gap-figure">1.421</span><span>hasta <b>Sant Adrià</b>, y con eso el liderazgo del benchmark formativo entero.</span></div>
+    <p class="tnote">Los cuatro clubes por delante son del área metropolitana, no de Barcelona ciudad. Dentro de la ciudad el Barna ya es primero, con 1.982 seguidores sobre SESE (+39%).</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="rail"><span class="n">04</span></div>
+  <div class="body">
+    <h2>Liga Femenina Endesa</h2>
+    <p>Máxima categoría del baloncesto femenino español, temporada 2026-27. Colocando al Barna en esa clasificación por comunidad digital, quedaría 11.º de 16 — por delante de cinco clubes de la élite y del propio campeón de liga en su cuenta femenina.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th class="r">#</th><th>Club</th><th class="r">Seguidores</th><th>Volumen</th><th>Tipo de cuenta</th></tr></thead>
+        <tbody>
+          <tr><td class="pos">1</td><td class="club">Casademont Zaragoza</td><td class="v">65.000</td><td class="barcell"><div class="bar"><i class="macro" style="width:100%"></i></div></td><td class="h"><span class="tag">Macrocuenta</span></td></tr>
+          <tr><td class="pos">2</td><td class="club">Movistar Estudiantes</td><td class="v">47.000</td><td class="barcell"><div class="bar"><i class="macro" style="width:100%"></i></div></td><td class="h"><span class="tag">Macrocuenta</span></td></tr>
+          <tr><td class="pos">3</td><td class="club">CB Meins Avenida</td><td class="v">34.000</td><td class="barcell"><div class="bar"><i class="macro" style="width:100%"></i></div></td><td class="h"><span class="tag">Macrocuenta</span></td></tr>
+          <tr><td class="pos">4</td><td class="club">Spar Girona</td><td class="v">24.000</td><td class="barcell"><div class="bar"><i class="macro" style="width:100%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">5</td><td class="club">Hozono Global Jairis</td><td class="v">10.000</td><td class="barcell"><div class="bar"><i style="width:100%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">6</td><td class="club">Kutxabank Araski</td><td class="v">9.198</td><td class="barcell"><div class="bar"><i style="width:92%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">7</td><td class="club">BAXI Ferrol</td><td class="v">8.891</td><td class="barcell"><div class="bar"><i style="width:89%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">8</td><td class="club">Celta Femxa Zorka</td><td class="v">8.351</td><td class="barcell"><div class="bar"><i style="width:84%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">9</td><td class="club">INVERSUS Gernika Bizkaia</td><td class="v">7.219</td><td class="barcell"><div class="bar"><i style="width:72%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">10</td><td class="club">Durán Maquinaria Ensino</td><td class="v">7.187</td><td class="barcell"><div class="bar"><i style="width:72%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr class="self"><td class="pos">11</td><td class="club">CB GRUP BARNA</td><td class="v">7.096</td><td class="barcell"><div class="bar"><i class="self" style="width:71%"></i></div></td><td class="h">Cuenta de club</td></tr>
+          <tr><td class="pos">12</td><td class="club">Valencia Basket Femenino</td><td class="v">6.954</td><td class="barcell"><div class="bar"><i style="width:70%"></i></div></td><td class="h">Campeón de liga</td></tr>
+          <tr><td class="pos">13</td><td class="club">Innova-TSN Leganés</td><td class="v">6.150</td><td class="barcell"><div class="bar"><i style="width:62%"></i></div></td><td class="h">Cuenta de club</td></tr>
+          <tr><td class="pos">14</td><td class="club">Impulso 360 CAB Estepona</td><td class="v">5.666</td><td class="barcell"><div class="bar"><i style="width:57%"></i></div></td><td class="h">Cuenta de club</td></tr>
+          <tr><td class="pos">15</td><td class="club">Mirai Euskotren (IDK)</td><td class="v">5.556</td><td class="barcell"><div class="bar"><i style="width:56%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">16</td><td class="club">Azulmarino Mallorca Palma</td><td class="v">5.178</td><td class="barcell"><div class="bar"><i style="width:52%"></i></div></td><td class="h">Debuta esta temporada</td></tr>
+          <tr><td class="pos">—</td><td class="club">Cadí La Seu</td><td class="v">n/d</td><td class="barcell"><div class="bar"></div></td><td class="h">No recuperado</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend"><span><b class="k-self"></b>CB Grup Barna</span><span><b class="k-peer"></b>Club comparable</span><span><b class="k-macro"></b>Fuera de escala</span></div>
+    <p class="tnote">Las barras se escalan sobre 10.000 seguidores; las cuatro primeras filas exceden la escala y se marcan con trama. Valencia Basket aparece con su cuenta femenina (@womenvalenciabasket): la cuenta general del club es mucho mayor y no es comparable.</p>
+
+    <div class="verdict">El dato para Junta: <strong>el Barna supera en comunidad al campeón de España en su cuenta femenina</strong>, por 142 seguidores. No es capacidad comercial equivalente. Es tamaño de comunidad equivalente, que ya es mucho.</div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section>
+  <div class="rail"><span class="n">05</span></div>
+  <div class="body">
+    <h2>LF Challenge</h2>
+    <p>Segunda categoría nacional femenina. Aquí solo dos cuentas quedan por delante del Barna, y ninguna de las dos es comparable: son las cuentas globales de Unicaja y de la Penya, que publican de toda la estructura profesional del club.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th class="r">#</th><th>Club</th><th class="r">Seguidores</th><th>Volumen</th><th>Tipo de cuenta</th></tr></thead>
+        <tbody>
+          <tr><td class="pos">1</td><td class="club">Unicaja Mijas</td><td class="v">92.000</td><td class="barcell"><div class="bar"><i class="macro" style="width:100%"></i></div></td><td class="h"><span class="tag">Macrocuenta</span></td></tr>
+          <tr><td class="pos">2</td><td class="club">Club Joventut Badalona</td><td class="v">68.000</td><td class="barcell"><div class="bar"><i class="macro" style="width:100%"></i></div></td><td class="h"><span class="tag">Macrocuenta</span></td></tr>
+          <tr class="self"><td class="pos">3</td><td class="club">CB GRUP BARNA</td><td class="v">7.096</td><td class="barcell"><div class="bar"><i class="self" style="width:100%"></i></div></td><td class="h">Cuenta de club</td></tr>
+          <tr><td class="pos">4</td><td class="club">Valencia Basket <span class="tag">filial</span></td><td class="v">6.954</td><td class="barcell"><div class="bar"><i style="width:98%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">5</td><td class="club">Domusa Teknik ISB (Iraurgi)</td><td class="v">5.257</td><td class="barcell"><div class="bar"><i style="width:74%"></i></div></td><td class="h">Cuenta de club</td></tr>
+          <tr><td class="pos">6</td><td class="club">SPAR Gran Canaria</td><td class="v">5.080</td><td class="barcell"><div class="bar"><i style="width:72%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">7</td><td class="club">Recoletas Zamora</td><td class="v">4.348</td><td class="barcell"><div class="bar"><i style="width:61%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">8</td><td class="club">Alter Enersun Al-Qázeres</td><td class="v">4.027</td><td class="barcell"><div class="bar"><i style="width:57%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">9</td><td class="club">Cajasol CB Sevilla Femenino</td><td class="v">3.487</td><td class="barcell"><div class="bar"><i style="width:49%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">10</td><td class="club">MCR Lima-Horta Barcelona</td><td class="v">3.231</td><td class="barcell"><div class="bar"><i style="width:46%"></i></div></td><td class="h">Cuenta de club · Barcelona</td></tr>
+          <tr><td class="pos">11</td><td class="club">Fustecma NBF Castelló</td><td class="v">2.866</td><td class="barcell"><div class="bar"><i style="width:40%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">12</td><td class="club">La Laguna Toyota Adareva</td><td class="v">2.668</td><td class="barcell"><div class="bar"><i style="width:38%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">13</td><td class="club">Sparking Truth Maristas Coruña</td><td class="v">2.667</td><td class="barcell"><div class="bar"><i style="width:38%"></i></div></td><td class="h">Cuenta de club</td></tr>
+          <tr><td class="pos">14</td><td class="club">Mipelletymas BF León</td><td class="v">2.581</td><td class="barcell"><div class="bar"><i style="width:36%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">15</td><td class="club">Osés Construcción (FNB Ardoi)</td><td class="v">2.178</td><td class="barcell"><div class="bar"><i style="width:31%"></i></div></td><td class="h">Cuenta de club</td></tr>
+          <tr><td class="pos">16</td><td class="club">Bosonit Unibasket Logroño</td><td class="v">2.045</td><td class="barcell"><div class="bar"><i style="width:29%"></i></div></td><td class="h">Exclusiva femenina</td></tr>
+          <tr><td class="pos">17</td><td class="club">Melilla Ciudad del Deporte La Salle</td><td class="v">162</td><td class="barcell"><div class="bar"><i style="width:2%"></i></div></td><td class="h">Cuenta de reciente creación</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend"><span><b class="k-self"></b>CB Grup Barna</span><span><b class="k-peer"></b>Club comparable</span><span><b class="k-macro"></b>Fuera de escala</span></div>
+    <p class="tnote">Escala sobre 7.096. Excluyendo las dos macrocuentas, el Barna lideraría la categoría: 1.839 seguidores por encima del quinto clasificado real.</p>
+  </div>
+</section>
+
+<!-- 06 -->
+<section>
+  <div class="rail"><span class="n">06</span></div>
+  <div class="body">
+    <h2>Liga Femenina 2</h2>
+    <p>Tercera categoría nacional, 28 equipos en dos grupos. Es el benchmark más ilustrativo porque su perfil de club —formación, territorio, presupuesto contenido— es exactamente el del Barna. Solo dos cuentas quedan por delante, y una de ellas es la cuenta global de la Fundación Lucentum.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th class="r">#</th><th>Club</th><th>Grupo</th><th class="r">Seguidores</th><th>Volumen</th></tr></thead>
+        <tbody>
+          <tr><td class="pos">1</td><td class="club">HLA / Lucentum Alicante</td><td class="h">B</td><td class="v">13.000</td><td class="barcell"><div class="bar"><i class="macro" style="width:100%"></i></div></td></tr>
+          <tr><td class="pos">2</td><td class="club">Basket Almeda</td><td class="h">B</td><td class="v">7.727</td><td class="barcell"><div class="bar"><i style="width:100%"></i></div></td></tr>
+          <tr class="self"><td class="pos">3</td><td class="club">CB GRUP BARNA</td><td class="h">—</td><td class="v">7.096</td><td class="barcell"><div class="bar"><i class="self" style="width:92%"></i></div></td></tr>
+          <tr><td class="pos">4</td><td class="club">Cesur Distrito Olímpico</td><td class="h">A</td><td class="v">6.617</td><td class="barcell"><div class="bar"><i style="width:86%"></i></div></td></tr>
+          <tr><td class="pos">5</td><td class="club">Grupo Interbus Alcobendas</td><td class="h">A</td><td class="v">5.543</td><td class="barcell"><div class="bar"><i style="width:72%"></i></div></td></tr>
+          <tr><td class="pos">6</td><td class="club">SPAR Gran Canaria <span class="tag">filial</span></td><td class="h">A</td><td class="v">5.080</td><td class="barcell"><div class="bar"><i style="width:66%"></i></div></td></tr>
+          <tr><td class="pos">7</td><td class="club">CB Las Rozas</td><td class="h">A</td><td class="v">4.898</td><td class="barcell"><div class="bar"><i style="width:63%"></i></div></td></tr>
+          <tr><td class="pos">8</td><td class="club">TGN Bàsquet A</td><td class="h">B</td><td class="v">4.850</td><td class="barcell"><div class="bar"><i style="width:63%"></i></div></td></tr>
+          <tr><td class="pos">9</td><td class="club">Dishelec 65 Viladecans</td><td class="h">B</td><td class="v">4.802</td><td class="barcell"><div class="bar"><i style="width:62%"></i></div></td></tr>
+          <tr><td class="pos">10</td><td class="club">CB Ciudad de Móstoles</td><td class="h">A</td><td class="v">3.725</td><td class="barcell"><div class="bar"><i style="width:48%"></i></div></td></tr>
+          <tr><td class="pos">11</td><td class="club">Manresa CBF</td><td class="h">B</td><td class="v">3.560</td><td class="barcell"><div class="bar"><i style="width:46%"></i></div></td></tr>
+          <tr><td class="pos">12</td><td class="club">CB Pozuelo</td><td class="h">A</td><td class="v">3.438</td><td class="barcell"><div class="bar"><i style="width:45%"></i></div></td></tr>
+          <tr><td class="pos">13</td><td class="club">Magec Tías Lanzarote</td><td class="h">A</td><td class="v">2.763</td><td class="barcell"><div class="bar"><i style="width:36%"></i></div></td></tr>
+          <tr><td class="pos">14</td><td class="club">Xerez CD</td><td class="h">B</td><td class="v">2.636</td><td class="barcell"><div class="bar"><i style="width:34%"></i></div></td></tr>
+          <tr><td class="pos">15</td><td class="club">Hierros Díaz Extremadura Miralvalle</td><td class="h">A</td><td class="v">2.814</td><td class="barcell"><div class="bar"><i style="width:36%"></i></div></td></tr>
+          <tr><td class="pos">16</td><td class="club">Ibaizabal</td><td class="h">B</td><td class="v">2.370</td><td class="barcell"><div class="bar"><i style="width:31%"></i></div></td></tr>
+          <tr><td class="pos">17</td><td class="club">Sernova Real Canoe</td><td class="h">A</td><td class="v">2.105</td><td class="barcell"><div class="bar"><i style="width:27%"></i></div></td></tr>
+          <tr><td class="pos">18</td><td class="club">Horbisa Spirit Ausarta Barakaldo</td><td class="h">B</td><td class="v">2.042</td><td class="barcell"><div class="bar"><i style="width:26%"></i></div></td></tr>
+          <tr><td class="pos">19</td><td class="club">Mariscos Antón Cortegada</td><td class="h">A</td><td class="v">1.555</td><td class="barcell"><div class="bar"><i style="width:20%"></i></div></td></tr>
+          <tr><td class="pos">20</td><td class="club">GEiEG Pacisa</td><td class="h">B</td><td class="v">1.299</td><td class="barcell"><div class="bar"><i style="width:17%"></i></div></td></tr>
+          <tr><td class="pos">21</td><td class="club">Baloncesto Claret Benimaclet</td><td class="h">B</td><td class="v">1.196</td><td class="barcell"><div class="bar"><i style="width:15%"></i></div></td></tr>
+          <tr><td class="pos">22</td><td class="club">Stadium Casablanca</td><td class="h">B</td><td class="v">1.102</td><td class="barcell"><div class="bar"><i style="width:14%"></i></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend"><span><b class="k-self"></b>CB Grup Barna</span><span><b class="k-peer"></b>Club comparable</span><span><b class="k-macro"></b>Fuera de escala</span></div>
+    <p class="tnote">Escala sobre 7.727. Faltan seis equipos sin cifra recuperada: Siroko Gijón, ADBA Sanfer, CB Isla Bonita, El Cochinillo Segoviano, Romakuruma UE Mataró y Segle XXI (programa federativo sin cuenta propia). De todos ellos, solo UE Mataró podría situarse por encima del Barna.</p>
+  </div>
+</section>
+
+<!-- 07 -->
+<section>
+  <div class="rail"><span class="n">07</span></div>
+  <div class="body">
+    <h2>Referencia masculina</h2>
+    <p>La ACB no es un benchmark útil: es otra dimensión comercial. La comparación empieza a tener sentido en Primera FEB y Segunda FEB. Se han verificado diez clubes de esas dos categorías —una muestra, no la liga completa— y el Barna queda por encima de los diez.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Club</th><th>Categoría</th><th class="r">Seguidores</th><th>Volumen</th><th class="r">Dif. vs Barna</th></tr></thead>
+        <tbody>
+          <tr class="self"><td class="club">CB GRUP BARNA</td><td class="h">Copa Catalunya / Supercopa fem.</td><td class="v">7.096</td><td class="barcell"><div class="bar"><i class="self" style="width:100%"></i></div></td><td class="v">—</td></tr>
+          <tr><td class="club">Palmer Basket Mallorca</td><td class="h">Primera FEB</td><td class="v">6.176</td><td class="barcell"><div class="bar"><i style="width:87%"></i></div></td><td class="v">−920</td></tr>
+          <tr><td class="club">Peñas Huesca</td><td class="h">Segunda FEB</td><td class="v">6.272</td><td class="barcell"><div class="bar"><i style="width:88%"></i></div></td><td class="v">−824</td></tr>
+          <tr><td class="club">Fibwi Palma</td><td class="h">Primera FEB</td><td class="v">5.906</td><td class="barcell"><div class="bar"><i style="width:83%"></i></div></td><td class="v">−1.190</td></tr>
+          <tr><td class="club">TAU / Amics Castelló</td><td class="h">Primera FEB</td><td class="v">5.494</td><td class="barcell"><div class="bar"><i style="width:77%"></i></div></td><td class="v">−1.602</td></tr>
+          <tr><td class="club">Córdoba CB</td><td class="h">Primera FEB</td><td class="v">5.415</td><td class="barcell"><div class="bar"><i style="width:76%"></i></div></td><td class="v">−1.681</td></tr>
+          <tr><td class="club">Bueno Arenas Albacete</td><td class="h">Primera FEB</td><td class="v">5.291</td><td class="barcell"><div class="bar"><i style="width:75%"></i></div></td><td class="v">−1.805</td></tr>
+          <tr><td class="club">Iraurgi ISB</td><td class="h">Segunda FEB</td><td class="v">5.257</td><td class="barcell"><div class="bar"><i style="width:74%"></i></div></td><td class="v">−1.839</td></tr>
+          <tr><td class="club">Class Bàsquet Sant Antoni</td><td class="h">Segunda FEB</td><td class="v">4.936</td><td class="barcell"><div class="bar"><i style="width:70%"></i></div></td><td class="v">−2.160</td></tr>
+          <tr><td class="club">CB Clavijo</td><td class="h">Segunda FEB</td><td class="v">4.247</td><td class="barcell"><div class="bar"><i style="width:60%"></i></div></td><td class="v">−2.849</td></tr>
+          <tr><td class="club">Estudiantes Cartagena</td><td class="h">Segunda FEB</td><td class="v">2.620</td><td class="barcell"><div class="bar"><i style="width:37%"></i></div></td><td class="v">−4.476</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend"><span><b class="k-self"></b>CB Grup Barna</span><span><b class="k-peer"></b>Club comparable</span></div>
+
+    <div class="verdict">Cautela obligatoria: <strong>diez clubes no son una liga</strong>. Este bloque autoriza a decir «por encima de las referencias verificadas de Primera y Segunda FEB», no «X.º clasificado». En un dossier, la primera frase es defendible; la segunda, no.</div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section>
+  <div class="rail"><span class="n">08</span></div>
+  <div class="body">
+    <h2>Diagnóstico</h2>
+    <div class="cols">
+      <div>
+        <h3>Lo que el dato demuestra</h3>
+        <p>Que el club comunica por encima de su categoría. Que la marca —barrio, formación, femenino, valores— genera adhesión más allá de los resultados. Y que el activo comunicativo del Barna es vendible con argumentos comparativos, no solo con adjetivos.</p>
+      </div>
+      <div>
+        <h3>Lo que el dato no demuestra</h3>
+        <p>Ni alcance, ni engagement, ni valor comercial equivalente a un club profesional. Un club de Primera FEB con menos seguidores tiene televisión, taquilla y territorio que el Barna no tiene. El tamaño de comunidad es una variable, no el retrato completo.</p>
+      </div>
+      <div>
+        <h3>La anomalía interna</h3>
+        <p>34 equipos y unas 450 familias sostienen 7.096 seguidores. La comunidad física del club es proporcionalmente mayor que la digital: el techo actual no lo pone el mercado, lo pone la conversión. Quien llega por un reel no se queda.</p>
+      </div>
+      <div>
+        <h3>La ventaja no explotada</h3>
+        <p>Almeda, Prat o TGN pueden hablar de partidos, resultados y fichajes. El Barna tiene además formación, femenino, entrenadores, familias, salud, táctica y barrio: material de medio, no de tablón de anuncios. Ahí está el margen que ninguno de ellos puede copiar rápido.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section>
+  <div class="rail"><span class="n">09</span></div>
+  <div class="body">
+    <h2>Objetivos 2026/27</h2>
+    <p>El borrador anterior proponía «Operación 7.700» para alcanzar a Almeda. Con las cifras verificadas hay un hito anterior, más barato y con mejor relato: Cornellà y Prat están a 137 y 355 seguidores. Superarlos convierte al Barna en el club de formación con más comunidad del área sur de Barcelona.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Hito</th><th class="r">Objetivo</th><th class="r">Faltan</th><th>Qué desbloquea</th></tr></thead>
+        <tbody>
+          <tr><td class="club">Operación 7.500</td><td class="v">7.500</td><td class="v">404</td><td class="h">Pasar a Cornellà y a Prat. Objetivo de trimestre.</td></tr>
+          <tr><td class="club">Operación 7.800</td><td class="v">7.800</td><td class="v">704</td><td class="h">Pasar a Almeda: líder del grupo metropolitano.</td></tr>
+          <tr><td class="club">Liderazgo formativo</td><td class="v">8.600</td><td class="v">1.504</td><td class="h">Pasar a Sant Adrià: 1.º del benchmark completo.</td></tr>
+          <tr><td class="club">Cambio de escala</td><td class="v">10.000</td><td class="v">2.904</td><td class="h">Por delante de todo LF Challenge y LF2 comparables.</td></tr>
+          <tr><td class="club">Marca de referencia</td><td class="v">15.000</td><td class="v">7.904</td><td class="h">Zona baja de LF Endesa real, no hipotética.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Argumentario para el dossier de patrocinio</h3>
+    <p>La frase que sostiene el dato, verificable y sin exagerar:</p>
+    <div class="verdict">«El CB Grup Barna reúne una comunidad digital de <strong>más de 7.000 personas</strong>: por delante de cinco clubes de la máxima categoría femenina española, líder de su categoría entre clubes comparables de LF Challenge y LF2, y por encima de todas las referencias verificadas de Primera y Segunda FEB masculina. Todo ello compitiendo en Copa Catalunya y Supercopa Femenina.»</div>
+    <p class="tnote">Antes de usar cualquier cifra de esta página en un dossier firmado, comprobar el perfil real: los seguidores se mueven cada semana y las cifras de los rivales proceden de índices públicos que pueden ir retrasados.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <h2>Conclusión</h2>
+  <p>El Barna no tiene que ganar la carrera de seguidores contra el Barça, la Penya o el Valencia: esa carrera no existe. La carrera real se juega entre Almeda, Cornellà, Prat, Distrito Olímpico y Sant Adrià, y en esa el club está a menos de mil seguidores del liderazgo.</p>
+  <p>El salto siguiente no es de volumen, es de naturaleza: pasar de cuenta de club a medio de baloncesto formativo. Si el contenido educativo y editorial atrae a gente que ni juega en el club ni tiene hijos en él, el techo deja de ser las 450 familias y pasa a ser todo el ecosistema del baloncesto base catalán.</p>
+  <div class="verdict">El reto no es tener más seguidores. Es convertir una posición digital fuerte en <strong>autoridad, alcance y patrocinio</strong>.</div>
+  <p style="font-size:13px;margin-top:26px">Fuente: perfiles públicos de Instagram, consultados en agosto de 2026 · 78 cuentas verificadas · Cobertura 90% · Elaborado por el Área de Marketing del CB Grup Barna.</p>
+</footer>
+
+</div>
