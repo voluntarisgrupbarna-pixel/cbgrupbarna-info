@@ -419,7 +419,18 @@
   .facts span{display:block;font-size:12px;color:var(--muted);margin-top:8px}
   .facts em{display:block;font-style:normal;font-size:12px;color:var(--ink);margin-top:6px}
 
+  /* Galeria del torneig: tres fotos a la mateixa alçada, retallades des de
+     dalt perquè no es talli cap cara. */
+  .gal{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px}
+  @media(min-width:760px){.gal{grid-template-columns:repeat(3,1fr)}}
+  .gal-im{display:block;position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--cream);
+    border:1px solid var(--line);border-radius:var(--radius)}
+  .gal-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;
+    transition:transform .6s var(--ease)}
+  .gal-im:hover img{transform:scale(1.04)}
+
   @media print{
+    .gal{grid-template-columns:repeat(3,1fr);break-inside:avoid}
     /* Seccions que apilen xifres + foto: la diapositiva es retalla a
        l'alçada exacta de pàgina. Sense el retall, els últims píxels de la
        foto vessaven i obrien una pàgina quasi buida al darrere. */
@@ -740,10 +751,10 @@
       <div><b>500-600</b><span>Samarretes del 3×3 per edició</span><em>I 300 telars oficials</em></div>
     </div>
     <div class="split">
-      <div class="split-media"><img src="/presentacio/img/mercat-clot.jpg" alt="Mercat del Clot, barri on juga i entrena el CB Grup Barna" loading="lazy"></div>
+      <div class="split-media"><img src="img/3x3-photocall.jpg" alt="Equip davant del photocall del 3x3 amb els logos dels patrocinadors" loading="lazy"></div>
       <div class="split-txt">
         <p class="lab">· Al pavelló i al carrer</p>
-        <h3>Presència física</h3>
+        <h3>On acaba el teu logo</h3>
         <p>Banderoles i cartells a La Nau del Clot, logo a l'equipació de tots els equips federats i
         presència a entregues de trofeus i finals.</p>
         <p>A fora, el barri: acords amb l'Eix del Clot, el Districte de Sant Martí i la Federació
@@ -758,7 +769,7 @@
   <div class="wrap">
     <div class="sech"><h2>3×3 Barna</h2><em>Westfield Glòries · esport al carrer</em></div>
     <div class="split rev">
-      <div class="split-media"><img src="/presentacio/img/carrer-bg.jpg" alt="Torneig 3x3 Barna a Westfield Glòries, amb la Torre Glòries al fons" loading="lazy"></div>
+      <div class="split-media"><img src="img/3x3-pista.jpg" alt="Pista del 3x3 Barna muntada a la plaça de Westfield Glòries, amb públic al voltant" loading="lazy"></div>
       <div class="split-txt">
         <p class="lab">· Esport al carrer</p>
         <div class="stat-big">+110</div><span>Equips participants</span>
@@ -771,6 +782,13 @@
         <p><a class="inline-link" href="/3x3/">Tota la informació del 3×3 Barna →</a></p>
       </div>
     </div>
+    <div class="gal">
+      <span class="gal-im"><img src="img/3x3-partit.jpg" alt="Partit del 3x3 Barna, amb públic seguint el joc" loading="lazy"></span>
+      <span class="gal-im"><img src="img/3x3-public.jpg" alt="Públic al voltant de la pista del 3x3 Barna" loading="lazy"></span>
+      <span class="gal-im"><img src="img/3x3-photocall.jpg" alt="Equip del 3x3 Barna davant del photocall amb els logos de Westfield Glòries i Time Chamber" loading="lazy"></span>
+    </div>
+    <p class="sponsor-note">Fotografies del torneig: Foto Jané. Galeria completa a
+    <a class="inline-link" href="/fotos-3x3/">les fotos del 3×3</a>.</p>
   </div>
 </section>
 
