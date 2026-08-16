@@ -580,14 +580,15 @@ img { max-width: 100%; height: auto; display: block; }
 .e-par .foot { border-top: 1px solid rgba(255,255,255,0.4); padding: 16px clamp(20px, 4vw, 40px); font-size: 13px; }
 .e-par .foot a { color: #fff; }
 
-/* ==== LIGHT / EXTENSA · dues portades, un commutador ====
-   Per defecte (sense JS, o abans que corri): light a mòbil i tauleta,
-   extensa a escriptori. Un cop hi ha preferència (--view-toggle--), la tria
-   explícita mana a qualsevol amplada. Res es duplica: calendari, formulari
-   i la resta de la pàgina són els mateixos als dos modes. */
+/* ==== FRANGES / EXTENSA · dues portades, un commutador ====
+   Per defecte (sense JS, o abans que corri): franges a mòbil i tauleta
+   (≤1024px, que inclou el navegador d'Instagram), extensa a escriptori.
+   Un cop hi ha preferència (--view-toggle--), la tria explícita mana a
+   qualsevol amplada. Res es duplica: calendari, formulari i la resta de
+   la pàgina són els mateixos als dos modes. */
 .only-light { display: none; }
 .only-extensa { display: block; }
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   html:not([data-view]) .only-light { display: block; }
   html:not([data-view]) .only-extensa { display: none; }
 }
@@ -972,10 +973,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         </span>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="head-wa">Contacte</a>
       </nav>
-      <!-- Sempre visible, a tots els amplades: light per defecte a mòbil
-           i tauleta, extensa a escriptori, i sempre es pot canviar. -->
+      <!-- Sempre visible, a totes les amplades: franges per defecte a mòbil,
+           tauleta i Instagram; extensa a escriptori, i sempre es pot canviar. -->
       <button class="view-toggle" id="viewToggle" type="button" aria-live="polite">
-        <span class="vt-ic" aria-hidden="true"></span><span id="viewToggleLbl">Light</span>
+        <span class="vt-ic" aria-hidden="true"></span><span id="viewToggleLbl">Franges</span>
       </button>
     </div>
   </div>
@@ -991,7 +992,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <a href="/organigrama/" data-cta="menu-organigrama">Organigrama <small>junta directiva</small></a>
       <a href="/femeni/" data-cta="menu-femeni">Bàsquet femení <small>8 equips</small></a>
       <a href="/posicionament/" data-cta="menu-posicionament">Posicionament <small>vs. Barça, Penya…</small></a>
-      <a href="/presentacio/" data-cta="menu-presentacio">Presentacions <small>què és el Grup Barna</small></a>
       <a href="/blog/" data-cta="menu-blog">Blog <small>guies</small></a>
       <a href="/grup-barna-dades-oficials/" data-cta="menu-dades">Dades oficials</a>
     </div>
@@ -1352,7 +1352,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <a href="/escoleta/" data-cta="escoleta-pagina"><span class="list-t">Escoleta · 4 a 8 anys</span><span class="list-s">cbgrupbarna.info/escoleta</span></a>
         <a href="/escoleta/#historia" data-cta="historia-escoleta"><span class="list-t">Història de l'Escoleta</span><span class="list-s">Des de 1965</span></a>
         <a href="/escoleta/materials/escoleta-cb-grup-barna.pdf" download data-cta="escoleta-pdf-list" data-descarrega="El dossier de l'Escoleta"><span class="list-t">Escoleta en PDF</span><span class="list-s">Descarrega'l</span></a>
-        <a href="/presentacio/" data-cta="presentacio-club"><span class="list-t">Presentació del club</span><span class="list-s">Empreses i institucions</span></a>
         <a href="/patrocinadors/" data-cta="sponsor-dossier"><span class="list-t">Patrocinadors i partners</span><span class="list-s">Nivells i contacte</span></a>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20per%20ser%20Patrocinador%2FPartner%20del%20club%20%F0%9F%A4%9D" target="_blank" rel="noopener" data-cta="patrocinador"><span class="list-t">Ser patrocinador</span><span class="list-s">WhatsApp</span></a>
         <a href="https://app.myplay.com/public-live?liveId=CBgrupBarna" target="_blank" rel="noopener" data-cta="myplay"><span class="list-t">Partits en directe</span><span class="list-s">MyPlay</span></a>
@@ -1421,10 +1420,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <a href="https://voluntarisgrupbarna-pixel.github.io/cbgrupbarna/patrocinis/dones.html" target="_blank" rel="noopener" data-cta="pres-dones">
 <span class="list-t">Patrocinis · Dones empresàries</span>
 <span class="list-s">Col·laboració amb el projecte femení</span>
-</a>
-        <a href="/presentacio/" data-cta="pres-empresa">
-<span class="list-t">Presentació d'empresa</span>
-<span class="list-s">Per a empreses i institucions</span>
 </a>
         <a href="/patrocinadors/" data-cta="pres-dossier-patrocinis">
 <span class="list-t">Dossier de patrocinis</span>
@@ -1586,15 +1581,16 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     el.textContent = DIES[d.getDay()] + ', ' + d.getDate() + ' ' + de + mes + ' de ' + d.getFullYear();
   })();
 
-  // ==== COMMUTADOR LIGHT / EXTENSA ====
-  // Per defecte: light a mòbil i tauleta (≤900px), extensa a escriptori.
+  // ==== COMMUTADOR FRANGES / EXTENSA ====
+  // Per defecte: franges a mòbil i tauleta (≤1024px) i dins del navegador
+  // d'Instagram o Facebook, sigui quina sigui l'amplada; extensa a escriptori.
   // Un cop es tria a mà, la preferència es desa i mana a qualsevol amplada.
   (function () {
     var btn = document.getElementById('viewToggle');
     var lbl = document.getElementById('viewToggleLbl');
     if (!btn || !lbl) return;
     var root = document.documentElement;
-    var mq = window.matchMedia('(max-width: 900px)');
+    var mq = window.matchMedia('(max-width: 1024px)');
     var KEY = 'cbgb-view';
     var view = null;
     try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'extensa') view = saved; } catch (e) {}
@@ -1619,9 +1615,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     function efectiu() { return view || (mq.matches ? 'light' : 'extensa'); }
     function pinta() {
       var actual = efectiu();
-      lbl.textContent = actual === 'light' ? 'Light' : 'Extensa';
+      lbl.textContent = actual === 'light' ? 'Franges' : 'Extensa';
       btn.setAttribute('aria-label', 'Ara veus la versió ' + lbl.textContent.toLowerCase() + '. Toca per canviar a l\'altra.');
-      if (view) root.setAttribute('data-view', view); else root.removeAttribute('data-view');
+      if (view) root.setAttribute('data-view', view);
+      else root.removeAttribute('data-view');
     }
     btn.addEventListener('click', function () {
       view = efectiu() === 'light' ? 'extensa' : 'light';
