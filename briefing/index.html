@@ -355,7 +355,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <div class="dl-bar">
     <div class="dl-txt"><strong>Briefing complet en PDF</strong> · 16 pàgines A4 · llest per imprimir o enviar per correu</div>
     <a class="dl-btn" href="/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf" download
-       onclick="if(window.gtag)gtag('event','descarrega_briefing',{format:'pdf',lloc:'briefing_top'})">↓ Descarregar el PDF</a>
+       onclick="if(window.gtag)gtag('event','descarrega_briefing',{format:'pdf',lloc:'briefing_top'})" data-descarrega="El briefing del club">↓ Descarregar el PDF</a>
     <a class="dl-btn ghost" href="/briefing/materials.html">Tots els materials</a>
   </div>
 
@@ -684,7 +684,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <div class="dl-bar">
     <div class="dl-txt"><strong>Vols aquest briefing per enviar-lo?</strong> Descarrega'l en PDF i comparteix-lo amb premsa, partners o institucions.</div>
     <a class="dl-btn" href="/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf" download
-       onclick="if(window.gtag)gtag('event','descarrega_briefing',{format:'pdf',lloc:'briefing_peu'})">↓ Descarregar el PDF</a>
+       onclick="if(window.gtag)gtag('event','descarrega_briefing',{format:'pdf',lloc:'briefing_peu'})" data-descarrega="El briefing del club">↓ Descarregar el PDF</a>
   </div>
 
   <div class="footcard">
@@ -704,5 +704,6 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <div class="pagefoot"><span>CB Grup Barna · Briefing de club · <a href="/" style="color:inherit">cbgrupbarna.info</a> · <a href="/briefing/materials.html" style="color:inherit">Materials</a></span><span>Temporada 2025-26</span></div>
 
 </div>
+<script src="/js/descarrega.js" defer></script>
 </body>
 </html>

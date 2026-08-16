@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Token de GitHub · Administració · CB Grup Barna</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#2ea043}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
+  nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav img{width:34px;height:34px;object-fit:contain}
+  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t span{color:var(--red)}
+  nav a.back{margin-left:auto;font-size:.75rem;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:.4rem .8rem}
+  nav a.back:hover{border-color:var(--red);color:var(--txt)}
+  .wrap{max-width:640px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:2rem}
+  h1 span{color:var(--red)}
+  .sub{color:var(--muted);font-size:.88rem;margin:.3rem 0 1.5rem;line-height:1.55}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem;margin-bottom:1rem}
+  .fgroup{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem}
+  .field-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .field-input{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Outfit',sans-serif;font-size:.88rem}
+  .field-input:focus{outline:none;border-color:var(--red)}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .hint{font-size:.72rem;color:var(--muted);margin-top:.8rem;line-height:1.6}
+  .hint a{color:rgba(226,6,19,.85)}
+  .estat{display:flex;align-items:center;gap:.6rem;font-size:.85rem}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--muted);flex:none}
+  .dot.on{background:var(--green)}
+  h2{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;margin-bottom:.7rem}
+  h2 span{color:var(--red)}
+</style>
+</head>
+<body>
+<script src="/scripts/admin-gate.js"></script>
+<script>CBGBGate.protect(init);</script>
+
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="t">TOKEN DE <span>GITHUB</span></div>
+  <a class="back" href="/admin/">← Panell</a>
+</nav>
+
+<div class="wrap">
+  <h1>GUARDAR EL TOKEN <span>UNA SOLA VEGADA</span></h1>
+  <p class="sub">
+    El token es guarda <strong>xifrat amb la contrasenya del club</strong> dins del repositori
+    (admin/token.enc.json). A partir de llavors, entrar la contrasenya a qualsevol dispositiu
+    ja el recupera sol: no cal tornar-lo a enganxar mai més a la galeria, als partits ni enlloc.
+  </p>
+
+  <div class="card">
+    <h2>ESTAT</h2>
+    <div class="estat"><span class="dot" id="dot"></span><span id="estat-txt">Comprovant…</span></div>
+    <div class="estat" style="margin-top:.5rem"><span class="dot" id="dot-local"></span><span id="estat-local"></span></div>
+  </div>
+
+  <div class="card">
+    <h2>GUARDAR O <span>CANVIAR</span> EL TOKEN</h2>
+    <div class="fgroup">
+      <label class="field-label" for="tok">GitHub Personal Access Token</label>
+      <input class="field-input" type="password" id="tok" placeholder="github_pat_… o ghp_…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="fgroup">
+      <label class="field-label" for="pass">Contrasenya del club (per xifrar-lo)</label>
+      <input class="field-input" type="password" id="pass" autocomplete="off">
+    </div>
+    <button class="btn" id="save">🔐 Xifrar i guardar al repositori</button>
+    <div class="err" id="err"></div>
+    <div class="ok" id="okmsg"></div>
+    <p class="hint">
+      Millor un token <em>fine-grained</em> limitat només a aquest repositori amb permís
+      <em>Contents: Read and write</em>: si mai es filtrés, només afectaria la web, no tot el compte.
+      Es crea a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens</a>.
+      Qui tingui la contrasenya del club pot recuperar el token: si canvies la contrasenya,
+      torna a guardar-lo aquí.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>TREURE'L DEL REPOSITORI</h2>
+    <p class="sub" style="margin-bottom:.8rem">Esborra admin/token.enc.json. Cada dispositiu tornarà a demanar el token com abans.</p>
+    <button class="btn ghost" id="del">🗑 Esborrar el token xifrat</button>
+  </div>
+</div>
+
+<script>
+const OWNER = 'voluntarisgrupbarna-pixel';
+const REPO  = 'cbgrupbarna-info';
+const BRANCH = 'main';
+const VAULT_PATH = 'admin/token.enc.json';
+
+const $ = id => document.getElementById(id);
+function say(el, msg) { $('err').style.display = $('okmsg').style.display = 'none'; $(el).textContent = msg; $(el).style.display = 'block'; }
+
+async function gh(path, method = 'GET', token, body = null) {
+  const res = await fetch(`https://api.github.com${path}`, {
+    method,
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+      ...(body ? { 'Content-Type': 'application/json' } : {}),
+    },
+    body: body ? JSON.stringify(body) : null,
+  });
+  if (!res.ok) throw new Error(`GitHub ${res.status}: ${await res.text()}`);
+  return res.status === 204 ? null : res.json();
+}
+
+async function vaultSha(token) {
+  try { return (await gh(`/repos/${OWNER}/${REPO}/contents/${VAULT_PATH}?ref=${BRANCH}`, 'GET', token)).sha; }
+  catch { return null; }
+}
+
+async function refreshEstat() {
+  try {
+    const r = await fetch('/admin/token.enc.json', { cache: 'no-store' });
+    $('dot').className = 'dot' + (r.ok ? ' on' : '');
+    $('estat-txt').textContent = r.ok
+      ? 'Hi ha un token xifrat guardat al repositori.'
+      : 'Encara no hi ha cap token guardat al repositori.';
+  } catch { $('estat-txt').textContent = 'No s\'ha pogut comprovar.'; }
+  const local = !!localStorage.getItem('gh_admin_token');
+  $('dot-local').className = 'dot' + (local ? ' on' : '');
+  $('estat-local').textContent = local
+    ? 'Aquest dispositiu ja té el token carregat.'
+    : 'Aquest dispositiu encara no té el token carregat.';
+}
+
+function init() {
+  refreshEstat();
+
+  $('save').onclick = async () => {
+    const token = $('tok').value.trim();
+    const pass = $('pass').value;
+    if (!token) return say('err', 'Enganxa el token.');
+    if (!await CBGBGate.vault.checkPass(pass)) return say('err', 'La contrasenya del club no és correcta.');
+    $('save').disabled = true;
+    try {
+      // 1 · Comprovar que el token pot escriure en aquest repositori
+      const repo = await gh(`/repos/${OWNER}/${REPO}`, 'GET', token);
+      if (!repo.permissions || !repo.permissions.push)
+        throw new Error('Aquest token no té permís d\'escriptura sobre el repositori.');
+      // 2 · Xifrar amb la contrasenya del club
+      const vault = await CBGBGate.vault.seal(pass, token);
+      vault.updated = new Date().toISOString().slice(0, 10);
+      // 3 · Pujar-lo al repositori amb el mateix token
+      const body = {
+        message: 'admin: actualitza el token xifrat (token.enc.json)',
+        content: btoa(JSON.stringify(vault, null, 2)),
+        branch: BRANCH,
+      };
+      const sha = await vaultSha(token);
+      if (sha) body.sha = sha;
+      await gh(`/repos/${OWNER}/${REPO}/contents/${VAULT_PATH}`, 'PUT', token, body);
+      // 4 · Deixar-lo també carregat en aquest dispositiu
+      localStorage.setItem('gh_admin_token', token);
+      $('tok').value = $('pass').value = '';
+      say('okmsg', 'Fet. El token queda guardat i xifrat: a partir d\'ara, amb la contrasenya del club n\'hi ha prou a qualsevol dispositiu (d\'aquí un parell de minuts, quan es publiqui el canvi).');
+      refreshEstat();
+    } catch (e) {
+      say('err', e.message || String(e));
+    }
+    $('save').disabled = false;
+  };
+
+  $('del').onclick = async () => {
+    if (!confirm('Segur que vols esborrar el token xifrat del repositori?')) return;
+    const token = localStorage.getItem('gh_admin_token') || $('tok').value.trim();
+    if (!token) return say('err', 'Cal el token per poder esborrar-lo (enganxa\'l a dalt).');
+    $('del').disabled = true;
+    try {
+      const sha = await vaultSha(token);
+      if (!sha) throw new Error('No hi ha cap token guardat al repositori.');
+      await gh(`/repos/${OWNER}/${REPO}/contents/${VAULT_PATH}`, 'DELETE', token, {
+        message: 'admin: esborra el token xifrat', sha, branch: BRANCH,
+      });
+      say('okmsg', 'Esborrat del repositori.');
+      refreshEstat();
+    } catch (e) { say('err', e.message || String(e)); }
+    $('del').disabled = false;
+  };
+}
+</script>
+</body>
+</html>
