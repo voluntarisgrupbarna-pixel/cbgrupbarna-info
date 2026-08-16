@@ -3,8 +3,18 @@
 
 window.BRIEFING_MATERIALS = [
   {
+    "titol": "El Barna, amb dades · Informe mestre (PDF)",
+    "desc": "La fusió de les tres investigacions del club: l'evidència científica sobre formació (15 troballes i pla de 10 moviments), el catàleg d'entrevistes verificades de Marc Gasol (2014-2026), i el benchmark complet club a club — 22 clubs formatius per comunitat digital i 13 per equips federats a la FCBQ. Amb nota metodològica de discrepàncies.",
+    "tipus": "Informe",
+    "partner": null,
+    "fitxer": "el-barna-con-datos-informe-maestro.pdf",
+    "ext": "pdf",
+    "mida": 437,
+    "data": "2026-08-16"
+  },
+  {
     "titol": "Informe: Formació, evidència i Gasol (PDF)",
-    "desc": "La investigació del club sobre bàsquet de formació en tres parts: el resum executiu íntegre (15 troballes, pla de 10 moviments, argumentari i xifres vetades), el mapa de la tesi capítol a capítol, i el catàleg complet d'entrevistes verificades de Marc Gasol sobre formació (2014-2026).",
+    "desc": "Versió prèvia, només el bloc formatiu: el resum executiu íntegre de la investigació (15 troballes, pla de 10 moviments, argumentari i xifres vetades), el mapa de la tesi capítol a capítol, i el catàleg d'entrevistes de Marc Gasol. Contingut inclòs dins l'informe mestre.",
     "tipus": "Informe",
     "partner": null,
     "fitxer": "informe-formacion-evidencia-gasol.pdf",
