@@ -682,22 +682,25 @@ function isFlickr(ev) { return ev.source === 'flickr'; }
 function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
 function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v|avi)$/i.test(ref || ''); }
 
-// wsrv.nl: proxy gratuït que redimensiona i comprimeix a WebP al vol qualsevol
-// imatge pública. Les fotos pujades des de l'admin es guarden a mida original
-// (sovint 1-2 MB) i sense això la graella carregaria totes les fotos a mida
-// completa — d'aquí la lentitud. Els vídeos no es toquen (wsrv és només imatges).
+// Les versions web i miniatura les genera scripts/build-gallery-images.py i es
+// serveixen des del domini propi. Abans passaven per wsrv.nl, un proxy extern
+// que havia de descarregar cada original —de fins a 14 MB— i encongir-lo al vol:
+// d'aquí la lentitud, i d'aquí que les fotos de les famílies acabessin passant
+// per un tercer. Els originals només es toquen per descarregar-los.
 function repoUrl(ev, ref) { return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`; }
-function wsrv(url, w) { return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=${w}&q=75&output=webp`; }
+function derivada(carpeta, ev, ref) {
+  return `/fotos/${carpeta}/${ev.id}/${ref.replace(/\.[^.]+$/, '.webp')}`;
+}
 
 function photoThumb(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : wsrv(repoUrl(ev, ref), 400);
+  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : derivada('thumb', ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_q.jpg`;
   return THUMB(ref);
 }
 function photoFull(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : wsrv(repoUrl(ev, ref), 1600);
+  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : derivada('web', ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_b.jpg`;
   return FULL(ref);
 }
@@ -716,7 +719,7 @@ function eventCover(ev) {
   if (isRepo(ev)) {
     const ref = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
     if (!ref) return PLACEHOLDER;
-    return wsrv(repoUrl(ev, ref), 500);
+    return derivada('thumb', ev, ref);
   }
   return THUMB(ev.cover);
 }
