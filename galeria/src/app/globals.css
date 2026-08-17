@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    --red: #C8102E;
-    --red-dark: #a81318;
+    --red: #E20613;
+    --red-dark: #A8040E;
     --black: #040404;
     --gray-1: #181818;
     --gray-2: #252525;
@@ -29,7 +29,7 @@
   }
 
   ::selection {
-    background-color: #C8102E;
+    background-color: #E20613;
     color: #F2EDE6;
   }
 }
@@ -102,7 +102,7 @@
   background: #181818;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C8102E;
+  background: #E20613;
   border-radius: 3px;
 }
 

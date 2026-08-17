@@ -6,12 +6,8 @@
 <meta name="theme-color" content="#0A0A0A">
 <title>Campus de bàsquet a Barcelona · CB Grup Barna | Estiu al Clot</title>
 <meta name="description" content="Campus de bàsquet a Barcelona per a nens i nenes de base. El campus d'estiu del CB Grup Barna al Clot, Districte de Sant Martí: setmanes intensives de tecnificació, grups per edat i places limitades. Informació i llista d'espera.">
-<meta name="keywords" content="campus bàsquet Barcelona, campus baloncesto Barcelona, campus estiu bàsquet, grup barna campus, campus tecnificació bàsquet Barcelona">
+<meta name="keywords" content="campus bàsquet Barcelona, campus baloncesto Barcelona, academia de baloncesto Barcelona verano, campus estiu bàsquet, grup barna campus, campus tecnificació bàsquet Barcelona">
 <link rel="canonical" href="https://cbgrupbarna.info/campus/">
-<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/campus/">
-<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/campus/">
-<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/campus/">
-<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/campus/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -27,15 +23,45 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 <style>
-/* ==== SELECTOR D'IDIOMA ==== */
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-.lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; color: var(--red); }
-.lang-switch .sep { opacity: 0.25; }
+  .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 38px 0; }
+  .photo-strip figure { margin: 0; }
+  .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
+  @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Programa setmanal en targetes: número + dates + focus, com el
+     calendari del microsite de Time Chamber però amb el llenguatge del Barna. */
+  .weeks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 720px) { .weeks { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1040px) { .weeks { grid-template-columns: repeat(3, 1fr); } }
+  .week { background: var(--paper); padding: clamp(20px, 2.6vw, 28px) clamp(18px, 2.4vw, 24px); }
+  .week b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; color: var(--red); line-height: 1; }
+  .week time { display: block; margin-top: 10px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .week h3 { font-size: 14px; letter-spacing: 0.1em; margin: 10px 0 6px; }
+  .week p { font-size: 13.5px; color: var(--ink-2); }
+
+  /* Preus: dues opcions, la recomanada amb vora vermella. */
+  .price-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 620px) { .price-cards { grid-template-columns: 1fr 1fr; } }
+  .price-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(22px, 3vw, 30px); }
+  .price-card.top { border-color: var(--red); position: relative; }
+  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .price-card.top .tag { color: var(--red); }
+  .price-card b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; margin: 8px 0 4px; }
+  .price-card .sched { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
+  .price-card ul { list-style: none; }
+  .price-card li { position: relative; padding: 7px 0 7px 18px; font-size: 13.5px; color: var(--ink-2); border-top: 1px solid var(--line); }
+  .price-card li:first-child { border-top: 0; }
+  .price-card li::before { content: '·'; position: absolute; left: 4px; color: var(--red); font-weight: 700; }
+  .price-note { font-size: 13.5px; color: var(--ink-2); max-width: 62ch; }
+
+  /* Crida forta a la galeria completa, no només les 6 fotos triades. */
+  .gal-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; justify-content: space-between;
+    border: 1px solid var(--line); background: var(--paper-2); padding: clamp(18px, 2.6vw, 26px); margin-top: 4px; }
+  .gal-cta p { font-size: 13.5px; color: var(--ink-2); margin: 0; max-width: 46ch; }
+  .gal-cta .btn { flex-shrink: 0; }
 </style>
 <script type="application/ld+json">
 {
@@ -48,6 +74,7 @@
       "alternateName": [
         "Campus de baloncesto en Barcelona",
         "Campus d'estiu de bàsquet Barcelona",
+        "Campus de la academia de baloncesto en Barcelona",
         "Grup Barna Campus"
       ],
       "description": "Campus de bàsquet a Barcelona per a nens i nenes de base. El campus d'estiu del CB Grup Barna al Clot, Districte de Sant Martí: setmanes intensives de tecnificació, grups per edat i places limitades. Informació i llista d'espera.",
@@ -163,6 +190,7 @@
   ]
 }
 </script>
+<script src="/js/galetes.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -173,17 +201,17 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
-      <a href="/escoleta/">Escoleta</a>
-      <a href="/campus/" class="opt">Campus</a>
-      <a href="/3x3/" class="opt">3x3</a>
-      <a href="/blog/" class="opt">Blog</a>
-      <a href="/premsa/" class="opt">Premsa</a>
+      <a href="/club/">Club</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
+      <a href="/partits/">Dies de partit</a>
       <a href="/patrocinadors/" class="opt">Patrocinadors</a>
-      <a href="/#info">Informació</a>
+      <a href="/campus/" class="opt">Campus</a>
+      <a href="/magics/" class="opt">Màgics</a>
+      <a href="/3x3/" class="opt">3x3</a>
+      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/fotos/" class="opt">Galeria</a>
+      <a href="/premsa/">Premsa</a>
     </nav>
-    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-      <a href="/campus/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/campus/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/campus/" hreflang="en">EN</a>
-    </div>
   </div>
 </header>
 <main id="main">
@@ -199,6 +227,8 @@
       <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20informaci%C3%B3%20del%20Campus%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna"
          class="btn red" target="_blank" rel="noopener" data-cta="campus-wa">Demanar informació</a>
       <a href="/#info" class="btn ghost" data-cta="campus-form">Avisa'm de la propera edició</a>
+      <a href="https://timechamber.skywork.website/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-web-timechamber">Web del campus Time Chamber →</a>
+      <a href="/presentacions/campus-timechamber/" class="btn ghost" data-cta="campus-presentacio">Veure la presentació →</a>
     </div>
     <div class="phead-media">
       <img src="/img/campus-hero.webp" alt="Jugadores del campus de bàsquet del CB Grup Barna amb la samarreta del campus" width="1200" height="675" fetchpriority="high">
@@ -218,20 +248,118 @@
     <h2>Com s'organitza</h2>
     <p>Cada setmana té un focus propi, de manera que qui ve més d'una setmana no repeteix continguts.
     Aquests són els mòduls que ha treballat el club en les darreres edicions:</p>
-    <ul>
-      <li><strong>Flow Camp</strong> — lectura de joc i presa de decisions.</li>
-      <li><strong>TC Basics</strong> — fonaments: peus, equilibri, mecànica.</li>
-      <li><strong>Shooting Academy</strong> — tir, en totes les seves situacions.</li>
-      <li><strong>One &amp; One Mastery</strong> — el joc d'un contra un.</li>
-      <li><strong>Ballhandling Lab</strong> — maneig de pilota i bot sota pressió.</li>
-      <li><strong>Skills Lab Experience</strong> — treball combinat d'habilitats.</li>
-    </ul>
+
+    <div class="weeks">
+      <div class="week">
+        <b>01</b>
+        <time>23–27 juny</time>
+        <h3>Flow Camp</h3>
+        <p>Lectura de joc i presa de decisions.</p>
+      </div>
+      <div class="week">
+        <b>02</b>
+        <time>30 juny–4 juliol</time>
+        <h3>TC Basics</h3>
+        <p>Fonaments: peus, equilibri, mecànica.</p>
+      </div>
+      <div class="week">
+        <b>03</b>
+        <time>7–11 juliol</time>
+        <h3>Shooting Academy</h3>
+        <p>Tir, en totes les seves situacions.</p>
+      </div>
+      <div class="week">
+        <b>04</b>
+        <time>14–18 juliol</time>
+        <h3>One &amp; One Mastery</h3>
+        <p>El joc d'un contra un: finta i creativitat ofensiva.</p>
+      </div>
+      <div class="week">
+        <b>05</b>
+        <time>21–25 juliol</time>
+        <h3>Ballhandling Lab</h3>
+        <p>Maneig de pilota i bot sota pressió.</p>
+      </div>
+      <div class="week">
+        <b>06</b>
+        <time>28 juliol–1 agost</time>
+        <h3>Skills Lab Experience</h3>
+        <p>Treball combinat d'habilitats: el broche de l'edició.</p>
+      </div>
+    </div>
+    <p class="tbl-note" style="font-size:13.5px;color:var(--ink-2)">Dates orientatives, calcades sobre l'edició
+    de referència. Es confirmen a aquesta pàgina i a Instagram abans de l'obertura d'inscripcions de cada any.</p>
 
     <div class="facts">
       <div><b><em>50</em></b><span>Places per setmana</span></div>
       <div><b>1965</b><span>Any de fundació del club</span></div>
       <div><b>+34</b><span>Equips federats</span></div>
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
+    </div>
+
+    <h2>Preus</h2>
+    <p>Dues modalitats segons horari, amb àpat inclòs a la jornada completa. Places obertes a
+    jugadors i jugadores del Barna i de fora del club.</p>
+    <div class="price-cards">
+      <div class="price-card top">
+        <span class="tag">Recomanat</span>
+        <b>195 €</b>
+        <p class="sched">Setmana completa · 9h a 17h</p>
+        <ul>
+          <li>Àpat de migdia inclòs</li>
+          <li>Servei d'acollida des de les 9h</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tag">Mitja jornada</span>
+        <b>160 €</b>
+        <p class="sched">9h a 13:30h</p>
+        <ul>
+          <li>Mateixos grups i mateix focus setmanal</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">Reserva de plaça amb pagament fraccionat en fins a 3 terminis. Cada any s'obre un
+    descompte per inscripció anticipada; les dates i el codi es publiquen a aquesta pàgina i a
+    <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a> quan
+    s'obren les inscripcions.</p>
+
+    <h2>El campus, en imatges</h2>
+    <p>Fotos de la darrera edició amb Time Chamber, a La Nau del Clot.</p>
+    <div class="photo-strip">
+      <figure><img src="img/campus-2026-01.jpg" alt="Sessió de vídeo amb l'entrenador durant el campus de bàsquet del CB Grup Barna" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="img/campus-2026-02.jpg" alt="Jugadors i jugadores del campus tirant a cistella a La Nau del Clot" loading="lazy" decoding="async" width="900" height="675"></figure>
+      <figure><img src="img/campus-2026-03.jpg" alt="Entrenador del campus explicant un exercici amb la pilota" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="img/campus-2026-04.jpg" alt="Jugadora del campus en posició de tir" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="img/campus-2026-05.jpg" alt="Jugador del campus botant la pilota entre companys" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="img/campus-2026-06.jpg" alt="Grup de jugadors del campus fent un exercici de tir" loading="lazy" decoding="async" width="900" height="1350"></figure>
+    </div>
+    <div class="gal-cta">
+      <p><strong>Aquestes són sis fotos triades.</strong> La galeria completa de l'estiu — totes les setmanes,
+      amb foto i vídeo — és a la Galeria Fotogràfica del club.</p>
+      <a href="/fotos/" class="btn ghost" data-cta="campus-galeria-completa">Veure la galeria de l'estiu →</a>
+    </div>
+
+    <h2>La seu</h2>
+    <p><strong>La Nau del Clot</strong>, Carrer de la Llacuna 172, 08018 Barcelona — el punt esportiu
+    principal del CB Grup Barna, al barri del Clot. Horari del campus: 9h–13:30h en mitja jornada,
+    9h–17h en jornada completa, amb servei d'acollida i àpat de migdia inclòs a la jornada completa.</p>
+
+    <div class="franges" aria-label="Altres portes del club">
+      <a class="franja" href="/escoleta/" data-cta="campus-franja-escoleta">
+        <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
+        <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Si encara no ha començat i té entre 4 i 7 anys, el camí és aquest.</span></span>
+        <span class="franja-go"><em>4 a 7 anys</em><i></i></span>
+      </a>
+      <a class="franja franja--red" href="/partits/" data-cta="campus-franja-dies-partit">
+        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
+      </a>
+      <a class="franja" href="/3x3/" data-cta="campus-franja-3x3">
+        <span class="franja-ph"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Jugadores del CB Grup Barna amb l'equipació del club"></span>
+        <span class="franja-tx"><span class="franja-t">3x3 Barcelona</span><span class="franja-s">El torneig urbà del club a Westfield Glòries.</span></span>
+        <span class="franja-go"><em>Cada estiu</em><i></i></span>
+      </a>
     </div>
 
     <h2>A qui va dirigit</h2>
@@ -250,11 +378,11 @@
     demanar l'avís previ: el club escriu a qui és a la llista quan s'obren les places, un dia abans
     de publicar-ho.</p>
 
-    <h2>Preguntes freqüents</h2>
+    <h2 id="faq">Preguntes freqüents</h2>
     <div class="faq"><details><summary>Per a quines edats és el campus de bàsquet?</summary><p>El campus del CB Grup Barna és per a jugadors i jugadores de base, des de l'edat de l'Escoleta fins a categories cadet i júnior. Els grups es fan per edat i nivell, de manera que un nen o nena que comença no entrena amb qui ja porta anys competint.</p></details><details><summary>Cal jugar al CB Grup Barna per apuntar-s'hi?</summary><p>No. El campus és obert a jugadors i jugadores de qualsevol club de Barcelona i de la província. Cada setmana hi ha places per a gent del Barna i places per a gent de fora.</p></details><details><summary>Quantes places hi ha per setmana?</summary><p>El campus treballa amb un límit aproximat de 50 places per setmana per mantenir la ràtio d'entrenador per jugador. Les setmanes s'omplen per ordre d'inscripció i les darreres edicions s'han completat abans de començar.</p></details><details><summary>On es fa el campus?</summary><p>Al barri del Clot, Districte de Sant Martí de Barcelona. La Nau del Clot és el punt esportiu principal del CB Grup Barna.</p></details><details><summary>Quan obren les inscripcions de la propera edició?</summary><p>Les dates de la propera edició s'anuncien a aquesta pàgina i a Instagram (@cbgrupbarna). Qui vulgui rebre l'avís abans que s'obri al públic pot demanar-ho pel WhatsApp del club (+34 698 425 153) i entra a la llista d'avisos.</p></details></div>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
-    <div class="closer"><h2>Vull que m'aviseu del proper campus</h2><p>Deixa'ns el contacte i t'escrivim quan s'obrin les inscripcions, abans de publicar-les.</p><div class="btn-row"><a href="/#info" class="btn red" data-cta="campus-closer-form">Demanar informació</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20info%20del%20Campus%20de%20b%C3%A0squet" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">WhatsApp del club</a></div></div>
+    <div class="closer"><h2>Vull que m'aviseu del proper campus</h2><p>Deixa'ns el contacte i t'escrivim quan s'obrin les inscripcions, abans de publicar-les.</p><div class="btn-row"><a href="/#info" class="btn red" data-cta="campus-closer-form">Demanar informació</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20info%20del%20Campus%20de%20b%C3%A0squet" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">WhatsApp del club</a><a href="/presentacions/campus-timechamber/" class="btn ghost" data-cta="campus-closer-presentacio">Veure la presentació</a></div></div>
     </div>
   </div>
 </div>
@@ -266,14 +394,19 @@
         <h3>El Barna</h3>
         <a href="/escoleta/">Escola de bàsquet</a>
         <a href="/campus/">Campus de bàsquet</a>
+        <a href="/magics/">Barna Màgics</a>
         <a href="/3x3/">Torneig 3x3</a>
+        <a href="/cistella-petita/">Cistella Petita</a>
         <a href="/patrocinadors/">Patrocinadors i partners</a>
+        <a href="/instal-lacions/">Instal·lacions</a>
+        <a href="/organigrama/">Organigrama</a>
+        <a href="/posicionament/">Posicionament del club</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Partits i resultats</a>
-        <a href="/partits/calendaris/">Calendaris per equip</a>
+        <a href="/partits/">Dies de partit</a>
+        <a href="/partits/calendaris/">Dies de partit per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
@@ -282,9 +415,16 @@
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
+        <a href="/faq/">Preguntes freqüents</a>
         <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/politica-de-privacitat/">Política de privacitat</a>
+        <a href="/avis-legal/">Avís legal</a>
+        <a href="/politica-de-privacitat/#galetes">Galetes</a>
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>
