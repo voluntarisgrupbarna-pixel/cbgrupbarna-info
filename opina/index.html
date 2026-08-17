@@ -457,12 +457,12 @@ details.tpl[open] summary::after { content: '–'; }
         <div class="panel">
           <h3 data-t="qrH">Codi QR</h3>
           <div class="qr-row">
-            <img src="qr.svg" alt="Codi QR cap a cbgrupbarna.info/opina" width="128" height="128" loading="lazy">
+            <img src="/opina/qr.svg" alt="Codi QR cap a cbgrupbarna.info/opina" width="128" height="128" loading="lazy">
             <p data-t="qrP">Per al taulell del pavelló, els cartells del partit o la pantalla del descans. És vectorial: s'amplia tant com calgui sense perdre qualitat.</p>
           </div>
           <div class="btn-row">
-            <a class="btn ghost" href="qr.svg" download="qr-opina-cbgrupbarna.svg" data-t="qrD">Descarregar QR</a>
-            <a class="btn ghost" href="print/cartell-opina-a4.pdf" download data-t="qrC">Cartell A4</a>
+            <a class="btn ghost" href="/opina/qr.svg" download="qr-opina-cbgrupbarna.svg" data-t="qrD">Descarregar QR</a>
+            <a class="btn ghost" href="/opina/print/cartell-opina-a4.pdf" download data-t="qrC">Cartell A4</a>
           </div>
         </div>
       </div>
@@ -832,7 +832,7 @@ https://cbgrupbarna.info/opina
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
   }
 
-  fetch('opina.json?t=' + Math.floor(Date.now() / 60000))
+  fetch('/opina/opina.json?t=' + Math.floor(Date.now() / 60000))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (data) {
       if (data) {
