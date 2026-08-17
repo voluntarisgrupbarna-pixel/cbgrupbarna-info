@@ -513,6 +513,47 @@ function auditGenerative(pageResults) {
   out.signals.pagesWithAuthor = withAuthor;
   if (withAuthor < 3) out.issues.push({ level: 'avís', code: 'sense-autoria', msg: 'poques pàgines declaren autor o editor a les dades estructurades' });
 
+  // Google no dona resultat enriquit a un article sense imatge, i una peça
+  // sense data de modificació sembla morta encara que no ho estigui.
+  const ARTICLE = new Set(['Article', 'Report', 'ScholarlyArticle', 'BlogPosting', 'NewsArticle', 'TechArticle']);
+  const noImage = [], noModified = [];
+  for (const p of all) {
+    for (const n of p.info.jsonld || []) {
+      const walk = (x) => {
+        if (Array.isArray(x)) return x.forEach(walk);
+        if (!x || typeof x !== 'object') return;
+        const t = Array.isArray(x['@type']) ? x['@type'] : [x['@type']];
+        if (t.some((y) => ARTICLE.has(y))) {
+          if (!x.image) noImage.push(p.url);
+          if (!x.dateModified) noModified.push(p.url);
+        }
+        for (const [k, v] of Object.entries(x)) {
+          if (k === '@type') continue;
+          if (k === 'citation' || k === 'isBasedOn') continue;  // obra de tercers
+          walk(v);
+        }
+      };
+      walk(n);
+    }
+  }
+  out.signals.articlesWithoutImage = noImage.length;
+  out.signals.articlesWithoutDateModified = noModified.length;
+  if (noImage.length) out.issues.push({ level: 'avís', code: 'article-sense-imatge', msg: `${noImage.length} articles sense \`image\`: Google no els donarà resultat enriquit`, sample: [...new Set(noImage)].slice(0, 6) });
+  if (noModified.length) out.issues.push({ level: 'avís', code: 'article-sense-data', msg: `${noModified.length} articles sense \`dateModified\``, sample: [...new Set(noModified)].slice(0, 6) });
+
+  // Consolidació d'entitat: quantes pàgines pengen del mateix @id del club.
+  const clubId = 'https://cbgrupbarna.info/#club';
+  const linked = all.filter((p) => JSON.stringify(p.info.jsonld || []).includes(clubId)).length;
+  out.signals.pagesLinkedToClubEntity = `${linked} de ${all.length}`;
+  if (linked / all.length < 0.6) {
+    out.issues.push({ level: 'avís', code: 'entitat-dispersa', msg: `només ${linked} de ${all.length} pàgines es refereixen al mateix @id del club` });
+  }
+
+  // Caixa de cerca de Google: només surt si el lloc la declara.
+  const hasSearch = all.some((p) => JSON.stringify(p.info.jsonld || []).includes('SearchAction'));
+  out.signals.searchAction = hasSearch;
+  if (!hasSearch) out.issues.push({ level: 'avís', code: 'sense-searchaction', msg: 'cap pàgina declara SearchAction al node WebSite' });
+
   // Un nom clar i constant: el que la IA usarà per referir-s'hi.
   const orgTypes = ['SportsClub', 'SportsOrganization', 'LocalBusiness', 'Organization'];
   const names = new Set();

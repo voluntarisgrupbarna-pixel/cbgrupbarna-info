@@ -59,6 +59,34 @@ per aparèixer.
   (`main`, `nav`, `footer`), salts de nivell d'encapçalament, controls sense
   nom accessible, taules que desborden i pes del DOM.
 
+## Sobre auditories externes rebudes com a PDF
+
+Si algú aporta una auditoria SEO/GEO d'una eina externa, **verifica-la contra el
+disc abans d'actuar-hi**. El 17/08/2026 se'n va rebre una de 63 pàgines que
+citava en detall 21 URLs (`/club/`, `/femeni/`, `/historia/`,
+`/organigrama/`, `/instal-lacions/`, `/posicionament/`, `/documents/`,
+`/magics/`, `/cistella-petita/`...) que **no existeixen en aquest repositori**:
+són noms plausibles per a un club de bàsquet genèric, no els reals. Bona part
+de les captures «reconstruïdes» i cites textuals associades a aquestes URLs
+eren, per tant, fabricades.
+
+Dins d'aquell mateix informe hi havia també un grapat de troballes reals,
+confirmades una per una contra el codi: el tipogràfic «Respostem» → hauria de
+ser «Responem» (`index.html`), «Cerca un event…» → «Cerca un esdeveniment…»
+(`fotos/index.html`), i una inconsistència real i no trivial: l'edat de
+l'Escoleta es deia «4 a 7 anys» a nou fitxers i «4 a 8 anys» només a
+`escoleta/index.html` i a un bloc de `blog/com-triar-escola-basquet-barcelona/`
+— aquest últim fitxer es contradeia fins i tot amb si mateix (FAQ deia 4-7,
+cos de l'article deia 4-8). Es va poder resoldre sense preguntar perquè la
+pròpia lògica de transició del club («als 8 anys passen a premini») només
+quadra amb 4-7. També s'hi va fer evergreen tot el «60 anys» que és text viu
+(no citació d'un article de premsa real, que sí s'ha de deixar intacte amb el
+número que porti).
+
+La lliçó: una auditoria externa pot barrejar troballes certes amb estructura
+inventada. Grep contra el repositori cada afirmació concreta abans de tocar
+res — és ràpid i evita construir sobre un fonament fals.
+
 ## El que s'ha provat i s'ha descartat
 
 Hi va haver una prova de **col·lisions** que buscava text damunt de text. Es va
