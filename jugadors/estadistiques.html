@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Estadístiques de jugadors · Admin · CB Grup Barna</title>
+<link rel="canonical" href="https://cbgrupbarna.info/jugadors/estadistiques.html">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/jugadors/estadistiques.html">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/jugadors/estadistiques.html">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/jugadors/estadistiques.html">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/jugadors/estadistiques.html">
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,6 +66,11 @@
   .best{color:var(--win)}
   .note{font-size:.78rem;color:var(--muted);margin-top:.6rem;line-height:1.5}
   .tablewrap{overflow-x:auto}
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; color: var(--muted); transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 700; color: var(--ink); }
+  .lang-switch a:hover { opacity: 1; color: var(--red); }
+  .lang-switch .sep { opacity: 0.25; }
 </style>
 <script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
@@ -72,7 +82,12 @@
     <img src="/logo.png" alt="CB Grup Barna">
     <div class="t">ADMIN <span>ESTADÍSTIQUES</span></div>
   </div>
-  <div class="links"><a href="/jugadors/admin.html">← Plantilla</a></div>
+  <div class="links">
+    <a href="/jugadors/admin.html">← Plantilla</a>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/jugadors/estadistiques.html" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/jugadors/estadistiques.html" hreflang="es">ES</a><span class="sep">·</span><a href="/en/jugadors/estadistiques.html" hreflang="en">EN</a>
+    </div>
+  </div>
   <div class="nav-user" id="nav-user">
     <span id="nav-username"></span>
     <button class="btn ghost small" onclick="logout()">Sortir</button>

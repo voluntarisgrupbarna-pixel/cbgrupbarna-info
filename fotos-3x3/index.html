@@ -7,6 +7,10 @@
 <title>📸 Galeria 3x3 Westfield Glòries · 377 fotos · CB Grup Barna</title>
 <meta name="description" content="Troba la teva foto del 3x3 Westfield Glòries. 377 fotos del torneig de bàsquet urbà organitzat pel CB Grup Barna × Time Chamber × Westfield Glòries. Descarrega-la gratis i comparteix-la amb #3x3Glories.">
 <link rel="canonical" href="https://cbgrupbarna.info/fotos-3x3/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/fotos-3x3/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/fotos-3x3/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/fotos-3x3/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/fotos-3x3/">
 
 <!-- Open Graph / WhatsApp / Instagram -->
 <meta property="og:site_name" content="CB Grup Barna">
@@ -15,6 +19,8 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info/fotos-3x3/">
 <meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -58,6 +64,13 @@ a{color:inherit;text-decoration:none}
 .tb-back{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wd);
   border:1px solid var(--bd);padding:.5rem .8rem;border-radius:40px;transition:.2s}
 .tb-back:hover{border-color:var(--red);color:var(--cream)}
+
+/* SELECTOR D'IDIOMA */
+.lang-switch{display:flex;align-items:center;gap:6px;font-family:'Outfit',sans-serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wd)}
+.lang-switch a{padding:7px 2px;opacity:.55;color:var(--wd);transition:opacity .3s,color .3s}
+.lang-switch a.active{opacity:1;font-weight:600;color:var(--cream)}
+.lang-switch a:hover{opacity:1;color:var(--red)}
+.lang-switch .sep{opacity:.3}
 
 /* HERO */
 .hero{position:relative;padding:3.4rem 0 2rem;overflow:hidden;
@@ -212,6 +225,9 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
     <img src="/premidonaesport/assets/img/logo-barna.webp" alt="CB Grup Barna">
     <span><span class="tb-name">CB Grup Barna</span><br><span class="tb-sub">El Clot · Barcelona · 1965</span></span>
   </a>
+  <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+    <a href="/fotos-3x3/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/fotos-3x3/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/fotos-3x3/" hreflang="en">EN</a>
+  </div>
   <a class="tb-back" href="/premidonaesport/comunitat/3x3-westfield.html">← El torneig 3x3</a>
 </header>
 

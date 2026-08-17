@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Cartel de victoria · CB Grup Barna</title>
+<link rel="canonical" href="https://cbgrupbarna.info/es/partits/cartell.html">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/partits/cartell.html">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/partits/cartell.html">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/partits/cartell.html">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/partits/cartell.html">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#3ddc84}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
+  nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav img{width:34px;height:34px;object-fit:contain}
+  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t span{color:var(--red)}
+  nav a{margin-left:auto;color:var(--muted);font-size:.8rem;text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:2rem}
+  h1 span{color:var(--red)}
+  .sub{color:var(--muted);font-size:.88rem;margin:.3rem 0 1.5rem;line-height:1.55}
+  h2{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;margin:1.5rem 0 .7rem}
+  h2 span{color:var(--red)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem}
+  .cols{display:grid;grid-template-columns:1fr 380px;gap:1.4rem;align-items:start}
+  @media(max-width:820px){.cols{grid-template-columns:1fr}}
+  label.fl{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);display:block;margin-bottom:.3rem}
+  select,input[type=file],input[type=text]{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Outfit',sans-serif;font-size:.87rem}
+  select:focus,input:focus{outline:none;border-color:var(--red)}
+  .fg{margin-bottom:.9rem}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.65rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn:disabled{opacity:.45;cursor:default}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .btn.small{padding:.35rem .7rem;font-size:.74rem}
+  .alert{display:none;background:linear-gradient(135deg,rgba(61,220,132,.14),rgba(200,16,46,.12));border:1px solid rgba(61,220,132,.4);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.4rem}
+  .alert b{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.04em;color:var(--green);display:block}
+  .alert p{font-size:.85rem;color:rgba(255,255,255,.7);margin-top:.2rem;line-height:1.5}
+  .alert .wins{margin-top:.7rem;display:flex;flex-direction:column;gap:.35rem}
+  .alert .w{display:flex;align-items:center;gap:.6rem;font-size:.84rem;background:rgba(0,0,0,.3);border-radius:8px;padding:.45rem .7rem;flex-wrap:wrap}
+  .alert .w b{font-family:'Outfit',sans-serif;font-size:.84rem;color:var(--txt);display:inline;font-weight:500}
+  .alert .sc{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--green);letter-spacing:.03em}
+  .preview{position:sticky;top:1rem}
+  canvas{width:100%;border-radius:12px;border:1px solid var(--line);display:block;background:#111}
+  .copybox{margin-top:1rem;background:#0e0e0e;border:1px solid var(--line);border-radius:10px;padding:.85rem;font-size:.83rem;line-height:1.6;white-space:pre-wrap}
+  .hint{font-size:.72rem;color:var(--muted);margin-top:.5rem;line-height:1.5}
+  .row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+  .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.55rem .8rem;font-size:.8rem;margin-top:.7rem}
+  .empty{color:var(--muted);font-size:.86rem;padding:1rem 0;line-height:1.6}
+  .empty a{color:var(--red)}
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; margin-left: 0; color: var(--muted); font-size: .72rem; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; color: var(--txt); }
+  .lang-switch a:hover { opacity: 1; color: var(--red); }
+  .lang-switch .sep { opacity: 0.25; color: var(--muted); }
+</style>
+</head>
+<body>
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="t">CARTEL DE <span>VICTORIA</span></div>
+  <a href="/partits/admin.html">← Gestión de partidos</a>
+  <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+    <a href="/partits/cartell.html" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/partits/cartell.html" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/partits/cartell.html" hreflang="en">EN</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <h1>CARTEL Y COPY DE <span>VICTORIA</span></h1>
+  <p class="sub">Elige el partido ganado, sube una foto y obtendrás el cartel 1080×1350 listo para Instagram, con el copy ya escrito.</p>
+
+  <div class="alert" id="alert">
+    <b id="alert-title">🏀 TENEMOS VICTORIAS</b>
+    <p id="alert-text"></p>
+    <div class="wins" id="alert-wins"></div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <div class="card">
+        <div class="fg">
+          <label class="fl">Partido ganado *</label>
+          <select id="f-partit"><option value="">— Elige un partido —</option></select>
+        </div>
+        <div class="fg">
+          <label class="fl">Foto del partido (JPG o PNG)</label>
+          <input type="file" id="f-foto" accept="image/*">
+          <div class="hint">Recomendado: foto horizontal o vertical de buena calidad. Se recorta automáticamente a 1080×1350 y se oscurece para que se lea el texto.</div>
+        </div>
+        <div class="fg">
+          <label class="fl">Rótulo superior</label>
+          <input type="text" id="f-retol" value="VICTORIA" maxlength="18">
+        </div>
+        <div class="fg">
+          <label class="fl">Frase de pie (opcional)</label>
+          <input type="text" id="f-peu" placeholder="Ej: Seguimos. #somclot" maxlength="40">
+        </div>
+        <div class="row">
+          <button class="btn" id="gen" onclick="generar()">Generar cartel</button>
+          <button class="btn ghost" id="dl" onclick="descarregar()" disabled>Descargar PNG</button>
+        </div>
+        <div class="ok" id="ok"></div>
+      </div>
+
+      <h2>COPY PARA <span>INSTAGRAM</span></h2>
+      <div class="card">
+        <div class="copybox" id="copy">Elige un partido para generar el copy.</div>
+        <div class="row">
+          <button class="btn ghost small" onclick="copiar()">Copiar texto</button>
+          <button class="btn ghost small" onclick="altreCopy()">Otro gancho</button>
+        </div>
+        <div class="hint">El gancho va en primera persona y dice qué había en juego. Revísalo antes de publicar.</div>
+      </div>
+    </div>
+
+    <div class="preview">
+      <canvas id="c" width="1080" height="1350"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="/partits/partits.js"></script>
+<script src="/scripts/google-gate.js"></script>
+<script>
+const W=1080, H=1350, RED='#C8102E';
+let img=null, partitSel=null, ganxoIdx=0;
+
+CBGBGate.protect(function(){ init(); });
+
+function esVictoria(p){ return p.resultat && p.resultat.nostre > p.resultat.seu; }
+
+function init(){
+  const guanyats=(window.PARTITS||[]).filter(esVictoria)
+    .sort((a,b)=>(b.data+b.hora).localeCompare(a.data+a.hora));
+  const sel=document.getElementById('f-partit');
+  sel.innerHTML='<option value="">— Elige un partido —</option>'+
+    guanyats.map(p=>`<option value="${p.id}">${p.data} · ${p.equip} ${p.resultat.nostre}-${p.resultat.seu} ${p.rival}</option>`).join('');
+
+  // Alerta de victorias recientes (últimos 3 días)
+  const limit=new Date(Date.now()-3*24*3600*1000).toISOString().slice(0,10);
+  const recents=guanyats.filter(p=>p.data>=limit);
+  if(recents.length){
+    const a=document.getElementById('alert');
+    a.style.display='block';
+    document.getElementById('alert-title').textContent=
+      recents.length>1?`🏀 ${recents.length} VICTORIAS NUEVAS`:'🏀 TENEMOS UNA VICTORIA';
+    document.getElementById('alert-text').textContent=
+      'Todavía no se ha publicado el cartel. Elige el partido y genéralo ahora que es noticia.';
+    document.getElementById('alert-wins').innerHTML=recents.map(p=>
+      `<div class="w"><b>${p.equip}</b> vs ${p.rival}
+        <span class="sc">${p.resultat.nostre}-${p.resultat.seu}</span>
+        <button class="btn small" onclick="triar('${p.id}')">Hacer el cartel</button></div>`).join('');
+  }
+  if(!guanyats.length){
+    document.querySelector('.cols').insertAdjacentHTML('afterbegin',
+      '<div class="empty">Todavía no hay ningún partido ganado con resultado cargado.<br>'
+      +'Añade los resultados en <a href="/partits/admin.html">Gestión de partidos</a> y vuelve aquí.</div>');
+  }
+  sel.addEventListener('change',()=>{ triar(sel.value); });
+  document.getElementById('f-foto').addEventListener('change',carregarFoto);
+  dibuixar();
+}
+
+function triar(id){
+  document.getElementById('f-partit').value=id;
+  partitSel=(window.PARTITS||[]).find(p=>p.id===id)||null;
+  ganxoIdx=0; ferCopy(); dibuixar();
+}
+
+function carregarFoto(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ const i=new Image(); i.onload=()=>{ img=i; dibuixar(); }; i.src=r.result; };
+  r.readAsDataURL(f);
+}
+
+// ── DIBUJO DEL CARTEL ──
+async function generar(){
+  await document.fonts.ready;
+  dibuixar();
+  document.getElementById('dl').disabled=false;
+  const ok=document.getElementById('ok');
+  ok.textContent='✔ Cartel generado. Ya lo puedes descargar.';
+  ok.style.display='block';
+}
+
+function dibuixar(){
+  const c=document.getElementById('c'), x=c.getContext('2d');
+  x.clearRect(0,0,W,H);
+  x.fillStyle='#0A0A0A'; x.fillRect(0,0,W,H);
+
+  // Foto de fondo, recortada tipo "cover"
+  if(img){
+    const r=Math.max(W/img.width, H/img.height);
+    const w=img.width*r, h=img.height*r;
+    x.drawImage(img,(W-w)/2,(H-h)/2*0.75,w,h);
+  }
+
+  // Oscurecimiento para legibilidad
+  let g=x.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'rgba(10,10,10,.72)');
+  g.addColorStop(.42,'rgba(10,10,10,.30)');
+  g.addColorStop(.72,'rgba(10,10,10,.88)');
+  g.addColorStop(1,'rgba(10,10,10,.97)');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+
+  // Barra roja superior
+  x.fillStyle=RED; x.fillRect(0,0,W,14);
+
+  // Cabecera
+  x.fillStyle='rgba(255,255,255,.85)';
+  x.font='500 30px Outfit, sans-serif'; x.textAlign='left';
+  x.letterSpacing='6px';
+  x.fillText('CB GRUP BARNA', 76, 108);
+  x.letterSpacing='0px';
+
+  if(!partitSel){
+    x.fillStyle='rgba(255,255,255,.35)';
+    x.font='500 34px Outfit, sans-serif'; x.textAlign='center';
+    x.fillText('Elige un partido ganado', W/2, H/2);
+    return;
+  }
+
+  const p=partitSel, r=p.resultat;
+  const retol=(document.getElementById('f-retol').value||'VICTORIA').toUpperCase();
+  const peu=document.getElementById('f-peu').value.trim();
+
+  // Rótulo grande
+  x.textAlign='left';
+  x.fillStyle='#F5F5F5';
+  x.font='170px Anton, "Bebas Neue", sans-serif';
+  let fs=170;
+  while(x.measureText(retol).width > W-152 && fs>70){ fs-=6; x.font=fs+'px Anton, "Bebas Neue", sans-serif'; }
+  x.fillText(retol, 76, 880);
+  // Subrayado rojo
+  x.fillStyle=RED;
+  x.fillRect(76, 900, Math.min(x.measureText(retol).width, W-152), 10);
+
+  // Marcador
+  x.fillStyle='#FFFFFF';
+  x.font='150px Anton, "Bebas Neue", sans-serif';
+  const marc=`${r.nostre}-${r.seu}`;
+  x.fillText(marc, 76, 1058);
+
+  // Equipo y rival
+  x.fillStyle='rgba(255,255,255,.92)';
+  x.font='600 42px Outfit, sans-serif';
+  let linia=`${p.equip}`;
+  x.fillText(linia, 76, 1122);
+  x.fillStyle='rgba(255,255,255,.55)';
+  x.font='400 34px Outfit, sans-serif';
+  x.fillText(`vs ${p.rival}`, 76, 1170);
+
+  // Pie: fecha, lugar, competición
+  const dt=new Date(p.data+'T12:00:00');
+  const MESOS=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const meta=[`${dt.getDate()} ${MESOS[dt.getMonth()]}`, p.lloc, p.competicio].filter(Boolean).join('  ·  ');
+  x.fillStyle='rgba(255,255,255,.4)';
+  x.font='400 26px Outfit, sans-serif';
+  x.fillText(meta, 76, 1232);
+
+  // Frase de pie o handle
+  x.fillStyle=RED;
+  x.font='600 28px Outfit, sans-serif';
+  x.letterSpacing='3px';
+  x.fillText((peu||'@CBGRUPBARNA').toUpperCase(), 76, 1288);
+  x.letterSpacing='0px';
+
+  // Escudo
+  const logo=new Image();
+  logo.onload=()=>{ const s=112; x.drawImage(logo, W-76-s, 56, s, s); };
+  logo.src='/logo.png';
+}
+
+function descarregar(){
+  const c=document.getElementById('c');
+  const a=document.createElement('a');
+  a.download=`victoria-${partitSel?partitSel.data+'-'+partitSel.equip.toLowerCase().replace(/[^a-z0-9]+/g,'-'):'cbgb'}.png`;
+  a.href=c.toDataURL('image/png');
+  a.click();
+}
+
+// ── COPY ──
+const GANXOS=[
+  p=>`Hay victorias que explican quién somos.`,
+  p=>`No era un partido cualquiera. Y lo hemos sabido jugar.`,
+  p=>`Esta la queríamos. Y esta es nuestra.`,
+  p=>`El trabajo de toda la semana, en cuarenta minutos.`,
+  p=>`${p.condicio==='local'?'En casa':'Fuera de casa'}, con la misma ambición de siempre.`,
+  p=>`Crecer también es ganar así.`
+];
+
+function ferCopy(){
+  const box=document.getElementById('copy');
+  if(!partitSel){ box.textContent='Elige un partido para generar el copy.'; return; }
+  const p=partitSel, r=p.resultat, dif=r.nostre-r.seu;
+  const dt=new Date(p.data+'T12:00:00');
+  const MESOS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const ganxo=GANXOS[ganxoIdx%GANXOS.length](p);
+  const on = p.condicio==='local' ? `en casa, en ${p.lloc}` : `como visitante, en ${p.lloc}`;
+  const marge = dif>=15 ? 'Un partido redondo, de principio a fin.'
+              : dif<=5  ? 'Decidido en los detalles, y los detalles fueron nuestros.'
+              : 'Partido serio, trabajado y bien cerrado.';
+  box.textContent =
+`${ganxo}
+
+El ${p.equip} gana ${on} por ${r.nostre}-${r.seu} ante el ${p.rival}. ${marge}
+
+${dt.getDate()} de ${MESOS[dt.getMonth()]}${p.competicio?' · '+p.competicio:''}
+
+Sigue a @cbgrupbarna para no perderte ninguna jornada 🏀
+Dale like, guárdalo y compártelo con quien estuvo allí.
+
+#somclot #cbgrupbarna #baloncesto #basquetcatala #ElClot #SantMartí #Barcelona`;
+}
+
+function altreCopy(){ ganxoIdx++; ferCopy(); }
+
+function copiar(){
+  const t=document.getElementById('copy').textContent;
+  navigator.clipboard.writeText(t).then(()=>{
+    const ok=document.getElementById('ok');
+    ok.textContent='✔ Copy copiado al portapapeles.'; ok.style.display='block';
+  });
+}
+
+['f-retol','f-peu'].forEach(id=>document.getElementById(id).addEventListener('input',dibuixar));
+</script>
+</body>
+</html>
