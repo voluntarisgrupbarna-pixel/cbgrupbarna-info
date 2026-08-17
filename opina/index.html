@@ -8,6 +8,10 @@
 <meta name="description" content="Ajuda el CB Grup Barna a arribar a 300 ressenyes a Google. Menys d'1 minut: toca el botó, tria 5 estrelles i escriu dues línies. Ayuda al CB Grup Barna con tu reseña en Google.">
 
 <link rel="canonical" href="https://cbgrupbarna.info/opina/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/opina/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/opina/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/opina/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/opina/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:title" content="Ens ajudes en menys d'1 minut? · Ressenyes CB Grup Barna">
@@ -151,6 +155,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   .head-brand img { width: 26px; height: 26px; }
   .head-brand span { font-size: 9px; letter-spacing: 0.18em; }
   .langs button { padding: 8px 8px; font-size: 8px; letter-spacing: 0.14em; }
+  .lang-switch { display: none; }
 }
 @media (max-width: 400px) { .head-brand span { display: none; } }
 
@@ -248,6 +253,13 @@ details.tpl[open] summary::after { content: '–'; }
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+
+/* ==== SELECTOR D'IDIOMA (miralls /es/ i /en/) ==== */
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+.lang-switch a.active { opacity: 1; font-weight: 600; }
+.lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+.lang-switch .sep { opacity: 0.25; }
 </style>
 </head>
 <body>
@@ -283,6 +295,9 @@ details.tpl[open] summary::after { content: '–'; }
       <div class="langs" role="group" aria-label="Idioma">
         <button type="button" data-lang="ca" aria-pressed="true">Cat</button>
         <button type="button" data-lang="es" aria-pressed="false">Cast</button>
+      </div>
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/opina/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/opina/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/opina/" hreflang="en">EN</a>
       </div>
     </div>
   </div>
