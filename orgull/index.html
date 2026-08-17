@@ -13,6 +13,10 @@
 <meta property="og:url" content="https://cbgrupbarna.info/orgull/">
 <meta property="og:locale" content="ca_ES">
 <link rel="canonical" href="https://cbgrupbarna.info/orgull/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/orgull/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/orgull/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/orgull/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/orgull/">
 <title>Mes de l'Orgull 2026 · CB Grup Barna · 3x3 per la Inclusió</title>
 
 <style>
@@ -73,6 +77,11 @@ img { max-width: 100%; display: block; }
 .site-nav-in a { font-family: -apple-system, sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.6); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
 .site-nav-in a:hover { color: #fff; }
 .site-nav-in a.brand { color: #fff; font-weight: 700; }
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; margin-left: auto; flex-shrink: 0; }
+.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; color: rgba(255,255,255,.6); }
+.lang-switch a.active { opacity: 1; font-weight: 600; color: #fff; }
+.lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+.lang-switch .sep { opacity: 0.25; color: rgba(255,255,255,.6); }
 
 .nav {
   position: sticky;
@@ -797,6 +806,9 @@ img { max-width: 100%; display: block; }
     <a href="/cistella-petita/">Cistella Petita</a>
     <a href="/fotos/">Galeria</a>
     <a href="/premsa/">Premsa</a>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/orgull/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/orgull/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/orgull/" hreflang="en">EN</a>
+    </div>
   </div>
 </nav>
 

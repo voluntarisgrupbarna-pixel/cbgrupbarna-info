@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0A0A0A">
-<title>Basketball Camp in Barcelona · CB Grup Barna | Summer at El Clot</title>
-<meta name="description" content="Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills-training weeks, groups by age and limited places. Information and waiting list.">
-<meta name="keywords" content="basketball camp Barcelona, summer basketball camp Barcelona, youth basketball camp, grup barna camp, basketball skills camp Barcelona">
+<title>Basketball Camp in Barcelona · CB Grup Barna | Summer in El Clot</title>
+<meta name="description" content="Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills weeks, age groups and limited spots. Information and waiting list.">
+<meta name="keywords" content="basketball camp Barcelona, basketball camp Barcelona, basketball academy Barcelona summer, summer basketball camp, grup barna camp, basketball skills camp Barcelona">
 <link rel="canonical" href="https://cbgrupbarna.info/en/campus/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/campus/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/campus/">
@@ -16,10 +16,8 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="ca_ES">
-<meta property="og:locale:alternate" content="es_ES">
-<meta property="og:title" content="Basketball Camp in Barcelona · CB Grup Barna | Summer at El Clot">
-<meta property="og:description" content="Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills-training weeks, groups by age and limited places. Information and waiting list.">
+<meta property="og:title" content="Basketball Camp in Barcelona · CB Grup Barna | Summer in El Clot">
+<meta property="og:description" content="Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills weeks, age groups and limited spots. Information and waiting list.">
 <meta property="og:url" content="https://cbgrupbarna.info/en/campus/">
 <meta property="og:image" content="https://cbgrupbarna.info/img/campus-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
@@ -29,15 +27,46 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 <style>
-/* ==== SELECTOR D'IDIOMA ==== */
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-.lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; color: var(--red); }
-.lang-switch .sep { opacity: 0.25; }
+  .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 38px 0; }
+  .photo-strip figure { margin: 0; }
+  .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
+  @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
+
+  .weeks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 720px) { .weeks { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1040px) { .weeks { grid-template-columns: repeat(3, 1fr); } }
+  .week { background: var(--paper); padding: clamp(20px, 2.6vw, 28px) clamp(18px, 2.4vw, 24px); }
+  .week b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; color: var(--red); line-height: 1; }
+  .week time { display: block; margin-top: 10px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .week h3 { font-size: 14px; letter-spacing: 0.1em; margin: 10px 0 6px; }
+  .week p { font-size: 13.5px; color: var(--ink-2); }
+
+  .price-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 620px) { .price-cards { grid-template-columns: 1fr 1fr; } }
+  .price-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(22px, 3vw, 30px); }
+  .price-card.top { border-color: var(--red); position: relative; }
+  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .price-card.top .tag { color: var(--red); }
+  .price-card b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; margin: 8px 0 4px; }
+  .price-card .sched { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
+  .price-card ul { list-style: none; }
+  .price-card li { position: relative; padding: 7px 0 7px 18px; font-size: 13.5px; color: var(--ink-2); border-top: 1px solid var(--line); }
+  .price-card li:first-child { border-top: 0; }
+  .price-card li::before { content: '·'; position: absolute; left: 4px; color: var(--red); font-weight: 700; }
+  .price-note { font-size: 13.5px; color: var(--ink-2); max-width: 62ch; }
+
+  .gal-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; justify-content: space-between;
+    border: 1px solid var(--line); background: var(--paper-2); padding: clamp(18px, 2.6vw, 26px); margin-top: 4px; }
+  .gal-cta p { font-size: 13.5px; color: var(--ink-2); margin: 0; max-width: 46ch; }
+  .gal-cta .btn { flex-shrink: 0; }
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+  .lang-switch .sep { opacity: 0.25; }
 </style>
 <script type="application/ld+json">
 {
@@ -45,16 +74,17 @@
   "@graph": [
     {
       "@type": "Service",
-      "@id": "https://cbgrupbarna.info/campus/#campus",
+      "@id": "https://cbgrupbarna.info/en/campus/#campus",
       "name": "Basketball Camp · CB Grup Barna",
       "alternateName": [
-        "Barcelona Summer Basketball Camp",
-        "Grup Barna Camp",
-        "Basketball Skills Camp"
+        "Basketball camp in Barcelona",
+        "Summer basketball camp Barcelona",
+        "Basketball academy camp in Barcelona",
+        "Grup Barna Camp"
       ],
-      "description": "Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills-training weeks, groups by age and limited places. Information and waiting list.",
+      "description": "Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills weeks, age groups and limited spots. Information and waiting list.",
       "serviceType": "Basketball camp",
-      "url": "https://cbgrupbarna.info/campus/",
+      "url": "https://cbgrupbarna.info/en/campus/",
       "provider": {
         "@id": "https://cbgrupbarna.info/#club"
       },
@@ -75,11 +105,11 @@
       },
       "availableChannel": {
         "@type": "ServiceChannel",
-        "serviceUrl": "https://cbgrupbarna.info/campus/",
+        "serviceUrl": "https://cbgrupbarna.info/en/campus/",
         "servicePhone": {
           "@type": "ContactPoint",
           "telephone": "+34698425153",
-          "contactType": "Camp registrations"
+          "contactType": "Camp registration"
         }
       }
     },
@@ -87,15 +117,14 @@
       "@type": "WebPage",
       "@id": "https://cbgrupbarna.info/en/campus/#webpage",
       "url": "https://cbgrupbarna.info/en/campus/",
-      "name": "Basketball Camp in Barcelona · CB Grup Barna | Summer at El Clot",
-      "description": "Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills-training weeks, groups by age and limited places. Information and waiting list.",
+      "name": "Basketball Camp in Barcelona · CB Grup Barna | Summer in El Clot",
+      "description": "Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills weeks, age groups and limited spots. Information and waiting list.",
       "inLanguage": [
-        "en-US",
-        "ca-ES",
-        "es-ES"
+        "en",
+        "ca-ES"
       ],
       "about": {
-        "@id": "https://cbgrupbarna.info/campus/#campus"
+        "@id": "https://cbgrupbarna.info/en/campus/#campus"
       },
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
@@ -109,23 +138,23 @@
           "name": "What ages is the basketball camp for?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The CB Grup Barna camp is for youth players, from Escoleta age up to cadet and junior categories. Groups are organised by age and level, so a child who's just starting doesn't train alongside someone who's been competing for years."
+            "text": "CB Grup Barna's camp is for youth players, from Escoleta age through cadet and junior categories. Groups are formed by age and level, so a child who's just starting out doesn't train alongside someone who has been competing for years."
           }
         },
         {
           "@type": "Question",
-          "name": "Do you have to play for CB Grup Barna to sign up?",
+          "name": "Do you need to play for CB Grup Barna to sign up?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The camp is open to players from any club in Barcelona and the province. Every week there are places for Barna players and places for players from outside."
+            "text": "No. The camp is open to players from any club in Barcelona and the wider province. Every week there are spots for Barna players and spots for players from outside."
           }
         },
         {
           "@type": "Question",
-          "name": "How many places are there per week?",
+          "name": "How many spots are there per week?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The camp works with a limit of around 50 places per week to keep a good coach-to-player ratio. Weeks fill up in registration order, and recent editions have sold out before starting."
+            "text": "The camp works with a limit of roughly 50 spots per week to keep the coach-to-player ratio right. Weeks fill up in order of registration, and recent editions have filled up before they started."
           }
         },
         {
@@ -133,7 +162,7 @@
           "name": "Where is the camp held?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "In the El Clot neighbourhood, Sant Martí District of Barcelona. La Nau del Clot is CB Grup Barna's main sports venue."
+            "text": "In the Clot neighborhood, Sant Martí District of Barcelona. La Nau del Clot is CB Grup Barna's main sports venue."
           }
         },
         {
@@ -141,7 +170,7 @@
           "name": "When does registration open for the next edition?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The dates for the next edition are announced on this page and on Instagram (@cbgrupbarna). Anyone who wants to be notified before it opens to the public can ask via the club's WhatsApp (+34 698 425 153) and will be added to the notification list."
+            "text": "Dates for the next edition are announced on this page and on Instagram (@cbgrupbarna). Anyone who wants advance notice before it opens to the public can ask via the club's WhatsApp (+34 698 425 153) and join the notification list."
           }
         }
       ]
@@ -153,12 +182,12 @@
           "@type": "ListItem",
           "position": 1,
           "name": "CB Grup Barna",
-          "item": "https://cbgrupbarna.info/"
+          "item": "https://cbgrupbarna.info/en/"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Basketball Camp",
+          "name": "Basketball camp",
           "item": "https://cbgrupbarna.info/en/campus/"
         }
       ]
@@ -166,6 +195,7 @@
   ]
 }
 </script>
+<script src="/js/galetes.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -176,13 +206,16 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Main navigation">
-      <a href="/en/escoleta/">Escoleta</a>
-      <a href="/en/campus/" class="opt">Camp</a>
-      <a href="/en/3x3/" class="opt">3x3</a>
-      <a href="/en/blog/" class="opt">Blog</a>
-      <a href="/en/premsa/" class="opt">Press</a>
+      <a href="/en/club/">Club</a>
+      <a href="/en/escoleta/" class="opt">Escoleta</a>
+      <a href="/en/partits/">Match days</a>
       <a href="/en/patrocinadors/" class="opt">Sponsors</a>
-      <a href="/#info">Information</a>
+      <a href="/en/campus/" class="opt">Camp</a>
+      <a href="/en/magics/" class="opt">Màgics</a>
+      <a href="/en/3x3/" class="opt">3x3</a>
+      <a href="/en/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/en/fotos/" class="opt">Gallery</a>
+      <a href="/en/premsa/">Press</a>
     </nav>
     <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/campus/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/campus/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/campus/" hreflang="en" class="active">EN</a>
@@ -190,74 +223,174 @@
   </div>
 </header>
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="/en/">Home</a> · <span>Basketball Camp</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="/en/">Home</a> · <span>Basketball camp</span></nav></div>
 <div class="wrap">
   <div class="phead">
-    <p class="eyebrow red">Basketball Camp · El Clot · Barcelona</p>
+    <p class="eyebrow red">Basketball camp · El Clot · Barcelona</p>
     <h1>Basketball Camp in Barcelona</h1>
-    <p class="lede">Intensive weeks of basketball and skills training in El Clot, Sant Martí District,
-    open to players from any club in Barcelona and the province. Groups by age
-    and level, limited places per week.</p>
+    <p class="lede">Intensive weeks of basketball and skills training in El Clot, Sant Martí
+    District, open to players from any club in Barcelona and the wider province. Groups by age
+    and level, limited spots per week.</p>
     <div class="btn-row" style="margin-top:28px">
-      <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hi!%20I%27d%20like%20information%20about%20the%20CB%20Grup%20Barna%20Basketball%20Camp"
+      <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hello!%20I%27d%20like%20information%20about%20CB%20Grup%20Barna%27s%20Basketball%20Camp"
          class="btn red" target="_blank" rel="noopener" data-cta="campus-wa">Request information</a>
-      <a href="/#info" class="btn ghost" data-cta="campus-form">Notify me about the next edition</a>
+      <a href="/en/#info" class="btn ghost" data-cta="campus-form">Notify me of the next edition</a>
+      <a href="https://timechamber.skywork.website/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-web-timechamber">Time Chamber camp website →</a>
+      <a href="/en/presentacions/campus-timechamber/" class="btn ghost" data-cta="campus-presentacio">View the presentation →</a>
     </div>
     <div class="phead-media">
-      <img src="/img/campus-hero.webp" alt="Players at the CB Grup Barna basketball camp wearing the camp t-shirt" width="1200" height="675" fetchpriority="high">
+      <img src="/img/campus-hero.webp" alt="Players from CB Grup Barna's basketball camp wearing the camp t-shirt" width="1200" height="675" fetchpriority="high">
     </div>
   </div>
 
   <div class="narrow prose">
     <h2>What the Barna camp is</h2>
-    <p>The <strong>CB Grup Barna</strong> basketball camp is the intensive training programme
-    the club runs during school holidays in the El Clot neighbourhood. It isn't a leisure
-    activity with a ball: it's <strong>skills training</strong>, with sessions dedicated to one
-    specific aspect of the game and groups organised by age and level.</p>
-    <p>The club runs it together with <strong>Time Chamber</strong>, which brings its individual-training
-    methodology. That combination is what defines the camp: the repetition volume of a
-    skills-training academy with the team spirit of a neighbourhood club with sixty years of history.</p>
+    <p>The <strong>CB Grup Barna</strong> basketball camp is the intensive training program the
+    club runs during school holidays in the Clot neighborhood. It's not a leisure activity with a
+    ball: it's <strong>skills training</strong>, with sessions dedicated to a specific aspect of
+    the game and groups formed by age and level.</p>
+    <p>The club runs it with <strong>Time Chamber</strong>, who bring the individual-work
+    methodology. That combination is what defines the camp: the repetition volume of a skills
+    academy with the team atmosphere of a neighborhood club with sixty years of history.</p>
 
-    <h2>How it's organised</h2>
+    <h2>How it's organized</h2>
     <p>Each week has its own focus, so anyone attending more than one week doesn't repeat content.
     These are the modules the club has run in recent editions:</p>
-    <ul>
-      <li><strong>Flow Camp</strong> — game reading and decision-making.</li>
-      <li><strong>TC Basics</strong> — fundamentals: footwork, balance, mechanics.</li>
-      <li><strong>Shooting Academy</strong> — shooting, in all its game situations.</li>
-      <li><strong>One &amp; One Mastery</strong> — one-on-one play.</li>
-      <li><strong>Ballhandling Lab</strong> — ball handling and dribbling under pressure.</li>
-      <li><strong>Skills Lab Experience</strong> — combined skills work.</li>
-    </ul>
+
+    <div class="weeks">
+      <div class="week">
+        <b>01</b>
+        <time>Jun 23–27</time>
+        <h3>Flow Camp</h3>
+        <p>Reading the game and decision-making.</p>
+      </div>
+      <div class="week">
+        <b>02</b>
+        <time>Jun 30–Jul 4</time>
+        <h3>TC Basics</h3>
+        <p>Fundamentals: footwork, balance, mechanics.</p>
+      </div>
+      <div class="week">
+        <b>03</b>
+        <time>Jul 7–11</time>
+        <h3>Shooting Academy</h3>
+        <p>Shooting, in every situation.</p>
+      </div>
+      <div class="week">
+        <b>04</b>
+        <time>Jul 14–18</time>
+        <h3>One &amp; One Mastery</h3>
+        <p>The one-on-one game: fakes and offensive creativity.</p>
+      </div>
+      <div class="week">
+        <b>05</b>
+        <time>Jul 21–25</time>
+        <h3>Ballhandling Lab</h3>
+        <p>Ball handling and dribbling under pressure.</p>
+      </div>
+      <div class="week">
+        <b>06</b>
+        <time>Jul 28–Aug 1</time>
+        <h3>Skills Lab Experience</h3>
+        <p>Combined skills work: the edition's finale.</p>
+      </div>
+    </div>
+    <p class="tbl-note" style="font-size:13.5px;color:var(--ink-2)">Indicative dates, based on the
+    reference edition. Confirmed on this page and on Instagram before registration opens each
+    year.</p>
 
     <div class="facts">
-      <div><b><em>50</em></b><span>Places per week</span></div>
-      <div><b>1965</b><span>Club founding year</span></div>
-      <div><b>+34</b><span>Federated teams</span></div>
+      <div><b><em>50</em></b><span>Spots per week</span></div>
+      <div><b>1965</b><span>Year the club was founded</span></div>
+      <div><b>34+</b><span>Federated teams</span></div>
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
 
+    <h2>Prices</h2>
+    <p>Two options depending on schedule, with lunch included in the full day. Spots open to
+    players from the Barna and from outside the club.</p>
+    <div class="price-cards">
+      <div class="price-card top">
+        <span class="tag">Recommended</span>
+        <b>€195</b>
+        <p class="sched">Full week · 9am to 5pm</p>
+        <ul>
+          <li>Lunch included</li>
+          <li>Drop-off service from 9am</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tag">Half day</span>
+        <b>€160</b>
+        <p class="sched">9am to 1:30pm</p>
+        <ul>
+          <li>Same groups and same weekly focus</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">Spots can be booked with payment split into up to 3 installments. Every
+    year an early-registration discount opens; the dates and code are published on this page and
+    on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>
+    when registration opens.</p>
+
+    <h2>The camp, in pictures</h2>
+    <p>Photos from the latest edition with Time Chamber, at La Nau del Clot.</p>
+    <div class="photo-strip">
+      <figure><img src="/campus/img/campus-2026-01.jpg" alt="Video review session with the coach during CB Grup Barna's basketball camp" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="/campus/img/campus-2026-02.jpg" alt="Camp players shooting at La Nau del Clot" loading="lazy" decoding="async" width="900" height="675"></figure>
+      <figure><img src="/campus/img/campus-2026-03.jpg" alt="Camp coach explaining a drill with the ball" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="/campus/img/campus-2026-04.jpg" alt="Camp player in shooting position" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="/campus/img/campus-2026-05.jpg" alt="Camp player dribbling the ball among teammates" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="/campus/img/campus-2026-06.jpg" alt="Group of camp players doing a shooting drill" loading="lazy" decoding="async" width="900" height="1350"></figure>
+    </div>
+    <div class="gal-cta">
+      <p><strong>These are six selected photos.</strong> The full summer gallery — every week,
+      with photo and video — is in the club's Photo Gallery.</p>
+      <a href="/en/fotos/" class="btn ghost" data-cta="campus-galeria-completa">See the summer gallery →</a>
+    </div>
+
+    <h2>The venue</h2>
+    <p><strong>La Nau del Clot</strong>, Carrer de la Llacuna 172, 08018 Barcelona — CB Grup
+    Barna's main sports venue, in the Clot neighborhood. Camp hours: 9am–1:30pm for half day,
+    9am–5pm for full day, with drop-off service and lunch included in the full day.</p>
+
+    <div class="franges" aria-label="Other doors into the club">
+      <a class="franja" href="/en/escoleta/" data-cta="campus-franja-escoleta">
+        <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Girl from CB Grup Barna's Escoleta with the ball"></span>
+        <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">If they haven't started yet and are 4 to 7 years old, this is the way in.</span></span>
+        <span class="franja-go"><em>Ages 4 to 7</em><i></i></span>
+      </a>
+      <a class="franja franja--red" href="/en/partits/" data-cta="campus-franja-dies-partit">
+        <span class="franja-tx"><span class="franja-t">Match days</span><span class="franja-s">The schedule for all the club's federated teams.</span></span>
+        <span class="franja-go"><em>Season 26·27</em><i></i></span>
+      </a>
+      <a class="franja" href="/en/3x3/" data-cta="campus-franja-3x3">
+        <span class="franja-ph"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="CB Grup Barna players wearing the club's kit"></span>
+        <span class="franja-tx"><span class="franja-t">3x3 Barcelona</span><span class="franja-s">The club's urban tournament at Westfield Glòries.</span></span>
+        <span class="franja-go"><em>Every summer</em><i></i></span>
+      </a>
+    </div>
+
     <h2>Who it's for</h2>
-    <p>Boys and girls who already play basketball or want to start, whether they belong to
-    CB Grup Barna or come from another club. Each week the club reserves places for its own
-    players and places open to players from outside, and groups are closed by age and level
-    so no one trains above or below their level.</p>
-    <p>If your child hasn't started yet and is between 4 and 7 years old, the natural path isn't the
-    camp but <a href="/en/escoleta/">the Escoleta</a>, the club's basketball school, which runs all
+    <p>Children who play basketball or want to start, whether they're with CB Grup Barna or come
+    from another club. Every week the club reserves spots for its own players and spots open to
+    players from outside, and groups are closed by age and level so no one trains above or below
+    where they should be.</p>
+    <p>If your child hasn't started yet and is 4 to 7 years old, the natural path isn't the camp
+    but <a href="/en/escoleta/">the Escoleta</a>, the club's basketball school, which runs all
     year round with Julio Torralba.</p>
 
     <h2>Next edition</h2>
-    <p>The dates for the next edition and when registration opens are announced on this page and on
-    <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.
-    Recent editions have filled up before they even started, so the safe way in is to ask for
-    advance notice: the club messages everyone on the list when places open, a day before
-    announcing it publicly.</p>
+    <p>Dates for the next edition and the opening of registration are announced on this page and
+    on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.
+    Recent editions have filled up before they started, so the safe way in is to request advance
+    notice: the club writes to those on the list when spots open, one day before publishing it.</p>
 
-    <h2>Frequently asked questions</h2>
-    <div class="faq"><details><summary>What ages is the basketball camp for?</summary><p>The CB Grup Barna camp is for youth players, from Escoleta age up to cadet and junior categories. Groups are organised by age and level, so a child who's just starting doesn't train alongside someone who's been competing for years.</p></details><details><summary>Do you have to play for CB Grup Barna to sign up?</summary><p>No. The camp is open to players from any club in Barcelona and the province. Every week there are places for Barna players and places for players from outside.</p></details><details><summary>How many places are there per week?</summary><p>The camp works with a limit of around 50 places per week to keep a good coach-to-player ratio. Weeks fill up in registration order, and recent editions have sold out before starting.</p></details><details><summary>Where is the camp held?</summary><p>In the El Clot neighbourhood, Sant Martí District of Barcelona. La Nau del Clot is CB Grup Barna's main sports venue.</p></details><details><summary>When does registration open for the next edition?</summary><p>The dates for the next edition are announced on this page and on Instagram (@cbgrupbarna). Anyone who wants to be notified before it opens to the public can ask via the club's WhatsApp (+34 698 425 153) and will be added to the notification list.</p></details></div>
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq"><details><summary>What ages is the basketball camp for?</summary><p>CB Grup Barna's camp is for youth players, from Escoleta age through cadet and junior categories. Groups are formed by age and level, so a child who's just starting out doesn't train alongside someone who has been competing for years.</p></details><details><summary>Do you need to play for CB Grup Barna to sign up?</summary><p>No. The camp is open to players from any club in Barcelona and the wider province. Every week there are spots for Barna players and spots for players from outside.</p></details><details><summary>How many spots are there per week?</summary><p>The camp works with a limit of roughly 50 spots per week to keep the coach-to-player ratio right. Weeks fill up in order of registration, and recent editions have filled up before they started.</p></details><details><summary>Where is the camp held?</summary><p>In the Clot neighborhood, Sant Martí District of Barcelona. La Nau del Clot is CB Grup Barna's main sports venue.</p></details><details><summary>When does registration open for the next edition?</summary><p>Dates for the next edition are announced on this page and on Instagram (@cbgrupbarna). Anyone who wants advance notice before it opens to the public can ask via the club's WhatsApp (+34 698 425 153) and join the notification list.</p></details></div>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
-    <div class="closer"><h2>Notify me about the next camp</h2><p>Leave us your contact details and we'll message you when registration opens, before we announce it publicly.</p><div class="btn-row"><a href="/#info" class="btn red" data-cta="campus-closer-form">Request information</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hi!%20I%27d%20like%20info%20about%20the%20Basketball%20Camp" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">Club WhatsApp</a></div></div>
+    <div class="closer"><h2>Notify me about the next camp</h2><p>Leave us your contact details and we'll write to you when registration opens, before it's published.</p><div class="btn-row"><a href="/en/#info" class="btn red" data-cta="campus-closer-form">Request information</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hello!%20I%27d%20like%20info%20about%20the%20Basketball%20Camp" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">Club WhatsApp</a><a href="/en/presentacions/campus-timechamber/" class="btn ghost" data-cta="campus-closer-presentacio">View the presentation</a></div></div>
     </div>
   </div>
 </div>
@@ -269,14 +402,19 @@
         <h3>The Barna</h3>
         <a href="/en/escoleta/">Basketball school</a>
         <a href="/en/campus/">Basketball camp</a>
+        <a href="/en/magics/">Barna Màgics</a>
         <a href="/en/3x3/">3x3 tournament</a>
+        <a href="/en/cistella-petita/">Cistella Petita</a>
         <a href="/en/patrocinadors/">Sponsors and partners</a>
+        <a href="/en/instal-lacions/">Facilities</a>
+        <a href="/en/organigrama/">Organization chart</a>
+        <a href="/en/posicionament/">Club positioning</a>
         <a href="/en/grup-barna-dades-oficials/">Official data</a>
       </div>
       <div class="foot-col">
         <h3>Season</h3>
-        <a href="/en/partits/">Matches and results</a>
-        <a href="/en/partits/calendaris/">Team calendars</a>
+        <a href="/en/partits/">Match days</a>
+        <a href="/en/partits/calendaris/">Match days by team</a>
         <a href="/en/fotos/">Photo gallery</a>
         <a href="/en/premidonaesport/">Women and Sport Award</a>
         <a href="/en/blog/">Blog</a>
@@ -284,10 +422,17 @@
       </div>
       <div class="foot-col">
         <h3>Contact</h3>
-        <a href="/#info">Request information</a>
+        <a href="/en/#info">Request information</a>
+        <a href="/en/faq/">Frequently asked questions</a>
         <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/en/politica-de-privacitat/">Privacy policy</a>
+        <a href="/en/avis-legal/">Legal notice</a>
+        <a href="/en/politica-de-privacitat/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Social</h3>

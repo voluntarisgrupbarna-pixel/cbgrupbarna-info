@@ -17,6 +17,7 @@
 <meta property="og:url" content="https://cbgrupbarna.info">
 <meta property="og:locale" content="ca_ES">
 <meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta property="og:image:secure_url" content="https://cbgrupbarna.info/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -34,6 +35,8 @@
 <!-- Canonical + hreflang -->
 <link rel="canonical" href="https://cbgrupbarna.info/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/">
 <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://cbgrupbarna.info/sitemap.xml">
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://cbgrupbarna.info/llms.txt">
@@ -208,7 +211,8 @@
       "description": "Hub digital del CB Grup Barna, acadèmia i club de bàsquet i baloncesto base de Barcelona des del 1965. Campus estiu, 3x3 Westfield, Portes Obertes, Escoleta i streaming.",
       "inLanguage": [
         "ca-ES",
-        "es-ES"
+        "es-ES",
+        "en-US"
       ],
       "publisher": {
         "@id": "https://cbgrupbarna.info/#club"
@@ -227,7 +231,8 @@
       "description": "Portada oficial del CB Grup Barna, acadèmia i club de bàsquet base a Barcelona: Escoleta de bàsquet de 4 a 8 anys, calendari de partits de tots els equips, galeria de fotos, streaming en directe i contacte del club al Clot, Districte de Sant Martí, Barcelona.",
       "inLanguage": [
         "ca-ES",
-        "es-ES"
+        "es-ES",
+        "en-US"
       ],
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
@@ -255,7 +260,8 @@
       "@id": "https://cbgrupbarna.info/#faq",
       "inLanguage": [
         "ca-ES",
-        "es-ES"
+        "es-ES",
+        "en-US"
       ],
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
@@ -625,6 +631,13 @@ html[data-view="light"] .view-toggle .vt-ic { background: linear-gradient(90deg,
 html[data-view="extensa"] .view-toggle .vt-ic, html:not([data-view]) .view-toggle .vt-ic { background: linear-gradient(90deg, currentColor 0 66%, transparent 66%); }
 @media (max-width: 620px) { .view-toggle { padding: 7px 10px; font-size: 8.5px; gap: 6px; } .view-toggle span:last-child { display: none; } }
 
+/* ==== SELECTOR D'IDIOMA · sempre visible, germà de .head-nav ==== */
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+.lang-switch a.active { opacity: 1; font-weight: 600; }
+.lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+.lang-switch .sep { opacity: 0.25; }
+
 .lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .lg-c, .lg-c img { transition: none; } }
 
@@ -992,6 +1005,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
         </span>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="head-wa">Contacte</a>
       </nav>
+      <!-- Sempre visible, a totes les amplades i germà de .head-nav, com el
+           view-toggle: així no desapareix quan el nav es plega sota el burger. -->
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/" hreflang="en">EN</a>
+      </div>
       <!-- Sempre visible, a totes les amplades: franges per defecte a mòbil,
            tauleta i Instagram; extensa a escriptori, i sempre es pot canviar. -->
       <button class="view-toggle" id="viewToggle" type="button" aria-live="polite">
@@ -1561,6 +1579,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     </div>
     <div class="foot-btm">
       <div class="foot-mark">#Som<em>Clot</em></div>
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/" hreflang="en">EN</a>
+      </div>
       <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965</div>
     </div>
   </div>

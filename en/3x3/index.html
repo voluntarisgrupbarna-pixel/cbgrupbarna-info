@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0A0A0A">
-<title>3x3 Barcelona · 3x3 Basketball Tournament at Glòries | CB Grup Barna</title>
-<meta name="description" content="3x3 basketball tournament in Barcelona organised by CB Grup Barna at Westfield Glòries. Youth and open categories, street format and team registration. Information on the next edition and galleries from previous ones.">
+<title>3×3 Westfield Glòries · Urban 3x3 Basketball Tournament in Barcelona | CB Grup Barna</title>
+<meta name="description" content="3×3 Westfield Glòries: the urban 3x3 basketball tournament run by CB Grup Barna, with Time Chamber and Eix Clot. 3rd edition, June 6-7, 3 venues in Clot-Glòries, 10 categories and €2,000 in prizes, with FIBA points in senior.">
 <meta name="keywords" content="3x3 Barcelona, 3x3 basketball Barcelona, 3x3 tournament, basketball 3x3 Barcelona, 3x3 Westfield Glòries, 3x3 tournament Barcelona">
 <link rel="canonical" href="https://cbgrupbarna.info/en/3x3/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/3x3/">
@@ -16,10 +16,8 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="ca_ES">
-<meta property="og:locale:alternate" content="es_ES">
-<meta property="og:title" content="3x3 Barcelona · 3x3 Basketball Tournament at Glòries | CB Grup Barna">
-<meta property="og:description" content="3x3 basketball tournament in Barcelona organised by CB Grup Barna at Westfield Glòries. Youth and open categories, street format and team registration. Information on the next edition and galleries from previous ones.">
+<meta property="og:title" content="3×3 Westfield Glòries · Urban 3x3 Basketball Tournament in Barcelona | CB Grup Barna">
+<meta property="og:description" content="3×3 Westfield Glòries: the urban 3x3 basketball tournament run by CB Grup Barna, with Time Chamber and Eix Clot. 3rd edition, June 6-7, 3 venues in Clot-Glòries, 10 categories and €2,000 in prizes, with FIBA points in senior.">
 <meta property="og:url" content="https://cbgrupbarna.info/en/3x3/">
 <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -29,15 +27,18 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 <style>
-/* ==== SELECTOR D'IDIOMA ==== */
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-.lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; color: var(--red); }
-.lang-switch .sep { opacity: 0.25; }
+  .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 38px 0; }
+  .photo-strip figure { margin: 0; }
+  .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
+  @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+  .lang-switch .sep { opacity: 0.25; }
 </style>
 <script type="application/ld+json">
 {
@@ -45,16 +46,18 @@
   "@graph": [
     {
       "@type": "SportsEvent",
-      "@id": "https://cbgrupbarna.info/3x3/#torneig",
-      "name": "3x3 Barcelona · 3x3 Basketball Tournament at Westfield Glòries",
+      "@id": "https://cbgrupbarna.info/en/3x3/#torneig",
+      "name": "3×3 Westfield Glòries",
       "alternateName": [
-        "3x3 Westfield Glòries",
+        "3x3 Barna",
         "3x3 Tournament Barcelona",
         "3x3 Basketball Barcelona"
       ],
-      "description": "3x3 basketball tournament in Barcelona organised by CB Grup Barna at Westfield Glòries. Youth and open categories, street format and team registration. Information on the next edition and galleries from previous ones.",
-      "url": "https://cbgrupbarna.info/3x3/",
+      "description": "Urban 3x3 basketball tournament run by CB Grup Barna, with Time Chamber and Eix Clot. 3rd edition: June 6-7, 2026, across three venues in Clot-Glòries, with 10 categories and €2,000 in prizes.",
+      "url": "https://cbgrupbarna.info/en/3x3/",
       "sport": "3x3 Basketball",
+      "startDate": "2026-06-06",
+      "endDate": "2026-06-07",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "eventStatus": "https://schema.org/EventScheduled",
       "organizer": {
@@ -74,8 +77,8 @@
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://cbgrupbarna-3x3timechamber.com/#inscripcio",
-        "availability": "https://schema.org/InStock",
+        "url": "https://www.cbgrupbarna-3x3timechamber.com/inscripcion",
+        "availability": "https://schema.org/SoldOut",
         "category": "Team registration"
       }
     },
@@ -83,15 +86,14 @@
       "@type": "WebPage",
       "@id": "https://cbgrupbarna.info/en/3x3/#webpage",
       "url": "https://cbgrupbarna.info/en/3x3/",
-      "name": "3x3 Barcelona · 3x3 Basketball Tournament at Glòries | CB Grup Barna",
-      "description": "3x3 basketball tournament in Barcelona organised by CB Grup Barna at Westfield Glòries. Youth and open categories, street format and team registration. Information on the next edition and galleries from previous ones.",
+      "name": "3×3 Westfield Glòries · Urban 3x3 Basketball Tournament in Barcelona | CB Grup Barna",
+      "description": "3×3 Westfield Glòries: the urban 3x3 basketball tournament run by CB Grup Barna, with Time Chamber and Eix Clot. 3rd edition, June 6-7, 3 venues in Clot-Glòries, 10 categories and €2,000 in prizes, with FIBA points in senior.",
       "inLanguage": [
-        "en-US",
-        "ca-ES",
-        "es-ES"
+        "en",
+        "ca-ES"
       ],
       "about": {
-        "@id": "https://cbgrupbarna.info/3x3/#torneig"
+        "@id": "https://cbgrupbarna.info/en/3x3/#torneig"
       },
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
@@ -102,10 +104,10 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is the Westfield Glòries 3x3?",
+          "name": "What is 3×3 Westfield Glòries?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It's the street 3x3 basketball tournament that CB Grup Barna organises at the Westfield Glòries shopping centre in Barcelona, with Time Chamber and the Clot-Glòries commercial area. It's played on an outdoor court, 3-on-3 on a single basket."
+            "text": "It's the urban 3x3 basketball tournament with FIBA points organized by CB Grup Barna, Time Chamber and Eix Clot in the Clot-Glòries neighborhood of Barcelona. The 3rd edition was played on June 6-7, 2026, spread across three venues: Westfield Glòries, La Nau del Clot and Rambleta del Clot."
           }
         },
         {
@@ -113,15 +115,23 @@
           "name": "Who can play?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "There are youth categories and open categories, so both club teams and groups of friends can play. You don't need to be a federated player to sign up for the open categories."
+            "text": "There are 10 categories, from Escoleta (ages 6-7) to seniors and veterans, plus the inclusive Barna Màgics category. You don't need to be federated to sign up for the open categories; in seniors, however, FIBA 3x3 world ranking points are awarded."
           }
         },
         {
           "@type": "Question",
-          "name": "What is the 3x3 format like?",
+          "name": "What is the 3x3 format?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Three players per team on a single basket, on a half court. Matches are short and back to back, so on a single day a team can play several knockout rounds. It's the Olympic basketball format since the Tokyo Games."
+            "text": "Teams of 3 to 5 players (3 on court and up to 2 substitutes) on a single basket, half-court. Short games, 10 minutes or up to 21 points, so a team can play several rounds in a row on the same day. It has been the Olympic basketball format since the Tokyo 2021 Games."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What prizes are there?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "€2,000 in prizes: €1,000 for the winning Senior Women's team and €1,000 for the winning Senior Men's team, an equal prize unique in Barcelona. The rest of the categories receive trophies, medals and gifts from neighborhood businesses."
           }
         },
         {
@@ -129,15 +139,15 @@
           "name": "When is the next edition?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Dates are announced on this page, on the official website cbgrupbarna-3x3timechamber.com and on Instagram (@cbgrupbarna). The tournament is usually held at the start of summer. Anyone who wants to be notified when registration opens can ask via the club's WhatsApp."
+            "text": "The dates of the 4th edition will be announced on this page, on the official website cbgrupbarna-3x3timechamber.com and on Instagram (@cbgrupbarna). Anyone who wants to be notified when registration opens can ask via the club's WhatsApp."
           }
         },
         {
           "@type": "Question",
-          "name": "Where exactly is it?",
+          "name": "Where exactly is it held?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "At Westfield Glòries, on Plaça de les Glòries Catalanes in Barcelona, right next to the El Clot neighbourhood and the Sant Martí District."
+            "text": "At three venues less than 15 minutes' walk apart: Westfield Glòries (Av. Diagonal 208), La Nau del Clot (Carrer de la Llacuna 172) and Rambleta del Clot, in the Clot neighborhood and Sant Martí District of Barcelona."
           }
         }
       ]
@@ -149,7 +159,7 @@
           "@type": "ListItem",
           "position": 1,
           "name": "CB Grup Barna",
-          "item": "https://cbgrupbarna.info/"
+          "item": "https://cbgrupbarna.info/en/"
         },
         {
           "@type": "ListItem",
@@ -162,6 +172,7 @@
   ]
 }
 </script>
+<script src="/js/galetes.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -172,13 +183,16 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Main navigation">
-      <a href="/en/escoleta/">Escoleta</a>
-      <a href="/en/campus/" class="opt">Camp</a>
-      <a href="/en/3x3/" class="opt">3x3</a>
-      <a href="/en/blog/" class="opt">Blog</a>
-      <a href="/en/premsa/" class="opt">Press</a>
+      <a href="/en/club/">Club</a>
+      <a href="/en/escoleta/" class="opt">Escoleta</a>
+      <a href="/en/partits/">Match days</a>
       <a href="/en/patrocinadors/" class="opt">Sponsors</a>
-      <a href="/#info">Information</a>
+      <a href="/en/campus/" class="opt">Camp</a>
+      <a href="/en/magics/" class="opt">Màgics</a>
+      <a href="/en/3x3/" class="opt">3x3</a>
+      <a href="/en/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/en/fotos/" class="opt">Gallery</a>
+      <a href="/en/premsa/">Press</a>
     </nav>
     <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/3x3/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/3x3/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/3x3/" hreflang="en" class="active">EN</a>
@@ -186,66 +200,132 @@
   </div>
 </header>
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="/en/">Home</a> · <span>3x3 Barcelona</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="/en/">Home</a> · <span>3×3 Westfield Glòries</span></nav></div>
 <div class="wrap">
   <div class="phead">
-    <p class="eyebrow red">Street tournament · Westfield Glòries · Barcelona</p>
-    <h1>3x3 Barcelona</h1>
-    <p class="lede">The 3x3 basketball tournament CB Grup Barna organises at Westfield Glòries, right next
-    to El Clot. Street format, short back-to-back matches, youth categories and open categories
-    for groups of friends.</p>
+    <p class="eyebrow red">Urban tournament · 3rd edition · June 6-7, 2026</p>
+    <h1>3×3 Westfield Glòries</h1>
+    <p class="lede">Barcelona's biggest urban 3x3 basketball tournament: CB Grup Barna,
+    Time Chamber and Eix Clot bring it to the Clot-Glòries neighborhood, with FIBA points and
+    €2,000 in prizes split equally between senior women's and men's.</p>
     <div class="btn-row" style="margin-top:28px">
-      <a href="https://cbgrupbarna-3x3timechamber.com/#inscripcio" class="btn red" target="_blank" rel="noopener"
-         data-cta="3x3-inscripcio">Register your team</a>
-      <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hi!%20I%27d%20like%20information%20about%20the%20Barcelona%203x3%20tournament"
-         class="btn ghost" target="_blank" rel="noopener" data-cta="3x3-wa">Request information</a>
+      <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hello!%20I%27d%20like%20to%20be%20notified%20about%20the%20next%203x3%20edition"
+         class="btn red" target="_blank" rel="noopener" data-cta="3x3-wa">Notify me of the next edition</a>
+      <a href="https://www.cbgrupbarna-3x3timechamber.com" class="btn ghost" target="_blank" rel="noopener"
+         data-cta="3x3-web-oficial">Official tournament website</a>
+    </div>
+    <div class="phead-media">
+      <img src="/3x3/img/hero-bg-1.jpg" alt="Outdoor court at 3x3 Westfield Glòries packed with spectators, with the Burger King and Carrefour of Plaça de les Glòries in the background" width="1600" height="900" fetchpriority="high">
     </div>
   </div>
 
   <div class="narrow prose">
-    <h2>What is 3x3 basketball</h2>
-    <p>3x3 is half-court basketball: <strong>three players per team and a single basket</strong>.
-    Matches are short, the score moves fast and on a single day a team can play several
-    knockout rounds back to back. It's the format that entered the Olympic Games in Tokyo and the
-    one that works best on the street, because it only needs half a court and an afternoon.</p>
+    <h2>What 3x3 basketball is</h2>
+    <p>3x3 is half-court basketball: <strong>teams of 3 to 5 players and a single basket</strong>,
+    with 3 on court and up to 2 substitutes. Games last 10 minutes or until 21 points, the scoring
+    moves fast, and in a single day a team can play several knockout rounds in a row. It's the
+    format that entered the Olympic Games at Tokyo 2021 and the one that works best on the street,
+    because it only needs half a court and an afternoon.</p>
 
-    <h2>Barna's 3x3, at Glòries</h2>
-    <p>CB Grup Barna brings the tournament to <strong>Westfield Glòries</strong>, on Plaça de les
-    Glòries Catalanes, together with <strong>Time Chamber</strong> and the Clot and Glòries commercial
-    area. The idea is simple: take basketball out of the sports hall and put it where people already
-    are, a place thousands of people pass through on a Saturday morning.</p>
-    <p>The tournament has youth categories, designed for club teams, and open categories where any
-    group can sign up without being a federated club. That mix is what gives it its atmosphere: club
-    teams and groups of friends from the neighbourhood share the same court.</p>
+    <h2>The 3rd edition, across three venues in Clot-Glòries</h2>
+    <p>On June 6-7, 2026, CB Grup Barna, <strong>Time Chamber</strong> and <strong>Eix Clot</strong>
+    took the tournament to three venues less than 15 minutes' walk apart: <strong>Westfield
+    Glòries</strong> (main venue and FIBA court, Av. Diagonal 208), <strong>La Nau del Clot</strong>
+    (the club's own pavilion, Carrer de la Llacuna 172, for the youth categories) and
+    <strong>Rambleta del Clot</strong> (outdoor court, for senior amateurs and the Barna Màgics).</p>
+    <p>The tournament has 10 categories, from Escoleta to veterans, and only in seniors are
+    <strong>FIBA 3x3</strong> world ranking points and the cash prize awarded. Everyone else gets
+    trophies, medals and gifts from neighborhood businesses.</p>
 
     <div class="facts">
-      <div><b><em>3</em></b><span>Players per team</span></div>
+      <div><b>3</b><span>Venues in Clot-Glòries</span></div>
       <div><b>10</b><span>Categories</span></div>
-      <div><b>60</b><span>Teams per edition</span></div>
-      <div><b>BCN</b><span>Westfield Glòries</span></div>
+      <div><b>€2,000</b><span>In prizes</span></div>
+      <div><b>800+</b><span>Players</span></div>
+    </div>
+
+    <h2>Categories and ages</h2>
+    <ul>
+      <li>Escoleta (born 2018-2019) · Premini (2016-2017) · Mini (2014-2015)</li>
+      <li>Pre-U12 U12 (age 12) · U14 (2012-2013) · U16 (2010-2011)</li>
+      <li>U18 (2008-2009) · U23 (2003-2007)</li>
+      <li>Senior Men's Pro and Senior Women's Pro — with FIBA points</li>
+      <li>Senior Amateur (veterans, born up to 1986)</li>
+      <li><strong>Barna Màgics</strong> — inclusive, mixed category, no previous experience needed</li>
+    </ul>
+
+    <h2>Prizes</h2>
+    <p><strong>€2,000 in prizes</strong>: €1,000 for the winning Senior Women's team and €1,000
+    for the winning Senior Men's team — an equal prize, unique in Barcelona. The rest of the
+    categories receive trophies and medals, and every team takes home an official tournament
+    t-shirt and gifts from collaborating businesses.</p>
+
+    <h2>Barna Màgics, the inclusive category</h2>
+    <p>New in the 3rd edition: mixed teams of players with and without functional diversity, with
+    adapted rules. Real competition, not exhibition — same intensity, same trophy. It's played at
+    Rambleta del Clot, during Pride Month, with zero tolerance for any discrimination.</p>
+
+    <h2>3x3, in pictures</h2>
+    <p>Photos from FotoJane and the organization at the 3rd edition of 3x3 Westfield Glòries.</p>
+    <div class="photo-strip">
+      <figure><img src="/3x3/img/hero-bg-2.jpg" alt="Women's 3x3 match on the Westfield Glòries court, with the Time Chamber logo painted on the floor" loading="lazy" decoding="async" width="1600" height="900"></figure>
+      <figure><img src="/3x3/img/hero-bg-3.jpg" alt="Player at 3x3 Westfield Glòries scoring on a drive to the basket" loading="lazy" decoding="async" width="1600" height="900"></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1UHH008wxY6sBXvG7t6qSEAnKmMODY1Lt&sz=w900" alt="Women's team at 3x3 Westfield Glòries with trophy" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1AxWHKorw5QynuTo-3W9VBoCJjuiGXp0D&sz=w900" alt="Dunk at 3x3 Westfield Glòries, on the outdoor court" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1rCG5fuRaf-dhWTVugB_-rjyHqK8p9XhI&sz=w900" alt="Player driving to the basket at 3x3 Westfield Glòries" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1zinFUunDFOBr-d3PSH7ViiKlZRXg1XVz&sz=w900" alt="Player driving to the basket at 3x3 Westfield Glòries" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1Kp7yWaYQMvrk8XFNJkYw8hE00WFPvoma&sz=w900" alt="Players at 3x3 Westfield Glòries shaking hands after the game" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1c_-dZiMaWEwms7DMPXRCUsvUI_m1sF6V&sz=w900" alt="Open category team at 3x3 Westfield Glòries with trophies" loading="lazy" decoding="async" width="900" height="1200"></figure>
+    </div>
+
+    <h2>Organizers and sponsors</h2>
+    <p>The tournament is made possible by CB Grup Barna, Time Chamber and Eix Clot, with the
+    support of Barcelona City Council and Westfield Glòries as official venue.</p>
+    <div class="partners-grid">
+      <a class="partner-logo" href="/en/patrocinadors/partners/westfield-glories/" title="Westfield Glòries · View profile"><img src="/partners/westfield-glories.png" alt="Westfield Glòries" loading="lazy"></a>
+      <a class="partner-logo" href="/en/patrocinadors/partners/time-chamber/" title="Time Chamber · View profile"><img src="/partners/time-chamber.png" alt="Time Chamber" loading="lazy"></a>
+      <a class="partner-logo" href="/en/patrocinadors/partners/eix-clot/" title="Eix Clot · View profile"><img src="/partners/eix-clot.png" alt="Eix Clot" loading="lazy"></a>
+    </div>
+
+    <div class="franges" aria-label="Other doors into the club">
+      <a class="franja" href="/en/escoleta/" data-cta="3x3-franja-escoleta">
+        <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Girl from CB Grup Barna's Escoleta with the ball"></span>
+        <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">If they haven't started yet and are 4 to 7 years old, this is the way in.</span></span>
+        <span class="franja-go"><em>Ages 4 to 7</em><i></i></span>
+      </a>
+      <a class="franja franja--red" href="/en/partits/" data-cta="3x3-franja-dies-partit">
+        <span class="franja-tx"><span class="franja-t">Match days</span><span class="franja-s">The schedule for all the club's federated teams.</span></span>
+        <span class="franja-go"><em>Season 26·27</em><i></i></span>
+      </a>
+      <a class="franja" href="/en/campus/" data-cta="3x3-franja-campus">
+        <span class="franja-ph"><img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 360w, /img/campus-hero@2x.webp 720w" sizes="150px" width="360" height="202" loading="lazy" decoding="async" alt="Training session at CB Grup Barna's basketball camp"></span>
+        <span class="franja-tx"><span class="franja-t">Basketball camp</span><span class="franja-s">Intensive skills weeks every summer.</span></span>
+        <span class="franja-go"><em>Every summer</em><i></i></span>
+      </a>
     </div>
 
     <h2>Previous editions</h2>
-    <p>Galleries from editions already played are open to everyone:</p>
+    <p>The galleries from past editions are open to everyone:</p>
     <ul>
-      <li><a href="/en/galeria-3x3-glories/">Westfield Glòries 3x3 gallery</a></li>
+      <li><a href="/en/galeria-3x3-glories/">3x3 Westfield Glòries gallery</a></li>
       <li><a href="/en/fotos-3x3/">3x3 tournament photos</a></li>
-      <li><a href="/en/fotos/">General club gallery</a></li>
+      <li><a href="/en/fotos/">Club's general gallery</a></li>
     </ul>
 
-    <h2>How to sign up a team</h2>
-    <p>Registration is done directly on the tournament's official website,
-    <a href="https://cbgrupbarna-3x3timechamber.com" target="_blank" rel="noopener">cbgrupbarna-3x3timechamber.com</a>, by
-    team and not by player. Places are limited and recent editions have filled up before starting,
-    so the sooner registration is completed, the safer it is. If registration for the next edition
-    hasn't opened yet, advance notice can be requested via the club's WhatsApp or by leaving
-    contact details in the <a href="/#info">information form</a>.</p>
+    <h2>The next edition</h2>
+    <p>Registration for the 3rd edition sold out before the tournament began. Registration is
+    always by team (3 to 5 players) on the official website,
+    <a href="https://www.cbgrupbarna-3x3timechamber.com" target="_blank" rel="noopener">cbgrupbarna-3x3timechamber.com</a>,
+    and anyone without a full team can also sign up: the club assigns them to one before the
+    tournament starts. Dates for the 4th edition have not been announced yet. Anyone who wants to
+    be notified when registration opens can ask via the club's WhatsApp or leave their contact
+    details in the <a href="/en/#info">information form</a>.</p>
 
-    <h2>Frequently asked questions</h2>
-    <div class="faq"><details><summary>What is the Westfield Glòries 3x3?</summary><p>It's the street 3x3 basketball tournament that CB Grup Barna organises at the Westfield Glòries shopping centre in Barcelona, with Time Chamber and the Clot-Glòries commercial area. It's played on an outdoor court, 3-on-3 on a single basket.</p></details><details><summary>Who can play?</summary><p>There are youth categories and open categories, so both club teams and groups of friends can play. You don't need to be a federated player to sign up for the open categories.</p></details><details><summary>What is the 3x3 format like?</summary><p>Three players per team on a single basket, on a half court. Matches are short and back to back, so on a single day a team can play several knockout rounds. It's the Olympic basketball format since the Tokyo Games.</p></details><details><summary>When is the next edition?</summary><p>Dates are announced on this page, on the official website cbgrupbarna-3x3timechamber.com and on Instagram (@cbgrupbarna). The tournament is usually held at the start of summer. Anyone who wants to be notified when registration opens can ask via the club's WhatsApp.</p></details><details><summary>Where exactly is it?</summary><p>At Westfield Glòries, on Plaça de les Glòries Catalanes in Barcelona, right next to the El Clot neighbourhood and the Sant Martí District.</p></details></div>
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq"><details><summary>What is 3×3 Westfield Glòries?</summary><p>It's the urban 3x3 basketball tournament with FIBA points organized by CB Grup Barna, Time Chamber and Eix Clot in the Clot-Glòries neighborhood of Barcelona. The 3rd edition was played on June 6-7, 2026, spread across three venues: Westfield Glòries, La Nau del Clot and Rambleta del Clot.</p></details><details><summary>Who can play?</summary><p>There are 10 categories, from Escoleta (ages 6-7) to seniors and veterans, plus the inclusive Barna Màgics category. You don't need to be federated to sign up for the open categories; in seniors, however, FIBA 3x3 world ranking points are awarded.</p></details><details><summary>What is the 3x3 format?</summary><p>Teams of 3 to 5 players (3 on court and up to 2 substitutes) on a single basket, half-court. Short games, 10 minutes or up to 21 points, so a team can play several rounds in a row on the same day. It has been the Olympic basketball format since the Tokyo 2021 Games.</p></details><details><summary>What prizes are there?</summary><p>€2,000 in prizes: €1,000 for the winning Senior Women's team and €1,000 for the winning Senior Men's team, an equal prize unique in Barcelona. The rest of the categories receive trophies, medals and gifts from neighborhood businesses.</p></details><details><summary>When is the next edition?</summary><p>The dates of the 4th edition will be announced on this page, on the official website cbgrupbarna-3x3timechamber.com and on Instagram (@cbgrupbarna). Anyone who wants to be notified when registration opens can ask via the club's WhatsApp.</p></details><details><summary>Where exactly is it held?</summary><p>At three venues less than 15 minutes' walk apart: Westfield Glòries (Av. Diagonal 208), La Nau del Clot (Carrer de la Llacuna 172) and Rambleta del Clot, in the Clot neighborhood and Sant Martí District of Barcelona.</p></details></div>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
-    <div class="closer"><h2>I want to register a team for the next 3x3</h2><p>Registration is done by team on the tournament's official website.</p><div class="btn-row"><a href="https://cbgrupbarna-3x3timechamber.com/#inscripcio" class="btn red" target="_blank" rel="noopener" data-cta="3x3-closer-inscripcio">Register at cbgrupbarna-3x3timechamber.com</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hi!%20I%27d%20like%20to%20register%20a%20team%20for%20the%203x3" class="btn ghost" target="_blank" rel="noopener" data-cta="3x3-closer-wa">Club WhatsApp</a></div></div>
+    <div class="closer"><h2>Notify me of the next edition</h2><p>Spots for the 3rd edition sold out. Leave us your contact details and we'll let you know when registration opens for the 4th.</p><div class="btn-row"><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hello!%20I%27d%20like%20to%20be%20notified%20about%20the%20next%203x3%20edition" class="btn red" target="_blank" rel="noopener" data-cta="3x3-closer-wa">Notify me on WhatsApp</a><a href="https://www.cbgrupbarna-3x3timechamber.com" class="btn ghost" target="_blank" rel="noopener" data-cta="3x3-closer-web">Official tournament website</a></div></div>
     </div>
   </div>
 </div>
@@ -257,14 +337,19 @@
         <h3>The Barna</h3>
         <a href="/en/escoleta/">Basketball school</a>
         <a href="/en/campus/">Basketball camp</a>
+        <a href="/en/magics/">Barna Màgics</a>
         <a href="/en/3x3/">3x3 tournament</a>
+        <a href="/en/cistella-petita/">Cistella Petita</a>
         <a href="/en/patrocinadors/">Sponsors and partners</a>
+        <a href="/en/instal-lacions/">Facilities</a>
+        <a href="/en/organigrama/">Organization chart</a>
+        <a href="/en/posicionament/">Club positioning</a>
         <a href="/en/grup-barna-dades-oficials/">Official data</a>
       </div>
       <div class="foot-col">
         <h3>Season</h3>
-        <a href="/en/partits/">Matches and results</a>
-        <a href="/en/partits/calendaris/">Team calendars</a>
+        <a href="/en/partits/">Match days</a>
+        <a href="/en/partits/calendaris/">Match days by team</a>
         <a href="/en/fotos/">Photo gallery</a>
         <a href="/en/premidonaesport/">Women and Sport Award</a>
         <a href="/en/blog/">Blog</a>
@@ -272,10 +357,17 @@
       </div>
       <div class="foot-col">
         <h3>Contact</h3>
-        <a href="/#info">Request information</a>
+        <a href="/en/#info">Request information</a>
+        <a href="/en/faq/">Frequently asked questions</a>
         <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/en/politica-de-privacitat/">Privacy policy</a>
+        <a href="/en/avis-legal/">Legal notice</a>
+        <a href="/en/politica-de-privacitat/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Social</h3>

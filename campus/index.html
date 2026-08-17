@@ -8,6 +8,10 @@
 <meta name="description" content="Campus de bàsquet a Barcelona per a nens i nenes de base. El campus d'estiu del CB Grup Barna al Clot, Districte de Sant Martí: setmanes intensives de tecnificació, grups per edat i places limitades. Informació i llista d'espera.">
 <meta name="keywords" content="campus bàsquet Barcelona, campus baloncesto Barcelona, academia de baloncesto Barcelona verano, campus estiu bàsquet, grup barna campus, campus tecnificació bàsquet Barcelona">
 <link rel="canonical" href="https://cbgrupbarna.info/campus/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/campus/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/campus/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/campus/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/campus/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -62,6 +66,11 @@
     border: 1px solid var(--line); background: var(--paper-2); padding: clamp(18px, 2.6vw, 26px); margin-top: 4px; }
   .gal-cta p { font-size: 13.5px; color: var(--ink-2); margin: 0; max-width: 46ch; }
   .gal-cta .btn { flex-shrink: 0; }
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+  .lang-switch .sep { opacity: 0.25; }
 </style>
 <script type="application/ld+json">
 {
@@ -212,6 +221,9 @@
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
     </nav>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/campus/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/campus/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/campus/" hreflang="en">EN</a>
+    </div>
   </div>
 </header>
 <main id="main">

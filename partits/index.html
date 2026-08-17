@@ -8,11 +8,17 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/logo.png">
 <link rel="canonical" href="https://cbgrupbarna.info/partits/"/>
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/partits/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/partits/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/partits/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/partits/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="keywords" content="partits CB Grup Barna, resultats Grup Barna, calendari basquet Clot, bàsquet Barcelona, La Nau del Clot, dies de partit">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://cbgrupbarna.info/partits/">
 <meta property="og:title" content="Dies de partit · calendari i resultats · CB Grup Barna">
 <meta property="og:description" content="Calendari de tots els equips del CB Grup Barna: cap de setmana, resultats de la jornada anterior i calendari global de la temporada.">
@@ -72,6 +78,12 @@
     .mes .mrow .hora { grid-column: 1; }
     .mes .mrow .qui { grid-column: 2; grid-row: 1 / span 2; }
   }
+  /* ==== Selector d'idioma ==== */
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+  .lang-switch .sep { opacity: 0.25; }
 </style>
 <script src="/js/galetes.js"></script>
 </head>
@@ -95,6 +107,9 @@
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
     </nav>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/partits/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/partits/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/partits/" hreflang="en">EN</a>
+    </div>
   </div>
 </header>
 

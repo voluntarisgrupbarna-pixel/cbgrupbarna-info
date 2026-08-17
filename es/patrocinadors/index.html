@@ -29,14 +29,14 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "SportsOrganization",
+      "@type": ["SportsClub", "SportsOrganization", "LocalBusiness"],
       "@id": "https://cbgrupbarna.info/#club",
       "name": "CB Grup Barna",
       "alternateName": "Club Bàsquet Grup Barna",
@@ -61,11 +61,11 @@
       "@id": "https://cbgrupbarna.info/es/patrocinadors/#patrocini",
       "name": "Dossier de patrocinio · CB Grup Barna",
       "alternateName": [
-        "Patrocinadors CB Grup Barna",
-        "Sponsoring club de bàsquet Barcelona"
+        "Patrocinadores CB Grup Barna",
+        "Sponsoring club de baloncesto Barcelona"
       ],
       "description": "Dossier público del CB Grup Barna: club, impacto, proyectos y oportunidades de colaboración para la temporada 2026/27. Niveles desde 300€, partners actuales y contacto directo por WhatsApp.",
-      "serviceType": "Patrocini esportiu",
+      "serviceType": "Patrocinio deportivo",
       "url": "https://cbgrupbarna.info/es/patrocinadors/",
       "provider": {
         "@id": "https://cbgrupbarna.info/#club"
@@ -82,7 +82,7 @@
         "servicePhone": {
           "@type": "ContactPoint",
           "telephone": "+34698425153",
-          "contactType": "Patrocinis i col·laboracions"
+          "contactType": "Patrocinios y colaboraciones"
         }
       }
     },
@@ -97,7 +97,7 @@
         "@id": "https://cbgrupbarna.info/es/patrocinadors/#patrocini"
       },
       "isPartOf": {
-        "@id": "https://cbgrupbarna.info/#website"
+        "@id": "https://cbgrupbarna.info/es/#website"
       }
     },
     {
@@ -165,11 +165,12 @@
   ]
 }
 </script>
+<script src="/js/galetes.js"></script>
 <style>
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
 .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
 .lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; }
+.lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
 .lang-switch .sep { opacity: 0.25; }
 </style>
 </head>
@@ -182,13 +183,16 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegación principal">
-      <a href="/es/escoleta/">Escoleta</a>
-      <a href="/es/campus/" class="opt">Campus</a>
-      <a href="/es/3x3/" class="opt">3x3</a>
-      <a href="/es/blog/" class="opt">Blog</a>
-      <a href="/es/premsa/" class="opt">Prensa</a>
+      <a href="/es/club/">Club</a>
+      <a href="/es/escoleta/" class="opt">Escoleta</a>
+      <a href="/es/partits/">Días de partido</a>
       <a href="/es/patrocinadors/" class="opt">Patrocinadores</a>
-      <a href="/es/#info">Información</a>
+      <a href="/es/campus/" class="opt">Campus</a>
+      <a href="/es/magics/" class="opt">Màgics</a>
+      <a href="/es/3x3/" class="opt">3x3</a>
+      <a href="/es/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/es/fotos/" class="opt">Galería</a>
+      <a href="/es/premsa/">Prensa</a>
     </nav>
   </div>
 </header>
@@ -236,12 +240,51 @@
   </div>
 </div>
 
+<div class="wrap section">
+  <div class="narrow prose">
+    <p class="eyebrow red">Posicionamiento competitivo</p>
+    <h2>La estructura de un club grande, con alma de barrio</h2>
+    <p>La Federació Catalana de Bàsquet publica la ficha oficial de cada club: cuántos equipos
+    tiene, en qué categorías compite y si su primer equipo sénior forma parte de la misma
+    entidad que la base. Con esos datos públicos, así queda el Barna frente a los clubes de
+    referencia de Catalunya.</p>
+    <ul>
+      <li><strong>FC Barcelona</strong> — 10 equipos federados en Catalunya, solo masculinos,
+      de Mini a Júnior, sin Pre-Mini. Y sin ningún equipo femenino: su proyecto de bàsquet
+      femení (Barça CBS, con el CB Santfeliuenc) cerró al final de la 2024-25 por motivos
+      económicos, tras haber llegado a jugar en Lliga F Endesa. Su reserva sénior masculina
+      juega Copa Catalunya, no Súper Copa; el primer equipo, Lliga ACB.</li>
+      <li><strong>Joventut Badalona (la Penya)</strong> — la base más grande de Catalunya: 53
+      equipos, de Pre-Mini a Júnior, en los dos géneros. Sin sénior propio en esta entidad: quien
+      llega arriba, sale del club.</li>
+      <li><strong>Bàsquet Manresa</strong> — dos clubes distintos según el género: 17 equipos
+      masculinos sin sénior, y un club femenino aparte (Manresa CBF) con sénior en Lliga
+      Femenina 2, la liga estatal.</li>
+      <li><strong>Fundació Bàsquet Girona</strong> — 23 equipos, de Pre-Mini a Júnior, en los dos
+      géneros, presidida por Marc Gasol. Tampoco tiene sénior propio: su primer equipo juega en
+      Lliga Endesa, fuera de esta ficha.</li>
+      <li><strong>CB Grup Barna</strong> — más de 34 equipos, de Pre-Mini a Sénior, y el único de
+      esta lista con dos equipos sénior — primero y reserva — en los dos géneros a la vez,
+      compitiendo ambos en Súper Copa FCBQ, la máxima categoría territorial.</li>
+    </ul>
+    <div class="press-quote">
+      <p class="eyebrow red">Lo que nos hace distintos</p>
+      <p>En los grandes clubes, formación y primer equipo casi nunca son la misma entidad. En el
+      Barna, sí: la misma jugadora que entra a los 4 años en la Escoleta puede acabar jugando la
+      Súper Copa sin cambiar nunca de camiseta.</p>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted)">Fuente: fichas de club de la Federació
+    Catalana de Bàsquet (basquetcatala.cat), agosto 2026. Análisis completo en el
+    <a href="/es/blog/club-formacio-i-competitiu-catalunya/">blog del club</a>.</p>
+  </div>
+</div>
+
 <div class="wrap section band-soft" id="proyectos">
   <p class="eyebrow red center">Proyectos con nombre propio</p>
   <h2 class="center" style="margin-top:14px">Cuatro puertas para entrar en el Barna</h2>
   <p class="narrow center lede" style="margin:18px auto 0">Cada proyecto ofrece una forma
   distinta de conectar con deporte, familias, territorio e instituciones.</p>
-  <div class="cards" style="margin-top:clamp(28px,4vw,46px)"><div class="card"><div class="card-media"><img src="/patrocinis/photos/team_sf15.jpg" alt="Equip del CB Grup Barna a la Supercopa" loading="lazy"></div><div class="card-body"><span class="card-tag">01 · Alto rendimiento</span><h3>Supercopa 26/27</h3><p>La temporada de mayor exigencia deportiva del club: primer equipo femenino y masculino compitiendo en la máxima categoría catalana.</p></div></div><div class="card"><div class="card-media"><img src="/patrocinis/photos/club_cbgb006.jpg" alt="Torneig 3x3 a Westfield Glòries" loading="lazy"></div><div class="card-body"><span class="card-tag">02 · Evento de ciudad</span><h3>3x3 Westfield Glòries</h3><p>Un torneo urbano registrado en FIBA 3x3 que conecta deporte, ciudad, marcas y centenares de jugadores y jugadoras.</p></div></div><div class="card"><div class="card-media"><img src="/patrocinis/photos/player_caf01.jpg" alt="Jugador del campus de tecnificació" loading="lazy"></div><div class="card-body"><span class="card-tag">03 · Formación</span><h3>Campus × Time Chamber</h3><p>Tecnificación en Navidad, Semana Santa y verano con turnos de alta ocupación y una propuesta formativa reconocible.</p></div></div><div class="card"><div class="card-media"><img src="/patrocinis/photos/club_cbgb016.jpg" alt="Jugadora dels Barna Màgics amb representants del club" loading="lazy"></div><div class="card-body"><span class="card-tag">04 · Impacto social</span><h3>Barna Màgics</h3><p>Baloncesto para personas con diversidad intelectual. Un proyecto que convierte la inclusión en práctica semanal.</p></div></div></div>
+  <div class="cards" style="margin-top:clamp(28px,4vw,46px)"><div class="card"><div class="card-media"><img src="/patrocinis/photos/team_sf15.jpg" alt="Equipo del CB Grup Barna en la Supercopa" loading="lazy"></div><div class="card-body"><span class="card-tag">01 · Alto rendimiento</span><h3>Supercopa 26/27</h3><p>La temporada de mayor exigencia deportiva del club: primer equipo femenino y masculino compitiendo en la máxima categoría catalana.</p></div></div><div class="card"><div class="card-media"><img src="/patrocinis/photos/club_cbgb006.jpg" alt="Torneo 3x3 en Westfield Glòries" loading="lazy"></div><div class="card-body"><span class="card-tag">02 · Evento de ciudad</span><h3>3x3 Westfield Glòries</h3><p>Un torneo urbano registrado en FIBA 3x3 que conecta deporte, ciudad, marcas y centenares de jugadores y jugadoras.</p></div></div><div class="card"><div class="card-media"><img src="/patrocinis/photos/player_caf01.jpg" alt="Jugador del campus de tecnificación" loading="lazy"></div><div class="card-body"><span class="card-tag">03 · Formación</span><h3>Campus × Time Chamber</h3><p>Tecnificación en Navidad, Semana Santa y verano con turnos de alta ocupación y una propuesta formativa reconocible.</p></div></div><div class="card"><div class="card-media"><img src="/patrocinis/photos/club_cbgb016.jpg" alt="Jugadora de Barna Màgics con representantes del club" loading="lazy"></div><div class="card-body"><span class="card-tag">04 · Impacto social</span><h3>Barna Màgics</h3><p>Baloncesto para personas con diversidad intelectual. Un proyecto que convierte la inclusión en práctica semanal.</p></div></div></div>
   <p class="narrow center" style="margin-top:22px;font-size:13px;color:var(--muted)">
   También impulsamos: Escoleta 4–7 · Premi Dona i Esport · Portes Obertes · Voluntariado</p>
 </div>
@@ -282,6 +325,7 @@
   <p class="narrow center" style="margin-top:18px;font-size:13px;color:var(--muted)">
   Nuevas incorporaciones 26/27 · Nova Farmàcia Clot · Clínica Dental 26</p>
   <div class="btn-row center" style="justify-content:center;margin-top:24px">
+    <a href="/es/partners-mapa/" class="btn red" data-cta="patro-mapa">Ver el mapa de partners</a>
     <a href="https://www.instagram.com/cbgrupbarna/" class="btn ghost" target="_blank" rel="noopener" data-cta="patro-follow-club">Seguir a @cbgrupbarna</a>
   </div>
 
@@ -320,14 +364,21 @@
         <h3>El Barna</h3>
         <a href="/es/escoleta/">Escuela de baloncesto</a>
         <a href="/es/campus/">Campus de baloncesto</a>
+        <a href="/es/magics/">Barna Màgics</a>
         <a href="/es/3x3/">Torneo 3x3</a>
+        <a href="/es/cistella-petita/">Cistella Petita</a>
         <a href="/es/patrocinadors/">Patrocinadores y partners</a>
+        <a href="/es/instal-lacions/">Instalaciones</a>
+        <a href="/es/organigrama/">Organigrama</a>
+        <a href="/es/posicionament/">Posicionamiento del club</a>
         <a href="/es/grup-barna-dades-oficials/">Datos oficiales</a>
+        <a href="/es/proteccion-menor/">Protección del Menor</a>
+        <a href="/es/basquet-femeni/">Baloncesto femenino</a>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/es/partits/">Partidos y resultados</a>
-        <a href="/es/partits/calendaris/">Calendarios por equipo</a>
+        <a href="/es/partits/">Días de partido</a>
+        <a href="/es/partits/calendaris/">Días de partido por equipo</a>
         <a href="/es/fotos/">Galería de fotos</a>
         <a href="/es/premidonaesport/">Premi Dona i Esport</a>
         <a href="/es/blog/">Blog</a>
@@ -336,9 +387,16 @@
       <div class="foot-col">
         <h3>Contacto</h3>
         <a href="/es/#info">Pedir información</a>
+        <a href="/es/faq/">Preguntas frecuentes</a>
         <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/es/politica-de-privacitat/">Política de privacidad</a>
+        <a href="/es/avis-legal/">Aviso legal</a>
+        <a href="/es/politica-de-privacitat/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Redes</h3>

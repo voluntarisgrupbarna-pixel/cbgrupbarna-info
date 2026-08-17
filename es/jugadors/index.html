@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plantilla · CB Grup Barna</title>
-<meta name="description" content="Jugadores y jugadores del CB Grup Barna por equipos. Temporada 2025-2026.">
+<meta name="description" content="Jugadores y jugadoras del CB Grup Barna por equipos. Temporada 2025-2026.">
 <link rel="canonical" href="https://cbgrupbarna.info/es/jugadors/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/jugadors/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/jugadors/">
@@ -14,14 +14,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif}
-  header{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  header{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line);flex-wrap:wrap}
   header img{width:38px;height:38px;object-fit:contain}
   header .t{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em}
   header .t span{color:var(--red)}
   header a.back{margin-left:auto;color:var(--muted);font-size:.8rem;text-decoration:none}
+  .site-nav{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;width:100%;margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--line)}
+  .site-nav a{font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+  .site-nav a:hover{color:var(--txt)}
   .wrap{max-width:960px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
   h1{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;margin-bottom:.2rem}
   h1 span{color:var(--red)}
@@ -35,11 +38,12 @@
   .pname{font-weight:500;font-size:.95rem;line-height:1.25}
   .ppos{color:var(--muted);font-size:.75rem}
   .empty{color:var(--muted);padding:2rem 0}
-  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Bebas Neue', sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-  .lang-switch a { padding: 7px 2px; opacity: 0.55; color: var(--muted); transition: opacity 0.3s, color 0.3s; }
-  .lang-switch a.active { opacity: 1; font-weight: 600; color: var(--txt); }
-  .lang-switch a:hover { opacity: 1; color: var(--red); }
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; margin-left: auto; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
   .lang-switch .sep { opacity: 0.25; }
+  header a.back { margin-left: 0; }
 </style>
 </head>
 <body>
@@ -47,13 +51,24 @@
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CB GRUP <span>BARNA</span></div>
   <a class="back" href="/es/">← Volver a la web</a>
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a href="/es/club/">Club</a>
+    <a href="/es/escoleta/">Escoleta</a>
+    <a href="/es/partits/">Días de partido</a>
+    <a href="/es/patrocinadors/">Patrocinadores</a>
+    <a href="/es/campus/">Campus</a>
+    <a href="/es/3x3/">3x3</a>
+    <a href="/es/cistella-petita/">Cistella Petita</a>
+    <a href="/es/fotos/">Galería</a>
+    <a href="/es/premsa/">Prensa</a>
+  </nav>
   <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
     <a href="/jugadors/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/jugadors/" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/jugadors/" hreflang="en">EN</a>
   </div>
 </header>
 <div class="wrap">
   <h1>LA <span>PLANTILLA</span></h1>
-  <div class="sub">Jugadoras y jugadores del CB Grup Barna por equipos · Temporada 2025-2026</div>
+  <div class="sub">Jugadores y jugadoras del CB Grup Barna por equipos · Temporada 2025-2026</div>
   <div id="roster"><div class="empty">Cargando plantilla…</div></div>
 </div>
 <script src="/jugadors/jugadors.js"></script>

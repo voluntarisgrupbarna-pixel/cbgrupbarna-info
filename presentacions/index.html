@@ -8,6 +8,10 @@
 <meta name="description" content="Totes les presentacions del CB Grup Barna en un sol lloc: la presentació institucional dels 60 anys i les que anirem publicant per a famílies, patrocinadors i institucions.">
 <meta name="keywords" content="presentacions CB Grup Barna, dossier club bàsquet Barcelona, presentació institucional Clot">
 <link rel="canonical" href="https://cbgrupbarna.info/presentacions/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/presentacions/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/presentacions/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/presentacions/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/presentacions/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -100,6 +104,12 @@
   .theme:hover{border-color:var(--red)}
   .theme .ic{width:11px;height:11px;border-radius:50%;border:1.5px solid currentColor;display:block;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);flex-shrink:0}
   @media(max-width:620px){.theme{padding:7px 9px;font-size:8.5px}}
+
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; color: #fff; text-decoration: none; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+  .lang-switch .sep { opacity: 0.25; }
 
   .crumb{padding:14px 0;font-size:11.5px;color:var(--muted)}
   .crumb a{color:var(--muted);text-decoration:none}
@@ -221,6 +231,9 @@
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
     </nav>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/presentacions/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/presentacions/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/presentacions/" hreflang="en">EN</a>
+    </div>
     <button class="theme" id="theme" type="button" aria-live="polite">
       <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
     </button>

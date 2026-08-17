@@ -7,6 +7,10 @@
 <title>Documents i protocols · CB Grup Barna</title>
 <meta name="description" content="Documents del CB Grup Barna: assegurança esportiva i protocol en cas d'accident, protecció del menor, Pla d'Igualtat, briefing per a col·laboradors, organigrama i instal·lacions.">
 <link rel="canonical" href="https://cbgrupbarna.info/documents/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/documents/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/documents/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/documents/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/documents/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -67,6 +71,12 @@
 }
 </script>
 <style>
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red, #E20613); }
+  .lang-switch .sep { opacity: 0.25; }
+  .head-in .lang-switch { margin-left: auto; }
   .docs2 { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--ink); margin: clamp(20px, 3vw, 32px) 0 clamp(30px, 4vw, 48px); }
   .doc2 { display: flex; flex-direction: column; gap: 6px; padding: 18px 2px; border-bottom: 1px solid var(--line); transition: color 0.3s var(--ease); }
   a.doc2:hover { color: var(--red); }
@@ -96,6 +106,9 @@
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
     </nav>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/documents/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/documents/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/documents/" hreflang="en">EN</a>
+    </div>
   </div>
 </header>
 <main id="main">
