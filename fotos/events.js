@@ -1,7 +1,20 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Actualitzat: 2026-08-16
+// Actualitzat: 2026-08-17
 
 window.GALERIA_EVENTS = [
+  {
+    "id": "vista-sr-collboni-alcade-barcelona-9-feb-26-msx895lw",
+    "title": "VISTA SR. COLLBONI, ALCADE BARCELONA 9 FEB 26",
+    "description": "VISITA ALCALDE AMB EL SEU EQUIP PER CONÈIXER EL CLUB",
+    "date": "2026-08-17",
+    "season": "2025-2026",
+    "location": "NAU DEL CLOT",
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo"
+  },
   {
     "id": "magics-msui1pmu",
     "title": "MÀGICS",
