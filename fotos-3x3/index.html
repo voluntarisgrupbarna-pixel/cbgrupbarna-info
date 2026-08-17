@@ -491,5 +491,6 @@ function toast(m){var el=document.getElementById('toast');el.textContent=m;el.cl
 /* ===== DEEP LINK (?foto=N) ===== */
 (function(){var p=new URLSearchParams(location.search).get('foto');if(p){var i=idxOfN(parseInt(p,10));if(i>=0)setTimeout(function(){openLb(i);},250);}})();
 </script>
+<script src="/scripts/geo-lang.js" defer></script>
 </body>
 </html>
