@@ -715,6 +715,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .menu-col a { display: flex; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 400; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.02em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
 .menu-col a:hover { color: var(--red); padding-left: 10px; }
 .menu-col a small { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.06em; text-transform: none; color: var(--muted); margin-left: auto; white-space: nowrap; }
+/* Zona admin: hi ha de ser al menú per poder-hi arribar, però no competeix
+   amb els destins del club. La protegeix admin-gate.js amb contrasenya. */
+.menu-col a.menu-admin { color: var(--muted); }
+.menu-col a.menu-admin:hover { color: var(--red); }
 .menu-foot { margin-top: 34px; text-align: center; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
 
 /* ==== LEAD · Escoleta ==== */
@@ -1028,6 +1032,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
       <a href="/faq/" data-cta="menu-faq">Preguntes freqüents</a>
       <a href="#acces">Tots els accessos</a>
+      <a href="/admin/" class="menu-admin" rel="nofollow" data-cta="menu-admin">Zona admin <small>amb contrasenya</small></a>
     </div>
   </div>
   <div class="menu-foot">@cbgrupbarna · +34 698 425 153 · El Clot, Barcelona</div>

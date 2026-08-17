@@ -842,9 +842,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── STATS ──
 function buildStats() {
-  const totalPhotos = window.GALERIA_EVENTS.reduce((s, e) => s + e.photos.length, 0);
-  const totalEvents = window.GALERIA_EVENTS.length;
-  const seasons = [...new Set(window.GALERIA_EVENTS.map(e => e.season).filter(Boolean))];
+  const visibles = window.GALERIA_EVENTS.filter(esVisible);
+  const totalPhotos = visibles.reduce((s, e) => s + e.photos.length, 0);
+  const totalEvents = visibles.length;
+  const seasons = [...new Set(visibles.map(e => e.season).filter(Boolean))];
   document.getElementById('hero-stats').innerHTML = [
     { num: totalPhotos.toLocaleString('ca'), label: 'Fotos' },
     { num: totalEvents, label: 'Esdeveniments' },
@@ -854,7 +855,7 @@ function buildStats() {
 
 // ── SEASON FILTERS ──
 function buildSeasonFilters() {
-  const seasons = [...new Set(window.GALERIA_EVENTS.map(e => e.season).filter(Boolean))].sort().reverse();
+  const seasons = [...new Set(window.GALERIA_EVENTS.filter(esVisible).map(e => e.season).filter(Boolean))].sort().reverse();
   const wrap = document.getElementById('season-filters');
   if (!seasons.length) { wrap.style.display = 'none'; return; }
 
@@ -879,9 +880,26 @@ function setSeasonFilter(season) {
   renderEvents();
 }
 
+// ── PÚBLIC / PRIVAT ──
+// Els grups marcats com a privats des de /fotos/admin.html no surten a la
+// galeria per a ningú. Màrqueting els veu afegint ?marqueting=<contrasenya>
+// un sol cop: es desa a la sessió, i es tanca en tancar la pestanya.
+const MK_KEY = 'cbgb-marqueting';
+function esMarqueting() {
+  try {
+    const p = new URLSearchParams(location.search).get('marqueting');
+    const clau = (window.GALERIA_CONFIG || {}).marketing_pin || '';
+    if (p && clau && p === clau) { sessionStorage.setItem(MK_KEY, '1'); return true; }
+    return sessionStorage.getItem(MK_KEY) === '1';
+  } catch (e) { return false; }
+}
+function esVisible(e) {
+  return e.visibility !== 'private' || esMarqueting();
+}
+
 // ── EVENTS GRID ──
 function filteredEvents() {
-  return window.GALERIA_EVENTS.filter(e => {
+  return window.GALERIA_EVENTS.filter(esVisible).filter(e => {
     const matchesSeason = activeSeason === 'all' || e.season === activeSeason;
     const matchesSearch = !searchQuery ||
       e.title.toLowerCase().includes(searchQuery) ||
