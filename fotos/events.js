@@ -3,6 +3,19 @@
 
 window.GALERIA_EVENTS = [
   {
+    "id": "jugadors-es-2526-msyqgnil",
+    "title": "JUGADORS/ES 2526",
+    "description": null,
+    "date": null,
+    "season": "2025-2026",
+    "location": null,
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo"
+  },
+  {
     "id": "vista-sr-collboni-alcade-barcelona-9-feb-26-msx895lw",
     "title": "VISTA SR. COLLBONI, ALCADE BARCELONA 9 FEB 26",
     "description": "VISITA ALCALDE AMB EL SEU EQUIP PER CONÈIXER EL CLUB",
