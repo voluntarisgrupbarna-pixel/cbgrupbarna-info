@@ -6,8 +6,8 @@ lo pisa una sincronización externa: un borrado, un cambio de máquina o un sync
 se lleva años de criterio acumulado. Esto lo arregla — cada push a GitHub es una
 copia fuera del ordenador.
 
-**Última sincronización: 2026-08-14 12:06 UTC** (sin cambios respecto al 13/08:
-las 38 skills del club estaban idénticas). Cierra la incidencia O-12 de
+**Última sincronización: 2026-08-18 13:36 UTC** (sin cambios desde el 14/08:
+las 38 skills del club siguen idénticas). Cierra la incidencia O-12 de
 `.claude/knowledge/bbdd/obertes.md`.
 
 ## Qué hay y qué no
