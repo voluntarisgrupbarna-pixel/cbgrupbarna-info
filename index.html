@@ -118,7 +118,17 @@
           "url": "https://cbgrupbarna.info/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf",
           "encodingFormat": "application/pdf",
           "isAccessibleForFree": true
-        }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://cbgrupbarna.info/og-image.jpg",
+          "contentUrl": "https://cbgrupbarna.info/og-image.jpg",
+          "width": 1200,
+          "height": 630,
+          "creditText": "CB Grup Barna",
+          "copyrightNotice": "CB Grup Barna"
+        },
+        "dateModified": "2026-08-15"
       },
       "award": [
         "Premi de reconeixement lliurat pel vicepresident de la Federació Catalana de Basquetbol en la presentació d'equips",
@@ -163,7 +173,7 @@
       "keywords": "academia de baloncesto Barcelona, acadèmia de bàsquet Barcelona, baloncesto base Barcelona, club baloncesto Barcelona, bàsquet base Barcelona, CB Grup Barna, Grup Barna, basket infantil Barcelona, campus baloncesto verano, 3x3 Barcelona, El Clot basket",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "La Nau del Clot, Districte de Sant Martí",
+        "streetAddress": "Carrer de la Llacuna, 172",
         "addressLocality": "Barcelona",
         "addressRegion": "Catalunya",
         "postalCode": "08018",
@@ -174,11 +184,67 @@
         "latitude": "41.4036",
         "longitude": "2.1878"
       },
-      "hasMap": "https://maps.google.com/?q=La+Nau+del+Clot+Barcelona",
-      "areaServed": {
-        "@type": "City",
-        "name": "Barcelona"
+      "location": {
+        "@type": "SportsActivityLocation",
+        "@id": "https://cbgrupbarna.info/#nau-del-clot",
+        "name": "La Nau del Clot",
+        "alternateName": "Nau Parc del Clot",
+        "description": "Pista principal del CB Grup Barna, al Parc del Clot, al Districte de Sant Martí de Barcelona.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrer de la Llacuna, 172",
+          "addressLocality": "Barcelona",
+          "addressRegion": "Catalunya",
+          "postalCode": "08018",
+          "addressCountry": "ES"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "41.4036",
+          "longitude": "2.1878"
+        },
+        "publicAccess": true,
+        "isAccessibleForFree": true,
+        "hasMap": "https://maps.google.com/?q=Carrer+de+la+Llacuna+172+Barcelona"
       },
+      "hasMap": "https://maps.google.com/?q=Carrer+de+la+Llacuna+172+Barcelona",
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "El Clot",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Districte de Sant Martí"
+          }
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Districte de Sant Martí",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Barcelona"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Barcelona",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Catalunya"
+          }
+        },
+        {
+          "@type": "GeoCircle",
+          "name": "Àrea de captació del club",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": "41.4036",
+            "longitude": "2.1878"
+          },
+          "geoRadius": "4000"
+        }
+      ],
+      
       "numberOfEmployees": {
         "@type": "QuantitativeValue",
         "value": 40
@@ -1116,12 +1182,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <span class="tk-it">Sèniors · Nova temporada</span>
       <span class="tk-it">Dies de partit actualitzats</span>
       <span class="tk-it">Galeria de fotos del club</span>
-      <span class="tk-it">#SomClot · 61 anys de bàsquet</span>
+      <span class="tk-it">#SomClot · Des de 1965</span>
       <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
       <span class="tk-it">Sèniors · Nova temporada</span>
       <span class="tk-it">Dies de partit actualitzats</span>
       <span class="tk-it">Galeria de fotos del club</span>
-      <span class="tk-it">#SomClot · 61 anys de bàsquet</span>
+      <span class="tk-it">#SomClot · Des de 1965</span>
     </div>
   </div>
 </div>
@@ -1454,7 +1520,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
               <a href="/politica-de-privacitat/">Política de privacitat</a>.</span>
             </label>
             <button type="submit" class="btn red" data-cta="info-submit">Enviar i obrir WhatsApp</button>
-            <p class="form-note">S'obre el WhatsApp del club amb les teves dades. Respostem en menys de 24 h.</p>
+            <p class="form-note">S'obre el WhatsApp del club amb les teves dades. Responem en menys de 24 h.</p>
           </form>
           <div class="form-ok" id="formOk" role="status">
             <h3>Rebut. Gràcies!</h3>

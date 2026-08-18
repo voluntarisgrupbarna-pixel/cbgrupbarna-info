@@ -1,3 +1,6 @@
 .DS_Store
 .vercel
 __pycache__/
+
+# Sortida de la bateria de proves: es regenera amb `node tests/audit-*.mjs`
+tests/out/
