@@ -1520,7 +1520,7 @@ function renderJugadors() {
   // llista
   document.getElementById('j-list').innerHTML = OV.jugadors.map(j=>{
     const e = m.equips.find(x=>x.id===j.equipId)||{};
-    return `<div class="team-row"><img src="${j.foto}" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
+    return `<div class="team-row"><img src="${j.foto}" alt="${j.nom}" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
       <span class="nm"><b>${j.nom}</b><small>${e.nom||''} · sortides al cartell: ${j.cops}</small></span>
       <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delJugador('${j.id}')">✕</button></div>`;
   }).join('') || '<p style="font-size:11px;color:var(--muted)">Encara no hi ha jugadors/es pujats.</p>';
@@ -1611,7 +1611,7 @@ async function addFons() {
 }
 function renderFons() {
   const box = document.getElementById('f-list'); if (!box) return;
-  box.innerHTML = OV.fons.map(f=>`<div class="team-row"><img src="${f.foto}" style="width:52px;height:38px;border-radius:8px;object-fit:cover">
+  box.innerHTML = OV.fons.map(f=>`<div class="team-row"><img src="${f.foto}" alt="${f.nom}" style="width:52px;height:38px;border-radius:8px;object-fit:cover">
     <span class="nm"><b>${f.nom}</b><small>fons de cartell</small></span>
     <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delFons('${f.id}')">✕</button></div>`).join('')
     || '<p style="font-size:11px;color:var(--muted)">Encara no hi ha fons pujats.</p>';
