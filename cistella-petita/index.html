@@ -8,6 +8,10 @@
 <meta name="description" content="La Cistella Petita és el festival de minibàsquet del CB Grup Barna per a infants de 3 a 8 anys al barri del Clot, Barcelona: partits adaptats, jocs i la porta d'entrada natural a l'Escoleta.">
 <meta name="keywords" content="Cistella Petita Barcelona, minibàsquet Barcelona, festival infantil bàsquet Clot, CB Grup Barna nens">
 <link rel="canonical" href="https://cbgrupbarna.info/cistella-petita/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/cistella-petita/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/cistella-petita/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/cistella-petita/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/cistella-petita/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -30,6 +34,13 @@
   .photo-strip figure { margin: 0; }
   .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
   @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ==== SELECTOR D'IDIOMA ==== */
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red); }
+  .lang-switch .sep { opacity: 0.25; }
 </style>
 <script type="application/ld+json">
 {
@@ -138,6 +149,9 @@
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
     </nav>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/cistella-petita/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/cistella-petita/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/cistella-petita/" hreflang="en">EN</a>
+    </div>
   </div>
 </header>
 <main id="main">

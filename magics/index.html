@@ -8,6 +8,10 @@
 <meta name="description" content="Barna Màgics: l'equip de bàsquet inclusiu del CB Grup Barna, amb jugadors i jugadores amb diversitat funcional competint a la Lliga ACELL. Sotscampions de la Lliga Catalana 25-26 i tercers al torneig de La Seu d'Urgell. Referent d'inclusió al Clot des de fa anys.">
 <meta name="keywords" content="bàsquet inclusiu Barcelona, esport adaptat Barcelona, Barna Màgics, ACELL bàsquet, Fundació Mullor, discapacitat intel·lectual bàsquet, Special Olympics Barcelona, grup barna màgics">
 <link rel="canonical" href="https://cbgrupbarna.info/magics/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/magics/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/magics/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/magics/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/magics/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -52,6 +56,13 @@
     border: 1px solid var(--line); background: var(--paper-2); padding: clamp(18px, 2.6vw, 26px); margin-top: 4px; }
   .gal-cta p { font-size: 13.5px; color: var(--ink-2); margin: 0; max-width: 46ch; }
   .gal-cta .btn { flex-shrink: 0; }
+
+  /* ==== SELECTOR D'IDIOMA ==== */
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; color: var(--red); }
+  .lang-switch .sep { opacity: 0.25; }
 </style>
 <script type="application/ld+json">
 {
@@ -162,6 +173,9 @@
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
     </nav>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/magics/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/magics/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/magics/" hreflang="en">EN</a>
+    </div>
   </div>
 </header>
 <main id="main">
