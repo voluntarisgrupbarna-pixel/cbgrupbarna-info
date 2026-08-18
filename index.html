@@ -827,24 +827,19 @@ html[data-view="extensa"] .lead.only-extensa { display: grid; }
 /* La primera franja porta el títol més gran, com a la guia. */
 .franja--lead .franja-t { font-size: clamp(26px, 4vw, 46px); }
 
-/* En franges la capçalera es queda al mínim —Menú, marca i xarxes—, com a la
-   guia. Els enllaços del nav només surten a l'extensa: a franges tot el mapa
-   del club ja és al menú i a les mateixes franges. */
-html[data-view="light"] .head-nav > a,
-html[data-view="light"] .head-nav > .opt,
-html:not([data-view]) .head-nav > a,
-html:not([data-view]) .head-nav > .opt { display: none; }
-html[data-view="extensa"] .head-nav > a,
-html[data-view="extensa"] .head-nav > .opt { display: inline-flex; }
+/* El menú de dalt (8 grups) és sempre visible, a franges i a extensa —
+   Ana ho vol així: el mateix menú a totes dues vistes. */
 
 /* Al costat dret de la capçalera, sempre visible: és germà de .head-nav,
    no fill seu, així no desapareix quan el nav es plega sota el burger. */
 .view-toggle { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-family: var(--body); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; padding: 8px 12px; min-height: 34px; transition: border-color 0.3s var(--ease), color 0.3s var(--ease); }
 .view-toggle:hover { border-color: var(--red); color: var(--red); }
 .view-toggle:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
-.view-toggle .vt-ic { width: 10px; height: 10px; border: 1.3px solid currentColor; display: block; flex-shrink: 0; }
-html[data-view="light"] .view-toggle .vt-ic { background: linear-gradient(90deg, currentColor 0 33%, transparent 33%); }
-html[data-view="extensa"] .view-toggle .vt-ic, html:not([data-view]) .view-toggle .vt-ic { background: linear-gradient(90deg, currentColor 0 66%, transparent 66%); }
+.view-toggle .vt-ic { width: 14px; height: 14px; display: block; flex-shrink: 0; }
+.view-toggle .vt-ic svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+.view-toggle .vt-ic .vt-extensa { display: none; }
+html[data-view="extensa"] .view-toggle .vt-ic .vt-franges { display: none; }
+html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 @media (max-width: 620px) { .view-toggle { padding: 7px 10px; font-size: 8.5px; gap: 6px; } .view-toggle span:last-child { display: none; } }
 
 /* Selector d'idioma, sempre visible al costat del commutador de vista. */
@@ -1236,7 +1231,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <!-- Sempre visible, a totes les amplades: franges per defecte a mòbil,
            tauleta i Instagram; extensa a escriptori, i sempre es pot canviar. -->
       <button class="view-toggle" id="viewToggle" type="button" aria-live="polite">
-        <span class="vt-ic" aria-hidden="true"></span><span id="viewToggleLbl">Franges</span>
+        <span class="vt-ic" aria-hidden="true">
+          <svg class="vt-franges" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="3.5"/><rect x="3" y="10.25" width="18" height="3.5"/><rect x="3" y="16.5" width="18" height="3.5"/></svg>
+          <svg class="vt-extensa" viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="16"/><rect x="13" y="4" width="8" height="7"/><rect x="13" y="13" width="8" height="7"/></svg>
+        </span><span id="viewToggleLbl">Franges</span>
       </button>
     </div>
   </div>
@@ -1882,7 +1880,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     var lbl = document.getElementById('viewToggleLbl');
     if (!btn || !lbl) return;
     var root = document.documentElement;
-    var KEY = 'cbgb-view';
+    var KEY = 'cbgb-view-v2';
     var view = null;
     try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'extensa') view = saved; } catch (e) {}
 
