@@ -34,6 +34,14 @@
     window.gtag = function () { window.dataLayer.push(arguments); };
   }
 
+  // Es crida des d'aquí (i no des de cada pàgina) perquè totes les pàgines
+  // que inclouen aquest fitxer quedin mesurades amb un sol punt de veritat:
+  // canviar el GA_ID o afegir-hi paràmetres ja no s'ha de repetir a 300
+  // fitxers .html. Com que gtag() només encua a dataLayer fins que hi ha
+  // consentiment, cridar-ho aquí no envia res a Google abans d'hora.
+  window.gtag('js', new Date());
+  window.gtag('config', GA_ID, { send_page_view: true, page_title: document.title, page_location: location.href });
+
   function llegir() {
     try {
       if (localStorage.getItem(CLAU_V) !== VERSIO) return null;

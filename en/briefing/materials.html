@@ -44,6 +44,7 @@
   .empty{color:var(--muted);padding:2rem 0;line-height:1.6}
   footer{text-align:center;color:rgba(255,255,255,.25);font-size:.72rem;padding:2rem 1rem;border-top:1px solid var(--line);margin-top:2rem}
 </style>
+<script src="/js/galetes.js"></script>
 </head>
 <body>
 <header>
@@ -67,35 +68,5 @@
 
 <script src="/briefing/materials.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
-<script>
-window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-R6XYR7G1WF',{anonymize_ip:true});
-
-const ICONS={'pdf':'📄','doc':'📝','docx':'📝','xls':'📊','xlsx':'📊','ppt':'📽','pptx':'📽',
-  'jpg':'🖼','jpeg':'🖼','png':'🖼','webp':'🖼','svg':'🖼','zip':'🗂'};
-const mats = window.BRIEFING_MATERIALS || [];
-const box = document.getElementById('list');
-
-if(!mats.length){
-  box.innerHTML = '<div class="empty">No materials published yet.<br>Contact the club at <a href="mailto:info@cbgrupbarna.com" style="color:var(--red)">info@cbgrupbarna.com</a> and we\'ll send them to you.</div>';
-} else {
-  const byType = {};
-  mats.forEach(m => { (byType[m.tipus] = byType[m.tipus] || []).push(m); });
-  box.innerHTML = Object.keys(byType).map(t => `
-    <section class="group">
-      <h2>${t}</h2>
-      ${byType[t].map(m => `
-        <a class="item" href="/briefing/materials/${m.fitxer}" target="_blank"
-           onclick="gtag('event','descarrega_material',{material:'${(m.titol||'').replace(/'/g,"")}',tipus:'${t}'})">
-          <span class="ic">${ICONS[m.ext]||'📎'}</span>
-          <span class="meta">
-            <b>${m.titol}</b>
-            <small>${m.desc ? m.desc + ' · ' : ''}${m.data} · ${m.mida} KB${m.partner ? ' · ' + m.partner : ''}</small>
-          </span>
-          <span class="arrow">→</span>
-        </a>`).join('')}
-    </section>`).join('');
-}
-</script>
 </body>
 </html>
