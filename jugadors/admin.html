@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
   .bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em}
@@ -34,9 +34,9 @@
   .field-input,select.field-input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.65rem .8rem;font-family:'Outfit',sans-serif;font-size:.9rem}
   .field-input:focus{outline:none;border-color:var(--red)}
   #login-box{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.6rem}
-  .err{display:none;background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.82rem}
+  .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.82rem}
   .hint{font-size:.72rem;color:var(--muted)}
-  .hint a{color:rgba(200,16,46,.8);text-decoration:none}
+  .hint a{color:rgba(226,6,19,.8);text-decoration:none}
   /* main */
   #main-screen{display:none}
   h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;margin:1.4rem 0 .8rem}
@@ -52,7 +52,7 @@
   .team-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--red);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.5rem}
   .player-row{display:flex;align-items:center;gap:.8rem;padding:.5rem 0;border-bottom:1px dashed var(--line);font-size:.88rem}
   .player-row:last-child{border-bottom:none}
-  .dorsal{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;min-width:2.2rem;text-align:center;background:rgba(200,16,46,.15);border-radius:6px;padding:.15rem 0}
+  .dorsal{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;min-width:2.2rem;text-align:center;background:rgba(226,6,19,.15);border-radius:6px;padding:.15rem 0}
   .pname{flex:1}
   .ppos{color:var(--muted);font-size:.75rem}
   .pfoto{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#222}
@@ -63,7 +63,7 @@
   .spin{animation:spin 1s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 </style>
-<script src="/scripts/google-gate.js"></script>
+<script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
 </head>
 <body>

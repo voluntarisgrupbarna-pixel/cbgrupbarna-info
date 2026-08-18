@@ -103,8 +103,8 @@ FOOT = f"""</main>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Partits i resultats</a>
-        <a href="/partits/calendaris/">Calendaris per equip</a>
+        <a href="/partits/">Dies de partit</a>
+        <a href="/partits/calendaris/">Dies de partit per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
@@ -130,6 +130,7 @@ FOOT = f"""</main>
     </div>
   </div>
 </footer>
+<script src="/js/descarrega.js" defer></script>
 </body>
 </html>
 """
@@ -267,6 +268,23 @@ def build_campus():
       <div><b>1965</b><span>Any de fundació del club</span></div>
       <div><b>+34</b><span>Equips federats</span></div>
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
+    </div>
+
+    <div class="franges" aria-label="Altres portes del club">
+      <a class="franja" href="/escoleta/" data-cta="campus-franja-escoleta">
+        <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
+        <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Si encara no ha començat i té entre 4 i 7 anys, el camí és aquest.</span></span>
+        <span class="franja-go"><em>4 a 7 anys</em><i></i></span>
+      </a>
+      <a class="franja franja--red" href="/partits/" data-cta="campus-franja-dies-partit">
+        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
+      </a>
+      <a class="franja" href="/3x3/" data-cta="campus-franja-3x3">
+        <span class="franja-ph"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Jugadores del CB Grup Barna amb l'equipació del club"></span>
+        <span class="franja-tx"><span class="franja-t">3x3 Barcelona</span><span class="franja-s">El torneig urbà del club a Westfield Glòries.</span></span>
+        <span class="franja-go"><em>Cada estiu</em><i></i></span>
+      </a>
     </div>
 
     <h2>A qui va dirigit</h2>
@@ -890,6 +908,23 @@ def build_3x3():
       <div><b>10</b><span>Categories</span></div>
       <div><b>60</b><span>Equips per edició</span></div>
       <div><b>BCN</b><span>Westfield Glòries</span></div>
+    </div>
+
+    <div class="franges" aria-label="Altres portes del club">
+      <a class="franja" href="/escoleta/" data-cta="3x3-franja-escoleta">
+        <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
+        <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Si encara no ha començat i té entre 4 i 7 anys, el camí és aquest.</span></span>
+        <span class="franja-go"><em>4 a 7 anys</em><i></i></span>
+      </a>
+      <a class="franja franja--red" href="/partits/" data-cta="3x3-franja-dies-partit">
+        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
+      </a>
+      <a class="franja" href="/campus/" data-cta="3x3-franja-campus">
+        <span class="franja-ph"><img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 360w, /img/campus-hero@2x.webp 720w" sizes="150px" width="360" height="202" loading="lazy" decoding="async" alt="Entrenament del Campus de bàsquet del CB Grup Barna"></span>
+        <span class="franja-tx"><span class="franja-t">Campus de bàsquet</span><span class="franja-s">Setmanes intensives de tecnificació a l'estiu.</span></span>
+        <span class="franja-go"><em>Cada estiu</em><i></i></span>
+      </a>
     </div>
 
     <h2>Edicions anteriors</h2>
@@ -1598,10 +1633,10 @@ def build_premsa_index():
     <h2 id="kit-title" style="margin-top:14px">Briefing del CB Grup Barna</h2>
     <p>Tot el que cal per escriure sobre el club amb dades verificades: 60 anys al Clot, els dos
     sèniors a la Supercopa FCBQ, la paritat real, la inclusió, els esdeveniments propis i la
-    protecció del menor. Accés lliure, sense registre.</p>
+    protecció del menor. Et demanem el contacte per poder-te atendre si ho necessites.</p>
     <div class="btn-row">
       <a class="btn red" href="/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf" download
-         data-cta="premsa-briefing-pdf">Descarregar el briefing (PDF · 16 pàg.)</a>
+         data-cta="premsa-briefing-pdf" data-descarrega="El briefing del club">Descarregar el briefing (PDF · 16 pàg.)</a>
       <a class="btn ghost" href="/briefing/" data-cta="premsa-briefing-web">Llegir-lo al web</a>
       <a class="btn ghost" href="/briefing/materials.html" data-cta="premsa-materials">Altres materials</a>
     </div>
@@ -1628,7 +1663,7 @@ CATEGORY_PREFIXES = ["Sènior", "Júnior", "Cadet", "Infantil", "Preinfantil", "
 
 def build_calendaris():
     url = SITE + "/partits/calendaris/"
-    title = "Calendaris per equip · descarrega'l en PDF | CB Grup Barna"
+    title = "Dies de partit per equip · calendari en PDF | CB Grup Barna"
     desc = ("Descarrega el calendari complet de la temporada del teu equip: sèniors, júniors, cadets i "
             "infantils del CB Grup Barna. Es genera cada dia a partir del calendari oficial de la FCBQ.")
 
@@ -1653,15 +1688,15 @@ def build_calendaris():
         {"@type": "CollectionPage", "@id": url + "#calendaris", "name": title, "description": desc, "url": url,
          "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"}},
         faq_ld,
-        BREADCRUMB([("CB Grup Barna", "/"), ("Partits i resultats", "/partits/"), ("Calendaris per equip", "/partits/calendaris/")]),
+        BREADCRUMB([("CB Grup Barna", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", "/partits/calendaris/")]),
     ]}
 
     body = f"""
-{crumbs([("Inici", "/"), ("Partits i resultats", "/partits/"), ("Calendaris per equip", None)])}
+{crumbs([("Inici", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", None)])}
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red" id="cal-temporada">Temporada</p>
-    <h1>Calendaris per equip</h1>
+    <h1>Dies de partit per equip</h1>
     <p class="lede">El calendari complet de cada equip, llest per descarregar i desar. Es genera cada dia a
     partir del calendari oficial de la FCBQ: els equips de promoció (premini, mini, preinfantil) hi apareixen
     sols en el moment que la federació en publiqui el calendari.</p>

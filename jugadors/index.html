@@ -10,14 +10,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif}
-  header{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  header{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line);flex-wrap:wrap}
   header img{width:38px;height:38px;object-fit:contain}
   header .t{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em}
   header .t span{color:var(--red)}
   header a.back{margin-left:auto;color:var(--muted);font-size:.8rem;text-decoration:none}
+  .site-nav{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;width:100%;margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--line)}
+  .site-nav a{font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+  .site-nav a:hover{color:var(--txt)}
   .wrap{max-width:960px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
   h1{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;margin-bottom:.2rem}
   h1 span{color:var(--red)}
@@ -38,6 +41,17 @@
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CB GRUP <span>BARNA</span></div>
   <a class="back" href="/">← Tornar a la web</a>
+  <nav class="site-nav" aria-label="Navegació principal">
+    <a href="/club/">Club</a>
+    <a href="/escoleta/">Escoleta</a>
+    <a href="/partits/">Dies de partit</a>
+    <a href="/patrocinadors/">Patrocinadors</a>
+    <a href="/campus/">Campus</a>
+    <a href="/3x3/">3x3</a>
+    <a href="/cistella-petita/">Cistella Petita</a>
+    <a href="/fotos/">Galeria</a>
+    <a href="/premsa/">Premsa</a>
+  </nav>
 </header>
 <div class="wrap">
   <h1>LA <span>PLANTILLA</span></h1>
