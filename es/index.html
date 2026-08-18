@@ -494,7 +494,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 
 /* ==== CAPÇALERA ==== */
 .head { position: sticky; top: 0; z-index: 110; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
-.head-in { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 36px); max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
+.head-in { display: flex; align-items: center; gap: clamp(10px, 2.2vw, 36px); max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
 .head-side { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); flex-shrink: 0; }
 .head-side.r { justify-content: flex-end; margin-left: auto; }
 .head-nav { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 28px); }
@@ -508,6 +508,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
 .menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
 .menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+@media (max-width: 2000px) { .head-side .head-nav a.opt { display: none; } }
 @media (max-width: 1080px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
 
@@ -822,10 +823,10 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       <button class="head-burger" id="burger" aria-label="Abrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <nav class="head-nav" aria-label="Navegación principal">
         <a href="#escoleta">Escoleta</a>
-        <a href="/es/campus/">Campus</a>
-        <a href="/es/3x3/">3x3</a>
+        <a href="/es/campus/" class="opt">Campus</a>
+        <a href="/es/3x3/" class="opt">3x3</a>
         <a href="#calendari">Calendario</a>
-        <a href="/es/fotos/">Galería</a>
+        <a href="/es/fotos/" class="opt">Galería</a>
         <a href="/es/premsa/" class="opt">Prensa</a>
         <a href="/es/patrocinadors/" class="opt">Patrocinadores</a>
         <a href="#info">Información</a>
