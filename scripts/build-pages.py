@@ -361,17 +361,19 @@ PARTNERS = [
     ("romeo-abogados.png", "Romeo Abogados", "https://www.instagram.com/romeoabogados/"),
     ("fundacio-mullor.png", "Fundació Mullor", None),
     ("l-aquarium-de-barcelona.png", "L'Aquàrium de Barcelona", None),
-    (None, "Wilson", None),
     ("eix-comercial-sant-marti.png", "Eix Comercial Sant Martí", None),
     ("gbk-globabasket.png", "GBK · Globasket", "https://www.instagram.com/globasket/"),
     ("illa-fantasia.png", "Illa Fantasia", "https://www.instagram.com/illafantasia/"),
     ("panteres-grogues.png", "Panteres Grogues", None),
 ]
-# Nova Farmàcia Clot (partner 26/27) no és en aquesta llista a propòsit: no té
-# fitxer de logo (wordmark de text, com Wilson) i el bloc `img is None` de
-# partners_grid està cablejat només per a Wilson. La seva fitxa,
-# patrocinadors/partners/nova-farmacia-clot/, es manté a mà seguint aquesta
-# mateixa plantilla fins que es generalitzi el cas "sense logo".
+# Nova Farmàcia Clot (partner 26/27) i Wilson (proveïdor oficial del baló) no
+# són en aquesta llista a propòsit: cap dels dos té fitxer de logo (wordmark
+# de text) i el bloc `img is None` de partners_grid, més el filtre `if p[0]`
+# del bucle principal, estan pensats per a un únic cas sense fitxa. Els dos
+# tenen fitxa pròpia (patrocinadors/partners/nova-farmacia-clot/ i
+# patrocinadors/partners/wilson/) i el seu enllaç al mur de /patrocinadors/
+# es manté a mà seguint la mateixa plantilla, fins que es generalitzi el cas
+# "sense logo" a partners_grid i al bucle de build_partner_landing.
 
 
 def build_patrocinadors():

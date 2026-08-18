@@ -22,6 +22,24 @@ Auditoria del repositori a 14/08/2026, revisada amb les decisions de l'Ana.
 - **Article del blog de partners: ja existia** (`/blog/patrocinadors-partners-cb-grup-barna/`,
   17/08/2026), amb els 23 partners enllaçats per sector, FAQ i JSON-LD. No calia escriure'n un altre.
 
+### Wilson ja té fitxa pròpia
+
+L'Ana ha confirmat que faltaven partners al mur. Comprovat: Wilson (proveïdor oficial del baló)
+apareixia només com un wordmark de text sense enllaç ni fitxa, a diferència dels altres 23. Ara té
+fitxa pròpia (`/patrocinadors/partners/wilson/`), és al `data.json` (24 partners en total), al
+`sitemap.xml`, a `llms.txt` i enllaçat des de l'article del blog i el mur de `/patrocinadors/`.
+
+També s'ha comprovat el suggeriment de Google AI Overview sobre partners que hi faltaven:
+**Platillo Volador no és partner** (confirmat per l'Ana — és Melosa Hamburgueseria, que ja hi és) i
+**GBK Teamswear i GBK · Globasket són la mateixa empresa** (globasket.com/gbk-teamswear/), la fitxa
+ja és correcta. Zapic AI, que encara sortia en cerques de Google, venia d'un post d'Instagram de
+març 2026 indexat per Google, no del nostre lloc — ja no en queda cap rastre a tot el repositori
+(comprovades també les 60 pàgines de `/premidonaesport/` en els tres idiomes i els dos dossiers de
+`/presentacio/` i `/presentacions/`, que encara hi enllaçaven).
+
+Si Ana identifica més partners reals que falten a la llista de 24, cal que els confirmi (nom, web,
+Instagram) abans de crear-los: no es fabriquen relacions de patrocini sense confirmació.
+
 ### Pendent real, no de codi: avantatges per a família
 
 Ana ha demanat que cada partner tingui un avantatge per a les famílies del Barna. **Cap dels 23 en té
