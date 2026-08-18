@@ -2,5 +2,9 @@
 .vercel
 __pycache__/
 
+# L'arxiu de 2560px es genera al workflow i va directe a R2: no ha d'inflar
+# el que GitHub Pages ha de servir.
+fotos/arxiu/
+
 # Sortida de la bateria de proves: es regenera amb `node tests/audit-*.mjs`
 tests/out/
