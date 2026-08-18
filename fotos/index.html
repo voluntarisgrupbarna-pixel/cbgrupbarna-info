@@ -13,6 +13,8 @@
   <link rel="icon" href="/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://wsrv.nl">
+  <link rel="preconnect" href="https://raw.githubusercontent.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -925,9 +927,13 @@ function renderEvents() {
 
     const dateStr = ev.date ? new Date(ev.date + 'T12:00:00').toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
 
+    // Connect the card to the document before setting its innerHTML: an
+    // <img loading="lazy"> parsed into a detached node fetches immediately
+    // regardless of the attribute, since deferral needs it in the document.
+    grid.appendChild(card);
     card.innerHTML = `
       <div class="event-thumb">
-        <img src="${eventCover(ev)}" alt="${ev.title}" loading="lazy">
+        <img src="${eventCover(ev)}" alt="${ev.title}" loading="lazy" decoding="async">
         <div class="event-thumb-overlay"></div>
         ${ev.season ? `<div class="event-season-tag">${ev.season}</div>` : ''}
         <div class="event-thumb-count">
@@ -947,7 +953,6 @@ function renderEvents() {
           ${ev.allow_download ? `<span class="event-meta-item dl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Descàrrega</span>` : ''}
         </div>
       </div>`;
-    grid.appendChild(card);
   });
 }
 
@@ -1025,30 +1030,6 @@ function loadMorePhotos() {
     shimmer.className = 'shimmer';
     item.appendChild(shimmer);
 
-    if (isVideoRef(id)) {
-      const video = document.createElement('video');
-      video.muted = true;
-      video.playsInline = true;
-      video.preload = 'metadata';
-      video.addEventListener('loadeddata', () => {
-        shimmer.remove();
-        item.appendChild(video);
-        const badge = document.createElement('div');
-        badge.className = 'video-tile-badge';
-        badge.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>`;
-        item.appendChild(badge);
-      }, { once: true });
-      video.addEventListener('error', () => { shimmer.style.opacity = '.3'; }, { once: true });
-      video.src = photoThumb(ev, id);
-    } else {
-      const img = new Image();
-      img.alt = `Foto ${i + 1}`;
-      img.loading = 'lazy';
-      img.onload = () => { shimmer.remove(); item.appendChild(img); };
-      img.onerror = () => { shimmer.style.opacity = '.3'; };
-      img.src = photoThumb(ev, id);
-    }
-
     // Hover actions
     const hover = document.createElement('div');
     hover.className = 'photo-hover';
@@ -1068,7 +1049,39 @@ function loadMorePhotos() {
 
     item.appendChild(hover);
     item.addEventListener('click', () => openLightbox(i));
+
+    // Connect the tile to the document BEFORE assigning any media `src`.
+    // Native `loading="lazy"` only defers a fetch once the element is in
+    // the document — on a detached node the browser fetches immediately,
+    // which is why an event with hundreds of photos used to download the
+    // whole batch at once instead of just what's near the viewport.
     grid.appendChild(item);
+
+    if (isVideoRef(id)) {
+      const video = document.createElement('video');
+      video.muted = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      video.addEventListener('loadeddata', () => {
+        shimmer.remove();
+        item.insertBefore(video, hover);
+        const badge = document.createElement('div');
+        badge.className = 'video-tile-badge';
+        badge.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>`;
+        item.insertBefore(badge, hover);
+      }, { once: true });
+      video.addEventListener('error', () => { shimmer.style.opacity = '.3'; }, { once: true });
+      video.src = photoThumb(ev, id);
+    } else {
+      const img = document.createElement('img');
+      img.alt = `Foto ${i + 1}`;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.addEventListener('load', () => shimmer.remove(), { once: true });
+      img.addEventListener('error', () => { shimmer.style.opacity = '.3'; }, { once: true });
+      item.insertBefore(img, hover);
+      img.src = photoThumb(ev, id);
+    }
   }
 
   displayedCount = end;

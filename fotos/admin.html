@@ -476,6 +476,40 @@ const MEDIA_EXT_RE = /\.(jpe?g|png|webp|gif|heic|bmp|tiff?|mp4|mov|webm|m4v|avi)
 function isVideoFile(name) { return VIDEO_EXT_RE.test(name); }
 function isMediaFile(f) { return f.type.startsWith('image/') || f.type.startsWith('video/') || MEDIA_EXT_RE.test(f.name); }
 
+// Photos pujades des del mòbil solen pesar 8-15 MB. Es pengen tal qual al
+// repo (no hi ha cap pas de redimensionat al servidor) i la galeria depèn
+// de wsrv.nl per generar les miniatures al vol a partir d'aquest original
+// — com més gran és l'original, més lenta és cada miniatura. Redimensionem
+// aquí, abans de pujar, perquè l'original que queda al repo ja sigui prou
+// petit. Només afecta formats que `canvas` sap decodificar; HEIC/GIF/TIFF
+// es pengen sense tocar.
+const COMPRESSIBLE_RE = /\.(jpe?g|png|webp)$/i;
+const MAX_DIM = 2400;
+const JPEG_QUALITY = 0.85;
+
+async function compressImage(file) {
+  if (!COMPRESSIBLE_RE.test(file.name) || typeof createImageBitmap !== 'function') return file;
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_DIM / Math.max(bitmap.width, bitmap.height));
+    if (scale === 1 && file.size <= 1.5 * 1024 * 1024) { bitmap.close?.(); return file; }
+
+    const w = Math.max(1, Math.round(bitmap.width * scale));
+    const h = Math.max(1, Math.round(bitmap.height * scale));
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    canvas.getContext('2d').drawImage(bitmap, 0, 0, w, h);
+    bitmap.close?.();
+
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', JPEG_QUALITY));
+    if (!blob || blob.size >= file.size) return file;
+    return new File([blob], file.name.replace(/\.\w+$/, '.jpg'), { type: 'image/jpeg' });
+  } catch (e) {
+    console.warn('No s\'ha pogut comprimir la imatge, es puja l\'original:', e);
+    return file;
+  }
+}
+
 // Git's blob SHA-1: sha1("blob " + byteLength + "\0" + content). Same value
 // GitHub returns as `sha` for a file with identical content, so it doubles
 // as a free content-hash for duplicate detection.
@@ -1059,11 +1093,12 @@ async function uploadAll() {
 
 async function uploadPhoto(file, queueIndex) {
   const ev = currentEvent;
-  const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+  const uploadFile = isVideoFile(file.name) ? file : await compressImage(file);
+  const ext = uploadFile.name.split('.').pop().toLowerCase() || 'jpg';
   const filename = `${Date.now()}-${Math.random().toString(36).slice(2,7)}.${ext}`;
   const path = `fotos/uploads/${ev.id}/${filename}`;
 
-  const base64 = await fileToBase64(file);
+  const base64 = await fileToBase64(uploadFile);
 
   // Simulate progress (GitHub API doesn't give real progress)
   let prog = 0;
