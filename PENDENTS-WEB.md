@@ -138,6 +138,17 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 
 ## Pendent de decisió
 
+- **`/premsa/moments/` en castellà i anglès.** La pàgina nova (36 moments d'Instagram
+  verificats un a un, de febrer a desembre de 2025) només existeix en català. `/premsa/`
+  ja té versions a `/es/` i `/en/`; decidir si es tradueix aquesta secció també.
+- **Cronologia real vs. «temporada 2025-26».** De les 36 publicacions que l'Ana va
+  proposar com a "els temes més importants de la 25/26", la verificació amb data real
+  (WebFetch a cada post) va trobar que només ~20 són de tardor 2025 (setembre en
+  endavant). La resta són de l'estiu 2025 (majoritàriament la campanya del 60è
+  aniversari) o de la temporada 2024-25 (febrer-maig 2025). La pàgina les organitza amb
+  les dates reals en tres blocs («Tardor 2025», «Estiu 2025 · 60 anys», «Abans de
+  l'estiu»), no com un sol bloc de «temporada 25-26». Revisar si aquesta classificació
+  li sembla bé o si en prefereix una altra.
 - **Els tres àudios de `/premidonaesport/patrocinis/`** (`musica.mp3`, `veu-jugadora.mp3`,
   `mix.mp3`) no són al repositori **ni a la web oficial** (comprovat: 404). La pàgina obre
   amb un overlay «Activa el so · 2 minuts» que depèn d'ells, o sigui que l'experiència
@@ -149,6 +160,24 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 - **Abans del 5 de setembre:** hi ha 274 partits carregats (05/09/26 → 16/05/27) i cap
   resultat. Convé provar amb un partit jugat de debò que el robot de la FCBQ, les fitxes
   descarregables, els 16 `.ics` i el cartell del cap de setmana funcionen.
+
+## Pendent de decisió · reestructuració del menú (18/08/2026)
+
+Reorganitzat el menú complet (`#menu` a `index.html`) en 6 branques —Juga al
+Barna / Equips i temporada / Activitats / El Club / Actualitat / Partners—
+seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
+
+- **`/basquet-femeni/` i `/basquet-femeni/el-metode-barna/`** ara redirigeixen
+  (noindex) a `/femeni/` i `/femeni/#metode`: eren dues pàgines completes amb
+  el mateix contingut i el mateix `<title>` objectiu ("Bàsquet femení a
+  Barcelona"), i s'ha triat `/femeni/` com a canònica per decisió de l'Ana.
+  **Pendent:** `/es/baloncesto-femenino/` i `/en/womens-basketball/` encara
+  són traduccions de la pàgina antiga (`/basquet-femeni/`), no de `/femeni/`.
+  No s'han tocat perquè traduir `/femeni/` és una feina de contingut a part.
+- **"Tecnificació"** (dins Activitats) i **"Notícies"** (dins Actualitat) són
+  a l'arbre de l'Ana però no tenen cap pàgina real al lloc ni contingut al
+  repositori. No s'han afegit al menú per no inventar-hi programa, preus o
+  notícies. Falta que l'Ana digui què són exactament i doni el material.
 
 ## Sense acció
 

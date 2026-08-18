@@ -28,9 +28,47 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /*/admin.html
+Disallow: /opina/print/
+Disallow: /fotos/migrar-flickr.html
+Disallow: /partits/cartell.html
+Disallow: /jugadors/estadistiques.html
 
 Sitemap: https://cbgrupbarna.info/sitemap.xml
 

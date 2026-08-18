@@ -34,6 +34,8 @@
 <!-- Canonical + hreflang -->
 <link rel="canonical" href="https://cbgrupbarna.info/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/">
 <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://cbgrupbarna.info/sitemap.xml">
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://cbgrupbarna.info/llms.txt">
@@ -116,7 +118,17 @@
           "url": "https://cbgrupbarna.info/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf",
           "encodingFormat": "application/pdf",
           "isAccessibleForFree": true
-        }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://cbgrupbarna.info/og-image.jpg",
+          "contentUrl": "https://cbgrupbarna.info/og-image.jpg",
+          "width": 1200,
+          "height": 630,
+          "creditText": "CB Grup Barna",
+          "copyrightNotice": "CB Grup Barna"
+        },
+        "dateModified": "2026-08-15"
       },
       "award": [
         "Premi de reconeixement lliurat pel vicepresident de la Federació Catalana de Basquetbol en la presentació d'equips",
@@ -161,7 +173,7 @@
       "keywords": "academia de baloncesto Barcelona, acadèmia de bàsquet Barcelona, baloncesto base Barcelona, club baloncesto Barcelona, bàsquet base Barcelona, CB Grup Barna, Grup Barna, basket infantil Barcelona, campus baloncesto verano, 3x3 Barcelona, El Clot basket",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "La Nau del Clot, Districte de Sant Martí",
+        "streetAddress": "Carrer de la Llacuna, 172",
         "addressLocality": "Barcelona",
         "addressRegion": "Catalunya",
         "postalCode": "08018",
@@ -172,11 +184,67 @@
         "latitude": "41.4036",
         "longitude": "2.1878"
       },
-      "hasMap": "https://maps.google.com/?q=La+Nau+del+Clot+Barcelona",
-      "areaServed": {
-        "@type": "City",
-        "name": "Barcelona"
+      "location": {
+        "@type": "SportsActivityLocation",
+        "@id": "https://cbgrupbarna.info/#nau-del-clot",
+        "name": "La Nau del Clot",
+        "alternateName": "Nau Parc del Clot",
+        "description": "Pista principal del CB Grup Barna, al Parc del Clot, al Districte de Sant Martí de Barcelona.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrer de la Llacuna, 172",
+          "addressLocality": "Barcelona",
+          "addressRegion": "Catalunya",
+          "postalCode": "08018",
+          "addressCountry": "ES"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "41.4036",
+          "longitude": "2.1878"
+        },
+        "publicAccess": true,
+        "isAccessibleForFree": true,
+        "hasMap": "https://maps.google.com/?q=Carrer+de+la+Llacuna+172+Barcelona"
       },
+      "hasMap": "https://maps.google.com/?q=Carrer+de+la+Llacuna+172+Barcelona",
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "El Clot",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Districte de Sant Martí"
+          }
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Districte de Sant Martí",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Barcelona"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Barcelona",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Catalunya"
+          }
+        },
+        {
+          "@type": "GeoCircle",
+          "name": "Àrea de captació del club",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": "41.4036",
+            "longitude": "2.1878"
+          },
+          "geoRadius": "4000"
+        }
+      ],
+      
       "numberOfEmployees": {
         "@type": "QuantitativeValue",
         "value": 40
@@ -778,6 +846,14 @@ html[data-view="light"] .view-toggle .vt-ic { background: linear-gradient(90deg,
 html[data-view="extensa"] .view-toggle .vt-ic, html:not([data-view]) .view-toggle .vt-ic { background: linear-gradient(90deg, currentColor 0 66%, transparent 66%); }
 @media (max-width: 620px) { .view-toggle { padding: 7px 10px; font-size: 8.5px; gap: 6px; } .view-toggle span:last-child { display: none; } }
 
+/* Selector d'idioma, sempre visible al costat del commutador de vista. */
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { padding: 7px 2px; color: var(--muted); transition: color 0.3s var(--ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover { color: var(--red); }
+.lang-switch .sep { color: var(--line); }
+@media (max-width: 480px) { .lang-switch { gap: 3px; font-size: 8.5px; } .lang-switch a { padding: 7px 1px; } .head-brand span { display: none; } }
+
 .lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .lg-c, .lg-c img { transition: none; } }
 
@@ -864,6 +940,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .menu.open { transform: none; visibility: visible; }
 .menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
 @media (min-width: 780px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
 .menu-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: var(--red); margin-bottom: 14px; }
 .menu-col a { display: flex; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 400; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.02em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
 .menu-col a:hover { color: var(--red); padding-left: 10px; }
@@ -1105,12 +1182,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <span class="tk-it">Sèniors · Nova temporada</span>
       <span class="tk-it">Dies de partit actualitzats</span>
       <span class="tk-it">Galeria de fotos del club</span>
-      <span class="tk-it">#SomClot · 60 anys de bàsquet</span>
+      <span class="tk-it">#SomClot · Des de 1965</span>
       <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
       <span class="tk-it">Sèniors · Nova temporada</span>
       <span class="tk-it">Dies de partit actualitzats</span>
       <span class="tk-it">Galeria de fotos del club</span>
-      <span class="tk-it">#SomClot · 60 anys de bàsquet</span>
+      <span class="tk-it">#SomClot · Des de 1965</span>
     </div>
   </div>
 </div>
@@ -1146,9 +1223,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
           <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener" data-cta="head-tt" aria-label="TikTok del CB Grup Barna · @cbgrupbarna">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.5 2h-2.9v12.3a2.5 2.5 0 1 1-2.5-2.5c.2 0 .4 0 .6.06V8.9a5.6 5.6 0 0 0-.6-.03 5.44 5.44 0 1 0 5.44 5.44V8.2a6.7 6.7 0 0 0 3.96 1.28V6.6a3.9 3.9 0 0 1-2.6-1.06A3.9 3.9 0 0 1 16.5 2Z"/></svg>
           </a>
+          <a href="/fotos/" data-cta="head-galeria" aria-label="Galeria de fotos del CB Grup Barna">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="8.4" height="8.4" rx="2.2"/><rect x="13.1" y="2.5" width="8.4" height="5.6" rx="2.2"/><rect x="13.1" y="9.9" width="8.4" height="11.6" rx="2.2"/><rect x="2.5" y="12.7" width="8.4" height="8.8" rx="2.2"/></svg>
+          </a>
         </span>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="head-wa">Contacte</a>
       </nav>
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/" hreflang="ca" class="active" data-cta="lang-ca">CA</a><span class="sep">·</span><a href="/es/" hreflang="es" data-cta="lang-es">ES</a><span class="sep">·</span><a href="/en/" hreflang="en" data-cta="lang-en">EN</a>
+      </div>
       <!-- Sempre visible, a totes les amplades: franges per defecte a mòbil,
            tauleta i Instagram; extensa a escriptori, i sempre es pot canviar. -->
       <button class="view-toggle" id="viewToggle" type="button" aria-live="polite">
@@ -1162,29 +1245,48 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 <nav class="menu" id="menu" aria-label="Menú complet">
   <div class="menu-grid">
     <div class="menu-col">
-      <h3>Club</h3>
-      <a href="/club/" data-cta="menu-club">El Club <small>qui som</small></a>
-      <a href="/historia/" data-cta="menu-historia">Història del club <small>des de 1965</small></a>
-      <a href="/organigrama/" data-cta="menu-organigrama">Organigrama <small>junta directiva</small></a>
+      <h3>Juga al Barna</h3>
+      <a href="#escoleta" data-cta="menu-escoleta">Escoleta <small>4 a 8 anys</small></a>
+      <a href="/partits/equips/" data-cta="menu-formatiu">Bàsquet formatiu <small>totes les categories</small></a>
+      <a href="#info" data-cta="menu-portes-obertes">Portes obertes <small>entrenament de prova</small></a>
       <a href="/femeni/" data-cta="menu-femeni">Bàsquet femení <small>8 equips</small></a>
-      <a href="/posicionament/" data-cta="menu-posicionament">Posicionament <small>vs. Barça, Penya…</small></a>
-      <a href="/blog/" data-cta="menu-blog">Blog <small>guies</small></a>
-      <a href="/grup-barna-dades-oficials/" data-cta="menu-dades">Dades oficials</a>
+      <a href="/magics/" data-cta="menu-magics">Barna Màgics <small>bàsquet inclusiu</small></a>
+      <a href="/faq/" data-cta="menu-faq">Preguntes freqüents</a>
     </div>
     <div class="menu-col">
-      <h3>Temporada i activitats</h3>
-      <a href="#info">Demanar informació <small>formulari</small></a>
-      <a href="#escoleta">Escoleta <small>4 a 8 anys</small></a>
+      <h3>Equips i temporada</h3>
+      <a href="/partits/equips/" data-cta="menu-equips">Equips <small>sènior, júnior, cadet…</small></a>
+      <a href="#calendari" data-cta="menu-partits">Dies de partit</a>
+      <a href="/partits/calendaris/" data-cta="menu-calendaris">Calendaris <small>per equip</small></a>
+      <a href="/fotos/" data-cta="menu-galeria">Galeria <small>fotos de temporada</small></a>
+    </div>
+    <div class="menu-col">
+      <h3>Activitats</h3>
       <a href="/campus/" data-cta="menu-campus">Campus de bàsquet</a>
       <a href="/3x3/" data-cta="menu-3x3">Torneig 3x3</a>
       <a href="/cistella-petita/" data-cta="menu-cistella">Cistella Petita <small>3 a 8 anys</small></a>
-      <a href="#calendari">Dies de partit</a>
-      <a href="/fotos/" data-cta="menu-galeria">Galeria de fotos</a>
-      <a href="/premsa/" data-cta="menu-premsa">Articles i premsa <small>Guia Clot</small></a>
-      <a href="/patrocinadors/" data-cta="menu-partners">Patrocinadors i partners</a>
+    </div>
+    <div class="menu-col">
+      <h3>El Club</h3>
+      <a href="/club/" data-cta="menu-club">Qui som</a>
+      <a href="/historia/" data-cta="menu-historia">Història <small>des de 1965</small></a>
+      <a href="/organigrama/" data-cta="menu-organigrama">Organigrama <small>junta directiva</small></a>
+      <a href="/instal-lacions/" data-cta="menu-installacions">Instal·lacions</a>
+      <a href="/posicionament/" data-cta="menu-posicionament">Posicionament <small>vs. Barça, Penya…</small></a>
+      <a href="/grup-barna-dades-oficials/" data-cta="menu-dades">Dades oficials</a>
+      <a href="/proteccio-menor/" data-cta="menu-proteccio">Protecció del menor</a>
+      <a href="/documents/" data-cta="menu-documents">Documents</a>
+    </div>
+    <div class="menu-col">
+      <h3>Actualitat</h3>
+      <a href="/blog/" data-cta="menu-blog">Coneixement Barna <small>formació, famílies, dades…</small></a>
+      <a href="/premsa/" data-cta="menu-premsa">Premsa <small>arxiu 1988–2026</small></a>
       <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
-      <a href="/faq/" data-cta="menu-faq">Preguntes freqüents</a>
-      <a href="#acces">Tots els accessos</a>
+    </div>
+    <div class="menu-col">
+      <h3>Partners</h3>
+      <a href="/patrocinadors/" data-cta="menu-partners">Patrocinadors <small>tots els partners</small></a>
+      <a href="/partners-mapa/" data-cta="menu-partners-mapa">Mapa de partners</a>
       <a href="/admin/" class="menu-admin" rel="nofollow" data-cta="menu-admin">Zona admin <small>amb contrasenya</small></a>
     </div>
   </div>
@@ -1215,7 +1317,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     <div class="lead-body">
       <p class="eyebrow red">El primer bot comença aquí · 4 a 8 anys</p>
       <h2>Acadèmia i Club de Bàsquet Base a Barcelona<small>CB Grup Barna · Escoleta 4-8 anys · El Clot</small></h2>
-      <p class="lede">Equips mixtos, tres grups per edat i trobades amb altres clubs. Vine a provar un entrenament sense compromís: seixanta anys formant nens i nenes del barri.</p>
+      <p class="lede">Equips mixtos, tres grups per edat i trobades amb altres clubs. Vine a provar un entrenament sense compromís: seixanta-un anys formant nens i nenes del barri.</p>
       <div class="btn-row">
         <a href="https://wa.me/34646205526?text=Hola%20Julio!%20M%27interessa%20l%27Escoleta%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna%20per%20a%20nens%20i%20nenes%20de%204%20a%207%20anys.%20Podeu%20informar-me%3F" target="_blank" rel="noopener" class="btn red" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
         <a href="tel:+34646205526" class="btn ghost" data-cta="escoleta-tel">646 205 526</a>
@@ -1237,7 +1339,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <section class="franges only-light" aria-label="Accés ràpid al club">
     <a class="franja franja--lead" href="/escoleta/" data-cta="franja-escoleta">
       <span class="franja-ph"><img src="img/escoleta.webp" srcset="img/escoleta.webp 600w, img/escoleta@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Nena de l'Escoleta amb la pilota i la mascota del club"></span>
-      <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">De 4 a 7 anys. Per on comença tothom, sense saber-ne gens.</span></span>
+      <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">De 4 a 8 anys. Per on comença tothom, sense saber-ne gens.</span></span>
       <span class="franja-go"><em>Inscripcions obertes</em><i></i></span>
     </a>
     <a class="franja franja--red" href="/partits/" data-cta="franja-dies-partit">
@@ -1249,7 +1351,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <span class="franja-tx"><span class="franja-t">Els sèniors</span><span class="franja-s">La primera plantilla del club.</span></span>
       <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
     </a>
-    <a class="franja" href="/basquet-femeni/" data-cta="franja-femeni">
+    <a class="franja" href="/femeni/" data-cta="franja-femeni">
       <span class="franja-ph"><img src="img/team-action.webp" srcset="img/team-action.webp 375w, img/team-action@2x.webp 750w" sizes="190px" width="375" height="500" loading="lazy" decoding="async" alt="Dues jugadores del CB Grup Barna amb l'equipació del club"></span>
       <span class="franja-tx"><span class="franja-t">Femení</span><span class="franja-s">Mateix nombre d'equips i mateix pressupost que la línia masculina.</span></span>
       <span class="franja-go"><em>Paritat real</em><i></i></span>
@@ -1418,7 +1520,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
               <a href="/politica-de-privacitat/">Política de privacitat</a>.</span>
             </label>
             <button type="submit" class="btn red" data-cta="info-submit">Enviar i obrir WhatsApp</button>
-            <p class="form-note">S'obre el WhatsApp del club amb les teves dades. Respostem en menys de 24 h.</p>
+            <p class="form-note">S'obre el WhatsApp del club amb les teves dades. Responem en menys de 24 h.</p>
           </form>
           <div class="form-ok" id="formOk" role="status">
             <h3>Rebut. Gràcies!</h3>

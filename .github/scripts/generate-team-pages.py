@@ -17,6 +17,21 @@ import re
 from datetime import date
 from pathlib import Path
 
+
+def clamp_desc(text, limit=160):
+    """Google en mostra uns 160 caràcters. Retallem per final de frase perquè
+    el fragment de cerca no quedi penjat a mitja paraula."""
+    text = " ".join(text.split())
+    if len(text) <= limit:
+        return text
+    cut = text[:limit + 1]
+    end = max(cut.rfind(". "), cut.rfind("? "), cut.rfind("! "))
+    if end > limit * 0.55:
+        return text[:end + 1].strip()
+    sp = cut.rfind(" ")
+    return text[:sp if sp > 0 else limit].rstrip(" ,;:·") + "…"
+
+
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "partits" / "data.json"
 OUT_DIR = ROOT / "partits" / "equips"
@@ -175,8 +190,8 @@ def team_page(e, data, avui):
     competicio = e.get("competicio", "")
     canonical = f"{BASE_URL}/partits/equips/{e['id']}/"
     posicio_txt = f" · {e['posicio']}a posició del seu grup" if e.get("posicio") else ""
-    desc = (f"Calendari i resultats de {nom} ({competicio}) del CB Grup Barna: "
-            f"balanç {w}-{l}{posicio_txt}. Actualitzat cada dia a partir del calendari oficial de la FCBQ.")
+    desc = clamp_desc(f"Calendari i resultats de {nom} ({competicio}) del CB Grup Barna: "
+                      f"balanç {w}-{l}{posicio_txt}. Actualitzat cada dia des del calendari oficial de la FCBQ.")
     title = f"{nom} · Calendari i resultats | CB Grup Barna"
     og_image = f"{BASE_URL}/partits/calendaris/img/{e['id']}.webp"
 
@@ -266,8 +281,8 @@ def index_page(data, avui):
 
     canonical = f"{BASE_URL}/partits/equips/"
     title = "Tots els equips · CB Grup Barna"
-    desc = ("Tots els equips federats del CB Grup Barna, per categoria: cadet, infantil, júnior i sènior, "
-            "femení i masculí. Calendari, resultats i balanç de cadascun, actualitzats cada dia.")
+    desc = clamp_desc("Tots els equips federats del CB Grup Barna, per categoria: cadet, infantil, "
+                      "júnior i sènior, femení i masculí. Calendari, resultats i balanç de cadascun.")
     ld = {
         "@context": "https://schema.org",
         "@graph": [
