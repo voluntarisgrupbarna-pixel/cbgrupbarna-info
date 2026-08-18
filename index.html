@@ -34,6 +34,8 @@
 <!-- Canonical + hreflang -->
 <link rel="canonical" href="https://cbgrupbarna.info/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/">
 <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://cbgrupbarna.info/sitemap.xml">
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://cbgrupbarna.info/llms.txt">
@@ -778,6 +780,14 @@ html[data-view="light"] .view-toggle .vt-ic { background: linear-gradient(90deg,
 html[data-view="extensa"] .view-toggle .vt-ic, html:not([data-view]) .view-toggle .vt-ic { background: linear-gradient(90deg, currentColor 0 66%, transparent 66%); }
 @media (max-width: 620px) { .view-toggle { padding: 7px 10px; font-size: 8.5px; gap: 6px; } .view-toggle span:last-child { display: none; } }
 
+/* Selector d'idioma, sempre visible al costat del commutador de vista. */
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { padding: 7px 2px; color: var(--muted); transition: color 0.3s var(--ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover { color: var(--red); }
+.lang-switch .sep { color: var(--line); }
+@media (max-width: 480px) { .lang-switch { gap: 3px; font-size: 8.5px; } .lang-switch a { padding: 7px 1px; } .head-brand span { display: none; } }
+
 .lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .lg-c, .lg-c img { transition: none; } }
 
@@ -1153,6 +1163,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
         </span>
         <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="head-wa">Contacte</a>
       </nav>
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/" hreflang="ca" class="active" data-cta="lang-ca">CA</a><span class="sep">·</span><a href="/es/" hreflang="es" data-cta="lang-es">ES</a><span class="sep">·</span><a href="/en/" hreflang="en" data-cta="lang-en">EN</a>
+      </div>
       <!-- Sempre visible, a totes les amplades: franges per defecte a mòbil,
            tauleta i Instagram; extensa a escriptori, i sempre es pot canviar. -->
       <button class="view-toggle" id="viewToggle" type="button" aria-live="polite">
