@@ -810,12 +810,13 @@ img { max-width: 100%; height: auto; display: block; }
    —la portada de diari— queda darrere el botó de la capçalera. Un cop hi
    ha preferència, la tria explícita mana. Res es duplica: calendari,
    formulari i la resta de la pàgina són els mateixos als dos modes. */
-.only-light { display: block; }
-.only-extensa { display: none; }
+html .only-light { display: block; }
+html .only-extensa { display: none; }
 html[data-view="light"] .only-light { display: block; }
 html[data-view="light"] .only-extensa { display: none; }
 html[data-view="extensa"] .only-light { display: none; }
 html[data-view="extensa"] .only-extensa { display: block; }
+html[data-view="extensa"] .lead.only-extensa { display: grid; }
 
 /* Hero de la vista de franges: etiqueta, titular gran i una sola frase.
    Calcat de .a-hero de la guia visual. */
