@@ -138,6 +138,17 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 
 ## Pendent de decisió
 
+- **`/premsa/moments/` en castellà i anglès.** La pàgina nova (36 moments d'Instagram
+  verificats un a un, de febrer a desembre de 2025) només existeix en català. `/premsa/`
+  ja té versions a `/es/` i `/en/`; decidir si es tradueix aquesta secció també.
+- **Cronologia real vs. «temporada 2025-26».** De les 36 publicacions que l'Ana va
+  proposar com a "els temes més importants de la 25/26", la verificació amb data real
+  (WebFetch a cada post) va trobar que només ~20 són de tardor 2025 (setembre en
+  endavant). La resta són de l'estiu 2025 (majoritàriament la campanya del 60è
+  aniversari) o de la temporada 2024-25 (febrer-maig 2025). La pàgina les organitza amb
+  les dates reals en tres blocs («Tardor 2025», «Estiu 2025 · 60 anys», «Abans de
+  l'estiu»), no com un sol bloc de «temporada 25-26». Revisar si aquesta classificació
+  li sembla bé o si en prefereix una altra.
 - **Els tres àudios de `/premidonaesport/patrocinis/`** (`musica.mp3`, `veu-jugadora.mp3`,
   `mix.mp3`) no són al repositori **ni a la web oficial** (comprovat: 404). La pàgina obre
   amb un overlay «Activa el so · 2 minuts» que depèn d'ells, o sigui que l'experiència
