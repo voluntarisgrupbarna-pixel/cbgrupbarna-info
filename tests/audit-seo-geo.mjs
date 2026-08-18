@@ -235,7 +235,7 @@ function auditPage(rel) {
   // encertar el 100 %: només detectar una pàgina que diu una cosa i n'és una altra.
   const MARKERS = {
     ca: ['amb', 'això', 'aquest', 'aquesta', 'aquests', 'nosaltres', 'també', 'però', 'molt', 'anys', 'nens', 'què', 'són', 'més', 'dels', 'les', 'seva', 'fins', 'tots', 'nostre'],
-    es: ['con', 'esto', 'este', 'esta', 'estos', 'nosotros', 'también', 'pero', 'muy', 'años', 'niños', 'qué', 'son', 'más', 'del', 'las', 'sus', 'hasta', 'todos', 'nuestro'],
+    es: ['con', 'esto', 'este', 'esta', 'estos', 'nosotros', 'también', 'pero', 'muy', 'años', 'niños', 'qué', 'son', 'más', 'para', 'las', 'sus', 'hasta', 'todos', 'nuestro'],
     en: ['with', 'this', 'these', 'we', 'also', 'but', 'very', 'years', 'children', 'what', 'are', 'more', 'of', 'the', 'their', 'until', 'all', 'our', 'and', 'for'],
   };
   // Les citacions bibliogràfiques van en l'idioma de l'original i falsejarien
@@ -583,12 +583,13 @@ function auditHreflang(pageResults) {
     // Cada alternativa ha d'existir i ha de tornar l'enllaç.
     for (const h of hl) {
       const target = (h.href || '').replace(SITE, '') || '/';
+      const targetBase = target.split('#')[0] || '/';
       if (h.href?.startsWith(SITE)) {
-        const other = byUrl.get(target);
+        const other = byUrl.get(targetBase);
         if (!other) {
           out.issues.push({ level: 'error', code: 'hreflang-404', msg: `${p.url} apunta a ${target}, que no existeix`, page: p.url });
-        } else if (target !== p.url) {
-          const back = (other.info.hreflang || []).some((x) => (x.href || '').replace(SITE, '') === p.url);
+        } else if (targetBase !== p.url) {
+          const back = (other.info.hreflang || []).some((x) => (x.href || '').replace(SITE, '').split('#')[0] === p.url);
           if (!back) out.issues.push({ level: 'error', code: 'hreflang-no-recíproc', msg: `${p.url} → ${target} no torna l'enllaç`, page: p.url });
         }
         // L'idioma declarat ha de coincidir amb el de la pàgina de destí.
