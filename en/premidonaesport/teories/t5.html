@@ -131,4 +131,5 @@ function setL(l,btn){document.querySelectorAll('.lang button').forEach(function(
 function initCarousel(trackId,speed,imgPaths){var track=document.getElementById(trackId);if(!track)return;var all=imgPaths.concat(imgPaths);all.forEach(function(src){var img=document.createElement('img');img.src=src;img.alt='CB Grup Barna';img.loading='lazy';img.decoding='async';track.appendChild(img);});var pos=0;function animate(){pos+=speed;var half=track.scrollWidth/2;if(pos>=half)pos=0;track.style.transform='translateX(-'+pos+'px)';requestAnimationFrame(animate);}requestAnimationFrame(animate);}
 function initCarouselLazy(trackId,speed,imgPaths){var track=document.getElementById(trackId);if(!track)return;var wrap=track.closest('.carousel-wrap');if(!wrap){initCarousel(trackId,speed,imgPaths);return;}var obs=new IntersectionObserver(function(entries){if(entries[0].isIntersecting){obs.disconnect();initCarousel(trackId,speed,imgPaths);}},{rootMargin:'200px'});obs.observe(wrap);}
 </script>
+<script src="/js/lang-switch.js" defer></script>
 </body></html>
