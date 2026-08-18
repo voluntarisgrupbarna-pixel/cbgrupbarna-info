@@ -827,7 +827,7 @@ html[data-view="extensa"] .lead.only-extensa { display: grid; }
 /* La primera franja porta el títol més gran, com a la guia. */
 .franja--lead .franja-t { font-size: clamp(26px, 4vw, 46px); }
 
-/* El menú de dalt (8 grups) és sempre visible, a franges i a extensa —
+/* El menú de dalt és sempre visible, a franges i a extensa —
    Ana ho vol així: el mateix menú a totes dues vistes. */
 
 /* Al costat dret de la capçalera, sempre visible: és germà de .head-nav,
@@ -905,9 +905,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
 /* ==== CAPÇALERA ==== */
 .head { position: sticky; top: 0; z-index: 110; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
-.head-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
-.head-side { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); }
-.head-side.r { justify-content: flex-end; }
+.head-in { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 36px); max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
+.head-side { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); flex-shrink: 0; }
+.head-side.r { justify-content: flex-end; margin-left: auto; }
 .head-nav { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); }
 .head-nav a { position: relative; padding: 7px 0; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; white-space: nowrap; }
 /* Icones socials: monocromes, vermell del club en passar-hi. Cap fitxer extern. */
@@ -918,7 +918,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .soc a::after { content: none; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
-.head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; justify-self: center; }
+.head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; flex-shrink: 0; }
 .head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--body); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
 .head-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
