@@ -281,7 +281,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
       <div class="field"><label for="gEmail">Email *</label><input id="gEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@email.com"></div>
       <div class="field"><label for="gMobil">Mobile *</label><input id="gMobil" type="tel" autocomplete="tel" inputmode="tel" placeholder="6XX XXX XXX"></div>
     </div>
-    <div class="field"><label for="gClub">Home club *</label><input id="gClub" type="text" placeholder="Your club — or write «None» if you don't have one"></div>
+    <div class="field"><label for="gClub">Home club *</label><input id="gClub" type="text" placeholder="Your club — or write “None” if you don't have one"></div>
     <div class="ig-step">
       <span class="ig-txt">Follow <b>@cbgrupbarna</b> on Instagram to access the photos.</span>
       <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" onclick="igOpened=true">Follow →</a>
@@ -398,7 +398,7 @@ async function submitGate(){
   if(!cognom)return gerr('Please enter your last name.');
   if(!email||email.indexOf('@')<0)return gerr('Please enter a valid email address.');
   if(!mobil||mobil.replace(/\D/g,'').length<6)return gerr('Please enter a valid mobile number.');
-  if(!club)return gerr('Please enter your home club (or write «None» if you don\'t have one).');
+  if(!club)return gerr('Please enter your home club (or write “None” if you don\'t have one).');
   if(!ig)return gerr('You must follow @cbgrupbarna on Instagram and check the box.');
   if(!rgpd)return gerr('You must accept the data protection policy.');
 
