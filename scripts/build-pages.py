@@ -367,6 +367,11 @@ PARTNERS = [
     ("illa-fantasia.png", "Illa Fantasia", "https://www.instagram.com/illafantasia/"),
     ("panteres-grogues.png", "Panteres Grogues", None),
 ]
+# Nova Farmàcia Clot (partner 26/27) no és en aquesta llista a propòsit: no té
+# fitxer de logo (wordmark de text, com Wilson) i el bloc `img is None` de
+# partners_grid està cablejat només per a Wilson. La seva fitxa,
+# patrocinadors/partners/nova-farmacia-clot/, es manté a mà seguint aquesta
+# mateixa plantilla fins que es generalitzi el cas "sense logo".
 
 
 def build_patrocinadors():
@@ -727,9 +732,18 @@ def build_partner_landing(img, nom, ig):
             f"{nom} forma part de l'ecosistema de partners i col·laboradors del CB Grup Barna, "
             f"el club de bàsquet base del Clot, Barcelona.")
 
+    faq_partner_ld = {"@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": f"És {nom} patrocinador del CB Grup Barna?",
+         "acceptedAnswer": {"@type": "Answer",
+             "text": f"Sí, {nom} és patrocinador oficial del CB Grup Barna, el club de bàsquet base "
+                     "del Clot (Barcelona), a la temporada 2026/27."}}
+    ]}
+
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
-         "description": desc, "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}},
+         "description": desc, "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"},
+         "publisher": {"@id": SITE + "/#club"}, "about": {"@id": SITE + "/#club"}},
+        faq_partner_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Patrocinadors", "/patrocinadors/"), (nom, f"/patrocinadors/partners/{slug}/")]),
     ]}
 
@@ -797,9 +811,10 @@ def build_partner_landing(img, nom, ig):
     <div class="phead-media" style="aspect-ratio:16/9;max-width:420px;margin-left:auto;margin-right:auto;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid var(--line)">
       <img src="/partners/{img}" alt="{nom}" style="max-width:70%;max-height:60%;object-fit:contain" width="300" height="169">
     </div>
-    <p class="lede" style="margin-left:auto;margin-right:auto">{nom} forma part de l'ecosistema de
-    partners i col·laboradors que fan possible el CB Grup Barna, el club de bàsquet base del Clot,
-    Barcelona. Segueix-los: cada follow que reben des del club forma part del que els oferim a canvi.</p>
+    <p class="lede" style="margin-left:auto;margin-right:auto"><strong>{nom} és patrocinador oficial
+    del CB Grup Barna</strong>, el club de bàsquet base del Clot, Barcelona. Formen part de l'ecosistema
+    de partners i col·laboradors que fan possible el dia a dia del club. Segueix-los: cada follow que
+    reben des del club forma part del que els oferim a canvi.</p>
     <div class="btn-row" style="justify-content:center;margin-top:28px">
       {web_btn}
       {follow_btn}
@@ -819,6 +834,13 @@ def build_partner_landing(img, nom, ig):
   </div>
 
   {f'<div class="wrap section band-soft">{ig_html}</div>' if ig_html else ''}
+
+  <div class="narrow prose" style="margin-top:clamp(20px,3vw,32px)">
+    <h2>Preguntes freqüents</h2>
+    <div class="faq"><details><summary>És {nom} patrocinador del CB Grup Barna?</summary><p>Sí, {nom} és
+    patrocinador oficial del CB Grup Barna, el club de bàsquet base del Clot (Barcelona), a la
+    temporada 2026/27.</p></details></div>
+  </div>
 
   <div class="narrow prose" style="margin-top:clamp(20px,3vw,32px)">
     <div class="closer">

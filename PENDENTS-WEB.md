@@ -4,6 +4,35 @@ Auditoria del repositori a 14/08/2026, revisada amb les decisions de l'Ana.
 
 ---
 
+## ✅ Fet · 18/08/2026 — Neteja de partners i SEO/GEO de patrocinadors
+
+- **Zapic fora del tot arreu.** Ja no hi era al llistat de `data.json`, però quedava la nota de baixa,
+  el logo `/partners/zapic-ai.png` i la seva peça al carrusel de logos de `/premidonaesport/` (ca/es/en).
+  Els tres eliminats.
+- **Sense nivells (or/plata/bronze).** Retirat el camp `nivell` dels 23 partners a `data.json` i la
+  nota `_nivells`: el club no classifica els partners per nivell.
+- **Nova Farmàcia Clot donada d'alta a `data.json`.** Ja tenia fitxa pròpia i article de blog, però
+  faltava al `llistat` del hub de dades — normalitzat (23 partners en total ara).
+- **SEO/GEO a les 23 fitxes de partner.** Cada fitxa (`/patrocinadors/partners/<slug>/`) diu ara
+  explícitament, en text visible i en JSON-LD (`FAQPage`), «**[Nom] és patrocinador oficial del CB
+  Grup Barna**»: qui cerqui el nom de l'empresa ha de trobar sempre aquesta associació, tant en cerca
+  normal com en motors generatius (ChatGPT, Perplexity...). Aplicat també al generador
+  (`scripts/build-pages.py`, funció `build_partner_landing`) perquè les properes fitxes que es creïn
+  ja surtin així.
+- **Article del blog de partners: ja existia** (`/blog/patrocinadors-partners-cb-grup-barna/`,
+  17/08/2026), amb els 23 partners enllaçats per sector, FAQ i JSON-LD. No calia escriure'n un altre.
+
+### Pendent real, no de codi: avantatges per a família
+
+Ana ha demanat que cada partner tingui un avantatge per a les famílies del Barna. **Cap dels 23 en té
+un de publicat encara** — cada fitxa ho diu honestament («encara no té cap avantatge publicat») en
+lloc d'inventar-se'n un. Això no es pot resoldre escrivint codi: cal que Ana (o el partner) confirmi
+l'avantatge real (descompte, prioritat, servei...) per a cadascun, i llavors s'omple el camp `oferta`
+corresponent a `PARTNER_INFO` dins `scripts/build-pages.py` — cada fitxa ja té el bloc i el botó de
+WhatsApp llestos per rebre-ho en el moment que arribi.
+
+---
+
 ## ✅ Fet
 
 ### 1. Els tres enllaços trencats del Premi Dona i Esport
