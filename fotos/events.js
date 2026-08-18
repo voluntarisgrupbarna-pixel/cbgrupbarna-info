@@ -1,7 +1,54 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Actualitzat: 2026-08-16
+// Actualitzat: 2026-08-18
 
 window.GALERIA_EVENTS = [
+  {
+    "id": "vista-sr-collboni-alcade-barcelona-9-feb-26-msx895lw",
+    "title": "VISTA SR. COLLBONI, ALCADE BARCELONA 9 FEB 26",
+    "description": "VISITA ALCALDE AMB EL SEU EQUIP PER CONÈIXER EL CLUB",
+    "date": "2026-08-17",
+    "season": "2025-2026",
+    "location": "NAU DEL CLOT",
+    "cover": "1787060034781-xa18y.jpg",
+    "cover_url": null,
+    "photos": [
+      "1787060034781-xa18y.jpg",
+      "1787060041551-ekh5d.jpg",
+      "1787060047126-8d43m.jpg",
+      "1787060052724-kfkca.jpg",
+      "1787060057688-og965.jpg",
+      "1787060065429-jaour.jpg",
+      "1787060070486-74vuq.jpg",
+      "1787060076530-hkhca.jpg",
+      "1787060082594-1d88u.jpg",
+      "1787060089534-mgyrf.jpg",
+      "1787060096088-4sjjs.jpg",
+      "1787060100424-90jxz.jpg",
+      "1787060109333-pv35n.jpg",
+      "1787060115232-4nl21.jpg",
+      "1787060121500-m22uf.jpg",
+      "1787060125928-xqruz.jpg",
+      "1787060130668-tmys0.jpg",
+      "1787060133630-c6hqp.jpg",
+      "1787060138393-ianvv.jpg",
+      "1787060146291-c45to.jpg",
+      "1787060153355-8zswh.jpg",
+      "1787060163720-ardup.jpg",
+      "1787060171397-ejsv3.jpg",
+      "1787060177196-onc5w.jpg",
+      "1787060183357-51r8s.jpg",
+      "1787060188794-p17j0.jpg",
+      "1787060194551-7z5ni.jpg",
+      "1787060200127-xzm50.jpg",
+      "1787060205770-oaysj.jpg",
+      "1787060210763-wntfn.jpg",
+      "1787060216843-7p4jl.jpg",
+      "1787060224043-qnli1.jpg",
+      "1787060233491-2h1tl.jpg"
+    ],
+    "allow_download": true,
+    "source": "repo"
+  },
   {
     "id": "magics-msui1pmu",
     "title": "MÀGICS",
