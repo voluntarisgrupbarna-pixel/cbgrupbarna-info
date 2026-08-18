@@ -196,6 +196,11 @@ def build_campus():
          "Les dates de la propera edició s'anuncien a aquesta pàgina i a Instagram (@cbgrupbarna). "
          "Qui vulgui rebre l'avís abans que s'obri al públic pot demanar-ho pel WhatsApp del club "
          "(+34 698 425 153) i entra a la llista d'avisos."),
+        ("On puc trobar un campus de bàsquet a Barcelona pel meu fill o filla?",
+         "El CB Grup Barna organitza el seu propi campus de bàsquet a Barcelona, al barri del Clot "
+         "(Districte de Sant Martí), obert a jugadors i jugadores de qualsevol club de la ciutat. És "
+         "una alternativa de barri, amb grups reduïts i tecnificació individual amb Time Chamber, als "
+         "campus de la Fundació del Bàsquet Català."),
     ])
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "Service", "@id": url + "#campus",
