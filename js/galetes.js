@@ -61,7 +61,7 @@
   // ── 3. La barra ──
   var CSS = [
     '.cbgb-gal{position:fixed;left:0;right:0;bottom:0;z-index:2147483000;',
-    'background:#0a0a0a;color:#fff;border-top:2px solid #C8102E;',
+    'background:#0a0a0a;color:#fff;border-top:2px solid #E20613;',
     "font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;",
     'font-size:14px;line-height:1.6;font-weight:300;',
     'padding:18px clamp(16px,4vw,40px);padding-bottom:calc(18px + env(safe-area-inset-bottom));',
@@ -71,18 +71,20 @@
     'align-items:center;justify-content:space-between;flex-wrap:wrap}',
     '.cbgb-gal-t{flex:1 1 340px;min-width:0}',
     '.cbgb-gal-t b{display:block;font-family:\'Jost\',\'Futura\',sans-serif;font-weight:400;',
-    'font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#C8102E;margin-bottom:7px}',
+    'font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#E20613;margin-bottom:7px}',
     '.cbgb-gal-t p{margin:0;color:rgba(255,255,255,.82)}',
-    '.cbgb-gal-t a{color:#fff;border-bottom:1px solid #C8102E;text-decoration:none}',
-    '.cbgb-gal-t a:hover{color:#C8102E}',
+    '.cbgb-gal-t a{color:#fff;border-bottom:1px solid #E20613;text-decoration:none}',
+    '.cbgb-gal-t a:hover{color:#E20613}',
     '.cbgb-gal-b{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}',
     '.cbgb-gal-b button{font-family:\'Jost\',\'Futura\',sans-serif;font-size:10px;letter-spacing:.24em;',
     'text-transform:uppercase;padding:13px 22px;min-height:46px;border:1px solid #fff;cursor:pointer;',
     'background:transparent;color:#fff;transition:background .3s,border-color .3s,color .3s}',
     '.cbgb-gal-b button:hover{background:#fff;color:#0a0a0a}',
-    '.cbgb-gal-b button.si{background:#C8102E;border-color:#C8102E}',
+    '.cbgb-gal-b button.si{background:#E20613;border-color:#E20613}',
     '.cbgb-gal-b button.si:hover{background:#fff;border-color:#fff;color:#0a0a0a}',
-    '@media(max-width:620px){.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;padding:13px 10px}}',
+    '@media(max-width:620px){.cbgb-gal{padding:14px 16px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}',
+    '.cbgb-gal-in{gap:12px}.cbgb-gal-t p{font-size:12.5px}',
+    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;padding:12px 10px;min-height:42px}}',
     '@media(prefers-reduced-motion:reduce){.cbgb-gal{animation:none}}'
   ].join('');
 
@@ -109,8 +111,7 @@
       '<div class="cbgb-gal-in">' +
         '<div class="cbgb-gal-t">' +
           '<b>Galetes</b>' +
-          '<p>Fem servir Google Analytics per saber quines pàgines interessen més. ' +
-          'No l\'activem fins que ens ho diguis, i no fem servir galetes de publicitat. ' +
+          '<p>Fem servir Google Analytics per saber quines pàgines interessen més, sense galetes de publicitat. ' +
           '<a href="/politica-de-privacitat/#galetes">Més informació</a>.</p>' +
         '</div>' +
         '<div class="cbgb-gal-b">' +

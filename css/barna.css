@@ -57,7 +57,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .head-nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 10px 0; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 4px; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
-@media (max-width: 700px) { .head-nav a.opt { display: none; } }
+@media (max-width: 1080px) { .head-nav a.opt { display: none; } }
+@media (max-width: 1080px) { .head-in { flex-wrap: nowrap; } .head-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; } .head-nav::-webkit-scrollbar { display: none; } }
 
 /* ==== BOTONS ==== */
 .cta { display: inline-block; font-family: var(--body); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid currentColor; transition: color 0.35s var(--ease), border-color 0.35s var(--ease); }
