@@ -1,7 +1,20 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Actualitzat: 2026-08-17
+// Actualitzat: 2026-08-18
 
 window.GALERIA_EVENTS = [
+  {
+    "id": "fotos-seniors-2526-msyp7yr5",
+    "title": "FOTOS SENIORS 2526",
+    "description": null,
+    "date": null,
+    "season": "2025-2026",
+    "location": null,
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo"
+  },
   {
     "id": "vista-sr-collboni-alcade-barcelona-9-feb-26-msx895lw",
     "title": "VISTA SR. COLLBONI, ALCADE BARCELONA 9 FEB 26",
