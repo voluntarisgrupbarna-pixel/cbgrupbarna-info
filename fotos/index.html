@@ -74,7 +74,13 @@
       transition: color .15s; margin-left: auto;
     }
     .nav-back:hover { color: var(--red); }
-    .site-nav { margin-top: 68px; background: var(--paper-2); border-bottom: 1px solid var(--line); }
+    /* Both bars are <nav> elements, so the bare `nav` selector above would
+       otherwise make this one fixed/flex/68px too, floating a click-blocking
+       band over the page content — reset everything it leaks. */
+    .site-nav {
+      position: static; z-index: auto; display: block; height: auto; padding: 0;
+      margin-top: 68px; background: var(--paper-2); border-bottom: 1px solid var(--line);
+    }
     .site-nav-in { max-width: 1100px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 44px); display: flex; align-items: center; gap: 18px; height: 36px; overflow-x: auto; scrollbar-width: none; }
     .site-nav-in::-webkit-scrollbar { display: none; }
     .site-nav-in a { font-family: var(--display); font-size: 9px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
