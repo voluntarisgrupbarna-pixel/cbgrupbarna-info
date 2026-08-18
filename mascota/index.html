@@ -33,6 +33,10 @@
 <!-- SEO -->
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://cbgrupbarna.info/mascota/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/mascota/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/mascota/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/mascota/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/mascota/">
 
 <!-- JSON-LD -->
 <script type="application/ld+json">
@@ -442,6 +446,23 @@
   @supports (padding: max(0px)) {
     .footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
   }
+
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; }
+  .lang-switch .sep { opacity: 0.25; }
+
+  .lang-switch-bar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+    background: rgba(0,0,0,0.45);
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #fff;
+  }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -454,6 +475,11 @@
 <main class="hero" role="main">
   <div class="video-wrap">
     <div class="video-badge">#SomClot · Escola Bàsquet</div>
+    <div class="lang-switch-bar">
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/mascota/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/mascota/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/mascota/" hreflang="en">EN</a>
+      </div>
+    </div>
     <video
       id="vid"
       playsinline
@@ -633,7 +659,7 @@
 </script>
 
 <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script src="/js/galetes.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

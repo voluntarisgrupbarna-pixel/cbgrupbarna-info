@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#E20613">
+<meta name="theme-color" content="#ffffff">
 <title>Deixa la teva ressenya · CB Grup Barna</title>
 <meta name="description" content="Ajuda el CB Grup Barna a arribar a 300 ressenyes a Google. Menys d'1 minut: toca el botó, tria 5 estrelles i escriu dues línies.">
 
@@ -97,7 +97,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
 <script>
@@ -108,489 +108,435 @@
 </script>
 
 <style>
-/* Mateix sistema visual que la portada: tokens, ticker, header, items,
-   badges, cta-pills i footer de cbgrupbarna.info */
+/* Mateix sistema visual que la portada de cbgrupbarna.info: paper blanc,
+   Jost per a titulars en versaletes espaiades, Inter lleugera per al text,
+   el vermell del club com a superfície i no només com a accent. */
 :root {
+  --ink: #0a0a0a;
+  --ink-2: #46433f;
+  --muted: #8a8681;
+  --line: #e4e1dd;
+  --line-dark: rgba(255,255,255,0.15);
+  --paper: #ffffff;
+  --paper-2: #f6f4f1;
   --red: #E20613;
   --red-dark: #A8040E;
-  --black: #050505;
-  --black-2: #0f0f0f;
-  --gray-1: #181818;
-  --gray-2: #252525;
-  --border: rgba(255,255,255,0.08);
-  --border-2: rgba(255,255,255,0.18);
-  --text: #ffffff;
-  --muted: #8a8a8a;
-  --green: #22c55e;
-  --yellow: #FFD600;
-  --blue: #3b82f6;
-  --orange: #f97316;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+  --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  background: var(--black); color: var(--text); line-height: 1.5;
+  font-family: var(--body); font-weight: 300; line-height: 1.7;
+  background: var(--paper); color: var(--ink);
   -webkit-font-smoothing: antialiased; overflow-x: hidden; min-height: 100dvh;
 }
 a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
-button { font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; border: 0; background: none; color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 img { max-width: 100%; height: auto; display: block; }
+::selection { background: var(--red); color: #fff; }
+:focus-visible { outline: 1px solid var(--red); outline-offset: 4px; }
 
-body::before {
-  content: ''; position: fixed; inset: 0; z-index: -2;
-  background:
-    radial-gradient(ellipse 50% 30% at 50% 0%, rgba(226,6,19,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(226,6,19,0.10) 0%, transparent 60%),
-    linear-gradient(180deg, #1a0606 0%, var(--black) 35%, var(--black) 100%);
+.wrap { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
+.wrap.narrow { max-width: 940px; }
+.section { padding: clamp(48px, 7vw, 104px) 0; }
+.section.tight { padding: clamp(34px, 5vw, 66px) 0; }
+.band-soft { background: var(--paper-2); }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.3; }
+.eyebrow { font-family: var(--display); font-size: 9.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted); }
+.eyebrow.red { color: var(--red); }
+.rule { width: 1px; height: clamp(26px, 4vw, 46px); background: var(--line); margin: 18px auto; }
+.sec-head { text-align: center; margin-bottom: clamp(30px, 4.4vw, 56px); }
+.sec-head h1, .sec-head h2 { font-size: clamp(18px, 2.5vw, 28px); margin-top: 14px; }
+.sec-head p { max-width: 56ch; margin: 18px auto 0; font-size: 13.5px; color: var(--ink-2); }
+.sec-head p b { font-weight: 500; color: var(--ink); }
+
+.cta {
+  display: inline-block; font-family: var(--display);
+  font-size: 10px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase;
+  padding-bottom: 6px; border-bottom: 1px solid currentColor;
+  transition: color 0.35s var(--ease), border-color 0.35s var(--ease);
 }
-body::after {
-  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.014) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px);
-  background-size: 36px 36px;
+.cta:hover { color: var(--red); border-color: var(--red); }
+.cta.light { color: #fff; }
+.cta.light:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px clamp(20px, 3vw, 32px); min-height: 44px;
+  font-family: var(--display); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  background: var(--ink); color: #fff; border: 1px solid var(--ink);
+  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
 }
+.btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
+.btn.red { background: var(--red); border-color: var(--red); }
+.btn.red:hover { background: var(--ink); border-color: var(--ink); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: #fff; }
+.btn.light { background: #fff; color: var(--red); border-color: #fff; }
+.btn.light:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn-row.center { justify-content: center; }
 
 /* ==== TICKER ==== */
-.ticker {
-  position: sticky; top: 0; z-index: 100; height: 36px;
-  background: linear-gradient(90deg, #100404, #1a0505 50%, #100404);
-  border-bottom: 1.5px solid rgba(226,6,19,0.55);
-  display: flex; align-items: center; overflow: hidden;
-}
+.ticker { position: relative; z-index: 120; height: 32px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
 .tk-lab {
-  flex-shrink: 0; height: 100%; padding: 0 14px; background: var(--red); color: white;
-  display: flex; align-items: center; gap: 7px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px); background: var(--red); color: #fff;
+  display: flex; align-items: center; gap: 9px;
+  font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase;
 }
-.tk-lab .pdot { width: 7px; height: 7px; border-radius: 50%; background: white; animation: pulseDot 1.6s ease-in-out infinite; }
+.tk-lab .pdot { width: 5px; height: 5px; border-radius: 50%; background: #fff; animation: pulseDot 2.2s ease-in-out infinite; }
 @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { box-shadow: 0 0 0 6px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
-.tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%); }
-.tk-cnt { display: inline-flex; gap: 36px; white-space: nowrap; animation: tkScroll 36s linear infinite; }
+.tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
+.tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
-.tk-it { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.7px; color: rgba(255,255,255,0.82); display: inline-flex; align-items: center; gap: 8px; }
-.tk-d { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.tk-d.r { background: var(--red); box-shadow: 0 0 6px var(--red); }
-.tk-d.g { background: var(--green); box-shadow: 0 0 6px var(--green); }
-.tk-d.y { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
-.tk-d.b { background: var(--blue); box-shadow: 0 0 6px var(--blue); }
+.tk-it { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* ==== BARRA SUPERIOR (tornar + idioma) ==== */
-.topbar { max-width: 540px; margin: 0 auto; padding: 14px 18px 0; display: flex; align-items: center; gap: 10px; }
-.backlink {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.4px;
-  text-transform: uppercase; color: var(--muted); display: inline-flex; align-items: center; gap: 6px;
-  border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; transition: color .2s, border-color .2s;
+/* ==== CAPÇALERA ==== */
+.head { position: sticky; top: 0; z-index: 110; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+.head-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
+.head-side { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); }
+.head-side.r { justify-content: flex-end; }
+.head-nav a { position: relative; padding: 7px 0; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; white-space: nowrap; }
+.head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
+.head-nav a:hover::after { right: 0; }
+.head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; justify-self: center; }
+.head-brand img { width: 32px; height: 32px; object-fit: contain; }
+.head-brand span { font-family: var(--display); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
+.langs { display: flex; align-items: center; border: 1px solid var(--line); }
+.langs button { padding: 8px 12px; min-height: 36px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); transition: background 0.3s, color 0.3s; }
+.langs button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+/* A pantalla estreta la capçalera ha de cabre sencera: es retira el text de
+   l'enllaç de tornada i s'estreny la marca i el canvi d'idioma. */
+@media (max-width: 680px) {
+  .head-in { padding: 0 14px; gap: 8px; height: 64px; }
+  .head-nav .lbl-back { display: none; }
+  .head-brand { gap: 8px; }
+  .head-brand img { width: 26px; height: 26px; }
+  .head-brand span { font-size: 9px; letter-spacing: 0.18em; }
+  .langs button { padding: 8px 8px; font-size: 8px; letter-spacing: 0.14em; }
 }
-.backlink:hover { color: #fff; border-color: var(--border-2); }
-.langs { margin-left: auto; display: flex; gap: 4px; border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
-.langs button {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
-  padding: 5px 11px; border-radius: 999px; color: var(--muted); transition: background .2s, color .2s;
-}
-.langs button[aria-pressed="true"] { background: var(--red); color: #fff; }
+@media (max-width: 400px) { .head-brand span { display: none; } }
 
-/* ==== HEADER ==== */
-.head { text-align: center; padding: 22px 20px 20px; position: relative; }
-.head-logo {
-  width: 92px; height: 92px; margin: 0 auto 14px;
-  background: var(--black); border: 2.5px solid white; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; padding: 8px;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.6);
-}
-.head-logo img { width: 100%; height: 100%; object-fit: contain; }
-.head-kick {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
-  letter-spacing: 2.4px; text-transform: uppercase; color: var(--red); margin-bottom: 8px;
-}
-.head-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(34px, 8vw, 46px); letter-spacing: 1.5px; line-height: 1; margin-bottom: 6px; }
-.head-name em { font-style: normal; color: var(--red); }
-.head-tag { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 14px; }
-.head-stats {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 999px;
-  padding: 7px 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase;
-  flex-wrap: wrap; justify-content: center;
-}
-.head-stats b { color: var(--red); font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1px; }
-.head-stats .sep { opacity: 0.3; }
+/* ==== CRIDA PRINCIPAL ==== */
+.hero { text-align: center; }
+.hero .stars-row { font-size: 15px; letter-spacing: 0.5em; color: var(--red); margin-bottom: 6px; }
+.hero .lede { max-width: 52ch; margin: 20px auto 0; font-size: 14.5px; color: var(--ink-2); }
+.hero .lede b { font-weight: 500; color: var(--ink); }
+.hero .btn-wrap { margin-top: clamp(26px, 3.4vw, 40px); }
+.hero .note { margin-top: 16px; font-size: 12px; color: var(--muted); max-width: 46ch; margin-left: auto; margin-right: auto; }
+.hero .note b { font-weight: 500; color: var(--ink-2); }
 
-/* ==== FEED ==== */
-.feed-wrap { max-width: 540px; margin: 0 auto; padding: 8px 18px 32px; }
-.feed-title { display: flex; align-items: baseline; gap: 12px; margin: 30px 0 14px; }
-.feed-title-main { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1.5px; line-height: 1; }
-.feed-title-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; margin-left: auto; }
+/* ==== BANDA VERMELLA · comptador ==== */
+.band-red { background: var(--red); color: #fff; }
+.band-red .eyebrow { color: rgba(255,255,255,0.65); }
+.count { display: grid; grid-template-columns: 1fr; gap: clamp(16px, 2.4vw, 30px); align-items: end; }
+@media (min-width: 780px) { .count { grid-template-columns: auto 1fr; } }
+.count-fig { display: flex; align-items: baseline; gap: 10px; }
+.count-now { font-family: var(--display); font-weight: 200; font-size: clamp(52px, 9vw, 92px); line-height: 0.9; letter-spacing: 0.04em; }
+.count-of { font-family: var(--display); font-size: clamp(13px, 2vw, 18px); letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.count-bar { height: 2px; background: rgba(255,255,255,0.35); margin-bottom: 12px; }
+.count-bar i { display: block; height: 100%; width: 0; background: #fff; transition: width 1.2s var(--ease); }
+.count-foot { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-family: var(--display); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
 
-/* ==== ITEM ==== */
-.item {
-  display: block; position: relative;
-  background: var(--gray-1); border: 1px solid var(--border);
-  border-radius: 18px; padding: 18px 20px 16px;
-  margin-bottom: 12px;
-  transition: transform 0.25s, border-color 0.25s, background 0.25s;
-  overflow: hidden;
-}
-.item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--border-2); transition: background 0.25s; }
-.item.p1::before { background: var(--red); }
-.item.p1 { border-color: rgba(226,6,19,0.28); }
-a.item:hover, a.item:active { transform: translateY(-2px); border-color: rgba(226,6,19,0.4); background: var(--gray-2); }
-a.item:hover::before { background: var(--red); }
+/* ==== GRAELLA DE RAONS ==== */
+.cards { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); }
+@media (min-width: 780px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+.card { padding: clamp(26px, 3.2vw, 40px); border: 1px solid var(--line); background: var(--paper); }
+.card .num { font-family: var(--display); font-size: 9px; letter-spacing: 0.3em; color: var(--red); }
+.card h3 { font-size: 11.5px; letter-spacing: 0.22em; margin: 14px 0 12px; }
+.card p { font-size: 13px; color: var(--ink-2); }
 
-.item-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-.badge {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
-  padding: 4px 9px; border-radius: 5px;
-  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
-}
-.badge .bdot { width: 6px; height: 6px; border-radius: 50%; animation: blinkDot 1.4s ease-in-out infinite; }
-@keyframes blinkDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
-.badge.open { background: rgba(226,6,19,0.18); color: #ff6b70; border: 1px solid rgba(226,6,19,0.4); }
-.badge.open .bdot { background: var(--red); box-shadow: 0 0 6px var(--red); }
-.badge.new { background: rgba(255,214,0,0.16); color: #FFD600; border: 1px solid rgba(255,214,0,0.4); }
-.badge.new .bdot { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
-.badge.info { background: rgba(59,130,246,0.16); color: #6ba6ff; border: 1px solid rgba(59,130,246,0.35); }
-.badge.muted { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+/* ==== PASSOS ==== */
+.steps { border-top: 1px solid var(--line); }
+.step { display: flex; align-items: flex-start; gap: clamp(16px, 3vw, 34px); padding: clamp(18px, 2.4vw, 26px) 6px; border-bottom: 1px solid var(--line); }
+.step .n { font-family: var(--display); font-size: 10px; letter-spacing: 0.3em; color: var(--red); padding-top: 4px; min-width: 34px; }
+.step h3 { font-size: 11.5px; letter-spacing: 0.22em; margin-bottom: 8px; }
+.step p { font-size: 13px; color: var(--ink-2); }
+.warn { margin-top: clamp(22px, 3vw, 34px); padding: clamp(20px, 2.6vw, 30px); background: var(--paper-2); border-left: 2px solid var(--red); font-size: 13px; color: var(--ink-2); }
+.warn b { font-weight: 500; color: var(--ink); }
 
-.item-meta { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.6px; text-transform: uppercase; }
-.item-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px, 5vw, 28px); letter-spacing: 0.8px; line-height: 1.05; margin-bottom: 6px; color: white; }
-.item.p1 .item-title { font-size: clamp(26px, 6vw, 34px); }
-.item-title em { font-style: normal; color: var(--red); }
-.item-desc { font-size: 13.5px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
-.item-desc b { color: #dcdcdc; }
-
-.item-foot { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.cta-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 9px 14px; border-radius: 10px;
-  font-size: 13px; font-weight: 800; letter-spacing: 0.4px;
-  background: var(--red); color: white;
-  transition: background 0.2s, transform 0.2s;
-}
-.cta-pill:hover { background: var(--red-dark); transform: translateX(2px); }
-.cta-pill .arrow { transition: transform 0.2s; }
-.cta-pill:hover .arrow { transform: translateX(3px); }
-.cta-pill.ghost { background: transparent; color: white; border: 1px solid var(--border-2); }
-.cta-pill.ghost:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.35); }
-.cta-pill.green { background: linear-gradient(135deg, #25D366, #128C7E); }
-.cta-pill.green:hover { transform: translateX(2px); }
-
-/* botó gran de la crida principal */
-.cta-big {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-  width: 100%; background: var(--red); color: #fff; border-radius: 14px; padding: 16px 18px;
-  box-shadow: 0 12px 32px rgba(226,6,19,0.30);
-  transition: background .2s, transform .2s, box-shadow .2s;
-}
-.cta-big:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(226,6,19,0.38); }
-.cta-big .lbl { font-family: 'Bebas Neue', sans-serif; font-size: clamp(24px, 6.4vw, 30px); letter-spacing: 1.4px; line-height: 1; }
-.cta-big .strs { color: var(--yellow); letter-spacing: 5px; font-size: 14px; }
-.cta-big .sub { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 1.4px; text-transform: uppercase; opacity: .92; }
-.cta-note { font-size: 11.5px; color: var(--muted); line-height: 1.55; margin-top: 10px; }
-.cta-note b { color: #dcdcdc; }
-
-/* ==== BLOC FOSC INTERIOR (comptador, QR, avisos) ==== */
-.blk { margin-top: 14px; padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.32); border: 1px solid var(--border); }
-.blk-title {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 12px;
-}
-.cnt-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
-.cnt-now { font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: .85; color: var(--red); letter-spacing: 1px; }
-.cnt-of { font-family: 'Bebas Neue', sans-serif; font-size: 22px; line-height: .85; color: var(--muted); letter-spacing: 1px; }
-.bar { height: 10px; border-radius: 5px; background: rgba(255,255,255,0.06); overflow: hidden; }
-.bar i { display: block; height: 100%; width: 0; border-radius: 5px; background: linear-gradient(90deg, var(--red), #ff4060); transition: width 1.1s cubic-bezier(.16,1,.3,1); }
-.cnt-foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 9px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
-
-/* ==== FILES DE RAONS I PASSOS ==== */
-.rw { display: flex; align-items: flex-start; gap: 12px; padding: 11px 0; border-top: 1px solid rgba(255,255,255,0.06); }
-.rw:first-child { border-top: none; padding-top: 2px; }
-.rw .ic { font-size: 17px; width: 22px; flex: none; text-align: center; line-height: 1.35; }
-.rw .num { font-family: 'Bebas Neue', sans-serif; font-size: 22px; line-height: 1; color: var(--red); width: 26px; flex: none; letter-spacing: 1px; }
-.rw h3 { font-size: 13.5px; font-weight: 800; color: #fff; margin-bottom: 2px; letter-spacing: .2px; }
-.rw p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-.warn { margin-top: 12px; border-left: 3px solid var(--red); background: rgba(226,6,19,0.07); padding: 11px 13px; border-radius: 0 10px 10px 0; font-size: 12.5px; color: #cfcfcf; line-height: 1.55; }
-.warn b { color: #fff; }
-
-.chips { display: flex; flex-wrap: wrap; gap: 7px; }
-.chip {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .8px; text-transform: uppercase;
-  border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: #c9c9c9;
-  border-radius: 6px; padding: 7px 10px; line-height: 1.35;
-}
-
-/* ==== QR ==== */
-.qr-wrap { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-.qr-card { background: #fff; border-radius: 10px; padding: 7px; width: 122px; flex: none; }
-.qr-txt { flex: 1; min-width: 150px; }
-.qr-txt p { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
-.btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+/* ==== IDEES ==== */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.chip { padding: 11px 16px; border: 1px solid var(--line); font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
 
 /* ==== VÍDEO ==== */
-#videoItem { display: none; }
-.video-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #000; }
+#videoSection { display: none; }
+.video-box { border: 1px solid var(--line); background: var(--ink); }
 .video-box video { width: 100%; display: block; }
+.video-cap { padding: 14px 18px; font-family: var(--display); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); background: var(--paper); border-top: 1px solid var(--line); }
 
-/* ==== PLANTILLES ==== */
-details.tpl { border: 1px solid var(--border); border-radius: 12px; background: rgba(0,0,0,0.32); margin-bottom: 8px; overflow: hidden; }
-details.tpl summary {
-  padding: 13px 14px; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px;
-  font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: #dcdcdc;
-}
-details.tpl summary::-webkit-details-marker { display: none; }
-details.tpl summary::after { content: '+'; margin-left: auto; color: var(--red); font-size: 18px; line-height: 1; }
-details.tpl[open] summary::after { content: '–'; }
-.tpl-body { padding: 0 14px 14px; }
-.tpl-msg { background: #0a0a0a; border: 1px solid var(--border); border-radius: 10px; padding: 13px; font-size: 12.5px; line-height: 1.65; white-space: pre-wrap; color: #cfcfcf; margin-bottom: 10px; }
-.copy-row { display: flex; align-items: center; gap: 10px; }
-.copied { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 1.2px; color: var(--green); opacity: 0; transition: opacity .2s; }
+/* ==== COMPARTIR I QR ==== */
+.share { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); }
+@media (min-width: 860px) { .share { grid-template-columns: 1fr 1fr; } }
+.panel { padding: clamp(26px, 3.2vw, 40px); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; }
+.panel h3 { font-size: 11.5px; letter-spacing: 0.22em; }
+.panel p { font-size: 13px; color: var(--ink-2); }
+.panel .btn-row { margin-top: auto; }
+.qr-row { display: flex; gap: clamp(18px, 2.4vw, 28px); align-items: center; flex-wrap: wrap; }
+.qr-row img { width: 128px; flex: none; border: 1px solid var(--line); padding: 8px; background: #fff; }
+.copied { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); opacity: 0; transition: opacity 0.25s; }
 .copied.on { opacity: 1; }
 
-/* ==== FOOTER ==== */
-.foot { text-align: center; padding: 32px 18px 110px; font-family: 'JetBrains Mono', monospace; }
-.foot-tag { font-family: 'Bebas Neue', sans-serif; color: var(--red); font-size: 22px; letter-spacing: 4px; margin-bottom: 12px; }
-.foot-meta { font-size: 10px; color: var(--muted); letter-spacing: 1px; line-height: 1.7; }
-.foot-meta a { color: #b0b0b0; }
-.foot-meta a:hover { color: var(--red); }
+/* ==== PLANTILLES ==== */
+details.tpl { border-top: 1px solid var(--line); }
+details.tpl:last-of-type { border-bottom: 1px solid var(--line); }
+details.tpl summary { list-style: none; display: flex; align-items: center; gap: 14px; padding: 19px 6px; min-height: 44px; font-family: var(--display); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; cursor: pointer; transition: color 0.3s; }
+details.tpl summary::-webkit-details-marker { display: none; }
+details.tpl summary:hover { color: var(--red); }
+details.tpl summary::after { content: '+'; margin-left: auto; color: var(--red); font-size: 16px; }
+details.tpl[open] summary::after { content: '–'; }
+.tpl-body { padding: 0 6px 26px; }
+.tpl-msg { padding: clamp(18px, 2.4vw, 26px); background: var(--paper-2); font-size: 13px; line-height: 1.8; color: var(--ink-2); white-space: pre-wrap; margin-bottom: 16px; }
+
+/* ==== PEU ==== */
+.foot { background: var(--ink); color: #fff; padding: clamp(46px, 7vw, 86px) 0 34px; }
+.foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: clamp(26px, 4vw, 52px); padding-bottom: clamp(34px, 5vw, 58px); border-bottom: 1px solid var(--line-dark); }
+.foot-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+.foot-col a, .foot-col p { display: block; padding: 6px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
+.foot-col a { display: flex; align-items: center; min-height: 44px; transition: color 0.3s; }
+.foot-col a:hover { color: var(--red); }
+.foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
+.foot-mark { font-family: var(--display); font-weight: 300; font-size: clamp(12px, 2vw, 16px); letter-spacing: 0.4em; text-transform: uppercase; }
+.foot-mark em { font-style: normal; color: var(--red); }
+.foot-legal { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
 /* ==== BARRA FIXA ==== */
-.sticky {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
-  padding: 10px 18px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(5,5,5,0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  border-top: 1px solid var(--border);
-  transform: translateY(120%); transition: transform .25s ease; visibility: hidden;
-}
+.sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--line); padding: 12px clamp(16px, 4vw, 48px) calc(12px + env(safe-area-inset-bottom)); transform: translateY(120%); transition: transform 0.35s var(--ease); visibility: hidden; }
 .sticky.show { transform: none; visibility: visible; }
-.sticky a {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  max-width: 540px; margin: 0 auto; background: var(--red); color: #fff; border-radius: 12px; padding: 14px;
-  font-family: 'Bebas Neue', sans-serif; font-size: 21px; letter-spacing: 1.4px;
-}
-.sticky a:hover { background: var(--red-dark); }
+.sticky .btn { display: flex; width: 100%; max-width: 560px; margin: 0 auto; }
 
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.skip { position: absolute; left: -9999px; top: 0; z-index: 200; }
+.skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; padding: 12px 22px; font-family: var(--display); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
 
-<!-- ==== TICKER ==== -->
+<a class="skip" href="#contingut" data-t="skip">Salta al contingut</a>
+
 <div class="ticker">
   <div class="tk-lab"><span class="pdot"></span><span data-t="tkLab">Ajuda'ns</span></div>
   <div class="tk-trk">
-    <div class="tk-cnt" id="tkCnt">
-      <span class="tk-it"><span class="tk-d r"></span><span data-t="tk1">RESSENYES A GOOGLE · OBJECTIU 300</span></span>
-      <span class="tk-it"><span class="tk-d y"></span><span data-t="tk2">1 MINUT · 5 ESTRELLES · 2 LÍNIES</span></span>
-      <span class="tk-it"><span class="tk-d g"></span><span data-t="tk3">LA TEVA OPINIÓ ENS FA VISIBLES</span></span>
-      <span class="tk-it"><span class="tk-d b"></span><span data-t="tk4">450 FAMÍLIES · 34 EQUIPS</span></span>
-      <span class="tk-it"><span class="tk-d r"></span><span data-t="tk5">#SOMCLOT · 60 ANYS DE BÀSQUET</span></span>
-      <span class="tk-it"><span class="tk-d r"></span><span data-t="tk1b">RESSENYES A GOOGLE · OBJECTIU 300</span></span>
-      <span class="tk-it"><span class="tk-d y"></span><span data-t="tk2b">1 MINUT · 5 ESTRELLES · 2 LÍNIES</span></span>
-      <span class="tk-it"><span class="tk-d g"></span><span data-t="tk3b">LA TEVA OPINIÓ ENS FA VISIBLES</span></span>
-      <span class="tk-it"><span class="tk-d b"></span><span data-t="tk4b">450 FAMÍLIES · 34 EQUIPS</span></span>
-      <span class="tk-it"><span class="tk-d r"></span><span data-t="tk5b">#SOMCLOT · 60 ANYS DE BÀSQUET</span></span>
+    <div class="tk-cnt">
+      <span class="tk-it" data-t="tk1">Ressenyes a Google · Objectiu 300</span>
+      <span class="tk-it" data-t="tk2">1 minut · 5 estrelles · 2 línies</span>
+      <span class="tk-it" data-t="tk3">La teva opinió ens fa visibles</span>
+      <span class="tk-it" data-t="tk4">450 famílies · 34 equips</span>
+      <span class="tk-it" data-t="tk1b">Ressenyes a Google · Objectiu 300</span>
+      <span class="tk-it" data-t="tk2b">1 minut · 5 estrelles · 2 línies</span>
+      <span class="tk-it" data-t="tk3b">La teva opinió ens fa visibles</span>
+      <span class="tk-it" data-t="tk4b">450 famílies · 34 equips</span>
     </div>
   </div>
 </div>
 
-<div class="topbar">
-  <a class="backlink" href="/" data-t="back">← Tornar a la web</a>
-  <div class="langs" role="group" aria-label="Idioma">
-    <button type="button" data-lang="ca" aria-pressed="true">CAT</button>
-    <button type="button" data-lang="es" aria-pressed="false">CAST</button>
-  </div>
-</div>
-
-<!-- ==== HEADER ==== -->
 <header class="head">
-  <div class="head-logo"><img src="/logo.png" alt="Escut CB Grup Barna" width="80" height="80" fetchpriority="high"></div>
-  <div class="head-kick" data-t="kick">★★★★★ Google · CB Grup Barna</div>
-  <h1 class="head-name"><span data-t="h1a">Deixa la teva</span> <em data-t="h1b">ressenya</em></h1>
-  <div class="head-tag" data-t="tag">No tenim pressupost de publicitat. Et tenim a tu.</div>
-  <div class="head-stats" id="headStats">
-    <span><b>1</b> <span data-t="stMin">minut</span></span><span class="sep">·</span>
-    <span><b>5</b> <span data-t="stStars">estrelles</span></span><span class="sep">·</span>
-    <span><span data-t="stGoal">objectiu</span> <b id="stGoalNum">300</b></span>
+  <div class="head-in">
+    <div class="head-side">
+      <nav class="head-nav" aria-label="Tornar"><a href="/"><span aria-hidden="true">←</span> <span class="lbl-back" data-t="back">Tornar a la web</span></a></nav>
+    </div>
+    <a class="head-brand" href="/" aria-label="CB Grup Barna · inici">
+      <img src="/logo.png" alt="Escut del CB Grup Barna" width="32" height="32" fetchpriority="high">
+      <span>CB Grup Barna</span>
+    </a>
+    <div class="head-side r">
+      <div class="langs" role="group" aria-label="Idioma">
+        <button type="button" data-lang="ca" aria-pressed="true">Cat</button>
+        <button type="button" data-lang="es" aria-pressed="false">Cast</button>
+      </div>
+    </div>
   </div>
 </header>
 
-<main class="feed-wrap">
+<main id="contingut">
 
-  <div class="feed-title">
-    <span>⭐</span>
-    <span class="feed-title-main" data-t="ft1">La crida</span>
-    <span class="feed-title-meta" data-t="ft1m">Menys d'1 minut</span>
-  </div>
-
-  <!-- ITEM 1 · LA CRIDA -->
-  <div class="item p1 reveal">
-    <div class="item-head">
-      <span class="badge open"><span class="bdot"></span><span data-t="b1">Obert a tothom</span></span>
-      <span class="item-meta" data-t="m1">Prioritat 01</span>
-    </div>
-    <h2 class="item-title"><span data-t="t1">Ens ajudes en menys d'</span><em data-t="t1e">1 minut</em>?</h2>
-    <p class="item-desc" data-t="d1">Quan una família busca un club de bàsquet a Barcelona, Google li ensenya primer els clubs més ben valorats. <b>Dues línies teves ens fan visibles.</b></p>
-
-    <a class="cta-big" id="ctaHero" href="#" rel="noopener">
-      <span class="lbl" data-t="ctaBig">Deixar la meva ressenya</span>
-      <span class="strs" aria-hidden="true">★★★★★</span>
-      <span class="sub" data-t="ctaSub">S'obre el formulari de Google</span>
-    </a>
-    <p class="cta-note" data-t="ctaNote">Si no tens la sessió iniciada, Google et demanarà entrar amb el teu compte i tornaràs aquí mateix. <b>Triga menys d'1 minut.</b></p>
-
-    <div class="blk">
-      <div class="blk-title">
-        <span data-t="cntTitle">Objectiu de la temporada</span>
-        <span id="cUpd"></span>
-      </div>
-      <div class="cnt-row">
-        <span class="cnt-now" id="cNow">300</span>
-        <span class="cnt-of" id="cOf"></span>
-      </div>
-      <div class="bar" id="cBarWrap"><i id="cBar"></i></div>
-      <div class="cnt-foot">
-        <span id="cLeft" data-t="cGoal">Objectiu: 300 ressenyes a Google</span>
+  <!-- ==== LA CRIDA ==== -->
+  <section class="section hero">
+    <div class="wrap narrow">
+      <div class="sec-head reveal" style="margin-bottom:0">
+        <div class="stars-row" aria-hidden="true">★★★★★</div>
+        <p class="eyebrow red" data-t="eyebrow">1 minut · Google</p>
+        <div class="rule"></div>
+        <h1 data-t="h1">Ens ajudes en menys d'un minut?</h1>
+        <p class="lede" data-t="lede">No tenim pressupost de publicitat: et tenim a tu. Quan una família busca un club de bàsquet a Barcelona, Google li ensenya primer els clubs més ben valorats. <b>Dues línies teves ens fan visibles.</b></p>
+        <div class="btn-wrap">
+          <a class="btn red" id="ctaHero" href="#" rel="noopener" data-t="ctaHero">Deixar la meva ressenya</a>
+        </div>
+        <p class="note" data-t="note">Si no tens la sessió iniciada, Google et demanarà entrar amb el teu compte i tornaràs aquí mateix. <b>Triga menys d'1 minut.</b></p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="feed-title">
-    <span>🏀</span>
-    <span class="feed-title-main" data-t="ft2">Per què importa</span>
-    <span class="feed-title-meta" data-t="ft2m">Tres raons concretes</span>
-  </div>
-
-  <!-- ITEM 2 · PER QUÈ -->
-  <div class="item reveal">
-    <div class="item-head">
-      <span class="badge info" data-t="b2">Visibilitat</span>
-      <span class="item-meta" data-t="m2">El club a Google</span>
-    </div>
-    <div class="rw">
-      <span class="ic" aria-hidden="true">🏀</span>
-      <div><h3 data-t="r1t">Perquè ens trobin</h3><p data-t="r1p">Qui busca "bàsquet base Barcelona" o "baloncesto Sant Martí" veu primer els clubs amb més ressenyes i millor nota.</p></div>
-    </div>
-    <div class="rw">
-      <span class="ic" aria-hidden="true">🤝</span>
-      <div><h3 data-t="r2t">Perquè ens obre portes</h3><p data-t="r2p">Empreses del barri, institucions i possibles patrocinadors miren la fitxa del club abans de dir que sí. És el nostre currículum públic.</p></div>
-    </div>
-    <div class="rw">
-      <span class="ic" aria-hidden="true">❤️</span>
-      <div><h3 data-t="r3t">Perquè és de tots</h3><p data-t="r3p">Som més de 450 famílies. Si una de cada dues escriu dues línies, el Barna passa a ser el club de barri més ben valorat de Barcelona.</p></div>
-    </div>
-  </div>
-
-  <!-- ITEM 3 · COM ES FA -->
-  <div class="item reveal">
-    <div class="item-head">
-      <span class="badge muted" data-t="b3">3 passos</span>
-      <span class="item-meta" data-t="m3">Com es fa</span>
-    </div>
-    <h2 class="item-title"><span data-t="t3">Com es fa en</span> <em data-t="t3e">1 minut</em></h2>
-    <div class="rw">
-      <span class="num">01</span>
-      <div><h3 data-t="p1t">Toca el botó vermell</h3><p data-t="p1p">S'obre la finestra de valoració del CB Grup Barna a Google. No has de buscar res.</p></div>
-    </div>
-    <div class="rw">
-      <span class="num">02</span>
-      <div><h3 data-t="p2t">Tria les estrelles i escriu 2 o 3 línies</h3><p data-t="p2p">Explica què hi trobes: l'equip, els entrenadors, l'ambient, el tracte amb les famílies.</p></div>
-    </div>
-    <div class="rw">
-      <span class="num">03</span>
-      <div><h3 data-t="p3t">Publica</h3><p data-t="p3p">Ja està. Es publica al moment i pots editar-la o esborrar-la quan vulguis des del teu compte de Google.</p></div>
-    </div>
-    <p class="warn" data-t="warn"><b>Important:</b> escriu el que penses de veritat i amb les teves paraules. No volem ressenyes calcades ni inventades — Google les detecta, les esborra i perjudiquen el club. Una opinió sincera val per deu de copiades.</p>
-  </div>
-
-  <!-- ITEM 4 · IDEES -->
-  <div class="item reveal">
-    <div class="item-head">
-      <span class="badge new"><span class="bdot"></span><span data-t="b4">Idees</span></span>
-      <span class="item-meta" data-t="m4">Si et quedes en blanc</span>
-    </div>
-    <h2 class="item-title" data-t="t4">No saps què escriure?</h2>
-    <p class="item-desc" data-t="d4">Pensa en una d'aquestes coses i explica-la amb les teves paraules:</p>
-    <div class="chips">
-      <span class="chip" data-t="i1">L'entrenador o entrenadora</span>
-      <span class="chip" data-t="i2">El primer dia al pavelló</span>
-      <span class="chip" data-t="i3">Com ha canviat des que juga</span>
-      <span class="chip" data-t="i4">L'ambient de les grades</span>
-      <span class="chip" data-t="i5">El tracte amb les famílies</span>
-      <span class="chip" data-t="i6">Un moment que recordareu</span>
-      <span class="chip" data-t="i7">Per què el recomanaries</span>
-    </div>
-  </div>
-
-  <!-- ITEM 5 · VÍDEO (opcional) -->
-  <div class="item reveal" id="videoItem">
-    <div class="item-head">
-      <span class="badge info" data-t="b5">Vídeo</span>
-      <span class="item-meta" id="videoCap"></span>
-    </div>
-    <h2 class="item-title" data-t="t5">Un minut de part nostra</h2>
-    <div class="video-box"><video id="opinaVideo" controls playsinline preload="none"></video></div>
-  </div>
-
-  <div class="feed-title">
-    <span>📣</span>
-    <span class="feed-title-main" data-t="ft3">Fes-ho córrer</span>
-    <span class="feed-title-meta" data-t="ft3m">Aquí es multiplica</span>
-  </div>
-
-  <!-- ITEM 6 · COMPARTIR -->
-  <div class="item reveal">
-    <div class="item-head">
-      <span class="badge open"><span class="bdot"></span><span data-t="b6">Comparteix</span></span>
-      <span class="item-meta" data-t="m6">cbgrupbarna.info/opina</span>
-    </div>
-    <h2 class="item-title" data-t="t6">Comparteix-ho amb 3 famílies</h2>
-    <p class="item-desc" data-t="d6">Envia l'enllaç al grup del teu equip. Una ressenya teva suma; tres més, multipliquen.</p>
-    <div class="item-foot">
-      <a class="cta-pill green" id="shWa" href="#" target="_blank" rel="noopener">WhatsApp <span class="arrow">→</span></a>
-      <a class="cta-pill ghost" id="shTg" href="#" target="_blank" rel="noopener">Telegram</a>
-      <a class="cta-pill ghost" id="shMail" href="#" data-t="shMail">Correu</a>
-      <button class="cta-pill ghost" id="shCopy" type="button"><span data-t="shCopy">Copiar enllaç</span></button>
-      <span class="copied" id="copiedLink">OK</span>
-    </div>
-
-    <div class="blk">
-      <div class="blk-title"><span data-t="qrTitle">Codi QR · pavelló i cartells</span><span>QR</span></div>
-      <div class="qr-wrap">
-        <div class="qr-card"><img src="qr.svg" alt="Codi QR cap a cbgrupbarna.info/opina" width="122" height="122" loading="lazy"></div>
-        <div class="qr-txt">
-          <p data-t="qrP">Per al taulell del pavelló, els cartells del partit o la pantalla del descans. És vectorial: s'amplia tant com calgui sense perdre qualitat.</p>
-          <div class="btn-row">
-            <a class="cta-pill ghost" href="qr.svg" download="qr-opina-cbgrupbarna.svg" data-t="qrD">Descarregar QR</a>
-            <a class="cta-pill ghost" href="print/cartell-opina-a4.pdf" download data-t="qrC">Cartell A4</a>
+  <!-- ==== COMPTADOR ==== -->
+  <section class="section tight band-red">
+    <div class="wrap">
+      <p class="eyebrow" data-t="cntEyebrow">Objectiu de la temporada</p>
+      <div class="count" style="margin-top:18px">
+        <div class="count-fig">
+          <span class="count-now" id="cNow">300</span>
+          <span class="count-of" id="cOf" data-t="cOfWord">ressenyes</span>
+        </div>
+        <div>
+          <div class="count-bar" id="cBarWrap"><i id="cBar"></i></div>
+          <div class="count-foot">
+            <span id="cLeft" data-t="cGoal">Objectiu: 300 ressenyes a Google</span>
+            <span id="cUpd"></span>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ITEM 7 · DELEGATS -->
-  <div class="item reveal">
-    <div class="item-head">
-      <span class="badge muted" data-t="b7">Intern</span>
-      <span class="item-meta" data-t="m7">Delegats i entrenadors</span>
+  <!-- ==== PER QUÈ ==== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow" data-t="s1e">Per què importa</p>
+        <div class="rule"></div>
+        <h2 data-t="s1h">Tres raons concretes</h2>
+        <p data-t="s1p">Cap d'elles és quedar bé.</p>
+      </div>
+      <div class="cards reveal">
+        <div class="card">
+          <span class="num">01</span>
+          <h3 data-t="c1h">Perquè ens trobin</h3>
+          <p data-t="c1p">Qui busca "bàsquet base Barcelona" o "baloncesto Sant Martí" veu primer els clubs amb més ressenyes i millor nota. Cada ressenya ens acosta a aparèixer abans que ningú.</p>
+        </div>
+        <div class="card">
+          <span class="num">02</span>
+          <h3 data-t="c2h">Perquè ens obre portes</h3>
+          <p data-t="c2p">Empreses del barri, institucions i possibles patrocinadors miren la fitxa del club abans de dir que sí. Les ressenyes són el nostre currículum públic.</p>
+        </div>
+        <div class="card">
+          <span class="num">03</span>
+          <h3 data-t="c3h">Perquè és de tots</h3>
+          <p data-t="c3p">Som més de 450 famílies. Si una de cada dues escriu dues línies, el Barna passa a ser el club de barri més ben valorat de Barcelona.</p>
+        </div>
+      </div>
     </div>
-    <h2 class="item-title" data-t="t7">Missatge llest per enviar</h2>
-    <p class="item-desc" data-t="d7">Copia'l i envia'l tal qual al grup de WhatsApp de l'equip.</p>
+  </section>
 
-    <details class="tpl">
-      <summary data-t="tplCa">Missatge en català</summary>
-      <div class="tpl-body">
-        <div class="tpl-msg" id="msgCa">💬 Ens ajudes en menys d'1 minut?
+  <!-- ==== COM ES FA ==== -->
+  <section class="section band-soft">
+    <div class="wrap narrow">
+      <div class="sec-head reveal">
+        <p class="eyebrow" data-t="s2e">Com es fa</p>
+        <div class="rule"></div>
+        <h2 data-t="s2h">Tres passos, un minut</h2>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <span class="n">01</span>
+          <div><h3 data-t="p1h">Toca el botó vermell</h3><p data-t="p1p">S'obre la finestra de valoració del CB Grup Barna a Google. No has de buscar res.</p></div>
+        </div>
+        <div class="step">
+          <span class="n">02</span>
+          <div><h3 data-t="p2h">Tria les estrelles i escriu dues línies</h3><p data-t="p2p">Explica què hi trobes: l'equip, els entrenadors, l'ambient, el tracte amb les famílies.</p></div>
+        </div>
+        <div class="step">
+          <span class="n">03</span>
+          <div><h3 data-t="p3h">Publica</h3><p data-t="p3p">Ja està. Es publica al moment i pots editar-la o esborrar-la quan vulguis des del teu compte de Google.</p></div>
+        </div>
+      </div>
+      <p class="warn reveal" data-t="warn"><b>Important:</b> escriu el que penses de veritat i amb les teves paraules. No volem ressenyes calcades ni inventades — Google les detecta, les esborra i perjudiquen el club. Una opinió sincera val per deu de copiades.</p>
+    </div>
+  </section>
+
+  <!-- ==== IDEES ==== -->
+  <section class="section tight">
+    <div class="wrap narrow">
+      <div class="sec-head reveal">
+        <p class="eyebrow" data-t="s3e">Si et quedes en blanc</p>
+        <div class="rule"></div>
+        <h2 data-t="s3h">No saps què escriure?</h2>
+        <p data-t="s3p">Pensa en una d'aquestes coses i explica-la amb les teves paraules.</p>
+      </div>
+      <div class="chips reveal">
+        <span class="chip" data-t="i1">L'entrenador o entrenadora</span>
+        <span class="chip" data-t="i2">El primer dia al pavelló</span>
+        <span class="chip" data-t="i3">Com ha canviat des que juga</span>
+        <span class="chip" data-t="i4">L'ambient de les grades</span>
+        <span class="chip" data-t="i5">El tracte amb les famílies</span>
+        <span class="chip" data-t="i6">Un moment que recordareu</span>
+        <span class="chip" data-t="i7">Per què el recomanaries</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== VÍDEO (opcional) ==== -->
+  <section class="section tight" id="videoSection">
+    <div class="wrap narrow">
+      <div class="sec-head reveal">
+        <p class="eyebrow" data-t="s4e">De part nostra</p>
+        <div class="rule"></div>
+        <h2 data-t="s4h">Un minut de part nostra</h2>
+      </div>
+      <div class="video-box reveal">
+        <video id="opinaVideo" controls playsinline preload="none"></video>
+      </div>
+      <div class="video-cap" id="videoCap"></div>
+    </div>
+  </section>
+
+  <!-- ==== COMPARTIR ==== -->
+  <section class="section band-soft">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow" data-t="s5e">Fes-ho córrer</p>
+        <div class="rule"></div>
+        <h2 data-t="s5h">Comparteix-ho amb tres famílies</h2>
+        <p data-t="s5p">Aquesta és la part que multiplica: envia l'enllaç al grup del teu equip.</p>
+      </div>
+      <div class="share reveal">
+        <div class="panel">
+          <h3 data-t="shH">Enviar l'enllaç</h3>
+          <p data-t="shP">cbgrupbarna.info/opina</p>
+          <div class="btn-row">
+            <a class="btn ghost" id="shWa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn ghost" id="shTg" href="#" target="_blank" rel="noopener">Telegram</a>
+            <a class="btn ghost" id="shMail" href="#" data-t="shMail">Correu</a>
+            <button class="btn ghost" id="shCopy" type="button" data-t="shCopy">Copiar enllaç</button>
+            <span class="copied" id="copiedLink">Copiat</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 data-t="qrH">Codi QR</h3>
+          <div class="qr-row">
+            <img src="qr.svg" alt="Codi QR cap a cbgrupbarna.info/opina" width="128" height="128" loading="lazy">
+            <p data-t="qrP">Per al taulell del pavelló, els cartells del partit o la pantalla del descans. És vectorial: s'amplia tant com calgui sense perdre qualitat.</p>
+          </div>
+          <div class="btn-row">
+            <a class="btn ghost" href="qr.svg" download="qr-opina-cbgrupbarna.svg" data-t="qrD">Descarregar QR</a>
+            <a class="btn ghost" href="print/cartell-opina-a4.pdf" download data-t="qrC">Cartell A4</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== DELEGATS ==== -->
+  <section class="section tight">
+    <div class="wrap narrow">
+      <div class="sec-head reveal">
+        <p class="eyebrow" data-t="s6e">Delegats i entrenadors</p>
+        <div class="rule"></div>
+        <h2 data-t="s6h">Missatge llest per enviar</h2>
+        <p data-t="s6p">Copia'l i envia'l tal qual al grup de WhatsApp de l'equip.</p>
+      </div>
+
+      <div class="reveal">
+        <details class="tpl">
+          <summary data-t="tplCa">Missatge en català</summary>
+          <div class="tpl-body">
+            <div class="tpl-msg" id="msgCa">💬 Ens ajudes en menys d'1 minut?
 
 Si el CB Grup Barna forma part del vostre camí, ens ajudaria molt que ens deixéssiu una ressenya a Google.
 
@@ -600,14 +546,14 @@ La vostra opinió ajuda altres famílies a trobar-nos i a fer créixer el club.
 https://cbgrupbarna.info/opina
 
 Moltes gràcies per formar part de la família Barna ❤️🖤</div>
-        <div class="copy-row"><button class="cta-pill ghost" type="button" data-copy="msgCa" data-t="copyBtn">Copiar el missatge</button><span class="copied">OK</span></div>
-      </div>
-    </details>
+            <div class="btn-row"><button class="btn ghost" type="button" data-copy="msgCa" data-t="copyBtn">Copiar el missatge</button><span class="copied">Copiat</span></div>
+          </div>
+        </details>
 
-    <details class="tpl">
-      <summary data-t="tplEs">Mensaje en castellano</summary>
-      <div class="tpl-body">
-        <div class="tpl-msg" id="msgEs">💬 ¿Nos ayudas en menos de 1 minuto?
+        <details class="tpl">
+          <summary data-t="tplEs">Mensaje en castellano</summary>
+          <div class="tpl-body">
+            <div class="tpl-msg" id="msgEs">💬 ¿Nos ayudas en menos de 1 minuto?
 
 Si el CB Grup Barna forma parte de vuestro camino, nos ayudaría muchísimo que nos dejarais una reseña en Google.
 
@@ -617,26 +563,47 @@ Vuestra opinión ayuda a otras familias a encontrarnos y a hacer crecer el club.
 https://cbgrupbarna.info/opina
 
 ¡Gracias por formar parte de la familia Barna! ❤️🖤</div>
-        <div class="copy-row"><button class="cta-pill ghost" type="button" data-copy="msgEs" data-t="copyBtn">Copiar el missatge</button><span class="copied">OK</span></div>
+            <div class="btn-row"><button class="btn ghost" type="button" data-copy="msgEs" data-t="copyBtn">Copiar el missatge</button><span class="copied">Copiat</span></div>
+          </div>
+        </details>
       </div>
-    </details>
-  </div>
+    </div>
+  </section>
 
 </main>
 
 <footer class="foot">
-  <div class="foot-tag">#SOMCLOT</div>
-  <div class="foot-meta">
-    CB Grup Barna · Districte Sant Martí, Barcelona<br>
-    Bàsquet base al Clot des de 1965<br>
-    <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a> · <a href="https://wa.me/34698425153">+34 698 425 153</a><br>
-    <a href="https://cbgrupbarna.info/">cbgrupbarna.info</a> · <a href="https://www.instagram.com/cbgrupbarna/">Instagram</a> · <a href="https://www.cbgrupbarna.com">cbgrupbarna.com</a><br>
-    <span style="opacity:0.55">© 2026 CB Grup Barna</span>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h3 data-t="fc1">El Barna</h3>
+        <a href="/">Portada</a>
+        <a href="/escoleta/">Escola de bàsquet</a>
+        <a href="/campus/">Campus de bàsquet</a>
+        <a href="/partits/">Dies de partit</a>
+      </div>
+      <div class="foot-col">
+        <h3 data-t="fc2">Contacte</h3>
+        <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
+        <a href="https://wa.me/34698425153">+34 698 425 153</a>
+        <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3 data-t="fc3">Xarxes</h3>
+        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.cbgrupbarna.com" target="_blank" rel="noopener">cbgrupbarna.com</a>
+      </div>
+    </div>
+    <div class="foot-btm">
+      <div class="foot-mark">Som<em>Clot</em></div>
+      <div class="foot-legal">© 2026 CB Grup Barna · Des de 1965</div>
+    </div>
   </div>
 </footer>
 
 <div class="sticky">
-  <a id="ctaSticky" href="#" rel="noopener" data-t="ctaSticky">Deixar la meva ressenya ⭐</a>
+  <a class="btn red" id="ctaSticky" href="#" rel="noopener" data-t="ctaSticky">Deixar la meva ressenya</a>
 </div>
 
 <script>
@@ -647,7 +614,7 @@ https://cbgrupbarna.info/opina
   var DEFAULTS = {
     placeId: '',
     reviewUrl: '',
-    fallbackUrl: 'https://www.google.com/maps/search/?api=1&query=CB%20Grup%20Barna%20Barcelona',
+    fallbackUrl: 'https://www.google.com/maps?cid=8202845242262325022',
     goal: 300,
     current: null,
     updated: '',
@@ -656,65 +623,56 @@ https://cbgrupbarna.info/opina
 
   // ---------------------------------------------------------------- i18n ---
   var ES = {
+    skip: 'Saltar al contenido',
     tkLab: 'Ayúdanos',
-    tk1: 'RESEÑAS EN GOOGLE · OBJETIVO 300', tk1b: 'RESEÑAS EN GOOGLE · OBJETIVO 300',
-    tk2: '1 MINUTO · 5 ESTRELLAS · 2 LÍNEAS', tk2b: '1 MINUTO · 5 ESTRELLAS · 2 LÍNEAS',
-    tk3: 'TU OPINIÓN NOS HACE VISIBLES', tk3b: 'TU OPINIÓN NOS HACE VISIBLES',
-    tk4: '450 FAMILIAS · 34 EQUIPOS', tk4b: '450 FAMILIAS · 34 EQUIPOS',
-    tk5: '#SOMCLOT · 60 AÑOS DE BALONCESTO', tk5b: '#SOMCLOT · 60 AÑOS DE BALONCESTO',
+    tk1: 'Reseñas en Google · Objetivo 300', tk1b: 'Reseñas en Google · Objetivo 300',
+    tk2: '1 minuto · 5 estrellas · 2 líneas', tk2b: '1 minuto · 5 estrellas · 2 líneas',
+    tk3: 'Tu opinión nos hace visibles', tk3b: 'Tu opinión nos hace visibles',
+    tk4: '450 familias · 34 equipos', tk4b: '450 familias · 34 equipos',
     back: '← Volver a la web',
-    kick: '★★★★★ Google · CB Grup Barna',
-    h1a: 'Déjanos tu', h1b: 'reseña',
-    tag: 'No tenemos presupuesto de publicidad. Te tenemos a ti.',
-    stMin: 'minuto', stStars: 'estrellas', stGoal: 'objetivo',
-    ft1: 'La llamada', ft1m: 'Menos de 1 minuto',
-    b1: 'Abierto a todos', m1: 'Prioridad 01',
-    t1: '¿Nos ayudas en menos de ', t1e: '1 minuto',
-    d1: 'Cuando una familia busca un club de baloncesto en Barcelona, Google le enseña primero los clubes mejor valorados. Dos líneas tuyas nos hacen visibles.',
-    ctaBig: 'Dejar mi reseña',
-    ctaSub: 'Se abre el formulario de Google',
-    ctaNote: 'Si no tienes la sesión iniciada, Google te pedirá entrar con tu cuenta y volverás aquí mismo. Tarda menos de 1 minuto.',
-    cntTitle: 'Objetivo de la temporada',
+    eyebrow: '1 minuto · Google',
+    h1: '¿Nos ayudas en menos de un minuto?',
+    lede: 'No tenemos presupuesto de publicidad: te tenemos a ti. Cuando una familia busca un club de baloncesto en Barcelona, Google le enseña primero los clubes mejor valorados. Dos líneas tuyas nos hacen visibles.',
+    ctaHero: 'Dejar mi reseña',
+    note: 'Si no tienes la sesión iniciada, Google te pedirá entrar con tu cuenta y volverás aquí mismo. Tarda menos de 1 minuto.',
+    cntEyebrow: 'Objetivo de la temporada',
+    cOfWord: 'reseñas',
     cGoal: 'Objetivo: 300 reseñas en Google',
-    ft2: 'Por qué importa', ft2m: 'Tres razones concretas',
-    b2: 'Visibilidad', m2: 'El club en Google',
-    r1t: 'Para que nos encuentren',
-    r1p: 'Quien busca "baloncesto base Barcelona" o "bàsquet Sant Martí" ve primero los clubes con más reseñas y mejor nota.',
-    r2t: 'Para que se nos abran puertas',
-    r2p: 'Empresas del barrio, instituciones y posibles patrocinadores miran la ficha del club antes de decir que sí. Es nuestro currículum público.',
-    r3t: 'Porque es de todos',
-    r3p: 'Somos más de 450 familias. Si una de cada dos escribe dos líneas, el Barna pasa a ser el club de barrio mejor valorado de Barcelona.',
-    b3: '3 pasos', m3: 'Cómo se hace',
-    t3: 'Cómo se hace en', t3e: '1 minuto',
-    p1t: 'Toca el botón rojo',
+    s1e: 'Por qué importa', s1h: 'Tres razones concretas', s1p: 'Ninguna de ellas es quedar bien.',
+    c1h: 'Para que nos encuentren',
+    c1p: 'Quien busca "baloncesto base Barcelona" o "bàsquet Sant Martí" ve primero los clubes con más reseñas y mejor nota. Cada reseña nos acerca a aparecer antes que nadie.',
+    c2h: 'Para que se nos abran puertas',
+    c2p: 'Empresas del barrio, instituciones y posibles patrocinadores miran la ficha del club antes de decir que sí. Las reseñas son nuestro currículum público.',
+    c3h: 'Porque es de todos',
+    c3p: 'Somos más de 450 familias. Si una de cada dos escribe dos líneas, el Barna pasa a ser el club de barrio mejor valorado de Barcelona.',
+    s2e: 'Cómo se hace', s2h: 'Tres pasos, un minuto',
+    p1h: 'Toca el botón rojo',
     p1p: 'Se abre la ventana de valoración del CB Grup Barna en Google. No tienes que buscar nada.',
-    p2t: 'Elige las estrellas y escribe 2 o 3 líneas',
+    p2h: 'Elige las estrellas y escribe dos líneas',
     p2p: 'Cuenta qué encuentras: el equipo, los entrenadores, el ambiente, el trato con las familias.',
-    p3t: 'Publica',
+    p3h: 'Publica',
     p3p: 'Ya está. Se publica al momento y puedes editarla o borrarla cuando quieras desde tu cuenta de Google.',
     warn: 'Importante: escribe lo que piensas de verdad y con tus palabras. No queremos reseñas calcadas ni inventadas — Google las detecta, las borra y perjudican al club. Una opinión sincera vale por diez copiadas.',
-    b4: 'Ideas', m4: 'Si te quedas en blanco',
-    t4: '¿No sabes qué escribir?',
-    d4: 'Piensa en una de estas cosas y cuéntala con tus palabras:',
+    s3e: 'Si te quedas en blanco', s3h: '¿No sabes qué escribir?',
+    s3p: 'Piensa en una de estas cosas y cuéntala con tus palabras.',
     i1: 'El entrenador o entrenadora', i2: 'El primer día en el pabellón',
     i3: 'Cómo ha cambiado desde que juega', i4: 'El ambiente de las gradas',
     i5: 'El trato con las familias', i6: 'Un momento que recordaréis',
     i7: 'Por qué lo recomendarías',
-    b5: 'Vídeo', t5: 'Un minuto de nuestra parte',
-    ft3: 'Hazlo correr', ft3m: 'Aquí se multiplica',
-    b6: 'Comparte', m6: 'cbgrupbarna.info/opina',
-    t6: 'Compártelo con 3 familias',
-    d6: 'Envía el enlace al grupo de tu equipo. Una reseña tuya suma; tres más, multiplican.',
+    s4e: 'De nuestra parte', s4h: 'Un minuto de nuestra parte',
+    s5e: 'Hazlo correr', s5h: 'Compártelo con tres familias',
+    s5p: 'Esta es la parte que multiplica: envía el enlace al grupo de tu equipo.',
+    shH: 'Enviar el enlace', shP: 'cbgrupbarna.info/opina',
     shMail: 'Correo', shCopy: 'Copiar enlace',
-    qrTitle: 'Código QR · pabellón y carteles',
+    qrH: 'Código QR',
     qrP: 'Para el tablón del pabellón, los carteles del partido o la pantalla del descanso. Es vectorial: se amplía todo lo que haga falta sin perder calidad.',
     qrD: 'Descargar QR', qrC: 'Cartel A4',
-    b7: 'Interno', m7: 'Delegados y entrenadores',
-    t7: 'Mensaje listo para enviar',
-    d7: 'Cópialo y envíalo tal cual al grupo de WhatsApp del equipo.',
+    s6e: 'Delegados y entrenadores', s6h: 'Mensaje listo para enviar',
+    s6p: 'Cópialo y envíalo tal cual al grupo de WhatsApp del equipo.',
     tplCa: 'Mensaje en catalán', tplEs: 'Mensaje en castellano',
     copyBtn: 'Copiar el mensaje',
-    ctaSticky: 'Dejar mi reseña ⭐'
+    fc1: 'El Barna', fc2: 'Contacto', fc3: 'Redes',
+    ctaSticky: 'Dejar mi reseña'
   };
 
   var CA = {};
@@ -800,13 +758,13 @@ https://cbgrupbarna.info/opina
       });
     });
     if (!direct) {
-      // Sense enllac directe configurat s'obre la fitxa del club: cal avisar
-      // que l'usuari ha de prémer "Escriu una ressenya".
-      var note = document.querySelector('.cta-note');
+      // Sense enllac directe configurat s'obre la fitxa del club: cal dir a
+      // l'usuari que ha de prémer "Escriu una ressenya".
+      var note = document.querySelector('.hero .note');
       if (note) {
         var extra = document.createElement('b');
         extra.style.display = 'block';
-        extra.style.marginTop = '6px';
+        extra.style.marginTop = '8px';
         extra.textContent = lang === 'es'
           ? 'Se abre la ficha del club en Google: pulsa "Escribir una reseña".'
           : 'S\'obre la fitxa del club a Google: prem "Escriu una ressenya".';
@@ -826,14 +784,11 @@ https://cbgrupbarna.info/opina
     var elWrap = document.getElementById('cBarWrap');
     var elLeft = document.getElementById('cLeft');
     var elUpd = document.getElementById('cUpd');
-    var elGoalNum = document.getElementById('stGoalNum');
-
-    if (elGoalNum) elGoalNum.textContent = goal;
 
     if (typeof now !== 'number' || isNaN(now) || now < 0) {
       elNow.textContent = goal;
       elOf.textContent = lang === 'es' ? 'reseñas' : 'ressenyes';
-      elWrap.style.display = 'none';
+      elWrap.style.visibility = 'hidden';
       elLeft.textContent = lang === 'es'
         ? 'Objetivo: ' + goal + ' reseñas en Google'
         : 'Objectiu: ' + goal + ' ressenyes a Google';
@@ -841,14 +796,14 @@ https://cbgrupbarna.info/opina
       return;
     }
 
-    elWrap.style.display = '';
+    elWrap.style.visibility = '';
     elNow.textContent = now;
     elOf.textContent = '/ ' + goal;
     var pct = Math.max(0, Math.min(100, Math.round((now / goal) * 100)));
-    setTimeout(function () { elBar.style.width = pct + '%'; }, 220);
+    setTimeout(function () { elBar.style.width = pct + '%'; }, 260);
     var left = Math.max(0, goal - now);
     elLeft.textContent = left === 0
-      ? (lang === 'es' ? '¡Objetivo conseguido! Gracias 🖤' : 'Objectiu assolit! Gràcies 🖤')
+      ? (lang === 'es' ? 'Objetivo conseguido. Gracias.' : 'Objectiu assolit. Gràcies.')
       : (lang === 'es' ? 'Faltan ' + left + ' · ' + pct + '%' : 'En falten ' + left + ' · ' + pct + '%');
     elUpd.textContent = CFG.updated || '';
   }
@@ -856,13 +811,13 @@ https://cbgrupbarna.info/opina
   function setupVideo() {
     var v = CFG.video || {};
     if (!v.enabled || !v.src) return;
-    var item = document.getElementById('videoItem');
+    var section = document.getElementById('videoSection');
     var video = document.getElementById('opinaVideo');
     video.src = v.src;
     if (v.poster) video.poster = v.poster;
     document.getElementById('videoCap').textContent = v.caption || '';
-    item.style.display = 'block';
-    item.classList.add('visible');
+    section.style.display = 'block';
+    section.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
     video.addEventListener('play', function () { track('video_start', { language: lang }); }, { once: true });
   }
 
@@ -909,7 +864,6 @@ https://cbgrupbarna.info/opina
 
   buildShare();
 
-  // La barra fixa nomes apareix quan el boto gran ja no es veu.
   var sticky = document.querySelector('.sticky');
   var hero = document.getElementById('ctaHero');
   if ('IntersectionObserver' in window && sticky && hero) {
@@ -920,7 +874,6 @@ https://cbgrupbarna.info/opina
     sticky.classList.add('show');
   }
 
-  // Aparicio progressiva dels items, igual que a la portada.
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {

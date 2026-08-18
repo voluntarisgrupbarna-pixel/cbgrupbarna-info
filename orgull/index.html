@@ -117,6 +117,13 @@ img { max-width: 100%; display: block; }
 }
 
 /* === NAVEGACIÓ === */
+.site-nav { background: var(--black); }
+.site-nav-in { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); display: flex; align-items: center; gap: 18px; height: 38px; overflow-x: auto; scrollbar-width: none; }
+.site-nav-in::-webkit-scrollbar { display: none; }
+.site-nav-in a { font-family: -apple-system, sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.6); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+.site-nav-in a:hover { color: #fff; }
+.site-nav-in a.brand { color: #fff; font-weight: 700; }
+
 .nav {
   position: sticky;
   top: 0;
@@ -827,10 +834,26 @@ img { max-width: 100%; display: block; }
 <!-- ========= FRANJA ARC IRIS DALT ========= -->
 <div class="rainbow-bar" role="presentation"></div>
 
+<!-- ========= SITE NAV ========= -->
+<nav class="site-nav" aria-label="Navegació del web">
+  <div class="site-nav-in">
+    <a href="/" class="brand">CB Grup Barna</a>
+    <a href="/club/">Club</a>
+    <a href="/escoleta/">Escoleta</a>
+    <a href="/partits/">Dies de partit</a>
+    <a href="/patrocinadors/">Patrocinadors</a>
+    <a href="/campus/">Campus</a>
+    <a href="/3x3/">3x3</a>
+    <a href="/cistella-petita/">Cistella Petita</a>
+    <a href="/fotos/">Galeria</a>
+    <a href="/premsa/">Premsa</a>
+  </div>
+</nav>
+
 <!-- ========= NAV ========= -->
-<nav class="nav" id="nav" aria-label="Navegació principal">
+<nav class="nav" id="nav" aria-label="Navegació de la pàgina">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">CB GRUP BARNA · MES DE L'<span>ORGULL</span></a>
+    <a href="/orgull/" class="nav-logo">CB GRUP BARNA · MES DE L'<span>ORGULL</span></a>
     <ul class="nav-links">
       <li><a href="#manifest">Manifest</a></li>
       <li><a href="#activitats">Activitats</a></li>
