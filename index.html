@@ -1872,9 +1872,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   })();
 
   // ==== COMMUTADOR FRANGES / EXTENSA ====
-  // Per defecte: franges a mòbil i tauleta (≤1024px) i dins del navegador
-  // d'Instagram o Facebook, sigui quina sigui l'amplada; extensa a escriptori.
-  // Un cop es tria a mà, la preferència es desa i mana a qualsevol amplada.
+  // Franges és sempre el punt de partida: cada visita nova (pestanya o
+  // navegador tancats i reoberts) torna a començar en franges. Si es tria
+  // extensa, es manté mentre es navegui per la mateixa pestanya (sessionStorage,
+  // no localStorage) — però la propera visita torna a ser franges.
   (function () {
     var btn = document.getElementById('viewToggle');
     var lbl = document.getElementById('viewToggleLbl');
@@ -1882,7 +1883,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     var root = document.documentElement;
     var KEY = 'cbgb-view-v2';
     var view = null;
-    try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'extensa') view = saved; } catch (e) {}
+    try { var saved = sessionStorage.getItem(KEY); if (saved === 'light' || saved === 'extensa') view = saved; } catch (e) {}
+    try { localStorage.removeItem(KEY); localStorage.removeItem('cbgb-view'); } catch (e) {}
 
     // Trànsit d'Instagram: sempre la versió light, sigui quin sigui el
     // dispositiu o la preferència desada. Els enllaços que es comparteixen
@@ -1913,7 +1915,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     }
     btn.addEventListener('click', function () {
       view = efectiu() === 'light' ? 'extensa' : 'light';
-      try { localStorage.setItem(KEY, view); } catch (e) {}
+      try { sessionStorage.setItem(KEY, view); } catch (e) {}
       pinta();
     });
     pinta();
