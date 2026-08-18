@@ -18,6 +18,70 @@ canviar res; si no coincideixen, atura't i pregunta.
 
 ---
 
+## 0 bis. La web i l'Instagram són la mateixa marca
+
+La tesi que ordena tota la resta: **qui salta del perfil a la web no ha de notar
+que canvia de club.** L'Instagram ja té un sistema tancat i respectat; la web és
+la que s'hi ha d'alinear, no al revés.
+
+### El que l'Instagram ja fa bé
+
+- **Tres colors i prou** — vermell, negre, blanc. La foto fa de quart color.
+- Cadència sostinguda i **sèries reconeixibles**: «La feina que no es veu»,
+  «Bàsquet femení», «Dies de partit».
+- El que arriba és **història emocional**, no pòster informatiu. Els reels de
+  l'escoleta femenina i de l'staff són els que més volen.
+- Un reel mitjà toca ~96% dels seguidors: la base està sana.
+
+### Els tres trencaments que separaven les dues cares
+
+| | Trencament | Estat |
+|---|---|---|
+| 1 | **Color** — al CSS convivien groc, verd, blau i taronja, cap d'ells de l'IG | Resolt: punt 1 |
+| 2 | **Vocabulari** — «Partits i events», «Partits i resultats» i «Calendari» com a tres entrades | Resolt: punt 5 |
+| 3 | **Jerarquia** — 8.500 px d'alçada i un bloc «Tot a mà» amb 25+ enllaços plans | Resolt: les franges |
+
+### Com es lliguen, peça a peça
+
+| Web | Instagram |
+|---|---|
+| Pilar «Escoleta» | Destacada «Escoleta» |
+| Bloc «Dies de partit» | Sèrie de stories del cap de setmana |
+| Hero editorial de l'extensa | Mateixa foto que la portada del post fixat |
+| Fitxa d'entrenador/a | Sèrie «La feina que no es veu» |
+
+**Els quatre destacats del perfil són els quatre pilars de la web.** Si canvien
+al perfil, canvien a la web.
+
+### Les dues velocitats de lectura
+
+No són propostes excloents: **la portada té les dues i un commutador**, perquè
+serveixen públics diferents.
+
+| | **Franges** (per defecte) | **Extensa** (editorial) |
+|---|---|---|
+| Per a qui | El dit que acaba de tocar l'enllaç de la bio: mòbil, tres segons de paciència | Qui investiga: famílies, premsa, patrocinadors |
+| Forma | Rectangles amples, una porta per franja, tot a un toc | Portada de diari: foto gran, titular editorial, pilars |
+| Guanya | Conversió. Menys d'un segon per entendre on tocar | Autoritat i SEO real: la web té contingut propi, no només enllaços |
+| Costa | Gairebé res de manteniment | Una foto editorial bona cada temporada i el bloc de partits viu |
+| Risc | Davant un patrocinador, una graella d'enllaços no sosté el discurs | Si l'IG canvia de sèries i la web no, es tornen a separar |
+
+L'estructura de les franges està calcada de la guia visual. **Si canvies l'ordre
+o els textos d'una, canvia'ls a l'altra**: la portada i la guia han de dir el
+mateix.
+
+### Nota sobre les guies antigues
+
+Hi ha una guia anterior —«Web + Instagram: dues propostes», agost 2026— que
+proposava **Bebas Neue** i el vermell **`#E31E24`**, amb negre `#050505` i
+JetBrains Mono per a dades. **Aquells valors no manen.** La decisió tancada és
+Anton i `#E20613` (punts 1 i 2), perquè el vermell està mostrejat de l'escut i
+`#E31E24` no arriba al contrast mínim sobre crema. La resta d'aquella guia —la
+tesi, el diagnòstic i les dues propostes— sí que val, i és el que hi ha aquí
+sobre.
+
+---
+
 ## 1. Un sol vermell: el de l'escut
 
 | Token | Valor | Ús |
