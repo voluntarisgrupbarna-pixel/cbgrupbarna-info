@@ -930,6 +930,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .menu.open { transform: none; visibility: visible; }
 .menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
 @media (min-width: 780px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
 .menu-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: var(--red); margin-bottom: 14px; }
 .menu-col a { display: flex; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 400; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.02em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
 .menu-col a:hover { color: var(--red); padding-left: 10px; }
@@ -1228,29 +1229,48 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 <nav class="menu" id="menu" aria-label="Menú complet">
   <div class="menu-grid">
     <div class="menu-col">
-      <h3>Club</h3>
-      <a href="/club/" data-cta="menu-club">El Club <small>qui som</small></a>
-      <a href="/historia/" data-cta="menu-historia">Història del club <small>des de 1965</small></a>
-      <a href="/organigrama/" data-cta="menu-organigrama">Organigrama <small>junta directiva</small></a>
+      <h3>Juga al Barna</h3>
+      <a href="#escoleta" data-cta="menu-escoleta">Escoleta <small>4 a 8 anys</small></a>
+      <a href="/partits/equips/" data-cta="menu-formatiu">Bàsquet formatiu <small>totes les categories</small></a>
+      <a href="#info" data-cta="menu-portes-obertes">Portes obertes <small>entrenament de prova</small></a>
       <a href="/femeni/" data-cta="menu-femeni">Bàsquet femení <small>8 equips</small></a>
-      <a href="/posicionament/" data-cta="menu-posicionament">Posicionament <small>vs. Barça, Penya…</small></a>
-      <a href="/blog/" data-cta="menu-blog">Blog <small>guies</small></a>
-      <a href="/grup-barna-dades-oficials/" data-cta="menu-dades">Dades oficials</a>
+      <a href="/magics/" data-cta="menu-magics">Barna Màgics <small>bàsquet inclusiu</small></a>
+      <a href="/faq/" data-cta="menu-faq">Preguntes freqüents</a>
     </div>
     <div class="menu-col">
-      <h3>Temporada i activitats</h3>
-      <a href="#info">Demanar informació <small>formulari</small></a>
-      <a href="#escoleta">Escoleta <small>4 a 8 anys</small></a>
+      <h3>Equips i temporada</h3>
+      <a href="/partits/equips/" data-cta="menu-equips">Equips <small>sènior, júnior, cadet…</small></a>
+      <a href="#calendari" data-cta="menu-partits">Dies de partit</a>
+      <a href="/partits/calendaris/" data-cta="menu-calendaris">Calendaris <small>per equip</small></a>
+      <a href="/fotos/" data-cta="menu-galeria">Galeria <small>fotos de temporada</small></a>
+    </div>
+    <div class="menu-col">
+      <h3>Activitats</h3>
       <a href="/campus/" data-cta="menu-campus">Campus de bàsquet</a>
       <a href="/3x3/" data-cta="menu-3x3">Torneig 3x3</a>
       <a href="/cistella-petita/" data-cta="menu-cistella">Cistella Petita <small>3 a 8 anys</small></a>
-      <a href="#calendari">Dies de partit</a>
-      <a href="/fotos/" data-cta="menu-galeria">Galeria de fotos</a>
-      <a href="/premsa/" data-cta="menu-premsa">Articles i premsa <small>Guia Clot</small></a>
-      <a href="/patrocinadors/" data-cta="menu-partners">Patrocinadors i partners</a>
+    </div>
+    <div class="menu-col">
+      <h3>El Club</h3>
+      <a href="/club/" data-cta="menu-club">Qui som</a>
+      <a href="/historia/" data-cta="menu-historia">Història <small>des de 1965</small></a>
+      <a href="/organigrama/" data-cta="menu-organigrama">Organigrama <small>junta directiva</small></a>
+      <a href="/instal-lacions/" data-cta="menu-installacions">Instal·lacions</a>
+      <a href="/posicionament/" data-cta="menu-posicionament">Posicionament <small>vs. Barça, Penya…</small></a>
+      <a href="/grup-barna-dades-oficials/" data-cta="menu-dades">Dades oficials</a>
+      <a href="/proteccio-menor/" data-cta="menu-proteccio">Protecció del menor</a>
+      <a href="/documents/" data-cta="menu-documents">Documents</a>
+    </div>
+    <div class="menu-col">
+      <h3>Actualitat</h3>
+      <a href="/blog/" data-cta="menu-blog">Coneixement Barna <small>formació, famílies, dades…</small></a>
+      <a href="/premsa/" data-cta="menu-premsa">Premsa <small>arxiu 1988–2026</small></a>
       <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
-      <a href="/faq/" data-cta="menu-faq">Preguntes freqüents</a>
-      <a href="#acces">Tots els accessos</a>
+    </div>
+    <div class="menu-col">
+      <h3>Partners</h3>
+      <a href="/patrocinadors/" data-cta="menu-partners">Patrocinadors <small>tots els partners</small></a>
+      <a href="/partners-mapa/" data-cta="menu-partners-mapa">Mapa de partners</a>
       <a href="/admin/" class="menu-admin" rel="nofollow" data-cta="menu-admin">Zona admin <small>amb contrasenya</small></a>
     </div>
   </div>
@@ -1315,7 +1335,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <span class="franja-tx"><span class="franja-t">Els sèniors</span><span class="franja-s">La primera plantilla del club.</span></span>
       <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
     </a>
-    <a class="franja" href="/basquet-femeni/" data-cta="franja-femeni">
+    <a class="franja" href="/femeni/" data-cta="franja-femeni">
       <span class="franja-ph"><img src="img/team-action.webp" srcset="img/team-action.webp 375w, img/team-action@2x.webp 750w" sizes="190px" width="375" height="500" loading="lazy" decoding="async" alt="Dues jugadores del CB Grup Barna amb l'equipació del club"></span>
       <span class="franja-tx"><span class="franja-t">Femení</span><span class="franja-s">Mateix nombre d'equips i mateix pressupost que la línia masculina.</span></span>
       <span class="franja-go"><em>Paritat real</em><i></i></span>
