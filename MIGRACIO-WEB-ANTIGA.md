@@ -103,7 +103,7 @@ de visualització.
 | Dada | cbgrupbarna.com | cbgrupbarna.info |
 |---|---|---|
 | Telèfon | 688 26 52 **31** (capçalera) i 688 26 52 **30** (peu) | 698 425 153 |
-| Correu | cbgrupbarna@gmail.com | info@cbgrupbarna.com |
+| Correu | cbgrupbarna@gmail.com | marqueting@cbgrupbarna.info |
 | Adreça | C/ Llacuna 170 | C/ Llacuna 172 *(corregit avui segons la candidatura)* |
 | Xarxes | Instagram, Facebook, Twitter/X, Flickr, WhatsApp | Instagram, TikTok, X *(només a la portada)* |
 
@@ -160,7 +160,7 @@ La conclusió no és «tornar enrere», és que la migració va deixar fora la p
    **Organigrama fet** (`/organigrama/`), amb la junta i direccions tal com consta a la candidatura
    oficial. **La resta, sense acció:** la botiga (wintym.com) no s'ha enllaçat perquè no es pot
    confirmar si segueix activa; el telèfon i el correu de `.info` (698 425 153 /
-   info@cbgrupbarna.com) ja són consistents a tot el web nou i no calia tocar-los — és l'antiga la
+   marqueting@cbgrupbarna.info) ja són consistents a tot el web nou i no calia tocar-los — és l'antiga la
    que es contradiu a si mateixa; i Facebook/Flickr de l'antiga no s'afegeixen al peu perquè no hi
    ha manera de saber si algú els segueix mantenint. **Confirmat per l'Ana (15/08/2026): no enllaçar
    Wintym, Flickr ni Facebook.**

@@ -125,7 +125,7 @@ const mats = window.BRIEFING_MATERIALS || [];
 const box = document.getElementById('list');
 
 if(!mats.length){
-  box.innerHTML = '<div class="empty">Todavía no hay materiales publicados.<br>Contacta con el club en <a href="mailto:info@cbgrupbarna.com" style="color:var(--red)">info@cbgrupbarna.com</a> y te los hacemos llegar.</div>';
+  box.innerHTML = '<div class="empty">Todavía no hay materiales publicados.<br>Contacta con el club en <a href="mailto:marqueting@cbgrupbarna.info" style="color:var(--red)">marqueting@cbgrupbarna.info</a> y te los hacemos llegar.</div>';
 } else {
   const byType = {};
   mats.forEach(m => { (byType[m.tipus] = byType[m.tipus] || []).push(m); });
