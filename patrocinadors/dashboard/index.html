@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0A0A0A">
+<title>Plantilla · Dashboard de retorn per a patrocinadors · CB Grup Barna</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/logo.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/barna.css">
+<style>
+  .draft-flag {
+    background: var(--ink); color: #fff; text-align: center;
+    font-family: var(--body); font-size: 11px; letter-spacing: .1em;
+    padding: 10px 16px; line-height: 1.5;
+  }
+  .draft-flag b { color: var(--red); }
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--paper-2); margin: clamp(26px, 4vw, 40px) 0; border: 1px solid var(--paper-2); }
+  .metric { background: var(--paper); padding: 24px 22px; }
+  .metric .m-label { font-family: var(--body); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .metric .m-value { font-size: clamp(28px, 4vw, 38px); font-weight: 500; margin-top: 10px; color: var(--ink-2); }
+  .metric .m-value.pending { color: var(--muted); }
+  .metric .m-note { margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+  .metric .m-note.blocked { color: var(--red); }
+  .sponsor-head { display: flex; align-items: center; gap: 18px; padding: 22px 24px; border: 1px solid var(--paper-2); margin-top: 22px; }
+  .sponsor-head img { width: 56px; height: 56px; object-fit: contain; }
+  .sponsor-head h2 { margin: 0; font-size: 18px; }
+  .sponsor-head .lvl { font-family: var(--body); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .checklist { margin: 30px 0; padding: 0; list-style: none; }
+  .checklist li { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid var(--paper-2); font-size: 14px; color: var(--ink-2); }
+  .checklist li:first-child { border-top: 0; }
+  .checklist .tag { flex: none; font-family: var(--body); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; padding: 3px 8px; height: fit-content; }
+  .tag.ok { background: #E8F5EC; color: #1F7A3D; }
+  .tag.pending { background: var(--paper-2); color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="draft-flag">Plantilla de treball — <b>encara no és pública</b>, no enllaçada des del menú ni del sitemap. Dades d'exemple des de <code>data.json</code>; les mètriques són marcadors de posició fins tenir accés a GA4.</div>
+<a href="#main" class="skip">Saltar al contingut</a>
+<header class="head">
+  <div class="head-in">
+    <a class="head-brand" href="/" aria-label="CB Grup Barna · inici">
+      <img src="/logo.png" alt="Escut del CB Grup Barna" width="30" height="30">
+      <span>CB Grup Barna</span>
+    </a>
+    <nav class="head-nav" aria-label="Navegació principal">
+      <a href="/patrocinadors/">Patrocinadors</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/patrocinadors/">Patrocinadors</a> · <span>Dashboard (plantilla)</span></nav></div>
+<div class="wrap">
+  <div class="phead narrow">
+    <p class="eyebrow red">Patrocinadors · plantilla Fase 1</p>
+    <h1>Dashboard de retorn</h1>
+    <p class="lede">Un exemple, no la versió final: així es veurà la pàgina que cada patrocinador podrà consultar per veure el seu retorn real, en comptes d'esperar la reunió anual. Aquesta setmana només es tanca l'estructura — les xifres arriben quan hi hagi accés a GA4.</p>
+  </div>
+
+  <article class="narrow prose">
+    <div class="sponsor-head">
+      <img src="/partners/aquamiga.png" alt="Logo d'Aquamiga" loading="lazy">
+      <div>
+        <h2>Aquamiga</h2>
+        <p class="lvl">Patrocinador · Temporada 2026–2027</p>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="m-label">Impressions de la fitxa</div>
+        <div class="m-value pending">—</div>
+        <div class="m-note blocked">Pendent accés a GA4</div>
+      </div>
+      <div class="metric">
+        <div class="m-label">Aparicions en vídeo</div>
+        <div class="m-value pending">—</div>
+        <div class="m-note">Pendent registre manual (cartela de partners)</div>
+      </div>
+      <div class="metric">
+        <div class="m-label">Clics a web / Instagram</div>
+        <div class="m-value pending">—</div>
+        <div class="m-note blocked">Pendent accés a GA4</div>
+      </div>
+      <div class="metric">
+        <div class="m-label">Abast agregat dels reels</div>
+        <div class="m-value pending">—</div>
+        <div class="m-note">Pendent accés a Meta Business Suite</div>
+      </div>
+    </div>
+
+    <h2>Què falta per passar de plantilla a versió real</h2>
+    <ul class="checklist">
+      <li><span class="tag pending">Pendent</span> Accés de lectura a la propietat GA4 (impressions i clics)</li>
+      <li><span class="tag pending">Pendent</span> Full de registre de cartela de partners per vídeo (ja és obligatòria a tots els vídeos, falta comptar-la)</li>
+      <li><span class="tag pending">Pendent</span> Accés a Meta Business Suite per a l'abast de reels</li>
+      <li><span class="tag pending">Pendent</span> Decisió: nivell Or/Plata/Bronze per patrocinador, per triar qui té dashboard complet i qui versió resumida</li>
+      <li><span class="tag ok">Fet</span> Estructura i disseny de la pàgina (aquest document)</li>
+    </ul>
+
+    <h2>Un cop hi hagi accés</h2>
+    <p>Cada patrocinador tindria la seva pròpia URL a <code>/patrocinadors/dashboard/[slug]/</code> (el mateix <code>slug</code> que ja fa servir cada fitxa), actualitzada un cop al trimestre. Es porta a la reunió de renovació en comptes del dossier estàndard.</p>
+  </article>
+</div>
+</main>
+</body>
+</html>

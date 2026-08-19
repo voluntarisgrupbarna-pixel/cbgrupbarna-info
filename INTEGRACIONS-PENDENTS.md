@@ -212,7 +212,7 @@ sembli que tot cal avui.
 
 | Decisió | Per a què | Fase |
 |---|---|---|
-| Confirmar el generador estàtic (Astro proposat) o preferir-ne un altre | Migració d'arquitectura | 3 |
+| ~~Confirmar el generador estàtic~~ **Resposta: Astro, confirmat** | Migració d'arquitectura | 3 |
 | ~~Quantes hores de voluntariat tècnic hi ha realment disponibles per setmana~~ **Resposta: 2 h/dia, cada dia (≈14 h/setmana)** | Ajustar el ritme del full de ruta | Totes |
 | Ordre de prioritat si cal triar u entre carnet digital / àrea de família / cercador intern | Fase 3, si el temps no dona per als tres alhora | 3 |
 

@@ -4,6 +4,26 @@ Auditoria del repositori a 14/08/2026, revisada amb les decisions de l'Ana.
 
 ---
 
+## Fase 1 · tancament aquesta setmana (19/08/2026)
+
+Decisió de l'Ana: **Organigrama queda per a una altra fase**; aquesta setmana
+es tanca Fase 1 amb CRM, SEO, GEO, UX i Patrocinadors. Estat ara mateix:
+
+| Àrea | Estat | Nota |
+|---|---|---|
+| Legal (privacitat, cookies, RGPD als formularis) | ✅ Fet | Veure secció "8" de `## ✅ Fet` |
+| GBP + missatgeria + NAP identificat | ✅ Fet (sessió paral·lela) | Detall a `INTEGRACIONS-PENDENTS.md` |
+| SEO — schema `SportsActivityLocation` a les 6 instal·lacions | ✅ Fet avui | Abast reduït (no 6 landings noves) |
+| UX — blocs web i schema de l'arxiu 03 | ⏳ Pendent de rebre el contingut | No es pot avançar sense l'arxiu |
+| Patrocinadors — plantilla de dashboard de retorn | ✅ Fet avui | `/patrocinadors/dashboard/` — `noindex`, no enllaçada, dades d'exemple |
+| CRM — Brevo connectat als 6 formularis | ⏳ Pendent clau API + accés a l'Apps Script | Codi ja llest, veure `INTEGRACIONS-PENDENTS.md` |
+| GEO — bateria de 12 preguntes llançada | ⏳ Pendent que algú amb accés a ChatGPT/Perplexity/Gemini la llanci | Bateria ja escrita |
+| Astro per a la migració d'arquitectura | ✅ Decidit (Fase 3, no ara) | — |
+
+Capacitat confirmada: 2 h/dia, cada dia (~14 h/setmana).
+
+---
+
 ## Nota de maduresa · proposta "Web 10" (19/08/2026, corregida el mateix dia)
 
 Puntuació pròpia d'aquest repositori, 0–10. **No és una certificació externa ni
