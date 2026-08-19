@@ -153,6 +153,21 @@ i el propi `/politica-de-privacitat/`. En faltaven dos:
 tipus `tel` que té és un gate de PIN numèric de 4 dígits, no un formulari que
 reculli dades de contacte.
 
+### 9. Google Business Profile, baseline GEO i CRM (Brevo) — 19/08/2026
+
+Detall complet, paquet de contingut per al GBP, la bateria de 12 preguntes GEO
+i el codi de l'Apps Script per sincronitzar tots els formularis amb Brevo:
+**`INTEGRACIONS-PENDENTS.md`**. Resum: cap dels tres es pot tancar sense una
+acció de l'Ana (login a Google, llançar les preguntes a les IA, o donar la
+clau API de Brevo) — tot el que jo podia deixar fet, ja hi és.
+
+Troballa important d'aquesta revisió: **el NAP del club no és consistent**.
+`guia.barcelona.cat` i `barcelona.cat/metropolis` (fitxes de l'Ajuntament)
+tenen adreça, telèfon i correu vells (C/ Llacuna 170, 688 26 52 30,
+coordinaciocbgrupbarna@gmail.com) enfront de l'oficial actual (172, 698 425
+153, info@cbgrupbarna.com). Cal demanar-ne la correcció abans de donar d'alta
+el GBP.
+
 ---
 
 ## Correcció de l'auditoria anterior
