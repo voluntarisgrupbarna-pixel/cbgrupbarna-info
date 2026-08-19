@@ -228,6 +228,56 @@ sessió.
 
 ---
 
+---
+
+## Llista completa del que necessito de l'Ana
+
+No només el mínim per desbloquejar la Fase 1 — tot el que, si l'Ana me'l dona,
+accelera qualsevol punt de la proposta "Web 10". Marcat per fase perquè no
+sembli que tot cal avui.
+
+### 🔑 Accessos i credencials
+
+| Què | Per a què | Fase |
+|---|---|---|
+| Clau API de Brevo (SMTP & API → API Keys, compte "voluntaris") | Sincronitzar els formularis amb el CRM | 1 |
+| Codi actual (o accés d'editor) de l'Apps Script que ja reben els formularis | Afegir-hi la funció de Brevo sense trencar el que funciona | 1 |
+| Login de Google del club (business.google.com) | Crear/reclamar el Google Business Profile | 1 |
+| Nombre d'inscripció del club al Fitxer General d'Entitats Ciutadanes, i qui n'és el/la representant legal | Agilitzar el tràmit de correcció del NAP | 1 |
+| Accés de lectura a Google Search Console del domini | Mesurar posició SEO local i CWV (KPIs de la proposta) | 1–2 |
+| Accés de lectura a la propietat GA4 (Data API) | Construir el dashboard analític a `/admin/` | 2 |
+| Accés al panell de R2/Cloudflare (o a qui gestiona el hosting de fotos) | Treure les fotos del repositori (bloqueja desplegaments) | 2 |
+| Compte Apple Developer Program i Google Wallet API | Emetre el carnet digital (Pass Type ID / Google Wallet) | 2–3 |
+| Accés al domini/DNS si cal moure res (subdominis, redireccions) | Qualsevol canvi d'infraestructura de Fase 2–3 | 2–3 |
+
+### 📄 Contingut i dades que només té l'Ana
+
+| Què | Per a què | Fase |
+|---|---|---|
+| Fotos en alta (mínim 720 px, ideal 1500+) de La Nau, un entreno, l'escut | GBP i qualsevol marc ampli de la web (avui les de `img/` són massa petites) | 1 |
+| Horaris per equip de les 5 instal·lacions que encara no en tenen | Landings d'instal·lació completes | 2 |
+| Nivell Or/Plata/Bronze dels 22 patrocinadors (pendent des de l'auditoria original) | Dashboard de patrocinadors per nivell | 2 |
+| Instagram de Foto Jané, Ovella Negra, Fundació Mullor, Tot Salut, Eix Comercial Sant Martí, Panteres Grogues (pendent des de l'auditoria original) | Fitxes de patrocinador completes | 2 |
+| Càrrecs actuals de la Junta | Recuperar la pàgina d'Organigrama | 2 |
+| Decisió: llista única de Brevo o una per origen (Escoleta, 3x3, Newsletter…) | Segmentació dels enviaments | 1 |
+| Qui escriu/aprova el blog cada mes | Fixar la cadència mensual | 1 |
+| URL de la botiga d'equipació, quan es decideixi llançar-la | Enllaçar-la (ja fora de Fase 1) | 3 |
+
+### ✅ Decisions estratègiques
+
+| Decisió | Per a què | Fase |
+|---|---|---|
+| Confirmar el generador estàtic (Astro proposat) o preferir-ne un altre | Migració d'arquitectura | 3 |
+| Quantes hores de voluntariat tècnic hi ha realment disponibles per setmana | Ajustar el ritme del full de ruta | Totes |
+| Ordre de prioritat si cal triar u entre carnet digital / àrea de família / cercador intern | Fase 3, si el temps no dona per als tres alhora | 3 |
+
+Res d'aquesta llista bloqueja res per si sol: la Fase 1 avança amb els tres
+primers ítems de "Accessos" i les dues primeres files de "Contingut". La resta
+és perquè, quan hi hagi temps o l'Ana ho tingui a mà, ja estigui demanat una
+sola vegada en lloc de gota a gota.
+
+---
+
 **Resum de qui fa què ara mateix:**
 
 | Peça | Jo | L'Ana |
