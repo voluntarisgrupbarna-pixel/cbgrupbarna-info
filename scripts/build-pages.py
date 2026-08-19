@@ -178,6 +178,7 @@ FOOT = f"""</main>
   </div>
 </footer>
 <script src="/js/galetes.js"></script>
+<script src="/js/search-global.js" defer></script>
 </body>
 </html>
 """
