@@ -6,88 +6,33 @@ fet i exactament què falta i de qui depèn.
 
 ---
 
-## 1. Google Business Profile
+## 1. Google Business Profile — treballat en paral·lel en una altra sessió (19/08/2026)
 
-**No puc crear ni reclamar la fitxa jo mateix**: cal iniciar sessió a
-business.google.com amb el compte de Google del club, i no tinc ni navegador
-autenticat ni les credencials. El que sí que puc deixar llest és tot el
-contingut, perquè sigui un copiar-i-enganxar de 10 minuts.
+L'Ana ho ha portat molt més lluny del que aquest document deixava preparat, en
+una altra conversa: NAP canònic tancat, escrit a l'Ajuntament llest per
+signar, missatgeria de Google activada amb missatge de benvinguda i 5
+respostes desades, i horari especial d'agost resolt. Aquell treball viu en
+tres documents (**01 NAP canònic i GBP**, **02 Auditoria NAP i pla de
+neteja**, **03 Blocs web i schema**) que aquesta sessió no ha vist encara.
 
-### Troballa important: el NAP no és consistent
+**Dades canòniques confirmades** (substitueixen la taula anterior d'aquest
+document):
+- Carrer de la Llacuna, 172 · 08018 Barcelona
+- +34 698 425 153 (també WhatsApp — és el mateix número)
+- marqueting@cbgrupbarna.info
+- Secretaria: dl., dc. i dv. de 18 a 20 h — **tancada per vacances, reobre
+  dilluns 24 d'agost**
+- Fora d'horari de secretaria, el canal real és WhatsApp al mateix 698
 
-Cercant "CB Grup Barna" a Google per preparar aquest paquet, han sortit **dues
-fitxes institucionals amb dades desactualitzades**:
+**Pendent per aquesta sessió**: rebre el contingut real de l'**arxiu 03
+"Blocs web i schema"** per aplicar-lo a `cbgrupbarna.info` — és el pas que
+toca a aquest repositori i que no puc endevinar sense veure'l. Si també es
+comparteix el 02 (auditoria NAP), es pot contrastar amb la taula d'aquest
+document i tancar-la com a duplicat.
 
-| Font | Adreça | Telèfon | Correu |
-|---|---|---|---|
-| **cbgrupbarna.info** (oficial, avui) | Carrer de la Llacuna, 172 | +34 698 425 153 | info@cbgrupbarna.com |
-| [guia.barcelona.cat](https://guia.barcelona.cat/detall/club-de-basquet-grup-barna-centre-parroquial-sant-marti-del-clot_96290111616.html) | C/ Llacuna **170** | **688 26 52 30** | **coordinaciocbgrupbarna@gmail.com** |
-| [barcelona.cat/metropolis](https://www.barcelona.cat/metropolis/ca/detall/club-de-basquet-grup-barna_96290111616) | C/ Llacuna **170** | **688 26 52 30** | (mateix) |
-
-Un NAP (Nom-Adreça-Telèfon) inconsistent confon Google a l'hora de decidir quina
-fitxa és la "de veritat" i debilita el SEO local (pilar 3 de la proposta). Abans
-de donar d'alta el GBP, val la pena que l'Ana demani la correcció d'aquestes
-dues fitxes de l'Ajuntament — són backlinks institucionals valuosos, no s'han
-d'esborrar, s'han d'actualitzar.
-
-**Canal oficial verificat**: les dues fitxes surten del *Fitxer General
-d'Entitats Ciutadanes* de l'Ajuntament. Hi ha un tràmit exprés per demanar la
-modificació de dades (nom, adreça, contacte) d'una entitat ja inscrita:
-
-> **Modificació de dades del Fitxer General d'Entitats Ciutadanes**
-> https://seuelectronica.ajuntament.barcelona.cat/oficinavirtual/es/tramit/20230001592
-
-Normalment cal certificat digital / idCAT / Cl@ve de qui sigui el/la
-representant legal inscrit/a del club, i el número d'inscripció al Fitxer (si
-no es té a mà, el propi tràmit permet cercar l'entitat pel nom). **No he pogut
-verificar aquest requisit de certificat amb el propi formulari** (el
-fetch a la pàgina va tornar un error), així que cal confirmar-ho en obrir el
-tràmit.
-
-**Alternativa més ràpida** si el club ja té contacte habitual amb el Districte
-de Sant Martí (l'organigrama del club en parla): demanar-los directament per
-correu la correcció, adjuntant les tres dades bones. Text llest per enviar:
-
-> Bon dia, us escrivim del CB Grup Barna (Club Bàsquet Grup Barna, antic
-> Centre Parroquial de Sant Martí del Clot) per demanar l'actualització de les
-> nostres dades a la fitxa de la Guia BCN i al portal de Barcelona.cat/metropolis,
-> que estan desactualitzades. Dades correctes: adreça Carrer de la Llacuna,
-> 172, 08018 Barcelona (la fitxa diu 170); telèfon +34 698 425 153 (la fitxa diu
-> 688 26 52 30); correu info@cbgrupbarna.com (la fitxa diu
-> coordinaciocbgrupbarna@gmail.com). Moltes gràcies.
-
-### Paquet de contingut, llest per enganxar
-
-```
-Nom del negoci:     CB Grup Barna (Club Bàsquet Grup Barna)
-Categoria principal: Club esportiu (o "Basketball club" si Google la proposa)
-Categories addicionals: Escola d'esports, Club juvenil
-Adreça:              Carrer de la Llacuna, 172, 08018 Barcelona
-Àrea de servei:      Districte de Sant Martí, Barcelona
-Telèfon:             +34 698 425 153
-Web:                 https://cbgrupbarna.info
-Correu (no públic):  info@cbgrupbarna.com
-```
-
-**Descripció (proposada, 750 caràcters màx. de Google):**
-> Club de bàsquet base i acadèmia de bàsquet al barri del Clot, Barcelona, des
-> de 1965. Més de 34 equips federats i 450 jugadores i jugadors, amb paritat
-> real entre la línia femenina i la masculina. Escoleta des dels 4 anys,
-> categories fins a sènior, campus d'estiu de tecnificació i sis instal·lacions
-> al Districte de Sant Martí. Primer entrenament de prova sense compromís.
-
-**Horaris**: no hi ha un "horari d'oficina" únic publicat — cada categoria
-entrena a hores diferents a les sis instal·lacions. Recomanació: marcar "Obert
-segons cita" o publicar l'horari de l'Escoleta (dc. 17:30–18:40 Escola Casas,
-ds. 09:00–10:30 La Nau) com a referència, i que l'Ana decideixi si hi ha un
-horari d'atenció telefònica/WhatsApp per posar-hi.
-
-**Fotos**: calen almenys 3–5 fotos reals (façana/entrada de La Nau, un
-entrenament, l'escut). Les de `img/` actuals fan 360–550 px — per sota del
-mínim recomanat per Google (720×720). Cal repescar-ne originals en alta.
-
-**Un cop creada**: enllaçar-la des de `/instal-lacions/` (secció "La Nau del
-Clot", ja existent) i des del peu de la portada.
+**Ja fet, no cal repetir-ho**: crear la fitxa GBP, activar missatgeria,
+carregar horaris especials i preparar l'escrit al Fitxer d'Entitats — tot allò
+que les seccions següents encara donaven per pendent.
 
 ---
 
@@ -268,7 +213,7 @@ sembli que tot cal avui.
 | Decisió | Per a què | Fase |
 |---|---|---|
 | Confirmar el generador estàtic (Astro proposat) o preferir-ne un altre | Migració d'arquitectura | 3 |
-| Quantes hores de voluntariat tècnic hi ha realment disponibles per setmana | Ajustar el ritme del full de ruta | Totes |
+| ~~Quantes hores de voluntariat tècnic hi ha realment disponibles per setmana~~ **Resposta: 2 h/dia, cada dia (≈14 h/setmana)** | Ajustar el ritme del full de ruta | Totes |
 | Ordre de prioritat si cal triar u entre carnet digital / àrea de família / cercador intern | Fase 3, si el temps no dona per als tres alhora | 3 |
 
 Res d'aquesta llista bloqueja res per si sol: la Fase 1 avança amb els tres
