@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Cuadro de mando · Administració · CB Grup Barna</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#2ea043}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh}
+  nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav img{width:34px;height:34px;object-fit:contain}
+  nav .t{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t span{color:var(--red)}
+  nav a.back{margin-left:.4rem;font-size:.72rem;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:.35rem .7rem}
+  nav a.back:hover{border-color:var(--red);color:var(--txt)}
+  .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--muted)}
+  .wrap{max-width:1040px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  h1{font-family:'Anton',sans-serif;font-size:2rem}
+  h1 span{color:var(--red)}
+  .sub{color:var(--muted);font-size:.88rem;margin:.3rem 0 1.5rem;line-height:1.55}
+  .sub a{color:var(--red)}
+  h2{font-family:'Anton',sans-serif;font-size:1.3rem;margin:2rem 0 .8rem;letter-spacing:.02em}
+  h2 span{color:var(--red)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .btn.small{padding:.3rem .65rem;font-size:.72rem}
+  .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#ff8fa0;border-radius:8px;padding:.7rem .9rem;font-size:.82rem;margin-top:.9rem;line-height:1.5}
+  .hint{font-size:.72rem;color:var(--muted);margin-top:.6rem;line-height:1.6}
+  .hint a{color:rgba(226,6,19,.85)}
+  .field-input{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Inter',sans-serif;font-size:.85rem}
+  .field-input:focus{outline:none;border-color:var(--red)}
+
+  /* pantalla de connexió */
+  #gate{max-width:480px;margin:2rem auto;text-align:center}
+  #gate .ic{font-size:2.4rem;margin-bottom:.8rem}
+  #gate p{color:var(--muted);font-size:.88rem;line-height:1.6;margin-bottom:1.2rem}
+
+  /* selector de rang */
+  .range{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+  .range button{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:.35rem .9rem;font-family:inherit;font-size:.75rem;cursor:pointer}
+  .range button.on{border-color:var(--red);color:var(--txt)}
+  .updated{font-size:.7rem;color:var(--muted);margin-left:auto}
+
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1rem}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+  .kpi .n{font-family:'Anton',sans-serif;font-size:1.9rem;letter-spacing:.01em}
+  .kpi .l{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:.15rem}
+
+  /* taules */
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:.83rem}
+  thead th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:.7rem .9rem;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--panel)}
+  tbody td{padding:.6rem .9rem;border-bottom:1px dashed var(--line);white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:rgba(255,255,255,.03)}
+  td.num{font-variant-numeric:tabular-nums;text-align:right}
+  td.dim{white-space:normal;max-width:280px}
+  .tag{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.04em;padding:.1rem .5rem;border-radius:20px;background:rgba(226,6,19,.15);color:#ff8fa0}
+  .empty{color:var(--muted);font-size:.83rem;padding:1rem}
+  .loading{color:var(--muted);font-size:.83rem;padding:1rem}
+  .filter-row{display:flex;gap:.6rem;align-items:center;margin-bottom:.6rem;flex-wrap:wrap}
+  .filter-row input{max-width:260px}
+  .filter-row .count{font-size:.72rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="t">CUADRO DE <span>MANDO</span></div>
+  <a class="back" href="/admin/">← Admin</a>
+  <div class="who" id="who"></div>
+</nav>
+
+<div class="wrap">
+  <h1>TRÀNSIT I <span>CONVERSIÓ</span></h1>
+  <p class="sub">Dades en directe de Google Analytics (propietat GA4 de cbgrupbarna.info). Mostra d'on ve realment cada visita —
+    Instagram, TikTok, WhatsApp, QR de patrocinadors— i què hi fa un cop arriba.</p>
+
+  <div id="gate" class="card">
+    <div class="ic">📊</div>
+    <p>Aquest panell llegeix dades directament de Google Analytics amb el compte de Google del club.
+      Cal haver-hi entrat almenys un cop com a lector de la propietat.</p>
+    <button class="btn" id="connect-btn">Connecta amb Google Analytics</button>
+    <div class="err" id="gate-err"></div>
+  </div>
+
+  <div id="dash" style="display:none">
+
+    <div class="range">
+      <button class="on" data-days="7">7 dies</button>
+      <button data-days="30">30 dies</button>
+      <button data-days="90">90 dies</button>
+      <span class="updated" id="updated"></span>
+    </div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <h2>ORIGEN DEL <span>TRÀNSIT</span></h2>
+    <p class="sub" style="margin-top:-.4rem">Sessions per font/mitjà/campanya — el reflex directe de cada enllaç UTM
+      (bio d'Instagram, TikTok, WhatsApp, QR, patrocinadors...). Filtra per buscar un patrocinador concret.</p>
+    <div class="filter-row">
+      <input class="field-input" id="src-filter" placeholder="Filtra per font, mitjà o patrocinador (ex: westfield)">
+      <span class="count" id="src-count"></span>
+    </div>
+    <div class="table-scroll">
+      <table id="tbl-src">
+        <thead><tr><th>Font</th><th>Mitjà</th><th>Campanya</th><th>Sessions</th><th>Usuaris</th><th>% Engagement</th></tr></thead>
+        <tbody><tr><td class="loading" colspan="6">Connecta amb Google per veure les dades.</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>EVENTS <span>CLAU</span></h2>
+    <p class="sub" style="margin-top:-.4rem">Les accions que ja mesura la web: interès per l'Escoleta, clics a CTA, valoracions i obertura d'Instagram.</p>
+    <div class="table-scroll">
+      <table id="tbl-events">
+        <thead><tr><th>Event</th><th>Vegades</th></tr></thead>
+        <tbody><tr><td class="loading" colspan="2">—</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>PÀGINES D'<span>ENTRADA</span></h2>
+    <p class="sub" style="margin-top:-.4rem">Per on entra la gent a la web (independentment de l'origen).</p>
+    <div class="table-scroll">
+      <table id="tbl-landing">
+        <thead><tr><th>Pàgina</th><th>Sessions</th></tr></thead>
+        <tbody><tr><td class="loading" colspan="2">—</td></tr></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<script src="/scripts/admin-gate.js"></script>
+<script src="/admin/config.js"></script>
+<script>
+const CFG = window.CBGB_ADMIN || {};
+let accessToken = null, days = 7, rows = { src: [] };
+
+CBGBGate.protect(function(user){
+  document.getElementById('who').innerHTML =
+    '<span>'+(user.email||'')+'</span>'+
+    '<button class="btn ghost small" onclick="CBGBGate.signOut()">Sortir</button>';
+  initConnectFlow();
+});
+
+function initConnectFlow(){
+  const errBox = document.getElementById('gate-err');
+  const btn = document.getElementById('connect-btn');
+
+  if (!CFG.GOOGLE_CLIENT_ID) {
+    errBox.style.display = 'block';
+    errBox.innerHTML = 'Falta configurar <code>GOOGLE_CLIENT_ID</code> a <code>admin/config.js</code>.';
+    btn.disabled = true;
+    return;
+  }
+  if (!CFG.GA4_PROPERTY_ID) {
+    errBox.style.display = 'block';
+    errBox.innerHTML = 'Falta configurar <code>GA4_PROPERTY_ID</code> a <code>admin/config.js</code> ' +
+      '(a Google Analytics: Administració → Detalls de la propietat → ID de la propietat, un número).';
+    btn.disabled = true;
+    return;
+  }
+
+  btn.addEventListener('click', function(){
+    btn.disabled = true; btn.textContent = 'Connectant…';
+    loadGis(function(){
+      const client = google.accounts.oauth2.initTokenClient({
+        client_id: CFG.GOOGLE_CLIENT_ID,
+        scope: 'https://www.googleapis.com/auth/analytics.readonly',
+        callback: function(resp){
+          btn.disabled = false; btn.textContent = 'Connecta amb Google Analytics';
+          if (resp.error) {
+            errBox.style.display = 'block';
+            errBox.textContent = 'Google ha denegat l\'accés: ' + resp.error;
+            return;
+          }
+          accessToken = resp.access_token;
+          document.getElementById('gate').style.display = 'none';
+          document.getElementById('dash').style.display = 'block';
+          loadAll();
+        },
+      });
+      client.requestAccessToken();
+    });
+  });
+}
+
+function loadGis(cb){
+  if (window.google && window.google.accounts && window.google.accounts.oauth2) return cb();
+  const sc = document.createElement('script');
+  sc.src = 'https://accounts.google.com/gsi/client';
+  sc.async = true; sc.defer = true;
+  sc.onload = cb;
+  sc.onerror = function(){
+    const errBox = document.getElementById('gate-err');
+    errBox.style.display = 'block';
+    errBox.textContent = 'No s\'ha pogut carregar Google. Comprova la connexió.';
+  };
+  document.head.appendChild(sc);
+}
+
+document.querySelectorAll('.range button').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.range button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    days = parseInt(b.dataset.days, 10);
+    loadAll();
+  });
+});
+
+document.getElementById('src-filter').addEventListener('input', renderSrcTable);
+
+async function runReport(body){
+  const url = 'https://analyticsdata.googleapis.com/v1beta/properties/' + CFG.GA4_PROPERTY_ID + ':runReport';
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error('GA4 ' + res.status + ': ' + t.slice(0, 200));
+  }
+  return res.json();
+}
+
+function range(){ return { startDate: (days-1) + 'daysAgo', endDate: 'today' }; }
+
+function num(v){ return new Intl.NumberFormat('ca-ES').format(Math.round(v)); }
+function pct(v){ return (v*100).toFixed(1).replace('.', ',') + '%'; }
+
+async function loadAll(){
+  document.getElementById('updated').textContent = 'Carregant…';
+  try {
+    await Promise.all([loadKpis(), loadSources(), loadEvents(), loadLanding()]);
+    document.getElementById('updated').textContent = 'Actualitzat ' + new Date().toLocaleTimeString('ca-ES');
+  } catch (e) {
+    document.getElementById('updated').textContent = '';
+    const errBox = document.getElementById('gate-err');
+    document.getElementById('gate').style.display = 'block';
+    document.getElementById('dash').style.display = 'none';
+    errBox.style.display = 'block';
+    errBox.textContent = 'No s\'han pogut carregar les dades: ' + e.message +
+      '. Comprova que el compte connectat té accés de lector a la propietat GA4.';
+  }
+}
+
+async function loadKpis(){
+  const data = await runReport({
+    dateRanges: [range()],
+    metrics: [{name:'sessions'},{name:'activeUsers'},{name:'newUsers'},{name:'engagementRate'}],
+  });
+  const r = (data.rows && data.rows[0] && data.rows[0].metricValues) || [];
+  const vals = r.map(m => m.value);
+  const box = document.getElementById('kpis');
+  const items = [
+    ['Sessions', vals[0] ? num(vals[0]) : '0'],
+    ['Usuaris actius', vals[1] ? num(vals[1]) : '0'],
+    ['Usuaris nous', vals[2] ? num(vals[2]) : '0'],
+    ['% Engagement', vals[3] ? pct(vals[3]) : '0%'],
+  ];
+  box.innerHTML = items.map(([l,n]) => '<div class="kpi"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>').join('');
+}
+
+async function loadSources(){
+  const data = await runReport({
+    dateRanges: [range()],
+    dimensions: [{name:'sessionSource'},{name:'sessionMedium'},{name:'sessionCampaign'}],
+    metrics: [{name:'sessions'},{name:'activeUsers'},{name:'engagementRate'}],
+    orderBys: [{metric:{metricName:'sessions'}, desc:true}],
+    limit: 200,
+  });
+  rows.src = (data.rows || []).map(r => ({
+    source: r.dimensionValues[0].value,
+    medium: r.dimensionValues[1].value,
+    campaign: r.dimensionValues[2].value,
+    sessions: Number(r.metricValues[0].value),
+    users: Number(r.metricValues[1].value),
+    engagement: Number(r.metricValues[2].value),
+  }));
+  renderSrcTable();
+}
+
+function renderSrcTable(){
+  const q = document.getElementById('src-filter').value.trim().toLowerCase();
+  const filtered = !q ? rows.src : rows.src.filter(r =>
+    (r.source+' '+r.medium+' '+r.campaign).toLowerCase().includes(q));
+  const tbody = document.querySelector('#tbl-src tbody');
+  document.getElementById('src-count').textContent = filtered.length + ' de ' + rows.src.length;
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td class="empty" colspan="6">Cap resultat per aquest filtre.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = filtered.map(r => '<tr>' +
+    '<td class="dim">'+esc(r.source)+'</td>' +
+    '<td class="dim">'+esc(r.medium)+'</td>' +
+    '<td class="dim">'+esc(r.campaign === '(not set)' ? '—' : r.campaign)+'</td>' +
+    '<td class="num">'+num(r.sessions)+'</td>' +
+    '<td class="num">'+num(r.users)+'</td>' +
+    '<td class="num">'+pct(r.engagement)+'</td>' +
+  '</tr>').join('');
+}
+
+async function loadEvents(){
+  const KNOWN = ['generate_lead','cta_click','ig_embed_open','web_rating'];
+  const data = await runReport({
+    dateRanges: [range()],
+    dimensions: [{name:'eventName'}],
+    metrics: [{name:'eventCount'}],
+    dimensionFilter: { filter: { fieldName:'eventName', inListFilter:{ values: KNOWN } } },
+    orderBys: [{metric:{metricName:'eventCount'}, desc:true}],
+  });
+  const LABELS = {
+    generate_lead: 'Formulari d\'interès (lead)',
+    cta_click: 'Clic a CTA',
+    ig_embed_open: 'Obertura d\'Instagram incrustat',
+    web_rating: 'Valoració de la web',
+  };
+  const tbody = document.querySelector('#tbl-events tbody');
+  const list = (data.rows || []).map(r => ({ name: r.dimensionValues[0].value, count: Number(r.metricValues[0].value) }));
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td class="empty" colspan="2">Cap d\'aquests events s\'ha registrat en aquest període.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(r => '<tr>' +
+    '<td class="dim">'+ (LABELS[r.name] || esc(r.name)) + ' <span class="tag">'+esc(r.name)+'</span></td>' +
+    '<td class="num">'+num(r.count)+'</td>' +
+  '</tr>').join('');
+}
+
+async function loadLanding(){
+  const data = await runReport({
+    dateRanges: [range()],
+    dimensions: [{name:'landingPage'}],
+    metrics: [{name:'sessions'}],
+    orderBys: [{metric:{metricName:'sessions'}, desc:true}],
+    limit: 15,
+  });
+  const tbody = document.querySelector('#tbl-landing tbody');
+  const list = data.rows || [];
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td class="empty" colspan="2">Sense dades per aquest període.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(r => '<tr>' +
+    '<td class="dim">'+esc(r.dimensionValues[0].value)+'</td>' +
+    '<td class="num">'+num(r.metricValues[0].value)+'</td>' +
+  '</tr>').join('');
+}
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+</script>
+</body>
+</html>
