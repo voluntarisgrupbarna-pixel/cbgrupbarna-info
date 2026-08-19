@@ -4,29 +4,40 @@ Auditoria del repositori a 14/08/2026, revisada amb les decisions de l'Ana.
 
 ---
 
-## Nota de maduresa · proposta "Web 10" (19/08/2026)
+## Nota de maduresa · proposta "Web 10" (19/08/2026, corregida el mateix dia)
 
-Puntuació pròpia d'aquest repositori, 0–10, feta a partir de l'auditoria d'aquest
-mateix document. **No és una certificació externa ni s'ha de publicar a cap pàgina
-pública**: mostrar una nota d'autoavaluació a famílies o patrocinadors fa més mal
-que bé. És un marcador intern per fer seguiment del progrés cap a "web 10".
+Puntuació pròpia d'aquest repositori, 0–10. **No és una certificació externa ni
+s'ha de publicar a cap pàgina pública**: mostrar una nota d'autoavaluació a
+famílies o patrocinadors fa més mal que bé. És un marcador intern per fer
+seguiment del progrés cap a "web 10".
 
-**Nota actual: 4,9 / 10**
+⚠️ **Correcció:** la primera versió d'aquesta nota es va basar en
+`MIGRACIO-WEB-ANTIGA.md` (14/08) sense contrastar-la amb el repositori actual.
+En verificar-ho directament, la política de privacitat, l'avís legal, el banner
+de cookies (`js/galetes.js`, actiu a 98 pàgines) i l'enllaç al protocol de
+menors **ja existien** — no eren un forat. El que sí que era real: dos dels sis
+formularis (`/fotos/` i `/galeria-3x3-glories/`) recollien dades sense casella
+de consentiment. **Ja s'han arreglat avui** (checkbox + enllaç a política de
+privacitat, obligatori per enviar el formulari). `/premidonaesport/` no és un
+formulari de dades, és un gate de PIN numèric: no calia tocar-lo.
+
+**Nota actual: 5,6 / 10** (era 4,9; el pilar legal puja de 2 a 8)
 
 | Pilar | Nota | Per què |
 |---|---|---|
 | GEO / IA generativa | 8 | `llms.txt` + `robots.txt` obert a bots d'IA — gairebé cap club de base ho té |
+| Confiança / legal | 8 | Privacitat, avís legal i cookies publicats; els 6 formularis ja tenen consentiment |
 | Contingut | 7 | Blog amb FAQ+schema, landing femenina, història i dades oficials |
 | SEO local | 6 | JSON-LD, hreflang i sitemap sòlids; falta GBP i landing per instal·lació |
 | Arquitectura | 5 | Estàtica i desplegada, però HTML clonat a mà en 3 idiomes i fotos al repositori |
 | UX / Producte | 4 | Sense PWA real, àrea de família ni cercador intern |
 | Dades / Martech | 4 | GA4 carregat però sense dashboard ni CRM unificat |
 | Monetització | 3 | Sense botiga ni dashboard de retorn per a patrocinadors |
-| Confiança / legal | 2 | Sis formularis recullen dades de famílies i menors sense política de privacitat |
 
 **Objectiu:** 10/10, en tres fases (Fundació → Infraestructura → Producte). Detall
 complet — diagnòstic, els vuit pilars, full de ruta i backlog priori tzat — a la
-proposta "Web 10" treballada amb l'Ana.
+proposta "Web 10" treballada amb l'Ana. **Lliçó:** puntuar sempre contra el
+repositori real, no contra un document d'auditoria que pot haver quedat vell.
 
 ---
 
@@ -124,6 +135,23 @@ interns creuats. El blog passa de 5 a 12 articles. Actualitzats també l'índex 
 ### 7. `noindex` a l'eina interna
 
 `fotos/migrar-flickr.html` ja porta `noindex, nofollow` com la resta d'admins.
+
+### 8. Consentiment RGPD als dos formularis que en faltaven (19/08/2026)
+
+Auditant els sis formularis que recullen dades personals (llista original a
+`MIGRACIO-WEB-ANTIGA.md`), quatre ja tenien casella de consentiment enllaçada a
+`/politica-de-privacitat/`: portada, `/fotos-3x3/`, `/fotos-esdeveniments/3x3-westfield-2026/`
+i el propi `/politica-de-privacitat/`. En faltaven dos:
+
+- **`/fotos/`** (formulari de subscripció per correu): afegida casella de
+  consentiment i validació obligatòria a `submitSubscription()` — el botó ja no
+  envia res si no està marcada.
+- **`/galeria-3x3-glories/`** (nom, cognoms, correu, mòbil, club): mateixa
+  casella, i `rgpd` afegit com a condició a `validateGate()`.
+
+`/premidonaesport/` es va revisar i **no calia tocar-lo**: l'única entrada de
+tipus `tel` que té és un gate de PIN numèric de 4 dígits, no un formulari que
+reculli dades de contacte.
 
 ---
 

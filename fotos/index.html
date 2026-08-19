@@ -380,6 +380,9 @@
     .gate-btn:hover { background: var(--red); border-color: var(--red); }
     .gate-btn:disabled { opacity: .5; cursor: not-allowed; }
     .gate-error { color: var(--red); font-size: .78rem; margin: -.25rem 0 .5rem; text-align: left; }
+    .gate-rgpd { display: flex; gap: .5rem; align-items: flex-start; margin: .3rem 0 .8rem; font-size: .72rem; color: var(--muted); line-height: 1.5; text-align: left; }
+    .gate-rgpd input { margin-top: .2rem; accent-color: var(--red); flex-shrink: 0; }
+    .gate-rgpd a { color: var(--red); }
     .gate-success { color: #1a7a3c; font-size: .82rem; margin-top: .75rem; }
 
     /* ── SPONSOR ── */
@@ -517,6 +520,8 @@
       <input class="gate-input" id="sub-email" type="email" placeholder="Correu electrònic" required
         onkeydown="if(event.key==='Enter')submitSubscription()">
       <div class="gate-error" id="sub-error" style="display:none"></div>
+      <label class="gate-rgpd"><input id="sub-rgpd" type="checkbox">
+        <span>Accepto que el CB Grup Barna tracti el meu correu per donar-me accés i enviar-me novetats. <a href="/politica-de-privacitat/" target="_blank" rel="noopener">Política de privacitat</a>.</span></label>
       <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Continuar a la galeria</button>
       <div class="gate-success" id="sub-success" style="display:none">Gràcies! Benvingut/da a la galeria.</div>
     </div>
@@ -780,6 +785,11 @@ async function submitSubscription() {
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     err.textContent = 'El correu no té un format vàlid.';
+    err.style.display = 'block';
+    return;
+  }
+  if (!document.getElementById('sub-rgpd').checked) {
+    err.textContent = 'Cal acceptar la política de privacitat per continuar.';
     err.style.display = 'block';
     return;
   }

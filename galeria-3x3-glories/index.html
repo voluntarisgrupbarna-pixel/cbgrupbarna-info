@@ -280,6 +280,10 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
       </div>
     </div>
 
+    <label style="display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;font-size:12px;color:#888;line-height:1.5">
+      <input id="rgpd" type="checkbox" style="margin-top:3px;accent-color:#E20613;flex-shrink:0">
+      <span>Accepto que el CB Grup Barna tracti les meves dades per enviar-me les fotos i la newsletter del club. <a href="/politica-de-privacitat/" target="_blank" rel="noopener" style="color:#E20613">Política de privacitat</a>.</span>
+    </label>
     <button type="submit" id="gate-btn"
       style="width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#444;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s">
       Omple tots els camps
@@ -398,7 +402,8 @@ function validateGate() {
   const email   = document.getElementById('email').value.trim();
   const mobil   = document.getElementById('mobil').value.trim();
   const club    = document.getElementById('club').value.trim();
-  const valid   = nom && cognoms && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && mobil.length >= 9 && club;
+  const rgpd    = document.getElementById('rgpd').checked;
+  const valid   = nom && cognoms && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && mobil.length >= 9 && club && rgpd;
   const btn     = document.getElementById('gate-btn');
   if (valid) {
     btn.className = 'btn-green';
