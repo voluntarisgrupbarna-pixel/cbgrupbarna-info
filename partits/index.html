@@ -4,10 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dies de partit · calendari i resultats · CB Grup Barna</title>
-<meta name="description" content="Calendari global de tots els equips del CB Grup Barna, partits del cap de setmana i resultats de la jornada anterior. Actualitzat cada dia des del calendari oficial de la FCBQ.">
+<meta name="description" content="Calendari global de tots els equips del CB Grup Barna, partits del cap de setmana i resultats de la jornada anterior.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/logo.png">
 <link rel="canonical" href="https://cbgrupbarna.info/partits/"/>
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/partits/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/partits/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/partits/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/partits/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="keywords" content="partits CB Grup Barna, resultats Grup Barna, calendari basquet Clot, bàsquet Barcelona, La Nau del Clot, dies de partit">
 <meta property="og:type" content="website">
@@ -107,6 +111,10 @@
   .equips-list li { padding: 13px 2px; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); }
   .equips-list li a { font-family: var(--display); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; border-bottom: 1px solid var(--red); padding-bottom: 1px; transition: color 0.3s; }
   .equips-list li a:hover { color: var(--red); }
+  /* Gameday Seniors: la primera plantilla, destacada per davant de la resta. */
+  .gameday .mrow { grid-template-columns: 64px minmax(0, 1fr) auto; border-bottom: 1px solid var(--line); border-left: 3px solid var(--red); padding-left: 16px; }
+  .gameday .mrow .qui b { font-size: 14px; }
+  .gameday .mrow:last-child { border-bottom: 0; }
   @media (max-width: 560px) {
     .mrow { grid-template-columns: 52px minmax(0, 1fr); }
     .mrow .on { grid-column: 2; text-align: left; }
@@ -158,9 +166,24 @@
           rival, casa o fora i pista, i els resultats de la jornada anterior.
         </p>
         <div class="btn-row" style="margin-top:26px">
-          <a class="btn red" href="#finde">Aquest cap de setmana</a>
+          <a class="btn red" href="#gameday-seniors">Gameday Seniors</a>
+          <a class="btn ghost" href="#finde">Aquest cap de setmana</a>
           <a class="btn ghost" href="/partits/calendaris/">Dies de partit per equip</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== GAMEDAY SENIORS ==== -->
+  <section class="section band-soft" id="gameday-seniors" style="padding-top:clamp(24px,3.4vw,44px)">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow red">Gameday</p>
+        <h2>Gameday Seniors</h2>
+        <p class="sub">La primera plantilla del club, femenina i masculina, els seus propers partits.</p>
+      </div>
+      <div id="gameday-list" class="gameday">
+        <p class="empty-note">Cal activar JavaScript per veure el Gameday Seniors.</p>
       </div>
     </div>
   </section>
@@ -276,7 +299,7 @@
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
         <a href="/faq/">Preguntes freqüents</a>
-        <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
       </div>
@@ -380,6 +403,9 @@
     return html + '</div>';
   }
 
+  /* La primera plantilla del club: paritat real, femenina i masculina. */
+  var SENIOR_IDS = ['scm', 'scf', 'senior-masculi-b', 'senior-femeni-b'];
+
   function render(data) {
     var equips = {};
     (data.equips || []).forEach(function (e) { equips[e.id] = e.nom || e.curt || e.id; });
@@ -387,6 +413,19 @@
       return (a.data + a.hora).localeCompare(b.data + b.hora);
     });
     var avui = avuiISO();
+
+    /* --- 0 · Gameday Seniors: el proper partit de cada equip sènior --- */
+    var gamedayBox = document.getElementById('gameday-list');
+    var propersSenior = SENIOR_IDS.map(function (id) {
+      return partits.filter(function (p) { return p.equipId === id && p.data >= avui; })[0];
+    }).filter(Boolean);
+    if (propersSenior.length) {
+      gamedayBox.innerHTML = propersSenior.map(function (p) {
+        return filaJornada(p, equips[p.equipId]);
+      }).join('');
+    } else {
+      gamedayBox.innerHTML = '<p class="empty-note">Encara no hi ha partits programats per als equips sèniors.</p>';
+    }
 
     /* --- 1 · Proper cap de setmana amb partits --- */
     var pendents = partits.filter(function (p) { return p.data >= avui; });

@@ -221,3 +221,27 @@ Cap color pot tenir la seva única definició dins d'un bloc de mode.
 5. Funciona en clar i en fosc, i es veu en quin mode s'està?
 6. Si has tocat una pàgina generada, has editat el generador?
 7. Sense desbordament horitzontal, i amb focus visible al teclat?
+
+---
+
+## 10. Per què de vegades el web no es desplega
+
+Quan es pugen fotos des de `/fotos/admin.html`, cada foto és **un commit**. Una
+tanda de 200 fotos són 200 commits en pocs minuts.
+
+El `[skip ci]` del missatge atura els workflows del repositori, però **no atura
+el build de GitHub Pages**, que és un workflow gestionat per GitHub. Resultat:
+cada commit engega un build que cancel·la l'anterior, i **mentre dura la pujada
+no es publica res**. Ni les fotos, ni cap altre canvi que hi hagi pendent.
+
+No està trencat: està afamat. Es desbloqueja sol quan para la pujada.
+
+Si has fusionat alguna cosa i no surt, mira-ho abans de tocar res:
+
+```
+git log origin/main --since="15 minutes ago" --oneline | wc -l
+```
+
+Si el número és alt, només cal esperar. La solució de fons és que les fotos
+deixin de viure al repositori: llavors pujar-ne no genera cap commit ni cap
+build.

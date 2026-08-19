@@ -381,8 +381,6 @@
     .gate-btn:disabled { opacity: .5; cursor: not-allowed; }
     .gate-error { color: var(--red); font-size: .78rem; margin: -.25rem 0 .5rem; text-align: left; }
     .gate-success { color: #1a7a3c; font-size: .82rem; margin-top: .75rem; }
-    .gate-form-row { display: flex; gap: .5rem; }
-    .gate-form-row .gate-input { flex: 1; }
 
     /* ── SPONSOR ── */
     .sponsor-bar {
@@ -499,11 +497,11 @@
   <div class="gate-box">
     <div class="gate-logo">CB <span>Grup</span> Barna</div>
     <div class="gate-title">Galeria Fotogràfica</div>
-    <div class="gate-subtitle">Per accedir, introdueix el codi d'accés del club<br>o subscriu-te al nostre newsletter gratuït.</div>
+    <div class="gate-subtitle">Ets família del club? Introdueix el codi d'accés.<br>Si no, deixa'ns el teu correu i hi entres directament.</div>
 
     <div class="gate-tabs">
       <button class="gate-tab active" onclick="switchTab('pin')">Codi d'accés</button>
-      <button class="gate-tab" onclick="switchTab('subscribe')">Newsletter</button>
+      <button class="gate-tab" onclick="switchTab('subscribe')">Accés amb correu</button>
     </div>
 
     <!-- PIN TAB -->
@@ -516,15 +514,10 @@
 
     <!-- SUBSCRIBE TAB -->
     <div class="gate-panel" id="tab-subscribe">
-      <div class="gate-form-row">
-        <input class="gate-input" id="sub-nom" type="text" placeholder="Nom" required>
-        <input class="gate-input" id="sub-cognoms" type="text" placeholder="Cognoms" required>
-      </div>
-      <input class="gate-input" id="sub-email" type="email" placeholder="Correu electrònic" required>
-      <input class="gate-input" id="sub-mobil" type="tel" placeholder="Telèfon mòbil">
-      <input class="gate-input" id="sub-club" type="text" placeholder="Club o entitat">
+      <input class="gate-input" id="sub-email" type="email" placeholder="Correu electrònic" required
+        onkeydown="if(event.key==='Enter')submitSubscription()">
       <div class="gate-error" id="sub-error" style="display:none"></div>
-      <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Subscriure'm i accedir</button>
+      <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Continuar a la galeria</button>
       <div class="gate-success" id="sub-success" style="display:none">Gràcies! Benvingut/da a la galeria.</div>
     </div>
   </div>
@@ -777,15 +770,11 @@ function checkPin() {
 }
 
 async function submitSubscription() {
-  const nom = document.getElementById('sub-nom').value.trim();
-  const cognoms = document.getElementById('sub-cognoms').value.trim();
   const email = document.getElementById('sub-email').value.trim();
-  const mobil = document.getElementById('sub-mobil').value.trim();
-  const club = document.getElementById('sub-club').value.trim();
   const err = document.getElementById('sub-error');
 
-  if (!nom || !cognoms || !email) {
-    err.textContent = 'Nom, cognoms i correu són obligatoris.';
+  if (!email) {
+    err.textContent = 'Cal un correu electrònic.';
     err.style.display = 'block';
     return;
   }
@@ -806,9 +795,8 @@ async function submitSubscription() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
-        Nom: nom, Cognoms: cognoms, Correu: email,
-        Mòbil: mobil || '—', Club: club || '—',
-        _subject: 'Nova subscripció Galeria CB Grup Barna',
+        Correu: email,
+        _subject: 'Nou accés a la Galeria CB Grup Barna',
         _captcha: 'false',
       }),
     });
@@ -820,7 +808,7 @@ async function submitSubscription() {
     } else { throw new Error('KO'); }
   } catch {
     btn.disabled = false;
-    btn.textContent = 'Subscriure\'m i accedir';
+    btn.textContent = 'Continuar a la galeria';
     err.textContent = 'Error en enviar. Torna-ho a intentar.';
     err.style.display = 'block';
   }
