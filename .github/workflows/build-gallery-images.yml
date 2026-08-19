@@ -1,0 +1,52 @@
+name: Galeria · generar versions web i miniatures
+
+# Els originals els puja l'admin (/fotos/admin.html) un per un via l'API de
+# GitHub, amb "[skip ci]" al missatge. Això és a posta: una pujada de 300 fotos
+# són 300 commits en pocs minuts, i no volem 300 execucions.
+#
+# Per això aquí no s'escolta el push: es passa cada quart d'hora, agafa tot el
+# que s'hagi pujat des de l'última vegada i en genera les derivades d'una
+# tacada. Si no hi ha res nou, no fa cap commit.
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:        # per generar-les a mà quan convingui
+
+permissions:
+  contents: write
+
+concurrency:
+  group: galeria-imatges     # mai dues execucions alhora sobre els mateixos fitxers
+  cancel-in-progress: false
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instal·lar Pillow
+        run: pip install --quiet Pillow
+
+      - name: Generar el que falti
+        run: python3 scripts/build-gallery-images.py
+
+      - name: Desar si hi ha res nou
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fotos/web fotos/thumb
+          if git diff --cached --quiet; then
+            echo "::notice::Cap foto nova: no hi ha res a generar."
+            exit 0
+          fi
+          n=$(git diff --cached --name-only | wc -l)
+          git commit -m "galeria: generar versions web de $n fitxers nous [skip ci]"
+          git push

@@ -18,6 +18,70 @@ canviar res; si no coincideixen, atura't i pregunta.
 
 ---
 
+## 0 bis. La web i l'Instagram són la mateixa marca
+
+La tesi que ordena tota la resta: **qui salta del perfil a la web no ha de notar
+que canvia de club.** L'Instagram ja té un sistema tancat i respectat; la web és
+la que s'hi ha d'alinear, no al revés.
+
+### El que l'Instagram ja fa bé
+
+- **Tres colors i prou** — vermell, negre, blanc. La foto fa de quart color.
+- Cadència sostinguda i **sèries reconeixibles**: «La feina que no es veu»,
+  «Bàsquet femení», «Dies de partit».
+- El que arriba és **història emocional**, no pòster informatiu. Els reels de
+  l'escoleta femenina i de l'staff són els que més volen.
+- Un reel mitjà toca ~96% dels seguidors: la base està sana.
+
+### Els tres trencaments que separaven les dues cares
+
+| | Trencament | Estat |
+|---|---|---|
+| 1 | **Color** — al CSS convivien groc, verd, blau i taronja, cap d'ells de l'IG | Resolt: punt 1 |
+| 2 | **Vocabulari** — «Partits i events», «Partits i resultats» i «Calendari» com a tres entrades | Resolt: punt 5 |
+| 3 | **Jerarquia** — 8.500 px d'alçada i un bloc «Tot a mà» amb 25+ enllaços plans | Resolt: les franges |
+
+### Com es lliguen, peça a peça
+
+| Web | Instagram |
+|---|---|
+| Pilar «Escoleta» | Destacada «Escoleta» |
+| Bloc «Dies de partit» | Sèrie de stories del cap de setmana |
+| Hero editorial de l'extensa | Mateixa foto que la portada del post fixat |
+| Fitxa d'entrenador/a | Sèrie «La feina que no es veu» |
+
+**Els quatre destacats del perfil són els quatre pilars de la web.** Si canvien
+al perfil, canvien a la web.
+
+### Les dues velocitats de lectura
+
+No són propostes excloents: **la portada té les dues i un commutador**, perquè
+serveixen públics diferents.
+
+| | **Franges** (per defecte) | **Extensa** (editorial) |
+|---|---|---|
+| Per a qui | El dit que acaba de tocar l'enllaç de la bio: mòbil, tres segons de paciència | Qui investiga: famílies, premsa, patrocinadors |
+| Forma | Rectangles amples, una porta per franja, tot a un toc | Portada de diari: foto gran, titular editorial, pilars |
+| Guanya | Conversió. Menys d'un segon per entendre on tocar | Autoritat i SEO real: la web té contingut propi, no només enllaços |
+| Costa | Gairebé res de manteniment | Una foto editorial bona cada temporada i el bloc de partits viu |
+| Risc | Davant un patrocinador, una graella d'enllaços no sosté el discurs | Si l'IG canvia de sèries i la web no, es tornen a separar |
+
+L'estructura de les franges està calcada de la guia visual. **Si canvies l'ordre
+o els textos d'una, canvia'ls a l'altra**: la portada i la guia han de dir el
+mateix.
+
+### Nota sobre les guies antigues
+
+Hi ha una guia anterior —«Web + Instagram: dues propostes», agost 2026— que
+proposava **Bebas Neue** i el vermell **`#E31E24`**, amb negre `#050505` i
+JetBrains Mono per a dades. **Aquells valors no manen.** La decisió tancada és
+Anton i `#E20613` (punts 1 i 2), perquè el vermell està mostrejat de l'escut i
+`#E31E24` no arriba al contrast mínim sobre crema. La resta d'aquella guia —la
+tesi, el diagnòstic i les dues propostes— sí que val, i és el que hi ha aquí
+sobre.
+
+---
+
 ## 1. Un sol vermell: el de l'escut
 
 El vermell és el mateix a tot arreu. Els **noms dels tokens, no**: al repositori
@@ -103,15 +167,14 @@ en pantalla retina calen el doble de píxels dels que ocupa. Si el fitxer no hi
 arriba, hi ha dues sortides honestes: canviar la foto o **fer més petit el marc**.
 Ampliar-la es nota sempre.
 
+**Només fotos de qualitat.** Nítides, ben exposades i sense gra ni desenfocament
+de moviment. Una foto fluixa abaixa tota la pàgina: si no n'hi ha cap de bona
+per a una peça, val més una franja de color pla que una foto dolenta.
+
 Les fotos ja retallades de `img/` fan entre 360 i 550 px d'ample: serveixen per a
-marcs petits i prou. **Els originals grans sí que hi són**, a `fotos/uploads/`:
-
-| Àlbum | Què hi ha | Mida |
-|---|---|---|
-| `summer-camp-2526-…` | Campus: entrenaments, tir, grups, entrenadors | fins a 3648 × 5472 |
-| `fotos-equips-temporada-25-26-records` | Foto oficial de cada equip, Escola inclosa | 1200 × 900 |
-| `cistella-petita-2a-edicio-2026` | Dia de la Cistella Petita | petites, de mòbil |
-
+marcs petits i prou. Les fotos de la galeria són a `fotos/web/<album>/` (versió
+web) i `fotos/thumb/<album>/` (miniatura); els originals grans només queden a
+`fotos/uploads/` per als àlbums més nous, la resta viuen fora del repositori.
 També hi ha `photos/` (retrats d'estudi, sèniors, entrada de la pista, mascota),
 entre 700 i 1600 px.
 
@@ -275,3 +338,27 @@ Val la pena obrir-ho de debò abans de donar-ho per fet. Amb Chromium ja
 instal·lat, `python3 -m http.server` i Playwright n'hi ha prou per mirar una
 pàgina a 1280 i a 390 px i comprovar d'una tirada que no desborda, que no hi ha
 cap imatge trencada i que cap no es mostra més gran del que és.
+
+---
+
+## 11. Per què de vegades el web no es desplega
+
+Quan es pugen fotos des de `/fotos/admin.html`, cada foto és **un commit**. Una
+tanda de 200 fotos són 200 commits en pocs minuts.
+
+El `[skip ci]` del missatge atura els workflows del repositori, però **no atura
+el build de GitHub Pages**, que és un workflow gestionat per GitHub. Resultat:
+cada commit engega un build que cancel·la l'anterior, i **mentre dura la pujada
+no es publica res**. Ni les fotos, ni cap altre canvi que hi hagi pendent.
+
+No està trencat: està afamat. Es desbloqueja sol quan para la pujada.
+
+Si has fusionat alguna cosa i no surt, mira-ho abans de tocar res:
+
+```
+git log origin/main --since="15 minutes ago" --oneline | wc -l
+```
+
+Si el número és alt, només cal esperar. La solució de fons és que les fotos
+deixin de viure al repositori: llavors pujar-ne no genera cap commit ni cap
+build.

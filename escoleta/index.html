@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Escola de bàsquet a Barcelona · Escoleta CB Grup Barna (4 a 8 anys) | El Clot</title>
+<title>Escoleta CB Grup Barna · Bàsquet a Barcelona (4-8 anys)</title>
 <link rel="preload" href="fonts/anton-400-2686.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* Tipografies auto-allotjades (Anton + Inter). Sense CDN de Google:
@@ -120,16 +120,22 @@ a{color:inherit}
 body{padding-bottom:66px}
 @media(max-width:520px){.pobar span{font-size:12px}.pobar{gap:10px}}
 
-/* ---------- LANG SWITCH ---------- */
+/* ---------- LANG SWITCH + SITE NAV (una sola barra fixa) ---------- */
 .langbar{
   position:fixed;top:0;left:0;right:0;z-index:60;
   background:rgba(14,17,22,.88);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.langbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
-.brandmark{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase}
+.langbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;height:56px}
+.brandmark{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:inherit}
 .brandmark span{color:var(--red)}
-.langs{display:flex;gap:4px}
+.site-nav{display:flex;align-items:center;gap:16px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.site-nav::-webkit-scrollbar{display:none}
+.site-nav a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);white-space:nowrap;text-decoration:none;transition:color .15s}
+.site-nav a:hover{color:#fff}
+@media(max-width:1080px){.site-nav a.opt{display:none}}
+@media(max-width:640px){.site-nav{display:none}}
+.langs{display:flex;gap:4px;flex-shrink:0}
 .langs button{
   font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;
   background:transparent;color:var(--grey);border:1px solid var(--line);
@@ -212,7 +218,7 @@ figcaption b{color:#CFCBC4;font-weight:700}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:38px 0}
 .grid3 figure{margin:0}
 .grid3 img,.grid2 img{aspect-ratio:4/3;object-fit:cover}
-.tall img{aspect-ratio:3/4;object-fit:cover}
+.tall img{aspect-ratio:3/4;object-fit:cover;object-position:center top}
 
 /* ---------- DOC HIGHLIGHT ---------- */
 .doc{
@@ -313,6 +319,10 @@ footer a{color:#CFCBC4}
 <meta name="description" content="Escoleta del CB Grup Barna (4-8 anys) al Clot. D'aquí han sortit un entrenador i capitana de la Lliga Femenina Endesa, un jugador d'ACB i jugadors del Barça.">
 <meta name="keywords" content="academia de baloncesto Barcelona, acadèmia de bàsquet Barcelona, escola de bàsquet Barcelona, escuela de baloncesto Barcelona, escoleta bàsquet infantil, baloncesto infantil El Clot">
 <link rel="canonical" href="https://cbgrupbarna.info/escoleta/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/escoleta/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/escoleta/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/escoleta/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/escoleta/">
 <meta property="og:title" content="Escola de bàsquet a Barcelona · Escoleta CB Grup Barna (4 a 8 anys)">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info/escoleta/">
@@ -452,6 +462,14 @@ footer a{color:#CFCBC4}
         },
         {
           "@type": "Question",
+          "name": "Quin horari té l'Escoleta del CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dos entrenaments setmanals: els dimecres de 17:30 a 18:40 a l'Escola Casas, i els dissabtes de 09:00 a 10:30 a La Nau del Clot."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Es pot provar un entrenament abans d'apuntar-s'hi?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -476,7 +494,19 @@ footer a{color:#CFCBC4}
 
 <div class="langbar">
   <div class="wrap">
-    <div class="brandmark">CB Grup Barna <span>·</span> Escoleta</div>
+    <a class="brandmark" href="/">CB Grup Barna <span>·</span> Escoleta</a>
+    <nav class="site-nav" aria-label="Navegació principal">
+      <a href="/club/">Club</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
+      <a href="/partits/">Dies de partit</a>
+      <a href="/patrocinadors/" class="opt">Patrocinadors</a>
+      <a href="/campus/" class="opt">Campus</a>
+      <a href="/magics/" class="opt">Màgics</a>
+      <a href="/3x3/" class="opt">3x3</a>
+      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/fotos/" class="opt">Galeria</a>
+      <a href="/premsa/">Premsa</a>
+    </nav>
     <div class="langs">
       <button type="button" data-set="ca" aria-pressed="true">CAT</button>
       <button type="button" data-set="es" aria-pressed="false">CAST</button>
@@ -500,7 +530,7 @@ footer a{color:#CFCBC4}
     <p class="subhook" data-lang="es">Y ninguno lo sabía a los seis años.</p>
 
     <p data-lang="ca">Un entrenador de la Lliga Femenina Endesa i una capitana de la mateixa lliga. Un jugador d’ACB. Un campió de la Tercera FEB. Quatre del Barça. Tots van tenir la primera llicència aquí, i cap d’ells ho recorda com un tràmit: ho recorden com una pista de pati i un senyor que els va ensenyar a botar.</p>
-    <p data-lang="ca" class="nota-molts">I no són només aquests deu. En són molts més: desenes de jugadors i jugadores formats en aquesta pista al llarg de seixanta anys. Aquí n’hem triat uns quants per donar a conèixer gent especial per al club, però la llista real no cabria en una pàgina.</p>
+    <p data-lang="ca" class="nota-molts">I no són només aquests deu. En són molts més: desenes de jugadors i jugadores formats en aquesta pista al llarg de seixanta-un anys. Aquí n’hem triat uns quants per donar a conèixer gent especial per al club, però la llista real no cabria en una pàgina.</p>
     <p data-lang="es">Un entrenador de la Liga Femenina Endesa y una capitana de la misma liga. Un jugador de ACB. Un campeón de la Tercera FEB. Cuatro del Barça. Todos tuvieron su primera licencia aquí, y ninguno lo recuerda como un trámite: lo recuerdan como una pista de patio y un señor que les enseñó a botar.</p>
     <p data-lang="es" class="nota-molts">Y no son solo estos diez. Son muchos más: decenas de jugadores y jugadoras formados en esta pista a lo largo de sesenta años. Aquí hemos elegido a unos cuantos para dar a conocer a gente especial para el club, pero la lista real no cabría en una página.</p>
 
@@ -524,23 +554,57 @@ footer a{color:#CFCBC4}
     conoce a los entrenadores y al resto del grupo, y después decidís. Así empezaron todos los que salen en esta página.</p>
 
     <div class="cta">
-      <a class="btn" data-lang="ca" href="https://wa.me/34698425153?text=Hola!%20Vull%20informaci%C3%B3%20de%20les%20Portes%20Obertes%20de%20l%27Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="portes-obertes">Apunta't a Portes Obertes</a>
-      <a class="btn" data-lang="es" href="https://wa.me/34698425153?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20de%20las%20Puertas%20Abiertas%20de%20la%20Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="portes-obertes">Apúntate a Puertas Abiertas</a>
-      <a class="btn ghost" data-lang="ca" href="#historia">Coneix l'Escoleta</a>
-      <a class="btn ghost" data-lang="es" href="#historia">Conoce la Escoleta</a>
+      <a class="btn" data-lang="ca" href="/#info" data-cta="portes-obertes">Apunta't a Portes Obertes</a>
+      <a class="btn" data-lang="es" href="/#info" data-cta="portes-obertes">Apúntate a Puertas Abiertas</a>
+      <a class="btn ghost" data-lang="ca" href="#historia">Història de l'Escoleta</a>
+      <a class="btn ghost" data-lang="es" href="#historia">Historia de la Escoleta</a>
+      <a class="btn ghost" data-lang="ca" href="/historia/" data-cta="escoleta-historia-club">Història del club</a>
+      <a class="btn ghost" data-lang="es" href="/historia/" data-cta="escoleta-historia-club">Historia del club</a>
+      <a class="btn ghost" data-lang="ca" href="/fotos/" data-cta="escoleta-galeria">Galeria de fotos</a>
+      <a class="btn ghost" data-lang="es" href="/fotos/" data-cta="escoleta-galeria">Galería de fotos</a>
+      <a class="btn ghost" data-lang="ca" href="/escoleta/materials/escoleta-cb-grup-barna.pdf" download data-cta="escoleta-pdf" data-descarrega="El dossier de l'Escoleta">Descarrega el PDF</a>
+      <a class="btn ghost" data-lang="es" href="/escoleta/materials/escoleta-cb-grup-barna.pdf" download data-cta="escoleta-pdf" data-descarrega="El dossier de l'Escoleta">Descargar el PDF</a>
     </div>
 
     <div class="facts">
       <div data-lang="ca"><b>4 a 8 anys</b>Escoleta d'iniciació</div>
       <div data-lang="es"><b>4 a 8 años</b>Escoleta de iniciación</div>
-      <div data-lang="ca"><b>El Clot</b>Sant Martí, Barcelona</div>
-      <div data-lang="es"><b>El Clot</b>Sant Martí, Barcelona</div>
-      <div data-lang="ca"><b>Des de 1965</b>60 anys formant al barri</div>
-      <div data-lang="es"><b>Desde 1965</b>60 años formando en el barrio</div>
+      <div data-lang="ca"><b>Dc 17:30-18:40</b>Escola Casas</div>
+      <div data-lang="es"><b>Mié 17:30-18:40</b>Escola Casas</div>
+      <div data-lang="ca"><b>Ds 09:00-10:30</b>La Nau del Clot</div>
+      <div data-lang="es"><b>Sáb 09:00-10:30</b>La Nau del Clot</div>
+      <div data-lang="ca"><b>Des de 1965</b>Formant nens i nenes del barri</div>
+      <div data-lang="es"><b>Desde 1965</b>Formando niños y niñas del barrio</div>
     </div>
   </div>
 </section>
 
+
+<!-- ============ L'ESCOLETA, AVUI ============ -->
+<section id="avui">
+  <div class="wrap">
+    <h2 data-lang="ca">L'Escoleta,<br>avui</h2>
+    <h2 data-lang="es">La Escoleta,<br>hoy</h2>
+
+    <div class="body">
+      <p data-lang="ca" class="lead">Seixanta anys després d'aquell pati, la mateixa pista, la mateixa mascota i les mateixes ganes de jugar.</p>
+      <p data-lang="es" class="lead">Sesenta años después de aquel patio, la misma pista, la misma mascota y las mismas ganas de jugar.</p>
+    </div>
+
+    <div class="grid3 tall">
+      <figure><img src="img/escoleta-2026-01.jpg" alt="Jugador de l'Escoleta amb la mascota del CB Grup Barna a La Nau del Clot" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="img/escoleta-2026-02.jpg" alt="Jugadora de l'Escoleta amb la mascota del CB Grup Barna a La Nau del Clot" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="img/escoleta-2026-03.jpg" alt="Jugador de l'Escoleta botant la pilota a La Nau del Clot" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="img/escoleta-2026-04.jpg" alt="Jugador de l'Escoleta somrient amb la pilota a La Nau del Clot" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="img/escoleta-2026-05.jpg" alt="Jugador de l'Escoleta en posició de bot a La Nau del Clot" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="img/escoleta-2026-06.jpg" alt="Jugador de l'Escoleta amb la pilota i la mascota a La Nau del Clot" loading="lazy" decoding="async" width="900" height="1200"></figure>
+    </div>
+    <div class="cta">
+      <a class="btn ghost" data-lang="ca" href="/fotos/" data-cta="escoleta-avui-galeria">Veure més fotos a la Galeria →</a>
+      <a class="btn ghost" data-lang="es" href="/fotos/" data-cta="escoleta-avui-galeria">Ver más fotos en la Galería →</a>
+    </div>
+  </div>
+</section>
 
 <!-- ============ 01 EL PATI ============ -->
 <section id="historia">
@@ -553,7 +617,7 @@ footer a{color:#CFCBC4}
       <p data-lang="ca" class="lead">No hi havia parquet. No hi havia grada. Hi havia una cistella clavada a la paret, un terra de ciment i onze nens amb samarreta negra i pantaló vermell.</p>
       <p data-lang="es" class="lead">No había parqué. No había grada. Había una canasta clavada en la pared, un suelo de cemento y once niños con camiseta negra y pantalón rojo.</p>
 
-      <p data-lang="ca">El club i l’Escoleta van néixer l’any <strong>1965</strong>. A l’esquerra de la foto, amb ulleres i jersei, hi ha <strong>en Julio Torralba</strong>, fundador del club i entrenador de referència durant dècades. Avui, seixanta anys després, continua a la pista cada setmana amb els nens i nenes de 4 a 8 anys de l’Escoleta.</p>
+      <p data-lang="ca">El club i l’Escoleta van néixer l’any <strong>1965</strong>. A l’esquerra de la foto, amb ulleres i jersei, hi ha <strong>en Julio Torralba</strong>, fundador del club i entrenador de referència durant dècades. Avui, seixanta-un anys després, continua a la pista cada setmana amb els nens i nenes de 4 a 8 anys de l’Escoleta.</p>
       <p data-lang="es">El club y la Escoleta nacieron en <strong>1965</strong>. A la izquierda de la foto, con gafas y jersey, está <strong>Julio Torralba</strong>, fundador del club y entrenador de referencia durante décadas. Hoy, sesenta años después, sigue en la pista cada semana con los niños y niñas de 4 a 8 años de la Escoleta.</p>
     </div>
 
@@ -960,15 +1024,15 @@ footer a{color:#CFCBC4}
       <p data-lang="es">La Escoleta del CB Grup Barna es para niños y niñas de 4 a 8 años. No buscamos a los mejores: buscamos que quieran volver la semana siguiente. Lo demás ya lo hemos visto pasar unas cuantas veces.</p>
     </div>
 
-    <!-- WhatsApp del club -->
+    <!-- Formulari d'informació (guarda les dades i després envia el WhatsApp) -->
     <div class="btns">
-      <a class="btn wa" data-lang="ca" target="_blank" rel="noopener"
-         href="https://wa.me/34698425153?text=Hola!%20Vull%20informaci%C3%B3%20de%20les%20Portes%20Obertes%20de%20l%27Escoleta%20del%20CB%20Grup%20Barna">
+      <a class="btn wa" data-lang="ca"
+         href="/#info">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4a3.2 3.2 0 0 0-1 2.4A5.6 5.6 0 0 0 7 12a12.7 12.7 0 0 0 4.9 4.3c.7.3 1.2.5 1.6.6a3.9 3.9 0 0 0 1.8.1 3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4l-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
         Vull informació
       </a>
-      <a class="btn wa" data-lang="es" target="_blank" rel="noopener"
-         href="https://wa.me/34698425153?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20de%20las%20Puertas%20Abiertas%20de%20la%20Escoleta%20del%20CB%20Grup%20Barna">
+      <a class="btn wa" data-lang="es"
+         href="/#info">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4a3.2 3.2 0 0 0-1 2.4A5.6 5.6 0 0 0 7 12a12.7 12.7 0 0 0 4.9 4.3c.7.3 1.2.5 1.6.6a3.9 3.9 0 0 0 1.8.1 3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4l-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
         Quiero información
       </a>
@@ -980,7 +1044,7 @@ footer a{color:#CFCBC4}
 <section class="faq-sec" aria-labelledby="faq-escoleta">
   <div class="wrap">
     <h2 id="faq-escoleta">Preguntes freqüents sobre l'Escoleta</h2>
-    <details class="faq-q"><summary>Quina és l'escola de bàsquet del CB Grup Barna?</summary><p>L'Escoleta és l'escola de bàsquet del CB Grup Barna per a nens i nenes de 4 a 8 anys, al barri del Clot, Districte de Sant Martí de Barcelona. Funciona amb equips mixtos i tres grups per edat.</p></details><details class="faq-q"><summary>Qui dirigeix l'Escoleta del CB Grup Barna?</summary><p>L'Escoleta la dirigeix Julio Torralba, fundador del club l'any 1965. Als 72 anys continua entrenant cada setmana. Es pot contactar amb ell per telèfon o WhatsApp al 646 205 526.</p></details><details class="faq-q"><summary>Quins jugadors coneguts s'han format a l'Escoleta del CB Grup Barna?</summary><p>D'aquesta mateixa pista han sortit en Javier Torralba, avui entrenador del Valencia Basket Femení a la Lliga Femenina Endesa; l'Ainhoa López, capitana de l'Spar Girona a la mateixa lliga; en Roger Fornas, pivot d'ACB i LEB Or; en David Mejía, campió de la Tercera FEB; i diversos jugadors formats després a les categories inferiors del FC Barcelona. Tots els detalls, amb fotos i fitxes federatives, són en aquesta mateixa pàgina.</p></details><details class="faq-q"><summary>A partir de quina edat es pot començar a jugar a bàsquet al Barna?</summary><p>Des dels 4 anys. L'Escoleta acull nens i nenes de 4 a 8 anys. A partir dels 8 i a mida que estan preparats, passen als equips federats del club (premini, mini i la resta de categories).</p></details><details class="faq-q"><summary>Es pot provar un entrenament abans d'apuntar-s'hi?</summary><p>Sí. El primer entrenament és de prova i sense compromís. Cal escriure o trucar a Julio Torralba al 646 205 526 per reservar dia.</p></details><details class="faq-q"><summary>On entrena l'Escoleta del CB Grup Barna?</summary><p>Al barri del Clot, al Districte de Sant Martí de Barcelona. La Nau del Clot és el punt esportiu principal del club.</p></details>
+    <details class="faq-q"><summary>Quina és l'escola de bàsquet del CB Grup Barna?</summary><p>L'Escoleta és l'escola de bàsquet del CB Grup Barna per a nens i nenes de 4 a 8 anys, al barri del Clot, Districte de Sant Martí de Barcelona. Funciona amb equips mixtos i tres grups per edat.</p></details><details class="faq-q"><summary>Qui dirigeix l'Escoleta del CB Grup Barna?</summary><p>L'Escoleta la dirigeix Julio Torralba, fundador del club l'any 1965. Als 72 anys continua entrenant cada setmana. Es pot contactar amb ell per telèfon o WhatsApp al 646 205 526.</p></details><details class="faq-q"><summary>Quins jugadors coneguts s'han format a l'Escoleta del CB Grup Barna?</summary><p>D'aquesta mateixa pista han sortit en Javier Torralba, avui entrenador del Valencia Basket Femení a la Lliga Femenina Endesa; l'Ainhoa López, capitana de l'Spar Girona a la mateixa lliga; en Roger Fornas, pivot d'ACB i LEB Or; en David Mejía, campió de la Tercera FEB; i diversos jugadors formats després a les categories inferiors del FC Barcelona. Tots els detalls, amb fotos i fitxes federatives, són en aquesta mateixa pàgina.</p></details><details class="faq-q"><summary>A partir de quina edat es pot començar a jugar a bàsquet al Barna?</summary><p>Des dels 4 anys. L'Escoleta acull nens i nenes de 4 a 8 anys. A partir dels 8 i a mida que estan preparats, passen als equips federats del club (premini, mini i la resta de categories).</p></details><details class="faq-q"><summary>Quin horari té l'Escoleta del CB Grup Barna?</summary><p>Dos entrenaments setmanals: els dimecres de 17:30 a 18:40 a l'Escola Casas, i els dissabtes de 09:00 a 10:30 a La Nau del Clot.</p></details><details class="faq-q"><summary>Es pot provar un entrenament abans d'apuntar-s'hi?</summary><p>Sí. El primer entrenament és de prova i sense compromís. Cal escriure o trucar a Julio Torralba al 646 205 526 per reservar dia.</p></details><details class="faq-q"><summary>On entrena l'Escoleta del CB Grup Barna?</summary><p>Al barri del Clot, al Districte de Sant Martí de Barcelona. La Nau del Clot és el punt esportiu principal del club.</p></details>
   </div>
 </section>
 
@@ -1014,11 +1078,11 @@ footer a{color:#CFCBC4}
 <div class="pobar">
   <span data-lang="ca">Portes Obertes · Prova un entrenament</span>
   <span data-lang="es">Puertas Abiertas · Prueba un entrenamiento</span>
-  <a data-lang="ca" href="https://wa.me/34698425153?text=Hola!%20Vull%20informaci%C3%B3%20de%20les%20Portes%20Obertes%20de%20l%27Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="portes-obertes-barra">Vull provar un entrenament</a>
-  <a data-lang="es" href="https://wa.me/34698425153?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20de%20las%20Puertas%20Abiertas%20de%20la%20Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="portes-obertes-barra">Quiero probar un entrenamiento</a>
+  <a data-lang="ca" href="/#info" data-cta="portes-obertes-barra">Vull provar un entrenament</a>
+  <a data-lang="es" href="/#info" data-cta="portes-obertes-barra">Quiero probar un entrenamiento</a>
 </div>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script src="/js/galetes.js"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());gtag('config','G-R6XYR7G1WF',{anonymize_ip:true});
@@ -1029,5 +1093,6 @@ document.addEventListener('click',function(e){
   }
 },true);
 </script>
+<script src="/js/descarrega.js" defer></script>
 </body>
 </html>
