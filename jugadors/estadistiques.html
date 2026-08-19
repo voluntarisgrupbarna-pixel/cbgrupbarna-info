@@ -5,12 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Estadístiques de jugadors · Admin · CB Grup Barna</title>
+<link rel="canonical" href="https://cbgrupbarna.info/jugadors/estadistiques.html">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/jugadors/estadistiques.html">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/jugadors/estadistiques.html">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/jugadors/estadistiques.html">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/jugadors/estadistiques.html">
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#E63329;--red-ink:#B7231B;--ink:#0E1116;--cream:#F4F1EC;--paper:#FFFFFF;--border:rgba(14,17,22,.12);--muted:#6B6560;--win:#1B7F4B;--loss:#B7231B}
+  :root{--red:#E20613;--red-ink:#A8040E;--ink:#0E1116;--cream:#F4F1EC;--paper:#FFFFFF;--border:rgba(14,17,22,.12);--muted:#6B6560;--win:#1B7F4B;--loss:#A8040E}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--cream);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;min-height:100vh}
   nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.2rem;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:.5rem}
@@ -33,7 +38,7 @@
   .field-input,select.field-input{width:100%;background:var(--paper);border:1px solid var(--border);border-radius:10px;color:var(--ink);padding:.65rem .8rem;font-family:'Inter',sans-serif;font-size:.9rem}
   .field-input:focus{outline:none;border-color:var(--red)}
   #login-box{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.6rem}
-  .err{display:none;background:rgba(230,51,41,.08);border:1px solid rgba(230,51,41,.3);color:var(--red-ink);border-radius:10px;padding:.6rem .8rem;font-size:.82rem}
+  .err{display:none;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.3);color:var(--red-ink);border-radius:10px;padding:.6rem .8rem;font-size:.82rem}
   .hint{font-size:.72rem;color:var(--muted)}
   .hint a{color:var(--red-ink);text-decoration:none}
   #main-screen{display:none}
@@ -61,8 +66,13 @@
   .best{color:var(--win)}
   .note{font-size:.78rem;color:var(--muted);margin-top:.6rem;line-height:1.5}
   .tablewrap{overflow-x:auto}
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; color: var(--muted); transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 700; color: var(--ink); }
+  .lang-switch a:hover { opacity: 1; color: var(--red); }
+  .lang-switch .sep { opacity: 0.25; }
 </style>
-<script src="/scripts/google-gate.js"></script>
+<script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
 </head>
 <body>
@@ -72,7 +82,12 @@
     <img src="/logo.png" alt="CB Grup Barna">
     <div class="t">ADMIN <span>ESTADÍSTIQUES</span></div>
   </div>
-  <div class="links"><a href="/jugadors/admin.html">← Plantilla</a></div>
+  <div class="links">
+    <a href="/jugadors/admin.html">← Plantilla</a>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/jugadors/estadistiques.html" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/jugadors/estadistiques.html" hreflang="es">ES</a><span class="sep">·</span><a href="/en/jugadors/estadistiques.html" hreflang="en">EN</a>
+    </div>
+  </div>
   <div class="nav-user" id="nav-user">
     <span id="nav-username"></span>
     <button class="btn ghost small" onclick="logout()">Sortir</button>

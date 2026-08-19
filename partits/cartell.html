@@ -5,11 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Cartell de victòria · CB Grup Barna</title>
+<link rel="canonical" href="https://cbgrupbarna.info/partits/cartell.html">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/partits/cartell.html">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/partits/cartell.html">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/partits/cartell.html">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/partits/cartell.html">
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#3ddc84}
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#3ddc84}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
   nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
@@ -34,7 +39,7 @@
   .btn:disabled{opacity:.45;cursor:default}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
   .btn.small{padding:.35rem .7rem;font-size:.74rem}
-  .alert{display:none;background:linear-gradient(135deg,rgba(61,220,132,.14),rgba(200,16,46,.12));border:1px solid rgba(61,220,132,.4);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.4rem}
+  .alert{display:none;background:linear-gradient(135deg,rgba(61,220,132,.14),rgba(226,6,19,.12));border:1px solid rgba(61,220,132,.4);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.4rem}
   .alert b{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.04em;color:var(--green);display:block}
   .alert p{font-size:.85rem;color:rgba(255,255,255,.7);margin-top:.2rem;line-height:1.5}
   .alert .wins{margin-top:.7rem;display:flex;flex-direction:column;gap:.35rem}
@@ -49,6 +54,11 @@
   .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.55rem .8rem;font-size:.8rem;margin-top:.7rem}
   .empty{color:var(--muted);font-size:.86rem;padding:1rem 0;line-height:1.6}
   .empty a{color:var(--red)}
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; margin-left: 0; color: var(--muted); font-size: .72rem; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; color: var(--txt); }
+  .lang-switch a:hover { opacity: 1; color: var(--red); }
+  .lang-switch .sep { opacity: 0.25; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -56,6 +66,9 @@
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CARTELL DE <span>VICTÒRIA</span></div>
   <a href="/partits/admin.html">← Gestió de partits</a>
+  <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+    <a href="/partits/cartell.html" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/partits/cartell.html" hreflang="es">ES</a><span class="sep">·</span><a href="/en/partits/cartell.html" hreflang="en">EN</a>
+  </div>
 </nav>
 
 <div class="wrap">
@@ -113,9 +126,9 @@
 </div>
 
 <script src="/partits/partits.js"></script>
-<script src="/scripts/google-gate.js"></script>
+<script src="/scripts/admin-gate.js"></script>
 <script>
-const W=1080, H=1350, RED='#C8102E';
+const W=1080, H=1350, RED='#E20613';
 let img=null, partitSel=null, ganxoIdx=0;
 
 CBGBGate.protect(function(){ init(); });

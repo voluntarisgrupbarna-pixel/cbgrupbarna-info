@@ -1,0 +1,91 @@
+name: Galeria · sincronitzar amb Cloudflare R2
+
+# Puja a R2 les fotos de la galeria. Els originals de la camera es queden
+# nomes al repositori fins que aquesta sincronitzacio estigui verificada; a
+# partir d'aqui, R2 es on viuen les imatges i el repositori nomes te el web.
+#
+# Cal tenir aquests secrets al repositori (Settings > Secrets > Actions):
+#   R2_ACCOUNT_ID · R2_ACCESS_KEY_ID · R2_SECRET_ACCESS_KEY
+# Si en falta cap, la feina s'atura amb un avis en comptes de fallar a mitges.
+
+on:
+  workflow_dispatch:
+    inputs:
+      incloure_arxiu:
+        description: "Pujar tambe l'arxiu de 2560px (triga mes)"
+        type: boolean
+        default: true
+  schedule:
+    - cron: '30 4 * * *'      # cada nit, per a les fotos noves del dia
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-sync
+  cancel-in-progress: false
+
+env:
+  BUCKET: cbgb-fotos
+
+jobs:
+  sincronitzar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Comprovar que hi ha els secrets
+        env:
+          ID: ${{ secrets.R2_ACCOUNT_ID }}
+          KEY: ${{ secrets.R2_ACCESS_KEY_ID }}
+          SECRET: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          if [ -z "$ID" ] || [ -z "$KEY" ] || [ -z "$SECRET" ]; then
+            echo "::error::Falten els secrets d'R2. Posa'ls a Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Preparar eines
+        run: pip install --quiet Pillow awscli
+
+      - name: Generar l'arxiu de 2560px
+        if: ${{ inputs.incloure_arxiu != false }}
+        run: python3 scripts/build-gallery-archive.py
+
+      - name: Pujar a R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+        run: |
+          set -e
+          puja () {   # $1 carpeta local, $2 prefix al bucket, $3 tipus
+            [ -d "$1" ] || { echo "  (no hi ha $1)"; return; }
+            echo "::group::$2"
+            aws s3 sync "$1" "s3://$BUCKET/$2" \
+              --endpoint-url "$ENDPOINT" \
+              --no-progress --size-only \
+              ${3:+--content-type "$3"}
+            echo "::endgroup::"
+          }
+          puja fotos/thumb  thumb/  image/webp
+          puja fotos/web    web/    image/webp
+          [ -d fotos/arxiu ] && puja fotos/arxiu arxiu/ image/webp
+          # Els videos, tal qual: no es transcodifiquen
+          echo "::group::videos"
+          find fotos/uploads -type f \( -iname '*.mp4' -o -iname '*.mov' -o -iname '*.webm' \) -print0 \
+          | while IFS= read -r -d '' f; do
+              rel="${f#fotos/uploads/}"
+              aws s3 cp "$f" "s3://$BUCKET/video/$rel" --endpoint-url "$ENDPOINT" --no-progress
+            done
+          echo "::endgroup::"
+
+      - name: Resum
+        run: echo "::notice::Sincronitzacio acabada. Comprova la galeria abans d'esborrar cap original."

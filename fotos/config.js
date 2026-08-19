@@ -2,6 +2,8 @@
 // Editable des del panell d'administrador: /fotos/admin.html
 
 window.GALERIA_CONFIG = {
-  require_access: true,
+  require_access: false,
+  // Dona accés als grups privats: /fotos/?marqueting=<aquesta clau>
+  marketing_pin: 'barna-mk-1965',
   newsletter_email: 'voluntarisgrupbarna@gmail.com',
 };

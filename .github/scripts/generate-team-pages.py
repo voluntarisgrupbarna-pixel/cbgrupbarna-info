@@ -17,6 +17,21 @@ import re
 from datetime import date
 from pathlib import Path
 
+
+def clamp_desc(text, limit=160):
+    """Google en mostra uns 160 caràcters. Retallem per final de frase perquè
+    el fragment de cerca no quedi penjat a mitja paraula."""
+    text = " ".join(text.split())
+    if len(text) <= limit:
+        return text
+    cut = text[:limit + 1]
+    end = max(cut.rfind(". "), cut.rfind("? "), cut.rfind("! "))
+    if end > limit * 0.55:
+        return text[:end + 1].strip()
+    sp = cut.rfind(" ")
+    return text[:sp if sp > 0 else limit].rstrip(" ,;:·") + "…"
+
+
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "partits" / "data.json"
 OUT_DIR = ROOT / "partits" / "equips"
@@ -53,12 +68,15 @@ def resultat(p):
     return "W" if barna > rival else ("L" if barna < rival else "E")
 
 
-HEAD_NAV = """<a href="/escoleta/">Escoleta</a>
+HEAD_NAV = """<a href="/club/">Club</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
+      <a href="/partits/">Dies de partit</a>
+      <a href="/patrocinadors/" class="opt">Patrocinadors</a>
       <a href="/campus/" class="opt">Campus</a>
       <a href="/3x3/" class="opt">3x3</a>
-      <a href="/blog/" class="opt">Blog</a>
-      <a href="/premsa/" class="opt">Premsa</a>
-      <a href="/#info">Informació</a>"""
+      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/fotos/" class="opt">Galeria</a>
+      <a href="/premsa/">Premsa</a>"""
 
 FOOTER = """<footer class="foot">
   <div class="wrap">
@@ -72,9 +90,9 @@ FOOTER = """<footer class="foot">
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Partits i resultats</a>
+        <a href="/partits/">Dies de partit</a>
         <a href="/partits/equips/">Tots els equips</a>
-        <a href="/partits/calendaris/">Calendaris per equip</a>
+        <a href="/partits/calendaris/">Dies de partit per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/blog/">Blog</a>
         <a href="/premsa/">Articles i premsa</a>
@@ -82,7 +100,8 @@ FOOTER = """<footer class="foot">
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
-        <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
+        <a href="/faq/">Preguntes freqüents</a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
       </div>
@@ -129,6 +148,7 @@ def head_html(title, desc, canonical, og_image, extra_ld):
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 <script type="application/ld+json">{json.dumps(extra_ld, ensure_ascii=False)}</script>
+<script src="/js/galetes.js"></script>
 </head>
 """
 
@@ -170,8 +190,8 @@ def team_page(e, data, avui):
     competicio = e.get("competicio", "")
     canonical = f"{BASE_URL}/partits/equips/{e['id']}/"
     posicio_txt = f" · {e['posicio']}a posició del seu grup" if e.get("posicio") else ""
-    desc = (f"Calendari i resultats de {nom} ({competicio}) del CB Grup Barna: "
-            f"balanç {w}-{l}{posicio_txt}. Actualitzat cada dia a partir del calendari oficial de la FCBQ.")
+    desc = clamp_desc(f"Calendari i resultats de {nom} ({competicio}) del CB Grup Barna: "
+                      f"balanç {w}-{l}{posicio_txt}. Actualitzat cada dia des del calendari oficial de la FCBQ.")
     title = f"{nom} · Calendari i resultats | CB Grup Barna"
     og_image = f"{BASE_URL}/partits/calendaris/img/{e['id']}.webp"
 
@@ -189,7 +209,7 @@ def team_page(e, data, avui):
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "CB Grup Barna", "item": f"{BASE_URL}/"},
-                    {"@type": "ListItem", "position": 2, "name": "Partits i resultats", "item": f"{BASE_URL}/partits/"},
+                    {"@type": "ListItem", "position": 2, "name": "Dies de partit", "item": f"{BASE_URL}/partits/"},
                     {"@type": "ListItem", "position": 3, "name": "Equips", "item": f"{BASE_URL}/partits/equips/"},
                     {"@type": "ListItem", "position": 4, "name": nom, "item": canonical},
                 ],
@@ -206,7 +226,7 @@ def team_page(e, data, avui):
 
     body = f"""{header_html()}
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Partits i resultats</a> · <a href="/partits/equips/">Equips</a> · <span>{esc(nom)}</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Dies de partit</a> · <a href="/partits/equips/">Equips</a> · <span>{esc(nom)}</span></nav></div>
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red">{esc(competicio)}</p>
@@ -214,7 +234,7 @@ def team_page(e, data, avui):
     <p class="lede">Balanç d'aquesta temporada: <strong>{w}-{l}</strong> (V-D){posicio_txt}. Calendari i
     resultats sincronitzats cada dia amb el calendari oficial de la FCBQ.</p>
     <div class="btn-row">
-      <a href="/partits/#equips" class="btn red" data-cta="team-app-{e['id']}">Veure a l'app completa (filtres, ratxes, previsions)</a>
+      <a href="/partits/" class="btn red" data-cta="team-app-{e['id']}">Tots els dies de partit del club</a>
       <a href="webcal://cbgrupbarna.info/partits/calendaris/ics/{e['id']}.ics" class="btn ghost" data-cta="team-ics-{e['id']}">🔔 Subscriu-te al calendari</a>
     </div>
   </div>
@@ -261,22 +281,22 @@ def index_page(data, avui):
 
     canonical = f"{BASE_URL}/partits/equips/"
     title = "Tots els equips · CB Grup Barna"
-    desc = ("Tots els equips federats del CB Grup Barna, per categoria: cadet, infantil, júnior i sènior, "
-            "femení i masculí. Calendari, resultats i balanç de cadascun, actualitzats cada dia.")
+    desc = clamp_desc("Tots els equips federats del CB Grup Barna, per categoria: cadet, infantil, "
+                      "júnior i sènior, femení i masculí. Calendari, resultats i balanç de cadascun.")
     ld = {
         "@context": "https://schema.org",
         "@graph": [
             {"@type": "CollectionPage", "name": title, "description": desc, "url": canonical, "inLanguage": "ca-ES"},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "CB Grup Barna", "item": f"{BASE_URL}/"},
-                {"@type": "ListItem", "position": 2, "name": "Partits i resultats", "item": f"{BASE_URL}/partits/"},
+                {"@type": "ListItem", "position": 2, "name": "Dies de partit", "item": f"{BASE_URL}/partits/"},
                 {"@type": "ListItem", "position": 3, "name": "Equips", "item": canonical},
             ]},
         ],
     }
     body = f"""{header_html()}
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Partits i resultats</a> · <span>Equips</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Dies de partit</a> · <span>Equips</span></nav></div>
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red">Temporada {esc(data.get('temporada', ''))}</p>
