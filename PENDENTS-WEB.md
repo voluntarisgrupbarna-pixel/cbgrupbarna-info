@@ -18,7 +18,7 @@ es tanca Fase 1 amb CRM, SEO, GEO, UX i Patrocinadors. Estat ara mateix:
 | Patrocinadors — plantilla de dashboard de retorn | ✅ Fet avui | `/patrocinadors/dashboard/` — `noindex`, no enllaçada, dades d'exemple |
 | CRM — Brevo connectat als 6 formularis | ⏳ Pendent clau API + accés a l'Apps Script | Codi ja llest, veure `INTEGRACIONS-PENDENTS.md` |
 | GEO — bateria de 12 preguntes llançada | ⏳ Pendent que algú amb accés a ChatGPT/Perplexity/Gemini la llanci | Bateria ja escrita |
-| Astro per a la migració d'arquitectura | ✅ Decidit (Fase 3, no ara) | — |
+| Astro per a la migració d'arquitectura | ✅ Decidit i **prova de concepte començada avui** | `astro-migracio/` — no toca producció, veure el seu README |
 
 Capacitat confirmada: 2 h/dia, cada dia (~14 h/setmana).
 
