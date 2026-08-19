@@ -1,6 +1,6 @@
 ---
 name: web-cbgb
-description: Sistema de disseny de les webs del CB Grup Barna (cbgrupbarna.info i satèl·lits). Carrega-la SEMPRE abans de tocar HTML, CSS o qualsevol peça visual del club: colors, tipografia, fotografia, vocabulari, modes clar i fosc, i les trampes tècniques del repositori. Inclou el vermell oficial mostrejat de l'escut i per què no és el mateix que el de vídeo.
+description: Sistema de disseny de les webs del CB Grup Barna (cbgrupbarna.info i satèl·lits). Carrega-la SEMPRE abans de tocar HTML, CSS o qualsevol peça visual del club: colors, tipografia, fotografia, gràfics i dades, vocabulari, modes de color i les trampes tècniques del repositori. Diu quin és el vermell oficial mostrejat de l'escut i per què no és el de vídeo; quins dos jocs de tokens i quines dues tipografies de display hi conviuen, i com no barrejar-los; on són els originals de foto i com passar-los pel script perquè cap surti ampliada; i quines pàgines generades encara no es poden regenerar sense perdre-hi contingut.
 ---
 
 # Sistema de disseny · web CB Grup Barna
@@ -84,15 +84,37 @@ sobre.
 
 ## 1. Un sol vermell: el de l'escut
 
+El vermell és el mateix a tot arreu. Els **noms dels tokens, no**: al repositori
+hi conviuen dos jocs, i confondre'ls fa que una regla no s'apliqui.
+
+**Sistema principal** — `css/barna.css`, i la portada, que porta el CSS a dins
+però amb els mateixos valors. Cobreix blog, campus, 3x3, premsa, patrocinadors,
+femení, `/es/`, `/en/` i `partits/equips/`.
+
 | Token | Valor | Ús |
 |---|---|---|
 | `--red` | `#E20613` | L'únic accent. Mostrejat de `logo.png` i `icon-512.png`. |
-| `--red-ink` | `#A8040E` | Text vermell sobre fons clar i estats de passar-hi el ratolí. |
-| `--ink` | `#10100E` | Tinta. |
-| `--paper` / `--cream` | `#FFFFFF` / `#F4F1EC` | Fons. |
+| `--red-dark` | `#A8040E` | Text vermell sobre fons clar i estats de passar-hi el ratolí. |
+| `--ink` | `#0a0a0a` | Tinta. |
+| `--ink-2` | `#46433f` | El text corrent. |
+| `--muted` | `#8a8681` | Etiquetes petites. Vegeu l'avís de sota. |
+| `--line` | `#e4e1dd` | Filets. |
+| `--paper` / `--paper-2` | `#ffffff` / `#f6f4f1` | Fons. |
 
-Contrast sobre blanc: `#E20613` dona 4,92:1 i `#A8040E`, 7,81:1. Tots dos passen
-el mínim AA per a text.
+**`/partits/` té el seu propi joc**, perquè és una pàgina autònoma: allà el
+vermell fosc es diu `--red-ink`, el fons crema `--cream` (`#F4F1EC`), la tinta
+`--ink` val `#0E1116` i el gris `--muted` és `#6B6560`. El vermell d'accent és
+el mateix. Si copies codi d'una banda a l'altra, tradueix els noms.
+
+Contrast mesurat sobre blanc: `#E20613` dona 4,92:1 i `#A8040E`, 7,81:1 — tots
+dos passen el mínim AA per a text. Blanc sobre `--red` també dona 4,92:1.
+
+> **`--muted` no arriba a AA.** `#8a8681` sobre blanc dona 3,62:1, i sobre
+> `--paper-2`, 3,29:1: per sota del 4,5:1 que demana el text. Al sistema només
+> s'hi posen etiquetes en caixa alta de 8,5 a 10 px, que és justament la mida on
+> més es nota. **No hi posis mai text que s'hagi de llegir de debò.** El dia que
+> es refaci, `#706c67` dona 5,21:1 sobre blanc i 4,75:1 sobre crema, i passa als
+> dos fons. `--muted` de `/partits/` (`#6B6560`) ja hi arriba.
 
 **No facis servir `#FD030C`**, que és el vermell de la cartela de vídeo de
 `sistema-visual-cbgb`. Sobre blanc dona 4,04:1 i sobre crema 3,59:1, per sota
@@ -110,14 +132,28 @@ aquestes:
 
 ---
 
-## 2. Dues tipografies, i prou
+## 2. Tipografia: dos sistemes, i cal saber en quin ets
 
-- **Anton** per a display: caixa alta, gran, atapeïda, interlineat curt.
-- **Inter** per a text, dades i etiquetes. Les etiquetes van en caixa alta amb
-  molt interlletratge (`0.18em`–`0.28em`).
+Sempre dues famílies com a màxim per peça: una de display i **Inter** per al
+text. La de display depèn d'on siguis.
 
-Els fitxers són a `.github/scripts/fonts/`. Incrusta'ls com a `data:` URI si la
-peça ha de funcionar sense xarxa. Màxim dues famílies per peça.
+- **Jost** (`--display`, amb `Futura` i `Century Gothic` de recanvi) és la del
+  **sistema actual**: portada, blog, campus, 3x3, premsa, patrocinadors, femení,
+  `/es/`, `/en/` i `partits/equips/`. Va en caixa alta, pes lleuger (200–400) i
+  molt interlletratge.
+- **Anton** és la de les **pàgines antigues i autònomes**, que porten el seu CSS
+  a dins: `/escoleta/` (que se serveix les fonts des de `escoleta/fonts/`), `/partits/`,
+  `/briefing/`, `/jugadors/estadistiques.html` i `/partits/cartell.html`. És més
+  pesada i més estreta que Jost. **No les barregis en una mateixa pàgina**: si
+  toques una d'aquestes, segueix amb Anton; si en fas una de nova, fes-la amb
+  `css/barna.css` i Jost.
+- **Inter** per a text, dades i etiquetes a tot arreu. Les etiquetes van en
+  caixa alta amb interlletratge de `0.18em` a `0.28em`.
+
+Els `.ttf` de `.github/scripts/fonts/` (`anton.ttf`, `inter-*.ttf`) **no són per
+al web**: els fan servir `generate-og-image.py` i `generate-calendaris.py` per
+dibuixar imatges amb Pillow. Al web les fonts vénen de Google Fonts, tret de
+`/escoleta/`, que les té en `.woff2` al seu propi directori.
 
 ---
 
@@ -135,14 +171,52 @@ Ampliar-la es nota sempre.
 de moviment. Una foto fluixa abaixa tota la pàgina: si no n'hi ha cap de bona
 per a una peça, val més una franja de color pla que una foto dolenta.
 
-> Estat actual: les fotos de `img/` fan entre 360 i 550 px d'ample. No hi ha
-> originals més grans al repositori. Qualsevol maqueta amb marcs amples les
-> delatarà. I no hi ha **cap foto moderna en alta de l'Escoleta (4-7 anys)**:
-> això es resol amb una sessió de fotos, no amb codi.
+Les fotos ja retallades de `img/` fan entre 360 i 550 px d'ample: serveixen per a
+marcs petits i prou. Les fotos de la galeria són a `fotos/web/<album>/` (versió
+web) i `fotos/thumb/<album>/` (miniatura); els originals grans només queden a
+`fotos/uploads/` per als àlbums més nous, la resta viuen fora del repositori.
+També hi ha `photos/` (retrats d'estudi, sèniors, entrada de la pista, mascota),
+entre 700 i 1600 px.
+
+**No enllacis mai un original**: pesen fins a 14 MB. Passa'ls per
+`scripts/build-blog-images.py`, que retalla des de dalt, comprimeix a WebP i en
+treu dues mides (`nom.webp` i `nom@2x.webp`). Aquell script **es nega a generar**
+qualsevol peça que hagi de mostrar-se més gran del que és: si t'avisa, no forcis
+res, fes més petit el marc.
+
+> El que segueix faltant és **una foto moderna en alta de l'Escoleta (4-7 anys)**:
+> l'única que hi ha és `img/escoleta@2x.webp`, de 750 px. Això es resol amb una
+> sessió de fotos, no amb codi.
 
 ---
 
-## 4. Res caducat a la portada
+## 4. Gràfics i dades
+
+**Un gràfic es fa amb HTML i CSS, no amb una imatge.** Una captura d'un gràfic
+es veu borrosa, no es pot seleccionar, no la llegeix un lector de pantalla i el
+text se n'hi fa il·legible al mòbil. Un SVG amb text a dins té el mateix
+problema: si l'SVG escala, la lletra escala amb ell.
+
+L'SVG només val per a **geometria pura i sense text** —una pista, un plànol— i
+amb `vector-effect: non-scaling-stroke` perquè les línies no s'aprimin.
+
+Els components ja fets viuen a `css/barna.css`: `.bars` (barres comparades),
+`.scale` (trams proporcionals: edats, mesos, setmanes), `.ratio` amb `.dots`
+(comptar persones d'una en una), `.gauge` (una escala amb la franja on la cosa
+es trenca), `.split` (un repartiment en dos trams), `table.vs` (comparativa) i
+`.court` (la pista). N'hi ha exemples de tots a `/blog/`.
+
+Tres regles que no es negocien:
+- **Un sol accent, el vermell**, i marca'n *una* cosa. Cinc barres vermelles no
+  destaquen res.
+- **Cap dada distingida només pel color.** Sempre porta el número o l'etiqueta al
+  costat: qui no distingeix el vermell del gris ha de poder llegir el gràfic.
+- **Cap llegenda que no correspongui al dibuix.** Si el vermell marca un llindar,
+  no el facis servir també per dir «per sota del llindar».
+
+---
+
+## 5. Res caducat a la portada
 
 El que ja ha passat no obre la web. Rotació per estació:
 
@@ -158,7 +232,7 @@ Això inclou `og-image.jpg`: es regenera amb
 
 ---
 
-## 5. El mateix nom a tot arreu
+## 6. El mateix nom a tot arreu
 
 Una cosa es diu igual a Instagram i a la web.
 
@@ -174,32 +248,57 @@ Els `<title>` i les descripcions sí que poden portar termes de cerca
 
 ---
 
-## 6. Modes clar i fosc
+## 7. Modes clar i fosc
 
-La pàgina s'adapta al mode del dispositiu, però **qui la llegeix ha de saber en
-quin està i poder-lo canviar**. Posa-hi un control visible amb tres estats:
-*sistema*, *clar* i *fosc*. «Sistema» no és el mateix que «clar»: pot canviar sol
-al vespre, i per això s'ha d'anomenar a part i indicar a què resol ara mateix.
+**Avui no n'hi ha cap.** Cap fitxer del repositori té `prefers-color-scheme` ni
+`data-theme`: tot el lloc és clar, i el fosc només hi surt com a superfície
+puntual (`.foot`, `.franja--ink`). No afegeixis mig mode fosc a una pàgina
+solta: o es fa a `css/barna.css` per a tot el sistema, o no es fa.
+
+Si algun dia s'hi posa, això és el que ha de complir. La pàgina s'adapta al mode
+del dispositiu, però **qui la llegeix ha de saber en quin està i poder-lo
+canviar**: un control visible amb tres estats, *sistema*, *clar* i *fosc*.
+«Sistema» no és el mateix que «clar» —pot canviar sol al vespre—, i per això
+s'ha d'anomenar a part i indicar a què resol ara mateix.
 
 Defineix la paleta clara al `:root` pelat, i redefineix **només els tokens** dins
 de `@media (prefers-color-scheme: dark)` amb el guard
 `:root:not([data-theme="light"])`, i un altre cop a `:root[data-theme="dark"]`.
-Cap color pot tenir la seva única definició dins d'un bloc de mode.
+Cap color pot tenir la seva única definició dins d'un bloc de mode. I el vermell
+s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
+
+> **No ho confonguis amb «el commutador» de la portada**, que sí que existeix i
+> no té res a veure amb el color: tria entre dues maquetacions, *Light* (les
+> franges apilades, per defecte per sota de 900 px) i *Extensa* (la portada
+> llarga, per defecte a escriptori). Totes dues són clares.
 
 ---
 
-## 7. Trampes d'aquest repositori
+## 8. Trampes d'aquest repositori
 
 - **`scripts/build-pages.py` genera** blog, campus, 3x3, premsa i patrocinadors.
-  Edita el generador, no la sortida. **Avís: el generador està desfasat respecte
-  al que hi ha publicat** — executar-lo revertirà un repàs d'SEO i un article del
-  blog reescrits a mà. Comprova el `git diff` sencer abans de desar.
+  Edita el generador, no la sortida. Ara bé, **només la part de `/blog/` està al
+  dia** (agost 2026): aquella es pot regenerar sense por. La resta va endarrerida
+  i executar-lo sencer, avui, esborra coses reals:
+  - a `/patrocinadors/`, l'apartat sencer de posicionament competitiu;
+  - a `/partits/calendaris/`, la instantània SEO i els botons de subscripció `.ics`;
+  - a `/campus/` i `/premsa/`, paraules clau i noms alternatius d'SEO.
+
+  El procediment segur: executa'l, mira el **`git diff` sencer** i restaura amb
+  `git checkout --` tot el que no volguessis tocar. Si el que fas afecta només el
+  blog, restaura la resta sempre.
+- **El peu de pàgina va per dues velocitats.** El generador ja emet els enllaços
+  de Protecció del Menor i Bàsquet femení, però `/campus/`, `/premsa/`, `/3x3/`,
+  `partits/calendaris/` i les fitxes de partners encara tenen a disc el peu antic
+  de 17 enllaços. S'igualarà el dia que es puguin regenerar sense pèrdues.
 - **`.github/scripts/generate-team-pages.py`** genera `partits/equips/`.
 - **`.github/scripts/generate-seo-snapshot.py`** només reescriu entre els
   marcadors `SEO-SNAPSHOT`, `SEO-EVENTS` i `SEO-EQUIPS`. Fora d'aquí és segur.
 - **`partits/data.json`** el refresca un robot diari. Els canvis manuals hi duren poc.
 
-## 8. Trampes de CSS que ja ens han mossegat
+---
+
+## 9. Trampes de CSS que ja ens han mossegat
 
 - `aspect-ratio` **no s'aplica a elements en línia**. Un `<span>` que faci de marc
   d'imatge necessita `display:block`, si no la imatge es desboca. Els fills de
@@ -211,20 +310,38 @@ Cap color pot tenir la seva única definició dins d'un bloc de mode.
   recorda que `textContent` **no** interpreta entitats: allà fes servir `·`.
 - **Amplada del menú**: un text llarg pot partir la navegació en tres línies.
   Els enllaços secundaris porten `.opt` i cauen primer entre 1080 i 1280 px.
-
-## 9. Abans de publicar
-
-1. Els colors surten de la taula del punt 1?
-2. Cap cara tallada i cap foto ampliada?
-3. Res amb data passada, `og-image.jpg` inclosa?
-4. Les etiquetes fan servir el vocabulari del punt 5?
-5. Funciona en clar i en fosc, i es veu en quin mode s'està?
-6. Si has tocat una pàgina generada, has editat el generador?
-7. Sense desbordament horitzontal, i amb focus visible al teclat?
+- **Marges automàtics dins d'una graella**: un fill de `grid` amb
+  `margin-inline: auto` i sense `width` s'encongeix fins al contingut. Si el
+  contingut és una imatge en `position: absolute`, el marc queda a **zero** i no
+  se'n veu res. Posa-hi `width: 100%` al costat del `max-width`.
+- **Especificitat dins de `.prose`**: `.prose p` (0,1,1) guanya a una classe sola
+  (0,1,0). Qualsevol `<p>` d'un component que visqui dins d'un article s'ha
+  d'escriure `.chart p.la-classe`, si no s'hi perden la mida i el color.
 
 ---
 
-## 10. Per què de vegades el web no es desplega
+## 10. Abans de publicar
+
+1. Els colors surten de la taula del punt 1, amb els noms del joc que toca?
+2. La display és la que li pertoca a aquella pàgina —Jost o Anton— i no n'hi ha
+   dues de barrejades?
+3. Cap cara tallada i cap foto ampliada? Res de `--muted` en text de llegir?
+4. Res amb data passada, `og-image.jpg` inclosa?
+5. Les etiquetes fan servir el vocabulari del punt 6?
+6. Si hi ha gràfics: són HTML i CSS, i cap dada es distingeix només pel color?
+7. Si has tocat una pàgina generada, has editat el generador **i** has mirat el
+   `git diff` sencer abans de desar?
+8. Si la pàgina té versió en castellà o en anglès, l'has tocada també?
+9. Sense desbordament horitzontal a 390 px, i amb focus visible al teclat?
+
+Val la pena obrir-ho de debò abans de donar-ho per fet. Amb Chromium ja
+instal·lat, `python3 -m http.server` i Playwright n'hi ha prou per mirar una
+pàgina a 1280 i a 390 px i comprovar d'una tirada que no desborda, que no hi ha
+cap imatge trencada i que cap no es mostra més gran del que és.
+
+---
+
+## 11. Per què de vegades el web no es desplega
 
 Quan es pugen fotos des de `/fotos/admin.html`, cada foto és **un commit**. Una
 tanda de 200 fotos són 200 commits en pocs minuts.

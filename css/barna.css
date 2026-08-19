@@ -248,3 +248,110 @@ a.partner-logo:hover img { filter: none; opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* ==== FOTOGRAFIA DEL BLOG ====
+   Cada marc té una amplada màxima fixa: és la meitat dels píxels de l'original,
+   de manera que cap foto no es mostra mai més gran del que és, ni en pantalla
+   retina. Les mides les calcula scripts/build-blog-images.py; si un original no
+   hi arriba, el script avisa i no genera el fitxer.
+   El retall va des de dalt: el que es perd és el terra, mai un cap. */
+figure.ph { margin: clamp(28px, 4vw, 48px) 0; }
+.ph-set { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.ph-f { display: block; position: relative; overflow: hidden; background: var(--paper-2); }
+figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.ph-32 { aspect-ratio: 3 / 2; }
+.ph-34 { aspect-ratio: 3 / 4; }
+.ph-169 { aspect-ratio: 16 / 9; }
+.ph-w375, .ph-w450, .ph-w540, .ph-w600 { margin-left: auto; margin-right: auto; }
+.ph-w375 { max-width: 375px; }
+.ph-w450 { max-width: 450px; }
+.ph-w540 { max-width: 540px; }
+.ph-w600 { max-width: 600px; }
+/* Apilades en vertical continuen limitades a la seva amplada honesta. */
+.ph-set.duo > .ph-f { width: 100%; max-width: 375px; margin-left: auto; margin-right: auto; }
+@media (min-width: 620px) {
+  .ph-set.duo { grid-template-columns: 1fr 1fr; gap: 30px; }
+  .ph-set.duo > .ph-f { max-width: none; }
+}
+
+/* ==== GRÀFICS DEL BLOG ====
+   Fets amb HTML i CSS, no amb imatges: el text d'un gràfic s'ha de llegir igual
+   de gran en un mòbil que en un portàtil, s'ha de poder seleccionar i l'ha de
+   poder llegir un lector de pantalla. Un sol accent, el vermell de l'escut; la
+   resta són tinta i grisos. Cap dada no es distingeix només pel color: sempre
+   porta el número o l'etiqueta al costat. */
+.chart { margin: clamp(30px, 4.5vw, 54px) 0; padding: clamp(20px, 3vw, 30px); border: 1px solid var(--line); background: var(--paper); }
+.chart p.chart-t { display: block; font-family: var(--display); font-weight: 400; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink); }
+.chart p.chart-s { display: block; margin-top: 9px; font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+.chart-b { margin-top: clamp(20px, 3vw, 28px); }
+.chart figcaption { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; line-height: 1.9; text-transform: uppercase; color: var(--muted); }
+.chart ul, .chart ol { margin: 0; padding: 0; list-style: none; }
+.chart li { font-size: inherit; color: inherit; margin-bottom: 0; }
+
+/* Barres horitzontals · magnitud comparada */
+.bars { display: grid; gap: 16px; }
+.bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 7px 14px; }
+.bar-k { font-family: var(--display); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.bar-v { font-family: var(--display); font-weight: 300; font-size: 16px; letter-spacing: 0.04em; color: var(--ink); text-align: right; }
+.bar-t { grid-column: 1 / -1; height: 10px; background: rgba(10, 10, 10, 0.09); }
+.bar-f { display: block; height: 100%; background: var(--ink-2); }
+.bar-n { grid-column: 1 / -1; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.bar.on .bar-f { background: var(--red); }
+.bar.on .bar-k, .bar.on .bar-v, .bar.on .bar-n { color: var(--red-dark); }
+
+/* Escala · trams proporcionals en una tira (edats, mesos, setmanes) */
+.scale { display: flex; flex-direction: column; gap: 2px; }
+.scale li { position: relative; padding: 13px 13px 15px; background: var(--paper-2); border-top: 3px solid var(--line); }
+.scale li.on { border-top-color: var(--red); }
+.scale-a { display: block; font-family: var(--display); font-weight: 300; font-size: 15px; letter-spacing: 0.04em; color: var(--ink); }
+.scale-n { display: block; margin-top: 7px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.scale li.on .scale-n { color: var(--red-dark); }
+@media (min-width: 680px) {
+  .scale { flex-direction: row; align-items: stretch; }
+  .scale li { flex: var(--y, 1) 1 0; min-width: 0; }
+  .scale-a { font-size: clamp(12px, 1.5vw, 15px); }
+}
+
+/* Ràtio · quantes persones per adult, comptades una a una */
+.ratio { display: grid; gap: clamp(22px, 3vw, 30px); }
+@media (min-width: 620px) { .ratio { grid-template-columns: 1fr 1fr; } }
+.chart p.ratio-h { font-family: var(--display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+.dots { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; max-width: 210px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; background: var(--muted); }
+.dot.ad { width: 18px; height: 18px; background: var(--red); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px rgba(226, 6, 19, 0.35); }
+.chart p.ratio-v { margin-top: 16px; font-family: var(--display); font-weight: 300; font-size: 20px; letter-spacing: 0.04em; color: var(--ink); }
+.chart p.ratio-v em { font-style: normal; color: var(--red); }
+.chart p.ratio-n { margin-top: 6px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+
+/* Repartiment · una sola barra partida en dos trams que sumen el total */
+.split { display: flex; gap: 2px; height: 16px; }
+.split span { display: block; }
+.split .f { background: var(--red); }
+.split .m { background: var(--ink-2); }
+.chart p.split-k { display: flex; justify-content: space-between; gap: 14px; margin-top: 13px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.chart p.split-k b { font-weight: 400; color: var(--red-dark); }
+.chart p.split-k i { font-style: normal; color: var(--ink); }
+
+/* Llindar · una escala amb la franja on la cosa es trenca */
+.gauge { margin-top: 6px; }
+.gauge-t { position: relative; height: 16px; background: rgba(10, 10, 10, 0.09); }
+.gauge-z { position: absolute; top: -7px; bottom: -7px; background: rgba(226, 6, 19, 0.12); border-left: 2px solid var(--red); border-right: 2px solid var(--red); }
+.gauge-x { display: flex; justify-content: space-between; margin-top: 12px; font-family: var(--display); font-size: 9px; letter-spacing: 0.18em; color: var(--muted); }
+.chart p.gauge-n { margin-top: 20px; font-size: 13px; line-height: 1.7; color: var(--ink-2); }
+.chart p.gauge-n b { font-weight: 500; color: var(--ink); }
+
+/* Pista · l'única peça que és geometria pura, i per això va en SVG */
+.court { display: block; width: 100%; height: auto; margin-top: 6px; }
+.court-out { fill: none; stroke: var(--ink); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.court-in { fill: none; stroke: var(--muted); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.court-zone { fill: rgba(226, 6, 19, 0.10); stroke: var(--red); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+.court-hoop { fill: none; stroke: var(--red); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+
+/* Comparativa · taula de dues columnes enfrontades */
+table.vs { width: 100%; border-collapse: collapse; margin-top: 6px; }
+table.vs th, table.vs td { padding: 11px 8px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.vs thead th { font-family: var(--display); font-weight: 400; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--ink); }
+table.vs thead th.a { color: var(--red-dark); }
+table.vs tbody th { font-family: var(--display); font-weight: 400; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+table.vs td { font-size: 13.5px; color: var(--ink-2); }
+table.vs td.a { color: var(--red-dark); }
