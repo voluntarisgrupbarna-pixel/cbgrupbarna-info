@@ -30,6 +30,32 @@ de donar d'alta el GBP, val la pena que l'Ana demani la correcció d'aquestes
 dues fitxes de l'Ajuntament — són backlinks institucionals valuosos, no s'han
 d'esborrar, s'han d'actualitzar.
 
+**Canal oficial verificat**: les dues fitxes surten del *Fitxer General
+d'Entitats Ciutadanes* de l'Ajuntament. Hi ha un tràmit exprés per demanar la
+modificació de dades (nom, adreça, contacte) d'una entitat ja inscrita:
+
+> **Modificació de dades del Fitxer General d'Entitats Ciutadanes**
+> https://seuelectronica.ajuntament.barcelona.cat/oficinavirtual/es/tramit/20230001592
+
+Normalment cal certificat digital / idCAT / Cl@ve de qui sigui el/la
+representant legal inscrit/a del club, i el número d'inscripció al Fitxer (si
+no es té a mà, el propi tràmit permet cercar l'entitat pel nom). **No he pogut
+verificar aquest requisit de certificat amb el propi formulari** (el
+fetch a la pàgina va tornar un error), així que cal confirmar-ho en obrir el
+tràmit.
+
+**Alternativa més ràpida** si el club ja té contacte habitual amb el Districte
+de Sant Martí (l'organigrama del club en parla): demanar-los directament per
+correu la correcció, adjuntant les tres dades bones. Text llest per enviar:
+
+> Bon dia, us escrivim del CB Grup Barna (Club Bàsquet Grup Barna, antic
+> Centre Parroquial de Sant Martí del Clot) per demanar l'actualització de les
+> nostres dades a la fitxa de la Guia BCN i al portal de Barcelona.cat/metropolis,
+> que estan desactualitzades. Dades correctes: adreça Carrer de la Llacuna,
+> 172, 08018 Barcelona (la fitxa diu 170); telèfon +34 698 425 153 (la fitxa diu
+> 688 26 52 30); correu info@cbgrupbarna.com (la fitxa diu
+> coordinaciocbgrupbarna@gmail.com). Moltes gràcies.
+
 ### Paquet de contingut, llest per enganxar
 
 ```
