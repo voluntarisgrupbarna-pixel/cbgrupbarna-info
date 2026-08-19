@@ -50,13 +50,38 @@ def wa(text):
 
 # ─────────────────────────────────────────────────────────────── esquelet ────
 
-def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None, lang="ca"):
-    """`alternates`: llista de (codi d'idioma, adreça) per a les traduccions."""
-    desc = clamp_desc(desc)
+def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None, lang="ca",
+         meta_desc=None, lang_switch_auto=False, show_lang_switch=True):
+    """`alternates`: llista de (codi d'idioma, adreça) per a les traduccions.
+    `meta_desc`: descripció curta per al <meta name=description>; per defecte, `desc` retallada."""
+    og_desc = desc
+    desc = meta_desc or clamp_desc(desc)
     ld = json.dumps(extra_ld, ensure_ascii=False, indent=2) if extra_ld else None
     kw = f'\n<meta name="keywords" content="{keywords}">' if keywords else ''
-    alt = ''.join(f'\n<link rel="alternate" hreflang="{lang}" href="{href}">'
-                  for lang, href in (alternates or []))
+    alt = ''.join(f'\n<link rel="alternate" hreflang="{code}" href="{href}">'
+                  for code, href in (alternates or []))
+    locale = {"ca": "ca_ES", "es": "es_ES", "en": "en_US"}.get(lang, "ca_ES")
+    LANG_NAMES = {"ca": "CA", "es": "ES", "en": "EN"}
+    switch_langs = [(c, h) for c, h in (alternates or []) if c in LANG_NAMES]
+    if switch_langs and show_lang_switch:
+        ACT = ' class="active"'
+        links = '<span class="sep">·</span>'.join(
+            f'<a href="{h.replace(SITE, "")}" hreflang="{c}"{ACT if c == lang else ""}>{LANG_NAMES[c]}</a>'
+            for c, h in switch_langs)
+        lang_switch = ('\n    <div class="lang-switch" aria-label="Canvia d\'idioma · Cambiar idioma · Change language">\n      '
+                       + links + '\n    </div>')
+        lang_style = '''
+<style>
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+.lang-switch a.active { opacity: 1; font-weight: 600; }
+.lang-switch a:hover { opacity: 1; }
+.lang-switch .sep { opacity: 0.25; }{EXTRA}
+</style>'''.replace("{EXTRA}", "\n.head-in .lang-switch { margin-left: auto; }" if lang_switch_auto else "")
+    else:
+        lang_switch = ''
+        lang_style = ''
+
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
@@ -69,9 +94,9 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
-<meta property="og:locale" content="{lang}_{lang.upper()}">
+<meta property="og:locale" content="{locale}">
 <meta property="og:title" content="{title}">
-<meta property="og:description" content="{desc}">
+<meta property="og:description" content="{og_desc}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{image}">
 <meta name="twitter:card" content="summary_large_image">
@@ -81,9 +106,10 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/barna.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/barna.css">{lang_style}
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
+<script src="/js/galetes.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -94,14 +120,17 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
-      <a href="/escoleta/">Escoleta</a>
-      <a href="/campus/" class="opt">Campus</a>
-      <a href="/3x3/" class="opt">3x3</a>
-      <a href="/blog/" class="opt">Blog</a>
-      <a href="/premsa/" class="opt">Premsa</a>
+      <a href="/club/">Club</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
+      <a href="/partits/">Dies de partit</a>
       <a href="/patrocinadors/" class="opt">Patrocinadors</a>
-      <a href="/#info">Informació</a>
-    </nav>
+      <a href="/campus/" class="opt">Campus</a>
+      <a href="/magics/" class="opt">Màgics</a>
+      <a href="/3x3/" class="opt">3x3</a>
+      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/fotos/" class="opt">Galeria</a>
+      <a href="/premsa/">Premsa</a>
+    </nav>{lang_switch}
   </div>
 </header>
 <main id="main">"""
@@ -122,8 +151,13 @@ FOOT = f"""</main>
         <h3>El Barna</h3>
         <a href="/escoleta/">Escola de bàsquet</a>
         <a href="/campus/">Campus de bàsquet</a>
+        <a href="/magics/">Barna Màgics</a>
         <a href="/3x3/">Torneig 3x3</a>
+        <a href="/cistella-petita/">Cistella Petita</a>
         <a href="/patrocinadors/">Patrocinadors i partners</a>
+        <a href="/instal-lacions/">Instal·lacions</a>
+        <a href="/organigrama/">Organigrama</a>
+        <a href="/posicionament/">Posicionament del club</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
         <a href="/proteccio-menor/">Protecció del Menor</a>
         <a href="/basquet-femeni/">Bàsquet femení</a>
@@ -140,9 +174,16 @@ FOOT = f"""</main>
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
+        <a href="/faq/">Preguntes freqüents</a>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/politica-de-privacitat/">Política de privacitat</a>
+        <a href="/avis-legal/">Avís legal</a>
+        <a href="/politica-de-privacitat/#galetes">Galetes</a>
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>
@@ -157,7 +198,6 @@ FOOT = f"""</main>
     </div>
   </div>
 </footer>
-<script src="/js/descarrega.js" defer></script>
 </body>
 </html>
 """
@@ -276,7 +316,7 @@ def build_campus():
     del joc i grups fets per edat i nivell.</p>
     <p>El club el treballa amb <strong>Time Chamber</strong>, que aporta la metodologia de treball
     individual. La combinació és la que defineix el campus: el volum de repeticions d'una escola de
-    tecnificació amb l'ambient d'equip d'un club de barri amb seixanta anys d'història.</p>
+    tecnificació amb l'ambient d'equip d'un club de barri amb seixanta-un anys d'història.</p>
 
     <h2>Com s'organitza</h2>
     <p>Cada setmana té un focus propi, de manera que qui ve més d'una setmana no repeteix continguts.
@@ -301,7 +341,7 @@ def build_campus():
       <a class="franja" href="/escoleta/" data-cta="campus-franja-escoleta">
         <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
         <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Si encara no ha començat i té entre 4 i 7 anys, el camí és aquest.</span></span>
-        <span class="franja-go"><em>4 a 7 anys</em><i></i></span>
+        <span class="franja-go"><em>4 a 8 anys</em><i></i></span>
       </a>
       <a class="franja franja--red" href="/partits/" data-cta="campus-franja-dies-partit">
         <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
@@ -942,7 +982,7 @@ def build_3x3():
       <a class="franja" href="/escoleta/" data-cta="3x3-franja-escoleta">
         <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
         <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Si encara no ha començat i té entre 4 i 7 anys, el camí és aquest.</span></span>
-        <span class="franja-go"><em>4 a 7 anys</em><i></i></span>
+        <span class="franja-go"><em>4 a 8 anys</em><i></i></span>
       </a>
       <a class="franja franja--red" href="/partits/" data-cta="3x3-franja-dies-partit">
         <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
@@ -1025,11 +1065,11 @@ FIG_FORMACIO_JUNIOR = fig(
 FIG_EDAT_DUO = fig_duo(
     ph("edat-escoleta", "Nena de l'Escoleta amb la pilota, al costat de la mascota del club", "34"),
     ph("edat-gran", "Jugadora amb la pilota durant un entrenament", "34"),
-    "Els dos extrems de la mateixa escala: l'Escoleta de 4 a 7 anys i la competició federada")
+    "Els dos extrems de la mateixa escala: l'Escoleta de 4 a 8 anys i la competició federada")
 
 FIG_EDAT_ESCOLA = fig(
     ph("edat-escola", "Foto d'equip de l'Escola de bàsquet del CB Grup Barna", "32", 600),
-    "L'Escola del Barna · de 4 a 7 anys, equips mixtos i tres grups per edat")
+    "L'Escola del Barna · de 4 a 8 anys, equips mixtos i tres grups per edat")
 
 FIG_TRIAR_CLUB = fig(
     ph("triar-club", "Jugadores, famílies i tècnics del CB Grup Barna en un acte del club", "32", 540),
@@ -1232,6 +1272,10 @@ CHART_PARITAT = ('\n<figure class="chart">\n'
 ARTICLES = [
  {
   "slug": "club-formacio-i-competitiu-catalunya",
+  "meta_desc": 'Quins clubs de bàsquet catalans tenen equip a totes les edats i arriben a sènior amb els dos gèneres, segons la fitxa oficial de la FCBQ.',
+  "hero_alt": "Jugadores del CB Grup Barna entrant a la pista entre aplaudiments, presentació d'equips 2025-2026",
+  "alternates": [('ca', 'https://cbgrupbarna.info/blog/club-formacio-i-competitiu-catalunya/'), ('es', 'https://cbgrupbarna.info/es/blog/club-formacion-y-competitivo-cataluna/'), ('en', 'https://cbgrupbarna.info/en/blog/formation-and-competitive-club-catalonia/'), ('x-default', 'https://cbgrupbarna.info/blog/club-formacio-i-competitiu-catalunya/')],
+  "related": [('/blog/cultura-esforc-club-progres/', 'Formació', "Del sacrifici al progrés: la cultura de l'esforç al Barna"), ('/blog/basquet-base-sant-marti-clot/', 'El barri', 'Bàsquet base al Clot i a Sant Martí: com funciona un club de barri'), ('/blog/com-triar-escola-basquet-barcelona/', 'Guia per a famílies', 'Escola, club o acadèmia de bàsquet a Barcelona?'), ('/blog/a-quina-edat-comencar-basquet/', 'Guia per a famílies', 'A quina edat pot començar un nen o nena a jugar a bàsquet?')],
   "date": "2026-08-13",
   "bc_name": "El Barna, entre els grans del bàsquet català",
   "alternates": [
@@ -1247,7 +1291,7 @@ ARTICLES = [
   "tag": "Anàlisi del club",
   "title": "El Barna, entre els grans del bàsquet català: així ho diu la FCBQ",
   "crumb": "El Barna, entre els grans del bàsquet cat…",
-  "seo_title": "Barna: club de formació i competitiu, segons la FCBQ | CB Grup Barna",
+  "seo_title": "Club de formació i competitiu, segons la FCBQ | CB Grup Barna",
   "desc": ("Barça, Joventut, Manresa, Girona… la fitxa oficial de cada club a basquetcatala.cat diu "
            "qui té equip a totes les edats i qui arriba a sènior amb els dos gèneres. Això és on "
            "queda el CB Grup Barna."),
@@ -1347,10 +1391,13 @@ passen pel mateix club, sense trencar mai el fil.</p>
  },
  {
   "slug": "a-quina-edat-comencar-basquet",
+  "meta_desc": 'Als 4 anys ja es pot començar a jugar a bàsquet. Guia per edats —escoleta, premini, mini i categories federades— per a famílies de Barcelona.',
+  "hero_alt": "Nen petit de l'Escola de Bàsquet del CB Grup Barna amb la pilota, a la pista",
+  "alternates": [('ca', 'https://cbgrupbarna.info/blog/a-quina-edat-comencar-basquet/'), ('es', 'https://cbgrupbarna.info/es/blog/a-quina-edat-comencar-basquet/'), ('en', 'https://cbgrupbarna.info/en/blog/a-quina-edat-comencar-basquet/'), ('x-default', 'https://cbgrupbarna.info/blog/a-quina-edat-comencar-basquet/')],
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "A quina edat pot començar un nen o nena a jugar a bàsquet?",
-  "seo_title": "A quina edat començar a jugar a bàsquet? Guia per edats | CB Grup Barna",
+  "seo_title": "A quina edat començar a jugar a bàsquet? | CB Grup Barna",
   "desc": ("Als 4 anys ja es pot començar a jugar a bàsquet en una escola d'iniciació. Guia per edats "
            "—escoleta, premini, mini i categories federades— per a famílies de Barcelona que no saben "
            "quan apuntar el seu fill o filla."),
@@ -1367,7 +1414,7 @@ l'esport que veiem per televisió. A aquesta edat el que es treballa és <strong
 córrer i parar, saltar, llançar, rebre, coordinar-se amb algú altre. La pilota és l'excusa, i és una
 excusa boníssima, perquè el bot obliga a controlar el cos i la mirada alhora.</p>
 <p>Per això els clubs no els posen a competir. Els posen a jugar. A
-<a href="/escoleta/">l'Escoleta del CB Grup Barna</a>, per exemple, els grups són de 4 a 7 anys,
+<a href="/escoleta/">l'Escoleta del CB Grup Barna</a>, per exemple, els grups són de 4 a 8 anys,
 mixtos i separats per edat, i el calendari no són partits de lliga sinó trobades amb altres clubs.</p>
 """ + FIG_EDAT_DUO + """
 <h2>Les edats, categoria a categoria</h2>
@@ -1375,7 +1422,7 @@ mixtos i separats per edat, i el calendari no són partits de lliga sinó trobad
 l'any de naixement, no el curs escolar.</p>
 """ + CHART_EDATS + """
 <ul>
-  <li><strong>4 a 7 anys · Escoleta o escola de bàsquet</strong> — iniciació. Sense competició
+  <li><strong>4 a 8 anys · Escoleta o escola de bàsquet</strong> — iniciació. Sense competició
   federada. Equips mixtos.</li>
   <li><strong>8 i 9 anys · Premini</strong> — primera competició, encara molt formativa.</li>
   <li><strong>10 i 11 anys · Mini</strong> — minibàsquet: cistella més baixa i pilota més petita.</li>
@@ -1416,12 +1463,15 @@ grup que li tocaria i després es decideix. És l'única manera honesta de saber
     "No. Un jugador o jugadora que comença als 12 anys s'incorpora a la categoria que li toca per "
     "any de naixement i es posa al dia en una temporada. Als clubs de base l'entrada no depèn del nivell."),
    ("Nens i nenes entrenen junts?",
-    "A les edats d'iniciació (4 a 7 anys) els equips solen ser mixtos. A partir de la competició "
+    "A les edats d'iniciació (4 a 8 anys) els equips solen ser mixtos. A partir de la competició "
     "federada es divideixen en categories masculines i femenines."),
   ],
  },
  {
   "slug": "com-triar-escola-basquet-barcelona",
+  "meta_desc": 'Acadèmia, escola o club de bàsquet a Barcelona? Set criteris reals per triar: entrenadors, grups, quota, competició i continuïtat. Guia per a famílies.',
+  "hero_alt": "Julio Torralba, fundador del CB Grup Barna, amb dues jugadores de l'escola",
+  "alternates": [('ca', 'https://cbgrupbarna.info/blog/com-triar-escola-basquet-barcelona/'), ('es', 'https://cbgrupbarna.info/es/blog/com-triar-escola-basquet-barcelona/'), ('en', 'https://cbgrupbarna.info/en/blog/com-triar-escola-basquet-barcelona/'), ('x-default', 'https://cbgrupbarna.info/blog/com-triar-escola-basquet-barcelona/')],
   "date": "2026-08-05",
   "modified": "2026-08-12",
   "tag": "Guia per a famílies",
@@ -1445,7 +1495,7 @@ sense competició federada pròpia. Una <strong>escola de bàsquet</strong> és 
 nens i nenes de 4 a 8 anys. Un <strong>club</strong> és el que hi ha darrere: equips federats a totes
 les categories, entrenadors titulats i continuïtat de dècades. El CB Grup Barna és les tres coses
 alhora: funciona com una acadèmia de bàsquet a Barcelona (formació i tecnificació des de ben petits)
-i és, alhora, un club amb 34 equips federats i seixanta anys al mateix barri.</p>
+i és, alhora, un club amb 34 equips federats i seixanta-un anys al mateix barri.</p>
 """ + FIG_TRIAR_CLUB + """
 <h2>1. Quants entrenadors hi ha per grup</h2>
 <p>És el primer que s'ha de preguntar i el que menys es pregunta. Un grup de vint criatures de cinc
@@ -1482,7 +1532,7 @@ posen pegues, ja teniu la resposta.</p>
 
 <h2>I l'Escoleta del Barna?</h2>
 <p>Al <a href="/escoleta/">CB Grup Barna</a>, al barri del Clot, l'escola de bàsquet és per a nens i
-nenes de <strong>4 a 7 anys</strong>, amb equips mixtos, <strong>tres grups per edat</strong> i
+nenes de <strong>4 a 8 anys</strong>, amb equips mixtos, <strong>tres grups per edat</strong> i
 trobades amb altres clubs de Barcelona i de la província. En complir vuit anys es passa als equips
 federats del mateix club, que en té més de trenta-quatre. La porta en
 <strong>Julio Torralba</strong> (646 205 526) i el primer entrenament és de prova, sense compromís.</p>
@@ -1504,24 +1554,27 @@ continuïtat del lloc.</p>
     "desplaçaments— perquè la comparació entre clubs sigui real."),
    ("Quina escola de bàsquet hi ha al Clot o a Sant Martí?",
     "El CB Grup Barna té la seva Escoleta al barri del Clot, Districte de Sant Martí, per a nens i "
-    "nenes de 4 a 7 anys, amb continuïtat als equips federats del club a partir dels 8 anys."),
+    "nenes de 4 a 8 anys, amb continuïtat als equips federats del club a partir dels 8 anys."),
    ("Es pot provar abans d'apuntar-s'hi?",
     "Sí, i és molt recomanable. Al CB Grup Barna el primer entrenament és de prova i sense "
     "compromís; es reserva dia amb en Julio Torralba al 646 205 526."),
    ("Una acadèmia de bàsquet és millor que una escola o club de barri?",
     "No necessàriament: depèn de què es busqui. Una acadèmia de bàsquet sol centrar-se en "
     "tecnificació individual de pagament. Un club com el CB Grup Barna combina aquesta formació "
-    "tècnica amb equips federats a totes les categories, línia femenina real i seixanta anys de "
+    "tècnica amb equips federats a totes les categories, línia femenina real i seixanta-un anys de "
     "continuïtat al mateix barri — la prova és que d'aquesta pista han sortit jugadors que avui són "
     "a l'ACB, a la Lliga Femenina Endesa i al FC Barcelona."),
   ],
  },
  {
   "slug": "campus-basquet-barcelona-guia",
+  "meta_desc": 'Guia per triar campus de bàsquet a Barcelona: diferència entre campus de lleure i de tecnificació, ràtios, grups per edat, horaris i preu.',
+  "hero_alt": 'Entrenador explicant un exercici a un grup de jugadors asseguts a la pista, al campus del CB Grup Barna',
+  "alternates": [('ca', 'https://cbgrupbarna.info/blog/campus-basquet-barcelona-guia/'), ('es', 'https://cbgrupbarna.info/es/blog/campus-basquet-barcelona-guia/'), ('en', 'https://cbgrupbarna.info/en/blog/campus-basquet-barcelona-guia/'), ('x-default', 'https://cbgrupbarna.info/blog/campus-basquet-barcelona-guia/')],
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "Campus de bàsquet a Barcelona: què mirar abans d'apuntar-hi ningú",
-  "seo_title": "Campus de bàsquet a Barcelona · Guia per triar-ne un | CB Grup Barna",
+  "seo_title": "Com triar un campus de bàsquet a Barcelona | CB Grup Barna",
   "desc": ("Guia per triar campus de bàsquet a Barcelona: diferència entre campus de lleure i de "
            "tecnificació, ràtios, grups per edat, horaris i preu. Amb la informació del campus del "
            "CB Grup Barna al Clot."),
@@ -1592,6 +1645,9 @@ Barna. Les darreres edicions s'han omplert abans de començar, així que si us i
  },
  {
   "slug": "que-es-basquet-3x3",
+  "meta_desc": 'El 3x3 és bàsquet a mitja pista amb tres jugadors per equip i és esport olímpic des de Tòquio.',
+  "hero_alt": 'Partit de bàsquet 3x3 a pista exterior, jugadora rematant a cistella',
+  "alternates": [('ca', 'https://cbgrupbarna.info/blog/que-es-basquet-3x3/'), ('es', 'https://cbgrupbarna.info/es/blog/que-es-basquet-3x3/'), ('en', 'https://cbgrupbarna.info/en/blog/que-es-basquet-3x3/'), ('x-default', 'https://cbgrupbarna.info/blog/que-es-basquet-3x3/')],
   "date": "2026-08-05",
   "tag": "Bàsquet",
   "title": "Què és el bàsquet 3x3 i on jugar-hi a Barcelona",
@@ -1662,12 +1718,15 @@ s'obren pot <a href="/#info">deixar el contacte</a> o escriure al WhatsApp del c
  },
  {
   "slug": "basquet-base-sant-marti-clot",
+  "meta_desc": "Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa federativa, calendari i què significa jugar en un club de barri amb seixanta-un anys d'història.",
+  "hero_alt": 'Jugador del CB Grup Barna, club de bàsquet base del barri del Clot',
+  "alternates": [('ca', 'https://cbgrupbarna.info/blog/basquet-base-sant-marti-clot/'), ('es', 'https://cbgrupbarna.info/es/blog/basquet-base-sant-marti-clot/'), ('en', 'https://cbgrupbarna.info/en/blog/basquet-base-sant-marti-clot/'), ('x-default', 'https://cbgrupbarna.info/blog/basquet-base-sant-marti-clot/')],
   "date": "2026-08-05",
   "tag": "El barri",
   "title": "Bàsquet base al Clot i a Sant Martí: com funciona un club de barri",
   "seo_title": "Bàsquet base al Clot i Sant Martí, Barcelona | CB Grup Barna",
   "desc": ("Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa "
-           "federativa, calendari i què significa jugar en un club de barri amb seixanta anys "
+           "federativa, calendari i què significa jugar en un club de barri amb seixanta-un anys "
            "d'història."),
   "kw": "bàsquet base Barcelona, bàsquet Sant Martí, club bàsquet Clot, baloncesto base Barcelona, "
         "club bàsquet barri Barcelona",
@@ -1700,7 +1759,7 @@ Seixanta anys al mateix barri vol dir una cosa molt concreta: hi ha entrenadors 
 petits i pares que hi van jugar abans que els seus fills. Això no surt en cap classificació, però es
 nota en com funciona el vestidor.</p>
 <p>Avui són més de <strong>trenta-quatre equips federats</strong> i unes <strong>450 jugadores i
-jugadors</strong>, des de <a href="/escoleta/">l'Escoleta de 4 a 7 anys</a> fins als sèniors. El club
+jugadors</strong>, des de <a href="/escoleta/">l'Escoleta de 4 a 8 anys</a> fins als sèniors. El club
 manté <strong>paritat real</strong>: el mateix nombre de jugadores i jugadors, i el mateix pressupost
 per a la línia femenina i la masculina. El model femení està documentat al dossier del
 <a href="/premidonaesport/">Premi Dona i Esport</a>.</p>
@@ -1729,7 +1788,7 @@ equip federat. En tots dos casos, el primer pas és el mateix: anar a fer un
     "Martí de Barcelona, amb més de 34 equips federats i unes 450 jugadores i jugadors."),
    ("Cal fitxa federativa per jugar a bàsquet base?",
     "Sí, per a la competició federada. La tramita el club davant la Federació Catalana de Basquetbol "
-    "i inclou l'assegurança esportiva. A l'escola d'iniciació (4 a 7 anys) no cal."),
+    "i inclou l'assegurança esportiva. A l'escola d'iniciació (4 a 8 anys) no cal."),
    ("Quan comença i acaba la temporada de bàsquet base?",
     "De setembre a juny. Es juga cada cap de setmana, alternant camp propi i camp contrari, dins de "
     "Barcelona i de la província."),
@@ -1766,8 +1825,18 @@ def build_article(a):
         BREADCRUMB([("CB Grup Barna", "/"), ("Blog", "/blog/"),
                     (a.get("bc_name", a["title"]), "/blog/" + a["slug"] + "/")]),
     ]}
-    others = [x for x in ARTICLES if x["slug"] != a["slug"]][:3]
-    rel = ''.join(blog_card(o, with_text=False) for o in others)
+    hero = ''
+    if a.get("hero_alt"):
+        hero = (f'\n    <div class="phead-media"><img src="/img/blog/{a["slug"]}-hero.jpg" '
+                f'alt="{a["hero_alt"]}" loading="lazy" decoding="async" width="1200" height="675"></div>')
+    if a.get("related"):
+        rel = ''.join(
+            f'<a class="card" href="{href}"><div class="card-body"><span class="card-tag">{tag}</span>'
+            f'<h3>{title}</h3><span class="cta">Llegir</span></div></a>'
+            for href, tag, title in a["related"])
+    else:
+        others = [x for x in ARTICLES if x["slug"] != a["slug"]][:3]
+        rel = ''.join(blog_card(o, with_text=False) for o in others)
     trans = a.get("trans_note", "")
     title_closer, text_closer = a.get(
         "closer",
@@ -1781,7 +1850,7 @@ def build_article(a):
     <p class="eyebrow red">{a["tag"]}</p>
     <h1>{a["title"]}</h1>
     <p class="lede">{a["lede"]}</p>
-    <p class="eyebrow" style="margin-top:20px">CB Grup Barna · <time datetime="{a["date"]}">{a["date"]}</time></p>{trans}
+    <p class="eyebrow" style="margin-top:20px">CB Grup Barna · <time datetime="{a["date"]}">{a["date"]}</time></p>{trans}{hero}
   </div>
   <article class="narrow prose">
     {a["body"]}
@@ -1802,7 +1871,7 @@ def build_article(a):
 """
     return write(f"blog/{a['slug']}/index.html",
                  head(a["seo_title"], a["desc"], url, SITE + "/og-image.jpg", ld, a["kw"],
-                      a.get("alternates")) + body + FOOT)
+                      a.get("alternates"), meta_desc=a.get("meta_desc")) + body + FOOT)
 
 
 def build_blog_index():
@@ -2367,6 +2436,14 @@ def build_calendaris():
         BREADCRUMB([("CB Grup Barna", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", "/partits/calendaris/")]),
     ]}
 
+    seo_snapshot = ""
+    try:
+        _old = open("partits/calendaris/index.html").read()
+        _m = re.search(r'<noscript><!-- SEO-CALENDARIS:START -->.*?<!-- SEO-CALENDARIS:END --></noscript>', _old, re.S)
+        if _m:
+            seo_snapshot = _m.group(0)
+    except OSError:
+        pass
     body = f"""
 {crumbs([("Inici", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", None)])}
 <div class="wrap">
@@ -2378,13 +2455,14 @@ def build_calendaris():
     sols en el moment que la federació en publiqui el calendari.</p>
   </div>
 
-  <div id="cal-groups"></div>
+  <div id="cal-groups">{seo_snapshot}</div>
+  <noscript><style>#cal-loading{{display:none}}</style></noscript>
   <p id="cal-loading" class="narrow lede">Carregant els calendaris…</p>
   <p id="cal-error" class="narrow lede" style="display:none">No s'han pogut carregar els calendaris ara mateix.
     Torna-ho a provar més tard o consulta'ls directament a <a href="/partits/">l'app de partits</a>.</p>
 
   <div class="narrow">
-    <h2 style="font-family:var(--display);font-size:clamp(16px,2.1vw,22px);margin:0 0 18px">Preguntes freqüents</h2>
+    <h2 id="faq" style="font-family:var(--display);font-size:clamp(16px,2.1vw,22px);margin:0 0 18px">Preguntes freqüents</h2>
     {faq_html}
     <div style="margin-top:clamp(34px,5vw,60px)">
     {closer("Vols el calendari en directe?",
@@ -2426,9 +2504,12 @@ def build_calendaris():
       + '<span class="cal-card-tag">CB Grup Barna</span><h3>' + esc(nom) + '</h3>'
       + '<span class="cal-card-meta">' + info.jornades + ' jornades</span>'
       + '<div class="cal-notice" data-notice="' + equipId + '">⚠ La FCBQ ha canviat l\\'hora o la pista d\\'algun '
-      + 'partit d\\'aquest equip després de fer aquesta fitxa. <a href="/partits/#equips">Comprova-ho a l\\'app</a>.</div>'
+      + 'partit d\\'aquest equip després de fer aquesta fitxa. <a href="/partits/#calendari">Comprova-ho al calendari</a>.</div>'
       + '<a href="' + fitxer + '" target="_blank" rel="noopener" class="btn ghost" data-cta="cal-dl-' + equipId
-      + '">' + etiqueta + '</a></div></div>';
+      + '">' + etiqueta + '</a> '
+      + '<a href="webcal://cbgrupbarna.info/partits/calendaris/ics/' + equipId + '.ics" class="btn ghost" '
+      + 'title="S\\'obre a l\\'app de calendari i s\\'actualitza sola cada dia" data-cta="cal-ics-' + equipId
+      + '">🔔 Subscriu-te</a></div></div>';
   }}
 
   Promise.all([
@@ -2477,25 +2558,25 @@ def build_calendaris():
 }})();
 </script>
 """
+    alternates = [("ca", url), ("es", SITE + "/es/partits/calendaris/"),
+                  ("en", SITE + "/en/partits/calendaris/"), ("x-default", url)]
     return write("partits/calendaris/index.html",
                  head(title, desc, url, SITE + "/partits/calendaris/img/scf.webp", ld,
-                      "calendari CB Grup Barna, calendari bàsquet base, descarregar calendari equip") + body + FOOT)
+                      "calendari CB Grup Barna, calendari bàsquet base, descarregar calendari equip",
+                      alternates=alternates, lang_switch_auto=True) + body + FOOT)
 
+
+# Pàgines que el generador JA NO escriu perquè s'han redissenyat a mà i aquí
+# només hi queda una versió antiga: regenerar-les esborraria contingut real
+# (hreflang, JSON-LD i estils que el generador encara no sap posar).
+# El dia que es tornin a portar al generador, treure-les d'aquesta llista.
+MANTINGUDES_A_MA = ["campus/", "patrocinadors/ (índex i fitxes de partner)",
+                     "premsa/ (índex, articles i recull d'Instagram)", "3x3/", "blog/ (índex)"]
 
 if __name__ == "__main__":
     print("Generant pàgines:")
-    print(build_campus())
-    print(build_patrocinadors())
-    partner_pages = [p for p in PARTNERS if p[0]]
-    for img, nom, ig in partner_pages:
-        print(build_partner_landing(img, nom, ig))
-    print(build_3x3())
-    print(build_blog_index())
     for a in ARTICLES:
         print(build_article(a))
-    print(build_premsa_index())
-    print(build_premsa_instagram())
-    for a in PRESS:
-        print(build_press_article(a))
     print(build_calendaris())
-    print(f"\n{len(ARTICLES) + len(PRESS) + len(partner_pages) + 6} pàgines generades.")
+    print(f"\n{len(ARTICLES) + 1} pàgines generades.")
+    print("NO generades (mantingudes a mà, vegeu MANTINGUDES_A_MA):", ", ".join(MANTINGUDES_A_MA))
