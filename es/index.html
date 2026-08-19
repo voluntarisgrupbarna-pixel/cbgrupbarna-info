@@ -551,8 +551,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 @keyframes leadZoom { from { transform: scale(1.07); } to { transform: scale(1); } }
 .lead-media .tagline { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
 .lead-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 6vw, 88px) clamp(22px, 5vw, 76px); }
-.lead-body h1 { font-size: clamp(25px, 3.4vw, 44px); margin: 18px 0 0; }
-.lead-body h1 small { display: block; margin-top: 14px; font-size: 0.44em; letter-spacing: 0.32em; color: var(--muted); font-weight: 300; }
+.lead-body h1, .lead-body h2 { font-size: clamp(30px, 4.6vw, 62px); line-height: 0.98; margin: 18px 0 0; }
+.lead-body h1 em, .lead-body h2 em { font-style: normal; color: var(--red); }
+.lead-body h1 small, .lead-body h2 small { display: block; margin-top: 16px; font-size: clamp(11px, 1.2vw, 13px); letter-spacing: 0.3em; color: var(--muted); font-weight: 300; font-family: var(--body); }
 .lead-body .lede { margin-top: 24px; }
 .lead-body .btn-row { margin-top: 30px; }
 .lead-url { display: inline-flex; align-items: center; min-height: 44px; gap: 8px; margin-top: 22px; align-self: flex-start; font-family: var(--display); font-size: 11px; letter-spacing: 0.16em; color: var(--red); border-bottom: 1px solid var(--red); padding-bottom: 6px; transition: color 0.3s, border-color 0.3s; }
@@ -564,17 +565,20 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 
 /* ==== CALENDARI ==== */
 .cal { border-top: 1px solid var(--ink); }
-.cal-row { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 30px); padding: 17px 0; border-bottom: 1px solid var(--line); }
-.cal-date { width: 68px; flex-shrink: 0; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
-.cal-date b { display: block; font-size: 25px; font-weight: 200; letter-spacing: 0.02em; color: var(--ink); line-height: 1.1; }
-.cal-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.cal-team { font-family: var(--display); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
-.cal-meta { font-size: 12px; color: var(--muted); }
-.cal-when { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-align: right; white-space: nowrap; }
-.cal-cond { width: 66px; flex-shrink: 0; text-align: right; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
-.cal-empty { padding: 34px 4px; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); text-align: center; }
-.cal-empty a { border-bottom: 1px solid var(--red); }
-@media (max-width: 640px) { .cal-when { display: none; } .cal-cond { width: auto; } }
+.mc-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.16); }
+@media (min-width: 780px) { .mc-grid { grid-template-columns: repeat(2, 1fr); } }
+.mc { flex: 1; display: flex; flex-direction: column; gap: 0; background: rgba(0,0,0,0.4); padding: 14px 16px; min-height: 140px; }
+.mc-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.mc-team { font-family: var(--body); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #FF3B41; }
+.mc-cond { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.55); white-space: nowrap; }
+.mc-vs { display: flex; flex-direction: column; gap: 5px; }
+.mc-vs b { font-family: var(--display); font-weight: 400; font-size: clamp(24px, 3vw, 34px); line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; }
+.mc-vs b.riv { font-size: clamp(16px, 2vw, 22px); color: rgba(255,255,255,0.78); }
+.mc-vs em { font-style: normal; font-family: var(--body); font-size: 9px; letter-spacing: 0.34em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.mc-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: auto; border-top: 1px solid rgba(255,255,255,0.14); padding-top: 13px; font-family: var(--body); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.mc-meta b { font-weight: 500; color: #fff; }
+.cal-empty { padding: 40px 20px; border: 1px solid rgba(255,255,255,0.16); font-size: 13.5px; color: rgba(255,255,255,0.75); text-align: center; }
+.cal-empty a { color: #fff; border-bottom: 1px solid #FF3B41; }
 
 /* ==== INSTAGRAM EMBED ==== */
 .ig-embed-wrap { display: grid; grid-template-columns: 1fr; gap: clamp(16px, 2.2vw, 28px); }
@@ -791,8 +795,9 @@ html[data-view="extensa"] .only-light { display: none; }
 html[data-view="extensa"] .only-extensa { display: block; }
 html[data-view="extensa"] .lead.only-extensa { display: grid; }
 .lg-hero { padding: clamp(26px, 4vw, 40px) 20px clamp(20px, 3vw, 28px); text-align: center; border-bottom: 1px solid var(--line); }
-.lg-hero h2 { font-size: clamp(26px, 4.4vw, 44px); margin: 8px 0 6px; }
-.lg-hero-s { font-size: 13px; color: var(--muted); margin: 0 auto; max-width: 46ch; line-height: 1.6; }
+.lg-hero h2 { font-size: clamp(38px, 8vw, 96px); line-height: 0.94; margin: 14px 0 0; }
+.lg-hero h2 em { font-style: normal; color: var(--red); }
+.lg-hero-s { font-size: clamp(13px, 1.6vw, 15px); color: var(--ink-2); margin: 20px auto 0; max-width: 52ch; line-height: 1.65; }
 .franja--lead .franja-t { font-size: clamp(26px, 4vw, 46px); }
 .view-toggle { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-family: var(--body); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; padding: 8px 12px; min-height: 34px; transition: border-color 0.3s var(--ease), color 0.3s var(--ease); }
 .view-toggle:hover { border-color: var(--red); color: var(--red); }
