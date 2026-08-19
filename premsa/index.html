@@ -115,6 +115,14 @@
     <p class="lede" style="margin-left:auto;margin-right:auto">Reportatges i mencions del club a la
     premsa del barri. Gràcies a qui ens dedica el seu temps i la seva feina per explicar el Barna.</p>
   </div>
+  <!-- BUSCADOR -->
+  <div style="margin-bottom:clamp(40px,6vw,72px);padding:clamp(20px,3vw,32px);border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,0.02)">
+    <input type="text" id="searchInput" placeholder="Buscar en premsa..." style="width:100%;padding:clamp(12px,1.5vw,16px);border:1px solid var(--line);border-radius:4px;font-family:var(--body);font-size:14px;background:var(--paper);color:var(--ink)" data-cta="premsa-search">
+    <div id="searchResults" style="margin-top:16px;display:none">
+      <p style="color:var(--muted);font-size:13px">Resultats de búsqueda: <span id="resultCount">0</span></p>
+    </div>
+  </div>
+
   <!-- KIT DE PREMSA · BRIEFING DEL CLUB -->
   <section class="closer" id="kit-de-premsa" style="margin-bottom:clamp(40px,6vw,72px)" aria-labelledby="kit-title">
     <p class="eyebrow red">Kit de premsa</p>
@@ -130,7 +138,28 @@
     </div>
   </section>
 
-  <div class="cards" style="padding-bottom:clamp(40px,6vw,80px)"><a class="card" href="/premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/"><div class="card-media"><img src="/premsa/img/article-guia-clot-pagina-1.webp" alt="Portada de l'article «El CB Grup Barna: seixanta anys fent bategar el Clot» a la revista Guia Clot, amb foto de l'equip infantil davant el bàner del club" loading="lazy" decoding="async"></div><div class="card-body"><span class="card-tag">Guia Clot · Camp de l'Arpa</span><h3>«El CB Grup Barna: seixanta anys fent bategar el Clot», a Guia Clot</h3><p>La revista Guia Clot, editada per Eix Clot, ha dedicat el seu article més destacat al CB Grup Barna pels 60 anys del club. Gràcies, Eix Clot. Gràcies, Gemma Collell.</p><span class="cta">Llegir l'article</span></div></a></div>
+  <!-- ARTICLES I REPORTATGES -->
+  <section style="margin-bottom:clamp(40px,6vw,80px)" id="articles-section">
+    <p class="eyebrow red">Articles i reportatges</p>
+    <h2 style="margin-top:14px;margin-bottom:clamp(24px,3vw,40px)">Els nostres articles</h2>
+    <div class="cards"><a class="card searchable-item" href="/premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/" data-keywords="Guia Clot seixanta anys Clot Eix Clot bàsquet base"><div class="card-media"><img src="/premsa/img/article-guia-clot-pagina-1.webp" alt="Portada de l'article «El CB Grup Barna: seixanta anys fent bategar el Clot» a la revista Guia Clot, amb foto de l'equip infantil davant el bàner del club" loading="lazy" decoding="async"></div><div class="card-body"><span class="card-tag">Guia Clot · Camp de l'Arpa</span><h3>«El CB Grup Barna: seixanta anys fent bategar el Clot», a Guia Clot</h3><p>La revista Guia Clot, editada per Eix Clot, ha dedicat el seu article més destacat al CB Grup Barna pels 60 anys del club. Gràcies, Eix Clot. Gràcies, Gemma Collell.</p><span class="cta">Llegir l'article</span></div></a></div>
+  </section>
+
+  <!-- INSTAGRAM DEL CLUB -->
+  <section style="margin-bottom:clamp(40px,6vw,80px)" id="instagram-section">
+    <p class="eyebrow red">@cbgrupbarna</p>
+    <h2 style="margin-top:14px;margin-bottom:clamp(24px,3vw,40px)">Contingut d'Instagram</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,2vw,24px);margin-bottom:clamp(24px,3vw,32px)">
+      <div class="igf" data-ig="https://www.instagram.com/p/DbgJvwuCCNv/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load" class="btn ghost">Veure aquí</button><a href="https://www.instagram.com/p/DbgJvwuCCNv/" target="_blank" rel="noopener" data-cta="ig-open" class="btn ghost">Obrir a Instagram</a></span></div>
+      <div class="igf" data-ig="https://www.instagram.com/p/DbiuXarCIpz/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load" class="btn ghost">Veure aquí</button><a href="https://www.instagram.com/p/DbiuXarCIpz/" target="_blank" rel="noopener" data-cta="ig-open" class="btn ghost">Obrir a Instagram</a></span></div>
+      <div class="igf" data-ig="https://www.instagram.com/p/DXonCiBiPcW/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load" class="btn ghost">Veure aquí</button><a href="https://www.instagram.com/p/DXonCiBiPcW/" target="_blank" rel="noopener" data-cta="ig-open" class="btn ghost">Obrir a Instagram</a></span></div>
+      <div class="igf" data-ig="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Vídeo d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load" class="btn ghost">Veure aquí</button><a href="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/" target="_blank" rel="noopener" data-cta="ig-open" class="btn ghost">Obrir a Instagram</a></span></div>
+      <div class="igf" data-ig="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load" class="btn ghost">Veure aquí</button><a href="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/" target="_blank" rel="noopener" data-cta="ig-open" class="btn ghost">Obrir a Instagram</a></span></div>
+    </div>
+    <p class="center" style="margin:0">
+      <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" class="cta" data-cta="premsa-ig-follow">Segueix @cbgrupbarna →</a>
+    </p>
+  </section>
 </div>
 </main>
 <footer class="foot">
@@ -184,5 +213,84 @@
   </div>
 </footer>
 <script src="/js/galetes.js"></script>
+<script>
+// Buscador de premsa
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const resultCount = document.getElementById('resultCount');
+const searchableItems = document.querySelectorAll('.searchable-item');
+const articlesSection = document.getElementById('articles-section');
+const instagramSection = document.getElementById('instagram-section');
+
+searchInput.addEventListener('input', function() {
+  const query = this.value.toLowerCase().trim();
+  let visibleCount = 0;
+
+  if (!query) {
+    // Reset: mostrar todos los elementos
+    searchableItems.forEach(item => {
+      item.style.display = '';
+    });
+    articlesSection.style.display = '';
+    instagramSection.style.display = '';
+    searchResults.style.display = 'none';
+    return;
+  }
+
+  searchableItems.forEach(item => {
+    const keywords = item.getAttribute('data-keywords') || '';
+    const title = item.querySelector('h3')?.textContent || '';
+    const description = item.querySelector('p')?.textContent || '';
+    const searchText = (keywords + ' ' + title + ' ' + description).toLowerCase();
+
+    if (searchText.includes(query)) {
+      item.style.display = '';
+      visibleCount++;
+    } else {
+      item.style.display = 'none';
+    }
+  });
+
+  // Ocultar/mostrar secciones basado en si hay resultados visibles
+  const visibleArticles = Array.from(searchableItems).filter(item => item.style.display !== 'none');
+  if (visibleArticles.length === 0) {
+    articlesSection.style.display = 'none';
+  } else {
+    articlesSection.style.display = '';
+  }
+
+  // Mostrar/ocultar resultados
+  if (visibleCount > 0) {
+    searchResults.style.display = 'block';
+    resultCount.textContent = visibleCount;
+  } else {
+    searchResults.style.display = 'block';
+    resultCount.textContent = '0';
+  }
+});
+
+// Manejar embeds de Instagram
+const igButtons = document.querySelectorAll('[data-cta="ig-load"]');
+igButtons.forEach(button => {
+  button.addEventListener('click', function(e) {
+    e.preventDefault();
+    const igFrame = this.closest('.igf');
+    const igUrl = igFrame.getAttribute('data-ig');
+
+    // Crear iframe de Instagram
+    const iframe = document.createElement('iframe');
+    iframe.src = igUrl + '/embed/captioned/';
+    iframe.style.maxWidth = '100%';
+    iframe.style.minWidth = '326px';
+    iframe.frameBorder = '0';
+    iframe.scrolling = 'no';
+    iframe.allowFullscreen = true;
+
+    // Reemplazar el contenido del igf
+    igFrame.innerHTML = '';
+    igFrame.appendChild(iframe);
+  });
+});
+</script>
 </body>
 </html>
