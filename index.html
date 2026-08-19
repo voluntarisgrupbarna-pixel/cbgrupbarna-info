@@ -722,6 +722,19 @@ img { max-width: 100%; height: auto; display: block; }
 .franja--ink .franja-s, .franja--ink .franja-go em { color: rgba(255,255,255,0.7); }
 .franja--ink .franja-go i { background: #fff; }
 .franja--ink:hover { background: #000; }
+
+/* Preferits: estrella que es desa al mòbil de qui navega, sense compte.
+   Botó dins de l'enllaç de la franja: no és HTML pur, però funciona a tots
+   els navegadors reals amb stopPropagation i és l'única manera de no haver
+   de refer l'estructura de .franges (que depèn de :nth-child per l'alternança). */
+.franja-fav { position: absolute; top: 10px; right: 10px; z-index: 3; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--ink); opacity: 0.5; transition: opacity 0.3s var(--ease), transform 0.2s var(--ease); }
+.franja-fav:hover { opacity: 1; transform: scale(1.12); }
+.franja-fav svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; pointer-events: none; }
+.franja-fav.on { opacity: 1; }
+.franja-fav.on svg { fill: var(--red); stroke: var(--red); }
+.franja:hover .franja-fav:not(.on) { color: #fff; }
+.franja--red .franja-fav, .franja--ink .franja-fav { color: #fff; }
+@media (max-width: 620px) { .franja-fav { top: 6px; right: 6px; width: 36px; height: 36px; } }
 /* La franja de paritat: no és un enllaç, és una dada. Vermell ple, partit
    exactament pel mig, perquè l'estructura digui el que abans deia una xifra. */
 .franja-par { display: block; background: var(--red); color: #fff; min-height: 0; }
@@ -810,8 +823,10 @@ img { max-width: 100%; height: auto; display: block; }
    —la portada de diari— queda darrere el botó de la capçalera. Un cop hi
    ha preferència, la tria explícita mana. Res es duplica: calendari,
    formulari i la resta de la pàgina són els mateixos als dos modes. */
-.only-light { display: block; }
-.only-extensa { display: none; }
+/* html + classe: més especificitat que ".lead{display:grid}" i similars,
+   perquè aquí no manin per ordre de declaració sinó sempre aquestes regles. */
+html .only-light { display: block; }
+html .only-extensa { display: none; }
 html[data-view="light"] .only-light { display: block; }
 html[data-view="light"] .only-extensa { display: none; }
 html[data-view="extensa"] .only-light { display: none; }
@@ -1337,7 +1352,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   </div>
 
   <section class="franges only-light" aria-label="Accés ràpid al club">
-    <a class="franja franja--lead" href="/escoleta/" data-cta="franja-escoleta">
+    <a class="franja franja--lead" id="campLead" href="/escoleta/" data-cta="franja-escoleta">
       <span class="franja-ph"><img src="img/escoleta.webp" srcset="img/escoleta.webp 600w, img/escoleta@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Nena de l'Escoleta amb la pilota i la mascota del club"></span>
       <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">De 4 a 8 anys. Per on comença tothom, sense saber-ne gens.</span></span>
       <span class="franja-go"><em>Inscripcions obertes</em><i></i></span>
@@ -1916,6 +1931,71 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       pinta();
     });
     pinta();
+  })();
+
+  // ==== CAMPANYA ACTIVA · la franja principal es controla des d'un JSON ====
+  // Per canviar de campanya (p.ex. a l'octubre pel Campus de Nadal o la roba),
+  // només cal editar campanyes/activa.json — cap canvi de codi. Si falla la
+  // petició o no hi ha campanya activa, es queda l'Escoleta escrita a mà.
+  (function () {
+    var lead = document.getElementById('campLead');
+    if (!lead) return;
+    fetch('/campanyes/activa.json?t=' + Math.floor(Date.now() / 3600000))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (c) {
+        if (!c || !c.actiu) return;
+        if (c.url) lead.href = c.url;
+        var img = lead.querySelector('.franja-ph img');
+        if (img && c.img) {
+          img.src = c.img;
+          img.srcset = c.img2x ? c.img + ' 600w, ' + c.img2x + ' 1200w' : c.img;
+          if (c.alt) img.alt = c.alt;
+        }
+        var t = lead.querySelector('.franja-t'); if (t && c.titol) t.textContent = c.titol;
+        var s = lead.querySelector('.franja-s'); if (s && c.text) s.textContent = c.text;
+        var em = lead.querySelector('.franja-go em'); if (em && c.etiqueta) em.textContent = c.etiqueta;
+        if (c.ticker) {
+          [].slice.call(document.querySelectorAll('.tk-it')).forEach(function (el, i) {
+            if (i < 2) el.textContent = c.ticker;
+          });
+        }
+      })
+      .catch(function () {});
+  })();
+
+  // ==== PREFERITS · fixar contingut de les franges (localStorage, sense compte) ====
+  (function () {
+    var llista = document.querySelector('.franges');
+    if (!llista) return;
+    var KEY = 'cbgb-favs';
+    var favs = [];
+    try { favs = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+    function desa() { try { localStorage.setItem(KEY, JSON.stringify(favs)); } catch (e) {} }
+    [].slice.call(llista.querySelectorAll(':scope > a.franja')).forEach(function (franja) {
+      var href = franja.getAttribute('href');
+      if (!href) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'franja-fav';
+      var actiu = favs.indexOf(href) > -1;
+      btn.setAttribute('aria-label', actiu ? 'Treu dels preferits' : 'Desa als preferits');
+      btn.setAttribute('aria-pressed', actiu ? 'true' : 'false');
+      if (actiu) btn.classList.add('on');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.6c-2.1-2.9-6.4-2.9-8.4.3-1.8 3-.4 5.7 8.4 13.5 8.8-7.8 10.2-10.5 8.4-13.5-2-3.2-6.3-3.2-8.4-.3Z"/></svg>';
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var i = favs.indexOf(href);
+        var araActiu = i === -1;
+        if (araActiu) favs.push(href); else favs.splice(i, 1);
+        desa();
+        btn.classList.toggle('on', araActiu);
+        btn.setAttribute('aria-pressed', araActiu ? 'true' : 'false');
+        btn.setAttribute('aria-label', araActiu ? 'Treu dels preferits' : 'Desa als preferits');
+        if (window.gtag) window.gtag('event', 'fav_toggle', { fav_id: href, on: araActiu });
+      });
+      franja.appendChild(btn);
+    });
   })();
 
   // ==== CTA tracking ====
