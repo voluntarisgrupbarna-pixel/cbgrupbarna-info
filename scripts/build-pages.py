@@ -1659,12 +1659,249 @@ def build_premsa_index():
     </div>
   </section>
 
-  <div class="cards" style="padding-bottom:clamp(40px,6vw,80px)">{cards}</div>
+  <div class="cards" style="padding-bottom:24px">{cards}</div>
+  <div class="narrow center" style="padding-bottom:clamp(40px,6vw,80px)">
+    <a href="/premsa/arxiu/" class="btn ghost" data-cta="premsa-arxiu">Veure l'arxiu de premsa complet (1988-2026)</a>
+  </div>
+
+  <!-- RECULL D'INSTAGRAM · totes les publicacions de la temporada, embegudes -->
+  <section class="closer" id="recull-instagram" style="margin:0 0 clamp(40px,6vw,80px)"
+           aria-labelledby="recull-title">
+    <p class="eyebrow red">@cbgrupbarna · temporada 2025-26</p>
+    <h2 id="recull-title" style="margin-top:14px">El Barna a Instagram</h2>
+    <p>{IG_TOTAL} publicacions de la temporada en una sola pàgina, totes embegudes: les visites
+    institucionals, els partners i col·laboracions, el campus, els títols i tornejos i els 60 anys
+    del club. Material de consulta per a mitjans i partners.</p>
+    <div class="btn-row">
+      <a class="btn red" href="/premsa/instagram/" data-cta="premsa-recull-ig">Veure el recull complet</a>
+      <a class="btn ghost" href="https://www.instagram.com/cbgrupbarna/"{EXT} data-cta="premsa-ig">Segueix @cbgrupbarna</a>
+    </div>
+  </section>
 </div>
 """
     return write("premsa/index.html", head(title, desc, url, SITE + f"/premsa/img/{PRESS[0]['images'][0][0]}", ld,
                  "premsa CB Grup Barna, kit de premsa, briefing del club, dossier de premsa bàsquet "
                  "Barcelona, Guia Clot, Eix Clot, articles bàsquet Clot") + body + FOOT)
+
+
+# ═════════════════════════════════════════════════════ /premsa/instagram/ ════
+#
+# Recull de les publicacions d'Instagram de la temporada 2025-26 que expliquen
+# el club: institucions, partners, campus, títols i els 60 anys. Tot embegut
+# —no són enllaços—, però l'embed només es crea quan la publicació s'acosta a
+# la pantalla, per no carregar quaranta iframes de cop.
+
+IG_RECULL = [
+ ("institucions", "Institucions", "Ajuntament, Generalitat i federació",
+  "Les visites i els reconeixements institucionals de la temporada.", [
+   ("p", "DVZSKc6CPCs", "2 de març",
+    "Presentació dels equips i tret de sortida dels 60 anys, amb Escudé, Nil López i el "
+    "vicepresident de la FCBQ."),
+   ("p", "DZXqmFviI27", "9 de juny",
+    "Visita institucional al 3x3, amb Escudé, Nil López i Dani Calvo."),
+   ("p", "DQr3YTDCO85", "Premis Dona i Esport 2025",
+    "El club als Premis Dona i Esport, amb Escudé."),
+   ("p", "DQmiLUECDno", "Reunió amb el conseller",
+    "Reunió del club amb el conseller."),
+ ]),
+ ("temporada", "La temporada, en vídeo", "Resum i tancament",
+  "Els dos reels que resumeixen l'any del club.", [
+   ("reel", "DadIljEKiLk", "Resum de temporada",
+    "El resum de la temporada, amb l'alcalde Collboni i el conseller Berni Álvarez."),
+   ("reel", "Db5m4uzoT3E", "Tancament",
+    "El reel de tancament de la temporada."),
+ ]),
+ ("partners", "Partners i col·laboracions", "Qui hi és al costat",
+  "Les marques, els comerços i la gent del bàsquet que han acompanyat el club.", [
+   ("p", "DVMBOccCCDM", "Wilson", "La col·laboració amb Wilson."),
+   ("p", "DZsGToICFtG", "FEDER", "La col·laboració amb FEDER."),
+   ("p", "DZfTykfiFpX", "Hoops Brand", "La col·laboració amb Hoops Brand."),
+   ("p", "DXcLIVXCLSB", "Barna + Eix Clot", "L'aliança entre el Barna i l'Eix Clot."),
+   ("reel", "DPURn8KiNYg", "Romeo · Eix Clot", "La signatura amb Romeo, dins l'Eix Clot."),
+   ("p", "DbyMiLVCOl1", "Revista Eix Clot", "«Gràcies, Eix Clot», a la revista de l'Eix Clot."),
+   ("p", "DSDOlPzCI8J", "La Melosa", "La Melosa, food truck a la presentació del 20 de desembre."),
+   ("reel", "DL-n0ZeMaOq", "Robert Willett", "Robert Willett, entrenador NBA, al campus del club."),
+   ("p", "DJlTlbyMizg", "Laura Piera", "Laura Piera (Penya · Lliga Endesa), al club."),
+   ("p", "DL202p2sqrc", "Chumi Ortega", "Chumi Ortega (MoraBanc Andorra · ACB), al club."),
+ ]),
+ ("campus", "Campus", "L'estiu del club",
+  "El campus del Barna, setmana a setmana.", [
+   ("reel", "Dbn8AMsIebZ", "Campus Timechamber", "El reel final del Campus Timechamber."),
+   ("reel", "Datex2OxHcS", "Setmana 3", "Setmana 3 del campus: Shooting Academy."),
+ ]),
+ ("equips", "Equips, títols i tornejos", "La pista",
+  "Presentacions, campionats, seleccions i tornejos de la temporada.", [
+   ("p", "DTtF7_TCC6c", "Presentació oficial", "El save the date de la presentació oficial."),
+   ("reel", "DR4zVsaCK3X", "Roba del club", "La roba del Barna, amb models femenins."),
+   ("p", "DS3BHgxCGLv", "Mini A femení · Infantil A",
+    "El mini A femení, campió de la SOMNIS CUP, i l'infantil A al 3x3 de Mataró."),
+   ("p", "DRb9oxAiDaP", "Seleccions Territorials U12",
+    "Jugadors i jugadores del club a les Seleccions Territorials U12."),
+   ("p", "DOa7WrBiFRf", "Oriol Filbà · U-16", "Oriol Filbà, amb la Selecció U-16."),
+   ("reel", "DRMzhd1iF6z", "Fira Boja", "El Barna a la Fira Boja."),
+   ("p", "DQwuU-VDCYg", "Torneig Equals", "El club al Torneig Equals."),
+   ("p", "DQGwR87iBOS", "Torneig Equals", "Més imatges del Torneig Equals."),
+   ("p", "DQg-mo3iMRG", "Torneig Globasket", "El club al Torneig Globasket."),
+   ("p", "DGx-pWoswQQ", "II Torneig U14 FIBA", "El II Torneig U14 FIBA, a Castelldefels."),
+ ]),
+ ("seixanta-anys", "60 anys al Clot", "1965-2025",
+  "La memòria del club: la gent que hi ha passat i el que hi ha quedat.", [
+   ("p", "DMvVHJPM9F0", "1965", "El primer equip femení del club, el 1965."),
+   ("p", "DP3BUcHCDpl", "La història", "La història del club."),
+   ("p", "DMD7FjeMVHU", "Javier Torralba", "Javier Torralba."),
+   ("p", "DMTYbpVs2FD", "Entrenadors i entrenadores",
+    "Grans entrenadors i entrenadores formats al club."),
+   ("reel", "DN3T_wRUOON", "Què és el Barna per tu?", "«Què és el Barna per tu?»"),
+   ("p", "DMcpUFgst4L", "Ainhoa López", "Ainhoa López, al campus."),
+   ("reel", "DFlLDq2MFVa", "TVmes · +Bàsquet", "L'homenatge de TVmes i +Bàsquet."),
+   ("p", "DM0PPD7sI0m", "TVmes · +Bàsquet", "L'homenatge de TVmes i +Bàsquet, al feed."),
+ ]),
+ ("club", "El club, dia a dia", "Fora del marcador",
+  "El que el club fa quan no hi ha partit.", [
+   ("p", "DPgwzUMCJ_X", "Sense plàstic", "El club, sense plàstic."),
+   ("reel", "DQE9oqniGhF", "Sense plàstic", "Sense plàstic, en vídeo."),
+   ("reel", "DHV2ICIqqAE", "Cistella petita", "Cistella petita."),
+   ("reel", "DHWML1tqV5O", "Cistella petita", "Cistella petita, segona part."),
+   ("p", "DL7c78fsQKs", "Del dia a dia", "Del dia a dia del club."),
+   ("p", "DL9NUofNRWX", "Del dia a dia", "Del dia a dia del club."),
+ ]),
+]
+
+IG_TOTAL = sum(len(s[4]) for s in IG_RECULL)
+
+IG_CSS = """<style>
+.ig-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.ig-nav a { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 16px; border: 1px solid var(--line); font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-2); transition: border-color 0.3s, color 0.3s; }
+.ig-nav a:hover { border-color: var(--red); color: var(--red); }
+.ig-sec { padding: clamp(34px, 5vw, 62px) 0; border-top: 1px solid var(--line); }
+.ig-sec h2 { font-size: clamp(19px, 2.6vw, 27px); margin-top: 14px; }
+.ig-sec > .lede { margin-top: 16px; max-width: 62ch; font-size: clamp(13.5px, 1.5vw, 15.5px); color: var(--ink-2); }
+.ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: clamp(20px, 2.6vw, 34px); margin-top: clamp(26px, 3.4vw, 42px); }
+.igx { display: flex; flex-direction: column; border: 1px solid var(--line); background: var(--paper); }
+.igx-media { position: relative; }
+.igx-media blockquote.instagram-media { background: var(--paper) !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; max-width: 100% !important; min-width: 0 !important; width: 100% !important; }
+.igx-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 300px; padding: 30px 20px; text-align: center; background: var(--paper-2); }
+.igx-ph span { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+.igx-cap { padding: 18px 20px 22px; border-top: 1px solid var(--line); }
+.igx-tag { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); }
+.igx-cap p { margin-top: 9px; font-size: 13.5px; line-height: 1.65; color: var(--ink-2); }
+.igx-cap .cta { margin-top: 14px; font-size: 9px; letter-spacing: 0.24em; }
+</style>"""
+
+IG_JS = """<script>
+/* Els embeds es creen quan la publicació s'acosta a la pantalla. */
+(function () {
+  var boxes = [].slice.call(document.querySelectorAll('.igx-media[data-ig]'));
+  if (!boxes.length) return;
+  var asked = false;
+  function script(cb) {
+    if (asked) { cb(); return; }
+    asked = true;
+    var sc = document.createElement('script');
+    sc.src = 'https://www.instagram.com/embed.js';
+    sc.async = true;
+    sc.onload = cb;
+    document.head.appendChild(sc);
+  }
+  function process() {
+    if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+  }
+  function mount(box) {
+    if (box.dataset.on) return;
+    box.dataset.on = '1';
+    var bq = document.createElement('blockquote');
+    bq.className = 'instagram-media';
+    bq.setAttribute('data-instgrm-permalink', box.getAttribute('data-ig') + '?utm_source=ig_embed');
+    bq.setAttribute('data-instgrm-version', '14');
+    /* El rètol es queda DINS del blockquote: si Instagram no carrega,
+       la targeta continua tenint l'enllaç en comptes de quedar buida. */
+    var ph = box.querySelector('.igx-ph');
+    if (ph) bq.appendChild(ph);
+    box.appendChild(bq);
+    script(process);
+  }
+  if (!('IntersectionObserver' in window)) { boxes.forEach(mount); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      mount(e.target);
+    });
+  }, { rootMargin: '600px 0px' });
+  boxes.forEach(function (b) { io.observe(b); });
+})();
+</script>"""
+
+
+def ig_card(kind, code, tag, text):
+    link = f"https://www.instagram.com/{'reel' if kind == 'reel' else 'p'}/{code}/"
+    return (f'<figure class="igx">'
+            f'<div class="igx-media" data-ig="{link}">'
+            f'<div class="igx-ph"><span>Publicació d\'Instagram</span>'
+            f'<a class="cta" href="{link}"{EXT} data-cta="ig-recull-ph">Obrir a Instagram</a></div></div>'
+            f'<figcaption class="igx-cap"><span class="igx-tag">{tag}</span><p>{text}</p>'
+            f'<a class="cta" href="{link}"{EXT} data-cta="ig-recull-open">Veure a Instagram</a>'
+            f'</figcaption></figure>')
+
+
+def build_premsa_instagram():
+    url = SITE + "/premsa/instagram/"
+    title = "El Barna a Instagram · recull de la temporada 2025-26 · CB Grup Barna"
+    desc = ("Recull de les publicacions d'@cbgrupbarna de la temporada 2025-26, totes embegudes en una "
+            "sola pàgina: visites institucionals, partners i col·laboracions, campus, títols i "
+            "tornejos i els 60 anys del club de bàsquet base del Clot, Barcelona.")
+    total = IG_TOTAL
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "CollectionPage", "@id": url + "#recull-instagram",
+         "name": "El Barna a Instagram · temporada 2025-26",
+         "description": desc, "url": url, "inLanguage": "ca-ES",
+         "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"},
+         "mainEntity": {"@type": "ItemList", "numberOfItems": total, "itemListOrder": "https://schema.org/ItemListUnordered",
+                        "itemListElement": [
+                            {"@type": "ListItem", "position": i + 1, "name": f"{tag} · {text}",
+                             "url": f"https://www.instagram.com/{'reel' if kind == 'reel' else 'p'}/{code}/"}
+                            for i, (kind, code, tag, text) in enumerate(
+                                [it for s in IG_RECULL for it in s[4]])]}},
+        BREADCRUMB([("CB Grup Barna", "/"), ("Premsa", "/premsa/"), ("Instagram", "/premsa/instagram/")]),
+    ]}
+    nav = ''.join(f'<a href="#{sid}">{name}</a>' for sid, name, _, _, _ in IG_RECULL)
+    secs = ''
+    for sid, name, eyebrow, lede, items in IG_RECULL:
+        secs += (f'<section class="ig-sec" id="{sid}" aria-labelledby="{sid}-t">'
+                 f'<p class="eyebrow red">{eyebrow}</p>'
+                 f'<h2 id="{sid}-t">{name}</h2><p class="lede">{lede}</p>'
+                 f'<div class="ig-grid">{"".join(ig_card(*it) for it in items)}</div></section>')
+    body = f"""
+{crumbs([("Inici", "/"), ("Premsa", "/premsa/"), ("Instagram", None)])}
+<div class="wrap">
+  <div class="phead narrow center">
+    <p class="eyebrow red">@cbgrupbarna · temporada 2025-26</p>
+    <h1 style="margin-left:auto;margin-right:auto">El Barna a Instagram</h1>
+    <p class="lede" style="margin-left:auto;margin-right:auto">{total} publicacions de la temporada,
+    totes embegudes en una sola pàgina: les visites institucionals, els partners, el campus, els
+    títols i els 60 anys del club. Per a mitjans, partners i qui vulgui veure-ho tot seguit.</p>
+    <nav class="ig-nav" aria-label="Seccions del recull" style="justify-content:center">{nav}</nav>
+  </div>
+  {secs}
+  <section class="closer" style="margin:clamp(30px,4vw,54px) 0 clamp(40px,6vw,80px)">
+    <h2>Segueix-ho en directe</h2>
+    <p>El recull és de la temporada 2025-26. El dia a dia del club es publica a Instagram, i la sala
+    de premsa recull el que n'escriuen els mitjans del barri.</p>
+    <div class="btn-row">
+      <a class="btn red" href="https://www.instagram.com/cbgrupbarna/"{EXT} data-cta="ig-recull-follow">Segueix @cbgrupbarna</a>
+      <a class="btn ghost" href="/premsa/" data-cta="ig-recull-premsa">Sala de premsa</a>
+      <a class="btn ghost" href="/premsa/arxiu/" data-cta="ig-recull-arxiu">Arxiu de premsa</a>
+      <a class="btn ghost" href="/briefing/" data-cta="ig-recull-briefing">Briefing del club</a>
+    </div>
+  </section>
+</div>
+{IG_JS}
+"""
+    return write("premsa/instagram/index.html",
+                 head(title, desc, url, SITE + "/og-image.jpg", ld,
+                      "CB Grup Barna Instagram, @cbgrupbarna, recull temporada 2025-26, bàsquet Clot "
+                      "Instagram, partners CB Grup Barna, 60 anys CB Grup Barna").replace(
+                     '</head>', IG_CSS + '\n</head>') + body + FOOT)
 
 
 # ═══════════════════════════════════════════════════════════ /partits/calendaris/ ════
@@ -1835,7 +2072,8 @@ if __name__ == "__main__":
     for a in ARTICLES:
         print(build_article(a))
     print(build_premsa_index())
+    print(build_premsa_instagram())
     for a in PRESS:
         print(build_press_article(a))
     print(build_calendaris())
-    print(f"\n{len(ARTICLES) + len(PRESS) + len(partner_pages) + 5} pàgines generades.")
+    print(f"\n{len(ARTICLES) + len(PRESS) + len(partner_pages) + 6} pàgines generades.")
