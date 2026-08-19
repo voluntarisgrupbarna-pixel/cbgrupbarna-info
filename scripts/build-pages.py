@@ -44,10 +44,27 @@ def wa(text):
 
 # ─────────────────────────────────────────────────────────────── esquelet ────
 
-def head(title, desc, url, image, extra_ld=None, keywords=None, lang="ca"):
+def head(title, desc, url, image, extra_ld=None, keywords=None, lang="ca", include_langsw=False):
     desc = clamp_desc(desc)
     ld = json.dumps(extra_ld, ensure_ascii=False, indent=2) if extra_ld else None
     kw = f'\n<meta name="keywords" content="{keywords}">' if keywords else ''
+
+    # Build canonical and hreflang for language switching
+    langsw = ''
+    if include_langsw:
+        # Extract path from absolute URL
+        from urllib.parse import urlparse
+        parsed = urlparse(url)
+        path = parsed.path
+        ca_path = path.replace('/es/', '/').replace('/en/', '/')
+        es_base = path.replace('/es/', '/').replace('/en/', '/')
+        en_base = path.replace('/es/', '/').replace('/en/', '/')
+        es_path = '/es' + es_base if not es_base.startswith('/es/') else es_base
+        en_path = '/en' + en_base if not en_base.startswith('/en/') else en_base
+        langsw = f'''<div class="lang-switch" style="display:flex;gap:2px;font-size:11px;color:var(--muted)">
+<a href="{ca_path}" hreflang="ca" class="{'active' if lang == 'ca' else ''}">CA</a>·<a href="{es_path}" hreflang="es" class="{'active' if lang == 'es' else ''}">ES</a>·<a href="{en_path}" hreflang="en" class="{'active' if lang == 'en' else ''}">EN</a>
+</div>'''
+
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
@@ -72,7 +89,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, lang="ca"):
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
 </head>
@@ -85,16 +102,20 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, lang="ca"):
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
-      <a href="/escoleta/">Escoleta</a>
-      <a href="/campus/" class="opt">Campus</a>
-      <a href="/3x3/" class="opt">3x3</a>
-      <a href="/blog/" class="opt">Blog</a>
-      <a href="/premsa/" class="opt">Premsa</a>
+      <a href="/club/">Club</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
+      <a href="/partits/">Dies de partit</a>
       <a href="/patrocinadors/" class="opt">Patrocinadors</a>
-      <a href="/#info">Informació</a>
+      <a href="/campus/" class="opt">Campus</a>
+      <a href="/magics/" class="opt">Màgics</a>
+      <a href="/3x3/" class="opt">3x3</a>
+      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/fotos/" class="opt">Galeria</a>
+      <a href="/premsa/">Premsa</a>
     </nav>
   </div>
 </header>
+{langsw}
 <main id="main">"""
 
 
@@ -111,10 +132,11 @@ FOOT = f"""</main>
     <div class="foot-grid">
       <div class="foot-col">
         <h3>El Barna</h3>
-        <a href="/escoleta/">Escola de bàsquet</a>
-        <a href="/campus/">Campus de bàsquet</a>
-        <a href="/3x3/">Torneig 3x3</a>
-        <a href="/patrocinadors/">Patrocinadors i partners</a>
+        <a href="/historia/">Història del club</a>
+        <a href="/organigrama/">Organigrama</a>
+        <a href="/femeni/">Bàsquet femení</a>
+        <a href="/posicionament/">Posicionament del club</a>
+        <a href="/instal-lacions/">Instal·lacions</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
       </div>
       <div class="foot-col">
@@ -124,7 +146,7 @@ FOOT = f"""</main>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
-        <a href="/premsa/">Articles i premsa</a>
+        <a href="/documents/">Documents i protocols</a>
       </div>
       <div class="foot-col">
         <h3>Contacte</h3>
@@ -132,6 +154,12 @@ FOOT = f"""</main>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/politica-de-privacitat/">Política de privacitat</a>
+        <a href="/avis-legal/">Avís legal</a>
+        <a href="/politica-de-privacitat/#galetes">Galetes</a>
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>
@@ -142,11 +170,14 @@ FOOT = f"""</main>
     </div>
     <div class="foot-btm">
       <div class="foot-mark">#Som<em>Clot</em></div>
-      <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965</div>
+      <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965 ·
+        <a href="/politica-de-privacitat/">Privacitat</a> ·
+        <a href="/avis-legal/">Avís legal</a> ·
+        <a href="/politica-de-privacitat/#galetes">Galetes</a></div>
     </div>
   </div>
 </footer>
-<script src="/js/descarrega.js" defer></script>
+<script src="/js/galetes.js"></script>
 </body>
 </html>
 """
@@ -835,7 +866,8 @@ def build_partner_landing(img, nom, ig):
 """
     return write(f"patrocinadors/partners/{slug}/index.html",
                  head(title, desc, url, SITE + "/partners/" + img, ld,
-                      f"{nom}, partner CB Grup Barna, patrocinadors bàsquet Barcelona") + body + FOOT)
+                      f"{nom}, partner CB Grup Barna, patrocinadors bàsquet Barcelona",
+                      lang="ca", include_langsw=True) + body + FOOT)
 
 
 # ═══════════════════════════════════════════════════════════════ /3x3/ ════
