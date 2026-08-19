@@ -4,6 +4,32 @@ Auditoria del repositori a 14/08/2026, revisada amb les decisions de l'Ana.
 
 ---
 
+## Nota de maduresa · proposta "Web 10" (19/08/2026)
+
+Puntuació pròpia d'aquest repositori, 0–10, feta a partir de l'auditoria d'aquest
+mateix document. **No és una certificació externa ni s'ha de publicar a cap pàgina
+pública**: mostrar una nota d'autoavaluació a famílies o patrocinadors fa més mal
+que bé. És un marcador intern per fer seguiment del progrés cap a "web 10".
+
+**Nota actual: 4,9 / 10**
+
+| Pilar | Nota | Per què |
+|---|---|---|
+| GEO / IA generativa | 8 | `llms.txt` + `robots.txt` obert a bots d'IA — gairebé cap club de base ho té |
+| Contingut | 7 | Blog amb FAQ+schema, landing femenina, història i dades oficials |
+| SEO local | 6 | JSON-LD, hreflang i sitemap sòlids; falta GBP i landing per instal·lació |
+| Arquitectura | 5 | Estàtica i desplegada, però HTML clonat a mà en 3 idiomes i fotos al repositori |
+| UX / Producte | 4 | Sense PWA real, àrea de família ni cercador intern |
+| Dades / Martech | 4 | GA4 carregat però sense dashboard ni CRM unificat |
+| Monetització | 3 | Sense botiga ni dashboard de retorn per a patrocinadors |
+| Confiança / legal | 2 | Sis formularis recullen dades de famílies i menors sense política de privacitat |
+
+**Objectiu:** 10/10, en tres fases (Fundació → Infraestructura → Producte). Detall
+complet — diagnòstic, els vuit pilars, full de ruta i backlog priori tzat — a la
+proposta "Web 10" treballada amb l'Ana.
+
+---
+
 ## ✅ Fet
 
 ### 1. Els tres enllaços trencats del Premi Dona i Esport
