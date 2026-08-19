@@ -103,8 +103,8 @@ def build_equips_fallback(data):
         w, l = jugats.count("W"), jugats.count("L")
         posicio = f" · {e['posicio']}a posició" if e.get("posicio") else ""
         items.append(
-            f"<li><strong>{esc(e['nom'])}</strong> — {esc(e.get('competicio', ''))} "
-            f"· {w}-{l} (V-D){posicio}</li>"
+            f"<li><a href=\"/partits/equips/{esc(e['id'])}/\"><strong>{esc(e['nom'])}</strong></a> "
+            f"— {esc(e.get('competicio', ''))} · {w}-{l} (V-D){posicio}</li>"
         )
     if not items:
         return ""

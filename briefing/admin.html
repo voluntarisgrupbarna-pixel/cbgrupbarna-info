@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
   nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
@@ -36,17 +36,17 @@
   .btn:disabled{opacity:.5;cursor:default}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
   .btn.small{padding:.35rem .7rem;font-size:.72rem}
-  .err{display:none;background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
   .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
   .hint{font-size:.72rem;color:var(--muted);margin-top:.6rem;line-height:1.5}
-  .hint a{color:rgba(200,16,46,.85)}
+  .hint a{color:rgba(226,6,19,.85)}
   .mrow{display:flex;align-items:center;gap:.8rem;padding:.65rem 0;border-bottom:1px dashed var(--line);font-size:.86rem}
   .mrow:last-child{border-bottom:none}
   .mic{font-size:1.2rem;flex:none}
   .mmeta{flex:1;min-width:0}
   .mmeta b{display:block;font-weight:500}
   .mmeta small{color:var(--muted);font-size:.72rem}
-  .mtag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);border:1px solid rgba(200,16,46,.35);border-radius:20px;padding:.15rem .55rem;flex:none}
+  .mtag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);border:1px solid rgba(226,6,19,.35);border-radius:20px;padding:.15rem .55rem;flex:none}
   .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
   .del:hover{color:#ff8fa0}
   .empty{color:var(--muted);font-size:.85rem;padding:1rem 0}
@@ -100,7 +100,7 @@
 </div>
 
 <script src="/briefing/materials.js"></script>
-<script src="/scripts/google-gate.js"></script>
+<script src="/scripts/admin-gate.js"></script>
 <script>
 const OWNER='voluntarisgrupbarna-pixel', REPO='cbgrupbarna-info', BRANCH='main';
 const DATA_PATH='briefing/materials.js', DIR='briefing/materials';
@@ -108,7 +108,7 @@ let ghToken=null, mats=[];
 
 CBGBGate.protect(function(user){
   document.getElementById('who').innerHTML =
-    (user.picture?'<img src="'+user.picture+'" style="width:24px;height:24px;border-radius:50%">':'')+
+    (user.picture?'<img src="'+user.picture+'" alt="" style="width:24px;height:24px;border-radius:50%">':'')+
     '<span>'+(user.email||'')+'</span>'+
     '<button class="btn ghost small" onclick="CBGBGate.signOut()">Sortir</button>';
   ghToken = localStorage.getItem('gh_admin_token');

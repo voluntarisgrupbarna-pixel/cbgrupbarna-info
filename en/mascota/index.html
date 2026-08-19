@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E31E24">
+<title>The CB Grup Barna Mascot · #SomClot · Basketball School Barcelona</title>
+<meta name="description" content="Meet the CB Grup Barna mascot! Basketball school for kids aged 4 to 8 in the Sant Martí District of Barcelona. Open house! #ElPrimerBotComençaAquí">
+
+<!-- Open Graph / Compartir -->
+<meta property="og:type" content="video.other">
+<meta property="og:url" content="https://cbgrupbarna.info/en/mascota/">
+<meta property="og:title" content="🐾 The CB Grup Barna Mascot! #SomClot">
+<meta property="og:description" content="Basketball school for kids aged 4 to 8 in the Clot neighbourhood, Barcelona. Mixed teams · 3 age groups · Open house! Call us: 646 205 526">
+<meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
+<meta property="og:video" content="https://cbgrupbarna.info/mascota/mascota.mp4">
+<meta property="og:video:type" content="video/mp4">
+<meta property="og:video:width" content="480">
+<meta property="og:video:height" content="848">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:site_name" content="CB Grup Barna">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="player">
+<meta name="twitter:site" content="@cbgrupbarna">
+<meta name="twitter:title" content="🐾 The CB Grup Barna Mascot! #SomClot">
+<meta name="twitter:description" content="Basketball school for kids aged 4 to 8. Open house! #ElPrimerBotComençaAquí">
+<meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
+<meta name="twitter:player" content="https://cbgrupbarna.info/en/mascota/">
+<meta name="twitter:player:width" content="480">
+<meta name="twitter:player:height" content="848">
+
+<!-- SEO -->
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://cbgrupbarna.info/en/mascota/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/mascota/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/mascota/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/mascota/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/mascota/">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "The CB Grup Barna Mascot · #SomClot",
+  "description": "Basketball school for kids aged 4 to 8 in the Clot neighbourhood, Barcelona. Mixed teams, 3 age groups, meet-ups with other clubs.",
+  "thumbnailUrl": "https://cbgrupbarna.info/og-image.jpg",
+  "uploadDate": "2026-06-12",
+  "duration": "PT1M30S",
+  "contentUrl": "https://cbgrupbarna.info/mascota/mascota.mp4",
+  "embedUrl": "https://cbgrupbarna.info/en/mascota/",
+  "publisher": {
+    "@type": "SportsOrganization",
+    "name": "CB Grup Barna",
+    "logo": "https://cbgrupbarna.info/logo.png",
+    "url": "https://cbgrupbarna.info"
+  }
+}
+</script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --vermell: #E31E24;
+    --vermell-fosc: #b5161b;
+    --negre: #0a0a0a;
+    --blanc: #ffffff;
+    --crema: #F2EDE6;
+    --gris: #1a1a1a;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--negre);
+    color: var(--blanc);
+    font-family: 'Outfit', 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO: vídeo a pantalla completa ── */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: var(--negre);
+  }
+
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .video-wrap::before {
+    content: '';
+    display: block;
+    padding-top: 176.67%; /* 848/480 */
+  }
+
+  video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  /* Subtítols estilitzats */
+  video::cue {
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    font-size: 1.1em;
+    font-family: 'Outfit', Arial, sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  video::cue(b) {
+    color: #ffcc00;
+  }
+
+  /* Botó play sobre el vídeo */
+  .play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.35);
+    transition: opacity .3s;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .play-btn.hidden { opacity: 0; pointer-events: none; }
+
+  .play-icon {
+    width: 72px;
+    height: 72px;
+    background: rgba(227, 30, 36, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 24px rgba(227,30,36,0.5);
+    transition: transform .2s;
+  }
+  .play-icon:hover { transform: scale(1.1); }
+  .play-icon svg { width: 32px; height: 32px; fill: #fff; margin-left: 4px; }
+
+  /* Badge hashtag sobre el vídeo */
+  .video-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(227,30,36,0.9);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 3;
+    text-transform: uppercase;
+  }
+
+  /* Indicador de so */
+  .sound-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: #fff;
+    font-size: 1.3rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Banner activa so */
+  .unmute-banner {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(227,30,36,0.92);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 10px 22px;
+    border-radius: 30px;
+    z-index: 10;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    animation: pulse-banner 1.5s ease-in-out infinite;
+    border: none;
+    font-family: inherit;
+  }
+  .unmute-banner.hidden { display: none; }
+  @keyframes pulse-banner {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+  }
+
+  /* ── INFO CARD ── */
+  .info-card {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--vermell);
+    padding: 28px 24px 20px;
+    text-align: center;
+  }
+
+  .info-card .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .info-card h1 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .info-card .sub {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 20px;
+  }
+
+  /* Característiques */
+  .features {
+    background: rgba(0,0,0,0.18);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .features li {
+    list-style: none;
+    padding: 5px 0;
+    font-size: 0.9rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .features li:last-child { border-bottom: none; }
+  .features .icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  /* Contacte destacat */
+  .contact-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .contact-box .contact-name {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .contact-box .phone {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--vermell);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+
+  .contact-box .person {
+    font-size: 0.85rem;
+    color: #444;
+    margin-top: 3px;
+  }
+
+  /* Botons CTA */
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .15s, box-shadow .15s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-primary {
+    background: #fff;
+    color: var(--vermell);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .btn-primary:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
+
+  .btn-wa {
+    background: #25D366;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+  }
+
+  .btn-ig {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(220,39,67,0.35);
+  }
+
+  /* Hashtags virals */
+  .hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    padding: 6px 0 4px;
+  }
+  .hashtags span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── COMPARTIR ── */
+  .share-strip {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--gris);
+    padding: 18px 20px;
+    text-align: center;
+  }
+
+  .share-strip h2 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 12px;
+  }
+
+  .share-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .share-btn {
+    flex: 1;
+    max-width: 130px;
+    padding: 11px 8px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: opacity .2s;
+  }
+  .share-btn:hover { opacity: 0.85; }
+
+  .share-wa { background: #25D366; color: #fff; }
+  .share-copy { background: #333; color: #fff; cursor: pointer; border: none; font-family: inherit; }
+
+  /* ── FOOTER ── */
+  .footer {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--negre);
+    padding: 16px 20px 32px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.6;
+  }
+  .footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
+
+  /* ── Responsive desktop ── */
+  @media (min-width: 520px) {
+    .hero, .info-card, .share-strip, .footer {
+      border-left: 1px solid #111;
+      border-right: 1px solid #111;
+    }
+
+    body {
+      background: #050505;
+    }
+  }
+
+  @supports (padding: max(0px)) {
+    .footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
+  }
+
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; }
+  .lang-switch .sep { opacity: 0.25; }
+
+  .lang-switch-bar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+    background: rgba(0,0,0,0.45);
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #fff;
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── HERO VIDEO ── -->
+<main class="hero" role="main">
+  <div class="video-wrap">
+    <div class="video-badge">#SomClot · Basketball School</div>
+    <div class="lang-switch-bar">
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/mascota/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/mascota/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/mascota/" hreflang="en" class="active">EN</a>
+      </div>
+    </div>
+    <video
+      id="vid"
+      playsinline
+      muted
+      preload="metadata"
+      poster="/og-image.jpg"
+      aria-label="Video of the CB Grup Barna mascot - Basketball school for kids aged 4 to 8"
+    >
+      <source src="/mascota/mascota-reel.mp4" type="video/mp4">
+      <track
+        kind="subtitles"
+        src="/mascota/subtitols.vtt"
+        srclang="ca"
+        label="Català"
+        default
+      >
+      Your browser does not support HTML5 video.
+    </video>
+
+    <div class="play-btn" id="playBtn" role="button" aria-label="Play video" tabindex="0">
+      <div class="play-icon">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </div>
+
+    <button class="sound-btn" id="soundBtn" aria-label="Turn on sound" title="Turn on sound">🔇</button>
+    <button class="unmute-banner" id="unmuteBanner">🔊 Tap to hear the voice!</button>
+  </div>
+
+  <!-- ── INFO CARD ── -->
+  <div class="info-card">
+    <div class="tag">🏀 Basketball School · El Clot</div>
+    <h1>Open House!</h1>
+    <p class="sub">Sant Martí District · Barcelona City Council</p>
+
+    <ul class="features">
+      <li><span class="icon">👦🏽👧🏻</span> <span>For kids aged <strong>4 to 8</strong></span></li>
+      <li><span class="icon">🤝</span> <span>Mixed teams</span></li>
+      <li><span class="icon">📊</span> <span>3 age groups</span></li>
+      <li><span class="icon">🏟️</span> <span>Meet-ups <strong>with</strong> other clubs</span></li>
+    </ul>
+
+    <div class="contact-box">
+      <div class="contact-name">📞 Contact phone</div>
+      <div class="phone">646 205 526</div>
+      <div class="person">Julio Torralba</div>
+    </div>
+
+    <div class="cta-group">
+      <a href="tel:+34646205526" class="btn btn-primary">
+        📞 Call now · 646 205 526
+      </a>
+      <a href="https://wa.me/34646205526?text=Hi!%20I'm%20interested%20in%20the%20CB%20Grup%20Barna%20Basketball%20School%20for%20kids%20aged%204%20to%208.%20Could%20you%20give%20me%20more%20information%3F" class="btn btn-wa" target="_blank" rel="noopener">
+        💬 WhatsApp
+      </a>
+      <a href="https://www.instagram.com/cbgrupbarna/" class="btn btn-ig" target="_blank" rel="noopener">
+        📸 @cbgrupbarna
+      </a>
+    </div>
+
+    <div class="hashtags">
+      <span>#ElPrimerBotComençaAquí</span>
+      <span>#SomClot</span>
+      <span>#GrassrootsBasketball</span>
+      <span>#Barcelona</span>
+      <span>#SantMartí</span>
+    </div>
+  </div>
+
+  <!-- ── COMPARTIR ── -->
+  <div class="share-strip">
+    <h2>Share with other families! 🚀</h2>
+    <div class="share-btns">
+      <a
+        href="https://wa.me/?text=🏀%20Check%20out%20the%20CB%20Grup%20Barna%20mascot!%20Basketball%20school%20for%20kids%20aged%204%20to%208%20in%20the%20Clot.%20Open%20House!%20https%3A%2F%2Fcbgrupbarna.info%2Fen%2Fmascota%2F%20%23SomClot"
+        class="share-btn share-wa"
+        target="_blank"
+        rel="noopener"
+        aria-label="Share via WhatsApp"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button
+        class="share-btn share-copy"
+        id="copyBtn"
+        aria-label="Copy link"
+        onclick="copyLink()"
+      >
+        🔗 Copy link
+      </button>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <p><strong>CB Grup Barna</strong> · Since 1965 in the Clot neighbourhood</p>
+    <p>Sant Martí District · Barcelona City Council</p>
+    <p style="margin-top:8px">
+      <a href="https://cbgrupbarna.info">cbgrupbarna.info</a> ·
+      <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>
+    </p>
+  </footer>
+</main>
+
+<script>
+  const vid = document.getElementById('vid');
+  const playBtn = document.getElementById('playBtn');
+  const soundBtn = document.getElementById('soundBtn');
+  const unmuteBanner = document.getElementById('unmuteBanner');
+
+  // Silent autoplay (browsers require muted for autoplay)
+  vid.addEventListener('canplay', () => { vid.play().catch(() => {}); });
+
+  function updatePlayBtn() { playBtn.classList.toggle('hidden', !vid.paused); }
+  vid.addEventListener('play', updatePlayBtn);
+  vid.addEventListener('pause', updatePlayBtn);
+
+  function unmute() {
+    vid.muted = false;
+    soundBtn.textContent = '🔊';
+    soundBtn.setAttribute('aria-label', 'Mute');
+    unmuteBanner.classList.add('hidden');
+    if (vid.paused) vid.play();
+  }
+
+  unmuteBanner.addEventListener('click', unmute);
+
+  let hasUnmuted = false;
+  function toggle() {
+    if (!hasUnmuted) { hasUnmuted = true; unmute(); return; }
+    if (vid.paused) { vid.play(); } else { vid.pause(); }
+  }
+
+  playBtn.addEventListener('click', toggle);
+  playBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggle(); });
+  vid.addEventListener('click', toggle);
+
+  soundBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (vid.muted) { unmute(); }
+    else { vid.muted = true; soundBtn.textContent = '🔇'; soundBtn.setAttribute('aria-label', 'Turn on sound'); }
+  });
+
+  // Turn on subtitles automatically
+  vid.addEventListener('loadedmetadata', () => {
+    const tracks = vid.textTracks;
+    for (let i = 0; i < tracks.length; i++) {
+      tracks[i].mode = 'showing';
+    }
+  });
+
+  // Copy the link
+  function copyLink() {
+    const url = window.location.href;
+    if (navigator.share) {
+      navigator.share({
+        title: '🐾 The CB Grup Barna Mascot! #SomClot',
+        text: 'Basketball school for kids aged 4 to 8 in the Clot. Open House! 🏀',
+        url: url
+      });
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => { btn.textContent = '🔗 Copy link'; }, 2500);
+      });
+    }
+  }
+
+  // Analytics (if GA4 available)
+  vid.addEventListener('ended', () => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'video_complete', { video_title: 'mascota_cb_grup_barna' });
+    }
+  });
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R6XYR7G1WF');
+</script>
+
+</body>
+</html>

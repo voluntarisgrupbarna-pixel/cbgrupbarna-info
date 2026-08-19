@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#E31E24">
-<title>La Mascota del CB Grup Barna · #SomClot · Escola de Bàsquet Barcelona</title>
-<meta name="description" content="Coneix la mascota del CB Grup Barna! Escola de bàsquet per a nens i nenes de 4 a 7 anys al Districte de Sant Martí de Barcelona. Portes obertes! #ElPrimerBotComençaAquí">
+<meta name="theme-color" content="#E20613">
+<title>La Mascota del CB Grup Barna · #SomClot · Bàsquet BCN</title>
+<meta name="description" content="Coneix la mascota del CB Grup Barna! Escola de bàsquet per a nens i nenes de 4 a 8 anys al Districte de Sant Martí de Barcelona. Portes obertes!">
 
 <!-- Open Graph / Compartir -->
 <meta property="og:type" content="video.other">
 <meta property="og:url" content="https://cbgrupbarna.info/mascota/">
 <meta property="og:title" content="🐾 La Mascota del CB Grup Barna! #SomClot">
-<meta property="og:description" content="Escola de bàsquet per a nens i nenes de 4 a 7 anys al barri del Clot, Barcelona. Equips mixtes · 3 grups per edat · Portes Obertes! Truca'ns: 646 205 526">
+<meta property="og:description" content="Escola de bàsquet per a nens i nenes de 4 a 8 anys al barri del Clot, Barcelona. Equips mixtes · 3 grups per edat · Portes Obertes! Truca'ns: 646 205 526">
 <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta property="og:video" content="https://cbgrupbarna.info/mascota/mascota.mp4">
 <meta property="og:video:type" content="video/mp4">
@@ -24,7 +24,7 @@
 <meta name="twitter:card" content="player">
 <meta name="twitter:site" content="@cbgrupbarna">
 <meta name="twitter:title" content="🐾 La Mascota del CB Grup Barna! #SomClot">
-<meta name="twitter:description" content="Escola de bàsquet per a nens i nenes de 4 a 7 anys. Portes Obertes! #ElPrimerBotComençaAquí">
+<meta name="twitter:description" content="Escola de bàsquet per a nens i nenes de 4 a 8 anys. Portes Obertes! #ElPrimerBotComençaAquí">
 <meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta name="twitter:player" content="https://cbgrupbarna.info/mascota/">
 <meta name="twitter:player:width" content="480">
@@ -33,6 +33,10 @@
 <!-- SEO -->
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://cbgrupbarna.info/mascota/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/mascota/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/mascota/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/mascota/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/mascota/">
 
 <!-- JSON-LD -->
 <script type="application/ld+json">
@@ -40,7 +44,7 @@
   "@context": "https://schema.org",
   "@type": "VideoObject",
   "name": "La Mascota del CB Grup Barna · #SomClot",
-  "description": "Escola de bàsquet per a nens i nenes de 4 a 7 anys al barri del Clot, Barcelona. Equips mixtes, 3 grups per edat, trobades amb altres clubs.",
+  "description": "Escola de bàsquet per a nens i nenes de 4 a 8 anys al barri del Clot, Barcelona. Equips mixtes, 3 grups per edat, trobades amb altres clubs.",
   "thumbnailUrl": "https://cbgrupbarna.info/og-image.jpg",
   "uploadDate": "2026-06-12",
   "duration": "PT1M30S",
@@ -59,8 +63,8 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --vermell: #E31E24;
-    --vermell-fosc: #b5161b;
+    --vermell: #E20613;
+    --vermell-fosc: #E20613;
     --negre: #0a0a0a;
     --blanc: #ffffff;
     --crema: #F2EDE6;
@@ -144,12 +148,12 @@
   .play-icon {
     width: 72px;
     height: 72px;
-    background: rgba(227, 30, 36, 0.9);
+    background: rgba(226,6,19, 0.9);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 24px rgba(227,30,36,0.5);
+    box-shadow: 0 4px 24px rgba(226,6,19,0.5);
     transition: transform .2s;
   }
   .play-icon:hover { transform: scale(1.1); }
@@ -160,7 +164,7 @@
     position: absolute;
     top: 12px;
     left: 12px;
-    background: rgba(227,30,36,0.9);
+    background: rgba(226,6,19,0.9);
     color: #fff;
     font-size: 0.72rem;
     font-weight: 700;
@@ -196,7 +200,7 @@
     bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(227,30,36,0.92);
+    background: rgba(226,6,19,0.92);
     color: #fff;
     font-size: 1rem;
     font-weight: 800;
@@ -442,6 +446,23 @@
   @supports (padding: max(0px)) {
     .footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
   }
+
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; }
+  .lang-switch a:hover { opacity: 1; }
+  .lang-switch .sep { opacity: 0.25; }
+
+  .lang-switch-bar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+    background: rgba(0,0,0,0.45);
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #fff;
+  }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -454,13 +475,18 @@
 <main class="hero" role="main">
   <div class="video-wrap">
     <div class="video-badge">#SomClot · Escola Bàsquet</div>
+    <div class="lang-switch-bar">
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/mascota/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/mascota/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/mascota/" hreflang="en">EN</a>
+      </div>
+    </div>
     <video
       id="vid"
       playsinline
       muted
       preload="metadata"
       poster="../og-image.jpg"
-      aria-label="Vídeo de la mascota del CB Grup Barna - Escola de bàsquet per a nens de 4 a 7 anys"
+      aria-label="Vídeo de la mascota del CB Grup Barna - Escola de bàsquet per a nens de 4 a 8 anys"
     >
       <source src="mascota-reel.mp4" type="video/mp4">
       <track
@@ -490,7 +516,7 @@
     <p class="sub">Districte de Sant Martí · Ajuntament de Barcelona</p>
 
     <ul class="features">
-      <li><span class="icon">👦🏽👧🏻</span> <span>Per a nens i nenes de <strong>4 a 7 anys</strong></span></li>
+      <li><span class="icon">👦🏽👧🏻</span> <span>Per a nens i nenes de <strong>4 a 8 anys</strong></span></li>
       <li><span class="icon">🤝</span> <span>Equips mixtes</span></li>
       <li><span class="icon">📊</span> <span>3 grups per edat</span></li>
       <li><span class="icon">🏟️</span> <span>Trobades <strong>amb</strong> altres clubs</span></li>
@@ -506,7 +532,7 @@
       <a href="tel:+34646205526" class="btn btn-primary">
         📞 Truca ara · 646 205 526
       </a>
-      <a href="https://wa.me/34646205526?text=Hola!%20M'interessa%20l'Escola%20de%20Bàsquet%20del%20CB%20Grup%20Barna%20per%20a%20nens%20de%204%20a%207%20anys.%20Podeu%20informar-me%3F" class="btn btn-wa" target="_blank" rel="noopener">
+      <a href="https://wa.me/34646205526?text=Hola!%20M'interessa%20l'Escola%20de%20Bàsquet%20del%20CB%20Grup%20Barna%20per%20a%20nens%20de%204%20a%208%20anys.%20Podeu%20informar-me%3F" class="btn btn-wa" target="_blank" rel="noopener">
         💬 WhatsApp
       </a>
       <a href="https://www.instagram.com/cbgrupbarna/" class="btn btn-ig" target="_blank" rel="noopener">
@@ -528,7 +554,7 @@
     <h2>Comparteix amb altres famílies! 🚀</h2>
     <div class="share-btns">
       <a
-        href="https://wa.me/?text=🏀%20Mira%20la%20mascota%20del%20CB%20Grup%20Barna!%20Escola%20de%20bàsquet%20per%20a%20nens%20de%204%20a%207%20anys%20al%20Clot.%20Portes%20Obertes!%20https%3A%2F%2Fcbgrupbarna.info%2Fmascota%2F%20%23SomClot"
+        href="https://wa.me/?text=🏀%20Mira%20la%20mascota%20del%20CB%20Grup%20Barna!%20Escola%20de%20bàsquet%20per%20a%20nens%20de%204%20a%208%20anys%20al%20Clot.%20Portes%20Obertes!%20https%3A%2F%2Fcbgrupbarna.info%2Fmascota%2F%20%23SomClot"
         class="share-btn share-wa"
         target="_blank"
         rel="noopener"
@@ -612,7 +638,7 @@
     if (navigator.share) {
       navigator.share({
         title: '🐾 La Mascota del CB Grup Barna! #SomClot',
-        text: 'Escola de bàsquet per a nens de 4 a 7 anys al Clot. Portes Obertes! 🏀',
+        text: 'Escola de bàsquet per a nens de 4 a 8 anys al Clot. Portes Obertes! 🏀',
         url: url
       });
     } else if (navigator.clipboard) {
@@ -633,7 +659,7 @@
 </script>
 
 <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script src="/js/galetes.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

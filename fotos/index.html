@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Galeria de Fotos · CB Grup Barna</title>
   <meta name="description" content="Repositori fotogràfic oficial del CB Grup Barna · Bàsquet al Clot · Sant Martí, Barcelona · des de 1965">
-  <meta name="theme-color" content="#E31E24">
+  <meta name="theme-color" content="#E20613">
   <meta property="og:title" content="Galeria de Fotos · CB Grup Barna">
   <meta property="og:description" content="Tots els esdeveniments fotogràfics del club. #somclot">
   <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
@@ -13,7 +13,7 @@
   <link rel="icon" href="/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -24,10 +24,10 @@
       --line-dark: rgba(255,255,255,0.15);
       --paper: #ffffff;
       --paper-2: #f6f4f1;
-      --red: #E31E24;
-      --red-dark: #a81318;
+      --red: #E20613;
+      --red-dark: #A8040E;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      --display: 'Jost', 'Futura', 'Century Gothic', -apple-system, sans-serif;
+      --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
       --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     }
 
@@ -72,6 +72,11 @@
       transition: color .15s; margin-left: auto;
     }
     .nav-back:hover { color: var(--red); }
+    .site-nav { margin-top: 68px; background: var(--paper-2); border-bottom: 1px solid var(--line); }
+    .site-nav-in { max-width: 1100px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 44px); display: flex; align-items: center; gap: 18px; height: 36px; overflow-x: auto; scrollbar-width: none; }
+    .site-nav-in::-webkit-scrollbar { display: none; }
+    .site-nav-in a { font-family: var(--display); font-size: 9px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+    .site-nav-in a:hover { color: var(--red); }
     #search-input {
       background: var(--paper-2); border: 1px solid var(--line);
       color: var(--ink); padding: .5rem .85rem .5rem 2.2rem;
@@ -376,8 +381,6 @@
     .gate-btn:disabled { opacity: .5; cursor: not-allowed; }
     .gate-error { color: var(--red); font-size: .78rem; margin: -.25rem 0 .5rem; text-align: left; }
     .gate-success { color: #1a7a3c; font-size: .82rem; margin-top: .75rem; }
-    .gate-form-row { display: flex; gap: .5rem; }
-    .gate-form-row .gate-input { flex: 1; }
 
     /* ── SPONSOR ── */
     .sponsor-bar {
@@ -425,9 +428,23 @@
       #search-input { width: 150px; font-size: .8rem; }
       .nav-logo span { display: none; }
     }
+
+    /* ── SELECTOR D'IDIOMA ── */
+    .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+    .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+    .lang-switch a.active { opacity: 1; font-weight: 600; }
+    .lang-switch a:hover { opacity: 1; }
+    .lang-switch .sep { opacity: 0.25; }
   </style>
-  <link rel="canonical" href="https://cbgrupbarna.info/fotos/">
+  <link rel="canonical" href="https://cbgrupbarna.info/fotos/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cbgrupbarna"><meta name="twitter:title" content="Galeria de fotos · CB Grup Barna"><meta name="twitter:description" content="Les fotos del club, dia de partit rere dia de partit. Bàsquet al Clot, Sant Martí."><meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
+  <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/fotos/">
+  <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/fotos/">
+  <link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/fotos/">
+  <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/fotos/">
   <meta property="og:url" content="https://cbgrupbarna.info/fotos/">
+  <meta property="og:locale" content="ca_ES">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="en_US">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -480,11 +497,11 @@
   <div class="gate-box">
     <div class="gate-logo">CB <span>Grup</span> Barna</div>
     <div class="gate-title">Galeria Fotogràfica</div>
-    <div class="gate-subtitle">Per accedir, introdueix el codi d'accés del club<br>o subscriu-te al nostre newsletter gratuït.</div>
+    <div class="gate-subtitle">Ets família del club? Introdueix el codi d'accés.<br>Si no, deixa'ns el teu correu i hi entres directament.</div>
 
     <div class="gate-tabs">
       <button class="gate-tab active" onclick="switchTab('pin')">Codi d'accés</button>
-      <button class="gate-tab" onclick="switchTab('subscribe')">Newsletter</button>
+      <button class="gate-tab" onclick="switchTab('subscribe')">Accés amb correu</button>
     </div>
 
     <!-- PIN TAB -->
@@ -497,15 +514,10 @@
 
     <!-- SUBSCRIBE TAB -->
     <div class="gate-panel" id="tab-subscribe">
-      <div class="gate-form-row">
-        <input class="gate-input" id="sub-nom" type="text" placeholder="Nom" required>
-        <input class="gate-input" id="sub-cognoms" type="text" placeholder="Cognoms" required>
-      </div>
-      <input class="gate-input" id="sub-email" type="email" placeholder="Correu electrònic" required>
-      <input class="gate-input" id="sub-mobil" type="tel" placeholder="Telèfon mòbil">
-      <input class="gate-input" id="sub-club" type="text" placeholder="Club o entitat">
+      <input class="gate-input" id="sub-email" type="email" placeholder="Correu electrònic" required
+        onkeydown="if(event.key==='Enter')submitSubscription()">
       <div class="gate-error" id="sub-error" style="display:none"></div>
-      <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Subscriure'm i accedir</button>
+      <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Continuar a la galeria</button>
       <div class="gate-success" id="sub-success" style="display:none">Gràcies! Benvingut/da a la galeria.</div>
     </div>
   </div>
@@ -524,7 +536,10 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <input type="search" id="search-input" placeholder="Cerca un event…" autocomplete="off">
+    <input type="search" id="search-input" placeholder="Cerca un esdeveniment…" autocomplete="off">
+  </div>
+  <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+    <a href="/fotos/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/fotos/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/fotos/" hreflang="en">EN</a>
   </div>
   <a href="/" class="nav-back">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -532,6 +547,18 @@
     </svg>
     cbgrupbarna.info
   </a>
+</nav>
+<nav class="site-nav" aria-label="Navegació principal">
+  <div class="site-nav-in">
+    <a href="/club/">Club</a>
+    <a href="/escoleta/">Escoleta</a>
+    <a href="/partits/">Dies de partit</a>
+    <a href="/patrocinadors/">Patrocinadors</a>
+    <a href="/campus/">Campus</a>
+    <a href="/3x3/">3x3</a>
+    <a href="/cistella-petita/">Cistella Petita</a>
+    <a href="/premsa/">Premsa</a>
+  </div>
 </nav>
 
 <!-- EVENTS VIEW -->
@@ -669,21 +696,31 @@ function isFlickr(ev) { return ev.source === 'flickr'; }
 function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
 function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v|avi)$/i.test(ref || ''); }
 
+// Les versions web i miniatura les genera scripts/build-gallery-images.py i es
+// serveixen des del domini propi. Abans passaven per wsrv.nl, un proxy extern
+// que havia de descarregar cada original —de fins a 14 MB— i encongir-lo al vol:
+// d'aquí la lentitud, i d'aquí que les fotos de les famílies acabessin passant
+// per un tercer. Els originals només es toquen per descarregar-los.
+function repoUrl(ev, ref) { return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`; }
+function derivada(carpeta, ev, ref) {
+  return `/fotos/${carpeta}/${ev.id}/${ref.replace(/\.[^.]+$/, '.webp')}`;
+}
+
 function photoThumb(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepoRef(ev, ref)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepoRef(ev, ref)) return isVideoRef(ref) ? repoUrl(ev, ref) : derivada('thumb', ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_q.jpg`;
   return THUMB(ref);
 }
 function photoFull(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepoRef(ev, ref)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepoRef(ev, ref)) return isVideoRef(ref) ? repoUrl(ev, ref) : derivada('web', ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_b.jpg`;
   return FULL(ref);
 }
 function photoDl(ev, ref) {
   if (!ref) return '#';
-  if (isRepoRef(ev, ref)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepoRef(ev, ref)) return repoUrl(ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_o.jpg`;
   return DL(ref);
 }
@@ -696,7 +733,7 @@ function eventCover(ev) {
   const coverRef = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
   if (isRepoRef(ev, coverRef)) {
     if (!coverRef) return PLACEHOLDER;
-    return `${REPO_RAW}/fotos/uploads/${ev.id}/${coverRef}`;
+    return isVideoRef(coverRef) ? repoUrl(ev, coverRef) : derivada('thumb', ev, coverRef);
   }
   return THUMB(ev.cover);
 }
@@ -737,15 +774,11 @@ function checkPin() {
 }
 
 async function submitSubscription() {
-  const nom = document.getElementById('sub-nom').value.trim();
-  const cognoms = document.getElementById('sub-cognoms').value.trim();
   const email = document.getElementById('sub-email').value.trim();
-  const mobil = document.getElementById('sub-mobil').value.trim();
-  const club = document.getElementById('sub-club').value.trim();
   const err = document.getElementById('sub-error');
 
-  if (!nom || !cognoms || !email) {
-    err.textContent = 'Nom, cognoms i correu són obligatoris.';
+  if (!email) {
+    err.textContent = 'Cal un correu electrònic.';
     err.style.display = 'block';
     return;
   }
@@ -766,9 +799,8 @@ async function submitSubscription() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
-        Nom: nom, Cognoms: cognoms, Correu: email,
-        Mòbil: mobil || '—', Club: club || '—',
-        _subject: 'Nova subscripció Galeria CB Grup Barna',
+        Correu: email,
+        _subject: 'Nou accés a la Galeria CB Grup Barna',
         _captcha: 'false',
       }),
     });
@@ -780,7 +812,7 @@ async function submitSubscription() {
     } else { throw new Error('KO'); }
   } catch {
     btn.disabled = false;
-    btn.textContent = 'Subscriure\'m i accedir';
+    btn.textContent = 'Continuar a la galeria';
     err.textContent = 'Error en enviar. Torna-ho a intentar.';
     err.style.display = 'block';
   }
@@ -822,9 +854,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── STATS ──
 function buildStats() {
-  const totalPhotos = window.GALERIA_EVENTS.reduce((s, e) => s + e.photos.length, 0);
-  const totalEvents = window.GALERIA_EVENTS.length;
-  const seasons = [...new Set(window.GALERIA_EVENTS.map(e => e.season).filter(Boolean))];
+  const visibles = window.GALERIA_EVENTS.filter(esVisible);
+  const totalPhotos = visibles.reduce((s, e) => s + e.photos.length, 0);
+  const totalEvents = visibles.length;
+  const seasons = [...new Set(visibles.map(e => e.season).filter(Boolean))];
   document.getElementById('hero-stats').innerHTML = [
     { num: totalPhotos.toLocaleString('ca'), label: 'Fotos' },
     { num: totalEvents, label: 'Esdeveniments' },
@@ -834,7 +867,7 @@ function buildStats() {
 
 // ── SEASON FILTERS ──
 function buildSeasonFilters() {
-  const seasons = [...new Set(window.GALERIA_EVENTS.map(e => e.season).filter(Boolean))].sort().reverse();
+  const seasons = [...new Set(window.GALERIA_EVENTS.filter(esVisible).map(e => e.season).filter(Boolean))].sort().reverse();
   const wrap = document.getElementById('season-filters');
   if (!seasons.length) { wrap.style.display = 'none'; return; }
 
@@ -859,9 +892,26 @@ function setSeasonFilter(season) {
   renderEvents();
 }
 
+// ── PÚBLIC / PRIVAT ──
+// Els grups marcats com a privats des de /fotos/admin.html no surten a la
+// galeria per a ningú. Màrqueting els veu afegint ?marqueting=<contrasenya>
+// un sol cop: es desa a la sessió, i es tanca en tancar la pestanya.
+const MK_KEY = 'cbgb-marqueting';
+function esMarqueting() {
+  try {
+    const p = new URLSearchParams(location.search).get('marqueting');
+    const clau = (window.GALERIA_CONFIG || {}).marketing_pin || '';
+    if (p && clau && p === clau) { sessionStorage.setItem(MK_KEY, '1'); return true; }
+    return sessionStorage.getItem(MK_KEY) === '1';
+  } catch (e) { return false; }
+}
+function esVisible(e) {
+  return e.visibility !== 'private' || esMarqueting();
+}
+
 // ── EVENTS GRID ──
 function filteredEvents() {
-  return window.GALERIA_EVENTS.filter(e => {
+  return window.GALERIA_EVENTS.filter(esVisible).filter(e => {
     const matchesSeason = activeSeason === 'all' || e.season === activeSeason;
     const matchesSearch = !searchQuery ||
       e.title.toLowerCase().includes(searchQuery) ||

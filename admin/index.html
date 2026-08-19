@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#C8102E;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
   nav{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
@@ -53,6 +53,12 @@
       <p>Carregar els partits de la jornada (locals i visitants) i posar-hi el resultat quan s'acaben.</p>
       <span class="tag">Gestionar partits →</span>
     </a>
+    <a class="card" href="/partits/app.html">
+      <div class="ic">📱</div>
+      <h2>App Partits i Resultats</h2>
+      <p>L'app completa: jornada amb filtres, resultats i ratxes, anàlisi, equips, cartells i gestió. De moment només des d'aquí, com la configuració de la galeria.</p>
+      <span class="tag">Obrir l'app →</span>
+    </a>
     <a class="card" href="/partits/cartell.html">
       <div class="ic">🏆</div>
       <h2>Cartell de victòria</h2>
@@ -77,6 +83,12 @@
       <p>Pujar fotos i vídeos dels partits i esdeveniments, crear àlbums i gestionar l'accés.</p>
       <span class="tag">Gestionar galeria →</span>
     </a>
+    <a class="card" href="/admin/token.html">
+      <div class="ic">🔐</div>
+      <h2>Token de GitHub</h2>
+      <p>Guardar el token una sola vegada, xifrat amb la contrasenya del club. Després cap eina el torna a demanar.</p>
+      <span class="tag">Gestionar token →</span>
+    </a>
     <a class="card" href="/briefing/admin.html">
       <div class="ic">🤝</div>
       <h2>Briefing de col·laboradors</h2>
@@ -95,14 +107,20 @@
     </a>
     <a class="card" href="/partits/" target="_blank">
       <div class="ic">🗓</div>
-      <h2>Partits del club</h2>
-      <p>Pàgina pública amb els horaris i resultats de la jornada.</p>
+      <h2>Dies de partit</h2>
+      <p>Pàgina pública: calendari global de tots els equips, cap de setmana i resultats de l'anterior.</p>
       <span class="tag">Veure web →</span>
     </a>
     <a class="card" href="/jugadors/" target="_blank">
       <div class="ic">👥</div>
       <h2>Plantilla pública</h2>
       <p>Pàgina pública amb tots els equips i jugadors del club.</p>
+      <span class="tag">Veure web →</span>
+    </a>
+    <a class="card" href="/opina/" target="_blank">
+      <div class="ic">⭐</div>
+      <h2>Ressenyes de Google</h2>
+      <p>Landing per demanar ressenyes a les famílies. El comptador i l'enllaç es canvien a <code>opina/opina.json</code>.</p>
       <span class="tag">Veure web →</span>
     </a>
     <a class="card" href="/premidonaesport/" target="_blank">
@@ -114,7 +132,7 @@
   </div>
 </div>
 
-<script src="/scripts/google-gate.js"></script>
+<script src="/scripts/admin-gate.js"></script>
 <script>
 CBGBGate.protect(function(user){
   var w = document.getElementById('who');

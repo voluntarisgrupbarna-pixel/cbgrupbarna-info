@@ -120,7 +120,11 @@ def main():
     canvis_avui = []
 
     for s in scraped:
-        eq = by_club.get(s.get("clubNom", "").upper()) or by_cat.get(s["categoria"].upper())
+        # la categoria (competicio) es unica per equip; clubNom ("C.B GRUP
+        # BARNA A"/"B") es comparteix entre fins a 8 equips diferents (un
+        # per genere/categoria amb la mateixa lletra), aixi que NO pot anar
+        # primer o assigna partits a l'equip equivocat en silenci.
+        eq = by_cat.get(s["categoria"].upper()) or by_club.get(s.get("clubNom", "").upper())
         if not eq:
             if not s["categoria"]:
                 continue
@@ -143,7 +147,7 @@ def main():
                                          "camp": label, "abans": abans, "despres": despres, "partitId": pid})
                 p["data"], p["hora"], p["pista"], p["adreca"] = s["data"], s["hora"], s["pista"], s["adreca"]
                 p["avis"] = {"detectat": avui, "expira": (date.today() + timedelta(days=DIES_AVIS)).isoformat(),
-                             "resum": " · ".join(f"{l}: {a} → {d}" for l, a, d in canviats)}
+                             "resum": " · ".join(f"{l}: {a or 'sense confirmar'} → {d}" for l, a, d in canviats)}
                 updated += 1
             if s["puntsLocal"] is not None and p.get("puntsLocal") is None:
                 p["puntsLocal"], p["puntsVisitant"], p["estat"] = s["puntsLocal"], s["puntsVisitant"], "jugat"

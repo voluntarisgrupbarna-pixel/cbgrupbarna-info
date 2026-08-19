@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escoleta CB Grup Barna · Baloncesto (4-8 años) | El Clot</title>
+<link rel="preload" href="/escoleta/fonts/anton-400-2686.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Tipografies auto-allotjades (Anton + Inter). Sense CDN de Google:
+   evita transferir IPs de les famílies a tercers (criteri RGPD del club). */
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/escoleta/fonts/anton-400-2686.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/escoleta/fonts/anton-400-1354.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/escoleta/fonts/inter-400-4592.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/escoleta/fonts/inter-400-8117.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/escoleta/fonts/inter-500-4592.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/escoleta/fonts/inter-500-8117.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/escoleta/fonts/inter-700-4592.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/escoleta/fonts/inter-700-8117.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ===================================================================
+   CB GRUP BARNA · tokens de marca (sistema-visual-cbgb)
+   Vermell Barna #E63329 · Tinta #0E1116 · Blanc/crema #F4F1EC
+   Display: Anton · Cos: Inter · NOMÉS 3 COLORS. Sense degradats decoratius.
+   =================================================================== */
+:root{
+  --red:#E63329;
+  --black:#0E1116;
+  --ink:#171B21;
+  --paper:#F4F1EC;
+  --grey:#8A8F98;
+  --line:rgba(244,241,236,.14);
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);color:var(--paper);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ---------- PORTES OBERTES ---------- */
+.po{background:var(--red);color:#fff;border-top:none;padding:64px 0 68px}
+.po .kicker{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;opacity:.85;margin-bottom:14px}
+.po h2{font-family:'Anton',sans-serif;font-size:clamp(34px,6vw,60px);line-height:1.02;text-transform:uppercase;margin-bottom:16px}
+.po p{font-size:18px;max-width:640px;opacity:.95;margin-bottom:26px}
+.po .btn{background:#fff;color:var(--red)}
+.po .btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.8)}
+.po .cta{display:flex;gap:12px;flex-wrap:wrap}
+.po .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28)}
+.po .facts div{font-size:15px}
+.po .facts b{display:block;font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.pobar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--red);
+  display:flex;align-items:center;justify-content:center;gap:14px;padding:11px 16px;flex-wrap:wrap;
+  box-shadow:0 -8px 24px rgba(0,0,0,.35)}
+.pobar span{font-family:'Anton',sans-serif;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.pobar a{background:#fff;color:var(--red);text-decoration:none;font-family:'Anton',sans-serif;font-size:13px;
+  letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px}
+body{padding-bottom:66px}
+@media(max-width:520px){.pobar span{font-size:12px}.pobar{gap:10px}}
+
+/* ---------- LANG SWITCH ---------- */
+.langbar{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(14,17,22,.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.langbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brandmark{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase}
+.brandmark span{color:var(--red)}
+
+/* ---------- SELECTOR D'IDIOMA (CA/ES/EN, navegacion entre paginas) ---------- */
+.langbar-right{display:flex;align-items:center;gap:16px}
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch a { padding: 7px 2px; opacity: 0.55; color: var(--paper); transition: opacity 0.3s, color 0.3s; }
+.lang-switch a.active { opacity: 1; font-weight: 700; color: var(--red); }
+.lang-switch a:hover { opacity: 1; color: var(--red); }
+.lang-switch .sep { opacity: 0.25; }
+@media(max-width:520px){ .langbar .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:8px;gap:6px} .langbar-right{gap:10px} }
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;padding-top:56px;overflow:hidden}
+.hero-img{position:absolute;inset:0}
+/* Tractament de foto de marca: B/N alt contrast, la foto és textura, no protagonista */
+.hero-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.22) brightness(.78)}
+.hero-img::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(105deg,rgba(14,17,22,.96) 0%,rgba(14,17,22,.88) 46%,rgba(14,17,22,.52) 82%),
+    linear-gradient(180deg,rgba(14,17,22,.72) 0%,rgba(14,17,22,.30) 38%,rgba(14,17,22,.99) 100%);
+}
+.hero .wrap{position:relative;z-index:2;padding-bottom:72px;padding-top:120px}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#fff;background:var(--red);padding:7px 13px;border-radius:2px;margin-bottom:26px;
+}
+h1,.h1-alt{
+  font-family:'Anton',sans-serif;font-weight:400;
+  font-size:clamp(46px,8.6vw,118px);line-height:.88;letter-spacing:-.02em;
+  text-transform:uppercase;
+}
+h1 em,.h1-alt em{font-style:normal;color:var(--red)}
+.subhook{
+  display:inline-block;margin-top:24px;font-family:'Anton',sans-serif;text-transform:uppercase;
+  font-size:clamp(19px,2.6vw,30px);letter-spacing:.01em;color:var(--paper);line-height:1.15;
+  background:rgba(14,17,22,.86);border-left:5px solid var(--red);
+  padding:11px 20px 12px;border-radius:2px;
+}
+.hero p{max-width:620px;margin-top:26px;font-size:19px;color:#CFCBC4}
+.hero p.nota-molts{font-size:16px;color:#A9A5A0;border-left:3px solid rgba(230,51,41,.65);padding-left:14px;margin-top:20px}
+.hero .credit{margin-top:20px;font-size:12px;color:var(--grey);letter-spacing:.04em}
+
+/* ---------- SECTIONS ---------- */
+section{padding:88px 0;border-top:1px solid var(--line)}
+.sec-num{
+  font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.2em;
+  color:var(--red);text-transform:uppercase;margin-bottom:14px;
+}
+h2{
+  font-family:'Anton',sans-serif;font-weight:400;
+  font-size:clamp(34px,5.6vw,66px);line-height:.94;letter-spacing:-.01em;
+  text-transform:uppercase;margin-bottom:24px;
+}
+h3{
+  font-family:'Anton',sans-serif;font-weight:400;font-size:26px;
+  text-transform:uppercase;letter-spacing:.01em;margin-bottom:10px;
+}
+.lead{font-size:20px;color:#CFCBC4;max-width:720px}
+p+p{margin-top:18px}
+.body{max-width:720px;color:#B2AEA8}
+.body strong{color:#fff;font-weight:700}
+
+.pull{
+  border-left:3px solid var(--red);padding:6px 0 6px 22px;margin:34px 0;
+  font-family:'Anton',sans-serif;font-size:clamp(22px,3.2vw,34px);line-height:1.15;
+  text-transform:uppercase;max-width:760px;
+}
+
+/* ---------- FIGURES ---------- */
+figure{margin:38px 0}
+figure img{width:100%;border-radius:2px}
+figcaption{margin-top:12px;font-size:13.5px;color:var(--grey);line-height:1.55;max-width:720px}
+figcaption b{color:#CFCBC4;font-weight:700}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:38px 0}
+.grid2 figure{margin:0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:38px 0}
+.grid3 figure{margin:0}
+.grid3 img,.grid2 img{aspect-ratio:4/3;object-fit:cover}
+.tall img{aspect-ratio:3/4;object-fit:cover}
+
+/* ---------- DOC HIGHLIGHT ---------- */
+.doc{
+  background:var(--ink);border:1px solid var(--line);border-radius:3px;
+  padding:30px;margin:40px 0;
+}
+.doc .tag{
+  display:inline-block;background:var(--red);color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:5px 11px;border-radius:2px;margin-bottom:18px;
+}
+.doc img{border-radius:2px}
+.doc dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;margin-top:22px;font-size:14.5px}
+.doc dt{color:var(--grey);text-transform:uppercase;font-size:11.5px;letter-spacing:.12em;font-weight:700;padding-top:3px}
+.doc dd{color:var(--paper);font-weight:500}
+
+/* ---------- ALUMNI ---------- */
+.alumni{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1px;background:var(--line);margin-top:44px;border:1px solid var(--line)}
+.alum{background:var(--ink);display:flex;flex-direction:column}
+.alum .shot{position:relative;aspect-ratio:3/4;overflow:hidden;background:#0A0C10}
+.alum .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.alum:hover .shot img{transform:scale(1.04)}
+.alum .shot::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(14,17,22,0) 45%,rgba(23,27,33,.96) 100%)}
+.alum .noshot{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;
+  background:repeating-linear-gradient(135deg,#12161C 0 10px,#171B21 10px 20px);position:relative}
+.alum .noshot span{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.16em;
+  text-transform:uppercase;color:#5C616B;text-align:center;padding:0 22px;line-height:1.5}
+.alum .txt{padding:22px 22px 26px}
+.alum .who{font-family:'Anton',sans-serif;font-size:23px;text-transform:uppercase;line-height:1.05}
+.alum .now{color:var(--red);font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-top:9px}
+.alum p{font-size:14px;color:#A6A29C;margin-top:13px;line-height:1.6}
+.alum .ara{
+  margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.alum .ara .tag{
+  flex:0 0 auto;font-family:'Anton',sans-serif;font-size:10.5px;letter-spacing:.14em;
+  background:var(--red);color:#fff;padding:5px 8px;border-radius:2px;margin-top:2px;
+}
+.alum .ara .val{font-size:13.5px;color:var(--paper);line-height:1.5;font-weight:500}
+.alum .ara .val em{display:block;font-style:normal;color:var(--grey);font-weight:400;font-size:12.5px;margin-top:2px}
+.alum .ara.pend .tag{background:#3A3F47}
+.alum .ara.pend .val{color:var(--grey);font-weight:400}
+
+/* ---------- STATS ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:44px 0}
+.stat{background:var(--ink);padding:30px 24px;text-align:center}
+.stat b{display:block;font-family:'Anton',sans-serif;font-size:52px;line-height:1;color:var(--red)}
+.stat span{display:block;margin-top:10px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--grey)}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--red);border-top:0}
+.cta h2{color:#fff}
+.cta .body{color:rgba(255,255,255,.92)}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.btn{
+  display:inline-block;background:var(--black);color:var(--paper);text-decoration:none;
+  font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  padding:17px 30px;border-radius:2px;transition:.15s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.75)}
+.btn.wa{display:inline-flex;align-items:center;gap:12px}
+.btn.wa svg{width:22px;height:22px;fill:currentColor;flex:0 0 auto}
+
+footer{padding:52px 0;font-size:13px;color:var(--grey);border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+footer a{color:#CFCBC4}
+
+.note{
+  background:rgba(230,51,41,.10);border:1px dashed rgba(230,51,41,.55);
+  padding:16px 20px;border-radius:3px;margin:30px 0;font-size:14px;color:#E9A9A3;
+}
+.note b{color:#fff}
+
+@media(max-width:780px){
+  body{font-size:16px}
+  section{padding:62px 0}
+  .grid3,.grid2{grid-template-columns:1fr}
+  .hero .wrap{padding-top:90px;padding-bottom:50px}
+  .doc{padding:20px}
+  .doc dl{grid-template-columns:1fr;gap:4px 0}
+  .doc dd{margin-bottom:12px}
+}
+
+/* FAQ visible · ha de coincidir sempre amb el FAQPage del JSON-LD */
+.faq-sec{padding:clamp(40px,6vw,84px) 0;border-top:1px solid rgba(255,255,255,.12)}
+.faq-sec h2{font-size:clamp(18px,4vw,26px);margin-bottom:26px}
+.faq-q{border-bottom:1px solid rgba(255,255,255,.12)}
+.faq-q summary{list-style:none;cursor:pointer;min-height:48px;display:flex;align-items:center;
+  padding:14px 40px 14px 0;position:relative;font-weight:600;font-size:15px}
+.faq-q summary::-webkit-details-marker{display:none}
+.faq-q summary::after{content:'+';position:absolute;right:6px;color:var(--red);font-weight:400;font-size:20px}
+.faq-q[open] summary::after{content:'–'}
+.faq-q p{padding:0 0 20px;font-size:14.5px;opacity:.8;line-height:1.75;max-width:70ch}
+</style>
+<meta name="description" content="Escoleta del CB Grup Barna (4 a 8 años) en El Clot, Barcelona. Puertas Abiertas: ven a probar un entrenamiento sin compromiso.">
+<link rel="canonical" href="https://cbgrupbarna.info/es/escoleta/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/escoleta/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/escoleta/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/escoleta/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/escoleta/">
+<meta property="og:title" content="Escuela de baloncesto en Barcelona · Escoleta CB Grup Barna (4 a 8 años)">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="ca_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbgrupbarna.info/es/escoleta/">
+<meta property="og:image" content="https://cbgrupbarna.info/escoleta/img/equip-anys90-julio.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="Escuela de baloncesto para niños y niñas de 4 a 8 años en El Clot, Barcelona. De esta pista han salido jugadores de ACB, de Liga Femenina Endesa y del Barça.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbgrupbarna.info/es/escoleta/">
+<link rel="icon" type="image/png" href="/logo.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://cbgrupbarna.info/#julio-torralba",
+      "name": "Julio Torralba",
+      "jobTitle": "Responsable de la Escoleta de baloncesto del CB Grup Barna",
+      "description": "Responsable de la Escoleta del CB Grup Barna, la escuela de baloncesto del club para niños y niñas de 4 a 8 años en el barrio de El Clot, Barcelona.",
+      "worksFor": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
+      "telephone": "+34646205526",
+      "knowsAbout": [
+        "Baloncesto base",
+        "Iniciación deportiva",
+        "Escuela de baloncesto",
+        "Minibaloncesto"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://cbgrupbarna.info/escoleta/#escoleta",
+      "name": "Escuela de baloncesto · Escoleta CB Grup Barna",
+      "alternateName": [
+        "Escoleta CB Grup Barna",
+        "Escuela de baloncesto en Barcelona",
+        "Escuela de baloncesto Barna"
+      ],
+      "description": "Escuela de baloncesto en Barcelona para niños y niñas de 4 a 8 años. La Escoleta del CB Grup Barna, en el barrio de El Clot (Distrito de Sant Martí), funciona con equipos mixtos, tres grupos por edad y encuentros con otros clubes de la ciudad y la provincia. De esta misma pista han salido jugadores y jugadoras que han llegado a la ACB, a la Liga Femenina Endesa y al FC Barcelona. La dirige Julio Torralba.",
+      "serviceType": "Escuela de baloncesto base",
+      "url": "https://cbgrupbarna.info/escoleta/",
+      "provider": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
+      "employee": {
+        "@id": "https://cbgrupbarna.info/#julio-torralba"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Barcelona"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Provincia de Barcelona"
+        }
+      ],
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 4,
+        "suggestedMaxAge": 8
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://cbgrupbarna.info/escoleta/",
+        "servicePhone": {
+          "@type": "ContactPoint",
+          "telephone": "+34646205526",
+          "contactType": "Escoleta",
+          "name": "Julio Torralba",
+          "availableLanguage": [
+            "es",
+            "ca"
+          ]
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "category": "Prueba gratuita",
+        "description": "Primer entrenamiento de prueba sin compromiso.",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://cbgrupbarna.info/es/escoleta/#webpage",
+      "url": "https://cbgrupbarna.info/es/escoleta/",
+      "name": "Escuela de baloncesto en Barcelona · Escoleta CB Grup Barna (4 a 8 años)",
+      "inLanguage": [
+        "es-ES",
+        "ca-ES",
+        "en-US"
+      ],
+      "about": {
+        "@id": "https://cbgrupbarna.info/escoleta/#escoleta"
+      },
+      "isPartOf": {
+        "@id": "https://cbgrupbarna.info/#website"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://cbgrupbarna.info/es/escoleta/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la escuela de baloncesto del CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Escoleta es la escuela de baloncesto del CB Grup Barna para niños y niñas de 4 a 8 años, en el barrio de El Clot, Distrito de Sant Martí de Barcelona. Funciona con equipos mixtos y tres grupos por edad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Quién dirige la Escoleta del CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Escoleta la dirige Julio Torralba. Se puede contactar con él por teléfono o WhatsApp al 646 205 526."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿A partir de qué edad se puede empezar a jugar a baloncesto en el Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Desde los 4 años. La Escoleta acoge a niños y niñas de 4 a 8 años. A partir de los 8 y a medida que están preparados, pasan a los equipos federados del club (premini, mini y el resto de categorías)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se puede probar un entrenamiento antes de apuntarse?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. El primer entrenamiento es de prueba y sin compromiso. Hay que escribir o llamar a Julio Torralba al 646 205 526 para reservar día."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde entrena la Escoleta del CB Grup Barna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En el barrio de El Clot, en el Distrito de Sant Martí de Barcelona. La Nau del Clot es el punto deportivo principal del club."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="langbar">
+  <div class="wrap">
+    <div class="brandmark">CB Grup Barna <span>·</span> Escoleta</div>
+    <div class="langbar-right">
+      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/escoleta/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/escoleta/" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/escoleta/" hreflang="en">EN</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-img">
+    <img src="/escoleta/img/equip-anys90-julio.webp" alt="Equipo mini del Grup Barna en los años 90 en una pista de patio, con Julio Torralba" fetchpriority="high" decoding="async" width="1200" height="836">
+  </div>
+  <div class="wrap">
+    
+    <div class="eyebrow">Escoleta CB Grup Barna · desde 1965</div>
+
+    
+    <h1 class="h1-alt">Diez empezaron<br>en <em>esta misma<br>pista</em></h1>
+
+    
+    <p class="subhook">Y ninguno lo sabía a los seis años.</p>
+
+    
+    
+    <p>Un entrenador de la Liga Femenina Endesa y una capitana de la misma liga. Un jugador de ACB. Un campeón de la Tercera FEB. Cuatro del Barça. Todos tuvieron su primera licencia aquí, y ninguno lo recuerda como un trámite: lo recuerdan como una pista de patio y un señor que les enseñó a botar.</p>
+    <p class="nota-molts">Y no son solo estos diez. Son muchos más: decenas de jugadores y jugadoras formados en esta pista a lo largo de sesenta años. Aquí hemos elegido a unos cuantos para dar a conocer a gente especial para el club, pero la lista real no cabría en una página.</p>
+
+    
+    <div class="credit">Escuela de Baloncesto Grup Barna · Sant Martí, Barcelona</div>
+  </div>
+</header>
+
+<!-- ============ PORTES OBERTES ============ -->
+<section class="po" id="portes-obertes">
+  <div class="wrap">
+    
+    <div class="kicker">Puertas Abiertas · Escoleta</div>
+
+    
+    <h2>Ven a probar<br>un entrenamiento</h2>
+
+    
+    <p>Sin compromiso y sin pagar nada. Tu hijo o hija entrena con nosotros un día,
+    conoce a los entrenadores y al resto del grupo, y después decidís. Así empezaron todos los que salen en esta página.</p>
+
+    <div class="cta">
+      
+      <a class="btn" href="https://wa.me/34698425153?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20de%20las%20Puertas%20Abiertas%20de%20la%20Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="portes-obertes">Apúntate a Puertas Abiertas</a>
+      
+      <a class="btn ghost" href="#historia">Conoce la Escoleta</a>
+    </div>
+
+    <div class="facts">
+      
+      <div><b>4 a 8 años</b>Escoleta de iniciación</div>
+      
+      <div><b>El Clot</b>Sant Martí, Barcelona</div>
+      
+      <div><b>Desde 1965</b>60 años formando en el barrio</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 EL PATI ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-num">01</div>
+    
+    <h2>Todo empezó<br>en un patio</h2>
+
+    <div class="body">
+      
+      <p class="lead">No había parqué. No había grada. Había una canasta clavada en la pared, un suelo de cemento y once niños con camiseta negra y pantalón rojo.</p>
+
+      
+      <p>El club y la Escoleta nacieron en <strong>1965</strong>. A la izquierda de la foto, con gafas y jersey, está <strong>Julio Torralba</strong>, fundador del club y entrenador de referencia durante décadas. Hoy, sesenta años después, sigue en la pista cada semana con los niños y niñas de 4 a 8 años de la Escoleta.</p>
+    </div>
+
+    <figure>
+      <img src="/escoleta/img/partit-pati-anys90.webp" alt="Partido de baloncesto en una pista de patio en los años 90" loading="lazy" decoding="async" width="1200" height="900">
+      
+      <figcaption><b>Años 90.</b> El niño que lleva el balón es <b>Javier Torralba</b>, hoy entrenador del Valencia Basket Femenino en la Liga Femenina Endesa. Partido en pista exterior; el público, sentado en el bordillo.</figcaption>
+    </figure>
+
+    <div class="grid2">
+      <figure>
+        <img src="/escoleta/img/campions-anys90.webp" alt="Niños del Grup Barna celebrando con un trofeo en los años 90" loading="lazy" decoding="async" width="1200" height="865">
+        
+        <figcaption><b>Un trofeo, diez manos.</b> La celebración no ha cambiado nada.</figcaption>
+      </figure>
+      <figure>
+        <img src="/escoleta/img/equip-medalles.webp" alt="Equipo del Grup Barna con medallas y Julio Torralba" loading="lazy" decoding="async" width="863" height="638">
+        
+        <figcaption><b>Generación tras generación.</b> Julio, a la derecha, en otra promoción.</figcaption>
+      </figure>
+    </div>
+
+    
+    <div class="pull">El club no nació en un pabellón.<br>Nació en un patio.</div>
+  </div>
+</section>
+
+<!-- ============ 02 LA FITXA ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-num">02</div>
+    
+    <h2>El documento<br>que lo demuestra</h2>
+
+    <div class="body">
+      
+      <p class="lead">Temporada 1993-94. Campeonato Mini Masculino Nivel A. Un niño de once años tramita su primera licencia federativa.</p>
+    </div>
+
+    <div class="doc">
+      
+      <span class="tag">Documento original</span>
+      <img src="/escoleta/img/fitxa-federativa-xavier-torralba.webp" alt="Licencia federativa de la Federació Catalana de Basquetbol de Xavier Torralba Liso, Grup Barna, temporada 1993-94" loading="lazy" decoding="async" width="1200" height="899">
+      <dl>
+        <dt>Jugador</dt>
+        <dd>Torralba Liso, Xavier</dd>
+        <dt>Nacimiento</dt>
+        <dd>06.03.1982</dd>
+        <dt>Club</dt>
+        <dd>Grup Barna · Barcelona</dd>
+        <dt>Categoría</dt>
+        <dd>Camp. Mini Masculí Nivell "A"</dd>
+        <dt>Temporada</dt>
+        <dd>1993-94 · Tramitada el 7.10.93</dd>
+      </dl>
+    </div>
+
+    <div class="body">
+      
+      <p>Ese niño es hoy <strong>Javier Torralba</strong>, entrenador del <strong>Valencia Basket Femenino</strong>. Antes dirigió el Segle XXI, uno de los principales centros de formación del baloncesto femenino español, y ha trabajado con las categorías inferiores de la selección española.</p>
+
+      
+      <p>Cuando fue presentado en Valencia dijo que se sentía «muy identificado con la formación y el crecimiento de las jugadoras jóvenes». No es una frase de circunstancias. Es lo que vio en casa: su padre, Julio, todavía lo hace cada martes.</p>
+    </div>
+
+    
+    <div class="pull">Padre e hijo.<br>El mismo oficio, treinta años de distancia.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ELS QUE VAN ARRIBAR LLUNY ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-num">03</div>
+    
+    <h2>Los que llegaron<br>lejos</h2>
+
+    <div class="body">
+      
+      <p class="lead">Ninguna escuela puede prometer que un niño llegue a la élite. Lo que sí puede demostrar el Barna es que de aquí han salido.</p>
+    </div>
+
+    <div class="alumni">
+
+      <div class="alum">
+        <div class="shot"><img src="/escoleta/img/alumni-javier-torralba.webp" alt="Javier Torralba de niño, foto de su primera licencia federativa" loading="lazy" decoding="async" width="900" height="1200"></div>
+        <div class="txt">
+          <div class="who">Javier Torralba</div>
+          
+          <div class="now">Entrenador · Valencia Basket · LF Endesa</div>
+          
+          <p>Esta es la foto de su primera licencia, temporada 93-94. Dirigió el Segle XXI y ha trabajado con la selección española de formación. Hoy entrena en la máxima categoría del baloncesto femenino español.</p>
+          
+          <div class="ara"><span class="tag">AHORA</span><span class="val">Entrenador del Valencia Basket Femenino<em>Liga Femenina Endesa · contrato hasta 2029</em></span></div>
+        </div>
+      </div>
+
+      <div class="alum">
+        <div class="shot"><img src="/escoleta/img/alumni-roger-fornas.webp" alt="Roger Fornas, pívot profesional" loading="lazy" decoding="async" width="900" height="1200"></div>
+        <div class="txt">
+          <div class="who">Roger Fornas</div>
+          
+          <div class="now">Pívot · ACB y LEB Oro</div>
+          
+          <p>Barcelona, 1982. Pívot de 2,02 m y la misma quinta que Javier: salen en la misma foto de equipo. Debutó en ACB con el Caprabo Lleida en 2003 e hizo toda su carrera en la LEB — Tarragona, Breogán, Lleida, Valladolid, Cáceres, Andorra, Palencia, Burgos y Palma. En 2018 era el noveno jugador con más partidos de la historia de la LEB Oro.</p>
+          
+          <div class="ara"><span class="tag">AHORA</span><span class="val">Carrera en ACB y LEB<em>Último club conocido: Palma Air Europa</em></span></div>
+        </div>
+      </div>
+
+      <div class="alum">
+        <div class="shot"><img src="/escoleta/img/alumni-david-mejia.webp" alt="David Mejía con el trofeo de campeón de la Tercera FEB" loading="lazy" decoding="async" width="900" height="1200"></div>
+        <div class="txt">
+          <div class="who">David Mejía</div>
+          
+          <div class="now">Campeón Tercera FEB 2026</div>
+          
+          <p>Ángel David Mejía Beriguete. Base, 1,79 m, nacido en abril de 2000. Entró en la Escoleta con 4 años. Ha pasado por Villarrobledo, Martinenc, Santfeliuenc y La Roda; en junio de 2026 ascendió a Segunda FEB con el Badajoz y lo primero que hizo fue reencontrarse con Julio.</p>
+          
+          <div class="ara"><span class="tag">AHORA</span><span class="val">Baloncesto Ciudad de Badajoz · Segunda FEB<em>Vítaly La Mar BCBadajoz · ascenso en junio de 2026</em></span></div>
+        </div>
+      </div>
+
+      <div class="alum">
+        <div class="shot"><img src="/escoleta/img/alumni-ainhoa-lopez.webp" alt="Ainhoa López, exjugadora de la Escoleta del CB Grup Barna" loading="lazy" decoding="async" width="900" height="1200"></div>
+        <div class="txt">
+          <div class="who">Ainhoa López</div>
+          
+          <div class="now">Escolta · Spar Girona · LF Endesa</div>
+          
+          <p>Barcelona, 1997. Escolta de 1,82 m y capitana del Spar Girona en la Liga Femenina Endesa. Empezó a jugar aquí y se formó en el CB Femenino Sant Adrià. Debutó en la élite en 2016-17 con el Uni Girona; después, Quesos El Pastor, Ensino y el Barça CBS, con quien ascendió a Liga Femenina. En 2023-24 volvió a Fontajau.</p>
+          
+          <div class="ara"><span class="tag">AHORA</span><span class="val">Spar Girona · Liga Femenina Endesa<em>Capitana · renovada en julio de 2026 para la 26-27</em></span></div>
+        </div>
+      </div>
+
+      <div class="alum">
+        <div class="shot"><img src="/escoleta/img/alumni-dario-naharro.webp" alt="Darío Naharro, entrenador y divulgador de baloncesto formativo" loading="lazy" decoding="async" width="900" height="1200"></div>
+        <div class="txt">
+          <div class="who">Darío Naharro</div>
+          
+          <div class="now">DCA Academy · tecnificación</div>
+          
+          <p>Una de las voces más seguidas del baloncesto formativo en castellano. Dirige la <strong>DCA Academy</strong>, academia de tecnificación en Les Franqueses del Vallès, con academia online y campus en Girona y Tarragona. Ha entrenado a jugadores como Marc Gasol, Thomas Heurtel y Anna Cruz, ha acompañado a más de mil familias y ha escrito un libro sobre lo que hay más allá del resultado.</p>
+          
+          <div class="ara"><span class="tag">AHORA</span><span class="val">Director de la DCA Academy<em>Tecnificación · Les Franqueses del Vallès</em></span></div>
+        </div>
+      </div>
+
+      <div class="alum">
+        <div class="shot"><img src="/escoleta/img/alumni-daniel-iruela.webp" alt="Daniel Iruela, jugador formado en el FC Barcelona" loading="lazy" decoding="async" width="900" height="1200"></div>
+        <div class="txt">
+          <div class="who">Daniel Iruela</div>
+          
+          <div class="now">Formación FC Barcelona</div>
+          
+          <p>Nacido en 2005. Pasó por esta pista antes de vestir de blaugrana: con el Barça jugó el Campeonato de España de clubes y la Euroliga ANGT. Después, Liga EBA con el Castelldefels y Tercera FEB con el SD Espanyol, el Cuarte de Huerva y la UE Sant Cugat.</p>
+          
+          <div class="ara"><span class="tag">AHORA</span><span class="val">UE Sant Cugat · Tercera FEB<em>Desde noviembre de 2025, según la ficha de la FEB</em></span></div>
+        </div>
+      </div>
+
+      <div class="alum">
+        <div class="noshot">
+          
+          <span>Sin foto:<br>todavía es menor</span>
+        </div>
+        <div class="txt">
+          <div class="who">Eric Montaner</div>
+          
+          <div class="now">FC Barcelona · Selección catalana</div>
+          
+          <p>Nacido en 2009. De la Escoleta a las categorías de formación del Barça: allí jugó el Campeonato de España de clubes infantil. También ha pasado por la selección catalana. No publicamos su imagen: todavía es menor.</p>
+          
+          <div class="ara"><span class="tag">AHORA</span><span class="val">Formación del FC Barcelona<em>Categoría juvenil · ficha FEB</em></span></div>
+        </div>
+      </div>
+
+      <div class="alum">
+        <div class="shot"><img src="/escoleta/img/alumni-seleccio-3x3.webp" alt="Exjugador de la Escoleta con la camiseta de la selección española de 3x3" loading="lazy" decoding="async" width="900" height="1200"></div>
+        <div class="txt">
+          
+          <div class="who">Selección 3x3</div>
+          
+          <div class="now">España · 3x3 FCBQ PRO</div>
+          
+          <p>También empezó aquí. Hoy compite con la camiseta de España en el circuito 3x3.</p>
+          
+          <div class="ara pend"><span class="tag">AHORA</span><span class="val">Pendiente de confirmar<em>Circuito 3x3 con la selección española</em></span></div>
+        </div>
+      </div>
+
+      <div class="alum">
+        <div class="noshot">
+          
+          <span>Sin foto:<br>todavía son menores</span>
+        </div>
+        <div class="txt">
+          <div class="who">Marc i Oriol Julià</div>
+          
+          <div class="now">FC Barcelona · Joventut Badalona</div>
+          
+          <p>Gemelos, nacidos en 2009. Salieron de la Escoleta: Oriol sigue en las categorías de formación del FC Barcelona y Marc juega ahora en el Joventut Badalona. No publicamos su imagen: todavía son menores y su carrera es suya.</p>
+          
+          <div class="ara"><span class="tag">AHORA</span><span class="val">FC Barcelona y Joventut Badalona<em>Categoría juvenil · 17 años</em></span></div>
+        </div>
+      </div>
+
+    </div>
+
+    
+    <div class="pull">De la pista del Clot<br>a la Liga Femenina Endesa.</div>
+
+    <div class="body">
+      
+      <p class="lead">La <strong>Ainhoa López</strong> empezó a jugar aquí. Hoy es capitana del Spar Girona y juega en la misma liga que entrena Javier Torralba.</p>
+
+      
+      <p>En el pre-mini femenino de la temporada 2004-05 tenía siete años. Once años después debutaba en la máxima categoría del baloncesto femenino español.</p>
+
+      
+      <p>Su carrera, sin embargo, no se explica solo con los partidos. En febrero de 2022, jugando en el Barça CBS, anunció que tenía un linfoma de Hodgkin, y lo superó. En septiembre de 2024 pasó veinticinco días ingresada por una anemia hemolítica grave y necesitó doce transfusiones. Volvió a la pista las dos veces. Hoy es embajadora de la donación de sangre y lleva una frase por bandera: <strong>«Viure és urgent»</strong>.</p>
+
+      
+      <p>Es el nombre que mejor explica por qué existe una escoleta: porque no sabes a quién tienes delante.</p>
+    </div>
+
+    <div class="grid2">
+      <figure>
+        <img src="/escoleta/img/ainhoa-premini-2004.webp" alt="Equipo pre-mini femenino del CB Grup Barna, temporada 2004-2005" loading="lazy" decoding="async" width="1200" height="900">
+        
+        <figcaption><b>Pre-mini femenino, 2004-05.</b> Siete años. Su primera temporada en el club.</figcaption>
+      </figure>
+      <figure>
+        <img src="/escoleta/img/ainhoa-equip-barna.webp" alt="Equipo femenino de formación del CB Grup Barna" loading="lazy" decoding="async" width="1200" height="900">
+        
+        <figcaption><b>Formación en el Barna.</b> Antes del Sant Adrià, del Barça CBS y de Fontajau.</figcaption>
+      </figure>
+    </div>
+
+    <div class="grid2">
+      <figure>
+        <img src="/escoleta/img/ainhoa-jugant.webp" alt="Partido de baloncesto femenino de formación del CB Grup Barna" loading="lazy" decoding="async" width="1200" height="900">
+        
+        <figcaption><b>Jugando.</b> Baloncesto femenino de formación en el Barna, hace más de veinte años.</figcaption>
+      </figure>
+      <figure>
+        <img src="/escoleta/img/ainhoa-escoleta-grup.webp" alt="La Escoleta del CB Grup Barna al completo" loading="lazy" decoding="async" width="1200" height="900">
+        
+        <figcaption><b>La Escoleta.</b> Entre estos niños había una futura capitana de LF Endesa.</figcaption>
+      </figure>
+    </div>
+
+    <figure>
+      <img src="/escoleta/img/equip-anys90-julio.webp" alt="Equipo mini del Grup Barna de los años 90" loading="lazy" decoding="async" width="1200" height="836">
+      
+      <figcaption><b>La misma foto, dos carreras.</b> En este equipo de los años 90 están Javier Torralba y Roger Fornas. Ninguno de los dos lo sabía todavía.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 04 DAVID MEJIA ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-num">04</div>
+    
+    <h2>Diecinueve años<br>después</h2>
+
+    <div class="body">
+      
+      <p class="lead">En febrero de 2007 un niño de seis años se hizo una foto con la mascota del club. En junio de 2026 el mismo chico levantaba un trofeo en Badajoz.</p>
+    </div>
+
+    <div class="grid2">
+      <figure class="tall">
+        <img src="/escoleta/img/david-mejia-nen-2007.webp" alt="David Mejía de niño en la Escuela de Baloncesto Grup Barna, febrero de 2007" loading="lazy" decoding="async" width="1050" height="1400">
+        
+        <figcaption><b>24 · 02 · 2007.</b> Escuela de Baloncesto Grup Barna.</figcaption>
+      </figure>
+      <figure class="tall">
+        <img src="/escoleta/img/david-mejia-trofeu.webp" alt="David Mejía con el trofeo de campeón de la Fase Final Tercera FEB 2025/26" loading="lazy" decoding="async" width="789" height="1400">
+        
+        <figcaption><b>Junio de 2026.</b> Campeón de la Fase Final Tercera FEB. Ascenso a Segunda FEB.</figcaption>
+      </figure>
+    </div>
+
+    <figure>
+      <img src="/escoleta/img/julio-david-retrobament.webp" alt="Julio Torralba y David Mejía reencontrándose" loading="lazy" decoding="async" width="833" height="1400">
+      
+      <figcaption><b>El reencuentro.</b> El entrenador que lo recibió con 4 años y el jugador que acaba de ascender de categoría. Hay historias que definen lo que es el Barna.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/escoleta/img/campions-tercera-feb.webp" alt="Celebración del campeonato de la Fase Final Tercera FEB 2025/26" loading="lazy" decoding="async" width="1200" height="800">
+      
+      <figcaption><b>«Hemos vuelto».</b> Fase Final Tercera FEB 2025/26, Badajoz.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 05 ELS QUE VENEN ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-num">05</div>
+    
+    <h2>Los que<br>vienen ahora</h2>
+
+    <div class="body">
+      
+      <p class="lead">Marta entró en la Escoleta de pequeña. Este año ha cumplido dieciocho y se va de casa. La Escoleta la despidió como se despide a la familia.</p>
+    </div>
+
+    <div class="grid2">
+      <figure>
+        <img src="/escoleta/img/marta-18-escoleta.webp" alt="Los niños y niñas de la Escoleta sentados en la pista escuchando" loading="lazy" decoding="async" width="1200" height="1066">
+        
+        <figcaption><b>Los pequeños miran.</b> Lo que ven hoy es lo que querrán ser mañana.</figcaption>
+      </figure>
+      <figure>
+        <img src="/escoleta/img/marta-felicitats.webp" alt="La Escoleta felicitando a Marta por sus 18 años" loading="lazy" decoding="async" width="1200" height="1051">
+        
+        <figcaption><b>Dieciocho.</b> La Escoleta al completo, Julio en medio.</figcaption>
+      </figure>
+    </div>
+
+    <div class="body">
+      
+      <p>Y detrás ya viene otra promoción. Hay exjugadores de la Escoleta jugando en las categorías de formación del <strong>FC Barcelona</strong> y en el circuito <strong>3x3 de la selección española</strong>. Algunos todavía son menores y por eso no les ponemos cara ni nombre aquí: su carrera es suya, no de nuestro marketing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 L'ESCOLETA AVUI ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-num">06</div>
+    
+    <h2>La Escoleta,<br>hoy</h2>
+
+    <div class="stats">
+      <div class="stat"><b>1965</b><span>Nace la Escoleta</span></div>
+      <div class="stat"><b>4-8</b><span>Años · Escoleta</span></div>
+      <div class="stat"><b>+450</b><span>Familias en el club</span></div>
+      <div class="stat"><b>50%</b><span>Niñas y niños</span></div>
+    </div>
+
+    <figure>
+      <img src="/escoleta/img/cistella-petita.webp" alt="Día de la Cistella Petita 2026 en el CB Grup Barna" loading="lazy" decoding="async" width="1200" height="808">
+      
+      <figcaption><b>Día de la Cistella Petita · 13.06.2026.</b> Segunda edición. Pequeños grandes jugadores.</figcaption>
+    </figure>
+
+    <div class="grid2">
+      <figure>
+        <img src="/escoleta/img/trobada-solozabal.webp" alt="Encuentro de la Escuela Grup Barna con la Escuela Nacho Solozabal" loading="lazy" decoding="async" width="1200" height="637">
+        
+        <figcaption><b>21.05.2026.</b> Encuentro con la Escuela Nacho Solozabal.</figcaption>
+      </figure>
+      <figure>
+        <img src="/escoleta/img/visita-alcalde.webp" alt="Visita del alcalde de Barcelona Jaume Collboni al CB Grup Barna" loading="lazy" decoding="async" width="1199" height="946">
+        
+        <figcaption><b>14.02.2026.</b> Visita del alcalde de Barcelona, Sr. Collboni, y del concejal de Deportes, Sr. Escudé.</figcaption>
+      </figure>
+    </div>
+
+    
+    <div class="pull">Aquí no fichamos talento.<br>Lo criamos.</div>
+  </div>
+</section>
+
+<!-- ============ 07 LA NAU ============ -->
+<section id="la-nau">
+  <div class="wrap">
+    <div class="sec-num">07</div>
+    
+    <h2>Quién entrena<br>en La Nau</h2>
+
+    <div class="body">
+      
+      <p class="lead">La misma pista donde un niño de cuatro años aprende a botar es donde entrenan jugadores profesionales fuera de temporada.</p>
+
+      
+      <p>En <strong>La Nau</strong> trabaja <strong>Time Chamber</strong>, partner del club, con <strong>Iandrey Panisa</strong> al frente. Por aquí han pasado internacionales como <strong>Willy Hernangómez</strong>, campeón de Europa con la selección española y jugador de NBA y de Euroliga.</p>
+
+      
+      <p>No es una anécdota para Instagram. Es lo que hace que un niño de la Escoleta cruce la puerta y vea, con sus propios ojos, qué significa dedicarse a esto de verdad.</p>
+    </div>
+    <!-- PENDENT: quan tinguis el video o la foto d'en Willy Hernangomez entrenant
+         a La Nau amb Time Chamber, posa aqui un <figure> amb la imatge. -->
+
+    
+    <div class="pull">La misma pista.<br>El niño de cuatro años y el internacional.</div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="wrap">
+    
+    <h2>El próximo<br>que salga de aquí<br>todavía no sabe botar</h2>
+
+    <div class="body">
+      
+      <p>La Escoleta del CB Grup Barna es para niños y niñas de 4 a 8 años. No buscamos a los mejores: buscamos que quieran volver la semana siguiente. Lo demás ya lo hemos visto pasar unas cuantas veces.</p>
+    </div>
+
+    <!-- WhatsApp del club -->
+    <div class="btns">
+      
+      <a class="btn wa" target="_blank" rel="noopener"
+         href="https://wa.me/34698425153?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20de%20las%20Puertas%20Abiertas%20de%20la%20Escoleta%20del%20CB%20Grup%20Barna">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4a3.2 3.2 0 0 0-1 2.4A5.6 5.6 0 0 0 7 12a12.7 12.7 0 0 0 4.9 4.3c.7.3 1.2.5 1.6.6a3.9 3.9 0 0 0 1.8.1 3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4l-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        Quiero información
+      </a>
+      <a class="btn ghost" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>
+    </div>
+  </div>
+</section>
+
+<section class="faq-sec" aria-labelledby="faq-escoleta">
+  <div class="wrap">
+    <h2 id="faq-escoleta">Preguntas frecuentes sobre la Escoleta</h2>
+    <details class="faq-q"><summary>¿Cuál es la escuela de baloncesto del CB Grup Barna?</summary><p>La Escoleta es la escuela de baloncesto del CB Grup Barna para niños y niñas de 4 a 8 años, en el barrio de El Clot, Distrito de Sant Martí de Barcelona. Funciona con equipos mixtos y tres grupos por edad.</p></details><details class="faq-q"><summary>¿Quién dirige la Escoleta del CB Grup Barna?</summary><p>La Escoleta la dirige Julio Torralba. Se puede contactar con él por teléfono o WhatsApp al 646 205 526.</p></details><details class="faq-q"><summary>¿A partir de qué edad se puede empezar a jugar a baloncesto en el Barna?</summary><p>Desde los 4 años. La Escoleta acoge a niños y niñas de 4 a 8 años. A partir de los 8 y a medida que están preparados, pasan a los equipos federados del club (premini, mini y el resto de categorías).</p></details><details class="faq-q"><summary>¿Se puede probar un entrenamiento antes de apuntarse?</summary><p>Sí. El primer entrenamiento es de prueba y sin compromiso. Hay que escribir o llamar a Julio Torralba al 646 205 526 para reservar día.</p></details><details class="faq-q"><summary>¿Dónde entrena la Escoleta del CB Grup Barna?</summary><p>En el barrio de El Clot, en el Distrito de Sant Martí de Barcelona. La Nau del Clot es el punto deportivo principal del club.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© CB Grup Barna · Sant Martí, Barcelona</div>
+    <div><a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a> · <a href="https://cbgrupbarna.info">cbgrupbarna.info</a> · <a href="https://cbgrupbarna.info/grup-barna-dades-oficials/">Datos oficiales del club</a></div>
+  </div>
+</footer>
+
+<div class="pobar">
+  
+  <span>Puertas Abiertas · Prueba un entrenamiento</span>
+  
+  <a href="https://wa.me/34698425153?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20de%20las%20Puertas%20Abiertas%20de%20la%20Escoleta%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="portes-obertes-barra">Quiero probar un entrenamiento</a>
+</div>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6XYR7G1WF"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-R6XYR7G1WF',{anonymize_ip:true});
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a[href]'); if(!a)return;
+  if((a.getAttribute('href')||'').indexOf('wa.me')>-1){
+    gtag('event','portes_obertes',{origen:a.dataset.cta||'altre',idioma:'es'});
+  }
+},true);
+</script>
+</body>
+</html>
