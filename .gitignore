@@ -8,3 +8,6 @@ fotos/arxiu/
 
 # Sortida de la bateria de proves: es regenera amb `node tests/audit-*.mjs`
 tests/out/
+
+# HTML intermedi de scripts/blog-pdf.py: es regenera a cada execucio
+scripts/.blog-pdf.html
