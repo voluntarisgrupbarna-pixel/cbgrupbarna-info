@@ -8,3 +8,8 @@ fotos/arxiu/
 
 # Sortida de la bateria de proves: es regenera amb `node tests/audit-*.mjs`
 tests/out/
+
+# Prova de concepte Astro (Fase 3, encara no és el lloc en producció)
+astro-migracio/node_modules/
+astro-migracio/dist/
+astro-migracio/.astro/

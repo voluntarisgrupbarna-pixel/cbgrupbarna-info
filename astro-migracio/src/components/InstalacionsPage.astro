@@ -1,0 +1,55 @@
+---
+// Aquest component es l'UNICA font de la pagina d'instal·lacions.
+// Els tres fitxers a src/pages/ (ca, es, en) nomes l'importen i li passen
+// l'idioma -- no hi ha HTML duplicat entre llengues.
+import instalacions from '../data/instalacions.json';
+import { instalacionsUi, type Locale } from '../i18n/instalacions';
+
+interface Props {
+  lang: Locale;
+  path: string; // p.ex. '/instal-lacions/' o '/es/instal-lacions/'
+}
+const { lang, path } = Astro.props;
+const t = instalacionsUi[lang];
+const canonical = `https://cbgrupbarna.info${path}`;
+---
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{t.title} · CB Grup Barna</title>
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/instal-lacions/" />
+  <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/instal-lacions/" />
+  <link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/instal-lacions/" />
+  <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/instal-lacions/" />
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 40px 20px; color: #10100E; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; color: #E20613; font-weight: 700; }
+    h1 { font-size: 32px; margin: 10px 0 16px; }
+    .lede { color: #46433f; font-size: 16px; }
+    .cards { display: grid; gap: 14px; margin-top: 30px; }
+    .card { border: 1px solid #ddd; padding: 16px 18px; }
+    .tag { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #E20613; }
+    .card h3 { margin: 6px 0 6px; }
+    .card p { margin: 0 0 8px; color: #46433f; font-size: 14px; }
+    .card a { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: #10100E; border-bottom: 1px solid #E20613; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <p class="eyebrow">{t.eyebrow}</p>
+  <h1>{t.title}</h1>
+  <p class="lede">{t.lede}</p>
+  <div class="cards">
+    {instalacions.map((inst) => (
+      <div class="card">
+        <span class="tag">{t.tags[inst.tag]}</span>
+        <h3>{inst.name}</h3>
+        <p>{t.descriptions[inst.slug]}</p>
+        <a href={`https://www.google.com/maps/search/?api=1&query=${inst.mapQuery}`} target="_blank" rel="noopener">{t.ctaMap}</a>
+      </div>
+    ))}
+  </div>
+</body>
+</html>
