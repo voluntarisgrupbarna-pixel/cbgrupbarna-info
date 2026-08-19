@@ -7,7 +7,7 @@ traduccions ja s'han desincronitzat perquè cada versió és un HTML clonat a m�
 
 ## Què demostra
 
-`/instal-lacions/` ca/es/en generat des d'**una sola font**:
+**Cas 1 — `/instal-lacions/`** ca/es/en des d'**una sola font**:
 
 - `src/data/instalacions.json` — dades que no canvien per idioma (nom, adreça, mapa)
 - `src/i18n/instalacions.ts` — textos traduïts (títol, descripcions, etiquetes)
@@ -16,9 +16,20 @@ traduccions ja s'han desincronitzat perquè cada versió és un HTML clonat a m�
   `src/pages/en/instal-lacions/` — tres fitxers de 3 línies cada un, que
   només diuen "renderitza la plantilla en aquest idioma"
 
-Canviar una descripció es fa **un cop**, a `instalacions.ts`, i surt actualitzada
-als tres idiomes en el següent build. Avui, al lloc real, calen tres edicions
-manuals — i per això `/femeni/` ja ha divergit de les seves traduccions.
+**Cas 2 — `/femeni/`**, el cas real més difícil (529 línies, estadístiques,
+3 pilars i FAQ): `src/i18n/femeni.ts` + `src/components/FemeniPage.astro`.
+La part que importa: **el JSON-LD `FAQPage` es genera automàticament des del
+mateix array `faq`** de cada idioma — no s'escriu a mà. Verificat amb
+`npm run build`: les 5 preguntes i respostes surten correctes i diferents a
+`dist/femeni/`, `dist/es/femeni/` i `dist/en/femeni/`. Avui, al lloc real,
+aquest JSON-LD es manté a mà en cada idioma i és exactament el tipus de cosa
+que es desincronitza en silenci.
+
+Canviar un text es fa **un cop**, al fitxer `.ts` corresponent, i surt
+actualitzat als tres idiomes (contingut visible i schema) en el següent
+build. Avui, al lloc real, calen tres edicions manuals — i per això
+`/femeni/`, `/es/baloncesto-femenino/` i `/en/womens-basketball/` ja han
+divergit (veure `PENDENTS-WEB.md`).
 
 ## Provar-ho
 

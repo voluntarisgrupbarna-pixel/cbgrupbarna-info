@@ -1,0 +1,119 @@
+---
+// Prova de concepte 2 (mes dificil que instal·lacions): una pagina llarga
+// amb estadistiques, 3 pilars i FAQ -- i el FAQPage JSON-LD es genera
+// AUTOMATICAMENT des del mateix array `faq`, en l'idioma que toqui.
+// Avui, al lloc real, el JSON-LD del FAQ s'escriu a ma en cada idioma:
+// es desincronitza en silenci si algu edita nomes el text visible.
+import { femeni, type Locale } from '../i18n/femeni';
+
+interface Props {
+  lang: Locale;
+  path: string;
+}
+const { lang, path } = Astro.props;
+const t = femeni[lang];
+const canonical = `https://cbgrupbarna.info${path}`;
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: t.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{t.h1}{t.h1Em} · CB Grup Barna</title>
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/femeni/" />
+  <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/femeni/" />
+  <link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/femeni/" />
+  <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/femeni/" />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; color: #10100E; line-height: 1.55; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; color: #E20613; font-weight: 700; }
+    h1 { font-size: 34px; margin: 10px 0 16px; }
+    h1 em { color: #E20613; font-style: normal; }
+    .lede { color: #46433f; font-size: 16px; max-width: 62ch; }
+    .btn-row { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 12px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; text-decoration: none; border: 1px solid #10100E; color: #10100E; }
+    .btn.red { background: #E20613; border-color: #E20613; color: #fff; }
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
+    .facts div { border-top: 2px solid #E20613; padding-top: 10px; }
+    .facts b { display: block; font-size: 26px; }
+    .facts span { font-size: 11px; color: #46433f; }
+    h2 { font-size: 22px; margin: 56px 0 18px; }
+    .pillars { display: grid; gap: 18px; margin-top: 24px; }
+    .pillar { border: 1px solid #ddd; padding: 20px; }
+    .pillar-n { color: #E20613; font-weight: 700; font-size: 12px; }
+    .pillar h3 { margin: 6px 0 10px; font-size: 17px; }
+    .pillar p { font-size: 14px; color: #46433f; margin: 0 0 8px; }
+    .pull { font-size: 20px; font-style: italic; text-align: center; margin: 40px 0; }
+    details { border-top: 1px solid #ddd; padding: 14px 0; }
+    summary { cursor: pointer; font-weight: 600; }
+    details p { color: #46433f; font-size: 14px; margin-top: 10px; }
+    .closer { text-align: center; margin-top: 60px; }
+    @media (max-width: 600px) { .facts { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+  <p class="eyebrow">{t.eyebrowHero}</p>
+  <h1>{t.h1}<em>{t.h1Em}</em></h1>
+  <p class="lede" set:html={t.lede} />
+  <div class="btn-row">
+    <a class="btn red" href="/#info">{t.ctaPlay}</a>
+    <a class="btn" href="#equips">{t.ctaTeams}</a>
+  </div>
+
+  <div class="facts">
+    {t.stats.map((s) => (
+      <div><b>{s.value}</b><span>{s.label}</span></div>
+    ))}
+  </div>
+
+  <p class="eyebrow" style="margin-top:56px">{t.metode.eyebrow}</p>
+  <h2 style="margin-top:8px">{t.metode.title}</h2>
+  <p class="lede">{t.metode.intro}</p>
+
+  <div class="pillars">
+    {t.pillars.map((p) => (
+      <div class="pillar">
+        <div class="pillar-n">{p.n}</div>
+        <h3>{p.title}</h3>
+        <p set:html={p.p1} />
+        <p set:html={p.p2} />
+      </div>
+    ))}
+  </div>
+
+  <p class="pull">{t.pull}</p>
+
+  <p class="eyebrow">{t.faqEyebrow}</p>
+  <h2 style="margin-top:8px">{t.faqTitle}</h2>
+  <div>
+    {t.faq.map((item) => (
+      <details>
+        <summary>{item.q}</summary>
+        <p>{item.a}</p>
+      </details>
+    ))}
+  </div>
+
+  <div class="closer">
+    <h2>{t.closerTitle}</h2>
+    <p class="lede" style="margin:0 auto">{t.closerP}</p>
+    <div class="btn-row" style="justify-content:center;margin-top:24px">
+      <a class="btn red" href="/#info">{t.ctaInfo}</a>
+      <a class="btn" href="https://wa.me/34698425153" target="_blank" rel="noopener">{t.ctaWhatsapp}</a>
+      <a class="btn" href="/patrocinadors/">{t.ctaSponsor}</a>
+    </div>
+  </div>
+</body>
+</html>
