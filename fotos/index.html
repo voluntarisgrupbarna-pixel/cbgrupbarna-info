@@ -688,6 +688,10 @@ const PLACEHOLDER = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 const BATCH = 40; // photos per load
 
 function isRepo(ev) { return ev.source === 'repo'; }
+// Events not sourced from the repo (e.g. Drive-based galleries) can still gain
+// individually repo-uploaded photos via the admin panel, which always writes
+// filenames with an extension — so a dotted ref is repo-hosted regardless of ev.source.
+function isRepoRef(ev, ref) { return isRepo(ev) || /\./.test(ref || ''); }
 function isFlickr(ev) { return ev.source === 'flickr'; }
 function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
 function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v|avi)$/i.test(ref || ''); }
@@ -704,19 +708,19 @@ function derivada(carpeta, ev, ref) {
 
 function photoThumb(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : derivada('thumb', ev, ref);
+  if (isRepoRef(ev, ref)) return isVideoRef(ref) ? repoUrl(ev, ref) : derivada('thumb', ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_q.jpg`;
   return THUMB(ref);
 }
 function photoFull(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return isVideoRef(ref) ? repoUrl(ev, ref) : derivada('web', ev, ref);
+  if (isRepoRef(ev, ref)) return isVideoRef(ref) ? repoUrl(ev, ref) : derivada('web', ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_b.jpg`;
   return FULL(ref);
 }
 function photoDl(ev, ref) {
   if (!ref) return '#';
-  if (isRepo(ev)) return repoUrl(ev, ref);
+  if (isRepoRef(ev, ref)) return repoUrl(ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_o.jpg`;
   return DL(ref);
 }
@@ -726,10 +730,10 @@ function eventCover(ev) {
     if (!ev.cover) return PLACEHOLDER;
     return `https://live.staticflickr.com/${ev.cover}_q.jpg`;
   }
-  if (isRepo(ev)) {
-    const ref = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
-    if (!ref) return PLACEHOLDER;
-    return derivada('thumb', ev, ref);
+  const coverRef = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
+  if (isRepoRef(ev, coverRef)) {
+    if (!coverRef) return PLACEHOLDER;
+    return isVideoRef(coverRef) ? repoUrl(ev, coverRef) : derivada('thumb', ev, coverRef);
   }
   return THUMB(ev.cover);
 }
