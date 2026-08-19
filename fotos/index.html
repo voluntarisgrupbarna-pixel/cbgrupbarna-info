@@ -345,16 +345,6 @@
     .gate-subtitle {
       font-size: .82rem; color: var(--ink-2); margin-bottom: 1.75rem; line-height: 1.6;
     }
-    .gate-tabs {
-      display: flex; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem;
-    }
-    .gate-tab {
-      flex: 1; background: none; border: none; color: var(--muted);
-      font-family: var(--display); font-size: 9.5px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
-      cursor: pointer; padding: .8rem .5rem;
-      border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s;
-    }
-    .gate-tab.active { color: var(--ink); border-bottom-color: var(--red); }
     .gate-panel { display: none; }
     .gate-panel.active { display: block; }
     .gate-input {
@@ -480,23 +470,10 @@
   <div class="gate-box">
     <div class="gate-logo">CB <span>Grup</span> Barna</div>
     <div class="gate-title">Galeria Fotogràfica</div>
-    <div class="gate-subtitle">Per accedir, introdueix el codi d'accés del club<br>o subscriu-te al nostre newsletter gratuït.</div>
+    <div class="gate-subtitle">Accés lliure per a tothom:<br>subscriu-te al nostre newsletter gratuït.</div>
 
-    <div class="gate-tabs">
-      <button class="gate-tab active" onclick="switchTab('pin')">Codi d'accés</button>
-      <button class="gate-tab" onclick="switchTab('subscribe')">Newsletter</button>
-    </div>
-
-    <!-- PIN TAB -->
-    <div class="gate-panel active" id="tab-pin">
-      <input class="gate-input" id="pin-input" type="password" placeholder="Codi d'accés" maxlength="20"
-        onkeydown="if(event.key==='Enter')checkPin()">
-      <div class="gate-error" id="pin-error" style="display:none">Codi incorrecte. Torna-ho a intentar.</div>
-      <button class="gate-btn" onclick="checkPin()">Accedir</button>
-    </div>
-
-    <!-- SUBSCRIBE TAB -->
-    <div class="gate-panel" id="tab-subscribe">
+    <!-- SUBSCRIBE -->
+    <div class="gate-panel active" id="tab-subscribe">
       <div class="gate-form-row">
         <input class="gate-input" id="sub-nom" type="text" placeholder="Nom" required>
         <input class="gate-input" id="sub-cognoms" type="text" placeholder="Cognoms" required>
@@ -710,26 +687,6 @@ const GATE_KEY = 'cbgb_access_v1';
 function grantAccess() {
   localStorage.setItem(GATE_KEY, '1');
   document.getElementById('access-gate').classList.add('hidden');
-}
-
-function switchTab(tab) {
-  document.querySelectorAll('.gate-tab').forEach((t, i) => t.classList.toggle('active', (tab === 'pin' ? i === 0 : i === 1)));
-  document.getElementById('tab-pin').classList.toggle('active', tab === 'pin');
-  document.getElementById('tab-subscribe').classList.toggle('active', tab === 'subscribe');
-  document.getElementById('pin-error').style.display = 'none';
-  document.getElementById('sub-error').style.display = 'none';
-}
-
-function checkPin() {
-  const val = document.getElementById('pin-input').value.trim();
-  const correct = CFG.access_pin || '1965';
-  if (val === correct) { grantAccess(); }
-  else {
-    const err = document.getElementById('pin-error');
-    err.style.display = 'block';
-    document.getElementById('pin-input').classList.add('error');
-    setTimeout(() => { err.style.display = 'none'; document.getElementById('pin-input').classList.remove('error'); }, 3000);
-  }
 }
 
 async function submitSubscription() {

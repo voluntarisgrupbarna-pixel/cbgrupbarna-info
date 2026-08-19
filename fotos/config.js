@@ -2,7 +2,6 @@
 // Editable des del panell d'administrador: /fotos/admin.html
 
 window.GALERIA_CONFIG = {
-  require_access: false,
-  access_pin: '1965',
+  require_access: true,
   newsletter_email: 'voluntarisgrupbarna@gmail.com',
 };
