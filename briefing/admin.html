@@ -100,7 +100,7 @@
 </div>
 
 <script src="/briefing/materials.js"></script>
-<script src="/scripts/google-gate.js"></script>
+<script src="/scripts/admin-gate.js"></script>
 <script>
 const OWNER='voluntarisgrupbarna-pixel', REPO='cbgrupbarna-info', BRANCH='main';
 const DATA_PATH='briefing/materials.js', DIR='briefing/materials';
@@ -108,7 +108,7 @@ let ghToken=null, mats=[];
 
 CBGBGate.protect(function(user){
   document.getElementById('who').innerHTML =
-    (user.picture?'<img src="'+user.picture+'" style="width:24px;height:24px;border-radius:50%">':'')+
+    (user.picture?'<img src="'+user.picture+'" alt="" style="width:24px;height:24px;border-radius:50%">':'')+
     '<span>'+(user.email||'')+'</span>'+
     '<button class="btn ghost small" onclick="CBGBGate.signOut()">Sortir</button>';
   ghToken = localStorage.getItem('gh_admin_token');

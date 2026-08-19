@@ -7,22 +7,22 @@
 <title>Gestió de partits · CB Grup Barna</title>
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#2ea043}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
+  body{background:var(--black);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh}
   nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
   nav img{width:34px;height:34px;object-fit:contain}
-  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.06em}
   nav .t span{color:var(--red)}
   .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--muted)}
   .wrap{max-width:900px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
-  h1{font-family:'Bebas Neue',sans-serif;font-size:2rem}
+  h1{font-family:'Anton',sans-serif;font-size:2rem}
   h1 span{color:var(--red)}
   .sub{color:var(--muted);font-size:.88rem;margin:.3rem 0 1.5rem;line-height:1.55}
   .sub a{color:var(--red)}
-  h2{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;margin:1.6rem 0 .8rem}
+  h2{font-family:'Anton',sans-serif;font-size:1.35rem;margin:1.6rem 0 .8rem}
   h2 span{color:var(--red)}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
   .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem}
@@ -31,30 +31,30 @@
   @media(max-width:660px){.grid{grid-template-columns:1fr}.grid .half{grid-column:auto}}
   .fgroup{display:flex;flex-direction:column;gap:.3rem}
   .field-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-  .field-input{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Outfit',sans-serif;font-size:.88rem}
+  .field-input{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Inter',sans-serif;font-size:.88rem}
   .field-input:focus{outline:none;border-color:var(--red)}
-  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
   .btn:disabled{opacity:.5;cursor:default}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
   .btn.small{padding:.3rem .65rem;font-size:.72rem}
-  .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
+  .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#FF3B41;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
   .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;margin-top:.8rem}
   .hint{font-size:.72rem;color:var(--muted);margin-top:.6rem;line-height:1.5}
   .hint a{color:rgba(226,6,19,.85)}
-  .day{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--red);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin:1.2rem 0 .5rem;letter-spacing:.04em}
+  .day{font-family:'Anton',sans-serif;font-size:1.1rem;color:var(--red);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin:1.2rem 0 .5rem;letter-spacing:.04em}
   .prow{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px dashed var(--line);font-size:.85rem;flex-wrap:wrap}
   .prow:last-child{border-bottom:none}
   .cond{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:.15rem .55rem;flex:none}
-  .cond.local{background:rgba(226,6,19,.18);color:#ff8fa0}
+  .cond.local{background:rgba(226,6,19,.18);color:#FF3B41}
   .cond.visitant{background:rgba(255,255,255,.07);color:var(--muted)}
   .pinfo{flex:1;min-width:180px}
   .pinfo b{display:block;font-weight:500}
   .pinfo small{color:var(--muted);font-size:.73rem}
-  .res{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;flex:none;letter-spacing:.05em}
+  .res{font-family:'Anton',sans-serif;font-size:1.05rem;flex:none;letter-spacing:.05em}
   .res.win{color:var(--green)}
   .res.loss{color:var(--muted)}
   .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
-  .del:hover{color:#ff8fa0}
+  .del:hover{color:#FF3B41}
   .empty{color:var(--muted);font-size:.85rem;padding:1rem 0}
   #tokbox{display:none;margin-bottom:1rem}
   .filters{display:flex;gap:.5rem;margin-bottom:.5rem;flex-wrap:wrap}
@@ -118,7 +118,7 @@
   </div>
 
   <div id="winalert" style="display:none;background:linear-gradient(135deg,rgba(46,160,67,.16),rgba(226,6,19,.12));border:1px solid rgba(46,160,67,.45);border-radius:12px;padding:1rem 1.1rem;margin-top:1.5rem">
-    <b style="font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.04em;color:#3ddc84;display:block" id="winalert-t"></b>
+    <b style="font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.04em;color:#3ddc84;display:block" id="winalert-t"></b>
     <p style="font-size:.84rem;color:rgba(255,255,255,.7);margin-top:.2rem;line-height:1.5" id="winalert-p"></p>
     <a class="btn" style="margin-top:.8rem;text-decoration:none" href="/partits/cartell.html">Generar cartell i copy →</a>
   </div>
@@ -132,7 +132,7 @@
 </div>
 
 <script src="/partits/partits.js"></script>
-<script src="/scripts/google-gate.js"></script>
+<script src="/scripts/admin-gate.js"></script>
 <script>
 const OWNER='voluntarisgrupbarna-pixel', REPO='cbgrupbarna-info', BRANCH='main';
 const DATA_PATH='partits/partits.js';
@@ -140,7 +140,7 @@ let ghToken=null, partits=[], filter='props';
 
 CBGBGate.protect(function(user){
   document.getElementById('who').innerHTML =
-    (user.picture?'<img src="'+user.picture+'" style="width:24px;height:24px;border-radius:50%">':'')+
+    (user.picture?'<img src="'+user.picture+'" alt="" style="width:24px;height:24px;border-radius:50%">':'')+
     '<span>'+(user.email||'')+'</span>'+
     '<button class="btn ghost small" onclick="CBGBGate.signOut()">Sortir</button>';
   ghToken=localStorage.getItem('gh_admin_token');

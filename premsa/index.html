@@ -4,16 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0A0A0A">
-<title>Sala de premsa i kit de premsa · CB Grup Barna</title>
-<meta name="description" content="Sala de premsa del CB Grup Barna: kit de premsa i briefing del club descarregable en PDF, més els articles i reportatges dels mitjans del barri sobre el club de bàsquet base del Clot, Sant Martí, Barcelona.">
-<meta name="keywords" content="premsa CB Grup Barna, kit de premsa, briefing del club, dossier de premsa bàsquet Barcelona, Guia Clot, Eix Clot, articles bàsquet Clot">
+<title>Premis i premsa · CB Grup Barna</title>
+<meta name="description" content="Premis i premsa del CB Grup Barna: finalista del 19è Premi Dona i Esport de l'Ajuntament de Barcelona, kit de premsa i reportatges dels mitjans.">
+<meta name="keywords" content="Premi Dona i Esport, premsa CB Grup Barna, kit de premsa, briefing del club, dossier de premsa bàsquet Barcelona, Guia Clot, Eix Clot, articles bàsquet Clot">
 <link rel="canonical" href="https://cbgrupbarna.info/premsa/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/premsa/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/premsa/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/premsa/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/premsa/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:locale" content="ca_ES">
-<meta property="og:title" content="Sala de premsa i kit de premsa · CB Grup Barna">
-<meta property="og:description" content="Sala de premsa del CB Grup Barna: kit de premsa i briefing del club descarregable en PDF, més els articles i reportatges dels mitjans del barri sobre el club de bàsquet base del Clot, Sant Martí, Barcelona.">
+<meta property="og:title" content="Premis i premsa · CB Grup Barna">
+<meta property="og:description" content="Premis i premsa del CB Grup Barna: finalista del 19è Premi Dona i Esport de l'Ajuntament de Barcelona, kit de premsa i reportatges dels mitjans.">
 <meta property="og:url" content="https://cbgrupbarna.info/premsa/">
 <meta property="og:image" content="https://cbgrupbarna.info/premsa/img/article-guia-clot-pagina-1.webp">
 <meta name="twitter:card" content="summary_large_image">
@@ -23,17 +27,27 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
-<script type="application/ld+json">
-{
+<style>
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; }
+.lang-switch a { padding: 7px 2px; color: var(--muted); transition: color 0.3s; }
+.lang-switch a.active { color: var(--ink); }
+.lang-switch a:hover { color: var(--red); }
+.lang-switch .sep { color: var(--line); }
+.lang-switch.light a { color: rgba(255,255,255,0.45); }
+.lang-switch.light a.active { color: #fff; }
+.lang-switch.light a:hover { color: var(--red); }
+.lang-switch.light .sep { color: rgba(255,255,255,0.2); }
+</style>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "CollectionPage",
       "@id": "https://cbgrupbarna.info/premsa/#premsa",
-      "name": "Sala de premsa · CB Grup Barna",
-      "description": "Sala de premsa del CB Grup Barna: kit de premsa i briefing del club descarregable en PDF, més els articles i reportatges dels mitjans del barri sobre el club de bàsquet base del Clot, Sant Martí, Barcelona.",
+      "name": "Premis i premsa · CB Grup Barna",
+      "description": "Premis i premsa del CB Grup Barna: finalista del 19è Premi Dona i Esport de l'Ajuntament de Barcelona, kit de premsa i reportatges dels mitjans.",
       "url": "https://cbgrupbarna.info/premsa/",
       "inLanguage": "ca-ES",
       "isPartOf": {
@@ -44,10 +58,41 @@
       },
       "hasPart": [
         {
+          "@type": "Event",
+          "name": "Lliurament del 19è Premi Dona i Esport",
+          "startDate": "2026-11-04",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Barcelona",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Barcelona",
+              "addressCountry": "ES"
+            }
+          },
+          "organizer": {
+            "@type": "GovernmentOrganization",
+            "name": "Ajuntament de Barcelona · Institut Barcelona Esports"
+          },
+          "description": "El CB Grup Barna és finalista del 19è Premi Dona i Esport."
+        },
+        {
           "@type": "Article",
           "headline": "«El CB Grup Barna: seixanta anys fent bategar el Clot», a Guia Clot",
           "url": "https://cbgrupbarna.info/premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/",
-          "datePublished": "2026-08-08"
+          "datePublished": "2026-08-08",
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://cbgrupbarna.info/og-image.jpg",
+            "contentUrl": "https://cbgrupbarna.info/og-image.jpg",
+            "width": 1200,
+            "height": 630,
+            "creditText": "CB Grup Barna",
+            "copyrightNotice": "CB Grup Barna"
+          },
+          "dateModified": "2026-08-17"
         },
         {
           "@type": "DigitalDocument",
@@ -80,8 +125,8 @@
       ]
     }
   ]
-}
-</script>
+}</script>
+<script src="/js/galetes.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -92,14 +137,20 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
-      <a href="/escoleta/">Escoleta</a>
-      <a href="/campus/" class="opt">Campus</a>
-      <a href="/3x3/" class="opt">3x3</a>
-      <a href="/blog/" class="opt">Blog</a>
-      <a href="/premsa/" class="opt">Premsa</a>
+      <a href="/club/">Club</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
+      <a href="/partits/">Dies de partit</a>
       <a href="/patrocinadors/" class="opt">Patrocinadors</a>
-      <a href="/#info">Informació</a>
+      <a href="/campus/" class="opt">Campus</a>
+      <a href="/magics/" class="opt">Màgics</a>
+      <a href="/3x3/" class="opt">3x3</a>
+      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/fotos/" class="opt">Galeria</a>
+      <a href="/premsa/">Premsa</a>
     </nav>
+    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/premsa/" hreflang="ca" class="active" data-cta="lang-ca">CA</a><span class="sep">·</span><a href="/es/premsa/" hreflang="es" data-cta="lang-es">ES</a><span class="sep">·</span><a href="/en/premsa/" hreflang="en" data-cta="lang-en">EN</a>
+    </div>
   </div>
 </header>
 <main id="main">
@@ -107,26 +158,56 @@
 <div class="wrap">
   <div class="phead narrow center">
     <p class="eyebrow red">El Barna als mitjans</p>
-    <h1 style="margin-left:auto;margin-right:auto">Articles i premsa</h1>
-    <p class="lede" style="margin-left:auto;margin-right:auto">Reportatges i mencions del club a la
-    premsa del barri. Gràcies a qui ens dedica el seu temps i la seva feina per explicar el Barna.</p>
+    <h1 style="margin-left:auto;margin-right:auto">Premis i premsa</h1>
+    <p class="lede" style="margin-left:auto;margin-right:auto">Els reconeixements del club i les
+    mencions del Barna a la premsa del barri. Gràcies a qui ens dedica el seu temps i la seva feina
+    per explicar-nos.</p>
   </div>
+
+  <!-- PREMIS -->
+  <section class="closer" id="premis" style="margin-bottom:clamp(40px,6vw,72px)" aria-labelledby="premis-title">
+    <p class="eyebrow red">Premis</p>
+    <h2 id="premis-title" style="margin-top:14px">19è Premi Dona i Esport</h2>
+    <p>El CB Grup Barna torna a ser <strong>finalista</strong> aquest any al Premi Dona i Esport de
+    l'Ajuntament de Barcelona (Institut Barcelona Esports), que reconeix dones i entitats que
+    destaquen pel seu compromís amb l'esport i l'activitat física femenines. El guardó té cinc
+    categories —Premi Mireia Tapiador al Foment de l'Esport, Esportistes, Mitjans de Comunicació,
+    Clubs Esportius i Directives de l'Esport—, amb un premi de fins a 3.000€ per categoria que
+    atorga el jurat. El lliurament de la 19a edició és el <strong>4 de novembre de 2026</strong>.</p>
+    <div class="btn-row">
+      <a class="btn red" href="/premidonaesport/" data-cta="premis-candidatura">Veure la candidatura del Barna</a>
+      <a class="btn ghost" href="https://ajuntament.barcelona.cat/donesiesport/ca/premi-dona-i-esport" target="_blank" rel="noopener" data-cta="premis-oficial">Web oficial del premi</a>
+    </div>
+  </section>
+
   <!-- KIT DE PREMSA · BRIEFING DEL CLUB -->
   <section class="closer" id="kit-de-premsa" style="margin-bottom:clamp(40px,6vw,72px)" aria-labelledby="kit-title">
     <p class="eyebrow red">Kit de premsa</p>
     <h2 id="kit-title" style="margin-top:14px">Briefing del CB Grup Barna</h2>
     <p>Tot el que cal per escriure sobre el club amb dades verificades: 60 anys al Clot, els dos
     sèniors a la Supercopa FCBQ, la paritat real, la inclusió, els esdeveniments propis i la
-    protecció del menor. Accés lliure, sense registre.</p>
+    protecció del menor. Et demanem el contacte per poder-te atendre si ho necessites.</p>
     <div class="btn-row">
       <a class="btn red" href="/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf" download
-         data-cta="premsa-briefing-pdf">Descarregar el briefing (PDF · 16 pàg.)</a>
+         data-cta="premsa-briefing-pdf" data-descarrega="El briefing del club">Descarregar el briefing (PDF · 16 pàg.)</a>
       <a class="btn ghost" href="/briefing/" data-cta="premsa-briefing-web">Llegir-lo al web</a>
       <a class="btn ghost" href="/briefing/materials.html" data-cta="premsa-materials">Altres materials</a>
     </div>
   </section>
 
   <div class="cards" style="padding-bottom:24px"><a class="card" href="/premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/"><div class="card-media"><img src="/premsa/img/article-guia-clot-pagina-1.webp" alt="Portada de l'article «El CB Grup Barna: seixanta anys fent bategar el Clot» a la revista Guia Clot, amb foto de l'equip infantil davant el bàner del club" loading="lazy" decoding="async"></div><div class="card-body"><span class="card-tag">Guia Clot · Camp de l'Arpa</span><h3>«El CB Grup Barna: seixanta anys fent bategar el Clot», a Guia Clot</h3><p>La revista Guia Clot, editada per Eix Clot, ha dedicat el seu article més destacat al CB Grup Barna pels 60 anys del club. Gràcies, Eix Clot. Gràcies, Gemma Collell.</p><span class="cta">Llegir l'article</span></div></a></div>
+
+  <!-- MOMENTS DESTACATS A INSTAGRAM -->
+  <section class="closer" id="moments-instagram" style="margin-bottom:clamp(40px,6vw,72px)" aria-labelledby="moments-title">
+    <p class="eyebrow red">El Barna a Instagram</p>
+    <h2 id="moments-title" style="margin-top:14px">Moments destacats</h2>
+    <p>Títols, presentacions, nous partners, la festa dels 60 anys i el dia a dia de La Nau: els
+    temes que més ens han importat aquests mesos, amb enllaç directe a cada publicació.</p>
+    <div class="btn-row">
+      <a class="btn red" href="/premsa/moments/" data-cta="premsa-moments">Veure tots els moments</a>
+    </div>
+  </section>
+
   <div class="narrow center" style="padding-bottom:clamp(40px,6vw,80px)">
     <a href="/premsa/arxiu/" class="btn ghost" data-cta="premsa-arxiu">Veure l'arxiu de premsa complet (1988-2026)</a>
   </div>
@@ -153,8 +234,13 @@
         <h3>El Barna</h3>
         <a href="/escoleta/">Escola de bàsquet</a>
         <a href="/campus/">Campus de bàsquet</a>
+        <a href="/magics/">Barna Màgics</a>
         <a href="/3x3/">Torneig 3x3</a>
+        <a href="/cistella-petita/">Cistella Petita</a>
         <a href="/patrocinadors/">Patrocinadors i partners</a>
+        <a href="/instal-lacions/">Instal·lacions</a>
+        <a href="/organigrama/">Organigrama</a>
+        <a href="/posicionament/">Posicionament del club</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
       </div>
       <div class="foot-col">
@@ -169,9 +255,16 @@
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
-        <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
+        <a href="/faq/">Preguntes freqüents</a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/politica-de-privacitat/">Política de privacitat</a>
+        <a href="/avis-legal/">Avís legal</a>
+        <a href="/politica-de-privacitat/#galetes">Galetes</a>
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>
@@ -182,9 +275,13 @@
     </div>
     <div class="foot-btm">
       <div class="foot-mark">#Som<em>Clot</em></div>
+      <div class="lang-switch light" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+        <a href="/premsa/" hreflang="ca" class="active" data-cta="foot-lang-ca">Català</a><span class="sep">·</span><a href="/es/premsa/" hreflang="es" data-cta="foot-lang-es">Castellano</a><span class="sep">·</span><a href="/en/premsa/" hreflang="en" data-cta="foot-lang-en">English</a>
+      </div>
       <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965</div>
     </div>
   </div>
 </footer>
+<script src="/js/descarrega.js" defer></script>
 </body>
 </html>

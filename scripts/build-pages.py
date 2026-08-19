@@ -15,6 +15,21 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
+
+def clamp_desc(text, limit=160):
+    """Google en mostra uns 160 caràcters. Retallem per final de frase perquè
+    el fragment de cerca no quedi penjat a mitja paraula."""
+    text = " ".join(text.split())
+    if len(text) <= limit:
+        return text
+    cut = text[:limit + 1]
+    end = max(cut.rfind(". "), cut.rfind("? "), cut.rfind("! "))
+    if end > limit * 0.55:
+        return text[:end + 1].strip()
+    sp = cut.rfind(" ")
+    return text[:sp if sp > 0 else limit].rstrip(" ,;:·") + "…"
+
+
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://cbgrupbarna.info"
 WA_CLUB = "https://api.whatsapp.com/send?phone=+34698425153"
@@ -29,11 +44,12 @@ def wa(text):
 
 # ─────────────────────────────────────────────────────────────── esquelet ────
 
-def head(title, desc, url, image, extra_ld=None, keywords=None):
+def head(title, desc, url, image, extra_ld=None, keywords=None, lang="ca"):
+    desc = clamp_desc(desc)
     ld = json.dumps(extra_ld, ensure_ascii=False, indent=2) if extra_ld else None
     kw = f'\n<meta name="keywords" content="{keywords}">' if keywords else ''
     return f"""<!DOCTYPE html>
-<html lang="ca">
+<html lang="{lang}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +60,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None):
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
-<meta property="og:locale" content="ca_ES">
+<meta property="og:locale" content="{lang}_{lang.upper()}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
@@ -113,7 +129,7 @@ FOOT = f"""</main>
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
-        <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
       </div>
@@ -130,6 +146,7 @@ FOOT = f"""</main>
     </div>
   </div>
 </footer>
+<script src="/js/descarrega.js" defer></script>
 </body>
 </html>
 """
@@ -195,6 +212,11 @@ def build_campus():
          "Les dates de la propera edició s'anuncien a aquesta pàgina i a Instagram (@cbgrupbarna). "
          "Qui vulgui rebre l'avís abans que s'obri al públic pot demanar-ho pel WhatsApp del club "
          "(+34 698 425 153) i entra a la llista d'avisos."),
+        ("On puc trobar un campus de bàsquet a Barcelona pel meu fill o filla?",
+         "El CB Grup Barna organitza el seu propi campus de bàsquet a Barcelona, al barri del Clot "
+         "(Districte de Sant Martí), obert a jugadors i jugadores de qualsevol club de la ciutat. És "
+         "una alternativa de barri, amb grups reduïts i tecnificació individual amb Time Chamber, als "
+         "campus de la Fundació del Bàsquet Català."),
     ])
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "Service", "@id": url + "#campus",
@@ -361,7 +383,7 @@ def build_patrocinadors():
 
     faq_html, faq_ld = faq_block([
         ("¿Cómo me hago patrocinador o partner del CB Grup Barna?",
-         "Escribe por WhatsApp (+34 698 425 153) o envía un correo a info@cbgrupbarna.com. "
+         "Escribe por WhatsApp (+34 698 425 153) o envía un correo a marqueting@cbgrupbarna.info. "
          "Preparamos una propuesta concreta según lo que quiera conseguir tu marca, sin packs "
          "de relleno ni promesas imposibles de medir."),
         ("¿Qué formas de colaborar hay?",
@@ -383,7 +405,7 @@ def build_patrocinadors():
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "SportsOrganization", "@id": SITE + "/#club", "name": "CB Grup Barna",
          "alternateName": "Club Bàsquet Grup Barna", "url": SITE, "logo": SITE + "/logo.png",
-         "foundingDate": "1965", "email": "info@cbgrupbarna.com",
+         "foundingDate": "1965", "email": "marqueting@cbgrupbarna.info",
          "address": {"@type": "PostalAddress", "streetAddress": "Carrer de la Llacuna, 172",
                     "addressLocality": "Barcelona", "postalCode": "08018", "addressCountry": "ES"},
          "sameAs": ["https://www.instagram.com/cbgrupbarna/", "https://www.tiktok.com/@cbgrupbarna"]},
@@ -552,10 +574,10 @@ def build_patrocinadors():
     relleno ni promesas imposibles de medir.</p>
     <div class="btn-row">
       <a href="https://wa.me/34698425153?text={wa('Hola, quiero información sobre las colaboraciones del CB Grup Barna para la temporada 2026/27.')}" class="btn red" target="_blank" rel="noopener" data-cta="patro-closer-wa">Hablar por WhatsApp</a>
-      <a href="mailto:info@cbgrupbarna.com?subject={wa('Colaboración CB Grup Barna 2026/27')}" class="btn ghost" data-cta="patro-closer-mail">Enviar email</a>
+      <a href="mailto:marqueting@cbgrupbarna.info?subject={wa('Colaboración CB Grup Barna 2026/27')}" class="btn ghost" data-cta="patro-closer-mail">Enviar email</a>
     </div>
     <p style="margin-top:22px;font-size:12.5px;color:var(--muted)">
-    Email: info@cbgrupbarna.com · Sede: La Nau del Clot · Llacuna 172 · Barcelona</p>
+    Email: marqueting@cbgrupbarna.info · Sede: La Nau del Clot · Llacuna 172 · Barcelona</p>
   </div>
   </div>
 </div>
@@ -563,7 +585,8 @@ def build_patrocinadors():
     return write("patrocinadors/index.html",
                  head(title, desc, url, SITE + ph + "hero_sf16.jpg", ld,
                       "patrocinadores CB Grup Barna, patrocinio baloncesto Barcelona, partners club "
-                      "de baloncesto, esponsorización deportiva Barcelona, dossier de colaboración") + body + FOOT)
+                      "de baloncesto, esponsorización deportiva Barcelona, dossier de colaboración",
+                      lang="es") + body + FOOT)
 
 
 # Dades pròpies de cada partner (descripció, oferta per a socis, posts
@@ -1627,10 +1650,10 @@ def build_premsa_index():
     <h2 id="kit-title" style="margin-top:14px">Briefing del CB Grup Barna</h2>
     <p>Tot el que cal per escriure sobre el club amb dades verificades: 60 anys al Clot, els dos
     sèniors a la Supercopa FCBQ, la paritat real, la inclusió, els esdeveniments propis i la
-    protecció del menor. Accés lliure, sense registre.</p>
+    protecció del menor. Et demanem el contacte per poder-te atendre si ho necessites.</p>
     <div class="btn-row">
       <a class="btn red" href="/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf" download
-         data-cta="premsa-briefing-pdf">Descarregar el briefing (PDF · 16 pàg.)</a>
+         data-cta="premsa-briefing-pdf" data-descarrega="El briefing del club">Descarregar el briefing (PDF · 16 pàg.)</a>
       <a class="btn ghost" href="/briefing/" data-cta="premsa-briefing-web">Llegir-lo al web</a>
       <a class="btn ghost" href="/briefing/materials.html" data-cta="premsa-materials">Altres materials</a>
     </div>
