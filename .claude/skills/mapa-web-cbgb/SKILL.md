@@ -332,3 +332,51 @@ existint** (encara que sigui privat o en un altre compte) i que les fotos
 originals tinguin còpia en algun lloc més. Amb això, regenerar la web és
 literalment tornar a fer `push` i revincular Pages, el domini i els
 secrets — no cal escriure de nou cap pàgina.
+
+### Com fer el mirall de còpia de seguretat (procediment provat el 20/08/2026)
+
+**Comprovat aquest dia: l'App de GitHub connectada a aquesta sessió no té
+permís per crear repositoris** (`create_repository` dona `403 Resource not
+accessible by integration`) — només llegeix i escriu als repos que ja se
+li han donat explícitament. Per tant el pas 1 l'ha de fer una persona amb
+accés al compte, no un agent en aquesta sessió.
+
+1. **Crea el repositori buit a mà**, amb l'Ana o qui tingui accés al
+   compte `voluntarisgrupbarna-pixel`: <https://github.com/new> → nom
+   `cbgrupbarna-info-backup` (o el que es vulgui) → **privat** → sense
+   README ni `.gitignore` (ha de quedar completament buit).
+2. **Dona-hi accés** a l'eina/agent que hagi de fer el mirall (a través
+   del connector de GitHub de la sessió, o amb un token amb permís
+   `contents:write` sobre aquest repo nou).
+3. **Fes el mirall amb `git`, no amb l'API de fitxers.** El repositori
+   pesa **~5,3 GB en 51 commits** (sobretot fotos); pujar-lo fitxer a
+   fitxer per l'API de GitHub (com fa `push_files`) no és viable. Amb
+   `git` directe, un sol `git push --mirror` de tot el pes de cop pot fer
+   `time-out` a través del proxy d'aquest tipus d'entorn (es va veure amb
+   pujades de només desenes de MB, vegeu §8) — per això cal pujar-ho **per
+   trossos, commit a commit, de més antic a més nou**, perquè cada pujada
+   només transporti les fotos noves d'aquell commit:
+   ```bash
+   git remote add backup https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info-backup.git
+
+   # main branch (o la branca que es vulgui protegir), de l'arrel cap amunt
+   for c in $(git rev-list --reverse main); do
+     git push backup "$c":refs/heads/main
+   done
+
+   # i qualsevol altra branca activa, p. ex. la de treball d'aquesta skill:
+   for c in $(git rev-list --reverse claude/skill-web-integral-70y1gb); do
+     git push backup "$c":refs/heads/claude/skill-web-integral-70y1gb
+   done
+   ```
+   Si algun pas falla per xarxa, es pot re-executar el mateix bucle: els
+   commits ja rebuts pel remot es reconeixen com a «up to date» i no es
+   tornen a pujar.
+4. **Repeteix-ho periòdicament** (manual, o com a workflow de GitHub
+   Actions amb un `cron` que faci `git push backup HEAD:refs/heads/main`
+   — un sol push incremental cada cop, no cal el bucle sencer un cop el
+   mirall ja existeix, perquè el remot ja té tot l'històric anterior).
+5. **Per Supabase** (dades de `galeria/`): `pg_dump "$SUPABASE_DB_URL"` des
+   d'un entorn amb accés a aquest secret (vegeu §3/§9 «Nivell 2»), i guarda
+   el `.sql` resultant al mateix repositori de backup o a un altre lloc
+   fora de Supabase.
