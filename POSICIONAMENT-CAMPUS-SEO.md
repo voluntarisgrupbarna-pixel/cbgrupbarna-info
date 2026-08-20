@@ -18,7 +18,8 @@ una IA pugui llegir i citar.
 |---|---|---|
 | `/campus-basquet-barcelona/` · `/es/campus-baloncesto-barcelona/` · `/en/basketball-camps-barcelona/` | **Comparativa de ciutat** (nova). És la peça citable per IA i la que competeix amb els llistats i blogs | genèriques i comparatives: "campus bàsquet Barcelona", "mejores campus de baloncesto Barcelona" |
 | `/campus/` · `/es/campus/` · `/en/campus/` | Producte: el campus del Barna | transaccionals: preu, inscripcions, dates, "campus Grup Barna" |
-| `/tecnificacio-basquet-barcelona/` | Tecnificació fora d'estiu | "tecnificació", "Nadal", "Setmana Santa", "entrenament individual" |
+| `/campus-nadal-basquet-barcelona/` · `/es/campus-navidad-baloncesto-barcelona/` | **Campus de Nadal** (nova). Landing estacional pròpia, viva tot l'any | "campus Nadal bàsquet Barcelona", "campus navidad baloncesto Barcelona" |
+| `/tecnificacio-basquet-barcelona/` | Tecnificació fora d'estiu, paraigua de les tres èpoques | "tecnificació", "entrenament individual", "Setmana Santa" |
 | `/blog/campus-basquet-barcelona-guia/` (3 idiomes) | Guia de criteri per a famílies | "com triar", "què mirar", "ràtio", "quant costa" |
 | `/escoleta/` | Curs sencer, no campus | "escola de bàsquet", "començar a jugar" |
 
@@ -150,3 +151,95 @@ respostes d'IA citen qui està mencionat en més llocs, no qui té millor HTML.
   "campus bàsquet Barcelona", "campus baloncesto Barcelona" i "mejores campus de
   baloncesto Barcelona": mirar si el club hi surt citat i amb quines dades.
 - Peticions per WhatsApp amb l'origen "us he trobat a Google".
+
+
+---
+
+# Campus de Nadal · pla per a l'octubre
+
+Ana publica l'edició de Nadal a l'**octubre**. La pàgina ja és viva des d'ara,
+perquè Google necessita setmanes per indexar i posicionar una URL nova: si es
+publica l'octubre des de zero, arriba tard a la temporada de cerques (que arrenca
+a mitjans de novembre i pica fort la primera quinzena de desembre).
+
+## Paraules clau del clúster de Nadal
+
+**Català**: campus Nadal bàsquet Barcelona · campus de bàsquet vacances de Nadal ·
+tecnificació Nadal bàsquet Barcelona · campus bàsquet desembre Barcelona ·
+casal de Nadal esportiu Barcelona · activitats de Nadal per a nens Barcelona ·
+campus bàsquet Nadal Clot / Sant Martí
+
+**Castellà**: campus Navidad baloncesto Barcelona · campus de baloncesto
+diciembre Barcelona · campus de Navidad deportivo Barcelona · tecnificación
+Navidad baloncesto · campus baloncesto vacaciones de Navidad · casal de Navidad
+Barcelona baloncesto · actividades de Navidad para niños Barcelona ·
+campus baloncesto Navidad El Clot
+
+**Preguntes (per a IA)**: hi ha campus de bàsquet per Nadal a Barcelona · què
+fer amb els nens les vacances de Nadal a Barcelona · quant costa un campus de
+Nadal · quins dies es fa el campus de Nadal · campus de Nadal obert a nens
+d'altres clubs
+
+## Calendari
+
+| Quan | Què |
+|---|---|
+| **Ara (agost)** | La pàgina ja és publicada, indexable i enllaçada des de campus, tecnificació i comparativa. Sense dates: diu que es confirmen a l'octubre. |
+| **Setembre** | Fitxa de Google al dia amb fotos de l'estiu. Un post d'Instagram que enllaci la pàgina (el perfil és l'única font d'enllaços que controlem). |
+| **Octubre — publicació** | Omplir dates i preu a la pàgina (ca i es), afegir el node `Event` del schema (plantilla a sota), actualitzar `lastmod` al sitemap i el bloc de Nadal a `llms.txt`. Publicació a Google Business Profile. Correu a les agendes de districte i portals de famílies amb l'activitat de Nadal. |
+| **Novembre** | Recordatori a IG i post de Google. Comprovar a Search Console que la pàgina ja rep impressions per "campus navidad baloncesto barcelona". |
+| **Desembre** | Fotos de l'edició a la mateixa pàgina: la converteix en prova social per a l'any següent. |
+| **Gener** | Treure les dates passades, deixar la pàgina en mode "propera edició" i mantenir-la viva. No esborrar-la mai: la URL ha d'acumular historial. |
+
+## Plantilla del node `Event` (enganxar dins de `@graph` quan hi hagi dates)
+
+```json
+{
+  "@type": "Event",
+  "@id": "https://cbgrupbarna.info/campus-nadal-basquet-barcelona/#edicio-2026",
+  "name": "Campus de Nadal de bàsquet · CB Grup Barna",
+  "description": "Tecnificació de bàsquet durant les vacances escolars de Nadal a La Nau del Clot: tir, manejo de pilota, 1x1 i lectura de joc, en grups per edat i nivell.",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "startDate": "2026-12-DD",
+  "endDate": "2026-12-DD",
+  "organizer": { "@id": "https://cbgrupbarna.info/#club" },
+  "location": {
+    "@type": "Place",
+    "name": "La Nau del Clot",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carrer de la Llacuna, 172",
+      "addressLocality": "Barcelona",
+      "addressRegion": "Catalunya",
+      "postalCode": "08018",
+      "addressCountry": "ES"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "PREU",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2026-10-DD",
+    "url": "https://cbgrupbarna.info/campus-nadal-basquet-barcelona/"
+  },
+  "audience": { "@type": "PeopleAudience", "suggestedMinAge": 5, "suggestedMaxAge": 17 }
+}
+```
+
+Amb `Event` + `Offer` datats, Google pot mostrar la fitxa d'esdeveniment i les
+IA poden respondre "del X al Y de desembre, N euros" citant-nos. Sense dates, no
+s'ha de posar el node: un `Event` amb dades inventades o buides fa més mal que bé.
+
+## Després de cada edició: la xifra
+
+L'estiu de 2026 hi van passar **unes 150 nenes i nens**. Aquesta xifra ja és a la
+pàgina del campus, a la comparativa, a la landing de Nadal i a `llms.txt`, perquè
+és exactament el tipus de dada que una IA cita quan compara campus i que una
+família llegeix com a prova que la cosa funciona.
+
+Cada edició ha de deixar la seva xifra: participants, setmanes, clubs de
+procedència. **La facturació no es publica** —ni al web, ni a la fitxa de Google,
+ni a les notes de premsa—: va al dossier de Junta i al de patrocinis, on sí que
+és un argument de pes.
