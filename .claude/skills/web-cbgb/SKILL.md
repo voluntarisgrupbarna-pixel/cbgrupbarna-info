@@ -132,30 +132,38 @@ aquestes:
 
 ---
 
-## 2. Tipografia: dos sistemes, i cal saber en quin ets
+## 2. Tipografia: Anton i Inter, i prou
 
-Sempre dues famílies com a màxim per peça: una de display i **Inter** per al
-text. La de display depèn d'on siguis.
+Dues famílies, i les mateixes a tot arreu.
 
-- **Jost** (`--display`, amb `Futura` i `Century Gothic` de recanvi) és la del
-  **sistema actual**: portada, blog, campus, 3x3, premsa, patrocinadors, femení,
-  `/es/`, `/en/` i `partits/equips/`. Va en caixa alta, pes lleuger (200–400) i
-  molt interlletratge.
-- **Anton** és la de les **pàgines antigues i autònomes**, que porten el seu CSS
-  a dins: `/escoleta/` (que se serveix les fonts des de `escoleta/fonts/`), `/partits/`,
-  `/briefing/`, `/jugadors/estadistiques.html` i `/partits/cartell.html`. És més
-  pesada i més estreta que Jost. **No les barregis en una mateixa pàgina**: si
-  toques una d'aquestes, segueix amb Anton; si en fas una de nova, fes-la amb
-  `css/barna.css` i Jost.
-- **Inter** per a text, dades i etiquetes a tot arreu. Les etiquetes van en
-  caixa alta amb interlletratge de `0.18em` a `0.28em`.
+- **Anton** és la display: `--display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif`.
+  Caixa alta, un sol gruix (400), interlletratge gairebé nul (`0.02em`) i
+  interlineat curt (`1.04`). Anton **no té pesos**: si veus `font-weight: 300`
+  en una regla de display, és codi antic de quan hi havia Jost.
+- **Inter** per a text, dades i **etiquetes**. Les etiquetes petites en caixa
+  alta amb molt interlletratge (`0.18em`–`0.28em`) van en Inter, **no** en
+  Anton: Anton amb `letter-spacing: 0.2em` queda malament.
 
-Els `.ttf` de `.github/scripts/fonts/` (`anton.ttf`, `inter-*.ttf`) **no són per
-al web**: els fan servir `generate-og-image.py` i `generate-calendaris.py` per
-dibuixar imatges amb Pillow. Al web les fonts vénen de Google Fonts, tret de
-`/escoleta/`, que les té en `.woff2` al seu propi directori.
+Aquesta és la separació que costa de veure i la que més s'equivoca: *display
+gran → Anton; etiqueta petita amb tracking → Inter*.
 
----
+### Anton s'auto-allotja
+
+Els dos subconjunts són a **`/fonts/`** i es declaren amb `@font-face` a
+`css/barna.css` i al `<style>` de la portada. **No es demana a Google Fonts**, i
+és a posta: així no s'envien les IP de les famílies a un tercer. `/escoleta/`
+fa el mateix des de `escoleta/fonts/` i ho documenta igual.
+
+Inter sí que ve encara de Google Fonts. És el següent a auto-allotjar.
+
+Els `.ttf` de `.github/scripts/fonts/` **no són per al web**: els fan servir
+`generate-og-image.py` i `generate-calendaris.py` per dibuixar imatges amb
+Pillow.
+
+> **Jost ja no s'usa enlloc.** Era la display fins a l'agost del 2026; es va
+> substituir per Anton a les 100 pàgines perquè la guia i aquesta skill sempre
+> havien dit Anton i el web no ho complia. Si trobes `Jost` en algun fitxer, és
+> un residu: treu-lo, no el propaguis.
 
 ## 3. Fotografia
 
