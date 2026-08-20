@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0A0A0A">
 <title>Campus de baloncesto en Barcelona, verano | CB Grup Barna</title>
 <meta name="description" content="Campus de baloncesto en Barcelona para niños y niñas de base. El campus de verano del CB Grup Barna en El Clot, Distrito de Sant Martí: semanas intensivas de…">
-<meta name="keywords" content="campus baloncesto Barcelona, campus básquet Barcelona, campus de verano baloncesto, grup barna campus, campus tecnificación baloncesto Barcelona">
+<meta name="keywords" content="campus baloncesto Barcelona, campus de verano baloncesto Barcelona, campus tecnificación baloncesto Barcelona, campus básquet Barcelona, campus baloncesto niños Barcelona, campus baloncesto niñas Barcelona, campus baloncesto Semana Santa, campus baloncesto Navidad, academia de baloncesto Barcelona, mejores campus de baloncesto Barcelona, campus baloncesto Sant Martí, campus baloncesto El Clot, grup barna campus">
 <link rel="canonical" href="https://cbgrupbarna.info/es/campus/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/campus/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/campus/">
@@ -43,6 +43,53 @@
 {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "Course",
+      "@id": "https://cbgrupbarna.info/es/campus/#course",
+      "name": "Campus de baloncesto CB Grup Barna con Time Chamber",
+      "description": "Campus de tecnificación de baloncesto por semanas en El Clot, Barcelona. Cada semana tiene un foco técnico propio (lectura de juego, fundamentos, tiro, 1x1, manejo de balón, habilidades combinadas), con grupos por edad y nivel y un límite aproximado de 50 plazas por semana.",
+      "inLanguage": "es",
+      "url": "https://cbgrupbarna.info/es/campus/",
+      "provider": { "@id": "https://cbgrupbarna.info/#club" },
+      "educationalLevel": "Baloncesto base: de Escoleta a júnior",
+      "teaches": ["Tiro", "Manejo de balón", "Juego de 1x1", "Lectura de juego", "Fundamentos técnicos"],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Semana completa · 9h a 17h, comida incluida",
+          "price": "195",
+          "priceCurrency": "EUR",
+          "category": "Semana completa",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://cbgrupbarna.info/es/campus/"
+        },
+        {
+          "@type": "Offer",
+          "name": "Media jornada · 9h a 13:30h",
+          "price": "160",
+          "priceCurrency": "EUR",
+          "category": "Media jornada",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://cbgrupbarna.info/es/campus/"
+        }
+      ],
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "onsite",
+        "courseWorkload": "PT40H",
+        "location": {
+          "@type": "Place",
+          "name": "La Nau del Clot",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Barcelona",
+            "addressRegion": "Barcelona",
+            "postalCode": "08018",
+            "addressCountry": "ES"
+          }
+        }
+      }
+    },
     {
       "@type": "Service",
       "@id": "https://cbgrupbarna.info/campus/#campus",
@@ -202,6 +249,7 @@
       <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20del%20Campus%20de%20baloncesto%20del%20CB%20Grup%20Barna"
          class="btn red" target="_blank" rel="noopener" data-cta="campus-wa">Pedir información</a>
       <a href="/#info" class="btn ghost" data-cta="campus-form">Avísame de la próxima edición</a>
+      <a href="/es/campus-baloncesto-barcelona/" class="btn ghost" data-cta="campus-comparativa">Comparativa de campus en Barcelona →</a>
     </div>
     <div class="phead-media">
       <img src="/img/campus-hero.webp" alt="Jugadores del campus de baloncesto del CB Grup Barna con la camiseta del campus" width="1200" height="675" fetchpriority="high">

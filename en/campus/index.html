@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0A0A0A">
 <title>Basketball Camp in Barcelona · CB Grup Barna | Summer at El Clot</title>
 <meta name="description" content="Basketball camp in Barcelona for youth players. CB Grup Barna's summer camp in El Clot, Sant Martí District: intensive skills-training weeks, groups by age and…">
-<meta name="keywords" content="basketball camp Barcelona, summer basketball camp Barcelona, youth basketball camp, grup barna camp, basketball skills camp Barcelona">
+<meta name="keywords" content="basketball camp Barcelona, summer basketball camp Barcelona, basketball skills camp Barcelona, youth basketball camp Barcelona, basketball camp for kids Barcelona, basketball camp for girls Barcelona, Easter basketball camp Barcelona, Christmas basketball camp Barcelona, basketball academy Barcelona, best basketball camps Barcelona, grup barna camp">
 <link rel="canonical" href="https://cbgrupbarna.info/en/campus/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/campus/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/campus/">
@@ -43,6 +43,53 @@
 {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "Course",
+      "@id": "https://cbgrupbarna.info/en/campus/#course",
+      "name": "CB Grup Barna basketball camp with Time Chamber",
+      "description": "Weekly basketball skills camp in El Clot, Barcelona. Each week has its own technical focus (reading the game, fundamentals, shooting, one-on-one, ball handling, combined skills), with groups by age and level and a limit of roughly 50 places per week.",
+      "inLanguage": "en",
+      "url": "https://cbgrupbarna.info/en/campus/",
+      "provider": { "@id": "https://cbgrupbarna.info/#club" },
+      "educationalLevel": "Youth basketball: Escoleta to junior",
+      "teaches": ["Shooting", "Ball handling", "One-on-one play", "Reading the game", "Technical fundamentals"],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Full week · 9am to 5pm, lunch included",
+          "price": "195",
+          "priceCurrency": "EUR",
+          "category": "Full week",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://cbgrupbarna.info/en/campus/"
+        },
+        {
+          "@type": "Offer",
+          "name": "Half day · 9am to 1:30pm",
+          "price": "160",
+          "priceCurrency": "EUR",
+          "category": "Half day",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://cbgrupbarna.info/en/campus/"
+        }
+      ],
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "onsite",
+        "courseWorkload": "PT40H",
+        "location": {
+          "@type": "Place",
+          "name": "La Nau del Clot",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Barcelona",
+            "addressRegion": "Barcelona",
+            "postalCode": "08018",
+            "addressCountry": "ES"
+          }
+        }
+      }
+    },
     {
       "@type": "Service",
       "@id": "https://cbgrupbarna.info/campus/#campus",
@@ -202,6 +249,7 @@
       <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hi!%20I%27d%20like%20information%20about%20the%20CB%20Grup%20Barna%20Basketball%20Camp"
          class="btn red" target="_blank" rel="noopener" data-cta="campus-wa">Request information</a>
       <a href="/#info" class="btn ghost" data-cta="campus-form">Notify me about the next edition</a>
+      <a href="/en/basketball-camps-barcelona/" class="btn ghost" data-cta="campus-comparativa">Compare basketball camps in Barcelona →</a>
     </div>
     <div class="phead-media">
       <img src="/img/campus-hero.webp" alt="Players at the CB Grup Barna basketball camp wearing the camp t-shirt" width="1200" height="675" fetchpriority="high">
