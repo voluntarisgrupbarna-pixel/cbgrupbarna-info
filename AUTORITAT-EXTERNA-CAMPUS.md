@@ -84,6 +84,59 @@ Globasket, Illa Fantasia, Westfield Glòries), canviar l'enllaç per
 **Objectiu realista: 12-15 enllaços de 23 demanats.** Amb això sol, ja canviem
 de lliga respecte d'avui.
 
+### La setmana d'arrencada (els partners tornen de vacances)
+
+Tres ja estan tancats i són el millor punt de partida, perquè la conversa ja està
+oberta i el moment és bo. **Demanar-ho ara, no d'aquí a tres mesos**: l'enllaç es
+demana quan la relació acaba de renovar-se o de signar-se, no quan ja fa mig any
+que no us parleu.
+
+| Partner | Situació | Què demanar exactament |
+|---|---|---|
+| Centre Bac de Roda | Renovat | Enllaç des del seu web a cbgrupbarna.info, dins la conversa de renovació |
+| Globasket | Renovat | Enllaç a `cbgrupbarna.info/campus/` des del seu apartat de clubs |
+| Nova Farmàcia Clot | Signat, arrenca la setmana vinent | No tenen web: **menció a la seva fitxa de Google**, enllaç a la bio d'Instagram i cartellet amb QR al taulell |
+
+**Als dos que renoven** (mateix missatge, canviant l'URL):
+
+> Hola [nom],
+>
+> Encantada de tenir-vos un any més. Ara que ho tenim tancat, una petició de dos minuts que a nosaltres ens ajuda molt: si al vostre web hi ha un apartat de col·laboradors, ens aniria molt bé sortir-hi amb enllaç.
+>
+> - Nom: CB Grup Barna
+> - Enllaç: https://cbgrupbarna.info/ (o https://cbgrupbarna.info/campus/)
+> - Text suggerit: "CB Grup Barna, club de bàsquet base del Clot des de 1965"
+> - Logo adjunt
+>
+> Nosaltres ja us tenim a la pàgina de partners i a la cartel·la de tots els vídeos del club. Això és el mateix, en direcció contrària.
+>
+> Gràcies!
+> Ana
+
+**A Nova Farmàcia Clot**, que no té web, l'enllaç clàssic no existeix. El que sí
+funciona amb un comerç de barri:
+
+> Hola [nom],
+>
+> Abans d'arrencar la setmana vinent, tres coses petites que ens ajuden molt i que no costen res:
+>
+> 1. Una publicació a la vostra fitxa de Google dient que col·laboreu amb el CB Grup Barna, el club de bàsquet del Clot. Us la deixo escrita si voleu.
+> 2. L'enllaç del club a la bio d'Instagram mentre duri la col·laboració.
+> 3. Un cartellet amb QR al taulell: qui l'escaneja arriba a la pàgina del club i del campus.
+>
+> El QR i el cartell els portem nosaltres impresos.
+>
+> Gràcies!
+> Ana
+
+I l'arrencada de la setmana vinent és, en si mateixa, contingut: la signatura d'un
+partner nou és un post, i el post és una menció més. La seva pàgina al web
+(`/patrocinadors/partners/nova-farmacia-clot/`) ja existeix i és el destí de tot.
+
+**Els altres 20 partners**: la setmana que tornin, cinc missatges el dilluns,
+cinc el dimecres, i seguiment als quinze dies dels que no contestin. La llista i
+l'estat, al CSV.
+
 ---
 
 ## Onada 2 · Les ressenyes (rutina, no campanya)
