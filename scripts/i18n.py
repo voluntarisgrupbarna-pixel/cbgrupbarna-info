@@ -35,6 +35,14 @@ PAGES = {
 }
 
 OG_LOCALE = {'ca': 'ca_ES', 'es': 'es_ES', 'en': 'en_GB'}
+
+# Documents traduïts pel seu propi script (no pel motor genèric d'aquest
+# fitxer), que el JSON-LD ha de citar en l'idioma correcte quan hi apareixen.
+EXTRA_TRANSLATED = {
+    'https://cbgrupbarna.info/briefing/': {
+        'en': 'https://cbgrupbarna.info/en/briefing/',
+    },
+}
 LABEL = {'ca': 'CA', 'es': 'ES', 'en': 'EN'}
 
 # Elements el text dels quals mai s'ha de traduir (marques, dades, codi)
@@ -288,12 +296,26 @@ def localize_jsonld(doc, lang, urls, cat):
 
     def walk(o):
         if isinstance(o, dict):
+            # "és la pròpia pàgina" només si un dels seus url/@id/item ja
+            # apunta exactament a la versió catalana d'aquesta pàgina — mai
+            # per estar dins del mateix graf. Un subjectOf que enllaça a un
+            # ALTRE document (p. ex. el briefing citat des de la home) no és
+            # "aquesta pàgina" encara que comparteixi domini, i el seu
+            # inLanguage no s'ha de tocar.
+            is_self = any(isinstance(v, str) and v.rstrip('/') == urls['ca'].rstrip('/')
+                          for k, v in o.items() if k in ('url', 'item', '@id'))
+            # …o és un document extern que SÍ té versió pròpia en aquest idioma
+            # (vegeu EXTRA_TRANSLATED): aleshores "url" apuntarà a aquesta
+            # versió i inLanguage n'ha de reflectir l'idioma real.
+            if not is_self:
+                is_self = any(isinstance(v, str) and lang in EXTRA_TRANSLATED.get(v.rstrip('/') + '/', {})
+                              for k, v in o.items() if k in ('url', 'item', '@id'))
             r = {}
             for k, v in o.items():
                 if k in ('name', 'description', 'headline', 'alternateName',
                          'jobTitle', 'serviceType', 'articleSection'):
                     r[k] = walk_text(v)
-                elif k == 'inLanguage':
+                elif k == 'inLanguage' and is_self:
                     r[k] = tag
                 elif k in ('url', 'item', '@id') and isinstance(v, str) and v.startswith(BASE):
                     r[k] = swap(v)
@@ -313,11 +335,19 @@ def localize_jsonld(doc, lang, urls, cat):
         return walk(v)
 
     def swap(u):
+        # Només es reescriu la URL PRÒPIA de la pàgina (autoreferència: @id,
+        # WebPage, breadcrumb del propi ítem…). Mai per prefix: quan la pàgina
+        # és la home, urls['ca'] és l'arrel del domini i un startswith()
+        # hi confondria QUALSEVOL URL absoluta del site (logo.png, altres
+        # pàgines, el PDF del briefing…), reescrivint-la cap a una ruta que
+        # no existeix sota /es/ o /en/.
         if u == urls['ca'] or u == urls['ca'].rstrip('/'):
             return urls[lang]
-        if u.startswith(urls['ca']):
-            return urls[lang] + u[len(urls['ca']):]
-        return u
+        # Documents traduïts a banda del motor genèric (p. ex. el briefing,
+        # generat pel seu propi script): si n'hi ha versió en aquest idioma,
+        # la home hi enllaça en comptes de citar sempre l'original català.
+        alt = EXTRA_TRANSLATED.get(u.rstrip('/') + '/', {}).get(lang)
+        return alt or u
 
     for sc in doc.xpath('//script[@type="application/ld+json"]'):
         try:
