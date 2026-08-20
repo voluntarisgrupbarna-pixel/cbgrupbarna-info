@@ -289,6 +289,8 @@ a.partner-logo:hover img { filter: none; opacity: 1; }
   .search-overlay { background: rgba(0,0,0,0.15); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.search-panel { animation: slideDown 0.25s var(--ease) !important; }
 @media (max-width: 620px) {
   .search-widget { max-width: 100%; margin: clamp(12px, 2vw, 16px) 0; }
   .search-input { font-size: 16px; }
