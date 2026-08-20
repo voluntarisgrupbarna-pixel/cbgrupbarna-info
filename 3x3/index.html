@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0A0A0A">
-<title>3×3 Westfield Glòries · Torneig de bàsquet 3x3 | CB Grup Barna</title>
-<meta name="description" content="3×3 Westfield Glòries: el torneig urbà de bàsquet 3x3 del CB Grup Barna, amb Time Chamber i Eix Clot.">
-<meta name="keywords" content="3x3 Barcelona, bàsquet 3x3 Barcelona, torneig 3x3, baloncesto 3x3 Barcelona, 3x3 Westfield Glòries, torneo 3x3 Barcelona">
+<title>3x3 Barcelona · Torneig de bàsquet 3x3 a Westfield Glòries | CB Grup Barna</title>
+<meta name="description" content="Torneig de bàsquet 3x3 a Barcelona amb punts FIBA: 3 edicions des del 2024, 113 equips, 2.000€ de premi paritari, totes les categories de l'Escoleta als veterans i la categoria inclusiva Barna Màgics. Al centre comercial Westfield Glòries i al barri del Clot.">
+<meta name="keywords" content="3x3 Barcelona, torneig 3x3 Barcelona, bàsquet 3x3 Barcelona, 3x3 centre comercial Barcelona, 3x3 centro comercial, baloncesto 3x3 Barcelona, torneo 3x3 Barcelona, 3x3 Westfield Glòries, 3x3 FIBA Barcelona, 3x3 inclusiu, 3x3 adults Barcelona, 3x3 premi en metàl·lic, 3x3 Clot">
 <link rel="canonical" href="https://cbgrupbarna.info/3x3/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/3x3/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/3x3/">
@@ -16,11 +16,14 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:locale" content="ca_ES">
-<meta property="og:title" content="3×3 Westfield Glòries · Torneig de bàsquet 3x3 | CB Grup Barna">
-<meta property="og:description" content="3×3 Westfield Glòries: el torneig urbà de bàsquet 3x3 del CB Grup Barna, amb Time Chamber i Eix Clot.">
+<meta property="og:title" content="3x3 Barcelona · Torneig de bàsquet 3x3 a Westfield Glòries | CB Grup Barna">
+<meta property="og:description" content="Torneig de bàsquet 3x3 a Barcelona amb punts FIBA: 3 edicions des del 2024, 113 equips, 2.000€ de premi paritari, totes les categories de l'Escoleta als veterans i la categoria inclusiva Barna Màgics. Al centre comercial Westfield Glòries i al barri del Clot.">
 <meta property="og:url" content="https://cbgrupbarna.info/3x3/">
 <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="3x3 Barcelona · Torneig de bàsquet 3x3 a Westfield Glòries | CB Grup Barna">
+<meta name="twitter:description" content="Torneig de bàsquet 3x3 a Barcelona amb punts FIBA: 3 edicions des del 2024, 113 equips, 2.000€ de premi paritari, totes les categories de l'Escoleta als veterans i la categoria inclusiva Barna Màgics. Al centre comercial Westfield Glòries i al barri del Clot.">
+<meta name="twitter:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta name="twitter:site" content="@cbgrupbarna">
 <link rel="icon" href="/logo.png">
 <link rel="apple-touch-icon" href="/icon-192.png">
@@ -42,21 +45,252 @@
 .photo-strip figure { margin: 0; }
 .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
 @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
+.fitxa{margin:26px 0 30px;border-top:1px solid var(--line)}
+.fitxa>div{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:6px 18px;padding:10px 0;border-bottom:1px solid var(--line)}
+.fitxa dt{font-family:var(--display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+.fitxa dd{margin:0;font-size:14.5px;color:var(--ink-2)}
+@media (max-width:520px){.fitxa>div{grid-template-columns:1fr;gap:2px}}
+.tbl-scroll{overflow-x:auto;margin:6px 0 26px}
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "SportsEvent",
-      "@id": "https://cbgrupbarna.info/3x3/#torneig",
+      "@type": [
+        "EventSeries",
+        "SportsEvent"
+      ],
+      "@id": "https://cbgrupbarna.info/3x3/#serie",
       "name": "3×3 Westfield Glòries",
       "alternateName": [
         "3x3 Barna",
+        "3x3 Barcelona",
         "Torneo 3x3 Barcelona",
-        "Bàsquet 3x3 Barcelona"
+        "Bàsquet 3x3 Barcelona",
+        "3x3 Westfield Glòries",
+        "Torneig 3x3 del Clot",
+        "3x3 centre comercial Barcelona"
       ],
-      "description": "Torneig urbà de bàsquet 3x3 del CB Grup Barna, amb Time Chamber i Eix Clot. 3a edició: 6-7 de juny de 2026, a tres seus del Clot-Glòries, amb 10 categories i 2.000€ en premis.",
+      "description": "Torneig urbà de bàsquet 3x3 que el CB Grup Barna organitza cada any amb Time Chamber i Eix Clot al barri del Clot-Glòries de Barcelona. Nascut el 2024 al centre comercial Westfield Glòries, la 3a edició (juny de 2026) va reunir 113 equips i 508 jugadors i jugadores en 10 categories, de l'Escoleta (6 anys) als veterans, amb punts del rànquing mundial FIBA 3x3 a sènior, 2.000€ de premi paritari entre la categoria femenina i la masculina i la categoria inclusiva Barna Màgics.",
+      "url": "https://cbgrupbarna.info/3x3/",
+      "sport": "Bàsquet 3x3",
+      "startDate": "2024",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "isAccessibleForFree": true,
+      "organizer": [
+        {
+          "@id": "https://cbgrupbarna.info/#club"
+        },
+        {
+          "@type": "Organization",
+          "name": "Time Chamber"
+        },
+        {
+          "@type": "Organization",
+          "name": "Eix Clot"
+        }
+      ],
+      "sponsor": [
+        {
+          "@type": "Organization",
+          "name": "Westfield Glòries",
+          "url": "https://cbgrupbarna.info/patrocinadors/partners/westfield-glories/"
+        },
+        {
+          "@type": "Organization",
+          "name": "Time Chamber",
+          "url": "https://cbgrupbarna.info/patrocinadors/partners/time-chamber/"
+        },
+        {
+          "@type": "Organization",
+          "name": "Eix Clot",
+          "url": "https://cbgrupbarna.info/patrocinadors/partners/eix-clot/"
+        }
+      ],
+      "location": {
+        "@type": "Place",
+        "name": "Westfield Glòries",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Barcelona",
+          "postalCode": "08018",
+          "addressRegion": "Catalunya",
+          "addressCountry": "ES",
+          "streetAddress": "Av. Diagonal, 208"
+        }
+      },
+      "keywords": "3x3 Barcelona, torneig 3x3, bàsquet 3x3, centre comercial, Westfield Glòries, Clot, FIBA 3x3, premi paritari, 3x3 inclusiu, Barna Màgics",
+      "subEvent": [
+        {
+          "@id": "https://cbgrupbarna.info/3x3/#edicio-2026"
+        },
+        {
+          "@id": "https://cbgrupbarna.info/3x3/#edicio-2025"
+        },
+        {
+          "@id": "https://cbgrupbarna.info/3x3/#edicio-2024"
+        }
+      ]
+    },
+    {
+      "@type": "SportsEvent",
+      "@id": "https://cbgrupbarna.info/3x3/#edicio-2026",
+      "name": "3×3 Westfield Glòries · 3a edició (2026)",
+      "description": "3a edició del torneig urbà de bàsquet 3x3 del CB Grup Barna, Time Chamber i Eix Clot: 113 equips (rècord), 508 jugadors i jugadores, 10 categories de l'Escoleta als veterans, 3 seus al Clot-Glòries, 2.000€ en premi paritari, punts del rànquing mundial FIBA 3x3 i la categoria inclusiva Barna Màgics. Es va jugar durant el Mes de l'Orgull LGTBI+.",
+      "url": "https://cbgrupbarna.info/3x3/",
+      "sport": "Bàsquet 3x3",
+      "startDate": "2026-06-06",
+      "endDate": "2026-06-07",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "isAccessibleForFree": true,
+      "organizer": [
+        {
+          "@id": "https://cbgrupbarna.info/#club"
+        },
+        {
+          "@type": "Organization",
+          "name": "Time Chamber"
+        },
+        {
+          "@type": "Organization",
+          "name": "Eix Clot"
+        }
+      ],
+      "sponsor": [
+        {
+          "@type": "Organization",
+          "name": "Westfield Glòries",
+          "url": "https://cbgrupbarna.info/patrocinadors/partners/westfield-glories/"
+        },
+        {
+          "@type": "Organization",
+          "name": "Time Chamber",
+          "url": "https://cbgrupbarna.info/patrocinadors/partners/time-chamber/"
+        },
+        {
+          "@type": "Organization",
+          "name": "Eix Clot",
+          "url": "https://cbgrupbarna.info/patrocinadors/partners/eix-clot/"
+        }
+      ],
+      "award": "2.000€ en premi paritari: 1.000€ per a la campiona Sènior Femení i 1.000€ per al campió Sènior Masculí",
+      "image": [
+        "https://cbgrupbarna.info/3x3/img/hero-bg-1.jpg",
+        "https://cbgrupbarna.info/3x3/img/hero-bg-2.jpg"
+      ],
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Westfield Glòries",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Barcelona",
+            "postalCode": "08018",
+            "addressRegion": "Catalunya",
+            "addressCountry": "ES",
+            "streetAddress": "Av. Diagonal, 208"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "La Nau del Clot",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Barcelona",
+            "postalCode": "08018",
+            "addressRegion": "Catalunya",
+            "addressCountry": "ES",
+            "streetAddress": "Carrer de la Llacuna, 172"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Rambleta del Clot",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Barcelona",
+            "postalCode": "08018",
+            "addressRegion": "Catalunya",
+            "addressCountry": "ES"
+          }
+        }
+      ],
+      "superEvent": {
+        "@id": "https://cbgrupbarna.info/3x3/#serie"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.cbgrupbarna-3x3timechamber.com/inscripcion",
+        "availability": "https://schema.org/SoldOut",
+        "category": "Inscripció per equip"
+      }
+    },
+    {
+      "@type": "SportsEvent",
+      "@id": "https://cbgrupbarna.info/3x3/#edicio-2025",
+      "name": "3×3 Westfield Glòries · 2a edició (2025)",
+      "description": "2a edició del torneig urbà de bàsquet 3x3 del CB Grup Barna a Westfield Glòries, amb 100 equips inscrits.",
+      "url": "https://cbgrupbarna.info/3x3/",
+      "sport": "Bàsquet 3x3",
+      "startDate": "2025",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "organizer": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Westfield Glòries",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Barcelona",
+          "postalCode": "08018",
+          "addressRegion": "Catalunya",
+          "addressCountry": "ES",
+          "streetAddress": "Av. Diagonal, 208"
+        }
+      },
+      "superEvent": {
+        "@id": "https://cbgrupbarna.info/3x3/#serie"
+      }
+    },
+    {
+      "@type": "SportsEvent",
+      "@id": "https://cbgrupbarna.info/3x3/#edicio-2024",
+      "name": "3×3 Westfield Glòries · 1a edició (2024)",
+      "description": "1a edició del torneig urbà de bàsquet 3x3 del CB Grup Barna a Westfield Glòries, amb 80 equips inscrits.",
+      "url": "https://cbgrupbarna.info/3x3/",
+      "sport": "Bàsquet 3x3",
+      "startDate": "2024",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "organizer": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Westfield Glòries",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Barcelona",
+          "postalCode": "08018",
+          "addressRegion": "Catalunya",
+          "addressCountry": "ES",
+          "streetAddress": "Av. Diagonal, 208"
+        }
+      },
+      "superEvent": {
+        "@id": "https://cbgrupbarna.info/3x3/#serie"
+      }
+    },
+    {
+      "@type": "SportsEvent",
+      "@id": "https://cbgrupbarna.info/3x3/#torneig",
+      "sameAs": "https://cbgrupbarna.info/3x3/#serie",
+      "name": "3×3 Westfield Glòries",
       "url": "https://cbgrupbarna.info/3x3/",
       "sport": "Bàsquet 3x3",
       "startDate": "2026-06-06",
@@ -71,36 +305,34 @@
         "name": "Westfield Glòries",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Av. Diagonal, 208",
           "addressLocality": "Barcelona",
           "postalCode": "08018",
           "addressRegion": "Catalunya",
-          "addressCountry": "ES"
+          "addressCountry": "ES",
+          "streetAddress": "Av. Diagonal, 208"
         }
       },
-      "offers": {
-        "@type": "Offer",
-        "url": "https://www.cbgrupbarna-3x3timechamber.com/inscripcion",
-        "availability": "https://schema.org/SoldOut",
-        "category": "Inscripció per equip"
+      "superEvent": {
+        "@id": "https://cbgrupbarna.info/3x3/#serie"
       }
     },
     {
       "@type": "WebPage",
       "@id": "https://cbgrupbarna.info/3x3/#webpage",
       "url": "https://cbgrupbarna.info/3x3/",
-      "name": "3×3 Westfield Glòries · Torneig urbà de bàsquet 3x3 a Barcelona | CB Grup Barna",
-      "description": "3×3 Westfield Glòries: el torneig urbà de bàsquet 3x3 del CB Grup Barna, amb Time Chamber i Eix Clot. 3a edició, 6-7 de juny, 3 seus al Clot-Glòries, 10 categories i 2.000€ en premis, amb punts FIBA a sènior.",
+      "name": "3x3 Barcelona · Torneig de bàsquet 3x3 a Westfield Glòries | CB Grup Barna",
+      "description": "Torneig de bàsquet 3x3 a Barcelona amb punts FIBA: 3 edicions des del 2024, 113 equips, 2.000€ de premi paritari, totes les categories de l'Escoleta als veterans i la categoria inclusiva Barna Màgics. Al centre comercial Westfield Glòries i al barri del Clot.",
       "inLanguage": [
         "ca-ES",
         "es-ES"
       ],
       "about": {
-        "@id": "https://cbgrupbarna.info/3x3/#torneig"
+        "@id": "https://cbgrupbarna.info/3x3/#serie"
       },
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
-      }
+      },
+      "primaryImageOfPage": "https://cbgrupbarna.info/3x3/img/hero-bg-1.jpg"
     },
     {
       "@type": "FAQPage",
@@ -110,7 +342,15 @@
           "name": "Què és el 3×3 Westfield Glòries?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "És el torneig urbà de bàsquet 3x3 amb punts FIBA que organitzen el CB Grup Barna, Time Chamber i Eix Clot al barri del Clot-Glòries de Barcelona. La 3a edició es va jugar el 6 i 7 de juny de 2026, repartida en tres seus: Westfield Glòries, La Nau del Clot i la Rambleta del Clot."
+            "text": "És el torneig urbà de bàsquet 3x3 amb punts FIBA que organitzen el CB Grup Barna, Time Chamber i Eix Clot al barri del Clot-Glòries de Barcelona. Va néixer el 2024 dins del centre comercial Westfield Glòries i ja porta tres edicions: la 3a es va jugar el 6 i 7 de juny de 2026, repartida en tres seus (Westfield Glòries, La Nau del Clot i la Rambleta del Clot), amb 113 equips."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quin torneig de bàsquet 3x3 es fa en un centre comercial de Barcelona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El 3×3 Westfield Glòries. La pista principal s'instal·la al centre comercial Westfield Glòries (Av. Diagonal 208, plaça de les Glòries Catalanes) i des de la 3a edició el torneig s'escampa a dues seus més del barri del Clot. És l'únic 3x3 vinculat a un centre comercial de Barcelona amb totes les categories d'edat, premi en metàl·lic paritari i punts del rànquing mundial FIBA 3x3."
           }
         },
         {
@@ -118,7 +358,39 @@
           "name": "Qui hi pot jugar?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Hi ha 10 categories, de l'Escoleta (6-7 anys) als sèniors i veterans, més la categoria inclusiva Barna Màgics. No cal estar federat per apuntar-se a les categories obertes; als sèniors, en canvi, es reparteixen punts del rànquing mundial FIBA 3x3."
+            "text": "Totes les edats. Hi ha 10 categories: Escoleta (6-7 anys), Premini, Mini, Preinfantil U12, Infantil U14, Cadet U16, Júnior U18, Sub-23, Sènior Masculí Pro i Sènior Femení Pro, més Sènior Amateur per a veterans i la categoria inclusiva Barna Màgics. No cal estar federat per apuntar-se a les categories obertes; als sèniors es reparteixen punts del rànquing mundial FIBA 3x3."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hi ha 3x3 per a adults i veterans a Barcelona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. El 3×3 Westfield Glòries té Sènior Masculí Pro i Sènior Femení Pro, amb punts FIBA i premi en metàl·lic, i una categoria Sènior Amateur de veterans per a nascuts fins al 1986. No és un torneig només de categories de formació: es juga de l'Escoleta als veterans."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hi ha alguna categoria inclusiva?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: els Barna Màgics, equips mixtos de jugadors i jugadores amb i sense diversitat funcional, amb regles adaptades. És competició real, amb trofeu propi, no una exhibició. Va ser la novetat de la 3a edició i el primer 3x3 inclusiu de Barcelona."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "El torneig reparteix premi en metàl·lic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: 2.000€ en premis, 1.000€ per a la campiona Sènior Femení i 1.000€ per al campió Sènior Masculí. És un premi paritari —la mateixa quantitat per a la categoria femenina i la masculina—, un diferencial que cap altre 3x3 de Barcelona ofereix. La resta de categories reben trofeus, medalles i regals dels comerços del barri."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "És un torneig oficial FIBA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A les categories sènior, sí: es reparteixen punts per al rànquing mundial FIBA 3x3 i el torneig té seguiment a FIBA Play. La resta de categories es juguen amb el mateix reglament FIBA 3x3 però sense puntuació de rànquing."
           }
         },
         {
@@ -131,10 +403,10 @@
         },
         {
           "@type": "Question",
-          "name": "Quins premis hi ha?",
+          "name": "Quantes edicions s'han jugat?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "2.000€ en premis: 1.000€ per al primer equip Sènior Femení i 1.000€ per al primer Sènior Masculí, premi paritari únic a Barcelona. La resta de categories reben trofeus, medalles i regals de comerços del barri."
+            "text": "Tres: 2024 (80 equips), 2025 (100 equips) i 2026 (113 equips i 508 jugadors i jugadores, rècord històric). La 4a edició encara no té dates anunciades."
           }
         },
         {
@@ -150,7 +422,7 @@
           "name": "On és exactament?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A tres seus a menys de 15 minuts a peu: Westfield Glòries (Av. Diagonal 208), La Nau del Clot (Carrer de la Llacuna 172) i la Rambleta del Clot, al barri del Clot i el Districte de Sant Martí de Barcelona."
+            "text": "A tres seus a menys de 15 minuts a peu: Westfield Glòries (Av. Diagonal 208, centre comercial), La Nau del Clot (Carrer de la Llacuna 172) i la Rambleta del Clot, al barri del Clot i el Districte de Sant Martí de Barcelona."
           }
         }
       ]
@@ -205,9 +477,11 @@
   <div class="phead">
     <p class="eyebrow red">Torneig urbà · 3a edició · 6-7 de juny de 2026</p>
     <h1>3×3 Westfield Glòries</h1>
-    <p class="lede">El torneig urbà de bàsquet 3x3 més potent de Barcelona: el CB Grup Barna,
-    Time Chamber i Eix Clot el porten al barri del Clot-Glòries, amb punts FIBA i 2.000€ en premis
-    repartits per igual entre sènior femení i masculí.</p>
+    <p class="lede">El torneig urbà de bàsquet 3x3 del CB Grup Barna, Time Chamber i Eix Clot:
+    <strong>tres edicions jugades des del 2024</strong>, totes les categories —de l'Escoleta als
+    veterans, més la categoria inclusiva Barna Màgics—, <strong>punts del rànquing mundial FIBA
+    3x3</strong> i <strong>2.000€ de premi repartits per igual</strong> entre sènior femení i
+    masculí. Comença al centre comercial Westfield Glòries i s'escampa pel barri del Clot.</p>
     <div class="btn-row" style="margin-top:28px">
       <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20que%20m%27aviseu%20de%20la%20propera%20edici%C3%B3%20del%203x3"
          class="btn red" target="_blank" rel="noopener" data-cta="3x3-wa">Avisa'm de la propera edició</a>
@@ -220,6 +494,83 @@
   </div>
 
   <div class="narrow prose">
+    <div class="recap-stat"><strong>En una línia:</strong> el 3×3 Westfield Glòries és el torneig
+    de bàsquet 3x3 del CB Grup Barna al Clot-Glòries de Barcelona. Nascut el 2024 dins del centre
+    comercial Westfield Glòries, porta <strong>tres edicions</strong> i a la darrera (6 i 7 de juny de
+    2026) hi van jugar <strong>113 equips i 508 jugadors i jugadores</strong> en <strong>10
+    categories</strong>, de 6 anys a veterans, amb punts FIBA a sènior i <strong>2.000€ de premi
+    paritari</strong>.</div>
+
+    <h2>Fitxa ràpida del torneig</h2>
+    <dl class="fitxa">
+      <div><dt>Nom</dt><dd>3×3 Westfield Glòries (també conegut com a 3x3 Barna)</dd></div>
+      <div><dt>Organitzen</dt><dd>CB Grup Barna · Time Chamber · Eix Clot</dd></div>
+      <div><dt>Edicions</dt><dd>3 · 2024, 2025 i 2026. La 4a, amb dates per confirmar</dd></div>
+      <div><dt>Darrera edició</dt><dd>6 i 7 de juny de 2026</dd></div>
+      <div><dt>Seus</dt><dd>Westfield Glòries (centre comercial, Av. Diagonal 208) · La Nau del Clot (Carrer de la Llacuna 172) · Rambleta del Clot</dd></div>
+      <div><dt>Categories</dt><dd>10, de l'Escoleta (6 anys) al Sènior Pro i als veterans, més la categoria inclusiva Barna Màgics</dd></div>
+      <div><dt>Participació</dt><dd>113 equips i unes 508 jugadores i jugadors el 2026 · rècord del torneig</dd></div>
+      <div><dt>Premis</dt><dd>2.000€ paritaris: 1.000€ al primer Sènior Femení i 1.000€ al primer Sènior Masculí</dd></div>
+      <div><dt>Oficialitat</dt><dd>Punts del rànquing mundial FIBA 3x3 a les categories sènior, amb seguiment a FIBA Play</dd></div>
+      <div><dt>Inscripció</dt><dd>Per equip (de 3 a 5 jugadors), a <a href="https://www.cbgrupbarna-3x3timechamber.com" target="_blank" rel="noopener">cbgrupbarna-3x3timechamber.com</a></dd></div>
+      <div><dt>Entrada</dt><dd>Lliure per al públic</dd></div>
+    </dl>
+
+    <h2>Què fa diferent aquest 3x3</h2>
+    <ul>
+      <li><strong>Totes les categories, no només la base.</strong> De l'Escoleta (6 anys) al Sènior Pro,
+      i també Sènior Amateur per a veterans nascuts fins al 1986. Una família sencera pot jugar-hi el
+      mateix cap de setmana.</li>
+      <li><strong>Premi paritari.</strong> 1.000€ per a la campiona Sènior Femení i 1.000€ per al campió
+      Sènior Masculí: la mateixa quantitat per a les dues categories, un diferencial que cap altre 3x3
+      de Barcelona ofereix.</li>
+      <li><strong>Punts del rànquing mundial FIBA 3x3</strong> a sènior, amb seguiment a FIBA Play.</li>
+      <li><strong>Barna Màgics, la primera categoria inclusiva d'un 3x3 a Barcelona.</strong> Equips
+      mixtos amb i sense diversitat funcional, regles adaptades i trofeu propi: competició real, no
+      exhibició.</li>
+      <li><strong>Es juga durant el Mes de l'Orgull LGTBI+</strong>, amb la samarreta oficial del torneig
+      incorporant-ne els colors i amb tolerància zero a qualsevol discriminació.</li>
+      <li><strong>Tres edicions consecutives des del 2024</strong>, amb creixement sostingut: 80 equips,
+      100 i 113.</li>
+      <li><strong>Reconeixement institucional.</strong> Visita de David Escudé, regidor d'Esports de
+      l'Ajuntament de Barcelona, i el club finalista del 19è Premi Dona i Esport gràcies, en bona part,
+      a aquest torneig.</li>
+      <li><strong>Compromís social amb FEDER.</strong> El club té una aliança amb la Federació Espanyola
+      de Malalties Rares per donar visibilitat a les malalties minoritàries a través de l'esport, i el
+      3x3 n'és un dels altaveus.</li>
+      <li><strong>Alçada de xarxes sense pagar-la.</strong> 7 creadors de contingut i més d'1,9 milions
+      de seguidors combinats a Instagram —entre ells Ari Geli, amb el seu equip professional Panthers—,
+      tot orgànic i sense cap compensació econòmica.</li>
+      <li><strong>No es queda dins del centre comercial.</strong> Des de la 3a edició ocupa tres seus del
+      barri a menys de 15 minuts a peu.</li>
+    </ul>
+
+    <h2>Un 3x3 en un centre comercial de Barcelona</h2>
+    <p>El torneig va néixer el 2024 amb una pista muntada dins del <strong>centre comercial Westfield
+    Glòries</strong>, a la plaça de les Glòries Catalanes (Av. Diagonal 208), amb una idea simple: treure
+    el bàsquet del pavelló i posar-lo on hi ha gent. Aquella seu continua sent la principal —hi va la
+    pista FIBA i les finals—, però el torneig ja no hi cap: des de la 3a edició també es juga a
+    <strong>La Nau del Clot</strong>, el pavelló propi del club, i a la <strong>Rambleta del
+    Clot</strong>, a l'aire lliure.</p>
+    <p>A Barcelona hi ha més d'un 3x3 lligat a un centre comercial. El del Clot-Glòries és el que
+    combina les quatre coses alhora: <strong>totes les categories d'edat</strong> —no només les de
+    formació—, <strong>premi en metàl·lic paritari</strong>, <strong>punts del rànquing mundial FIBA
+    3x3</strong> i una <strong>categoria inclusiva</strong>. I és un torneig d'un club de barri amb 60
+    anys d'història al Clot, no una acció de màrqueting puntual: el fan els mateixos que entrenen a la
+    Nau del Clot tot l'any.</p>
+
+    <h2>Les tres edicions, en xifres</h2>
+    <div class="tbl-scroll">
+    <table class="vs">
+      <thead><tr><th>Edició</th><th>Any</th><th>Equips</th><th>Fita</th></tr></thead>
+      <tbody>
+        <tr><th>1a</th><td>2024</td><td>80</td><td>Estrena, amb pista dins de Westfield Glòries</td></tr>
+        <tr><th>2a</th><td>2025</td><td>100</td><td>Consolidació del torneig al Clot-Glòries</td></tr>
+        <tr><th class="a">3a</th><td class="a">2026 · 6 i 7 de juny</td><td class="a">113</td><td class="a">Rècord: 508 jugadors/es, 10 categories, 3 seus, punts FIBA, 2.000€ paritaris i la categoria inclusiva Barna Màgics</td></tr>
+      </tbody>
+    </table>
+    </div>
+
     <h2>Què és el bàsquet 3x3</h2>
     <p>El 3x3 és bàsquet a mitja pista: <strong>equips de 3 a 5 jugadors i una sola cistella</strong>,
     amb 3 en pista i fins a 2 suplents. Els partits duren 10 minuts o fins a 21 punts, el marcador va
@@ -241,10 +592,10 @@
       <div><b>3</b><span>Seus al Clot-Glòries</span></div>
       <div><b>10</b><span>Categories</span></div>
       <div><b>113</b><span>Equips · rècord 2026</span></div>
-      <div><b>2.000€</b><span>En premis</span></div>
-      <div><b>800+</b><span>Jugadors i jugadores</span></div>
-      <div><b>2.000€</b><span>En premis</span></div>
-      <div><b>800+</b><span>Jugadors i jugadores</span></div>
+      <div><b>2.000€</b><span>Premi paritari</span></div>
+      <div><b>508</b><span>Jugadors i jugadores</span></div>
+      <div><b><em>3</em></b><span>Edicions des del 2024</span></div>
+      <div><b>FIBA</b><span>Punts de rànquing mundial</span></div>
     </div>
 
     <h2>Categories i edats</h2>
@@ -267,7 +618,22 @@
     <p>Novetat de la 3a edició: equips mixtos de jugadors i jugadores amb i sense diversitat
     funcional, amb regles adaptades. Competició real, no exhibició — mateixa intensitat, mateix
     trofeu. Es juga a la Rambleta del Clot, durant el Mes de l'Orgull, amb tolerància zero a
-    qualsevol discriminació.</p>
+    qualsevol discriminació. És la primera categoria inclusiva d'un torneig 3x3 a Barcelona.</p>
+
+    <h2>Paritat, Orgull i compromís social</h2>
+    <p>El torneig es juga al <strong>juny, durant el Mes de l'Orgull LGTBI+</strong>, i això no és
+    decoració: la samarreta oficial de la 3a edició en va incorporar els colors, l'esdeveniment es va
+    dissenyar per defensar aquests valors i hi va participar <strong>Kendall Martin</strong>,
+    jugadora trans i exjugadora del Barça B.</p>
+    <p>La <strong>paritat</strong> és estructural, no simbòlica: hi ha les mateixes categories per a
+    noies i per a nois, i el premi en metàl·lic és idèntic per a la campiona Sènior Femení i per al
+    campió Sènior Masculí. El club ha estat <a href="/premidonaesport/">finalista del 19è Premi Dona i
+    Esport</a> de l'Institut Barcelona Esports gràcies, en bona part, a aquest torneig.</p>
+    <p>I hi ha una pota social: el CB Grup Barna manté una <strong>aliança amb FEDER</strong>, la
+    Federació Espanyola de Malalties Rares, per donar visibilitat a les malalties minoritàries a
+    través de l'esport. El 3x3, que és l'esdeveniment del club amb més gent de fora, és un dels seus
+    altaveus. Es pot veure tot plegat a la <a href="/orgull/">programació del Mes de l'Orgull</a> i al
+    <a href="/magics/">projecte Barna Màgics</a>.</p>
 
     <h2>El 3x3, en imatges</h2>
     <p>Fotos de FotoJane i de l'organització a la 3a edició del 3x3 Westfield Glòries.</p>
@@ -368,7 +734,7 @@
     <a href="/#info">formulari d'informació</a>.</p>
 
     <h2 id="faq">Preguntes freqüents</h2>
-    <div class="faq"><details><summary>Què és el 3×3 Westfield Glòries?</summary><p>És el torneig urbà de bàsquet 3x3 amb punts FIBA que organitzen el CB Grup Barna, Time Chamber i Eix Clot al barri del Clot-Glòries de Barcelona. La 3a edició es va jugar el 6 i 7 de juny de 2026, repartida en tres seus: Westfield Glòries, La Nau del Clot i la Rambleta del Clot.</p></details><details><summary>Qui hi pot jugar?</summary><p>Hi ha 10 categories, de l'Escoleta (6-7 anys) als sèniors i veterans, més la categoria inclusiva Barna Màgics. No cal estar federat per apuntar-se a les categories obertes; als sèniors, en canvi, es reparteixen punts del rànquing mundial FIBA 3x3.</p></details><details><summary>Com és el format 3x3?</summary><p>Equips de 3 a 5 jugadors (3 en pista i fins a 2 suplents) a una sola cistella, en mitja pista. Partits curts, de 10 minuts o fins a 21 punts, així que en un mateix dia un equip pot jugar diverses eliminatòries seguides. És el format olímpic del bàsquet des dels Jocs de Tòquio 2021.</p></details><details><summary>Quins premis hi ha?</summary><p>2.000€ en premis: 1.000€ per al primer equip Sènior Femení i 1.000€ per al primer Sènior Masculí, premi paritari únic a Barcelona. La resta de categories reben trofeus, medalles i regals de comerços del barri.</p></details><details><summary>Quan és la propera edició?</summary><p>Les dates de la 4a edició s'anunciaran en aquesta pàgina, a la web oficial cbgrupbarna-3x3timechamber.com i a Instagram (@cbgrupbarna). Qui vulgui rebre l'avís d'obertura d'inscripcions pot demanar-ho pel WhatsApp del club.</p></details><details><summary>On és exactament?</summary><p>A tres seus a menys de 15 minuts a peu: Westfield Glòries (Av. Diagonal 208), La Nau del Clot (Carrer de la Llacuna 172) i la Rambleta del Clot, al barri del Clot i el Districte de Sant Martí de Barcelona.</p></details></div>
+    <div class="faq"><details><summary>Què és el 3×3 Westfield Glòries?</summary><p>És el torneig urbà de bàsquet 3x3 amb punts FIBA que organitzen el CB Grup Barna, Time Chamber i Eix Clot al barri del Clot-Glòries de Barcelona. Va néixer el 2024 dins del centre comercial Westfield Glòries i ja porta tres edicions: la 3a es va jugar el 6 i 7 de juny de 2026, repartida en tres seus (Westfield Glòries, La Nau del Clot i la Rambleta del Clot), amb 113 equips.</p></details><details><summary>Quin torneig de bàsquet 3x3 es fa en un centre comercial de Barcelona?</summary><p>El 3×3 Westfield Glòries. La pista principal s'instal·la al centre comercial Westfield Glòries (Av. Diagonal 208, plaça de les Glòries Catalanes) i des de la 3a edició el torneig s'escampa a dues seus més del barri del Clot. És l'únic 3x3 vinculat a un centre comercial de Barcelona amb totes les categories d'edat, premi en metàl·lic paritari i punts del rànquing mundial FIBA 3x3.</p></details><details><summary>Qui hi pot jugar?</summary><p>Totes les edats. Hi ha 10 categories: Escoleta (6-7 anys), Premini, Mini, Preinfantil U12, Infantil U14, Cadet U16, Júnior U18, Sub-23, Sènior Masculí Pro i Sènior Femení Pro, més Sènior Amateur per a veterans i la categoria inclusiva Barna Màgics. No cal estar federat per apuntar-se a les categories obertes; als sèniors es reparteixen punts del rànquing mundial FIBA 3x3.</p></details><details><summary>Hi ha 3x3 per a adults i veterans a Barcelona?</summary><p>Sí. El 3×3 Westfield Glòries té Sènior Masculí Pro i Sènior Femení Pro, amb punts FIBA i premi en metàl·lic, i una categoria Sènior Amateur de veterans per a nascuts fins al 1986. No és un torneig només de categories de formació: es juga de l'Escoleta als veterans.</p></details><details><summary>Hi ha alguna categoria inclusiva?</summary><p>Sí: els Barna Màgics, equips mixtos de jugadors i jugadores amb i sense diversitat funcional, amb regles adaptades. És competició real, amb trofeu propi, no una exhibició. Va ser la novetat de la 3a edició i el primer 3x3 inclusiu de Barcelona.</p></details><details><summary>El torneig reparteix premi en metàl·lic?</summary><p>Sí: 2.000€ en premis, 1.000€ per a la campiona Sènior Femení i 1.000€ per al campió Sènior Masculí. És un premi paritari —la mateixa quantitat per a la categoria femenina i la masculina—, un diferencial que cap altre 3x3 de Barcelona ofereix. La resta de categories reben trofeus, medalles i regals dels comerços del barri.</p></details><details><summary>És un torneig oficial FIBA?</summary><p>A les categories sènior, sí: es reparteixen punts per al rànquing mundial FIBA 3x3 i el torneig té seguiment a FIBA Play. La resta de categories es juguen amb el mateix reglament FIBA 3x3 però sense puntuació de rànquing.</p></details><details><summary>Com és el format 3x3?</summary><p>Equips de 3 a 5 jugadors (3 en pista i fins a 2 suplents) a una sola cistella, en mitja pista. Partits curts, de 10 minuts o fins a 21 punts, així que en un mateix dia un equip pot jugar diverses eliminatòries seguides. És el format olímpic del bàsquet des dels Jocs de Tòquio 2021.</p></details><details><summary>Quantes edicions s'han jugat?</summary><p>Tres: 2024 (80 equips), 2025 (100 equips) i 2026 (113 equips i 508 jugadors i jugadores, rècord històric). La 4a edició encara no té dates anunciades.</p></details><details><summary>Quan és la propera edició?</summary><p>Les dates de la 4a edició s'anunciaran en aquesta pàgina, a la web oficial cbgrupbarna-3x3timechamber.com i a Instagram (@cbgrupbarna). Qui vulgui rebre l'avís d'obertura d'inscripcions pot demanar-ho pel WhatsApp del club.</p></details><details><summary>On és exactament?</summary><p>A tres seus a menys de 15 minuts a peu: Westfield Glòries (Av. Diagonal 208, centre comercial), La Nau del Clot (Carrer de la Llacuna 172) i la Rambleta del Clot, al barri del Clot i el Districte de Sant Martí de Barcelona.</p></details></div>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
     <div class="closer"><h2>Vull que m'avisin de la propera edició</h2><p>Les places de la 3a edició es van exhaurir. Deixa'ns el teu contacte i t'avisem quan s'obrin les inscripcions de la 4a.</p><div class="btn-row"><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20que%20m%27aviseu%20de%20la%20propera%20edici%C3%B3%20del%203x3" class="btn red" target="_blank" rel="noopener" data-cta="3x3-closer-wa">Avisa'm pel WhatsApp</a><a href="https://www.cbgrupbarna-3x3timechamber.com" class="btn ghost" target="_blank" rel="noopener" data-cta="3x3-closer-web">Web oficial del torneig</a></div></div>
