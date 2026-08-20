@@ -42,6 +42,21 @@
 .lang-switch a.active { opacity: 1; font-weight: 600; }
 .lang-switch a:hover { opacity: 1; color: var(--red); }
 .lang-switch .sep { opacity: 0.25; }
+
+  /* Estrelles del campus: qui ha vingut a entrenar amb els nostres.
+     El reel només es carrega quan algú hi clica (res d'Instagram fins llavors). */
+  .stars { display: grid; grid-template-columns: 1fr; gap: 18px; margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 780px) { .stars { grid-template-columns: repeat(3, 1fr); } }
+  .star { border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; }
+  .star-play { border: 0; width: 100%; aspect-ratio: 9/14; background: var(--ink); color: #fff; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; font: inherit; }
+  .star-play span { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.6; }
+  .star-play em { width: 46px; height: 46px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; }
+  .star-embed { aspect-ratio: 9/14; }
+  .star-embed iframe { width: 100%; height: 100%; border: 0; }
+  .star-tx { padding: 18px 18px 20px; }
+  .star-tx h3 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; }
+  .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
+  .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
 </style>
 <script type="application/ld+json">
 {
@@ -155,6 +170,14 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué entrenadores y jugadores han pasado por el campus?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por las últimas ediciones han pasado Ainhoa López, jugadora profesional e internacional española formada en El Clot; Robert Willet (@bballwillett), entrenador de tecnificación NBA; y Malak Shady, referente del baloncesto en redes y MVP de 3x3. No van de visita para la foto: dirigen sesión en pista con los jugadores y jugadoras del campus."
+          }
+        },
         {
           "@type": "Question",
           "name": "¿Cuánta gente pasó por el campus en verano de 2026?",
@@ -298,6 +321,57 @@
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
 
+    <h2>Estrellas del campus</h2>
+    <p>Algo que no hace todo el mundo: por el campus han pasado referentes del baloncesto a entrenar con nuestros jugadores y jugadoras. No de visita para la foto — en pista, dirigiendo sesión.</p>
+    <div class="stars">
+      <div class="star">
+        <button type="button" class="star-play" data-reel="C-0jXXDMY5r" aria-label="Reproducir el reel con Ainhoa López">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Ainhoa López</span>
+        </button>
+        <div class="star-tx">
+          <h3>Ainhoa López</h3>
+          <p>Jugadora profesional · Selección Española. Formada en El Clot.</p>
+          <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">Ver en Instagram →</a>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-reel="DMqb9P8sUic" aria-label="Reproducir el reel con Robert Willet">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Robert Willet</span>
+        </button>
+        <div class="star-tx">
+          <h3>Robert Willet</h3>
+          <p>Entrenador de tecnificación NBA (@bballwillett).</p>
+          <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">Ver en Instagram →</a>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Reproducir el reel con Malak Shady">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Malak Shady</span>
+        </button>
+        <div class="star-tx">
+          <h3>Malak Shady</h3>
+          <p>Referente del baloncesto en redes y MVP de 3x3.</p>
+          <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">Ver en Instagram →</a>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13.5px;color:var(--ink-2)">Los vídeos son de Instagram y solo se cargan si haces clic. Todo el recopilatorio de la edición está en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <script>
+      // Els reels d'Instagram només es carreguen si l'usuari hi clica.
+      document.querySelectorAll('.star-play').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var d = document.createElement('div');
+          d.className = 'star-embed';
+          d.innerHTML = '<iframe src="https://www.instagram.com/reel/' + b.dataset.reel +
+            '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
+          b.replaceWith(d);
+        });
+      });
+    </script>
+
     <h2>A quién va dirigido</h2>
     <p>A niños y niñas que juegan a baloncesto o que quieren empezar, tanto si son del CB Grup Barna como
     si vienen de otro club. Cada semana el club reserva plazas para sus jugadores y plazas
@@ -315,7 +389,7 @@
     de publicarlo.</p>
 
     <h2>Preguntas frecuentes</h2>
-    <div class="faq"><details><summary>¿Cuánta gente pasó por el campus en verano de 2026?</summary><p>Unas 150 niñas y niños a lo largo de las seis semanas de la edición de 2026, en grupos por edad y nivel y con un límite aproximado de 50 plazas por semana. Hubo participantes del CB Grup Barna y de otros clubes de Barcelona y de la provincia.</p></details><details><summary>¿Para qué edades es el campus de baloncesto?</summary><p>El campus del CB Grup Barna es para jugadores y jugadoras de base, desde la edad de la Escoleta hasta categorías cadete y júnior. Los grupos se hacen por edad y nivel, de manera que un niño o niña que empieza no entrena con quien ya lleva años compitiendo.</p></details><details><summary>¿Hay que jugar en el CB Grup Barna para apuntarse?</summary><p>No. El campus está abierto a jugadores y jugadoras de cualquier club de Barcelona y de la provincia. Cada semana hay plazas para gente del Barna y plazas para gente de fuera.</p></details><details><summary>¿Cuántas plazas hay por semana?</summary><p>El campus trabaja con un límite aproximado de 50 plazas por semana para mantener la ratio de entrenador por jugador. Las semanas se llenan por orden de inscripción y las últimas ediciones se han completado antes de empezar.</p></details><details><summary>¿Dónde se hace el campus?</summary><p>En el barrio de El Clot, Distrito de Sant Martí de Barcelona. La Nau del Clot es el punto deportivo principal del CB Grup Barna.</p></details><details><summary>¿Cuándo abren las inscripciones de la próxima edición?</summary><p>Las fechas de la próxima edición se anuncian en esta página y en Instagram (@cbgrupbarna). Quien quiera recibir el aviso antes de que se abra al público puede pedirlo por el WhatsApp del club (+34 698 425 153) y entra en la lista de avisos.</p></details></div>
+    <div class="faq"><details><summary>¿Qué entrenadores y jugadores han pasado por el campus?</summary><p>Por las últimas ediciones han pasado Ainhoa López, jugadora profesional e internacional española formada en El Clot; Robert Willet (@bballwillett), entrenador de tecnificación NBA; y Malak Shady, referente del baloncesto en redes y MVP de 3x3. No van de visita para la foto: dirigen sesión en pista.</p></details><details><summary>¿Cuánta gente pasó por el campus en verano de 2026?</summary><p>Unas 150 niñas y niños a lo largo de las seis semanas de la edición de 2026, en grupos por edad y nivel y con un límite aproximado de 50 plazas por semana. Hubo participantes del CB Grup Barna y de otros clubes de Barcelona y de la provincia.</p></details><details><summary>¿Para qué edades es el campus de baloncesto?</summary><p>El campus del CB Grup Barna es para jugadores y jugadoras de base, desde la edad de la Escoleta hasta categorías cadete y júnior. Los grupos se hacen por edad y nivel, de manera que un niño o niña que empieza no entrena con quien ya lleva años compitiendo.</p></details><details><summary>¿Hay que jugar en el CB Grup Barna para apuntarse?</summary><p>No. El campus está abierto a jugadores y jugadoras de cualquier club de Barcelona y de la provincia. Cada semana hay plazas para gente del Barna y plazas para gente de fuera.</p></details><details><summary>¿Cuántas plazas hay por semana?</summary><p>El campus trabaja con un límite aproximado de 50 plazas por semana para mantener la ratio de entrenador por jugador. Las semanas se llenan por orden de inscripción y las últimas ediciones se han completado antes de empezar.</p></details><details><summary>¿Dónde se hace el campus?</summary><p>En el barrio de El Clot, Distrito de Sant Martí de Barcelona. La Nau del Clot es el punto deportivo principal del CB Grup Barna.</p></details><details><summary>¿Cuándo abren las inscripciones de la próxima edición?</summary><p>Las fechas de la próxima edición se anuncian en esta página y en Instagram (@cbgrupbarna). Quien quiera recibir el aviso antes de que se abra al público puede pedirlo por el WhatsApp del club (+34 698 425 153) y entra en la lista de avisos.</p></details></div>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
     <div class="closer"><h2>Quiero que me aviséis del próximo campus</h2><p>Déjanos tu contacto y te escribimos cuando se abran las inscripciones, antes de publicarlas.</p><div class="btn-row"><a href="/#info" class="btn red" data-cta="campus-closer-form">Pedir información</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=%C2%A1Hola!%20Quiero%20info%20del%20Campus%20de%20baloncesto" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">WhatsApp del club</a></div></div>
