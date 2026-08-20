@@ -278,6 +278,36 @@ def build_campus():
          "availableChannel": {"@type": "ServiceChannel", "serviceUrl": url,
                               "servicePhone": {"@type": "ContactPoint", "telephone": "+34698425153",
                                                "contactType": "Inscripcions campus"}}},
+        # Course: sense aixo Google llegeix la pagina com un article, no com un producte.
+        # Es el que separa /campus/ de la guia del blog, que atacava la mateixa consulta.
+        {"@type": "Course", "@id": url + "#course",
+         "name": "Campus de bàsquet CB Grup Barna · Time Chamber Experience",
+         "alternateName": ["Campus de baloncesto en Barcelona", "Basketball camp Barcelona",
+                           "Campus d'estiu de bàsquet Barcelona", "Time Chamber Experience"],
+         "description": desc, "url": url, "provider": {"@id": SITE + "/#club"},
+         "inLanguage": "ca",
+         "educationalLevel": "Bàsquet formatiu · de l'Escoleta a júnior",
+         "teaches": ["Tir", "Ballhandling", "Joc de l'1x1", "Fonaments individuals",
+                     "Lectura de joc"],
+         "audience": {"@type": "PeopleAudience", "suggestedMinAge": 5, "suggestedMaxAge": 17},
+         "offers": {"@type": "Offer", "price": "195", "priceCurrency": "EUR",
+                    "description": "Preu per setmana. 160 € per als jugadors i jugadores del club.",
+                    "availability": "https://schema.org/LimitedAvailability", "url": url},
+         "hasCourseInstance": [
+             {"@type": "CourseInstance", "name": n, "description": d, "courseMode": "onsite",
+              "courseWorkload": "PT25H",
+              "location": {"@type": "Place", "name": "La Nau del Clot",
+                           "address": {"@type": "PostalAddress",
+                                       "streetAddress": "Carrer de la Llacuna, 172",
+                                       "addressLocality": "Barcelona", "postalCode": "08018",
+                                       "addressCountry": "ES"}},
+              "offers": {"@type": "Offer", "price": "195", "priceCurrency": "EUR"}}
+             for n, d in [("Flow Camp", "Fonaments i ritme de joc"),
+                          ("TC Basics", "Fonaments individuals Time Chamber"),
+                          ("Shooting Academy", "Mecànica i volum de tir"),
+                          ("One & One Mastery", "Joc de l'1x1"),
+                          ("Ballhandling Lab", "Maneig de pilota"),
+                          ("Skills Lab Experience", "Habilitats combinades")]]},
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
          "description": desc, "inLanguage": ["ca-ES", "es-ES"],
          "about": {"@id": url + "#campus"}, "isPartOf": {"@id": SITE + "/#website"}},
@@ -300,7 +330,7 @@ def build_campus():
       <a href="/#info" class="btn ghost" data-cta="campus-form">Avisa'm de la propera edició</a>
     </div>
     <div class="phead-media">
-      <img src="/img/campus-hero.webp" alt="Jugadores del campus de bàsquet del CB Grup Barna amb la samarreta del campus" width="1200" height="675" fetchpriority="high">
+      <img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 1200w, /img/campus-hero@2x.webp 2048w" sizes="(max-width: 900px) 100vw, 1120px" alt="Sessió del campus de bàsquet del CB Grup Barna a La Nau del Clot: una vintena de nens i nenes en cercle al voltant d'un entrenador" width="1200" height="675" fetchpriority="high">
     </div>
   </div>
 
@@ -313,6 +343,25 @@ def build_campus():
     <p>El club el treballa amb <strong>Time Chamber</strong>, que aporta la metodologia de treball
     individual. La combinació és la que defineix el campus: el volum de repeticions d'una escola de
     tecnificació amb l'ambient d'equip d'un club de barri amb seixanta-un anys d'història.</p>
+
+    <h2>Qui hi entrena</h2>
+    <p>El que separa un campus de tecnificació d'un casal amb pilota no és el que diu el fullet:
+    són els entrenadors que hi passen. Dins del programa <strong>Time Chamber Experience ×
+    CB Grup Barna</strong>, <strong>Robert Willett</strong> —entrenador amb recorregut a l'NBA—
+    ha entrenat els jugadors del campus a <strong>La Nau del Clot</strong>. No és una
+    col·laboració anunciada en una nota de premsa: està gravada, publicada i es pot veure.</p>
+    <p><a href="https://www.instagram.com/reel/DL-n0ZeMaOq/" target="_blank" rel="noopener" data-cta="campus-prova-willett">Veure la sessió de Robert Willett al Clot &rarr;</a></p>
+    <p>La feina diària la porten els entrenadors del club i de Time Chamber, amb el mateix criteri
+    que a la temporada: grups per edat i nivell, i informe individual. És la diferència entre un
+    campus que porta un nom conegut a la portada i un campus on aquest nom trepitja la pista.</p>
+
+    <h2>El campus i el 3x3 del club</h2>
+    <p>El campus no és l'única cita d'estiu del Barna al Clot. El club organitza el
+    <strong>3&times;3 Westfield Glòries</strong>, torneig registrat a la FIBA amb 2.000 &euro; en premis
+    &mdash;1.000 &euro; femenins i 1.000 &euro; masculins, repartiment paritari, únic a Barcelona&mdash;, 10 categories
+    i tres seus al barri. Moltes famílies fan les dues coses: campus al matí de l'estiu, torneig
+    el cap de setmana de juny.</p>
+    <p><a href="/3x3/">El 3&times;3 del club al web &rarr;</a> &middot; <a href="https://www.cbgrupbarna-3x3timechamber.com/" target="_blank" rel="noopener" data-cta="campus-3x3-microsite">Web oficial del 3&times;3 Barna &rarr;</a></p>
 
     <h2>Com s'organitza</h2>
     <p>Cada setmana té un focus propi, de manera que qui ve més d'una setmana no repeteix continguts.
