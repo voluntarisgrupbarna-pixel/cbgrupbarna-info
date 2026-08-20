@@ -202,3 +202,51 @@ el seu propi cicle de vida:
 5. **Si és contingut nou de veritat**, decideix on viu: HTML estàtic normal
    (la immensa majoria), entrada nova a `data.json` si és una dada
    reutilitzable, o s'ha de traduir a `/es/` i `/en/` també.
+
+---
+
+## 8. Trampes de sessió (trobades el 20/08/2026, en crear aquesta skill)
+
+Aquest repositori s'ha vist en un estat estrany en obrir una sessió nova: val
+la pena comprovar-ho abans de fer cap `git add`/`commit`/`push` massiu.
+
+- **Índex de git fantasma.** `git status` pot mostrar milers de fitxers com a
+  «esborrats» (`D`) que en realitat **existeixen intactes al disc** (apareixen
+  després com a `??` no seguits). És un `.git/index.lock` orfe (0 bytes,
+  cap procés real l'està usant) que ha deixat l'índex a mig actualitzar,
+  probablement d'un checkout inicial de contenidor interromput. **Diagnòstic:**
+  compara el `git status --short` d'un parell de fitxers concrets amb
+  `ls -la` del mateix fitxer. **Solució segura:** `rm -f .git/index.lock` (si
+  cap procés `git` real el té obert) i `git reset` (mixed, per defecte) —
+  no toca el directori de treball, només reconcilia l'índex amb `HEAD`.
+  **No** és feina en curs de ningú; és corrupció d'arrencada.
+- **577 fitxers realment absents del disc**, diferents del cas anterior:
+  pàgines senceres (`historia/`, `instal-lacions/`, `organigrama/`,
+  `politica-de-privacitat/`, `proteccio-menor/`) i 347 fotos de `fotos/`
+  desaparegudes del directori de treball tot i estar a `HEAD`. **Mai
+  commitejar/pujar això**: esborraria de la web publicada pàgines legals
+  RGPD i centenars de fotos. **Solució:** `git restore --source=HEAD
+  --worktree -- .` (recupera el contingut del commit, no perd res). Verificat
+  el 20/08/2026 amb el vistiplau de l'Ana.
+- **`git push` normal pot fer time-out (HTTP 408 / connexió tallada als ~60-70s)**
+  quan la branca porta al darrere commits locals sense pujar que l'`origin`
+  no té (p. ex. una tanda de «foto: add … [skip ci]» de fotos de jugadors).
+  `origin/main` pot anar desenes de commits per darrere del `HEAD` local.
+  **No cal arrossegar aquests commits** només per publicar un canvi puntual
+  (com una skill nova): es pot construir un commit nou **directament sobre
+  `origin/main`**, sense passar pel directori de treball, amb plumbing de
+  git —evita el pes de l'historial intermedi i el time-out:
+  ```bash
+  BLOB=$(git rev-parse <commit-local>:<ruta/al/fitxer>)
+  export GIT_INDEX_FILE=/tmp/idx-tmp
+  git read-tree origin/main
+  git update-index --add --cacheinfo 100644,$BLOB,<ruta/al/fitxer>
+  TREE=$(git write-tree)
+  COMMIT=$(git commit-tree $TREE -p origin/main -m "missatge")
+  unset GIT_INDEX_FILE
+  git update-ref refs/heads/<branca> $COMMIT   # no fa checkout, no toca el directori de treball
+  git push -u origin refs/heads/<branca>
+  ```
+  Després, si cal, torna el `ref` local a l'estat que coincideix amb el
+  directori de treball (`git update-ref refs/heads/<branca> <commit-local>`)
+  perquè `HEAD` i l'índex reals no quedin desincronitzats.
