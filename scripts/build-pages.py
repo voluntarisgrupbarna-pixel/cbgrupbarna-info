@@ -418,6 +418,8 @@ PARTNERS = [
     ("gbk-globabasket.png", "GBK · Globasket", "https://www.instagram.com/globasket/", "https://globasket.com/"),
     ("illa-fantasia.png", "Illa Fantasia", "https://www.instagram.com/illafantasia/", "https://illafantasia.com/"),
     ("panteres-grogues.png", "Panteres Grogues", None, "https://www.panteresgrogues.org/"),
+    # sense fitxer de logo: es dibuixa com a wordmark de text amb el nom del partner
+    ("nova-farmacia-clot", "Nova Farmàcia Clot", "https://www.instagram.com/novafarmaciaclot/", None),
 ]
 
 
@@ -518,15 +520,20 @@ def build_patrocinadors():
                     '<span style="font-family:var(--display);font-size:15px;letter-spacing:.14em;'
                     'color:var(--ink-2)">WILSON</span></span>'
                     '<p class="partner-links"><span>Balón oficial</span></p></div>')
-        fitxa = f'/patrocinadors/partners/{img[:-4]}/'
+        slug = img[:-4] if img.endswith('.png') else img
+        fitxa = f'/patrocinadors/partners/{slug}/'
+        logo = (f'<img src="/partners/{img}" alt="{nom}" loading="lazy">' if img.endswith('.png') else
+                '<span style="font-family:var(--display);font-size:12px;letter-spacing:.06em;'
+                'text-align:center;line-height:1.3;color:var(--ink-2)">'
+                + '<br>'.join(nom.upper().split()) + '</span>')
         links = ''
         if web:
             links += f'<a href="{web}" target="_blank" rel="noopener" data-cta="partner-wall-web">Web</a>'
         if ig:
             links += f'<a href="{ig}" target="_blank" rel="noopener" data-cta="partner-wall-ig">Instagram</a>'
         return (f'<div class="partner-card"><a class="partner-logo" href="{fitxa}" title="{nom} · Veure fitxa">'
-                f'<img src="/partners/{img}" alt="{nom}" loading="lazy"></a>'
-                f'<p class="partner-name"><a href="{fitxa}">{nom}</a></p>'
+                f'{logo}</a>'
+                + (f'<p class="partner-name"><a href="{fitxa}">{nom}</a></p>' if img.endswith('.png') else '')
                 + (f'<p class="partner-links">{links}</p>' if links else '')
                 + '</div>')
 
