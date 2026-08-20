@@ -223,3 +223,16 @@ com a prova de dimensió, no com a definició de la marca.
    real encara no migrat. Fins que no es migri, no es poden treure.
 7. **Guia visual «Franges i Extensa».** La portada ja no porta el hero
    `.lg-hero` de les franges (el repetia la capçalera de marca). Cal reflectir-ho a la guia.
+
+### Nota sobre el nom «Patrocinadors» (20/08/2026)
+
+El nom desapareix com a **nom de secció**: la secció es diu **Empreses** (`/empreses/`) i
+la llista de qui hi és avui es diu **Partners** (`/patrocinadors/`). S'han canviat les 362
+etiquetes visibles, els fils d'Ariadna i el generador.
+
+**La URL `/patrocinadors/` no s'ha tocat**, i és una decisió, no un oblit: hi pengen 22
+fitxes de partner més les versions `/es/` i `/en/`, i GitHub Pages no fa redireccions de
+servidor —només `<meta refresh>` o JavaScript, que passen molt pitjor l'autoritat. Moure
+la URL avui, amb el domini acabat d'estrenar i encara sense posicions guanyades, és
+regalar el poc que hi ha. Es podrà fer quan `/patrocinadors/` ja posicioni i valgui la
+pena arriscar-hi, i llavors amb redireccions per a totes les fitxes alhora.
