@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Genera les dues edicions de vacances escolars del campus: /campus/nadal/ i
-/campus/setmana-santa/. Son productes diferents de l'estiu —duren menys dies,
-tenen un altre preu i un altre public—, i per aixo tenen pagina propia. Tot el
-que no tenim confirmat es diu que s'anuncia, no s'inventa."""
+"""Genera l'edicio de vacances escolars del campus que no te pagina propia
+fora d'aquest generador: /campus/setmana-santa/. El Nadal viu a
+/campus-nadal-basquet-barcelona/, fora d'aquest script. Es un producte
+diferent de l'estiu —dura menys dies, te un altre preu i un altre public—, i
+per aixo te pagina propia. Tot el que no tenim confirmat es diu que
+s'anuncia, no s'inventa."""
 import json, os
 HDR = open('/tmp/claude-0/c_hdr.txt', encoding='utf-8').read()
 FTR = open('/tmp/claude-0/c_ftr.txt', encoding='utf-8').read()
@@ -12,23 +14,6 @@ WA = ("https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20
 CATS = ("Escoleta, Premini, Mini, Preinfantil, Infantil, Cadet i Júnior")
 
 SEASONS = [
- dict(slug="nadal", q="Nadal", nom="Campus de Nadal",
-   title="Campus de Nadal de bàsquet a Barcelona | CB Grup Barna",
-   h1="Campus de Nadal de bàsquet a Barcelona",
-   kw="campus de Nadal bàsquet Barcelona, campus Nadal baloncesto Barcelona, casal de Nadal bàsquet Clot, tecnificació Nadal Barcelona",
-   quan="Durant les vacances escolars de Nadal, entre finals de desembre i principis de gener.",
-   dies="Setmanes curtes, condicionades pel calendari de festius.",
-   preu=None,
-   lede=("Setmana de tecnificació de bàsquet a La Nau del Clot durant les vacances de Nadal. "
-         "Mateixa metodologia que el campus d'estiu, en format curt: pocs dies, molta pilota i "
-         "grups per categoria."),
-   perque=("Nadal és el moment de l'any en què un jugador o jugadora porta mitja temporada "
-           "jugada i comença a saber què li falta. Dues setmanes d'aturada federada són la "
-           "finestra per treballar-ho sense la pressió del partit del cap de setmana: el que a "
-           "l'hivern no es pot tocar perquè hi ha jornada cada diumenge, aquí sí."),
-   focus=[("Correcció tècnica","El que ha aparegut a la primera volta i no hi ha temps de corregir en temporada."),
-          ("Tir","Volum de repeticions, que és el que la temporada no dona."),
-          ("Joc de l'1x1","Prendre decisions sense l'equip a sobre.")]),
  dict(slug="setmana-santa", q="Setmana%20Santa", nom="Campus de Setmana Santa",
    title="Campus de Setmana Santa de bàsquet a Barcelona | CB Grup Barna",
    h1="Campus de Setmana Santa de bàsquet a Barcelona",
@@ -197,7 +182,7 @@ for S in SEASONS:
     <h2>La resta del campus</h2>
     <ul>
       <li><a href="/campus/">Campus de bàsquet a Barcelona</a> — l'edició d'estiu, sis setmanes amb focus propi, i tota la fitxa de dades.</li>
-      <li><a href="/campus/{'setmana-santa' if S['slug']=='nadal' else 'nadal'}/">{'Campus de Setmana Santa' if S['slug']=='nadal' else 'Campus de Nadal'}</a> — l'altra setmana de vacances escolars.</li>
+      <li><a href="/campus-nadal-basquet-barcelona/">Campus de Nadal</a> — l'altra setmana de vacances escolars.</li>
       <li><a href="/tecnificacio-basquet-barcelona/">Tecnificació de bàsquet a Barcelona</a> — què vol dir tecnificar i com ho treballa el club.</li>
       <li><a href="/blog/campus-basquet-barcelona-guia/">Com triar un campus de bàsquet a Barcelona</a> — la guia per a famílies.</li>
       <li><a href="/escoleta/">Escoleta</a> — per als de 4 a 8 anys, tot l'any.</li>

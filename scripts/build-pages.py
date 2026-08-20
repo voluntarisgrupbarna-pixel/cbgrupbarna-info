@@ -391,7 +391,7 @@ def build_campus():
     vacances escolars el club obre dues edicions curtes al mateix lloc i amb la mateixa
     metodologia:</p>
     <ul>
-      <li><a href="/campus/nadal/">Campus de Nadal</a> — entre finals de desembre i principis de gener.</li>
+      <li><a href="/campus-nadal-basquet-barcelona/">Campus de Nadal</a> — entre finals de desembre i principis de gener.</li>
       <li><a href="/campus/setmana-santa/">Campus de Setmana Santa</a> — el Flow Camp, 150 &euro; la setmana.</li>
     </ul>
     <p>Si el que vols és entendre què vol dir tecnificar abans d'apuntar-hi ningú, això s'explica
