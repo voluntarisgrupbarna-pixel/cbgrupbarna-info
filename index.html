@@ -96,7 +96,7 @@
         "Barna del Clot",
         "CB Grup Barna Barcelona"
       ],
-      "description": "Acadèmia i club de bàsquet i baloncesto base al Districte de Sant Martí, Barcelona, des de 1965. Més de 34 equips federats i unes 450 jugadores i jugadors (temporada 2026-27). Paritat real: mateix nombre de jugadors i jugadores i mateix pressupost per a la línia masculina i la femenina. De la mateixa pista del Clot han sortit un entrenador i una capitana de la Lliga Femenina Endesa, un jugador d'ACB i jugadors formats al FC Barcelona. Campus Time Chamber, 3x3 Westfield Glòries, Cistella Petita, Portes Obertes i Escoleta. #somclot",
+      "description": "Acadèmia i club de bàsquet i baloncesto base al Districte de Sant Martí, Barcelona, des de 1965. Més de 34+ equips i unes 450 jugadores i jugadors (temporada 2026-27). Paritat real: mateix nombre de jugadors i jugadores i mateix pressupost per a la línia masculina i la femenina. De la mateixa pista del Clot han sortit un entrenador i una capitana de la Lliga Femenina Endesa, un jugador d'ACB i jugadors formats al FC Barcelona. Campus Time Chamber, 3x3 Westfield Glòries, Cistella Petita, Portes Obertes i Escoleta. #somclot",
       "knowsAbout": [
         "Bàsquet base",
         "Bàsquet femení",
@@ -693,6 +693,28 @@ img { max-width: 100%; height: auto; display: block; }
    Substitueix la llista plana d'enllaços com a primera porta de la web.
    Fa servir fotos del club que ja eren al repositori sense usar-se. El
    vermell hi és superfície, no només accent: veure sistema-visual-cbgb. */
+/* ==== CAPÇALERA DE MARCA · el primer que veu qui no ens coneix ====
+   Va abans que qualsevol porta d'entrada: primer qui som, després on tocar. */
+.masthead { background: var(--ink); color: #fff; }
+.mh-in { max-width: 1180px; margin: 0 auto; padding: clamp(38px, 6vw, 74px) clamp(20px, 5vw, 56px) clamp(30px, 4.5vw, 56px); }
+.mh-eyebrow { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: #FF3B41; margin: 0 0 clamp(14px, 2vw, 22px); }
+.mh-h { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.9; letter-spacing: 0.01em; font-size: clamp(38px, 8.5vw, 92px); margin: 0; color: #fff; }
+.mh-h em { display: block; font-style: normal; font-family: var(--display); font-size: clamp(13px, 2.1vw, 22px); letter-spacing: 0.12em; line-height: 1.15; margin-top: clamp(10px, 1.6vw, 18px); color: rgba(255,255,255,0.88); }
+.mh-pillars { list-style: none; display: flex; flex-wrap: wrap; margin: clamp(20px, 3vw, 32px) 0 0; padding: 0; }
+.mh-pillars li { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.8); padding-right: 15px; margin: 4px 15px 4px 0; border-right: 1px solid rgba(255,255,255,0.24); }
+.mh-pillars li:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.mh-sub { font-size: 13.5px; line-height: 1.62; color: rgba(255,255,255,0.74); max-width: 62ch; margin: clamp(18px, 2.4vw, 26px) 0 0; }
+.mh-sub strong { color: #fff; font-weight: 500; }
+.mh-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(22px, 3vw, 32px); }
+.mh-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 clamp(18px, 3vw, 28px); background: var(--red); color: #fff; font-family: var(--display); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+.mh-btn:hover { background: #fff; color: var(--ink); }
+.mh-btn--ghost { background: transparent; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.38); }
+.mh-btn--ghost:hover { background: #fff; color: var(--ink); box-shadow: none; }
+
+@media (max-width: 700px) {
+  .mh-in { padding: 30px 20px 26px; }
+  .mh-sub { font-size: 12.5px; }
+}
 .franges { display: flex; flex-direction: column; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .franja { position: relative; display: grid; grid-template-columns: 190px minmax(0, 1fr) auto; align-items: stretch; background: var(--paper); min-height: 108px; overflow: hidden; transition: background 0.35s var(--ease); }
 /* Sense foto, la columna de 190px no s'ha de reservar: el text s'hi comprimia. */
@@ -1202,16 +1224,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     <div class="head-side">
       <button class="head-burger" id="burger" aria-label="Obrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <nav class="head-nav" aria-label="Navegació principal">
+        <a href="/partits/equips/">Equips</a>
         <a href="/club/">Club</a>
-        <a href="#escoleta" class="opt">Escoleta</a>
         <a href="#calendari">Dies de partit</a>
-        <a href="/patrocinadors/" class="opt">Patrocinadors</a>
+        <a href="#escoleta" class="opt">Escoleta</a>
         <a href="/campus/" class="opt">Campus</a>
-      <a href="/magics/" class="opt">Màgics</a>
-        <a href="/3x3/" class="opt">3x3</a>
-        <a href="/cistella-petita/" class="opt">Cistella Petita</a>
-        <a href="/fotos/" class="opt">Galeria</a>
-        <a href="/premsa/">Premsa</a>
+        <a href="/empreses/" class="opt">Empreses</a>
       </nav>
     </div>
     <a class="head-brand" href="#top" aria-label="CB Grup Barna · inici">
@@ -1292,9 +1310,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
     </div>
     <div class="menu-col">
-      <h3>Partners</h3>
-      <a href="/patrocinadors/" data-cta="menu-partners">Patrocinadors <small>tots els partners</small></a>
+      <h3>Empreses</h3>
+      <a href="/empreses/" data-cta="menu-empreses">Empreses <small>per què invertir al Barna</small></a>
+      <a href="/patrocinadors/" data-cta="menu-partners">Partners <small>qui hi és avui</small></a>
       <a href="/partners-mapa/" data-cta="menu-partners-mapa">Mapa de partners</a>
+      <a href="/dossier-patrocinis/" data-cta="menu-dossier">Dossier comercial</a>
       <a href="/admin/" class="menu-admin" rel="nofollow" data-cta="menu-admin">Zona admin <small>amb contrasenya</small></a>
     </div>
   </div>
@@ -1305,7 +1325,28 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
 <main id="contingut">
 
-  <h1 class="sr-only">Acadèmia i Club de Bàsquet Base a Barcelona · CB Grup Barna · Escoleta 4-8 anys · El Clot</h1>
+  <!-- ==== QUI SOM · abans que qualsevol porta d'entrada ====
+       El titular deia "Acadèmia i Club de Bàsquet Base": bo per a Google,
+       dolent per a qui arriba a decidir si val la pena. Les paraules de cerca
+       no es perden, baixen al paràgraf de sota, que també es rastreja. -->
+  <section class="masthead" aria-labelledby="mh-h">
+    <div class="mh-in">
+      <p class="mh-eyebrow">El Clot · Sant Martí · Barcelona</p>
+      <h1 class="mh-h" id="mh-h">CB Grup Barna<em>Bàsquet a Barcelona des de 1965</em></h1>
+      <ul class="mh-pillars">
+        <li>Competició</li>
+        <li>Formació</li>
+        <li>Bàsquet femení</li>
+        <li>Comunitat</li>
+        <li>Impacte social</li>
+      </ul>
+      <p class="mh-sub">Club i acadèmia de bàsquet base al Clot, Barcelona. <strong>34+ equips</strong> masculins i femenins, <strong>15 federats a la FCBQ</strong> —vuit d'ells femenins—, <strong>Escoleta de 4 a 8 anys</strong>, campus, tecnificació i bàsquet inclusiu amb els Barna Màgics.</p>
+      <div class="mh-cta">
+        <a class="mh-btn" href="#info" data-cta="mh-fes-te">Fes-te del Barna</a>
+        <a class="mh-btn mh-btn--ghost" href="/empreses/" data-cta="mh-empreses">Empreses i partners</a>
+      </div>
+    </div>
+  </section>
 
   <!-- ==== LA PORTADA · capçalera d'article, mateix filet vermell que la resta ==== -->
   <div class="wrap only-extensa e-sech-wrap">
@@ -1338,12 +1379,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <!-- ==== FRANGES · les portes del club, d'un cop d'ull ====
        Ordre, textos i fotos calcats de la guia visual «Franges i Extensa».
        Qualsevol canvi aquí s'ha de reflectir també a la guia. -->
-  <div class="lg-hero only-light">
-    <p class="eyebrow">El primer bot comença aquí</p>
-    <h2>Bàsquet al Clot des de 1965</h2>
-    <p class="lg-hero-s">34 equips federats. Mateix nombre de jugadores i jugadors, i mateix pressupost per a les dues línies.</p>
-  </div>
-
   <section class="franges only-light" aria-label="Accés ràpid al club">
     <a class="franja franja--lead" href="/escoleta/" data-cta="franja-escoleta">
       <span class="franja-ph"><img src="img/escoleta.webp" srcset="img/escoleta.webp 600w, img/escoleta@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Nena de l'Escoleta amb la pilota i la mascota del club"></span>
@@ -1689,7 +1724,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
           <p class="eyebrow red">El club · Des de 1965 · #somclot</p>
           <h2 id="brief-title">Bàsquet base al Clot des de 1965</h2>
           <div id="brief-text">
-            <p>El <strong>CB Grup Barna</strong> és el club de bàsquet base del barri del <strong>Clot</strong>, al Districte de <strong>Sant Martí de Barcelona</strong>. Més de 34 equips federats i unes 450 jugadores i jugadors, des de l'Escoleta de 4 a 8 anys fins als equips sèniors, amb totes les categories: premini, mini, preinfantil, infantil, cadet, júnior, sub-22, sènior i open.</p>
+            <p>El <strong>CB Grup Barna</strong> és el club de bàsquet base del barri del <strong>Clot</strong>, al Districte de <strong>Sant Martí de Barcelona</strong>. Més de 34+ equips i unes 450 jugadores i jugadors, des de l'Escoleta de 4 a 8 anys fins als equips sèniors, amb totes les categories: premini, mini, preinfantil, infantil, cadet, júnior, sub-22, sènior i open.</p>
             <p><strong>Paritat real</strong>: el mateix nombre de jugadores i jugadors, i el mateix pressupost per a la línia femenina i la masculina. El model de bàsquet femení del club està documentat al dossier <a href="/premidonaesport/">Premi Dona i Esport</a>.</p>
             <p>Club de baloncesto base en Barcelona desde 1965 · Distrito de Sant Martí · La Nau del Clot.</p>
             <p>Moltes famílies també ens busquen com a <strong>acadèmia de bàsquet a Barcelona</strong> (<em>academia de baloncesto en Barcelona</em>): som el punt de referència del barri per aprendre a jugar des dels 4 anys fins a l'alta competició de base.</p>
