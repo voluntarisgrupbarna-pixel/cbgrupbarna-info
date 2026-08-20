@@ -390,33 +390,34 @@ def build_campus():
 
 # ═══════════════════════════════════════════════════════ /patrocinadors/ ════
 
-# (fitxer del logo, nom, Instagram real si el tenim confirmat — si no, None
-#  i es mostra sense enllaç. Verificat a partners-mapa/index.html i al dossier
-#  patrocinis/index.html. Wilson no té fitxer de logo: és un wordmark de text.)
+# (fitxer del logo, nom, Instagram real i web real si els tenim confirmats — si no,
+#  None i es mostra sense aquell enllaç. Verificat a partners-mapa/index.html, a les
+#  fitxes de patrocinadors/partners/ i al dossier patrocinis/index.html.
+#  Wilson no té fitxer de logo: és un wordmark de text.)
 PARTNERS = [
-    ("instax-fujifilm.png", "Instax Fujifilm", "https://www.instagram.com/instaxcamara/"),
-    ("westfield-glories.png", "Westfield Glòries", "https://www.instagram.com/westfieldglories/"),
-    ("time-chamber.png", "Time Chamber", "https://www.instagram.com/timechamber_es/"),
-    ("eix-clot.png", "Eix Clot", "https://www.instagram.com/eixclot/"),
-    ("herbolaris-montserrat.png", "Herbolaris Montserrat", "https://www.instagram.com/herbolari.montserrat/"),
-    ("clinica-dental-bac-de-roda.png", "Clínica Dental Bac de Roda", "https://www.instagram.com/clinicadentalbacderoda/"),
-    ("stepback-podologia.png", "Stepback Podologia", "https://www.instagram.com/stepback.podologia/"),
-    ("aquamiga.png", "Aquamiga", "https://www.instagram.com/aquamiga_oficial/"),
-    ("armand-optics.png", "Armand Òptics", "https://www.instagram.com/armandoptics/"),
-    ("manual-colors.png", "Manual Colors", "https://www.instagram.com/manualcolor/"),
-    ("melosa-hamburgueseria.png", "La Melosa", "https://www.instagram.com/melosahamburgueseria/"),
-    ("foto-jane.png", "Foto Jané", None),
-    ("mercat-dels-encants.png", "Mercat dels Encants", None),
-    ("tot-salut.png", "Tot Salut", None),
-    ("ovella-negra.png", "Ovella Negra", "https://www.instagram.com/ovellanegrabcn/"),
-    ("romeo-abogados.png", "Romeo Abogados", "https://www.instagram.com/romeoabogados/"),
-    ("fundacio-mullor.png", "Fundació Mullor", None),
-    ("l-aquarium-de-barcelona.png", "L'Aquàrium de Barcelona", None),
-    (None, "Wilson", None),
-    ("eix-comercial-sant-marti.png", "Eix Comercial Sant Martí", None),
-    ("gbk-globabasket.png", "GBK · Globasket", "https://www.instagram.com/globasket/"),
-    ("illa-fantasia.png", "Illa Fantasia", "https://www.instagram.com/illafantasia/"),
-    ("panteres-grogues.png", "Panteres Grogues", None),
+    ("instax-fujifilm.png", "Instax Fujifilm", "https://www.instagram.com/instaxcamara/", "https://instax.eu/es/"),
+    ("westfield-glories.png", "Westfield Glòries", "https://www.instagram.com/westfieldglories/", "https://www.westfield.com/es/spain/glories"),
+    ("time-chamber.png", "Time Chamber", "https://www.instagram.com/timechamber_es/", "https://www.timechamber.es/"),
+    ("eix-clot.png", "Eix Clot", "https://www.instagram.com/eixclot/", "https://www.eixclot.cat/"),
+    ("herbolaris-montserrat.png", "Herbolaris Montserrat", "https://www.instagram.com/herbolari.montserrat/", "https://www.herbolarismontserrat.com/"),
+    ("clinica-dental-bac-de-roda.png", "Clínica Dental Bac de Roda", "https://www.instagram.com/clinicadentalbacderoda/", "https://centrebacderoda.com/"),
+    ("stepback-podologia.png", "Stepback Podologia", "https://www.instagram.com/stepback.podologia/", "https://www.stepbackpodologia.es/"),
+    ("aquamiga.png", "Aquamiga", "https://www.instagram.com/aquamiga_oficial/", "https://aquamiga.com/"),
+    ("armand-optics.png", "Armand Òptics", "https://www.instagram.com/armandoptics/", "https://armandoptics.com/"),
+    ("manual-colors.png", "Manual Colors", "https://www.instagram.com/manualcolor/", "https://www.manualcolor.com/"),
+    ("melosa-hamburgueseria.png", "La Melosa", "https://www.instagram.com/melosahamburgueseria/", "https://melosa.co/"),
+    ("foto-jane.png", "Foto Jané", None, "https://www.fotojane.es/"),
+    ("mercat-dels-encants.png", "Mercat dels Encants", None, "https://encantsbarcelona.com/"),
+    ("tot-salut.png", "Tot Salut", None, "http://centretotsalut.es/"),
+    ("ovella-negra.png", "Ovella Negra", "https://www.instagram.com/ovellanegrabcn/", "http://www.ovellanegrabcn.net/"),
+    ("romeo-abogados.png", "Romeo Abogados", "https://www.instagram.com/romeoabogados/", "https://www.romeoabogados.com/"),
+    ("fundacio-mullor.png", "Fundació Mullor", None, "https://fundaciomullor.org/"),
+    ("l-aquarium-de-barcelona.png", "L'Aquàrium de Barcelona", None, "https://www.aquariumbcn.com/"),
+    (None, "Wilson", None, None),
+    ("eix-comercial-sant-marti.png", "Eix Comercial Sant Martí", None, "https://www.santmartieix.com/"),
+    ("gbk-globabasket.png", "GBK · Globasket", "https://www.instagram.com/globasket/", "https://globasket.com/"),
+    ("illa-fantasia.png", "Illa Fantasia", "https://www.instagram.com/illafantasia/", "https://illafantasia.com/"),
+    ("panteres-grogues.png", "Panteres Grogues", None, "https://www.panteresgrogues.org/"),
 ]
 
 
@@ -509,12 +510,27 @@ def build_patrocinadors():
          ["Visibilidad estable", "Contenido de competición", "Vinculación con familias y afición"]),
     ])
 
-    partners_grid = ''.join(
-        ('<span class="partner-logo" title="Wilson · Balón oficial"><span style="font-family:var(--display);font-size:15px;letter-spacing:.14em;color:var(--ink-2)">WILSON</span></span>'
-         if img is None else
-         f'<a class="partner-logo" href="/patrocinadors/partners/{img[:-4]}/" title="{nom} · Veure fitxa">'
-         f'<img src="/partners/{img}" alt="{nom}" loading="lazy"></a>')
-        for img, nom, ig in PARTNERS)
+    def partner_card(img, nom, ig, web):
+        """Targeta del mur: logo a color (enllaç a la fitxa), nom llegible i
+        enllaços directes a la web i a l'Instagram del partner."""
+        if img is None:   # Wilson: wordmark de text, sense fitxa ni enllaços
+            return ('<div class="partner-card"><span class="partner-logo" title="Wilson · Balón oficial">'
+                    '<span style="font-family:var(--display);font-size:15px;letter-spacing:.14em;'
+                    'color:var(--ink-2)">WILSON</span></span>'
+                    '<p class="partner-links"><span>Balón oficial</span></p></div>')
+        fitxa = f'/patrocinadors/partners/{img[:-4]}/'
+        links = ''
+        if web:
+            links += f'<a href="{web}" target="_blank" rel="noopener" data-cta="partner-wall-web">Web</a>'
+        if ig:
+            links += f'<a href="{ig}" target="_blank" rel="noopener" data-cta="partner-wall-ig">Instagram</a>'
+        return (f'<div class="partner-card"><a class="partner-logo" href="{fitxa}" title="{nom} · Veure fitxa">'
+                f'<img src="/partners/{img}" alt="{nom}" loading="lazy"></a>'
+                f'<p class="partner-name"><a href="{fitxa}">{nom}</a></p>'
+                + (f'<p class="partner-links">{links}</p>' if links else '')
+                + '</div>')
+
+    partners_grid = ''.join(partner_card(*p) for p in PARTNERS)
 
     body = f"""
 {crumbs([("Inici", "/"), ("Patrocinadors", None)])}
