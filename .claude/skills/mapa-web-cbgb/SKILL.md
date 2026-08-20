@@ -250,3 +250,85 @@ la pena comprovar-ho abans de fer cap `git add`/`commit`/`push` massiu.
   Després, si cal, torna el `ref` local a l'estat que coincideix amb el
   directori de treball (`git update-ref refs/heads/<branca> <commit-local>`)
   perquè `HEAD` i l'índex reals no quedin desincronitzats.
+
+---
+
+## 9. Pla de recuperació si es perd la web
+
+El **codi i el text** de tota la web viuen a un repositori de git; si el
+repositori existeix (a GitHub o en qualsevol clon), **es pot tornar a
+publicar sencer amb un `git push`**, no cal reconstruir res a mà. El que
+**no** viu al repositori —i per tant no es recupera només amb aquesta
+skill— són les claus/comptes externs i els fitxers binaris que no s'hi han
+pujat. Distingeix els tres nivells de pèrdua:
+
+### Nivell 1 · El repositori existeix, però `cbgrupbarna.info` no respon
+
+El lloc és a **GitHub Pages**. Per reviure'l:
+1. A la configuració del repositori (`Settings → Pages`), torna a activar
+   Pages sobre la branca de publicació.
+2. Comprova que el fitxer **`CNAME`** a l'arrel encara diu
+   `cbgrupbarna.info` (si s'ha esborrat per error, recrea'l amb aquest
+   contingut exacte).
+3. **El DNS del domini és extern al repositori** (registrador del domini,
+   no GitHub): cal que els registres A/CNAME de `cbgrupbarna.info`
+   segueixin apuntant a GitHub Pages. Si el domini ha caducat o s'ha
+   desvinculat, això **no es pot arreglar des del codi** — cal entrar al
+   panell del registrador del domini.
+
+### Nivell 2 · El repositori de GitHub es perd, però hi ha un clon (com aquest)
+
+```bash
+git remote add origin https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info
+git push -u origin main    # o la branca que facis servir per publicar
+```
+Torna a fer Nivell 1 per revincular Pages i el domini. Els **robots de
+GitHub Actions** (§3) necessiten que es tornin a donar d'alta els secrets
+que fan servir (no viatgen amb el codi, GitHub els esborra si es perd el
+repositori):
+
+| Secret | El fa servir | Com es torna a donar d'alta |
+|---|---|---|
+| `JOTFORM_API_KEY` | `update-counters.yml` | `bash scripts/add-jotform-secret.sh` (clau nova a jotform.com/myaccount/api) |
+| `SUPABASE_DB_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` | `deploy-galeria.yml` (app `galeria/`) | Panell del projecte a supabase.com → API settings |
+| `VERCEL_TOKEN` | `deploy-galeria.yml` | vercel.com → Account settings → Tokens |
+
+A més, fora dels *secrets* de GitHub:
+- **`admin/config.js`** porta el `GOOGLE_CLIENT_ID` de l'OAuth del panell
+  `/admin/` — si es perd, cal crear-ne un de nou a Google Cloud Console
+  (les instruccions són al mateix fitxer, a dalt de tot).
+- **Google Analytics** (`G-R6XYR7G1WF`) és una propietat del compte de
+  Google del club, no del repositori — si es perd l'accés al compte, cal
+  vincular-ne una de nova i canviar l'ID a `index.html`.
+- **El projecte de Supabase** (base de dades i storage de `galeria/`) i el
+  **projecte de Vercel** on es desplega són comptes externs propis —
+  perdre'ls no es soluciona amb el codi, cal tenir-hi accés o recrear-los
+  (i, amb Supabase, **recuperar les dades de la base amb un backup propi**:
+  el repositori no en guarda cap còpia).
+
+### Nivell 3 · Es perd tot: repositori, clons i comptes
+
+Aquí la skill deixa de ser una xarxa de seguretat completa. El que **sí**
+es podria reconstruir amb els tres documents del punt §0
+(`llms.txt`, `PENDENTS-WEB.md`, `MIGRACIO-WEB-ANTIGA.md`) i aquesta skill
+és **el text i l'estructura**: quines pàgines hi havia, què deien, com
+s'organitzaven, quin sistema visual seguien (`web-cbgb`). El que **no** es
+pot reconstruir a partir de text:
+- **Les fotografies i vídeos** (`fotos/`, `partits/logos/`, `img/`, etc.).
+  Si no hi ha una còpia fora del repositori (Google Drive, disc de l'Ana,
+  Instagram), es perden de veritat. **Recomanació:** que les fotos
+  originals que es pugen a `fotos/uploads/` es guardin també en algun lloc
+  fora del repositori — el repositori no n'és una còpia de seguretat, és
+  la web mateixa.
+- **L'històric de dades de partits** (`partits/data.json`, `canvis.json`):
+  es podria tornar a baixar de la FCBQ (basquetcatala.cat, club 24) amb el
+  robot `update-partits.py`, però es perdria l'històric de resultats ja
+  jugats si la federació no els conserva igual de bé.
+- **Les dades de la base de Supabase** de `galeria/` (comentaris, metadades
+  pujades pels usuaris).
+
+**En resum: la millor assegurança és que el repositori de GitHub segueixi
+existint** (encara que sigui privat o en un altre compte) i que les fotos
+originals tinguin còpia en algun lloc més. Amb això, regenerar la web és
+literalment tornar a fer `push` i revincular Pages, el domini i els
+secrets — no cal escriure de nou cap pàgina.
