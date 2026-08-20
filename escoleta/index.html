@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Escola de bàsquet a Barcelona · Escoleta CB Grup Barna (4 a 8 anys) | El Clot</title>
+<title>Escola de bàsquet a Barcelona (4-8 anys) · Escoleta CB Grup Barna</title>
 <link rel="preload" href="fonts/anton-400-2686.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* Tipografies auto-allotjades (Anton + Inter). Sense CDN de Google:
@@ -279,9 +279,24 @@ figcaption b{color:#CFCBC4;font-weight:700}
 .btn.wa{display:inline-flex;align-items:center;gap:12px}
 .btn.wa svg{width:22px;height:22px;fill:currentColor;flex:0 0 auto}
 
-footer{padding:52px 0;font-size:13px;color:var(--grey);border-top:1px solid var(--line)}
-footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+footer{padding:44px 0 52px;font-size:13px;color:var(--grey);border-top:1px solid var(--line)}
 footer a{color:#CFCBC4}
+.foot-nav{display:flex;flex-wrap:wrap;gap:10px 26px;padding-bottom:24px;margin-bottom:22px;
+  border-bottom:1px solid var(--line);font-size:13.5px}
+.foot-nav a{color:#CFCBC4;min-height:34px;display:inline-flex;align-items:center}
+.foot-nav a:hover{color:var(--red)}
+.foot-btm{display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:space-between;align-items:center}
+
+/* Enllaços de context · evita que la pàgina sigui un cul-de-sac */
+.segueix{padding:clamp(40px,6vw,72px) 0;border-top:1px solid var(--line)}
+.segueix h2{font-size:clamp(18px,4vw,26px);margin-bottom:24px}
+.seg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.seg-grid a{display:flex;flex-direction:column;gap:8px;padding:22px 20px;background:var(--black);
+  min-height:96px;justify-content:flex-start;text-decoration:none}
+.seg-grid a:hover .seg-t{color:var(--red)}
+.seg-t{font-size:14.5px;font-weight:600;line-height:1.35;color:#fff}
+.seg-s{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
 
 .note{
   background:rgba(230,51,41,.10);border:1px dashed rgba(230,51,41,.55);
@@ -316,15 +331,59 @@ footer a{color:#CFCBC4}
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info/escoleta/">
 <meta property="og:image" content="https://cbgrupbarna.info/escoleta/img/equip-anys90-julio.webp">
+<meta property="og:image:alt" content="Equip mini del Grup Barna als anys 90, amb Julio Torralba">
+<meta property="og:site_name" content="CB Grup Barna">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cbgrupbarna">
 <meta property="og:description" content="Escola de bàsquet per a nens i nenes de 4 a 8 anys al Clot, Barcelona. D'aquesta pista han sortit jugadors d'ACB, de Lliga Femenina Endesa i del Barça.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://cbgrupbarna.info/escoleta/">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="keywords" content="escola de bàsquet Barcelona, escuela de baloncesto Barcelona, escoleta bàsquet, bàsquet nens 4 anys, escola bàsquet Clot, bàsquet Sant Martí">
 <link rel="icon" type="image/png" href="/logo.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": ["SportsClub", "SportsOrganization", "LocalBusiness"],
+      "@id": "https://cbgrupbarna.info/#club",
+      "name": "CB Grup Barna",
+      "alternateName": ["Club Bàsquet Grup Barna", "Club Baloncesto Grupo Barna", "Grup Barna"],
+      "url": "https://cbgrupbarna.info",
+      "logo": "https://cbgrupbarna.info/logo.png",
+      "foundingDate": "1965",
+      "description": "Club de bàsquet base al Districte de Sant Martí, Barcelona, des de 1965. Més de 34 equips federats i unes 450 jugadores i jugadors.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "La Nau del Clot",
+        "addressLocality": "Barcelona",
+        "addressRegion": "Catalunya",
+        "postalCode": "08018",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.4036,
+        "longitude": 2.1878
+      },
+      "email": "info@cbgrupbarna.com",
+      "telephone": "+34698425153",
+      "sameAs": [
+        "https://www.instagram.com/cbgrupbarna/",
+        "https://www.tiktok.com/@cbgrupbarna",
+        "https://www.cbgrupbarna.com",
+        "https://www.basquetcatala.cat/club/24"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cbgrupbarna.info/#website",
+      "url": "https://cbgrupbarna.info",
+      "name": "CB Grup Barna",
+      "inLanguage": "ca-ES",
+      "publisher": { "@id": "https://cbgrupbarna.info/#club" }
+    },
     {
       "@type": "Person",
       "@id": "https://cbgrupbarna.info/#julio-torralba",
@@ -991,11 +1050,52 @@ footer a{color:#CFCBC4}
   </div>
 </section>
 
+<section class="segueix">
+  <div class="wrap">
+    <h2 data-lang="ca">Si esteu decidint</h2>
+    <h2 data-lang="es">Si estáis decidiendo</h2>
+    <div class="seg-grid">
+      <a href="/observatori/que-aprendre-4-anys-basquet/">
+        <span class="seg-t" data-lang="ca">Què aprèn un nen de 4 anys jugant a bàsquet?</span>
+        <span class="seg-t" data-lang="es">¿Qué aprende un niño de 4 años jugando a baloncesto?</span>
+        <span class="seg-s">Observatori Barna</span>
+      </a>
+      <a href="/blog/a-quina-edat-comencar-basquet/">
+        <span class="seg-t" data-lang="ca">A quina edat pot començar a jugar a bàsquet?</span>
+        <span class="seg-t" data-lang="es">¿A qué edad puede empezar a jugar a baloncesto?</span>
+        <span class="seg-s">Guia per a famílies</span>
+      </a>
+      <a href="/blog/com-triar-escola-basquet-barcelona/">
+        <span class="seg-t" data-lang="ca">Com triar una escola de bàsquet a Barcelona</span>
+        <span class="seg-t" data-lang="es">Cómo elegir una escuela de baloncesto en Barcelona</span>
+        <span class="seg-s">Guia per a famílies</span>
+      </a>
+      <a href="/campus/">
+        <span class="seg-t" data-lang="ca">Campus de bàsquet a l'estiu</span>
+        <span class="seg-t" data-lang="es">Campus de baloncesto en verano</span>
+        <span class="seg-s">El Clot, Barcelona</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
-    <div data-lang="ca">© CB Grup Barna · Sant Martí, Barcelona</div>
-    <div data-lang="es">© CB Grup Barna · Sant Martí, Barcelona</div>
-    <div><a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a> · <a href="https://cbgrupbarna.info">cbgrupbarna.info</a> · <a href="https://cbgrupbarna.info/grup-barna-dades-oficials/">Dades oficials del club</a></div>
+    <div class="foot-nav">
+      <a href="/">Inici</a>
+      <a href="/campus/">Campus</a>
+      <a href="/3x3/">3x3</a>
+      <a href="/partits/">Partits i resultats</a>
+      <a href="/observatori/">Observatori Barna</a>
+      <a href="/blog/">Blog</a>
+      <a href="/premidonaesport/">Premi Dona i Esport</a>
+      <a href="/grup-barna-dades-oficials/">Dades oficials</a>
+    </div>
+    <div class="foot-btm">
+      <div data-lang="ca">© CB Grup Barna · La Nau del Clot · Sant Martí, Barcelona</div>
+      <div data-lang="es">© CB Grup Barna · La Nau del Clot · Sant Martí, Barcelona</div>
+      <div><a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.cbgrupbarna.com" target="_blank" rel="noopener">cbgrupbarna.com</a></div>
+    </div>
   </div>
 </footer>
 
