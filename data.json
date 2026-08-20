@@ -8,13 +8,32 @@
     "fundacioAny": 1965,
     "barri": "Sant Martí",
     "ciutat": "Barcelona",
-    "web": "https://cbgrupbarna.com",
+    "web": "https://cbgrupbarna.info",
+    "webAntiga": "https://cbgrupbarna.com",
     "whatsapp": "+34698425153",
     "whatsappLink": "https://wa.me/34698425153",
     "email": "cbgrupbarna@gmail.com",
     "instagram": "@cbgrupbarna",
     "instagramUrl": "https://instagram.com/cbgrupbarna",
     "github": "voluntarisgrupbarna-pixel"
+  },
+
+  "xifres": {
+    "_note": "FONT DE VERITAT de les xifres del club. Cap pagina pot escriure una xifra diferent d'aquestes. Si canvia una dada, canvia-la AQUI i propaga-la. Els equips federats surten de partits/data.json, que refresca un robot diari des de la FCBQ.",
+    "anysDeClub": 61,
+    "anysDeClubText": { "ca": "seixanta-un anys", "es": "sesenta y un anos", "en": "sixty-one years" },
+    "anysDeClubRevisar": "Recalcular cada 1 de setembre: any de temporada - 1965.",
+    "equipsTotal": 34,
+    "equipsTotalText": "34+ equips",
+    "equipsTotalAbast": "Tot el club: federats FCBQ + Escoleta + Cistella Petita + Barna Magics.",
+    "equipsFederats": 15,
+    "equipsFederatsFemenins": 8,
+    "equipsFederatsMasculins": 7,
+    "equipsFederatsFont": "partits/data.json (robot FCBQ)",
+    "seniorFemeniCategoria": "Supercopa",
+    "seniorFemeniHistoric": "El senior femeni va jugar a LF2 fa dues temporades. Actualment competeix a Supercopa. Cap pagina pot dir que el club juga a LF2 en present.",
+    "lf2Barcelona": "Avui no hi ha cap equip de Barcelona ciutat a LF2. El pla del club es tornar-hi.",
+    "xifresProhibides": ["40 equips", "20F+20M", "60 anys", "sesenta anos", "seixanta anys"]
   },
 
   "temporada": {
@@ -103,7 +122,7 @@
   "xarxes": {
     "instagram": { "handle": "@cbgrupbarna", "url": "https://instagram.com/cbgrupbarna" },
     "whatsapp":  { "numero": "+34698425153", "link": "https://wa.me/34698425153" },
-    "web":       { "url": "https://cbgrupbarna.com" },
+    "web":       { "url": "https://cbgrupbarna.info" },
     "microsite3x3": { "url": "https://cbgrupbarna-3x3timechamber.com" }
   },
 
