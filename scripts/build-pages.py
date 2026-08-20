@@ -346,7 +346,7 @@ def build_campus():
     <div class="dl-row"><dt>On</dt><dd>La Nau del Clot, Barcelona. Instal·lació oficial del club.</dd></div>
     <div class="dl-row"><dt>Adreça</dt><dd>Carrer de la Llacuna, 172 · 08018 Barcelona · barri del Clot, Districte de Sant Martí.</dd></div>
     <div class="dl-row"><dt>Com arribar-hi</dt><dd>Metro L1 Glòries i L2 Clot · Rodalies Clot-Aragó · autobusos del Clot i Glòries. A peu des de Westfield Glòries.</dd></div>
-    <div class="dl-row"><dt>Per a qui</dt><dd>Jugadors i jugadores de base, de l'edat de l'Escoleta fins a cadet i júnior. Els grups es fan per edat i nivell.</dd></div>
+    <div class="dl-row"><dt>Per a qui</dt><dd>Set categories: Escoleta, Premini, Mini, Preinfantil, Infantil, Cadet i Júnior. Els grups es fan per categoria i nivell, de manera que qui comença no entrena amb qui ja porta anys competint.</dd></div>
     <div class="dl-row"><dt>Nens i nenes</dt><dd>Sí. El campus és mixt i el club té paritat real entre la línia femenina i la masculina.</dd></div>
     <div class="dl-row"><dt>Cal ser del Barna?</dt><dd>No. És obert a jugadors i jugadores de qualsevol club de Barcelona i de la província. Els del club tenen prioritat d'inscripció i preu propi.</dd></div>
     <div class="dl-row"><dt>Quan</dt><dd>A l'estiu, en setmanes consecutives de finals de juny a principis d'agost. L'edició 2026 va anar del 23 de juny a l'1 d'agost.</dd></div>
@@ -385,6 +385,17 @@ def build_campus():
     <p>No són col·laboracions anunciades en una nota de premsa: estan gravades, publicades i es
     poden veure. És la diferència entre un campus que posa un nom conegut a la portada i un campus
     on aquest nom trepitja la pista.</p>
+
+    <h2>I fora de l'estiu</h2>
+    <p>El campus d'estiu és el gruix, però no l'única setmana de tecnificació de l'any. A les
+    vacances escolars el club obre dues edicions curtes al mateix lloc i amb la mateixa
+    metodologia:</p>
+    <ul>
+      <li><a href="/campus/nadal/">Campus de Nadal</a> — entre finals de desembre i principis de gener.</li>
+      <li><a href="/campus/setmana-santa/">Campus de Setmana Santa</a> — el Flow Camp, 150 &euro; la setmana.</li>
+    </ul>
+    <p>Si el que vols és entendre què vol dir tecnificar abans d'apuntar-hi ningú, això s'explica
+    a <a href="/tecnificacio-basquet-barcelona/">Tecnificació de bàsquet a Barcelona</a>.</p>
 
     <h2>El campus i el 3x3 del club</h2>
     <p>El campus no és l'única cita d'estiu del Barna al Clot. El club organitza el
