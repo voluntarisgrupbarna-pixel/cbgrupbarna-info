@@ -295,7 +295,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 .bar-v { font-family: var(--display); font-weight: 300; font-size: 16px; letter-spacing: 0.04em; color: var(--ink); text-align: right; }
 .bar-t { grid-column: 1 / -1; height: 10px; background: rgba(10, 10, 10, 0.09); }
 .bar-f { display: block; height: 100%; background: var(--ink-2); }
-.bar-n { grid-column: 1 / -1; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.bar-n { grid-column: 1 / -1; font-size: 12px; line-height: 1.6; color: #706c67; }
 .bar.on .bar-f { background: var(--red); }
 .bar.on .bar-k, .bar.on .bar-v, .bar.on .bar-n { color: var(--red-dark); }
 
@@ -321,7 +321,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 .dot.ad { width: 18px; height: 18px; background: var(--red); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px rgba(226, 6, 19, 0.35); }
 .chart p.ratio-v { margin-top: 16px; font-family: var(--display); font-weight: 300; font-size: 20px; letter-spacing: 0.04em; color: var(--ink); }
 .chart p.ratio-v em { font-style: normal; color: var(--red); }
-.chart p.ratio-n { margin-top: 6px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.chart p.ratio-n { margin-top: 6px; font-size: 12px; line-height: 1.6; color: #706c67; }
 
 /* Repartiment · una sola barra partida en dos trams que sumen el total */
 .split { display: flex; gap: 2px; height: 16px; }

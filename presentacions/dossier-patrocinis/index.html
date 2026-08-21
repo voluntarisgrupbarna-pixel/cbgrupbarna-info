@@ -109,7 +109,7 @@
      Diu on ets i deixa saltar a qualsevol secció sense tornar amunt. */
   .idx{position:sticky;top:60px;z-index:99;background:var(--panel);border-bottom:1px solid var(--line)}
   .idx-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:18px}
-  .idx-lab{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);flex-shrink:0}
+  .idx-lab{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#706c67;flex-shrink:0}
   @media(max-width:820px){.idx-lab{display:none}}
   /* Els extrems s'esvaeixen: diu que la barra es pot arrossegar i evita que
      una etiqueta tallada quedi seccionada en sec. */
@@ -118,7 +118,7 @@
     mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
   .idx-nav::-webkit-scrollbar{display:none}
   .idx-nav a{position:relative;font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--muted);text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
+    color:#706c67;text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
   .idx-nav a:hover{color:var(--ink)}
   .idx-nav a[aria-current="true"]{color:var(--red);border-bottom-color:var(--red)}
   .idx-more{flex-shrink:0;font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
@@ -128,8 +128,8 @@
   [id]{scroll-margin-top:112px}
   @media(max-width:620px){[id]{scroll-margin-top:104px}}
 
-  .crumb{padding:14px 0;font-size:11.5px;color:var(--muted)}
-  .crumb a{color:var(--muted);text-decoration:none}
+  .crumb{padding:14px 0;font-size:11.5px;color:#706c67}
+  .crumb a{color:#706c67;text-decoration:none}
   .crumb a:hover{color:var(--ink)}
   .crumb span{color:var(--ink)}
 
@@ -155,7 +155,7 @@
   /* FILETS DE SECCIÓ · el que fa que llegeixi com un diari */
   .sech{border-top:3px solid var(--red);padding:16px 0 14px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .sech h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;letter-spacing:.05em;line-height:1}
-  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#706c67}
   .sec{padding:clamp(44px,7vw,80px) 0 0}
   .sec:last-of-type{padding-bottom:clamp(44px,7vw,80px)}
 
@@ -168,7 +168,7 @@
   .b-num div:hover{background:var(--cream)}
   .b-num b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(28px,4.6vw,52px);line-height:.9;font-variant-numeric:tabular-nums;color:var(--ink)}
   .b-num .r b{color:var(--red)}
-  .b-num span{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+  .b-num span{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#706c67;margin-top:8px}
 
   /* SPLIT · foto + text sobre panell */
   .split{display:grid;grid-template-columns:1fr;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);margin-top:26px}
@@ -179,7 +179,7 @@
   .split-media img{width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0}
   .split-txt{padding:clamp(30px,4.6vw,56px);display:flex;flex-direction:column;justify-content:center}
   .split-txt h3{font-family:var(--display);font-weight:400;font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;line-height:1.02;margin:10px 0 14px}
-  .split-txt p{font-size:15px;color:var(--muted);max-width:46ch}
+  .split-txt p{font-size:15px;color:#706c67;max-width:46ch}
   .split-txt p+p{margin-top:12px}
   .split-txt p strong{color:var(--ink);font-weight:600}
   .split-txt p em{font-style:italic}
@@ -209,7 +209,7 @@
   .quote::before{content:'';display:block;width:34px;height:2px;background:var(--red-solid);margin:0 auto clamp(24px,3vw,34px)}
   .quote blockquote{font-family:var(--display);font-weight:400;font-size:clamp(24px,4vw,44px);line-height:1.12;max-width:18ch;margin:0 auto;text-transform:uppercase;text-wrap:balance}
   .quote blockquote em{font-style:normal;color:var(--red)}
-  .quote cite{display:block;margin-top:16px;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .quote cite{display:block;margin-top:16px;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#706c67}
 
   /* PROTECCIÓ */
   .panel{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);padding:clamp(28px,4.5vw,52px);margin-top:26px}
@@ -217,11 +217,11 @@
   .badge-lopivi img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center top}
   .badge-lopivi span{font-family:var(--display);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
   .panel h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,3.2vw,36px);text-transform:uppercase;line-height:1.02;margin-bottom:12px}
-  .panel>p{font-size:15px;color:var(--muted);max-width:62ch}
+  .panel>p{font-size:15px;color:#706c67;max-width:62ch}
   .panel>p strong{color:var(--ink);font-weight:600}
   .two-col{display:grid;grid-template-columns:1fr;gap:8px 40px;margin-top:14px}
   @media(min-width:700px){.two-col{grid-template-columns:1fr 1fr}}
-  .two-col h4{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+  .two-col h4{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#706c67;margin-top:14px}
 
   /* BARRI · entitats i escoles */
   .partners-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:22px}
@@ -232,14 +232,14 @@
   .partner-card .pc-logo{height:44px;display:flex;align-items:center;background:#fff;color:#10100E;border-radius:4px;padding:5px 10px}
   .partner-card .pc-logo img{max-height:34px;width:auto;max-width:160px;object-fit:contain}
   .partner-card b{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.02em;text-transform:uppercase}
-  .partner-card span{font-size:11.5px;color:var(--muted)}
+  .partner-card span{font-size:11.5px;color:#706c67}
   .school-list{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;max-width:560px}
   .school-list li{list-style:none;border:1px solid var(--line);background:var(--panel);padding:8px 13px;font-size:12px;letter-spacing:.04em}
   .school-list li.on{background:var(--red-solid);border-color:var(--red-solid);color:#fff}
 
   /* 3x3 · xifra gran al costat de la foto */
   .stat-big{font-family:var(--display);font-weight:400;font-size:clamp(64px,9vw,120px);line-height:.85;color:var(--red)}
-  .stat-big+span{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:8px 0 16px}
+  .stat-big+span{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#706c67;margin:8px 0 16px}
 
   /* VISITES INSTITUCIONALS */
   .visits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:26px}
@@ -249,7 +249,7 @@
   .visit-card:hover .vc-img img{transform:scale(1.04)}
   .visit-card .vc-body{padding:18px}
   .visit-card h3{font-family:var(--display);font-weight:400;font-size:14px;letter-spacing:.02em;text-transform:uppercase;margin-bottom:6px}
-  .visit-card p{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+  .visit-card p{font-size:12.5px;color:#706c67;margin-bottom:12px}
   .visit-card a{font-family:var(--body);font-weight:700;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink);text-decoration:none}
 
   /* PATROCINADORS · mateixa graella i mides que /patrocinadors/, sobre placa
@@ -261,7 +261,7 @@
   .sponsor img{max-width:88px;max-height:40px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.72;transition:filter .3s var(--ease),opacity .3s var(--ease)}
   a.sponsor:hover img{filter:none;opacity:1}
   .sponsor.txt span{font-family:var(--display);font-size:15px;letter-spacing:.14em;color:#10100E;text-transform:uppercase}
-  .sponsor-note{margin-top:18px;font-size:13px;color:var(--muted)}
+  .sponsor-note{margin-top:18px;font-size:13px;color:#706c67}
 
   .inline-link{color:var(--red-ink);text-decoration:none;border-bottom:1px solid var(--red);border-bottom-color:color-mix(in srgb,var(--red) 45%,transparent)}
   .inline-link:hover{border-bottom-color:var(--red-ink)}
@@ -277,7 +277,7 @@
      el seu coixí de sota, ni el peu deixa una franja crema entremig. */
   .closer{background:var(--panel);border-top:1px solid var(--line);padding:clamp(56px,8vw,96px) 0;text-align:center}
   .closer h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,44px);text-transform:uppercase;margin-bottom:14px}
-  .closer p{color:var(--muted);max-width:44ch;margin:0 auto 30px}
+  .closer p{color:#706c67;max-width:44ch;margin:0 auto 30px}
   .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:15px 30px;transition:all .2s}
   .btn.red{background:var(--red-solid);color:#fff}
@@ -366,33 +366,33 @@
   .tbl{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
   .tbl th,.tbl td{padding:14px 16px;text-align:right;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
   .tbl thead th{border-top:0;font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--muted);text-align:right}
+    text-transform:uppercase;color:#706c67;text-align:right}
   .tbl th:first-child,.tbl td:first-child{text-align:left;font-family:var(--display);font-weight:400;
     font-size:16px;letter-spacing:.03em;white-space:nowrap}
   .tbl tbody tr:last-child{background:var(--panel)}
   .tbl tbody tr:last-child td{color:var(--ink)}
   .tbl .up{color:var(--red);font-weight:600}
-  .tbl-note{font-size:12.5px;color:var(--muted);margin-top:12px;max-width:70ch}
+  .tbl-note{font-size:12.5px;color:#706c67;margin-top:12px;max-width:70ch}
 
   /* Audiència: barres horitzontals. El valor va fora de la barra perquè es
      llegeixi també quan la barra és curta. */
   .aud{display:grid;grid-template-columns:1fr;gap:30px;margin-top:26px}
   @media(min-width:820px){.aud{grid-template-columns:1fr 1fr}}
   .aud h4{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+    text-transform:uppercase;color:#706c67;margin-bottom:16px}
   .bar{display:grid;grid-template-columns:82px 1fr 52px;align-items:center;gap:12px;margin-bottom:9px;font-size:13px}
   .bar .k{color:var(--ink)}
   .bar .t{height:14px;background:var(--cream);position:relative;overflow:hidden}
   .bar .f{position:absolute;inset:0 auto 0 0;background:var(--red-solid)}
-  .bar .f.alt{background:var(--muted)}
-  .bar .v{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+  .bar .f.alt{background:#706c67}
+  .bar .v{text-align:right;color:#706c67;font-variant-numeric:tabular-nums}
 
   /* Rànquing de clubs: nosaltres, ressaltats. */
   .rank{margin-top:26px;max-width:680px}
   .rank li{list-style:none;display:grid;grid-template-columns:26px 1fr auto;gap:14px;align-items:center;
     padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
-  .rank li .p{font-family:var(--display);font-size:13px;color:var(--muted)}
-  .rank li .n{font-variant-numeric:tabular-nums;color:var(--muted)}
+  .rank li .p{font-family:var(--display);font-size:13px;color:#706c67}
+  .rank li .n{font-variant-numeric:tabular-nums;color:#706c67}
   .rank li.us{background:var(--panel);border-bottom-color:var(--red);padding-left:12px;padding-right:12px;margin:0 -12px}
   .rank li.us .k,.rank li.us .n{color:var(--red);font-weight:600}
 
@@ -403,9 +403,9 @@
   .pack{background:var(--panel);border:1px solid var(--line);padding:26px 22px;display:flex;flex-direction:column}
   .pack.top{border-color:var(--red)}
   .pack h4{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.4vw,26px);text-transform:uppercase;margin:10px 0 4px}
-  .pack .tag{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .pack .tag{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#706c67}
   .pack.top .tag{color:var(--red)}
-  .pack p{font-size:13.5px;color:var(--muted);margin-top:10px}
+  .pack p{font-size:13.5px;color:#706c67;margin-top:10px}
   .pack ul{list-style:none;margin-top:16px}
   .pack li{position:relative;padding:8px 0 8px 010px;padding-left:22px;font-size:13px;border-top:1px solid var(--line)}
   .pack li::before{content:'·';position:absolute;left:6px;color:var(--red);font-weight:700}
@@ -416,7 +416,7 @@
   .facts div{background:var(--panel);padding:24px 18px}
   .facts b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(24px,3.4vw,40px);
     line-height:.95;color:var(--red);font-variant-numeric:tabular-nums}
-  .facts span{display:block;font-size:12px;color:var(--muted);margin-top:8px}
+  .facts span{display:block;font-size:12px;color:#706c67;margin-top:8px}
   .facts em{display:block;font-style:normal;font-size:12px;color:var(--ink);margin-top:6px}
 
   /* Galeria del torneig: tres fotos a la mateixa alçada, retallades des de
@@ -727,13 +727,13 @@
       <div class="two-col">
         <div>
           <h4>Xarxa de col·laboracions</h4>
-          <p style="font-size:14px;color:var(--muted)">La temporada 25·26 hem mencionat o col·laborat amb
+          <p style="font-size:14px;color:#706c67">La temporada 25·26 hem mencionat o col·laborat amb
           <strong style="color:var(--ink)">197 comptes diferents</strong>: comerços del barri, fotografia i
           premsa local, la Federació Catalana de Bàsquet i altres clubs.</p>
         </div>
         <div>
           <h4>El que més abast fa</h4>
-          <p style="font-size:14px;color:var(--muted)">Esdeveniment, jugadora destacada i valors de barri.
+          <p style="font-size:14px;color:#706c67">Esdeveniment, jugadora destacada i valors de barri.
           La peça més vista de la temporada arriba a <strong style="color:var(--ink)">35,6K visualitzacions</strong>,
           i tres de les cinc primeres són d'equips femenins.</p>
         </div>

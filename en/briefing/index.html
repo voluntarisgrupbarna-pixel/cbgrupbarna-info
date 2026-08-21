@@ -118,7 +118,7 @@
     background:var(--tinta);color:#fff;padding:.1rem .55rem;border-radius:3px;
     font-weight:700;white-space:nowrap;
   }
-  .ladder .here .red{color:var(--vermell);}
+  .ladder .here .red{color:var(--vermell);white-space:normal;}
 
   blockquote{
     border-left:5px solid var(--vermell);
@@ -162,7 +162,7 @@
   /* Banner d'esdeveniment destacat */
   .event-banner{
     background:var(--tinta);color:#fff;padding:1.1rem 1.4rem;
-    display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem;
+    display:flex;align-items:center;flex-wrap:wrap;gap:.5rem 1rem;margin-bottom:1.4rem;
   }
   .event-banner .tag{
     background:var(--vermell);color:#fff;font-size:.62rem;font-weight:800;
@@ -170,6 +170,7 @@
   }
   .event-banner .name{
     font-family:'Anton',sans-serif;text-transform:uppercase;font-size:1.25rem;line-height:1.15;
+    min-width:0;
   }
 
   /* ── PEU ───────────────────────────────────────────── */
