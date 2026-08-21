@@ -48,10 +48,31 @@
   }
 
   // ── 2. Injecció d'Analytics, només amb consentiment ──
+  //
+  // Compte amb una trampa: carregar gtag.js NO envia cap visita per si sol.
+  // Qui la dispara és la crida gtag('config', GA_ID). Les pàgines fetes a mà
+  // ja la porten inline, però les que genera scripts/build-pages.py (tot el
+  // blog, els partners, els equips…) només carreguen aquest fitxer. Sense la
+  // línia de sota, aquelles pàgines injectaven gtag.js i no comptaven ni una
+  // sola visita. Per això la fem aquí, i només si la pàgina no l'ha feta ja
+  // (si no, comptaríem la visita dues vegades).
+  function jaConfigurat() {
+    var dl = window.dataLayer || [];
+    for (var i = 0; i < dl.length; i++) {
+      var c = dl[i];
+      if (c && c[0] === 'config' && c[1] === GA_ID) return true;
+    }
+    return false;
+  }
+
   var injectat = false;
   function activarAnalytics() {
     if (injectat) return;
     injectat = true;
+    if (!jaConfigurat()) {
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID, { anonymize_ip: true });
+    }
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;

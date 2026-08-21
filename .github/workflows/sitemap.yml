@@ -1,0 +1,70 @@
+name: SEO · sitemap i avís als cercadors
+
+# El sitemap es mantenia a mà, i per això anava quedant enrere: hi havia
+# pàgines publicades que no hi sortien i dates que no corresponien a cap canvi
+# real. Ara es reconstrueix sol cada cop que es publica una pàgina.
+#
+# Després avisa IndexNow (Bing, Yandex, Seznam, Naver) de les URLs que han
+# canviat en aquest push. Google no fa servir IndexNow: aquell es dona per
+# assabentat pel sitemap, i si cal córrer, per la Search Console.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'scripts/build-sitemap.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sitemap
+  cancel-in-progress: false
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2          # cal el commit anterior per saber què ha canviat
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Reconstruir el sitemap
+        run: python3 scripts/build-sitemap.py
+
+      - name: Desar-lo si ha canviat
+        run: |
+          if git diff --quiet sitemap.xml; then
+            echo "::notice::El sitemap ja estava al dia."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sitemap.xml
+            git commit -m "chore(seo): reconstrueix el sitemap [skip ci]"
+            git push
+            echo "::notice::Sitemap actualitzat."
+          fi
+
+      - name: Avisar els cercadors de les pàgines que han canviat
+        run: |
+          # Les pàgines tocades en aquest push, en forma d'URL pública.
+          canviats=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD -- '*.html' || true)
+          urls=""
+          for f in $canviats; do
+            case "$f" in
+              */admin.html|admin/*|*/print/*|*/cartell.html|*/estadistiques.html|*/app.html) continue ;;
+            esac
+            u="https://cbgrupbarna.info/${f%index.html}"
+            urls="$urls $u"
+          done
+          if [ -z "$urls" ]; then
+            echo "::notice::Cap pàgina pública nova en aquest push."
+          else
+            python3 scripts/indexnow.py $urls
+          fi
