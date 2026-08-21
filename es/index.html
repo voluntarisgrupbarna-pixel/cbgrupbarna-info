@@ -544,6 +544,27 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .menu-col a small { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.06em; text-transform: none; color: var(--muted); margin-left: auto; white-space: nowrap; }
 .menu-foot { margin-top: 34px; text-align: center; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
 
+/* ==== MASTHEAD · Qui som ==== */
+.masthead { background: var(--ink); color: #fff; }
+.mh-in { max-width: 1180px; margin: 0 auto; padding: clamp(38px, 6vw, 74px) clamp(20px, 5vw, 56px) clamp(30px, 4.5vw, 56px); }
+.mh-eyebrow { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: #FF3B41; margin: 0 0 clamp(14px, 2vw, 22px); }
+.mh-h { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.9; letter-spacing: 0.01em; font-size: clamp(38px, 8.5vw, 92px); margin: 0; color: #fff; }
+.mh-h em { display: block; font-style: normal; font-family: var(--display); font-size: clamp(13px, 2.1vw, 22px); letter-spacing: 0.12em; line-height: 1.15; margin-top: clamp(10px, 1.6vw, 18px); color: rgba(255,255,255,0.88); }
+.mh-pillars { list-style: none; display: flex; flex-wrap: wrap; margin: clamp(20px, 3vw, 32px) 0 0; padding: 0; }
+.mh-pillars li { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.8); padding-right: 15px; margin: 4px 15px 4px 0; border-right: 1px solid rgba(255,255,255,0.24); }
+.mh-pillars li:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.mh-sub { font-size: 13.5px; line-height: 1.62; color: rgba(255,255,255,0.74); max-width: 62ch; margin: clamp(18px, 2.4vw, 26px) 0 0; }
+.mh-sub strong { color: #fff; font-weight: 500; }
+.mh-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(22px, 3vw, 32px); }
+.mh-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 clamp(18px, 3vw, 28px); background: var(--red); color: #fff; font-family: var(--display); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+.mh-btn:hover { background: #fff; color: var(--ink); }
+.mh-btn--ghost { background: transparent; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.38); }
+.mh-btn--ghost:hover { background: #fff; color: var(--ink); box-shadow: none; }
+@media (max-width: 640px) {
+  .mh-in { padding: 30px 20px 26px; }
+  .mh-sub { font-size: 12.5px; }
+}
+
 /* ==== LEAD · Escoleta ==== */
 .lead { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 0; }
 .lead-media { position: relative; overflow: hidden; background: var(--paper-2); aspect-ratio: 5 / 4; }
@@ -898,6 +919,29 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
 <main id="contingut">
 
+  <!-- ==== QUI SOM · abans que qualsevol porta d'entrada ====
+       El titular deia "Club de Baloncesto Base": bo per a Google,
+       dolent per a qui arriba a decidir si val la pena. Les paraules de cerca
+       no es perden, baixen al paràgraf de sota, que també es rastreja. -->
+  <section class="masthead" aria-labelledby="mh-h">
+    <div class="mh-in">
+      <p class="mh-eyebrow">El Clot · Sant Martí · Barcelona</p>
+      <h1 class="mh-h" id="mh-h">CB Grup Barna<em>Baloncesto en Barcelona desde 1965</em></h1>
+      <ul class="mh-pillars">
+        <li>Competición</li>
+        <li>Formación</li>
+        <li>Baloncesto femenino</li>
+        <li>Comunidad</li>
+        <li>Impacto social</li>
+      </ul>
+      <p class="mh-sub">Club y academia de baloncesto base en el Clot, Barcelona. <strong>34+ equipos</strong> masculinos y femeninos, <strong>15 federados en la FCBQ</strong> —ocho de ellos femeninos—, <strong>Escoleta de 4 a 8 años</strong>, campus, tecnificación y baloncesto inclusivo con los Barna Màgics.</p>
+      <div class="mh-cta">
+        <a class="mh-btn" href="#escoleta" data-cta="mh-fes-te">Únete al Barna</a>
+        <a class="mh-btn mh-btn--ghost" href="/es/patrocinadors/" data-cta="mh-empreses">Empresas y partners</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ==== ESCOLETA · el que toca aquest mes ==== -->
   <section class="lead only-extensa" id="escoleta">
     <div class="lead-media">
@@ -906,7 +950,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     </div>
     <div class="lead-body">
       <p class="eyebrow red">El primer bote empieza aquí · 4 a 8 años</p>
-      <h1>Escoleta de baloncesto<small>CB Grup Barna · El Clot</small></h1>
+      <h2>Escoleta de baloncesto<small>CB Grup Barna · El Clot</small></h2>
       <p class="lede">Equipos mixtos, tres grupos por edad y encuentros con otros clubes. Ven a probar un entrenamiento sin compromiso: sesenta y un años formando a niños y niñas del barrio.</p>
       <div class="btn-row">
         <a href="https://wa.me/34646205526?text=Hola%20Julio!%20Me%20interesa%20la%20Escoleta%20de%20baloncesto%20del%20CB%20Grup%20Barna%20para%20ni%C3%B1os%20y%20ni%C3%B1as%20de%204%20a%208%20a%C3%B1os.%20%C2%BFPod%C3%A9is%20informarme%3F" target="_blank" rel="noopener" class="btn red" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
