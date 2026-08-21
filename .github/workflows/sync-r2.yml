@@ -4,9 +4,13 @@ name: Galeria · sincronitzar amb Cloudflare R2
 # nomes al repositori fins que aquesta sincronitzacio estigui verificada; a
 # partir d'aqui, R2 es on viuen les imatges i el repositori nomes te el web.
 #
-# Cal tenir aquests secrets al repositori (Settings > Secrets > Actions):
-#   R2_ACCOUNT_ID · R2_ACCESS_KEY_ID · R2_SECRET_ACCESS_KEY
+# Cal tenir DOS secrets al repositori (Settings > Secrets and variables > Actions):
+#   R2_ACCESS_KEY_ID · R2_SECRET_ACCESS_KEY
 # Si en falta cap, la feina s'atura amb un avis en comptes de fallar a mitges.
+#
+# L'Account ID no es cap credencial -surt a la URL del panell de Cloudflare i
+# forma part de l'endpoint public de l'API-, aixi que va escrit aqui i no fa
+# falta guardar-lo com a secret.
 
 on:
   workflow_dispatch:
@@ -27,6 +31,7 @@ concurrency:
 
 env:
   BUCKET: cbgb-fotos
+  R2_ACCOUNT: 410ac6afd2d5cb6e654ba12967a04f7a
 
 jobs:
   sincronitzar:
@@ -38,14 +43,17 @@ jobs:
 
       - name: Comprovar que hi ha els secrets
         env:
-          ID: ${{ secrets.R2_ACCOUNT_ID }}
           KEY: ${{ secrets.R2_ACCESS_KEY_ID }}
           SECRET: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
-          if [ -z "$ID" ] || [ -z "$KEY" ] || [ -z "$SECRET" ]; then
-            echo "::error::Falten els secrets d'R2. Posa'ls a Settings > Secrets and variables > Actions."
+          falten=""
+          [ -z "$KEY" ]    && falten="$falten R2_ACCESS_KEY_ID"
+          [ -z "$SECRET" ] && falten="$falten R2_SECRET_ACCESS_KEY"
+          if [ -n "$falten" ]; then
+            echo "::error::Falta:$falten. Posa'ls a Settings > Secrets and variables > Actions."
             exit 1
           fi
+          echo "::notice::Credencials presents. Bucket $BUCKET al compte $R2_ACCOUNT."
 
       - uses: actions/setup-python@v5
         with:
@@ -63,7 +71,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
-          ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          ENDPOINT: https://${{ env.R2_ACCOUNT }}.r2.cloudflarestorage.com
         run: |
           set -e
           puja () {   # $1 carpeta local, $2 prefix al bucket, $3 tipus
