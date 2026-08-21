@@ -1594,7 +1594,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     function pinta() {
       var actual = efectiu();
       lbl.textContent = actual === 'light' ? 'Bands' : 'Extended';
-      btn.setAttribute('aria-label', 'You're now viewing the ' + lbl.textContent.toLowerCase() + ' version. Tap to switch to the other.');
+      btn.setAttribute('aria-label', "You're now viewing the " + lbl.textContent.toLowerCase() + ' version. Tap to switch to the other.');
       if (view) root.setAttribute('data-view', view);
       else root.removeAttribute('data-view');
     }
