@@ -1881,6 +1881,67 @@ equip federat. En tots dos casos, el primer pas és el mateix: anar a fer un
     "Barcelona i de la província."),
   ],
  },
+ {
+  "slug": "trobada-escola-nacho-solozabal",
+  "meta_desc": "El 21 de maig de 2026 l'Escoleta del CB Grup Barna i l'Escola Nacho Solozabal es van trobar per jugar juntes a la pista del Clot.",
+  "hero_alt": "Nens i nenes de l'Escoleta del CB Grup Barna i de l'Escola Nacho Solozabal junts a la pista, trobada del 21 de maig de 2026",
+  "alternates": [('ca', 'https://cbgrupbarna.info/blog/trobada-escola-nacho-solozabal/'), ('x-default', 'https://cbgrupbarna.info/blog/trobada-escola-nacho-solozabal/')],
+  "date": "2026-08-21",
+  "tag": "Escoleta",
+  "title": "L'Escoleta del Barna i l'Escola Nacho Solozabal, juntes a la pista del Clot",
+  "seo_title": "Trobada de l'Escoleta amb l'Escola Nacho Solozabal | CB Grup Barna",
+  "desc": ("El 21 de maig de 2026, l'Escoleta del CB Grup Barna va rebre l'Escola Nacho Solozabal per "
+           "a una trobada conjunta al Clot: dues escoles d'iniciació, una mateixa pista."),
+  "kw": "Escoleta CB Grup Barna, Escola Nacho Solozabal, trobada bàsquet base Barcelona, "
+        "iniciació al bàsquet Clot, bàsquet 4 a 8 anys Barcelona",
+  "lede": ("Dues escoles d'iniciació, una mateixa pista. El 21 de maig de 2026 l'Escoleta del CB Grup "
+           "Barna va rebre l'Escola Nacho Solozabal per a una trobada conjunta al Clot."),
+  "card_img": "card-trobada-solozabal",
+  "card_alt": "Nens i nenes de l'Escoleta del CB Grup Barna i de l'Escola Nacho Solozabal junts a la pista",
+  "body": """
+<h2>Una trobada entre dues escoles d'iniciació</h2>
+<p>El <strong>21 de maig de 2026</strong>, l'Escoleta del CB Grup Barna va compartir pista amb
+l'<strong>Escola Nacho Solozabal</strong> en una trobada conjunta al pavelló del Clot. Hi van
+participar nens i nenes de totes dues escoles, dels grups d'iniciació de 4 a 8 anys, en una sessió
+pensada per jugar juntes, no per competir-hi.</p>
+<p>La proposta va sortir de l'Escola Nacho Solozabal, que va voler portar el seu grup a entrenar amb
+el de l'Escoleta del Barna. Per a un club de barri com el Grup Barna, que una altra escola busqui
+activament aquest tipus de trobada és una manera concreta de mesurar com es veu la feina de
+formació des de fora.</p>
+
+<h2>Per què una trobada i no un partit</h2>
+<p>A l'edat de l'Escoleta —4 a 8 anys— l'objectiu no és el resultat: és jugar, moure's amb la pilota
+i perdre la vergonya de la pista. Una trobada entre dues escoles permet això sense la pressió d'un
+marcador: els grups es barregen, roten per estacions i acaben la sessió junts, no enfrontats.</p>
+<p>És el mateix criteri que segueix l'Escoleta cada setmana als seus propis entrenaments, aplicat
+ara a una jornada amb convidats.</p>
+
+<h2>Una porta més enllà del Clot</h2>
+<p>Trobades com aquesta no substitueixen la feina de cada dimecres i dissabte a la pista, però hi
+sumen alguna cosa que l'entrenament habitual no dona: la mainada veu com juga una altra escola, i
+els dos clubs es coneixen entre ells. Per a l'Escoleta, és també una manera d'aparèixer fora del seu
+propi barri sense haver de sortir-ne físicament: és l'altra escola qui hi ve.</p>
+<p>El calendari de trobades i visites de l'Escoleta —amb l'Escola Nacho Solozabal i amb altres
+clubs de la ciutat— es va actualitzant a la <a href="/escoleta/">pàgina de l'Escoleta</a>.</p>
+""",
+  "faq": [
+   ("Què va ser la trobada amb l'Escola Nacho Solozabal?",
+    "Una sessió conjunta, el 21 de maig de 2026, entre l'Escoleta del CB Grup Barna i l'Escola Nacho "
+    "Solozabal, a la pista del Clot, amb nens i nenes dels grups d'iniciació de totes dues escoles."),
+   ("Va ser un partit o un entrenament conjunt?",
+    "Un entrenament conjunt, no un partit. A l'edat de l'Escoleta (4 a 8 anys) l'objectiu és jugar i "
+    "moure's amb la pilota, no el resultat."),
+   ("On entrena l'Escoleta del CB Grup Barna?",
+    "Al barri del Clot, Districte de Sant Martí de Barcelona: els dimecres a l'Escola Casas i els "
+    "dissabtes a La Nau del Clot."),
+   ("Es fan altres trobades amb escoles de fora del club?",
+    "Sí, de manera puntual al llarg de la temporada. Es recullen a la pàgina de l'Escoleta a mesura "
+    "que es fan."),
+  ],
+  "closer": ("Voleu provar un entrenament de l'Escoleta?",
+             "Deixa'ns el nom i el contacte i us expliquem els horaris i com funciona un primer "
+             "entrenament de prova, sense compromís."),
+ },
 ]
 
 

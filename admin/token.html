@@ -142,12 +142,13 @@ function init() {
   refreshEstat();
 
   $('save').onclick = async () => {
-    const token = $('tok').value.trim();
-    const pass = $('pass').value;
-    if (!token) return say('err', 'Enganxa el token.');
-    if (!await CBGBGate.vault.checkPass(pass)) return say('err', 'La contrasenya del club no és correcta.');
     $('save').disabled = true;
     try {
+      const token = $('tok').value.trim();
+      const pass = $('pass').value;
+      if (!token) { say('err', 'Enganxa el token.'); return; }
+      if (!pass) { say('err', 'Escriu la contrasenya del club.'); return; }
+      if (!(await CBGBGate.vault.checkPass(pass))) { say('err', 'La contrasenya del club no és correcta.'); return; }
       // 1 · Comprovar que el token pot escriure en aquest repositori
       const repo = await gh(`/repos/${OWNER}/${REPO}`, 'GET', token);
       if (!repo.permissions || !repo.permissions.push)
@@ -170,9 +171,10 @@ function init() {
       say('okmsg', 'Fet. El token queda guardat i xifrat: a partir d\'ara, amb la contrasenya del club n\'hi ha prou a qualsevol dispositiu (d\'aquí un parell de minuts, quan es publiqui el canvi).');
       refreshEstat();
     } catch (e) {
-      say('err', e.message || String(e));
+      say('err', (e && e.message) || String(e) || 'Hi ha hagut un error inesperat.');
+    } finally {
+      $('save').disabled = false;
     }
-    $('save').disabled = false;
   };
 
   $('del').onclick = async () => {
