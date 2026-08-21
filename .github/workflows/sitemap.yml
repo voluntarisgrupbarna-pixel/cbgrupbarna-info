@@ -5,8 +5,8 @@ name: SEO · sitemap i avís als cercadors
 # real. Ara es reconstrueix sol cada cop que es publica una pàgina.
 #
 # Després avisa IndexNow (Bing, Yandex, Seznam, Naver) de les URLs que han
-# canviat en aquest push. Google no fa servir IndexNow: aquell es dona per
-# assabentat pel sitemap, i si cal córrer, per la Search Console.
+# canviat en aquest push. Google no fa servir IndexNow: aquell se n'assabenta
+# pel sitemap, i si cal córrer, per la Search Console.
 
 on:
   push:
@@ -29,11 +29,40 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2          # cal el commit anterior per saber què ha canviat
+          # Cal l'historial sencer: amb un clon superficial, el commit anterior
+          # al push pot no existir-hi i el diff surt buit sense dir-ho.
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      # Aquest pas va PRIMER a posta. El pas que desa el sitemap fa un commit,
+      # i un commit mou HEAD: si calculéssim el diff després, compararíem el
+      # commit del sitemap amb ell mateix i no hi trobaríem cap pàgina. Per
+      # això ens ancorem als dos SHA del push, que no es mouen.
+      - name: Veure quines pàgines ha tocat aquest push
+        env:
+          ABANS: ${{ github.event.before }}
+          ARA: ${{ github.sha }}
+        run: |
+          : > /tmp/urls.txt
+          if [ -z "$ABANS" ] || [ "$ABANS" = "0000000000000000000000000000000000000000" ]; then
+            echo "::notice::Push sense commit anterior (branca nova). No s'avisa ningú."
+            exit 0
+          fi
+          if ! git cat-file -e "$ABANS^{commit}" 2>/dev/null; then
+            echo "::warning::El commit anterior ($ABANS) no és a l'historial. No s'avisa ningú."
+            exit 0
+          fi
+          canviats=$(git diff --name-only --diff-filter=AM "$ABANS" "$ARA" -- '*.html')
+          for f in $canviats; do
+            case "$f" in
+              */admin.html|admin/*|*/print/*|*/cartell.html|*/estadistiques.html|*/app.html) continue ;;
+            esac
+            echo "https://cbgrupbarna.info/${f%index.html}" >> /tmp/urls.txt
+          done
+          echo "::notice::$(wc -l < /tmp/urls.txt) pàgines públiques tocades en aquest push."
 
       - name: Reconstruir el sitemap
         run: python3 scripts/build-sitemap.py
@@ -51,20 +80,10 @@ jobs:
             echo "::notice::Sitemap actualitzat."
           fi
 
-      - name: Avisar els cercadors de les pàgines que han canviat
+      - name: Avisar els cercadors
         run: |
-          # Les pàgines tocades en aquest push, en forma d'URL pública.
-          canviats=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD -- '*.html' || true)
-          urls=""
-          for f in $canviats; do
-            case "$f" in
-              */admin.html|admin/*|*/print/*|*/cartell.html|*/estadistiques.html|*/app.html) continue ;;
-            esac
-            u="https://cbgrupbarna.info/${f%index.html}"
-            urls="$urls $u"
-          done
-          if [ -z "$urls" ]; then
-            echo "::notice::Cap pàgina pública nova en aquest push."
+          if [ ! -s /tmp/urls.txt ]; then
+            echo "::notice::Cap pàgina pública tocada. No cal avisar ningú."
           else
-            python3 scripts/indexnow.py $urls
+            python3 scripts/indexnow.py $(cat /tmp/urls.txt)
           fi
