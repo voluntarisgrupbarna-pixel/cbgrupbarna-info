@@ -82,9 +82,29 @@
   .star-embed { aspect-ratio: 9/14; }
   .star-embed iframe { width: 100%; height: 100%; border: 0; }
   .star-tx { padding: 18px 18px 20px; }
-  .star-tx h3 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; }
+  .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
   .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .star-tx .role { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--red-dark); margin-bottom: 7px; }
+
+  /* Els tres grups d'estrelles: on es va gravar cada cosa, dit sense inflar. */
+  .stars-group { margin-top: clamp(30px, 4vw, 46px); }
+  .stars-group > h3 { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.2em;
+    text-transform: uppercase; margin: 0 0 6px; padding-bottom: 9px; border-bottom: 2px solid var(--red); }
+  .stars-group > p { font-size: 13.5px; color: var(--ink-2); max-width: 64ch; margin: 12px 0 0; }
+  .stars-group .stars { margin-top: clamp(18px, 2.4vw, 26px); }
+
+  /* Les convocatòries publicades: enllaç sec, sense incrustar res. */
+  .convos { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line);
+    border: 1px solid var(--line); margin: clamp(18px, 2.4vw, 26px) 0 0; }
+  @media (min-width: 720px) { .convos { grid-template-columns: repeat(2, 1fr); } }
+  .convos a { background: var(--paper); padding: 15px 18px; display: flex; flex-direction: column; gap: 3px;
+    text-decoration: none; }
+  .convos a:hover { background: var(--paper-2); }
+  .convos b { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink); }
+  .convos span { font-size: 12.5px; color: var(--ink-2); }
 </style>
 <script type="application/ld+json">
 {
@@ -764,54 +784,252 @@
     <div class="gal-cta">
       <p><strong>Aquestes són sis fotos triades.</strong> La galeria completa de l'estiu — totes les setmanes,
       amb foto i vídeo — és a la Galeria Fotogràfica del club.</p>
-      <a href="/fotos/" class="btn ghost" data-cta="campus-galeria-completa">Veure la galeria de l'estiu →</a>
+      <a href="/fotos/#summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9" class="btn ghost" data-cta="campus-galeria-completa">Veure la galeria de l'estiu →</a>
     </div>
 
+<!-- ESTRELLES-CAMPUS:inici · generat per scripts/build-campus-estrelles.py -->
     <h2>Estrelles del campus</h2>
-    <p>Una cosa que no fa tothom: al campus hi han passat referents del bàsquet a entrenar amb els nostres jugadors i jugadores. No de visita per a la foto — a pista, dirigint sessió.</p>
-    <div class="stars">
-      <div class="star">
-        <button type="button" class="star-play" data-reel="C-0jXXDMY5r" aria-label="Reproduir el reel amb Ainhoa López">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Ainhoa López</span>
-        </button>
-        <div class="star-tx">
-          <h3>Ainhoa López</h3>
-          <p>Jugadora professional · Selecció Espanyola. Formada al Clot.</p>
-          <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">Veure a Instagram →</a>
+    <p>Una cosa que no fa tothom: al campus hi han passat referents del bàsquet a entrenar amb els nostres jugadors i jugadores. No de visita per a la foto — a pista, dirigint sessió. Ho separem en tres grups perquè no tot es va gravar al mateix lloc: primer el que va passar <strong>a La Nau del Clot</strong>, després la feina dels entrenadors i dels jugadors d'elit <strong>amb Time Chamber</strong>, que és el nostre soci del campus.</p>
+
+    <div class="stars-group">
+      <h3>A La Nau del Clot</h3>
+      <p>Gravat al pavelló del club, amb els nostres jugadors i jugadores a pista.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="Reproduir el vídeo amb El resum de l'edició">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>El resum de l'edició</span>
+          </button>
+          <div class="star-tx">
+            <h4>El resum de l'edició</h4>
+            <span class="role">Reel final del campus</span>
+            <p>Com va acabar el Campus Timechamber: totes les setmanes en un vídeo.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-reel="DMqb9P8sUic" aria-label="Reproduir el reel amb Robert Willet">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Robert Willet</span>
-        </button>
-        <div class="star-tx">
-          <h3>Robert Willet</h3>
-          <p>Entrenador de tecnificació NBA (@bballwillett).</p>
-          <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">Veure a Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="Datex2OxHcS" aria-label="Reproduir el vídeo amb Shooting Academy">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Shooting Academy</span>
+          </button>
+          <div class="star-tx">
+            <h4>Shooting Academy</h4>
+            <span class="role">Setmana 3 del campus</span>
+            <p>La setmana dedicada al tir, de dins de la pista.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Reproduir el reel amb Malak Shady">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Malak Shady</span>
-        </button>
-        <div class="star-tx">
-          <h3>Malak Shady</h3>
-          <p>Referent del bàsquet a xarxes i MVP de 3x3.</p>
-          <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">Veure a Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL-n0ZeMaOq" aria-label="Reproduir el vídeo amb Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">Entrenador NBA · al campus</span>
+            <p>Dirigint sessió al campus del club.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DQOhe0qjAPb" aria-label="Reproduir el vídeo amb Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">Entrenador NBA · al campus</span>
+            <p>Segona sessió, un altre bloc de treball.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="C-0jXXDMY5r" aria-label="Reproduir el vídeo amb Ainhoa López">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Ainhoa López</span>
+          </button>
+          <div class="star-tx">
+            <h4>Ainhoa López</h4>
+            <span class="role">Selecció Espanyola · formada al Clot</span>
+            <p>Jugadora professional. Va sortir d'aquesta pista i hi ha tornat a entrenar.</p>
+            <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Reproduir el vídeo amb Malak Shady">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Malak Shady</span>
+          </button>
+          <div class="star-tx">
+            <h4>Malak Shady</h4>
+            <span class="role">MVP de 3x3</span>
+            <p>Referent del bàsquet a xarxes i MVP de 3x3.</p>
+            <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
+          </div>
         </div>
       </div>
     </div>
-    <p style="font-size:13.5px;color:var(--ink-2)">Els vídeos són d'Instagram i només es carreguen si hi cliques. Tot el recull de l'edició és a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+
+    <div class="stars-group">
+      <h3>Entrenadors NBA amb Time Chamber</h3>
+      <p>La metodologia de treball individual que el campus incorpora ve d'aquí.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMLipXBsMMe" aria-label="Reproduir el vídeo amb Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Treball de fonaments individuals amb Time Chamber.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMQlHE4Mty1" aria-label="Reproduir el vídeo amb Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Segona sessió: lectura de joc i resolució a prop de cistella.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMGO77UsDoQ" aria-label="Reproduir el vídeo amb Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Tercera sessió del bloc de tecnificació.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
+      <h3>Jugadors d'elit que hi han entrenat</h3>
+      <p>Sessions amb Time Chamber, el soci del campus. No totes es van gravar a La Nau: quan no hi va ser, ho diem.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DO4KaZxCLqY" aria-label="Reproduir el vídeo amb Serge Ibaka">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Serge Ibaka</span>
+          </button>
+          <div class="star-tx">
+            <h4>Serge Ibaka</h4>
+            <span class="role">Campió NBA 2019</span>
+            <p>Sessió de treball amb Time Chamber.</p>
+            <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DN1a1DvUGhg" aria-label="Reproduir el vídeo amb Yankuba Sima">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Yankuba Sima</span>
+          </button>
+          <div class="star-tx">
+            <h4>Yankuba Sima</h4>
+            <span class="role">Eurolliga</span>
+            <p>Treball de pivot amb Time Chamber.</p>
+            <a href="https://www.instagram.com/yankubasima/" target="_blank" rel="noopener">@yankubasima →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL25XRsskTS" aria-label="Reproduir el vídeo amb Pedro Marhuenda">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Pedro Marhuenda</span>
+          </button>
+          <div class="star-tx">
+            <h4>Pedro Marhuenda</h4>
+            <span class="role">Jugador professional</span>
+            <p>Sessió individual amb Time Chamber.</p>
+            <a href="https://www.instagram.com/4future_pedromarhuenda/" target="_blank" rel="noopener">@4future_pedromarhuenda →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DOHTiwWiKJE" aria-label="Reproduir el vídeo amb Dani Carrasco">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Dani Carrasco</span>
+          </button>
+          <div class="star-tx">
+            <h4>Dani Carrasco</h4>
+            <span class="role">Jugador professional</span>
+            <p>Sessió de treball amb Time Chamber.</p>
+            <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DOrQsPRiD_l" aria-label="Reproduir el vídeo amb Salo 23">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Salo 23</span>
+          </button>
+          <div class="star-tx">
+            <h4>Salo 23</h4>
+            <span class="role">Jugador</span>
+            <p>Sessió de tecnificació amb Time Chamber.</p>
+            <a href="https://www.instagram.com/salo23_/" target="_blank" rel="noopener">@salo23_ →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DN5x42hCDpV" aria-label="Reproduir el vídeo amb Kassius">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Kassius</span>
+          </button>
+          <div class="star-tx">
+            <h4>Kassius</h4>
+            <span class="role">Jugador</span>
+            <p>Sessió de tecnificació amb Time Chamber.</p>
+            <a href="https://www.instagram.com/kassius_r/" target="_blank" rel="noopener">@kassius_r →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="CguvYo9KuTz" data-kind="p" aria-label="Reproduir el vídeo amb Joel Parra">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Joel Parra</span>
+          </button>
+          <div class="star-tx">
+            <h4>Joel Parra</h4>
+            <span class="role">ACB · Joventut</span>
+            <p>Sessió amb Time Chamber al Pavelló Olímpic de Badalona, no a La Nau.</p>
+            <a href="https://www.instagram.com/joelparra/" target="_blank" rel="noopener">@joelparra →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
+      <h3>Les convocatòries publicades</h3>
+      <p>Cada edició del campus s'anuncia amb <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es</a>. Aquestes són les quatre darreres.</p>
+      <div class="convos">
+        <a href="https://www.instagram.com/p/DXKxd7VjCJK/" target="_blank" rel="noopener">
+          <b>Campus d'estiu · La Nau del Clot</b><span>Convocatòria del 16 d'abril</span></a>
+        <a href="https://www.instagram.com/p/DUtmAbHjFIs/" target="_blank" rel="noopener">
+          <b>Flow Camp · Setmana Santa</b><span>Del 30 de març al 3 d'abril</span></a>
+        <a href="https://www.instagram.com/p/DUT5hyjDD7S/" target="_blank" rel="noopener">
+          <b>Campus de Carnaval</b><span>Convocatòria del 3 de febrer</span></a>
+        <a href="https://www.instagram.com/p/DQ7nLmkjINq/" target="_blank" rel="noopener">
+          <b>Edició Limitada 2025</b><span>Convocatòria de l'11 de novembre de 2025</span></a>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Els vídeos són d'Instagram i només es carreguen si hi cliques. Tot el recull de l'edició és a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <!-- ESTRELLES-CAMPUS:final -->
     <script>
       // Els reels d'Instagram només es carreguen si l'usuari hi clica.
       document.querySelectorAll('.star-play').forEach(function (b) {
         b.addEventListener('click', function () {
           var d = document.createElement('div');
           d.className = 'star-embed';
-          d.innerHTML = '<iframe src="https://www.instagram.com/reel/' + b.dataset.reel +
+          // Uns són reels i uns altres publicacions de feed: data-kind="p" ho marca.
+          var kind = b.dataset.kind === 'p' ? 'p' : 'reel';
+          d.innerHTML = '<iframe src="https://www.instagram.com/' + kind + '/' + b.dataset.reel +
             '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
           b.replaceWith(d);
         });

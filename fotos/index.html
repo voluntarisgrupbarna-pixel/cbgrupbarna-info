@@ -777,6 +777,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildStats();
   buildSeasonFilters();
   renderEvents();
+  obreAlbumDeLAdreca();
 
   document.getElementById('search-input').addEventListener('input', e => {
     searchQuery = e.target.value.trim().toLowerCase();
@@ -881,7 +882,7 @@ function renderEvents() {
   events.forEach((ev, i) => {
     const card = document.createElement('a');
     card.className = 'event-card';
-    card.href = '#';
+    card.href = '#' + ev.id;
     card.style.animationDelay = `${i * 40}ms`;
     card.addEventListener('click', e => { e.preventDefault(); showPhotos(ev); });
 
@@ -917,6 +918,9 @@ function renderEvents() {
 function showPhotos(ev) {
   currentEvent = ev;
   displayedCount = 0;
+
+  // L'àlbum queda a l'adreça, perquè s'hi pugui enllaçar de fora (p. ex. des de /campus/).
+  if (location.hash.slice(1) !== ev.id) history.replaceState(null, '', '#' + ev.id);
 
   document.getElementById('events-view').style.display = 'none';
   document.getElementById('photos-view').style.display = 'block';
@@ -1019,10 +1023,19 @@ function loadMorePhotos() {
 
 function showEvents() {
   currentEvent = null;
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
   document.getElementById('photos-view').style.display = 'none';
   document.getElementById('events-view').style.display = 'block';
   document.getElementById('search-wrap').style.display = 'flex';
   window.scrollTo(0, 0);
+}
+
+// Si l'adreça ja porta un àlbum, obre'l directament.
+function obreAlbumDeLAdreca() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  const ev = window.GALERIA_EVENTS.filter(esVisible).find(e => e.id === id);
+  if (ev) showPhotos(ev);
 }
 
 // ── LIGHTBOX ──
