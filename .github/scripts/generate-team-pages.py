@@ -68,15 +68,12 @@ def resultat(p):
     return "W" if barna > rival else ("L" if barna < rival else "E")
 
 
-HEAD_NAV = """<a href="/club/">Club</a>
-      <a href="/escoleta/" class="opt">Escoleta</a>
+HEAD_NAV = """<a href="/partits/equips/">Equips</a>
+      <a href="/club/">Club</a>
       <a href="/partits/">Dies de partit</a>
-      <a href="/patrocinadors/" class="opt">Patrocinadors</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
       <a href="/campus/" class="opt">Campus</a>
-      <a href="/3x3/" class="opt">3x3</a>
-      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
-      <a href="/fotos/" class="opt">Galeria</a>
-      <a href="/premsa/">Premsa</a>"""
+      <a href="/empreses/" class="opt">Empreses</a>"""
 
 FOOTER = """<footer class="foot">
   <div class="wrap">
@@ -109,7 +106,6 @@ FOOTER = """<footer class="foot">
         <h3>Xarxes</h3>
         <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://www.cbgrupbarna.com" target="_blank" rel="noopener">cbgrupbarna.com</a>
       </div>
     </div>
     <div class="foot-btm">

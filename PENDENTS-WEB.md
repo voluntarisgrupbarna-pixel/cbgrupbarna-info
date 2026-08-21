@@ -183,3 +183,56 @@ seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
 
 - **Esdeveniments «passats»** (3x3 Glòries, Mes de l'Orgull, Campus Time Chamber,
   Little Basket Day): són esdeveniments anuals del club i es queden com estan.
+
+---
+
+## Fase de marca · 20/08/2026
+
+Canvi d'objectiu: la web deixa de mesurar-se com a web de club formatiu i passa a
+mesurar-se com a **plataforma de marca esportiva i comercial**. La formació hi és, però
+com a prova de dimensió, no com a definició de la marca.
+
+### ✅ Fet en aquesta tanda
+
+- **Coherència de dades.** `data.json` guanya el bloc `xifres`, que fa de font de veritat.
+  Desapareixen «40 equips», «20F+20M» i «60 anys» de tot el lloc. L'LF2 deixa de ser una
+  contradicció dins la mateixa pàgina: el club hi va jugar, avui compet a Supercopa.
+- **El peu deixa d'enllaçar cbgrupbarna.com** (165 pàgines i els dos generadors). El
+  `sameAs` de schema.org es manté: allà sí que consolida entitat.
+- **Capçalera de marca a la portada** i navegació de sis entrades amb Empreses.
+- **`/empreses/`**, amb Barna Business i FAQPage.
+
+### Pendent, per ordre
+
+1. **`/empreses/` en castellà i anglès.** `/patrocinadors/` ja té `/es/` i `/en/`; la
+   nova pàgina, no. És la pàgina que llegirà una marca de fora de Barcelona.
+2. **Els primers equips a la portada.** Sènior Femení A i Sènior Masculí A amb foto,
+   plantilla, staff, pròxim partit i resultat, **abans** de la base. L'ordre comunica
+   jerarquia, i és el que veu un patrocinador els primers cinc segons. Avui `#seniors`
+   queda molt avall.
+3. **La Nau del Clot com a actiu de marca.** Avui `/instal-lacions/` és una adreça. Hauria
+   de ser la casa del club: fotografia, història, dies de partit, esdeveniments,
+   activacions i com arribar-hi. Cal una sessió de fotos.
+4. **Barna Media.** El blog ja no és «notícies del club»: és autoritat temàtica. Canviar-li
+   el nom implica canviar URL, així que només amb redireccions ben fetes i després de tot
+   l'anterior.
+5. **Xifres d'audiència verificables.** `data.json → audiencia` cita 439.000
+   visualitzacions mensuals a Instagram i no té els seguidors. Revisar cada trimestre amb
+   una captura del panell; el que no es pugui justificar, fora de `/empreses/`.
+6. **Migració tancada.** Queden enllaços a `cbgrupbarna.com/noticies/`, que és contingut
+   real encara no migrat. Fins que no es migri, no es poden treure.
+7. **Guia visual «Franges i Extensa».** La portada ja no porta el hero
+   `.lg-hero` de les franges (el repetia la capçalera de marca). Cal reflectir-ho a la guia.
+
+### Nota sobre el nom «Patrocinadors» (20/08/2026)
+
+El nom desapareix com a **nom de secció**: la secció es diu **Empreses** (`/empreses/`) i
+la llista de qui hi és avui es diu **Partners** (`/patrocinadors/`). S'han canviat les 362
+etiquetes visibles, els fils d'Ariadna i el generador.
+
+**La URL `/patrocinadors/` no s'ha tocat**, i és una decisió, no un oblit: hi pengen 22
+fitxes de partner més les versions `/es/` i `/en/`, i GitHub Pages no fa redireccions de
+servidor —només `<meta refresh>` o JavaScript, que passen molt pitjor l'autoritat. Moure
+la URL avui, amb el domini acabat d'estrenar i encara sense posicions guanyades, és
+regalar el poc que hi ha. Es podrà fer quan `/patrocinadors/` ja posicioni i valgui la
+pena arriscar-hi, i llavors amb redireccions per a totes les fitxes alhora.
