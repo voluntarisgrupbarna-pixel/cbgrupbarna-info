@@ -58,7 +58,13 @@ def avisar(urls, k):
     peticio = urllib.request.Request(
         "https://api.indexnow.org/IndexNow",
         data=cos,
-        headers={"Content-Type": "application/json; charset=utf-8"},
+        headers={
+            "Content-Type": "application/json; charset=utf-8",
+            # Sense User-Agent propi, urllib s'anuncia com a "Python-urllib/3.x"
+            # i el servidor de Microsoft respon 403 sense mirar-s'ho. Amb un
+            # d'identificable, accepta l'avís.
+            "User-Agent": "CBGrupBarna-IndexNow/1.0 (+https://cbgrupbarna.info/)",
+        },
     )
     try:
         with urllib.request.urlopen(peticio, timeout=30) as r:
