@@ -92,7 +92,7 @@ articles que no existien, escrits per a famílies i no com a resum del document:
 Cadascun porta FAQ indexable, JSON-LD (`BlogPosting` + `FAQPage` + `BreadcrumbList`) i enllaços
 interns creuats. El blog passa de 5 a 12 articles. Actualitzats també l'índex del blog, el
 `sitemap.xml` (97 URL) i el `llms.txt`. La xifra de l'staff tècnic femení s'unifica a **65,5%**
-(abans el briefing i les dades oficials deien 68%), i l'adreça del club a **C/ Llacuna 172**
+(abans el briefing i les dades oficials deien 68%), i l'adreça del club a **C/ Llacuna 170-172**
 (53 ocurrències en 27 fitxers deien 170), seguint la candidatura.
 
 ### 7. `noindex` a l'eina interna

@@ -104,7 +104,7 @@ de visualització.
 |---|---|---|
 | Telèfon | 688 26 52 **31** (capçalera) i 688 26 52 **30** (peu) | 698 425 153 |
 | Correu | cbgrupbarna@gmail.com | marqueting@cbgrupbarna.info |
-| Adreça | C/ Llacuna 170 | C/ Llacuna 172 *(corregit avui segons la candidatura)* |
+| Adreça | C/ Llacuna 170-172 | C/ Llacuna 170-172 *(corregit avui segons la candidatura)* |
 | Xarxes | Instagram, Facebook, Twitter/X, Flickr, WhatsApp | Instagram, TikTok, X *(només a la portada)* |
 
 El telèfon es contradiu dins de la mateixa web antiga. Cal decidir quin és el bo i deixar-lo
