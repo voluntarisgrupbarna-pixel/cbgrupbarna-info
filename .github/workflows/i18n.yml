@@ -1,0 +1,74 @@
+name: i18n · revisió del multiidioma
+
+# La web viu en tres idiomes i fins ara res no avisava quan una traducció es
+# quedava enrere: si tocaves la pàgina catalana i no la castellana, no passava
+# res —fins que algú se n'adonava mesos després. Aquest workflow és qui se
+# n'adona el mateix dia.
+#
+# No toca cap fitxer i no atura res pel que ja hi havia: i18n/baseline.txt
+# guarda els errors coneguts del dia que es va posar en marxa. Només falla si
+# el canvi que s'està pujant n'afegeix de nous.
+
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - 'i18n/**'
+      - 'scripts/i18n-*.py'
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'i18n/**'
+      - 'scripts/i18n-*.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: i18n-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  revisio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Cal l'historial sencer: el lint compara la data de l'últim commit
+          # de cada pàgina amb la de la seva traducció per saber quines s'han
+          # quedat enrere. Amb un clon superficial totes semblarien igual de
+          # noves i no avisaria mai.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install --quiet pyyaml
+
+      - name: Mirar si el mapa de rutes s'ha quedat enrere
+        run: |
+          sortida=$(python3 scripts/i18n-routes.py --dry-run)
+          echo "$sortida"
+          if echo "$sortida" | grep -q "El mapa canviaria"; then
+            echo "::warning::Hi ha pàgines noves que no són a i18n/routes.yml. Executa python3 scripts/i18n-routes.py i torna-ho a pujar."
+          fi
+
+      - name: Revisar el multiidioma
+        run: |
+          set +e
+          python3 scripts/i18n-lint.py | tee /tmp/i18n.txt
+          codi=${PIPESTATUS[0]}
+          {
+            echo '## Multiidioma'
+            echo
+            echo '```'
+            cat /tmp/i18n.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$codi" -ne 0 ]; then
+            echo "::error::Aquest canvi afegeix errors nous de multiidioma. Els tens a l'informe de dalt."
+          fi
+          exit $codi

@@ -1,0 +1,23 @@
+# Excepcions del lint. Cada línia d'aquí és una decisió presa, no un descuit
+# amagat: si s'hi afegeix res, que sigui amb el motiu escrit al costat.
+
+# Rutes on el nom NO s'ha de traduir mai, i el lint no ha de demanar-ho.
+# S'hi compara el començament de la ruta catalana.
+rutes_exemptes:
+  - ruta: /patrocinadors/partners/
+    motiu: Cada pàgina porta el nom d'una empresa. Un nom propi no es tradueix.
+  - ruta: /premidonaesport/
+    motiu: Candidatura al Premi Dona i Esport. El nom del premi és el que és.
+  - ruta: /presentacions/
+    motiu: Presentacions internes amb nom propi de la peça.
+  - ruta: /magics/
+    motiu: Barna Màgics és el nom de la secció, no una descripció.
+  - ruta: /opina/
+    motiu: Campanya amb nom propi i QR impresos que hi apunten.
+
+# Paraules que ja s'escriuen igual en els tres idiomes, o que són vocabulari
+# del club i no es tradueixen. Es comparen amb l'últim tram de la ruta.
+segments_exempts:
+  es: [3x3, blog, campus, escoleta, briefing, fotos, mascota, jugadors, partners-mapa,
+       fotos-3x3, galeria-3x3-glories, grup-barna-dades-oficials, dossier-patrocinis]
+  en: [3x3, blog, escoleta, briefing, partners-mapa, fotos-3x3, galeria-3x3-glories]
