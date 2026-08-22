@@ -21,6 +21,8 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
+from i18n_chrome import navegacio, peu, text
+
 
 def clamp_desc(text, limit=160):
     """Google en mostra uns 160 caràcters. Retallem per final de frase perquè
@@ -112,21 +114,14 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <script src="/js/galetes.js"></script>
 </head>
 <body>
-<a href="#main" class="skip">Saltar al contingut</a>
+<a href="#main" class="skip">{text("salta", lang)}</a>
 <header class="head">
   <div class="head-in">
-    <a class="head-brand" href="/" aria-label="CB Grup Barna · inici">
-      <img src="/logo.png" alt="Escut del CB Grup Barna" width="30" height="30">
+    <a class="head-brand" href="/" aria-label="{text("inici_aria", lang)}">
+      <img src="/logo.png" alt="{text("escut_alt", lang)}" width="30" height="30">
       <span>CB Grup Barna</span>
     </a>
-    <nav class="head-nav" aria-label="Navegació principal">
-      <a href="/partits/equips/">Equips</a>
-      <a href="/club/">Club</a>
-      <a href="/partits/">Dies de partit</a>
-      <a href="/escoleta/" class="opt">Escoleta</a>
-      <a href="/campus/" class="opt">Campus</a>
-      <a href="/empreses/" class="opt">Empreses</a>
-    </nav>{lang_switch}
+{navegacio(lang)}{lang_switch}
   </div>
 </header>
 <main id="main">"""
@@ -139,64 +134,9 @@ def crumbs(items):
     return '<div class="wrap"><nav class="crumb" aria-label="Fil d\'Ariadna">' + ' · '.join(parts) + '</nav></div>'
 
 
-FOOT = f"""</main>
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-col">
-        <h3>El Barna</h3>
-        <a href="/escoleta/">Escola de bàsquet</a>
-        <a href="/campus/">Campus de bàsquet</a>
-        <a href="/magics/">Barna Màgics</a>
-        <a href="/3x3/">Torneig 3x3</a>
-        <a href="/cistella-petita/">Cistella Petita</a>
-        <a href="/empreses/">Empreses</a>
-        <a href="/patrocinadors/">Partners</a>
-        <a href="/instal-lacions/">Instal·lacions</a>
-        <a href="/organigrama/">Organigrama</a>
-        <a href="/posicionament/">Posicionament del club</a>
-        <a href="/grup-barna-dades-oficials/">Dades oficials</a>
-        <a href="/proteccio-menor/">Protecció del Menor</a>
-        <a href="/basquet-femeni/">Bàsquet femení</a>
-      </div>
-      <div class="foot-col">
-        <h3>Temporada</h3>
-        <a href="/partits/">Dies de partit</a>
-        <a href="/partits/calendaris/">Dies de partit per equip</a>
-        <a href="/fotos/">Galeria de fotos</a>
-        <a href="/premidonaesport/">Premi Dona i Esport</a>
-        <a href="/blog/">Blog</a>
-        <a href="/premsa/">Articles i premsa</a>
-      </div>
-      <div class="foot-col">
-        <h3>Contacte</h3>
-        <a href="/#info">Demanar informació</a>
-        <a href="/faq/">Preguntes freqüents</a>
-        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
-        <a href="https://wa.me/34698425153">+34 698 425 153</a>
-        <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
-      </div>
-      <div class="foot-col">
-        <h3>Legal</h3>
-        <a href="/politica-de-privacitat/">Política de privacitat</a>
-        <a href="/avis-legal/">Avís legal</a>
-        <a href="/politica-de-privacitat/#galetes">Galetes</a>
-      </div>
-      <div class="foot-col">
-        <h3>Xarxes</h3>
-        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
-      </div>
-    </div>
-    <div class="foot-btm">
-      <div class="foot-mark">#Som<em>Clot</em></div>
-      <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965</div>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
-"""
+# El peu en català. És el mateix dibuix d'abans, però ara surt del diccionari
+# i el mateix codi en sap fer la versió castellana i anglesa: peu("es").
+FOOT = peu("ca")
 
 
 def faq_block(pairs):
@@ -1661,7 +1601,7 @@ continuïtat del lloc.</p>
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "Campus de bàsquet a Barcelona: què mirar abans d'apuntar-hi ningú",
-  "seo_title": "Com triar un campus de bàsquet a Barcelona | CB Grup Barna",
+  "seo_title": "Com triar un campus de bàsquet a Barcelona: guia per a famílies | CB Grup Barna",
   "desc": ("Guia per triar campus de bàsquet a Barcelona: diferència entre campus de lleure i de "
            "tecnificació, ràtios, grups per edat, horaris i preu. Amb la informació del campus del "
            "CB Grup Barna al Clot."),
@@ -1697,6 +1637,8 @@ quan tots dos pares treballen fins a les sis és un problema logístic disfressa
 <h2>Què inclou el preu</h2>
 <p>Dinar, samarreta, assegurança, material. Dos campus amb el mateix preu poden ser molt diferents un
 cop s'hi suma el que no estava inclòs.</p>
+
+<p>Si el que voleu és veure d'una tirada quines opcions hi ha a la ciutat, tenim la <a href="/campus-basquet-barcelona/">comparativa dels campus de bàsquet de Barcelona</a>: qui els organitza, on es fan, què treballa cadascun i quant costen.</p>
 
 <h2>El campus del CB Grup Barna</h2>
 <p>El <a href="/campus/">campus del Barna</a> es fa al barri del Clot, Districte de Sant Martí, i és
@@ -1842,7 +1784,7 @@ FCBQ.</p>
 <h2>Un club de barri al Districte de Sant Martí</h2>
 """ + FIG_CLOT_DUO + """
 <p>El <strong>CB Grup Barna</strong> és del <strong>Clot</strong> des del <strong>1965</strong>.
-Seixanta anys al mateix barri vol dir una cosa molt concreta: hi ha entrenadors que van jugar-hi de
+Seixanta-un anys al mateix barri vol dir una cosa molt concreta: hi ha entrenadors que van jugar-hi de
 petits i pares que hi van jugar abans que els seus fills. Això no surt en cap classificació, però es
 nota en com funciona el vestidor.</p>
 <p>Avui són més de <strong>trenta-quatre equips federats</strong> i unes <strong>450 jugadores i

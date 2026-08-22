@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+"""
+Capçalera i peu de pàgina, dibuixats des de i18n/diccionari.yml.
+
+Fins ara aquests textos vivien escrits tres vegades, una per idioma, i a més
+d'un lloc: dins de scripts/build-pages.py i a disc, pàgina per pàgina. Per
+això el mateix enllaç va acabar dient-se «Team calendars» en una pàgina i
+«Calendars by team» en una altra. Aquí cada text té una clau i tres valors.
+
+    from i18n_chrome import navegacio, peu
+    navegacio("ca")   # el <nav> de la capçalera
+    peu("en")         # el <footer> sencer
+
+Les rutes s'escriuen en català i cada idioma hi posa el seu prefix:
+/escoleta/ és /es/escoleta/ i /en/escoleta/. Si una pàgina no existeix en un
+idioma, el diccionari no l'ha de llistar a la seva estructura, i si ho fa,
+això peta expressament: val més que s'aturi la generació que no pas publicar
+un peu en castellà amb un enllaç que porta a una pàgina en català.
+"""
+from pathlib import Path
+
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+DICCIONARI = ROOT / "i18n" / "diccionari.yml"
+
+_dades = yaml.safe_load(DICCIONARI.read_text(encoding="utf-8"))
+TEXTOS = _dades["textos"]
+ESTRUCTURA = _dades["estructura"]
+
+
+def text(clau, idioma):
+    entrada = TEXTOS.get(clau)
+    if entrada is None:
+        raise KeyError(f"i18n: la clau «{clau}» no és al diccionari")
+    if idioma not in entrada:
+        raise KeyError(f"i18n: «{clau}» no té versió en {idioma}")
+    return entrada[idioma]
+
+
+def enllac(clau, idioma):
+    """L'adreça d'una clau en un idioma, amb el prefix que li toca."""
+    href = TEXTOS[clau].get("href")
+    if href is None:
+        raise KeyError(f"i18n: la clau «{clau}» no és un enllaç")
+    if idioma == "ca" or href.startswith(("http", "mailto:")):
+        return href
+    return f"/{idioma}{href}"
+
+
+def _comprova(clau, idioma):
+    """Que l'enllaç porti a una pàgina que existeix de debò."""
+    href = enllac(clau, idioma)
+    if href.startswith(("http", "mailto:")):
+        return href
+    ruta = href.split("#")[0]
+    if not ruta:
+        return href
+    fitxer = ROOT / (ruta.lstrip("/") + "index.html" if ruta.endswith("/") else ruta.lstrip("/"))
+    if not fitxer.exists():
+        raise FileNotFoundError(
+            f"i18n: el peu de {idioma} enllaça {href} i aquesta pàgina no existeix. "
+            f"O es tradueix la pàgina, o es treu la clau «{clau}» de l'estructura de {idioma}.")
+    return href
+
+
+def navegacio(idioma):
+    """El <nav> de la capçalera. El sufix .opt d'una clau marca els enllaços
+    secundaris, que són els primers que cauen quan el menú no hi cap."""
+    linies = []
+    for clau in ESTRUCTURA[idioma]["nav"]:
+        clau, _, opcional = clau.partition(".")
+        classe = ' class="opt"' if opcional else ''
+        linies.append(f'      <a href="{_comprova(clau, idioma)}"{classe}>{text(clau, idioma)}</a>')
+    return (f'    <nav class="head-nav" aria-label="{text("nav_aria", idioma)}">\n'
+            + "\n".join(linies) + "\n    </nav>")
+
+
+def peu(idioma):
+    """El <footer> sencer.
+
+    Les tres primeres columnes surten del diccionari. Les dades de contacte i
+    les xarxes no: un correu, un telèfon i una adreça són els mateixos en els
+    tres idiomes, i posar-los al diccionari només afegiria tres còpies del
+    mateix text a mantenir.
+    """
+    columnes = []
+    for titol, claus in ESTRUCTURA[idioma]["peu"]:
+        enllacos = "\n".join(
+            f'        <a href="{_comprova(c, idioma)}">{text(c, idioma)}</a>' for c in claus)
+        extra = ""
+        if titol == "titol_contacte":
+            extra = ('\n        <a href="mailto:marqueting@cbgrupbarna.info">'
+                     'marqueting@cbgrupbarna.info</a>'
+                     '\n        <a href="https://wa.me/34698425153">+34 698 425 153</a>'
+                     '\n        <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>')
+        columnes.append('      <div class="foot-col">\n'
+                        f'        <h3>{text(titol, idioma)}</h3>\n{enllacos}{extra}\n'
+                        '      </div>')
+    columnes.append(
+        '      <div class="foot-col">\n'
+        f'        <h3>{text("titol_xarxes", idioma)}</h3>\n'
+        '        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>\n'
+        '        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>\n'
+        '      </div>')
+    return ('</main>\n<footer class="foot">\n  <div class="wrap">\n    <div class="foot-grid">\n'
+            + "\n".join(columnes) + '\n    </div>\n'
+            '    <div class="foot-btm">\n'
+            '      <div class="foot-mark">#Som<em>Clot</em></div>\n'
+            f'      <div class="foot-legal">{text("peu_legal", idioma)}</div>\n'
+            '    </div>\n  </div>\n</footer>\n</body>\n</html>\n')
+
+
+if __name__ == "__main__":
+    for idioma in ("ca", "es", "en"):
+        print(f"── {idioma} " + "─" * 60)
+        print(navegacio(idioma))
+        print(peu(idioma))
