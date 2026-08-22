@@ -12,6 +12,8 @@ a mà perquè tenen lògica pròpia.
 """
 import json
 import re
+import os
+import io
 from pathlib import Path
 from urllib.parse import quote
 
@@ -1322,7 +1324,7 @@ def build_article(a):
         faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Blog", "/blog/"), (a["title"], "/blog/" + a["slug"] + "/")]),
     ]}
-    others = [x for x in ARTICLES if x["slug"] != a["slug"]][:3]
+    others = [x for x in ALL_ARTICLES() if x["slug"] != a["slug"]][:3]
     rel = ''.join(
         f'<a class="card" href="/blog/{o["slug"]}/"><div class="card-body">'
         f'<span class="card-tag">{o["tag"]}</span><h3>{o["title"]}</h3>'
@@ -1358,6 +1360,54 @@ def build_article(a):
                  head(a["seo_title"], a["desc"], url, SITE + "/og-image.jpg", ld, a["kw"]) + body + FOOT)
 
 
+def disk_articles():
+    """Articles que existeixen a /blog/ i que aquest generador no coneix.
+
+    El generador nomes porta a ARTICLES els articles que ell mateix escriu.
+    Els que s'han escrit a ma quedaven fora de l'index i, en executar-lo,
+    desapareixien de /blog/ tot i seguir al disc: pagines orfes, invisibles per
+    a Google i per a qualsevol lector. Aqui es llegeixen del disc i s'afegeixen
+    a l'index, sense tornar a generar-ne el contingut.
+    """
+    known = {a["slug"] for a in ARTICLES}
+    found = []
+    base = "blog"
+    if not os.path.isdir(base):
+        return found
+    for slug in sorted(os.listdir(base)):
+        d = os.path.join(base, slug)
+        f = os.path.join(d, "index.html")
+        if slug in known or not os.path.isfile(f):
+            continue
+        html = io.open(f, encoding="utf-8").read()
+
+        def grab(pattern, default=""):
+            m = re.search(pattern, html, re.S | re.I)
+            return m.group(1).strip() if m else default
+
+        title = grab(r"<title>(.*?)</title>")
+        title = re.sub(r"\s*\|\s*CB Grup Barna\s*$", "", title)
+        title = re.sub(r"\s*&middot;.*$", "", title).strip()
+        desc = grab(r'<meta name="description" content="(.*?)"')
+        date = grab(r'"datePublished"\s*:\s*"([0-9]{4}-[0-9]{2}-[0-9]{2})"') \
+            or grab(r'<time[^>]*datetime="([0-9]{4}-[0-9]{2}-[0-9]{2})') \
+            or "2026-08-01"
+        tag = grab(r'<p class="eyebrow[^"]*">(.*?)</p>', "Guia per a fam&iacute;lies")
+        tag = re.sub(r"<[^>]+>", "", tag).strip() or "Guia"
+        lede = grab(r'<p class="lede"[^>]*>(.*?)</p>') or desc
+        lede = re.sub(r"<[^>]+>", "", lede).strip()
+        if len(lede) > 190:
+            lede = lede[:187].rsplit(" ", 1)[0] + "\u2026"
+        found.append({"slug": slug, "date": date, "tag": tag,
+                      "title": title, "desc": desc, "lede": lede, "on_disk": True})
+    return found
+
+
+def ALL_ARTICLES():
+    """ARTICLES + els que ja son al disc, ordenats del mes nou al mes antic."""
+    return sorted(ARTICLES + disk_articles(), key=lambda a: a.get("date", ""), reverse=True)
+
+
 def build_blog_index():
     url = SITE + "/blog/"
     title = "Blog del CB Grup Barna · Guies de bàsquet base a Barcelona"
@@ -1369,13 +1419,13 @@ def build_blog_index():
          "inLanguage": "ca-ES", "publisher": {"@id": SITE + "/#club"},
          "blogPost": [{"@type": "BlogPosting", "headline": a["title"],
                        "url": f"{SITE}/blog/{a['slug']}/", "datePublished": a["date"],
-                       "description": a["desc"]} for a in ARTICLES]},
+                       "description": a["desc"]} for a in ALL_ARTICLES()]},
         BREADCRUMB([("CB Grup Barna", "/"), ("Blog", "/blog/")]),
     ]}
     cards = ''.join(
         f'<a class="card" href="/blog/{a["slug"]}/"><div class="card-body">'
         f'<span class="card-tag">{a["tag"]}</span><h3>{a["title"]}</h3>'
-        f'<p>{a["lede"]}</p><span class="cta">Llegir</span></div></a>' for a in ARTICLES)
+        f'<p>{a["lede"]}</p><span class="cta">Llegir</span></div></a>' for a in ALL_ARTICLES())
     body = f"""
 {crumbs([("Inici", "/"), ("Blog", None)])}
 <div class="wrap">
@@ -1817,3 +1867,8 @@ if __name__ == "__main__":
         print(build_press_article(a))
     print(build_calendaris())
     print(f"\n{len(ARTICLES) + len(PRESS) + len(partner_pages) + 5} pàgines generades.")
+    extres = disk_articles()
+    if extres:
+        print(f"{len(extres)} articles escrits a ma, llegits del disc i inclosos a l'index:")
+        for e in extres:
+            print(f"   · /blog/{e['slug']}/")
