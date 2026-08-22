@@ -1,0 +1,584 @@
+<title>Radar de cerca del Barna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+:root{
+  --ink:#10100E; --ink-2:#57514C; --muted:#8B8279;
+  --paper:#FFFFFF; --surface:#F4F1EC; --surface-2:#EDE8E1;
+  --line:#E0DAD5; --line-2:#CFC7BF;
+  --red:#E20613; --red-ink:#A8040E; --red-wash:#FBE9E9;
+  --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --maxw:1180px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#F1EEEB; --ink-2:#B6ADA5; --muted:#8B8279;
+    --paper:#121110; --surface:#1A1817; --surface-2:#221F1D;
+    --line:#2E2A28; --line-2:#403A37;
+    --red:#FF3B41; --red-ink:#FF6A6E; --red-wash:#2A1413;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#F1EEEB; --ink-2:#B6ADA5; --muted:#8B8279;
+  --paper:#121110; --surface:#1A1817; --surface-2:#221F1D;
+  --line:#2E2A28; --line-2:#403A37;
+  --red:#FF3B41; --red-ink:#FF6A6E; --red-wash:#2A1413;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+a{color:inherit}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,44px)}
+.prose{max-width:68ch}
+
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:1.02;letter-spacing:.01em}
+h1{font-size:clamp(38px,7.5vw,74px)}
+h2{font-size:clamp(24px,3.6vw,38px)}
+h3{font-size:clamp(16px,2vw,20px);letter-spacing:.03em}
+p{color:var(--ink-2)}
+p+p{margin-top:.9em}
+strong{font-weight:600;color:var(--ink)}
+
+.lbl{font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.lbl.red{color:var(--red-ink)}
+
+/* ---- cap&#231;alera ---- */
+.top{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line)}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:11px clamp(18px,4vw,44px);display:flex;align-items:center;gap:16px}
+.top-nm{font-family:var(--display);font-size:15px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.top-nm em{font-style:normal;color:var(--red)}
+.top-nav{display:flex;gap:18px;margin-left:auto}
+.top-nav a{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}
+.top-nav a:hover{color:var(--ink);border-bottom-color:var(--red)}
+@media(max-width:820px){.top-nav{display:none}}
+
+.theme{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden;flex:none}
+.theme button{font-family:var(--body);font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:none;border:0;padding:7px 9px;cursor:pointer;min-height:34px}
+.theme button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.theme-now{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+@media(max-width:560px){.theme-now{display:none}}
+
+/* ---- portada ---- */
+.hero{padding:clamp(48px,8vw,96px) 0 clamp(32px,5vw,56px);border-bottom:1px solid var(--line)}
+.hero h1{margin:14px 0 0;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero .lede{margin-top:22px;font-size:clamp(15px,1.7vw,18px);max-width:60ch}
+.meta-row{display:flex;flex-wrap:wrap;gap:28px;margin-top:34px;padding-top:22px;border-top:1px solid var(--line)}
+.meta b{display:block;font-family:var(--display);font-size:30px;line-height:1;color:var(--red);font-variant-numeric:tabular-nums}
+.meta span{display:block;margin-top:6px}
+
+section{padding:clamp(44px,6.5vw,86px) 0;border-bottom:1px solid var(--line)}
+.sec-head{margin-bottom:clamp(24px,3.4vw,40px)}
+.sec-head h2{margin-top:10px;text-wrap:balance}
+.sec-head p{margin-top:14px;max-width:66ch}
+
+/* ---- taules ---- */
+.scroller{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+caption{text-align:left;padding:14px 16px;font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+th,td{text-align:left;padding:10px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+td.ca{font-weight:500;color:var(--ink)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.fam{font-family:var(--display);font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);background:var(--paper)}
+.fam td{padding:16px;border-top:2px solid var(--red);border-bottom:1px solid var(--line)}
+.pill{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--line-2);color:var(--muted);white-space:nowrap}
+.pill.no{color:var(--red-ink);border-color:var(--red);background:var(--red-wash)}
+.pill.si{color:var(--ink);border-color:var(--line-2);background:var(--surface-2)}
+
+/* ---- graella de fitxes ---- */
+.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:760px){.grid.c2{grid-template-columns:1fr 1fr}.grid.c3{grid-template-columns:repeat(3,1fr)}}
+.cell{background:var(--paper);padding:clamp(20px,2.6vw,30px)}
+.cell h3{margin:12px 0 10px}
+.cell p{font-size:13.5px}
+.cell .n{font-family:var(--display);font-size:13px;letter-spacing:.1em;color:var(--red)}
+
+/* ---- passos del mes ---- */
+.steps{border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:64px 1fr;gap:clamp(14px,2.6vw,30px);padding:22px 0;border-bottom:1px solid var(--line)}
+.step .d{font-family:var(--display);font-size:13px;letter-spacing:.08em;color:var(--red);padding-top:3px}
+.step h3{margin-bottom:8px}
+.step p{font-size:13.5px}
+
+.note{background:var(--surface);border-left:2px solid var(--red);padding:clamp(18px,2.4vw,26px);font-size:13.5px;color:var(--ink-2)}
+.note strong{color:var(--ink)}
+.note+.note{margin-top:14px}
+
+.brief{background:var(--surface);border:1px solid var(--line);padding:0}
+.brief-bar{display:flex;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.brief-bar .lbl{margin-right:auto}
+.brief-copy{font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:8px 14px;min-height:36px;background:var(--ink);color:var(--paper);border:0;cursor:pointer}
+.brief-copy:hover{background:var(--red)}
+.brief-ok{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink);opacity:0;transition:opacity .25s}
+.brief-ok.on{opacity:1}
+pre.brief-txt{margin:0;padding:clamp(18px,2.6vw,26px);overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.75;color:var(--ink-2);white-space:pre-wrap;word-wrap:break-word}
+footer{padding:44px 0 60px}
+footer p{font-size:11px;letter-spacing:.06em;color:var(--muted)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <span class="top-nm">Radar de cerca &#183; <em>Barna</em></span>
+    <nav class="top-nav">
+      <a href="#estat">Estat</a>
+      <a href="#paraules">Paraules</a>
+      <a href="#pla">Pla mensual</a>
+      <a href="#registre">Registre</a>
+      <a href="#encarrec">Enc&#224;rrec</a>
+    </nav>
+    <span class="theme-now" id="themeNow">Sistema</span>
+    <div class="theme" role="group" aria-label="Mode de color">
+      <button type="button" data-mode="system" aria-pressed="true">Sistema</button>
+      <button type="button" data-mode="light" aria-pressed="false">Clar</button>
+      <button type="button" data-mode="dark" aria-pressed="false">Fosc</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<div class="hero">
+  <p class="lbl red">CB Grup Barna &#183; Document de treball</p>
+  <h1>Amb quines paraules ens <em>busquen</em>, i qui ens guanya</h1>
+  <p class="lede">Les 240 cerques per les quals competim &#8212; 80 conceptes escrits en catal&#224;, castell&#224; i angl&#232;s, i el m&#232;tode per tornar-les a mesurar cada mes i saber si pugem o baixem. Aquesta &#233;s la fotografia del <strong>22 d'agost de 2026</strong>: abans de presentar la web nova, que &#233;s exactament quan s'ha de prendre.</p>
+  <div class="meta-row">
+    <div class="meta"><b>240</b><span class="lbl">Cerques &#183; 3 idiomes</span></div>
+    <div class="meta"><b>10</b><span class="lbl">Cerques ja mesurades</span></div>
+    <div class="meta"><b>4</b><span class="lbl">On sortim</span></div>
+    <div class="meta"><b>4</b><span class="lbl">Plataformes</span></div>
+  </div>
+</div>
+
+<section id="estat">
+  <div class="sec-head">
+    <p class="lbl">Punt de partida</p>
+    <h2>On som avui</h2>
+    <p>Deu cerques passades el 22 d'agost. Sortim a quatre. La lectura no &#233;s "estem malament": &#233;s que competim contra <strong>directoris, enciclop&#232;dies i llistats</strong>, no contra clubs &#8212; i que en castell&#224;, que &#233;s on hi ha el volum gran de Barcelona, no hi som.</p>
+  </div>
+
+  <div class="scroller">
+    <table>
+      <caption>Cerques mesurades &#183; 22 d'agost de 2026</caption>
+      <thead>
+        <tr><th scope="col">Paraula</th><th scope="col">Idioma</th><th scope="col">Hi som?</th><th scope="col">Qui mana</th><th scope="col">Lectura</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="ca">club de b&#224;squet base Barcelona</td><td>Catal&#224;</td><td><span class="pill si">S&#237; &#183; 3r</span></td><td>basquetcatala &#183; FC Barcelona &#183; CB Roser</td><td>El rival &#233;s la federaci&#243;, no un club.</td></tr>
+        <tr><td class="ca">b&#224;squet al Clot &#183; Sant Mart&#237;</td><td>Catal&#224;</td><td><span class="pill si">S&#237;</span></td><td>guia.barcelona.cat &#183; Ajuntament &#183; <strong>cbgrupbarna.com</strong></td><td>La nostra web antiga ens guanya al nostre propi barri.</td></tr>
+        <tr><td class="ca">escola de b&#224;squet Barcelona nens</td><td>Catal&#224;</td><td><span class="pill si">De rebot</span></td><td>Bar&#231;a Escola &#183; <strong>betev&#233;</strong> &#183; basquetcatala</td><td>Qui posiciona per nosaltres &#233;s un mitj&#224;, no la nostra Escoleta.</td></tr>
+        <tr><td class="ca">CB Grup Barna opinions</td><td>Marca</td><td><span class="pill si">S&#237;</span></td><td><strong>cbgrupbarna.com</strong> &#183; Foursquare &#183; X</td><td>I no hi ha cap ressenya enlloc.</td></tr>
+        <tr><td class="ca">b&#224;squet femen&#237; Barcelona</td><td>Catal&#224;</td><td><span class="pill no">No</span></td><td>enciclopedia.cat &#183; Viquip&#232;dia &#183; FC Barcelona</td><td>Invisibles amb tres p&#224;gines de femen&#237; publicades.</td></tr>
+        <tr><td class="ca">campus de b&#224;squet Barcelona</td><td>Catal&#224;</td><td><span class="pill no">No</span></td><td>Nacho Solozabal &#183; FCBQ &#183; Bar&#231;a Escola Campus</td><td>Paraula 100 % d'inscripci&#243;. Aqu&#237; es perden altes.</td></tr>
+        <tr><td class="ca">acad&#232;mia de b&#224;squet Barcelona</td><td>Catal&#224;</td><td><span class="pill no">No</span></td><td>Competize &#183; ToYouToMe &#183; Beast Academy</td><td>Manen els llistats, no els clubs.</td></tr>
+        <tr><td class="ca">baloncesto base Barcelona ni&#241;os</td><td>Castell&#224;</td><td><span class="pill no">No</span></td><td>Bar&#231;a Academy &#183; 4 llistats &#183; CB Roser i CB Coll citats</td><td>En castell&#224; no existim.</td></tr>
+        <tr><td class="ca">apuntar a mi hija a baloncesto</td><td>Castell&#224;</td><td><span class="pill no">No</span></td><td>FC Barcelona (&#215;4) &#183; css.cat</td><td>La cerca d'una mare decidida. No hi som.</td></tr>
+        <tr><td class="ca">baloncesto inclusivo Barcelona</td><td>Castell&#224;</td><td><span class="pill no">No</span></td><td>Bar&#231;a Genuine &#183; Guttmann &#183; Discapnet</td><td>Tenim els M&#224;gics. &#201;s la vict&#242;ria m&#233;s barata.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note" style="margin-top:22px"><strong>Com s'ha mesurat i qu&#232; no val.</strong> Amb un cercador integrat, no amb Google des de Barcelona: no hi ha geolocalitzaci&#243; ni resultats locals. Serveix per saber <strong>contra qui competim</strong>, no per donar posicions exactes. Les posicions reals surten quan es passa la tanda des del m&#242;bil, tal com diu el pla.</div>
+</section>
+
+<section id="paraules">
+  <div class="sec-head">
+    <p class="lbl">El diccionari</p>
+    <h2>Les paraules, en tres idiomes</h2>
+    <p>Cada fila &#233;s <strong>un concepte</strong>, no una traducci&#243; literal: &#233;s com ho escriuria una fam&#237;lia catalana, una castellana i una anglesa. La columna d'URL diu quina p&#224;gina nostra ha de respondre. Si una paraula no t&#233; p&#224;gina assignada, aquest &#233;s el forat.</p>
+  </div>
+
+  <div class="scroller">
+    <table>
+      <caption>68 conceptes &#183; catal&#224; &#183; castell&#224; &#183; angl&#232;s &#183; 204 cerques</caption>
+      <thead>
+        <tr><th scope="col" style="width:24%">Catal&#224;</th><th scope="col" style="width:24%">Castell&#224;</th><th scope="col" style="width:24%">Angl&#232;s</th><th scope="col" style="width:18%">P&#224;gina nostra</th><th scope="col" style="width:10%">Prio.</th></tr>
+      </thead>
+      <tbody>
+        <tr class="fam"><td colspan="5">Club i b&#224;squet base</td></tr>
+        <tr><td class="ca">club de b&#224;squet base Barcelona</td><td>club de baloncesto base Barcelona</td><td>grassroots basketball club Barcelona</td><td>/</td><td class="num">1</td></tr>
+        <tr><td class="ca">b&#224;squet base Barcelona</td><td>baloncesto base Barcelona</td><td>youth basketball Barcelona</td><td>/</td><td class="num">1</td></tr>
+        <tr><td class="ca">clubs de b&#224;squet de Barcelona</td><td>clubes de baloncesto de Barcelona</td><td>basketball clubs in Barcelona</td><td>/posicionament/</td><td class="num">2</td></tr>
+        <tr><td class="ca">on jugar a b&#224;squet a Barcelona</td><td>d&#243;nde jugar baloncesto en Barcelona</td><td>where to play basketball in Barcelona</td><td>/</td><td class="num">2</td></tr>
+        <tr><td class="ca">b&#224;squet a prop meu</td><td>baloncesto cerca de m&#237;</td><td>basketball near me</td><td>/ (fitxa de Maps)</td><td class="num">1</td></tr>
+
+        <tr class="fam"><td colspan="5">Barri i districte</td></tr>
+        <tr><td class="ca">b&#224;squet al Clot</td><td>baloncesto en El Clot</td><td>basketball in El Clot</td><td>/</td><td class="num">1</td></tr>
+        <tr><td class="ca">b&#224;squet Sant Mart&#237;</td><td>baloncesto Sant Mart&#237;</td><td>basketball Sant Mart&#237; Barcelona</td><td>/blog/basquet-base-sant-marti-clot/</td><td class="num">1</td></tr>
+        <tr><td class="ca">club esportiu Sant Mart&#237;</td><td>club deportivo Sant Mart&#237;</td><td>sports club Sant Mart&#237;</td><td>/club/</td><td class="num">2</td></tr>
+        <tr><td class="ca">b&#224;squet Poblenou</td><td>baloncesto Poblenou</td><td>basketball Poblenou</td><td>/</td><td class="num">2</td></tr>
+        <tr><td class="ca">b&#224;squet Gl&#242;ries</td><td>baloncesto Gl&#242;ries</td><td>basketball Gl&#242;ries</td><td>/3x3/</td><td class="num">2</td></tr>
+
+        <tr class="fam"><td colspan="5">Escola i iniciaci&#243; &#183; 4 a 8 anys</td></tr>
+        <tr><td class="ca">escola de b&#224;squet Barcelona</td><td>escuela de baloncesto Barcelona</td><td>basketball school Barcelona</td><td>/escoleta/</td><td class="num">1</td></tr>
+        <tr><td class="ca">escoleta de b&#224;squet</td><td>escuela de iniciaci&#243;n al baloncesto</td><td>basketball for young beginners</td><td>/escoleta/</td><td class="num">1</td></tr>
+        <tr><td class="ca">b&#224;squet per a nens de 4 anys</td><td>baloncesto para ni&#241;os de 4 a&#241;os</td><td>basketball for 4 year olds</td><td>/escoleta/</td><td class="num">1</td></tr>
+        <tr><td class="ca">b&#224;squet per a nenes</td><td>baloncesto para ni&#241;as</td><td>basketball for girls</td><td>/basquet-femeni/</td><td class="num">1</td></tr>
+        <tr><td class="ca">apuntar el meu fill a b&#224;squet</td><td>apuntar a mi hijo a baloncesto</td><td>sign my child up for basketball</td><td>/escoleta/</td><td class="num">1</td></tr>
+        <tr><td class="ca">extraescolar de b&#224;squet Barcelona</td><td>extraescolar de baloncesto Barcelona</td><td>after-school basketball Barcelona</td><td>/escoleta/</td><td class="num">2</td></tr>
+
+        <tr class="fam"><td colspan="5">Acad&#232;mia i tecnificaci&#243;</td></tr>
+        <tr><td class="ca">acad&#232;mia de b&#224;squet Barcelona</td><td>academia de baloncesto Barcelona</td><td>basketball academy Barcelona</td><td>/</td><td class="num">1</td></tr>
+        <tr><td class="ca">tecnificaci&#243; de b&#224;squet</td><td>tecnificaci&#243;n de baloncesto</td><td>basketball skills training</td><td>/campus/</td><td class="num">2</td></tr>
+        <tr><td class="ca">entrenament individual de b&#224;squet</td><td>entrenamiento individual de baloncesto</td><td>private basketball training</td><td>/campus/</td><td class="num">3</td></tr>
+        <tr><td class="ca">escola, club o acad&#232;mia?</td><td>&#191;escuela, club o academia?</td><td>school, club or academy?</td><td>/blog/com-triar-escola-basquet-barcelona/</td><td class="num">1</td></tr>
+
+        <tr class="fam"><td colspan="5">Campus</td></tr>
+        <tr><td class="ca">campus de b&#224;squet Barcelona</td><td>campus de baloncesto Barcelona</td><td>basketball camp Barcelona</td><td>/campus/</td><td class="num">1</td></tr>
+        <tr><td class="ca">campus d'estiu de b&#224;squet</td><td>campus de verano de baloncesto</td><td>summer basketball camp</td><td>/campus/</td><td class="num">1</td></tr>
+        <tr><td class="ca">campus de b&#224;squet per a nens</td><td>campus de baloncesto para ni&#241;os</td><td>basketball camp for kids</td><td>/campus/</td><td class="num">1</td></tr>
+        <tr><td class="ca">campus de b&#224;squet per a nenes</td><td>campus de baloncesto para ni&#241;as</td><td>girls basketball camp</td><td>/campus/</td><td class="num">1</td></tr>
+        <tr><td class="ca">inscripcions campus de b&#224;squet</td><td>inscripciones campus de baloncesto</td><td>basketball camp registration</td><td>/campus/</td><td class="num">1</td></tr>
+        <tr><td class="ca">preu del campus de b&#224;squet</td><td>precio campus de baloncesto</td><td>basketball camp price</td><td>/campus/</td><td class="num">1</td></tr>
+        <tr><td class="ca">campus de b&#224;squet al juliol</td><td>campus de baloncesto en julio</td><td>july basketball camp</td><td>/campus/</td><td class="num">2</td></tr>
+        <tr><td class="ca">campus de b&#224;squet al Clot</td><td>campus de baloncesto en El Clot</td><td>basketball camp El Clot</td><td>/campus/</td><td class="num">2</td></tr>
+        <tr><td class="ca">campus de tecnificaci&#243; de b&#224;squet</td><td>campus de tecnificaci&#243;n de baloncesto</td><td>basketball skills camp</td><td>/campus/</td><td class="num">2</td></tr>
+        <tr><td class="ca">setmana de campus de b&#224;squet</td><td>semana de campus de baloncesto</td><td>basketball camp week</td><td>/campus/</td><td class="num">2</td></tr>
+        <tr><td class="ca">casal d'estiu esportiu Barcelona</td><td>campamento deportivo de verano Barcelona</td><td>summer sports camp Barcelona</td><td>/campus/</td><td class="num">2</td></tr>
+        <tr><td class="ca">campus de b&#224;squet amb menjador</td><td>campus de baloncesto con comedor</td><td>basketball camp with lunch</td><td>/campus/</td><td class="num">3</td></tr>
+        <tr><td class="ca">campus de b&#224;squet en angl&#232;s</td><td>campus de baloncesto en ingl&#233;s</td><td>English basketball camp Barcelona</td><td>/campus/</td><td class="num">3</td></tr>
+        <tr><td class="ca">com triar un campus de b&#224;squet</td><td>c&#243;mo elegir un campus de baloncesto</td><td>how to choose a basketball camp</td><td>/blog/campus-basquet-barcelona-guia/</td><td class="num">2</td></tr>
+
+        <tr class="fam"><td colspan="5">Femen&#237;</td></tr>
+        <tr><td class="ca">b&#224;squet femen&#237; Barcelona</td><td>baloncesto femenino Barcelona</td><td>women's basketball Barcelona</td><td>/basquet-femeni/</td><td class="num">1</td></tr>
+        <tr><td class="ca">club de b&#224;squet femen&#237;</td><td>club de baloncesto femenino</td><td>girls basketball club</td><td>/basquet-femeni/</td><td class="num">1</td></tr>
+        <tr><td class="ca">equip femen&#237; de b&#224;squet</td><td>equipo femenino de baloncesto</td><td>girls basketball team</td><td>/basquet-femeni/</td><td class="num">2</td></tr>
+        <tr><td class="ca">paritat en clubs esportius</td><td>paridad en clubes deportivos</td><td>gender parity in sports clubs</td><td>/premidonaesport/</td><td class="num">2</td></tr>
+        <tr><td class="ca">el M&#232;tode Barna</td><td>el M&#233;todo Barna</td><td>the Barna Method</td><td>/basquet-femeni/el-metode-barna/</td><td class="num">2</td></tr>
+
+        <tr class="fam"><td colspan="5">Inclusi&#243; &#183; Barna M&#224;gics</td></tr>
+        <tr><td class="ca">b&#224;squet inclusiu Barcelona</td><td>baloncesto inclusivo Barcelona</td><td>inclusive basketball Barcelona</td><td>/magics/</td><td class="num">1</td></tr>
+        <tr><td class="ca">b&#224;squet i discapacitat intel&#183;lectual</td><td>baloncesto y discapacidad intelectual</td><td>basketball intellectual disability</td><td>/magics/</td><td class="num">1</td></tr>
+        <tr><td class="ca">esport adaptat Sant Mart&#237;</td><td>deporte adaptado Sant Mart&#237;</td><td>adaptive sport Barcelona</td><td>/magics/</td><td class="num">2</td></tr>
+
+        <tr class="fam"><td colspan="5">3x3</td></tr>
+        <tr><td class="ca">3x3 Barcelona</td><td>3x3 Barcelona</td><td>3x3 basketball Barcelona</td><td>/3x3/</td><td class="num">1</td></tr>
+        <tr><td class="ca">torneig 3x3 de b&#224;squet</td><td>torneo 3x3 de baloncesto</td><td>3x3 basketball tournament</td><td>/3x3/</td><td class="num">1</td></tr>
+        <tr><td class="ca">3x3 Westfield Gl&#242;ries</td><td>3x3 Westfield Gl&#242;ries</td><td>3x3 Westfield Gl&#242;ries</td><td>/3x3/</td><td class="num">1</td></tr>
+        <tr><td class="ca">inscripcions torneig 3x3</td><td>inscripciones torneo 3x3</td><td>3x3 tournament registration</td><td>/3x3/</td><td class="num">1</td></tr>
+        <tr><td class="ca">b&#224;squet al carrer Barcelona</td><td>baloncesto en la calle Barcelona</td><td>street basketball Barcelona</td><td>/3x3/</td><td class="num">2</td></tr>
+        <tr><td class="ca">torneig 3x3 juvenil</td><td>torneo 3x3 juvenil</td><td>youth 3x3 tournament</td><td>/3x3/</td><td class="num">2</td></tr>
+        <tr><td class="ca">campionat 3x3 Catalunya</td><td>campeonato 3x3 Catalu&#241;a</td><td>3x3 championship Catalonia</td><td>/3x3/</td><td class="num">2</td></tr>
+        <tr><td class="ca">pista de 3x3 a Barcelona</td><td>pista de 3x3 en Barcelona</td><td>3x3 court Barcelona</td><td>/3x3/</td><td class="num">3</td></tr>
+        <tr><td class="ca">qu&#232; &#233;s el b&#224;squet 3x3</td><td>qu&#233; es el baloncesto 3x3</td><td>what is 3x3 basketball</td><td>/blog/que-es-basquet-3x3/</td><td class="num">2</td></tr>
+        <tr><td class="ca">regles del b&#224;squet 3x3</td><td>reglas del baloncesto 3x3</td><td>3x3 basketball rules</td><td>/blog/que-es-basquet-3x3/</td><td class="num">2</td></tr>
+        <tr><td class="ca">b&#224;squet 3x3 ol&#237;mpic</td><td>baloncesto 3x3 ol&#237;mpico</td><td>Olympic 3x3 basketball</td><td>/blog/que-es-basquet-3x3/</td><td class="num">3</td></tr>
+
+        <tr class="fam"><td colspan="5">Marca</td></tr>
+        <tr><td class="ca">CB Grup Barna</td><td>CB Grup Barna</td><td>CB Grup Barna</td><td>/</td><td class="num">1</td></tr>
+        <tr><td class="ca">Grup Barna b&#224;squet</td><td>Grup Barna baloncesto</td><td>Grup Barna basketball</td><td>/</td><td class="num">1</td></tr>
+        <tr><td class="ca">CB Grup Barna ressenyes</td><td>CB Grup Barna opiniones</td><td>CB Grup Barna reviews</td><td>/opina/</td><td class="num">1</td></tr>
+        <tr><td class="ca">&#233;s bo el CB Grup Barna?</td><td>&#191;qu&#233; tal es el CB Grup Barna?</td><td>is CB Grup Barna any good?</td><td>/opina/</td><td class="num">1</td></tr>
+
+        <tr class="fam"><td colspan="5">Guies per a fam&#237;lies</td></tr>
+        <tr><td class="ca">a quina edat comen&#231;ar a jugar a b&#224;squet</td><td>a qu&#233; edad empezar a jugar baloncesto</td><td>what age to start basketball</td><td>/blog/a-quina-edat-comencar-basquet/</td><td class="num">1</td></tr>
+        <tr><td class="ca">com triar un club de b&#224;squet</td><td>c&#243;mo elegir un club de baloncesto</td><td>how to choose a basketball club</td><td>/blog/com-triar-escola-basquet-barcelona/</td><td class="num">1</td></tr>
+        <tr><td class="ca">per qu&#232; les noies deixen l'esport</td><td>por qu&#233; las ni&#241;as dejan el deporte</td><td>why girls quit sport</td><td>/blog/per-que-les-noies-deixen-el-basquet/</td><td class="num">1</td></tr>
+        <tr><td class="ca">club segur per a menors</td><td>club seguro para menores</td><td>safe sports club for children</td><td>/blog/club-basquet-segur-igualtat-families/</td><td class="num">1</td></tr>
+        <tr><td class="ca">protecci&#243; del menor a l'esport</td><td>protecci&#243;n del menor en el deporte</td><td>child protection in sport</td><td>/proteccio-menor/</td><td class="num">1</td></tr>
+        <tr><td class="ca">entrenadores de b&#224;squet</td><td>entrenadoras de baloncesto</td><td>women basketball coaches</td><td>/blog/entrenadores-basquet-barcelona/</td><td class="num">2</td></tr>
+
+        <tr class="fam"><td colspan="5">Competici&#243; i institucional</td></tr>
+        <tr><td class="ca">calendari de partits</td><td>calendario de partidos</td><td>match schedule</td><td>/partits/</td><td class="num">2</td></tr>
+        <tr><td class="ca">resultats de b&#224;squet base a Catalunya</td><td>resultados de baloncesto base en Catalu&#241;a</td><td>Catalan youth basketball results</td><td>/partits/</td><td class="num">2</td></tr>
+        <tr><td class="ca">patrocinar un club esportiu</td><td>patrocinar un club deportivo</td><td>sponsor a sports club</td><td>/patrocinadors/</td><td class="num">1</td></tr>
+        <tr><td class="ca">patrocini esportiu Barcelona</td><td>patrocinio deportivo Barcelona</td><td>sports sponsorship Barcelona</td><td>/patrocinadors/</td><td class="num">2</td></tr>
+        <tr><td class="ca">hist&#242;ria del b&#224;squet al Clot</td><td>historia del baloncesto en El Clot</td><td>history of basketball in El Clot</td><td>/historia/</td><td class="num">3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="scroller" style="margin-top:26px">
+    <table>
+      <caption>Cerques dins d'Instagram i TikTok &#183; s'escriuen curtes i sense accents</caption>
+      <thead><tr><th scope="col">Catal&#224;</th><th scope="col">Castell&#224;</th><th scope="col">Angl&#232;s</th><th scope="col">On</th><th scope="col">Qu&#232; comprovem</th></tr></thead>
+      <tbody>
+        <tr><td class="ca">b&#224;squet barcelona</td><td>baloncesto barcelona</td><td>basketball barcelona</td><td>IG + TikTok</td><td>Si el perfil surt a la pestanya de comptes.</td></tr>
+        <tr><td class="ca">b&#224;squet clot</td><td>baloncesto clot</td><td>basketball clot</td><td>IG + TikTok</td><td>Territori propi: hi hem de ser primers.</td></tr>
+        <tr><td class="ca">b&#224;squet base</td><td>baloncesto base</td><td>youth basketball</td><td>IG + TikTok</td><td>Qui ocupa el top 3: clubs o creadors?</td></tr>
+        <tr><td class="ca">b&#224;squet femen&#237;</td><td>baloncesto femenino</td><td>womens basketball</td><td>IG + TikTok</td><td>Si el contingut femen&#237; es troba.</td></tr>
+        <tr><td class="ca">campus b&#224;squet</td><td>campus baloncesto</td><td>basketball camp</td><td>IG + TikTok</td><td>Si els posts de campus surten en temporada.</td></tr>
+        <tr><td class="ca">escola b&#224;squet nens</td><td>escuela baloncesto ni&#241;os</td><td>basketball school kids</td><td>IG</td><td>Si l'Escoleta es troba fora de la web.</td></tr>
+        <tr><td class="ca">b&#224;squet inclusiu</td><td>baloncesto inclusivo</td><td>inclusive basketball</td><td>IG</td><td>Si els M&#224;gics existeixen a la cerca.</td></tr>
+        <tr><td class="ca">3x3 barcelona</td><td>3x3 barcelona</td><td>3x3 barcelona</td><td>IG + TikTok</td><td>Si el torneig surt tot l'any o nom&#233;s al juny.</td></tr>
+        <tr><td class="ca">entrenament b&#224;squet nens</td><td>entrenamiento baloncesto ni&#241;os</td><td>basketball training kids</td><td>TikTok</td><td>Contra entrenadors creadors, no contra clubs.</td></tr>
+        <tr><td class="ca">jugades de b&#224;squet</td><td>jugadas de baloncesto</td><td>basketball highlights</td><td>TikTok</td><td>Si els nostres clips competeixen.</td></tr>
+        <tr><td class="ca">cb grup barna</td><td>cb grup barna</td><td>cb grup barna</td><td>IG + TikTok</td><td>Marca: hi hem de sortir primers sempre.</td></tr>
+        <tr><td class="ca">somclot</td><td>somclot</td><td>somclot</td><td>IG + TikTok</td><td>Qui m&#233;s fa servir el nostre hashtag.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="pla">
+  <div class="sec-head">
+    <p class="lbl">El m&#232;tode</p>
+    <h2>Com es mesura cada mes</h2>
+    <p>Sempre igual, o els n&#250;meros no es poden comparar. <strong>El primer dilluns de cada mes</strong>, des del m&#242;bil i amb la sessi&#243; tancada. Una hora de feina.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <span class="d">Pas 1</span>
+      <div><h3>Preparar el terreny</h3><p>M&#242;bil, navegaci&#243; privada, sessi&#243; tancada a Instagram i TikTok. Si es cerca des del compte del club, les dues xarxes ensenyen el que ja segueixes i el resultat surt maquillat. Idioma del tel&#232;fon en catal&#224; per a la tanda catalana i en castell&#224; per a la castellana.</p></div>
+    </div>
+    <div class="step">
+      <span class="d">Pas 2</span>
+      <div><h3>Passar les 30 cerques fixes</h3><p>Sempre les mateixes 30, en el mateix ordre: 16 a Google (8 en catal&#224;, 8 en castell&#224;), 6 a Instagram, 5 a TikTok i 3 preguntes a les IA. Les de prioritat 1 es repeteixen tres vegades, perqu&#232; aquests cercadors varien entre consulta i consulta.</p></div>
+    </div>
+    <div class="step">
+      <span class="d">Pas 3</span>
+      <div><h3>Anotar posici&#243; i rivals</h3><p>Per a cada cerca: si hi som, en quina posici&#243;, i <strong>els tres que surten per sobre</strong>. Quan no hi som, s'anota igualment qui guanya: saber qui ens passa al davant &#233;s la meitat de la informaci&#243;.</p></div>
+    </div>
+    <div class="step">
+      <span class="d">Pas 4</span>
+      <div><h3>Captura de pantalla de tot</h3><p>Amb la data visible. &#201;s la prova i &#233;s el que permet, d'aqu&#237; a sis mesos, mirar enrere i saber qu&#232; va canviar exactament.</p></div>
+    </div>
+    <div class="step">
+      <span class="d">Pas 5</span>
+      <div><h3>Comptar seguidors i ressenyes</h3><p>Els deu clubs de la llista, el mateix dia. I el nombre de ressenyes de Google, que &#233;s l'&#250;nic n&#250;mero d'aquest quadre que puja nom&#233;s si el club hi treballa.</p></div>
+    </div>
+    <div class="step">
+      <span class="d">Trimestre</span>
+      <div><h3>La passada llarga</h3><p>Cada tres mesos, en comptes de 30 cerques se'n passen les 240 senceres, incloent-hi l'angl&#232;s. Marca el mapa complet i detecta forats nous.</p></div>
+    </div>
+  </div>
+
+  <div class="grid c3" style="margin-top:34px">
+    <div class="cell"><span class="n">Senyal</span><h3>Canvi de rival al top 3</h3><p>Si apareix o desapareix alg&#250; dels tres primers, ha passat alguna cosa de veritat. &#201;s el canvi que m&#233;s informa.</p></div>
+    <div class="cell"><span class="n">Soroll</span><h3>Pujar o baixar dues posicions</h3><p>Els cercadors ballen sols. Per sota de tres posicions de difer&#232;ncia, no s'hi toca res i no s'explica a ning&#250;.</p></div>
+    <div class="cell"><span class="n">Alerta</span><h3>Desapar&#232;ixer del tot</h3><p>Si una cerca on hi &#233;rem deixa de donar-nos, es mira aquell mateix dia: sol ser un canvi t&#232;cnic a la p&#224;gina, no el mercat.</p></div>
+  </div>
+</section>
+
+<section id="registre">
+  <div class="sec-head">
+    <p class="lbl">Els n&#250;meros</p>
+    <h2>El registre mensual</h2>
+    <p>Set indicadors. La columna d'agost &#233;s el punt de partida real; la resta s'omplen cada mes. El que importa no &#233;s la xifra d'un mes, &#233;s <strong>la direcci&#243; al llarg de tres</strong>.</p>
+  </div>
+
+  <div class="scroller">
+    <table>
+      <caption>Quadre de seguiment &#183; temporada 2026-27</caption>
+      <thead>
+        <tr>
+          <th scope="col" style="width:26%">Indicador</th>
+          <th scope="col" style="width:26%">Com es calcula</th>
+          <th scope="col">Ago 26</th><th scope="col">Set</th><th scope="col">Oct</th>
+          <th scope="col">Nov</th><th scope="col">Des</th><th scope="col">Gen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="ca">Cerques on sortim</td><td>De les 16 de Google, a quantes apareixem</td><td class="num">4 / 10</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="ca">Cerques on som top 3</td><td>Apar&#232;ixer entre els tres primers</td><td class="num">1 / 10</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="ca">Cobertura en castell&#224;</td><td>Cerques en castell&#224; on sortim</td><td class="num">0 / 3</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="ca">Mencions de les IA</td><td>De 9 respostes (3 preguntes &#215; 3 assistents), en quantes ens citen</td><td class="num">Pendent</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="ca">Citacions amb enlla&#231;</td><td>De les mencions, quantes enllacen cbgrupbarna.info</td><td class="num">Pendent</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="ca">Ressenyes a Google</td><td>Total a la fitxa del club &#183; objectiu 300</td><td class="num">0 trobades</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="ca">Seguidors d'Instagram</td><td>I la dist&#224;ncia amb SESE, el rival de paritat</td><td class="num">Pendent</td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note" style="margin-top:22px"><strong>Per qu&#232; agost &#233;s bon mes per comen&#231;ar, encara que sembli el pitjor.</strong> La web nova no s'ha presentat i mig Barcelona &#233;s fora. Precisament per aix&#242;: aquest &#233;s el <strong>zero</strong>. Si esperem a haver-la anunciat, ja no sabrem qu&#232; va moure els n&#250;meros &#8212; si la web, la campanya de ressenyes o el comen&#231;ament de temporada. La foto d'avui &#233;s la que dona sentit a totes les seg&#252;ents.</div>
+
+  <div class="note"><strong>Els tres n&#250;meros que decidiran el curs.</strong> Cobertura en castell&#224; (avui zero de tres), campus a l'abril &#8212; quan la gent hi busca de veritat &#8212; i ressenyes a Google. Si al gener aquests tres han pujat, la feina serveix. La resta &#233;s context.</div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="lbl">El que ja sabem que cal fer</p>
+    <h2>Vuit coses, per ordre d'impacte</h2>
+  </div>
+  <div class="grid c2">
+    <div class="cell"><span class="n">Junta</span><h3>Decidir qu&#232; fem amb el .com</h3><p>cbgrupbarna.com surt per sobre de cbgrupbarna.info fins i tot buscant la marca i el barri. Ens fem la compet&#232;ncia a nosaltres mateixos. Redirigir o repartir-se els temes: cal decidir-ho.</p></div>
+    <div class="cell"><span class="n">Contingut</span><h3>Existir en castell&#224;</h3><p>Zero de tres a les generiques castellanes. &#201;s on hi ha el volum gran de Barcelona.</p></div>
+    <div class="cell"><span class="n">Premsa</span><h3>Entrar als quatre llistats</h3><p>Competize, ToYouToMe, MejorValorados i shbarcelona decideixen qui &#233;s &#171;la millor escola de Barcelona&#187;. Sortir-hi val m&#233;s que qualsevol canvi t&#232;cnic &#8212; i &#233;s una trucada, no codi.</p></div>
+    <div class="cell"><span class="n">Web</span><h3>Que l'Escoleta es trobi sola</h3><p>Avui, a &#171;escola de b&#224;squet Barcelona nens&#187;, qui posiciona per nosaltres &#233;s un article de betev&#233;. El mitj&#224; es queda el tr&#224;nsit que hauria d'anar a la nostra p&#224;gina.</p></div>
+    <div class="cell"><span class="n">Web</span><h3>Desfer la canibalitzaci&#243; femenina</h3><p>/femeni/ i /basquet-femeni/ competeixen entre elles i el resultat &#233;s que no surt cap de les dues.</p></div>
+    <div class="cell"><span class="n">Web</span><h3>Una sola adre&#231;a a tot arreu</h3><p>guia.barcelona.cat diu Pla&#231;a Canonge Rod&#243; 2; la nostra web diu Llacuna 172. Per a cerca local, aix&#242; &#233;s determinant.</p></div>
+    <div class="cell"><span class="n">Comunitat</span><h3>Ressenyes a Google</h3><p>No se n'ha trobat cap enlloc. La p&#224;gina /opina ja est&#224; feta i publicada: nom&#233;s falta difondre-la.</p></div>
+    <div class="cell"><span class="n">Contingut</span><h3>Els M&#224;gics, a la primera p&#224;gina</h3><p>Tenim un equip inclusiu real i som invisibles en una cerca amb poqu&#237;ssima compet&#232;ncia local. &#201;s la vict&#242;ria m&#233;s barata del mapa.</p></div>
+  </div>
+</section>
+
+<section id="encarrec">
+  <div class="sec-head">
+    <p class="lbl">Per a una sessio amb internet</p>
+    <h2>L'encarrec, llest per copiar</h2>
+    <p>Aquest document es la base; el que falta es una sessio amb acces a internet que passi les cerques de veritat. Copia aquest text, enganxa'l alla i adjunta-hi aquesta pagina. Ja porta el context, el que ja sabem i el format de resposta que volem, perque no comenci de zero ni repeteixi feina.</p>
+  </div>
+  <div class="brief">
+    <div class="brief-bar">
+      <span class="lbl">Encarrec complet &#183; SEO, GEO, captions i competencia</span>
+      <span class="brief-ok" id="briefOk">Copiat</span>
+      <button class="brief-copy" type="button" id="briefCopy">Copiar encarrec</button>
+    </div>
+    <pre class="brief-txt" id="briefTxt">ENCARGO &#183; Auditor&#237;a profunda de SEO, GEO y redes &#183; CB Grup Barna
+
+CONTEXTO
+Club de baloncesto base de Barcelona, barrio de El Clot, distrito de Sant Marti.
+Fundado en 1965. Mas de 34 equipos federados y unas 450 familias. Paridad real
+entre linea masculina y femenina. Equipo inclusivo: Barna Magics.
+Web principal: https://cbgrupbarna.info  &#183;  Web antigua: https://cbgrupbarna.com
+Instagram y TikTok: @cbgrupbarna  &#183;  Idiomas: catalan (principal), castellano, ingles.
+
+QUE YA SABEMOS (no lo repitas, verificalo y amplialo)
+1. En 10 busquedas de agosto de 2026 salimos en 4. En castellano, en ninguna.
+2. cbgrupbarna.com (web antigua) posiciona por encima de cbgrupbarna.info
+   incluso para la marca y para el barrio.
+3. En "escola de basquet Barcelona nens" posiciona un articulo de betev&#233; sobre
+   el club, no nuestra pagina /escoleta/.
+4. Somos invisibles en: campus, academia, baloncesto femenino y baloncesto
+   inclusivo.
+5. Mandan los listados: Competize, ToYouToMe, MejorValorados, shbarcelona.
+6. Dos paginas nuestras compiten entre si: /femeni/ y /basquet-femeni/.
+7. La direccion no coincide: guia.barcelona.cat dice Plaza Canonge Rodo 2
+   (08026) y nuestra web dice Llacuna 172 (08018).
+8. No se ha encontrado ninguna resena del club en ninguna plataforma.
+
+TAREA 1 &#183; POSICIONES REALES EN BUSCADORES
+Pasa las 240 busquedas del documento adjunto (68 conceptos en catalan,
+castellano e ingles) en Google, geolocalizado en Barcelona y en sesion privada.
+Para cada una anota: si aparece cbgrupbarna.info, en que posicion, con que URL,
+si aparece el paquete local de Maps, y los TRES resultados que estan por encima.
+Marca aparte los casos en que quien posiciona es cbgrupbarna.com o un tercero
+que habla de nosotros.
+
+TAREA 2 &#183; GEO &#183; COMO NOS CUENTAN LAS IA
+Lanza estas preguntas en ChatGPT, Perplexity, Gemini y Copilot, en catalan y en
+castellano, tres veces cada una (las respuestas varian):
+ - A que club de baloncesto apunto a mi hija en Barcelona?
+ - Mejor club de baloncesto base en Barcelona
+ - Donde apuntar a un nino de 5 anos a baloncesto en Barcelona
+ - Clubes de baloncesto inclusivos en Barcelona
+ - Campus de baloncesto en Barcelona para el verano
+ - Es fiable el CB Grup Barna?
+Registra por respuesta: si nos menciona, en que puesto de la lista, si enlaza y
+a que dominio, que datos usa, si son correctos, de que fuente parecen salir y
+si alucina algo. Calcula: cobertura de mencion, tasa de citacion con enlace y
+tasa de alucinacion.
+
+TAREA 3 &#183; SEO DE LOS CAPTIONS DE INSTAGRAM
+Analiza los ultimos 30 posts y 20 reels de @cbgrupbarna. Por pieza:
+ - Primeras 125 caracteres del caption: llevan palabra clave o solo gancho?
+ - Palabras clave presentes y ausentes segun la lista del documento.
+ - Texto alternativo (alt) relleno o vacio.
+ - Texto en pantalla y, en reels, lo que se dice en voz alta (Instagram
+   transcribe el audio y lo indexa).
+ - Hashtags: cuantos, cuales y si filtran algo real.
+Recuerda el orden de peso en la busqueda de Instagram: campo Nombre del perfil,
+usuario, caption, texto en pantalla, transcripcion del audio, alt, hashtags.
+El campo Nombre es hoy "Basquet al Clot &#183; Barcelona": comprueba si con eso
+salimos en las busquedas del documento y contra quien.
+Entrega: plantilla de caption que mantenga el gancho y ademas posicione.
+
+TAREA 4 &#183; SEO DE TIKTOK
+Mismo analisis sobre @cbgrupbarna en TikTok, con el orden de peso propio de la
+plataforma: lo que se dice en voz alta (transcripcion automatica), texto en
+pantalla, caption, hashtags. Anota ademas las sugerencias de la barra de
+busqueda para las palabras del documento: son investigacion de palabras clave
+real y gratuita. Entrega: que hay que DECIR en voz alta en los tres primeros
+segundos para existir en busqueda.
+
+TAREA 5 &#183; BUSQUEDA DENTRO DE LAS APPS
+Con sesion cerrada y desde movil, busca en Instagram y TikTok las 36 busquedas
+sociales del documento. En Instagram mira las tres pestanas: cuentas,
+publicaciones y reels. Anota posicion y los tres perfiles por encima. Presta
+atencion a quien mas usa el hashtag #somclot.
+
+TAREA 6 &#183; COMPETENCIA
+Barrio: SESE, CB Roser, UE Horta. Ciudad y Cataluna: FC Barcelona, Joventut
+Badalona, Basquet Manresa, Fundacio Basquet Girona, Spar Girona. Formativo:
+Pau Gasol Academy, Beast Basketball Academy, ITW Sport, Campus Nacho Solozabal.
+Para cada uno: seguidores reales hoy en Instagram y TikTok, y en cuantas de las
+busquedas del documento aparecen por encima de nosotros. El rival de verdad es
+quien salga por encima, no quien nosotros creamos: anade los que descubras.
+
+TAREA 7 &#183; FICHA DE GOOGLE Y COHERENCIA DE DATOS
+Estado de la ficha de Google Business: categorias, atributos, servicios, fotos,
+horarios, numero y nota de resenas. Y coherencia del nombre, direccion y
+telefono en: guia.barcelona.cat, basquetcatala.cat, enciclopedia.cat, FEB,
+Foursquare y cualquier directorio donde aparezcamos. Lista cada sitio donde el
+dato no coincida.
+
+COMO QUIERO EL RESULTADO
+ - Una tabla por tarea, en formato CSV o Excel, lista para pegar.
+ - Cada dato con su fuente y su fecha. Si no lo has podido comprobar, escribe
+   "no verificado": no inventes cifras ni posiciones.
+ - Al final: los 10 arreglos ordenados por impacto dividido esfuerzo, separando
+   lo que es trabajo de web de lo que es trabajo de prensa o de junta.
+ - Avisame explicitamente de lo que no hayas podido medir y por que.</pre>
+  </div>
+  <div class="note" style="margin-top:22px"><strong>Una condicio, i no es negociable.</strong> Que digui sempre d'on treu cada dada i que marqui com a "no verificat" tot el que no hagi pogut comprovar. Un informe amb posicions inventades es pitjor que no tenir-ne cap: prendriem decisions sobre sorra.</div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>CB Grup Barna &#183; El Clot, Sant Mart&#237; &#183; Document intern de treball &#183; Fotografia del 22 d'agost de 2026</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var now = document.getElementById('themeNow');
+  var btns = document.querySelectorAll('.theme button');
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function label(mode) {
+    if (mode === 'system') return 'Sistema \u00B7 ' + (mq.matches ? 'fosc' : 'clar');
+    return mode === 'dark' ? 'Fosc' : 'Clar';
+  }
+  function apply(mode) {
+    if (mode === 'system') { root.removeAttribute('data-theme'); }
+    else { root.setAttribute('data-theme', mode); }
+    btns.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-mode') === mode));
+    });
+    if (now) now.textContent = label(mode);
+    try { localStorage.setItem('radar-theme', mode); } catch (e) {}
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.getAttribute('data-mode')); });
+  });
+  mq.addEventListener('change', function () {
+    if (!root.hasAttribute('data-theme') && now) now.textContent = label('system');
+  });
+  var cp = document.getElementById('briefCopy');
+  var ok = document.getElementById('briefOk');
+  if (cp) {
+    cp.addEventListener('click', function () {
+      var t = document.getElementById('briefTxt').textContent;
+      var done = function () { ok.classList.add('on'); setTimeout(function () { ok.classList.remove('on'); }, 2000); };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(t).then(done, done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = t; ta.style.cssText = 'position:absolute;left:-9999px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  }
+
+  var saved = 'system';
+  try { saved = localStorage.getItem('radar-theme') || 'system'; } catch (e) {}
+  apply(saved);
+})();
+</script>
