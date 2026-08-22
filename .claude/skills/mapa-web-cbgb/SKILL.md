@@ -250,6 +250,15 @@ la pena comprovar-ho abans de fer cap `git add`/`commit`/`push` massiu.
   Després, si cal, torna el `ref` local a l'estat que coincideix amb el
   directori de treball (`git update-ref refs/heads/<branca> <commit-local>`)
   perquè `HEAD` i l'índex reals no quedin desincronitzats.
+- **El hook `stop-hook-git-check.sh` avisa de «canvis sense commitejar» mirant
+  la branca `_local-checkout`**, una branca interna de gestió de la sessió
+  (no la branca de l'encàrrec) on l'entorn fa snapshots automàtics del
+  directori de treball. Si avisa després d'haver publicat ja el canvi a la
+  branca real (per exemple amb el mètode de plumbing d'aquest punt),
+  **comprova primer si el contingut ja coincideix** amb
+  `git diff <commit-publicat>:<ruta> <ruta>` abans de tornar a commitejar
+  res — sol ser el mateix canvi vist des d'una branca diferent, no feina
+  perduda.
 
 ---
 
