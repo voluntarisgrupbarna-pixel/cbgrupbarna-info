@@ -355,3 +355,42 @@ table.vs thead th.a { color: var(--red-dark); }
 table.vs tbody th { font-family: var(--display); font-weight: 400; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
 table.vs td { font-size: 13.5px; color: var(--ink-2); }
 table.vs td.a { color: var(--red-dark); }
+
+/* ==== ORGANIGRAMA · qui mana i qui coordina =========================
+   Un organigrama és una dada, no una imatge: es dibuixa amb HTML i CSS
+   perquè es pugui seleccionar, llegir amb lector de pantalla i escalar
+   al mòbil sense fer-se borrós. Cap càrrec es distingeix només pel
+   color: el nivell el marquen el títol del tram i la posició. */
+.org { margin: clamp(26px, 4vw, 46px) 0 clamp(8px, 1.5vw, 14px); }
+.org-tier { margin-top: clamp(22px, 3vw, 34px); }
+.org-tier:first-child { margin-top: 0; }
+.org p.org-k { display: flex; align-items: center; gap: 12px; font-family: var(--body); font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-2); }
+.org p.org-k::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.org p.org-k b { font-weight: 500; color: var(--red-dark); }
+.org-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 14px; }
+@media (min-width: 620px) { .org-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .org-grid.g3 { grid-template-columns: repeat(3, 1fr); } }
+.org-node { position: relative; padding: 16px 18px 17px; border: 1px solid var(--line); background: var(--paper); transition: border-color 0.35s var(--ease), transform 0.35s var(--ease); }
+.org-node::before { content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 2px; background: transparent; transition: background 0.35s var(--ease); }
+.org-node:hover { border-color: var(--ink); transform: translateY(-2px); }
+.org-node:hover::before { background: var(--red); }
+.org-node.lead { grid-column: 1 / -1; background: var(--paper-2); }
+.org-node.lead::before { background: var(--red); }
+.org p.org-role { font-family: var(--body); font-size: 9px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-2); }
+.org strong.org-name { display: block; margin-top: 8px; font-family: var(--display); font-weight: 400; font-size: clamp(15px, 1.9vw, 19px); letter-spacing: 0.02em; line-height: 1.15; text-transform: uppercase; color: var(--ink); }
+.org-note { display: block; margin-top: 7px; font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+/* Baixada d'un tram al següent: la línia diu de qui depèn la coordinació. */
+.org p.org-join { display: flex; align-items: center; gap: 12px; margin: clamp(20px, 2.6vw, 28px) 0 0; padding-left: 2px; font-size: 12.5px; color: var(--ink-2); }
+.org p.org-join::before { content: ""; flex: 0 0 26px; height: 1px; background: var(--ink); }
+
+/* Qui fa què · una consulta, una persona, un contacte */
+.org-ask { border-top: 1px solid var(--ink); margin: clamp(22px, 3vw, 32px) 0; }
+.org-ask-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; padding: 15px 2px; border-bottom: 1px solid var(--line); }
+.org-ask .org-ask-row b { flex: 0 0 200px; font-family: var(--body); font-weight: 500; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+.org-ask .org-ask-row span { flex: 1 1 240px; font-size: 14px; color: var(--ink-2); }
+.org-ask .org-ask-row a { color: var(--red-dark); border-bottom: 1px solid rgba(168, 4, 14, 0.3); }
+.org-ask .org-ask-row a:hover { border-bottom-color: var(--red-dark); }
+
+/* Nota de procedència: d'on surt aquesta llista */
+.org-src { margin: clamp(22px, 3vw, 32px) 0 0; padding: 18px 20px; background: var(--paper-2); border-left: 2px solid var(--line); }
+.org-src p { font-size: 13px; line-height: 1.7; color: var(--ink-2); }
