@@ -525,3 +525,49 @@ voluntariat). Inventar-les seria pitjor que no tenir-les.
 Queden **27 pàgines amb les FAQ desquadrades entre idiomes**. Passar-les per la
 font única és mecànic i es pot fer en tandes; la primera, `/basquet-formatiu/`,
 ja està feta i va de 5/5/4 a 7/7/7.
+
+
+---
+
+## Preguntes freqüents · tancat el 23/08/2026
+
+**Les 28 pàgines desquadrades ja no existeixen.** Totes les preguntes del web
+han passat per `i18n/faq.yml`, i les 98 pàgines amb FAQ tenen el `<details>`
+visible i el `FAQPage` del JSON-LD quadrats, amb exactament un `FAQPage` per
+pàgina. Cap pàgina amb versió traduïda té un nombre de preguntes diferent del
+català.
+
+| | Abans | Ara |
+|---|---|---|
+| Preguntes indexades pel cercador | 493 | **546** |
+| Pàgines desquadrades entre idiomes | 28 | **0** |
+| Errors del lint d'i18n | 91 | **0** |
+| Traduccions que falten i tenen on anar | 42 | **0** |
+| Portada | 15 / 11 / 11 | **15 / 15 / 15** |
+
+Comprovat que la migració no ha canviat cap contingut: **0 preguntes
+perdudes i 0 respostes canviades sota la mateixa pregunta**, comparant l'índex
+de cerca abans i després.
+
+### El que va costar, per si torna a passar
+
+- **Aparellar, no perdre.** El perill no era perdre una pregunta —això es
+  compta— sinó publicar la resposta d'una sota una altra en un altre idioma.
+  `scripts/faq-migra.py` alinea com un diff, respectant l'ordre, i es nega a
+  fer-ho quan l'ordre no encaixa.
+- **Dues pàgines no eren traduccions.** A `/femeni/` i a
+  `/blog/cultura-esforc-club-progres/` el castellà i l'anglès tenien
+  preguntes DIFERENTS, no les mateixes traduïdes. S'han fet a mà: cap resposta
+  s'ha descartat, i on faltava la contrària s'ha escrit.
+- **La portada es va duplicar i es va desfer.** El migrador buscava
+  `class="faq"` exacte i la portada la tenia com a `class="faq reveal"`: hi va
+  crear una segona secció i durant una estona va ensenyar les quinze
+  preguntes dues vegades. Trobat obrint-la al navegador i comparant els
+  `<details>` visibles amb els del JSON-LD. Arreglat a les cinc pàgines
+  afectades i al regex del migrador.
+
+### El que segueix pendent
+
+Les **14 preguntes amb `pendent:`**, que no es publiquen enlloc perquè la seva
+resposta no és a cap pàgina del web: vuit números (les quotes i l'equipació) i
+sis dades de funcionament del club. `--pendents` les llista.

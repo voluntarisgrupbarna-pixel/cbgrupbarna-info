@@ -200,6 +200,82 @@ def plausible(ca, altre):
 
 # ── escriptura ─────────────────────────────────────────────────────────────
 
+def trigrames(text):
+    t = unicodedata.normalize("NFD", text.lower())
+    t = "".join(c for c in t if unicodedata.category(c) != "Mn")
+    t = re.sub(r"[^a-z0-9 ]+", " ", t)
+    t = re.sub(r"\s+", " ", t).strip()
+    return {t[k:k + 3] for k in range(max(0, len(t) - 2))}
+
+
+def puntua(a, b):
+    """Com de bé encaixen dues preguntes, de 0 a 1.
+
+    Suma dues coses que fallen per motius diferents i per tant es tapen els
+    forats l'una a l'altra: els SENYALS (xifres i noms propis, que sobreviuen
+    a qualsevol idioma però no hi són a les preguntes curtes) i la semblança
+    de LLETRES (que va bé entre català i castellà i no diu res entre català i
+    anglès, on qui mana és l'ordre).
+    """
+    xa, pa = senyals(a["q"] + " " + a["r"])
+    xb, pb = senyals(b["q"] + " " + b["r"])
+    tot = xa | pa
+    per_senyals = len((xa & xb) | (pa & pb)) / len(tot) if tot else 0.0
+
+    ta, tb = trigrames(a["q"]), trigrames(b["q"])
+    per_lletres = len(ta & tb) / len(ta | tb) if (ta and tb) else 0.0
+
+    # Un mínim petit sempre, perquè l'alineament prefereixi aparellar dues
+    # preguntes en el mateix lloc abans que deixar dos forats.
+    return 0.1 + per_senyals * 0.6 + per_lletres * 0.6
+
+
+def aparella(ca, alt):
+    """Aparella la llista catalana amb la traduïda, RESPECTANT L'ORDRE.
+
+    El primer intent va ser buscar, per a cada pregunta, la que més s'hi
+    assemblava de l'altre idioma. No serveix, i falla dels dos costats:
+
+      · Aparellava coses diferents que compartien «CB Grup Barna»: a
+        /femeni/, «Quants equips femenins té?» amb «¿Tiene equipo femenino?».
+      · I deixava sense parella les que no tenen cap xifra ni cap nom propi:
+        a /3x3/, «Qui hi pot jugar?» amb «Who can play?» no comparteixen ni
+        una lletra, i són òbviament la mateixa.
+
+    El que sí que es manté és l'ORDRE. Una traducció es va fer copiant la
+    pàgina catalana i traduint-la de dalt a baix; el que passa després és que
+    al català s'hi afegeixen preguntes noves i a la traducció no. O sigui que
+    la traducció acostuma a ser una SUBSEQÜÈNCIA de la catalana.
+
+    Per això s'alinea com un diff (Needleman-Wunsch): es busca la manera de
+    fer-les correspondre que maximitza la semblança total sense creuar cap
+    parella, i deixant forats on falti la traducció. Els forats són gratuïts
+    a posta: que a una pàgina hi falti la meitat de les traduccions és
+    normal, i no ha de fer que l'alineament s'inventi parelles.
+    """
+    n, m = len(ca), len(alt)
+    # taula[i][j] = millor puntuació alineant ca[i:] amb alt[j:]
+    taula = [[0.0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n - 1, -1, -1):
+        for j in range(m - 1, -1, -1):
+            junts = puntua(ca[i], alt[j]) + taula[i + 1][j + 1]
+            taula[i][j] = max(junts, taula[i + 1][j], taula[i][j + 1])
+
+    fora = [None] * n
+    i = j = 0
+    while i < n and j < m:
+        junts = puntua(ca[i], alt[j]) + taula[i + 1][j + 1]
+        if junts >= taula[i + 1][j] and junts >= taula[i][j + 1]:
+            fora[i] = alt[j]
+            i += 1
+            j += 1
+        elif taula[i + 1][j] >= taula[i][j + 1]:
+            i += 1          # aquesta catalana no té traducció
+        else:
+            j += 1          # aquesta traduïda no té catalana (rara)
+    return fora
+
+
 def identificador(url, i, usats):
     tros = [t for t in url.strip("/").split("/") if t] or ["portada"]
     base = re.sub(r"[^a-z0-9]+", "-", tros[-1].lower()).strip("-")[:26] or "pag"
@@ -232,15 +308,24 @@ def treu_faqpage(s):
     return RE_LD.sub(refes, s)
 
 
-def prepara_pagina(url, idioma):
-    """Deixa la pàgina amb els marcadors i sense el FAQPage vell."""
+def prepara_pagina(url, idioma, crear_seccio=True):
+    """Deixa la pàgina amb els marcadors i sense el FAQPage vell.
+
+    Amb `crear_seccio=False` no s'hi obre una secció de preguntes nova: és el
+    cas d'una traducció que encara no en té cap: un titular «Preguntas
+    frecuentes» amb res a sota és pitjor que no tenir-ne.
+    """
     p = cami_de(url)
     s = io.open(p, encoding="utf-8").read()
     if "FAQ:START" in s and "FAQ-LD:START" in s:
         return "ja preparada"
 
     if "FAQ:START" not in s:
-        m = re.search(r'<div class="faq"[^>]*>', s)
+        # Amb modificadors inclosos: la portada la tenia com a
+        # class="faq reveal", el regex antic demanava class="faq" pelat, no
+        # la va trobar i va crear-hi una SEGONA secció. La pàgina va acabar
+        # ensenyant les mateixes quinze preguntes dues vegades.
+        m = re.search(r'<div class="faq(?:[ "][^>]*)?>', s)
         if m:
             # Ja hi ha secció de preguntes: el seu contingut passa a ser
             # territori del generador.
@@ -248,6 +333,8 @@ def prepara_pagina(url, idioma):
             fi = s.rfind("</details>", i)
             j = s.index("</div>", fi if fi > 0 else i)
             s = s[:i] + "<!-- FAQ:START --><!-- FAQ:END -->" + s[j:]
+        elif not crear_seccio:
+            return "sense preguntes en aquest idioma: no s'hi obre secció"
         else:
             bloc = (
                 '\n<!-- ==== PREGUNTES FREQÜENTS ====\n'
@@ -282,6 +369,9 @@ def main():
     ap.add_argument("--automatiques", action="store_true",
                     help="migra totes les que passen la comprovació")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--aparella", action="store_true",
+                    help="per a les pàgines que no passen la comprovació d'ordre: "
+                         "aparella per contingut i ensenya el resultat per repassar-lo")
     args = ap.parse_args()
 
     rutes = carrega_rutes()
@@ -306,13 +396,12 @@ def main():
             alt = preguntes_de(url)
             if alt is None:
                 continue
-            if len(alt) != len(pc):
+            if len(alt) != len(pc) or not ordre_correcte(pc, alt):
+                # No es descarta: s'alinea igualment (respectant l'ordre i
+                # deixant forats), però la pàgina es marca perquè algú miri
+                # el resultat abans de publicar-lo. Ho fa `--aparella`.
                 estat = "a-ma"
-                continue
-            if not ordre_correcte(pc, alt):
-                estat = "a-ma"
-                continue
-            traduccions[idioma] = alt
+            traduccions[idioma] = aparella(pc, alt)
         candidates[ca] = (pc, traduccions, estat, m)
 
     if args.llista:
@@ -323,6 +412,35 @@ def main():
             for ca, (pc, tr, _, m) in sorted(grup.items()):
                 diu = "+".join(sorted(tr)) or "només ca"
                 print(f"  {len(pc):2} preguntes · {diu:8} · {ca}")
+        return 0
+
+    if args.aparella:
+        if not args.pagina:
+            print("Digues quina pàgina.")
+            return 1
+        pc = preguntes_de(args.pagina)
+        m = rutes.get(args.pagina, {"ca": args.pagina, "es": None, "en": None})
+        trad = {}
+        for idioma in ("es", "en"):
+            if m.get(idioma):
+                alt = preguntes_de(m[idioma])
+                if alt:
+                    trad[idioma] = aparella(pc, alt)
+        for i, tros in enumerate(pc):
+            print(f"\n[{i}] ca · {tros['q']}")
+            for idioma in ("es", "en"):
+                if idioma in trad:
+                    parell = trad[idioma][i]
+                    print(f"     {idioma} · " + (parell["q"] if parell else "— SENSE TRADUCCIÓ —"))
+        for idioma, llista in trad.items():
+            usades = {id(x) for x in llista if x}
+            alt = preguntes_de(m[idioma])
+            sobren = [b for b in alt if id(b) not in usades and b not in [x for x in llista if x]]
+            if sobren:
+                print(f"\n  Al {idioma} hi ha {len(sobren)} preguntes que no s'han pogut "
+                      f"aparellar amb cap catalana:")
+                for b in sobren:
+                    print(f"    · {b['q']}")
         return 0
 
     objectiu = ([args.pagina] if args.pagina
@@ -343,7 +461,8 @@ def main():
         for i, tros in enumerate(pc):
             e = {"id": identificador(ca, i, usats), "pagina": ca, "ca": tros}
             for idioma, llista in traduccions.items():
-                e[idioma] = llista[i]
+                if llista[i]:
+                    e[idioma] = llista[i]
             noves.append(e)
         print(f"  {len(pc):2} preguntes · {'+'.join(sorted(traduccions)) or 'només ca'} · {ca}"
               + ("   ⚠ aparellament no comprovat" if estat == "a-ma" else ""))
@@ -364,7 +483,8 @@ def main():
         for idioma in IDIOMES:
             url = rutes.get(ca, {}).get(idioma)
             if url and os.path.exists(cami_de(url)):
-                print(f"    {url}: {prepara_pagina(url, idioma)}")
+                te = any(e.get(idioma, {}).get("q") for e in noves if e["pagina"] == ca)
+                print(f"    {url}: {prepara_pagina(url, idioma, te)}")
 
     print(f"\n{len(noves)} preguntes a i18n/faq.yml. Ara:\n"
           "  python3 .github/scripts/generate-faq.py")

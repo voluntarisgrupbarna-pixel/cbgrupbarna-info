@@ -29,6 +29,8 @@ l'enllaç a la pàgina d'on surt.
 | `scripts/afegeix-cerca.py` | Posa les dues línies del cercador a totes les pàgines amb capçalera del club. |
 | `i18n/faq.yml` | **La font única de les preguntes freqüents**: una entrada per pregunta, amb els tres idiomes i la pàgina on va. |
 | `.github/scripts/generate-faq.py` | Les reparteix al `<details>` i al JSON-LD de les tres versions de cada pàgina, entre marcadors. |
+| `scripts/faq-migra.py` | Va passar a la font única les preguntes que vivien dins de l'HTML. Ja no queda res per migrar, però serveix si algun dia n'apareix una pàgina nova amb FAQ escrites a mà. |
+| `scripts/faq-tradueix.py` | Omple les traduccions que falten amb el traductor del web. |
 | `tests/cerca/prova-motor.mjs` | 45 casos de prova del motor contra l'índex real, sense navegador: quins resultats surten, quina resposta es dona i quines consultes no n'han de treure cap. |
 
 ## Com s'obre
@@ -122,8 +124,12 @@ surten a la mateixa llista.
 > Per què una font única: el 23/08/2026 hi havia **28 pàgines amb les tres
 > versions desquadrades** (la portada anava 15/11/11). Una pregunta viu a sis
 > llocs —`<details>` i JSON-LD, per tres idiomes— i sis llocs a mà no
-> aguanten. Les 460 que hi havia van néixer així i encara no han passat per
-> la font única; les noves, sí.
+> aguanten.
+>
+> **Ja no en queda cap.** Totes les preguntes del web han passat per la font
+> única i les 98 pàgines amb FAQ tenen el `<details>` visible i el JSON-LD
+> quadrats. Cap pàgina amb versió traduïda té un nombre de preguntes diferent
+> del català.
 
 Si toques qualsevol de les tres, **afegeix el cas nou a `tests/cerca/prova-motor.mjs`**
 i executa'l: és el que impedeix que arreglar una cerca en trenqui tres.

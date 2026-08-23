@@ -264,6 +264,7 @@ def revisa():
     # deute que una pàgina sense traduir.
     faq = ROOT / "i18n" / "faq.yml"
     if faq.exists():
+        per_ruta = {r["ca"]: r for r in rutes if r.get("ca")}
         dades = yaml.safe_load(faq.read_text(encoding="utf-8")) or {}
         for e in dades.get("preguntes", []):
             ident = e.get("id", "?")
@@ -271,7 +272,13 @@ def revisa():
                 pendents.append(
                     f"faq-sense-resposta · {ident} · espera: {e['pendent'].strip().splitlines()[0][:70]}")
                 continue
+            # Només compta com a deute si la pàgina existeix en aquell
+            # idioma: si no, la feina és traduir la pàgina, no la pregunta,
+            # i ja surt com a `sense-traduccio` més amunt.
+            parella = per_ruta.get(e.get("pagina")) or {}
             for idioma in ("ca", "es", "en"):
+                if idioma != "ca" and not parella.get(idioma):
+                    continue
                 tros = e.get(idioma) or {}
                 if not (tros.get("q") and tros.get("r")):
                     pendents.append(

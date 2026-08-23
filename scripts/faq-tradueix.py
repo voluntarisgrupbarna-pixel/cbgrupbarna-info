@@ -51,7 +51,26 @@ def carrega_traductor():
     return mod
 
 
-def que_falta(entrades, idiomes):
+def carrega_rutes():
+    """Quines pàgines existeixen en cada idioma."""
+    cami = os.path.join(ARREL, "i18n", "routes.yml")
+    with open(cami, encoding="utf-8") as f:
+        dades = yaml.safe_load(f) or {}
+    mapa = {}
+    for r in dades.get("rutes", []):
+        if r.get("ca"):
+            mapa[r["ca"]] = {"es": r.get("es"), "en": r.get("en")}
+    return mapa
+
+
+def que_falta(entrades, idiomes, rutes):
+    """Les traduccions que falten I QUE TENEN ON ANAR.
+
+    Si la pàgina no existeix en aquell idioma —la meitat dels articles del
+    blog només són en català— traduir-ne les preguntes no serveix de res: no
+    hi ha cap pàgina on posar-les. Aquestes no es compten, perquè la feina
+    d'allà és traduir la pàgina, no la pregunta.
+    """
     fora = []
     for e in entrades:
         if e.get("pendent"):
@@ -59,7 +78,10 @@ def que_falta(entrades, idiomes):
         ca = e.get("ca") or {}
         if not (ca.get("q") and ca.get("r")):
             continue
+        destins = rutes.get(e.get("pagina"), {})
         for idioma in idiomes:
+            if not destins.get(idioma):
+                continue
             tros = e.get(idioma) or {}
             if not (tros.get("q") and tros.get("r")):
                 fora.append((e, idioma))
@@ -82,7 +104,7 @@ def main():
         dades = yaml.safe_load(f) or {}
     entrades = dades.get("preguntes", [])
 
-    falten = que_falta(entrades, idiomes)
+    falten = que_falta(entrades, idiomes, carrega_rutes())
     if not falten:
         print("Cap traducció pendent: totes les preguntes publicables tenen "
               "els tres idiomes.")
