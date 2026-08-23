@@ -89,7 +89,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#10100E">
 <title>{title}</title>
 <meta name="description" content="{desc}">{kw}
 <link rel="canonical" href="{url}">{alt}

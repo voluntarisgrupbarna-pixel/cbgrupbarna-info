@@ -11,41 +11,40 @@
 <link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/partits/cartell.html">
 <link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/partits/cartell.html">
 <link rel="icon" type="image/png" href="/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fonts.css">
 <style>
-  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#3ddc84}
+  :root{--red:#E20613;--black:#10100E;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45);--green:#3ddc84}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
+  body{background:var(--black);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh}
   nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
   nav img{width:34px;height:34px;object-fit:contain}
-  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.06em}
   nav .t span{color:var(--red)}
   nav a{margin-left:auto;color:var(--muted);font-size:.8rem;text-decoration:none}
   .wrap{max-width:1000px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
-  h1{font-family:'Bebas Neue',sans-serif;font-size:2rem}
+  h1{font-family:'Anton',sans-serif;font-size:2rem}
   h1 span{color:var(--red)}
   .sub{color:var(--muted);font-size:.88rem;margin:.3rem 0 1.5rem;line-height:1.55}
-  h2{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;margin:1.5rem 0 .7rem}
+  h2{font-family:'Anton',sans-serif;font-size:1.3rem;margin:1.5rem 0 .7rem}
   h2 span{color:var(--red)}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem}
   .cols{display:grid;grid-template-columns:1fr 380px;gap:1.4rem;align-items:start}
   @media(max-width:820px){.cols{grid-template-columns:1fr}}
   label.fl{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);display:block;margin-bottom:.3rem}
-  select,input[type=file],input[type=text]{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Outfit',sans-serif;font-size:.87rem}
+  select,input[type=file],input[type=text]{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Inter',sans-serif;font-size:.87rem}
   select:focus,input:focus{outline:none;border-color:var(--red)}
   .fg{margin-bottom:.9rem}
-  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.65rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.65rem 1.15rem;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
   .btn:disabled{opacity:.45;cursor:default}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
   .btn.small{padding:.35rem .7rem;font-size:.74rem}
   .alert{display:none;background:linear-gradient(135deg,rgba(61,220,132,.14),rgba(226,6,19,.12));border:1px solid rgba(61,220,132,.4);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.4rem}
-  .alert b{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.04em;color:var(--green);display:block}
+  .alert b{font-family:'Anton',sans-serif;font-size:1.3rem;letter-spacing:.04em;color:var(--green);display:block}
   .alert p{font-size:.85rem;color:rgba(255,255,255,.7);margin-top:.2rem;line-height:1.5}
   .alert .wins{margin-top:.7rem;display:flex;flex-direction:column;gap:.35rem}
   .alert .w{display:flex;align-items:center;gap:.6rem;font-size:.84rem;background:rgba(0,0,0,.3);border-radius:8px;padding:.45rem .7rem;flex-wrap:wrap}
-  .alert .w b{font-family:'Outfit',sans-serif;font-size:.84rem;color:var(--txt);display:inline;font-weight:500}
-  .alert .sc{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--green);letter-spacing:.03em}
+  .alert .w b{font-family:'Inter',sans-serif;font-size:.84rem;color:var(--txt);display:inline;font-weight:500}
+  .alert .sc{font-family:'Anton',sans-serif;font-size:1.05rem;color:var(--green);letter-spacing:.03em}
   .preview{position:sticky;top:1rem}
   canvas{width:100%;border-radius:12px;border:1px solid var(--line);display:block;background:#111}
   .copybox{margin-top:1rem;background:#0e0e0e;border:1px solid var(--line);border-radius:10px;padding:.85rem;font-size:.83rem;line-height:1.6;white-space:pre-wrap}
@@ -193,7 +192,7 @@ async function generar(){
 function dibuixar(){
   const c=document.getElementById('c'), x=c.getContext('2d');
   x.clearRect(0,0,W,H);
-  x.fillStyle='#0A0A0A'; x.fillRect(0,0,W,H);
+  x.fillStyle='#10100E'; x.fillRect(0,0,W,H);
 
   // Foto de fons, retallada tipus "cover"
   if(img){
@@ -204,10 +203,10 @@ function dibuixar(){
 
   // Enfosquiment per llegibilitat
   let g=x.createLinearGradient(0,0,0,H);
-  g.addColorStop(0,'rgba(10,10,10,.72)');
-  g.addColorStop(.42,'rgba(10,10,10,.30)');
-  g.addColorStop(.72,'rgba(10,10,10,.88)');
-  g.addColorStop(1,'rgba(10,10,10,.97)');
+  g.addColorStop(0,'rgba(16,16,14,.72)');
+  g.addColorStop(.42,'rgba(16,16,14,.30)');
+  g.addColorStop(.72,'rgba(16,16,14,.88)');
+  g.addColorStop(1,'rgba(16,16,14,.97)');
   x.fillStyle=g; x.fillRect(0,0,W,H);
 
   // Barra vermella superior
@@ -215,14 +214,14 @@ function dibuixar(){
 
   // Capçalera
   x.fillStyle='rgba(255,255,255,.85)';
-  x.font='500 30px Outfit, sans-serif'; x.textAlign='left';
+  x.font='500 30px Inter, sans-serif'; x.textAlign='left';
   x.letterSpacing='6px';
   x.fillText('CB GRUP BARNA', 76, 108);
   x.letterSpacing='0px';
 
   if(!partitSel){
     x.fillStyle='rgba(255,255,255,.35)';
-    x.font='500 34px Outfit, sans-serif'; x.textAlign='center';
+    x.font='500 34px Inter, sans-serif'; x.textAlign='center';
     x.fillText('Tria un partit guanyat', W/2, H/2);
     return;
   }
@@ -234,9 +233,9 @@ function dibuixar(){
   // Rètol gran
   x.textAlign='left';
   x.fillStyle='#F5F5F5';
-  x.font='170px Anton, "Bebas Neue", sans-serif';
+  x.font='170px Anton, 'Anton', sans-serif';
   let fs=170;
-  while(x.measureText(retol).width > W-152 && fs>70){ fs-=6; x.font=fs+'px Anton, "Bebas Neue", sans-serif'; }
+  while(x.measureText(retol).width > W-152 && fs>70){ fs-=6; x.font=fs+'px Anton, 'Anton', sans-serif'; }
   x.fillText(retol, 76, 880);
   // Subratllat vermell
   x.fillStyle=RED;
@@ -244,17 +243,17 @@ function dibuixar(){
 
   // Marcador
   x.fillStyle='#FFFFFF';
-  x.font='150px Anton, "Bebas Neue", sans-serif';
+  x.font='150px Anton, 'Anton', sans-serif';
   const marc=`${r.nostre}-${r.seu}`;
   x.fillText(marc, 76, 1058);
 
   // Equip i rival
   x.fillStyle='rgba(255,255,255,.92)';
-  x.font='600 42px Outfit, sans-serif';
+  x.font='600 42px Inter, sans-serif';
   let linia=`${p.equip}`;
   x.fillText(linia, 76, 1122);
   x.fillStyle='rgba(255,255,255,.55)';
-  x.font='400 34px Outfit, sans-serif';
+  x.font='400 34px Inter, sans-serif';
   x.fillText(`vs ${p.rival}`, 76, 1170);
 
   // Peu: data, lloc, competició
@@ -262,12 +261,12 @@ function dibuixar(){
   const MESOS=['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
   const meta=[`${dt.getDate()} ${MESOS[dt.getMonth()]}`, p.lloc, p.competicio].filter(Boolean).join('  ·  ');
   x.fillStyle='rgba(255,255,255,.4)';
-  x.font='400 26px Outfit, sans-serif';
+  x.font='400 26px Inter, sans-serif';
   x.fillText(meta, 76, 1232);
 
   // Frase de peu o handle
   x.fillStyle=RED;
-  x.font='600 28px Outfit, sans-serif';
+  x.font='600 28px Inter, sans-serif';
   x.letterSpacing='3px';
   x.fillText((peu||'@CBGRUPBARNA').toUpperCase(), 76, 1288);
   x.letterSpacing='0px';

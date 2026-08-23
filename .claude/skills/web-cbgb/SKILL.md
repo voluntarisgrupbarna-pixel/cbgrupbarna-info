@@ -1,6 +1,6 @@
 ---
 name: web-cbgb
-description: Sistema de disseny de les webs del CB Grup Barna (cbgrupbarna.info i satèl·lits). Carrega-la SEMPRE abans de tocar HTML, CSS o qualsevol peça visual del club: colors, tipografia, fotografia, gràfics i dades, vocabulari, modes de color i les trampes tècniques del repositori. Diu quin és el vermell oficial mostrejat de l'escut i per què no és el de vídeo; quins dos jocs de tokens i quines dues tipografies de display hi conviuen, i com no barrejar-los; on són els originals de foto i com passar-los pel script perquè cap surti ampliada; i quines pàgines generades encara no es poden regenerar sense perdre-hi contingut.
+description: Sistema de disseny de les webs del CB Grup Barna (cbgrupbarna.info i satèl·lits). Carrega-la SEMPRE abans de tocar HTML, CSS o qualsevol peça visual del club: colors, tipografia, fotografia, gràfics i dades, vocabulari, modes de color i les trampes tècniques del repositori. Diu quin és el vermell oficial mostrejat de l'escut i per què no és el de vídeo; quins són els valors únics dels tokens i els seus àlies, i per què la display és sempre l'Anton i el text sempre la Inter, servides des del mateix domini; on són els originals de foto i com passar-los pel script perquè cap surti ampliada; i quines pàgines generades encara no es poden regenerar sense perdre-hi contingut.
 ---
 
 # Sistema de disseny · web CB Grup Barna
@@ -66,6 +66,24 @@ serveixen públics diferents.
 | Costa | Gairebé res de manteniment | Una foto editorial bona cada temporada i el bloc de partits viu |
 | Risc | Davant un patrocinador, una graella d'enllaços no sosté el discurs | Si l'IG canvia de sèries i la web no, es tornen a separar |
 
+**Les peces de totes dues viuen a `css/barna.css`**, no només a la portada: les
+franges (`.franges`, `.franja`, `.franja--red`, `.franja--ink`, `.franja--lead`)
+i el joc de l'extensa (`.e-sech` amb el filet vermell, `.e-feat`/`.e-art`,
+`.e-guides`, `.e-par` de paritat, `.e-lema` sobre tinta i la barra de novetats
+`.ticker`). Una pàgina interior que enllaci el full ja les té: no en refacis cap
+de nova. Els títols de secció d'un article (`.prose h2`) porten el mateix filet
+vermell, que és el gest que lliga una interior amb la portada.
+
+A la vista de franges la portada obre com a la guia: barra de novetats, menú,
+el hero curt (etiqueta vermella, «Bàsquet al Clot. / Des de 1965.» amb la segona
+línia en vermell i una sola frase) i les nou franges. **El bloc fosc de marca
+—el `.masthead`— només surt a l'extensa**: a franges hi és al marcatge però
+amagat, perquè la guia diu que davant hi va la porta, no la presentació.
+L'única cosa que el hero de franges afegeix a la guia és una línia petita
+sota la frase amb les paraules de cerca que abans portava el bloc fosc
+(`.lg-hero-seo`): sense ella, l'h1 visible deixaria de dir «bàsquet base a
+Barcelona» i això es paga al cercador.
+
 L'estructura de les franges està calcada de la guia visual. **Si canvies l'ordre
 o els textos d'una, canvia'ls a l'altra**: la portada i la guia han de dir el
 mateix.
@@ -84,8 +102,9 @@ sobre.
 
 ## 1. Un sol vermell: el de l'escut
 
-El vermell és el mateix a tot arreu. Els **noms dels tokens, no**: al repositori
-hi conviuen dos jocs, i confondre'ls fa que una regla no s'apliqui.
+El vermell és el mateix a tot arreu, i des de l'agost del 2026 **els valors
+també**: els de la guia «Franges i Extensa». Hi ha un sol joc de números, amb
+dos jocs de **noms** que conviuen com a àlies dins de `css/barna.css`.
 
 **Sistema principal** — `css/barna.css`, i la portada, que porta el CSS a dins
 però amb els mateixos valors. Cobreix blog, campus, 3x3, premsa, patrocinadors,
@@ -94,27 +113,28 @@ femení, `/es/`, `/en/` i `partits/equips/`.
 | Token | Valor | Ús |
 |---|---|---|
 | `--red` | `#E20613` | L'únic accent. Mostrejat de `logo.png` i `icon-512.png`. |
-| `--red-dark` | `#A8040E` | Text vermell sobre fons clar i estats de passar-hi el ratolí. |
-| `--ink` | `#0a0a0a` | Tinta. |
+| `--red-dark` / `--red-ink` | `#A8040E` | Text vermell sobre fons clar i estats de passar-hi el ratolí. |
+| `--ink` | `#10100E` | Tinta. |
 | `--ink-2` | `#46433f` | El text corrent. |
-| `--muted` | `#8a8681` | Etiquetes petites. Vegeu l'avís de sota. |
-| `--line` | `#e4e1dd` | Filets. |
-| `--paper` / `--paper-2` | `#ffffff` / `#f6f4f1` | Fons. |
+| `--muted` | `#6B6560` | Etiquetes petites i text secundari. Passa AA. |
+| `--line` | `rgba(16, 16, 14, 0.14)` | Filets. |
+| `--paper` | `#ffffff` | Paper. |
+| `--paper-2` / `--cream` / `--ground` | `#F4F1EC` | Crema. |
 
-**`/partits/` té el seu propi joc**, perquè és una pàgina autònoma: allà el
-vermell fosc es diu `--red-ink`, el fons crema `--cream` (`#F4F1EC`), la tinta
-`--ink` val `#0E1116` i el gris `--muted` és `#6B6560`. El vermell d'accent és
-el mateix. Si copies codi d'una banda a l'altra, tradueix els noms.
+**Els noms de `/partits/` són àlies del mateix joc**: `--cream`, `--red-ink`,
+`--panel` i `--ground` estan declarats a `css/barna.css` amb aquests valors, de
+manera que copiar codi d'una banda a l'altra ja no obliga a traduir res.
+`scripts/aplica-estetica.py` és qui manté la resta del lloc en aquests valors:
+tradueix els vermells, les tintes i les cremes que no hi són, i deixa dues
+famílies de lletra. Passa-l'hi després de qualsevol pàgina nova
+(`python3 scripts/aplica-estetica.py --dry-run` primer).
 
 Contrast mesurat sobre blanc: `#E20613` dona 4,92:1 i `#A8040E`, 7,81:1 — tots
 dos passen el mínim AA per a text. Blanc sobre `--red` també dona 4,92:1.
 
-> **`--muted` no arriba a AA.** `#8a8681` sobre blanc dona 3,62:1, i sobre
-> `--paper-2`, 3,29:1: per sota del 4,5:1 que demana el text. Al sistema només
-> s'hi posen etiquetes en caixa alta de 8,5 a 10 px, que és justament la mida on
-> més es nota. **No hi posis mai text que s'hagi de llegir de debò.** El dia que
-> es refaci, `#706c67` dona 5,21:1 sobre blanc i 4,75:1 sobre crema, i passa als
-> dos fons. `--muted` de `/partits/` (`#6B6560`) ja hi arriba.
+> **`--muted` ja arriba a AA.** El gris antic, `#8a8681`, es quedava en 3,62:1
+> sobre blanc i 3,29:1 sobre crema. El d'ara, `#6B6560`, dona 5,74:1 sobre blanc
+> i 5,25:1 sobre crema: passa als dos fons i ja s'hi pot posar text de llegir.
 
 **No facis servir `#FD030C`**, que és el vermell de la cartela de vídeo de
 `sistema-visual-cbgb`. Sobre blanc dona 4,04:1 i sobre crema 3,59:1, per sota
@@ -132,28 +152,30 @@ aquestes:
 
 ---
 
-## 2. Tipografia: dos sistemes, i cal saber en quin ets
+## 2. Tipografia: una de display i una de text
 
-Sempre dues famílies com a màxim per peça: una de display i **Inter** per al
-text. La de display depèn d'on siguis.
+Dues famílies, i prou. **Anton** per a display i **Inter** per a tota la resta.
+No hi ha cap tercera: Jost, Bebas Neue, Outfit, Cormorant Garamond i Fraunces
+han sortit del lloc.
 
-- **Jost** (`--display`, amb `Futura` i `Century Gothic` de recanvi) és la del
-  **sistema actual**: portada, blog, campus, 3x3, premsa, patrocinadors, femení,
-  `/es/`, `/en/` i `partits/equips/`. Va en caixa alta, pes lleuger (200–400) i
-  molt interlletratge.
-- **Anton** és la de les **pàgines antigues i autònomes**, que porten el seu CSS
-  a dins: `/escoleta/` (que se serveix les fonts des de `escoleta/fonts/`), `/partits/`,
-  `/briefing/`, `/jugadors/estadistiques.html` i `/partits/cartell.html`. És més
-  pesada i més estreta que Jost. **No les barregis en una mateixa pàgina**: si
-  toques una d'aquestes, segueix amb Anton; si en fas una de nova, fes-la amb
-  `css/barna.css` i Jost.
-- **Inter** per a text, dades i etiquetes a tot arreu. Les etiquetes van en
-  caixa alta amb interlletratge de `0.18em` a `0.28em`.
+- **Anton** (`--display`, amb `Haettenschweiler` i `Arial Narrow` de recanvi) va
+  en caixa alta. És la de la portada, la de `css/barna.css` i la de les pàgines
+  autònomes: `/escoleta/`, `/partits/`, `/briefing/`, `/jugadors/`, `/premsa/`,
+  `/premidonaesport/`, `/presentacions/`… No té cursiva ni pes negreta: si en
+  demanes, el navegador se les inventa i es nota.
+- **Inter** per a text, dades i etiquetes. És variable: un sol fitxer per
+  subconjunt cobreix del pes 100 al 900. Les etiquetes van en caixa alta amb
+  interlletratge de `0.18em` a `0.28em`.
+
+**Les dues s'allotgen al mateix domini**, a `/fonts/`, i es carreguen amb
+`<link rel="stylesheet" href="/css/fonts.css">` (o via `css/barna.css`, que ja
+porta l'Anton a dins). Cap pàgina demana res a `fonts.googleapis.com`: així no
+es transfereixen IPs de les famílies a tercers, que és el criteri RGPD del club.
+Si fas una pàgina nova, enllaça `/css/fonts.css` i prou.
 
 Els `.ttf` de `.github/scripts/fonts/` (`anton.ttf`, `inter-*.ttf`) **no són per
 al web**: els fan servir `generate-og-image.py` i `generate-calendaris.py` per
-dibuixar imatges amb Pillow. Al web les fonts vénen de Google Fonts, tret de
-`/escoleta/`, que les té en `.woff2` al seu propi directori.
+dibuixar imatges amb Pillow.
 
 ---
 
@@ -323,8 +345,8 @@ s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
 ## 10. Abans de publicar
 
 1. Els colors surten de la taula del punt 1, amb els noms del joc que toca?
-2. La display és la que li pertoca a aquella pàgina —Jost o Anton— i no n'hi ha
-   dues de barrejades?
+2. La display és l'Anton, sense cursiva, i la de text és la Inter, totes dues
+   servides des de `/fonts/` i no des de Google?
 3. Cap cara tallada i cap foto ampliada? Res de `--muted` en text de llegir?
 4. Res amb data passada, `og-image.jpg` inclosa?
 5. Les etiquetes fan servir el vocabulari del punt 6?

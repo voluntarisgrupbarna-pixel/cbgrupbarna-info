@@ -206,7 +206,7 @@ def head_html(title, desc, canonical, og_image, extra_ld, idioma):
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/barna.css">
 <script type="application/ld+json">{json.dumps(extra_ld, ensure_ascii=False)}</script>
 <script src="/js/galetes.js"></script>

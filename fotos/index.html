@@ -11,19 +11,17 @@
   <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
   <meta property="og:type" content="website">
   <link rel="icon" href="/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/fonts.css">
 
   <style>
     :root {
-      --ink: #0a0a0a;
+      --ink: #10100E;
       --ink-2: #46433f;
-      --muted: #8a8681;
-      --line: #e4e1dd;
+      --muted: #6B6560;
+      --line: rgba(16, 16, 14, 0.14);
       --line-dark: rgba(255,255,255,0.15);
       --paper: #ffffff;
-      --paper-2: #f6f4f1;
+      --paper-2: #F4F1EC;
       --red: #E20613;
       --red-dark: #A8040E;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -165,7 +163,7 @@
     }
     .event-thumb-count {
       position: absolute; bottom: .6rem; right: .6rem;
-      background: rgba(10,10,10,.7); backdrop-filter: blur(4px);
+      background: rgba(16,16,14,.7); backdrop-filter: blur(4px);
       color: rgba(255,255,255,.9); font-family: var(--display); font-size: 9px; letter-spacing: .1em;
       padding: .3rem .55rem;
       display: flex; align-items: center; gap: .3rem;
@@ -239,16 +237,16 @@
       transition: opacity .2s;
     }
     .photo-item .photo-hover {
-      position: absolute; inset: 0; background: rgba(10,10,10,0);
+      position: absolute; inset: 0; background: rgba(16,16,14,0);
       transition: background .2s;
       display: flex; align-items: flex-end; padding: .4rem;
       gap: .3rem;
     }
-    .photo-item:hover .photo-hover { background: rgba(10,10,10,.35); }
+    .photo-item:hover .photo-hover { background: rgba(16,16,14,.35); }
     .photo-action-btn {
       opacity: 0; transform: translateY(4px);
       transition: opacity .15s, transform .15s;
-      background: rgba(10,10,10,.7); backdrop-filter: blur(4px);
+      background: rgba(16,16,14,.7); backdrop-filter: blur(4px);
       border: none; color: #fff; cursor: pointer;
       padding: .35rem; display: flex; align-items: center;
     }
@@ -260,7 +258,7 @@
     .photo-item video { width: 100%; height: auto; display: block; }
     .video-tile-badge {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 34px; height: 34px; background: rgba(10,10,10,.55); border-radius: 50%;
+      width: 34px; height: 34px; background: rgba(16,16,14,.55); border-radius: 50%;
       display: flex; align-items: center; justify-content: center; pointer-events: none;
     }
 
@@ -276,7 +274,7 @@
     /* ── LIGHTBOX ── */
     #lightbox {
       display: none; position: fixed; inset: 0; z-index: 1000;
-      background: rgba(10,10,10,.97); align-items: center; justify-content: center;
+      background: rgba(16,16,14,.97); align-items: center; justify-content: center;
     }
     #lightbox.open { display: flex; }
     #lightbox img#lb-img {
@@ -325,7 +323,7 @@
     /* ── ACCESS GATE ── */
     #access-gate {
       position: fixed; inset: 0; z-index: 9999;
-      background: rgba(10,10,10,.9);
+      background: rgba(16,16,14,.9);
       display: none; align-items: center; justify-content: center;
       padding: 1.25rem;
       backdrop-filter: blur(4px);

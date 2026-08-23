@@ -91,7 +91,7 @@ for S in SEASONS:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#10100E">
 <title>{S['title']}</title>
 <meta name="description" content="{desc}">
 <meta name="keywords" content="{S['kw']}">
