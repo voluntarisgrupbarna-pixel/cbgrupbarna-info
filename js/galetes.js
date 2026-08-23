@@ -126,18 +126,18 @@
       aria: 'Consentimiento de cookies', titol: 'Cookies', mes: 'Más información',
       text: 'Usamos Google Analytics para saber qué páginas interesan más, sin cookies de publicidad.',
       nomes: 'Solo las necesarias', accepta: 'Aceptarlas',
-      enllac: '/politica-de-privacitat/#galetes'
+      enllac: '/es/politica-de-privacidad/#galetes'
     },
     en: {
       aria: 'Cookie consent', titol: 'Cookies', mes: 'More information',
       text: 'We use Google Analytics to see which pages people read most. No advertising cookies.',
       nomes: 'Only the necessary ones', accepta: 'Accept them',
-      enllac: '/politica-de-privacitat/#galetes'
+      enllac: '/en/privacy-policy/#galetes'
     }
   };
 
-  // Els tres enllacen la política en català perquè encara no està traduïda.
-  // El dia que ho estigui, aquí es posa la ruta amb prefix.
+  // Cada idioma enllaça la seva política de privacitat: llegir com es
+  // tracten les teves dades en una llengua que no entens no és informar-te.
   function textos() {
     var codi = (document.documentElement.lang || 'ca').slice(0, 2).toLowerCase();
     return TEXTOS[codi] || TEXTOS.ca;
