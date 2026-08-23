@@ -42,9 +42,9 @@ TRADUITS = [
 # no se'ls mengi una substitucio mes curta.
 TEXTOS = [
     # (catala, castella, angles)
-    ("Dies de partit · calendari i resultats · CB Grup Barna",
-     "Días de partido · calendario y resultados · CB Grup Barna",
-     "Match days · fixtures and results · CB Grup Barna"),
+    ("Calendari · dies de partit i resultats · CB Grup Barna",
+     "Calendario · días de partido y resultados · CB Grup Barna",
+     "Calendar · match days and fixtures · CB Grup Barna"),
     ("Tots els equips federats del club, en un sol calendari. S'actualitza cada dia a partir",
      "Todos los equipos federados del club, en un solo calendario. Se actualiza cada día a partir",
      "Every federated team at the club, in one calendar. Updated daily from"),
@@ -105,7 +105,7 @@ TEXTOS = [
     ("Subscriure'm al calendari (.ics)",
      "Suscribirme al calendario (.ics)",
      "Subscribe to the calendar (.ics)"),
-    ("Dies de partit per equip", "Días de partido por equipo", "Match days by team"),
+    ("Calendari per equip", "Calendario por equipo", "Team calendars"),
     ("Aquest cap de setmana", "Este fin de semana", "This weekend"),
     ("Descarregar per equip", "Descargar por equipo", "Download by team"),
     ("Posicionament del club", "Posicionamiento del club", "Where the club stands"),
@@ -113,7 +113,7 @@ TEXTOS = [
     ("Política de privacitat", "Política de privacidad", "Privacy policy"),
     ("Preguntes freqüents", "Preguntas frecuentes", "FAQ"),
     ("Demanar informació", "Pedir información", "Request information"),
-    ("Calendaris per equip", "Calendarios por equipo", "Calendars by team"),
+    ("Calendaris per equip", "Calendario por equipo", "Team calendars"),
     ("Premi Dona i Esport", "Premio Mujer y Deporte", "Women and Sport Award"),
     ("Articles i premsa", "Artículos y prensa", "Articles and press"),
     ("Campus de bàsquet", "Campus de baloncesto", "Basketball camp"),
@@ -124,7 +124,7 @@ TEXTOS = [
     ("Bàsquet femení", "Baloncesto femenino", "Women's basketball"),
     ("Dades oficials", "Datos oficiales", "Official data"),
     ("Instal·lacions", "Instalaciones", "Facilities"),
-    ("Dies de partit", "Días de partido", "Match days"),
+    ("Calendari", "Calendario", "Calendar"),
     ("Cistella Petita", "Cistella Petita", "Cistella Petita"),
     ("Barna Màgics", "Barna Màgics", "Barna Màgics"),
     ("Torneig 3x3", "Torneo 3x3", "3x3 tournament"),
@@ -204,9 +204,9 @@ MESOS = {
 # marcadors SEO-*, comprovat—, aixi que es poden traduir aqui sense que el
 # generador de la instantania SEO els trepitgi.
 LD = [
-    ("Dies de partit · CB Grup Barna",
-     "Días de partido · CB Grup Barna",
-     "Match days · CB Grup Barna"),
+    ("Calendari · CB Grup Barna",
+     "Calendario · CB Grup Barna",
+     "Calendar · CB Grup Barna"),
     ("Calendari global de tots els equips del CB Grup Barna, partits del cap de setmana i resultats de la jornada anterior.",
      "Calendario global de todos los equipos del CB Grup Barna, partidos del fin de semana y resultados de la jornada anterior.",
      "Full calendar for every CB Grup Barna team, this weekend's fixtures and last round's results."),

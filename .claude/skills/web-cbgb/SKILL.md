@@ -260,13 +260,18 @@ Una cosa es diu igual a Instagram i a la web.
 
 | Destacada d'IG | Etiqueta a la web |
 |---|---|
-| Dies de partit | **Calendari** — decisió de la direcció del club, agost del 2026. Abans era «Dies de partit»; el que segueix prohibit és «Partits i resultats» i «Partits i events». Als `<title>` i les descripcions s'hi pot deixar «dies de partit» com a terme de cerca. |
-| — | **Calendari per equip** per a `/partits/calendaris/` |
+| Dies de partit | **Calendari** — decisió de la direcció del club, agost del 2026, i **igual en castellà i en anglès**: «Calendario» i «Calendar». Abans era «Dies de partit»; ara aquest, i «Partits i resultats» i «Partits i events», són els prohibits. Als `<title>` i les descripcions s'hi pot deixar «dies de partit» com a terme de cerca, però l'etiqueta hi va davant. |
+| — | **Calendari per equip** per a `/partits/calendaris/` · «Calendario por equipo» · «Team calendars» |
 | Escoleta | Escoleta |
 | El club | El club |
 
 Els `<title>` i les descripcions sí que poden portar termes de cerca
-(«calendari», «resultats»); les **etiquetes i els enllaços**, no.
+(«dies de partit», «resultats»); les **etiquetes i els enllaços**, no. La
+llista viva és `i18n/etiquetes.yml`, i `scripts/i18n-aplica-etiquetes.py`
+l'aplica a disc: si canvies el vocabulari, canvia'l allà i executa'l, o el
+lint te'l revertirà. Les **adreces no es toquen** —`/partits/` i
+`/partits/calendaris/` es queden com són— perquè d'aquesta última en pengen
+els `.ics` que les famílies ja tenen subscrits al mòbil.
 
 ---
 

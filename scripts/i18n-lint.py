@@ -18,7 +18,7 @@ Comprova nou coses, en dos nivells de gravetat:
     · Un hreflang apunta a una pàgina que no existeix.
     · Un hreflang no és recíproc: A diu que B és la seva traducció i B no ho diu.
     · Un enllaç fa servir un sinònim que el vocabulari del club dona per
-      prohibit —«Team calendars» en comptes de «Match days by team».
+      prohibit —«Match days» en comptes de «Calendar».
 
   PENDENTS (informen, no aturen res: és feina, i la feina es prioritza)
     · Pàgines sense versió castellana o anglesa.
@@ -248,7 +248,7 @@ def revisa():
                 continue
             # Dins d'un text seguit, un enllaç pot dir el que li convingui:
             # «podeu consultar el calendari del vostre equip» és una frase, no
-            # una etiqueta, i obligar-la a dir «Dies de partit» faria una
+            # una etiqueta, i obligar-la a dir «Calendari» faria una
             # prosa absurda. La regla només val per al que fa d'etiqueta:
             # curt, sense puntuació de frase i començat en majúscula.
             paraules = net.split()

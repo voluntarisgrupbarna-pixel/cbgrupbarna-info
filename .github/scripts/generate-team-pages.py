@@ -74,7 +74,7 @@ CATEGORIA_TRAD = {
 
 T = {
   "ca": {
-    "locale": "ca_ES", "inici": "Inici", "partits": "Dies de partit", "equips": "Equips",
+    "locale": "ca_ES", "inici": "Inici", "partits": "Calendari", "equips": "Equips",
     "crumb_aria": "Fil d'Ariadna",
     "victoria": "victòria", "derrota": "derrota", "empat": "empat",
     "posicio": "{n}a posició del seu grup",
@@ -98,7 +98,7 @@ T = {
                   "els últims resultats i subscriure't per rebre els canvis automàticament.",
   },
   "es": {
-    "locale": "es_ES", "inici": "Inicio", "partits": "Días de partido", "equips": "Equipos",
+    "locale": "es_ES", "inici": "Inicio", "partits": "Calendario", "equips": "Equipos",
     "crumb_aria": "Ruta de navegación",
     "victoria": "victoria", "derrota": "derrota", "empat": "empate",
     "posicio": "{n}ª posición de su grupo",
@@ -122,7 +122,7 @@ T = {
                   "los últimos resultados y suscribirte para recibir los cambios automáticamente.",
   },
   "en": {
-    "locale": "en_US", "inici": "Home", "partits": "Match days", "equips": "Teams",
+    "locale": "en_US", "inici": "Home", "partits": "Calendar", "equips": "Teams",
     "crumb_aria": "Breadcrumb",
     "victoria": "win", "derrota": "loss", "empat": "draw",
     "posicio": "{n}th in their group",
