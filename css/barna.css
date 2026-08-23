@@ -522,4 +522,8 @@ table.vs td.a { color: var(--red-dark); }
    el dit, no l'amplada: una tauleta ajaguda fa 1.180 px i es toca igualment. */
 @media (pointer: coarse) {
   .form-check { min-height: 44px; align-items: center; }
+  /* I l'etiqueta mateixa, que és el que es toca: la fila podia fer 44 px i
+     el text, en una sola línia, quedar-se en 22. El marge negatiu torna
+     l'espai que afegeix el coixí, de manera que el formulari no es mou. */
+  .form-check label { display: inline-block; min-height: 44px; padding: 11px 0; margin: -11px 0; }
 }
