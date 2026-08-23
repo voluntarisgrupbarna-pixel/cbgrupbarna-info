@@ -100,6 +100,25 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
 <link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma: aquestes pàgines no carreguen barna.css, així que
+   el component es pinta aquí amb els mateixos valors. Caselles de 24px
+   mínim perquè un dit hi arribi (WCAG 2.2, mida mínima de diana). */
+
+/* ==== SELECTOR D'IDIOMA ====
+   Aquesta pàgina no carrega css/barna.css: porta el seu propi full. El
+   component es pinta aquí amb els mateixos valors. Les caselles fan 24px
+   mínim perquè un dit hi arribi (mida mínima de diana, WCAG 2.2): amb el
+   text sol feien 15-17px. */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color 0.3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+.lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
+.lang-switch.light a.active { color: #fff; }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+</style>
 
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -387,6 +406,9 @@ details.tpl[open] summary::after { content: '–'; }
   <div class="head-in">
     <div class="head-side">
       <nav class="head-nav" aria-label="Tornar"><a href="/"><span aria-hidden="true">←</span> <span class="lbl-back" data-t="back">Tornar a la web</span></a></nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/opina/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/opina/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/opina/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
     </div>
     <a class="head-brand" href="/" aria-label="CB Grup Barna · inici">
       <img src="/logo.png" alt="Escut del CB Grup Barna" width="32" height="32" fetchpriority="high">

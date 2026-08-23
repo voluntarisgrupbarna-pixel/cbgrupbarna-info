@@ -832,6 +832,21 @@ img { max-width: 100%; display: block; }
     scroll-behavior: auto !important;
   }
 }
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.lang-switch a { display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;text-decoration:none; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+.lang-switch a.active { opacity: 1; font-weight: 600; }
+.lang-switch a:hover { opacity: 1; }
+.lang-switch .sep { opacity: 0.25; }
+
+/* A mòbil el títol del menú («CB GRUP BARNA · MES DE L'ORGULL») no cabia i
+   empenyia el selector d'idioma fora de la pantalla: hi era, però no s'hi
+   podia arribar. Ara el títol pot encongir i el selector es queda sempre
+   visible a la dreta. */
+@media (max-width: 720px) {
+  .nav-inner { gap: 12px; }
+  .nav-logo { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nav-inner .lang-switch { flex-shrink: 0; margin-left: auto; }
+}
 </style>
 <script src="/js/galetes.js"></script>
 </head>
@@ -868,6 +883,9 @@ img { max-width: 100%; display: block; }
       <li><a href="#contacte">Contacte</a></li>
     </ul>
     <a href="#activitats" class="nav-cta">Veure activitats</a>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/orgull/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/orgull/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/orgull/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
     <button class="nav-toggle" aria-label="Obrir menú" onclick="document.getElementById('nav').classList.toggle('open')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <line x1="3" y1="6" x2="21" y2="6"/>

@@ -140,8 +140,8 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
 #view-gate,#view-follow,#view-loading,#view-gallery{display:none}
 
 /* SELECTOR D'IDIOMA */
-.lang-switch{position:fixed;top:14px;right:16px;z-index:500;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.lang-switch a{padding:7px 2px;opacity:.55;color:rgba(255,255,255,.7);transition:opacity .3s,color .3s}
+.lang-switch{position:fixed;top:14px;right:16px;z-index:500;display:flex;align-items:center;gap:2px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;text-decoration:none;opacity:.55;color:rgba(255,255,255,.7);transition:opacity .3s,color .3s}
 .lang-switch a.active{opacity:1;color:#fff}
 .lang-switch a:hover{opacity:1;color:#E20613}
 .lang-switch .sep{opacity:.3}
@@ -150,9 +150,9 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
 </head>
 <body>
 
-<div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-  <a href="/galeria-3x3-glories/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/galeria-3x3-glories/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/galeria-3x3-glories/" hreflang="en" class="active">EN</a>
-</div>
+<nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/galeria-3x3-glories/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/galeria-3x3-glories/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/galeria-3x3-glories/" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
+    </nav>
 
 <!-- ── GATE ─────────────────────────────────────────── -->
 <div id="view-gate" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden">
@@ -249,6 +249,10 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
       </div>
     </div>
 
+    <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;text-align:left;margin:4px 0 18px">
+      <input type="checkbox" id="gate-consent" required style="margin-top:3px;width:18px;height:18px;accent-color:#E20613;cursor:pointer;flex-shrink:0">
+      <span style="font-size:12.5px;color:#8d8d8d;line-height:1.55">I agree that CB Grup Barna processes this data to send me the newsletter and give me access to the photos. <a href="/en/privacy-policy/" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">Privacy policy</a>.</span>
+    </label>
     <button type="submit" id="gate-btn"
       style="width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#444;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s">
       Fill in all the fields
@@ -367,7 +371,10 @@ function validateGate() {
   const email   = document.getElementById('email').value.trim();
   const mobil   = document.getElementById('mobil').value.trim();
   const club    = document.getElementById('club').value.trim();
-  const valid   = nom && cognoms && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && mobil.length >= 9 && club;
+  const consent = document.getElementById('gate-consent').checked;
+  // El formulari demana nom, cognoms, correu, mòbil i club: són dades
+  // personals i, sense consentiment explícit, no es poden recollir.
+  const valid   = nom && cognoms && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && mobil.length >= 9 && club && consent;
   const btn     = document.getElementById('gate-btn');
   if (valid) {
     btn.className = 'btn-green';
@@ -382,6 +389,7 @@ function validateGate() {
 }
 
 document.getElementById('gate-form').addEventListener('input', validateGate);
+document.getElementById('gate-form').addEventListener('change', validateGate);
 document.getElementById('gate-form').addEventListener('submit', function(e) {
   e.preventDefault();
   if (!validateGate()) return;

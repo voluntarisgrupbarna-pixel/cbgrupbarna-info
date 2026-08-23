@@ -60,7 +60,6 @@
 <link rel="shortcut icon" href="/logo.png">
 <!-- Preload recursos crítics -->
 <link rel="preload" href="/logo.png" as="image" fetchpriority="high">
-<link rel="preload" href="/og-image.jpg" as="image">
 <!-- DNS prefetch per a recursos externs -->
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//www.instagram.com">
@@ -558,15 +557,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
 
 /* ==== SELECTOR D'IDIOMA ==== */
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; }
-.lang-switch a { padding: 7px 2px; color: #6B6560; transition: color 0.3s; }
-.lang-switch a.active { color: var(--ink); }
-.lang-switch a:hover { color: var(--red); }
-.lang-switch .sep { color: var(--line); }
-.lang-switch.light a { color: rgba(255,255,255,0.45); }
-.lang-switch.light a.active { color: #fff; }
-.lang-switch.light a:hover { color: var(--red); }
-.lang-switch.light .sep { color: rgba(255,255,255,0.2); }
 
 /* Menú desplegat · el mapa complet del club */
 .menu { position: fixed; inset: 0; z-index: 105; background: var(--paper); padding: 126px clamp(20px, 6vw, 70px) 48px; transform: translateY(-101%); transition: transform 0.6s var(--ease); overflow-y: auto; visibility: hidden; }
@@ -856,6 +846,20 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 .comunitat-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.6vw, 28px); letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; }
 .comunitat-s { display: block; margin-top: 9px; font-size: 12.5px; color: rgba(255,255,255,0.74); }
 .comunitat-porta--red .comunitat-s { color: rgba(255,255,255,0.86); }
+
+/* ==== SELECTOR D'IDIOMA ====
+   Aquesta pàgina no carrega css/barna.css: porta el seu propi full. El
+   component es pinta aquí amb els mateixos valors. Les caselles fan 24px
+   mínim perquè un dit hi arribi (mida mínima de diana, WCAG 2.2): amb el
+   text sol feien 15-17px. */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color 0.3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+.lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
+.lang-switch.light a.active { color: #fff; }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
 </style>
 <script src="/js/galetes.js"></script>
 </head>
@@ -896,7 +900,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
         <a href="#info">Información</a>
       </nav>
     </div>
-    <a class="head-brand" href="#top" aria-label="CB Grup Barna · inicio">
+    <a class="head-brand" href="#top" aria-label="CB Grup Barna · inicioo">
       <img src="/logo.png" alt="Escudo del CB Grup Barna" width="32" height="32" fetchpriority="high" decoding="async">
       <span>CB Grup Barna</span>
     </a>
@@ -911,9 +915,9 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
           <svg class="vt-extensa" viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="16"/><rect x="13" y="4" width="8" height="7"/><rect x="13" y="13" width="8" height="7"/></svg>
         </span><span id="viewToggleLbl">Franjas</span>
       </button>
-      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-        <a href="/" hreflang="ca" data-cta="lang-ca">CA</a><span class="sep">·</span><a href="/es/" hreflang="es" class="active" data-cta="lang-es">ES</a><span class="sep">·</span><a href="/en/" hreflang="en" data-cta="lang-en">EN</a>
-      </div>
+      <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
     </div>
   </div>
 </header>
@@ -1269,7 +1273,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
         </details>
         <details>
           <summary>¿Es el CB Grup Barna un club referente en baloncesto inclusivo?</summary>
-          <p>Sí. Los <a href="/magics/">Barna Màgics</a> son el equipo de baloncesto inclusivo del club, integrado en igualdad de condiciones con el resto de equipos y compitiendo en la Liga ACELL con la Fundació Mullor: subcampeones de la Lliga Catalana 25-26 y terceros en La Seu d'Urgell. Su modelo ha inspirado la categoría EQUALS del torneo 3x3 Westfield Glòries, adoptada por otros clubes de Cataluña: lo que ha convertido al Barna en un referente de inclusión en el baloncesto base.</p>
+          <p>Sí. Los <a href="/es/magics/">Barna Màgics</a> son el equipo de baloncesto inclusivo del club, integrado en igualdad de condiciones con el resto de equipos y compitiendo en la Liga ACELL con la Fundació Mullor: subcampeones de la Lliga Catalana 25-26 y terceros en La Seu d'Urgell. Su modelo ha inspirado la categoría EQUALS del torneo 3x3 Westfield Glòries, adoptada por otros clubes de Cataluña: lo que ha convertido al Barna en un referente de inclusión en el baloncesto base.</p>
         </details>
         <details>
           <summary>¿Tiene el CB Grup Barna paridad real entre niños y niñas?</summary>
@@ -1366,6 +1370,12 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
       </div>
       <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/es/politica-de-privacidad/">Política de privacidad</a>
+        <a href="/es/aviso-legal/">Aviso legal</a>
+        <a href="/es/politica-de-privacidad/#galetes">Cookies</a>
+      </div>
+      <div class="foot-col">
         <h3>Redes</h3>
         <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
@@ -1374,9 +1384,9 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     </div>
     <div class="foot-btm">
       <div class="foot-mark">#Som<em>Clot</em></div>
-      <div class="lang-switch light" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-        <a href="/" hreflang="ca" data-cta="foot-lang-ca">Català</a><span class="sep">·</span><a href="/es/" hreflang="es" class="active" data-cta="foot-lang-es">Castellano</a><span class="sep">·</span><a href="/en/" hreflang="en" data-cta="foot-lang-en">English</a>
-      </div>
+      <nav class="lang-switch light" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/es/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
       <div class="foot-legal">© 2026 CB Grup Barna · Baloncesto base en El Clot desde 1965</div>
     </div>
   </div>
@@ -1403,10 +1413,30 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       document.body.style.overflow = open ? 'hidden' : '';
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       burger.setAttribute('aria-label', open ? 'Cerrar el menú' : 'Abrir el menú');
+      // El menú tapa tota la pantalla, però amb el tabulador se'n sortia cap
+      // a la pàgina de sota, que no es veu: qui navega amb teclat es perdia
+      // en enllaços invisibles. Ara el focus hi entra en obrir-lo, hi dona
+      // voltes mentre és obert, i torna al botó en tancar-lo.
+      if (open) {
+        var primer = menu.querySelector('a, button');
+        if (primer) primer.focus();
+      } else if (menu.contains(document.activeElement)) {
+        burger.focus();
+      }
     }
     burger.addEventListener('click', function () { toggle(!menu.classList.contains('open')); });
     menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { toggle(false); return; }
+      if (e.key !== 'Tab' || !menu.classList.contains('open')) return;
+      var f = [].slice.call(menu.querySelectorAll('a[href], button:not([disabled])'))
+                .filter(function (el) { return el.offsetParent !== null; });
+      if (!f.length) return;
+      var primer = f[0], ultim = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === primer) { e.preventDefault(); ultim.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultim) { e.preventDefault(); primer.focus(); }
+      else if (!menu.contains(document.activeElement)) { e.preventDefault(); primer.focus(); }
+    });
   })();
 
   // ==== CTA tracking ====
@@ -1427,6 +1457,10 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   }
   function flash(msg) {
     var t = document.createElement('div');
+    // El missatge d'error del formulari només es veia: qui fa servir un
+    // lector de pantalla no en sabia res, i el focus saltava a un camp
+    // sense saber per què. Amb role="alert" es llegeix tot sol.
+    t.setAttribute('role', 'alert');
     t.textContent = msg;
     t.style.cssText = "position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#10100E;color:#fff;padding:14px 26px;font-family:'Anton',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;z-index:1000";
     document.body.appendChild(t);

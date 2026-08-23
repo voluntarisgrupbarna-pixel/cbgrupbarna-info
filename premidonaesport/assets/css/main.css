@@ -77,7 +77,25 @@ a { color: inherit; }
   z-index: 8000;
   gap: 1rem;
 }
+/* El navegador eixamplava la finestra de disseny a 671px a mòbil perquè hi
+   ha contingut més ample que la pantalla i el <html> no el retallava. Efecte:
+   la barra superior, que és position:fixed, també feia 671px i el seu costat
+   dret —el botó de l'experiència i el selector d'idioma— quedava fora de la
+   pantalla, sense manera d'arribar-hi. Retallant també a <html>, la finestra
+   de disseny torna a ser l'amplada real del mòbil. */
+html { overflow-x: hidden; max-width: 100%; }
+body { max-width: 100%; }
+
 .tb-l { display: flex; align-items: center; gap: .75rem; }
+.tb-r { display: flex; align-items: center; gap: .75rem; }
+
+/* Selector d'idioma del dossier. Les versions castellana i anglesa ja el
+   duien; la catalana, no, i des d'aquí no hi havia manera d'arribar-hi. */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: inherit; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; opacity: .55; text-decoration: none; transition: opacity .3s, color .3s; }
+.lang-switch a.active { opacity: 1; font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { opacity: 1; color: var(--red); }
+.lang-switch .sep { opacity: .25; pointer-events: none; }
 
 /* Burger */
 .burg {

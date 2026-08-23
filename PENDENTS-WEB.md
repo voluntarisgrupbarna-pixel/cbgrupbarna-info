@@ -238,3 +238,173 @@ servidor —només `<meta refresh>` o JavaScript, que passen molt pitjor l'autor
 la URL avui, amb el domini acabat d'estrenar i encara sense posicions guanyades, és
 regalar el poc que hi ha. Es podrà fer quan `/patrocinadors/` ja posicioni i valgui la
 pena arriscar-hi, i llavors amb redireccions per a totes les fitxes alhora.
+
+---
+
+# Auditoria d'experiència d'usuari als tres idiomes · 23/08/2026
+
+Repàs complet de navegació, usabilitat i UX/UI de `cbgrupbarna.info` en
+**català, castellà i anglès** (478 fitxers HTML), fet amb el web servit de
+debò i obert amb un navegador a 390 px, no només llegint el codi. Aquí hi ha
+el que s'ha arreglat i el que queda per decidir.
+
+## Arreglat
+
+### 1. El calendari de partits no existia en castellà ni en anglès
+
+`/es/partits/` i `/en/partits/` no eren la pàgina pública traduïda: eren una
+còpia antiga que portava enganxada **l'eina interna de gestió del club**
+(92 KB de JavaScript amb entrada de resultats, generador de cartells i
+importació de PDF). A sobre, aquell codi declarava dues vegades les mateixes
+variables (`MESOS`, `DIES`), i això és un **error de sintaxi**: el navegador
+descartava el bloc sencer i no s'executava res. Resultat: al lloc del
+calendari hi sortia «Hay que activar JavaScript para ver el calendario
+completo», sempre, encara que el JavaScript estigués activat. Ni un partit,
+ni un resultat, ni un horari, per a qui llegeix la web en castellà o anglès.
+
+Ja existia el generador `scripts/build-partits-idiomes.py`, escrit per a
+això, però no s'havia arribat a executar. S'ha executat i, de passada,
+arreglat i millorat:
+
+- **Els enllaços interns ja no s'endevinen, es llegeixen.** Abans hi havia
+  una llista fixa que donava per fet que l'adreça era la mateixa en els tres
+  idiomes (`/escoleta/` → `/es/escoleta/`). No sempre ho és: la política de
+  privacitat és `/es/politica-de-privacidad/` i `/en/privacy-policy/`, i
+  protecció del menor és `/en/child-protection/`. Amb la llista fixa, el peu
+  de la pàgina castellana enviava a la política **en català**. Ara cada
+  destí es resol amb el `hreflang` de la pàgina catalana corresponent, així
+  que quan es tradueixi una secció nova això ho seguirà sol.
+- **Substitucions en dues passades.** Una regla curta es menjava el resultat
+  d'una de llarga i deixava coses com «Calendarioo global».
+- **Textos que quedaven en català** a la pàgina traduïda: el fil d'Ariadna,
+  «A casa»/«Fora» de cada partit, el recompte de partits i l'avís de quan
+  encara no hi ha resultats.
+- **El text que només senten els lectors de pantalla** (`alt` de l'escut,
+  «inici», «Fil d'Ariadna») ara també es tradueix.
+
+### 2. El selector d'idioma no hi era a 2 de cada 3 pàgines
+
+De 391 pàgines públiques, **251 no tenien selector d'idioma**. Qui entrava a
+`/en/faq/` o a `/campus/` no tenia cap manera de canviar de llengua sense
+tornar a la portada. Ara el porten totes (les úniques excepcions són el
+panell d'`/admin/`, els fitxers d'impressió d'`/opina/print/` i les
+redireccions).
+
+I on hi era, sovint estava trencat:
+
+- **15 pàgines enviaven a un article del blog.** A `/portes-obertes/`,
+  `/bustia/`, `/escriu-nos/`, `/newsletter/` i `/proteccio-menor/comunicar/`
+  —en els tres idiomes— els tres botons CA · ES · EN apuntaven tots a
+  «A quina edat començar a jugar a bàsquet». Clicar «ES» a Portes obertes et
+  deixava, després d'un salt de redirecció, en un article sobre l'edat
+  d'iniciació. Són justament les cinc pàgines on la gent escriu al club.
+- **22 pàgines el pintaven sense estil** perquè el CSS del component estava
+  copiat a mà dins de cada pàgina i allà no s'havia copiat.
+- **Hi havia vuit versions diferents del mateix CSS**: en 84 pàgines sortia
+  amb l'Anton i en la resta amb la Inter. Ara el component viu una sola
+  vegada a `css/barna.css` i s'han retirat 472 regles duplicades.
+- **Les caselles feien 15-17 px d'ample.** Per sota del mínim de 24×24 px
+  que demana la WCAG 2.2 per a qualsevol cosa que s'hagi de tocar amb el
+  dit. Ara en fan 26.
+- A `/orgull/` i a `/premidonaesport/` el selector quedava **fora de la
+  pantalla** a mòbil: hi era al codi, però no s'hi podia arribar.
+
+### 3. 599 enllaços que et treien de la teva llengua
+
+Enllaços dins de pàgines `/es/` i `/en/` que apuntaven a la versió catalana
+**tot i existir-ne la traducció**. Inclou els menús sencers d'algunes
+pàgines, el «Demanar informació» de la portada i, sobretot, això:
+
+> **El blog en castellà i en anglès amagava dos terços dels seus articles.**
+> Sota un títol que deia «Estos artículos están publicados en catalán» /
+> «These articles are published in Catalan» hi havia 14 i 15 fitxes amb el
+> títol en català i l'enllaç a la versió catalana. **Totes tenien traducció
+> completa publicada.** El lector en anglès veia 6 articles disponibles i 15
+> «només en català» que en realitat podia llegir en anglès.
+
+### 4. La capçalera es trencava a mòbil
+
+A ~190 pàgines, el nom del club de la capçalera («CB GRUP BARNA», amb
+`white-space: nowrap`) i el menú se solapaven, lletra sobre lletra, a
+qualsevol mòbil. Per sota de 560 px el nom es retira —l'escut ja hi és, i és
+enllaç a l'inici— i el menú recupera l'espai.
+
+### 5. Consentiment i legal
+
+- **L'enllaç «Més informació» de l'avís de galetes no anava enlloc**, en cap
+  dels tres idiomes. Un gestor genèric interceptava qualsevol enllaç acabat
+  en `#galetes` per reobrir el plafó, i s'enduia també el del propi avís:
+  es cancel·lava la navegació, es tornava a obrir un plafó que ja era obert
+  i, de propina, s'esborrava el consentiment desat.
+- El mateix gestor **segrestava l'àncora real** de `#galetes` a
+  `/es/politica-de-privacidad/` i `/en/privacy-policy/`: només s'excloïa la
+  catalana.
+- **Els peus en castellà i anglès no tenien columna «Legal».** Cap enllaç a
+  la política de privacitat, ni a l'avís legal, ni a les galetes, en cap de
+  les ~290 pàgines. Afegida als 218 peus que tenen l'estructura estàndard.
+- **Dos formularis deien «Más info» / «More info» i portaven al dossier del
+  Premi Dona i Esport**, no a la política de privacitat: `/es/fotos-3x3/`,
+  `/en/fotos-3x3/` i els dos `3x3-westfield-2026/`.
+- **`/galeria-3x3-glories/` recollia nom, cognoms, correu, mòbil i club
+  sense casella de consentiment ni cap enllaç a la política**, en els tres
+  idiomes. Ara la casella és obligatòria per continuar.
+
+### 6. Accessibilitat i rendiment
+
+- L'`alt` de l'escut i l'`aria-label` de la capçalera eren en català a 255
+  llocs de `/es/` i `/en/`: qui fa servir un lector de pantalla sentia
+  català llegint la pàgina en un altre idioma.
+- **El menú de la portada no retenia el focus**: amb el tabulador se'n
+  sortia cap a la pàgina de sota, que està tapada. Ara el focus hi entra en
+  obrir-lo, hi dona voltes i torna al botó en tancar-lo.
+- **Els errors del formulari de la portada no es llegien.** El missatge
+  sortia en un rètol sense `role`, i desapareixia als 2,2 s.
+- **El 404 sortia sempre en català.** GitHub Pages el serveix per a
+  qualsevol adreça inexistent, també `/es/…` i `/en/…`: qui s'equivocava
+  dins la versió castellana o anglesa quedava expulsat a un menú català. Ara
+  es reescriu sol segons el camí.
+- **Es precarregava `og-image.jpg` (84 KB) a les tres portades** i aquella
+  imatge no es veu mai: és la de compartir a xarxes. 84 KB de prioritat alta
+  competint amb el que sí que es veu.
+- **Les tipografies es baixaven dues vegades.** `/escoleta/` i
+  `/partners-mapa/` les demanaven a `/escoleta/fonts/`, una còpia amb URL
+  diferent i, per tant, memòria cau diferent: ~130 KB que ja eren al
+  navegador.
+- Tres `<audio>` de `/premidonaesport/patrocinis/` apuntaven a fitxers
+  `.mp3` que no existeixen (els reals són `.m4a`): l'experiència sonora no
+  sonava.
+- `rel="noopener"` a 9 enllaços `target="_blank"`; `src=""` retirat dels
+  visors de `/fotos/` (un `src` buit fa que el navegador torni a demanar la
+  pàgina sencera); `noindex` i `viewport` a les 12 redireccions.
+
+### 7. `/escoleta/` tenia el seu propi commutador CAT/CAST
+
+Canviava el text sense canviar l'adreça i, amb el navegador en castellà,
+s'obria en castellà tot i que la URL, el `canonical` i el `hreflang` deien
+que era la catalana. Al mateix temps ja existeixen `/es/escoleta/` i
+`/en/escoleta/`, traduïdes senceres: hi havia **dues versions castellanes en
+dues adreces diferents** i cap manera d'arribar a l'anglesa. Ara fa servir
+el selector de sempre. El text castellà segueix al marcatge, ocult; es pot
+netejar quan es vulgui.
+
+## Per decidir (no s'ha tocat)
+
+1. **`/premidonaesport/` demana un PIN i alhora és al `sitemap.xml`.** Són
+   ~115 adreces que es donen a Google com a indexables i que, quan algú hi
+   clica, ensenyen una paret amb un PIN. A més el codi és a la vista dins
+   d'`assets/js/auth.js`. O s'obre (i es treu la paret) o es treu del
+   sitemap amb `noindex`. És una decisió de l'Ana, no un error.
+2. **Hi ha un vídeo de la mascota en castellà que no fa servir ningú.**
+   `/mascota/mascota-reel-es.mp4` (50 MB) és al repositori, però
+   `/es/mascota/` i `/en/mascota/` serveixen el català amb subtítols
+   catalans per defecte. Abans de canviar-ho cal confirmar que el fitxer és
+   el doblatge bo.
+3. **Les portades en castellà i anglès són més pobres que la catalana.** La
+   catalana té «La portada», «Cultura del Progrés», «El Barna per dins»,
+   «Observatori Barna» i «Presentacions»; les altres dues no, i el seu `h1`
+   és «Escoleta de baloncesto» en comptes del club. Són ~45 KB menys de
+   pàgina.
+4. **El `--red` de l'escut (#E20613) sobre crema (#F4F1EC) dona 4,37:1**,
+   just per sota del 4,5:1 que demana la WCAG per a text petit. Per a
+   titulars grans és correcte; per a text petit convindria el `--red-dark`
+   (#A8040E, 7,81:1).

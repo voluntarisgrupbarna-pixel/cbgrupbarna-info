@@ -26,6 +26,16 @@
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
+   component es pinta aquí amb els mateixos tokens, i per tant segueix el
+   mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+</style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -229,8 +239,8 @@
 <a href="#main" class="skip">Saltar al contenido</a>
 <header class="head">
   <div class="head-in">
-    <a class="head-brand" href="/es/" aria-label="CB Grup Barna · inici">
-      <img src="/logo.png" alt="Escut del CB Grup Barna">
+    <a class="head-brand" href="/es/" aria-label="CB Grup Barna · inicio">
+      <img src="/logo.png" alt="Escudo del CB Grup Barna">
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegación principal">
@@ -241,6 +251,9 @@
       <a href="/es/premsa/" class="opt">Prensa</a>
       <a href="/es/patrocinadors/" class="opt">Partners</a>
       <a href="/es/#info">Información</a>
+    </nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/presentacions/visio-global/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/presentaciones/vision-global/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/presentations/global-view/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
       <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
@@ -260,12 +273,12 @@
       <a href="#patrocinis">Patrocinios</a>
       <a href="#institucions">Instituciones</a>
     </div>
-    <a class="idx-more" href="/presentacions/">Todas las presentaciones</a>
+    <a class="idx-more" href="/es/presentaciones/">Todas las presentaciones</a>
   </div>
 </nav>
 
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Ruta de navegación"><a href="/es/">Inicio</a> · <a href="/presentacions/">Presentaciones</a> · <span>Visión Global</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Ruta de navegación"><a href="/es/">Inicio</a> · <a href="/es/presentaciones/">Presentaciones</a> · <span>Visión Global</span></nav></div>
 
 <!-- PORTADA -->
 <section class="hero" id="portada">
@@ -332,7 +345,7 @@
       <p class="lab">· La propuesta</p>
       <p><strong>Fons Barna 8M</strong> en tres niveles: un fondo de becas FCBQ para titular a las 38 entrenadoras en activo (cofinanciación 30% club / 70% FCBQ), el rediseño del Programa Mentoría para que acceda quien ya entrena y no solo quien ya tiene carné, y un programa piloto «Del Clot a Cataluña» para hacer del modelo Barna una política replicable en todos los clubes de barrio.</p>
     </div>
-    <a class="chapter-go" href="/presentacions/fons-barna-8m/">Ver la petición formal completa <i></i></a>
+    <a class="chapter-go" href="/es/presentaciones/fons-barna-8m/">Ver la petición formal completa <i></i></a>
   </div>
 </section>
 
@@ -355,7 +368,7 @@
         <p>Flow Camp, TC Basics, Shooting Academy, One &amp; One Mastery, Ballhandling Lab y Skills Lab Experience. Abierto a jugadores y jugadoras de cualquier club de Barcelona y de la provincia.</p>
       </div>
     </div>
-    <a class="chapter-go" href="/presentacions/campus-timechamber/">Ver el programa y los precios completos <i></i></a>
+    <a class="chapter-go" href="/es/presentaciones/campus-timechamber/">Ver el programa y los precios completos <i></i></a>
   </div>
 </section>
 
@@ -381,7 +394,7 @@
     <div class="panel">
       <p><strong>Once líneas de investigación, dieciocho capítulos, ~61.500 palabras.</strong> Psicología del jugador joven, abandono, desarrollo del talento, salud, protección del menor, género y el mapa completo del baloncesto catalán — con el Barna comparado uno a uno con 22 clubes formativos reales.</p>
     </div>
-    <a class="chapter-go" href="/presentacions/evidencia-i-posicio/">Ver el informe completo con datos <i></i></a>
+    <a class="chapter-go" href="/es/presentaciones/evidencia-y-posicion/">Ver el informe completo con datos <i></i></a>
   </div>
 </section>
 
@@ -404,7 +417,7 @@
         <p>Cuatro niveles de colaboración, de la presencia digital al naming de un evento, más colaboraciones en especie a medida de cada empresa.</p>
       </div>
     </div>
-    <a class="chapter-go" href="/presentacions/dossier-patrocinis/">Ver el dosier completo de patrocinios <i></i></a>
+    <a class="chapter-go" href="/es/presentaciones/dosier-patrocinios/">Ver el dosier completo de patrocinios <i></i></a>
   </div>
 </section>
 
@@ -431,7 +444,7 @@
     <div class="btn-row">
       <a href="https://api.whatsapp.com/send?phone=+34698425153" class="btn red" target="_blank" rel="noopener" data-cta="visio-global-wa">WhatsApp del club</a>
       <a href="mailto:marqueting@cbgrupbarna.info" class="btn ghost" data-cta="visio-global-mail">marqueting@cbgrupbarna.info</a>
-      <a href="/presentacions/" class="btn ghost" data-cta="visio-global-presentacions">Todas las presentaciones</a>
+      <a href="/es/presentaciones/" class="btn ghost" data-cta="visio-global-presentacions">Todas las presentaciones</a>
     </div>
   </div>
 </section>
@@ -477,6 +490,12 @@
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/es/politica-de-privacidad/">Política de privacidad</a>
+        <a href="/es/aviso-legal/">Aviso legal</a>
+        <a href="/es/politica-de-privacidad/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Redes</h3>

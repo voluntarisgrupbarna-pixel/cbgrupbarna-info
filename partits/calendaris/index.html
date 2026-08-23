@@ -28,11 +28,6 @@
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">
 <style>
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-.lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; }
-.lang-switch .sep { opacity: 0.25; }
 .head-in .lang-switch { margin-left: auto; }
 </style>
 <script type="application/ld+json">
@@ -134,9 +129,9 @@
       <a href="/campus/" class="opt">Campus</a>
       <a href="/empreses/" class="opt">Empreses</a>
     </nav>
-    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-      <a href="/partits/calendaris/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/partits/calendaris/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/partits/calendaris/" hreflang="en">EN</a>
-    </div>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/partits/calendaris/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/partits/calendaris/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/partits/calendaris/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
   </div>
 </header>
 <main id="main">

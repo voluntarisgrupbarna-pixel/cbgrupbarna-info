@@ -98,6 +98,16 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
 <link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma: aquestes pàgines no carreguen barna.css, així que
+   el component es pinta aquí amb els mateixos valors. Caselles de 24px
+   mínim perquè un dit hi arribi (WCAG 2.2, mida mínima de diana). */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color .3s ease; }
+.lang-switch a.active { color: #10100E; font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: #E20613; }
+.lang-switch .sep { color: rgba(16,16,14,.2); pointer-events: none; }
+</style>
 
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -350,9 +360,12 @@ details.tpl[open] summary::after { content: '–'; }
       <a href="/en/patrocinadors/" class="opt">Partners</a>
       <a href="/en/#info">Information</a>
     </nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/opina/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/opina/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/opina/" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
+    </nav>
     </div>
-    <a class="head-brand" href="/en/" aria-label="CB Grup Barna · inici">
-      <img src="/logo.png" alt="Escut del CB Grup Barna" width="32" height="32" fetchpriority="high">
+    <a class="head-brand" href="/en/" aria-label="CB Grup Barna · home">
+      <img src="/logo.png" alt="CB Grup Barna crest" width="32" height="32" fetchpriority="high">
       <span>CB Grup Barna</span>
     </a>
     <div class="head-side r">
@@ -620,6 +633,12 @@ https://cbgrupbarna.info/opina
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/en/privacy-policy/">Privacy policy</a>
+        <a href="/en/legal-notice/">Legal notice</a>
+        <a href="/en/privacy-policy/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Social</h3>

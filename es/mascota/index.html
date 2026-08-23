@@ -449,11 +449,13 @@
     .footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
   }
 
-  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
+  /* Caselles de 24px mínim: amb el text sol feien 19-21px d'ample i no
+     arribaven a la mida mínima de diana tàctil (WCAG 2.2). */
+  .lang-switch { display: flex; align-items: center; gap: 2px; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; opacity: 0.55; text-decoration: none; transition: opacity 0.3s, color 0.3s; }
   .lang-switch a.active { opacity: 1; font-weight: 600; }
-  .lang-switch a:hover { opacity: 1; }
-  .lang-switch .sep { opacity: 0.25; }
+  .lang-switch a:hover, .lang-switch a:focus-visible { opacity: 1; }
+  .lang-switch .sep { opacity: 0.25; pointer-events: none; }
 
   .lang-switch-bar {
     position: absolute;
@@ -475,11 +477,9 @@
 <main class="hero" role="main">
   <div class="video-wrap">
     <div class="video-badge">#SomClot · Escuela Baloncesto</div>
-    <div class="lang-switch-bar">
-      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-        <a href="/mascota/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/mascota/" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/mascota/" hreflang="en">EN</a>
-      </div>
-    </div>
+    <nav class="lang-switch lang-switch-bar" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/es/mascota/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/mascota/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/mascota/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
     <video
       id="vid"
       playsinline

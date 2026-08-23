@@ -65,7 +65,7 @@
   .note{font-size:.78rem;color:#6B6560;margin-top:.6rem;line-height:1.5}
   .tablewrap{overflow-x:auto}
   .lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-  .lang-switch a { padding: 7px 2px; opacity: 0.55; color: #6B6560; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; text-decoration: none; opacity: 0.55; color: #6B6560; transition: opacity 0.3s, color 0.3s; }
   .lang-switch a.active { opacity: 1; font-weight: 700; color: var(--ink); }
   .lang-switch a:hover { opacity: 1; color: var(--red); }
   .lang-switch .sep { opacity: 0.25; }
@@ -82,9 +82,9 @@
   </div>
   <div class="links">
     <a href="/jugadors/admin.html">← Plantilla</a>
-    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-      <a href="/jugadors/estadistiques.html" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/jugadors/estadistiques.html" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/jugadors/estadistiques.html" hreflang="en">EN</a>
-    </div>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/jugadors/estadistiques.html" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/jugadors/estadistiques.html" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/jugadors/estadistiques.html" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
   </div>
   <div class="nav-user" id="nav-user">
     <span id="nav-username"></span>

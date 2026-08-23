@@ -26,6 +26,16 @@
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
+   component es pinta aquí amb els mateixos tokens, i per tant segueix el
+   mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -280,6 +290,9 @@
       <a href="/3x3/" class="opt">3x3</a>
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
+    </nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/presentacions/fons-barna-8m/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/presentaciones/fons-barna-8m/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/presentations/fons-barna-8m/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
       <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>

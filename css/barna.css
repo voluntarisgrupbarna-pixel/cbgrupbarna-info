@@ -70,6 +70,31 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 @media (max-width: 1080px) { .head-nav a.opt { display: none; } }
 @media (max-width: 1080px) { .head-in { flex-wrap: nowrap; } .head-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; } .head-nav::-webkit-scrollbar { display: none; } }
 
+/* A mòbil, la capçalera no hi cabia: el nom del club («CB GRUP BARNA») té
+   white-space: nowrap i el menú s'hi encavalcava a sobre, lletra sobre
+   lletra, a totes les pàgines que porten selector d'idioma. El nom no és
+   informació —l'escut ja hi és, i és enllaç a l'inici— així que per sota de
+   560px es retira i el menú recupera l'espai. .head-nav necessita min-width:0
+   perquè un fill flexible amb overflow-x pugui encongir de veritat. */
+@media (max-width: 1080px) { .head-nav { min-width: 0; } }
+@media (max-width: 560px) { .head-brand span { display: none; } }
+
+/* ==== SELECTOR D'IDIOMA ====
+   Fins ara cada pàgina que el duia es repintava aquest bloc a dins del seu
+   <style>, i les que no el copiaven el treien sense estil. Ara viu aquí una
+   sola vegada: qualsevol pàgina que carregui barna.css el té ben pintat.
+   Les caselles fan 24px d'amplada mínima perquè un dit hi arribi: amb el
+   text sol («CA») feien 15-17px i incomplien la mida mínima de diana de la
+   WCAG 2.2. Els separadors són decoratius i no es poden tocar. */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color 0.3s var(--ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+.lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
+.lang-switch.light a.active { color: #fff; }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+
 /* ==== BOTONS ==== */
 .cta { display: inline-block; font-family: var(--body); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid currentColor; transition: color 0.35s var(--ease), border-color 0.35s var(--ease); }
 .cta:hover { color: var(--red); border-color: var(--red); }

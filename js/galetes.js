@@ -166,7 +166,7 @@
         '<div class="cbgb-gal-t">' +
           '<b>' + t.titol + '</b>' +
           '<p>' + t.text + ' ' +
-          '<a href="' + t.enllac + '">' + t.mes + '</a>.</p>' +
+          '<a href="' + t.enllac + '" data-cbgb-mes="1">' + t.mes + '</a>.</p>' +
         '</div>' +
         '<div class="cbgb-gal-b">' +
           '<button type="button" data-cbgb="no">' + t.nomes + '</button>' +
@@ -200,6 +200,11 @@
   // ── 5. API per reobrir el panell des del peu ──
   window.CBGB_GALETES = {
     obrir: function () {
+      // Si la barra ja hi és, no s'esborra res: abans es netejava el
+      // consentiment desat i tot seguit pintar() sortia de seguida perquè
+      // la barra existia, així que la decisió desapareixia sense que la
+      // persona veiés cap panell nou.
+      if (barra) { barra.querySelector('[data-cbgb="si"]').focus(); return; }
       try { localStorage.removeItem(CLAU); localStorage.removeItem(CLAU_V); } catch (e) {}
       pintar();
     },
@@ -207,10 +212,24 @@
   };
 
   // Qualsevol enllaç cap a #galetes reobre el panell sense sortir de la pàgina
+  // Les tres polítiques de privacitat tenen una secció #galetes de veritat.
+  // Abans només s'excloïa la catalana, i per tant a /es/politica-de-privacidad/
+  // i a /en/privacy-policy/ l'àncora de la pàgina quedava segrestada: en lloc
+  // de baixar fins a la secció, reobria el panell.
+  var POLITIQUES = [
+    '/politica-de-privacitat/',
+    '/es/politica-de-privacidad/',
+    '/en/privacy-policy/'
+  ];
+
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href$="#galetes"]');
     if (!a) return;
-    if (location.pathname === '/politica-de-privacitat/') return; // allà és una àncora real
+    // L'enllaç «Més informació» del propi avís ha de portar a la política.
+    // Amb el gestor genèric no anava enlloc: es cancel·lava la navegació i
+    // es tornava a obrir un panell que ja era obert.
+    if (a.hasAttribute('data-cbgb-mes')) return;
+    if (POLITIQUES.indexOf(location.pathname) !== -1) return; // allà és una àncora real
     e.preventDefault();
     window.CBGB_GALETES.obrir();
   });

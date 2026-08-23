@@ -104,5 +104,83 @@
     </div>
   </div>
 </footer>
+
+<script>
+/* ── El 404 en tres idiomes ──────────────────────────────────────────────
+   GitHub Pages serveix aquest mateix fitxer per a QUALSEVOL adreça que no
+   existeixi, també per a /es/… i /en/…. Fins ara sempre sortia en català i
+   amb totes les portes cap a les pàgines catalanes: qui s'equivocava dins
+   la versió castellana o anglesa del web en sortia expulsat. Ara la pàgina
+   mira el camí i es reescriu sola. Sense JavaScript queda tal com era, en
+   català, que és el comportament de sempre. */
+(function () {
+  var pre = location.pathname.slice(0, 4);
+  var lg = pre === '/es/' ? 'es' : pre === '/en/' ? 'en' : 'ca';
+  if (lg === 'ca') return;
+  var T = {
+    es: {
+      lang: 'es', skip: 'Saltar al contenido', inici: 'CB Grup Barna · inicio',
+      alt: 'Escudo del CB Grup Barna', nav: 'Navegación principal',
+      lab: 'Página no encontrada', h1: 'Esta página no está.',
+      p: 'O la dirección ha cambiado, o tiene una letra de más. No pasa nada: desde aquí puedes entrar por cualquiera de las puertas de siempre.',
+      seccions: 'Secciones principales',
+      portes: [['/es/','Inicio','La portada del club'],['/es/club/','El club','Quiénes somos y cómo trabajamos'],['/es/escoleta/','Escoleta','Baloncesto de 4 a 8 años'],['/es/partits/','Calendario','Horarios y resultados'],['/es/campus/','Campus','Estancias y tecnificación'],['/es/fotos/','Galería','Las fotos de la temporada']],
+      tot: 'Si has llegado desde un enlace nuestro que ya no funciona, escríbenos a ',
+      tot2: ' y lo corregimos.',
+      menu: [['/es/club/','Club'],['/es/escoleta/','Escoleta'],['/es/partits/','Calendario'],['/es/patrocinadors/','Partners'],['/es/campus/','Campus'],['/es/fotos/','Galería'],['/es/premsa/','Prensa']],
+      ig: 'Síguenos en Instagram', igs: '@cbgrupbarna · el día a día del club, cada semana.',
+      nl: '/es/newsletter/', nlt: 'Apúntate a la newsletter', nls: 'Un correo al mes con lo que vale la pena saber. Nada más.',
+      peu: '© 2026 CB Grup Barna · Baloncesto base en El Clot desde 1965'
+    },
+    en: {
+      lang: 'en', skip: 'Skip to content', inici: 'CB Grup Barna · home',
+      alt: 'CB Grup Barna crest', nav: 'Main navigation',
+      lab: 'Page not found', h1: 'This page is not here.',
+      p: 'Either the address has changed or it has one letter too many. No problem: from here you can go in through any of the usual doors.',
+      seccions: 'Main sections',
+      portes: [['/en/','Home','The club front page'],['/en/club/','The club','Who we are and how we work'],['/en/escoleta/','Escoleta','Basketball from 4 to 8'],['/en/partits/','Calendar','Times and results'],['/en/campus/','Camps','Summer camps and skills work'],['/en/fotos/','Gallery','The season in photos']],
+      tot: 'If you got here from a link of ours that no longer works, write to us at ',
+      tot2: ' and we will fix it.',
+      menu: [['/en/club/','Club'],['/en/escoleta/','Escoleta'],['/en/partits/','Calendar'],['/en/patrocinadors/','Partners'],['/en/campus/','Camps'],['/en/fotos/','Gallery'],['/en/premsa/','Press']],
+      ig: 'Follow us on Instagram', igs: '@cbgrupbarna · the club week by week.',
+      nl: '/en/newsletter/', nlt: 'Join the newsletter', nls: 'One email a month with what is worth knowing. Nothing else.',
+      peu: '© 2026 CB Grup Barna · Youth basketball in El Clot since 1965'
+    }
+  }[lg];
+  var $ = function (s) { return document.querySelector(s); };
+  document.documentElement.lang = T.lang;
+  document.title = T.h1 + ' · CB Grup Barna';
+  $('.skip').textContent = T.skip;
+  var brand = $('.head-brand');
+  brand.href = '/' + lg + '/'; brand.setAttribute('aria-label', T.inici);
+  brand.querySelector('img').alt = T.alt;
+  var nav = $('.head-nav');
+  nav.setAttribute('aria-label', T.nav);
+  nav.querySelectorAll('a').forEach(function (a, i) {
+    if (!T.menu[i]) { a.remove(); return; }
+    a.href = T.menu[i][0]; a.textContent = T.menu[i][1];
+  });
+  $('.e404-lab').textContent = T.lab;
+  $('.e404 h1').textContent = T.h1;
+  $('.e404 h1 + p').textContent = T.p;
+  var portes = $('.e404-portes');
+  portes.setAttribute('aria-label', T.seccions);
+  portes.querySelectorAll('.e404-porta').forEach(function (a, i) {
+    a.href = T.portes[i][0];
+    a.querySelector('b').textContent = T.portes[i][1];
+    a.querySelector('span').textContent = T.portes[i][2];
+  });
+  var tot = $('.e404-tot'), mail = tot.querySelector('a');
+  tot.textContent = T.tot; tot.appendChild(mail);
+  tot.appendChild(document.createTextNode(T.tot2));
+  var portesC = document.querySelectorAll('.comunitat-porta');
+  portesC[0].querySelector('.comunitat-t').textContent = T.ig;
+  portesC[0].querySelector('.comunitat-s').textContent = T.igs;
+  portesC[1].href = T.nl;
+  portesC[1].querySelector('.comunitat-t').textContent = T.nlt;
+  portesC[1].querySelector('.comunitat-s').textContent = T.nls;
+  $('.foot-legal').textContent = T.peu;
+})();
+</script>
 </body>
 </html>
