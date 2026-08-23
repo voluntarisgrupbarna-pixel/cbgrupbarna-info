@@ -67,19 +67,18 @@
     ] },
   ];
 
-  // Quines destinacions del menú tenen rèplica a /es/ i a /en/. Comprovat
-  // contra el disc: la resta no existeixen i, si s'hi enllacés, serien un 404.
-  // Actualitzar-ho quan es tradueixi una pàgina nova.
-  var REPLICA = {
-    es: ['/escoleta/', '/faq/', '/partits/equips/', '/partits/', '/partits/calendaris/',
-         '/fotos/', '/campus/', '/3x3/', '/cistella-petita/', '/club/', '/historia/',
-         '/organigrama/', '/grup-barna-dades-oficials/', '/blog/', '/premsa/',
-         '/premidonaesport/', '/patrocinadors/', '/partners-mapa/', '/dossier-patrocinis/'],
-    en: ['/escoleta/', '/faq/', '/partits/equips/', '/partits/', '/partits/calendaris/',
-         '/fotos/', '/campus/', '/3x3/', '/cistella-petita/', '/club/',
-         '/grup-barna-dades-oficials/', '/documents/', '/blog/', '/premsa/',
-         '/premidonaesport/', '/patrocinadors/', '/partners-mapa/', '/dossier-patrocinis/'],
-  };
+  // El mapa d'idiomes el genera `scripts/genera-nav-i18n.py` des de
+  // `i18n/routes.yml`, que és la font de veritat del club. No es pot
+  // substituir per posar un prefix davant de l'adreça: divuit rutes estan
+  // traduïdes de debò (/proteccio-menor/ és /es/proteccion-menor/) i un
+  // prefix hi enviaria la gent a un 404.
+  var TRIOS = window.CBGB_IDIOMES || [];
+  var IDIOMES = ['ca', 'es', 'en'];
+  var PER_URL = {};   // qualsevol adreça -> {ca:…, es:…, en:…}
+  TRIOS.forEach(function (t) {
+    var fila = { ca: t[0], es: t[1] || null, en: t[2] || null };
+    IDIOMES.forEach(function (l) { if (fila[l]) PER_URL[fila[l]] = fila; });
+  });
 
   // Noms de tram que no surten al menú però sí a la molla de pa.
   var NOMS_EXTRA = {
@@ -107,12 +106,17 @@
   // Les rèpliques /es/ i /en/ són el mateix mapa amb un prefix.
   var PREFIX = /^\/(es|en)\//.test(ACTUAL) ? ACTUAL.slice(0, 4) : '/';
 
-  // La destinació d'un enllaç del menú segons la llengua de la pàgina on ets.
+  var LLENGUA = PREFIX === '/' ? 'ca' : PREFIX.slice(1, 3);
+
+  // La destinació d'un enllaç del menú en la llengua de la pàgina on ets, o
+  // `null` si aquella pàgina no està traduïda. `null` vol dir que l'entrada
+  // no surt al menú d'aquesta llengua: el criteri escrit a i18n/README.md és
+  // que posar al menú castellà un enllaç que porta a una pàgina en català és
+  // pitjor que no posar-l'hi.
   function desti(href) {
-    if (PREFIX === '/') return href;
-    var llengua = PREFIX.slice(1, 3);
-    var te = REPLICA[llengua] || [];
-    return te.indexOf(href) > -1 ? '/' + llengua + href : href;
+    if (LLENGUA === 'ca') return href;
+    var fila = PER_URL[href];
+    return (fila && fila[LLENGUA]) || null;
   }
 
   // --- 1. El menú ----------------------------------------------------------
@@ -131,9 +135,13 @@
       var h = doc.createElement('h3');
       h.textContent = col.titol;
       d.appendChild(h);
+      var posats = 0;
       col.enllacos.forEach(function (e) {
+        var href = desti(e[0]);
+        if (!href) return;               // sense traducció: no surt en aquesta llengua
+        posats++;
         var a = doc.createElement('a');
-        a.href = desti(e[0]);
+        a.href = href;
         a.textContent = e[1];
         if (e[0] === '/admin/') { a.className = 'menu-admin'; a.rel = 'nofollow'; }
         if (e[2]) {
@@ -144,7 +152,9 @@
         }
         d.appendChild(a);
       });
-      grid.appendChild(d);
+      // Una columna que s'ha quedat sense cap enllaç en aquesta llengua no
+      // ha de deixar un títol solt penjant.
+      if (posats) grid.appendChild(d);
     });
 
     nav.appendChild(grid);
@@ -296,6 +306,55 @@
       else if (!e.shiftKey && doc.activeElement === ultim) { e.preventDefault(); primer.focus(); }
     });
   }
+
+  // --- 2 bis. Commutador d'idioma -----------------------------------------
+  // Només existia a les tres portades. Qui entrava per cercador a una pàgina
+  // interior en castellà o en anglès —que és per on entra la majoria— no en
+  // podia sortir. S'hi posa només quan aquella pàgina té traducció de debò:
+  // si no en té, no s'ofereix l'idioma, perquè un enllaç que porta a una
+  // pàgina en una altra llengua és pitjor que no oferir-lo.
+  (function () {
+    if (!capcalera) return;
+    if (doc.querySelector('.lang-switch, .langs')) return;   // ja en té un de propi
+    var fila = PER_URL[ACTUAL];
+    if (!fila) return;                                       // pàgina sense traduccions
+
+    var disponibles = IDIOMES.filter(function (l) { return fila[l]; });
+    if (disponibles.length < 2) return;                      // un sol idioma: no hi ha res a commutar
+
+    var NOMS = { ca: 'Català', es: 'Castellano', en: 'English' };
+    var caixa = doc.createElement('div');
+    caixa.className = 'lang-switch';
+    caixa.setAttribute('aria-label', "Canvia d'idioma · Cambiar idioma · Change language");
+
+    disponibles.forEach(function (l, i) {
+      if (i) {
+        var sep = doc.createElement('span');
+        sep.className = 'sep';
+        sep.setAttribute('aria-hidden', 'true');
+        sep.textContent = '·';
+        caixa.appendChild(sep);
+      }
+      var a = doc.createElement('a');
+      a.href = fila[l];
+      a.hreflang = l;
+      a.textContent = l.toUpperCase();
+      a.setAttribute('lang', l);
+      // El nom sencer per a qui ho escolta: «ES» tot sol no diu res.
+      a.setAttribute('aria-label', NOMS[l]);
+      if (l === LLENGUA) {
+        a.className = 'active';
+        a.setAttribute('aria-current', 'true');
+      }
+      caixa.appendChild(a);
+    });
+
+    var dins = capcalera.querySelector('.head-in') || capcalera;
+    var dreta = dins.querySelector('.head-side.r');
+    if (dreta) dreta.appendChild(caixa);
+    else dins.appendChild(caixa);
+    dins.classList.add('head-in--amb-idiomes');
+  }());
 
   // --- 3. On sóc: marcar la secció actual ----------------------------------
   // Coincidència exacta primer; si no, la secció que conté la pàgina (així una

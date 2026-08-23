@@ -29,6 +29,9 @@ ARREL = Path(__file__).resolve().parent.parent
 EXCLOU = ('.git', 'node_modules', 'tests', '.github', 'galeria', '.claude')
 
 CSS = '<link rel="stylesheet" href="/css/nav.css">'
+# L'ordre importa: tots dos són `defer` i s'executen en l'ordre del document,
+# i `nav.js` necessita el mapa d'idiomes ja carregat quan arrenca.
+I18N = '<script src="/js/nav-i18n.js" defer></script>'
 JS = '<script src="/js/nav.js" defer></script>'
 
 # Pàgines públiques sense cap <header>: entren per cercador i no tenien cap
@@ -72,6 +75,26 @@ def aplica(text):
             sagnia = re.match(r'[ \t]*', text[inici_linia:m.start()]).group(0)
             text = text[:m.start()] + CSS + '\n' + sagnia + text[m.start():]
             fet.append('css')
+
+    # El mapa d'idiomes va SEMPRE davant de nav.js. Si nav.js ja hi és (d'una
+    # passada anterior), el mapa s'insereix just abans; si no, tots dos van
+    # abans de </body>, en aquest ordre.
+    if I18N not in text:
+        if JS in text:
+            text = text.replace(JS, I18N + '\n' + JS, 1)
+            fet.append('i18n')
+        else:
+            m = RE_BODY_TANCA.search(text)
+            if m:
+                inici_linia = text.rfind('\n', 0, m.start()) + 1
+                sagnia = re.match(r'[ \t]*', text[inici_linia:m.start()]).group(0)
+                text = text[:m.start()] + I18N + '\n' + sagnia + text[m.start():]
+                fet.append('i18n')
+    elif JS in text and text.index(JS) < text.index(I18N):
+        # Ordre invertit d'una passada anterior: es repara.
+        text = text.replace(I18N + '\n', '', 1).replace(I18N, '', 1)
+        text = text.replace(JS, I18N + '\n' + JS, 1)
+        fet.append('ordre')
 
     if JS not in text:
         m = RE_BODY_TANCA.search(text)
