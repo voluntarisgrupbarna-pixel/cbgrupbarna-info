@@ -1,0 +1,95 @@
+name: Galeria · processar pujades directes a R2
+
+# Contrapart de sync-r2.yml per a les fotos que ja no passen pel
+# repositori: des que /fotos/admin.html te el worker de workers/fotos-upload/
+# activat (fotos/config.js amb r2_worker_url i r2_public_base omplerts),
+# cada foto i video nou aterra directament a R2 sota "uploads/", sense cap
+# commit.
+#
+# Aquest workflow baixa el que hi hagi de nou a "uploads/", hi genera les
+# derivades amb el mateix scripts/build-gallery-images.py que ja fa servir
+# el flux antic, i les puja a "web/" i "thumb/" a R2. Tot passa en un
+# runner efimer: no es fa cap commit ni cap push, res toca el repositori.
+#
+# Si encara no has fet la migracio (fotos/config.js buit), aquest workflow
+# no te res a fer perque "uploads/" a R2 estara buit — no fa cap mal
+# deixar-lo actiu.
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-uploads
+  cancel-in-progress: false
+
+env:
+  BUCKET: cbgb-fotos
+
+jobs:
+  processar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comprovar que hi ha els secrets
+        env:
+          ID: ${{ secrets.R2_ACCOUNT_ID }}
+          KEY: ${{ secrets.R2_ACCESS_KEY_ID }}
+          SECRET: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          if [ -z "$ID" ] || [ -z "$KEY" ] || [ -z "$SECRET" ]; then
+            echo "::notice::Falten els secrets d'R2 (normal si encara no has fet la migracio). Sortint sense fer res."
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+
+      - uses: actions/checkout@v4
+        if: env.SKIP != '1'
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        if: env.SKIP != '1'
+        with:
+          python-version: '3.11'
+
+      - name: Preparar eines
+        if: env.SKIP != '1'
+        run: pip install --quiet Pillow awscli
+
+      - name: Baixar el que hi hagi de nou a uploads/
+        if: env.SKIP != '1'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+        run: |
+          mkdir -p fotos/uploads
+          aws s3 sync "s3://$BUCKET/uploads" fotos/uploads \
+            --endpoint-url "$ENDPOINT" --no-progress --size-only
+
+      - name: Generar les versions web i miniatura
+        if: env.SKIP != '1'
+        run: python3 scripts/build-gallery-images.py
+
+      - name: Pujar les derivades a R2
+        if: env.SKIP != '1'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+        run: |
+          set -e
+          puja () {
+            [ -d "$1" ] || { echo "  (no hi ha $1)"; return; }
+            aws s3 sync "$1" "s3://$BUCKET/$2" \
+              --endpoint-url "$ENDPOINT" --no-progress --size-only --content-type image/webp
+          }
+          puja fotos/web   web/
+          puja fotos/thumb thumb/
+
+      # Res es commiteja: aquest runner es descarta sencer en acabar.

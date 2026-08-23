@@ -10,7 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
   <style>
     :root {
-      --ink: #0a0a0a; --ink-2: #46433f; --muted: #8a8681; --line: rgba(16, 16, 14, 0.14);
+      --ink: #10100E; --ink-2: #46433f; --muted: #6B6560; --line: rgba(16, 16, 14, 0.14);
       --paper: #ffffff; --paper-2: #f6f4f1;
       --red: #E20613; --red-dark: #A8040E;
       --green: #1a7a3c;
@@ -224,6 +224,7 @@
   </style>
 <script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
+<script src="config.js"></script>
 </head>
 <body>
 
@@ -262,6 +263,13 @@
         github.com/settings/tokens
       </a>
       → selecciona l'abast <strong>repo</strong>.
+    </p>
+
+    <label class="field-label" for="r2-token-input" style="margin-top:1rem">Clau de pujada R2 (opcional)</label>
+    <input class="field-input" type="password" id="r2-token-input" placeholder="només si ja tens R2 configurat" autocomplete="off">
+    <p class="field-hint">
+      Deixa-ho buit si encara no has fet la migració a R2 — les fotos es
+      seguiran pujant com fins ara. Vegeu <code>workers/fotos-upload/README.md</code>.
     </p>
     <div id="login-error" class="login-error"></div>
 
@@ -501,6 +509,11 @@ async function loadExistingShas(ev) {
 
 // ── AUTH ──
 function getToken() { return localStorage.getItem('gh_admin_token'); }
+function getR2Secret() { return localStorage.getItem('r2_upload_secret') || ''; }
+function r2Enabled() {
+  const cfg = window.GALERIA_CONFIG || {};
+  return !!(cfg.r2_worker_url && cfg.r2_public_base && getR2Secret());
+}
 
 window.addEventListener('DOMContentLoaded', async () => {
   const tok = getToken();
@@ -540,6 +553,7 @@ async function verifyToken() {
 
 async function doLogin() {
   const input = document.getElementById('token-input');
+  const r2Input = document.getElementById('r2-token-input');
   const btn = document.getElementById('login-btn');
   const err = document.getElementById('login-error');
   err.style.display = 'none';
@@ -553,6 +567,8 @@ async function doLogin() {
     const ok = await verifyToken();
     if (ok) {
       localStorage.setItem('gh_admin_token', ghToken);
+      const r2Secret = r2Input.value.trim();
+      if (r2Secret) localStorage.setItem('r2_upload_secret', r2Secret);
       showMain();
     } else {
       throw new Error('Token invàlid o sense permisos');
@@ -569,6 +585,7 @@ async function doLogin() {
 
 function logout() {
   localStorage.removeItem('gh_admin_token');
+  localStorage.removeItem('r2_upload_secret');
   ghToken = null;
   showLogin();
 }
@@ -662,6 +679,25 @@ async function deleteFile(path, message) {
   const sha = await getFileSHA(path);
   if (!sha) return;
   return gh(`/repos/${OWNER}/${REPO}/contents/${path}`, 'DELETE', { message, sha, branch: BRANCH });
+}
+
+// ── R2 (pujada directa, sense commit) ──
+// Vegeu workers/fotos-upload/README.md. `key` és p.ex. "uploads/<event>/<fitxer>".
+async function uploadToR2(key, file) {
+  const cfg = window.GALERIA_CONFIG;
+  const url = `${cfg.r2_worker_url.replace(/\/$/, '')}/${key}`;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'X-Upload-Secret': getR2Secret(),
+      'Content-Type': file.type || 'application/octet-stream',
+    },
+    body: file,
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`R2 upload ${res.status}: ${text}`);
+  }
 }
 
 // ── EVENTS DATA ──
@@ -1063,11 +1099,8 @@ async function uploadPhoto(file, queueIndex) {
   const ev = currentEvent;
   const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
   const filename = `${Date.now()}-${Math.random().toString(36).slice(2,7)}.${ext}`;
-  const path = `fotos/uploads/${ev.id}/${filename}`;
 
-  const base64 = await fileToBase64(file);
-
-  // Simulate progress (GitHub API doesn't give real progress)
+  // Simulate progress (cap API tampoc ens en dona una de real)
   let prog = 0;
   const progInterval = setInterval(() => {
     prog = Math.min(prog + 15, 85);
@@ -1076,7 +1109,15 @@ async function uploadPhoto(file, queueIndex) {
   }, 200);
 
   try {
-    await writeFileBinary(path, base64, `foto: add ${filename} to ${ev.id} [skip ci]`);
+    if (r2Enabled()) {
+      // Directe a R2: cap commit al repositori per aquesta foto.
+      await uploadToR2(`uploads/${ev.id}/${filename}`, file);
+    } else {
+      // Camí antic: un commit per foto via l'API de contingut de GitHub.
+      const path = `fotos/uploads/${ev.id}/${filename}`;
+      const base64 = await fileToBase64(file);
+      await writeFileBinary(path, base64, `foto: add ${filename} to ${ev.id} [skip ci]`);
+    }
     clearInterval(progInterval);
     const el = document.getElementById(`prog-${queueIndex}`);
     if (el) el.style.width = '100%';
