@@ -379,7 +379,11 @@ FCBQ la temporada 2026-27.
   navegador de qui cerca, sobre l'índex `/cerca-index.json`; cap consulta surt del
   navegador ni s'envia a cap servei extern. Entén la pregunta en català, castellà i
   anglès («quant costa», «cuánto cuesta», «how much does it cost» porten al mateix
-  lloc) i perdona les faltes d'ortografia. La pàgina és `noindex, follow` i per això
+  lloc) i perdona les faltes d'ortografia. Sobretot, RESPON: indexa les 460
+  preguntes amb resposta que ja hi ha escrites al JSON-LD `FAQPage` de 98 pàgines
+  d'aquest web i ensenya la que toca a dalt de tot, tal com està redactada i amb
+  l'enllaç a la pàgina d'on surt. No hi intervé cap model de llenguatge: no
+  s'inventa res i, si cap pregunta encaixa prou bé, no ensenya cap resposta. La pàgina és `noindex, follow` i per això
   no surt al sitemap: el contingut real ja hi és, pàgina per pàgina. Des de
   qualsevol pàgina del web també s'obre amb la lupa de la capçalera, amb ⌘K/Ctrl+K
   o amb la tecla «/».

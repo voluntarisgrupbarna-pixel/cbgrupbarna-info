@@ -1,7 +1,15 @@
 /* Prova el motor de /js/cerca.js contra l'índex real, sense navegador.
    node tests/cerca/prova-motor.mjs
-   Cada cas diu: què s'escriu, en quin idioma, i quina pàgina ha de sortir
-   entre els primers resultats. Si un cas falla, la cerca ha empitjorat. */
+
+   Dues tandes:
+     1. RESULTATS — què s'escriu, en quin idioma, i quina pàgina ha de sortir
+        entre els cinc primers.
+     2. RESPOSTES — quina de les 460 preguntes ja escrites al web ha de sortir
+        resolta a dalt de tot, i —igual d'important— quines consultes NO han
+        de treure'n cap. Una resposta que no toca fa més mal que no respondre.
+
+   Si toques SINONIMS, DESTINS o RESPOSTES de js/cerca.js, afegeix el cas nou
+   aquí. És el que impedeix que arreglar una cerca en trenqui tres. */
 import fs from 'node:fs';
 import vm from 'node:vm';
 
@@ -78,5 +86,38 @@ for (const [lang, consulta, esperat] of CASOS) {
     (esperat ? ` → esperat ${esperat}` : '') + `\n        ${top.join('  ') || '(cap resultat)'}`);
   passa ? ok++ : ko++;
 }
+// ---- Tanda 2 · les respostes ----------------------------------------------
+// El tercer camp és un tros de la pregunta que ha de respondre, o `null` si
+// aquesta consulta NO ha de treure cap resposta (massa vaga, o cap pregunta
+// del web la respon de debò).
+const RESPOSTES = [
+  ['ca', 'quant costa apuntar-se', 'quant costa apuntar-se'],
+  ['ca', 'com m\'apunto', "com m'apunto"],
+  ['ca', 'on entrena', 'on entrena'],
+  ['ca', 'a partir de quina edat', 'a partir de quina edat'],
+  ['ca', "hi ha pla d'igualtat", "pla d'igualtat"],
+  ['ca', 'quan es el campus de nadal', 'dates del campus de nadal'],
+  ['es', 'cuanto cuesta', 'cuánto cuesta'],
+  ['es', 'donde entrena', 'dónde entrena'],
+  ['es', 'a que edad se empieza', 'a qué edad'],
+  ['en', 'how much does it cost', 'how much does it cost'],
+  // Cap resposta: una paraula solta és un tema, no una pregunta; i un
+  // teclat aixafat no ha de treure res.
+  ['ca', 'fotos', null],
+  ['ca', 'asdfghjkl', null],
+  ['ca', 'que porto el primer dia', null],
+];
+
+console.log('\n---- respostes ----');
+for (const [lang, consulta, esperat] of RESPOSTES) {
+  const r = motors[lang].resposta(consulta);
+  const te = r ? r.q.toLowerCase() : '';
+  const passa = esperat ? te.includes(esperat.toLowerCase()) : r === null;
+  console.log((passa ? '  ok  ' : '  FALLA ') + `[${lang}] "${consulta}"` +
+    (esperat ? ` → esperat «${esperat}»` : ' → cap resposta') +
+    `\n        ${r ? r.q + '  (' + r.u + ' · ' + r.punts + ')' : '(cap)'}`);
+  passa ? ok++ : ko++;
+}
+
 console.log(`\n${ok} bé · ${ko} malament`);
 process.exit(ko ? 1 : 0);

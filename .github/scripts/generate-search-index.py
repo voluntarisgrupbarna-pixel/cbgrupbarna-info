@@ -4,6 +4,15 @@
 Genera /cerca-index.json: l'índex que fa servir el cercador del web
 (/js/cerca.js i la pàgina /cerca/).
 
+Recull dues coses:
+
+  1. Les PÀGINES (títol, descripció, encapçalaments, un tros de text).
+  2. Les PREGUNTES I RESPOSTES que ja hi ha escrites al JSON-LD `FAQPage` de
+     tot el lloc — 477 repartides per 98 pàgines. Són respostes redactades
+     pel club, i per això el cercador les pot ensenyar tal qual, sense
+     inventar-se res i sense demanar-ho a cap servei extern. Aquesta és la
+     part que fa que el cercador respongui, no només enllaci.
+
 Recorre els .html del repositori, en treu títol, descripció, encapçalaments i
 un tros de text visible, i ho desa tot en un únic JSON compacte que el
 navegador es baixa la primera vegada que algú obre el cercador.
@@ -160,6 +169,52 @@ def neteja(s):
     return BUITS.sub(" ", unescape(s or "")).strip()
 
 
+RE_LD = re.compile(
+    r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+    re.I | re.S)
+
+
+def recorre(node):
+    """Tot el JSON-LD és un arbre irregular: @graph, llistes, objectes solts."""
+    if isinstance(node, dict):
+        yield node
+        for v in node.values():
+            for x in recorre(v):
+                yield x
+    elif isinstance(node, list):
+        for v in node:
+            for x in recorre(v):
+                yield x
+
+
+def preguntes_de(cru):
+    """Treu les parelles pregunta/resposta del JSON-LD d'una pàgina.
+
+    No es fa amb expressions regulars sobre l'HTML a posta: el JSON-LD ja és
+    dada estructurada i validada per Google, i llegir-la com a JSON evita
+    arrossegar marcatge dins de la resposta.
+    """
+    fora = []
+    for tros in RE_LD.findall(cru):
+        try:
+            dades = json.loads(tros)
+        except (ValueError, TypeError):
+            continue
+        for node in recorre(dades):
+            if node.get("@type") != "Question":
+                continue
+            q = neteja(node.get("name") or "")
+            resp = node.get("acceptedAnswer") or {}
+            if isinstance(resp, list):
+                resp = resp[0] if resp else {}
+            r = neteja((resp or {}).get("text") or "")
+            # Una pregunta sense resposta no serveix de res, i una resposta
+            # d'una línia sol ser un titular, no una resposta.
+            if len(q) > 6 and len(r) > 25:
+                fora.append((q, r))
+    return fora
+
+
 def ruta_publica(cami):
     """De la ruta al disc a la URL que veu la gent."""
     rel = os.path.relpath(cami, ARREL).replace(os.sep, "/")
@@ -230,6 +285,8 @@ def cal_indexar(cami):
 
 def main():
     pagines = []
+    faq = []
+    vistes_faq = set()
     saltades = {"noindex": 0, "redireccio": 0, "buida": 0}
 
     for arrel, dirs, fitxers in os.walk(ARREL):
@@ -272,22 +329,42 @@ def main():
                 saltades["buida"] += 1
                 continue
 
+            for q, r in preguntes_de(cru):
+                # La mateixa pregunta surt sovint a més d'una pàgina (i a les
+                # tres versions d'idioma). Ens quedem amb la primera, que per
+                # l'ordre de recorregut sol ser la pàgina més important.
+                clau = (idioma(url, p.lang), BUITS.sub(" ", q.lower()))
+                if clau in vistes_faq:
+                    continue
+                vistes_faq.add(clau)
+                faq.append({
+                    "q": q,
+                    "r": r[:600],
+                    "u": url,
+                    "l": idioma(url, p.lang),
+                })
+
             registre = {
                 "u": url,
                 "l": idioma(url, p.lang),
                 "t": titol,
                 "d": neteja(p.descripcio)[:260],
                 "h": p.encapcalaments[:14],
-                "c": cos[:900],
+                "c": cos[:700],
                 "p": pes(url),
             }
             pagines.append(registre)
 
     pagines.sort(key=lambda r: (-r["p"], r["u"]))
 
+    # Ordre estable: així el fitxer no canvia si no ha canviat el contingut,
+    # i el workflow no fa un commit per res.
+    faq.sort(key=lambda x: (x["l"], x["u"], x["q"]))
+
     index = {
-        "versio": 1,
+        "versio": 2,
         "pagines": pagines,
+        "faq": faq,
         "idiomes": sorted({r["l"] for r in pagines}),
         "rutes": [r for r in carrega_routes() if r.get("ca")],
     }
@@ -299,7 +376,13 @@ def main():
     per_idioma = {}
     for r in pagines:
         per_idioma[r["l"]] = per_idioma.get(r["l"], 0) + 1
-    print(f"cerca-index.json · {len(pagines)} pàgines · {pes_kb:.0f} KB")
+    faq_idioma = {}
+    for r in faq:
+        faq_idioma[r["l"]] = faq_idioma.get(r["l"], 0) + 1
+    print(f"cerca-index.json · {len(pagines)} pàgines · "
+          f"{len(faq)} preguntes amb resposta · {pes_kb:.0f} KB")
+    print("  preguntes per idioma: " +
+          ", ".join(f"{k}={v}" for k, v in sorted(faq_idioma.items())))
     print("  per idioma: " + ", ".join(f"{k}={v}" for k, v in sorted(per_idioma.items())))
     print("  saltades: " + ", ".join(f"{k}={v}" for k, v in saltades.items()))
     return 0

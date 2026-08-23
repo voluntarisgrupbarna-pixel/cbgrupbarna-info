@@ -14,9 +14,15 @@
         no surti escrita a la pàgina.
      2. PERDONA. Accents, majúscules, «ç», «l·l» i una lletra mal
         posada («basquet», «escoleta», «entrenemant») no trenquen res.
-     3. RESPON, no només enllaça. Les preguntes que la gent fa de
-        veritat —on entrenem, com apuntar-s'hi, com contactar—
-        surten resoltes a dalt de tot, no amagades al resultat 4.
+     3. RESPON, no només enllaça. El web ja porta 460 preguntes
+        amb la resposta escrita pel club, dins del JSON-LD de 98
+        pàgines. El cercador les indexa i ensenya la que toca a
+        dalt de tot, TAL QUAL està escrita, amb l'enllaç a la
+        pàgina d'on surt. No hi ha cap model de llenguatge pel
+        mig: no s'inventa res, no costa res i la pregunta no surt
+        del navegador. Per sota hi ha les respostes escrites a mà
+        d'aquest fitxer, per a les intencions que cap FAQ cobreix
+        (contacte, portes obertes).
 
    Es pot fer servir de dues maneres:
      - Superposat: qualsevol pàgina que carregui aquest fitxer té
@@ -45,7 +51,8 @@
       capAjuda: 'Prova amb menys paraules: «escoleta», «cadet», «campus», «preu».',
       suggeriments: 'Les més buscades', altresIdiomes: 'En altres idiomes',
       recents: 'Les teves darreres cerques', esborrar: 'esborrar',
-      resposta: 'Resposta ràpida', carregant: 'Un moment…',
+      resposta: 'Resposta ràpida', respostaFaq: 'La resposta',
+      fontFaq: 'Ho explica', relacionades: 'També s\'hi pregunta', carregant: 'Un moment…',
       error: 'Ara mateix no es pot cercar. Prova el menú de dalt.',
       resultats: 'resultats', unResultat: '1 resultat', veure: 'Veure-ho tot',
       pista: 'per moure\'t · Enter per obrir · Esc per sortir'
@@ -57,7 +64,8 @@
       capAjuda: 'Prueba con menos palabras: «escoleta», «cadete», «campus», «precio».',
       suggeriments: 'Lo más buscado', altresIdiomes: 'En otros idiomas',
       recents: 'Tus últimas búsquedas', esborrar: 'borrar',
-      resposta: 'Respuesta rápida', carregant: 'Un momento…',
+      resposta: 'Respuesta rápida', respostaFaq: 'La respuesta',
+      fontFaq: 'Lo explica', relacionades: 'También se pregunta', carregant: 'Un momento…',
       error: 'Ahora mismo no se puede buscar. Prueba el menú de arriba.',
       resultats: 'resultados', unResultat: '1 resultado', veure: 'Verlo todo',
       pista: 'para moverte · Enter para abrir · Esc para salir'
@@ -69,7 +77,8 @@
       capAjuda: 'Try fewer words: “escoleta”, “under-16”, “camp”, “price”.',
       suggeriments: 'Most searched', altresIdiomes: 'In other languages',
       recents: 'Your recent searches', esborrar: 'clear',
-      resposta: 'Quick answer', carregant: 'One moment…',
+      resposta: 'Quick answer', respostaFaq: 'The answer',
+      fontFaq: 'Explained in', relacionades: 'People also ask', carregant: 'One moment…',
       error: 'Search is unavailable right now. Try the menu above.',
       resultats: 'results', unResultat: '1 result', veure: 'See everything',
       pista: 'to move · Enter to open · Esc to close'
@@ -255,7 +264,7 @@
   /* ============================================================
      4 · MOTOR
      ============================================================ */
-  var index = null, carregant = null, preparat = null, equivalents = {};
+  var index = null, carregant = null, preparat = null, preparatFaq = [], equivalents = {};
   var teTraduccio = function () { return false; };
   var traduccio = function () { return null; };
 
@@ -289,6 +298,16 @@
           var r = equivalents[url];
           return r && r[aIdioma] && existeix[r[aIdioma]] ? r[aIdioma] : null;
         };
+
+        // Les preguntes que ja tenen resposta escrita. Es normalitzen un cop
+        // i prou: n'hi ha 460 i es repassen a cada tecla.
+        preparatFaq = (dades.faq || []).map(function (f) {
+          return {
+            f: f,
+            q: normalitza(f.q),
+            r: normalitza(f.r)
+          };
+        });
 
         preparat = dades.pagines.map(function (p) {
           var titol = normalitza(p.t);
@@ -445,6 +464,111 @@
     return { llista: resultats, families: families };
   }
 
+  /* ============================================================
+     4 bis · LA RESPOSTA
+     De les 460 preguntes que ja tenen resposta escrita, quina
+     respon la que s'acaba d'escriure? Aquí es decideix.
+
+     La regla que mana és la de no fer el ridícul: val més no
+     ensenyar cap resposta que ensenyar-ne una que no toca. Per
+     això hi ha un llindar, i per sota d'ell la resposta no surt
+     encara que sigui la millor de les dolentes.
+     ============================================================ */
+  var LLINDAR_FAQ = 9;
+
+  /* Les interrogatives NO són paraules buides quan el que busques és una
+     pregunta: «quan és el campus» i «quant costa el campus» es diferencien
+     només per aquí. Per al text corrent sí que ho són, i per això la llista
+     viu a part. */
+  var INTERROGATIVES = {};
+  ('quan quant quanta quants quantes on com qui quina quines quin quins perque ' +
+   'cuando cuanto cuanta cuantos cuantas donde como quien cual cuales porque ' +
+   'when how where who what which why').split(' ').forEach(function (p) { INTERROGATIVES[p] = 1; });
+
+  /* «Club», «Barna» i «bàsquet» surten a gairebé totes les preguntes del web.
+     Comptar-les fa que qualsevol consulta sembli que encaixa amb tot. */
+  var GENERIQUES = {};
+  ('club clubs barna cb grup cbgrupbarna basquet baloncesto basket basketball ' +
+   'equip equipo team').split(' ').forEach(function (p) { GENERIQUES[p] = 1; });
+
+  function paraulesPregunta(s) {
+    return normalitza(s).split(' ').filter(function (p) {
+      if (p.length < 2 || GENERIQUES[p]) return false;
+      return INTERROGATIVES[p] || !BUIDES[p];
+    });
+  }
+
+  function cercaResposta(consulta, families) {
+    if (!preparatFaq.length) return null;
+    var termes = paraulesPregunta(consulta);
+    if (!termes.length) return null;
+
+    // Les paraules de la família detectada ajuden a casar la pregunta encara
+    // que estigui escrita amb unes altres («quotes» ↔ «quant costa»).
+    var ampliats = [];
+    Object.keys(families).forEach(function (f) {
+      SINONIMS[f].split(' ').forEach(function (p) {
+        if (p.length > 2 && termes.indexOf(p) < 0 && ampliats.indexOf(p) < 0) ampliats.push(p);
+      });
+    });
+
+    var frase = termes.join(' ');
+    var millors = [];
+
+    for (var i = 0; i < preparatFaq.length; i++) {
+      var d = preparatFaq[i], punts = 0, encerts = 0;
+
+      for (var j = 0; j < termes.length; j++) {
+        var t = termes[j], tol = tolerancia(t);
+        var aQ = puntuaCamp(d.q, t, tol);
+        var aR = aQ ? 0 : puntuaCamp(d.r, t, tol);
+        if (aQ || aR) {
+          encerts++;
+          // puntuaCamp ja dona 1 a la paraula sencera i 0.8 a un principi de
+          // paraula. Elevat al quadrat, la diferència entre encertar-la
+          // («entrena») i quedar-s'hi a prop («entrenar») deixa de ser un
+          // matís i decideix.
+          punts += aQ * aQ * 3.5 + aR * 0.7;
+        }
+      }
+      if (!encerts) continue;
+
+      // Cobertura: quina part del que s'ha escrit surt a la pregunta. Una
+      // pregunta que respon la meitat del que es demana no la respon.
+      var cobertura = encerts / termes.length;
+      if (cobertura < 0.5) continue;
+      punts *= 0.6 + cobertura;
+
+      for (var k = 0; k < ampliats.length; k++) {
+        if (d.q.indexOf(ampliats[k]) >= 0) punts += 0.5;
+      }
+      // La pregunta escrita gairebé igual guanya de llarg.
+      if (termes.length > 1 && d.q.indexOf(frase) >= 0) punts += 6;
+      // Una pregunta curta que conté tot el que s'ha demanat és més precisa
+      // que una de llarga que ho conté de passada.
+      punts += Math.max(0, 3 - d.q.split(' ').length / 8);
+
+      if (d.f.l === lang) punts *= 1.5;
+      else if (teTraduccio(d.f.u, lang)) punts *= 0.35;
+
+      millors.push({ d: d, punts: punts });
+    }
+
+    if (!millors.length) return null;
+    millors.sort(function (a, b) { return b.punts - a.punts; });
+    if (millors[0].punts < LLINDAR_FAQ) return null;
+
+    // Preguntes veïnes: només les de la mateixa collita, per no oferir
+    // «i també et pot interessar» d'una cosa que no hi té res a veure.
+    var veines = [];
+    for (var n = 1; n < millors.length && veines.length < 2; n++) {
+      if (millors[n].punts < millors[0].punts * 0.55) break;
+      if (millors[n].d.f.q !== millors[0].d.f.q) veines.push(millors[n].d.f);
+    }
+
+    return { resposta: millors[0].d.f, punts: millors[0].punts, veines: veines };
+  }
+
   /* Tall del text on surt el que s'ha buscat, amb el terme marcat. */
   function fragment(dades, termes) {
     var font = dades.p.d || dades.p.c || '';
@@ -513,6 +637,15 @@
   /* Títol net per al resultat: fora el «· CB Grup Barna» de cada pàgina. */
   function titolNet(t) {
     return (t || '').replace(/\s*[·|–-]\s*CB Grup Barna.*$/i, '').trim() || t;
+  }
+
+  /* Per a l'enllaç de sota la resposta cal un nom curt, no el títol sencer
+     d'SEO: «Escola de bàsquet a Barcelona · Escoleta CB Grup Barna (4-8 anys)»
+     ocupa tres línies al mòbil i no diu res que no digui «Escoleta». */
+  function titolCurt(t) {
+    var curt = titolNet(t).split(/\s+[·|]\s+/)[0].trim();
+    if (curt.length > 42) curt = curt.slice(0, 40).replace(/\s+\S*$/, '') + '…';
+    return curt;
   }
 
   var NOM_IDIOMA = { ca: 'Català', es: 'Castellano', en: 'English' };
@@ -675,8 +808,35 @@
     var termes = paraules(q);
     var html = '';
 
-    // Resposta ràpida: només si la intenció és clara i no hi ha soroll.
-    var families = Object.keys(res.families);
+    // 1r · La resposta escrita pel club, si n'hi ha cap que encaixi.
+    var faq = cercaResposta(q, res.families);
+    if (faq) {
+      var titolNetFont = null;
+      for (var z = 0; z < preparat.length; z++) {
+        if (preparat[z].p.u === faq.resposta.u) { titolNetFont = titolCurt(preparat[z].p.t); break; }
+      }
+      html += '<div class="cerca-bloc"><h2 class="cerca-titol">' + escapa(T.respostaFaq) + '</h2>' +
+        '<div class="cerca-faq">' +
+          '<p class="cerca-faq-q">' + marca(faq.resposta.q, termes) + '</p>' +
+          '<p class="cerca-faq-r">' + marca(faq.resposta.r, termes) + '</p>' +
+          '<a class="cerca-faq-font" data-cerca-r href="' + escapa(faq.resposta.u) + '">' +
+            escapa(T.fontFaq) + ' <b>' + escapa(titolNetFont || faq.resposta.u) + '</b> &rarr;</a>' +
+        '</div>';
+      if (faq.veines.length) {
+        html += '<p class="cerca-titol" style="margin-top:12px">' + escapa(T.relacionades) + '</p>' +
+          '<div class="cerca-fitxes">';
+        faq.veines.forEach(function (v) {
+          html += '<button type="button" class="cerca-fitxa" data-pregunta="' + escapa(v.q) + '">' +
+            escapa(v.q) + '</button>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+
+    // 2n · Les respostes escrites a mà, per a les intencions que cap pregunta
+    // del web cobreix (contacte, portes obertes). Si ja hem respost, no cal.
+    var families = faq ? [] : Object.keys(res.families);
     if (families.length) {
       for (var i = 0; i < RESPOSTES.length; i++) {
         var r = RESPOSTES[i];
@@ -720,6 +880,13 @@
     }
 
     this.cos.innerHTML = html;
+    Array.prototype.forEach.call(this.cos.querySelectorAll('[data-pregunta]'), function (b) {
+      b.addEventListener('click', function () {
+        self.input.value = b.getAttribute('data-pregunta');
+        self.input.focus();
+        self.pinta();
+      });
+    });
     this.recolliEnllacos();
 
     if (this.esPagina) {
@@ -871,7 +1038,12 @@
           return { u: x.d.p.u, l: x.d.p.l, t: x.d.p.t, punts: Math.round(x.punts * 10) / 10 };
         });
       },
-      families: function (q) { return Object.keys(cerca(q).families); }
+      families: function (q) { return Object.keys(cerca(q).families); },
+      resposta: function (q) {
+        var r = cercaResposta(q, cerca(q).families);
+        return r ? { q: r.resposta.q, r: r.resposta.r, u: r.resposta.u, l: r.resposta.l,
+                     punts: Math.round(r.punts * 10) / 10 } : null;
+      }
     }
   };
 })();

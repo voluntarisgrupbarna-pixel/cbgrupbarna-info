@@ -4,11 +4,24 @@ Cerca a tot el web **sense servidor i sense servei de tercers**. La consulta no
 surt del navegador de qui cerca: no s'envia a Google, no cal consentiment de
 galetes i no queda registrada enlloc.
 
+**Respon, no només enllaça.** El web ja portava **460 preguntes amb la resposta
+escrita pel club**, dins del JSON-LD `FAQPage` de 98 pàgines. El cercador les
+indexa i ensenya la que toca a dalt de tot, **tal com està escrita**, amb
+l'enllaç a la pàgina d'on surt.
+
+> No hi ha cap model de llenguatge pel mig, i és a posta: no s'inventa res, no
+> costa res per consulta, no hi ha cap clau d'API que mantenir, contesta a
+> l'instant i la pregunta no surt del navegador —o sigui que la política de
+> privacitat no s'ha de tocar. El preu és que només sap respondre el que algú
+> del club ja ha escrit. Quan cap pregunta encaixa prou bé (llindar
+> `LLINDAR_FAQ` a `js/cerca.js`), **no ensenya res**: una resposta que no toca
+> fa més mal que no respondre.
+
 ## Les peces
 
 | Fitxer | Què fa |
 |---|---|
-| `.github/scripts/generate-search-index.py` | Llegeix tots els `.html` i escriu `/cerca-index.json` (uns 490 KB, ~130 KB per la xarxa). Salta `noindex`, redireccions, `/admin/`, `/galeria/` i els residus de `/patrocinis/`. |
+| `.github/scripts/generate-search-index.py` | Llegeix tots els `.html` i escriu `/cerca-index.json`: 354 pàgines **i les 460 preguntes amb resposta del JSON-LD** (uns 575 KB, ~150 KB per la xarxa). Salta `noindex`, redireccions, `/admin/`, `/galeria/` i els residus de `/patrocinis/`. |
 | `/cerca-index.json` | L'índex. **No s'edita a mà**: es regenera. |
 | `js/cerca.js` | El motor i la interfície. |
 | `css/cerca.css` | L'estil, amb els tokens del sistema visual. |
@@ -57,15 +70,28 @@ i afegir-hi una fila és la manera barata de millorar-la:
 - **`DESTINS`** — la porta d'entrada de cada família, **per ordre**: la primera
   és la resposta, les altres el context. Es tradueixen soles als altres idiomes
   amb `i18n/routes.yml`.
-- **`RESPOSTES`** — les preguntes que mereixen una resposta i no una llista
-  d'enllaços (contacte, com apuntar-s'hi, on entrenem, quotes…). Surten a dalt
-  de tot, amb el text ja escrit en els tres idiomes.
+- **`RESPOSTES`** — el pla B escrit a mà, per a les intencions que **cap** FAQ
+  del web cobreix (contacte, portes obertes). Només surt si no s'ha trobat cap
+  pregunta que encaixi.
+
+**La millor manera de fer-lo més llest, però, no és tocar codi: és escriure
+preguntes freqüents a les pàgines.** Cada `<details>` d'una secció `.faq` que
+també vagi al JSON-LD `FAQPage` és una resposta nova que el cercador sabrà
+donar l'endemà, en el seu idioma i amb el text del club. Les 460 d'ara han
+sortit d'aquí.
 
 Si toques qualsevol de les tres, **afegeix el cas nou a `tests/cerca/prova-motor.mjs`**
 i executa'l: és el que impedeix que arreglar una cerca en trenqui tres.
 
 ## Detalls que val la pena saber
 
+- **Quan respon i quan no.** La consulta es compara amb les 460 preguntes: les
+  interrogatives (`quan`, `on`, `com`, `cuánto`, `when`, `how`…) hi compten,
+  perquè són el que distingeix «quan és el campus» de «quant costa el campus»;
+  en canvi «club», «Barna» i «bàsquet» **no** compten, perquè surten a gairebé
+  totes i farien que qualsevol cosa semblés que encaixa. Cal que hi surti com a
+  mínim la meitat del que s'ha escrit, i que la millor passi el llindar. Una
+  paraula solta («fotos») és un tema, no una pregunta: no en treu cap.
 - **Idioma.** Es mira l'atribut `lang` i el prefix `/es/` o `/en/`. Una pàgina en
   un altre idioma baixa de posició **només si existeix la versió en el teu**; si
   no n'hi ha cap altra (com `/magics/`), no se la penalitza, perquè és l'única
