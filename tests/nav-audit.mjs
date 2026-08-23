@@ -136,7 +136,12 @@ const RECULL = `(function () {
     // per arribar-hi, i el recompte de pàgines inabastables els necessita.
     idiomesDesti: [...new Set([].slice.call(document.querySelectorAll('.lang-switch a, [hreflang]'))
       .filter(visible).map(function (a) { return net(a.getAttribute('href')); }).filter(Boolean))],
-    tornarInici: !!([].slice.call(document.querySelectorAll('header a[href], .head a[href]'))
+    // Es mira també la molla de pa: el seu primer tram és «Inici» i porta a la
+    // portada. Mirant només la capçalera, 279 pàgines sortien com si no
+    // tinguessin manera de tornar a l'inici quan sí que en tenen una, i ben
+    // visible. Compta el camí que hi ha, no el lloc on s'esperava trobar-lo.
+    tornarInici: !!([].slice.call(document.querySelectorAll(
+      'header a[href], .head a[href], .molla a[href], .crumb a[href]'))
       .filter(visible).find(function (a) {
         var h = a.getAttribute('href') || '';
         return h === '/' || h === '/index.html' || /^https?:\\/\\/[^/]+\\/?$/.test(h);
