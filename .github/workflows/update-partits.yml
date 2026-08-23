@@ -55,6 +55,10 @@ jobs:
         run: python .github/scripts/generate-calendaris.py
       - name: Actualitzar resum estàtic per a SEO / SEO-IA
         run: python .github/scripts/generate-seo-snapshot.py
+      # Ha d'anar just després: /es/partits/ i /en/partits/ es generen a partir
+      # de la catalana, i si no, es queden amb la instantània del dia abans.
+      - name: Regenerar Dies de partit en castellà i anglès
+        run: python scripts/build-partits-idiomes.py
       - name: Regenerar calendaris .ics per equip
         run: python .github/scripts/generate-ics.py
       - name: Regenerar pàgines pròpies per equip
@@ -63,7 +67,7 @@ jobs:
         run: |
           git config user.name "cbgb-robot"
           git config user.email "cbgrupbarna@gmail.com"
-          git add partits/data.json partits/canvis.json partits/calendaris/ partits/index.html partits/equips/
+          git add partits/data.json partits/canvis.json partits/calendaris/ partits/index.html partits/equips/ es/partits/index.html en/partits/index.html
           if git diff --cached --quiet; then
             echo "Sense canvis"
           else
