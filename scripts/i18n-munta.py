@@ -31,6 +31,8 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import importlib.util as _u                                       # noqa: E402
 from i18n_chrome import navegacio, peu, text as text_diccionari   # noqa: E402
@@ -48,6 +50,13 @@ LOCALE = {"ca": "ca_ES", "es": "es_ES", "en": "en_US"}
 RE_HTML_LANG = re.compile(r'(<html[^>]*\blang=["\'])([^"\']*)(["\'])', re.I)
 RE_OG_LOCALE = re.compile(r'(<meta[^>]+property=["\']og:locale["\'][^>]+content=["\'])([^"\']*)(["\'])', re.I)
 RE_ENLLAC = re.compile(r'((?:href|action)=["\'])(/[^"\'#?]*)([^"\']*)(["\'])', re.I)
+# Rutes relatives: src="img/foto.jpg" dins de /cistella-petita/ apunta a
+# /cistella-petita/img/foto.jpg, però la mateixa línia dins de
+# /es/cistella-petita/ apuntaria a /es/cistella-petita/img/foto.jpg, que no
+# existeix. Es passen a absolutes abans de moure la pàgina de carpeta.
+RE_RELATIU = re.compile(
+    r'((?:src|href|poster|data-src)=["\'])(?!https?:|//|/|#|mailto:|tel:|data:|javascript:)'
+    r'([^"\']+)(["\'])', re.I)
 RE_CHROME_NAV = re.compile(r'(?is)<nav class="head-nav".*?</nav>')
 # El peu, sol. No es pot demanar que vagi enganxat a </main> i a </body>:
 # hi ha pàgines amb un <script> entremig i llavors no es reconeixeria, i el
@@ -55,6 +64,15 @@ RE_CHROME_NAV = re.compile(r'(?is)<nav class="head-nav".*?</nav>')
 RE_CHROME_FOOT = re.compile(r'(?is)<footer class="foot">.*?</footer>')
 RE_SKIP = re.compile(r'(?is)(<a href="#main" class="skip">)(.*?)(</a>)')
 RE_LD = re.compile(r'(?is)(<script[^>]*ld\+json[^>]*>)(.*?)(</script>)')
+
+
+def desti_del_mapa(ruta, idioma):
+    """On viu la traducció d'aquesta pàgina, segons i18n/routes.yml."""
+    mapa = yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}
+    for grup in mapa.get("rutes", []):
+        if grup.get("ca") == ruta:
+            return grup.get(idioma)
+    return None
 
 
 def fitxer_de(url):
@@ -67,6 +85,12 @@ def per_camins(dades, cami, valor):
     for tros in cami[:-1]:
         node = node[tros]
     node[cami[-1]] = valor
+
+
+def absolutitza(html, ruta):
+    """Les rutes relatives, a absolutes des d'on era la pàgina catalana."""
+    base = ruta if ruta.endswith("/") else ruta.rsplit("/", 1)[0] + "/"
+    return RE_RELATIU.sub(lambda m: m.group(1) + base + m.group(2) + m.group(3), html)
 
 
 def tradueix_enllacos(html, idioma):
@@ -164,7 +188,8 @@ def munta(ruta, idioma):
     # 4. Les adreces pròpies: canonical, og:url i les de dins del JSON-LD.
     html = html.replace(SITE + ruta, SITE + f"/{idioma}{ruta}")
 
-    # 5. Els enllaços interns.
+    # 5. Les rutes relatives i després els enllaços interns.
+    html = absolutitza(html, ruta)
     html, sense_versio = tradueix_enllacos(html, idioma)
 
     # 6. La capçalera i el peu, des del diccionari.
@@ -208,7 +233,12 @@ def main():
         # Una pàgina nova ha de néixer amb el nom que li toca. Renomenar-la
         # després vol dir deixar una redirecció enrere per sempre; fer-ho bé
         # ara no costa res, perquè encara no hi ha ningú que hi enllaci.
-        desti_url = args.ruta_desti or f"/{args.idioma}{ruta}"
+        #
+        # Si el mapa ja diu on viu la traducció, mana el mapa: així el
+        # workflow que refà una pàgina no la torna a deixar amb el nom
+        # català al costat de la que ja té el nom traduït.
+        desti_url = args.ruta_desti or desti_del_mapa(ruta, args.idioma) \
+            or f"/{args.idioma}{ruta}"
         html = html.replace(SITE + f"/{args.idioma}{ruta}", SITE + desti_url)
         desti = fitxer_de(desti_url)
         print(f"  {desti_url}  ({len(html) // 1024} KB)"
