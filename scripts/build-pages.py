@@ -21,7 +21,7 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
-from i18n_chrome import navegacio, peu, text
+from i18n_chrome import alternatives, navegacio, peu, text
 
 
 def clamp_desc(text, limit=160):
@@ -1301,7 +1301,6 @@ ARTICLES = [
   "slug": "club-formacio-i-competitiu-catalunya",
   "meta_desc": 'Quins clubs de bàsquet catalans tenen equip a totes les edats i arriben a sènior amb els dos gèneres, segons la fitxa oficial de la FCBQ.',
   "hero_alt": "Jugadores del CB Grup Barna entrant a la pista entre aplaudiments, presentació d'equips 2025-2026",
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/club-formacio-i-competitiu-catalunya/'), ('es', 'https://cbgrupbarna.info/es/blog/club-formacion-y-competitivo-cataluna/'), ('en', 'https://cbgrupbarna.info/en/blog/formation-and-competitive-club-catalonia/'), ('x-default', 'https://cbgrupbarna.info/blog/club-formacio-i-competitiu-catalunya/')],
   "related": [('/blog/cultura-esforc-club-progres/', 'Formació', "Del sacrifici al progrés: la cultura de l'esforç al Barna"), ('/blog/basquet-base-sant-marti-clot/', 'El barri', 'Bàsquet base al Clot i a Sant Martí: com funciona un club de barri'), ('/blog/com-triar-escola-basquet-barcelona/', 'Guia per a famílies', 'Escola, club o acadèmia de bàsquet a Barcelona?'), ('/blog/a-quina-edat-comencar-basquet/', 'Guia per a famílies', 'A quina edat pot començar un nen o nena a jugar a bàsquet?')],
   "date": "2026-08-13",
   "bc_name": "El Barna, entre els grans del bàsquet català",
@@ -1420,7 +1419,6 @@ passen pel mateix club, sense trencar mai el fil.</p>
   "slug": "a-quina-edat-comencar-basquet",
   "meta_desc": 'Als 4 anys ja es pot començar a jugar a bàsquet. Guia per edats —escoleta, premini, mini i categories federades— per a famílies de Barcelona.',
   "hero_alt": "Nen petit de l'Escola de Bàsquet del CB Grup Barna amb la pilota, a la pista",
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/a-quina-edat-comencar-basquet/'), ('es', 'https://cbgrupbarna.info/es/blog/a-quina-edat-comencar-basquet/'), ('en', 'https://cbgrupbarna.info/en/blog/a-quina-edat-comencar-basquet/'), ('x-default', 'https://cbgrupbarna.info/blog/a-quina-edat-comencar-basquet/')],
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "A quina edat pot començar un nen o nena a jugar a bàsquet?",
@@ -1498,7 +1496,6 @@ grup que li tocaria i després es decideix. És l'única manera honesta de saber
   "slug": "com-triar-escola-basquet-barcelona",
   "meta_desc": 'Acadèmia, escola o club de bàsquet a Barcelona? Set criteris reals per triar: entrenadors, grups, quota, competició i continuïtat. Guia per a famílies.',
   "hero_alt": "Julio Torralba, fundador del CB Grup Barna, amb dues jugadores de l'escola",
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/com-triar-escola-basquet-barcelona/'), ('es', 'https://cbgrupbarna.info/es/blog/com-triar-escola-basquet-barcelona/'), ('en', 'https://cbgrupbarna.info/en/blog/com-triar-escola-basquet-barcelona/'), ('x-default', 'https://cbgrupbarna.info/blog/com-triar-escola-basquet-barcelona/')],
   "date": "2026-08-05",
   "modified": "2026-08-12",
   "tag": "Guia per a famílies",
@@ -1597,7 +1594,6 @@ continuïtat del lloc.</p>
   "slug": "campus-basquet-barcelona-guia",
   "meta_desc": 'Guia per triar campus de bàsquet a Barcelona: diferència entre campus de lleure i de tecnificació, ràtios, grups per edat, horaris i preu.',
   "hero_alt": 'Entrenador explicant un exercici a un grup de jugadors asseguts a la pista, al campus del CB Grup Barna',
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/campus-basquet-barcelona-guia/'), ('es', 'https://cbgrupbarna.info/es/blog/campus-basquet-barcelona-guia/'), ('en', 'https://cbgrupbarna.info/en/blog/campus-basquet-barcelona-guia/'), ('x-default', 'https://cbgrupbarna.info/blog/campus-basquet-barcelona-guia/')],
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "Campus de bàsquet a Barcelona: què mirar abans d'apuntar-hi ningú",
@@ -1676,7 +1672,6 @@ Barna. Les darreres edicions s'han omplert abans de començar, així que si us i
   "slug": "que-es-basquet-3x3",
   "meta_desc": 'El 3x3 és bàsquet a mitja pista amb tres jugadors per equip i és esport olímpic des de Tòquio.',
   "hero_alt": 'Partit de bàsquet 3x3 a pista exterior, jugadora rematant a cistella',
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/que-es-basquet-3x3/'), ('es', 'https://cbgrupbarna.info/es/blog/que-es-basquet-3x3/'), ('en', 'https://cbgrupbarna.info/en/blog/que-es-basquet-3x3/'), ('x-default', 'https://cbgrupbarna.info/blog/que-es-basquet-3x3/')],
   "date": "2026-08-05",
   "tag": "Bàsquet",
   "title": "Què és el bàsquet 3x3 i on jugar-hi a Barcelona",
@@ -1749,7 +1744,6 @@ s'obren pot <a href="/#info">deixar el contacte</a> o escriure al WhatsApp del c
   "slug": "basquet-base-sant-marti-clot",
   "meta_desc": "Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa federativa, calendari i què significa jugar en un club de barri amb seixanta-un anys d'història.",
   "hero_alt": 'Jugador del CB Grup Barna, club de bàsquet base del barri del Clot',
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/basquet-base-sant-marti-clot/'), ('es', 'https://cbgrupbarna.info/es/blog/basquet-base-sant-marti-clot/'), ('en', 'https://cbgrupbarna.info/en/blog/basquet-base-sant-marti-clot/'), ('x-default', 'https://cbgrupbarna.info/blog/basquet-base-sant-marti-clot/')],
   "date": "2026-08-05",
   "tag": "El barri",
   "title": "Bàsquet base al Clot i a Sant Martí: com funciona un club de barri",
@@ -1840,6 +1834,7 @@ def blog_card(a, with_text):
 
 def build_article(a):
     url = f"{SITE}/blog/{a['slug']}/"
+    url_relativa = f"/blog/{a['slug']}/"
     faq_html, faq_ld = faq_block(a["faq"])
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "BlogPosting", "@id": url + "#article",
@@ -1900,7 +1895,7 @@ def build_article(a):
 """
     return write(f"blog/{a['slug']}/index.html",
                  head(a["seo_title"], a["desc"], url, SITE + "/og-image.jpg", ld, a["kw"],
-                      a.get("alternates"), meta_desc=a.get("meta_desc")) + body + FOOT)
+                      alternatives(url_relativa), meta_desc=a.get("meta_desc")) + body + FOOT)
 
 
 def build_blog_index():
@@ -2587,8 +2582,7 @@ def build_calendaris():
 }})();
 </script>
 """
-    alternates = [("ca", url), ("es", SITE + "/es/partits/calendaris/"),
-                  ("en", SITE + "/en/partits/calendaris/"), ("x-default", url)]
+    alternates = alternatives("/partits/calendaris/")
     return write("partits/calendaris/index.html",
                  head(title, desc, url, SITE + "/partits/calendaris/img/scf.webp", ld,
                       "calendari CB Grup Barna, calendari bàsquet base, descarregar calendari equip",

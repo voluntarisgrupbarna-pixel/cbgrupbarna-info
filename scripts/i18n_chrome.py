@@ -23,6 +23,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 DICCIONARI = ROOT / "i18n" / "diccionari.yml"
+SITE = "https://cbgrupbarna.info"
 
 _dades = yaml.safe_load(DICCIONARI.read_text(encoding="utf-8"))
 TEXTOS = _dades["textos"]
@@ -109,6 +110,26 @@ def peu(idioma):
             '      <div class="foot-mark">#Som<em>Clot</em></div>\n'
             f'      <div class="foot-legal">{text("peu_legal", idioma)}</div>\n'
             '    </div>\n  </div>\n</footer>\n</body>\n</html>\n')
+
+
+def alternatives(url):
+    """Les traduccions d'una pàgina, tal com les vol head(): una llista de
+    (codi d'idioma, adreça absoluta), amb x-default al final.
+
+    Surten de i18n/routes.yml, que és qui sap quina pàgina és quina en cada
+    idioma. Abans cada article portava aquesta llista escrita a mà al costat,
+    i per això n'hi havia que apuntaven a pàgines que ja no existien.
+    """
+    mapa = yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}
+    for grup in mapa.get("rutes", []):
+        if url not in (grup.get("ca"), grup.get("es"), grup.get("en")):
+            continue
+        llista = [(idioma, SITE + grup[idioma])
+                  for idioma in ("ca", "es", "en") if grup.get(idioma)]
+        if len(llista) == 1:
+            return []          # sense traduccions no cal declarar res
+        return llista + [("x-default", SITE + grup["ca"])]
+    return []
 
 
 if __name__ == "__main__":

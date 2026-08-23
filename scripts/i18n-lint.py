@@ -64,6 +64,7 @@ RE_ALTERNATE = re.compile(
 )
 RE_ENLLAC = re.compile(r'<a\b[^>]*\bhref=["\']([^"\']+)["\'][^>]*>(.*?)</a>', re.I | re.S)
 RE_ETIQUETA = re.compile(r"<[^>]+>")
+RE_NOINDEX = re.compile(r'<meta[^>]+name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', re.I)
 
 
 def fitxer_de(url):
@@ -175,6 +176,12 @@ def revisa():
     for r in rutes:
         germanes = [r.get(i) for i in ("es", "en") if r.get(i)]
         if not germanes:
+            continue
+        # Si la pàgina catalana és noindex, no se li demanen hreflang: declarar
+        # com a versió principal una pàgina que hem tret de l'índex és pitjor
+        # que no declarar res. scripts/i18n-hreflang.py salta aquests grups
+        # pel mateix motiu i els diu pel nom quan s'executa.
+        if RE_NOINDEX.search(contingut.get(r["ca"]) or ""):
             continue
         for url in [r["ca"], *germanes]:
             trobats = declarats.get(url, {})
