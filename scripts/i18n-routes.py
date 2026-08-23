@@ -49,6 +49,7 @@ EXCLOU = re.compile(
     r"|/admin/|/print/|/cartell\.html$|migrar-flickr"
 )
 
+RE_REDIRECCIO = re.compile(r'<meta[^>]+http-equiv=["\']refresh["\']', re.I)
 RE_ALTERNATE = re.compile(
     r'<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\']([^"\']+)["\'][^>]*href=["\']([^"\']+)["\']',
     re.I,
@@ -88,6 +89,10 @@ def pagines():
             continue
         url = url_de(fitxer)
         if EXCLOU.search(url):
+            continue
+        # Una adreça vella que només porta a la nova (i18n/renoms.yml) no és
+        # una pàgina: si comptés, sortiria al mapa com a òrfena per sempre.
+        if RE_REDIRECCIO.search(fitxer.read_text(encoding="utf-8", errors="ignore")):
             continue
         fora[idioma_de(url)].add(url)
     return fora

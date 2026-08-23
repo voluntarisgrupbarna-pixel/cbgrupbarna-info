@@ -14,6 +14,8 @@ Què inclou i què no:
   · Només pàgines indexables. Si una pàgina porta <meta name="robots"
     content="noindex">, queda fora — que és el cas de /patrocinis/,
     /presentacio/, /dossier-patrocinis/ i /basquet-femeni/.
+  · Fora les pàgines que només redirigeixen a una altra: les adreces velles
+    que van quedar enrere quan es va traduir un slug (i18n/renoms.yml).
   · Fora també els panells d'admin, les pàgines d'impressió i els cartells:
     les mateixes rutes que ja bloqueja robots.txt.
   · La <loc> surt del <link rel="canonical"> de cada pàgina quan n'hi ha, no
@@ -41,6 +43,7 @@ EXCLOU = re.compile(
     r"|/admin/|/print/|/cartell\.html$|migrar-flickr"
 )
 
+RE_REDIRECCIO = re.compile(r'<meta[^>]+http-equiv=["\']refresh["\']', re.I)
 RE_NOINDEX = re.compile(r'<meta[^>]+name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', re.I)
 RE_CANONICAL = re.compile(r'<link[^>]+rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\']', re.I)
 RE_ALTERNATE = re.compile(
@@ -100,6 +103,11 @@ def recollir():
             continue
         text = fitxer.read_text(encoding="utf-8", errors="ignore")
         if RE_NOINDEX.search(text):
+            continue
+        # Les pàgines que només porten a una altra (i18n/renoms.yml) no són
+        # una URL del lloc: la del sitemap ha de ser la de destí, que és la
+        # que porta els hreflang.
+        if RE_REDIRECCIO.search(text):
             continue
 
         canonic = RE_CANONICAL.search(text)

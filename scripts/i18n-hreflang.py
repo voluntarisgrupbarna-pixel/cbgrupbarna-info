@@ -39,6 +39,10 @@ SITE = "https://cbgrupbarna.info"
 RE_CANONICAL = re.compile(r'([ \t]*)<link[^>]+rel=["\']canonical["\'][^>]*>', re.I)
 RE_ALTERNATE = re.compile(
     r'[ \t]*<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\'][^"\']+["\'][^>]*>[ \t]*\n?', re.I)
+RE_REDIRECCIO = re.compile(r'<meta[^>]+http-equiv=["\']refresh["\']', re.I)
+RE_UN_ALTERNATE = re.compile(
+    r'[ \t]*<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\']([^"\']+)["\'][^>]*'
+    r'href=["\']([^"\']+)["\'][^>]*>[ \t]*\n?', re.I)
 RE_NOINDEX = re.compile(
     r'<meta[^>]+name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', re.I)
 
@@ -100,8 +104,43 @@ def main():
                 if not args.dry_run:
                     fitxer.write_text(final, encoding="utf-8")
 
+    # Segona passada: hreflang que apunten a una pàgina que ja no és una
+    # pàgina. /presentacio/ deia que la seva versió castellana era
+    # /es/presentacio/, que fa temps que només és una redirecció cap a
+    # /es/patrocinadors/: això li diu al cercador que la versió en castellà
+    # d'aquesta pàgina és una redirecció, que no és el que volem dir.
+    del_grup = {u for g in rutes if g.get("es") or g.get("en")
+                for u in (g.get("ca"), g.get("es"), g.get("en")) if u}
+    netejades = []
+    for fitxer in sorted(ROOT.rglob("*.html")):
+        rel = "/" + fitxer.relative_to(ROOT).as_posix()
+        if ".git" in fitxer.parts or rel.replace("/index.html", "/") in del_grup:
+            continue
+        text = fitxer.read_text(encoding="utf-8", errors="ignore")
+        if not RE_ALTERNATE.search(text):
+            continue
+
+        def viva(desti):
+            f = fitxer_de(desti.replace(SITE, ""))
+            if not f.exists():
+                return False
+            return not RE_REDIRECCIO.search(f.read_text(encoding="utf-8", errors="ignore"))
+
+        reals = [(c, h) for c, h in RE_UN_ALTERNATE.findall(text) if c != "x-default" and viva(h)]
+        if len(reals) >= 2:
+            continue                      # parella legítima que el mapa no coneix
+        net = RE_ALTERNATE.sub("", text)
+        if net != text:
+            netejades.append(rel.replace("/index.html", "/"))
+            if not args.dry_run:
+                fitxer.write_text(net, encoding="utf-8")
+
     print(f"{tocades} pàgines amb els hreflang reescrits"
           + (" (no s'ha desat res)" if args.dry_run else " · desat"))
+    if netejades:
+        print(f"\n{len(netejades)} pàgines on s'han tret hreflang que ja no porten enlloc:")
+        for u in netejades:
+            print(f"  {u}")
     if saltades:
         print(f"\n{len(saltades)} grups saltats perquè el català és noindex:")
         for u in saltades:

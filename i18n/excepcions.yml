@@ -15,6 +15,41 @@ rutes_exemptes:
   - ruta: /opina/
     motiu: Campanya amb nom propi i QR impresos que hi apunten.
 
+# Seccions de navegació que es queden amb el nom català a propòsit. No les
+# busca ningú pel nom —s'hi arriba pel menú— i canviar-les trencaria enllaços
+# interns, el sitemap i, a /partits/calendaris/, els .ics que la gent ja té
+# subscrits al mòbil. El que SÍ que s'ha traduït és a i18n/renoms.yml: els
+# articles, que és on el nom de l'adreça decideix si et troben.
+rutes_exemptes_de_renom:
+  - ruta: /partits/
+    motiu: Secció de navegació. A més, les URL dels .ics i del webcal en pengen.
+  - ruta: /fotos/
+    motiu: Secció de navegació.
+  - ruta: /fotos-esdeveniments/
+    motiu: Secció de navegació.
+  - ruta: /campus/
+    motiu: Secció de navegació. La pàgina de cerca en anglès ja és /en/basketball-camps-barcelona/.
+  - ruta: /premsa/
+    motiu: Secció de navegació.
+  - ruta: /patrocinadors/
+    motiu: Secció de navegació.
+  - ruta: /jugadors/
+    motiu: Secció de navegació.
+  - ruta: /orgull/
+    motiu: Campanya amb nom propi.
+  - ruta: /mascota/
+    motiu: Pàgina de la mascota, amb nom propi.
+  - ruta: /grup-barna-dades-oficials/
+    motiu: Porta el nom del club a dins.
+  - ruta: /patrocinis/
+    motiu: Pàgina interna, noindex.
+  - ruta: /dossier-patrocinis/
+    motiu: Pàgina interna, noindex.
+  - ruta: /presentacio/
+    motiu: Pàgina interna.
+  - ruta: /briefing/
+    motiu: Pàgina interna.
+
 # Paraules que ja s'escriuen igual en els tres idiomes, o que són vocabulari
 # del club i no es tradueixen. Es comparen amb l'últim tram de la ruta.
 segments_exempts:

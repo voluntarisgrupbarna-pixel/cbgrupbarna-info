@@ -112,13 +112,17 @@ def carrega():
 def slug_exempt(ca, idioma, excepcions):
     """Un slug igual en dos idiomes que no és cap descuit.
 
-    N'hi ha de dues menes: rutes senceres amb nom propi a dins —les fitxes de
-    cada empresa patrocinadora— i paraules que ja s'escriuen igual en els tres
-    idiomes, com «blog» o «3x3», o que són vocabulari del club, com «Escoleta».
+    N'hi ha de tres menes: rutes senceres amb nom propi a dins —les fitxes de
+    cada empresa patrocinadora—, paraules que ja s'escriuen igual en els tres
+    idiomes, com «blog» o «3x3», o que són vocabulari del club, com
+    «Escoleta», i les seccions de navegació que s'ha decidit deixar amb el nom
+    català perquè ningú les busca pel nom i canviar-les trencaria enllaços
+    publicats. El motiu de cada decisió és a i18n/excepcions.yml.
     """
-    for regla in excepcions.get("rutes_exemptes", []):
-        if ca.startswith(regla["ruta"]):
-            return True
+    for llista in ("rutes_exemptes", "rutes_exemptes_de_renom"):
+        for regla in excepcions.get(llista, []):
+            if ca.startswith(regla["ruta"]):
+                return True
     ultim = ca.strip("/").split("/")[-1]
     return ultim in (excepcions.get("segments_exempts", {}).get(idioma) or [])
 
