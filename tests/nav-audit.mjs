@@ -83,6 +83,13 @@ const RECULL = `(function () {
     var vis = [], tot = [];
     document.querySelectorAll(sel).forEach(function (zona) {
       zona.querySelectorAll('a[href]').forEach(function (a) {
+        // El commutador d'idioma no és una sortida cap a un altre lloc: porta
+        // a la MATEIXA pàgina en una altra llengua. Comptar-lo com a destí
+        // faria semblar que cada pàgina té una navegació diferent de totes
+        // les altres, quan el que canvia és només l'adreça d'aquests dos
+        // enllaços. Que hi sigui es mesura a part, al camp idiomes.
+        // (Sense cometes invertides: aquest bloc és una plantilla de text.)
+        if (a.closest('.lang-switch, .langs')) return;
         var d = net(a.getAttribute('href'));
         if (!d) return;
         tot.push(d);
