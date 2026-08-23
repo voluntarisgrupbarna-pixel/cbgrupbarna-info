@@ -79,6 +79,10 @@ el hero curt (etiqueta vermella, «Bàsquet al Clot. / Des de 1965.» amb la seg
 línia en vermell i una sola frase) i les nou franges. **El bloc fosc de marca
 —el `.masthead`— només surt a l'extensa**: a franges hi és al marcatge però
 amagat, perquè la guia diu que davant hi va la porta, no la presentació.
+L'única cosa que el hero de franges afegeix a la guia és una línia petita
+sota la frase amb les paraules de cerca que abans portava el bloc fosc
+(`.lg-hero-seo`): sense ella, l'h1 visible deixaria de dir «bàsquet base a
+Barcelona» i això es paga al cercador.
 
 L'estructura de les franges està calcada de la guia visual. **Si canvies l'ordre
 o els textos d'una, canvia'ls a l'altra**: la portada i la guia han de dir el
