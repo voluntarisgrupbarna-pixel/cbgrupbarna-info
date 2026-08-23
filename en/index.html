@@ -850,6 +850,18 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     .form-blocked a { font-weight: 600; white-space: nowrap; }
     .req { color: var(--red); font-weight: 700; }
     .form-legend { font-size: 12.5px; color: var(--ink-2); margin: 0 0 16px; }
+
+/* ==== CRIDA DE COMUNITAT · mateixa peça que a css/barna.css ==== */
+.comunitat { background: var(--ink); color: #fff; }
+.comunitat-in { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.18); }
+@media (max-width: 700px) { .comunitat-in { grid-template-columns: 1fr; } }
+.comunitat-porta { display: block; background: var(--ink); padding: clamp(24px, 3.4vw, 38px) clamp(20px, 5vw, 60px); transition: background 0.35s var(--ease); }
+.comunitat-porta:hover { background: #000; }
+.comunitat-porta--red { background: var(--red); }
+.comunitat-porta--red:hover { background: var(--red-dark); }
+.comunitat-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.6vw, 28px); letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; }
+.comunitat-s { display: block; margin-top: 9px; font-size: 12.5px; color: rgba(255,255,255,0.74); }
+.comunitat-porta--red .comunitat-s { color: rgba(255,255,255,0.86); }
 </style>
 <script src="/js/galetes.js"></script>
 </head>
@@ -1304,6 +1316,20 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 </main>
 
 <!-- ==== PEU ==== -->
+<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
+<section class="comunitat" aria-label="Follow CB Grup Barna">
+  <div class="comunitat-in">
+    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
+      <span class="comunitat-t">Follow us on Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · the club's week, as it happens.</span>
+    </a>
+    <a class="comunitat-porta comunitat-porta--red" href="/en/newsletter/" data-cta="crida-newsletter">
+      <span class="comunitat-t">Join the newsletter</span>
+      <span class="comunitat-s">One email a month with what's worth knowing. Nothing else.</span>
+    </a>
+  </div>
+</section>
+<!-- /CRIDA DE COMUNITAT -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-partners">
