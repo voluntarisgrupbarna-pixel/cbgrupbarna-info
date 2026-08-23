@@ -374,6 +374,15 @@ FCBQ la temporada 2026-27.
 - [Deixa la teva ressenya](https://cbgrupbarna.info/opina/): pàgina per a famílies,
   jugadores i jugadors que vulguin valorar el club a Google, amb l'enllaç directe
   al formulari de ressenya.
+- [Cerca a tot el web](https://cbgrupbarna.info/cerca/) · [ES](https://cbgrupbarna.info/es/cerca/)
+  · [EN](https://cbgrupbarna.info/en/search/): cercador de tot el lloc. Funciona al
+  navegador de qui cerca, sobre l'índex `/cerca-index.json`; cap consulta surt del
+  navegador ni s'envia a cap servei extern. Entén la pregunta en català, castellà i
+  anglès («quant costa», «cuánto cuesta», «how much does it cost» porten al mateix
+  lloc) i perdona les faltes d'ortografia. La pàgina és `noindex, follow` i per això
+  no surt al sitemap: el contingut real ja hi és, pàgina per pàgina. Des de
+  qualsevol pàgina del web també s'obre amb la lupa de la capçalera, amb ⌘K/Ctrl+K
+  o amb la tecla «/».
 
 ## Premsa
 

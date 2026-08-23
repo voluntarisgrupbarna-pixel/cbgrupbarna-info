@@ -69,6 +69,9 @@ Disallow: /opina/print/
 Disallow: /fotos/migrar-flickr.html
 Disallow: /partits/cartell.html
 Disallow: /jugadors/estadistiques.html
+# L'índex del cercador: 486 KB del mateix text que ja hi ha a les pàgines.
+# Rastrejar-lo no aporta res i es refà sovint.
+Disallow: /cerca-index.json
 
 Sitemap: https://cbgrupbarna.info/sitemap.xml
 
