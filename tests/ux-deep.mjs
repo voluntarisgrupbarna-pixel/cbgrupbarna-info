@@ -242,6 +242,9 @@ const TOCS = `(function () {
     var pare = el.closest('label');
     if (pare && pare !== el) { var pr = pare.getBoundingClientRect(); if (pr.height > 1) { w = Math.max(w, pr.width); h = Math.max(h, pr.height); } }
     if (w >= 44 && h >= 44) return;
+    // L'enllaç de saltar al contingut viu fora de pantalla i només apareix
+    // quan hi arribes amb el tabulador: no és una zona per tocar amb el dit.
+    if (el.classList.contains('skip') || el.classList.contains('skip-link')) return;
     // Els enllaços dins d'un paràgraf de text corregut no són botons: no s'hi
     // aplica la regla dels 44 px i marcar-los només faria soroll.
     if (el.tagName === 'A' && el.closest('p, li, figcaption, small')) return;

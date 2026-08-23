@@ -131,3 +131,19 @@
    no calgui passar-hi per sobre per veure el que has buscat. */
 .menu.cercant .menu-grid, .menu.cercant .menu-foot { display: none; }
 @media (prefers-reduced-motion: reduce) { .menu-cerca-llista a { transition: none; } }
+
+/* A 320 px, el commutador afegit al costat d'una capçalera que ja porta sis
+   enllaços desbordava l'ample per 4 px. La barra d'enllaços ja es pot
+   desplaçar de costat; només li faltava permís per encongir-se, que
+   `min-width: auto` li negava. */
+/* Es fa servir `.head-in--amb-burger`, que `js/nav.js` posa a TOTES les
+   pàgines interiors, i no la classe del commutador: les pàgines que ja
+   portaven el seu propi commutador escrit a l'HTML —el blog, la premsa, la
+   butlleta— també desbordaven l'ample per 4 px a 320 px, i això ja passava
+   abans de tocar-hi res. */
+.head-in--amb-burger .head-nav { min-width: 0; }
+.head-in--amb-burger .head-brand { min-width: 44px; justify-content: center; }
+/* El nom del club al costat de l'escut es retira a les pantalles estretes,
+   com ja fa la portada per sota de 480 px: ocupa 134 dels 320 px i, amb el
+   commutador al costat, no hi cap. L'escut segueix sent l'enllaç a l'inici. */
+@media (max-width: 480px) { .head-in--amb-burger .head-brand span { display: none; } }
