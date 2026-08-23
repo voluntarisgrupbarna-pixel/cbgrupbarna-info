@@ -42,7 +42,17 @@
 </head>
 <body>
 <script src="/scripts/admin-gate.js"></script>
-<script>CBGBGate.protect(init);</script>
+<script>
+  // `init` es declara en un bloc de script de més avall, i les declaracions
+  // de funció només pugen dins del seu propi bloc: aquí encara no existeix, i
+  // passar-la directament donava «init is not defined». Es tapa la pàgina ara
+  // —que és el que ha de passar de seguida— i s'arrenca quan el document
+  // està llegit i `init` ja hi és.
+  CBGBGate.protect(function () {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  });
+</script>
 
 <nav>
   <img src="/logo.png" alt="CB Grup Barna">

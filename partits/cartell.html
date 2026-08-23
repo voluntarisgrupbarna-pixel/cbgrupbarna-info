@@ -233,9 +233,9 @@ function dibuixar(){
   // Rètol gran
   x.textAlign='left';
   x.fillStyle='#F5F5F5';
-  x.font='170px Anton, 'Anton', sans-serif';
+  x.font = "170px 'Anton', sans-serif";
   let fs=170;
-  while(x.measureText(retol).width > W-152 && fs>70){ fs-=6; x.font=fs+'px Anton, 'Anton', sans-serif'; }
+  while(x.measureText(retol).width > W-152 && fs>70){ fs-=6; x.font = fs + "px 'Anton', sans-serif"; }
   x.fillText(retol, 76, 880);
   // Subratllat vermell
   x.fillStyle=RED;
@@ -243,7 +243,7 @@ function dibuixar(){
 
   // Marcador
   x.fillStyle='#FFFFFF';
-  x.font='150px Anton, 'Anton', sans-serif';
+  x.font = "150px 'Anton', sans-serif";
   const marc=`${r.nostre}-${r.seu}`;
   x.fillText(marc, 76, 1058);
 
