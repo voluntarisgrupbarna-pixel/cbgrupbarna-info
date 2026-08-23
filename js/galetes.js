@@ -126,13 +126,13 @@
       aria: 'Consentimiento de cookies', titol: 'Cookies', mes: 'Más información',
       text: 'Usamos Google Analytics para saber qué páginas interesan más, sin cookies de publicidad.',
       nomes: 'Solo las necesarias', accepta: 'Aceptarlas',
-      enllac: '/politica-de-privacitat/#galetes'
+      enllac: '/es/politica-de-privacidad/#galetes'
     },
     en: {
       aria: 'Cookie consent', titol: 'Cookies', mes: 'More information',
       text: 'We use Google Analytics to see which pages people read most. No advertising cookies.',
       nomes: 'Only the necessary ones', accepta: 'Accept them',
-      enllac: '/politica-de-privacitat/#galetes'
+      enllac: '/en/privacy-policy/#galetes'
     }
   };
 
