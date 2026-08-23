@@ -184,6 +184,8 @@ def main():
     ap.add_argument("ruta", nargs="?", help="ruta catalana, p. ex. /club/")
     ap.add_argument("idioma", choices=["es", "en"])
     ap.add_argument("--tot", action="store_true", help="totes les que tinguin la feina feta")
+    ap.add_argument("--ruta-desti", help="ruta de la pàgina traduïda si no ha de dur el nom "
+                                         "català: --ruta-desti /en/history/")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -203,8 +205,13 @@ def main():
             pendents.append(f"{ruta}: {error}")
             continue
         html, sense_versio = resultat
-        desti = fitxer_de(f"/{args.idioma}{ruta}")
-        print(f"  /{args.idioma}{ruta}  ({len(html) // 1024} KB)"
+        # Una pàgina nova ha de néixer amb el nom que li toca. Renomenar-la
+        # després vol dir deixar una redirecció enrere per sempre; fer-ho bé
+        # ara no costa res, perquè encara no hi ha ningú que hi enllaci.
+        desti_url = args.ruta_desti or f"/{args.idioma}{ruta}"
+        html = html.replace(SITE + f"/{args.idioma}{ruta}", SITE + desti_url)
+        desti = fitxer_de(desti_url)
+        print(f"  {desti_url}  ({len(html) // 1024} KB)"
               + (f" · {len(sense_versio)} enllaços encara cap al català" if sense_versio else ""))
         if not args.dry_run:
             desti.parent.mkdir(parents=True, exist_ok=True)
