@@ -171,7 +171,7 @@
       "keywords": "academia de baloncesto Barcelona, acadèmia de bàsquet Barcelona, baloncesto base Barcelona, club baloncesto Barcelona, bàsquet base Barcelona, CB Grup Barna, Grup Barna, basket infantil Barcelona, campus baloncesto verano, 3x3 Barcelona, El Clot basket",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Carrer de la Llacuna, 172",
+        "streetAddress": "Carrer de la Llacuna, 170-172",
         "addressLocality": "Barcelona",
         "addressRegion": "Catalunya",
         "postalCode": "08018",
@@ -190,7 +190,7 @@
         "description": "Pista principal del CB Grup Barna, al Parc del Clot, al Districte de Sant Martí de Barcelona.",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Carrer de la Llacuna, 172",
+          "streetAddress": "Carrer de la Llacuna, 170-172",
           "addressLocality": "Barcelona",
           "addressRegion": "Catalunya",
           "postalCode": "08018",
@@ -1232,6 +1232,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   .tk-cnt { animation: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+    .form-blocked { margin-top: 14px; padding: 13px 16px; border-left: 3px solid var(--red);
+      background: var(--paper-2); font-size: 13.5px; line-height: 1.55; color: var(--ink-2); }
+    .form-blocked strong { color: var(--ink); }
+    .form-blocked a { font-weight: 600; white-space: nowrap; }
+    .req { color: var(--red); font-weight: 700; }
+    .form-legend { font-size: 12.5px; color: var(--ink-2); margin: 0 0 16px; }
 </style>
 </head>
 <body>
@@ -1376,7 +1382,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
         <li>Comunitat</li>
         <li>Impacte social</li>
       </ul>
-      <p class="mh-sub">El club de bàsquet més gran de Barcelona, formatiu i competitiu, al Clot. <strong>34+ equips</strong> masculins i femenins, <strong>15 federats a la FCBQ</strong> —vuit d'ells femenins—, <strong>Escoleta de 4 a 8 anys</strong>, campus, tecnificació i bàsquet inclusiu amb els Barna Màgics.</p>
+      <p class="mh-sub">Club i acadèmia de bàsquet base al Clot, Barcelona. <strong>38 equips</strong> masculins i femenins, <strong>15 federats a la FCBQ</strong> —vuit d'ells femenins—, <strong>Escoleta de 4 a 8 anys</strong>, campus, tecnificació i bàsquet inclusiu amb els Barna Màgics.</p>
       <div class="mh-cta">
         <a class="mh-btn" href="#info" data-cta="mh-fes-te">Fes-te del Barna</a>
         <a class="mh-btn mh-btn--ghost" href="/empreses/" data-cta="mh-empreses">Empreses i partners</a>
@@ -1587,20 +1593,21 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
           les portes obertes, el campus, el 3x3 o l'equip que li toca al teu fill o filla. També
           t'avisem quan s'obrin inscripcions, abans de publicar-les.</p>
           <form class="form" id="infoForm" novalidate>
+            <p class="form-legend">Els camps amb <span class="req" aria-hidden="true">*</span> són obligatoris.</p>
             <div class="form-grid">
               <div class="field">
-                <label for="f-nom">Nom i cognoms</label>
+                <label for="f-nom">Nom i cognoms <span class="req" aria-hidden="true">*</span></label>
                 <input id="f-nom" name="nom" type="text" required autocomplete="name" placeholder="&nbsp;">
               </div>
             </div>
             <div class="form-grid two" style="margin-top:18px">
               <div class="field">
-                <label for="f-mobil">Mòbil</label>
+                <label for="f-mobil">Mòbil <span class="req" aria-hidden="true">*</span></label>
                 <input id="f-mobil" name="mobil" type="tel" required autocomplete="tel"
                        inputmode="tel" pattern="[0-9+ ]{9,}" placeholder="&nbsp;">
               </div>
               <div class="field">
-                <label for="f-mail">Correu electrònic</label>
+                <label for="f-mail">Correu electrònic <span class="req" aria-hidden="true">*</span></label>
                 <input id="f-mail" name="correu" type="email" required autocomplete="email"
                        inputmode="email" placeholder="&nbsp;">
               </div>
@@ -1629,6 +1636,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
             </label>
             <button type="submit" class="btn red" data-cta="info-submit">Enviar i obrir WhatsApp</button>
             <p class="form-note">S'obre el WhatsApp del club amb les teves dades. Responem en menys de 24 h.</p>
+            <p class="form-blocked" id="formBloquejat" role="alert" hidden>El navegador ha blocat la finestra,
+            així que <strong>encara no ens ha arribat res</strong>.
+            <a href="#" target="_blank" rel="noopener">Obre el WhatsApp tu mateix →</a></p>
           </form>
           <div class="form-ok" id="formOk" role="status">
             <h3>Rebut. Gràcies!</h3>
@@ -2087,7 +2097,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   //  la d'un Google Apps Script publicat com a aplicació web). Mentre
   //  estigui buit només s'envia per WhatsApp i no falla res.
   // ══════════════════════════════════════════════════════════════════════
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formspree.io/f/xeajwzlv';
   var WA_CLUB_NUM = '34698425153';
 
   (function () {
@@ -2117,18 +2127,30 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
       var interesTxt = interes.join(', ') || 'Sense especificar';
 
-      // 1 · Correu, si hi ha endpoint configurat. No bloqueja el WhatsApp.
+      // 1 · Correu, que ara sí que hi arriba. No bloqueja el WhatsApp.
+      //
+      //  Abans anava amb mode:'no-cors', i així no funcionava: en aquest mode
+      //  el navegador NOMÉS deixa passar tres valors de Content-Type, i
+      //  application/json no és cap d'ells. La capçalera es requeia en silenci
+      //  i el servidor rebia text pla, no un JSON. A sobre, la resposta era
+      //  opaca i no hi havia manera de saber si havia arribat.
+      //
+      //  Formspree accepta CORS, així que es demana bé i es pot comprovar.
       if (FORM_ENDPOINT) {
         try {
           fetch(FORM_ENDPOINT, {
-            method: 'POST', mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({
               _subject: "Nova sol·licitud d'informació · " + nom,
               nom: nom, mobil: mobil, correu: correu,
               interes: interesTxt, missatge: msg, origen: location.pathname
             })
-          }).catch(function () {});
+          }).then(function (r) {
+            if (!r.ok && window.gtag) window.gtag('event', 'form_email_error', { codi: r.status });
+          }).catch(function () {
+            if (window.gtag) window.gtag('event', 'form_email_error', { codi: 'xarxa' });
+          });
         } catch (_) {}
       }
 
@@ -2139,8 +2161,29 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
               + "Correu: " + correu + "\n"
               + "M'interessa: " + interesTxt
               + (msg ? "\n\n" + msg : "");
-      window.open('https://api.whatsapp.com/send?phone=' + WA_CLUB_NUM
-                  + '&text=' + encodeURIComponent(txt), '_blank', 'noopener');
+      var waUrl = 'https://api.whatsapp.com/send?phone=' + WA_CLUB_NUM
+                  + '&text=' + encodeURIComponent(txt);
+      // Sense 'noopener' a proposit: amb aquesta opcio window.open retorna
+      // null SEMPRE, per especificacio, i llavors no hi ha manera de saber si
+      // la finestra s'ha obert. S'anul·la l'opener a ma just despres, que dona
+      // la mateixa proteccio i si que deixa comprovar-ho.
+      var finestra = window.open(waUrl, '_blank');
+      if (finestra) { try { finestra.opener = null; } catch (_) {} }
+
+      // Si el navegador ha blocat l'emergent, el missatge no ha sortit. Abans
+      // s'amagava el formulari i es deia «Rebut» igualment: la persona se
+      // n'anava convencuda d'haver-nos escrit i aqui no arribava res. Ara el
+      // formulari es queda i li donem l'enllac perque hi cliqui ella.
+      if (!finestra) {
+        var av = document.getElementById('formBloquejat');
+        if (av) {
+          av.querySelector('a').href = waUrl;
+          av.hidden = false;
+          av.scrollIntoView({ block: 'center' });
+        }
+        flash('El navegador ha blocat la finestra');
+        return;
+      }
 
       if (window.gtag) window.gtag('event', 'generate_lead', { method: 'form_info', interes: interesTxt });
       form.style.display = 'none';

@@ -1,0 +1,346 @@
+#!/usr/bin/env python3
+"""Genera /es/partits/ i /en/partits/ a partir de /partits/.
+
+Per que existeix: les versions en castella i angles de «Dies de partit» NO
+eren la pagina publica traduida. Eren una altra cosa: l'eina de GESTIO del
+club, de 152 KB, amb sis pestanyes i un formulari d'entrada, mentre que la
+catalana es una pagina publica neta de 33 KB. Qui llegia la web en castella o
+en angles no arribava mai al calendari; arribava al taulell d'administracio.
+
+Com que el problema de fons era que hi havia tres copies escrites a ma que
+havien divergit fins a ser pagines diferents, aixo passa a tenir una sola
+font: la catalana. Les altres dues es generen.
+
+Que NO es tradueix, a proposit:
+  - noms d'equip i de competicio (C.B GRUP BARNA B, C.C. CADET FEMENI...),
+    que son els noms oficials de la FCBQ;
+  - noms de pavello i de poblacio;
+  - el text de dins dels marcadors SEO-SNAPSHOT, SEO-EVENTS i SEO-EQUIPS, que
+    el genera .github/scripts/generate-seo-snapshot.py.
+
+Us:
+    python3 scripts/build-partits-idiomes.py
+    python3 scripts/build-partits-idiomes.py --dry-run
+"""
+
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+FONT = ROOT / "partits" / "index.html"
+
+# Destins que SI que tenen versio traduida. La resta d'enllaços del peu es
+# queden apuntant al catala, que es millor que un 404.
+TRADUITS = [
+    "escoleta", "campus", "3x3", "fotos", "premsa", "blog",
+    "grup-barna-dades-oficials", "premidonaesport", "patrocinadors",
+    "partits/calendaris", "partits",
+]
+
+# Text de la interficie. L'ordre importa: els fragments llargs, primer, perque
+# no se'ls mengi una substitucio mes curta.
+TEXTOS = [
+    # (catala, castella, angles)
+    ("Dies de partit · calendari i resultats · CB Grup Barna",
+     "Días de partido · calendario y resultados · CB Grup Barna",
+     "Match days · fixtures and results · CB Grup Barna"),
+    ("Tots els equips federats del club, en un sol calendari. S'actualitza cada dia a partir",
+     "Todos los equipos federados del club, en un solo calendario. Se actualiza cada día a partir",
+     "Every federated team at the club, in one calendar. Updated daily from"),
+    ("del calendari oficial de la",
+     "del calendario oficial de la",
+     "the official calendar of the"),
+    ("Federació Catalana de Basquetbol",
+     "Federación Catalana de Baloncesto",
+     "Catalan Basketball Federation"),
+    (": dia, hora,\n          rival, casa o fora i pista, i els resultats de la jornada anterior.",
+     ": día, hora,\n          rival, casa o fuera y pista, y los resultados de la jornada anterior.",
+     ": day, time,\n          opponent, home or away and venue, plus last round's results."),
+    ("La primera plantilla del club, femenina i masculina, els seus propers partits.",
+     "La primera plantilla del club, femenina y masculina, y sus próximos partidos.",
+     "The club's first teams, women's and men's, and their next fixtures."),
+    ("Cal activar JavaScript per veure el Gameday Seniors.",
+     "Hay que activar JavaScript para ver el Gameday Seniors.",
+     "JavaScript needs to be enabled to see the Seniors Gameday."),
+    ("Cal activar JavaScript per veure els resultats.",
+     "Hay que activar JavaScript para ver los resultados.",
+     "JavaScript needs to be enabled to see the results."),
+    ("Cal activar JavaScript per veure el calendari complet.",
+     "Hay que activar JavaScript para ver el calendario completo.",
+     "JavaScript needs to be enabled to see the full calendar."),
+    ("Tots els partits de la temporada, mes a mes. També pots subscriure-t'hi des de",
+     "Todos los partidos de la temporada, mes a mes. También puedes suscribirte desde",
+     "Every fixture of the season, month by month. You can also subscribe from"),
+    ("Google Calendar, Apple o Outlook i rebre els canvis d'hora automàticament.",
+     "Google Calendar, Apple u Outlook y recibir los cambios de hora automáticamente.",
+     "Google Calendar, Apple or Outlook and get time changes automatically."),
+    ("Cada equip té la seva pàgina amb la competició, el balanç i el calendari complet.",
+     "Cada equipo tiene su página con la competición, el balance y el calendario completo.",
+     "Each team has its own page with the competition, its record and the full calendar."),
+    ("Els dies de partit es viuen a la Nau del Clot. I els que no hi puguis ser,",
+     "Los días de partido se viven en la Nau del Clot. Y los que no puedas venir,",
+     "Match days happen at La Nau del Clot. And when you can't make it,"),
+    ("els resultats i les millors jugades surten a l'Instagram del club.",
+     "los resultados y las mejores jugadas salen en el Instagram del club.",
+     "the results and the best plays go up on the club's Instagram."),
+    ("Resultats del cap de setmana anterior",
+     "Resultados del fin de semana anterior",
+     "Last weekend's results"),
+    ("Pròxims partits del CB Grup Barna",
+     "Próximos partidos del CB Grup Barna",
+     "Upcoming CB Grup Barna fixtures"),
+    ("Calendari global de tots els equips",
+     "Calendario global de todos los equipos",
+     "Full calendar, all teams"),
+    ("Temporada 2026-2027 · #SomClot",
+     "Temporada 2026-2027 · #SomClot",
+     "2026-2027 season · #SomClot"),
+    ("Vine a la Nau. O segueix-nos.",
+     "Ven a la Nau. O síguenos.",
+     "Come to La Nau. Or follow us."),
+    ("A la pista i a les xarxes",
+     "En la pista y en las redes",
+     "On court and online"),
+    ("Subscriure'm al calendari (.ics)",
+     "Suscribirme al calendario (.ics)",
+     "Subscribe to the calendar (.ics)"),
+    ("Dies de partit per equip", "Días de partido por equipo", "Match days by team"),
+    ("Aquest cap de setmana", "Este fin de semana", "This weekend"),
+    ("Descarregar per equip", "Descargar por equipo", "Download by team"),
+    ("Posicionament del club", "Posicionamiento del club", "Where the club stands"),
+    ("La jornada anterior", "La jornada anterior", "Last round"),
+    ("Política de privacitat", "Política de privacidad", "Privacy policy"),
+    ("Preguntes freqüents", "Preguntas frecuentes", "FAQ"),
+    ("Demanar informació", "Pedir información", "Request information"),
+    ("Calendaris per equip", "Calendarios por equipo", "Calendars by team"),
+    ("Premi Dona i Esport", "Premio Mujer y Deporte", "Women and Sport Award"),
+    ("Articles i premsa", "Artículos y prensa", "Articles and press"),
+    ("Campus de bàsquet", "Campus de baloncesto", "Basketball camp"),
+    ("Escola de bàsquet", "Escuela de baloncesto", "Basketball school"),
+    ("Galeria de fotos", "Galería de fotos", "Photo gallery"),
+    ("Saltar al contingut", "Saltar al contenido", "Skip to content"),
+    ("Vull jugar al Barna", "Quiero jugar en el Barna", "I want to play for Barna"),
+    ("Bàsquet femení", "Baloncesto femenino", "Women's basketball"),
+    ("Dades oficials", "Datos oficiales", "Official data"),
+    ("Instal·lacions", "Instalaciones", "Facilities"),
+    ("Dies de partit", "Días de partido", "Match days"),
+    ("Cistella Petita", "Cistella Petita", "Cistella Petita"),
+    ("Barna Màgics", "Barna Màgics", "Barna Màgics"),
+    ("Torneig 3x3", "Torneo 3x3", "3x3 tournament"),
+    ("Tota la temporada", "Toda la temporada", "The whole season"),
+    ("Organigrama", "Organigrama", "Who's who"),
+    ("Els equips", "Los equipos", "The teams"),
+    ("La jornada", "La jornada", "The round"),
+    ("Avís legal", "Aviso legal", "Legal notice"),
+    ("Per equip", "Por equipo", "By team"),
+    ("Temporada", "Temporada", "Season"),
+    ("El Barna", "El Barna", "El Barna"),
+    ("Empreses", "Empresas", "Businesses"),
+    ("Contacte", "Contacto", "Contact"),
+    ("Escoleta", "Escoleta", "Escoleta"),
+    ("Partners", "Partners", "Partners"),
+    ("Galetes", "Cookies", "Cookies"),
+    ("Galeria", "Galería", "Gallery"),
+    ("Premsa", "Prensa", "Press"),
+    ("Màgics", "Màgics", "Màgics"),
+    ("Xarxes", "Redes", "Social"),
+    ("Campus", "Campus", "Camp"),
+    ("Inici", "Inicio", "Home"),
+    ("Legal", "Legal", "Legal"),
+    ("Club", "Club", "Club"),
+]
+
+# Cadenes que viuen dins del JavaScript.
+JS = [
+    ("Sense resultat", "Sin resultado", "No result"),
+    ("anàlisi viuen a l", "análisis viven en l", "analysis live at l"),
+]
+
+# Els tres llistats del JavaScript, tal com son a l'original: dies comencant en
+# diumenge (l'ordre de Date.getDay()), dies curts i mesos sencers.
+DIES_CA = "['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte']"
+CURT_CA = "['dg.', 'dl.', 'dt.', 'dc.', 'dj.', 'dv.', 'ds.']"
+MESOS_CA = ("['gener', 'febrer', 'març', 'abril', 'maig', 'juny',\n"
+            "               'juliol', 'agost', 'setembre', 'octubre', 'novembre', 'desembre']")
+
+DIES = {
+    "es": "['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']",
+    "en": "['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']",
+}
+CURT = {
+    "es": "['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb']",
+    "en": "['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']",
+}
+# Trossos del JavaScript que construeixen dates i comptadors. Cal-hi tocar
+# perque si no queden connectors en catala enmig d'una frase traduida
+# («Fin de semana del 5 i 6 de septiembre · 7 partits»).
+JS_DATES = [
+    ("' partits.';",
+     "' partidos.';",
+     "' fixtures.';"),
+    ("'Cap de setmana del '",
+     "'Fin de semana del '",
+     "'Weekend of '"),
+    ("da.getDate() + ' i ' + db.getDate() + ' de ' + MESOS[db.getMonth()]",
+     "da.getDate() + ' y ' + db.getDate() + ' de ' + MESOS[db.getMonth()]",
+     "da.getDate() + ' and ' + db.getDate() + ' ' + MESOS[db.getMonth()]"),
+    ("da.getDate() + ' de ' + MESOS[da.getMonth()] + ' i ' + db.getDate() + ' de ' + MESOS[db.getMonth()]",
+     "da.getDate() + ' de ' + MESOS[da.getMonth()] + ' y ' + db.getDate() + ' de ' + MESOS[db.getMonth()]",
+     "da.getDate() + ' ' + MESOS[da.getMonth()] + ' and ' + db.getDate() + ' ' + MESOS[db.getMonth()]"),
+    ("DIES[d.getDay()] + ' ' + d.getDate() + ' de ' + MESOS[d.getMonth()]",
+     "DIES[d.getDay()] + ' ' + d.getDate() + ' de ' + MESOS[d.getMonth()]",
+     "DIES[d.getDay()] + ' ' + d.getDate() + ' ' + MESOS[d.getMonth()]"),
+]
+
+MESOS = {
+    "es": ("['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',\n"
+           "               'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']"),
+    "en": ("['January', 'February', 'March', 'April', 'May', 'June',\n"
+           "               'July', 'August', 'September', 'October', 'November', 'December']"),
+}
+
+# Dades estructurades. La FAQ i el WebPage son text estatic —queden FORA dels
+# marcadors SEO-*, comprovat—, aixi que es poden traduir aqui sense que el
+# generador de la instantania SEO els trepitgi.
+LD = [
+    ("Dies de partit · CB Grup Barna",
+     "Días de partido · CB Grup Barna",
+     "Match days · CB Grup Barna"),
+    ("Calendari global de tots els equips del CB Grup Barna, partits del cap de setmana i resultats de la jornada anterior.",
+     "Calendario global de todos los equipos del CB Grup Barna, partidos del fin de semana y resultados de la jornada anterior.",
+     "Full calendar for every CB Grup Barna team, this weekend's fixtures and last round's results."),
+    ("Quan juga el CB Grup Barna aquest cap de setmana?",
+     "¿Cuándo juega el CB Grup Barna este fin de semana?",
+     "When does CB Grup Barna play this weekend?"),
+    ("On juga els seus partits el CB Grup Barna?",
+     "¿Dónde juega sus partidos el CB Grup Barna?",
+     "Where does CB Grup Barna play its home games?"),
+    ("On es pot veure el resultat d'un partit del CB Grup Barna?",
+     "¿Dónde se puede ver el resultado de un partido del CB Grup Barna?",
+     "Where can I see the result of a CB Grup Barna game?"),
+    ("Quins equips té el CB Grup Barna?",
+     "¿Qué equipos tiene el CB Grup Barna?",
+     "What teams does CB Grup Barna have?"),
+    ("El calendari complet de tots els equips del CB Grup Barna (cadet, infantil, júnior i sènior, femení i masculí) s'actualitza cada dia a partir del calendari oficial de la Federació Catalana de Basquetbol",
+     "El calendario completo de todos los equipos del CB Grup Barna (cadete, infantil, júnior y sénior, femenino y masculino) se actualiza cada día a partir del calendario oficial de la Federación Catalana de Baloncesto",
+     "The full calendar for every CB Grup Barna team (cadet, infantil, junior and senior, women's and men's) is updated daily from the official Catalan Basketball Federation calendar"),
+    ("La majoria de partits de casa del CB Grup Barna es juguen a la Nau del Clot i al Pavelló del Parc del Clot, al barri del Clot, Districte de Sant Martí de Barcelona.",
+     "La mayoría de partidos de casa del CB Grup Barna se juegan en la Nau del Clot y en el Pabellón del Parc del Clot, en el barrio del Clot, Distrito de Sant Martí de Barcelona.",
+     "Most CB Grup Barna home games are played at La Nau del Clot and the Parc del Clot sports hall, in the Clot neighbourhood, Sant Martí district of Barcelona."),
+    ("El pavelló exacte de cada partit apareix al calendari de",
+     "El pabellón exacto de cada partido aparece en el calendario de",
+     "The exact venue for each game appears in the calendar at"),
+    ("Els resultats de tots els equips del CB Grup Barna es publiquen a",
+     "Los resultados de todos los equipos del CB Grup Barna se publican en",
+     "Results for every CB Grup Barna team are published at"),
+    (", a l'apartat de resultats del cap de setmana anterior, i a la pàgina de cada equip.",
+     ", en el apartado de resultados del fin de semana anterior, y en la página de cada equipo.",
+     ", under last weekend's results, and on each team's own page."),
+    ("El CB Grup Barna té equips federats en categories Cadet, Infantil, Júnior i Sènior, tant femenins com masculins,",
+     "El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos,",
+     "CB Grup Barna has federated teams in the Cadet, Infantil, Junior and Senior age groups, both women's and men's,"),
+    ("i es pot consultar a", "y se puede consultar en", "and can be seen at"),
+]
+
+META = {
+    "es": ("Días de partido del CB Grup Barna: calendario y resultados de todos los equipos "
+           "federados, actualizado cada día desde la Federación Catalana de Baloncesto."),
+    "en": ("CB Grup Barna match days: fixtures and results for every federated team, "
+           "updated daily from the Catalan Basketball Federation."),
+}
+
+
+def tradueix(html, idx, lang):
+    for fila in TEXTOS:
+        if fila[0] != fila[idx]:
+            html = html.replace(fila[0], fila[idx])
+    for fila in JS:
+        if fila[0] != fila[idx]:
+            html = html.replace(fila[0], fila[idx])
+    # Els mes llargs primer, que si no un de curt en trenca un de llarg.
+    for fila in sorted(JS_DATES, key=lambda f: -len(f[0])):
+        if fila[0] not in html:
+            sys.exit(f"No trobo aquest tros de JavaScript:\n  {fila[0][:70]}")
+        if fila[0] != fila[idx]:
+            html = html.replace(fila[0], fila[idx])
+
+    # Llistes de dies i mesos del JavaScript, substituides senceres.
+    for vell, nou in ((DIES_CA, DIES[lang]), (CURT_CA, CURT[lang]), (MESOS_CA, MESOS[lang])):
+        if vell not in html:
+            sys.exit(f"No trobo aquest llistat a la pagina catalana:\n  {vell[:60]}...\n"
+                     "Si l'han canviat, cal actualitzar-lo tambe aqui.")
+        html = html.replace(vell, nou)
+
+    # Dades estructurades: FAQ i WebPage.
+    for fila in sorted(LD, key=lambda f: -len(f[0])):
+        if fila[0] != fila[idx]:
+            html = html.replace(fila[0], fila[idx])
+    # Les adreces de dins del JSON-LD han d'apuntar a la pagina d'aquest idioma.
+    html = html.replace("cbgrupbarna.info/partits/", f"cbgrupbarna.info/{lang}/partits/")
+    html = html.replace('"inLanguage":"ca"', f'"inLanguage":"{lang}"')
+
+    # Idioma del document i de les dades estructurades.
+    html = html.replace('<html lang="ca">', f'<html lang="{lang}">')
+    html = html.replace('"inLanguage": "ca-ES"', f'"inLanguage": "{lang}-ES"' if lang == "es"
+                        else '"inLanguage": "en"')
+    html = re.sub(r'(<meta name="description" content=")[^"]*(")',
+                  lambda m: m.group(1) + META[lang] + m.group(2), html)
+    html = re.sub(r'(<meta property="og:description" content=")[^"]*(")',
+                  lambda m: m.group(1) + META[lang] + m.group(2), html)
+    html = html.replace('content="ca_ES"', f'content="{lang}_ES"' if lang == "es"
+                        else 'content="en_GB"')
+
+    # data.json es relatiu a l'original: des de /es/ i /en/ ha de ser absolut.
+    html = html.replace("'data.json'", "'/partits/data.json'")
+    html = html.replace('"data.json"', '"/partits/data.json"')
+
+    # Enllaços interns cap a la versio de l'idioma, nomes on existeix.
+    for desti in sorted(TRADUITS, key=len, reverse=True):
+        html = html.replace(f'href="/{desti}/"', f'href="/{lang}/{desti}/"')
+    html = html.replace('href="/"', f'href="/{lang}/"')
+    html = html.replace('href="/#info"', f'href="/{lang}/#info"')
+    # El canonical i les alternates es reescriuen SENCERS al final, perque les
+    # substitucions d'adreces d'abans se'ls emportaven per davant: el hreflang
+    # del catala acabava apuntant a /es/partits/.
+    html = re.sub(r'<link rel="canonical"[^>]*>',
+                  f'<link rel="canonical" href="https://cbgrupbarna.info/{lang}/partits/"/>',
+                  html, count=1)
+    ALT = ('<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/partits/">\n'
+           '<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/partits/">\n'
+           '<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/partits/">\n'
+           '<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/partits/">')
+    html = re.sub(r'<link rel="alternate" hreflang="ca"[^>]*>\s*'
+                  r'<link rel="alternate" hreflang="es"[^>]*>\s*'
+                  r'<link rel="alternate" hreflang="en"[^>]*>\s*'
+                  r'<link rel="alternate" hreflang="x-default"[^>]*>',
+                  ALT, html, count=1)
+    return html
+
+
+def main():
+    dry = "--dry-run" in sys.argv
+    if not FONT.is_file():
+        sys.exit(f"No trobo {FONT}.")
+    base = FONT.read_text(encoding="utf-8")
+
+    for lang, idx in (("es", 1), ("en", 2)):
+        desti = ROOT / lang / "partits" / "index.html"
+        nou = tradueix(base, idx, lang)
+        anterior = desti.read_text(encoding="utf-8") if desti.is_file() else ""
+        if nou == anterior:
+            print(f"  sense canvis: {desti.relative_to(ROOT)}")
+        elif dry:
+            print(f"  escriuria:    {desti.relative_to(ROOT)}  "
+                  f"({len(anterior):,} → {len(nou):,} bytes)")
+        else:
+            desti.parent.mkdir(parents=True, exist_ok=True)
+            desti.write_text(nou, encoding="utf-8")
+            print(f"  escrit:       {desti.relative_to(ROOT)}  "
+                  f"({len(anterior):,} → {len(nou):,} bytes)")
+    if dry:
+        print("--dry-run: no he escrit res.")
+
+
+if __name__ == "__main__":
+    main()

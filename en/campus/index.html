@@ -52,9 +52,43 @@
   .star-embed { aspect-ratio: 9/14; }
   .star-embed iframe { width: 100%; height: 100%; border: 0; }
   .star-tx { padding: 18px 18px 20px; }
-  .star-tx h3 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; }
+  .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
+  .star-tx .role { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--red-dark); margin-bottom: 7px; }
+
+  /* Els tres grups d'estrelles: on es va gravar cada cosa, dit sense inflar. */
+  .stars-group { margin-top: clamp(30px, 4vw, 46px); }
+  .stars-group > h3 { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.2em;
+    text-transform: uppercase; margin: 0 0 6px; padding-bottom: 9px; border-bottom: 2px solid var(--red); }
+  .stars-group > p { font-size: 13.5px; color: var(--ink-2); max-width: 64ch; margin: 12px 0 0; }
+  .stars-group .stars { margin-top: clamp(18px, 2.4vw, 26px); }
+
+  /* Les convocatories publicades: enllac sec, sense incrustar res. */
+  .convos { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line);
+    border: 1px solid var(--line); margin: clamp(18px, 2.4vw, 26px) 0 0; }
+  @media (min-width: 720px) { .convos { grid-template-columns: repeat(2, 1fr); } }
+  .convos a { background: var(--paper); padding: 15px 18px; display: flex; flex-direction: column; gap: 3px;
+    text-decoration: none; }
+  .convos a:hover { background: var(--paper-2); }
+  .convos b { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink); }
+  .convos span { font-size: 12.5px; color: var(--ink-2); }
   .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
   .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+  /* Targetes de preu: la fitxa i els preus no hi eren, en aquest idioma. */
+  .price-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 620px) { .price-cards { grid-template-columns: 1fr 1fr; } }
+  .price-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(22px, 3vw, 30px); }
+  .price-card.top { border-color: var(--red); position: relative; }
+  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .price-card.top .tag { color: var(--red); }
+  .price-card b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; margin: 8px 0 4px; }
+  .price-card .sched { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
+  .price-card ul { list-style: none; }
+  .price-card li { position: relative; padding: 7px 0 7px 18px; font-size: 13.5px; color: var(--ink-2); border-top: 1px solid var(--line); }
+  .price-card li:first-child { border-top: 0; }
+  .price-card li::before { content: '·'; position: absolute; left: 4px; color: var(--red); font-weight: 700; }
+  .price-note { font-size: 13.5px; color: var(--ink-2); max-width: 62ch; }
 </style>
 <script type="application/ld+json">
 {
@@ -263,7 +297,7 @@
       <a href="/en/blog/" class="opt">Blog</a>
       <a href="/en/premsa/" class="opt">Press</a>
       <a href="/en/patrocinadors/" class="opt">Partners</a>
-      <a href="/#info">Information</a>
+      <a href="/en/#info">Information</a>
     </nav>
     <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/campus/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/campus/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/campus/" hreflang="en" class="active">EN</a>
@@ -282,7 +316,7 @@
     <div class="btn-row" style="margin-top:28px">
       <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hi!%20I%27d%20like%20information%20about%20the%20CB%20Grup%20Barna%20Basketball%20Camp"
          class="btn red" target="_blank" rel="noopener" data-cta="campus-wa">Request information</a>
-      <a href="/#info" class="btn ghost" data-cta="campus-form">Notify me about the next edition</a>
+      <a href="/en/#info" class="btn ghost" data-cta="campus-form">Notify me about the next edition</a>
       <a href="/en/basketball-camps-barcelona/" class="btn ghost" data-cta="campus-comparativa">Compare basketball camps in Barcelona →</a>
     </div>
     <div class="phead-media">
@@ -291,6 +325,32 @@
   </div>
 
   <div class="narrow prose">
+    <!-- FITXA-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
+    <h2>Camp fact sheet</h2>
+    <p>Everything in one place, so you don't have to hunt through the page for it. The last completed edition is <strong>Summer 2026</strong>; dates for the next one are announced here and on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+  </div>
+  <div class="dl narrow">
+    <div class="dl-row"><dt>What it is</dt><dd>A basketball skills camp. Not a summer club with a ball: each week works on one specific part of the game.</dd></div>
+    <div class="dl-row"><dt>Who runs it</dt><dd>CB Grup Barna × Time Chamber. The club provides the structure and the coaches; Time Chamber, the individual-work method.</dd></div>
+    <div class="dl-row"><dt>Where</dt><dd>La Nau del Clot, Barcelona. The club's own venue.</dd></div>
+    <div class="dl-row"><dt>Address</dt><dd>Carrer de la Llacuna, 170-172 · 08018 Barcelona · Clot, Sant Martí district.</dd></div>
+    <div class="dl-row"><dt>Getting there</dt><dd>Metro L1 Glòries and L2 Clot · Rodalies Clot-Aragó · buses at Clot and Glòries. Walking distance from Westfield Glòries.</dd></div>
+    <div class="dl-row"><dt>Who it's for</dt><dd>Seven age groups, from Escoleta to Júnior. Groups are set by age and level, so a beginner never trains alongside someone who has been competing for years.</dd></div>
+    <div class="dl-row"><dt>Boys and girls</dt><dd>Yes. The camp is mixed, and the club has real parity between its girls' and boys' sides.</dd></div>
+    <div class="dl-row"><dt>Do you have to be a Barna player?</dt><dd>No. It is open to players from any club in Barcelona and the province. Club players get priority and their own price.</dd></div>
+    <div class="dl-row"><dt>When</dt><dd>In summer, in consecutive weeks from late June to early August. The 2026 edition ran from 23 June to 1 August.</dd></div>
+    <div class="dl-row"><dt>Hours</dt><dd>Full day 9:00 to 17:00 · half day 9:00 to 13:30.</dd></div>
+    <div class="dl-row"><dt>Price</dt><dd>Full week €195 (9–17) · half day €160 (9–13:30). Price per week. Payment in instalments available.</dd></div>
+    <div class="dl-row"><dt>Lunch</dt><dd>Included in the full day. The half day ends before lunch.</dd></div>
+    <div class="dl-row"><dt>Extras</dt><dd>Early drop-off in the morning, lunch on the full day, and a Friday trip to Illa Fantasia.</dd></div>
+    <div class="dl-row"><dt>What is worked on</dt><dd>Shooting, ball handling, one-on-one play, individual fundamentals and reading the game. Each week has its own focus, so coming for more than one week never means repeating.</dd></div>
+    <div class="dl-row"><dt>Who coaches</dt><dd>The club's own coaches and Time Chamber's. Robert Willett (NBA coach, @bballwillett), Ainhoa López (professional player, Spanish national team) and Malak Shady (3x3 MVP) have all been through.</dd></div>
+    <div class="dl-row"><dt>How many</dt><dd>More than 200 players per edition, with a cap of around 50 places a week to keep the coach-to-player ratio.</dd></div>
+    <div class="dl-row"><dt>Language</dt><dd>Catalan and Spanish. International guest coaches work in English, with translation.</dd></div>
+    <div class="dl-row"><dt>How to sign up</dt><dd>By WhatsApp on +34 698 425 153 or through the club's form. Recent editions have filled up before they started.</dd></div>
+  </div>
+  <div class="narrow prose">
+    <!-- FITXA-CAMPUS:final -->
     <h2>What the Barna camp is</h2>
     <p>The <strong>CB Grup Barna</strong> basketball camp is the intensive training programme
     the club runs during school holidays in the El Clot neighbourhood. It isn't a leisure
@@ -319,51 +379,274 @@
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
 
+<!-- PREUS-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
+    <h2>Prices</h2>
+    <p>Two options depending on hours, with lunch included on the full day. Open to Barna players and to players from any other club.</p>
+    <div class="price-cards">
+      <div class="price-card top">
+        <span class="tag">Most chosen</span>
+        <b>€195</b>
+        <p class="sched">Full week · 9 to 17</p>
+        <ul>
+          <li>Lunch included</li>
+          <li>Early drop-off from 9</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tag">Half day</span>
+        <b>€160</b>
+        <p class="sched">9 to 13:30</p>
+        <ul>
+          <li>Same groups, same weekly focus</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">Places can be held with payment in up to 3 instalments. Every year there is an early-bird discount; the dates and the code go up on this page and on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a> when sign-ups open.</p>
+    <!-- PREUS-CAMPUS:final -->
+
+<!-- ESTRELLES-CAMPUS:inici · generat per scripts/build-campus-estrelles.py -->
     <h2>Camp guests</h2>
-    <p>Something not every camp can say: basketball names have come through to train with our players. Not a photo visit — on court, running the session.</p>
-    <div class="stars">
-      <div class="star">
-        <button type="button" class="star-play" data-reel="C-0jXXDMY5r" aria-label="Play the reel with Ainhoa López">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Ainhoa López</span>
-        </button>
-        <div class="star-tx">
-          <h3>Ainhoa López</h3>
-          <p>Professional player · Spanish national team. Trained in El Clot.</p>
-          <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">View on Instagram →</a>
+    <p>Something not every club can say: players and coaches at the top of the game have come to the camp to train with our kids. Not a photo visit — on court, running the session. We split them into three groups because not everything was filmed in the same place: first what happened <strong>at La Nau del Clot</strong>, then the work by coaches and elite players <strong>with Time Chamber</strong>, our camp partner.</p>
+
+    <div class="stars-group">
+      <h3>At La Nau del Clot</h3>
+      <p>Filmed at the club's own court, with our players on it.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="Play the video with The season recap">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>The season recap</span>
+          </button>
+          <div class="star-tx">
+            <h4>The season recap</h4>
+            <span class="role">Camp closing reel</span>
+            <p>How the Timechamber Camp ended: every week in one video.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-reel="DMqb9P8sUic" aria-label="Play the reel with Robert Willet">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Robert Willet</span>
-        </button>
-        <div class="star-tx">
-          <h3>Robert Willet</h3>
-          <p>NBA skills trainer (@bballwillett).</p>
-          <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">View on Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="Datex2OxHcS" aria-label="Play the video with Shooting Academy">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Shooting Academy</span>
+          </button>
+          <div class="star-tx">
+            <h4>Shooting Academy</h4>
+            <span class="role">Camp week 3</span>
+            <p>The week devoted to shooting, from the court.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Play the reel with Malak Shady">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Malak Shady</span>
-        </button>
-        <div class="star-tx">
-          <h3>Malak Shady</h3>
-          <p>Basketball creator and 3x3 MVP.</p>
-          <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">View on Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL-n0ZeMaOq" aria-label="Play the video with Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">NBA coach · at the camp</span>
+            <p>Running a session at the club's camp.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DQOhe0qjAPb" aria-label="Play the video with Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">NBA coach · at the camp</span>
+            <p>A second session, a different block of work.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="C-0jXXDMY5r" aria-label="Play the video with Ainhoa López">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Ainhoa López</span>
+          </button>
+          <div class="star-tx">
+            <h4>Ainhoa López</h4>
+            <span class="role">Spanish national team · trained at El Clot</span>
+            <p>A professional player. She came up on this court and has come back to train on it.</p>
+            <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Play the video with Malak Shady">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Malak Shady</span>
+          </button>
+          <div class="star-tx">
+            <h4>Malak Shady</h4>
+            <span class="role">3x3 MVP</span>
+            <p>A basketball voice online and a 3x3 MVP.</p>
+            <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
+          </div>
         </div>
       </div>
     </div>
-    <p style="font-size:13.5px;color:var(--ink-2)">The videos are hosted on Instagram and only load when you click. The full edition round-up is on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+
+    <div class="stars-group">
+      <h3>NBA coaches with Time Chamber</h3>
+      <p>The individual-work method the camp is built on comes from here.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMLipXBsMMe" aria-label="Play the video with Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">NBA coach</span>
+            <p>Individual fundamentals work with Time Chamber.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMQlHE4Mty1" aria-label="Play the video with Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">NBA coach</span>
+            <p>A second session: reading the game and finishing near the rim.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMGO77UsDoQ" aria-label="Play the video with Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">NBA coach</span>
+            <p>A third session in the skills block.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
+      <h3>Elite players who have trained there</h3>
+      <p>Sessions with Time Chamber, the camp partner. Not all of them were filmed at La Nau — where they weren't, we say so.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DO4KaZxCLqY" aria-label="Play the video with Serge Ibaka">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Serge Ibaka</span>
+          </button>
+          <div class="star-tx">
+            <h4>Serge Ibaka</h4>
+            <span class="role">2019 NBA champion</span>
+            <p>A working session with Time Chamber.</p>
+            <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DN1a1DvUGhg" aria-label="Play the video with Yankuba Sima">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Yankuba Sima</span>
+          </button>
+          <div class="star-tx">
+            <h4>Yankuba Sima</h4>
+            <span class="role">EuroLeague</span>
+            <p>Big-man work with Time Chamber.</p>
+            <a href="https://www.instagram.com/yankubasima/" target="_blank" rel="noopener">@yankubasima →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL25XRsskTS" aria-label="Play the video with Pedro Marhuenda">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Pedro Marhuenda</span>
+          </button>
+          <div class="star-tx">
+            <h4>Pedro Marhuenda</h4>
+            <span class="role">Professional player</span>
+            <p>An individual session with Time Chamber.</p>
+            <a href="https://www.instagram.com/4future_pedromarhuenda/" target="_blank" rel="noopener">@4future_pedromarhuenda →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DOHTiwWiKJE" aria-label="Play the video with Dani Carrasco">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Dani Carrasco</span>
+          </button>
+          <div class="star-tx">
+            <h4>Dani Carrasco</h4>
+            <span class="role">Professional player</span>
+            <p>A working session with Time Chamber.</p>
+            <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DOrQsPRiD_l" aria-label="Play the video with Salo 23">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Salo 23</span>
+          </button>
+          <div class="star-tx">
+            <h4>Salo 23</h4>
+            <span class="role">Player</span>
+            <p>A skills session with Time Chamber.</p>
+            <a href="https://www.instagram.com/salo23_/" target="_blank" rel="noopener">@salo23_ →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DN5x42hCDpV" aria-label="Play the video with Kassius">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Kassius</span>
+          </button>
+          <div class="star-tx">
+            <h4>Kassius</h4>
+            <span class="role">Player</span>
+            <p>A skills session with Time Chamber.</p>
+            <a href="https://www.instagram.com/kassius_r/" target="_blank" rel="noopener">@kassius_r →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="CguvYo9KuTz" data-kind="p" aria-label="Play the video with Joel Parra">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Joel Parra</span>
+          </button>
+          <div class="star-tx">
+            <h4>Joel Parra</h4>
+            <span class="role">ACB · Joventut</span>
+            <p>A session with Time Chamber at the Badalona Olympic Arena, not at La Nau.</p>
+            <a href="https://www.instagram.com/joelparra/" target="_blank" rel="noopener">@joelparra →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
+      <h3>The camps we've announced</h3>
+      <p>Every edition is announced with <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es</a>. These are the last four.</p>
+      <div class="convos">
+        <a href="https://www.instagram.com/p/DXKxd7VjCJK/" target="_blank" rel="noopener">
+          <b>Summer camp · La Nau del Clot</b><span>Announced 16 April</span></a>
+        <a href="https://www.instagram.com/p/DUtmAbHjFIs/" target="_blank" rel="noopener">
+          <b>Flow Camp · Easter</b><span>30 March to 3 April</span></a>
+        <a href="https://www.instagram.com/p/DUT5hyjDD7S/" target="_blank" rel="noopener">
+          <b>Carnival camp</b><span>Announced 3 February</span></a>
+        <a href="https://www.instagram.com/p/DQ7nLmkjINq/" target="_blank" rel="noopener">
+          <b>Limited Edition 2025</b><span>Announced 11 November 2025</span></a>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">The videos are hosted on Instagram and only load if you click. The full set for each edition is on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <!-- ESTRELLES-CAMPUS:final -->
     <script>
       // Els reels d'Instagram només es carreguen si l'usuari hi clica.
       document.querySelectorAll('.star-play').forEach(function (b) {
         b.addEventListener('click', function () {
           var d = document.createElement('div');
           d.className = 'star-embed';
-          d.innerHTML = '<iframe src="https://www.instagram.com/reel/' + b.dataset.reel +
+          // Uns son reels i uns altres publicacions de feed: data-kind="p" ho marca.
+          var kind = b.dataset.kind === 'p' ? 'p' : 'reel';
+          d.innerHTML = '<iframe src="https://www.instagram.com/' + kind + '/' + b.dataset.reel +
             '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
           b.replaceWith(d);
         });
@@ -390,7 +673,7 @@
     <div class="faq"><details><summary>Which coaches and players have visited the camp?</summary><p>Recent editions have hosted Ainhoa López, a professional player and Spain international who trained in El Clot; Robert Willet (@bballwillett), an NBA skills trainer; and Malak Shady, a basketball creator and 3x3 MVP. They run sessions on court with the camp players.</p></details><details><summary>How many players came to the camp in summer 2026?</summary><p>Around 150 girls and boys across the six weeks of the 2026 edition, in groups by age and level and with a limit of roughly 50 places per week. Players came both from CB Grup Barna and from other clubs in Barcelona and the province.</p></details><details><summary>What ages is the basketball camp for?</summary><p>The CB Grup Barna camp is for youth players, from Escoleta age up to cadet and junior categories. Groups are organised by age and level, so a child who's just starting doesn't train alongside someone who's been competing for years.</p></details><details><summary>Do you have to play for CB Grup Barna to sign up?</summary><p>No. The camp is open to players from any club in Barcelona and the province. Every week there are places for Barna players and places for players from outside.</p></details><details><summary>How many places are there per week?</summary><p>The camp works with a limit of around 50 places per week to keep a good coach-to-player ratio. Weeks fill up in registration order, and recent editions have sold out before starting.</p></details><details><summary>Where is the camp held?</summary><p>In the El Clot neighbourhood, Sant Martí District of Barcelona. La Nau del Clot is CB Grup Barna's main sports venue.</p></details><details><summary>When does registration open for the next edition?</summary><p>The dates for the next edition are announced on this page and on Instagram (@cbgrupbarna). Anyone who wants to be notified before it opens to the public can ask via the club's WhatsApp (+34 698 425 153) and will be added to the notification list.</p></details></div>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
-    <div class="closer"><h2>Notify me about the next camp</h2><p>Leave us your contact details and we'll message you when registration opens, before we announce it publicly.</p><div class="btn-row"><a href="/#info" class="btn red" data-cta="campus-closer-form">Request information</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hi!%20I%27d%20like%20info%20about%20the%20Basketball%20Camp" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">Club WhatsApp</a></div></div>
+    <div class="closer"><h2>Notify me about the next camp</h2><p>Leave us your contact details and we'll message you when registration opens, before we announce it publicly.</p><div class="btn-row"><a href="/en/#info" class="btn red" data-cta="campus-closer-form">Request information</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hi!%20I%27d%20like%20info%20about%20the%20Basketball%20Camp" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">Club WhatsApp</a></div></div>
     </div>
   </div>
 </div>
@@ -419,7 +702,7 @@
       </div>
       <div class="foot-col">
         <h3>Contact</h3>
-        <a href="/#info">Request information</a>
+        <a href="/en/#info">Request information</a>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>

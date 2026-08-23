@@ -47,12 +47,12 @@ for S in SEASONS:
       "audience":{"@type":"PeopleAudience","suggestedMinAge":5,"suggestedMaxAge":17},
       "coursePrerequisites":"Cap. Obert a jugadors i jugadores de qualsevol club.",
       "location":{"@type":"Place","name":"La Nau del Clot","address":{"@type":"PostalAddress",
-        "streetAddress":"Carrer de la Llacuna, 172","addressLocality":"Barcelona",
+        "streetAddress":"Carrer de la Llacuna, 170-172","addressLocality":"Barcelona",
         "addressRegion":"Barcelona","postalCode":"08018","addressCountry":"ES"}},
       "hasCourseInstance":{"@type":"CourseInstance","courseMode":"onsite",
         "name":f"{S['nom']} · CB Grup Barna",
         "location":{"@type":"Place","name":"La Nau del Clot","address":{"@type":"PostalAddress",
-          "streetAddress":"Carrer de la Llacuna, 172","addressLocality":"Barcelona",
+          "streetAddress":"Carrer de la Llacuna, 170-172","addressLocality":"Barcelona",
           "postalCode":"08018","addressCountry":"ES"}}}}
     if S['preu']:
         course["offers"]={"@type":"Offer","price":S['preu'],"priceCurrency":"EUR",
@@ -64,7 +64,7 @@ for S in SEASONS:
              "No. És obert a jugadors i jugadores de qualsevol club de Barcelona i de la província. "
              "Els del club tenen prioritat quan s'obren les places."),
           ("Per a quines edats és?", f"Set categories: {CATS}. Els grups es fan per categoria i nivell."),
-          ("On es fa?", "A La Nau del Clot, Carrer de la Llacuna 172, 08018 Barcelona. "
+          ("On es fa?", "A La Nau del Clot, Carrer de la Llacuna 170-172, 08018 Barcelona. "
              "Metro L1 Glòries i L2 Clot, i Rodalies Clot-Aragó.")]
     ld={"@context":"https://schema.org","@graph":[course,
       {"@type":"WebPage","@id":url+"#webpage","url":url,"name":S['title'],"description":desc,
@@ -144,7 +144,7 @@ for S in SEASONS:
   <div class="dl narrow">
     <div class="dl-row"><dt>Què és</dt><dd>Setmana de tecnificació de bàsquet en vacances escolars. Mateixa metodologia que el campus d'estiu, en format curt.</dd></div>
     <div class="dl-row"><dt>Qui l'organitza</dt><dd>CB Grup Barna, amb la metodologia de Time Chamber.</dd></div>
-    <div class="dl-row"><dt>On</dt><dd>La Nau del Clot · Carrer de la Llacuna, 172 · 08018 Barcelona.</dd></div>
+    <div class="dl-row"><dt>On</dt><dd>La Nau del Clot · Carrer de la Llacuna, 170-172 · 08018 Barcelona.</dd></div>
     <div class="dl-row"><dt>Com arribar-hi</dt><dd>Metro L1 Glòries i L2 Clot · Rodalies Clot-Aragó · a peu des de Westfield Glòries.</dd></div>
     <div class="dl-row"><dt>Quan</dt><dd>{S['quan']} {S['dies']}</dd></div>
     <div class="dl-row"><dt>Per a qui</dt><dd>Set categories: {CATS}. Nens i nenes, per categoria i nivell.</dd></div>

@@ -171,7 +171,7 @@
       "keywords": "baloncesto base Barcelona, club baloncesto Barcelona, CB Grup Barna, Grup Barna, basket infantil Barcelona, campus baloncesto verano, 3x3 Barcelona, El Clot basket",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Carrer de la Llacuna, 172",
+        "streetAddress": "Carrer de la Llacuna, 170-172",
         "addressLocality": "Barcelona",
         "addressRegion": "Cataluña",
         "postalCode": "08018",
@@ -839,6 +839,12 @@ html[data-view="extensa"] .lead.only-extensa { display: grid; }
 html[data-view="extensa"] .view-toggle .vt-ic .vt-franges { display: none; }
 html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 @media (max-width: 620px) { .view-toggle { padding: 7px 10px; font-size: 8.5px; gap: 6px; } .view-toggle span:last-child { display: none; } }
+    .form-blocked { margin-top: 14px; padding: 13px 16px; border-left: 3px solid var(--red);
+      background: var(--paper-2); font-size: 13.5px; line-height: 1.55; color: var(--ink-2); }
+    .form-blocked strong { color: var(--ink); }
+    .form-blocked a { font-weight: 600; white-space: nowrap; }
+    .req { color: var(--red); font-weight: 700; }
+    .form-legend { font-size: 12.5px; color: var(--ink-2); margin: 0 0 16px; }
 </style>
 <script src="/js/galetes.js"></script>
 </head>
@@ -957,7 +963,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   <div class="lg-hero only-light">
     <p class="eyebrow">El primer bote empieza aquí</p>
     <h2>Baloncesto en el Clot desde 1965</h2>
-    <p class="lg-hero-s">34+ equipos. Mismo número de jugadoras y jugadores, y mismo presupuesto para las dos líneas.</p>
+    <p class="lg-hero-s">38 equipos. Mismo número de jugadoras y jugadores, y mismo presupuesto para las dos líneas.</p>
   </div>
 
   <section class="franges only-light" aria-label="Acceso rápido al club">
@@ -1023,20 +1029,21 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
         <div class="reveal">
           <form class="form" id="infoForm" novalidate>
+            <p class="form-legend">Los campos con <span class="req" aria-hidden="true">*</span> son obligatorios.</p>
             <div class="form-grid">
               <div class="field">
-                <label for="f-nom">Nombre y apellidos</label>
+                <label for="f-nom">Nombre y apellidos <span class="req" aria-hidden="true">*</span></label>
                 <input id="f-nom" name="nom" type="text" required autocomplete="name" placeholder="&nbsp;">
               </div>
             </div>
             <div class="form-grid two" style="margin-top:18px">
               <div class="field">
-                <label for="f-mobil">Móvil</label>
+                <label for="f-mobil">Móvil <span class="req" aria-hidden="true">*</span></label>
                 <input id="f-mobil" name="mobil" type="tel" required autocomplete="tel"
                        inputmode="tel" pattern="[0-9+ ]{9,}" placeholder="&nbsp;">
               </div>
               <div class="field">
-                <label for="f-mail">Correo electrónico</label>
+                <label for="f-mail">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
                 <input id="f-mail" name="correu" type="email" required autocomplete="email"
                        inputmode="email" placeholder="&nbsp;">
               </div>
@@ -1064,6 +1071,9 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
             </label>
             <button type="submit" class="btn red" data-cta="info-submit">Enviar y abrir WhatsApp</button>
             <p class="form-note">Se abre el WhatsApp del club con tus datos. Respondemos en menos de 24 h.</p>
+            <p class="form-blocked" id="formBloquejat" role="alert" hidden>El navegador ha bloqueado la ventana,
+            así que <strong>todavía no nos ha llegado nada</strong>.
+            <a href="#" target="_blank" rel="noopener">Abre tú mismo el WhatsApp →</a></p>
           </form>
           <div class="form-ok" id="formOk" role="status">
             <h3>Recibido. ¡Gracias!</h3>
@@ -1411,7 +1421,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   //  la d'un Google Apps Script publicat com a aplicació web). Mentre
   //  estigui buit només s'envia per WhatsApp i no falla res.
   // ══════════════════════════════════════════════════════════════════════
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formspree.io/f/xeajwzlv';
   var WA_CLUB_NUM = '34698425153';
 
   (function () {
@@ -1441,18 +1451,30 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
       var interesTxt = interes.join(', ') || 'Sin especificar';
 
-      // 1 · Correu, si hi ha endpoint configurat. No bloqueja el WhatsApp.
+      // 1 · Correo, que ahora sí llega. No bloquea el WhatsApp.
+      //
+      //  Antes iba con mode:'no-cors', y así no funcionaba: en ese modo el
+      //  navegador SOLO deja pasar tres valores de Content-Type, y
+      //  application/json no es ninguno. La cabecera se caía en silencio y el
+      //  servidor recibía texto plano, no un JSON. Encima la respuesta era
+      //  opaca y no había manera de saber si había llegado.
+      //
+      //  Formspree acepta CORS, así que se pide bien y se puede comprobar.
       if (FORM_ENDPOINT) {
         try {
           fetch(FORM_ENDPOINT, {
-            method: 'POST', mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({
               _subject: "Nueva solicitud de información · " + nom,
               nom: nom, mobil: mobil, correu: correu,
               interes: interesTxt, missatge: msg, origen: location.pathname
             })
-          }).catch(function () {});
+          }).then(function (r) {
+            if (!r.ok && window.gtag) window.gtag('event', 'form_email_error', { codi: r.status });
+          }).catch(function () {
+            if (window.gtag) window.gtag('event', 'form_email_error', { codi: 'xarxa' });
+          });
         } catch (_) {}
       }
 
@@ -1463,8 +1485,29 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
               + "Correo: " + correu + "\n"
               + "Me interesa: " + interesTxt
               + (msg ? "\n\n" + msg : "");
-      window.open('https://api.whatsapp.com/send?phone=' + WA_CLUB_NUM
-                  + '&text=' + encodeURIComponent(txt), '_blank', 'noopener');
+      var waUrl = 'https://api.whatsapp.com/send?phone=' + WA_CLUB_NUM
+                  + '&text=' + encodeURIComponent(txt);
+      // Sense 'noopener' a proposit: amb aquesta opcio window.open retorna
+      // null SEMPRE, per especificacio, i llavors no hi ha manera de saber si
+      // la finestra s'ha obert. S'anul·la l'opener a ma just despres, que dona
+      // la mateixa proteccio i si que deixa comprovar-ho.
+      var finestra = window.open(waUrl, '_blank');
+      if (finestra) { try { finestra.opener = null; } catch (_) {} }
+
+      // Si el navegador ha bloqueado el emergente, el mensaje no ha salido.
+      // Antes se ocultaba el formulario y se decia «Recibido» igualmente: la
+      // persona se iba convencida de habernos escrito y aqui no llegaba nada.
+      // Ahora el formulario se queda y le damos el enlace para que haga clic.
+      if (!finestra) {
+        var av = document.getElementById('formBloquejat');
+        if (av) {
+          av.querySelector('a').href = waUrl;
+          av.hidden = false;
+          av.scrollIntoView({ block: 'center' });
+        }
+        flash('El navegador ha bloqueado la ventana');
+        return;
+      }
 
       if (window.gtag) window.gtag('event', 'generate_lead', { method: 'form_info', interes: interesTxt });
       form.style.display = 'none';

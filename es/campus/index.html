@@ -52,9 +52,43 @@
   .star-embed { aspect-ratio: 9/14; }
   .star-embed iframe { width: 100%; height: 100%; border: 0; }
   .star-tx { padding: 18px 18px 20px; }
-  .star-tx h3 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; }
+  .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
+  .star-tx .role { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--red-dark); margin-bottom: 7px; }
+
+  /* Els tres grups d'estrelles: on es va gravar cada cosa, dit sense inflar. */
+  .stars-group { margin-top: clamp(30px, 4vw, 46px); }
+  .stars-group > h3 { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.2em;
+    text-transform: uppercase; margin: 0 0 6px; padding-bottom: 9px; border-bottom: 2px solid var(--red); }
+  .stars-group > p { font-size: 13.5px; color: var(--ink-2); max-width: 64ch; margin: 12px 0 0; }
+  .stars-group .stars { margin-top: clamp(18px, 2.4vw, 26px); }
+
+  /* Les convocatories publicades: enllac sec, sense incrustar res. */
+  .convos { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line);
+    border: 1px solid var(--line); margin: clamp(18px, 2.4vw, 26px) 0 0; }
+  @media (min-width: 720px) { .convos { grid-template-columns: repeat(2, 1fr); } }
+  .convos a { background: var(--paper); padding: 15px 18px; display: flex; flex-direction: column; gap: 3px;
+    text-decoration: none; }
+  .convos a:hover { background: var(--paper-2); }
+  .convos b { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink); }
+  .convos span { font-size: 12.5px; color: var(--ink-2); }
   .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
   .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+  /* Targetes de preu: la fitxa i els preus no hi eren, en aquest idioma. */
+  .price-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 620px) { .price-cards { grid-template-columns: 1fr 1fr; } }
+  .price-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(22px, 3vw, 30px); }
+  .price-card.top { border-color: var(--red); position: relative; }
+  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .price-card.top .tag { color: var(--red); }
+  .price-card b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; margin: 8px 0 4px; }
+  .price-card .sched { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
+  .price-card ul { list-style: none; }
+  .price-card li { position: relative; padding: 7px 0 7px 18px; font-size: 13.5px; color: var(--ink-2); border-top: 1px solid var(--line); }
+  .price-card li:first-child { border-top: 0; }
+  .price-card li::before { content: '·'; position: absolute; left: 4px; color: var(--red); font-weight: 700; }
+  .price-note { font-size: 13.5px; color: var(--ink-2); max-width: 62ch; }
 </style>
 <script type="application/ld+json">
 {
@@ -263,7 +297,7 @@
       <a href="/es/blog/" class="opt">Blog</a>
       <a href="/es/premsa/" class="opt">Prensa</a>
       <a href="/es/patrocinadors/" class="opt">Partners</a>
-      <a href="/#info">Información</a>
+      <a href="/es/#info">Información</a>
     </nav>
     <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/campus/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/campus/" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/campus/" hreflang="en">EN</a>
@@ -282,7 +316,7 @@
     <div class="btn-row" style="margin-top:28px">
       <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20del%20Campus%20de%20baloncesto%20del%20CB%20Grup%20Barna"
          class="btn red" target="_blank" rel="noopener" data-cta="campus-wa">Pedir información</a>
-      <a href="/#info" class="btn ghost" data-cta="campus-form">Avísame de la próxima edición</a>
+      <a href="/es/#info" class="btn ghost" data-cta="campus-form">Avísame de la próxima edición</a>
       <a href="/es/campus-baloncesto-barcelona/" class="btn ghost" data-cta="campus-comparativa">Comparativa de campus en Barcelona →</a>
       <a href="/es/campus-navidad-baloncesto-barcelona/" class="btn ghost" data-cta="campus-navidad">Campus de Navidad →</a>
     </div>
@@ -292,6 +326,32 @@
   </div>
 
   <div class="narrow prose">
+    <!-- FITXA-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
+    <h2>Ficha del campus</h2>
+    <p>Todos los datos en un solo sitio, sin tener que buscarlos por la página. La última edición cerrada es el <strong>Verano 2026</strong>; las fechas de la próxima se anuncian aquí y en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+  </div>
+  <div class="dl narrow">
+    <div class="dl-row"><dt>Qué es</dt><dd>Campus de tecnificación de baloncesto. No es un casal con pelota: cada semana trabaja un aspecto concreto del juego.</dd></div>
+    <div class="dl-row"><dt>Quién lo organiza</dt><dd>CB Grup Barna × Time Chamber. El club pone la estructura y los entrenadores; Time Chamber, la metodología de trabajo individual.</dd></div>
+    <div class="dl-row"><dt>Dónde</dt><dd>La Nau del Clot, Barcelona. Instalación oficial del club.</dd></div>
+    <div class="dl-row"><dt>Dirección</dt><dd>Carrer de la Llacuna, 170-172 · 08018 Barcelona · barrio del Clot, Distrito de Sant Martí.</dd></div>
+    <div class="dl-row"><dt>Cómo llegar</dt><dd>Metro L1 Glòries y L2 Clot · Cercanías Clot-Aragó · autobuses del Clot y Glòries. A pie desde Westfield Glòries.</dd></div>
+    <div class="dl-row"><dt>Para quién</dt><dd>Siete categorías: Escoleta, Premini, Mini, Preinfantil, Infantil, Cadete y Júnior. Los grupos se hacen por categoría y nivel, de modo que quien empieza no entrena con quien lleva años compitiendo.</dd></div>
+    <div class="dl-row"><dt>Niños y niñas</dt><dd>Sí. El campus es mixto y el club tiene paridad real entre la línea femenina y la masculina.</dd></div>
+    <div class="dl-row"><dt>¿Hay que ser del Barna?</dt><dd>No. Está abierto a jugadores y jugadoras de cualquier club de Barcelona y de la provincia. Los del club tienen prioridad de inscripción y precio propio.</dd></div>
+    <div class="dl-row"><dt>Cuándo</dt><dd>En verano, en semanas consecutivas de finales de junio a principios de agosto. La edición 2026 fue del 23 de junio al 1 de agosto.</dd></div>
+    <div class="dl-row"><dt>Horario</dt><dd>Jornada completa de 9:00 a 17:00 h · media jornada de 9:00 a 13:30 h.</dd></div>
+    <div class="dl-row"><dt>Precio</dt><dd>Semana completa 195 € (9–17 h) · media jornada 160 € (9–13:30 h). Precio por semana. Pago fraccionado disponible.</dd></div>
+    <div class="dl-row"><dt>Comida</dt><dd>Incluida en la jornada completa. La media jornada acaba antes de comer.</dd></div>
+    <div class="dl-row"><dt>Servicios</dt><dd>Servicio de acogida por la mañana, comida en la jornada completa y excursión el viernes a Illa Fantasia.</dd></div>
+    <div class="dl-row"><dt>Qué se trabaja</dt><dd>Tiro, manejo de balón, juego del 1x1, fundamentos individuales y lectura de juego. Cada semana tiene un foco propio, de modo que quien viene más de una semana no repite.</dd></div>
+    <div class="dl-row"><dt>Quién entrena</dt><dd>Los entrenadores del club y de Time Chamber. Han pasado Robert Willett (entrenador NBA, @bballwillett), Ainhoa López (jugadora profesional, selección española) y Malak Shady (MVP de 3x3).</dd></div>
+    <div class="dl-row"><dt>Cuántos hay</dt><dd>Más de 200 jugadores y jugadoras por edición, con un límite aproximado de 50 plazas por semana para mantener la ratio de trabajo.</dd></div>
+    <div class="dl-row"><dt>Idioma</dt><dd>Catalán y castellano. Los entrenadores invitados internacionales trabajan en inglés con traducción.</dd></div>
+    <div class="dl-row"><dt>Cómo inscribirse</dt><dd>Por WhatsApp al +34 698 425 153 o por el formulario del club. Las últimas ediciones se han llenado antes de empezar.</dd></div>
+  </div>
+  <div class="narrow prose">
+    <!-- FITXA-CAMPUS:final -->
     <h2>Qué es el campus del Barna</h2>
     <p>El campus de baloncesto del <strong>CB Grup Barna</strong> es el programa de entrenamiento intensivo
     que el club organiza durante las vacaciones escolares en el barrio de El Clot. No es una actividad de
@@ -320,51 +380,274 @@
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
 
+<!-- PREUS-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
+    <h2>Precios</h2>
+    <p>Dos modalidades según horario, con comida incluida en la jornada completa. Plazas abiertas a jugadores y jugadoras del Barna y de fuera del club.</p>
+    <div class="price-cards">
+      <div class="price-card top">
+        <span class="tag">Recomendado</span>
+        <b>195 €</b>
+        <p class="sched">Semana completa · 9h a 17h</p>
+        <ul>
+          <li>Comida de mediodía incluida</li>
+          <li>Servicio de acogida desde las 9h</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tag">Media jornada</span>
+        <b>160 €</b>
+        <p class="sched">9h a 13:30h</p>
+        <ul>
+          <li>Mismos grupos y mismo foco semanal</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">Reserva de plaza con pago fraccionado en hasta 3 plazos. Cada año se abre un descuento por inscripción anticipada; las fechas y el código se publican en esta página y en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a> cuando se abren las inscripciones.</p>
+    <!-- PREUS-CAMPUS:final -->
+
+<!-- ESTRELLES-CAMPUS:inici · generat per scripts/build-campus-estrelles.py -->
     <h2>Estrellas del campus</h2>
-    <p>Algo que no hace todo el mundo: por el campus han pasado referentes del baloncesto a entrenar con nuestros jugadores y jugadoras. No de visita para la foto — en pista, dirigiendo sesión.</p>
-    <div class="stars">
-      <div class="star">
-        <button type="button" class="star-play" data-reel="C-0jXXDMY5r" aria-label="Reproducir el reel con Ainhoa López">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Ainhoa López</span>
-        </button>
-        <div class="star-tx">
-          <h3>Ainhoa López</h3>
-          <p>Jugadora profesional · Selección Española. Formada en El Clot.</p>
-          <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">Ver en Instagram →</a>
+    <p>Algo que no hace todo el mundo: por el campus han pasado referentes del baloncesto a entrenar con nuestros jugadores y jugadoras. No de visita para la foto — en pista, dirigiendo sesión. Lo separamos en tres grupos porque no todo se grabó en el mismo sitio: primero lo que pasó <strong>en La Nau del Clot</strong>, después el trabajo de los entrenadores y de los jugadores de élite <strong>con Time Chamber</strong>, que es nuestro socio del campus.</p>
+
+    <div class="stars-group">
+      <h3>En La Nau del Clot</h3>
+      <p>Grabado en el pabellón del club, con nuestros jugadores y jugadoras en pista.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="Reproducir el vídeo con El resumen de la edición">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>El resumen de la edición</span>
+          </button>
+          <div class="star-tx">
+            <h4>El resumen de la edición</h4>
+            <span class="role">Reel final del campus</span>
+            <p>Cómo acabó el Campus Timechamber: todas las semanas en un vídeo.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Ver en Instagram →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-reel="DMqb9P8sUic" aria-label="Reproducir el reel con Robert Willet">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Robert Willet</span>
-        </button>
-        <div class="star-tx">
-          <h3>Robert Willet</h3>
-          <p>Entrenador de tecnificación NBA (@bballwillett).</p>
-          <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">Ver en Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="Datex2OxHcS" aria-label="Reproducir el vídeo con Shooting Academy">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Shooting Academy</span>
+          </button>
+          <div class="star-tx">
+            <h4>Shooting Academy</h4>
+            <span class="role">Semana 3 del campus</span>
+            <p>La semana dedicada al tiro, desde dentro de la pista.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Ver en Instagram →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Reproducir el reel con Malak Shady">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Malak Shady</span>
-        </button>
-        <div class="star-tx">
-          <h3>Malak Shady</h3>
-          <p>Referente del baloncesto en redes y MVP de 3x3.</p>
-          <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">Ver en Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL-n0ZeMaOq" aria-label="Reproducir el vídeo con Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">Entrenador NBA · en el campus</span>
+            <p>Dirigiendo sesión en el campus del club.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DQOhe0qjAPb" aria-label="Reproducir el vídeo con Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">Entrenador NBA · en el campus</span>
+            <p>Segunda sesión, otro bloque de trabajo.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="C-0jXXDMY5r" aria-label="Reproducir el vídeo con Ainhoa López">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Ainhoa López</span>
+          </button>
+          <div class="star-tx">
+            <h4>Ainhoa López</h4>
+            <span class="role">Selección Española · formada en El Clot</span>
+            <p>Jugadora profesional. Salió de esta pista y ha vuelto a entrenar en ella.</p>
+            <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Reproducir el vídeo con Malak Shady">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Malak Shady</span>
+          </button>
+          <div class="star-tx">
+            <h4>Malak Shady</h4>
+            <span class="role">MVP de 3x3</span>
+            <p>Referente del baloncesto en redes y MVP de 3x3.</p>
+            <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
+          </div>
         </div>
       </div>
     </div>
-    <p style="font-size:13.5px;color:var(--ink-2)">Los vídeos son de Instagram y solo se cargan si haces clic. Todo el recopilatorio de la edición está en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+
+    <div class="stars-group">
+      <h3>Entrenadores NBA con Time Chamber</h3>
+      <p>La metodología de trabajo individual que el campus incorpora viene de aquí.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMLipXBsMMe" aria-label="Reproducir el vídeo con Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Trabajo de fundamentos individuales con Time Chamber.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMQlHE4Mty1" aria-label="Reproducir el vídeo con Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Segunda sesión: lectura de juego y resolución cerca del aro.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMGO77UsDoQ" aria-label="Reproducir el vídeo con Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Tercera sesión del bloque de tecnificación.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
+      <h3>Jugadores de élite que han entrenado</h3>
+      <p>Sesiones con Time Chamber, el socio del campus. No todas se grabaron en La Nau: cuando no fue así, lo decimos.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DO4KaZxCLqY" aria-label="Reproducir el vídeo con Serge Ibaka">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Serge Ibaka</span>
+          </button>
+          <div class="star-tx">
+            <h4>Serge Ibaka</h4>
+            <span class="role">Campeón NBA 2019</span>
+            <p>Sesión de trabajo con Time Chamber.</p>
+            <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DN1a1DvUGhg" aria-label="Reproducir el vídeo con Yankuba Sima">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Yankuba Sima</span>
+          </button>
+          <div class="star-tx">
+            <h4>Yankuba Sima</h4>
+            <span class="role">Euroliga</span>
+            <p>Trabajo de pívot con Time Chamber.</p>
+            <a href="https://www.instagram.com/yankubasima/" target="_blank" rel="noopener">@yankubasima →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL25XRsskTS" aria-label="Reproducir el vídeo con Pedro Marhuenda">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Pedro Marhuenda</span>
+          </button>
+          <div class="star-tx">
+            <h4>Pedro Marhuenda</h4>
+            <span class="role">Jugador profesional</span>
+            <p>Sesión individual con Time Chamber.</p>
+            <a href="https://www.instagram.com/4future_pedromarhuenda/" target="_blank" rel="noopener">@4future_pedromarhuenda →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DOHTiwWiKJE" aria-label="Reproducir el vídeo con Dani Carrasco">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Dani Carrasco</span>
+          </button>
+          <div class="star-tx">
+            <h4>Dani Carrasco</h4>
+            <span class="role">Jugador profesional</span>
+            <p>Sesión de trabajo con Time Chamber.</p>
+            <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DOrQsPRiD_l" aria-label="Reproducir el vídeo con Salo 23">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Salo 23</span>
+          </button>
+          <div class="star-tx">
+            <h4>Salo 23</h4>
+            <span class="role">Jugador</span>
+            <p>Sesión de tecnificación con Time Chamber.</p>
+            <a href="https://www.instagram.com/salo23_/" target="_blank" rel="noopener">@salo23_ →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DN5x42hCDpV" aria-label="Reproducir el vídeo con Kassius">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Kassius</span>
+          </button>
+          <div class="star-tx">
+            <h4>Kassius</h4>
+            <span class="role">Jugador</span>
+            <p>Sesión de tecnificación con Time Chamber.</p>
+            <a href="https://www.instagram.com/kassius_r/" target="_blank" rel="noopener">@kassius_r →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="CguvYo9KuTz" data-kind="p" aria-label="Reproducir el vídeo con Joel Parra">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Joel Parra</span>
+          </button>
+          <div class="star-tx">
+            <h4>Joel Parra</h4>
+            <span class="role">ACB · Joventut</span>
+            <p>Sesión con Time Chamber en el Pavelló Olímpic de Badalona, no en La Nau.</p>
+            <a href="https://www.instagram.com/joelparra/" target="_blank" rel="noopener">@joelparra →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
+      <h3>Las convocatorias publicadas</h3>
+      <p>Cada edición del campus se anuncia con <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es</a>. Estas son las cuatro últimas.</p>
+      <div class="convos">
+        <a href="https://www.instagram.com/p/DXKxd7VjCJK/" target="_blank" rel="noopener">
+          <b>Campus de verano · La Nau del Clot</b><span>Convocatoria del 16 de abril</span></a>
+        <a href="https://www.instagram.com/p/DUtmAbHjFIs/" target="_blank" rel="noopener">
+          <b>Flow Camp · Semana Santa</b><span>Del 30 de marzo al 3 de abril</span></a>
+        <a href="https://www.instagram.com/p/DUT5hyjDD7S/" target="_blank" rel="noopener">
+          <b>Campus de Carnaval</b><span>Convocatoria del 3 de febrero</span></a>
+        <a href="https://www.instagram.com/p/DQ7nLmkjINq/" target="_blank" rel="noopener">
+          <b>Edición Limitada 2025</b><span>Convocatoria del 11 de noviembre de 2025</span></a>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Los vídeos son de Instagram y solo se cargan si haces clic. Todo el recopilatorio de la edición está en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <!-- ESTRELLES-CAMPUS:final -->
     <script>
       // Els reels d'Instagram només es carreguen si l'usuari hi clica.
       document.querySelectorAll('.star-play').forEach(function (b) {
         b.addEventListener('click', function () {
           var d = document.createElement('div');
           d.className = 'star-embed';
-          d.innerHTML = '<iframe src="https://www.instagram.com/reel/' + b.dataset.reel +
+          // Uns son reels i uns altres publicacions de feed: data-kind="p" ho marca.
+          var kind = b.dataset.kind === 'p' ? 'p' : 'reel';
+          d.innerHTML = '<iframe src="https://www.instagram.com/' + kind + '/' + b.dataset.reel +
             '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
           b.replaceWith(d);
         });
@@ -391,7 +674,7 @@
     <div class="faq"><details><summary>¿Qué entrenadores y jugadores han pasado por el campus?</summary><p>Por las últimas ediciones han pasado Ainhoa López, jugadora profesional e internacional española formada en El Clot; Robert Willet (@bballwillett), entrenador de tecnificación NBA; y Malak Shady, referente del baloncesto en redes y MVP de 3x3. No van de visita para la foto: dirigen sesión en pista.</p></details><details><summary>¿Cuánta gente pasó por el campus en verano de 2026?</summary><p>Unas 150 niñas y niños a lo largo de las seis semanas de la edición de 2026, en grupos por edad y nivel y con un límite aproximado de 50 plazas por semana. Hubo participantes del CB Grup Barna y de otros clubes de Barcelona y de la provincia.</p></details><details><summary>¿Para qué edades es el campus de baloncesto?</summary><p>El campus del CB Grup Barna es para jugadores y jugadoras de base, desde la edad de la Escoleta hasta categorías cadete y júnior. Los grupos se hacen por edad y nivel, de manera que un niño o niña que empieza no entrena con quien ya lleva años compitiendo.</p></details><details><summary>¿Hay que jugar en el CB Grup Barna para apuntarse?</summary><p>No. El campus está abierto a jugadores y jugadoras de cualquier club de Barcelona y de la provincia. Cada semana hay plazas para gente del Barna y plazas para gente de fuera.</p></details><details><summary>¿Cuántas plazas hay por semana?</summary><p>El campus trabaja con un límite aproximado de 50 plazas por semana para mantener la ratio de entrenador por jugador. Las semanas se llenan por orden de inscripción y las últimas ediciones se han completado antes de empezar.</p></details><details><summary>¿Dónde se hace el campus?</summary><p>En el barrio de El Clot, Distrito de Sant Martí de Barcelona. La Nau del Clot es el punto deportivo principal del CB Grup Barna.</p></details><details><summary>¿Cuándo abren las inscripciones de la próxima edición?</summary><p>Las fechas de la próxima edición se anuncian en esta página y en Instagram (@cbgrupbarna). Quien quiera recibir el aviso antes de que se abra al público puede pedirlo por el WhatsApp del club (+34 698 425 153) y entra en la lista de avisos.</p></details></div>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
-    <div class="closer"><h2>Quiero que me aviséis del próximo campus</h2><p>Déjanos tu contacto y te escribimos cuando se abran las inscripciones, antes de publicarlas.</p><div class="btn-row"><a href="/#info" class="btn red" data-cta="campus-closer-form">Pedir información</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=%C2%A1Hola!%20Quiero%20info%20del%20Campus%20de%20baloncesto" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">WhatsApp del club</a></div></div>
+    <div class="closer"><h2>Quiero que me aviséis del próximo campus</h2><p>Déjanos tu contacto y te escribimos cuando se abran las inscripciones, antes de publicarlas.</p><div class="btn-row"><a href="/es/#info" class="btn red" data-cta="campus-closer-form">Pedir información</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=%C2%A1Hola!%20Quiero%20info%20del%20Campus%20de%20baloncesto" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">WhatsApp del club</a></div></div>
     </div>
   </div>
 </div>
@@ -420,7 +703,7 @@
       </div>
       <div class="foot-col">
         <h3>Contacto</h3>
-        <a href="/#info">Pedir información</a>
+        <a href="/es/#info">Pedir información</a>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>

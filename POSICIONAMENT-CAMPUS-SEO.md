@@ -209,7 +209,7 @@ d'altres clubs
     "name": "La Nau del Clot",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Carrer de la Llacuna, 172",
+      "streetAddress": "Carrer de la Llacuna, 170-172",
       "addressLocality": "Barcelona",
       "addressRegion": "Catalunya",
       "postalCode": "08018",
