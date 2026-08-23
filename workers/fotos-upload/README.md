@@ -8,88 +8,117 @@ Mentre no el despleguis i no omplis `fotos/config.js`, la web segueix
 funcionant exactament com fins ara (fotos al repositori, pujada via l'API
 de GitHub). Res es trenca per tenir aquest codi al repositori sense usar-lo.
 
-## Pas 1 · Crear el bucket R2 (si encara no existeix)
+## Estat (22 d'agost 2026)
 
-1. Entra al [dashboard de Cloudflare](https://dash.cloudflare.com) → **R2**.
-2. **Create bucket** → nom exacte `cbgb-fotos` (si li poses un altre nom,
-   canvia'l a `wrangler.toml` d'aquesta carpeta i a `sync-r2.yml`).
-3. Un cop creat, entra al bucket → **Settings** → **Public access** →
-   activa **Allow public access via the r2.dev subdomain**. Copia la URL
-   pública que et dona (`https://pub-XXXXXXXX.r2.dev`) — la necessitaràs
-   al pas 4.
+Ja fet des del dashboard de Cloudflare:
 
-## Pas 2 · Desplegar el Worker
+- ✅ Bucket `cbgb-fotos` creat, amb accés públic
+- ✅ Worker `fotos-upload` desplegat a `fotos-upload.cbgrupbarna.workers.dev`
+- ✅ Binding R2 `FOTOS` → bucket `cbgb-fotos`
+- ✅ Variable `PUBLIC_BASE`
 
-**Opció ràpida (sense instal·lar res), des del dashboard:**
+Pendent (els dos únics passos que falten):
 
-1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Create Worker**.
-2. Nom: `cbgb-fotos-upload`. Crea'l amb el codi per defecte.
-3. **Edit code** → esborra tot i enganxa el contingut de `worker.js` d'aquesta
-   carpeta → **Deploy**.
-4. Torna a la pàgina del Worker → **Settings** → **Bindings** → **Add binding**
-   → tipus **R2 Bucket** → variable `BUCKET` → bucket `cbgb-fotos` → Desa.
-5. **Settings** → **Variables and Secrets** → **Add** → tipus **Secret** →
-   nom `UPLOAD_SECRET` → valor: una contrasenya llarga i aleatòria que et
-   inventis ara (per exemple, generada amb `openssl rand -hex 24`). **Apunta-te-la**:
-   la necessitaràs al pas 4 i no la tornaràs a veure.
-6. Comprova la URL del Worker a dalt de tot de la pàgina (alguna cosa com
-   `https://cbgb-fotos-upload.<el-teu-subdomini>.workers.dev`).
+1. **Enganxar el codi** de `worker.js` (aquest fitxer) a l'editor del Worker
+   i fer **Deploy**.
+2. **Crear el secret `UPLOAD_TOKEN`** a Settings del Worker → *Variables and
+   Secrets* → tipus **Secret**, marcant la casella "Secreto"/"Secret" abans
+   de desar.
 
-**Opció amb wrangler (si prefereixes terminal):**
+Un cop fets aquests dos passos, ves a **Comprovar que funciona** més avall.
+
+## Bindings i variables que ha de tenir el Worker
+
+| Nom | Tipus | Valor |
+|---|---|---|
+| `FOTOS` | R2 bucket binding | bucket `cbgb-fotos` |
+| `PUBLIC_BASE` | Variable normal | URL pública del bucket, p.ex. `https://pub-xxxx.r2.dev` |
+| `UPLOAD_TOKEN` | Secret | contrasenya llarga i aleatòria (la que ja tens generada) |
+
+Si en algun moment redesplegues el Worker des de zero i vols fer-ho amb
+`wrangler` en comptes del dashboard:
 
 ```bash
 cd workers/fotos-upload
 npx wrangler login
-npx wrangler secret put UPLOAD_SECRET   # t'aturarà per demanar-te el valor
+npx wrangler secret put UPLOAD_TOKEN   # t'aturarà per demanar-te el valor
 npx wrangler deploy
 ```
 
-## Pas 3 · Crear l'usuari de GitHub Actions per pujar les derivades
+(`wrangler.toml` ja porta el binding `FOTOS` i la variable `PUBLIC_BASE`
+configurats amb els mateixos noms que el Worker desplegat al dashboard.)
 
-El workflow `.github/workflows/sync-r2-uploads.yml` necessita poder escriure
-a R2 (per pujar les versions `web/` i `thumb/` que genera). Fa servir els
-mateixos tres secrets que ja demanava `sync-r2.yml`:
+## Comprovar que el Worker funciona
 
-1. Cloudflare dashboard → **R2** → **Manage API tokens** → **Create API token**.
-2. Permisos: **Object Read & Write**, limitat al bucket `cbgb-fotos`.
-3. Copia els tres valors que et dona: **Account ID**, **Access Key ID**,
-   **Secret Access Key**.
-4. Al repositori de GitHub: **Settings** → **Secrets and variables** →
-   **Actions** → **New repository secret**, i crea'n tres:
-   - `R2_ACCOUNT_ID`
-   - `R2_ACCESS_KEY_ID`
-   - `R2_SECRET_ACCESS_KEY`
+Sense tocar res de `fotos/admin.html` encara, pots comprovar-ho directament
+des del navegador o amb `curl`:
 
-(Si ja els vas crear per a `sync-r2.yml`, aquest pas ja està fet — els dos
-workflows fan servir els mateixos tres secrets.)
-
-## Pas 4 · Activar-ho a la web
-
-Edita `fotos/config.js` i omple aquests dos camps (la resta de l'arxiu es
-queda igual):
-
-```js
-r2_public_base: 'https://pub-XXXXXXXX.r2.dev',       // del pas 1
-r2_worker_url: 'https://cbgb-fotos-upload.xxx.workers.dev',  // del pas 2
+```bash
+curl https://fotos-upload.cbgrupbarna.workers.dev/health
+# {"ok":true,"worker":"fotos-upload","bucketBound":true,"tokenConfigured":true,"publicBase":"https://pub-xxxx.r2.dev"}
 ```
 
+Si `bucketBound` o `tokenConfigured` surten en `false`, falta algun dels
+passos de dalt. Si `publicBase` surt `null` o no coincideix amb la URL
+pública real del bucket, corregeix la variable `PUBLIC_BASE`.
+
+```bash
+curl "https://fotos-upload.cbgrupbarna.workers.dev/list?secret=EL_TEU_UPLOAD_TOKEN"
+# {"ok":true,"prefix":"uploads/","truncated":false,"objects":[]}
+```
+
+Una llista buida és el resultat correcte ara mateix: encara no s'hi ha
+pujat res.
+
+## Pas final · activar-ho a la web
+
+Un cop `/health` respon bé, edita `fotos/config.js` i omple:
+
+```js
+r2_public_base: 'https://pub-xxxx.r2.dev',                        // = publicBase de /health
+r2_worker_url: 'https://fotos-upload.cbgrupbarna.workers.dev',
+```
+
+I els tres secrets a GitHub (**Settings → Secrets and variables → Actions**),
+per als workflows `sync-r2.yml` i `sync-r2-uploads.yml`:
+
+- `R2_ACCOUNT_ID`
+- `R2_ACCESS_KEY_ID`
+- `R2_SECRET_ACCESS_KEY`
+
+(Aquests tres són d'un API Token d'R2 amb permís *Object Read & Write* sobre
+`cbgb-fotos` — Cloudflare dashboard → R2 → *Manage API tokens*. És diferent
+de `UPLOAD_TOKEN`: aquell l'usa el Worker per validar pujades des del
+navegador; aquests tres els usa GitHub Actions per generar i pujar les
+miniatures.)
+
 Puja't `/fotos/admin.html`, entra amb el teu token de GitHub de sempre, i a
-sota del token trobaràs un nou camp «Clau de pujada R2»: enganxa-hi el
-`UPLOAD_SECRET` del pas 2, punt 5. Es guarda només al teu navegador, mai al
-repositori.
+sota trobaràs un camp «Clau de pujada R2»: enganxa-hi el valor de
+`UPLOAD_TOKEN`. Es guarda només al teu navegador, mai al repositori.
 
 A partir d'aquí, cada foto que pugis va directa a R2 (0 commits), i cada 15
-minuts un workflow li genera les versions web i miniatura i les puja també
-a R2. `events.js` (la llista d'esdeveniments i noms de fitxer) es segueix
-desant al repositori com fins ara: pesa poc i ja s'actualitza una sola
-vegada per tanda, no per foto.
+minuts `sync-r2-uploads.yml` li genera les versions web i miniatura i les
+puja també a R2. `events.js` (la llista d'esdeveniments i noms de fitxer) es
+segueix desant al repositori com fins ara: pesa poc i ja s'actualitza una
+sola vegada per tanda, no per foto.
 
-## Comprovar que funciona
+## Comprovar una pujada real
 
 1. A `/fotos/admin.html`, puja una foto de prova a un event.
 2. Hauria de completar-se sense passar per GitHub (mira la pestanya Network
-   del navegador: hauries de veure un `PUT` cap al domini `workers.dev`, no
-   cap a `api.github.com`).
-3. Espera fins a 15 minuts (o llança `sync-r2-uploads.yml` a mà des de
+   del navegador: hauries de veure un `PUT` cap a `fotos-upload.cbgrupbarna.workers.dev`,
+   no cap a `api.github.com`).
+3. `curl ".../list?secret=..."` hauria de mostrar-hi la clau nova.
+4. Espera fins a 15 minuts (o llança `sync-r2-uploads.yml` a mà des de
    **Actions** → **Run workflow**) i comprova que la foto surt a
    `https://cbgrupbarna.info/fotos/`.
+
+## Límits coneguts d'aquesta primera versió
+
+- Esborrar una foto pujada per R2 des de l'admin panel la treu de la
+  galeria (del `events.js`) però no l'esborra del bucket: queda orfe a R2.
+  No és un problema de funcionament, només d'espai; es pot netejar més
+  endavant amb un endpoint `DELETE` al Worker si cal.
+- La detecció de duplicats per SHA que fa l'admin panel per a les fotos
+  antigues (contra `fotos/uploads/` a GitHub) no aplica a les fotos que ja
+  viuen a R2.

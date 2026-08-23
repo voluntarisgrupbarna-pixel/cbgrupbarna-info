@@ -10,6 +10,14 @@
  * commits al repositori (vegeu fotos/admin.html i el comentari de dalt de
  * .github/workflows/sync-r2.yml).
  *
+ * Bindings i variables que ha de tenir aquest Worker (Settings del Worker
+ * al dashboard de Cloudflare):
+ *   FOTOS        R2 bucket binding, apuntant al bucket cbgb-fotos
+ *   PUBLIC_BASE  variable normal, la URL pública del bucket (p.ex.
+ *                https://pub-xxxx.r2.dev) — només s'usa a /health, per
+ *                comprovar que coincideix amb el que hi ha a fotos/config.js
+ *   UPLOAD_TOKEN secret, la contrasenya que ha de portar cada pujada
+ *
  * Desplegament: vegeu README.md d'aquesta carpeta.
  */
 
@@ -22,64 +30,97 @@ function corsHeaders(origin) {
   const allow = ALLOWED_ORIGINS.has(origin) ? origin : 'https://cbgrupbarna.info';
   return {
     'Access-Control-Allow-Origin': allow,
-    'Access-Control-Allow-Methods': 'PUT, OPTIONS',
+    'Access-Control-Allow-Methods': 'PUT, GET, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, X-Upload-Secret',
     'Access-Control-Max-Age': '86400',
   };
+}
+
+function checkAuth(request, url, env) {
+  if (!env.UPLOAD_TOKEN) return false;
+  const given = request.headers.get('X-Upload-Secret') || url.searchParams.get('secret') || '';
+  return given === env.UPLOAD_TOKEN;
+}
+
+async function handleHealth(env, cors) {
+  return new Response(JSON.stringify({
+    ok: true,
+    worker: 'fotos-upload',
+    bucketBound: !!env.FOTOS,
+    tokenConfigured: !!env.UPLOAD_TOKEN,
+    publicBase: env.PUBLIC_BASE || null,
+  }), { status: 200, headers: { ...cors, 'Content-Type': 'application/json' } });
+}
+
+async function handleList(request, url, env, cors) {
+  if (!checkAuth(request, url, env)) {
+    return new Response('Unauthorized', { status: 401, headers: cors });
+  }
+  const prefix = url.searchParams.get('prefix') || 'uploads/';
+  const listed = await env.FOTOS.list({ prefix, limit: 50 });
+  const objects = listed.objects.map(o => ({ key: o.key, size: o.size, uploaded: o.uploaded }));
+  return new Response(JSON.stringify({ ok: true, prefix, truncated: listed.truncated, objects }), {
+    status: 200,
+    headers: { ...cors, 'Content-Type': 'application/json' },
+  });
+}
+
+async function handleUpload(request, url, env, cors) {
+  if (!env.UPLOAD_TOKEN) {
+    return new Response('Worker sense configurar: falta el secret UPLOAD_TOKEN', { status: 500, headers: cors });
+  }
+  if (!checkAuth(request, url, env)) {
+    return new Response('Unauthorized', { status: 401, headers: cors });
+  }
+
+  const key = decodeURIComponent(url.pathname.replace(/^\/+/, ''));
+
+  // Nomes fotos i videos, nomes dins de uploads/<event>/<fitxer>. Sense
+  // aixo qualsevol que tingui el secret podria escriure a qualsevol clau.
+  if (!/^uploads\/[^/]+\/[^/]+\.[A-Za-z0-9]+$/.test(key) || key.includes('..')) {
+    return new Response('Clau no vàlida', { status: 400, headers: cors });
+  }
+
+  const MAX_BYTES = 200 * 1024 * 1024; // 200 MB: marge ampli per a vídeos de mòbil
+  const len = Number(request.headers.get('Content-Length') || '0');
+  if (len && len > MAX_BYTES) {
+    return new Response('Fitxer massa gran', { status: 413, headers: cors });
+  }
+
+  try {
+    await env.FOTOS.put(key, request.body, {
+      httpMetadata: {
+        contentType: request.headers.get('Content-Type') || 'application/octet-stream',
+      },
+    });
+  } catch (err) {
+    return new Response(`Error escrivint a R2: ${err.message}`, { status: 502, headers: cors });
+  }
+
+  return new Response(JSON.stringify({ ok: true, key }), {
+    status: 200,
+    headers: { ...cors, 'Content-Type': 'application/json' },
+  });
 }
 
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
     const cors = corsHeaders(origin);
+    const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: cors });
     }
-
-    if (request.method !== 'PUT') {
-      return new Response('Method not allowed', { status: 405, headers: cors });
+    if (request.method === 'GET' && url.pathname === '/health') {
+      return handleHealth(env, cors);
     }
-
-    if (!env.UPLOAD_SECRET) {
-      return new Response('Worker sense configurar: falta el secret UPLOAD_SECRET', { status: 500, headers: cors });
+    if (request.method === 'GET' && url.pathname === '/list') {
+      return handleList(request, url, env, cors);
     }
-    const given = request.headers.get('X-Upload-Secret') || '';
-    if (given !== env.UPLOAD_SECRET) {
-      return new Response('Unauthorized', { status: 401, headers: cors });
+    if (request.method === 'PUT') {
+      return handleUpload(request, url, env, cors);
     }
-
-    const url = new URL(request.url);
-    const key = decodeURIComponent(url.pathname.replace(/^\/+/, ''));
-
-    // Nomes fotos i videos, nomes dins de uploads/<event>/<fitxer>. Sense
-    // aixo qualsevol que tingui el secret podria escriure a qualsevol clau.
-    if (!/^uploads\/[^/]+\/[^/]+\.[A-Za-z0-9]+$/.test(key)) {
-      return new Response('Clau no vàlida', { status: 400, headers: cors });
-    }
-    if (key.includes('..')) {
-      return new Response('Clau no vàlida', { status: 400, headers: cors });
-    }
-
-    const MAX_BYTES = 200 * 1024 * 1024; // 200 MB: marge ampli per a vídeos de mòbil
-    const len = Number(request.headers.get('Content-Length') || '0');
-    if (len && len > MAX_BYTES) {
-      return new Response('Fitxer massa gran', { status: 413, headers: cors });
-    }
-
-    try {
-      await env.BUCKET.put(key, request.body, {
-        httpMetadata: {
-          contentType: request.headers.get('Content-Type') || 'application/octet-stream',
-        },
-      });
-    } catch (err) {
-      return new Response(`Error escrivint a R2: ${err.message}`, { status: 502, headers: cors });
-    }
-
-    return new Response(JSON.stringify({ ok: true, key }), {
-      status: 200,
-      headers: { ...cors, 'Content-Type': 'application/json' },
-    });
+    return new Response('Method not allowed', { status: 405, headers: cors });
   },
 };

@@ -1,7 +1,15 @@
-name = "cbgb-fotos-upload"
+name = "fotos-upload"
 main = "worker.js"
 compatibility_date = "2026-01-01"
 
 [[r2_buckets]]
-binding = "BUCKET"
+binding = "FOTOS"
 bucket_name = "cbgb-fotos"
+
+[vars]
+# La URL pública del bucket (Settings > Public access al bucket a Cloudflare).
+# No és secret: només s'usa per contrastar-la a /health.
+PUBLIC_BASE = ""
+
+# UPLOAD_TOKEN es desa amb `wrangler secret put UPLOAD_TOKEN` (o des del
+# dashboard, marcat com a "Secret") — no va aquí.
