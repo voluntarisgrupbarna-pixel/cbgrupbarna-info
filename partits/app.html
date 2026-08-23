@@ -359,6 +359,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   .edit-pill { bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 10px); }
 }
 </style>
+<link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
 <script src="/scripts/admin-gate.js"></script>
@@ -2510,5 +2511,6 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
   if (/iphone|ipad/i.test(navigator.userAgent) && !navigator.standalone) pwaBtn.style.display='inline-block';
 })();
 </script>
+<script src="/js/nav.js" defer></script>
 </body>
 </html>

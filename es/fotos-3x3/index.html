@@ -263,6 +263,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
 }
 </script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
 
@@ -536,5 +537,6 @@ function toast(m){var el=document.getElementById('toast');el.textContent=m;el.cl
 /* ===== DEEP LINK (?foto=N) ===== */
 (function(){var p=new URLSearchParams(location.search).get('foto');if(p){var i=idxOfN(parseInt(p,10));if(i>=0)setTimeout(function(){openLb(i);},250);}})();
 </script>
+<script src="/js/nav.js" defer></script>
 </body>
 </html>

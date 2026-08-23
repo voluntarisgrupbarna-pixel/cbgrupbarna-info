@@ -1,0 +1,72 @@
+/* Navegació del club · el full que acompanya `js/nav.js`.
+ *
+ * Va a part de `css/barna.css` perquè el menú també ha d'arribar a les pàgines
+ * que no carreguen el full gran (el dossier del Premi Dona i Esport i les
+ * peces heretades): allà, afegir-hi `barna.css` sencer les re-estilaria. Aquí
+ * només hi ha `.head-burger`, `.menu` i `.molla`, classes que cap d'aquelles
+ * pàgines fa servir, i per tant no en pot tocar res.
+ *
+ * Els tokens són els de `web-cbgb`; els valors literals del `:root` d'aquí
+ * sota són el recanvi per a les pàgines que no porten `barna.css` i que, si
+ * no, es quedarien sense color. On hi ha `barna.css`, guanya ell.
+ */
+:root {
+  --nav-red: var(--red, #E20613);
+  --nav-ink: var(--ink, #10100E);
+  --nav-paper: var(--paper, #ffffff);
+  --nav-line: var(--line, rgba(16, 16, 14, 0.14));
+  --nav-muted: var(--muted, #6B6560);
+  --nav-ease: var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+  --nav-display: var(--display, 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif);
+  --nav-body: var(--body, 'Inter', system-ui, -apple-system, sans-serif);
+}
+/* ==== NAVEGACIÓ COMPLETA · a totes les pàgines, no només a la portada ====
+   Fins ara el mapa del club vivia només a `index.html`: en sortir-ne, la
+   navegació quedava reduïda als enllaços de la capçalera i, per sota de
+   1080 px, encara menys. Aquestes regles fan que el menú de `js/nav.js`
+   es vegi igual a tot el lloc. Valors calcats dels de la portada perquè
+   les dues capçaleres siguin la mateixa peça. */
+
+.head-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; flex-shrink: 0; background: none; border: 0; padding: 0; cursor: pointer; }
+.head-burger i { display: block; width: 100%; height: 1px; background: var(--nav-ink); transition: transform 0.35s var(--nav-ease); }
+.menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
+.menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+.head-burger:focus-visible { outline: 2px solid var(--nav-red); outline-offset: 4px; }
+/* Zona tocable de 44 px sense engreixar el dibuix de les dues barres. */
+@media (max-width: 1024px) { .head-burger { width: 44px; height: 44px; align-items: center; padding: 12px 9px; } }
+
+/* El burger que injecta nav.js va davant de l'escut i necessita separar-se'n. */
+.head-in--amb-burger { gap: clamp(12px, 2.4vw, 20px); }
+.head-in--amb-burger > .head-burger { margin-right: 2px; }
+
+/* Menú desplegat · el mapa complet del club */
+.menu { position: fixed; inset: 0; z-index: 105; background: var(--nav-paper); padding: 96px clamp(20px, 6vw, 70px) 48px; transform: translateY(-101%); transition: transform 0.6s var(--nav-ease); overflow-y: auto; visibility: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.menu.open { transform: none; visibility: visible; }
+.menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(22px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
+@media (min-width: 780px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
+.menu-col h3 { font-family: var(--nav-body); font-size: 8.5px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--nav-red); margin-bottom: 14px; }
+.menu-col a { display: flex; align-items: baseline; gap: 12px; min-height: 44px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--nav-line); font-family: var(--nav-display); font-weight: 400; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.02em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--nav-ease); }
+.menu-col a:hover { color: var(--nav-red); padding-left: 10px; }
+.menu-col a small { font-family: var(--nav-body); font-size: 10.5px; letter-spacing: 0.06em; text-transform: none; color: var(--nav-muted); margin-left: auto; white-space: nowrap; }
+.menu-col a[aria-current] { color: var(--nav-red); }
+.menu-col a[aria-current]::before { content: ''; width: 3px; align-self: stretch; background: var(--nav-red); margin-right: -4px; }
+.menu-col a.menu-admin { color: var(--nav-muted); }
+.menu-col a.menu-admin:hover { color: var(--nav-red); }
+.menu-foot { margin-top: 34px; text-align: center; font-family: var(--nav-body); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--nav-muted); }
+@media (prefers-reduced-motion: reduce) { .menu { transition: none; } }
+
+/* La secció on ets, marcada també a la capçalera: la resposta a «on sóc?»
+   no pot dependre només de recordar on has clicat. */
+.head-nav a[aria-current] { color: var(--nav-red); }
+.head-nav a[aria-current]::after { right: 0; }
+
+/* ==== MOLLA DE PA · la ruta fins on ets ====
+   La injecta `js/nav.js` a les pàgines que no en porten. */
+.molla { margin: 0 0 clamp(18px, 3vw, 30px); font-family: var(--nav-body); font-size: 11px; letter-spacing: 0.1em; }
+.molla ol { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; list-style: none; margin: 0; padding: 0; }
+.molla li { display: flex; align-items: center; gap: 10px; color: var(--nav-muted); }
+.molla li + li::before { content: '/'; color: var(--nav-line); }
+.molla a { color: var(--nav-muted); border-bottom: 1px solid transparent; transition: color 0.3s var(--nav-ease), border-color 0.3s var(--nav-ease); }
+.molla a:hover { color: var(--nav-red); border-bottom-color: var(--nav-red); }
+.molla li[aria-current] { color: var(--nav-ink); }

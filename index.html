@@ -1243,6 +1243,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     .req { color: var(--red); font-weight: 700; }
     .form-legend { font-size: 12.5px; color: var(--ink-2); margin: 0 0 16px; }
 </style>
+<link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
 
@@ -1974,21 +1975,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
 <script>
   // ==== MENÚ ====
-  (function () {
-    var burger = document.getElementById('burger');
-    var menu = document.getElementById('menu');
-    if (!burger || !menu) return;
-    function toggle(open) {
-      menu.classList.toggle('open', open);
-      document.body.classList.toggle('menu-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      burger.setAttribute('aria-label', open ? 'Tancar el menú' : 'Obrir el menú');
-    }
-    burger.addEventListener('click', function () { toggle(!menu.classList.contains('open')); });
-    menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
-  })();
+  // El commutador, el focus i la captura del tabulador viuen a /js/nav.js,
+  // que és el mateix a totes les pàgines del lloc. Aquí només hi queda el
+  // marcatge del menú, escrit a l'HTML perquè es vegi encara sense JS.
 
   // ==== LA PORTADA · data real, no escrita a mà ====
   (function () {
@@ -2350,5 +2339,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 </script>
 
 <script src="/js/descarrega.js" defer></script>
+<script src="/js/nav.js" defer></script>
 </body>
 </html>
