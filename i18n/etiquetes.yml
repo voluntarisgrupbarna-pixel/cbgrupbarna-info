@@ -13,23 +13,39 @@
 # mateix enllaç.
 
 enllacos:
+  # Actualitzat el 23/08/2026, pel mateix motiu que /partits/calendaris/ aquí
+  # sota: la direcció del club va decidir l'agost del 2026 que l'etiqueta és
+  # «Calendari». El català ja ho deia a 240 enllaços; el castellà i l'anglès
+  # s'havien quedat amb el nom antic, i aquesta llista els hi mantenia. Ara
+  # les tres versions diuen el mateix.
   /partits/:
-    ca: ["Dies de partit"]
-    es: ["Días de partido"]
-    en: ["Match days"]
+    ca: ["Calendari"]
+    es: ["Calendario"]
+    en: ["Calendar"]
     # Variants que s'han de corregir quan es toqui la pàgina on surten.
+    # «Dies de partit» hi és perquè era l'etiqueta anterior: als <title> i a
+    # les descripcions s'hi pot quedar com a terme de cerca, però ja no
+    # nomena l'enllaç.
     prohibides:
-      es: ["Partidos y resultados", "Calendario", "Partidos"]
-      en: ["Games and results", "Matches and results", "Calendar", "Matches"]
+      ca: ["Dies de partit", "Partits i resultats", "Partits i events"]
+      es: ["Partidos y resultados", "Días de partido", "Partidos"]
+      en: ["Games and results", "Matches and results", "Match days", "Matches"]
 
+  # Actualitzat el 23/08/2026. Aquest fitxer s'havia quedat amb el vocabulari
+  # anterior a la decisió de la direcció del club de l'agost del 2026, que va
+  # canviar l'etiqueta a «Calendari» (i «Calendari per equip» per a aquesta
+  # pàgina). El resultat era que el lint donava 91 errors demanant el nom
+  # antic a pàgines que ja feien servir el nou: la web tenia raó i la llista,
+  # no. «Dies de partit» segueix valent als <title> i a les descripcions com a
+  # terme de cerca; el que no pot fer és nomenar l'enllaç.
   /partits/calendaris/:
-    ca: ["Dies de partit per equip"]
-    es: ["Días de partido por equipo"]
-    en: ["Match days by team"]
+    ca: ["Calendari per equip"]
+    es: ["Calendario por equipo"]
+    en: ["Calendar by team"]
     prohibides:
-      ca: ["Calendaris per equip", "Calendari per equip"]
-      es: ["Calendarios por equipo"]
-      en: ["Team calendars", "Calendars by team"]
+      ca: ["Calendaris per equip", "Dies de partit per equip"]
+      es: ["Calendarios por equipo", "Días de partido por equipo"]
+      en: ["Team calendars", "Calendars by team", "Match days by team"]
 
   /escoleta/:
     ca: ["Escoleta"]

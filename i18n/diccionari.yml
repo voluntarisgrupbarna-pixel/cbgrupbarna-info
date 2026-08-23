@@ -38,8 +38,12 @@ textos:
   # ── El nom de les seccions ───────────────────────────────────────────────
   # «Dies de partit» és el nom de la secció a l'Instagram i a la web, i no
   # admet sinònims. El castellà i l'anglès en tenien dos i tres cadascun.
-  partits:         {href: /partits/,           ca: Dies de partit,          es: Días de partido,           en: Match days}
-  calendaris:      {href: /partits/calendaris/, ca: Dies de partit per equip, es: Días de partido por equipo, en: Match days by team}
+  # Etiqueta decidida per la direcció del club l'agost del 2026 (vegeu
+  # i18n/etiquetes.yml). Abans deia «Dies de partit», que continua valent
+  # als <title> i a les descripcions com a terme de cerca, però ja no
+  # nomena l'enllaç.
+  partits:         {href: /partits/,           ca: Calendari,               es: Calendario,                en: Calendar}
+  calendaris:      {href: /partits/calendaris/, ca: Calendari per equip,     es: Calendario por equipo,     en: Calendar by team}
   escoleta_llarg:  {href: /escoleta/,          ca: Escola de bàsquet,       es: Escuela de baloncesto,     en: Basketball school}
   campus_llarg:    {href: /campus/,            ca: Campus de bàsquet,       es: Campus de baloncesto,      en: Basketball camp}
   magics:          {href: /magics/,            ca: Barna Màgics,            es: Barna Màgics,              en: Barna Màgics}

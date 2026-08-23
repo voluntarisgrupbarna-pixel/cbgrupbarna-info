@@ -467,3 +467,61 @@ qui vol ser entrenador o voluntari.
   però `web-cbgb` §6 diu que l'etiqueta decidida per la direcció l'agost del
   2026 és **«Calendari»**. Sembla que `i18n/etiquetes.yml` va quedar amb el
   vocabulari antic.
+
+
+---
+
+## Arreglat el 23/08/2026 (tarda)
+
+### Els 91 errors del lint eren un sol error, i el tenia la llista
+
+`i18n/etiquetes.yml` i `i18n/diccionari.yml` s'havien quedat amb el vocabulari
+anterior a la decisió de la direcció del club de l'agost del 2026, que va
+canviar l'etiqueta a **«Calendari»** (i «Calendari per equip»). El lint
+demanava el nom antic a 91 pàgines que ja feien servir el nou: **la web tenia
+raó i la llista, no.**
+
+Corregits els dos fitxers i passat `scripts/i18n-aplica-etiquetes.py`. De
+passada ha sortit una cosa que el lint no podia veure: **el castellà i l'anglès
+s'havien quedat amb el nom antic** («Días de partido», «Match days») mentre el
+català ja deia «Calendari» a 240 enllaços. Ara les tres versions diuen el
+mateix: **Calendari · Calendario · Calendar**, i **Calendari per equip ·
+Calendario por equipo · Calendar by team**. Són 203 enllaços de 150 pàgines.
+
+> És l'únic canvi d'aquesta tanda que es veu a la navegació del web, i és
+> reversible: es desfà tornant els dos fitxers enrere i tornant a passar
+> l'aplicador.
+
+**El lint ha passat de 91 errors a 0.** Els pendents, de 497 a 392.
+
+### /portes-obertes/ ja té les tres versions
+
+Creades **`/es/puertas-abiertas/`** i **`/en/open-days/`**, amb la pàgina
+sencera traduïda: text, formulari (mateixos identificadors, o sigui que
+`/js/portes-obertes.js` hi funciona igual), avís de dades i preguntes. La
+capçalera i el peu no s'han traduït a mà: els dibuixa `scripts/i18n_chrome.py`
+des d'`i18n/diccionari.yml`.
+
+Les seves **cinc preguntes ja surten en els tres idiomes**. Ara «what do we
+bring the first day» troba resposta.
+
+De passada, dues coses trencades a la pàgina catalana:
+- Els seus `hreflang` apuntaven a `/es/portes-obertes/` i `/en/portes-obertes/`,
+  que no han existit mai.
+- **El commutador d'idioma portava a un article del blog**
+  (`/blog/a-quina-edat-comencar-basquet/`), no a la pàgina. Error de copiar i
+  enganxar.
+
+També s'ha afegit `/portes-obertes/` a `llms.txt`, on no hi era.
+
+### El que segueix pendent, i per què
+
+Les **14 preguntes amb `pendent:`** no s'han pogut escriure perquè la seva
+resposta no és a cap pàgina del web ni la sap ningú d'aquí: vuit són números
+(les quotes i l'equipació) i sis són dades de funcionament del club (equip A i
+B, desplaçaments, canal d'avisos, revisió mèdica, coordinació per categoria,
+voluntariat). Inventar-les seria pitjor que no tenir-les.
+
+Queden **27 pàgines amb les FAQ desquadrades entre idiomes**. Passar-les per la
+font única és mecànic i es pot fer en tandes; la primera, `/basquet-formatiu/`,
+ja està feta i va de 5/5/4 a 7/7/7.
