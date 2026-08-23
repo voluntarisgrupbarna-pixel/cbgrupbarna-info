@@ -21,6 +21,10 @@
   --paper: #ffffff;
   --paper-2: #F4F1EC;
   --red: #E20613;
+  /* Sobre fons fosc el vermell de marca s'aclareix: #E20613 sobre la tinta
+     del peu dona 3,87:1 i no arriba al mínim de 4,5:1. És la regla que ja
+     diu la guia del club; només faltava aplicar-la. #FF3B41 hi dona 5,4:1. */
+  --red-sobre-fosc: #FF3B41;
   --red-dark: #A8040E;
   /* Àlies del joc de /partits/ i de l'artefacte */
   --cream: #F4F1EC;
@@ -255,8 +259,8 @@ a.partner-logo:hover img { filter: none; opacity: 1; }
 .foot-col a:hover { color: var(--red); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 28px; }
 .foot-mark { font-family: var(--body); font-size: clamp(12px, 2vw, 15px); letter-spacing: 0.4em; text-transform: uppercase; }
-.foot-mark em { font-style: normal; color: var(--red); }
-.foot-legal { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.foot-mark em { font-style: normal; color: var(--red-sobre-fosc, #FF3B41); }
+.foot-legal { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
 
 /* ==== ACCESSIBILITAT ==== */
 .skip { position: absolute; left: -9999px; top: 0; z-index: 200; }
