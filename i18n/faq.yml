@@ -1,553 +1,2063 @@
-# Preguntes freqüents de cbgrupbarna.info · FONT ÚNICA
-#
-# Una pregunta s'escriu AQUÍ, un sol cop, amb els seus tres idiomes. Qui la
-# reparteix és `.github/scripts/generate-faq.py`, que l'escriu a dos llocs de
-# cada versió de la pàgina: el <details> que llegeix la gent i el FAQPage del
-# JSON-LD que llegeixen Google i el cercador del web.
-#
-#   python3 .github/scripts/generate-faq.py --dry-run
-#   python3 .github/scripts/generate-faq.py
-#   python3 .github/scripts/generate-faq.py --pendents
-#
-# Per què una font única: el 23/08/2026 hi havia 28 pàgines amb les tres
-# versions desquadrades (la portada anava 15/11/11). Sis llocs per pregunta
-# mantinguts a mà no aguanten.
-#
-# CAMPS
-#   id       identificador curt i estable. No es reaprofita.
-#   pagina   la ruta EN CATALÀ. Les altres dues surten d'i18n/routes.yml.
-#   ca/es/en  q: la pregunta · r: la resposta
-#   pendent  què falta per poder-la publicar. Amb això posat, la pregunta NO
-#            surt enlloc, ni tan sols en català: val més cap resposta que
-#            mitja. Surt a `--pendents`.
-#
-# REGLES
-#   · La resposta ha de respondre a la primera frase. Qui la llegeix al
-#     cercador no veu la pàgina de sota.
-#   · Text pla: ni HTML ni enllaços. Va a dos llocs i un d'ells és JSON.
-#   · No s'hi inventa res. Si la dada no és a cap pàgina del web ni la sap
-#     ningú, es posa `pendent:` i s'espera.
-#   · Vocabulari de web-cbgb §6: «Escoleta» és Escoleta en els tres idiomes;
-#     «Calendari» / «Calendario» / «Calendar», mai «Partits i resultats».
-
 preguntes:
-
-# ══════════════════════════════════════════════════════════════════════
-# /portes-obertes/  ·  el primer dia
-# La pàgina ja ho explicava tot al cos del text; el que faltava era que
-# constés com a pregunta, que és l'única forma que el cercador ho troba.
-# ⚠ Aquesta pàgina encara no té versió /es/ ni /en/ (vegeu PENDENTS-WEB.md):
-#   el generador avisa i, de moment, només n'escriu la catalana.
-# ══════════════════════════════════════════════════════════════════════
-
 - id: po-quan
   pagina: /portes-obertes/
   ca:
     q: Quan són les portes obertes del CB Grup Barna?
-    r: >-
-      Tot el setembre. No hi ha una jornada de portes obertes d'un sol dia:
-      durant tot el mes qualsevol nen o nena pot venir a fer un entrenament
-      amb nosaltres, sense pagar res i sense compromís de quedar-s'hi.
+    r: 'Tot el setembre. No hi ha una jornada de portes obertes d''un sol dia: durant tot
+      el mes qualsevol nen o nena pot venir a fer un entrenament amb nosaltres, sense pagar
+      res i sense compromís de quedar-s''hi.'
   es:
     q: ¿Cuándo son las puertas abiertas del CB Grup Barna?
-    r: >-
-      Todo septiembre. No hay una jornada de puertas abiertas de un solo día:
-      durante todo el mes cualquier niño o niña puede venir a hacer un
-      entrenamiento con nosotros, sin pagar nada y sin compromiso de quedarse.
+    r: 'Todo septiembre. No hay una jornada de puertas abiertas de un solo día: durante todo
+      el mes cualquier niño o niña puede venir a hacer un entrenamiento con nosotros, sin
+      pagar nada y sin compromiso de quedarse.'
   en:
     q: When are CB Grup Barna's open days?
-    r: >-
-      All through September. There is no single open day: for the whole month
-      any child can come and train with us, free of charge and with no
-      commitment to stay.
-
+    r: 'All through September. There is no single open day: for the whole month any child
+      can come and train with us, free of charge and with no commitment to stay.'
 - id: po-que-portar
   pagina: /portes-obertes/
   ca:
     q: Què cal portar el primer dia d'entrenament?
-    r: >-
-      Roba d'esport, sabatilles de pista i una ampolla d'aigua. La pilota la
-      posem nosaltres. L'entrenament de prova és gratuït.
+    r: Roba d'esport, sabatilles de pista i una ampolla d'aigua. La pilota la posem nosaltres.
+      L'entrenament de prova és gratuït.
   es:
     q: ¿Qué hay que llevar el primer día de entrenamiento?
-    r: >-
-      Ropa de deporte, zapatillas de pista y una botella de agua. El balón lo
-      ponemos nosotros. El entrenamiento de prueba es gratuito.
+    r: Ropa de deporte, zapatillas de pista y una botella de agua. El balón lo ponemos nosotros.
+      El entrenamiento de prueba es gratuito.
   en:
     q: What should we bring on the first training session?
-    r: >-
-      Sports clothes, indoor court shoes and a water bottle. We provide the
-      ball. The trial session is free.
-
+    r: Sports clothes, indoor court shoes and a water bottle. We provide the ball. The trial
+      session is free.
 - id: po-cal-avisar
   pagina: /portes-obertes/
   ca:
     q: Cal avisar abans de venir a provar un entrenament o em puc presentar?
-    r: >-
-      Cal demanar dia abans, perquè cada edat entrena un dia i una hora
-      diferents. Amb el nom de la criatura, l'any de naixement i un telèfon o
-      un correu n'hi ha prou: et responem el mateix dia amb el dia i l'hora
-      que li toquen.
+    r: 'Cal demanar dia abans, perquè cada edat entrena un dia i una hora diferents. Amb el
+      nom de la criatura, l''any de naixement i un telèfon o un correu n''hi ha prou: et responem
+      el mateix dia amb el dia i l''hora que li toquen.'
   es:
     q: ¿Hay que avisar antes de venir a probar un entrenamiento o me puedo presentar?
-    r: >-
-      Hay que pedir día antes, porque cada edad entrena un día y una hora
-      distintos. Con el nombre del niño o la niña, el año de nacimiento y un
-      teléfono o un correo basta: te respondemos el mismo día con el día y la
-      hora que le tocan.
+    r: 'Hay que pedir día antes, porque cada edad entrena un día y una hora distintos. Con
+      el nombre del niño o la niña, el año de nacimiento y un teléfono o un correo basta:
+      te respondemos el mismo día con el día y la hora que le tocan.'
   en:
     q: Do we need to book a trial session in advance, or can we just turn up?
-    r: >-
-      You need to book, because each age group trains on a different day and
-      time. Just send us the child's name, year of birth and a phone number or
-      email: we reply the same day with their day and time.
-
+    r: 'You need to book, because each age group trains on a different day and time. Just
+      send us the child''s name, year of birth and a phone number or email: we reply the same
+      day with their day and time.'
 - id: po-sense-experiencia
   pagina: /portes-obertes/
   ca:
     q: El meu fill no ha jugat mai a bàsquet. Hi encaixarà?
-    r: >-
-      Sí. No cal experiència prèvia: hi ha jugadors i jugadores que hi arriben
-      sense haver jugat mai. De 4 a 8 anys van a l'Escoleta, amb equips mixtos
-      i tres grups per edat; de 9 anys en amunt, als equips federats per any
-      de naixement. El primer entrenament és de prova i gratuït.
+    r: 'Sí. No cal experiència prèvia: hi ha jugadors i jugadores que hi arriben sense haver
+      jugat mai. De 4 a 8 anys van a l''Escoleta, amb equips mixtos i tres grups per edat;
+      de 9 anys en amunt, als equips federats per any de naixement. El primer entrenament
+      és de prova i gratuït.'
   es:
     q: Mi hijo no ha jugado nunca a baloncesto. ¿Encajará?
-    r: >-
-      Sí. No hace falta experiencia previa: hay jugadores y jugadoras que
-      llegan sin haber jugado nunca. De 4 a 8 años van a la Escoleta, con
-      equipos mixtos y tres grupos por edad; de 9 años en adelante, a los
-      equipos federados por año de nacimiento. El primer entrenamiento es de
-      prueba y gratuito.
+    r: 'Sí. No hace falta experiencia previa: hay jugadores y jugadoras que llegan sin haber
+      jugado nunca. De 4 a 8 años van a la Escoleta, con equipos mixtos y tres grupos por
+      edad; de 9 años en adelante, a los equipos federados por año de nacimiento. El primer
+      entrenamiento es de prueba y gratuito.'
   en:
     q: My child has never played basketball. Will they fit in?
-    r: >-
-      Yes. No previous experience is needed: plenty of our players arrived
-      having never played. Ages 4 to 8 join the Escoleta, in mixed groups by
-      age; from 9 upwards they join the league teams, grouped by year of
-      birth. The first session is a free trial.
-
+    r: 'Yes. No previous experience is needed: plenty of our players arrived having never
+      played. Ages 4 to 8 join the Escoleta, in mixed groups by age; from 9 upwards they join
+      the league teams, grouped by year of birth. The first session is a free trial.'
 - id: po-mirar
   pagina: /portes-obertes/
   ca:
     q: Em puc quedar a mirar l'entrenament?
-    r: >-
-      Sí. Si prefereixes venir a veure-ho abans de dir-li res a la criatura,
-      també pots: només cal que ens ho diguis en demanar el dia.
+    r: 'Sí. Si prefereixes venir a veure-ho abans de dir-li res a la criatura, també pots:
+      només cal que ens ho diguis en demanar el dia.'
   es:
     q: ¿Me puedo quedar a mirar el entrenamiento?
-    r: >-
-      Sí. Si prefieres venir a verlo antes de decirle nada al niño o a la
-      niña, también puedes: solo hace falta que nos lo digas al pedir el día.
+    r: 'Sí. Si prefieres venir a verlo antes de decirle nada al niño o a la niña, también
+      puedes: solo hace falta que nos lo digas al pedir el día.'
   en:
     q: Can I stay and watch the session?
-    r: >-
-      Yes. If you would rather come and see it before telling your child
-      anything, that is fine too: just say so when you book the day.
-
-# ══════════════════════════════════════════════════════════════════════
-# /instal-lacions/  ·  on és tot això
-# ══════════════════════════════════════════════════════════════════════
-
+    r: 'Yes. If you would rather come and see it before telling your child anything, that
+      is fine too: just say so when you book the day.'
 - id: inst-nau-clot
   pagina: /instal-lacions/
   ca:
     q: On és exactament La Nau del Clot?
-    r: >-
-      Al carrer de la Llacuna 170-172, dins del Parc del Clot, 08018
-      Barcelona. És el pavelló de referència del club i la seu principal, al
-      Districte de Sant Martí.
+    r: Al carrer de la Llacuna 170-172, dins del Parc del Clot, 08018 Barcelona. És el pavelló
+      de referència del club i la seu principal, al Districte de Sant Martí.
   es:
     q: ¿Dónde está exactamente La Nau del Clot?
-    r: >-
-      En la calle Llacuna 170-172, dentro del Parc del Clot, 08018 Barcelona.
-      Es el pabellón de referencia del club y la sede principal, en el
-      Distrito de Sant Martí.
+    r: En la calle Llacuna 170-172, dentro del Parc del Clot, 08018 Barcelona. Es el pabellón
+      de referencia del club y la sede principal, en el Distrito de Sant Martí.
   en:
     q: Where exactly is La Nau del Clot?
-    r: >-
-      At carrer de la Llacuna 170-172, inside Parc del Clot, 08018 Barcelona.
-      It is the club's main venue, in the Sant Martí district.
-
+    r: At carrer de la Llacuna 170-172, inside Parc del Clot, 08018 Barcelona. It is the club's
+      main venue, in the Sant Martí district.
 - id: inst-quines-pistes
   pagina: /instal-lacions/
   ca:
     q: A quines pistes entrena i juga el CB Grup Barna?
-    r: >-
-      A sis instal·lacions del Districte de Sant Martí, totes properes entre
-      elles: La Nau del Clot, Escola Provençals, La Farigola del Clot, La
-      Rambleta del Clot, Escola Casas i Claror Marítim.
+    r: 'A sis instal·lacions del Districte de Sant Martí, totes properes entre elles: La Nau
+      del Clot, Escola Provençals, La Farigola del Clot, La Rambleta del Clot, Escola Casas
+      i Claror Marítim.'
   es:
     q: ¿En qué pistas entrena y juega el CB Grup Barna?
-    r: >-
-      En seis instalaciones del Distrito de Sant Martí, todas cercanas entre
-      sí: La Nau del Clot, Escola Provençals, La Farigola del Clot, La
-      Rambleta del Clot, Escola Casas y Claror Marítim.
+    r: 'En seis instalaciones del Distrito de Sant Martí, todas cercanas entre sí: La Nau
+      del Clot, Escola Provençals, La Farigola del Clot, La Rambleta del Clot, Escola Casas
+      y Claror Marítim.'
   en:
     q: Which courts does CB Grup Barna train and play on?
-    r: >-
-      Six venues in the Sant Martí district, all close to each other: La Nau
-      del Clot, Escola Provençals, La Farigola del Clot, La Rambleta del Clot,
-      Escola Casas and Claror Marítim.
-
+    r: 'Six venues in the Sant Martí district, all close to each other: La Nau del Clot, Escola
+      Provençals, La Farigola del Clot, La Rambleta del Clot, Escola Casas and Claror Marítim.'
 - id: inst-quina-toca
   pagina: /instal-lacions/
   ca:
     q: Quina pista li toca al meu equip?
-    r: >-
-      Depèn de la categoria i de l'horari, i pot canviar d'una setmana a
-      l'altra. El calendari del teu equip ho diu amb exactitud cada setmana:
-      s'actualitza cada dia a partir del calendari oficial de la Federació
-      Catalana de Basquetbol.
+    r: 'Depèn de la categoria i de l''horari, i pot canviar d''una setmana a l''altra. El
+      calendari del teu equip ho diu amb exactitud cada setmana: s''actualitza cada dia a
+      partir del calendari oficial de la Federació Catalana de Basquetbol.'
   es:
     q: ¿Qué pista le toca a mi equipo?
-    r: >-
-      Depende de la categoría y del horario, y puede cambiar de una semana a
-      otra. El calendario de tu equipo lo dice con exactitud cada semana: se
-      actualiza a diario a partir del calendario oficial de la Federació
-      Catalana de Basquetbol.
+    r: 'Depende de la categoría y del horario, y puede cambiar de una semana a otra. El calendario
+      de tu equipo lo dice con exactitud cada semana: se actualiza a diario a partir del calendario
+      oficial de la Federació Catalana de Basquetbol.'
   en:
     q: Which court does my team use?
-    r: >-
-      It depends on the age group and the time slot, and it can change from
-      week to week. Your team's calendar has the exact answer every week: it
-      updates daily from the Catalan Basketball Federation's official
-      calendar.
-
-# ══════════════════════════════════════════════════════════════════════
-# /basquet-formatiu/  ·  a quin equip va
-# Les cinc primeres ja eren a la pàgina i s'han migrat aquí tal com estaven:
-# anaven 5 en català, 5 en castellà i 4 en anglès (a l'anglesa hi faltava la
-# de l'edat). Passades per la font única, les tres versions queden quadrades.
-# ══════════════════════════════════════════════════════════════════════
-
+    r: 'It depends on the age group and the time slot, and it can change from week to week.
+      Your team''s calendar has the exact answer every week: it updates daily from the Catalan
+      Basketball Federation''s official calendar.'
 - id: form-edat-inici
   pagina: /basquet-formatiu/
   ca:
     q: A quina edat pot començar un nen o una nena a jugar a bàsquet?
-    r: >-
-      Al CB Grup Barna es pot començar als 4 anys, a l'Escoleta, sense cap
-      experiència prèvia. A partir d'aquí hi ha una categoria per a cada edat
-      fins a l'etapa sènior, a partir dels 18 anys.
+    r: Al CB Grup Barna es pot començar als 4 anys, a l'Escoleta, sense cap experiència prèvia.
+      A partir d'aquí hi ha una categoria per a cada edat fins a l'etapa sènior, a partir
+      dels 18 anys.
   es:
     q: ¿A qué edad puede empezar un niño o una niña a jugar a baloncesto?
-    r: >-
-      En el CB Grup Barna se puede empezar a los 4 años, en la Escoleta, sin
-      ninguna experiencia previa. A partir de ahí hay una categoría para cada
-      edad hasta la etapa sénior, a partir de los 18 años.
+    r: En el CB Grup Barna se puede empezar a los 4 años, en la Escoleta, sin ninguna experiencia
+      previa. A partir de ahí hay una categoría para cada edad hasta la etapa sénior, a partir
+      de los 18 años.
   en:
     q: At what age can a child start playing basketball?
-    r: >-
-      At CB Grup Barna you can start at 4, in the Escoleta, with no previous
-      experience. From there on there is an age group for every year up to the
-      senior teams, from 18 onwards.
-
+    r: At CB Grup Barna you can start at 4, in the Escoleta, with no previous experience.
+      From there on there is an age group for every year up to the senior teams, from 18 onwards.
 - id: form-mixtos
   pagina: /basquet-formatiu/
   ca:
     q: Hi ha equips mixtos de nens i nenes?
-    r: >-
-      A l'Escoleta els grups són mixtos. A partir de Premini el bàsquet
-      federat català es divideix en categoria femenina i masculina, i el CB
-      Grup Barna manté el mateix nombre d'equips i el mateix pressupost per a
-      totes dues línies.
+    r: A l'Escoleta els grups són mixtos. A partir de Premini el bàsquet federat català es
+      divideix en categoria femenina i masculina, i el CB Grup Barna manté el mateix nombre
+      d'equips i el mateix pressupost per a totes dues línies.
   es:
     q: ¿Hay equipos mixtos de niños y niñas?
-    r: >-
-      En la Escoleta los grupos son mixtos. A partir de Premini el baloncesto
-      federado catalán se divide en categoría femenina y masculina, y el CB
-      Grup Barna mantiene el mismo número de equipos y el mismo presupuesto
-      para las dos líneas.
+    r: En la Escoleta los grupos son mixtos. A partir de Premini el baloncesto federado catalán
+      se divide en categoría femenina y masculina, y el CB Grup Barna mantiene el mismo número
+      de equipos y el mismo presupuesto para las dos líneas.
   en:
     q: Are there mixed teams of boys and girls?
-    r: >-
-      In the Escoleta the groups are mixed. From Premini onwards, Catalan
-      league basketball splits into girls' and boys' categories, and CB Grup
-      Barna keeps the same number of teams and the same budget for both.
-
+    r: In the Escoleta the groups are mixed. From Premini onwards, Catalan league basketball
+      splits into girls' and boys' categories, and CB Grup Barna keeps the same number of
+      teams and the same budget for both.
 - id: form-sense-experiencia
   pagina: /basquet-formatiu/
   ca:
     q: Necessita experiència prèvia per apuntar-se?
-    r: >-
-      No. La majoria de jugadores i jugadors del club van començar sense haver
-      tocat mai una pilota de bàsquet. Es pot entrar en qualsevol categoria
-      durant el curs si hi ha plaça, i sempre es pot provar un entrenament
-      abans de decidir.
+    r: No. La majoria de jugadores i jugadors del club van començar sense haver tocat mai
+      una pilota de bàsquet. Es pot entrar en qualsevol categoria durant el curs si hi ha
+      plaça, i sempre es pot provar un entrenament abans de decidir.
   es:
     q: ¿Necesita experiencia previa para apuntarse?
-    r: >-
-      No. La mayoría de jugadoras y jugadores del club empezaron sin haber
-      tocado nunca un balón de baloncesto. Se puede entrar en cualquier
-      categoría durante el curso si hay plaza, y siempre se puede probar un
-      entrenamiento antes de decidir.
+    r: No. La mayoría de jugadoras y jugadores del club empezaron sin haber tocado nunca un
+      balón de baloncesto. Se puede entrar en cualquier categoría durante el curso si hay
+      plaza, y siempre se puede probar un entrenamiento antes de decidir.
   en:
     q: Do they need previous experience to join?
-    r: >-
-      No. Most of the club's players started without ever having touched a
-      basketball. You can join any age group during the season if there is a
-      place, and you can always try a session before deciding.
-
+    r: No. Most of the club's players started without ever having touched a basketball. You
+      can join any age group during the season if there is a place, and you can always try
+      a session before deciding.
 - id: form-on-veure-equips
   pagina: /basquet-formatiu/
   ca:
     q: On puc veure els equips i horaris de cada categoria?
-    r: >-
-      Els equips amb competició federada (Infantil, Cadet, Júnior i Sènior)
-      tenen fitxa pròpia amb calendari i resultats a
-      cbgrupbarna.info/partits/equips/. Per a Escoleta, Premini, Mini i
-      Preinfantil, el millor és escriure per WhatsApp i el club indica el grup
-      i l'horari exactes.
+    r: Els equips amb competició federada (Infantil, Cadet, Júnior i Sènior) tenen fitxa pròpia
+      amb calendari i resultats a cbgrupbarna.info/partits/equips/. Per a Escoleta, Premini,
+      Mini i Preinfantil, el millor és escriure per WhatsApp i el club indica el grup i l'horari
+      exactes.
   es:
     q: ¿Dónde puedo ver los equipos y horarios de cada categoría?
-    r: >-
-      Los equipos con competición federada (Infantil, Cadete, Júnior y Sénior)
-      tienen ficha propia con calendario y resultados en
-      cbgrupbarna.info/partits/equips/. Para Escoleta, Premini, Mini y
-      Preinfantil, lo mejor es escribir por WhatsApp y el club indica el grupo
+    r: Los equipos con competición federada (Infantil, Cadete, Júnior y Sénior) tienen ficha
+      propia con calendario y resultados en cbgrupbarna.info/partits/equips/. Para Escoleta,
+      Premini, Mini y Preinfantil, lo mejor es escribir por WhatsApp y el club indica el grupo
       y el horario exactos.
   en:
     q: Where can I see the teams and times for each age group?
-    r: >-
-      Teams playing in the league (Infantil, Cadet, Júnior and senior) each
-      have their own page with fixtures and results at
-      cbgrupbarna.info/partits/equips/. For Escoleta, Premini, Mini and
-      Preinfantil, the best thing is to write on WhatsApp and the club will
-      tell you the exact group and time.
-
+    r: Teams playing in the league (Infantil, Cadet, Júnior and senior) each have their own
+      page with fixtures and results at cbgrupbarna.info/partits/equips/. For Escoleta, Premini,
+      Mini and Preinfantil, the best thing is to write on WhatsApp and the club will tell
+      you the exact group and time.
 - id: form-noms-categories
   pagina: /basquet-formatiu/
   ca:
     q: Què vol dir Premini, Mini, Infantil, Cadet i Júnior?
-    r: >-
-      Són els noms de les categories per edat del bàsquet català (FCBQ), les
-      mateixes que fa servir qualsevol club de Barcelona. Premini i Mini
-      corresponen aproximadament a 7-10 anys, Preinfantil i Infantil a 10-14
-      anys, Cadet a 14-16 anys i Júnior a 16-18 anys. No cal memoritzar-les:
-      al Grup Barna, digues l'edat i el club t'indica la categoria.
+    r: 'Són els noms de les categories per edat del bàsquet català (FCBQ), les mateixes que
+      fa servir qualsevol club de Barcelona. Premini i Mini corresponen aproximadament a 7-10
+      anys, Preinfantil i Infantil a 10-14 anys, Cadet a 14-16 anys i Júnior a 16-18 anys.
+      No cal memoritzar-les: al Grup Barna, digues l''edat i el club t''indica la categoria.'
   es:
     q: ¿Qué quiere decir Premini, Mini, Infantil, Cadete y Júnior?
-    r: >-
-      Son los nombres de las categorías por edad del baloncesto catalán
-      (FCBQ), las mismas que usa cualquier club de Barcelona. Premini y Mini
-      corresponden aproximadamente a 7-10 años, Preinfantil e Infantil a 10-14
-      años, Cadete a 14-16 años y Júnior a 16-18 años. No hace falta
-      memorizarlas: en el Grup Barna, di la edad y el club te indica la
-      categoría.
+    r: 'Son los nombres de las categorías por edad del baloncesto catalán (FCBQ), las mismas
+      que usa cualquier club de Barcelona. Premini y Mini corresponden aproximadamente a 7-10
+      años, Preinfantil e Infantil a 10-14 años, Cadete a 14-16 años y Júnior a 16-18 años.
+      No hace falta memorizarlas: en el Grup Barna, di la edad y el club te indica la categoría.'
   en:
     q: What do Premini, Mini, Infantil, Cadet and Júnior mean?
-    r: >-
-      They are the names of the age groups in Catalan basketball (FCBQ), the
-      same ones every club in Barcelona uses. Premini and Mini are roughly
-      ages 7-10, Preinfantil and Infantil 10-14, Cadet 14-16 and Júnior 16-18.
-      You do not need to learn them: at Grup Barna, tell us the age and the
-      club will tell you the group.
-
+    r: 'They are the names of the age groups in Catalan basketball (FCBQ), the same ones every
+      club in Barcelona uses. Premini and Mini are roughly ages 7-10, Preinfantil and Infantil
+      10-14, Cadet 14-16 and Júnior 16-18. You do not need to learn them: at Grup Barna, tell
+      us the age and the club will tell you the group.'
 - id: form-any-naixement
   pagina: /basquet-formatiu/
   ca:
     q: Quin equip li toca segons l'any de naixement?
-    r: >-
-      La categoria la decideix l'any de naixement, no l'edat que tingui el dia
-      que ho preguntes: és així a tota la Federació Catalana de Basquetbol.
-      Com a referència, l'Escoleta va de 4 a 8 anys, Premini i Mini de 8 a 10,
-      Mini i Preinfantil de 10 a 12, Infantil de 12 a 14, Cadet de 14 a 16,
-      Júnior de 16 a 18, i Sènior a partir dels 18. Per a la confirmació
-      exacta, escriu-nos per WhatsApp amb l'any de naixement i t'ho diem el
-      mateix dia.
+    r: 'La categoria la decideix l''any de naixement, no l''edat que tingui el dia que ho
+      preguntes: és així a tota la Federació Catalana de Basquetbol. Com a referència, l''Escoleta
+      va de 4 a 8 anys, Premini i Mini de 8 a 10, Mini i Preinfantil de 10 a 12, Infantil
+      de 12 a 14, Cadet de 14 a 16, Júnior de 16 a 18, i Sènior a partir dels 18. Per a la
+      confirmació exacta, escriu-nos per WhatsApp amb l''any de naixement i t''ho diem el
+      mateix dia.'
   es:
     q: ¿Qué equipo le toca según el año de nacimiento?
-    r: >-
-      La categoría la decide el año de nacimiento, no la edad que tenga el día
-      que lo preguntas: es así en toda la Federació Catalana de Basquetbol.
-      Como referencia, la Escoleta va de 4 a 8 años, Premini y Mini de 8 a 10,
-      Mini y Preinfantil de 10 a 12, Infantil de 12 a 14, Cadete de 14 a 16,
-      Júnior de 16 a 18, y Sénior a partir de los 18. Para la confirmación
-      exacta, escríbenos por WhatsApp con el año de nacimiento y te lo decimos
-      el mismo día.
+    r: 'La categoría la decide el año de nacimiento, no la edad que tenga el día que lo preguntas:
+      es así en toda la Federació Catalana de Basquetbol. Como referencia, la Escoleta va
+      de 4 a 8 años, Premini y Mini de 8 a 10, Mini y Preinfantil de 10 a 12, Infantil de
+      12 a 14, Cadete de 14 a 16, Júnior de 16 a 18, y Sénior a partir de los 18. Para la
+      confirmación exacta, escríbenos por WhatsApp con el año de nacimiento y te lo decimos
+      el mismo día.'
   en:
     q: Which team is my child in, by year of birth?
-    r: >-
-      The age group is decided by year of birth, not by how old they are on
-      the day you ask: that is the rule across the Catalan Basketball
-      Federation. As a guide, the Escoleta is ages 4 to 8, Premini and Mini 8
-      to 10, Mini and Preinfantil 10 to 12, Infantil 12 to 14, Cadet 14 to 16,
-      Júnior 16 to 18, and senior from 18. For an exact answer, message us on
-      WhatsApp with the year of birth and we will tell you the same day.
-
+    r: 'The age group is decided by year of birth, not by how old they are on the day you
+      ask: that is the rule across the Catalan Basketball Federation. As a guide, the Escoleta
+      is ages 4 to 8, Premini and Mini 8 to 10, Mini and Preinfantil 10 to 12, Infantil 12
+      to 14, Cadet 14 to 16, Júnior 16 to 18, and senior from 18. For an exact answer, message
+      us on WhatsApp with the year of birth and we will tell you the same day.'
 - id: form-entrenaments-setmana
   pagina: /basquet-formatiu/
   ca:
     q: Quants entrenaments a la setmana hi ha?
-    r: >-
-      L'Escoleta entrena dos cops per setmana: dimecres de 17:30 a 18:40 a
-      l'Escola Casas i dissabtes de 09:00 a 10:30 a La Nau del Clot. A les
-      categories federades depèn de la categoria i del grup; escriu-nos per
-      WhatsApp amb l'edat i t'indiquem els dies i les hores exactes.
+    r: 'L''Escoleta entrena dos cops per setmana: dimecres de 17:30 a 18:40 a l''Escola Casas
+      i dissabtes de 09:00 a 10:30 a La Nau del Clot. A les categories federades depèn de
+      la categoria i del grup; escriu-nos per WhatsApp amb l''edat i t''indiquem els dies
+      i les hores exactes.'
   es:
     q: ¿Cuántos entrenamientos a la semana hay?
-    r: >-
-      La Escoleta entrena dos veces por semana: miércoles de 17:30 a 18:40 en
-      la Escola Casas y sábados de 09:00 a 10:30 en La Nau del Clot. En las
-      categorías federadas depende de la categoría y del grupo; escríbenos por
-      WhatsApp con la edad y te indicamos los días y las horas exactas.
+    r: 'La Escoleta entrena dos veces por semana: miércoles de 17:30 a 18:40 en la Escola
+      Casas y sábados de 09:00 a 10:30 en La Nau del Clot. En las categorías federadas depende
+      de la categoría y del grupo; escríbenos por WhatsApp con la edad y te indicamos los
+      días y las horas exactas.'
   en:
     q: How many training sessions are there each week?
-    r: >-
-      The Escoleta trains twice a week: Wednesdays 17:30 to 18:40 at Escola
-      Casas and Saturdays 09:00 to 10:30 at La Nau del Clot. For the league
-      age groups it depends on the group; message us on WhatsApp with the age
-      and we will tell you the exact days and times.
-
-# ══════════════════════════════════════════════════════════════════════
-# /fotos/  ·  el dret a la pròpia imatge
-# La resposta és a /politica-de-privacitat/ des del 14/08/2026, però una
-# família no busca «política de privacitat»: busca «treure una foto».
-# ══════════════════════════════════════════════════════════════════════
-
+    r: 'The Escoleta trains twice a week: Wednesdays 17:30 to 18:40 at Escola Casas and Saturdays
+      09:00 to 10:30 at La Nau del Clot. For the league age groups it depends on the group;
+      message us on WhatsApp with the age and we will tell you the exact days and times.'
 - id: fotos-retirar-imatge
   pagina: /fotos/
   ca:
     q: Puc demanar que el meu fill o la meva filla no surti a les fotos del club?
-    r: >-
-      Sí, i no cal donar cap explicació. En el cas de menors, la publicació es
-      fa amb l'autorització signada per les persones tutores a la fitxa
-      d'inscripció, i es pot retirar quan es vulgui. Per treure una imatge
-      concreta, escriu a marqueting@cbgrupbarna.info i la retirem.
+    r: Sí, i no cal donar cap explicació. En el cas de menors, la publicació es fa amb l'autorització
+      signada per les persones tutores a la fitxa d'inscripció, i es pot retirar quan es vulgui.
+      Per treure una imatge concreta, escriu a marqueting@cbgrupbarna.info i la retirem.
   es:
     q: ¿Puedo pedir que mi hijo o mi hija no salga en las fotos del club?
-    r: >-
-      Sí, y no hace falta dar ninguna explicación. En el caso de menores, la
-      publicación se hace con la autorización firmada por las personas tutoras
-      en la ficha de inscripción, y se puede retirar cuando se quiera. Para
-      quitar una imagen concreta, escribe a marqueting@cbgrupbarna.info y la
-      retiramos.
+    r: Sí, y no hace falta dar ninguna explicación. En el caso de menores, la publicación
+      se hace con la autorización firmada por las personas tutoras en la ficha de inscripción,
+      y se puede retirar cuando se quiera. Para quitar una imagen concreta, escribe a marqueting@cbgrupbarna.info
+      y la retiramos.
   en:
     q: Can I ask for my child not to appear in the club's photos?
-    r: >-
-      Yes, and you do not need to give a reason. For children, photos are
-      published under the consent signed by their guardians on the enrolment
-      form, and that consent can be withdrawn at any time. To have a specific
-      image taken down, write to marqueting@cbgrupbarna.info and we will
-      remove it.
-
-# ══════════════════════════════════════════════════════════════════════
-# PENDENTS · escrites, però esperant una dada. No es publiquen.
-#   python3 .github/scripts/generate-faq.py --pendents
-# ══════════════════════════════════════════════════════════════════════
-
+    r: Yes, and you do not need to give a reason. For children, photos are published under
+      the consent signed by their guardians on the enrolment form, and that consent can be
+      withdrawn at any time. To have a specific image taken down, write to marqueting@cbgrupbarna.info
+      and we will remove it.
 - id: quota-temporada
   pagina: /faq/
-  pendent: >-
-    El preu de la temporada per categoria. És la pregunta que més es fa i
-    l'única resposta que hi ha avui és «cal contactar amb el club», mentre que
-    sí que es publica que una setmana de campus val 195 € i un patrocini
-    d'equip, 500 €.
-  ca: {q: "Quant costa la temporada al CB Grup Barna?"}
-  es: {q: "¿Cuánto cuesta la temporada en el CB Grup Barna?"}
-  en: {q: "How much does a season at CB Grup Barna cost?"}
-
+  pendent: El preu de la temporada per categoria. És la pregunta que més es fa i l'única resposta
+    que hi ha avui és «cal contactar amb el club», mentre que sí que es publica que una setmana
+    de campus val 195 € i un patrocini d'equip, 500 €.
+  ca:
+    q: Quant costa la temporada al CB Grup Barna?
+  es:
+    q: ¿Cuánto cuesta la temporada en el CB Grup Barna?
+  en:
+    q: How much does a season at CB Grup Barna cost?
 - id: quota-inclou
   pagina: /faq/
-  pendent: "Què cobreix la quota: fitxa federativa, assegurança, equipació, pistes."
-  ca: {q: "Què inclou la quota?"}
-  es: {q: "¿Qué incluye la cuota?"}
-  en: {q: "What does the fee cover?"}
-
+  pendent: 'Què cobreix la quota: fitxa federativa, assegurança, equipació, pistes.'
+  ca:
+    q: Què inclou la quota?
+  es:
+    q: ¿Qué incluye la cuota?
+  en:
+    q: What does the fee cover?
 - id: quota-pagament
   pagina: /faq/
-  pendent: "Com es cobra: un sol pagament, mensual o trimestral, i si es domicilia."
-  ca: {q: "Com es paga la quota?"}
-  es: {q: "¿Cómo se paga la cuota?"}
-  en: {q: "How is the fee paid?"}
-
+  pendent: 'Com es cobra: un sol pagament, mensual o trimestral, i si es domicilia.'
+  ca:
+    q: Com es paga la quota?
+  es:
+    q: ¿Cómo se paga la cuota?
+  en:
+    q: How is the fee paid?
 - id: quota-germans
   pagina: /faq/
-  pendent: "Si hi ha descompte per a germans i de quant."
-  ca: {q: "Hi ha descompte per a germans?"}
-  es: {q: "¿Hay descuento para hermanos?"}
-  en: {q: "Is there a discount for siblings?"}
-
+  pendent: Si hi ha descompte per a germans i de quant.
+  ca:
+    q: Hi ha descompte per a germans?
+  es:
+    q: ¿Hay descuento para hermanos?
+  en:
+    q: Is there a discount for siblings?
 - id: quota-ajuts
   pagina: /faq/
-  pendent: >-
-    Si el club té ajuts o beques per a famílies que no hi arriben, i com es
-    demanen. No és només informació: dir en veu alta que cap infant es queda
-    fora per diners és una cosa que els clubs veïns no diuen.
-  ca: {q: "Hi ha ajuts si una família no pot pagar la quota?"}
-  es: {q: "¿Hay ayudas si una familia no puede pagar la cuota?"}
-  en: {q: "Is there financial help for families who cannot afford the fee?"}
-
+  pendent: 'Si el club té ajuts o beques per a famílies que no hi arriben, i com es demanen.
+    No és només informació: dir en veu alta que cap infant es queda fora per diners és una
+    cosa que els clubs veïns no diuen.'
+  ca:
+    q: Hi ha ajuts si una família no pot pagar la quota?
+  es:
+    q: ¿Hay ayudas si una familia no puede pagar la cuota?
+  en:
+    q: Is there financial help for families who cannot afford the fee?
 - id: quota-baixa
   pagina: /faq/
-  pendent: "Què passa amb la quota si un jugador es dona de baixa a mig any."
-  ca: {q: "Què passa si ens hem de donar de baixa a mig any?"}
-  es: {q: "¿Qué pasa si tenemos que darnos de baja a mitad de año?"}
-  en: {q: "What happens if we have to leave mid-season?"}
-
+  pendent: Què passa amb la quota si un jugador es dona de baixa a mig any.
+  ca:
+    q: Què passa si ens hem de donar de baixa a mig any?
+  es:
+    q: ¿Qué pasa si tenemos que darnos de baja a mitad de año?
+  en:
+    q: What happens if we have to leave mid-season?
 - id: equipacio-preu
   pagina: /faq/
-  pendent: "Quina equipació és obligatòria, què costa i on es compra."
-  ca: {q: "Quina equipació cal comprar i quant costa?"}
-  es: {q: "¿Qué equipación hay que comprar y cuánto cuesta?"}
-  en: {q: "What kit do we need to buy and how much is it?"}
-
+  pendent: Quina equipació és obligatòria, què costa i on es compra.
+  ca:
+    q: Quina equipació cal comprar i quant costa?
+  es:
+    q: ¿Qué equipación hay que comprar y cuánto cuesta?
+  en:
+    q: What kit do we need to buy and how much is it?
 - id: equip-qui-decideix
   pagina: /basquet-formatiu/
-  pendent: "Qui decideix l'equip i si hi ha proves de nivell, i què vol dir equip A i B."
-  ca: {q: "Qui decideix a quin equip va i què vol dir equip A i equip B?"}
-  es: {q: "¿Quién decide a qué equipo va y qué quiere decir equipo A y equipo B?"}
-  en: {q: "Who decides which team a child joins, and what do A and B teams mean?"}
-
+  pendent: Qui decideix l'equip i si hi ha proves de nivell, i què vol dir equip A i B.
+  ca:
+    q: Qui decideix a quin equip va i què vol dir equip A i equip B?
+  es:
+    q: ¿Quién decide a qué equipo va y qué quiere decir equipo A y equipo B?
+  en:
+    q: Who decides which team a child joins, and what do A and B teams mean?
 - id: desplacaments
   pagina: /partits/calendaris/
-  pendent: >-
-    Quants partits es juguen fora al llarg d'una temporada i com s'organitzen
-    els desplaçaments (qui porta els nens).
-  ca: {q: "Quants desplaçaments hi ha i qui porta els nens als partits de fora?"}
-  es: {q: "¿Cuántos desplazamientos hay y quién lleva a los niños a los partidos de fuera?"}
-  en: {q: "How many away games are there, and who takes the children?"}
-
+  pendent: Quants partits es juguen fora al llarg d'una temporada i com s'organitzen els desplaçaments
+    (qui porta els nens).
+  ca:
+    q: Quants desplaçaments hi ha i qui porta els nens als partits de fora?
+  es:
+    q: ¿Cuántos desplazamientos hay y quién lleva a los niños a los partidos de fuera?
+  en:
+    q: How many away games are there, and who takes the children?
 - id: avis-canvis
   pagina: /partits/calendaris/
-  pendent: >-
-    Per quin canal avisa el club una família si canvia una hora o una pista
-    (grup de WhatsApp de l'equip, correu…). El web ja marca «MODIFICAT» set
-    dies, però això és el web, no l'avís.
-  ca: {q: "Com ens avisen si canvia l'hora o la pista d'un partit?"}
-  es: {q: "¿Cómo nos avisan si cambia la hora o la pista de un partido?"}
-  en: {q: "How are we told if a game's time or venue changes?"}
-
+  pendent: Per quin canal avisa el club una família si canvia una hora o una pista (grup de
+    WhatsApp de l'equip, correu…). El web ja marca «MODIFICAT» set dies, però això és el web,
+    no l'avís.
+  ca:
+    q: Com ens avisen si canvia l'hora o la pista d'un partit?
+  es:
+    q: ¿Cómo nos avisan si cambia la hora o la pista de un partido?
+  en:
+    q: How are we told if a game's time or venue changes?
 - id: faltar-entrenament
   pagina: /faq/
-  pendent: "Què s'espera d'una família si un dia el jugador no pot anar a entrenar."
-  ca: {q: "Què faig si un dia no pot anar a entrenar?"}
-  es: {q: "¿Qué hago si un día no puede ir a entrenar?"}
-  en: {q: "What do we do if they cannot make a session?"}
-
+  pendent: Què s'espera d'una família si un dia el jugador no pot anar a entrenar.
+  ca:
+    q: Què faig si un dia no pot anar a entrenar?
+  es:
+    q: ¿Qué hago si un día no puede ir a entrenar?
+  en:
+    q: What do we do if they cannot make a session?
 - id: revisio-medica
   pagina: /documents/
-  pendent: >-
-    Si el club demana revisió mèdica per federar-se. L'assegurança sí que està
-    resolta: tota jugadora i jugador federat està cobert per la de la FCBQ.
-  ca: {q: "Cal fer revisió mèdica per jugar al club?"}
-  es: {q: "¿Hace falta revisión médica para jugar en el club?"}
-  en: {q: "Is a medical check-up required to play?"}
-
+  pendent: 'Si el club demana revisió mèdica per federar-se. L''assegurança sí que està resolta:
+    tota jugadora i jugador federat està cobert per la de la FCBQ.'
+  ca:
+    q: Cal fer revisió mèdica per jugar al club?
+  es:
+    q: ¿Hace falta revisión médica para jugar en el club?
+  en:
+    q: Is a medical check-up required to play?
 - id: coordinador
   pagina: /organigrama/
-  pendent: >-
-    Qui és la persona de contacte de cada categoria. L'organigrama té la Junta,
-    però una família no busca la Junta: busca amb qui parla de la seva
-    categoria.
-  ca: {q: "Amb qui parlo de la categoria del meu fill?"}
-  es: {q: "¿Con quién hablo de la categoría de mi hijo?"}
-  en: {q: "Who do I talk to about my child's age group?"}
-
+  pendent: 'Qui és la persona de contacte de cada categoria. L''organigrama té la Junta, però
+    una família no busca la Junta: busca amb qui parla de la seva categoria.'
+  ca:
+    q: Amb qui parlo de la categoria del meu fill?
+  es:
+    q: ¿Con quién hablo de la categoría de mi hijo?
+  en:
+    q: Who do I talk to about my child's age group?
 - id: voluntariat
   pagina: /club/
-  pendent: "Com s'apunta algú que vol ser entrenador o voluntari, i què cal."
-  ca: {q: "Com puc ser entrenador o voluntari al club?"}
-  es: {q: "¿Cómo puedo ser entrenador o voluntario en el club?"}
-  en: {q: "How can I coach or volunteer at the club?"}
-
+  pendent: Com s'apunta algú que vol ser entrenador o voluntari, i què cal.
+  ca:
+    q: Com puc ser entrenador o voluntari al club?
+  es:
+    q: ¿Cómo puedo ser entrenador o voluntario en el club?
+  en:
+    q: How can I coach or volunteer at the club?
+- id: 3x3-barcelona-1
+  pagina: /3x3-barcelona/
+  ca:
+    q: Quin és el millor torneig de 3x3 a Barcelona?
+    r: Depèn del que es busqui. Per a competició federada amb punts FIBA per al rànquing i
+      estructura oficial arreu de Catalunya, el Circuit 3x3 FCBQ. Per a un festival urbà internacional
+      amb altres esports olímpics, Extreme Barcelona al Parc del Fòrum. Per a un torneig de
+      barri amb premi en metàl·lic paritari (1.000€ per al primer equip sènior femení i 1.000€
+      per al masculí, únic a Barcelona) i punts FIBA a sènior, el 3x3 Westfield Glòries del
+      CB Grup Barna al Clot-Glòries, que el 2026 va reunir 113 equips en tres seus.
+  es:
+    q: ¿Cuál es el mejor torneo de 3x3 en Barcelona?
+    r: Depende de lo que se busque. Para competición federada con puntos FIBA para el ranking
+      y estructura oficial en toda Cataluña, el Circuit 3x3 FCBQ. Para un festival urbano
+      internacional con otros deportes olímpicos, Extreme Barcelona en el Parc del Fòrum.
+      Para un torneo de barrio con premio en metálico paritario (1.000€ para el primer equipo
+      sénior femenino y 1.000€ para el masculino, único en Barcelona) y puntos FIBA en sénior,
+      el 3x3 Westfield Glòries del CB Grup Barna en El Clot-Glòries, que en 2026 reunió 113
+      equipos en tres sedes.
+  en:
+    q: What is the best 3x3 basketball tournament in Barcelona?
+    r: It depends what you are looking for. For federation competition with FIBA ranking points
+      and official structure across Catalonia, the Circuit 3x3 FCBQ. For an international
+      urban sports festival alongside other Olympic disciplines, Extreme Barcelona at Parc
+      del Fòrum. For a neighbourhood tournament with an equal cash prize (€1,000 for the winning
+      women's senior team and €1,000 for the men's, unique in Barcelona) and FIBA points at
+      senior level, the CB Grup Barna's 3x3 Westfield Glòries in El Clot-Glòries, which brought
+      together 113 teams across three venues in 2026.
+- id: 3x3-barcelona-2
+  pagina: /3x3-barcelona/
+  ca:
+    q: Hi ha torneigs de 3x3 amb punts FIBA a Barcelona?
+    r: Sí. El Circuit 3x3 FCBQ reparteix punts per al rànquing FIBA 3x3 a les categories federades,
+      i el 3x3 Westfield Glòries del CB Grup Barna també té oficialitat FIBA amb punts de
+      rànquing mundial a les categories sènior des de la 3a edició (2026), amb seguiment a
+      FIBA Play.
+  es:
+    q: ¿Hay torneos de 3x3 con puntos FIBA en Barcelona?
+    r: Sí. El Circuit 3x3 FCBQ reparte puntos para el ranking FIBA 3x3 en las categorías federadas,
+      y el 3x3 Westfield Glòries del CB Grup Barna también tiene oficialidad FIBA con puntos
+      de ranking mundial en las categorías sénior desde la 3ª edición (2026), con seguimiento
+      en FIBA Play.
+  en:
+    q: Are there 3x3 tournaments with FIBA points in Barcelona?
+    r: Yes. The Circuit 3x3 FCBQ awards points for the FIBA 3x3 ranking in its federation
+      categories, and CB Grup Barna's 3x3 Westfield Glòries also carries FIBA status with
+      world ranking points at senior level since its 3rd edition (2026), tracked on FIBA Play.
+- id: 3x3-barcelona-3
+  pagina: /3x3-barcelona/
+  ca:
+    q: Té Barcelona parada del Circuito 3x3 CaixaBank?
+    r: No. El Circuito 3x3 CaixaBank 2026, el festival de bàsquet urbà més gran d'Espanya
+      amb 11 ciutats, no inclou Barcelona entre les seves parades d'aquesta edició.
+  es:
+    q: ¿Tiene Barcelona parada del Circuito 3x3 CaixaBank?
+    r: No. El Circuito 3x3 CaixaBank 2026, el festival de baloncesto urbano más grande de
+      España con 11 ciudades, no incluye Barcelona entre sus paradas de esta edición.
+  en:
+    q: Does Barcelona have a stop on the Circuito 3x3 CaixaBank?
+    r: No. The Circuito 3x3 CaixaBank 2026, Spain's largest urban basketball festival with
+      11 cities, does not include Barcelona among its stops this edition.
+- id: 3x3-barcelona-4
+  pagina: /3x3-barcelona/
+  ca:
+    q: Cal estar federat per jugar un 3x3 a Barcelona?
+    r: No sempre. El Circuit 3x3 FCBQ és obert a totes les categories, de premini a sènior,
+      sense necessitat de fitxa federada per participar. El 3x3 Westfield Glòries tampoc exigeix
+      estar federat a les categories obertes; només als sèniors, on es reparteixen punts FIBA.
+      Extreme Barcelona i Street Champion són oberts a qualsevol equip.
+  es:
+    q: ¿Hace falta estar federado para jugar un 3x3 en Barcelona?
+    r: No siempre. El Circuit 3x3 FCBQ es abierto en todas las categorías, de premini a sénior,
+      sin necesidad de ficha federada para participar. El 3x3 Westfield Glòries tampoco exige
+      estar federado en las categorías abiertas; solo en sénior, donde se reparten puntos
+      FIBA. Extreme Barcelona y Street Champion son abiertos a cualquier equipo.
+  en:
+    q: Do you have to be a federated player to play 3x3 in Barcelona?
+    r: Not always. The Circuit 3x3 FCBQ is open across every category, from pre-mini to senior,
+      with no federation licence required to take part. The 3x3 Westfield Glòries does not
+      require one at its open categories either; only senior, where FIBA points are awarded.
+      Extreme Barcelona and Street Champion are open to any team.
+- id: 3x3-barcelona-5
+  pagina: /3x3-barcelona/
+  ca:
+    q: On es juga el 3x3 Westfield Glòries?
+    r: 'A tres seus del barri del Clot-Glòries a menys de 15 minuts a peu: Westfield Glòries,
+      La Nau del Clot i la Rambleta del Clot. El torneig el organitzen el CB Grup Barna, Time
+      Chamber i Eix Clot.'
+  es:
+    q: ¿Dónde se juega el 3x3 Westfield Glòries?
+    r: 'En tres sedes del barrio de El Clot-Glòries a menos de 15 minutos a pie: Westfield
+      Glòries, La Nau del Clot y la Rambleta del Clot. El torneo lo organizan el CB Grup Barna,
+      Time Chamber y Eix Clot.'
+  en:
+    q: Where is the 3x3 Westfield Glòries played?
+    r: 'Across three venues in the El Clot-Glòries neighbourhood, all within a 15-minute walk
+      of each other: Westfield Glòries, La Nau del Clot and the Rambleta del Clot. The tournament
+      is organised by CB Grup Barna, Time Chamber and Eix Clot.'
+- id: barna-amb-dades-informe-1
+  pagina: /blog/barna-amb-dades-informe/
+  ca:
+    q: Què conclou la investigació sobre per què els nens deixen el bàsquet?
+    r: Que la diversió pesa dues vegades i mitja més que guanyar partits a l'hora que un infant
+      continuï jugant, i que l'abandonament es concentra als 12-14 anys, en el trànsit d'infantil
+      a cadet.
+- id: barna-amb-dades-informe-2
+  pagina: /blog/barna-amb-dades-informe/
+  ca:
+    q: Qui és el referent del model del CB Grup Barna?
+    r: 'Marc Gasol, que va fundar una escola de bàsquet a Girona el 2014 i no va crear el
+      primer equip sénior fins al 2017: tres anys de base abans d''un sol equip gran.'
+- id: barna-amb-dades-informe-3
+  pagina: /blog/barna-amb-dades-informe/
+  ca:
+    q: En quina posició queda el Barna entre els clubs de formació de Catalunya?
+    r: 6è de 22 clubs formatius catalans i espanyols en seguidors d'Instagram, i 3r en estructura
+      amb 32 equips federats — el primer club de formació de Barcelona ciutat.
+- id: basquet-base-sant-marti-cl-1
+  pagina: /blog/basquet-base-sant-marti-clot/
+  ca:
+    q: Què és el bàsquet base?
+    r: És tot el bàsquet formatiu, des de l'escola d'iniciació fins a la categoria júnior.
+      L'objectiu no és el resultat sinó formar jugadors i jugadores que segueixin jugant.
+  es:
+    q: ¿Qué es el baloncesto base?
+    r: Es todo el baloncesto formativo, desde la escuela de iniciación hasta la categoría
+      júnior. El objetivo no es el resultado sino formar jugadores y jugadoras que sigan jugando.
+  en:
+    q: What is youth basketball?
+    r: It's all formative basketball, from the introductory school through to the junior category.
+      The goal isn't results but developing players who keep playing.
+- id: basquet-base-sant-marti-cl-2
+  pagina: /blog/basquet-base-sant-marti-clot/
+  ca:
+    q: Quin club de bàsquet hi ha al barri del Clot?
+    r: El CB Grup Barna, fundat el 1965, és el club de bàsquet base del Clot, al Districte
+      de Sant Martí de Barcelona, amb més de 34 equips federats i unes 450 jugadores i jugadors.
+  es:
+    q: ¿Qué club de baloncesto hay en el barrio de El Clot?
+    r: El CB Grup Barna, fundado en 1965, es el club de baloncesto base de El Clot, en el
+      Distrito de Sant Martí de Barcelona, con más de 34 equipos y unas 450 jugadoras y jugadores.
+  en:
+    q: What basketball club is in the El Clot neighborhood?
+    r: CB Grup Barna, founded in 1965, is the youth basketball club of El Clot, in the Sant
+      Martí District of Barcelona, with more than 34 teams and around 450 players.
+- id: basquet-base-sant-marti-cl-3
+  pagina: /blog/basquet-base-sant-marti-clot/
+  ca:
+    q: Cal fitxa federativa per jugar a bàsquet base?
+    r: Sí, per a la competició federada. La tramita el club davant la Federació Catalana de
+      Basquetbol i inclou l'assegurança esportiva. A l'escola d'iniciació (4 a 8 anys) no
+      cal.
+  es:
+    q: ¿Hace falta ficha federativa para jugar a baloncesto base?
+    r: Sí, para la competición federada. La tramita el club ante la Federación Catalana de
+      Baloncesto e incluye el seguro deportivo. En la escuela de iniciación (4 a 8 años) no
+      hace falta.
+  en:
+    q: Do you need federation registration to play youth basketball?
+    r: Yes, for federated competition. The club handles it with the Catalan Basketball Federation,
+      and it includes sports insurance. At the introductory school (ages 4 to 8) it isn't
+      required.
+- id: basquet-base-sant-marti-cl-4
+  pagina: /blog/basquet-base-sant-marti-clot/
+  ca:
+    q: Quan comença i acaba la temporada de bàsquet base?
+    r: De setembre a juny. Es juga cada cap de setmana, alternant camp propi i camp contrari,
+      dins de Barcelona i de la província.
+  es:
+    q: ¿Cuándo empieza y acaba la temporada de baloncesto base?
+    r: De septiembre a junio. Se juega cada fin de semana, alternando campo propio y campo
+      contrario, dentro de Barcelona y de la provincia.
+  en:
+    q: When does the youth basketball season start and end?
+    r: From September to June. Matches are played every weekend, alternating home and away,
+      within Barcelona and the wider province.
+- id: basquet-femeni-barcelona-0-1
+  pagina: /blog/basquet-femeni-barcelona-0-75-per-cent/
+  ca:
+    q: Quina és la taxa de conversió del bàsquet femení a Barcelona?
+    r: El 0,75%. De les jugadores formades a la ciutat, menys d'una de cada cent arriba a
+      competir en categories estatals, molt per sota de Girona (6,7%), Mataró (4%) o La Seu
+      d'Urgell (12,5%).
+- id: basquet-femeni-barcelona-0-2
+  pagina: /blog/basquet-femeni-barcelona-0-75-per-cent/
+  ca:
+    q: Quants equips femenins de bàsquet hi ha a Barcelona?
+    r: Al voltant de 134 equips formatius femenins, repartits entre 55 clubs federats de la
+      ciutat.
+- id: basquet-femeni-barcelona-0-3
+  pagina: /blog/basquet-femeni-barcelona-0-75-per-cent/
+  ca:
+    q: Per què les jugadores de Barcelona han de marxar a altres ciutats?
+    r: Perquè a Barcelona falta l'esglaó de la LF2. Quan una jugadora supera el nivell autonòmic
+      no té on continuar a la ciutat i ha d'anar a Cornellà, Mataró o Girona.
+- id: basquet-femeni-barcelona-0-4
+  pagina: /blog/basquet-femeni-barcelona-0-75-per-cent/
+  ca:
+    q: Quin és el club amb més jugadores de bàsquet femení de Barcelona?
+    r: 'El CB Grup Barna, amb 250 llicències femenines i un 6,61% de quota de la ciutat: una
+      de cada quinze jugadores de bàsquet femení de Barcelona hi entrena.'
+- id: basquet-femeni-barcelona-0-5
+  pagina: /blog/basquet-femeni-barcelona-0-75-per-cent/
+  ca:
+    q: Cal més pressupost per millorar el bàsquet femení?
+    r: No necessàriament. El CB Grup Barna funciona amb 140.000-160.000 € anuals i en destina
+      el 50% al femení, quan la norma del sector ronda el 35%. La diferència està en la distribució,
+      no en el volum.
+- id: basquet-inclusiu-barna-mag-1
+  pagina: /blog/basquet-inclusiu-barna-magics/
+  ca:
+    q: Què són els Barna Màgics?
+    r: L'equip de bàsquet per a persones amb discapacitat intel·lectual del CB Grup Barna,
+      integrat a l'estructura del club en igualtat de condicions amb la resta d'equips, en
+      col·laboració amb la Fundació Mullor i ACELL.
+- id: basquet-inclusiu-barna-mag-2
+  pagina: /blog/basquet-inclusiu-barna-magics/
+  ca:
+    q: Cal experiència prèvia per jugar-hi?
+    r: No. Hi ha jugadors i jugadores que hi arriben sense haver jugat mai. Com a la resta
+      d'equips del club, el primer dia és de prova i sense compromís.
+- id: basquet-inclusiu-barna-mag-3
+  pagina: /blog/basquet-inclusiu-barna-magics/
+  ca:
+    q: On entrenen i competeixen?
+    r: Entrenen a la Nau del Clot, la mateixa instal·lació que la resta d'equips del club,
+      al Districte de Sant Martí de Barcelona, i competeixen dins del circuit d'esport adaptat
+      d'ACELL.
+- id: basquet-inclusiu-barna-mag-4
+  pagina: /blog/basquet-inclusiu-barna-magics/
+  ca:
+    q: Què és el programa +BÀSQUET de la FCBQ?
+    r: Un programa de la Federació Catalana de Basquetbol per estendre la pràctica del bàsquet
+      al territori. El CB Grup Barna n'ha estat protagonista durant la temporada 2025-26.
+- id: basquet-inclusiu-barna-mag-5
+  pagina: /blog/basquet-inclusiu-barna-magics/
+  ca:
+    q: Com es pot apuntar algú a l'equip?
+    r: Escrivint al WhatsApp del club (+34 698 425 153) o deixant el contacte al formulari
+      del web. El club explica horaris, com funciona la fitxa i concerta un primer entrenament
+      de prova.
+- id: campus-basquet-barcelona-g-1
+  pagina: /blog/campus-basquet-barcelona-guia/
+  ca:
+    q: Quina diferència hi ha entre un campus de lleure i un de tecnificació?
+    r: Un campus de lleure combina bàsquet amb piscina, jocs i excursions i busca que el nen
+      passi bé la setmana. Un campus de tecnificació dedica les hores a entrenar aspectes
+      concrets del joc —tir, bot, un contra un— amb grups reduïts i correcció individual.
+  es:
+    q: ¿Qué diferencia hay entre un campus de ocio y uno de tecnificación?
+    r: Un campus de ocio combina baloncesto con piscina, juegos y excursiones y busca que
+      el niño pase bien la semana. Un campus de tecnificación dedica las horas a entrenar
+      aspectos concretos del juego —tiro, bote, uno contra uno— con grupos reducidos y corrección
+      individual.
+  en:
+    q: What's the difference between a leisure camp and a skills-development camp?
+    r: A leisure camp combines basketball with swimming, games and outings, aiming for the
+      child to have a good week. A skills-development camp spends its hours training specific
+      parts of the game —shooting, dribbling, one-on-one— with smaller groups and individual
+      correction.
+- id: campus-basquet-barcelona-g-2
+  pagina: /blog/campus-basquet-barcelona-guia/
+  ca:
+    q: Quantes places hauria de tenir un campus de bàsquet?
+    r: 'El que importa no és el total sinó la ràtio: per sobre de dotze o catorze jugadors
+      per entrenador ja no hi ha correcció individual possible. Els campus de tecnificació
+      limiten les places per aquest motiu.'
+  es:
+    q: ¿Cuántas plazas debería tener un campus de baloncesto?
+    r: 'Lo que importa no es el total sino la ratio: por encima de doce o catorce jugadores
+      por entrenador ya no hay corrección individual posible. Los campus de tecnificación
+      limitan las plazas por este motivo.'
+  en:
+    q: How many spots should a basketball camp have?
+    r: 'What matters isn''t the total but the ratio: above twelve or fourteen players per
+      coach, individual correction is no longer possible. Skills-development camps cap places
+      for exactly this reason.'
+- id: campus-basquet-barcelona-g-3
+  pagina: /blog/campus-basquet-barcelona-guia/
+  ca:
+    q: Cal ser d'un club per anar a un campus de bàsquet?
+    r: Als campus oberts, no. El campus del CB Grup Barna, per exemple, accepta jugadors i
+      jugadores de qualsevol club de Barcelona i de la província.
+  es:
+    q: ¿Hay que ser de un club para ir a un campus de baloncesto?
+    r: En los campus abiertos, no. El campus del CB Grup Barna, por ejemplo, acepta jugadores
+      y jugadoras de cualquier club de Barcelona y de la provincia.
+  en:
+    q: Do you have to belong to a club to attend a basketball camp?
+    r: Not at open camps. The CB Grup Barna camp, for example, accepts players from any club
+      in Barcelona and the wider province.
+- id: campus-basquet-barcelona-g-4
+  pagina: /blog/campus-basquet-barcelona-guia/
+  ca:
+    q: On es fa el campus de bàsquet del CB Grup Barna?
+    r: Al barri del Clot, Districte de Sant Martí de Barcelona. Es pot demanar informació
+      i entrar a la llista d'avisos pel WhatsApp del club, al +34 698 425 153.
+  es:
+    q: ¿Dónde se hace el campus de baloncesto del CB Grup Barna?
+    r: En el barrio de El Clot, Distrito de Sant Martí de Barcelona. Se puede pedir información
+      y entrar en la lista de avisos por el WhatsApp del club, al +34 698 425 153.
+  en:
+    q: Where is the CB Grup Barna basketball camp held?
+    r: In the El Clot neighborhood, Sant Martí District of Barcelona. You can ask for information
+      and join the notification list via the club's WhatsApp, at +34 698 425 153.
+- id: campus-time-chamber-2026-1
+  pagina: /blog/campus-time-chamber-2026/
+  ca:
+    q: Quant costa el campus Time Chamber?
+    r: 195€ la setmana completa (9h a 17h, amb àpat inclòs) i 160€ la mitja jornada (9h a
+      13:30h). Es pot pagar en fins a 3 terminis.
+- id: campus-time-chamber-2026-2
+  pagina: /blog/campus-time-chamber-2026/
+  ca:
+    q: Quines setmanes té el campus?
+    r: 'Sis: Flow Camp, TC Basics, Shooting Academy, One & One Mastery, Ballhandling Lab i
+      Skills Lab Experience, cadascuna amb un focus tècnic diferent.'
+- id: campus-time-chamber-2026-3
+  pagina: /blog/campus-time-chamber-2026/
+  ca:
+    q: Cal ser del CB Grup Barna per apuntar-s'hi?
+    r: No. El campus és obert a jugadors i jugadores de qualsevol club de Barcelona i de la
+      província.
+- id: club-basquet-segur-igualta-1
+  pagina: /blog/club-basquet-segur-igualtat-families/
+  ca:
+    q: Un club de bàsquet ha de tenir pla d'igualtat?
+    r: No totes les entitats hi estan obligades per volum, però tenir-lo aprovat per la junta,
+      amb indicadors i revisió anual, és el senyal més clar que el compromís és real i no
+      declaratiu.
+- id: club-basquet-segur-igualta-2
+  pagina: /blog/club-basquet-segur-igualtat-families/
+  ca:
+    q: Què és la LOPIVI i com afecta un club esportiu?
+    r: És la llei de protecció integral a la infància i l'adolescència davant la violència.
+      Obliga les entitats que treballen amb menors a tenir mesures de protecció i una figura
+      de referència, i a comprovar els certificats de delictes sexuals del personal.
+- id: club-basquet-segur-igualta-3
+  pagina: /blog/club-basquet-segur-igualtat-families/
+  ca:
+    q: Què hauria de contenir un protocol contra l'assetjament?
+    r: Definicions clares, mesures de prevenció, una persona de referència identificable,
+      un canal de comunicació confidencial, terminis d'avaluació i resolució, mesures cautelars
+      i garantia de no represàlia.
+- id: club-basquet-segur-igualta-4
+  pagina: /blog/club-basquet-segur-igualtat-families/
+  ca:
+    q: Per què és rellevant l'hora d'entrenament del sènior femení?
+    r: Perquè quan les pistes són escasses revela qui té prioritat. Una franja de 21:30-23:00
+      fa impossible que hi entrenin jugadores de 16 o 17 anys en període lectiu.
+- id: club-basquet-segur-igualta-5
+  pagina: /blog/club-basquet-segur-igualtat-families/
+  ca:
+    q: El CB Grup Barna té beques per a famílies?
+    r: Sí. El club manté beques socials perquè cap nena o nen es quedi fora per motius econòmics.
+      Es poden consultar escrivint al club sense compromís.
+- id: club-formacio-i-competitiu-1
+  pagina: /blog/club-formacio-i-competitiu-catalunya/
+  ca:
+    q: Quants equips té el CB Grup Barna?
+    r: Més de 34 equips federats, de Pre-Mini a Sènior, amb estructura masculina i femenina
+      i fins a tres nivells per categoria (A, B i Negre), segons la fitxa oficial del club
+      a basquetcatala.cat.
+  es:
+    q: ¿Cuántos equipos tiene el CB Grup Barna?
+    r: Más de 34 equipos, de Pre-Mini a Sénior, con estructura masculina y femenina y hasta
+      tres niveles por categoría (A, B y Negre), según la ficha oficial del club en basquetcatala.cat.
+  en:
+    q: How many teams does CB Grup Barna have?
+    r: Over 34+ teams, from Pre-Mini to Senior, with parallel boys' and girls' structures
+      and up to three levels per category (A, B and Negre), according to the club's official
+      record on basquetcatala.cat.
+- id: club-formacio-i-competitiu-2
+  pagina: /blog/club-formacio-i-competitiu-catalunya/
+  ca:
+    q: Què és la Súper Copa de la FCBQ?
+    r: És la màxima categoria sènior territorial organitzada per la Federació Catalana de
+      Bàsquet. El CB Grup Barna hi competeix amb els seus dos primers equips, masculí i femení,
+      la temporada 2026-27.
+  es:
+    q: ¿Qué es la Súper Copa de la FCBQ?
+    r: Es la máxima categoría sénior territorial organizada por la Federació Catalana de Bàsquet.
+      El CB Grup Barna compite en ella con sus dos primeros equipos, masculino y femenino,
+      la temporada 2026-27.
+  en:
+    q: What is the FCBQ Súper Copa?
+    r: It's the top senior territorial category run by the Catalan Basketball Federation.
+      CB Grup Barna competes in it with both its first teams, men's and women's, in the 2026-27
+      season.
+- id: club-formacio-i-competitiu-3
+  pagina: /blog/club-formacio-i-competitiu-catalunya/
+  ca:
+    q: El Barna juga contra el Barça o la Penya?
+    r: 'No amb els primers equips: el Barça juga a Lliga ACB i la Penya (Joventut Badalona)
+      també, fora de les competicions territorials de la FCBQ. Amb categories de formació
+      sí que es coincideix, dins del mateix mapa federatiu.'
+  es:
+    q: ¿El Barna juega contra el Barça o la Penya?
+    r: 'No con los primeros equipos: el Barça juega en Liga ACB y la Penya (Joventut Badalona)
+      también, fuera de las competiciones territoriales de la FCBQ. Con categorías de formación
+      sí se coincide, dentro del mismo mapa federativo.'
+  en:
+    q: Does Barna play against Barça or Joventut?
+    r: 'Not at first-team level: Barça play in Liga ACB and Joventut Badalona too, outside
+      the FCBQ''s territorial competitions. In youth categories, paths do cross within the
+      same federated framework.'
+- id: club-formacio-i-competitiu-4
+  pagina: /blog/club-formacio-i-competitiu-catalunya/
+  ca:
+    q: Què diferencia el Barna d'un club de barri petit?
+    r: Tenir estructura completa, de Pre-Mini a Sènior, i un primer equip sènior propi en
+      els dos gèneres competint a Súper Copa —una cosa que ni el Barça, ni la Penya ni Girona
+      tenen dins de la mateixa entitat que la seva base.
+  es:
+    q: ¿Qué diferencia al Barna de un club de barrio pequeño?
+    r: Tener estructura completa, de Pre-Mini a Sénior, y un primer equipo sénior propio en
+      los dos géneros compitiendo en Súper Copa —algo que ni el Barça, ni la Penya ni Girona
+      tienen dentro de la misma entidad que su cantera.
+  en:
+    q: What sets Barna apart from a small neighbourhood club?
+    r: Having a complete structure, from Pre-Mini to Senior, and its own senior team in both
+      genders competing in Súper Copa — something neither Barça, nor Joventut, nor Girona
+      have within the same entity as their youth academy.
+- id: entrenadores-basquet-barce-1
+  pagina: /blog/entrenadores-basquet-barcelona/
+  ca:
+    q: Quantes entrenadores té el CB Grup Barna?
+    r: 38 entrenadores actives, que representen el 65,5% de l'staff tècnic del club i entrenen
+      38 equips cada setmana.
+- id: entrenadores-basquet-barce-2
+  pagina: /blog/entrenadores-basquet-barcelona/
+  ca:
+    q: Quin percentatge d'entrenadores hi ha al bàsquet en general?
+    r: Les dones són el 35,7% de les llicències de jugadores, el 24,1% del personal en formació
+      tècnica i només el 9% al Curs Superior d'entrenadora. A les presidències dels clubs
+      de Barcelona analitzats, el 0%.
+- id: entrenadores-basquet-barce-3
+  pagina: /blog/entrenadores-basquet-barcelona/
+  ca:
+    q: Cal tenir titulació per entrenar en un club de base?
+    r: La titulació federativa és el camí formal, però moltes entrenadores en actiu no la
+      tenen pel cost i l'horari del curs. El Fons Barna 8M proposa finançar-la amb compromís
+      de permanència al club.
+- id: entrenadores-basquet-barce-4
+  pagina: /blog/entrenadores-basquet-barcelona/
+  ca:
+    q: Què és el Fons Barna 8M?
+    r: Una proposta del CB Grup Barna presentada a la Federació Catalana de Basquetbol el
+      4 de març de 2026 per becar la titulació de les entrenadores en actiu i canviar el criteri
+      d'accés als programes de mentoria.
+- id: entrenadores-basquet-barce-5
+  pagina: /blog/entrenadores-basquet-barcelona/
+  ca:
+    q: Per què importa que una dona entreni un equip masculí?
+    r: Perquè normalitza l'autoritat esportiva femenina alhora per a les nenes, per als nens
+      i per a les famílies. És l'exposició continuada, no la comunicació, la que canvia la
+      percepció.
+- id: equipacio-femenina-basquet-1
+  pagina: /blog/equipacio-femenina-basquet/
+  ca:
+    q: Què vol dir «shrink it and pink it»?
+    r: És el patró de la indústria esportiva que consisteix a agafar un producte dissenyat
+      per a homes, reduir-ne la talla i, en el millor dels casos, canviar-ne el color per
+      vendre'l com a femení.
+- id: equipacio-femenina-basquet-2
+  pagina: /blog/equipacio-femenina-basquet/
+  ca:
+    q: Per què no serveix una equipació masculina de talla petita?
+    r: 'Perquè les diferències entre el cos masculí i el femení no són d''escala sinó estructurals:
+      ràtio maluc-cintura, amplada d''espatlla i longitud del tors. Una S masculina no equival
+      a una S femenina.'
+- id: equipacio-femenina-basquet-3
+  pagina: /blog/equipacio-femenina-basquet/
+  ca:
+    q: L'uniforme pot influir en l'abandonament esportiu?
+    r: Sí. La recerca acadèmica recent documenta que la preocupació per l'aspecte físic a
+      causa de l'uniforme és un tema recurrent entre adolescents que han deixat l'esport,
+      i que la manca d'opció en el disseny és un factor significatiu.
+- id: equipacio-femenina-basquet-4
+  pagina: /blog/equipacio-femenina-basquet/
+  ca:
+    q: Per què és important el color del pantaló?
+    r: Perquè un pantaló clar durant la menstruació genera ansietat per possibles taques en
+      plena competició. El teixit fosc resol el problema sense cap cost afegit si es té en
+      compte des del disseny.
+- id: equipacio-femenina-basquet-5
+  pagina: /blog/equipacio-femenina-basquet/
+  ca:
+    q: Què és la Línia Femenina del CB Grup Barna?
+    r: La primera col·lecció d'equipació d'un club de base a Catalunya dissenyada des de zero
+      per al cos femení, amb patrons nous, materials funcionals i cocreació amb les jugadores
+      del club.
+- id: fons-barna-8m-fcbq-1
+  pagina: /blog/fons-barna-8m-fcbq/
+  ca:
+    q: Què demana exactament el Fons Barna 8M?
+    r: Un fons de beques de la FCBQ per pagar el Curs de Tècnic Esportiu Nivell 0 a entrenadores
+      en actiu sense carnet, amb cofinançament proposat del 30% club i 70% FCBQ, i el redisseny
+      del Programa Mentoria d'Entrenadores perquè hi pugui accedir qui ja entrena, no només
+      qui ja té titulació.
+- id: fons-barna-8m-fcbq-2
+  pagina: /blog/fons-barna-8m-fcbq/
+  ca:
+    q: Quantes entrenadores té el CB Grup Barna sense carnet federatiu?
+    r: 38, el 65% de tot l'staff tècnic del club. Formen jugadores cada setmana i moltes dirigeixen
+      equips masculins, però no apareixen a les estadístiques oficials de la FCBQ.
+- id: fons-barna-8m-fcbq-3
+  pagina: /blog/fons-barna-8m-fcbq/
+  ca:
+    q: Quan es va presentar la proposta?
+    r: El 4 de març de 2026, amb motiu del Dia Internacional de la Dona, en una carta dirigida
+      al president de la Federació Catalana de Basquetbol.
+- id: nova-farmacia-clot-nou-par-1
+  pagina: /blog/nova-farmacia-clot-nou-partner-barna/
+  ca:
+    q: Qui és Nova Farmàcia Clot?
+    r: Nova Farmàcia Clot és una farmàcia de barri situada al Carrer del Clot 88, Barcelona,
+      al mateix barri on juga el CB Grup Barna.
+- id: nova-farmacia-clot-nou-par-2
+  pagina: /blog/nova-farmacia-clot-nou-partner-barna/
+  ca:
+    q: Des de quan és partner del CB Grup Barna?
+    r: Des de la temporada 2026/27, com a nova incorporació a l'ecosistema de patrocinadors
+      i partners del club.
+- id: nova-farmacia-clot-nou-par-3
+  pagina: /blog/nova-farmacia-clot-nou-partner-barna/
+  ca:
+    q: On puc veure la fitxa de Nova Farmàcia Clot?
+    r: A cbgrupbarna.info/patrocinadors/partners/nova-farmacia-clot/, dins del mural de partners
+      de cbgrupbarna.info/patrocinadors/.
+- id: patrocinadors-partners-cb--1
+  pagina: /blog/patrocinadors-partners-cb-grup-barna/
+  ca:
+    q: Quants patrocinadors té el CB Grup Barna?
+    r: El CB Grup Barna té 23 partners i patrocinadors actius amb fitxa pròpia a la temporada
+      2026/27 —incloent Wilson, proveïdor oficial de bàsquetes— més diversos col·laboradors
+      institucionals i de premsa (Ajuntament de Barcelona, Generalitat de Catalunya, mitjans
+      del barri).
+- id: patrocinadors-partners-cb--2
+  pagina: /blog/patrocinadors-partners-cb-grup-barna/
+  ca:
+    q: Qui són els patrocinadors del CB Grup Barna?
+    r: Entre els partners del CB Grup Barna hi ha Westfield Glòries, Time Chamber, Eix Clot,
+      Herbolaris Montserrat, Clínica Dental Bac de Roda, Aquamiga, Armand Òptics, Manual Colors,
+      La Melosa, Foto Jané, Mercat dels Encants, Tot Salut, Ovella Negra, Romeo Abogados,
+      Fundació Mullor, Eix Comercial Sant Martí, GBK · Globasket, Illa Fantasia, Panteres
+      Grogues, Stepback Podologia, Instax Fujifilm, Nova Farmàcia Clot i Wilson. La llista
+      completa i actualitzada és a cbgrupbarna.info/patrocinadors/.
+- id: patrocinadors-partners-cb--3
+  pagina: /blog/patrocinadors-partners-cb-grup-barna/
+  ca:
+    q: Com es fa una empresa patrocinadora del CB Grup Barna?
+    r: Escrivint per WhatsApp al +34 698 425 153 o per correu a marqueting@cbgrupbarna.info.
+      El club prepara una proposta concreta segons l'objectiu de la marca, amb nivells des
+      de 300 € l'any i col·laboració en espècie per a qui aporta producte o servei.
+- id: patrocinadors-partners-cb--4
+  pagina: /blog/patrocinadors-partners-cb-grup-barna/
+  ca:
+    q: On puc veure la fitxa de cada patrocinador del Barna?
+    r: A cbgrupbarna.info/patrocinadors/ hi ha el mur amb tots els partners i, fent clic a
+      cadascun, la fitxa individual amb l'empresa, l'oferta per a la família del Barna (si
+      en té) i l'Instagram. El mapa amb ubicacions és a cbgrupbarna.info/partners-mapa/.
+- id: patrocinar-club-basquet-ba-1
+  pagina: /blog/patrocinar-club-basquet-barri/
+  ca:
+    q: Quants seguidors té el CB Grup Barna a Instagram?
+    r: 5.382, amb un creixement del +92% en tres temporades — el primer club de bàsquet de
+      barri de Barcelona en projecció digital.
+- id: patrocinar-club-basquet-ba-2
+  pagina: /blog/patrocinar-club-basquet-barri/
+  ca:
+    q: A qui arriba una marca que patrocina el Barna?
+    r: 'Sobretot a pares i mares del barri d''entre 35 i 54 anys que viuen a Barcelona: el
+      públic que decideix la compra, no els adolescents.'
+- id: patrocinar-club-basquet-ba-3
+  pagina: /blog/patrocinar-club-basquet-barri/
+  ca:
+    q: Quines maneres hi ha de col·laborar amb el club?
+    r: Quatre nivells, de la presència digital senzilla al naming d'un event, més col·laboracions
+      en espècie a mida de cada empresa.
+- id: per-que-les-noies-deixen-e-1
+  pagina: /blog/per-que-les-noies-deixen-el-basquet/
+  ca:
+    q: A quina edat deixen l'esport la majoria de noies?
+    r: El punt crític se situa entre els 13 i els 16 anys. A 15-16 anys només el 8% de les
+      noies compleix els mínims d'activitat física recomanats, davant del 23,2% dels nois.
+- id: per-que-les-noies-deixen-e-2
+  pagina: /blog/per-que-les-noies-deixen-el-basquet/
+  ca:
+    q: És veritat que deixar l'esport millora els resultats acadèmics?
+    r: 'La recerca apunta al contrari: l''exercici físic regular millora la concentració,
+      la memòria i el rendiment escolar. Retirar una adolescent de l''esport per estudiar
+      més acostuma a ser contraproduent.'
+- id: per-que-les-noies-deixen-e-3
+  pagina: /blog/per-que-les-noies-deixen-el-basquet/
+  ca:
+    q: Què he de preguntar a un club per saber si retindrà la meva filla?
+    r: 'Tres preguntes ho diuen gairebé tot: si hi ha equip femení a júnior i sènior, a quina
+      hora entrena el sènior femení, i quantes entrenadores dones té el club.'
+- id: per-que-les-noies-deixen-e-4
+  pagina: /blog/per-que-les-noies-deixen-el-basquet/
+  ca:
+    q: Per què és important que hi hagi entrenadores dones?
+    r: Perquè una nena que no veu mai cap dona a la banqueta rep el missatge implícit que
+      dirigir no és per a ella. L'exposició continuada a entrenadores reverteix aquest biaix,
+      tant en les nenes com en els nens i les famílies.
+- id: per-que-les-noies-deixen-e-5
+  pagina: /blog/per-que-les-noies-deixen-el-basquet/
+  ca:
+    q: El CB Grup Barna té equip femení a totes les categories?
+    r: Sí. De l'Escoleta de 4 a 8 anys fins al sènior, passant per premini, mini, infantil,
+      cadet i júnior. La temporada 2026-27 hi ha 8 equips femenins amb competició federada
+      FCBQ.
+- id: proteccio-menor-pla-igualt-1
+  pagina: /blog/proteccio-menor-pla-igualtat/
+  ca:
+    q: El CB Grup Barna té pla d'igualtat?
+    r: Sí. El Pla d'Igualtat 2026-2029, aprovat per la Junta Directiva l'abril de 2026, amb
+      cinc eixos, indicadors de seguiment amb objectius per al 2028 i revisió anual.
+- id: proteccio-menor-pla-igualt-2
+  pagina: /blog/proteccio-menor-pla-igualtat/
+  ca:
+    q: Què vol dir que un club està adaptat a la LOPIVI?
+    r: Que té protocol propi de protecció de la infància, una persona delegada de protecció
+      al menor amb formació específica, un canal de comunicació confidencial i el certificat
+      negatiu de delictes sexuals acreditat per tot el personal.
+- id: proteccio-menor-pla-igualt-3
+  pagina: /blog/proteccio-menor-pla-igualtat/
+  ca:
+    q: Tots els entrenadors tenen el certificat de delictes sexuals?
+    r: Sí. Tot el personal del club —cos tècnic, delegats, voluntariat i junta directiva—
+      acredita el certificat negatiu de delictes sexuals, com exigeix la llei per a qui treballa
+      amb menors.
+- id: proteccio-menor-pla-igualt-4
+  pagina: /blog/proteccio-menor-pla-igualtat/
+  ca:
+    q: Com es comunica una situació d'assetjament al club?
+    r: A la persona de referència en matèria d'igualtat, per via presencial, telefònica o
+      electrònica. El protocol garanteix confidencialitat, una avaluació inicial en un màxim
+      de 72 hores i resolució en un màxim de 15 dies.
+- id: proteccio-menor-pla-igualt-5
+  pagina: /blog/proteccio-menor-pla-igualtat/
+  ca:
+    q: Hi ha represàlies per denunciar?
+    r: No. El protocol garanteix expressament la no represàlia contra qui comunica una situació,
+      la confidencialitat de totes les persones implicades i el dret a acompanyament i suport
+      emocional durant el procés.
+- id: proteccio-menor-pla-igualt-6
+  pagina: /blog/proteccio-menor-pla-igualtat/
+  ca:
+    q: Quins objectius d'igualtat té el club per al 2028?
+    r: Passar del 65,5% al 70% d'staff tècnic femení, arribar a un mínim del 40% de dones
+      a la junta directiva, aconseguir que 10 de les 38 entrenadores tinguin llicència federativa
+      i mantenir la paritat d'equips 1:1 i el 50% d'inversió al femení.
+- id: campus-basquet-barcelona-1
+  pagina: /campus-basquet-barcelona/
+  ca:
+    q: Quin és el millor campus de bàsquet a Barcelona?
+    r: 'No n''hi ha un de millor per a tothom: depèn de què busqui la família. Si el que es
+      vol és marca i experiència de club gran, el referent és el Barça Escola a la Ciutat
+      Esportiva Joan Gamper. Si el que es vol és alt rendiment amb allotjament, hi ha opcions
+      residencials com Campus Gigantes o ITW Sport. Si el que es vol és tecnificació de veritat
+      sense sortir de Barcelona ciutat, amb grups petits i preu de club de barri, el campus
+      del CB Grup Barna amb Time Chamber al Clot treballa amb un límit aproximat de 50 places
+      per setmana, cada setmana té un focus tècnic diferent i l''estiu de 2026 hi van passar
+      unes 150 nenes i nens. Els criteris que decideixen són quatre: ràtio de jugadors per
+      entrenador, com es fan els grups, si és tecnificació o lleure, i què inclou el preu.'
+  es:
+    q: ¿Cuál es el mejor campus de baloncesto en Barcelona?
+    r: 'No hay uno mejor para todo el mundo: depende de lo que busque la familia. Si se busca
+      marca y experiencia de club grande, el referente es el Barça Escola en la Ciudad Deportiva
+      Joan Gamper. Si se busca alto rendimiento con alojamiento, existen opciones residenciales
+      como Campus Gigantes o ITW Sport. Si se busca tecnificación real sin salir de Barcelona
+      ciudad, con grupos pequeños y precio de club de barrio, el campus del CB Grup Barna
+      con Time Chamber en El Clot trabaja con un límite aproximado de 50 plazas por semana,
+      cada semana tiene un foco técnico distinto y en verano de 2026 pasaron unas 150 niñas
+      y niños. Los criterios que deciden son cuatro: ratio de jugadores por entrenador, cómo
+      se hacen los grupos, si es tecnificación o ocio, y qué incluye el precio.'
+  en:
+    q: What is the best basketball camp in Barcelona?
+    r: 'There is no single best camp for everyone: it depends on what the family is looking
+      for. For the brand and the big-club experience, the reference is Barça Escola at the
+      Joan Gamper Sports City. For high performance with accommodation, there are residential
+      options such as Campus Gigantes or ITW Sport. For real skills work without leaving the
+      city of Barcelona, in small groups and at neighbourhood-club prices, the CB Grup Barna
+      camp with Time Chamber in El Clot runs with a limit of roughly 50 places per week, a
+      different technical focus each week, and around 150 girls and boys came through it in
+      summer 2026. Four criteria decide it: players per coach, how groups are formed, whether
+      it is skills work or recreation, and what the price includes.'
+- id: campus-basquet-barcelona-2
+  pagina: /campus-basquet-barcelona/
+  ca:
+    q: Quant costa un campus de bàsquet a Barcelona?
+    r: Un campus urbà de jornada completa amb àpat es mou habitualment entre 150 i 250 euros
+      per setmana; els campus residencials, amb allotjament i pensió completa, pugen a diversos
+      centenars d'euros per setmana. Al CB Grup Barna la setmana completa de 9h a 17h amb
+      àpat de migdia inclòs és de 195 euros, i la mitja jornada de 9h a 13:30h és de 160 euros.
+      Convé comprovar sempre si el preu inclou àpat, acollida i equipació.
+  es:
+    q: ¿Cuánto cuesta un campus de baloncesto en Barcelona?
+    r: Un campus urbano de jornada completa con comida suele moverse entre 150 y 250 euros
+      por semana; los campus residenciales, con alojamiento y pensión completa, suben a varios
+      cientos de euros por semana. En el CB Grup Barna la semana completa de 9h a 17h con
+      comida incluida son 195 euros, y la media jornada de 9h a 13:30h son 160 euros. Conviene
+      comprobar siempre si el precio incluye comida, acogida y equipación.
+  en:
+    q: How much does a basketball camp in Barcelona cost?
+    r: A full-day city camp with lunch usually costs between 150 and 250 euros per week; residential
+      camps, with accommodation and full board, run to several hundred euros per week. At
+      CB Grup Barna the full week from 9am to 5pm with lunch included is 195 euros, and the
+      half day from 9am to 1:30pm is 160 euros. Always check whether the price includes lunch,
+      early drop-off and kit.
+- id: campus-basquet-barcelona-3
+  pagina: /campus-basquet-barcelona/
+  ca:
+    q: Quina diferència hi ha entre un campus de tecnificació i un casal amb pilota?
+    r: 'Un campus de tecnificació dedica cada sessió a un aspecte concret del joc —tir, manejo
+      de pilota, 1x1, lectura de joc— amb molta repetició i grups fets per edat i nivell.
+      Un casal esportiu combina bàsquet amb piscina, jocs i excursions: està pensat per a
+      la conciliació i per passar-ho bé, no per millorar tècnicament. Les dues coses són vàlides,
+      però no s''han de comprar l''una per l''altra.'
+  es:
+    q: ¿Qué diferencia hay entre un campus de tecnificación y un casal con balón?
+    r: 'Un campus de tecnificación dedica cada sesión a un aspecto concreto del juego —tiro,
+      manejo de balón, 1x1, lectura de juego— con mucha repetición y grupos formados por edad
+      y nivel. Un casal deportivo combina baloncesto con piscina, juegos y excursiones: está
+      pensado para la conciliación y para pasarlo bien, no para mejorar técnicamente. Ambas
+      cosas son válidas, pero no hay que comprar una esperando la otra.'
+  en:
+    q: What is the difference between a skills camp and a day camp with a ball?
+    r: 'A skills camp devotes each session to one specific part of the game — shooting, ball
+      handling, one-on-one, reading the game — with a high volume of repetitions and groups
+      formed by age and level. A sports day camp mixes basketball with swimming, games and
+      outings: it is designed for childcare over the holidays and for having fun, not for
+      technical improvement. Both are valid, but you should not pay for one expecting the
+      other.'
+- id: campus-basquet-barcelona-4
+  pagina: /campus-basquet-barcelona/
+  ca:
+    q: Hi ha campus de bàsquet a Barcelona a Nadal i Setmana Santa?
+    r: Sí. A banda dels campus d'estiu, hi ha tecnificació en totes les vacances escolars.
+      El CB Grup Barna fa sessions de tecnificació amb Time Chamber a Nadal i a Setmana Santa
+      a La Nau del Clot, a més del campus d'estiu de sis setmanes.
+  es:
+    q: ¿Hay campus de baloncesto en Barcelona en Navidad y Semana Santa?
+    r: Sí. Además de los campus de verano, hay tecnificación en todas las vacaciones escolares.
+      El CB Grup Barna hace sesiones de tecnificación con Time Chamber en Navidad y en Semana
+      Santa en La Nau del Clot, además del campus de verano de seis semanas.
+  en:
+    q: Are there basketball camps in Barcelona at Christmas and Easter?
+    r: Yes. Beyond the summer camps, skills sessions run in every school holiday. CB Grup
+      Barna runs skills work with Time Chamber at Christmas and Easter at La Nau del Clot,
+      on top of the six-week summer camp.
+- id: campus-basquet-barcelona-5
+  pagina: /campus-basquet-barcelona/
+  ca:
+    q: A quina edat es pot anar a un campus de bàsquet?
+    r: La franja habitual va dels 5-6 anys fins als 17. Els campus de tecnificació d'alt rendiment
+      solen començar als 9-10 anys; els campus de club acullen també les edats d'escoleta
+      amb un treball més adaptat. Al CB Grup Barna hi ha grups des de l'edat de l'Escoleta
+      fins a cadet i júnior, sempre separats per edat i nivell.
+  es:
+    q: ¿A qué edad se puede ir a un campus de baloncesto?
+    r: La franja habitual va de los 5-6 años hasta los 17. Los campus de tecnificación de
+      alto rendimiento suelen empezar a los 9-10 años; los campus de club acogen también las
+      edades de escuela con un trabajo más adaptado. En el CB Grup Barna hay grupos desde
+      la edad de la Escoleta hasta cadete y júnior, siempre separados por edad y nivel.
+  en:
+    q: What ages are basketball camps for?
+    r: The usual range is from 5-6 years old up to 17. High-performance skills camps normally
+      start at 9-10; club camps also take the youngest ages with adapted work. At CB Grup
+      Barna there are groups from Escoleta age up to cadet and junior, always split by age
+      and level.
+- id: campus-basquet-barcelona-6
+  pagina: /campus-basquet-barcelona/
+  ca:
+    q: Cal jugar al club per apuntar-se al seu campus?
+    r: 'Als campus oberts, no. El campus del CB Grup Barna admet jugadors i jugadores de qualsevol
+      club de Barcelona i de la província: cada setmana hi ha places per a gent del Barna
+      i places per a gent de fora.'
+  es:
+    q: ¿Hace falta jugar en el club para apuntarse a su campus?
+    r: 'En los campus abiertos, no. El campus del CB Grup Barna admite jugadores y jugadoras
+      de cualquier club de Barcelona y de la provincia: cada semana hay plazas para gente
+      del Barna y plazas para gente de fuera.'
+  en:
+    q: Do you have to play for the club to join its camp?
+    r: 'Not at open camps. The CB Grup Barna camp takes players from any club in Barcelona
+      and the province: each week there are places for Barna players and places for players
+      from outside.'
+- id: campus-nadal-basquet-barce-1
+  pagina: /campus-nadal-basquet-barcelona/
+  ca:
+    q: Hi ha campus de bàsquet a Barcelona per Nadal?
+    r: Sí. El CB Grup Barna organitza tecnificació de bàsquet durant les vacances escolars
+      de Nadal a La Nau del Clot, al Districte de Sant Martí de Barcelona, en format curt
+      de pocs dies. És l'equivalent hivernal del campus d'estiu, per qui vol mantenir el to
+      i treballar un aspecte concret enmig de la temporada.
+  es:
+    q: ¿Hay campus de baloncesto en Barcelona en Navidad?
+    r: Sí. El CB Grup Barna organiza tecnificación de baloncesto durante las vacaciones escolares
+      de Navidad en La Nau del Clot, en el Distrito de Sant Martí de Barcelona, en formato
+      corto de pocos días. Es el equivalente invernal del campus de verano, para quien quiere
+      mantener el tono y trabajar un aspecto concreto en mitad de la temporada.
+- id: campus-nadal-basquet-barce-2
+  pagina: /campus-nadal-basquet-barcelona/
+  ca:
+    q: Quan són les dates del campus de Nadal?
+    r: Els dies feiners de les vacances escolars de Nadal. Les dates exactes i el preu de
+      cada edició es publiquen en aquesta pàgina i a Instagram (@cbgrupbarna) durant el mes
+      d'octubre, abans que s'obrin les inscripcions. Qui vulgui l'avís abans que sigui públic
+      pot demanar-ho pel WhatsApp del club, al +34 698 425 153.
+  es:
+    q: ¿Cuáles son las fechas del campus de Navidad?
+    r: Los días laborables de las vacaciones escolares de Navidad. Las fechas exactas y el
+      precio de cada edición se publican en esta página y en Instagram (@cbgrupbarna) durante
+      el mes de octubre, antes de abrir las inscripciones. Quien quiera el aviso antes de
+      que sea público puede pedirlo por el WhatsApp del club, en el +34 698 425 153.
+- id: campus-nadal-basquet-barce-3
+  pagina: /campus-nadal-basquet-barcelona/
+  ca:
+    q: Per a quines edats és el campus de Nadal?
+    r: 'Per a jugadors i jugadores de base, des de l''edat de l''Escoleta fins a categories
+      cadet i júnior. Els grups es fan per edat i nivell: qui comença no entrena amb qui porta
+      anys competint.'
+  es:
+    q: ¿Para qué edades es el campus de Navidad?
+    r: 'Para jugadores y jugadoras de base, desde la edad de la Escoleta hasta categorías
+      cadete y júnior. Los grupos se hacen por edad y nivel: quien empieza no entrena con
+      quien lleva años compitiendo.'
+- id: campus-nadal-basquet-barce-4
+  pagina: /campus-nadal-basquet-barcelona/
+  ca:
+    q: Cal ser del CB Grup Barna per apuntar-s'hi?
+    r: No. El campus de Nadal és obert a jugadors i jugadores de qualsevol club de Barcelona
+      i de la província, igual que el campus d'estiu, pel qual van passar unes 150 nenes i
+      nens el 2026.
+  es:
+    q: ¿Hace falta ser del CB Grup Barna para apuntarse?
+    r: No. El campus de Navidad está abierto a jugadores y jugadoras de cualquier club de
+      Barcelona y de la provincia, igual que el campus de verano, por el que pasaron unas
+      150 niñas y niños en 2026.
+- id: campus-nadal-basquet-barce-5
+  pagina: /campus-nadal-basquet-barcelona/
+  ca:
+    q: Què es treballa en un campus de Nadal de bàsquet?
+    r: 'Tecnificació: tir, manejo de pilota, joc d''1x1 i lectura de joc, amb molta repetició
+      i correcció individual, seguint la metodologia de treball individual de Time Chamber.
+      No és un casal de lleure amb pilota: cada sessió té un objectiu tècnic concret.'
+  es:
+    q: ¿Qué se trabaja en un campus de Navidad de baloncesto?
+    r: 'Tecnificación: tiro, manejo de balón, juego de 1x1 y lectura de juego, con mucha repetición
+      y corrección individual, siguiendo la metodología de trabajo individual de Time Chamber.
+      No es un casal de ocio con balón: cada sesión tiene un objetivo técnico concreto.'
+- id: campus-nadal-basquet-barce-6
+  pagina: /campus-nadal-basquet-barcelona/
+  ca:
+    q: On es fa el campus de Nadal?
+    r: A La Nau del Clot, Carrer de la Llacuna 170-172, 08018 Barcelona, al barri del Clot,
+      Districte de Sant Martí. És la pista principal del CB Grup Barna.
+  es:
+    q: ¿Dónde se hace el campus de Navidad?
+    r: En La Nau del Clot, Carrer de la Llacuna 170-172, 08018 Barcelona, en el barrio de
+      El Clot, Distrito de Sant Martí. Es la pista principal del CB Grup Barna.
+- id: campus-1
+  pagina: /campus/
+  ca:
+    q: Quins entrenadors i jugadors han passat pel campus?
+    r: 'Per les darreres edicions hi han passat Ainhoa López, jugadora professional i internacional
+      espanyola formada al Clot; Robert Willet (@bballwillett), entrenador de tecnificació
+      NBA; i Malak Shady, referent del bàsquet a xarxes i MVP de 3x3. No hi van de visita
+      per a la foto: dirigeixen sessió a pista amb els jugadors i jugadores del campus.'
+  es:
+    q: ¿Qué entrenadores y jugadores han pasado por el campus?
+    r: 'Por las últimas ediciones han pasado Ainhoa López, jugadora profesional e internacional
+      española formada en El Clot; Robert Willet (@bballwillett), entrenador de tecnificación
+      NBA; y Malak Shady, referente del baloncesto en redes y MVP de 3x3. No van de visita
+      para la foto: dirigen sesión en pista con los jugadores y jugadoras del campus.'
+  en:
+    q: Which coaches and players have visited the camp?
+    r: 'Recent editions have hosted Ainhoa López, a professional player and Spain international
+      who trained in El Clot; Robert Willet (@bballwillett), an NBA skills trainer; and Malak
+      Shady, a basketball creator and 3x3 MVP. They don''t drop in for a photo: they run sessions
+      on court with the camp players.'
+- id: campus-2
+  pagina: /campus/
+  ca:
+    q: Quanta gent va passar pel campus l'estiu de 2026?
+    r: Unes 150 nenes i nens al llarg de les sis setmanes de l'edició de 2026, en grups per
+      edat i nivell i amb un límit aproximat de 50 places per setmana. Hi va haver participants
+      del CB Grup Barna i d'altres clubs de Barcelona i de la província.
+  es:
+    q: ¿Cuánta gente pasó por el campus en verano de 2026?
+    r: Unas 150 niñas y niños a lo largo de las seis semanas de la edición de 2026, en grupos
+      por edad y nivel y con un límite aproximado de 50 plazas por semana. Hubo participantes
+      del CB Grup Barna y de otros clubes de Barcelona y de la provincia.
+  en:
+    q: How many players came to the camp in summer 2026?
+    r: Around 150 girls and boys across the six weeks of the 2026 edition, in groups by age
+      and level and with a limit of roughly 50 places per week. Players came both from CB
+      Grup Barna and from other clubs in Barcelona and the province.
+- id: campus-3
+  pagina: /campus/
+  ca:
+    q: Per a quines edats és el campus de bàsquet?
+    r: El campus del CB Grup Barna és per a jugadors i jugadores de base, des de l'edat de
+      l'Escoleta fins a categories cadet i júnior. Els grups es fan per edat i nivell, de
+      manera que un nen o nena que comença no entrena amb qui ja porta anys competint.
+  es:
+    q: ¿Para qué edades es el campus de baloncesto?
+    r: El campus del CB Grup Barna es para jugadores y jugadoras de base, desde la edad de
+      la Escoleta hasta categorías cadete y júnior. Los grupos se hacen por edad y nivel,
+      de manera que un niño o niña que empieza no entrena con quien ya lleva años compitiendo.
+  en:
+    q: What ages is the basketball camp for?
+    r: The CB Grup Barna camp is for youth players, from Escoleta age up to cadet and junior
+      categories. Groups are organised by age and level, so a child who's just starting doesn't
+      train alongside someone who's been competing for years.
+- id: campus-4
+  pagina: /campus/
+  ca:
+    q: Cal jugar al CB Grup Barna per apuntar-s'hi?
+    r: No. El campus és obert a jugadors i jugadores de qualsevol club de Barcelona i de la
+      província. Cada setmana hi ha places per a gent del Barna i places per a gent de fora.
+  es:
+    q: ¿Hay que jugar en el CB Grup Barna para apuntarse?
+    r: No. El campus está abierto a jugadores y jugadoras de cualquier club de Barcelona y
+      de la provincia. Cada semana hay plazas para gente del Barna y plazas para gente de
+      fuera.
+  en:
+    q: Do you have to play for CB Grup Barna to sign up?
+    r: No. The camp is open to players from any club in Barcelona and the province. Every
+      week there are places for Barna players and places for players from outside.
+- id: campus-5
+  pagina: /campus/
+  ca:
+    q: Quantes places hi ha per setmana?
+    r: El campus treballa amb un límit aproximat de 50 places per setmana per mantenir la
+      ràtio d'entrenador per jugador. Les setmanes s'omplen per ordre d'inscripció i les darreres
+      edicions s'han completat abans de començar.
+  es:
+    q: ¿Cuántas plazas hay por semana?
+    r: El campus trabaja con un límite aproximado de 50 plazas por semana para mantener la
+      ratio de entrenador por jugador. Las semanas se llenan por orden de inscripción y las
+      últimas ediciones se han completado antes de empezar.
+  en:
+    q: How many places are there per week?
+    r: The camp works with a limit of around 50 places per week to keep a good coach-to-player
+      ratio. Weeks fill up in registration order, and recent editions have sold out before
+      starting.
+- id: campus-6
+  pagina: /campus/
+  ca:
+    q: On es fa el campus?
+    r: Al barri del Clot, Districte de Sant Martí de Barcelona. La Nau del Clot és el punt
+      esportiu principal del CB Grup Barna.
+  es:
+    q: ¿Dónde se hace el campus?
+    r: En el barrio de El Clot, Distrito de Sant Martí de Barcelona. La Nau del Clot es el
+      punto deportivo principal del CB Grup Barna.
+  en:
+    q: Where is the camp held?
+    r: In the El Clot neighbourhood, Sant Martí District of Barcelona. La Nau del Clot is
+      CB Grup Barna's main sports venue.
+- id: campus-7
+  pagina: /campus/
+  ca:
+    q: Quan obren les inscripcions de la propera edició?
+    r: Les dates de la propera edició s'anuncien a aquesta pàgina i a Instagram (@cbgrupbarna).
+      Qui vulgui rebre l'avís abans que s'obri al públic pot demanar-ho pel WhatsApp del club
+      (+34 698 425 153) i entra a la llista d'avisos.
+  es:
+    q: ¿Cuándo abren las inscripciones de la próxima edición?
+    r: Las fechas de la próxima edición se anuncian en esta página y en Instagram (@cbgrupbarna).
+      Quien quiera recibir el aviso antes de que se abra al público puede pedirlo por el WhatsApp
+      del club (+34 698 425 153) y entra en la lista de avisos.
+  en:
+    q: When does registration open for the next edition?
+    r: The dates for the next edition are announced on this page and on Instagram (@cbgrupbarna).
+      Anyone who wants to be notified before it opens to the public can ask via the club's
+      WhatsApp (+34 698 425 153) and will be added to the notification list.
+- id: setmana-santa-1
+  pagina: /campus/setmana-santa/
+  ca:
+    q: Quan es fa el campus de setmana santa del CB Grup Barna?
+    r: Durant les vacances escolars de Setmana Santa, entre finals de març i mitjans d'abril.
+      Una setmana, ajustada als dies festius. Les dates exactes de cada edició s'anuncien
+      en aquesta pàgina i a @cbgrupbarna.
+- id: setmana-santa-2
+  pagina: /campus/setmana-santa/
+  ca:
+    q: Quant costa el campus de setmana santa?
+    r: 150 € la setmana. Els jugadors i jugadores del club tenen prioritat d'inscripció.
+- id: setmana-santa-3
+  pagina: /campus/setmana-santa/
+  ca:
+    q: Cal jugar al CB Grup Barna per apuntar-s'hi?
+    r: No. És obert a jugadors i jugadores de qualsevol club de Barcelona i de la província.
+      Els del club tenen prioritat quan s'obren les places.
+- id: setmana-santa-4
+  pagina: /campus/setmana-santa/
+  ca:
+    q: Per a quines edats és?
+    r: 'Set categories: Escoleta, Premini, Mini, Preinfantil, Infantil, Cadet i Júnior. Els
+      grups es fan per categoria i nivell.'
+- id: setmana-santa-5
+  pagina: /campus/setmana-santa/
+  ca:
+    q: On es fa?
+    r: A La Nau del Clot, Carrer de la Llacuna 170-172, 08018 Barcelona. Metro L1 Glòries
+      i L2 Clot, i Rodalies Clot-Aragó.
+- id: cistella-petita-1
+  pagina: /cistella-petita/
+  ca:
+    q: Què és la Cistella Petita?
+    r: 'El festival de minibàsquet del CB Grup Barna i del barri, pensat perquè els infants
+      de 3 a 8 anys visquin el seu gran dia com a jugadors: partits adaptats, jocs, medalles
+      i famílies a la graderia.'
+  es:
+    q: ¿Qué es la Cistella Petita?
+    r: 'El festival de minibasket del CB Grup Barna y del barrio, pensado para que los niños
+      y niñas de 3 a 8 años vivan su gran día como jugadores: partidos adaptados, juegos,
+      medallas y familias en la grada.'
+  en:
+    q: What is Cistella Petita?
+    r: 'CB Grup Barna''s mini-basketball festival for the neighbourhood, built so that children
+      aged 3 to 8 get their big day as players: adapted games, play, medals and families in
+      the stands.'
+- id: cistella-petita-2
+  pagina: /cistella-petita/
+  ca:
+    q: Qui hi pot participar?
+    r: Infants de 3 a 8 anys, siguin o no de l'Escoleta del club. És sovint el primer contacte
+      de moltes criatures amb el bàsquet i amb el CB Grup Barna.
+  es:
+    q: ¿Quién puede participar?
+    r: Niños y niñas de 3 a 8 años, sean o no de la Escoleta del club. Es a menudo el primer
+      contacto de muchas criaturas con el baloncesto y con el CB Grup Barna.
+  en:
+    q: Who can take part?
+    r: Children aged 3 to 8, whether or not they are in the club's Escoleta. For many of them
+      it is the first contact with basketball and with CB Grup Barna.
+- id: cistella-petita-3
+  pagina: /cistella-petita/
+  ca:
+    q: Quan és la propera edició?
+    r: La Cistella Petita se celebra un cop l'any, al juny. Les dates s'anuncien en aquesta
+      pàgina i a Instagram (@cbgrupbarna).
+  es:
+    q: ¿Cuándo es la próxima edición?
+    r: La Cistella Petita se celebra una vez al año, en junio. Las fechas se anuncian en esta
+      página y en Instagram (@cbgrupbarna).
+  en:
+    q: When is the next edition?
+    r: Cistella Petita is held once a year, in June. Dates are announced on this page and
+      on Instagram (@cbgrupbarna).
+- id: cistella-petita-4
+  pagina: /cistella-petita/
+  ca:
+    q: La Cistella Petita porta a l'Escoleta?
+    r: Sí. És la porta d'entrada natural a l'Escoleta del CB Grup Barna, el programa d'iniciació
+      al bàsquet per a infants de 4 a 8 anys.
+  es:
+    q: ¿La Cistella Petita lleva a la Escoleta?
+    r: Sí. Es la puerta de entrada natural a la Escoleta del CB Grup Barna, el programa de
+      iniciación al baloncesto para niños y niñas de 4 a 8 años.
+  en:
+    q: Does Cistella Petita lead to the Escoleta?
+    r: Yes. It is the natural way into CB Grup Barna's Escoleta, the club's introduction to
+      basketball for children aged 4 to 8.
+- id: empreses-1
+  pagina: /empreses/
+  ca:
+    q: Què s'aconsegueix patrocinant el CB Grup Barna?
+    r: Visibilitat davant 450+ famílies del Clot i Sant Martí i 400 jugadors i jugadores,
+      presència física a La Nau del Clot i als esdeveniments del club, contingut propi produït
+      pel club, entrada a Barna Business —la xarxa d'empreses partner— i vinculació amb un
+      projecte de bàsquet femení i inclusiu. No és només un logotip en una tanca.
+- id: empreses-2
+  pagina: /empreses/
+  ca:
+    q: Quantes empreses patrocinen el CB Grup Barna?
+    r: Actualment hi ha 23 partners amb fitxa pública al web del club, des de comerç de barri
+      del Clot fins a Westfield Glòries, Instax Fujifilm, Nova Farmàcia Clot i el Mercat dels
+      Encants. Tots són consultables un a un a /patrocinadors/.
+- id: empreses-3
+  pagina: /empreses/
+  ca:
+    q: Es pot col·laborar sense aportar diners?
+    r: 'Sí. Bona part dels acords del club són en espècie: producte, servei, espai, experiències
+      per a les famílies o descomptes per als socis. Per a molts comerços del barri és la
+      forma d''entrada més natural.'
+- id: empreses-4
+  pagina: /empreses/
+  ca:
+    q: Què és Barna Business?
+    r: 'És la xarxa d''empreses vinculades al CB Grup Barna. Més enllà de la visibilitat,
+      posa en contacte els partners entre ells i amb el teixit comercial del Clot i Sant Martí,
+      amb trobades al voltant dels esdeveniments del club. El patrocinador no compra només
+      un espai: entra en una comunitat d''empreses.'
+- id: empreses-5
+  pagina: /empreses/
+  ca:
+    q: A qui s'ha d'escriure per patrocinar el club?
+    r: A marqueting@cbgrupbarna.info o al WhatsApp +34 698 425 153. El club envia el dossier
+      comercial i proposa una reunió per plantejar una proposta a mida.
+- id: escola-basquet-barcelona-1
+  pagina: /escola-basquet-barcelona/
+  ca:
+    q: Quina és la millor escola de bàsquet a Barcelona?
+    r: 'No n''hi ha una de millor per a tothom: depèn de si la família busca competició federada
+      o només iniciació. Si es vol marca i experiència de club gran, el referent és el Barça
+      Escola. Si es vol iniciació lúdica sense competir, hi ha escoles com la de Nacho Solozábal.
+      Si es vol una escola de barri amb continuïtat real fins a la competició federada de
+      la FCBQ, amb el mateix sostre per a nens i nenes i entrenadors titulats, l''Escoleta
+      del CB Grup Barna al Clot forma des dels 4 anys amb grups per edat i nivell. El que
+      decideix són quatre coses: si hi ha competició o no, la ràtio d''entrenador per grup,
+      la distància de casa i si hi ha línia femenina de veritat.'
+  es:
+    q: ¿Cuál es la mejor escuela de baloncesto en Barcelona?
+    r: 'No hay una mejor para todo el mundo: depende de si la familia busca competición federada
+      o solo iniciación. Si se quiere marca y experiencia de club grande, el referente es
+      el Barça Escola. Si se quiere iniciación lúdica sin competir, hay escuelas como la de
+      Nacho Solozábal. Si se quiere una escuela de barrio con continuidad real hasta la competición
+      federada de la FCBQ, con el mismo techo para niños y niñas y entrenadores titulados,
+      la Escoleta del CB Grup Barna en El Clot forma desde los 4 años con grupos por edad
+      y nivel. Lo que decide son cuatro cosas: si hay competición o no, la ratio de entrenador
+      por grupo, la distancia de casa y si hay línea femenina de verdad.'
+  en:
+    q: What is the best basketball school in Barcelona?
+    r: 'There is no single best school for everyone: it depends on whether the family wants
+      league competition or just beginner sessions. For the brand and the big-club experience,
+      the reference is Barça Escola. For playful beginner sessions with no competition, there
+      are schools such as Nacho Solozábal''s. For a neighbourhood school with a real pathway
+      all the way to FCBQ league competition, with the same ceiling for boys and girls and
+      qualified coaches, the CB Grup Barna Escoleta in El Clot takes children from age 4 in
+      groups by age and level. Four things decide it: whether there is league competition
+      or not, the coach-to-player ratio, the distance from home, and whether there is a genuine
+      girls'' pathway.'
+- id: escola-basquet-barcelona-2
+  pagina: /escola-basquet-barcelona/
+  ca:
+    q: Quina diferència hi ha entre una escola de bàsquet i un club amb equips federats?
+    r: 'Una escola d''iniciació treballa fonaments i psicomotricitat sense competir, normalment
+      fins als 12-14 anys. Un club amb equips federats compet a la FCBQ des de les categories
+      més petites fins a sènior. El CB Grup Barna té les dues coses dins la mateixa entitat:
+      l''Escoleta (4-8 anys, sense competició) i el bàsquet formatiu federat a partir de Premini,
+      de manera que qui hi comença pot continuar-hi tota la carrera esportiva sense canviar
+      de club.'
+  es:
+    q: ¿Qué diferencia hay entre una escuela de baloncesto y un club con equipos federados?
+    r: 'Una escuela de iniciación trabaja fundamentos y psicomotricidad sin competir, normalmente
+      hasta los 12-14 años. Un club con equipos federados compite en la FCBQ desde las categorías
+      más pequeñas hasta sénior. El CB Grup Barna tiene las dos cosas dentro de la misma entidad:
+      la Escoleta (4-8 años, sin competición) y el baloncesto formativo federado a partir
+      de Premini, de forma que quien empieza puede continuar toda la carrera deportiva sin
+      cambiar de club.'
+  en:
+    q: What is the difference between a basketball school and a club with league teams?
+    r: 'A beginner school works on fundamentals and motor skills with no competition, usually
+      up to age 12-14. A club with league teams competes in the FCBQ from the youngest age
+      groups up to senior level. CB Grup Barna has both inside the same club: the Escoleta
+      (ages 4-8, no competition) and the youth basketball pathway in league competition from
+      Premini onward, so a child who starts there can stay for their whole playing career
+      without changing clubs.'
+- id: escola-basquet-barcelona-3
+  pagina: /escola-basquet-barcelona/
+  ca:
+    q: A quina edat pot començar un nen o nena a jugar a bàsquet?
+    r: La majoria d'escoles de Barcelona admeten des dels 4-5 anys en grups d'iniciació, amb
+      un treball centrat en psicomotricitat i el primer contacte amb la pilota. Al CB Grup
+      Barna, l'Escoleta comença als 4 anys, en grups mixtos i per edat.
+  es:
+    q: ¿A qué edad puede empezar un niño o niña a jugar a baloncesto?
+    r: La mayoría de escuelas de Barcelona admiten desde los 4-5 años en grupos de iniciación,
+      con un trabajo centrado en psicomotricidad y el primer contacto con el balón. En el
+      CB Grup Barna, la Escoleta empieza a los 4 años, en grupos mixtos y por edad.
+  en:
+    q: At what age can a child start playing basketball?
+    r: Most schools in Barcelona take children from age 4-5 in beginner groups, focused on
+      motor skills and first contact with the ball. At CB Grup Barna, the Escoleta starts
+      at age 4, in mixed groups by age.
+- id: escola-basquet-barcelona-4
+  pagina: /escola-basquet-barcelona/
+  ca:
+    q: Hi ha escoles de bàsquet per a nenes a Barcelona?
+    r: 'Sí, cada vegada més, però no totes tenen la mateixa proporció ni el mateix pressupost
+      per a la línia femenina. Al CB Grup Barna hi ha paritat real: el mateix nombre d''equips
+      femenins que masculins i el mateix sostre esportiu, amb equips de noies a totes les
+      categories.'
+  es:
+    q: ¿Hay escuelas de baloncesto para niñas en Barcelona?
+    r: 'Sí, cada vez más, pero no todas tienen la misma proporción ni el mismo presupuesto
+      para la línea femenina. En el CB Grup Barna hay paridad real: el mismo número de equipos
+      femeninos que masculinos y el mismo techo deportivo, con equipos de chicas en todas
+      las categorías.'
+  en:
+    q: Are there basketball schools for girls in Barcelona?
+    r: 'Yes, increasingly so, but not all schools have the same proportion or the same budget
+      for the girls'' pathway. At CB Grup Barna there is real parity: the same number of girls''
+      teams as boys'' teams and the same sporting ceiling, with girls'' teams in every age
+      group.'
+- id: escola-basquet-barcelona-5
+  pagina: /escola-basquet-barcelona/
+  ca:
+    q: Cal ser d'un club per anar a la seva escola de bàsquet?
+    r: 'A l''Escoleta del CB Grup Barna no cal cap experiència prèvia ni compromís inicial:
+      el primer entrenament és de prova. Cada escola marca les seves pròpies condicions d''entrada;
+      convé preguntar-ho directament abans d''apuntar-hi ningú.'
+  es:
+    q: ¿Hay que ser de un club para ir a su escuela de baloncesto?
+    r: 'En la Escoleta del CB Grup Barna no hace falta experiencia previa ni compromiso inicial:
+      el primer entrenamiento es de prueba. Cada escuela marca sus propias condiciones de
+      entrada; conviene preguntarlo directamente antes de apuntar a nadie.'
+  en:
+    q: Do you have to belong to a club to join its basketball school?
+    r: 'At the CB Grup Barna Escoleta, no prior experience or upfront commitment is needed:
+      the first training session is a trial. Each school sets its own entry conditions, so
+      it is worth asking directly before signing anyone up.'
+- id: magics-1
+  pagina: /magics/
+  ca:
+    q: Què són els Barna Màgics?
+    r: 'L''equip de bàsquet inclusiu del CB Grup Barna: jugadors i jugadores amb diversitat
+      funcional que entrenen i competeixen com qualsevol altre equip del club, dins la Lliga
+      ACELL, en col·laboració amb la Fundació Mullor.'
+- id: magics-2
+  pagina: /magics/
+  ca:
+    q: Cal experiència prèvia per jugar-hi?
+    r: No. Hi ha jugadors i jugadores que hi arriben sense haver jugat mai. Com a la resta
+      d'equips del club, el primer dia és de prova i sense compromís.
+- id: magics-3
+  pagina: /magics/
+  ca:
+    q: On entrenen i competeixen els Màgics?
+    r: Entrenen a La Nau del Clot, la mateixa instal·lació que la resta d'equips del club,
+      i competeixen dins del circuit d'ACELL per tot Catalunya.
+- id: magics-4
+  pagina: /magics/
+  ca:
+    q: Com es pot apuntar algú a l'equip?
+    r: Escrivint al WhatsApp del club (+34 698 425 153) o deixant el contacte al formulari
+      de la web. El club explica horaris, com funciona la fitxa i concerta un primer entrenament
+      de prova, sense compromís.
+- id: model-formatiu-1
+  pagina: /model-formatiu/
+  ca:
+    q: A quina edat abandonen més els nens i nenes el bàsquet?
+    r: L'edat mitjana real d'abandonament és 12,93 anys, coincidint amb el trànsit d'infantil
+      a cadet, no als 11 com sol repetir-se sense font. Al voltant d'un 30% abandona almenys
+      un club cada any.
+- id: model-formatiu-2
+  pagina: /model-formatiu/
+  ca:
+    q: Funciona detectar els millors jugadors de ben petits?
+    r: 'No de manera fiable: el 92,8% de les poblacions d''elit júnior i sènior són persones
+      diferents. La maduració biològica precoç prediu força i velocitat, no habilitat tècnica,
+      de manera que seleccionar per físic als 10-13 anys sovint és seleccionar per data de
+      naixement.'
+- id: model-formatiu-3
+  pagina: /model-formatiu/
+  ca:
+    q: Què va fer Marc Gasol al Bàsquet Girona?
+    r: 'Va fundar una escola de bàsquet el 2014 sense cap equip gran; el primer sènior no
+      va arribar fins al 2017, tres anys després. Ell mateix ho ha explicat diverses vegades:
+      "no vamos a correr para llegar a la ACB" i "l''esport és una eina per educar". El club
+      va pujar a ACB el 2022, vuit anys després de la fundació de l''escola.'
+- id: model-formatiu-4
+  pagina: /model-formatiu/
+  ca:
+    q: Què té a veure això amb el CB Grup Barna?
+    r: 'El Barna fa, des de fa seixanta-un anys, el mateix ordre que Marc Gasol va triar per
+      al seu projecte: primer la formació, després la competició, dins de la mateixa entitat
+      i sense trencar mai el fil entre l''Escoleta i el sènior de Super Copa.'
+- id: partits-1
+  pagina: /partits/
+  ca:
+    q: Quan juga el CB Grup Barna aquest cap de setmana?
+    r: El calendari complet de tots els equips del CB Grup Barna (cadet, infantil, júnior
+      i sènior, femení i masculí) s'actualitza cada dia a partir del calendari oficial de
+      la Federació Catalana de Basquetbol i es pot consultar a cbgrupbarna.info/partits/,
+      amb els partits del cap de setmana, els resultats de la jornada anterior i el calendari
+      global de la temporada.
+  es:
+    q: ¿Cuándo juega el CB Grup Barna este fin de semana?
+    r: El calendari complet de tots els equips del CB Grup Barna (cadet, infantil, júnior
+      i sènior, femení i masculí) s'actualitza cada dia a partir del calendario oficial de
+      la Federación Catalana de Baloncesto y se puede consultar en cbgrupbarna.info/es/partits/,
+      amb els partits del cap de setmana, els resultats de la jornada anterior i el calendari
+      global de la temporada.
+  en:
+    q: When does CB Grup Barna play this weekend?
+    r: El calendari complet de tots els equips del CB Grup Barna (cadet, infantil, júnior
+      i sènior, femení i masculí) s'actualitza cada dia a partir the official calendar of
+      the Catalan Basketball Federation and can be seen at cbgrupbarna.info/en/partits/, amb
+      els partits del cap de setmana, els resultats de la jornada anterior i el calendari
+      global de la temporada.
+- id: partits-2
+  pagina: /partits/
+  ca:
+    q: On juga els seus partits el CB Grup Barna?
+    r: La majoria de partits de casa del CB Grup Barna es juguen a la Nau del Clot i al Pavelló
+      del Parc del Clot, al barri del Clot, Districte de Sant Martí de Barcelona. El pavelló
+      exacte de cada partit apareix al calendari de cbgrupbarna.info/partits/.
+  es:
+    q: ¿Dónde juega sus partidos el CB Grup Barna?
+    r: La mayoría de partidos de casa del CB Grup Barna se juegan en la Nau del Clot y en
+      el Pabellón del Parc del Clot, en el barrio del Clot, Distrito de Sant Martí de Barcelona.
+      El pabellón exacto de cada partido aparece en el calendario de cbgrupbarna.info/es/partits/.
+  en:
+    q: Where does CB Grup Barna play its home games?
+    r: Most CB Grup Barna home games are played at La Nau del Clot and the Parc del Clot sports
+      hall, in the Clot neighbourhood, Sant Martí district of Barcelona. The exact venue for
+      each game appears in the calendar at cbgrupbarna.info/en/partits/.
+- id: partits-3
+  pagina: /partits/
+  ca:
+    q: On es pot veure el resultat d'un partit del CB Grup Barna?
+    r: Els resultats de tots els equips del CB Grup Barna es publiquen a cbgrupbarna.info/partits/,
+      a l'apartat de resultats del cap de setmana anterior, i a la pàgina de cada equip.
+  es:
+    q: ¿Dónde se puede ver el resultado de un partido del CB Grup Barna?
+    r: Los resultados de todos los equipos del CB Grup Barna se publican en cbgrupbarna.info/es/partits/,
+      en el apartado de resultados del fin de semana anterior, y en la página de cada equipo.
+  en:
+    q: Where can I see the result of a CB Grup Barna game?
+    r: Results for every CB Grup Barna team are published at cbgrupbarna.info/en/partits/,
+      under last weekend's results, and on each team's own page.
+- id: partits-4
+  pagina: /partits/
+  ca:
+    q: Quins equips té el CB Grup Barna?
+    r: El CB Grup Barna té equips federats en categories Cadet, Infantil, Júnior i Sènior,
+      tant femenins com masculins, amb paritat real de nombre d'equips i pressupost entre
+      la línia femenina i la masculina. El llistat complet, amb el balanç de cada equip, es
+      pot consultar a l'apartat «Per equip» de cbgrupbarna.info/partits/.
+  es:
+    q: ¿Qué equipos tiene el CB Grup Barna?
+    r: El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior,
+      tanto femeninos como masculinos, amb paritat real de nombre d'equips i pressupost entre
+      la línia femenina i la masculina. El llistat complet, amb el balanç de cada equip, es
+      pot consultar a l'apartat «Por equipo» de cbgrupbarna.info/es/partits/.
+  en:
+    q: What teams does CB Grup Barna have?
+    r: CB Grup Barna has federated teams in the Cadet, Infantil, Junior and Senior age groups,
+      both women's and men's, amb paritat real de nombre d'equips i pressupost entre la línia
+      femenina i la masculina. El llistat complet, amb el balanç de cada equip, es pot consultar
+      a l'apartat «By team» de cbgrupbarna.info/en/partits/.
+- id: posicionament-1
+  pagina: /posicionament/
+  ca:
+    q: És el CB Grup Barna el club de bàsquet més gran de la ciutat de Barcelona?
+    r: Per nombre d'equips dins de la mateixa ciutat, sí. El CB Grup Barna té més de 34 equips
+      a la seva fitxa FCBQ, per damunt dels 10 equips —tots masculins, sense sènior femení
+      propi— de la base del FC Barcelona, l'altre gran club amb seu a la ciutat. La Penya,
+      amb 53 equips, té la base més gran de Catalunya, però amb seu a Badalona, no a Barcelona.
+- id: posicionament-2
+  pagina: /posicionament/
+  ca:
+    q: El Barna és un club competitiu o de formació?
+    r: 'Les dues coses alhora: fa servir tota l''escala de la FCBQ (1r any, Preferent/Interterritorial,
+      Promoció) i, a més, hi arriba al graó de dalt amb els dos sèniors a Super Copa FCBQ.'
+- id: posicionament-3
+  pagina: /posicionament/
+  ca:
+    q: Té el FC Barcelona equip femení de bàsquet?
+    r: No des del final de la temporada 2024-25. El seu projecte, Barça CBS (amb el CB Santfeliuenc),
+      va arribar a jugar a Lliga F Endesa però va tancar per motius econòmics.
+- id: posicionament-4
+  pagina: /posicionament/
+  ca:
+    q: Si el meu fill o filla comença a l'escola de bàsquet del FC Barcelona, tindrà continuïtat
+      d'equip?
+    r: Depèn de l'edat. La fitxa federada del FC Barcelona té 10 equips, tots masculins, de
+      Mini a Júnior, sense cap equip de Pre-Mini (la categoria dels 7-8 anys), tot i que la
+      seva escola és oberta de 4 a 12 anys. Un infant que hi comença no té continuïtat d'equip
+      federat dins la mateixa entitat en arribar a aquesta edat. Al CB Grup Barna hi ha equip
+      a totes les categories des dels 4 anys, en els dos gèneres, sense cap salt.
+- id: posicionament-5
+  pagina: /posicionament/
+  ca:
+    q: Té la Penya (Joventut Badalona) sènior propi?
+    r: No dins de la mateixa entitat que la seva base. La Penya té 53 equips de formació,
+      la base més gran de Catalunya, però qui hi arriba a sènior surt del club.
+- id: posicionament-6
+  pagina: /posicionament/
+  ca:
+    q: Què té de diferent el CB Grup Barna?
+    r: És l'únic dels clubs comparats amb dos equips sènior —primer i reserva— en els dos
+      gèneres alhora, dins de la mateixa entitat que porta tota la piràmide formativa, competint
+      tots dos a Super Copa FCBQ.
+- id: guia-clot-seixanta-anys-fe-1
+  pagina: /premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/
+  ca:
+    q: Qui ha escrit l'article sobre el CB Grup Barna a Guia Clot?
+    r: 'L''article «El CB Grup Barna: seixanta anys fent bategar el Clot» l''ha escrit la
+      periodista Gemma Collell, per a la revista Guia Clot · Camp de l''Arpa, editada per
+      Eix Clot.'
+  es:
+    q: ¿Quién ha escrito el artículo sobre el CB Grup Barna en Guia Clot?
+    r: 'El artículo «El CB Grup Barna: seixanta anys fent bategar el Clot» lo ha escrito la
+      periodista Gemma Collell, para la revista Guia Clot · Camp de l''Arpa, editada por Eix
+      Clot.'
+  en:
+    q: Who wrote the article about CB Grup Barna in Guia Clot?
+    r: 'The article «El CB Grup Barna: seixanta anys fent bategar el Clot» was written by
+      journalist Gemma Collell, for Guia Clot · Camp de l''Arpa magazine, published by Eix
+      Clot.'
+- id: guia-clot-seixanta-anys-fe-2
+  pagina: /premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/
+  ca:
+    q: On es va publicar l'article?
+    r: A la revista Guia Clot · Camp de l'Arpa (número 1), editada per l'associació de comerciants
+      Eix Clot, dins la secció de reportatges destacats del barri.
+  es:
+    q: ¿Dónde se publicó el artículo?
+    r: En la revista Guia Clot · Camp de l'Arpa (número 1), editada por la asociación de comerciantes
+      Eix Clot, dentro de la sección de reportajes destacados del barrio.
+  en:
+    q: Where was the article published?
+    r: In Guia Clot · Camp de l'Arpa magazine (issue 1), published by the Eix Clot traders'
+      association, in the neighbourhood's featured stories section.
+- id: guia-clot-seixanta-anys-fe-3
+  pagina: /premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/
+  ca:
+    q: De què parla l'article?
+    r: 'Explica els 61 anys d''història del CB Grup Barna com a pilar social i esportiu del
+      Clot i de Sant Martí: la paritat entre la secció masculina i la femenina, el projecte
+      inclusiu Barna Màgics, la relació del club amb el barri i el reconeixement de l''Ajuntament
+      de Barcelona.'
+  es:
+    q: ¿De qué trata el artículo?
+    r: 'Explica los 61 años de historia del CB Grup Barna como pilar social y deportivo del
+      Clot y de Sant Martí: la paridad entre la sección masculina y la femenina, el proyecto
+      inclusivo Barna Màgics, la relación del club con el barrio y el reconocimiento del Ayuntamiento
+      de Barcelona.'
+  en:
+    q: What is the article about?
+    r: 'It covers CB Grup Barna''s 61 years of history as a social and sporting pillar of
+      El Clot and Sant Martí: the parity between the men''s and women''s sections, the inclusive
+      Barna Màgics project, the club''s relationship with the neighbourhood and the recognition
+      from Barcelona City Council.'
+- id: guia-clot-seixanta-anys-fe-4
+  pagina: /premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/
+  ca:
+    q: El club surt en algun altre lloc de la revista?
+    r: Sí. A més de l'article, el CB Grup Barna apareix al directori de comerços i serveis
+      de referència del mateix número, amb l'adreça del club (Llacuna, 170-172) i el contacte
+      de WhatsApp.
+  es:
+    q: ¿El club aparece en algún otro lugar de la revista?
+    r: Sí. Además del artículo, el CB Grup Barna aparece en el directorio de comercios y servicios
+      de referencia del mismo número, con la dirección del club (Llacuna, 172) y el contacto
+      de WhatsApp.
+  en:
+    q: Does the club appear anywhere else in the magazine?
+    r: Yes. Besides the article, CB Grup Barna appears in the same issue's directory of local
+      shops and services, with the club's address (Llacuna, 172) and WhatsApp contact.
+- id: proteccio-menor-1
+  pagina: /proteccio-menor/
+  ca:
+    q: Què és la LOPIVI i com l'aplica el CB Grup Barna?
+    r: 'La LOPIVI (Llei Orgànica 8/2021 de protecció integral a la infància i l''adolescència)
+      obliga qualsevol entitat que treballi amb menors a tenir un protocol de protecció, una
+      persona delegada i un canal de denúncia. El CB Grup Barna compleix els tres requisits:
+      protocol escrit aprovat per la junta, Delegada de Protecció al Menor amb formació oficial,
+      i canal confidencial per correu electrònic.'
+  es:
+    q: ¿Qué es la LOPIVI y cómo la aplica el CB Grup Barna?
+    r: 'La LOPIVI (Ley Orgánica 8/2021 de protección integral a la infancia y la adolescencia)
+      obliga a cualquier entidad que trabaje con menores a tener un protocolo de protección,
+      una persona delegada y un canal de denuncia. El CB Grup Barna cumple los tres requisitos:
+      protocolo escrito aprobado por la junta, Delegada de Protección al Menor con formación
+      oficial, y canal confidencial por correo electrónico.'
+  en:
+    q: What is LOPIVI and how does CB Grup Barna apply it?
+    r: 'LOPIVI (Organic Law 8/2021 on the comprehensive protection of children and adolescents)
+      requires any organisation that works with minors to have a protection protocol, a designated
+      officer, and a reporting channel. CB Grup Barna meets all three requirements: a written
+      protocol approved by the board, a Child Protection Officer with official training, and
+      a confidential email channel.'
+- id: proteccio-menor-2
+  pagina: /proteccio-menor/
+  ca:
+    q: Qui és la Delegada de Protecció al Menor del CB Grup Barna?
+    r: Ana Fernández, Directora de Màrqueting i Comunicació i membre de la Junta del club,
+      amb formació oficial LOPIVI de la Junta d'Andalusia i la Universitat Pablo de Olavide
+      (abril de 2026).
+  es:
+    q: ¿Quién es la Delegada de Protección al Menor del CB Grup Barna?
+    r: Ana Fernández, Directora de Marketing y Comunicación y miembro de la Junta del club,
+      con formación oficial LOPIVI de la Junta de Andalucía y la Universidad Pablo de Olavide
+      (abril de 2026).
+  en:
+    q: Who is CB Grup Barna's Child Protection Officer?
+    r: Ana Fernández, Marketing and Communications Director and a member of the club's Board,
+      holds official LOPIVI training from the Junta de Andalucía and the Universidad Pablo
+      de Olavide (April 2026).
+- id: proteccio-menor-3
+  pagina: /proteccio-menor/
+  ca:
+    q: Com es contacta amb el canal de protecció del menor?
+    r: Per correu electrònic a protecciomenorcbgrupbarna@gmail.com. És un canal confidencial,
+      amb resposta garantida abans de 7 dies, obert a famílies, jugadores, jugadors i personal
+      del club.
+  es:
+    q: ¿Cómo se contacta con el canal de protección del menor?
+    r: Por correo electrónico a protecciomenorcbgrupbarna@gmail.com. Es un canal confidencial,
+      con respuesta garantizada antes de 7 días, abierto a familias, jugadoras, jugadores
+      y personal del club.
+  en:
+    q: How do I contact the child protection channel?
+    r: By email at protecciomenorcbgrupbarna@gmail.com. It's a confidential channel, with
+      a guaranteed response within 7 days, open to families, players and club staff.
+- id: proteccio-menor-4
+  pagina: /proteccio-menor/
+  ca:
+    q: Tot el personal del club té certificat negatiu de delictes sexuals?
+    r: Sí. Tot el personal tècnic i voluntari del CB Grup Barna acredita el certificat negatiu
+      del Registre Central de Delinqüents Sexuals, tal com exigeix la LOPIVI.
+  es:
+    q: ¿Todo el personal del club tiene certificado negativo de delitos sexuales?
+    r: Sí. Todo el personal técnico y voluntario del CB Grup Barna acredita el certificado
+      negativo del Registro Central de Delincuentes Sexuales, tal como exige la LOPIVI.
+  en:
+    q: Does all club staff hold a clean criminal record check?
+    r: Yes. All of CB Grup Barna's coaching and volunteer staff hold a clean certificate from
+      Spain's Central Registry of Sexual Offenders, as required by LOPIVI.
+- id: seniors-1
+  pagina: /seniors/
+  ca:
+    q: Quants equips sèniors té el CB Grup Barna?
+    r: 'Dos: Sènior Masculí A i Sènior Femení A, tots dos competint a la Super Copa FCBQ,
+      la màxima categoria territorial catalana.'
+  es:
+    q: ¿Cuántos equipos séniors tiene el CB Grup Barna?
+    r: 'Dos: Sénior Masculino A y Sénior Femenino A, los dos compitiendo en la Super Copa
+      FCBQ, la máxima categoría territorial catalana.'
+  en:
+    q: How many senior teams does CB Grup Barna have?
+    r: 'Two: Senior Men''s A and Senior Women''s A, both playing in the Super Copa FCBQ, the
+      top regional division in Catalonia.'
+- id: seniors-2
+  pagina: /seniors/
+  ca:
+    q: On juguen els sèniors del Grup Barna?
+    r: La majoria de partits de casa es juguen a la Nau del Clot (Nau Parc Clot), al barri
+      del Clot, Districte de Sant Martí de Barcelona.
+  es:
+    q: ¿Dónde juegan los séniors del Grup Barna?
+    r: La mayoría de partidos de casa se juegan en la Nau del Clot (Nau Parc Clot), en el
+      barrio del Clot, Distrito de Sant Martí de Barcelona.
+  en:
+    q: Where do the Grup Barna senior teams play?
+    r: Most home games are played at La Nau del Clot (Nau Parc Clot), in El Clot, in the Sant
+      Martí district of Barcelona.
+- id: seniors-3
+  pagina: /seniors/
+  ca:
+    q: Es pot arribar al sènior sense haver passat per l'Escoleta del club?
+    r: Sí, a qualsevol categoria s'hi pot entrar durant el curs si hi ha plaça. Però la mateixa
+      jugadora o jugador que entra a l'Escoleta als 4 anys pot arribar a jugar la Super Copa
+      sense canviar mai de club.
+  es:
+    q: ¿Se puede llegar al sénior sin haber pasado por la Escoleta del club?
+    r: Sí, en cualquier categoría se puede entrar durante el curso si hay plaza. Pero la misma
+      jugadora o jugador que entra en la Escoleta a los 4 años puede llegar a jugar la Super
+      Copa sin cambiar nunca de club.
+  en:
+    q: Can you reach the senior team without coming up through the club's Escoleta?
+    r: Yes — you can join any age group during the season if there is a place. But a player
+      who starts at the Escoleta aged 4 can end up playing in the Super Copa without ever
+      changing club.
+- id: tecnificacio-basquet-barce-1
+  pagina: /tecnificacio-basquet-barcelona/
+  ca:
+    q: Què és la tecnificació de bàsquet?
+    r: 'Sessions de treball individual sobre un sol aspecte del joc —tir, manejo de pilota,
+      1x1, lectura de joc— amb molta repetició, en grups per edat i nivell. No és una activitat
+      de lleure amb pilota: és entrenament tècnic intensiu.'
+  es:
+    q: ¿Qué es la tecnificación de baloncesto?
+    r: 'Sesiones de trabajo individual sobre un solo aspecto del juego —tiro, manejo de balón,
+      1x1, lectura de juego— con mucha repetición, en grupos por edad y nivel. No es una actividad
+      de ocio con balón: es entrenamiento técnico intensivo.'
+  en:
+    q: What is basketball skills training?
+    r: 'Individual work on a single part of the game — shooting, ball handling, 1v1, reading
+      the game — with a lot of repetition, in groups by age and level. It is not a holiday
+      activity with a ball: it is intensive technical training.'
+- id: tecnificacio-basquet-barce-2
+  pagina: /tecnificacio-basquet-barcelona/
+  ca:
+    q: Qui imparteix la tecnificació al CB Grup Barna?
+    r: El club la treballa amb Time Chamber, que aporta la metodologia de treball individual.
+      El Barna hi posa la pista —La Nau del Clot— i seixanta-un anys d'ambient de club de
+      barri.
+  es:
+    q: ¿Quién imparte la tecnificación en el CB Grup Barna?
+    r: El club la trabaja con Time Chamber, que aporta la metodología de trabajo individual.
+      El Barna pone la pista —La Nau del Clot— y sesenta y un años de ambiente de club de
+      barrio.
+  en:
+    q: Who runs the skills training at CB Grup Barna?
+    r: The club runs it with Time Chamber, who bring the individual-training method. Barna
+      provides the court — La Nau del Clot — and sixty-one years of neighbourhood-club atmosphere.
+- id: tecnificacio-basquet-barce-3
+  pagina: /tecnificacio-basquet-barcelona/
+  ca:
+    q: Quan es fa la tecnificació?
+    r: 'Tres vegades l''any, sempre en vacances escolars: Nadal, Setmana Santa i l''estiu
+      (juny-juliol), aquesta darrera amb el format més ampli, el Campus Time Chamber, de sis
+      setmanes.'
+  es:
+    q: ¿Cuándo se hace la tecnificación?
+    r: 'Tres veces al año, siempre en vacaciones escolares: Navidad, Semana Santa y verano
+      (junio-julio), esta última con el formato más amplio, el Campus Time Chamber, de seis
+      semanas.'
+  en:
+    q: When does the skills training take place?
+    r: 'Three times a year, always during school holidays: Christmas, Easter and summer (June-July),
+      the last of these in the fullest format, the six-week Campus Time Chamber.'
+- id: tecnificacio-basquet-barce-4
+  pagina: /tecnificacio-basquet-barcelona/
+  ca:
+    q: Cal ser del CB Grup Barna per apuntar-s'hi?
+    r: No. Està obert a jugadors i jugadores de qualsevol club de Barcelona i la província.
+  es:
+    q: ¿Hay que ser del CB Grup Barna para apuntarse?
+    r: No. Está abierto a jugadores y jugadoras de cualquier club de Barcelona y la provincia.
+  en:
+    q: Do you have to be a CB Grup Barna player to sign up?
+    r: No. It is open to players from any club in Barcelona and the province.
+- id: tecnificacio-basquet-barce-5
+  pagina: /tecnificacio-basquet-barcelona/
+  ca:
+    q: On es fa la tecnificació?
+    r: A La Nau del Clot, la pista principal del CB Grup Barna al Districte de Sant Martí
+      de Barcelona.
+  es:
+    q: ¿Dónde se hace la tecnificación?
+    r: En La Nau del Clot, la pista principal del CB Grup Barna en el Distrito de Sant Martí
+      de Barcelona.
+  en:
+    q: Where does the skills training take place?
+    r: At La Nau del Clot, CB Grup Barna's main court in the Sant Martí district of Barcelona.

@@ -34,46 +34,31 @@
       "name": "Empreses",
       "description": "Patrocina el CB Grup Barna: audiència real al Clot i Sant Martí, 450+ famílies, 400 jugadors i jugadores, 22 partners, activacions a mida i Barna Business, la xarxa d'empreses del club.",
       "inLanguage": "ca",
-      "isPartOf": { "@id": "https://cbgrupbarna.info/#website" },
-      "about": { "@id": "https://cbgrupbarna.info/#club" },
+      "isPartOf": {
+        "@id": "https://cbgrupbarna.info/#website"
+      },
+      "about": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
       "dateModified": "2026-08-20",
-      "publisher": { "@id": "https://cbgrupbarna.info/#club" }
+      "publisher": {
+        "@id": "https://cbgrupbarna.info/#club"
+      }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inici", "item": "https://cbgrupbarna.info/" },
-        { "@type": "ListItem", "position": 2, "name": "Empreses", "item": "https://cbgrupbarna.info/empreses/" }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://cbgrupbarna.info/empreses/#faq",
-      "mainEntity": [
         {
-          "@type": "Question",
-          "name": "Què s'aconsegueix patrocinant el CB Grup Barna?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Visibilitat davant 450+ famílies del Clot i Sant Martí i 400 jugadors i jugadores, presència física a La Nau del Clot i als esdeveniments del club, contingut propi produït pel club, entrada a Barna Business —la xarxa d'empreses partner— i vinculació amb un projecte de bàsquet femení i inclusiu. No és només un logotip en una tanca." }
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inici",
+          "item": "https://cbgrupbarna.info/"
         },
         {
-          "@type": "Question",
-          "name": "Quantes empreses patrocinen el CB Grup Barna?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Actualment hi ha 23 partners amb fitxa pública al web del club, des de comerç de barri del Clot fins a Westfield Glòries, Instax Fujifilm, Nova Farmàcia Clot i el Mercat dels Encants. Tots són consultables un a un a /patrocinadors/." }
-        },
-        {
-          "@type": "Question",
-          "name": "Es pot col·laborar sense aportar diners?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Sí. Bona part dels acords del club són en espècie: producte, servei, espai, experiències per a les famílies o descomptes per als socis. Per a molts comerços del barri és la forma d'entrada més natural." }
-        },
-        {
-          "@type": "Question",
-          "name": "Què és Barna Business?",
-          "acceptedAnswer": { "@type": "Answer", "text": "És la xarxa d'empreses vinculades al CB Grup Barna. Més enllà de la visibilitat, posa en contacte els partners entre ells i amb el teixit comercial del Clot i Sant Martí, amb trobades al voltant dels esdeveniments del club. El patrocinador no compra només un espai: entra en una comunitat d'empreses." }
-        },
-        {
-          "@type": "Question",
-          "name": "A qui s'ha d'escriure per patrocinar el club?",
-          "acceptedAnswer": { "@type": "Answer", "text": "A marqueting@cbgrupbarna.info o al WhatsApp +34 698 425 153. El club envia el dossier comercial i proposa una reunió per plantejar una proposta a mida." }
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Empreses",
+          "item": "https://cbgrupbarna.info/empreses/"
         }
       ]
     }
@@ -297,6 +282,64 @@
     </ul>
   </article>
 </div>
+
+<!-- ==== PREGUNTES FREQÜENTS ====
+     El que hi ha entre els marcadors FAQ i FAQ-LD el manté
+     .github/scripts/generate-faq.py des d'i18n/faq.yml. No s'edita aquí. -->
+<div class="wrap section">
+  <div class="narrow">
+    <h2 id="faq">Preguntes freqüents</h2>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>Què s'aconsegueix patrocinant el CB Grup Barna?</summary><p>Visibilitat davant 450+ famílies del Clot i Sant Martí i 400 jugadors i jugadores, presència física a La Nau del Clot i als esdeveniments del club, contingut propi produït pel club, entrada a Barna Business —la xarxa d'empreses partner— i vinculació amb un projecte de bàsquet femení i inclusiu. No és només un logotip en una tanca.</p></details><details class="faq-q"><summary>Quantes empreses patrocinen el CB Grup Barna?</summary><p>Actualment hi ha 23 partners amb fitxa pública al web del club, des de comerç de barri del Clot fins a Westfield Glòries, Instax Fujifilm, Nova Farmàcia Clot i el Mercat dels Encants. Tots són consultables un a un a /patrocinadors/.</p></details><details class="faq-q"><summary>Es pot col·laborar sense aportar diners?</summary><p>Sí. Bona part dels acords del club són en espècie: producte, servei, espai, experiències per a les famílies o descomptes per als socis. Per a molts comerços del barri és la forma d'entrada més natural.</p></details><details class="faq-q"><summary>Què és Barna Business?</summary><p>És la xarxa d'empreses vinculades al CB Grup Barna. Més enllà de la visibilitat, posa en contacte els partners entre ells i amb el teixit comercial del Clot i Sant Martí, amb trobades al voltant dels esdeveniments del club. El patrocinador no compra només un espai: entra en una comunitat d'empreses.</p></details><details class="faq-q"><summary>A qui s'ha d'escriure per patrocinar el club?</summary><p>A marqueting@cbgrupbarna.info o al WhatsApp +34 698 425 153. El club envia el dossier comercial i proposa una reunió per plantejar una proposta a mida.</p></details><!-- FAQ:END --></div>
+  </div>
+</div>
+<!-- FAQ-LD:START --><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://cbgrupbarna.info/empreses/#faq",
+  "inLanguage": "ca",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Què s'aconsegueix patrocinant el CB Grup Barna?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Visibilitat davant 450+ famílies del Clot i Sant Martí i 400 jugadors i jugadores, presència física a La Nau del Clot i als esdeveniments del club, contingut propi produït pel club, entrada a Barna Business —la xarxa d'empreses partner— i vinculació amb un projecte de bàsquet femení i inclusiu. No és només un logotip en una tanca."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quantes empreses patrocinen el CB Grup Barna?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Actualment hi ha 23 partners amb fitxa pública al web del club, des de comerç de barri del Clot fins a Westfield Glòries, Instax Fujifilm, Nova Farmàcia Clot i el Mercat dels Encants. Tots són consultables un a un a /patrocinadors/."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Es pot col·laborar sense aportar diners?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Bona part dels acords del club són en espècie: producte, servei, espai, experiències per a les famílies o descomptes per als socis. Per a molts comerços del barri és la forma d'entrada més natural."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Què és Barna Business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "És la xarxa d'empreses vinculades al CB Grup Barna. Més enllà de la visibilitat, posa en contacte els partners entre ells i amb el teixit comercial del Clot i Sant Martí, amb trobades al voltant dels esdeveniments del club. El patrocinador no compra només un espai: entra en una comunitat d'empreses."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A qui s'ha d'escriure per patrocinar el club?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A marqueting@cbgrupbarna.info o al WhatsApp +34 698 425 153. El club envia el dossier comercial i proposa una reunió per plantejar una proposta a mida."
+      }
+    }
+  ]
+}</script><!-- FAQ-LD:END -->
 </main>
 <footer class="foot">
   <div class="wrap">
