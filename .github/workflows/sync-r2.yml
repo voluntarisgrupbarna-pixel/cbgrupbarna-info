@@ -78,12 +78,15 @@ jobs:
           puja fotos/thumb  thumb/  image/webp
           puja fotos/web    web/    image/webp
           [ -d fotos/arxiu ] && puja fotos/arxiu arxiu/ image/webp
-          # Els videos, tal qual: no es transcodifiquen
+          # Els videos, tal qual: no es transcodifiquen. Prefix uploads/ perque
+          # coincideixi amb on els escriu el Worker de pujada directa (vegeu
+          # workers/fotos-upload/) i repoUrl() a fotos/index.html hi apunti
+          # igual siguin videos vells (sincronitzats des d'aqui) o nous.
           echo "::group::videos"
           find fotos/uploads -type f \( -iname '*.mp4' -o -iname '*.mov' -o -iname '*.webm' \) -print0 \
           | while IFS= read -r -d '' f; do
               rel="${f#fotos/uploads/}"
-              aws s3 cp "$f" "s3://$BUCKET/video/$rel" --endpoint-url "$ENDPOINT" --no-progress
+              aws s3 cp "$f" "s3://$BUCKET/uploads/$rel" --endpoint-url "$ENDPOINT" --no-progress
             done
           echo "::endgroup::"
 

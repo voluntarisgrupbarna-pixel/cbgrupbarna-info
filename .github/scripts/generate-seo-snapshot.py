@@ -9,6 +9,16 @@ calendari es pinta amb fetch('data.json') + JS. El bloc estatic viu dins
 <noscript>, així que els navegadors amb JavaScript el sobreescriuen a
 l'instant (renderJornada() substitueix tot #jornada-list) i mai es veu.
 
+IMPORTANT: nomes escriu la versio CATALANA. Les de /es/partits/ i /en/partits/
+es generen a partir d'aquesta amb scripts/build-partits-idiomes.py, o sigui
+que l'ordre es:
+
+    python3 .github/scripts/generate-seo-snapshot.py
+    python3 scripts/build-partits-idiomes.py
+
+Si nomes s'executa el primer, les traduccions es queden amb la instantania
+d'abans.
+
 S'executa cada dia, just despres d'update-partits.py, per reflectir sempre
 data.json al dia. Disseny defensiu: si data.json no es pot llegir o no hi
 ha partits, deixa els blocs buits en comptes de trencar la pagina.

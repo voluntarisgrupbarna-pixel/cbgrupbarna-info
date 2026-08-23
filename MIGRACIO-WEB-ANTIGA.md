@@ -103,8 +103,8 @@ de visualització.
 | Dada | cbgrupbarna.com | cbgrupbarna.info |
 |---|---|---|
 | Telèfon | 688 26 52 **31** (capçalera) i 688 26 52 **30** (peu) | 698 425 153 |
-| Correu | cbgrupbarna@gmail.com | marqueting@cbgrupbarna.info |
-| Adreça | C/ Llacuna 170 | C/ Llacuna 172 *(corregit avui segons la candidatura)* |
+| Correu | marqueting@cbgrupbarna.info | marqueting@cbgrupbarna.info |
+| Adreça | C/ Llacuna 170-172 | C/ Llacuna 170-172 *(corregit avui segons la candidatura)* |
 | Xarxes | Instagram, Facebook, Twitter/X, Flickr, WhatsApp | Instagram, TikTok, X *(només a la portada)* |
 
 El telèfon es contradiu dins de la mateixa web antiga. Cal decidir quin és el bo i deixar-lo
@@ -164,3 +164,25 @@ La conclusió no és «tornar enrere», és que la migració va deixar fora la p
    que es contradiu a si mateixa; i Facebook/Flickr de l'antiga no s'afegeixen al peu perquè no hi
    ha manera de saber si algú els segueix mantenint. **Confirmat per l'Ana (15/08/2026): no enllaçar
    Wintym, Flickr ni Facebook.**
+7. ~~Decidir quin domini mana i deixar de tractar l'altre com un lloc a part.~~
+   **Confirmat per l'Ana (23/08/2026): `cbgrupbarna.com` es queda com a redirecció cap a
+   `cbgrupbarna.info`.** La redirecció 301 en si és una configuració de DNS/allotjament del domini
+   `.com`, fora d'aquest repositori. El que sí que és aquí:
+   - Tret l'enllaç «cbgrupbarna.com» de la columna Xarxes del peu (175 pàgines): ja no és «un altre
+     lloc», és el mateix amb un dret de pas.
+   - Els tres «Notícies del club» de la portada (ca/es/en) que apuntaven a
+     `cbgrupbarna.com/noticies/` —una secció que mai ha existit a `.info`— ara van a `/blog/`, l'únic
+     hub de contingut propi que hi ha.
+   - `data.json` (`club.web` i `xarxes.web`, la font que llegeixen diverses pàgines) ara diu
+     `cbgrupbarna.info`.
+   - Tret `https://www.cbgrupbarna.com` del `sameAs` del JSON-LD a la portada i al briefing (ca/en):
+     un domini que només reboca cap a la mateixa pàgina no hauria de figurar-hi com si fos un perfil
+     extern.
+   - Els quatre `info@cbgrupbarna.com` solts que quedaven a peus de pàgina (blog, premsa,
+     `/seniors/`, `/tecnificacio-basquet-barcelona/`) ara diuen `marqueting@cbgrupbarna.info`, l'adreça
+     que ja era l'estàndard a tota la resta del web.
+   - **Deliberadament NO tocat:** l'`UID` de l'`.ics` de `/partits/` segueix dient
+     `@cbgrupbarna.com` — és un identificador, no un enllaç, i canviar-lo duplicaria els partits als
+     calendaris de qui ja els té sincronitzats. I les tres mencions dins de l'article de premsa de
+     la Guia del Clot (Gemma Collell) es mantenen tal com les va publicar la periodista: és una cita
+     literal amb autoria, no contingut del club.

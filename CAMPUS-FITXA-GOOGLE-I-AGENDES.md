@@ -7,7 +7,7 @@ Dades oficials que han de sortir **idèntiques** a tot arreu (NAP):
 
 ```
 CB Grup Barna
-Carrer de la Llacuna, 172 · 08018 Barcelona (El Clot, Districte de Sant Martí)
+Carrer de la Llacuna, 170-172 · 08018 Barcelona (El Clot, Districte de Sant Martí)
 +34 698 425 153
 marqueting@cbgrupbarna.info
 https://cbgrupbarna.info
@@ -28,7 +28,7 @@ més s'incompleix.
 | Nom del negoci | `CB Grup Barna` (només això: res de "campus" ni "bàsquet Barcelona al nom" — Google penalitza el farciment) |
 | Categoria principal | `Club deportivo` |
 | Categories secundàries | `Escuela de baloncesto` · `Cancha de baloncesto` · `Organización deportiva` · `Campamento de verano` |
-| Adreça | Carrer de la Llacuna, 172 · 08018 Barcelona |
+| Adreça | Carrer de la Llacuna, 170-172 · 08018 Barcelona |
 | Àrea de servei | Barcelona i província de Barcelona |
 | Telèfon | +34 698 425 153 |
 | Web | https://cbgrupbarna.info |
@@ -99,7 +99,7 @@ locals. Publicar-ne aquestes sis:
 2. *Cal ser del club per anar al campus?* → No. És obert a jugadors i jugadores de qualsevol club de Barcelona i de la província.
 3. *Quantes places hi ha per setmana?* → Al voltant de 50, per mantenir la ràtio d'entrenador per jugador. Les setmanes s'omplen per ordre d'inscripció.
 4. *A quina edat es pot començar?* → A l'Escoleta des dels 4 anys; al campus, des de l'edat d'Escoleta fins a cadet i júnior, en grups per edat i nivell.
-5. *On es fa el campus?* → A La Nau del Clot, Carrer de la Llacuna, 172, barri del Clot, Districte de Sant Martí.
+5. *On es fa el campus?* → A La Nau del Clot, Carrer de la Llacuna, 170-172, barri del Clot, Districte de Sant Martí.
 6. *Hi ha campus a Nadal i Setmana Santa?* → Sí, en format curt de tecnificació amb Time Chamber. Detall a cbgrupbarna.info/tecnificacio-basquet-barcelona/
 
 ### Publicacions (Novetats) — calendari mínim
@@ -181,7 +181,7 @@ aquí per no enviar res a una adreça morta.
 > - **Dates:** sis setmanes, de finals de juny a principis d'agost [CONFIRMAR DATES DE L'EDICIÓ]
 > - **Horari:** jornada completa de 9:00 a 17:00 amb àpat inclòs, o mitja jornada de 9:00 a 13:30
 > - **Preu:** 195 € la setmana completa · 160 € la mitja jornada
-> - **Lloc:** La Nau del Clot · Carrer de la Llacuna, 172 · 08018 Barcelona
+> - **Lloc:** La Nau del Clot · Carrer de la Llacuna, 170-172 · 08018 Barcelona
 > - **Places:** unes 50 per setmana
 > - **Obert a:** qualsevol infant, sigui del club o no
 > - **Informació i inscripcions:** https://cbgrupbarna.info/campus/
@@ -226,7 +226,7 @@ aquí per no enviar res a una adreça morta.
 >
 > - **Campus de bàsquet CB Grup Barna** · tecnificació, amb Time Chamber
 > - Sis setmanes d'estiu + tecnificació de Nadal i Setmana Santa
-> - La Nau del Clot · Carrer de la Llacuna, 172 · 08018 Barcelona
+> - La Nau del Clot · Carrer de la Llacuna, 170-172 · 08018 Barcelona
 > - De 4 a 17 anys, grups per edat i nivell, unes 50 places per setmana
 > - Obert a jugadors i jugadores de qualsevol club
 > - https://cbgrupbarna.info/campus/
@@ -273,7 +273,7 @@ una agenda no publica una activitat sense dia.
 > - **Dates:** [DIES FEINERS DE LES VACANCES DE NADAL — CONFIRMAR]
 > - **Horari:** [CONFIRMAR]
 > - **Preu:** [CONFIRMAR]
-> - **Lloc:** La Nau del Clot · Carrer de la Llacuna, 172 · 08018 Barcelona
+> - **Lloc:** La Nau del Clot · Carrer de la Llacuna, 170-172 · 08018 Barcelona
 > - **Obert a:** qualsevol infant, sigui del club o no
 > - **Informació i inscripcions:** https://cbgrupbarna.info/campus-nadal-basquet-barcelona/
 > - **Contacte:** marqueting@cbgrupbarna.info · +34 698 425 153

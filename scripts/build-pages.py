@@ -369,7 +369,7 @@ def build_campus():
         <span class="franja-go"><em>4 a 8 anys</em><i></i></span>
       </a>
       <a class="franja franja--red" href="/partits/" data-cta="campus-franja-dies-partit">
-        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-tx"><span class="franja-t">Calendari</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
         <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
       </a>
       <a class="franja" href="/3x3/" data-cta="campus-franja-3x3">
@@ -1010,7 +1010,7 @@ def build_3x3():
         <span class="franja-go"><em>4 a 8 anys</em><i></i></span>
       </a>
       <a class="franja franja--red" href="/partits/" data-cta="3x3-franja-dies-partit">
-        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-tx"><span class="franja-t">Calendari</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
         <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
       </a>
       <a class="franja" href="/campus/" data-cta="3x3-franja-campus">
@@ -1340,7 +1340,7 @@ del nivell més alt. Un club "de formació" és el que fa servir aquesta escala 
 dades de la federació ho demostren millor que qualsevol frase de presentació.</p>
 """ + FIG_FORMACIO_SENIOR + """
 <h2>La piràmide del Barna, per dins</h2>
-<p>La fitxa oficial del club a basquetcatala.cat mostra <strong>més de 34 equips federats</strong>,
+<p>La fitxa oficial del club a basquetcatala.cat mostra <strong>32 equips federats</strong>,
 de Pre-Mini (8-9 anys) fins a Sènior, amb estructura masculina i femenina paral·lela i, en la
 majoria de categories, fins a <strong>tres nivells</strong>: un equip A al sostre competitiu
 (Interterritorial, o Preferent quan no n'hi ha), un equip B format per jugadors i jugadores en el
@@ -1394,7 +1394,7 @@ passen pel mateix club, sense trencar mai el fil.</p>
 """,
   "faq": [
    ("Quants equips té el CB Grup Barna?",
-    "Més de 34 equips federats, de Pre-Mini a Sènior, amb estructura masculina i femenina i fins a "
+    "32 equips federats, de Pre-Mini a Sènior, amb estructura masculina i femenina i fins a "
     "tres nivells per categoria (A, B i Negre), segons la fitxa oficial del club a basquetcatala.cat."),
    ("Què és la Súper Copa de la FCBQ?",
     "És la màxima categoria sènior territorial organitzada per la Federació Catalana de Bàsquet. "
@@ -1517,7 +1517,7 @@ sense competició federada pròpia. Una <strong>escola de bàsquet</strong> és 
 nens i nenes de 4 a 8 anys. Un <strong>club</strong> és el que hi ha darrere: equips federats a totes
 les categories, entrenadors titulats i continuïtat de dècades. El CB Grup Barna és les tres coses
 alhora: funciona com una acadèmia de bàsquet a Barcelona (formació i tecnificació des de ben petits)
-i és, alhora, un club amb 34 equips federats i seixanta-un anys al mateix barri.</p>
+i és, alhora, un club amb 38 equips i seixanta-un anys al mateix barri.</p>
 """ + FIG_TRIAR_CLUB + """
 <h2>1. Quants entrenadors hi ha per grup</h2>
 <p>És el primer que s'ha de preguntar i el que menys es pregunta. Un grup de vint criatures de cinc
@@ -1747,7 +1747,7 @@ s'obren pot <a href="/#info">deixar el contacte</a> o escriure al WhatsApp del c
   "title": "Bàsquet base al Clot i a Sant Martí: com funciona un club de barri",
   "seo_title": "Bàsquet base al Clot i Sant Martí, Barcelona | CB Grup Barna",
   "desc": ("Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa "
-           "federativa, calendari i què significa jugar en un club de barri amb seixanta-un anys "
+           "federativa, calendari i què vol dir jugar en un club de barri amb seixanta-un anys "
            "d'història."),
   "kw": "bàsquet base Barcelona, bàsquet Sant Martí, club bàsquet Clot, baloncesto base Barcelona, "
         "club bàsquet barri Barcelona",
@@ -1806,7 +1806,7 @@ equip federat. En tots dos casos, el primer pas és el mateix: anar a fer un
     "no és el resultat sinó formar jugadors i jugadores que segueixin jugant."),
    ("Quin club de bàsquet hi ha al barri del Clot?",
     "El CB Grup Barna, fundat el 1965, és el club de bàsquet base del Clot, al Districte de Sant "
-    "Martí de Barcelona, amb més de 34 equips federats i unes 450 jugadores i jugadors."),
+    "Martí de Barcelona, amb 32 equips federats i unes 450 jugadores i jugadors."),
    ("Cal fitxa federativa per jugar a bàsquet base?",
     "Sí, per a la competició federada. La tramita el club davant la Federació Catalana de Basquetbol "
     "i inclou l'assegurança esportiva. A l'escola d'iniciació (4 a 8 anys) no cal."),
@@ -2471,7 +2471,7 @@ def build_calendaris():
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red" id="cal-temporada">Temporada</p>
-    <h1>Dies de partit per equip</h1>
+    <h1>Calendari per equip</h1>
     <p class="lede">El calendari complet de cada equip, llest per descarregar i desar. Es genera cada dia a
     partir del calendari oficial de la FCBQ: els equips de promoció (premini, mini, preinfantil) hi apareixen
     sols en el moment que la federació en publiqui el calendari.</p>

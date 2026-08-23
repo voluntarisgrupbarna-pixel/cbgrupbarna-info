@@ -335,11 +335,11 @@
 .ig-nav a { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 16px; border: 1px solid var(--line); font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-2); transition: border-color 0.3s, color 0.3s; }
 .ig-nav a:hover { border-color: var(--red); color: var(--red); }
 .ig-search { position: relative; max-width: 360px; margin: 20px auto 0; }
-.ig-search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.ig-search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #6B6560; pointer-events: none; }
 .ig-search input { width: 100%; height: 44px; padding: 0 14px 0 40px; border: 1px solid var(--line); background: var(--paper); font-family: var(--body); font-size: 14px; color: var(--ink); }
 .ig-search input:focus { outline: none; border-color: var(--red); }
-.ig-search input::placeholder { color: var(--muted); }
-.ig-search-count { margin-top: 10px; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-align: center; }
+.ig-search input::placeholder { color: #6B6560; }
+.ig-search-count { margin-top: 10px; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6560; text-align: center; }
 .igx[hidden], .ig-sec[hidden], .ig-nav a[hidden] { display: none !important; }
 .ig-empty { text-align: center; padding: 40px 0; color: var(--ink-2); font-size: 14px; }
 .ig-sec { padding: clamp(34px, 5vw, 62px) 0; border-top: 1px solid var(--line); }
@@ -350,7 +350,7 @@
 .igx-media { position: relative; }
 .igx-media blockquote.instagram-media { background: var(--paper) !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; max-width: 100% !important; min-width: 0 !important; width: 100% !important; }
 .igx-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 300px; padding: 30px 20px; text-align: center; background: var(--paper-2); }
-.igx-ph span { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+.igx-ph span { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
 .igx-cap { padding: 18px 20px 22px; border-top: 1px solid var(--line); }
 .igx-tag { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); }
 .igx-cap p { margin-top: 9px; font-size: 13.5px; line-height: 1.65; color: var(--ink-2); }
@@ -502,6 +502,20 @@
 })();
 </script>
 </main>
+<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
+<section class="comunitat" aria-label="Segueix el CB Grup Barna">
+  <div class="comunitat-in">
+    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
+      <span class="comunitat-t">Segueix-nos a Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el dia a dia del club, cada setmana.</span>
+    </a>
+    <a class="comunitat-porta comunitat-porta--red" href="/newsletter/" data-cta="crida-newsletter">
+      <span class="comunitat-t">Apunta't a la newsletter</span>
+      <span class="comunitat-s">Un correu al mes amb el que val la pena saber. Res més.</span>
+    </a>
+  </div>
+</section>
+<!-- /CRIDA DE COMUNITAT -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
@@ -513,11 +527,13 @@
         <a href="/empreses/">Empreses</a>
         <a href="/patrocinadors/">Partners</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
+        <a href="/proteccio-menor/">Protecció del Menor</a>
+        <a href="/femeni/">Bàsquet femení</a>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Dies de partit</a>
-        <a href="/partits/calendaris/">Dies de partit per equip</a>
+        <a href="/partits/">Calendari</a>
+        <a href="/partits/calendaris/">Calendari per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
@@ -526,7 +542,9 @@
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
-        <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/bustia/">Bústia de suggeriments</a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
       </div>

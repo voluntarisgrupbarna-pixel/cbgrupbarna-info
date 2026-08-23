@@ -54,7 +54,9 @@ TINTES = ["0a0a0a", "0f0f0f", "0a0908", "0e1116"]
 # Cremes i papers trencats.
 CREMES = ["f2ede6", "ede7de", "f6f4f1", "faf9f5", "f7f4f0", "f4f1ea"]
 # Grisos d'etiqueta que no arriben al contrast mínim.
-GRISOS = ["8a8681", "9a9691", "8b8b8b"]
+# #706c67 va arribar d'una revisió d'accessibilitat i també passa AA, però el
+# gris de la guia és el #6B6560: un de sol, com el vermell.
+GRISOS = ["8a8681", "9a9691", "8b8b8b", "706c67"]
 # Accents que no són de marca (el verd neó de la galeria del 3x3).
 ACCENTS_FORA = ["00ff57", "00e04c"]
 
@@ -216,6 +218,32 @@ def substitueix_lletra(text: str) -> tuple[str, int]:
 ENLLAC_FONTS = '<link rel="stylesheet" href="/css/fonts.css">\n'
 
 
+RE_FULL_GOOGLE = re.compile(r'<link[^>]*fonts\.googleapis\.com/css2[^>]*>')
+RE_PRECONNECT = re.compile(r'\s*<link[^>]*fonts\.(?:googleapis|gstatic)\.com"?[^>]*>')
+
+
+def treu_google_fonts(text: str) -> tuple[str, int]:
+    """Cap pàgina demana res a fonts.googleapis.com: les dues famílies viuen a
+    /fonts/ i es carreguen amb /css/fonts.css. És el criteri RGPD del club."""
+    if "fonts.googleapis.com" not in text:
+        return text, 0
+    primer = [True]
+
+    def sub(m: re.Match) -> str:
+        if "stylesheet" in m.group(0) and primer[0]:
+            primer[0] = False
+            return ENLLAC_FONTS.strip()
+        return ""
+
+    text = RE_FULL_GOOGLE.sub(sub, text)
+    text = RE_PRECONNECT.sub("", text)
+    if primer[0]:  # només hi havia preloads o preconnects
+        text = re.sub(
+            r"(<meta charset=[^>]*>)", r"\1\n" + ENLLAC_FONTS.strip(), text, count=1
+        )
+    return text, 1
+
+
 def assegura_fonts(text: str) -> tuple[str, int]:
     """Si una pàgina demana Anton, l'ha de carregar. Si no, cau a un serif del
     sistema i el titular deixa de ser del club."""
@@ -258,8 +286,9 @@ def main() -> int:
         original = f.read_text(encoding="utf-8")
         text, n_color = substitueix_colors(original)
         text, n_lletra = substitueix_lletra(text)
+        text, n_google = treu_google_fonts(text)
         text, n_fonts = assegura_fonts(text)
-        n_lletra += n_fonts
+        n_lletra += n_fonts + n_google
         if text == original:
             continue
         tocats += 1

@@ -82,7 +82,7 @@
   .mrow .hora { font-family: var(--display); font-weight: 400; font-size: 15px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
   .mrow .qui b { display: block; font-family: var(--display); font-weight: 400; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.5; }
   .mrow .qui span { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
-  .mrow .qui small { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .mrow .qui small { display: block; font-size: 11.5px; color: #6B6560; margin-top: 2px; }
   .mrow .on { text-align: right; }
   .chip { display: inline-block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--line); padding: 4px 10px; white-space: nowrap; }
   .chip.casa { border-color: rgba(226,6,19,0.4); color: var(--red-dark); }
@@ -90,7 +90,7 @@
   .marc { font-family: var(--display); font-weight: 400; font-size: 17px; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .marc.win { color: #1B7F4B; }
   .marc.loss { color: #A8040E; }
-  .marc-tag { display: block; font-family: var(--display); font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); margin-top: 2px; text-align: right; }
+  .marc-tag { display: block; font-family: var(--display); font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; margin-top: 2px; text-align: right; }
   .empty-note { padding: 18px 0; font-size: 14.5px; color: var(--ink-2); }
   /* Calendari global: un desplegable per mes */
   .mes { border: 1px solid var(--line); border-bottom: 0; }
@@ -98,11 +98,11 @@
   .mes summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 54px; padding: 12px clamp(14px, 2.4vw, 24px); font-family: var(--display); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s; }
   .mes summary::-webkit-details-marker { display: none; }
   .mes summary:hover { color: var(--red); }
-  .mes summary i { font-style: normal; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; color: var(--muted); }
+  .mes summary i { font-style: normal; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; color: #6B6560; }
   .mes[open] summary { border-bottom: 1px solid var(--line); }
   .mes-body { padding: 4px clamp(14px, 2.4vw, 24px) 18px; }
   .mes .mrow { grid-template-columns: 92px 64px minmax(0, 1fr); }
-  .mes .mrow .dia { font-family: var(--display); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .mes .mrow .dia { font-family: var(--display); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6560; white-space: nowrap; }
   .mes .mrow:last-child { border-bottom: 0; }
   /* Llistat per equip (el manté el robot diari entre els marcadors SEO-EQUIPS) */
   .equips-list ul { list-style: none; margin: 0; border-top: 1px solid var(--ink); }
@@ -135,7 +135,7 @@
     <nav class="head-nav" aria-label="Navegació principal">
       <a href="/club/">Club</a>
       <a href="/escoleta/" class="opt">Escoleta</a>
-      <a href="/partits/" aria-current="page">Dies de partit</a>
+      <a href="/partits/" aria-current="page">Calendari</a>
       <a href="/patrocinadors/" class="opt">Partners</a>
       <a href="/campus/" class="opt">Campus</a>
       <a href="/magics/" class="opt">Màgics</a>
@@ -157,7 +157,7 @@
       </nav>
       <div class="phead" style="padding-bottom:0">
         <p class="eyebrow red">Temporada 2026-2027 · #SomClot</p>
-        <h1>Dies de partit</h1>
+        <h1>Calendari</h1>
         <p class="lede">
           Tots els equips federats del club, en un sol calendari. S'actualitza cada dia a partir
           del calendari oficial de la <strong>Federació Catalana de Basquetbol</strong>: dia, hora,
@@ -166,7 +166,7 @@
         <div class="btn-row" style="margin-top:26px">
           <a class="btn red" href="#gameday-seniors">Gameday Seniors</a>
           <a class="btn ghost" href="#finde">Aquest cap de setmana</a>
-          <a class="btn ghost" href="/partits/calendaris/">Dies de partit per equip</a>
+          <a class="btn ghost" href="/partits/calendaris/">Calendari per equip</a>
         </div>
       </div>
     </div>
@@ -267,6 +267,20 @@
 
 </main>
 
+<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
+<section class="comunitat" aria-label="Segueix el CB Grup Barna">
+  <div class="comunitat-in">
+    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
+      <span class="comunitat-t">Segueix-nos a Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el dia a dia del club, cada setmana.</span>
+    </a>
+    <a class="comunitat-porta comunitat-porta--red" href="/newsletter/" data-cta="crida-newsletter">
+      <span class="comunitat-t">Apunta't a la newsletter</span>
+      <span class="comunitat-s">Un correu al mes amb el que val la pena saber. Res més.</span>
+    </a>
+  </div>
+</section>
+<!-- /CRIDA DE COMUNITAT -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
@@ -284,11 +298,13 @@
         <a href="/organigrama/">Organigrama</a>
         <a href="/posicionament/">Posicionament del club</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
+        <a href="/proteccio-menor/">Protecció del Menor</a>
+        <a href="/femeni/">Bàsquet femení</a>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Dies de partit</a>
-        <a href="/partits/calendaris/">Dies de partit per equip</a>
+        <a href="/partits/">Calendari</a>
+        <a href="/partits/calendaris/">Calendari per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
@@ -297,6 +313,8 @@
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/bustia/">Bústia de suggeriments</a>
         <a href="/faq/">Preguntes freqüents</a>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>

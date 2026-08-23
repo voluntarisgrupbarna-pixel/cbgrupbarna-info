@@ -58,7 +58,7 @@
         "name": "La Nau del Clot",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "C/ Llacuna 172 · Parc del Clot",
+          "streetAddress": "C/ Llacuna 170-172 · Parc del Clot",
           "addressLocality": "Barcelona",
           "postalCode": "08018",
           "addressCountry": "ES"
@@ -92,7 +92,7 @@
         {
           "@type": "Question",
           "name": "On entrena el bàsquet femení del CB Grup Barna?",
-          "acceptedAnswer": { "@type": "Answer", "text": "A La Nau del Clot, C/ Llacuna 172, Parc del Clot, 08018 Barcelona, al Districte de Sant Martí." }
+          "acceptedAnswer": { "@type": "Answer", "text": "A La Nau del Clot, C/ Llacuna 170-172, Parc del Clot, 08018 Barcelona, al Districte de Sant Martí." }
         }
       ]
     },
@@ -141,12 +141,12 @@
   .team { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 15px 2px; border-bottom: 1px solid var(--line); transition: color 0.3s var(--ease); }
   a.team:hover { color: var(--red); }
   .team-n { font-family: var(--display); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
-  .team-c { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-align: right; flex: 0 1 auto; }
+  .team-c { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6560; text-align: right; flex: 0 1 auto; }
 
   /* ==== Cita destacada ==== */
   .pull { margin: clamp(28px, 4vw, 48px) 0 0; padding: clamp(22px, 3.4vw, 34px) clamp(20px, 3vw, 34px); border-left: 2px solid var(--red); background: var(--paper-2); }
   .pull p { font-family: var(--display); font-weight: 300; font-size: clamp(15px, 2.2vw, 21px); letter-spacing: 0.02em; line-height: 1.55; }
-  .pull span { display: block; margin-top: 16px; font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .pull span { display: block; margin-top: 16px; font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
 
   /* ==== Documents oficials ==== */
   .docs { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--ink); margin-top: clamp(22px, 3vw, 34px); }
@@ -154,7 +154,7 @@
   a.doc:hover { color: var(--red); }
   .doc b { font-family: var(--display); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400; flex: 0 0 clamp(120px, 22vw, 230px); }
   .doc span { font-size: 13.5px; color: var(--ink-2); flex: 1 1 200px; }
-  .doc i { font-style: normal; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; color: var(--muted); }
+  .doc i { font-style: normal; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; color: #6B6560; }
 </style>
 <script src="/js/galetes.js"></script>
 </head>
@@ -169,7 +169,7 @@
     <nav class="head-nav" aria-label="Navegació principal">
       <a href="/partits/equips/">Equips</a>
       <a href="/club/">Club</a>
-      <a href="/partits/">Dies de partit</a>
+      <a href="/partits/">Calendari</a>
       <a href="/escoleta/" class="opt">Escoleta</a>
       <a href="/campus/" class="opt">Campus</a>
       <a href="/empreses/" class="opt">Empreses</a>
@@ -240,7 +240,7 @@
         <div class="card"><div class="card-body pillar">
           <div class="pillar-n">02</div>
           <h3>Pipeline de lideratge</h3>
-          <p><b>38 entrenadores actives</b>, el 65,5% de l'staff tècnic. Entrenen 34+ equips cada setmana al Clot.</p>
+          <p><b>38 entrenadores actives</b>, el 65,5% de l'staff tècnic. Entrenen 38 equips cada setmana al Clot.</p>
           <p>La jugadora que es fa entrenadora — i que entrena equips masculins — canvia la percepció de
           les nenes, dels nens i de les famílies més que cap campanya d'igualtat.</p>
         </div></div>
@@ -293,8 +293,8 @@
       </div>
 
       <div class="btn-row" style="margin-top:clamp(26px,3.6vw,40px)">
-        <a class="btn ghost" href="/partits/">Dies de partit</a>
-        <a class="btn ghost" href="/partits/calendaris/">Dies de partit per equip</a>
+        <a class="btn ghost" href="/partits/">Calendari</a>
+        <a class="btn ghost" href="/partits/calendaris/">Calendari per equip</a>
       </div>
     </div>
   </section>
@@ -472,7 +472,7 @@
           </details>
           <details>
             <summary>On s'entrena i es juga?</summary>
-            <p>A La Nau del Clot, C/ Llacuna 172, dins el Parc del Clot (08018 Barcelona), al Districte
+            <p>A La Nau del Clot, C/ Llacuna 170-172, dins el Parc del Clot (08018 Barcelona), al Districte
             de Sant Martí. Els partits i horaris de cada equip són a <a href="/partits/">partits</a>.</p>
           </details>
         </div>
@@ -499,6 +499,20 @@
 
 </main>
 
+<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
+<section class="comunitat" aria-label="Segueix el CB Grup Barna">
+  <div class="comunitat-in">
+    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
+      <span class="comunitat-t">Segueix-nos a Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el dia a dia del club, cada setmana.</span>
+    </a>
+    <a class="comunitat-porta comunitat-porta--red" href="/newsletter/" data-cta="crida-newsletter">
+      <span class="comunitat-t">Apunta't a la newsletter</span>
+      <span class="comunitat-s">Un correu al mes amb el que val la pena saber. Res més.</span>
+    </a>
+  </div>
+</section>
+<!-- /CRIDA DE COMUNITAT -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
@@ -516,11 +530,13 @@
         <a href="/organigrama/">Organigrama</a>
         <a href="/posicionament/">Posicionament del club</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
+        <a href="/proteccio-menor/">Protecció del Menor</a>
+        <a href="/femeni/">Bàsquet femení</a>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Dies de partit</a>
-        <a href="/partits/calendaris/">Dies de partit per equip</a>
+        <a href="/partits/">Calendari</a>
+        <a href="/partits/calendaris/">Calendari per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
@@ -529,6 +545,8 @@
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/bustia/">Bústia de suggeriments</a>
         <a href="/faq/">Preguntes freqüents</a>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>

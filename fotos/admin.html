@@ -10,7 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
   <style>
     :root {
-      --ink: #0a0a0a; --ink-2: #46433f; --muted: #8a8681; --line: rgba(16, 16, 14, 0.14);
+      --ink: #10100E; --ink-2: #46433f; --muted: #6B6560; --line: rgba(16, 16, 14, 0.14);
       --paper: #ffffff; --paper-2: #f6f4f1;
       --red: #E20613; --red-dark: #A8040E;
       --green: #1a7a3c;
@@ -35,10 +35,10 @@
     .nav-logo { font-family: var(--display); font-size: .8rem; font-weight: 400; letter-spacing: .24em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: .5rem; }
     .nav-logo span { color: var(--red); }
     .badge-admin { font-family: var(--display); font-size: 8.5px; letter-spacing: .16em; text-transform: uppercase; background: var(--ink); color: #fff; padding: .25rem .5rem; }
-    .nav-user { margin-left: auto; display: flex; align-items: center; gap: .75rem; font-size: .8rem; color: var(--muted); }
+    .nav-user { margin-left: auto; display: flex; align-items: center; gap: .75rem; font-size: .8rem; color: #706c67; }
     .btn-logout { background: none; border: 1px solid var(--line); color: var(--ink-2); padding: .4rem .8rem; cursor: pointer; font-family: var(--display); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; transition: all .15s; }
     .btn-logout:hover { border-color: var(--ink); color: var(--ink); }
-    .nav-gallery-link { color: var(--muted); text-decoration: none; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; transition: color .15s; }
+    .nav-gallery-link { color: #706c67; text-decoration: none; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; transition: color .15s; }
     .nav-gallery-link:hover { color: var(--red); }
 
     /* LOGIN */
@@ -52,15 +52,15 @@
     .login-icon { width: 52px; height: 52px; background: var(--paper-2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
     .login-title { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.5rem; letter-spacing: .08em; margin-bottom: .4rem; }
     .login-sub { font-size: .85rem; color: var(--ink-2); margin-bottom: 1.5rem; }
-    .field-label { display: block; font-family: var(--display); font-size: 9px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); margin-bottom: .5rem; }
+    .field-label { display: block; font-family: var(--display); font-size: 9px; text-transform: uppercase; letter-spacing: .16em; color: #706c67; margin-bottom: .5rem; }
     .field-input {
       width: 100%; background: var(--paper-2); border: 1px solid var(--line);
       color: var(--ink); padding: .7rem .85rem;
       font-family: var(--body); font-size: .9rem; outline: none; transition: border-color .15s;
     }
     .field-input:focus { border-color: var(--red); }
-    .field-input::placeholder { color: var(--muted); }
-    .field-hint { font-size: .74rem; color: var(--muted); margin-top: .5rem; line-height: 1.5; }
+    .field-input::placeholder { color: #706c67; }
+    .field-hint { font-size: .74rem; color: #706c67; margin-top: .5rem; line-height: 1.5; }
     .field-hint a { color: var(--red); }
     .btn-primary { width: 100%; background: var(--ink); color: #fff; border: 1px solid var(--ink); padding: .8rem 1rem; font-family: var(--display); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); margin-top: 1.25rem; display: flex; align-items: center; justify-content: center; gap: .4rem; }
     .btn-primary:hover { background: var(--red); border-color: var(--red); }
@@ -103,7 +103,7 @@
     .event-thumb-empty { width: 72px; height: 72px; background: var(--paper-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .event-row-info { padding: .75rem 0; min-width: 0; }
     .event-row-title { font-family: var(--display); font-size: .9rem; letter-spacing: .04em; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .event-row-meta { font-family: var(--display); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: .35rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    .event-row-meta { font-family: var(--display); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: #706c67; margin-top: .35rem; display: flex; gap: .75rem; flex-wrap: wrap; }
     .event-row-actions { display: flex; align-items: center; gap: .4rem; padding-right: .75rem; flex-shrink: 0; }
     /* Públic / privat. Privat vol dir que el grup no surt a /fotos/ per a
        ningú: només s'hi arriba amb la contrasenya de màrqueting. */
@@ -111,7 +111,7 @@
       font-family: var(--display); font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase;
       padding: .45rem .6rem; cursor: pointer; white-space: nowrap;
       transition: border-color .25s, color .25s, background .25s; }
-    .btn-vis.is-public { color: var(--muted); }
+    .btn-vis.is-public { color: #706c67; }
     .btn-vis.is-public:hover { border-color: var(--ink); color: var(--ink); }
     .btn-vis.is-private { color: #fff; background: var(--red); border-color: var(--red); }
     .btn-vis.is-private:hover { background: #A8040E; border-color: #A8040E; }
@@ -125,7 +125,7 @@
     /* UPLOAD PANEL */
     #upload-panel { display: none; }
     .upload-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .btn-back { background: none; border: none; color: var(--muted); cursor: pointer; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; display: flex; align-items: center; gap: .3rem; transition: color .15s; padding: .4rem 0; }
+    .btn-back { background: none; border: none; color: #706c67; cursor: pointer; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; display: flex; align-items: center; gap: .3rem; transition: color .15s; padding: .4rem 0; }
     .btn-back:hover { color: var(--red); }
     .upload-event-title { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.4rem; letter-spacing: .06em; }
     .upload-event-title span { color: var(--red); }
@@ -137,10 +137,10 @@
     }
     .drop-zone.drag-over { border-color: var(--red); background: rgba(226,6,19,.04); }
     .drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .drop-zone-icon { color: var(--muted); margin-bottom: .75rem; }
+    .drop-zone-icon { color: #706c67; margin-bottom: .75rem; }
     .drop-zone p { color: var(--ink-2); font-size: .9rem; }
     .drop-zone p span { color: var(--red); cursor: pointer; }
-    .drop-zone small { color: var(--muted); font-size: .75rem; }
+    .drop-zone small { color: #706c67; font-size: .75rem; }
 
     /* ZIP UPLOAD */
     .zip-row { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
@@ -160,9 +160,9 @@
     }
     .upload-item-thumb { width: 52px; height: 52px; object-fit: cover; background: var(--paper-2); }
     .upload-item-name { font-size: .8rem; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .upload-item-size { font-size: .7rem; color: var(--muted); margin-top: .15rem; }
+    .upload-item-size { font-size: .7rem; color: #706c67; margin-top: .15rem; }
     .upload-item-status { font-family: var(--display); font-size: 8.5px; letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: .3rem; white-space: nowrap; flex-shrink: 0; padding-right: .25rem; }
-    .status-pending { color: var(--muted); }
+    .status-pending { color: #706c67; }
     .status-uploading { color: #1d6fd6; }
     .status-done { color: var(--green); }
     .status-error { color: var(--red); }
@@ -183,7 +183,7 @@
     .btn-upload-all { background: var(--red); color: #fff; border: 1px solid var(--red); padding: .7rem 1.35rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); display: flex; align-items: center; gap: .4rem; }
     .btn-upload-all:hover { background: var(--ink); border-color: var(--ink); }
     .btn-upload-all:disabled { opacity: .5; cursor: not-allowed; }
-    .upload-status-text { font-size: .8rem; color: var(--muted); }
+    .upload-status-text { font-size: .8rem; color: #706c67; }
     .success-banner { background: rgba(26,122,60,.07); border: 1px solid rgba(26,122,60,.3); color: var(--green); padding: .8rem 1rem; font-size: .85rem; display: flex; align-items: center; gap: .5rem; display: none; margin-bottom: 1rem; }
 
     /* UPLOADED PHOTOS GRID */
@@ -224,6 +224,7 @@
   </style>
 <script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
+<script src="config.js"></script>
 </head>
 <body>
 
@@ -262,6 +263,13 @@
         github.com/settings/tokens
       </a>
       → selecciona l'abast <strong>repo</strong>.
+    </p>
+
+    <label class="field-label" for="r2-token-input" style="margin-top:1rem">Clau de pujada R2 (opcional)</label>
+    <input class="field-input" type="password" id="r2-token-input" placeholder="només si ja tens R2 configurat" autocomplete="off">
+    <p class="field-hint">
+      Deixa-ho buit si encara no has fet la migració a R2 — les fotos es
+      seguiran pujant com fins ara. Vegeu <code>workers/fotos-upload/README.md</code>.
     </p>
     <div id="login-error" class="login-error"></div>
 
@@ -435,7 +443,7 @@
       </div>
       <div>
         <label class="field-label">Correu per rebre subscripcions newsletter</label>
-        <input class="field-input" type="email" id="cfg-email" placeholder="Ex: info@cbgrupbarna.info">
+        <input class="field-input" type="email" id="cfg-email" placeholder="Ex: marqueting@cbgrupbarna.info">
         <p style="font-size:.72rem;color:#8a8681;margin-top:.3rem;">S'usa FormSubmit.co — el primer correu rebrà una confirmació d'activació.</p>
       </div>
     </div>
@@ -501,6 +509,11 @@ async function loadExistingShas(ev) {
 
 // ── AUTH ──
 function getToken() { return localStorage.getItem('gh_admin_token'); }
+function getR2Secret() { return localStorage.getItem('r2_upload_secret') || ''; }
+function r2Enabled() {
+  const cfg = window.GALERIA_CONFIG || {};
+  return !!(cfg.r2_worker_url && cfg.r2_public_base && getR2Secret());
+}
 
 window.addEventListener('DOMContentLoaded', async () => {
   const tok = getToken();
@@ -540,6 +553,7 @@ async function verifyToken() {
 
 async function doLogin() {
   const input = document.getElementById('token-input');
+  const r2Input = document.getElementById('r2-token-input');
   const btn = document.getElementById('login-btn');
   const err = document.getElementById('login-error');
   err.style.display = 'none';
@@ -553,6 +567,8 @@ async function doLogin() {
     const ok = await verifyToken();
     if (ok) {
       localStorage.setItem('gh_admin_token', ghToken);
+      const r2Secret = r2Input.value.trim();
+      if (r2Secret) localStorage.setItem('r2_upload_secret', r2Secret);
       showMain();
     } else {
       throw new Error('Token invàlid o sense permisos');
@@ -569,6 +585,7 @@ async function doLogin() {
 
 function logout() {
   localStorage.removeItem('gh_admin_token');
+  localStorage.removeItem('r2_upload_secret');
   ghToken = null;
   showLogin();
 }
@@ -662,6 +679,25 @@ async function deleteFile(path, message) {
   const sha = await getFileSHA(path);
   if (!sha) return;
   return gh(`/repos/${OWNER}/${REPO}/contents/${path}`, 'DELETE', { message, sha, branch: BRANCH });
+}
+
+// ── R2 (pujada directa, sense commit) ──
+// Vegeu workers/fotos-upload/README.md. `key` és p.ex. "uploads/<event>/<fitxer>".
+async function uploadToR2(key, file) {
+  const cfg = window.GALERIA_CONFIG;
+  const url = `${cfg.r2_worker_url.replace(/\/$/, '')}/${key}`;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'X-Upload-Secret': getR2Secret(),
+      'Content-Type': file.type || 'application/octet-stream',
+    },
+    body: file,
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`R2 upload ${res.status}: ${text}`);
+  }
 }
 
 // ── EVENTS DATA ──
@@ -971,7 +1007,7 @@ function renderUploadQueue() {
 
     const thumbHtml = isVideo
       ? `<div class="upload-item-thumb-wrap"><video class="upload-item-thumb" src="${preview}" muted preload="metadata"></video><div class="video-thumb-badge"><svg width="9" height="9" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
-      : `<img class="upload-item-thumb" src="${preview}" alt="">`;
+      : `<img class="upload-item-thumb" src="${preview}" alt="" loading="lazy" decoding="async">`;
 
     div.innerHTML = `
       ${thumbHtml}
@@ -1063,11 +1099,8 @@ async function uploadPhoto(file, queueIndex) {
   const ev = currentEvent;
   const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
   const filename = `${Date.now()}-${Math.random().toString(36).slice(2,7)}.${ext}`;
-  const path = `fotos/uploads/${ev.id}/${filename}`;
 
-  const base64 = await fileToBase64(file);
-
-  // Simulate progress (GitHub API doesn't give real progress)
+  // Simulate progress (cap API tampoc ens en dona una de real)
   let prog = 0;
   const progInterval = setInterval(() => {
     prog = Math.min(prog + 15, 85);
@@ -1076,7 +1109,15 @@ async function uploadPhoto(file, queueIndex) {
   }, 200);
 
   try {
-    await writeFileBinary(path, base64, `foto: add ${filename} to ${ev.id} [skip ci]`);
+    if (r2Enabled()) {
+      // Directe a R2: cap commit al repositori per aquesta foto.
+      await uploadToR2(`uploads/${ev.id}/${filename}`, file);
+    } else {
+      // Camí antic: un commit per foto via l'API de contingut de GitHub.
+      const path = `fotos/uploads/${ev.id}/${filename}`;
+      const base64 = await fileToBase64(file);
+      await writeFileBinary(path, base64, `foto: add ${filename} to ${ev.id} [skip ci]`);
+    }
     clearInterval(progInterval);
     const el = document.getElementById(`prog-${queueIndex}`);
     if (el) el.style.width = '100%';

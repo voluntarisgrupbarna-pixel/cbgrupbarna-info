@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10100E">
 <title>Campus de Bàsquet a Barcelona | CB Grup Barna × Time Chamber</title>
-<meta name="description" content="Campus de bàsquet a Barcelona: tecnificació al Clot per a jugadors i jugadores de formació. CB Grup Barna × Time Chamber, La Nau del Clot, Carrer de la Llacuna 172. Setmanes temàtiques, 9h–17h amb dinar o 9h–13:30h, des de 160 €. Obert a qualsevol club.">
+<meta name="description" content="Campus de bàsquet a Barcelona: tecnificació al Clot per a jugadors i jugadores de formació. CB Grup Barna × Time Chamber, La Nau del Clot, Carrer de la Llacuna 170-172. Setmanes temàtiques, 9h–17h amb dinar o 9h–13:30h, des de 160 €. Obert a qualsevol club.">
 <meta name="keywords" content="campus bàsquet Barcelona, campus baloncesto Barcelona, academia de baloncesto Barcelona verano, campus estiu bàsquet, grup barna campus, campus tecnificació bàsquet Barcelona">
 <link rel="canonical" href="https://cbgrupbarna.info/campus/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/campus/">
@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:locale" content="ca_ES">
 <meta property="og:title" content="Campus de bàsquet a Barcelona · CB Grup Barna | Estiu al Clot">
-<meta property="og:description" content="Campus de bàsquet a Barcelona: tecnificació al Clot per a jugadors i jugadores de formació. CB Grup Barna × Time Chamber, La Nau del Clot, Carrer de la Llacuna 172. Setmanes temàtiques, 9h–17h amb dinar o 9h–13:30h, des de 160 €. Obert a qualsevol club.">
+<meta property="og:description" content="Campus de bàsquet a Barcelona: tecnificació al Clot per a jugadors i jugadores de formació. CB Grup Barna × Time Chamber, La Nau del Clot, Carrer de la Llacuna 170-172. Setmanes temàtiques, 9h–17h amb dinar o 9h–13:30h, des de 160 €. Obert a qualsevol club.">
 <meta property="og:url" content="https://cbgrupbarna.info/campus/">
 <meta property="og:image" content="https://cbgrupbarna.info/img/campus-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
@@ -44,7 +44,7 @@
   @media (min-width: 1040px) { .weeks { grid-template-columns: repeat(3, 1fr); } }
   .week { background: var(--paper); padding: clamp(20px, 2.6vw, 28px) clamp(18px, 2.4vw, 24px); }
   .week b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; color: var(--red); line-height: 1; }
-  .week time { display: block; margin-top: 10px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .week time { display: block; margin-top: 10px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
   .week h3 { font-size: 14px; letter-spacing: 0.1em; margin: 10px 0 6px; }
   .week p { font-size: 13.5px; color: var(--ink-2); }
 
@@ -53,7 +53,7 @@
   @media (min-width: 620px) { .price-cards { grid-template-columns: 1fr 1fr; } }
   .price-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(22px, 3vw, 30px); }
   .price-card.top { border-color: var(--red); position: relative; }
-  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
   .price-card.top .tag { color: var(--red); }
   .price-card b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; margin: 8px 0 4px; }
   .price-card .sched { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
@@ -80,9 +80,29 @@
   .star-embed { aspect-ratio: 9/14; }
   .star-embed iframe { width: 100%; height: 100%; border: 0; }
   .star-tx { padding: 18px 18px 20px; }
-  .star-tx h3 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; }
+  .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
   .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .star-tx .role { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--red-dark); margin-bottom: 7px; }
+
+  /* Els tres grups d'estrelles: on es va gravar cada cosa, dit sense inflar. */
+  .stars-group { margin-top: clamp(30px, 4vw, 46px); }
+  .stars-group > h3 { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.2em;
+    text-transform: uppercase; margin: 0 0 6px; padding-bottom: 9px; border-bottom: 2px solid var(--red); }
+  .stars-group > p { font-size: 13.5px; color: var(--ink-2); max-width: 64ch; margin: 12px 0 0; }
+  .stars-group .stars { margin-top: clamp(18px, 2.4vw, 26px); }
+
+  /* Les convocatòries publicades: enllaç sec, sense incrustar res. */
+  .convos { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line);
+    border: 1px solid var(--line); margin: clamp(18px, 2.4vw, 26px) 0 0; }
+  @media (min-width: 720px) { .convos { grid-template-columns: repeat(2, 1fr); } }
+  .convos a { background: var(--paper); padding: 15px 18px; display: flex; flex-direction: column; gap: 3px;
+    text-decoration: none; }
+  .convos a:hover { background: var(--paper-2); }
+  .convos b { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink); }
+  .convos span { font-size: 12.5px; color: var(--ink-2); }
 </style>
 <script type="application/ld+json">
 {
@@ -230,7 +250,7 @@
             "name": "La Nau del Clot",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Carrer de la Llacuna, 172",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
               "addressLocality": "Barcelona",
               "postalCode": "08018",
               "addressCountry": "ES"
@@ -267,7 +287,7 @@
             "name": "La Nau del Clot",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Carrer de la Llacuna, 172",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
               "addressLocality": "Barcelona",
               "postalCode": "08018",
               "addressCountry": "ES"
@@ -304,7 +324,7 @@
             "name": "La Nau del Clot",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Carrer de la Llacuna, 172",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
               "addressLocality": "Barcelona",
               "postalCode": "08018",
               "addressCountry": "ES"
@@ -341,7 +361,7 @@
             "name": "La Nau del Clot",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Carrer de la Llacuna, 172",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
               "addressLocality": "Barcelona",
               "postalCode": "08018",
               "addressCountry": "ES"
@@ -378,7 +398,7 @@
             "name": "La Nau del Clot",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Carrer de la Llacuna, 172",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
               "addressLocality": "Barcelona",
               "postalCode": "08018",
               "addressCountry": "ES"
@@ -415,7 +435,7 @@
             "name": "La Nau del Clot",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Carrer de la Llacuna, 172",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
               "addressLocality": "Barcelona",
               "postalCode": "08018",
               "addressCountry": "ES"
@@ -447,7 +467,7 @@
         "name": "La Nau del Clot",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Carrer de la Llacuna, 172",
+          "streetAddress": "Carrer de la Llacuna, 170-172",
           "addressLocality": "Barcelona",
           "addressRegion": "Barcelona",
           "postalCode": "08018",
@@ -568,7 +588,7 @@
     <nav class="head-nav" aria-label="Navegació principal">
       <a href="/partits/equips/">Equips</a>
       <a href="/club/">Club</a>
-      <a href="/partits/">Dies de partit</a>
+      <a href="/partits/">Calendari</a>
       <a href="/escoleta/" class="opt">Escoleta</a>
       <a href="/campus/" class="opt">Campus</a>
       <a href="/empreses/" class="opt">Empreses</a>
@@ -601,16 +621,15 @@
 
 
   <div class="narrow prose" id="fitxa">
+<!-- FITXA-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
     <h2>Fitxa del campus</h2>
-    <p>Totes les dades en un sol lloc, sense haver de buscar-les per la pàgina. La darrera edició
-    tancada és l'<strong>Estiu 2026</strong>; les dates de la propera s'anuncien aquí i a
-    <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <p>Totes les dades en un sol lloc, sense haver de buscar-les per la pàgina. La darrera edició tancada és l'<strong>Estiu 2026</strong>; les dates de la propera s'anuncien aquí i a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
   </div>
   <div class="dl narrow">
     <div class="dl-row"><dt>Què és</dt><dd>Campus de tecnificació de bàsquet. No és un casal amb pilota: cada setmana treballa un aspecte concret del joc.</dd></div>
     <div class="dl-row"><dt>Qui l'organitza</dt><dd>CB Grup Barna × Time Chamber. El club hi posa l'estructura i els entrenadors; Time Chamber, la metodologia de treball individual.</dd></div>
     <div class="dl-row"><dt>On</dt><dd>La Nau del Clot, Barcelona. Instal·lació oficial del club.</dd></div>
-    <div class="dl-row"><dt>Adreça</dt><dd>Carrer de la Llacuna, 172 · 08018 Barcelona · barri del Clot, Districte de Sant Martí.</dd></div>
+    <div class="dl-row"><dt>Adreça</dt><dd>Carrer de la Llacuna, 170-172 · 08018 Barcelona · barri del Clot, Districte de Sant Martí.</dd></div>
     <div class="dl-row"><dt>Com arribar-hi</dt><dd>Metro L1 Glòries i L2 Clot · Rodalies Clot-Aragó · autobusos del Clot i Glòries. A peu des de Westfield Glòries.</dd></div>
     <div class="dl-row"><dt>Per a qui</dt><dd>Set categories: Escoleta, Premini, Mini, Preinfantil, Infantil, Cadet i Júnior. Els grups es fan per categoria i nivell, de manera que qui comença no entrena amb qui ja porta anys competint.</dd></div>
     <div class="dl-row"><dt>Nens i nenes</dt><dd>Sí. El campus és mixt i el club té paritat real entre la línia femenina i la masculina.</dd></div>
@@ -626,8 +645,8 @@
     <div class="dl-row"><dt>Idioma</dt><dd>Català i castellà. Els entrenadors convidats internacionals treballen en anglès amb traducció.</dd></div>
     <div class="dl-row"><dt>Com inscriure-s'hi</dt><dd>Per WhatsApp al +34 698 425 153 o pel formulari del club. Les darreres edicions s'han omplert abans de començar.</dd></div>
   </div>
-
   <div class="narrow prose">
+    <!-- FITXA-CAMPUS:final -->
     <h2>Què és el campus del Barna</h2>
     <p>El campus de bàsquet del <strong>CB Grup Barna</strong> és el programa d'entrenament intensiu
     que el club organitza durant les vacances escolars al barri del Clot. No és una activitat de
@@ -725,9 +744,9 @@
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
 
+<!-- PREUS-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
     <h2>Preus</h2>
-    <p>Dues modalitats segons horari, amb àpat inclòs a la jornada completa. Places obertes a
-    jugadors i jugadores del Barna i de fora del club.</p>
+    <p>Dues modalitats segons horari, amb àpat inclòs a la jornada completa. Places obertes a jugadors i jugadores del Barna i de fora del club.</p>
     <div class="price-cards">
       <div class="price-card top">
         <span class="tag">Recomanat</span>
@@ -747,11 +766,8 @@
         </ul>
       </div>
     </div>
-    <p class="price-note">Reserva de plaça amb pagament fraccionat en fins a 3 terminis. Cada any s'obre un
-    descompte per inscripció anticipada; les dates i el codi es publiquen a aquesta pàgina i a
-    <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a> quan
-    s'obren les inscripcions.</p>
-
+    <p class="price-note">Reserva de plaça amb pagament fraccionat en fins a 3 terminis. Cada any s'obre un descompte per inscripció anticipada; les dates i el codi es publiquen a aquesta pàgina i a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a> quan s'obren les inscripcions.</p>
+    <!-- PREUS-CAMPUS:final -->
     <h2>El campus, en imatges</h2>
     <p>Fotos de la darrera edició amb Time Chamber, a La Nau del Clot.</p>
     <div class="photo-strip">
@@ -765,54 +781,88 @@
     <div class="gal-cta">
       <p><strong>Aquestes són sis fotos triades.</strong> La galeria completa de l'estiu — totes les setmanes,
       amb foto i vídeo — és a la Galeria Fotogràfica del club.</p>
-      <a href="/fotos/" class="btn ghost" data-cta="campus-galeria-completa">Veure la galeria de l'estiu →</a>
+      <a href="/fotos/#summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9" class="btn ghost" data-cta="campus-galeria-completa">Veure la galeria de l'estiu →</a>
     </div>
 
+<!-- ESTRELLES-CAMPUS:inici · generat per scripts/build-campus-estrelles.py -->
     <h2>Estrelles del campus</h2>
-    <p>Una cosa que no fa tothom: al campus hi han passat referents del bàsquet a entrenar amb els nostres jugadors i jugadores. No de visita per a la foto — a pista, dirigint sessió. Cada vídeo és una publicació pública i verificable, no una etiqueta d'un dia.</p>
-    <div class="stars">
-      <div class="star">
-        <button type="button" class="star-play" data-embed="reel/C-0jXXDMY5r" aria-label="Reproduir el reel amb Ainhoa López">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Ainhoa López</span>
-        </button>
-        <div class="star-tx">
-          <h3>Ainhoa López</h3>
-          <p>Jugadora professional · Selecció Espanyola. Formada al Clot.</p>
-          <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">Veure a Instagram →</a>
+    <p>Una cosa que no fa tothom: al campus hi han passat referents del bàsquet a entrenar amb els nostres jugadors i jugadores. No de visita per a la foto — a pista, dirigint sessió. Ho separem en tres grups perquè no tot es va gravar al mateix lloc: primer el que va passar <strong>a La Nau del Clot</strong>, després la feina dels entrenadors i dels jugadors d'elit <strong>amb Time Chamber</strong>, que és el nostre soci del campus.</p>
+
+    <div class="stars-group">
+      <h3>A La Nau del Clot</h3>
+      <p>Gravat al pavelló del club, amb els nostres jugadors i jugadores a pista.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="Reproduir el vídeo amb El resum de l'edició">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>El resum de l'edició</span>
+          </button>
+          <div class="star-tx">
+            <h4>El resum de l'edició</h4>
+            <span class="role">Reel final del campus</span>
+            <p>Com va acabar el Campus Timechamber: totes les setmanes en un vídeo.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-embed="reel/DQOhe0qjAPb" aria-label="Reproduir el reel amb Robert Willett">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Robert Willett</span>
-        </button>
-        <div class="star-tx">
-          <h3>Robert Willett</h3>
-          <p>Entrenador de tecnificació NBA (@bballwillett), al campus del Barna.</p>
-          <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">Veure a Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="Datex2OxHcS" aria-label="Reproduir el vídeo amb Shooting Academy">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Shooting Academy</span>
+          </button>
+          <div class="star-tx">
+            <h4>Shooting Academy</h4>
+            <span class="role">Setmana 3 del campus</span>
+            <p>La setmana dedicada al tir, de dins de la pista.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-embed="reel/DMGO77UsDoQ" aria-label="Reproduir el reel amb Nolan Willett">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Nolan Willett</span>
-        </button>
-        <div class="star-tx">
-          <h3>Nolan Willett</h3>
-          <p>Entrenador de tecnificació, sessions amb Time Chamber al Clot.</p>
-          <a href="https://www.instagram.com/reel/DMGO77UsDoQ/" target="_blank" rel="noopener">Veure a Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL-n0ZeMaOq" aria-label="Reproduir el vídeo amb Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">Entrenador NBA · al campus</span>
+            <p>Dirigint sessió al campus del club.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-embed="reel/DJXMrhzsqYg" aria-label="Reproduir el reel amb Malak Shady">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Malak Shady</span>
-        </button>
-        <div class="star-tx">
-          <h3>Malak Shady</h3>
-          <p>Referent del bàsquet a xarxes i MVP de 3x3.</p>
-          <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">Veure a Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DQOhe0qjAPb" aria-label="Reproduir el vídeo amb Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">Entrenador NBA · al campus</span>
+            <p>Segona sessió, un altre bloc de treball.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="C-0jXXDMY5r" aria-label="Reproduir el vídeo amb Ainhoa López">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Ainhoa López</span>
+          </button>
+          <div class="star-tx">
+            <h4>Ainhoa López</h4>
+            <span class="role">Selecció Espanyola · formada al Clot</span>
+            <p>Jugadora professional. Va sortir d'aquesta pista i hi ha tornat a entrenar.</p>
+            <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Reproduir el vídeo amb Malak Shady">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Malak Shady</span>
+          </button>
+          <div class="star-tx">
+            <h4>Malak Shady</h4>
+            <span class="role">MVP de 3x3</span>
+            <p>Referent del bàsquet a xarxes i MVP de 3x3.</p>
+            <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
+          </div>
         </div>
       </div>
       <div class="star">
@@ -838,15 +888,168 @@
         </div>
       </div>
     </div>
-    <p style="font-size:13.5px;color:var(--ink-2)">Els vídeos són d'Instagram i només es carreguen si hi cliques. Tot el recull de l'edició és a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a> i a <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es</a>.</p>
+
+    <div class="stars-group">
+      <h3>Entrenadors NBA amb Time Chamber</h3>
+      <p>La metodologia de treball individual que el campus incorpora ve d'aquí.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMLipXBsMMe" aria-label="Reproduir el vídeo amb Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Treball de fonaments individuals amb Time Chamber.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMQlHE4Mty1" aria-label="Reproduir el vídeo amb Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Segona sessió: lectura de joc i resolució a prop de cistella.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMGO77UsDoQ" aria-label="Reproduir el vídeo amb Nolan Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Nolan Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Nolan Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Tercera sessió del bloc de tecnificació.</p>
+            <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
+      <h3>Jugadors d'elit que hi han entrenat</h3>
+      <p>Sessions amb Time Chamber, el soci del campus. No totes es van gravar a La Nau: quan no hi va ser, ho diem.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DO4KaZxCLqY" aria-label="Reproduir el vídeo amb Serge Ibaka">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Serge Ibaka</span>
+          </button>
+          <div class="star-tx">
+            <h4>Serge Ibaka</h4>
+            <span class="role">Campió NBA 2019</span>
+            <p>Sessió de treball amb Time Chamber.</p>
+            <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DN1a1DvUGhg" aria-label="Reproduir el vídeo amb Yankuba Sima">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Yankuba Sima</span>
+          </button>
+          <div class="star-tx">
+            <h4>Yankuba Sima</h4>
+            <span class="role">Eurolliga</span>
+            <p>Treball de pivot amb Time Chamber.</p>
+            <a href="https://www.instagram.com/yankubasima/" target="_blank" rel="noopener">@yankubasima →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL25XRsskTS" aria-label="Reproduir el vídeo amb Pedro Marhuenda">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Pedro Marhuenda</span>
+          </button>
+          <div class="star-tx">
+            <h4>Pedro Marhuenda</h4>
+            <span class="role">Jugador professional</span>
+            <p>Sessió individual amb Time Chamber.</p>
+            <a href="https://www.instagram.com/4future_pedromarhuenda/" target="_blank" rel="noopener">@4future_pedromarhuenda →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DOHTiwWiKJE" aria-label="Reproduir el vídeo amb Dani Carrasco">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Dani Carrasco</span>
+          </button>
+          <div class="star-tx">
+            <h4>Dani Carrasco</h4>
+            <span class="role">Jugador professional</span>
+            <p>Sessió de treball amb Time Chamber.</p>
+            <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DOrQsPRiD_l" aria-label="Reproduir el vídeo amb Salo 23">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Salo 23</span>
+          </button>
+          <div class="star-tx">
+            <h4>Salo 23</h4>
+            <span class="role">Jugador</span>
+            <p>Sessió de tecnificació amb Time Chamber.</p>
+            <a href="https://www.instagram.com/salo23_/" target="_blank" rel="noopener">@salo23_ →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DN5x42hCDpV" aria-label="Reproduir el vídeo amb Kassius">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Kassius</span>
+          </button>
+          <div class="star-tx">
+            <h4>Kassius</h4>
+            <span class="role">Jugador</span>
+            <p>Sessió de tecnificació amb Time Chamber.</p>
+            <a href="https://www.instagram.com/kassius_r/" target="_blank" rel="noopener">@kassius_r →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="CguvYo9KuTz" data-kind="p" aria-label="Reproduir el vídeo amb Joel Parra">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Joel Parra</span>
+          </button>
+          <div class="star-tx">
+            <h4>Joel Parra</h4>
+            <span class="role">ACB · Joventut</span>
+            <p>Sessió amb Time Chamber al Pavelló Olímpic de Badalona, no a La Nau.</p>
+            <a href="https://www.instagram.com/joelparra/" target="_blank" rel="noopener">@joelparra →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
+      <h3>Les convocatòries publicades</h3>
+      <p>Cada edició del campus s'anuncia amb <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es</a>. Aquestes són les quatre darreres.</p>
+      <div class="convos">
+        <a href="https://www.instagram.com/p/DXKxd7VjCJK/" target="_blank" rel="noopener">
+          <b>Campus d'estiu · La Nau del Clot</b><span>Convocatòria del 16 d'abril</span></a>
+        <a href="https://www.instagram.com/p/DUtmAbHjFIs/" target="_blank" rel="noopener">
+          <b>Flow Camp · Setmana Santa</b><span>Del 30 de març al 3 d'abril</span></a>
+        <a href="https://www.instagram.com/p/DUT5hyjDD7S/" target="_blank" rel="noopener">
+          <b>Campus de Carnaval</b><span>Convocatòria del 3 de febrer</span></a>
+        <a href="https://www.instagram.com/p/DQ7nLmkjINq/" target="_blank" rel="noopener">
+          <b>Edició Limitada 2025</b><span>Convocatòria de l'11 de novembre de 2025</span></a>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Els vídeos són d'Instagram i només es carreguen si hi cliques. Tot el recull de l'edició és a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <!-- ESTRELLES-CAMPUS:final -->
     <script>
       // Els reels i posts d'Instagram només es carreguen si l'usuari hi clica.
       document.querySelectorAll('.star-play').forEach(function (b) {
         b.addEventListener('click', function () {
           var d = document.createElement('div');
           d.className = 'star-embed';
-          d.innerHTML = '<iframe src="https://www.instagram.com/' + b.dataset.embed +
-            '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Publicació d\'Instagram"></iframe>';
+          // Uns són reels i uns altres publicacions de feed: data-kind="p" ho marca.
+          var kind = b.dataset.kind === 'p' ? 'p' : 'reel';
+          d.innerHTML = '<iframe src="https://www.instagram.com/' + kind + '/' + b.dataset.reel +
+            '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
           b.replaceWith(d);
         });
       });
@@ -862,7 +1065,7 @@
     </div>
 
     <h2>La seu</h2>
-    <p><strong>La Nau del Clot</strong>, Carrer de la Llacuna 172, 08018 Barcelona — el punt esportiu
+    <p><strong>La Nau del Clot</strong>, Carrer de la Llacuna 170-172, 08018 Barcelona — el punt esportiu
     principal del CB Grup Barna, al barri del Clot. Horari del campus: 9h–13:30h en mitja jornada,
     9h–17h en jornada completa, amb servei d'acollida i àpat de migdia inclòs a la jornada completa.</p>
 
@@ -873,7 +1076,7 @@
         <span class="franja-go"><em>4 a 8 anys</em><i></i></span>
       </a>
       <a class="franja franja--red" href="/partits/" data-cta="campus-franja-dies-partit">
-        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-tx"><span class="franja-t">Calendari</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
         <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
       </a>
       <a class="franja" href="/3x3/" data-cta="campus-franja-3x3">
@@ -913,6 +1116,20 @@
   </div>
 </div>
 </main>
+<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
+<section class="comunitat" aria-label="Segueix el CB Grup Barna">
+  <div class="comunitat-in">
+    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
+      <span class="comunitat-t">Segueix-nos a Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el dia a dia del club, cada setmana.</span>
+    </a>
+    <a class="comunitat-porta comunitat-porta--red" href="/newsletter/" data-cta="crida-newsletter">
+      <span class="comunitat-t">Apunta't a la newsletter</span>
+      <span class="comunitat-s">Un correu al mes amb el que val la pena saber. Res més.</span>
+    </a>
+  </div>
+</section>
+<!-- /CRIDA DE COMUNITAT -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
@@ -929,11 +1146,13 @@
         <a href="/organigrama/">Organigrama</a>
         <a href="/posicionament/">Posicionament del club</a>
         <a href="/grup-barna-dades-oficials/">Dades oficials</a>
+        <a href="/proteccio-menor/">Protecció del Menor</a>
+        <a href="/femeni/">Bàsquet femení</a>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
-        <a href="/partits/">Dies de partit</a>
-        <a href="/partits/calendaris/">Dies de partit per equip</a>
+        <a href="/partits/">Calendari</a>
+        <a href="/partits/calendaris/">Calendari per equip</a>
         <a href="/fotos/">Galeria de fotos</a>
         <a href="/premidonaesport/">Premi Dona i Esport</a>
         <a href="/blog/">Blog</a>
@@ -942,6 +1161,8 @@
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/bustia/">Bústia de suggeriments</a>
         <a href="/faq/">Preguntes freqüents</a>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>

@@ -260,8 +260,8 @@ Una cosa es diu igual a Instagram i a la web.
 
 | Destacada d'IG | Etiqueta a la web |
 |---|---|
-| Dies de partit | **Dies de partit** (mai «Calendari», «Partits i resultats» ni «Partits i events») |
-| — | **Dies de partit per equip** per a `/partits/calendaris/` |
+| Dies de partit | **Calendari** — decisió de la direcció del club, agost del 2026. Abans era «Dies de partit»; el que segueix prohibit és «Partits i resultats» i «Partits i events». Als `<title>` i les descripcions s'hi pot deixar «dies de partit» com a terme de cerca. |
+| — | **Calendari per equip** per a `/partits/calendaris/` |
 | Escoleta | Escoleta |
 | El club | El club |
 
