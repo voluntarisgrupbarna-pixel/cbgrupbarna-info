@@ -198,14 +198,18 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
 .head-side { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); }
 .head-side.r { justify-content: flex-end; }
-.head-nav a { position: relative; padding: 7px 0; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; white-space: nowrap; }
+/* Per sota de 680 px aquest enllaç es queda només amb la fletxa i feia 12×28
+   px: era l'única sortida de la pàgina cap al club i no es podia encertar amb
+   el dit. Amb els mínims arriba als 44×44 de la pauta sense fer la barra més
+   alta, que en fa 64. */
+.head-nav a { position: relative; display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; padding: 7px 0; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; white-space: nowrap; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
 .head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; justify-self: center; }
 .head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--display); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
 .langs { display: flex; align-items: center; border: 1px solid var(--line); }
-.langs button { padding: 8px 12px; min-height: 36px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; transition: background 0.3s, color 0.3s; }
+.langs button { padding: 8px 12px; min-height: 44px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; transition: background 0.3s, color 0.3s; }
 .langs button[aria-pressed="true"] { background: var(--ink); color: #fff; }
 /* A pantalla estreta la capçalera ha de cabre sencera: es retira el text de
    l'enllaç de tornada i s'estreny la marca i el canvi d'idioma. */
