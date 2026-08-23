@@ -31,6 +31,19 @@ EXCLOU = ('.git', 'node_modules', 'tests', '.github', 'galeria', '.claude')
 CSS = '<link rel="stylesheet" href="/css/nav.css">'
 JS = '<script src="/js/nav.js" defer></script>'
 
+# Pàgines públiques sense cap <header>: entren per cercador i no tenien cap
+# sortida cap al club. Hi va la navegació igualment, i `js/nav.js` els fa una
+# capçalera mínima. Fora d'aquesta llista, una pàgina sense capçalera se salta:
+# els panells d'administració i els generadors de cartells no han de dur menú.
+SENSE_CAPCALERA_PERO_PUBLIQUES = {
+    'mascota/index.html',
+    'es/mascota/index.html',
+    'en/mascota/index.html',
+    'galeria-3x3-glories/index.html',
+    'es/galeria-3x3-glories/index.html',
+    'en/galeria-3x3-glories/index.html',
+}
+
 RE_HEADER = re.compile(r'<header[\s>]', re.I)
 RE_HEAD_TANCA = re.compile(r'</head\s*>', re.I)
 RE_BODY_TANCA = re.compile(r'</body\s*>', re.I)
@@ -81,9 +94,10 @@ def main():
     for p in pagines():
         text = p.read_text(encoding='utf-8')
 
-        # Sense capçalera no hi ha on penjar el botó de menú: nav.js no hi
-        # faria res i la línia només afegiria pes.
-        if not RE_HEADER.search(text):
+        # Sense capçalera no hi ha on penjar el botó de menú, tret de les
+        # públiques de la llista: allà nav.js en fabrica una de mínima.
+        rel_str = p.relative_to(ARREL).as_posix()
+        if not RE_HEADER.search(text) and rel_str not in SENSE_CAPCALERA_PERO_PUBLIQUES:
             saltades += 1
             continue
 

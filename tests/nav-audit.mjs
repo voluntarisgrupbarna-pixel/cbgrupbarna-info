@@ -178,10 +178,16 @@ for (const amplada of AMPLADES) {
   // --- Graf de navegació fent servir NOMÉS el xassís -----------------------
   // Si per anar d'una pàgina a una altra cal passar pel cos d'un article, la
   // navegació no és navegació: és sort.
+  //
+  // Un enllaç dins d'un menú tancat SÍ que compta, sempre que el botó que
+  // l'obre es vegi: és un toc més, no un carreró. Comptar només el que ja és
+  // a la pantalla diria que un lloc amb menú de gallet no té navegació, que
+  // és fals. El que no compta mai és un enllaç que cap gest fa aparèixer.
   const sortides = {};
   for (const [url, v] of Object.entries(d)) {
     if (v.error) continue;
-    sortides[url] = [...new Set([...v.capcalera.vis, ...v.menu.vis, ...v.peu.vis])]
+    const delMenu = v.burgerVisible ? v.menu.tot : v.menu.vis;
+    sortides[url] = [...new Set([...v.capcalera.vis, ...delMenu, ...v.peu.vis])]
       .filter((x) => existeix.has(x) && x !== url);
   }
 
@@ -199,12 +205,16 @@ for (const amplada of AMPLADES) {
   const inabastables = pagines.map((p) => p.url).filter((u) => dist[u] === undefined);
   const lluny = Object.entries(dist).filter(([, k]) => k >= 4).map(([u, k]) => `${u} (${k} clics)`);
 
-  // Formes diferents de capçalera: si n'hi ha moltes, la navegació «canvia» de
-  // pàgina en pàgina i és el que es percep com a incoherent.
+  // Formes diferents de navegació persistent: si n'hi ha moltes, el menú
+  // «canvia» de pàgina en pàgina i és el que es percep com a incoherent.
+  // Es mira el xassís sencer (capçalera + menú), no la capçalera sola: dues
+  // pàgines amb el mateix menú ofereixen el mateix mapa encara que la barra
+  // de dalt en mostri quatre entrades o set.
   const formes = new Map();
   for (const [url, v] of Object.entries(d)) {
     if (v.error) continue;
-    const clau = v.capcalera.vis.slice().sort().join('|') || '(cap)';
+    const delMenu = v.burgerVisible ? v.menu.tot : v.menu.vis;
+    const clau = [...new Set([...v.capcalera.vis, ...delMenu])].sort().join('|') || '(cap)';
     if (!formes.has(clau)) formes.set(clau, []);
     formes.get(clau).push(url);
   }
@@ -229,7 +239,7 @@ for (const amplada of AMPLADES) {
     abastablesEnUnClic: Object.values(dist).filter((k) => k === 1).length,
     abastablesEnDosClics: Object.values(dist).filter((k) => k <= 2).length,
     inabastables: inabastables.length,
-    formesDeCapcalera: formes.size,
+    formesDeNavegacio: formes.size,
   };
 
   const afegeix = (tipus, gravetat, llista, detall) => {
@@ -255,8 +265,8 @@ for (const amplada of AMPLADES) {
   afegeix('sense-tornar-a-inici', 'mitja', senseInici, 'no hi ha manera clara de tornar a la portada');
   if (lluny.length) afegeix('massa-lluny-de-la-portada', 'mitja', lluny, 'a 4 clics o més de la portada');
   if (formes.size > 3) {
-    problemes.push({ amplada, tipus: 'capcalera-incoherent', gravetat: 'greu', quants: formes.size,
-      detall: 'la capçalera no és la mateixa a tot el lloc: aquestes són les variants i quantes pàgines fa servir cadascuna',
+    problemes.push({ amplada, tipus: 'navegacio-incoherent', gravetat: 'greu', quants: formes.size,
+      detall: 'la navegació persistent no és la mateixa a tot el lloc: aquestes són les variants i quantes pàgines fa servir cadascuna',
       exemples: [...formes.entries()].sort((a, b) => b[1].length - a[1].length)
         .slice(0, 6).map(([k, v]) => `${v.length} pàgines · ${k.split('|').length} enllaços: ${k.slice(0, 90)}`) });
   }
@@ -274,7 +284,7 @@ for (const a of AMPLADES) {
   console.log(`    sortides de navegació per pàgina: ${r.sortidesMinim}–${r.sortidesMaxim} (mitjana ${r.sortidesMitjana})`);
   console.log(`    a un clic de la portada: ${r.abastablesEnUnClic} pàgines · a dos clics: ${r.abastablesEnDosClics} de ${r.pagines}`);
   console.log(`    no s'hi arriba navegant: ${r.inabastables} pàgines`);
-  console.log(`    variants diferents de capçalera: ${r.formesDeCapcalera}`);
+  console.log(`    variants diferents de navegació: ${r.formesDeNavegacio}`);
 }
 
 const ordre = { greu: 0, mitja: 1, lleu: 2 };

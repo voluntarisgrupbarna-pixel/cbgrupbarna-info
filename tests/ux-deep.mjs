@@ -248,6 +248,38 @@ async function provaPagina(ctx, origin, url, dev, ferNoJs) {
     return r;
   }
   await page.waitForTimeout(400);
+
+  // --- 0. Les galetes, primer -----------------------------------------------
+  //     La barra de consentiment és fixa a baix de tot i tapa la barra
+  //     d'accions del mòbil. Ho anotem un cop —és el que veu qui arriba per
+  //     primera vegada— i després l'acceptem, perquè la resta del recorregut
+  //     mesuri el lloc tal com el veu qui ja hi ha estat.
+  var barraGaletes = await page.$('.cbgb-gal');
+  if (barraGaletes) {
+    const tapaCta = await page.evaluate(`(function () {
+      var g = document.querySelector('.cbgb-gal');
+      if (!g) return [];
+      var gr = g.getBoundingClientRect();
+      var out = [];
+      document.querySelectorAll('.actionbar a, .fab-wa, a.btn, button.btn').forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.height < 1) return;
+        if (r.bottom > gr.top && r.top < gr.bottom) {
+          out.push((el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 40));
+        }
+      });
+      return out;
+    })()`);
+    if (tapaCta.length) {
+      afegeix('galetes-tapen-la-crida-a-l-accio', 'mitja', {
+        quants: tapaCta.length, exemples: tapaCta.slice(0, 5),
+        detall: 'a la primera visita, la barra de galetes tapa aquests botons fins que es respon',
+      });
+    }
+    await page.click('.cbgb-gal button[data-cbgb="si"]').catch(function () {});
+    await page.waitForTimeout(400);
+  }
+
   await page.evaluate(MARCA);
 
   // --- 1. Foto de sortida: què es veu abans de tocar res -------------------

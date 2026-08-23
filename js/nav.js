@@ -171,6 +171,31 @@
   var menu = doc.getElementById('menu') || doc.querySelector('.menu');
   var burger = doc.getElementById('burger') || doc.querySelector('.head-burger');
 
+  // Pàgines sense cap capçalera (la mascota, la galeria del 3x3): són públiques
+  // i entren per cercador, però no tenien cap sortida cap al club. Se'ls en fa
+  // una de mínima —escut i botó de menú— que no els toca el disseny.
+  // Aquest fitxer només es carrega on s'ha decidit que hi vagi, així que
+  // arribar aquí ja és la decisió: no cal endevinar si la pàgina la vol.
+  if (!capcalera) {
+    capcalera = doc.createElement('header');
+    capcalera.className = 'head head--injectada';
+    var dinsNou = doc.createElement('div');
+    dinsNou.className = 'head-in';
+    var marca = doc.createElement('a');
+    marca.className = 'head-brand';
+    marca.href = PREFIX;
+    marca.setAttribute('aria-label', 'CB Grup Barna · inici');
+    var esc = doc.createElement('img');
+    esc.src = '/logo.png'; esc.alt = 'Escut del CB Grup Barna';
+    esc.width = 30; esc.height = 30; esc.decoding = 'async';
+    var nom = doc.createElement('span');
+    nom.textContent = 'CB Grup Barna';
+    marca.appendChild(esc); marca.appendChild(nom);
+    dinsNou.appendChild(marca);
+    capcalera.appendChild(dinsNou);
+    doc.body.insertBefore(capcalera, doc.body.firstChild);
+  }
+
   if (capcalera && !menu) {
     menu = construeixMenu();
     capcalera.parentNode.insertBefore(menu, capcalera.nextSibling);
