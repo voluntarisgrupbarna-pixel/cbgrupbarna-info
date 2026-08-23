@@ -350,6 +350,49 @@ club. Falta escrit com el pregunta una mare.
 33. Amb qui parlo de la meva categoria? (coordinador/a)
 34. Com puc ser voluntari o entrenador al club?
 
+### I tot això, per tres · el que costa de debò
+
+**34 preguntes no són 34 textos: en són 102**, i cada un ha d'anar a dos llocs
+(el `<details>` visible i el `FAQPage` del JSON-LD). Són ~204 insercions
+repartides per una trentena de fitxers, i el repositori no té cap framework
+d'i18n: cada traducció és un HTML independent que s'actualitza a mà.
+
+Fet a mà, això no es manté. **Ja no s'està mantenint**: comptades sobre
+l'índex, **28 pàgines tenen avui les tres versions desquadrades**.
+
+| Pàgina | CA | ES | EN |
+|---|---|---|---|
+| Portada | 15 | 11 | 11 |
+| `/escoleta/` | 8 | 6 | 6 |
+| `/grup-barna-dades-oficials/` | 8 | 0 | 0 |
+| `/patrocinadors/` | 8 | 5 | 5 |
+| `/femeni/` | 5 | 3 | 3 |
+| `/posicionament/`, `/empreses/`, `/model-formatiu/`, `/magics/`, 12 articles del blog | 1–6 | 0 | 0 |
+
+I `escoleta/index.html` porta escrita, en un comentari, la regla que avui es
+compleix a mà: *«FAQ visible · ha de coincidir sempre amb el FAQPage del
+JSON-LD»*. Afegir-hi 102 textos més per la mateixa via empitjora el problema.
+
+**La proposta és no escriure-ho tres vegades a tres llocs.** Una sola font
+—`i18n/faq.yml`, una pregunta per entrada amb els seus tres idiomes i la
+pàgina on va— i un generador que escrigui tots dos blocs (el `<details>` i el
+JSON-LD) entre marcadors, com ja fa `generate-seo-snapshot.py` a `/partits/`.
+D'una tacada: s'acaba la desincronització, es poden quadrar les 28 pàgines
+d'ara, i el cercador se n'assabenta tot sol perquè llegeix el JSON-LD.
+
+### Un blocatge concret
+
+**`/portes-obertes/` no té versió en castellà ni en anglès.** És la pàgina del
+bloc B —cinc preguntes—, té pes 88 i és la porta d'entrada de setembre. Cal
+crear `/es/portes-obertes/` i `/en/open-days/` (i donar-les d'alta a
+`i18n/routes.yml`) abans o alhora que les preguntes.
+
+La resta de pàgines de la llista sí que tenen les tres versions, amb els noms
+de `routes.yml`: `/es/instalaciones/` i `/en/facilities/`,
+`/es/baloncesto-formativo/` i `/en/development-basketball/`,
+`/es/proteccion-menor/` i `/en/child-protection/`, `/es/organigrama/` i
+`/en/organisation/`.
+
 ### La regla, perquè serveixi de res
 
 Cada pregunta ha d'anar **a dos llocs alhora**: al `<details>` visible dins
