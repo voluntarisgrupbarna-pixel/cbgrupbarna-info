@@ -377,7 +377,11 @@ def main():
     rutes = carrega_rutes()
     font = yaml.safe_load(io.open(FONT, encoding="utf-8")) or {}
     entrades = font.get("preguntes", [])
-    ja = {e["pagina"] for e in entrades}
+    # Les entrades amb `pendent:` no compten com a migrades: una pàgina pot
+    # tenir-hi una pregunta esperant un preu i, tot i així, tenir-ne d'altres
+    # escrites a l'HTML que encara no han passat per aquí. Era el cas de
+    # /faq/, que amb el filtre antic semblava feta i no ho estava.
+    ja = {e["pagina"] for e in entrades if not e.get("pendent")}
     usats = {e["id"] for e in entrades}
 
     # Què hi ha per migrar, i de quina mena.

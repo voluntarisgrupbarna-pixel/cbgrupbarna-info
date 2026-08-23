@@ -134,15 +134,41 @@ surten a la mateixa llista.
 Si toques qualsevol de les tres, **afegeix el cas nou a `tests/cerca/prova-motor.mjs`**
 i executa'l: és el que impedeix que arreglar una cerca en trenqui tres.
 
+## Quan no troba res
+
+Una cerca sense resultats no s'acaba en un carreró:
+
+- **«Volies dir…»** — la pregunta del web que més s'hi assembla, encara que no
+  arribi al llindar per donar-la per bona.
+- **«Pregunta-ho i t'ho diem»** — un enllaç al WhatsApp del club **amb la
+  pregunta ja escrita**. Si el web no ho diu, que ho digui una persona: una
+  cerca fallida és algú que volia saber una cosa i encara la vol saber.
+- I les portes de sempre, per si el que buscava tenia un altre nom.
+
+## La pàgina de 404
+
+`404.html` no ensenya només una graella d'enllaços: **hi posa el cercador amb
+la consulta ja escrita, deduïda de l'adreça que no existeix.** Qui entra a
+`/escoleta-inscripcions-2026/` es troba «escoleta inscripcions 2026» cercat i
+resolt. Ho fa `data-cerca-de-la-ruta` al `#cercaPagina` d'aquella pàgina.
+
+I el `SearchAction` del JSON-LD de les tres portades —el que fa que Google
+pugui ensenyar una caixa de cerca del lloc als resultats— apuntava a la
+portada, que no ha llegit mai cap `?q=`. Ara apunta a `/cerca/`,
+`/es/busqueda/` i `/en/search/`, que sí que en saben.
+
 ## Detalls que val la pena saber
 
-- **Quan respon i quan no.** La consulta es compara amb les 460 preguntes: les
-  interrogatives (`quan`, `on`, `com`, `cuánto`, `when`, `how`…) hi compten,
-  perquè són el que distingeix «quan és el campus» de «quant costa el campus»;
-  en canvi «club», «Barna» i «bàsquet» **no** compten, perquè surten a gairebé
-  totes i farien que qualsevol cosa semblés que encaixa. Cal que hi surti com a
-  mínim la meitat del que s'ha escrit, i que la millor passi el llindar. Una
-  paraula solta («fotos») és un tema, no una pregunta: no en treu cap.
+- **Quan respon i quan no.** Cada paraula pesa segons com de rara sigui al
+  corpus de preguntes: «qui» surt a dues-centes i no distingeix res, «president»
+  a cap i ho decideix tot. Les interrogatives (`quan`, `on`, `com`, `cuánto`,
+  `when`, `how`…) compten, perquè distingeixen «quan és el campus» de «quant
+  costa el campus»; «club», «Barna» i «bàsquet», no, perquè surten a gairebé
+  totes. **La paraula més distintiva de la consulta ha de sortir a la
+  pregunta**, comparada per l'arrel: «porto» i «portar» són la mateixa paraula,
+  i «entrenador» i «patrocinador» no. Una paraula solta només respon si és
+  rara: «campus» surt a 23 preguntes i no en treu cap; «assegurança», a cap, i
+  sí.
 - **Idioma.** Es mira l'atribut `lang` i el prefix `/es/` o `/en/`. Una pàgina en
   un altre idioma baixa de posició **només si existeix la versió en el teu**; si
   no n'hi ha cap altra (com `/magics/`), no se la penalitza, perquè és l'única

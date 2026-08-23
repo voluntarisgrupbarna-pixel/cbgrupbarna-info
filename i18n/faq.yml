@@ -260,6 +260,23 @@ preguntes:
     r: 'The Escoleta trains twice a week: Wednesdays 17:30 to 18:40 at Escola Casas and Saturdays
       09:00 to 10:30 at La Nau del Clot. For the league age groups it depends on the group;
       message us on WhatsApp with the age and we will tell you the exact days and times.'
+- id: fotos-on-son
+  pagina: /fotos/
+  ca:
+    q: On són les fotos dels partits i dels esdeveniments?
+    r: 'A la galeria del club, a cbgrupbarna.info/fotos/: és el repositori fotogràfic oficial,
+      amb tots els esdeveniments i totes les temporades. L''accés és lliure —només cal deixar-hi
+      un correu per entrar-hi— i les fotos es poden descarregar.'
+  es:
+    q: ¿Dónde están las fotos de los partidos y de los eventos?
+    r: 'En la galería del club, en cbgrupbarna.info/fotos/: es el repositorio fotográfico
+      oficial, con todos los eventos y todas las temporadas. El acceso es libre —solo hace
+      falta dejar un correo para entrar— y las fotos se pueden descargar.'
+  en:
+    q: Where are the photos from games and events?
+    r: 'In the club gallery at cbgrupbarna.info/fotos/: it is the official photo archive,
+      with every event and every season. Access is open — you just leave an email to get in
+      — and the photos can be downloaded.'
 - id: fotos-retirar-imatge
   pagina: /fotos/
   ca:
@@ -317,17 +334,6 @@ preguntes:
     q: ¿Hay descuento para hermanos?
   en:
     q: Is there a discount for siblings?
-- id: quota-ajuts
-  pagina: /faq/
-  pendent: 'Si el club té ajuts o beques per a famílies que no hi arriben, i com es demanen.
-    No és només informació: dir en veu alta que cap infant es queda fora per diners és una
-    cosa que els clubs veïns no diuen.'
-  ca:
-    q: Hi ha ajuts si una família no pot pagar la quota?
-  es:
-    q: ¿Hay ayudas si una familia no puede pagar la cuota?
-  en:
-    q: Is there financial help for families who cannot afford the fee?
 - id: quota-baixa
   pagina: /faq/
   pendent: Què passa amb la quota si un jugador es dona de baixa a mig any.
@@ -395,16 +401,6 @@ preguntes:
     q: ¿Hace falta revisión médica para jugar en el club?
   en:
     q: Is a medical check-up required to play?
-- id: coordinador
-  pagina: /organigrama/
-  pendent: 'Qui és la persona de contacte de cada categoria. L''organigrama té la Junta, però
-    una família no busca la Junta: busca amb qui parla de la seva categoria.'
-  ca:
-    q: Amb qui parlo de la categoria del meu fill?
-  es:
-    q: ¿Con quién hablo de la categoría de mi hijo?
-  en:
-    q: Who do I talk to about my child's age group?
 - id: voluntariat
   pagina: /club/
   pendent: Com s'apunta algú que vol ser entrenador o voluntari, i què cal.
@@ -3290,3 +3286,173 @@ preguntes:
     q: At what age can a girl start playing basketball at Barna?
     r: At 4 years old, in the Escoleta, in mixed groups. Federated women's competition starts
       at premini (age 8-9) and continues through to Senior.
+- id: faq-1
+  pagina: /faq/
+  ca:
+    q: Què és el CB Grup Barna?
+    r: Un club de bàsquet formatiu del Clot, Barcelona, fundat el 1965, amb més de 34 equips,
+      estructura masculina i femenina, Escoleta, equips sèniors a Super Copa FCBQ i esport
+      adaptat.
+  es:
+    q: ¿Qué es el CB Grup Barna?
+    r: Un club de baloncesto formativo del Clot, Barcelona, fundado en 1965, con más de 34
+      equipos, estructura masculina y femenina, Escoleta, equipos séniors en Super Copa FCBQ
+      y deporte adaptado.
+  en:
+    q: What is CB Grup Barna?
+    r: A development basketball club from El Clot, Barcelona, founded in 1965, with more than
+      34 teams, boys' and girls' structures, an Escoleta, senior teams in the Super Copa FCBQ
+      and adapted sport.
+- id: faq-2
+  pagina: /faq/
+  ca:
+    q: Com m'apunto al CB Grup Barna?
+    r: Deixant les dades al formulari d'informació de la portada o escrivint pel WhatsApp
+      del club. Per a infants de 4 a 8 anys, la porta d'entrada sol ser l'Escoleta.
+  es:
+    q: ¿Cómo me apunto al CB Grup Barna?
+    r: Dejando los datos en el formulario de información de la portada o escribiendo por el
+      WhatsApp del club. Para niños y niñas de 4 a 8 años, la puerta de entrada suele ser
+      la Escoleta.
+  en:
+    q: How do I join CB Grup Barna?
+    r: Leave your details in the information form on the home page, or write to the club on
+      WhatsApp. For children aged 4 to 8, the way in is usually the Escoleta.
+- id: faq-3
+  pagina: /faq/
+  ca:
+    q: On entrena i juga el CB Grup Barna?
+    r: La seu principal és la Nau del Clot, al carrer de la Llacuna, Districte de Sant Martí.
+      El club també fa servir cinc pistes més del barri, segons l'equip i l'horari.
+  es:
+    q: ¿Dónde entrena y juega el CB Grup Barna?
+    r: La sede principal es La Nau del Clot, en la calle de la Llacuna, Distrito de Sant Martí.
+      El club usa también otras cinco pistas del barrio, según el equipo y el horario.
+  en:
+    q: Where does CB Grup Barna train and play?
+    r: The main venue is La Nau del Clot, on carrer de la Llacuna, in the Sant Martí district.
+      The club also uses five other courts in the neighbourhood, depending on the team and
+      the time.
+- id: faq-4
+  pagina: /faq/
+  ca:
+    q: Quant costa apuntar-se al club?
+    r: Els preus varien segons la categoria i el programa (Escoleta, competició federada,
+      Campus). El primer entrenament de prova és sense compromís; per a preus concrets, cal
+      contactar directament amb el club.
+  es:
+    q: ¿Cuánto cuesta apuntarse al club?
+    r: Los precios varían según la categoría y el programa (Escoleta, competición federada,
+      Campus). El primer entrenamiento de prueba es sin compromiso; para precios concretos
+      hay que contactar directamente con el club.
+  en:
+    q: How much does it cost to join the club?
+    r: Fees vary by age group and programme (Escoleta, league basketball, Camp). The first
+      trial session is free and with no commitment; for exact fees, contact the club directly.
+- id: organigrama-presidencia
+  pagina: /organigrama/
+  ca:
+    q: Qui presideix el CB Grup Barna?
+    r: La temporada 2026-27 la presidència és de Santos García Yagüe i la vicepresidència,
+      de Pere Solanas. La direcció tècnica és d'Adrià Mateo. La llista sencera de la Junta
+      i de les coordinacions és en aquesta pàgina, tal com consta a la documentació oficial
+      del club.
+  es:
+    q: ¿Quién preside el CB Grup Barna?
+    r: En la temporada 2026-27 la presidencia es de Santos García Yagüe y la vicepresidencia,
+      de Pere Solanas. La dirección técnica es de Adrià Mateo. La lista completa de la Junta
+      y de las coordinaciones está en esta página, tal como consta en la documentación oficial
+      del club.
+  en:
+    q: Who is the president of CB Grup Barna?
+    r: For the 2026-27 season the president is Santos García Yagüe and the vice-president
+      is Pere Solanas. Adrià Mateo is technical director. The full list of the board and the
+      section coordinators is on this page, as recorded in the club's official documents.
+- id: organigrama-a-qui-escriure
+  pagina: /organigrama/
+  ca:
+    q: Amb qui parlo segons el que necessiti?
+    r: 'Per a l''Escoleta (4 a 8 anys), amb Julio Torralba, al 646 205 526. Per a consultes
+      generals del club, a marqueting@cbgrupbarna.info o al WhatsApp +34 698 425 153. Per
+      a patrocinis i col·laboracions, a la direcció de màrqueting. I per a qualsevol qüestió
+      de protecció del menor hi ha un canal confidencial a part: protecciomenorcbgrupbarna@gmail.com.'
+  es:
+    q: ¿Con quién hablo según lo que necesite?
+    r: 'Para la Escoleta (4 a 8 años), con Julio Torralba, en el 646 205 526. Para consultas
+      generales del club, en marqueting@cbgrupbarna.info o en el WhatsApp +34 698 425 153.
+      Para patrocinios y colaboraciones, con la dirección de marketing. Y para cualquier cuestión
+      de protección del menor hay un canal confidencial aparte: protecciomenorcbgrupbarna@gmail.com.'
+  en:
+    q: Who do I contact about what?
+    r: 'For the Escoleta (ages 4 to 8), Julio Torralba on 646 205 526. For general club enquiries,
+      marqueting@cbgrupbarna.info or WhatsApp +34 698 425 153. For sponsorship and partnerships,
+      the marketing director. And for anything to do with child protection there is a separate
+      confidential channel: protecciomenorcbgrupbarna@gmail.com.'
+- id: historia-des-de-quan
+  pagina: /historia/
+  ca:
+    q: Des de quan existeix el CB Grup Barna?
+    r: 'Des del 1965: seixanta-un anys al barri del Clot. Va néixer com a secció de bàsquet
+      del Centre Parroquial de Sant Martí del Clot, dins d''una entitat poliesportiva oberta
+      a tot el jovent del barri.'
+  es:
+    q: ¿Desde cuándo existe el CB Grup Barna?
+    r: 'Desde 1965: sesenta y un años en el barrio de El Clot. Nació como sección de baloncesto
+      del Centre Parroquial de Sant Martí del Clot, dentro de una entidad polideportiva abierta
+      a todos los jóvenes del barrio.'
+  en:
+    q: How long has CB Grup Barna been going?
+    r: 'Since 1965: sixty-one years in the El Clot neighbourhood. It started as the basketball
+      section of the Centre Parroquial de Sant Martí del Clot, inside a multi-sport organisation
+      open to every young person in the area.'
+- id: faq-ajuts
+  pagina: /faq/
+  ca:
+    q: Hi ha beques o ajuts si una família no pot pagar la quota?
+    r: Sí. El club manté beques socials perquè cap infant es quedi fora per motius econòmics.
+      Es demanen escrivint al club, a marqueting@cbgrupbarna.info o al WhatsApp +34 698 425
+      153, i es tracten de manera confidencial.
+  es:
+    q: ¿Hay becas o ayudas si una familia no puede pagar la cuota?
+    r: Sí. El club mantiene becas sociales para que ningún niño o niña se quede fuera por
+      motivos económicos. Se piden escribiendo al club, a marqueting@cbgrupbarna.info o al
+      WhatsApp +34 698 425 153, y se tratan de forma confidencial.
+  en:
+    q: Are there bursaries or help for families who cannot afford the fee?
+    r: Yes. The club keeps hardship bursaries so that no child is left out for financial reasons.
+      You can ask for one by writing to the club at marqueting@cbgrupbarna.info or on WhatsApp
+      +34 698 425 153, and requests are handled confidentially.
+- id: documents-assegurança
+  pagina: /documents/
+  ca:
+    q: Els jugadors i jugadores estan assegurats?
+    r: Sí. Tota jugadora i jugador federat està cobert per l'assegurança esportiva obligatòria
+      de la Federació Catalana de Basquetbol (FCBQ). La informació i el protocol en cas d'accident
+      durant un entrenament o un partit es gestionen des de la mateixa federació.
+  es:
+    q: ¿Los jugadores y jugadoras están asegurados?
+    r: Sí. Toda jugadora y jugador federado está cubierto por el seguro deportivo obligatorio
+      de la Federació Catalana de Basquetbol (FCBQ). La información y el protocolo en caso
+      de accidente durante un entrenamiento o un partido se gestionan desde la propia federación.
+  en:
+    q: Are the players insured?
+    r: Yes. Every registered player is covered by the compulsory sports insurance of the Catalan
+      Basketball Federation (FCBQ). The details and the procedure if there is an accident
+      during training or a game are handled by the federation itself.
+- id: faq-quin-lema
+  pagina: /club/
+  ca:
+    q: Quin és el lema del CB Grup Barna?
+    r: 'La Cultura del Progrés. No eduquem des del sacrifici: eduquem des del progrés. L''esforç
+      importa, però no explica sol el resultat — hi calen també aprenentatge, descans, acompanyament,
+      oportunitats i adaptació.'
+  es:
+    q: ¿Cuál es el lema del CB Grup Barna?
+    r: 'La Cultura del Progreso. No educamos desde el sacrificio: educamos desde el progreso.
+      El esfuerzo importa, pero no explica solo el resultado — hacen falta también aprendizaje,
+      descanso, acompañamiento, oportunidades y adaptación.'
+  en:
+    q: What is CB Grup Barna's motto?
+    r: 'The Culture of Progress. We do not teach through sacrifice: we teach through progress.
+      Effort matters, but it does not explain the result on its own — learning, rest, support,
+      opportunities and adaptation all count too.'

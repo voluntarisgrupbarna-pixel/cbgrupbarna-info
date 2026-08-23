@@ -111,7 +111,13 @@ const RESPOSTES = [
   ['en', 'where is la nau del clot', 'la nau del clot'],
   // Cap resposta: una paraula solta és un tema, no una pregunta; i un
   // teclat aixafat no ha de treure res.
-  ['ca', 'fotos', null],
+  // «fotos» va deixar de ser un cas de «cap resposta» el 23/08/2026: una
+  // paraula rara i sola SÍ que és una pregunta, i el que calia arreglar no
+  // era la regla sinó el contingut —/fotos/ només tenia escrita la pregunta
+  // del dret d'imatge, i ara també la que la gent fa de debò.
+  ['ca', 'fotos', 'les fotos dels partits'],
+  // «campus» surt a 23 preguntes: sola no distingeix res i segueix sense
+  // treure resposta, que és el que ha de fer.
   ['ca', 'campus', null],
   ['ca', 'asdfghjkl', null],
   // Però amb dues paraules, sí: ja és una pregunta.

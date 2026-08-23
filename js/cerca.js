@@ -55,7 +55,9 @@
       fontFaq: 'Ho explica', relacionades: 'També s\'hi pregunta', carregant: 'Un moment…',
       error: 'Ara mateix no es pot cercar. Prova el menú de dalt.',
       resultats: 'resultats', unResultat: '1 resultat', veure: 'Veure-ho tot',
-      pista: 'per moure\'t · Enter per obrir · Esc per sortir'
+      pista: 'per moure\'t · Enter per obrir · Esc per sortir',
+      voliesDir: 'Volies dir', preguntaHo: 'Pregunta-ho i t\'ho diem',
+      preguntaHoAra: 'Escriu-ho pel WhatsApp del club', deLaRuta: 'Potser buscaves'
     },
     es: {
       obrir: 'Buscar', titol: '¿Qué buscas?',
@@ -68,7 +70,9 @@
       fontFaq: 'Lo explica', relacionades: 'También se pregunta', carregant: 'Un momento…',
       error: 'Ahora mismo no se puede buscar. Prueba el menú de arriba.',
       resultats: 'resultados', unResultat: '1 resultado', veure: 'Verlo todo',
-      pista: 'para moverte · Enter para abrir · Esc para salir'
+      pista: 'para moverte · Enter para abrir · Esc para salir',
+      voliesDir: '¿Querías decir', preguntaHo: 'Pregúntalo y te lo decimos',
+      preguntaHoAra: 'Escríbelo por el WhatsApp del club', deLaRuta: 'Quizá buscabas'
     },
     en: {
       obrir: 'Search', titol: 'What are you looking for?',
@@ -81,7 +85,9 @@
       fontFaq: 'Explained in', relacionades: 'People also ask', carregant: 'One moment…',
       error: 'Search is unavailable right now. Try the menu above.',
       resultats: 'results', unResultat: '1 result', veure: 'See everything',
-      pista: 'to move · Enter to open · Esc to close'
+      pista: 'to move · Enter to open · Esc to close',
+      voliesDir: 'Did you mean', preguntaHo: 'Ask us and we will tell you',
+      preguntaHoAra: 'Message the club on WhatsApp', deLaRuta: 'Maybe you were looking for'
     }
   }[lang];
 
@@ -108,7 +114,8 @@
   ('de del la el les els un una uns unes i o a al als amb per que quan com on ' +
    'els meu meva teu teva es se para por con del las los una unos unas y donde ' +
    'cuando como cuanto the of and for to in on at is are how what when where my ' +
-   'your can i do does es en si no hi ha').split(' ').forEach(function (p) { BUIDES[p] = 1; });
+   'your can i do does es en si no hi ha hay tiene tienen te tenim tenen have has ' +
+   'sobre about esta este esta aquest aquesta cual quiere quiero vull want').split(' ').forEach(function (p) { BUIDES[p] = 1; });
 
   function paraules(s) {
     return normalitza(s).split(' ').filter(function (p) {
@@ -547,10 +554,13 @@
     for (var i = 0; i < mots.length; i++) {
       var m = mots[i];
       if (m.slice(0, 4) === quatre) return true;
-      // Amb tres lletres només si totes dues paraules són llargues: els
-      // verbs canvien d'arrel («empieza» / «empezar») i quatre lletres no
-      // ho veuen. Amb paraules curtes, tres lletres casaria qualsevol cosa.
-      if (m.length >= 6 && terme.length >= 6 && m.slice(0, 3) === tres) return true;
+      // Amb tres lletres només si totes dues paraules són llargues I FAN
+      // MÉS O MENYS LA MATEIXA MIDA: els verbs canvien d'arrel («empieza» /
+      // «empezar», totes dues de set lletres) i quatre lletres no ho veuen.
+      // Sense el límit de mida, «president» casava amb «premis» i la cerca
+      // responia «Quins premis hi ha?» a qui preguntava per la presidència.
+      if (m.length >= 6 && terme.length >= 6 && m.slice(0, 3) === tres &&
+          Math.abs(m.length - terme.length) <= 2) return true;
     }
     return false;
   }
@@ -564,14 +574,36 @@
     return Math.max(0.12, Math.log((total + 1) / (df + 1)) / Math.log(total + 1));
   }
 
+  /* Com `puntuaCamp`, però amb l'arrel de recanvi. Les preguntes són text
+     curt i escrit per una altra persona: qui busca «assegurança» es troba
+     «estan assegurats», i qui busca «beques», «beca social». La distància
+     d'edició no ho salva —hi ha tres lletres de diferència— i l'arrel sí. */
+  function puntuaCampFaq(camp, terme, tol) {
+    var p = puntuaCamp(camp, terme, tol);
+    if (p) return p;
+    // Gairebé tant com encertar-la: per a un text curt escrit per una altra
+    // persona, «assegurats» és «assegurança». El que no val és confondre
+    // arrels diferents, i d'això ja se n'ocupa teLArrel.
+    return teLArrel(camp, terme) ? 0.85 : 0;
+  }
+
   function cercaResposta(consulta, families) {
     if (!preparatFaq.length) return null;
     var termes = paraulesPregunta(consulta);
-    // Una paraula solta és un TEMA, no una pregunta. Qui escriu «fotos» vol
-    // la galeria, no la resposta sobre el dret a la pròpia imatge; qui escriu
+    if (!termes.length) return null;
+
+    // Una paraula solta sol ser un TEMA i no una pregunta: qui escriu
     // «campus» vol la pàgina del campus, no una de les seves set preguntes.
-    // Amb enllaços n'hi ha prou: la resposta és per a qui pregunta.
-    if (termes.length < 2) return null;
+    // Però hi ha paraules que soles ja SÓN la pregunta —«assegurança»,
+    // «beques», «president», «quota»— i deixar-les sense resposta era pitjor
+    // que el problema que volíem evitar. El que les separa és com de rares
+    // siguin: «campus» surt a 23 preguntes, «assegurança» a cap.
+    var solaINoDistintiva = termes.length === 1 && pesTerme(termes[0]) < 0.7;
+    if (solaINoDistintiva) return null;
+    // Amb una paraula sola no cal apujar el llistó: ja l'apuja la regla de
+    // dalt (ha de ser rara) i la de sota (ha de sortir a la PREGUNTA, no
+    // només a la resposta).
+    var nomesUna = termes.length === 1;
 
     // Les paraules de la família detectada ajuden a casar la pregunta encara
     // que estigui escrita amb unes altres («quotes» ↔ «quant costa»).
@@ -614,8 +646,8 @@
       var teElRar = (termes.length < 2 || rar < 0) ? 2 : 0;
       for (var j = 0; j < termes.length; j++) {
         var t = termes[j], tol = tolerancia(t);
-        var aQ = puntuaCamp(d.q, t, tol);
-        var aR = aQ ? 0 : puntuaCamp(d.r, t, tol);
+        var aQ = puntuaCampFaq(d.q, t, tol);
+        var aR = aQ ? 0 : puntuaCampFaq(d.r, t, tol);
         // Compta sobretot a la PREGUNTA: una resposta llarga acaba contenint
         // qualsevol paraula i el filtre deixaria de filtrar. Però a la
         // resposta també val, perquè hi ha preguntes que fan servir una
@@ -636,6 +668,10 @@
         }
       }
       if (!encerts || !teElRar) continue;
+      // Una consulta d'una sola paraula ha de sortir a la pregunta: si només
+      // és a la resposta, la relació és massa indirecta per donar-la per
+      // bona sense res més que la sostingui.
+      if (nomesUna && teElRar !== 2) continue;
       // Si la paraula clau només surt a la resposta i no a la pregunta, la
       // parella és més fluixa: que ho hagi de compensar amb la resta.
       if (teElRar === 1) punts *= 0.7;
@@ -682,6 +718,25 @@
     }
 
     return { resposta: millors[0].d.f, punts: millors[0].punts, veines: veines };
+  }
+
+  /* Quan no trobem res, la pregunta del web que més s'hi assembla.
+     No és la resposta —no arriba al llindar, i per això no la donem com a
+     bona—, però sovint és el que la persona volia i no sabia com dir. */
+  function voliesDir(consulta) {
+    var termes = paraulesPregunta(consulta);
+    if (!termes.length || !preparatFaq.length) return null;
+    var millor = null, millorPunts = 0;
+    for (var i = 0; i < preparatFaq.length; i++) {
+      var d = preparatFaq[i];
+      if (d.f.l !== lang) continue;
+      var n = 0;
+      for (var j = 0; j < termes.length; j++) {
+        if (teLArrel(d.q, termes[j])) n += pesTerme(termes[j]);
+      }
+      if (n > millorPunts) { millorPunts = n; millor = d.f; }
+    }
+    return millorPunts >= 0.55 ? millor : null;
   }
 
   /* Tall del text on surt el que s'ha buscat, amb el terme marcat. */
@@ -971,9 +1026,30 @@
     var mostra = res.llista.slice(0, MAX_RESULTATS);
 
     if (!mostra.length && !html) {
-      this.cos.innerHTML = '<div class="cerca-bloc"><p class="cerca-estat"><strong>' +
-        escapa(T.cap) + ' «' + escapa(q) + '»</strong><br>' + escapa(T.capAjuda) + '</p></div>';
+      var buit = '<div class="cerca-bloc"><p class="cerca-estat"><strong>' +
+        escapa(T.cap) + ' «' + escapa(q) + '»</strong><br>' + escapa(T.capAjuda) + '</p>';
+      var proposta = voliesDir(q);
+      if (proposta) {
+        buit += '<p class="cerca-titol" style="margin-top:6px">' + escapa(T.voliesDir) + '</p>' +
+          '<div class="cerca-fitxes"><button type="button" class="cerca-fitxa" ' +
+          'data-pregunta="' + escapa(proposta.q) + '">' + escapa(proposta.q) + '</button></div>';
+      }
+      // I si el web de debò no ho diu enlloc, que no s'acabi aquí: la
+      // pregunta ja està escrita, només cal enviar-la.
+      buit += '<a class="cerca-preguntaho" data-cerca-r target="_blank" rel="noopener" href="' +
+        escapa('https://api.whatsapp.com/send?phone=+34698425153&text=' + encodeURIComponent(q)) +
+        '"><strong>' + escapa(T.preguntaHo) + '</strong><span>' +
+        escapa(T.preguntaHoAra) + ' &rarr;</span></a></div>';
+      this.cos.innerHTML = buit;
       this.estatBuitSuggeriments();
+      var self2 = this;
+      Array.prototype.forEach.call(this.cos.querySelectorAll('[data-pregunta]'), function (b) {
+        b.addEventListener('click', function () {
+          self2.input.value = b.getAttribute('data-pregunta');
+          self2.input.focus();
+          self2.pinta();
+        });
+      });
       return;
     }
 
@@ -1148,6 +1224,15 @@
     if (pagina) {
       var c = new Cercador(pagina, 'pag', true);
       var q = new URLSearchParams(location.search).get('q') || '';
+      // A la pàgina de 404 no hi ha res a escriure: ja sabem què buscava,
+      // ho diu l'adreça que no existeix. /escoleta-2026/ → «escoleta 2026».
+      if (!q && pagina.hasAttribute('data-cerca-de-la-ruta')) {
+        q = decodeURIComponent(location.pathname)
+          .replace(/\.[a-z]{2,5}$/i, '')
+          .replace(/[\/_-]+/g, ' ')
+          .replace(/\b(es|en|index|html|404|www|amp)\b/g, ' ')
+          .replace(/\s+/g, ' ').trim();
+      }
       c.input.value = q;
       carregaIndex().then(function () { c.pinta(); })
         .catch(function () { c.cos.innerHTML = '<p class="cerca-estat">' + escapa(T.error) + '</p>'; });

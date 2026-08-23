@@ -49,7 +49,6 @@ const CASOS = [
   ['es', 'cuánto cuesta apuntarse', 'resposta'],
   ['es', 'precio de la temporada', null],
   ['en', 'how much is it', 'resposta'],
-  ['ca', 'hi ha beques', null],
   ['ca', 'es pot pagar a terminis', null],
 
   // ── Apuntar-s'hi
@@ -119,7 +118,6 @@ const CASOS = [
   ['ca', 'els entrenadors tenen certificat', 'resposta'],
   ['ca', 'proteccio del menor', '/proteccio-menor/'],
   ['ca', 'treure una foto del meu fill', 'resposta'],
-  ['ca', 'hi ha assegurança', null],
   ['ca', 'pla digualtat', null],
   ['es', 'protección del menor', null],
   ['en', 'child protection', null],
@@ -136,8 +134,17 @@ const CASOS = [
   ['en', 'sponsorship', null],
 
   // ── El club
-  ['ca', 'des de quan existeix el club', null],
-  ['ca', 'qui es el president', null],
+  // Escrites el 23/08/2026 arran d'aquesta mateixa auditoria: la resposta era
+  // al web, però en un lloc on ningú la buscava.
+  ['ca', 'des de quan existeix el club', 'resposta'],
+  ['ca', 'qui es el president', 'resposta'],
+  ['es', 'quién preside el club', 'resposta'],
+  ['ca', 'amb qui parlo del meu fill', 'resposta'],
+  ['ca', 'hi ha beques', 'resposta'],
+  ['es', 'hay becas', 'resposta'],
+  ['en', 'is there financial help', 'resposta'],
+  ['ca', 'hi ha assegurança', 'resposta'],
+  ['ca', 'quin es el lema del club', 'resposta'],
   ['ca', 'junta directiva', '/organigrama/'],
   ['ca', 'historia del club', '/historia/'],
   ['ca', 'julio torralba', null],
