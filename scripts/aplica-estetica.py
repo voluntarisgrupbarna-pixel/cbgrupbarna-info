@@ -54,7 +54,9 @@ TINTES = ["0a0a0a", "0f0f0f", "0a0908", "0e1116"]
 # Cremes i papers trencats.
 CREMES = ["f2ede6", "ede7de", "f6f4f1", "faf9f5", "f7f4f0", "f4f1ea"]
 # Grisos d'etiqueta que no arriben al contrast mínim.
-GRISOS = ["8a8681", "9a9691", "8b8b8b"]
+# #706c67 va arribar d'una revisió d'accessibilitat i també passa AA, però el
+# gris de la guia és el #6B6560: un de sol, com el vermell.
+GRISOS = ["8a8681", "9a9691", "8b8b8b", "706c67"]
 # Accents que no són de marca (el verd neó de la galeria del 3x3).
 ACCENTS_FORA = ["00ff57", "00e04c"]
 

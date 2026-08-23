@@ -15,23 +15,23 @@
   nav img{width:36px;height:36px;object-fit:contain}
   nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.06em}
   nav .t span{color:var(--red)}
-  .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--muted)}
+  .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:#706c67}
   .who img{width:26px;height:26px;border-radius:50%}
-  .btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:.4rem .8rem;font-family:inherit;font-size:.75rem;cursor:pointer}
+  .btn{background:transparent;border:1px solid var(--line);color:#706c67;border-radius:8px;padding:.4rem .8rem;font-family:inherit;font-size:.75rem;cursor:pointer}
   .btn:hover{border-color:var(--red);color:var(--txt)}
   .wrap{max-width:900px;margin:0 auto;padding:2rem 1.2rem 4rem}
   h1{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1}
   h1 span{color:var(--red)}
-  .sub{color:var(--muted);font-size:.92rem;margin:.4rem 0 2rem}
+  .sub{color:#706c67;font-size:.92rem;margin:.4rem 0 2rem}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
   a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
   a.card:hover{border-color:var(--red);transform:translateY(-2px)}
   .card .ic{font-size:1.6rem;margin-bottom:.6rem}
   .card h2{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.03em;margin-bottom:.3rem}
-  .card p{color:var(--muted);font-size:.82rem;line-height:1.5}
+  .card p{color:#706c67;font-size:.82rem;line-height:1.5}
   .card .tag{display:inline-block;margin-top:.7rem;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
   .soon{opacity:.5;pointer-events:none}
-  h3.sec{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--muted);letter-spacing:.06em;margin:2.5rem 0 .9rem;border-bottom:1px solid var(--line);padding-bottom:.4rem}
+  h3.sec{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#706c67;letter-spacing:.06em;margin:2.5rem 0 .9rem;border-bottom:1px solid var(--line);padding-bottom:.4rem}
 </style>
 </head>
 <body>
@@ -135,7 +135,7 @@
 <script>
 CBGBGate.protect(function(user){
   var w = document.getElementById('who');
-  w.innerHTML = (user.picture ? '<img src="'+user.picture+'" alt="">' : '')
+  w.innerHTML = (user.picture ? '<img src="'+user.picture+'" alt="" loading="lazy" decoding="async">' : '')
     + '<span>' + (user.email || '') + '</span>'
     + '<button class="btn" onclick="CBGBGate.signOut()">Sortir</button>';
 });

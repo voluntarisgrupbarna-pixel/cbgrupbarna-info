@@ -313,7 +313,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 .bar-v { font-family: var(--display); font-weight: 300; font-size: 16px; letter-spacing: 0.04em; color: var(--ink); text-align: right; }
 .bar-t { grid-column: 1 / -1; height: 10px; background: rgba(16,16,14, 0.09); }
 .bar-f { display: block; height: 100%; background: var(--ink-2); }
-.bar-n { grid-column: 1 / -1; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.bar-n { grid-column: 1 / -1; font-size: 12px; line-height: 1.6; color: #6B6560; }
 .bar.on .bar-f { background: var(--red); }
 .bar.on .bar-k, .bar.on .bar-v, .bar.on .bar-n { color: var(--red-dark); }
 
@@ -339,7 +339,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 .dot.ad { width: 18px; height: 18px; background: var(--red); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px rgba(226, 6, 19, 0.35); }
 .chart p.ratio-v { margin-top: 16px; font-family: var(--display); font-weight: 300; font-size: 20px; letter-spacing: 0.04em; color: var(--ink); }
 .chart p.ratio-v em { font-style: normal; color: var(--red); }
-.chart p.ratio-n { margin-top: 6px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.chart p.ratio-n { margin-top: 6px; font-size: 12px; line-height: 1.6; color: #6B6560; }
 
 /* Repartiment · una sola barra partida en dos trams que sumen el total */
 .split { display: flex; gap: 2px; height: 16px; }
@@ -445,3 +445,53 @@ table.vs td.a { color: var(--red-dark); }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
 .tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+/* ============================================================
+   Formularis · component compartit
+   Newsletter, bústia de suggeriments i canal de protecció.
+   Alçada mínima de 48 px als camps i al botó: mida de dit.
+   ============================================================ */
+.form { margin-top: 26px; }
+.form-row { margin-bottom: 18px; }
+.form-row label { display: block; font-family: var(--body); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); margin-bottom: 7px; }
+.form-row .hint { display: block; font-size: 13px; font-weight: 300; letter-spacing: 0; text-transform: none; color: var(--ink-2); margin-top: -3px; margin-bottom: 8px; }
+.form input[type="text"], .form input[type="email"], .form input[type="tel"], .form select, .form textarea {
+  width: 100%; min-height: 48px; padding: 13px 14px;
+  font-family: var(--body); font-size: 15px; font-weight: 300; line-height: 1.5;
+  color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 0;
+  transition: border-color 0.25s var(--ease);
+}
+.form textarea { min-height: 160px; resize: vertical; }
+.form input:hover, .form select:hover, .form textarea:hover { border-color: var(--ink-2); }
+.form input:focus, .form select:focus, .form textarea:focus { outline: 2px solid var(--red); outline-offset: 1px; border-color: var(--red); }
+.form input::placeholder, .form textarea::placeholder { color: #6B6560; }
+
+/* Casella de consentiment: el text ha de ser llegible, no una etiqueta petita */
+.form-check { display: flex; gap: 11px; align-items: flex-start; margin-bottom: 18px; }
+.form-check input[type="checkbox"] { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 2px; accent-color: var(--red); cursor: pointer; }
+.form-check label { font-size: 14px; font-weight: 300; line-height: 1.6; letter-spacing: 0; text-transform: none; color: var(--ink-2); margin: 0; cursor: pointer; }
+.form-check a { color: var(--red-dark); }
+
+/* Estat obligatori i error */
+.form .req { color: var(--red-dark); }
+.form-err { display: none; margin-top: 7px; font-size: 13.5px; color: var(--red-dark); }
+.form-err.on { display: block; }
+.form input[aria-invalid="true"], .form textarea[aria-invalid="true"] { border-color: var(--red-dark); }
+
+/* Resposta després d'enviar */
+.form-done { display: none; padding: 26px; background: var(--paper-2); border-left: 3px solid var(--red); }
+.form-done.on { display: block; }
+.form-done h3 { font-family: var(--display); font-weight: 400; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 9px; }
+.form-done p { font-size: 15px; color: var(--ink-2); }
+.form.sent { display: none; }
+
+/* Avís destacat dins d'un formulari (vies d'urgència, nota legal) */
+.form-note { padding: 18px 20px; background: var(--paper-2); border-left: 3px solid var(--ink); margin: 22px 0; }
+.form-note p { font-size: 14px; line-height: 1.65; color: var(--ink-2); }
+.form-note p + p { margin-top: 9px; }
+.form-note strong { color: var(--ink); font-weight: 500; }
+.form-note.urgent { border-left-color: var(--red); }
+
+/* Un .btn amb text llarg desbordava a 390 px: és inline-flex i no s'encongia.
+   Que no passi mai de l'ample disponible i que el text pugui partir. */
+.btn { max-width: 100%; text-align: center; text-wrap: balance; }
