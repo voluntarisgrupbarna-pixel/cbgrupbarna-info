@@ -101,11 +101,18 @@ const RESPOSTES = [
   ['es', 'donde entrena', 'dónde entrena'],
   ['es', 'a que edad se empieza', 'a qué edad'],
   ['en', 'how much does it cost', 'how much does it cost'],
+  // Escrites a i18n/faq.yml i repartides per generate-faq.py. Fins al
+  // 23/08/2026 cap d'aquestes tenia resposta al web.
+  ['ca', 'que porto el primer dia', 'què cal portar'],
+  ['ca', 'em puc quedar a mirar', 'quedar a mirar'],
+  ['ca', 'on es la nau del clot', 'la nau del clot'],
+  ['es', 'donde esta la nau del clot', 'la nau del clot'],
+  ['es', 'en que pistas entrena', 'en qué pistas'],
+  ['en', 'where is la nau del clot', 'la nau del clot'],
   // Cap resposta: una paraula solta és un tema, no una pregunta; i un
   // teclat aixafat no ha de treure res.
   ['ca', 'fotos', null],
   ['ca', 'asdfghjkl', null],
-  ['ca', 'que porto el primer dia', null],
 ];
 
 console.log('\n---- respostes ----');

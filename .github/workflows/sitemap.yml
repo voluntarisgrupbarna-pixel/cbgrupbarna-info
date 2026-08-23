@@ -22,6 +22,7 @@ on:
       - 'scripts/build-sitemap.py'
       - '.github/scripts/generate-search-index.py'
       - 'i18n/routes.yml'
+      - 'i18n/faq.yml'
   workflow_dispatch:
 
 permissions:
@@ -72,6 +73,13 @@ jobs:
           done
           echo "::notice::$(wc -l < /tmp/urls.txt) pàgines públiques tocades en aquest push."
 
+      # Va PRIMER: escriu les preguntes freqüents a les pàgines, i el sitemap
+      # i l'índex del cercador s'han de calcular sobre les pàgines ja escrites.
+      - name: Repartir les preguntes freqüents als tres idiomes
+        run: |
+          pip install --quiet pyyaml
+          python3 .github/scripts/generate-faq.py
+
       - name: Reconstruir el sitemap
         run: python3 scripts/build-sitemap.py
 
@@ -80,13 +88,13 @@ jobs:
 
       - name: Desar-ho si ha canviat
         run: |
-          if git diff --quiet sitemap.xml cerca-index.json; then
-            echo "::notice::El sitemap i l'índex de cerca ja estaven al dia."
+          if git diff --quiet; then
+            echo "::notice::El sitemap, les preguntes i l'índex de cerca ja estaven al dia."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add sitemap.xml cerca-index.json
-            git commit -m "chore(seo): reconstrueix el sitemap i l'índex de cerca [skip ci]"
+            git add -A
+            git commit -m "chore(seo): preguntes freqüents, sitemap i índex de cerca [skip ci]"
             git push
             echo "::notice::Sitemap i índex de cerca actualitzats."
           fi

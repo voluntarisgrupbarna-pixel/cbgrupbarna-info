@@ -21,8 +21,11 @@
 }
 .cerca-boto svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
 .cerca-boto:hover { border-color: var(--red, #E20613); color: var(--red-dark, #A8040E); }
-/* A mòbil la capçalera ja va justa: només la lupa. */
+/* A mòbil la capçalera ja va justa: només la lupa. La classe --icona la posa
+   js/cerca.js quan, en qualsevol amplada, el botó faria desbordar la pàgina. */
 @media (max-width: 720px) { .cerca-boto span { display: none; } .cerca-boto { padding: 8px; } }
+.cerca-boto--icona span { display: none; }
+.cerca-boto--icona { padding: 8px; }
 
 /* ---- La capa ---- */
 html.cerca-oberta { overflow: hidden; }

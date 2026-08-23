@@ -27,7 +27,9 @@ l'enllaç a la pàgina d'on surt.
 | `css/cerca.css` | L'estil, amb els tokens del sistema visual. |
 | `/cerca/`, `/es/cerca/`, `/en/search/` | La versió a pàgina sencera, amb `?q=`. `noindex, follow`, i per això no entren al `sitemap.xml`. |
 | `scripts/afegeix-cerca.py` | Posa les dues línies del cercador a totes les pàgines amb capçalera del club. |
-| `tests/cerca/prova-motor.mjs` | 27 casos de prova del motor contra l'índex real, sense navegador. |
+| `i18n/faq.yml` | **La font única de les preguntes freqüents**: una entrada per pregunta, amb els tres idiomes i la pàgina on va. |
+| `.github/scripts/generate-faq.py` | Les reparteix al `<details>` i al JSON-LD de les tres versions de cada pàgina, entre marcadors. |
+| `tests/cerca/prova-motor.mjs` | 45 casos de prova del motor contra l'índex real, sense navegador: quins resultats surten, quina resposta es dona i quines consultes no n'han de treure cap. |
 
 ## Com s'obre
 
@@ -75,10 +77,31 @@ i afegir-hi una fila és la manera barata de millorar-la:
   pregunta que encaixi.
 
 **La millor manera de fer-lo més llest, però, no és tocar codi: és escriure
-preguntes freqüents a les pàgines.** Cada `<details>` d'una secció `.faq` que
-també vagi al JSON-LD `FAQPage` és una resposta nova que el cercador sabrà
-donar l'endemà, en el seu idioma i amb el text del club. Les 460 d'ara han
-sortit d'aquí.
+preguntes freqüents.** I això ja no es fa pàgina per pàgina: s'escriuen a
+**`i18n/faq.yml`**, un sol cop, amb els seus tres idiomes, i
+`.github/scripts/generate-faq.py` les reparteix al `<details>` i al JSON-LD de
+les tres versions de la pàgina.
+
+```bash
+python3 .github/scripts/generate-faq.py --dry-run   # què faria
+python3 .github/scripts/generate-faq.py             # ho fa
+python3 .github/scripts/generate-faq.py --pendents  # què espera una dada
+```
+
+La pàgina de destí ha de portar els marcadors `<!-- FAQ:START -->` /
+`<!-- FAQ:END -->` i `<!-- FAQ-LD:START -->` / `<!-- FAQ-LD:END -->`; fora
+d'aquí l'script no hi toca res, com fa `generate-seo-snapshot.py` a
+`/partits/`. Si no els troba, avisa i no escriu.
+
+Una entrada amb `pendent:` no es publica **enlloc**, ni en català: serveix per
+deixar la pregunta escrita mentre s'espera un preu o una data, sense publicar
+mitja resposta.
+
+> Per què una font única: el 23/08/2026 hi havia **28 pàgines amb les tres
+> versions desquadrades** (la portada anava 15/11/11). Una pregunta viu a sis
+> llocs —`<details>` i JSON-LD, per tres idiomes— i sis llocs a mà no
+> aguanten. Les 460 que hi havia van néixer així i encara no han passat per
+> la font única; les noves, sí.
 
 Si toques qualsevol de les tres, **afegeix el cas nou a `tests/cerca/prova-motor.mjs`**
 i executa'l: és el que impedeix que arreglar una cerca en trenqui tres.

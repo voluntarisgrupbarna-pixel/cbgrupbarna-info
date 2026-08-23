@@ -970,7 +970,31 @@
     b.setAttribute('aria-label', T.obrir);
     b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 1-4.6 13.4l-3.2 3.2a1 1 0 0 1-1.4-1.4l3.2-3.2A7.5 7.5 0 0 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>' +
       '<span>' + escapa(T.obrir) + '</span>';
-    costat.insertBefore(b, costat.firstChild);
+
+    // Les capçaleres del lloc no són totes iguals i algunes van justes: a
+    // /portes-obertes/ a 1280 px, la paraula «Cerca» empenyia el commutador
+    // d'idioma 3 px fora de la pantalla. En comptes d'endevinar un punt de
+    // ruptura per a cada maquetació, es mira si la pàgina desbordava ABANS
+    // d'entrar el botó; si no ho feia i ara sí, el botó es queda amb la lupa.
+    var arrelDoc = document.documentElement;
+    var desbordavaAbans = arrelDoc.scrollWidth > arrelDoc.clientWidth + 1;
+    // Al final de la navegació, no al principi: a les pàgines amb la
+    // capçalera llarga (deu enllaços i el commutador d'idioma), posat al
+    // principi el botó se solapava amb el nom del club.
+    costat.appendChild(b);
+
+    var ajusta = function () {
+      b.classList.remove('cerca-boto--icona');
+      if (!desbordavaAbans && arrelDoc.scrollWidth > arrelDoc.clientWidth + 1) {
+        b.classList.add('cerca-boto--icona');
+      }
+    };
+    ajusta();
+    var espera;
+    window.addEventListener('resize', function () {
+      clearTimeout(espera);
+      espera = setTimeout(ajusta, 150);
+    });
   }
 
   function inicia() {

@@ -1,0 +1,362 @@
+# Preguntes freqüents de cbgrupbarna.info · FONT ÚNICA
+#
+# Una pregunta s'escriu AQUÍ, un sol cop, amb els seus tres idiomes. Qui la
+# reparteix és `.github/scripts/generate-faq.py`, que l'escriu a dos llocs de
+# cada versió de la pàgina: el <details> que llegeix la gent i el FAQPage del
+# JSON-LD que llegeixen Google i el cercador del web.
+#
+#   python3 .github/scripts/generate-faq.py --dry-run
+#   python3 .github/scripts/generate-faq.py
+#   python3 .github/scripts/generate-faq.py --pendents
+#
+# Per què una font única: el 23/08/2026 hi havia 28 pàgines amb les tres
+# versions desquadrades (la portada anava 15/11/11). Sis llocs per pregunta
+# mantinguts a mà no aguanten.
+#
+# CAMPS
+#   id       identificador curt i estable. No es reaprofita.
+#   pagina   la ruta EN CATALÀ. Les altres dues surten d'i18n/routes.yml.
+#   ca/es/en  q: la pregunta · r: la resposta
+#   pendent  què falta per poder-la publicar. Amb això posat, la pregunta NO
+#            surt enlloc, ni tan sols en català: val més cap resposta que
+#            mitja. Surt a `--pendents`.
+#
+# REGLES
+#   · La resposta ha de respondre a la primera frase. Qui la llegeix al
+#     cercador no veu la pàgina de sota.
+#   · Text pla: ni HTML ni enllaços. Va a dos llocs i un d'ells és JSON.
+#   · No s'hi inventa res. Si la dada no és a cap pàgina del web ni la sap
+#     ningú, es posa `pendent:` i s'espera.
+#   · Vocabulari de web-cbgb §6: «Escoleta» és Escoleta en els tres idiomes;
+#     «Calendari» / «Calendario» / «Calendar», mai «Partits i resultats».
+
+preguntes:
+
+# ══════════════════════════════════════════════════════════════════════
+# /portes-obertes/  ·  el primer dia
+# La pàgina ja ho explicava tot al cos del text; el que faltava era que
+# constés com a pregunta, que és l'única forma que el cercador ho troba.
+# ⚠ Aquesta pàgina encara no té versió /es/ ni /en/ (vegeu PENDENTS-WEB.md):
+#   el generador avisa i, de moment, només n'escriu la catalana.
+# ══════════════════════════════════════════════════════════════════════
+
+- id: po-quan
+  pagina: /portes-obertes/
+  ca:
+    q: Quan són les portes obertes del CB Grup Barna?
+    r: >-
+      Tot el setembre. No hi ha una jornada de portes obertes d'un sol dia:
+      durant tot el mes qualsevol nen o nena pot venir a fer un entrenament
+      amb nosaltres, sense pagar res i sense compromís de quedar-s'hi.
+  es:
+    q: ¿Cuándo son las puertas abiertas del CB Grup Barna?
+    r: >-
+      Todo septiembre. No hay una jornada de puertas abiertas de un solo día:
+      durante todo el mes cualquier niño o niña puede venir a hacer un
+      entrenamiento con nosotros, sin pagar nada y sin compromiso de quedarse.
+  en:
+    q: When are CB Grup Barna's open days?
+    r: >-
+      All through September. There is no single open day: for the whole month
+      any child can come and train with us, free of charge and with no
+      commitment to stay.
+
+- id: po-que-portar
+  pagina: /portes-obertes/
+  ca:
+    q: Què cal portar el primer dia d'entrenament?
+    r: >-
+      Roba d'esport, sabatilles de pista i una ampolla d'aigua. La pilota la
+      posem nosaltres. L'entrenament de prova és gratuït.
+  es:
+    q: ¿Qué hay que llevar el primer día de entrenamiento?
+    r: >-
+      Ropa de deporte, zapatillas de pista y una botella de agua. El balón lo
+      ponemos nosotros. El entrenamiento de prueba es gratuito.
+  en:
+    q: What should we bring on the first training session?
+    r: >-
+      Sports clothes, indoor court shoes and a water bottle. We provide the
+      ball. The trial session is free.
+
+- id: po-cal-avisar
+  pagina: /portes-obertes/
+  ca:
+    q: Cal avisar abans de venir a provar un entrenament o em puc presentar?
+    r: >-
+      Cal demanar dia abans, perquè cada edat entrena un dia i una hora
+      diferents. Amb el nom de la criatura, l'any de naixement i un telèfon o
+      un correu n'hi ha prou: et responem el mateix dia amb el dia i l'hora
+      que li toquen.
+  es:
+    q: ¿Hay que avisar antes de venir a probar un entrenamiento o me puedo presentar?
+    r: >-
+      Hay que pedir día antes, porque cada edad entrena un día y una hora
+      distintos. Con el nombre del niño o la niña, el año de nacimiento y un
+      teléfono o un correo basta: te respondemos el mismo día con el día y la
+      hora que le tocan.
+  en:
+    q: Do we need to book a trial session in advance, or can we just turn up?
+    r: >-
+      You need to book, because each age group trains on a different day and
+      time. Just send us the child's name, year of birth and a phone number or
+      email: we reply the same day with their day and time.
+
+- id: po-sense-experiencia
+  pagina: /portes-obertes/
+  ca:
+    q: El meu fill no ha jugat mai a bàsquet. Hi encaixarà?
+    r: >-
+      Sí. No cal experiència prèvia: hi ha jugadors i jugadores que hi arriben
+      sense haver jugat mai. De 4 a 8 anys van a l'Escoleta, amb equips mixtos
+      i tres grups per edat; de 9 anys en amunt, als equips federats per any
+      de naixement. El primer entrenament és de prova i gratuït.
+  es:
+    q: Mi hijo no ha jugado nunca a baloncesto. ¿Encajará?
+    r: >-
+      Sí. No hace falta experiencia previa: hay jugadores y jugadoras que
+      llegan sin haber jugado nunca. De 4 a 8 años van a la Escoleta, con
+      equipos mixtos y tres grupos por edad; de 9 años en adelante, a los
+      equipos federados por año de nacimiento. El primer entrenamiento es de
+      prueba y gratuito.
+  en:
+    q: My child has never played basketball. Will they fit in?
+    r: >-
+      Yes. No previous experience is needed: plenty of our players arrived
+      having never played. Ages 4 to 8 join the Escoleta, in mixed groups by
+      age; from 9 upwards they join the league teams, grouped by year of
+      birth. The first session is a free trial.
+
+- id: po-mirar
+  pagina: /portes-obertes/
+  ca:
+    q: Em puc quedar a mirar l'entrenament?
+    r: >-
+      Sí. Si prefereixes venir a veure-ho abans de dir-li res a la criatura,
+      també pots: només cal que ens ho diguis en demanar el dia.
+  es:
+    q: ¿Me puedo quedar a mirar el entrenamiento?
+    r: >-
+      Sí. Si prefieres venir a verlo antes de decirle nada al niño o a la
+      niña, también puedes: solo hace falta que nos lo digas al pedir el día.
+  en:
+    q: Can I stay and watch the session?
+    r: >-
+      Yes. If you would rather come and see it before telling your child
+      anything, that is fine too: just say so when you book the day.
+
+# ══════════════════════════════════════════════════════════════════════
+# /instal-lacions/  ·  on és tot això
+# ══════════════════════════════════════════════════════════════════════
+
+- id: inst-nau-clot
+  pagina: /instal-lacions/
+  ca:
+    q: On és exactament La Nau del Clot?
+    r: >-
+      Al carrer de la Llacuna 170-172, dins del Parc del Clot, 08018
+      Barcelona. És el pavelló de referència del club i la seu principal, al
+      Districte de Sant Martí.
+  es:
+    q: ¿Dónde está exactamente La Nau del Clot?
+    r: >-
+      En la calle Llacuna 170-172, dentro del Parc del Clot, 08018 Barcelona.
+      Es el pabellón de referencia del club y la sede principal, en el
+      Distrito de Sant Martí.
+  en:
+    q: Where exactly is La Nau del Clot?
+    r: >-
+      At carrer de la Llacuna 170-172, inside Parc del Clot, 08018 Barcelona.
+      It is the club's main venue, in the Sant Martí district.
+
+- id: inst-quines-pistes
+  pagina: /instal-lacions/
+  ca:
+    q: A quines pistes entrena i juga el CB Grup Barna?
+    r: >-
+      A sis instal·lacions del Districte de Sant Martí, totes properes entre
+      elles: La Nau del Clot, Escola Provençals, La Farigola del Clot, La
+      Rambleta del Clot, Escola Casas i Claror Marítim.
+  es:
+    q: ¿En qué pistas entrena y juega el CB Grup Barna?
+    r: >-
+      En seis instalaciones del Distrito de Sant Martí, todas cercanas entre
+      sí: La Nau del Clot, Escola Provençals, La Farigola del Clot, La
+      Rambleta del Clot, Escola Casas y Claror Marítim.
+  en:
+    q: Which courts does CB Grup Barna train and play on?
+    r: >-
+      Six venues in the Sant Martí district, all close to each other: La Nau
+      del Clot, Escola Provençals, La Farigola del Clot, La Rambleta del Clot,
+      Escola Casas and Claror Marítim.
+
+- id: inst-quina-toca
+  pagina: /instal-lacions/
+  ca:
+    q: Quina pista li toca al meu equip?
+    r: >-
+      Depèn de la categoria i de l'horari, i pot canviar d'una setmana a
+      l'altra. El calendari del teu equip ho diu amb exactitud cada setmana:
+      s'actualitza cada dia a partir del calendari oficial de la Federació
+      Catalana de Basquetbol.
+  es:
+    q: ¿Qué pista le toca a mi equipo?
+    r: >-
+      Depende de la categoría y del horario, y puede cambiar de una semana a
+      otra. El calendario de tu equipo lo dice con exactitud cada semana: se
+      actualiza a diario a partir del calendario oficial de la Federació
+      Catalana de Basquetbol.
+  en:
+    q: Which court does my team use?
+    r: >-
+      It depends on the age group and the time slot, and it can change from
+      week to week. Your team's calendar has the exact answer every week: it
+      updates daily from the Catalan Basketball Federation's official
+      calendar.
+
+# ══════════════════════════════════════════════════════════════════════
+# PENDENTS · escrites, però esperant una dada. No es publiquen.
+#   python3 .github/scripts/generate-faq.py --pendents
+# ══════════════════════════════════════════════════════════════════════
+
+- id: quota-temporada
+  pagina: /faq/
+  pendent: >-
+    El preu de la temporada per categoria. És la pregunta que més es fa i
+    l'única resposta que hi ha avui és «cal contactar amb el club», mentre que
+    sí que es publica que una setmana de campus val 195 € i un patrocini
+    d'equip, 500 €.
+  ca: {q: "Quant costa la temporada al CB Grup Barna?"}
+  es: {q: "¿Cuánto cuesta la temporada en el CB Grup Barna?"}
+  en: {q: "How much does a season at CB Grup Barna cost?"}
+
+- id: quota-inclou
+  pagina: /faq/
+  pendent: "Què cobreix la quota: fitxa federativa, assegurança, equipació, pistes."
+  ca: {q: "Què inclou la quota?"}
+  es: {q: "¿Qué incluye la cuota?"}
+  en: {q: "What does the fee cover?"}
+
+- id: quota-pagament
+  pagina: /faq/
+  pendent: "Com es cobra: un sol pagament, mensual o trimestral, i si es domicilia."
+  ca: {q: "Com es paga la quota?"}
+  es: {q: "¿Cómo se paga la cuota?"}
+  en: {q: "How is the fee paid?"}
+
+- id: quota-germans
+  pagina: /faq/
+  pendent: "Si hi ha descompte per a germans i de quant."
+  ca: {q: "Hi ha descompte per a germans?"}
+  es: {q: "¿Hay descuento para hermanos?"}
+  en: {q: "Is there a discount for siblings?"}
+
+- id: quota-ajuts
+  pagina: /faq/
+  pendent: >-
+    Si el club té ajuts o beques per a famílies que no hi arriben, i com es
+    demanen. No és només informació: dir en veu alta que cap infant es queda
+    fora per diners és una cosa que els clubs veïns no diuen.
+  ca: {q: "Hi ha ajuts si una família no pot pagar la quota?"}
+  es: {q: "¿Hay ayudas si una familia no puede pagar la cuota?"}
+  en: {q: "Is there financial help for families who cannot afford the fee?"}
+
+- id: quota-baixa
+  pagina: /faq/
+  pendent: "Què passa amb la quota si un jugador es dona de baixa a mig any."
+  ca: {q: "Què passa si ens hem de donar de baixa a mig any?"}
+  es: {q: "¿Qué pasa si tenemos que darnos de baja a mitad de año?"}
+  en: {q: "What happens if we have to leave mid-season?"}
+
+- id: equipacio-preu
+  pagina: /faq/
+  pendent: "Quina equipació és obligatòria, què costa i on es compra."
+  ca: {q: "Quina equipació cal comprar i quant costa?"}
+  es: {q: "¿Qué equipación hay que comprar y cuánto cuesta?"}
+  en: {q: "What kit do we need to buy and how much is it?"}
+
+- id: equip-categoria
+  pagina: /basquet-formatiu/
+  pendent: >-
+    La taula d'any de naixement → categoria de la temporada 26-27. La pàgina
+    explica què vol dir Premini, Mini, Infantil, Cadet i Júnior, però no
+    respon «el meu fill del 2015, a quin equip va».
+  ca: {q: "Quin equip li toca segons l'any de naixement?"}
+  es: {q: "¿Qué equipo le toca según el año de nacimiento?"}
+  en: {q: "Which team is my child in, by year of birth?"}
+
+- id: equip-qui-decideix
+  pagina: /basquet-formatiu/
+  pendent: "Qui decideix l'equip i si hi ha proves de nivell, i què vol dir equip A i B."
+  ca: {q: "Qui decideix a quin equip va i què vol dir equip A i equip B?"}
+  es: {q: "¿Quién decide a qué equipo va y qué quiere decir equipo A y equipo B?"}
+  en: {q: "Who decides which team a child joins, and what do A and B teams mean?"}
+
+- id: entrenaments-setmana
+  pagina: /basquet-formatiu/
+  pendent: "Quants entrenaments setmanals té cada categoria."
+  ca: {q: "Quants entrenaments a la setmana té cada categoria?"}
+  es: {q: "¿Cuántos entrenamientos a la semana tiene cada categoría?"}
+  en: {q: "How many training sessions a week does each age group have?"}
+
+- id: desplacaments
+  pagina: /partits/calendaris/
+  pendent: >-
+    Quants partits es juguen fora al llarg d'una temporada i com s'organitzen
+    els desplaçaments (qui porta els nens).
+  ca: {q: "Quants desplaçaments hi ha i qui porta els nens als partits de fora?"}
+  es: {q: "¿Cuántos desplazamientos hay y quién lleva a los niños a los partidos de fuera?"}
+  en: {q: "How many away games are there, and who takes the children?"}
+
+- id: avis-canvis
+  pagina: /partits/calendaris/
+  pendent: >-
+    Per quin canal avisa el club una família si canvia una hora o una pista
+    (grup de WhatsApp de l'equip, correu…). El web ja marca «MODIFICAT» set
+    dies, però això és el web, no l'avís.
+  ca: {q: "Com ens avisen si canvia l'hora o la pista d'un partit?"}
+  es: {q: "¿Cómo nos avisan si cambia la hora o la pista de un partido?"}
+  en: {q: "How are we told if a game's time or venue changes?"}
+
+- id: faltar-entrenament
+  pagina: /faq/
+  pendent: "Què s'espera d'una família si un dia el jugador no pot anar a entrenar."
+  ca: {q: "Què faig si un dia no pot anar a entrenar?"}
+  es: {q: "¿Qué hago si un día no puede ir a entrenar?"}
+  en: {q: "What do we do if they cannot make a session?"}
+
+- id: revisio-medica
+  pagina: /documents/
+  pendent: >-
+    Si el club demana revisió mèdica per federar-se. L'assegurança sí que està
+    resolta: tota jugadora i jugador federat està cobert per la de la FCBQ.
+  ca: {q: "Cal fer revisió mèdica per jugar al club?"}
+  es: {q: "¿Hace falta revisión médica para jugar en el club?"}
+  en: {q: "Is a medical check-up required to play?"}
+
+- id: coordinador
+  pagina: /organigrama/
+  pendent: >-
+    Qui és la persona de contacte de cada categoria. L'organigrama té la Junta,
+    però una família no busca la Junta: busca amb qui parla de la seva
+    categoria.
+  ca: {q: "Amb qui parlo de la categoria del meu fill?"}
+  es: {q: "¿Con quién hablo de la categoría de mi hijo?"}
+  en: {q: "Who do I talk to about my child's age group?"}
+
+- id: voluntariat
+  pagina: /club/
+  pendent: "Com s'apunta algú que vol ser entrenador o voluntari, i què cal."
+  ca: {q: "Com puc ser entrenador o voluntari al club?"}
+  es: {q: "¿Cómo puedo ser entrenador o voluntario en el club?"}
+  en: {q: "How can I coach or volunteer at the club?"}
+
+- id: fotos-dret-imatge
+  pagina: /fotos/
+  pendent: >-
+    Com demana una família que el seu fill no surti a les fotos del club, i a
+    qui s'ho demana. Toca RGPD i hauria de quadrar amb la política de
+    privacitat.
+  ca: {q: "Puc demanar que el meu fill no surti a les fotos del club?"}
+  es: {q: "¿Puedo pedir que mi hijo no salga en las fotos del club?"}
+  en: {q: "Can I ask for my child not to appear in the club's photos?"}
