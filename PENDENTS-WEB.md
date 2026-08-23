@@ -221,8 +221,10 @@ com a prova de dimensió, no com a definició de la marca.
    una captura del panell; el que no es pugui justificar, fora de `/empreses/`.
 6. **Migració tancada.** Queden enllaços a `cbgrupbarna.com/noticies/`, que és contingut
    real encara no migrat. Fins que no es migri, no es poden treure.
-7. **Guia visual «Franges i Extensa».** La portada ja no porta el hero
-   `.lg-hero` de les franges (el repetia la capçalera de marca). Cal reflectir-ho a la guia.
+7. ~~**Guia visual «Franges i Extensa».** La portada ja no porta el hero
+   `.lg-hero` de les franges (el repetia la capçalera de marca). Cal reflectir-ho a la guia.~~
+   **Resolt (21/08/2026):** decisió de l'Ana és mantenir el `.lg-hero` de les Franges tal com
+   diu la guia visual, malgrat la repetició amb la capçalera de marca. Restaurat a `index.html`.
 
 ### Nota sobre el nom «Patrocinadors» (20/08/2026)
 
