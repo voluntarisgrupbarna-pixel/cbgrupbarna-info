@@ -537,7 +537,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 }
 .tk-lab .pdot { width: 5px; height: 5px; border-radius: 50%; background: #fff; animation: pulseDot 2.2s ease-in-out infinite; }
 @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { box-shadow: 0 0 0 6px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
-.tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
+/* `min-width: 0`: un fill de flex no baixa de l'ample del seu contingut si no
+   s'hi diu. Aquí dins hi ha una tira de text amb `nowrap`, i sense això la
+   pista creixia fins a l'ample de la tira i estirava la pàgina sencera:
+   1.797 px de desbordament horitzontal a 320 px. */
+.tk-trk { flex: 1; min-width: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
 .tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
 .tk-it { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
@@ -555,6 +559,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; flex-shrink: 0; }
 .head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--display); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
+/* La portada en català ja tenia aquesta regla i les rèpliques no: a 320 px el
+   nom del club al costat de l'escut ocupava 147 px i la capçalera se sortia
+   53 px de la pantalla. És el risc conegut de tenir tres fitxers separats
+   per a la mateixa portada; si es toca la capçalera, s'ha de tocar als tres. */
+@media (max-width: 480px) { .lang-switch { gap: 3px; font-size: 8.5px; } .lang-switch a { padding: 7px 1px; } .head-brand span { display: none; } }
 .head-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
 .head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
 .menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
@@ -569,6 +578,18 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .lang-switch a.active { color: var(--ink); }
 .lang-switch a:hover { color: var(--red); }
 .lang-switch .sep { color: var(--line); }
+/* Zones tocables dels controls de la capçalera. Mesurat amb la bateria: el
+   commutador d'idioma feia 17×28 px i el de maquetació 36×34, tots dos per
+   sota dels 44 px que demana la pauta del club. Es guanya alçada amb
+   `min-height`, sense fer el dibuix més gros ni moure la capçalera. */
+@media (max-width: 1024px) {
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; min-height: 44px; padding: 0 4px; }
+  /* Amb `.head-in` al davant per guanyar en especificitat: a les rèpliques
+     la regla base del commutador es declara més avall i, si no, la guanyava
+     per ordre i el botó es quedava en 34 px d'alçada. */
+  .head-in .view-toggle, .view-toggle { min-height: 44px; }
+  .head-brand { min-width: 44px; justify-content: center; }
+}
 .lang-switch.light a { color: rgba(255,255,255,0.45); }
 .lang-switch.light a.active { color: #fff; }
 .lang-switch.light a:hover { color: var(--red); }
@@ -647,7 +668,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .opi-card h3 { font-size: 12.5px; letter-spacing: 0.22em; }
 .opi-card p { font-size: 13px; color: var(--ink-2); max-width: 40ch; }
 .opi-card .cta, .opi-card .btn { margin-top: auto; }
-.stars { display: inline-flex; gap: 12px; margin: 4px 0 2px; }
+.stars { display: inline-flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 2px; }
+/* Cada estrella té els 44 px de zona tocable que toquen: cinc estrelles i
+   quatre buits de 12 px fan 268 px i, amb el marge de la fitxa, se sortien
+   de la pantalla a 320 px. Es retallen els buits, no la zona tocable. */
+@media (max-width: 380px) { .stars { gap: 2px; } }
 .stars button { font-size: 27px; line-height: 1; color: var(--line); transition: color 0.2s, transform 0.2s; }
 .stars button:hover { transform: translateY(-2px); }
 .stars button.on { color: var(--red); }
@@ -785,6 +810,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 }
 .fab-wa { opacity: 1; transform: none; transition: background 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.35s var(--ease), transform 0.35s var(--ease); }
 .fab-wa.hidden { opacity: 0; transform: translateY(14px) scale(0.9); pointer-events: none; }
+
+/* La barra d'accions del mòbil ocupa els 56 px de baix. Més amunt ja hi ha un
+   bloc que puja el botó flotant a 70 px, però la regla base torna a declarar
+   `bottom` DESPRÉS i, amb la mateixa especificitat, el guanya per ordre: el
+   botó quedava mig amagat sota la barra (mesurat a 390 px: 42 dels seus 56).
+   Es torna a aplicar aquí, al final, que és on mana. */
+@media (max-width: 760px) { .fab-wa { bottom: calc(56px + 14px); } }
 
 /* ==== REVELAT ==== */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }

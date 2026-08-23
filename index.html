@@ -914,6 +914,18 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
 .lang-switch a:hover { color: var(--red); }
 .lang-switch .sep { color: var(--line); }
+/* Zones tocables dels controls de la capçalera. Mesurat amb la bateria: el
+   commutador d'idioma feia 17×28 px i el de maquetació 36×34, tots dos per
+   sota dels 44 px que demana la pauta del club. Es guanya alçada amb
+   `min-height`, sense fer el dibuix més gros ni moure la capçalera. */
+@media (max-width: 1024px) {
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; min-height: 44px; padding: 0 4px; }
+  /* Amb `.head-in` al davant per guanyar en especificitat: a les rèpliques
+     la regla base del commutador es declara més avall i, si no, la guanyava
+     per ordre i el botó es quedava en 34 px d'alçada. */
+  .head-in .view-toggle, .view-toggle { min-height: 44px; }
+  .head-brand { min-width: 44px; justify-content: center; }
+}
 @media (max-width: 480px) { .lang-switch { gap: 3px; font-size: 8.5px; } .lang-switch a { padding: 7px 1px; } .head-brand span { display: none; } }
 
 .lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B6560; }
@@ -963,7 +975,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 }
 .tk-lab .pdot { width: 5px; height: 5px; border-radius: 50%; background: #fff; animation: pulseDot 2.2s ease-in-out infinite; }
 @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { box-shadow: 0 0 0 6px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
-.tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
+/* `min-width: 0`: un fill de flex no baixa de l'ample del seu contingut si no
+   s'hi diu. Aquí dins hi ha una tira de text amb `nowrap`, i sense això la
+   pista creixia fins a l'ample de la tira i estirava la pàgina sencera:
+   1.797 px de desbordament horitzontal a 320 px. */
+.tk-trk { flex: 1; min-width: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
 .tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
 .tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
@@ -1085,7 +1101,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .opi-card h3 { font-size: 12.5px; letter-spacing: 0.22em; }
 .opi-card p { font-size: 13px; color: var(--ink-2); max-width: 40ch; }
 .opi-card .cta, .opi-card .btn { margin-top: auto; }
-.stars { display: inline-flex; gap: 12px; margin: 4px 0 2px; }
+.stars { display: inline-flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 2px; }
+/* Cada estrella té els 44 px de zona tocable que toquen: cinc estrelles i
+   quatre buits de 12 px fan 268 px i, amb el marge de la fitxa, se sortien
+   de la pantalla a 320 px. Es retallen els buits, no la zona tocable. */
+@media (max-width: 380px) { .stars { gap: 2px; } }
 .stars button { font-size: 27px; line-height: 1; color: var(--line); transition: color 0.2s, transform 0.2s; }
 .stars button:hover { transform: translateY(-2px); }
 .stars button.on { color: var(--red); }
@@ -1097,7 +1117,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .list a { display: flex; align-items: center; gap: 18px; padding: 19px 6px; border-bottom: 1px solid var(--line); transition: padding-left 0.4s var(--ease), color 0.3s; }
 .list a:hover { padding-left: 16px; color: var(--red); }
 .list-t { font-family: var(--body); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; }
-.list-s { margin-left: auto; text-align: right; font-family: var(--body); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; }
+/* L'adreça de correu del club no té cap espai on partir i, a 320 px,
+   estirava la pàgina sencera 7 px. `overflow-wrap: anywhere` la deixa
+   partir només quan no hi cap, sense tocar-la a la resta de mides. */
+.list-s { margin-left: auto; text-align: right; font-family: var(--body); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; min-width: 0; overflow-wrap: anywhere; }
 .list a:hover .list-s { color: var(--red); }
 
 /* ==== PARTNERS ==== */
@@ -1226,6 +1249,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 }
 .fab-wa { opacity: 1; transform: none; transition: background 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.35s var(--ease), transform 0.35s var(--ease); }
 .fab-wa.hidden { opacity: 0; transform: translateY(14px) scale(0.9); pointer-events: none; }
+
+/* La barra d'accions del mòbil ocupa els 56 px de baix. Més amunt ja hi ha un
+   bloc que puja el botó flotant a 70 px, però la regla base torna a declarar
+   `bottom` DESPRÉS i, amb la mateixa especificitat, el guanya per ordre: el
+   botó quedava mig amagat sota la barra (mesurat a 390 px: 42 dels seus 56).
+   Es torna a aplicar aquí, al final, que és on mana. */
+@media (max-width: 760px) { .fab-wa { bottom: calc(56px + 14px); } }
 
 /* ==== REVELAT ==== */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }

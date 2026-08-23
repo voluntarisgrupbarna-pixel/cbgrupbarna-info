@@ -167,7 +167,35 @@
     return b;
   }
 
-  var capcalera = doc.querySelector('header.head, header, .head');
+  // Quina és la capçalera de debò. No val agafar el primer <header>: a
+  // /escoleta/ el <header> és el hero de la pàgina i la navegació real és una
+  // barra fixa a sobre (.langbar). El botó de menú hi quedava a sota, tapat, i
+  // no es podia ni tocar. L'ordre és: la capçalera del sistema, després la
+  // barra enganxada de dalt que porti enllaços, i només llavors un <header>.
+  function trobaCapcalera() {
+    var propia = doc.querySelector('header.head, .head');
+    if (propia) return propia;
+
+    var candidates = [].slice.call(doc.querySelectorAll('header, div, nav'));
+    for (var i = 0; i < candidates.length; i++) {
+      var el = candidates[i];
+      var cs = getComputedStyle(el);
+      if (cs.position !== 'fixed' && cs.position !== 'sticky') continue;
+      var r = el.getBoundingClientRect();
+      if (r.top > 80 || r.height < 20 || r.width < innerWidth * 0.6) continue;
+      if (!el.querySelector('a[href]')) continue;
+      return el.querySelector('.wrap') || el;
+    }
+
+    var h = doc.querySelector('header');
+    if (h) {
+      var hs = getComputedStyle(h);
+      if (hs.position === 'fixed' || hs.position === 'sticky') return h;
+    }
+    return null;   // cap: se'n fabricarà una de mínima
+  }
+
+  var capcalera = trobaCapcalera();
   var menu = doc.getElementById('menu') || doc.querySelector('.menu');
   var burger = doc.getElementById('burger') || doc.querySelector('.head-burger');
 
@@ -198,7 +226,9 @@
 
   if (capcalera && !menu) {
     menu = construeixMenu();
-    capcalera.parentNode.insertBefore(menu, capcalera.nextSibling);
+    // Sempre penjat del <body>: dins d'una barra fixa amb `overflow` o un
+    // `z-index` propi, un menú a pantalla completa quedaria retallat.
+    doc.body.appendChild(menu);
   }
   if (capcalera && menu && !burger) {
     burger = construeixBurger();

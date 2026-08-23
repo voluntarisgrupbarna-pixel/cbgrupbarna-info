@@ -93,7 +93,8 @@ const VISIBLES = `(function () {
   // amaga mig centenar de coses, i ofegaria el que sí que és un problema.
   var A_PROPOSIT = '.menu, [hidden], [aria-hidden="true"], dialog:not([open]),'
     + ' details:not([open]) > :not(summary), .only-extensa, .only-light,'
-    + ' .modal, .popup, .drawer, .igf, .cbgb-gal';
+    + ' .modal, .popup, .drawer, .igf, .cbgb-gal,'
+    + ' [role="status"], output, .toast, .flash, .copied';
   var out = {};
   document.querySelectorAll('body *').forEach(function (el) {
     if (fora[el.tagName]) return;
@@ -125,12 +126,29 @@ const DESBORDA = `(function () {
   var de = document.documentElement;
   var excess = Math.round(de.scrollWidth - de.clientWidth);
   if (excess <= 1) return null;
+  // Un element retallat per un pare amb overflow hidden no estira res, per
+  // molt que el seu rectangle digui que arriba lluny: el cas del ticker, que
+  // és una tira de 2.000 px dins d'una finestra de 220. Si no es mira, el
+  // culpable que surt a l'informe és sempre ell i el de debò queda amagat.
+  function retallat(el) {
+    var p = el.parentElement;
+    while (p && p !== document.body) {
+      var cs = getComputedStyle(p);
+      if (cs.overflowX === 'hidden' || cs.overflowX === 'clip' || cs.overflowX === 'auto'
+          || cs.overflow === 'hidden' || cs.overflow === 'clip') {
+        if (p.getBoundingClientRect().right <= de.clientWidth + 1) return true;
+      }
+      p = p.parentElement;
+    }
+    return false;
+  }
+
   var amples = [];
   document.querySelectorAll('body *').forEach(function (el) {
     var r = el.getBoundingClientRect();
     if (r.width < 1 || r.height < 1) return;
     var dreta = Math.round(r.right + window.scrollX);
-    if (dreta > de.clientWidth + 1) {
+    if (dreta > de.clientWidth + 1 && !retallat(el)) {
       amples.push({ id: el.dataset.uxid, tag: el.tagName.toLowerCase(),
         cls: String(el.className || '').slice(0, 60), sobra: dreta - de.clientWidth });
     }
@@ -155,6 +173,24 @@ const TAPATS = `(function () {
       rect: [Math.round(r.left), Math.round(r.top), Math.round(r.right), Math.round(r.bottom)] });
   });
 
+  // Una barra ancorada a dalt de tot —enganxada o fixa, porti la classe que
+  // porti— tapa el que li passa per sota mentre es fa scroll. És com funciona,
+  // i el mateix element es veu bé unes passes més amunt: no és un problema.
+  // El que sí que ho és, és el que tapa una barra de BAIX, perquè allà el
+  // contingut ja no pot baixar més.
+  function tapadorDeDalt(node) {
+    var p = node;
+    while (p && p.nodeType === 1) {
+      var cs = getComputedStyle(p);
+      if (cs.position === 'fixed' || cs.position === 'sticky') {
+        var r = p.getBoundingClientRect();
+        return r.top <= 80 && r.bottom < innerHeight * 0.5;
+      }
+      p = p.parentElement;
+    }
+    return false;
+  }
+
   var tapats = [];
   document.querySelectorAll('a[href], button, input, select, textarea, summary').forEach(function (el) {
     var r = el.getBoundingClientRect();
@@ -172,8 +208,7 @@ const TAPATS = `(function () {
     // compta si la pàgina ja no pot baixar més I l'element es queda a sota
     // seu per sempre, cosa que aquí es descarta perquè a mig recorregut era
     // visible. El que sí que compta és el que tapa una barra fixa de baix.
-    var deDalt = dalt.closest && dalt.closest('header, .head');
-    if (deDalt && getComputedStyle(deDalt).position === 'sticky') return;
+    if (tapadorDeDalt(dalt)) return;
     // Qui el tapa: pugem fins a trobar un element fix o enganxat.
     var p = dalt, tapador = null;
     while (p && p.nodeType === 1) {
@@ -356,9 +391,16 @@ async function provaPagina(ctx, origin, url, dev, ferNoJs) {
 
   // 4a. Contingut que ARRENCA invisible i mai s'arregla. És el cor de la
   //     queixa: text que hi és al codi però que l'usuari no arriba a veure.
+  // El que compta és el contingut que OCUPA LLOC i tot i així no es veu: text
+  // transparent, que és el que fa que una pàgina sembli que li falten trossos.
+  // Una secció que no es mostra gens (el bloc de vídeo quan no n'hi ha cap
+  // configurat) o una barra que només surt en fer scroll no és contingut
+  // perdut: és una decisió del contingut, i acusar-la ofegaria el senyal.
   const maiVist = [];
   for (const [id, el] of Object.entries(final)) {
     if (el.vis) continue;
+    if (el.op > 0.01) continue;      // amagat per display/visibility: a propòsit
+    if (el.h < 1) continue;          // no ocupa lloc: no hi ha res a perdre
     maiVist.push(el);
   }
   if (maiVist.length) {
@@ -390,8 +432,12 @@ async function provaPagina(ctx, origin, url, dev, ferNoJs) {
       if (el.classList.contains('visible')) return;
       // Si viu dins d'una maquetació que ara no es mostra (el commutador
       // franges/extensa), no ha disparat perquè no li tocava.
-      var alt = el.closest('.only-extensa, .only-light');
-      if (alt && getComputedStyle(alt).display === 'none') return;
+      // Si algun pare no es mostra, el revelat no ha fallat: no li tocava.
+      var p = el;
+      while (p && p.nodeType === 1) {
+        if (getComputedStyle(p).display === 'none') return;
+        p = p.parentElement;
+      }
       var r = el.getBoundingClientRect();
       out.push({ cls: String(el.className), h: Math.round(r.height),
         text: (el.textContent || '').trim().slice(0, 60) });

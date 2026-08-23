@@ -440,7 +440,11 @@ table.vs td.a { color: var(--red-dark); }
 /* Barra de novetats · lliga qualsevol pàgina amb la portada. */
 .ticker { position: relative; z-index: 120; height: 32px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
 .tk-lab { flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px); background: var(--red); color: #fff; display: flex; align-items: center; gap: 9px; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
-.tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
+/* `min-width: 0`: un fill de flex no baixa de l'ample del seu contingut si no
+   s'hi diu. Aquí dins hi ha una tira de text amb `nowrap`, i sense això la
+   pista creixia fins a l'ample de la tira i estirava la pàgina sencera:
+   1.797 px de desbordament horitzontal a 320 px. */
+.tk-trk { flex: 1; min-width: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
 .tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
 .tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
