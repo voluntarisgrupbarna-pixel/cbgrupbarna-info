@@ -87,12 +87,20 @@ const VISIBLES = `(function () {
     return t.trim();
   }
   var fora = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEMPLATE: 1, HEAD: 1, META: 1, LINK: 1, TITLE: 1 };
+  // Un panell tancat no és contingut perdut: el menú desplegable, un <details>
+  // sense obrir o la maquetació alternativa del commutador de la portada estan
+  // amagats perquè algú els ha de demanar. Comptar-los diria que cada pàgina
+  // amaga mig centenar de coses, i ofegaria el que sí que és un problema.
+  var A_PROPOSIT = '.menu, [hidden], [aria-hidden="true"], dialog:not([open]),'
+    + ' details:not([open]) > :not(summary), .only-extensa, .only-light,'
+    + ' .modal, .popup, .drawer, .igf, .cbgb-gal';
   var out = {};
   document.querySelectorAll('body *').forEach(function (el) {
     if (fora[el.tagName]) return;
     var propi = textPropi(el);
     var media = el.tagName === 'IMG' || el.tagName === 'VIDEO' || el.tagName === 'SVG';
     if (!propi && !media) return;
+    if (el.closest(A_PROPOSIT)) return;
     var r = el.getBoundingClientRect();
     if (r.width < 1 || r.height < 1) return;
     var cs = getComputedStyle(el);
@@ -159,6 +167,13 @@ const TAPATS = `(function () {
     var dalt = document.elementFromPoint(x, y);
     if (!dalt) return;
     if (dalt === el || el.contains(dalt) || dalt.contains(el)) return;
+    // La capçalera enganxada tapa el que li passa per sota: és com funciona,
+    // i el mateix element es veu perfectament unes passes més amunt. Només
+    // compta si la pàgina ja no pot baixar més I l'element es queda a sota
+    // seu per sempre, cosa que aquí es descarta perquè a mig recorregut era
+    // visible. El que sí que compta és el que tapa una barra fixa de baix.
+    var deDalt = dalt.closest && dalt.closest('header, .head');
+    if (deDalt && getComputedStyle(deDalt).position === 'sticky') return;
     // Qui el tapa: pugem fins a trobar un element fix o enganxat.
     var p = dalt, tapador = null;
     while (p && p.nodeType === 1) {
@@ -198,6 +213,26 @@ const TOCS = `(function () {
     out.push({ id: el.dataset.uxid, tag: el.tagName.toLowerCase(),
       text: (el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 45),
       w: Math.round(w), h: Math.round(h) });
+  });
+  return out;
+})()`;
+
+const AMAGATS = `(function () {
+  var out = [];
+  document.querySelectorAll('*').forEach(function (el) {
+    var cs = getComputedStyle(el);
+    if (parseFloat(cs.opacity) > 0.01 && cs.visibility !== 'hidden' && cs.display !== 'none') return;
+    var t = (el.textContent || '').trim();
+    if (t.length < 12) return;
+    if (el.closest('script, style, noscript, template, head')) return;
+    // Només el més amunt de cada branca amagada, per no comptar-ho tot dos cops.
+    var p = el.parentElement, jaHiEs = false;
+    while (p) { var pc = getComputedStyle(p);
+      if (parseFloat(pc.opacity) <= 0.01 || pc.visibility === 'hidden' || pc.display === 'none') { jaHiEs = true; break; }
+      p = p.parentElement; }
+    if (jaHiEs) return;
+    out.push({ clau: (el.tagName + '|' + String(el.className || '').slice(0, 40) + '|' + t.slice(0, 40)),
+      cls: String(el.className || '').slice(0, 50), text: t.slice(0, 60), op: cs.opacity });
   });
   return out;
 })()`;
@@ -353,6 +388,10 @@ async function provaPagina(ctx, origin, url, dev, ferNoJs) {
     var out = [];
     document.querySelectorAll('.reveal').forEach(function (el) {
       if (el.classList.contains('visible')) return;
+      // Si viu dins d'una maquetació que ara no es mostra (el commutador
+      // franges/extensa), no ha disparat perquè no li tocava.
+      var alt = el.closest('.only-extensa, .only-light');
+      if (alt && getComputedStyle(alt).display === 'none') return;
       var r = el.getBoundingClientRect();
       out.push({ cls: String(el.className), h: Math.round(r.height),
         text: (el.textContent || '').trim().slice(0, 60) });
@@ -371,6 +410,7 @@ async function provaPagina(ctx, origin, url, dev, ferNoJs) {
   //     bloquejador el talla, el contingut ha de continuar sent visible.
   //     No depèn del dispositiu: només cal fer-ho un cop per pàgina.
   if (ferNoJs) {
+    const ambJs = await page.evaluate(AMAGATS);
     const ctxNoJs = await ctx.browser().newContext({
       viewport: { width: dev.width, height: dev.height },
       deviceScaleFactor: dev.dpr, isMobile: dev.mobile, hasTouch: dev.mobile,
@@ -380,26 +420,14 @@ async function provaPagina(ctx, origin, url, dev, ferNoJs) {
     await p2.route('**/*', (route) => (route.request().url().startsWith(origin) ? route.continue() : route.abort()));
     try {
       await p2.goto(origin + url, { waitUntil: 'load', timeout: 20000 });
-      const amagat = await p2.evaluate(`(function () {
-        var out = [];
-        document.querySelectorAll('*').forEach(function (el) {
-          var cs = getComputedStyle(el);
-          if (parseFloat(cs.opacity) > 0.01 && cs.visibility !== 'hidden' && cs.display !== 'none') return;
-          var t = (el.textContent || '').trim();
-          if (t.length < 12) return;
-          if (el.closest('script, style, noscript, template, head')) return;
-          // Només el més amunt de cada branca amagada, per no comptar-ho tot dos cops.
-          var p = el.parentElement, jaHiEs = false;
-          while (p) { var pc = getComputedStyle(p);
-            if (parseFloat(pc.opacity) <= 0.01 || pc.visibility === 'hidden' || pc.display === 'none') { jaHiEs = true; break; }
-            p = p.parentElement; }
-          if (jaHiEs) return;
-          out.push({ cls: String(el.className || '').slice(0, 50), text: t.slice(0, 60), op: cs.opacity });
-        });
-        return out;
-      })()`);
-      // El menú desplegable i coses similars estan amagades a propòsit.
-      const real = amagat.filter((a) => !/menu|modal|dialog|popup|drawer|tooltip|sr-only|skip/i.test(a.cls));
+      const amagat = await p2.evaluate(AMAGATS);
+      // La comparació és el que fa la prova honesta: amb JS també hi ha coses
+      // amagades (el menú tancat, la maquetació alternativa del commutador, el
+      // que un media query retira al mòbil). Només és un problema el que
+      // desapareix NOMÉS quan el JS no arrenca.
+      const jaAmagatAmbJs = new Set(ambJs.map((a) => a.clau));
+      const real = amagat.filter((a) => !jaAmagatAmbJs.has(a.clau))
+        .filter((a) => !/menu|modal|dialog|popup|drawer|tooltip|sr-only|skip/i.test(a.cls));
       if (real.length) {
         afegeix('invisible-sense-javascript', 'greu', {
           quants: real.length,

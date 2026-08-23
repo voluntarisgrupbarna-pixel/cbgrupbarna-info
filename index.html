@@ -1244,6 +1244,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     .form-legend { font-size: 12.5px; color: var(--ink-2); margin: 0 0 16px; }
 </style>
 <link rel="stylesheet" href="/css/nav.css">
+<noscript>
+  <!-- El revelat per scroll arrenca amb opacity:0 i l'encén un observador de
+       JavaScript. Si el JS no arrenca —el tallen, falla la xarxa, un
+       bloquejador—, aquest contingut es quedaria invisible per sempre: la
+       bateria `tests/ux-deep.mjs` en comptava 15 blocs només a la portada.
+       Aquí es desactiva l'efecte i el contingut es veu, que és el que importa. -->
+  <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+</noscript>
 </head>
 <body>
 
