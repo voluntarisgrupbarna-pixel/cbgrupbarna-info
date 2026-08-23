@@ -136,8 +136,8 @@
     }
   };
 
-  // Els tres enllacen la política en català perquè encara no està traduïda.
-  // El dia que ho estigui, aquí es posa la ruta amb prefix.
+  // Cada idioma enllaça la seva política de privacitat: llegir com es
+  // tracten les teves dades en una llengua que no entens no és informar-te.
   function textos() {
     var codi = (document.documentElement.lang || 'ca').slice(0, 2).toLowerCase();
     return TEXTOS[codi] || TEXTOS.ca;
