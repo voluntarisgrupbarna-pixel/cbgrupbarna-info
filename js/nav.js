@@ -93,7 +93,6 @@
   };
 
   var doc = document;
-  var arrel = doc.documentElement;
 
   // --- Camí actual, normalitzat -------------------------------------------
   function normalitza(p) {
