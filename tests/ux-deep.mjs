@@ -295,7 +295,14 @@ async function provaPagina(ctx, origin, url, dev, ferNoJs) {
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e).slice(0, 200)));
-  page.on('console', (m) => { if (m.type() === 'error') errors.push('console: ' + m.text().slice(0, 200)); });
+  page.on('console', (m) => {
+    if (m.type() !== 'error') return;
+    // La prova talla el trànsit extern a propòsit (§ page.route més avall), i
+    // cada petició avortada arriba aquí com un error de consola. Comptar-la
+    // seria acusar el lloc d'una cosa que fa la prova mateixa.
+    if (/net::ERR_FAILED|Failed to load resource/.test(m.text())) return;
+    errors.push('console: ' + m.text().slice(0, 200));
+  });
 
   // Tallem el trànsit extern: així la prova és determinista i, de passada, es
   // veu si alguna cosa del lloc depèn d'un tercer per aparèixer.
@@ -589,7 +596,18 @@ async function provaPagina(ctx, origin, url, dev, ferNoJs) {
     }
     const invisGirat = await page.evaluate(`(function () {
       var n = 0;
-      document.querySelectorAll('.reveal').forEach(function (el) { if (!el.classList.contains('visible')) n++; });
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        if (el.classList.contains('visible')) return;
+        // Mateix criteri que a la comprovació de dalt: si algun pare no es
+        // mostra (la maquetació que el commutador no ensenya, una secció sense
+        // contingut configurat), el revelat no ha fallat, és que no li tocava.
+        var p = el;
+        while (p && p.nodeType === 1) {
+          if (getComputedStyle(p).display === 'none') return;
+          p = p.parentElement;
+        }
+        n++;
+      });
       return n;
     })()`);
     if (invisGirat) {
