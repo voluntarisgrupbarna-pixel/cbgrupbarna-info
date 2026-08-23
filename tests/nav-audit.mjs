@@ -136,15 +136,19 @@ const RECULL = `(function () {
     // per arribar-hi, i el recompte de pàgines inabastables els necessita.
     idiomesDesti: [...new Set([].slice.call(document.querySelectorAll('.lang-switch a, [hreflang]'))
       .filter(visible).map(function (a) { return net(a.getAttribute('href')); }).filter(Boolean))],
-    // Es mira també la molla de pa: el seu primer tram és «Inici» i porta a la
-    // portada. Mirant només la capçalera, 279 pàgines sortien com si no
-    // tinguessin manera de tornar a l'inici quan sí que en tenen una, i ben
-    // visible. Compta el camí que hi ha, no el lloc on s'esperava trobar-lo.
+    // «Hi ha manera de tornar a la portada?» Es mira la capçalera i també la
+    // molla de pa, el primer tram de la qual és «Inici» i hi porta: mirant
+    // només la capçalera, centenars de pàgines sortien com si no en
+    // tinguessin cap quan sí que en tenen una, i ben visible.
+    //
+    // I la portada de la pàgina és la del SEU idioma: a /en/blog/ tornar
+    // vol dir /en/, no /. Es comparen adreces ja normalitzades, no el text
+    // de l'atribut, perquè moltes són relatives.
     tornarInici: !!([].slice.call(document.querySelectorAll(
       'header a[href], .head a[href], .molla a[href], .crumb a[href]'))
       .filter(visible).find(function (a) {
-        var h = a.getAttribute('href') || '';
-        return h === '/' || h === '/index.html' || /^https?:\\/\\/[^/]+\\/?$/.test(h);
+        var d = net(a.getAttribute('href'));
+        return d === '/' || d === '/es/' || d === '/en/';
       })),
   };
 })()`;
