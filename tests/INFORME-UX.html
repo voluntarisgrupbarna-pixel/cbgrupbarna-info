@@ -7,7 +7,6 @@
      i la Inter per a tot el text. Els neutres tiren cap al crema del club. */
   :root {
     --red: #E20613;
-    --red-ink: #A8040E;
     --ink: #10100E;
     --ink-2: #46433F;
     --muted: #6B6560;
@@ -21,66 +20,44 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --red: #FF3B41;
-      --red-ink: #FF7A7E;
-      --ink: #F2EFEA;
-      --ink-2: #C6C0B8;
-      --muted: #948D85;
-      --paper: #141312;
-      --cream: #1D1B19;
-      --line: rgba(242, 239, 234, 0.16);
-      --line-soft: rgba(242, 239, 234, 0.08);
+      --red: #FF3B41; --ink: #F2EFEA; --ink-2: #C6C0B8; --muted: #948D85;
+      --paper: #141312; --cream: #1D1B19;
+      --line: rgba(242, 239, 234, 0.16); --line-soft: rgba(242, 239, 234, 0.08);
       --ok: #5FCB8B;
     }
   }
   :root[data-theme="dark"] {
-    --red: #FF3B41;
-    --red-ink: #FF7A7E;
-    --ink: #F2EFEA;
-    --ink-2: #C6C0B8;
-    --muted: #948D85;
-    --paper: #141312;
-    --cream: #1D1B19;
-    --line: rgba(242, 239, 234, 0.16);
-    --line-soft: rgba(242, 239, 234, 0.08);
+    --red: #FF3B41; --ink: #F2EFEA; --ink-2: #C6C0B8; --muted: #948D85;
+    --paper: #141312; --cream: #1D1B19;
+    --line: rgba(242, 239, 234, 0.16); --line-soft: rgba(242, 239, 234, 0.08);
     --ok: #5FCB8B;
   }
 
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink-2);
-    font-family: var(--body);
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.65;
+    margin: 0; background: var(--paper); color: var(--ink-2);
+    font-family: var(--body); font-weight: 300; font-size: 16px; line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 940px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
 
   h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--ink); text-wrap: balance; margin: 0; }
-  h1 { font-size: clamp(38px, 8vw, 78px); line-height: 0.94; letter-spacing: 0.005em; text-transform: uppercase; }
+  h1 { font-size: clamp(38px, 8vw, 78px); line-height: 0.94; text-transform: uppercase; }
   h2 { font-size: clamp(23px, 3.6vw, 33px); line-height: 1.02; text-transform: uppercase; letter-spacing: 0.01em; }
   h3 { font-size: clamp(15px, 2vw, 18px); line-height: 1.15; text-transform: uppercase; letter-spacing: 0.03em; }
   p { margin: 0; max-width: 66ch; }
   strong { color: var(--ink); font-weight: 500; }
   code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.87em; background: var(--cream); padding: 1px 5px; color: var(--ink); }
-  .eyebrow {
-    font-family: var(--body); font-size: 9.5px; font-weight: 600; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--red); margin: 0;
-  }
+  .eyebrow { font-family: var(--body); font-size: 9.5px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin: 0; }
   .rule { width: 46px; height: 2px; background: var(--red); margin: 14px 0 18px; }
 
-  /* ---- Obertura ---- */
   .hero { border-bottom: 1px solid var(--line); padding: clamp(46px, 8vw, 84px) 0 clamp(34px, 5vw, 52px); }
-  .hero .lede { font-size: clamp(17px, 2.3vw, 21px); font-weight: 300; color: var(--ink-2); margin-top: 22px; max-width: 60ch; }
+  .hero .lede { font-size: clamp(17px, 2.3vw, 21px); font-weight: 300; margin-top: 22px; max-width: 60ch; }
   .hero .meta { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 30px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 
   section { padding: clamp(40px, 6vw, 66px) 0; border-bottom: 1px solid var(--line-soft); }
   .sec-head { margin-bottom: 30px; }
 
-  /* ---- Xifres de titular ---- */
   .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 34px; }
   .fig { background: var(--paper); padding: 24px 22px 22px; }
   .fig .n { font-family: var(--display); font-size: clamp(32px, 5vw, 44px); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
@@ -88,7 +65,6 @@
   .fig .n em { font-style: normal; color: var(--red); }
   .fig .k { font-size: 11.5px; line-height: 1.45; color: var(--ink-2); margin-top: 11px; }
 
-  /* ---- Graella de dispositius ---- */
   .grid-scroll { overflow-x: auto; margin-top: 26px; padding-bottom: 6px; }
   table.grid { border-collapse: collapse; font-size: 11px; min-width: 620px; }
   table.grid th, table.grid td { padding: 5px 4px; text-align: center; }
@@ -103,16 +79,14 @@
   .legend { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 18px; font-size: 11px; color: var(--muted); align-items: center; }
   .legend span.k { display: inline-flex; align-items: center; gap: 8px; }
 
-  /* ---- Casos ---- */
   .cases { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 26px; }
   .case { background: var(--paper); padding: 24px clamp(18px, 3vw, 26px); }
   .case .top { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
-  .chip { font-family: var(--body); font-size: 8.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--red); color: var(--red); white-space: nowrap; }
-  .chip.fixed { border-color: var(--ok); color: var(--ok); }
+  .chip { font-family: var(--body); font-size: 8.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--ok); color: var(--ok); white-space: nowrap; }
+  .chip.obert { border-color: var(--muted); color: var(--muted); }
   .case p + p { margin-top: 11px; }
   .case .where { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 14px; }
 
-  /* ---- Taula abans/després ---- */
   .tbl-scroll { overflow-x: auto; margin-top: 26px; }
   table.ba { border-collapse: collapse; width: 100%; min-width: 540px; font-size: 14px; }
   table.ba th, table.ba td { text-align: left; padding: 13px 14px 13px 0; border-bottom: 1px solid var(--line-soft); vertical-align: baseline; }
@@ -121,6 +95,7 @@
   table.ba td.n.after { color: var(--ink); font-weight: 500; }
   table.ba td.n.before { color: var(--muted); }
   table.ba tbody tr:last-child td { border-bottom: 0; }
+  table.ba tbody tr.sep td { border-top: 1px solid var(--line); padding-top: 20px; }
 
   ul.plain { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 13px; }
   ul.plain li { padding-left: 20px; position: relative; max-width: 66ch; }
@@ -128,12 +103,9 @@
 
   .note { background: var(--cream); border-left: 3px solid var(--red); padding: 20px clamp(18px, 3vw, 26px); margin-top: 28px; }
   .note p { max-width: 62ch; font-size: 14.5px; }
+  .note p + p { margin-top: 10px; }
 
   footer.end { padding: 40px 0 60px; color: var(--muted); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
-
-  @media (max-width: 640px) {
-    table.grid thead th span { font-size: 8.5px; }
-  }
 </style>
 
 <div class="wrap">
@@ -144,10 +116,9 @@
     <h1>El menú que<br>desapareixia</h1>
     <p class="lede">
       El mapa complet del club existia en una sola pàgina: la portada. En sortir-ne,
-      la navegació es reduïa a sis enllaços i, en un mòbil, a tres. Això és el que es
-      notava com que «el menú desapareix i apareix sense coherència», i és també el
-      motiu de perdre's pel web. Aquí hi ha què s'ha mesurat, què s'ha trobat i què
-      s'ha arreglat.
+      la navegació es reduïa a sis enllaços i, en un mòbil, a tres. Buscant per què,
+      van anar sortint coses més grans: dues pàgines senceres que no funcionaven des
+      del maig, i el web sencer sense manera de canviar de llengua.
     </p>
     <div class="meta">
       <span>404 pàgines</span>
@@ -159,14 +130,13 @@
 
   <section>
     <div class="sec-head">
-      <p class="eyebrow">El resultat en tres xifres</p>
+      <p class="eyebrow">On som</p>
       <div class="rule"></div>
       <h2>De 18 recorreguts amb problema greu a cap</h2>
     </div>
     <p>
       Les mateixes 18 pàgines i els mateixos 13 dispositius, mesurats amb la mateixa
-      bateria abans i després. La xifra que ho explica tot és la segona: el menú de sis
-      columnes —les 30 portes del club— era a la portada i enlloc més.
+      bateria abans i després. Les tres xifres que resumeixen el canvi.
     </p>
     <div class="figures">
       <div class="fig">
@@ -174,12 +144,12 @@
         <div class="k">Recorreguts complets amb algun problema greu: contingut invisible, desbordament horitzontal, un botó tapat o un menú que no obre.</div>
       </div>
       <div class="fig">
-        <div class="n">370 <span class="was">de 404 · abans 1</span></div>
-        <div class="k">Pàgines que ofereixen el mapa complet del club. Les 34 restants són panells d'administració i generadors de cartells, que no han de dur menú.</div>
+        <div class="n">378 <span class="was">de 404 · abans 3</span></div>
+        <div class="k">Pàgines que ofereixen el mapa complet del club. Les que queden fora són panells d'administració i generadors de cartells, que no n'han de dur.</div>
       </div>
       <div class="fig">
-        <div class="n">32,8 <span class="was">abans 14,7</span></div>
-        <div class="k">Sortides de navegació per pàgina, de mitjana, comptant només el que hi ha sempre: capçalera, menú i peu. Mesurat a 360 px, que és on la navegació s'aprimava.</div>
+        <div class="n">28,5 <span class="was">abans 14,1</span></div>
+        <div class="k">Sortides de navegació per pàgina, de mitjana, comptant només el que hi ha sempre: capçalera, menú i peu. Mesurat a 360 px.</div>
       </div>
     </div>
   </section>
@@ -192,21 +162,26 @@
     </div>
     <p>
       El repositori ja tenia una bateria que fotografia cada pàgina quieta a dalt de tot.
-      Faltava l'altra meitat: el que passa <strong>mentre</strong> algú es mou per la pàgina.
-      Per això s'hi han afegit dues eines noves, i totes dues es poden tornar a passar
-      quan es vulgui.
+      Faltava l'altra meitat: el que passa <strong>mentre</strong> algú es mou per la
+      pàgina. S'hi han afegit dues eines, i totes dues es tornen a passar quan es vulgui.
     </p>
     <ul class="plain">
       <li><strong><code>tests/ux-deep.mjs</code></strong> — recorre cada pàgina de dalt a baix i torna a pujar, gira la pantalla, obre el menú, prova l'Escape i el tabulador, apuja la lletra al 200 %, respon les galetes i torna a carregar-ho tot amb el JavaScript desactivat. A 13 mides reals de pantalla, de l'iPhone SE de 320 px al monitor de 1920.</li>
-      <li><strong><code>tests/nav-audit.mjs</code></strong> — mira el lloc sencer com un mapa i respon a tres preguntes: on sóc, on puc anar i en quants clics. Només compta el que es veu de debò a cada amplada, perquè un enllaç que un <code>media query</code> retira al mòbil no és una sortida.</li>
+      <li><strong><code>tests/nav-audit.mjs</code></strong> — mira el lloc sencer com un mapa i respon a tres preguntes: on sóc, on puc anar i en quants clics. Només compta el que es veu de debò a cada amplada.</li>
     </ul>
     <div class="note">
       <p>
-        <strong>Una correcció pel camí.</strong> La primera versió de l'auditoria de navegació
-        comptava com a sortida només l'enllaç ja visible a la pantalla, i això feia semblar
-        que un menú tancat darrere un botó no existís. Un toc de més no és un carreró sense
-        sortida. Les xifres d'aquest informe estan totes recalculades amb el criteri corregit,
-        abans i després, perquè la comparació valgui.
+        <strong>Dues correccions de la manera de mesurar</strong>, i totes dues canvien
+        xifres que aquest mateix informe donava abans. La primera: comptava com a sortida
+        només l'enllaç ja visible, cosa que feia semblar que un menú tancat darrere un botó
+        no existís. La segona: comptava el commutador d'idioma com un destí, quan porta a
+        la <em>mateixa</em> pàgina en una altra llengua —això feia semblar que cada pàgina
+        tingués una navegació diferent de totes les altres.
+      </p>
+      <p>
+        Amb la vara corregida s'ha tornat a mesurar <strong>el codi de partida i el
+        d'ara</strong>, cadascun amb la mateixa versió de la bateria. Totes les xifres
+        d'aquesta pàgina són d'aquesta segona mesura.
       </p>
     </div>
   </section>
@@ -219,8 +194,7 @@
     </div>
     <p>
       Cada quadre és un recorregut complet d'una pàgina en un dispositiu. Vermell,
-      un problema greu; ombrejat, un de menor; buit, net. A l'esquerra, l'estat en
-      començar; a la dreta, l'estat d'ara.
+      un problema greu; ombrejat, un de menor; buit, net.
     </p>
     <div class="grid-scroll" id="graella"></div>
     <div class="legend">
@@ -228,90 +202,151 @@
       <span class="k"><i class="cell warn"></i> problema menor</span>
       <span class="k"><i class="cell ok"></i> net</span>
     </div>
+    <div class="note">
+      <p>
+        <strong>Per què ara hi ha més ombrejat que abans.</strong> Els problemes greus
+        han passat de 18 a cap, però els menors han pujat de 165 a 232. Gairebé tots
+        són el mateix: <em>el menú de 30 destins demana scroll en aquesta pantalla</em>.
+        Abans això sortia a 27 recorreguts i ara a 228, i no és perquè res hagi
+        empitjorat: és que abans gairebé cap pàgina tenia menú.
+      </p>
+      <p>
+        La resta dels menors són zones tocables estretes —controls agrupats de dues
+        lletres, que ja tenen els 44 px d'alçada— i la barra de galetes tapant la
+        crida a l'acció el primer cop que entres.
+      </p>
+    </div>
   </section>
 
   <section>
     <div class="sec-head">
-      <p class="eyebrow">La causa de fons</p>
+      <p class="eyebrow">El que s'ha trobat</p>
       <div class="rule"></div>
-      <h2>Per què es perdia la gent</h2>
+      <h2>Vuit coses, de la més greu a la més petita</h2>
     </div>
     <div class="cases">
 
       <div class="case">
-        <div class="top"><span class="chip fixed">Arreglat</span><h3>El mapa del club vivia en una sola pàgina</h3></div>
+        <div class="top"><span class="chip">Arreglat</span><h3>«Días de partido» i «Match days» estaven mortes</h3></div>
         <p>
-          De 404 pàgines, <strong>401 no tenien el botó de menú</strong> i 395 no tenien
-          el menú. La portada oferia 30 destins; una pàgina interior, sis —i per sota de
-          1080 px, tres, perquè els altres estan marcats per retirar-se quan no hi caben.
-          Des d'un mòbil, en una pàgina de Campus o de Bàsquet femení, els únics llocs on
-          es podia anar eren Equips, Club i Calendari.
+          Les pàgines de partits en castellà i en anglès <strong>no funcionaven des del
+          maig</strong>. El seu script no arribava ni a compilar-se, de manera que no
+          s'hi pintava cap partit: ni la jornada, ni els resultats, ni el calendari.
+          Només se'n veia el marcatge buit.
         </p>
         <p>
-          Ara el mateix menú és a totes les pàgines, servit per un sol fitxer
-          (<code>js/nav.js</code>) amb una sola llista de destins. Els enllaços respecten
-          la llengua de la pàgina i només apunten a <code>/es/</code> o <code>/en/</code>
-          quan la traducció existeix de debò: comprovat enllaç per enllaç, cap porta a un 404.
+          L'origen: un commit que va posar-hi el contingut correcte a sobre però va
+          deixar-hi a sota <strong>1.423 línies del taulell intern</strong> i un
+          marcador de conflicte de git sense resoldre. A més hi faltaven 32 dels 33
+          estils propis de la pàgina, li faltava una secció sencera —el botó de la
+          capçalera que hi apunta era un enllaç mort—, demanava les dades a una adreça
+          que no existeix i li havien quedat textos en català.
+        </p>
+        <p>
+          El guió s'ha reconstruït alineant-lo amb el de la pàgina catalana i conservant
+          les traduccions que ja hi havia: de 1.641 línies a 172, com el català.
+        </p>
+        <p class="where">On es notava · /es/partits/ i /en/partits/, a tots els dispositius</p>
+      </div>
+
+      <div class="case">
+        <div class="top"><span class="chip">Arreglat</span><h3>El mapa del club vivia en una sola pàgina</h3></div>
+        <p>
+          De 404 pàgines, <strong>401 no tenien el botó de menú</strong>. La portada
+          oferia 30 destins; una pàgina interior, sis —i per sota de 1080 px, tres,
+          perquè els altres estan marcats per retirar-se quan no hi caben. Des d'un
+          mòbil, a Campus o a Bàsquet femení, els únics llocs on es podia anar eren
+          Equips, Club i Calendari.
+        </p>
+        <p>
+          Ara el mateix menú és a totes les pàgines, servit per un sol fitxer amb una
+          sola llista de destins.
         </p>
         <p class="where">On es notava · totes les pàgines menys tres</p>
       </div>
 
       <div class="case">
-        <div class="top"><span class="chip fixed">Arreglat</span><h3>Sense JavaScript, mig portada era invisible</h3></div>
+        <div class="top"><span class="chip">Arreglat</span><h3>No es podia canviar de llengua enlloc</h3></div>
+        <p>
+          El commutador d'idioma només era a les tres portades. Qui entrava per cercador
+          a una pàgina interior en castellà o en anglès —que és per on entra la
+          majoria— no en podia sortir.
+        </p>
+        <p>
+          La peça que faltava no era el botó, era saber a quina adreça porta:
+          <strong>les adreces traduïdes no són mecàniques</strong>.
+          <code>/proteccio-menor/</code> és <code>/es/proteccion-menor/</code> i
+          <code>/en/child-protection/</code>, i divuit rutes són així. Posar-hi el prefix
+          de l'idioma al davant hauria enviat la gent a un 404. La font que ho sap ja
+          existia al repositori i deia expressament que d'ella n'havia de sortir això.
+        </p>
+        <p class="where">On es notava · 401 pàgines · ara n'hi ha 350 amb commutador</p>
+      </div>
+
+      <div class="case">
+        <div class="top"><span class="chip">Arreglat</span><h3>Sense JavaScript, mig portada era invisible</h3></div>
         <p>
           Els blocs de la portada apareixen amb una animació d'entrada: arrenquen
-          transparents i els encén un observador de JavaScript quan hi arribes. Si el
-          JavaScript no arrenca —el talla un bloquejador, falla la xarxa a mig camí—
-          <strong>res no els encenia mai</strong>. Comprovat amb el navegador i el
-          JavaScript desactivat: <strong>59 blocs</strong> es quedaven transparents per
-          sempre —15 a la portada, 16 a la castellana, 16 a l'anglesa i 12 a
-          <code>/opina/</code>—, entre ells el formulari de contacte i la secció de sèniors.
+          transparents i els encén un observador de JavaScript. Si el JavaScript no
+          arrenca, <strong>res no els encenia mai</strong>. Comprovat amb el navegador
+          i el JavaScript desactivat: 59 blocs es quedaven transparents per sempre,
+          entre ells el formulari de contacte. Ara, cap.
         </p>
-        <p>
-          Ara aquestes pàgines porten un <code>&lt;noscript&gt;</code> que desactiva
-          l'efecte. Tornat a comprovar: <strong>cap bloc amagat</strong>. Amb JavaScript,
-          l'animació segueix igual.
-        </p>
-        <p class="where">On es notava · portada, i les seves versions en castellà i anglès</p>
+        <p class="where">On es notava · portada, /opina/ i les versions castellana i anglesa</p>
       </div>
 
       <div class="case">
-        <div class="top"><span class="chip fixed">Arreglat</span><h3>A /escoleta/ el botó de menú no es podia ni tocar</h3></div>
+        <div class="top"><span class="chip">Arreglat</span><h3>Sis errors de JavaScript, i un de tapat</h3></div>
         <p>
-          Aquella pàgina té estructura pròpia: el que el codi anomena capçalera és la
-          portada de la pàgina, i la navegació de debò és una barra fixa que hi va a
-          sobre. El botó de menú hi quedava a sota, tapat, i no responia
-          <strong>a cap dels 13 dispositius</strong>. Ara el botó va a la barra que mana.
+          Carregant les 404 pàgines amb el navegador en sortien sis errors. Entre ells,
+          <code>x.font='170px Anton, 'Anton', sans-serif'</code> —una cadena tancada a
+          la cometa equivocada— que impedia generar els cartells de partit en cap
+          idioma, i una reixa de contrasenya que cridava una funció abans que
+          existís. Resolts els sis, en va aparèixer un setè que els primers tapaven.
         </p>
-        <p class="where">On es notava · /escoleta/, a totes les mides</p>
+        <p class="where">Ara: 0 errors a les 404 pàgines</p>
       </div>
 
       <div class="case">
-        <div class="top"><span class="chip fixed">Arreglat</span><h3>Cinc trampes d'ordre del CSS</h3></div>
+        <div class="top"><span class="chip">Arreglat</span><h3>El contrast del peu no arribava al mínim</h3></div>
         <p>
-          Cap és de disseny; totes són regles correctes que una altra regla escrita més
-          avall desfeia sense que es notés. El botó flotant de WhatsApp quedava
+          La guia del club diu que sobre fons fosc el vermell s'aclareix. Al peu no
+          s'hi aplicava: el «Clot» del logotip donava <strong>3,87:1</strong>, per sota
+          del mínim de 4,5. Ara en dona 5,4. La línia legal passava de 3,82 a 6,23, i
+          la reixa privada del Premi Dona i Esport, d'un <strong>1,53:1</strong>
+          pràcticament il·legible, a 5,5.
+        </p>
+        <p class="where">On es notava · el peu de totes les pàgines</p>
+      </div>
+
+      <div class="case">
+        <div class="top"><span class="chip">Arreglat</span><h3>Cinc trampes d'ordre del CSS</h3></div>
+        <p>
+          Cap és de disseny; totes són regles correctes que una altra escrita més avall
+          desfeia sense que es notés. El botó flotant de WhatsApp quedava
           <strong>42 dels seus 56 px sota la barra d'accions</strong>. La barra de
-          novetats estirava la pàgina 1.797 px a 320 px. Les fitxes de
-          <strong>/femeni/</strong> en desbordaven 42, i l'adreça de correu del club, 7 més.
-        </p>
-        <p>
-          I una desincronització: la portada en català amaga el nom del club al costat de
-          l'escut en pantalles molt estretes; <strong>les versions en castellà i anglès no
-          tenien aquesta regla</strong> i la capçalera se'ls sortia 53 px. És el risc conegut
-          de tenir tres fitxers separats per a la mateixa portada.
+          novetats estirava la pàgina 1.797 px a 320 px. I la portada en català amaga
+          el nom del club en pantalles estretes, però les versions traduïdes i les
+          pàgines interiors no tenien aquesta regla i la capçalera se'ls sortia.
         </p>
         <p class="where">On es notava · sobretot a 320 px, la pantalla més estreta que es prova</p>
       </div>
 
       <div class="case">
-        <div class="top"><span class="chip fixed">Arreglat</span><h3>Pàgines públiques sense cap sortida</h3></div>
+        <div class="top"><span class="chip">Nou</span><h3>Un cercador per a les altres 370 pàgines</h3></div>
         <p>
-          La pàgina de la mascota és pública i entra per cercador, però no tenia capçalera
-          ni cap manera de tornar al club: qui hi arribava, s'hi quedava. Ara se li fabrica
-          una capçalera mínima —escut i botó de menú— que no li toca el disseny.
+          El menú porta els 30 destins grans. El lloc en té més de 400: cada article,
+          cada fitxa d'equip, cada partner. A aquelles només s'hi arribava si sabies de
+          quina secció penjaven.
         </p>
-        <p class="where">On es notava · /mascota/ en els tres idiomes</p>
+        <p>
+          Ara el menú obre amb el focus dins d'un camp de cerca. L'índex fa 62 KB i
+          <strong>no</strong> es carrega amb la pàgina: es demana el primer cop que
+          algú toca el camp. Només dona resultats de la llengua on ets, i les paraules
+          encaixen en tots dos sentits, de manera que «partidos» troba «Días de
+          partido».
+        </p>
+        <p class="where">359 pàgines indexades · teclat sencer, fletxes i Enter</p>
       </div>
 
     </div>
@@ -330,25 +365,30 @@
         </thead>
         <tbody>
           <tr><td>Recorreguts amb problema greu (18 pàgines × 13 dispositius)</td><td class="n before">18</td><td class="n after">0</td></tr>
-          <tr><td>Pàgines amb el mapa complet del club</td><td class="n before">1</td><td class="n after">370</td></tr>
-          <tr><td>Sortides de navegació per pàgina (mitjana, a 360 px)</td><td class="n before">14,7</td><td class="n after">32,8</td></tr>
-          <tr><td>Carrerons sense sortida</td><td class="n before">43</td><td class="n after">22</td></tr>
-          <tr><td>Pàgines a les quals no s'arriba navegant</td><td class="n before">106</td><td class="n after">59</td></tr>
-          <tr><td>Pàgines amb molla de pa («on sóc»)</td><td class="n before">312</td><td class="n after">370</td></tr>
-          <tr><td>Pàgines que marquen a la capçalera la secció on ets</td><td class="n before">cap</td><td class="n after">171</td></tr>
+          <tr><td>Errors de JavaScript a les 404 pàgines</td><td class="n before">6</td><td class="n after">0</td></tr>
           <tr><td>Blocs invisibles sense JavaScript</td><td class="n before">59</td><td class="n after">0</td></tr>
-          <tr><td>Desbordament horitzontal a 320 px (portades i /femeni/)</td><td class="n before">fins a 1.797 px</td><td class="n after">cap</td></tr>
-          <tr><td>Alçada tocable del commutador d'idioma</td><td class="n before">28 px</td><td class="n after">44 px</td></tr>
-          <tr><td>Alçada tocable del commutador de maquetació</td><td class="n before">34 px</td><td class="n after">44 px</td></tr>
+          <tr class="sep"><td>Pàgines amb el botó del menú del club</td><td class="n before">3</td><td class="n after">378</td></tr>
+          <tr><td>Sortides de navegació per pàgina (mitjana, a 360 px)</td><td class="n before">14,1</td><td class="n after">28,5</td></tr>
+          <tr><td>Carrerons sense sortida</td><td class="n before">67</td><td class="n after">23</td></tr>
+          <tr><td>Variants diferents de navegació al lloc</td><td class="n before">33</td><td class="n after">24</td></tr>
+          <tr><td>Pàgines a les quals no s'arriba navegant</td><td class="n before">110</td><td class="n after">54</td></tr>
+          <tr class="sep"><td>Pàgines amb commutador d'idioma</td><td class="n before">203</td><td class="n after">350</td></tr>
+          <tr><td>Pàgines amb molla de pa («on sóc»)</td><td class="n before">334</td><td class="n after">375</td></tr>
+          <tr><td>Pàgines que marquen la secció on ets</td><td class="n before">132</td><td class="n after">268</td></tr>
+          <tr class="sep"><td>Contrast del vermell del peu sobre fons fosc</td><td class="n before">3,87:1</td><td class="n after">5,40:1</td></tr>
+          <tr><td>Contrast de la reixa privada</td><td class="n before">1,53:1</td><td class="n after">5,50:1</td></tr>
+          <tr><td>Alçada tocable dels controls de la capçalera</td><td class="n before">28 px</td><td class="n after">44 px</td></tr>
+          <tr><td>Desbordament horitzontal a 320 px</td><td class="n before">fins a 1.797 px</td><td class="n after">cap</td></tr>
         </tbody>
       </table>
     </div>
     <div class="note">
       <p>
         <strong>Una xifra que no s'ha mogut, i per què.</strong> La distància en clics
-        <em>des de la portada</em> és pràcticament la mateixa: la portada ja tenia el menú
+        <em>des de la portada</em> és exactament la mateixa: la portada ja tenia el menú
         sencer i des d'allà mai va ser el problema. El que ha canviat és el que passa
-        <strong>a partir del segon clic</strong>, que és on la gent es perdia.
+        <strong>a partir del segon clic</strong>, que és on la gent es perdia, i això és
+        el que mesuren les sortides per pàgina.
       </p>
     </div>
   </section>
@@ -360,24 +400,37 @@
       <h2>Obert, i per què</h2>
     </div>
     <ul class="plain">
-      <li><strong>Sense JavaScript no hi ha menú a les pàgines interiors.</strong> El menú s'hi injecta amb un fitxer de JavaScript; a la portada el marcatge és a l'HTML i per tant hi és sempre. Els enllaços de la capçalera segueixen sent-hi en tots dos casos. Resoldre-ho del tot vol dir escriure el menú a l'HTML de les 357 pàgines, cosa que es pot fer amb el mateix script quan es decideixi.</li>
-      <li><strong>El commutador d'idioma només és a les portades.</strong> Qui arriba a una pàgina interior en castellà o en anglès no en pot canviar. No s'ha afegit perquè moltes pàgines no tenen traducció i els enllaços portarien a un 404: cal decidir abans si en aquests casos val més anar a la portada d'aquell idioma o no oferir el canvi.</li>
+      <li><strong>El menú de 30 destins demana scroll al mòbil.</strong> Abans això passava a 27 recorreguts i ara a molts més, simplement perquè abans gairebé cap pàgina tenia menú. És el preu de posar el mapa sencer a tot arreu; si es vol evitar, el camí és escurçar el mapa, no tornar a amagar-lo. El cercador ja hi fa de drecera.</li>
+      <li><strong>El menú castellà i l'anglès tenen 24 destins, no 30.</strong> Les sis que falten són pàgines que encara no s'han traduït. El repositori té escrit que posar al menú castellà un enllaç que porta a una pàgina en català és pitjor que no posar-l'hi, i s'ha seguit aquest criteri. Es resol traduint aquelles pàgines, no tocant el menú.</li>
       <li><strong>L'amplada del commutador d'idioma es queda en 30 px.</strong> L'alçada ja és de 44. Eixamplar-lo tornaria a desbordar la capçalera a 320 px, i són tres controls agrupats de dues lletres.</li>
-      <li><strong>El menú de 30 destins demana scroll al mòbil.</strong> Abans això passava a 27 recorreguts i ara a 222, simplement perquè abans gairebé cap pàgina tenia menú. És el preu de posar el mapa sencer a tot arreu; si es vol evitar, el camí és escurçar el mapa, no tornar a amagar-lo.</li>
-      <li><strong>La portada té dues maquetacions</strong> —Franges i Extensa— i la tria es guarda només mentre dura la pestanya, i el trànsit que ve d'Instagram sempre veu Franges. Funciona tal com està escrit, però és la peça que més pot fer la sensació que «la pàgina canvia sola». No s'hi ha tocat: és una decisió de producte, no un defecte.</li>
+      <li><strong>La portada té dues maquetacions</strong> —Franges i Extensa— i la tria es guarda només mentre dura la pestanya; el trànsit que ve d'Instagram sempre veu Franges. Funciona tal com està escrit, però és la peça que més pot fer la sensació que «la pàgina canvia sola». No s'hi ha tocat: és una decisió de producte, no un defecte.</li>
+      <li><strong>La galeria del 3x3 depèn de Google Drive</strong> per a 153 fotografies. Si Drive canvia les adreces o en restringeix l'accés, aquella galeria es queda sense imatges. No és un defecte d'avui, sí una dependència que val la pena saber.</li>
     </ul>
+    <div class="note">
+      <p>
+        <strong>Una cosa que aquest informe deia i no era del tot certa.</strong> A la
+        primera versió hi constava que sense JavaScript no hi ha menú a les pàgines
+        interiors, cosa que donava a entendre que qui hi arribés hi quedaria encallat.
+        Mesurat després: sense JavaScript una pàgina interior ofereix igualment
+        <strong>entre 30 i 33 destins</strong> —la capçalera i el peu són HTML pla i hi
+        són sempre. El menú és una millora, no l'única sortida.
+      </p>
+      <p>
+        Per això no s'ha escrit el menú dins de les 357 pàgines: hauria calgut inventar
+        seixanta etiquetes en castellà i anglès al marge del procés de traducció que el
+        club ja té muntat, per tapar un forat que en bona part no hi era.
+      </p>
+    </div>
   </section>
 
   <footer class="end">
-    Dades completes a <code>tests/out/ux-deep.json</code> i <code>tests/out/nav-audit.json</code> ·
+    Dades completes a <code>tests/out/</code> ·
     Es tornen a passar amb <code>node tests/ux-deep.mjs</code> i <code>node tests/nav-audit.mjs</code>
   </footer>
 
 </div>
 
 <script>
-  // La graella es dibuixa a partir de les dades de les dues passades, perquè
-  // el que es veu sigui exactament el que van dir les proves.
   var PAGINES = ['/', '/escoleta/', '/partits/', '/partits/calendaris/', '/campus/', '/femeni/',
     '/patrocinadors/', '/blog/', '/club/', '/faq/', '/opina/', '/3x3/', '/organigrama/',
     '/instal-lacions/', '/premsa/', '/newsletter/', '/es/', '/en/'];
@@ -388,9 +441,8 @@
     ['tauleta 1024', 'iPad Pro'], ['portàtil 1280', 'MacBook Air'], ['escriptori 1440', 'monitor'],
     ['escriptori 1920', 'monitor gran']
   ];
-  // 0 = net, 1 = problema menor, 2 = problema greu.
   var ABANS = [[2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2], [2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2], [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2], [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2], [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-  var ARA = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]];
+  var ARA = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]];
 
   function taula(dades, titol) {
     var t = '<table class="grid"><caption style="caption-side:top;text-align:left;font-family:var(--body);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);padding-bottom:14px">' + titol + '</caption><thead><tr><th class="dev"></th>';
