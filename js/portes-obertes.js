@@ -50,7 +50,13 @@
     if (primer) { primer.focus(); return; }
 
     form.querySelector('button[type="submit"]').disabled = true;
+    // Amb mode no-cors no sabem mai si ha arribat, i si la xarxa es queda
+    // penjada l'usuari es queda mirant un botó apagat. Al cap de sis segons
+    // es dona per fet igualment.
+    var fet = false;
     var acabat = function () {
+      if (fet) return;
+      fet = true;
       form.classList.add('sent');
       done.classList.add('on');
       done.setAttribute('tabindex', '-1');
@@ -64,6 +70,7 @@
     };
     camps.forEach(function (c) { dades[c.nom] = c.el.value.trim(); });
 
+    setTimeout(acabat, 6000);
     if (cfg.bustiaEndpoint) {
       fetch(cfg.bustiaEndpoint, {
         method: 'POST', mode: 'no-cors',
