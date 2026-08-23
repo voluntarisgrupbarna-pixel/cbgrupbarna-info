@@ -21,6 +21,8 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
+from i18n_chrome import alternatives, navegacio, peu, text
+
 
 def clamp_desc(text, limit=160):
     """Google en mostra uns 160 caràcters. Retallem per final de frase perquè
@@ -112,21 +114,14 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <script src="/js/galetes.js"></script>
 </head>
 <body>
-<a href="#main" class="skip">Saltar al contingut</a>
+<a href="#main" class="skip">{text("salta", lang)}</a>
 <header class="head">
   <div class="head-in">
-    <a class="head-brand" href="/" aria-label="CB Grup Barna · inici">
-      <img src="/logo.png" alt="Escut del CB Grup Barna" width="30" height="30">
+    <a class="head-brand" href="/" aria-label="{text("inici_aria", lang)}">
+      <img src="/logo.png" alt="{text("escut_alt", lang)}" width="30" height="30">
       <span>CB Grup Barna</span>
     </a>
-    <nav class="head-nav" aria-label="Navegació principal">
-      <a href="/partits/equips/">Equips</a>
-      <a href="/club/">Club</a>
-      <a href="/partits/">Dies de partit</a>
-      <a href="/escoleta/" class="opt">Escoleta</a>
-      <a href="/campus/" class="opt">Campus</a>
-      <a href="/empreses/" class="opt">Empreses</a>
-    </nav>{lang_switch}
+{navegacio(lang)}{lang_switch}
   </div>
 </header>
 <main id="main">"""
@@ -139,64 +134,9 @@ def crumbs(items):
     return '<div class="wrap"><nav class="crumb" aria-label="Fil d\'Ariadna">' + ' · '.join(parts) + '</nav></div>'
 
 
-FOOT = f"""</main>
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-col">
-        <h3>El Barna</h3>
-        <a href="/escoleta/">Escola de bàsquet</a>
-        <a href="/campus/">Campus de bàsquet</a>
-        <a href="/magics/">Barna Màgics</a>
-        <a href="/3x3/">Torneig 3x3</a>
-        <a href="/cistella-petita/">Cistella Petita</a>
-        <a href="/empreses/">Empreses</a>
-        <a href="/patrocinadors/">Partners</a>
-        <a href="/instal-lacions/">Instal·lacions</a>
-        <a href="/organigrama/">Organigrama</a>
-        <a href="/posicionament/">Posicionament del club</a>
-        <a href="/grup-barna-dades-oficials/">Dades oficials</a>
-        <a href="/proteccio-menor/">Protecció del Menor</a>
-        <a href="/femeni/">Bàsquet femení</a>
-      </div>
-      <div class="foot-col">
-        <h3>Temporada</h3>
-        <a href="/partits/">Dies de partit</a>
-        <a href="/partits/calendaris/">Dies de partit per equip</a>
-        <a href="/fotos/">Galeria de fotos</a>
-        <a href="/premidonaesport/">Premi Dona i Esport</a>
-        <a href="/blog/">Blog</a>
-        <a href="/premsa/">Articles i premsa</a>
-      </div>
-      <div class="foot-col">
-        <h3>Contacte</h3>
-        <a href="/#info">Demanar informació</a>
-        <a href="/faq/">Preguntes freqüents</a>
-        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
-        <a href="https://wa.me/34698425153">+34 698 425 153</a>
-        <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
-      </div>
-      <div class="foot-col">
-        <h3>Legal</h3>
-        <a href="/politica-de-privacitat/">Política de privacitat</a>
-        <a href="/avis-legal/">Avís legal</a>
-        <a href="/politica-de-privacitat/#galetes">Galetes</a>
-      </div>
-      <div class="foot-col">
-        <h3>Xarxes</h3>
-        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
-      </div>
-    </div>
-    <div class="foot-btm">
-      <div class="foot-mark">#Som<em>Clot</em></div>
-      <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965</div>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
-"""
+# El peu en català. És el mateix dibuix d'abans, però ara surt del diccionari
+# i el mateix codi en sap fer la versió castellana i anglesa: peu("es").
+FOOT = peu("ca")
 
 
 def faq_block(pairs):
@@ -1361,7 +1301,6 @@ ARTICLES = [
   "slug": "club-formacio-i-competitiu-catalunya",
   "meta_desc": 'Quins clubs de bàsquet catalans tenen equip a totes les edats i arriben a sènior amb els dos gèneres, segons la fitxa oficial de la FCBQ.',
   "hero_alt": "Jugadores del CB Grup Barna entrant a la pista entre aplaudiments, presentació d'equips 2025-2026",
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/club-formacio-i-competitiu-catalunya/'), ('es', 'https://cbgrupbarna.info/es/blog/club-formacion-y-competitivo-cataluna/'), ('en', 'https://cbgrupbarna.info/en/blog/formation-and-competitive-club-catalonia/'), ('x-default', 'https://cbgrupbarna.info/blog/club-formacio-i-competitiu-catalunya/')],
   "related": [('/blog/cultura-esforc-club-progres/', 'Formació', "Del sacrifici al progrés: la cultura de l'esforç al Barna"), ('/blog/basquet-base-sant-marti-clot/', 'El barri', 'Bàsquet base al Clot i a Sant Martí: com funciona un club de barri'), ('/blog/com-triar-escola-basquet-barcelona/', 'Guia per a famílies', 'Escola, club o acadèmia de bàsquet a Barcelona?'), ('/blog/a-quina-edat-comencar-basquet/', 'Guia per a famílies', 'A quina edat pot començar un nen o nena a jugar a bàsquet?')],
   "date": "2026-08-13",
   "bc_name": "El Barna, entre els grans del bàsquet català",
@@ -1480,7 +1419,6 @@ passen pel mateix club, sense trencar mai el fil.</p>
   "slug": "a-quina-edat-comencar-basquet",
   "meta_desc": 'Als 4 anys ja es pot començar a jugar a bàsquet. Guia per edats —escoleta, premini, mini i categories federades— per a famílies de Barcelona.',
   "hero_alt": "Nen petit de l'Escola de Bàsquet del CB Grup Barna amb la pilota, a la pista",
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/a-quina-edat-comencar-basquet/'), ('es', 'https://cbgrupbarna.info/es/blog/a-quina-edat-comencar-basquet/'), ('en', 'https://cbgrupbarna.info/en/blog/a-quina-edat-comencar-basquet/'), ('x-default', 'https://cbgrupbarna.info/blog/a-quina-edat-comencar-basquet/')],
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "A quina edat pot començar un nen o nena a jugar a bàsquet?",
@@ -1558,7 +1496,6 @@ grup que li tocaria i després es decideix. És l'única manera honesta de saber
   "slug": "com-triar-escola-basquet-barcelona",
   "meta_desc": 'Acadèmia, escola o club de bàsquet a Barcelona? Set criteris reals per triar: entrenadors, grups, quota, competició i continuïtat. Guia per a famílies.',
   "hero_alt": "Julio Torralba, fundador del CB Grup Barna, amb dues jugadores de l'escola",
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/com-triar-escola-basquet-barcelona/'), ('es', 'https://cbgrupbarna.info/es/blog/com-triar-escola-basquet-barcelona/'), ('en', 'https://cbgrupbarna.info/en/blog/com-triar-escola-basquet-barcelona/'), ('x-default', 'https://cbgrupbarna.info/blog/com-triar-escola-basquet-barcelona/')],
   "date": "2026-08-05",
   "modified": "2026-08-12",
   "tag": "Guia per a famílies",
@@ -1657,7 +1594,6 @@ continuïtat del lloc.</p>
   "slug": "campus-basquet-barcelona-guia",
   "meta_desc": 'Guia per triar campus de bàsquet a Barcelona: diferència entre campus de lleure i de tecnificació, ràtios, grups per edat, horaris i preu.',
   "hero_alt": 'Entrenador explicant un exercici a un grup de jugadors asseguts a la pista, al campus del CB Grup Barna',
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/campus-basquet-barcelona-guia/'), ('es', 'https://cbgrupbarna.info/es/blog/campus-basquet-barcelona-guia/'), ('en', 'https://cbgrupbarna.info/en/blog/campus-basquet-barcelona-guia/'), ('x-default', 'https://cbgrupbarna.info/blog/campus-basquet-barcelona-guia/')],
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "Campus de bàsquet a Barcelona: què mirar abans d'apuntar-hi ningú",
@@ -1699,6 +1635,7 @@ quan tots dos pares treballen fins a les sis és un problema logístic disfressa
 cop s'hi suma el que no estava inclòs.</p>
 
 <p>Si el que voleu és veure d'una tirada quines opcions hi ha a la ciutat, tenim la <a href="/campus-basquet-barcelona/">comparativa dels campus de bàsquet de Barcelona</a>: qui els organitza, on es fan, què treballa cadascun i quant costen.</p>
+
 <h2>El campus del CB Grup Barna</h2>
 <p>El <a href="/campus/">campus del Barna</a> es fa al barri del Clot, Districte de Sant Martí, i és
 de tecnificació: cada setmana té un focus propi —fonaments, tir, un contra un, maneig de pilota,
@@ -1735,7 +1672,6 @@ Barna. Les darreres edicions s'han omplert abans de començar, així que si us i
   "slug": "que-es-basquet-3x3",
   "meta_desc": 'El 3x3 és bàsquet a mitja pista amb tres jugadors per equip i és esport olímpic des de Tòquio.',
   "hero_alt": 'Partit de bàsquet 3x3 a pista exterior, jugadora rematant a cistella',
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/que-es-basquet-3x3/'), ('es', 'https://cbgrupbarna.info/es/blog/que-es-basquet-3x3/'), ('en', 'https://cbgrupbarna.info/en/blog/que-es-basquet-3x3/'), ('x-default', 'https://cbgrupbarna.info/blog/que-es-basquet-3x3/')],
   "date": "2026-08-05",
   "tag": "Bàsquet",
   "title": "Què és el bàsquet 3x3 i on jugar-hi a Barcelona",
@@ -1808,7 +1744,6 @@ s'obren pot <a href="/#info">deixar el contacte</a> o escriure al WhatsApp del c
   "slug": "basquet-base-sant-marti-clot",
   "meta_desc": "Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa federativa, calendari i què significa jugar en un club de barri amb seixanta-un anys d'història.",
   "hero_alt": 'Jugador del CB Grup Barna, club de bàsquet base del barri del Clot',
-  "alternates": [('ca', 'https://cbgrupbarna.info/blog/basquet-base-sant-marti-clot/'), ('es', 'https://cbgrupbarna.info/es/blog/basquet-base-sant-marti-clot/'), ('en', 'https://cbgrupbarna.info/en/blog/basquet-base-sant-marti-clot/'), ('x-default', 'https://cbgrupbarna.info/blog/basquet-base-sant-marti-clot/')],
   "date": "2026-08-05",
   "tag": "El barri",
   "title": "Bàsquet base al Clot i a Sant Martí: com funciona un club de barri",
@@ -1843,7 +1778,7 @@ FCBQ.</p>
 <h2>Un club de barri al Districte de Sant Martí</h2>
 """ + FIG_CLOT_DUO + """
 <p>El <strong>CB Grup Barna</strong> és del <strong>Clot</strong> des del <strong>1965</strong>.
-seixanta-un anys al mateix barri vol dir una cosa molt concreta: hi ha entrenadors que van jugar-hi de
+Seixanta-un anys al mateix barri vol dir una cosa molt concreta: hi ha entrenadors que van jugar-hi de
 petits i pares que hi van jugar abans que els seus fills. Això no surt en cap classificació, però es
 nota en com funciona el vestidor.</p>
 <p>Avui són més de <strong>trenta-quatre equips federats</strong> i unes <strong>450 jugadores i
@@ -1899,6 +1834,7 @@ def blog_card(a, with_text):
 
 def build_article(a):
     url = f"{SITE}/blog/{a['slug']}/"
+    url_relativa = f"/blog/{a['slug']}/"
     faq_html, faq_ld = faq_block(a["faq"])
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "BlogPosting", "@id": url + "#article",
@@ -1959,7 +1895,7 @@ def build_article(a):
 """
     return write(f"blog/{a['slug']}/index.html",
                  head(a["seo_title"], a["desc"], url, SITE + "/og-image.jpg", ld, a["kw"],
-                      a.get("alternates"), meta_desc=a.get("meta_desc")) + body + FOOT)
+                      alternatives(url_relativa), meta_desc=a.get("meta_desc")) + body + FOOT)
 
 
 def build_blog_index():
@@ -2646,8 +2582,7 @@ def build_calendaris():
 }})();
 </script>
 """
-    alternates = [("ca", url), ("es", SITE + "/es/partits/calendaris/"),
-                  ("en", SITE + "/en/partits/calendaris/"), ("x-default", url)]
+    alternates = alternatives("/partits/calendaris/")
     return write("partits/calendaris/index.html",
                  head(title, desc, url, SITE + "/partits/calendaris/img/scf.webp", ld,
                       "calendari CB Grup Barna, calendari bàsquet base, descarregar calendari equip",

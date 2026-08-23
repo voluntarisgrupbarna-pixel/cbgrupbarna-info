@@ -1,0 +1,106 @@
+# El diccionari del que envolta el contingut: capçalera, navegació i peu.
+#
+# Fins ara aquests textos estaven escrits tres vegades —una per idioma— i a
+# més d'un lloc: dins de scripts/build-pages.py i a disc, pàgina per pàgina.
+# Per això el mateix enllaç acabava dient-se de tres maneres diferents en
+# anglès. Aquí cada text té una clau i tres valors, i s'acaba la deriva.
+#
+# Dues parts, i la separació és a posta:
+#
+#   textos:     una clau, tres idiomes. El vocabulari.
+#   estructura: quins enllaços surten al menú i al peu de cada idioma.
+#
+# No totes les seccions existeixen en tots els idiomes: el peu català té
+# tretze entrades a la primera columna i el castellà i l'anglès en tenen
+# cinc, perquè la resta de pàgines encara no estan traduïdes. Això no és un
+# descuit que s'hagi d'igualar a corre-cuita: posar al peu castellà un enllaç
+# que porta a una pàgina en català és pitjor que no posar-l'hi. A mesura que
+# es tradueixin, s'afegeixen aquí.
+#
+# L'`href` s'escriu en català i cada idioma hi posa el seu prefix: /escoleta/
+# és /es/escoleta/ i /en/escoleta/. Les rutes no es tradueixen (vegeu
+# i18n/README.md). Si una pàgina no existeix en un idioma, no ha de sortir a
+# la seva estructura: el generador s'atura si hi surt.
+
+textos:
+  # ── Navegació ────────────────────────────────────────────────────────────
+  nav_equips:      {href: /partits/equips/,  ca: Equips,          es: Equipos,          en: Teams}
+  nav_club:        {href: /club/,            ca: Club,            es: Club,             en: Club}
+  nav_escoleta:    {href: /escoleta/,        ca: Escoleta,        es: Escoleta,         en: Escoleta}
+  nav_campus:      {href: /campus/,          ca: Campus,          es: Campus,           en: Camp}
+  nav_empreses:    {href: /empreses/,        ca: Empreses,        es: Empresas,         en: Companies}
+  nav_3x3:         {href: /3x3/,             ca: 3x3,             es: 3x3,              en: 3x3}
+  nav_blog:        {href: /blog/,            ca: Blog,            es: Blog,             en: Blog}
+  nav_premsa:      {href: /premsa/,          ca: Premsa,          es: Prensa,           en: Press}
+  nav_partners:    {href: /patrocinadors/,   ca: Partners,        es: Partners,         en: Partners}
+  nav_info:        {href: /#info,            ca: Informació,      es: Información,      en: Information}
+
+  # ── El nom de les seccions ───────────────────────────────────────────────
+  # «Dies de partit» és el nom de la secció a l'Instagram i a la web, i no
+  # admet sinònims. El castellà i l'anglès en tenien dos i tres cadascun.
+  partits:         {href: /partits/,           ca: Dies de partit,          es: Días de partido,           en: Match days}
+  calendaris:      {href: /partits/calendaris/, ca: Dies de partit per equip, es: Días de partido por equipo, en: Match days by team}
+  escoleta_llarg:  {href: /escoleta/,          ca: Escola de bàsquet,       es: Escuela de baloncesto,     en: Basketball school}
+  campus_llarg:    {href: /campus/,            ca: Campus de bàsquet,       es: Campus de baloncesto,      en: Basketball camp}
+  magics:          {href: /magics/,            ca: Barna Màgics,            es: Barna Màgics,              en: Barna Màgics}
+  torneig_3x3:     {href: /3x3/,               ca: Torneig 3x3,             es: Torneo 3x3,                en: 3x3 tournament}
+  cistella_petita: {href: /cistella-petita/,   ca: Cistella Petita,         es: Cistella Petita,           en: Cistella Petita}
+  empreses:        {href: /empreses/,          ca: Empreses,                es: Empresas,                  en: Companies}
+  partners:        {href: /patrocinadors/,     ca: Partners,                es: Partners,                  en: Partners}
+  installacions:   {href: /instal-lacions/,    ca: Instal·lacions,          es: Instalaciones,             en: Facilities}
+  organigrama:     {href: /organigrama/,       ca: Organigrama,             es: Organigrama,               en: Organisation}
+  posicionament:   {href: /posicionament/,     ca: Posicionament del club,  es: Posicionamiento del club,  en: Club positioning}
+  dades_oficials:  {href: /grup-barna-dades-oficials/, ca: Dades oficials,  es: Datos oficiales,           en: Official data}
+  proteccio_menor: {href: /proteccio-menor/,   ca: Protecció del Menor,     es: Protección del Menor,      en: Child protection}
+  basquet_femeni:  {href: /basquet-femeni/,    ca: Bàsquet femení,          es: Baloncesto femenino,       en: Women's basketball}
+  fotos:           {href: /fotos/,             ca: Galeria de fotos,        es: Galería de fotos,          en: Photo gallery}
+  premidonaesport: {href: /premidonaesport/,   ca: Premi Dona i Esport,     es: Premio Mujer y Deporte,    en: Women and Sport Award}
+  blog:            {href: /blog/,              ca: Blog,                    es: Blog,                      en: Blog}
+  premsa_llarg:    {href: /premsa/,            ca: Articles i premsa,       es: Artículos y prensa,        en: Articles and press}
+  info_demanar:    {href: /#info,              ca: Demanar informació,      es: Pedir información,         en: Request information}
+  faq:             {href: /faq/,               ca: Preguntes freqüents,     es: Preguntas frecuentes,      en: Frequently asked questions}
+  privacitat:      {href: /politica-de-privacitat/, ca: Política de privacitat, es: Política de privacidad, en: Privacy policy}
+  avis_legal:      {href: /avis-legal/,        ca: Avís legal,              es: Aviso legal,               en: Legal notice}
+  galetes:         {href: "/politica-de-privacitat/#galetes", ca: Galetes,  es: Cookies,                   en: Cookies}
+
+  # ── Títols de columna i textos solts ─────────────────────────────────────
+  titol_el_barna:  {ca: El Barna,       es: El Barna,       en: The Barna}
+  titol_temporada: {ca: Temporada,      es: Temporada,      en: Season}
+  titol_contacte:  {ca: Contacte,       es: Contacto,       en: Contact}
+  titol_legal:     {ca: Legal,          es: Legal,          en: Legal}
+  titol_xarxes:    {ca: Xarxes,         es: Redes,          en: Social}
+  salta:           {ca: Saltar al contingut, es: Saltar al contenido, en: Skip to content}
+  nav_aria:        {ca: Navegació principal, es: Navegación principal, en: Main navigation}
+  inici_aria:      {ca: CB Grup Barna · inici, es: CB Grup Barna · inicio, en: "CB Grup Barna · home"}
+  escut_alt:       {ca: Escut del CB Grup Barna, es: Escudo del CB Grup Barna, en: CB Grup Barna crest}
+  peu_legal:
+    ca: "© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965"
+    es: "© 2026 CB Grup Barna · Baloncesto base en El Clot desde 1965"
+    en: "© 2026 CB Grup Barna · Youth basketball in El Clot since 1965"
+
+# Quins enllaços surten, en quin ordre, per a cada idioma. `.opt` marca els
+# secundaris, que són els primers que cauen quan el menú no hi cap.
+estructura:
+  ca:
+    nav: [nav_equips, nav_club, partits, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
+    peu:
+      - [titol_el_barna, [escoleta_llarg, campus_llarg, magics, torneig_3x3, cistella_petita,
+                          empreses, partners, installacions, organigrama, posicionament,
+                          dades_oficials, proteccio_menor, basquet_femeni]]
+      - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
+      - [titol_contacte, [info_demanar, faq]]
+      - [titol_legal, [privacitat, avis_legal, galetes]]
+  es:
+    nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
+          "nav_partners.opt", nav_info]
+    peu:
+      - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
+      - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
+      - [titol_contacte, [info_demanar]]
+  en:
+    nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
+          "nav_partners.opt", nav_info]
+    peu:
+      - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
+      - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
+      - [titol_contacte, [info_demanar]]

@@ -1,0 +1,150 @@
+name: i18n · traduir el que ha canviat
+
+# Quan es toca una pàgina en català, les seves versions en castellà i anglès
+# es queden velles el mateix dia. Fins ara això no ho veia ningú fins mesos
+# després. Això ho detecta a cada push i ho tradueix sol.
+#
+# Com sap què cal tornar a traduir, sense refer-ho tot cada vegada:
+# scripts/i18n-extreu.py torna a treure el text de la pàgina i conserva la
+# traducció dels trossos que no han canviat, buscant-los pel text català. Si
+# només s'ha tocat un paràgraf, només es tradueix aquell paràgraf.
+#
+# Cal el secret ANTHROPIC_API_KEY. Sense clau el workflow no falla ni ho
+# amaga: diu quines pàgines s'han quedat pendents, perquè es puguin traduir
+# a mà o executar-lo un altre cop quan la clau hi sigui.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - '!es/**'
+      - '!en/**'
+      - '!admin/**'
+  workflow_dispatch:
+    inputs:
+      rutes:
+        description: 'Rutes a traduir, separades per espais (buit = les que hagin canviat)'
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: i18n-tradueix
+  cancel-in-progress: false
+
+jobs:
+  traduir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install --quiet pyyaml
+
+      - name: Veure quines pàgines catalanes ha tocat aquest push
+        id: canvis
+        env:
+          ABANS: ${{ github.event.before }}
+          ARA: ${{ github.sha }}
+          MANUALS: ${{ github.event.inputs.rutes }}
+        run: |
+          : > /tmp/rutes.txt
+          if [ -n "$MANUALS" ]; then
+            for r in $MANUALS; do echo "$r" >> /tmp/rutes.txt; done
+          elif [ -z "$ABANS" ] || [ "$ABANS" = "0000000000000000000000000000000000000000" ] \
+               || ! git cat-file -e "$ABANS^{commit}" 2>/dev/null; then
+            echo "::notice::Push sense commit anterior. No es tradueix res."
+          else
+            for f in $(git diff --name-only --diff-filter=AM "$ABANS" "$ARA" -- '*.html'); do
+              case "$f" in
+                es/*|en/*|admin/*|*/print/*|*/admin.html|*/cartell.html|404.html) continue ;;
+              esac
+              # Només les que el mapa reconeix com a pàgina amb traducció.
+              ruta="/${f%index.html}"
+              [ "$ruta" = "/index.html" ] && ruta="/"
+              echo "$ruta" >> /tmp/rutes.txt
+            done
+          fi
+          sort -u /tmp/rutes.txt -o /tmp/rutes.txt
+          echo "quantes=$(wc -l < /tmp/rutes.txt)" >> "$GITHUB_OUTPUT"
+          echo "::notice::$(wc -l < /tmp/rutes.txt) pàgines catalanes tocades."
+          cat /tmp/rutes.txt
+
+      - name: Mirar si algú ha editat una traducció a mà
+        env:
+          ABANS: ${{ github.event.before }}
+          ARA: ${{ github.sha }}
+        run: |
+          # El català és l'original. Si algú edita directament una pàgina de
+          # /es/ o /en/, el circuit li passarà per sobre la propera vegada:
+          # val més dir-ho ara que no pas que desaparegui sense avisar.
+          if git cat-file -e "$ABANS^{commit}" 2>/dev/null; then
+            tocades=$(git diff --name-only "$ABANS" "$ARA" -- 'es/*.html' 'en/*.html' | head -20)
+            if [ -n "$tocades" ]; then
+              echo "::warning::S'han editat traduccions a mà. El circuit les reescriurà: el text s'ha de canviar a la pàgina catalana."
+              echo "$tocades"
+            fi
+          fi
+
+      - name: Treure el text que cal traduir
+        if: steps.canvis.outputs.quantes != '0'
+        run: |
+          while read -r ruta; do
+            [ -z "$ruta" ] && continue
+            python3 scripts/i18n-extreu.py "$ruta" es en || echo "::warning::no s'ha pogut extreure $ruta"
+          done < /tmp/rutes.txt
+
+      - name: Traduir
+        if: steps.canvis.outputs.quantes != '0'
+        id: traduir
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::warning::No hi ha ANTHROPIC_API_KEY. Les pàgines següents queden pendents de traduir:"
+            cat /tmp/rutes.txt
+            echo "sense_clau=si" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          while read -r ruta; do
+            [ -z "$ruta" ] && continue
+            python3 scripts/i18n-tradueix.py "$ruta" es
+            python3 scripts/i18n-tradueix.py "$ruta" en
+          done < /tmp/rutes.txt
+
+      - name: Muntar les pàgines i refer mapa, hreflang i sitemap
+        if: steps.canvis.outputs.quantes != '0' && steps.traduir.outputs.sense_clau != 'si'
+        run: |
+          while read -r ruta; do
+            [ -z "$ruta" ] && continue
+            python3 scripts/i18n-munta.py "$ruta" es || true
+            python3 scripts/i18n-munta.py "$ruta" en || true
+          done < /tmp/rutes.txt
+          python3 scripts/i18n-routes.py
+          python3 scripts/i18n-hreflang.py
+          python3 scripts/build-sitemap.py
+
+      - name: Revisar que no s'hi hagi trencat res
+        if: steps.canvis.outputs.quantes != '0' && steps.traduir.outputs.sense_clau != 'si'
+        run: python3 scripts/i18n-lint.py --nomes-errors
+
+      - name: Desar
+        if: steps.canvis.outputs.quantes != '0' && steps.traduir.outputs.sense_clau != 'si'
+        run: |
+          if git diff --quiet; then
+            echo "::notice::Les traduccions ja estaven al dia."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "i18n: tradueix el que ha canviat [skip ci]"
+          git push
+          echo "::notice::Traduccions actualitzades."
