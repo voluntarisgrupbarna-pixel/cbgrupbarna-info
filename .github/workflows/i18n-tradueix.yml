@@ -9,9 +9,19 @@ name: i18n · traduir el que ha canviat
 # traducció dels trossos que no han canviat, buscant-los pel text català. Si
 # només s'ha tocat un paràgraf, només es tradueix aquell paràgraf.
 #
-# Cal el secret ANTHROPIC_API_KEY. Sense clau el workflow no falla ni ho
-# amaga: diu quines pàgines s'han quedat pendents, perquè es puguin traduir
-# a mà o executar-lo un altre cop quan la clau hi sigui.
+# Funciona de dues maneres, i totes dues serveixen:
+#
+#   AMB el secret ANTHROPIC_API_KEY: tradueix sol i ho desa. Té un cost per
+#   ús, petit perquè només es tradueix el que ha canviat, però un cost.
+#
+#   SENSE clau, que és com està ara: no tradueix, però tampoc deixa que es
+#   perdi. Apunta les pàgines que s'han quedat velles en una incidència del
+#   repositori —sempre la mateixa, que es va actualitzant— i així hi ha una
+#   llista viva del que falta, sense pagar res ni haver-se'n de recordar.
+#
+# El que no fa mai és publicar una traducció automàtica sense passar pel
+# glossari i pel lint. Val més una pàgina en català que una mala traducció
+# de la pàgina en català.
 
 on:
   push:
@@ -29,6 +39,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: i18n-tradueix
@@ -108,7 +119,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           if [ -z "$ANTHROPIC_API_KEY" ]; then
-            echo "::warning::No hi ha ANTHROPIC_API_KEY. Les pàgines següents queden pendents de traduir:"
+            echo "::notice::Sense clau d'API. Les pàgines tocades s'apunten a la incidència de pendents."
             cat /tmp/rutes.txt
             echo "sense_clau=si" >> "$GITHUB_OUTPUT"
             exit 0
@@ -134,6 +145,41 @@ jobs:
       - name: Revisar que no s'hi hagi trencat res
         if: steps.canvis.outputs.quantes != '0' && steps.traduir.outputs.sense_clau != 'si'
         run: python3 scripts/i18n-lint.py --nomes-errors
+
+      - name: Apuntar les pendents a la incidència
+        if: steps.traduir.outputs.sense_clau == 'si'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Una sola incidència, sempre la mateixa, amb la llista al dia. Així
+          # no s'omple el repositori d'incidències ni cal recordar-se de res:
+          # el que falti per traduir és sempre allà.
+          TITOL="i18n · pàgines pendents de traduir"
+          {
+            echo "Aquestes pàgines catalanes s'han tocat i les seves versions en"
+            echo "castellà i anglès s'han quedat velles."
+            echo
+            while read -r r; do [ -n "$r" ] && echo "- \`$r\`"; done < /tmp/rutes.txt
+            echo
+            echo "Per posar-les al dia:"
+            echo '```'
+            echo "python3 scripts/i18n-extreu.py <ruta> es en"
+            echo "# omplir la traducció a i18n/feina/, a mà o amb i18n-tradueix.py"
+            echo "python3 scripts/i18n-munta.py <ruta> es && python3 scripts/i18n-munta.py <ruta> en"
+            echo "python3 scripts/i18n-routes.py && python3 scripts/i18n-hreflang.py && python3 scripts/build-sitemap.py"
+            echo '```'
+            echo
+            echo "_Actualitzat automàticament pel workflow i18n-tradueix._"
+          } > /tmp/cos.md
+          num=$(gh issue list --search "$TITOL in:title" --state open --json number --jq '.[0].number' || true)
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body-file /tmp/cos.md
+            echo "::notice::Apuntat a la incidència #$num."
+          else
+            gh issue create --title "$TITOL" --body-file /tmp/cos.md --label i18n 2>/dev/null \
+              || gh issue create --title "$TITOL" --body-file /tmp/cos.md
+            echo "::notice::Oberta la incidència de pendents."
+          fi
 
       - name: Desar
         if: steps.canvis.outputs.quantes != '0' && steps.traduir.outputs.sense_clau != 'si'
