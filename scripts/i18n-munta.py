@@ -64,6 +64,8 @@ RE_CHROME_NAV = re.compile(r'(?is)<nav class="head-nav".*?</nav>')
 RE_CHROME_FOOT = re.compile(r'(?is)<footer class="foot">.*?</footer>')
 RE_SKIP = re.compile(r'(?is)(<a href="#main" class="skip">)(.*?)(</a>)')
 RE_LD = re.compile(r'(?is)(<script[^>]*ld\+json[^>]*>)(.*?)(</script>)')
+RE_ALTERNATE = re.compile(
+    r'[ \t]*<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\'][^"\']+["\'][^>]*>[ \t]*\n?', re.I)
 
 
 def desti_del_mapa(ruta, idioma):
@@ -186,6 +188,13 @@ def munta(ruta, idioma):
     html = html.replace('"inLanguage": "ca"', f'"inLanguage": "{idioma}"')
 
     # 4. Les adreces pròpies: canonical, og:url i les de dins del JSON-LD.
+    #
+    # Els hreflang es treuen abans, i no es toquen: si es deixessin, el canvi
+    # d'adreça d'aquesta línia se'ls emportaria també i la versió catalana
+    # acabaria dient que la seva pàgina en català és la castellana. Els
+    # torna a escriure scripts/i18n-hreflang.py des del mapa, que és qui sap
+    # com es diu cada versió.
+    html = RE_ALTERNATE.sub("", html)
     html = html.replace(SITE + ruta, SITE + f"/{idioma}{ruta}")
 
     # 5. Les rutes relatives i després els enllaços interns.
