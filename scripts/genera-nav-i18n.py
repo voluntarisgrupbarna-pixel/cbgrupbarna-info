@@ -30,6 +30,8 @@ from pathlib import Path
 
 ARREL = Path(__file__).resolve().parent.parent
 RUTES = ARREL / 'i18n' / 'routes.yml'
+MENU = ARREL / 'i18n' / 'menu.yml'
+NAV = ARREL / 'js' / 'nav.js'
 SORTIDA = ARREL / 'js' / 'nav-i18n.js'
 
 
@@ -58,6 +60,54 @@ def llegeix_rutes():
     if actual:
         entrades.append(actual)
     return entrades
+
+
+def llegeix_menu():
+    """Els rètols del menú en castellà i en anglès, de i18n/menu.yml.
+
+    Mateix criteri que amb routes.yml: el fitxer té una forma fixa i molt
+    simple, i el repositori no porta PyYAML. Un `-` en columna zero obre una
+    entrada; les línies indentades hi posen claus.
+    """
+    text = MENU.read_text(encoding='utf-8')
+    seccio, columnes, enllacos, actual = None, [], [], None
+
+    def tanca():
+        if actual is None:
+            return
+        (columnes if seccio == 'columnes' else enllacos).append(actual)
+
+    for linia in text.splitlines():
+        if re.match(r'^(columnes|enllacos):\s*$', linia):
+            tanca()
+            seccio, actual = linia.split(':')[0], None
+            continue
+        m = re.match(r'^-\s*ca:\s*(.+?)\s*$', linia)
+        if m:
+            tanca()
+            actual = {'ca': m.group(1)}
+            continue
+        m = re.match(r'^\s+(es|en|nota_es|nota_en):\s*(.+?)\s*$', linia)
+        if m and actual is not None:
+            actual[m.group(1)] = m.group(2)
+    tanca()
+    return columnes, enllacos
+
+
+def llegeix_mapa():
+    """Les columnes i els destins del menú, tal com són a js/nav.js.
+
+    No per generar-los —el mapa mana i viu allà— sinó per comprovar que la
+    traducció els cobreix tots. Si algú afegeix un destí al menú i no el posa
+    a menu.yml, l'entrada sortiria en català enmig d'un menú en castellà;
+    val més que l'script ho digui.
+    """
+    text = NAV.read_text(encoding='utf-8')
+    inici = text.index('var MAPA')
+    blob = text[inici:text.index('\n  ];', inici)]
+    titols = re.findall(r"\{ titol: '([^']*)'", blob)
+    hrefs = re.findall(r"\['(/[^']*)',", blob)
+    return titols, hrefs
 
 
 def existeix(url):
@@ -96,7 +146,48 @@ def main():
              for e in entrades if e['es'] or e['en']]
     trios.sort()
 
+    # --- Rètols del menú ---------------------------------------------------
+    columnes, enllacos = llegeix_menu()
+    titols, destins = llegeix_mapa()
+
+    if [c['ca'] for c in columnes] != titols:
+        print("✗ Les columnes de i18n/menu.yml no són les del mapa de js/nav.js.\n"
+              f"  menu.yml: {[c['ca'] for c in columnes]}\n"
+              f"  nav.js:   {titols}", file=sys.stderr)
+        return 1
+
+    per_ruta = {e['ca']: e for e in entrades}
+    dits = {e['ca'] for e in enllacos}
+    # Un destí només necessita rètol en l'idioma on el menú l'ensenyarà, i el
+    # menú només l'ensenya si la pàgina està traduïda.
+    falten = [d for d in destins
+              if d not in dits and (per_ruta.get(d, {}).get('es') or per_ruta.get(d, {}).get('en'))]
+    if falten:
+        for d in falten:
+            print(f"✗ {d} surt al menú traduït i no té rètol a i18n/menu.yml", file=sys.stderr)
+        return 1
+
+    sobren = [e['ca'] for e in enllacos if e['ca'] not in destins]
+    if sobren:
+        for d in sobren:
+            print(f"! {d} té rètol a i18n/menu.yml i ja no és al menú", file=sys.stderr)
+
+    menu = {
+        'columnes': {
+            'es': [c.get('es', c['ca']) for c in columnes],
+            'en': [c.get('en', c['ca']) for c in columnes],
+        },
+        'enllacos': {
+            e['ca']: {
+                'es': [e.get('es', ''), e.get('nota_es', '')],
+                'en': [e.get('en', ''), e.get('nota_en', '')],
+            }
+            for e in enllacos if e['ca'] in destins
+        },
+    }
+
     cos = json.dumps(trios, ensure_ascii=False, separators=(',', ':'))
+    cos_menu = json.dumps(menu, ensure_ascii=False, separators=(',', ':'), sort_keys=True)
     contingut = f'''/* Mapa d'idiomes · generat per scripts/genera-nav-i18n.py des de i18n/routes.yml.
  *
  * NO S'EDITA A MÀ. Per canviar una parella, toqueu i18n/routes.yml —que sí
@@ -110,6 +201,16 @@ def main():
  * {len(trios)} pàgines amb almenys una traducció, de {len(entrades)} del mapa.
  */
 window.CBGB_IDIOMES = {cos};
+
+/* Els rètols del menú en castellà i en anglès · generat des de i18n/menu.yml.
+ *
+ * Els enllaços del menú ja portaven bé —això ho resol el mapa d'aquí dalt—
+ * però el text sortia en català a les pàgines /es/ i /en/. Cap paraula d'aquí
+ * no s'ha inventat: surten del glossari, del vocabulari tancat d'enllaços o
+ * del text que el club ja té publicat en aquell idioma. Per canviar-ne una,
+ * toqueu i18n/menu.yml i torneu a passar l'script.
+ */
+window.CBGB_MENU = {cos_menu};
 '''
 
     if args.check:

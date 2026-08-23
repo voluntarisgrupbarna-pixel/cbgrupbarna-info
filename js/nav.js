@@ -121,34 +121,64 @@
     return (fila && fila[LLENGUA]) || null;
   }
 
+  // Els rètols del menú en la llengua de la pàgina. El mapa d'aquí dalt és en
+  // català perquè el català és l'original; la taula de traduccions la genera
+  // scripts/genera-nav-i18n.py des de i18n/menu.yml, que és on hi ha escrit
+  // d'on surt cada paraula. Si hi faltés una entrada es manté el català: un
+  // rètol en català es llegeix, i un rètol buit no.
+  var MENU_TXT = window.CBGB_MENU || null;
+
+  function retolColumna(i, ca) {
+    if (LLENGUA === 'ca' || !MENU_TXT || !MENU_TXT.columnes) return ca;
+    var llista = MENU_TXT.columnes[LLENGUA];
+    return (llista && llista[i]) || ca;
+  }
+
+  function retol(href, ca, nota) {
+    if (LLENGUA === 'ca' || !MENU_TXT || !MENU_TXT.enllacos) return [ca, nota];
+    var fila = MENU_TXT.enllacos[href];
+    var t = fila && fila[LLENGUA];
+    if (!t || !t[0]) return [ca, nota];
+    return [t[0], t[1] || ''];
+  }
+
+  var ETIQUETA_MENU = { ca: 'Menú complet', es: 'Menú completo', en: 'Full menu' };
+
+  var MOLLA_TXT = {
+    ca: { inici: 'Inici', ruta: 'Ruta de navegació' },
+    es: { inici: 'Inicio', ruta: 'Ruta de navegación' },
+    en: { inici: 'Home', ruta: 'Breadcrumb' },
+  };
+
   // --- 1. El menú ----------------------------------------------------------
   function construeixMenu() {
     var nav = doc.createElement('nav');
     nav.className = 'menu';
     nav.id = 'menu';
-    nav.setAttribute('aria-label', 'Menú complet');
+    nav.setAttribute('aria-label', ETIQUETA_MENU[LLENGUA] || ETIQUETA_MENU.ca);
 
     var grid = doc.createElement('div');
     grid.className = 'menu-grid';
 
-    MAPA.forEach(function (col) {
+    MAPA.forEach(function (col, i) {
       var d = doc.createElement('div');
       d.className = 'menu-col';
       var h = doc.createElement('h3');
-      h.textContent = col.titol;
+      h.textContent = retolColumna(i, col.titol);
       d.appendChild(h);
       var posats = 0;
       col.enllacos.forEach(function (e) {
         var href = desti(e[0]);
         if (!href) return;               // sense traducció: no surt en aquesta llengua
         posats++;
+        var t = retol(e[0], e[1], e[2]);
         var a = doc.createElement('a');
         a.href = href;
-        a.textContent = e[1];
+        a.textContent = t[0];
         if (e[0] === '/admin/') { a.className = 'menu-admin'; a.rel = 'nofollow'; }
-        if (e[2]) {
+        if (t[1]) {
           var s = doc.createElement('small');
-          s.textContent = e[2];
+          s.textContent = t[1];
           a.appendChild(doc.createTextNode(' '));
           a.appendChild(s);
         }
@@ -592,14 +622,23 @@
     if (!main || main.tagName === 'FOOTER') return;
 
     // Noms coneguts, primer el mapa del menú i després la llista d'extres.
+    // La clau és l'adreça EN LA LLENGUA DE LA PÀGINA: a /es/campus/ la molla
+    // ha de dir «Campus de baloncesto», no «Campus de bàsquet». Es guarda
+    // també la catalana, que és la que fan servir les pàgines en català.
     var noms = {};
-    MAPA.forEach(function (c) { c.enllacos.forEach(function (e) { noms[normalitza(e[0])] = e[1]; }); });
+    MAPA.forEach(function (c) {
+      c.enllacos.forEach(function (e) {
+        noms[normalitza(e[0])] = e[1];
+        var traduit = desti(e[0]);
+        if (traduit) noms[normalitza(traduit)] = retol(e[0], e[1], e[2])[0];
+      });
+    });
 
     var trams = ACTUAL.split('/').filter(Boolean);
     if (!trams.length) return;
     var nav = doc.createElement('nav');
     nav.className = 'molla';
-    nav.setAttribute('aria-label', 'Ruta de navegació');
+    nav.setAttribute('aria-label', (MOLLA_TXT[LLENGUA] || MOLLA_TXT.ca).ruta);
     var ol = doc.createElement('ol');
 
     function posa(href, text, ultim) {
@@ -615,7 +654,7 @@
       ol.appendChild(li);
     }
 
-    posa(PREFIX, 'Inici', false);
+    posa(PREFIX, (MOLLA_TXT[LLENGUA] || MOLLA_TXT.ca).inici, false);
     var acumulat = PREFIX === '/' ? '' : PREFIX.replace(/\/$/, '');
     var començaA = PREFIX === '/' ? 0 : 1;
     for (var i = començaA; i < trams.length; i++) {

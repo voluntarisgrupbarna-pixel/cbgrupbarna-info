@@ -68,11 +68,16 @@ jobs:
           mapa=$?
           python3 scripts/genera-index-cerca.py --check
           index=$?
+          python3 scripts/genera-menu-portades.py --check
+          portades=$?
           if [ "$mapa" -ne 0 ]; then
             echo "::warning::El mapa d'idiomes no està al dia. Executa python3 scripts/genera-nav-i18n.py i torna-ho a pujar."
           fi
           if [ "$index" -ne 0 ]; then
             echo "::warning::L'índex del cercador no està al dia. Executa python3 scripts/genera-index-cerca.py i torna-ho a pujar."
+          fi
+          if [ "$portades" -ne 0 ]; then
+            echo "::warning::El menú escrit a les portades no és el del club. Executa python3 scripts/genera-menu-portades.py i torna-ho a pujar."
           fi
 
       - name: Revisar el multiidioma

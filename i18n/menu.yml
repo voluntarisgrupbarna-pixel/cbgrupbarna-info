@@ -1,0 +1,169 @@
+# Com es diu cada entrada del menú del club en castellà i en anglès.
+#
+# PER QUÈ EXISTEIX. El menú es construeix a js/nav.js a partir d'un mapa
+# escrit en català. Fins ara, una pàgina en castellà o en anglès ensenyava
+# aquell mapa amb les etiquetes catalanes: els enllaços portaven bé —això ho
+# resol i18n/routes.yml— però el text era d'un altre idioma. Aquest fitxer
+# només diu el TEXT; les adreces segueixen sortint de routes.yml i no es
+# toquen des d'aquí.
+#
+# D'ON SURT CADA PARAULA. No se n'ha inventat cap. Cada etiqueta ve d'una de
+# tres fonts, per aquest ordre:
+#
+#   1. i18n/glossari.yml, quan és un nom propi que no es tradueix mai
+#      (Escoleta, Barna Màgics, Cistella Petita, Premi Dona i Esport) o un
+#      terme amb traducció fixada (bàsquet formatiu, sènior, júnior…).
+#   2. i18n/etiquetes.yml, el vocabulari tancat dels enllaços. Per això
+#      /partits/ es diu «Días de partido» i «Match days» i no «Calendario»
+#      ni «Calendar», que hi són com a prohibides.
+#   3. El text que el club ja té publicat: l'ancoratge que ja fa servir en
+#      aquell idioma, o el títol de la pàgina traduïda.
+#
+# ES EDITA A MÀ. Qui ho canviï, que torni a passar
+# `python3 scripts/genera-nav-i18n.py`, que ho escriu a js/nav-i18n.js.
+#
+# El català no hi és: és l'original, i viu al mapa de js/nav.js.
+
+# Els títols de les sis columnes, en el mateix ordre que el mapa.
+columnes:
+- ca: Juga al Barna
+  es: Juega en el Barna
+  en: Play at the Barna
+- ca: Equips i temporada
+  es: Equipos y temporada
+  en: Teams and season
+- ca: Activitats
+  es: Actividades
+  en: Activities
+- ca: El Club
+  es: El Club
+  en: The Club
+- ca: Actualitat
+  es: Actualidad
+  en: News
+- ca: Empreses
+  es: Empresas
+  en: Businesses
+
+# Una entrada per destí. `ca` és l'adreça catalana, que és la clau del mapa.
+# `es` i `en` són l'etiqueta; `nota_es` i `nota_en`, la lletra petita que
+# l'acompanya. Un destí sense entrada aquí surt en català, i el lint avisa.
+enllacos:
+- ca: /escoleta/
+  es: Escoleta
+  en: Escoleta
+  nota_es: 4 a 8 años
+  nota_en: ages 4 to 8
+- ca: /basquet-formatiu/
+  es: Baloncesto formativo
+  en: Development basketball
+  nota_es: ¿qué edad tiene?
+  nota_en: how old are they?
+- ca: /portes-obertes/
+  es: Puertas abiertas
+  en: Open days
+  nota_es: todo septiembre, ven a probar
+  nota_en: all September, come and try
+- ca: /femeni/
+  es: Baloncesto femenino
+  en: Women's basketball
+  nota_es: 8 equipos
+  nota_en: 8 teams
+- ca: /magics/
+  es: Barna Màgics
+  en: Barna Màgics
+  nota_es: baloncesto inclusivo
+  nota_en: inclusive basketball
+- ca: /faq/
+  es: Preguntas frecuentes
+  en: Frequently asked questions
+- ca: /partits/equips/
+  es: Equipos
+  en: Teams
+  nota_es: sénior, júnior, cadete…
+  nota_en: senior, under-18, under-16…
+- ca: /partits/
+  es: Días de partido
+  en: Match days
+- ca: /partits/calendaris/
+  es: Días de partido
+  en: Match days
+  nota_es: por equipo
+  nota_en: by team
+- ca: /fotos/
+  es: Galería
+  en: Gallery
+  nota_es: fotos de temporada
+  nota_en: season photos
+- ca: /campus/
+  es: Campus de baloncesto
+  en: Basketball camp
+- ca: /tecnificacio-basquet-barcelona/
+  es: Tecnificación
+  en: Skills training
+  nota_es: con Time Chamber
+  nota_en: with Time Chamber
+- ca: /3x3/
+  es: Torneo 3x3
+  en: 3x3 tournament
+- ca: /cistella-petita/
+  es: Cistella Petita
+  en: Cistella Petita
+  nota_es: 3 a 8 años
+  nota_en: ages 3 to 8
+- ca: /club/
+  es: El Club
+  en: The Club
+- ca: /historia/
+  es: Historia
+  en: History
+  nota_es: desde 1965
+  nota_en: since 1965
+- ca: /organigrama/
+  es: Organigrama
+  en: Organisation chart
+  nota_es: junta directiva
+  nota_en: the board
+- ca: /instal-lacions/
+  es: Instalaciones
+  en: Facilities
+- ca: /posicionament/
+  es: Posicionamiento
+  en: Where we stand
+  nota_es: vs. Barça, Penya…
+  nota_en: vs. Barça, Penya…
+- ca: /grup-barna-dades-oficials/
+  es: Datos oficiales
+  en: Official data
+- ca: /proteccio-menor/
+  es: Protección del menor
+  en: Child protection
+- ca: /documents/
+  es: Documentos
+  en: Documents
+- ca: /blog/
+  es: Blog del Barna
+  en: The Barna Blog
+  nota_es: formación, familias, datos…
+  nota_en: coaching, families, data…
+- ca: /premsa/
+  es: Prensa
+  en: Press
+  nota_es: archivo 1988–2026
+  nota_en: archive 1988–2026
+- ca: /premidonaesport/
+  es: Premi Dona i Esport
+  en: Premi Dona i Esport
+- ca: /empreses/
+  es: Empresas
+  en: Businesses
+  nota_es: por qué invertir en el Barna
+  nota_en: why invest in the Barna
+- ca: /patrocinadors/
+  es: Partners
+  en: Partners
+  nota_es: quién está hoy
+  nota_en: who is with us today
+- ca: /partners-mapa/
+  es: Mapa de partners
+  en: Partner map
