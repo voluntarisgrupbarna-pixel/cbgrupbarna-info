@@ -2020,7 +2020,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   //  la d'un Google Apps Script publicat com a aplicació web). Mentre
   //  estigui buit només s'envia per WhatsApp i no falla res.
   // ══════════════════════════════════════════════════════════════════════
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formspree.io/f/xeajwzlv';
   var WA_CLUB_NUM = '34698425153';
 
   (function () {
@@ -2050,18 +2050,30 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
       var interesTxt = interes.join(', ') || 'Sense especificar';
 
-      // 1 · Correu, si hi ha endpoint configurat. No bloqueja el WhatsApp.
+      // 1 · Correu, que ara sí que hi arriba. No bloqueja el WhatsApp.
+      //
+      //  Abans anava amb mode:'no-cors', i així no funcionava: en aquest mode
+      //  el navegador NOMÉS deixa passar tres valors de Content-Type, i
+      //  application/json no és cap d'ells. La capçalera es requeia en silenci
+      //  i el servidor rebia text pla, no un JSON. A sobre, la resposta era
+      //  opaca i no hi havia manera de saber si havia arribat.
+      //
+      //  Formspree accepta CORS, així que es demana bé i es pot comprovar.
       if (FORM_ENDPOINT) {
         try {
           fetch(FORM_ENDPOINT, {
-            method: 'POST', mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({
               _subject: "Nova sol·licitud d'informació · " + nom,
               nom: nom, mobil: mobil, correu: correu,
               interes: interesTxt, missatge: msg, origen: location.pathname
             })
-          }).catch(function () {});
+          }).then(function (r) {
+            if (!r.ok && window.gtag) window.gtag('event', 'form_email_error', { codi: r.status });
+          }).catch(function () {
+            if (window.gtag) window.gtag('event', 'form_email_error', { codi: 'xarxa' });
+          });
         } catch (_) {}
       }
 

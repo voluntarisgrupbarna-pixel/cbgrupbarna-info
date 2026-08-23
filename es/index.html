@@ -1362,7 +1362,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   //  la d'un Google Apps Script publicat com a aplicació web). Mentre
   //  estigui buit només s'envia per WhatsApp i no falla res.
   // ══════════════════════════════════════════════════════════════════════
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formspree.io/f/xeajwzlv';
   var WA_CLUB_NUM = '34698425153';
 
   (function () {
@@ -1392,18 +1392,30 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
       var interesTxt = interes.join(', ') || 'Sin especificar';
 
-      // 1 · Correu, si hi ha endpoint configurat. No bloqueja el WhatsApp.
+      // 1 · Correo, que ahora sí llega. No bloquea el WhatsApp.
+      //
+      //  Antes iba con mode:'no-cors', y así no funcionaba: en ese modo el
+      //  navegador SOLO deja pasar tres valores de Content-Type, y
+      //  application/json no es ninguno. La cabecera se caía en silencio y el
+      //  servidor recibía texto plano, no un JSON. Encima la respuesta era
+      //  opaca y no había manera de saber si había llegado.
+      //
+      //  Formspree acepta CORS, así que se pide bien y se puede comprobar.
       if (FORM_ENDPOINT) {
         try {
           fetch(FORM_ENDPOINT, {
-            method: 'POST', mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({
               _subject: "Nueva solicitud de información · " + nom,
               nom: nom, mobil: mobil, correu: correu,
               interes: interesTxt, missatge: msg, origen: location.pathname
             })
-          }).catch(function () {});
+          }).then(function (r) {
+            if (!r.ok && window.gtag) window.gtag('event', 'form_email_error', { codi: r.status });
+          }).catch(function () {
+            if (window.gtag) window.gtag('event', 'form_email_error', { codi: 'xarxa' });
+          });
         } catch (_) {}
       }
 
