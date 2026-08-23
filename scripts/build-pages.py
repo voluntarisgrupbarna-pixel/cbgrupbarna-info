@@ -113,7 +113,7 @@ FOOT = f"""</main>
       <div class="foot-col">
         <h3>Contacte</h3>
         <a href="/#info">Demanar informació</a>
-        <a href="mailto:info@cbgrupbarna.com">info@cbgrupbarna.com</a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
       </div>
@@ -121,7 +121,6 @@ FOOT = f"""</main>
         <h3>Xarxes</h3>
         <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://www.cbgrupbarna.com" target="_blank" rel="noopener">cbgrupbarna.com</a>
       </div>
     </div>
     <div class="foot-btm">
@@ -362,7 +361,7 @@ def build_patrocinadors():
 
     faq_html, faq_ld = faq_block([
         ("¿Cómo me hago patrocinador o partner del CB Grup Barna?",
-         "Escribe por WhatsApp (+34 698 425 153) o envía un correo a info@cbgrupbarna.com. "
+         "Escribe por WhatsApp (+34 698 425 153) o envía un correo a marqueting@cbgrupbarna.info. "
          "Preparamos una propuesta concreta según lo que quiera conseguir tu marca, sin packs "
          "de relleno ni promesas imposibles de medir."),
         ("¿Qué formas de colaborar hay?",
@@ -384,8 +383,8 @@ def build_patrocinadors():
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "SportsOrganization", "@id": SITE + "/#club", "name": "CB Grup Barna",
          "alternateName": "Club Bàsquet Grup Barna", "url": SITE, "logo": SITE + "/logo.png",
-         "foundingDate": "1965", "email": "info@cbgrupbarna.com",
-         "address": {"@type": "PostalAddress", "streetAddress": "Carrer de la Llacuna, 172",
+         "foundingDate": "1965", "email": "marqueting@cbgrupbarna.info",
+         "address": {"@type": "PostalAddress", "streetAddress": "Carrer de la Llacuna, 170",
                     "addressLocality": "Barcelona", "postalCode": "08018", "addressCountry": "ES"},
          "sameAs": ["https://www.instagram.com/cbgrupbarna/", "https://www.tiktok.com/@cbgrupbarna"]},
         {"@type": "Service", "@id": url + "#patrocini", "name": "Dossier de patrocinio · CB Grup Barna",
@@ -553,10 +552,10 @@ def build_patrocinadors():
     relleno ni promesas imposibles de medir.</p>
     <div class="btn-row">
       <a href="https://wa.me/34698425153?text={wa('Hola, quiero información sobre las colaboraciones del CB Grup Barna para la temporada 2026/27.')}" class="btn red" target="_blank" rel="noopener" data-cta="patro-closer-wa">Hablar por WhatsApp</a>
-      <a href="mailto:info@cbgrupbarna.com?subject={wa('Colaboración CB Grup Barna 2026/27')}" class="btn ghost" data-cta="patro-closer-mail">Enviar email</a>
+      <a href="mailto:marqueting@cbgrupbarna.info?subject={wa('Colaboración CB Grup Barna 2026/27')}" class="btn ghost" data-cta="patro-closer-mail">Enviar email</a>
     </div>
     <p style="margin-top:22px;font-size:12.5px;color:var(--muted)">
-    Email: info@cbgrupbarna.com · Sede: La Nau del Clot · Llacuna 172 · Barcelona</p>
+    Email: marqueting@cbgrupbarna.info · Sede: La Nau del Clot · Llacuna 170 · Barcelona</p>
   </div>
   </div>
 </div>
@@ -1475,7 +1474,7 @@ tingut la revista a les mans també el pugui llegir.</p>
   ],
   "after": """
 <p>El club també apareix al directori de <em>Comerços i serveis de referència</em> de la mateixa
-revista, amb l'adreça oficial —Llacuna, 172— i el WhatsApp del club, al costat d'altres negocis i
+revista, amb l'adreça oficial —Llacuna, 170— i el WhatsApp del club, al costat d'altres negocis i
 entitats del barri. Un article i una fitxa al mateix número: gràcies per fer-nos costat,
 <a href="https://www.eixclot.cat/" target="_blank" rel="noopener">Eix Clot</a>.</p>
 <p class="eyebrow">
@@ -1496,7 +1495,7 @@ entitats del barri. Un article i una fitxa al mateix número: gràcies per fer-n
     "Màgics, la relació del club amb el barri i el reconeixement de l'Ajuntament de Barcelona."),
    ("El club surt en algun altre lloc de la revista?",
     "Sí. A més de l'article, el CB Grup Barna apareix al directori de comerços i serveis de "
-    "referència del mateix número, amb l'adreça del club (Llacuna, 172) i el contacte de WhatsApp."),
+    "referència del mateix número, amb l'adreça del club (Llacuna, 170) i el contacte de WhatsApp."),
   ],
  },
 ]

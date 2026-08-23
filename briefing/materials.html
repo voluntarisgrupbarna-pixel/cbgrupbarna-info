@@ -64,7 +64,7 @@ const mats = window.BRIEFING_MATERIALS || [];
 const box = document.getElementById('list');
 
 if(!mats.length){
-  box.innerHTML = '<div class="empty">Encara no hi ha materials publicats.<br>Contacta amb el club a <a href="mailto:info@cbgrupbarna.com" style="color:var(--red)">info@cbgrupbarna.com</a> i te\'ls fem arribar.</div>';
+  box.innerHTML = '<div class="empty">Encara no hi ha materials publicats.<br>Contacta amb el club a <a href="mailto:marqueting@cbgrupbarna.info" style="color:var(--red)">marqueting@cbgrupbarna.info</a> i te\'ls fem arribar.</div>';
 } else {
   const byType = {};
   mats.forEach(m => { (byType[m.tipus] = byType[m.tipus] || []).push(m); });
