@@ -1,0 +1,62 @@
+# El glossari de la traducció automàtica: què no es tradueix mai i què es
+# tradueix sempre igual.
+#
+# Sense això, una traducció automàtica converteix «Escoleta» en «Escuelita»,
+# «Barna Màgics» en «Barna Mágicos» i «La Nau del Clot» en «La Nave del
+# Clot». Són noms propis: el club es diu igual a Xangai que al Clot.
+
+# Mai es tradueixen. Han de sortir igual, lletra per lletra.
+noms_propis:
+  - CB Grup Barna
+  - Grup Barna
+  - Barna
+  - Escoleta
+  - Barna Màgics
+  - Màgics
+  - Cistella Petita
+  - La Nau del Clot
+  - el Clot
+  - Sant Martí
+  - Barcelona
+  - Catalunya
+  - FCBQ
+  - Federació Catalana de Basquetbol
+  - Time Chamber
+  - Westfield Glòries
+  - Eix Clot
+  - Premi Dona i Esport
+  - "#SomClot"
+  - basquetcatala.cat
+  - cbgrupbarna.info
+
+# Termes del club que sempre es diuen igual dins de cada idioma. La columna
+# catalana és com surt a l'original; les altres dues, com ha de sortir.
+termes:
+  - {ca: bàsquet base,        es: baloncesto base,        en: youth basketball}
+  - {ca: bàsquet formatiu,    es: baloncesto formativo,   en: development basketball}
+  - {ca: fitxa federativa,    es: ficha federativa,       en: federation licence}
+  - {ca: pista,               es: pista,                  en: court}
+  - {ca: temporada,           es: temporada,              en: season}
+  - {ca: jornada,             es: jornada,                en: matchday}
+  - {ca: entrenament de prova, es: entrenamiento de prueba, en: trial session}
+  - {ca: portes obertes,      es: puertas abiertas,       en: open day}
+  - {ca: junta,               es: junta,                  en: board}
+  - {ca: soci,                es: socio,                  en: member}
+  - {ca: sènior,              es: sénior,                 en: senior}
+  - {ca: júnior,              es: júnior,                 en: under-18}
+  - {ca: cadet,               es: cadete,                 en: under-16}
+  - {ca: infantil,            es: infantil,               en: under-14}
+  - {ca: mini,                es: mini,                   en: under-12}
+  - {ca: premini,             es: premini,                en: under-10}
+
+# Com s'ha d'escriure, més enllà de les paraules.
+to:
+  ca: Tracte de vós al lector («podeu», «truqueu-nos»). Frases curtes.
+  es: >-
+    Trato de usted en plural («podéis», «llamadnos»), que és el que fa servir
+    la web en castellà. Castellà de Catalunya, no llatinoamericà: «baloncesto»,
+    no «básquetbol»; «entrenamiento», no «práctica».
+  en: >-
+    British English («organisation», «programme», «licence»), que és el que
+    entén millor una família europea. Directe i planer, sense floritures de
+    màrqueting. Les edats, en format anglès: «under-14», no «infantil».

@@ -111,6 +111,38 @@
 
   var barra = null;
 
+  // L'avís de galetes és el primer que llegeix qui entra al lloc, i fins ara
+  // sortia sempre en català encara que la pàgina fos en castellà o en anglès.
+  // Al club hi ha famílies de mig món i sèniors que només parlen anglès: un
+  // consentiment que no s'entén no és consentiment.
+  var TEXTOS = {
+    ca: {
+      aria: 'Consentiment de galetes', titol: 'Galetes', mes: 'Més informació',
+      text: 'Fem servir Google Analytics per saber quines pàgines interessen més, sense galetes de publicitat.',
+      nomes: 'Només les necessàries', accepta: 'Accepta-les',
+      enllac: '/politica-de-privacitat/#galetes'
+    },
+    es: {
+      aria: 'Consentimiento de cookies', titol: 'Cookies', mes: 'Más información',
+      text: 'Usamos Google Analytics para saber qué páginas interesan más, sin cookies de publicidad.',
+      nomes: 'Solo las necesarias', accepta: 'Aceptarlas',
+      enllac: '/politica-de-privacitat/#galetes'
+    },
+    en: {
+      aria: 'Cookie consent', titol: 'Cookies', mes: 'More information',
+      text: 'We use Google Analytics to see which pages people read most. No advertising cookies.',
+      nomes: 'Only the necessary ones', accepta: 'Accept them',
+      enllac: '/politica-de-privacitat/#galetes'
+    }
+  };
+
+  // Els tres enllacen la política en català perquè encara no està traduïda.
+  // El dia que ho estigui, aquí es posa la ruta amb prefix.
+  function textos() {
+    var codi = (document.documentElement.lang || 'ca').slice(0, 2).toLowerCase();
+    return TEXTOS[codi] || TEXTOS.ca;
+  }
+
   function tancar() {
     if (!barra) return;
     barra.remove();
@@ -123,21 +155,22 @@
     est.textContent = CSS;
     document.head.appendChild(est);
 
+    var t = textos();
     barra = document.createElement('div');
     barra.className = 'cbgb-gal';
     barra.setAttribute('role', 'dialog');
     barra.setAttribute('aria-live', 'polite');
-    barra.setAttribute('aria-label', 'Consentiment de galetes');
+    barra.setAttribute('aria-label', t.aria);
     barra.innerHTML =
       '<div class="cbgb-gal-in">' +
         '<div class="cbgb-gal-t">' +
-          '<b>Galetes</b>' +
-          '<p>Fem servir Google Analytics per saber quines pàgines interessen més, sense galetes de publicitat. ' +
-          '<a href="/politica-de-privacitat/#galetes">Més informació</a>.</p>' +
+          '<b>' + t.titol + '</b>' +
+          '<p>' + t.text + ' ' +
+          '<a href="' + t.enllac + '">' + t.mes + '</a>.</p>' +
         '</div>' +
         '<div class="cbgb-gal-b">' +
-          '<button type="button" data-cbgb="no">Només les necessàries</button>' +
-          '<button type="button" class="si" data-cbgb="si">Accepta-les</button>' +
+          '<button type="button" data-cbgb="no">' + t.nomes + '</button>' +
+          '<button type="button" class="si" data-cbgb="si">' + t.accepta + '</button>' +
         '</div>' +
       '</div>';
 
