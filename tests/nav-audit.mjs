@@ -131,6 +131,11 @@ const RECULL = `(function () {
     mollaDades: jsonMoll,
     actiu: actiu ? (actiu.textContent || '').trim().slice(0, 40) : null,
     idiomes: [].slice.call(document.querySelectorAll('.lang-switch a, [hreflang]')).filter(visible).length,
+    // Els destins del commutador. No compten com a sortida —porten a la
+    // MATEIXA pàgina en una altra llengua— però sí que són un camí de debò
+    // per arribar-hi, i el recompte de pàgines inabastables els necessita.
+    idiomesDesti: [...new Set([].slice.call(document.querySelectorAll('.lang-switch a, [hreflang]'))
+      .filter(visible).map(function (a) { return net(a.getAttribute('href')); }).filter(Boolean))],
     tornarInici: !!([].slice.call(document.querySelectorAll('header a[href], .head a[href]'))
       .filter(visible).find(function (a) {
         var h = a.getAttribute('href') || '';
@@ -198,12 +203,25 @@ for (const amplada of AMPLADES) {
       .filter((x) => existeix.has(x) && x !== url);
   }
 
+  // Per arribar-hi, el commutador d'idioma SÍ que compta. No és una sortida
+  // —no et porta a un altre lloc del club, sinó a la mateixa pàgina en una
+  // altra llengua— i per això no surt del recompte de sortides per pàgina.
+  // Però és el camí pel qual s'arriba a l'arbre castellà i a l'anglès: sense
+  // comptar-lo, les 250 pàgines traduïdes sortien totes com a inabastables,
+  // que és una conclusió del mesurament, no del lloc.
+  const camins = {};
+  for (const [url, v] of Object.entries(d)) {
+    if (v.error) continue;
+    camins[url] = [...new Set([...(sortides[url] || []), ...(v.idiomesDesti || [])])]
+      .filter((x) => existeix.has(x) && x !== url);
+  }
+
   // BFS des de la portada.
   const dist = { '/': 0 };
   let cua = ['/'];
   while (cua.length) {
     const seg = [];
-    for (const u of cua) for (const v of (sortides[u] || [])) {
+    for (const u of cua) for (const v of (camins[u] || [])) {
       if (dist[v] === undefined) { dist[v] = dist[u] + 1; seg.push(v); }
     }
     cua = seg;
