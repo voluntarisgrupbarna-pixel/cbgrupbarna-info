@@ -1399,7 +1399,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <a href="/empreses/" data-cta="menu-empreses">Empreses <small>per què invertir al Barna</small></a>
       <a href="/patrocinadors/" data-cta="menu-partners">Partners <small>qui hi és avui</small></a>
       <a href="/partners-mapa/" data-cta="menu-partners-mapa">Mapa de partners</a>
-      <a href="/dossier-patrocinis/" data-cta="menu-dossier">Dossier comercial</a>
+      <a href="/presentacions/dossier-patrocinis/" data-cta="menu-dossier">Dossier comercial</a>
       <a href="/admin/" class="menu-admin" rel="nofollow" data-cta="menu-admin">Zona admin <small>amb contrasenya</small></a>
     </div>
   </div>
@@ -2356,6 +2356,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       a.href = link;
       a.target = '_blank';
       a.rel = 'noopener';
+      a.className = 'igf-fallback';
       a.textContent = 'Veure la publicació a Instagram';
       bq.appendChild(a);
       box.replaceWith(bq);

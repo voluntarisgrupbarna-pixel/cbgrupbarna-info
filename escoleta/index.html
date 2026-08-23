@@ -127,12 +127,17 @@ body{padding-bottom:66px}
   border-bottom:1px solid var(--line);
 }
 .langbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;height:56px}
-.brandmark{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:inherit}
+/* Mateixa tècnica que als enllaços de sota: la zona tocable arriba als 44 px
+   sense fer la barra més alta. */
+.brandmark{display:inline-block;padding:10px 0;margin:-10px 0;font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:inherit}
 .brandmark span{color:var(--red)}
 @media(max-width:400px){.brandmark .bm-sub{display:none}}
 .site-nav{display:flex;align-items:center;gap:16px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 .site-nav::-webkit-scrollbar{display:none}
-.site-nav a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);white-space:nowrap;text-decoration:none;transition:color .15s}
+/* Els enllaços d'aquesta barra feien 45×18 px. El `padding` vertical amb el
+   `margin` negatiu al costat els dona els 44 px de zona tocable de la pauta
+   del club sense fer la barra més alta ni moure el text. */
+.site-nav a{display:inline-block;padding:13px 0;margin:-13px 0;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);white-space:nowrap;text-decoration:none;transition:color .15s}
 .site-nav a:hover{color:#fff}
 @media(max-width:1080px){.site-nav a.opt{display:none}}
 /* Per sota de 640 px la barra s'amagava del tot i no hi havia cap hamburguesa
@@ -151,7 +156,10 @@ body{padding-bottom:66px}
 .langs button{
   font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;
   background:transparent;color:var(--grey);border:1px solid var(--line);
+  /* 12 px d'alçada de dibuix, però 44 de zona tocable: el botó es veu igual
+     de discret i es pot prémer amb el dit. */
   padding:7px 13px;border-radius:2px;cursor:pointer;transition:.15s;
+  min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;
 }
 .langs button:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 .langs button[aria-pressed="true"]{background:var(--red);color:#fff;border-color:var(--red)}

@@ -62,7 +62,10 @@
       ['/empreses/', 'Empreses', 'per què invertir al Barna'],
       ['/patrocinadors/', 'Partners', 'qui hi és avui'],
       ['/partners-mapa/', 'Mapa de partners', ''],
-      ['/dossier-patrocinis/', 'Dossier comercial', ''],
+      // El destí real: /dossier-patrocinis/ és una redirecció `noindex`, i a
+      // més la catalana i la castellana porten a llocs diferents. El menú hi
+      // va directe i s'estalvia el salt.
+      ['/presentacions/dossier-patrocinis/', 'Dossier comercial', ''],
       ['/admin/', 'Zona admin', 'amb contrasenya'],
     ] },
   ];

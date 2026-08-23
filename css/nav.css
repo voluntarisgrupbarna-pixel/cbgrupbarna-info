@@ -147,3 +147,21 @@
    com ja fa la portada per sota de 480 px: ocupa 134 dels 320 px i, amb el
    commutador al costat, no hi cap. L'escut segueix sent l'enllaç a l'inici. */
 @media (max-width: 480px) { .head-in--amb-burger .head-brand span { display: none; } }
+
+/* ==== LA BARRA DE GALETES NO TAPA LA CRIDA A L'ACCIÓ ====
+   Totes dues peces són fixes a baix de tot i s'apilaven: el primer cop que
+   algú entrava, el banner cobria la barra d'accions i el botó de WhatsApp
+   —13 dels 234 recorreguts—, que és justament quan més importa que es
+   vegin. Ara s'esperen fins que la persona respon.
+
+   La classe va a l'arrel del document, així guanya per especificitat a la
+   regla `.actionbar.on` de la pàgina sense necessitat de cap `!important`. */
+html.cbgb-galetes-obertes .actionbar,
+html.cbgb-galetes-obertes .actionbar.on { transform: translateY(100%); }
+html.cbgb-galetes-obertes .fab-wa { opacity: 0; transform: translateY(14px) scale(0.9); pointer-events: none; }
+
+/* L'enllaç de recanvi de la publicació d'Instagram —el que hi queda si
+   l'incrustació no carrega— es creava sense cap estil i feia 20 px d'alçada
+   de zona tocable. És una crida a l'acció que va sola, no un enllaç enmig
+   d'una frase: li toquen els 44 px de la pauta del club. */
+.igf-fallback { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 2px; }

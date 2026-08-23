@@ -245,9 +245,23 @@ const TOCS = `(function () {
     // L'enllaç de saltar al contingut viu fora de pantalla i només apareix
     // quan hi arribes amb el tabulador: no és una zona per tocar amb el dit.
     if (el.classList.contains('skip') || el.classList.contains('skip-link')) return;
-    // Els enllaços dins d'un paràgraf de text corregut no són botons: no s'hi
-    // aplica la regla dels 44 px i marcar-los només faria soroll.
-    if (el.tagName === 'A' && el.closest('p, li, figcaption, small')) return;
+    // Els enllaços dins d'un text corregut no són botons. La pauta de mida
+    // mínima de la WCAG 2.2 els exceptua expressament, i té sentit: donar 44 px
+    // d'alçada a un enllaç enmig d'una frase faria que la seva zona de toc es
+    // trepitgés amb la de la línia del costat, que és pitjor que deixar-lo
+    // petit. Es reconeixen perquè el seu contenidor porta text a banda de
+    // l'enllaç: «Instagram · cbgrupbarna.info · Dades oficials».
+    if (el.tagName === 'A') {
+      if (el.closest('p, li, figcaption, small')) return;
+      var pare = el.parentElement;
+      if (pare) {
+        var propi = '';
+        for (var k = 0; k < pare.childNodes.length; k++) {
+          if (pare.childNodes[k].nodeType === 3) propi += pare.childNodes[k].nodeValue;
+        }
+        if (propi.replace(/[\s·|,–—-]/g, '').length) return;
+      }
+    }
     out.push({ id: el.dataset.uxid, tag: el.tagName.toLowerCase(),
       text: (el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 45),
       w: Math.round(w), h: Math.round(h) });

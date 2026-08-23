@@ -143,7 +143,14 @@
     return TEXTOS[codi] || TEXTOS.ca;
   }
 
+  // Mentre la barra hi és, la pàgina ho diu amb una classe a l'arrel. Les
+  // peces fixes de baix —la barra d'accions del mòbil i el botó flotant de
+  // WhatsApp— s'esperen: apilar-hi dues barres tapava la crida a l'acció
+  // just el primer cop que algú entra, que és quan més importa.
+  var MARCA = 'cbgb-galetes-obertes';
+
   function tancar() {
+    document.documentElement.classList.remove(MARCA);
     if (!barra) return;
     barra.remove();
     barra = null;
@@ -182,6 +189,7 @@
     });
 
     document.body.appendChild(barra);
+    document.documentElement.classList.add(MARCA);
     barra.querySelector('[data-cbgb="si"]').focus();
   }
 

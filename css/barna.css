@@ -88,7 +88,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
 /* ==== FIL D'ARIADNA ==== */
 .crumb { font-family: var(--body); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); padding: 22px 0 0; }
-.crumb a { border-bottom: 1px solid transparent; transition: border-color 0.3s, color 0.3s; }
+/* Els enllaços de la molla feien 31×12 px de zona tocable, molt per sota dels
+   44 que demana la pauta del club. El `padding` amb el `margin` negatiu al
+   costat fa gran l'àrea que respon al dit sense moure ni un píxel del que es
+   veu: el text es queda exactament on era. */
+.crumb a { display: inline-block; padding: 16px 2px; margin: -16px 0; border-bottom: 1px solid transparent; transition: border-color 0.3s, color 0.3s; }
 .crumb a:hover { color: var(--red); border-color: var(--red); }
 
 /* ==== CAPÇAL DE PÀGINA ==== */
