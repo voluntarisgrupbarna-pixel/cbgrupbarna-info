@@ -238,3 +238,132 @@ servidor —només `<meta refresh>` o JavaScript, que passen molt pitjor l'autor
 la URL avui, amb el domini acabat d'estrenar i encara sense posicions guanyades, és
 regalar el poc que hi ha. Es podrà fer quan `/patrocinadors/` ja posicioni i valgui la
 pena arriscar-hi, i llavors amb redireccions per a totes les fitxes alhora.
+
+---
+
+## Preguntes freqüents · fase 1 del cercador que respon (23/08/2026)
+
+Des que el cercador ensenya la resposta i no només l'enllaç, **cada pregunta
+freqüent que s'escriu val el doble**: surt a Google com a `FAQPage` i el
+cercador del web la dona a l'instant, en el seu idioma. Per tant, la manera de
+fer el cercador més llest ja no és tocar codi.
+
+### D'on surt aquesta llista
+
+De comptar què hi ha. El web té **460 preguntes amb resposta** (219 en català),
+i estan molt ben repartides per identitat, escoleta, campus, femení,
+patrocinis i posicionament d'SEO. **El forat és un altre**: quan una família
+ja s'ha convençut i vol entrar, no hi ha res escrit. Nou pàgines de pes no
+tenen ni una sola pregunta:
+
+| Pàgina | Pes | Preguntes |
+|---|---|---|
+| `/partits/equips/` | 90 | 0 |
+| `/portes-obertes/` | 88 | 0 |
+| `/club/` | 84 | 0 |
+| `/fotos/` | 76 | 0 |
+| `/blog/`, `/historia/`, `/instal-lacions/`, `/organigrama/` | 72 | 0 |
+| `/documents/` | 70 | 0 |
+
+**La asimetria més cridanera és el preu.** El web diu que una setmana de campus
+val 195 €, la mitja jornada 160 € i la de Setmana Santa 150 €; diu que un
+patrocini d'equip són 500 €. Però a la pregunta «quant costa apuntar-se al
+club» —la primera que fa qualsevol família— l'única resposta que hi ha és
+*«cal contactar directament amb el club»*. Es publica el preu d'una setmana i
+no el de la temporada.
+
+### Bloc A · Diners i compromís — **cal decisió de l'Ana**
+
+Sis preguntes que no es poden escriure sense que algú digui el número. Són les
+més buscades i les úniques que avui fan abandonar la pàgina.
+
+1. Quant costa la temporada, per categoria?
+2. Què inclou la quota? (fitxa federativa, assegurança, equipació, pistes)
+3. Com es paga: un sol cop, mensual o trimestral? Es domicilia?
+4. Hi ha descompte per a germans?
+5. Hi ha ajuts o beques si una família no hi arriba?
+6. Què passa si ens hem de donar de baixa a mig any?
+
+> La 5 no és informació, és marca: un club que diu en veu alta que cap infant
+> es queda fora per diners diu una cosa que els seus veïns no diuen.
+
+**On van:** `/faq/` i, la 1 i la 2, també a `/escoleta/` i `/basquet-formatiu/`.
+
+### Bloc B · El primer dia → `/portes-obertes/`
+
+La pàgina amb més pes del web sense cap pregunta, i just la que llegeix qui
+està a punt de venir.
+
+7. Què he de portar el primer dia?
+8. Cal avisar abans o em puc presentar directament?
+9. Quants dies pot venir a provar?
+10. El meu fill no ha jugat mai. Hi encaixarà?
+11. Em puc quedar a mirar l'entrenament?
+
+### Bloc C · Quin equip li toca → `/basquet-formatiu/` i `/partits/equips/`
+
+Hi ha «Què vol dir Premini, Mini, Infantil, Cadet i Júnior?», que explica el
+vocabulari. Falta la resposta directa: *el meu fill del 2015, on va?*
+
+12. Quin equip li toca segons l'any de naixement?
+13. Qui decideix a quin equip va? Hi ha proves de nivell?
+14. Què vol dir equip A i equip B?
+15. Es pot canviar d'equip durant la temporada?
+16. Quants entrenaments a la setmana té cada categoria?
+
+### Bloc D · On és tot això → `/instal-lacions/`
+
+17. On és exactament la Nau del Clot i com s'hi arriba?
+18. A quines altres pistes entrena el club?
+19. Quin metro o bus hi va? Es pot aparcar?
+20. Les famílies poden entrar a veure els entrenaments?
+
+### Bloc E · La vida d'un equip — el que ningú ha escrit
+
+Això no és a cap pàgina i és el que més es pregunta pel WhatsApp del club.
+Anirien a `/faq/` i a `/partits/calendaris/`.
+
+21. Els partits són sempre en cap de setmana? Quants desplaçaments hi ha?
+22. Qui porta els nens als partits de fora?
+23. Com ens avisen si canvia una hora o una pista?
+24. Què passa si un dia no pot anar a entrenar?
+25. És compatible amb els estudis o amb una altra activitat?
+26. Cal revisió mèdica? Els jugadors estan assegurats?
+27. Què passa si es lesiona en un entrenament?
+
+### Bloc F · Equipació — **cal decisió de l'Ana** (preu)
+
+28. Quina equipació cal comprar i quant costa?
+29. On es compra i quan arriba?
+
+### Bloc G · Confiança → `/proteccio-menor/` i `/fotos/`
+
+El contingut de protecció del menor existeix, però escrit com a política de
+club. Falta escrit com el pregunta una mare.
+
+30. Els entrenadors i entrenadores tenen el certificat de delictes sexuals?
+31. Puc demanar que el meu fill no surti a les fotos del club?
+32. Amb qui parlo si tinc un problema amb un entrenador?
+
+### Bloc H · Qui és qui → `/club/` i `/organigrama/`
+
+33. Amb qui parlo de la meva categoria? (coordinador/a)
+34. Com puc ser voluntari o entrenador al club?
+
+### La regla, perquè serveixi de res
+
+Cada pregunta ha d'anar **a dos llocs alhora**: al `<details>` visible dins
+d'una secció `.faq` **i** al JSON-LD `FAQPage` de la mateixa pàgina. Si només
+va al `<details>`, ni Google ni el cercador del web la veuen. Els generadors
+ja ho fan bé; a les pàgines fetes a mà, cal recordar-ho.
+
+Després, `/es/` i `/en/`: el cercador ensenya la catalana a qui llegeix en
+castellà si no n'hi ha versió, però és un pedaç, no la solució.
+
+### Com sabrem si ha funcionat
+
+Les 34 d'aquesta llista portarien el web a prop de 500 preguntes en català. La
+prova real no és el número: és que `node tests/cerca/prova-motor.mjs` es pugui
+ampliar amb un cas per bloc —«quant costa la temporada», «què porto el primer
+dia», «el meu fill del 2015 a quin equip va»— i que totes tornin una resposta.
+Avui, cap de les tres en té.
