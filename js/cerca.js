@@ -144,11 +144,13 @@
     contacte: 'contacte contacto contact telefon telefono phone whatsapp mail correu email escriure hablar parlar',
     pista: 'pista pistes pavello pabellon poliesportiu polideportivo installacions instalaciones facilities gym gimnas adreca direccion address on donde where mapa arribar llegar',
     club: 'club qui som quienes somos about historia history 1965 anys aniversari junta directiva organigrama entrenador entrenadors coach coaches staff tecnic',
-    patrocini: 'patrocini patrocinis patrocinador patrocinadors patrocinio sponsor sponsors partner partners empresa empreses empresas publicitat colaborar collaborate',
+    patrocini: 'patrocini patrocinis patrocinar patrocinador patrocinadors patrocinio patrocinar sponsor sponsors sponsorship patrocinen partner partners empresa empreses empresas publicitat colaborar collaborate col.laborar',
     fotos: 'fotos foto fotografies fotografias photos gallery galeria imatges imagenes',
     documents: 'document documents documentos assegurança seguro insurance autoritzacio autorizacion certificat certificado proteccio proteccion protection menor',
     tresxtres: '3x3 3 x 3 tresxtres torneig torneo tournament glories westfield street',
     blog: 'blog article articles articulo noticies noticias news consells consejos tips guia guide',
+    premsa: 'premsa prensa press briefing kit dossier mitjans medios media periodista journalist entrevista logotip logo materials nota',
+    persones: 'julio torralba ainhoa lopez javier roger fornas mejia entrenador entrenadora president presidenta junta directiva coordinador coordinadora',
     edat: 'edat edad age anys anos years mini premini benjami infantil cadet junior senior sub categoria nen nena hijo hija fill filla nino'
   };
 
@@ -171,7 +173,9 @@
     fotos: ['/fotos/', '/galeria/'],
     documents: ['/documents/', '/proteccio-menor/'],
     tresxtres: ['/3x3/'],
-    blog: ['/blog/', '/premsa/'],
+    blog: ['/blog/'],
+    premsa: ['/briefing/', '/premsa/'],
+    persones: ['/organigrama/', '/club/', '/jugadors/'],
     edat: ['/basquet-formatiu/', '/partits/equips/']
   };
 
@@ -265,6 +269,7 @@
      4 · MOTOR
      ============================================================ */
   var index = null, carregant = null, preparat = null, preparatFaq = [], equivalents = {};
+  var pesFaq = {}, totalPreguntes = {}, pesPagina = {};
   var teTraduccio = function () { return false; };
   var traduccio = function () { return null; };
 
@@ -308,6 +313,27 @@
             r: normalitza(f.r)
           };
         });
+
+        // Quantes preguntes fan servir cada paraula. Serveix per saber què
+        // pesa: «qui» surt a dues-centes preguntes i no distingeix res;
+        // «president» surt a cap o a una i ho decideix tot.
+        pesFaq = {};
+        var totalFaq = {};
+        preparatFaq.forEach(function (d) {
+          var l = d.f.l;
+          totalFaq[l] = (totalFaq[l] || 0) + 1;
+          var vistes = {};
+          d.q.split(' ').forEach(function (w) {
+            if (!w || vistes[w]) return;
+            vistes[w] = 1;
+            (pesFaq[l] = pesFaq[l] || {})[w] = (pesFaq[l][w] || 0) + 1;
+          });
+        });
+        totalPreguntes = totalFaq;
+
+        // La importància de cada pàgina, que ja calcula el generador d'índex.
+        pesPagina = {};
+        dades.pagines.forEach(function (p) { pesPagina[p.u] = p.p; });
 
         preparat = dades.pagines.map(function (p) {
           var titol = normalitza(p.t);
@@ -474,6 +500,15 @@
      això hi ha un llindar, i per sota d'ell la resposta no surt
      encara que sigui la millor de les dolentes.
      ============================================================ */
+  // Mesurat amb tests/cerca/prova-contingut.mjs sobre 85 consultes reals.
+  // Es va provar de pujar-lo a 11,5 per matar les respostes fluixes i NO ES
+  // POT: les puntuacions se solapen. «Where do they train» és bona i fa 8,6;
+  // «quant val la temporada» és dolenta i fa 9,5. Pujar el llindar costava
+  // més respostes bones que dolentes.
+  //
+  // Qui separa les dues famílies són les regles d'aquí sota —el pes per
+  // raresa i la paraula clau obligatòria—, que miren l'estructura de la
+  // consulta. El llindar només fa de terra.
   var LLINDAR_FAQ = 9;
 
   /* Les interrogatives NO són paraules buides quan el que busques és una
@@ -481,9 +516,9 @@
      només per aquí. Per al text corrent sí que ho són, i per això la llista
      viu a part. */
   var INTERROGATIVES = {};
-  ('quan quant quanta quants quantes on com qui quina quines quin quins perque ' +
+  ('que quan quant quanta quants quantes on com qui quina quines quin quins perque ' +
    'cuando cuanto cuanta cuantos cuantas donde como quien cual cuales porque ' +
-   'when how where who what which why').split(' ').forEach(function (p) { INTERROGATIVES[p] = 1; });
+   'when how where who what which why whose').split(' ').forEach(function (p) { INTERROGATIVES[p] = 1; });
 
   /* «Club», «Barna» i «bàsquet» surten a gairebé totes les preguntes del web.
      Comptar-les fa que qualsevol consulta sembli que encaixa amb tot. */
@@ -496,6 +531,37 @@
       if (p.length < 2 || GENERIQUES[p]) return false;
       return INTERROGATIVES[p] || !BUIDES[p];
     });
+  }
+
+  /* El pes d'una paraula: 1 si no surt a cap pregunta, i cada vegada menys
+     com més comuna sigui. Els extrems importen més que la fórmula exacta. */
+  /* La paraula hi és, encara que estigui conjugada d'una altra manera?
+     «porto» i «portar» són la mateixa paraula per a qui pregunta, i la
+     distància d'edició no ho veu (hi ha dues lletres de diferència en una
+     paraula de cinc). Comparar l'arrel sí que ho veu, i no confon
+     «entrenador» amb «patrocinador», que és el que calia evitar. */
+  function teLArrel(camp, terme) {
+    if (terme.length < 4) return camp.indexOf(terme) >= 0;
+    var mots = camp.split(' ');
+    var quatre = terme.slice(0, 4), tres = terme.slice(0, 3);
+    for (var i = 0; i < mots.length; i++) {
+      var m = mots[i];
+      if (m.slice(0, 4) === quatre) return true;
+      // Amb tres lletres només si totes dues paraules són llargues: els
+      // verbs canvien d'arrel («empieza» / «empezar») i quatre lletres no
+      // ho veuen. Amb paraules curtes, tres lletres casaria qualsevol cosa.
+      if (m.length >= 6 && terme.length >= 6 && m.slice(0, 3) === tres) return true;
+    }
+    return false;
+  }
+
+  function pesTerme(t) {
+    var comptes = pesFaq[lang] || {};
+    var total = totalPreguntes[lang] || 1;
+    var df = comptes[t] || 0;
+    // Amb tolerància a faltes, una paraula pot no ser al corpus i ser bona:
+    // per això el mínim no és zero.
+    return Math.max(0.12, Math.log((total + 1) / (df + 1)) / Math.log(total + 1));
   }
 
   function cercaResposta(consulta, families) {
@@ -519,27 +585,65 @@
     var frase = termes.join(' ');
     var millors = [];
 
-    for (var i = 0; i < preparatFaq.length; i++) {
-      var d = preparatFaq[i], punts = 0, encerts = 0;
+    // El pes de cada paraula de la consulta: com més rara al corpus de
+    // preguntes, més decideix. Comptar les paraules a pes igual era el que
+    // feia que «qui és el president» respongués «Qui hi pot jugar?»: casava
+    // «qui», que no vol dir res, i es donava per satisfeta amb mitja
+    // consulta.
+    var pesos = termes.map(function (t) { return pesTerme(t); });
+    var pesTotal = pesos.reduce(function (a, b) { return a + b; }, 0) || 1;
 
+    // La paraula que fa que la consulta sigui aquesta i no una altra. Si no
+    // surt a la pregunta, no és la pregunta, per bé que casin les altres:
+    //   «quant VAL la TEMPORADA»  →  «Quant valen les cistelles al 3x3?»
+    //   «com em faig ENTRENADOR»  →  «Com em faig patrocinador?»
+    //   «quiero APUNTAR a mi hija» → «¿Puedo pedir que mi hija no salga…?»
+    // Totes tres casaven prou paraules per passar qualsevol llindar, i cap
+    // de les tres responia el que s'havia preguntat.
+    // Entre les paraules de debò: una de tres lletres pot ser rara al corpus
+    // («pel») i no vol dir res. Si no n'hi ha cap de prou llarga, la regla
+    // no s'aplica.
+    var rar = -1;
+    for (var z = 0; z < termes.length; z++) {
+      if (termes[z].length >= 4 && (rar < 0 || pesos[z] > pesos[rar])) rar = z;
+    }
+
+    for (var i = 0; i < preparatFaq.length; i++) {
+      var d = preparatFaq[i], punts = 0, encerts = 0, pesEncert = 0;
+
+      var teElRar = (termes.length < 2 || rar < 0) ? 2 : 0;
       for (var j = 0; j < termes.length; j++) {
         var t = termes[j], tol = tolerancia(t);
         var aQ = puntuaCamp(d.q, t, tol);
         var aR = aQ ? 0 : puntuaCamp(d.r, t, tol);
+        // Compta sobretot a la PREGUNTA: una resposta llarga acaba contenint
+        // qualsevol paraula i el filtre deixaria de filtrar. Però a la
+        // resposta també val, perquè hi ha preguntes que fan servir una
+        // paraula i responen amb una altra («no surti a les fotos» a la
+        // pregunta, «per treure una imatge» a la resposta).
+        if (j === rar) {
+          if (teLArrel(d.q, t)) teElRar = 2;
+          else if (teElRar !== 2 && teLArrel(d.r, t)) teElRar = 1;
+        }
         if (aQ || aR) {
           encerts++;
+          pesEncert += pesos[j];
           // puntuaCamp ja dona 1 a la paraula sencera i 0.8 a un principi de
           // paraula. Elevat al quadrat, la diferència entre encertar-la
           // («entrena») i quedar-s'hi a prop («entrenar») deixa de ser un
           // matís i decideix.
-          punts += aQ * aQ * 3.5 + aR * 0.7;
+          punts += (aQ * aQ * 3.5 + aR * 0.7) * pesos[j];
         }
       }
-      if (!encerts) continue;
+      if (!encerts || !teElRar) continue;
+      // Si la paraula clau només surt a la resposta i no a la pregunta, la
+      // parella és més fluixa: que ho hagi de compensar amb la resta.
+      if (teElRar === 1) punts *= 0.7;
 
-      // Cobertura: quina part del que s'ha escrit surt a la pregunta. Una
-      // pregunta que respon la meitat del que es demana no la respon.
-      var cobertura = encerts / termes.length;
+      // Cobertura pesada: no quantes paraules s'han trobat, sinó quina part
+      // del que la consulta té de distintiu. Trobar «qui» i no «president»
+      // és no haver trobat res.
+      var cobertura = pesEncert / pesTotal;
       if (cobertura < 0.5) continue;
       punts *= 0.6 + cobertura;
 
@@ -551,6 +655,13 @@
       // Una pregunta curta que conté tot el que s'ha demanat és més precisa
       // que una de llarga que ho conté de passada.
       punts += Math.max(0, 3 - d.q.split(' ').length / 8);
+
+      // D'on surt la resposta importa: la mateixa puntuació treta de /faq/ o
+      // de /escoleta/ val més que treta d'un article del blog, que sol
+      // parlar del bàsquet en general i no del club. Era el cas de «quant
+      // val la temporada», que responia amb quant valen les cistelles al
+      // 3x3, d'un article sobre les regles del 3x3.
+      punts *= 0.85 + (pesPagina[d.f.u] || 45) / 300;
 
       if (d.f.l === lang) punts *= 1.5;
       else if (teTraduccio(d.f.u, lang)) punts *= 0.35;
@@ -935,7 +1046,38 @@
     capa.addEventListener('click', function (e) {
       if (e.target.hasAttribute('data-tanca')) tanca();
     });
+    capa.addEventListener('keydown', atrapaFocus);
     return capa;
+  }
+
+  /* El focus no pot sortir d'una finestra modal: si en surt, qui va amb
+     teclat o amb lector de pantalla acaba navegant per la pàgina de sota
+     sense veure-la, i sense manera d'entendre on és. Ho va trobar
+     tests/cerca/prova-ux.mjs: catorze tabulacions i el focus era al body. */
+  function enfocables() {
+    return Array.prototype.filter.call(
+      capa.querySelectorAll('a[href], button, input, [tabindex]:not([tabindex="-1"])'),
+      function (e) {
+        return !e.hasAttribute('disabled') && e.offsetParent !== null;
+      });
+  }
+
+  function atrapaFocus(e) {
+    if (e.key !== 'Tab' || !capa || capa.hidden) return;
+    var llista = enfocables();
+    if (!llista.length) return;
+    var primer = llista[0], ultim = llista[llista.length - 1];
+    var actiu = document.activeElement;
+    if (!capa.contains(actiu)) {
+      e.preventDefault();
+      primer.focus();
+    } else if (e.shiftKey && actiu === primer) {
+      e.preventDefault();
+      ultim.focus();
+    } else if (!e.shiftKey && actiu === ultim) {
+      e.preventDefault();
+      primer.focus();
+    }
   }
 
   function obre(text) {
