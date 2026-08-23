@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0A0908">
+<meta name="theme-color" content="#10100E">
 <title>CB Grup Barna · Des de 1965 · Model Català</title>
 <meta name="description" content="Presentació institucional del CB Grup Barna: bàsquet i valors des de 1965 al Poblenou i el Clot.">
 <meta name="keywords" content="CB Grup Barna presentació, bàsquet des de 1965 Clot, model català bàsquet, presentació institucional club bàsquet Barcelona">
@@ -21,9 +21,7 @@
 <link rel="icon" href="/logo.png">
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fonts.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -63,8 +61,8 @@
     --ground:#060606; --panel:#111111; --cream:#191919; --paper:#111111;
     --line:rgba(255,255,255,.15);
     --shadow:0 30px 70px -34px rgba(0,0,0,.95);
-    --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
-    --body:'Inter',system-ui,-apple-system,sans-serif;
+    --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --ease:cubic-bezier(.22,1,.36,1);
   }
   :root[data-theme="light"]{
@@ -87,7 +85,7 @@
   .lab{font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
 
   /* HEADER · capçalera fosca constant, com a la resta de pàgines interiors */
-  .head{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}
+  .head{position:sticky;top:0;z-index:100;background:rgba(16,16,14,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}
   .head-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);height:60px;display:flex;align-items:center;gap:24px}
   .head-brand{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#fff;flex-shrink:0}
   .head-brand img{width:26px;height:26px}
@@ -139,7 +137,7 @@
   .hero-bg{position:absolute;inset:0}
   .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center top}
   .hero-bg::after{content:'';position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(10,9,8,.42) 0%,rgba(10,9,8,.58) 48%,rgba(10,9,8,.94) 84%,#0A0908 100%)}
+    background:linear-gradient(180deg,rgba(16,16,14,.42) 0%,rgba(16,16,14,.58) 48%,rgba(16,16,14,.94) 84%,#10100E 100%)}
   .hero-glow{position:absolute;left:50%;top:46%;width:min(900px,120vw);aspect-ratio:1;transform:translate(-50%,-50%);
     background:radial-gradient(circle,rgba(226,6,19,.32) 0%,rgba(226,6,19,.1) 38%,transparent 68%);pointer-events:none;z-index:1}
   .hero-in{position:relative;z-index:2;text-align:center;width:100%;padding:90px 0 46px}
@@ -285,7 +283,7 @@
   .btn.ghost:hover{border-color:var(--red);color:var(--red)}
 
   /* FOOTER · fosc constant, com a la resta del lloc */
-  .foot{background:#0A0A0A;color:#F5F5F5;border-top:1px solid rgba(255,255,255,.1);padding:50px 0 30px}
+  .foot{background:#10100E;color:#F5F5F5;border-top:1px solid rgba(255,255,255,.1);padding:50px 0 30px}
   .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;margin-bottom:34px}
   .foot-col h3{font-family:var(--display);font-weight:400;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px}
   .foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px}
@@ -306,7 +304,7 @@
        classe per al seu peu i desapareixeria. */
     .head,.idx,.crumb,.skip,.btn-row,.sponsor-note,footer.foot,.cbgb-gal{display:none!important}
     .rv{opacity:1!important;transform:none!important}
-    html,body{background:#0A0908!important;font-size:13px}
+    html,body{background:#10100E!important;font-size:13px}
     .wrap{max-width:none;padding:0 62px}
     .sec{padding:0}
 
@@ -815,7 +813,7 @@
     lbl.textContent = (mode==='light') ? 'Mode clar' : 'Mode fosc';
     btn.setAttribute('title', (mode==='light') ? 'Canviar a mode fosc' : 'Canviar a mode clar');
     var meta=document.querySelector('meta[name="theme-color"]');
-    if(meta) meta.setAttribute('content', mode==='light'?'#F4F1EC':'#0A0908');
+    if(meta) meta.setAttribute('content', mode==='light'?'#F4F1EC':'#10100E');
   }
   btn.addEventListener('click',function(){
     var next = current()==='light' ? 'dark' : 'light';

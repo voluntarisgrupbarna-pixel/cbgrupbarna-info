@@ -253,15 +253,15 @@
       `;
       cta.innerHTML = `
         <div style="font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;
-          color:rgba(242,237,230,.45);margin-bottom:.85rem;font-family:'Outfit',sans-serif;">
+          color:rgba(244,241,236,.45);margin-bottom:.85rem;font-family:'Inter',sans-serif;">
           La veu ha acabat
         </div>
         <button onclick="skipAll()" style="
-          background:#C8102E;border:none;color:#F2EDE6;
-          padding:1rem 2.4rem;font-family:'Outfit',sans-serif;
+          background:#E20613;border:none;color:#F4F1EC;
+          padding:1rem 2.4rem;font-family:'Inter',sans-serif;
           font-size:.72rem;font-weight:500;letter-spacing:.25em;
           text-transform:uppercase;cursor:pointer;
-          box-shadow:0 0 28px rgba(200,16,46,.45);
+          box-shadow:0 0 28px rgba(226,6,19,.45);
           transition:all .3s ease;animation:ctaPulse 2.4s ease-in-out infinite;
         " onmouseover="this.style.transform='scale(1.04)'"
            onmouseout="this.style.transform='scale(1)'">
@@ -270,8 +270,8 @@
         <div style="margin-top:1rem;">
           <a onclick="skipAll()" style="
             font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;
-            color:rgba(242,237,230,.3);cursor:pointer;text-decoration:underline;
-            font-family:'Outfit',sans-serif;
+            color:rgba(244,241,236,.3);cursor:pointer;text-decoration:underline;
+            font-family:'Inter',sans-serif;
           ">Saltar a la web →</a>
         </div>
       `;
@@ -330,9 +330,9 @@
         const b = document.getElementById('btn-' + k);
         if (!b) return;
         const active = (k === type);
-        b.style.background    = active ? '#C8102E' : 'transparent';
-        b.style.color         = active ? '#F2EDE6' : 'rgba(242,237,230,.4)';
-        b.style.border        = active ? 'none'   : '1px solid rgba(242,237,230,.15)';
+        b.style.background    = active ? '#E20613' : 'transparent';
+        b.style.color         = active ? '#F4F1EC' : 'rgba(244,241,236,.4)';
+        b.style.border        = active ? 'none'   : '1px solid rgba(244,241,236,.15)';
       });
       const tn = document.getElementById('trackName');
       const tt = document.getElementById('trackType');

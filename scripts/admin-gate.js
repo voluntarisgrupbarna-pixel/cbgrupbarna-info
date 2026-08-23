@@ -113,10 +113,10 @@
 
       var fontLink = document.createElement('link');
       fontLink.rel = 'stylesheet';
-      fontLink.href = 'https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Inter:wght@300;400;500;600&display=swap';
+      fontLink.href = '/css/fonts.css';
       document.head.appendChild(fontLink);
 
-      var gate = el('div', 'position:fixed;inset:0;z-index:99999;background:#ffffff;display:flex;align-items:center;justify-content:center;padding:2rem;font-family:Inter,-apple-system,system-ui,sans-serif;font-weight:300;color:#0a0a0a');
+      var gate = el('div', 'position:fixed;inset:0;z-index:99999;background:#ffffff;display:flex;align-items:center;justify-content:center;padding:2rem;font-family:Inter,-apple-system,system-ui,sans-serif;font-weight:300;color:#10100E');
       gate.id = 'cbgb-pgate';
 
       var box = el('div', 'text-align:center;max-width:360px;width:100%');
@@ -127,13 +127,13 @@
       box.appendChild(el('p', 'color:#46433f;font-size:.85rem;margin:.6rem 0 1.75rem', 'Introdueix la contrasenya del club per continuar.'));
 
       var form = el('form', 'display:flex;flex-direction:column;gap:.75rem');
-      var input = el('input', 'width:100%;background:#f6f4f1;border:1px solid #e4e1dd;color:#0a0a0a;padding:.75rem .9rem;font-family:Inter,sans-serif;font-size:.95rem;outline:none;text-align:center;letter-spacing:.04em');
+      var input = el('input', 'width:100%;background:#F4F1EC;border:1px solid #e4e1dd;color:#10100E;padding:.75rem .9rem;font-family:Inter,sans-serif;font-size:.95rem;outline:none;text-align:center;letter-spacing:.04em');
       input.type = 'password';
       input.placeholder = 'Contrasenya';
       input.autocomplete = 'current-password';
       form.appendChild(input);
 
-      var btn = el('button', 'width:100%;background:#0a0a0a;border:1px solid #0a0a0a;color:#fff;padding:.75rem 1rem;font-family:Jost,sans-serif;font-size:10px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer', 'Entrar');
+      var btn = el('button', 'width:100%;background:#10100E;border:1px solid #10100E;color:#fff;padding:.75rem 1rem;font-family:Jost,sans-serif;font-size:10px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer', 'Entrar');
       btn.type = 'submit';
       form.appendChild(btn);
 
@@ -142,7 +142,7 @@
 
       box.appendChild(form);
       box.appendChild(err);
-      box.appendChild(el('p', 'font-family:Jost,sans-serif;color:#8a8681;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-top:2rem;line-height:1.6',
+      box.appendChild(el('p', 'font-family:Jost,sans-serif;color:#6B6560;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-top:2rem;line-height:1.6',
         'Accés reservat a l\'equip del CB Grup Barna.'));
 
       gate.appendChild(box);

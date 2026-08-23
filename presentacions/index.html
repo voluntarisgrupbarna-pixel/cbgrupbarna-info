@@ -21,9 +21,7 @@
 <link rel="icon" href="/logo.png">
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fonts.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -63,8 +61,8 @@
     --ground:#060606; --panel:#111111; --cream:#191919; --paper:#111111;
     --line:rgba(255,255,255,.15);
     --shadow:0 30px 70px -34px rgba(0,0,0,.95);
-    --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
-    --body:'Inter',system-ui,-apple-system,sans-serif;
+    --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --ease:cubic-bezier(.22,1,.36,1);
   }
   :root[data-theme="light"]{
@@ -86,7 +84,7 @@
   .skip:focus{left:16px;top:16px;background:var(--red-solid);color:#fff;padding:10px 16px;z-index:999}
   .lab{font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
 
-  .head{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}
+  .head{position:sticky;top:0;z-index:100;background:rgba(16,16,14,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}
   .head-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);height:60px;display:flex;align-items:center;gap:24px}
   .head-brand{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#fff;flex-shrink:0}
   .head-brand img{width:26px;height:26px}
@@ -149,7 +147,7 @@
   .btn.ghost{border:1px solid var(--ink);color:var(--ink)}
   .btn.ghost:hover{border-color:var(--red);color:var(--red)}
 
-  .foot{background:#0A0A0A;color:#F5F5F5;border-top:1px solid rgba(255,255,255,.1);padding:50px 0 30px}
+  .foot{background:#10100E;color:#F5F5F5;border-top:1px solid rgba(255,255,255,.1);padding:50px 0 30px}
   .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;margin-bottom:34px}
   .foot-col h3{font-family:var(--display);font-weight:400;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px}
   .foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px}
@@ -408,7 +406,7 @@
     lbl.textContent = (mode==='light') ? 'Mode clar' : 'Mode fosc';
     btn.setAttribute('title', (mode==='light') ? 'Canviar a mode fosc' : 'Canviar a mode clar');
     var meta=document.querySelector('meta[name="theme-color"]');
-    if(meta) meta.setAttribute('content', mode==='light'?'#F4F1EC':'#0A0908');
+    if(meta) meta.setAttribute('content', mode==='light'?'#F4F1EC':'#10100E');
   }
   btn.addEventListener('click',function(){
     var next = current()==='light' ? 'dark' : 'light';

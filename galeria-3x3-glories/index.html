@@ -142,15 +142,10 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../logo.png">
 <link rel="shortcut icon" href="../logo.png">
 <!-- Preload + DNS prefetch -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="dns-prefetch" href="//fonts.googleapis.com">
-<link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link rel="dns-prefetch" href="//www.flickr.com">
 <link rel="dns-prefetch" href="//live.staticflickr.com">
 <link rel="dns-prefetch" href="//script.google.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fonts.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -159,12 +154,12 @@ input,button{font-family:inherit}
 input::placeholder{color:#383838}
 input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgba(226,6,19,.12)!important}
 @keyframes spin   {to{transform:rotate(360deg)}}
-@keyframes pulse  {0%,100%{opacity:1;box-shadow:0 0 10px #00FF57}50%{opacity:.4;box-shadow:0 0 3px #00FF57}}
+@keyframes pulse  {0%,100%{opacity:1;box-shadow:0 0 10px #E20613}50%{opacity:.4;box-shadow:0 0 3px #E20613}}
 @keyframes fadeUp {from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes glow   {0%,100%{text-shadow:0 0 40px rgba(226,6,19,.35)}50%{text-shadow:0 0 80px rgba(226,6,19,.65)}}
 @keyframes fadeIn {from{opacity:0}to{opacity:1}}
 .animate-in{animation:fadeUp .4s ease both}
-.btn-green:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(0,255,87,.6)!important}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(226,6,19,.6)!important}
 .btn-green:active{transform:translateY(0)}
 .btn-ig{width:100%;padding:16px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;font-size:15px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;transition:transform .15s;display:flex;align-items:center;justify-content:center;gap:10px}
 .btn-ig:hover{transform:translateY(-2px);filter:brightness(1.1)}
@@ -207,8 +202,8 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
   <!-- overlay vermell fosc -->
   <div aria-hidden="true" style="position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 0%,rgba(226,6,19,.22) 0%,rgba(7,7,7,.72) 55%,rgba(7,7,7,.88) 100%)"></div>
 
-  <div class="animate-in" style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,255,87,.08);border:1px solid rgba(0,255,87,.28);border-radius:999px;padding:6px 18px;font-size:11px;font-weight:700;letter-spacing:.1em;color:#00FF57;text-transform:uppercase;margin-bottom:26px;z-index:1">
-    <span style="width:7px;height:7px;border-radius:50%;background:#00FF57;animation:pulse 2s infinite;display:inline-block"></span>
+  <div class="animate-in" style="display:inline-flex;align-items:center;gap:8px;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.28);border-radius:999px;padding:6px 18px;font-size:11px;font-weight:700;letter-spacing:.1em;color:#E20613;text-transform:uppercase;margin-bottom:26px;z-index:1">
+    <span style="width:7px;height:7px;border-radius:50%;background:#E20613;animation:pulse 2s infinite;display:inline-block"></span>
     Galeria oficial · 3a edició 2026
   </div>
 
@@ -314,7 +309,7 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
       <span>📷</span> Obrir Instagram → @cbgrupbarna
     </button>
     <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;text-align:left;margin-top:22px;margin-bottom:8px">
-      <input type="checkbox" id="follow-check" style="margin-top:3px;width:18px;height:18px;accent-color:#00FF57;cursor:pointer;flex-shrink:0">
+      <input type="checkbox" id="follow-check" style="margin-top:3px;width:18px;height:18px;accent-color:#E20613;cursor:pointer;flex-shrink:0">
       <span style="font-size:13px;color:#aaa;line-height:1.5">
         Ja segueixo <strong style="color:#fff">@cbgrupbarna</strong> i vull accedir a les fotos
       </span>
@@ -337,13 +332,13 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
 
 <!-- ── LOADING ─────────────────────────────────────── -->
 <div id="view-loading" style="min-height:100vh;background:#070707;display:flex;flex-direction:column;align-items:center;justify-content:center">
-  <div style="width:52px;height:52px;border-radius:50%;border:3px solid #1a1a1a;border-top-color:#00FF57;animation:spin .8s linear infinite;margin-bottom:20px"></div>
+  <div style="width:52px;height:52px;border-radius:50%;border:3px solid #1a1a1a;border-top-color:#E20613;animation:spin .8s linear infinite;margin-bottom:20px"></div>
   <p style="font-size:12px;color:#555;letter-spacing:.18em;font-weight:700;text-transform:uppercase">Accedint a la galeria…</p>
 </div>
 
 <!-- ── GALLERY ─────────────────────────────────────── -->
 <div id="view-gallery" style="min-height:100vh;background:#070707;display:flex;flex-direction:column">
-  <header class="g-header" style="background:#0f0f0f;border-bottom:1px solid #1a1a1a;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100">
+  <header class="g-header" style="background:#10100E;border-bottom:1px solid #1a1a1a;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100">
     <div style="display:flex;align-items:center;gap:12px">
       <span style="background:#E20613;color:#fff;border-radius:7px;padding:4px 11px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase">3a Edició · 2026</span>
       <div>
@@ -353,23 +348,23 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
     </div>
     <div class="g-stats" style="display:flex;gap:20px">
       <div style="text-align:center">
-        <div style="font-size:18px;font-weight:900;color:#00FF57;line-height:1">522</div>
+        <div style="font-size:18px;font-weight:900;color:#E20613;line-height:1">522</div>
         <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-top:2px">Fotos</div>
       </div>
       <div style="text-align:center">
-        <div style="font-size:18px;font-weight:900;color:#00FF57;line-height:1">6 & 7</div>
+        <div style="font-size:18px;font-weight:900;color:#E20613;line-height:1">6 & 7</div>
         <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-top:2px">Juny 2026</div>
       </div>
     </div>
   </header>
   <div style="flex:1;position:relative;overflow:hidden;min-height:calc(100vh - 110px)">
     <iframe id="flickr-frame"
-      style="position:absolute;top:0;left:0;width:100%;height:calc(100% + 52px);border:none;background:#0a0a0a"
+      style="position:absolute;top:0;left:0;width:100%;height:calc(100% + 52px);border:none;background:#10100E"
       title="3×3 Westfield Glòries 2026 — Galeria Fotogràfica Oficial"
       allowfullscreen loading="lazy">
     </iframe>
   </div>
-  <footer style="background:#0f0f0f;border-top:1px solid #1a1a1a;padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap">
+  <footer style="background:#10100E;border-top:1px solid #1a1a1a;padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap">
     <span style="font-size:11px;font-weight:700;color:#444;letter-spacing:.15em;text-transform:uppercase">Westfield Glòries</span>
     <span style="color:#444;font-size:13px;font-weight:300">-</span>
     <span style="font-size:11px;font-weight:700;color:#444;letter-spacing:.15em;text-transform:uppercase">Grup Barna</span>
@@ -403,7 +398,7 @@ function validateGate() {
   const btn     = document.getElementById('gate-btn');
   if (valid) {
     btn.className = 'btn-green';
-    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#00FF57;color:#000;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(0,255,87,.35)';
+    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#E20613;color:#000;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(226,6,19,.35)';
     btn.textContent = '📧 Subscriure\'m i accedir a les fotos →';
   } else {
     btn.className = '';
@@ -432,7 +427,7 @@ document.getElementById('follow-check').addEventListener('change', function() {
   const btn = document.getElementById('follow-btn');
   if (this.checked) {
     btn.className = 'btn-green';
-    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#00FF57;color:#000;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(0,255,87,.35)';
+    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#E20613;color:#000;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(226,6,19,.35)';
     btn.textContent = '📸 Accedir a la Galeria →';
   } else {
     btn.className = '';

@@ -34,23 +34,21 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="CBGB Matches">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fonts.css">
 <style>
 :root {
   /* Sistema visual CB Grup Barna — només 3 colors de marca */
-  --red: #E63329;          /* identitat, emoció */
-  --red-ink: #B7231B;      /* text vermell sobre crema, contrast AA */
-  --ink: #0E1116;          /* negre premium */
+  --red: #E20613;          /* identitat, emoció */
+  --red-ink: #A8040E;      /* text vermell sobre crema, contrast AA */
+  --ink: #10100E;          /* negre premium */
   --cream: #F4F1EC;        /* crema, el que trenca el bloc */
   --paper: #FFFFFF;
-  --border: rgba(14,17,22,0.12);
-  --border-soft: rgba(14,17,22,0.07);
-  --text: #0E1116;
+  --border: rgba(16,16,14,0.12);
+  --border-soft: rgba(16,16,14,0.07);
+  --text: #10100E;
   --muted: #6B6560;
   --win: #1B7F4B;          /* semàntic, no és color de marca */
-  --loss: #B7231B;
+  --loss: #A8040E;
   --gold: #B58900;
   /* compatibilitat amb noms antics */
   --black: #F4F1EC;
@@ -58,7 +56,7 @@
   --panel2: #EFEBE4;
   --green: #1B7F4B;
   --yellow: #B58900;
-  --blue: #B7231B;
+  --blue: #A8040E;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -88,7 +86,7 @@ a { color:inherit; }
 /* ===== HEADER ===== */
 header {
   text-align:center; padding: 26px 16px 10px;
-  background: linear-gradient(180deg, rgba(230,51,41,0.10), transparent 78%);
+  background: linear-gradient(180deg, rgba(226,6,19,0.10), transparent 78%);
 }
 header img { width:64px; height:64px; }
 h1 { font-family:'Anton', sans-serif; letter-spacing:-0.5px; font-size: clamp(32px, 8vw, 44px); letter-spacing:1.5px; line-height:1; margin-top:6px; }
@@ -139,10 +137,10 @@ h1 span { color: var(--red); }
 .tb-admin:hover { background:var(--red); }
 /* acabats més suaus i airejats */
 .match, .team-row, .g-box, .winners, .stat, .tile { border-radius:16px; }
-.match { padding:16px; margin-bottom:12px; box-shadow:0 1px 2px rgba(14,17,22,.04); }
-.team-row { padding:14px 16px; margin-bottom:10px; box-shadow:0 1px 2px rgba(14,17,22,.04); transition:.15s; }
-.team-row:hover { border-color:rgba(230,51,41,.35); transform:translateY(-1px); }
-.g-box { padding:22px; margin-bottom:16px; box-shadow:0 1px 2px rgba(14,17,22,.04); }
+.match { padding:16px; margin-bottom:12px; box-shadow:0 1px 2px rgba(16,16,14,.04); }
+.team-row { padding:14px 16px; margin-bottom:10px; box-shadow:0 1px 2px rgba(16,16,14,.04); transition:.15s; }
+.team-row:hover { border-color:rgba(226,6,19,.35); transform:translateY(-1px); }
+.g-box { padding:22px; margin-bottom:16px; box-shadow:0 1px 2px rgba(16,16,14,.04); }
 .tab { transition:.15s; }
 .chip { transition:.12s; }
 .sec-t { margin:26px 0 12px; }
@@ -176,7 +174,7 @@ h1 span { color: var(--red); }
 }
 .wk-today {
   width:100%; margin-bottom:12px; padding:8px; border-radius:10px;
-  background:rgba(227,30,36,0.12); border:1px dashed rgba(227,30,36,0.45);
+  background:rgba(226,6,19,0.12); border:1px dashed rgba(226,6,19,0.45);
   color:var(--red); font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1.2px; text-transform:uppercase;
 }
 
@@ -184,7 +182,7 @@ h1 span { color: var(--red); }
 .chips { display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:8px; scrollbar-width:none; }
 .seg { display:flex; gap:4px; background:var(--panel2); border-radius:99px; padding:4px; margin-bottom:10px; }
 .seg button { flex:1; border-radius:99px; padding:9px 10px; font-size:12.5px; font-weight:700; color:var(--muted); transition:.15s; }
-.seg button.on { background:var(--paper); color:var(--ink); box-shadow:0 1px 3px rgba(14,17,22,.10); }
+.seg button.on { background:var(--paper); color:var(--ink); box-shadow:0 1px 3px rgba(16,16,14,.10); }
 .m-rival { margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); font-size:12px; }
 .m-rival b { color:var(--ink); }
 .m-rival .r-tit { font-size:9.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
@@ -221,8 +219,8 @@ h1 span { color: var(--red); }
   font-family:'Inter', sans-serif; font-size:8.5px; letter-spacing:1px; font-weight:700;
   padding:3px 8px; border-radius:99px; text-transform:uppercase;
 }
-.m-badge.casa { background:rgba(230,51,41,0.14); color:var(--red-ink); }
-.m-badge.fora { background:rgba(14,17,22,0.07); color:var(--muted); }
+.m-badge.casa { background:rgba(226,6,19,0.14); color:var(--red-ink); }
+.m-badge.fora { background:rgba(16,16,14,0.07); color:var(--muted); }
 .m-eq { margin-left:auto; font-family:'Inter', sans-serif; font-size:9px; letter-spacing:0.8px; color:var(--muted); text-transform:uppercase; }
 .m-teams { display:flex; align-items:center; gap:10px; }
 .m-t { flex:1; font-weight:600; font-size:14px; line-height:1.25; }
@@ -241,7 +239,7 @@ h1 span { color: var(--red); }
 .m-loc a {
   flex-shrink:0; text-decoration:none; white-space:nowrap;
   font-family:'Inter', sans-serif; font-size:9px; letter-spacing:0.8px;
-  color:var(--red-ink); border:1px solid rgba(230,51,41,0.30); padding:4px 9px; border-radius:99px;
+  color:var(--red-ink); border:1px solid rgba(226,6,19,0.30); padding:4px 9px; border-radius:99px;
 }
 .m-cat { font-family:'Inter', sans-serif; font-size:8.5px; letter-spacing:0.8px; color:var(--muted); text-transform:uppercase; margin-top:8px; }
 .m-edit { display:flex; align-items:center; gap:8px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); }
@@ -286,7 +284,7 @@ h1 span { color: var(--red); }
 .team-row .rec { font-family:'Anton', sans-serif; font-size:19px; letter-spacing:1px; text-align:right; }
 .team-row .rec small { display:block; font-family:'Inter', sans-serif; font-size:8px; letter-spacing:0.6px; color:var(--muted); }
 .dots { display:flex; gap:3px; margin-top:4px; }
-.dot { width:8px; height:8px; border-radius:50%; background:rgba(14,17,22,0.10); }
+.dot { width:8px; height:8px; border-radius:50%; background:rgba(16,16,14,0.10); }
 .dot.w { background:var(--win); } .dot.l { background:var(--loss); }
 .streak { font-size:11px; font-weight:700; margin-top:3px; }
 .streak.hot { color:var(--red-ink); }
@@ -326,12 +324,12 @@ h1 span { color: var(--red); }
   font-family:'Anton', sans-serif; font-size:15px; letter-spacing:1px;
 }
 .g-btn.ghost { background:var(--panel2); border:1px solid var(--border); color:var(--ink); }
-.g-btn.warn { background:transparent; border:1px solid rgba(230,51,41,0.4); color:var(--red-ink); }
+.g-btn.warn { background:transparent; border:1px solid rgba(226,6,19,0.4); color:var(--red-ink); }
 .drop {
-  border:2px dashed rgba(14,17,22,0.16); border-radius:14px; padding:26px 14px;
+  border:2px dashed rgba(16,16,14,0.16); border-radius:14px; padding:26px 14px;
   text-align:center; color:var(--muted); font-size:12px; transition:all .15s;
 }
-.drop.over { border-color:var(--red); background:rgba(227,30,36,0.06); color:var(--red-ink); }
+.drop.over { border-color:var(--red); background:rgba(226,6,19,0.06); color:var(--red-ink); }
 .g-log { font-family:'Inter', sans-serif; font-size:10px; color:var(--win); margin-top:10px; white-space:pre-wrap; line-height:1.7; }
 /* ===== CARTELLS ===== */
 .c-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
@@ -370,7 +368,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   background: rgba(244,241,236,0.96); backdrop-filter: blur(10px);
   border-top: 1px solid var(--border);
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  box-shadow: 0 -2px 14px rgba(14,17,22,.06);
+  box-shadow: 0 -2px 14px rgba(16,16,14,.06);
 }
 .bottomnav-in { display: flex; }
 .bn-item {
@@ -404,7 +402,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   <img src="/logo.png" alt="CB Grup Barna crest">
   <h1>Matches <span>&amp;</span> Results</h1>
   <div class="head-tag">The biggest basketball club in Barcelona · 2026-2027 Season · #SomClot</div>
-  <br><a class="back" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="border:1px solid rgba(227,30,36,.45);border-radius:99px;padding:6px 14px;margin-top:8px;color:#E31E24">📸 FOLLOW @CBGRUPBARNA</a>
+  <br><a class="back" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="border:1px solid rgba(226,6,19,.45);border-radius:99px;padding:6px 14px;margin-top:8px;color:#E20613">📸 FOLLOW @CBGRUPBARNA</a>
   <br><button class="back" id="pwa-btn" style="display:none;border:1px solid var(--border);border-radius:99px;padding:6px 14px;margin-top:8px">📲 INSTALL THE APP ON YOUR PHONE</button>
 </header>
 
@@ -574,7 +572,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       <button class="g-btn" id="g-unlock">Entrar</button></details>
     </div>
     <div id="g-open" style="display:none">
-      <div class="g-box" style="background:linear-gradient(135deg,rgba(230,51,41,.10),var(--paper) 60%);border-color:rgba(230,51,41,.30)">
+      <div class="g-box" style="background:linear-gradient(135deg,rgba(226,6,19,.10),var(--paper) 60%);border-color:rgba(226,6,19,.30)">
         <h3>🗓️ La rutina del cap de setmana</h3>
         <p><b>1.</b> Dijous, comprovar que hi ha tots els partits · <b>2.</b> Generar el cartell de la jornada i els game days ·
         <b>3.</b> Dissabte i diumenge, posar els resultats · <b>4.</b> Diumenge a la nit, publicar la menció als guanyadors
@@ -647,7 +645,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 <button class="edit-pill" id="edit-pill">✏️ MANAGEMENT MODE ON · EXIT</button>
 
 <footer>
-  <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="display:inline-block;background:#E31E24;color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font-family:'Anton',sans-serif;font-size:16px;letter-spacing:1px;margin-bottom:14px">📸 FOLLOW THE BARNA ON INSTAGRAM</a><br>
+  <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="display:inline-block;background:#E20613;color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font-family:'Anton',sans-serif;font-size:16px;letter-spacing:1px;margin-bottom:14px">📸 FOLLOW THE BARNA ON INSTAGRAM</a><br>
   <a href="/en/" style="color:#8a8a8a;text-decoration:none">CB GRUP BARNA · BASKETBALL IN EL CLOT SINCE 1965</a><br>
   Data: FCBQ · basquetcatala.cat/club/24
 </footer>
@@ -870,7 +868,7 @@ function previsioPartit(p, m) {
 }
 function avisModificacio(p) {
   if (!p.avis || p.avis.expira < todayStr()) return '';
-  return `<div style="margin-top:8px;padding:8px 10px;background:rgba(230,51,41,.10);border:1px solid rgba(230,51,41,.30);border-radius:10px;font-size:11.5px;color:var(--red-ink)">
+  return `<div style="margin-top:8px;padding:8px 10px;background:rgba(226,6,19,.10);border:1px solid rgba(226,6,19,.30);border-radius:10px;font-size:11.5px;color:var(--red-ink)">
     ✏️ <b>CHANGED</b> on ${fmtDia(p.avis.detectat).toLowerCase()} · ${p.avis.resum}</div>`;
 }
 function matchCard(p, m, showDate) {
@@ -931,7 +929,7 @@ function renderCanvisBanner() {
     `<li>${it.equip} vs ${it.rival}: <b>${it.camp}</b> ${it.abans!=='—' ? `${it.abans} → ` : ''}${it.despres}</li>`
   ).join('');
   el.innerHTML = `
-  <div style="margin-bottom:14px;padding:12px 14px;background:rgba(230,51,41,.08);border:1px solid rgba(230,51,41,.25);border-radius:14px;font-size:12.5px;color:var(--ink)">
+  <div style="margin-bottom:14px;padding:12px 14px;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.25);border-radius:14px;font-size:12.5px;color:var(--ink)">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
       <b>📣 The FCBQ robot has detected ${items.length} schedule change${items.length===1?'':'s'}</b>
       <button onclick="marcarCanvisVistos()" style="border:none;background:none;color:var(--red-ink);font-size:12px;cursor:pointer;text-decoration:underline">Got it</button>
@@ -1016,7 +1014,7 @@ function renderResultats() {
   document.getElementById('millors-box').innerHTML = enRatxa.length ? `<div class="winners" style="background:linear-gradient(135deg,rgba(34,197,94,.10),var(--panel) 60%);border-color:rgba(34,197,94,.35)">
     <h3 style="color:var(--green)">🔥 Teams on the best run right now</h3>
     ${enRatxa.map(({e,s})=>`<div class="wrow">${e.emoji||'🏀'} ${e.nom}<small>${s.streak} wins in a row · ${s.w}-${s.l}</small></div>`).join('')}
-    <a class="g-btn" style="text-decoration:none;background:#E31E24" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">📸 Follow them at @cbgrupbarna</a>
+    <a class="g-btn" style="text-decoration:none;background:#E20613" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">📸 Follow them at @cbgrupbarna</a>
   </div>` : '';
   document.getElementById('ratxes-list').innerHTML = rows.map(({e,s})=>{
     let stk = '<span class="streak">No matches played</span>';
@@ -1778,11 +1776,11 @@ async function genCartell() {
   cv.width = W; cv.height = H;
   const S = H / 1350;                    // escala respecte al disseny original
   const px = n => Math.round(n * S);     // mides tipogràfiques proporcionals
-  const RED='#E63329', INK='#0E1116', CREAM='#F4F1EC', WHITE='#ffffff';
+  const RED='#E20613', INK='#10100E', CREAM='#F4F1EC', WHITE='#ffffff';
   const mode = document.getElementById('c-bgm').value || 'cream';
   const BG   = mode==='red' ? RED : mode==='ink' ? INK : CREAM;      // fons de la peça
   const FG   = mode==='cream' ? INK : WHITE;                          // tinta principal
-  const FG2  = mode==='cream' ? 'rgba(14,17,22,.60)' : 'rgba(255,255,255,.68)';
+  const FG2  = mode==='cream' ? 'rgba(16,16,14,.60)' : 'rgba(255,255,255,.68)';
   const ACC  = mode==='red' ? INK : RED;                              // accent
   const BAR  = mode==='red' ? INK : RED;                              // franja de peu
   const BART = mode==='red' ? CREAM : WHITE;
@@ -1829,7 +1827,7 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     } else {
       const g = ctx.createRadialGradient(W*0.3,H*0.4,80,W*0.3,H*0.4,1000);
-      g.addColorStop(0, mode==='cream'?'#EDE7DE':'#3a0a0c'); g.addColorStop(1, BG);
+      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#3a0a0c'); g.addColorStop(1, BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     // mes gegant a l'esquerra
@@ -1880,7 +1878,7 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     } else {
       const g = ctx.createRadialGradient(W/2,H*0.42,px(80),W/2,H*0.42,Math.max(W,H));
-      g.addColorStop(0, mode==='cream'?'#EDE7DE':'#2a0709'); g.addColorStop(1,BG);
+      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#2a0709'); g.addColorStop(1,BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     ctx.textAlign='center';
@@ -1921,7 +1919,7 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     } else {
       const g = ctx.createRadialGradient(W/2,H/2,px(80),W/2,H/2,Math.max(W,H));
-      g.addColorStop(0, mode==='cream'?'#EDE7DE':'#2a0709'); g.addColorStop(1,BG);
+      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#2a0709'); g.addColorStop(1,BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     ctx.textAlign='center';
@@ -2048,11 +2046,11 @@ async function genCartell() {
     if (cPhoto) {
       drawCover(ctx, cPhoto, 0, 0, W, fotoH);
       const g = ctx.createLinearGradient(0, fotoH - px(260), 0, fotoH);
-      g.addColorStop(0, mode==='cream'?'rgba(244,241,236,0)':'rgba(14,17,22,0)'); g.addColorStop(1, mode==='cream'?'rgba(244,241,236,.92)':'rgba(14,17,22,.9)');
+      g.addColorStop(0, mode==='cream'?'rgba(244,241,236,0)':'rgba(16,16,14,0)'); g.addColorStop(1, mode==='cream'?'rgba(244,241,236,.92)':'rgba(16,16,14,.9)');
       ctx.fillStyle=g; ctx.fillRect(0, fotoH - px(260), W, px(260));
     } else {
       const g = ctx.createRadialGradient(W/2, fotoH/2, px(100), W/2, fotoH/2, Math.max(W,fotoH));
-      g.addColorStop(0, mode==='cream'?'#EDE7DE':'#3a0a0c'); g.addColorStop(1, BG);
+      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#3a0a0c'); g.addColorStop(1, BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,fotoH);
     }
     ctx.fillStyle = INK; ctx.fillRect(0, fotoH, W, H - fotoH);
@@ -2083,7 +2081,7 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     } else {
       const g = ctx.createRadialGradient(W/2,H*0.4,80,W/2,H*0.4,900);
-      g.addColorStop(0, mode==='cream' ? '#EDE7DE' : (tpl==='victoria' ? '#4d0d10' : '#1a1a1a')); g.addColorStop(1, BG);
+      g.addColorStop(0, mode==='cream' ? '#F4F1EC' : (tpl==='victoria' ? '#4d0d10' : '#1a1a1a')); g.addColorStop(1, BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     ctx.textAlign='center'; ctx.fillStyle = FG;
@@ -2122,14 +2120,14 @@ async function genFinde(m) {
   const [W, H] = (document.getElementById('c-fmt').value || '1080x1080').split('x').map(Number);
   cv.width = W; cv.height = H;
   const S = H / 1350, px = n => Math.round(n * S);
-  const RED='#E63329', INK='#0E1116', WHITE='#ffffff';
+  const RED='#E20613', INK='#10100E', WHITE='#ffffff';
   const W80 = 'rgba(255,255,255,.86)', W60 = 'rgba(255,255,255,.68)';
 
   /* Fons: foto a sangre amb vel fosc (el text sempre en blanc, com la referència) */
   if (cPhoto) {
     drawCover(ctx, cPhoto, 0, 0, W, H);
     const g = ctx.createLinearGradient(0,0,W,0);
-    g.addColorStop(0,'rgba(14,17,22,.58)'); g.addColorStop(.42,'rgba(14,17,22,.62)'); g.addColorStop(1,'rgba(14,17,22,.86)');
+    g.addColorStop(0,'rgba(16,16,14,.58)'); g.addColorStop(.42,'rgba(16,16,14,.62)'); g.addColorStop(1,'rgba(16,16,14,.86)');
     ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
   } else {
     const g = ctx.createRadialGradient(W*0.3,H*0.45,px(80),W*0.3,H*0.45,Math.max(W,H));

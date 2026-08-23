@@ -9,15 +9,25 @@
    vermell del club com a únic accent.
    ============================================================ */
 :root {
-  --ink: #0a0a0a;
+  /* Tokens de l'artefacte «Franges i Extensa». Aquests valors manen a tot el
+     lloc: el vermell és el mostrejat de l'escut i la tinta, la crema i el gris
+     són els de la portada. Els dos jocs de noms conviuen com a àlies perquè el
+     codi que ve de /partits/ no s'hagi de traduir a mà. */
+  --ink: #10100E;
   --ink-2: #46433f;
-  --muted: #8a8681;
-  --line: #e4e1dd;
-  --line-dark: rgba(255,255,255,0.15);
+  --muted: #6B6560;
+  --line: rgba(16, 16, 14, 0.14);
+  --line-dark: rgba(255, 255, 255, 0.15);
   --paper: #ffffff;
-  --paper-2: #f6f4f1;
+  --paper-2: #F4F1EC;
   --red: #E20613;
   --red-dark: #A8040E;
+  /* Àlies del joc de /partits/ i de l'artefacte */
+  --cream: #F4F1EC;
+  --red-ink: #A8040E;
+  --panel: #ffffff;
+  --ground: #F4F1EC;
+  --shadow: 0 24px 60px -28px rgba(16, 16, 14, 0.34);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -112,21 +122,21 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
    Mateix component que a la portada (index.html): el vermell fa de
    superfície, no només d'accent. Veure la skill web-cbgb. */
 .franges { display: flex; flex-direction: column; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: clamp(34px, 5vw, 60px) 0; }
-.franja { position: relative; display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; align-items: stretch; background: var(--paper); min-height: 96px; overflow: hidden; transition: background 0.35s var(--ease); }
-/* Sense foto, la columna de 150px no s'ha de reservar: el text s'hi comprimia. */
+.franja { position: relative; display: grid; grid-template-columns: 190px minmax(0, 1fr) auto; align-items: stretch; background: var(--paper); min-height: 108px; overflow: hidden; transition: background 0.35s var(--ease); }
+/* Sense foto, la columna de 190px no s'ha de reservar: el text s'hi comprimia. */
 .franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr) auto; }
 .franja:nth-child(even):not(.franja--red):not(.franja--ink) { background: var(--paper-2); }
 .franja:hover { background: var(--ink); }
 .franja:hover .franja-t, .franja:hover .franja-go em { color: #fff; }
 .franja:hover .franja-s { color: rgba(255,255,255,0.7); }
-.franja:hover .franja-go i { background: var(--red); width: 40px; }
+.franja:hover .franja-go i { background: var(--red); width: 46px; }
 .franja-ph { position: relative; overflow: hidden; background: var(--paper-2); }
 .franja-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.7s var(--ease); }
 .franja:hover .franja-ph img { transform: scale(1.05); }
-.franja-tx { padding: 16px 22px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-.franja-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(15px, 1.9vw, 19px); letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.1; transition: color 0.3s; }
+.franja-tx { padding: 20px 26px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.franja-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(18px, 2.4vw, 27px); letter-spacing: 0.01em; text-transform: uppercase; line-height: 0.98; transition: color 0.3s; }
 .franja-s { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 6px; max-width: 46ch; }
-.franja-go { padding: 0 22px; display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.franja-go { padding: 0 26px; display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
 .franja-go em { font-style: normal; font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 .franja-go i { display: block; width: 22px; height: 1px; background: var(--ink); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
 .franja--red { background: var(--red); }
@@ -138,8 +148,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .franja--ink .franja-t { color: #fff; }
 .franja--ink .franja-s, .franja--ink .franja-go em { color: rgba(255,255,255,0.7); }
 .franja--ink .franja-go i { background: #fff; }
+.franja--ink:hover { background: #000; }
+/* La franja que obre la pila porta el títol més gran, com a la portada. */
+.franja--lead .franja-t { font-size: clamp(26px, 4vw, 46px); }
 @media (max-width: 640px) {
-  .franja { grid-template-columns: 84px minmax(0, 1fr); min-height: 82px; }
+  .franja { grid-template-columns: 92px minmax(0, 1fr); min-height: 90px; }
   .franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr); }
   .franja-go { display: none; }
   .franja-tx { padding: 12px 16px; }
@@ -293,7 +306,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 .bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 7px 14px; }
 .bar-k { font-family: var(--display); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
 .bar-v { font-family: var(--display); font-weight: 300; font-size: 16px; letter-spacing: 0.04em; color: var(--ink); text-align: right; }
-.bar-t { grid-column: 1 / -1; height: 10px; background: rgba(10, 10, 10, 0.09); }
+.bar-t { grid-column: 1 / -1; height: 10px; background: rgba(16,16,14, 0.09); }
 .bar-f { display: block; height: 100%; background: var(--ink-2); }
 .bar-n { grid-column: 1 / -1; font-size: 12px; line-height: 1.6; color: var(--muted); }
 .bar.on .bar-f { background: var(--red); }
@@ -334,7 +347,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 
 /* Llindar · una escala amb la franja on la cosa es trenca */
 .gauge { margin-top: 6px; }
-.gauge-t { position: relative; height: 16px; background: rgba(10, 10, 10, 0.09); }
+.gauge-t { position: relative; height: 16px; background: rgba(16,16,14, 0.09); }
 .gauge-z { position: absolute; top: -7px; bottom: -7px; background: rgba(226, 6, 19, 0.12); border-left: 2px solid var(--red); border-right: 2px solid var(--red); }
 .gauge-x { display: flex; justify-content: space-between; margin-top: 12px; font-family: var(--display); font-size: 9px; letter-spacing: 0.18em; color: var(--muted); }
 .chart p.gauge-n { margin-top: 20px; font-size: 13px; line-height: 1.7; color: var(--ink-2); }
@@ -355,3 +368,75 @@ table.vs thead th.a { color: var(--red-dark); }
 table.vs tbody th { font-family: var(--display); font-weight: 400; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
 table.vs td { font-size: 13.5px; color: var(--ink-2); }
 table.vs td.a { color: var(--red-dark); }
+
+/* ==== PORTADA · EXTENSA ====================================================
+   El mateix joc de peces que la portada (index.html) i que la guia visual
+   «Franges i Extensa»: filets de secció amb el nom a l'esquerra i la dada a la
+   dreta, peces de mitjà, targetes de text i la franja de paritat partida pel
+   mig. Aquí hi viuen perquè una pàgina interior no hagi de reinventar-les:
+   si es canvien, es canvien als dos llocs alhora. */
+
+/* Filet de secció · és el que fa que la pàgina llegeixi com un diari. */
+.e-sech-wrap { padding-top: clamp(20px, 3vw, 34px); }
+.e-sech { border-top: 2px solid var(--red); padding: 14px 0 12px; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.e-sech h2 { font-family: var(--display); font-weight: 400; font-size: clamp(15px, 2vw, 20px); letter-spacing: 0.02em; text-transform: uppercase; }
+.e-sech em { font-style: normal; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+/* Els títols de secció d'un article porten el mateix filet vermell: és el
+   gest que lliga una pàgina interior amb la portada extensa sense afegir cap
+   color nou ni tocar el marcatge de cada pàgina. */
+.prose h2 { border-top: 2px solid var(--red); padding-top: clamp(14px, 2vw, 18px); }
+
+/* Peça gran i dues targetes · la graella d'una secció d'un mitjà. */
+.e-feat { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 3vw, 34px); padding: clamp(30px, 4.5vw, 54px) 0; }
+@media (min-width: 860px) { .e-feat { grid-template-columns: 1.4fr 1fr 1fr; } }
+.e-art { display: block; }
+.e-art .im { display: block; position: relative; overflow: hidden; background: var(--paper-2); aspect-ratio: 3 / 4; }
+.e-art .im img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.7s var(--ease); }
+.e-art:hover .im img { transform: scale(1.04); }
+.e-art .cap { display: block; padding: 14px 2px 0; }
+.e-art .kick { font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
+.e-art h3 { font-size: clamp(17px, 2.1vw, 24px); letter-spacing: 0.02em; text-transform: none; font-weight: 500; margin: 8px 0 6px; line-height: 1.15; }
+.e-art.wide h3 { font-size: clamp(20px, 2.8vw, 32px); }
+.e-art p { font-size: 13px; color: var(--ink-2); }
+
+/* Guies · targetes de text, sense foto. */
+.e-guides { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: clamp(30px, 4.5vw, 54px); }
+@media (min-width: 760px) { .e-guides { grid-template-columns: repeat(3, 1fr); } }
+.e-guide { display: block; background: var(--paper); padding: clamp(20px, 2.6vw, 28px); transition: background 0.3s var(--ease); }
+.e-guide:hover { background: var(--paper-2); }
+.e-guide .kick { font-family: var(--body); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); }
+.e-guide h3 { font-size: 15.5px; font-weight: 500; text-transform: none; letter-spacing: 0.01em; margin: 9px 0 8px; line-height: 1.25; }
+.e-guide p { font-size: 12.5px; color: var(--ink-2); margin: 0; }
+
+/* Paritat · la meitat exacta de la franja per a cada línia: ho diu
+   l'estructura, no la xifra. */
+.e-par { background: var(--red); color: #fff; margin: clamp(24px, 3.5vw, 40px) 0; }
+.e-par .halves { display: grid; grid-template-columns: 1fr 1px 1fr; }
+@media (max-width: 640px) { .e-par .halves { grid-template-columns: 1fr; } }
+.e-par .rule { background: rgba(255,255,255,0.4); width: auto; height: auto; margin: 0; }
+@media (max-width: 640px) { .e-par .rule { height: 1px; } }
+.e-par .h { padding: clamp(22px, 3.2vw, 32px) clamp(20px, 4vw, 40px); }
+.e-par .h span { display: block; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.82; }
+.e-par .h b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.8vw, 30px); text-transform: uppercase; line-height: 1; margin-top: 10px; }
+.e-par .foot { border-top: 1px solid rgba(255,255,255,0.4); padding: 16px clamp(20px, 4vw, 40px); font-size: 13px; }
+.e-par .foot a { color: #fff; }
+
+/* Bloc sobre tinta · el vermell s'hi aclareix, que sobre negre el de l'escut
+   perd contrast. */
+.e-lema { background: var(--ink); color: #fff; text-align: center; padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 50px); margin: clamp(24px, 3.5vw, 40px) 0; }
+.e-lema .eyebrow { color: rgba(255,255,255,0.6); }
+.e-lema h2 { color: #fff; margin-top: 10px; }
+.e-lema h2 em { font-style: normal; color: #FF3B41; }
+.e-lema p { color: rgba(255,255,255,0.8); max-width: 58ch; margin: 18px auto 0; }
+.e-lema .cta { color: #fff; margin-top: 20px; }
+.e-lema .cta:hover { color: #FF3B41; }
+
+/* Barra de novetats · lliga qualsevol pàgina amb la portada. */
+.ticker { position: relative; z-index: 120; height: 32px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
+.tk-lab { flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px); background: var(--red); color: #fff; display: flex; align-items: center; gap: 9px; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
+.tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
+.tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
+.ticker:hover .tk-cnt { animation-play-state: paused; }
+.tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+@keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
