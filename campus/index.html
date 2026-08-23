@@ -82,7 +82,12 @@
   .star-tx { padding: 18px 18px 20px; }
   .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
-  .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+  /* L'enllaç de crèdit de cada reel feia 16 px d'alt: és l'única sortida
+     d'aquella targeta i va sol, no dins d'una frase. Amb el coixí arriba als
+     44 px de la pauta del club sense moure el text ni fer la targeta més
+     alta, perquè el marge negatiu recupera l'espai. */
+  .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; margin: -14px -6px; }
   .star-tx .role { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em;
     text-transform: uppercase; color: var(--red-dark); margin-bottom: 7px; }
 

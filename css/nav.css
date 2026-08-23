@@ -178,3 +178,13 @@ html.cbgb-galetes-obertes .fab-wa { opacity: 0; transform: translateY(14px) scal
   .menu-col a { font-size: 14px; padding: 8px 0; }
   .menu-col a small { display: none; }
 }
+
+/* La molla de pa: l'alçada tocable ja arriba als 49 px, però «Inici» només fa
+   21 px de text i es quedava en 31 d'ample. Set píxels a cada banda el porten
+   a 35 sense moure el text ni la separació entre trams.
+   No s'hi posa més: per arribar als 44 d'ample caldrien dotze píxels a cada
+   costat i, amb els deu de separació de la llista, les zones tocables de dos
+   trams veïns se solaparien. Dos objectius que es trepitgen són pitjor que un
+   de curt d'ample, i aquí el que decideix el toc és l'alçada. Mateix criteri
+   que amb els botons CA/ES/EN, que fan 26×44. */
+.molla a { display: inline-block; padding: 16px 7px; margin: -16px -7px; }

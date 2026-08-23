@@ -507,3 +507,11 @@ table.vs td.a { color: var(--red-dark); }
 /* Un .btn amb text llarg desbordava a 390 px: és inline-flex i no s'encongia.
    Que no passi mai de l'ample disponible i que el text pugui partir. */
 .btn { max-width: 100%; text-align: center; text-wrap: balance; }
+
+/* Els enllaços de secció (.cta) van sols al final d'una targeta o d'un bloc:
+   no són un enllaç enmig d'una frase, sinó la crida a l'acció d'aquell tros.
+   Feien entre 28 i 37 px d'alt segons l'amplada, per sota dels 44 de la
+   pauta del club. El `padding` amb el `margin` negatiu els hi puja sense
+   moure ni el text ni la línia de sota, que és el que dibuixa l'enllaç. */
+.cta { display: inline-flex; align-items: flex-end; min-height: 44px; padding-top: 14px; margin-top: -14px; }
+@media (max-width: 900px) { .cta { padding: 20px 0 10px; margin-top: -14px; } }
