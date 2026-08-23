@@ -436,7 +436,6 @@ PARTNERS = [
     ("ovella-negra.png", "Ovella Negra", "https://www.instagram.com/ovellanegrabcn/"),
     ("romeo-abogados.png", "Romeo Abogados", "https://www.instagram.com/romeoabogados/"),
     ("fundacio-mullor.png", "Fundació Mullor", None),
-    ("l-aquarium-de-barcelona.png", "L'Aquàrium de Barcelona", None),
     (None, "Wilson", None),
     ("eix-comercial-sant-marti.png", "Eix Comercial Sant Martí", None),
     ("gbk-globabasket.png", "GBK · Globasket", "https://www.instagram.com/globasket/"),
@@ -760,11 +759,6 @@ PARTNER_INFO = {
         "Mullor, amb seus a Barcelona, Lleida i Madrid. Desenvolupa programes de formació i "
         "inserció laboral per a joves en risc d'exclusió social i joves amb discapacitat "
         "intel·lectual."},
-    "l-aquarium-de-barcelona": {"web": "https://www.aquariumbcn.com/", "phone": "932 217 474",
-        "email": "info@aquariumbcn.com", "desc":
-        "L'Aquàrium de Barcelona és un centre marí al Port Vell, especialitzat en fauna del "
-        "Mediterrani i un dels aquaris més grans d'Europa, amb més d'11.000 exemplars de 450 "
-        "espècies. El seu Oceanari té un túnel submarí de vidre de 80 metres."},
     "eix-comercial-sant-marti": {"web": "https://www.santmartieix.com/", "phone": "933 057 144",
         "email": "hola@santmartieix.com", "desc":
         "L'Associació Sant Martí Eix Comercial és una associació de comerços i serveis del "
