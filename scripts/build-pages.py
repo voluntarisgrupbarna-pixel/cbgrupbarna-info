@@ -369,7 +369,7 @@ def build_campus():
         <span class="franja-go"><em>4 a 8 anys</em><i></i></span>
       </a>
       <a class="franja franja--red" href="/partits/" data-cta="campus-franja-dies-partit">
-        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-tx"><span class="franja-t">Calendari</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
         <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
       </a>
       <a class="franja" href="/3x3/" data-cta="campus-franja-3x3">
@@ -1010,7 +1010,7 @@ def build_3x3():
         <span class="franja-go"><em>4 a 8 anys</em><i></i></span>
       </a>
       <a class="franja franja--red" href="/partits/" data-cta="3x3-franja-dies-partit">
-        <span class="franja-tx"><span class="franja-t">Dies de partit</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
+        <span class="franja-tx"><span class="franja-t">Calendari</span><span class="franja-s">El calendari de tots els equips federats del club.</span></span>
         <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
       </a>
       <a class="franja" href="/campus/" data-cta="3x3-franja-campus">
@@ -2471,7 +2471,7 @@ def build_calendaris():
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red" id="cal-temporada">Temporada</p>
-    <h1>Dies de partit per equip</h1>
+    <h1>Calendari per equip</h1>
     <p class="lede">El calendari complet de cada equip, llest per descarregar i desar. Es genera cada dia a
     partir del calendari oficial de la FCBQ: els equips de promoció (premini, mini, preinfantil) hi apareixen
     sols en el moment que la federació en publiqui el calendari.</p>
