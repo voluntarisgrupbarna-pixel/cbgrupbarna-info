@@ -972,7 +972,7 @@ function renderUploadQueue() {
 
     const thumbHtml = isVideo
       ? `<div class="upload-item-thumb-wrap"><video class="upload-item-thumb" src="${preview}" muted preload="metadata"></video><div class="video-thumb-badge"><svg width="9" height="9" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
-      : `<img class="upload-item-thumb" src="${preview}" alt="">`;
+      : `<img class="upload-item-thumb" src="${preview}" alt="" loading="lazy" decoding="async">`;
 
     div.innerHTML = `
       ${thumbHtml}

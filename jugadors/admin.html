@@ -358,7 +358,7 @@ function renderList(){
       <div class="team-name">${t} <span class="count-pill">${byTeam[t].length}</span></div>
       ${byTeam[t].map(j => `
         <div class="player-row">
-          ${j.foto ? `<img class="pfoto" src="/jugadors/fotos/${j.foto}" alt="">` : `<div class="pfoto"></div>`}
+          ${j.foto ? `<img class="pfoto" src="/jugadors/fotos/${j.foto}" alt="" loading="lazy" decoding="async">` : `<div class="pfoto"></div>`}
           <div class="dorsal">${j.dorsal ?? '—'}</div>
           <div class="pname">${j.nom} ${j.cognoms}${j.posicio ? ` <span class="ppos">· ${j.posicio}</span>` : ''}</div>
           <button class="del" title="Eliminar" onclick="deletePlayer('${j.id}')">✕</button>

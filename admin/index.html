@@ -136,7 +136,7 @@
 <script>
 CBGBGate.protect(function(user){
   var w = document.getElementById('who');
-  w.innerHTML = (user.picture ? '<img src="'+user.picture+'" alt="">' : '')
+  w.innerHTML = (user.picture ? '<img src="'+user.picture+'" alt="" loading="lazy" decoding="async">' : '')
     + '<span>' + (user.email || '') + '</span>'
     + '<button class="btn" onclick="CBGBGate.signOut()">Sortir</button>';
 });

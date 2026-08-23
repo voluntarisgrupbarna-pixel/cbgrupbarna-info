@@ -140,7 +140,7 @@ let ghToken=null, partits=[], filter='props';
 
 CBGBGate.protect(function(user){
   document.getElementById('who').innerHTML =
-    (user.picture?'<img src="'+user.picture+'" alt="" style="width:24px;height:24px;border-radius:50%">':'')+
+    (user.picture?'<img src="'+user.picture+'" alt="" style="width:24px;height:24px;border-radius:50%" loading="lazy" decoding="async">':'')+
     '<span>'+(user.email||'')+'</span>'+
     '<button class="btn ghost small" onclick="CBGBGate.signOut()">Sortir</button>';
   ghToken=localStorage.getItem('gh_admin_token');

@@ -134,7 +134,7 @@
         <div class="players">
           ${byTeam[t].map(j => `
             <div class="pcard">
-              ${j.foto ? `<img class="pfoto" src="/jugadors/fotos/${j.foto}" alt="${j.nom} ${j.cognoms}">` : `<div class="pfoto"></div>`}
+              ${j.foto ? `<img class="pfoto" src="/jugadors/fotos/${j.foto}" alt="${j.nom} ${j.cognoms}" loading="lazy" decoding="async">` : `<div class="pfoto"></div>`}
               <div class="dorsal">${j.dorsal ?? ''}</div>
               <div>
                 <div class="pname">${j.nom} ${j.cognoms}</div>
