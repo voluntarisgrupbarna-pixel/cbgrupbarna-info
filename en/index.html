@@ -806,6 +806,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   .head-burger { width: 44px; height: 44px; align-items: flex-start; justify-content: center; padding: 12px 9px; }
   .fab-wa { width: 56px; height: 56px; }
   .sg-action, .igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; }
+  /* La casella de consentiment es toca per l'etiqueta, no pel quadret: la
+     zona que compta és tota la fila, i feia 40 px. */
+  .consent { min-height: 44px; }
+  /* El commutador de maquetació feia 34 px d'alt. Amb el selector doble perquè
+     la regla base d'aquesta pàgina està escrita més avall i, a igualtat de
+     pes, guanyaria ella. */
+  .head-in .view-toggle, .view-toggle { min-height: 44px; }
 }
 /* Tauleta: un sol punt de ruptura per a totes les graelles. */
 @media (min-width: 768px) and (max-width: 1023px) {
