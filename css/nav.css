@@ -165,3 +165,16 @@ html.cbgb-galetes-obertes .fab-wa { opacity: 0; transform: translateY(14px) scal
    de zona tocable. És una crida a l'acció que va sola, no un enllaç enmig
    d'una frase: li toquen els 44 px de la pauta del club. */
 .igf-fallback { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 2px; }
+
+/* El menú porta 30 destins i, en una sola columna, feia 2.062 px: gairebé tres
+   pantalles de mòbil. En dues columnes es queda en 1.282, i les etiquetes són
+   prou curtes perquè fins i tot a 320 px —la pantalla més estreta que es
+   prova— no se'n parteixi cap en dues línies ni desbordi l'ample. La zona
+   tocable de cada enllaç segueix sent de 44 px; el que s'estreny és el buit
+   entre enllaços, no el que es pot tocar. La nota petita de cada entrada es
+   retira al mòbil: és context, i aquí el que cal és arribar-hi. */
+@media (min-width: 300px) and (max-width: 779px) {
+  .menu-grid { grid-template-columns: 1fr 1fr; gap: 20px clamp(14px, 4vw, 24px); }
+  .menu-col a { font-size: 14px; padding: 8px 0; }
+  .menu-col a small { display: none; }
+}
