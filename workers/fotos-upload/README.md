@@ -70,6 +70,31 @@ curl "https://fotos-upload.cbgrupbarna.workers.dev/list?secret=EL_TEU_UPLOAD_TOK
 Una llista buida és el resultat correcte ara mateix: encara no s'hi ha
 pujat res.
 
+**Abans de donar-ho per bo**, comprova que `/uploads/...` rebutja el que ha
+de rebutjar:
+
+```bash
+# Sense contrasenya: ha de donar 401
+curl -X PUT "https://fotos-upload.cbgrupbarna.workers.dev/uploads/prova/x.jpg" \
+  -H "Content-Type: image/jpeg" --data-binary "res"
+
+# Contrasenya correcta pero fitxer que no és foto ni video: ha de donar 400
+curl -X PUT "https://fotos-upload.cbgrupbarna.workers.dev/uploads/prova/x.exe" \
+  -H "X-Upload-Secret: EL_TEU_UPLOAD_TOKEN" --data-binary "res"
+
+# Contrasenya correcta i extensio valida: ha de donar 200 i {"ok":true,...}
+curl -X PUT "https://fotos-upload.cbgrupbarna.workers.dev/uploads/prova/x.jpg" \
+  -H "X-Upload-Secret: EL_TEU_UPLOAD_TOKEN" --data-binary "res"
+# esborra-la despres amb el mateix mecanisme que faries servir per a
+# qualsevol objecte de prova, o deixa-la — "prova/x.jpg" no surt enlloc
+# perque cap event de events.js hi apunta.
+```
+
+El content-type que queda desat a R2 el decideix el Worker per l'extensió
+de la clau, no pas el `Content-Type` que enviï qui puja — així ningú pot
+declarar el que vulgui i un HEIC mal etiquetat pel navegador tampoc es
+rebutja per error.
+
 ## Pas final · activar-ho a la web
 
 Un cop `/health` respon bé, edita `fotos/config.js` i omple:

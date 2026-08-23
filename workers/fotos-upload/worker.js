@@ -75,10 +75,22 @@ async function handleUpload(request, url, env, cors) {
 
   const key = decodeURIComponent(url.pathname.replace(/^\/+/, ''));
 
-  // Nomes fotos i videos, nomes dins de uploads/<event>/<fitxer>. Sense
-  // aixo qualsevol que tingui el secret podria escriure a qualsevol clau.
-  if (!/^uploads\/[^/]+\/[^/]+\.[A-Za-z0-9]+$/.test(key) || key.includes('..')) {
-    return new Response('Clau no vàlida', { status: 400, headers: cors });
+  // Nomes fotos i videos coneguts, nomes dins de uploads/<event>/<fitxer>.
+  // Mateixes extensions que IMATGES/VIDEOS a scripts/build-gallery-images.py
+  // i isVideoRef() a fotos/index.html — si s'hi afegeix un format nou, cal
+  // afegir-lo als tres llocs (i a CONTENT_TYPES, aqui sota). Sense aquest
+  // filtre, qui tingui el secret (o el trobi filtrat) podria escriure
+  // qualsevol fitxer al bucket, que es públic.
+  const CONTENT_TYPES = {
+    jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp',
+    heic: 'image/heic', heif: 'image/heif',
+    mp4: 'video/mp4', mov: 'video/quicktime', webm: 'video/webm',
+    m4v: 'video/x-m4v', avi: 'video/x-msvideo',
+  };
+  const m = /^uploads\/[^/]+\/[^/]+\.([A-Za-z0-9]+)$/.exec(key);
+  const ext = m ? m[1].toLowerCase() : '';
+  if (!m || key.includes('..') || !CONTENT_TYPES[ext]) {
+    return new Response('Clau no vàlida: nomes fotos i videos', { status: 400, headers: cors });
   }
 
   const MAX_BYTES = 200 * 1024 * 1024; // 200 MB: marge ampli per a vídeos de mòbil
@@ -88,10 +100,11 @@ async function handleUpload(request, url, env, cors) {
   }
 
   try {
+    // El content-type el decidim per l'extensio, no pel que digui el
+    // navegador: alguns (HEIC des de mobil, sobretot) no l'envien be, i no
+    // volem que un client pugui declarar el que vulgui.
     await env.FOTOS.put(key, request.body, {
-      httpMetadata: {
-        contentType: request.headers.get('Content-Type') || 'application/octet-stream',
-      },
+      httpMetadata: { contentType: CONTENT_TYPES[ext] },
     });
   } catch (err) {
     return new Response(`Error escrivint a R2: ${err.message}`, { status: 502, headers: cors });
