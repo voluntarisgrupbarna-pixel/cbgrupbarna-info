@@ -1061,6 +1061,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 }
 
 /* ==== FAÇANA D'INSTAGRAM · l'embed només es carrega si es demana ==== */
+/* El text dels sèniors: una columna de lectura, centrada sota el titular. */
+.sn-txt { max-width: 68ch; margin: 0 auto clamp(28px, 4vw, 44px); }
+.sn-txt p { font-size: 14.5px; line-height: 1.75; color: var(--ink-2); }
+.sn-txt p + p { margin-top: 14px; }
+.sn-txt b { font-weight: 500; color: var(--ink); }
 .igf { border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 290px; padding: 34px 22px; text-align: center; }
 .igf-mark { width: 34px; height: 34px; }
 .igf-mark svg { width: 100%; height: 100%; fill: var(--ink); }
@@ -1654,31 +1659,21 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <section class="section" id="seniors">
     <div class="wrap">
       <div class="sec-head reveal">
-        <p class="eyebrow red">Anunci oficial</p>
+        <p class="eyebrow red">Supercopa FCBQ · Temporada 25·26</p>
         <div class="rule"></div>
         <h2>Els sèniors</h2>
-        <p>La presentació dels equips sèniors del CB Grup Barna, directament des d'Instagram.</p>
+        <p>L'únic club de Barcelona amb els <b>dos equips sènior a la Supercopa</b> de la Federació Catalana de Bàsquet la mateixa temporada. El masculí i el femení.</p>
+      </div>
+
+      <div class="sn-txt reveal">
+        <p>La Supercopa FCBQ no és un torneig d'estiu: és la lliga d'elit de Catalunya, el nivell més alt del bàsquet federat català. Per sobre només hi ha les competicions estatals —la Liga EBA i l'ACB en masculí, la LF2 i la Liga Femenina en femení—, i per sota, tots els graons que s'han hagut de superar abans d'arribar-hi.</p>
+        <p>El <b>sènior femení</b> hi va tancar la temporada regular en <b>quarta posició</b>, amb 17 victòries i 7 derrotes. La <b>Judit Ortiz</b> va entrar a l'All Star de la Supercopa Femenina i la <b>Marta Zori</b> va ser una de les màximes anotadores de perímetre de tota la competició. El <b>sènior masculí</b> competeix a la mateixa categoria sense moure's del barri.</p>
+        <p>Darrere hi ha els segons equips, que són els que fan que això se sostingui: el <b>sènior B masculí juga a Primera Territorial</b> i el <b>sènior B femení, a Primera Catalana</b>.</p>
+        <p>La voluntat del club és formar el planter perquè arribi a dalt: que les jugadores i els jugadors que comencen a l'Escoleta acabin al primer equip, i que cada temporada calgui fitxar menys gent de fora. Arribar a la Supercopa amb els dos equips no és un premi: és la conseqüència de fer-ho així durant molt de temps.</p>
       </div>
       <div class="ig-embed-wrap two">
-        <div class="igf" data-ig="https://www.instagram.com/p/DbgJvwuCCNv/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbgJvwuCCNv/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
-        <div class="igf" data-ig="https://www.instagram.com/p/DbiuXarCIpz/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbiuXarCIpz/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==== POSTS FIXATS D'INSTAGRAM ==== -->
-  <section class="section band-soft" id="instagram">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <p class="eyebrow">@cbgrupbarna</p>
-        <div class="rule"></div>
-        <h2>Posts fixats</h2>
-        <p>El que sempre has de tenir a mà del club.</p>
-      </div>
-      <div class="ig-embed-wrap three">
-        <div class="igf" data-ig="https://www.instagram.com/p/DXonCiBiPcW/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DXonCiBiPcW/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
-        <div class="igf" data-ig="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/cbgrupbarna/reel/DXtOYAViBF-/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
-        <div class="igf" data-ig="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/cbgrupbarna/p/DXr-pdxCCX4/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
+        <div class="igf" data-auto data-ig="https://www.instagram.com/p/DbgJvwuCCNv/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbgJvwuCCNv/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
+        <div class="igf sn-ig2" data-auto data-ig="https://www.instagram.com/p/DbiuXarCIpz/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbiuXarCIpz/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
       </div>
       <p class="center reveal" style="margin-top:clamp(26px,4vw,42px)">
         <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" class="cta" data-cta="ig-follow">Segueix @cbgrupbarna</a>
@@ -2322,21 +2317,35 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       sc.onload = cb;
       document.head.appendChild(sc);
     }
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest('.igf button');
-      if (!btn) return;
-      var box = btn.closest('.igf');
+    function encasta(box) {
       var link = box.getAttribute('data-ig');
       var bq = document.createElement('blockquote');
       bq.className = 'instagram-media';
       bq.setAttribute('data-instgrm-permalink', link + '?utm_source=ig_embed');
       bq.setAttribute('data-instgrm-version', '14');
+      /* Si Instagram no carrega —xarxa, bloquejador, consentiment—, que hi
+         quedi almenys l'enllaç i no un forat. */
+      var a = document.createElement('a');
+      a.href = link;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Veure la publicació a Instagram';
+      bq.appendChild(a);
       box.replaceWith(bq);
       loadScript(function () {
         if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
       });
+      return link;
+    }
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.igf button');
+      if (!btn) return;
+      var link = encasta(btn.closest('.igf'));
       if (window.gtag) window.gtag('event', 'ig_embed_open', { url: link });
     });
+    /* Les publicacions marcades amb data-auto surten ja encastades: són les
+       dels sèniors, que són el contingut de la secció i no un afegit. */
+    document.querySelectorAll('.igf[data-auto]').forEach(encasta);
   })();
 </script>
 
