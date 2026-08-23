@@ -991,7 +991,7 @@ function buildWaText(list, m, title) {
       out += `${p.hora} · ${eq.curt||''} ${p.casa?'🏠':'🚌'}\n${p.local} vs ${p.visitant}${res}\n📍 ${p.pista}\n`;
     }
   }
-  out += '\n#SomClot 🔴⚫ cbgrupbarna.com/partits/';
+  out += '\n#SomClot 🔴⚫ cbgrupbarna.info/partits/';
   return out;
 }
 
@@ -1312,7 +1312,7 @@ function renderWinners(m) {
     + (winners.length ? winners.map(p=>{ const e=m.equips.find(x=>x.id===p.equipId)||{};
         return `✅ *${e.nom}* — ${p.puntsLocal}-${p.puntsVisitant} vs ${p.casa?p.visitant:p.local} ${p.casa?'🏠':'🚌'}`; }).join('\n')
       : 'Ninguna victoria este fin de semana. La semana que viene, más fuerte 💪')
-    + `\n\n#SomClot 🔴⚫ cbgrupbarna.com/partits/`;
+    + `\n\n#SomClot 🔴⚫ cbgrupbarna.info/partits/`;
   box.innerHTML = `<div class="winners">
     <h3>🏆 Mención especial · Ganadores del finde ${wkLabel(wk)}</h3>
     ${rows || '<div class="wrow">Ninguna victoria este finde 🧊</div>'}
@@ -2197,7 +2197,7 @@ async function genFinde(m) {
   cv.style.display='block';
   document.getElementById('c-down').style.display='inline-flex';
   const txt = buildWaText(tots, m, `🔴⚫ *ELS PARTITS DEL CAP DE SETMANA* · ${wkLabel(wk)}`)
-    .replace('#SomClot 🔴⚫ cbgrupbarna.com/partits/',
+    .replace('#SomClot 🔴⚫ cbgrupbarna.info/partits/',
       '➡️ Tots els partits a cbgrupbarna.info/partits/\n❤️ Segueix @cbgrupbarna i vine a animar\n\n#SomClot #CBGrupBarna #BàsquetCatalà #Clot');
   document.getElementById('c-caption').value = txt;
   document.getElementById('c-cap-box').style.display='block';
