@@ -39,8 +39,8 @@ Regles que no es toquen:
 
 ## Onada 1 · Els partners (la més rendible, i és aquesta setmana)
 
-Vint-i-tres partners, la majoria amb web pròpia, i alguns amb dominis molt forts:
-Westfield Glòries, L'Aquàrium de Barcelona, Illa Fantasia, Mercat dels Encants,
+Vint-i-dos partners, la majoria amb web pròpia, i alguns amb dominis molt forts:
+Westfield Glòries, Illa Fantasia, Mercat dels Encants,
 Instax (Fujifilm), Panteres Grogues, Eix Clot, Eix Comercial Sant Martí,
 Fundació Mullor, Time Chamber… Cada un d'ells té una pàgina de col·laboradors,
 de RSC o de "projectes que donem suport" on **hauria de sortir el club**.
