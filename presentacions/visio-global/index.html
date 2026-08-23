@@ -111,14 +111,14 @@
 
   .idx{position:sticky;top:60px;z-index:99;background:var(--panel);border-bottom:1px solid var(--line)}
   .idx-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:18px}
-  .idx-lab{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6B6560;flex-shrink:0}
+  .idx-lab{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);flex-shrink:0}
   @media(max-width:820px){.idx-lab{display:none}}
   .idx-nav{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;scroll-behavior:smooth;
     -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
     mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
   .idx-nav::-webkit-scrollbar{display:none}
   .idx-nav a{position:relative;font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-    color:#6B6560;text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
+    color:var(--muted);text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
   .idx-nav a:hover{color:var(--ink)}
   .idx-nav a[aria-current="true"]{color:var(--red);border-bottom-color:var(--red)}
   .idx-more{flex-shrink:0;font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:8px;
@@ -127,8 +127,10 @@
   [id]{scroll-margin-top:112px}
   @media(max-width:620px){[id]{scroll-margin-top:104px}}
 
-  .crumb{padding:14px 0;font-size:11.5px;color:#6B6560}
-  .crumb a{color:#6B6560;text-decoration:none}
+  /* La pagina te mode fosc propi: el gris fix es quedava en 3,14:1 sobre el
+     fons fosc. Amb el token segueix el mode. */
+  .crumb{padding:14px 0;font-size:11.5px;color:var(--muted)}
+  .crumb a{color:var(--muted);text-decoration:none}
   .crumb a:hover{color:var(--ink)}
   .crumb span{color:var(--ink)}
 
@@ -149,7 +151,7 @@
 
   .sech{border-top:3px solid var(--red);padding:16px 0 14px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .sech h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;letter-spacing:.05em;line-height:1}
-  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#6B6560}
+  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
   .sec{padding:clamp(44px,7vw,80px) 0 0}
   .sec:last-of-type{padding-bottom:clamp(44px,7vw,80px)}
 
@@ -159,8 +161,8 @@
   .b-num div:hover{background:var(--cream)}
   .b-num b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(26px,4vw,44px);line-height:.9;font-variant-numeric:tabular-nums;color:var(--ink)}
   .b-num .r b{color:var(--red)}
-  .b-num span{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#6B6560;margin-top:8px}
-  .b-num em{display:block;font-style:normal;font-size:11px;color:#6B6560;margin-top:6px}
+  .b-num span{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+  .b-num em{display:block;font-style:normal;font-size:11px;color:var(--muted);margin-top:6px}
 
   .split{display:grid;grid-template-columns:1fr;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);margin-top:26px;border-radius:var(--radius);overflow:hidden}
   @media(min-width:900px){.split{grid-template-columns:1fr 1fr;min-height:420px}}
@@ -170,12 +172,12 @@
   .split-media img{width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0}
   .split-txt{padding:clamp(28px,4.4vw,52px);display:flex;flex-direction:column;justify-content:center}
   .split-txt h3{font-family:var(--display);font-weight:400;font-size:clamp(22px,3vw,34px);text-transform:uppercase;line-height:1.02;margin:10px 0 14px}
-  .split-txt p{font-size:14.5px;color:#6B6560;max-width:52ch}
+  .split-txt p{font-size:14.5px;color:var(--muted);max-width:52ch}
   .split-txt p+p{margin-top:10px}
   .split-txt p strong{color:var(--ink);font-weight:600}
 
   .panel{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);padding:clamp(26px,4vw,44px);margin-top:22px;border-radius:var(--radius)}
-  .panel>p{font-size:14.5px;color:#6B6560;max-width:70ch}
+  .panel>p{font-size:14.5px;color:var(--muted);max-width:70ch}
   .panel>p strong{color:var(--ink);font-weight:600}
 
   .p-list{list-style:none;margin-top:16px;max-width:680px}
@@ -187,7 +189,7 @@
   .facts div{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px}
   .facts b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,26px);
     line-height:.95;color:var(--red);font-variant-numeric:tabular-nums}
-  .facts span{display:block;font-size:10.5px;color:#6B6560;margin-top:6px}
+  .facts span{display:block;font-size:10.5px;color:var(--muted);margin-top:6px}
 
   .chapter{margin-top:18px;padding-top:6px}
   .chapter-go{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red-ink);text-decoration:none}
@@ -198,7 +200,7 @@
 
   .closer{background:var(--panel);border-top:1px solid var(--line);padding:clamp(56px,8vw,96px) 0;text-align:center}
   .closer h2{font-family:var(--display);font-weight:400;font-size:clamp(26px,3.8vw,40px);text-transform:uppercase;margin-bottom:14px}
-  .closer p{color:#6B6560;max-width:52ch;margin:0 auto 30px}
+  .closer p{color:var(--muted);max-width:52ch;margin:0 auto 30px}
   .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:15px 30px;transition:all .2s;border-radius:8px}
   .btn.red{background:var(--red-solid);color:#fff}
@@ -437,7 +439,7 @@
       <div><b>3</b><span>Reunions institucionals directes</span></div>
       <div><b>18è</b><span>Premi Dona i Esport, finalistes</span></div>
     </div>
-    <p style="color:#6B6560;font-size:14.5px;max-width:70ch;margin-top:18px">Acords amb l'Eix del
+    <p style="color:var(--muted);font-size:14.5px;max-width:70ch;margin-top:18px">Acords amb l'Eix del
     Clot, el Districte de Sant Martí, la Federació d'Entitats Clot-Camp de l'Arpa i l'Eix Sant Martí.
     Presència a La Nau del Clot, Escola Provençals, La Farigola del Clot, La Rambleta del Clot, Escola
     Casas i Claror Marítim. Reunions amb el Conseller d'Esports de la Generalitat, visita de l'Alcalde

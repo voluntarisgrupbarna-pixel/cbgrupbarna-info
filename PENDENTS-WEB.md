@@ -387,7 +387,107 @@ dues adreces diferents** i cap manera d'arribar a l'anglesa. Ara fa servir
 el selector de sempre. El text castellà segueix al marcatge, ocult; es pot
 netejar quan es vulgui.
 
-## Per decidir (no s'ha tocat)
+## Els quatre punts que quedaven per decidir · resolts el 23/08/2026
+
+L'Ana va demanar tancar-los tots. Això és el que s'ha fet i per què.
+
+### 1. El dossier del Premi demanava un PIN i alhora era al sitemap
+
+Hi havia **dues reixes**, no una: les tres portades (`/premidonaesport/` i les
+seves versions `/es/` i `/en/`) portaven, a més de la d'`assets/js/auth.js`, una
+segona reixa de quatre caselles escrita dins de l'HTML, amb **el mateix codi** i
+una clau de sessió diferent. Qui hi arribava havia de teclejar 1965 dues vegades
+seguides per entrar al mateix lloc. I qui no el tenia es quedava en un carreró
+sense un sol enllaç.
+
+Ara la porta és una: la d'`auth.js`, que cobreix les 72 pàgines del dossier,
+reconeix les dues claus antigues (ningú no ha de tornar a entrar-hi), **surt en
+l'idioma de la pàgina** —abans sempre en català— i ofereix una sortida a qui no
+té el codi: la pàgina pública de bàsquet femení de cada idioma.
+
+Sobre l'indexació: **no s'ha obert el dossier** —això és una decisió de
+contingut— però s'ha desfet la contradicció. Les 72 pàgines porten
+`noindex,follow` i les seves **69 adreces han sortit del `sitemap.xml`** (de 433
+a 364). Ningú no arribarà des d'una cerca a una paret amb un PIN. Si algun dia es
+vol obrir, és treure el `<script>` d'`auth.js` i tornar-les a posar al sitemap.
+
+També s'ha corregit `llms.txt`, que descrivia aquest corpus com a «obert i sense
+registre» quan no ho és. Ara diu que aquest mirall demana codi i assenyala les
+dues versions realment obertes: la web oficial de la candidatura i `/femeni/`.
+
+### 2. El vídeo de la mascota en castellà
+
+`/es/mascota/` ja serveix `mascota-reel-es.mp4`, que era al repositori sense fer
+servir. Els rètols del vídeo no són una transcripció de la veu: són targetes en
+pantalla, i per tant es poden traduir. Se n'han fet dos `.vtt` nous
+—`subtitols-es.vtt` i `subtitols-en.vtt`— amb els mateixos temps que l'original.
+`/en/mascota/` segueix amb el muntatge català, que és l'únic que hi ha, però ara
+amb els rètols en anglès per defecte i el català com a segona pista.
+
+> **Per confirmar mirant-lo:** el fitxer castellà no s'ha pogut obrir des d'aquí
+> per comprovar-ne l'àudio. El nom, la durada (90 s contra els 80 s del català) i
+> el germà `-es-capcut.mp4` diuen que és el doblatge, però val la pena veure'n
+> deu segons abans de donar-ho per fet.
+
+### 3. Les portades en castellà i en anglès
+
+Tenien el commutador Franges/Extensa, però **l'extensa quedava buida**: hi
+faltaven set blocs que només existien en català. Ara hi són tots, traduïts:
+
+- el **masthead** («CB Grup Barna · Bàsquet a Barcelona des de 1965»), amb els
+  cinc pilars i les dues crides;
+- la capçalera **«La portada»** amb la data del dia, en castellà i en anglès;
+- la franja de **paritat**;
+- el bloc del lema, **Cultura del Progrés**;
+- **El Barna per dins**, amb les tres portes;
+- **l'Observatori Barna**, amb tres guies del blog;
+- i la secció **Presentacions**.
+
+Pel camí van sortir dues coses més:
+
+- **Cap de les dues portades tenia un `h1` visible a la vista per defecte.** El
+  titular de les franges era un `<h2>` i l'únic `h1` vivia en un bloc que només
+  surt a l'extensa. Ara les tres portades es comporten igual: un `h1` visible a
+  cada vista.
+- El titular de la fitxa de l'Escoleta era un segon `h1` («Escoleta de
+  baloncesto»), que a més era el que Google llegia com a títol de la portada.
+  Ara és un `h2`, com en català.
+
+I una que afectava les tres: **la primera franja no es podia llegir a mòbil**.
+La graella manté tres columnes fixes —190 px de foto, el text i la crida de la
+dreta, que no parteix—, i a 390 px al text li quedaven vint píxels: queia una
+paraula per línia. És la primera cosa que veu qui entra des del mòbil. Per sota
+de 700 px la crida ara baixa sota el text.
+
+### 4. El contrast del vermell
+
+Repassat amb el navegador, no a ull: 72 pàgines dels tres idiomes, comparant el
+color de cada text amb el fons **compositat** de sota (les capes translúcides
+menteixen si es miren pel seu compte). Hi havia **38 combinacions** per sota del
+mínim AA. Ara no en queda cap.
+
+El sistema ja tenia la resposta escrita i no s'aplicava:
+
+| On | Abans | Ara |
+|---|---|---|
+| Text vermell petit sobre crema | `--red` #E20613 · 4,37:1 | `--red-ink` #A8040E · 6,93:1 |
+| Text vermell sobre tinta | `--red` #E20613 · 3,87:1 | `--red-light` #FF3B41 · 5,40:1 |
+| Botó vermell dins d'un article | tinta sobre vermell · 3,87:1 | blanc · 4,92:1 |
+
+Aquell botó era un cas d'especificitat de manual, del que avisa la guia visual:
+`.prose a` (0,1,1) guanyava a `.btn` (0,1,0), i qualsevol botó dins d'un article
+es quedava amb el text en tinta i un subratllat que no li tocava.
+
+I quatre pàgines fosques feien servir els grisos pensats per a fons clar:
+`/jugadors/` (#6B6560 sobre tinta, 3,32:1), `/presentacions/` (un gris fix que
+ignorava el seu propi mode fosc), `/galeria-3x3-glories/` (#2e2e2e sobre negre,
+**1,39:1** — text que directament no es veu) i `/mascota/` (blanc sobre el verd
+de WhatsApp, 1,98:1). El verd de WhatsApp és seu i s'hi queda; el que ha canviat
+és el text, que ara hi va en tinta.
+
+---
+
+## Per decidir (redactat el 23/08/2026, abans de resoldre'ls) — vegeu més amunt
 
 1. **`/premidonaesport/` demana un PIN i alhora és al `sitemap.xml`.** Són
    ~115 adreces que es donen a Google com a indexables i que, quan algú hi

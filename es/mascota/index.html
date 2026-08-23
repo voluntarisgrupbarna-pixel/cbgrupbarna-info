@@ -232,9 +232,11 @@
     text-align: center;
   }
 
+  /* El vel blanc aclaria el vermell i el text hi baixava a 4,41:1. Amb un vel
+     de tinta el fons s'enfosqueix i el blanc hi puja a 7:1. */
   .info-card .tag {
     display: inline-block;
-    background: rgba(255,255,255,0.15);
+    background: rgba(16,16,14,0.22);
     color: #fff;
     font-size: 0.7rem;
     font-weight: 700;
@@ -294,7 +296,7 @@
 
   .contact-box .contact-name {
     font-size: 0.75rem;
-    color: #888;
+    color: #6B6560;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 4px;
@@ -345,9 +347,11 @@
   }
   .btn-primary:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
 
+  /* El verd de WhatsApp es el seu, i es queda. El text, pero, no pot ser blanc:
+     hi dona 1,98:1. En tinta hi dona 9,6:1 i el boto se segueix reconeixent. */
   .btn-wa {
     background: #25D366;
-    color: #fff;
+    color: #10100E;
     box-shadow: 0 4px 16px rgba(37,211,102,0.3);
   }
 
@@ -416,7 +420,7 @@
   }
   .share-btn:hover { opacity: 0.85; }
 
-  .share-wa { background: #25D366; color: #fff; }
+  .share-wa { background: #25D366; color: #10100E; }
   .share-copy { background: #333; color: #fff; cursor: pointer; border: none; font-family: inherit; }
 
   /* ── FOOTER ── */
@@ -452,9 +456,9 @@
   /* Caselles de 24px mínim: amb el text sol feien 19-21px d'ample i no
      arribaven a la mida mínima de diana tàctil (WCAG 2.2). */
   .lang-switch { display: flex; align-items: center; gap: 2px; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; opacity: 0.55; text-decoration: none; transition: opacity 0.3s, color 0.3s; }
-  .lang-switch a.active { opacity: 1; font-weight: 600; }
-  .lang-switch a:hover, .lang-switch a:focus-visible { opacity: 1; }
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; opacity: 0.85; color: #fff; text-decoration: none; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; color: #fff; }
+  .lang-switch a:hover, .lang-switch a:focus-visible { opacity: 1; color: #FF3B41; }
   .lang-switch .sep { opacity: 0.25; pointer-events: none; }
 
   .lang-switch-bar {
@@ -488,12 +492,15 @@
       poster="/og-image.jpg"
       aria-label="Vídeo de la mascota del CB Grup Barna - Escuela de baloncesto para niños de 4 a 8 años"
     >
-      <source src="/mascota/mascota-reel.mp4" type="video/mp4">
+      <!-- Versio castellana del reel: aquest fitxer ja era al repositori i la
+           pagina servia igualment la catalana. Els rotols van al seu propi
+           .vtt en castella, amb els mateixos temps que l'original. -->
+      <source src="/mascota/mascota-reel-es.mp4" type="video/mp4">
       <track
         kind="subtitles"
-        src="/mascota/subtitols.vtt"
-        srclang="ca"
-        label="Català"
+        src="/mascota/subtitols-es.vtt"
+        srclang="es"
+        label="Castellano"
         default
       >
       Tu navegador no admite vídeos HTML5.

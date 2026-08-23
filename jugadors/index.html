@@ -68,22 +68,25 @@
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="stylesheet" href="/css/fonts.css">
 <style>
-  :root{--red:#E20613;--black:#10100E;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  /* Aquesta pagina va sobre tinta: el gris de text secundari del sistema
+     (#6B6560, pensat per a fons clar) hi donava 3,32:1. Sobre fosc el que
+     arriba a AA es #9C9A95 (6,78:1). */
+  :root{--red:#E20613;--red-light:#FF3B41;--black:#10100E;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:#9C9A95}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Inter',sans-serif}
   header{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line);flex-wrap:wrap}
   header img{width:38px;height:38px;object-fit:contain}
   header .t{font-family:'Anton',sans-serif;font-size:1.4rem;letter-spacing:.06em}
-  header .t span{color:var(--red)}
-  header a.back{margin-left:auto;color:#6B6560;font-size:.8rem;text-decoration:none}
+  header .t span{color:var(--red-light)}
+  header a.back{margin-left:auto;color:#9C9A95;font-size:.8rem;text-decoration:none}
   .site-nav{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;width:100%;margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--line)}
-  .site-nav a{font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6B6560;text-decoration:none}
+  .site-nav a{font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#9C9A95;text-decoration:none}
   .site-nav a:hover{color:var(--txt)}
   .wrap{max-width:960px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
   h1{font-family:'Anton',sans-serif;font-size:2.2rem;margin-bottom:.2rem}
   h1 span{color:var(--red)}
-  .sub{color:#6B6560;font-size:.9rem;margin-bottom:1.5rem}
-  .intro{color:#6B6560;font-size:.85rem;max-width:56ch;margin:-.8rem 0 1.5rem}
+  .sub{color:#9C9A95;font-size:.9rem;margin-bottom:1.5rem}
+  .intro{color:#9C9A95;font-size:.85rem;max-width:56ch;margin:-.8rem 0 1.5rem}
   .team{margin-top:1.8rem}
   .team h2{font-family:'Anton',sans-serif;font-size:1.4rem;color:var(--red);border-bottom:1px solid var(--line);padding-bottom:.35rem;margin-bottom:.8rem}
   .players{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem}
@@ -91,10 +94,10 @@
   .pfoto{width:52px;height:52px;border-radius:50%;object-fit:cover;background:#222;flex:none}
   .dorsal{font-family:'Anton',sans-serif;font-size:1.5rem;color:var(--red);min-width:2rem;text-align:center;flex:none}
   .pname{font-weight:500;font-size:.95rem;line-height:1.25}
-  .ppos{color:#6B6560;font-size:.75rem}
-  .empty{color:#6B6560;padding:2rem 0}
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Anton', sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B6560; }
-.lang-switch a { display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;text-decoration:none; opacity: 0.55; color: #6B6560; transition: opacity 0.3s, color 0.3s; }
+  .ppos{color:#9C9A95;font-size:.75rem}
+  .empty{color:#9C9A95;padding:2rem 0}
+.lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Anton', sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #9C9A95; }
+.lang-switch a { display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;text-decoration:none; opacity: 0.55; color: #9C9A95; transition: opacity 0.3s, color 0.3s; }
 .lang-switch a.active { opacity: 1; font-weight: 600; color: var(--txt); }
 .lang-switch a:hover { opacity: 1; color: var(--red); }
 .lang-switch .sep { opacity: 0.25; }

@@ -466,6 +466,9 @@
   --paper: #ffffff;
   --paper-2: #F4F1EC;
   --red: #E20613;
+  /* Sobre fons fosc el vermell de l'escut es queda en 3,87:1 i no arriba al
+     mínim per a text petit. El sistema el preveu aclarit a #FF3B41 (5,4:1). */
+  --red-light: #FF3B41;
   --red-dark: #a81318;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
@@ -495,7 +498,11 @@ img { max-width: 100%; height: auto; display: block; }
 /* ==== TIPOGRAFIA ==== */
 h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.3; }
 .eyebrow { font-family: var(--display); font-size: 9.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: #6B6560; }
-.eyebrow.red { color: var(--red); }
+/* 9,5-10 px: --red sobre crema es queda en 4,37:1. --red-ink és el token
+   que el sistema reserva per a text vermell sobre fons clar. */
+.eyebrow.red { color: var(--red-ink, #A8040E); }
+.foot .eyebrow.red, .comunitat .eyebrow.red, .franja--ink .eyebrow.red,
+.e-lema .eyebrow.red, .ticker .eyebrow.red { color: var(--red-light); }
 .rule { width: 1px; height: clamp(26px, 4vw, 46px); background: var(--line); margin: 18px auto; }
 .sec-head { text-align: center; margin-bottom: clamp(30px, 4.4vw, 56px); }
 .sec-head h2 { font-size: clamp(18px, 2.5vw, 28px); margin-top: 14px; }
@@ -583,7 +590,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .lead-media .tagline { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
 .lead-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 6vw, 88px) clamp(22px, 5vw, 76px); }
 .lead-body h1 { font-size: clamp(25px, 3.4vw, 44px); margin: 18px 0 0; }
-.lead-body h1 small { display: block; margin-top: 14px; font-size: 0.44em; letter-spacing: 0.32em; color: #6B6560; font-weight: 300; }
+.lead-body h1 small, .lead-body h2 small { display: block; margin-top: 14px; font-size: 0.44em; letter-spacing: 0.32em; color: #6B6560; font-weight: 300; }
 .lead-body .lede { margin-top: 24px; }
 .lead-body .btn-row { margin-top: 30px; }
 .lead-url { display: inline-flex; align-items: center; min-height: 44px; gap: 8px; margin-top: 22px; align-self: flex-start; font-family: var(--display); font-size: 11px; letter-spacing: 0.16em; color: var(--red); border-bottom: 1px solid var(--red); padding-bottom: 6px; transition: color 0.3s, border-color 0.3s; }
@@ -602,7 +609,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .cal-team { font-family: var(--display); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
 .cal-meta { font-size: 12px; color: #6B6560; }
 .cal-when { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; text-align: right; white-space: nowrap; }
-.cal-cond { width: 66px; flex-shrink: 0; text-align: right; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
+/* 8,5 px sobre crema: --red hi dona 4,37:1. */
+.cal-cond { width: 66px; flex-shrink: 0; text-align: right; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red-ink, #A8040E); }
 .cal-empty { padding: 34px 4px; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); text-align: center; }
 .cal-empty a { border-bottom: 1px solid var(--red); }
 @media (max-width: 640px) { .cal-when { display: none; } .cal-cond { width: auto; } }
@@ -742,10 +750,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .foot-col a, .foot-col p { display: block; padding: 6px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
 .foot-col a { display: flex; align-items: center; min-height: 44px; }
 .foot-col a { transition: color 0.3s; }
-.foot-col a:hover { color: var(--red); }
+.foot-col a:hover { color: var(--red-light); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
 .foot-mark { font-family: var(--display); font-weight: 300; font-size: clamp(12px, 2vw, 16px); letter-spacing: 0.4em; text-transform: uppercase; }
-.foot-mark em { font-style: normal; color: var(--red); }
+.foot-mark em { font-style: normal; color: var(--red-light); }
 .foot-legal { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
 /* ==== FAB WHATSAPP ==== */
@@ -804,6 +812,20 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .franja-go { padding: 0 26px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
 .franja-go em { font-style: normal; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6560; white-space: nowrap; }
 .franja-go i { display: block; width: 26px; height: 1px; background: var(--ink); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
+
+/* A 390 px la franja conservava les tres columnes fixes —190 px d'imatge, el
+   text, i la crida de la dreta, que porta white-space: nowrap i no encongeix—:
+   al text li quedaven vint píxels i queia una paraula per línia. És la primera
+   cosa que es veu des del mòbil, que és per on entra gairebé tothom. Per sota
+   de 700 px la crida baixa sota el text i la foto es fa petita. */
+@media (max-width: 700px) {
+  .franja { grid-template-columns: 104px minmax(0, 1fr); grid-template-areas: "ph tx" "ph go"; }
+  .franja-ph { grid-area: ph; }
+  .franja-tx { grid-area: tx; padding: 16px 18px 2px; }
+  .franja-go { grid-area: go; padding: 4px 18px 16px; align-items: center; }
+  .franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tx" "go"; }
+}
+
 .franja--red { background: var(--red); }
 .franja--red .franja-t, .franja--red .franja-s, .franja--red .franja-go em { color: #fff; }
 .franja--red .franja-s { color: rgba(255,255,255,0.82); }
@@ -822,7 +844,9 @@ html[data-view="extensa"] .only-light { display: none; }
 html[data-view="extensa"] .only-extensa { display: block; }
 html[data-view="extensa"] .lead.only-extensa { display: grid; }
 .lg-hero { padding: clamp(26px, 4vw, 40px) 20px clamp(20px, 3vw, 28px); text-align: center; border-bottom: 1px solid var(--line); }
-.lg-hero h2 { font-size: clamp(26px, 4.4vw, 44px); margin: 8px 0 6px; }
+.lg-hero h1, .lg-hero h2 { font-size: clamp(26px, 4.4vw, 44px); line-height: 0.94; margin: 8px 0 8px; }
+.lg-hero h1 em { font-style: normal; color: var(--red); }
+.lg-hero-seo { font-size: 11.5px; color: var(--muted); margin: 10px auto 0; max-width: 62ch; line-height: 1.65; }
 .lg-hero-s { font-size: 13px; color: #6B6560; margin: 0 auto; max-width: 46ch; line-height: 1.6; }
 .franja--lead .franja-t { font-size: clamp(26px, 4vw, 46px); }
 .view-toggle { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-family: var(--body); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; padding: 8px 12px; min-height: 34px; transition: border-color 0.3s var(--ease), color 0.3s var(--ease); }
@@ -866,6 +890,72 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 .lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
 .lang-switch.light a.active { color: #fff; }
 @media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+
+/* ==== VISTA EXTENSA · les peces editorials ====
+   Aquests components nomes existien a la portada catalana: la castellana i
+   l'anglesa tenien el commutador Franges/Extensa pero l'extensa quedava
+   buida. Son els mateixos valors que a /index.html. */
+.masthead { background: var(--ink); color: #fff; }
+.mh-in { max-width: 1180px; margin: 0 auto; padding: clamp(38px, 6vw, 74px) clamp(20px, 5vw, 56px) clamp(30px, 4.5vw, 56px); }
+.mh-eyebrow { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: #FF3B41; margin: 0 0 clamp(14px, 2vw, 22px); }
+.mh-h { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.9; letter-spacing: 0.01em; font-size: clamp(38px, 8.5vw, 92px); margin: 0; color: #fff; }
+.mh-h em { display: block; font-style: normal; font-family: var(--display); font-size: clamp(13px, 2.1vw, 22px); letter-spacing: 0.12em; line-height: 1.15; margin-top: clamp(10px, 1.6vw, 18px); color: rgba(255,255,255,0.88); }
+.mh-pillars { list-style: none; display: flex; flex-wrap: wrap; margin: clamp(20px, 3vw, 32px) 0 0; padding: 0; }
+.mh-pillars li { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.8); padding-right: 15px; margin: 4px 15px 4px 0; border-right: 1px solid rgba(255,255,255,0.24); }
+.mh-pillars li:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.mh-sub { font-size: 13.5px; line-height: 1.62; color: rgba(255,255,255,0.74); max-width: 62ch; margin: clamp(18px, 2.4vw, 26px) 0 0; }
+.mh-sub strong { color: #fff; font-weight: 500; }
+.mh-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(22px, 3vw, 32px); }
+.mh-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 clamp(18px, 3vw, 28px); background: var(--red); color: #fff; font-family: var(--display); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+.mh-btn:hover { background: #fff; color: var(--ink); }
+.mh-btn--ghost { background: transparent; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.38); }
+.mh-btn--ghost:hover { background: #fff; color: var(--ink); box-shadow: none; }
+.mh-in { padding: 30px 20px 26px; }
+.mh-sub { font-size: 12.5px; }
+.e-sech-wrap { padding-top: clamp(20px, 3vw, 34px); }
+.e-sech { border-top: 2px solid var(--red); padding: 14px 0 12px; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.e-sech h2 { font-family: var(--display); font-weight: 400; font-size: clamp(15px, 2vw, 20px); letter-spacing: 0.02em; text-transform: uppercase; }
+.e-sech em { font-style: normal; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6560; }
+.e-feat { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 3vw, 34px); padding: clamp(30px, 4.5vw, 54px) 0; }
+.e-art { display: block; }
+.e-art .im { display: block; position: relative; overflow: hidden; background: var(--paper-2); aspect-ratio: 3 / 4; }
+.e-art .im img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.7s var(--ease); }
+.e-art:hover .im img { transform: scale(1.04); }
+.e-art .cap { display: block; padding: 14px 2px 0; }
+.e-art .kick { font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
+.e-art h3 { font-size: clamp(17px, 2.1vw, 24px); letter-spacing: 0.02em; text-transform: none; font-weight: 500; margin: 8px 0 6px; line-height: 1.15; }
+.e-art.wide h3 { font-size: clamp(20px, 2.8vw, 32px); }
+.e-art p { font-size: 13px; color: var(--ink-2); }
+.e-guides { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: clamp(30px, 4.5vw, 54px); }
+.e-guide { display: block; background: var(--paper); padding: clamp(20px, 2.6vw, 28px); transition: background 0.3s var(--ease); }
+.e-guide:hover { background: var(--paper-2); }
+.e-guide .kick { font-family: var(--body); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); }
+.e-guide h3 { font-size: 15.5px; font-weight: 500; text-transform: none; letter-spacing: 0.01em; margin: 9px 0 8px; line-height: 1.25; }
+.e-guide p { font-size: 12.5px; color: var(--ink-2); margin: 0; }
+.e-par { background: var(--red); color: #fff; margin: clamp(24px, 3.5vw, 40px) 0; }
+.e-par .halves { display: grid; grid-template-columns: 1fr 1px 1fr; }
+.e-par .rule { background: rgba(255,255,255,0.4); }
+.e-par .h { padding: clamp(22px, 3.2vw, 32px) clamp(20px, 4vw, 40px); }
+.e-par .h span { display: block; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.82; }
+.e-par .h b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.8vw, 30px); text-transform: uppercase; line-height: 1; margin-top: 10px; }
+.e-par .foot { border-top: 1px solid rgba(255,255,255,0.4); padding: 16px clamp(20px, 4vw, 40px); font-size: 13px; }
+.e-par .foot a { color: #fff; }
+.e-lema { background: var(--ink); color: #fff; text-align: center; padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 50px); margin: clamp(24px, 3.5vw, 40px) 0; }
+.e-lema .eyebrow { color: rgba(255,255,255,0.6); }
+.e-lema h2 { color: #fff; margin-top: 10px; }
+.e-lema h2 em { font-style: normal; color: #FF3B41; }
+.e-lema p.lede { color: rgba(255,255,255,0.8); max-width: 58ch; margin: 18px auto 0; }
+.e-lema .cta { color: #fff; margin-top: 20px; }
+.e-lema .cta:hover { color: #FF3B41; }
+@media (max-width: 700px) {
+  .mh-in { padding: 30px 20px 26px; }
+  .mh-sub { font-size: 12.5px; }
+}
+@media (min-width: 860px) { .e-feat { grid-template-columns: 1.4fr 1fr 1fr; } }
+@media (min-width: 760px) { .e-guides { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .e-par .halves { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .e-par .rule { height: 1px; } }
+
 </style>
 <script src="/js/galetes.js"></script>
 </head>
@@ -962,6 +1052,32 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
 <main id="contingut">
 
+
+  <!-- ==== QUI SOM · abans que qualsevol porta d'entrada ==== -->
+  <section class="masthead only-extensa" aria-labelledby="mh-h">
+    <div class="mh-in">
+      <p class="mh-eyebrow">El Clot · Sant Martí · Barcelona</p>
+      <h1 class="mh-h" id="mh-h">CB Grup Barna<em>Basketball in Barcelona since 1965</em></h1>
+      <ul class="mh-pillars">
+        <li>Competition</li>
+        <li>Development</li>
+        <li>Women's basketball</li>
+        <li>Community</li>
+        <li>Social impact</li>
+      </ul>
+      <p class="mh-sub">Youth basketball club and academy in El Clot, Barcelona. <strong>38 teams</strong>, men's and women's, <strong>15 registered with the FCBQ</strong> —eight of them women's—, an <strong>Escoleta for ages 4 to 8</strong>, camps, skills work and inclusive basketball with the Barna Màgics.</p>
+      <div class="mh-cta">
+        <a class="mh-btn" href="#info" data-cta="mh-fes-te">Join the Barna</a>
+        <a class="mh-btn mh-btn--ghost" href="/en/companies/" data-cta="mh-empreses">Companies and partners</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== LA PORTADA · capçalera d'article ==== -->
+  <div class="wrap only-extensa e-sech-wrap">
+    <div class="e-sech"><h2>The front page</h2><em id="e-date"></em></div>
+  </div>
+
   <!-- ==== ESCOLETA · el que toca aquest mes ==== -->
   <section class="lead only-extensa" id="escoleta">
     <div class="lead-media">
@@ -970,7 +1086,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     </div>
     <div class="lead-body">
       <p class="eyebrow red">The first dribble starts here · Ages 4 to 8</p>
-      <h1>Basketball Escoleta<small>CB Grup Barna · El Clot</small></h1>
+      <h2>Youth Basketball Club and Academy in Barcelona<small>CB Grup Barna · Escoleta ages 4-8 · El Clot</small></h2>
       <p class="lede">Mixed teams, three age groups and meet-ups with other clubs. Come try a training session with no commitment: sixty-one years training the neighbourhood's children.</p>
       <div class="btn-row">
         <a href="https://wa.me/34646205526?text=Hi%20Julio!%20I%27m%20interested%20in%20the%20CB%20Grup%20Barna%20basketball%20Escoleta%20for%20children%20aged%204%20to%208.%20Could%20you%20give%20me%20more%20information%3F" target="_blank" rel="noopener" class="btn red" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
@@ -982,9 +1098,10 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   </section>
 
   <div class="lg-hero only-light">
-    <p class="eyebrow">The first bounce starts here</p>
-    <h2>Basketball in Clot since 1965</h2>
-    <p class="lg-hero-s">34+ teams. The same number of players, and the same budget, for both lines.</p>
+    <p class="eyebrow red">CB Grup Barna · El Clot · Barcelona</p>
+    <h1>Basketball in Clot.<br><em>Since 1965.</em></h1>
+    <p class="lg-hero-s">38 teams. The same number of players, and the same budget, for both sides.</p>
+    <p class="lg-hero-seo">Youth basketball club and academy in Barcelona: an Escoleta for ages 4 to 8, teams registered with the FCBQ, camps, skills work and inclusive basketball with the Barna Màgics, in El Clot, Sant Martí.</p>
   </div>
 
   <section class="franges only-light" aria-label="Quick access to the club">
@@ -1027,6 +1144,76 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     </a>
   </section>
 
+
+
+  <!-- ==== PARITAT · una franja, no una xifra ==== -->
+  <div class="wrap only-extensa">
+    <div class="e-par">
+      <div class="halves">
+        <div class="h"><span>Women's side</span><b>The same number of players</b></div>
+        <div class="rule"></div>
+        <div class="h"><span>Men's side</span><b>The same number of players</b></div>
+      </div>
+      <div class="foot"><b>And the same budget for both.</b> Parity at the Barna is not a statement of intent: it is split down the middle. <a href="/en/premidonaesport/" data-cta="extensa-premi-dona">The model, documented in the Premi Dona i Esport →</a></div>
+    </div>
+  </div>
+
+  <!-- ==== LEMA · cultura del progrés ==== -->
+  <div class="wrap only-extensa">
+    <div class="e-lema">
+      <p class="eyebrow">Our motto</p>
+      <h2>Culture of <em>Progress</em></h2>
+      <p class="lede">We do not teach through sacrifice: we teach through progress. Effort, learning, rest, support, opportunity and adaptation — the sum is what moves every player forward, not sacrifice on its own. That is why we are a development club, a competitive club and a club of progress at the same time: three ways of saying the same thing.</p>
+      <a class="cta" href="/en/blog/culture-of-effort-progress/" data-cta="extensa-lema-progres">What it means for the Barna →</a>
+    </div>
+  </div>
+
+  <!-- ==== EL BARNA PER DINS ==== -->
+  <div class="wrap only-extensa">
+    <div class="e-sech"><h2>Inside the Barna</h2><em>Three doors</em></div>
+    <div class="e-feat">
+      <a class="e-art wide" href="/en/escoleta/" data-cta="extensa-escoleta">
+        <span class="im"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="(max-width:860px) 100vw, 40vw" width="600" height="800" loading="lazy" decoding="async" alt="Girl from the CB Grup Barna Escoleta with the ball"></span>
+        <span class="cap"><span class="kick">Escoleta</span>
+          <h3>Ages 4 to 8: where everyone starts, knowing nothing</h3>
+          <p>Mixed teams, three age groups and friendlies with other clubs.</p></span>
+      </a>
+      <a class="e-art" href="#seniors" data-cta="extensa-seniors">
+        <span class="im"><img src="/img/seniors.webp" srcset="/img/seniors.webp 600w, /img/seniors@2x.webp 1200w" sizes="(max-width:860px) 100vw, 25vw" width="600" height="900" loading="lazy" decoding="async" alt="CB Grup Barna first-team player with the ball"></span>
+        <span class="cap"><span class="kick">Seniors</span>
+          <h3>The first team takes on the 26·27 season</h3>
+          <p>Where the road that starts at the Escoleta ends.</p></span>
+      </a>
+      <a class="e-art" href="/en/premidonaesport/" data-cta="extensa-femeni">
+        <span class="im"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="(max-width:860px) 100vw, 25vw" width="375" height="500" loading="lazy" decoding="async" alt="CB Grup Barna players in the club kit"></span>
+        <span class="cap"><span class="kick">Women's</span>
+          <h3>The women's project, team by team</h3>
+          <p>From the Escoleta to the senior side, without skipping a rung.</p></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ==== OBSERVATORI BARNA · articles reals del blog ==== -->
+  <div class="wrap only-extensa">
+    <div class="e-sech"><h2>Barna Observatory</h2><em>The club's take</em></div>
+    <div class="e-guides">
+      <a class="e-guide" href="/en/blog/what-age-to-start-basketball/" data-cta="extensa-guia-edat">
+        <span class="kick">Youth basketball</span>
+        <h3>What age can a child start playing basketball?</h3>
+        <p>The short answer is four. The long one has nuances worth knowing before signing anyone up anywhere.</p>
+      </a>
+      <a class="e-guide" href="/en/blog/how-to-choose-a-basketball-school-barcelona/" data-cta="extensa-guia-escola">
+        <span class="kick">Guide</span>
+        <h3>How to choose a basketball school in Barcelona</h3>
+        <p>Seven points that genuinely tell one option from another, and that no website spells out.</p>
+      </a>
+      <a class="e-guide" href="/en/blog/youth-basketball-sant-marti-clot/" data-cta="extensa-guia-barri">
+        <span class="kick">The neighbourhood</span>
+        <h3>How a neighbourhood club works in El Clot</h3>
+        <p>A neighbourhood club is not a small version of a big club. It is a different thing.</p>
+      </a>
+    </div>
+  </div>
 
   <!-- ==== INFORMACIÓ · formulari de contacte i avisos ==== -->
   <section class="section band-soft" id="info">
@@ -1256,6 +1443,37 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
           <div><b>450</b><span>Players</span></div>
           <div><b><em>60</em></b><span>Years in El Clot</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==== PRESENTACIONS · documents institucionals del club ==== -->
+  <section class="section" id="presentacions" aria-labelledby="presentacions-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow red">What the Grup Barna is</p>
+        <div class="rule"></div>
+        <h2 id="presentacions-title">Presentations</h2>
+      </div>
+
+      <div class="list reveal">
+        <a href="https://voluntarisgrupbarna-pixel.github.io/cbgrupbarna/el-metode.html" target="_blank" rel="noopener" data-cta="pres-1">
+<span class="list-t">The Barna Method</span>
+<span class="list-s">The 3 pillars · Premi Dona i Esport</span>
+</a>
+        <a href="https://voluntarisgrupbarna-pixel.github.io/cbgrupbarna/investigacio/dossier-8m.html" target="_blank" rel="noopener" data-cta="pres-2">
+<span class="list-t">8M Dossier</span>
+<span class="list-s">Fons Barna · Women's basketball</span>
+</a>
+        <a href="https://voluntarisgrupbarna-pixel.github.io/cbgrupbarna/patrocinis/dones.html" target="_blank" rel="noopener" data-cta="pres-3">
+<span class="list-t">Sponsorship · Women in business</span>
+<span class="list-s">Backing the women's project</span>
+</a>
+        <a href="/en/patrocinadors/" data-cta="pres-4">
+<span class="list-t">Sponsorship dossier</span>
+<span class="list-s">Tiers, activations and contact · 26/27</span>
+</a>
       </div>
     </div>
   </section>
@@ -1728,6 +1946,18 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       });
       if (window.gtag) window.gtag('event', 'ig_embed_open', { url: link });
     });
+  })();
+</script>
+
+<script>
+  // ==== LA PORTADA · data real, no escrita a mà ====
+  (function () {
+    var el = document.getElementById('e-date');
+    if (!el) return;
+    var DIES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var MESOS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var d = new Date();
+    el.textContent = DIES[d.getDay()] + ', ' + d.getDate() + ' ' + MESOS[d.getMonth()] + ' ' + d.getFullYear();
   })();
 </script>
 

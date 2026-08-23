@@ -693,6 +693,9 @@
   --paper-2: #F4F1EC;
   --red: #E20613;
   --red-dark: #A8040E;
+  /* Sobre fons fosc el vermell de l'escut es queda en 3,87:1 i no arriba al
+     mínim per a text petit. El sistema el preveu aclarit a #FF3B41 (5,4:1). */
+  --red-light: #FF3B41;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -762,6 +765,20 @@ img { max-width: 100%; height: auto; display: block; }
 .franja-go { padding: 0 26px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
 .franja-go em { font-style: normal; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6560; white-space: nowrap; }
 .franja-go i { display: block; width: 26px; height: 1px; background: var(--ink); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
+
+/* A 390 px la franja conservava les tres columnes fixes —190 px d'imatge, el
+   text, i la crida de la dreta, que porta white-space: nowrap i no encongeix—:
+   al text li quedaven vint píxels i queia una paraula per línia. És la primera
+   cosa que es veu des del mòbil, que és per on entra gairebé tothom. Per sota
+   de 700 px la crida baixa sota el text i la foto es fa petita. */
+@media (max-width: 700px) {
+  .franja { grid-template-columns: 104px minmax(0, 1fr); grid-template-areas: "ph tx" "ph go"; }
+  .franja-ph { grid-area: ph; }
+  .franja-tx { grid-area: tx; padding: 16px 18px 2px; }
+  .franja-go { grid-area: go; padding: 4px 18px 16px; align-items: center; }
+  .franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tx" "go"; }
+}
+
 .franja--red { background: var(--red); }
 .franja--red .franja-t, .franja--red .franja-s, .franja--red .franja-go em { color: #fff; }
 .franja--red .franja-s { color: rgba(255,255,255,0.82); }
@@ -910,13 +927,20 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 /* Selector d'idioma, sempre visible al costat del commutador de vista. */
 @media (max-width: 480px) {.head-brand span { display: none; } }
 
-.lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B6560; }
+/* Aquesta línia no va sobre paper: va sobre el fons de la graella de franges
+   —el color de filet al 14% sobre blanc, que dona un gris #DEDEDD—, i allà
+   --muted es queda en 4,27:1. Amb --ink-2 puja a 7,31:1. */
+.lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); }
 @media (prefers-reduced-motion: reduce) { .lg-c, .lg-c img { transition: none; } }
 
 /* ==== TIPOGRAFIA ==== */
 h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.04; }
 .eyebrow { font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: #6B6560; }
-.eyebrow.red { color: var(--red); }
+/* 9,5-10 px: --red sobre crema es queda en 4,37:1. --red-ink és el token
+   que el sistema reserva per a text vermell sobre fons clar. */
+.eyebrow.red { color: var(--red-ink, #A8040E); }
+.foot .eyebrow.red, .comunitat .eyebrow.red, .franja--ink .eyebrow.red,
+.e-lema .eyebrow.red, .ticker .eyebrow.red { color: var(--red-light); }
 .rule { width: 1px; height: clamp(26px, 4vw, 46px); background: var(--line); margin: 18px auto; }
 .sec-head { text-align: center; margin-bottom: clamp(30px, 4.4vw, 56px); }
 .sec-head h2 { font-size: clamp(18px, 2.5vw, 28px); margin-top: 14px; }
@@ -1039,7 +1063,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .cal-team { font-family: var(--body); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
 .cal-meta { font-size: 12px; color: #6B6560; }
 .cal-when { font-family: var(--body); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; text-align: right; white-space: nowrap; }
-.cal-cond { width: 66px; flex-shrink: 0; text-align: right; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
+/* 8,5 px sobre crema: --red hi dona 4,37:1. */
+.cal-cond { width: 66px; flex-shrink: 0; text-align: right; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red-ink, #A8040E); }
 .cal-empty { padding: 34px 4px; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); text-align: center; }
 .cal-empty a { border-bottom: 1px solid var(--red); }
 @media (max-width: 640px) { .cal-when { display: none; } .cal-cond { width: auto; } }
@@ -1187,10 +1212,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .foot-col a { transition: color 0.3s; }
 .foot-soc { gap: 10px; }
 .foot-soc svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
-.foot-col a:hover { color: var(--red); }
+.foot-col a:hover { color: var(--red-light); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
 .foot-mark { font-family: var(--body); font-weight: 300; font-size: clamp(12px, 2vw, 16px); letter-spacing: 0.4em; text-transform: uppercase; }
-.foot-mark em { font-style: normal; color: var(--red); }
+.foot-mark em { font-style: normal; color: var(--red-light); }
 .foot-legal { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
 /* ==== FAB WHATSAPP ==== */
@@ -1546,7 +1571,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
   <!-- ==== EL BARNA PER DINS ==== -->
   <div class="wrap only-extensa">
-    <div class="e-sech"><h2>El Barna per dins</h2><em>Quatre portes</em></div>
+    <div class="e-sech"><h2>El Barna per dins</h2><em>Tres portes</em></div>
     <div class="e-feat">
       <a class="e-art wide" href="/escoleta/" data-cta="extensa-escoleta">
         <span class="im"><img src="img/escoleta.webp" srcset="img/escoleta.webp 600w, img/escoleta@2x.webp 1200w" sizes="(max-width:860px) 100vw, 40vw" width="600" height="800" loading="lazy" decoding="async" alt="Nena de l'Escoleta del CB Grup Barna amb la pilota"></span>
