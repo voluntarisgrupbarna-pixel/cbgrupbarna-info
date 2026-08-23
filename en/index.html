@@ -795,7 +795,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .btn, .list a, .faq summary, .head-nav a, .menu-col a { min-height: 44px; }
 .head-nav a { display: inline-flex; align-items: center; }
 .list a { align-items: center; }
-@media (max-width: 1024px) {
+/* La condició no és només l'amplada: una tauleta ajaguda fa 1.180 px i es toca
+   amb el dit. Amb el punt de ruptura sol, allà el botó de menú es quedava en
+   26×26 px i les estrelles de la valoració en 24×27. `pointer: coarse` és el
+   que pregunta pel dit, que és el que decideix la mida de la zona tocable. */
+@media (max-width: 1024px), (pointer: coarse) {
   .cta { display: inline-flex; align-items: center; min-height: 44px; padding: 12px 0 10px; }
   .stars button { font-size: 32px; min-width: 44px; min-height: 44px; }
   .btn { padding: 17px clamp(20px, 5vw, 32px); }

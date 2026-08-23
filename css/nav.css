@@ -33,7 +33,11 @@
 .menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
 .head-burger:focus-visible { outline: 2px solid var(--nav-red); outline-offset: 4px; }
 /* Zona tocable de 44 px sense engreixar el dibuix de les dues barres. */
-@media (max-width: 1024px) { .head-burger { width: 44px; height: 44px; align-items: center; padding: 12px 9px; } }
+/* La condició no és només l'amplada: una tauleta ajaguda fa 1.180 px i es toca
+   amb el dit. Amb el punt de ruptura sol, allà el botó que obre el menú del
+   club es quedava en 26×26 px a totes les pàgines. `pointer: coarse` pregunta
+   pel dit, que és el que decideix la mida de la zona tocable. */
+@media (max-width: 1024px), (pointer: coarse) { .head-burger { width: 44px; height: 44px; align-items: center; padding: 12px 9px; } }
 
 /* El burger que injecta nav.js va davant de l'escut i necessita separar-se'n. */
 .head-in--amb-burger { gap: clamp(12px, 2.4vw, 20px); }
