@@ -10,6 +10,8 @@ Inventari de contingut + arquitectura tècnica del web del club. `web-cbgb` diu
 funciona per dins**, perquè no es proposi de nou el que ja existeix, no es
 trenqui un automatisme sense saber-ho, i es toqui la font real de cada dada.
 
+*Última actualització: 23/08/2026.*
+
 ---
 
 ## 0. Els tres documents que cal llegir abans de proposar res nou
@@ -205,7 +207,7 @@ el seu propi cicle de vida:
 
 ---
 
-## 8. Trampes de sessió (trobades el 20/08/2026, en crear aquesta skill)
+## 8. Trampes de sessió (trobades el 23/08/2026, en crear aquesta skill)
 
 Aquest repositori s'ha vist en un estat estrany en obrir una sessió nova: val
 la pena comprovar-ho abans de fer cap `git add`/`commit`/`push` massiu.
@@ -227,7 +229,7 @@ la pena comprovar-ho abans de fer cap `git add`/`commit`/`push` massiu.
   commitejar/pujar això**: esborraria de la web publicada pàgines legals
   RGPD i centenars de fotos. **Solució:** `git restore --source=HEAD
   --worktree -- .` (recupera el contingut del commit, no perd res). Verificat
-  el 20/08/2026 amb el vistiplau de l'Ana.
+  el 23/08/2026 amb el vistiplau de l'Ana.
 - **`git push` normal pot fer time-out (HTTP 408 / connexió tallada als ~60-70s)**
   quan la branca porta al darrere commits locals sense pujar que l'`origin`
   no té (p. ex. una tanda de «foto: add … [skip ci]» de fotos de jugadors).
@@ -342,7 +344,7 @@ originals tinguin còpia en algun lloc més. Amb això, regenerar la web és
 literalment tornar a fer `push` i revincular Pages, el domini i els
 secrets — no cal escriure de nou cap pàgina.
 
-### Com fer el mirall de còpia de seguretat (procediment provat el 20/08/2026)
+### Com fer el mirall de còpia de seguretat (procediment provat el 23/08/2026)
 
 **Comprovat aquest dia: l'App de GitHub connectada a aquesta sessió no té
 permís per crear repositoris** (`create_repository` dona `403 Resource not
