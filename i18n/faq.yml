@@ -298,15 +298,30 @@ preguntes:
       and we will remove it.
 - id: quota-temporada
   pagina: /faq/
-  pendent: El preu de la temporada per categoria. És la pregunta que més es fa i l'única resposta
-    que hi ha avui és «cal contactar amb el club», mentre que sí que es publica que una setmana
-    de campus val 195 € i un patrocini d'equip, 500 €.
   ca:
     q: Quant costa la temporada al CB Grup Barna?
+    r: 'El preu depèn de la categoria i del programa: no és el mateix l''Escoleta, un equip
+      federat o el campus. Tres coses que sí que són iguals per a tothom: el primer entrenament
+      és de prova i gratuït, no cal pagar res per venir a provar, i el club manté beques socials
+      perquè cap infant es quedi fora per motius econòmics. Per al preu exacte de la categoria
+      que li toca, escriu-nos al WhatsApp +34 698 425 153 o a marqueting@cbgrupbarna.info
+      amb l''any de naixement: responem el mateix dia.'
   es:
     q: ¿Cuánto cuesta la temporada en el CB Grup Barna?
+    r: 'El precio depende de la categoría y del programa: no es lo mismo la Escoleta, un equipo
+      federado o el campus. Tres cosas que sí son iguales para todo el mundo: el primer entrenamiento
+      es de prueba y gratuito, no hay que pagar nada por venir a probar, y el club mantiene
+      becas sociales para que ningún niño o niña se quede fuera por motivos económicos. Para
+      el precio exacto de la categoría que le toca, escríbenos al WhatsApp +34 698 425 153
+      o a marqueting@cbgrupbarna.info con el año de nacimiento: respondemos el mismo día.'
   en:
     q: How much does a season at CB Grup Barna cost?
+    r: 'It depends on the age group and the programme: the Escoleta, a league team and the
+      camp are not the same. Three things are the same for everyone: the first session is
+      a free trial, there is nothing to pay to come and try, and the club keeps hardship bursaries
+      so that no child is left out for financial reasons. For the exact price of their age
+      group, message us on WhatsApp +34 698 425 153 or write to marqueting@cbgrupbarna.info
+      with the year of birth: we reply the same day.'
 - id: quota-inclou
   pagina: /faq/
   pendent: 'Què cobreix la quota: fitxa federativa, assegurança, equipació, pistes.'
@@ -363,25 +378,50 @@ preguntes:
     q: Who decides which team a child joins, and what do A and B teams mean?
 - id: desplacaments
   pagina: /partits/calendaris/
-  pendent: Quants partits es juguen fora al llarg d'una temporada i com s'organitzen els desplaçaments
-    (qui porta els nens).
   ca:
-    q: Quants desplaçaments hi ha i qui porta els nens als partits de fora?
+    q: Quants partits es juguen fora de casa?
+    r: 'La meitat. La temporada 2026-27 el club té 274 partits de competició federada repartits
+      entre 15 equips: 137 es juguen a casa i 137, fora, en vuitanta pistes diferents: la
+      meitat de la temporada són desplaçaments. Segons la categoria, un equip en juga entre
+      14 i 30 en tot l''any. El calendari de cada equip diu quin és a casa i quin a fora,
+      amb la pista i l''adreça, i s''actualitza cada dia.'
   es:
-    q: ¿Cuántos desplazamientos hay y quién lleva a los niños a los partidos de fuera?
+    q: ¿Cuántos partidos se juegan fuera de casa?
+    r: 'La mitad. En la temporada 2026-27 el club tiene 274 partidos de competición federada
+      repartidos entre 15 equipos: 137 se juegan en casa y 137, fuera, en ochenta pistas distintas:
+      la mitad de la temporada son desplazamientos. Según la categoría, un equipo juega entre
+      14 y 30 en todo el año. El calendario de cada equipo dice cuál es en casa y cuál fuera,
+      con la pista y la dirección, y se actualiza cada día.'
   en:
-    q: How many away games are there, and who takes the children?
+    q: How many games are played away?
+    r: 'Half of them. In the 2026-27 season the club has 274 league fixtures across 15 teams:
+      137 at home and 137 away, at eighty different venues: half the season is spent travelling.
+      Depending on the age group, a team plays between 14 and 30 over the year. Each team''s
+      calendar says which are home and which are away, with the venue and the address, and
+      it updates every day.'
 - id: avis-canvis
   pagina: /partits/calendaris/
-  pendent: Per quin canal avisa el club una família si canvia una hora o una pista (grup de
-    WhatsApp de l'equip, correu…). El web ja marca «MODIFICAT» set dies, però això és el web,
-    no l'avís.
   ca:
-    q: Com ens avisen si canvia l'hora o la pista d'un partit?
+    q: Com sé si canvia l'hora o la pista d'un partit?
+    r: 'El calendari del web es refresca cada dia a partir del calendari oficial de la Federació
+      Catalana de Basquetbol, i un partit que ja s''havia publicat i canvia queda marcat com
+      a MODIFICAT durant set dies. La manera de no haver-hi d''entrar a mirar és subscriure''s
+      al calendari del teu equip des de /partits/calendaris/: el mòbil se''l descarrega sol
+      i el canvi hi apareix sense fer res.'
   es:
-    q: ¿Cómo nos avisan si cambia la hora o la pista de un partido?
+    q: ¿Cómo sé si cambia la hora o la pista de un partido?
+    r: 'El calendario de la web se refresca cada día a partir del calendario oficial de la
+      Federació Catalana de Basquetbol, y un partido ya publicado que cambia queda marcado
+      como MODIFICADO durante siete días. La manera de no tener que entrar a mirar es suscribirse
+      al calendario de tu equipo desde /partits/calendaris/: el móvil se lo descarga solo
+      y el cambio aparece sin hacer nada.'
   en:
-    q: How are we told if a game's time or venue changes?
+    q: How do I know if a game's time or venue changes?
+    r: 'The calendar on the site refreshes every day from the Catalan Basketball Federation''s
+      official fixtures, and a game that had already been published and then changes is flagged
+      as MODIFIED for seven days. To avoid having to check at all, subscribe to your team''s
+      calendar from /partits/calendaris/: your phone downloads it by itself and the change
+      appears without you doing anything.'
 - id: faltar-entrenament
   pagina: /faq/
   pendent: Què s'espera d'una família si un dia el jugador no pot anar a entrenar.
@@ -403,13 +443,27 @@ preguntes:
     q: Is a medical check-up required to play?
 - id: voluntariat
   pagina: /club/
-  pendent: Com s'apunta algú que vol ser entrenador o voluntari, i què cal.
   ca:
-    q: Com puc ser entrenador o voluntari al club?
+    q: Com puc ser entrenador o voluntari al CB Grup Barna?
+    r: 'Escrivint al club i dient què t''agradaria fer: marqueting@cbgrupbarna.info o WhatsApp
+      +34 698 425 153. El club té 38 entrenadores en actiu —el 65,5% de l''staff tècnic— i
+      moltes són exjugadores formades a casa, o sigui que el camí de jugar-hi a entrenar-hi
+      és habitual. Tot el personal tècnic i voluntari acredita el certificat negatiu del Registre
+      Central de Delinqüents Sexuals, tal com exigeix la LOPIVI.'
   es:
-    q: ¿Cómo puedo ser entrenador o voluntario en el club?
+    q: ¿Cómo puedo ser entrenador o voluntario en el CB Grup Barna?
+    r: 'Escribiendo al club y diciendo qué te gustaría hacer: marqueting@cbgrupbarna.info
+      o WhatsApp +34 698 425 153. El club tiene 38 entrenadoras en activo —el 65,5% del staff
+      técnico— y muchas son exjugadoras formadas en casa, así que el camino de jugar a entrenar
+      es habitual. Todo el personal técnico y voluntario acredita el certificado negativo
+      del Registro Central de Delincuentes Sexuales, tal como exige la LOPIVI.'
   en:
-    q: How can I coach or volunteer at the club?
+    q: How can I coach or volunteer at CB Grup Barna?
+    r: 'Write to the club and tell us what you would like to do: marqueting@cbgrupbarna.info
+      or WhatsApp +34 698 425 153. The club has 38 active female coaches — 65.5% of the coaching
+      staff — and many are former players who came up through the club, so going from playing
+      to coaching is a well-trodden path. All coaching and volunteer staff hold a clean certificate
+      from the Central Register of Sex Offenders, as LOPIVI requires.'
 - id: 3x3-barcelona-1
   pagina: /3x3-barcelona/
   ca:
@@ -3456,3 +3510,81 @@ preguntes:
     r: 'The Culture of Progress. We do not teach through sacrifice: we teach through progress.
       Effort matters, but it does not explain the result on its own — learning, rest, support,
       opportunities and adaptation all count too.'
+- id: desplacaments-qui-porta
+  pagina: /partits/calendaris/
+  pendent: 'Com s''organitzen els desplaçaments: si els porten les famílies, si es fan cotxes
+    compartits, si el club hi posa transport.'
+  ca:
+    q: Qui porta els nens als partits de fora?
+  es:
+    q: ¿Quién lleva a los niños a los partidos de fuera?
+  en:
+    q: Who takes the children to away games?
+- id: calendaris-1
+  pagina: /partits/calendaris/
+  ca:
+    q: Com descarrego el calendari del meu equip?
+    r: 'Busca l''equip a la llista, toca la imatge o el botó de descàrrega i es desa al mòbil
+      o ordinador: una imatge per als equips amb una sola fitxa, un PDF de diverses pàgines
+      per als sèniors, que juguen lliga d''ida i tornada.'
+  es:
+    q: ¿Cómo descargo el calendario de mi equipo?
+    r: 'Busca el equipo en la lista, toca la imagen o el botón de descarga y se guarda en
+      el móvil u ordenador: una imagen para los equipos con una sola ficha, un PDF de varias
+      páginas para los séniors, que juegan liga de ida y vuelta.'
+  en:
+    q: How do I download my team's calendar?
+    r: 'Find your team in the list, tap the image or the download button and it saves to your
+      phone or computer: an image for teams with a single fixture list, a multi-page PDF for
+      the senior teams, who play a home-and-away league.'
+- id: calendaris-2
+  pagina: /partits/calendaris/
+  ca:
+    q: Per què no hi ha calendari del meu equip?
+    r: Els equips de promoció (premini, mini, preinfantil) reben el calendari de la FCBQ més
+      tard que la resta de categories. Es publicarà aquí en el moment que la federació el
+      faci oficial.
+  es:
+    q: ¿Por qué no hay calendario de mi equipo?
+    r: Los equipos de promoción (premini, mini, preinfantil) reciben el calendario de la FCBQ
+      más tarde que el resto de categorías. Se publicará aquí en el momento en que la federación
+      lo haga oficial.
+  en:
+    q: Why isn't there a calendar for my team?
+    r: Development teams (pre-mini, mini, pre-youth) receive their calendar from the FCBQ
+      later than the rest of the categories. It will be published here as soon as the federation
+      makes it official.
+- id: calendaris-3
+  pagina: /partits/calendaris/
+  ca:
+    q: Què faig si un partit ha canviat d'hora o de pista?
+    r: Si la Federació Catalana de Basquetbol modifica un partit després que s'hagi fet la
+      fitxa descarregable, la targeta de l'equip mostra un avís perquè comprovis les dades
+      actualitzades a l'aplicació de partits del club, que es revisa cada dia.
+  es:
+    q: ¿Qué hago si un partido ha cambiado de hora o de pista?
+    r: Si la Federación Catalana de Basquetbol modifica un partido después de que se haya
+      generado la ficha descargable, la tarjeta del equipo muestra un aviso para que compruebes
+      los datos actualizados en la aplicación de partidos del club, que se revisa cada día.
+  en:
+    q: What do I do if a match has changed time or venue?
+    r: If the Catalan Basketball Federation changes a match after the downloadable fixture
+      list was generated, the team's card shows a notice so you can check the updated details
+      in the club's match app, which is reviewed every day.
+- id: calendaris-4
+  pagina: /partits/calendaris/
+  ca:
+    q: Amb quina freqüència s'actualitzen els calendaris?
+    r: 'El calendari en directe de /partits/ es sincronitza cada dia amb el calendari oficial
+      de la FCBQ. Les fitxes descarregables són fixes: si un partit concret canvia, l''app
+      sempre té la dada correcta.'
+  es:
+    q: ¿Con qué frecuencia se actualizan los calendarios?
+    r: 'El calendario en directo de /partits/ se sincroniza cada día con el calendario oficial
+      de la FCBQ. Las fichas descargables son fijas: si un partido concreto cambia, la app
+      siempre tiene el dato correcto.'
+  en:
+    q: How often are the calendars updated?
+    r: 'The live calendar at /partits/ syncs every day with the official FCBQ calendar. The
+      downloadable fixture lists are fixed: if a specific match changes, the app always has
+      the correct data.'

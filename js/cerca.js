@@ -115,7 +115,16 @@
    'els meu meva teu teva es se para por con del las los una unos unas y donde ' +
    'cuando como cuanto the of and for to in on at is are how what when where my ' +
    'your can i do does es en si no hi ha hay tiene tienen te tenim tenen have has ' +
-   'sobre about esta este esta aquest aquesta cual quiere quiero vull want').split(' ').forEach(function (p) { BUIDES[p] = 1; });
+   'sobre about esta este esta aquest aquesta cual quiere quiero vull want ' +
+   // Verbs de tots els dies. Al corpus de preguntes en surten pocs, i per
+   // això el pes per raresa els prenia per distintius: «com em FAIG
+   // entrenador» exigia trobar «faig», i cap pregunta del web el diu.
+   'faig fas fa fem feu fan fer puc pots pot podem podeu poden poder ' +
+   'vols vol volem voleu volen voler ser soc som sou estar esta estan ' +
+   'hago haces hace hacemos hacen hacer puedo puedes puede podemos pueden poder ' +
+   'quieres quiere queremos quieren querer soy eres somos son estoy estas estan ' +
+   'make makes made want wants get gets go goes am was were be been being ' +
+   'should would could will shall may might must').split(' ').forEach(function (p) { BUIDES[p] = 1; });
 
   function paraules(s) {
     return normalitza(s).split(' ').filter(function (p) {
@@ -672,9 +681,6 @@
       // és a la resposta, la relació és massa indirecta per donar-la per
       // bona sense res més que la sostingui.
       if (nomesUna && teElRar !== 2) continue;
-      // Si la paraula clau només surt a la resposta i no a la pregunta, la
-      // parella és més fluixa: que ho hagi de compensar amb la resta.
-      if (teElRar === 1) punts *= 0.7;
 
       // Cobertura pesada: no quantes paraules s'han trobat, sinó quina part
       // del que la consulta té de distintiu. Trobar «qui» i no «president»
@@ -682,6 +688,13 @@
       var cobertura = pesEncert / pesTotal;
       if (cobertura < 0.5) continue;
       punts *= 0.6 + cobertura;
+
+      // Si la paraula clau només surt a la resposta i no a la pregunta, la
+      // parella és més fluixa: que ho hagi de compensar amb la resta. Ara bé,
+      // si hi ha sortit TOT el que s'ha escrit, ja no és fluixa —només és una
+      // pregunta redactada amb unes altres paraules— i penalitzar-la dues
+      // vegades (aquí i al pes del camp) la deixava fora sense motiu.
+      if (teElRar === 1 && cobertura < 0.95) punts *= 0.7;
 
       for (var k = 0; k < ampliats.length; k++) {
         if (d.q.indexOf(ampliats[k]) >= 0) punts += 0.5;

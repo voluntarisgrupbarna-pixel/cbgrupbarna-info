@@ -571,3 +571,48 @@ de cerca abans i després.
 Les **14 preguntes amb `pendent:`**, que no es publiquen enlloc perquè la seva
 resposta no és a cap pàgina del web: vuit números (les quotes i l'equipació) i
 sis dades de funcionament del club. `--pendents` les llista.
+
+
+---
+
+## Les 9 preguntes que falten · formulari per contestar-les (23/08/2026)
+
+De les 14 que esperaven una dada, **cinc s'han pogut contestar** mirant millor
+què sap el web, sense inventar-ne cap:
+
+| Pregunta | D'on ha sortit la resposta |
+|---|---|
+| Quant costa la temporada? | No la xifra, però sí el que decideix una família: la prova és gratuïta, hi ha beques i el preu exacte de la seva categoria el té el mateix dia si escriu. |
+| Quants partits es juguen fora de casa? | **De `partits/data.json`**: 274 partits, 137 a casa i 137 a fora, en 80 pistes. Ningú els havia comptat. |
+| Com sé si canvia l'hora o la pista? | El robot diari, la marca «MODIFICAT» set dies i la subscripció `.ics`, que ja existien. |
+| Hi ha beques o ajuts? | Ho deia `/femeni/`, on cap família ho busca. |
+| Com puc ser entrenador o voluntari? | El canal del club + les 38 entrenadores en actiu + el certificat LOPIVI. |
+
+**En queden nou, i totes demanen un sí o un no que no és enlloc del web.**
+Contestar-les aquí és tot el que separa el cercador d'un 10: les redacto en
+els tres idiomes el mateix dia.
+
+### Diners · 5 preguntes
+
+1. **Què inclou la quota?** Marca el que hi entra: fitxa federativa ☐ ·
+   assegurança FCBQ ☐ · equipació ☐ · lloguer de pistes ☐ · altres:
+2. **Com es paga?** Un sol pagament ☐ · mensual ☐ · trimestral ☐ ·
+   Es domicilia? ☐ sí ☐ no
+3. **Hi ha descompte per a germans?** ☐ sí, de _____ ☐ no
+4. **Si es dona de baixa a mig any, què passa amb la quota?**
+5. **Equipació:** què és obligatori comprar, què val i on es compra.
+
+### Funcionament · 4 preguntes
+
+6. **Equip A i equip B: què vol dir, i qui ho decideix?** (Hi ha proves de
+   nivell? Ho decideix la direcció tècnica, la coordinació de la secció?)
+7. **Si un dia no pot anar a entrenar, què s'espera de la família?**
+   (Avisar l'entrenador? Per quin canal?)
+8. **Cal revisió mèdica per federar-se?** ☐ sí ☐ no
+   *(L'assegurança ja està resolta: la de la FCBQ, i ja està publicada.)*
+9. **Qui porta els nens als partits de fora?** (Les famílies? Cotxes
+   compartits? Hi posa transport el club?)
+
+> Amb aquestes nou respostes, l'auditoria passaria de 75 consultes resoltes
+> sobre 98 a prop de 90, i el bloc de diners —que és el que més es busca i el
+> que fa marxar més gent— quedaria tancat.

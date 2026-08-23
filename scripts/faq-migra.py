@@ -377,20 +377,27 @@ def main():
     rutes = carrega_rutes()
     font = yaml.safe_load(io.open(FONT, encoding="utf-8")) or {}
     entrades = font.get("preguntes", [])
-    # Les entrades amb `pendent:` no compten com a migrades: una pàgina pot
-    # tenir-hi una pregunta esperant un preu i, tot i així, tenir-ne d'altres
-    # escrites a l'HTML que encara no han passat per aquí. Era el cas de
-    # /faq/, que amb el filtre antic semblava feta i no ho estava.
-    ja = {e["pagina"] for e in entrades if not e.get("pendent")}
+    # El que ja està migrat són PREGUNTES, no pàgines. Filtrar per pàgina
+    # deixava fora tota la pàgina quan només se n'hi havia escrit una: a
+    # /partits/calendaris/ hi vam posar dues respostes noves i, de retruc,
+    # les quatre que ja tenia a l'HTML no es van poder migrar mai.
+    def clau(q):
+        return " ".join(q.lower().split())
+
+    ja_q = {clau((e.get("ca") or {}).get("q", "")) for e in entrades}
+    ja_q.discard("")
     usats = {e["id"] for e in entrades}
 
     # Què hi ha per migrar, i de quina mena.
     candidates = {}
     for ca, m in sorted(rutes.items()):
-        if ca in ja:
-            continue
         pc = preguntes_de(ca)
         if not pc:
+            continue
+        # Les que ja són a la font única no es tornen a migrar. Si no en queda
+        # cap, la pàgina està feta.
+        queden = [i for i, q in enumerate(pc) if clau(q["q"]) not in ja_q]
+        if not queden:
             continue
         traduccions, estat = {}, "automatica"
         for idioma in ("es", "en"):
@@ -406,16 +413,16 @@ def main():
                 # el resultat abans de publicar-lo. Ho fa `--aparella`.
                 estat = "a-ma"
             traduccions[idioma] = aparella(pc, alt)
-        candidates[ca] = (pc, traduccions, estat, m)
+        candidates[ca] = (pc, traduccions, estat, m, queden)
 
     if args.llista:
         for mena in ("automatica", "a-ma"):
             grup = {k: v for k, v in candidates.items() if v[2] == mena}
             print(f"\n=== {mena} · {len(grup)} pàgines · "
                   f"{sum(len(v[0]) for v in grup.values())} preguntes")
-            for ca, (pc, tr, _, m) in sorted(grup.items()):
+            for ca, (pc, tr, _, m, queden) in sorted(grup.items()):
                 diu = "+".join(sorted(tr)) or "només ca"
-                print(f"  {len(pc):2} preguntes · {diu:8} · {ca}")
+                print(f"  {len(queden):2} preguntes · {diu:8} · {ca}")
         return 0
 
     if args.aparella:
@@ -459,16 +466,17 @@ def main():
         if ca not in candidates:
             print(f"  {ca}: res a migrar (o ja migrada)")
             continue
-        pc, traduccions, estat, m = candidates[ca]
+        pc, traduccions, estat, m, queden = candidates[ca]
         if estat == "a-ma" and not args.pagina:
             continue
-        for i, tros in enumerate(pc):
+        for i in queden:
+            tros = pc[i]
             e = {"id": identificador(ca, i, usats), "pagina": ca, "ca": tros}
             for idioma, llista in traduccions.items():
                 if llista[i]:
                     e[idioma] = llista[i]
             noves.append(e)
-        print(f"  {len(pc):2} preguntes · {'+'.join(sorted(traduccions)) or 'només ca'} · {ca}"
+        print(f"  {len(queden):2} preguntes · {'+'.join(sorted(traduccions)) or 'només ca'} · {ca}"
               + ("   ⚠ aparellament no comprovat" if estat == "a-ma" else ""))
 
     if not noves:

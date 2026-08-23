@@ -162,6 +162,18 @@ const CASOS = [
 
   // ── Els 14 pendents: no han de treure una resposta que no toca
   ['ca', 'descompte per germans', null],
+  // Contestades el 23/08/2026 amb dades que el web ja tenia i no feia servir:
+  // els 274 partits de partits/data.json surten 137 a casa i 137 a fora.
+  ['ca', 'quants partits es juguen fora', 'resposta'],
+  ['ca', 'quants desplaçaments hi ha', 'resposta'],
+  ['es', 'cuantos partidos se juegan fuera', 'resposta'],
+  ['en', 'how many away games', 'resposta'],
+  ['ca', 'com se si canvia la pista', 'resposta'],
+  ['ca', 'vull ser voluntari', 'resposta'],
+  ['ca', 'quant costa la temporada', 'resposta'],
+  ['es', 'cuanto cuesta la temporada', 'resposta'],
+  // Aquesta segueix sense resposta a posta: qui porta els nens no ho diu
+  // enlloc el web, i inventar-ho seria pitjor.
   ['ca', 'qui porta els nens als partits de fora', null],
   ['ca', 'que faig si un dia no pot anar', null],
   ['ca', 'cal revisio medica', null],
