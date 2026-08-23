@@ -96,3 +96,38 @@
 .lang-switch a:focus-visible { outline: 2px solid var(--nav-red); outline-offset: 2px; }
 .lang-switch .sep { color: var(--nav-line); }
 @media (max-width: 480px) { .lang-switch { gap: 2px; font-size: 8.5px; } .lang-switch a { min-width: 26px; padding: 0 2px; } }
+
+/* ==== CERCADOR DEL MENÚ ====
+   El menú porta els 30 destins grans; el lloc en té més de 400. Això és com
+   s'arriba a la resta sense saber de quina secció pengen. */
+.menu-cerca { max-width: 1180px; margin: 0 auto clamp(22px, 3.5vw, 34px); }
+.menu-cerca-lab { display: block; font-family: var(--nav-body); font-size: 8.5px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--nav-red); margin-bottom: 12px; }
+.menu-cerca-camp {
+  width: 100%; min-height: 52px; padding: 12px 2px; margin: 0;
+  background: transparent; border: 0; border-bottom: 1px solid var(--nav-line);
+  border-radius: 0; -webkit-appearance: none; appearance: none;
+  font-family: var(--nav-display); font-size: clamp(19px, 3.4vw, 27px);
+  letter-spacing: 0.01em; text-transform: uppercase; color: var(--nav-ink);
+  transition: border-color 0.3s var(--nav-ease);
+}
+.menu-cerca-camp::placeholder { color: var(--nav-muted); }
+.menu-cerca-camp:focus { outline: none; border-bottom-color: var(--nav-red); }
+.menu-cerca-camp:focus-visible { outline: none; }
+.menu-cerca-compte { font-family: var(--nav-body); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--nav-muted); margin: 10px 0 0; min-height: 14px; }
+
+.menu-cerca-llista { list-style: none; margin: 6px 0 0; padding: 0; }
+.menu-cerca-llista li { border-bottom: 1px solid var(--nav-line); }
+.menu-cerca-llista a {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  min-height: 44px; padding: 12px 0; text-decoration: none;
+  font-family: var(--nav-body); font-size: 15px; font-weight: 400; color: var(--nav-ink);
+  transition: color 0.3s var(--nav-ease), padding-left 0.35s var(--nav-ease);
+}
+.menu-cerca-llista a:hover, .menu-cerca-llista a:focus-visible { color: var(--nav-red); padding-left: 8px; }
+.menu-cerca-llista li[aria-selected="true"] a { color: var(--nav-red); padding-left: 8px; }
+.menu-cerca-ruta { font-size: 10.5px; letter-spacing: 0.12em; color: var(--nav-muted); margin-left: auto; white-space: nowrap; }
+
+/* Mentre s'escriu, els resultats manen: les sis columnes es retiren perquè
+   no calgui passar-hi per sobre per veure el que has buscat. */
+.menu.cercant .menu-grid, .menu.cercant .menu-foot { display: none; }
+@media (prefers-reduced-motion: reduce) { .menu-cerca-llista a { transition: none; } }

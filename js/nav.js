@@ -251,6 +251,189 @@
     dins.classList.add('head-in--amb-burger');
   }
 
+  // --- 1 bis. Cercador dins del menú --------------------------------------
+  // El menú porta els 30 destins grans del club; el lloc en té més de 400.
+  // A un article del blog o a una fitxa d'equip només s'hi arriba si saps de
+  // quina secció penja. Amb un camp de cerca s'hi arriba escrivint-ne el
+  // nom, que és el que fa tothom quan no sap on és una cosa.
+  //
+  // L'índex (uns 60 KB) NO es carrega amb la pàgina: es demana el primer cop
+  // que algú toca el camp. Qui no el faci servir no en paga res.
+  var TEXTOS = {
+    ca: { etiqueta: 'Cerca al web', pista: 'Cerca una pàgina…', cap: 'Cap resultat per a',
+          un: 'resultat', molts: 'resultats' },
+    es: { etiqueta: 'Buscar en la web', pista: 'Busca una página…', cap: 'Sin resultados para',
+          un: 'resultado', molts: 'resultados' },
+    en: { etiqueta: 'Search the site', pista: 'Search for a page…', cap: 'No results for',
+          un: 'result', molts: 'results' }
+  };
+
+  function senseAccents(s) {
+    // Rang de les marques diacrítiques combinades, escrit amb codis i no amb
+    // els caràcters literals: aquests sobreviuen malament a un reformatatge.
+    return s.normalize ? s.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : s;
+  }
+
+  function posaCercador(menu) {
+    if (!menu || menu.querySelector('.menu-cerca')) return;
+    var t = TEXTOS[LLENGUA] || TEXTOS.ca;
+
+    var caixa = doc.createElement('div');
+    caixa.className = 'menu-cerca';
+
+    var etiqueta = doc.createElement('label');
+    etiqueta.className = 'menu-cerca-lab';
+    etiqueta.setAttribute('for', 'menu-cerca-camp');
+    etiqueta.textContent = t.etiqueta;
+
+    var camp = doc.createElement('input');
+    camp.type = 'search';
+    camp.id = 'menu-cerca-camp';
+    camp.className = 'menu-cerca-camp';
+    camp.placeholder = t.pista;
+    camp.autocomplete = 'off';
+    camp.setAttribute('role', 'combobox');
+    camp.setAttribute('aria-expanded', 'false');
+    camp.setAttribute('aria-controls', 'menu-cerca-llista');
+    camp.setAttribute('aria-autocomplete', 'list');
+
+    var compte = doc.createElement('p');
+    compte.className = 'menu-cerca-compte';
+    compte.setAttribute('aria-live', 'polite');
+
+    var llista = doc.createElement('ul');
+    llista.className = 'menu-cerca-llista';
+    llista.id = 'menu-cerca-llista';
+    llista.setAttribute('role', 'listbox');
+    llista.setAttribute('aria-label', t.etiqueta);
+
+    caixa.appendChild(etiqueta);
+    caixa.appendChild(camp);
+    caixa.appendChild(compte);
+    caixa.appendChild(llista);
+    menu.insertBefore(caixa, menu.firstChild);
+
+    var index = null, carregant = false, triat = -1;
+
+    function carrega() {
+      if (index || carregant) return;
+      carregant = true;
+      fetch('/js/cerca-index.json')
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (dades) {
+          // Només la llengua de la pàgina on ets: qui busca en català no ha
+          // de rebre resultats en anglès.
+          index = dades.filter(function (e) { return e.l === LLENGUA; });
+          carregant = false;
+          if (camp.value.trim()) pinta();
+        })
+        .catch(function () { carregant = false; index = []; });
+    }
+
+    // Es busca paraula a paraula, i cada paraula val si una del text hi
+    // encaixa per davant en qualsevol dels dos sentits. Això és el que fa que
+    // «partidos» trobi «Dies de partido» i «campus» trobi «camp»: exigir la
+    // consulta sencera com a tros de text fallava amb qualsevol plural.
+    function encaixa(paraula, mots) {
+      var millor = -1;
+      for (var i = 0; i < mots.length; i++) {
+        var m = mots[i];
+        if (!m) continue;
+        var val = m.indexOf(paraula) === 0
+          || (paraula.length >= 4 && paraula.indexOf(m) === 0 && m.length >= 4);
+        if (val) { millor = i; break; }
+      }
+      return millor;
+    }
+
+    function puntua(e, paraules) {
+      if (!e._m) e._m = e.b.split(/[^a-z0-9]+/);
+      var total = 0;
+      for (var i = 0; i < paraules.length; i++) {
+        var on = encaixa(paraules[i], e._m);
+        if (on < 0) {
+          // Última oportunitat: com a tros de text qualsevol (busques «xar»
+          // i la pàgina diu «Eixample»).
+          var k = e.b.indexOf(paraules[i]);
+          if (k < 0) return -1;
+          total += 60 + Math.min(k, 40);
+        } else {
+          total += Math.min(on, 20);
+        }
+      }
+      // A igualtat, davant l'adreça més curta: les seccions grans surten
+      // abans que els seus articles.
+      return total + e.u.length / 20;
+    }
+
+    function pinta() {
+      var q = senseAccents(camp.value.trim().toLowerCase());
+      llista.innerHTML = '';
+      triat = -1;
+      menu.classList.toggle('cercant', !!q);
+      camp.setAttribute('aria-expanded', q ? 'true' : 'false');
+      if (!q) { compte.textContent = ''; return; }
+      if (!index) { compte.textContent = '…'; return; }
+
+      var paraules = q.split(/\s+/).filter(Boolean);
+      var trobats = index
+        .map(function (e) { return { e: e, p: puntua(e, paraules) }; })
+        .filter(function (x) { return x.p >= 0; })
+        .sort(function (a, b) { return a.p - b.p; })
+        .slice(0, 12);
+
+      if (!trobats.length) {
+        compte.textContent = t.cap + ' «' + camp.value.trim() + '»';
+        return;
+      }
+      compte.textContent = trobats.length + ' ' + (trobats.length === 1 ? t.un : t.molts);
+      trobats.forEach(function (x, i) {
+        var li = doc.createElement('li');
+        li.setAttribute('role', 'option');
+        li.setAttribute('aria-selected', 'false');
+        li.id = 'menu-cerca-op-' + i;
+        var a = doc.createElement('a');
+        a.href = x.e.u;
+        a.textContent = x.e.t;
+        var ruta = doc.createElement('span');
+        ruta.className = 'menu-cerca-ruta';
+        ruta.textContent = x.e.u;
+        a.appendChild(ruta);
+        li.appendChild(a);
+        llista.appendChild(li);
+      });
+    }
+
+    function mou(delta) {
+      var ops = llista.querySelectorAll('li');
+      if (!ops.length) return;
+      if (triat >= 0) ops[triat].setAttribute('aria-selected', 'false');
+      // Es fa voltar per n+1 posicions: les n opcions més la de «cap
+      // seleccionada», que és quan el cursor torna al camp de text. Es compta
+      // amb `triat + 1` perquè -1 vol dir justament aquesta posició de més.
+      var quants = ops.length + 1;
+      triat = ((triat + 1 + delta) % quants + quants) % quants - 1;
+      if (triat < 0) { camp.removeAttribute('aria-activedescendant'); return; }
+      ops[triat].setAttribute('aria-selected', 'true');
+      camp.setAttribute('aria-activedescendant', ops[triat].id);
+      ops[triat].scrollIntoView({ block: 'nearest' });
+    }
+
+    camp.addEventListener('focus', carrega);
+    camp.addEventListener('input', function () { carrega(); pinta(); });
+    camp.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); mou(1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); mou(-1); }
+      else if (e.key === 'Enter') {
+        var ops = llista.querySelectorAll('li');
+        var anar = triat >= 0 ? ops[triat] : ops[0];
+        if (anar) { e.preventDefault(); anar.querySelector('a').click(); }
+      }
+    });
+  }
+
+  if (menu) posaCercador(menu);
+
   // --- 2. Obrir i tancar, amb el teclat inclòs -----------------------------
   if (burger && menu) {
     var obert = false;
@@ -281,8 +464,12 @@
       burger.setAttribute('aria-label', open ? 'Tancar el menú' : 'Obrir el menú');
       menu.setAttribute('aria-hidden', open ? 'false' : 'true');
       if (open) {
+        // El focus va al camp de cerca: des d'allà s'arriba a qualsevol
+        // pàgina del lloc, i amb el tabulador se surt cap al menú de sempre.
+        var cerca = menu.querySelector('.menu-cerca-camp');
         var f = focusables();
-        if (f.length) setTimeout(function () { f[0].focus(); }, 80);
+        var primer = cerca || f[0];
+        if (primer) setTimeout(function () { primer.focus(); }, 80);
       } else if (ultimFocus && ultimFocus.focus) {
         ultimFocus.focus();
       }
