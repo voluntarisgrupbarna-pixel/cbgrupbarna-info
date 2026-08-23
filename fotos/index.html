@@ -673,14 +673,24 @@ function isRepo(ev) { return ev.source === 'repo'; }
 function isRepoRef(ev, ref) { return isRepo(ev) || /\./.test(ref || ''); }
 function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v|avi)$/i.test(ref || ''); }
 
-// Les versions web i miniatura les genera scripts/build-gallery-images.py i es
-// serveixen des del domini propi. Abans passaven per wsrv.nl, un proxy extern
-// que havia de descarregar cada original —de fins a 14 MB— i encongir-lo al vol:
-// d'aquí la lentitud, i d'aquí que les fotos de les famílies acabessin passant
-// per un tercer. Els originals només es toquen per descarregar-los.
-function repoUrl(ev, ref) { return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`; }
+// Les versions web i miniatura les genera scripts/build-gallery-images.py.
+// Abans passaven per wsrv.nl, un proxy extern que havia de descarregar cada
+// original —de fins a 14 MB— i encongir-lo al vol: d'aquí la lentitud, i
+// d'aquí que les fotos de les famílies acabessin passant per un tercer.
+//
+// R2_BASE buit (per defecte) = tot es serveix des del repositori, com fins
+// ara. Quan fotos/config.js porti `r2_public_base`, les imatges i vídeos
+// nous (i els vells, un cop sincronitzats) es serveixen des d'R2 en comptes
+// del repositori. Vegeu workers/fotos-upload/README.md.
+const R2_BASE = (window.GALERIA_CONFIG && window.GALERIA_CONFIG.r2_public_base || '').replace(/\/$/, '');
+function repoUrl(ev, ref) {
+  if (R2_BASE) return `${R2_BASE}/uploads/${ev.id}/${ref}`;
+  return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+}
 function derivada(carpeta, ev, ref) {
-  return `/fotos/${carpeta}/${ev.id}/${ref.replace(/\.[^.]+$/, '.webp')}`;
+  const webp = ref.replace(/\.[^.]+$/, '.webp');
+  if (R2_BASE) return `${R2_BASE}/${carpeta}/${ev.id}/${webp}`;
+  return `/fotos/${carpeta}/${ev.id}/${webp}`;
 }
 
 function photoThumb(ev, ref) {

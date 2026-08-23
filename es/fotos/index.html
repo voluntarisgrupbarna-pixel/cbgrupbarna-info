@@ -683,21 +683,29 @@ function isFlickr(ev) { return ev.source === 'flickr'; }
 function isFlickrEmbed(ev) { return ev.source === 'flickr-embed'; }
 function isVideoRef(ref) { return /\.(mp4|mov|webm|m4v|avi)$/i.test(ref || ''); }
 
+// R2_BASE buit (per defecte) = servit des del repositori, com fins ara.
+// Vegeu la mateixa constant a /fotos/index.html i workers/fotos-upload/README.md.
+const R2_BASE = (window.GALERIA_CONFIG && window.GALERIA_CONFIG.r2_public_base || '').replace(/\/$/, '');
+function repoUrl(ev, ref) {
+  if (R2_BASE) return `${R2_BASE}/uploads/${ev.id}/${ref}`;
+  return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+}
+
 function photoThumb(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return repoUrl(ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_q.jpg`;
   return THUMB(ref);
 }
 function photoFull(ev, ref) {
   if (!ref) return PLACEHOLDER;
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return repoUrl(ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_b.jpg`;
   return FULL(ref);
 }
 function photoDl(ev, ref) {
   if (!ref) return '#';
-  if (isRepo(ev)) return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+  if (isRepo(ev)) return repoUrl(ev, ref);
   if (isFlickr(ev)) return `https://live.staticflickr.com/${ref}_o.jpg`;
   return DL(ref);
 }
@@ -710,7 +718,7 @@ function eventCover(ev) {
   if (isRepo(ev)) {
     const ref = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
     if (!ref) return PLACEHOLDER;
-    return `${REPO_RAW}/fotos/uploads/${ev.id}/${ref}`;
+    return repoUrl(ev, ref);
   }
   return THUMB(ev.cover);
 }
