@@ -1,0 +1,44 @@
+# Adreces traduïdes: quina ruta tenia una pàgina i quina té ara.
+#
+# Aquest fitxer és el registre de les redireccions que hi ha al lloc. Cada
+# entrada vol dir que a `de` hi ha una pàgina que no fa res més que portar a
+# `a`, i que hi ha de continuar havent-n'hi: hi ha enllaços publicats, gent
+# que ho té guardat i cercadors que encara hi porten. **No s'esborra mai una
+# entrada d'aquí.**
+#
+# Només s'hi renomena el que té valor de cerca: un article que en anglès es
+# deia «que-es-basquet-3x3» no el troba ningú que busqui en anglès. Les
+# seccions de navegació NO es toquen —/partits/, /partits/calendaris/,
+# /fotos/, /campus/— perquè ningú les busca pel nom i canviar-les trencaria
+# enllaços interns, el sitemap i els .ics que la gent ja té subscrits al
+# mòbil. El motiu de cada renúncia és a i18n/excepcions.yml.
+
+renoms:
+  # ── Els articles del blog. El slug és la seva identitat de cerca. ────────
+  - de: /en/blog/que-es-basquet-3x3/
+    a:  /en/blog/what-is-3x3-basketball/
+  - de: /en/blog/a-quina-edat-comencar-basquet/
+    a:  /en/blog/what-age-to-start-basketball/
+  - de: /en/blog/basquet-base-sant-marti-clot/
+    a:  /en/blog/youth-basketball-sant-marti-clot/
+  - de: /en/blog/campus-basquet-barcelona-guia/
+    a:  /en/blog/basketball-camp-barcelona-guide/
+  - de: /en/blog/com-triar-escola-basquet-barcelona/
+    a:  /en/blog/how-to-choose-a-basketball-school-barcelona/
+
+  - de: /es/blog/que-es-basquet-3x3/
+    a:  /es/blog/que-es-el-baloncesto-3x3/
+  - de: /es/blog/a-quina-edat-comencar-basquet/
+    a:  /es/blog/a-que-edad-empezar-baloncesto/
+  - de: /es/blog/basquet-base-sant-marti-clot/
+    a:  /es/blog/baloncesto-base-sant-marti-clot/
+  - de: /es/blog/campus-basquet-barcelona-guia/
+    a:  /es/blog/guia-campus-baloncesto-barcelona/
+  - de: /es/blog/com-triar-escola-basquet-barcelona/
+    a:  /es/blog/como-elegir-escuela-baloncesto-barcelona/
+
+  # ── L'article de premsa, pel mateix motiu. ───────────────────────────────
+  - de: /en/premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/
+    a:  /en/premsa/clot-guide-sixty-years/
+  - de: /es/premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/
+    a:  /es/premsa/guia-clot-sesenta-anos/
