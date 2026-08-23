@@ -25,7 +25,7 @@ l'enllaç a la pàgina d'on surt.
 | `/cerca-index.json` | L'índex. **No s'edita a mà**: es regenera. |
 | `js/cerca.js` | El motor i la interfície. |
 | `css/cerca.css` | L'estil, amb els tokens del sistema visual. |
-| `/cerca/`, `/es/cerca/`, `/en/search/` | La versió a pàgina sencera, amb `?q=`. `noindex, follow`, i per això no entren al `sitemap.xml`. |
+| `/cerca/`, `/es/busqueda/`, `/en/search/` | La versió a pàgina sencera, amb `?q=`. `noindex, follow`, i per això no entren al `sitemap.xml`. |
 | `scripts/afegeix-cerca.py` | Posa les dues línies del cercador a totes les pàgines amb capçalera del club. |
 | `i18n/faq.yml` | **La font única de les preguntes freqüents**: una entrada per pregunta, amb els tres idiomes i la pàgina on va. |
 | `.github/scripts/generate-faq.py` | Les reparteix al `<details>` i al JSON-LD de les tres versions de cada pàgina, entre marcadors. |
@@ -96,6 +96,28 @@ d'aquí l'script no hi toca res, com fa `generate-seo-snapshot.py` a
 Una entrada amb `pendent:` no es publica **enlloc**, ni en català: serveix per
 deixar la pregunta escrita mentre s'espera un preu o una data, sense publicar
 mitja resposta.
+
+### Les traduccions no s'escriuen a mà
+
+`scripts/faq-tradueix.py` omple les que falten amb **el mateix traductor que
+ja fa servir la resta del web** (`scripts/i18n-tradueix.py`): el mateix
+glossari, el mateix to per idioma, els mateixos noms propis que no es toquen
+mai i la mateixa comprovació que no s'han perdut pel camí.
+
+```bash
+python3 scripts/faq-tradueix.py --que-falta   # què falta, sense clau ni cost
+python3 scripts/faq-tradueix.py --tot         # amb ANTHROPIC_API_KEY
+```
+
+Com la resta del sistema d'i18n, **sense clau no falla**: diu què falta i
+marxa. I no publica mai: omple el YAML, i qui escriu a les pàgines continua
+sent `generate-faq.py`, un pas a part, perquè entre les dues coses hi hagi
+algú mirant-s'ho.
+
+`scripts/i18n-lint.py` també les vigila: una pregunta publicada en català i
+sense traduir surt com a `faq-sense-traduccio`, i una que espera una dada, com
+a `faq-sense-resposta`. Són el mateix deute que una pàgina sense traduir, i ara
+surten a la mateixa llista.
 
 > Per què una font única: el 23/08/2026 hi havia **28 pàgines amb les tres
 > versions desquadrades** (la portada anava 15/11/11). Una pregunta viu a sis

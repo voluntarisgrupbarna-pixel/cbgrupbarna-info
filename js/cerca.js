@@ -501,7 +501,11 @@
   function cercaResposta(consulta, families) {
     if (!preparatFaq.length) return null;
     var termes = paraulesPregunta(consulta);
-    if (!termes.length) return null;
+    // Una paraula solta és un TEMA, no una pregunta. Qui escriu «fotos» vol
+    // la galeria, no la resposta sobre el dret a la pròpia imatge; qui escriu
+    // «campus» vol la pàgina del campus, no una de les seves set preguntes.
+    // Amb enllaços n'hi ha prou: la resposta és per a qui pregunta.
+    if (termes.length < 2) return null;
 
     // Les paraules de la família detectada ajuden a casar la pregunta encara
     // que estigui escrita amb unes altres («quotes» ↔ «quant costa»).

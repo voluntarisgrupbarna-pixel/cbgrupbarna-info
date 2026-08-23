@@ -112,7 +112,13 @@ const RESPOSTES = [
   // Cap resposta: una paraula solta és un tema, no una pregunta; i un
   // teclat aixafat no ha de treure res.
   ['ca', 'fotos', null],
+  ['ca', 'campus', null],
   ['ca', 'asdfghjkl', null],
+  // Però amb dues paraules, sí: ja és una pregunta.
+  ['ca', 'treure una foto del meu fill', 'no surti a les fotos'],
+  ['es', 'quitar una foto de mi hija', 'no salga en las fotos'],
+  ['ca', 'quin equip li toca pel seu any', "l'any de naixement"],
+  ['en', 'how many trainings a week', 'training sessions'],
 ];
 
 console.log('\n---- respostes ----');

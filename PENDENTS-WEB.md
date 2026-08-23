@@ -410,3 +410,60 @@ prova real no és el número: és que `node tests/cerca/prova-motor.mjs` es pugu
 ampliar amb un cas per bloc —«quant costa la temporada», «què porto el primer
 dia», «el meu fill del 2015 a quin equip va»— i que totes tornin una resposta.
 Avui, cap de les tres en té.
+
+
+---
+
+## Preguntes freqüents · on som (23/08/2026, final del dia)
+
+La font única existeix (`i18n/faq.yml` + `.github/scripts/generate-faq.py`) i
+ja hi ha **16 preguntes publicades en els tres idiomes**. Cap inventada: totes
+surten del que el web ja deia, escrit al cos del text o en una altra pàgina, i
+que el cercador no podia trobar perquè no constava com a pregunta.
+
+| Pàgina | Preguntes | D'on surt la resposta |
+|---|---|---|
+| `/portes-obertes/` | 5 | El cos de la mateixa pàgina |
+| `/instal-lacions/` | 3 | El cos de la mateixa pàgina |
+| `/basquet-formatiu/` | 7 | 5 migrades de la pàgina + 2 noves del seu propi quadre de categories |
+| `/fotos/` | 1 | `/politica-de-privacitat/` |
+
+`/basquet-formatiu/` anava **5 en català, 5 en castellà i 4 en anglès**.
+Passada per la font única, va 7/7/7. És la primera pàgina amb el descuadre
+resolt; en queden 27.
+
+**Les traduccions ja no s'escriuen a mà**: `scripts/faq-tradueix.py` reutilitza
+el traductor del web (`scripts/i18n-tradueix.py`) amb el mateix glossari i el
+mateix to. Sense `ANTHROPIC_API_KEY` no falla: diu què falta. I
+`scripts/i18n-lint.py` ara també les vigila (`faq-sense-traduccio`,
+`faq-sense-resposta`), o sigui que una pregunta sense traduir surt a la mateixa
+llista que una pàgina sense traduir.
+
+### El que segueix bloquejat · 14 preguntes
+
+Escrites, amb `pendent:`, i **no publicades enlloc, ni en català**. Val més cap
+resposta que mitja. `python3 .github/scripts/generate-faq.py --pendents`.
+
+**Vuit números de l'Ana** (7 de diners, 1 d'equipació): quant costa la
+temporada per categoria, què inclou la quota, com es paga, descompte de
+germans, si hi ha ajuts, què passa amb una baixa a mig any, i quina equipació
+cal i quant val. Són les que més es busquen.
+
+**Sis dades del club**: què vol dir equip A i equip B i qui ho decideix; quants
+desplaçaments hi ha i qui hi porta els nens; per quin canal s'avisa una família
+d'un canvi d'hora o de pista; què fer si un dia no pot anar a entrenar; si cal
+revisió mèdica; qui és la persona de contacte de cada categoria; i com s'apunta
+qui vol ser entrenador o voluntari.
+
+### Dos temes oberts que no són d'aquesta llista
+
+- **`/portes-obertes/` segueix sense `/es/` ni `/en/`.** Les seves cinc
+  preguntes ja estan traduïdes al YAML i esperen la pàgina on viure. Avui, qui
+  busca en anglès «what do we bring the first day» no troba res.
+- **`scripts/i18n-lint.py` dona 91 errors, tots anteriors a aquesta feina** (hi
+  eren igual abans de tocar res: comprovat comparant amb la branca neta). N'hi
+  ha un que val la pena mirar perquè és una contradicció amb una decisió ja
+  presa: el lint exigeix dir «Dies de partit per equip» a `/partits/calendaris/`,
+  però `web-cbgb` §6 diu que l'etiqueta decidida per la direcció l'agost del
+  2026 és **«Calendari»**. Sembla que `i18n/etiquetes.yml` va quedar amb el
+  vocabulari antic.
