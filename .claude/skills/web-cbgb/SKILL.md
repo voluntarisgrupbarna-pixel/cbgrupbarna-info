@@ -74,6 +74,12 @@ i el joc de l'extensa (`.e-sech` amb el filet vermell, `.e-feat`/`.e-art`,
 de nova. Els títols de secció d'un article (`.prose h2`) porten el mateix filet
 vermell, que és el gest que lliga una interior amb la portada.
 
+A la vista de franges la portada obre com a la guia: barra de novetats, menú,
+el hero curt (etiqueta vermella, «Bàsquet al Clot. / Des de 1965.» amb la segona
+línia en vermell i una sola frase) i les nou franges. **El bloc fosc de marca
+—el `.masthead`— només surt a l'extensa**: a franges hi és al marcatge però
+amagat, perquè la guia diu que davant hi va la porta, no la presentació.
+
 L'estructura de les franges està calcada de la guia visual. **Si canvies l'ordre
 o els textos d'una, canvia'ls a l'altra**: la portada i la guia han de dir el
 mateix.
