@@ -2430,7 +2430,7 @@ CATEGORY_PREFIXES = ["Sènior", "Júnior", "Cadet", "Infantil", "Preinfantil", "
 
 def build_calendaris():
     url = SITE + "/partits/calendaris/"
-    title = "Dies de partit per equip · calendari en PDF | CB Grup Barna"
+    title = "Calendari per equip · dies de partit en PDF | CB Grup Barna"
     desc = ("Descarrega el calendari complet de la temporada del teu equip: sèniors, júniors, cadets i "
             "infantils del CB Grup Barna. Es genera cada dia a partir del calendari oficial de la FCBQ.")
 
@@ -2455,7 +2455,7 @@ def build_calendaris():
         {"@type": "CollectionPage", "@id": url + "#calendaris", "name": title, "description": desc, "url": url,
          "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"}},
         faq_ld,
-        BREADCRUMB([("CB Grup Barna", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", "/partits/calendaris/")]),
+        BREADCRUMB([("CB Grup Barna", "/"), ("Calendari", "/partits/"), ("Calendari per equip", "/partits/calendaris/")]),
     ]}
 
     seo_snapshot = ""
@@ -2467,7 +2467,7 @@ def build_calendaris():
     except OSError:
         pass
     body = f"""
-{crumbs([("Inici", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", None)])}
+{crumbs([("Inici", "/"), ("Calendari", "/partits/"), ("Calendari per equip", None)])}
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red" id="cal-temporada">Temporada</p>
