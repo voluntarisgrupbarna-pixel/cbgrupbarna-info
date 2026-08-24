@@ -34,10 +34,11 @@ jobs:
   paritat:
     runs-on: ubuntu-latest
     steps:
+      # Sense historial a propòsit: aquest repositori pesa 5,5 GB (les fotos
+      # hi són a dins) i un clon complet a cada proposta de canvi serien
+      # minuts d'espera per a una comprovació que dura segons. La llista de
+      # fitxers tocats la dona l'API de GitHub, que no necessita historial.
       - uses: actions/checkout@v4
-        with:
-          # Cal l'historial per poder comparar amb la branca de destí.
-          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -45,14 +46,55 @@ jobs:
 
       - run: pip install --quiet pyyaml
 
+      - name: Veure quins fitxers toca el canvi
+        id: fitxers
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.pull_request.number }}
+        run: |
+          if [ -n "$NUM" ]; then
+            gh api --paginate "repos/${{ github.repository }}/pulls/$NUM/files" \
+              --jq '.[].filename' | grep '\.html$' > /tmp/tocats.txt || true
+          else
+            : > /tmp/tocats.txt
+          fi
+          echo "quants=$(wc -l < /tmp/tocats.txt)" >> "$GITHUB_OUTPUT"
+          echo "$(wc -l < /tmp/tocats.txt) fitxers HTML tocats."
+
       - name: Comprovar que el canvi va en els tres idiomes
         id: comprova
         run: |
           set +e
-          base="origin/${{ github.base_ref }}"
-          git fetch --quiet origin "${{ github.base_ref }}" || true
-          python3 scripts/i18n-paritat.py --des "$base" --fins HEAD | tee /tmp/paritat.txt
+          if [ "${{ steps.fitxers.outputs.quants }}" = "0" ]; then
+            echo "Cap pàgina tocada." | tee /tmp/paritat.txt
+            echo "codi=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          xargs -a /tmp/tocats.txt python3 scripts/i18n-paritat.py --fitxers \
+            | tee /tmp/paritat.txt
           echo "codi=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      # Hi ha dues maneres legítimes de tocar un sol idioma, i són diferents:
+      #
+      #   · La pàgina va per lliure sempre  → i18n/excepcions-paritat.yml
+      #   · Aquest canvi concret hi va      → una línia a la descripció
+      #
+      # La segona és per a coses com «el castellà deia noindex i el català no;
+      # només cal tocar el castellà». Fer-ne una excepció permanent de pàgina
+      # per un arreglo d'una vegada ompliria el fitxer d'excepcions de casos
+      # morts. Aquesta caduca sola: viu a la proposta de canvi i prou.
+      - name: Mirar si la descripció ho justifica
+        id: justificat
+        if: steps.comprova.outputs.codi != '0' && github.event_name == 'pull_request'
+        env:
+          COS: ${{ github.event.pull_request.body }}
+        run: |
+          motiu=$(printf '%s' "$COS" | grep -i '^i18n-nomes-un-idioma:' | head -1 || true)
+          if [ -n "$motiu" ]; then
+            echo "::notice::Excepció d'aquesta proposta: $motiu"
+            echo "motiu=$motiu" >> "$GITHUB_OUTPUT"
+            echo "$motiu" >> /tmp/paritat.txt
+          fi
 
       - name: Escriure l'informe
         run: |
@@ -65,7 +107,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Deixar-ho dit a la proposta de canvi
-        if: steps.comprova.outputs.codi != '0' && github.event_name == 'pull_request'
+        if: steps.comprova.outputs.codi != '0' && !steps.justificat.outputs.motiu && github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
           NUM: ${{ github.event.pull_request.number }}
@@ -91,7 +133,7 @@ jobs:
           fi
 
       - name: Retirar l'avís si ja està resolt
-        if: steps.comprova.outputs.codi == '0' && github.event_name == 'pull_request'
+        if: (steps.comprova.outputs.codi == '0' || steps.justificat.outputs.motiu) && github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
           NUM: ${{ github.event.pull_request.number }}
@@ -103,4 +145,9 @@ jobs:
             "repos/${{ github.repository }}/issues/comments/$id" >/dev/null || true
 
       - name: Resultat
-        run: exit ${{ steps.comprova.outputs.codi }}
+        run: |
+          if [ -n "${{ steps.justificat.outputs.motiu }}" ]; then
+            echo "Passa amb el motiu escrit a la descripció."
+            exit 0
+          fi
+          exit ${{ steps.comprova.outputs.codi }}

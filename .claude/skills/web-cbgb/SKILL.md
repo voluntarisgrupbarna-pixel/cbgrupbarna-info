@@ -309,11 +309,19 @@ no queda a cap fitxer de `i18n/feina/` i la propera vegada que es munti la
 pàgina desapareixerà. El canvi de text es fa a la pàgina catalana i baixa cap
 a les altres dues.
 
-**L'excepció.** Hi ha canvis que només han d'anar en un idioma —una falta que
-només hi ha en castellà, un terme de cerca que només té sentit en un mercat.
-El motiu va escrit a `i18n/excepcions-paritat.yml`, amb la ruta catalana. No
-hi ha cap altra manera de passar la comprovació, i és a propòsit: una llista
-d'excepcions sense motius acaba sent la regla.
+**Les dues excepcions**, i són diferents a propòsit:
+
+| Cas | On es diu |
+|---|---|
+| Aquesta **pàgina** va per lliure sempre | `i18n/excepcions-paritat.yml`, amb la ruta catalana i el motiu |
+| Aquest **canvi concret** hi va, un cop | Una línia a la descripció de la proposta: `i18n-nomes-un-idioma: <motiu>` |
+
+La segona és per a arreglos d'una vegada —«el castellà deia `noindex` i el
+català no, només cal tocar el castellà»—. Fer-ne una excepció permanent de
+pàgina ompliria el fitxer de casos morts; així caduca sola amb la proposta.
+
+Cap de les dues deixa passar res sense un motiu escrit, i és a propòsit: una
+llista d'excepcions sense motius acaba sent la regla.
 
 ---
 
