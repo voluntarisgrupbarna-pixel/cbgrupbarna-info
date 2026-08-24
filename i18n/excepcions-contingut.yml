@@ -1,0 +1,85 @@
+# Traduccions que scripts/i18n-contingut.py no ha de mirar, i per què.
+#
+# Aquell script obre l'original i la traducció i els compara: seccions,
+# llargada, paraules catalanes i <title>. La immensa majoria dels avisos són
+# feina de debò. Però n'hi ha que són correctes tal com estan, i si no es
+# declaren aquí l'informe s'omple de soroll i es deixa de mirar.
+#
+# Cada entrada diu QUÈ no s'ha de mirar, no «ignora aquesta pàgina sencera»:
+#
+#   no_mirar:
+#     - ruta: /una-pagina/            ← sempre la ruta CATALANA
+#       comprovacions: [llargada]     ← seccions · llargada · catala · titol
+#       motiu: Per què aquest avís és correcte tal com està.
+#
+# Sense `comprovacions` s'entén que no se'n mira cap. Val més declarar només
+# la que sobra: si demà aquella pàgina perd una secció, encara ho sabrem.
+
+no_mirar:
+  - ruta: /escoleta/
+    comprovacions: [seccions, llargada]
+    motiu: >
+      La pàgina catalana porta les dues llengües a dins, amb un commutador
+      (114 blocs data-lang="ca" i 114 data-lang="es"). Té el doble de
+      seccions i el doble de paraules per disseny, no perquè hi falti res.
+
+  - ruta: /premsa/arxiu/
+    comprovacions: [catala]
+    motiu: >
+      Són titulars de premsa citats literalment de betevé, El Clotenc i
+      Guia Clot. Traduir la citació d'un titular seria falsejar-la.
+
+  - ruta: /premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/
+    comprovacions: [catala]
+    motiu: El títol de l'article de la revista, citat tal com es va publicar.
+
+  - ruta: /premsa/moments/
+    comprovacions: [catala]
+    motiu: Hi surt el «Premi Molt Bàsquet de Santa Coloma», nom propi d'un guardó.
+
+  - ruta: /opina/
+    comprovacions: [catala]
+    motiu: >
+      La plantilla de ressenya s'ofereix en català i en castellà (msgCa i
+      msgEs) perquè cada família triï en quina la deixa a Google. El text
+      català hi és a propòsit.
+
+  - ruta: /presentacions/evidencia-i-posicio/
+    comprovacions: [catala]
+    motiu: >
+      Cites textuals de Marc Gasol i d'Esport3 en català, marcades com a
+      citació. El mateix criteri que amb els titulars de premsa.
+
+  - ruta: /partits/
+    comprovacions: [catala]
+    motiu: >
+      El generador de cartells per a Instagram és eina interna del club i
+      es fa servir en català. No és contingut per a qui llegeix la pàgina.
+
+  - ruta: /partits/equips/scm/
+    comprovacions: [catala]
+    motiu: Hi surt «100 ANYS CB SANTFELIUENC», el nom oficial d'un rival.
+
+  - ruta: /organigrama/
+    comprovacions: [titol]
+    motiu: >
+      «Organigrama · Junta directiva del CB Grup Barna» s'escriu igual en
+      català i en castellà. No és que no s'hagi traduït: és que coincideix.
+
+  - ruta: /patrocinadors/partners/nova-farmacia-clot/
+    comprovacions: [titol]
+    motiu: «Nova Farmàcia Clot · Partner del CB Grup Barna» coincideix en tots dos idiomes.
+
+  - ruta: /patrocinadors/partners/wilson/
+    comprovacions: [titol]
+    motiu: «Wilson · Partner del CB Grup Barna» coincideix en tots dos idiomes.
+
+  # Per prefix, quan la mateixa raó val per a tota una família de pàgines.
+  - prefix: /patrocinadors/partners/
+    comprovacions: [titol]
+    motiu: >
+      El títol d'una fitxa de partner és «<Empresa> · Partner del CB Grup
+      Barna», i «Partner del CB Grup Barna» s'escriu igual en català i en
+      castellà. Coincideixen perquè han de coincidir, no perquè faltin per
+      traduir. En anglès sí que canvia («CB Grup Barna Partner») i per això
+      allà no salta.

@@ -119,6 +119,27 @@ jobs:
             echo "$motiu" >> /tmp/paritat.txt
           fi
 
+      # La paritat mira fitxers i dates; això obre les pàgines i les compara.
+      # Va a part i NO atura la fusió: hi ha 59 avisos heretats i bloquejar-ho
+      # tot avui només faria que ningú pogués tocar res. Serveix per no
+      # afegir-ne de nous sense adonar-se'n, i per tenir la llista sempre a mà.
+      - name: Comparar el contingut de les traduccions
+        if: always()
+        run: |
+          set +e
+          python3 scripts/i18n-contingut.py > /tmp/contingut.txt
+          set -e
+          {
+            echo '## Contingut de les traduccions'
+            echo
+            echo '```'
+            head -80 /tmp/contingut.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          n=$(grep -c "seccions, l'original" /tmp/contingut.txt || true)
+          [ "$n" -gt 0 ] && echo "::warning::$n traduccions tenen menys seccions que el seu original. Mira l'informe."
+          exit 0
+
       - name: Escriure l'informe
         run: |
           {
