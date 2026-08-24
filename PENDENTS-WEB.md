@@ -113,6 +113,12 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 - **Escoleta:** foto o vídeo d'en Willy Hernangómez entrenant a La Nau amb Time Chamber
   (el forat és a `escoleta/index.html:944`), i confirmar la fitxa del circuit 3x3 amb la
   selecció espanyola (línia 744).
+- **Sessió de fotos de l'Escoleta (4-7 anys):** és el punt més feble de l'apartat
+  d'estètica de la web i no es resol amb codi. Avui només hi ha una foto
+  (`img/escoleta@2x.webp`) per representar tot aquest pilar, i és la imatge que carrega
+  amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
+  material d'acció real (no posat), llum natural, enquadrat des de dalt sense tallar
+  cares, i diverses tomes perquè es pugui rotar en comptes de repetir sempre la mateixa.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
 - **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
