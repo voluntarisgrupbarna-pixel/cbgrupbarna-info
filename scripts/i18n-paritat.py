@@ -91,6 +91,7 @@ def main():
     ap.add_argument("--des")
     ap.add_argument("--fins", default="HEAD")
     ap.add_argument("--fitxers", nargs="*")
+    ap.add_argument("--llista", help="fitxer amb una ruta per línia")
     ap.add_argument("--tot", action="store_true")
     args = ap.parse_args()
 
@@ -100,13 +101,16 @@ def main():
     if args.tot:
         return audita_tot(trios, excepcions)
 
-    if args.fitxers:
+    if args.llista:
+        with open(args.llista, encoding="utf-8") as fh:
+            tocats = [l.strip() for l in fh if l.strip().endswith(".html")]
+    elif args.fitxers:
         tocats = [f for f in args.fitxers if f.endswith(".html")]
     elif args.des:
         tocats = [f for f in git("diff", "--name-only", "--diff-filter=AMD",
                                  args.des, args.fins, "--", "*.html")]
     else:
-        sys.exit("Cal --des, --fitxers o --tot.")
+        sys.exit("Cal --des, --fitxers, --llista o --tot.")
 
     # De fitxer tocat a trio afectat, amb quins idiomes s'han tocat.
     afectats = {}

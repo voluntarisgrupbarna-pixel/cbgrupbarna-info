@@ -16,6 +16,10 @@ name: i18n · els tres idiomes alhora
 
 on:
   pull_request:
+    # «edited» hi és perquè el motiu d'una excepció d'un cop s'escriu a la
+    # descripció: sense això, escriure'l no tornaria a executar la
+    # comprovació i no serviria de res fins al proper commit.
+    types: [opened, synchronize, reopened, edited]
     paths:
       - '**.html'
       - 'i18n/routes.yml'
@@ -70,8 +74,9 @@ jobs:
             echo "codi=0" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          xargs -a /tmp/tocats.txt python3 scripts/i18n-paritat.py --fitxers \
-            | tee /tmp/paritat.txt
+          # Sense xargs: convertiria el codi de sortida del guió en un 123
+          # que no diu res a qui llegeix el registre.
+          python3 scripts/i18n-paritat.py --llista /tmp/tocats.txt | tee /tmp/paritat.txt
           echo "codi=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
       # Hi ha dues maneres legítimes de tocar un sol idioma, i són diferents:
