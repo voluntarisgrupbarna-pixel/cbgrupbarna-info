@@ -1225,3 +1225,84 @@ part.
 **Norma confirmada per l'Ana:** a partir d'ara, cada vegada que es tanqui una
 feina es puja la subversió corresponent (`VERSION` + entrada a
 `CHANGELOG.md`) en el mateix commit, sense haver-ho de demanar cada cop.
+
+---
+
+## 24-08-2026 — Auditoria crítica externa (nota 6/10): el que queda obert
+
+Repàs fet des de fora, amb el lloc publicat de debò (`curl` a
+`cbgrupbarna.info`, no només el repositori), demanant explícitament una
+crítica dura. La majoria dels problemes tècnics grans ja són als apartats
+d'amunt (contrast, teclat, 320 px, pes, i18n); això és el que **no hi
+constava encara**.
+
+### 1. Setze enllaços morts a l'antic `cbgrupbarna.com`
+
+`cbgrupbarna.com` ja no es referencia des del peu de pàgina (fet el
+20/08/2026, «Fase de marca»), però encara hi ha **16 enllaços vius amb
+`cbgrupbarna.com` al cos del text**, repartits en:
+
+```
+en/3x3-basketball-barcelona/index.html
+en/basketball-school-barcelona/index.html
+en/basketball-camps-barcelona/index.html
+en/premsa/clot-guide-sixty-years/index.html
+campus-basquet-barcelona/index.html
+es/3x3-baloncesto-barcelona/index.html
+es/campus-navidad-baloncesto-barcelona/index.html
+es/briefing/index.html
+es/campus-baloncesto-barcelona/index.html
+es/premsa/guia-clot-sesenta-anos/index.html
+es/escola-baloncesto-barcelona/index.html
+3x3-barcelona/index.html
+escola-basquet-barcelona/index.html
+premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/index.html
+partits/app.html
+campus-nadal-basquet-barcelona/index.html
+```
+
+Cal comprovar un a un si l'enllaç és a contingut real de `cbgrupbarna.com/
+noticies/` (encara no migrat, vegeu «Migració tancada» a la Fase de marca) o
+si és cruft que es pot treure ja.
+
+### 2. Logo d'un patrocinador donat de baixa, encara al repositori
+
+`partners/zapic-ai.png` segueix a disc. Zapic ja consta com a baixa a
+`data.json` (vegeu punt 3 de «✅ Fet»). Si no hi ha cap fitxa ni pàgina que
+l'enllaci, és desar espai i confusió sense motiu.
+
+### 3. Risc de lectura «contingut fabricat en sèrie» per Google
+
+546 preguntes indexades i 12 articles de blog generats trossejant un PDF de
+53 pàgines, tots per un mateix pipeline (`i18n/faq.yml` + generador +
+traductor automàtic als tres idiomes). L'execució és impecable —cap
+pregunta inventada, tot ve del que el club ja sap—, però el **volum i la
+mecànica** (YAML → generador → 3 idiomes en sèrie) és exactament el patró
+que les *helpful content policies* de Google penalitzen quan no es percep
+veu editorial darrere. No és un bug a arreglar; és un risc a vigilar en el
+posicionament dels propers mesos, sobretot si el ritme de generació segueix
+pujant més ràpid que el de contingut escrit a mà per a un article concret.
+
+### 4. El coll d'ampolla de publicar fotos segueix sense resoldre's
+
+Ja anotat a `web-cbgb` §11 («Per què de vegades el web no es desplega»),
+però no hi ha cap pendent obert aquí per treure'l d'arrel: cada foto pujada
+des de `/fotos/admin.html` és un commit, una tanda de 200 fotos són 200
+builds de GitHub Pages que es cancel·len entre si, i **mentre dura la
+pujada no es publica res**, ni tan sols un arreglo urgent d'una altra
+pàgina. La solució de fons —que les fotos deixin de viure com a commits
+individuals al repositori— ja la apunta la mateixa skill (§9, «Nivell 3»);
+falta decidir-la i fer-la.
+
+### Resum de la nota
+
+Tècnicament, el sistema de disseny, l'accessibilitat i la sincronització
+amb la FCBQ són de nivell professional per a un club d'aquesta mida. El que
+baixa la nota és la fragilitat operativa: la mateixa auditoria d'aquest
+document mostra, tanda rere tanda, el mateix patró de bugs de conversió
+(selectors d'idioma trencats, calendari sense JS en dues llengües, FAQ
+duplicada) detectats només per revisió manual completa, no per disseny a
+prova de fallada. Fins que aquest patró no s'inverteixi —proves
+automàtiques que cobreixin els punts de conversió, no només `i18n-lint` i
+paritat de contingut—, la web seguirà necessitant aquest tipus de repàs
+sencer per confiar-hi.
