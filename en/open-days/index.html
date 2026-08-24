@@ -140,11 +140,18 @@ watch before saying anything to your child, you can: just let us know.</p>
     <p class="form-err" id="po-contacte-err" role="alert">Please tell us who is writing.</p>
   </div>
   <div class="form-row">
-    <label for="po-tel">Phone or email <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">Whichever suits you. We only use it to reply to this.</span>
-    <input type="text" id="po-tel" name="contacteVia" required autocomplete="tel"
+    <label for="po-tel">Phone <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">We only use it to tell you the day.</span>
+    <input type="tel" id="po-tel" name="telefon" required autocomplete="tel" inputmode="tel"
            aria-describedby="po-tel-err">
-    <p class="form-err" id="po-tel-err" role="alert">Please leave a phone number or email so we can tell you the day.</p>
+    <p class="form-err" id="po-tel-err" role="alert">Please leave a phone number so we can tell you the day.</p>
+  </div>
+  <div class="form-row">
+    <label for="po-mail">Email <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">We ask for both so we don't lose you: if we can't reach you by phone, we'll write.</span>
+    <input type="email" id="po-mail" name="email" required autocomplete="email" inputmode="email"
+           aria-describedby="po-mail-err">
+    <p class="form-err" id="po-mail-err" role="alert">Please write a valid email.</p>
   </div>
   <div class="form-row">
     <label for="po-msg">Anything we should know</label>

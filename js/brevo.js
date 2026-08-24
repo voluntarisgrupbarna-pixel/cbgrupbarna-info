@@ -33,8 +33,59 @@
     any:       'ANY_NAIX',
     contacte:  'CONTACTE',
     estrelles: 'ESTRELLES',
-    consent:   'CONSENT'
+    consent:   'CONSENT',
+    campanya:  'CAMPANYA',
+    font:      'FONT',
+    mitja:     'MITJA',
+    referent:  'REFERENT',
+    entrada:   'ENTRADA'
   };
+
+  /* ── D'ON VE CADA CONTACTE ──────────────────────────────────────────
+     Sense això, al CRM tothom sembla que hagi arribat sol. Amb això se
+     sap quina campanya, quin cartell o quin reel ha portat cada alta, i
+     es pot deixar de pagar el que no en porta cap.
+
+     S'agafa de dues fonts:
+       · Els paràmetres utm_* de l'enllaç (Instagram, anuncis, QR, correu).
+       · Si no n'hi ha, d'on venia el navegador (instagram.com, google…).
+
+     Es guarda a la sessió i mana la PRIMERA visita: qui entra per un
+     anunci del campus, dona voltes pel web i acaba enviant el formulari
+     de la portada, segueix comptant com a alta d'aquell anunci.        */
+  var CLAU = 'cbgb-campanya';
+
+  function xarxa(ref) {
+    if (!ref) return '';
+    try { ref = new URL(ref).hostname.replace(/^www\./, ''); } catch (_) { return ''; }
+    if (ref === location.hostname) return '';                 // navegació interna
+    if (/instagram/.test(ref))  return 'instagram';
+    if (/facebook|fb\.com/.test(ref)) return 'facebook';
+    if (/google/.test(ref))     return 'google';
+    if (/tiktok/.test(ref))     return 'tiktok';
+    if (/youtube|youtu\.be/.test(ref)) return 'youtube';
+    if (/whatsapp|wa\.me/.test(ref))   return 'whatsapp';
+    if (/bing|duckduckgo|ecosia|yahoo/.test(ref)) return 'cercador';
+    return ref;
+  }
+
+  function campanya() {
+    var desat = null;
+    try { desat = JSON.parse(sessionStorage.getItem(CLAU) || 'null'); } catch (_) {}
+    if (desat) return desat;
+
+    var q = new URLSearchParams(location.search);
+    var d = {
+      campanya: q.get('utm_campaign') || q.get('campanya') || '',
+      font:     q.get('utm_source')   || q.get('font')     || xarxa(document.referrer),
+      mitja:    q.get('utm_medium')   || '',
+      referent: xarxa(document.referrer),
+      entrada:  location.pathname
+    };
+    if (!d.font && !d.campanya) d.font = 'directe';
+    try { sessionStorage.setItem(CLAU, JSON.stringify(d)); } catch (_) {}
+    return d;
+  }
 
   function cfg() {
     return (window.CANALS && window.CANALS.brevo) || {};
@@ -64,8 +115,16 @@
     var camps = c.camps || {};
     var fd = new FormData();
 
-    Object.keys(dades || {}).forEach(function (clau) {
-      var valor = dades[clau];
+    /* La campanya s'hi afegeix sola, a tots els formularis: si algun dia
+       s'ha de tocar d'on ve, es toca aquí i prou. El que porti el
+       formulari mana, per si mai vol dir una altra cosa. */
+    var tot = {};
+    var orig = campanya();
+    Object.keys(orig).forEach(function (k) { tot[k] = orig[k]; });
+    Object.keys(dades || {}).forEach(function (k) { tot[k] = dades[k]; });
+
+    Object.keys(tot).forEach(function (clau) {
+      var valor = tot[clau];
       if (valor === undefined || valor === null) return;
       if (Array.isArray(valor)) valor = valor.join(', ');
       valor = String(valor).trim();
@@ -85,5 +144,12 @@
       .then(function () { return true; }, function () { return false; });
   }
 
-  window.BREVO = { actiu: actiu, envia: envia, CAMPS: CAMPS };
+  /* Es desa d'on ve la visita ARA, en carregar la pàgina, no en enviar el
+     formulari: qui entra per un anunci pot aterrar a /campus/ i acabar
+     enviant el formulari de la portada, i per llavors ja no queda cap
+     rastre de l'anunci a l'adreça. Per això aquest fitxer es carrega a
+     tot el web, no només a les pàgines amb formulari. */
+  campanya();
+
+  window.BREVO = { actiu: actiu, envia: envia, campanya: campanya, CAMPS: CAMPS };
 })();

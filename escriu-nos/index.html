@@ -95,10 +95,16 @@ cosa que necessiti resposta. Et responem el mateix dia.</p>
     <p class="form-err" id="in-nom-err" role="alert">Digue'ns qui ens escriu.</p>
   </div>
   <div class="form-row">
-    <label for="in-via">Telèfon o correu <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">El que et vagi millor. Només el fem servir per respondre't.</span>
-    <input type="text" id="in-via" name="contacteVia" required autocomplete="tel" aria-describedby="in-via-err">
-    <p class="form-err" id="in-via-err" role="alert">Deixa'ns un telèfon o un correu per poder-te respondre.</p>
+    <label for="in-tel">Telèfon <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Només el fem servir per respondre't.</span>
+    <input type="tel" id="in-tel" name="telefon" required autocomplete="tel" inputmode="tel" aria-describedby="in-tel-err">
+    <p class="form-err" id="in-tel-err" role="alert">Deixa'ns un telèfon per poder-te respondre.</p>
+  </div>
+  <div class="form-row">
+    <label for="in-mail">Correu electrònic <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Et demanem les dues coses per no perdre't: si no t'agafem el telèfon, t'escrivim.</span>
+    <input type="email" id="in-mail" name="email" required autocomplete="email" inputmode="email" aria-describedby="in-mail-err">
+    <p class="form-err" id="in-mail-err" role="alert">Escriu un correu vàlid.</p>
   </div>
   <div class="form-row">
     <label for="in-msg">Què vols saber <span class="req" aria-hidden="true">*</span></label>

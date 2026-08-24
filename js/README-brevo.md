@@ -73,6 +73,11 @@ serveix per a tots els formularis. Els noms han de ser **exactament** aquests
 | `CONTACTE` | Text | Nom de la criatura, quan qui escriu és la família |
 | `ESTRELLES` | Text | Puntuació de la ressenya, d'1 a 5 |
 | `CONSENT` | Text | `Sí` / `No` — si han marcat la casella comercial |
+| `CAMPANYA` | Text | Quina campanya l'ha portat (`campus-nadal-2026`…) |
+| `FONT` | Text | D'on venia: `instagram`, `google`, `whatsapp`, `directe`… |
+| `MITJA` | Text | Format concret: `reel`, `story`, `bio`, `qr`, `cartell`… |
+| `REFERENT` | Text | El web des d'on ha clicat, si n'hi havia |
+| `ENTRADA` | Text | La primera pàgina del web que ha vist |
 
 `TELEFON` és de text a posta i **no** és el camp `SMS` de Brevo: la gent hi
 escriu el número de mil maneres i el camp `SMS` rebutja el que no sigui un
@@ -118,18 +123,35 @@ ho fa a la web del club; Brevo només rep les dades.
 
 ### Camps de cada formulari
 
-| Canal | Camps que hi ha de posar |
+**Tots** els formularis han de portar, a més dels seus, aquests sis camps
+comuns: `IDIOMA`, `ORIGEN`, `CAMPANYA`, `FONT`, `MITJA`, `ENTRADA` (i
+`REFERENT`, si el vols). El web els omple sol.
+
+| Canal | Camps propis, a més dels sis comuns |
 |---|---|
-| `portada` | `EMAIL`, `NOM`, `TELEFON`, `INTERES`, `MISSATGE`, `IDIOMA`, `ORIGEN`, `CONSENT` |
-| `informacio` | `EMAIL`, `NOM`, `TELEFON`, `TEMA`, `MISSATGE`, `IDIOMA`, `ORIGEN` |
-| `portesObertes` | `EMAIL`, `NOM`, `TELEFON`, `CONTACTE`, `ANY_NAIX`, `MISSATGE`, `IDIOMA`, `ORIGEN` |
-| `newsletter` | `EMAIL`, `NOM`, `IDIOMA`, `ORIGEN`, `CONSENT` |
-| `bustia` | `EMAIL`, `TEMA`, `IDIOMA`, `ORIGEN` |
-| `ressenya` | `EMAIL`, `NOM`, `ESTRELLES`, `MISSATGE`, `IDIOMA`, `ORIGEN` |
-| `descarrega` | `EMAIL`, `NOM`, `TELEFON`, `TEMA`, `IDIOMA`, `ORIGEN`, `CONSENT` |
-| `galeria` | `EMAIL`, `NOM`, `TELEFON`, `TEMA`, `IDIOMA`, `ORIGEN`, `CONSENT` |
+| `portada` | `EMAIL`, `NOM`, `TELEFON`, `INTERES`, `MISSATGE`, `CONSENT` |
+| `informacio` | `EMAIL`, `NOM`, `TELEFON`, `TEMA`, `MISSATGE` |
+| `portesObertes` | `EMAIL`, `NOM`, `TELEFON`, `CONTACTE`, `ANY_NAIX`, `MISSATGE` |
+| `newsletter` | `EMAIL`, `NOM`, `CONSENT` |
+| `bustia` | `EMAIL`, `TEMA` |
+| `ressenya` | `EMAIL`, `NOM`, `ESTRELLES`, `MISSATGE` |
+| `descarrega` | `EMAIL`, `NOM`, `TELEFON`, `TEMA`, `CONSENT` |
+| `galeria` | `EMAIL`, `NOM`, `TELEFON`, `TEMA`, `CONSENT` |
 
 ## Pas 4 · Comprovar-ho
+
+Al repositori hi ha una prova que ho comprova tot d'un cop, sense enviar res a
+Brevo de veritat:
+
+```bash
+node tests/formularis-brevo.mjs
+```
+
+Omple els deu formularis en un navegador real, entrant per un enllaç de campanya,
+i mira que a Brevo hi arribin el correu, el telèfon, el nom i la campanya. Passa-la
+sempre que es toqui un formulari.
+
+I a mà, amb l'`action` ja enganxada:
 
 Amb l'`action` enganxada i desada, omple el formulari del web amb un correu del
 club i mira **Contactes → Llista del canal**: el contacte hi ha de ser, amb els
@@ -141,6 +163,48 @@ atributs plens, en menys d'un minut. Si no hi és:
   `canals.js` → `brevo.camps`.
 
 ---
+
+## Pas 5 · Saber per quina campanya entra cada contacte
+
+El web ja hi posa d'on ve cada alta. Perquè digui alguna cosa útil, **els
+enllaços que publiquem han de portar etiqueta**. És l'única feina manual, i es
+fa en el moment de publicar.
+
+Un enllaç etiquetat és el de sempre amb tres paràmetres al final:
+
+```
+https://cbgrupbarna.info/campus/?utm_source=instagram&utm_medium=reel&utm_campaign=campus-nadal-2026
+```
+
+| Paràmetre | Què hi va | Exemples |
+|---|---|---|
+| `utm_source` | On s'ha publicat | `instagram`, `whatsapp`, `cartell`, `newsletter`, `google` |
+| `utm_medium` | En quin format | `reel`, `story`, `bio`, `post`, `qr`, `correu` |
+| `utm_campaign` | Quina campanya | `campus-nadal-2026`, `portes-obertes-setembre`, `sponsors-2026` |
+
+Regles perquè les dades serveixin de debò:
+
+- Sempre en **minúscules i amb guions**, mai accents ni espais. `Campus Nadal`
+  i `campus-nadal` són dues campanyes diferents per a Brevo, i llavors no es pot
+  sumar res.
+- El **mateix `utm_campaign`** a tots els enllaços d'una mateixa campanya, encara
+  que canviï la xarxa: així se sap què ha portat més gent, si el reel o el cartell.
+- Als **cartells i el QR**, `utm_source=cartell` i `utm_medium=qr`. Un QR és
+  l'única manera de saber si un cartell de paper porta gent.
+- A la **bio d'Instagram**, `utm_source=instagram&utm_medium=bio`.
+
+Si un enllaç no porta etiqueta no es perd res: el web mira d'on venia el
+navegador i escriu igualment `instagram`, `google`, `whatsapp` o `directe` a
+`FONT`. El que no sabrà és **quina** campanya era.
+
+**Mana la primera visita.** Qui entra per un anunci del campus, es passeja pel
+web i acaba enviant el formulari de la portada, segueix comptant com a alta
+d'aquell anunci. És el que interessa saber: què va portar la persona, no per on
+va acabar passant.
+
+Un cop hi ha dades, a Brevo: **Contactes → Filtres**, filtra per
+`CAMPANYA = campus-nadal-2026` i tindràs tots els contactes que ha portat. Desa
+el filtre com a **segment** i el tindràs sempre a mà per enviar-los només a ells.
 
 ## Coses que el codi fa a posta
 
@@ -154,12 +218,12 @@ a Brevo no hi arriba res. Si el deixa, hi arriba el contacte i el tema, **però
 no el text del missatge**: aquell es queda a la full de càlcul, que és on el
 llegeix qui l'ha de contestar.
 
-**Qui només deixa un telèfon no arriba a Brevo.** A `/escriu-nos/` i a
-`/portes-obertes/` el camp diu «telèfon o correu». Brevo identifica els
-contactes **pel correu**, així que si només hi ha un número, el web l'envia a la
-full de càlcul com sempre i no crea contacte al CRM. No es perd: simplement viu
-en un altre lloc. Si algun dia volem que hi entrin tots, cal separar el camp en
-dos (telèfon i correu) a les sis pàgines.
+**Nom, telèfon i correu, els tres obligatoris.** A la portada, a
+`/escriu-nos/`, a `/portes-obertes/`, a la finestra de descàrrega i a les
+galeries. Dues raons: si no despengen el telèfon se'ls escriu, i sense correu el
+contacte no entra a Brevo (Brevo identifica els contactes pel correu). Així no
+es perd ningú. Les úniques excepcions són la bústia, que és anònima a posta, i
+la newsletter, on demanar un telèfon per rebre un butlletí faria fugir la gent.
 
 **Brevo no substitueix res, s'hi suma.** Cada formulari segueix enviant on
 enviava (full de càlcul, Formspree, WhatsApp). Són dos destins alhora mentre no

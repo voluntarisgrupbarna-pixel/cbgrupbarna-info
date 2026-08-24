@@ -90,10 +90,16 @@
     <p class="form-err" id="in-nom-err" role="alert">Dinos quién nos escribe.</p>
   </div>
   <div class="form-row">
-    <label for="in-via">Teléfono o correo <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">El que te vaya mejor. Solo lo usamos para responderte.</span>
-    <input type="text" id="in-via" name="contacteVia" required autocomplete="tel" aria-describedby="in-via-err">
-    <p class="form-err" id="in-via-err" role="alert">Déjanos un teléfono o un correo para poder responderte.</p>
+    <label for="in-tel">Teléfono <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Solo lo usamos para responderte.</span>
+    <input type="tel" id="in-tel" name="telefon" required autocomplete="tel" inputmode="tel" aria-describedby="in-tel-err">
+    <p class="form-err" id="in-tel-err" role="alert">Déjanos un teléfono para poder responderte.</p>
+  </div>
+  <div class="form-row">
+    <label for="in-mail">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Te pedimos las dos cosas para no perderte: si no te cogemos el teléfono, te escribimos.</span>
+    <input type="email" id="in-mail" name="email" required autocomplete="email" inputmode="email" aria-describedby="in-mail-err">
+    <p class="form-err" id="in-mail-err" role="alert">Escribe un correo válido.</p>
   </div>
   <div class="form-row">
     <label for="in-msg">Qué quieres saber <span class="req" aria-hidden="true">*</span></label>

@@ -105,8 +105,8 @@
             '<input type="text" name="nom" autocomplete="name" required></label>' +
           '<label class="cbgb-dl-f"><span>Correu electrònic</span>' +
             '<input type="email" name="email" autocomplete="email" inputmode="email" required></label>' +
-          '<label class="cbgb-dl-f"><span>Mòbil (opcional)</span>' +
-            '<input type="tel" name="mobil" autocomplete="tel" inputmode="tel"></label>' +
+          '<label class="cbgb-dl-f"><span>Mòbil</span>' +
+            '<input type="tel" name="mobil" autocomplete="tel" inputmode="tel" required></label>' +
           '<div class="cbgb-dl-news"><label class="cbgb-dl-chk">' +
             '<input type="checkbox" name="news" checked>' +
             '<span>Sí, vull rebre el butlletí del club: novetats, portes obertes, campus i ' +
@@ -153,6 +153,8 @@
 
       if (!nom) return crit('Cal el teu nom.', form.nom);
       if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) return crit('Revisa el correu electrònic.', form.email);
+      // Les dues vies, obligatòries: si no despengen, s'escriu. Així no es perd ningú.
+      if (!mobil) return crit('Cal un telèfon de contacte.', form.mobil);
       if (!form.rgpd.checked) return crit('Cal acceptar la política de privacitat per continuar.', form.rgpd);
 
       btn.disabled = true;

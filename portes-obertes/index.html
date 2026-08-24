@@ -109,11 +109,18 @@ mirar-ho abans de dir res a la criatura, també pots: només cal que ens ho digu
     <p class="form-err" id="po-contacte-err" role="alert">Digue'ns qui ens escriu.</p>
   </div>
   <div class="form-row">
-    <label for="po-tel">Telèfon o correu <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">El que et vagi millor. Només el fem servir per respondre't això.</span>
-    <input type="text" id="po-tel" name="contacteVia" required autocomplete="tel"
+    <label for="po-tel">Telèfon <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Només el fem servir per dir-te el dia.</span>
+    <input type="tel" id="po-tel" name="telefon" required autocomplete="tel" inputmode="tel"
            aria-describedby="po-tel-err">
-    <p class="form-err" id="po-tel-err" role="alert">Deixa'ns un telèfon o un correu per poder-te dir el dia.</p>
+    <p class="form-err" id="po-tel-err" role="alert">Deixa'ns un telèfon per poder-te dir el dia.</p>
+  </div>
+  <div class="form-row">
+    <label for="po-mail">Correu electrònic <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Et demanem les dues coses per no perdre't: si no t'agafem el telèfon, t'escrivim.</span>
+    <input type="email" id="po-mail" name="email" required autocomplete="email" inputmode="email"
+           aria-describedby="po-mail-err">
+    <p class="form-err" id="po-mail-err" role="alert">Escriu un correu vàlid.</p>
   </div>
   <div class="form-row">
     <label for="po-msg">Alguna cosa que hàgim de saber</label>

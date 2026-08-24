@@ -90,10 +90,16 @@
     <p class="form-err" id="in-nom-err" role="alert">Tell us who is writing.</p>
   </div>
   <div class="form-row">
-    <label for="in-via">Phone or email <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">Whichever suits you. We only use it to reply.</span>
-    <input type="text" id="in-via" name="contacteVia" required autocomplete="tel" aria-describedby="in-via-err">
-    <p class="form-err" id="in-via-err" role="alert">Leave a phone number or an email so we can answer.</p>
+    <label for="in-tel">Phone <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">We only use it to reply.</span>
+    <input type="tel" id="in-tel" name="telefon" required autocomplete="tel" inputmode="tel" aria-describedby="in-tel-err">
+    <p class="form-err" id="in-tel-err" role="alert">Leave a phone number so we can answer.</p>
+  </div>
+  <div class="form-row">
+    <label for="in-mail">Email <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">We ask for both so we don't lose you: if we can't reach you by phone, we'll write.</span>
+    <input type="email" id="in-mail" name="email" required autocomplete="email" inputmode="email" aria-describedby="in-mail-err">
+    <p class="form-err" id="in-mail-err" role="alert">Please write a valid email.</p>
   </div>
   <div class="form-row">
     <label for="in-msg">What you want to know <span class="req" aria-hidden="true">*</span></label>

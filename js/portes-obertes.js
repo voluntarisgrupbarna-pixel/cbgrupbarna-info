@@ -8,11 +8,14 @@
   if (!form) return;
   var cfg = window.CANALS || {};
 
+  // Telèfon i correu, els dos obligatoris: si no despengen, s'escriu; i sense
+  // correu el contacte no entra al CRM. Així no es perd ningú.
   var camps = [
     { id: 'po-nom', nom: 'nom' },
     { id: 'po-any', nom: 'any' },
     { id: 'po-contacte', nom: 'contacte' },
-    { id: 'po-tel', nom: 'contacteVia' }
+    { id: 'po-tel', nom: 'telefon' },
+    { id: 'po-mail', nom: 'email' }
   ].map(function (c) {
     c.el = document.getElementById(c.id);
     c.err = document.getElementById(c.id + '-err');
@@ -30,6 +33,7 @@
     if (!v) return true;
     // L'any de naixement ha de ser un any de veritat, no una edat.
     if (c.nom === 'any') return !/^(19|20)\d{2}$/.test(v);
+    if (c.nom === 'email') return !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
     return false;
   }
 
@@ -69,15 +73,15 @@
       missatge: msg && msg.value.trim() ? msg.value.trim() : ''
     };
     camps.forEach(function (c) { dades[c.nom] = c.el.value.trim(); });
+    // La full de càlcul de sempre té una columna «contacteVia».
+    dades.contacteVia = dades.telefon + ' · ' + dades.email;
 
     // El contacte, al CRM: qui prova un entrenament al setembre és qui
     // s'apunta al novembre, i ha de quedar-hi seguit.
     if (window.BREVO) {
-      var via = dades.contacteVia || '';
-      var esMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(via);
       window.BREVO.envia('portesObertes', {
-        email:    esMail ? via : '',
-        telefon:  esMail ? '' : via,
+        email:    dades.email,
+        telefon:  dades.telefon,
         nom:      dades.contacte,
         contacte: dades.nom,
         any:      dades.any,

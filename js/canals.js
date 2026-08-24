@@ -58,7 +58,12 @@ window.CANALS = {
       any:       'ANY_NAIX',
       contacte:  'CONTACTE',
       estrelles: 'ESTRELLES',
-      consent:   'CONSENT'
+      consent:   'CONSENT',
+      campanya:  'CAMPANYA',
+      font:      'FONT',
+      mitja:     'MITJA',
+      referent:  'REFERENT',
+      entrada:   'ENTRADA'
     }
   },
 

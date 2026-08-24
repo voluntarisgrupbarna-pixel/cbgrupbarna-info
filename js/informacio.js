@@ -10,15 +10,26 @@
   var tema = document.getElementById('in-tema');
   var done = document.getElementById('in-done');
 
+  // Nom, telèfon i correu: els tres obligatoris, a posta. Amb un sol camp
+  // «telèfon o correu» hi havia gent que només deixava el número, i llavors
+  // ni entrava al CRM (Brevo identifica pel correu) ni hi havia segona via
+  // per arribar-hi si no despenjava. Ara no es perd ningú.
   var camps = [
-    { id: 'in-nom', nom: 'nom' },
-    { id: 'in-via', nom: 'contacteVia' },
-    { id: 'in-msg', nom: 'missatge' }
+    { id: 'in-nom',  nom: 'nom' },
+    { id: 'in-tel',  nom: 'telefon' },
+    { id: 'in-mail', nom: 'email' },
+    { id: 'in-msg',  nom: 'missatge' }
   ].map(function (c) {
     c.el = document.getElementById(c.id);
     c.err = document.getElementById(c.id + '-err');
     return c;
   });
+
+  function mailOk(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }
+  function malament(c) {
+    if (!c.el.value.trim()) return true;
+    return c.nom === 'email' ? !mailOk(c.el.value) : false;
+  }
 
   function mostra(c, mal) {
     c.err.classList.toggle('on', mal);
@@ -27,7 +38,7 @@
 
   camps.forEach(function (c) {
     c.el.addEventListener('input', function () {
-      if (c.err.classList.contains('on')) mostra(c, !c.el.value.trim());
+      if (c.err.classList.contains('on')) mostra(c, malament(c));
     });
   });
 
@@ -35,7 +46,7 @@
     e.preventDefault();
     var primer = null;
     camps.forEach(function (c) {
-      var mal = !c.el.value.trim();
+      var mal = malament(c);
       mostra(c, mal);
       if (mal && !primer) primer = c.el;
     });
@@ -61,16 +72,17 @@
       tema: tema && tema.value ? tema.value : '—'
     };
     camps.forEach(function (c) { dades[c.nom] = c.el.value.trim(); });
+    // La full de càlcul de sempre té una columna «contacteVia»; se li segueix
+    // omplint amb les dues vies perquè no es quedi buida.
+    dades.contacteVia = dades.telefon + ' · ' + dades.email;
 
     // Al CRM hi va el contacte; a la full de càlcul, la conversa sencera.
     // Són dos destins alhora a posta: la full segueix sent la còpia de
     // seguretat mentre no tinguem tot l'històric a Brevo.
     if (window.BREVO) {
-      var via = dades.contacteVia || '';
-      var esMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(via);
       window.BREVO.envia('informacio', {
-        email:    esMail ? via : '',
-        telefon:  esMail ? '' : via,
+        email:    dades.email,
+        telefon:  dades.telefon,
         nom:      dades.nom,
         tema:     dades.tema,
         missatge: dades.missatge,

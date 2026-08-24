@@ -140,11 +140,18 @@ verlo antes de decir nada a la criatura, también puede: solo hace falta que nos
     <p class="form-err" id="po-contacte-err" role="alert">Díganos quién nos escribe.</p>
   </div>
   <div class="form-row">
-    <label for="po-tel">Teléfono o correo <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">El que le vaya mejor. Solo lo usamos para responderle a esto.</span>
-    <input type="text" id="po-tel" name="contacteVia" required autocomplete="tel"
+    <label for="po-tel">Teléfono <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Solo lo usamos para decirle el día.</span>
+    <input type="tel" id="po-tel" name="telefon" required autocomplete="tel" inputmode="tel"
            aria-describedby="po-tel-err">
-    <p class="form-err" id="po-tel-err" role="alert">Déjenos un teléfono o un correo para poder decirle el día.</p>
+    <p class="form-err" id="po-tel-err" role="alert">Déjenos un teléfono para poder decirle el día.</p>
+  </div>
+  <div class="form-row">
+    <label for="po-mail">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Le pedimos las dos cosas para no perderle: si no le cogemos el teléfono, le escribimos.</span>
+    <input type="email" id="po-mail" name="email" required autocomplete="email" inputmode="email"
+           aria-describedby="po-mail-err">
+    <p class="form-err" id="po-mail-err" role="alert">Escriba un correo válido.</p>
   </div>
   <div class="form-row">
     <label for="po-msg">Algo que debamos saber</label>
