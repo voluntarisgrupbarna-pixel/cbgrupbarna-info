@@ -115,6 +115,11 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   selecció espanyola (línia 744).
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
+- **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
+  `patrocinadors/partners/wilson/` se'n surt amb el nom escrit amb la tipografia del
+  club, que queda digne, però és l'única de les 21 fitxes que no té marca gràfica. Si
+  l'Ana en pot demanar un SVG o un PNG amb fons transparent, es posa en un minut. Mentre
+  no arribi, la fitxa no queda coixa: no cal fer-hi res.
 
 ## Pendent de desenvolupar
 
