@@ -221,7 +221,9 @@ a { color: inherit; }
   transition: all .28s ease; cursor: pointer;
 }
 .btn-r {
-  background: var(--red); color: var(--cream); border: none;
+  /* Blanc, no crema: sobre el vermell del club la crema es queda en 4,37:1
+     i el blanc en dona 4,92, que és el número que la pauta ja publica. */
+  background: var(--red); color: #fff; border: none;
 }
 .btn-r:hover { background: #a50f25; transform: translateY(-1px); }
 .btn-o {

@@ -1,7 +1,6 @@
 {
   "_comment": "Hub de dades compartit del CB Grup Barna. Totes les apps llegiran d'aquí. Actualitzar en UN SOL LLOC, propagar a tot arreu.",
   "lastUpdate": "2026-06-10T10:00:00+02:00",
-
   "club": {
     "nom": "CB Grup Barna",
     "nomComplet": "Club de Bàsquet Grup Barna",
@@ -16,11 +15,14 @@
     "instagramUrl": "https://instagram.com/cbgrupbarna",
     "github": "voluntarisgrupbarna-pixel"
   },
-
   "xifres": {
     "_note": "FONT DE VERITAT de les xifres del club. Cap pagina pot escriure una xifra diferent d'aquestes. Si canvia una dada, canvia-la AQUI i propaga-la. Els equips federats surten de partits/data.json, que refresca un robot diari des de la FCBQ.",
     "anysDeClub": 61,
-    "anysDeClubText": { "ca": "seixanta-un anys", "es": "sesenta y un anos", "en": "sixty-one years" },
+    "anysDeClubText": {
+      "ca": "seixanta-un anys",
+      "es": "sesenta y un anos",
+      "en": "sixty-one years"
+    },
     "anysDeClubRevisar": "Recalcular cada 1 de setembre: any de temporada - 1965.",
     "equipsTotal": 34,
     "equipsTotalText": "34+ equips",
@@ -32,14 +34,19 @@
     "seniorFemeniCategoria": "Supercopa",
     "seniorFemeniHistoric": "El senior femeni va jugar a LF2 fa dues temporades. Actualment competeix a Supercopa. Cap pagina pot dir que el club juga a LF2 en present.",
     "lf2Barcelona": "Avui no hi ha cap equip de Barcelona ciutat a LF2. El pla del club es tornar-hi.",
-    "xifresProhibides": ["40 equips", "20F+20M", "60 anys", "sesenta anos", "seixanta anys"],
+    "xifresProhibides": [
+      "40 equips",
+      "20F+20M",
+      "60 anys",
+      "sesenta anos",
+      "seixanta anys"
+    ],
     "families": 450,
     "jugadors": 400,
     "partners": 22,
     "staffTecnic": 38,
     "donesAlStaffPercent": 65.5
   },
-
   "audiencia": {
     "_note": "Xifres que es venen a una empresa. Si no es poden justificar amb una captura del panell, no es publiquen. REVISAR CADA TRIMESTRE: la pagina /empreses/ les cita.",
     "revisatEl": "2026-08-21",
@@ -49,19 +56,30 @@
     "instagramFont": "Panell de resultats de @cbgrupbarna, mitjana mensual",
     "familiesActives": 450,
     "jugadors": 400,
-    "esdevenimentsAnuals": ["3x3 Westfield Glories", "Campus d'estiu", "Portes obertes", "Premi Dona i Esport"],
+    "esdevenimentsAnuals": [
+      "3x3 Westfield Glories",
+      "Campus d'estiu",
+      "Portes obertes",
+      "Premi Dona i Esport"
+    ],
     "territori": "El Clot · Sant Marti · Barcelona"
   },
-
   "temporada": {
     "id": "2025-2026",
     "inici": "2025-09-01",
     "final": "2026-06-30",
     "categoriesActives": [
-      "Premini", "Mini", "Preinfantil", "Infantil", "Cadet", "Júnior", "Sub-22", "Sènior", "Open"
+      "Premini",
+      "Mini",
+      "Preinfantil",
+      "Infantil",
+      "Cadet",
+      "Júnior",
+      "Sub-22",
+      "Sènior",
+      "Open"
     ]
   },
-
   "campus": {
     "actiu": true,
     "nom": "Campus Time Chamber Estiu 2026",
@@ -69,79 +87,329 @@
     "form": "https://wa.me/34698425153?text=Hola!%20Vull%20inscriure%27m%20al%20Campus%20Time%20Chamber%20Estiu%2026.%20Codi:%20CAMPUS_INFO_CAMPUS",
     "limitPerWeek": 50,
     "weeks": [
-      { "id": 1, "label": "S1 · 22-26 juny",   "name": "Flow Camp",         "filled": 58, "barna": 32, "ext": 26, "dates": "2026-06-22/2026-06-26" },
-      { "id": 2, "label": "S2 · 29 juny–3 jul", "name": "TC Basics",         "filled": 60, "barna": 34, "ext": 26, "dates": "2026-06-29/2026-07-03" },
-      { "id": 3, "label": "S3 · 6-10 juliol",   "name": "Shooting Academy",  "filled": 55, "barna": 29, "ext": 26, "dates": "2026-07-06/2026-07-10" },
-      { "id": 4, "label": "S4 · 13-17 juliol",  "name": "One & One Mastery", "filled": 54, "barna": 24, "ext": 30, "dates": "2026-07-13/2026-07-17" },
-      { "id": 5, "label": "S5 · 20-24 juliol",  "name": "Ballhandling Lab",  "filled": 45, "barna": 22, "ext": 23, "dates": "2026-07-20/2026-07-24" },
-      { "id": 6, "label": "S6 · 27-31 juliol",  "name": "Skills Lab Exp.",   "filled": 45, "barna": 20, "ext": 25, "dates": "2026-07-27/2026-07-31" }
+      {
+        "id": 1,
+        "label": "S1 · 22-26 juny",
+        "name": "Flow Camp",
+        "filled": 58,
+        "barna": 32,
+        "ext": 26,
+        "dates": "2026-06-22/2026-06-26"
+      },
+      {
+        "id": 2,
+        "label": "S2 · 29 juny–3 jul",
+        "name": "TC Basics",
+        "filled": 60,
+        "barna": 34,
+        "ext": 26,
+        "dates": "2026-06-29/2026-07-03"
+      },
+      {
+        "id": 3,
+        "label": "S3 · 6-10 juliol",
+        "name": "Shooting Academy",
+        "filled": 55,
+        "barna": 29,
+        "ext": 26,
+        "dates": "2026-07-06/2026-07-10"
+      },
+      {
+        "id": 4,
+        "label": "S4 · 13-17 juliol",
+        "name": "One & One Mastery",
+        "filled": 54,
+        "barna": 24,
+        "ext": 30,
+        "dates": "2026-07-13/2026-07-17"
+      },
+      {
+        "id": 5,
+        "label": "S5 · 20-24 juliol",
+        "name": "Ballhandling Lab",
+        "filled": 45,
+        "barna": 22,
+        "ext": 23,
+        "dates": "2026-07-20/2026-07-24"
+      },
+      {
+        "id": 6,
+        "label": "S6 · 27-31 juliol",
+        "name": "Skills Lab Exp.",
+        "filled": 45,
+        "barna": 20,
+        "ext": 25,
+        "dates": "2026-07-27/2026-07-31"
+      }
     ]
   },
-
   "tres_x_tres": {
     "actiu": true,
     "nom": "3x3 Westfield Glòries 2026",
     "edicio": 3,
     "site": "https://cbgrupbarna-3x3timechamber.com",
-    "dates": ["2026-06-06", "2026-06-07"],
+    "dates": [
+      "2026-06-06",
+      "2026-06-07"
+    ],
     "lloc": "Westfield Glòries, Barcelona",
     "filled": 42,
     "limit": 60,
     "deadlineNote": "Aviat tancarem inscripcions",
     "categories": 10
   },
-
   "events": {
     "calendari": [
-      { "id": "3x3",          "nom": "3x3 Westfield Glòries", "inici": "2026-06-06", "final": "2026-06-07", "tipus": "torneig" },
-      { "id": "mesOrgull",    "nom": "Mes de l'Orgull",        "inici": "2026-06-01", "final": "2026-06-30", "tipus": "campanya" },
-      { "id": "campus",       "nom": "Campus Time Chamber",    "inici": "2026-07-01", "final": "2026-07-26", "tipus": "campus" },
-      { "id": "littleBasket", "nom": "Little Basket Day",      "inici": "2026-06-23", "final": "2026-06-23", "tipus": "jornada" }
+      {
+        "id": "3x3",
+        "nom": "3x3 Westfield Glòries",
+        "inici": "2026-06-06",
+        "final": "2026-06-07",
+        "tipus": "torneig"
+      },
+      {
+        "id": "mesOrgull",
+        "nom": "Mes de l'Orgull",
+        "inici": "2026-06-01",
+        "final": "2026-06-30",
+        "tipus": "campanya"
+      },
+      {
+        "id": "campus",
+        "nom": "Campus Time Chamber",
+        "inici": "2026-07-01",
+        "final": "2026-07-26",
+        "tipus": "campus"
+      },
+      {
+        "id": "littleBasket",
+        "nom": "Little Basket Day",
+        "inici": "2026-06-23",
+        "final": "2026-06-23",
+        "tipus": "jornada"
+      }
     ]
   },
-
   "contactesClub": {
     "_note": "Contactes institucionals públics del club. Dades de famílies/jugadors NO aquí (RGPD — al Sheets privat).",
-    "coordinadora": { "nom": "Ana", "whatsapp": "+34698425153", "email": "marqueting@cbgrupbarna.info" }
+    "coordinadora": {
+      "nom": "Ana",
+      "whatsapp": "+34698425153",
+      "email": "marqueting@cbgrupbarna.info"
+    }
   },
-
   "patrocinadors": {
     "_note": "Llistat dels partners amb fitxa publicada a /patrocinadors/partners/. Detall economic complet a Drive: CB Grup Barna / Patrocinadors / [Any].gsheet",
     "temporada": "2026-2027",
     "_nivells": "El nivell (or / plata / bronze) encara no esta assignat a cap partner: queda a null fins que l'Ana el confirmi. Valors admesos: \"or\", \"plata\", \"bronze\", \"institucional\".",
     "_pendents": "Instagram per confirmar: Foto Jane, Ovella Negra, Fundacio Mullor, Tot Salut, Eix Comercial Sant Marti, Panteres Grogues. Altes 26/27 anunciades a /patrocinadors/ i encara sense fitxa propia: Nova Farmacia Clot i Clinica Dental 26. Baixa: Zapic (ja no es continua la col·laboracio) — el logo /partners/zapic-ai.png segueix al repositori.",
     "llistat": [
-      { "slug": "aquamiga", "nom": "Aquamiga", "nivell": null, "fitxa": "/patrocinadors/partners/aquamiga/", "logo": "/partners/aquamiga.png", "web": "https://aquamiga.com/", "instagram": "https://www.instagram.com/aquamiga_oficial/" },
-      { "slug": "armand-optics", "nom": "Armand Òptics", "nivell": null, "fitxa": "/patrocinadors/partners/armand-optics/", "logo": "/partners/armand-optics.png", "web": "https://armandoptics.com/", "instagram": "https://www.instagram.com/armandoptics/" },
-      { "slug": "clinica-dental-bac-de-roda", "nom": "Clínica Dental Bac de Roda", "nivell": null, "fitxa": "/patrocinadors/partners/clinica-dental-bac-de-roda/", "logo": "/partners/clinica-dental-bac-de-roda.png", "web": "https://centrebacderoda.com/", "instagram": "https://www.instagram.com/clinicadentalbacderoda/" },
-      { "slug": "eix-clot", "nom": "Eix Clot", "nivell": null, "fitxa": "/patrocinadors/partners/eix-clot/", "logo": "/partners/eix-clot.png", "web": "https://www.eixclot.cat/", "instagram": "https://www.instagram.com/eixclot/" },
-      { "slug": "eix-comercial-sant-marti", "nom": "Eix Comercial Sant Martí", "nivell": null, "fitxa": "/patrocinadors/partners/eix-comercial-sant-marti/", "logo": "/partners/eix-comercial-sant-marti.png", "web": "https://www.santmartieix.com/", "instagram": null },
-      { "slug": "foto-jane", "nom": "Foto Jané", "nivell": null, "fitxa": "/patrocinadors/partners/foto-jane/", "logo": "/partners/foto-jane.png", "web": "https://www.fotojane.es/", "instagram": null },
-      { "slug": "fundacio-mullor", "nom": "Fundació Mullor", "nivell": null, "fitxa": "/patrocinadors/partners/fundacio-mullor/", "logo": "/partners/fundacio-mullor.png", "web": "https://fundaciomullor.org/", "instagram": null },
-      { "slug": "gbk-globabasket", "nom": "GBK · Globasket", "nivell": null, "fitxa": "/patrocinadors/partners/gbk-globabasket/", "logo": "/partners/gbk-globabasket.png", "web": "https://globasket.com/", "instagram": "https://www.instagram.com/globasket/" },
-      { "slug": "herbolaris-montserrat", "nom": "Herbolaris Montserrat", "nivell": null, "fitxa": "/patrocinadors/partners/herbolaris-montserrat/", "logo": "/partners/herbolaris-montserrat.png", "web": "https://www.herbolarismontserrat.com/", "instagram": "https://www.instagram.com/herbolari.montserrat/" },
-      { "slug": "illa-fantasia", "nom": "Illa Fantasia", "nivell": null, "fitxa": "/patrocinadors/partners/illa-fantasia/", "logo": "/partners/illa-fantasia.png", "web": "https://illafantasia.com/", "instagram": "https://www.instagram.com/illafantasia/" },
-      { "slug": "instax-fujifilm", "nom": "Instax Fujifilm", "nivell": null, "fitxa": "/patrocinadors/partners/instax-fujifilm/", "logo": "/partners/instax-fujifilm.png", "web": "https://instax.eu/es/", "instagram": "https://www.instagram.com/instaxcamara/" },
-      { "slug": "l-aquarium-de-barcelona", "nom": "L'Aquàrium de Barcelona", "nivell": null, "fitxa": "/patrocinadors/partners/l-aquarium-de-barcelona/", "logo": "/partners/l-aquarium-de-barcelona.png", "web": "https://www.aquariumbcn.com/", "instagram": "https://www.instagram.com/aquariumbarcelona/" },
-      { "slug": "manual-colors", "nom": "Manual Colors", "nivell": null, "fitxa": "/patrocinadors/partners/manual-colors/", "logo": "/partners/manual-colors.png", "web": "https://www.manualcolor.com/", "instagram": "https://www.instagram.com/manualcolor/" },
-      { "slug": "melosa-hamburgueseria", "nom": "La Melosa", "nivell": null, "fitxa": "/patrocinadors/partners/melosa-hamburgueseria/", "logo": "/partners/melosa-hamburgueseria.png", "web": "https://melosa.co/", "instagram": "https://www.instagram.com/melosahamburgueseria/" },
-      { "slug": "mercat-dels-encants", "nom": "Mercat dels Encants", "nivell": null, "fitxa": "/patrocinadors/partners/mercat-dels-encants/", "logo": "/partners/mercat-dels-encants.png", "web": "https://encantsbarcelona.com/", "instagram": "https://www.instagram.com/encantsbarcelona/" },
-      { "slug": "ovella-negra", "nom": "Ovella Negra", "nivell": null, "fitxa": "/patrocinadors/partners/ovella-negra/", "logo": "/partners/ovella-negra.png", "web": "http://www.ovellanegrabcn.net/", "instagram": null },
-      { "slug": "panteres-grogues", "nom": "Panteres Grogues", "nivell": null, "fitxa": "/patrocinadors/partners/panteres-grogues/", "logo": "/partners/panteres-grogues.png", "web": "https://www.panteresgrogues.org/", "instagram": null },
-      { "slug": "romeo-abogados", "nom": "Romeo Abogados", "nivell": null, "fitxa": "/patrocinadors/partners/romeo-abogados/", "logo": "/partners/romeo-abogados.png", "web": "https://www.romeoabogados.com/", "instagram": "https://www.instagram.com/romeoabogados/" },
-      { "slug": "stepback-podologia", "nom": "Stepback Podologia", "nivell": null, "fitxa": "/patrocinadors/partners/stepback-podologia/", "logo": "/partners/stepback-podologia.png", "web": "https://www.stepbackpodologia.es/", "instagram": "https://www.instagram.com/stepback.podologia/" },
-      { "slug": "time-chamber", "nom": "Time Chamber", "nivell": null, "fitxa": "/patrocinadors/partners/time-chamber/", "logo": "/partners/time-chamber.png", "web": "https://www.timechamber.es/", "instagram": "https://www.instagram.com/timechamber_es/" },
-      { "slug": "tot-salut", "nom": "Tot Salut", "nivell": null, "fitxa": "/patrocinadors/partners/tot-salut/", "logo": "/partners/tot-salut.png", "web": "http://centretotsalut.es/", "instagram": null },
-      { "slug": "westfield-glories", "nom": "Westfield Glòries", "nivell": null, "fitxa": "/patrocinadors/partners/westfield-glories/", "logo": "/partners/westfield-glories.png", "web": "https://www.westfield.com/es/spain/glories", "instagram": "https://www.instagram.com/westfieldglories/" }
+      {
+        "slug": "aquamiga",
+        "nom": "Aquamiga",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/aquamiga/",
+        "logo": "/partners/aquamiga.png",
+        "web": "https://aquamiga.com/",
+        "instagram": "https://www.instagram.com/aquamiga_oficial/"
+      },
+      {
+        "slug": "armand-optics",
+        "nom": "Armand Òptics",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/armand-optics/",
+        "logo": "/partners/armand-optics.png",
+        "web": "https://armandoptics.com/",
+        "instagram": "https://www.instagram.com/armandoptics/"
+      },
+      {
+        "slug": "clinica-dental-bac-de-roda",
+        "nom": "Clínica Dental Bac de Roda",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/clinica-dental-bac-de-roda/",
+        "logo": "/partners/clinica-dental-bac-de-roda.png",
+        "web": "https://centrebacderoda.com/",
+        "instagram": "https://www.instagram.com/clinicadentalbacderoda/"
+      },
+      {
+        "slug": "eix-clot",
+        "nom": "Eix Clot",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/eix-clot/",
+        "logo": "/partners/eix-clot.png",
+        "web": "https://www.eixclot.cat/",
+        "instagram": "https://www.instagram.com/eixclot/"
+      },
+      {
+        "slug": "eix-comercial-sant-marti",
+        "nom": "Eix Comercial Sant Martí",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/eix-comercial-sant-marti/",
+        "logo": "/partners/eix-comercial-sant-marti.png",
+        "web": "https://www.santmartieix.com/",
+        "instagram": null
+      },
+      {
+        "slug": "foto-jane",
+        "nom": "Foto Jané",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/foto-jane/",
+        "logo": "/partners/foto-jane.png",
+        "web": "https://www.fotojane.es/",
+        "instagram": null
+      },
+      {
+        "slug": "fundacio-mullor",
+        "nom": "Fundació Mullor",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/fundacio-mullor/",
+        "logo": "/partners/fundacio-mullor.png",
+        "web": "https://fundaciomullor.org/",
+        "instagram": null
+      },
+      {
+        "slug": "gbk-globabasket",
+        "nom": "GBK · Globasket",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/gbk-globabasket/",
+        "logo": "/partners/gbk-globabasket.png",
+        "web": "https://globasket.com/",
+        "instagram": "https://www.instagram.com/globasket/"
+      },
+      {
+        "slug": "herbolaris-montserrat",
+        "nom": "Herbolaris Montserrat",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/herbolaris-montserrat/",
+        "logo": "/partners/herbolaris-montserrat.png",
+        "web": "https://www.herbolarismontserrat.com/",
+        "instagram": "https://www.instagram.com/herbolari.montserrat/"
+      },
+      {
+        "slug": "illa-fantasia",
+        "nom": "Illa Fantasia",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/illa-fantasia/",
+        "logo": "/partners/illa-fantasia.png",
+        "web": "https://illafantasia.com/",
+        "instagram": "https://www.instagram.com/illafantasia/"
+      },
+      {
+        "slug": "instax-fujifilm",
+        "nom": "Instax Fujifilm",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/instax-fujifilm/",
+        "logo": "/partners/instax-fujifilm.png",
+        "web": "https://instax.eu/es/",
+        "instagram": "https://www.instagram.com/instaxcamara/"
+      },
+      {
+        "slug": "manual-colors",
+        "nom": "Manual Colors",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/manual-colors/",
+        "logo": "/partners/manual-colors.png",
+        "web": "https://www.manualcolor.com/",
+        "instagram": "https://www.instagram.com/manualcolor/"
+      },
+      {
+        "slug": "melosa-hamburgueseria",
+        "nom": "La Melosa",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/melosa-hamburgueseria/",
+        "logo": "/partners/melosa-hamburgueseria.png",
+        "web": "https://melosa.co/",
+        "instagram": "https://www.instagram.com/melosahamburgueseria/"
+      },
+      {
+        "slug": "mercat-dels-encants",
+        "nom": "Mercat dels Encants",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/mercat-dels-encants/",
+        "logo": "/partners/mercat-dels-encants.png",
+        "web": "https://encantsbarcelona.com/",
+        "instagram": "https://www.instagram.com/encantsbarcelona/"
+      },
+      {
+        "slug": "ovella-negra",
+        "nom": "Ovella Negra",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/ovella-negra/",
+        "logo": "/partners/ovella-negra.png",
+        "web": "http://www.ovellanegrabcn.net/",
+        "instagram": null
+      },
+      {
+        "slug": "panteres-grogues",
+        "nom": "Panteres Grogues",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/panteres-grogues/",
+        "logo": "/partners/panteres-grogues.png",
+        "web": "https://www.panteresgrogues.org/",
+        "instagram": null
+      },
+      {
+        "slug": "romeo-abogados",
+        "nom": "Romeo Abogados",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/romeo-abogados/",
+        "logo": "/partners/romeo-abogados.png",
+        "web": "https://www.romeoabogados.com/",
+        "instagram": "https://www.instagram.com/romeoabogados/"
+      },
+      {
+        "slug": "stepback-podologia",
+        "nom": "Stepback Podologia",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/stepback-podologia/",
+        "logo": "/partners/stepback-podologia.png",
+        "web": "https://www.stepbackpodologia.es/",
+        "instagram": "https://www.instagram.com/stepback.podologia/"
+      },
+      {
+        "slug": "time-chamber",
+        "nom": "Time Chamber",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/time-chamber/",
+        "logo": "/partners/time-chamber.png",
+        "web": "https://www.timechamber.es/",
+        "instagram": "https://www.instagram.com/timechamber_es/"
+      },
+      {
+        "slug": "tot-salut",
+        "nom": "Tot Salut",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/tot-salut/",
+        "logo": "/partners/tot-salut.png",
+        "web": "http://centretotsalut.es/",
+        "instagram": null
+      },
+      {
+        "slug": "westfield-glories",
+        "nom": "Westfield Glòries",
+        "nivell": null,
+        "fitxa": "/patrocinadors/partners/westfield-glories/",
+        "logo": "/partners/westfield-glories.png",
+        "web": "https://www.westfield.com/es/spain/glories",
+        "instagram": "https://www.instagram.com/westfieldglories/"
+      }
     ]
   },
-
   "xarxes": {
-    "instagram": { "handle": "@cbgrupbarna", "url": "https://instagram.com/cbgrupbarna" },
-    "whatsapp":  { "numero": "+34698425153", "link": "https://wa.me/34698425153" },
-    "web":       { "url": "https://cbgrupbarna.info" },
-    "microsite3x3": { "url": "https://cbgrupbarna-3x3timechamber.com" }
+    "instagram": {
+      "handle": "@cbgrupbarna",
+      "url": "https://instagram.com/cbgrupbarna"
+    },
+    "whatsapp": {
+      "numero": "+34698425153",
+      "link": "https://wa.me/34698425153"
+    },
+    "web": {
+      "url": "https://cbgrupbarna.info"
+    },
+    "microsite3x3": {
+      "url": "https://cbgrupbarna-3x3timechamber.com"
+    }
   },
-
   "_howToUpdate": "Actualitza aquest fitxer quan canviï qualsevol dada del club (places campus, inscripcions 3x3, etc.). Totes les apps llegiran d'aquí automàticament si estan connectades."
 }

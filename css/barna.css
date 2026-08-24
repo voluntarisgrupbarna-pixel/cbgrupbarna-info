@@ -116,6 +116,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .prose strong { font-weight: 500; color: var(--ink); }
 .prose a { color: var(--ink); border-bottom: 1px solid var(--red); padding-bottom: 1px; transition: color 0.3s; }
 .prose a:hover { color: var(--red); }
+/* Un botó dins d'un article perdia el text blanc: `.prose a` (0,1,1) guanya
+   a `.btn` (0,1,0) i el deixava amb la tinta sobre el vermell, 3,87:1. És la
+   trampa d'especificitat que la guia del club ja avisa. Amb el filet de sota
+   fora, que en un botó no hi pinta res. */
+.prose a.btn { color: #fff; border-bottom: 0; padding-bottom: 0; }
+.prose a.btn.ghost { color: var(--ink); }
+.prose a.btn.ghost:hover { color: #fff; }
+.prose a.btn:hover { color: #fff; }
 .prose ul, .prose ol { margin: 16px 0 16px 20px; }
 .prose li { font-size: 15px; color: var(--ink-2); margin-bottom: 9px; }
 .prose blockquote { margin: 28px 0; padding: 22px 26px; border-left: 2px solid var(--red); background: var(--paper-2); font-size: 15.5px; color: var(--ink); }

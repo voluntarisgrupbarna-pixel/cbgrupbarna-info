@@ -238,3 +238,54 @@ servidor —només `<meta refresh>` o JavaScript, que passen molt pitjor l'autor
 la URL avui, amb el domini acabat d'estrenar i encara sense posicions guanyades, és
 regalar el poc que hi ha. Es podrà fer quan `/patrocinadors/` ja posicioni i valgui la
 pena arriscar-hi, i llavors amb redireccions per a totes les fitxes alhora.
+
+---
+
+## Auditoria de qualitat · 24/08/2026
+
+Passades les tres bateries del repositori sobre les 410 pàgines. L'auditoria
+d'SEO i GEO passa de **46 errors i 161 avisos a cap error i 15 avisos**, i el
+lint de multiidioma de **110 errors a cap**. El que segueix és el que NO s'ha
+pogut tancar, i per què.
+
+### Cal una dada que només té el club
+
+1. **Horaris d'atenció.** L'entitat de la portada no en declara cap, i a tot el
+   lloc no n'hi ha cap de publicat. No s'hi ha posat res: unes dades
+   estructurades amb horari fan que algú es presenti a La Nau del Clot a
+   aquella hora. Cal saber si el club té atenció presencial i quan; si no en
+   té, el correcte és no declarar-ne i deixar-ho així.
+
+2. **Quants partners hi ha.** Ara mateix el lloc diu tres números diferents:
+   la reixa de `/patrocinadors/` ensenya 23 logos, `data.json` en llista 21 i
+   `/empreses/` diu «22 partners» en tres llocs i «23 partners» en dos més.
+   La font de veritat hauria de ser `data.json`, però hi ha fitxes publicades
+   que no hi són (Nova Farmàcia Clot, Wilson) i el generador no les coneix. Cal
+   que el club digui qui hi és aquesta temporada; llavors s'igualen els tres
+   llocs d'una tirada.
+
+3. **Descripció i contacte de dos partners.** La fitxa de Wilson no té web,
+   telèfon ni descripció verificada, i la de Nova Farmàcia Clot tampoc. On les
+   altres fitxes tenen dada, aquestes diuen que encara no la tenim. No s'hi
+   inventa res: és el criteri que el generador ja porta escrit.
+
+### Decidit i fet en aquesta tanda
+
+- **L'Aquàrium de Barcelona, fora.** Decisió de l'Ana (24/08). Tretes les tres
+  fitxes, l'entrada del generador i de `data.json`, el logo de les reixes de
+  `/patrocinadors/`, `/presentacio/` i el dossier, la parella de
+  `i18n/routes.yml` i el fitxer del logo.
+- **La fitxa de Wilson ensenyava el logo de L'Aquàrium** i el seu text d'oferta
+  duia el nom de L'Aquàrium. És el que passa quan una fitxa sense imatge es
+  genera després d'una que en té. Ara hi va el wordmark de text, com a la reixa.
+
+### El que queda obert i no depèn de ningú de fora
+
+- **Text prim a `/jugadors/`.** Amb el JavaScript executat en té 100 paraules
+  en català i 87 en anglès. No és un defecte de mesura: la pàgina encara no
+  està acabada (ja consta més amunt en aquest mateix fitxer). Quan hi hagi
+  plantilla, deixarà de ser-ho.
+- **Text de 8,5 px.** El sistema visual del club fa servir etiquetes en caixa
+  alta molt petites. La bateria de navegador les compta com a text petit a
+  411 pàgines. No s'ha tocat res: és una decisió de disseny escrita a la guia,
+  no un descuit, i canviar-la és canviar la marca.
