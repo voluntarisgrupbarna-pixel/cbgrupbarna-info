@@ -34,6 +34,25 @@ Quan n'activis un, marca la fila amb ✅ perquè la taula segueixi dient la veri
 
 ---
 
+## Pas 0 · El compte i el domini
+
+Abans de tocar cap formulari:
+
+1. **Un sol compte de Brevo per al club**, amb el correu genèric
+   (`voluntarisgrupbarna@gmail.com`), no el personal de ningú. Convida-hi la
+   resta des de **Configuració → Els meus usuaris**.
+2. **Autentica el domini** a **Configuració → Emissors, dominis i IPs
+   dedicades → Dominis**. Brevo et dona uns registres **DKIM, SPF i DMARC** que
+   s'han d'afegir al DNS de `cbgrupbarna.info`. Sense això els correus del club
+   acaben a la brossa de Gmail i Outlook. Es pot fer després de connectar els
+   formularis, però **abans del primer enviament**.
+3. **Emissor per defecte**: `hola@cbgrupbarna.info` (o el que faci servir el
+   club), amb el nom «CB Grup Barna».
+
+L'ordre de la feina: **pas 1 (atributs) → pas 2 (llistes) → pas 3 (formularis)**.
+No es pot canviar: un formulari no pot fer servir un atribut que encara no
+existeix.
+
 ## Pas 1 · Crear els atributs de contacte
 
 **Contactes → Configuració → Atributs de contacte.** Es fa **una sola vegada** i
