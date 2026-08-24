@@ -289,6 +289,7 @@ has de tocar les tres; esborra'n una i has d'esborrar les tres.
 | A la proposta de canvi | `.github/workflows/i18n-paritat.yml` | Compara què toca el canvi amb el trio de cada pàgina. Si en falta un idioma, **la marca en vermell** i escriu a la proposta quins fitxers falten. Quan es resol, esborra l'avís sol. |
 | A cada push a `main` | `.github/workflows/i18n-tradueix.yml` | Torna a extreure el text de les pàgines tocades conservant el que no ha canviat, i manté **una sola incidència** amb la llista viva del que queda endarrerit. Es tanca sola quan es buida. |
 | Sempre que vulguis | `python3 scripts/i18n-paritat.py --tot` | La mateixa foto, a mà i al moment. |
+| A cada proposta, a part | `scripts/i18n-contingut.py` | **Obre** l'original i la traducció i els compara: seccions, llargada, paraules catalanes i `<title>`. La paritat mira fitxers i dates i no en veu cap; això va trobar `/3x3/` amb 6 de 12 seccions i 21 de 23 fitxes de partner amb 1 de 4. Avisa, no atura. Les excepcions, amb el motiu, a `i18n/excepcions-contingut.yml`. |
 
 El circuit per posar una pàgina al dia:
 
