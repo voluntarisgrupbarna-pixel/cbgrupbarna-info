@@ -140,6 +140,19 @@ def construeix():
         for entrada in dades.get("rutes", []):
             previ[entrada["ca"]] = entrada
 
+    # Una parella escrita a mà la pot encapçalar una adreça catalana que
+    # aquest script no compta com a pàgina perquè és una redirecció —el cas
+    # de /basquet-femeni/el-metode-barna/, que porta a /femeni/#metode. El
+    # contingut català hi és, però dins d'una secció d'una altra pàgina; el
+    # castellà i l'anglès el tenen com a pàgina pròpia. Sense això, aquelles
+    # dues sortirien per sempre com a òrfenes i es quedarien sense commutador
+    # d'idioma, que és el contrari del que volem.
+    manuals = sorted(u for u in previ
+                     if u not in totes["ca"] and fitxer_de(u).is_file())
+    for ca in manuals:
+        totes["ca"].add(ca)
+        declarats.setdefault(ca, alternates_declarats(ca))
+
     rutes, avisos = [], []
     for ca in sorted(totes["ca"]):
         entrada = dict(previ.get(ca) or {})
