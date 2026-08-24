@@ -95,8 +95,17 @@ function auditPage(rel) {
   // Una pàgina que demana no ser indexada no necessita Open Graph, ni
   // descripció, ni dades estructurades: exigir-li-ho és soroll. Val tant per
   // a les eines internes com per a les redireccions amb canonical.
-  const isAdmin = noindex || NOINDEX_OK.some((p) => url.startsWith(p) || url === p);
+  // Una redirecció tampoc: a l'adreça vella d'una pàgina que ha canviat de
+  // nom hi queda una pàgina que no fa res més que portar a la nova, amb el
+  // canonical apuntant-hi. No hi porta `noindex` a posta —el que ha de fer
+  // un cercador amb això és seguir-la i quedar-se la nova—, però demanar-li
+  // titular, descripció i dades estructurades és soroll: no és contingut.
+  // Es reconeix igual que a scripts/build-sitemap.py, pel refresh.
+  const esRedireccio = /<meta[^>]+http-equiv=["']?refresh["']?/i.test(html);
+  const isAdmin = noindex || esRedireccio
+    || NOINDEX_OK.some((p) => url.startsWith(p) || url === p);
   r.info.noindex = noindex;
+  r.info.redireccio = esRedireccio;
   r.info.admin = isAdmin;
 
   // --- bàsics ---
@@ -140,9 +149,11 @@ function auditPage(rel) {
     else {
       const expect = SITE + (url === '/' ? '/' : url);
       const got = canon.href.replace(/\/$/, '') || canon.href;
-      // Una redirecció amb noindex ha d'apuntar al seu destí: és el que la fa
-      // correcta, no un error.
-      if (!noindex && got.replace(/\/$/, '') !== expect.replace(/\/$/, '')) {
+      // Una redirecció ha d'apuntar al seu destí: és el que la fa correcta,
+      // no un error. Val tant si porta `noindex` com si no —les del renom de
+      // slugs no en porten a posta, perquè el que ha de fer un cercador amb
+      // elles és seguir-les i quedar-se la nova.
+      if (!noindex && !esRedireccio && got.replace(/\/$/, '') !== expect.replace(/\/$/, '')) {
         add('avís', 'canonical-divergent', 'la canonical no apunta a la pròpia URL', { href: canon.href, expect });
       }
     }
@@ -241,8 +252,18 @@ function auditPage(rel) {
   // Les citacions bibliogràfiques van en l'idioma de l'original i falsejarien
   // el recompte: una pàgina de bibliografia en català plena de títols anglesos
   // no és una pàgina en anglès.
+  // I un tros que declara el seu propi `lang` tampoc compta: si una pàgina
+  // catalana porta un informe escrit en castellà i ho diu al marcatge, això
+  // és el correcte, no un error. Es retiren els elements amb `lang` propi
+  // diferent del de la pàgina.
+  const senseAltresIdiomes = (tros) => {
+    const meu = (langVal || '').slice(0, 2);
+    return tros.replace(
+      /<(main|section|article|div|aside|p)\b[^>]*\slang=["']([a-z]{2})[^"']*["'][^>]*>[\s\S]*?<\/\1>/gi,
+      (tot, _etiqueta, idioma) => (idioma.toLowerCase() === meu ? tot : ' '));
+  };
   const bodyText = textOf(
-    (html.match(/<body[\s\S]*<\/body>/i) || [html])[0]
+    senseAltresIdiomes((html.match(/<body[\s\S]*<\/body>/i) || [html])[0])
       .replace(/<li\b[\s\S]*?<\/li>/gi, ' ')
       .replace(/<cite\b[\s\S]*?<\/cite>/gi, ' ')
       .replace(/<blockquote\b[\s\S]*?<\/blockquote>/gi, ' ')
