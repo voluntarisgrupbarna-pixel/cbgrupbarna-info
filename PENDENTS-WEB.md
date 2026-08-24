@@ -1174,3 +1174,28 @@ mencions eren prosa d'aquest document i un comentari de
 **Com recuperar-los si mai calen:** són a l'historial de git, al commit
 `c589e7f4`. Amb `git show c589e7f4:mascota/mascota-reel.mp4 > mascota-reel.mp4`
 en surt qualsevol, byte a byte.
+
+## 24-08-2026 — El que queda obert d'aquesta tanda de traducció
+
+Tres coses apuntades i no fetes, perquè cap de les tres és una decisió tècnica:
+
+- **Redirect de L'Aquàrium de Barcelona.** Quan es va esborrar el partner, les
+  seves tres fitxes (`ca`, `es`, `en`) van passar a 404. GitHub Pages no fa
+  redireccions de servidor, així que l'única manera és una pàgina estàtica amb
+  `<meta http-equiv="refresh">`, que ja és el mecanisme que fem servir a la
+  resta del web per a aquest cas (vegeu `web-cbgb`). No s'ha fet perquè no hi
+  ha cap enllaç conegut, intern ni extern, que hi apunti — les tres fitxes
+  només sortien del propi `partits/` i del sitemap, i totes dues coses ja
+  estan netes. Si l'Ana sap d'algun enllaç extern (una nota de premsa, un post
+  antic) que encara hi porti gent, avisa-ho i es posa el redirect en cinc
+  minuts.
+- **Logotip de la Wilson**, ja apuntat més amunt, a «Pendent de material de
+  l'Ana».
+- **La skill `mapa-web-cbgb` parla d'una desincronització que ja no existeix.**
+  Diu que `/femeni/` és «encara sense traduir» com a exemple del que passa
+  quan es toca una pàgina catalana i no es reflecteix a `/es/` i `/en/`. Des
+  d'aquesta tanda, `/femeni/` està traduïda sencera i, sobretot, ja no cal fer
+  aquesta comprovació a mà: `i18n-paritat.py` i `i18n-contingut.py` ho vigilen
+  soles a cada `push` i bloquegen el pull request si es desincronitza. Cal
+  actualitzar aquell paràgraf perquè no enviï a ningú a buscar un problema que
+  ja no hi és.
