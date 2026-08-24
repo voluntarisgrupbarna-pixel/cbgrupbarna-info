@@ -184,17 +184,20 @@ seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
 Auditoria completa a `claude/web-performance-testing-6k9iwe`: la portada passa de
 79 a 97/100 de Lighthouse, LCP de 5,1 s a 1,4 s, -216 KB de pes i -200 MB al
 repositori (vídeos de la mascota sense usar). Detall complet a
-`tests/README.md` i als missatges de commit d'aquesta branca. Dues coses no
-es podien resoldre des del codi:
+`tests/README.md` i als missatges de commit d'aquesta branca.
 
-- **Cabeceres de caché HTTP.** El domini apunta directament a GitHub Pages
-  (`CNAME` → `cbgrupbarna.info`, sense Cloudflare ni cap altre CDN al davant
-  — R2 només s'usa per emmagatzemar fotos, no com a proxy del lloc). GitHub
-  Pages no admet cap fitxer de configuració per personalitzar `Cache-Control`
-  (no hi ha equivalent al `_headers` de Netlify): les cabeceres de caché són
-  fixes i no es poden allargar des del repositori. Per aconseguir-ho caldria
-  posar un CDN (Cloudflare és l'opció més òbvia, ja que R2 ja hi viu) davant
-  del domini — és una decisió d'infraestructura, no de codi.
+**✅ Cabeceres de caché HTTP — resolt el 24/08/2026.** Amb el domini ja
+darrere de Cloudflare (nameservers canviats, DNS proxied, SSL en mode
+Full), els estàtics (`/fonts/`, `/css/`, `/img/`) passen de 10 minuts de
+caché (sempre `MISS` a GitHub) a 4 hores, ja servint `HIT` des del node
+de vora. L'HTML es queda correctament en `DYNAMIC` (respecta el
+`max-age=600` d'origen, no cacheja contingut que canvia). Es va decidir
+deixar-ho en 4 hores en comptes d'allargar-ho a 1 mes; si en algun moment
+es vol allargar, és **Caching → Cache Rules** al tauler de Cloudflare.
+Verificat amb `curl` contra el domini real: sense redireccions trencades,
+`www` fa 301 net cap a l'arrel, sitemap i robots accessibles, totes les
+pàgines clau responen 200.
+
 - **451 fotos amb l'original esborrat del repositori.** Als àlbums
   `jugadors-es-2526` (178 de 192 fotos) i `fotos-seniors-2526` (273 de 292),
   la miniatura i la foto gran sí que hi són (`fotos/thumb/`, `fotos/web/`),
