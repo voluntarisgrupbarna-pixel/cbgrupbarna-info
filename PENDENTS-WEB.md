@@ -1237,8 +1237,6 @@ necessitaven material nou de l'Ana.
 - Preus del campus: seguir mostrant-los o treure'ls per coherència amb «cap preu de
   quota al web».
 - Els cinc MP4 originals de `mascota/` (186 MB): conservar-los al repositori o treure'ls.
-- `/premidonaesport/` obert de debò o es queda amb PIN (ja resolta la contradicció
-  amb el sitemap; la pregunta de fons de contingut segueix oberta si es vol reobrir).
 - `/premsa/moments/` en castellà i anglès: traduir-la o deixar-la només en català.
 - `/briefing/`: refer-lo per a la temporada 26-27 o deixar-lo com a document tancat.
 - Eina de dashboard d'analítica: GA4 Data API o una alternativa sense galetes
@@ -1264,3 +1262,14 @@ necessitaven material nou de l'Ana.
 
 **Sense acció pròpia, esperen un esdeveniment extern:**
 - Provar el robot de partits amb un resultat real (la temporada comença el 05/09).
+
+## Decisió · el Premi Dona i Esport no es toca (24/08/2026)
+
+**Decisió de l'Ana, presa i tancada.** `/premidonaesport/` es queda tal com està: amb PIN,
+`noindex,follow` a les 72 pàgines i fora del `sitemap.xml`. No s'obre. No es reobre aquesta
+pregunta.
+
+Confirma el que ja deia `mapa-web-cbgb` §4: la web oficial i canònica d'aquest contingut és
+externa (`voluntarisgrupbarna-pixel.github.io/cbgrupbarna/`), i el mirall local no s'edita
+com a font. `/femeni/` segueix sent la síntesi pròpia i pública per a la web, i és el que
+s'ha de tocar quan calgui ampliar contingut de bàsquet femení — mai `/premidonaesport/`.
