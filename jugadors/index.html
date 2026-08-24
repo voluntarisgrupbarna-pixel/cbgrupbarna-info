@@ -103,8 +103,10 @@
 .lang-switch .sep { opacity: 0.25; }
 </style>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Salta al contingut</a>
 <header>
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CB GRUP <span>BARNA</span></div>
@@ -125,12 +127,14 @@
     <a href="/premsa/">Premsa</a>
   </nav>
 </header>
+<main id="contingut" tabindex="-1">
 <div class="wrap">
   <h1>LA <span>PLANTILLA</span></h1>
   <div class="sub">Jugadors i jugadores del CB Grup Barna per equips · Temporada 2025-2026</div>
   <p class="intro">Consulta la plantilla completa del CB Grup Barna, equip per equip: des de l'Escoleta fins als sèniors, amb tots els jugadors i jugadores federats del club al Clot, Barcelona.</p>
   <div id="roster"><div class="empty">Carregant plantilla…</div></div>
 </div>
+</main>
 <script src="/jugadors/jugadors.js"></script>
 <script>
   const jug = Array.isArray(window.JUGADORS) ? window.JUGADORS : [];

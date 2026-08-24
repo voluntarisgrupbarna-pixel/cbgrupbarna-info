@@ -494,10 +494,13 @@
 }
 </script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Saltar al contenido</a>
 
 <!-- ACCESS GATE -->
+<main id="contingut" tabindex="-1">
 <div id="access-gate">
   <div class="gate-box">
     <div class="gate-logo">CB <span>Grup</span> Barna</div>
@@ -511,7 +514,7 @@
 
     <!-- PIN TAB -->
     <div class="gate-panel active" id="tab-pin">
-      <input class="gate-input" id="pin-input" type="password" placeholder="Código de acceso" maxlength="20"
+      <input aria-label="Código de acceso" class="gate-input" id="pin-input" type="password" placeholder="Código de acceso" maxlength="20"
         onkeydown="if(event.key==='Enter')checkPin()">
       <div class="gate-error" id="pin-error" style="display:none">Código incorrecto. Vuelve a intentarlo.</div>
       <button class="gate-btn" onclick="checkPin()">Acceder</button>
@@ -520,12 +523,12 @@
     <!-- SUBSCRIBE TAB -->
     <div class="gate-panel" id="tab-subscribe">
       <div class="gate-form-row">
-        <input class="gate-input" id="sub-nom" type="text" placeholder="Nombre" required>
-        <input class="gate-input" id="sub-cognoms" type="text" placeholder="Apellidos" required>
+        <input aria-label="Nombre" class="gate-input" id="sub-nom" type="text" placeholder="Nombre" required>
+        <input aria-label="Apellidos" class="gate-input" id="sub-cognoms" type="text" placeholder="Apellidos" required>
       </div>
-      <input class="gate-input" id="sub-email" type="email" placeholder="Correo electrónico" required>
-      <input class="gate-input" id="sub-mobil" type="tel" placeholder="Teléfono móvil">
-      <input class="gate-input" id="sub-club" type="text" placeholder="Club o entidad">
+      <input aria-label="Correo electrónico" class="gate-input" id="sub-email" type="email" placeholder="Correo electrónico" required>
+      <input aria-label="Teléfono móvil" class="gate-input" id="sub-mobil" type="tel" placeholder="Teléfono móvil">
+      <input aria-label="Club o entidad" class="gate-input" id="sub-club" type="text" placeholder="Club o entidad">
       <div class="gate-error" id="sub-error" style="display:none"></div>
       <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Suscribirme y acceder</button>
       <div class="gate-success" id="sub-success" style="display:none">¡Gracias! Bienvenido/a a la galería.</div>
@@ -546,7 +549,7 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <input type="search" id="search-input" placeholder="Buscar un evento…" autocomplete="off">
+    <input aria-label="Buscar un evento…" type="search" id="search-input" placeholder="Buscar un evento…" autocomplete="off">
   </div>
   <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/fotos/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/fotos/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/fotos/" hreflang="en" lang="en" aria-label="English">EN</a>
@@ -702,6 +705,7 @@
     }
   ]
 }</script><!-- FAQ-LD:END -->
+</main>
 <footer>
   <p>CB Grup Barna · Baloncesto en El Clot · Sant Martí, Barcelona · desde 1965</p>
   <p style="margin-top:.4rem">#somclot · <a href="/es/">cbgrupbarna.info</a> · <a href="/fotos/admin.html" style="color:rgba(255,255,255,.2);font-size:.72rem">Admin</a></p>

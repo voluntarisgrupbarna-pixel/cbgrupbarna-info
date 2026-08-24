@@ -11,7 +11,7 @@
   --black:  #040404;
   --red:    #E20613;
   --cream:  #F4F1EC;
-  --wd:     rgba(244,241,236,.6);
+  --wd:     rgba(244,241,236,.78);
   --s1:     #10100E;
   --s2:     #10100E;
   --bd:     rgba(244,241,236,.08);
@@ -58,7 +58,7 @@ body {
 .skip-link:focus { top: 1rem; }
 
 /* ── TIPOGRAFIA UTILS ────────────────────────────────────────── */
-.r { color: var(--red); }
+.r { color: #FF3B41; }
 strong { font-weight: 600; }
 a { color: inherit; }
 
@@ -94,7 +94,7 @@ body { max-width: 100%; }
 .lang-switch { display: flex; align-items: center; gap: 2px; font-family: inherit; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; }
 .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; opacity: .55; text-decoration: none; transition: opacity .3s, color .3s; }
 .lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover, .lang-switch a:focus-visible { opacity: 1; color: var(--red); }
+.lang-switch a:hover, .lang-switch a:focus-visible { opacity: 1; color: #FF3B41; }
 .lang-switch .sep { opacity: .25; pointer-events: none; }
 
 /* Burger */
@@ -119,12 +119,12 @@ body { max-width: 100%; }
   text-align: center; pointer-events: none;
 }
 .prize-main { font-size: .6rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; }
-.prize-sub { font-size: .5rem; letter-spacing: .15em; color: var(--red); text-transform: uppercase; margin-top: 1px; }
+.prize-sub { font-size: .5rem; letter-spacing: .15em; color: #FF3B41; text-transform: uppercase; margin-top: 1px; }
 
 /* Lang */
 .lang button {
   background: transparent; border: 1px solid var(--bd);
-  color: rgba(244,241,236,.4); cursor: pointer;
+  color: rgba(244,241,236,.72); cursor: pointer;
   font-family: 'Inter', sans-serif; font-size: .55rem;
   letter-spacing: .2em; padding: 4px 8px; text-transform: uppercase;
   transition: all .2s ease;
@@ -159,10 +159,10 @@ body { max-width: 100%; }
   position: sticky; top: 0; background: #080808; z-index: 1;
 }
 .sb-ht { font-size: .6rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; }
-.sb-hs { font-size: .52rem; color: rgba(244,241,236,.3); letter-spacing: .1em; }
-.sb-lbl { font-size: .48rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(244,241,236,.25); padding: .85rem 1.5rem .3rem; }
+.sb-hs { font-size: .52rem; color: rgba(244,241,236,.72); letter-spacing: .1em; }
+.sb-lbl { font-size: .48rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(244,241,236,.72); padding: .85rem 1.5rem .3rem; }
 .sb-div { height: 1px; background: var(--bd); margin: .5rem 1.5rem; }
-.sb-ft { font-size: .52rem; color: rgba(244,241,236,.2); padding: 1.5rem; line-height: 1.7; margin-top: auto; border-top: 1px solid var(--bd); }
+.sb-ft { font-size: .52rem; color: rgba(244,241,236,.72); padding: 1.5rem; line-height: 1.7; margin-top: auto; border-top: 1px solid var(--bd); }
 
 /* Sidebar items */
 .si {
@@ -172,15 +172,15 @@ body { max-width: 100%; }
   border-left: 2px solid transparent;
 }
 .si:hover { background: rgba(244,241,236,.04); }
-.si.act { border-left-color: var(--red); background: rgba(226,6,19,.06); }
-.si-n { font-size: .52rem; letter-spacing: .15em; color: var(--red); min-width: 22px; font-family: monospace; }
+.si.act { border-left-color: #FF3B41; background: rgba(226,6,19,.06); }
+.si-n { font-size: .52rem; letter-spacing: .15em; color: #FF3B41; min-width: 22px; font-family: monospace; }
 .si-t { font-size: .75rem; font-weight: 400; letter-spacing: .03em; }
-.si-s { font-size: .55rem; color: rgba(244,241,236,.35); margin-top: 1px; }
+.si-s { font-size: .55rem; color: rgba(244,241,236,.72); margin-top: 1px; }
 
 .sd {
   display: flex; align-items: center; gap: .75rem;
   padding: .5rem 1.5rem; text-decoration: none;
-  color: rgba(244,241,236,.6); transition: color .2s ease;
+  color: rgba(244,241,236,.72); transition: color .2s ease;
   font-size: .72rem;
 }
 .sd:hover { color: var(--cream); }
@@ -205,7 +205,7 @@ body { max-width: 100%; }
 /* ── TIPOGRAFIA SECCIONS ─────────────────────────────────────── */
 .ey {
   font-size: .58rem; letter-spacing: .35em; text-transform: uppercase;
-  color: var(--red); font-weight: 500; margin-bottom: 1.25rem;
+  color: #FF3B41; font-weight: 500; margin-bottom: 1.25rem;
   display: flex; align-items: center; gap: .6rem;
 }
 .ey::before { content: ''; width: 18px; height: 1px; background: var(--red); }
@@ -231,7 +231,7 @@ body { max-width: 100%; }
   transition: all .28s ease; cursor: pointer;
 }
 .btn-r {
-  background: var(--red); color: var(--cream); border: none;
+  background: var(--red); color: #fff; border: none;
 }
 .btn-r:hover { background: #a50f25; transform: translateY(-1px); }
 .btn-o {
@@ -262,9 +262,9 @@ body { max-width: 100%; }
   font-weight: 700; line-height: 1;
   color: var(--cream);
 }
-.dbn span { font-size: 55%; color: var(--red); }
-.dbl { font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(244,241,236,.35); margin-top: .4rem; }
-.dbs { font-size: .52rem; color: rgba(244,241,236,.2); margin-top: .2rem; }
+.dbn span { font-size: 55%; color: #FF3B41; }
+.dbl { font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(244,241,236,.72); margin-top: .4rem; }
+.dbs { font-size: .52rem; color: rgba(244,241,236,.72); margin-top: .2rem; }
 
 /* ── BLOCKQUOTE ──────────────────────────────────────────────── */
 .bq {
@@ -274,14 +274,14 @@ body { max-width: 100%; }
   margin: 1.5rem 0;
 }
 .bq p { font-family: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif; font-size: clamp(1rem, 2.5vw, 1.2rem); line-height: 1.7; color: var(--cream); }
-.bq cite { display: block; font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(244,241,236,.3); margin-top: .75rem; font-style: normal; }
+.bq cite { display: block; font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(244,241,236,.72); margin-top: .75rem; font-style: normal; }
 
 /* ── TABLE ───────────────────────────────────────────────────── */
 .tbl { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .85rem; }
-.tbl th { padding: .75rem 1rem; text-align: left; font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(244,241,236,.4); border-bottom: 1px solid var(--bd); font-weight: 500; }
+.tbl th { padding: .75rem 1rem; text-align: left; font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(244,241,236,.72); border-bottom: 1px solid var(--bd); font-weight: 500; }
 .tbl td { padding: .85rem 1rem; border-bottom: 1px solid var(--bd); color: var(--wd); }
 .tbl tr.hl td { color: var(--cream); font-weight: 500; }
-.tbl td.rd { color: var(--red); }
+.tbl td.rd { color: #FF3B41; }
 
 /* ── PILLS (teoria) ──────────────────────────────────────────── */
 .pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
@@ -292,7 +292,7 @@ body { max-width: 100%; }
   color: var(--wd); transition: all .2s ease;
 }
 .pill:hover { border-color: rgba(226,6,19,.4); color: var(--cream); }
-.pill-n { color: var(--red); font-size: .5rem; letter-spacing: .15em; }
+.pill-n { color: #FF3B41; font-size: .5rem; letter-spacing: .15em; }
 
 /* ── TEORIA CARDS ────────────────────────────────────────────── */
 .tc {
@@ -305,10 +305,10 @@ body { max-width: 100%; }
 .tc:hover { background: rgba(244,241,236,.03); border-color: rgba(226,6,19,.25); }
 .tc-top { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
 .tc:hover .tc-top { transform: scaleX(1); }
-.tc-num { font-size: .55rem; letter-spacing: .2em; color: var(--red); margin-bottom: .5rem; font-family: monospace; }
+.tc-num { font-size: .55rem; letter-spacing: .2em; color: #FF3B41; margin-bottom: .5rem; font-family: monospace; }
 .tc-t { font-family: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: .5rem; }
 .tc-d { font-size: .78rem; color: var(--wd); line-height: 1.6; }
-.tc-r { font-size: .6rem; letter-spacing: .12em; color: var(--red); margin-top: .75rem; text-transform: uppercase; }
+.tc-r { font-size: .6rem; letter-spacing: .12em; color: #FF3B41; margin-top: .75rem; text-transform: uppercase; }
 
 /* ── CAROUSEL ────────────────────────────────────────────────── */
 .carousel-wrap { overflow: hidden; position: relative; }
@@ -321,13 +321,13 @@ body { max-width: 100%; }
 
 /* ── FOOTER ──────────────────────────────────────────────────── */
 footer { padding: 3rem 1.5rem; border-top: 1px solid var(--bd); background: #020202; }
-.ft-claim { font-family: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif; font-size: clamp(.9rem, 2vw, 1.1rem); color: rgba(244,241,236,.4); margin-bottom: 1rem; }
-.ft-contact { font-size: .65rem; color: rgba(244,241,236,.25); letter-spacing: .05em; margin-bottom: 2rem; line-height: 1.8; }
+.ft-claim { font-family: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif; font-size: clamp(.9rem, 2vw, 1.1rem); color: rgba(244,241,236,.72); margin-bottom: 1rem; }
+.ft-contact { font-size: .65rem; color: rgba(244,241,236,.72); letter-spacing: .05em; margin-bottom: 2rem; line-height: 1.8; }
 .ft-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-.ft-ct { font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,241,236,.3); margin-bottom: .75rem; }
-.ft-lk { display: block; font-size: .7rem; color: rgba(244,241,236,.45); text-decoration: none; margin-bottom: .35rem; transition: color .2s; }
+.ft-ct { font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,241,236,.72); margin-bottom: .75rem; }
+.ft-lk { display: block; font-size: .7rem; color: rgba(244,241,236,.72); text-decoration: none; margin-bottom: .35rem; transition: color .2s; }
 .ft-lk:hover { color: var(--cream); }
-.ft-bot { font-size: .55rem; color: rgba(244,241,236,.15); letter-spacing: .1em; border-top: 1px solid var(--bd); padding-top: 1.5rem; }
+.ft-bot { font-size: .55rem; color: rgba(244,241,236,.72); letter-spacing: .1em; border-top: 1px solid var(--bd); padding-top: 1.5rem; }
 
 /* ── FIXED LOGOS ─────────────────────────────────────────────── */
 .fixed-logos {
@@ -354,16 +354,16 @@ footer { padding: 3rem 1.5rem; border-top: 1px solid var(--bd); background: #020
   background: var(--red);
 }
 
-.crumb { font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(244,241,236,.3); margin-bottom: 1rem; }
-.crumb a { color: var(--red); text-decoration: none; }
+.crumb { font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(244,241,236,.72); margin-bottom: 1rem; }
+.crumb a { color: #FF3B41; text-decoration: underline; text-underline-offset: 3px; }
 
-.page-eyebrow { display: flex; align-items: center; gap: .6rem; font-size: .6rem; letter-spacing: .35em; text-transform: uppercase; color: var(--red); font-weight: 500; margin-bottom: 1.25rem; }
+.page-eyebrow { display: flex; align-items: center; gap: .6rem; font-size: .6rem; letter-spacing: .35em; text-transform: uppercase; color: #FF3B41; font-weight: 500; margin-bottom: 1.25rem; }
 .page-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--red); }
 
 .page-title { font-family: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 700; line-height: 1.05; margin-bottom: 1rem; }
-.page-title .r { color: var(--red); font-style: italic; }
+.page-title .r { color: #FF3B41; font-style: italic; }
 
-.page-sub { font-family: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif; font-size: clamp(.95rem, 2.5vw, 1.15rem); color: rgba(244,241,236,.55); line-height: 1.7; max-width: 680px; }
+.page-sub { font-family: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif; font-size: clamp(.95rem, 2.5vw, 1.15rem); color: rgba(244,241,236,.72); line-height: 1.7; max-width: 680px; }
 
 /* ── ANIMATIONS ──────────────────────────────────────────────── */
 @keyframes fu { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
@@ -398,7 +398,7 @@ footer { padding: 3rem 1.5rem; border-top: 1px solid var(--bd); background: #020
 .re-card, .def-list li { transition: background .2s; }
 /* Sidebar actiu: color accent */
 .si.act { background: rgba(226,6,19,.08); border-left: 2px solid var(--red); }
-.si.act .si-t { color: var(--red); }
+.si.act .si-t { color: #FF3B41; }
 /* Mòbil: ig-cards menys altes */
 @media (max-width:640px) {
   .ig-card-play { min-height: 180px; }
@@ -413,7 +413,7 @@ footer { padding-top: clamp(2.5rem, 5vw, 4rem); }
 .skip-link:focus { opacity: 1; position: fixed; top: 1rem; left: 1rem; z-index: 9999; }
 /* Heading amb línia decorativa */
 .ey { position: relative; padding-left: 2.5rem; }
-.ey::before { content: '—'; position: absolute; left: 0; color: var(--red); }
+.ey::before { content: '—'; position: absolute; left: 0; color: #FF3B41; }
 
 /* ══════════════════════════════════════════════════════════════
    UX FIXES — CB Grup Barna Candidatura 2026
@@ -440,15 +440,17 @@ footer { padding-top: clamp(2.5rem, 5vw, 4rem); }
 .crumb {
   font-size: .62rem !important;
   letter-spacing: .15em !important;
-  color: rgba(244,241,236,.5) !important;
+  color: rgba(244,241,236,.72) !important;
   margin-bottom: .75rem !important;
 }
 .crumb a {
-  color: rgba(226,6,19,.8) !important;
+  color: #FF3B41 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
 }
 .crumb a:hover {
-  color: var(--red) !important;
-  text-decoration: underline;
+  color: #FF3B41 !important;
+  text-decoration: underline !important;
 }
 
 /* FIX 4: Hamburger més gran i accessible en mòbil */
@@ -595,7 +597,7 @@ footer { padding-top: clamp(2.5rem, 5vw, 4rem); }
   font-size: .68rem;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: var(--red);
+  color: #FF3B41;
   font-style: normal;
 }
 

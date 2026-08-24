@@ -71,7 +71,7 @@
     --red:#FF2A30;        /* vermell de text sobre negre */
     --red-ink:#FF8A8E;    /* enllaços dins de text */
     --red-solid:#E20613;  /* el de l'escut: fons plens amb lletra blanca */
-    --ink:#FFFFFF; --muted:#9C9C9C;
+    --ink:#FFFFFF; --muted:#9C9C9C; --ink-2:#9C9C9C;
     --ground:#060606; --panel:#111111; --cream:#191919; --paper:#111111;
     --line:rgba(255,255,255,.15);
     --shadow:0 30px 70px -34px rgba(0,0,0,.95);
@@ -424,6 +424,7 @@
     .split,.panel,.visit-card,.partner-card,.sponsor,.pack,.facts,.tbl-wrap,.b-num div,.par{border-radius:10px}
   }
 </style>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -468,7 +469,7 @@
       <a href="#patrocinadors">Patrocinadors</a>
       <a href="#contacte">Contacte</a>
     </div>
-    <a class="idx-more" href="/presentacio/cb-grup-barna-presentacio.pdf" download="CB-Grup-Barna-Presentacio-60-Anys.pdf" data-cta="presentacio-pdf-barra">PDF</a>
+    <a class="idx-more" href="/presentacio/cb-grup-barna-presentacio.pdf" download="CB-Grup-Barna-Presentacio-60-Anys.pdf" data-cta="presentacio-pdf-barra" aria-label="Descarregar la presentació (PDF, 18 pàg., 3,3 MB)">PDF</a>
     <a class="idx-more" href="/presentacions/">Presentacions</a>
   </div>
 </nav>
@@ -779,7 +780,7 @@
     <div class="btn-row">
       <a href="/#info" class="btn red" data-cta="presentacio-closer-form">Demanar informació</a>
       <a href="https://api.whatsapp.com/send?phone=+34698425153" class="btn ghost" target="_blank" rel="noopener" data-cta="presentacio-closer-wa">WhatsApp del club</a>
-      <a href="/presentacio/cb-grup-barna-presentacio.pdf" class="btn ghost" download="CB-Grup-Barna-Presentacio-60-Anys.pdf" data-cta="presentacio-closer-pdf">Descarregar en PDF</a>
+      <a href="/presentacio/cb-grup-barna-presentacio.pdf" class="btn ghost" download="CB-Grup-Barna-Presentacio-60-Anys.pdf" aria-label="Descarregar la presentació en PDF (18 pàg., 3,3 MB)" data-cta="presentacio-closer-pdf">Descarregar en PDF</a>
       <a href="/femeni/#metode" class="btn ghost" data-cta="presentacio-closer-metode">El Mètode Barna</a>
     </div>
   </div>
@@ -821,6 +822,7 @@
         <h3>Legal</h3>
         <a href="/politica-de-privacitat/">Política de privacitat</a>
         <a href="/avis-legal/">Avís legal</a>
+        <a href="/accessibilitat/">Accessibilitat</a>
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>

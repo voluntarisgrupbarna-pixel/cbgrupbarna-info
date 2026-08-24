@@ -61,9 +61,14 @@ textos:
   premsa_llarg:    {href: /premsa/,            ca: Articles i premsa,       es: Artículos y prensa,        en: Articles and press}
   info_demanar:    {href: /#info,              ca: Demanar informació,      es: Pedir información,         en: Request information}
   faq:             {href: /faq/,               ca: Preguntes freqüents,     es: Preguntas frecuentes,      en: Frequently asked questions}
-  privacitat:      {href: /politica-de-privacitat/, ca: Política de privacitat, es: Política de privacidad, en: Privacy policy}
-  avis_legal:      {href: /avis-legal/,        ca: Avís legal,              es: Aviso legal,               en: Legal notice}
-  galetes:         {href: "/politica-de-privacitat/#galetes", ca: Galetes,  es: Cookies,                   en: Cookies}
+  privacitat:      {href: /politica-de-privacitat/, href_es: /es/politica-de-privacidad/, href_en: /en/privacy-policy/,
+                    ca: Política de privacitat, es: Política de privacidad, en: Privacy policy}
+  avis_legal:      {href: /avis-legal/, href_es: /es/aviso-legal/, href_en: /en/legal-notice/,
+                    ca: Avís legal, es: Aviso legal, en: Legal notice}
+  galetes:         {href: "/politica-de-privacitat/#galetes", href_es: "/es/politica-de-privacidad/#galetes",
+                    href_en: "/en/privacy-policy/#galetes", ca: Galetes, es: Cookies, en: Cookies}
+  accessibilitat:  {href: /accessibilitat/, href_es: /es/accesibilidad/, href_en: /en/accessibility/,
+                    ca: Accessibilitat, es: Accesibilidad, en: Accessibility}
 
   # ── Títols de columna i textos solts ─────────────────────────────────────
   titol_el_barna:  {ca: El Barna,       es: El Barna,       en: The Barna}
@@ -91,7 +96,7 @@ estructura:
                           dades_oficials, proteccio_menor, basquet_femeni]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
       - [titol_contacte, [info_demanar, faq]]
-      - [titol_legal, [privacitat, avis_legal, galetes]]
+      - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]
   es:
     nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
           "nav_partners.opt", nav_info]
@@ -99,6 +104,7 @@ estructura:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
       - [titol_contacte, [info_demanar]]
+      - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]
   en:
     nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
           "nav_partners.opt", nav_info]
@@ -106,3 +112,4 @@ estructura:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
       - [titol_contacte, [info_demanar]]
+      - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]

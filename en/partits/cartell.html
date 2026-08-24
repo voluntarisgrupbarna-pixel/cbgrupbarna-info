@@ -19,24 +19,24 @@
   nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
   nav img{width:34px;height:34px;object-fit:contain}
   nav .t{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.06em}
-  nav .t span{color:var(--red)}
-  nav a{margin-left:auto;color:#6B6560;font-size:.8rem;text-decoration:none}
+  nav .t span{color:#FF3B41}
+  nav a{margin-left:auto;color:#A6A29C;font-size:.8rem;text-decoration:none}
   .wrap{max-width:1000px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
   h1{font-family:'Anton',sans-serif;font-size:2rem}
-  h1 span{color:var(--red)}
-  .sub{color:#6B6560;font-size:.88rem;margin:.3rem 0 1.5rem;line-height:1.55}
+  h1 span{color:#FF3B41}
+  .sub{color:#A6A29C;font-size:.88rem;margin:.3rem 0 1.5rem;line-height:1.55}
   h2{font-family:'Anton',sans-serif;font-size:1.3rem;margin:1.5rem 0 .7rem}
-  h2 span{color:var(--red)}
+  h2 span{color:#FF3B41}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem}
   .cols{display:grid;grid-template-columns:1fr 380px;gap:1.4rem;align-items:start}
   @media(max-width:820px){.cols{grid-template-columns:1fr}}
-  label.fl{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:#6B6560;display:block;margin-bottom:.3rem}
+  label.fl{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:#A6A29C;display:block;margin-bottom:.3rem}
   select,input[type=file],input[type=text]{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.6rem .75rem;font-family:'Inter',sans-serif;font-size:.87rem}
-  select:focus,input:focus{outline:none;border-color:var(--red)}
+  select:focus,input:focus{outline:none;border-color:#FF3B41}
   .fg{margin-bottom:.9rem}
   .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.65rem 1.15rem;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
   .btn:disabled{opacity:.45;cursor:default}
-  .btn.ghost{background:transparent;border:1px solid var(--line);color:#6B6560}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:#A6A29C}
   .btn.small{padding:.35rem .7rem;font-size:.74rem}
   .alert{display:none;background:linear-gradient(135deg,rgba(61,220,132,.14),rgba(226,6,19,.12));border:1px solid rgba(61,220,132,.4);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.4rem}
   .alert b{font-family:'Anton',sans-serif;font-size:1.3rem;letter-spacing:.04em;color:var(--green);display:block}
@@ -48,19 +48,21 @@
   .preview{position:sticky;top:1rem}
   canvas{width:100%;border-radius:12px;border:1px solid var(--line);display:block;background:#111}
   .copybox{margin-top:1rem;background:#0e0e0e;border:1px solid var(--line);border-radius:10px;padding:.85rem;font-size:.83rem;line-height:1.6;white-space:pre-wrap}
-  .hint{font-size:.72rem;color:#6B6560;margin-top:.5rem;line-height:1.5}
+  .hint{font-size:.72rem;color:#A6A29C;margin-top:.5rem;line-height:1.5}
   .row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
   .ok{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.55rem .8rem;font-size:.8rem;margin-top:.7rem}
-  .empty{color:#6B6560;font-size:.86rem;padding:1rem 0;line-height:1.6}
-  .empty a{color:var(--red)}
+  .empty{color:#A6A29C;font-size:.86rem;padding:1rem 0;line-height:1.6}
+  .empty a{color:#FF3B41}
   .lang-switch { display: flex; align-items: center; gap: 2px; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; text-decoration: none; opacity: 0.55; transition: opacity 0.3s, color 0.3s; margin-left: 0; color: #6B6560; font-size: .72rem; }
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; text-decoration: none; opacity: 0.55; transition: opacity 0.3s, color 0.3s; margin-left: 0; color: #A6A29C; font-size: .72rem; }
   .lang-switch a.active { opacity: 1; font-weight: 600; color: var(--txt); }
-  .lang-switch a:hover { opacity: 1; color: var(--red); }
-  .lang-switch .sep { opacity: 0.25; color: #6B6560; }
+  .lang-switch a:hover { opacity: 1; color: #FF3B41; }
+  .lang-switch .sep { opacity: 0.25; color: #A6A29C; }
 </style>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Skip to content</a>
 <nav>
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">VICTORY <span>POSTER</span></div>
@@ -70,6 +72,7 @@
     </nav>
 </nav>
 
+<main id="contingut" tabindex="-1">
 <div class="wrap">
   <h1>POSTER & COPY FOR <span>VICTORY</span></h1>
   <p class="sub">Pick the match you won, upload a photo, and get a 1080×1350 poster ready for Instagram, with the copy already written.</p>
@@ -84,20 +87,20 @@
     <div>
       <div class="card">
         <div class="fg">
-          <label class="fl">Match won *</label>
+          <label class="fl" for="f-partit">Match won *</label>
           <select id="f-partit"><option value="">— Pick a match —</option></select>
         </div>
         <div class="fg">
-          <label class="fl">Match photo (JPG or PNG)</label>
+          <label class="fl" for="f-foto">Match photo (JPG or PNG)</label>
           <input type="file" id="f-foto" accept="image/*">
           <div class="hint">Recommended: a good-quality horizontal or vertical photo. It's automatically cropped to 1080×1350 and darkened so the text is easy to read.</div>
         </div>
         <div class="fg">
-          <label class="fl">Top label</label>
+          <label class="fl" for="f-retol">Top label</label>
           <input type="text" id="f-retol" value="VICTORY" maxlength="18">
         </div>
         <div class="fg">
-          <label class="fl">Footer phrase (optional)</label>
+          <label class="fl" for="f-peu">Footer phrase (optional)</label>
           <input type="text" id="f-peu" placeholder="E.g.: We keep going. #somclot" maxlength="40">
         </div>
         <div class="row">
@@ -124,6 +127,7 @@
   </div>
 </div>
 
+</main>
 <script src="/partits/partits.js"></script>
 <script src="/scripts/admin-gate.js"></script>
 <script>

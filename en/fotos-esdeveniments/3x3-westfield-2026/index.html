@@ -28,7 +28,7 @@
 <style>
 :root{
   --black:#040404; --red:#E20613; --red-d:#9a0c23; --cream:#F4F1EC;
-  --wd:rgba(244,241,236,.6); --wf:rgba(244,241,236,.4);
+  --wd:rgba(244,241,236,.8); --wf:rgba(244,241,236,.66);
   --s1:#10100E; --s2:#10100E; --s3:#151515; --bd:rgba(244,241,236,.08);
   --gold:#C9A24B; --green:#3ECF8E;
 }
@@ -80,7 +80,7 @@ h1.title em{font-style:italic;color:var(--red)}
   background:rgba(4,4,4,.82);backdrop-filter:blur(10px);display:flex;align-items:center;
   justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--bd)}
 .toolbar .h{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--wf)}
-.toolbar .h b{color:var(--red);font-family:'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;font-size:1.1rem}
+.toolbar .h b{color:#FF3B41;font-family:'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;font-size:1.1rem}
 .jump{display:flex;align-items:center;gap:.5rem}
 .jump input{width:92px;background:var(--s2);border:1px solid var(--bd);color:var(--cream);
   padding:.55rem .7rem;border-radius:8px;font-family:'Inter';font-size:.8rem}
@@ -133,7 +133,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
 .lb.open{display:flex}
 .lb-top{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;flex-shrink:0}
 .lb-count{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--wd)}
-.lb-count b{color:var(--red);font-family:'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;font-size:1.05rem}
+.lb-count b{color:#FF3B41;font-family:'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;font-size:1.05rem}
 .lb-x{background:none;border:none;color:var(--cream);font-size:1.6rem;cursor:pointer;line-height:1;padding:.2rem .5rem}
 .lb-stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;min-height:0;padding:0 .5rem}
 .lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;opacity:0;transition:opacity .25s}
@@ -183,8 +183,10 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Skip to content</a>
 
 <header class="tb">
   <a class="logo" href="/en/">
@@ -197,7 +199,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
   <a class="tb-back" href="/en/fotos-esdeveniments/">← All events</a>
 </header>
 
-<main>
+<main id="contingut" tabindex="-1">
 <section class="hero">
   <div class="cw">
     <span class="eyebrow"><span class="dot"></span> Event gallery · Registered access</span>

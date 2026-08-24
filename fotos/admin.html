@@ -33,13 +33,15 @@
       padding: 0 clamp(16px, 4vw, 44px); gap: 1rem;
     }
     .nav-logo { font-family: var(--display); font-size: .8rem; font-weight: 400; letter-spacing: .24em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: .5rem; }
-    .nav-logo span { color: var(--red); }
-    .badge-admin { font-family: var(--display); font-size: 8.5px; letter-spacing: .16em; text-transform: uppercase; background: var(--ink); color: #fff; padding: .25rem .5rem; }
-    .nav-user { margin-left: auto; display: flex; align-items: center; gap: .75rem; font-size: .8rem; color: #706c67; }
+    .nav-logo span { color: #E20613; }
+    /* `.nav-logo span` (0,1,1) guanyava a `.badge-admin` (0,1,0) i deixava el
+       distintiu en vermell sobre tinta: 3,87:1. Amb el pare al selector, no. */
+    .nav-logo .badge-admin { font-family: var(--display); font-size: 8.5px; letter-spacing: .16em; text-transform: uppercase; background: var(--ink); color: #fff; padding: .25rem .5rem; }
+    .nav-user { margin-left: auto; display: flex; align-items: center; gap: .75rem; font-size: .8rem; color: #6B6560; }
     .btn-logout { background: none; border: 1px solid var(--line); color: var(--ink-2); padding: .4rem .8rem; cursor: pointer; font-family: var(--display); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; transition: all .15s; }
     .btn-logout:hover { border-color: var(--ink); color: var(--ink); }
-    .nav-gallery-link { color: #706c67; text-decoration: none; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; transition: color .15s; }
-    .nav-gallery-link:hover { color: var(--red); }
+    .nav-gallery-link { color: #6B6560; text-decoration: none; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; transition: color .15s; }
+    .nav-gallery-link:hover { color: #E20613; }
 
     /* LOGIN */
     #login-screen {
@@ -52,18 +54,18 @@
     .login-icon { width: 52px; height: 52px; background: var(--paper-2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
     .login-title { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.5rem; letter-spacing: .08em; margin-bottom: .4rem; }
     .login-sub { font-size: .85rem; color: var(--ink-2); margin-bottom: 1.5rem; }
-    .field-label { display: block; font-family: var(--display); font-size: 9px; text-transform: uppercase; letter-spacing: .16em; color: #706c67; margin-bottom: .5rem; }
+    .field-label { display: block; font-family: var(--display); font-size: 9px; text-transform: uppercase; letter-spacing: .16em; color: #6B6560; margin-bottom: .5rem; }
     .field-input {
       width: 100%; background: var(--paper-2); border: 1px solid var(--line);
       color: var(--ink); padding: .7rem .85rem;
       font-family: var(--body); font-size: .9rem; outline: none; transition: border-color .15s;
     }
-    .field-input:focus { border-color: var(--red); }
-    .field-input::placeholder { color: #706c67; }
-    .field-hint { font-size: .74rem; color: #706c67; margin-top: .5rem; line-height: 1.5; }
-    .field-hint a { color: var(--red); }
+    .field-input:focus { border-color: #E20613; }
+    .field-input::placeholder { color: #6B6560; }
+    .field-hint { font-size: .74rem; color: #6B6560; margin-top: .5rem; line-height: 1.5; }
+    .field-hint a { color: #E20613; }
     .btn-primary { width: 100%; background: var(--ink); color: #fff; border: 1px solid var(--ink); padding: .8rem 1rem; font-family: var(--display); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); margin-top: 1.25rem; display: flex; align-items: center; justify-content: center; gap: .4rem; }
-    .btn-primary:hover { background: var(--red); border-color: var(--red); }
+    .btn-primary:hover { background: var(--red); border-color: #E20613; }
     .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
     .login-error { background: rgba(226,6,19,.06); border: 1px solid rgba(226,6,19,.3); color: var(--red-dark); padding: .65rem .85rem; font-size: .82rem; margin-top: .75rem; display: none; }
 
@@ -73,7 +75,7 @@
     /* TOOLBAR */
     .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
     .toolbar h1 { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.7rem; letter-spacing: .08em; }
-    .toolbar h1 span { color: var(--red); }
+    .toolbar h1 span { color: #E20613; }
     .btn-new-event { background: var(--red); color: #fff; border: 1px solid var(--red); padding: .7rem 1.2rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); display: flex; align-items: center; gap: .4rem; }
     .btn-new-event:hover { background: var(--ink); border-color: var(--ink); }
 
@@ -88,7 +90,7 @@
     .btn-cancel { flex: 1; background: transparent; border: 1px solid var(--line); color: var(--ink-2); padding: .7rem 1rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; transition: all .15s; }
     .btn-cancel:hover { border-color: var(--ink); color: var(--ink); }
     .btn-save { flex: 2; background: var(--ink); color: #fff; border: 1px solid var(--ink); padding: .7rem 1rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); display: flex; align-items: center; justify-content: center; gap: .4rem; }
-    .btn-save:hover { background: var(--red); border-color: var(--red); }
+    .btn-save:hover { background: var(--red); border-color: #E20613; }
     .btn-save:disabled { opacity: .5; cursor: not-allowed; }
 
     /* EVENTS LIST */
@@ -103,7 +105,7 @@
     .event-thumb-empty { width: 72px; height: 72px; background: var(--paper-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .event-row-info { padding: .75rem 0; min-width: 0; }
     .event-row-title { font-family: var(--display); font-size: .9rem; letter-spacing: .04em; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .event-row-meta { font-family: var(--display); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: #706c67; margin-top: .35rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    .event-row-meta { font-family: var(--display); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: #6B6560; margin-top: .35rem; display: flex; gap: .75rem; flex-wrap: wrap; }
     .event-row-actions { display: flex; align-items: center; gap: .4rem; padding-right: .75rem; flex-shrink: 0; }
     /* Públic / privat. Privat vol dir que el grup no surt a /fotos/ per a
        ningú: només s'hi arriba amb la contrasenya de màrqueting. */
@@ -111,43 +113,43 @@
       font-family: var(--display); font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase;
       padding: .45rem .6rem; cursor: pointer; white-space: nowrap;
       transition: border-color .25s, color .25s, background .25s; }
-    .btn-vis.is-public { color: #706c67; }
+    .btn-vis.is-public { color: #6B6560; }
     .btn-vis.is-public:hover { border-color: var(--ink); color: var(--ink); }
-    .btn-vis.is-private { color: #fff; background: var(--red); border-color: var(--red); }
+    .btn-vis.is-private { color: #fff; background: var(--red); border-color: #E20613; }
     .btn-vis.is-private:hover { background: #A8040E; border-color: #A8040E; }
     .btn-vis:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
     @media (max-width: 560px) { .btn-vis { font-size: 0; gap: 0; padding: .45rem; } }
     .btn-icon { background: transparent; border: 1px solid var(--line); color: var(--ink-2); padding: .4rem; cursor: pointer; transition: all .15s; display: flex; align-items: center; }
     .btn-icon:hover { border-color: var(--ink); color: var(--ink); }
-    .btn-icon.danger:hover { background: rgba(226,6,19,.06); border-color: var(--red); color: var(--red); }
-    .season-chip { font-family: var(--display); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--red); border: 1px solid var(--line); padding: .2rem .4rem; }
+    .btn-icon.danger:hover { background: rgba(226,6,19,.06); border-color: #E20613; color: #E20613; }
+    .season-chip { font-family: var(--display); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: #E20613; border: 1px solid var(--line); padding: .2rem .4rem; }
 
     /* UPLOAD PANEL */
     #upload-panel { display: none; }
     .upload-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .btn-back { background: none; border: none; color: #706c67; cursor: pointer; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; display: flex; align-items: center; gap: .3rem; transition: color .15s; padding: .4rem 0; }
-    .btn-back:hover { color: var(--red); }
+    .btn-back { background: none; border: none; color: #6B6560; cursor: pointer; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; display: flex; align-items: center; gap: .3rem; transition: color .15s; padding: .4rem 0; }
+    .btn-back:hover { color: #E20613; }
     .upload-event-title { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: 1.4rem; letter-spacing: .06em; }
-    .upload-event-title span { color: var(--red); }
+    .upload-event-title span { color: #E20613; }
 
     /* DROP ZONE */
     .drop-zone {
       border: 1px dashed var(--line); padding: 3rem 1.5rem;
       text-align: center; transition: all .2s; cursor: pointer; position: relative; margin-bottom: .75rem;
     }
-    .drop-zone.drag-over { border-color: var(--red); background: rgba(226,6,19,.04); }
+    .drop-zone.drag-over { border-color: #E20613; background: rgba(226,6,19,.04); }
     .drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .drop-zone-icon { color: #706c67; margin-bottom: .75rem; }
+    .drop-zone-icon { color: #6B6560; margin-bottom: .75rem; }
     .drop-zone p { color: var(--ink-2); font-size: .9rem; }
-    .drop-zone p span { color: var(--red); cursor: pointer; }
-    .drop-zone small { color: #706c67; font-size: .75rem; }
+    .drop-zone p span { color: #E20613; cursor: pointer; }
+    .drop-zone small { color: #6B6560; font-size: .75rem; }
 
     /* ZIP UPLOAD */
     .zip-row { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
     .zip-divider { flex: 1; height: 1px; background: var(--line); }
     .zip-label { font-family: var(--display); font-size: 8.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .16em; flex-shrink: 0; }
     .btn-zip { position: relative; overflow: hidden; background: transparent; border: 1px solid var(--line); color: var(--ink-2); padding: .55rem 1rem; font-family: var(--display); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: .4rem; white-space: nowrap; }
-    .btn-zip:hover { border-color: var(--red); color: var(--red); }
+    .btn-zip:hover { border-color: #E20613; color: #E20613; }
     .btn-zip input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
     .zip-progress { display: none; background: var(--paper-2); border: 1px solid var(--line); padding: .75rem 1rem; margin-bottom: .75rem; font-size: .82rem; color: var(--ink-2); display: none; align-items: center; gap: .6rem; }
     .zip-progress.active { display: flex; }
@@ -160,12 +162,12 @@
     }
     .upload-item-thumb { width: 52px; height: 52px; object-fit: cover; background: var(--paper-2); }
     .upload-item-name { font-size: .8rem; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .upload-item-size { font-size: .7rem; color: #706c67; margin-top: .15rem; }
+    .upload-item-size { font-size: .7rem; color: #6B6560; margin-top: .15rem; }
     .upload-item-status { font-family: var(--display); font-size: 8.5px; letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: .3rem; white-space: nowrap; flex-shrink: 0; padding-right: .25rem; }
-    .status-pending { color: #706c67; }
+    .status-pending { color: #6B6560; }
     .status-uploading { color: #1d6fd6; }
     .status-done { color: var(--green); }
-    .status-error { color: var(--red); }
+    .status-error { color: #E20613; }
     .status-duplicate { color: #b8860b; }
     .upload-item.is-duplicate { opacity: .55; }
     .progress-bar { height: 2px; background: var(--line); margin-top: .3rem; overflow: hidden; }
@@ -183,7 +185,7 @@
     .btn-upload-all { background: var(--red); color: #fff; border: 1px solid var(--red); padding: .7rem 1.35rem; font-family: var(--display); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: all .3s var(--ease); display: flex; align-items: center; gap: .4rem; }
     .btn-upload-all:hover { background: var(--ink); border-color: var(--ink); }
     .btn-upload-all:disabled { opacity: .5; cursor: not-allowed; }
-    .upload-status-text { font-size: .8rem; color: #706c67; }
+    .upload-status-text { font-size: .8rem; color: #6B6560; }
     .success-banner { background: rgba(26,122,60,.07); border: 1px solid rgba(26,122,60,.3); color: var(--green); padding: .8rem 1rem; font-size: .85rem; display: flex; align-items: center; gap: .5rem; display: none; margin-bottom: 1rem; }
 
     /* UPLOADED PHOTOS GRID */
@@ -210,7 +212,7 @@
     #toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: .5rem; }
     .toast-item { background: var(--ink); border: 1px solid var(--ink); padding: .7rem 1.1rem; font-size: .82rem; color: #fff; display: flex; align-items: center; gap: .5rem; animation: slideIn .2s ease; max-width: 320px; }
     .toast-item.success { border-color: var(--green); }
-    .toast-item.error { border-color: var(--red); }
+    .toast-item.error { border-color: #E20613; }
     @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
 
     @media (prefers-reduced-motion: reduce) {
@@ -225,8 +227,10 @@
 <script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
 <script src="config.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Salta al contingut</a>
 
 <nav>
   <div class="nav-logo">
@@ -245,6 +249,7 @@
 </nav>
 
 <!-- LOGIN -->
+<main id="contingut" tabindex="-1">
 <div id="login-screen">
   <div class="login-box">
     <div class="login-icon">
@@ -330,7 +335,7 @@
     </div>
 
     <div class="drop-zone" id="drop-zone">
-      <input type="file" id="file-input" accept="image/*,video/*" multiple>
+      <input aria-label="Tria les fotos que vols pujar" type="file" id="file-input" accept="image/*,video/*" multiple>
       <div class="drop-zone-icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -385,34 +390,35 @@
 </div>
 
 <!-- NEW EVENT MODAL -->
+</main>
 <div class="modal-backdrop" id="new-event-modal">
   <div class="modal">
     <h2>Nou Esdeveniment</h2>
     <div class="field-group">
       <div>
-        <label class="field-label">Títol *</label>
+        <label class="field-label" for="ev-title">Títol *</label>
         <input class="field-input" type="text" id="ev-title" placeholder="Ex: Torneig 3x3 Glòries 2026">
       </div>
       <div>
-        <label class="field-label">Descripció</label>
+        <label class="field-label" for="ev-desc">Descripció</label>
         <textarea class="field-input" id="ev-desc" rows="2" placeholder="Breu descripció de l'event…" style="resize:vertical"></textarea>
       </div>
       <div class="field-row">
         <div>
-          <label class="field-label">Data</label>
+          <label class="field-label" for="ev-date">Data</label>
           <input class="field-input" type="date" id="ev-date">
         </div>
         <div>
-          <label class="field-label">Temporada</label>
+          <label class="field-label" for="ev-season">Temporada</label>
           <input class="field-input" type="text" id="ev-season" placeholder="Ex: 2025-2026">
         </div>
       </div>
       <div>
-        <label class="field-label">Lloc</label>
+        <label class="field-label" for="ev-location">Lloc</label>
         <input class="field-input" type="text" id="ev-location" placeholder="Ex: Parc de les Glòries, Barcelona">
       </div>
       <div style="display:flex;align-items:center;gap:.75rem;">
-        <input type="checkbox" id="ev-dl" checked style="accent-color:var(--red);width:15px;height:15px;">
+        <input type="checkbox" id="ev-dl" checked style="accent-color:#E20613;width:15px;height:15px;">
         <label for="ev-dl" style="font-size:.85rem;color:#46433f;cursor:pointer;">Permetre descàrrega de fotos</label>
       </div>
     </div>
@@ -436,13 +442,13 @@
     <h2>Configuració de la Galeria</h2>
     <div class="field-group">
       <div style="display:flex;align-items:center;gap:.75rem;padding:.5rem 0;">
-        <input type="checkbox" id="cfg-require" checked style="accent-color:var(--red);width:16px;height:16px;cursor:pointer;">
+        <input type="checkbox" id="cfg-require" checked style="accent-color:#E20613;width:16px;height:16px;cursor:pointer;">
         <label for="cfg-require" style="font-size:.85rem;color:#46433f;cursor:pointer;">
           Requerir subscripció al newsletter per veure la galeria
         </label>
       </div>
       <div>
-        <label class="field-label">Correu per rebre subscripcions newsletter</label>
+        <label class="field-label" for="cfg-email">Correu per rebre subscripcions newsletter</label>
         <input class="field-input" type="email" id="cfg-email" placeholder="Ex: marqueting@cbgrupbarna.info">
         <p style="font-size:.72rem;color:#8a8681;margin-top:.3rem;">S'usa FormSubmit.co — el primer correu rebrà una confirmació d'activació.</p>
       </div>
