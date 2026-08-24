@@ -45,17 +45,22 @@ jobs:
       #   · sense historial   — la llista de fitxers tocats la dona l'API
       #   · sense les imatges — aquesta comprovació només llegeix HTML
       #
-      # Queden 121 MB. Si algun dia una carpeta nova de fotos es fa gran,
-      # afegeix-la aquí i prou.
+      # Queden 63 MB. S'exclou per EXTENSIÓ, no per carpeta: /fotos/ i
+      # /mascota/ tenen pàgines HTML a dins que la comprovació sí que ha de
+      # llegir, i excloent la carpeta sencera desapareixien.
       - uses: actions/checkout@v4
         with:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /*
-            !/fotos/
-            !/mascota/
-            !/photos/
-            !/galeria/
+            !*.jpg
+            !*.jpeg
+            !*.png
+            !*.webp
+            !*.gif
+            !*.avif
+            !*.mp4
+            !*.mov
 
       - uses: actions/setup-python@v5
         with:

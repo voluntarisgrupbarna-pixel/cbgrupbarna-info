@@ -48,13 +48,19 @@ jobs:
           # `git log --name-only`— i el contingut només del que hi ha ara.
           filter: blob:none
           # I d'ara mateix, tampoc les imatges: el lint només obre HTML.
+          # Per EXTENSIÓ, no per carpeta: dins de /fotos/ i /mascota/ hi ha
+          # pàgines que sí que ha de mirar.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /*
-            !/fotos/
-            !/mascota/
-            !/photos/
-            !/galeria/
+            !*.jpg
+            !*.jpeg
+            !*.png
+            !*.webp
+            !*.gif
+            !*.avif
+            !*.mp4
+            !*.mov
 
       - uses: actions/setup-python@v5
         with:
