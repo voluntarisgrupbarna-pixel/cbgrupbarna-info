@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: 'Galeria Fotos · CB Grup Barna',
   description: 'Repositori fotogràfic oficial del CB Grup Barna · Bàsquet al Clot · Sant Martí, Barcelona · des de 1965',
   keywords: ['CB Grup Barna', 'bàsquet', 'fotos', 'galeria', 'Clot', 'Sant Martí', 'Barcelona'],
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: 'Galeria Fotos · CB Grup Barna',
     description: 'Repositori fotogràfic oficial del CB Grup Barna',

@@ -1295,7 +1295,7 @@ CHART_PARITAT = ('\n<figure class="chart">\n'
 ARTICLES = [
  {
   "slug": "club-formacio-i-competitiu-catalunya",
-  "meta_desc": 'Quins clubs de bàsquet catalans tenen equip a totes les edats i arriben a sènior amb els dos gèneres, segons la fitxa oficial de la FCBQ.',
+  "meta_desc": 'Quins clubs de bàsquet catalans tenen equip a totes les edats i arriben a sènior amb els dos gèneres, segons la fitxa oficial de la FCBQ. Com encaixa l\'escola de bàsquet del Barna al mapa oficial de Catalunya.',
   "hero_alt": "Jugadores del CB Grup Barna entrant a la pista entre aplaudiments, presentació d'equips 2025-2026",
   "related": [('/blog/cultura-esforc-club-progres/', 'Formació', "Del sacrifici al progrés: la cultura de l'esforç al Barna"), ('/blog/basquet-base-sant-marti-clot/', 'El barri', 'Bàsquet base al Clot i a Sant Martí: com funciona un club de barri'), ('/blog/com-triar-escola-basquet-barcelona/', 'Guia per a famílies', 'Escola, club o acadèmia de bàsquet a Barcelona?'), ('/blog/a-quina-edat-comencar-basquet/', 'Guia per a famílies', 'A quina edat pot començar un nen o nena a jugar a bàsquet?')],
   "date": "2026-08-13",
@@ -1318,7 +1318,8 @@ ARTICLES = [
            "qui té equip a totes les edats i qui arriba a sènior amb els dos gèneres. Això és on "
            "queda el CB Grup Barna."),
   "kw": "club de formació bàsquet Barcelona, CB Grup Barna Super Copa, equips federats bàsquet "
-        "Catalunya, bàsquet base vs elit, FCBQ categories",
+        "Catalunya, bàsquet base vs elit, FCBQ categories, escola de bàsquet Catalunya, escoles de "
+        "bàsquet FCBQ, millor escola de bàsquet Catalunya",
   "lede": ("Barça, Joventut, Manresa, Girona… quan es parla dels grans del bàsquet català, poques "
            "vegades s'hi inclou un club de barri. La fitxa oficial de cada club a basquetcatala.cat "
            "diu una altra cosa."),
@@ -1381,6 +1382,20 @@ però, l'única manera de créixer.</p>
 Barna, sí: la mateixa jugadora que entra als quatre anys a l'Escoleta pot arribar a jugar la Súper
 Copa sense canviar mai de samarreta.</blockquote>
 
+<h2>On encaixa el Barna al mapa oficial de les escoles de bàsquet de Catalunya</h2>
+<p>Per sobre de cada club hi ha un sol paraigua: el programa d'<strong>Escoles de Bàsquet</strong> de
+la Federació Catalana de Basquetbol (FCBQ), amb el lema "el més important no és competir, sinó
+aprendre i passar-ho bé". La FCBQ organitza aquest programa per territorials —Barcelona, Catalunya
+Central, Girona, Lleida i Tarragona— que coordinen les trobades de cap de setmana i la formació de
+monitors. L'<a href="/escoleta/">Escoleta del CB Grup Barna</a> hi és dins, a la territorial de
+Barcelona, com qualsevol altra escola de bàsquet de la ciutat.</p>
+<p>La diferència no és estar-hi o no —hi som tots—, sinó què passa <strong>després</strong> de
+l'escola. La majoria d'escoles de bàsquet de Catalunya acaben en un club petit d'una sola franja
+d'edat, o depenen d'una entitat més gran que no és la mateixa que els va formar. Al Barna, la
+mateixa Escoleta que entra al programa de la FCBQ als 4 anys és la porta d'entrada als 34+ equips
+federats del club, fins al sènior. És aquesta continuïtat —no un rànquing ni un premi— el que fa
+que, quan es parla d'escoles de bàsquet completes a Catalunya, el Barna hi tingui un lloc.</p>
+
 <h2>El que ens fa diferents</h2>
 """ + FIG_FORMACIO_JUNIOR + """
 <p>El Grup Barna és, dels clubs analitzats, l'únic amb <strong>dos equips sènior —primer i
@@ -1406,6 +1421,13 @@ passen pel mateix club, sense trencar mai el fil.</p>
     "Tenir estructura completa, de Pre-Mini a Sènior, i un primer equip sènior propi en els dos "
     "gèneres competint a Súper Copa —una cosa que ni el Barça, ni la Penya ni Girona tenen dins de "
     "la mateixa entitat que la seva base."),
+   ("És el CB Grup Barna la millor escola de bàsquet de Catalunya?",
+    "No hi ha cap rànquing oficial que puntuï les escoles de bàsquet de Catalunya per qualitat, i "
+    "no en fem servir el títol literal. El que sí diu la fitxa pública de la FCBQ a "
+    "basquetcatala.cat és que el Barna és, amb 34+ equips, un dels pocs clubs on l'Escoleta de 4 "
+    "anys i els dos primers equips sènior —masculí i femení— formen part de la mateixa entitat, "
+    "sense trencar mai el fil formatiu. És per això que la definim com una de les escoles de "
+    "bàsquet més completes de Catalunya."),
   ],
   "closer": ("Voleu conèixer el club per dins?",
              "Deixa'ns el nom i el contacte i us expliquem com és formar-se i competir al Barna, "
