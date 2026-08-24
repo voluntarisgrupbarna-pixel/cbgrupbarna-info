@@ -905,7 +905,7 @@ function renderEvents() {
 
     card.innerHTML = `
       <div class="event-thumb">
-        <img src="${eventCover(ev)}" alt="${ev.title}" loading="lazy">
+        <img src="${eventCover(ev)}" alt="${ev.title}"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'}>
         <div class="event-thumb-overlay"></div>
         ${ev.season ? `<div class="event-season-tag">${ev.season}</div>` : ''}
         <div class="event-thumb-count">

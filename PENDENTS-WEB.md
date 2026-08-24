@@ -179,6 +179,32 @@ seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
   repositori. No s'han afegit al menú per no inventar-hi programa, preus o
   notícies. Falta que l'Ana digui què són exactament i doni el material.
 
+## Pendent · rendiment web (24/08/2026)
+
+Auditoria completa a `claude/web-performance-testing-6k9iwe`: la portada passa de
+79 a 97/100 de Lighthouse, LCP de 5,1 s a 1,4 s, -216 KB de pes i -200 MB al
+repositori (vídeos de la mascota sense usar). Detall complet a
+`tests/README.md` i als missatges de commit d'aquesta branca. Dues coses no
+es podien resoldre des del codi:
+
+- **Cabeceres de caché HTTP.** El domini apunta directament a GitHub Pages
+  (`CNAME` → `cbgrupbarna.info`, sense Cloudflare ni cap altre CDN al davant
+  — R2 només s'usa per emmagatzemar fotos, no com a proxy del lloc). GitHub
+  Pages no admet cap fitxer de configuració per personalitzar `Cache-Control`
+  (no hi ha equivalent al `_headers` de Netlify): les cabeceres de caché són
+  fixes i no es poden allargar des del repositori. Per aconseguir-ho caldria
+  posar un CDN (Cloudflare és l'opció més òbvia, ja que R2 ja hi viu) davant
+  del domini — és una decisió d'infraestructura, no de codi.
+- **451 fotos amb l'original esborrat del repositori.** Als àlbums
+  `jugadors-es-2526` (178 de 192 fotos) i `fotos-seniors-2526` (273 de 292),
+  la miniatura i la foto gran sí que hi són (`fotos/thumb/`, `fotos/web/`),
+  però l'original a `fotos/uploads/` no. El botó de descarregar l'original
+  d'aquestes 451 fotos concretes dona un enllaç trencat (404) a producció.
+  No sé si és intencionat (es va netejar espai i només es van conservar les
+  derivades) o un pas de pujada que va quedar a mitges. Cal decidir: es
+  torna a pujar l'original, o es treu el botó de descàrrega en aquests dos
+  àlbums.
+
 ## Sense acció
 
 - **Esdeveniments «passats»** (3x3 Glòries, Mes de l'Orgull, Campus Time Chamber,
