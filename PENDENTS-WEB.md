@@ -1192,3 +1192,75 @@ El que sí era real:
   diguin el mateix telèfon i adreça que `index.html`. Val la pena confirmar primer amb
   l'Ana si `Pl. Canonge Rodó, 2` és una seu antiga real (abans de la Nau del Clot /
   Llacuna) o directament un error de la fitxa.
+
+## 24-08-2026 — Repàs complet de pendents + primera tanda d'arreglos
+
+Compilació de **tot** el que segueix realment obert en aquest document (molts punts
+antics ja estaven fets i mai es van marcar), i primera tanda d'arreglos que no
+necessitaven material nou de l'Ana.
+
+### Fet en aquesta tanda
+
+- **El logo òrfe de Zapic.** `/partners/zapic-ai.png` no el referenciava ni
+  `/patrocinadors/` ni `data.json` (només quedava anomenat a la nota `_pendents`).
+  Esborrat el fitxer i netejada la nota.
+- **`/femeni/` en castellà i anglès eren la traducció de la pàgina VELLA
+  (`/basquet-femeni/`), no de l'actual.** `/es/baloncesto-femenino/` i
+  `/en/womens-basketball/` feien 346/343 línies contra les 620 de la catalana: text
+  diferent, sense els 3 pilars actuals amb les xifres reals (50%/38/65,5%/53,7%), sense
+  la graella dels 8 equips 26-27, sense el Cicle de Lideratge, sense l'Efecte Ainhoa ni
+  la Línia Femenina, i amb una FAQ diferent. **Traduïdes senceres de nou**, mantenint
+  les mateixes URL (ja enllaçades des del `hreflang` i el `sitemap.xml`, no calia moure
+  res). `cerca-index.json` regenerat; `scripts/i18n-lint.py` a 0 errors nous.
+- **`/femeni/el-metode-barna/` en castellà i anglès** té el mateix problema (pàgina
+  vella). **Encara pendent**, és la següent peça d'aquesta mateixa família de contingut.
+
+### Confirmat que ja estava fet (el document no s'havia actualitzat)
+
+- **`/empreses/` en castellà i anglès** ("Fase de marca", punt 1 de la llista per
+  ordre): `/es/empresas/` i `/en/companies/` ja existeixen, completes i donades d'alta
+  al `sitemap.xml`. Ningú ho havia marcat com a fet.
+- **Els enllaços a `cbgrupbarna.com/noticies/`** ("Fase de marca", punt 6): ja no en
+  queda cap a cap HTML del repositori — es van corregir en un pas posterior
+  (`MIGRACIO-WEB-ANTIGA.md`) i el punt havia quedat desactualitzat.
+- **El pes dels reels de la mascota** (secció «Tercera passada», 23/08): ja no aplica.
+  El vídeo es va treure sencer de la pàgina el 24/08/2026 (vegeu més amunt, «Fora el
+  vídeo de la mascota»); el que segueix obert és només si es conserven o no els cinc
+  MP4 originals al repositori, ja anotat en aquell mateix punt.
+
+### La llista real del que queda obert (repàs complet del document)
+
+**Es pot fer des d'aquí, sense esperar material (properes tandes):**
+- `/femeni/el-metode-barna/` en castellà i anglès (mateixa feina que `/femeni/`, ja en marxa).
+
+**Necessiten una decisió curta de l'Ana, no material:**
+- Preus del campus: seguir mostrant-los o treure'ls per coherència amb «cap preu de
+  quota al web».
+- Els cinc MP4 originals de `mascota/` (186 MB): conservar-los al repositori o treure'ls.
+- `/premidonaesport/` obert de debò o es queda amb PIN (ja resolta la contradicció
+  amb el sitemap; la pregunta de fons de contingut segueix oberta si es vol reobrir).
+- `/premsa/moments/` en castellà i anglès: traduir-la o deixar-la només en català.
+- `/briefing/`: refer-lo per a la temporada 26-27 o deixar-lo com a document tancat.
+- Eina de dashboard d'analítica: GA4 Data API o una alternativa sense galetes
+  (Plausible/GoatCounter).
+- Eina d'enviament de newsletter (Mailchimp, Brevo o similar) — ara només es recull consentiment.
+
+**Necessiten material o dades de l'Ana:**
+- Foto o vídeo d'en Willy Hernangómez a l'Escoleta.
+- Galeries de `/fotos-esdeveniments/` (només hi ha la del 3x3).
+- Nivells or/plata/bronze dels 22 partners.
+- Instagram per confirmar de sis partners (Foto Jané, Ovella Negra, Fundació Mullor,
+  Tot Salut, Eix Comercial Sant Martí, Panteres Grogues).
+- Fitxa pròpia de les altes 26/27 (Nova Farmàcia Clot, Clínica Dental 26).
+- Plantilla de `/jugadors/` (`jugadors.js` segueix buit).
+- Contingut real per a «Tecnificació» i «Notícies» a l'arbre de menú de l'Ana.
+- Sessió de fotos de La Nau del Clot com a actiu de marca (Fase de marca, punt 3).
+- Xifres d'audiència verificables cada trimestre (Fase de marca, punt 5).
+
+**No depenen de codi, ja preparats i en marxa (vegeu l'entrada anterior d'avui):**
+- 301 de `cbgrupbarna.com` → `cbgrupbarna.info` (checklist enviat a l'Ana).
+- Llista de premsa/backlinks (ho farà l'Ana la setmana del 31/08).
+- Corregir telèfon/adreça a la fitxa de l'Ajuntament i a Google Business.
+
+**Sense acció pròpia, esperen un esdeveniment extern:**
+- Provar el robot de partits amb un resultat real (la temporada comença el 05/09).
