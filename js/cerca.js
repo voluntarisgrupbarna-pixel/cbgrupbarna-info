@@ -543,9 +543,17 @@
    'equip equipo team').split(' ').forEach(function (p) { GENERIQUES[p] = 1; });
 
   function paraulesPregunta(s) {
-    return normalitza(s).split(' ').filter(function (p) {
+    var fora = normalitza(s).split(' ').filter(function (p) {
       if (p.length < 2 || GENERIQUES[p]) return false;
       return INTERROGATIVES[p] || !BUIDES[p];
+    });
+    // «Club», «Barna» i «bàsquet» no compten perquè surten a gairebé totes
+    // les preguntes. Però si la consulta NOMÉS en té —«per què es diu Grup
+    // Barna»— llavors sí que són el tema, i descartar-les deixava la
+    // consulta sense cap paraula i sense resposta possible.
+    if (fora.length) return fora;
+    return normalitza(s).split(' ').filter(function (p) {
+      return p.length > 1 && (INTERROGATIVES[p] || !BUIDES[p]);
     });
   }
 

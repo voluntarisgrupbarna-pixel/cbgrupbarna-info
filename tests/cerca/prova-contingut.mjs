@@ -152,6 +152,22 @@ const CASOS = [
   ['ca', 'quants equips te el club', 'resposta'],
   ['ca', 'quants seguidors te a instagram', 'resposta'],
 
+  // ── Historia i persones. Escrites el 24/08/2026: la resposta era a
+  // /historia/ i a /escoleta/, en text corrent, i no la trobava ningu.
+  ['ca', 'per que es diu grup barna', 'resposta'],
+  ['ca', 'd on venen els colors del club', 'resposta'],
+  ['es', 'por que se llama grup barna', 'resposta'],
+  ['en', 'where does the name come from', 'resposta'],
+  ['ca', 'qui es julio torralba', 'resposta'],
+  ['ca', 'el club ha tingut altres esports', 'resposta'],
+  ['ca', 'tennis de taula', 'resposta'],
+  ['ca', 'premi dona i esport', 'resposta'],
+  ['ca', 'soc periodista', 'resposta'],
+  ['ca', 'es pot entrar a mig curs', 'resposta'],
+  ['ca', 'com deixo una ressenya', 'resposta'],
+  ['ca', 'que es la cistella petita', 'resposta'],
+  ['ca', 'es pot pagar a terminis', 'resposta'],
+
   // ── Comparatives
   ['ca', 'barna o barça', '/posicionament/'],
   ['ca', 'millor club de basquet de barcelona', null],
