@@ -1236,40 +1236,44 @@ crítica dura. La majoria dels problemes tècnics grans ja són als apartats
 d'amunt (contrast, teclat, 320 px, pes, i18n); això és el que **no hi
 constava encara**.
 
-### 1. Setze enllaços morts a l'antic `cbgrupbarna.com`
+### 1. ✅ Resolt (24/08/2026) — Setze enllaços a l'antic `cbgrupbarna.com`
 
-`cbgrupbarna.com` ja no es referencia des del peu de pàgina (fet el
-20/08/2026, «Fase de marca»), però encara hi ha **16 enllaços vius amb
-`cbgrupbarna.com` al cos del text**, repartits en:
+Comprovats un a un. Cap portava a `cbgrupbarna.com/noticies/` (contingut
+real encara no migrat, vegeu «Migració tancada»): eren tots o bé una
+entrada solta «cbgrupbarna.com» al bloc «Xarxes/Social» del peu —11
+pàgines, la mateixa línia que ja es va treure de la resta del web el
+20/08/2026 però que aquestes es van quedar sense fer— o bé una menció en
+prosa («visiteu el seu lloc web oficial a cbgrupbarna.com») en els tres
+idiomes d'un mateix article de premsa.
 
-```
-en/3x3-basketball-barcelona/index.html
-en/basketball-school-barcelona/index.html
-en/basketball-camps-barcelona/index.html
-en/premsa/clot-guide-sixty-years/index.html
-campus-basquet-barcelona/index.html
-es/3x3-baloncesto-barcelona/index.html
-es/campus-navidad-baloncesto-barcelona/index.html
-es/briefing/index.html
-es/campus-baloncesto-barcelona/index.html
-es/premsa/guia-clot-sesenta-anos/index.html
-es/escola-baloncesto-barcelona/index.html
-3x3-barcelona/index.html
-escola-basquet-barcelona/index.html
-premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/index.html
-partits/app.html
-campus-nadal-basquet-barcelona/index.html
-```
+- **Peu «Xarxes»/«Social», eliminat:** `3x3-barcelona/`,
+  `campus-basquet-barcelona/`, `campus-nadal-basquet-barcelona/`,
+  `escola-basquet-barcelona/`, `en/3x3-basketball-barcelona/`,
+  `en/basketball-camps-barcelona/`, `en/basketball-school-barcelona/`,
+  `es/3x3-baloncesto-barcelona/`, `es/campus-baloncesto-barcelona/`,
+  `es/campus-navidad-baloncesto-barcelona/`,
+  `es/escola-baloncesto-barcelona/`.
+- **Prosa canviada a `cbgrupbarna.info`** (el lloc real avui):
+  `premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/`,
+  `es/premsa/guia-clot-sesenta-anos/`, `en/premsa/clot-guide-sixty-years/`.
 
-Cal comprovar un a un si l'enllaç és a contingut real de `cbgrupbarna.com/
-noticies/` (encara no migrat, vegeu «Migració tancada» a la Fase de marca) o
-si és cruft que es pot treure ja.
+**Els dos que queden són intencionats, no cruft:**
+- `es/briefing/index.html` — `sameAs` del JSON-LD. Decidit el 20/08/2026:
+  «El `sameAs` de schema.org es manté: allà sí que consolida entitat.»
+- `partits/app.html` — `UID:${p.id}@cbgrupbarna.com` als `.ics`. No és un
+  enllaç, és el sufix de l'identificador únic de cada esdeveniment de
+  calendari. Canviar-lo trencaria la continuïtat dels calendaris que les
+  famílies ja tenen subscrits al mòbil (l'app deduplica per `UID`).
 
-### 2. Logo d'un patrocinador donat de baixa, encara al repositori
+### 2. Logo d'un patrocinador donat de baixa — **descartat, sí que s'usa**
 
-`partners/zapic-ai.png` segueix a disc. Zapic ja consta com a baixa a
-`data.json` (vegeu punt 3 de «✅ Fet»). Si no hi ha cap fitxa ni pàgina que
-l'enllaci, és desar espai i confusió sense motiu.
+Aquest punt era un fals positiu de la primera revisió. `partners/zapic-ai.png`
+**sí té un enllaç real i indexat**: `/presentacio/` (`robots: index,follow`,
+53 KB, en producció) l'enllaça a la línia 767, dins d'una graella de
+patrocinadors. El primer cop de `grep` no va trobar-ho perquè no cercava el
+nom exacte del fitxer. Es queda tal com era. Si mai es vol treure de debò,
+cal fer-ho a `/presentacio/` primer (i les seves versions `/es/` i `/en/`),
+no esborrant només la imatge.
 
 ### 3. Risc de lectura «contingut fabricat en sèrie» per Google
 
