@@ -11,7 +11,8 @@
   <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
   <meta property="og:type" content="website">
   <link rel="icon" href="/logo.png">
-  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="preload" href="/fonts/inter-400-8117.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
 
   <style>
     :root {
@@ -141,6 +142,11 @@
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: clamp(18px, 2.4vw, 30px);
     }
+    /* La graella la munta el JavaScript després de llegir les dades. Mentre
+       és buida ocupa zero i, en omplir-se, empenyia el peu una pantalla avall:
+       era el salt de disseny més gran del lloc. Reservant-li l'alçada, el que
+       ja es veu no es mou. */
+    .events-grid:empty { min-height: 100vh; }
     .event-card {
       background: var(--paper); border: 1px solid var(--line);
       overflow: hidden; cursor: pointer;
@@ -478,7 +484,7 @@
   ]
 }
 </script>
-<script src="/js/galetes.js"></script>
+<script src="/js/galetes.js" defer></script>
 </head>
 <body>
 

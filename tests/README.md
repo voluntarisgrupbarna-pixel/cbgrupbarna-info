@@ -6,12 +6,13 @@ servir el Chromium i el Playwright que ja hi ha a l'entorn.
 ```bash
 node tests/audit-seo-geo.mjs                  # SEO i GEO, anàlisi estàtica
 node tests/audit-browser.mjs                  # renderitzat real a 5 amplades
+node tests/audit-rendiment.mjs                # velocitat i pes amb mòbil i 4G
 node tests/report.mjs --md tests/out/INFORME.md
 node tests/screenshots.mjs --full             # captures per mirar-s'ho
 ```
 
-Els resultats en brut queden a `tests/out/` (`seo-geo.json` i `browser.json`),
-i `report.mjs` els ajunta en un informe llegible.
+Els resultats en brut queden a `tests/out/` (`seo-geo.json`, `browser.json` i
+`rendiment.json`), i `report.mjs` els ajunta en un informe llegible.
 
 ## Què comprova cadascuna
 
@@ -37,6 +38,32 @@ Recorre totes les pàgines `.html` del repositori sense obrir cap navegador.
 - **GEO generatiu**: `llms.txt` viu i amb les dades dures, permisos dels
   rastrejadors d'IA a `robots.txt`, encapçalaments en forma de pregunta,
   dades estructurades datades i amb autoria.
+
+### `audit-rendiment.mjs`
+Carrega les pàgines amb el navegador frenat com un mòbil de gamma mitjana amb
+4G (390 px, DPR 2, 1,6 Mbps, 150 ms de latència, CPU ×4) i mesura el que sent
+una persona, no el que diu el codi. Es queda a mig camí de Lighthouse a
+propòsit: no puntua de 0 a 100 ni afegeix cap dependència.
+
+- **Core Web Vitals**: LCP, CLS i FCP contra els llindars de Google
+  (2500 ms, 0,1 i 1800 ms), amb quin element és la LCP i quins nodes s'han
+  desplaçat.
+- **Pes real** per tipus de fitxer i els cinc recursos més pesats.
+- **Trampes que aquest lloc ja ha tingut** i que la prova evita que tornin:
+  recursos precarregats que després ningú fa servir, tipografies servides des
+  d'una còpia que no és `/fonts/` (cada còpia és una entrada de memòria cau
+  diferent: la mateixa lletra baixada dos cops), `<img>` amb `srcset` el
+  candidat més petit del qual ja és massa gran per a la mida en què es pinta,
+  imatges de dalt de tot amb `loading="lazy"` (endarrereixen la pròpia LCP) i
+  `<script>` que bloquegen la pintada sense `defer` ni `async`.
+
+Amb `--urls '/,/campus/'` es limita a les pàgines que interessin.
+
+**Compte amb la mètrica de fotos ampliades de `audit-browser.mjs`**: fa servir
+`naturalWidth`, que el navegador ja corregeix per densitat quan l'`<img>` porta
+`srcset` amb `w` i `sizes`. Per això marca com a ampliades fotos que no ho són.
+Per saber de debò si una foto sortirà tova, compara els píxels reals del fitxer
+(llegits del fitxer, no del DOM) amb `amplada_css × dpr`.
 
 ### `audit-browser.mjs`
 Serveix el repositori i el carrega amb Chromium a 360, 430, 820, 1024 i

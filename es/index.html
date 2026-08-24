@@ -60,7 +60,9 @@
 <link rel="shortcut icon" href="/logo.png">
 <!-- Preload recursos crítics -->
 <link rel="preload" href="/logo.png" as="image" fetchpriority="high">
-<link rel="preload" href="/og-image.jpg" as="image">
+<link rel="preload" href="/fonts/inter-400-8117.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/anton-400-1354.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="/img/escoleta-600.webp" imagesrcset="/img/escoleta-300.webp 300w, /img/escoleta-600.webp 600w" imagesizes="190px" fetchpriority="high">
 <!-- DNS prefetch per a recursos externs -->
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//www.instagram.com">
@@ -857,7 +859,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 .comunitat-s { display: block; margin-top: 9px; font-size: 12.5px; color: rgba(255,255,255,0.74); }
 .comunitat-porta--red .comunitat-s { color: rgba(255,255,255,0.86); }
 </style>
-<script src="/js/galetes.js"></script>
+<script src="/js/galetes.js" defer></script>
 </head>
 <body>
 
@@ -955,7 +957,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   <!-- ==== ESCOLETA · el que toca aquest mes ==== -->
   <section class="lead only-extensa" id="escoleta">
     <div class="lead-media">
-      <img src="/img/escoleta.webp" alt="Niña de la Escoleta del CB Grup Barna con la pelota y la mascota del club" fetchpriority="high" decoding="async">
+      <img loading="lazy" src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="(max-width: 900px) 100vw, 50vw" width="600" height="800" alt="Niña de la Escoleta del CB Grup Barna con la pelota y la mascota del club" decoding="async">
       <span class="tagline">Inscripciones abiertas</span>
     </div>
     <div class="lead-body">
@@ -979,7 +981,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
   <section class="franges only-light" aria-label="Acceso rápido al club">
     <a class="franja franja--lead" href="/es/escoleta/" data-cta="franja-escoleta">
-      <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Niña de la Escoleta con la pelota y la mascota del club"></span>
+      <span class="franja-ph"><img fetchpriority="high" src="/img/escoleta.webp" srcset="/img/escoleta-300.webp 300w, /img/escoleta-600.webp 600w" sizes="190px" width="600" height="800" decoding="async" alt="Niña de la Escoleta con la pelota y la mascota del club"></span>
       <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">De 4 a 8 años. Por donde empieza todo el mundo, sin saber nada.</span></span>
       <span class="franja-go"><em>Inscripciones abiertas</em><i></i></span>
     </a>
@@ -988,12 +990,12 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       <span class="franja-go"><em>Este fin de semana</em><i></i></span>
     </a>
     <a class="franja" href="#seniors" data-cta="franja-seniors">
-      <span class="franja-ph"><img src="/img/hero-player.webp" srcset="/img/hero-player.webp 600w, /img/hero-player@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Jugador sénior del CB Grup Barna con la pelota"></span>
+      <span class="franja-ph"><img src="/img/hero-player.webp" srcset="/img/hero-player-300.webp 300w, /img/hero-player-600.webp 600w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Jugador sénior del CB Grup Barna con la pelota"></span>
       <span class="franja-tx"><span class="franja-t">Los séniors</span><span class="franja-s">La primera plantilla del club.</span></span>
       <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
     </a>
     <a class="franja" href="/es/baloncesto-femenino/" data-cta="franja-femeni">
-      <span class="franja-ph"><img src="/img/team-action.webp" srcset="/img/team-action.webp 600w, /img/team-action@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Dos jugadoras del CB Grup Barna con la equipación del club"></span>
+      <span class="franja-ph"><img src="/img/team-action.webp" srcset="/img/team-action-300.webp 300w, /img/team-action-600.webp 600w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Dos jugadoras del CB Grup Barna con la equipación del club"></span>
       <span class="franja-tx"><span class="franja-t">Femenino</span><span class="franja-s">Mismo número de equipos y mismo presupuesto que la línea masculina.</span></span>
       <span class="franja-go"><em>Paridad real</em><i></i></span>
     </a>
@@ -1002,12 +1004,12 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       <span class="franja-go"><em>Todo el año</em><i></i></span>
     </a>
     <a class="franja" href="/es/grup-barna-dades-oficials/" data-cta="franja-club">
-      <span class="franja-ph"><img src="/img/club.webp" srcset="/img/club.webp 600w, /img/club@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Foto de grupo del CB Grup Barna bajo la pancarta del club"></span>
+      <span class="franja-ph"><img src="/img/club.webp" srcset="/img/club-300.webp 300w, /img/club-600.webp 600w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Foto de grupo del CB Grup Barna bajo la pancarta del club"></span>
       <span class="franja-tx"><span class="franja-t">El club</span><span class="franja-s">sesenta y un años formando a niños y niñas del barrio.</span></span>
       <span class="franja-go"><em>Desde 1965</em><i></i></span>
     </a>
     <a class="franja" href="/es/fotos/" data-cta="franja-galeria">
-      <span class="franja-ph"><img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 1200w, /img/campus-hero@2x.webp 2048w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Sesión del campus de baloncesto del CB Grup Barna en La Nau del Clot"></span>
+      <span class="franja-ph"><img src="/img/campus-hero.webp" srcset="/img/campus-hero-380.webp 380w, /img/campus-hero-760.webp 760w, /img/campus-hero.webp 1200w" sizes="190px" width="360" height="202" loading="lazy" decoding="async" alt="Sesión del campus de baloncesto del CB Grup Barna en La Nau del Clot"></span>
       <span class="franja-tx"><span class="franja-t">Galería</span><span class="franja-s">Las fotos de la temporada.</span></span>
       <span class="franja-go"><em>Días de partido y eventos</em><i></i></span>
     </a>
@@ -1603,10 +1605,23 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
           + '</div>';
       }).join('');
     }
-    fetch('/partits/data.json?t=' + Math.floor(Date.now() / 3600000))
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) { if (d) render(d); else buit(); })
-      .catch(buit);
+    // El JSON del calendari pesa ~130 KB i la secció queda sota el plec:
+    // no ha de competir amb la primera pintada. Es demana quan s'hi acosta
+    // la vista (o de seguida, si el navegador no té IntersectionObserver).
+    function carrega() {
+      fetch('/partits/data.json?t=' + Math.floor(Date.now() / 3600000))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { if (d) render(d); else buit(); })
+        .catch(buit);
+    }
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (ents) {
+        if (ents.some(function (e) { return e.isIntersecting; })) { obs.disconnect(); carrega(); }
+      }, { rootMargin: '600px 0px' });
+      obs.observe(box);
+    } else {
+      carrega();
+    }
   })();
 
   // ==== VALORACIÓ DE LA WEB ====
