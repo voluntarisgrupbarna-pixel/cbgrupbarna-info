@@ -49,8 +49,9 @@ const CASOS = [
     await p.fill('#po-mail', 'ana@example.com');
     await p.click('#po-form button[type=submit]');
   }],
-  ['/newsletter/', 'newsletter', ['EMAIL', 'CONSENT'], async p => {
-    await p.fill('#nl-email', 'ana@example.com'); await p.fill('#nl-nom', 'Ana');
+  ['/newsletter/', 'newsletter', ['NOM', 'TELEFON', 'EMAIL', 'CONSENT'], async p => {
+    await p.fill('#nl-nom', 'Ana'); await p.fill('#nl-tel', '600111222');
+    await p.fill('#nl-email', 'ana@example.com');
     await p.check('#nl-ok'); await p.click('#nl-form button[type=submit]');
   }],
   ['/bustia/', 'bustia', ['EMAIL'], async p => {

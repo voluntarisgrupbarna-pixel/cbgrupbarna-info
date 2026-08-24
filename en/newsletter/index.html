@@ -78,15 +78,22 @@ season from the inside.</p>
 
 <h2>Sign up</h2>
 <div class="form-note">
-  <p>The email address is the only thing we need. The name is only so the message does not begin with a
+  <p>We ask for your name, phone and email. With both ways to reach you nobody gets lost: if an email
+  bounces or lands in spam, the club can still let you know what matters. The
   bare "Hello,".</p>
 </div>
 
 <form class="form" id="nl-form" novalidate>
   <div class="form-row">
-    <label for="nl-nom">Name</label>
-    <span class="hint">Optional.</span>
-    <input type="text" id="nl-nom" name="nom" autocomplete="name">
+    <label for="nl-nom">Name <span class="req" aria-hidden="true">*</span></label>
+    <input type="text" id="nl-nom" name="nom" required autocomplete="name" aria-describedby="nl-nom-err">
+    <p class="form-err" id="nl-nom-err" role="alert">Tell us your name.</p>
+  </div>
+  <div class="form-row">
+    <label for="nl-tel">Phone <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Only to reach you if the email does not arrive. We never send marketing by phone.</span>
+    <input type="tel" id="nl-tel" name="telefon" required autocomplete="tel" inputmode="tel" aria-describedby="nl-tel-err">
+    <p class="form-err" id="nl-tel-err" role="alert">Please leave a phone number.</p>
   </div>
   <div class="form-row">
     <label for="nl-email">Email address <span class="req" aria-hidden="true">*</span></label>

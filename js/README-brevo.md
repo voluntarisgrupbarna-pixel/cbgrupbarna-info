@@ -132,7 +132,7 @@ comuns: `IDIOMA`, `ORIGEN`, `CAMPANYA`, `FONT`, `MITJA`, `ENTRADA` (i
 | `portada` | `EMAIL`, `NOM`, `TELEFON`, `INTERES`, `MISSATGE`, `CONSENT` |
 | `informacio` | `EMAIL`, `NOM`, `TELEFON`, `TEMA`, `MISSATGE` |
 | `portesObertes` | `EMAIL`, `NOM`, `TELEFON`, `CONTACTE`, `ANY_NAIX`, `MISSATGE` |
-| `newsletter` | `EMAIL`, `NOM`, `CONSENT` |
+| `newsletter` | `EMAIL`, `NOM`, `TELEFON`, `CONSENT` |
 | `bustia` | `EMAIL`, `TEMA` |
 | `ressenya` | `EMAIL`, `NOM`, `ESTRELLES`, `MISSATGE` |
 | `descarrega` | `EMAIL`, `NOM`, `TELEFON`, `TEMA`, `CONSENT` |
@@ -222,8 +222,8 @@ llegeix qui l'ha de contestar.
 `/escriu-nos/`, a `/portes-obertes/`, a la finestra de descàrrega i a les
 galeries. Dues raons: si no despengen el telèfon se'ls escriu, i sense correu el
 contacte no entra a Brevo (Brevo identifica els contactes pel correu). Així no
-es perd ningú. Les úniques excepcions són la bústia, que és anònima a posta, i
-la newsletter, on demanar un telèfon per rebre un butlletí faria fugir la gent.
+es perd ningú. La newsletter també els demana tots tres. L'única excepció és la bústia, que és
+anònima a posta.
 
 **Brevo no substitueix res, s'hi suma.** Cada formulari segueix enviant on
 enviava (full de càlcul, Formspree, WhatsApp). Són dos destins alhora mentre no
@@ -244,4 +244,6 @@ igual i l'alta segueix arribant per l'altre camí.
 - **Automatització de `CONSENT`.** A **Automatitzacions**, crea'n una: si un
   contacte entra amb `CONSENT = Sí`, afegeix-lo també a la llista
   **Newsletter**. Així la casella de les descàrregues serveix de debò.
-- **Correu de benvinguda** de la newsletter, que ara no existeix.
+- **Els dos correus automàtics** —benvinguda i acusament de rebuda amb la
+  consulta— amb el text ja escrit i les instruccions de muntatge a
+  [`/BREVO-CORREUS.md`](../BREVO-CORREUS.md).

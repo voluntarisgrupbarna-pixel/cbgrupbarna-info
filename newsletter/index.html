@@ -80,15 +80,22 @@ jugant, per a qui ve a veure els partits i per a qui vol saber com va la tempora
 
 <h2>Apunta-t'hi</h2>
 <div class="form-note">
-  <p>El correu és l'única cosa obligatòria. El nom només serveix perquè el missatge no comenci amb un
+  <p>Et demanem el nom, el telèfon i el correu. Amb les dues vies no es perd ningú: si un correu
+  rebota o va a la brossa, el club et pot avisar igualment del que importa. El
   «Hola,» a seques.</p>
 </div>
 
 <form class="form" id="nl-form" novalidate>
   <div class="form-row">
-    <label for="nl-nom">Nom</label>
-    <span class="hint">Opcional.</span>
-    <input type="text" id="nl-nom" name="nom" autocomplete="name">
+    <label for="nl-nom">Nom <span class="req" aria-hidden="true">*</span></label>
+    <input type="text" id="nl-nom" name="nom" required autocomplete="name" aria-describedby="nl-nom-err">
+    <p class="form-err" id="nl-nom-err" role="alert">Digue'ns com et dius.</p>
+  </div>
+  <div class="form-row">
+    <label for="nl-tel">Telèfon <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Només per avisar-te si el correu no arriba. No enviem publicitat per telèfon.</span>
+    <input type="tel" id="nl-tel" name="telefon" required autocomplete="tel" inputmode="tel" aria-describedby="nl-tel-err">
+    <p class="form-err" id="nl-tel-err" role="alert">Deixa'ns un telèfon.</p>
   </div>
   <div class="form-row">
     <label for="nl-email">Correu electrònic <span class="req" aria-hidden="true">*</span></label>

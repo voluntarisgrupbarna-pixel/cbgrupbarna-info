@@ -77,15 +77,22 @@ jugando, para quien viene a ver los partidos y para quien quiere saber cómo va 
 
 <h2>Apúntate</h2>
 <div class="form-note">
-  <p>El correo es lo único obligatorio. El nombre solo sirve para que el mensaje no empiece con un
+  <p>Te pedimos el nombre, el teléfono y el correo. Con las dos vías no se pierde nadie: si un correo
+  rebota o cae en la bandeja de spam, el club puede avisarte igualmente de lo que importa. El
   «Hola,» a secas.</p>
 </div>
 
 <form class="form" id="nl-form" novalidate>
   <div class="form-row">
-    <label for="nl-nom">Nombre</label>
-    <span class="hint">Opcional.</span>
-    <input type="text" id="nl-nom" name="nom" autocomplete="name">
+    <label for="nl-nom">Nombre <span class="req" aria-hidden="true">*</span></label>
+    <input type="text" id="nl-nom" name="nom" required autocomplete="name" aria-describedby="nl-nom-err">
+    <p class="form-err" id="nl-nom-err" role="alert">Dinos cómo te llamas.</p>
+  </div>
+  <div class="form-row">
+    <label for="nl-tel">Teléfono <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Solo para avisarte si el correo no llega. No enviamos publicidad por teléfono.</span>
+    <input type="tel" id="nl-tel" name="telefon" required autocomplete="tel" inputmode="tel" aria-describedby="nl-tel-err">
+    <p class="form-err" id="nl-tel-err" role="alert">Déjanos un teléfono.</p>
   </div>
   <div class="form-row">
     <label for="nl-email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
