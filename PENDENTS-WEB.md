@@ -694,12 +694,24 @@ L'Ana les va contestar totes. **Cap pregunta del web queda sense resposta.**
   no: són la mateixa categoria en competicions diferents, tothom entrena,
   tothom juga i es pot canviar al llarg de la formació.
 
-### Wintym
+### Wintym · no s'anomena, i menys s'enllaça (24/08/2026)
 
-S'anomena com a botiga oficial però **no s'hi enllaça**. La decisió de no
-enllaçar-la (`MIGRACIO-WEB-ANTIGA.md`, 15/08/2026) es va prendre perquè no es
-podia confirmar si la botiga seguia activa; l'Ana ha confirmat que sí, però
-l'enllaç no s'afegeix sense dir-ho expressament. **Si es vol, és una línia.**
+**L'Ana avisa que aquesta és l'última temporada amb Wintym**: les famílies ja
+han comprat l'equipació d'enguany i el club ha de negociar una marca i un
+disseny nous.
+
+Per això la resposta de l'equipació **no diu cap nom de proveïdor**. Parla de
+«la botiga oficial del club» i remet al moment en què es dona la plaça, que és
+quan la família ho necessita saber de debò. Així la resposta segueix sent
+certa el dia que canviï la marca, i no cal recordar-se d'anar-la a buscar.
+
+> **Regla que val per a tot el web:** un nom de tercer dins d'una resposta és
+> una data de caducitat amagada. Si el que la família necessita és *com*
+> aconseguir una cosa, la resposta ha de dir el «com», no el «qui».
+
+El preu (uns 150 €) s'hi ha deixat perquè és l'ordre de magnitud i ajuda a
+decidir, però **també canviarà amb la marca nova**: quan es tanqui, cal
+repassar aquesta entrada a `i18n/faq.yml` (`id: equipacio-preu`).
 
 ### On queda el cercador
 
