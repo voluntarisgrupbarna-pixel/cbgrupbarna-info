@@ -1189,11 +1189,14 @@ a «Pendent de material de l'Ana»; això és la resta.
 
 ### UX
 
-- **Preus encara publicats a tres pàgines de campus.** `campus/index.html`,
-  `campus-basquet-barcelona/index.html` i `campus/setmana-santa/index.html`
-  segueixen anunciant 195€/160€/150€, tot i la decisió del 23/08/2026 de no
-  publicar cap preu de temporada (vegeu «Decisió · els preus no es
-  publiquen»). Arreglo directe.
+- ~~**Preus encara publicats a tres pàgines de campus.**~~ **Fet (24/08/2026).**
+  Tret de `campus/index.html` (+ `/es/` i `/en/`), `campus-basquet-barcelona/index.html`
+  i `campus/setmana-santa/index.html`: meta descriptions, `dl-row` de preu,
+  targetes de preu i totes les dades estructurades (`offers`/`AggregateOffer`
+  a 4 fitxers). El generador `scripts/build-campus-fitxa.py` ja no coneix cap
+  xifra. Es queden intactes els 2.000 € de premis del 3x3 (no és una quota) i
+  el rang de mercat «150-250 €/setmana» de `campus-basquet-barcelona/`, que és
+  informació de tercers, no el preu del club.
 - **`/campus/` no té formulari propi.** Els CTA d'inscripció reenvien tots al
   WhatsApp del club o al bloc `#info` genèric de portada. Cal decidir quines
   dades demanar i on van a parar abans de construir-lo.
@@ -1205,12 +1208,11 @@ a «Pendent de material de l'Ana»; això és la resta.
 
 ### Seguretat i legal
 
-- **La política de privacitat no esmenta Formspree.**
-  `politica-de-privacitat/index.html` diu que el formulari de portada «no
-  desa res en cap servidor nostre» i només llista Meta/Google/GitHub/Flickr
-  com a encarregats. Però `index.html` envia nom, mòbil, correu i missatge a
-  Formspree (EUA) a cada enviament: és un encarregat real i no declarat. Cal
-  afegir-lo al text.
+- ~~**La política de privacitat no esmenta Formspree.**~~ **Fet (24/08/2026).**
+  Afegit als tres idiomes (`politica-de-privacitat/`, `es/politica-de-privacidad/`,
+  `en/privacy-policy/`): el paràgraf del formulari de portada ja diu que les
+  dades s'envien també a Formspree, i apareix a la llista d'encarregats del
+  tractament. Data d'«última actualització» pujada al 24/08/2026.
 - **El PIN del dossier de Premi Dona i Esport és «1965» en clar.**
   `premidonaesport/assets/js/auth.js` el guarda sense ofuscar, visible amb
   «Veure codi font». No és el mateix problema que es va resoldre el
@@ -1220,10 +1222,11 @@ a «Pendent de material de l'Ana»; això és la resta.
 
 ### SEO
 
-- **`/jugadors/` és indexable i buida.** Ja hi ha un pendent per omplir
-  `jugadors/jugadors.js` (a «Pendent de decisió»), però mentre segueixi buida
-  Google la indexa tal qual amb la meta description de la temporada
-  2025-2026. Convé posar-hi `noindex` fins que hi hagi plantilla.
+- ~~**`/jugadors/` és indexable i buida.**~~ **Fet (24/08/2026).** `noindex,follow`
+  a les tres versions (`jugadors/`, `es/jugadors/`, `en/jugadors/`) i tretes
+  del `sitemap.xml` (363 URL). Segueix pendent omplir `jugadors/jugadors.js`
+  quan hi hagi plantilla — a «Pendent de decisió»—; quan es faci, cal treure
+  també el `noindex`.
 - **39 dels 43 objectius d'enllaços externs segueixen «pendents».** Segons
   `POSICIONAMENT-CAMPUS-SEO.md`, l'arquitectura on-page ja està resolta; el
   que falta és autoritat externa real, i això no és una tasca de codi.
