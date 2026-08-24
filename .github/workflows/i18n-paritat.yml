@@ -1,0 +1,176 @@
+name: i18n · els tres idiomes alhora
+
+# Aquest és el que impedeix que un canvi arribi a la web en un sol idioma.
+#
+# El workflow i18n-tradueix.yml ja avisava quan una traducció es quedava
+# enrere, però ho feia DESPRÉS de fusionar: la pàgina ja era publicada dient
+# una cosa en català i una altra en castellà. Això ho mira ABANS, a la
+# proposta de canvi, i la marca en vermell fins que les tres versions van
+# juntes.
+#
+# La regla és la de sempre, ara comprovada: si toques una pàgina que té
+# traduccions, les toques totes tres. Si n'esborres una, les esborres totes.
+#
+# Si el canvi ha de ser d'un sol idioma amb tota la raó, el motiu va escrit a
+# i18n/excepcions-paritat.yml. No hi ha cap altra manera de passar-hi.
+
+on:
+  pull_request:
+    # «edited» hi és perquè el motiu d'una excepció d'un cop s'escriu a la
+    # descripció: sense això, escriure'l no tornaria a executar la
+    # comprovació i no serviria de res fins al proper commit.
+    types: [opened, synchronize, reopened, edited]
+    paths:
+      - '**.html'
+      - 'i18n/routes.yml'
+      - 'i18n/excepcions-paritat.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: i18n-paritat-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  paritat:
+    runs-on: ubuntu-latest
+    steps:
+      # Aquest repositori té les fotos a dins: 5,5 GB d'historial i 636 MB
+      # d'arbre de treball, dels quals 515 MB són imatges. Una comprovació
+      # que dura segons no ha d'esperar-se a baixar-ho tot.
+      #
+      #   · sense historial   — la llista de fitxers tocats la dona l'API
+      #   · sense les imatges — aquesta comprovació només llegeix HTML
+      #
+      # Queden 63 MB. S'exclou per EXTENSIÓ, no per carpeta: /fotos/ i
+      # /mascota/ tenen pàgines HTML a dins que la comprovació sí que ha de
+      # llegir, i excloent la carpeta sencera desapareixien.
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !*.jpg
+            !*.jpeg
+            !*.png
+            !*.webp
+            !*.gif
+            !*.avif
+            !*.mp4
+            !*.mov
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install --quiet pyyaml
+
+      - name: Veure quins fitxers toca el canvi
+        id: fitxers
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.pull_request.number }}
+        run: |
+          if [ -n "$NUM" ]; then
+            gh api --paginate "repos/${{ github.repository }}/pulls/$NUM/files" \
+              --jq '.[].filename' | grep '\.html$' > /tmp/tocats.txt || true
+          else
+            : > /tmp/tocats.txt
+          fi
+          echo "quants=$(wc -l < /tmp/tocats.txt)" >> "$GITHUB_OUTPUT"
+          echo "$(wc -l < /tmp/tocats.txt) fitxers HTML tocats."
+
+      - name: Comprovar que el canvi va en els tres idiomes
+        id: comprova
+        run: |
+          set +e
+          if [ "${{ steps.fitxers.outputs.quants }}" = "0" ]; then
+            echo "Cap pàgina tocada." | tee /tmp/paritat.txt
+            echo "codi=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Sense xargs: convertiria el codi de sortida del guió en un 123
+          # que no diu res a qui llegeix el registre.
+          python3 scripts/i18n-paritat.py --llista /tmp/tocats.txt | tee /tmp/paritat.txt
+          echo "codi=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      # Hi ha dues maneres legítimes de tocar un sol idioma, i són diferents:
+      #
+      #   · La pàgina va per lliure sempre  → i18n/excepcions-paritat.yml
+      #   · Aquest canvi concret hi va      → una línia a la descripció
+      #
+      # La segona és per a coses com «el castellà deia noindex i el català no;
+      # només cal tocar el castellà». Fer-ne una excepció permanent de pàgina
+      # per un arreglo d'una vegada ompliria el fitxer d'excepcions de casos
+      # morts. Aquesta caduca sola: viu a la proposta de canvi i prou.
+      - name: Mirar si la descripció ho justifica
+        id: justificat
+        if: steps.comprova.outputs.codi != '0' && github.event_name == 'pull_request'
+        env:
+          COS: ${{ github.event.pull_request.body }}
+        run: |
+          motiu=$(printf '%s' "$COS" | grep -i '^i18n-nomes-un-idioma:' | head -1 || true)
+          if [ -n "$motiu" ]; then
+            echo "::notice::Excepció d'aquesta proposta: $motiu"
+            echo "motiu=$motiu" >> "$GITHUB_OUTPUT"
+            echo "$motiu" >> /tmp/paritat.txt
+          fi
+
+      - name: Escriure l'informe
+        run: |
+          {
+            echo '## Els tres idiomes'
+            echo
+            echo '```'
+            cat /tmp/paritat.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Deixar-ho dit a la proposta de canvi
+        if: steps.comprova.outputs.codi != '0' && !steps.justificat.outputs.motiu && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.pull_request.number }}
+        run: |
+          # Un sol comentari, que es va reescrivint. Si es resol, s'esborra:
+          # una proposta ja arreglada no ha de quedar amb un avís penjat.
+          MARCA="<!-- i18n-paritat -->"
+          {
+            echo "$MARCA"
+            echo "### Aquest canvi no va en els tres idiomes"
+            echo
+            echo '```'
+            cat /tmp/paritat.txt
+            echo '```'
+          } > /tmp/comentari.md
+          id=$(gh api "repos/${{ github.repository }}/issues/$NUM/comments" \
+                 --jq ".[] | select(.body | contains(\"$MARCA\")) | .id" | head -1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" \
+              -f body="$(cat /tmp/comentari.md)" >/dev/null
+          else
+            gh pr comment "$NUM" --body-file /tmp/comentari.md
+          fi
+
+      - name: Retirar l'avís si ja està resolt
+        if: (steps.comprova.outputs.codi == '0' || steps.justificat.outputs.motiu) && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.pull_request.number }}
+        run: |
+          MARCA="<!-- i18n-paritat -->"
+          id=$(gh api "repos/${{ github.repository }}/issues/$NUM/comments" \
+                 --jq ".[] | select(.body | contains(\"$MARCA\")) | .id" | head -1)
+          [ -n "$id" ] && gh api -X DELETE \
+            "repos/${{ github.repository }}/issues/comments/$id" >/dev/null || true
+
+      - name: Resultat
+        run: |
+          if [ -n "${{ steps.justificat.outputs.motiu }}" ]; then
+            echo "Passa amb el motiu escrit a la descripció."
+            exit 0
+          fi
+          exit ${{ steps.comprova.outputs.codi }}

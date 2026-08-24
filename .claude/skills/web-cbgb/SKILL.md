@@ -275,6 +275,56 @@ els `.ics` que les famílies ja tenen subscrits al mòbil.
 
 ---
 
+## 6 bis. Els tres idiomes van junts, i ho comprova una màquina
+
+**Un canvi de text es fa als tres idiomes alhora.** No és una bona pràctica:
+és una comprovació que atura la fusió.
+
+Cada traducció és un fitxer HTML independent —no hi ha framework d'i18n—, i
+`i18n/routes.yml` és qui diu quines tres pàgines són la mateixa. Toca'n una i
+has de tocar les tres; esborra'n una i has d'esborrar les tres.
+
+| Quan | Què hi ha | Què fa |
+|---|---|---|
+| A la proposta de canvi | `.github/workflows/i18n-paritat.yml` | Compara què toca el canvi amb el trio de cada pàgina. Si en falta un idioma, **la marca en vermell** i escriu a la proposta quins fitxers falten. Quan es resol, esborra l'avís sol. |
+| A cada push a `main` | `.github/workflows/i18n-tradueix.yml` | Torna a extreure el text de les pàgines tocades conservant el que no ha canviat, i manté **una sola incidència** amb la llista viva del que queda endarrerit. Es tanca sola quan es buida. |
+| Sempre que vulguis | `python3 scripts/i18n-paritat.py --tot` | La mateixa foto, a mà i al moment. |
+
+El circuit per posar una pàgina al dia:
+
+```bash
+python3 scripts/i18n-extreu.py <ruta-catalana> es en   # conserva el ja traduït
+# omplir i18n/feina/{es,en}/<pàgina>.json
+python3 scripts/i18n-munta.py <ruta-catalana> es
+python3 scripts/i18n-munta.py <ruta-catalana> en
+python3 scripts/i18n-hreflang.py && python3 scripts/build-sitemap.py
+```
+
+`i18n-extreu.py` busca cada tros pel text català, de manera que **només et
+demana traduir el que ha canviat**: si has tocat un paràgraf, la resta de la
+pàgina conserva la traducció que ja tenia.
+
+**El català és l'original.** Si toques `/es/` o `/en/` directament, aquell text
+no queda a cap fitxer de `i18n/feina/` i la propera vegada que es munti la
+pàgina desapareixerà. El canvi de text es fa a la pàgina catalana i baixa cap
+a les altres dues.
+
+**Les dues excepcions**, i són diferents a propòsit:
+
+| Cas | On es diu |
+|---|---|
+| Aquesta **pàgina** va per lliure sempre | `i18n/excepcions-paritat.yml`, amb la ruta catalana i el motiu |
+| Aquest **canvi concret** hi va, un cop | Una línia a la descripció de la proposta: `i18n-nomes-un-idioma: <motiu>` |
+
+La segona és per a arreglos d'una vegada —«el castellà deia `noindex` i el
+català no, només cal tocar el castellà»—. Fer-ne una excepció permanent de
+pàgina ompliria el fitxer de casos morts; així caduca sola amb la proposta.
+
+Cap de les dues deixa passar res sense un motiu escrit, i és a propòsit: una
+llista d'excepcions sense motius acaba sent la regla.
+
+---
+
 ## 7. Modes clar i fosc
 
 **Avui no n'hi ha cap.** Cap fitxer del repositori té `prefers-color-scheme` ni
@@ -359,6 +409,8 @@ s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
 7. Si has tocat una pàgina generada, has editat el generador **i** has mirat el
    `git diff` sencer abans de desar?
 8. Si la pàgina té versió en castellà o en anglès, l'has tocada també?
+   Comprova-ho amb `python3 scripts/i18n-paritat.py --tot` (punt 6 bis); si no,
+   t'ho aturarà la comprovació de la proposta de canvi.
 9. Sense desbordament horitzontal a 390 px, i amb focus visible al teclat?
 
 Val la pena obrir-ho de debò abans de donar-ho per fet. Amb Chromium ja
