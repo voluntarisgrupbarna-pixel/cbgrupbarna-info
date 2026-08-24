@@ -53,17 +53,17 @@ def wa(text):
     return quote(text)
 
 
-def hero_2x_width(slug):
-    """Amplada real del WebP @2x de la portada d'un article.
+def hero_width(slug, label, default):
+    """Amplada real d'un WebP de portada d'article (`""` per a 1x, `"@2x"`).
 
     Cada original té una amplada diferent i no s'amplia mai per sobre de la
     que té (regla del sistema de disseny), així que el `srcset` no pot dur un
-    número fix. Es llegeix del fitxer generat; si encara no existeix, es fa
-    servir el màxim que genera build-blog-heroes.py.
+    número fix per a cap dels dos fitxers. Es llegeix del fitxer generat; si
+    encara no existeix, es fa servir el màxim que genera build-blog-heroes.py.
     """
-    p = ROOT / "img" / "blog" / f"{slug}-hero@2x.webp"
+    p = ROOT / "img" / "blog" / f"{slug}-hero{label}.webp"
     if not p.exists():
-        return 1560
+        return default
     from PIL import Image
     return Image.open(p).size[0]
 
@@ -85,10 +85,13 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
     if switch_langs and show_lang_switch:
         # El nom de la llengua en la seva llengua: qui fa servir un lector de
         # pantalla ha de sentir "Castellano", no "ES" lletra per lletra.
+        # L'aria-label ha de portar el text visible ("ES") a més del nom
+        # sencer: si només hi ha el nom sencer, l'accessible name deixa de
+        # coincidir amb l'etiqueta visible i incompleix WCAG 2.5.3.
         LANG_ARIA = {"ca": "Català", "es": "Castellano", "en": "English"}
         links = '<span class="sep" aria-hidden="true">·</span>'.join(
             f'<a href="{h.replace(SITE, "")}" hreflang="{c}" lang="{c}" '
-            f'aria-label="{LANG_ARIA[c]}"'
+            f'aria-label="{LANG_NAMES[c]} · {LANG_ARIA[c]}"'
             + (' class="active" aria-current="true"' if c == lang else '')
             + f'>{LANG_NAMES[c]}</a>'
             for c, h in switch_langs)
@@ -97,7 +100,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
         # Les regles del component viuen a css/barna.css i prou: tenir-les
         # també aquí és el que va deixar vuit versions del mateix CSS pel lloc.
         lang_style = ('\n<style>\n.head-in .lang-switch { margin-left: auto; }\n</style>'
-                      if lang_switch_auto else '\n<style>\n</style>')
+                      if lang_switch_auto else '')
     else:
         lang_switch = ''
         lang_style = ''
@@ -1894,9 +1897,10 @@ def build_article(a):
     hero = ''
     if a.get("hero_alt"):
         # Els WebP els genera scripts/build-blog-heroes.py a partir del JPG original.
-        w2 = hero_2x_width(a["slug"])
+        w1 = hero_width(a["slug"], "", 780)
+        w2 = hero_width(a["slug"], "@2x", 1560)
         hero = (f'\n    <div class="phead-media"><img src="/img/blog/{a["slug"]}-hero.webp" '
-                f'srcset="/img/blog/{a["slug"]}-hero.webp 780w, '
+                f'srcset="/img/blog/{a["slug"]}-hero.webp {w1}w, '
                 f'/img/blog/{a["slug"]}-hero@2x.webp {w2}w" '
                 f'sizes="(max-width: 900px) 100vw, 780px" '
                 f'alt="{a["hero_alt"]}" fetchpriority="high" decoding="async" '
