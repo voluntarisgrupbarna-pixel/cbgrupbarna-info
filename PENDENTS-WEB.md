@@ -186,17 +186,32 @@ Auditoria completa a `claude/web-performance-testing-6k9iwe`: la portada passa d
 repositori (vídeos de la mascota sense usar). Detall complet a
 `tests/README.md` i als missatges de commit d'aquesta branca.
 
-**✅ Cabeceres de caché HTTP — resolt el 24/08/2026.** Amb el domini ja
-darrere de Cloudflare (nameservers canviats, DNS proxied, SSL en mode
-Full), els estàtics (`/fonts/`, `/css/`, `/img/`) passen de 10 minuts de
-caché (sempre `MISS` a GitHub) a 4 hores, ja servint `HIT` des del node
-de vora. L'HTML es queda correctament en `DYNAMIC` (respecta el
-`max-age=600` d'origen, no cacheja contingut que canvia). Es va decidir
-deixar-ho en 4 hores en comptes d'allargar-ho a 1 mes; si en algun moment
-es vol allargar, és **Caching → Cache Rules** al tauler de Cloudflare.
-Verificat amb `curl` contra el domini real: sense redireccions trencades,
-`www` fa 301 net cap a l'arrel, sitemap i robots accessibles, totes les
-pàgines clau responen 200.
+**✅ Cabeceres de caché HTTP — resolt el 24/08/2026.** Domini darrere de
+Cloudflare (nameservers canviats, SSL en mode **Full** — no «Full strict»,
+perquè GitHub Pages no sempre pot renovar el seu certificat darrere del
+proxy i amb «strict» la web es cauria). De pas es va trobar i arreglar un
+problema real que no tenia res a veure amb la caché: el registre `A` de
+`www` apuntava a una IP morta (`217.76.130.93`, error 521); ara apunta a
+GitHub Pages i `www.cbgrupbarna.info` fa un 301 net cap a l'arrel.
+
+Regla de caché activa («Estatics amb cache llarga»): `/fonts/`, `/css/`,
+`/img/` i la resta d'extensions estàtiques (woff2, css, js, png, jpg,
+webp, mp4...) passen dels 10 minuts fixos de GitHub Pages (sempre `MISS`)
+a **30 dies** de vora i de navegador, ja servint `HIT`. L'HTML es queda
+en `DYNAMIC`: no es cacheja, així que un canvi publicat es veu a l'acte.
+Els registres MX/SPF/autoconfig del correu (`serviciodecorreo.es`) no
+s'han tocat.
+
+**Compte amb els 30 dies si es reutilitza un nom de fitxer.** Si es puja
+una foto o un CSS nou mantenint el mateix nom, la gent pot seguir veient
+la versió vella fins a un mes. Dues sortides: canviar el nom del fitxer
+(`logo-v2.png`) o, després de desplegar un canvi així, **Caching →
+Configuration → Purge Everything** al tauler de Cloudflare.
+
+Verificat amb `curl` contra el domini real: `cache-control: max-age=2592000`
+a fonts/CSS/imatges, `cf-cache-status: HIT`, HTML en `DYNAMIC`, `www` amb
+301 net, sense redireccions trencades, sitemap i robots accessibles, totes
+les pàgines clau responen 200.
 
 - **451 fotos amb l'original esborrat del repositori.** Als àlbums
   `jugadors-es-2526` (178 de 192 fotos) i `fotos-seniors-2526` (273 de 292),
