@@ -1221,3 +1221,7 @@ no hi ha cap eina de GitHub disponible en aquesta sessió per crear-ne un per
 API. Un fitxer dins del repositori no depèn d'aquest permís i, de retruc,
 queda a l'historial de qualsevol clonatge sense haver de demanar els tags a
 part.
+
+**Norma confirmada per l'Ana:** a partir d'ara, cada vegada que es tanqui una
+feina es puja la subversió corresponent (`VERSION` + entrada a
+`CHANGELOG.md`) en el mateix commit, sense haver-ho de demanar cada cop.

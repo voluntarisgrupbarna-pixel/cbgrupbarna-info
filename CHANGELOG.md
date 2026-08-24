@@ -22,6 +22,12 @@ només l'hi posa nom.
 
 ---
 
+## 1.0.2 — 2026-08-24
+
+Confirmat i documentat a `PENDENTS-WEB.md`: a partir d'ara cada feina
+tancada puja la seva subversió sense que calgui demanar-ho cada cop. Cap
+canvi de codi.
+
 ## 1.0.1 — 2026-08-24
 
 Documentat a `PENDENTS-WEB.md` que aquest sistema de versions existeix i per
