@@ -487,6 +487,87 @@ de WhatsApp, 1,98:1). El verd de WhatsApp és seu i s'hi queda; el que ha canvia
 
 ---
 
+## Tercera passada · el que va sortir mirant més endins (23/08/2026)
+
+Amb els punts grossos tancats, un repàs a coses que no es veuen llegint el codi:
+dades estructurades, teclat, pantalles de 320 px i pes de pàgina.
+
+### Dades estructurades: 45 pàgines deien a Google que eren en català
+
+El JSON-LD de `/es/` i `/en/` portava `"inLanguage": "ca-ES"` copiat de
+l'original. Afectava tot el blog traduït, les fitxes de partner, premsa i les
+tres portades. A més, `WebPage` i `FAQPage` declaraven la llista dels tres
+idiomes, que només té sentit al node `WebSite`: el lloc és trilingüe; una
+pàgina concreta, no. Els 439 blocs de JSON-LD del repositori queden validats i
+amb l'idioma correcte.
+
+El generador que ho provocava (`scripts/i18n-munta.py`) només traduïa la forma
+curta (`"ca"`), no la llarga ni la llista. Ara les cobreix totes tres, i la
+llista la resol llegint el JSON per no tocar el node `WebSite`.
+
+### Teclat
+
+Els camps de text del formulari de la portada anul·laven el contorn de focus i
+el substituïen per un filet d'un píxel que només canvia de color. Amb teclat ara
+recuperen el contorn vermell de la resta del web; amb ratolí segueix sortint
+només el filet. Revisat tabulant de debò per 24 pàgines: no queda cap element
+focusable sense indicador visible.
+
+**La galeria no es podia fer servir amb el teclat.** Les caselles de `/fotos/`
+eren `<div>` amb un `click` i prou: no s'hi podia arribar ni obrir cap foto, i
+un lector de pantalla no les anunciava com a res. Ara són botons de debò, amb
+etiqueta («Obrir la foto 3 a pantalla completa»), i s'obren amb Enter o espai.
+El visor mou el focus al botó de tancar en obrir-se, el manté a dins mentre es
+fa servir i el torna a la mateixa foto en tancar-se.
+
+### Pantalles de 320 px
+
+Sis famílies de pàgina hi desbordaven. El cas més gros era **l'avís de
+galetes**: feia 342 px d'ample en una pantalla de 320 i el botó d'acceptar
+sortia partit. És la primera cosa que es toca en entrar.
+
+La causa de fons no era la barra. Hi havia contingut més ample que la pantalla,
+el navegador eixamplava la finestra de disseny, i la barra —que és
+`position: fixed`— l'heretava:
+
+- les cinc estrelles de la valoració (5 dianes de 44 px i les separacions) no hi
+  cabien amb els marges de la targeta;
+- les capçaleres de `/es/` i `/en/` no retiraven el nom del club, com sí que fa
+  la catalana;
+- a `/presentacions/` el botó de mode clar/fosc quedava fora de pantalla, sense
+  manera d'arribar-hi;
+- a `/fotos/` l'enllaç de tornada sortia de la pantalla;
+- les files de `/#acces` no cabien en una línia.
+
+Cap diana tàctil baixa dels 44 px: el que s'estreny és l'aire, i el que es
+retira són etiquetes que ja diu l'`aria-label`.
+
+### Pes
+
+Cinc imatges es servien senceres, sense `srcset`, en pàgines on mai es mostren a
+més de 700 px. `hero-equip.jpg` feia 2100 px i 468 KB per a un marc de 348. És
+la regla del sistema de disseny llegida per l'altra banda: si cap foto no s'ha
+de mostrar més gran del que és, tampoc no se n'han de baixar més píxels dels que
+caben. `scripts/build-imatges-responsives.py` en fa versions WebP a 400, 800 i
+1400 px —mai per sobre de l'original— i els `<img>` ja les demanen.
+
+| Pàgina | Abans | Ara |
+|---|---|---|
+| `/presentacions/` | 1.146 KB | 242 KB |
+| `/patrocinadors/` | 548 KB | 240 KB |
+| `/3x3/` | 439 KB | 226 KB |
+| `/premsa/` | 407 KB | 231 KB |
+
+I `/mascota/` arrencava el vídeo sol. Pesa entre 31 i 50 MB i, arrencant, es
+baixa sencer. Ara només ho fa si el vídeo és a pantalla i si qui mira no ha
+demanat menys moviment ni té l'estalvi de dades activat.
+
+> **Pendent, i això no és codi:** el reel de la mascota hauria de sortir
+> re-codificat. Un vertical de 90 segons no hauria de passar de 10-12 MB, i ara
+> en fa 31 (català) i 50 (castellà).
+
+---
+
 ## Per decidir (redactat el 23/08/2026, abans de resoldre'ls) — vegeu més amunt
 
 1. **`/premidonaesport/` demana un PIN i alhora és al `sitemap.xml`.** Són
