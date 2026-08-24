@@ -1,0 +1,106 @@
+name: i18n · els tres idiomes alhora
+
+# Aquest és el que impedeix que un canvi arribi a la web en un sol idioma.
+#
+# El workflow i18n-tradueix.yml ja avisava quan una traducció es quedava
+# enrere, però ho feia DESPRÉS de fusionar: la pàgina ja era publicada dient
+# una cosa en català i una altra en castellà. Això ho mira ABANS, a la
+# proposta de canvi, i la marca en vermell fins que les tres versions van
+# juntes.
+#
+# La regla és la de sempre, ara comprovada: si toques una pàgina que té
+# traduccions, les toques totes tres. Si n'esborres una, les esborres totes.
+#
+# Si el canvi ha de ser d'un sol idioma amb tota la raó, el motiu va escrit a
+# i18n/excepcions-paritat.yml. No hi ha cap altra manera de passar-hi.
+
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - 'i18n/routes.yml'
+      - 'i18n/excepcions-paritat.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: i18n-paritat-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  paritat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Cal l'historial per poder comparar amb la branca de destí.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install --quiet pyyaml
+
+      - name: Comprovar que el canvi va en els tres idiomes
+        id: comprova
+        run: |
+          set +e
+          base="origin/${{ github.base_ref }}"
+          git fetch --quiet origin "${{ github.base_ref }}" || true
+          python3 scripts/i18n-paritat.py --des "$base" --fins HEAD | tee /tmp/paritat.txt
+          echo "codi=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: Escriure l'informe
+        run: |
+          {
+            echo '## Els tres idiomes'
+            echo
+            echo '```'
+            cat /tmp/paritat.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Deixar-ho dit a la proposta de canvi
+        if: steps.comprova.outputs.codi != '0' && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.pull_request.number }}
+        run: |
+          # Un sol comentari, que es va reescrivint. Si es resol, s'esborra:
+          # una proposta ja arreglada no ha de quedar amb un avís penjat.
+          MARCA="<!-- i18n-paritat -->"
+          {
+            echo "$MARCA"
+            echo "### Aquest canvi no va en els tres idiomes"
+            echo
+            echo '```'
+            cat /tmp/paritat.txt
+            echo '```'
+          } > /tmp/comentari.md
+          id=$(gh api "repos/${{ github.repository }}/issues/$NUM/comments" \
+                 --jq ".[] | select(.body | contains(\"$MARCA\")) | .id" | head -1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" \
+              -f body="$(cat /tmp/comentari.md)" >/dev/null
+          else
+            gh pr comment "$NUM" --body-file /tmp/comentari.md
+          fi
+
+      - name: Retirar l'avís si ja està resolt
+        if: steps.comprova.outputs.codi == '0' && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.pull_request.number }}
+        run: |
+          MARCA="<!-- i18n-paritat -->"
+          id=$(gh api "repos/${{ github.repository }}/issues/$NUM/comments" \
+                 --jq ".[] | select(.body | contains(\"$MARCA\")) | .id" | head -1)
+          [ -n "$id" ] && gh api -X DELETE \
+            "repos/${{ github.repository }}/issues/comments/$id" >/dev/null || true
+
+      - name: Resultat
+        run: exit ${{ steps.comprova.outputs.codi }}
