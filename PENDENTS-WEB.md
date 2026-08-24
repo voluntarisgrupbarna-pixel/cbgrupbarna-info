@@ -1169,3 +1169,90 @@ mencions eren prosa d'aquest document i un comentari de
 **Com recuperar-los si mai calen:** són a l'historial de git, al commit
 `c589e7f4`. Amb `git show c589e7f4:mascota/mascota-reel.mp4 > mascota-reel.mp4`
 en surt qualsevol, byte a byte.
+
+---
+
+## 24-08-2026 — Auditoria «web 10»: nota per apartats i pla en tres fases
+
+Repàs complet demanat des de fora (velocitat, SEO, idiomes, UX, estètica,
+accessibilitat, seguretat i mantenibilitat), amb nota per apartat i pla
+d'acció perquè el web arribi al 10. Queda registrat aquí perquè les tres
+fases es facin de veres i no es perdin en una conversa.
+
+### Nota de partida, per apartat (24-08-2026)
+
+| Apartat | Nota | El que faltava |
+|---|---|---|
+| Mantenibilitat | 7/10 | `build-pages.py` desfasat (esborrava 388 línies reals en executar-se) |
+| Velocitat | 7,5/10 | Fotos de portada del blog en JPG cru (200-420 KB), sense passar pel pipeline WebP |
+| Idiomes | 8/10 | `/empreses/` sense castellà ni anglès; `alt`/`aria-label` de l'escut en català a les traduccions |
+| UX | 8,5/10 | Sense inscripció en línia; tres àudios de `/premidonaesport/` que no existeixen |
+| Estètica | 8,5/10 | L'Escoleta (4-7 anys) depèn d'una sola foto de 750 px |
+| Accessibilitat | 9/10 | Puntual (contrast ja corregit en auditories anteriors) |
+| Seguretat / legal | 9/10 | Puntual |
+| SEO / buscadors | 9,5/10 | `/premsa/moments/` només en català |
+
+**Nota global de partida: 8,4/10.**
+
+### El pla, per ordre de pitjor nota primera
+
+**Fase 1 · Mantenibilitat + Velocitat (fet, 24-08-2026)**
+
+- `scripts/build-pages.py` tenia 7 regressions que l'havien deixat perillós
+  d'executar (es menjava els marcadors de FAQ, trencava el `FAQPage`,
+  perdia atributs d'accessibilitat del commutador d'idioma, duplicava CSS).
+  Arreglades una a una i comprovat que ja no toca res fora de `/blog/` i
+  `/partits/calendaris/` (la resta de seccions generades es mantenen a mà,
+  tal com ja diu `web-cbgb` §8).
+- Nou `scripts/build-blog-heroes.py`: retalla les 17 fotos de portada del
+  blog des de dalt (mai es talla un cap) i en treu WebP a dues mides, com ja
+  fa la resta del lloc. De 200-420 KB per peça a 6-80 KB.
+
+**Fase 2 · Idiomes + LCP de portada (fet, 24-08-2026)**
+
+- El muntador de traduccions (`scripts/i18n-munta.py`) desfeia tres coses
+  que auditories anteriors ja havien arreglat: endevinava rutes en comptes
+  de llegir-les d'`i18n/routes.yml`, deixava l'`alt` de l'escut i
+  l'`aria-label` d'inici en català, i rellegia el mapa de rutes a cada
+  enllaç. Corregit, i **aplicat també a les 48 pàgines ja publicades** que
+  encara portaven l'atribut en català (no només al muntador, perquè no
+  quedessin corregides només «per a la propera vegada»).
+- `/empreses/` (castellà i anglès) ja existia però amb tres respostes de
+  FAQ tallades a mig frase; refetes senceres.
+- La foto de l'Escoleta a la portada (versió Franges, la que es veu per
+  defecte a tothom) portava `loading="lazy"` tot i ser la candidata a LCP:
+  passa a `fetchpriority="high"`.
+
+**Fase 3 · Revisió i tancament (fet, 24-08-2026)**
+
+Una revisió de codi sobre les dues fases anteriors va trobar 7 problemes
+reals més (detall al missatge del commit `e695d3e2`): el `sizes` de la foto
+de l'Escoleta perdia la branca mòbil, hi havia dues imatges competint per
+`fetchpriority="high"` quan Franges és l'única vista per defecte, un
+`<style></style>` buit sortint a cada pàgina, un `aria-label` que
+incomplia WCAG 2.5.3 en substituir el text visible en comptes d'afegir-s'hi,
+un `srcset` amb un ample fix que s'hauria vist malament amb una foto futura
+més estreta, i el text de FAQ d'`/empreses/` corregit a la pàgina però no a
+`i18n/faq.yml` (que l'hauria revertit al proper `generate-faq.py`). Tot
+tancat i comprovat: `i18n-lint` (0 errors nous), `i18n-paritat` (tot al
+dia), `generate-faq.py` convergent.
+
+### El que queda per al 10, i per què no s'ha fet des d'aquí
+
+Quatre coses del pla original que necessiten una decisió o un material que
+no és a cap fitxer del repositori:
+
+1. **Sessió de fotos nova per a l'Escoleta (4-7 anys).** És contingut, no
+   codi — ja anotat més amunt, a «Pendent de material de l'Ana».
+2. **Els tres àudios de `/premidonaesport/patrocinis/`** que no existeixen
+   ni al repositori ni a la web oficial — ja anotat més amunt, a «Pendent
+   de decisió».
+3. **Decidir un flux d'inscripció en línia** (o almenys una sol·licitud
+   estructurada) per escurçar l'embut manual d'avui. És una decisió de
+   producte/negoci, no un arreglo tècnic puntual.
+4. **`/premsa/moments/` en castellà i anglès** i **retirar el mini-lloc
+   heretat `patrocinis/`** — mecànics però no fets encara; queden com a
+   feina pendent de la propera tanda.
+
+Amb les fases 1-3 fetes, la nota de velocitat, mantenibilitat i idiomes hauria
+de pujar; falta tornar a mesurar-la un cop publicat.
