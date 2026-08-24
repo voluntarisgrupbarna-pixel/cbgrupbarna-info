@@ -50,6 +50,21 @@ def wa(text):
     """Text codificat per a un enllaç de WhatsApp (?text=...)."""
     return quote(text)
 
+
+def hero_2x_width(slug):
+    """Amplada real del WebP @2x de la portada d'un article.
+
+    Cada original té una amplada diferent i no s'amplia mai per sobre de la
+    que té (regla del sistema de disseny), així que el `srcset` no pot dur un
+    número fix. Es llegeix del fitxer generat; si encara no existeix, es fa
+    servir el màxim que genera build-blog-heroes.py.
+    """
+    p = ROOT / "img" / "blog" / f"{slug}-hero@2x.webp"
+    if not p.exists():
+        return 1560
+    from PIL import Image
+    return Image.open(p).size[0]
+
 # ─────────────────────────────────────────────────────────────── esquelet ────
 
 def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None, lang="ca",
@@ -1847,8 +1862,14 @@ def build_article(a):
     ]}
     hero = ''
     if a.get("hero_alt"):
-        hero = (f'\n    <div class="phead-media"><img src="/img/blog/{a["slug"]}-hero.jpg" '
-                f'alt="{a["hero_alt"]}" loading="lazy" decoding="async" width="1200" height="675"></div>')
+        # Els WebP els genera scripts/build-blog-heroes.py a partir del JPG original.
+        w2 = hero_2x_width(a["slug"])
+        hero = (f'\n    <div class="phead-media"><img src="/img/blog/{a["slug"]}-hero.webp" '
+                f'srcset="/img/blog/{a["slug"]}-hero.webp 780w, '
+                f'/img/blog/{a["slug"]}-hero@2x.webp {w2}w" '
+                f'sizes="(max-width: 900px) 100vw, 780px" '
+                f'alt="{a["hero_alt"]}" fetchpriority="high" decoding="async" '
+                f'width="1200" height="675"></div>')
     if a.get("related"):
         rel = ''.join(
             f'<a class="card" href="{href}"><div class="card-body"><span class="card-tag">{tag}</span>'
