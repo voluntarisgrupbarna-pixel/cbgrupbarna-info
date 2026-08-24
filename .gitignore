@@ -8,3 +8,9 @@ fotos/arxiu/
 
 # Sortida de la bateria de proves: es regenera amb `node tests/audit-*.mjs`
 tests/out/
+
+# Les dependencies de les proves. Mai al repositori: un cop s'hi va colar com a
+# enllac simbolic cap a /tmp/node_modules i va deixar GitHub Pages sense poder
+# publicar durant un dia sencer.
+node_modules/
+node_modules
