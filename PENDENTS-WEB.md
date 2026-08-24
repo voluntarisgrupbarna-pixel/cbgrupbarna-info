@@ -616,3 +616,50 @@ els tres idiomes el mateix dia.
 > Amb aquestes nou respostes, l'auditoria passaria de 75 consultes resoltes
 > sobre 98 a prop de 90, i el bloc de diners —que és el que més es busca i el
 > que fa marxar més gent— quedaria tancat.
+
+
+---
+
+## Decisió · els preus no es publiquen (23/08/2026)
+
+**Decisió de l'Ana, presa i tancada.** Les quotes van per **franges d'edat i
+per categoria**, i **no es publiquen al web**: fer-ho donaria als clubs del
+voltant l'argument econòmic per competir amb el Barna pel preu. No es reobre.
+
+### Com queda contestada, sense cap xifra
+
+La pregunta «quant costa» segueix sent la que més es busca, i ara té resposta
+sencera. El que una família necessita per decidir no és el número: és saber
+que hi ha una estructura clara, que provar no costa res, que hi ha beques i
+que el preu de la SEVA categoria el té el mateix dia si escriu.
+
+> La quota va per franges d'edat i per categoria: l'Escoleta, els equips
+> federats i el campus tenen preus diferents […] No publiquem la taula de
+> preus al web, però te la donem de seguida: escriu-nos […] amb l'any de
+> naixement i et diem la quota exacta que li tocaria, el mateix dia. Abans de
+> decidir res, el primer entrenament és de prova i gratuït, i el club manté
+> beques socials perquè cap infant es quedi fora per motius econòmics.
+
+**Dir per què no hi és val més que ometre-la.** Un preu absent i sense
+explicació sembla un oblit —o que hi ha alquna cosa a amagar—; dit així, és
+una política, i la resposta acaba amb tres motius per venir igualment.
+
+Les tres versions d'idioma diuen el mateix, i la pregunta porta les paraules
+amb què es busca de debò: *apuntar-se*, *costa* i *temporada*.
+
+### El que segueix faltant NO és el preu
+
+Cinc de les nou pendents eren «de diners», i **cap necessita una xifra**:
+necessiten la POLÍTICA, que no dona cap argument econòmic a ningú.
+
+| Pregunta | Què cal, exactament |
+|---|---|
+| Què inclou la quota? | Si hi entren fitxa federativa, assegurança FCBQ, equipació i pistes. Serveix per comparar què hi ha inclòs, no per saber el preu. |
+| Com es paga? | Un sol pagament, mensual o trimestral, i si es domicilia. **Poder pagar a terminis és sovint el que decideix**, i dir-ho no dona cap xifra. |
+| Descompte per a germans? | Només si n'hi ha o no. «Sí, escriu-nos i te'l diem» respon sense publicar el percentatge. |
+| Baixa a mig any? | La política. És una de les pors que frenen una família que dubta. |
+| Equipació | Què és obligatori i on es compra. El preu es pot ometre igual que la quota. |
+
+I quatre de funcionament, que tampoc tenen res a veure amb diners: equip A i
+equip B, faltar a un entrenament, revisió mèdica i qui porta els nens als
+partits de fora.
