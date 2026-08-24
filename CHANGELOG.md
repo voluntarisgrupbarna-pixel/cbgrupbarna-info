@@ -22,6 +22,11 @@ només l'hi posa nom.
 
 ---
 
+## 1.0.1 — 2026-08-24
+
+Documentat a `PENDENTS-WEB.md` que aquest sistema de versions existeix i per
+què és un fitxer i no un tag de git. Cap canvi de codi.
+
 ## 1.0.0 — 2026-08-24
 
 Primera versió fixada. Marca l'estat del repositori just després de
