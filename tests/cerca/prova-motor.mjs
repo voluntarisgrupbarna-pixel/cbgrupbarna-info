@@ -128,6 +128,54 @@ const RESPOSTES = [
   ['en', 'how many trainings a week', 'training sessions'],
 ];
 
+// ── Auditoria del 24/08/2026 · les setze respostes equivocades ────────────
+// DOS CASOS QUE NO HI SÓN, i val més dir-ho que amagar-ho: «quin metro em va
+// bé» (8,7 punts) i «cómo doy de baja a mi hijo» es queden just per sota del
+// llindar quan la consulta porta una sola paraula de contingut i molta
+// palla. Totes dues tornen els enllaços bons. Abaixar el llindar per
+// guanyar-les en faria entrar de dolentes: està mesurat que per sota de 9
+// les respostes bones i les dolentes es barregen.
+// Cada línia d'aquí sota era una resposta que el cercador donava malament, o
+// una pregunta escrita al web que no sabia trobar. Van sortir de passar-hi
+// 111 consultes escrites com les escriu la gent. Si una torna a fallar, és
+// que s'ha desfet la correcció que la va arreglar.
+RESPOSTES.push(
+  // 1 · Perdonar faltes no pot voler dir canviar de tema. La regla d'arrel
+  //     només ajunta dues paraules si el començament compartit val per la
+  //     meitat de la paraula llarga (mateixaParaula, js/cerca.js).
+  ['ca', 'instalacions', null],       // abans: «Quan obren les inscripcions…»
+  ['es', 'precio', null],             // abans: «¿Qué premios hay?»
+  ['ca', 'entranador', null],         // abans: «Es pot entrar a mig curs?»
+  ['ca', 'equipasio', null],          // abans: «Quins equips té el club?»
+  ['ca', 'metro', 'metro'],
+  ['ca', 'qui es el president', 'presideix'],
+
+  // 2 · Una paraula que no surt a cap pregunta no és rara: és muda. El pes
+  //     per raresa la prenia per la paraula que decidia la consulta.
+  ['ca', 'quantes entrenadores teniu', 'entrenadores'],
+  ['ca', 'cal fer-se una prova medica', 'revisió mèdica'],
+
+  // 3 · Preguntes escrites al web que el cercador no trobava.
+  ['ca', 'com em dono de baixa', 'baixa'],
+  ['es', 'darse de baja a mitad de curso', 'baja'],
+  ['ca', 'es pot entrar a mitja temporada', 'mig curs'],
+  ['ca', 'que passa si falta a un entrenament', 'falta a un entrenament'],
+  ['es', 'dónde compro la ropa del club', 'equipación'],
+  ['es', 'hace falta certificado médico', 'revisión médica'],
+
+  // 4 · Contingut escrit a partir de l'auditoria: no hi havia resposta.
+  ['ca', 'com contacto amb el club', 'contacto amb el club'],
+  ['en', 'how do I contact the club', 'contact the club'],
+  ['es', 'dirección del pabellón', 'dirección del pabellón'],
+  ['ca', 'quan es el campus d\'estiu', 'campus d\'estiu'],
+  ['en', 'summer basketball camp dates', 'summer camp'],
+  ['ca', 'hi ha equip senior', 'sènior'],
+  ['ca', 'quants anys te el club', 'quants anys'],
+  ['ca', 'sou el millor club de barcelona', 'millor club'],
+  ['ca', 'que passa si es lesiona', 'lesiona'],
+  ['ca', 'quan juga el meu fill', 'quan juga el meu fill'],
+);
+
 console.log('\n---- respostes ----');
 for (const [lang, consulta, esperat] of RESPOSTES) {
   const r = motors[lang].resposta(consulta);

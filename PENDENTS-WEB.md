@@ -1251,3 +1251,54 @@ a «Pendent de material de l'Ana»; això és la resta.
   de velocitat és de navegador local. Els Core Web Vitals reals de Search
   Console —els que compten per al posicionament— triguen uns dies a
   reflectir el canvi de les imatges. Revisar quan hi hagi prou dades.
+
+## 24-08-2026 — El que queda obert d'aquesta tanda de traducció
+
+Tres coses apuntades i no fetes, perquè cap de les tres és una decisió tècnica:
+
+- **Redirect de L'Aquàrium de Barcelona.** Quan es va esborrar el partner, les
+  seves tres fitxes (`ca`, `es`, `en`) van passar a 404. GitHub Pages no fa
+  redireccions de servidor, així que l'única manera és una pàgina estàtica amb
+  `<meta http-equiv="refresh">`, que ja és el mecanisme que fem servir a la
+  resta del web per a aquest cas (vegeu `web-cbgb`). No s'ha fet perquè no hi
+  ha cap enllaç conegut, intern ni extern, que hi apunti — les tres fitxes
+  només sortien del propi `partits/` i del sitemap, i totes dues coses ja
+  estan netes. Si l'Ana sap d'algun enllaç extern (una nota de premsa, un post
+  antic) que encara hi porti gent, avisa-ho i es posa el redirect en cinc
+  minuts.
+- **Logotip de la Wilson**, ja apuntat més amunt, a «Pendent de material de
+  l'Ana».
+- **La skill `mapa-web-cbgb` parla d'una desincronització que ja no existeix.**
+  Diu que `/femeni/` és «encara sense traduir» com a exemple del que passa
+  quan es toca una pàgina catalana i no es reflecteix a `/es/` i `/en/`. Des
+  d'aquesta tanda, `/femeni/` està traduïda sencera i, sobretot, ja no cal fer
+  aquesta comprovació a mà: `i18n-paritat.py` i `i18n-contingut.py` ho vigilen
+  soles a cada `push` i bloquegen el pull request si es desincronitza. Cal
+  actualitzar aquell paràgraf perquè no enviï a ningú a buscar un problema que
+  ja no hi és.
+
+## 24-08-2026 — Comença el versionat: `VERSION` i `CHANGELOG.md`
+
+Fins ara l'única manera de dir «això és el que hi havia publicat en tal data»
+era el missatge d'un commit. A partir d'ara hi ha una versió amb nom:
+**1.0.0**, fixada al commit `205f0861` — el cercador intel·ligent, ja
+publicat i comprovat.
+
+**Com queda.** `VERSION`, a l'arrel, porta el número. `CHANGELOG.md` en porta
+l'explicació i la convenció, a l'estil habitual `MAJOR.MENOR.PEDAÇ`: un pedaç
+per un arreglo o contingut nou que no canvia com funciona res, un menor per
+una funcionalitat que s'afegeix sense trencar la que ja hi havia, un major
+per un canvi de com es fa servir la web o el repositori. Cada versió nova
+puja `VERSION`, hi afegeix l'entrada a `CHANGELOG.md` i es publica a `main`
+en el mateix commit.
+
+**Per què no és un tag de git.** Es va intentar primer amb un tag anotat
+(`v1.0-cercador`): el `git push` del tag el va rebutjar GitHub amb un 403, i
+no hi ha cap eina de GitHub disponible en aquesta sessió per crear-ne un per
+API. Un fitxer dins del repositori no depèn d'aquest permís i, de retruc,
+queda a l'historial de qualsevol clonatge sense haver de demanar els tags a
+part.
+
+**Norma confirmada per l'Ana:** a partir d'ara, cada vegada que es tanqui una
+feina es puja la subversió corresponent (`VERSION` + entrada a
+`CHANGELOG.md`) en el mateix commit, sense haver-ho de demanar cada cop.
