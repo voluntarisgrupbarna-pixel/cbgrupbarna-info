@@ -121,6 +121,18 @@ formulari**.
 El disseny del formulari a Brevo **és igual**: ningú el veurà mai. Qui l'omple
 ho fa a la web del club; Brevo només rep les dades.
 
+**Dues coses que et poden bloquejar:**
+
+- ⚠️ **El captcha ha d'estar DESACTIVAT.** Si actives la protecció reCAPTCHA del
+  formulari, Brevo espera un testimoni que la nostra pàgina no li pot donar i
+  **rebutja totes les altes en silenci**. El parany per a robots que sí que
+  funciona ja el porta el codi: el camp buit `email_address_check`.
+- ⚠️ **El doble opt-in necessita plantilla.** Als dos formularis que en porten
+  (Newsletter i Galeria), Brevo demana quina plantilla envia per confirmar i a
+  quina pàgina va la gent després de clicar. Si no les tries, el formulari no es
+  deixa activar. La plantilla de confirmació és a
+  [`/BREVO-CORREUS.md`](../BREVO-CORREUS.md).
+
 ### Camps de cada formulari
 
 **Tots** els formularis han de portar, a més dels seus, aquests sis camps
