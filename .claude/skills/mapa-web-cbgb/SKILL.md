@@ -54,10 +54,13 @@ que es serveix. Allotjat a **GitHub Pages**, domini propi via `CNAME`
   font per a peces que necessiten dades del club fora del propi HTML.
 - **Tres idiomes**: `ca` a l'arrel (idioma per defecte), **`/es/`** i
   **`/en/`** com a carpetes mirall. **No és un framework d'i18n**: cada
-  traducció és un fitxer HTML independent que cal actualitzar a mà. Quan es
-  canvia una pàgina en català, comprovar si `/es/` i `/en/` en tenen còpia i
-  si cal reflectir-hi el canvi (sovint no es fa i queden desincronitzades —
-  vegeu el cas `/femeni/` a `PENDENTS-WEB.md`, encara sense traduir).
+  traducció és un fitxer HTML independent. Quan es canvia una pàgina en
+  català, cal reflectir-ho a `/es/` i `/en/` (amb `scripts/i18n-extreu.py` i
+  `scripts/i18n-munta.py`; vegeu la secció «Els tres idiomes van junts» de
+  la skill `web-cbgb`). No cal comprovar-ho a mà:
+  `scripts/i18n-paritat.py` i `scripts/i18n-contingut.py` vigilen les tres
+  versions a cada `push` i bloquegen el pull request si es desincronitzen o
+  si una traducció diu menys que l'original.
 
 ---
 
