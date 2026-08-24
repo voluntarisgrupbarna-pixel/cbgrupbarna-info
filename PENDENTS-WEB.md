@@ -663,3 +663,50 @@ necessiten la POLÍTICA, que no dona cap argument econòmic a ningú.
 I quatre de funcionament, que tampoc tenen res a veure amb diners: equip A i
 equip B, faltar a un entrenament, revisió mèdica i qui porta els nens als
 partits de fora.
+
+
+---
+
+## Tancat · les nou preguntes, contestades (24/08/2026)
+
+L'Ana les va contestar totes. **Cap pregunta del web queda sense resposta.**
+
+| | Resposta publicada |
+|---|---|
+| Què inclou la quota? | Tot, excepte l'equipació, que va a part |
+| Com es paga? | **Mensualment**, i l'import depèn de l'edat i la categoria |
+| Descompte per a germans? | **Sí** (el percentatge, no; es diu escrivint) |
+| Baixa a mig any? | La temporada es paga sencera |
+| Equipació | Uns 150 €, a **Wintym**, des del seu web |
+| Equip A i equip B | L'any de naixement decideix la categoria; dins d'una categoria, **l'entrenador** decideix segons el nivell |
+| Faltar a un entrenament | Avisar l'entrenador; per justificar-ho, **justificant mèdic** |
+| Revisió mèdica | **Sí, i la gestiona el club: és gratuïta per a les famílies** |
+| Desplaçaments | **Les famílies**, organitzant-se entre els pares del mateix equip |
+
+### Tres coses que val la pena mirar
+
+- **La revisió mèdica gratuïta i gestionada pel club era un actiu amagat.**
+  És una fricció que altres clubs deixen a la família (buscar-la, pagar-la,
+  demanar dia) i aquí no existeix. Ara ho diu la web.
+- **El pagament mensual, també.** Poder-ho pagar a terminis és sovint el que
+  decideix una família que dubta, i no dona cap argument econòmic a ningú.
+- **L'equip A i B** s'ha redactat perquè no soni a divisió entre qui val i qui
+  no: són la mateixa categoria en competicions diferents, tothom entrena,
+  tothom juga i es pot canviar al llarg de la formació.
+
+### Wintym
+
+S'anomena com a botiga oficial però **no s'hi enllaça**. La decisió de no
+enllaçar-la (`MIGRACIO-WEB-ANTIGA.md`, 15/08/2026) es va prendre perquè no es
+podia confirmar si la botiga seguia activa; l'Ana ha confirmat que sí, però
+l'enllaç no s'afegeix sense dir-ho expressament. **Si es vol, és una línia.**
+
+### On queda el cercador
+
+| | Al començar | Ara |
+|---|---|---|
+| Consultes provades | 85 | **109** |
+| Amb resposta a dalt de tot | 46 | **90** |
+| Només amb enllaços | 36 | **17** |
+| Sense cap resultat | 2 | **0** |
+| Preguntes pendents d'una dada | 14 | **0** |

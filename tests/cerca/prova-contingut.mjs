@@ -160,8 +160,23 @@ const CASOS = [
   ['ca', 'asdfghjkl', 'res'],
   ['ca', 'zzzz', 'res'],
 
-  // ── Els 14 pendents: no han de treure una resposta que no toca
-  ['ca', 'descompte per germans', null],
+  // ── Les nou que esperaven una dada del club, contestades el 24/08/2026.
+  // Fins aquell dia cap d'aquestes tenia resposta enlloc del web.
+  ['ca', 'descompte per germans', 'resposta'],
+  ['es', 'descuento para hermanos', 'resposta'],
+  ['en', 'sibling discount', 'resposta'],
+  ['ca', 'que inclou la quota', 'resposta'],
+  ['ca', 'com es paga la quota', 'resposta'],
+  ['es', 'se paga mensual', 'resposta'],
+  ['ca', 'si ens donem de baixa a mig any', 'resposta'],
+  ['ca', 'quant costa l equipacio', 'resposta'],
+  ['es', 'donde se compra la equipacion', 'resposta'],
+  ['ca', 'que vol dir equip a i equip b', 'resposta'],
+  ['ca', 'qui decideix a quin equip va', 'resposta'],
+  ['ca', 'cal revisio medica', 'resposta'],
+  ['es', 'hace falta revision medica', 'resposta'],
+  ['ca', 'que faig si un dia no pot anar a entrenar', 'resposta'],
+  ['ca', 'qui porta els nens als partits de fora', 'resposta'],
   // Contestades el 23/08/2026 amb dades que el web ja tenia i no feia servir:
   // els 274 partits de partits/data.json surten 137 a casa i 137 a fora.
   ['ca', 'quants partits es juguen fora', 'resposta'],
@@ -172,11 +187,6 @@ const CASOS = [
   ['ca', 'vull ser voluntari', 'resposta'],
   ['ca', 'quant costa la temporada', 'resposta'],
   ['es', 'cuanto cuesta la temporada', 'resposta'],
-  // Aquesta segueix sense resposta a posta: qui porta els nens no ho diu
-  // enlloc el web, i inventar-ho seria pitjor.
-  ['ca', 'qui porta els nens als partits de fora', null],
-  ['ca', 'que faig si un dia no pot anar', null],
-  ['ca', 'cal revisio medica', null],
   ['ca', 'com em faig entrenador', null],
 ];
 

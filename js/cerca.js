@@ -568,7 +568,7 @@
       // «empezar», totes dues de set lletres) i quatre lletres no ho veuen.
       // Sense el límit de mida, «president» casava amb «premis» i la cerca
       // responia «Quins premis hi ha?» a qui preguntava per la presidència.
-      if (m.length >= 6 && terme.length >= 6 && m.slice(0, 3) === tres &&
+      if (m.length >= 5 && terme.length >= 5 && m.slice(0, 3) === tres &&
           Math.abs(m.length - terme.length) <= 2) return true;
     }
     return false;
