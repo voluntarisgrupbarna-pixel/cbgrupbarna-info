@@ -440,7 +440,6 @@ PARTNERS = [
     ("ovella-negra.png", "Ovella Negra", "https://www.instagram.com/ovellanegrabcn/"),
     ("romeo-abogados.png", "Romeo Abogados", "https://www.instagram.com/romeoabogados/"),
     ("fundacio-mullor.png", "Fundació Mullor", None),
-    ("l-aquarium-de-barcelona.png", "L'Aquàrium de Barcelona", None),
     (None, "Wilson", None),
     ("eix-comercial-sant-marti.png", "Eix Comercial Sant Martí", None),
     ("gbk-globabasket.png", "GBK · Globasket", "https://www.instagram.com/globasket/"),
@@ -764,11 +763,6 @@ PARTNER_INFO = {
         "Mullor, amb seus a Barcelona, Lleida i Madrid. Desenvolupa programes de formació i "
         "inserció laboral per a joves en risc d'exclusió social i joves amb discapacitat "
         "intel·lectual."},
-    "l-aquarium-de-barcelona": {"web": "https://www.aquariumbcn.com/", "phone": "932 217 474",
-        "email": "info@aquariumbcn.com", "desc":
-        "L'Aquàrium de Barcelona és un centre marí al Port Vell, especialitzat en fauna del "
-        "Mediterrani i un dels aquaris més grans d'Europa, amb més d'11.000 exemplars de 450 "
-        "espècies. El seu Oceanari té un túnel submarí de vidre de 80 metres."},
     "eix-comercial-sant-marti": {"web": "https://www.santmartieix.com/", "phone": "933 057 144",
         "email": "hola@santmartieix.com", "desc":
         "L'Associació Sant Martí Eix Comercial és una associació de comerços i serveis del "
@@ -2434,7 +2428,7 @@ CATEGORY_PREFIXES = ["Sènior", "Júnior", "Cadet", "Infantil", "Preinfantil", "
 
 def build_calendaris():
     url = SITE + "/partits/calendaris/"
-    title = "Dies de partit per equip · calendari en PDF | CB Grup Barna"
+    title = "Calendari per equip · dies de partit en PDF | CB Grup Barna"
     desc = ("Descarrega el calendari complet de la temporada del teu equip: sèniors, júniors, cadets i "
             "infantils del CB Grup Barna. Es genera cada dia a partir del calendari oficial de la FCBQ.")
 
@@ -2459,7 +2453,7 @@ def build_calendaris():
         {"@type": "CollectionPage", "@id": url + "#calendaris", "name": title, "description": desc, "url": url,
          "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"}},
         faq_ld,
-        BREADCRUMB([("CB Grup Barna", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", "/partits/calendaris/")]),
+        BREADCRUMB([("CB Grup Barna", "/"), ("Calendari", "/partits/"), ("Calendari per equip", "/partits/calendaris/")]),
     ]}
 
     seo_snapshot = ""
@@ -2471,7 +2465,7 @@ def build_calendaris():
     except OSError:
         pass
     body = f"""
-{crumbs([("Inici", "/"), ("Dies de partit", "/partits/"), ("Dies de partit per equip", None)])}
+{crumbs([("Inici", "/"), ("Calendari", "/partits/"), ("Calendari per equip", None)])}
 <div class="wrap">
   <div class="phead narrow">
     <p class="eyebrow red" id="cal-temporada">Temporada</p>

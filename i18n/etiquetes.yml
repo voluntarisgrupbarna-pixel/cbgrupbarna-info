@@ -11,41 +11,32 @@
 # llista. Comença per /partits/, que és on hi havia més sinònims: el català
 # ja estava net, però el castellà i l'anglès tenien dos i tres noms per al
 # mateix enllaç.
+#
+# AGOST DEL 2026 · la direcció del club decideix que l'etiqueta és
+# «Calendari», i el mateix en castellà i en anglès. Abans era «Dies de
+# partit», que passa a la llista de prohibides juntament amb «Partits i
+# resultats» i «Partits i events». Als <title> i a les descripcions s'hi pot
+# seguir deixant «dies de partit» com a terme de cerca.
 
 enllacos:
-  # Actualitzat el 23/08/2026, pel mateix motiu que /partits/calendaris/ aquí
-  # sota: la direcció del club va decidir l'agost del 2026 que l'etiqueta és
-  # «Calendari». El català ja ho deia a 240 enllaços; el castellà i l'anglès
-  # s'havien quedat amb el nom antic, i aquesta llista els hi mantenia. Ara
-  # les tres versions diuen el mateix.
   /partits/:
     ca: ["Calendari"]
     es: ["Calendario"]
     en: ["Calendar"]
     # Variants que s'han de corregir quan es toqui la pàgina on surten.
-    # «Dies de partit» hi és perquè era l'etiqueta anterior: als <title> i a
-    # les descripcions s'hi pot quedar com a terme de cerca, però ja no
-    # nomena l'enllaç.
     prohibides:
       ca: ["Dies de partit", "Partits i resultats", "Partits i events"]
-      es: ["Partidos y resultados", "Días de partido", "Partidos"]
-      en: ["Games and results", "Matches and results", "Match days", "Matches"]
+      es: ["Días de partido", "Partidos y resultados", "Partidos"]
+      en: ["Match days", "Games and results", "Matches and results", "Matches"]
 
-  # Actualitzat el 23/08/2026. Aquest fitxer s'havia quedat amb el vocabulari
-  # anterior a la decisió de la direcció del club de l'agost del 2026, que va
-  # canviar l'etiqueta a «Calendari» (i «Calendari per equip» per a aquesta
-  # pàgina). El resultat era que el lint donava 91 errors demanant el nom
-  # antic a pàgines que ja feien servir el nou: la web tenia raó i la llista,
-  # no. «Dies de partit» segueix valent als <title> i a les descripcions com a
-  # terme de cerca; el que no pot fer és nomenar l'enllaç.
   /partits/calendaris/:
     ca: ["Calendari per equip"]
     es: ["Calendario por equipo"]
-    en: ["Calendar by team"]
+    en: ["Team calendars"]
     prohibides:
-      ca: ["Calendaris per equip", "Dies de partit per equip"]
-      es: ["Calendarios por equipo", "Días de partido por equipo"]
-      en: ["Team calendars", "Calendars by team", "Match days by team"]
+      ca: ["Dies de partit per equip", "Calendaris per equip"]
+      es: ["Días de partido por equipo", "Calendarios por equipo"]
+      en: ["Match days by team", "Calendars by team"]
 
   /escoleta/:
     ca: ["Escoleta"]
@@ -53,8 +44,8 @@ enllacos:
     en: ["Escoleta"]
 
 # Text que acompanya un enllaç però no el nomena —botons de descàrrega,
-# subscripcions .ics, peus de foto— i que pot dir "calendari" amb tota la
-# raó, perquè allà un calendari és literalment el que et descarregues.
+# subscripcions .ics, peus de foto— i que no s'ha de comparar amb el
+# vocabulari, perquè allà el que hi diu descriu el fitxer, no la secció.
 excepcions_de_text:
   - "(.ics)"
   - "PDF"

@@ -26,8 +26,8 @@ rutes:
   es: /es/3x3/
   en: /en/3x3/
 - ca: /avis-legal/
-  es: null
-  en: null
+  es: /es/aviso-legal/
+  en: /en/legal-notice/
 - ca: /basquet-formatiu/
   es: /es/baloncesto-formativo/
   en: /en/development-basketball/
@@ -38,26 +38,26 @@ rutes:
   es: /es/blog/a-que-edad-empezar-baloncesto/
   en: /en/blog/what-age-to-start-basketball/
 - ca: /blog/barna-amb-dades-informe/
-  es: null
-  en: null
+  es: /es/blog/barna-con-datos-informe/
+  en: /en/blog/barna-with-data-report/
 - ca: /blog/basquet-base-sant-marti-clot/
   es: /es/blog/baloncesto-base-sant-marti-clot/
   en: /en/blog/youth-basketball-sant-marti-clot/
 - ca: /blog/basquet-femeni-barcelona-0-75-per-cent/
-  es: null
-  en: null
+  es: /es/blog/baloncesto-femenino-barcelona-0-75-por-ciento/
+  en: /en/blog/womens-basketball-barcelona-0-75-per-cent/
 - ca: /blog/basquet-inclusiu-barna-magics/
-  es: null
-  en: null
+  es: /es/blog/baloncesto-inclusivo-barna-magics/
+  en: /en/blog/inclusive-basketball-barna-magics/
 - ca: /blog/campus-basquet-barcelona-guia/
   es: /es/blog/guia-campus-baloncesto-barcelona/
   en: /en/blog/basketball-camp-barcelona-guide/
 - ca: /blog/campus-time-chamber-2026/
-  es: null
-  en: null
+  es: /es/blog/campus-time-chamber-2026/
+  en: /en/blog/time-chamber-camp-2026/
 - ca: /blog/club-basquet-segur-igualtat-families/
-  es: null
-  en: null
+  es: /es/blog/club-baloncesto-seguro-igualdad-familias/
+  en: /en/blog/safe-equal-basketball-club-families/
 - ca: /blog/club-formacio-i-competitiu-catalunya/
   es: /es/blog/club-formacion-y-competitivo-cataluna/
   en: /en/blog/formation-and-competitive-club-catalonia/
@@ -66,31 +66,34 @@ rutes:
   en: /en/blog/how-to-choose-a-basketball-school-barcelona/
 - ca: /blog/cultura-esforc-club-progres/
   es: /es/blog/cultura-esfuerzo-club-progreso/
-  en: null
+  en: /en/blog/culture-of-effort-progress/
 - ca: /blog/entrenadores-basquet-barcelona/
-  es: null
-  en: null
+  es: /es/blog/entrenadoras-baloncesto-barcelona/
+  en: /en/blog/women-basketball-coaches-barcelona/
 - ca: /blog/equipacio-femenina-basquet/
-  es: null
-  en: null
+  es: /es/blog/equipacion-femenina-baloncesto/
+  en: /en/blog/womens-basketball-kit-design/
 - ca: /blog/fons-barna-8m-fcbq/
-  es: null
-  en: null
+  es: /es/blog/fons-barna-8m-fcbq/
+  en: /en/blog/fons-barna-8m-fcbq/
 - ca: /blog/nova-farmacia-clot-nou-partner-barna/
-  es: null
-  en: null
+  es: /es/blog/nueva-farmacia-clot-nuevo-partner-barna/
+  en: /en/blog/nova-farmacia-clot-new-cb-grup-barna-partner/
 - ca: /blog/patrocinadors-partners-cb-grup-barna/
-  es: null
-  en: null
+  es: /es/blog/patrocinadores-partners-cb-grup-barna/
+  en: /en/blog/cb-grup-barna-sponsors-and-partners/
 - ca: /blog/patrocinar-club-basquet-barri/
-  es: null
-  en: null
+  es: /es/blog/patrocinar-club-baloncesto-barrio/
+  en: /en/blog/why-sponsor-a-neighbourhood-basketball-club/
 - ca: /blog/per-que-les-noies-deixen-el-basquet/
-  es: null
-  en: null
+  es: /es/blog/por-que-las-chicas-dejan-el-baloncesto/
+  en: /en/blog/why-girls-quit-basketball/
 - ca: /blog/proteccio-menor-pla-igualtat/
-  es: null
-  en: null
+  es: /es/blog/proteccion-menor-plan-igualdad/
+  en: /en/blog/child-protection-equality-plan/
+- ca: /blog/quants-equips-te-el-barna/
+  es: /es/blog/cuantos-equipos-tiene-el-barna/
+  en: /en/blog/how-many-teams-does-the-barna-have/
 - ca: /blog/que-es-basquet-3x3/
   es: /es/blog/que-es-el-baloncesto-3x3/
   en: /en/blog/what-is-3x3-basketball/
@@ -100,18 +103,21 @@ rutes:
 - ca: /briefing/materials.html
   es: /es/briefing/materials.html
   en: /en/briefing/materials.html
+- ca: /bustia/
+  es: /es/buzon/
+  en: /en/suggestions/
 - ca: /campus-basquet-barcelona/
   es: /es/campus-baloncesto-barcelona/
   en: /en/basketball-camps-barcelona/
 - ca: /campus-nadal-basquet-barcelona/
   es: /es/campus-navidad-baloncesto-barcelona/
-  en: null
+  en: /en/christmas-basketball-camp-barcelona/
 - ca: /campus/
   es: /es/campus/
   en: /en/campus/
 - ca: /campus/setmana-santa/
-  es: null
-  en: null
+  es: /es/campus/semana-santa/
+  en: /en/campus/easter/
 - ca: /cerca/
   es: /es/busqueda/
   en: /en/search/
@@ -125,20 +131,26 @@ rutes:
   es: /es/documentos/
   en: /en/documents/
 - ca: /empreses/
-  es: null
-  en: null
+  es: /es/empresas/
+  en: /en/companies/
 - ca: /escola-basquet-barcelona/
   es: /es/escola-baloncesto-barcelona/
   en: /en/basketball-school-barcelona/
 - ca: /escoleta/
   es: /es/escoleta/
   en: /en/escoleta/
+- ca: /escriu-nos/
+  es: /es/escribenos/
+  en: /en/contact-us/
 - ca: /faq/
   es: /es/faq/
   en: /en/faq/
 - ca: /femeni/
   es: /es/baloncesto-femenino/
   en: /en/womens-basketball/
+- ca: /femeni/el-metode-barna/
+  es: /es/baloncesto-femenino/el-metodo-barna/
+  en: /en/womens-basketball/the-barna-method/
 - ca: /fotos-3x3/
   es: /es/fotos-3x3/
   en: /en/fotos-3x3/
@@ -167,17 +179,20 @@ rutes:
   es: /es/jugadors/
   en: /en/jugadors/
 - ca: /magics/
-  es: null
-  en: null
+  es: /es/magics/
+  en: /en/magics/
 - ca: /mascota/
   es: /es/mascota/
   en: /en/mascota/
 - ca: /model-formatiu/
-  es: null
-  en: null
+  es: /es/modelo-formativo/
+  en: /en/development-model/
+- ca: /newsletter/
+  es: /es/newsletter/
+  en: /en/newsletter/
 - ca: /opina/
-  es: null
-  en: null
+  es: /es/opina/
+  en: /en/opina/
 - ca: /organigrama/
   es: /es/organigrama/
   en: /en/organisation/
@@ -287,8 +302,8 @@ rutes:
   es: /es/patrocinadors/partners/mercat-dels-encants/
   en: /en/patrocinadors/partners/mercat-dels-encants/
 - ca: /patrocinadors/partners/nova-farmacia-clot/
-  es: null
-  en: null
+  es: /es/patrocinadors/partners/nova-farmacia-clot/
+  en: /en/patrocinadors/partners/nova-farmacia-clot/
 - ca: /patrocinadors/partners/ovella-negra/
   es: /es/patrocinadors/partners/ovella-negra/
   en: /en/patrocinadors/partners/ovella-negra/
@@ -311,17 +326,17 @@ rutes:
   es: /es/patrocinadors/partners/westfield-glories/
   en: /en/patrocinadors/partners/westfield-glories/
 - ca: /patrocinadors/partners/wilson/
-  es: null
-  en: null
+  es: /es/patrocinadors/partners/wilson/
+  en: /en/patrocinadors/partners/wilson/
 - ca: /politica-de-privacitat/
-  es: null
-  en: null
+  es: /es/politica-de-privacidad/
+  en: /en/privacy-policy/
 - ca: /portes-obertes/
   es: /es/puertas-abiertas/
   en: /en/open-days/
 - ca: /posicionament/
-  es: null
-  en: null
+  es: /es/posicionamiento/
+  en: /en/club-positioning/
 - ca: /premidonaesport/
   es: /es/premidonaesport/
   en: /en/premidonaesport/
@@ -395,41 +410,44 @@ rutes:
   es: /es/premsa/
   en: /en/premsa/
 - ca: /premsa/arxiu/
-  es: null
-  en: null
+  es: /es/premsa/archivo/
+  en: /en/premsa/archive/
 - ca: /premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/
   es: /es/premsa/guia-clot-sesenta-anos/
   en: /en/premsa/clot-guide-sixty-years/
 - ca: /premsa/instagram/
-  es: null
-  en: null
+  es: /es/premsa/instagram/
+  en: /en/premsa/instagram/
 - ca: /premsa/moments/
-  es: null
-  en: null
+  es: /es/premsa/momentos/
+  en: /en/premsa/highlights/
 - ca: /presentacio/
-  es: null
-  en: null
+  es: /es/presentacion/
+  en: /en/presentation/
 - ca: /presentacions/
-  es: null
-  en: null
+  es: /es/presentaciones/
+  en: /en/presentations/
 - ca: /presentacions/campus-timechamber/
-  es: null
-  en: null
+  es: /es/presentaciones/campus-timechamber/
+  en: /en/presentations/campus-timechamber/
 - ca: /presentacions/dossier-patrocinis/
-  es: null
-  en: null
+  es: /es/presentaciones/dosier-patrocinios/
+  en: /en/presentations/sponsorship-pack/
 - ca: /presentacions/evidencia-i-posicio/
-  es: null
-  en: null
+  es: /es/presentaciones/evidencia-y-posicion/
+  en: /en/presentations/evidence-and-position/
 - ca: /presentacions/fons-barna-8m/
-  es: null
-  en: null
+  es: /es/presentaciones/fons-barna-8m/
+  en: /en/presentations/fons-barna-8m/
 - ca: /presentacions/visio-global/
-  es: null
-  en: null
+  es: /es/presentaciones/vision-global/
+  en: /en/presentations/global-view/
 - ca: /proteccio-menor/
   es: /es/proteccion-menor/
   en: /en/child-protection/
+- ca: /proteccio-menor/comunicar/
+  es: /es/proteccion-menor/comunicar/
+  en: /en/child-protection/report/
 - ca: /seniors/
   es: /es/seniors/
   en: /en/seniors/
@@ -438,6 +456,6 @@ rutes:
   en: /en/basketball-skills-training-barcelona/
 orfes:
   es:
-  - /es/baloncesto-femenino/el-metodo-barna/
+  - /es/patrocinadors/partners/l-aquarium-de-barcelona/
   en:
-  - /en/womens-basketball/the-barna-method/
+  - /en/patrocinadors/partners/l-aquarium-de-barcelona/

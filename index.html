@@ -504,7 +504,7 @@
         {
           "@type": "SiteNavigationElement",
           "position": 2,
-          "name": "Dies de partit",
+          "name": "Calendari",
           "url": "https://cbgrupbarna.info/partits/",
           "description": "Calendari i resultats de tots els equips federats del club."
         },
@@ -1105,6 +1105,18 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     .form-blocked a { font-weight: 600; white-space: nowrap; }
     .req { color: var(--red); font-weight: 700; }
     .form-legend { font-size: 12.5px; color: var(--ink-2); margin: 0 0 16px; }
+
+/* ==== CRIDA DE COMUNITAT · mateixa peça que a css/barna.css ==== */
+.comunitat { background: var(--ink); color: #fff; }
+.comunitat-in { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.18); }
+@media (max-width: 700px) { .comunitat-in { grid-template-columns: 1fr; } }
+.comunitat-porta { display: block; background: var(--ink); padding: clamp(24px, 3.4vw, 38px) clamp(20px, 5vw, 60px); transition: background 0.35s var(--ease); }
+.comunitat-porta:hover { background: #000; }
+.comunitat-porta--red { background: var(--red); }
+.comunitat-porta--red:hover { background: var(--red-dark); }
+.comunitat-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.6vw, 28px); letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; }
+.comunitat-s { display: block; margin-top: 9px; font-size: 12.5px; color: rgba(255,255,255,0.74); }
+.comunitat-porta--red .comunitat-s { color: rgba(255,255,255,0.86); }
 </style>
 <link rel="stylesheet" href="/css/cerca.css">
 </head>
@@ -1116,13 +1128,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <div class="tk-trk">
     <div class="tk-cnt">
       <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
-      <span class="tk-it">Dies de partit actualitzats</span>
+      <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
       <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
-      <span class="tk-it">Dies de partit actualitzats</span>
+      <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
       <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
-      <span class="tk-it">Dies de partit actualitzats</span>
+      <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
     </div>
   </div>
@@ -1337,9 +1349,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <span class="franja-tx"><span class="franja-t">Galeria</span><span class="franja-s">Les fotos de la temporada.</span></span>
       <span class="franja-go"><em>Dies de partit i events</em><i></i></span>
     </a>
-    <a class="franja franja--red" href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="franja-whatsapp">
-      <span class="franja-tx"><span class="franja-t">Escriu-nos</span><span class="franja-s">Et responem el mateix dia.</span></span>
-      <span class="franja-go"><em>WhatsApp</em><i></i></span>
+    <a class="franja franja--red" href="/escriu-nos/" data-cta="franja-escriu-nos">
+      <span class="franja-tx"><span class="franja-t">Escriu-nos</span><span class="franja-s">Demana informació —et responem el mateix dia— o deixa'ns un suggeriment anònim.</span></span>
+      <span class="franja-go"><em>Amb formulari</em><i></i></span>
     </a>
     <p class="lg-foot">@cbgrupbarna · La Nau del Clot · Sant Martí · #SomClot</p>
   </section>
@@ -1833,6 +1845,20 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 </main>
 
 <!-- ==== PEU ==== -->
+<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
+<section class="comunitat" aria-label="Segueix el CB Grup Barna">
+  <div class="comunitat-in">
+    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
+      <span class="comunitat-t">Segueix-nos a Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el dia a dia del club, cada setmana.</span>
+    </a>
+    <a class="comunitat-porta comunitat-porta--red" href="/newsletter/" data-cta="crida-newsletter">
+      <span class="comunitat-t">Apunta't a la newsletter</span>
+      <span class="comunitat-s">Un correu al mes amb el que val la pena saber. Res més.</span>
+    </a>
+  </div>
+</section>
+<!-- /CRIDA DE COMUNITAT -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-partners">

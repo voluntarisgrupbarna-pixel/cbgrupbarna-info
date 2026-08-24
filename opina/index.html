@@ -8,6 +8,10 @@
 <meta name="description" content="Ajuda el CB Grup Barna a arribar a 300 ressenyes a Google. Menys d'1 minut: toca el botó, tria 5 estrelles i escriu dues línies.">
 
 <link rel="canonical" href="https://cbgrupbarna.info/opina/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/opina/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/opina/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/opina/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/opina/">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -313,6 +317,49 @@ details.tpl[open] summary::after { content: '–'; }
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+
+/* ==== CRIDA DE COMUNITAT · mateixa peça que a css/barna.css ==== */
+.comunitat { background: var(--ink); color: #fff; }
+.comunitat-in { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.18); }
+@media (max-width: 700px) { .comunitat-in { grid-template-columns: 1fr; } }
+.comunitat-porta { display: block; background: var(--ink); padding: clamp(24px, 3.4vw, 38px) clamp(20px, 5vw, 60px); transition: background 0.35s var(--ease); }
+.comunitat-porta:hover { background: #000; }
+.comunitat-porta--red { background: var(--red); }
+.comunitat-porta--red:hover { background: var(--red-dark); }
+.comunitat-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.6vw, 28px); letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; }
+.comunitat-s { display: block; margin-top: 9px; font-size: 12.5px; color: rgba(255,255,255,0.74); }
+.comunitat-porta--red .comunitat-s { color: rgba(255,255,255,0.86); }
+
+/* ==== RESSENYA AL LLOC · estrelles, nom i correu, sense marxar d'aquí ====
+   El formulari de Google no es pot encastar (ho bloqueja Google), així que
+   aquí es recull la ressenya i, un cop enviada, s'ofereix publicar-la també
+   a Google, que és el que compta per al cercador. */
+.rs { border: 1px solid var(--line); padding: clamp(22px, 3.4vw, 40px); margin-top: clamp(26px, 4vw, 44px); }
+.rs h2 { font-size: clamp(17px, 2.3vw, 24px); }
+.rs p.rs-s { font-size: 13.5px; color: var(--ink-2); margin-top: 12px; max-width: 58ch; }
+.rs-form { margin-top: 22px; }
+.rs-row { margin-bottom: 16px; }
+.rs-row label { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 7px; }
+.rs-row input, .rs-row textarea { width: 100%; min-height: 48px; padding: 13px 14px; font-family: var(--body); font-size: 15px; font-weight: 300; color: var(--ink); background: var(--paper); border: 1px solid var(--line); }
+.rs-row textarea { min-height: 130px; resize: vertical; }
+.rs-row input:focus, .rs-row textarea:focus { outline: 2px solid var(--red); outline-offset: 1px; border-color: var(--red); }
+.rs-stars { position: relative; display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; }
+/* Els radios són invisibles però han de seguir rebent el focus del teclat;
+   el que no poden fer és quedar-se a sobre de les estrelles i menjar-se el
+   clic, que és el que passava. */
+.rs-stars input { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.rs-stars label { font-size: 30px; line-height: 1; color: var(--line); cursor: pointer; margin: 0; letter-spacing: 0; transition: color 0.2s; }
+.rs-stars label span { position: absolute; left: -9999px; }
+.rs-stars input:checked ~ label, .rs-stars label:hover, .rs-stars label:hover ~ label { color: var(--red); }
+.rs-stars input:focus-visible + label { outline: 2px solid var(--red); outline-offset: 3px; }
+.rs-err { display: none; margin-top: 7px; font-size: 13.5px; color: var(--red-dark); }
+.rs-err.on { display: block; }
+.rs-done { display: none; padding: 24px; background: var(--paper-2); border-left: 3px solid var(--red); margin-top: 22px; }
+.rs-done.on { display: block; }
+.rs-done h3 { font-size: 19px; margin-bottom: 9px; }
+.rs-done p { font-size: 14.5px; color: var(--ink-2); margin-bottom: 16px; }
+.rs-form.sent { display: none; }
+.rs-nota { font-size: 12px; color: var(--muted); margin-top: 14px; }
 </style>
 <script src="/js/galetes.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
@@ -370,6 +417,54 @@ details.tpl[open] summary::after { content: '–'; }
           <a class="btn red" id="ctaHero" href="#" rel="noopener" data-t="ctaHero">Deixar la meva ressenya</a>
         </div>
         <p class="note" data-t="note">Si no tens la sessió iniciada, Google et demanarà entrar amb el teu compte i tornaràs aquí mateix. <b>Triga menys d'1 minut.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== RESSENYA AL LLOC ==== -->
+  <section class="section tight">
+    <div class="wrap narrow">
+      <div class="rs">
+        <h2 data-t="rsH">Deixa-la aquí mateix</h2>
+        <p class="rs-s" data-t="rsS">Si prefereixes no sortir de la pàgina, escriu-la aquí. La llegim nosaltres i, si vols, després la pots publicar també a Google amb un toc: allà és on la veuen les famílies que ens busquen.</p>
+
+        <form class="rs-form" id="rs-form" novalidate>
+          <div class="rs-row">
+            <label for="rs-e5" data-t="rsL1">La teva puntuació</label>
+            <div class="rs-stars" role="radiogroup" aria-label="Puntuació d'1 a 5 estrelles">
+              <input type="radio" id="rs-e5" name="estrelles" value="5" checked><label for="rs-e5">★<span>5 estrelles</span></label>
+              <input type="radio" id="rs-e4" name="estrelles" value="4"><label for="rs-e4">★<span>4 estrelles</span></label>
+              <input type="radio" id="rs-e3" name="estrelles" value="3"><label for="rs-e3">★<span>3 estrelles</span></label>
+              <input type="radio" id="rs-e2" name="estrelles" value="2"><label for="rs-e2">★<span>2 estrelles</span></label>
+              <input type="radio" id="rs-e1" name="estrelles" value="1"><label for="rs-e1">★<span>1 estrella</span></label>
+            </div>
+          </div>
+          <div class="rs-row">
+            <label for="rs-nom" data-t="rsL2">El teu nom</label>
+            <input type="text" id="rs-nom" autocomplete="name" aria-describedby="rs-nom-err">
+            <p class="rs-err" id="rs-nom-err" role="alert" data-t="rsE1">Digue'ns com et dius.</p>
+          </div>
+          <div class="rs-row">
+            <label for="rs-mail" data-t="rsL3">El teu correu</label>
+            <input type="email" id="rs-mail" autocomplete="email" aria-describedby="rs-mail-err">
+            <p class="rs-err" id="rs-mail-err" role="alert" data-t="rsE2">Aquest correu no sembla vàlid.</p>
+          </div>
+          <div class="rs-row">
+            <label for="rs-msg" data-t="rsL4">La teva ressenya</label>
+            <textarea id="rs-msg" aria-describedby="rs-msg-err" placeholder="Dues línies amb les teves paraules…"></textarea>
+            <p class="rs-err" id="rs-msg-err" role="alert" data-t="rsE3">Escriu-hi dues línies abans d'enviar-la.</p>
+          </div>
+          <div class="btn-wrap" style="margin-top:6px">
+            <button type="submit" class="btn red" data-t="rsBtn">Envia la ressenya</button>
+          </div>
+          <p class="rs-nota" data-t="rsNota">El nom i el correu els fem servir només per saber qui l'escriu i poder-te respondre. No els publiquem enlloc.</p>
+        </form>
+
+        <div class="rs-done" id="rs-done" role="status">
+          <h3 data-t="rsDoneH">Gràcies</h3>
+          <p data-t="rsDoneP">Ja la tenim. Si vols que la vegi tothom qui ens busca, publica-la també a Google: es fa en mig minut i és el que ens fa sortir als primers llocs.</p>
+          <a class="btn red" id="rs-google" href="#" target="_blank" rel="noopener" data-t="rsDoneBtn">Publicar-la també a Google</a>
+        </div>
       </div>
     </div>
   </section>
@@ -597,6 +692,20 @@ https://cbgrupbarna.info/opina
 }</script><!-- FAQ-LD:END -->
 </main>
 
+<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
+<section class="comunitat" aria-label="Segueix el CB Grup Barna">
+  <div class="comunitat-in">
+    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
+      <span class="comunitat-t">Segueix-nos a Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el dia a dia del club, cada setmana.</span>
+    </a>
+    <a class="comunitat-porta comunitat-porta--red" href="/newsletter/" data-cta="crida-newsletter">
+      <span class="comunitat-t">Apunta't a la newsletter</span>
+      <span class="comunitat-s">Un correu al mes amb el que val la pena saber. Res més.</span>
+    </a>
+  </div>
+</section>
+<!-- /CRIDA DE COMUNITAT -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
@@ -698,7 +807,17 @@ https://cbgrupbarna.info/opina
     tplCa: 'Mensaje en catalán', tplEs: 'Mensaje en castellano',
     copyBtn: 'Copiar el mensaje',
     fc1: 'El Barna', fc2: 'Contacto', fc3: 'Redes',
-    ctaSticky: 'Dejar mi reseña'
+    ctaSticky: 'Dejar mi reseña',
+    rsH: 'Déjala aquí mismo',
+    rsS: 'Si prefieres no salir de la página, escríbela aquí. La leemos nosotros y, si quieres, después puedes publicarla también en Google con un toque: ahí es donde la ven las familias que nos buscan.',
+    rsL1: 'Tu puntuación', rsL2: 'Tu nombre', rsL3: 'Tu correo', rsL4: 'Tu reseña',
+    rsE1: 'Dinos cómo te llamas.', rsE2: 'Este correo no parece válido.',
+    rsE3: 'Escribe dos líneas antes de enviarla.',
+    rsBtn: 'Enviar la reseña',
+    rsNota: 'El nombre y el correo los usamos solo para saber quién la escribe y poder responderte. No los publicamos en ningún sitio.',
+    rsDoneH: 'Gracias',
+    rsDoneP: 'Ya la tenemos. Si quieres que la vea todo el que nos busca, publícala también en Google: se hace en medio minuto y es lo que nos hace salir en los primeros puestos.',
+    rsDoneBtn: 'Publicarla también en Google'
   };
 
   var CA = {};
@@ -926,6 +1045,8 @@ https://cbgrupbarna.info/opina
 })();
 </script>
 
+<script src="/js/canals.js"></script>
+<script src="/js/ressenya.js"></script>
 <script src="/js/cerca.js" defer></script>
 </body>
 </html>

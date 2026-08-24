@@ -55,8 +55,9 @@ const CASOS = [
   ['es', 'horarios de partidos', '/es/partits/'],
   ['es', 'baloncesto femenino', '/es/baloncesto-femenino/'],
   ['es', 'donde entrenais', '/es/instalaciones/'],
-  // /magics/ no té versió castellana: ha de sortir la catalana, no amagar-se
-  ['es', 'baloncesto inclusivo', '/magics/'],
+  // El Magics va estar temps sense versió castellana i la prova demanava la
+  // catalana. Ara ja en té: qui busca en castellà ha de rebre la castellana.
+  ['es', 'baloncesto inclusivo', '/es/magics/'],
   ['en', 'how much does it cost', '/en/faq/'],
   ['en', 'summer camp', '/en/campus/'],
   ['en', 'where do you train', '/en/facilities/'],

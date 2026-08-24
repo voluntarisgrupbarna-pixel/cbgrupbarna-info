@@ -1,0 +1,22 @@
+# Pàgines que es poden tocar en un sol idioma, amb el motiu escrit.
+#
+# La regla general és que un canvi de text es fa als tres idiomes alhora, i
+# scripts/i18n-paritat.py atura el que no ho faci. Però hi ha canvis que
+# només toquen un idioma amb tota la raó: corregir una falta que només hi ha
+# en castellà, ajustar una paraula que en anglès quedava rara, afegir un
+# terme de cerca que només té sentit en un mercat.
+#
+# Aquest fitxer és per a aquests casos. No hi ha manera de saltar-se la
+# comprovació sense deixar escrit per què, i això és a propòsit: una llista
+# d'excepcions sense motius es converteix, al cap de sis mesos, en la regla.
+#
+# Posa-hi la ruta CATALANA de la pàgina, que és la que identifica el trio.
+#
+#   nomes_un_idioma:
+#     - ruta: /alguna-pagina/
+#       motiu: Per què aquesta pàgina pot anar per lliure.
+#
+# Quan l'excepció deixi de fer falta, treu-la. És més fàcil treure una línia
+# ara que endevinar d'aquí a un any per què hi era.
+
+nomes_un_idioma: []

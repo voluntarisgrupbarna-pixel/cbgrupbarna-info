@@ -36,14 +36,12 @@ textos:
   nav_info:        {href: /#info,            ca: Informació,      es: Información,      en: Information}
 
   # ── El nom de les seccions ───────────────────────────────────────────────
-  # «Dies de partit» és el nom de la secció a l'Instagram i a la web, i no
-  # admet sinònims. El castellà i l'anglès en tenien dos i tres cadascun.
-  # Etiqueta decidida per la direcció del club l'agost del 2026 (vegeu
-  # i18n/etiquetes.yml). Abans deia «Dies de partit», que continua valent
-  # als <title> i a les descripcions com a terme de cerca, però ja no
-  # nomena l'enllaç.
-  partits:         {href: /partits/,           ca: Calendari,               es: Calendario,                en: Calendar}
-  calendaris:      {href: /partits/calendaris/, ca: Calendari per equip,     es: Calendario por equipo,     en: Calendar by team}
+  # «Calendari» és el nom de la secció des de l'agost del 2026, per decisió
+  # de la direcció del club, i no admet sinònims en cap dels tres idiomes.
+  # L'adreça no es toca: /partits/ i /partits/calendaris/ es queden com són
+  # perquè d'aquesta última en pengen els .ics que la gent té subscrits.
+  partits:         {href: /partits/,           ca: Calendari,          es: Calendario,          en: Calendar}
+  calendaris:      {href: /partits/calendaris/, ca: Calendari per equip, es: Calendario por equipo, en: Team calendars}
   escoleta_llarg:  {href: /escoleta/,          ca: Escola de bàsquet,       es: Escuela de baloncesto,     en: Basketball school}
   campus_llarg:    {href: /campus/,            ca: Campus de bàsquet,       es: Campus de baloncesto,      en: Basketball camp}
   magics:          {href: /magics/,            ca: Barna Màgics,            es: Barna Màgics,              en: Barna Màgics}

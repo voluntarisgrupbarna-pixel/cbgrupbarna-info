@@ -30,7 +30,14 @@ ARREL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CSS = '<link rel="stylesheet" href="/css/cerca.css">'
 JS = '<script src="/js/cerca.js" defer></script>'
 
-EXCLOSES = ("galeria", "admin", "patrocinis", "presentacio", "dossier-patrocinis",
+# Les carpetes van pel nom que tenen al disc, i cada idioma té el seu: quan
+# es van traduir les presentacions, /es/presentacion/ i /en/presentation/ no
+# eren a la llista i van sortir amb lupa mentre la catalana no en tenia. Una
+# pàgina que canvia en dos idiomes i no en el tercer és exactament el que
+# atura la comprovació de paritat, i amb raó.
+EXCLOSES = ("galeria", "admin", "patrocinis",
+            "presentacio", "presentacion", "presentation",
+            "dossier-patrocinis", "dosier-patrocinios", "sponsorship-pack",
             "tests", "node_modules", "workers")
 
 

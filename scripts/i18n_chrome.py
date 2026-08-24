@@ -77,6 +77,41 @@ def navegacio(idioma):
             + "\n".join(linies) + "\n    </nav>")
 
 
+CRIDA = {}
+for _idioma, _t in {
+    "ca": ("Segueix el CB Grup Barna", "Segueix-nos a Instagram",
+           "@cbgrupbarna · el dia a dia del club, cada setmana.",
+           "Apunta't a la newsletter",
+           "Un correu al mes amb el que val la pena saber. Res més.", "/newsletter/"),
+    "es": ("Sigue al CB Grup Barna", "Síguenos en Instagram",
+           "@cbgrupbarna · el día a día del club, cada semana.",
+           "Apúntate a la newsletter",
+           "Un correo al mes con lo que vale la pena saber. Nada más.", "/es/newsletter/"),
+    "en": ("Follow CB Grup Barna", "Follow us on Instagram",
+           "@cbgrupbarna · the club's week, as it happens.",
+           "Join the newsletter",
+           "One email a month with what's worth knowing. Nothing else.", "/en/newsletter/"),
+}.items():
+    _aria, _igt, _igs, _nlt, _nls, _nlurl = _t
+    CRIDA[_idioma] = (
+        "<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->\n"
+        f'<section class="comunitat" aria-label="{_aria}">\n'
+        '  <div class="comunitat-in">\n'
+        '    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/"'
+        ' target="_blank" rel="noopener" data-cta="crida-instagram">\n'
+        f'      <span class="comunitat-t">{_igt}</span>\n'
+        f'      <span class="comunitat-s">{_igs}</span>\n'
+        '    </a>\n'
+        f'    <a class="comunitat-porta comunitat-porta--red" href="{_nlurl}"'
+        ' data-cta="crida-newsletter">\n'
+        f'      <span class="comunitat-t">{_nlt}</span>\n'
+        f'      <span class="comunitat-s">{_nls}</span>\n'
+        '    </a>\n'
+        '  </div>\n</section>\n'
+        "<!-- /CRIDA DE COMUNITAT -->\n"
+    )
+
+
 def peu(idioma):
     """El <footer> sencer.
 
@@ -104,7 +139,11 @@ def peu(idioma):
         '        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>\n'
         '        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>\n'
         '      </div>')
-    return ('</main>\n<footer class="foot">\n  <div class="wrap">\n    <div class="foot-grid">\n'
+    # La crida de comunitat va abans del peu a totes les pàgines: la manté
+    # scripts/crida-comunitat.py, i aquí s'emet ja posada perquè una pàgina
+    # generada no neixi sense ella.
+    crida = CRIDA[idioma]
+    return ('</main>\n' + crida + '<footer class="foot">\n  <div class="wrap">\n    <div class="foot-grid">\n'
             + "\n".join(columnes) + '\n    </div>\n'
             '    <div class="foot-btm">\n'
             '      <div class="foot-mark">#Som<em>Clot</em></div>\n'

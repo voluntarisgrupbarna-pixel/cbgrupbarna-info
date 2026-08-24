@@ -309,7 +309,7 @@
         {
           "@type": "SiteNavigationElement",
           "position": 2,
-          "name": "Calendario de partidos y resultados",
+          "name": "Calendario",
           "url": "https://cbgrupbarna.info/partits/",
           "description": "Calendario y resultados de todos los equipos federados del club."
         },
@@ -740,6 +740,18 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     .form-blocked a { font-weight: 600; white-space: nowrap; }
     .req { color: var(--red); font-weight: 700; }
     .form-legend { font-size: 12.5px; color: var(--ink-2); margin: 0 0 16px; }
+
+/* ==== CRIDA DE COMUNITAT · mateixa peça que a css/barna.css ==== */
+.comunitat { background: var(--ink); color: #fff; }
+.comunitat-in { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.18); }
+@media (max-width: 700px) { .comunitat-in { grid-template-columns: 1fr; } }
+.comunitat-porta { display: block; background: var(--ink); padding: clamp(24px, 3.4vw, 38px) clamp(20px, 5vw, 60px); transition: background 0.35s var(--ease); }
+.comunitat-porta:hover { background: #000; }
+.comunitat-porta--red { background: var(--red); }
+.comunitat-porta--red:hover { background: var(--red-dark); }
+.comunitat-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.6vw, 28px); letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; }
+.comunitat-s { display: block; margin-top: 9px; font-size: 12.5px; color: rgba(255,255,255,0.74); }
+.comunitat-porta--red .comunitat-s { color: rgba(255,255,255,0.86); }
 </style>
 <script src="/js/galetes.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
@@ -753,12 +765,12 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     <div class="tk-cnt">
       <span class="tk-it">Escoleta 4-8 años · Inscripciones abiertas</span>
       <span class="tk-it">Séniors · Nueva temporada</span>
-      <span class="tk-it">Calendario de partidos actualizado</span>
+      <span class="tk-it">Calendario actualizado</span>
       <span class="tk-it">Galería de fotos del club</span>
       <span class="tk-it">#SomClot · 61 años de baloncesto</span>
       <span class="tk-it">Escoleta 4-8 años · Inscripciones abiertas</span>
       <span class="tk-it">Séniors · Nueva temporada</span>
-      <span class="tk-it">Calendario de partidos actualizado</span>
+      <span class="tk-it">Calendario actualizado</span>
       <span class="tk-it">Galería de fotos del club</span>
       <span class="tk-it">#SomClot · 61 años de baloncesto</span>
     </div>
@@ -810,7 +822,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       <h3>Este mes</h3>
       <a href="#info">Pedir información <small>formulario</small></a>
       <a href="/es/escoleta/">Escoleta <small>4 a 8 años</small></a>
-      <a href="/es/partits/">Calendario de partidos</a>
+      <a href="/es/partits/">Calendario</a>
       <a href="#seniors">Los séniors</a>
       <a href="/es/fotos/" data-cta="menu-galeria">Galería de fotos</a>
       <a href="#instagram">Instagram</a>
@@ -869,7 +881,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       <span class="franja-go"><em>Inscripciones abiertas</em><i></i></span>
     </a>
     <a class="franja franja--red" href="/es/partits/" data-cta="franja-dies-partit">
-      <span class="franja-tx"><span class="franja-t">Días de partido</span><span class="franja-s">Calendario y resultados de todos los equipos, cada semana.</span></span>
+      <span class="franja-tx"><span class="franja-t">Calendario</span><span class="franja-s">Calendario y resultados de todos los equipos, cada semana.</span></span>
       <span class="franja-go"><em>Este fin de semana</em><i></i></span>
     </a>
     <a class="franja" href="#seniors" data-cta="franja-seniors">
@@ -1279,6 +1291,20 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 </main>
 
 <!-- ==== PEU ==== -->
+<!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
+<section class="comunitat" aria-label="Sigue al CB Grup Barna">
+  <div class="comunitat-in">
+    <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
+      <span class="comunitat-t">Síguenos en Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el día a día del club, cada semana.</span>
+    </a>
+    <a class="comunitat-porta comunitat-porta--red" href="/es/newsletter/" data-cta="crida-newsletter">
+      <span class="comunitat-t">Apúntate a la newsletter</span>
+      <span class="comunitat-s">Un correo al mes con lo que vale la pena saber. Nada más.</span>
+    </a>
+  </div>
+</section>
+<!-- /CRIDA DE COMUNITAT -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-partners">
