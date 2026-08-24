@@ -234,6 +234,8 @@
       position: relative; cursor: pointer; overflow: hidden;
       display: block; background: var(--paper-2); border: 1px solid var(--line);
     }
+    /* Ara son focusables amb el teclat: cal que es vegi quina esta triada. */
+    .photo-item:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
     .photo-item img {
       width: 100%; height: auto; display: block;
       transition: opacity .2s;
@@ -838,10 +840,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') navigateLightbox(-1);
-    if (e.key === 'ArrowRight') navigateLightbox(1);
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeLightbox(); return; }
+    if (e.key === 'ArrowLeft') { navigateLightbox(-1); return; }
+    if (e.key === 'ArrowRight') { navigateLightbox(1); return; }
+    // El visor tapa la pagina sencera: amb el tabulador se'n sortia cap a la
+    // graella de sota, que no es veu. Aqui el focus hi dona voltes.
+    if (e.key !== 'Tab') return;
+    const f = [].slice.call(lb.querySelectorAll('a[href], button:not([disabled]), video[controls]'))
+                .filter(el => el.offsetParent !== null);
+    if (!f.length) return;
+    const primer = f[0], ultim = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === primer) { e.preventDefault(); ultim.focus(); }
+    else if (!e.shiftKey && document.activeElement === ultim) { e.preventDefault(); primer.focus(); }
+    else if (!lb.contains(document.activeElement)) { e.preventDefault(); primer.focus(); }
   });
 
   document.getElementById('load-more-btn').addEventListener('click', loadMorePhotos);
@@ -1057,7 +1070,16 @@ function loadMorePhotos() {
     }
 
     item.appendChild(hover);
+    // Les caselles de la graella eren <div> amb un click i prou: amb el
+    // teclat no s'hi podia arribar ni obrir cap foto, i un lector de
+    // pantalla no les anunciava com a res. Ara son botons de debo.
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('aria-label', 'Open photo ' + (i + 1) + ' full screen');
     item.addEventListener('click', () => openLightbox(i));
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
+    });
     grid.appendChild(item);
   }
 
@@ -1077,11 +1099,18 @@ function showEvents() {
 // ── LIGHTBOX ──
 let lbIndex = 0;
 
+// Qui obre el visor amb el teclat ha de poder-ne sortir amb el teclat i
+// tornar a la mateixa foto de la graella. Es guarda qui l'ha obert.
+let lbObridor = null;
+
 function openLightbox(index) {
+  lbObridor = document.activeElement;
   lbIndex = index;
   updateLightbox();
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
+  const tancar = document.getElementById('lb-close');
+  if (tancar) tancar.focus();
 }
 
 function closeLightbox() {
@@ -1090,6 +1119,8 @@ function closeLightbox() {
   const video = document.getElementById('lb-video');
   video.pause();
   video.src = '';
+  if (lbObridor && document.body.contains(lbObridor)) lbObridor.focus();
+  lbObridor = null;
 }
 
 function navigateLightbox(dir) {

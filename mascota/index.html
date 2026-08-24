@@ -592,8 +592,41 @@
   const soundBtn = document.getElementById('soundBtn');
   const unmuteBanner = document.getElementById('unmuteBanner');
 
-  // Autoplay silenciós (navegadors exigeixen muted per autoplay)
-  vid.addEventListener('canplay', () => { vid.play().catch(() => {}); });
+  // Autoplay silenciós (navegadors exigeixen muted per autoplay).
+  //
+  // Amb dues excepcions. Aquest vídeo pesa entre 31 i 50 MB i, en arrencar
+  // sol, es baixa sencer: mesurat, aquesta pàgina transferia 62 MB en obrir-la.
+  // Per a qui va amb dades comptades o ha demanat menys moviment, això no és
+  // una decisió que puguem prendre nosaltres. En aquests casos es queda el
+  // pòster amb el botó de reproduir, que ja hi és i funciona.
+  //
+  // I encara que arrenqui, només ho fa quan el vídeo és a pantalla: si algú
+  // hi arriba amb un enllaç a una àncora de més avall, no es baixa res.
+  function volMenysDades() {
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+      var c = navigator.connection;
+      if (c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || ''))) return true;
+    } catch (e) {}
+    return false;
+  }
+
+  if (!volMenysDades()) {
+    var arrencat = false;
+    var arrenca = function () {
+      if (arrencat) return;
+      arrencat = true;
+      vid.play().catch(function () {});
+    };
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entrades) {
+        entrades.forEach(function (e) { if (e.isIntersecting) { arrenca(); obs.disconnect(); } });
+      }, { threshold: 0.25 });
+      obs.observe(vid);
+    } else {
+      vid.addEventListener('canplay', arrenca);
+    }
+  }
 
   function updatePlayBtn() { playBtn.classList.toggle('hidden', !vid.paused); }
   vid.addEventListener('play', updatePlayBtn);
