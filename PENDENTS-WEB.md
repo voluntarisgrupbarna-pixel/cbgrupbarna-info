@@ -589,3 +589,26 @@ demanat menys moviment ni té l'estalvi de dades activat.
    just per sota del 4,5:1 que demana la WCAG per a text petit. Per a
    titulars grans és correcte; per a text petit convindria el `--red-dark`
    (#A8040E, 7,81:1).
+
+## 24-08-2026 — El vídeo de la mascota no arrencava
+
+**Símptoma que veia la gent:** entres a `/mascota/` i no hi ha vídeo. Ni un
+fotograma, ni la durada, res: un rectangle buit.
+
+**Causa real:** `mascota/mascota-reel.mp4` era l'únic MP4 del web amb l'índex
+(`moov`) DESPRÉS de les dades (`mdat`). Ordre dels àtoms: `ftyp, free, mdat,
+moov`. Un navegador no pot pintar res fins que no té l'índex, i amb l'índex al
+final això vol dir baixar-se els 30 MB sencers primer. Verificat també en
+producció amb `curl -r 0-63`, o sigui que no era cosa de la branca.
+
+**Arreglat:** `scripts/mp4-faststart.py` (qt-faststart en Python pur, sense
+dependències). Mou el `moov` al davant i reescriu totes les taules de posicions
+`stco`/`co64`. En el cas del reel: 3758 posicions desplaçades 61075 bytes,
+totes comprovades byte a byte abans d'escriure. Mida final idèntica i contingut
+de vídeo (`mdat`) idèntic — no és una reconversió, és una reordenació.
+
+Comprovats tots els MP4 del repositori: la resta ja tenien l'índex al davant.
+
+**Encara pendent per l'Ana (no es pot fer des d'aquí):** els reels pesen massa.
+30 MB el català i 48 MB el castellà per a 90 segons verticals; ben codificat
+haurien de ser 10–12 MB. Cal reexportar-los, no reordenar-los.
