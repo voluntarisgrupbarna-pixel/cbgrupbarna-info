@@ -1225,3 +1225,76 @@ part.
 **Norma confirmada per l'Ana:** a partir d'ara, cada vegada que es tanqui una
 feina es puja la subversió corresponent (`VERSION` + entrada a
 `CHANGELOG.md`) en el mateix commit, sense haver-ho de demanar cada cop.
+
+---
+
+## Accessibilitat · 24/08/2026
+
+Passada d'accessibilitat de tot el lloc, mesurada amb axe-core sobre el lloc
+servit i comprovada amb teclat a 1280 i 390 px. La declaració pública és a
+**`/accessibilitat/`** (`/es/accesibilidad/`, `/en/accessibility/`), enllaçada
+des del peu de totes les pàgines i llistada a `llms.txt` i al `sitemap.xml`.
+
+Aquesta passada s'ha fet en paral·lel a «Auditoria d'experiència d'usuari als
+tres idiomes» (#78), que ja va arreglar de forma independent bona part del
+mateix terreny: els 38 combos de color per sota d'AA d'aleshores, el peu en
+castellà/anglès sense columna Legal, el `lang-switch` amb `aria-current` i
+`lang` per enllaç, i la navegació per teclat de la galeria. El que segueix és
+el que quedava sense cobrir després d'aquella auditoria, mesurat de nou amb
+axe-core sobre l'estat actual.
+
+### Fet
+
+- **`css/a11y.css`** — capa compartida, enllaçada des de totes les pàgines
+  reals i carregada l'última perquè les seves regles manin: focus visible de
+  3 px (amb `!important`, perquè hi havia una trentena de pàgines amb
+  `outline:none` a l'atribut `style`), enllaç de salt, `prefers-reduced-motion`,
+  mode d'alt contrast del sistema, `.visually-hidden` i les correccions de
+  contrast que l'auditoria #78 no cobria.
+- **Salt al contingut i `<main>`** a les pàgines que encara no en tenien
+  (`scripts/a11y-aplica.py`, idempotent: es pot tornar a passar sempre).
+- **~90 camps de formulari** amb nom accessible (`scripts/a11y-etiquetes.py`).
+- **Contrast addicional**: `/admin/`, `/briefing/`, `/partners-mapa/`,
+  `/mascota/`, `/opina/`, `/jugadors/`, `/fotos-3x3/`, `/fotos-esdeveniments/`,
+  el mirall de `/premidonaesport/` (3 idiomes) i les fitxes de partner. Mateix
+  criteri que l'auditoria #78: `#FF3B41` sobre fons foscos, `--red-ink` sobre
+  fons clars, blanc pur sobre el vermell.
+- **`<dt>`/`<dd>` dins d'una `<dl>` de debò** a les 21 fitxes de partner i al
+  campus (abans, dins d'un `<div>` pla). `scripts/build-pages.py` i
+  `scripts/build-campus-fitxa.py` corregits al mateix lloc.
+- **Marcadors del mapa de partners amb nom** (`title`/`alt` a cada `L.marker`);
+  iframes d'Instagram amb `title`.
+- **PDF**: dels 7 documents enllaçats, 3 ja tenien l'arbre d'etiquetes complet.
+  Als altres 4 (presentació de club, dossier de patrocinis, «El Barna amb
+  dades» i el dossier de premsa orfe) se'ls ha posat `/Title` i `/Lang`, i els
+  enllaços que en deien només «PDF» ara porten nom, pàgines i pes.
+- **Vídeo d'`/opina/`**: no hi ha cap vídeo actiu (funcionalitat preparada i
+  apagada). `setupVideo()` ara exigeix `CFG.video.captions` a més
+  d'`enabled` i `src`, així que no es podrà activar mai sense subtítols.
+- **Menús amb `aria-expanded`** i Escape que en retorna el focus; galetes amb
+  el mateix comportament i el focus gestionat en tancar.
+- **Comprovació repetible**: `scripts/a11y-revisa.py` passa totes les pàgines
+  sense navegador (salt, `<main>`, `<h1>`, `alt`, formularis, iframes). Avui
+  torna zero.
+
+### Pendent
+
+1. **PDF sense arbre d'etiquetes complet** (ordre de lectura, encapçalaments):
+   la presentació de club, el dossier de patrocinis i «El Barna amb dades» són
+   exportacions d'una eina de disseny sense accés en aquest entorn. Mentre no
+   es refacin, l'alternativa accessible és la pàgina HTML equivalent, que ja
+   existeix per a cadascun.
+2. **`galeria/`** (l'app Next.js) no ha passat aquesta revisió.
+3. **Pàgines de cartells i materials per imprimir** (`partits/cartell.html`,
+   `opina/print/*`): generen una imatge, no es llegeixen. Queden fora.
+4. Els calendaris per equip són imatges pures (`generate-calendaris.py`,
+   Pillow): mai tindran text seleccionable; l'alternativa accessible és la
+   fitxa HTML de l'equip i el fitxer `.ics`.
+5. **`#pagLlista` del cercador** (`/cerca/`, `/404.html`, `/en/search/`,
+   `/es/busqueda/`) — trobat amb axe-core, `aria-required-children`: un
+   contenidor amb rol de llista sense cap `role="listitem"` a dins quan no hi
+   ha resultats. És a `js/cerca.js`, la funcionalitat de cerca de #78/#84, no
+   d'aquesta passada. No s'ha tocat perquè no hi ha cap ocurrència estàtica de
+   `pagLlista` al repositori: es crea sencer en JavaScript en temps
+   d'execució, i tocar-ho a cegues sense poder-ho provar a fons és més risc
+   que valor. Queda apuntat perquè qui toqui `cerca.js` ho vegi.

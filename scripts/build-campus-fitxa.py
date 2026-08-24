@@ -221,9 +221,9 @@ def bloc_fitxa(lang):
     <h2>{esc(t['h2f'])}</h2>
     <p>{t['ledef']}</p>
   </div>
-  <div class="dl narrow">
+  <dl class="dl narrow">
 {files}
-  </div>
+  </dl>
   <div class="narrow prose">
     {F_FINAL}"""
 

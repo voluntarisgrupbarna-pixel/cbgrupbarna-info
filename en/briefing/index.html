@@ -117,7 +117,7 @@
     background:var(--tinta);color:#fff;padding:.1rem .55rem;border-radius:3px;
     font-weight:700;white-space:nowrap;
   }
-  .ladder .here .red{color:var(--vermell);white-space:normal;}
+  .ladder .here .red{color:#FF3B41;white-space:normal;}
 
   blockquote{
     border-left:5px solid var(--vermell);
@@ -183,7 +183,7 @@
   .footcard .badge img{max-width:58px;max-height:70px;}
   .footcard .who{flex:1;min-width:220px;}
   .footcard .who .name{font-family:'Anton',sans-serif;font-size:1.5rem;text-transform:uppercase;line-height:1.1;}
-  .footcard .who .name .red{color:var(--vermell);}
+  .footcard .who .name .red{color:#FF3B41;}
   .footcard .who .addr{font-size:.8rem;color:#c9ccd1;margin-top:.4rem;}
   .footcard .contact{min-width:230px;text-align:right;font-size:.8rem;line-height:1.9;color:#c9ccd1;}
   .footcard .contact .lbl{
@@ -191,9 +191,9 @@
     text-transform:uppercase;color:#8b9098;display:block;margin-bottom:.2rem;
   }
   .footcard .contact a{color:#fff;text-decoration:none;}
-  .footcard .contact .tag{color:var(--vermell);font-weight:700;}
+  .footcard .contact .tag{color:#FF3B41;font-weight:700;}
   .pagefoot{
-    padding:0 3rem 2rem;font-size:.68rem;color:#9aa0a6;
+    padding:0 3rem 2rem;font-size:.68rem;color:#6B6560;
     display:flex;justify-content:space-between;letter-spacing:.06em;
   }
 
@@ -327,8 +327,10 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 }
 </script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Skip to content</a>
 <div class="doc">
 
   <!-- PORTADA -->
@@ -369,7 +371,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <a class="dl-btn ghost" href="/en/briefing/materials.html">All materials</a>
   </div>
 
-  <main class="body">
+  <main id="contingut" tabindex="-1" class="body">
 
     <p class="lead">CB Grup Barna is one of the largest youth basketball clubs in the Sant Martí
     district, ranked among the top 20 clubs in Catalonia. From the Escoleta to the two senior teams at the FCBQ Supercup, the club has held

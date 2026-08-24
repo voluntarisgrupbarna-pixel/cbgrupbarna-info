@@ -16,30 +16,30 @@
   nav .brand{display:flex;align-items:center;gap:.6rem}
   nav img{width:34px;height:34px;object-fit:contain}
   nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
-  nav .t span{color:var(--red)}
+  nav .t span{color:#FF3B41}
   nav .links{display:flex;align-items:center;gap:1rem}
-  nav .links a{color:#706c67;font-size:.8rem;text-decoration:none}
-  .nav-user{display:none;align-items:center;gap:.7rem;font-size:.8rem;color:#706c67}
+  nav .links a{color:#A6A29C;font-size:.8rem;text-decoration:none}
+  .nav-user{display:none;align-items:center;gap:.7rem;font-size:.8rem;color:#A6A29C}
   .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
   .btn:disabled{opacity:.5;cursor:default}
-  .btn.ghost{background:transparent;border:1px solid var(--line);color:#706c67}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:#A6A29C}
   .btn.small{padding:.35rem .7rem;font-size:.75rem}
   .wrap{max-width:860px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
   /* login */
   #login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;gap:.9rem;padding:1rem}
   .login-title{font-family:'Bebas Neue',sans-serif;font-size:2rem}
-  .login-sub{color:#706c67;font-size:.85rem;text-align:center}
-  .field-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#706c67}
+  .login-sub{color:#A6A29C;font-size:.85rem;text-align:center}
+  .field-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#A6A29C}
   .field-input,select.field-input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.65rem .8rem;font-family:'Outfit',sans-serif;font-size:.9rem}
-  .field-input:focus{outline:none;border-color:var(--red)}
+  .field-input:focus{outline:none;border-color:#FF3B41}
   #login-box{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.6rem}
   .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.82rem}
-  .hint{font-size:.72rem;color:#706c67}
-  .hint a{color:rgba(226,6,19,.8);text-decoration:none}
+  .hint{font-size:.72rem;color:#A6A29C}
+  .hint a{color:#FF3B41;text-decoration:underline;text-underline-offset:3px}
   /* main */
   #main-screen{display:none}
   h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;margin:1.4rem 0 .8rem}
-  h2 span{color:var(--red)}
+  h2 span{color:#FF3B41}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
   .grid .full{grid-column:1/-1}
@@ -48,24 +48,26 @@
   .ok-banner{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.82rem;margin-top:.8rem}
   /* list */
   .team-block{margin-top:1.2rem}
-  .team-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--red);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.5rem}
+  .team-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#FF3B41;border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.5rem}
   .player-row{display:flex;align-items:center;gap:.8rem;padding:.5rem 0;border-bottom:1px dashed var(--line);font-size:.88rem}
   .player-row:last-child{border-bottom:none}
   .dorsal{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;min-width:2.2rem;text-align:center;background:rgba(226,6,19,.15);border-radius:6px;padding:.15rem 0}
   .pname{flex:1}
-  .ppos{color:#706c67;font-size:.75rem}
+  .ppos{color:#A6A29C;font-size:.75rem}
   .pfoto{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#222}
-  .del{background:none;border:none;color:#706c67;cursor:pointer;font-size:1rem}
+  .del{background:none;border:none;color:#A6A29C;cursor:pointer;font-size:1rem}
   .del:hover{color:#ff8fa0}
-  .count-pill{font-size:.72rem;color:#706c67;margin-left:.5rem}
-  .empty{color:#706c67;font-size:.85rem;padding:1rem 0}
+  .count-pill{font-size:.72rem;color:#A6A29C;margin-left:.5rem}
+  .empty{color:#A6A29C;font-size:.85rem;padding:1rem 0}
   .spin{animation:spin 1s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 <script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Salta al contingut</a>
 
 <nav>
   <div class="brand">
@@ -80,8 +82,10 @@
 </nav>
 
 <!-- LOGIN -->
+<main id="contingut" tabindex="-1">
+<h1 class="visually-hidden">Gestió de jugadors i jugadores</h1>
 <div id="login-screen">
-  <div class="login-title">ACCÉS <span style="color:var(--red)">ADMIN</span></div>
+  <div class="login-title">ACCÉS <span style="color:#FF3B41">ADMIN</span></div>
   <div class="login-sub">Introdueix el token de GitHub per gestionar la plantilla</div>
   <div id="login-box">
     <label class="field-label" for="token-input">GitHub Personal Access Token</label>
@@ -103,29 +107,29 @@
     <h2>AFEGIR <span>JUGADOR/A</span></h2>
     <div class="card">
       <div class="grid">
-        <div class="fgroup"><label class="field-label">Nom *</label><input class="field-input" id="f-nom" placeholder="Nom"></div>
-        <div class="fgroup"><label class="field-label">Cognoms *</label><input class="field-input" id="f-cognoms" placeholder="Cognoms"></div>
+        <div class="fgroup"><label class="field-label" for="f-nom">Nom *</label><input class="field-input" id="f-nom" placeholder="Nom"></div>
+        <div class="fgroup"><label class="field-label" for="f-cognoms">Cognoms *</label><input class="field-input" id="f-cognoms" placeholder="Cognoms"></div>
         <div class="fgroup">
-          <label class="field-label">Categoria *</label>
+          <label class="field-label" for="f-categoria">Categoria *</label>
           <select class="field-input" id="f-categoria">
             <option>Sènior</option><option>Sub-22</option><option>Júnior</option><option>Cadet</option>
             <option>Infantil</option><option>Preinfantil</option><option>Mini</option><option>Premini</option><option>Open</option>
           </select>
         </div>
         <div class="fgroup">
-          <label class="field-label">Equip *</label>
+          <label class="field-label" for="f-genere">Equip *</label>
           <select class="field-input" id="f-genere">
             <option>Masculí</option><option>Femení</option><option>Mixt</option>
           </select>
         </div>
-        <div class="fgroup"><label class="field-label">Dorsal</label><input class="field-input" id="f-dorsal" type="number" min="0" max="99" placeholder="—"></div>
+        <div class="fgroup"><label class="field-label" for="f-dorsal">Dorsal</label><input class="field-input" id="f-dorsal" type="number" min="0" max="99" placeholder="—"></div>
         <div class="fgroup">
-          <label class="field-label">Posició</label>
+          <label class="field-label" for="f-posicio">Posició</label>
           <select class="field-input" id="f-posicio">
             <option value="">—</option><option>Base</option><option>Escorta</option><option>Aler</option><option>Ala-pivot</option><option>Pivot</option>
           </select>
         </div>
-        <div class="fgroup full"><label class="field-label">Foto (opcional, JPG/PNG/WebP)</label><input class="field-input" id="f-foto" type="file" accept="image/jpeg,image/png,image/webp"></div>
+        <div class="fgroup full"><label class="field-label" for="f-foto">Foto (opcional, JPG/PNG/WebP)</label><input class="field-input" id="f-foto" type="file" accept="image/jpeg,image/png,image/webp"></div>
       </div>
       <div class="err" id="form-error" style="margin-top:.8rem"></div>
       <div class="ok-banner" id="form-ok"></div>
@@ -144,6 +148,7 @@
   </div>
 </div>
 
+</main>
 <script src="/jugadors/jugadors.js"></script>
 <script>
 const OWNER = 'voluntarisgrupbarna-pixel';

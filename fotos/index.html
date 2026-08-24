@@ -488,10 +488,13 @@
 }
 </script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Salta al contingut</a>
 
 <!-- ACCESS GATE -->
+<main id="contingut" tabindex="-1">
 <div id="access-gate">
   <div class="gate-box">
     <div class="gate-logo">CB <span>Grup</span> Barna</div>
@@ -500,7 +503,7 @@
 
     <!-- SUBSCRIBE -->
     <div class="gate-panel active" id="tab-subscribe">
-      <input class="gate-input" id="sub-email" type="email" placeholder="Correu electrònic" required
+      <input aria-label="Correu electrònic" class="gate-input" id="sub-email" type="email" placeholder="Correu electrònic" required
         onkeydown="if(event.key==='Enter')submitSubscription()">
       <div class="gate-error" id="sub-error" style="display:none"></div>
       <button class="gate-btn" id="sub-btn" onclick="submitSubscription()">Continuar a la galeria</button>
@@ -522,7 +525,7 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <input type="search" id="search-input" placeholder="Cerca un esdeveniment…" autocomplete="off">
+    <input aria-label="Cerca un esdeveniment…" type="search" id="search-input" placeholder="Cerca un esdeveniment…" autocomplete="off">
   </div>
   <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/fotos/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/fotos/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/fotos/" hreflang="en" lang="en" aria-label="English">EN</a>
@@ -691,9 +694,10 @@
     }
   ]
 }</script><!-- FAQ-LD:END -->
+</main>
 <footer>
   <p>CB Grup Barna · Bàsquet al Clot · Sant Martí, Barcelona · des de 1965</p>
-  <p style="margin-top:.4rem">#somclot · <a href="/">cbgrupbarna.info</a> · <a href="admin.html" style="color:rgba(255,255,255,.2);font-size:.72rem">Admin</a></p>
+  <p style="margin-top:.4rem">#somclot · <a href="/">cbgrupbarna.info</a> · <a href="admin.html" style="color:rgba(255,255,255,.62);font-size:.72rem">Admin</a></p>
 </footer>
 
 <script src="config.js"></script>

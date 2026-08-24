@@ -149,7 +149,7 @@ h1 span { color: var(--red); }
 .wk-today {
   width:100%; margin-bottom:12px; padding:8px; border-radius:10px;
   background:rgba(226,6,19,0.12); border:1px dashed rgba(226,6,19,0.45);
-  color:var(--red); font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1.2px; text-transform:uppercase;
+  color:var(--red-ink, #A8040E); font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1.2px; text-transform:uppercase;
 }
 
 /* ===== FILTRES ===== */
@@ -176,8 +176,8 @@ h1 span { color: var(--red); }
 }
 .day-h .line { flex:1; height:1px; background:var(--border); }
 .day-h .n { color:#6B6560; font-size:14px; font-family:'Inter', sans-serif; letter-spacing:0; }
-.day-h.sat { color:var(--red); }
-.day-h.sun { color:var(--red); }
+.day-h.sat { color:var(--red-ink, #A8040E); }
+.day-h.sun { color:var(--red-ink, #A8040E); }
 
 .match {
   background:var(--panel); border:1px solid var(--border); border-radius:16px;
@@ -230,7 +230,7 @@ h1 span { color: var(--red); }
 
 .wa-btn {
   display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
-  background:#EAF4EE; border:1px solid rgba(27,127,75,0.30); color:var(--win);
+  background:#EAF4EE; border:1px solid rgba(27,127,75,0.30); color:#136138;
   border-radius:12px; padding:12px; margin-top:14px;
   font-family:'Anton', sans-serif; font-size:16px; letter-spacing:1px;
   text-decoration:none;
@@ -359,8 +359,10 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   .edit-pill { bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 10px); }
 }
 </style>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Salta al contingut</a>
 <script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
 
@@ -381,6 +383,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   <a href="/premsa/">Premsa</a>
 </nav>
 
+<main id="contingut" tabindex="-1">
 <header>
   <img src="../logo.png" alt="Escut CB Grup Barna">
   <h1>Dies de <span>partit</span></h1>
@@ -403,7 +406,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   <section class="view on" id="v-jornada">
     <div class="wk-nav">
       <button class="wk-btn" id="wk-prev">‹</button>
-      <div class="wk-sel"><select id="wk-select"></select></div>
+      <div class="wk-sel"><select aria-label="Tria la jornada" id="wk-select"></select></div>
       <button class="wk-btn" id="wk-next">›</button>
     </div>
     <div id="canvis-banner"></div>
@@ -424,7 +427,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <div class="g-box" id="resultats-lock">
       <h3>🔐 Resultats i ratxes</h3>
       <p>Aquesta secció és només per a l'staff del club.</p>
-      <input type="password" id="r-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
+      <input aria-label="Codi d'accés" type="password" id="r-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
       <button class="g-btn" id="r-unlock">Entrar</button>
     </div>
     <div id="resultats-open" style="display:none">
@@ -432,7 +435,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       <div id="millors-box"></div>
       <div class="stat-row" id="club-stats"></div>
       <div class="sec-t">🔍 Cerca un rival</div>
-      <input type="search" id="rival-search" placeholder="Nom d'un equip rival (p. ex. Sabadell, Hospitalet…)" autocomplete="off" style="width:100%;background:var(--paper);border:1px solid var(--border);border-radius:12px;color:var(--ink);padding:11px 14px;font-size:14px;margin-bottom:10px">
+      <input aria-label="Nom d'un equip rival (p. ex. Sabadell, Hospitalet…)" type="search" id="rival-search" placeholder="Nom d'un equip rival (p. ex. Sabadell, Hospitalet…)" autocomplete="off" style="width:100%;background:var(--paper);border:1px solid var(--border);border-radius:12px;color:var(--ink);padding:11px 14px;font-size:14px;margin-bottom:10px">
       <div id="rival-search-results"></div>
       <div class="sec-t">🔥 Ratxes per equip</div>
       <div id="ratxes-list"></div>
@@ -447,7 +450,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <div class="g-box" id="analisi-lock">
       <h3>🔐 Anàlisi</h3>
       <p>Aquesta secció és només per a l'staff del club.</p>
-      <input type="password" id="a-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
+      <input aria-label="Codi d'accés" type="password" id="a-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
       <button class="g-btn" id="a-unlock">Entrar</button>
     </div>
     <div id="analisi-open" style="display:none">
@@ -464,7 +467,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <div class="g-box" id="equips-lock">
       <h3>🔐 Equips</h3>
       <p>Aquesta secció és només per a l'staff del club.</p>
-      <input type="password" id="e-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
+      <input aria-label="Codi d'accés" type="password" id="e-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
       <button class="g-btn" id="e-unlock">Entrar</button>
     </div>
     <div id="equips-open" style="display:none">
@@ -478,7 +481,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <div class="g-box" id="cartells-lock">
       <h3>🔐 Cartells del club</h3>
       <p>La generació i descàrrega de cartells és només per a l'staff de comunicació.</p>
-      <input type="password" id="c-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
+      <input aria-label="Codi d'accés" type="password" id="c-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
       <button class="g-btn" id="c-unlock">Entrar</button>
     </div>
     <div id="cartells-open" style="display:none">
@@ -562,8 +565,8 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     </div>
     <canvas id="c-canvas" width="1080" height="1350" style="width:100%;border-radius:16px;border:1px solid var(--border);display:none"></canvas>
     <div class="g-box" id="c-cap-box" style="display:none;margin-top:12px">
-      <h3>✍️ Caption per publicar (amb el rival etiquetat)</h3>
-      <textarea id="c-caption" rows="9" style="width:100%;background:var(--paper);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:12px;padding:10px;line-height:1.5"></textarea>
+      <h3 id="c-cap-t">✍️ Caption per publicar (amb el rival etiquetat)</h3>
+      <textarea id="c-caption" aria-labelledby="c-cap-t" rows="9" style="width:100%;background:var(--paper);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:12px;padding:10px;line-height:1.5"></textarea>
       <button class="g-btn ghost" id="c-cap-copy" style="margin-top:8px">📋 Copiar caption</button>
     </div>
     </div><!-- fi cartells-open -->
@@ -574,7 +577,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <div class="g-box" id="g-lock">
       <h3>🔐 Mode gestió</h3>
       <p>Zona per introduir resultats, pujar els PDF de la federació i actualitzar posicions de lliga.</p>
-      <input type="password" id="g-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
+      <input aria-label="Codi d'accés" type="password" id="g-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
       <button class="g-btn" id="g-unlock">Entrar</button>
     </div>
     <div id="g-open" style="display:none">
@@ -650,9 +653,10 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 
 <button class="edit-pill" id="edit-pill">✏️ MODE GESTIÓ ACTIU · SORTIR</button>
 
+</main>
 <footer>
   <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" style="display:inline-block;background:#E20613;color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font-family:'Anton',sans-serif;font-size:16px;letter-spacing:1px;margin-bottom:14px">📸 SEGUEIX EL BARNA A INSTAGRAM</a><br>
-  <a href="/" style="color:#8a8a8a;text-decoration:none">CB GRUP BARNA · BÀSQUET AL CLOT DES DE 1965</a><br>
+  <a href="/" style="color:#6B6560;text-decoration:none">CB GRUP BARNA · BÀSQUET AL CLOT DES DE 1965</a><br>
   Dades: FCBQ · basquetcatala.cat/club/24
 </footer>
 

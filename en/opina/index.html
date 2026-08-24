@@ -243,15 +243,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 
 /* ==== BANDA VERMELLA · comptador ==== */
 .band-red { background: var(--red); color: #fff; }
-.band-red .eyebrow { color: rgba(255,255,255,0.65); }
+.band-red .eyebrow { color: #fff; }
 .count { display: grid; grid-template-columns: 1fr; gap: clamp(16px, 2.4vw, 30px); align-items: end; }
 @media (min-width: 780px) { .count { grid-template-columns: auto 1fr; } }
 .count-fig { display: flex; align-items: baseline; gap: 10px; }
 .count-now { font-family: var(--display); font-weight: 200; font-size: clamp(52px, 9vw, 92px); line-height: 0.9; letter-spacing: 0.04em; }
-.count-of { font-family: var(--display); font-size: clamp(13px, 2vw, 18px); letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.count-of { font-family: var(--display); font-size: clamp(13px, 2vw, 18px); letter-spacing: 0.24em; text-transform: uppercase; color: #fff; }
 .count-bar { height: 2px; background: rgba(255,255,255,0.35); margin-bottom: 12px; }
 .count-bar i { display: block; height: 100%; width: 0; background: #fff; transition: width 1.2s var(--ease); }
-.count-foot { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-family: var(--display); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+.count-foot { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-family: var(--display); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: #fff; }
 
 /* ==== GRAELLA DE RAONS ==== */
 .cards { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); }
@@ -326,9 +326,27 @@ details.tpl[open] summary::after { content: '–'; }
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+
+/* ── CRIDA DE COMUNITAT ──────────────────────────────────────────────────
+   Aquesta pàgina no enllaça css/barna.css i el bloc de comunitat hi sortia
+   sense estil: dues línies de text soltes, amb l'enllaç de 20 px d'alt (per
+   sota dels 24 px del criteri 2.5.8). Són les mateixes regles de barna.css.
+   El text secundari va en blanc sencer sobre el vermell, perquè cap blanc
+   rebaixat hi arriba a 4,5:1.                                             */
+.comunitat { background:#10100E; color:#fff; }
+.comunitat-in { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.18); }
+@media (max-width:700px){ .comunitat-in { grid-template-columns:1fr; } }
+.comunitat-porta { display:block; background:#10100E; padding:clamp(24px,3.4vw,38px) clamp(20px,5vw,60px); text-decoration:none; color:#fff; }
+.comunitat-porta:hover { background:#000; }
+.comunitat-porta--red { background:#E20613; }
+.comunitat-porta--red:hover { background:#A8040E; }
+.comunitat-t { display:block; font-family:'Anton','Haettenschweiler','Arial Narrow',sans-serif; font-weight:400; font-size:clamp(19px,2.6vw,28px); letter-spacing:.02em; text-transform:uppercase; line-height:1; }
+.comunitat-s { display:block; margin-top:9px; font-size:12.5px; color:rgba(255,255,255,.86); }
+.comunitat-porta--red .comunitat-s { color:#fff; }
 </style>
 <script src="/js/galetes.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
 
@@ -710,6 +728,7 @@ https://cbgrupbarna.info/opina
         <a href="/en/privacy-policy/">Privacy policy</a>
         <a href="/en/legal-notice/">Legal notice</a>
         <a href="/en/privacy-policy/#galetes">Cookies</a>
+        <a href="/en/accessibility/">Accessibility</a>
       </div>
       <div class="foot-col">
         <h3>Social</h3>
@@ -740,7 +759,10 @@ https://cbgrupbarna.info/opina
     goal: 300,
     current: null,
     updated: '',
-    video: { enabled: false, src: '', poster: '', caption: '' }
+    // `captions`: ruta a un .vtt en el mateix idioma. Sense això, el vídeo
+    // no s'activa: un vídeo amb so i sense subtítols exclou qui no hi sent,
+    // qui mira sense so i qui fa servir un lector de pantalla.
+    video: { enabled: false, src: '', poster: '', caption: '', captions: '' }
   };
 
   // ---------------------------------------------------------------- i18n ---
@@ -932,11 +954,20 @@ https://cbgrupbarna.info/opina
 
   function setupVideo() {
     var v = CFG.video || {};
-    if (!v.enabled || !v.src) return;
+    // Sense subtítols, el vídeo no surt: `enabled` sol no n'hi ha prou. Qui
+    // activi el vídeo ha de portar-hi el .vtt del mateix idioma.
+    if (!v.enabled || !v.src || !v.captions) return;
     var section = document.getElementById('videoSection');
     var video = document.getElementById('opinaVideo');
     video.src = v.src;
     if (v.poster) video.poster = v.poster;
+    var trackEl = document.createElement('track');
+    trackEl.kind = 'captions';
+    trackEl.src = v.captions;
+    trackEl.srclang = 'en';
+    trackEl.label = 'English';
+    trackEl.default = true;
+    video.appendChild(trackEl);
     document.getElementById('videoCap').textContent = v.caption || '';
     section.style.display = 'block';
     section.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });

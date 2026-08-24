@@ -90,7 +90,7 @@
     --red:#FF2A30;        /* vermell de text sobre negre */
     --red-ink:#FF8A8E;    /* enllaços dins de text */
     --red-solid:#E20613;  /* el de l'escut: fons plens amb lletra blanca */
-    --ink:#FFFFFF; --muted:#9C9C9C;
+    --ink:#FFFFFF; --muted:#9C9C9C; --ink-2:#9C9C9C;
     --ground:#060606; --panel:#111111; --cream:#191919; --paper:#111111;
     --line:rgba(255,255,255,.15);
     --shadow:0 30px 70px -34px rgba(0,0,0,.95);
@@ -440,7 +440,25 @@
   @media print{
     .split,.panel,.visit-card,.partner-card,.sponsor,.pack,.facts,.tbl-wrap,.b-num div,.par{border-radius:10px}
   }
+
+/* ── CRIDA DE COMUNITAT ──────────────────────────────────────────────────
+   Aquesta pàgina no enllaça css/barna.css i el bloc de comunitat hi sortia
+   sense estil: dues línies de text soltes, amb l'enllaç de 20 px d'alt (per
+   sota dels 24 px del criteri 2.5.8). Són les mateixes regles de barna.css.
+   El text secundari va en blanc sencer sobre el vermell, perquè cap blanc
+   rebaixat hi arriba a 4,5:1.                                             */
+.comunitat { background:#10100E; color:#fff; }
+.comunitat-in { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.18); }
+@media (max-width:700px){ .comunitat-in { grid-template-columns:1fr; } }
+.comunitat-porta { display:block; background:#10100E; padding:clamp(24px,3.4vw,38px) clamp(20px,5vw,60px); text-decoration:none; color:#fff; }
+.comunitat-porta:hover { background:#000; }
+.comunitat-porta--red { background:#E20613; }
+.comunitat-porta--red:hover { background:#A8040E; }
+.comunitat-t { display:block; font-family:'Anton','Haettenschweiler','Arial Narrow',sans-serif; font-weight:400; font-size:clamp(19px,2.6vw,28px); letter-spacing:.02em; text-transform:uppercase; line-height:1; }
+.comunitat-s { display:block; margin-top:9px; font-size:12.5px; color:rgba(255,255,255,.86); }
+.comunitat-porta--red .comunitat-s { color:#fff; }
 </style>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -486,7 +504,7 @@
       <a href="#patrocinadors">Sponsors</a>
       <a href="#contacte">Contact</a>
     </div>
-    <a class="idx-more" href="/presentacio/cb-grup-barna-presentacio.pdf" download="CB-Grup-Barna-Presentacio-60-Anys.pdf" data-cta="presentacio-pdf-barra">PDF</a>
+    <a class="idx-more" href="/presentacio/cb-grup-barna-presentacio.pdf" download="CB-Grup-Barna-Presentacio-60-Anys.pdf" data-cta="presentacio-pdf-barra" aria-label="Download the presentation (PDF, 18 pages, 3.3 MB)">PDF</a>
     <a class="idx-more" href="/en/presentations/">Presentations</a>
   </div>
 </nav>
@@ -792,7 +810,7 @@
     <div class="btn-row">
       <a href="/en/#info" class="btn red" data-cta="presentacio-closer-form">Request information</a>
       <a href="https://api.whatsapp.com/send?phone=+34698425153" class="btn ghost" target="_blank" rel="noopener" data-cta="presentacio-closer-wa">The club's WhatsApp</a>
-      <a href="/presentacio/cb-grup-barna-presentacio.pdf" class="btn ghost" download="CB-Grup-Barna-Presentacio-60-Anys.pdf" data-cta="presentacio-closer-pdf">Download as PDF</a>
+      <a href="/presentacio/cb-grup-barna-presentacio.pdf" class="btn ghost" download="CB-Grup-Barna-Presentacio-60-Anys.pdf" aria-label="Download the presentation as PDF (18 pages, 3.3 MB)" data-cta="presentacio-closer-pdf">Download as PDF</a>
       <a href="/en/womens-basketball/#metode" class="btn ghost" data-cta="presentacio-closer-metode">The Barna Method</a>
     </div>
   </div>
@@ -845,6 +863,7 @@
         <a href="/en/privacy-policy/">Privacy policy</a>
         <a href="/en/legal-notice/">Legal notice</a>
         <a href="/en/privacy-policy/#galetes">Cookies</a>
+        <a href="/en/accessibility/">Accessibility</a>
       </div>
       <div class="foot-col">
         <h3>Social</h3>

@@ -725,11 +725,15 @@ img { max-width: 100%; display: block; }
 }
 .footer p, .footer a {
   font-size: 14px;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.78);
   text-decoration: none;
   line-height: 1.7;
   display: block;
 }
+/* Un enllaç de 14 px amb interlineat 1,7 fa 23,8 px d'alt: un pèl per sota
+   dels 24 px que demana el criteri 2.5.8. Amb quatre píxels de coixí, hi
+   arriba, i de passada es toca millor amb el dit. */
+.footer a { min-height: 24px; padding: 2px 0; }
 .footer a:hover { color: white; }
 .footer-brand {
   font-family: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
@@ -832,10 +836,13 @@ img { max-width: 100%; display: block; }
 }
 </script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Saltar al contenido</a>
 
 <!-- ========= FRANJA ARC IRIS DALT ========= -->
+<main id="contingut" tabindex="-1">
 <div class="rainbow-bar" role="presentation"></div>
 
 <!-- ========= NAV ========= -->
@@ -852,7 +859,7 @@ img { max-width: 100%; display: block; }
     <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/orgull/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/orgull/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/orgull/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
-    <button class="nav-toggle" aria-label="Abrir menú" onclick="document.getElementById('nav').classList.toggle('open')">
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');this.setAttribute('aria-expanded', String(n.classList.toggle('open')));">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <line x1="3" y1="6" x2="21" y2="6"/>
         <line x1="3" y1="12" x2="21" y2="12"/>
@@ -1157,6 +1164,7 @@ img { max-width: 100%; display: block; }
 </section>
 
 <!-- ========= FOOTER ========= -->
+</main>
 <footer class="footer" id="contacte">
   <div class="footer-inner">
 

@@ -254,15 +254,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 
 /* ==== BANDA VERMELLA · comptador ==== */
 .band-red { background: var(--red); color: #fff; }
-.band-red .eyebrow { color: rgba(255,255,255,0.65); }
+.band-red .eyebrow { color: #fff; }
 .count { display: grid; grid-template-columns: 1fr; gap: clamp(16px, 2.4vw, 30px); align-items: end; }
 @media (min-width: 780px) { .count { grid-template-columns: auto 1fr; } }
 .count-fig { display: flex; align-items: baseline; gap: 10px; }
 .count-now { font-family: var(--display); font-weight: 200; font-size: clamp(52px, 9vw, 92px); line-height: 0.9; letter-spacing: 0.04em; }
-.count-of { font-family: var(--display); font-size: clamp(13px, 2vw, 18px); letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.count-of { font-family: var(--display); font-size: clamp(13px, 2vw, 18px); letter-spacing: 0.24em; text-transform: uppercase; color: #fff; }
 .count-bar { height: 2px; background: rgba(255,255,255,0.35); margin-bottom: 12px; }
 .count-bar i { display: block; height: 100%; width: 0; background: #fff; transition: width 1.2s var(--ease); }
-.count-foot { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-family: var(--display); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+.count-foot { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-family: var(--display); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: #fff; }
 
 /* ==== GRAELLA DE RAONS ==== */
 .cards { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); }
@@ -383,6 +383,7 @@ details.tpl[open] summary::after { content: '–'; }
 </style>
 <script src="/js/galetes.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
 
@@ -776,7 +777,10 @@ https://cbgrupbarna.info/opina
     goal: 300,
     current: null,
     updated: '',
-    video: { enabled: false, src: '', poster: '', caption: '' }
+    // `captions`: ruta a un .vtt en el mateix idioma. Sense això, el vídeo
+    // no s'activa: un vídeo amb so i sense subtítols exclou qui no hi sent,
+    // qui mira sense so i qui fa servir un lector de pantalla.
+    video: { enabled: false, src: '', poster: '', caption: '', captions: '' }
   };
 
   // ---------------------------------------------------------------- i18n ---
@@ -978,11 +982,20 @@ https://cbgrupbarna.info/opina
 
   function setupVideo() {
     var v = CFG.video || {};
-    if (!v.enabled || !v.src) return;
+    // Sense subtítols, el vídeo no surt: `enabled` sol no n'hi ha prou. Qui
+    // activi el vídeo ha de portar-hi el .vtt del mateix idioma.
+    if (!v.enabled || !v.src || !v.captions) return;
     var section = document.getElementById('videoSection');
     var video = document.getElementById('opinaVideo');
     video.src = v.src;
     if (v.poster) video.poster = v.poster;
+    var trackEl = document.createElement('track');
+    trackEl.kind = 'captions';
+    trackEl.src = v.captions;
+    trackEl.srclang = 'ca';
+    trackEl.label = 'Català';
+    trackEl.default = true;
+    video.appendChild(trackEl);
     document.getElementById('videoCap').textContent = v.caption || '';
     section.style.display = 'block';
     section.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
