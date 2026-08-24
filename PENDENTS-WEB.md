@@ -1275,6 +1275,18 @@ nom exacte del fitxer. Es queda tal com era. Si mai es vol treure de debò,
 cal fer-ho a `/presentacio/` primer (i les seves versions `/es/` i `/en/`),
 no esborrant només la imatge.
 
+> **Lliçó apresa, per si torna a passar:** el primer `grep` va cercar
+> `cbgrupbarna.com` (el domini) i, en semblar que no hi havia cap enllaç al
+> fitxer, es va esborrar `partners/zapic-ai.png` sense haver cercat abans
+> el **nom exacte del fitxer** (`zapic-ai.png` / `partners/zapic`) a tot el
+> repositori. Un fitxer «sense referències» només ho és si la cerca ha
+> cobert totes les maneres com se l'anomena — la ruta de la imatge, no
+> el nom del que hi surt escrit a sobre. Es va detectar de seguida perquè
+> es va tornar a comprovar abans de fer `commit`, i es va restaurar amb
+> `git checkout -- partners/zapic-ai.png` sense pèrdua. Abans d'esborrar
+> qualsevol fitxer «orfe», la cerca ha de ser pel seu nom de fitxer exacte,
+> no per una paraula relacionada.
+
 ### 3. Risc de lectura «contingut fabricat en sèrie» per Google
 
 546 preguntes indexades i 12 articles de blog generats trossejant un PDF de
