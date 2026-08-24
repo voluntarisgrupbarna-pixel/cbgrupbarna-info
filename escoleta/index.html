@@ -116,7 +116,8 @@ a{color:inherit}
   box-shadow:0 -8px 24px rgba(0,0,0,.35)}
 .pobar span{font-family:'Anton',sans-serif;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
 .pobar a{background:#fff;color:var(--red);text-decoration:none;font-family:'Anton',sans-serif;font-size:13px;
-  letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px}
+  letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px;
+  display:inline-flex;align-items:center;min-height:44px}
 body{padding-bottom:66px}
 @media(max-width:520px){.pobar span{font-size:12px}.pobar{gap:10px}}
 
@@ -308,6 +309,11 @@ figcaption b{color:#CFCBC4;font-weight:700}
 footer{padding:52px 0;font-size:13px;color:var(--grey);border-top:1px solid var(--line)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
 footer a{color:#CFCBC4}
+/* Els tres enllaços del crèdit feien 16 px d'alt. Van seguits en una sola
+   línia, separats per punts volats: el coixí els puja als 44 de la pauta i el
+   marge negatiu el torna, de manera que el peu no creix. Com que estan un al
+   costat de l'altre, les zones tocables no es trepitgen. */
+footer a{display:inline-block;padding:14px 4px;margin:-14px 0}
 
 .note{
   background:rgba(226,6,19,.10);border:1px dashed rgba(226,6,19,.55);

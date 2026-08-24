@@ -105,7 +105,7 @@
     '.cbgb-gal-b button.si:hover{background:#fff;border-color:#fff;color:#10100E}',
     '@media(max-width:620px){.cbgb-gal{padding:14px 16px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}',
     '.cbgb-gal-in{gap:12px}.cbgb-gal-t p{font-size:12.5px}',
-    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;padding:12px 10px;min-height:42px}}',
+    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;padding:12px 10px;min-height:44px}}',
     '@media(prefers-reduced-motion:reduce){.cbgb-gal{animation:none}}'
   ].join('');
 
