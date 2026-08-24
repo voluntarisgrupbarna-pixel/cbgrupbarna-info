@@ -28,15 +28,6 @@
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">
 <style>
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; }
-.lang-switch a { padding: 7px 2px; color: #6B6560; transition: color 0.3s; }
-.lang-switch a.active { color: var(--ink); }
-.lang-switch a:hover { color: var(--red); }
-.lang-switch .sep { color: var(--line); }
-.lang-switch.light a { color: rgba(255,255,255,0.45); }
-.lang-switch.light a.active { color: #fff; }
-.lang-switch.light a:hover { color: var(--red); }
-.lang-switch.light .sep { color: rgba(255,255,255,0.2); }
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -143,9 +134,9 @@
       <a href="/campus/" class="opt">Campus</a>
       <a href="/empreses/" class="opt">Empreses</a>
     </nav>
-    <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-      <a href="/premsa/" hreflang="ca" class="active" data-cta="lang-ca">CA</a><span class="sep">·</span><a href="/es/premsa/" hreflang="es" data-cta="lang-es">ES</a><span class="sep">·</span><a href="/en/premsa/" hreflang="en" data-cta="lang-en">EN</a>
-    </div>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/premsa/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/premsa/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/premsa/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
   </div>
 </header>
 <main id="main">
@@ -190,7 +181,7 @@
     </div>
   </section>
 
-  <div class="cards" style="padding-bottom:24px"><a class="card" href="/premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/"><div class="card-media"><img src="/premsa/img/article-guia-clot-pagina-1.webp" alt="Portada de l'article «El CB Grup Barna: seixanta anys fent bategar el Clot» a la revista Guia Clot, amb foto de l'equip infantil davant el bàner del club" loading="lazy" decoding="async"></div><div class="card-body"><span class="card-tag">Guia Clot · Camp de l'Arpa</span><h3>«El CB Grup Barna: seixanta anys fent bategar el Clot», a Guia Clot</h3><p>La revista Guia Clot, editada per Eix Clot, ha dedicat el seu article més destacat al CB Grup Barna pels 61 anys del club. Gràcies, Eix Clot. Gràcies, Gemma Collell.</p><span class="cta">Llegir l'article</span></div></a></div>
+  <div class="cards" style="padding-bottom:24px"><a class="card" href="/premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/"><div class="card-media"><img src="/premsa/img/article-guia-clot-pagina-1-400.webp" srcset="/premsa/img/article-guia-clot-pagina-1-400.webp 400w, /premsa/img/article-guia-clot-pagina-1-800.webp 800w, /premsa/img/article-guia-clot-pagina-1-1400.webp 1400w" sizes="(max-width: 900px) 100vw, 700px" alt="Portada de l'article «El CB Grup Barna: seixanta anys fent bategar el Clot» a la revista Guia Clot, amb foto de l'equip infantil davant el bàner del club" loading="lazy" decoding="async" width="1400" height="1750"></div><div class="card-body"><span class="card-tag">Guia Clot · Camp de l'Arpa</span><h3>«El CB Grup Barna: seixanta anys fent bategar el Clot», a Guia Clot</h3><p>La revista Guia Clot, editada per Eix Clot, ha dedicat el seu article més destacat al CB Grup Barna pels 61 anys del club. Gràcies, Eix Clot. Gràcies, Gemma Collell.</p><span class="cta">Llegir l'article</span></div></a></div>
 
   <!-- MOMENTS DESTACATS A INSTAGRAM -->
   <section class="closer" id="moments-instagram" style="margin-bottom:clamp(40px,6vw,72px)" aria-labelledby="moments-title">
@@ -288,9 +279,9 @@
     </div>
     <div class="foot-btm">
       <div class="foot-mark">#Som<em>Clot</em></div>
-      <div class="lang-switch light" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-        <a href="/premsa/" hreflang="ca" class="active" data-cta="foot-lang-ca">Català</a><span class="sep">·</span><a href="/es/premsa/" hreflang="es" data-cta="foot-lang-es">Castellano</a><span class="sep">·</span><a href="/en/premsa/" hreflang="en" data-cta="foot-lang-en">English</a>
-      </div>
+      <nav class="lang-switch light" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/premsa/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/premsa/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/premsa/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
       <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965</div>
     </div>
   </div>

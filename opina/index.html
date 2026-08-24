@@ -100,6 +100,25 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
 <link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma: aquestes pàgines no carreguen barna.css, així que
+   el component es pinta aquí amb els mateixos valors. Caselles de 24px
+   mínim perquè un dit hi arribi (WCAG 2.2, mida mínima de diana). */
+
+/* ==== SELECTOR D'IDIOMA ====
+   Aquesta pàgina no carrega css/barna.css: porta el seu propi full. El
+   component es pinta aquí amb els mateixos valors. Les caselles fan 24px
+   mínim perquè un dit hi arribi (mida mínima de diana, WCAG 2.2): amb el
+   text sol feien 15-17px. */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color 0.3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+.lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
+.lang-switch.light a.active { color: #fff; }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+</style>
 
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -122,6 +141,7 @@
   --paper-2: #F4F1EC;
   --red: #E20613;
   --red-dark: #A8040E;
+  --red-light: #FF3B41;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -255,7 +275,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 /* ==== PASSOS ==== */
 .steps { border-top: 1px solid var(--line); }
 .step { display: flex; align-items: flex-start; gap: clamp(16px, 3vw, 34px); padding: clamp(18px, 2.4vw, 26px) 6px; border-bottom: 1px solid var(--line); }
-.step .n { font-family: var(--display); font-size: 10px; letter-spacing: 0.3em; color: var(--red); padding-top: 4px; min-width: 34px; }
+.step .n { font-family: var(--display); font-size: 10px; letter-spacing: 0.3em; color: var(--red-dark, #A8040E); padding-top: 4px; min-width: 34px; }
 .step h3 { font-size: 11.5px; letter-spacing: 0.22em; margin-bottom: 8px; }
 .step p { font-size: 13px; color: var(--ink-2); }
 .warn { margin-top: clamp(22px, 3vw, 34px); padding: clamp(20px, 2.6vw, 30px); background: var(--paper-2); border-left: 2px solid var(--red); font-size: 13px; color: var(--ink-2); }
@@ -280,7 +300,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .panel .btn-row { margin-top: auto; }
 .qr-row { display: flex; gap: clamp(18px, 2.4vw, 28px); align-items: center; flex-wrap: wrap; }
 .qr-row img { width: 128px; flex: none; border: 1px solid var(--line); padding: 8px; background: #fff; }
-.copied { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); opacity: 0; transition: opacity 0.25s; }
+.copied { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red-dark, #A8040E); opacity: 0; transition: opacity 0.25s; }
 .copied.on { opacity: 1; }
 
 /* ==== PLANTILLES ==== */
@@ -303,7 +323,7 @@ details.tpl[open] summary::after { content: '–'; }
 .foot-col a:hover { color: var(--red); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
 .foot-mark { font-family: var(--display); font-weight: 300; font-size: clamp(12px, 2vw, 16px); letter-spacing: 0.4em; text-transform: uppercase; }
-.foot-mark em { font-style: normal; color: var(--red); }
+.foot-mark em { font-style: normal; color: var(--red-light, #FF3B41); }
 .foot-legal { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
 /* ==== BARRA FIXA ==== */
@@ -388,6 +408,9 @@ details.tpl[open] summary::after { content: '–'; }
   <div class="head-in">
     <div class="head-side">
       <nav class="head-nav" aria-label="Tornar"><a href="/"><span aria-hidden="true">←</span> <span class="lbl-back" data-t="back">Tornar a la web</span></a></nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/opina/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/opina/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/opina/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
     </div>
     <a class="head-brand" href="/" aria-label="CB Grup Barna · inici">
       <img src="/logo.png" alt="Escut del CB Grup Barna" width="32" height="32" fetchpriority="high">

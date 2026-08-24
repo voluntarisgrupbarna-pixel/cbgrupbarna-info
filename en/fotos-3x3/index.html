@@ -65,7 +65,7 @@ a{color:inherit;text-decoration:none}
 
 /* SELECTOR D'IDIOMA */
 .lang-switch{display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wd)}
-.lang-switch a{padding:7px 2px;opacity:.55;color:var(--wd);transition:opacity .3s,color .3s}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;text-decoration:none;opacity:.55;color:var(--wd);transition:opacity .3s,color .3s}
 .lang-switch a.active{opacity:1;font-weight:600;color:var(--cream)}
 .lang-switch a:hover{opacity:1;color:var(--red)}
 .lang-switch .sep{opacity:.3}
@@ -271,9 +271,9 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
     <img src="/premidonaesport/assets/img/logo-barna.webp" alt="CB Grup Barna">
     <span><span class="tb-name">CB Grup Barna</span><br><span class="tb-sub">El Clot · Barcelona · 1965</span></span>
   </a>
-  <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-    <a href="/fotos-3x3/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/fotos-3x3/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/fotos-3x3/" hreflang="en" class="active">EN</a>
-  </div>
+  <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/fotos-3x3/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/fotos-3x3/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/fotos-3x3/" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
+    </nav>
   <a class="tb-back" href="/en/premidonaesport/comunitat/3x3-westfield.html">← The 3x3 tournament</a>
 </header>
 
@@ -375,7 +375,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--bd);background:var(--black)}
       <div class="field"><label for="gMobil">Mobile *</label><input id="gMobil" type="tel" autocomplete="tel" inputmode="tel" placeholder="6XX XXX XXX"></div>
     </div>
     <label class="rgpd"><input id="gRgpd" type="checkbox">
-      <span>I agree that CB Grup Barna processes my data to send me the photos and information about its activities. <a href="/en/premidonaesport/" target="_blank">More info</a>.</span></label>
+      <span>I agree that CB Grup Barna processes my data to send me the photos and information about its activities. <a href="/en/privacy-policy/" target="_blank" rel="noopener">Privacy policy</a>.</span></label>
     <button class="btn btn-red" id="gBtn" onclick="submitGate()">⬇ Unlock and download</button>
     <div class="trust">🔒 Secure data · No spam · Unsubscribe anytime</div>
   </div>

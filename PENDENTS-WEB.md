@@ -741,3 +741,375 @@ moment; si no, val la pena que quedi escrit per què no.
 | Només amb enllaços | 36 | **17** |
 | Sense cap resultat | 2 | **0** |
 | Preguntes pendents d'una dada | 14 | **0** |
+
+# Auditoria d'experiència d'usuari als tres idiomes · 23/08/2026
+
+Repàs complet de navegació, usabilitat i UX/UI de `cbgrupbarna.info` en
+**català, castellà i anglès** (478 fitxers HTML), fet amb el web servit de
+debò i obert amb un navegador a 390 px, no només llegint el codi. Aquí hi ha
+el que s'ha arreglat i el que queda per decidir.
+
+## Arreglat
+
+### 1. El calendari de partits no existia en castellà ni en anglès
+
+`/es/partits/` i `/en/partits/` no eren la pàgina pública traduïda: eren una
+còpia antiga que portava enganxada **l'eina interna de gestió del club**
+(92 KB de JavaScript amb entrada de resultats, generador de cartells i
+importació de PDF). A sobre, aquell codi declarava dues vegades les mateixes
+variables (`MESOS`, `DIES`), i això és un **error de sintaxi**: el navegador
+descartava el bloc sencer i no s'executava res. Resultat: al lloc del
+calendari hi sortia «Hay que activar JavaScript para ver el calendario
+completo», sempre, encara que el JavaScript estigués activat. Ni un partit,
+ni un resultat, ni un horari, per a qui llegeix la web en castellà o anglès.
+
+Ja existia el generador `scripts/build-partits-idiomes.py`, escrit per a
+això, però no s'havia arribat a executar. S'ha executat i, de passada,
+arreglat i millorat:
+
+- **Els enllaços interns ja no s'endevinen, es llegeixen.** Abans hi havia
+  una llista fixa que donava per fet que l'adreça era la mateixa en els tres
+  idiomes (`/escoleta/` → `/es/escoleta/`). No sempre ho és: la política de
+  privacitat és `/es/politica-de-privacidad/` i `/en/privacy-policy/`, i
+  protecció del menor és `/en/child-protection/`. Amb la llista fixa, el peu
+  de la pàgina castellana enviava a la política **en català**. Ara cada
+  destí es resol amb el `hreflang` de la pàgina catalana corresponent, així
+  que quan es tradueixi una secció nova això ho seguirà sol.
+- **Substitucions en dues passades.** Una regla curta es menjava el resultat
+  d'una de llarga i deixava coses com «Calendarioo global».
+- **Textos que quedaven en català** a la pàgina traduïda: el fil d'Ariadna,
+  «A casa»/«Fora» de cada partit, el recompte de partits i l'avís de quan
+  encara no hi ha resultats.
+- **El text que només senten els lectors de pantalla** (`alt` de l'escut,
+  «inici», «Fil d'Ariadna») ara també es tradueix.
+
+### 2. El selector d'idioma no hi era a 2 de cada 3 pàgines
+
+De 391 pàgines públiques, **251 no tenien selector d'idioma**. Qui entrava a
+`/en/faq/` o a `/campus/` no tenia cap manera de canviar de llengua sense
+tornar a la portada. Ara el porten totes (les úniques excepcions són el
+panell d'`/admin/`, els fitxers d'impressió d'`/opina/print/` i les
+redireccions).
+
+I on hi era, sovint estava trencat:
+
+- **15 pàgines enviaven a un article del blog.** A `/portes-obertes/`,
+  `/bustia/`, `/escriu-nos/`, `/newsletter/` i `/proteccio-menor/comunicar/`
+  —en els tres idiomes— els tres botons CA · ES · EN apuntaven tots a
+  «A quina edat començar a jugar a bàsquet». Clicar «ES» a Portes obertes et
+  deixava, després d'un salt de redirecció, en un article sobre l'edat
+  d'iniciació. Són justament les cinc pàgines on la gent escriu al club.
+- **22 pàgines el pintaven sense estil** perquè el CSS del component estava
+  copiat a mà dins de cada pàgina i allà no s'havia copiat.
+- **Hi havia vuit versions diferents del mateix CSS**: en 84 pàgines sortia
+  amb l'Anton i en la resta amb la Inter. Ara el component viu una sola
+  vegada a `css/barna.css` i s'han retirat 472 regles duplicades.
+- **Les caselles feien 15-17 px d'ample.** Per sota del mínim de 24×24 px
+  que demana la WCAG 2.2 per a qualsevol cosa que s'hagi de tocar amb el
+  dit. Ara en fan 26.
+- A `/orgull/` i a `/premidonaesport/` el selector quedava **fora de la
+  pantalla** a mòbil: hi era al codi, però no s'hi podia arribar.
+
+### 3. 599 enllaços que et treien de la teva llengua
+
+Enllaços dins de pàgines `/es/` i `/en/` que apuntaven a la versió catalana
+**tot i existir-ne la traducció**. Inclou els menús sencers d'algunes
+pàgines, el «Demanar informació» de la portada i, sobretot, això:
+
+> **El blog en castellà i en anglès amagava dos terços dels seus articles.**
+> Sota un títol que deia «Estos artículos están publicados en catalán» /
+> «These articles are published in Catalan» hi havia 14 i 15 fitxes amb el
+> títol en català i l'enllaç a la versió catalana. **Totes tenien traducció
+> completa publicada.** El lector en anglès veia 6 articles disponibles i 15
+> «només en català» que en realitat podia llegir en anglès.
+
+### 4. La capçalera es trencava a mòbil
+
+A ~190 pàgines, el nom del club de la capçalera («CB GRUP BARNA», amb
+`white-space: nowrap`) i el menú se solapaven, lletra sobre lletra, a
+qualsevol mòbil. Per sota de 560 px el nom es retira —l'escut ja hi és, i és
+enllaç a l'inici— i el menú recupera l'espai.
+
+### 5. Consentiment i legal
+
+- **L'enllaç «Més informació» de l'avís de galetes no anava enlloc**, en cap
+  dels tres idiomes. Un gestor genèric interceptava qualsevol enllaç acabat
+  en `#galetes` per reobrir el plafó, i s'enduia també el del propi avís:
+  es cancel·lava la navegació, es tornava a obrir un plafó que ja era obert
+  i, de propina, s'esborrava el consentiment desat.
+- El mateix gestor **segrestava l'àncora real** de `#galetes` a
+  `/es/politica-de-privacidad/` i `/en/privacy-policy/`: només s'excloïa la
+  catalana.
+- **Els peus en castellà i anglès no tenien columna «Legal».** Cap enllaç a
+  la política de privacitat, ni a l'avís legal, ni a les galetes, en cap de
+  les ~290 pàgines. Afegida als 218 peus que tenen l'estructura estàndard.
+- **Dos formularis deien «Más info» / «More info» i portaven al dossier del
+  Premi Dona i Esport**, no a la política de privacitat: `/es/fotos-3x3/`,
+  `/en/fotos-3x3/` i els dos `3x3-westfield-2026/`.
+- **`/galeria-3x3-glories/` recollia nom, cognoms, correu, mòbil i club
+  sense casella de consentiment ni cap enllaç a la política**, en els tres
+  idiomes. Ara la casella és obligatòria per continuar.
+
+### 6. Accessibilitat i rendiment
+
+- L'`alt` de l'escut i l'`aria-label` de la capçalera eren en català a 255
+  llocs de `/es/` i `/en/`: qui fa servir un lector de pantalla sentia
+  català llegint la pàgina en un altre idioma.
+- **El menú de la portada no retenia el focus**: amb el tabulador se'n
+  sortia cap a la pàgina de sota, que està tapada. Ara el focus hi entra en
+  obrir-lo, hi dona voltes i torna al botó en tancar-lo.
+- **Els errors del formulari de la portada no es llegien.** El missatge
+  sortia en un rètol sense `role`, i desapareixia als 2,2 s.
+- **El 404 sortia sempre en català.** GitHub Pages el serveix per a
+  qualsevol adreça inexistent, també `/es/…` i `/en/…`: qui s'equivocava
+  dins la versió castellana o anglesa quedava expulsat a un menú català. Ara
+  es reescriu sol segons el camí.
+- **Es precarregava `og-image.jpg` (84 KB) a les tres portades** i aquella
+  imatge no es veu mai: és la de compartir a xarxes. 84 KB de prioritat alta
+  competint amb el que sí que es veu.
+- **Les tipografies es baixaven dues vegades.** `/escoleta/` i
+  `/partners-mapa/` les demanaven a `/escoleta/fonts/`, una còpia amb URL
+  diferent i, per tant, memòria cau diferent: ~130 KB que ja eren al
+  navegador.
+- Tres `<audio>` de `/premidonaesport/patrocinis/` apuntaven a fitxers
+  `.mp3` que no existeixen (els reals són `.m4a`): l'experiència sonora no
+  sonava.
+- `rel="noopener"` a 9 enllaços `target="_blank"`; `src=""` retirat dels
+  visors de `/fotos/` (un `src` buit fa que el navegador torni a demanar la
+  pàgina sencera); `noindex` i `viewport` a les 12 redireccions.
+
+### 7. `/escoleta/` tenia el seu propi commutador CAT/CAST
+
+Canviava el text sense canviar l'adreça i, amb el navegador en castellà,
+s'obria en castellà tot i que la URL, el `canonical` i el `hreflang` deien
+que era la catalana. Al mateix temps ja existeixen `/es/escoleta/` i
+`/en/escoleta/`, traduïdes senceres: hi havia **dues versions castellanes en
+dues adreces diferents** i cap manera d'arribar a l'anglesa. Ara fa servir
+el selector de sempre. El text castellà segueix al marcatge, ocult; es pot
+netejar quan es vulgui.
+
+## Els quatre punts que quedaven per decidir · resolts el 23/08/2026
+
+L'Ana va demanar tancar-los tots. Això és el que s'ha fet i per què.
+
+### 1. El dossier del Premi demanava un PIN i alhora era al sitemap
+
+Hi havia **dues reixes**, no una: les tres portades (`/premidonaesport/` i les
+seves versions `/es/` i `/en/`) portaven, a més de la d'`assets/js/auth.js`, una
+segona reixa de quatre caselles escrita dins de l'HTML, amb **el mateix codi** i
+una clau de sessió diferent. Qui hi arribava havia de teclejar 1965 dues vegades
+seguides per entrar al mateix lloc. I qui no el tenia es quedava en un carreró
+sense un sol enllaç.
+
+Ara la porta és una: la d'`auth.js`, que cobreix les 72 pàgines del dossier,
+reconeix les dues claus antigues (ningú no ha de tornar a entrar-hi), **surt en
+l'idioma de la pàgina** —abans sempre en català— i ofereix una sortida a qui no
+té el codi: la pàgina pública de bàsquet femení de cada idioma.
+
+Sobre l'indexació: **no s'ha obert el dossier** —això és una decisió de
+contingut— però s'ha desfet la contradicció. Les 72 pàgines porten
+`noindex,follow` i les seves **69 adreces han sortit del `sitemap.xml`** (de 433
+a 364). Ningú no arribarà des d'una cerca a una paret amb un PIN. Si algun dia es
+vol obrir, és treure el `<script>` d'`auth.js` i tornar-les a posar al sitemap.
+
+També s'ha corregit `llms.txt`, que descrivia aquest corpus com a «obert i sense
+registre» quan no ho és. Ara diu que aquest mirall demana codi i assenyala les
+dues versions realment obertes: la web oficial de la candidatura i `/femeni/`.
+
+### 2. El vídeo de la mascota en castellà
+
+`/es/mascota/` ja serveix `mascota-reel-es.mp4`, que era al repositori sense fer
+servir. Els rètols del vídeo no són una transcripció de la veu: són targetes en
+pantalla, i per tant es poden traduir. Se n'han fet dos `.vtt` nous
+—`subtitols-es.vtt` i `subtitols-en.vtt`— amb els mateixos temps que l'original.
+`/en/mascota/` segueix amb el muntatge català, que és l'únic que hi ha, però ara
+amb els rètols en anglès per defecte i el català com a segona pista.
+
+> **Per confirmar mirant-lo:** el fitxer castellà no s'ha pogut obrir des d'aquí
+> per comprovar-ne l'àudio. El nom, la durada (90 s contra els 80 s del català) i
+> el germà `-es-capcut.mp4` diuen que és el doblatge, però val la pena veure'n
+> deu segons abans de donar-ho per fet.
+
+### 3. Les portades en castellà i en anglès
+
+Tenien el commutador Franges/Extensa, però **l'extensa quedava buida**: hi
+faltaven set blocs que només existien en català. Ara hi són tots, traduïts:
+
+- el **masthead** («CB Grup Barna · Bàsquet a Barcelona des de 1965»), amb els
+  cinc pilars i les dues crides;
+- la capçalera **«La portada»** amb la data del dia, en castellà i en anglès;
+- la franja de **paritat**;
+- el bloc del lema, **Cultura del Progrés**;
+- **El Barna per dins**, amb les tres portes;
+- **l'Observatori Barna**, amb tres guies del blog;
+- i la secció **Presentacions**.
+
+Pel camí van sortir dues coses més:
+
+- **Cap de les dues portades tenia un `h1` visible a la vista per defecte.** El
+  titular de les franges era un `<h2>` i l'únic `h1` vivia en un bloc que només
+  surt a l'extensa. Ara les tres portades es comporten igual: un `h1` visible a
+  cada vista.
+- El titular de la fitxa de l'Escoleta era un segon `h1` («Escoleta de
+  baloncesto»), que a més era el que Google llegia com a títol de la portada.
+  Ara és un `h2`, com en català.
+
+I una que afectava les tres: **la primera franja no es podia llegir a mòbil**.
+La graella manté tres columnes fixes —190 px de foto, el text i la crida de la
+dreta, que no parteix—, i a 390 px al text li quedaven vint píxels: queia una
+paraula per línia. És la primera cosa que veu qui entra des del mòbil. Per sota
+de 700 px la crida ara baixa sota el text.
+
+### 4. El contrast del vermell
+
+Repassat amb el navegador, no a ull: 72 pàgines dels tres idiomes, comparant el
+color de cada text amb el fons **compositat** de sota (les capes translúcides
+menteixen si es miren pel seu compte). Hi havia **38 combinacions** per sota del
+mínim AA. Ara no en queda cap.
+
+El sistema ja tenia la resposta escrita i no s'aplicava:
+
+| On | Abans | Ara |
+|---|---|---|
+| Text vermell petit sobre crema | `--red` #E20613 · 4,37:1 | `--red-ink` #A8040E · 6,93:1 |
+| Text vermell sobre tinta | `--red` #E20613 · 3,87:1 | `--red-light` #FF3B41 · 5,40:1 |
+| Botó vermell dins d'un article | tinta sobre vermell · 3,87:1 | blanc · 4,92:1 |
+
+Aquell botó era un cas d'especificitat de manual, del que avisa la guia visual:
+`.prose a` (0,1,1) guanyava a `.btn` (0,1,0), i qualsevol botó dins d'un article
+es quedava amb el text en tinta i un subratllat que no li tocava.
+
+I quatre pàgines fosques feien servir els grisos pensats per a fons clar:
+`/jugadors/` (#6B6560 sobre tinta, 3,32:1), `/presentacions/` (un gris fix que
+ignorava el seu propi mode fosc), `/galeria-3x3-glories/` (#2e2e2e sobre negre,
+**1,39:1** — text que directament no es veu) i `/mascota/` (blanc sobre el verd
+de WhatsApp, 1,98:1). El verd de WhatsApp és seu i s'hi queda; el que ha canviat
+és el text, que ara hi va en tinta.
+
+---
+
+## Tercera passada · el que va sortir mirant més endins (23/08/2026)
+
+Amb els punts grossos tancats, un repàs a coses que no es veuen llegint el codi:
+dades estructurades, teclat, pantalles de 320 px i pes de pàgina.
+
+### Dades estructurades: 45 pàgines deien a Google que eren en català
+
+El JSON-LD de `/es/` i `/en/` portava `"inLanguage": "ca-ES"` copiat de
+l'original. Afectava tot el blog traduït, les fitxes de partner, premsa i les
+tres portades. A més, `WebPage` i `FAQPage` declaraven la llista dels tres
+idiomes, que només té sentit al node `WebSite`: el lloc és trilingüe; una
+pàgina concreta, no. Els 439 blocs de JSON-LD del repositori queden validats i
+amb l'idioma correcte.
+
+El generador que ho provocava (`scripts/i18n-munta.py`) només traduïa la forma
+curta (`"ca"`), no la llarga ni la llista. Ara les cobreix totes tres, i la
+llista la resol llegint el JSON per no tocar el node `WebSite`.
+
+### Teclat
+
+Els camps de text del formulari de la portada anul·laven el contorn de focus i
+el substituïen per un filet d'un píxel que només canvia de color. Amb teclat ara
+recuperen el contorn vermell de la resta del web; amb ratolí segueix sortint
+només el filet. Revisat tabulant de debò per 24 pàgines: no queda cap element
+focusable sense indicador visible.
+
+**La galeria no es podia fer servir amb el teclat.** Les caselles de `/fotos/`
+eren `<div>` amb un `click` i prou: no s'hi podia arribar ni obrir cap foto, i
+un lector de pantalla no les anunciava com a res. Ara són botons de debò, amb
+etiqueta («Obrir la foto 3 a pantalla completa»), i s'obren amb Enter o espai.
+El visor mou el focus al botó de tancar en obrir-se, el manté a dins mentre es
+fa servir i el torna a la mateixa foto en tancar-se.
+
+### Pantalles de 320 px
+
+Sis famílies de pàgina hi desbordaven. El cas més gros era **l'avís de
+galetes**: feia 342 px d'ample en una pantalla de 320 i el botó d'acceptar
+sortia partit. És la primera cosa que es toca en entrar.
+
+La causa de fons no era la barra. Hi havia contingut més ample que la pantalla,
+el navegador eixamplava la finestra de disseny, i la barra —que és
+`position: fixed`— l'heretava:
+
+- les cinc estrelles de la valoració (5 dianes de 44 px i les separacions) no hi
+  cabien amb els marges de la targeta;
+- les capçaleres de `/es/` i `/en/` no retiraven el nom del club, com sí que fa
+  la catalana;
+- a `/presentacions/` el botó de mode clar/fosc quedava fora de pantalla, sense
+  manera d'arribar-hi;
+- a `/fotos/` l'enllaç de tornada sortia de la pantalla;
+- les files de `/#acces` no cabien en una línia.
+
+Cap diana tàctil baixa dels 44 px: el que s'estreny és l'aire, i el que es
+retira són etiquetes que ja diu l'`aria-label`.
+
+### Pes
+
+Cinc imatges es servien senceres, sense `srcset`, en pàgines on mai es mostren a
+més de 700 px. `hero-equip.jpg` feia 2100 px i 468 KB per a un marc de 348. És
+la regla del sistema de disseny llegida per l'altra banda: si cap foto no s'ha
+de mostrar més gran del que és, tampoc no se n'han de baixar més píxels dels que
+caben. `scripts/build-imatges-responsives.py` en fa versions WebP a 400, 800 i
+1400 px —mai per sobre de l'original— i els `<img>` ja les demanen.
+
+| Pàgina | Abans | Ara |
+|---|---|---|
+| `/presentacions/` | 1.146 KB | 242 KB |
+| `/patrocinadors/` | 548 KB | 240 KB |
+| `/3x3/` | 439 KB | 226 KB |
+| `/premsa/` | 407 KB | 231 KB |
+
+I `/mascota/` arrencava el vídeo sol. Pesa entre 31 i 50 MB i, arrencant, es
+baixa sencer. Ara només ho fa si el vídeo és a pantalla i si qui mira no ha
+demanat menys moviment ni té l'estalvi de dades activat.
+
+> **Pendent, i això no és codi:** el reel de la mascota hauria de sortir
+> re-codificat. Un vertical de 90 segons no hauria de passar de 10-12 MB, i ara
+> en fa 31 (català) i 50 (castellà).
+
+---
+
+## Per decidir (redactat el 23/08/2026, abans de resoldre'ls) — vegeu més amunt
+
+1. **`/premidonaesport/` demana un PIN i alhora és al `sitemap.xml`.** Són
+   ~115 adreces que es donen a Google com a indexables i que, quan algú hi
+   clica, ensenyen una paret amb un PIN. A més el codi és a la vista dins
+   d'`assets/js/auth.js`. O s'obre (i es treu la paret) o es treu del
+   sitemap amb `noindex`. És una decisió de l'Ana, no un error.
+2. **Hi ha un vídeo de la mascota en castellà que no fa servir ningú.**
+   `/mascota/mascota-reel-es.mp4` (50 MB) és al repositori, però
+   `/es/mascota/` i `/en/mascota/` serveixen el català amb subtítols
+   catalans per defecte. Abans de canviar-ho cal confirmar que el fitxer és
+   el doblatge bo.
+3. **Les portades en castellà i anglès són més pobres que la catalana.** La
+   catalana té «La portada», «Cultura del Progrés», «El Barna per dins»,
+   «Observatori Barna» i «Presentacions»; les altres dues no, i el seu `h1`
+   és «Escoleta de baloncesto» en comptes del club. Són ~45 KB menys de
+   pàgina.
+4. **El `--red` de l'escut (#E20613) sobre crema (#F4F1EC) dona 4,37:1**,
+   just per sota del 4,5:1 que demana la WCAG per a text petit. Per a
+   titulars grans és correcte; per a text petit convindria el `--red-dark`
+   (#A8040E, 7,81:1).
+
+## 24-08-2026 — El vídeo de la mascota no arrencava
+
+**Símptoma que veia la gent:** entres a `/mascota/` i no hi ha vídeo. Ni un
+fotograma, ni la durada, res: un rectangle buit.
+
+**Causa real:** `mascota/mascota-reel.mp4` era l'únic MP4 del web amb l'índex
+(`moov`) DESPRÉS de les dades (`mdat`). Ordre dels àtoms: `ftyp, free, mdat,
+moov`. Un navegador no pot pintar res fins que no té l'índex, i amb l'índex al
+final això vol dir baixar-se els 30 MB sencers primer. Verificat també en
+producció amb `curl -r 0-63`, o sigui que no era cosa de la branca.
+
+**Arreglat:** `scripts/mp4-faststart.py` (qt-faststart en Python pur, sense
+dependències). Mou el `moov` al davant i reescriu totes les taules de posicions
+`stco`/`co64`. En el cas del reel: 3758 posicions desplaçades 61075 bytes,
+totes comprovades byte a byte abans d'escriure. Mida final idèntica i contingut
+de vídeo (`mdat`) idèntic — no és una reconversió, és una reordenació.
+
+Comprovats tots els MP4 del repositori: la resta ja tenien l'índex al davant.
+
+**Encara pendent per l'Ana (no es pot fer des d'aquí):** els reels pesen massa.
+30 MB el català i 48 MB el castellà per a 90 segons verticals; ben codificat
+haurien de ser 10–12 MB. Cal reexportar-los, no reordenar-los.

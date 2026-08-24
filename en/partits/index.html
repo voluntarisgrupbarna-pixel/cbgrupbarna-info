@@ -30,354 +30,54 @@
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">
 <style>
-:root {
-  /* Sistema visual CB Grup Barna — només 3 colors de marca */
-  --red: #E20613;          /* identitat, emoció */
-  --red-ink: #A8040E;      /* text vermell sobre crema, contrast AA */
-  --ink: #10100E;          /* negre premium */
-  --cream: #F4F1EC;        /* crema, el que trenca el bloc */
-  --paper: #FFFFFF;
-  --border: rgba(16,16,14,0.12);
-  --border-soft: rgba(16,16,14,0.07);
-  --text: #10100E;
-  --muted: #6B6560;
-  --win: #1B7F4B;          /* semàntic, no és color de marca */
-  --loss: #A8040E;
-  --gold: #B58900;
-  /* compatibilitat amb noms antics */
-  --black: #F4F1EC;
-  --panel: #FFFFFF;
-  --panel2: #EFEBE4;
-  --green: #1B7F4B;
-  --yellow: #B58900;
-  --blue: #A8040E;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  font-variant-numeric: tabular-nums;
-  background: var(--cream);
-  color: var(--text);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  min-height: 100vh;
-  padding-bottom: 90px;
-}
-@media (max-width: 760px) {
-  body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
-}
-button { font-family:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; border:0; background:none; color:inherit; }
-a { color:inherit; }
-.mono { font-family:'Inter', sans-serif; }
-.bebas { font-family:'Anton', sans-serif; }
-
-/* ==== SELECTOR D'IDIOMA ==== */
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-.lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; }
-.lang-switch .sep { opacity: 0.25; }
-
-/* ===== HEADER ===== */
-header {
-  text-align:center; padding: 26px 16px 10px;
-  background: linear-gradient(180deg, rgba(226,6,19,0.10), transparent 78%);
-}
-header img { width:64px; height:64px; }
-h1 { font-family:'Anton', sans-serif; letter-spacing:-0.5px; font-size: clamp(32px, 8vw, 44px); letter-spacing:1.5px; line-height:1; margin-top:6px; }
-h1 span { color: var(--red); }
-.head-tag { font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#6B6560; margin-top:6px; }
-.back { display:inline-flex; align-items:center; gap:6px; font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1px; color:#6B6560; text-decoration:none; margin-top:10px; }
-.back:hover { color:var(--red-ink); }
-
-/* ===== TABS ===== */
-.tabs {
-  position:sticky; top:0; z-index:50;
-  display:flex; gap:6px; padding:10px 12px; overflow-x:auto; scroll-behavior:smooth;
-  background: rgba(244,241,236,0.94); backdrop-filter: blur(10px);
-  border-bottom:1px solid var(--border);
-  scrollbar-width:none;
-  /* a tauleta/mòbil (on encara no caben totes les pestanyes) s'indica amb un
-     esvaïment que hi ha més contingut a la dreta cap on es pot lliscar */
-  mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
-}
-.tabs::-webkit-scrollbar { display:none; }
-@media (min-width: 900px) {
-  /* al ser prou ample per encabir-les totes, centrem la barra en comptes de
-     deixar-la enganxada a l'esquerra amb un buit enorme a la dreta */
-  .tabs { justify-content:center; mask-image:none; -webkit-mask-image:none; }
-}
-.tab {
-  flex-shrink:0; padding:9px 16px; border-radius:99px;
-  font-family:'Anton', sans-serif; font-size:16px; letter-spacing:1.2px;
-  background: var(--panel); border:1px solid var(--border); color:#6B6560;
-  transition: all .15s;
-}
-.tab.on { background: var(--red); color:#fff; border-color:var(--red); }
-
-.wrap { max-width: 680px; margin: 0 auto; padding: 16px 12px; }
-/* barra superior fixa: sortida a la web i entrada al panell */
-.topbar {
-  display:flex; align-items:center; gap:10px; padding:9px 14px;
-  background:var(--paper); border-bottom:1px solid var(--border);
-  font-size:12px; font-weight:600;
-}
-.tb-home { color:#6B6560; text-decoration:none; }
-.tb-home:hover { color:var(--ink); }
-.tb-admin {
-  margin-left:auto; text-decoration:none; color:#fff; background:var(--ink);
-  padding:7px 14px; border-radius:99px; letter-spacing:.2px;
-}
-.tb-admin:hover { background:var(--red); }
-/* acabats més suaus i airejats */
-.match, .team-row, .g-box, .winners, .stat, .tile { border-radius:16px; }
-.match { padding:16px; margin-bottom:12px; box-shadow:0 1px 2px rgba(16,16,14,.04); }
-.team-row { padding:14px 16px; margin-bottom:10px; box-shadow:0 1px 2px rgba(16,16,14,.04); transition:.15s; }
-.team-row:hover { border-color:rgba(226,6,19,.35); transform:translateY(-1px); }
-.g-box { padding:22px; margin-bottom:16px; box-shadow:0 1px 2px rgba(16,16,14,.04); }
-.tab { transition:.15s; }
-.chip { transition:.12s; }
-.sec-t { margin:26px 0 12px; }
-/* capçaleres de secció dins de Gestió */
-.g-step { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
-.g-step i {
-  font-style:normal; width:26px; height:26px; flex:0 0 26px; border-radius:50%;
-  background:var(--red); color:#fff; font-size:12px; font-weight:800;
-  display:flex; align-items:center; justify-content:center;
-}
-.g-step h3 { margin:0 !important; }
-.view { display:none; }
-.view.on { display:block; animation: fade .25s; }
-@keyframes fade { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
-
-/* ===== SELECTOR CAP DE SETMANA ===== */
-.wk-nav { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
-.wk-btn {
-  width:38px; height:38px; border-radius:12px; flex-shrink:0;
-  background:var(--panel); border:1px solid var(--border);
-  font-size:18px; color:var(--ink);
-}
-.wk-btn:disabled { opacity:.25; }
-.wk-sel { flex:1; position:relative; min-width:0; }
-.wk-sel select {
-  width:100%; appearance:none; text-align:center;
-  background:var(--panel); border:1px solid var(--border); border-radius:12px;
-  color:var(--ink); font-family:'Anton', sans-serif; font-size:clamp(12px, 5vw, 19px); letter-spacing:.2px;
-  text-overflow:ellipsis; overflow:hidden; white-space:nowrap;
-  padding:10px 6px;
-}
-.wk-today {
-  width:100%; margin-bottom:12px; padding:8px; border-radius:10px;
-  background:rgba(226,6,19,0.12); border:1px dashed rgba(226,6,19,0.45);
-  color:var(--red); font-family:'Inter', sans-serif; font-size:10px; letter-spacing:1.2px; text-transform:uppercase;
-}
-
-/* ===== FILTRES ===== */
-.chips { display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:8px; scrollbar-width:none; }
-.seg { display:flex; gap:4px; background:var(--panel2); border-radius:99px; padding:4px; margin-bottom:10px; }
-.seg button { flex:1; border-radius:99px; padding:9px 10px; font-size:12.5px; font-weight:700; color:#6B6560; transition:.15s; }
-.seg button.on { background:var(--paper); color:var(--ink); box-shadow:0 1px 3px rgba(16,16,14,.10); }
-.m-rival { margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); font-size:12px; }
-.m-rival b { color:var(--ink); }
-.m-rival .r-tit { font-size:9.5px; letter-spacing:1.2px; text-transform:uppercase; color:#6B6560; margin-bottom:6px; }
-.m-rival .r-fila { display:flex; gap:14px; flex-wrap:wrap; color:#6B6560; }
-.m-rival .r-fila span b { display:block; font-family:'Anton',sans-serif; font-size:19px; color:var(--ink); line-height:1.1; }
-.chips::-webkit-scrollbar { display:none; }
-.chip {
-  flex-shrink:0; padding:6px 12px; border-radius:99px; font-size:12px; font-weight:600;
-  background:var(--panel); border:1px solid var(--border); color:#6B6560;
-}
-.chip.on { background:var(--ink); color:var(--cream); border-color:var(--ink); }
-
-/* ===== DIES I PARTITS ===== */
-.day-h {
-  display:flex; align-items:center; gap:10px; margin:18px 0 10px;
-  font-family:'Anton', sans-serif; font-size:22px; letter-spacing:1.5px;
-}
-.day-h .line { flex:1; height:1px; background:var(--border); }
-.day-h .n { color:#6B6560; font-size:14px; font-family:'Inter', sans-serif; letter-spacing:0; }
-.day-h.sat { color:var(--red); }
-.day-h.sun { color:var(--yellow); }
-
-.match {
-  background:var(--panel); border:1px solid var(--border); border-radius:16px;
-  padding:14px; margin-bottom:10px; position:relative; overflow:hidden;
-}
-.match.casa { border-left:3px solid var(--red); }
-.match.fora { border-left:3px solid #6B6560; }
-.match.win  { background: #F1F7F2; }
-.match.loss { background: #FCF1F0; }
-.m-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:9px; }
-.m-hora { font-family:'Inter', sans-serif; font-weight:700; font-size:15px; }
-.m-badge {
-  font-family:'Inter', sans-serif; font-size:8.5px; letter-spacing:1px; font-weight:700;
-  padding:3px 8px; border-radius:99px; text-transform:uppercase;
-}
-.m-badge.casa { background:rgba(226,6,19,0.14); color:var(--red-ink); }
-.m-badge.fora { background:rgba(16,16,14,0.07); color:#6B6560; }
-.m-eq { margin-left:auto; font-family:'Inter', sans-serif; font-size:9px; letter-spacing:0.8px; color:#6B6560; text-transform:uppercase; }
-.m-teams { display:flex; align-items:center; gap:10px; }
-.m-t { flex:1; font-weight:600; font-size:14px; line-height:1.25; }
-.m-t.right { text-align:right; }
-.m-t.barna { color:var(--ink); }
-.m-t.rival { color:#6B6560; }
-.m-score {
-  flex-shrink:0; text-align:center; font-family:'Anton', sans-serif; font-size:26px; letter-spacing:1px;
-  min-width:74px;
-}
-.m-score small { display:block; font-family:'Inter', sans-serif; font-size:8px; letter-spacing:1.5px; margin-top:-2px; }
-.m-score .w { color:var(--green); } .m-score .l { color:var(--red); }
-.m-vs { flex-shrink:0; color:#6B6560; font-family:'Anton', sans-serif; font-size:16px; min-width:74px; text-align:center; }
-.m-loc { display:flex; align-items:center; gap:6px; margin-top:10px; font-size:11.5px; color:#6B6560; flex-wrap:wrap; }
-.m-loc-actions { margin-left:auto; display:flex; gap:6px; flex-wrap:wrap; }
-.m-loc a {
-  flex-shrink:0; text-decoration:none; white-space:nowrap;
-  font-family:'Inter', sans-serif; font-size:9px; letter-spacing:0.8px;
-  color:var(--red-ink); border:1px solid rgba(226,6,19,0.30); padding:4px 9px; border-radius:99px;
-}
-.m-cat { font-family:'Inter', sans-serif; font-size:8.5px; letter-spacing:0.8px; color:#6B6560; text-transform:uppercase; margin-top:8px; }
-.m-edit { display:flex; align-items:center; gap:8px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); }
-.m-edit input {
-  width:64px; text-align:center; background:var(--paper); border:1px solid var(--border); border-radius:8px;
-  color:var(--ink); font-family:'Inter', sans-serif; font-size:15px; font-weight:700; padding:7px 4px;
-}
-.m-edit .sep { color:#6B6560; }
-.m-edit button {
-  margin-left:auto; background:var(--red); color:#fff; border-radius:8px; padding:7px 14px;
-  font-family:'Anton', sans-serif; font-size:14px; letter-spacing:1px;
-}
-.empty { text-align:center; color:#6B6560; padding:40px 20px; font-size:13px; }
-
-.wa-btn {
-  display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
-  background:#EAF4EE; border:1px solid rgba(27,127,75,0.30); color:var(--win);
-  border-radius:12px; padding:12px; margin-top:14px;
-  font-family:'Anton', sans-serif; font-size:16px; letter-spacing:1px;
-  text-decoration:none;
-}
-
-/* ===== RESULTATS / RATXES ===== */
-.stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px; }
-.stat {
-  background:var(--panel); border:1px solid var(--border); border-radius:14px;
-  text-align:center; padding:12px 4px;
-}
-.stat b { display:block; font-family:'Anton', sans-serif; font-size:28px; line-height:1; }
-.stat span { font-family:'Inter', sans-serif; font-size:8px; letter-spacing:1px; color:#6B6560; text-transform:uppercase; }
-.stat .g { color:var(--green); } .stat .p { color:var(--red); }
-.sec-t { font-family:'Anton', sans-serif; font-size:20px; letter-spacing:1.2px; margin:20px 0 10px; }
-.team-row {
-  display:flex; align-items:center; gap:10px;
-  background:var(--panel); border:1px solid var(--border); border-radius:14px;
-  padding:12px 14px; margin-bottom:8px; width:100%; text-align:left;
-}
-.team-row .em { font-size:20px; }
-.team-row .nm { flex:1; min-width:0; }
-.team-row .nm b { display:block; font-size:13.5px; }
-.team-row .nm small { font-family:'Inter', sans-serif; font-size:8.5px; letter-spacing:0.6px; color:#6B6560; text-transform:uppercase; }
-.team-row .rec { font-family:'Anton', sans-serif; font-size:19px; letter-spacing:1px; text-align:right; }
-.team-row .rec small { display:block; font-family:'Inter', sans-serif; font-size:8px; letter-spacing:0.6px; color:#6B6560; }
-.dots { display:flex; gap:3px; margin-top:4px; }
-.dot { width:8px; height:8px; border-radius:50%; background:rgba(16,16,14,0.10); }
-.dot.w { background:var(--win); } .dot.l { background:var(--loss); }
-.streak { font-size:11px; font-weight:700; margin-top:3px; }
-.streak.hot { color:var(--red-ink); }
-.streak.cold { color:#6B6560; }
-
-/* ===== EQUIP DETALL ===== */
-.td-head { text-align:center; padding:10px 0 16px; }
-.td-head .em { font-size:40px; }
-.td-head h2 { font-family:'Anton', sans-serif; font-size:32px; letter-spacing:1.5px; }
-.td-head .comp { font-family:'Inter', sans-serif; font-size:9px; letter-spacing:1.2px; color:#6B6560; text-transform:uppercase; margin-top:4px; }
-.pos-box {
-  display:flex; align-items:center; justify-content:center; gap:10px; margin:12px auto;
-  background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:12px; max-width:340px;
-}
-.pos-box b { font-family:'Anton', sans-serif; font-size:34px; color:var(--red); }
-.pos-box span { font-size:11px; color:#6B6560; text-align:left; line-height:1.4; }
-.pos-box input { width:52px; text-align:center; background:var(--paper); border:1px solid var(--border); border-radius:8px; color:var(--ink); font-family:'Inter',monospace; font-size:14px; padding:6px 2px; }
-.td-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0; }
-.td-actions a, .td-actions button {
-  display:flex; align-items:center; justify-content:center; gap:6px;
-  background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:11px;
-  font-family:'Anton', sans-serif; font-size:14px; letter-spacing:1px; text-decoration:none; color:var(--ink);
-}
-.back-btn { font-family:'Inter',monospace; font-size:10px; letter-spacing:1px; color:#6B6560; margin-bottom:12px; display:inline-block; }
-
-/* ===== GESTIÓ ===== */
-.g-box { background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:12px; }
-.g-box h3 { font-family:'Anton', sans-serif; font-size:18px; letter-spacing:1.2px; margin-bottom:8px; }
-.g-box p { font-size:12px; color:#6B6560; line-height:1.6; margin-bottom:10px; }
-.g-box input[type=password] {
-  width:100%; background:var(--paper); border:1px solid var(--border); border-radius:10px;
-  color:var(--ink); padding:11px; font-size:14px; margin-bottom:10px;
-}
-.g-btn {
-  display:inline-flex; align-items:center; gap:6px;
-  background:var(--red); color:white; border-radius:10px; padding:10px 18px;
-  font-family:'Anton', sans-serif; font-size:15px; letter-spacing:1px;
-}
-.g-btn.ghost { background:var(--panel2); border:1px solid var(--border); color:var(--ink); }
-.g-btn.warn { background:transparent; border:1px solid rgba(226,6,19,0.4); color:var(--red-ink); }
-.drop {
-  border:2px dashed rgba(16,16,14,0.16); border-radius:14px; padding:26px 14px;
-  text-align:center; color:#6B6560; font-size:12px; transition:all .15s;
-}
-.drop.over { border-color:var(--red); background:rgba(226,6,19,0.06); color:var(--red-ink); }
-.g-log { font-family:'Inter', sans-serif; font-size:10px; color:var(--win); margin-top:10px; white-space:pre-wrap; line-height:1.7; }
-/* ===== CARTELLS ===== */
-.c-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
-@media (max-width:520px){ .c-grid { grid-template-columns:1fr; } }
-.c-lab { display:block; font-family:'Inter',monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; color:#6B6560; }
-.c-lab select, .c-lab input {
-  display:block; width:100%; margin-top:5px;
-  background:var(--paper); border:1px solid var(--border); border-radius:10px;
-  color:var(--ink); font-family:'Inter',sans-serif; font-size:12px; padding:10px;
-}
-.winners {
-  background: linear-gradient(135deg, rgba(255,214,0,0.10), var(--panel) 60%);
-  border:1px solid rgba(255,214,0,0.35); border-radius:16px; padding:16px; margin-bottom:16px;
-}
-.winners h3 { font-family:'Anton',sans-serif; font-size:20px; letter-spacing:1.2px; color:var(--yellow); margin-bottom:8px; }
-.winners .wrow { display:flex; align-items:center; gap:8px; padding:6px 0; font-size:13px; font-weight:600; }
-.winners .wrow small { color:#6B6560; font-family:'Inter',monospace; font-size:10px; margin-left:auto; }
-.winners .g-btn { margin-top:8px; }
-.edit-pill {
-  position:fixed; bottom:16px; right:16px; z-index:60;
-  background:var(--ink); color:var(--cream); border-radius:99px; padding:9px 16px;
-  font-family:'Anton', sans-serif; font-size:14px; letter-spacing:1px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.5); display:none;
-}
-.edit-pill.on { display:block; }
-footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; font-size:9px; letter-spacing:1px; color:#6B6560; text-transform:uppercase; line-height:2; }
-
-/* ===== NAVEGACIÓ INFERIOR (mòbil) =====
-   En una PWA instal·lada en mode standalone no hi ha barra del navegador:
-   la navegació de dalt obliga a estirar el polze. Aquesta barra fixa deixa
-   les 3 vistes del dia a dia (Jornada, Resultats, Equips) i la tornada al
-   club a un sol toc, sense amagar mai la resta de pestanyes de dalt. */
-.bottomnav {
-  display: none;
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
-  background: rgba(244,241,236,0.96); backdrop-filter: blur(10px);
-  border-top: 1px solid var(--border);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-  box-shadow: 0 -2px 14px rgba(16,16,14,.06);
-}
-.bottomnav-in { display: flex; }
-.bn-item {
-  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 3px; min-height: 60px; padding: 8px 4px 7px;
-  font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: .3px;
-  text-transform: uppercase; color: #6B6560; text-decoration: none;
-  border-top: 2px solid transparent;
-}
-.bn-item .bn-ic { font-size: 19px; line-height: 1; }
-.bn-item.on { color: var(--red-ink); border-top-color: var(--red); }
-@media (max-width: 760px) {
-  .bottomnav { display: block; }
-  .edit-pill { bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 10px); }
-}
+  /* ==== Peces pròpies de Match days ==== */
+  .sec-head { margin-bottom: clamp(22px, 3.4vw, 38px); }
+  .sec-head h2 { font-size: clamp(17px, 2.4vw, 26px); margin-top: 14px; }
+  .sec-head .sub { margin-top: 12px; font-size: 14.5px; color: var(--ink-2); max-width: 60ch; }
+  .day-h { font-family: var(--display); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin: clamp(26px, 4vw, 40px) 0 4px; }
+  .mrow { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px 16px; align-items: baseline; padding: 14px 2px; border-bottom: 1px solid var(--line); }
+  .mrow .hora { font-family: var(--display); font-weight: 400; font-size: 15px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+  .mrow .qui b { display: block; font-family: var(--display); font-weight: 400; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.5; }
+  .mrow .qui span { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+  .mrow .qui small { display: block; font-size: 11.5px; color: #6B6560; margin-top: 2px; }
+  .mrow .on { text-align: right; }
+  .chip { display: inline-block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--line); padding: 4px 10px; white-space: nowrap; }
+  .chip.casa { border-color: rgba(226,6,19,0.4); color: var(--red-dark); }
+  /* Semàntics de resultat: només per dir guanyat o perdut (skill web-cbgb). */
+  .marc { font-family: var(--display); font-weight: 400; font-size: 17px; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .marc.win { color: #1B7F4B; }
+  .marc.loss { color: #A8040E; }
+  .marc-tag { display: block; font-family: var(--display); font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; margin-top: 2px; text-align: right; }
+  .empty-note { padding: 18px 0; font-size: 14.5px; color: var(--ink-2); }
+  /* Calendar global: un desplegable per mes */
+  .mes { border: 1px solid var(--line); border-bottom: 0; }
+  .mes:last-of-type { border-bottom: 1px solid var(--line); }
+  .mes summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 54px; padding: 12px clamp(14px, 2.4vw, 24px); font-family: var(--display); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s; }
+  .mes summary::-webkit-details-marker { display: none; }
+  .mes summary:hover { color: var(--red); }
+  .mes summary i { font-style: normal; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; color: #6B6560; }
+  .mes[open] summary { border-bottom: 1px solid var(--line); }
+  .mes-body { padding: 4px clamp(14px, 2.4vw, 24px) 18px; }
+  .mes .mrow { grid-template-columns: 92px 64px minmax(0, 1fr); }
+  .mes .mrow .dia { font-family: var(--display); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6560; white-space: nowrap; }
+  .mes .mrow:last-child { border-bottom: 0; }
+  /* Llistat per equip (el manté el robot diari entre els marcadors SEO-EQUIPS) */
+  .equips-list ul { list-style: none; margin: 0; border-top: 1px solid var(--ink); }
+  .equips-list li { padding: 13px 2px; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); }
+  .equips-list li a { font-family: var(--display); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; border-bottom: 1px solid var(--red); padding-bottom: 1px; transition: color 0.3s; }
+  .equips-list li a:hover { color: var(--red); }
+  /* Gameday Seniors: la primera plantilla, destacada per davant de la resta. */
+  .gameday .mrow { grid-template-columns: 64px minmax(0, 1fr) auto; border-bottom: 1px solid var(--line); border-left: 3px solid var(--red); padding-left: 16px; }
+  .gameday .mrow .qui b { font-size: 14px; }
+  .gameday .mrow:last-child { border-bottom: 0; }
+  @media (max-width: 560px) {
+    .mrow { grid-template-columns: 52px minmax(0, 1fr); }
+    .mrow .on { grid-column: 2; text-align: left; }
+    .marc-tag { text-align: left; }
+    .mes .mrow { grid-template-columns: 78px minmax(0, 1fr); }
+    .mes .mrow .hora { grid-column: 1; }
+    .mes .mrow .qui { grid-column: 2; grid-row: 1 / span 2; }
+  }
 </style>
 <script src="/js/galetes.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
@@ -386,21 +86,24 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 <a href="#main" class="skip">Skip to content</a>
 <header class="head">
   <div class="head-in">
-    <a class="head-brand" href="/en/" aria-label="CB Grup Barna · inici">
-      <img src="/logo.png" alt="Escut del CB Grup Barna" width="30" height="30">
+    <a class="head-brand" href="/en/" aria-label="CB Grup Barna · home">
+      <img src="/logo.png" alt="CB Grup Barna crest" width="30" height="30">
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
-      <a href="/club/">Club</a>
+      <a href="/en/club/">Club</a>
       <a href="/en/escoleta/" class="opt">Escoleta</a>
       <a href="/en/partits/" aria-current="page">Calendar</a>
       <a href="/en/patrocinadors/" class="opt">Partners</a>
       <a href="/en/campus/" class="opt">Camp</a>
-      <a href="/magics/" class="opt">Màgics</a>
+      <a href="/en/magics/" class="opt">Màgics</a>
       <a href="/en/3x3/" class="opt">3x3</a>
-      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
+      <a href="/en/cistella-petita/" class="opt">Cistella Petita</a>
       <a href="/en/fotos/" class="opt">Gallery</a>
       <a href="/en/premsa/">Press</a>
+    </nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/partits/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/partits/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/partits/" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
     </nav>
   </div>
 </header>
@@ -410,7 +113,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   <!-- ==== CAPÇAL ==== -->
   <section class="section" style="padding-bottom:clamp(20px,3vw,36px)">
     <div class="wrap">
-      <nav class="crumb" aria-label="Fil d'Ariadna">
+      <nav class="crumb" aria-label="Breadcrumb">
         <a href="/en/">Home</a> · Match days
       </nav>
       <div class="phead" style="padding-bottom:0">
@@ -430,16 +133,18 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     </div>
   </section>
 
-  <!-- ===== VISTA RESULTATS ===== -->
-  <section class="view" id="v-resultats">
-    <div id="winners-box"></div>
-    <div id="millors-box"></div>
-    <div class="stat-row" id="club-stats"></div>
-    <div class="sec-t">🔥 Streaks by team</div>
-    <div id="ratxes-list"></div>
-    <div class="sec-t">⏳ Pending results</div>
-    <p style="font-size:11px;color:#6B6560;margin-bottom:10px">Matches already played with no score entered yet. Turn on management mode to add them.</p>
-    <div id="pendents-list"></div>
+  <!-- ==== GAMEDAY SENIORS ==== -->
+  <section class="section band-soft" id="gameday-seniors" style="padding-top:clamp(24px,3.4vw,44px)">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow red">Gameday</p>
+        <h2>Gameday Seniors</h2>
+        <p class="sub">The club's first teams, women's and men's, and their next fixtures.</p>
+      </div>
+      <div id="gameday-list" class="gameday">
+        <p class="empty-note">JavaScript needs to be enabled to see the Seniors Gameday.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ==== AQUEST CAP DE SETMANA ==== -->
@@ -470,71 +175,19 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     </div>
   </section>
 
-  <!-- ===== VISTA POSTERS ===== -->
-  <section class="view" id="v-cartells">
-    <div class="g-box" id="cartells-lock">
-      <h3>🔐 Club posters</h3>
-      <p>Generating and downloading posters is only for the communications staff (internal tool, in Catalan). Sign in with the club's Google account. The analysis and results are public on the other tabs.</p>
-      <div id="c-gbtn" style="margin-bottom:12px"></div>
-      <details><summary style="font-size:11px;color:#6B6560;cursor:pointer;margin-bottom:8px">O entrar amb clau</summary>
-      <input type="password" id="c-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
-      <button class="g-btn" id="c-unlock">Entrar</button></details>
-    </div>
-    <div id="cartells-open" style="display:none">
-    <div class="g-box">
-      <h3>🎨 Generador de cartells per Instagram</h3>
-      <p>Estètica de club gran (referència Barça Basket) amb els colors CBGB: vermell, negre i blanc. Tria plantilla i partit, puja la foto del jugador/a i descarrega el post llest per publicar (1080×1350).</p>
-      <div class="c-grid">
-        <label class="c-lab">Plantilla
-          <select id="c-tpl">
-            <option value="finde">📅 PARTITS DEL CAP DE SETMANA (llista)</option>
-            <option value="dia">🗓 UN DIA DE PARTIT (prèvia del dia)</option>
-            <option value="calendari">📆 CALENDARI MENSUAL (per al carrusel)</option>
-            <option value="duel">⚔️ DUEL · escuts enfrontats</option>
-            <option value="stats">📊 ESTADÍSTIQUES comparades</option>
-            <option value="serie">🔢 ELIMINATÒRIA · marcador de sèrie</option>
-            <option value="previa">📋 PRÈVIA amb estadístiques</option>
-            <option value="victoria">🏆 VICTÒRIA (resultat guanyat)</option>
-            <option value="final">⏱ FINAL (qualsevol resultat)</option>
-          </select>
-        </label>
-        <label class="c-lab">Partit
-          <select id="c-match"></select>
-        </label>
-        <label class="c-lab">Fons
-          <select id="c-bgm">
-            <option value="cream">◻ Crema · el que trenca el bloc</option>
-            <option value="red">🟥 Vermell Barna</option>
-            <option value="ink">⬛ Negre premium</option>
-          </select>
-        </label>
-        <label class="c-lab">Format
-          <select id="c-fmt">
-            <option value="1080x1080">◼ Post quadrat IG · 1080×1080</option>
-            <option value="1080x1920">▮ Story / Reel · 1080×1920</option>
-            <option value="1080x1350">▯ Vertical 4:5 · 1080×1350</option>
-          </select>
-        </label>
-        <label class="c-lab">Fons del cartell
-          <select id="c-fons"><option value="">— Sense foto (color de marca) —</option></select>
-        </label>
-        <label class="c-lab">…o puja una foto ara
-          <input type="file" id="c-photo" accept="image/*">
-        </label>
-        <label class="c-lab">Logo rival (opcional)
-          <input type="file" id="c-rival" accept="image/*">
-        </label>
-        <label class="c-lab">Plantilla pròpia de fons (opcional)
-          <input type="file" id="c-bg" accept="image/*">
-        </label>
-      </div>
-      <div id="c-rivalstats" style="display:none;margin:10px 0;padding:12px;background:var(--panel2);border-radius:12px">
-        <p style="font-size:11px;margin-bottom:8px">📊 Dades del rival per a la comparativa (opcional, es guarden per a la propera vegada):</p>
-        <div class="c-grid">
-          <label class="c-lab">Posició<input type="number" id="rs-pos" min="1" max="30"></label>
-          <label class="c-lab">Jugats<input type="number" id="rs-pj" min="0"></label>
-          <label class="c-lab">Victòries<input type="number" id="rs-v" min="0"></label>
-          <label class="c-lab">Derrotes<input type="number" id="rs-d" min="0"></label>
+  <!-- ==== CALENDARI GLOBAL ==== -->
+  <section class="section" id="calendari">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow red">The whole season</p>
+        <h2>Full calendar, all teams</h2>
+        <p class="sub">
+          Every fixture of the season, month by month. You can also subscribe from
+          Google Calendar, Apple or Outlook and get time changes automatically.
+        </p>
+        <div class="btn-row" style="margin-top:20px">
+          <a class="btn ghost" href="/partits/calendaris/ics/tots-els-equips.ics">Subscribe to the calendar (.ics)</a>
+          <a class="btn ghost" href="/en/partits/calendaris/">Download by team</a>
         </div>
       </div>
       <div id="cal-list">
@@ -543,15 +196,15 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     </div>
   </section>
 
-  <!-- ===== VISTA MANAGEMENT ===== -->
-  <section class="view" id="v-gestio">
-    <div class="g-box" id="g-lock">
-      <h3>🔐 Management mode</h3>
-      <p>Area for entering results, uploading federation PDFs and updating league positions (internal tool, in Catalan). Sign in with the club's Google account (<b>voluntarisgrupbarna@gmail.com</b>).</p>
-      <div id="g-gbtn" style="margin-bottom:12px"></div>
-      <details><summary style="font-size:11px;color:#6B6560;cursor:pointer;margin-bottom:8px">O entrar amb clau</summary>
-      <input type="password" id="g-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
-      <button class="g-btn" id="g-unlock">Entrar</button></details>
+  <!-- ==== PER EQUIP ==== -->
+  <section class="section band-soft" id="equips">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow red">The teams</p>
+        <h2>By team</h2>
+        <p class="sub">Each team has its own page with the competition, its record and the full calendar.</p>
+      </div>
+      <div class="equips-list"><!-- SEO-EQUIPS:START --><ul><li><a href="/en/partits/equips/cadet-femeni-a/"><strong>Cadet Femení A</strong></a> — C.C. CADET FEMENÍ PREFERENT · 0-0 (V-D)</li><li><a href="/en/partits/equips/cadet-femeni-b/"><strong>Cadet Femení B</strong></a> — C.C. CADET FEMENí PREFERENT 1R. ANY · 0-0 (V-D)</li><li><a href="/en/partits/equips/infantil-femeni-a/"><strong>Infantil Femení A</strong></a> — C.C. INFANTIL FEMENÍ INTERTERRITORIAL · 0-0 (V-D)</li><li><a href="/en/partits/equips/infantil-femeni-b/"><strong>Infantil Femení B</strong></a> — C.C. INFANTIL FEMENÍ PREFERENT 1R. ANY · 0-0 (V-D)</li><li><a href="/en/partits/equips/junior-femeni-a/"><strong>Júnior Femení A</strong></a> — C. C. JÚNIOR FEMENÍ PREFERENT · 0-0 (V-D)</li><li><a href="/en/partits/equips/junior-femeni-b/"><strong>Júnior Femení B</strong></a> — C.C. JÚNIOR FEMENÍ PREFERENT 1R. ANY · 0-0 (V-D)</li><li><a href="/en/partits/equips/scf/"><strong>Sènior Femení A</strong></a> — SUPER COPA FEMENINA · 0-0 (V-D)</li><li><a href="/en/partits/equips/senior-femeni-b/"><strong>Sènior Femení B</strong></a> — C.C. PRIMERA CATEGORIA FEMENINA · 0-0 (V-D)</li><li><a href="/en/partits/equips/cadet-masculi-a/"><strong>Cadet Masculí A</strong></a> — C.C. CADET MASCULÍ INTERTERRITORIAL · 0-0 (V-D)</li><li><a href="/en/partits/equips/cadet-masculi-b/"><strong>Cadet Masculí B</strong></a> — C.C. CADET MASCULÍ PREFERENT 1R. ANY · 0-0 (V-D)</li><li><a href="/en/partits/equips/infantil-masculi-a/"><strong>Infantil Masculí A</strong></a> — C.C. INFANTIL MASCULÍ INTERTERRITORIAL · 0-0 (V-D)</li><li><a href="/en/partits/equips/junior-masculi-a/"><strong>Júnior Masculí A</strong></a> — C.C. JÚNIOR MASCULÍ INTERTERRITORIAL · 0-0 (V-D)</li><li><a href="/en/partits/equips/scm/"><strong>Sènior Masculí A</strong></a> — SUPER COPA MASCULINA · 0-0 (V-D)</li><li><a href="/en/partits/equips/senior-masculi-b/"><strong>Sènior Masculí B</strong></a> — 1A. TERRITORIAL SÈNIOR MASCULÍ · 0-0 (V-D)</li><li><a href="/en/partits/equips/infantil-masculi-b/"><strong>Infantil Masculí B</strong></a> — C.C. INFANTIL MASCULÍ PREFERENT 1R. ANY · 0-0 (V-D)</li></ul><!-- SEO-EQUIPS:END --></div>
     </div>
   </section>
 
@@ -626,15 +279,15 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 </main>
 
 <!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
-<section class="comunitat" aria-label="Follow CB Grup Barna">
+<section class="comunitat" aria-label="Segueix el CB Grup Barna">
   <div class="comunitat-in">
     <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
-      <span class="comunitat-t">Follow us on Instagram</span>
-      <span class="comunitat-s">@cbgrupbarna · the club's week, as it happens.</span>
+      <span class="comunitat-t">Segueix-nos a Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el dia a dia del club, cada setmana.</span>
     </a>
     <a class="comunitat-porta comunitat-porta--red" href="/en/newsletter/" data-cta="crida-newsletter">
-      <span class="comunitat-t">Join the newsletter</span>
-      <span class="comunitat-s">One email a month with what's worth knowing. Nothing else.</span>
+      <span class="comunitat-t">Apunta't a la newsletter</span>
+      <span class="comunitat-s">Un correu al mes amb el que val la pena saber. Res més.</span>
     </a>
   </div>
 </section>
@@ -644,18 +297,20 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
     <div class="foot-grid">
       <div class="foot-col">
         <h3>El Barna</h3>
-        <a href="/femeni/">Women's basketball</a>
+        <a href="/en/womens-basketball/">Women's basketball</a>
         <a href="/en/escoleta/">Basketball school</a>
         <a href="/en/campus/">Basketball camp</a>
-        <a href="/magics/">Barna Màgics</a>
+        <a href="/en/magics/">Barna Màgics</a>
         <a href="/en/3x3/">3x3 tournament</a>
-        <a href="/cistella-petita/">Cistella Petita</a>
-        <a href="/empreses/">Businesses</a>
+        <a href="/en/cistella-petita/">Cistella Petita</a>
+        <a href="/en/companies/">Businesses</a>
         <a href="/en/patrocinadors/">Partners</a>
-        <a href="/instal-lacions/">Facilities</a>
-        <a href="/organigrama/">Who's who</a>
-        <a href="/posicionament/">Where the club stands</a>
+        <a href="/en/facilities/">Facilities</a>
+        <a href="/en/organisation/">Who's who</a>
+        <a href="/en/club-positioning/">Where the club stands</a>
         <a href="/en/grup-barna-dades-oficials/">Official data</a>
+        <a href="/en/child-protection/">Protecció del Menor</a>
+        <a href="/en/womens-basketball/">Women's basketball</a>
       </div>
       <div class="foot-col">
         <h3>Season</h3>
@@ -669,16 +324,18 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
       <div class="foot-col">
         <h3>Contact</h3>
         <a href="/en/#info">Request information</a>
-        <a href="/faq/">FAQ</a>
+        <a href="/en/newsletter/">Newsletter</a>
+        <a href="/en/suggestions/">Bústia de suggeriments</a>
+        <a href="/en/faq/">FAQ</a>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
       </div>
       <div class="foot-col">
         <h3>Legal</h3>
-        <a href="/politica-de-privacitat/">Privacy policy</a>
-        <a href="/avis-legal/">Legal notice</a>
-        <a href="/politica-de-privacitat/#galetes">Cookies</a>
+        <a href="/en/privacy-policy/">Privacy policy</a>
+        <a href="/en/legal-notice/">Legal notice</a>
+        <a href="/en/privacy-policy/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Social</h3>
@@ -708,1157 +365,6 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
   var MESOS = ['January', 'February', 'March', 'April', 'May', 'June',
                'July', 'August', 'September', 'October', 'November', 'December'];
 
-function loadOverrides() {
-  const def = {resultats:{},posicions:{},extraEquips:[],extraPartits:[],editsPartits:{},jugadors:[],fons:[],rivalStats:{},statsPartit:{}};
-  try { return Object.assign(def, JSON.parse(localStorage.getItem(LS_KEY)||'{}')); }
-  catch(e){ return def; }
-}
-function saveOverrides(){ localStorage.setItem(LS_KEY, JSON.stringify(OV)); }
-
-/* ---------- model fusionat ---------- */
-function model() {
-  const equips = [...BASE.equips.map(e=>({...e})), ...OV.extraEquips.map(e=>({...e}))];
-  for (const e of equips) {
-    const p = OV.posicions[e.id];
-    if (p) Object.assign(e, p);
-  }
-  const seen = {};
-  let partits = [...BASE.partits, ...OV.extraPartits].map(p=>({...p, ...(OV.editsPartits[p.id]||{})}));
-  partits = partits.filter(p => seen[p.id] ? false : (seen[p.id]=1));
-  for (const p of partits) {
-    const r = OV.resultats[p.id];
-    if (r) { p.puntsLocal = r.pl; p.puntsVisitant = r.pv; }
-    p.jugat = p.puntsLocal != null && p.puntsVisitant != null;
-    if (p.jugat) {
-      const barnaPts = p.casa ? p.puntsLocal : p.puntsVisitant;
-      const rivalPts = p.casa ? p.puntsVisitant : p.puntsLocal;
-      p.res = barnaPts > rivalPts ? 'W' : (barnaPts < rivalPts ? 'L' : 'E');
-    }
-  }
-  partits.sort((a,b)=> (a.data+a.hora).localeCompare(b.data+b.hora));
-  return { equips, partits };
-}
-
-/* ---------- estadístiques per equip ---------- */
-function teamStats(eqId, partits) {
-  const played = partits.filter(p=>p.equipId===eqId && p.jugat);
-  const w = played.filter(p=>p.res==='W').length;
-  const l = played.filter(p=>p.res==='L').length;
-  let streak = 0, sType = null;
-  for (let i = played.length-1; i>=0; i--) {
-    if (sType===null) { sType = played[i].res; streak = 1; }
-    else if (played[i].res===sType) streak++;
-    else break;
-  }
-  const last5 = played.slice(-5).map(p=>p.res);
-  const next = partits.find(p=>p.equipId===eqId && !p.jugat && p.data >= todayStr());
-  return { pj: played.length, w, l, streak, sType, last5, next };
-}
-function todayStr(){ const d=new Date(); return d.toISOString().slice(0,10); }
-
-/* ---------- caps de setmana ---------- */
-function weekKey(dateStr) {
-  // clau = dilluns de la setmana ISO
-  const d = new Date(dateStr+'T12:00:00');
-  const dow = (d.getDay()+6)%7; // 0=dl
-  d.setDate(d.getDate()-dow);
-  return d.toISOString().slice(0,10);
-}
-const MESOS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const DIES = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
-function fmtDia(dateStr){ const d=new Date(dateStr+'T12:00:00'); return `${DIES[d.getDay()]} ${d.getDate()} ${MESOS[d.getMonth()].toUpperCase()}`; }
-function wkLabel(mondayStr) {
-  const sat = new Date(mondayStr+'T12:00:00'); sat.setDate(sat.getDate()+5);
-  const sun = new Date(sat); sun.setDate(sun.getDate()+1);
-  const sameMonth = sat.getMonth()===sun.getMonth();
-  return sameMonth
-    ? `${sat.getDate()}–${sun.getDate()} ${MESOS[sat.getMonth()]} ${sat.getFullYear()}`
-    : `${sat.getDate()} ${MESOS[sat.getMonth()]} – ${sun.getDate()} ${MESOS[sun.getMonth()]} ${sat.getFullYear()}`;
-}
-function weekends(partits) {
-  const keys = [...new Set(partits.map(p=>weekKey(p.data)))].sort();
-  return keys;
-}
-
-/* ---------- render: jornada ---------- */
-function renderWeekNav(m) {
-  const wks = weekends(m.partits);
-  if (!wks.length) return;
-  if (!state.wk || !wks.includes(state.wk)) {
-    const cur = weekKey(todayStr());
-    state.wk = wks.find(k=>k>=cur) || wks[wks.length-1];
-  }
-  const sel = document.getElementById('wk-select');
-  sel.innerHTML = wks.map(k=>`<option value="${k}" ${k===state.wk?'selected':''}>Weekend ${wkLabel(k)}</option>`).join('');
-  const i = wks.indexOf(state.wk);
-  document.getElementById('wk-prev').disabled = i<=0;
-  document.getElementById('wk-next').disabled = i>=wks.length-1;
-}
-function renderFilters(m) {
-  // gènere
-  const gb = document.getElementById('filters-genere');
-  gb.innerHTML = [['tots','All'],['F','🔴 Women'],['M','⚫ Men']]
-    .map(([id,txt])=>`<button class="chip ${state.genere===id?'on':''}" data-g="${id}">${txt}</button>`).join('');
-  // categoria (nivell: sènior, júnior, cadet…)
-  const cats = [...new Set(m.equips.map(e=>e.nom.split(' ')[0]))].sort();
-  const cb = document.getElementById('filters-cat');
-  cb.innerHTML = `<button class="chip ${state.cat==='totes'?'on':''}" data-c="totes">All categories</button>`
-    + cats.map(c=>`<button class="chip ${state.cat===c?'on':''}" data-c="${c}">${c}</button>`).join('');
-  const box = document.getElementById('filters');
-  const visibles = m.equips.filter(e =>
-    (state.genere==='tots' || e.genere===state.genere) &&
-    (state.cat==='totes'  || e.nom.split(' ')[0]===state.cat));
-  const chips = [
-    {id:'tots', txt:'All teams'},
-    ...visibles.map(e=>({id:'eq:'+e.id, txt:`${e.emoji} ${e.curt||e.nom}`})),
-    {id:'casa', txt:'🏠 Home'}, {id:'fora', txt:'🚌 Away'},
-  ];
-  box.innerHTML = chips.map(c=>`<button class="chip ${state.filter===c.id?'on':''}" data-f="${c.id}">${c.txt}</button>`).join('');
-}
-/* Dades del contrincant: com ens ha anat contra ell, la seva posició si la tenim
-   i el seu Instagram. Només surt el que sabem de veritat. */
-function dadesRival(p, m) {
-  const rival = p.casa ? p.visitant : p.local;
-  const previs = m.partits.filter(x => x.equipId===p.equipId && x.jugat && x.data < p.data
-    && (x.local===rival || x.visitant===rival));
-  const rs = (OV.rivalStats||{})[rival] || {};
-  const ig = (RIVALS && (RIVALS[p.equipId]||{})[rival]) || null;
-  const bits = [];
-  if (previs.length) {
-    const g = previs.filter(x=>x.res==='W').length;
-    const ult = previs[previs.length-1];
-    bits.push(`<span><b>${g}-${previs.length-g}</b>Our record</span>`);
-    bits.push(`<span><b>${ult.puntsLocal}-${ult.puntsVisitant}</b>Last meeting</span>`);
-  }
-  if (rs.pos)  bits.push(`<span><b>${rs.pos}</b>Their position</span>`);
-  if (rs.pj != null && rs.v != null) bits.push(`<span><b>${rs.v}-${rs.d ?? 0}</b>Their record</span>`);
-  return `<div class="m-rival"><div class="r-tit">The opponent · ${rival}</div>
-    ${bits.length ? `<div class="r-fila">${bits.join('')}</div>` : ''}
-    ${!previs.length ? '<div style="color:#6B6560;font-size:11.5px;margin-top:4px">First meeting of the season. Data will appear once there are results.</div>' : ''}
-    ${ig ? `<div style="margin-top:6px"><a href="https://instagram.com/${ig.instagram.slice(1)}" target="_blank" rel="noopener" style="color:var(--red-ink);text-decoration:none;font-size:11.5px">📸 ${ig.instagram} · ${(ig.seguidors/1000).toFixed(1)}K followers</a></div>` : ''}
-  </div>`;
-}
-/* Previsió d'un partit encara no jugat: estimació estadística transparent
-   (rendiment casa/fora de la temporada + historial directe contra el rival),
-   MAI una "IA" de caixa negra — i només si la mostra ho aguanta. */
-function previsioPartit(p, m) {
-  if (p.jugat) return '';
-  const rival = p.casa ? p.visitant : p.local;
-  const a = analitzaEquip(p.equipId, m);
-  const previs = m.partits.filter(x => x.equipId===p.equipId && x.jugat && x.data < p.data
-    && (x.local===rival || x.visitant===rival));
-  const ctx = p.casa ? a.casa : a.fora;
-  const h2h = previs.length >= 2 ? previs.filter(x=>x.res==='W').length / previs.length : null;
-  const ambient = ctx.pj >= MIN_MOSTRA ? ctx.w/ctx.pj : (a.pj >= MIN_MOSTRA ? a.w/a.pj : null);
-  if (h2h == null && ambient == null) return '';
-  const prob = (h2h != null && ambient != null) ? h2h*0.6 + ambient*0.4 : (h2h != null ? h2h : ambient);
-  const pct = Math.round(prob*100);
-  const etiqueta = pct >= 65 ? 'favourites' : pct <= 35 ? 'uphill match' : 'even match';
-  const base = h2h != null
-    ? `the head-to-head vs ${rival} and the ${p.casa?'home':'away'} record this season`
-    : `the ${p.casa?'home':'away'} record this season`;
-  return `<div style="margin-top:8px;padding:8px 10px;background:var(--panel2);border-radius:10px;font-size:11.5px;line-height:1.5">
-    🔮 <b>Forecast: ${pct}% chance of winning</b> · ${etiqueta}
-    <br><span style="color:#6B6560">Estimate based on ${base} — the club's own data, not a guaranteed prediction.</span>
-  </div>`;
-}
-function avisModificacio(p) {
-  if (!p.avis || p.avis.expira < todayStr()) return '';
-  return `<div style="margin-top:8px;padding:8px 10px;background:rgba(226,6,19,.10);border:1px solid rgba(226,6,19,.30);border-radius:10px;font-size:11.5px;color:var(--red-ink)">
-    ✏️ <b>CHANGED</b> on ${fmtDia(p.avis.detectat).toLowerCase()} · ${p.avis.resum}</div>`;
-}
-function matchCard(p, m, showDate) {
-  const eq = m.equips.find(e=>e.id===p.equipId) || {};
-  const homeIsBarna = p.casa===true, awayIsBarna = p.casa===false;
-  const mapsQ = encodeURIComponent(`${p.pista}, ${p.adreca||''}`);
-  const mapsViewUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQ}`;
-  const mapsCarUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQ}&travelmode=driving`;
-  const mapsTransitUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQ}&travelmode=transit`;
-  let center;
-  if (p.jugat) {
-    const cls = p.res==='W'?'w':(p.res==='L'?'l':'');
-    center = `<div class="m-score"><span class="${cls}">${p.puntsLocal} · ${p.puntsVisitant}</span><small class="${cls}">${p.res==='W'?'WIN':p.res==='L'?'LOSS':'DRAW'}</small></div>`;
-  } else {
-    center = `<div class="m-vs">VS</div>`;
-  }
-  const editRow = editMode ? `
-    <div class="m-edit">
-      <input type="number" inputmode="numeric" min="0" max="300" id="pl-${p.id}" placeholder="local" value="${p.puntsLocal ?? ''}">
-      <span class="sep">–</span>
-      <input type="number" inputmode="numeric" min="0" max="300" id="pv-${p.id}" placeholder="away" value="${p.puntsVisitant ?? ''}">
-      <button onclick="saveResult('${p.id}')">Save</button>
-    </div>` : '';
-  return `
-  <div class="match ${p.casa?'casa':'fora'} ${p.jugat ? (p.res==='W'?'win':p.res==='L'?'loss':'') : ''}">
-    <div class="m-top">
-      <span class="m-hora">${showDate?fmtDia(p.data)+' · ':''}${p.hora}</span>
-      <span class="m-badge ${p.casa?'casa':'fora'}">${p.casa?'Home':'Away'}</span>
-      <span class="m-eq">${eq.emoji||''} ${eq.curt||eq.nom||''}</span>
-    </div>
-    <div class="m-teams">
-      <div class="m-t ${homeIsBarna?'barna':'rival'}">${p.local}</div>
-      ${center}
-      <div class="m-t right ${awayIsBarna?'barna':'rival'}">${p.visitant}</div>
-    </div>
-    <div class="m-loc">📍 <a href="${mapsViewUrl}" target="_blank" rel="noopener" style="border:none;padding:0;color:#6B6560;text-decoration:underline;font-family:inherit;font-size:inherit;letter-spacing:normal">${p.pista}${p.adreca?` · ${p.adreca}`:''}</a>
-      <span class="m-loc-actions">
-        <a href="${mapsCarUrl}" target="_blank" rel="noopener">🚗 CAR</a>
-        <a href="${mapsTransitUrl}" target="_blank" rel="noopener">🚌 BUS/TRAIN</a>
-      </span>
-    </div>
-    <div class="m-cat">${p.categoria}</div>
-    ${avisModificacio(p)}
-    ${dadesRival(p, m)}
-    ${previsioPartit(p, m)}
-    ${editRow}
-  </div>`;
-}
-function renderCanvisBanner() {
-  const el = document.getElementById('canvis-banner');
-  if (!el) return;
-  if (!CANVIS || !CANVIS.canvis || !CANVIS.canvis.length) { el.innerHTML = ''; return; }
-  const vist = localStorage.getItem('cbgbCanvisVist') || '';
-  const nous = CANVIS.canvis.filter(c => c.data > vist);
-  if (!nous.length) { el.innerHTML = ''; return; }
-  const items = nous.flatMap(c => c.items);
-  const resum = items.slice(0, 6).map(it =>
-    `<li>${it.equip} vs ${it.rival}: <b>${it.camp}</b> ${it.abans!=='—' ? `${it.abans} → ` : ''}${it.despres}</li>`
-  ).join('');
-  el.innerHTML = `
-  <div style="margin-bottom:14px;padding:12px 14px;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.25);border-radius:14px;font-size:12.5px;color:var(--ink)">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-      <b>📣 The FCBQ robot has detected ${items.length} schedule change${items.length===1?'':'s'}</b>
-      <button onclick="marcarCanvisVistos()" style="border:none;background:none;color:var(--red-ink);font-size:12px;cursor:pointer;text-decoration:underline">Got it</button>
-    </div>
-    <ul style="margin:8px 0 0;padding-left:18px">${resum}</ul>
-  </div>`;
-}
-function marcarCanvisVistos() {
-  localStorage.setItem('cbgbCanvisVist', todayStr());
-  renderCanvisBanner();
-}
-function renderJornada() {
-  const m = model();
-  renderWeekNav(m);
-  renderFilters(m);
-  let list;
-  if (state.abast === 'mes') {
-    const mes = state.wk.slice(0,7);
-    const seg = new Date(state.wk+'T12:00:00'); seg.setDate(seg.getDate()+6);
-    const mesFi = seg.toISOString().slice(0,7);           // si el cap de setmana canvia de mes
-    list = m.partits.filter(p => p.data.slice(0,7)===mes || p.data.slice(0,7)===mesFi);
-  } else {
-    const wkEnd = new Date(state.wk+'T12:00:00'); wkEnd.setDate(wkEnd.getDate()+6);
-    list = m.partits.filter(p => p.data>=state.wk && p.data<=wkEnd.toISOString().slice(0,10));
-  }
-  const eqOk = e => (state.genere==='tots' || e.genere===state.genere)
-                 && (state.cat==='totes'  || e.nom.split(' ')[0]===state.cat);
-  list = list.filter(p => { const e = m.equips.find(x=>x.id===p.equipId); return e && eqOk(e); });
-  if (state.filter.startsWith('eq:')) list = list.filter(p=>p.equipId===state.filter.slice(3));
-  if (state.filter==='casa') list = list.filter(p=>p.casa);
-  if (state.filter==='fora') list = list.filter(p=>!p.casa);
-  const box = document.getElementById('jornada-list');
-  if (!list.length) { box.innerHTML = `<div class="empty">No matches this weekend with this filter. 🏖</div>`; }
-  else {
-    const days = [...new Set(list.map(p=>p.data))].sort();
-    box.innerHTML = days.map(d=>{
-      const dow = new Date(d+'T12:00:00').getDay();
-      const cls = dow===6?'sat':(dow===0?'sun':'');
-      const dayList = list.filter(p=>p.data===d);
-      return `<div class="day-h ${cls}"><span>${fmtDia(d)}</span><span class="line"></span><span class="n">${dayList.length} match${dayList.length>1?'es':''}</span></div>`
-        + dayList.map(p=>matchCard(p,m,false)).join('');
-    }).join('');
-  }
-  // WhatsApp del finde
-  const wa = document.getElementById('wa-share');
-  const txt = buildWaText(list, m, `🏀 *CB GRUP BARNA · Weekend ${wkLabel(state.wk)}*`);
-  wa.href = 'https://wa.me/?text='+encodeURIComponent(txt);
-  wa.style.display = list.length?'flex':'none';
-}
-function buildWaText(list, m, title) {
-  let out = title+'\n';
-  const days = [...new Set(list.map(p=>p.data))].sort();
-  for (const d of days) {
-    out += `\n*${fmtDia(d)}*\n`;
-    for (const p of list.filter(x=>x.data===d)) {
-      const eq = m.equips.find(e=>e.id===p.equipId)||{};
-      const res = p.jugat ? ` → *${p.puntsLocal}-${p.puntsVisitant}* ${p.res==='W'?'✅':p.res==='L'?'❌':'➖'}` : '';
-      out += `${p.hora} · ${eq.curt||''} ${p.casa?'🏠':'🚌'}\n${p.local} vs ${p.visitant}${res}\n📍 ${p.pista}\n`;
-    }
-  }
-  out += '\n#SomClot 🔴⚫ cbgrupbarna.info/partits/';
-  return out;
-}
-
-/* ---------- render: resultats i ratxes ---------- */
-function renderResultats() {
-  const m = model();
-  const played = m.partits.filter(p=>p.jugat);
-  const w = played.filter(p=>p.res==='W').length, l = played.filter(p=>p.res==='L').length;
-  const pct = played.length? Math.round(w/played.length*100) : 0;
-  renderWinners(m);
-  document.getElementById('club-stats').innerHTML = `
-    <div class="stat"><b>${played.length}</b><span>Played</span></div>
-    <div class="stat"><b class="g">${w}</b><span>Wins</span></div>
-    <div class="stat"><b class="p">${l}</b><span>Losses</span></div>
-    <div class="stat"><b>${pct}%</b><span>% Win</span></div>`;
-  // ratxes ordenades: millors primer
-  const rows = m.equips.map(e=>({e, s: teamStats(e.id, m.partits)}))
-    .sort((a,b)=> (b.s.sType==='W'?b.s.streak:-b.s.streak) - (a.s.sType==='W'?a.s.streak:-a.s.streak));
-  // equips que millor van → destacats amb CTA de seguiment
-  const enRatxa = rows.filter(r=>r.s.sType==='W' && r.s.streak>=2);
-  document.getElementById('millors-box').innerHTML = enRatxa.length ? `<div class="winners" style="background:linear-gradient(135deg,rgba(34,197,94,.10),var(--panel) 60%);border-color:rgba(34,197,94,.35)">
-    <h3 style="color:var(--green)">🔥 Teams on the best run right now</h3>
-    ${enRatxa.map(({e,s})=>`<div class="wrow">${e.emoji||'🏀'} ${e.nom}<small>${s.streak} wins in a row · ${s.w}-${s.l}</small></div>`).join('')}
-    <a class="g-btn" style="text-decoration:none;background:#E20613" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">📸 Follow them at @cbgrupbarna</a>
-  </div>` : '';
-  document.getElementById('ratxes-list').innerHTML = rows.map(({e,s})=>{
-    let stk = '<span class="streak">No matches played</span>';
-    if (s.sType==='W') stk = `<span class="streak hot">🔥 ${s.streak} win${s.streak>1?'s':''} in a row</span>`;
-    if (s.sType==='L') stk = `<span class="streak cold">🧊 ${s.streak} loss${s.streak>1?'es':''} in a row</span>`;
-    return `<button class="team-row" onclick="openTeam('${e.id}')">
-      <span class="em">${e.emoji||'🏀'}</span>
-      <span class="nm"><b>${e.nom}</b><small>${e.competicio||''}${e.posicio?` · position ${e.posicio}`:''}</small>
-        <span class="dots">${s.last5.map(r=>`<span class="dot ${r==='W'?'w':'l'}"></span>`).join('')}</span>
-        ${stk}
-      </span>
-      <span class="rec">${s.w}-${s.l}<small>W - L</small></span>
-    </button>`;
-  }).join('');
-  // pendents
-  const pend = m.partits.filter(p=>!p.jugat && p.data < todayStr()).slice(-12).reverse();
-  document.getElementById('pendents-list').innerHTML = pend.length
-    ? pend.map(p=>matchCard(p,m,true)).join('')
-    : `<div class="empty">All caught up. No pending results. ✅</div>`;
-}
-
-
-/* =========================================================
-   📈 ANÀLISI · lectura dels resultats propis del club
-   Tot es calcula amb els partits que hi ha a la app. Cap dada
-   inventada: si no hi ha prou mostra, es diu i no s'afirma res.
-   ========================================================= */
-const MIN_MOSTRA = 3;          // per sota d'això no traiem conclusions
-
-function analitzaEquip(eqId, m) {
-  const tots = m.partits.filter(p => p.equipId === eqId);
-  const jug = tots.filter(p => p.jugat);
-  const w = jug.filter(p => p.res === 'W'), l = jug.filter(p => p.res === 'L');
-  const pts = p => ({ nostres: p.casa ? p.puntsLocal : p.puntsVisitant,
-                      seus:    p.casa ? p.puntsVisitant : p.puntsLocal });
-  const mitjana = arr => arr.length ? Math.round(arr.reduce((a,b)=>a+b,0)/arr.length) : null;
-  const casa = jug.filter(p=>p.casa), fora = jug.filter(p=>!p.casa);
-  const bal = arr => ({ pj: arr.length, w: arr.filter(p=>p.res==='W').length, l: arr.filter(p=>p.res==='L').length });
-  // ratxa actual i millor/pitjor ratxa
-  let millorW = 0, pitjorL = 0, cW = 0, cL = 0;
-  for (const p of jug) {
-    if (p.res==='W') { cW++; cL=0; millorW=Math.max(millorW,cW); }
-    else if (p.res==='L') { cL++; cW=0; pitjorL=Math.max(pitjorL,cL); }
-  }
-  // tendència: primera meitat vs segona meitat dels partits jugats
-  let tendencia = null;
-  if (jug.length >= 6) {
-    const tall = Math.floor(jug.length/2);
-    const pct = arr => arr.filter(p=>p.res==='W').length / arr.length;
-    const d = Math.round((pct(jug.slice(tall)) - pct(jug.slice(0,tall))) * 100);
-    tendencia = { delta: d, txt: d >= 15 ? 'a més' : d <= -15 ? 'a menys' : 'estable' };
-  }
-  // rendiment per pista
-  const perPista = {};
-  for (const p of jug) {
-    const k = p.pista || '—';
-    (perPista[k] = perPista[k] || { pj:0, w:0, l:0, casa: p.casa })
-    perPista[k].pj++; perPista[k][p.res==='W'?'w':'l']++;
-  }
-  // rivals: com ens ha anat contra cadascun
-  const perRival = {};
-  for (const p of jug) {
-    const r = p.casa ? p.visitant : p.local;
-    (perRival[r] = perRival[r] || { pj:0, w:0, l:0, dif:0 });
-    const q = pts(p);
-    perRival[r].pj++; perRival[r][p.res==='W'?'w':'l']++; perRival[r].dif += q.nostres - q.seus;
-  }
-  const propers = tots.filter(p => !p.jugat && p.data >= todayStr()).slice(0, 5);
-  return {
-    pj: jug.length, w: w.length, l: l.length,
-    pf: mitjana(jug.map(p=>pts(p).nostres)), pc: mitjana(jug.map(p=>pts(p).seus)),
-    casa: bal(casa), fora: bal(fora), millorW, pitjorL, tendencia,
-    perPista, perRival, propers, restants: tots.filter(p=>!p.jugat).length, total: tots.length,
-  };
-}
-
-/* Lectures automàtiques: només s'escriuen quan la mostra ho aguanta */
-function lecturesEquip(a, e) {
-  const out = [];
-  if (a.pj < MIN_MOSTRA) return out;
-  const pct = Math.round(a.w / a.pj * 100);
-  if (a.casa.pj >= MIN_MOSTRA && a.fora.pj >= MIN_MOSTRA) {
-    const pc = a.casa.w / a.casa.pj, pf = a.fora.w / a.fora.pj;
-    if (pc - pf >= 0.3) out.push({ t:'🏠', txt:`<b>Very strong at home.</b> ${a.casa.w}-${a.casa.l} at the Nau and ${a.fora.w}-${a.fora.l} away. Home matches are where the season is won.` });
-    else if (pf - pc >= 0.3) out.push({ t:'🚌', txt:`<b>Better away than at home</b> (${a.fora.w}-${a.fora.l} away, ${a.casa.w}-${a.casa.l} at home). Worth checking what's happening at the Nau.` });
-  }
-  if (a.pf != null && a.pc != null) {
-    const d = a.pf - a.pc;
-    if (d >= 8) out.push({ t:'📈', txt:`<b>Clear dominance:</b> ${a.pf} points for on average and ${a.pc} against (+${d}).` });
-    else if (d <= -8) out.push({ t:'📉', txt:`<b>Conceding too much:</b> ${a.pc} points against for ${a.pf} for (${d}). The problem is defensive.` });
-    else if (a.pj >= 5) out.push({ t:'⚖️', txt:`<b>Tight matches:</b> ${a.pf} for and ${a.pc} against. Every possession counts.` });
-  }
-  if (a.tendencia) {
-    if (a.tendencia.txt === 'a més') out.push({ t:'🚀', txt:`<b>Trending up:</b> ${a.tendencia.delta > 0 ? '+' : ''}${a.tendencia.delta} percentage points of wins in the second half of the schedule played.` });
-    if (a.tendencia.txt === 'a menys') out.push({ t:'⚠️', txt:`<b>Trending down:</b> ${a.tendencia.delta} percentage points versus the start. Time to react.` });
-  }
-  if (a.millorW >= 3) out.push({ t:'🔥', txt:`<b>Best streak of the season:</b> ${a.millorW} wins in a row.` });
-  if (a.pitjorL >= 3) out.push({ t:'🧊', txt:`Worst spell: ${a.pitjorL} losses in a row.` });
-  // rivals que se'ns han donat malament
-  const negres = Object.entries(a.perRival).filter(([,v]) => v.pj >= 2 && v.w === 0);
-  if (negres.length) out.push({ t:'🎯', txt:`<b>Bogey team:</b> ${negres.map(([r,v])=>`${r} (${v.pj} matches, ${v.pj} losses)`).join(' · ')}.` });
-  // pistes on no guanyem
-  const males = Object.entries(a.perPista).filter(([,v]) => v.pj >= 2 && v.w === 0 && !v.casa);
-  if (males.length) out.push({ t:'📍', txt:`<b>Tough court:</b> ${males.map(([p,v])=>`${p} (${v.l} losses out of ${v.pj})`).join(' · ')}.` });
-  if (pct >= 70 && a.pj >= 5) out.push({ t:'🏆', txt:`<b>${pct}% wins.</b> Top-of-group pace.` });
-  if (pct <= 30 && a.pj >= 5) out.push({ t:'🛟', txt:`<b>${pct}% wins.</b> Bottom-of-group pace: the remaining points are vital.` });
-  return out;
-}
-
-/* Objectius: quants dels partits que queden cal guanyar */
-function objectiusEquip(a, e) {
-  if (!a.pj || !a.restants) return null;
-  const ritme = a.w / a.pj;
-  const projeccio = Math.round(a.w + ritme * a.restants);
-  const assequibles = a.propers.filter(p => {
-    const r = p.casa ? p.visitant : p.local;
-    const h = a.perRival[r];
-    return p.casa || (h && h.w > h.l);          // a casa, o rival a qui ja hem guanyat
-  });
-  return { projeccio, total: a.total, assequibles, ritme: Math.round(ritme*100) };
-}
-
-function analitzaClub(m) {
-  const jug = m.partits.filter(p => p.jugat);
-  const perPista = {}, perRival = {};
-  for (const p of jug) {
-    const k = p.pista || '—';
-    (perPista[k] = perPista[k] || { pj:0, w:0, l:0, casa:p.casa });
-    perPista[k].pj++; perPista[k][p.res==='W'?'w':'l']++;
-    const r = p.casa ? p.visitant : p.local;
-    (perRival[r] = perRival[r] || { pj:0, w:0, l:0 });
-    perRival[r].pj++; perRival[r][p.res==='W'?'w':'l']++;
-  }
-  return { jug, perPista, perRival };
-}
-
-function renderAnalisi() {
-  const m = model();
-  const club = analitzaClub(m);
-  const avis = document.getElementById('an-avis'); if (!avis) return;
-
-  if (!club.jug.length) {
-    avis.innerHTML = `<div class="g-box"><h3>📈 Nothing to analyze yet</h3>
-      <p>The analysis is built from the teams' <b>real results</b>. As you enter them in Management,
-      you'll see each team's streaks, trend, courts where it's hard to win, bogey teams and
-      how many matches are needed to climb positions.<br><br>
-      <b>${m.partits.length} matches</b> loaded and <b>0 played</b> · the season starts on 5 September.</p></div>`;
-    ['an-setmana','an-equips','an-pistes','an-rivals'].forEach(id=>document.getElementById(id).innerHTML='');
-    return;
-  }
-  avis.innerHTML = '';
-
-  // ── resum de la setmana ──
-  const wks = [...new Set(club.jug.map(p=>weekKey(p.data)))].sort();
-  const ultima = wks[wks.length-1];
-  const fi = new Date(ultima+'T12:00:00'); fi.setDate(fi.getDate()+6);
-  const dUlt = club.jug.filter(p=>p.data>=ultima && p.data<=fi.toISOString().slice(0,10));
-  const wUlt = dUlt.filter(p=>p.res==='W').length;
-  document.getElementById('an-setmana').innerHTML = `
-    <div class="winners"><h3>📅 The latest matchday · ${wkLabel(ultima)}</h3>
-      <div class="wrow">Club record<small>${wUlt}W - ${dUlt.length-wUlt}L</small></div>
-      ${dUlt.map(p=>{const e=m.equips.find(x=>x.id===p.equipId)||{};
-        return `<div class="wrow">${p.res==='W'?'✅':'❌'} ${e.nom}<small>${p.puntsLocal}-${p.puntsVisitant}</small></div>`}).join('')}
-    </div>`;
-
-  // ── equip a equip ──
-  const rows = m.equips.map(e => ({ e, a: analitzaEquip(e.id, m) })).filter(x => x.a.pj > 0)
-    .sort((x,y) => (y.a.w/Math.max(1,y.a.pj)) - (x.a.w/Math.max(1,x.a.pj)));
-  document.getElementById('an-equips').innerHTML = `<div class="sec-t">🧠 Team-by-team read</div>` + rows.map(({e,a}) => {
-    const lect = lecturesEquip(a, e), obj = objectiusEquip(a, e);
-    return `<div class="g-box">
-      <div class="g-step" style="margin-bottom:10px"><span style="font-size:20px">${e.emoji||'🏀'}</span>
-        <h3 style="flex:1">${e.nom}</h3>
-        <span style="font-family:'Anton',sans-serif;font-size:20px">${a.w}-${a.l}</span></div>
-      <div class="stat-row" style="margin-bottom:12px">
-        <div class="stat"><b>${a.pj}</b><span>Played</span></div>
-        <div class="stat"><b>${a.casa.w}-${a.casa.l}</b><span>Home</span></div>
-        <div class="stat"><b>${a.fora.w}-${a.fora.l}</b><span>Away</span></div>
-        <div class="stat"><b>${a.pf!=null?a.pf:'—'}</b><span>Points/game</span></div>
-      </div>
-      ${lect.length ? lect.map(x=>`<p style="font-size:12.5px;line-height:1.6;margin-bottom:7px">${x.t} ${x.txt}</p>`).join('')
-        : `<p style="font-size:12px;color:#6B6560">With ${a.pj} match${a.pj>1?'es':''} played there's not yet enough sample for reliable conclusions (need ${MIN_MOSTRA}).</p>`}
-      ${obj && a.pj >= MIN_MOSTRA ? `<div style="margin-top:10px;padding:12px;background:var(--panel2);border-radius:12px;font-size:12.5px;line-height:1.6">
-        🎯 <b>At the current pace (${obj.ritme}% wins)</b> it would finish with around <b>${obj.projeccio} wins</b> out of ${obj.total} matches.
-        ${obj.assequibles.length ? `<br>Of the upcoming ones, the most within reach: ${obj.assequibles.map(p=>`<b>${p.casa?'vs':'@'} ${(p.casa?p.visitant:p.local).slice(0,24)}</b> (${fmtDia(p.data).toLowerCase()})`).join(' · ')}.` : ''}
-        ${a.restants ? `<br>There are <b>${a.restants} matches</b> left: each win is worth ${Math.round(100/a.total)}% of the schedule.` : ''}
-      </div>` : ''}
-    </div>`;
-  }).join('');
-
-  // ── pistes ──
-  const pistes = Object.entries(club.perPista).filter(([,v])=>v.pj>=2)
-    .sort((a,b)=>(a[1].w/a[1].pj)-(b[1].w/b[1].pj));
-  document.getElementById('an-pistes').innerHTML = pistes.length ? `<div class="sec-t">📍 Courts: where it's hard and where it isn't</div>`
-    + pistes.map(([nom,v])=>`<div class="team-row"><span class="em">${v.casa?'🏠':'🚌'}</span>
-        <span class="nm"><b>${nom}</b><small>${v.pj} matches</small></span>
-        <span class="rec" style="color:${v.w>v.l?'var(--win)':v.l>v.w?'var(--loss)':'inherit'}">${v.w}-${v.l}<small>W - L</small></span></div>`).join('') : '';
-
-  // ── rivals ──
-  const rivals = Object.entries(club.perRival).filter(([,v])=>v.pj>=2)
-    .sort((a,b)=>(a[1].w/a[1].pj)-(b[1].w/b[1].pj)).slice(0,10);
-  document.getElementById('an-rivals').innerHTML = rivals.length ? `<div class="sec-t">🎯 Repeated opponents</div>`
-    + rivals.map(([nom,v])=>`<div class="team-row"><span class="nm"><b>${nom}</b><small>${v.pj} meetings</small></span>
-        <span class="rec" style="color:${v.w>v.l?'var(--win)':v.l>v.w?'var(--loss)':'inherit'}">${v.w}-${v.l}<small>W - L</small></span></div>`).join('') : '';
-}
-
-/* ---------- render: equips ---------- */
-function renderEquips() {
-  const m = model();
-  document.getElementById('equip-detall').style.display = state.team?'block':'none';
-  document.getElementById('equips-list').style.display = state.team?'none':'block';
-  if (!state.team) {
-    document.getElementById('equips-list').innerHTML = m.equips.map(e=>{
-      const s = teamStats(e.id, m.partits);
-      return `<button class="team-row" onclick="openTeam('${e.id}')">
-        <span class="em">${e.emoji||'🏀'}</span>
-        <span class="nm"><b>${e.nom}</b><small>${e.competicio||''}</small></span>
-        <span class="rec">${s.w}-${s.l}<small>${e.posicio?`Pos. ${e.posicio}`:'W - L'}</small></span>
-      </button>`;
-    }).join('');
-    return;
-  }
-  const e = m.equips.find(x=>x.id===state.team);
-  if (!e) { state.team=null; return renderEquips(); }
-  const s = teamStats(e.id, m.partits);
-  const teamMatches = m.partits.filter(p=>p.equipId===e.id);
-  const posEdit = editMode
-    ? `<input type="number" min="1" max="20" value="${e.posicio||''}" id="pos-in" placeholder="?"> de <input type="number" min="2" max="20" value="${e.equipsGrup||''}" id="grp-in" placeholder="?"> <button class="g-btn" style="padding:6px 12px" onclick="savePos('${e.id}')">OK</button>`
-    : (e.posicio ? `<b>${e.posicio}${e.equipsGrup?`<span style="font-size:16px;color:#6B6560">/${e.equipsGrup}</span>`:''}</b>` : `<b style="color:#6B6560;font-size:18px">—</b>`);
-  const waTxt = buildWaText(teamMatches.filter(p=>!p.jugat).slice(0,5), m, `🏀 *${e.nom} · Upcoming matches*`);
-  document.getElementById('equip-detall').innerHTML = `
-    <button class="back-btn" onclick="closeTeam()">← ALL TEAMS</button>
-    <div class="td-head">
-      <div class="em">${e.emoji||'🏀'}</div>
-      <h2>${e.nom}</h2>
-      <div class="comp">${e.competicio||''}</div>
-    </div>
-    <div class="stat-row">
-      <div class="stat"><b>${s.pj}</b><span>Played</span></div>
-      <div class="stat"><b class="g">${s.w}</b><span>W.</span></div>
-      <div class="stat"><b class="p">${s.l}</b><span>L.</span></div>
-      <div class="stat"><b>${s.sType?`${s.streak}${s.sType==='W'?'W':'L'}`:'—'}</b><span>Streak</span></div>
-    </div>
-    <div class="pos-box">${posEdit}<span>league position<br><small style="color:#6B6560">${editMode?'edita i prem OK':'updates from management'}</small></span></div>
-    <div class="td-actions">
-      <a href="https://wa.me/?text=${encodeURIComponent(waTxt)}" target="_blank" rel="noopener">📲 WhatsApp</a>
-      <button onclick="downloadICS('${e.id}')">📅 Download .ics</button>
-      <a href="webcal://cbgrupbarna.info/partits/calendaris/ics/${e.id}.ics" title="Opens in your phone or computer's calendar app and updates itself every day">🔔 Subscribe to calendar</a>
-    </div>
-    ${s.next?`<div class="sec-t">⏭ Next match</div>${matchCard(s.next,m,true)}`:''}
-    <div id="td-rivals"></div>
-    <div class="sec-t">📋 Full schedule</div>
-    ${teamMatches.map(p=>matchCard(p,m,true)).join('')}`;
-}
-function openTeam(id){ state.team=id; showView('equips'); renderEquips(); fillRivals(id); window.scrollTo({top:0}); }
-async function fillRivals(eqId) {
-  await loadRivals();
-  const box = document.getElementById('td-rivals');
-  const data = RIVALS[eqId];
-  if (!box || !data) return;
-  const rows = Object.entries(data).sort((a,b)=>b[1].seguidors-a[1].seguidors);
-  const handles = rows.map(([,r])=>r.instagram).join(' ');
-  box.innerHTML = `<div class="sec-t">📣 Opponents on Instagram (to prioritize tagging)</div>`
-    + rows.map(([nom,r])=>`<a class="team-row" style="text-decoration:none" href="https://instagram.com/${r.instagram.slice(1)}" target="_blank" rel="noopener">
-        <img src="${r.logo}" style="width:34px;height:34px;object-fit:contain" alt="" loading="lazy" decoding="async">
-        <span class="nm"><b>${r.nomCurt}</b><small>${r.instagram}</small></span>
-        <span class="rec">${(r.seguidors/1000).toFixed(1)}K<small>followers</small></span>
-      </a>`).join('')
-    + `<button class="g-btn ghost" style="margin-top:4px" onclick="navigator.clipboard.writeText('${handles}').then(()=>alert('Handles copied ✅'))">📋 Copy all @ handles to tag</button>`;
-}
-function closeTeam(){ state.team=null; renderEquips(); }
-function savePos(eqId) {
-  const pos = parseInt(document.getElementById('pos-in').value)||null;
-  const grp = parseInt(document.getElementById('grp-in').value)||null;
-  OV.posicions[eqId] = { posicio: pos, equipsGrup: grp };
-  saveOverrides(); renderEquips();
-}
-
-/* ---------- guanyadors del finde (menció especial) ---------- */
-function renderWinners(m) {
-  const box = document.getElementById('winners-box');
-  const playedWks = [...new Set(m.partits.filter(p=>p.jugat).map(p=>weekKey(p.data)))].sort();
-  if (!playedWks.length) { box.innerHTML=''; return; }
-  const wk = playedWks[playedWks.length-1];
-  const wkEnd = new Date(wk+'T12:00:00'); wkEnd.setDate(wkEnd.getDate()+6);
-  const wkMatches = m.partits.filter(p=>p.jugat && p.data>=wk && p.data<=wkEnd.toISOString().slice(0,10));
-  const winners = wkMatches.filter(p=>p.res==='W');
-  const losers  = wkMatches.filter(p=>p.res==='L');
-  const rows = winners.map(p=>{
-    const e = m.equips.find(x=>x.id===p.equipId)||{};
-    return `<div class="wrow">${e.emoji||'🏆'} ${e.nom}<small>${p.puntsLocal}-${p.puntsVisitant} vs ${p.casa?p.visitant:p.local}</small></div>`;
-  }).join('');
-  const txt = `🏆 *WEEKEND SPECIAL MENTION ${wkLabel(wk)}*\n\n`
-    + (winners.length ? winners.map(p=>{ const e=m.equips.find(x=>x.id===p.equipId)||{};
-        return `✅ *${e.nom}* — ${p.puntsLocal}-${p.puntsVisitant} vs ${p.casa?p.visitant:p.local} ${p.casa?'🏠':'🚌'}`; }).join('\n')
-      : 'No wins this weekend. Next week, stronger 💪')
-    + `\n\n#SomClot 🔴⚫ cbgrupbarna.info/partits/`;
-  box.innerHTML = `<div class="winners">
-    <h3>🏆 Special mention · Weekend winners ${wkLabel(wk)}</h3>
-    ${rows || '<div class="wrow">No wins this weekend 🧊</div>'}
-    <div class="wrow" style="opacity:.6">Weekend record: ${winners.length}W - ${losers.length}L</div>
-    <a class="g-btn" style="text-decoration:none" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">📲 Share mention</a>
-    <button class="g-btn ghost" onclick="navigator.clipboard.writeText(decodeURIComponent('${encodeURIComponent(txt)}')).then(()=>alert('Text copied ✅'))">📋 Copy text</button>
-  </div>`;
-}
-
-/* ---------- prèvia: dades d'anàlisi pre-partit ---------- */
-function previaData(p, m) {
-  const s = teamStats(p.equipId, m.partits);
-  const e = m.equips.find(x=>x.id===p.equipId)||{};
-  const rival = p.casa ? p.visitant : p.local;
-  const prev = m.partits.filter(x=>x.equipId===p.equipId && x.jugat && x.data<p.data
-    && (x.local===rival || x.visitant===rival)).pop();
-  return { e, s, rival, prev };
-}
-
-/* ---------- resultats ---------- */
-function saveResult(id) {
-  const pl = document.getElementById('pl-'+id).value;
-  const pv = document.getElementById('pv-'+id).value;
-  if (pl==='' || pv==='') { OV.resultats[id] && delete OV.resultats[id]; }
-  else OV.resultats[id] = { pl: parseInt(pl), pv: parseInt(pv) };
-  saveOverrides();
-  renderAll();
-  // 🏆 victòria → cartell automàtic
-  const p = model().partits.find(x=>x.id===id);
-  if (p && p.jugat && p.res==='W') {
-    if (confirm(`🏆 VICTÒRIA ${p.puntsLocal}-${p.puntsVisitant}!\nVols generar el cartell d'Instagram ara?`)) {
-      showView('cartells');
-      document.getElementById('c-tpl').value = 'victoria';
-      fillCartellSelect();
-      document.getElementById('c-match').value = id;
-      genCartell();
-      window.scrollTo({top:0});
-    }
-  }
-}
-
-/* ---------- ICS ---------- */
-function downloadICS(eqId) {
-  const m = model();
-  const e = m.equips.find(x=>x.id===eqId);
-  const evts = m.partits.filter(p=>p.equipId===eqId).map(p=>{
-    const dt = p.data.replace(/-/g,'')+'T'+p.hora.replace(':','')+'00';
-    const end = new Date(`${p.data}T${p.hora}:00`); end.setMinutes(end.getMinutes()+105);
-    const dtEnd = end.toISOString().slice(0,19).replace(/[-:]/g,'').slice(0,15);
-    return ['BEGIN:VEVENT',
-      `UID:${p.id}@cbgrupbarna.com`,
-      `DTSTART;TZID=Europe/Madrid:${dt}`,
-      `DTEND;TZID=Europe/Madrid:${dtEnd}`,
-      `SUMMARY:🏀 ${p.local} vs ${p.visitant}`,
-      `LOCATION:${(p.pista+' '+(p.adreca||'')).replace(/,/g,'\\,')}`,
-      `DESCRIPTION:${e.nom} · ${p.categoria} · CB Grup Barna`,
-      'END:VEVENT'].join('\r\n');
-  });
-  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//CBGB//Partits//CA',
-    `X-WR-CALNAME:CBGB ${e.nom}`,'X-WR-TIMEZONE:Europe/Madrid',...evts,'END:VCALENDAR'].join('\r\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));
-  a.download = `cbgb-${e.id}.ics`; a.click();
-}
-
-/* ---------- parser PDF (mateix format que el robot) ---------- */
-function parseFcbqText(lines) {
-  const dateRe = /^(\d{2})-(\d{2})-(\d{4})\s+(\d{2}:\d{2})/;
-  const out = [];
-  for (let i=0;i<lines.length;i++) {
-    const dm = lines[i].match(dateRe);
-    if (!dm) continue;
-    const partit = (lines[i+1]||'').trim();
-    const categoria = (lines[i+2]||'').trim();
-    let pista='', adreca='';
-    for (let j=i+3; j<Math.min(i+6,lines.length); j++) {
-      if (lines[j].startsWith('Instal·lació:')) {
-        const inst = lines[j].slice('Instal·lació:'.length).trim();
-        const k = inst.indexOf(' (');
-        if (k>0) { pista=inst.slice(0,k).trim(); adreca=inst.slice(k+2).replace(/\)$/,'').trim(); }
-        else pista = inst;
-        break;
-      }
-    }
-    let local, visitant, casa;
-    const mh = partit.match(new RegExp('^('+CLUB_RE.source+')\\s+-\\s+(.+)$','i'));
-    const ma = partit.match(new RegExp('^(.+?)\\s+-\\s+('+CLUB_RE.source+')$','i'));
-    if (mh) { local=mh[1]; visitant=mh[2]; casa=true; }
-    else if (ma) { local=ma[1]; visitant=ma[2]; casa=false; }
-    else { const parts=partit.split(' - '); local=parts[0]; visitant=parts.slice(1).join(' - '); casa=null; }
-    out.push({ data:`${dm[3]}-${dm[2]}-${dm[1]}`, hora:dm[4], local, visitant, casa, categoria, pista, adreca,
-               clubNom: (casa ? local : visitant).trim(),
-               puntsLocal:null, puntsVisitant:null, estat:'pendent' });
-  }
-  return out;
-}
-function slugify(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
-
-async function importPdf(files) {
-  const log = document.getElementById('pdf-log');
-  log.textContent = '⏳ Carregant lector de PDF…';
-  if (!window.pdfjsLib) {
-    await new Promise((res,rej)=>{ const s=document.createElement('script');
-      s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js'; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
-    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-  }
-  let totalNew=0, totalUpd=0, msgs=[];
-  for (const file of files) {
-    try {
-      const buf = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({data:buf}).promise;
-      let lines = [];
-      for (let p=1;p<=pdf.numPages;p++) {
-        const page = await pdf.getPage(p);
-        const tc = await page.getTextContent();
-        // agrupa items per coordenada Y → línies
-        const rows = {};
-        for (const it of tc.items) {
-          const y = Math.round(it.transform[5]);
-          (rows[y] = rows[y]||[]).push(it);
-        }
-        const ys = Object.keys(rows).map(Number).sort((a,b)=>b-a);
-        for (const y of ys) lines.push(rows[y].sort((a,b)=>a.transform[4]-b.transform[4]).map(i=>i.str).join(' ').replace(/\s+/g,' ').trim());
-      }
-      const ms = parseFcbqText(lines.filter(Boolean));
-      if (!ms.length) { msgs.push(`⚠️ ${file.name}: no s'hi han trobat partits (és el "Calendari Global Equip"?)`); continue; }
-      // equip: per categoria
-      const m = model();
-      const cat = ms[0].categoria;
-      const clubNom = ms[0].clubNom || '';
-      const lletra = (clubNom.match(/\b([A-Z])\s*$/) || [])[1] || '';
-      // primer per nom exacte de l'equip del club (distingeix A / B), després per competició
-      let eq = m.equips.find(e=>(e.clubNom||'').toUpperCase()===clubNom.toUpperCase())
-            || m.equips.find(e=>(e.competicio||'').toUpperCase()===cat.toUpperCase() && !e.clubNom);
-      if (!eq) {
-        const suggerit = cat.replace(/^SUPER COPA /i,'Sènior ').replace(/FEMENINA/i,'Femení').replace(/MASCULINA/i,'Masculí')
-                          + (lletra ? ' ' + lletra : '');
-        const nom = prompt(`Equip nou detectat: ${clubNom || cat}\n(${cat})\n\nQuin nom li posem?`, suggerit) || suggerit;
-        eq = { id: slugify(nom), nom, curt: nom.toUpperCase().slice(0,14), emoji: /fem/i.test(nom)?'🔴':'⚫',
-               competicio: cat, clubNom, posicio:null, equipsGrup:null };
-        OV.extraEquips.push(eq);
-      }
-      let nNew=0, nUpd=0;
-      for (const p of ms) {
-        p.id = `${eq.id}_${p.data}`; p.equipId = eq.id;
-        const existing = m.partits.find(x=>x.id===p.id);
-        if (existing) {
-          if (existing.hora!==p.hora || existing.pista!==p.pista || existing.data!==p.data) {
-            OV.editsPartits[p.id] = { data:p.data, hora:p.hora, pista:p.pista, adreca:p.adreca }; nUpd++;
-          }
-        } else if (!OV.extraPartits.find(x=>x.id===p.id)) { OV.extraPartits.push(p); nNew++; }
-      }
-      totalNew+=nNew; totalUpd+=nUpd;
-      msgs.push(`✅ ${file.name}: ${eq.nom} · ${ms.length} partits llegits (${nNew} nous, ${nUpd} actualitzats)`);
-    } catch(err) { msgs.push(`❌ ${file.name}: error llegint el PDF (${err.message})`); }
-  }
-  saveOverrides();
-  log.textContent = msgs.join('\n') + (totalNew+totalUpd ? `\n💾 Guardat en aquest dispositiu. Recorda "Descarregar data.json" i pujar-lo a GitHub perquè ho vegi tothom.` : '');
-  renderAll();
-}
-
-/* ---------- exportar ---------- */
-function exportJson() {
-  const m = model();
-  const out = {
-    _comment: "Dades de partits i resultats del CB Grup Barna. Font: FCBQ (club/24).",
-    clubIdFCBQ: 24, temporada: BASE.temporada || '2026-2027',
-    lastUpdate: new Date().toISOString(),
-    equips: m.equips.map(({id,nom,curt,genere,emoji,competicio,posicio,equipsGrup,notaLliga})=>({id,nom,curt,genere,emoji,competicio,posicio,equipsGrup,notaLliga:notaLliga||''})),
-    partits: m.partits.map(({id,equipId,data,hora,local,visitant,casa,categoria,pista,adreca,puntsLocal,puntsVisitant})=>({id,equipId,data,hora,local,visitant,casa,categoria,pista,adreca,puntsLocal,puntsVisitant,estat: puntsLocal!=null?'jugat':'pendent'})),
-  };
-  return JSON.stringify(out, null, 2);
-}
-
-/* =========================================================
-   🏃 PLANTILLA DE JUGADORS/ES (úniques, amb rotació)
-   ========================================================= */
-function normNom(s){ return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
-function compressPhoto(file) {
-  return fileToImg(file).then(img=>{
-    const c = document.createElement('canvas');
-    const s = Math.min(1, 1080/Math.max(img.width,img.height));
-    c.width = img.width*s; c.height = img.height*s;
-    c.getContext('2d').drawImage(img,0,0,c.width,c.height);
-    return c.toDataURL('image/jpeg',0.82);
-  });
-}
-async function addJugador() {
-  const nom = document.getElementById('j-nom').value.trim();
-  const equipId = document.getElementById('j-equip').value;
-  const file = document.getElementById('j-foto').files[0];
-  if (!nom) { alert('Posa el nom'); return; }
-  if (!file) { alert('Puja la foto'); return; }
-  if (OV.jugadors.some(j=>normNom(j.nom)===normNom(nom))) { alert(`"${nom}" ja existeix — no es poden repetir jugadors/es.`); return; }
-  const foto = await compressPhoto(file);
-  OV.jugadors.push({ id: slugify(nom), nom, equipId, foto, cops: 0, ultimUs: null });
-  saveOverrides(); renderJugadors();
-  document.getElementById('j-nom').value=''; document.getElementById('j-foto').value='';
-}
-function renderJugadors() {
-  const m = model();
-  // selector d'equips del formulari
-  const je = document.getElementById('j-equip');
-  je.innerHTML = m.equips.map(e=>`<option value="${e.id}">${e.emoji||''} ${e.nom}</option>`).join('');
-  // llista
-  document.getElementById('j-list').innerHTML = OV.jugadors.map(j=>{
-    const e = m.equips.find(x=>x.id===j.equipId)||{};
-    return `<div class="team-row"><img src="${j.foto}" alt="${j.nom}" style="width:36px;height:36px;border-radius:50%;object-fit:cover" loading="lazy" decoding="async">
-      <span class="nm"><b>${j.nom}</b><small>${e.nom||''} · sortides al cartell: ${j.cops}</small></span>
-      <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delJugador('${j.id}')">✕</button></div>`;
-  }).join('') || '<p style="font-size:11px;color:#6B6560">Encara no hi ha jugadors/es pujats.</p>';
-  // el selector de fons del generador es refresca sol
-  if (typeof omplirFons === 'function') omplirFons();
-}
-/* ── Equips i partits d'un altre calendari (Barna Màgics, amistosos, 3x3) ── */
-function addPartitManual() {
-  const sel = document.getElementById('mx-equip').value;
-  const data = document.getElementById('mx-data').value;
-  const hora = document.getElementById('mx-hora').value || '10:00';
-  const rival = document.getElementById('mx-rival').value.trim();
-  const casa = document.getElementById('mx-casa').value === '1';
-  const pista = document.getElementById('mx-pista').value.trim() || (casa ? 'NAU PARC CLOT' : '');
-  if (!data) { alert('Posa la data del partit'); return; }
-  if (!rival) { alert('Posa el rival'); return; }
-  let eq;
-  if (sel === '__nou__') {
-    const nom = document.getElementById('mx-nom').value.trim();
-    const comp = document.getElementById('mx-comp').value.trim();
-    if (!nom) { alert("Posa el nom de l'equip nou"); return; }
-    if (model().equips.some(e => normNom(e.nom) === normNom(nom))) { alert(`L'equip "${nom}" ja existeix.`); return; }
-    eq = { id: slugify(nom), nom, curt: nom.toUpperCase().slice(0,16),
-           genere: /fem|nia|dona/i.test(nom) ? 'F' : 'M',
-           emoji: /magic|màgic/i.test(nom) ? '⭐' : (/fem/i.test(nom) ? '🔴' : '⚫'),
-           competicio: comp || 'Altres competicions', clubNom: 'C.B GRUP BARNA',
-           posicio: null, equipsGrup: null, notaLliga: '', manual: true };
-    OV.extraEquips.push(eq);
-  } else {
-    eq = model().equips.find(e => e.id === sel);
-    if (!eq) { alert('Tria un equip'); return; }
-  }
-  const base = `${eq.id}_${data}`;
-  let id = base, n = 1;
-  while (model().partits.some(p => p.id === id)) id = `${base}_${++n}`;
-  OV.extraPartits.push({
-    id, equipId: eq.id, data, hora,
-    local: casa ? 'C.B GRUP BARNA' : rival, visitant: casa ? rival : 'C.B GRUP BARNA',
-    casa, categoria: eq.competicio, pista, adreca: '',
-    puntsLocal: null, puntsVisitant: null, estat: 'pendent', manual: true });
-  saveOverrides(); renderAll();
-  document.getElementById('mx-rival').value = ''; document.getElementById('mx-nom').value = '';
-  alert(`✅ Partit afegit: ${eq.nom} · ${fmtDia(data)} ${hora}`);
-}
-function renderManuals() {
-  const box = document.getElementById('mx-list'); if (!box) return;
-  const m = model();
-  // selector d'equips (tots, per poder afegir també partits extra a equips existents)
-  const sel = document.getElementById('mx-equip');
-  if (sel) {
-    const v = sel.value;
-    sel.innerHTML = '<option value="__nou__">➕ Equip nou…</option>'
-      + m.equips.map(e=>`<option value="${e.id}">${e.emoji||''} ${e.nom}</option>`).join('');
-    if ([...sel.options].some(o=>o.value===v)) sel.value = v;
-  }
-  const manuals = m.partits.filter(p => p.manual).sort((a,b)=>(a.data+a.hora).localeCompare(b.data+b.hora));
-  box.innerHTML = manuals.length ? manuals.map(p=>{
-    const e = m.equips.find(x=>x.id===p.equipId) || {};
-    return `<div class="team-row"><span class="em">${e.emoji||'🏀'}</span>
-      <span class="nm"><b>${e.nom} · ${p.casa?'vs':'@'} ${p.casa?p.visitant:p.local}</b>
-      <small>${fmtDia(p.data)} · ${p.hora} · ${p.pista||'sense pista'}</small></span>
-      <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delPartitManual('${p.id}')">✕</button></div>`;
-  }).join('') : '<p style="font-size:11px;color:#6B6560">Encara no hi ha partits afegits a mà.</p>';
-}
-function delPartitManual(id) {
-  const p = OV.extraPartits.find(x=>x.id===id);
-  OV.extraPartits = OV.extraPartits.filter(x=>x.id!==id);
-  // si l'equip es queda sense cap partit i era manual, també s'esborra
-  if (p && !OV.extraPartits.some(x=>x.equipId===p.equipId)) {
-    const eq = OV.extraEquips.find(e=>e.id===p.equipId && e.manual);
-    if (eq) OV.extraEquips = OV.extraEquips.filter(e=>e.id!==eq.id);
-  }
-  saveOverrides(); renderAll();
-}
-
-async function addFons() {
-  const nom = document.getElementById('f-nom').value.trim();
-  const files = [...document.getElementById('f-foto').files];
-  if (!files.length) { alert('Tria una o més fotos'); return; }
-  for (let i=0; i<files.length; i++) {
-    const base = nom || files[i].name.replace(/\.[^.]+$/,'');
-    const etiqueta = files.length>1 ? `${base} ${i+1}` : base;
-    if (OV.fons.some(f=>normNom(f.nom)===normNom(etiqueta))) continue;
-    OV.fons.push({ id: slugify(etiqueta)+'-'+OV.fons.length, nom: etiqueta, foto: await compressPhoto(files[i]) });
-  }
-  saveOverrides(); renderFons(); omplirFons();
-  document.getElementById('f-nom').value=''; document.getElementById('f-foto').value='';
-}
-function renderFons() {
-  const box = document.getElementById('f-list'); if (!box) return;
-  box.innerHTML = OV.fons.map(f=>`<div class="team-row"><img src="${f.foto}" alt="${f.nom}" style="width:52px;height:38px;border-radius:8px;object-fit:cover" loading="lazy" decoding="async">
-    <span class="nm"><b>${f.nom}</b><small>fons de cartell</small></span>
-    <button class="g-btn warn" style="padding:5px 10px;font-size:12px" onclick="delFons('${f.id}')">✕</button></div>`).join('')
-    || '<p style="font-size:11px;color:#6B6560">Encara no hi ha fons pujats.</p>';
-}
-function delFons(id){ OV.fons = OV.fons.filter(f=>f.id!==id); saveOverrides(); renderFons(); omplirFons(); }
-
-/* Selector únic de fons: fotos de la Nau + jugadors/es, amb comptador d'usos */
-function omplirFons() {
-  const sel = document.getElementById('c-fons'); if (!sel) return;
-  const val = sel.value;
-  const sugg = suggerimentJugador();
-  sel.innerHTML = '<option value="">— Sense foto (color de marca) —</option>'
-    + (OV.fons.length ? `<optgroup label="🖼️ Fons de la Nau">${OV.fons.map(f=>`<option value="fons:${f.id}">${f.nom}</option>`).join('')}</optgroup>` : '')
-    + (OV.jugadors.length ? `<optgroup label="🏃 Jugadors i jugadores">${OV.jugadors
-        .slice().sort((a,b)=>(a.cops-b.cops)||((a.ultimUs||'').localeCompare(b.ultimUs||'')))
-        .map(j=>`<option value="jug:${j.id}">${j.id===sugg?.id ? '⭐ ' : ''}${j.nom} · ${j.cops===0?'mai publicat':`${j.cops} cop${j.cops>1?'s':''}`}</option>`).join('')}</optgroup>` : '');
-  if ([...sel.options].some(o=>o.value===val)) sel.value = val;
-  mostraSuggeriment();
-}
-function suggerimentJugador(eqId) {
-  const p = model().partits.find(x=>x.id===document.getElementById('c-match')?.value);
-  const cands = OV.jugadors.filter(j => !eqId ? (!p || j.equipId===p.equipId) : j.equipId===eqId);
-  const llista = cands.length ? cands : OV.jugadors;
-  if (!llista.length) return null;
-  return llista.slice().sort((a,b)=>(a.cops-b.cops)||((a.ultimUs||'').localeCompare(b.ultimUs||'')))[0];
-}
-function mostraSuggeriment() {
-  const box = document.getElementById('c-sugg'); if (!box) return;
-  const j = suggerimentJugador();
-  if (!j) { box.style.display='none'; return; }
-  const usats = OV.jugadors.filter(x=>x.cops>0).length;
-  box.style.display='block';
-  box.innerHTML = `⭐ <b>Et toca posar: ${j.nom}</b> — ${j.cops===0?'encara no ha sortit mai':'fa més temps que no surt'}.`
-    + ` <span style="color:#6B6560">(${usats}/${OV.jugadors.length} ja publicats · no es repeteix ningú fins que hagin sortit tots)</span>`;
-}
-function delJugador(id){ OV.jugadors = OV.jugadors.filter(j=>j.id!==id); saveOverrides(); renderJugadors(); }
-function pickRotacio(equipId) {
-  // tria qui fa més temps que no surt (mai repetir fins que tothom hagi sortit)
-  const cands = OV.jugadors.filter(j=>j.equipId===equipId);
-  if (!cands.length) return null;
-  cands.sort((a,b)=>(a.cops-b.cops) || ((a.ultimUs||'').localeCompare(b.ultimUs||'')));
-  return cands[0];
-}
-
-/* =========================================================
-   🎨 GENERADOR DE CARTELLS (canvas 1080×1350, estil CBGB)
-   ========================================================= */
-let cPhoto = null, cRivalLogo = null, cClubLogo = null, cBgTpl = null;
-let LOGOMAP = null, LOGOIDX = null, LOGOALIAS = null; const logoCache = {};
-/* Emparellament AUTOMÀTIC del rival amb el seu escut, pel nom.
-   Regla estricta: totes les paraules significatives del fitxer han de sortir al nom
-   del rival (així "CB BOET MATARÓ 2012" troba cb_boet_mataro.png, però "SANT ANDREU"
-   mai agafa l'escut del "SANT ADRIÀ"). Desempat: la secció del gènere de l'equip. */
-const LOGO_NOISE = new Set(['CB','CE','AE','UE','AEC','CBU','CBF','EB','BC','BQ','CLUB','BASQUET',
-  'BASKET','BALONCESTO','FEMENI','MASCULI','A','B','C','D','SAF','SAM','ASSOCIACIO','ESPORTIU','ESPORTIVA','DE','DEL','LA','EL']);
-function logoToks(s) {
-  return (s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^A-Z0-9 ]/g,' ').split(/\s+/)
-    .filter(t => t.length>1 && !LOGO_NOISE.has(t) && !/^(U\d+[FM]?|F\d+[A-Z]?|\d+)$/.test(t));
-}
-function trobaLogoPerNom(rival, genere) {
-  if (!LOGOIDX) return null;
-  const rt = new Set(logoToks(rival));
-  let millor = null, millorLen = 0, millorPref = -1;
-  for (const f of LOGOIDX) {
-    const lt = logoToks(f.split('/').pop().replace(/\.png$/i,'').replace(/_/g,' '));
-    if (!lt.length || !lt.every(t => rt.has(t))) continue;      // totes hi han de ser
-    const pref = ((genere==='F' && f.includes('/saf/')) || (genere==='M' && f.includes('/sam/'))) ? 1 : 0;
-    if (lt.length > millorLen || (lt.length === millorLen && pref > millorPref)) {
-      millor = f; millorLen = lt.length; millorPref = pref;
-    }
-  }
-  return millor;
-}
-let RIVALS = null;
-async function loadRivals(){ if(!RIVALS){ try { RIVALS = await (await fetch('/partits/rivals.json')).json(); } catch(e){ RIVALS = {}; } } return RIVALS; }
-async function rivalInfo(p){ await loadRivals(); return (RIVALS[p.equipId]||{})[p.casa?p.visitant:p.local] || null; }
-async function rivalLogoFor(p, nomesAuto) {
-  if (cRivalLogo && !nomesAuto) return cRivalLogo;        // pujat a mà: mana (excepte al calendari)
-  if (!LOGOMAP) { try { LOGOMAP = await (await fetch('/partits/logos/map.json')).json(); } catch(e){ LOGOMAP = {}; } }
-  if (!LOGOIDX) { try { LOGOIDX = (await (await fetch('/partits/logos/index.json')).json()).fitxers; } catch(e){ LOGOIDX = []; } }
-  if (!LOGOALIAS) { try { LOGOALIAS = (await (await fetch('/partits/logos/alias.json')).json()).alias; } catch(e){ LOGOALIAS = {}; } }
-  const rival = p.casa ? p.visitant : p.local;
-  const eqp = model().equips.find(e=>e.id===p.equipId) || {};
-  // 1r: alias exacte de l'inventari · 2n: excepció manual · 3r: emparellament pel nom
-  const f = LOGOALIAS[rival.toUpperCase()] || (LOGOMAP[p.equipId]||{})[rival] || trobaLogoPerNom(rival, eqp.genere);
-  if (!f) return null;
-  if (!logoCache[f]) { try { logoCache[f] = await loadImg(f); } catch(e){ logoCache[f] = null; } }
-  return logoCache[f];
-}
-
-function fillCartellSelect() {
-  const m = model();
-  const tpl = document.getElementById('c-tpl').value;
-  const sel0 = document.getElementById('c-match');
-  if (tpl === 'finde') {
-    const wks = weekends(m.partits);
-    const cur = weekKey(todayStr());
-    const def = wks.find(k => k >= cur) || wks[wks.length-1];
-    sel0.innerHTML = wks.map(k => {
-      const fi = new Date(k+'T12:00:00'); fi.setDate(fi.getDate()+6);
-      const n = m.partits.filter(p => p.data >= k && p.data <= fi.toISOString().slice(0,10)).length;
-      return `<option value="${k}" ${k===def?'selected':''}>${wkLabel(k)} · ${n} partit${n===1?'':'s'}</option>`;
-    }).join('');
-    return;
-  }
-  const wantPlayed = (tpl==='victoria' || tpl==='final');
-  const list = m.partits.filter(p => wantPlayed ? p.jugat : !p.jugat);
-  const sel = document.getElementById('c-match');
-  const cur = sel.value;
-  sel.innerHTML = list.map(p=>{
-    const e = m.equips.find(x=>x.id===p.equipId)||{};
-    const res = p.jugat ? ` (${p.puntsLocal}-${p.puntsVisitant})` : '';
-    return `<option value="${p.id}">${p.data.slice(8,10)}/${p.data.slice(5,7)} · ${e.curt||e.nom} · ${p.casa?'vs':'@'} ${p.casa?p.visitant:p.local}${res}</option>`;
-  }).join('');
-  if ([...sel.options].some(o=>o.value===cur)) sel.value = cur;
-}
-function loadImg(src){ return new Promise((res,rej)=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=rej; i.src=src; }); }
-function fileToImg(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>loadImg(r.result).then(res,rej); r.readAsDataURL(file); }); }
-function drawCover(ctx,img,x,y,w,h){
-  const zoom = (parseInt(document.getElementById('c-zoom')?.value) || 100) / 100;
-  const pan  = (parseInt(document.getElementById('c-pany')?.value ?? 25)) / 100;   // 0 = dalt, 1 = baix
-  const s = Math.max(w/img.width, h/img.height) * zoom;
-  const iw = img.width*s, ih = img.height*s;
-  ctx.save(); ctx.beginPath(); ctx.rect(x,y,w,h); ctx.clip();
-  ctx.drawImage(img, x+(w-iw)/2, y+(h-ih)*pan, iw, ih);
-  ctx.restore();
-}
-function drawLogo(ctx, img, cx, cy, size, fallbackTxt, dark) {
-  // logo tal qual, sense cercle de fons (estil Barça); ombra suau per llegir-se sobre foto
-  ctx.save();
-  if (img) {
-    ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 18;
-    const s = Math.min(size/img.width, size/img.height);
-    ctx.drawImage(img, cx-img.width*s/2, cy-img.height*s/2, img.width*s, img.height*s);
-  } else {
-    ctx.fillStyle = dark ? '#050505' : '#ffffff';
-    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 10;
-    ctx.font = `${size*0.55}px 'Anton'`; ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText(fallbackTxt||'?', cx, cy);
-  }
-  ctx.restore();
-  ctx.textBaseline='alphabetic';
-}
-function fitText(ctx, txt, maxW, font, startPx) {
-  let px = startPx;
-  do { ctx.font = font.replace('{px}', px); px -= 4; } while (ctx.measureText(txt).width > maxW && px > 20);
-  return ctx.font;
-}
-async function genCartell() {
-  const m = model();
-  const tpl = document.getElementById('c-tpl').value;
-  if (tpl === 'finde') { await genFinde(m); return; }
-  const p = m.partits.find(x=>x.id===document.getElementById('c-match').value);
-  if (!p) { alert('Tria un partit'); return; }
-  const { e, s, rival, prev } = previaData(p, m);
-  await document.fonts.load("80px 'Anton'"); await document.fonts.load("700 30px 'Inter'");
-  if (!cClubLogo) { try { cClubLogo = await loadImg('/logo.png'); } catch(err){} }
-  const autoRival = await rivalLogoFor(p);   // logo del rival automàtic des de logos/map.json
-  const rinfoTop = await rivalInfo(p);       // IG i seguidors del rival (rivals.json)
-  const cv = document.getElementById('c-canvas'), ctx = cv.getContext('2d');
-  const [W, H] = (document.getElementById('c-fmt').value || '1080x1080').split('x').map(Number);
-  cv.width = W; cv.height = H;
-  const S = H / 1350;                    // escala respecte al disseny original
-  const px = n => Math.round(n * S);     // mides tipogràfiques proporcionals
-  const RED='#E20613', INK='#10100E', CREAM='#F4F1EC', WHITE='#ffffff';
-  const mode = document.getElementById('c-bgm').value || 'cream';
-  const BG   = mode==='red' ? RED : mode==='ink' ? INK : CREAM;      // fons de la peça
-  const FG   = mode==='cream' ? INK : WHITE;                          // tinta principal
-  const FG2  = mode==='cream' ? 'rgba(16,16,14,.60)' : 'rgba(255,255,255,.68)';
-  const ACC  = mode==='red' ? INK : RED;                              // accent
-  const BAR  = mode==='red' ? INK : RED;                              // franja de peu
-  const BART = mode==='red' ? CREAM : WHITE;
-  const BLACK = BG;                                                   // compatibilitat
-  const dataFmt = `${fmtDia(p.data)} · ${p.hora}H`;
-  const rivalInit = rival.split(/\s+/).map(w=>w[0]).join('').slice(0,3);
-
-  // fons segons el mode de marca (crema / vermell / negre)
-  ctx.fillStyle = BG; ctx.fillRect(0,0,W,H);
-
-  /* ---- PLANTILLA PRÒPIA: només s'hi escriuen les dades a sobre ---- */
-  if (cBgTpl) {
-    drawCover(ctx, cBgTpl, 0, 0, W, H);
-    ctx.textAlign='center'; ctx.fillStyle=WHITE;
-    ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=16;
-    if (p.jugat) {
-      ctx.font = `${px(240)}px 'Anton'`;
-      ctx.fillText(`${p.puntsLocal} ${p.puntsVisitant}`, W/2, H-px(140));
-      ctx.shadowBlur=0;
-      ctx.font = `600 ${px(24)}px 'Inter'`;
-      ctx.fillText(`${e.nom.toUpperCase()} · ${p.categoria}`, W/2, H-px(60));
-    } else {
-      ctx.font = `${px(80)}px 'Anton'`;
-      ctx.fillText(dataFmt, W/2, H-px(120));
-      ctx.shadowBlur=0;
-      ctx.font = `600 ${px(24)}px 'Inter'`;
-      ctx.fillText(`${e.nom.toUpperCase()} · ${p.pista.slice(0,32)}`, W/2, H-px(60));
-    }
-    cv.style.display='block';
-    document.getElementById('c-down').style.display='inline-flex';
-    return;
-  }
-
-  if (tpl==='calendari') {
-    /* ---- CALENDARI MENSUAL (estil Barça: foto + mes gegant + graella de dies) ---- */
-    const month = p.data.slice(0,7);
-    const monthMatches = m.partits.filter(x=>x.equipId===p.equipId && x.data.startsWith(month));
-    const MESOS_LL = ['GENER','FEBRER','MARÇ','ABRIL','MAIG','JUNY','JULIOL','AGOST','SETEMBRE','OCTUBRE','NOVEMBRE','DESEMBRE'];
-    const DIES_AB = ['DG.','DL.','DT.','DC.','DJ.','DV.','DS.'];
-    if (cPhoto) { drawCover(ctx, cPhoto, 0, 0, W, H);
-      const g = ctx.createLinearGradient(0,0,W,0);
-      const t1 = mode==='cream'?'244,241,236':'14,17,22';
-      g.addColorStop(0,`rgba(${t1},.25)`); g.addColorStop(0.5,`rgba(${t1},.5)`); g.addColorStop(1,`rgba(${t1},.85)`);
-      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-    } else {
-      const g = ctx.createRadialGradient(W*0.3,H*0.4,80,W*0.3,H*0.4,1000);
-      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#3a0a0c'); g.addColorStop(1, BG);
-      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-    }
-    // mes gegant a l'esquerra
-    ctx.textAlign='left'; ctx.fillStyle=FG;
-    ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=14;
-    ctx.font = fitText(ctx, MESOS_LL[parseInt(month.slice(5,7))-1], px(460), "{px}px 'Anton'", px(150));
-    ctx.fillText(MESOS_LL[parseInt(month.slice(5,7))-1], px(60), H*0.56);
-    ctx.shadowBlur=0;
-    // graella de partits a la dreta (2 columnes): escut del Barna VS rival, logos grans
-    const rlogos = await Promise.all(monthMatches.map(x=>rivalLogoFor(x, true)));
-    ctx.textAlign='center';
-    const col = [W-px(400), W-px(150)], rowH = Math.min(px(260), (H-px(330))/Math.ceil(monthMatches.length/2));
-    monthMatches.forEach((x,idx)=>{
-      const cx = col[idx%2], cy = px(200) + Math.floor(idx/2)*rowH;
-      const d = new Date(x.data+'T12:00:00');
-      ctx.fillStyle = x.casa ? RED : WHITE;
-      ctx.font = `${px(96)}px 'Anton'`;
-      ctx.fillText(String(d.getDate()), cx, cy);
-      // escut Barna a cada partit + rival, en ordre local-visitant
-      const esq = x.casa ? cClubLogo : rlogos[idx];
-      const dre = x.casa ? rlogos[idx] : cClubLogo;
-      drawLogo(ctx, esq, cx-px(58), cy+px(72), px(108), x.casa?'CBGB':'?', mode==='cream');
-      drawLogo(ctx, dre, cx+px(58), cy+px(72), px(108), x.casa?'?':'CBGB', mode==='cream');
-      ctx.fillStyle=FG2; ctx.font=`${px(26)}px 'Anton'`;
-      ctx.fillText('VS', cx, cy+px(80));
-      ctx.fillStyle = FG;
-      ctx.font = `700 ${px(21)}px 'Inter'`;
-      ctx.fillText(`${DIES_AB[d.getDay()]} ${x.hora}`, cx, cy+px(160));
-      ctx.font = `${px(30)}px 'Anton'`;
-      ctx.fillStyle = x.casa ? FG : FG2;
-      ctx.fillText(x.casa ? 'LOCAL' : 'VISITANT', cx, cy+px(194));
-      const rv = (x.casa ? x.visitant : x.local).split(/\s+/).slice(0,2).join(' ');
-      ctx.font = `600 ${px(16)}px 'Inter'`; ctx.fillStyle=FG2;
-      ctx.fillText(rv.slice(0,20), cx, cy+px(220));
-=======
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -1895,8 +401,8 @@ async function genCartell() {
 
   function filaJornada(p, nomEquip) {
     var lloc = p.casa
-      ? '<span class="chip casa">A casa</span>'
-      : '<span class="chip">Fora</span>';
+      ? '<span class="chip casa">Home</span>'
+      : '<span class="chip">Away</span>';
     var pista = p.pista ? '<small>' + esc(p.pista) + (p.adreca ? ' · ' + esc(p.adreca) : '') + '</small>' : '';
     return '<div class="mrow">' +
       '<div class="hora">' + esc(p.hora) + '</div>' +
@@ -1976,10 +482,10 @@ async function genCartell() {
         'Weekend of ' + rangSetmana(anterior) + '.';
       resBox.innerHTML = anterior.map(function (p) { return filaResultat(p, equips[p.equipId]); }).join('');
     } else {
-      resBox.innerHTML = '<p class="empty-note">La temporada 2026-2027 encara no ha començat: el primer cap de setmana amb partits és el del 5 i 6 de setembre. Els resultats sortiran aquí l\'endemà de cada jornada.</p>';
+      resBox.innerHTML = '<p class="empty-note">The 2026-2027 season has not started yet: the first weekend with matches is 5 and 6 September. Results will appear here the day after each round.</p>';
     }
 
-    /* --- 3 · Calendari global, mes a mes --- */
+    /* --- 3 · Calendar global, mes a mes --- */
     var mesos = {};
     partits.forEach(function (p) {
       var k = p.data.slice(0, 7);
@@ -1991,7 +497,7 @@ async function genCartell() {
       var nom = MESOS[parseInt(k.slice(5, 7), 10) - 1];
       var titol = nom.charAt(0).toUpperCase() + nom.slice(1) + ' ' + k.slice(0, 4);
       return '<details class="mes"' + (k === mesObert ? ' open' : '') + '>' +
-        '<summary>' + titol + '<i>' + llista.length + ' partits</i></summary>' +
+        '<summary>' + titol + '<i>' + llista.length + ' fixtures</i></summary>' +
         '<div class="mes-body">' +
         llista.map(function (p) {
           var rival = p.casa ? p.visitant : p.local;
@@ -1999,7 +505,7 @@ async function genCartell() {
             '<div class="dia">' + diaCurt(p.data) + '</div>' +
             '<div class="hora">' + esc(p.hora) + '</div>' +
             '<div class="qui"><b>' + esc(equips[p.equipId]) + '</b>' +
-            '<span>' + (p.casa ? 'A casa contra ' : 'Fora contra ') + esc(rival) + '</span>' +
+            '<span>' + (p.casa ? 'Home vs ' : 'Away at ') + esc(rival) + '</span>' +
             (p.pista ? '<small>' + esc(p.pista) + '</small>' : '') + '</div>' +
             '</div>';
         }).join('') +
@@ -2007,325 +513,13 @@ async function genCartell() {
     }).join('');
   }
 
-  /* Paraula gran a l'esquerra, amb el número de jornada */
-  const DIES_AB = ['DG.','DL.','DT.','DC.','DJ.','DV.','DS.'];
-  const jornada = weekends(m.partits).indexOf(wk) + 1;    // 1a setmana amb partits = jornada 1
-  ctx.textAlign='left';
-  ctx.fillStyle = RED; ctx.font = `${px(40)}px 'Anton'`;
-  ctx.shadowColor='rgba(0,0,0,.55)'; ctx.shadowBlur=px(12);
-  if (jornada > 0) ctx.fillText(`JORNADA ${jornada}`, px(56), H*0.50 - px(155));
-  ctx.fillStyle=WHITE; ctx.shadowBlur=px(16);
-  ctx.font = fitText(ctx, 'SETMANA', W*0.33, "{px}px 'Anton'", px(120));
-  ctx.fillText('CAP DE', px(56), H*0.50);
-  ctx.fillText('SETMANA', px(56), H*0.50 + px(106));
-  ctx.shadowBlur=0;
-  ctx.fillStyle = RED; ctx.fillRect(px(58), H*0.50 + px(142), px(110), px(7));
-  ctx.fillStyle = W60; ctx.font = `700 ${px(22)}px 'Inter'`;
-  ctx.fillText(wkLabel(wk).toUpperCase(), px(56), H*0.50 + px(192));
-  ctx.fillText(`${tots.length} PARTITS · ${tots.filter(p=>p.casa).length} A CASA`, px(56), H*0.50 + px(226));
-
-  /* Graella compacta a la dreta: 2 columnes, com la referència */
-  const x0 = W*0.415, ample = W - x0 - px(40);
-  const colW = ample/2, files = Math.ceil(tots.length/2);
-  const dalt = px(96), baix = H - px(96);
-  const rowH = Math.min(px(240), (baix - dalt) / files);
-  const rs = Math.max(0.72, Math.min(1, rowH/px(210)));   // no baixem tant la lletra
-  if (cPhoto) { ctx.shadowColor = 'rgba(0,0,0,.75)'; ctx.shadowBlur = px(10); ctx.shadowOffsetY = px(2); }
-  const r = n => Math.round(px(n) * rs);
-  tots.forEach((p, i) => {
-    const cx = x0 + (i%2)*colW, cy = dalt + Math.floor(i/2)*rowH;
-    const d = new Date(p.data+'T12:00:00');
-    const eq = m.equips.find(e=>e.id===p.equipId) || {};
-    // hora gran + escut del rival al costat
-    ctx.textAlign='left'; ctx.fillStyle=WHITE;
-    ctx.font = `${r(62)}px 'Anton'`;
-    ctx.fillText(p.hora, cx, cy + r(50));
-    // l'escut es col·loca després de l'hora segons el seu ample real, mai a sobre
-    const wHora = ctx.measureText(p.hora).width;
-    drawLogo(ctx, logos[i], cx + wHora + r(46), cy + r(26), r(58), (p.casa?p.visitant:p.local).slice(0,3).toUpperCase());
-    // dia · local/visitant — més grans i amb més contrast
-    ctx.font = `800 ${r(21)}px 'Inter'`;
-    ctx.fillStyle = W80; ctx.fillText(DIES_AB[d.getDay()], cx, cy + r(84));
-    const wDia = ctx.measureText(DIES_AB[d.getDay()]).width;
-    ctx.fillStyle = p.casa ? '#FF6A5F' : WHITE;      // vermell aclarit: llegible sobre foto fosca
-    ctx.fillText(p.casa ? 'LOCAL' : 'VISITANT', cx + wDia + r(14), cy + r(84));
-    // rival
-    ctx.fillStyle = WHITE; ctx.font = `800 ${r(23)}px 'Inter'`;
-    ctx.fillText((p.casa?'vs ':'@ ') + (p.casa?p.visitant:p.local).slice(0,22), cx, cy + r(116));
-    // equip i categoria
-    ctx.fillStyle = W80; ctx.font = `700 ${r(18)}px 'Inter'`;
-    ctx.fillText((eq.curt||eq.nom||'').slice(0,20), cx, cy + r(142));
-    ctx.fillStyle = W60; ctx.font = `600 ${r(15)}px 'Inter'`;
-    ctx.fillText(p.categoria.slice(0,26), cx, cy + r(164));
-  });
-
-  ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
-  ctx.fillStyle = RED; ctx.fillRect(0,H-px(64),W,px(64));
-  ctx.fillStyle = WHITE; ctx.textAlign='center'; ctx.font = `700 ${px(23)}px 'Inter'`;
-  const sub = (document.getElementById('c-sub').value || '').trim().toUpperCase();
-  ctx.fillText(sub || 'CB GRUP BARNA · @CBGRUPBARNA · #SOMCLOT', W/2, H-px(22));
-
-  cv.style.display='block';
-  document.getElementById('c-down').style.display='inline-flex';
-  const txt = buildWaText(tots, m, `🔴⚫ *ELS PARTITS DEL CAP DE SETMANA* · ${wkLabel(wk)}`)
-    .replace('#SomClot 🔴⚫ cbgrupbarna.info/partits/',
-      '➡️ Tots els partits a cbgrupbarna.info/partits/\n❤️ Segueix @cbgrupbarna i vine a animar\n\n#SomClot #CBGrupBarna #BàsquetCatalà #Clot');
-  document.getElementById('c-caption').value = txt;
-  document.getElementById('c-cap-box').style.display='block';
-}
-
-/* ---------- caption suggerit per publicar ---------- */
-function showCaption(tpl, p, e, rinfo, m) {
-  const rival = p.casa ? p.visitant : p.local;
-  const tag = rinfo ? ` ${rinfo.instagram}` : '';
-  const cta = `\n➡️ Segueix @cbgrupbarna per no perdre't cap partit\n❤️ Dona-li like, guarda-la i comparteix-la amb la família Barna`;
-  const hash = `\n\n#SomClot #CBGrupBarna #BàsquetCatalà #Basquet #Clot #SantMartí`;
-  let txt = '';
-  if (tpl==='dia') txt = `🔴⚫ UN DIA DE PARTIT.\n\n🏀 ${e.nom} · ${p.casa?'juguem A CASA':'sortim de gira'}\n🗓 ${fmtDia(p.data)} · ${p.hora}h\n🆚 ${rival}${tag}\n📍 ${p.pista}${p.casa?'\n\n🔊 Vine a la Nau i fes que se senti el Clot.':''}${cta}${hash}`;
-  else if (tpl==='calendari') { const mes = p.data.slice(0,7); const n = m.partits.filter(x=>x.equipId===e.id && x.data.startsWith(mes)).length;
-    txt = `📆 Els dies de partit del ${e.nom}.\n\n${n} batalles aquest mes. Quantes vindràs a veure?\n\n📍 Les de LOCAL, a la Nau del Clot.${cta}${hash}`; }
-  else if (tpl==='previa') txt = `📊 PRÈVIA · ${e.nom}\n\n🗓 ${fmtDia(p.data)} · ${p.hora}h\n🆚 ${rival}${tag}\n📍 ${p.pista}\n\nTot el que has de saber abans del salt inicial, a la imatge. 👆${cta}${hash}`;
-  else if (tpl==='victoria') txt = `🏆 VICTÒRIA!\n\n${p.local} ${p.puntsLocal} - ${p.puntsVisitant} ${p.visitant}\n\nOrgull de ${e.nom}. Això es treballa cada dia al Clot. 🔴⚫${tag?`\n🤝 Gran partit,${tag}`:''}${cta}${hash}`;
-  else txt = `⏱ FINAL\n\n${p.local} ${p.puntsLocal ?? ''} - ${p.puntsVisitant ?? ''} ${p.visitant}\n\nSeguim treballant. Aquest club no s'atura. 🔴⚫${cta}${hash}`;
-  document.getElementById('c-caption').value = txt;
-  document.getElementById('c-cap-box').style.display='block';
-}
-
-/* ---------- navegació ---------- */
-function showView(v) {
-  document.querySelectorAll('.tab').forEach(t=>{
-    const on = t.dataset.v===v;
-    t.classList.toggle('on', on);
-    if (on) t.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
-  });
-  document.querySelectorAll('.bn-item[data-v]').forEach(t=>t.classList.toggle('on', t.dataset.v===v));
-  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
-}
-function renderAll(){ renderJornada(); renderCanvisBanner(); renderResultats(); renderAnalisi(); renderEquips(); renderJugadors(); renderFons(); renderManuals(); omplirFons(); }
-function goView(v) {
-  showView(v);
-  if (v==='equips') renderEquips();
-  if (v==='cartells') fillCartellSelect();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* ---------- listeners ---------- */
-document.getElementById('tabs').addEventListener('click', e=>{
-  const t = e.target.closest('.tab'); if (!t) return;
-  goView(t.dataset.v);
-});
-document.getElementById('bottomnav').addEventListener('click', e=>{
-  const t = e.target.closest('.bn-item[data-v]'); if (!t) return;
-  goView(t.dataset.v);
-  if (window.gtag) window.gtag('event', 'bottomnav_click', { view: t.dataset.v });
-});
-function toggleCamps() {
-  const t = document.getElementById('c-tpl').value;
-  document.getElementById('c-rivalstats').style.display = t==='stats' ? 'block' : 'none';
-  document.getElementById('c-serie').style.display     = t==='serie' ? 'block' : 'none';
-  if (t==='stats') carregaRivalStats();
-  mostraSuggeriment();
-}
-function rivalDelSelect() {
-  const p = model().partits.find(x=>x.id===document.getElementById('c-match').value);
-  return p ? (p.casa ? p.visitant : p.local) : null;
-}
-function carregaRivalStats() {
-  const r = rivalDelSelect(); if (!r) return;
-  const rs = (OV.rivalStats||{})[r] || {};
-  document.getElementById('rs-pos').value = rs.pos ?? '';
-  document.getElementById('rs-pj').value  = rs.pj  ?? '';
-  document.getElementById('rs-v').value   = rs.v   ?? '';
-  document.getElementById('rs-d').value   = rs.d   ?? '';
-}
-function desaRivalStats() {
-  const r = rivalDelSelect(); if (!r) return;
-  OV.rivalStats = OV.rivalStats || {};
-  const num = id => { const v = document.getElementById(id).value; return v==='' ? null : parseInt(v); };
-  OV.rivalStats[r] = { pos:num('rs-pos'), pj:num('rs-pj'), v:num('rs-v'), d:num('rs-d') };
-  saveOverrides();
-}
-['rs-pos','rs-pj','rs-v','rs-d'].forEach(id =>
-  document.getElementById(id).addEventListener('change', desaRivalStats));
-document.getElementById('c-match').addEventListener('change', ()=>{ if (document.getElementById('c-tpl').value==='stats') carregaRivalStats(); });
-document.getElementById('c-tpl').addEventListener('change', ()=>{ fillCartellSelect(); toggleCamps(); });
-document.getElementById('c-photo').addEventListener('change', async e=>{ if(e.target.files[0]) cPhoto = await fileToImg(e.target.files[0]); });
-document.getElementById('c-rival').addEventListener('change', async e=>{ if(e.target.files[0]) cRivalLogo = await fileToImg(e.target.files[0]); });
-document.getElementById('c-bg').addEventListener('change', async e=>{ cBgTpl = e.target.files[0] ? await fileToImg(e.target.files[0]) : null; });
-let cFonsSel = null;   // {tipus:'jug'|'fons', id}
-document.getElementById('c-fons').addEventListener('change', async e=>{
-  const v = e.target.value;
-  if (!v) { cPhoto = null; cFonsSel = null; return; }
-  const [tipus, id] = v.split(':');
-  const item = tipus==='jug' ? OV.jugadors.find(x=>x.id===id) : OV.fons.find(x=>x.id===id);
-  cPhoto = item ? await loadImg(item.foto) : null;
-  cFonsSel = item ? {tipus, id} : null;
-});
-document.getElementById('f-add').addEventListener('click', ()=>addFons().catch(err=>alert('Error: '+err.message)));
-document.getElementById('mx-add').addEventListener('click', ()=>{ try { addPartitManual(); } catch(e){ alert('Error: '+e.message); } });
-document.getElementById('j-add').addEventListener('click', ()=>addJugador().catch(err=>alert('Error: '+err.message)));
-document.getElementById('c-cap-copy').addEventListener('click', async ()=>{
-  await navigator.clipboard.writeText(document.getElementById('c-caption').value);
-  alert('Caption copiat ✅');
-});
-/* 🎮 GAME DAYS SÈNIORS: un clic → cartell "UN DIA DE PARTIT" de cada sènior
-   del proper cap de setmana, rotant jugadors/es perquè no es repeteixin */
-document.getElementById('c-gamedays').addEventListener('click', async ()=>{
-  const m = model();
-  const seniors = m.equips.filter(e=>/s[eè]nior/i.test(e.nom));
-  if (!seniors.length) { alert('No hi ha equips sèniors a les dades.'); return; }
-  const wks = weekends(m.partits.filter(p=>!p.jugat && p.data>=todayStr()));
-  if (!wks.length) { alert('No hi ha partits pendents.'); return; }
-  const wk = wks[0];
-  const wkEnd = new Date(wk+'T12:00:00'); wkEnd.setDate(wkEnd.getDate()+6);
-  let fets = 0, sense = [];
-  for (const eq of seniors) {
-    const p = m.partits.find(x=>x.equipId===eq.id && !x.jugat && x.data>=wk && x.data<=wkEnd.toISOString().slice(0,10));
-    if (!p) continue;
-    const j = pickRotacio(eq.id);
-    if (j) { cPhoto = await loadImg(j.foto); j.cops++; j.ultimUs = new Date().toISOString(); }
-    else { cPhoto = null; sense.push(eq.nom); }
-    document.getElementById('c-tpl').value = 'dia';
-    fillCartellSelect();
-    document.getElementById('c-match').value = p.id;
-    await genCartell();
-    const a = document.createElement('a');
-    a.href = document.getElementById('c-canvas').toDataURL('image/png');
-    a.download = `cbgb-gameday-${eq.id}-${p.data}${j?'-'+j.id:''}.png`;
-    a.click();
-    fets++;
-    await new Promise(r=>setTimeout(r,600));
-  }
-  saveOverrides(); renderJugadors();
-  alert(`🎮 ${fets} game day(s) del finde ${wkLabel(wk)} descarregats.`
-    + (sense.length?`\n⚠️ Sense jugadors/es pujats per: ${sense.join(', ')} (surten sense foto).`:''));
-});
-document.getElementById('c-gen').addEventListener('click', ()=>genCartell().catch(err=>alert('Error generant: '+err.message)));
-['c-zoom','c-pany'].forEach(id => document.getElementById(id).addEventListener('input', ()=>{
-  if (document.getElementById('c-canvas').style.display==='block') genCartell().catch(()=>{});
-}));
-['c-titol','c-sub'].forEach(id => document.getElementById(id).addEventListener('change', ()=>{
-  if (document.getElementById('c-canvas').style.display==='block') genCartell().catch(()=>{});
-}));
-document.getElementById('c-down').addEventListener('click', ()=>{
-  const p = model().partits.find(x=>x.id===document.getElementById('c-match').value);
-  if (cFonsSel && cFonsSel.tipus==='jug') {           // queda registrat perquè no es repeteixi
-    const j = OV.jugadors.find(x=>x.id===cFonsSel.id);
-    if (j) { j.cops++; j.ultimUs = new Date().toISOString(); saveOverrides(); renderJugadors(); omplirFons(); }
-  }
-  const a = document.createElement('a');
-  a.href = document.getElementById('c-canvas').toDataURL('image/png');
-  const tplv = document.getElementById('c-tpl').value;
-  a.download = `cbgb-${tplv}-${document.getElementById('c-fmt').value}-${tplv==='finde'?document.getElementById('c-match').value:(p?p.id:'cartell')}.png`;
-  a.click();
-});
-document.getElementById('filters').addEventListener('click', e=>{
-  const c = e.target.closest('.chip'); if (!c) return;
-  state.filter = c.dataset.f; renderJornada();
-});
-document.getElementById('filters-genere').addEventListener('click', e=>{
-  const c = e.target.closest('.chip'); if (!c) return;
-  state.genere = c.dataset.g; state.filter = 'tots'; renderJornada();
-});
-document.getElementById('filters-cat').addEventListener('click', e=>{
-  const c = e.target.closest('.chip'); if (!c) return;
-  state.cat = c.dataset.c; state.filter = 'tots'; renderJornada();
-});
-document.getElementById('seg-abast').addEventListener('click', e=>{
-  const b = e.target.closest('button'); if (!b) return;
-  state.abast = b.dataset.abast;
-  document.querySelectorAll('#seg-abast button').forEach(x=>x.classList.toggle('on', x===b));
-  renderJornada();
-});
-document.getElementById('wk-select').addEventListener('change', e=>{ state.wk=e.target.value; renderJornada(); });
-document.getElementById('wk-prev').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i>0){state.wk=w[i-1]; renderJornada();} });
-document.getElementById('wk-next').addEventListener('click', ()=>{ const w=weekends(model().partits); const i=w.indexOf(state.wk); if(i<w.length-1){state.wk=w[i+1]; renderJornada();} });
-document.getElementById('wk-today').addEventListener('click', ()=>{ state.wk=null; renderJornada(); });
-
-function applyStaffUI() {
-  document.getElementById('g-lock').style.display='none';
-  document.getElementById('g-open').style.display='block';
-  document.getElementById('cartells-lock').style.display='none';
-  document.getElementById('cartells-open').style.display='block';
-  document.getElementById('edit-pill').classList.add('on');
-}
-function tryUnlock(inputId) {
-  if (sha256(document.getElementById(inputId).value.trim()) === EDIT_KEY_HASH) {
-    editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','clau');
-    applyStaffUI(); renderAll();
-  } else alert('Clau incorrecta');
-}
-document.getElementById('g-unlock').addEventListener('click', ()=>tryUnlock('g-pass'));
-document.getElementById('g-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('g-pass'); });
-document.getElementById('c-unlock').addEventListener('click', ()=>tryUnlock('c-pass'));
-document.getElementById('c-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('c-pass'); });
-document.getElementById('g-download').addEventListener('click', ()=>{
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([exportJson()],{type:'application/json'}));
-  a.download='data.json'; a.click();
-});
-document.getElementById('g-copy').addEventListener('click', async ()=>{ await navigator.clipboard.writeText(exportJson()); alert('JSON copiat ✅'); });
-document.getElementById('edit-pill').addEventListener('click', ()=>{
-  if (confirm('Vols sortir del mode gestió?')) {
-    sessionStorage.removeItem('cbgbEdit'); sessionStorage.removeItem('cbgbEditSrc');
-    if (window.CBGBAuth) CBGBAuth.logout();
-    location.reload();
-  }
-});
-document.getElementById('g-reset').addEventListener('click', ()=>{
-  if (confirm('Segur? S\'esborraran els resultats i canvis guardats NOMÉS en aquest dispositiu (el data.json publicat no es toca).')) {
-    localStorage.removeItem(LS_KEY); OV=loadOverrides(); renderAll();
-  }
-});
-const drop = document.getElementById('drop');
-drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('over'); });
-drop.addEventListener('dragleave', ()=>drop.classList.remove('over'));
-drop.addEventListener('drop', e=>{ e.preventDefault(); drop.classList.remove('over'); importPdf([...e.dataTransfer.files].filter(f=>f.type==='application/pdf')); });
-document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...e.target.files]));
-
-/* ---------- init ---------- */
-(async function init(){
-  try {
-    const r = await fetch('/partits/data.json', {cache:'no-store'});
-    BASE = await r.json();
-  } catch(e) {
-    document.getElementById('jornada-list').innerHTML = '<div class="empty">Could not load data.json 😕</div>';
-  }
-  try { CANVIS = await (await fetch('/partits/canvis.json', {cache:'no-store'})).json(); } catch(e) { CANVIS = {canvis:[]}; }
-  // si el mode gestió venia d'un login de Google i la sessió ja no és vàlida, es tanca
-  if (sessionStorage.getItem('cbgbEditSrc')==='google' && !(window.CBGBAuth && CBGBAuth.isStaff())) {
-    sessionStorage.removeItem('cbgbEdit'); sessionStorage.removeItem('cbgbEditSrc');
-  }
-  if (window.CBGBAuth && CBGBAuth.isStaff()) {
-    editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','google'); applyStaffUI();
-  }
-  else if (sessionStorage.getItem('cbgbEdit')==='1') { editMode = true; applyStaffUI(); }
-  else if (window.CBGBAuth) {
-    const onGoogle = (err, sess) => {
-      if (err === 'NO_CONFIG') {
-        document.querySelectorAll('#g-gbtn,#c-gbtn').forEach(el=>{
-          el.innerHTML = '<a href="/admin/" style="color:var(--red);font-size:12px">⚙️ Connecta el Google del club al panell d\'administració →</a>'; });
-        return;
-      }
-      if (err) { alert(err); return; }
-      editMode = true; sessionStorage.setItem('cbgbEdit','1'); sessionStorage.setItem('cbgbEditSrc','google'); applyStaffUI(); renderAll();
-    };
-    CBGBAuth.renderButton('g-gbtn', onGoogle);
-    CBGBAuth.renderButton('c-gbtn', onGoogle);
-  }
-  await loadRivals();
-  renderAll();
-  // PWA: instal·lable a Android/iPhone
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/partits/sw.js').catch(()=>{});
-  let deferredPrompt = null;
-  const pwaBtn = document.getElementById('pwa-btn');
-  window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); deferredPrompt=e; pwaBtn.style.display='inline-block'; });
-  pwaBtn.addEventListener('click', async ()=>{
-    if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; pwaBtn.style.display='none'; }
-    else alert('On iPhone: open this page in Safari → Share button → "Add to Home Screen". You\'ll get the app with the club crest.');
-  });
-  // a iOS no existeix beforeinstallprompt: mostra el botó amb instruccions
-  if (/iphone|ipad/i.test(navigator.userAgent) && !navigator.standalone) pwaBtn.style.display='inline-block';
+  fetch('/partits/data.json')
+    .then(function (r) { return r.json(); })
+    .then(render)
+    .catch(function () {
+      document.getElementById('finde-list').innerHTML =
+        '<p class="empty-note">No s\'ha pogut carregar el calendari. Torna-ho a provar d\'aquí una estona.</p>';
+    });
 })();
 </script>
 <script src="/js/cerca.js" defer></script>

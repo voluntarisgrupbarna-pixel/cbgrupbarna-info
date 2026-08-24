@@ -109,12 +109,16 @@
 <link rel="dns-prefetch" href="//script.google.com">
 <link rel="stylesheet" href="/css/fonts.css">
 <style>
+/* Aquesta pagina va sobre negre. Els grisos que hi havia (#555, #444, #2e2e2e)
+   es quedaven entre 1,4:1 i 2,7:1 sobre el fons: text que no es llegeix. El
+   gris que hi arriba a AA es #8d8d8d (5,7:1), i el vermell de l'escut s'hi
+   aclareix a #FF3B41, com diu el sistema per a fons foscos. */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 html,body{background:#070707;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;min-height:100dvh}
 input,button{font-family:inherit}
 input::placeholder{color:#383838}
-input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgba(226,6,19,.12)!important}
+input:focus{outline:none;border-color:#FF3B41!important;box-shadow:0 0 0 3px rgba(226,6,19,.12)!important}
 @keyframes spin   {to{transform:rotate(360deg)}}
 @keyframes pulse  {0%,100%{opacity:1;box-shadow:0 0 10px #E20613}50%{opacity:.4;box-shadow:0 0 3px #E20613}}
 @keyframes fadeUp {from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
@@ -140,19 +144,19 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
 #view-gate,#view-follow,#view-loading,#view-gallery{display:none}
 
 /* SELECTOR D'IDIOMA */
-.lang-switch{position:fixed;top:14px;right:16px;z-index:500;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.lang-switch a{padding:7px 2px;opacity:.55;color:rgba(255,255,255,.7);transition:opacity .3s,color .3s}
+.lang-switch{position:fixed;top:14px;right:16px;z-index:500;display:flex;align-items:center;gap:2px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;text-decoration:none;opacity:.55;color:rgba(255,255,255,.7);transition:opacity .3s,color .3s}
 .lang-switch a.active{opacity:1;color:#fff}
-.lang-switch a:hover{opacity:1;color:#E20613}
+.lang-switch a:hover{opacity:1;color:#FF3B41}
 .lang-switch .sep{opacity:.3}
 </style>
 <script src="/js/galetes.js"></script>
 </head>
 <body>
 
-<div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-  <a href="/galeria-3x3-glories/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/galeria-3x3-glories/" hreflang="es" class="active">ES</a><span class="sep">·</span><a href="/en/galeria-3x3-glories/" hreflang="en">EN</a>
-</div>
+<nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/galeria-3x3-glories/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/galeria-3x3-glories/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/galeria-3x3-glories/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
 
 <!-- ── GATE ─────────────────────────────────────────── -->
 <div id="view-gate" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden">
@@ -175,19 +179,19 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
   <!-- overlay vermell fosc -->
   <div aria-hidden="true" style="position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 0%,rgba(226,6,19,.22) 0%,rgba(7,7,7,.72) 55%,rgba(7,7,7,.88) 100%)"></div>
 
-  <div class="animate-in" style="display:inline-flex;align-items:center;gap:8px;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.28);border-radius:999px;padding:6px 18px;font-size:11px;font-weight:700;letter-spacing:.1em;color:#E20613;text-transform:uppercase;margin-bottom:26px;z-index:1">
+  <div class="animate-in" style="display:inline-flex;align-items:center;gap:8px;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.28);border-radius:999px;padding:6px 18px;font-size:11px;font-weight:700;letter-spacing:.1em;color:#FF3B41;text-transform:uppercase;margin-bottom:26px;z-index:1">
     <span style="width:7px;height:7px;border-radius:50%;background:#E20613;animation:pulse 2s infinite;display:inline-block"></span>
     Galería oficial · 3ª edición 2026
   </div>
 
-  <p class="animate-in" style="font-size:11px;font-weight:700;letter-spacing:.25em;color:#555;text-transform:uppercase;margin-bottom:10px;z-index:1;text-align:center">El torneo 3×3 FIBA de referencia en Barcelona</p>
+  <p class="animate-in" style="font-size:11px;font-weight:700;letter-spacing:.25em;color:#8d8d8d;text-transform:uppercase;margin-bottom:10px;z-index:1;text-align:center">El torneo 3×3 FIBA de referencia en Barcelona</p>
   <h1 class="animate-in" style="z-index:1;text-align:center;margin:0 0 2px">
-    <span class="hero-3x3" style="display:block;font-size:clamp(68px,12vw,108px);font-weight:900;line-height:.85;text-transform:uppercase;color:#E20613;animation:glow 3s ease infinite;letter-spacing:-.02em">3×3</span>
+    <span class="hero-3x3" style="display:block;font-size:clamp(68px,12vw,108px);font-weight:900;line-height:.85;text-transform:uppercase;color:#FF3B41;animation:glow 3s ease infinite;letter-spacing:-.02em">3×3</span>
     <span class="hero-sub" style="display:block;font-size:clamp(40px,8.5vw,80px);font-weight:900;line-height:.88;text-transform:uppercase;color:#fff;letter-spacing:-.02em;margin-top:4px">Westfield Glòries</span>
   </h1>
   <div class="animate-in" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;z-index:1;margin-top:10px;margin-bottom:4px">
     <span style="font-size:clamp(18px,4vw,30px);font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.02em">Grup Barna</span>
-    <span style="color:#E20613;font-size:clamp(20px,4vw,32px);font-weight:300;line-height:1">—</span>
+    <span style="color:#FF3B41;font-size:clamp(20px,4vw,32px);font-weight:300;line-height:1">—</span>
     <span style="font-size:clamp(18px,4vw,30px);font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.02em">Time Chamber</span>
   </div>
   <div class="animate-in pill-row" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:30px;z-index:1">
@@ -199,72 +203,76 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
 
   <form id="gate-form" class="animate-in form-card" novalidate
     style="width:100%;max-width:480px;background:#111;border:1px solid #1e1e1e;border-radius:20px;padding:34px 28px;z-index:1;box-shadow:0 32px 80px rgba(0,0,0,.7)">
-    <p style="font-size:11px;font-weight:700;color:#E20613;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px">Newsletter · Acceso Gratuito</p>
+    <p style="font-size:11px;font-weight:700;color:#FF3B41;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px">Newsletter · Acceso Gratuito</p>
     <h2 style="font-size:20px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">📧 Suscríbete a la Newsletter</h2>
-    <p style="font-size:13px;color:#666;margin-bottom:18px;line-height:1.6">Accede a las 522 fotos oficiales y recibe cada mes las novedades del <strong style="color:#fff">CB Grup Barna</strong>: resultados, campus, torneos y todo lo que pasa en el baloncesto barcelonés.</p>
+    <p style="font-size:13px;color:#8d8d8d;margin-bottom:18px;line-height:1.6">Accede a las 522 fotos oficiales y recibe cada mes las novedades del <strong style="color:#fff">CB Grup Barna</strong>: resultados, campus, torneos y todo lo que pasa en el baloncesto barcelonés.</p>
 
     <div style="background:#0c0c0c;border:1px solid #1a1a1a;border-radius:10px;padding:10px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px">
-      <div style="font-size:18px;flex-shrink:0;margin-top:2px">📬</div>
+      <div style="font-size:18px;flex-shrink:0;margin-top:2px" aria-hidden="true">📬</div>
       <div>
-        <p style="font-size:10px;font-weight:700;color:#555;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Recibirás cada mes</p>
-        <p style="font-size:11px;color:#666;line-height:1.5">Novedades del club · Resultados · Campus y torneos · Baloncesto femenino BCN · Contenido exclusivo</p>
+        <p style="font-size:10px;font-weight:700;color:#8d8d8d;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Recibirás cada mes</p>
+        <p style="font-size:11px;color:#8d8d8d;line-height:1.5">Novedades del club · Resultados · Campus y torneos · Baloncesto femenino BCN · Contenido exclusivo</p>
       </div>
     </div>
 
     <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
       <div>
-        <label for="nom" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:6px">Nombre *</label>
+        <label for="nom" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d8d8d;margin-bottom:6px">Nombre *</label>
         <input id="nom" name="nom" type="text" placeholder="Anna" autocomplete="given-name"
           style="width:100%;background:#181818;border:1px solid #282828;border-radius:10px;padding:13px 14px;font-size:15px;color:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none" required>
       </div>
       <div>
-        <label for="cognoms" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:6px">Apellidos *</label>
+        <label for="cognoms" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d8d8d;margin-bottom:6px">Apellidos *</label>
         <input id="cognoms" name="cognoms" type="text" placeholder="García" autocomplete="family-name"
           style="width:100%;background:#181818;border:1px solid #282828;border-radius:10px;padding:13px 14px;font-size:15px;color:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none" required>
       </div>
     </div>
     <div style="margin-bottom:12px">
-      <label for="email" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:6px">Correo electrónico *</label>
+      <label for="email" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d8d8d;margin-bottom:6px">Correo electrónico *</label>
       <input id="email" name="email" type="email" placeholder="anna@example.com" autocomplete="email" inputmode="email"
         style="width:100%;background:#181818;border:1px solid #282828;border-radius:10px;padding:13px 14px;font-size:15px;color:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none" required>
     </div>
     <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px">
       <div>
-        <label for="mobil" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:6px">Móvil *</label>
+        <label for="mobil" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d8d8d;margin-bottom:6px">Móvil *</label>
         <input id="mobil" name="mobil" type="tel" placeholder="600 000 000" autocomplete="tel" inputmode="tel"
           style="width:100%;background:#181818;border:1px solid #282828;border-radius:10px;padding:13px 14px;font-size:15px;color:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none" required>
       </div>
       <div>
-        <label for="club" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:6px">Club de origen *</label>
+        <label for="club" style="display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d8d8d;margin-bottom:6px">Club de origen *</label>
         <input id="club" name="club" type="text" placeholder="CB Grup Barna" autocomplete="organization"
           style="width:100%;background:#181818;border:1px solid #282828;border-radius:10px;padding:13px 14px;font-size:15px;color:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none" required>
       </div>
     </div>
 
     <div style="background:#0c0c0c;border:1px solid #1a1a1a;border-radius:10px;padding:12px 14px;margin-bottom:18px;display:flex;align-items:center;gap:12px">
-      <div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📷</div>
+      <div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0" aria-hidden="true">📷</div>
       <div>
-        <p style="font-size:10px;font-weight:700;color:#555;letter-spacing:.1em;text-transform:uppercase">Paso 2: Instagram</p>
+        <p style="font-size:10px;font-weight:700;color:#8d8d8d;letter-spacing:.1em;text-transform:uppercase">Paso 2: Instagram</p>
         <p style="font-size:12px;color:#888;margin-top:2px">Te pediremos que sigas a <strong style="color:#fff">@cbgrupbarna</strong> para acceder a las fotos</p>
       </div>
     </div>
 
+    <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;text-align:left;margin:4px 0 18px">
+      <input type="checkbox" id="gate-consent" required style="margin-top:3px;width:18px;height:18px;accent-color:#FF3B41;cursor:pointer;flex-shrink:0">
+      <span style="font-size:12.5px;color:#8d8d8d;line-height:1.55">Acepto que el CB Grup Barna trate estos datos para enviarme la newsletter y darme acceso a las fotos. <a href="/es/politica-de-privacidad/" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">Política de privacidad</a>.</span>
+    </label>
     <button type="submit" id="gate-btn"
-      style="width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#444;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s">
+      style="width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#8d8d8d;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s">
       Rellena todos los campos
     </button>
-    <p style="font-size:11px;color:#2e2e2e;text-align:center;margin-top:14px;line-height:1.6">🔐 Suscripción gratuita. Puedes darte de baja en cualquier momento. Datos no compartidos con terceros.</p>
+    <p style="font-size:11px;color:#8d8d8d;text-align:center;margin-top:14px;line-height:1.6">🔐 Suscripción gratuita. Puedes darte de baja en cualquier momento. Datos no compartidos con terceros.</p>
   </form>
 
   <div class="animate-in" style="margin-top:32px;z-index:1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center">
-    <span style="font-size:11px;font-weight:700;color:#2e2e2e;letter-spacing:.15em;text-transform:uppercase">Westfield Glòries</span>
-    <span style="color:#2e2e2e;font-size:13px;font-weight:300">-</span>
-    <span style="font-size:11px;font-weight:700;color:#2e2e2e;letter-spacing:.15em;text-transform:uppercase">Grup Barna</span>
-    <span style="color:#2e2e2e;font-size:13px;font-weight:300">-</span>
-    <span style="font-size:11px;font-weight:700;color:#2e2e2e;letter-spacing:.15em;text-transform:uppercase">Time Chamber</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Westfield Glòries</span>
+    <span style="color:#8d8d8d;font-size:13px;font-weight:300">-</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Grup Barna</span>
+    <span style="color:#8d8d8d;font-size:13px;font-weight:300">-</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Time Chamber</span>
   </div>
   <div style="margin-top:8px;z-index:1">
-    <a href="https://www.cbgrupbarna-3x3timechamber.com" target="_blank" rel="noopener noreferrer" style="font-size:11px;color:#222;text-decoration:none">cbgrupbarna-3x3timechamber.com →</a>
+    <a href="https://www.cbgrupbarna-3x3timechamber.com" target="_blank" rel="noopener noreferrer" style="font-size:11px;color:#8d8d8d;text-decoration:none">cbgrupbarna-3x3timechamber.com →</a>
   </div>
 </div>
 
@@ -272,9 +280,9 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
 <div id="view-follow" style="min-height:100vh;background:radial-gradient(ellipse at 50% 0%,rgba(131,58,180,.15) 0%,#070707 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px">
   <article class="animate-in follow-card" style="width:100%;max-width:460px;background:#111;border:1px solid #222;border-radius:20px;padding:40px 32px;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.6)">
     <div style="width:68px;height:68px;border-radius:18px;background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:34px">📸</div>
-    <p style="font-size:11px;font-weight:700;color:#555;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px">Paso 2 de 2</p>
+    <p style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px">Paso 2 de 2</p>
     <h2 style="font-size:25px;font-weight:900;color:#fff;text-transform:uppercase;margin-bottom:12px;line-height:1.1">
-      Síguenos<br><span style="color:#E20613">en Instagram</span>
+      Síguenos<br><span style="color:#FF3B41">en Instagram</span>
     </h2>
     <p style="font-size:14px;color:#777;margin-bottom:8px;line-height:1.6">Para acceder a las fotos, sigue la cuenta oficial:</p>
     <p style="font-size:22px;font-weight:900;color:#fff;margin-bottom:28px">@cbgrupbarna</p>
@@ -282,31 +290,31 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
       <span>📷</span> Abrir Instagram → @cbgrupbarna
     </button>
     <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;text-align:left;margin-top:22px;margin-bottom:8px">
-      <input type="checkbox" id="follow-check" style="margin-top:3px;width:18px;height:18px;accent-color:#E20613;cursor:pointer;flex-shrink:0">
+      <input type="checkbox" id="follow-check" style="margin-top:3px;width:18px;height:18px;accent-color:#FF3B41;cursor:pointer;flex-shrink:0">
       <span style="font-size:13px;color:#aaa;line-height:1.5">
         Ya sigo a <strong style="color:#fff">@cbgrupbarna</strong> y quiero acceder a las fotos
       </span>
     </label>
     <p id="follow-error" role="alert" style="display:none;background:rgba(226,6,19,.1);border:1px solid rgba(226,6,19,.3);border-radius:8px;padding:10px 14px;font-size:13px;color:#ff6b6b;margin-bottom:12px;text-align:center"></p>
     <button id="follow-btn" onclick="handleFollow()"
-      style="width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#444;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s">
+      style="width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#8d8d8d;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s">
       Confirma que sigues la cuenta
     </button>
-    <button onclick="showView('gate')" style="background:none;border:none;color:#444;font-size:12px;cursor:pointer;margin-top:18px;text-decoration:underline">← Volver atrás</button>
+    <button onclick="showView('gate')" style="background:none;border:none;color:#8d8d8d;font-size:12px;cursor:pointer;margin-top:18px;text-decoration:underline">← Volver atrás</button>
   </article>
   <div style="margin-top:28px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center">
-    <span style="font-size:11px;font-weight:700;color:#2e2e2e;letter-spacing:.15em;text-transform:uppercase">Westfield Glòries</span>
-    <span style="color:#2e2e2e;font-size:13px;font-weight:300">-</span>
-    <span style="font-size:11px;font-weight:700;color:#2e2e2e;letter-spacing:.15em;text-transform:uppercase">Grup Barna</span>
-    <span style="color:#2e2e2e;font-size:13px;font-weight:300">-</span>
-    <span style="font-size:11px;font-weight:700;color:#2e2e2e;letter-spacing:.15em;text-transform:uppercase">Time Chamber</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Westfield Glòries</span>
+    <span style="color:#8d8d8d;font-size:13px;font-weight:300">-</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Grup Barna</span>
+    <span style="color:#8d8d8d;font-size:13px;font-weight:300">-</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Time Chamber</span>
   </div>
 </div>
 
 <!-- ── LOADING ─────────────────────────────────────── -->
 <div id="view-loading" style="min-height:100vh;background:#070707;display:flex;flex-direction:column;align-items:center;justify-content:center">
-  <div style="width:52px;height:52px;border-radius:50%;border:3px solid #1a1a1a;border-top-color:#E20613;animation:spin .8s linear infinite;margin-bottom:20px"></div>
-  <p style="font-size:12px;color:#555;letter-spacing:.18em;font-weight:700;text-transform:uppercase">Accediendo a la galería…</p>
+  <div style="width:52px;height:52px;border-radius:50%;border:3px solid #1a1a1a;border-top-color:#FF3B41;animation:spin .8s linear infinite;margin-bottom:20px"></div>
+  <p style="font-size:12px;color:#8d8d8d;letter-spacing:.18em;font-weight:700;text-transform:uppercase">Accediendo a la galería…</p>
 </div>
 
 <!-- ── GALLERY ─────────────────────────────────────── -->
@@ -316,17 +324,17 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
       <span style="background:#E20613;color:#fff;border-radius:7px;padding:4px 11px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase">3ª Edición · 2026</span>
       <div>
         <div style="font-size:16px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.04em;line-height:1.1">3×3 Westfield Glòries</div>
-        <p style="font-size:10px;color:#555;margin-top:2px">Westfield Glòries - Grup Barna - Time Chamber</p>
+        <p style="font-size:10px;color:#8d8d8d;margin-top:2px">Westfield Glòries - Grup Barna - Time Chamber</p>
       </div>
     </div>
     <div class="g-stats" style="display:flex;gap:20px">
       <div style="text-align:center">
-        <div style="font-size:18px;font-weight:900;color:#E20613;line-height:1">522</div>
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-top:2px">Fotos</div>
+        <div style="font-size:18px;font-weight:900;color:#FF3B41;line-height:1">522</div>
+        <div style="font-size:10px;color:#8d8d8d;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-top:2px">Fotos</div>
       </div>
       <div style="text-align:center">
-        <div style="font-size:18px;font-weight:900;color:#E20613;line-height:1">6 & 7</div>
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-top:2px">Junio 2026</div>
+        <div style="font-size:18px;font-weight:900;color:#FF3B41;line-height:1">6 & 7</div>
+        <div style="font-size:10px;color:#8d8d8d;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-top:2px">Junio 2026</div>
       </div>
     </div>
   </header>
@@ -338,11 +346,11 @@ input:focus{outline:none;border-color:#E20613!important;box-shadow:0 0 0 3px rgb
     </iframe>
   </div>
   <footer style="background:#10100E;border-top:1px solid #1a1a1a;padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap">
-    <span style="font-size:11px;font-weight:700;color:#444;letter-spacing:.15em;text-transform:uppercase">Westfield Glòries</span>
-    <span style="color:#444;font-size:13px;font-weight:300">-</span>
-    <span style="font-size:11px;font-weight:700;color:#444;letter-spacing:.15em;text-transform:uppercase">Grup Barna</span>
-    <span style="color:#444;font-size:13px;font-weight:300">-</span>
-    <span style="font-size:11px;font-weight:700;color:#444;letter-spacing:.15em;text-transform:uppercase">Time Chamber</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Westfield Glòries</span>
+    <span style="color:#8d8d8d;font-size:13px;font-weight:300">-</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Grup Barna</span>
+    <span style="color:#8d8d8d;font-size:13px;font-weight:300">-</span>
+    <span style="font-size:11px;font-weight:700;color:#8d8d8d;letter-spacing:.15em;text-transform:uppercase">Time Chamber</span>
   </footer>
 </div>
 
@@ -367,21 +375,25 @@ function validateGate() {
   const email   = document.getElementById('email').value.trim();
   const mobil   = document.getElementById('mobil').value.trim();
   const club    = document.getElementById('club').value.trim();
-  const valid   = nom && cognoms && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && mobil.length >= 9 && club;
+  const consent = document.getElementById('gate-consent').checked;
+  // El formulari demana nom, cognoms, correu, mòbil i club: són dades
+  // personals i, sense consentiment explícit, no es poden recollir.
+  const valid   = nom && cognoms && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && mobil.length >= 9 && club && consent;
   const btn     = document.getElementById('gate-btn');
   if (valid) {
     btn.className = 'btn-green';
-    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#E20613;color:#000;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(226,6,19,.35)';
+    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#E20613;color:#fff;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(226,6,19,.35)';
     btn.textContent = '📧 Suscribirme y acceder a las fotos →';
   } else {
     btn.className = '';
-    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#444;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s';
+    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#8d8d8d;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s';
     btn.textContent = 'Rellena todos los campos';
   }
   return valid;
 }
 
 document.getElementById('gate-form').addEventListener('input', validateGate);
+document.getElementById('gate-form').addEventListener('change', validateGate);
 document.getElementById('gate-form').addEventListener('submit', function(e) {
   e.preventDefault();
   if (!validateGate()) return;
@@ -400,11 +412,11 @@ document.getElementById('follow-check').addEventListener('change', function() {
   const btn = document.getElementById('follow-btn');
   if (this.checked) {
     btn.className = 'btn-green';
-    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#E20613;color:#000;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(226,6,19,.35)';
+    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#E20613;color:#fff;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(226,6,19,.35)';
     btn.textContent = '📸 Acceder a la Galería →';
   } else {
     btn.className = '';
-    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#444;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s';
+    btn.style.cssText = 'width:100%;padding:17px;border-radius:12px;border:none;background:#1a1a1a;color:#8d8d8d;font-size:15px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:not-allowed;transition:transform .15s,box-shadow .2s';
     btn.textContent = 'Confirma que sigues la cuenta';
   }
   document.getElementById('follow-error').style.display = 'none';

@@ -45,7 +45,7 @@
     text-transform:uppercase;color:#cfd2d6;margin-bottom:1.8rem;
   }
   .lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Inter',Arial,sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.4rem; }
-  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; color: inherit; }
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; text-decoration: none; opacity: 0.55; transition: opacity 0.3s, color 0.3s; color: inherit; }
   .lang-switch a.active { opacity: 1; font-weight: 700; }
   .lang-switch a:hover { opacity: 1; }
   .lang-switch .sep { opacity: 0.25; }
@@ -310,7 +310,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
       "name": "CB Grup Barna club briefing for collaborators (PDF)",
       "description": "Official PDF version of the CB Grup Barna briefing: 16 A4 pages covering history, values, senior teams at the FCBQ Supercup, events, child protection and communication guidelines. Document in Catalan.",
       "encodingFormat": "application/pdf",
-      "inLanguage": "ca",
+      "inLanguage": "en",
       "url": "https://cbgrupbarna.info/briefing/materials/briefing-cb-grup-barna-collaboradors.pdf",
       "datePublished": "2026-08-01",
       "isAccessibleForFree": true,
@@ -335,9 +335,9 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <header class="cover">
     <div class="cover-left">
       <div class="badge"><img src="/briefing/img/briefing-01-a543bd43.webp" alt="CB Grup Barna crest" loading="lazy" decoding="async" width="220" height="292"></div>
-      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-        <a href="/briefing/" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/briefing/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/briefing/" hreflang="en" class="active">EN</a>
-      </div>
+      <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/briefing/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/briefing/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/briefing/" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
+    </nav>
       <div class="redbar"></div>
       <div class="kicker">Club Briefing · For Collaborators</div>
       <h1 class="display">CB Grup<br>Barna<br><span class="red">El Clot · 1965</span></h1>

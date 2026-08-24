@@ -219,7 +219,7 @@ function render(){
         <small>${m.data} · ${m.mida} KB${m.partner?' · '+m.partner:''}${m.desc?' · '+m.desc:''}</small>
       </div>
       <span class="mtag">${m.tipus}</span>
-      <a class="btn ghost small" href="/${DIR}/${m.fitxer}" target="_blank">Obrir</a>
+      <a class="btn ghost small" href="/${DIR}/${m.fitxer}" target="_blank" rel="noopener">Obrir</a>
       <button class="del" title="Eliminar" onclick="del('${m.fitxer}')">✕</button>
     </div>`).join('');
 }

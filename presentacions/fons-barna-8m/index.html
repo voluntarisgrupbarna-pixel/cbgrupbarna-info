@@ -26,6 +26,16 @@
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
+   component es pinta aquí amb els mateixos tokens, i per tant segueix el
+   mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -98,17 +108,28 @@
   .theme:hover{border-color:var(--red)}
   .theme .ic{width:11px;height:11px;border-radius:50%;border:1.5px solid currentColor;display:block;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);flex-shrink:0}
   @media(max-width:620px){.theme{padding:7px 9px;font-size:8.5px}}
+  /* A 320 px la capçalera —nom, menú, commutador de mode i selector
+     d'idioma— no hi cabia: el navegador eixamplava la finestra de disseny
+     fins a 411 px i el botó de mode quedava fora de la pantalla, sense
+     manera d'arribar-hi. El nom del club es retira (l'escut ja hi és) i el
+     botó es queda amb la icona; el nom del mode el diu l'aria-live. */
+  @media(max-width:480px){
+    .head-in{gap:12px}
+    .head-brand span{display:none}
+    .head-nav{min-width:0}
+    .theme #theme-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  }
 
   .idx{position:sticky;top:60px;z-index:99;background:var(--panel);border-bottom:1px solid var(--line)}
   .idx-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:18px}
-  .idx-lab{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6B6560;flex-shrink:0}
+  .idx-lab{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);flex-shrink:0}
   @media(max-width:820px){.idx-lab{display:none}}
   .idx-nav{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;scroll-behavior:smooth;
     -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
     mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
   .idx-nav::-webkit-scrollbar{display:none}
   .idx-nav a{position:relative;font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-    color:#6B6560;text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
+    color:var(--muted);text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
   .idx-nav a:hover{color:var(--ink)}
   .idx-nav a[aria-current="true"]{color:var(--red);border-bottom-color:var(--red)}
   .idx-more{flex-shrink:0;font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:8px;
@@ -117,8 +138,10 @@
   [id]{scroll-margin-top:112px}
   @media(max-width:620px){[id]{scroll-margin-top:104px}}
 
-  .crumb{padding:14px 0;font-size:11.5px;color:#6B6560}
-  .crumb a{color:#6B6560;text-decoration:none}
+  /* La pagina te mode fosc propi: el gris fix es quedava en 3,14:1 sobre el
+     fons fosc. Amb el token segueix el mode. */
+  .crumb{padding:14px 0;font-size:11.5px;color:var(--muted)}
+  .crumb a{color:var(--muted);text-decoration:none}
   .crumb a:hover{color:var(--ink)}
   .crumb span{color:var(--ink)}
 
@@ -139,7 +162,7 @@
 
   .sech{border-top:3px solid var(--red);padding:16px 0 14px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .sech h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;letter-spacing:.05em;line-height:1}
-  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#6B6560}
+  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
   .sec{padding:clamp(44px,7vw,80px) 0 0}
   .sec:last-of-type{padding-bottom:clamp(44px,7vw,80px)}
 
@@ -149,8 +172,8 @@
   .b-num div:hover{background:var(--cream)}
   .b-num b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(26px,4vw,44px);line-height:.9;font-variant-numeric:tabular-nums;color:var(--ink)}
   .b-num .r b{color:var(--red)}
-  .b-num span{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#6B6560;margin-top:8px}
-  .b-num em{display:block;font-style:normal;font-size:11px;color:#6B6560;margin-top:6px}
+  .b-num span{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+  .b-num em{display:block;font-style:normal;font-size:11px;color:var(--muted);margin-top:6px}
 
   .split{display:grid;grid-template-columns:1fr;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);margin-top:26px;border-radius:var(--radius);overflow:hidden}
   @media(min-width:900px){.split{grid-template-columns:1fr 1fr;min-height:440px}}
@@ -160,13 +183,13 @@
   .split-media img{width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0}
   .split-txt{padding:clamp(30px,4.6vw,56px);display:flex;flex-direction:column;justify-content:center}
   .split-txt h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,3.2vw,36px);text-transform:uppercase;line-height:1.02;margin:10px 0 14px}
-  .split-txt p{font-size:15px;color:#6B6560;max-width:52ch}
+  .split-txt p{font-size:15px;color:var(--muted);max-width:52ch}
   .split-txt p+p{margin-top:12px}
   .split-txt p strong{color:var(--ink);font-weight:600}
 
   .panel{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);padding:clamp(28px,4.5vw,52px);margin-top:26px;border-radius:var(--radius)}
   .panel h3{font-family:var(--display);font-weight:400;font-size:clamp(22px,3vw,32px);text-transform:uppercase;line-height:1.02;margin-bottom:12px}
-  .panel>p{font-size:15px;color:#6B6560;max-width:70ch}
+  .panel>p{font-size:15px;color:var(--muted);max-width:70ch}
   .panel>p+p{margin-top:12px}
   .panel>p strong{color:var(--ink);font-weight:600}
 
@@ -174,7 +197,7 @@
   .quote::before{content:'';display:block;width:34px;height:2px;background:var(--red-solid);margin:0 auto clamp(20px,3vw,30px)}
   .quote blockquote{font-family:var(--display);font-weight:400;font-size:clamp(20px,3.2vw,34px);line-height:1.18;max-width:26ch;margin:0 auto;text-transform:uppercase;text-wrap:balance}
   .quote blockquote em{font-style:normal;color:var(--red)}
-  .quote cite{display:block;margin-top:16px;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6B6560}
+  .quote cite{display:block;margin-top:16px;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
   .p-list{list-style:none;margin-top:18px;max-width:680px}
   .p-list li{position:relative;padding:12px 0 12px 30px;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink)}
@@ -203,10 +226,10 @@
   @media(min-width:760px){.packs{grid-template-columns:repeat(3,1fr)}}
   .pack{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;display:flex;flex-direction:column}
   .pack.top{border-color:var(--red);background:linear-gradient(160deg,rgba(226,6,19,.14),var(--panel) 62%)}
-  .pack .tag{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6B6560}
+  .pack .tag{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
   .pack.top .tag{color:var(--red)}
   .pack h4{font-family:var(--display);font-weight:400;font-size:clamp(18px,2.2vw,22px);text-transform:uppercase;margin:10px 0 4px;line-height:1.15}
-  .pack p{font-size:13.5px;color:#6B6560;margin-top:10px}
+  .pack p{font-size:13.5px;color:var(--muted);margin-top:10px}
   .pack ul{list-style:none;margin-top:16px}
   .pack li{position:relative;padding:8px 0 8px 22px;font-size:13px;border-top:1px solid var(--line)}
   .pack li::before{content:'·';position:absolute;left:6px;color:var(--red);font-weight:700}
@@ -216,7 +239,7 @@
   .facts div{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 18px}
   .facts b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(22px,3vw,30px);
     line-height:.95;color:var(--red);font-variant-numeric:tabular-nums}
-  .facts span{display:block;font-size:11px;color:#6B6560;margin-top:8px}
+  .facts span{display:block;font-size:11px;color:var(--muted);margin-top:8px}
   .facts em{display:block;font-style:normal;font-size:11px;color:var(--ink);margin-top:6px}
 
   .bar{display:grid;grid-template-columns:100px 1fr 56px;align-items:center;gap:12px;margin-bottom:9px;font-size:13px}
@@ -224,13 +247,13 @@
   .bar .t{height:14px;background:var(--cream);position:relative;overflow:hidden;border-radius:6px}
   .bar .f{position:absolute;inset:0 auto 0 0;background:var(--red-solid);border-radius:6px}
   .bar .f.alt{background:#6B6560}
-  .bar .v{text-align:right;color:#6B6560;font-variant-numeric:tabular-nums}
+  .bar .v{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
 
   .tbl-wrap{overflow-x:auto;margin-top:26px;border:1px solid var(--line);border-radius:var(--radius)}
   .tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
   .tbl th,.tbl td{padding:13px 15px;text-align:left;border-top:1px solid var(--line)}
   .tbl thead th{border-top:0;font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.14em;
-    text-transform:uppercase;color:#6B6560;background:var(--panel)}
+    text-transform:uppercase;color:var(--muted);background:var(--panel)}
   .tbl td:nth-child(3),.tbl td:nth-child(4),.tbl th:nth-child(3),.tbl th:nth-child(4){text-align:right;font-variant-numeric:tabular-nums}
 
   /* Petició formal */
@@ -245,7 +268,7 @@
 
   .closer{background:var(--panel);border-top:1px solid var(--line);padding:clamp(56px,8vw,96px) 0;text-align:center}
   .closer h2{font-family:var(--display);font-weight:400;font-size:clamp(26px,3.8vw,40px);text-transform:uppercase;margin-bottom:14px}
-  .closer p{color:#6B6560;max-width:52ch;margin:0 auto 30px}
+  .closer p{color:var(--muted);max-width:52ch;margin:0 auto 30px}
   .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:15px 30px;transition:all .2s;border-radius:8px}
   .btn.red{background:var(--red-solid);color:#fff}
@@ -282,6 +305,9 @@
       <a href="/fotos/" class="opt">Galeria</a>
       <a href="/premsa/">Premsa</a>
     </nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/presentacions/fons-barna-8m/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/presentaciones/fons-barna-8m/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/presentations/fons-barna-8m/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
       <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
     </button>
@@ -312,7 +338,7 @@
 
 <!-- PORTADA -->
 <section class="hero" id="portada">
-  <div class="hero-bg"><img src="/presentacions/fons-barna-8m/img/staff-06.jpg" alt="Staff tècnic del CB Grup Barna, intergeneracional i mixt" fetchpriority="high"></div>
+  <div class="hero-bg"><img src="/presentacions/fons-barna-8m/img/staff-06-400.webp" srcset="/presentacions/fons-barna-8m/img/staff-06-400.webp 400w, /presentacions/fons-barna-8m/img/staff-06-800.webp 800w, /presentacions/fons-barna-8m/img/staff-06-1400.webp 1400w" sizes="(max-width: 900px) 100vw, 700px" alt="Staff tècnic del CB Grup Barna, intergeneracional i mixt" fetchpriority="high" width="1400" height="1050" decoding="async"></div>
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-in wrap">
     <span class="hero-rule" aria-hidden="true"></span>
@@ -381,7 +407,7 @@
 <section class="sec" id="problema">
   <div class="wrap">
     <div class="sech"><h2>2 · El problema estructural: la bretxa invisible</h2><em>De jugadora a entrenadora</em></div>
-    <p style="color:#6B6560;font-size:15px;max-width:70ch;margin-top:14px">El bàsquet català té un
+    <p style="color:var(--muted);font-size:15px;max-width:70ch;margin-top:14px">El bàsquet català té un
     repte que els números de llicències no mostren: les dones s'incorporen com a jugadores, però no es
     queden com a tècniques ni líders.</p>
     <div class="facts">
@@ -390,7 +416,7 @@
       <div><b>−12%</b><span>De jugadora a entrenadora</span><em>Punts de representació que es perden</em></div>
       <div><b>4</b><span>Edicions del Programa Mentoria FCBQ</span><em>2021–2025, requereix titulació prèvia</em></div>
     </div>
-    <p style="color:#6B6560;font-size:14px;margin-top:16px;max-width:70ch">A escala estatal, les
+    <p style="color:var(--muted);font-size:14px;margin-top:16px;max-width:70ch">A escala estatal, les
     157.432 llicències femenines del 2024 representen el 35,7% del total, i el creixement femení dobla el
     masculí (+19.165 dones vs +9.377 homes). Però hi ha un embut sistemàtic: les dones entren al bàsquet en
     nombre creixent, però els mecanismes per convertir-les en entrenadores no acompanyen — no per falta de
@@ -409,7 +435,7 @@
 <section class="sec" id="model">
   <div class="wrap">
     <div class="sech"><h2>3 · El model CB Grup Barna</h2><em>61 anys construint el que la ciutat necessita</em></div>
-    <p style="color:#6B6560;font-size:15px;max-width:70ch;margin-top:14px">CB Grup Barna no presenta
+    <p style="color:var(--muted);font-size:15px;max-width:70ch;margin-top:14px">CB Grup Barna no presenta
     una acció puntual pel 8M. Presenta un model estructural de 61 anys que ha construït un ecosistema real.</p>
 
     <div class="staff-grid">
@@ -417,7 +443,7 @@
       <div class="staff-card"><img src="/presentacions/fons-barna-8m/img/staff-03.jpg" alt="Lideratge compartit al CB Grup Barna" loading="lazy"><span>Lideratge compartit: pilota a mans femenines</span></div>
       <div class="staff-card"><img src="/presentacions/fons-barna-8m/img/staff-04.jpg" alt="Entrenadora del CB Grup Barna al centre visual de l'equip" loading="lazy"><span>Entrenadora al centre visual de l'equip</span></div>
     </div>
-    <p style="font-size:13px;color:#6B6560;margin-top:10px">Entrenadores del club dirigeixen equips
+    <p style="font-size:13px;color:var(--muted);margin-top:10px">Entrenadores del club dirigeixen equips
     masculins. Això no és anecdòtic: és la demostració que la igualtat real significa dones liderant
     equips independentment del gènere dels jugadors.</p>
 
@@ -455,7 +481,7 @@
 <section class="sec" id="cercle">
   <div class="wrap">
     <div class="sech"><h2>4 · El patró ocult: el cercle viciós del talent femení</h2><em>Anàlisi creuada FCBQ + estudis d'abandó + realitat interna</em></div>
-    <p style="color:#6B6560;font-size:15px;max-width:70ch;margin-top:14px">L'anàlisi creuada de les
+    <p style="color:var(--muted);font-size:15px;max-width:70ch;margin-top:14px">L'anàlisi creuada de les
     dades de la FCBQ, els estudis d'abandó i la realitat interna del CB Grup Barna permet formular el
     mecanisme que expulsa les dones del bàsquet:</p>
     <ol class="circle">
@@ -489,7 +515,7 @@
 
     <div class="staff-grid" style="margin-top:24px">
       <div class="staff-card"><img src="/presentacions/fons-barna-8m/img/staff-09.jpg" alt="Entrenadora i entrenador del CB Grup Barna, igualtat a la banqueta" loading="lazy"><span>Entrenadora i entrenador: igualtat a la banqueta</span></div>
-      <div class="staff-card"><img src="/presentacions/fons-barna-8m/img/staff-06.jpg" alt="Lideratge compartit i diversitat real al staff del CB Grup Barna" loading="lazy"><span>Lideratge compartit: diversitat real</span></div>
+      <div class="staff-card"><img src="/presentacions/fons-barna-8m/img/staff-06-400.webp" srcset="/presentacions/fons-barna-8m/img/staff-06-400.webp 400w, /presentacions/fons-barna-8m/img/staff-06-800.webp 800w, /presentacions/fons-barna-8m/img/staff-06-1400.webp 1400w" sizes="(max-width: 900px) 100vw, 700px" alt="Lideratge compartit i diversitat real al staff del CB Grup Barna" loading="lazy" width="1400" height="1050" decoding="async"><span>Lideratge compartit: diversitat real</span></div>
       <div class="staff-card"><img src="/presentacions/fons-barna-8m/img/staff-01.jpg" alt="De jugadora a tècnica, pipeline visible del CB Grup Barna" loading="lazy"><span>De jugadora a tècnica: el pipeline visible</span></div>
     </div>
 
@@ -536,7 +562,7 @@
 <section class="sec" id="proposta">
   <div class="wrap">
     <div class="sech"><h2>6 · Proposta: Fons Barna 8M</h2><em>Beques per a entrenadores · tres nivells d'acció</em></div>
-    <p style="color:#6B6560;font-size:15px;max-width:70ch;margin-top:14px">No és una demanda puntual:
+    <p style="color:var(--muted);font-size:15px;max-width:70ch;margin-top:14px">No és una demanda puntual:
     és un model de col·laboració club-federació per resoldre la bretxa de titulació i generar un canvi
     sistèmic replicable a tot Catalunya.</p>
     <div class="packs">
@@ -591,7 +617,7 @@
 <section class="sec" id="urgencia">
   <div class="wrap">
     <div class="sech"><h2>7 · Per què és urgent ara</h2><em>La connexió amb el 8M real</em></div>
-    <p style="color:#6B6560;font-size:15px;max-width:70ch;margin-top:14px">El 8M no és el dia que els
+    <p style="color:var(--muted);font-size:15px;max-width:70ch;margin-top:14px">El 8M no és el dia que els
     clubs publiquen un post amb fons morat. És el recordatori anual que la desigualtat estructural existeix
     — i que exigeix accions estructurals, no simbòliques.</p>
     <div class="split">
@@ -656,11 +682,11 @@
 <section class="sec" id="peticio">
   <div class="wrap">
     <div class="sech"><h2>9 · Conclusions i petició formal a la FCBQ</h2><em>Elles ja entrenen. El sistema ha de reconèixer-les.</em></div>
-    <p style="color:#6B6560;font-size:15px;max-width:70ch;margin-top:14px">El CB Grup Barna ha
+    <p style="color:var(--muted);font-size:15px;max-width:70ch;margin-top:14px">El CB Grup Barna ha
     construït durant 61 anys, al barri del Clot, el que moltes polítiques esportives intenten crear en 4
     anys: un ecosistema on les dones no abandonen el bàsquet. Però ho hem fet sense carnet, sense registre,
     sense visibilitat institucional.</p>
-    <p style="color:#6B6560;font-size:15px;max-width:70ch;margin-top:10px">Les 38 entrenadores del CB
+    <p style="color:var(--muted);font-size:15px;max-width:70ch;margin-top:10px">Les 38 entrenadores del CB
     Grup Barna existeixen. Treballen. Formen jugadores. Trenquen estereotips entrenant equips masculins.
     Redueixen l'abandó. Però per a les estadístiques de la FCBQ, no existeixen.</p>
 

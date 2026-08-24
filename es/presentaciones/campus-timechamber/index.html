@@ -26,6 +26,16 @@
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
+   component es pinta aquí amb els mateixos tokens, i per tant segueix el
+   mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+</style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -118,6 +128,17 @@
   .theme:hover{border-color:var(--red)}
   .theme .ic{width:11px;height:11px;border-radius:50%;border:1.5px solid currentColor;display:block;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);flex-shrink:0}
   @media(max-width:620px){.theme{padding:7px 9px;font-size:8.5px}}
+  /* A 320 px la capçalera —nom, menú, commutador de mode i selector
+     d'idioma— no hi cabia: el navegador eixamplava la finestra de disseny
+     fins a 411 px i el botó de mode quedava fora de la pantalla, sense
+     manera d'arribar-hi. El nom del club es retira (l'escut ja hi és) i el
+     botó es queda amb la icona; el nom del mode el diu l'aria-live. */
+  @media(max-width:480px){
+    .head-in{gap:12px}
+    .head-brand span{display:none}
+    .head-nav{min-width:0}
+    .theme #theme-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  }
 
   .idx{position:sticky;top:60px;z-index:99;background:var(--panel);border-bottom:1px solid var(--line)}
   .idx-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:18px}
@@ -270,8 +291,8 @@
 <a href="#main" class="skip">Saltar al contenido</a>
 <header class="head">
   <div class="head-in">
-    <a class="head-brand" href="/es/" aria-label="CB Grup Barna · inici">
-      <img src="/logo.png" alt="Escut del CB Grup Barna">
+    <a class="head-brand" href="/es/" aria-label="CB Grup Barna · inicio">
+      <img src="/logo.png" alt="Escudo del CB Grup Barna">
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegación principal">
@@ -282,6 +303,9 @@
       <a href="/es/premsa/" class="opt">Prensa</a>
       <a href="/es/patrocinadors/" class="opt">Partners</a>
       <a href="/es/#info">Información</a>
+    </nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/presentacions/campus-timechamber/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/presentaciones/campus-timechamber/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/presentations/campus-timechamber/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
       <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
@@ -303,12 +327,12 @@
       <a href="#contacte">Inscripción</a>
     </div>
     <a class="idx-more" href="/es/campus/">Página del campus</a>
-    <a class="idx-more" href="/presentacions/">Presentaciones</a>
+    <a class="idx-more" href="/es/presentaciones/">Presentaciones</a>
   </div>
 </nav>
 
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Ruta de navegación"><a href="/es/">Inicio</a> · <a href="/presentacions/">Presentaciones</a> · <span>Campus × Time Chamber</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Ruta de navegación"><a href="/es/">Inicio</a> · <a href="/es/presentaciones/">Presentaciones</a> · <span>Campus × Time Chamber</span></nav></div>
 
 <!-- PORTADA -->
 <section class="hero" id="portada">
@@ -507,6 +531,12 @@
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/es/politica-de-privacidad/">Política de privacidad</a>
+        <a href="/es/aviso-legal/">Aviso legal</a>
+        <a href="/es/politica-de-privacidad/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Redes</h3>

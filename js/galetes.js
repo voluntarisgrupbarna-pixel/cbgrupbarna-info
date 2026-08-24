@@ -92,10 +92,10 @@
     'align-items:center;justify-content:space-between;flex-wrap:wrap}',
     '.cbgb-gal-t{flex:1 1 340px;min-width:0}',
     '.cbgb-gal-t b{display:block;font-family:\'Anton\',\'Futura\',sans-serif;font-weight:400;',
-    'font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#E20613;margin-bottom:7px}',
+    'font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#FF3B41;margin-bottom:7px}',
     '.cbgb-gal-t p{margin:0;color:rgba(255,255,255,.82)}',
-    '.cbgb-gal-t a{color:#fff;border-bottom:1px solid #E20613;text-decoration:none}',
-    '.cbgb-gal-t a:hover{color:#E20613}',
+    '.cbgb-gal-t a{color:#fff;border-bottom:1px solid #FF3B41;text-decoration:none}',
+    '.cbgb-gal-t a:hover{color:#FF3B41}',
     '.cbgb-gal-b{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}',
     '.cbgb-gal-b button{font-family:\'Anton\',\'Futura\',sans-serif;font-size:10px;letter-spacing:.24em;',
     'text-transform:uppercase;padding:13px 22px;min-height:46px;border:1px solid #fff;cursor:pointer;',
@@ -105,7 +105,15 @@
     '.cbgb-gal-b button.si:hover{background:#fff;border-color:#fff;color:#10100E}',
     '@media(max-width:620px){.cbgb-gal{padding:14px 16px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}',
     '.cbgb-gal-in{gap:12px}.cbgb-gal-t p{font-size:12.5px}',
-    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;padding:12px 10px;min-height:42px}}',
+    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;min-width:0;padding:12px 10px;min-height:42px}}',
+    // A 320 px la barra feia 342 px d'ample i el boto d'acceptar quedava
+    // partit fora de la pantalla: els botons son flex:1 1 0 pero el seu
+    // contingut (majuscules amb .24em d'interlletratge) no encongeix, i sense
+    // min-width:0 un fill flexible no baixa de l'amplada del seu text. Aquest
+    // avis es la primera cosa que es toca en entrar; no pot sortir tallat.
+    '@media(max-width:380px){.cbgb-gal{padding:12px 12px;padding-bottom:calc(12px + env(safe-area-inset-bottom))}',
+    '.cbgb-gal-b{gap:8px}',
+    '.cbgb-gal-b button{font-size:9px;letter-spacing:.12em;padding:12px 6px;hyphens:auto}}',
     '@media(prefers-reduced-motion:reduce){.cbgb-gal{animation:none}}'
   ].join('');
 
@@ -166,7 +174,7 @@
         '<div class="cbgb-gal-t">' +
           '<b>' + t.titol + '</b>' +
           '<p>' + t.text + ' ' +
-          '<a href="' + t.enllac + '">' + t.mes + '</a>.</p>' +
+          '<a href="' + t.enllac + '" data-cbgb-mes="1">' + t.mes + '</a>.</p>' +
         '</div>' +
         '<div class="cbgb-gal-b">' +
           '<button type="button" data-cbgb="no">' + t.nomes + '</button>' +
@@ -200,6 +208,11 @@
   // ── 5. API per reobrir el panell des del peu ──
   window.CBGB_GALETES = {
     obrir: function () {
+      // Si la barra ja hi és, no s'esborra res: abans es netejava el
+      // consentiment desat i tot seguit pintar() sortia de seguida perquè
+      // la barra existia, així que la decisió desapareixia sense que la
+      // persona veiés cap panell nou.
+      if (barra) { barra.querySelector('[data-cbgb="si"]').focus(); return; }
       try { localStorage.removeItem(CLAU); localStorage.removeItem(CLAU_V); } catch (e) {}
       pintar();
     },
@@ -207,10 +220,24 @@
   };
 
   // Qualsevol enllaç cap a #galetes reobre el panell sense sortir de la pàgina
+  // Les tres polítiques de privacitat tenen una secció #galetes de veritat.
+  // Abans només s'excloïa la catalana, i per tant a /es/politica-de-privacidad/
+  // i a /en/privacy-policy/ l'àncora de la pàgina quedava segrestada: en lloc
+  // de baixar fins a la secció, reobria el panell.
+  var POLITIQUES = [
+    '/politica-de-privacitat/',
+    '/es/politica-de-privacidad/',
+    '/en/privacy-policy/'
+  ];
+
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href$="#galetes"]');
     if (!a) return;
-    if (location.pathname === '/politica-de-privacitat/') return; // allà és una àncora real
+    // L'enllaç «Més informació» del propi avís ha de portar a la política.
+    // Amb el gestor genèric no anava enlloc: es cancel·lava la navegació i
+    // es tornava a obrir un panell que ja era obert.
+    if (a.hasAttribute('data-cbgb-mes')) return;
+    if (POLITIQUES.indexOf(location.pathname) !== -1) return; // allà és una àncora real
     e.preventDefault();
     window.CBGB_GALETES.obrir();
   });

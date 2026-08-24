@@ -26,6 +26,16 @@
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
+   component es pinta aquí amb els mateixos tokens, i per tant segueix el
+   mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+</style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -125,6 +135,17 @@
   .theme:hover{border-color:var(--red)}
   .theme .ic{width:11px;height:11px;border-radius:50%;border:1.5px solid currentColor;display:block;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);flex-shrink:0}
   @media(max-width:620px){.theme{padding:7px 9px;font-size:8.5px}}
+  /* A 320 px la capçalera —nom, menú, commutador de mode i selector
+     d'idioma— no hi cabia: el navegador eixamplava la finestra de disseny
+     fins a 411 px i el botó de mode quedava fora de la pantalla, sense
+     manera d'arribar-hi. El nom del club es retira (l'escut ja hi és) i el
+     botó es queda amb la icona; el nom del mode el diu l'aria-live. */
+  @media(max-width:480px){
+    .head-in{gap:12px}
+    .head-brand span{display:none}
+    .head-nav{min-width:0}
+    .theme #theme-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  }
 
   /* ÍNDEX DE LA PRESENTACIÓ · segona barra enganxada sota la capçalera.
      Diu on ets i deixa saltar a qualsevol secció sense tornar amunt. */
@@ -512,8 +533,8 @@
 <a href="#main" class="skip">Skip to content</a>
 <header class="head">
   <div class="head-in">
-    <a class="head-brand" href="/en/" aria-label="CB Grup Barna · inici">
-      <img src="/logo.png" alt="Escut del CB Grup Barna">
+    <a class="head-brand" href="/en/" aria-label="CB Grup Barna · home">
+      <img src="/logo.png" alt="CB Grup Barna crest">
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Main navigation">
@@ -524,6 +545,9 @@
       <a href="/en/premsa/" class="opt">Press</a>
       <a href="/en/patrocinadors/" class="opt">Partners</a>
       <a href="/en/#info">Information</a>
+    </nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/presentacions/dossier-patrocinis/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/presentaciones/dosier-patrocinios/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/presentations/sponsorship-pack/" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
       <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
@@ -551,16 +575,16 @@
       <a href="#contacte">Contact</a>
     </div>
     <a class="idx-more" href="/presentacions/dossier-patrocinis/cb-grup-barna-dossier-patrocinis.pdf" download="CB-Grup-Barna-Dossier-Patrocinis.pdf" data-cta="dossier-pdf-barra">PDF</a>
-    <a class="idx-more" href="/presentacions/">Presentations</a>
+    <a class="idx-more" href="/en/presentations/">Presentations</a>
   </div>
 </nav>
 
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="/en/">Home</a> · <a href="/presentacions/">Presentations</a> · <span>Sponsorship pack</span></nav></div>
+<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="/en/">Home</a> · <a href="/en/presentations/">Presentations</a> · <span>Sponsorship pack</span></nav></div>
 
 <!-- PORTADA -->
 <section class="hero" id="portada">
-  <div class="hero-bg"><img src="/presentacio/img/hero-equip.jpg" alt="CB Grup Barna players in the club kit" fetchpriority="high"></div>
+  <div class="hero-bg"><img src="/presentacio/img/hero-equip-400.webp" srcset="/presentacio/img/hero-equip-400.webp 400w, /presentacio/img/hero-equip-800.webp 800w, /presentacio/img/hero-equip-1400.webp 1400w" sizes="(max-width: 900px) 100vw, 420px" alt="CB Grup Barna players in the club kit" fetchpriority="high" width="2100" height="2408" decoding="async"></div>
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-in wrap">
     <span class="hero-rule" aria-hidden="true"></span>
@@ -600,7 +624,7 @@
   <div class="wrap">
     <div class="sech"><h2>Digital impact</h2><em>Professional dashboard · 24 July 2026</em></div>
     <div class="split">
-      <div class="split-media"><img src="/presentacio/img/ent-42.jpg" alt="A CB Grup Barna player" loading="lazy"></div>
+      <div class="split-media"><img src="/presentacio/img/ent-42-400.webp" srcset="/presentacio/img/ent-42-400.webp 400w, /presentacio/img/ent-42-800.webp 800w, /presentacio/img/ent-42-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 420px" alt="A CB Grup Barna player" loading="lazy" width="1200" height="1600" decoding="async"></div>
       <div class="split-txt">
         <p class="lab">· What is behind the logo</p>
         <h3>Half a million views every month</h3>
@@ -661,7 +685,7 @@
   <div class="wrap">
     <div class="sech"><h2>Who follows us</h2><em>Audience profile</em></div>
     <div class="split rev">
-      <div class="split-media"><img src="/presentacio/img/educacio-bg.jpg" alt="CB Grup Barna players" loading="lazy"></div>
+      <div class="split-media"><img src="/presentacio/img/educacio-bg-400.webp" srcset="/presentacio/img/educacio-bg-400.webp 400w, /presentacio/img/educacio-bg-800.webp 800w, /presentacio/img/educacio-bg-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 420px" alt="CB Grup Barna players" loading="lazy" width="1200" height="1600" decoding="async"></div>
       <div class="split-txt">
         <p class="lab">· Who your brand reaches</p>
         <h3>Local parents</h3>
@@ -815,14 +839,14 @@
     <div class="sech"><h2>Institutional recognition</h2><em>Generalitat · City Hall · Federation</em></div>
     <div class="visits-grid">
       <div class="visit-card">
-        <div class="vc-img"><img src="/presentacio/img/inst-conseller.jpg" alt="Meeting with the Minister for Sport" loading="lazy"></div>
+        <div class="vc-img"><img src="/presentacio/img/inst-conseller-400.webp" srcset="/presentacio/img/inst-conseller-400.webp 400w, /presentacio/img/inst-conseller-800.webp 800w, /presentacio/img/inst-conseller-828.webp 828w" sizes="(max-width: 900px) 100vw, 420px" alt="Meeting with the Minister for Sport" loading="lazy" width="828" height="828" decoding="async"></div>
         <div class="vc-body">
           <h3>Generalitat de Catalunya</h3>
           <p>A meeting with Bernat Álvarez, Minister for Sport.</p>
         </div>
       </div>
       <div class="visit-card">
-        <div class="vc-img"><img src="/presentacio/img/premi-dona-1.jpg" alt="CB Grup Barna, finalist for the Premi Dona i Esport" loading="lazy"></div>
+        <div class="vc-img"><img src="/presentacio/img/premi-dona-1-400.webp" srcset="/presentacio/img/premi-dona-1-400.webp 400w, /presentacio/img/premi-dona-1-800.webp 800w, /presentacio/img/premi-dona-1-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 420px" alt="CB Grup Barna, finalist for the Premi Dona i Esport" loading="lazy" width="1200" height="1600" decoding="async"></div>
         <div class="vc-body">
           <h3>Barcelona City Council</h3>
           <p>The only basketball club shortlisted for the 18th Premi Dona i Esport.</p>
@@ -830,7 +854,7 @@
         </div>
       </div>
       <div class="visit-card">
-        <div class="vc-img"><img src="/presentacio/img/inst-david.jpg" alt="David Escudé and the vice-president of the Federació Catalana de Bàsquet" loading="lazy"></div>
+        <div class="vc-img"><img src="/presentacio/img/inst-david-400.webp" srcset="/presentacio/img/inst-david-400.webp 400w, /presentacio/img/inst-david-800.webp 800w, /presentacio/img/inst-david-1066.webp 1066w" sizes="(max-width: 900px) 100vw, 420px" alt="David Escudé and the vice-president of the Federació Catalana de Bàsquet" loading="lazy" width="1066" height="1421" decoding="async"></div>
         <div class="vc-body">
           <h3>Federació Catalana de Bàsquet</h3>
           <p>Teams in every league and collaboration on the BQ Programme.</p>
@@ -980,6 +1004,12 @@
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/en/privacy-policy/">Privacy policy</a>
+        <a href="/en/legal-notice/">Legal notice</a>
+        <a href="/en/privacy-policy/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Social</h3>

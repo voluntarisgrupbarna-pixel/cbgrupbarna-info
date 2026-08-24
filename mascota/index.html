@@ -230,9 +230,11 @@
     text-align: center;
   }
 
+  /* El vel blanc aclaria el vermell i el text hi baixava a 4,41:1. Amb un vel
+     de tinta el fons s'enfosqueix i el blanc hi puja a 7:1. */
   .info-card .tag {
     display: inline-block;
-    background: rgba(255,255,255,0.15);
+    background: rgba(16,16,14,0.22);
     color: #fff;
     font-size: 0.7rem;
     font-weight: 700;
@@ -292,7 +294,7 @@
 
   .contact-box .contact-name {
     font-size: 0.75rem;
-    color: #888;
+    color: #6B6560;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 4px;
@@ -343,9 +345,11 @@
   }
   .btn-primary:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
 
+  /* El verd de WhatsApp es el seu, i es queda. El text, pero, no pot ser blanc:
+     hi dona 1,98:1. En tinta hi dona 9,6:1 i el boto se segueix reconeixent. */
   .btn-wa {
     background: #25D366;
-    color: #fff;
+    color: #10100E;
     box-shadow: 0 4px 16px rgba(37,211,102,0.3);
   }
 
@@ -414,7 +418,7 @@
   }
   .share-btn:hover { opacity: 0.85; }
 
-  .share-wa { background: #25D366; color: #fff; }
+  .share-wa { background: #25D366; color: #10100E; }
   .share-copy { background: #333; color: #fff; cursor: pointer; border: none; font-family: inherit; }
 
   /* ── FOOTER ── */
@@ -447,11 +451,13 @@
     .footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
   }
 
-  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-  .lang-switch a.active { opacity: 1; font-weight: 600; }
-  .lang-switch a:hover { opacity: 1; }
-  .lang-switch .sep { opacity: 0.25; }
+  /* Caselles de 24px mínim: amb el text sol feien 19-21px d'ample i no
+     arribaven a la mida mínima de diana tàctil (WCAG 2.2). */
+  .lang-switch { display: flex; align-items: center; gap: 2px; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; opacity: 0.85; color: #fff; text-decoration: none; transition: opacity 0.3s, color 0.3s; }
+  .lang-switch a.active { opacity: 1; font-weight: 600; color: #fff; }
+  .lang-switch a:hover, .lang-switch a:focus-visible { opacity: 1; color: #FF3B41; }
+  .lang-switch .sep { opacity: 0.25; pointer-events: none; }
 
   .lang-switch-bar {
     position: absolute;
@@ -472,11 +478,9 @@
 <main class="hero" role="main">
   <div class="video-wrap">
     <div class="video-badge">#SomClot · Escola Bàsquet</div>
-    <div class="lang-switch-bar">
-      <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-        <a href="/mascota/" hreflang="ca" class="active">CA</a><span class="sep">·</span><a href="/es/mascota/" hreflang="es">ES</a><span class="sep">·</span><a href="/en/mascota/" hreflang="en">EN</a>
-      </div>
-    </div>
+    <nav class="lang-switch lang-switch-bar" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/mascota/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/mascota/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/mascota/" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
     <video
       id="vid"
       playsinline
@@ -588,8 +592,41 @@
   const soundBtn = document.getElementById('soundBtn');
   const unmuteBanner = document.getElementById('unmuteBanner');
 
-  // Autoplay silenciós (navegadors exigeixen muted per autoplay)
-  vid.addEventListener('canplay', () => { vid.play().catch(() => {}); });
+  // Autoplay silenciós (navegadors exigeixen muted per autoplay).
+  //
+  // Amb dues excepcions. Aquest vídeo pesa entre 31 i 50 MB i, en arrencar
+  // sol, es baixa sencer: mesurat, aquesta pàgina transferia 62 MB en obrir-la.
+  // Per a qui va amb dades comptades o ha demanat menys moviment, això no és
+  // una decisió que puguem prendre nosaltres. En aquests casos es queda el
+  // pòster amb el botó de reproduir, que ja hi és i funciona.
+  //
+  // I encara que arrenqui, només ho fa quan el vídeo és a pantalla: si algú
+  // hi arriba amb un enllaç a una àncora de més avall, no es baixa res.
+  function volMenysDades() {
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+      var c = navigator.connection;
+      if (c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || ''))) return true;
+    } catch (e) {}
+    return false;
+  }
+
+  if (!volMenysDades()) {
+    var arrencat = false;
+    var arrenca = function () {
+      if (arrencat) return;
+      arrencat = true;
+      vid.play().catch(function () {});
+    };
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entrades) {
+        entrades.forEach(function (e) { if (e.isIntersecting) { arrenca(); obs.disconnect(); } });
+      }, { threshold: 0.25 });
+      obs.observe(vid);
+    } else {
+      vid.addEventListener('canplay', arrenca);
+    }
+  }
 
   function updatePlayBtn() { playBtn.classList.toggle('hidden', !vid.paused); }
   vid.addEventListener('play', updatePlayBtn);

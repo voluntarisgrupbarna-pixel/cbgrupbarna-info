@@ -22,6 +22,10 @@
   --paper-2: #F4F1EC;
   --red: #E20613;
   --red-dark: #A8040E;
+  /* Sobre fons fosc el vermell de l'escut es queda en 3,87:1 i no arriba al
+     minim per a text petit. El sistema ja preveu aclarir-lo a #FF3B41, que hi
+     dona 5,4:1. Nomes per a text sobre tinta, mai per a fons ni filets. */
+  --red-light: #FF3B41;
   /* Àlies del joc de /partits/ i de l'artefacte */
   --cream: #F4F1EC;
   --red-ink: #A8040E;
@@ -54,7 +58,13 @@ img { max-width: 100%; height: auto; display: block; }
 
 h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.04; }
 .eyebrow { font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted); }
-.eyebrow.red { color: var(--red); }
+/* L'etiqueta va a 9,5-10 px: amb --red sobre crema es queda en 4,37:1, just per
+   sota del minim. --red-ink es el token que el sistema reserva per a text
+   vermell sobre fons clar (6,93:1 sobre crema, 7,81:1 sobre blanc). */
+.eyebrow.red { color: var(--red-ink); }
+/* I sobre les superficies fosques, el vermell aclarit. */
+.foot .eyebrow.red, .comunitat .eyebrow.red, .franja--ink .eyebrow.red,
+.e-lema .eyebrow.red, .ticker .eyebrow.red { color: var(--red-light); }
 .rule { width: 1px; height: clamp(26px, 4vw, 44px); background: var(--line); margin: 18px auto; }
 
 /* ==== CAPÇALERA ==== */
@@ -69,6 +79,31 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .head-nav a:hover::after { right: 0; }
 @media (max-width: 1080px) { .head-nav a.opt { display: none; } }
 @media (max-width: 1080px) { .head-in { flex-wrap: nowrap; } .head-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; } .head-nav::-webkit-scrollbar { display: none; } }
+
+/* A mòbil, la capçalera no hi cabia: el nom del club («CB GRUP BARNA») té
+   white-space: nowrap i el menú s'hi encavalcava a sobre, lletra sobre
+   lletra, a totes les pàgines que porten selector d'idioma. El nom no és
+   informació —l'escut ja hi és, i és enllaç a l'inici— així que per sota de
+   560px es retira i el menú recupera l'espai. .head-nav necessita min-width:0
+   perquè un fill flexible amb overflow-x pugui encongir de veritat. */
+@media (max-width: 1080px) { .head-nav { min-width: 0; } }
+@media (max-width: 560px) { .head-brand span { display: none; } }
+
+/* ==== SELECTOR D'IDIOMA ====
+   Fins ara cada pàgina que el duia es repintava aquest bloc a dins del seu
+   <style>, i les que no el copiaven el treien sense estil. Ara viu aquí una
+   sola vegada: qualsevol pàgina que carregui barna.css el té ben pintat.
+   Les caselles fan 24px d'amplada mínima perquè un dit hi arribi: amb el
+   text sol («CA») feien 15-17px i incomplien la mida mínima de diana de la
+   WCAG 2.2. Els separadors són decoratius i no es poden tocar. */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color 0.3s var(--ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+.lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
+.lang-switch.light a.active { color: #fff; }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
 
 /* ==== BOTONS ==== */
 .cta { display: inline-block; font-family: var(--body); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid currentColor; transition: color 0.35s var(--ease), border-color 0.35s var(--ease); }
@@ -101,8 +136,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .prose p { font-size: 15px; color: var(--ink-2); }
 .prose p + p { margin-top: 15px; }
 .prose strong { font-weight: 500; color: var(--ink); }
-.prose a { color: var(--ink); border-bottom: 1px solid var(--red); padding-bottom: 1px; transition: color 0.3s; }
-.prose a:hover { color: var(--red); }
+/* .prose a (0,1,1) guanyava a .btn (0,1,0): qualsevol boto dins d'un article
+   es quedava amb el text en tinta —3,87:1 sobre el vermell del boto— i amb un
+   subratllat que no li tocava. Els botons queden fora de la regla. */
+.prose a:not(.btn):not(.cta) { color: var(--ink); border-bottom: 1px solid var(--red); padding-bottom: 1px; transition: color 0.3s; }
+.prose a:not(.btn):not(.cta):hover { color: var(--red); }
 .prose ul, .prose ol { margin: 16px 0 16px 20px; }
 .prose li { font-size: 15px; color: var(--ink-2); margin-bottom: 9px; }
 .prose blockquote { margin: 28px 0; padding: 22px 26px; border-left: 2px solid var(--red); background: var(--paper-2); font-size: 15.5px; color: var(--ink); }
@@ -139,6 +177,20 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .franja-go { padding: 0 26px; display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
 .franja-go em { font-style: normal; font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 .franja-go i { display: block; width: 22px; height: 1px; background: var(--ink); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
+
+/* A 390 px la franja conservava les tres columnes fixes —190 px d'imatge, el
+   text, i la crida de la dreta, que porta white-space: nowrap i no encongeix—:
+   al text li quedaven vint píxels i queia una paraula per línia. És la primera
+   cosa que es veu des del mòbil, que és per on entra gairebé tothom. Per sota
+   de 700 px la crida baixa sota el text i la foto es fa petita. */
+@media (max-width: 700px) {
+  .franja { grid-template-columns: 104px minmax(0, 1fr); grid-template-areas: "ph tx" "ph go"; }
+  .franja-ph { grid-area: ph; }
+  .franja-tx { grid-area: tx; padding: 16px 18px 2px; }
+  .franja-go { grid-area: go; padding: 4px 18px 16px; align-items: center; }
+  .franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tx" "go"; }
+}
+
 .franja--red { background: var(--red); }
 .franja--red .franja-t, .franja--red .franja-s, .franja--red .franja-go em { color: #fff; }
 .franja--red .franja-s { color: rgba(255,255,255,0.82); }
@@ -268,10 +320,10 @@ a.partner-logo:hover img { filter: none; opacity: 1; }
 .foot-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: rgba(255,255,255,0.45); margin-bottom: 15px; }
 .foot-col a, .foot-col p { display: block; padding: 7px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
 .foot-col a { display: flex; align-items: center; min-height: 44px; }
-.foot-col a:hover { color: var(--red); }
+.foot-col a:hover { color: var(--red-light); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 28px; }
 .foot-mark { font-family: var(--body); font-size: clamp(12px, 2vw, 15px); letter-spacing: 0.4em; text-transform: uppercase; }
-.foot-mark em { font-style: normal; color: var(--red); }
+.foot-mark em { font-style: normal; color: var(--red-light); }
 .foot-legal { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
 /* ==== ACCESSIBILITAT ==== */

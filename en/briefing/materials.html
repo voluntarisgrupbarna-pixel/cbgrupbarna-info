@@ -23,7 +23,7 @@
   header .t span{color:var(--red)}
   header a.back{margin-left:auto;color:var(--muted);font-size:.8rem;text-decoration:none}
   .lang-switch { display: flex; align-items: center; gap: 6px; font-family: 'Inter',sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; margin-left: 14px; }
-  .lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; color: inherit; }
+  .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; text-decoration: none; opacity: 0.55; transition: opacity 0.3s, color 0.3s; color: inherit; }
   .lang-switch a.active { opacity: 1; font-weight: 600; }
   .lang-switch a:hover { opacity: 1; }
   .lang-switch .sep { opacity: 0.25; }
@@ -98,9 +98,9 @@
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CB GRUP <span>BARNA</span></div>
   <a class="back" href="/en/briefing/">← Club Briefing</a>
-  <div class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
-    <a href="/briefing/materials.html" hreflang="ca">CA</a><span class="sep">·</span><a href="/es/briefing/materials.html" hreflang="es">ES</a><span class="sep">·</span><a href="/en/briefing/materials.html" hreflang="en" class="active">EN</a>
-  </div>
+  <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
+      <a href="/briefing/materials.html" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/briefing/materials.html" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/briefing/materials.html" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
+    </nav>
 </header>
 <div class="wrap">
   <h1>MATERIALS FOR <span>COLLABORATORS</span></h1>
@@ -133,7 +133,7 @@ if(!mats.length){
       <h2>${t}</h2>
       ${byType[t].map(m => `
         <a class="item" href="/briefing/materials/${m.fitxer}" target="_blank"
-           onclick="gtag('event','descarrega_material',{material:'${(m.titol||'').replace(/'/g,"")}',tipus:'${t}'})">
+           onclick="gtag('event','descarrega_material',{material:'${(m.titol||'').replace(/'/g,"")}',tipus:'${t}'})" rel="noopener">
           <span class="ic">${ICONS[m.ext]||'📎'}</span>
           <span class="meta">
             <b>${m.titol}</b>

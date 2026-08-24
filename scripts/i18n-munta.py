@@ -185,7 +185,47 @@ def munta(ruta, idioma):
     # 3. L'idioma de la pàgina.
     html = RE_HTML_LANG.sub(lambda m: m.group(1) + idioma + m.group(3), html, count=1)
     html = RE_OG_LOCALE.sub(lambda m: m.group(1) + LOCALE[idioma] + m.group(3), html)
+    # L'inLanguage del JSON-LD s'escriu de tres maneres pel repositori i abans
+    # només se'n traduïa una: la curta. Les pàgines generades del blog, dels
+    # partners i de premsa fan servir la llarga ("ca-ES") i deien a Google que
+    # la versió anglesa era en català; les portades fan servir una llista.
+    # BCP-47: el castellà d'aquí és es-ES i l'anglès el servim com a en-US.
+    llarg = {"ca": "ca-ES", "es": "es-ES", "en": "en-US"}[idioma]
     html = html.replace('"inLanguage": "ca"', f'"inLanguage": "{idioma}"')
+    html = html.replace('"inLanguage":"ca"', f'"inLanguage":"{idioma}"')
+    html = html.replace('"inLanguage": "ca-ES"', f'"inLanguage": "{llarg}"')
+    html = html.replace('"inLanguage":"ca-ES"', f'"inLanguage":"{llarg}"')
+    # La llista sencera només té sentit al node WebSite —el lloc sí que és
+    # trilingüe—; a una pàgina concreta hi va el seu idioma i prou. Es fa
+    # llegint el JSON, no amb una expressió regular, per no tocar el WebSite.
+    def _idioma_del_jsonld(m):
+        cos = m.group(1)
+        if '"inLanguage"' not in cos:
+            return m.group(0)
+        try:
+            dades = json.loads(cos)
+        except ValueError:
+            return m.group(0)
+
+        canviat = [False]
+
+        def recorre(node):
+            if isinstance(node, dict):
+                if isinstance(node.get("inLanguage"), list) and node.get("@type") != "WebSite":
+                    node["inLanguage"] = llarg
+                    canviat[0] = True
+                for valor in node.values():
+                    recorre(valor)
+            elif isinstance(node, list):
+                for valor in node:
+                    recorre(valor)
+
+        recorre(dades)
+        if not canviat[0]:
+            return m.group(0)
+        return m.group(0).replace(cos, json.dumps(dades, ensure_ascii=False, indent=2))
+
+    html = re.sub(r'(?s)<script[^>]*ld\+json[^>]*>(.*?)</script>', _idioma_del_jsonld, html)
 
     # 4. Les adreces pròpies: canonical, og:url i les de dins del JSON-LD.
     #

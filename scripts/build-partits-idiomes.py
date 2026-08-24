@@ -30,13 +30,37 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FONT = ROOT / "partits" / "index.html"
 
-# Destins que SI que tenen versio traduida. La resta d'enllaços del peu es
-# queden apuntant al catala, que es millor que un 404.
-TRADUITS = [
-    "escoleta", "campus", "3x3", "fotos", "premsa", "blog",
-    "grup-barna-dades-oficials", "premidonaesport", "patrocinadors",
-    "partits/calendaris", "partits",
-]
+# Cap a on va cada enllaç intern en castella i en angles. NO es una llista
+# escrita a ma: es llegeix del <link rel="alternate" hreflang> de la propia
+# pagina catalana de desti. Aixi, si una seccio canvia d'adreca o se'n tradueix
+# una de nova, aixo ho segueix sol i no cal tocar aquest fitxer.
+#
+# Abans hi havia una llista fixa amb el suposit que l'adreca era la mateixa en
+# els tres idiomes (/escoleta/ → /es/escoleta/). No sempre ho es:
+# /politica-de-privacitat/ es /es/politica-de-privacidad/ i /en/privacy-policy/,
+# i /proteccio-menor/ es /en/child-protection/. Amb la llista fixa, el peu de
+# la pagina castellana enviava a la politica de privacitat EN CATALA.
+def _mapa_traduccions():
+    mapa = {}
+    for fitxer in ROOT.rglob("index.html"):
+        rel = fitxer.relative_to(ROOT).as_posix()
+        if rel.startswith(("es/", "en/", ".git/", "galeria/node_modules/")):
+            continue
+        try:
+            text = fitxer.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        alts = {}
+        for etiqueta in re.finditer(r'<link[^>]*rel="alternate"[^>]*>', text):
+            t = etiqueta.group(0)
+            lg = re.search(r'hreflang="([^"]+)"', t)
+            hf = re.search(r'href="([^"]+)"', t)
+            if lg and hf and lg.group(1) in ("ca", "es", "en"):
+                alts[lg.group(1)] = re.sub(r'^https?://(www\.)?cbgrupbarna\.info', '', hf.group(1))
+        if len(alts) == 3:
+            ca = "/" + rel[: -len("index.html")]
+            mapa[ca] = alts
+    return mapa
 
 # Text de la interficie. L'ordre importa: els fragments llargs, primer, perque
 # no se'ls mengi una substitucio mes curta.
@@ -120,6 +144,24 @@ TEXTOS = [
     ("Escola de bàsquet", "Escuela de baloncesto", "Basketball school"),
     ("Galeria de fotos", "Galería de fotos", "Photo gallery"),
     ("Saltar al contingut", "Saltar al contenido", "Skip to content"),
+    # Trossos que quedaven en català a la pàgina traduïda (vistos amb el
+    # navegador, no llegint el fitxer): el fil d'Ariadna, l'etiqueta de local
+    # o visitant de cada partit i l'avís de quan encara no hi ha resultats.
+    ("La temporada 2026-2027 encara no ha començat: el primer cap de setmana amb partits és el del 5 i 6 de setembre. Els resultats sortiran aquí l\\'endemà de cada jornada.",
+     "La temporada 2026-2027 todavía no ha empezado: el primer fin de semana con partidos es el del 5 y 6 de septiembre. Los resultados saldrán aquí al día siguiente de cada jornada.",
+     "The 2026-2027 season has not started yet: the first weekend with matches is 5 and 6 September. Results will appear here the day after each round."),
+    ("Dies de partit", "Días de partido", "Match days"),
+    (">A casa<", ">En casa<", ">Home<"),
+    ("'A casa contra '", "'En casa contra '", "'Home vs '"),
+    ("'Fora contra '", "'Fuera contra '", "'Away at '"),
+    ("' partits</i></summary>'", "' partidos</i></summary>'", "' fixtures</i></summary>'"),
+    ("'A casa'", "'En casa'", "'Home'"),
+    (">Fora<", ">Fuera<", ">Away<"),
+    # Text que nomes llegeix qui fa servir un lector de pantalla: si no es
+    # tradueix, el sent en catala tot i llegir la pagina en un altre idioma.
+    ("Escut del CB Grup Barna", "Escudo del CB Grup Barna", "CB Grup Barna crest"),
+    ("CB Grup Barna · inici", "CB Grup Barna · inicio", "CB Grup Barna · home"),
+    ("Fil d'Ariadna", "Ruta de navegación", "Breadcrumb"),
     ("Vull jugar al Barna", "Quiero jugar en el Barna", "I want to play for Barna"),
     ("Bàsquet femení", "Baloncesto femenino", "Women's basketball"),
     ("Dades oficials", "Datos oficiales", "Official data"),
@@ -251,13 +293,34 @@ META = {
 }
 
 
+def _substitueix(html, files, idx):
+    """Substitueix en dues passades, amb marques intermedies.
+
+    Fer-ho directament tenia un error: una regla curta es menjava el resultat
+    d'una de llarga que ja s'havia aplicat. «Calendari global de tots els
+    equips» passava a «Calendario global de todos los equipos», i tot seguit la
+    regla «Calendari» → «Calendario» hi tornava a picar a dins i deixava
+    «Calendarioo global». Amb marques, cada tros original es toca una vegada i
+    prou: primer s'amaga darrere un @@n@@ i despres es revela ja traduit.
+    """
+    files = [f for f in files if f[0]]
+    ordre = sorted(range(len(files)), key=lambda i: -len(files[i][0]))
+    marca = {}
+    for i in ordre:
+        original = files[i][0]
+        if original not in html:
+            continue
+        clau = f"@@T{i}@@"
+        html = html.replace(original, clau)
+        marca[clau] = files[i][idx]
+    for clau, valor in marca.items():
+        html = html.replace(clau, valor)
+    return html
+
+
 def tradueix(html, idx, lang):
-    for fila in TEXTOS:
-        if fila[0] != fila[idx]:
-            html = html.replace(fila[0], fila[idx])
-    for fila in JS:
-        if fila[0] != fila[idx]:
-            html = html.replace(fila[0], fila[idx])
+    html = _substitueix(html, TEXTOS, idx)
+    html = _substitueix(html, JS, idx)
     # Els mes llargs primer, que si no un de curt en trenca un de llarg.
     for fila in sorted(JS_DATES, key=lambda f: -len(f[0])):
         if fila[0] not in html:
@@ -295,11 +358,31 @@ def tradueix(html, idx, lang):
     html = html.replace("'data.json'", "'/partits/data.json'")
     html = html.replace('"data.json"', '"/partits/data.json"')
 
-    # Enllaços interns cap a la versio de l'idioma, nomes on existeix.
-    for desti in sorted(TRADUITS, key=len, reverse=True):
-        html = html.replace(f'href="/{desti}/"', f'href="/{lang}/{desti}/"')
-    html = html.replace('href="/"', f'href="/{lang}/"')
-    html = html.replace('href="/#info"', f'href="/{lang}/#info"')
+    # Enllaços interns cap a la versio de l'idioma, nomes on existeix. El
+    # selector d'idioma es queda tal qual: els seus tres enllaços ja apunten,
+    # a proposit, a les tres versions.
+    mapa = _mapa_traduccions()
+    switch = re.search(r'(?s)<nav class="lang-switch"[^>]*>.*?</nav>', html)
+    if switch:
+        html = html.replace(switch.group(0), "@@LANGSWITCH@@", 1)
+
+    def _enllac(m):
+        adreca = m.group(1)
+        base, _, ancora = adreca.partition("#")
+        base = base or "/"
+        desti = mapa.get(base, {}).get(lang)
+        if not desti:
+            return m.group(0)
+        return 'href="' + desti + ("#" + ancora if ancora else "") + '"'
+
+    html = re.sub(r'href="(/[^"]*)"', _enllac, html)
+
+    if switch:
+        nou = switch.group(0)
+        nou = nou.replace(' class="active" aria-current="true"', '')
+        nou = re.sub(r'(<a href="[^"]*" hreflang="' + lang + r'"[^>]*?)>',
+                     r'\1 class="active" aria-current="true">', nou, count=1)
+        html = html.replace("@@LANGSWITCH@@", nou, 1)
     # El canonical i les alternates es reescriuen SENCERS al final, perque les
     # substitucions d'adreces d'abans se'ls emportaven per davant: el hreflang
     # del catala acabava apuntant a /es/partits/.
