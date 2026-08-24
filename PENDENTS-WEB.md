@@ -679,7 +679,7 @@ L'Ana les va contestar totes. **Cap pregunta del web queda sense resposta.**
 | Baixa a mig any? | La temporada es paga sencera |
 | Equipació | Uns 150 €, a **Wintym**, des del seu web |
 | Equip A i equip B | L'any de naixement decideix la categoria; dins d'una categoria, **l'entrenador** decideix segons el nivell |
-| Faltar a un entrenament | Avisar l'entrenador; per justificar-ho, **justificant mèdic** |
+| Faltar a un entrenament | Avisar l'entrenador; **amb el justificant de la família n'hi ha prou** |
 | Revisió mèdica | **Sí, i la gestiona el club: és gratuïta per a les famílies** |
 | Desplaçaments | **Les famílies**, organitzant-se entre els pares del mateix equip |
 
