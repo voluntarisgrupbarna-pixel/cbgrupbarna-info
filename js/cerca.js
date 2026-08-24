@@ -57,7 +57,18 @@
       resultats: 'resultats', unResultat: '1 resultat', veure: 'Veure-ho tot',
       pista: 'per moure\'t · Enter per obrir · Esc per sortir',
       voliesDir: 'Volies dir', preguntaHo: 'Pregunta-ho i t\'ho diem',
-      preguntaHoAra: 'Escriu-ho pel WhatsApp del club', deLaRuta: 'Potser buscaves'
+      preguntaHoAra: 'Escriu-ho pel WhatsApp del club', deLaRuta: 'Potser buscaves',
+      formTitol: 'Això no ho tenim escrit', 
+      formPeu: 'Deixa\'ns un contacte i t\'ho responem nosaltres, normalment el mateix dia.',
+      formNom: 'Com et dius', formVia: 'Telèfon o correu',
+      formPregunta: 'Què vols saber', formEnvia: 'Envia-ho al club',
+      formEnviant: 'Enviant…', formFalta: 'Això cal omplir-ho',
+      formAvis: 'Només s\'envia si prems el botó, i és per respondre\'t. ',
+      formPrivacitat: 'Política de privacitat',
+      formGracies: 'Rebut. T\'escrivim de seguida.',
+      formPressa: 'Tens pressa?', formWhatsApp: 'Digues-ho pel WhatsApp &rarr;',
+      formError: 'No s\'ha pogut enviar. Prova pel WhatsApp.',
+      privacitatRuta: '/politica-de-privacitat/'
     },
     es: {
       obrir: 'Buscar', titol: '¿Qué buscas?',
@@ -72,7 +83,18 @@
       resultats: 'resultados', unResultat: '1 resultado', veure: 'Verlo todo',
       pista: 'para moverte · Enter para abrir · Esc para salir',
       voliesDir: '¿Querías decir', preguntaHo: 'Pregúntalo y te lo decimos',
-      preguntaHoAra: 'Escríbelo por el WhatsApp del club', deLaRuta: 'Quizá buscabas'
+      preguntaHoAra: 'Escríbelo por el WhatsApp del club', deLaRuta: 'Quizá buscabas',
+      formTitol: 'Esto no lo tenemos escrito',
+      formPeu: 'Déjanos un contacto y te lo respondemos nosotros, normalmente el mismo día.',
+      formNom: 'Cómo te llamas', formVia: 'Teléfono o correo',
+      formPregunta: 'Qué quieres saber', formEnvia: 'Enviarlo al club',
+      formEnviant: 'Enviando…', formFalta: 'Esto hay que rellenarlo',
+      formAvis: 'Solo se envía si pulsas el botón, y es para responderte. ',
+      formPrivacitat: 'Política de privacidad',
+      formGracies: 'Recibido. Te escribimos enseguida.',
+      formPressa: '¿Tienes prisa?', formWhatsApp: 'Dilo por WhatsApp &rarr;',
+      formError: 'No se ha podido enviar. Prueba por WhatsApp.',
+      privacitatRuta: '/es/politica-de-privacidad/'
     },
     en: {
       obrir: 'Search', titol: 'What are you looking for?',
@@ -87,7 +109,18 @@
       resultats: 'results', unResultat: '1 result', veure: 'See everything',
       pista: 'to move · Enter to open · Esc to close',
       voliesDir: 'Did you mean', preguntaHo: 'Ask us and we will tell you',
-      preguntaHoAra: 'Message the club on WhatsApp', deLaRuta: 'Maybe you were looking for'
+      preguntaHoAra: 'Message the club on WhatsApp', deLaRuta: 'Maybe you were looking for',
+      formTitol: 'We have not written this one down',
+      formPeu: 'Leave us a contact and we will answer you ourselves, usually the same day.',
+      formNom: 'Your name', formVia: 'Phone or email',
+      formPregunta: 'What would you like to know', formEnvia: 'Send it to the club',
+      formEnviant: 'Sending…', formFalta: 'This one is required',
+      formAvis: 'It is only sent if you press the button, and only so we can reply. ',
+      formPrivacitat: 'Privacy policy',
+      formGracies: 'Got it. We will be in touch shortly.',
+      formPressa: 'In a hurry?', formWhatsApp: 'Say it on WhatsApp &rarr;',
+      formError: 'It could not be sent. Try WhatsApp instead.',
+      privacitatRuta: '/en/privacy-policy/'
     }
   }[lang];
 
@@ -104,7 +137,14 @@
       .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .replace(/ç/g, 'c')
       .replace(/[''’‘"“”]/g, ' ')
-      .replace(/[^a-z0-9\s-]/g, ' ')
+      // El guionet, fora. En català les formes amb pronom en porten
+      // («fer-se», «quedar-me», «apuntar-s'hi») i, sense separar-lo,
+      // «fer-se» era una paraula que no surt a cap pregunta del web: la
+      // consulta «cal fer-se una prova mèdica» es quedava sense resposta
+      // perquè aquesta paraula inventada pesava més que «mèdica».
+      // normalitzaPosicional ja el tractava com un separador: ara van
+      // iguals.
+      .replace(/[^a-z0-9\s]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
   }
@@ -124,7 +164,26 @@
    'hago haces hace hacemos hacen hacer puedo puedes puede podemos pueden poder ' +
    'quieres quiere queremos quieren querer soy eres somos son estoy estas estan ' +
    'make makes made want wants get gets go goes am was were be been being ' +
-   'should would could will shall may might must').split(' ').forEach(function (p) { BUIDES[p] = 1; });
+   'should would could will shall may might must ' +
+   // Aquestes són pitjor que inútils. El web escriu «Quants equips té el CB
+   // Grup Barna?» i ningú no hi escriu mai «teniu»; la raresa la prenia,
+   // doncs, per la paraula MÉS distintiva de la consulta i exigia trobar-la
+   // a la pregunta. «Quantes entrenadores teniu» buscava «teniu» i deixava
+   // «entrenadores» de banda. El mateix amb «on esteu» i «sou el millor
+   // club». Una paraula que no surt enlloc no és rara: és buida.
+   'tinc tens teniu tinguem tingueu tenir tinguin ' +
+   'estic estas esteu estem estigui estic ' +
+   'sereu serem series siguin fos fossin ' +
+   'tengo tienes teneis tenemos tener tenga tengan ' +
+   'estoy estais estamos estar seais sois fuera fueran ' +
+   'haveis habeis hemos haber hay ' +
+   'venc vens venem veneu venen vendre vendo vendes vendemos venden ' +
+   // Pronoms i auxiliars. Són curts, surten poc a les preguntes del web i
+   // arrossegaven la consulta cap avall: «quin metro EM VA bé» i «cómo doy
+   // de baja a MI hijo» es quedaven sense resposta perquè aquestes paraules
+   // comptaven tant com «metro» i «baja», i no són a cap pregunta.
+   'em et ens us hi ho li me nos mi tu su sus mis tus le lo ' +
+   'va van vaig vam vau anar voy vamos van ir').split(' ').forEach(function (p) { BUIDES[p] = 1; });
 
   function paraules(s) {
     return normalitza(s).split(' ').filter(function (p) {
@@ -542,6 +601,13 @@
   ('club clubs barna cb grup cbgrupbarna basquet baloncesto basket basketball ' +
    'equip equipo team').split(' ').forEach(function (p) { GENERIQUES[p] = 1; });
 
+  /* Paraules que sí que compten, però que no poden decidir tota soles. */
+  var NO_DECIDEIXEN = {};
+  ('fill filla fills filles hijo hija hijos hijas nino nina child children ' +
+   'son daughter kid kids nen nena nens nenes').split(' ').forEach(function (p) {
+    NO_DECIDEIXEN[p] = 1;
+  });
+
   function paraulesPregunta(s) {
     var fora = normalitza(s).split(' ').filter(function (p) {
       if (p.length < 2 || GENERIQUES[p]) return false;
@@ -564,20 +630,98 @@
      distància d'edició no ho veu (hi ha dues lletres de diferència en una
      paraula de cinc). Comparar l'arrel sí que ho veu, i no confon
      «entrenador» amb «patrocinador», que és el que calia evitar. */
+  /* Quantes lletres tenen en comú pel començament. */
+  function prefixComu(a, b) {
+    var n = 0, max = Math.min(a.length, b.length);
+    while (n < max && a[n] === b[n]) n++;
+    return n;
+  }
+
+  /* Dues paraules són LA MATEIXA paraula? No n'hi ha prou amb el
+     començament. Comparar només les tres o quatre primeres lletres feia
+     que el cercador contestés qualsevol cosa que comencés igual:
+
+        instalacions → «inscripcions»      precio    → «premios»
+        metro        → «Mètode Barna»      entranador → «entrar»
+        equipasio    → «equips»            president  → «pressupost»
+
+     Sis de les setze respostes equivocades de l'auditoria eren això. El
+     començament compartit ha de valer per la MEITAT de la paraula llarga,
+     i el que queda no pot ser una cua qualsevol: d'aquí el límit de mida.
+
+     Aquí hi va haver una segona regla, de tres lletres, per als verbs que
+     canvien pel mig («donem»/«donar»). No hi ha manera d'escriure-la sense
+     que hi caiguin també «precio»/«previa» i «precio»/«premios»: són
+     indistingibles mesurant lletres. Els verbs que calgui, doncs, van a
+     SINONIMS, que és explícit i es pot llegir. */
+  function mateixaParaula(m, terme) {
+    if (m === terme) return true;
+    var pref = prefixComu(m, terme);
+    var llarg = Math.max(m.length, terme.length);
+    var curt = Math.min(m.length, terme.length);
+    if (pref * 2 < llarg) return false;
+    // Amb sis lletres seguides iguals ja no cal mirar la cua: «mensual» i
+    // «mensualitat» són la mateixa paraula i es diferencien en quatre.
+    if (pref >= 6) return true;
+    return pref >= 4 && llarg - curt <= 2;
+  }
+
+  /* El que les lletres no poden ajuntar, ho ajuntem a mà. Cada línia és
+     una família de formes de la mateixa paraula: la primera és la que
+     acostuma a sortir escrita al web, i la resta, com ho escriu la gent.
+     Val més una taula que algú pot llegir i corregir que una fórmula que
+     encerta el 80% i falla d'una manera que ningú pot preveure. */
+  var EQUIVALENTS = [
+    // El verb i el nom van per separat: ajuntant-los, «cómo DOY de baja»
+    // casava amb qualsevol pregunta que digués «baja» o «hijo».
+    'donar dona donem dono donen donat donarse',
+    'dar da damos doy dan dado darse darnos',
+    'baixa baixes',
+    'baja bajas',
+    'roba equipacio equipacions samarreta pantalo',
+    'ropa equipacion equipaciones camiseta pantalon',
+    'kit clothes shirt jersey shorts',
+    'revisio reconeixement prova proves examen certificat',
+    'revision reconocimiento prueba pruebas examen certificado',
+    'check checkup test medical certificate',
+    'lesio lesionar lesionat lesionada lesions trencar trencat',
+    'lesion lesionarse lesionado lesionada lesiones romper roto',
+    'injury injured injuries hurt',
+    'plegar deixar deixo deixem abandonar marxar marxem anarsen',
+    'dejar dejo dejamos abandonar irse irnos marcharse',
+    'quit leave leaving stop stopping',
+    'esperar espera llista cua torn',
+    'esperar espera lista cola turno',
+    'wait waiting list queue',
+    'faltar falta falto faltem absencia absent avisar',
+    'faltar falta falto faltamos ausencia ausente avisar',
+    'miss missing absence absent',
+    'jugar juga juguen jugo minuts estona banqueta banca convocatoria',
+    'jugar juega juegan juego minutos rato banquillo convocatoria',
+    'play plays playing minutes bench squad',
+    'telefon numero trucar truco trucada contactar contacte',
+    'telefono numero llamar llamo llamada contactar contacto',
+    'phone number call calling contact',
+    'adreca direccio ubicacio situat lloc pavello nau',
+    'direccion ubicacion situado lugar pabellon nave',
+    'address location located place venue'
+  ];
+
+  var GERMANES = {};
+  EQUIVALENTS.forEach(function (linia) {
+    var mots = linia.split(' ');
+    mots.forEach(function (m) {
+      GERMANES[m] = (GERMANES[m] || []).concat(mots);
+    });
+  });
+
   function teLArrel(camp, terme) {
     if (terme.length < 4) return camp.indexOf(terme) >= 0;
     var mots = camp.split(' ');
-    var quatre = terme.slice(0, 4), tres = terme.slice(0, 3);
+    var germanes = GERMANES[terme];
     for (var i = 0; i < mots.length; i++) {
-      var m = mots[i];
-      if (m.slice(0, 4) === quatre) return true;
-      // Amb tres lletres només si totes dues paraules són llargues I FAN
-      // MÉS O MENYS LA MATEIXA MIDA: els verbs canvien d'arrel («empieza» /
-      // «empezar», totes dues de set lletres) i quatre lletres no ho veuen.
-      // Sense el límit de mida, «president» casava amb «premis» i la cerca
-      // responia «Quins premis hi ha?» a qui preguntava per la presidència.
-      if (m.length >= 5 && terme.length >= 5 && m.slice(0, 3) === tres &&
-          Math.abs(m.length - terme.length) <= 2) return true;
+      if (mateixaParaula(mots[i], terme)) return true;
+      if (germanes && germanes.indexOf(mots[i]) >= 0) return true;
     }
     return false;
   }
@@ -586,8 +730,20 @@
     var comptes = pesFaq[lang] || {};
     var total = totalPreguntes[lang] || 1;
     var df = comptes[t] || 0;
-    // Amb tolerància a faltes, una paraula pot no ser al corpus i ser bona:
-    // per això el mínim no és zero.
+    // Una paraula que no surt a CAP pregunta no és rara: és muda. No pot
+    // casar amb res, i donar-li el pes màxim per raresa la convertia en la
+    // paraula que decidia la consulta. «Quantes entrenadores TENIU» exigia
+    // trobar «teniu», que el web no diu mai, i deixava «entrenadores» de
+    // banda; «quin metro em VA bé» es quedava sense resposta perquè «va» i
+    // «em» pesaven més que «metro». Al terra, doncs: que no faci nosa.
+    // (Amb tolerància a faltes encara pot casar-hi alguna cosa —«quotta» amb
+    // «quota»—, i per això el terra no és zero.)
+    // Només les curtes: «president» tampoc no surt escrit enlloc (el web
+    // diu «Qui presideix»), i és exactament la paraula que decideix.
+    // …i sempre que no en tinguem una germana escrita a EQUIVALENTS: «ropa»
+    // no surt a cap pregunta perquè el web escriu «equipació», i justament
+    // per això és la paraula que la consulta té de distintiu.
+    if (!df && t.length <= 5 && !GERMANES[t]) return 0.15;
     return Math.max(0.12, Math.log((total + 1) / (df + 1)) / Math.log(total + 1));
   }
 
@@ -652,8 +808,14 @@
     // Entre les paraules de debò: una de tres lletres pot ser rara al corpus
     // («pel») i no vol dir res. Si no n'hi ha cap de prou llarga, la regla
     // no s'aplica.
+    // «El meu FILL», «mi HIJO»: diuen de qui es parla, no de què. Compten
+    // per a la cobertura i per a la puntuació, però no poden ser la paraula
+    // que decideix: al corpus surten poc i el pes per raresa les triava, i
+    // llavors qualsevol pregunta que no digués «hijo» quedava descartada
+    // («cómo doy de baja a mi hijo» no trobava la pregunta de la baixa).
     var rar = -1;
     for (var z = 0; z < termes.length; z++) {
+      if (NO_DECIDEIXEN[termes[z]]) continue;
       if (termes[z].length >= 4 && (rar < 0 || pesos[z] > pesos[rar])) rar = z;
     }
 
@@ -861,6 +1023,138 @@
   /* ============================================================
      5 · INTERFÍCIE
      ============================================================ */
+  /* ============================================================
+     7 · QUAN EL WEB NO HO DIU · el formulari
+     Fins aquí res no ha sortit del navegador de qui cerca. Això és
+     l'excepció, i és una excepció que decideix la persona: fins que no
+     prem el botó no s'envia res. El que s'envia va a la mateixa Apps
+     Script que la resta de formularis del web, marcat amb source
+     'cerca' perquè al full es puguin llegir a part i, sobretot, perquè
+     es puguin llegir com el que són: la llista del que la gent busca i
+     el web encara no respon.
+     ============================================================ */
+
+  var WHATSAPP = '+34698425153';
+
+  function enllacWhatsApp(text) {
+    return 'https://api.whatsapp.com/send?phone=' + WHATSAPP +
+      '&text=' + encodeURIComponent(text);
+  }
+
+  function formulariHTML(idPrefix, q) {
+    var id = idPrefix + '-f';
+    return '<form class="cerca-form" novalidate>' +
+      '<p class="cerca-form-t"><strong>' + escapa(T.formTitol) + '</strong>' +
+      '<span>' + escapa(T.formPeu) + '</span></p>' +
+      '<div class="cerca-form-camps">' +
+        '<label for="' + id + 'n">' + escapa(T.formNom) + '</label>' +
+        '<input id="' + id + 'n" name="nom" type="text" autocomplete="name" required>' +
+        '<label for="' + id + 'v">' + escapa(T.formVia) + '</label>' +
+        '<input id="' + id + 'v" name="contacteVia" type="text" autocomplete="tel" required>' +
+        '<label for="' + id + 'p">' + escapa(T.formPregunta) + '</label>' +
+        '<textarea id="' + id + 'p" name="missatge" rows="2" required>' + escapa(q) + '</textarea>' +
+      '</div>' +
+      '<p class="cerca-form-err" hidden>' + escapa(T.formFalta) + '</p>' +
+      '<button type="submit" class="cerca-form-btn">' + escapa(T.formEnvia) + '</button>' +
+      '<p class="cerca-form-avis">' + escapa(T.formAvis) +
+        '<a href="' + escapa(T.privacitatRuta) + '">' + escapa(T.formPrivacitat) + '</a></p>' +
+      '</form>' +
+      '<div class="cerca-form-fet" hidden role="status">' +
+        '<strong>' + escapa(T.formGracies) + '</strong>' +
+        '<a class="cerca-preguntaho" target="_blank" rel="noopener" href="' +
+          escapa(enllacWhatsApp(q)) + '">' +
+          '<strong>' + escapa(T.formPressa) + '</strong><span>' + T.formWhatsApp + '</span></a>' +
+      '</div>';
+  }
+
+  /* L'adreça d'enviament viu a /js/canals.js, que és l'únic lloc del web on
+     s'escriu. La majoria de pàgines no el carreguen, i carregar-lo a totes
+     per un formulari que gairebé mai no surt seria pagar-lo sempre: es
+     demana just quan cal. */
+  function endpoint(quan) {
+    var ja = (window.CANALS || {}).bustiaEndpoint;
+    if (ja || window.CANALS) return quan(ja);
+    var sc = document.createElement('script');
+    sc.src = '/js/canals.js';
+    sc.onload = function () { quan((window.CANALS || {}).bustiaEndpoint); };
+    sc.onerror = function () { quan(null); };
+    document.head.appendChild(sc);
+  }
+
+  function muntaFormulari(arrel, q) {
+    var form = arrel.querySelector('.cerca-form');
+    if (!form) return;
+    var fet = arrel.querySelector('.cerca-form-fet');
+    var err = arrel.querySelector('.cerca-form-err');
+    var boto = form.querySelector('.cerca-form-btn');
+    var camps = Array.prototype.slice.call(form.querySelectorAll('[required]'));
+
+    // El formulari es demana abans de saber l'adreça: així, quan la persona
+    // acaba d'escriure, ja hi és i l'enviament no espera cap descàrrega.
+    var adreca;
+    endpoint(function (a) { adreca = a; });
+
+    camps.forEach(function (c) {
+      c.addEventListener('input', function () {
+        if (c.getAttribute('aria-invalid') === 'true' && c.value.trim()) {
+          c.removeAttribute('aria-invalid');
+        }
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var primer = null;
+      camps.forEach(function (c) {
+        var mal = !c.value.trim();
+        c.setAttribute('aria-invalid', mal ? 'true' : 'false');
+        if (mal && !primer) primer = c;
+      });
+      err.hidden = !primer;
+      if (primer) { primer.focus(); return; }
+
+      boto.disabled = true;
+      boto.textContent = T.formEnviant;
+
+      // Amb mode no-cors mai no sabem si ha arribat. Val més donar-ho per
+      // enviat i ensenyar el WhatsApp que deixar la persona mirant un botó
+      // apagat: el mateix criteri que a js/informacio.js.
+      var tancat = false;
+      function acaba() {
+        if (tancat) return;
+        tancat = true;
+        form.hidden = true;
+        fet.hidden = false;
+        var wa = fet.querySelector('a');
+        if (wa) wa.href = enllacWhatsApp(form.querySelector('textarea').value.trim() || q);
+        fet.setAttribute('tabindex', '-1');
+        fet.focus();
+      }
+
+      var dades = {
+        source: 'cerca',
+        idioma: lang,
+        tema: 'Cerca sense resposta',
+        cerca: q,
+        nom: form.querySelector('[name=nom]').value.trim(),
+        contacteVia: form.querySelector('[name=contacteVia]').value.trim(),
+        missatge: form.querySelector('[name=missatge]').value.trim()
+      };
+
+      setTimeout(acaba, 6000);
+      endpoint(function (a) {
+        adreca = a || adreca;
+        if (!adreca) { acaba(); return; }
+        fetch(adreca, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dades)
+        }).then(acaba, acaba);
+      });
+      if (window.gtag) window.gtag('event', 'cerca_sense_resposta_enviada');
+    });
+  }
+
   function construeixHTML(idPrefix) {
     return '' +
       '<form class="cerca-camp" role="search" autocomplete="off">' +
@@ -879,6 +1173,9 @@
     var self = this;
     this.arrel = arrel;
     this.esPagina = esPagina;
+    // pinta() viu al prototipus i no veu l'argument: els identificadors del
+    // formulari els necessita per lligar cada etiqueta amb el seu camp.
+    this.idPrefix = idPrefix;
     arrel.innerHTML = construeixHTML(idPrefix);
     this.input = arrel.querySelector('.cerca-input');
     this.cos = arrel.querySelector('.cerca-cos');
@@ -998,10 +1295,12 @@
     var res = cerca(q);
     var termes = paraules(q);
     var html = '';
+    var teResposta = false;
 
     // 1r · La resposta escrita pel club, si n'hi ha cap que encaixi.
     var faq = cercaResposta(q, res.families);
     if (faq) {
+      teResposta = true;
       var titolNetFont = null;
       for (var z = 0; z < preparat.length; z++) {
         if (preparat[z].p.u === faq.resposta.u) { titolNetFont = titolCurt(preparat[z].p.t); break; }
@@ -1035,6 +1334,7 @@
         if (!encerta) continue;
         var txt = r[lang];
         var extern = r.href.indexOf('http') === 0;
+        teResposta = true;
         html += '<div class="cerca-bloc"><h2 class="cerca-titol">' + escapa(T.resposta) + '</h2>' +
           '<a class="cerca-resposta" data-cerca-r href="' + escapa(r.href) + '"' +
           (extern ? ' target="_blank" rel="noopener"' : '') + '>' +
@@ -1055,13 +1355,16 @@
           '<div class="cerca-fitxes"><button type="button" class="cerca-fitxa" ' +
           'data-pregunta="' + escapa(proposta.q) + '">' + escapa(proposta.q) + '</button></div>';
       }
-      // I si el web de debò no ho diu enlloc, que no s'acabi aquí: la
-      // pregunta ja està escrita, només cal enviar-la.
-      buit += '<a class="cerca-preguntaho" data-cerca-r target="_blank" rel="noopener" href="' +
-        escapa('https://api.whatsapp.com/send?phone=+34698425153&text=' + encodeURIComponent(q)) +
-        '"><strong>' + escapa(T.preguntaHo) + '</strong><span>' +
-        escapa(T.preguntaHoAra) + ' &rarr;</span></a></div>';
+      // I si el web de debò no ho diu enlloc, que no s'acabi aquí. Abans hi
+      // havia només l'enllaç al WhatsApp; el problema d'aquell enllaç és que
+      // qui no vol obrir el WhatsApp es quedava sense res, i el club es
+      // quedava sense saber què s'havia buscat i no s'havia trobat. Ara la
+      // pregunta ja escrita s'aprofita per obrir un formulari: qui deixa el
+      // contacte rep resposta, i el WhatsApp queda per a qui té pressa,
+      // després d'enviar-ho.
+      buit += formulariHTML(this.idPrefix, q) + '</div>';
       this.cos.innerHTML = buit;
+      muntaFormulari(this.cos, q);
       this.estatBuitSuggeriments();
       var self2 = this;
       Array.prototype.forEach.call(this.cos.querySelectorAll('[data-pregunta]'), function (b) {
@@ -1091,7 +1394,17 @@
       html += '</ul></div>';
     }
 
+    // Hi ha pàgines, però ningú no ha escrit la resposta: són vint-i-set de
+    // cada cent consultes de l'auditoria. Enviar aquesta gent a llegir-se
+    // tres pàgines és fer-los la feina a ells. Aquí el formulari va al peu i
+    // plegat, que la llista de resultats continua sent el que han demanat.
+    if (!teResposta && mostra.length) {
+      html += '<details class="cerca-bloc cerca-plec"><summary>' +
+        escapa(T.formTitol) + '</summary>' + formulariHTML(this.idPrefix, q) + '</details>';
+    }
+
     this.cos.innerHTML = html;
+    muntaFormulari(this.cos, q);
     Array.prototype.forEach.call(this.cos.querySelectorAll('[data-pregunta]'), function (b) {
       b.addEventListener('click', function () {
         self.input.value = b.getAttribute('data-pregunta');
@@ -1153,9 +1466,16 @@
      tests/cerca/prova-ux.mjs: catorze tabulacions i el focus era al body. */
   function enfocables() {
     return Array.prototype.filter.call(
-      capa.querySelectorAll('a[href], button, input, [tabindex]:not([tabindex="-1"])'),
+      capa.querySelectorAll('a[href], button, input, textarea, select, summary, [tabindex]:not([tabindex="-1"])'),
       function (e) {
-        return !e.hasAttribute('disabled') && e.offsetParent !== null;
+        if (e.hasAttribute('disabled') || e.offsetParent === null) return false;
+        // El contingut d'un <details> plegat, fora. Ni offsetParent ni
+        // getClientRects no el descarten (el navegador l'amaga amb
+        // content-visibility, no amb display), i la llista es pensava que
+        // després del resum hi havia quatre camps més. Com que el tabulador
+        // no els hi porta, el focus se saltava el final de la llista i
+        // sortia de la capa.
+        return !e.closest('details:not([open])') || e.tagName === 'SUMMARY';
       });
   }
 

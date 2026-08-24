@@ -313,6 +313,108 @@ console.log('\n11 · Lector de pantalla');
   await p.close();
 }
 
+// ── 12 · Quan no hi ha resposta: el formulari ─────────────────────────────
+console.log('\n12 · Quan no hi ha resposta: el formulari');
+{
+  const p = await nova();
+  // Res no ha de sortir cap a l'Apps Script mentre no es premi el botó: la
+  // prova ho comprova de debò, interceptant la xarxa.
+  const enviaments = [];
+  await p.route('**script.google.com/**', r => { enviaments.push(r.request().url()); r.abort(); });
+  await p.goto(BASE + '/faq/', { waitUntil: 'networkidle' });
+  await obreCapa(p);
+  await p.fill('.cerca-input', 'zzzzqqq');
+  await p.waitForTimeout(350);
+
+  comprova('sense cap resultat surt el formulari', await p.isVisible('.cerca-form'));
+  comprova('la pregunta ja hi ve escrita',
+    (await p.inputValue('.cerca-form textarea')) === 'zzzzqqq');
+  comprova('cada camp té la seva etiqueta', await p.evaluate(() => {
+    const camps = [...document.querySelectorAll('.cerca-form input, .cerca-form textarea')];
+    return camps.length === 3 && camps.every(c => !!document.querySelector('label[for="' + c.id + '"]'));
+  }));
+  comprova('hi ha l\'avís de privacitat amb enllaç',
+    await p.isVisible('.cerca-form-avis a'));
+
+  // Enviar-ho buit no ha d'enviar res ni tancar el formulari.
+  await p.fill('.cerca-form textarea', '');
+  await p.click('.cerca-form-btn');
+  await p.waitForTimeout(150);
+  comprova('buit, avisa i no envia',
+    await p.isVisible('.cerca-form-err') && await p.isVisible('.cerca-form') &&
+    enviaments.length === 0, 'enviaments=' + enviaments.length);
+  comprova('marca el camp que falta',
+    (await p.getAttribute('.cerca-form [name=nom]', 'aria-invalid')) === 'true');
+
+  await p.fill('.cerca-form [name=nom]', 'Anna Prova');
+  await p.fill('.cerca-form [name=contacteVia]', '600000000');
+  await p.fill('.cerca-form textarea', 'teniu equip de veterans?');
+  await p.click('.cerca-form-btn');
+  await p.waitForSelector('.cerca-form-fet:not([hidden])', { timeout: 8000 });
+  comprova('després d\'enviar-ho, dona les gràcies', await p.isVisible('.cerca-form-fet'));
+  comprova('i llavors sí que ofereix el WhatsApp',
+    await p.isVisible('.cerca-form-fet a[href*="whatsapp"]'));
+  const wa = await p.getAttribute('.cerca-form-fet a', 'href');
+  comprova('el WhatsApp porta la pregunta escrita',
+    decodeURIComponent(wa).includes('teniu equip de veterans?'), wa);
+  comprova('el formulari desapareix quan ja s\'ha enviat',
+    !(await p.isVisible('.cerca-form')));
+  comprova('només s\'ha enviat en prémer el botó', enviaments.length === 1,
+    'enviaments=' + enviaments.length);
+  await p.close();
+}
+
+{
+  const p = await nova();
+  await p.goto(BASE + '/es/faq/', { waitUntil: 'networkidle' });
+  await obreCapa(p);
+  await p.fill('.cerca-input', 'zzzzqqq');
+  await p.waitForTimeout(350);
+  const t = (await p.textContent('.cerca-form')).toLowerCase();
+  comprova('en castellà, el formulari va en castellà',
+    t.includes('cómo te llamas') && t.includes('privacidad'), t.slice(0, 90));
+  await p.close();
+}
+
+{
+  const p = await nova();
+  await p.goto(BASE + '/en/faq/', { waitUntil: 'networkidle' });
+  await obreCapa(p);
+  await p.fill('.cerca-input', 'zzzzqqq');
+  await p.waitForTimeout(350);
+  const t = (await p.textContent('.cerca-form')).toLowerCase();
+  comprova('en anglès, el formulari va en anglès',
+    t.includes('your name') && t.includes('privacy'), t.slice(0, 90));
+  // El focus no pot escapar-se ara que hi ha camps de text a dins.
+  await p.focus('.cerca-input');
+  for (let i = 0; i < 20; i++) await p.keyboard.press('Tab');
+  comprova('amb el formulari obert el focus continua dins de la capa',
+    await p.evaluate(() => !!document.activeElement.closest('.cerca-capa')));
+  await p.close();
+}
+
+{
+  const p = await nova();
+  await p.goto(BASE + '/faq/', { waitUntil: 'networkidle' });
+  await obreCapa(p);
+  // «campus» torna pàgines però cap resposta escrita: el formulari hi és,
+  // però plegat, que la llista de resultats continua sent el que s'ha demanat.
+  await p.fill('.cerca-input', 'campus');
+  await p.waitForSelector('.cerca-llista a');
+  comprova('amb enllaços però sense resposta, el formulari surt plegat',
+    await p.isVisible('.cerca-plec > summary') && !(await p.isVisible('.cerca-form-btn')));
+  // El resum queda sota el plec del llistat: es prem directament.
+  await p.$eval('.cerca-plec > summary', el => el.click());
+  await p.waitForTimeout(120);
+  comprova('i s\'obre en prémer-lo', await p.isVisible('.cerca-form-btn'));
+  // Amb resposta escrita no ha de sortir res de tot això.
+  await p.fill('.cerca-input', 'que inclou la quota');
+  await p.waitForSelector('.cerca-faq');
+  comprova('quan sí que hi ha resposta, no hi ha formulari',
+    !(await p.isVisible('.cerca-plec')) && !(await p.isVisible('.cerca-form')));
+  await p.close();
+}
+
 await navegador.close();
 console.log(`\n${ok} bé · ${ko} malament`);
 if (falles.length) { console.log('\nFalles:'); falles.forEach(f => console.log('  · ' + f)); }

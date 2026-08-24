@@ -239,6 +239,90 @@ html.cerca-oberta { overflow: hidden; }
 }
 .cerca-preguntaho:hover, .cerca-preguntaho.es-actiu { background: #EDE8E0; }
 
+/* ---- Quan el web no ho diu: el formulari ----------------------------
+   Ha de semblar poca cosa. Qui hi arriba ja ve d'una decepció —ha buscat
+   una cosa i no hi era— i un formulari amb pinta de tràmit acaba
+   d'espantar. Tres camps, un botó, i el WhatsApp només després.        */
+.cerca-form {
+  margin: 12px 0 4px; padding: 15px;
+  background: var(--cream, #F4F1EC);
+  border-left: 3px solid var(--red, #E20613);
+}
+.cerca-form-t strong {
+  display: block;
+  font-family: var(--display, 'Anton', 'Arial Narrow', sans-serif);
+  font-weight: 400; font-size: 16px; letter-spacing: .02em; text-transform: uppercase;
+  color: var(--ink, #10100E);
+}
+.cerca-form-t span {
+  display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.5;
+  color: var(--ink-2, #46433f);
+}
+.cerca-form-camps { display: grid; gap: 4px; margin: 12px 0 0; }
+.cerca-form-camps label {
+  font-size: 9.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--muted, #6B6560); margin-top: 6px;
+}
+.cerca-form-camps input,
+.cerca-form-camps textarea {
+  width: 100%; padding: 9px 11px;
+  font-family: var(--body, 'Inter', system-ui, sans-serif); font-size: 15px;
+  color: var(--ink, #10100E);
+  background: var(--paper, #fff);
+  border: 1px solid var(--line, rgba(16, 16, 14, .14));
+  border-radius: 0; resize: vertical;
+}
+.cerca-form-camps input:focus,
+.cerca-form-camps textarea:focus {
+  outline: 2px solid var(--red, #E20613); outline-offset: -1px; border-color: transparent;
+}
+.cerca-form-camps [aria-invalid="true"] { border-color: var(--red, #E20613); }
+.cerca-form-err {
+  margin: 8px 0 0; font-size: 12.5px; font-weight: 500;
+  color: var(--red-dark, #A8040E);
+}
+.cerca-form-btn {
+  margin-top: 12px; width: 100%; padding: 12px 16px; cursor: pointer;
+  font-family: var(--display, 'Anton', 'Arial Narrow', sans-serif);
+  font-weight: 400; font-size: 15px; letter-spacing: .04em; text-transform: uppercase;
+  color: #fff; background: var(--red, #E20613); border: 0;
+  transition: background .2s var(--ease, cubic-bezier(.22,1,.36,1));
+}
+.cerca-form-btn:hover { background: var(--red-dark, #A8040E); }
+.cerca-form-btn:disabled { background: var(--muted, #6B6560); cursor: default; }
+.cerca-form-avis {
+  margin: 9px 0 0; font-size: 11.5px; line-height: 1.5;
+  color: var(--muted, #6B6560);
+}
+.cerca-form-avis a { color: inherit; text-decoration: underline; }
+.cerca-form-fet {
+  margin: 12px 0 4px; padding: 15px;
+  background: var(--cream, #F4F1EC);
+  border-left: 3px solid var(--red, #E20613);
+}
+.cerca-form-fet > strong {
+  display: block;
+  font-family: var(--display, 'Anton', 'Arial Narrow', sans-serif);
+  font-weight: 400; font-size: 16px; letter-spacing: .02em; text-transform: uppercase;
+  color: var(--ink, #10100E);
+}
+.cerca-form-fet .cerca-preguntaho { margin: 10px 0 0; background: var(--paper, #fff); }
+.cerca-form-fet:focus { outline: none; }
+
+/* El mateix formulari, plegat, quan sí que hi ha pàgines però cap resposta
+   escrita: qui ha trobat el que buscava no l'ha de veure obert.          */
+.cerca-plec > summary {
+  cursor: pointer; list-style: none; padding: 11px 0 0;
+  font-size: 12px; font-weight: 500; letter-spacing: .06em;
+  color: var(--red-dark, #A8040E);
+  border-top: 1px solid var(--line, rgba(16, 16, 14, .14));
+}
+.cerca-plec > summary::-webkit-details-marker { display: none; }
+.cerca-plec > summary::after { content: ' +'; }
+.cerca-plec[open] > summary::after { content: ' –'; }
+.cerca-plec > summary:hover { color: var(--red, #E20613); }
+.cerca-plec .cerca-form { margin-top: 10px; }
+
 /* ---- Mapa de sota a /cerca/ · la sortida quan no hi ha JavaScript ---- */
 .cerca-mapa { display: grid; gap: 22px 28px;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
