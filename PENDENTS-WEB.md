@@ -179,6 +179,37 @@ seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
   repositori. No s'han afegit al menú per no inventar-hi programa, preus o
   notícies. Falta que l'Ana digui què són exactament i doni el material.
 
+## Pendent de decisió · auditoria SEO/rendiment (24/08/2026)
+
+Feta a partir d'una auditoria externa (Gemini) sobre cbgrupbarna.info. Resum del que ja
+està fet i del que queda obert:
+
+**Fet:**
+- Correu personal tret de 69 pàgines públiques (144 usos) → `marqueting@cbgrupbarna.info`.
+- `/briefing/` (ca/es/en): de 2,24 MB a 42 KB per pàgina — les 15 imatges en base64
+  extretes a WebP a `briefing/img/`.
+- Fase 1 de comunitat: `/newsletter/`, `/bustia/` (bústia de suggeriments, anònima) i
+  `/proteccio-menor/comunicar/` (canal LOPIVI, formulari desactivat a posta fins que hi
+  hagi una Apps Script pròpia — veure `js/README-canals.md`).
+- Contrast AA de `--muted`: 581 usos corregits a 100 fitxers.
+- Domini `cbgrupbarna.com`: confirmat per l'Ana que es queda com a redirecció cap a
+  `.info`. Tret com a destí propi de peus, `data.json`, `sameAs` i mails solts (detall a
+  `MIGRACIO-WEB-ANTIGA.md`, punt 7).
+- Pes d'imatges: `fotos/web/` (1.709 fitxers) redimensionades sense ampliar cap ni
+  retallar-ne cap (costat llarg màxim 2400 px) i recomprimides; ~19 actius solts pesats
+  (hero del blog, fotos de patrocinis, logo d'un club rival) recomprimits a la mateixa
+  mida. 266 `<img>` sense `loading="lazy"` arreglades a 162 pàgines, amb `width`/`height`
+  calculats a 171 quan el fitxer era local. La primera imatge de cada pàgina (logo o
+  hero) no es toca a posta.
+
+**Pendent de l'Ana:**
+- **`/opina/`** (ressenyes de Google): `opina.json` amb `placeId` i `reviewUrl` buits.
+  El Perfil d'Empresa encara no està verificat, així que Google no dona l'enllaç curt
+  `g.page/r/…/review`. Sortida acordada: buscar "CB Grup Barna" al
+  [Place ID Finder](https://developers.google.com/maps/documentation/places/web-service/place-id)
+  de Google (eina pública, no cal verificació) i passar el `placeId` — un cop arribi,
+  s'enganxa a `opina/opina.json` i queda actiu en un moment.
+
 ## Sense acció
 
 - **Esdeveniments «passats»** (3x3 Glòries, Mes de l'Orgull, Campus Time Chamber,
