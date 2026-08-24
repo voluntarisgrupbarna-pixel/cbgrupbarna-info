@@ -1144,3 +1144,28 @@ damunt la foto a 5,87:1 de contrast. **La pàgina passa de ~62 MB transferits a
 **Pendent de decidir:** els cinc MP4 de `mascota/` (186 MB en total) ja no els
 enllaça cap pàgina. Es queden al repositori fins que l'Ana digui, perquè són
 els originals; però cada desplegament els ha d'empaquetar.
+
+## 24-08-2026 — Fora també els vídeos del repositori
+
+Decisió de l'Ana. Traguda la reproducció de la pàgina, els fitxers ja no els
+enllaçava ningú i cada desplegament els havia d'empaquetar.
+
+Esborrats de `mascota/` (180 MB):
+
+| Fitxer | Mida |
+|---|---|
+| `mascota-reel-es-capcut.mp4` | 48,2 MB |
+| `mascota-reel-es.mp4` | 48,1 MB |
+| `mascota-reel.mp4` | 30,2 MB |
+| `mascota-teleprompter.mp4` | 38,6 MB |
+| `mascota.mp4` | 14,1 MB |
+| `subtitols.vtt`, `subtitols-es.vtt`, `subtitols-en.vtt` | els subtítols dels vídeos |
+
+Abans d'esborrar es va buscar cada nom per tot el repositori: cap pàgina,
+full d'estil, guió ni el `sitemap.xml` no en referencien cap. Les úniques
+mencions eren prosa d'aquest document i un comentari de
+`scripts/mp4-faststart.py`, que és una eina general i no en depèn.
+
+**Com recuperar-los si mai calen:** són a l'historial de git, al commit
+`c589e7f4`. Amb `git show c589e7f4:mascota/mascota-reel.mp4 > mascota-reel.mp4`
+en surt qualsevol, byte a byte.
