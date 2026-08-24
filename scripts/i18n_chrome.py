@@ -11,11 +11,17 @@ això el mateix enllaç va acabar dient-se «Team calendars» en una pàgina i
     navegacio("ca")   # el <nav> de la capçalera
     peu("en")         # el <footer> sencer
 
-Les rutes s'escriuen en català i cada idioma hi posa el seu prefix:
-/escoleta/ és /es/escoleta/ i /en/escoleta/. Si una pàgina no existeix en un
-idioma, el diccionari no l'ha de llistar a la seva estructura, i si ho fa,
-això peta expressament: val més que s'aturi la generació que no pas publicar
-un peu en castellà amb un enllaç que porta a una pàgina en català.
+Les rutes s'escriuen en català i la traducció **es llegeix** de
+i18n/routes.yml, no s'endevina posant-hi un prefix: /avis-legal/ és
+/es/aviso-legal/ i /en/legal-notice/, no /es/avis-legal/. Amb el prefix, el
+peu en castellà enviava a la política en català, i les claus que no s'hi
+podien resoldre —tota la columna Legal— van acabar fora del peu de /es/ i
+/en/. Només quan una pàgina no és a routes.yml es fa servir el prefix.
+
+Si una pàgina no existeix en un idioma, el diccionari no l'ha de llistar a la
+seva estructura, i si ho fa, això peta expressament: val més que s'aturi la
+generació que no pas publicar un peu en castellà amb un enllaç que porta a
+una pàgina en català.
 """
 from pathlib import Path
 
@@ -23,11 +29,17 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 DICCIONARI = ROOT / "i18n" / "diccionari.yml"
+RUTES = ROOT / "i18n" / "routes.yml"
 SITE = "https://cbgrupbarna.info"
 
 _dades = yaml.safe_load(DICCIONARI.read_text(encoding="utf-8"))
 TEXTOS = _dades["textos"]
 ESTRUCTURA = _dades["estructura"]
+
+# {ruta catalana: {"es": ..., "en": ...}}
+_RUTES = {r["ca"]: r
+          for r in yaml.safe_load(RUTES.read_text(encoding="utf-8"))["rutes"]
+          if r.get("ca")}
 
 
 def text(clau, idioma):
@@ -40,12 +52,16 @@ def text(clau, idioma):
 
 
 def enllac(clau, idioma):
-    """L'adreça d'una clau en un idioma, amb el prefix que li toca."""
+    """L'adreça d'una clau en un idioma, llegida de routes.yml."""
     href = TEXTOS[clau].get("href")
     if href is None:
         raise KeyError(f"i18n: la clau «{clau}» no és un enllaç")
     if idioma == "ca" or href.startswith(("http", "mailto:")):
         return href
+    ruta, _, ancora = href.partition("#")
+    traduida = _RUTES.get(ruta, {}).get(idioma)
+    if traduida:
+        return traduida + ("#" + ancora if ancora else "")
     return f"/{idioma}{href}"
 
 
@@ -148,7 +164,9 @@ def peu(idioma):
             '    <div class="foot-btm">\n'
             '      <div class="foot-mark">#Som<em>Clot</em></div>\n'
             f'      <div class="foot-legal">{text("peu_legal", idioma)}</div>\n'
-            '    </div>\n  </div>\n</footer>\n</body>\n</html>\n')
+            '    </div>\n  </div>\n</footer>\n'
+            '<script src="/js/cerca.js" defer></script>\n'
+            '</body>\n</html>\n')
 
 
 def alternatives(url):

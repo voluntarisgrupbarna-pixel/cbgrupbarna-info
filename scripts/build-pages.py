@@ -18,6 +18,8 @@ a mà perquè tenen lògica pròpia.
 """
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 from urllib.parse import quote
 
@@ -81,20 +83,21 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
     LANG_NAMES = {"ca": "CA", "es": "ES", "en": "EN"}
     switch_langs = [(c, h) for c, h in (alternates or []) if c in LANG_NAMES]
     if switch_langs and show_lang_switch:
-        ACT = ' class="active"'
-        links = '<span class="sep">·</span>'.join(
-            f'<a href="{h.replace(SITE, "")}" hreflang="{c}"{ACT if c == lang else ""}>{LANG_NAMES[c]}</a>'
+        # El nom de la llengua en la seva llengua: qui fa servir un lector de
+        # pantalla ha de sentir "Castellano", no "ES" lletra per lletra.
+        LANG_ARIA = {"ca": "Català", "es": "Castellano", "en": "English"}
+        links = '<span class="sep" aria-hidden="true">·</span>'.join(
+            f'<a href="{h.replace(SITE, "")}" hreflang="{c}" lang="{c}" '
+            f'aria-label="{LANG_ARIA[c]}"'
+            + (' class="active" aria-current="true"' if c == lang else '')
+            + f'>{LANG_NAMES[c]}</a>'
             for c, h in switch_langs)
-        lang_switch = ('\n    <div class="lang-switch" aria-label="Canvia d\'idioma · Cambiar idioma · Change language">\n      '
-                       + links + '\n    </div>')
-        lang_style = '''
-<style>
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-.lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; }
-.lang-switch .sep { opacity: 0.25; }{EXTRA}
-</style>'''.replace("{EXTRA}", "\n.head-in .lang-switch { margin-left: auto; }" if lang_switch_auto else "")
+        lang_switch = ('\n    <nav class="lang-switch" aria-label="Canvia d\'idioma · Cambiar idioma · Change language">\n      '
+                       + links + '\n    </nav>')
+        # Les regles del component viuen a css/barna.css i prou: tenir-les
+        # també aquí és el que va deixar vuit versions del mateix CSS pel lloc.
+        lang_style = ('\n<style>\n.head-in .lang-switch { margin-left: auto; }\n</style>'
+                      if lang_switch_auto else '\n<style>\n</style>')
     else:
         lang_switch = ''
         lang_style = ''
@@ -123,12 +126,9 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">{lang_style}
-<!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
-     aquí, el planta /js/cerca.js dins de la capçalera. -->
-<link rel="stylesheet" href="/css/cerca.css">
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
 <script src="/js/galetes.js"></script>
-<script src="/js/cerca.js" defer></script>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 <a href="#main" class="skip">{text("salta", lang)}</a>
@@ -156,13 +156,34 @@ def crumbs(items):
 FOOT = peu("ca")
 
 
-def faq_block(pairs):
-    """FAQ visible + el JSON-LD corresponent, sempre sincronitzats."""
-    html = '<div class="faq">' + ''.join(
-        f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in pairs) + '</div>'
-    ld = {"@type": "FAQPage", "mainEntity": [
-        {"@type": "Question", "name": q,
-         "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a)}} for q, a in pairs]}
+def faq_block(pairs, url, lang="ca"):
+    """FAQ visible + el JSON-LD corresponent, sempre sincronitzats.
+
+    Tots dos blocs van entre marcadors (`FAQ` i `FAQ-LD`) perquè la font única
+    de preguntes —`i18n/faq.yml` amb `.github/scripts/generate-faq.py`— els
+    pugui reescriure. Sense marcadors, aquell script es nega a tocar la pàgina
+    i la pàgina queda desconnectada de la font: és el que passava abans.
+
+    El FAQPage va en un <script> propi i no dins del @graph de la pàgina, per
+    la mateixa raó: així s'hi pot afegir una pregunta sense reescriure un JSON
+    aliè. Google accepta més d'un bloc ld+json per pàgina.
+    """
+    visible = ''.join(
+        f'<details class="faq-q"><summary>{q}</summary><p>{a}</p></details>' for q, a in pairs)
+    html = f'<div class="faq"><!-- FAQ:START -->{visible}<!-- FAQ:END --></div>'
+    dades = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": url + "#faq",
+        "inLanguage": lang,
+        "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a)}}
+            for q, a in pairs],
+    }
+    ld = ('<!-- FAQ-LD:START --><script type="application/ld+json">'
+          + json.dumps(dades, ensure_ascii=False, indent=2)
+          + '</script><!-- FAQ-LD:END -->\n')
     return html, ld
 
 
@@ -177,7 +198,21 @@ def closer(title, text, buttons):
     return f'<div class="closer"><h2>{title}</h2><p>{text}</p><div class="btn-row">{b}</div></div>'
 
 
+# Les xifres del club no s'escriuen mai a mà en aquest fitxer: surten de
+# data.json, que és la font de veritat i ho diu al seu propi _note. Escrites a
+# mà van derivar fins a tenir el mateix generador dient «32 equips» en una
+# pàgina i «38» en una altra, quan la xifra publicada és 34+.
+_XIFRES = json.loads((ROOT / "data.json").read_text(encoding="utf-8"))["xifres"]
+SUBSTITUCIONS = {
+    "{EQUIPS}": _XIFRES["equipsTotalText"].replace("34+", "més de 34").replace(" equips", ""),
+    "{ANYS}": _XIFRES["anysDeClubText"]["ca"],
+    "{FAMILIES}": str(_XIFRES["families"]),
+}
+
+
 def write(path, html):
+    for marca, valor in SUBSTITUCIONS.items():
+        html = html.replace(marca, valor)
     p = ROOT / path
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(html, encoding='utf-8')
@@ -221,7 +256,7 @@ def build_campus():
          "(Districte de Sant Martí), obert a jugadors i jugadores de qualsevol club de la ciutat. És "
          "una alternativa de barri, amb grups reduïts i tecnificació individual amb Time Chamber, als "
          "campus de la Fundació del Bàsquet Català."),
-    ])
+    ], url)
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "Service", "@id": url + "#campus",
          "name": "Campus de bàsquet · CB Grup Barna",
@@ -268,7 +303,6 @@ def build_campus():
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
          "description": desc, "inLanguage": ["ca-ES", "es-ES"],
          "about": {"@id": url + "#campus"}, "isPartOf": {"@id": SITE + "/#website"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Campus de bàsquet", "/campus/")]),
     ]}
 
@@ -429,7 +463,7 @@ def build_campus():
     return write("campus/index.html",
                  head(title, desc, url, SITE + "/img/campus-hero.webp", ld,
                       "campus bàsquet Barcelona, campus baloncesto Barcelona, campus estiu bàsquet, "
-                      "grup barna campus, campus tecnificació bàsquet Barcelona") + body + FOOT)
+                      "grup barna campus, campus tecnificació bàsquet Barcelona") + body + faq_ld + FOOT)
 
 
 # ═══════════════════════════════════════════════════════ /patrocinadors/ ════
@@ -494,7 +528,7 @@ def build_patrocinadors():
          "medida con entregables concretos para cada marca."),
         ("¿Producción de lonas o material específico incluida?",
          "No, salvo acuerdo expreso: se presupuesta aparte según lo que necesite la activación."),
-    ])
+    ], url, "es")
 
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "SportsOrganization", "@id": SITE + "/#club", "name": "CB Grup Barna",
@@ -514,7 +548,6 @@ def build_patrocinadors():
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
          "description": desc, "inLanguage": ["es-ES", "ca-ES"],
          "about": {"@id": url + "#patrocini"}, "isPartOf": {"@id": SITE + "/#website"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Patrocinadors", "/patrocinadors/")]),
     ]}
 
@@ -680,7 +713,7 @@ def build_patrocinadors():
                  head(title, desc, url, SITE + ph + "hero_sf16.jpg", ld,
                       "patrocinadores CB Grup Barna, patrocinio baloncesto Barcelona, partners club "
                       "de baloncesto, esponsorización deportiva Barcelona, dossier de colaboración",
-                      lang="es") + body + FOOT)
+                      lang="es") + body + faq_ld + FOOT)
 
 
 # Dades pròpies de cada partner (descripció, oferta per a socis, posts
@@ -954,7 +987,7 @@ def build_3x3():
         ("On és exactament?",
          "A Westfield Glòries, a la plaça de les Glòries Catalanes de Barcelona, a tocar del barri "
          "del Clot i del Districte de Sant Martí."),
-    ])
+    ], url)
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "SportsEvent", "@id": url + "#torneig",
          "name": "3x3 Barcelona · Torneig de bàsquet 3x3 a Westfield Glòries",
@@ -972,7 +1005,6 @@ def build_3x3():
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
          "description": desc, "inLanguage": ["ca-ES", "es-ES"],
          "about": {"@id": url + "#torneig"}, "isPartOf": {"@id": SITE + "/#website"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("3x3 Barcelona", "/3x3/")]),
     ]}
 
@@ -1064,7 +1096,7 @@ def build_3x3():
     return write("3x3/index.html",
                  head(title, desc, url, SITE + "/og-image.jpg", ld,
                       "3x3 Barcelona, bàsquet 3x3 Barcelona, torneig 3x3, baloncesto 3x3 Barcelona, "
-                      "3x3 Westfield Glòries, torneo 3x3 Barcelona") + body + FOOT)
+                      "3x3 Westfield Glòries, torneo 3x3 Barcelona") + body + faq_ld + FOOT)
 
 
 # ═══════════════════════════════════════════════════════════════ /blog/ ════
@@ -1353,7 +1385,7 @@ del nivell més alt. Un club "de formació" és el que fa servir aquesta escala 
 dades de la federació ho demostren millor que qualsevol frase de presentació.</p>
 """ + FIG_FORMACIO_SENIOR + """
 <h2>La piràmide del Barna, per dins</h2>
-<p>La fitxa oficial del club a basquetcatala.cat mostra <strong>32 equips federats</strong>,
+<p>La fitxa oficial del club a basquetcatala.cat mostra <strong>{EQUIPS} equips federats</strong>,
 de Pre-Mini (8-9 anys) fins a Sènior, amb estructura masculina i femenina paral·lela i, en la
 majoria de categories, fins a <strong>tres nivells</strong>: un equip A al sostre competitiu
 (Interterritorial, o Preferent quan no n'hi ha), un equip B format per jugadors i jugadores en el
@@ -1407,7 +1439,7 @@ passen pel mateix club, sense trencar mai el fil.</p>
 """,
   "faq": [
    ("Quants equips té el CB Grup Barna?",
-    "32 equips federats, de Pre-Mini a Sènior, amb estructura masculina i femenina i fins a "
+    "{EQUIPS} equips federats, de Pre-Mini a Sènior, amb estructura masculina i femenina i fins a "
     "tres nivells per categoria (A, B i Negre), segons la fitxa oficial del club a basquetcatala.cat."),
    ("Què és la Súper Copa de la FCBQ?",
     "És la màxima categoria sènior territorial organitzada per la Federació Catalana de Bàsquet. "
@@ -1530,7 +1562,7 @@ sense competició federada pròpia. Una <strong>escola de bàsquet</strong> és 
 nens i nenes de 4 a 8 anys. Un <strong>club</strong> és el que hi ha darrere: equips federats a totes
 les categories, entrenadors titulats i continuïtat de dècades. El CB Grup Barna és les tres coses
 alhora: funciona com una acadèmia de bàsquet a Barcelona (formació i tecnificació des de ben petits)
-i és, alhora, un club amb 38 equips i seixanta-un anys al mateix barri.</p>
+i és, alhora, un club amb {EQUIPS} equips i {ANYS} al mateix barri.</p>
 """ + FIG_TRIAR_CLUB + """
 <h2>1. Quants entrenadors hi ha per grup</h2>
 <p>És el primer que s'ha de preguntar i el que menys es pregunta. Un grup de vint criatures de cinc
@@ -1608,7 +1640,7 @@ continuïtat del lloc.</p>
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "Campus de bàsquet a Barcelona: què mirar abans d'apuntar-hi ningú",
-  "seo_title": "Com triar un campus de bàsquet a Barcelona: guia per a famílies | CB Grup Barna",
+  "seo_title": "Com triar un campus de bàsquet a Barcelona | CB Grup Barna",
   "desc": ("Guia per triar campus de bàsquet a Barcelona: diferència entre campus de lleure i de "
            "tecnificació, ràtios, grups per edat, horaris i preu. Amb la informació del campus del "
            "CB Grup Barna al Clot."),
@@ -1760,7 +1792,7 @@ s'obren pot <a href="/#info">deixar el contacte</a> o escriure al WhatsApp del c
   "title": "Bàsquet base al Clot i a Sant Martí: com funciona un club de barri",
   "seo_title": "Bàsquet base al Clot i Sant Martí, Barcelona | CB Grup Barna",
   "desc": ("Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa "
-           "federativa, calendari i què vol dir jugar en un club de barri amb seixanta-un anys "
+           "federativa, calendari i què significa jugar en un club de barri amb seixanta-un anys "
            "d'història."),
   "kw": "bàsquet base Barcelona, bàsquet Sant Martí, club bàsquet Clot, baloncesto base Barcelona, "
         "club bàsquet barri Barcelona",
@@ -1819,7 +1851,7 @@ equip federat. En tots dos casos, el primer pas és el mateix: anar a fer un
     "no és el resultat sinó formar jugadors i jugadores que segueixin jugant."),
    ("Quin club de bàsquet hi ha al barri del Clot?",
     "El CB Grup Barna, fundat el 1965, és el club de bàsquet base del Clot, al Districte de Sant "
-    "Martí de Barcelona, amb 32 equips federats i unes 450 jugadores i jugadors."),
+    "Martí de Barcelona, amb {EQUIPS} equips federats i unes {FAMILIES} jugadores i jugadors."),
    ("Cal fitxa federativa per jugar a bàsquet base?",
     "Sí, per a la competició federada. La tramita el club davant la Federació Catalana de Basquetbol "
     "i inclou l'assegurança esportiva. A l'escola d'iniciació (4 a 8 anys) no cal."),
@@ -1846,7 +1878,7 @@ def blog_card(a, with_text):
 def build_article(a):
     url = f"{SITE}/blog/{a['slug']}/"
     url_relativa = f"/blog/{a['slug']}/"
-    faq_html, faq_ld = faq_block(a["faq"])
+    faq_html, faq_ld = faq_block(a["faq"], url)
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "BlogPosting", "@id": url + "#article",
          "headline": a["title"], "description": a["desc"], "url": url,
@@ -1856,7 +1888,6 @@ def build_article(a):
          "image": SITE + "/og-image.jpg",
          "isPartOf": {"@id": SITE + "/blog/#blog"},
          "mainEntityOfPage": {"@type": "WebPage", "@id": url}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Blog", "/blog/"),
                     (a.get("bc_name", a["title"]), "/blog/" + a["slug"] + "/")]),
     ]}
@@ -1912,7 +1943,7 @@ def build_article(a):
 """
     return write(f"blog/{a['slug']}/index.html",
                  head(a["seo_title"], a["desc"], url, SITE + "/og-image.jpg", ld, a["kw"],
-                      alternatives(url_relativa), meta_desc=a.get("meta_desc")) + body + FOOT)
+                      alternatives(url_relativa), meta_desc=a.get("meta_desc")) + body + faq_ld + FOOT)
 
 
 def build_blog_index():
@@ -2058,7 +2089,7 @@ entitats del barri. Un article i una fitxa al mateix número: gràcies per fer-n
 
 def build_press_article(a):
     url = f"{SITE}/premsa/{a['slug']}/"
-    faq_html, faq_ld = faq_block(a["faq"])
+    faq_html, faq_ld = faq_block(a["faq"], url)
 
     gallery = ''.join(
         f'<figure><img src="/premsa/img/{fn}" alt="{alt}" loading="lazy" decoding="async" '
@@ -2093,7 +2124,6 @@ def build_press_article(a):
                         "url": a["publisher_url"], "sameAs": [a["publisher_ig"]]},
          },
          "about": {"@id": SITE + "/#club"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Premsa", "/premsa/"), (a["title"], "/premsa/" + a["slug"] + "/")]),
     ]}
 
@@ -2136,7 +2166,7 @@ def build_press_article(a):
 """
     return write(f"premsa/{a['slug']}/index.html",
                  head(a["seo_title"], a["desc"], url, SITE + f"/premsa/img/{a['images'][0][0]}", ld, a["kw"])
-                 + body + FOOT)
+                 + body + faq_ld + FOOT)
 
 
 def build_premsa_index():
@@ -2468,12 +2498,11 @@ def build_calendaris():
         ("Amb quina freqüència s'actualitzen els calendaris?",
          "El calendari en directe de /partits/ es sincronitza cada dia amb el calendari oficial de la FCBQ. "
          "Les fitxes descarregables són fixes: si un partit concret canvia, l'app sempre té la dada correcta."),
-    ])
+    ], url)
 
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "CollectionPage", "@id": url + "#calendaris", "name": title, "description": desc, "url": url,
          "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Calendari", "/partits/"), ("Calendari per equip", "/partits/calendaris/")]),
     ]}
 
@@ -2603,7 +2632,7 @@ def build_calendaris():
     return write("partits/calendaris/index.html",
                  head(title, desc, url, SITE + "/partits/calendaris/img/scf.webp", ld,
                       "calendari CB Grup Barna, calendari bàsquet base, descarregar calendari equip",
-                      alternates=alternates, lang_switch_auto=True) + body + FOOT)
+                      alternates=alternates, lang_switch_auto=True) + body + faq_ld + FOOT)
 
 
 # Pàgines que el generador JA NO escriu perquè s'han redissenyat a mà i aquí
@@ -2620,3 +2649,9 @@ if __name__ == "__main__":
     print(build_calendaris())
     print(f"\n{len(ARTICLES) + 1} pàgines generades.")
     print("NO generades (mantingudes a mà, vegeu MANTINGUDES_A_MA):", ", ".join(MANTINGUDES_A_MA))
+
+    # Les preguntes que porta aquest fitxer són el mínim amb què neix una
+    # pàgina; la llista viva és i18n/faq.yml. Sense aquest pas, generar
+    # /partits/calendaris/ la deixava amb 4 preguntes de les 7 publicades.
+    print("\nPreguntes freqüents des de i18n/faq.yml:")
+    subprocess.run([sys.executable, str(ROOT / ".github/scripts/generate-faq.py")], check=True)

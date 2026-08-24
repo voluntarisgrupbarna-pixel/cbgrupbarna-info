@@ -354,21 +354,36 @@ s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
 
 ## 8. Trampes d'aquest repositori
 
-- **`scripts/build-pages.py` genera** blog, campus, 3x3, premsa i patrocinadors.
-  Edita el generador, no la sortida. Ara bé, **només la part de `/blog/` està al
-  dia** (agost 2026): aquella es pot regenerar sense por. La resta va endarrerida
-  i executar-lo sencer, avui, esborra coses reals:
-  - a `/patrocinadors/`, l'apartat sencer de posicionament competitiu;
-  - a `/partits/calendaris/`, la instantània SEO i els botons de subscripció `.ics`;
-  - a `/campus/` i `/premsa/`, paraules clau i noms alternatius d'SEO.
+- **`scripts/build-pages.py` genera** els 6 articles del blog que hi té escrits i
+  `/partits/calendaris/`. Edita el generador, no la sortida. **Des del 24/08/2026
+  es pot executar sense por**: la sortida coincideix amb el publicat, i l'única
+  diferència que hi deixa és arreglar quatre incoherències que hi havia (un
+  `og:title` que no deia el mateix que el `<title>`, una descripció del JSON-LD
+  que no deia el mateix que l'`og:description`, un color escrit en hexadecimal
+  en comptes del token, i el recompte d'equips). Igualment, **mira el `git diff`
+  sencer abans de desar**: és barat i és l'única manera de veure una deriva nova.
 
-  El procediment segur: executa'l, mira el **`git diff` sencer** i restaura amb
-  `git checkout --` tot el que no volguessis tocar. Si el que fas afecta només el
-  blog, restaura la resta sempre.
-- **El peu de pàgina va per dues velocitats.** El generador ja emet els enllaços
-  de Protecció del Menor i Bàsquet femení, però `/campus/`, `/premsa/`, `/3x3/`,
-  `partits/calendaris/` i les fitxes de partners encara tenen a disc el peu antic
-  de 17 enllaços. S'igualarà el dia que es puguin regenerar sense pèrdues.
+  El que sí que segueix fora del generador —i per això no el pot esborrar— és a
+  la llista `MANTINGUDES_A_MA`: `/campus/`, `/patrocinadors/` (índex i les 22
+  fitxes de partner), `/premsa/`, `/3x3/` i l'índex de `/blog/`. Aquestes es
+  mantenen a mà.
+
+  Quatre coses que abans destruïa i ara ja no, per si es tornen a trencar:
+  - **Els marcadors `FAQ:START` i `FAQ-LD:START`.** Sense ells,
+    `.github/scripts/generate-faq.py` es nega a tocar la pàgina i la desconnecta
+    de la font única (`i18n/faq.yml`). `build-pages.py` ara els emet sempre i
+    encadena `generate-faq.py` al final, o sigui que les preguntes tornen soles.
+  - **El `FAQPage` va en un `<script>` propi**, no dins del `@graph` de la
+    pàgina: així s'hi pot afegir una pregunta sense reescriure un JSON aliè.
+  - **El commutador d'idioma és un `<nav>`** amb `lang`, `aria-label` i
+    `aria-current` a cada enllaç. Abans en sortia un `<div>` pelat.
+  - **Les xifres del club surten de `data.json`**, no escrites a mà: el
+    generador arribava a dir «32 equips» en una pàgina i «38» en una altra quan
+    la xifra publicada és 34+.
+- **Les rutes traduïdes es llegeixen, no s'endevinen.** `scripts/i18n_chrome.py`
+  resol cada enllaç del peu amb `i18n/routes.yml`: `/avis-legal/` és
+  `/es/aviso-legal/`, no `/es/avis-legal/`. Amb el prefix automàtic d'abans, la
+  columna Legal sencera no es podia resoldre i queia del peu de `/es/` i `/en/`.
 - **`.github/scripts/generate-team-pages.py`** genera `partits/equips/`.
 - **`.github/scripts/generate-seo-snapshot.py`** només reescriu entre els
   marcadors `SEO-SNAPSHOT`, `SEO-EVENTS` i `SEO-EQUIPS`. Fora d'aquí és segur.

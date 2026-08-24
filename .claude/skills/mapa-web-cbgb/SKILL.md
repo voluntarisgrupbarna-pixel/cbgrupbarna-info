@@ -75,11 +75,17 @@ que es serveix. Allotjat a **GitHub Pages**, domini propi via `CNAME`
 | Bloc `SEO-SNAPSHOT` / `SEO-EVENTS` / `SEO-EQUIPS` dins `partits/index.html` i `calendaris/index.html` | **Reescrit només entre aquests marcadors**, la resta és segur tocar-la a mà | `.github/scripts/generate-seo-snapshot.py` |
 | `og-image.jpg` | **Manual**: cal regenerar-la després de canviar la portada | `python3 .github/scripts/generate-og-image.py` |
 
-**⚠️ Trampa coneguda** (heretada de `web-cbgb` §7): `scripts/build-pages.py`
-**està desfasat** respecte al publicat — executar-lo sense mirar el diff pot
-revertir un repàs d'SEO i un article escrits a mà. Sempre: edita el
-generador, no la sortida directa, i revisa el `git diff` sencer abans de
-desar.
+**`scripts/build-pages.py` ja es pot executar sense por** (des del 24/08/2026):
+la seva sortida coincideix amb el publicat i encadena tot sol
+`generate-faq.py`, que hi torna a posar les preguntes de `i18n/faq.yml`. Abans
+esborrava 3 preguntes de `/partits/calendaris/`, els marcadors de FAQ i els
+atributs d'accessibilitat del commutador d'idioma; el detall del que s'hi va
+arreglar és a `web-cbgb` §8. Igualment: **edita el generador, no la sortida**, i
+mira el `git diff` sencer abans de desar.
+
+El que **no** genera —i per tant no pot esborrar— és a la llista
+`MANTINGUDES_A_MA` del mateix fitxer: `/campus/`, `/patrocinadors/` (índex i les
+22 fitxes de partner), `/premsa/`, `/3x3/` i l'índex de `/blog/`.
 
 ---
 

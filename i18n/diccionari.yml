@@ -17,10 +17,12 @@
 # que porta a una pàgina en català és pitjor que no posar-l'hi. A mesura que
 # es tradueixin, s'afegeixen aquí.
 #
-# L'`href` s'escriu en català i cada idioma hi posa el seu prefix: /escoleta/
-# és /es/escoleta/ i /en/escoleta/. Les rutes no es tradueixen (vegeu
-# i18n/README.md). Si una pàgina no existeix en un idioma, no ha de sortir a
-# la seva estructura: el generador s'atura si hi surt.
+# L'`href` s'escriu en català i la traducció es LLEGEIX de i18n/routes.yml:
+# /avis-legal/ és /es/aviso-legal/, no /es/avis-legal/. Només quan una ruta
+# no hi consta s'hi posa el prefix (/escoleta/ → /es/escoleta/). Endevinar-ho
+# amb el prefix és el que enviava el peu castellà a la política en català.
+# Si una pàgina no existeix en un idioma, no ha de sortir a la seva
+# estructura: el generador s'atura si hi surt.
 
 textos:
   # ── Navegació ────────────────────────────────────────────────────────────
@@ -54,12 +56,14 @@ textos:
   posicionament:   {href: /posicionament/,     ca: Posicionament del club,  es: Posicionamiento del club,  en: Club positioning}
   dades_oficials:  {href: /grup-barna-dades-oficials/, ca: Dades oficials,  es: Datos oficiales,           en: Official data}
   proteccio_menor: {href: /proteccio-menor/,   ca: Protecció del Menor,     es: Protección del Menor,      en: Child protection}
-  basquet_femeni:  {href: /basquet-femeni/,    ca: Bàsquet femení,          es: Baloncesto femenino,       en: Women's basketball}
+  basquet_femeni:  {href: /femeni/,            ca: Bàsquet femení,          es: Baloncesto femenino,       en: Women's basketball}
   fotos:           {href: /fotos/,             ca: Galeria de fotos,        es: Galería de fotos,          en: Photo gallery}
   premidonaesport: {href: /premidonaesport/,   ca: Premi Dona i Esport,     es: Premio Mujer y Deporte,    en: Women and Sport Award}
   blog:            {href: /blog/,              ca: Blog,                    es: Blog,                      en: Blog}
   premsa_llarg:    {href: /premsa/,            ca: Articles i premsa,       es: Artículos y prensa,        en: Articles and press}
   info_demanar:    {href: /#info,              ca: Demanar informació,      es: Pedir información,         en: Request information}
+  newsletter:      {href: /newsletter/,        ca: Newsletter,              es: Newsletter,                en: Newsletter}
+  bustia:          {href: /bustia/,            ca: Bústia de suggeriments,  es: Buzón de sugerencias,      en: Suggestions box}
   faq:             {href: /faq/,               ca: Preguntes freqüents,     es: Preguntas frecuentes,      en: Frequently asked questions}
   privacitat:      {href: /politica-de-privacitat/, ca: Política de privacitat, es: Política de privacidad, en: Privacy policy}
   avis_legal:      {href: /avis-legal/,        ca: Avís legal,              es: Aviso legal,               en: Legal notice}
@@ -90,7 +94,7 @@ estructura:
                           empreses, partners, installacions, organigrama, posicionament,
                           dades_oficials, proteccio_menor, basquet_femeni]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
-      - [titol_contacte, [info_demanar, faq]]
+      - [titol_contacte, [info_demanar, newsletter, bustia, faq]]
       - [titol_legal, [privacitat, avis_legal, galetes]]
   es:
     nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
@@ -99,6 +103,7 @@ estructura:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
       - [titol_contacte, [info_demanar]]
+      - [titol_legal, [privacitat, avis_legal, galetes]]
   en:
     nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
           "nav_partners.opt", nav_info]
@@ -106,3 +111,4 @@ estructura:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
       - [titol_contacte, [info_demanar]]
+      - [titol_legal, [privacitat, avis_legal, galetes]]
