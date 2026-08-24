@@ -677,7 +677,7 @@ L'Ana les va contestar totes. **Cap pregunta del web queda sense resposta.**
 | Com es paga? | **Mensualment**, i l'import depèn de l'edat i la categoria |
 | Descompte per a germans? | **Sí** (el percentatge, no; es diu escrivint) |
 | Baixa a mig any? | La temporada es paga sencera |
-| Equipació | Uns 150 €, a **Wintym**, des del seu web |
+| Equipació | Va a part; **ho explica qui porta la inscripció**, sense preu al web |
 | Equip A i equip B | L'any de naixement decideix la categoria; dins d'una categoria, **l'entrenador** decideix segons el nivell |
 | Faltar a un entrenament | Avisar l'entrenador; **amb el justificant de la família n'hi ha prou** |
 | Revisió mèdica | **Sí, i la gestiona el club: és gratuïta per a les famílies** |
@@ -709,9 +709,28 @@ certa el dia que canviï la marca, i no cal recordar-se d'anar-la a buscar.
 > una data de caducitat amagada. Si el que la família necessita és *com*
 > aconseguir una cosa, la resposta ha de dir el «com», no el «qui».
 
-El preu (uns 150 €) s'hi ha deixat perquè és l'ordre de magnitud i ajuda a
-decidir, però **també canviarà amb la marca nova**: quan es tanqui, cal
-repassar aquesta entrada a `i18n/faq.yml` (`id: equipacio-preu`).
+**El preu tampoc hi és** (24/08/2026, decisió de l'Ana): cap xifra al web, i
+ho explica la persona que porta la inscripció quan es dona la plaça. Amb la
+marca nova el preu canviarà igualment, i així la resposta no caduca.
+
+### Inventari de preus que SÍ segueixen publicats
+
+La norma «cap preu al web» val per al que paga una família per jugar: quota i
+equipació. Però al web hi ha altres xifres, i convé saber-ho per decidir si la
+norma les abasta o no. **No s'han tocat: són decisions anteriors.**
+
+| On | Xifra | Què és |
+|---|---|---|
+| `/campus/`, `/campus-basquet-barcelona/`, `/campus/setmana-santa/` | 195 € / 160 € / 150 € | Preu del campus, per setmana i per jornada |
+| `/3x3/`, `/3x3-barcelona/` | 2.000 € en premis | Premi del torneig, paritari |
+| `/patrocinadors/` | des de 300 € l'any | Nivells de patrocini |
+| `/blog/basquet-femeni-…/` | 140.000-160.000 € | Pressupost anual del club, com a argument de posicionament |
+
+Els tres últims no són el que paga una família per jugar. **El del campus
+sí**, i és el cas que caldria decidir: avui el campus es ven amb el preu
+davant —i el preu és, de fet, un dels seus arguments— mentre que la temporada
+no en diu cap. Si la norma ha de valer també per al campus, es treu en un
+moment; si no, val la pena que quedi escrit per què no.
 
 ### On queda el cercador
 
