@@ -505,6 +505,13 @@
       if (esFosc(fonsDe(sw))) sw.classList.add('lang-switch--fosc');
       else sw.classList.remove('lang-switch--fosc');
     });
+    // La molla injectada pot caure sobre una secció vermella o fosca —passa
+    // quan el primer germà de la capçalera és un bloc de crida com «Portes
+    // Obertes»— i la tinta grisa hi queda il·legible. Mateix criteri.
+    [].slice.call(doc.querySelectorAll('.molla')).forEach(function (m) {
+      if (esFosc(fonsDe(m))) m.classList.add('molla--fosc');
+      else m.classList.remove('molla--fosc');
+    });
   }
 
   // --- 2. Obrir i tancar, amb el teclat inclòs -----------------------------

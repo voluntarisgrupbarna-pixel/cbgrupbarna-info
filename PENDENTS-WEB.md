@@ -320,3 +320,40 @@ Si algun dia es descongela, això és el que s'hi ha de fer.
   alta molt petites. La bateria de navegador les compta com a text petit a
   411 pàgines. No s'ha tocat res: és una decisió de disseny escrita a la guia,
   no un descuit, i canviar-la és canviar la marca.
+
+### Contrast: quatre trencaments reals trobats i arreglats (24/08, segona ronda)
+
+Repassada la bateria completa (`tests/audit-browser.mjs`, 410 pàgines × 5
+amples), la majoria de les 2.300+ combinacions per sota d'AA que en surten
+són o bé dins de `/premidonaesport/` (congelat, vegeu amunt) o bé la mateixa
+etiqueta de 8,5 px ja acceptada com a decisió de disseny. Filtrant-les, hi
+quedaven quatre trencaments de debò, tots arreglats:
+
+- **`--muted` xocava amb el token del club.** Quatre pàgines autònomes
+  (`/jugadors/`, `/briefing/materials.html`, i les seves `/es/` i `/en/`)
+  declaren el seu propi `:root{--muted:...}` per al seu disseny fosc intern.
+  Com que `css/nav.css` llegeix el gris del commutador d'idioma amb
+  `var(--muted, #6B6560)`, aquell valor local se li colava per sobre i hi
+  deixava text blanc gairebé invisible. Renombrat a `--txt-muted` a les sis
+  pàgines: el commutador torna a llegir el seu propi valor.
+- **La molla de pa no sabia que podia caure sobre vermell.** A `/escoleta/`
+  (i qualsevol pàgina on el primer bloc després de la capçalera sigui una
+  secció de crida amb fons de color, com «Portes Obertes») la molla
+  s'injectava amb el gris apagat de sempre, que sobre vermell només arriba a
+  1,17:1. Estesa la mateixa detecció de fons fosc que ja tenia el commutador
+  d'idioma (`js/nav.js`, `marcaFonsFosc`) a `.molla`, amb un joc de colors
+  propi a `css/nav.css` (`.molla--fosc`) en blanc sòlid, perquè el crema
+  translúcid que ja funcionava sobre negre només dona 4,37:1 sobre el vermell
+  del club — per sota del mínim— i el blanc en dona 4,92.
+- **Un enllaç amb el color escrit a mà.** A `/galeria-3x3-glories/` (ca/es/en)
+  un `<a>` amb `style="color:#222"` quedava a 1,27:1 sobre la targeta gairebé
+  negra. Canviat a `#8a8a8a`, que hi dona 6,6:1 i manté el to apagat que
+  demana el disseny d'aquella pàgina de captació.
+
+El que queda d'aquella pàgina de captació (`/galeria-3x3-glories/`) — les
+etiquetes «Westfield Glòries · Grup Barna · Time Chamber», el peu «🔐
+Subscripció gratuïta…», el botó desactivat «Omple tots els camps»— és tot text
+decoratiu en gris molt apagat sobre gairebé negre, per sota d'AA a totes les
+mides. Sembla una decisió deliberada de la pàgina (un to gairebé d'aigua per
+no competir amb el formulari), no un descuit puntual: abans de tocar-ho caldria
+que el club digués si aquell to apagat és volgut o no.

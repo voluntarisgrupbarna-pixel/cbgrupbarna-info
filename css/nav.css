@@ -74,6 +74,11 @@
 .molla a { color: var(--nav-muted); border-bottom: 1px solid transparent; transition: color 0.3s var(--nav-ease), border-color 0.3s var(--nav-ease); }
 .molla a:hover { color: var(--nav-red); border-bottom-color: var(--nav-red); }
 .molla li[aria-current] { color: var(--nav-ink); }
+.molla--fosc li { color: #fff; }
+.molla--fosc li + li::before { color: rgba(255, 255, 255, 0.55); }
+.molla--fosc a { color: #fff; }
+.molla--fosc a:hover { color: #FF3B41; border-bottom-color: #FF3B41; }
+.molla--fosc li[aria-current] { color: #fff; }
 
 /* ==== CAPÇALERA MÍNIMA · només per a les pàgines que no en tenien cap ====
    La mascota i la galeria del 3x3 són públiques i entren per cercador, però
