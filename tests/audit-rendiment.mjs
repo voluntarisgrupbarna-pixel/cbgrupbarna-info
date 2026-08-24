@@ -109,7 +109,11 @@ const TRAMPES = () => {
     }
     if (img.srcset && r.width > 0) {
       const cands = [...img.srcset.matchAll(/(\d+)w/g)].map((m) => +m[1]);
-      const cal = r.width * (window.devicePixelRatio || 1);
+      // Aquesta auditoria sempre corre a un sol DPR (el d'aquest mòbil
+      // emulat), però el mateix srcset l'ha de servir també a mòbils DPR3
+      // reals: el candidat mínim és correcte si cobreix el pitjor cas real,
+      // no nomès el DPR concret d'aquesta execució.
+      const cal = r.width * Math.max(window.devicePixelRatio || 1, 3);
       if (cands.length && Math.min(...cands) > cal * 1.6) {
         out.srcsetMassaGran.push({
           fitxer: (img.currentSrc || img.src).replace(location.origin, ''),
