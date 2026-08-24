@@ -389,6 +389,8 @@ input:focus{outline:none;border-color:#FF3B41!important;box-shadow:0 0 0 3px rgb
   </footer>
 </div>
 
+<script src="/js/canals.js"></script>
+<script src="/js/brevo.js"></script>
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXY1zBr9TH-gwOS3fo6tUqj9Sj7ExHv33un3VLtBHz58QNThlR3DdUnrB-xjtQri9g/exec';
 const FLICKR_PLAYER   = 'https://www.flickr.com/photos/202771466@N06/sets/72177720334156609/player/';
@@ -481,6 +483,19 @@ async function handleFollow() {
   try {
     await fetch(APPS_SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
   } catch(_) {}
+  // I al CRM: aquí la casella de la newsletter és part del tracte, així que
+  // el consentiment és explícit.
+  if (window.BREVO) {
+    window.BREVO.envia('galeria', {
+      email:   payload.email,
+      nom:     payload.nom,
+      telefon: payload.mobil,
+      tema:    payload.club,
+      idioma:  document.documentElement.lang,
+      origen:  payload.source,
+      consent: 'Sí'
+    });
+  }
   document.getElementById('flickr-frame').src = FLICKR_PLAYER;
   showView('gallery');
 }

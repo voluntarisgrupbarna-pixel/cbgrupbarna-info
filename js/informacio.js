@@ -62,6 +62,23 @@
     };
     camps.forEach(function (c) { dades[c.nom] = c.el.value.trim(); });
 
+    // Al CRM hi va el contacte; a la full de càlcul, la conversa sencera.
+    // Són dos destins alhora a posta: la full segueix sent la còpia de
+    // seguretat mentre no tinguem tot l'històric a Brevo.
+    if (window.BREVO) {
+      var via = dades.contacteVia || '';
+      var esMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(via);
+      window.BREVO.envia('informacio', {
+        email:    esMail ? via : '',
+        telefon:  esMail ? '' : via,
+        nom:      dades.nom,
+        tema:     dades.tema,
+        missatge: dades.missatge,
+        idioma:   dades.idioma,
+        origen:   'escriu-nos'
+      });
+    }
+
     setTimeout(acabat, 6000);
     if (cfg.bustiaEndpoint) {
       fetch(cfg.bustiaEndpoint, {

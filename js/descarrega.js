@@ -187,6 +187,21 @@
         doneFn();
       }
 
+      // El mateix contacte, al CRM. La casella de la newsletter viatja com a
+      // atribut CONSENT: qui no l'ha marcada entra a Brevo com a contacte del
+      // club (ha demanat un document), però no a la llista comercial.
+      if (window.BREVO) {
+        window.BREVO.envia('descarrega', {
+          email:    email,
+          nom:      nom,
+          telefon:  mobil,
+          tema:     'Descàrrega · ' + doc,
+          idioma:   document.documentElement.lang,
+          origen:   'descarrega-document',
+          consent:  news ? 'Sí' : 'No'
+        });
+      }
+
       // Si la xarxa triga o falla, la descàrrega no s'ha de quedar bloquejada.
       var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
       var t = setTimeout(function () { if (ctrl) ctrl.abort(); acaba(); }, 8000);

@@ -1,6 +1,8 @@
 /* CB Grup Barna · Alta a la newsletter
-   Envia a Brevo si CANALS.brevoAction està configurat; si no, guarda
-   l'alta a la full de càlcul de sempre perquè no es perdi cap correu. */
+   Va a Brevo (CRM) si el formulari està configurat a /js/canals.js; si no,
+   guarda l'alta a la full de càlcul de sempre perquè no es perdi cap correu.
+   És l'únic formulari del web amb consentiment comercial explícit: la
+   casella és obligatòria i viatja a Brevo com a atribut CONSENT. */
 (function () {
   var form = document.getElementById('nl-form');
   if (!form) return;
@@ -38,14 +40,15 @@
       done.focus();
     };
 
-    if (cfg.brevoAction) {
-      // Brevo espera un enviament de formulari clàssic, no JSON.
-      var camps = cfg.brevoCamps || { email: 'EMAIL', nom: 'NOM' };
-      var fd = new FormData();
-      fd.append(camps.email, email.value.trim());
-      if (nom.value.trim()) fd.append(camps.nom, nom.value.trim());
-      fetch(cfg.brevoAction, { method: 'POST', mode: 'no-cors', body: fd })
-        .then(acabat, acabat);
+    var brevo = window.BREVO && window.BREVO.actiu('newsletter');
+    if (brevo) {
+      window.BREVO.envia('newsletter', {
+        email:   email.value.trim(),
+        nom:     nom.value.trim(),
+        idioma:  document.documentElement.lang,
+        origen:  'newsletter-web',
+        consent: 'Sí'
+      }).then(acabat, acabat);
     } else if (cfg.bustiaEndpoint) {
       fetch(cfg.bustiaEndpoint, {
         method: 'POST', mode: 'no-cors',

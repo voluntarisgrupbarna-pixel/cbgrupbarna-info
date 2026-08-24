@@ -70,6 +70,23 @@
     };
     camps.forEach(function (c) { dades[c.nom] = c.el.value.trim(); });
 
+    // El contacte, al CRM: qui prova un entrenament al setembre és qui
+    // s'apunta al novembre, i ha de quedar-hi seguit.
+    if (window.BREVO) {
+      var via = dades.contacteVia || '';
+      var esMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(via);
+      window.BREVO.envia('portesObertes', {
+        email:    esMail ? via : '',
+        telefon:  esMail ? '' : via,
+        nom:      dades.contacte,
+        contacte: dades.nom,
+        any:      dades.any,
+        missatge: dades.missatge,
+        idioma:   dades.idioma,
+        origen:   'portes-obertes'
+      });
+    }
+
     setTimeout(acabat, 6000);
     if (cfg.bustiaEndpoint) {
       fetch(cfg.bustiaEndpoint, {

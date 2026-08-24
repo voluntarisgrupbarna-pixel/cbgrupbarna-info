@@ -45,6 +45,18 @@
     // El correu només viatja si l'usuari l'ha escrit.
     if (mail.value.trim()) dades.email = mail.value.trim();
 
+    // Al CRM només hi va el contacte de qui ha deixat el correu expressament,
+    // i sense el text del missatge: la bústia és anònima i el que s'hi escriu
+    // es queda a la full, no al CRM. Si no hi ha correu, aquí no s'envia res.
+    if (window.BREVO && dades.email) {
+      window.BREVO.envia('bustia', {
+        email:  dades.email,
+        tema:   dades.tema,
+        idioma: dades.idioma,
+        origen: 'bustia'
+      });
+    }
+
     if (cfg.bustiaEndpoint) {
       fetch(cfg.bustiaEndpoint, {
         method: 'POST', mode: 'no-cors',

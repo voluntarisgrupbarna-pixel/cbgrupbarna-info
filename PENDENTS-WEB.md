@@ -133,8 +133,11 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   dades al mateix Apps Script que la galeria del 3x3 (`action=register`), amb dos camps
   nous: `newsletter` (si/no) i el document demanat dins de `font`. Cal comprovar que
   l'Apps Script els desa en una columna pròpia; si no, queden només dins de `font`.
-- **Butlletí:** encara no hi ha eina d'enviament (Mailchimp, Brevo o similar). De moment
-  només es recull el consentiment; cal decidir amb què s'envia.
+- **Butlletí:** decidit que l'eina és **Brevo**, i el web ja hi envia tots els
+  formularis. El que falta és **dins de Brevo**: crear els atributs, les llistes i
+  un formulari per canal, i enganxar les `action` a `/js/canals.js`. Instruccions
+  pas a pas a [`/js/README-brevo.md`](js/README-brevo.md). Mentre no es faci, res
+  no es trenca: les altes segueixen anant a la full de càlcul de sempre.
 
 ## Pendent de decisió
 

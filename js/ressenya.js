@@ -78,6 +78,17 @@
       missatge: msg.value.trim()
     };
 
+    if (window.BREVO) {
+      window.BREVO.envia('ressenya', {
+        email:     dades.email,
+        nom:       dades.nom,
+        estrelles: dades.estrelles,
+        missatge:  dades.missatge,
+        idioma:    dades.idioma,
+        origen:    'opina'
+      });
+    }
+
     setTimeout(acabat, 6000);
     if (cfg.bustiaEndpoint) {
       fetch(cfg.bustiaEndpoint, {

@@ -488,6 +488,8 @@
 }
 </script>
 <script src="/js/galetes.js"></script>
+<script src="/js/canals.js"></script>
+<script src="/js/brevo.js"></script>
 </head>
 <body>
 
@@ -806,6 +808,14 @@ async function submitSubscription() {
     });
     const data = await res.json();
     if (data.success === 'true' || data.success === true) {
+      if (window.BREVO) {
+        window.BREVO.envia('galeria', {
+          email:   email,
+          idioma:  document.documentElement.lang,
+          origen:  'galeria-fotos',
+          consent: 'Sí'
+        });
+      }
       document.getElementById('sub-success').style.display = 'block';
       btn.style.display = 'none';
       setTimeout(() => grantAccess(), 1500);

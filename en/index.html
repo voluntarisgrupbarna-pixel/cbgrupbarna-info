@@ -868,6 +868,8 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
 </style>
 <script src="/js/galetes.js"></script>
+<script src="/js/canals.js"></script>
+<script src="/js/brevo.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
@@ -1753,6 +1755,22 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
             if (window.gtag) window.gtag('event', 'form_email_error', { codi: 'xarxa' });
           });
         } catch (_) {}
+      }
+
+      // 1 bis · Brevo (CRM). El correu del punt 1 avisa; el CRM recorda.
+      //  Mentre /js/canals.js no tingui l'action del formulari de la portada,
+      //  aquesta crida no fa res i no trenca res.
+      if (window.BREVO) {
+        window.BREVO.envia('portada', {
+          email:    correu,
+          nom:      nom,
+          telefon:  mobil,
+          interes:  interes,
+          missatge: msg,
+          idioma:   document.documentElement.lang,
+          origen:   'portada',
+          consent:  'S\u00ed'
+        });
       }
 
       // 2 · WhatsApp to the club with all the details
