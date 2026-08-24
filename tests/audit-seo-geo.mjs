@@ -18,6 +18,23 @@ const SKIP = [/^\.git\//, /^node_modules\//, /^tests\//, /^\.github\//];
 const NOINDEX_BASE = ['/admin/', '/fotos/admin.html', '/jugadors/admin.html', '/partits/admin.html', '/briefing/'];
 const NOINDEX_OK = NOINDEX_BASE.flatMap((p) => [p, `/es${p}`, `/en${p}`]);
 
+// El recompte de paraules de la pàgina pintada, si algú ha passat abans
+// `node tests/audit-browser.mjs`. Sense això no es pot jutjar si una pàgina
+// que es munta amb JavaScript té text o no en té.
+const MOTS_RENDERITZATS = (() => {
+  const m = new Map();
+  try {
+    const dades = JSON.parse(fs.readFileSync(path.join(OUT, 'browser.json'), 'utf8'));
+    for (const r of dades.results || []) {
+      if (typeof r.stats?.words !== 'number') continue;
+      const mots = r.stats.words;
+      const avui = m.get(r.page);
+      if (avui === undefined || mots > avui) m.set(r.page, mots);
+    }
+  } catch { /* sense mesura del navegador: es fa servir la de l'HTML */ }
+  return m;
+})();
+
 // ---------- utilitats de lectura d'HTML ----------
 // Prou per a metadades: el marcatge d'aquest lloc és regular i no cal un DOM.
 const attr = (tag, name) => {
@@ -302,7 +319,19 @@ function auditPage(rel) {
   // --- text útil ---
   const body = textOf((html.match(/<body[\s\S]*<\/body>/i) || [html])[0]);
   r.info.words = body.split(/\s+/).filter((w) => w.length > 1).length;
-  if (!isAdmin && r.info.words < 120) add('avís', 'text-prim', `només ${r.info.words} paraules de text visible`);
+  // Aquesta auditoria llegeix el fitxer, no la pàgina pintada. Hi ha pàgines
+  // que munten el gros del text amb JavaScript —la galeria, el mapa de
+  // partners, les fitxes de jugadors— i comptar-ne només l'HTML les fa
+  // semblar buides quan no ho són: mesurat amb el navegador, /partners-mapa/
+  // passa de 118 paraules a 585 i /fotos/ de 100 a 302. Quan hi ha una
+  // mesura del navegador a tests/out/browser.json, mana aquella.
+  const renderitzades = MOTS_RENDERITZATS.get(url);
+  const mots = renderitzades !== undefined ? renderitzades : r.info.words;
+  r.info.wordsRendered = renderitzades;
+  if (!isAdmin && mots < 120) {
+    add('avís', 'text-prim', `només ${mots} paraules de text visible`
+      + (renderitzades !== undefined ? ' (amb el JavaScript executat)' : ''));
+  }
 
   r.info.hreflang = ls.filter((l) => l.rel === 'alternate' && l.hreflang).map((l) => ({ lang: l.hreflang, href: l.href }));
   return r;
@@ -654,7 +683,22 @@ function auditDupes(pageResults) {
       if (!m.has(v)) m.set(v, []);
       m.get(v).push(p.url);
     }
-    return [...m.entries()].filter(([, urls]) => urls.length > 1);
+    // Dues traduccions d'una mateixa pàgina poden compartir títol amb tota
+    // la raó: «Organigrama · Junta directiva del CB Grup Barna» s'escriu
+    // igual en català i en castellà. Amb els hreflang posats, Google sap que
+    // són la mateixa pàgina en dues llengües i no ho compta com a duplicat;
+    // nosaltres tampoc. El que sí que continua sent un duplicat és el mateix
+    // títol a dues pàgines diferents del mateix idioma.
+    const traduccions = new Map();
+    for (const p of pageResults) {
+      traduccions.set(p.url, new Set((p.info.hreflang || [])
+        .map((h) => (h.href || '').replace(SITE, '').split('#')[0])));
+    }
+    const sonLaMateixa = (urls) => urls.every((u) => urls.every(
+      (v) => u === v || (traduccions.get(u) || new Set()).has(v)));
+    return [...m.entries()]
+      .filter(([, urls]) => urls.length > 1)
+      .filter(([, urls]) => !sonLaMateixa(urls));
   };
   for (const [key, label] of [['title', 'títol'], ['description', 'descripció']]) {
     for (const [value, urls] of group(key)) {

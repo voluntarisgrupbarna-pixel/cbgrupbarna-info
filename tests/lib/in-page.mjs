@@ -358,6 +358,10 @@ export function collect(opts) {
     scripts: document.scripts.length,
     inlineStyleBytes: [...document.querySelectorAll('style')].reduce((n, s) => n + s.textContent.length, 0),
     textBytes: (document.body.innerText || '').length,
+    // Les paraules que es veuen de debò. Hi ha pàgines que munten el gros
+    // del text amb JavaScript, i comptar-ne només l'HTML les fa semblar
+    // buides: l'auditoria d'SEO fa servir aquest número quan hi és.
+    words: ((document.body.innerText || '').trim().match(/\S+/g) || []).length,
     scrollHeight: document.documentElement.scrollHeight,
   };
 
