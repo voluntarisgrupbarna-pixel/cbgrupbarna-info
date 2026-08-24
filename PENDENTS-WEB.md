@@ -205,6 +205,26 @@ es podien resoldre des del codi:
   torna a pujar l'original, o es treu el botó de descàrrega en aquests dos
   àlbums.
 
+## Pendent · grups de fotos privats a `galeria/` (24/08/2026)
+
+`/fotos/` (la galeria estàtica publicada) **ja té** grups privats: un
+esdeveniment amb `"visibility": "private"` a `fotos/events.js` no surt al
+llistat normal, i només es veu entrant amb `/fotos/?marqueting=<clau>` (la
+clau és `marketing_pin` de `fotos/config.js`, gestionable des de
+`/fotos/admin.html`).
+
+`galeria/` — l'app a part en Next.js + Supabase, amb login de socis i rols
+(viewer/contributor/editor/admin), desplegada al seu propi domini de Vercel
+i **no enllaçada des de cap pàgina de cbgrupbarna.info** — no ho té:
+`galeria/supabase/schema.sql` no defineix cap camp de visibilitat a la
+taula `events`, així que qualsevol persona amb compte (fins i tot rol
+`viewer`) veu tots els esdeveniments. Cal decidir:
+- si aquesta app arriba a fer-se servir de debò (ara mateix sembla parada,
+  sense enllaç des del lloc publicat), i
+- si es vol, afegir un camp `visibility` (o `is_private` + taula
+  d'accessos per esdeveniment) a `events` i filtrar-lo a les consultes,
+  seguint el mateix criteri que ja fa `/fotos/`.
+
 ## Sense acció
 
 - **Esdeveniments «passats»** (3x3 Glòries, Mes de l'Orgull, Campus Time Chamber,
