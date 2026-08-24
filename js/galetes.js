@@ -105,7 +105,15 @@
     '.cbgb-gal-b button.si:hover{background:#fff;border-color:#fff;color:#10100E}',
     '@media(max-width:620px){.cbgb-gal{padding:14px 16px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}',
     '.cbgb-gal-in{gap:12px}.cbgb-gal-t p{font-size:12.5px}',
-    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;padding:12px 10px;min-height:42px}}',
+    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;min-width:0;padding:12px 10px;min-height:42px}}',
+    // A 320 px la barra feia 342 px d'ample i el boto d'acceptar quedava
+    // partit fora de la pantalla: els botons son flex:1 1 0 pero el seu
+    // contingut (majuscules amb .24em d'interlletratge) no encongeix, i sense
+    // min-width:0 un fill flexible no baixa de l'amplada del seu text. Aquest
+    // avis es la primera cosa que es toca en entrar; no pot sortir tallat.
+    '@media(max-width:380px){.cbgb-gal{padding:12px 12px;padding-bottom:calc(12px + env(safe-area-inset-bottom))}',
+    '.cbgb-gal-b{gap:8px}',
+    '.cbgb-gal-b button{font-size:9px;letter-spacing:.12em;padding:12px 6px;hyphens:auto}}',
     '@media(prefers-reduced-motion:reduce){.cbgb-gal{animation:none}}'
   ].join('');
 

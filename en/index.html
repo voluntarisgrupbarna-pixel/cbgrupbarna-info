@@ -74,8 +74,7 @@
 </script>
 
 <!-- JSON-LD: SportsClub + WebSite + Events -->
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -107,7 +106,7 @@
         "@id": "https://cbgrupbarna.info/briefing/#briefing",
         "name": "CB Grup Barna club briefing for collaborators",
         "url": "https://cbgrupbarna.info/briefing/",
-        "inLanguage": "ca",
+        "inLanguage": "en",
         "description": "Official reference document for press, sponsors and institutions: history since 1965 in El Clot, the two senior teams at the FCBQ Supercup, in-house events, child protection and communication guidelines. With a downloadable PDF version.",
         "associatedMedia": {
           "@type": "DigitalDocument",
@@ -217,9 +216,9 @@
       "name": "CB Grup Barna · Youth Basketball Club · Barcelona",
       "description": "CB Grup Barna's digital hub. Youth basketball club in Barcelona since 1965. Summer camp, 3x3 Westfield, Open Days, Escoleta and streaming.",
       "inLanguage": [
-        "en-US",
         "ca-ES",
-        "es-ES"
+        "es-ES",
+        "en-US"
       ],
       "publisher": {
         "@id": "https://cbgrupbarna.info/#club"
@@ -236,11 +235,7 @@
       "url": "https://cbgrupbarna.info/en/",
       "name": "CB Grup Barna · Barcelona's Biggest Basketball Club",
       "description": "Official homepage of CB Grup Barna: basketball Escoleta for ages 4 to 8, match calendar for all teams, photo gallery, live streaming and club contact in El Clot, Sant Martí District, Barcelona.",
-      "inLanguage": [
-        "en-US",
-        "ca-ES",
-        "es-ES"
-      ],
+      "inLanguage": "en-US",
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/en/#website"
       },
@@ -265,11 +260,7 @@
     {
       "@type": "FAQPage",
       "@id": "https://cbgrupbarna.info/en/#faq",
-      "inLanguage": [
-        "en-US",
-        "ca-ES",
-        "es-ES"
-      ],
+      "inLanguage": "en-US",
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/en/#website"
       },
@@ -446,8 +437,7 @@
       ]
     }
   ]
-}
-</script>
+}</script>
 
 <link rel="stylesheet" href="/css/fonts.css">
 
@@ -688,6 +678,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .field textarea { min-height: 80px; resize: vertical; }
 .field select { background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: right 8px center, right 3px center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 22px; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 0; border-bottom-color: var(--red); }
+/* Amb el teclat, un filet d'un píxel que només canvia de color no diu prou
+   on ets: aquest formulari és la porta d'entrada del club. Amb teclat es
+   recupera el contorn vermell que fa servir la resta del web; amb ratolí
+   segueix sortint només el filet. */
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 1px solid var(--red); outline-offset: 3px; }
 .field input:invalid:not(:placeholder-shown) { border-bottom-color: var(--red); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips input { position: absolute; width: 1px; height: 1px; min-height: 0; margin: -1px; padding: 0;
@@ -771,6 +766,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 @media (max-width: 1024px) {
   .cta { display: inline-flex; align-items: center; min-height: 44px; padding: 12px 0 10px; }
   .stars button { font-size: 32px; min-width: 44px; min-height: 44px; }
+}
+/* Les cinc estrelles amb diana de 44 px i 12 px de separació sumen 268 px:
+   amb el marge de la targeta i el del contenidor no hi cabien en una
+   pantalla de 320 px, i estiraven la pàgina sencera (el navegador
+   eixamplava la finestra de disseny i l'avís de galetes en sortia tallat).
+   La diana es queda a 44 px, que és el mínim; el que s'estreny és l'aire. */
+@media (max-width: 380px) {
+  .stars { gap: 6px; }
+  .opi-card { padding: 22px 14px; }
   .btn { padding: 17px clamp(20px, 5vw, 32px); }
   .head-burger { width: 44px; height: 44px; align-items: flex-start; justify-content: center; padding: 12px 9px; }
   .fab-wa { width: 56px; height: 56px; }
@@ -890,6 +894,13 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 .lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
 .lang-switch.light a.active { color: #fff; }
 @media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+/* El nom del club al costat de l'escut no cabia amb el commutador de vista i
+   el selector d'idioma: la capçalera estirava la pàgina i l'avís de galetes
+   en sortia tallat. L'escut ja és l'enllaç a l'inici. */
+@media (max-width: 480px) { .head-brand span { display: none; } }
+/* I per sota de 380 px el commutador es queda amb la icona: l'etiqueta
+   («Franges» / «Extensa») ja la diu l'aria-label. */
+@media (max-width: 380px) { .view-toggle #viewToggleLbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } .view-toggle { padding: 8px 9px; } }
 
 /* ==== VISTA EXTENSA · les peces editorials ====
    Aquests components nomes existien a la portada catalana: la castellana i

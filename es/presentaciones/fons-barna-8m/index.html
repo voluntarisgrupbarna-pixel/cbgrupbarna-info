@@ -127,6 +127,17 @@
   .theme:hover{border-color:var(--red)}
   .theme .ic{width:11px;height:11px;border-radius:50%;border:1.5px solid currentColor;display:block;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);flex-shrink:0}
   @media(max-width:620px){.theme{padding:7px 9px;font-size:8.5px}}
+  /* A 320 px la capçalera —nom, menú, commutador de mode i selector
+     d'idioma— no hi cabia: el navegador eixamplava la finestra de disseny
+     fins a 411 px i el botó de mode quedava fora de la pantalla, sense
+     manera d'arribar-hi. El nom del club es retira (l'escut ja hi és) i el
+     botó es queda amb la icona; el nom del mode el diu l'aria-live. */
+  @media(max-width:480px){
+    .head-in{gap:12px}
+    .head-brand span{display:none}
+    .head-nav{min-width:0}
+    .theme #theme-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  }
 
   .idx{position:sticky;top:60px;z-index:99;background:var(--panel);border-bottom:1px solid var(--line)}
   .idx-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:18px}

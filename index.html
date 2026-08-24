@@ -72,8 +72,7 @@
 </script>
 
 <!-- JSON-LD: SportsClub + WebSite + Events -->
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -241,7 +240,6 @@
           "geoRadius": "4000"
         }
       ],
-      
       "numberOfEmployees": {
         "@type": "QuantitativeValue",
         "value": 40
@@ -412,7 +410,8 @@
       "description": "Hub digital del CB Grup Barna, acadèmia i club de bàsquet i baloncesto base de Barcelona des del 1965. Campus estiu, 3x3 Westfield, Portes Obertes, Escoleta i streaming.",
       "inLanguage": [
         "ca-ES",
-        "es-ES"
+        "es-ES",
+        "en-US"
       ],
       "publisher": {
         "@id": "https://cbgrupbarna.info/#club"
@@ -429,10 +428,7 @@
       "url": "https://cbgrupbarna.info/",
       "name": "CB Grup Barna · El Club de Bàsquet Més Gran de Barcelona",
       "description": "Portada oficial del CB Grup Barna, el club de bàsquet més gran de Barcelona: formatiu i competitiu des de 1965. Escoleta de bàsquet de 4 a 8 anys, calendari de partits de tots els equips, galeria de fotos, streaming en directe i contacte del club al Clot, Districte de Sant Martí, Barcelona.",
-      "inLanguage": [
-        "ca-ES",
-        "es-ES"
-      ],
+      "inLanguage": "ca-ES",
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
       },
@@ -457,10 +453,7 @@
     {
       "@type": "FAQPage",
       "@id": "https://cbgrupbarna.info/#faq",
-      "inLanguage": [
-        "ca-ES",
-        "es-ES"
-      ],
+      "inLanguage": "ca-ES",
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
       },
@@ -668,8 +661,7 @@
       ]
     }
   ]
-}
-</script>
+}</script>
 <link rel="stylesheet" href="/css/fonts.css">
 
 <style>
@@ -1117,6 +1109,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .list a:hover { padding-left: 16px; color: var(--red); }
 .list-t { font-family: var(--body); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; }
 .list-s { margin-left: auto; text-align: right; font-family: var(--body); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; }
+/* A 320 px la fila d'una sola línia —etiqueta a l'esquerra, detall a la
+   dreta, totes dues en majúscules amb interlletratge— no hi cabia i
+   estirava la pàgina. Per sota de 420 px el detall baixa a la línia de
+   sota, que és el que ja fa la resta del lloc. */
+@media (max-width: 420px) {
+  .list a { flex-wrap: wrap; gap: 4px 12px; }
+  .list-t { flex: 1 1 100%; }
+  .list-s { margin-left: 0; text-align: left; }
+}
 .list a:hover .list-s { color: var(--red); }
 
 /* ==== PARTNERS ==== */
@@ -1148,6 +1149,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .field textarea { min-height: 80px; resize: vertical; }
 .field select { background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: right 8px center, right 3px center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 22px; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 0; border-bottom-color: var(--red); }
+/* Amb el teclat, un filet d'un píxel que només canvia de color no diu prou
+   on ets: aquest formulari és la porta d'entrada del club. Amb teclat es
+   recupera el contorn vermell que fa servir la resta del web; amb ratolí
+   segueix sortint només el filet. */
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 1px solid var(--red); outline-offset: 3px; }
 .field input:invalid:not(:placeholder-shown) { border-bottom-color: var(--red); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips input { position: absolute; width: 1px; height: 1px; min-height: 0; margin: -1px; padding: 0;
@@ -1233,6 +1239,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 @media (max-width: 1024px) {
   .cta { display: inline-flex; align-items: center; min-height: 44px; padding: 12px 0 10px; }
   .stars button { font-size: 32px; min-width: 44px; min-height: 44px; }
+}
+/* Les cinc estrelles amb diana de 44 px i 12 px de separació sumen 268 px:
+   amb el marge de la targeta i el del contenidor no hi cabien en una
+   pantalla de 320 px, i estiraven la pàgina sencera (el navegador
+   eixamplava la finestra de disseny i l'avís de galetes en sortia tallat).
+   La diana es queda a 44 px, que és el mínim; el que s'estreny és l'aire. */
+@media (max-width: 380px) {
+  .stars { gap: 6px; }
+  .opi-card { padding: 22px 14px; }
   .btn { padding: 17px clamp(20px, 5vw, 32px); }
   .head-burger { width: 44px; height: 44px; align-items: flex-start; justify-content: center; padding: 12px 9px; }
   .fab-wa { width: 56px; height: 56px; }
@@ -1287,6 +1302,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
 .lang-switch.light a.active { color: #fff; }
 @media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+/* Per sota de 380 px el commutador es queda amb la icona: l'etiqueta
+   («Franges» / «Extensa») ja la diu l'aria-label. */
+@media (max-width: 380px) { .view-toggle #viewToggleLbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } .view-toggle { padding: 8px 9px; } }
 </style>
 </head>
 <body>
