@@ -31,6 +31,7 @@
 {"@type":"WebPage","@id":"https://cbgrupbarna.info/newsletter/#page","url":"https://cbgrupbarna.info/newsletter/","name":"Newsletter","description":"Apunta't al correu del CB Grup Barna: dies de partit, escoleta, campus i el que passa al Clot. Un enviament al mes i baixa amb un clic.","inLanguage":"ca","isPartOf":{"@id":"https://cbgrupbarna.info/#website"},"about":{"@id":"https://cbgrupbarna.info/#club"},"publisher":{"@id":"https://cbgrupbarna.info/#club"}},
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inici","item":"https://cbgrupbarna.info/"},{"@type":"ListItem","position":2,"name":"Newsletter","item":"https://cbgrupbarna.info/newsletter/"}]}]}
 </script>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -122,6 +123,32 @@ la tutela.</p>
 
   </article>
 </div>
+
+<!-- ==== PREGUNTES FREQÜENTS ====
+     El que hi ha entre els marcadors FAQ i FAQ-LD el manté
+     .github/scripts/generate-faq.py des d'i18n/faq.yml. No s'edita aquí. -->
+<div class="wrap section">
+  <div class="narrow">
+    <h2 id="faq">Preguntes freqüents</h2>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>Com puc estar al dia del que passa al club?</summary><p>Amb el correu del club: una vegada al mes, el resum del que de veritat val la pena saber —calendari, com va la temporada i el que passa des de dins—, escrit per a qui té criatures jugant i per a qui ve a veure els partits. També hi ha les novetats per WhatsApp i el dia a dia a Instagram, a @cbgrupbarna.</p></details><!-- FAQ:END --></div>
+  </div>
+</div>
+<!-- FAQ-LD:START --><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://cbgrupbarna.info/newsletter/#faq",
+  "inLanguage": "ca",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Com puc estar al dia del que passa al club?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Amb el correu del club: una vegada al mes, el resum del que de veritat val la pena saber —calendari, com va la temporada i el que passa des de dins—, escrit per a qui té criatures jugant i per a qui ve a veure els partits. També hi ha les novetats per WhatsApp i el dia a dia a Instagram, a @cbgrupbarna."
+      }
+    }
+  ]
+}</script><!-- FAQ-LD:END -->
 </main>
 <footer class="foot">
   <div class="wrap">
@@ -181,5 +208,6 @@ la tutela.</p>
 <script src="/js/galetes.js"></script>
 <script src="/js/canals.js"></script>
 <script src="/js/newsletter.js"></script>
+<script src="/js/cerca.js" defer></script>
 </body>
 </html>

@@ -63,11 +63,17 @@ jobs:
         run: python .github/scripts/generate-ics.py
       - name: Regenerar pàgines pròpies per equip
         run: python .github/scripts/generate-team-pages.py
+
+      # Les fitxes d'equip que s'acaben de generar també s'han de poder
+      # cercar. Aquest commit porta [skip ci], o sigui que el workflow del
+      # sitemap no s'engegarà: l'índex s'ha de refer aquí mateix.
+      - name: Refer l'índex del cercador
+        run: python .github/scripts/generate-search-index.py
       - name: Commit si hi ha canvis
         run: |
           git config user.name "cbgb-robot"
           git config user.email "cbgrupbarna@gmail.com"
-          git add partits/data.json partits/canvis.json partits/calendaris/ partits/index.html partits/equips/ es/partits/index.html en/partits/index.html
+          git add partits/data.json partits/canvis.json partits/calendaris/ partits/index.html partits/equips/ es/partits/index.html en/partits/index.html cerca-index.json
           if git diff --cached --quiet; then
             echo "Sense canvis"
           else

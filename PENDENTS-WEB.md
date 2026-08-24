@@ -241,6 +241,507 @@ pena arriscar-hi, i llavors amb redireccions per a totes les fitxes alhora.
 
 ---
 
+## Preguntes freqüents · fase 1 del cercador que respon (23/08/2026)
+
+Des que el cercador ensenya la resposta i no només l'enllaç, **cada pregunta
+freqüent que s'escriu val el doble**: surt a Google com a `FAQPage` i el
+cercador del web la dona a l'instant, en el seu idioma. Per tant, la manera de
+fer el cercador més llest ja no és tocar codi.
+
+### D'on surt aquesta llista
+
+De comptar què hi ha. El web té **460 preguntes amb resposta** (219 en català),
+i estan molt ben repartides per identitat, escoleta, campus, femení,
+patrocinis i posicionament d'SEO. **El forat és un altre**: quan una família
+ja s'ha convençut i vol entrar, no hi ha res escrit. Nou pàgines de pes no
+tenen ni una sola pregunta:
+
+| Pàgina | Pes | Preguntes |
+|---|---|---|
+| `/partits/equips/` | 90 | 0 |
+| `/portes-obertes/` | 88 | 0 |
+| `/club/` | 84 | 0 |
+| `/fotos/` | 76 | 0 |
+| `/blog/`, `/historia/`, `/instal-lacions/`, `/organigrama/` | 72 | 0 |
+| `/documents/` | 70 | 0 |
+
+**La asimetria més cridanera és el preu.** El web diu que una setmana de campus
+val 195 €, la mitja jornada 160 € i la de Setmana Santa 150 €; diu que un
+patrocini d'equip són 500 €. Però a la pregunta «quant costa apuntar-se al
+club» —la primera que fa qualsevol família— l'única resposta que hi ha és
+*«cal contactar directament amb el club»*. Es publica el preu d'una setmana i
+no el de la temporada.
+
+### Bloc A · Diners i compromís — **cal decisió de l'Ana**
+
+Sis preguntes que no es poden escriure sense que algú digui el número. Són les
+més buscades i les úniques que avui fan abandonar la pàgina.
+
+1. Quant costa la temporada, per categoria?
+2. Què inclou la quota? (fitxa federativa, assegurança, equipació, pistes)
+3. Com es paga: un sol cop, mensual o trimestral? Es domicilia?
+4. Hi ha descompte per a germans?
+5. Hi ha ajuts o beques si una família no hi arriba?
+6. Què passa si ens hem de donar de baixa a mig any?
+
+> La 5 no és informació, és marca: un club que diu en veu alta que cap infant
+> es queda fora per diners diu una cosa que els seus veïns no diuen.
+
+**On van:** `/faq/` i, la 1 i la 2, també a `/escoleta/` i `/basquet-formatiu/`.
+
+### Bloc B · El primer dia → `/portes-obertes/`
+
+La pàgina amb més pes del web sense cap pregunta, i just la que llegeix qui
+està a punt de venir.
+
+7. Què he de portar el primer dia?
+8. Cal avisar abans o em puc presentar directament?
+9. Quants dies pot venir a provar?
+10. El meu fill no ha jugat mai. Hi encaixarà?
+11. Em puc quedar a mirar l'entrenament?
+
+### Bloc C · Quin equip li toca → `/basquet-formatiu/` i `/partits/equips/`
+
+Hi ha «Què vol dir Premini, Mini, Infantil, Cadet i Júnior?», que explica el
+vocabulari. Falta la resposta directa: *el meu fill del 2015, on va?*
+
+12. Quin equip li toca segons l'any de naixement?
+13. Qui decideix a quin equip va? Hi ha proves de nivell?
+14. Què vol dir equip A i equip B?
+15. Es pot canviar d'equip durant la temporada?
+16. Quants entrenaments a la setmana té cada categoria?
+
+### Bloc D · On és tot això → `/instal-lacions/`
+
+17. On és exactament la Nau del Clot i com s'hi arriba?
+18. A quines altres pistes entrena el club?
+19. Quin metro o bus hi va? Es pot aparcar?
+20. Les famílies poden entrar a veure els entrenaments?
+
+### Bloc E · La vida d'un equip — el que ningú ha escrit
+
+Això no és a cap pàgina i és el que més es pregunta pel WhatsApp del club.
+Anirien a `/faq/` i a `/partits/calendaris/`.
+
+21. Els partits són sempre en cap de setmana? Quants desplaçaments hi ha?
+22. Qui porta els nens als partits de fora?
+23. Com ens avisen si canvia una hora o una pista?
+24. Què passa si un dia no pot anar a entrenar?
+25. És compatible amb els estudis o amb una altra activitat?
+26. Cal revisió mèdica? Els jugadors estan assegurats?
+27. Què passa si es lesiona en un entrenament?
+
+### Bloc F · Equipació — **cal decisió de l'Ana** (preu)
+
+28. Quina equipació cal comprar i quant costa?
+29. On es compra i quan arriba?
+
+### Bloc G · Confiança → `/proteccio-menor/` i `/fotos/`
+
+El contingut de protecció del menor existeix, però escrit com a política de
+club. Falta escrit com el pregunta una mare.
+
+30. Els entrenadors i entrenadores tenen el certificat de delictes sexuals?
+31. Puc demanar que el meu fill no surti a les fotos del club?
+32. Amb qui parlo si tinc un problema amb un entrenador?
+
+### Bloc H · Qui és qui → `/club/` i `/organigrama/`
+
+33. Amb qui parlo de la meva categoria? (coordinador/a)
+34. Com puc ser voluntari o entrenador al club?
+
+### I tot això, per tres · el que costa de debò
+
+**34 preguntes no són 34 textos: en són 102**, i cada un ha d'anar a dos llocs
+(el `<details>` visible i el `FAQPage` del JSON-LD). Són ~204 insercions
+repartides per una trentena de fitxers, i el repositori no té cap framework
+d'i18n: cada traducció és un HTML independent que s'actualitza a mà.
+
+Fet a mà, això no es manté. **Ja no s'està mantenint**: comptades sobre
+l'índex, **28 pàgines tenen avui les tres versions desquadrades**.
+
+| Pàgina | CA | ES | EN |
+|---|---|---|---|
+| Portada | 15 | 11 | 11 |
+| `/escoleta/` | 8 | 6 | 6 |
+| `/grup-barna-dades-oficials/` | 8 | 0 | 0 |
+| `/patrocinadors/` | 8 | 5 | 5 |
+| `/femeni/` | 5 | 3 | 3 |
+| `/posicionament/`, `/empreses/`, `/model-formatiu/`, `/magics/`, 12 articles del blog | 1–6 | 0 | 0 |
+
+I `escoleta/index.html` porta escrita, en un comentari, la regla que avui es
+compleix a mà: *«FAQ visible · ha de coincidir sempre amb el FAQPage del
+JSON-LD»*. Afegir-hi 102 textos més per la mateixa via empitjora el problema.
+
+**La proposta és no escriure-ho tres vegades a tres llocs.** Una sola font
+—`i18n/faq.yml`, una pregunta per entrada amb els seus tres idiomes i la
+pàgina on va— i un generador que escrigui tots dos blocs (el `<details>` i el
+JSON-LD) entre marcadors, com ja fa `generate-seo-snapshot.py` a `/partits/`.
+D'una tacada: s'acaba la desincronització, es poden quadrar les 28 pàgines
+d'ara, i el cercador se n'assabenta tot sol perquè llegeix el JSON-LD.
+
+### Un blocatge concret
+
+**`/portes-obertes/` no té versió en castellà ni en anglès.** És la pàgina del
+bloc B —cinc preguntes—, té pes 88 i és la porta d'entrada de setembre. Cal
+crear `/es/portes-obertes/` i `/en/open-days/` (i donar-les d'alta a
+`i18n/routes.yml`) abans o alhora que les preguntes.
+
+La resta de pàgines de la llista sí que tenen les tres versions, amb els noms
+de `routes.yml`: `/es/instalaciones/` i `/en/facilities/`,
+`/es/baloncesto-formativo/` i `/en/development-basketball/`,
+`/es/proteccion-menor/` i `/en/child-protection/`, `/es/organigrama/` i
+`/en/organisation/`.
+
+### La regla, perquè serveixi de res
+
+Cada pregunta ha d'anar **a dos llocs alhora**: al `<details>` visible dins
+d'una secció `.faq` **i** al JSON-LD `FAQPage` de la mateixa pàgina. Si només
+va al `<details>`, ni Google ni el cercador del web la veuen. Els generadors
+ja ho fan bé; a les pàgines fetes a mà, cal recordar-ho.
+
+Després, `/es/` i `/en/`: el cercador ensenya la catalana a qui llegeix en
+castellà si no n'hi ha versió, però és un pedaç, no la solució.
+
+### Com sabrem si ha funcionat
+
+Les 34 d'aquesta llista portarien el web a prop de 500 preguntes en català. La
+prova real no és el número: és que `node tests/cerca/prova-motor.mjs` es pugui
+ampliar amb un cas per bloc —«quant costa la temporada», «què porto el primer
+dia», «el meu fill del 2015 a quin equip va»— i que totes tornin una resposta.
+Avui, cap de les tres en té.
+
+
+---
+
+## Preguntes freqüents · on som (23/08/2026, final del dia)
+
+La font única existeix (`i18n/faq.yml` + `.github/scripts/generate-faq.py`) i
+ja hi ha **16 preguntes publicades en els tres idiomes**. Cap inventada: totes
+surten del que el web ja deia, escrit al cos del text o en una altra pàgina, i
+que el cercador no podia trobar perquè no constava com a pregunta.
+
+| Pàgina | Preguntes | D'on surt la resposta |
+|---|---|---|
+| `/portes-obertes/` | 5 | El cos de la mateixa pàgina |
+| `/instal-lacions/` | 3 | El cos de la mateixa pàgina |
+| `/basquet-formatiu/` | 7 | 5 migrades de la pàgina + 2 noves del seu propi quadre de categories |
+| `/fotos/` | 1 | `/politica-de-privacitat/` |
+
+`/basquet-formatiu/` anava **5 en català, 5 en castellà i 4 en anglès**.
+Passada per la font única, va 7/7/7. És la primera pàgina amb el descuadre
+resolt; en queden 27.
+
+**Les traduccions ja no s'escriuen a mà**: `scripts/faq-tradueix.py` reutilitza
+el traductor del web (`scripts/i18n-tradueix.py`) amb el mateix glossari i el
+mateix to. Sense `ANTHROPIC_API_KEY` no falla: diu què falta. I
+`scripts/i18n-lint.py` ara també les vigila (`faq-sense-traduccio`,
+`faq-sense-resposta`), o sigui que una pregunta sense traduir surt a la mateixa
+llista que una pàgina sense traduir.
+
+### El que segueix bloquejat · 14 preguntes
+
+Escrites, amb `pendent:`, i **no publicades enlloc, ni en català**. Val més cap
+resposta que mitja. `python3 .github/scripts/generate-faq.py --pendents`.
+
+**Vuit números de l'Ana** (7 de diners, 1 d'equipació): quant costa la
+temporada per categoria, què inclou la quota, com es paga, descompte de
+germans, si hi ha ajuts, què passa amb una baixa a mig any, i quina equipació
+cal i quant val. Són les que més es busquen.
+
+**Sis dades del club**: què vol dir equip A i equip B i qui ho decideix; quants
+desplaçaments hi ha i qui hi porta els nens; per quin canal s'avisa una família
+d'un canvi d'hora o de pista; què fer si un dia no pot anar a entrenar; si cal
+revisió mèdica; qui és la persona de contacte de cada categoria; i com s'apunta
+qui vol ser entrenador o voluntari.
+
+### Dos temes oberts que no són d'aquesta llista
+
+- **`/portes-obertes/` segueix sense `/es/` ni `/en/`.** Les seves cinc
+  preguntes ja estan traduïdes al YAML i esperen la pàgina on viure. Avui, qui
+  busca en anglès «what do we bring the first day» no troba res.
+- **`scripts/i18n-lint.py` dona 91 errors, tots anteriors a aquesta feina** (hi
+  eren igual abans de tocar res: comprovat comparant amb la branca neta). N'hi
+  ha un que val la pena mirar perquè és una contradicció amb una decisió ja
+  presa: el lint exigeix dir «Dies de partit per equip» a `/partits/calendaris/`,
+  però `web-cbgb` §6 diu que l'etiqueta decidida per la direcció l'agost del
+  2026 és **«Calendari»**. Sembla que `i18n/etiquetes.yml` va quedar amb el
+  vocabulari antic.
+
+
+---
+
+## Arreglat el 23/08/2026 (tarda)
+
+### Els 91 errors del lint eren un sol error, i el tenia la llista
+
+`i18n/etiquetes.yml` i `i18n/diccionari.yml` s'havien quedat amb el vocabulari
+anterior a la decisió de la direcció del club de l'agost del 2026, que va
+canviar l'etiqueta a **«Calendari»** (i «Calendari per equip»). El lint
+demanava el nom antic a 91 pàgines que ja feien servir el nou: **la web tenia
+raó i la llista, no.**
+
+Corregits els dos fitxers i passat `scripts/i18n-aplica-etiquetes.py`. De
+passada ha sortit una cosa que el lint no podia veure: **el castellà i l'anglès
+s'havien quedat amb el nom antic** («Días de partido», «Match days») mentre el
+català ja deia «Calendari» a 240 enllaços. Ara les tres versions diuen el
+mateix: **Calendari · Calendario · Calendar**, i **Calendari per equip ·
+Calendario por equipo · Calendar by team**. Són 203 enllaços de 150 pàgines.
+
+> És l'únic canvi d'aquesta tanda que es veu a la navegació del web, i és
+> reversible: es desfà tornant els dos fitxers enrere i tornant a passar
+> l'aplicador.
+
+**El lint ha passat de 91 errors a 0.** Els pendents, de 497 a 392.
+
+### /portes-obertes/ ja té les tres versions
+
+Creades **`/es/puertas-abiertas/`** i **`/en/open-days/`**, amb la pàgina
+sencera traduïda: text, formulari (mateixos identificadors, o sigui que
+`/js/portes-obertes.js` hi funciona igual), avís de dades i preguntes. La
+capçalera i el peu no s'han traduït a mà: els dibuixa `scripts/i18n_chrome.py`
+des d'`i18n/diccionari.yml`.
+
+Les seves **cinc preguntes ja surten en els tres idiomes**. Ara «what do we
+bring the first day» troba resposta.
+
+De passada, dues coses trencades a la pàgina catalana:
+- Els seus `hreflang` apuntaven a `/es/portes-obertes/` i `/en/portes-obertes/`,
+  que no han existit mai.
+- **El commutador d'idioma portava a un article del blog**
+  (`/blog/a-quina-edat-comencar-basquet/`), no a la pàgina. Error de copiar i
+  enganxar.
+
+També s'ha afegit `/portes-obertes/` a `llms.txt`, on no hi era.
+
+### El que segueix pendent, i per què
+
+Les **14 preguntes amb `pendent:`** no s'han pogut escriure perquè la seva
+resposta no és a cap pàgina del web ni la sap ningú d'aquí: vuit són números
+(les quotes i l'equipació) i sis són dades de funcionament del club (equip A i
+B, desplaçaments, canal d'avisos, revisió mèdica, coordinació per categoria,
+voluntariat). Inventar-les seria pitjor que no tenir-les.
+
+Queden **27 pàgines amb les FAQ desquadrades entre idiomes**. Passar-les per la
+font única és mecànic i es pot fer en tandes; la primera, `/basquet-formatiu/`,
+ja està feta i va de 5/5/4 a 7/7/7.
+
+
+---
+
+## Preguntes freqüents · tancat el 23/08/2026
+
+**Les 28 pàgines desquadrades ja no existeixen.** Totes les preguntes del web
+han passat per `i18n/faq.yml`, i les 98 pàgines amb FAQ tenen el `<details>`
+visible i el `FAQPage` del JSON-LD quadrats, amb exactament un `FAQPage` per
+pàgina. Cap pàgina amb versió traduïda té un nombre de preguntes diferent del
+català.
+
+| | Abans | Ara |
+|---|---|---|
+| Preguntes indexades pel cercador | 493 | **546** |
+| Pàgines desquadrades entre idiomes | 28 | **0** |
+| Errors del lint d'i18n | 91 | **0** |
+| Traduccions que falten i tenen on anar | 42 | **0** |
+| Portada | 15 / 11 / 11 | **15 / 15 / 15** |
+
+Comprovat que la migració no ha canviat cap contingut: **0 preguntes
+perdudes i 0 respostes canviades sota la mateixa pregunta**, comparant l'índex
+de cerca abans i després.
+
+### El que va costar, per si torna a passar
+
+- **Aparellar, no perdre.** El perill no era perdre una pregunta —això es
+  compta— sinó publicar la resposta d'una sota una altra en un altre idioma.
+  `scripts/faq-migra.py` alinea com un diff, respectant l'ordre, i es nega a
+  fer-ho quan l'ordre no encaixa.
+- **Dues pàgines no eren traduccions.** A `/femeni/` i a
+  `/blog/cultura-esforc-club-progres/` el castellà i l'anglès tenien
+  preguntes DIFERENTS, no les mateixes traduïdes. S'han fet a mà: cap resposta
+  s'ha descartat, i on faltava la contrària s'ha escrit.
+- **La portada es va duplicar i es va desfer.** El migrador buscava
+  `class="faq"` exacte i la portada la tenia com a `class="faq reveal"`: hi va
+  crear una segona secció i durant una estona va ensenyar les quinze
+  preguntes dues vegades. Trobat obrint-la al navegador i comparant els
+  `<details>` visibles amb els del JSON-LD. Arreglat a les cinc pàgines
+  afectades i al regex del migrador.
+
+### El que segueix pendent
+
+Les **14 preguntes amb `pendent:`**, que no es publiquen enlloc perquè la seva
+resposta no és a cap pàgina del web: vuit números (les quotes i l'equipació) i
+sis dades de funcionament del club. `--pendents` les llista.
+
+
+---
+
+## Les 9 preguntes que falten · formulari per contestar-les (23/08/2026)
+
+De les 14 que esperaven una dada, **cinc s'han pogut contestar** mirant millor
+què sap el web, sense inventar-ne cap:
+
+| Pregunta | D'on ha sortit la resposta |
+|---|---|
+| Quant costa la temporada? | No la xifra, però sí el que decideix una família: la prova és gratuïta, hi ha beques i el preu exacte de la seva categoria el té el mateix dia si escriu. |
+| Quants partits es juguen fora de casa? | **De `partits/data.json`**: 274 partits, 137 a casa i 137 a fora, en 80 pistes. Ningú els havia comptat. |
+| Com sé si canvia l'hora o la pista? | El robot diari, la marca «MODIFICAT» set dies i la subscripció `.ics`, que ja existien. |
+| Hi ha beques o ajuts? | Ho deia `/femeni/`, on cap família ho busca. |
+| Com puc ser entrenador o voluntari? | El canal del club + les 38 entrenadores en actiu + el certificat LOPIVI. |
+
+**En queden nou, i totes demanen un sí o un no que no és enlloc del web.**
+Contestar-les aquí és tot el que separa el cercador d'un 10: les redacto en
+els tres idiomes el mateix dia.
+
+### Diners · 5 preguntes
+
+1. **Què inclou la quota?** Marca el que hi entra: fitxa federativa ☐ ·
+   assegurança FCBQ ☐ · equipació ☐ · lloguer de pistes ☐ · altres:
+2. **Com es paga?** Un sol pagament ☐ · mensual ☐ · trimestral ☐ ·
+   Es domicilia? ☐ sí ☐ no
+3. **Hi ha descompte per a germans?** ☐ sí, de _____ ☐ no
+4. **Si es dona de baixa a mig any, què passa amb la quota?**
+5. **Equipació:** què és obligatori comprar, què val i on es compra.
+
+### Funcionament · 4 preguntes
+
+6. **Equip A i equip B: què vol dir, i qui ho decideix?** (Hi ha proves de
+   nivell? Ho decideix la direcció tècnica, la coordinació de la secció?)
+7. **Si un dia no pot anar a entrenar, què s'espera de la família?**
+   (Avisar l'entrenador? Per quin canal?)
+8. **Cal revisió mèdica per federar-se?** ☐ sí ☐ no
+   *(L'assegurança ja està resolta: la de la FCBQ, i ja està publicada.)*
+9. **Qui porta els nens als partits de fora?** (Les famílies? Cotxes
+   compartits? Hi posa transport el club?)
+
+> Amb aquestes nou respostes, l'auditoria passaria de 75 consultes resoltes
+> sobre 98 a prop de 90, i el bloc de diners —que és el que més es busca i el
+> que fa marxar més gent— quedaria tancat.
+
+
+---
+
+## Decisió · els preus no es publiquen (23/08/2026)
+
+**Decisió de l'Ana, presa i tancada.** Les quotes van per **franges d'edat i
+per categoria**, i **no es publiquen al web**: fer-ho donaria als clubs del
+voltant l'argument econòmic per competir amb el Barna pel preu. No es reobre.
+
+### Com queda contestada, sense cap xifra
+
+La pregunta «quant costa» segueix sent la que més es busca, i ara té resposta
+sencera. El que una família necessita per decidir no és el número: és saber
+que hi ha una estructura clara, que provar no costa res, que hi ha beques i
+que el preu de la SEVA categoria el té el mateix dia si escriu.
+
+> La quota va per franges d'edat i per categoria: l'Escoleta, els equips
+> federats i el campus tenen preus diferents […] No publiquem la taula de
+> preus al web, però te la donem de seguida: escriu-nos […] amb l'any de
+> naixement i et diem la quota exacta que li tocaria, el mateix dia. Abans de
+> decidir res, el primer entrenament és de prova i gratuït, i el club manté
+> beques socials perquè cap infant es quedi fora per motius econòmics.
+
+**Dir per què no hi és val més que ometre-la.** Un preu absent i sense
+explicació sembla un oblit —o que hi ha alquna cosa a amagar—; dit així, és
+una política, i la resposta acaba amb tres motius per venir igualment.
+
+Les tres versions d'idioma diuen el mateix, i la pregunta porta les paraules
+amb què es busca de debò: *apuntar-se*, *costa* i *temporada*.
+
+### El que segueix faltant NO és el preu
+
+Cinc de les nou pendents eren «de diners», i **cap necessita una xifra**:
+necessiten la POLÍTICA, que no dona cap argument econòmic a ningú.
+
+| Pregunta | Què cal, exactament |
+|---|---|
+| Què inclou la quota? | Si hi entren fitxa federativa, assegurança FCBQ, equipació i pistes. Serveix per comparar què hi ha inclòs, no per saber el preu. |
+| Com es paga? | Un sol pagament, mensual o trimestral, i si es domicilia. **Poder pagar a terminis és sovint el que decideix**, i dir-ho no dona cap xifra. |
+| Descompte per a germans? | Només si n'hi ha o no. «Sí, escriu-nos i te'l diem» respon sense publicar el percentatge. |
+| Baixa a mig any? | La política. És una de les pors que frenen una família que dubta. |
+| Equipació | Què és obligatori i on es compra. El preu es pot ometre igual que la quota. |
+
+I quatre de funcionament, que tampoc tenen res a veure amb diners: equip A i
+equip B, faltar a un entrenament, revisió mèdica i qui porta els nens als
+partits de fora.
+
+
+---
+
+## Tancat · les nou preguntes, contestades (24/08/2026)
+
+L'Ana les va contestar totes. **Cap pregunta del web queda sense resposta.**
+
+| | Resposta publicada |
+|---|---|
+| Què inclou la quota? | Tot, excepte l'equipació, que va a part |
+| Com es paga? | **Mensualment**, i l'import depèn de l'edat i la categoria |
+| Descompte per a germans? | **Sí** (el percentatge, no; es diu escrivint) |
+| Baixa a mig any? | La temporada es paga sencera |
+| Equipació | Va a part; **ho explica qui porta la inscripció**, sense preu al web |
+| Equip A i equip B | L'any de naixement decideix la categoria; dins d'una categoria, **l'entrenador** decideix segons el nivell |
+| Faltar a un entrenament | Avisar l'entrenador; **amb el justificant de la família n'hi ha prou** |
+| Revisió mèdica | **Sí, i la gestiona el club: és gratuïta per a les famílies** |
+| Desplaçaments | **Les famílies**, organitzant-se entre els pares del mateix equip |
+
+### Tres coses que val la pena mirar
+
+- **La revisió mèdica gratuïta i gestionada pel club era un actiu amagat.**
+  És una fricció que altres clubs deixen a la família (buscar-la, pagar-la,
+  demanar dia) i aquí no existeix. Ara ho diu la web.
+- **El pagament mensual, també.** Poder-ho pagar a terminis és sovint el que
+  decideix una família que dubta, i no dona cap argument econòmic a ningú.
+- **L'equip A i B** s'ha redactat perquè no soni a divisió entre qui val i qui
+  no: són la mateixa categoria en competicions diferents, tothom entrena,
+  tothom juga i es pot canviar al llarg de la formació.
+
+### Wintym · no s'anomena, i menys s'enllaça (24/08/2026)
+
+**L'Ana avisa que aquesta és l'última temporada amb Wintym**: les famílies ja
+han comprat l'equipació d'enguany i el club ha de negociar una marca i un
+disseny nous.
+
+Per això la resposta de l'equipació **no diu cap nom de proveïdor**. Parla de
+«la botiga oficial del club» i remet al moment en què es dona la plaça, que és
+quan la família ho necessita saber de debò. Així la resposta segueix sent
+certa el dia que canviï la marca, i no cal recordar-se d'anar-la a buscar.
+
+> **Regla que val per a tot el web:** un nom de tercer dins d'una resposta és
+> una data de caducitat amagada. Si el que la família necessita és *com*
+> aconseguir una cosa, la resposta ha de dir el «com», no el «qui».
+
+**El preu tampoc hi és** (24/08/2026, decisió de l'Ana): cap xifra al web, i
+ho explica la persona que porta la inscripció quan es dona la plaça. Amb la
+marca nova el preu canviarà igualment, i així la resposta no caduca.
+
+### Inventari de preus que SÍ segueixen publicats
+
+La norma «cap preu al web» val per al que paga una família per jugar: quota i
+equipació. Però al web hi ha altres xifres, i convé saber-ho per decidir si la
+norma les abasta o no. **No s'han tocat: són decisions anteriors.**
+
+| On | Xifra | Què és |
+|---|---|---|
+| `/campus/`, `/campus-basquet-barcelona/`, `/campus/setmana-santa/` | 195 € / 160 € / 150 € | Preu del campus, per setmana i per jornada |
+| `/3x3/`, `/3x3-barcelona/` | 2.000 € en premis | Premi del torneig, paritari |
+| `/patrocinadors/` | des de 300 € l'any | Nivells de patrocini |
+| `/blog/basquet-femeni-…/` | 140.000-160.000 € | Pressupost anual del club, com a argument de posicionament |
+
+Els tres últims no són el que paga una família per jugar. **El del campus
+sí**, i és el cas que caldria decidir: avui el campus es ven amb el preu
+davant —i el preu és, de fet, un dels seus arguments— mentre que la temporada
+no en diu cap. Si la norma ha de valer també per al campus, es treu en un
+moment; si no, val la pena que quedi escrit per què no.
+
+### On queda el cercador
+
+| | Al començar | Ara |
+|---|---|---|
+| Consultes provades | 85 | **109** |
+| Amb resposta a dalt de tot | 46 | **90** |
+| Només amb enllaços | 36 | **17** |
+| Sense cap resultat | 2 | **0** |
+| Preguntes pendents d'una dada | 14 | **0** |
+
 # Auditoria d'experiència d'usuari als tres idiomes · 23/08/2026
 
 Repàs complet de navegació, usabilitat i UX/UI de `cbgrupbarna.info` en

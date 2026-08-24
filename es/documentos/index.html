@@ -75,6 +75,7 @@
   .doc2 span { font-size: 13.5px; color: var(--ink-2); max-width: 62ch; }
   .doc2 i { font-style: normal; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; color: var(--muted); }
 </style>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contenido</a>
@@ -162,6 +163,40 @@
 
   </article>
 </div>
+
+<!-- ==== PREGUNTES FREQÜENTS ====
+     El que hi ha entre els marcadors FAQ i FAQ-LD el manté
+     .github/scripts/generate-faq.py des d'i18n/faq.yml. No s'edita aquí. -->
+<div class="wrap section">
+  <div class="narrow">
+    <h2 id="faq">Preguntas frecuentes</h2>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Hace falta revisión médica para jugar en el club?</summary><p>Sí, hay que pasar una prueba médica para poder jugar. La gestiona el club y es gratuita para las familias: no hace falta buscarla ni pagarla por vuestra cuenta.</p></details><details class="faq-q"><summary>¿Los jugadores y jugadoras están asegurados?</summary><p>Sí. Toda jugadora y jugador federado está cubierto por el seguro deportivo obligatorio de la Federació Catalana de Basquetbol (FCBQ). La información y el protocolo en caso de accidente durante un entrenamiento o un partido se gestionan desde la propia federación.</p></details><!-- FAQ:END --></div>
+  </div>
+</div>
+<!-- FAQ-LD:START --><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://cbgrupbarna.info/es/documentos/#faq",
+  "inLanguage": "es",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Hace falta revisión médica para jugar en el club?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, hay que pasar una prueba médica para poder jugar. La gestiona el club y es gratuita para las familias: no hace falta buscarla ni pagarla por vuestra cuenta."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Los jugadores y jugadoras están asegurados?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Toda jugadora y jugador federado está cubierto por el seguro deportivo obligatorio de la Federació Catalana de Basquetbol (FCBQ). La información y el protocolo en caso de accidente durante un entrenamiento o un partido se gestionan desde la propia federación."
+      }
+    }
+  ]
+}</script><!-- FAQ-LD:END -->
 </main>
 <!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
 <section class="comunitat" aria-label="Sigue al CB Grup Barna">
@@ -224,5 +259,6 @@
 </footer>
 <script src="/js/galetes.js"></script>
 <script src="/js/descarrega.js" defer></script>
+<script src="/js/cerca.js" defer></script>
 </body>
 </html>

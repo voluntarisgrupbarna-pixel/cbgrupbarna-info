@@ -71,6 +71,7 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -169,6 +170,50 @@ Clot. Per a qualsevol dubte, Julio Torralba al <a href="tel:+34646205526">646 20
 
   </article>
 </div>
+
+<!-- ==== PREGUNTES FREQÜENTS ====
+     El que hi ha entre els marcadors FAQ i FAQ-LD el manté
+     .github/scripts/generate-faq.py des d'i18n/faq.yml. No s'edita aquí:
+     s'edita la font i es torna a executar. Fora dels marcadors, la pàgina és
+     seva i l'script no hi toca. -->
+<div class="wrap section">
+  <div class="narrow">
+    <h2 id="faq">Preguntes freqüents</h2>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>On és exactament La Nau del Clot?</summary><p>Al carrer de la Llacuna 170-172, dins del Parc del Clot, 08018 Barcelona. És el pavelló de referència del club i la seu principal, al Districte de Sant Martí.</p></details><details class="faq-q"><summary>A quines pistes entrena i juga el CB Grup Barna?</summary><p>A sis instal·lacions del Districte de Sant Martí, totes properes entre elles: La Nau del Clot, Escola Provençals, La Farigola del Clot, La Rambleta del Clot, Escola Casas i Claror Marítim.</p></details><details class="faq-q"><summary>Quina pista li toca al meu equip?</summary><p>Depèn de la categoria i de l'horari, i pot canviar d'una setmana a l'altra. El calendari del teu equip ho diu amb exactitud cada setmana: s'actualitza cada dia a partir del calendari oficial de la Federació Catalana de Basquetbol.</p></details><!-- FAQ:END --></div>
+  </div>
+</div>
+<!-- FAQ-LD:START --><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://cbgrupbarna.info/instal-lacions/#faq",
+  "inLanguage": "ca",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "On és exactament La Nau del Clot?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Al carrer de la Llacuna 170-172, dins del Parc del Clot, 08018 Barcelona. És el pavelló de referència del club i la seu principal, al Districte de Sant Martí."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A quines pistes entrena i juga el CB Grup Barna?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A sis instal·lacions del Districte de Sant Martí, totes properes entre elles: La Nau del Clot, Escola Provençals, La Farigola del Clot, La Rambleta del Clot, Escola Casas i Claror Marítim."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quina pista li toca al meu equip?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depèn de la categoria i de l'horari, i pot canviar d'una setmana a l'altra. El calendari del teu equip ho diu amb exactitud cada setmana: s'actualitza cada dia a partir del calendari oficial de la Federació Catalana de Basquetbol."
+      }
+    }
+  ]
+}</script><!-- FAQ-LD:END -->
 </main>
 <!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
 <section class="comunitat" aria-label="Segueix el CB Grup Barna">
@@ -240,5 +285,6 @@ Clot. Per a qualsevol dubte, Julio Torralba al <a href="tel:+34646205526">646 20
   </div>
 </footer>
 <script src="/js/galetes.js"></script>
+<script src="/js/cerca.js" defer></script>
 </body>
 </html>

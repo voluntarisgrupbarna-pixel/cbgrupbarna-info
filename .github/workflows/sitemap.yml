@@ -1,8 +1,14 @@
-name: SEO · sitemap i avís als cercadors
+name: SEO · sitemap, índex de cerca i avís als cercadors
 
 # El sitemap es mantenia a mà, i per això anava quedant enrere: hi havia
 # pàgines publicades que no hi sortien i dates que no corresponien a cap canvi
 # real. Ara es reconstrueix sol cada cop que es publica una pàgina.
+#
+# Al mateix pas es refà l'índex del cercador (/cerca-index.json), que es
+# calcula de les mateixes pàgines: si una es publica, es retira o canvia de
+# títol, el cercador se n'ha d'assabentar el mateix dia. Van junts a posta,
+# en un sol commit: dos workflows empenyent alhora sobre el mateix push es
+# trepitgen i el segon rebota.
 #
 # Després avisa IndexNow (Bing, Yandex, Seznam, Naver) de les URLs que han
 # canviat en aquest push. Google no fa servir IndexNow: aquell se n'assabenta
@@ -14,6 +20,9 @@ on:
     paths:
       - '**.html'
       - 'scripts/build-sitemap.py'
+      - '.github/scripts/generate-search-index.py'
+      - 'i18n/routes.yml'
+      - 'i18n/faq.yml'
   workflow_dispatch:
 
 permissions:
@@ -64,20 +73,30 @@ jobs:
           done
           echo "::notice::$(wc -l < /tmp/urls.txt) pàgines públiques tocades en aquest push."
 
+      # Va PRIMER: escriu les preguntes freqüents a les pàgines, i el sitemap
+      # i l'índex del cercador s'han de calcular sobre les pàgines ja escrites.
+      - name: Repartir les preguntes freqüents als tres idiomes
+        run: |
+          pip install --quiet pyyaml
+          python3 .github/scripts/generate-faq.py
+
       - name: Reconstruir el sitemap
         run: python3 scripts/build-sitemap.py
 
-      - name: Desar-lo si ha canviat
+      - name: Reconstruir l'índex del cercador
+        run: python3 .github/scripts/generate-search-index.py
+
+      - name: Desar-ho si ha canviat
         run: |
-          if git diff --quiet sitemap.xml; then
-            echo "::notice::El sitemap ja estava al dia."
+          if git diff --quiet; then
+            echo "::notice::El sitemap, les preguntes i l'índex de cerca ja estaven al dia."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add sitemap.xml
-            git commit -m "chore(seo): reconstrueix el sitemap [skip ci]"
+            git add -A
+            git commit -m "chore(seo): preguntes freqüents, sitemap i índex de cerca [skip ci]"
             git push
-            echo "::notice::Sitemap actualitzat."
+            echo "::notice::Sitemap i índex de cerca actualitzats."
           fi
 
       - name: Avisar els cercadors

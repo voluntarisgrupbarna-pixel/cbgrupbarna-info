@@ -27,7 +27,8 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -40,36 +41,6 @@
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
       }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://cbgrupbarna.info/en/seniors/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How many senior teams does CB Grup Barna have?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Two: Senior Men's A and Senior Women's A, both playing in the Super Copa FCBQ, the top regional division in Catalonia."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Where do the Grup Barna senior teams play?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Most home games are played at La Nau del Clot (Nau Parc Clot), in El Clot, in the Sant Martí district of Barcelona."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can you reach the senior team without coming up through the club's Escoleta?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes — you can join any age group during the season if there is a place. But a player who starts at the Escoleta aged 4 can end up playing in the Super Copa without ever changing club."
-          }
-        }
-      ]
     },
     {
       "@type": "BreadcrumbList",
@@ -89,7 +60,8 @@
       ]
     }
   ]
-}</script>
+}
+</script>
 <script src="/js/galetes.js"></script>
 <style>
   .sen-teams { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.6vw, 28px); margin-top: clamp(28px, 4vw, 44px); }
@@ -98,6 +70,7 @@
   .sen-card h2 { font-size: clamp(18px, 2.2vw, 24px); }
   .sen-card .eyebrow { margin-bottom: 2px; }
 </style>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -151,13 +124,45 @@
 
   <div class="narrow" style="margin-top:clamp(34px,5vw,56px)">
     <h2 id="faq" style="font-family:var(--display);font-size:clamp(18px,2.2vw,24px);margin-bottom:20px">Frequently asked questions</h2>
-    <div class="faq"><details><summary>How many senior teams does CB Grup Barna have?</summary><p>Two: Senior Men's A and Senior Women's A, both playing in the Super Copa FCBQ, the top regional division in Catalonia.</p></details><details><summary>Where do the Grup Barna senior teams play?</summary><p>Most home games are played at La Nau del Clot (Nau Parc Clot), in El Clot, in the Sant Martí district of Barcelona.</p></details><details><summary>Can you reach the senior team without coming up through the club's Escoleta?</summary><p>Yes — you can join any age group during the season if there is a place. But a player who starts at the Escoleta aged 4 can end up playing here without ever changing club.</p></details></div>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>How many senior teams does CB Grup Barna have?</summary><p>Two: Senior Men's A and Senior Women's A, both playing in the Super Copa FCBQ, the top regional division in Catalonia.</p></details><details class="faq-q"><summary>Where do the Grup Barna senior teams play?</summary><p>Most home games are played at La Nau del Clot (Nau Parc Clot), in El Clot, in the Sant Martí district of Barcelona.</p></details><details class="faq-q"><summary>Can you reach the senior team without coming up through the club's Escoleta?</summary><p>Yes — you can join any age group during the season if there is a place. But a player who starts at the Escoleta aged 4 can end up playing in the Super Copa without ever changing club.</p></details><!-- FAQ:END --></div>
   </div>
 
   <div style="margin-top:clamp(34px,5vw,60px)">
     <div class="closer"><h2>Want to follow the senior teams this season?</h2><p>Every club fixture, both senior teams included, in a single calendar.</p><div class="btn-row"><a href="/en/partits/" class="btn red" data-cta="seniors-closer-partits">Calendar</a><a href="/en/magics/" class="btn ghost" data-cta="seniors-closer-magics">Barna Màgics</a></div></div>
   </div>
 </div>
+<!-- FAQ-LD:START --><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://cbgrupbarna.info/en/seniors/#faq",
+  "inLanguage": "en",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many senior teams does CB Grup Barna have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two: Senior Men's A and Senior Women's A, both playing in the Super Copa FCBQ, the top regional division in Catalonia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do the Grup Barna senior teams play?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most home games are played at La Nau del Clot (Nau Parc Clot), in El Clot, in the Sant Martí district of Barcelona."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you reach the senior team without coming up through the club's Escoleta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — you can join any age group during the season if there is a place. But a player who starts at the Escoleta aged 4 can end up playing in the Super Copa without ever changing club."
+      }
+    }
+  ]
+}</script><!-- FAQ-LD:END -->
 </main>
 <!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
 <section class="comunitat" aria-label="Follow CB Grup Barna">
@@ -218,5 +223,6 @@
     </div>
   </div>
 </footer>
+<script src="/js/cerca.js" defer></script>
 </body>
 </html>

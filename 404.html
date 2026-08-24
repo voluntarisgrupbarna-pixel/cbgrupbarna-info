@@ -41,6 +41,7 @@
 @media (max-width: 420px) { .e404-portes { grid-template-columns: 1fr; } }
 </style>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -66,8 +67,15 @@
   <div class="e404-num">404</div>
   <div class="e404-lab">Pàgina no trobada</div>
   <h1>Aquesta pàgina no hi és.</h1>
-  <p>O l'adreça ha canviat, o té una lletra de més. No passa res: des d'aquí pots
-     entrar per qualsevol de les portes de sempre.</p>
+  <p>O l'adreça ha canviat, o té una lletra de més. No passa res: hem posat al
+     cercador el que sembla que buscaves.</p>
+
+  <!-- El cercador, amb la consulta ja escrita a partir de l'adreça que no
+       existeix: /escoleta-2026/ hi entra com a «escoleta 2026». Ho fa
+       /js/cerca.js quan hi troba data-cerca-de-la-ruta. -->
+  <div id="cercaPagina" class="cerca-pagina" data-cerca-de-la-ruta></div>
+
+  <p class="e404-tot">O entra per qualsevol de les portes de sempre:</p>
 
   <nav class="e404-portes" aria-label="Seccions principals">
     <a class="e404-porta" href="/"><b>Inici</b><span>La portada del club</span></a>
@@ -122,9 +130,10 @@
       lang: 'es', skip: 'Saltar al contenido', inici: 'CB Grup Barna · inicio',
       alt: 'Escudo del CB Grup Barna', nav: 'Navegación principal',
       lab: 'Página no encontrada', h1: 'Esta página no está.',
-      p: 'O la dirección ha cambiado, o tiene una letra de más. No pasa nada: desde aquí puedes entrar por cualquiera de las puertas de siempre.',
+      p: 'O la dirección ha cambiado, o tiene una letra de más. No pasa nada: hemos puesto en el buscador lo que parece que buscabas.',
       seccions: 'Secciones principales',
       portes: [['/es/','Inicio','La portada del club'],['/es/club/','El club','Quiénes somos y cómo trabajamos'],['/es/escoleta/','Escoleta','Baloncesto de 4 a 8 años'],['/es/partits/','Calendario','Horarios y resultados'],['/es/campus/','Campus','Estancias y tecnificación'],['/es/fotos/','Galería','Las fotos de la temporada']],
+      portesT: 'O entra por cualquiera de las puertas de siempre:',
       tot: 'Si has llegado desde un enlace nuestro que ya no funciona, escríbenos a ',
       tot2: ' y lo corregimos.',
       menu: [['/es/club/','Club'],['/es/escoleta/','Escoleta'],['/es/partits/','Calendario'],['/es/patrocinadors/','Partners'],['/es/campus/','Campus'],['/es/fotos/','Galería'],['/es/premsa/','Prensa']],
@@ -136,9 +145,10 @@
       lang: 'en', skip: 'Skip to content', inici: 'CB Grup Barna · home',
       alt: 'CB Grup Barna crest', nav: 'Main navigation',
       lab: 'Page not found', h1: 'This page is not here.',
-      p: 'Either the address has changed or it has one letter too many. No problem: from here you can go in through any of the usual doors.',
+      p: 'Either the address has changed or it has one letter too many. No problem: we have put what you seem to be looking for into the search box.',
       seccions: 'Main sections',
       portes: [['/en/','Home','The club front page'],['/en/club/','The club','Who we are and how we work'],['/en/escoleta/','Escoleta','Basketball from 4 to 8'],['/en/partits/','Calendar','Times and results'],['/en/campus/','Camps','Summer camps and skills work'],['/en/fotos/','Gallery','The season in photos']],
+      portesT: 'Or come in through any of the usual doors:',
       tot: 'If you got here from a link of ours that no longer works, write to us at ',
       tot2: ' and we will fix it.',
       menu: [['/en/club/','Club'],['/en/escoleta/','Escoleta'],['/en/partits/','Calendar'],['/en/patrocinadors/','Partners'],['/en/campus/','Camps'],['/en/fotos/','Gallery'],['/en/premsa/','Press']],
@@ -170,7 +180,11 @@
     a.querySelector('b').textContent = T.portes[i][1];
     a.querySelector('span').textContent = T.portes[i][2];
   });
-  var tot = $('.e404-tot'), mail = tot.querySelector('a');
+  /* Des que hi ha cercador, la pagina te dos .e404-tot: el que presenta les
+     portes i el del correu. El del correu es sempre l'ultim. */
+  var tots = document.querySelectorAll('.e404-tot');
+  if (tots.length > 1) tots[0].textContent = T.portesT;
+  var tot = tots[tots.length - 1], mail = tot.querySelector('a');
   tot.textContent = T.tot; tot.appendChild(mail);
   tot.appendChild(document.createTextNode(T.tot2));
   var portesC = document.querySelectorAll('.comunitat-porta');
@@ -182,5 +196,6 @@
   $('.foot-legal').textContent = T.peu;
 })();
 </script>
+<script src="/js/cerca.js" defer></script>
 </body>
 </html>

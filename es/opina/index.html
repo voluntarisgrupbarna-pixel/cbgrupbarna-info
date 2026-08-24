@@ -328,6 +328,7 @@ details.tpl[open] summary::after { content: '–'; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
 </style>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 
@@ -592,6 +593,32 @@ https://cbgrupbarna.info/opina
     </div>
   </section>
 
+
+<!-- ==== PREGUNTES FREQÜENTS ====
+     El que hi ha entre els marcadors FAQ i FAQ-LD el manté
+     .github/scripts/generate-faq.py des d'i18n/faq.yml. No s'edita aquí. -->
+<div class="wrap section">
+  <div class="narrow">
+    <h2 id="faq">Preguntas frecuentes</h2>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Cómo puedo dejar una reseña u opinión del club?</summary><p>En Google, y se tarda menos de un minuto. El club no tiene presupuesto de publicidad: cuando una familia busca un club de baloncesto, lo que lee son las reseñas de las otras familias. El enlace directo al formulario está en la página de opiniones.</p></details><!-- FAQ:END --></div>
+  </div>
+</div>
+<!-- FAQ-LD:START --><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://cbgrupbarna.info/es/opina/#faq",
+  "inLanguage": "es",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cómo puedo dejar una reseña u opinión del club?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En Google, y se tarda menos de un minuto. El club no tiene presupuesto de publicidad: cuando una familia busca un club de baloncesto, lo que lee son las reseñas de las otras familias. El enlace directo al formulario está en la página de opiniones."
+      }
+    }
+  ]
+}</script><!-- FAQ-LD:END -->
 </main>
 
 <!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
@@ -952,5 +979,6 @@ https://cbgrupbarna.info/opina
 })();
 </script>
 
+<script src="/js/cerca.js" defer></script>
 </body>
 </html>

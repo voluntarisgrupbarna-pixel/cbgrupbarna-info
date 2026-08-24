@@ -1,0 +1,258 @@
+/* ============================================================
+   CB GRUP BARNA · Cercador
+   ------------------------------------------------------------
+   Full autònom: es pot enllaçar des de qualsevol pàgina, porti
+   css/barna.css o el CSS a dins (com la portada). Els tokens es
+   llegeixen si hi són i, si no, hi ha el valor de la taula del
+   sistema visual escrit al costat. Cap color nou: vermell de
+   l'escut, tinta, crema i blanc.
+   ============================================================ */
+
+/* ---- El botó de la capçalera ---- */
+.cerca-boto {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--line, rgba(16, 16, 14, 0.14));
+  background: var(--paper, #fff);
+  font-family: var(--body, 'Inter', system-ui, sans-serif);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-2, #46433f); line-height: 1;
+  transition: border-color .2s var(--ease, cubic-bezier(.22,1,.36,1)), color .2s;
+}
+.cerca-boto svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
+.cerca-boto:hover { border-color: var(--red, #E20613); color: var(--red-dark, #A8040E); }
+/* A mòbil la capçalera ja va justa: només la lupa. La classe --icona la posa
+   js/cerca.js quan, en qualsevol amplada, el botó faria desbordar la pàgina. */
+@media (max-width: 720px) { .cerca-boto span { display: none; } .cerca-boto { padding: 8px; } }
+.cerca-boto--icona span { display: none; }
+.cerca-boto--icona { padding: 8px; }
+
+/* ---- La capa ---- */
+html.cerca-oberta { overflow: hidden; }
+.cerca-capa { position: fixed; inset: 0; z-index: 9000; display: flex;
+  align-items: flex-start; justify-content: center; padding: clamp(12px, 6vh, 80px) 16px 16px; }
+.cerca-capa[hidden] { display: none; }
+.cerca-fons { position: absolute; inset: 0; background: rgba(16, 16, 14, 0.55);
+  backdrop-filter: blur(3px); animation: cercaFon .18s ease-out; }
+@keyframes cercaFon { from { opacity: 0; } }
+
+.cerca-panell {
+  position: relative; width: 100%; max-width: 720px; max-height: 86vh;
+  display: flex; flex-direction: column;
+  background: var(--paper, #fff);
+  border: 1px solid var(--line, rgba(16, 16, 14, 0.14));
+  box-shadow: var(--shadow, 0 24px 60px -28px rgba(16, 16, 14, .34));
+  animation: cercaPuja .22s var(--ease, cubic-bezier(.22,1,.36,1));
+}
+@keyframes cercaPuja { from { opacity: 0; transform: translateY(-10px); } }
+@media (prefers-reduced-motion: reduce) {
+  .cerca-fons, .cerca-panell { animation: none; }
+}
+
+.cerca-tanca {
+  position: absolute; top: 10px; right: 12px; z-index: 2;
+  width: 34px; height: 34px; font-size: 24px; line-height: 1;
+  color: var(--muted, #6B6560);
+}
+.cerca-tanca:hover { color: var(--red, #E20613); }
+
+/* ---- El camp ---- */
+.cerca-camp {
+  position: relative; display: flex; align-items: center; gap: 10px;
+  padding: 16px 54px 16px 18px;
+  border-bottom: 1px solid var(--line, rgba(16, 16, 14, 0.14));
+  flex: none;
+}
+.cerca-lupa { width: 19px; height: 19px; fill: var(--red, #E20613); flex: none; }
+.cerca-input {
+  flex: 1; min-width: 0; border: 0; background: none; outline: none;
+  font-family: var(--body, 'Inter', system-ui, sans-serif);
+  font-size: 17px; font-weight: 400; color: var(--ink, #10100E);
+  /* 16px o més: si no, l'iPhone fa zoom en tocar el camp. */
+  -webkit-appearance: none; appearance: none;
+}
+.cerca-input::placeholder { color: var(--muted, #6B6560); font-weight: 300; }
+.cerca-input::-webkit-search-cancel-button { display: none; }
+.cerca-neteja { font-size: 22px; line-height: 1; color: var(--muted, #6B6560); padding: 0 4px; }
+.cerca-neteja:hover { color: var(--ink, #10100E); }
+
+/* ---- El cos ---- */
+.cerca-cos { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.cerca-bloc { padding: 16px 18px 4px; }
+.cerca-bloc + .cerca-bloc { border-top: 1px solid var(--line, rgba(16, 16, 14, 0.14)); }
+
+.cerca-titol {
+  display: flex; align-items: baseline; gap: 10px;
+  font-family: var(--body, 'Inter', system-ui, sans-serif);
+  font-size: 9.5px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--muted, #6B6560); margin: 0 0 10px;
+}
+.cerca-esborra-recents {
+  font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--red-dark, #A8040E); text-decoration: underline;
+}
+
+.cerca-estat {
+  padding: 26px 18px; font-size: 14px; line-height: 1.7;
+  color: var(--ink-2, #46433f);
+}
+.cerca-estat strong { font-weight: 600; color: var(--ink, #10100E); }
+
+/* ---- Resposta ràpida ---- */
+.cerca-resposta {
+  display: block; padding: 14px 16px; margin-bottom: 12px;
+  background: var(--cream, #F4F1EC);
+  border-left: 3px solid var(--red, #E20613);
+}
+.cerca-resposta strong {
+  display: block; font-family: var(--display, 'Anton', 'Arial Narrow', sans-serif);
+  font-weight: 400; font-size: 19px; letter-spacing: 0.02em; text-transform: uppercase;
+  line-height: 1.1; color: var(--ink, #10100E);
+}
+.cerca-resposta span {
+  display: block; margin-top: 5px; font-size: 13.5px; line-height: 1.6;
+  color: var(--ink-2, #46433f);
+}
+.cerca-resposta em {
+  display: inline-block; margin-top: 8px; font-style: normal;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--red-dark, #A8040E);
+}
+.cerca-resposta.es-actiu, .cerca-resposta:hover { background: #EDE8E0; }
+
+/* ---- La resposta escrita pel club ----
+   És la peça que ha de manar a la pantalla: primer la resposta, i els
+   enllaços després. Per això té el pes de la crema i el filet vermell,
+   com els títols de secció d'un article. */
+.cerca-faq {
+  padding: 15px 17px; margin-bottom: 10px;
+  background: var(--cream, #F4F1EC);
+  border-left: 3px solid var(--red, #E20613);
+}
+.cerca-faq-q {
+  font-family: var(--display, 'Anton', 'Arial Narrow', sans-serif);
+  font-weight: 400; font-size: 18px; letter-spacing: 0.02em; text-transform: uppercase;
+  line-height: 1.12; color: var(--ink, #10100E); margin: 0;
+}
+.cerca-faq-r {
+  margin: 9px 0 0; font-size: 14px; line-height: 1.65;
+  color: var(--ink-2, #46433f);
+}
+.cerca-faq-font {
+  display: inline-block; margin-top: 11px;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted, #6B6560);
+}
+.cerca-faq-font b { font-weight: 600; color: var(--red-dark, #A8040E); }
+.cerca-faq-font:hover b { text-decoration: underline; }
+.cerca-faq-font.es-actiu { outline: 1px solid var(--red, #E20613); outline-offset: 3px; }
+
+/* ---- Resultats ---- */
+.cerca-llista { list-style: none; margin: 0; padding: 0; }
+.cerca-llista a {
+  display: block; padding: 11px 14px; margin: 0 -14px 2px;
+  border-left: 3px solid transparent;
+}
+.cerca-llista a.es-actiu, .cerca-llista a:hover {
+  background: var(--cream, #F4F1EC); border-left-color: var(--red, #E20613);
+}
+.cerca-r-t {
+  display: block; font-family: var(--display, 'Anton', 'Arial Narrow', sans-serif);
+  font-weight: 400; font-size: 16.5px; letter-spacing: 0.02em; text-transform: uppercase;
+  line-height: 1.15; color: var(--ink, #10100E);
+}
+.cerca-r-d {
+  /* Dues línies i prou: la llista ha de deixar veure els altres resultats. */
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--ink-2, #46433f);
+}
+.cerca-r-u {
+  display: block; margin-top: 5px; font-size: 10.5px; letter-spacing: 0.1em;
+  color: var(--muted, #6B6560); word-break: break-word;
+}
+.cerca-idioma {
+  display: inline-block; margin-left: 6px; padding: 1px 6px;
+  border: 1px solid var(--line, rgba(16, 16, 14, 0.14));
+  font-weight: 500; letter-spacing: 0.08em; color: var(--ink-2, #46433f);
+}
+.cerca-cos mark {
+  background: none; color: var(--red-dark, #A8040E); font-weight: 600;
+}
+
+/* ---- Fitxes (suggeriments i cerques recents) ---- */
+.cerca-fitxes { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 12px; }
+.cerca-fitxa {
+  display: inline-block; padding: 8px 13px;
+  border: 1px solid var(--line, rgba(16, 16, 14, 0.14));
+  border-radius: 999px;
+  font-family: var(--body, 'Inter', system-ui, sans-serif);
+  font-size: 12.5px; font-weight: 400; color: var(--ink-2, #46433f);
+  background: var(--paper, #fff);
+}
+.cerca-fitxa:hover, .cerca-fitxa.es-actiu {
+  border-color: var(--red, #E20613); color: var(--red-dark, #A8040E);
+  background: var(--cream, #F4F1EC);
+}
+
+/* ---- Peu ---- */
+.cerca-pista {
+  flex: none; padding: 9px 18px;
+  border-top: 1px solid var(--line, rgba(16, 16, 14, 0.14));
+  background: var(--cream, #F4F1EC);
+  font-size: 10px; letter-spacing: 0.08em; color: var(--muted, #6B6560);
+}
+.cerca-pista kbd {
+  display: inline-block; min-width: 17px; margin-right: 3px; padding: 1px 4px;
+  border: 1px solid var(--line, rgba(16, 16, 14, 0.14)); border-radius: 3px;
+  background: var(--paper, #fff); font-family: inherit; font-size: 10px; text-align: center;
+}
+/* Sense teclat físic la pista no diu res útil. */
+@media (pointer: coarse) { .cerca-pista { display: none; } }
+
+/* ---- Versió a pàgina sencera (/cerca/) ---- */
+.cerca-pagina {
+  border: 1px solid var(--line, rgba(16, 16, 14, 0.14));
+  background: var(--paper, #fff);
+}
+.cerca-pagina .cerca-cos { max-height: none; }
+.cerca-pagina .cerca-pista { display: none; }
+@media (min-width: 700px) { .cerca-pagina .cerca-input { font-size: 20px; } }
+
+/* ---- Quan no trobem res ----
+   Una cerca sense resultats no s'ha d'acabar en un carreró: la pregunta ja
+   està escrita, i el club té una persona a l'altra banda del WhatsApp. */
+.cerca-preguntaho {
+  display: block; margin: 12px 0 4px; padding: 13px 15px;
+  background: var(--cream, #F4F1EC);
+  border-left: 3px solid var(--red, #E20613);
+}
+.cerca-preguntaho strong {
+  display: block;
+  font-family: var(--display, 'Anton', 'Arial Narrow', sans-serif);
+  font-weight: 400; font-size: 16px; letter-spacing: 0.02em; text-transform: uppercase;
+  color: var(--ink, #10100E);
+}
+.cerca-preguntaho span {
+  display: block; margin-top: 4px;
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--red-dark, #A8040E);
+}
+.cerca-preguntaho:hover, .cerca-preguntaho.es-actiu { background: #EDE8E0; }
+
+/* ---- Mapa de sota a /cerca/ · la sortida quan no hi ha JavaScript ---- */
+.cerca-mapa { display: grid; gap: 22px 28px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.cerca-mapa h3 {
+  font-family: var(--body, 'Inter', system-ui, sans-serif);
+  font-size: 9.5px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--muted, #6B6560); margin: 0 0 8px;
+}
+.cerca-mapa a {
+  display: block; padding: 3px 0; font-size: 14px; line-height: 1.6;
+  color: var(--ink-2, #46433f);
+  border-bottom: 1px solid transparent;
+}
+.cerca-mapa a:hover { color: var(--red-dark, #A8040E); }
+.cerca-nota { margin-top: 14px; font-size: 12.5px; line-height: 1.7; color: var(--ink-2, #46433f); }
+
+:focus-visible { outline: 1px solid var(--red, #E20613); outline-offset: 3px; }

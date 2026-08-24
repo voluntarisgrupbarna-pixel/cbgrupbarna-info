@@ -257,6 +257,33 @@ def revisa():
             if es_etiqueta:
                 pendents.append(f"etiqueta-a-revisar · {url} → {desti} · es diu «{net}»")
 
+    # --- Preguntes freqüents (i18n/faq.yml) ---------------------------------
+    # Des del 23/08/2026 les preguntes freqüents no viuen a l'HTML sinó a la
+    # seva font única, i per tant tampoc les veia aquest lint. Una pregunta
+    # publicada en català i no traduïda és exactament la mateixa mena de
+    # deute que una pàgina sense traduir.
+    faq = ROOT / "i18n" / "faq.yml"
+    if faq.exists():
+        per_ruta = {r["ca"]: r for r in rutes if r.get("ca")}
+        dades = yaml.safe_load(faq.read_text(encoding="utf-8")) or {}
+        for e in dades.get("preguntes", []):
+            ident = e.get("id", "?")
+            if e.get("pendent"):
+                pendents.append(
+                    f"faq-sense-resposta · {ident} · espera: {e['pendent'].strip().splitlines()[0][:70]}")
+                continue
+            # Només compta com a deute si la pàgina existeix en aquell
+            # idioma: si no, la feina és traduir la pàgina, no la pregunta,
+            # i ja surt com a `sense-traduccio` més amunt.
+            parella = per_ruta.get(e.get("pagina")) or {}
+            for idioma in ("ca", "es", "en"):
+                if idioma != "ca" and not parella.get(idioma):
+                    continue
+                tros = e.get(idioma) or {}
+                if not (tros.get("q") and tros.get("r")):
+                    pendents.append(
+                        f"faq-sense-traduccio · {ident} · falta la versió {idioma}")
+
     return sorted(set(errors)), sorted(set(pendents))
 
 

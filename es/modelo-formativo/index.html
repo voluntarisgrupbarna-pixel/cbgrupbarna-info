@@ -38,7 +38,8 @@
   .tl2 p { margin: 4px 0 0; font-size: 15px; line-height: 1.55; }
   .tl2 cite { display: block; font-style: italic; color: var(--ink-2); margin-top: 6px; }
 </style>
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -54,44 +55,6 @@
       "about": {
         "@id": "https://cbgrupbarna.info/#club"
       }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://cbgrupbarna.info/es/modelo-formativo/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿A qué edad abandonan más los niños y niñas el baloncesto?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La edad media real de abandono es 12,93 años, coincidiendo con el paso de infantil a cadete, no a los 11 como suele repetirse sin fuente. Alrededor de un 30% abandona al menos un club cada año."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Funciona detectar a los mejores jugadores de muy pequeños?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No de manera fiable: el 92,8% de las poblaciones de élite júnior y sénior son personas distintas. La maduración biológica precoz predice fuerza y velocidad, no habilidad técnica, de manera que seleccionar por físico a los 10-13 años a menudo es seleccionar por fecha de nacimiento."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué hizo Marc Gasol en el Bàsquet Girona?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fundó una escuela de baloncesto en 2014 sin ningún equipo grande; el primer sénior no llegó hasta 2017, tres años después. Él mismo lo ha explicado varias veces: «no vamos a correr para llegar a la ACB» y «el deporte es una herramienta para educar». El club subió a ACB en 2022, ocho años después de la fundación de la escuela."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué tiene que ver esto con el CB Grup Barna?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "El Barna hace, desde hace sesenta y un años, el mismo orden que Marc Gasol eligió para su proyecto: primero la formación, después la competición, dentro de la misma entidad y sin romper nunca el hilo entre la Escoleta y el sénior de Super Copa."
-          }
-        }
-      ]
     },
     {
       "@type": "BreadcrumbList",
@@ -117,8 +80,10 @@
       ]
     }
   ]
-}</script>
+}
+</script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contenido</a>
@@ -230,6 +195,56 @@
     </div>
   </div>
 </div>
+
+<!-- ==== PREGUNTES FREQÜENTS ====
+     El que hi ha entre els marcadors FAQ i FAQ-LD el manté
+     .github/scripts/generate-faq.py des d'i18n/faq.yml. No s'edita aquí. -->
+<div class="wrap section">
+  <div class="narrow">
+    <h2 id="faq">Preguntas frecuentes</h2>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿A qué edad abandonan más los niños y niñas el baloncesto?</summary><p>La edad media real de abandono es de 12,93 años, coincidiendo con el paso de infantil a cadete, no a los 11 como suele repetirse sin fuente. Alrededor de un 30% abandona al menos un club cada año.</p></details><details class="faq-q"><summary>¿Funciona detectar a los mejores jugadores de muy pequeños?</summary><p>No de forma fiable: el 92,8% de las poblaciones de élite júnior y sénior son personas distintas. La maduración biológica precoz predice fuerza y velocidad, no habilidad técnica, de modo que seleccionar por físico a los 10-13 años a menudo es seleccionar por fecha de nacimiento.</p></details><details class="faq-q"><summary>¿Qué hizo Marc Gasol en el Bàsquet Girona?</summary><p>Fundó una escuela de baloncesto en 2014 sin ningún equipo mayor; el primer sénior no llegó hasta 2017, tres años después. Él mismo lo ha explicado varias veces: «no vamos a correr para llegar a la ACB» y «el deporte es una herramienta para educar». El club subió a ACB en 2022, ocho años después de fundarse la escuela.</p></details><details class="faq-q"><summary>¿Qué tiene que ver esto con el CB Grup Barna?</summary><p>El Barna hace, desde hace sesenta y un años, el mismo orden que Marc Gasol eligió para su proyecto: primero la formación, después la competición, dentro de la misma entidad y sin romper nunca el hilo entre la Escoleta y el sénior de Super Copa.</p></details><!-- FAQ:END --></div>
+  </div>
+</div>
+<!-- FAQ-LD:START --><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://cbgrupbarna.info/es/modelo-formativo/#faq",
+  "inLanguage": "es",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿A qué edad abandonan más los niños y niñas el baloncesto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La edad media real de abandono es de 12,93 años, coincidiendo con el paso de infantil a cadete, no a los 11 como suele repetirse sin fuente. Alrededor de un 30% abandona al menos un club cada año."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Funciona detectar a los mejores jugadores de muy pequeños?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No de forma fiable: el 92,8% de las poblaciones de élite júnior y sénior son personas distintas. La maduración biológica precoz predice fuerza y velocidad, no habilidad técnica, de modo que seleccionar por físico a los 10-13 años a menudo es seleccionar por fecha de nacimiento."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué hizo Marc Gasol en el Bàsquet Girona?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fundó una escuela de baloncesto en 2014 sin ningún equipo mayor; el primer sénior no llegó hasta 2017, tres años después. Él mismo lo ha explicado varias veces: «no vamos a correr para llegar a la ACB» y «el deporte es una herramienta para educar». El club subió a ACB en 2022, ocho años después de fundarse la escuela."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué tiene que ver esto con el CB Grup Barna?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El Barna hace, desde hace sesenta y un años, el mismo orden que Marc Gasol eligió para su proyecto: primero la formación, después la competición, dentro de la misma entidad y sin romper nunca el hilo entre la Escoleta y el sénior de Super Copa."
+      }
+    }
+  ]
+}</script><!-- FAQ-LD:END -->
 </main>
 <!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
 <section class="comunitat" aria-label="Sigue al CB Grup Barna">
@@ -290,5 +305,6 @@
     </div>
   </div>
 </footer>
+<script src="/js/cerca.js" defer></script>
 </body>
 </html>

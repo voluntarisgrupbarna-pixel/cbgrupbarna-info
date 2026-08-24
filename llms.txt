@@ -48,6 +48,18 @@ campus d'estiu de tecnificació i seguiment individualitzat — combinat amb
 equip, competició federada i comunitat de barri, a diferència d'una acadèmia
 privada d'alt rendiment de pagament.
 
+## Portes obertes
+
+- [Portes obertes](https://cbgrupbarna.info/portes-obertes/) ·
+  [ES](https://cbgrupbarna.info/es/puertas-abiertas/) ·
+  [EN](https://cbgrupbarna.info/en/open-days/): tot el setembre és de portes
+  obertes. No hi ha una jornada d'un dia: qualsevol nen o nena pot venir a fer
+  un entrenament de prova, gratuït i sense compromís, de l'Escoleta al sènior.
+  Cal demanar dia amb el formulari de la pàgina o pel WhatsApp del club; es
+  respon el mateix dia amb el dia i l'hora que li toquen. Cal portar roba
+  d'esport, sabatilles de pista i una ampolla d'aigua; la pilota la posa el
+  club. S'entrena a La Nau del Clot, al Districte de Sant Martí.
+
 ## Escola de bàsquet (Escoleta)
 
 - [Escoleta · escola de bàsquet 4 a 8 anys](https://cbgrupbarna.info/escoleta/):
@@ -374,6 +386,19 @@ FCBQ la temporada 2026-27.
 - [Deixa la teva ressenya](https://cbgrupbarna.info/opina/): pàgina per a famílies,
   jugadores i jugadors que vulguin valorar el club a Google, amb l'enllaç directe
   al formulari de ressenya.
+- [Cerca a tot el web](https://cbgrupbarna.info/cerca/) · [ES](https://cbgrupbarna.info/es/cerca/)
+  · [EN](https://cbgrupbarna.info/en/search/): cercador de tot el lloc. Funciona al
+  navegador de qui cerca, sobre l'índex `/cerca-index.json`; cap consulta surt del
+  navegador ni s'envia a cap servei extern. Entén la pregunta en català, castellà i
+  anglès («quant costa», «cuánto cuesta», «how much does it cost» porten al mateix
+  lloc) i perdona les faltes d'ortografia. Sobretot, RESPON: indexa les 460
+  preguntes amb resposta que ja hi ha escrites al JSON-LD `FAQPage` de 98 pàgines
+  d'aquest web i ensenya la que toca a dalt de tot, tal com està redactada i amb
+  l'enllaç a la pàgina d'on surt. No hi intervé cap model de llenguatge: no
+  s'inventa res i, si cap pregunta encaixa prou bé, no ensenya cap resposta. La pàgina és `noindex, follow` i per això
+  no surt al sitemap: el contingut real ja hi és, pàgina per pàgina. Des de
+  qualsevol pàgina del web també s'obre amb la lupa de la capçalera, amb ⌘K/Ctrl+K
+  o amb la tecla «/».
 
 ## Premsa
 

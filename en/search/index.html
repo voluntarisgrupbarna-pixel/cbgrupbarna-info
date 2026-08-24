@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10100E">
+<title>Search · CB Grup Barna</title>
+<meta name="description" content="Search the whole CB Grup Barna site: escoleta, teams, calendar, camps, women's basketball, partners and FAQ.">
+<link rel="canonical" href="https://cbgrupbarna.info/en/search/">
+<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/cerca/">
+<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/busqueda/">
+<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/search/">
+<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/cerca/">
+<!-- Una pàgina de cerca no aporta res a l'índex de Google (el contingut real
+     ja hi és, pàgina per pàgina), però sí que ha de repartir autoritat cap a
+     les pàgines que enllaça: noindex, follow. Per això tampoc entra al
+     sitemap.xml, segons la norma del repositori. -->
+<meta name="robots" content="noindex,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CB Grup Barna">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Search · CB Grup Barna">
+<meta property="og:description" content="Search the whole CB Grup Barna site: escoleta, teams, calendar, camps, women's basketball, partners and FAQ.">
+<meta property="og:url" content="https://cbgrupbarna.info/en/search/">
+<meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cbgrupbarna">
+<link rel="icon" href="/logo.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/barna.css">
+<link rel="stylesheet" href="/css/cerca.css">
+<!-- L'índex es baixa tan bon punt es pot: en aquesta pàgina la cerca és
+     l'única cosa que s'hi ve a fer. -->
+<link rel="preload" href="/cerca-index.json" as="fetch" type="application/json" crossorigin="anonymous">
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<header class="head">
+  <div class="head-in">
+    <a class="head-brand" href="/" aria-label="CB Grup Barna · inici">
+      <img src="/logo.png" alt="Escut del CB Grup Barna" width="30" height="30">
+      <span>CB Grup Barna</span>
+    </a>
+    <nav class="head-nav" aria-label="Navegació principal">
+      <a href="/partits/equips/">Teams</a>
+      <a href="/en/club/">Club</a>
+      <a href="/en/partits/">Calendar</a>
+      <a href="/en/escoleta/" class="opt">Escoleta</a>
+      <a href="/en/campus/" class="opt">Camps</a>
+      <a href="/empreses/" class="opt">Companies</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap"><nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Home</a> · <span>Search</span></nav></div>
+<div class="wrap">
+  <div class="phead narrow">
+    <p class="eyebrow red">The whole site</p>
+    <h1>Search</h1>
+    <p class="lede">Type what you are after. You do not need the exact word: “how much does it cost”, “when does the under-16 team play” or “sign up my son” work too.</p>
+  </div>
+
+  <div class="narrow">
+    <!-- El cercador es dibuixa aquí dins. Sense JavaScript no hi ha camp,
+         i per això a sota hi ha sempre el mapa del web enllaçat a mà. -->
+    <div id="cercaPagina" class="cerca-pagina"></div>
+    <p class="cerca-nota">Search runs in your browser: your query never leaves this page.</p>
+  </div>
+
+  <section class="narrow" style="margin-top:34px">
+    <h2 class="eyebrow red" style="margin-bottom:14px">If search is not working</h2>
+    <div class="cerca-mapa">
+      <div class="cerca-mapa-col"><h3>Play at Barna</h3>
+        <a href="/en/escoleta/">Escoleta (ages 4-8)</a>
+        <a href="/en/development-basketball/">Development basketball</a>
+        <a href="/portes-obertes/">Open days</a>
+        <a href="/en/womens-basketball/">Women's basketball</a>
+        <a href="/magics/">Barna Màgics</a>
+        <a href="/en/faq/">FAQ</a>
+      </div>
+      <div class="cerca-mapa-col"><h3>Teams and season</h3>
+        <a href="/partits/equips/">Teams</a>
+        <a href="/en/partits/">Calendar</a>
+        <a href="/en/partits/calendaris/">Calendar by team</a>
+        <a href="/fotos/">Gallery</a>
+      </div>
+      <div class="cerca-mapa-col"><h3>Activities</h3>
+        <a href="/en/campus/">Camps</a>
+        <a href="/en/basketball-skills-training-barcelona/">Skills training</a>
+        <a href="/en/3x3/">3x3 tournament</a>
+        <a href="/en/cistella-petita/">Cistella Petita</a>
+      </div>
+      <div class="cerca-mapa-col"><h3>The club</h3>
+        <a href="/en/club/">About us</a>
+        <a href="/en/facilities/">Facilities</a>
+        <a href="/en/documents/">Documents</a>
+      </div>
+      <div class="cerca-mapa-col"><h3>News and companies</h3>
+        <a href="/en/blog/">Blog</a>
+        <a href="/en/premsa/">Press</a>
+        <a href="/en/patrocinadors/">Partners</a>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h3>El Barna</h3>
+        <a href="/club/">El Club</a>
+        <a href="/historia/">Història del club</a>
+        <a href="/organigrama/">Organigrama</a>
+        <a href="/femeni/">Bàsquet femení</a>
+        <a href="/instal-lacions/">Instal·lacions</a>
+        <a href="/grup-barna-dades-oficials/">Dades oficials</a>
+        <a href="/proteccio-menor/">Protecció del Menor</a>
+        <a href="/femeni/">Bàsquet femení</a>
+      </div>
+      <div class="foot-col">
+        <h3>Temporada</h3>
+        <a href="/partits/">Calendari</a>
+        <a href="/partits/calendaris/">Calendari per equip</a>
+        <a href="/fotos/">Galeria de fotos</a>
+        <a href="/premidonaesport/">Premi Dona i Esport</a>
+        <a href="/blog/">Blog</a>
+        <a href="/documents/">Documents i protocols</a>
+      </div>
+      <div class="foot-col">
+        <h3>Contacte</h3>
+        <a href="/#info">Demanar informació</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/bustia/">Bústia de suggeriments</a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
+        <a href="https://wa.me/34698425153">+34 698 425 153</a>
+        <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>Legal</h3>
+        <a href="/politica-de-privacitat/">Política de privacitat</a>
+        <a href="/avis-legal/">Avís legal</a>
+        <a href="/politica-de-privacitat/#galetes">Galetes</a>
+      </div>
+      <div class="foot-col">
+        <h3>Xarxes</h3>
+        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+    <div class="foot-btm">
+      <div class="foot-mark">#Som<em>Clot</em></div>
+      <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965</div>
+    </div>
+  </div>
+</footer>
+<script src="/js/galetes.js"></script>
+<script src="/js/cerca.js" defer></script>
+</body>
+</html>

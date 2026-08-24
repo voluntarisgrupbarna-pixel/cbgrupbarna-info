@@ -108,8 +108,12 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">{lang_style}
+<!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
+     aquí, el planta /js/cerca.js dins de la capçalera. -->
+<link rel="stylesheet" href="/css/cerca.css">
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
 <script src="/js/galetes.js"></script>
+<script src="/js/cerca.js" defer></script>
 </head>
 <body>
 <a href="#main" class="skip">{text("salta", lang)}</a>

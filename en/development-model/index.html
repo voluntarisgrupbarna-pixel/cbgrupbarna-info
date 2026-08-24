@@ -38,7 +38,8 @@
   .tl2 p { margin: 4px 0 0; font-size: 15px; line-height: 1.55; }
   .tl2 cite { display: block; font-style: italic; color: var(--ink-2); margin-top: 6px; }
 </style>
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -54,44 +55,6 @@
       "about": {
         "@id": "https://cbgrupbarna.info/#club"
       }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://cbgrupbarna.info/en/development-model/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "At what age do children most often quit basketball?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The real average drop-out age is 12.93, at the move from under-14 to under-16, not 11 as is often repeated without a source. Around 30% leave at least one club every year."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does spotting the best players very young work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Not reliably: 92.8% of the junior elite and the senior elite are different people. Early biological maturation predicts strength and speed, not technical skill, so selecting on physique at 10-13 is often selecting on date of birth."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What did Marc Gasol do at Bàsquet Girona?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "He founded a basketball school in 2014 with no senior team at all; the first senior side did not arrive until 2017, three years later. He has explained it himself several times: «we are not going to rush to reach the ACB» and «sport is a tool for education». The club reached the ACB in 2022, eight years after the school was founded."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What does this have to do with CB Grup Barna?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "For sixty-one years Barna has followed the same order Marc Gasol chose for his project: development first, competition later, inside the same organisation and without ever breaking the thread between the Escoleta and the Super Copa senior team."
-          }
-        }
-      ]
     },
     {
       "@type": "BreadcrumbList",
@@ -117,8 +80,10 @@
       ]
     }
   ]
-}</script>
+}
+</script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/cerca.css">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -230,6 +195,56 @@
     </div>
   </div>
 </div>
+
+<!-- ==== PREGUNTES FREQÜENTS ====
+     El que hi ha entre els marcadors FAQ i FAQ-LD el manté
+     .github/scripts/generate-faq.py des d'i18n/faq.yml. No s'edita aquí. -->
+<div class="wrap section">
+  <div class="narrow">
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>At what age do children most often quit basketball?</summary><p>The real average drop-out age is 12.93, at the move from under-14 to under-16 — not 11, as is often repeated without a source. Around 30% leave at least one club every year.</p></details><details class="faq-q"><summary>Does spotting the best players very young actually work?</summary><p>Not reliably: 92.8% of junior and senior elite populations are different people. Early biological maturation predicts strength and speed, not technical skill, so selecting on physique at 10-13 is often selecting on date of birth.</p></details><details class="faq-q"><summary>What did Marc Gasol do at Bàsquet Girona?</summary><p>He founded a basketball school in 2014 with no senior team at all; the first senior side did not arrive until 2017, three years later. He has explained it himself more than once: “we are not going to rush to reach the ACB” and “sport is a tool for education”. The club reached the ACB in 2022, eight years after the school was founded.</p></details><details class="faq-q"><summary>What does this have to do with CB Grup Barna?</summary><p>For sixty-one years the Barna has followed the same order Marc Gasol chose for his project: development first, competition after, inside one single club and without ever breaking the thread between the Escoleta and the Super Copa senior team.</p></details><!-- FAQ:END --></div>
+  </div>
+</div>
+<!-- FAQ-LD:START --><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://cbgrupbarna.info/en/development-model/#faq",
+  "inLanguage": "en",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "At what age do children most often quit basketball?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The real average drop-out age is 12.93, at the move from under-14 to under-16 — not 11, as is often repeated without a source. Around 30% leave at least one club every year."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does spotting the best players very young actually work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not reliably: 92.8% of junior and senior elite populations are different people. Early biological maturation predicts strength and speed, not technical skill, so selecting on physique at 10-13 is often selecting on date of birth."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What did Marc Gasol do at Bàsquet Girona?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "He founded a basketball school in 2014 with no senior team at all; the first senior side did not arrive until 2017, three years later. He has explained it himself more than once: “we are not going to rush to reach the ACB” and “sport is a tool for education”. The club reached the ACB in 2022, eight years after the school was founded."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does this have to do with CB Grup Barna?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For sixty-one years the Barna has followed the same order Marc Gasol chose for his project: development first, competition after, inside one single club and without ever breaking the thread between the Escoleta and the Super Copa senior team."
+      }
+    }
+  ]
+}</script><!-- FAQ-LD:END -->
 </main>
 <!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
 <section class="comunitat" aria-label="Follow CB Grup Barna">
@@ -290,5 +305,6 @@
     </div>
   </div>
 </footer>
+<script src="/js/cerca.js" defer></script>
 </body>
 </html>
