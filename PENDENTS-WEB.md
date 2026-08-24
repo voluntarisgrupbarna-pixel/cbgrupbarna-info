@@ -1144,3 +1144,51 @@ damunt la foto a 5,87:1 de contrast. **La pàgina passa de ~62 MB transferits a
 **Pendent de decidir:** els cinc MP4 de `mascota/` (186 MB en total) ja no els
 enllaça cap pàgina. Es queden al repositori fins que l'Ana digui, perquè són
 els originals; però cada desplegament els ha d'empaquetar.
+
+## 24-08-2026 — Auditoria SEO real i forats de contingut
+
+Auditoria contra el codi (no genèrica) arran d'una anàlisi de Copilot que resultava ser
+sobretot genèrica: 6 de les 8 recomanacions ("afegeix alt-text", canonical, JSON-LD,
+lazy loading, hreflang, Open Graph) ja estaven fetes i més completes del que demanava.
+El que sí era real:
+
+- **`cbgrupbarna.com` encara és una web viva**, no una redirecció, tot i que l'Ana ho va
+  decidir el 23/08/2026. La part del repositori ja està neta (enllaços, JSON-LD,
+  contactes); falta el 301 real a nivell de DNS/hosting del domini `.com`, fora
+  d'aquest repositori. **Pendent, checklist ja preparat i enviat a l'Ana.**
+- **`/galeria` (app Next.js) no estava preparada per indexar-se**: sense sitemap ni
+  robots propis, sense domini de marca vinculat al codi, i amb pàgines d'esdeveniments
+  públiques sense login que mostren fotos de menors. **Arreglat:** `noindex` +
+  `app/robots.ts` afegits, perquè no quedés indexant-se per defecte sense que ningú ho
+  hagués decidit.
+- **Forat de contingut real:** la cerca "escola bàsquet Catalunya" (a diferència de
+  "...Barcelona", on ja sortim) no citava `cbgrupbarna.info` enlloc. **Arreglat:**
+  l'article `/blog/club-formacio-i-competitiu-catalunya/` (ca/es/en) amplia amb el
+  programa oficial "Escoles de Bàsquet" de la FCBQ i una FAQ que respon si el Barna és
+  "la millor escola de bàsquet de Catalunya" (sense inventar cap premi: no n'hi ha cap
+  d'oficial, la resposta es basa en dades pròpies verificables — 34+ equips, únic amb
+  dos sèniors en Súper Copa dins la mateixa entitat). Sincronitzat a
+  `scripts/build-pages.py`, `cerca-index.json` i `llms.txt`.
+- **Backlinks:** una cerca real confirma que els únics enllaços que apunten al club són
+  perfils propis, la fitxa de la FCBQ i el directori de l'Ajuntament — cap mitjà de
+  premsa. **Pendent, ho farà l'Ana la setmana del 31/08/2026:** llista de mitjans (Guia
+  del Clot, Tot Barcelona, Betevé, L'Esportiu, Diari de l'Educació) amb angle de pitch
+  per a cadascun, ja preparada.
+- **Dades del club inconsistents fora del repositori (NAP — nom/adreça/telèfon).** La
+  font canònica és el propi JSON-LD de `index.html`: telèfon **+34 698 425 153**, adreça
+  **Carrer de la Llacuna, 170-172**. Però cercant el club es troben versions diferents en
+  llocs que el repositori no controla:
+  - **`cbgrupbarna.com`** (la web antiga, encara viva — vegeu el punt del 301 més amunt):
+    telèfon **688 26 52 31** a la capçalera i **688 26 52 30** al peu, cap dels dos igual
+    al canònic. Ja documentat a `MIGRACIO-WEB-ANTIGA.md`.
+  - **Fitxa de l'Ajuntament de Barcelona** (`guia.barcelona.cat/.../club-de-basquet-grup-barna_...`):
+    telèfon **688 26 52 30** i adreça **Pl. Canonge Rodó, 2** — ni el telèfon ni l'adreça
+    coincideixen amb el canònic.
+  - Probablement el mateix passa a la **fitxa de Google Business/Maps** del club (no
+    verificat des d'aquí perquè cal accés al perfil, no és contingut del repositori).
+  **Pendent, fora del codi:** un cop actiu el 301 de `.com`, aquella font d'error
+  desapareix sola. La fitxa de l'Ajuntament i el perfil de Google Business els ha de
+  corregir algú amb accés (el segon, des del propi compte de Google del club) perquè
+  diguin el mateix telèfon i adreça que `index.html`. Val la pena confirmar primer amb
+  l'Ana si `Pl. Canonge Rodó, 2` és una seu antiga real (abans de la Nau del Clot /
+  Llacuna) o directament un error de la fitxa.
