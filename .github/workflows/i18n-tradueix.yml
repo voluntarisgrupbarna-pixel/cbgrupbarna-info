@@ -93,13 +93,15 @@ jobs:
           ABANS: ${{ github.event.before }}
           ARA: ${{ github.sha }}
         run: |
-          # El català és l'original. Si algú edita directament una pàgina de
-          # /es/ o /en/, el circuit li passarà per sobre la propera vegada:
-          # val més dir-ho ara que no pas que desaparegui sense avisar.
+          # El català és l'original: el text es decideix allà i baixa cap a
+          # les altres dues. Si algú toca /es/ o /en/ directament, aquell text
+          # queda fora del circuit —no és a cap fitxer de i18n/feina/— i la
+          # propera vegada que es refaci la pàgina desapareixerà sense avisar.
+          # Dir-ho el mateix dia és l'única manera que no es perdi.
           if git cat-file -e "$ABANS^{commit}" 2>/dev/null; then
             tocades=$(git diff --name-only "$ABANS" "$ARA" -- 'es/*.html' 'en/*.html' | head -20)
             if [ -n "$tocades" ]; then
-              echo "::warning::S'han editat traduccions a mà. El circuit les reescriurà: el text s'ha de canviar a la pàgina catalana."
+              echo "::warning::S'han editat traduccions directament. Si el canvi és de text, fes-lo a la pàgina catalana i torna a muntar les traduccions, o es perdrà."
               echo "$tocades"
             fi
           fi
@@ -146,35 +148,61 @@ jobs:
         if: steps.canvis.outputs.quantes != '0' && steps.traduir.outputs.sense_clau != 'si'
         run: python3 scripts/i18n-lint.py --nomes-errors
 
-      - name: Apuntar les pendents a la incidència
-        if: steps.traduir.outputs.sense_clau == 'si'
+      - name: Posar al dia la incidència de pendents
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # Una sola incidència, sempre la mateixa, amb la llista al dia. Així
-          # no s'omple el repositori d'incidències ni cal recordar-se de res:
-          # el que falti per traduir és sempre allà.
+          # Una sola incidència, que es REESCRIU cada vegada amb el que falta
+          # ara mateix. Abans s'hi anaven afegint comentaris i al cap d'un mes
+          # ningú sabia què seguia pendent i què ja s'havia fet. Ara el cos de
+          # la incidència és sempre la foto d'avui, i si no falta res es tanca
+          # sola.
           TITOL="i18n · pàgines pendents de traduir"
+          set +e
+          python3 scripts/i18n-paritat.py --tot > /tmp/pendents.txt
+          codi=$?
+          set -e
+
+          num=$(gh issue list --search "$TITOL in:title" --state all \
+                  --json number,state --jq '.[0].number' || true)
+
+          if [ "$codi" -eq 0 ]; then
+            echo "::notice::Cap traducció endarrerida."
+            if [ -n "$num" ]; then
+              estat=$(gh issue view "$num" --json state --jq .state)
+              if [ "$estat" = "OPEN" ]; then
+                gh issue comment "$num" --body "Ja no queda cap traducció endarrerida. Es tanca sola; es tornarà a obrir quan calgui."
+                gh issue close "$num"
+              fi
+            fi
+            exit 0
+          fi
+
           {
-            echo "Aquestes pàgines catalanes s'han tocat i les seves versions en"
-            echo "castellà i anglès s'han quedat velles."
+            echo "Aquestes pàgines tenen la versió catalana més nova que la seva"
+            echo "traducció, o directament no la tenen."
             echo
-            while read -r r; do [ -n "$r" ] && echo "- \`$r\`"; done < /tmp/rutes.txt
-            echo
-            echo "Per posar-les al dia:"
             echo '```'
+            cat /tmp/pendents.txt
+            echo '```'
+            echo
+            echo "### Com es tanca una"
+            echo '```bash'
             echo "python3 scripts/i18n-extreu.py <ruta> es en"
             echo "# omplir la traducció a i18n/feina/, a mà o amb i18n-tradueix.py"
             echo "python3 scripts/i18n-munta.py <ruta> es && python3 scripts/i18n-munta.py <ruta> en"
-            echo "python3 scripts/i18n-routes.py && python3 scripts/i18n-hreflang.py && python3 scripts/build-sitemap.py"
+            echo "python3 scripts/i18n-hreflang.py && python3 scripts/build-sitemap.py"
             echo '```'
             echo
-            echo "_Actualitzat automàticament pel workflow i18n-tradueix._"
+            echo "_Aquest cos el reescriu el workflow i18n-tradueix a cada push."
+            echo "No cal contestar-hi: quan la llista es buidi, la incidència es tanca sola._"
           } > /tmp/cos.md
-          num=$(gh issue list --search "$TITOL in:title" --state open --json number --jq '.[0].number' || true)
+
           if [ -n "$num" ]; then
-            gh issue comment "$num" --body-file /tmp/cos.md
-            echo "::notice::Apuntat a la incidència #$num."
+            gh issue edit "$num" --body-file /tmp/cos.md
+            gh issue reopen "$num" 2>/dev/null || true
+            echo "::notice::Incidència #$num posada al dia."
           else
             gh issue create --title "$TITOL" --body-file /tmp/cos.md --label i18n 2>/dev/null \
               || gh issue create --title "$TITOL" --body-file /tmp/cos.md
