@@ -41,6 +41,20 @@ jobs:
           # quedat enrere. Amb un clon superficial totes semblarien igual de
           # noves i no avisaria mai.
           fetch-depth: 0
+          # Però l'historial que cal són les DATES, no el contingut. Aquest
+          # repositori té les fotos a dins i pesa 5,5 GB: baixar-lo sencer
+          # feia que aquesta comprovació trigués més de deu minuts. Amb
+          # blob:none arriben els commits i els arbres —que és el que llegeix
+          # `git log --name-only`— i el contingut només del que hi ha ara.
+          filter: blob:none
+          # I d'ara mateix, tampoc les imatges: el lint només obre HTML.
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/fotos/
+            !/mascota/
+            !/photos/
+            !/galeria/
 
       - uses: actions/setup-python@v5
         with:
