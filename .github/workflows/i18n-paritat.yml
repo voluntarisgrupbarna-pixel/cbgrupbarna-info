@@ -38,11 +38,24 @@ jobs:
   paritat:
     runs-on: ubuntu-latest
     steps:
-      # Sense historial a propòsit: aquest repositori pesa 5,5 GB (les fotos
-      # hi són a dins) i un clon complet a cada proposta de canvi serien
-      # minuts d'espera per a una comprovació que dura segons. La llista de
-      # fitxers tocats la dona l'API de GitHub, que no necessita historial.
+      # Aquest repositori té les fotos a dins: 5,5 GB d'historial i 636 MB
+      # d'arbre de treball, dels quals 515 MB són imatges. Una comprovació
+      # que dura segons no ha d'esperar-se a baixar-ho tot.
+      #
+      #   · sense historial   — la llista de fitxers tocats la dona l'API
+      #   · sense les imatges — aquesta comprovació només llegeix HTML
+      #
+      # Queden 121 MB. Si algun dia una carpeta nova de fotos es fa gran,
+      # afegeix-la aquí i prou.
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/fotos/
+            !/mascota/
+            !/photos/
+            !/galeria/
 
       - uses: actions/setup-python@v5
         with:
