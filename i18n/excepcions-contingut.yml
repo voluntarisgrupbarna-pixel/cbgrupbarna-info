@@ -73,3 +73,13 @@ no_mirar:
   - ruta: /patrocinadors/partners/wilson/
     comprovacions: [titol]
     motiu: «Wilson · Partner del CB Grup Barna» coincideix en tots dos idiomes.
+
+  # Per prefix, quan la mateixa raó val per a tota una família de pàgines.
+  - prefix: /patrocinadors/partners/
+    comprovacions: [titol]
+    motiu: >
+      El títol d'una fitxa de partner és «<Empresa> · Partner del CB Grup
+      Barna», i «Partner del CB Grup Barna» s'escriu igual en català i en
+      castellà. Coincideixen perquè han de coincidir, no perquè faltin per
+      traduir. En anglès sí que canvia («CB Grup Barna Partner») i per això
+      allà no salta.

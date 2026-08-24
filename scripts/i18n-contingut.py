@@ -100,13 +100,17 @@ def meta(brut, rx):
 def carrega_excepcions():
     cami = os.path.join(ARREL, "i18n", "excepcions-contingut.yml")
     if not os.path.exists(cami):
-        return {}
+        return {}, []
     with open(cami, encoding="utf-8") as fh:
         d = yaml.safe_load(fh) or {}
-    fora = {}
+    fora, prefixos = {}, []
     for e in (d.get("no_mirar") or []):
-        fora.setdefault(e["ruta"], set()).update(e.get("comprovacions") or ["totes"])
-    return fora
+        quines = set(e.get("comprovacions") or ["totes"])
+        if e.get("prefix"):
+            prefixos.append((e["prefix"], quines))
+        else:
+            fora.setdefault(e["ruta"], set()).update(quines)
+    return fora, prefixos
 
 
 def sense_soroll(text, noms):
@@ -124,7 +128,7 @@ def main():
         noms = sorted(yaml.safe_load(fh)["noms_propis"], key=len, reverse=True)
     with open(os.path.join(ARREL, "i18n", "routes.yml"), encoding="utf-8") as fh:
         rutes = yaml.safe_load(fh).get("rutes", [])
-    fora = carrega_excepcions()
+    fora, prefixos = carrega_excepcions()
 
     avisos = {"seccions": [], "llargada": [], "catala": [], "titol": []}
     mirades = 0
@@ -146,7 +150,10 @@ def main():
             continue
         h2_ca = len(RE_H2.findall(brut_ca))
         titol_ca = meta(brut_ca, RE_TITOL)
-        exempta = fora.get(ca, set())
+        exempta = set(fora.get(ca, set()))
+        for pre, quines in prefixos:
+            if ca.startswith(pre):
+                exempta |= quines
 
         for idioma in IDIOMES:
             desti = r.get(idioma)
