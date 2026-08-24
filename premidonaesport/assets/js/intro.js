@@ -253,7 +253,7 @@
       `;
       cta.innerHTML = `
         <div style="font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;
-          color:rgba(244,241,236,.78);margin-bottom:.85rem;font-family:'Inter',sans-serif;">
+          color:rgba(244,241,236,.45);margin-bottom:.85rem;font-family:'Inter',sans-serif;">
           La veu ha acabat
         </div>
         <button onclick="skipAll()" style="
@@ -270,7 +270,7 @@
         <div style="margin-top:1rem;">
           <a onclick="skipAll()" style="
             font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;
-            color:rgba(244,241,236,.66);cursor:pointer;text-decoration:underline;
+            color:rgba(244,241,236,.3);cursor:pointer;text-decoration:underline;
             font-family:'Inter',sans-serif;
           ">Saltar a la web →</a>
         </div>

@@ -33,6 +33,12 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# El Premi Dona i Esport no s'hi toca: decisió de l'Ana (24/08/2026). És el
+# mirall local d'una candidatura que viu a la web oficial, i qualsevol canvi
+# aquí la fa divergir de l'original.
+INTOCABLE = 'premidonaesport'
+
 MAPA = ROOT / "i18n" / "routes.yml"
 SITE = "https://cbgrupbarna.info"
 
@@ -113,6 +119,8 @@ def main():
                 for u in (g.get("ca"), g.get("es"), g.get("en")) if u}
     netejades = []
     for fitxer in sorted(ROOT.rglob("*.html")):
+        if INTOCABLE in fitxer.parts:
+            continue
         rel = "/" + fitxer.relative_to(ROOT).as_posix()
         if ".git" in fitxer.parts or rel.replace("/index.html", "/") in del_grup:
             continue

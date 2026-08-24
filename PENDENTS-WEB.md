@@ -269,6 +269,37 @@ pogut tancar, i per què.
    altres fitxes tenen dada, aquestes diuen que encara no la tenim. No s'hi
    inventa res: és el criteri que el generador ja porta escrit.
 
+### Regla nova: el Premi Dona i Esport no s'hi toca
+
+Decisió de l'Ana, 24/08/2026. `/premidonaesport/` i les seves versions `/es/` i
+`/en/` són el mirall local d'una candidatura que viu a la web oficial
+(`voluntarisgrupbarna-pixel.github.io/cbgrupbarna`), i qualsevol canvi aquí la
+fa divergir de l'original.
+
+S'han **desfet** els canvis que hi havia fet aquesta sessió —el menú del club,
+el commutador d'idioma, els contrastos i les descripcions— i els 75 fitxers han
+tornat exactament al que eren.
+
+Els scripts que **escriuen** dins de fitxers ja la salten:
+`aplica-navegacio.py`, `aplica-estetica.py`, `i18n-hreflang.py`,
+`i18n-aplica-etiquetes.py`, `i18n-enllacos.py` i `i18n-munta.py`.
+
+Les eines que només **llegeixen** hi segueixen entrant a posta: el cercador del
+menú l'ha de trobar, el sitemap l'ha de llistar i les bateries l'han de poder
+mesurar. Mesurar no és tocar, i el club ha de poder veure com està encara que
+ara mateix estigui congelada. Els avisos que en surtin es queden aquí, sense
+tocar-la:
+
+- El vermell del club com a text sobre el seu fons negre dona 3,87:1, i sobre
+  fosc la pauta diu que s'aclareix a `#FF3B41`.
+- Els textos de crema per sota del 48% d'opacitat (peus, contactes, etiquetes)
+  es queden entre 1,67 i 3,41:1.
+- El botó vermell hi porta text crema, 4,37:1; amb blanc seria 4,92.
+- No hi arriba el menú del club ni el commutador d'idioma que sí que tenen les
+  altres 338 pàgines.
+
+Si algun dia es descongela, això és el que s'hi ha de fer.
+
 ### Decidit i fet en aquesta tanda
 
 - **L'Aquàrium de Barcelona, fora.** Decisió de l'Ana (24/08). Tretes les tres

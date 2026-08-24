@@ -97,6 +97,11 @@ def main():
     total, fitxers = 0, 0
     for idioma in ('es', 'en'):
         for f in sorted((ARREL / idioma).rglob('*.html')):
+            # El Premi Dona i Esport no s'hi toca: decisió de l'Ana
+            # (24/08/2026). És el mirall local d'una candidatura que viu a
+            # la web oficial, i qualsevol canvi aquí la fa divergir.
+            if 'premidonaesport' in f.parts:
+                continue
             html = f.read_text(encoding='utf-8')
             nou, canvis = arregla(html, idioma, mapa)
             if not canvis:

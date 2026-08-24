@@ -31,6 +31,12 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# El Premi Dona i Esport no s'hi toca: decisió de l'Ana (24/08/2026). És el
+# mirall local d'una candidatura que viu a la web oficial, i qualsevol canvi
+# aquí la fa divergir de l'original.
+INTOCABLE = 'premidonaesport'
+
 ETIQUETES = ROOT / "i18n" / "etiquetes.yml"
 SITE = "https://cbgrupbarna.info"
 
@@ -55,6 +61,8 @@ def main():
     canvis, fitxers = [], 0
 
     for fitxer in sorted(ROOT.rglob("*.html")):
+        if INTOCABLE in fitxer.parts:
+            continue
         rel = fitxer.relative_to(ROOT).as_posix()
         if rel.startswith((".git/", "galeria/node_modules/", "tests/")) or EXCLOU.search(rel):
             continue

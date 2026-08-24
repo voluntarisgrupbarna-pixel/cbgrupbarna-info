@@ -43,6 +43,12 @@ _extreu = _u.module_from_spec(_spec)
 _spec.loader.exec_module(_extreu)
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# El Premi Dona i Esport no s'hi toca: decisió de l'Ana (24/08/2026). És el
+# mirall local d'una candidatura que viu a la web oficial, i qualsevol canvi
+# aquí la fa divergir de l'original.
+INTOCABLE = 'premidonaesport'
+
 FEINA = ROOT / "i18n" / "feina"
 SITE = "https://cbgrupbarna.info"
 LOCALE = {"ca": "ca_ES", "es": "es_ES", "en": "en_US"}

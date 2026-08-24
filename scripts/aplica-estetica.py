@@ -30,7 +30,13 @@ from pathlib import Path
 
 ARREL = Path(__file__).resolve().parent.parent
 
-EXCLOU_DIRS = {".git", "tests", "node_modules"}
+# El Premi Dona i Esport no s'hi toca: decisió de l'Ana (24/08/2026). És el
+# mirall local d'una candidatura que viu a la web oficial, i qualsevol canvi
+# aquí la fa divergir de l'original.
+INTOCABLE = 'premidonaesport'
+
+
+EXCLOU_DIRS = {".git", "tests", "node_modules", INTOCABLE}
 EXCLOU_PATRONS = (
     "vendor/",
     "css/fonts.css",

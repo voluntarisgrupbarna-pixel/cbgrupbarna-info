@@ -26,7 +26,12 @@ from pathlib import Path
 ARREL = Path(__file__).resolve().parent.parent
 
 # Fora del lloc públic, o amb cicle de vida propi.
-EXCLOU = ('.git', 'node_modules', 'tests', '.github', 'galeria', '.claude')
+# El Premi Dona i Esport no s'hi toca: decisió de l'Ana (24/08/2026).
+# És el mirall local d'una candidatura que viu a la web oficial
+# (voluntarisgrupbarna-pixel.github.io/cbgrupbarna), i qualsevol canvi
+# aquí la fa divergir de l'original.
+EXCLOU = ('.git', 'node_modules', 'tests', '.github', 'galeria', '.claude',
+          'premidonaesport')
 
 CSS = '<link rel="stylesheet" href="/css/nav.css">'
 # L'ordre importa: tots dos són `defer` i s'executen en l'ordre del document,
