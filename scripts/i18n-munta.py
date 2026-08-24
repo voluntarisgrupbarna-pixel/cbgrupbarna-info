@@ -89,6 +89,9 @@ def per_camins(dades, cami, valor):
     node[cami[-1]] = valor
 
 
+MARCA_COMMUTADOR = "<!--i18n:commutador-->"
+
+
 def absolutitza(html, ruta):
     """Les rutes relatives, a absolutes des d'on era la pàgina catalana."""
     base = ruta if ruta.endswith("/") else ruta.rsplit("/", 1)[0] + "/"
@@ -239,7 +242,26 @@ def munta(ruta, idioma):
 
     # 5. Les rutes relatives i després els enllaços interns.
     html = absolutitza(html, ruta)
+
+    # El commutador d'idioma queda fora de la traducció d'enllaços. És l'únic
+    # lloc de la pàgina on un enllaç a la versió CATALANA hi és a propòsit: si
+    # el deixéssim passar per tradueix_enllacos, el «CA» acabaria apuntant a la
+    # pàgina castellana i totes tres pestanyes anirien al mateix lloc. Es guarda
+    # sencer, es tradueix la resta, i es torna a posar marcant l'idioma d'ara.
+    # (Vist el 24/08/2026: /es/3x3/ i /es/premsa/ tenien el «CA» apuntant-se a
+    # si mateixes i marcat com a actiu.)
+    commutador = re.search(r'(?is)<(div|nav) class="lang-switch".*?</\1>', html)
+    if commutador:
+        html = html.replace(commutador.group(0), MARCA_COMMUTADOR, 1)
+
     html, sense_versio = tradueix_enllacos(html, idioma)
+
+    if commutador:
+        bloc = commutador.group(0)
+        net = bloc.replace(' class="active"', '').replace(' aria-current="true"', '')
+        net = re.sub(r'(<a [^>]*hreflang="' + idioma + r'"[^>]*)(>)',
+                     r'\1 class="active" aria-current="true"\2', net, count=1)
+        html = html.replace(MARCA_COMMUTADOR, net, 1)
 
     # 6. La capçalera i el peu, des del diccionari.
     html = RE_CHROME_NAV.sub(lambda m: navegacio(idioma).lstrip(), html, count=1)
