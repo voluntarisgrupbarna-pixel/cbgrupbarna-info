@@ -26,6 +26,7 @@ Després cal refer el mapa, els hreflang i el sitemap:
         && python3 scripts/build-sitemap.py
 """
 import argparse
+import functools
 import json
 import re
 import sys
@@ -68,13 +69,15 @@ RE_ALTERNATE = re.compile(
     r'[ \t]*<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\'][^"\']+["\'][^>]*>[ \t]*\n?', re.I)
 
 
+@functools.lru_cache(maxsize=1)
+def _mapa_rutes():
+    mapa = yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}
+    return {g["ca"]: g for g in mapa.get("rutes", []) if g.get("ca")}
+
+
 def desti_del_mapa(ruta, idioma):
     """On viu la traducció d'aquesta pàgina, segons i18n/routes.yml."""
-    mapa = yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}
-    for grup in mapa.get("rutes", []):
-        if grup.get("ca") == ruta:
-            return grup.get(idioma)
-    return None
+    return _mapa_rutes().get(ruta, {}).get(idioma)
 
 
 def fitxer_de(url):
@@ -109,7 +112,11 @@ def tradueix_enllacos(html, idioma):
         # Fitxers (imatges, PDF, .ics) i rutes tècniques no tenen versió.
         if re.search(r"\.[a-z0-9]{2,5}$", ruta) and not ruta.endswith(".html"):
             return m.group(0)
-        candidat = f"/{idioma}{ruta}"
+        # La ruta traduïda es LLEGEIX del mapa; només si no hi consta es prova
+        # amb el prefix. Endevinant-la, /posicionament/ donava
+        # /es/posicionament/, que no existeix, i l'enllaç es quedava apuntant
+        # al català tot i que /es/posicionamiento/ sí que hi és.
+        candidat = desti_del_mapa(ruta, idioma) or f"/{idioma}{ruta}"
         if fitxer_de(candidat).exists():
             return f"{obre}{candidat}{cua}{tanca}"
         sense.add(ruta)
@@ -266,6 +273,14 @@ def munta(ruta, idioma):
     # 6. La capçalera i el peu, des del diccionari.
     html = RE_CHROME_NAV.sub(lambda m: navegacio(idioma).lstrip(), html, count=1)
     html = RE_SKIP.sub(lambda m: m.group(1) + text_diccionari("salta", idioma) + m.group(3), html)
+    # L'escut i l'enllaç d'inici no són text visible i per això no s'extreuen
+    # com a trossos: es quedaven en català a la pàgina traduïda, i qui fa
+    # servir un lector de pantalla els sentia en un idioma que no és el seu.
+    for clau, patro in (("escut_alt", r'(alt=")%s(")'),
+                        ("inici_aria", r'(aria-label=")%s(")')):
+        html = re.sub(patro % re.escape(text_diccionari(clau, "ca")),
+                      lambda m: m.group(1) + text_diccionari(clau, idioma) + m.group(2),
+                      html, count=1)
     peu_sol = re.search(r'(?is)<footer class="foot">.*</footer>', peu(idioma)).group(0)
     if RE_CHROME_FOOT.search(html):
         html = RE_CHROME_FOOT.sub(lambda _: peu_sol, html, count=1)
