@@ -68,13 +68,21 @@ RE_ALTERNATE = re.compile(
     r'[ \t]*<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\'][^"\']+["\'][^>]*>[ \t]*\n?', re.I)
 
 
+_MAPA = None
+
+
+def mapa_de_rutes():
+    """i18n/routes.yml llegit un sol cop: {ruta catalana: {es: ..., en: ...}}."""
+    global _MAPA
+    if _MAPA is None:
+        dades = yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}
+        _MAPA = {g["ca"]: g for g in dades.get("rutes", []) if g.get("ca")}
+    return _MAPA
+
+
 def desti_del_mapa(ruta, idioma):
     """On viu la traducció d'aquesta pàgina, segons i18n/routes.yml."""
-    mapa = yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}
-    for grup in mapa.get("rutes", []):
-        if grup.get("ca") == ruta:
-            return grup.get(idioma)
-    return None
+    return (mapa_de_rutes().get(ruta) or {}).get(idioma)
 
 
 def fitxer_de(url):
@@ -109,7 +117,11 @@ def tradueix_enllacos(html, idioma):
         # Fitxers (imatges, PDF, .ics) i rutes tècniques no tenen versió.
         if re.search(r"\.[a-z0-9]{2,5}$", ruta) and not ruta.endswith(".html"):
             return m.group(0)
-        candidat = f"/{idioma}{ruta}"
+        # Primer el mapa: hi ha pàgines la traducció de les quals no viu a
+        # /es/<mateix nom> sinó a un nom traduït — /campus-basquet-barcelona/
+        # es publica a /es/campus-baloncesto-barcelona/. Sense mirar-hi, la
+        # pàgina traduïda enllaçaria de tornada cap al català.
+        candidat = desti_del_mapa(ruta, idioma) or f"/{idioma}{ruta}"
         if fitxer_de(candidat).exists():
             return f"{obre}{candidat}{cua}{tanca}"
         sense.add(ruta)
