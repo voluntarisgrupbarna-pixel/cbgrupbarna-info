@@ -1116,3 +1116,105 @@ Comprovats tots els MP4 del repositori: la resta ja tenien l'índex al davant.
 **Encara pendent per l'Ana (no es pot fer des d'aquí):** els reels pesen massa.
 30 MB el català i 48 MB el castellà per a 90 segons verticals; ben codificat
 haurien de ser 10–12 MB. Cal reexportar-los, no reordenar-los.
+
+## 24-08-2026 — Els formularis, connectats al CRM de Brevo
+
+Fins ara cada formulari del web anava pel seu compte: uns a una full de càlcul,
+un a Formspree, un altre a WhatsApp. No hi havia cap lloc on veure **totes** les
+persones que han contactat amb el club, ni manera de saber què les hi havia
+portat. Ara tots van a **Brevo**, que passa a ser el CRM del club.
+
+### Fet al web (branca `claude/formularios-brevo-crm-m6uw0y`)
+
+- **Onze formularis connectats**: portada (ca/es/en), `/escriu-nos/`,
+  `/portes-obertes/`, `/newsletter/`, `/bustia/`, `/opina/`, la finestra de
+  descàrrega de documents i les portes de `/fotos/` i `/galeria-3x3-glories/`.
+- **`/js/brevo.js`** és l'únic lloc que parla amb Brevo, i **`/js/canals.js` →
+  bloc `brevo`** té una línia per formulari. Mentre una línia estigui buida,
+  aquell formulari funciona **exactament com fins ara**: no es perd cap alta,
+  però no arriba al CRM. S'activen d'un en un.
+- Es fan servir els **formularis allotjats a Brevo** (`sibforms.com/serve/…`),
+  que no necessiten clau d'API. La web és estàtica i una clau dins d'un `.js` la
+  pot llegir tothom.
+- **Brevo se suma als destins de sempre**, no els substitueix. Són dos destins
+  alhora mentre no hi hagi l'històric sencer a Brevo i la confiança que no es
+  perd res. El dia que es vulgui apagar la full, s'esborra una branca `if` de
+  cada handler.
+- **Nom, telèfon i correu, els tres obligatoris** a portada, `/escriu-nos/`,
+  `/portes-obertes/`, `/newsletter/`, la finestra de descàrrega i les galeries.
+  Abans hi havia un sol camp «telèfon o correu»: qui hi deixava només el número
+  no entrava al CRM (Brevo identifica els contactes pel correu) i, si no
+  despenjava, no hi havia segona via. **Ara no es perd ningú.**
+- **D'on ve cada contacte**: cada alta viatja amb `CAMPANYA`, `FONT`, `MITJA`,
+  `REFERENT` i `ENTRADA`, tret dels paràmetres `utm_*` de l'enllaç i, si no
+  n'hi ha, d'on venia el navegador. Es desa en carregar la pàgina i **mana la
+  primera visita**: qui entra per un anunci del campus i acaba enviant el
+  formulari de la portada segueix comptant com a alta d'aquell anunci. Per això
+  `/js/brevo.js` es carrega a tot el web, no només on hi ha formularis.
+- **`tests/formularis-brevo.mjs`**: omple els deu formularis en un navegador de
+  veritat, entrant per un enllaç de campanya, i comprova que hi arribin correu,
+  telèfon, nom i campanya. Sense enviar res enlloc. Passa'l sempre que es toqui
+  un formulari.
+
+### Decisions deliberades
+
+- **El canal de protecció del menor no va a Brevo**, i aquelles pàgines ni tan
+  sols carreguen `brevo.js`. El que s'hi comunica és la seguretat d'un infant,
+  no una oportunitat comercial.
+- **La bústia segueix sent anònima**: sense correu no s'envia res, i amb correu
+  hi va el contacte i el tema, **però no el text del missatge**, que es queda a
+  la full on el llegeix qui l'ha de contestar.
+- **La newsletter és l'únic formulari amb consentiment comercial explícit.** La
+  resta entren amb l'atribut `CONSENT` segons la casella que hagin marcat.
+
+### Pendent · només es pot fer dins de Brevo
+
+Instruccions pas a pas a **[`/js/README-brevo.md`](js/README-brevo.md)**; els
+textos dels correus, a **[`/BREVO-CORREUS.md`](BREVO-CORREUS.md)**.
+
+- [ ] **0 · Compte i domini.** Compte únic del club amb el correu genèric.
+      Autenticar `cbgrupbarna.info` (DKIM, SPF, DMARC) al DNS. Sense això els
+      correus cauen a la brossa. Es pot fer en paral·lel, però **abans del
+      primer enviament**.
+- [ ] **1 · Els 16 atributs de contacte.** Tots de tipus Text.
+      ⚠️ `TELEFON` és de text a posta, **no** el camp `SMS` de Brevo: `SMS`
+      rebutja els números mal formats i tira l'alta sencera.
+- [ ] **2 · Les 7 llistes**, una per canal. Separar-les és el que permet enviar
+      un correu comercial només a qui l'ha demanat.
+- [ ] **3 · Els 8 formularis.** `EMAIL` obligatori i **tota la resta opcional**:
+      si un camp és obligatori a Brevo i el web no l'envia, Brevo rebutja
+      l'alta. Doble opt-in només a Newsletter i Galeria.
+      Comença pel de la newsletter, que és el més simple, per veure el circuit
+      sencer abans de repetir-lo set vegades.
+- [ ] **4 · Enganxar les 8 `action`** a `/js/canals.js` → `brevo.formularis`.
+- [ ] **5 · Etiquetar els enllaços que publiquem** amb `utm_source`,
+      `utm_medium` i `utm_campaign`. És l'única feina manual i es fa en publicar.
+      Minúscules i guions, sempre: `Campus Nadal` i `campus-nadal` són dues
+      campanyes diferents per a Brevo. Als cartells amb QR,
+      `utm_source=cartell&utm_medium=qr` — és l'única manera de saber si el
+      paper porta gent.
+- [ ] **6 · Els dos correus automàtics**, amb el text ja escrit:
+      **benvinguda** en confirmar l'alta, i **rebut** just després d'enviar un
+      formulari, amb la consulta que ha fet la persona a dins.
+      El de «rebut» **no pot dur novetats ni ofertes** (va a gent sense permís
+      comercial) i el flux ha de ser **repetible**: si es configura «un cop per
+      contacte», qui escrigui dues vegades no rep el segon acusament i pensa
+      que no ha arribat.
+- [ ] **7 · Automatització del `CONSENT`**: si un contacte entra amb
+      `CONSENT = Sí`, afegir-lo també a la llista Newsletter. Sense això, la
+      casella de les descàrregues no serveix de res.
+- [ ] **8 · Migrar l'històric.** A la full hi ha altes de `/fotos/`,
+      `/fotos-3x3/` i `/galeria-3x3-glories/` amb `newsletter: 'Sí'`. Exportar a
+      CSV i importar-les a la llista Newsletter **abans del primer enviament**.
+
+### Per decidir
+
+- **Un formulari propi de patrocinis?** Ara les empreses entren pel formulari
+  genèric de `/escriu-nos/` amb el tema «Empreses i patrocinis», i per
+  `INTERES: Patrocini` des de la portada. Es poden separar a Brevo filtrant per
+  aquests dos camps, però si el volum creix val la pena una pàgina i una llista
+  pròpies, amb els camps que fa falta demanar a una empresa (persona de
+  contacte, càrrec, empresa) i no a una família.
+- **Apagar la full de càlcul.** Quan Brevo porti unes setmanes rebent-ho tot i
+  s'hagi comprovat que no falta res, es pot deixar d'enviar-hi. Fins llavors,
+  els dos destins.
