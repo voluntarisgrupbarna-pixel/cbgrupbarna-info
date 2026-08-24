@@ -63,8 +63,12 @@ for (const [nom, width, height] of DISPOSITIUS) {
   });
   for (const url of PAGINES) {
     const pag = await ctx.newPage();
+    // Cap petició cap enfora. Sense això, un incrustat d'Instagram o una foto
+    // de Drive deixen la pàgina esperant per sempre i el cens es penja: la
+    // primera vegada va quedar-se una hora en una sola pàgina.
+    await pag.route('**/*', (r) => (r.request().url().startsWith(servidor.origin) ? r.continue() : r.abort()));
     try {
-      await pag.goto(servidor.origin + url, { waitUntil: 'networkidle', timeout: 20000 });
+      await pag.goto(servidor.origin + url, { waitUntil: 'load', timeout: 20000 });
       // Respondre les galetes: si no, la barra tapa la pàgina i els seus dos
       // botons surten a cadascuna de les 162 mesures.
       await pag.evaluate(() => {
@@ -73,8 +77,8 @@ for (const [nom, width, height] of DISPOSITIUS) {
           localStorage.setItem('cbgb_galetes_v', '1');
         } catch (e) { /* mode privat: la barra hi serà i sortirà a la llista */ }
       });
-      await pag.reload({ waitUntil: 'networkidle', timeout: 20000 });
-      await pag.waitForTimeout(250);
+      await pag.reload({ waitUntil: 'load', timeout: 20000 });
+      await pag.waitForTimeout(400);
       for (const t of await pag.evaluate(TOCS)) {
         if (t.h < 44) curts.push({ nom, url, ...t });
         else nomesAmple++;

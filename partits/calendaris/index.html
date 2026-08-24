@@ -192,7 +192,12 @@
     return '<div class="cal-card" data-equip="' + equipId + '">'
       + '<a href="' + fitxer + '" target="_blank" rel="noopener" data-cta="cal-img-' + equipId + '">'
       + '<img src="/partits/calendaris/img/' + equipId + '.webp?v=' + t + '" alt="Calendari de ' + esc(nom)
-      + '" loading="lazy" decoding="async"></a>'
+      // Totes les fitxes es generen a 700×875. Dir-ho aquí fa que el navegador
+      // reservi l'espai abans de baixar la imatge: sense això, una fitxa encara
+      // no carregada ocupa un píxel, la pàgina fa un salt quan arriba i, si
+      // n'hi ha diverses avall de tot, la càrrega mandrosa no s'arriba a
+      // disparar mai perquè el document és més curt del que serà.
+      + '" width="700" height="875" loading="lazy" decoding="async"></a>'
       + '<div class="cal-card-body">'
       + '<span class="cal-card-tag">CB Grup Barna</span><h3>' + esc(nom) + '</h3>'
       + '<span class="cal-card-meta">' + info.jornades + ' jornades</span>'
