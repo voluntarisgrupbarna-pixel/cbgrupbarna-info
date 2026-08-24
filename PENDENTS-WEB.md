@@ -1113,3 +1113,34 @@ Comprovats tots els MP4 del repositori: la resta ja tenien l'índex al davant.
 **Encara pendent per l'Ana (no es pot fer des d'aquí):** els reels pesen massa.
 30 MB el català i 48 MB el castellà per a 90 segons verticals; ben codificat
 haurien de ser 10–12 MB. Cal reexportar-los, no reordenar-los.
+
+## 24-08-2026 — Fora el vídeo de la mascota
+
+Decisió de l'Ana: la pàgina de la mascota es queda sense vídeo, en els tres
+idiomes.
+
+No n'hi havia prou amb treure l'etiqueta `<video>`. També se n'han anat:
+
+- els comandaments que només servien per al reproductor (botó de reproduir,
+  botó de so, l'avís de «Toca per sentir la veu») i tot el seu JavaScript;
+- les etiquetes que anunciaven un vídeo a fora — `og:video`, `twitter:player`,
+  `og:type: video.other` i `twitter:card: player` —, perquè si no, WhatsApp i
+  X continuarien intentant reproduir-ne un que ja no hi és;
+- el JSON-LD, que declarava un `VideoObject` amb durada i URL del fitxer. Ara
+  és un `WebPage`;
+- el CSS que vestia tot això.
+
+**El marc del hero era vertical** (480×848) perquè hi anava un reel 9:16. La
+foto de la mascota que tenim és apaisada, i encabir-la-hi retallada donava un
+primer pla il·legible. El marc passa a apaisat (750×500) i hi va
+`img/blog/clot-mascota@2x.webp`, amb `srcset` per no servir el doble del que
+es veu.
+
+Comprovat amb navegador a 390 px en els tres idiomes: cap `<video>`, cap error
+de JavaScript, cap petició fallida, res que desbordi, i el commutador d'idioma
+damunt la foto a 5,87:1 de contrast. **La pàgina passa de ~62 MB transferits a
+133 KB.**
+
+**Pendent de decidir:** els cinc MP4 de `mascota/` (186 MB en total) ja no els
+enllaça cap pàgina. Es queden al repositori fins que l'Ana digui, perquè són
+els originals; però cada desplegament els ha d'empaquetar.
