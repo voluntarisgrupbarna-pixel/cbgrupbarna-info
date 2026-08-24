@@ -371,10 +371,6 @@ details.tpl[open] summary::after { content: '–'; }
       <span>CB Grup Barna</span>
     </a>
     <div class="head-side r">
-      <div class="langs" role="group" aria-label="Idioma">
-        <button type="button" data-lang="ca" aria-pressed="true">Cat</button>
-        <button type="button" data-lang="es" aria-pressed="false">Cast</button>
-      </div>
     </div>
   </div>
 </header>
@@ -419,6 +415,53 @@ details.tpl[open] summary::after { content: '–'; }
   </section>
 
   <!-- ==== PER QUÈ ==== -->
+  <section class="section tight">
+    <div class="wrap narrow">
+      <div class="rs">
+        <h2 data-t="rsH">Leave it right here</h2>
+        <p class="rs-s" data-t="rsS">If you would rather not leave the page, write it here. We read it ourselves and, if you like, you can then post it on Google too with one tap: that is where the families looking for us will see it.</p>
+
+        <form class="rs-form" id="rs-form" novalidate>
+          <div class="rs-row">
+            <label for="rs-e5" data-t="rsL1">Your rating</label>
+            <div class="rs-stars" role="radiogroup" aria-label="Rating from 1 to 5 stars">
+              <input type="radio" id="rs-e5" name="estrelles" value="5" checked><label for="rs-e5">★<span>5 stars</span></label>
+              <input type="radio" id="rs-e4" name="estrelles" value="4"><label for="rs-e4">★<span>4 stars</span></label>
+              <input type="radio" id="rs-e3" name="estrelles" value="3"><label for="rs-e3">★<span>3 stars</span></label>
+              <input type="radio" id="rs-e2" name="estrelles" value="2"><label for="rs-e2">★<span>2 stars</span></label>
+              <input type="radio" id="rs-e1" name="estrelles" value="1"><label for="rs-e1">★<span>1 star</span></label>
+            </div>
+          </div>
+          <div class="rs-row">
+            <label for="rs-nom" data-t="rsL2">Your name</label>
+            <input type="text" id="rs-nom" autocomplete="name" aria-describedby="rs-nom-err">
+            <p class="rs-err" id="rs-nom-err" role="alert" data-t="rsE1">Tell us your name.</p>
+          </div>
+          <div class="rs-row">
+            <label for="rs-mail" data-t="rsL3">Your email</label>
+            <input type="email" id="rs-mail" autocomplete="email" aria-describedby="rs-mail-err">
+            <p class="rs-err" id="rs-mail-err" role="alert" data-t="rsE2">That email does not look valid.</p>
+          </div>
+          <div class="rs-row">
+            <label for="rs-msg" data-t="rsL4">Your review</label>
+            <textarea id="rs-msg" aria-describedby="rs-msg-err" placeholder="Two lines in your own words…"></textarea>
+            <p class="rs-err" id="rs-msg-err" role="alert" data-t="rsE3">Write a couple of lines before sending it.</p>
+          </div>
+          <div class="btn-wrap" style="margin-top:6px">
+            <button type="submit" class="btn red" data-t="rsBtn">Send the review</button>
+          </div>
+          <p class="rs-nota" data-t="rsNota">We use your name and email only to know who wrote it and to be able to reply. We do not publish them anywhere.</p>
+        </form>
+
+        <div class="rs-done" id="rs-done" role="status">
+          <h3 data-t="rsDoneH">Thank you</h3>
+          <p data-t="rsDoneP">We have it. If you want everyone searching for us to see it, post it on Google too: it takes half a minute and it is what puts us at the top of the results.</p>
+          <a class="btn red" id="rs-google" href="#" target="_blank" rel="noopener" data-t="rsDoneBtn">Post it on Google too</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -934,12 +977,9 @@ https://cbgrupbarna.info/opina
   // ------------------------------------------------------------ arrencada --
   var params = new URLSearchParams(location.search);
   if (params.get('s')) track('opina_source', { source: params.get('s') });
-  var initial = params.get('lang');
-  if (!initial) {
-    try { initial = localStorage.getItem('opina-lang'); } catch (e) {}
-  }
-  if (!initial && (navigator.language || '').toLowerCase().indexOf('es') === 0) initial = 'es';
-  if (initial === 'es') applyLang('es');
+  // El commutador Cat/Cast de la pàgina catalana aquí no hi pinta res: aquesta
+  // pàgina ja és la versió traduïda i el canvi d'idioma es fa amb el commutador
+  // del web. Sense això, un navegador en castellà reescrivia aquesta pàgina.
 
   buildShare();
 

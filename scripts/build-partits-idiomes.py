@@ -18,6 +18,17 @@ Que NO es tradueix, a proposit:
   - el text de dins dels marcadors SEO-SNAPSHOT, SEO-EVENTS i SEO-EQUIPS, que
     el genera .github/scripts/generate-seo-snapshot.py.
 
+Es pot executar tantes vegades com calgui: la sortida nomes depen de la pagina
+catalana, aixi que passar-hi dues vegades dona el mateix fitxer.
+
+Com esta fet, i per que importa: totes les taules de text (TEXTOS, JS,
+JS_DATES, LD) es passen EN UNA SOLA passada amb marques intermedies i ordenades
+per llargada. Fer-ho taula per taula tenia un error dificil de veure: una frase
+curta d'una taula es menjava el principi d'una de llarga d'una altra i la
+deixava mig traduida per sempre, dins d'una resposta de la FAQ, on ningu no hi
+mirava. Abans de escriure res, `_comprova` busca restes de catala al text que
+es veu i s'atura si en troba.
+
 Us:
     python3 scripts/build-partits-idiomes.py
     python3 scripts/build-partits-idiomes.py --dry-run
@@ -135,7 +146,7 @@ TEXTOS = [
     ("Posicionament del club", "Posicionamiento del club", "Where the club stands"),
     ("La jornada anterior", "La jornada anterior", "Last round"),
     ("Política de privacitat", "Política de privacidad", "Privacy policy"),
-    ("Preguntes freqüents", "Preguntas frecuentes", "FAQ"),
+    ("Preguntes freqüents", "Preguntas frecuentes", "Frequently asked questions"),
     ("Demanar informació", "Pedir información", "Request information"),
     ("Calendaris per equip", "Calendario por equipo", "Team calendars"),
     ("Premi Dona i Esport", "Premio Mujer y Deporte", "Women and Sport Award"),
@@ -150,6 +161,18 @@ TEXTOS = [
     ("La temporada 2026-2027 encara no ha començat: el primer cap de setmana amb partits és el del 5 i 6 de setembre. Els resultats sortiran aquí l\\'endemà de cada jornada.",
      "La temporada 2026-2027 todavía no ha empezado: el primer fin de semana con partidos es el del 5 y 6 de septiembre. Los resultados saldrán aquí al día siguiente de cada jornada.",
      "The 2026-2027 season has not started yet: the first weekend with matches is 5 and 6 September. Results will appear here the day after each round."),
+    # Els avisos de quan no hi ha res a ensenyar. Es veuen poc, pero es veuen:
+    # fora de temporada la pagina es NOMES aixo, i qui la llegia en angles la
+    # trobava en catala sencera.
+    ("Encara no hi ha partits programats per als equips sèniors.",
+     "Todavía no hay partidos programados para los equipos sénior.",
+     "No fixtures scheduled yet for the senior teams."),
+    ("No hi ha partits programats a partir d\\'avui. Consulta el calendari global aquí sota.",
+     "No hay partidos programados a partir de hoy. Consulta el calendario global aquí abajo.",
+     "No fixtures scheduled from today. See the full calendar below."),
+    ("No s\\'ha pogut carregar el calendari. Torna-ho a provar d\\'aquí una estona.",
+     "No se ha podido cargar el calendario. Vuelve a probarlo dentro de un rato.",
+     "The calendar could not be loaded. Try again in a little while."),
     ("Dies de partit", "Días de partido", "Match days"),
     (">A casa<", ">En casa<", ">Home<"),
     ("'A casa contra '", "'En casa contra '", "'Home vs '"),
@@ -283,7 +306,20 @@ LD = [
      "El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos,",
      "CB Grup Barna has federated teams in the Cadet, Infantil, Junior and Senior age groups, both women's and men's,"),
     ("i es pot consultar a", "y se puede consultar en", "and can be seen at"),
+    (", amb els partits del cap de setmana, els resultats de la jornada anterior i el calendari global de la temporada.",
+     ", con los partidos del fin de semana, los resultados de la jornada anterior y el calendario global de la temporada.",
+     ", with this weekend's fixtures, last round's results and the full season calendar."),
 ]
+
+# Les paraules clau del <meta name="keywords">. Es reescriuen senceres perque
+# son una llista, no una frase: traduir-les tros a tros deixava una barreja
+# dels tres idiomes dins de la mateixa etiqueta.
+KEYWORDS = {
+    "es": ("partidos CB Grup Barna, resultados Grup Barna, calendario baloncesto Clot, "
+           "baloncesto Barcelona, La Nau del Clot, dias de partido"),
+    "en": ("CB Grup Barna fixtures, Grup Barna results, basketball calendar Clot, "
+           "basketball Barcelona, La Nau del Clot, match days"),
+}
 
 META = {
     "es": ("Días de partido del CB Grup Barna: calendario y resultados de todos los equipos "
@@ -293,7 +329,7 @@ META = {
 }
 
 
-def _substitueix(html, files, idx):
+def _substitueix(html, taules, idx):
     """Substitueix en dues passades, amb marques intermedies.
 
     Fer-ho directament tenia un error: una regla curta es menjava el resultat
@@ -302,8 +338,17 @@ def _substitueix(html, files, idx):
     regla «Calendari» → «Calendario» hi tornava a picar a dins i deixava
     «Calendarioo global». Amb marques, cada tros original es toca una vegada i
     prou: primer s'amaga darrere un @@n@@ i despres es revela ja traduit.
+
+    Les taules entren TOTES A LA VEGADA, a proposit. Quan cada taula es
+    passava per separat, l'ordre per llargada nomes valia dins de la seva, i
+    una frase curta de TEXTOS es menjava el principi d'una de llarga de LD:
+    «Calendari global de tots els equips» es traduia sol i deixava la resta
+    de la frase del JSON-LD —«…del CB Grup Barna, partits del cap de setmana
+    i resultats de la jornada anterior»— en catala per sempre, perque la
+    regla llarga ja no hi trobava el seu text sencer. Amb una sola passada,
+    la regla mes llarga sempre guanya, vingui de la taula que vingui.
     """
-    files = [f for f in files if f[0]]
+    files = [f for taula in taules for f in taula if f[0]]
     ordre = sorted(range(len(files)), key=lambda i: -len(files[i][0]))
     marca = {}
     for i in ordre:
@@ -319,14 +364,14 @@ def _substitueix(html, files, idx):
 
 
 def tradueix(html, idx, lang):
-    html = _substitueix(html, TEXTOS, idx)
-    html = _substitueix(html, JS, idx)
-    # Els mes llargs primer, que si no un de curt en trenca un de llarg.
-    for fila in sorted(JS_DATES, key=lambda f: -len(f[0])):
+    # El JavaScript de dates es comprova ABANS de tocar res: si l'original ha
+    # canviat, val mes aturar-se que publicar una pagina amb mitja frase en
+    # catala enmig d'una de traduida.
+    for fila in JS_DATES:
         if fila[0] not in html:
             sys.exit(f"No trobo aquest tros de JavaScript:\n  {fila[0][:70]}")
-        if fila[0] != fila[idx]:
-            html = html.replace(fila[0], fila[idx])
+
+    html = _substitueix(html, (TEXTOS, JS, JS_DATES, LD), idx)
 
     # Llistes de dies i mesos del JavaScript, substituides senceres.
     for vell, nou in ((DIES_CA, DIES[lang]), (CURT_CA, CURT[lang]), (MESOS_CA, MESOS[lang])):
@@ -335,22 +380,28 @@ def tradueix(html, idx, lang):
                      "Si l'han canviat, cal actualitzar-lo tambe aqui.")
         html = html.replace(vell, nou)
 
-    # Dades estructurades: FAQ i WebPage.
-    for fila in sorted(LD, key=lambda f: -len(f[0])):
-        if fila[0] != fila[idx]:
-            html = html.replace(fila[0], fila[idx])
     # Les adreces de dins del JSON-LD han d'apuntar a la pagina d'aquest idioma.
     html = html.replace("cbgrupbarna.info/partits/", f"cbgrupbarna.info/{lang}/partits/")
-    html = html.replace('"inLanguage":"ca"', f'"inLanguage":"{lang}"')
 
     # Idioma del document i de les dades estructurades.
     html = html.replace('<html lang="ca">', f'<html lang="{lang}">')
-    html = html.replace('"inLanguage": "ca-ES"', f'"inLanguage": "{lang}-ES"' if lang == "es"
-                        else '"inLanguage": "en"')
+    # inLanguage, en totes les formes que hi ha a la pagina: al JSON-LD compacte
+    # hi diu "ca" sense espai, al de sota "ca" o "ca-ES" amb espai. Buscar-ne
+    # nomes una deixava l'altra en catala dins d'una pagina en angles.
+    # Es respecta la forma que hi hagi a l'original: "ca" surt "es"/"en" i
+    # "ca-ES" surt "es-ES"/"en-GB". Aixi no s'hi inventa una regio que la
+    # pagina catalana no declarava.
+    REGIO = {"es": "es-ES", "en": "en-GB"}
+    html = re.sub(
+        r'("inLanguage":\s*")ca(-ES)?(")',
+        lambda m: m.group(1) + (REGIO[lang] if m.group(2) else lang) + m.group(3),
+        html)
     html = re.sub(r'(<meta name="description" content=")[^"]*(")',
                   lambda m: m.group(1) + META[lang] + m.group(2), html)
     html = re.sub(r'(<meta property="og:description" content=")[^"]*(")',
                   lambda m: m.group(1) + META[lang] + m.group(2), html)
+    html = re.sub(r'(<meta name="keywords" content=")[^"]*(")',
+                  lambda m: m.group(1) + KEYWORDS[lang] + m.group(2), html)
     html = html.replace('content="ca_ES"', f'content="{lang}_ES"' if lang == "es"
                         else 'content="en_GB"')
 
@@ -401,6 +452,44 @@ def tradueix(html, idx, lang):
     return html
 
 
+# Paraules que, si surten al text que llegeix una persona, volen dir que una
+# frase s'ha quedat a mitges. No hi son totes les del catala: hi son les que no
+# es poden confondre amb un nom propi ni amb castella ni angles. FEMENÍ i
+# MASCULÍ no hi son a proposit: formen part dels noms oficials d'equip de la
+# FCBQ i no es tradueixen mai.
+# Es comproven amb limit de paraula, que si no el castella hi pica sol: dins
+# de «el calendario oficial» hi ha «el calendari», i «la jornada anterior»
+# s'escriu igual en catala i en castella. Per aixo la llista nomes te trossos
+# que no existeixen en cap dels altres dos idiomes.
+RESTES = [
+    "cap de setmana", "dies de partit", "s'actualitza", "Cal activar",
+    "Encara no", "aquí sota", "els partits", "el calendari", "Torna-ho",
+    "tots els equips", "hi ha partits", "resultats", "sortiran",
+]
+
+
+def _comprova(html, lang):
+    """Avisa si ha quedat catala al text que es veu.
+
+    Les etiquetes, el JavaScript i els comentaris no compten: alli el catala
+    hi pot ser i no el llegeix ningu. El que no pot passar es que una frase
+    quedi mig traduida —«…and can be seen at cbgrupbarna.info/en/partits/, amb
+    els partits del cap de setmana…»—, que es exactament el que passava quan
+    una regla curta es menjava el principi d'una de llarga.
+    """
+    visible = re.sub(r"(?is)<(script|style)\b.*?</\1>", " ", html)
+    visible = re.sub(r"(?s)<!--.*?-->", " ", visible)
+    # Els atributs que si que llegeix algu: alt, title, aria-label i les meta.
+    llegible = " ".join(re.findall(r'(?:alt|title|aria-label|content)="([^"]*)"', visible))
+    visible = re.sub(r"(?s)<[^>]+>", " ", visible) + " " + llegible
+    trobats = sorted({t for t in RESTES
+                      if re.search(r"\b" + re.escape(t) + r"\b", visible, re.I)})
+    if trobats:
+        sys.exit(f"Ha quedat catala a la versio «{lang}»: {', '.join(trobats)}\n"
+                 "Segurament una regla curta s'ha menjat el principi d'una de llarga.\n"
+                 "Afegeix la frase sencera a TEXTOS o a LD i torna-ho a provar.")
+
+
 def main():
     dry = "--dry-run" in sys.argv
     if not FONT.is_file():
@@ -410,6 +499,7 @@ def main():
     for lang, idx in (("es", 1), ("en", 2)):
         desti = ROOT / lang / "partits" / "index.html"
         nou = tradueix(base, idx, lang)
+        _comprova(nou, lang)
         anterior = desti.read_text(encoding="utf-8") if desti.is_file() else ""
         if nou == anterior:
             print(f"  sense canvis: {desti.relative_to(ROOT)}")

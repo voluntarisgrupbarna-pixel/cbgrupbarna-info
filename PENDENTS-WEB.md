@@ -115,6 +115,11 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   selecció espanyola (línia 744).
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
+- **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
+  `patrocinadors/partners/wilson/` se'n surt amb el nom escrit amb la tipografia del
+  club, que queda digne, però és l'única de les 21 fitxes que no té marca gràfica. Si
+  l'Ana en pot demanar un SVG o un PNG amb fons transparent, es posa en un minut. Mentre
+  no arribi, la fitxa no queda coixa: no cal fer-hi res.
 
 ## Pendent de desenvolupar
 
@@ -1113,3 +1118,84 @@ Comprovats tots els MP4 del repositori: la resta ja tenien l'índex al davant.
 **Encara pendent per l'Ana (no es pot fer des d'aquí):** els reels pesen massa.
 30 MB el català i 48 MB el castellà per a 90 segons verticals; ben codificat
 haurien de ser 10–12 MB. Cal reexportar-los, no reordenar-los.
+
+## 24-08-2026 — Fora el vídeo de la mascota
+
+Decisió de l'Ana: la pàgina de la mascota es queda sense vídeo, en els tres
+idiomes.
+
+No n'hi havia prou amb treure l'etiqueta `<video>`. També se n'han anat:
+
+- els comandaments que només servien per al reproductor (botó de reproduir,
+  botó de so, l'avís de «Toca per sentir la veu») i tot el seu JavaScript;
+- les etiquetes que anunciaven un vídeo a fora — `og:video`, `twitter:player`,
+  `og:type: video.other` i `twitter:card: player` —, perquè si no, WhatsApp i
+  X continuarien intentant reproduir-ne un que ja no hi és;
+- el JSON-LD, que declarava un `VideoObject` amb durada i URL del fitxer. Ara
+  és un `WebPage`;
+- el CSS que vestia tot això.
+
+**El marc del hero era vertical** (480×848) perquè hi anava un reel 9:16. La
+foto de la mascota que tenim és apaisada, i encabir-la-hi retallada donava un
+primer pla il·legible. El marc passa a apaisat (750×500) i hi va
+`img/blog/clot-mascota@2x.webp`, amb `srcset` per no servir el doble del que
+es veu.
+
+Comprovat amb navegador a 390 px en els tres idiomes: cap `<video>`, cap error
+de JavaScript, cap petició fallida, res que desbordi, i el commutador d'idioma
+damunt la foto a 5,87:1 de contrast. **La pàgina passa de ~62 MB transferits a
+133 KB.**
+
+**Pendent de decidir:** els cinc MP4 de `mascota/` (186 MB en total) ja no els
+enllaça cap pàgina. Es queden al repositori fins que l'Ana digui, perquè són
+els originals; però cada desplegament els ha d'empaquetar.
+
+## 24-08-2026 — Fora també els vídeos del repositori
+
+Decisió de l'Ana. Traguda la reproducció de la pàgina, els fitxers ja no els
+enllaçava ningú i cada desplegament els havia d'empaquetar.
+
+Esborrats de `mascota/` (180 MB):
+
+| Fitxer | Mida |
+|---|---|
+| `mascota-reel-es-capcut.mp4` | 48,2 MB |
+| `mascota-reel-es.mp4` | 48,1 MB |
+| `mascota-reel.mp4` | 30,2 MB |
+| `mascota-teleprompter.mp4` | 38,6 MB |
+| `mascota.mp4` | 14,1 MB |
+| `subtitols.vtt`, `subtitols-es.vtt`, `subtitols-en.vtt` | els subtítols dels vídeos |
+
+Abans d'esborrar es va buscar cada nom per tot el repositori: cap pàgina,
+full d'estil, guió ni el `sitemap.xml` no en referencien cap. Les úniques
+mencions eren prosa d'aquest document i un comentari de
+`scripts/mp4-faststart.py`, que és una eina general i no en depèn.
+
+**Com recuperar-los si mai calen:** són a l'historial de git, al commit
+`c589e7f4`. Amb `git show c589e7f4:mascota/mascota-reel.mp4 > mascota-reel.mp4`
+en surt qualsevol, byte a byte.
+
+## 24-08-2026 — El que queda obert d'aquesta tanda de traducció
+
+Tres coses apuntades i no fetes, perquè cap de les tres és una decisió tècnica:
+
+- **Redirect de L'Aquàrium de Barcelona.** Quan es va esborrar el partner, les
+  seves tres fitxes (`ca`, `es`, `en`) van passar a 404. GitHub Pages no fa
+  redireccions de servidor, així que l'única manera és una pàgina estàtica amb
+  `<meta http-equiv="refresh">`, que ja és el mecanisme que fem servir a la
+  resta del web per a aquest cas (vegeu `web-cbgb`). No s'ha fet perquè no hi
+  ha cap enllaç conegut, intern ni extern, que hi apunti — les tres fitxes
+  només sortien del propi `partits/` i del sitemap, i totes dues coses ja
+  estan netes. Si l'Ana sap d'algun enllaç extern (una nota de premsa, un post
+  antic) que encara hi porti gent, avisa-ho i es posa el redirect en cinc
+  minuts.
+- **Logotip de la Wilson**, ja apuntat més amunt, a «Pendent de material de
+  l'Ana».
+- **La skill `mapa-web-cbgb` parla d'una desincronització que ja no existeix.**
+  Diu que `/femeni/` és «encara sense traduir» com a exemple del que passa
+  quan es toca una pàgina catalana i no es reflecteix a `/es/` i `/en/`. Des
+  d'aquesta tanda, `/femeni/` està traduïda sencera i, sobretot, ja no cal fer
+  aquesta comprovació a mà: `i18n-paritat.py` i `i18n-contingut.py` ho vigilen
+  soles a cada `push` i bloquegen el pull request si es desincronitza. Cal
+  actualitzar aquell paràgraf perquè no enviï a ningú a buscar un problema que
+  ja no hi és.

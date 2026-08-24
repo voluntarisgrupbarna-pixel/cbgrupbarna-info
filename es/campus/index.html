@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10100E">
-<title>Campus de baloncesto en Barcelona, verano | CB Grup Barna</title>
-<meta name="description" content="Campus de baloncesto en Barcelona para niños y niñas de base. El campus de verano del CB Grup Barna en El Clot, Distrito de Sant Martí: semanas intensivas de…">
-<meta name="keywords" content="campus baloncesto Barcelona, campus de verano baloncesto Barcelona, campus tecnificación baloncesto Barcelona, campus básquet Barcelona, campus baloncesto niños Barcelona, campus baloncesto niñas Barcelona, campus baloncesto Semana Santa, campus baloncesto Navidad, academia de baloncesto Barcelona, mejores campus de baloncesto Barcelona, campus baloncesto Sant Martí, campus baloncesto El Clot, grup barna campus">
+<title>Campus de Baloncesto en Barcelona | CB Grup Barna × Time Chamber</title>
+<meta name="description" content="Campus de baloncesto en Barcelona: tecnificación en el Clot para jugadores y jugadoras de formación. CB Grup Barna × Time Chamber, La Nau del Clot, Carrer de la Llacuna 170-172. Semanas temáticas, 9h–17h con comida o 9h–13:30h, desde 160 €. Abierto a cualquier club.">
+<meta name="keywords" content="campus baloncesto Barcelona, campus bàsquet Barcelona, academia de baloncesto Barcelona verano, campus verano baloncesto, grup barna campus, campus tecnificación baloncesto Barcelona">
 <link rel="canonical" href="https://cbgrupbarna.info/es/campus/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/campus/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/campus/">
@@ -16,10 +16,8 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:locale" content="es_ES">
-<meta property="og:locale:alternate" content="ca_ES">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:title" content="Campus de baloncesto en Barcelona, verano | CB Grup Barna">
-<meta property="og:description" content="Campus de baloncesto en Barcelona para niños y niñas de base. El campus de verano del CB Grup Barna en El Clot, Distrito de Sant Martí: semanas intensivas de…">
+<meta property="og:title" content="Campus de baloncesto en Barcelona · CB Grup Barna | Verano en el Clot">
+<meta property="og:description" content="Campus de baloncesto en Barcelona: tecnificación en el Clot para jugadores y jugadoras de formación. CB Grup Barna × Time Chamber, La Nau del Clot, Carrer de la Llacuna 170-172. Semanas temáticas, 9h–17h con comida o 9h–13:30h, desde 160 €. Abierto a cualquier club.">
 <meta property="og:url" content="https://cbgrupbarna.info/es/campus/">
 <meta property="og:image" content="https://cbgrupbarna.info/img/campus-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
@@ -34,7 +32,42 @@
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">
 <style>
-/* ==== SELECTOR D'IDIOMA ==== */
+  .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 38px 0; }
+  .photo-strip figure { margin: 0; }
+  .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
+  @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Programa setmanal en targetes: número + dates + focus, com el
+     calendari del microsite de Time Chamber però amb el llenguatge del Barna. */
+  .weeks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 720px) { .weeks { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1040px) { .weeks { grid-template-columns: repeat(3, 1fr); } }
+  .week { background: var(--paper); padding: clamp(20px, 2.6vw, 28px) clamp(18px, 2.4vw, 24px); }
+  .week b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; color: var(--red); line-height: 1; }
+  .week time { display: block; margin-top: 10px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
+  .week h3 { font-size: 14px; letter-spacing: 0.1em; margin: 10px 0 6px; }
+  .week p { font-size: 13.5px; color: var(--ink-2); }
+
+  /* Preus: dues opcions, la recomanada amb vora vermella. */
+  .price-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: clamp(26px, 4vw, 44px) 0; }
+  @media (min-width: 620px) { .price-cards { grid-template-columns: 1fr 1fr; } }
+  .price-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(22px, 3vw, 30px); }
+  .price-card.top { border-color: var(--red); position: relative; }
+  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
+  .price-card.top .tag { color: var(--red); }
+  .price-card b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; margin: 8px 0 4px; }
+  .price-card .sched { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
+  .price-card ul { list-style: none; }
+  .price-card li { position: relative; padding: 7px 0 7px 18px; font-size: 13.5px; color: var(--ink-2); border-top: 1px solid var(--line); }
+  .price-card li:first-child { border-top: 0; }
+  .price-card li::before { content: '·'; position: absolute; left: 4px; color: var(--red); font-weight: 700; }
+  .price-note { font-size: 13.5px; color: var(--ink-2); max-width: 62ch; }
+
+  /* Crida forta a la galeria completa, no només les 6 fotos triades. */
+  .gal-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; justify-content: space-between;
+    border: 1px solid var(--line); background: var(--paper-2); padding: clamp(18px, 2.6vw, 26px); margin-top: 4px; }
+  .gal-cta p { font-size: 13.5px; color: var(--ink-2); margin: 0; max-width: 46ch; }
+  .gal-cta .btn { flex-shrink: 0; }
 
   /* Estrelles del campus: qui ha vingut a entrenar amb els nostres.
      El reel només es carrega quan algú hi clica (res d'Instagram fins llavors). */
@@ -48,6 +81,8 @@
   .star-embed iframe { width: 100%; height: 100%; border: 0; }
   .star-tx { padding: 18px 18px 20px; }
   .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
+  .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
+  .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
   .star-tx .role { display: block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.24em;
     text-transform: uppercase; color: var(--red-dark); margin-bottom: 7px; }
 
@@ -58,7 +93,7 @@
   .stars-group > p { font-size: 13.5px; color: var(--ink-2); max-width: 64ch; margin: 12px 0 0; }
   .stars-group .stars { margin-top: clamp(18px, 2.4vw, 26px); }
 
-  /* Les convocatories publicades: enllac sec, sense incrustar res. */
+  /* Les convocatòries publicades: enllaç sec, sense incrustar res. */
   .convos { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line);
     border: 1px solid var(--line); margin: clamp(18px, 2.4vw, 26px) 0 0; }
   @media (min-width: 720px) { .convos { grid-template-columns: repeat(2, 1fr); } }
@@ -68,44 +103,27 @@
   .convos b { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--ink); }
   .convos span { font-size: 12.5px; color: var(--ink-2); }
-  .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
-  .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
-  /* Targetes de preu: la fitxa i els preus no hi eren, en aquest idioma. */
-  .price-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: clamp(26px, 4vw, 44px) 0; }
-  @media (min-width: 620px) { .price-cards { grid-template-columns: 1fr 1fr; } }
-  .price-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(22px, 3vw, 30px); }
-  .price-card.top { border-color: var(--red); position: relative; }
-  .price-card .tag { font-family: var(--display); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
-  .price-card.top .tag { color: var(--red); }
-  .price-card b { display: block; font-family: var(--display); font-size: clamp(30px, 4vw, 40px); font-weight: 300; margin: 8px 0 4px; }
-  .price-card .sched { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
-  .price-card ul { list-style: none; }
-  .price-card li { position: relative; padding: 7px 0 7px 18px; font-size: 13.5px; color: var(--ink-2); border-top: 1px solid var(--line); }
-  .price-card li:first-child { border-top: 0; }
-  .price-card li::before { content: '·'; position: absolute; left: 4px; color: var(--red); font-weight: 700; }
-  .price-note { font-size: 13.5px; color: var(--ink-2); max-width: 62ch; }
 </style>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Course",
       "@id": "https://cbgrupbarna.info/es/campus/#course",
       "name": "Campus de baloncesto CB Grup Barna con Time Chamber",
-      "description": "Campus de tecnificación de baloncesto por semanas en El Clot, Barcelona. Cada semana tiene un foco técnico propio (lectura de juego, fundamentos, tiro, 1x1, manejo de balón, habilidades combinadas), con grupos por edad y nivel y un límite aproximado de 50 plazas por semana.",
+      "description": "Campus de tecnificación de baloncesto por semanas en el Clot, Barcelona. Cada semana tiene un foco técnico propio (lectura de juego, fundamentos, tiro, 1x1, manejo de balón, habilidades combinadas), con grupos por edad y nivel y un límite aproximado de 50 plazas por semana.",
       "inLanguage": "es",
       "url": "https://cbgrupbarna.info/es/campus/",
       "provider": {
         "@id": "https://cbgrupbarna.info/#club"
       },
-      "educationalLevel": "Baloncesto base: de Escoleta a júnior",
+      "educationalLevel": "Bàsquet base: d'Escoleta a júnior",
       "teaches": [
-        "Tiro",
-        "Manejo de balón",
-        "Juego de 1x1",
-        "Lectura de juego",
-        "Fundamentos técnicos"
+        "Tir",
+        "Manejo de pilota",
+        "Joc d'1x1",
+        "Lectura de joc",
+        "Fonaments tècnics"
       ],
       "offers": [
         {
@@ -113,7 +131,7 @@
           "name": "Semana completa · 9h a 17h, comida incluida",
           "price": "195",
           "priceCurrency": "EUR",
-          "category": "Semana completa",
+          "category": "Setmana completa",
           "availability": "https://schema.org/LimitedAvailability",
           "url": "https://cbgrupbarna.info/es/campus/"
         },
@@ -122,7 +140,7 @@
           "name": "Media jornada · 9h a 13:30h",
           "price": "160",
           "priceCurrency": "EUR",
-          "category": "Media jornada",
+          "category": "Mitja jornada",
           "availability": "https://schema.org/LimitedAvailability",
           "url": "https://cbgrupbarna.info/es/campus/"
         }
@@ -146,16 +164,17 @@
     },
     {
       "@type": "Service",
-      "@id": "https://cbgrupbarna.info/campus/#campus",
+      "@id": "https://cbgrupbarna.info/es/campus/#campus",
       "name": "Campus de baloncesto · CB Grup Barna",
       "alternateName": [
-        "Campus de verano de baloncesto en Barcelona",
-        "Grup Barna Campus",
-        "Campus de tecnificación de baloncesto"
+        "Campus de baloncesto en Barcelona",
+        "Campus d'estiu de bàsquet Barcelona",
+        "Campus de la academia de baloncesto en Barcelona",
+        "Grup Barna Campus"
       ],
-      "description": "Campus de baloncesto en Barcelona para niños y niñas de base. El campus de verano del CB Grup Barna en El Clot, Distrito de Sant Martí: semanas intensivas de tecnificación, grupos por edad y plazas limitadas. Información y lista de espera.",
-      "serviceType": "Campus de baloncesto",
-      "url": "https://cbgrupbarna.info/campus/",
+      "description": "Campus de baloncesto en Barcelona para niños y niñas de base. El campus de verano del CB Grup Barna en el Clot, Distrito de Sant Martí: semanas intensivas de tecnificación, grupos por edad y plazas limitadas. Información y lista de espera.",
+      "serviceType": "Campus de bàsquet",
+      "url": "https://cbgrupbarna.info/es/campus/",
       "provider": {
         "@id": "https://cbgrupbarna.info/#club"
       },
@@ -176,27 +195,301 @@
       },
       "availableChannel": {
         "@type": "ServiceChannel",
-        "serviceUrl": "https://cbgrupbarna.info/campus/",
+        "serviceUrl": "https://cbgrupbarna.info/es/campus/",
         "servicePhone": {
           "@type": "ContactPoint",
           "telephone": "+34698425153",
-          "contactType": "Inscripciones campus"
+          "contactType": "Inscripcions campus"
         }
       }
+    },
+    {
+      "@type": "Course",
+      "@id": "https://cbgrupbarna.info/es/campus/#course",
+      "name": "Campus de baloncesto CB Grup Barna · Time Chamber Experience",
+      "alternateName": [
+        "Campus de baloncesto en Barcelona",
+        "Basketball camp Barcelona",
+        "Campus d'estiu de bàsquet Barcelona",
+        "Time Chamber Experience"
+      ],
+      "description": "Campus intensivo de tecnificación de baloncesto en el Clot, Barcelona. Semanas con foco propio (tiro, ballhandling, 1x1, fundamentos), grupos por edad y nivel, informe individual y plazas limitadas. Abierto a jugadores y jugadoras de cualquier club.",
+      "url": "https://cbgrupbarna.info/es/campus/",
+      "provider": {
+        "@id": "https://cbgrupbarna.info/#club"
+      },
+      "inLanguage": "es-ES",
+      "educationalLevel": "Bàsquet formatiu · de l'Escoleta a júnior",
+      "teaches": [
+        "Tir",
+        "Ballhandling",
+        "Joc de l'1x1",
+        "Fonaments individuals",
+        "Lectura de joc"
+      ],
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 5,
+        "suggestedMaxAge": 17
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "160",
+        "highPrice": "195",
+        "priceCurrency": "EUR",
+        "offerCount": 2,
+        "description": "Semana completa 195 € (9–17 h, comida incluida) · media jornada 160 € (9–13:30 h). Precio por semana.",
+        "availability": "https://schema.org/LimitedAvailability",
+        "url": "https://cbgrupbarna.info/es/campus/"
+      },
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "name": "Flow Camp",
+          "description": "Fundamentos y ritmo de juego",
+          "courseMode": "onsite",
+          "courseWorkload": "PT25H",
+          "location": {
+            "@type": "Place",
+            "name": "La Nau del Clot",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
+              "addressLocality": "Barcelona",
+              "postalCode": "08018",
+              "addressCountry": "ES"
+            }
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "160",
+            "highPrice": "195",
+            "priceCurrency": "EUR"
+          },
+          "courseSchedule": {
+            "@type": "Schedule",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "repeatFrequency": "P1D"
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "TC Basics",
+          "description": "Fundamentos individuales Time Chamber",
+          "courseMode": "onsite",
+          "courseWorkload": "PT25H",
+          "location": {
+            "@type": "Place",
+            "name": "La Nau del Clot",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
+              "addressLocality": "Barcelona",
+              "postalCode": "08018",
+              "addressCountry": "ES"
+            }
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "160",
+            "highPrice": "195",
+            "priceCurrency": "EUR"
+          },
+          "courseSchedule": {
+            "@type": "Schedule",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "repeatFrequency": "P1D"
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "Shooting Academy",
+          "description": "Mecánica y volumen de tiro",
+          "courseMode": "onsite",
+          "courseWorkload": "PT25H",
+          "location": {
+            "@type": "Place",
+            "name": "La Nau del Clot",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
+              "addressLocality": "Barcelona",
+              "postalCode": "08018",
+              "addressCountry": "ES"
+            }
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "160",
+            "highPrice": "195",
+            "priceCurrency": "EUR"
+          },
+          "courseSchedule": {
+            "@type": "Schedule",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "repeatFrequency": "P1D"
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "One & One Mastery",
+          "description": "Juego del 1x1",
+          "courseMode": "onsite",
+          "courseWorkload": "PT25H",
+          "location": {
+            "@type": "Place",
+            "name": "La Nau del Clot",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
+              "addressLocality": "Barcelona",
+              "postalCode": "08018",
+              "addressCountry": "ES"
+            }
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "160",
+            "highPrice": "195",
+            "priceCurrency": "EUR"
+          },
+          "courseSchedule": {
+            "@type": "Schedule",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "repeatFrequency": "P1D"
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "Ballhandling Lab",
+          "description": "Manejo de balón",
+          "courseMode": "onsite",
+          "courseWorkload": "PT25H",
+          "location": {
+            "@type": "Place",
+            "name": "La Nau del Clot",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
+              "addressLocality": "Barcelona",
+              "postalCode": "08018",
+              "addressCountry": "ES"
+            }
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "160",
+            "highPrice": "195",
+            "priceCurrency": "EUR"
+          },
+          "courseSchedule": {
+            "@type": "Schedule",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "repeatFrequency": "P1D"
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "Skills Lab Experience",
+          "description": "Habilidades combinadas",
+          "courseMode": "onsite",
+          "courseWorkload": "PT25H",
+          "location": {
+            "@type": "Place",
+            "name": "La Nau del Clot",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Carrer de la Llacuna, 170-172",
+              "addressLocality": "Barcelona",
+              "postalCode": "08018",
+              "addressCountry": "ES"
+            }
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "160",
+            "highPrice": "195",
+            "priceCurrency": "EUR"
+          },
+          "courseSchedule": {
+            "@type": "Schedule",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "repeatFrequency": "P1D"
+          }
+        }
+      ],
+      "location": {
+        "@type": "Place",
+        "name": "La Nau del Clot",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrer de la Llacuna, 170-172",
+          "addressLocality": "Barcelona",
+          "addressRegion": "Barcelona",
+          "postalCode": "08018",
+          "addressCountry": "ES"
+        }
+      },
+      "maximumAttendeeCapacity": 50,
+      "coursePrerequisites": "Cap. Obert a jugadors i jugadores de qualsevol club."
     },
     {
       "@type": "WebPage",
       "@id": "https://cbgrupbarna.info/es/campus/#webpage",
       "url": "https://cbgrupbarna.info/es/campus/",
-      "name": "Campus de baloncesto en Barcelona · CB Grup Barna | Verano en El Clot",
-      "description": "Campus de baloncesto en Barcelona para niños y niñas de base. El campus de verano del CB Grup Barna en El Clot, Distrito de Sant Martí: semanas intensivas de tecnificación, grupos por edad y plazas limitadas. Información y lista de espera.",
-      "inLanguage": [
-        "es-ES",
-        "ca-ES",
-        "en-US"
-      ],
+      "name": "Campus de baloncesto en Barcelona · CB Grup Barna | Verano en el Clot",
+      "description": "Campus de baloncesto en Barcelona para niños y niñas de base. El campus de verano del CB Grup Barna en el Clot, Distrito de Sant Martí: semanas intensivas de tecnificación, grupos por edad y plazas limitadas. Información y lista de espera.",
+      "inLanguage": "es-ES",
       "about": {
-        "@id": "https://cbgrupbarna.info/campus/#campus"
+        "@id": "https://cbgrupbarna.info/es/campus/#campus"
       },
       "isPartOf": {
         "@id": "https://cbgrupbarna.info/#website"
@@ -220,8 +513,7 @@
       ]
     }
   ]
-}
-</script>
+}</script>
 <script src="/js/galetes.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
 </head>
@@ -229,8 +521,8 @@
 <a href="#main" class="skip">Saltar al contenido</a>
 <header class="head">
   <div class="head-in">
-    <a class="head-brand" href="/es/" aria-label="CB Grup Barna · inicioo">
-      <img src="/logo.png" alt="Escudo del CB Grup Barna" width="30" height="30">
+    <a class="head-brand" href="/es/" aria-label="CB Grup Barna · inici">
+      <img src="/logo.png" alt="Escut del CB Grup Barna" width="30" height="30">
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegación principal">
@@ -253,33 +545,36 @@
   <div class="phead">
     <p class="eyebrow red">Campus de baloncesto · El Clot · Barcelona</p>
     <h1>Campus de baloncesto en Barcelona</h1>
-    <p class="lede">Semanas intensivas de baloncesto y tecnificación en El Clot, Distrito de Sant Martí,
-    abiertas a jugadores y jugadoras de cualquier club de Barcelona y de la provincia. Grupos por edad
-    y nivel, plazas limitadas por semana.</p>
+    <p class="lede">Tecnificación de baloncesto en el Clot para jugadores y jugadoras de formación ·
+    <strong>CB Grup Barna × Time Chamber</strong>. Semanas intensivas con foco propio, grupos por edad y nivel, y abiertas a cualquier club de Barcelona y de la provincia.</p>
     <div class="btn-row" style="margin-top:28px">
-      <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20del%20Campus%20de%20baloncesto%20del%20CB%20Grup%20Barna"
+      <a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20informaci%C3%B3%20del%20Campus%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna"
          class="btn red" target="_blank" rel="noopener" data-cta="campus-wa">Pedir información</a>
       <a href="/es/#info" class="btn ghost" data-cta="campus-form">Avísame de la próxima edición</a>
-      <a href="/es/campus-baloncesto-barcelona/" class="btn ghost" data-cta="campus-comparativa">Comparativa de campus en Barcelona →</a>
-      <a href="/es/campus-navidad-baloncesto-barcelona/" class="btn ghost" data-cta="campus-navidad">Campus de Navidad →</a>
+      <a href="https://timechamber.skywork.website/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-web-timechamber">Web del campus Time Chamber →</a>
+      <a href="/es/tecnificacion-baloncesto-barcelona/" class="btn ghost" data-cta="campus-tecnificacio">Tecnificación en Navidad y Semana Santa →</a>
+        <a href="/es/campus-baloncesto-barcelona/" class="btn ghost" data-cta="campus-comparativa">Comparativa de campus en Barcelona →</a>
+        <a href="/es/campus-navidad-baloncesto-barcelona/" class="btn ghost" data-cta="campus-nadal">Campus de Navidad →</a>
+      <a href="/es/presentaciones/campus-timechamber/" class="btn ghost" data-cta="campus-presentacio">Ver la presentación →</a>
     </div>
     <div class="phead-media">
-      <img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 1200w, /img/campus-hero@2x.webp 2048w" sizes="(max-width: 900px) 100vw, 1120px" alt="Sesión del campus de baloncesto del CB Grup Barna en La Nau del Clot" width="1200" height="675" fetchpriority="high">
+      <img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 1200w, /img/campus-hero@2x.webp 2048w" sizes="(max-width: 900px) 100vw, 1120px" alt="Sesión del campus de baloncesto del CB Grup Barna en La Nau del Clot: una veintena de niños y niñas en círculo alrededor de un entrenador" width="1200" height="675" fetchpriority="high">
     </div>
   </div>
 
-  <div class="narrow prose">
-    <!-- FITXA-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
+
+  <div class="narrow prose" id="fitxa">
+<!-- FITXA-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
     <h2>Ficha del campus</h2>
-    <p>Todos los datos en un solo sitio, sin tener que buscarlos por la página. La última edición cerrada es el <strong>Verano 2026</strong>; las fechas de la próxima se anuncian aquí y en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <p>Todos los datos en un solo lugar, sin tener que buscarlos por la página. La última edición cerrada es el<strong>Verano 2026</strong>; las fechas de la próxima se anuncian aquí y en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
   </div>
   <div class="dl narrow">
-    <div class="dl-row"><dt>Qué es</dt><dd>Campus de tecnificación de baloncesto. No es un casal con pelota: cada semana trabaja un aspecto concreto del juego.</dd></div>
+    <div class="dl-row"><dt>Qué es</dt><dd>Campus de tecnificación de baloncesto. No es un casal con balón: cada semana trabaja un aspecto concreto del juego.</dd></div>
     <div class="dl-row"><dt>Quién lo organiza</dt><dd>CB Grup Barna × Time Chamber. El club pone la estructura y los entrenadores; Time Chamber, la metodología de trabajo individual.</dd></div>
     <div class="dl-row"><dt>Dónde</dt><dd>La Nau del Clot, Barcelona. Instalación oficial del club.</dd></div>
     <div class="dl-row"><dt>Dirección</dt><dd>Carrer de la Llacuna, 170-172 · 08018 Barcelona · barrio del Clot, Distrito de Sant Martí.</dd></div>
-    <div class="dl-row"><dt>Cómo llegar</dt><dd>Metro L1 Glòries y L2 Clot · Cercanías Clot-Aragó · autobuses del Clot y Glòries. A pie desde Westfield Glòries.</dd></div>
-    <div class="dl-row"><dt>Para quién</dt><dd>Siete categorías: Escoleta, Premini, Mini, Preinfantil, Infantil, Cadete y Júnior. Los grupos se hacen por categoría y nivel, de modo que quien empieza no entrena con quien lleva años compitiendo.</dd></div>
+    <div class="dl-row"><dt>Cómo llegar</dt><dd>Metro L1 Glòries y L2 Clot · Rodalies Clot-Aragó · autobuses del Clot y Glòries. A pie desde Westfield Glòries.</dd></div>
+    <div class="dl-row"><dt>Para quién</dt><dd>Siete categorías: Escoleta, Premini, Mini, Preinfantil, Infantil, Cadete y Júnior. Los grupos se hacen por categoría y nivel, de manera que quien empieza no entrena con quien ya lleva años compitiendo.</dd></div>
     <div class="dl-row"><dt>Niños y niñas</dt><dd>Sí. El campus es mixto y el club tiene paridad real entre la línea femenina y la masculina.</dd></div>
     <div class="dl-row"><dt>¿Hay que ser del Barna?</dt><dd>No. Está abierto a jugadores y jugadoras de cualquier club de Barcelona y de la provincia. Los del club tienen prioridad de inscripción y precio propio.</dd></div>
     <div class="dl-row"><dt>Cuándo</dt><dd>En verano, en semanas consecutivas de finales de junio a principios de agosto. La edición 2026 fue del 23 de junio al 1 de agosto.</dd></div>
@@ -287,8 +582,8 @@
     <div class="dl-row"><dt>Precio</dt><dd>Semana completa 195 € (9–17 h) · media jornada 160 € (9–13:30 h). Precio por semana. Pago fraccionado disponible.</dd></div>
     <div class="dl-row"><dt>Comida</dt><dd>Incluida en la jornada completa. La media jornada acaba antes de comer.</dd></div>
     <div class="dl-row"><dt>Servicios</dt><dd>Servicio de acogida por la mañana, comida en la jornada completa y excursión el viernes a Illa Fantasia.</dd></div>
-    <div class="dl-row"><dt>Qué se trabaja</dt><dd>Tiro, manejo de balón, juego del 1x1, fundamentos individuales y lectura de juego. Cada semana tiene un foco propio, de modo que quien viene más de una semana no repite.</dd></div>
-    <div class="dl-row"><dt>Quién entrena</dt><dd>Los entrenadores del club y de Time Chamber. Han pasado Robert Willett (entrenador NBA, @bballwillett), Ainhoa López (jugadora profesional, selección española) y Malak Shady (MVP de 3x3).</dd></div>
+    <div class="dl-row"><dt>Qué se trabaja</dt><dd>Tiro, manejo de balón, juego del 1x1, fundamentos individuales y lectura de juego. Cada semana tiene un foco propio, de manera que quien viene más de una semana no repite.</dd></div>
+    <div class="dl-row"><dt>Quién entrena</dt><dd>Los entrenadores del club y de Time Chamber. Han pasado Robert Willett y Nolan Willett (entrenadores de tecnificación NBA), Ainhoa López (jugadora profesional, selección española), Malak Shady (MVP de 3x3), Serge Ibaka (campeón NBA 2019) y Yankuba Sima (Euroliga).</dd></div>
     <div class="dl-row"><dt>Cuántos hay</dt><dd>Más de 200 jugadores y jugadoras por edición, con un límite aproximado de 50 plazas por semana para mantener la ratio de trabajo.</dd></div>
     <div class="dl-row"><dt>Idioma</dt><dd>Catalán y castellano. Los entrenadores invitados internacionales trabajan en inglés con traducción.</dd></div>
     <div class="dl-row"><dt>Cómo inscribirse</dt><dd>Por WhatsApp al +34 698 425 153 o por el formulario del club. Las últimas ediciones se han llenado antes de empezar.</dd></div>
@@ -296,30 +591,82 @@
   <div class="narrow prose">
     <!-- FITXA-CAMPUS:final -->
     <h2>Qué es el campus del Barna</h2>
-    <p>El campus de baloncesto del <strong>CB Grup Barna</strong> es el programa de entrenamiento intensivo
-    que el club organiza durante las vacaciones escolares en el barrio de El Clot. No es una actividad de
-    ocio con balón: es <strong>tecnificación</strong>, con sesiones dedicadas a un aspecto concreto
-    del juego y grupos hechos por edad y nivel.</p>
-    <p>El club lo trabaja con <strong>Time Chamber</strong>, que aporta la metodología de trabajo
-    individual. La combinación es lo que define el campus: el volumen de repeticiones de una escuela de
-    tecnificación con el ambiente de equipo de un club de barrio con sesenta y un años de historia.</p>
+    <p>El campus de baloncesto del <strong>CB Grup Barna</strong> es el programa de entrenamiento intensivo que el club organiza durante las vacaciones escolares en el barrio del Clot. No es una actividad de ocio con balón: es <strong>tecnificación</strong>, con sesiones dedicadas a un aspecto concreto del juego y grupos hechos por edad y nivel.</p>
+    <p>El club lo trabaja con <strong>Time Chamber</strong>, que aporta la metodología de trabajo individual. La combinación es la que define el campus: el volumen de repeticiones de una escuela de tecnificación con el ambiente de equipo de un club de barrio con sesenta y un años de historia.</p>
+
+    <h2>Quién entrena</h2>
+    <p>Lo que separa un campus de tecnificación de un casal con balón no es lo que dice el folleto: son los entrenadores que pasan por él. El trabajo diario lo llevan los entrenadores del club y de
+    <strong>Time Chamber</strong>, con el mismo criterio que en la temporada. Y cada edición invita a gente que no suele pisar un campus de barrio:</p>
+    <ul>
+      <li><strong>Robert Willett</strong> — entrenador NBA (<a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett</a>), dentro del programa <em>Time Chamber Experience × CB Grup Barna</em>. <a href="https://www.instagram.com/reel/DQOhe0qjAPb/" target="_blank" rel="noopener" data-cta="campus-prova-willett">Ver la sesión en el Clot →</a></li>
+      <li><strong>Nolan Willett</strong> — entrenador de tecnificación, también con Time Chamber en el Clot. <a href="https://www.instagram.com/reel/DMGO77UsDoQ/" target="_blank" rel="noopener" data-cta="campus-prova-nolan">Ver la sesión →</a></li>
+      <li><strong>Serge Ibaka</strong> — campeón de la NBA 2019, de visita al campus. <a href="https://www.instagram.com/reel/DO4KaZxCLqY/" target="_blank" rel="noopener" data-cta="campus-prova-ibaka">Ver la visita →</a></li>
+      <li><strong>Yankuba Sima</strong> — jugador de Euroliga, sesión en el campus del Barna. <a href="https://www.instagram.com/reel/DN1a1DvUGhg/" target="_blank" rel="noopener" data-cta="campus-prova-sima">Ver la sesión →</a></li>
+      <li><strong>Ainhoa López</strong> — jugadora profesional e internacional española, formada en la misma pista del Clot. <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official</a></li>
+      <li><strong>Malak Shady</strong> — MVP de 3x3 y referente del baloncesto urbano. <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22</a></li>
+    </ul>
+    <p>No son colaboraciones anunciadas en una nota de prensa: están grabadas, publicadas y se pueden ver. Es la diferencia entre un campus que pone un nombre conocido en la portada y un campus donde ese nombre pisa la pista.</p>
+
+    <h2>Y fuera del verano</h2>
+    <p>El campus de verano es el grueso, pero no la única semana de tecnificación del año. En las vacaciones escolares el club abre dos ediciones cortas en el mismo sitio y con la misma metodología:</p>
+    <ul>
+      <li><a href="/es/campus-navidad-baloncesto-barcelona/">Campus de Navidad</a> — entre finales de diciembre y principios de enero.</li>
+      <li><a href="/es/campus/semana-santa/">Campus de Semana Santa</a> — el Flow Camp, 150 € la semana.</li>
+    </ul>
+    <p>Si lo que quiere es entender qué quiere decir tecnificar antes de apuntar a nadie, eso se explica en <a href="/es/tecnificacion-baloncesto-barcelona/">Tecnificación de baloncesto en Barcelona</a>.</p>
+
+    <h2>El campus y el 3x3 del club</h2>
+    <p>El campus no es la única cita de verano del Barna en el Clot. El club organiza el
+    <strong>3×3 Westfield Glòries</strong>, torneo registrado en la FIBA con 2.000 € en premios —1.000 € femeninos y 1.000 € masculinos, reparto paritario, único en Barcelona—, 10 categorías y tres sedes en el barrio. Muchas familias hacen las dos cosas: campus por la mañana en verano, torneo el fin de semana de junio.</p>
+    <p><a href="/es/3x3/">El 3×3 del club en la web →</a> · <a href="https://www.cbgrupbarna-3x3timechamber.com/" target="_blank" rel="noopener" data-cta="campus-3x3-microsite">Web oficial del 3×3 Barna →</a></p>
 
     <h2>Cómo se organiza</h2>
-    <p>Cada semana tiene un enfoque propio, de manera que quien viene más de una semana no repite contenidos.
-    Estos son los módulos que ha trabajado el club en las últimas ediciones:</p>
-    <ul>
-      <li><strong>Flow Camp</strong> — lectura de juego y toma de decisiones.</li>
-      <li><strong>TC Basics</strong> — fundamentos: pies, equilibrio, mecánica.</li>
-      <li><strong>Shooting Academy</strong> — tiro, en todas sus situaciones.</li>
-      <li><strong>One &amp; One Mastery</strong> — el juego de uno contra uno.</li>
-      <li><strong>Ballhandling Lab</strong> — manejo de balón y bote bajo presión.</li>
-      <li><strong>Skills Lab Experience</strong> — trabajo combinado de habilidades.</li>
-    </ul>
+    <p>Cada semana tiene un foco propio, de manera que quien viene más de una semana no repite contenidos. Estos son los módulos que ha trabajado el club en las últimas ediciones:</p>
+
+    <div class="weeks">
+      <div class="week">
+        <b>01</b>
+        <time>23–27 junio</time>
+        <h3>Flow Camp</h3>
+        <p>Lectura de juego y toma de decisiones.</p>
+      </div>
+      <div class="week">
+        <b>02</b>
+        <time>30 junio–4 julio</time>
+        <h3>TC Basics</h3>
+        <p>Fundamentos: pies, equilibrio, mecánica.</p>
+      </div>
+      <div class="week">
+        <b>03</b>
+        <time>7–11 julio</time>
+        <h3>Shooting Academy</h3>
+        <p>Tiro, en todas sus situaciones.</p>
+      </div>
+      <div class="week">
+        <b>04</b>
+        <time>14–18 julio</time>
+        <h3>One &amp; One Mastery</h3>
+        <p>El juego de uno contra uno: finta y creatividad ofensiva.</p>
+      </div>
+      <div class="week">
+        <b>05</b>
+        <time>21–25 julio</time>
+        <h3>Ballhandling Lab</h3>
+        <p>Manejo de balón y bote bajo presión.</p>
+      </div>
+      <div class="week">
+        <b>06</b>
+        <time>28 julio–1 agosto</time>
+        <h3>Skills Lab Experience</h3>
+        <p>Trabajo combinado de habilidades: el broche de la edición.</p>
+      </div>
+    </div>
+    <p class="tbl-note" style="font-size:13.5px;color:var(--ink-2)">Fechas orientativas, calcadas sobre la edición de referencia. Se confirman en esta página y en Instagram antes de la apertura de inscripciones de cada año.</p>
 
     <div class="facts">
       <div><b><em>50</em></b><span>Plazas por semana</span></div>
       <div><b>1965</b><span>Año de fundación del club</span></div>
-      <div><b>150</b><span>Participantes en verano de 2026</span></div>
+      <div><b>150</b><span>Participantes en el verano de 2026</span></div>
       <div><b>BCN</b><span>El Clot · Sant Martí</span></div>
     </div>
 
@@ -347,10 +694,25 @@
     </div>
     <p class="price-note">Reserva de plaza con pago fraccionado en hasta 3 plazos. Cada año se abre un descuento por inscripción anticipada; las fechas y el código se publican en esta página y en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a> cuando se abren las inscripciones.</p>
     <!-- PREUS-CAMPUS:final -->
+    <h2>El campus, en imágenes</h2>
+    <p>Fotos de la última edición con Time Chamber, en La Nau del Clot.</p>
+    <div class="photo-strip">
+      <figure><img src="/campus/img/campus-2026-01.jpg" alt="Sesión de vídeo con el entrenador durante el campus de baloncesto del CB Grup Barna" loading="lazy" decoding="async" width="900" height="1200"></figure>
+      <figure><img src="/campus/img/campus-2026-02.jpg" alt="Jugadores y jugadoras del campus tirando a canasta en La Nau del Clot" loading="lazy" decoding="async" width="900" height="675"></figure>
+      <figure><img src="/campus/img/campus-2026-03.jpg" alt="Entrenador del campus explicando un ejercicio con el balón" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="/campus/img/campus-2026-04.jpg" alt="Jugadora del campus en posición de tiro" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="/campus/img/campus-2026-05.jpg" alt="Jugador del campus botando el balón entre compañeros" loading="lazy" decoding="async" width="900" height="1350"></figure>
+      <figure><img src="/campus/img/campus-2026-06.jpg" alt="Grupo de jugadores del campus haciendo un ejercicio de tiro" loading="lazy" decoding="async" width="900" height="1350"></figure>
+    </div>
+    <div class="gal-cta">
+      <p><strong>Estas son seis fotos escogidas.</strong> La galería completa del verano — todas las semanas,
+      con foto y vídeo — está en la Galería Fotográfica del club.</p>
+      <a href="/es/fotos/#summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9" class="btn ghost" data-cta="campus-galeria-completa">Ver la galería del verano →</a>
+    </div>
 
 <!-- ESTRELLES-CAMPUS:inici · generat per scripts/build-campus-estrelles.py -->
     <h2>Estrellas del campus</h2>
-    <p>Algo que no hace todo el mundo: por el campus han pasado referentes del baloncesto a entrenar con nuestros jugadores y jugadoras. No de visita para la foto — en pista, dirigiendo sesión. Lo separamos en tres grupos porque no todo se grabó en el mismo sitio: primero lo que pasó <strong>en La Nau del Clot</strong>, después el trabajo de los entrenadores y de los jugadores de élite <strong>con Time Chamber</strong>, que es nuestro socio del campus.</p>
+    <p>Una cosa que no hace todo el mundo: por el campus han pasado referentes del baloncesto a entrenar con nuestros jugadores y jugadoras. No de visita para la foto — en pista, dirigiendo sesión. Lo separamos en tres grupos porque no todo se grabó en el mismo sitio: primero lo que pasó <strong>en La Nau del Clot</strong>, después el trabajo de los entrenadores y de los jugadores de élite <strong>amb Time Chamber</strong>, que es nuestro socio del campus.</p>
 
     <div class="stars-group">
       <h3>En La Nau del Clot</h3>
@@ -411,7 +773,7 @@
           </button>
           <div class="star-tx">
             <h4>Ainhoa López</h4>
-            <span class="role">Selección Española · formada en El Clot</span>
+            <span class="role">Selección Española · formada en el Clot</span>
             <p>Jugadora profesional. Salió de esta pista y ha vuelto a entrenar en ella.</p>
             <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official →</a>
           </div>
@@ -427,6 +789,28 @@
             <p>Referente del baloncesto en redes y MVP de 3x3.</p>
             <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
           </div>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-embed="reel/DO4KaZxCLqY" aria-label="Reproducir el reel con Serge Ibaka">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Serge Ibaka</span>
+        </button>
+        <div class="star-tx">
+          <h3>Serge Ibaka</h3>
+          <p>Campeón de la NBA 2019, de visita en el Clot.</p>
+          <a href="https://www.instagram.com/reel/DO4KaZxCLqY/" target="_blank" rel="noopener">Ver en Instagram →</a>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-embed="reel/DN1a1DvUGhg" aria-label="Reproducir el reel con Yankuba Sima">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Yankuba Sima</span>
+        </button>
+        <div class="star-tx">
+          <h3>Yankuba Sima</h3>
+          <p>Jugador de Euroliga, en el campus del Barna.</p>
+          <a href="https://www.instagram.com/reel/DN1a1DvUGhg/" target="_blank" rel="noopener">Ver en Instagram →</a>
         </div>
       </div>
     </div>
@@ -455,7 +839,7 @@
           <div class="star-tx">
             <h4>Nolan Willett</h4>
             <span class="role">Entrenador NBA</span>
-            <p>Segunda sesión: lectura de juego y resolución cerca del aro.</p>
+            <p>Segunda sesión: lectura de juego y resolución cerca de canasta.</p>
             <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
           </div>
         </div>
@@ -475,7 +859,7 @@
     </div>
 
     <div class="stars-group">
-      <h3>Jugadores de élite que han entrenado</h3>
+      <h3>Jugadores de élite que han entrenado aquí</h3>
       <p>Sesiones con Time Chamber, el socio del campus. No todas se grabaron en La Nau: cuando no fue así, lo decimos.</p>
       <div class="stars">
         <div class="star">
@@ -558,7 +942,7 @@
           <div class="star-tx">
             <h4>Joel Parra</h4>
             <span class="role">ACB · Joventut</span>
-            <p>Sesión con Time Chamber en el Pavelló Olímpic de Badalona, no en La Nau.</p>
+            <p>Sesión con Time Chamber en el Pabellón Olímpico de Badalona, no en La Nau.</p>
             <a href="https://www.instagram.com/joelparra/" target="_blank" rel="noopener">@joelparra →</a>
           </div>
         </div>
@@ -580,15 +964,15 @@
       </div>
     </div>
 
-    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Los vídeos son de Instagram y solo se cargan si haces clic. Todo el recopilatorio de la edición está en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Los vídeos son de Instagram y solo se cargan si hacéis clic. Todo el recopilatorio de la edición está en <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
     <!-- ESTRELLES-CAMPUS:final -->
     <script>
-      // Els reels d'Instagram només es carreguen si l'usuari hi clica.
+      // Els reels i posts d'Instagram només es carreguen si l'usuari hi clica.
       document.querySelectorAll('.star-play').forEach(function (b) {
         b.addEventListener('click', function () {
           var d = document.createElement('div');
           d.className = 'star-embed';
-          // Uns son reels i uns altres publicacions de feed: data-kind="p" ho marca.
+          // Uns són reels i uns altres publicacions de feed: data-kind="p" ho marca.
           var kind = b.dataset.kind === 'p' ? 'p' : 'reel';
           d.innerHTML = '<iframe src="https://www.instagram.com/' + kind + '/' + b.dataset.reel +
             '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
@@ -597,12 +981,43 @@
       });
     </script>
 
+    <h2>El campus en Instagram</h2>
+    <p>Las convocatorias de cada edición, publicadas y enlazadas — no una promesa, un rastro que se puede comprobar.</p>
+    <div class="btn-row">
+      <a href="https://www.instagram.com/p/DXKxd7VjCJK/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-ig-estiu">Campus de verano · La Nau del Clot →</a>
+      <a href="https://www.instagram.com/p/DUtmAbHjFIs/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-ig-flowcamp">Flow Camp · Semana Santa →</a>
+      <a href="https://www.instagram.com/p/DQ7nLmkjINq/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-ig-edicio-limitada">Edición Limitada 2025 →</a>
+      <a href="https://www.instagram.com/p/DUT5hyjDD7S/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-ig-carnaval">Campus de Carnaval →</a>
+    </div>
+
+    <h2>La sede</h2>
+    <p><strong>La Nau del Clot</strong>, Carrer de la Llacuna 170-172, 08018 Barcelona — el punto deportivo
+    principal del CB Grup Barna, en el barrio del Clot. Horario del campus: 9h–13:30h en media jornada,
+    9h–17h en jornada completa, con servicio de acogida y comida de mediodía incluida en la jornada completa.</p>
+
+    <div class="franges" aria-label="Otras puertas del club">
+      <a class="franja" href="/es/escoleta/" data-cta="campus-franja-escoleta">
+        <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 375w, /img/escoleta@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Niña de la Escoleta del CB Grup Barna con el balón"></span>
+        <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Si todavía no ha empezado y tiene entre 4 y 7 años, el camino es este.</span></span>
+        <span class="franja-go"><em>4 a 8 años</em><i></i></span>
+      </a>
+      <a class="franja franja--red" href="/es/partits/" data-cta="campus-franja-dies-partit">
+        <span class="franja-tx"><span class="franja-t">Calendario</span><span class="franja-s">El calendario de todos los equipos federados del club.</span></span>
+        <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
+      </a>
+      <a class="franja" href="/es/3x3/" data-cta="campus-franja-3x3">
+        <span class="franja-ph"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="150px" width="375" height="500" loading="lazy" decoding="async" alt="Jugadoras del CB Grup Barna con la equipación del club"></span>
+        <span class="franja-tx"><span class="franja-t">3x3 Barcelona</span><span class="franja-s">El torneo urbano del club en Westfield Glòries.</span></span>
+        <span class="franja-go"><em>Cada verano</em><i></i></span>
+      </a>
+    </div>
+
     <h2>A quién va dirigido</h2>
     <p>A niños y niñas que juegan a baloncesto o que quieren empezar, tanto si son del CB Grup Barna como
     si vienen de otro club. Cada semana el club reserva plazas para sus jugadores y plazas
     abiertas a jugadores y jugadoras de fuera, y los grupos se cierran por edad y nivel para que nadie
-    entrene por encima ni por debajo de lo que le corresponde.</p>
-    <p>Si tu hijo o hija todavía no ha empezado y tiene entre 4 y 7 años, el camino natural no es el
+    entrene por encima ni por debajo de lo que le toca.</p>
+    <p>Si vuestro hijo o hija todavía no ha empezado y tiene entre 4 y 7 años, el camino natural no es el
     campus sino <a href="/es/escoleta/">la Escoleta</a>, la escuela de baloncesto del club, que funciona todo
     el año con Julio Torralba.</p>
 
@@ -613,11 +1028,15 @@
     pedir el aviso previo: el club escribe a quien está en la lista cuando se abren las plazas, un día antes
     de publicarlo.</p>
 
-    <h2>Preguntas frecuentes</h2>
+    <h2 id="faq">Preguntas frecuentes</h2>
     <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Qué entrenadores y jugadores han pasado por el campus?</summary><p>Por las últimas ediciones han pasado Ainhoa López, jugadora profesional e internacional española formada en El Clot; Robert Willet (@bballwillett), entrenador de tecnificación NBA; y Malak Shady, referente del baloncesto en redes y MVP de 3x3. No van de visita para la foto: dirigen sesión en pista con los jugadores y jugadoras del campus.</p></details><details class="faq-q"><summary>¿Cuánta gente pasó por el campus en verano de 2026?</summary><p>Unas 150 niñas y niños a lo largo de las seis semanas de la edición de 2026, en grupos por edad y nivel y con un límite aproximado de 50 plazas por semana. Hubo participantes del CB Grup Barna y de otros clubes de Barcelona y de la provincia.</p></details><details class="faq-q"><summary>¿Para qué edades es el campus de baloncesto?</summary><p>El campus del CB Grup Barna es para jugadores y jugadoras de base, desde la edad de la Escoleta hasta categorías cadete y júnior. Los grupos se hacen por edad y nivel, de manera que un niño o niña que empieza no entrena con quien ya lleva años compitiendo.</p></details><details class="faq-q"><summary>¿Hay que jugar en el CB Grup Barna para apuntarse?</summary><p>No. El campus está abierto a jugadores y jugadoras de cualquier club de Barcelona y de la provincia. Cada semana hay plazas para gente del Barna y plazas para gente de fuera.</p></details><details class="faq-q"><summary>¿Cuántas plazas hay por semana?</summary><p>El campus trabaja con un límite aproximado de 50 plazas por semana para mantener la ratio de entrenador por jugador. Las semanas se llenan por orden de inscripción y las últimas ediciones se han completado antes de empezar.</p></details><details class="faq-q"><summary>¿Dónde se hace el campus?</summary><p>En el barrio de El Clot, Distrito de Sant Martí de Barcelona. La Nau del Clot es el punto deportivo principal del CB Grup Barna.</p></details><details class="faq-q"><summary>¿Cuándo abren las inscripciones de la próxima edición?</summary><p>Las fechas de la próxima edición se anuncian en esta página y en Instagram (@cbgrupbarna). Quien quiera recibir el aviso antes de que se abra al público puede pedirlo por el WhatsApp del club (+34 698 425 153) y entra en la lista de avisos.</p></details><details class="faq-q"><summary>¿Cuándo es el campus de verano? Fechas y semanas</summary><p>En verano, en semanas consecutivas de finales de junio a principios de agosto. La edición de 2026 fue del 23 de junio al 1 de agosto: seis semanas, y cada una se puede hacer por separado. Las fechas de la próxima edición se anuncian en esta página y en Instagram (@cbgrupbarna).</p></details><!-- FAQ:END --></div>
+    <p style="margin-top:26px;font-size:15px;line-height:1.65;max-width:62ch;opacity:.85">
+      ¿Todavía comparáis opciones? Hemos escrito una guía sobre
+      <a href="/es/blog/guia-campus-baloncesto-barcelona/">qué mirar antes de apuntar a nadie a un campus de baloncesto en Barcelona</a>,
+      tanto si acaba siendo el nuestro como si no.</p>
 
     <div style="margin-top:clamp(34px,5vw,60px)">
-    <div class="closer"><h2>Quiero que me aviséis del próximo campus</h2><p>Déjanos tu contacto y te escribimos cuando se abran las inscripciones, antes de publicarlas.</p><div class="btn-row"><a href="/es/#info" class="btn red" data-cta="campus-closer-form">Pedir información</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=%C2%A1Hola!%20Quiero%20info%20del%20Campus%20de%20baloncesto" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">WhatsApp del club</a></div></div>
+    <div class="closer"><h2>Quiero que me aviséis del próximo campus</h2><p>Déjanos el contacto y te escribimos cuando se abran las inscripciones, antes de publicarlas.</p><div class="btn-row"><a href="/es/#info" class="btn red" data-cta="campus-closer-form">Pedir información</a><a href="https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20info%20del%20Campus%20de%20b%C3%A0squet" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-closer-wa">WhatsApp del club</a><a href="/es/presentaciones/campus-timechamber/" class="btn ghost" data-cta="campus-closer-presentacio">Ver la presentación</a></div></div>
     </div>
   </div>
 </div>
@@ -718,8 +1137,6 @@
         <a href="/es/3x3/">Torneo 3x3</a>
         <a href="/es/patrocinadors/">Partners</a>
         <a href="/es/grup-barna-dades-oficials/">Datos oficiales</a>
-        <a href="/es/proteccion-menor/">Protección del Menor</a>
-        <a href="/es/baloncesto-femenino/">Baloncesto femenino</a>
       </div>
       <div class="foot-col">
         <h3>Temporada</h3>
@@ -733,17 +1150,9 @@
       <div class="foot-col">
         <h3>Contacto</h3>
         <a href="/es/#info">Pedir información</a>
-        <a href="/es/newsletter/">Newsletter</a>
-        <a href="/es/buzon/">Buzón de sugerencias</a>
         <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
-      </div>
-      <div class="foot-col">
-        <h3>Legal</h3>
-        <a href="/es/politica-de-privacidad/">Política de privacidad</a>
-        <a href="/es/aviso-legal/">Aviso legal</a>
-        <a href="/es/politica-de-privacidad/#galetes">Cookies</a>
       </div>
       <div class="foot-col">
         <h3>Redes</h3>
