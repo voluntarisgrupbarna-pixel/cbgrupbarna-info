@@ -58,7 +58,12 @@ img { max-width: 100%; height: auto; display: block; }
 
 h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.04; }
 .eyebrow { font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted); }
-.eyebrow.red { color: var(--red); }
+/* El vermell base sobre crema es queda en 4,37:1, per sota del mínim; sobre
+   blanc arriba just a 4,92. L'etiqueta petita va sobre totes dues
+   superfícies, així que fa servir el vermell fosc de la pauta, que dona
+   7,81:1 sobre blanc i 7,2 sobre crema. Es veu igual de vermell i es
+   llegeix als dos fons. */
+.eyebrow.red { color: var(--red-dark); }
 .rule { width: 1px; height: clamp(26px, 4vw, 44px); background: var(--line); margin: 18px auto; }
 
 /* ==== CAPÇALERA ==== */

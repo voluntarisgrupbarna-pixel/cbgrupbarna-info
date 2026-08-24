@@ -13,7 +13,10 @@ const OUT = path.resolve(ROOT, (args[args.indexOf('--out') + 1] && args.includes
 const SITE = 'https://cbgrupbarna.info';
 
 const SKIP = [/^\.git\//, /^node_modules\//, /^tests\//, /^\.github\//];
-const NOINDEX_OK = ['/admin/', '/fotos/admin.html', '/jugadors/admin.html', '/partits/admin.html', '/briefing/'];
+// Adreces que no s'indexen. El prefix d'idioma no les fa una altra cosa:
+// /es/briefing/ és el mateix briefing intern que /briefing/.
+const NOINDEX_BASE = ['/admin/', '/fotos/admin.html', '/jugadors/admin.html', '/partits/admin.html', '/briefing/'];
+const NOINDEX_OK = NOINDEX_BASE.flatMap((p) => [p, `/es${p}`, `/en${p}`]);
 
 // ---------- utilitats de lectura d'HTML ----------
 // Prou per a metadades: el marcatge d'aquest lloc és regular i no cal un DOM.
@@ -175,7 +178,23 @@ function auditPage(rel) {
   r.info.h1 = h1s;
   // Una pàgina que no s'indexa pot no tenir <h1>: no és un problema de cerca.
   if (h1s.length === 0 && !isAdmin) add('error', 'h1', 'cap <h1>');
-  else if (h1s.length > 1) add('avís', 'h1-multiple', `${h1s.length} <h1>`, { h1s: h1s.slice(0, 4) });
+  // La portada porta dues maquetacions —Franges i Extensa— i el commutador
+  // n'amaga una amb `display: none`. Cada vista té un sol <h1>; que al codi
+  // n'hi hagi dos no ho veu ningú, ni una persona ni un rastrejador, perquè
+  // tots dos apliquen el CSS. Es compten només els que la vista per defecte
+  // ensenya.
+  const etiquetes = html.match(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi) || [];
+  let cursor = 0;
+  const visibles = h1s.filter((_, i) => {
+    const on = html.indexOf(etiquetes[i], cursor);
+    cursor = on + 1;
+    const abans = html.slice(0, on);
+    // L'últim marcador de maquetació que s'ha obert abans d'aquest titular
+    // diu de quina vista és. Si és el de la vista que el commutador amaga
+    // per defecte, aquest <h1> no el veu ningú.
+    return abans.lastIndexOf('only-extensa') <= abans.lastIndexOf('only-light');
+  });
+  if (visibles.length > 1) add('avís', 'h1-multiple', `${visibles.length} <h1>`, { h1s: visibles.slice(0, 4) });
 
   // --- imatges sense alt ---
   const imgs = html.match(/<img\b[^>]*>/gi) || [];

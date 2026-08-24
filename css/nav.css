@@ -101,6 +101,18 @@
 .lang-switch .sep { color: var(--nav-line); }
 @media (max-width: 480px) { .lang-switch { gap: 2px; font-size: 8.5px; } .lang-switch a { min-width: 26px; padding: 0 2px; } }
 
+/* El mateix commutador sobre una barra fosca. Hi ha un centenar de pàgines
+   així —la galeria, el briefing, les presentacions, la mascota— i amb la
+   tinta del club la lletra hi quedava en 1,08:1: no es veia. Qui hi posa
+   aquesta classe és js/nav.js, mirant el fons que hi ha de debò darrere, de
+   manera que també val per a una pàgina fosca que es faci demà.
+   Sobre fosc el vermell s'aclareix a #FF3B41, com diu la pauta del club. */
+.lang-switch--fosc a { color: rgba(244, 241, 236, 0.72); }
+.lang-switch--fosc a.active { color: #F4F1EC; }
+.lang-switch--fosc a:hover { color: #FF3B41; }
+.lang-switch--fosc a:focus-visible { outline-color: #FF3B41; }
+.lang-switch--fosc .sep { color: rgba(244, 241, 236, 0.3); }
+
 /* ==== CERCADOR DEL MENÚ ====
    El menú porta els 30 destins grans; el lloc en té més de 400. Això és com
    s'arriba a la resta sense saber de quina secció pengen. */

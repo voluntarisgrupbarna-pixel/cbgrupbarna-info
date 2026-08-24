@@ -466,6 +466,47 @@
 
   if (menu) posaCercador(menu);
 
+  // --- 1 quater. El commutador d'idioma sobre fons fosc --------------------
+  // El commutador es pinta amb la tinta del club, que és el correcte sobre
+  // paper. Però hi ha un centenar de pàgines amb la barra superior fosca —la
+  // galeria, el briefing, les presentacions, la mascota— i allà la lletra
+  // quedava en 1,08:1: pràcticament invisible. Mesurat amb el navegador a
+  // 413 pàgines.
+  //
+  // No es pot saber del marcatge quines són: cada família té les seves
+  // classes. El que sí que es pot és mirar el fons que hi ha de debò darrere
+  // i decidir amb això, que a més val per a qualsevol pàgina que es faci
+  // demà. Sobre fosc el vermell s'aclareix a #FF3B41, com diu la pauta.
+  function fonsDe(el) {
+    var n = el;
+    while (n && n.nodeType === 1) {
+      var c = getComputedStyle(n).backgroundColor;
+      var m = c && c.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/);
+      if (m && (m[4] === undefined || parseFloat(m[4]) > 0.5)) {
+        return [+m[1], +m[2], +m[3]];
+      }
+      n = n.parentElement;
+    }
+    return [255, 255, 255];
+  }
+
+  function esFosc(rgb) {
+    // Luminància relativa de la WCAG. Per sota de 0,18 la tinta del club ja
+    // no s'hi llegeix.
+    var c = rgb.map(function (v) {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] < 0.18;
+  }
+
+  function marcaFonsFosc() {
+    [].slice.call(doc.querySelectorAll('.lang-switch')).forEach(function (sw) {
+      if (esFosc(fonsDe(sw))) sw.classList.add('lang-switch--fosc');
+      else sw.classList.remove('lang-switch--fosc');
+    });
+  }
+
   // --- 2. Obrir i tancar, amb el teclat inclòs -----------------------------
   if (burger && menu) {
     var obert = false;
@@ -677,4 +718,10 @@
     nav.appendChild(ol);
     main.insertBefore(nav, main.firstChild);
   })();
+
+  // Un cop tot està muntat, es mira el fons que ha quedat darrere del
+  // commutador d'idioma. Es torna a mirar en girar la pantalla, perquè hi
+  // ha barres que canvien de color amb l'amplada.
+  marcaFonsFosc();
+  addEventListener('resize', marcaFonsFosc);
 }());
