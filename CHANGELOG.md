@@ -22,6 +22,22 @@ només l'hi posa nom.
 
 ---
 
+## 1.1.0 — 2026-08-24
+
+Accessibilitat: `css/a11y.css`, capa compartida a les 458 pàgines (focus
+visible, salt al contingut, moviment reduït, alt contrast del sistema).
+Nova secció **`/accessibilitat/`** (+ `/es/accesibilidad/`,
+`/en/accessibility/`), enllaçada des del peu de tot el lloc, amb l'estat
+real de conformitat WCAG 2.2 AA. Contrast corregit a l'engròs allà on
+l'auditoria d'UX (#78) no havia arribat; menús amb `aria-expanded`; PDF amb
+`/Title` i `/Lang`; vídeo d'`/opina/` amb subtítols obligatoris abans de
+poder-se activar mai.
+
+Resultat mesurat amb axe-core: 0 violacions WCAG 2.0/2.1/2.2 A i AA a les
+458 pàgines servides.
+
+---
+
 ## 1.0.2 — 2026-08-24
 
 Confirmat i documentat a `PENDENTS-WEB.md`: a partir d'ara cada feina
