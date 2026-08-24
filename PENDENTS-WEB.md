@@ -1180,3 +1180,71 @@ mencions eren prosa d'aquest document i un comentari de
 **Com recuperar-los si mai calen:** són a l'historial de git, al commit
 `c589e7f4`. Amb `git show c589e7f4:mascota/mascota-reel.mp4 > mascota-reel.mp4`
 en surt qualsevol, byte a byte.
+
+## 24-08-2026 — Camí cap al 10: la resta de pendents
+
+Auditoria feta per veure què separa cada apartat de la nota màxima, partint
+del 9,4 global de l'últim informe. La sessió de fotos de l'Escoleta ja hi és,
+a «Pendent de material de l'Ana»; això és la resta.
+
+### UX
+
+- **Preus encara publicats a tres pàgines de campus.** `campus/index.html`,
+  `campus-basquet-barcelona/index.html` i `campus/setmana-santa/index.html`
+  segueixen anunciant 195€/160€/150€, tot i la decisió del 23/08/2026 de no
+  publicar cap preu de temporada (vegeu «Decisió · els preus no es
+  publiquen»). Arreglo directe.
+- **`/campus/` no té formulari propi.** Els CTA d'inscripció reenvien tots al
+  WhatsApp del club o al bloc `#info` genèric de portada. Cal decidir quines
+  dades demanar i on van a parar abans de construir-lo.
+- **La «inscripció en línia» de portada depèn que la família confirmi a mà
+  dins de WhatsApp.** El formulari envia les dades a Formspree i obre `wa.me`
+  precarregat, però si el navegador bloqueja el pop-up només arriba el
+  correu, sense número de referència. Cal decidir si el club vol un registre
+  estructurat en comptes del gest manual.
+
+### Seguretat i legal
+
+- **La política de privacitat no esmenta Formspree.**
+  `politica-de-privacitat/index.html` diu que el formulari de portada «no
+  desa res en cap servidor nostre» i només llista Meta/Google/GitHub/Flickr
+  com a encarregats. Però `index.html` envia nom, mòbil, correu i missatge a
+  Formspree (EUA) a cada enviament: és un encarregat real i no declarat. Cal
+  afegir-lo al text.
+- **El PIN del dossier de Premi Dona i Esport és «1965» en clar.**
+  `premidonaesport/assets/js/auth.js` el guarda sense ofuscar, visible amb
+  «Veure codi font». No és el mateix problema que es va resoldre el
+  23/08/2026 (la doble reixa i la indexació): aquí cal que l'Ana confirmi si
+  aquestes 72 pàgines necessiten protecció real o si el gest simbòlic ja és
+  prou.
+
+### SEO
+
+- **`/jugadors/` és indexable i buida.** Ja hi ha un pendent per omplir
+  `jugadors/jugadors.js` (a «Pendent de decisió»), però mentre segueixi buida
+  Google la indexa tal qual amb la meta description de la temporada
+  2025-2026. Convé posar-hi `noindex` fins que hi hagi plantilla.
+- **39 dels 43 objectius d'enllaços externs segueixen «pendents».** Segons
+  `POSICIONAMENT-CAMPUS-SEO.md`, l'arquitectura on-page ja està resolta; el
+  que falta és autoritat externa real, i això no és una tasca de codi.
+
+### Accessibilitat
+
+- **Les miniatures de `/fotos/` no descriuen la foto.** Totes porten
+  `alt="Foto 1"`, `alt="Foto 2"`… i el visor a pantalla completa sempre diu
+  `alt="Foto del club"`. Un lector de pantalla no rep cap contingut real.
+  Arreglar-ho és mecànic però lent: cal redactar text alternatiu àlbum a
+  àlbum.
+
+### Idiomes
+
+- **`/campus/` només té 9 de 15 seccions traduïdes** a `/es/` i `/en/`, ~1.500
+  paraules per idioma. (El cas de `/femeni/`, 6 de 9 seccions, ja és pendent
+  a «Pendent de decisió · reestructuració del menú».)
+
+### Velocitat
+
+- **Falta confirmar amb dades de camp.** Tot el que es va mesurar a la fase
+  de velocitat és de navegador local. Els Core Web Vitals reals de Search
+  Console —els que compten per al posicionament— triguen uns dies a
+  reflectir el canvi de les imatges. Revisar quan hi hagi prou dades.
