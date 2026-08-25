@@ -1323,9 +1323,12 @@ d'aquella fase segueixen sense tancar-se.
    vista Franges com a l'Extensa, la franja/targeta d'Escoleta (línies 1371
    i 1463) va abans que la de Sèniors (1380 i 1469). És exactament el punt 2
    de «Fase de marca · 20/08/2026», encara no fet.
-2. **`/empreses/` no té `/es/` ni `/en/`.** Comprovat: no existeixen els
-   directoris. És la pàgina que llegeix una empresa de fora abans de
-   decidir patrocinar.
+2. ~~**`/empreses/` no té `/es/` ni `/en/`.**~~ **Fals positiu de la mateixa
+   auditoria, corregit el 25/08**: les traduccions existeixen a
+   `/es/empresas/` i `/en/companies/` (l'auditor va comprovar `es/empreses`,
+   amb el nom català). Estan completes, enllaçades des dels menús i amb
+   0 pàgines pendents segons `i18n-routes.py`. L'única resta real era que
+   `/accessibilitat/` no estava donada d'alta a `i18n/routes.yml`; fet.
 3. **Els 22 partners de `data.json` segueixen amb `"nivell": null`.** Sense
    aquesta dada no es pot mostrar cap jerarquia or/plata/bronze enlloc.
 
