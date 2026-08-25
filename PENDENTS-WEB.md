@@ -201,14 +201,13 @@ està fet i del que queda obert:
   mida. 266 `<img>` sense `loading="lazy"` arreglades a 162 pàgines, amb `width`/`height`
   calculats a 171 quan el fitxer era local. La primera imatge de cada pàgina (logo o
   hero) no es toca a posta.
-
-**Pendent de l'Ana:**
-- **`/opina/`** (ressenyes de Google): `opina.json` amb `placeId` i `reviewUrl` buits.
-  El Perfil d'Empresa encara no està verificat, així que Google no dona l'enllaç curt
-  `g.page/r/…/review`. Sortida acordada: buscar "CB Grup Barna" al
-  [Place ID Finder](https://developers.google.com/maps/documentation/places/web-service/place-id)
-  de Google (eina pública, no cal verificació) i passar el `placeId` — un cop arribi,
-  s'enganxa a `opina/opina.json` i queda actiu en un moment.
+- **`/opina/`** (ressenyes de Google): el Perfil d'Empresa encara no està verificat, així
+  que Google no dona l'enllaç curt `g.page/r/…/review`. Solucionat sense esperar-hi:
+  Place ID tret amb el [Place ID Finder](https://developers.google.com/maps/documentation/places/web-service/place-id)
+  públic de Google i posat a `opina/opina.json`. El botó «Deixar la meva ressenya» ja obre
+  directament el quadre d'escriure ressenya de Google, un pas menys que abans.
+  Quan la ficha es verifiqui, es pot canviar per l'enllaç curt si es prefereix, però no
+  cal: el placeId ja fa la mateixa feina.
 
 ## Sense acció
 
