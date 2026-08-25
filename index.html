@@ -761,6 +761,23 @@ html[data-view="extensa"] .lead.only-extensa { display: grid; }
 .lg-hero h1 em { font-style: normal; color: var(--red); }
 .lg-hero-s { font-size: 13px; color: var(--muted); margin: 0 auto; max-width: 46ch; line-height: 1.6; }
 .lg-hero-seo { font-size: 11.5px; color: var(--muted); margin: 10px auto 0; max-width: 62ch; line-height: 1.65; }
+/* «El primer bot comença aquí», fet moviment: el titular entra en dos temps i la
+   línia vermella cau i bota un sol cop. Només transform i opacity — cap salt de
+   layout — i només a la vista de franges, que és l'única on viu aquest hero. */
+.lg-hero h1 .lg-l1, .lg-hero h1 em { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .lg-hero .eyebrow { animation: hero-fade 0.25s var(--ease) both; }
+  .lg-hero h1 .lg-l1 { animation: hero-rise 0.4s var(--ease) 0.15s both; }
+  .lg-hero h1 em { animation: hero-bounce 0.55s 0.35s both; }
+}
+@keyframes hero-fade { from { opacity: 0; } }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(20px); } }
+@keyframes hero-bounce {
+  0% { opacity: 0; transform: translateY(-34px); animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.36); }
+  55% { opacity: 1; transform: translateY(0); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+  75% { transform: translateY(-6px); animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.36); }
+  100% { transform: translateY(0); }
+}
 
 /* La franja que obre la pila, calcada de la guia: més alta, la foto més ampla,
    fons crema i el filet vermell a l'esquerra. */
@@ -1359,7 +1376,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
        Qualsevol canvi aquí s'ha de reflectir també a la guia. -->
   <div class="lg-hero only-light">
     <p class="eyebrow red">CB Grup Barna · El Clot · Barcelona</p>
-    <h1>Bàsquet al Clot.<br><em>Des de 1965.</em></h1>
+    <h1><span class="lg-l1">Bàsquet al Clot.</span><br><em>Des de 1965.</em></h1>
     <p class="lg-hero-s">34 equips federats. Mateix nombre de jugadores i jugadors, i mateix pressupost per a les dues línies. El primer bot comença aquí.</p>
     <!-- Les paraules de cerca que abans portava el bloc fosc de marca, ara amagat
          a franges: acadèmia i club de bàsquet base a Barcelona. Una línia, en

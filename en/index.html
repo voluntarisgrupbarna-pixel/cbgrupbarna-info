@@ -750,6 +750,23 @@ html[data-view="extensa"] .lead.only-extensa { display: grid; }
 .lg-hero h1, .lg-hero h2 { font-size: clamp(26px, 4.4vw, 44px); line-height: 0.94; margin: 8px 0 8px; }
 .lg-hero h1 em { font-style: normal; color: var(--red); }
 .lg-hero-seo { font-size: 11.5px; color: var(--muted); margin: 10px auto 0; max-width: 62ch; line-height: 1.65; }
+/* «El primer bot comença aquí», fet moviment: el titular entra en dos temps i la
+   línia vermella cau i bota un sol cop. Només transform i opacity — cap salt de
+   layout — i només a la vista de franges, que és l'única on viu aquest hero. */
+.lg-hero h1 .lg-l1, .lg-hero h1 em { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .lg-hero .eyebrow { animation: hero-fade 0.25s var(--ease) both; }
+  .lg-hero h1 .lg-l1 { animation: hero-rise 0.4s var(--ease) 0.15s both; }
+  .lg-hero h1 em { animation: hero-bounce 0.55s 0.35s both; }
+}
+@keyframes hero-fade { from { opacity: 0; } }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(20px); } }
+@keyframes hero-bounce {
+  0% { opacity: 0; transform: translateY(-34px); animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.36); }
+  55% { opacity: 1; transform: translateY(0); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+  75% { transform: translateY(-6px); animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.36); }
+  100% { transform: translateY(0); }
+}
 .lg-hero-s { font-size: 13px; color: #6B6560; margin: 0 auto; max-width: 46ch; line-height: 1.6; }
 .franja--lead .franja-t { font-size: clamp(26px, 4vw, 46px); }
 .view-toggle { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-family: var(--body); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; padding: 8px 12px; min-height: 34px; transition: border-color 0.3s var(--ease), color 0.3s var(--ease); }
@@ -1011,7 +1028,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
   <div class="lg-hero only-light">
     <p class="eyebrow red">CB Grup Barna · El Clot · Barcelona</p>
-    <h1>Basketball in Clot.<br><em>Since 1965.</em></h1>
+    <h1><span class="lg-l1">Basketball in Clot.</span><br><em>Since 1965.</em></h1>
     <p class="lg-hero-s">38 teams. The same number of players, and the same budget, for both sides.</p>
     <p class="lg-hero-seo">Youth basketball club and academy in Barcelona: an Escoleta for ages 4 to 8, teams registered with the FCBQ, camps, skills work and inclusive basketball with the Barna Màgics, in El Clot, Sant Martí.</p>
   </div>
