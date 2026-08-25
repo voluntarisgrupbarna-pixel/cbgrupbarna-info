@@ -1298,3 +1298,68 @@ axe-core sobre l'estat actual.
    `pagLlista` al repositori: es crea sencer en JavaScript en temps
    d'execució, i tocar-ho a cegues sense poder-ho provar a fons és més risc
    que valor. Queda apuntat perquè qui toqui `cerca.js` ho vegi.
+
+---
+
+## 25-08-2026 — Canvi d'estètica de la portada, decidit en prototip, pendent d'aplicar al lloc
+
+Sessió llarga de disseny amb l'Ana sobre com hauria de ser la portada per
+arribar a un 10. **Res d'això s'ha tocat encara a `index.html` ni a
+`css/barna.css`** — tot viu, de moment, en un prototip navegable publicat com
+a Artifact, fora del repositori:
+**https://claude.ai/code/artifact/639494fb-9f78-4210-bede-ca28e4649565**
+(el racional i el registre de decisions, a la guia
+**https://claude.ai/code/artifact/50a5c317-1569-478d-a6b1-15eb9581ed26**).
+
+### Què decideix el prototip
+
+- **Quatre vestits d'una sola portada**, no quatre webs diferents: mateixos
+  tokens de color i tipografia a tot arreu.
+  - **A · L'Afinat** — elevació del hero i les franges actuals (més escala,
+    més aire, animació d'entrada del titular). És la que hauria de substituir
+    la vista de franges real; l'extensa no es toca.
+  - **B · Dia de partit** — vestit del cap de setmana: partits (dissabte *i*
+    diumenge, sempre els dos dies), gameday sènior quan toca, resultats de la
+    setmana anterior, calendari complet.
+  - **C · Campanya d'Escoleta** — scrollytelling amb rellotge de possessió de
+    24 s, tancant amb enllaç a les deu històries reals que ja explica
+    `/escoleta/`.
+  - **D · L'Edició** — «diari del barri», contingut real de la newsletter
+    setmanal (resultats, anàlisi, article del blog).
+- **Sense crema.** `--cream` passa a blanc pur (el del logo). Decisió expressa
+  de l'Ana: cap superfície es distingeix ja per calidesa de crema, només pel
+  vermell i la tinta. **Falta traslladar-ho a `css/barna.css`** — allà `--cream`/
+  `--paper-2`/`--ground` encara valen `#F4F1EC`.
+- **Groc fluorescent, amb regla.** Només a la lletra (mai al fons), i només
+  als dos punts d'entrada a la campanya d'Escoleta (ticker de novetats i
+  «Vine a provar»), sempre sobre negre o vermell — mai directe sobre blanc
+  perquè el contrast hi falla.
+- **Mapa de navegació complet** (botó ≡) a les quatre capçaleres.
+- **Descàrrega del full d'Escoleta amb captura de dades**: nom, telèfon,
+  correu i acceptació expressa de la newsletter abans de descarregar. Al
+  prototip és una simulació (l'Artifact no permet descàrregues reals); a
+  producció caldria enganxar-ho a l'eina real de newsletter del club.
+
+### El que això s'emporta pel camí
+
+- **Petita correcció d'accessibilitat**, ja aplicada al prototip: en unificar
+  crema i blanc, les franges que abans es distingien només per aquest
+  contrast (Escoleta/Femení/El club) es van quedar sense separació visual.
+  S'hi ha afegit una línia fina entre files.
+- **Discrepància d'edat sense resoldre**: el flyer A6 d'Escoleta diu «4 a 7
+  anys»; la web i el prototip diuen «4 a 8 anys». No s'ha triat per l'Ana.
+- **Fotos noves de la sessió d'agost** (quatre jugadors fent broma, el grup de
+  quatre assenyalant a càmera, l'alcalde Jaume Collboni amb un jugador
+  d'Escoleta, tres seguidors a la grada) viuen només al prototip, no a
+  `img/` ni `photos/`. Calen passar-les per `scripts/build-blog-images.py`
+  abans de fer-les servir a producció.
+
+### Per fer, quan es passi del prototip al lloc real
+
+1. Portar la vista de franges de `index.html` al disseny de la proposta A.
+2. Actualitzar `--cream`/`--paper-2`/`--ground` a `css/barna.css`.
+3. Decidir 4-7 o 4-8 anys per a l'Escoleta (flyer vs. web).
+4. Processar i pujar les fotos noves amb el pipeline de sempre.
+5. Connectar el formulari de descàrrega a una eina real (JotForm, ja
+   integrat al repositori per a altres formularis — vegeu
+   `scripts/add-jotform-secret.sh`).
