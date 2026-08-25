@@ -22,6 +22,29 @@ només l'hi posa nom.
 
 ---
 
+## 1.2.1 — 2026-08-25
+
+La tanda de decisions de l'Ana del mateix dia, executades: l'edat de
+l'Escoleta unificada a **4-8 anys** a les 484 pàgines (dues el contradeien
+amb 4-7); `/premsa/moments/` traduïda —neixen `/es/premsa/momentos/` i
+`/en/premsa/highlights/`, 38 entrades per idioma—; el **briefing** refet per
+a la temporada 2026-27 amb les xifres quadrades amb `data.json` (fora les
+«~2M d'impressions» injustificables, dins les 439.000 visualitzacions del
+panell verificat); i el **flyer nou de l'Escoleta** (A5 a 300 ppp, PNG i
+PDF a `escoleta/flyer/`), amb foto real de la galeria i l'estètica
+definitiva.
+
+## 1.2.0 — 2026-08-25
+
+**L'estètica definitiva.** S'aplica el document tancat del 25 d'agost a tot
+el lloc: **desapareix la crema** `#F4F1EC` —totes les superfícies clares
+passen a blanc pur, el del logo— i entra el **groc** `#EEFF00` amb regla
+escrita: sempre a la lletra, mai al fons, i només als dos punts d'entrada a
+la campanya d'Escoleta (el ticker, ara enllaç, i el seu CTA). 179 fitxers
+passats per `aplica-estetica.py`, que des d'ara tradueix qualsevol crema a
+blanc. De retruc, el vermell de l'escut passa de 4,36:1 a 4,92:1 de
+contrast sobre les superfícies clares i entra a l'AA sense ajudes.
+
 ## 1.1.3 — 2026-08-25
 
 `PENDENTS-WEB.md` posat al dia: registrat el fet i el pendent de la icona a
