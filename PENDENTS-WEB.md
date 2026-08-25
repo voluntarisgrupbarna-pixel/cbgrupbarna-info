@@ -179,12 +179,17 @@ seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
   repositori. No s'han afegit al menú per no inventar-hi programa, preus o
   notícies. Falta que l'Ana digui què són exactament i doni el material.
 
-## Pendent · rendiment web (24/08/2026)
+## ✅ Rendiment web (24/08/2026)
 
-Auditoria completa a `claude/web-performance-testing-6k9iwe`: la portada passa de
-79 a 97/100 de Lighthouse, LCP de 5,1 s a 1,4 s, -216 KB de pes i -200 MB al
-repositori (vídeos de la mascota sense usar). Detall complet a
-`tests/README.md` i als missatges de commit d'aquesta branca.
+**Tancat del tot.** Auditoria completa a `claude/web-performance-testing-6k9iwe`:
+la portada passa de 79 a 97/100 de Lighthouse, LCP de 5,1 s a 1,4 s, -216 KB
+de pes i -200 MB al repositori (vídeos de la mascota sense usar). Detall
+complet a `tests/README.md` i als missatges de commit d'aquesta branca.
+Els quatre punts del pla (imatges, fotos òrfenes, `/partits/` i `/femeni/`,
+cabeceres de caché) estan fets i verificats contra el domini real. Només
+queden dues coses obertes i **no són de rendiment**, són de contingut —
+recollides tal qual a les seccions següents: les 451 fotos amb l'original
+esborrat, i els grups privats a `galeria/`.
 
 **✅ Cabeceres de caché HTTP — resolt el 24/08/2026.** Domini darrere de
 Cloudflare (nameservers canviats, SSL en mode **Full** — no «Full strict»,
