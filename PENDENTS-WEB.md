@@ -1359,11 +1359,11 @@ d'aquella fase segueixen sense tancar-se.
 
 | # | Què falta | Qui el destrapa |
 |---|---|---|
-| 1 | Sèniors (equip A femení i masculí) abans que l'Escoleta a la portada | Tècnic |
-| 2 | `/empreses/` en castellà i anglès | Tècnic |
+| 1 | Sèniors (equip A femení i masculí) abans que l'Escoleta a la portada | Disseny · en pausa |
+| 2 | ~~`/empreses/` en castellà i anglès~~ | Fals positiu, ja existia (vegeu més avall) |
 | 3 | Nivell or/plata/bronze dels 22 partners | **L'Ana** |
-| 4 | Panell d'analítica a `/admin/` (llegint la GA4 Data API) | Tècnic |
-| 5 | Treure `fotos/` del pes del repositori (Git LFS o emmagatzematge extern) | Tècnic |
+| 4 | Panell d'analítica a `/admin/` (llegint la GA4 Data API) | Tècnic · necessita credencials OAuth |
+| 5 | Treure `fotos/` del pes del repositori (Git LFS o emmagatzematge extern) | Tècnic · investigat, vegeu més avall |
 | 6 | La Nau del Clot com a actiu de marca (sessió de fotos) | **L'Ana** |
 | 7 | Eina d'enviament de newsletter (es recull consentiment i no s'envia res) | **L'Ana** |
 | 8 | Logotip de Wilson | **L'Ana** |
@@ -1374,3 +1374,94 @@ formen part de la mateixa ruta cap al 10, no perquè siguin nous.
 El que **no** cal tocar: accessibilitat (9,5/10, 0 violacions), i18n (bloquejat
 per CI), FAQ/cercador (546 preguntes, font única), legal/RGPD i automatització
 de partits. Repetir-hi feina seria fer dues vegades el que ja està fet.
+
+---
+
+## Arreglat el 25/08/2026, en el mateix simulacre de l'auditoria
+
+Tres coses trobades **fent** l'auditoria, no només escrivint-la, i ja
+publicades (v1.1.1 i v1.1.2):
+
+- **El robot diari de la FCBQ portava dos dies mort** (runs #123-135, des del
+  23/08): el workflow no instal·lava `pyyaml`, que `generate-team-pages.py`
+  necessita des que carrega `scripts/i18n_chrome.py`. Arreglar només això
+  hauria fet que l'endemà el robot esborrés una millora pendent de publicar
+  (el generador de fitxes d'equip anava per darrere del publicat: sense
+  `hreflang`, sense selector d'idioma, sense `css/a11y.css`). Arreglats
+  workflow i generador alhora; 45 pàgines regenerades i comprovades amb axe
+  (0 violacions als tres idiomes).
+- **El buscador tenia un error ARIA crític** (`aria-required-children`),
+  anotat abans com «massa arriscat de tocar sense poder-ho provar» — ja es
+  podia provar amb navegador. Arreglat: les fletxes mouen el focus real en
+  comptes d'un patró combobox/listbox invàlid. De passada, l'axe va destapar
+  un defecte visual real que ningú havia vist: el panell del buscador
+  superposat no requadrava i els resultats es pintaven damunt del vel fosc
+  (contrast 1,37:1, sota `.cerca-motor` sense CSS).
+- **Fals positiu de la mateixa auditoria**: es va dir que `/empreses/` no
+  tenia castellà ni anglès. Error de comprovació (es va mirar el directori
+  amb el nom català, `es/empreses`, que no existeix; el real és
+  `/es/empresas/` i `/en/companies/`, complet i enllaçat). Paritat
+  d'idiomes del lloc: 100%, 0 pàgines pendents segons `i18n-routes.py`.
+
+## Investigat el 25/08/2026 — pes del repositori (`fotos/` i el `.git`)
+
+**Només investigació, cap canvi fet.** Dades reals mesurades sobre aquest
+repositori:
+
+| | Mida |
+|---|---|
+| `fotos/` al directori de treball (HEAD) | 331 MB (`web/` 248 MB, `uploads/` 49 MB, `thumb/` 35 MB) |
+| `.git/` sencer (tot l'historial) | **5,5 GB**, en dos paquets |
+| El paquet gran | 5,2 GB |
+
+**La diferència (5,5 GB − 331 MB ≈ 5,2 GB) no és `fotos/` d'avui: és
+historial.** Confirmat amb `git log --diff-filter=D`: els cinc vídeos de la
+mascota que es van esborrar el 24/08 (180 MB: `mascota-reel.mp4`,
+`mascota-reel-es.mp4`, `mascota-reel-es-capcut.mp4`,
+`mascota-teleprompter.mp4`, `mascota.mp4`) **segueixen dins del `.git` per
+sempre**, tot i no existir ja al directori de treball — és exactament el
+que diu `CHANGELOG.md` 1.1.0 sobre poder-los recuperar del commit
+`c589e7f4`. El mateix passa amb qualsevol altre binari gran esborrat en
+algun moment (vídeos antics, exportacions, etc.): esborrar un fitxer no
+buida mai `.git` sol.
+
+`fotos/uploads/`, `fotos/web/` i `fotos/thumb/` només tenen 1-3 commits
+cadascuna a tot l'historial: **el pes no ve de pujar la mateixa foto moltes
+vegades**, ve de tandes grosses puntuals (l'àlbum sencer d'un cop) i dels
+binaris grans que s'han esborrat sense purgar mai l'historial.
+
+### Per què Git LFS no és una solució directa aquí
+
+**GitHub Pages no serveix fitxers de Git LFS.** Pages construeix el lloc
+directament del contingut del repositori, no passa pel `smudge` de LFS: si
+es migren les fotos a LFS, el que es publicaria a `cbgrupbarna.info` serien
+els fitxers punter de text (uns 130 bytes cadascun), no les imatges. Per
+fer servir LFS caldria que les fotos deixessin de servir-se des del mateix
+domini —un CDN o bucket apuntat directament, no des del checkout de
+Pages— és a dir, canviar on viuen les fotos publicades, no només com es
+guarden al git.
+
+### Les dues rutes reals, sense decidir cap
+
+1. **Emmagatzematge extern** (Supabase storage, ja en ús a `galeria/`; o un
+   bucket / Google Drive): les fotos noves deixen de pujar-se com a commits
+   des de `/fotos/admin.html` i es pengen a un servei extern, servides des
+   d'allà. Resol el problema **d'ara en endavant** sense tocar l'historial
+   ni res publicat. No redueix el `.git` ja existent (5,5 GB), però atura
+   que segueixi creixent i talla l'arrel dels *timeouts* de `push` (§8 i
+   §11 de `mapa-web-cbgb`).
+2. **Reescriure l'historial** (`git filter-repo` o equivalent) per purgar
+   binaris grans esborrats i vells. Sí que buidaria el `.git`, però **canvia
+   tots els hashos de commit de tot el repositori**: qualsevol clonatge,
+   fork, o referència externa a un commit concret (com `c589e7f4` citat al
+   `CHANGELOG.md` mateix) deixa de ser vàlida, i cal tornar a fer `push
+   --force` a `origin/main` — una operació que aquesta sessió no fa sense
+   permís exprés i que val la pena fer amb el repositori de còpia de
+   seguretat (§9 de `mapa-web-cbgb`) ja fet abans.
+
+**Recomanació, sense executar-la:** la via 1 (emmagatzematge extern per a
+les fotos noves) és la que talla el problema de soscar sense risc de
+trencar res existent, i es pot fer sense tocar l'historial. La via 2 només
+té sentit si el `.git` de 5,5 GB arriba a ser, ell sol, un problema pràctic
+(clonatges lents, quota d'espai) — i llavors, primer una còpia de
+seguretat.
