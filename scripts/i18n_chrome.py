@@ -40,7 +40,17 @@ def text(clau, idioma):
 
 
 def enllac(clau, idioma):
-    """L'adreça d'una clau en un idioma, amb el prefix que li toca."""
+    """L'adreça d'una clau en un idioma, amb el prefix que li toca.
+
+    La regla general és que la traducció viu a /es/ o /en/ amb la mateixa
+    adreça. Les pàgines que tenen l'adreça traduïda —les legals, per exemple:
+    /avis-legal/ és /es/aviso-legal/ i /en/legal-notice/— ho diuen amb un
+    `href_es` o `href_en` propi al diccionari, que es fa servir tal com és.
+    """
+    if idioma != "ca":
+        propi = TEXTOS[clau].get(f"href_{idioma}")
+        if propi:
+            return propi
     href = TEXTOS[clau].get("href")
     if href is None:
         raise KeyError(f"i18n: la clau «{clau}» no és un enllaç")

@@ -168,7 +168,7 @@
 
   .info-card .sub {
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.85);
+    color: #fff;
     margin-bottom: 20px;
   }
 
@@ -281,8 +281,8 @@
   .hashtags span {
     font-size: 0.75rem;
     font-weight: 700;
-    color: rgba(255,255,255,0.7);
-    background: rgba(255,255,255,0.1);
+    color: #fff;
+    background: rgba(0,0,0,0.25);
     padding: 3px 10px;
     border-radius: 20px;
     letter-spacing: 0.03em;
@@ -341,10 +341,10 @@
     padding: 16px 20px 32px;
     text-align: center;
     font-size: 0.75rem;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.72);
     line-height: 1.6;
   }
-  .footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
+  .footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
 
   /* ── Responsive desktop ── */
   @media (min-width: 520px) {
@@ -383,11 +383,13 @@
 </style>
 <link rel="stylesheet" href="/css/fonts.css">
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Saltar al contenido</a>
 
 <!-- ── HERO ── -->
-<main class="hero" role="main">
+<main id="contingut" tabindex="-1" class="hero" role="main">
   <div class="video-wrap">
     <div class="video-badge">#SomClot · Escuela Baloncesto</div>
     <nav class="lang-switch lang-switch-bar" aria-label="Canvia d'idioma · Cambiar idioma · Change language">

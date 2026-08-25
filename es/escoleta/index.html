@@ -104,7 +104,7 @@ a{color:inherit}
 
 /* ---------- PORTES OBERTES ---------- */
 .po{background:var(--red);color:#fff;border-top:none;padding:64px 0 68px}
-.po .kicker{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;opacity:.85;margin-bottom:14px}
+.po .kicker{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
 .po h2{font-family:'Anton',sans-serif;font-size:clamp(34px,6vw,60px);line-height:1.02;text-transform:uppercase;margin-bottom:16px}
 .po p{font-size:18px;max-width:640px;opacity:.95;margin-bottom:26px}
 .po .btn{background:#fff;color:var(--red)}
@@ -265,7 +265,7 @@ figcaption b{color:#CFCBC4;font-weight:700}
 /* ---------- CTA ---------- */
 .cta{background:var(--red);border-top:0}
 .cta h2{color:#fff}
-.cta .body{color:rgba(255,255,255,.92)}
+.cta .body{color:#fff}
 .btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
 .btn{
   display:inline-block;background:var(--black);color:var(--paper);text-decoration:none;
@@ -440,8 +440,10 @@ footer a{color:#CFCBC4}
 }
 </script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Saltar al contenido</a>
 
 <div class="langbar">
   <div class="wrap">
@@ -456,6 +458,7 @@ footer a{color:#CFCBC4}
 </div>
 
 <!-- ============ HERO ============ -->
+<main id="contingut" tabindex="-1">
 <header class="hero">
   <div class="hero-img">
     <img src="/escoleta/img/equip-anys90-julio.webp" alt="Equipo mini del Grup Barna en los años 90 en una pista de patio, con Julio Torralba" fetchpriority="high" decoding="async" width="1200" height="836">
@@ -1039,6 +1042,7 @@ footer a{color:#CFCBC4}
     }
   ]
 }</script><!-- FAQ-LD:END -->
+</main>
 <footer>
   <div class="wrap">
     <div>© CB Grup Barna · Sant Martí, Barcelona</div>

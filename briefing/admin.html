@@ -8,20 +8,20 @@
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="stylesheet" href="/css/fonts.css">
 <style>
-  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.72)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
   nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
   nav img{width:34px;height:34px;object-fit:contain}
   nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
-  nav .t span{color:var(--red)}
+  nav .t span{color:#FF3B41}
   .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--muted)}
   .wrap{max-width:860px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
   h1{font-family:'Bebas Neue',sans-serif;font-size:2rem}
-  h1 span{color:var(--red)}
+  h1 span{color:#FF3B41}
   .sub{color:var(--muted);font-size:.88rem;margin:.3rem 0 1.6rem}
   h2{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;margin:1.6rem 0 .8rem}
-  h2 span{color:var(--red)}
+  h2 span{color:#FF3B41}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
   .grid .full{grid-column:1/-1}
@@ -29,7 +29,7 @@
   .fgroup{display:flex;flex-direction:column;gap:.3rem}
   .field-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
   .field-input,select.field-input,textarea.field-input{width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.65rem .8rem;font-family:'Outfit',sans-serif;font-size:.9rem}
-  .field-input:focus{outline:none;border-color:var(--red)}
+  .field-input:focus{outline:none;border-color:#FF3B41}
   textarea.field-input{min-height:70px;resize:vertical}
   .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
   .btn:disabled{opacity:.5;cursor:default}
@@ -45,27 +45,30 @@
   .mmeta{flex:1;min-width:0}
   .mmeta b{display:block;font-weight:500}
   .mmeta small{color:var(--muted);font-size:.72rem}
-  .mtag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);border:1px solid rgba(226,6,19,.35);border-radius:20px;padding:.15rem .55rem;flex:none}
+  .mtag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#FF3B41;border:1px solid rgba(226,6,19,.35);border-radius:20px;padding:.15rem .55rem;flex:none}
   .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
   .del:hover{color:#ff8fa0}
   .empty{color:var(--muted);font-size:.85rem;padding:1rem 0}
   #tokbox{display:none}
 </style>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Salta al contingut</a>
 <nav>
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">ADMIN <span>BRIEFING</span></div>
   <div class="who" id="who"></div>
 </nav>
 
+<main id="contingut" tabindex="-1">
 <div class="wrap">
   <h1>INFORMACIÓ PER A <span>COL·LABORADORS</span></h1>
-  <p class="sub">Puja aquí els materials que es presenten als partners: dossiers, informes de retorn, logos, fotos i dades. Apareixen a <a href="/briefing/materials.html" style="color:var(--red)">la pàgina de materials</a> i es poden enviar a qualsevol empresa.</p>
+  <p class="sub">Puja aquí els materials que es presenten als partners: dossiers, informes de retorn, logos, fotos i dades. Apareixen a <a href="/briefing/materials.html" style="color:#FF3B41">la pàgina de materials</a> i es poden enviar a qualsevol empresa.</p>
 
   <div class="card" id="tokbox">
     <div class="fgroup">
-      <label class="field-label">Token de GitHub (només el primer cop)</label>
+      <label class="field-label" for="tok">Token de GitHub (només el primer cop)</label>
       <input class="field-input" type="password" id="tok" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
     </div>
     <div class="hint">Cal per poder guardar els fitxers al web. Crea'l a
@@ -76,17 +79,17 @@
   <h2>PUJAR <span>MATERIAL</span></h2>
   <div class="card">
     <div class="grid">
-      <div class="fgroup full"><label class="field-label">Títol *</label><input class="field-input" id="f-titol" placeholder="Ex: Informe de retorn 25-26"></div>
-      <div class="fgroup full"><label class="field-label">Descripció</label><textarea class="field-input" id="f-desc" placeholder="Què és i per a què serveix davant d'un partner"></textarea></div>
+      <div class="fgroup full"><label class="field-label" for="f-titol">Títol *</label><input class="field-input" id="f-titol" placeholder="Ex: Informe de retorn 25-26"></div>
+      <div class="fgroup full"><label class="field-label" for="f-desc">Descripció</label><textarea class="field-input" id="f-desc" placeholder="Què és i per a què serveix davant d'un partner"></textarea></div>
       <div class="fgroup">
-        <label class="field-label">Tipus *</label>
+        <label class="field-label" for="f-tipus">Tipus *</label>
         <select class="field-input" id="f-tipus">
           <option>Dossier</option><option>Informe de retorn</option><option>Dades del club</option>
           <option>Fotos</option><option>Logos i marca</option><option>Contracte</option><option>Altres</option>
         </select>
       </div>
-      <div class="fgroup"><label class="field-label">Col·laborador (opcional)</label><input class="field-input" id="f-partner" placeholder="Ex: Foto Jané · deixa buit si és genèric"></div>
-      <div class="fgroup full"><label class="field-label">Fitxer * (PDF, imatge, Word, Excel, PPT)</label><input class="field-input" id="f-file" type="file"></div>
+      <div class="fgroup"><label class="field-label" for="f-partner">Col·laborador (opcional)</label><input class="field-input" id="f-partner" placeholder="Ex: Foto Jané · deixa buit si és genèric"></div>
+      <div class="fgroup full"><label class="field-label" for="f-file">Fitxer * (PDF, imatge, Word, Excel, PPT)</label><input class="field-input" id="f-file" type="file"></div>
     </div>
     <div class="err" id="err"></div>
     <div class="ok" id="ok"></div>
@@ -98,6 +101,7 @@
   <div class="card" id="list"><div class="empty">Carregant…</div></div>
 </div>
 
+</main>
 <script src="/briefing/materials.js"></script>
 <script src="/scripts/admin-gate.js"></script>
 <script>

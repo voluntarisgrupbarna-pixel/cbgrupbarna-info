@@ -825,7 +825,7 @@ def build_partner_landing(img, nom, ig):
         dl_rows.append(f'<div class="dl-row"><dt>Telèfon</dt><dd><a href="tel:{tel}">{info["phone"]}</a></dd></div>')
     if info.get("email"):
         dl_rows.append(f'<div class="dl-row"><dt>Correu</dt><dd><a href="mailto:{info["email"]}">{info["email"]}</a></dd></div>')
-    contacte_html = f'<h2>Contacte</h2><div class="dl">{"".join(dl_rows)}</div>' if dl_rows else ''
+    contacte_html = f'<h2>Contacte</h2><dl class="dl">{"".join(dl_rows)}</dl>' if dl_rows else ''
 
     wa_ask = lambda text, cta: (f'<a href="{WA_CLUB}&amp;text={wa(text)}" class="btn ghost" '
                                 f'target="_blank" rel="noopener" data-cta="{cta}">Escriure al club per WhatsApp</a>')

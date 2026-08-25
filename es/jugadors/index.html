@@ -88,8 +88,10 @@
 }
 </script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Saltar al contenido</a>
 <header>
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CB GRUP <span>BARNA</span></div>
@@ -98,12 +100,14 @@
       <a href="/jugadors/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/jugadors/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/jugadors/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
 </header>
+<main id="contingut" tabindex="-1">
 <div class="wrap">
   <h1>LA <span>PLANTILLA</span></h1>
   <div class="sub">Jugadoras y jugadores del CB Grup Barna por equipos · Temporada 2025-2026</div>
   <p class="intro">Consulta la plantilla completa del CB Grup Barna, equipo por equipo: desde la Escoleta hasta los séniors, con todos los jugadores y jugadoras federados del club en El Clot, Barcelona.</p>
   <div id="roster"><div class="empty">Cargando plantilla…</div></div>
 </div>
+</main>
 <script src="/jugadors/jugadors.js"></script>
 <script>
   const jug = Array.isArray(window.JUGADORS) ? window.JUGADORS : [];

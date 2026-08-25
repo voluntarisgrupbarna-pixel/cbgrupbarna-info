@@ -20,7 +20,7 @@
   nav .brand{display:flex;align-items:center;gap:.6rem}
   nav img{width:34px;height:34px;object-fit:contain}
   nav .t{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.03em}
-  nav .t span{color:var(--red)}
+  nav .t span{color:var(--red-ink,#A8040E)}
   nav .links{display:flex;align-items:center;gap:1rem}
   nav .links a{color:var(--red-ink);font-size:.8rem;text-decoration:none;font-weight:600}
   .nav-user{display:none;align-items:center;gap:.7rem;font-size:.8rem;color:#6B6560}
@@ -38,7 +38,7 @@
   #login-box{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.6rem}
   .err{display:none;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.3);color:var(--red-ink);border-radius:10px;padding:.6rem .8rem;font-size:.82rem}
   .hint{font-size:.72rem;color:#6B6560}
-  .hint a{color:var(--red-ink);text-decoration:none}
+  .hint a{color:var(--red-ink);text-decoration:underline;text-underline-offset:3px}
   #main-screen{display:none}
   h2{font-family:'Anton',sans-serif;font-size:1.5rem;margin:1.4rem 0 .8rem;letter-spacing:.01em}
   h2 span{color:var(--red)}
@@ -72,8 +72,10 @@
 </style>
 <script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Saltar al contenido</a>
 
 <nav>
   <div class="brand">
@@ -93,6 +95,8 @@
 </nav>
 
 <!-- LOGIN -->
+<main id="contingut" tabindex="-1">
+<h1 class="visually-hidden">Estadísticas de jugadores y jugadoras</h1>
 <div id="login-screen">
   <div class="login-title">ACCESO <span style="color:var(--red)">ADMIN</span></div>
   <div class="login-sub">Introduce el token de GitHub para gestionar las estadísticas</div>
@@ -121,16 +125,16 @@
       </div>
       <div class="grid" style="margin-top:1rem">
         <div class="fgroup full">
-          <label class="field-label">Jugador/a *</label>
+          <label class="field-label" for="f-jugador">Jugador/a *</label>
           <select class="field-input" id="f-jugador"><option value="">— Selecciona —</option></select>
         </div>
-        <div class="fgroup"><label class="field-label">Fecha del partido *</label><input class="field-input" id="f-data" type="date"></div>
-        <div class="fgroup full"><label class="field-label">Rival</label><input class="field-input" id="f-rival" placeholder="Nombre del equipo contrario"></div>
-        <div class="fgroup"><label class="field-label">Minutos jugados</label><input class="field-input" id="f-minuts" type="number" min="0" max="60" placeholder="0"></div>
-        <div class="fgroup"><label class="field-label">Puntos</label><input class="field-input" id="f-punts" type="number" min="0" max="99" placeholder="0"></div>
-        <div class="fgroup"><label class="field-label">Triples anotados</label><input class="field-input" id="f-triples" type="number" min="0" max="20" placeholder="0"></div>
-        <div class="fgroup"><label class="field-label">Tiros libres anotados</label><input class="field-input" id="f-tl" type="number" min="0" max="40" placeholder="0"></div>
-        <div class="fgroup"><label class="field-label">Faltas cometidas</label><input class="field-input" id="f-faltes" type="number" min="0" max="6" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-data">Fecha del partido *</label><input class="field-input" id="f-data" type="date"></div>
+        <div class="fgroup full"><label class="field-label" for="f-rival">Rival</label><input class="field-input" id="f-rival" placeholder="Nombre del equipo contrario"></div>
+        <div class="fgroup"><label class="field-label" for="f-minuts">Minutos jugados</label><input class="field-input" id="f-minuts" type="number" min="0" max="60" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-punts">Puntos</label><input class="field-input" id="f-punts" type="number" min="0" max="99" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-triples">Triples anotados</label><input class="field-input" id="f-triples" type="number" min="0" max="20" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-tl">Tiros libres anotados</label><input class="field-input" id="f-tl" type="number" min="0" max="40" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-faltes">Faltas cometidas</label><input class="field-input" id="f-faltes" type="number" min="0" max="6" placeholder="0"></div>
       </div>
       <div class="err" id="form-error" style="margin-top:.8rem"></div>
       <div class="ok-banner" id="form-ok"></div>
@@ -160,6 +164,7 @@
   </div>
 </div>
 
+</main>
 <script src="/jugadors/jugadors.js"></script>
 <script src="/jugadors/stats.js"></script>
 <script>

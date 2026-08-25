@@ -151,10 +151,28 @@
     return TEXTOS[codi] || TEXTOS.ca;
   }
 
+  // En tancar la barra, el focus tornaria al <body> i qui navega amb teclat
+  // es quedaria al principi de tot. El portem al contingut de la pàgina, que
+  // és on la persona anava.
   function tancar() {
     if (!barra) return;
+    var teniaFocus = barra.contains(document.activeElement);
     barra.remove();
     barra = null;
+    document.removeEventListener('keydown', escapa);
+    if (teniaFocus) {
+      var desti = document.getElementById('contingut') || document.querySelector('main');
+      if (desti) {
+        if (!desti.hasAttribute('tabindex')) desti.setAttribute('tabindex', '-1');
+        desti.focus();
+      }
+    }
+  }
+
+  // Escape val com a «només les necessàries», mai com a acceptació. Tancar
+  // un avís no és consentir-hi.
+  function escapa(e) {
+    if (e.key === 'Escape' && barra) { desar('rebutja'); tancar(); }
   }
 
   function pintar() {
@@ -167,7 +185,6 @@
     barra = document.createElement('div');
     barra.className = 'cbgb-gal';
     barra.setAttribute('role', 'dialog');
-    barra.setAttribute('aria-live', 'polite');
     barra.setAttribute('aria-label', t.aria);
     barra.innerHTML =
       '<div class="cbgb-gal-in">' +
@@ -190,6 +207,7 @@
     });
 
     document.body.appendChild(barra);
+    document.addEventListener('keydown', escapa);
     barra.querySelector('[data-cbgb="si"]').focus();
   }
 

@@ -88,8 +88,10 @@
 }
 </script>
 <script src="/js/galetes.js"></script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Skip to content</a>
 <header>
   <img src="/logo.png" alt="CB Grup Barna">
   <div class="t">CB GRUP <span>BARNA</span></div>
@@ -98,12 +100,14 @@
       <a href="/jugadors/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/jugadors/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/jugadors/" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
     </nav>
 </header>
+<main id="contingut" tabindex="-1">
 <div class="wrap">
   <h1>THE <span>ROSTER</span></h1>
   <div class="sub">CB Grup Barna players by team · 2025-2026 season</div>
   <p class="intro">Browse the full CB Grup Barna roster, team by team: from the Escoleta to the senior squads, every registered player at the club in El Clot, Barcelona.</p>
   <div id="roster"><div class="empty">Loading roster…</div></div>
 </div>
+</main>
 <script src="/jugadors/jugadors.js"></script>
 <script>
   const jug = Array.isArray(window.JUGADORS) ? window.JUGADORS : [];

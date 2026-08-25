@@ -20,7 +20,7 @@
   nav .brand{display:flex;align-items:center;gap:.6rem}
   nav img{width:34px;height:34px;object-fit:contain}
   nav .t{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.03em}
-  nav .t span{color:var(--red)}
+  nav .t span{color:var(--red-ink,#A8040E)}
   nav .links{display:flex;align-items:center;gap:1rem}
   nav .links a{color:var(--red-ink);font-size:.8rem;text-decoration:none;font-weight:600}
   .nav-user{display:none;align-items:center;gap:.7rem;font-size:.8rem;color:#6B6560}
@@ -38,7 +38,7 @@
   #login-box{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.6rem}
   .err{display:none;background:rgba(226,6,19,.08);border:1px solid rgba(226,6,19,.3);color:var(--red-ink);border-radius:10px;padding:.6rem .8rem;font-size:.82rem}
   .hint{font-size:.72rem;color:#6B6560}
-  .hint a{color:var(--red-ink);text-decoration:none}
+  .hint a{color:var(--red-ink);text-decoration:underline;text-underline-offset:3px}
   #main-screen{display:none}
   h2{font-family:'Anton',sans-serif;font-size:1.5rem;margin:1.4rem 0 .8rem;letter-spacing:.01em}
   h2 span{color:var(--red)}
@@ -72,8 +72,10 @@
 </style>
 <script src="/scripts/admin-gate.js"></script>
 <script>CBGBGate.protect();</script>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a class="skip" href="#contingut">Skip to content</a>
 
 <nav>
   <div class="brand">
@@ -93,6 +95,8 @@
 </nav>
 
 <!-- LOGIN -->
+<main id="contingut" tabindex="-1">
+<h1 class="visually-hidden">Player statistics</h1>
 <div id="login-screen">
   <div class="login-title">ADMIN <span style="color:var(--red)">ACCESS</span></div>
   <div class="login-sub">Enter your GitHub token to manage the statistics</div>
@@ -121,16 +125,16 @@
       </div>
       <div class="grid" style="margin-top:1rem">
         <div class="fgroup full">
-          <label class="field-label">Player *</label>
+          <label class="field-label" for="f-jugador">Player *</label>
           <select class="field-input" id="f-jugador"><option value="">— Select —</option></select>
         </div>
-        <div class="fgroup"><label class="field-label">Match date *</label><input class="field-input" id="f-data" type="date"></div>
-        <div class="fgroup full"><label class="field-label">Opponent</label><input class="field-input" id="f-rival" placeholder="Name of the opposing team"></div>
-        <div class="fgroup"><label class="field-label">Minutes played</label><input class="field-input" id="f-minuts" type="number" min="0" max="60" placeholder="0"></div>
-        <div class="fgroup"><label class="field-label">Points</label><input class="field-input" id="f-punts" type="number" min="0" max="99" placeholder="0"></div>
-        <div class="fgroup"><label class="field-label">Three-pointers made</label><input class="field-input" id="f-triples" type="number" min="0" max="20" placeholder="0"></div>
-        <div class="fgroup"><label class="field-label">Free throws made</label><input class="field-input" id="f-tl" type="number" min="0" max="40" placeholder="0"></div>
-        <div class="fgroup"><label class="field-label">Fouls committed</label><input class="field-input" id="f-faltes" type="number" min="0" max="6" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-data">Match date *</label><input class="field-input" id="f-data" type="date"></div>
+        <div class="fgroup full"><label class="field-label" for="f-rival">Opponent</label><input class="field-input" id="f-rival" placeholder="Name of the opposing team"></div>
+        <div class="fgroup"><label class="field-label" for="f-minuts">Minutes played</label><input class="field-input" id="f-minuts" type="number" min="0" max="60" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-punts">Points</label><input class="field-input" id="f-punts" type="number" min="0" max="99" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-triples">Three-pointers made</label><input class="field-input" id="f-triples" type="number" min="0" max="20" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-tl">Free throws made</label><input class="field-input" id="f-tl" type="number" min="0" max="40" placeholder="0"></div>
+        <div class="fgroup"><label class="field-label" for="f-faltes">Fouls committed</label><input class="field-input" id="f-faltes" type="number" min="0" max="6" placeholder="0"></div>
       </div>
       <div class="err" id="form-error" style="margin-top:.8rem"></div>
       <div class="ok-banner" id="form-ok"></div>
@@ -160,6 +164,7 @@
   </div>
 </div>
 
+</main>
 <script src="/jugadors/jugadors.js"></script>
 <script src="/jugadors/stats.js"></script>
 <script>

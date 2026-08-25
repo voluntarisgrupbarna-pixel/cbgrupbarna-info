@@ -22,15 +22,31 @@ només l'hi posa nom.
 
 ---
 
-## 1.0.3 — 2026-08-24
+## 1.1.1 — 2026-08-24
 
 Primera tanda de codi del «Camí cap al 10» (auditoria d'estètica i de la
 resta d'apartats): els preus del campus (195/160/150 €) ja no es publiquen
-enlloc —3 pàgines en ca/es/en, el generador `build-campus-fitxa.py` i totes
-les dades estructurades—, la política de privacitat declara Formspree com a
-encarregat del tractament, i `/jugadors/` porta `noindex` mentre no tingui
-plantilla. `PENDENTS-WEB.md` actualitzat marcant les tres accions com a
-fetes.
+enlloc —a totes les pàgines en ca/es/en, el generador `build-campus-fitxa.py`
+i totes les dades estructurades—, la política de privacitat declara
+Formspree com a encarregat del tractament, i `/jugadors/` porta `noindex`
+mentre no tingui plantilla. `PENDENTS-WEB.md` actualitzat marcant les tres
+accions com a fetes.
+
+## 1.1.0 — 2026-08-24
+
+Accessibilitat: `css/a11y.css`, capa compartida a les 458 pàgines (focus
+visible, salt al contingut, moviment reduït, alt contrast del sistema).
+Nova secció **`/accessibilitat/`** (+ `/es/accesibilidad/`,
+`/en/accessibility/`), enllaçada des del peu de tot el lloc, amb l'estat
+real de conformitat WCAG 2.2 AA. Contrast corregit a l'engròs allà on
+l'auditoria d'UX (#78) no havia arribat; menús amb `aria-expanded`; PDF amb
+`/Title` i `/Lang`; vídeo d'`/opina/` amb subtítols obligatoris abans de
+poder-se activar mai.
+
+Resultat mesurat amb axe-core: 0 violacions WCAG 2.0/2.1/2.2 A i AA a les
+458 pàgines servides.
+
+---
 
 ## 1.0.2 — 2026-08-24
 

@@ -1,0 +1,173 @@
+/* ==========================================================================
+   Capa d'accessibilitat · cbgrupbarna.info
+   --------------------------------------------------------------------------
+   Un sol full, enllaçat des de totes les pàgines, amb el que ha de valer
+   igual a tot el lloc: focus visible, salt al contingut, moviment reduït,
+   mode d'alt contrast i les utilitats per a lectors de pantalla.
+
+   Es carrega DESPRÉS de css/barna.css i dels estils propis de cada pàgina,
+   de manera que aquestes regles guanyen sense haver de repetir-les a cada
+   fitxer. Les pàgines que no enllacen barna.css tenen els seus propis colors,
+   per això aquí cada token porta un valor de recanvi.
+
+   Els valors de color surten de la skill web-cbgb (punt 1): --red #E20613
+   (4,92:1 sobre blanc i 3,66:1 sobre la tinta #10100E, per damunt del 3:1 que
+   demana el criteri 1.4.11 per a un contorn de focus) i --ink #10100E.
+   ========================================================================== */
+
+/* --- 1. Focus visible al teclat -------------------------------------------
+   El contorn d'1 px que hi havia es perdia sobre foto i sobre fons fosc.
+   Tres píxels de vermell més una ombra clara: es veu sobre paper, sobre
+   crema, sobre tinta i sobre fotografia. Només amb :focus-visible, de manera
+   que el ratolí no en veu res.                                             */
+:focus-visible {
+  outline: 3px solid var(--red, #E20613) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.55);
+  border-radius: 2px;
+}
+/* L'`!important` no és per caprici: hi ha una trentena de pàgines amb
+   `outline: none` escrit a l'atribut `style` del propi element (caselles de
+   PIN, cercadors), i un estil en línia guanya sempre a un full. Sense això,
+   aquells camps es continuarien enfocant sense que es veiés. */
+/* Sobre superfícies fosques el halo clar seria un llum: es fa fosc. */
+.foot :focus-visible,
+.masthead :focus-visible,
+.franja--ink :focus-visible,
+[data-theme="dark"] :focus-visible {
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.55);
+}
+/* Contenidors que reben el focus per programa (el destí del salt) no han de
+   dibuixar-hi res: el focus hi és per moure el lector de pantalla, no per
+   assenyalar un control. */
+main:focus, [tabindex="-1"]:focus { outline: none !important; box-shadow: none !important; }
+main:focus-visible, [tabindex="-1"]:focus-visible { outline: none !important; box-shadow: none !important; }
+
+/* --- 2. Salta al contingut ------------------------------------------------
+   Amagat fins que el teclat hi arriba. És el primer que ha de trobar qui
+   navega amb tabulador, perquè no hagi de passar per tot el menú a cada
+   pàgina.                                                                  */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 2000;
+  font-family: var(--body, "Inter", system-ui, sans-serif);
+}
+.skip:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8px;
+  background: var(--ink, #10100E);
+  color: #fff;
+  padding: 12px 22px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  outline: 3px solid var(--red, #E20613);
+  outline-offset: 2px;
+}
+
+/* --- 3. L'àncora no ha de quedar sota la capçalera enganxada -------------- */
+:target { scroll-margin-top: 96px; }
+
+/* --- 4. Moviment reduït ---------------------------------------------------
+   Qui té el sistema configurat sense animacions (vertigen, migranya,
+   trastorns vestibulars) no ha de veure res que es mogui, ni el desplaçament
+   suau, ni les entrades per opacitat que deixarien contingut invisible si
+   l'script no arribés a activar-les.                                       */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .rv, [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
+
+/* --- 5. Mode d'alt contrast del sistema (Windows / forced colors) ---------
+   Amb colors forçats, els filets de rgba() desapareixen i les targetes es
+   fonen amb el fons. Aquí es tornen a dibuixar amb els colors del sistema. */
+@media (forced-colors: active) {
+  :focus-visible { outline: 3px solid Highlight; box-shadow: none; }
+  .card, .franja, .e-art, .panel, .box, table, th, td { border-color: CanvasText; }
+  .skip:focus { background: Canvas; color: CanvasText; border: 2px solid CanvasText; }
+  img { forced-color-adjust: none; }
+}
+
+/* --- 6. Utilitats ---------------------------------------------------------
+   .visually-hidden: text només per a lector de pantalla, mai per amagar
+   contingut que la vista necessiti.                                        */
+.visually-hidden, .sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- 7. Text i zoom -------------------------------------------------------
+   El criteri 1.4.4 demana poder ampliar fins al 200% sense perdre contingut.
+   Les mides en px que ja hi ha escalen amb el zoom del navegador; el que cal
+   assegurar és que res no bloqui l'ampliació ni talli el text.             */
+body { text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+
+/* --- 8. Correccions de contrast ------------------------------------------
+   Mesurades amb axe-core sobre el lloc publicat. Cap d'aquestes canvia la
+   paleta: totes fan servir els valors que la guia de marca ja preveu —el
+   vermell aclarit #FF3B41 per a fons foscos i --red-ink #A8040E per a text
+   vermell sobre fons clar— allà on el vermell de l'escut es quedava per sota
+   del 4,5:1 que demana el criteri 1.4.3 (nivell AA).
+
+   Contrastos, per si algú els vol tornar a comprovar:
+     #E20613 sobre #10100E → 3,87:1  ✗      #FF3B41 sobre #10100E → 5,40:1  ✓
+     #E20613 sobre #F4F1EC → 4,36:1  ✗      #A8040E sobre #F4F1EC → 6,93:1  ✓
+     #10100E sobre #E20613 → 3,87:1  ✗      #FFFFFF sobre #E20613 → 4,92:1  ✓
+   Sobre el vermell no hi ha cap blanc rebaixat que hi arribi: ni al 92%
+   d'opacitat (4,28:1). Per això, a sobre del vermell, blanc pur.           */
+
+/* Vermell sobre les superfícies fosques del lloc. */
+.foot em, .foot-mark em, .foot .red,
+.masthead em, .masthead .red,
+.franja--ink em, .franja--ink .red,
+.cbgb-gal-t b { color: #FF3B41; }
+
+/* La línia de crèdits del peu anava a un 40% de blanc: 3,83:1. */
+.foot-legal { color: rgba(255, 255, 255, 0.62); }
+
+/* Text secundari a sobre del vermell. */
+.comunitat-porta--red .comunitat-s,
+.franja--red .franja-s,
+.franja--red .franja-go em { color: #fff; }
+
+/* Etiquetes vermelles: sobre crema o paper, el vermell fosc; sobre tinta,
+   l'aclarit. */
+.eyebrow.red { color: var(--red-ink, #A8040E); }
+.foot .eyebrow.red,
+.masthead .eyebrow.red,
+.franja--ink .eyebrow.red { color: #FF3B41; }
+
+
+/* El commutador d'idioma anava a un 55% d'opacitat sobre un gris que ja és
+   gris: 4,18:1. Amb l'opacitat sencera, el gris de marca hi dona 5,74:1, i el
+   que hereta el color del peu fosc es queda blanc. */
+.lang-switch a { opacity: 1; }
+.lang-switch.light a { color: rgba(255, 255, 255, 0.82); }
+.lang-switch.light a.active { color: #fff; }
+
+/* Etiquetes petites sobre el peu fosc: el gris de marca hi dona 3,83:1. */
+.foot .eyebrow, .foot-partners .eyebrow { color: rgba(255, 255, 255, 0.72); }
+
+/* Peu curt de la portada, sobre una franja grisa clara. */
+.lg-foot { color: var(--ink-2, #46433f); }
+
+/* Un botó vermell sempre porta el text en blanc (4,92:1); en tinta es
+   quedaria a 3,87:1. */
+.btn.red, a.btn.red { color: #fff; }

@@ -72,7 +72,7 @@
     --red:#FF2A30;        /* vermell de text sobre negre */
     --red-ink:#FF8A8E;    /* enllaços dins de text */
     --red-solid:#E20613;  /* el de l'escut: fons plens amb lletra blanca */
-    --ink:#FFFFFF; --muted:#9C9C9C;
+    --ink:#FFFFFF; --muted:#9C9C9C; --ink-2:#9C9C9C;
     --ground:#060606; --panel:#111111; --cream:#191919; --paper:#111111;
     --line:rgba(255,255,255,.15);
     --shadow:0 30px 70px -34px rgba(0,0,0,.95);
@@ -511,6 +511,7 @@
     .split,.panel,.visit-card,.partner-card,.sponsor,.pack,.facts,.tbl-wrap,.b-num div,.par{border-radius:10px}
   }
 </style>
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
 <a href="#main" class="skip">Saltar al contingut</a>
@@ -561,7 +562,7 @@
       <a href="#packs">Packs</a>
       <a href="#contacte">Contacte</a>
     </div>
-    <a class="idx-more" href="/presentacions/dossier-patrocinis/cb-grup-barna-dossier-patrocinis.pdf" download="CB-Grup-Barna-Dossier-Patrocinis.pdf" data-cta="dossier-pdf-barra">PDF</a>
+    <a class="idx-more" href="/presentacions/dossier-patrocinis/cb-grup-barna-dossier-patrocinis.pdf" download="CB-Grup-Barna-Dossier-Patrocinis.pdf" data-cta="dossier-pdf-barra" aria-label="Descarregar el dossier de patrocinis (PDF, 19 pàg., 3,4 MB)">PDF</a>
     <a class="idx-more" href="/presentacions/">Presentacions</a>
   </div>
 </nav>
@@ -960,7 +961,7 @@
     <div class="btn-row">
       <a href="https://api.whatsapp.com/send?phone=+34698425153" class="btn red" target="_blank" rel="noopener" data-cta="dossier-wa">WhatsApp del club</a>
       <a href="mailto:marqueting@cbgrupbarna.info" class="btn ghost" data-cta="dossier-mail">marqueting@cbgrupbarna.info</a>
-      <a href="/presentacions/dossier-patrocinis/cb-grup-barna-dossier-patrocinis.pdf" class="btn ghost" download="CB-Grup-Barna-Dossier-Patrocinis.pdf" data-cta="dossier-closer-pdf">Descarregar en PDF</a>
+      <a href="/presentacions/dossier-patrocinis/cb-grup-barna-dossier-patrocinis.pdf" class="btn ghost" download="CB-Grup-Barna-Dossier-Patrocinis.pdf" aria-label="Descarregar el dossier de patrocinis en PDF (19 pàg., 3,4 MB)" data-cta="dossier-closer-pdf">Descarregar en PDF</a>
     </div>
   </div>
 </section>
@@ -1000,6 +1001,7 @@
         <h3>Legal</h3>
         <a href="/politica-de-privacitat/">Política de privacitat</a>
         <a href="/avis-legal/">Avís legal</a>
+        <a href="/accessibilitat/">Accessibilitat</a>
       </div>
       <div class="foot-col">
         <h3>Xarxes</h3>
