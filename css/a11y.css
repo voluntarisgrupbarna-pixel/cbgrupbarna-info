@@ -171,3 +171,18 @@ body { text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 /* Un botó vermell sempre porta el text en blanc (4,92:1); en tinta es
    quedaria a 3,87:1. */
 .btn.red, a.btn.red { color: #fff; }
+
+/* --- 9. Enllaç d'accessibilitat al peu ------------------------------------
+   No hi ha cap logo oficial de «web accessible»: el que demanen les normes
+   (WCAG 2.2, RD 1112/2018) és una declaració enllaçada, no un segell. Aquí
+   es fa visible sense que sembli una certificació que ningú ens ha donat:
+   la icona i el nivell de conformitat, en el vermell aclarit que ja fa
+   servir la resta del peu fosc (5,40:1, vegeu el punt 8 més amunt). */
+.foot-a11y {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: #FF3B41 !important;
+  font-weight: 600;
+}
+.foot-a11y-i { font-size: 1.15em; line-height: 1; }
