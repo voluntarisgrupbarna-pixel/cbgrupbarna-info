@@ -1503,12 +1503,11 @@ portada»). Aplicat a les tres portades (ca/es/en):
 - **Hero a dues columnes**: titular gran amb el primer bot, foto de
   l'Escoleta amb peu i filet vermell, i el trio de botons (Vine a provar /
   Entrenaments / ⬇ Descarrega el full) sota la foto.
-- **Cinc franges grans** amb aire (Escoleta sense foto —la foto ja és al
-  hero—, sèniors sobre tinta amb la foto nova de grup, femení amb les cares
-  centrades, calendari en vermell, el club) i el peu de pila
+- **Les nou franges de la guia, en gran i amb aire** (l'Ana va demanar
+  recuperar-les totes: «es la guia»). Ordre intacte: Escoleta (sense foto
+  —la foto ja és al hero—), Portes obertes, sèniors sobre tinta amb la
+  foto nova de grup, femení amb les cares centrades, calendari en vermell,
+  el club, Observatori, Galeria i Escriu-nos. I el peu de pila
   #SOMCLOT · El diari del Clot → · CA ES EN.
-- Les portes que surten de la pila (Portes obertes, Observatori/blog,
-  Galeria, Escriu-nos) segueixen al mapa ≡, al peu i a l'extensa; el blog
-  té la porta del peu de pila.
 - **El burger vell de la capçalera es retira** (display:none): duplicava el
   mapa ≡ a dos dits de distància. El menú antic queda al marcatge.
