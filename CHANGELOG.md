@@ -22,6 +22,17 @@ només l'hi posa nom.
 
 ---
 
+## 1.3.0 — 2026-08-25
+
+**L'estètica definitiva, completa.** Les tres peces que quedaven del document
+del 25 d'agost: el **botó ≡** amb el mapa de navegació complet a totes les
+capçaleres (377 pàgines més; component autocontingut `js/mapa.js` generat des
+de `i18n/routes.yml`); els **panells de la portada** —«Entrenaments» amb els
+horaris reals de l'Escoleta i «Descarrega el full (PDF)» amb el flyer nou per
+la porta de descàrrega existent, amb casella de butlletí—; i els **sèniors**
+pugen a dalt de la portada, per sobre del formulari, amb l'eyebrow a la
+temporada 26·27.
+
 ## 1.2.1 — 2026-08-25
 
 La tanda de decisions de l'Ana del mateix dia, executades: l'edat de

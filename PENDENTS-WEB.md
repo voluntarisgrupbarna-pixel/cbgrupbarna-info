@@ -1442,13 +1442,19 @@ I de la tanda de decisions de l'Ana del mateix dia:
 - **Newsletter**: el club ja té Brevo. Pendent que l'Ana passi l'URL del
   formulari (la clau API no pot viure en un lloc estàtic).
 
-### Pendent de les quatre decisions de l'estètica
+### Pendent de les quatre decisions de l'estètica — TANCAT (mateix dia, v1.3.0)
 
-- **Mapa de navegació ≡ a totes les capçaleres** — avui només és a les 3
-  portades; falten 481 pàgines. És la feina grossa que queda de l'estètica.
-- **Els panells «Entrenaments» i «Descarrega info»** de la maqueta, a la
-  portada real (el segon, lligat al formulari de Brevo).
-- **Els primers equips abans de la base** a la portada (#seniors és quart).
+- ~~**Mapa de navegació ≡ a totes les capçaleres**~~ **Fet.** `js/mapa.js`
+  (generat per `scripts/build-mapa.py` des de `i18n/routes.yml`) a 377
+  pàgines més via `scripts/mapa-aplica.py`; 108 saltades amb motiu (admin,
+  impremta, redireccions, galeria, mirall del Premi).
+- ~~**Els panells «Entrenaments» i «Descarrega info»**~~ **Fet.** A les tres
+  portades i a les dues vistes. La descàrrega tira de la porta existent
+  (Apps Script + casella de butlletí); quan arribi l'URL de Brevo s'hi
+  connecta l'enviament.
+- ~~**Els primers equips abans de la base**~~ **Fet.** #seniors puja per
+  sobre del formulari a les tres portades. La fitxa amb plantilla i staff
+  segueix esperant material (/jugadors/ buit).
 
 ### Material · l'Ana avui no té temps (dit explícitament el 25/08)
 
