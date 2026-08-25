@@ -79,7 +79,9 @@ l'Escoleta es deia «4 a 7 anys» a nou fitxers i «4 a 8 anys» només a
 — aquest últim fitxer es contradeia fins i tot amb si mateix (FAQ deia 4-7,
 cos de l'article deia 4-8). Es va poder resoldre sense preguntar perquè la
 pròpia lògica de transició del club («als 8 anys passen a premini») només
-quadra amb 4-7. També s'hi va fer evergreen tot el «60 anys» que és text viu
+quadra amb 4-7. **Actualització 25-08-2026**: la direcció de màrqueting ha
+decidit expressament el contrari — «4 a 8 anys, sempre» — i s'ha aplicat a
+tot el lloc; no ho «arreglis» de tornada a 4-7 per la lògica d'aquí sobre. També s'hi va fer evergreen tot el «60 anys» que és text viu
 (no citació d'un article de premsa real, que sí s'ha de deixar intacte amb el
 número que porti).
 

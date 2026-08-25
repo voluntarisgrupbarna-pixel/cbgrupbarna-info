@@ -1465,3 +1465,32 @@ ja en tira), Willy Hernangómez, galeries d'esdeveniments, nivells
 or/plata/bronze, Instagram de 6 partners, fitxes de Nova Farmàcia Clot i
 Clínica Dental 26, plantilla de /jugadors/, Tecnificació i Notícies, fotos
 de La Nau, logo de la Wilson.
+
+---
+
+## 25-08-2026 · Nota de reconciliació — dues sessions van aplicar l'estètica alhora
+
+La branca del prototip (`claude/web-design-proposals-yd18ir`) i la tanda
+v1.2.0–1.3.1 de dalt van fer la mateixa feina en paral·lel el mateix dia. En
+fusionar-les ha manat la tanda v1.2.0–1.3.1, que era més completa; de la
+branca del prototip s'hi ha sumat el que faltava:
+
+- **«4 a 8 anys» als llocs que la tanda no cobria**: `suggestedMaxAge` del
+  JSON-LD de les tres portades, franges d'Escoleta de 3x3/campus/màgics en
+  castellà i anglès, els dos blogs afectats en es/en, els fitxers
+  d'`i18n/feina/` i `cerca-index.json`, i l'avís a `tests/README.md` perquè
+  ningú ho «arregli» de tornada a 4-7.
+- El PDF provisional `escoleta/materials/escoleta-info.pdf` de la branca
+  s'ha retirat: el supera el flyer real d'`escoleta/flyer/` (A5, 300 ppp).
+
+Referències del prototip que van originar les decisions (viuen fora del
+repositori, com a Artifacts):
+
+- Prototip navegable de 4 vistes: https://claude.ai/code/artifact/639494fb-9f78-4210-bede-ca28e4649565
+- «Estètica definitiva» (mockup viu + decisions): https://claude.ai/code/artifact/b51f10df-cb1d-47b7-867c-c8168a0225ea
+
+**Fotos noves que només viuen al prototip** (no són a `img/` ni `photos/`):
+quatre jugadors fent broma, el grup de quatre assenyalant a càmera,
+l'alcalde Jaume Collboni amb un jugador d'Escoleta, tres seguidors a la
+grada. Si es volen a producció, passar-les per
+`scripts/build-blog-images.py`.
