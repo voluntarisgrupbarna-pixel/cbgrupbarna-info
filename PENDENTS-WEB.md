@@ -1328,8 +1328,12 @@ a Artifact, fora del repositori:
     setmanal (resultats, anàlisi, article del blog).
 - **Sense crema.** `--cream` passa a blanc pur (el del logo). Decisió expressa
   de l'Ana: cap superfície es distingeix ja per calidesa de crema, només pel
-  vermell i la tinta. **Falta traslladar-ho a `css/barna.css`** — allà `--cream`/
-  `--paper-2`/`--ground` encara valen `#F4F1EC`.
+  vermell i la tinta. ✅ Fet a 25-08-2026: `--cream`/`--paper-2`/`--ground` ja
+  valen `#ffffff` a `css/barna.css` (104 pàgines) i a les còpies locals del
+  mateix bloc a `index.html` (ca/es/en), `opina/`, `partners-mapa/` i
+  `mascota/`. Queda fora expressament `premidonaesport/` (microlloc propi,
+  el crema hi és lletra clara sobre fons fosc, no un fons) i `/escoleta/`
+  (té el seu propi sistema bespoke, vegeu el punt 6 de sota).
 - **Groc fluorescent, amb regla.** Només a la lletra (mai al fons), i només
   als dos punts d'entrada a la campanya d'Escoleta (ticker de novetats i
   «Vine a provar»), sempre sobre negre o vermell — mai directe sobre blanc
@@ -1357,7 +1361,12 @@ a Artifact, fora del repositori:
 ### Per fer, quan es passi del prototip al lloc real
 
 1. Portar la vista de franges de `index.html` al disseny de la proposta A.
-2. Actualitzar `--cream`/`--paper-2`/`--ground` a `css/barna.css`.
+   La franja de l'Escoleta i les fotos de sèniors/femení/club ja hi eren
+   amb l'estructura correcta (sense el mal encreuament amb la foto del
+   campus que sí que sortia al prototip). Falta encara el trio de botons
+   d'heroi (Vine a provar / Entrenaments / Descarrega info) amb els panells
+   desplegables, i el diàleg de mapa de navegació de l'hamburguesa.
+2. ✅ Fet: `--cream`/`--paper-2`/`--ground` a blanc a `css/barna.css`.
 3. Decidir 4-7 o 4-8 anys per a l'Escoleta (flyer vs. web).
 4. Processar i pujar les fotos noves amb el pipeline de sempre.
 5. Connectar el formulari de descàrrega a una eina real (JotForm, ja
