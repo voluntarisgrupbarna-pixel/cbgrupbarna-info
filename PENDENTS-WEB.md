@@ -1334,6 +1334,15 @@ d'aquella fase segueixen sense tancar-se.
 
 ### Trobat nou en aquesta passada
 
+0. **El robot diari de la FCBQ portava dos dies mort** (23-25/08, runs
+   #123-135 tots en vermell) per un `import yaml` sense `pyyaml` al workflow.
+   Arreglat a la v1.1.2, juntament amb la regressió que la fallada amagava:
+   el generador de fitxes d'equip anava per darrere del publicat. **Avís per
+   a futures sessions:** des d'un entorn amb proxy (com aquest), la FCBQ
+   respon 403 amb reCAPTCHA a `basquetcatala.cat` — això NO vol dir que el
+   robot estigui trencat: des de GitHub Actions hi arriba bé. Comprovar
+   sempre els runs d'Actions abans de tocar `update-partits.py`.
+
 4. **No hi ha cap panell d'analítica.** GA4 recull dades (correctament,
    darrere el consentiment) però no hi ha res a `/admin/` que digui quina
    franja converteix, quants `.ics` es descarreguen o d'on ve el trànsit.
