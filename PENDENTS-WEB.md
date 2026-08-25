@@ -1377,3 +1377,86 @@ axe-core sobre l'estat actual.
    `pagLlista` al repositori: es crea sencer en JavaScript en temps
    d'execució, i tocar-ho a cegues sense poder-ho provar a fons és més risc
    que valor. Queda apuntat perquè qui toqui `cerca.js` ho vegi.
+---
+
+## 25-08-2026 — Repàs del document per fases: enllaços trencats i restes de traducció
+
+Repàs complet d'aquest document buscant què queda realment obert i **verificant-ho
+contra el codi**, no contra el que el document deia. Tres fases d'arreglos que no
+necessitaven cap material nou de l'Ana, i una troballa descartada.
+
+### Fase 1 · Enllaços que portaven al lloc equivocat
+
+- **El selector «També disponible en» apuntava a la mateixa pàgina, a 6 pàgines.**
+  A `/es/proteccion-menor/`, `/es/baloncesto-femenino/el-metodo-barna/`,
+  `/es/blog/club-formacion-y-competitivo-cataluna/`, `/en/child-protection/`,
+  `/en/womens-basketball/the-barna-method/` i
+  `/en/blog/formation-and-competitive-club-catalonia/`, l'enllaç que deia «català»
+  portava a la pàgina castellana o anglesa que ja estaves llegint. Clicar-lo
+  recarregava el mateix. Ara van a la versió catalana de debò.
+- **Dues pàgines més tenien mig selector.** `/en/blog/culture-of-effort-progress/`
+  només oferia el castellà i `/es/blog/cultura-esfuerzo-club-progreso/` només un
+  «català» que apuntava a si mateix. Ara les dues ofereixen els altres dos idiomes.
+- **26 pàgines enllaçaven `/basquet-femeni/`**, que des del 18/08/2026 és una
+  redirecció `noindex` cap a `/femeni/`. Enviaven Google i les visites a un desviament
+  en comptes de a la pàgina canònica. Les 24 catalanes ara van a `/femeni/`; les **2
+  angleses tenien un error doble** —etiqueta «Women's Basketball» apuntant a la
+  redirecció **catalana**— i ara van a `/en/womens-basketball/`.
+
+### Fase 2 · Restes de traducció que es llegien malament
+
+- **`aria-label="CB Grup Barna · inicioo"` a 37 pàgines** de `/es/`. Ho llegeix en veu
+  alta un lector de pantalla a cada pàgina. Corregit a `inicio`.
+- **L'etiqueta «Empreses», en català, dins de 6 pies de `/es/` i `/en/`.**
+  `i18n/diccionari.yml` ja diu `es: Empresas` / `en: Companies`: eren pies escrits a
+  mà que mai van passar pel generador. Corregits a la sortida, sense tocar el
+  diccionari, que ja era correcte.
+- **12 frases que començaven en minúscula** («sesenta y un años…», «sixty-one
+  years…») a `/es/` i `/en/` de `club`, `historia`, `briefing`, `premsa/archivo` i
+  `premsa/guia-clot-sesenta-anos`. Ve del traductor, que va traduir «Seixanta-un anys»
+  sense recapitalitzar l'inici de frase.
+
+### Fase 3 · Contingut que ja no era veritat
+
+- **«El resto del blog está, de momento, en català» era fals.** El deien 3 pàgines
+  (`/es/baloncesto-femenino/el-metodo-barna/`,
+  `/en/womens-basketball/the-barna-method/` i
+  `/en/blog/formation-and-competitive-club-catalonia/`). Avui el blog té **21 articles
+  en català i 26 en castellà i 26 en anglès**: les traduccions en tenen *més* que
+  l'original. El bloc no existeix a la versió catalana, o sigui que treure'l també
+  torna la paritat amb l'original.
+- **`dateModified` desquadrat** a `/femeni/el-metode-barna/`: la catalana deia
+  23/08/2026 i les dues traduccions 13/08, tot i haver-se retraduït senceres en
+  aquella mateixa tanda. Alineades.
+
+### Una troballa descartada a propòsit
+
+**92 fitxers escriuen `color:#6B6560` en comptes de `var(--muted)`.** Sembla un error
+de mode fosc, i no ho és: `css/barna.css` **no té mode fosc** —cap `prefers-color-scheme`
+ni `[data-theme]`— i `--muted` val exactament `#6B6560`. Avui es veuen idèntics. És
+deute de manteniment, no un error viu, i tocar 92 fitxers per un canvi que no es veu
+no compensa el risc. **Queda apuntat per si algun dia s'afegeix mode fosc**: llavors sí
+que caldrà fer-ho, i abans d'afegir-lo.
+
+### Comprovat
+
+`scripts/i18n-lint.py` (0 errors nous, mateix baseline de 413 pendents),
+`scripts/i18n-paritat.py --tot` (146 pàgines, cap traducció endarrerida),
+`scripts/i18n-contingut.py` (292 traduccions, cap avís), validesa de tots els blocs
+JSON-LD dels fitxers tocats i balanç d'etiquetes HTML de les 3 pàgines on s'ha
+esborrat un `<div>`.
+
+### El que segueix obert i per què
+
+Res d'aquesta tanda queda a mitges. El que segueix bloquejat és el mateix d'abans:
+els punts que necessiten **una decisió curta de l'Ana** (preus del campus, els 5 MP4
+de la mascota, `/premsa/moments/`, `/briefing/`, eina d'analítica, eina de newsletter)
+i els que necessiten **material** (Willy Hernangómez, galeries d'esdeveniments,
+nivells or/plata/bronze dels partners, Instagram de 6 partners, altes 26/27, plantilla
+de `/jugadors/`, «Tecnificació» i «Notícies», fotos de La Nau, xifres d'audiència).
+
+**Una excepció anotada:** hi ha 6 frases més en minúscula a
+`/es/premidonaesport/resum-executiu.html` i `/en/premidonaesport/resum-executiu.html`.
+**No s'han tocat a propòsit:** `premidonaesport/` és el mirall d'una web oficial
+externa i no s'edita com a font (vegeu `mapa-web-cbgb` §4). Corregir-hi un detall el
+faria divergir del seu original.
