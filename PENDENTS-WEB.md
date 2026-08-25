@@ -113,6 +113,12 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 - **Escoleta:** foto o vídeo d'en Willy Hernangómez entrenant a La Nau amb Time Chamber
   (el forat és a `escoleta/index.html:944`), i confirmar la fitxa del circuit 3x3 amb la
   selecció espanyola (línia 744).
+- **Sessió de fotos de l'Escoleta (4-8 anys):** és el punt més feble de l'apartat
+  d'estètica de la web i no es resol amb codi. Avui només hi ha una foto
+  (`img/escoleta@2x.webp`) per representar tot aquest pilar, i és la imatge que carrega
+  amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
+  material d'acció real (no posat), llum natural, enquadrat des de dalt sense tallar
+  cares, i diverses tomes perquè es pugui rotar en comptes de repetir sempre la mateixa.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
 - **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
@@ -176,9 +182,10 @@ seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
   (noindex) a `/femeni/` i `/femeni/#metode`: eren dues pàgines completes amb
   el mateix contingut i el mateix `<title>` objectiu ("Bàsquet femení a
   Barcelona"), i s'ha triat `/femeni/` com a canònica per decisió de l'Ana.
-  **Pendent:** `/es/baloncesto-femenino/` i `/en/womens-basketball/` encara
-  són traduccions de la pàgina antiga (`/basquet-femeni/`), no de `/femeni/`.
-  No s'han tocat perquè traduir `/femeni/` és una feina de contingut a part.
+  ~~**Pendent:** `/es/baloncesto-femenino/` i `/en/womens-basketball/` encara
+  eren traduccions de la pàgina antiga.~~ **Fet.** Les dues ja tradueixen
+  `/femeni/`: 9 de 9 seccions als tres idiomes, i `i18n-contingut.py` no hi
+  troba cap avís.
 - **"Tecnificació"** (dins Activitats) i **"Notícies"** (dins Actualitat) són
   a l'arbre de l'Ana però no tenen cap pàgina real al lloc ni contingut al
   repositori. No s'han afegit al menú per no inventar-hi programa, preus o
@@ -1175,6 +1182,78 @@ mencions eren prosa d'aquest document i un comentari de
 `c589e7f4`. Amb `git show c589e7f4:mascota/mascota-reel.mp4 > mascota-reel.mp4`
 en surt qualsevol, byte a byte.
 
+## 24-08-2026 — Camí cap al 10: la resta de pendents
+
+Auditoria feta per veure què separa cada apartat de la nota màxima, partint
+del 9,4 global de l'últim informe. La sessió de fotos de l'Escoleta ja hi és,
+a «Pendent de material de l'Ana»; això és la resta.
+
+### UX
+
+- ~~**Preus encara publicats a tres pàgines de campus.**~~ **Fet (24/08/2026).**
+  Tret de `campus/index.html` (+ `/es/` i `/en/`), `campus-basquet-barcelona/index.html`
+  i `campus/setmana-santa/index.html`: meta descriptions, `dl-row` de preu,
+  targetes de preu i totes les dades estructurades (`offers`/`AggregateOffer`
+  a 4 fitxers). El generador `scripts/build-campus-fitxa.py` ja no coneix cap
+  xifra. Es queden intactes els 2.000 € de premis del 3x3 (no és una quota) i
+  el rang de mercat «150-250 €/setmana» de `campus-basquet-barcelona/`, que és
+  informació de tercers, no el preu del club.
+- **`/campus/` no té formulari propi.** Els CTA d'inscripció reenvien tots al
+  WhatsApp del club o al bloc `#info` genèric de portada. Cal decidir quines
+  dades demanar i on van a parar abans de construir-lo.
+- **La «inscripció en línia» de portada depèn que la família confirmi a mà
+  dins de WhatsApp.** El formulari envia les dades a Formspree i obre `wa.me`
+  precarregat, però si el navegador bloqueja el pop-up només arriba el
+  correu, sense número de referència. Cal decidir si el club vol un registre
+  estructurat en comptes del gest manual.
+
+### Seguretat i legal
+
+- ~~**La política de privacitat no esmenta Formspree.**~~ **Fet (24/08/2026).**
+  Afegit als tres idiomes (`politica-de-privacitat/`, `es/politica-de-privacidad/`,
+  `en/privacy-policy/`): el paràgraf del formulari de portada ja diu que les
+  dades s'envien també a Formspree, i apareix a la llista d'encarregats del
+  tractament. Data d'«última actualització» pujada al 24/08/2026.
+- **El PIN del dossier de Premi Dona i Esport és «1965» en clar.**
+  `premidonaesport/assets/js/auth.js` el guarda sense ofuscar, visible amb
+  «Veure codi font». No és el mateix problema que es va resoldre el
+  23/08/2026 (la doble reixa i la indexació): aquí cal que l'Ana confirmi si
+  aquestes 72 pàgines necessiten protecció real o si el gest simbòlic ja és
+  prou.
+
+### SEO
+
+- ~~**`/jugadors/` és indexable i buida.**~~ **Fet (24/08/2026).** `noindex,follow`
+  a les tres versions (`jugadors/`, `es/jugadors/`, `en/jugadors/`) i tretes
+  del `sitemap.xml` (363 URL). Segueix pendent omplir `jugadors/jugadors.js`
+  quan hi hagi plantilla — a «Pendent de decisió»—; quan es faci, cal treure
+  també el `noindex`.
+- **39 dels 43 objectius d'enllaços externs segueixen «pendents».** Segons
+  `POSICIONAMENT-CAMPUS-SEO.md`, l'arquitectura on-page ja està resolta; el
+  que falta és autoritat externa real, i això no és una tasca de codi.
+
+### Accessibilitat
+
+- **Les miniatures de `/fotos/` no descriuen la foto.** Totes porten
+  `alt="Foto 1"`, `alt="Foto 2"`… i el visor a pantalla completa sempre diu
+  `alt="Foto del club"`. Un lector de pantalla no rep cap contingut real.
+  Arreglar-ho és mecànic però lent: cal redactar text alternatiu àlbum a
+  àlbum.
+
+### Idiomes
+
+- ~~**`/campus/` només té 9 de 15 seccions traduïdes** a `/es/` i `/en/`.~~
+  **Fet.** Les 15 seccions ja hi són als tres idiomes (mateix nombre
+  d'`<h2>`) i `i18n-contingut.py` no hi troba cap avís. El cas de `/femeni/`
+  —a «Pendent de decisió · reestructuració del menú»— també ho està.
+
+### Velocitat
+
+- **Falta confirmar amb dades de camp.** Tot el que es va mesurar a la fase
+  de velocitat és de navegador local. Els Core Web Vitals reals de Search
+  Console —els que compten per al posicionament— triguen uns dies a
+  reflectir el canvi de les imatges. Revisar quan hi hagi prou dades.
+
 ## 24-08-2026 — El que queda obert d'aquesta tanda de traducció
 
 Tres coses apuntades i no fetes, perquè cap de les tres és una decisió tècnica:
@@ -1299,92 +1378,119 @@ axe-core sobre l'estat actual.
    d'execució, i tocar-ho a cegues sense poder-ho provar a fons és més risc
    que valor. Queda apuntat perquè qui toqui `cerca.js` ho vegi.
 
+## Accessibilitat · 25/08/2026 — icona a l'enllaç del peu
+
+L'Ana va preguntar si hi havia un logo de «web accessible» per posar al peu.
+No n'hi ha cap d'oficial: el que exigeixen les normatives (WCAG 2.2, EN 301
+549, RD 1112/2018) és una declaració enllaçada, no un segell, i el W3C
+desaconsella els logos de conformitat auto-atorgats sense auditoria externa
+perquè es poden llegir com una garantia legal que no es té.
+
+### Fet
+
+- L'enllaç «Accessibilitat» del peu (`scripts/i18n_chrome.py`) porta ara una
+  icona i el nivell de conformitat visible: **♿ Accessibilitat — WCAG 2.2
+  AA** (`Accesibilidad` / `Accessibility` en castellà i anglès), en comptes
+  del text pla. Icona marcada `aria-hidden="true"`: el lector de pantalla
+  només anuncia el text.
+- Nova regla `.foot-a11y` a `css/a11y.css` (secció 9), amb el vermell
+  aclarit de marca (`#FF3B41`, 5,40:1 sobre el peu fosc).
+- Aplicat a les 277 pàgines (ca/es/en) que enllacen `/accessibilitat/`.
+  Versió **1.1.2**.
+
+### Pendent
+
+Res específic d'aquest canvi. Els 5 punts pendents de la passada
+d'accessibilitat del 24/08/2026 (llista de dalt) segueixen oberts tal com
+estaven.
 ---
 
-## 25-08-2026 — Canvi d'estètica de la portada, decidit en prototip, pendent d'aplicar al lloc
+## 25-08-2026 — L'estètica definitiva, aplicada (v1.2.0 – 1.2.1)
 
-Sessió llarga de disseny amb l'Ana sobre com hauria de ser la portada per
-arribar a un 10. **Res d'això s'ha tocat encara a `index.html` ni a
-`css/barna.css`** — tot viu, de moment, en un prototip navegable publicat com
-a Artifact, fora del repositori:
-**https://claude.ai/code/artifact/639494fb-9f78-4210-bede-ca28e4649565**
-(el racional i el registre de decisions, a la guia
-**https://claude.ai/code/artifact/50a5c317-1569-478d-a6b1-15eb9581ed26**).
+El document «Estètica definitiva» del 25/08 substitueix «Franges i Extensa»
+com a guia. De les seves quatre decisions tancades, aplicades avui:
 
-### Què decideix el prototip
+- **Sense crema enlloc** — `#F4F1EC` fora de tot el lloc: tokens de
+  `css/barna.css`, `css/cerca.css`, i 179 fitxers passats per
+  `aplica-estetica.py`, que des d'ara tradueix qualsevol crema a blanc pur.
+  El vermell de l'escut hi guanya contrast (4,36:1 → 4,92:1, entra a l'AA).
+- **Groc només a la lletra, mai al fons** — token `--yel` amb la regla i els
+  contrastos escrits al costat. Al ticker (ara enllaç amb `data-cta`) i al
+  CTA d'Escoleta, tres portades. Correcció mesurada sobre el document: groc
+  sobre el vermell de l'escut dona 4,44:1, no 5,4:1; el botó groc va sobre
+  `--red-dark` (7,04:1).
 
-- **Quatre vestits d'una sola portada**, no quatre webs diferents: mateixos
-  tokens de color i tipografia a tot arreu.
-  - **A · L'Afinat** — elevació del hero i les franges actuals (més escala,
-    més aire, animació d'entrada del titular). És la que hauria de substituir
-    la vista de franges real; l'extensa no es toca.
-  - **B · Dia de partit** — vestit del cap de setmana: partits (dissabte *i*
-    diumenge, sempre els dos dies), gameday sènior quan toca, resultats de la
-    setmana anterior, calendari complet.
-  - **C · Campanya d'Escoleta** — scrollytelling amb rellotge de possessió de
-    24 s, tancant amb enllaç a les deu històries reals que ja explica
-    `/escoleta/`.
-  - **D · L'Edició** — «diari del barri», contingut real de la newsletter
-    setmanal (resultats, anàlisi, article del blog).
-- **Sense crema.** `--cream` passa a blanc pur (el del logo). Decisió expressa
-  de l'Ana: cap superfície es distingeix ja per calidesa de crema, només pel
-  vermell i la tinta. ✅ Fet a 25-08-2026: `--cream`/`--paper-2`/`--ground` ja
-  valen `#ffffff` a `css/barna.css` (104 pàgines) i a les còpies locals del
-  mateix bloc a `index.html` (ca/es/en), `opina/`, `partners-mapa/` i
-  `mascota/`. Queda fora expressament `premidonaesport/` (microlloc propi,
-  el crema hi és lletra clara sobre fons fosc, no un fons) i `/escoleta/`
-  (té el seu propi sistema bespoke, vegeu el punt 6 de sota).
-- **Groc fluorescent, amb regla.** Només a la lletra (mai al fons), i només
-  als dos punts d'entrada a la campanya d'Escoleta (ticker de novetats i
-  «Vine a provar»), sempre sobre negre o vermell — mai directe sobre blanc
-  perquè el contrast hi falla.
-- **Mapa de navegació complet** (botó ≡) a les quatre capçaleres.
-- **Descàrrega del full d'Escoleta amb captura de dades**: nom, telèfon,
-  correu i acceptació expressa de la newsletter abans de descarregar. Al
-  prototip és una simulació (l'Artifact no permet descàrregues reals); a
-  producció caldria enganxar-ho a l'eina real de newsletter del club.
+I de la tanda de decisions de l'Ana del mateix dia:
 
-### El que això s'emporta pel camí
+- **Escoleta: de 4 a 8 anys** («nos quedamos de 4 a 8»). Corregides les dues
+  pàgines que deien 4-7 (blog «Quants equips» i /patrocinadors/, tres
+  idiomes). El flyer nou ja va amb 4-8.
+- **/premsa/moments/ traduïda**: /es/premsa/momentos/ i /en/premsa/highlights/,
+  pel circuit de la font única. 38 entrades per idioma, sitemap a 366 URL.
+- **Briefing refet per a la 26-27**: temporada i data noves, resultats del
+  sènior femení datats com a 2025-26, els dos sèniors inscrits a la Supercopa
+  segons el robot FCBQ, i xifres quadrades amb data.json (fora les «~2M
+  d'impressions»; dins les 439.000 visualitzacions verificades; 34+ equips
+  amb l'abast real; 400 jugadores i jugadors · 450 famílies).
+- **Flyer nou de l'Escoleta**: font HTML a `escoleta/flyer/` (noindex) +
+  PNG/PDF A5 a 300 ppp. Foto real de l'àlbum de la galeria.
+- **Vídeos de la mascota**: ja eren fora des del 24/08 (commit c589e7f4 per
+  recuperar-los). El tauler de pendents anava endarrerit en aquest punt.
+- **Panell d'analítica**: delegat («haz lo que consideres»). Proposta
+  triada: GitHub Action diària → GA4 Data API → JSON al repositori →
+  panell a /admin/. Pendent de construir i d'un service account de GA4.
+- **Newsletter**: el club ja té Brevo. Pendent que l'Ana passi l'URL del
+  formulari (la clau API no pot viure en un lloc estàtic).
 
-- **Petita correcció d'accessibilitat**, ja aplicada al prototip: en unificar
-  crema i blanc, les franges que abans es distingien només per aquest
-  contrast (Escoleta/Femení/El club) es van quedar sense separació visual.
-  S'hi ha afegit una línia fina entre files.
-- **Discrepància d'edat ✅ resolta** (Ana, 25-08-2026): **«4 a 8 anys»,
-  sempre**. Aplicat a tot el lloc en els tres idiomes (blogs, franges de
-  3x3/campus/màgics, patrocinadors, JSON-LD `suggestedMaxAge`, fitxers de
-  traducció d'`i18n/feina/` i `cerca-index.json`) i al full informatiu en
-  PDF. Atenció: `tests/README.md` explica una decisió anterior en sentit
-  contrari (4-7, per la lògica del pas a premini) — aquella queda superada
-  per aquesta decisió expressa. El flyer A6 imprès continua dient 4-7:
-  si es reimprimeix, actualitzar-lo.
-- **Fotos noves de la sessió d'agost** (quatre jugadors fent broma, el grup de
-  quatre assenyalant a càmera, l'alcalde Jaume Collboni amb un jugador
-  d'Escoleta, tres seguidors a la grada) viuen només al prototip, no a
-  `img/` ni `photos/`. Calen passar-les per `scripts/build-blog-images.py`
-  abans de fer-les servir a producció.
+### Pendent de les quatre decisions de l'estètica — TANCAT (mateix dia, v1.3.0)
 
-### Per fer, quan es passi del prototip al lloc real
+- ~~**Mapa de navegació ≡ a totes les capçaleres**~~ **Fet.** `js/mapa.js`
+  (generat per `scripts/build-mapa.py` des de `i18n/routes.yml`) a 377
+  pàgines més via `scripts/mapa-aplica.py`; 108 saltades amb motiu (admin,
+  impremta, redireccions, galeria, mirall del Premi).
+- ~~**Els panells «Entrenaments» i «Descarrega info»**~~ **Fet.** A les tres
+  portades i a les dues vistes. La descàrrega tira de la porta existent
+  (Apps Script + casella de butlletí); quan arribi l'URL de Brevo s'hi
+  connecta l'enviament.
+- ~~**Els primers equips abans de la base**~~ **Fet.** #seniors puja per
+  sobre del formulari a les tres portades. La fitxa amb plantilla i staff
+  segueix esperant material (/jugadors/ buit).
 
-1. Portar la vista de franges de `index.html` al disseny de la proposta A.
-   La franja de l'Escoleta i les fotos de sèniors/femení/club ja hi eren
-   amb l'estructura correcta (sense el mal encreuament amb la foto del
-   campus que sí que sortia al prototip). Falta encara el trio de botons
-   d'heroi (Vine a provar / Entrenaments / Descarrega info) amb els panells
-   desplegables, i el diàleg de mapa de navegació de l'hamburguesa.
-2. ✅ Fet: `--cream`/`--paper-2`/`--ground` a blanc a `css/barna.css`.
-3. ✅ Fet: «4 a 8 anys» a tot arreu, per decisió expressa de l'Ana
-   (25-08-2026).
-4. Processar i pujar les fotos noves amb el pipeline de sempre.
-5. **Parcialment fet** (25-08-2026): el full informatiu de l'Escoleta ja es
-   pot descarregar de debò — `escoleta/materials/escoleta-info.pdf`, enllaçat
-   amb botó «⬇ Descarrega info» al hero de franges i a la secció Escoleta de
-   l'extensa, en els tres idiomes. A la versió catalana passa per la porta
-   de captura que el lloc ja tenia (`js/descarrega.js`: nom, correu, casella
-   de newsletter i RGPD, cap al full de càlcul del club via Apps Script).
-   **Queda pendent, per a l'Ana**: decidir l'eina definitiva del formulari
-   (mantenir la porta d'Apps Script o migrar a JotForm — vegeu
-   `scripts/add-jotform-secret.sh`), i si es vol la porta també a `/es/` i
-   `/en/` caldrà traduir el diàleg de `js/descarrega.js`, que avui només
-   existeix en català (ara mateix en castellà i anglès la descàrrega és
-   directa, sense captura).
+### Material · l'Ana avui no té temps (dit explícitament el 25/08)
+
+Tot el bloc de material queda aparcat sense data: sessió de fotos de
+l'Escoleta (ara mateix el millor material és l'àlbum
+escola-basquet-julio-torralba de la galeria, 91 fotos a 1772 px — el flyer
+ja en tira), Willy Hernangómez, galeries d'esdeveniments, nivells
+or/plata/bronze, Instagram de 6 partners, fitxes de Nova Farmàcia Clot i
+Clínica Dental 26, plantilla de /jugadors/, Tecnificació i Notícies, fotos
+de La Nau, logo de la Wilson.
+
+---
+
+## 25-08-2026 · Nota de reconciliació — dues sessions van aplicar l'estètica alhora
+
+La branca del prototip (`claude/web-design-proposals-yd18ir`) i la tanda
+v1.2.0–1.3.1 de dalt van fer la mateixa feina en paral·lel el mateix dia. En
+fusionar-les ha manat la tanda v1.2.0–1.3.1, que era més completa; de la
+branca del prototip s'hi ha sumat el que faltava:
+
+- **«4 a 8 anys» als llocs que la tanda no cobria**: `suggestedMaxAge` del
+  JSON-LD de les tres portades, franges d'Escoleta de 3x3/campus/màgics en
+  castellà i anglès, els dos blogs afectats en es/en, els fitxers
+  d'`i18n/feina/` i `cerca-index.json`, i l'avís a `tests/README.md` perquè
+  ningú ho «arregli» de tornada a 4-7.
+- El PDF provisional `escoleta/materials/escoleta-info.pdf` de la branca
+  s'ha retirat: el supera el flyer real d'`escoleta/flyer/` (A5, 300 ppp).
+
+Referències del prototip que van originar les decisions (viuen fora del
+repositori, com a Artifacts):
+
+- Prototip navegable de 4 vistes: https://claude.ai/code/artifact/639494fb-9f78-4210-bede-ca28e4649565
+- «Estètica definitiva» (mockup viu + decisions): https://claude.ai/code/artifact/b51f10df-cb1d-47b7-867c-c8168a0225ea
+
+**Fotos noves que només viuen al prototip** (no són a `img/` ni `photos/`):
+quatre jugadors fent broma, el grup de quatre assenyalant a càmera,
+l'alcalde Jaume Collboni amb un jugador d'Escoleta, tres seguidors a la
+grada. Si es volen a producció, passar-les per
+`scripts/build-blog-images.py`.

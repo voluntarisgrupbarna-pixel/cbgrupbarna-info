@@ -127,7 +127,7 @@
       box.appendChild(el('p', 'color:#46433f;font-size:.85rem;margin:.6rem 0 1.75rem', 'Introdueix la contrasenya del club per continuar.'));
 
       var form = el('form', 'display:flex;flex-direction:column;gap:.75rem');
-      var input = el('input', 'width:100%;background:#F4F1EC;border:1px solid #e4e1dd;color:#10100E;padding:.75rem .9rem;font-family:Inter,sans-serif;font-size:.95rem;outline:none;text-align:center;letter-spacing:.04em');
+      var input = el('input', 'width:100%;background:#FFFFFF;border:1px solid #e4e1dd;color:#10100E;padding:.75rem .9rem;font-family:Inter,sans-serif;font-size:.95rem;outline:none;text-align:center;letter-spacing:.04em');
       input.type = 'password';
       input.placeholder = 'Contrasenya';
       input.autocomplete = 'current-password';

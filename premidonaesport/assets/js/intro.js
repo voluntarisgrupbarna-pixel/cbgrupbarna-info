@@ -253,11 +253,11 @@
       `;
       cta.innerHTML = `
         <div style="font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;
-          color:rgba(244,241,236,.45);margin-bottom:.85rem;font-family:'Inter',sans-serif;">
+          color:rgba(255,255,255,.45);margin-bottom:.85rem;font-family:'Inter',sans-serif;">
           La veu ha acabat
         </div>
         <button onclick="skipAll()" style="
-          background:#E20613;border:none;color:#F4F1EC;
+          background:#E20613;border:none;color:#FFFFFF;
           padding:1rem 2.4rem;font-family:'Inter',sans-serif;
           font-size:.72rem;font-weight:500;letter-spacing:.25em;
           text-transform:uppercase;cursor:pointer;
@@ -270,7 +270,7 @@
         <div style="margin-top:1rem;">
           <a onclick="skipAll()" style="
             font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;
-            color:rgba(244,241,236,.3);cursor:pointer;text-decoration:underline;
+            color:rgba(255,255,255,.3);cursor:pointer;text-decoration:underline;
             font-family:'Inter',sans-serif;
           ">Saltar a la web →</a>
         </div>
@@ -331,8 +331,8 @@
         if (!b) return;
         const active = (k === type);
         b.style.background    = active ? '#E20613' : 'transparent';
-        b.style.color         = active ? '#F4F1EC' : 'rgba(244,241,236,.4)';
-        b.style.border        = active ? 'none'   : '1px solid rgba(244,241,236,.15)';
+        b.style.color         = active ? '#FFFFFF' : 'rgba(255,255,255,.4)';
+        b.style.border        = active ? 'none'   : '1px solid rgba(255,255,255,.15)';
       });
       const tn = document.getElementById('trackName');
       const tt = document.getElementById('trackType');

@@ -101,7 +101,7 @@
   :root[data-theme="light"]{
     --red:#E20613; --red-ink:#A8040E; --red-solid:#E20613;
     --ink:#10100E; --muted:#6B6560;
-    --ground:#F4F1EC; --panel:#FFFFFF; --cream:#F4F1EC; --paper:#FFFFFF;
+    --ground:#FFFFFF; --panel:#FFFFFF; --cream:#FFFFFF; --paper:#FFFFFF;
     --line:rgba(16,16,14,.14);
     --shadow:0 24px 60px -28px rgba(16,16,14,.34);
   }
@@ -452,7 +452,7 @@
         <a href="/en/privacy-policy/">Privacy policy</a>
         <a href="/en/legal-notice/">Legal notice</a>
         <a href="/en/privacy-policy/#galetes">Cookies</a>
-        <a href="/en/accessibility/">Accessibility</a>
+        <a href="/en/accessibility/" class="foot-a11y"><span class="foot-a11y-i" aria-hidden="true">&#9855;</span>Accessibility — WCAG 2.2 AA</a>
       </div>
       <div class="foot-col">
         <h3>Social</h3>
@@ -479,7 +479,7 @@
     lbl.textContent = (mode==='light') ? 'Mode clar' : 'Mode fosc';
     btn.setAttribute('title', (mode==='light') ? 'Canviar a mode fosc' : 'Canviar a mode clar');
     var meta=document.querySelector('meta[name="theme-color"]');
-    if(meta) meta.setAttribute('content', mode==='light'?'#F4F1EC':'#10100E');
+    if(meta) meta.setAttribute('content', mode==='light'?'#FFFFFF':'#10100E');
   }
   btn.addEventListener('click',function(){
     var next = current()==='light' ? 'dark' : 'light';
@@ -491,5 +491,6 @@
 </script>
 <script src="/js/galetes.js"></script>
 <script src="/js/cerca.js" defer></script>
+<script src="/js/mapa.js" defer></script>
 </body>
 </html>

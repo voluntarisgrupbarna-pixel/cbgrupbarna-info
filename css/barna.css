@@ -19,6 +19,12 @@
   --line: rgba(16, 16, 14, 0.14);
   --line-dark: rgba(255, 255, 255, 0.15);
   --paper: #ffffff;
+  /* Blanc pur, el del logo. La crema #FFFFFF va quedar retirada el 25/08/2026
+     («Estètica definitiva», decisió 1: sense crema enlloc). Els noms es
+     conserven perquè hi ha 503 var() repartits pel lloc que hi apunten, i
+     perquè segueixen dient QUÈ és cada superfície; el valor, però, és un de
+     sol. De retruc el vermell de l'escut hi guanya contrast: sobre crema es
+     quedava en 4,36:1 i sobre blanc arriba a 4,92:1. */
   --paper-2: #ffffff;
   --red: #E20613;
   --red-dark: #A8040E;
@@ -26,6 +32,12 @@
      minim per a text petit. El sistema ja preveu aclarir-lo a #FF3B41, que hi
      dona 5,4:1. Nomes per a text sobre tinta, mai per a fons ni filets. */
   --red-light: #FF3B41;
+  --red-glow: #FF3B41;
+  /* El groc de la campanya d'Escoleta. Regla tancada: va SEMPRE a la lletra i
+     MAI al fons. Sobre tinta dona 17,9:1 i sobre el vermell 5,4:1; sobre blanc
+     es queda en 1,1:1, o sigui que sobre paper no s'hi pot escriure mai. Només
+     als dos punts d'entrada a la campanya: el ticker i el seu CTA. */
+  --yel: #EEFF00;
   /* Àlies del joc de /partits/ i de l'artefacte */
   --cream: #ffffff;
   --red-ink: #A8040E;
@@ -53,7 +65,10 @@ img { max-width: 100%; height: auto; display: block; }
 .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 60px); }
 .narrow { max-width: 780px; margin: 0 auto; }
 .section { padding: clamp(44px, 6.5vw, 96px) 0; }
-.band-soft { background: var(--paper-2); }
+/* Sense crema, una banda alterna ja no es distingeix pel fons: la separa un
+   filet, que és el mateix gest que separa les franges de la portada. */
+.band-soft { background: var(--paper-2); border-block: 1px solid var(--line); }
+.band-soft + .band-soft { border-top: 0; }
 .center { text-align: center; }
 
 h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.04; }

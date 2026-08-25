@@ -128,7 +128,9 @@ body { text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 
    Contrastos, per si algú els vol tornar a comprovar:
      #E20613 sobre #10100E → 3,87:1  ✗      #FF3B41 sobre #10100E → 5,40:1  ✓
-     #E20613 sobre #F4F1EC → 4,36:1  ✗      #A8040E sobre #F4F1EC → 6,93:1  ✓
+     #E20613 sobre #FFFFFF → 4,92:1  ✓      #A8040E sobre #FFFFFF → 7,81:1  ✓
+   (La crema #FFFFFF, on el vermell es quedava en 4,36:1, va desaparèixer del
+    lloc el 25/08/2026: totes les superfícies clares són blanc pur.)
      #10100E sobre #E20613 → 3,87:1  ✗      #FFFFFF sobre #E20613 → 4,92:1  ✓
    Sobre el vermell no hi ha cap blanc rebaixat que hi arribi: ni al 92%
    d'opacitat (4,28:1). Per això, a sobre del vermell, blanc pur.           */
@@ -171,3 +173,18 @@ body { text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 /* Un botó vermell sempre porta el text en blanc (4,92:1); en tinta es
    quedaria a 3,87:1. */
 .btn.red, a.btn.red { color: #fff; }
+
+/* --- 9. Enllaç d'accessibilitat al peu ------------------------------------
+   No hi ha cap logo oficial de «web accessible»: el que demanen les normes
+   (WCAG 2.2, RD 1112/2018) és una declaració enllaçada, no un segell. Aquí
+   es fa visible sense que sembli una certificació que ningú ens ha donat:
+   la icona i el nivell de conformitat, en el vermell aclarit que ja fa
+   servir la resta del peu fosc (5,40:1, vegeu el punt 8 més amunt). */
+.foot-a11y {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: #FF3B41 !important;
+  font-weight: 600;
+}
+.foot-a11y-i { font-size: 1.15em; line-height: 1; }

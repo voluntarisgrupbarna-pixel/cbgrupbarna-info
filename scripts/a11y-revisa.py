@@ -19,7 +19,7 @@ import os, re, sys, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKIP_DIRS = {'.git', 'node_modules', '.next', 'assets'}
-SKIP_PATHS = ('opina/print/',)
+SKIP_PATHS = ('opina/print/', 'escoleta/flyer/')  # peces d'impremta: generen una imatge, no es llegeixen
 BREU = '--breu' in sys.argv
 
 try:
