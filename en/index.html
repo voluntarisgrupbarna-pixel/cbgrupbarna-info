@@ -358,7 +358,12 @@
   /* Sobre fons fosc el vermell de l'escut es queda en 3,87:1 i no arriba al
      mínim per a text petit. El sistema el preveu aclarit a #FF3B41 (5,4:1). */
   --red-light: #FF3B41;
-  --red-dark: #a81318;
+  /* El groc de la campanya d'Escoleta («Estètica definitiva», decisió 2). Va
+     SEMPRE a la lletra i MAI al fons: sobre tinta dona 17,9:1 i sobre el
+     vermell 5,4:1, però sobre blanc es queda en 1,1:1 i no s'hi pot escriure.
+     Només als dos punts d'entrada a la campanya: el ticker i el seu CTA. */
+  --yel: #EEFF00;
+  --red-dark: #A8040E;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -435,8 +440,22 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
 .tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
-.tk-it { font-family: var(--display); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ==== EL GROC, AMB REGLA ====
+   Els dos únics llocs on apareix #EEFF00, i tots dos sobre fons fosc o
+   vermell. Si algun dia se'n vol un tercer, primer es comprova el contrast:
+   sobre paper blanc el groc no es llegeix. */
+.tk-it--yel { color: var(--yel); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.tk-it--yel:hover { text-decoration-thickness: 2px; }
+/* El groc sobre el vermell de l'escut es queda en 4,44:1 —el document de
+   l'estètica hi deia 5,4:1, que és la xifra del #FF3B41 sobre tinta, no
+   aquesta— i el text del botó fa 10 px, o sigui que li cal el 4,5:1 sencer.
+   Amb el vermell fosc del sistema, el mateix que ja fa de vermell portador de
+   text a tot el lloc, puja a 7,04:1 i el botó no deixa de ser vermell. */
+.btn.red.yel { background: var(--red-dark); border-color: var(--red-dark); color: var(--yel); }
+.btn.red.yel:hover { background: var(--ink); border-color: var(--ink); color: var(--yel); }
 
 /* ==== CAPÇALERA ==== */
 .head { position: sticky; top: 0; z-index: 110; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
@@ -878,12 +897,12 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   <div class="tk-lab"><span class="pdot"></span>News</div>
   <div class="tk-trk">
     <div class="tk-cnt">
-      <span class="tk-it">Escoleta ages 4-8 · Registration open</span>
+      <a class="tk-it tk-it--yel" href="/en/escoleta/" data-cta="ticker-escoleta">Escoleta ages 4-8 · Registration open</a>
       <span class="tk-it">Seniors · New season</span>
       <span class="tk-it">Calendar updated</span>
       <span class="tk-it">Club photo gallery</span>
       <span class="tk-it">#SomClot · 61 years of basketball</span>
-      <span class="tk-it">Escoleta ages 4-8 · Registration open</span>
+      <a class="tk-it tk-it--yel" href="/en/escoleta/" data-cta="ticker-escoleta">Escoleta ages 4-8 · Registration open</a>
       <span class="tk-it">Seniors · New season</span>
       <span class="tk-it">Calendar updated</span>
       <span class="tk-it">Club photo gallery</span>
@@ -1001,7 +1020,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       <h2>Youth Basketball Club and Academy in Barcelona<small>CB Grup Barna · Escoleta ages 4-8 · El Clot</small></h2>
       <p class="lede">Mixed teams, three age groups and meet-ups with other clubs. Come try a training session with no commitment: sixty-one years training the neighbourhood's children.</p>
       <div class="btn-row">
-        <a href="https://wa.me/34646205526?text=Hi%20Julio!%20I%27m%20interested%20in%20the%20CB%20Grup%20Barna%20basketball%20Escoleta%20for%20children%20aged%204%20to%208.%20Could%20you%20give%20me%20more%20information%3F" target="_blank" rel="noopener" class="btn red" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
+        <a href="https://wa.me/34646205526?text=Hi%20Julio!%20I%27m%20interested%20in%20the%20CB%20Grup%20Barna%20basketball%20Escoleta%20for%20children%20aged%204%20to%208.%20Could%20you%20give%20me%20more%20information%3F" target="_blank" rel="noopener" class="btn red yel" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
         <a href="tel:+34646205526" class="btn ghost" data-cta="escoleta-tel">646 205 526</a>
       </div>
       <p class="lead-tel">Escoleta contact: <b>Julio Torralba</b> · 646 205 526</p>
