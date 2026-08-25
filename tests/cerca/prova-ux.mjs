@@ -83,36 +83,38 @@ console.log('\n3 · Teclat dins de la cerca');
 
   comprova('el primer element navegable surt marcat',
     await p.evaluate(() =>
-      document.querySelector('[data-cerca-r]')?.getAttribute('aria-selected') === 'true'));
+      document.querySelector('[data-cerca-r]')?.classList.contains('es-actiu')));
 
   await p.keyboard.press('ArrowDown');
-  comprova('la fletxa avall mou la selecció',
+  comprova('la fletxa avall posa el focus de debò al resultat marcat',
     await p.evaluate(() => {
       const a = [...document.querySelectorAll('[data-cerca-r]')];
-      return a.findIndex(x => x.getAttribute('aria-selected') === 'true') === 1;
+      return document.activeElement === a[0] && a[0].classList.contains('es-actiu');
+    }));
+
+  await p.keyboard.press('ArrowDown');
+  comprova('la segona avall passa al següent',
+    await p.evaluate(() => {
+      const a = [...document.querySelectorAll('[data-cerca-r]')];
+      return document.activeElement === a[1] && a[1].classList.contains('es-actiu');
     }));
 
   await p.keyboard.press('ArrowUp');
   await p.keyboard.press('ArrowUp');
-  comprova('la fletxa amunt dona la volta pel final',
+  comprova('la fletxa amunt torna el focus al camp',
+    await p.evaluate(() => document.activeElement === document.querySelector('.cerca-input')));
+
+  await p.keyboard.press('ArrowUp');
+  comprova('i des del camp, amunt dona la volta per l\'últim',
     await p.evaluate(() => {
       const a = [...document.querySelectorAll('[data-cerca-r]')];
-      return a.findIndex(x => x.getAttribute('aria-selected') === 'true') === a.length - 1;
+      return document.activeElement === a[a.length - 1];
     }));
 
-  comprova('el camp diu quin resultat està seleccionat (aria-activedescendant)',
-    await p.evaluate(() => {
-      const inp = document.querySelector('.cerca-input');
-      const id = inp.getAttribute('aria-activedescendant');
-      return !!id && document.getElementById(id)?.getAttribute('aria-selected') === 'true';
-    }));
-
-  // Enter obre el resultat seleccionat
-  await p.keyboard.press('ArrowDown');
-  const desti = await p.evaluate(() =>
-    document.querySelector('[data-cerca-r][aria-selected="true"]')?.getAttribute('href'));
+  // Enter obre el resultat que té el focus
+  const desti = await p.evaluate(() => document.activeElement.getAttribute('href'));
   await Promise.all([p.waitForURL('**' + desti, { timeout: 5000 }).catch(() => {}), p.keyboard.press('Enter')]);
-  comprova('Enter obre el resultat seleccionat',
+  comprova('Enter obre el resultat amb el focus',
     new URL(p.url()).pathname === desti, p.url() + ' vs ' + desti);
   await p.close();
 }
@@ -294,17 +296,17 @@ console.log('\n11 · Lector de pantalla');
     return {
       dialog: capa.getAttribute('role'), modal: capa.getAttribute('aria-modal'),
       etiquetaCapa: !!(capa.getAttribute('aria-label') || capa.getAttribute('aria-labelledby')),
-      combobox: inp.getAttribute('role'), etiquetaCamp: !!inp.getAttribute('aria-label'),
-      controls: inp.getAttribute('aria-controls') === llista.id,
+      etiquetaCamp: !!inp.getAttribute('aria-label'),
       llistaRol: llista.getAttribute('role'),
+      llistaNom: !!llista.getAttribute('aria-label'),
       botoEtiqueta: !!document.querySelector('[data-cerca-obrir]').getAttribute('aria-label'),
     };
   });
   comprova('la capa és un diàleg modal amb nom',
     a.dialog === 'dialog' && a.modal === 'true' && a.etiquetaCapa, JSON.stringify(a));
-  comprova('el camp és un combobox amb nom i lligat a la llista',
-    a.combobox === 'combobox' && a.etiquetaCamp && a.controls);
-  comprova('la llista de resultats és una listbox', a.llistaRol === 'listbox');
+  comprova('el camp de cerca té nom accessible', a.etiquetaCamp);
+  comprova('el panell de resultats és una regió amb nom',
+    a.llistaRol === 'region' && a.llistaNom);
   comprova('la lupa té nom accessible', a.botoEtiqueta);
   await p.fill('.cerca-input', 'zzzzqqq');
   await p.waitForTimeout(300);

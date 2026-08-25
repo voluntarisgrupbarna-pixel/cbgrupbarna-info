@@ -1161,11 +1161,14 @@
         '<svg class="cerca-lupa" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 1-4.6 13.4l-3.2 3.2a1 1 0 0 1-1.4-1.4l3.2-3.2A7.5 7.5 0 0 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>' +
         '<input type="search" id="' + idPrefix + 'Input" class="cerca-input" ' +
           'placeholder="' + escapa(T.placeholder) + '" aria-label="' + escapa(T.titol) + '" ' +
-          'role="combobox" aria-expanded="false" aria-autocomplete="list" ' +
-          'aria-controls="' + idPrefix + 'Llista" spellcheck="false">' +
+          'spellcheck="false">' +
         '<button type="button" class="cerca-neteja" hidden aria-label="' + escapa(T.esborrar) + '">&times;</button>' +
       '</form>' +
-      '<div class="cerca-cos" id="' + idPrefix + 'Llista" role="listbox" aria-label="' + escapa(T.resultats) + '"></div>' +
+      // Regió i prou: el panell barreja resposta, resultats, formulari i
+      // suggeriments, i cap patró combobox/listbox el pot descriure sense
+      // mentir (axe: aria-required-children). Les fletxes mouen el focus de
+      // debò, i el lector de pantalla llegeix cada enllaç pel que és.
+      '<div class="cerca-cos" id="' + idPrefix + 'Llista" role="region" aria-label="' + escapa(T.resultats) + '"></div>' +
       '<p class="cerca-pista"><kbd>&uarr;</kbd><kbd>&darr;</kbd> ' + escapa(T.pista) + '</p>';
   }
 
@@ -1208,42 +1211,39 @@
     else location.href = a.href;
   };
 
+  // Les fletxes mouen el focus real: avall entra al resultat marcat i va
+  // baixant (amb volta), amunt torna cap al camp; des del camp, amunt salta
+  // a l'últim. Enter no es toca: al camp l'agafa el submit del formulari, i
+  // sobre un enllaç el navegador ja fa el clic.
   Cercador.prototype.tecla = function (e) {
-    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Enter') return;
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
     if (!this.enllacos.length) return;
-    if (e.key === 'Enter') {
-      if (this.actiu >= 0) { e.preventDefault(); this.obre(this.enllacos[this.actiu]); }
-      return;
-    }
     e.preventDefault();
-    this.actiu += (e.key === 'ArrowDown' ? 1 : -1);
-    if (this.actiu < 0) this.actiu = this.enllacos.length - 1;
-    if (this.actiu >= this.enllacos.length) this.actiu = 0;
-    this.marcaActiu();
+    var i = this.enllacos.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') {
+      if (i === -1) i = this.actiu >= 0 ? this.actiu : 0;
+      else i = i + 1 < this.enllacos.length ? i + 1 : 0;
+    } else {
+      if (i === -1) i = this.enllacos.length - 1;
+      else if (i === 0) { this.actiu = 0; this.marcaActiu(); this.input.focus(); return; }
+      else i = i - 1;
+    }
+    this.actiu = i;
+    this.marcaActiu(true);
   };
 
-  Cercador.prototype.marcaActiu = function () {
+  Cercador.prototype.marcaActiu = function (focus) {
     var self = this;
     this.enllacos.forEach(function (a, i) {
       var sel = i === self.actiu;
       a.classList.toggle('es-actiu', sel);
-      a.setAttribute('aria-selected', sel ? 'true' : 'false');
-      if (sel) {
-        self.input.setAttribute('aria-activedescendant', a.id);
-        if (a.scrollIntoView) a.scrollIntoView({ block: 'nearest' });
-      }
+      if (sel && focus) a.focus();
     });
   };
 
   Cercador.prototype.recolliEnllacos = function () {
     this.enllacos = Array.prototype.slice.call(this.cos.querySelectorAll('a[data-cerca-r]'));
-    this.enllacos.forEach(function (a, i) {
-      a.id = a.id || 'cerca-r-' + i;
-      a.setAttribute('role', 'option');
-      a.setAttribute('aria-selected', 'false');
-    });
     this.actiu = this.enllacos.length ? 0 : -1;
-    this.input.setAttribute('aria-expanded', this.enllacos.length ? 'true' : 'false');
     this.marcaActiu();
   };
 
@@ -1287,8 +1287,12 @@
 
     if (!preparat) {
       this.cos.innerHTML = '<p class="cerca-estat">' + escapa(T.carregant) + '</p>';
+      this.recolliEnllacos();
       carregaIndex().then(function () { self.pinta(); })
-        .catch(function () { self.cos.innerHTML = '<p class="cerca-estat">' + escapa(T.error) + '</p>'; });
+        .catch(function () {
+          self.cos.innerHTML = '<p class="cerca-estat">' + escapa(T.error) + '</p>';
+          self.recolliEnllacos();
+        });
       return;
     }
 
@@ -1576,7 +1580,10 @@
       }
       c.input.value = q;
       carregaIndex().then(function () { c.pinta(); })
-        .catch(function () { c.cos.innerHTML = '<p class="cerca-estat">' + escapa(T.error) + '</p>'; });
+        .catch(function () {
+          c.cos.innerHTML = '<p class="cerca-estat">' + escapa(T.error) + '</p>';
+          c.recolliEnllacos();
+        });
       c.pinta();
       c.input.focus();
     }

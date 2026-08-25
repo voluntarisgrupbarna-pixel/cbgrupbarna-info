@@ -22,6 +22,28 @@ només l'hi posa nom.
 
 ---
 
+## 1.1.1 — 2026-08-25
+
+El cercador, net d'ARIA inventada i amb el panell que ja no es desborda.
+
+- **El patró combobox/listbox era invàlid** (axe: `aria-required-children`,
+  crític, en tots els estats): el panell barreja resposta, resultats,
+  formulari i suggeriments, i cap listbox pot descriure això sense mentir.
+  Ara les fletxes mouen el **focus real** entre els resultats (avall entra i
+  baixa amb volta, amunt torna cap al camp), el lector de pantalla llegeix
+  cada enllaç pel que és, i el panell és una regió amb nom. La suite de UX
+  codifica el patró nou (57 proves).
+- **Els resultats de la capa es pintaven damunt del vel.** `.cerca-motor` no
+  tenia CSS: el panell (max-height 86vh) no repartia l'alçada i el
+  contingut es desbordava per sota, gris sobre fosc a 1,37:1. Amb
+  `min-height: 0` al motor i al cos, el panell recorta i el cos fa scroll.
+- Resultat: **0 violacions axe** (WCAG 2.x A/AA) a `/cerca/`, `/es/busqueda/`,
+  `/en/search/`, `/404.html` i a la capa, en els tres estats. Motor 74/74 ·
+  contingut 95/95 · ux 57/57.
+
+També: `/accessibilitat/` donada d'alta a `i18n/routes.yml` (no hi era) i
+corregit un fals positiu de l'auditoria del 25/08 a `PENDENTS-WEB.md`.
+
 ## 1.1.0 — 2026-08-24
 
 Accessibilitat: `css/a11y.css`, capa compartida a les 458 pàgines (focus

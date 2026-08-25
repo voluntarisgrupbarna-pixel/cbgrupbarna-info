@@ -77,7 +77,11 @@ html.cerca-oberta { overflow: hidden; }
 .cerca-neteja:hover { color: var(--ink, #10100E); }
 
 /* ---- El cos ---- */
-.cerca-cos { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+/* El panell limita l'alçada (86vh) però el motor és qui l'ha de repartir:
+   sense min-height:0, un fill de flex no s'encongeix mai per sota del seu
+   contingut, el panell es desborda i els resultats es pinten damunt del vel. */
+.cerca-motor { display: flex; flex-direction: column; min-height: 0; }
+.cerca-cos { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; min-height: 0; }
 .cerca-bloc { padding: 16px 18px 4px; }
 .cerca-bloc + .cerca-bloc { border-top: 1px solid var(--line, rgba(16, 16, 14, 0.14)); }
 
