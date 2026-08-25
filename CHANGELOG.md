@@ -22,6 +22,16 @@ només l'hi posa nom.
 
 ---
 
+## 1.1.1 — 2026-08-24
+
+Primera tanda de codi del «Camí cap al 10» (auditoria d'estètica i de la
+resta d'apartats): els preus del campus (195/160/150 €) ja no es publiquen
+enlloc —a totes les pàgines en ca/es/en, el generador `build-campus-fitxa.py`
+i totes les dades estructurades—, la política de privacitat declara
+Formspree com a encarregat del tractament, i `/jugadors/` porta `noindex`
+mentre no tingui plantilla. `PENDENTS-WEB.md` actualitzat marcant les tres
+accions com a fetes.
+
 ## 1.1.0 — 2026-08-24
 
 Accessibilitat: `css/a11y.css`, capa compartida a les 458 pàgines (focus

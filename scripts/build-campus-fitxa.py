@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera la fitxa i els preus del campus a /campus/, /es/campus/ i /en/campus/.
+"""Genera la fitxa i el bloc de preus del campus a /campus/, /es/campus/ i /en/campus/.
 
 Per que existeix: /es/campus/ i /en/campus/ tenien la meitat del text de la
 catalana i, sobretot, NO DEIEN EL PREU. Pero si que el declaraven a les dades
@@ -10,9 +10,11 @@ audiencia la veia incompleta.
 Com que el problema de fons era que hi havia tres copies escrites a ma, aixo
 surt d'una taula sola. Nomes reescriu entre els marcadors FITXA-CAMPUS.
 
-Quan canvii un preu o una data, es canvia AQUI i es torna a executar. Si es
-toca el preu, recorda que tambe surt a les dades estructurades de cada pagina
-i al text de /campus-basquet-barcelona/.
+Des del 23/08/2026 hi ha una decisio de l'Ana, presa i tancada: la quota no
+es publica al web (vegeu PENDENTS-WEB.md, «Decisio · els preus no es
+publiquen»). Aixo val tambe per al campus. El bloc de preus ja no mostra cap
+xifra: explica les dues modalitats i remet a WhatsApp/correu, amb la mateixa
+veu que fa servir el FAQ per a la resta de preguntes de diners.
 
 Us:
     python3 scripts/build-campus-fitxa.py
@@ -35,9 +37,6 @@ P_FINAL = "<!-- PREUS-CAMPUS:final -->"
 
 IG = "https://www.instagram.com/cbgrupbarna/"
 WA = "+34 698 425 153"
-
-PREU_COMPLETA = "195"
-PREU_MITJA = "160"
 
 # Cada fila: (etiqueta_ca, valor_ca, etiqueta_es, valor_es, etiqueta_en, valor_en)
 FILES = [
@@ -102,11 +101,11 @@ FILES = [
      "Hours",
      "Full day 9:00 to 17:00 · half day 9:00 to 13:30."),
     ("Preu",
-     f"Setmana completa {PREU_COMPLETA} € (9–17 h) · mitja jornada {PREU_MITJA} € (9–13:30 h). Preu per setmana. Pagament fraccionat disponible.",
+     "Depèn de la modalitat i de si ets del club. No es publica al web: escriu-nos amb l'edat i te la diem el mateix dia. Pagament fraccionat disponible.",
      "Precio",
-     f"Semana completa {PREU_COMPLETA} € (9–17 h) · media jornada {PREU_MITJA} € (9–13:30 h). Precio por semana. Pago fraccionado disponible.",
+     "Depende de la modalidad y de si eres del club. No se publica en la web: escríbenos con la edad y te la damos el mismo día. Pago fraccionado disponible.",
      "Price",
-     f"Full week €{PREU_COMPLETA} (9–17) · half day €{PREU_MITJA} (9–13:30). Price per week. Payment in instalments available."),
+     "Depends on the modality and whether you play for the club. Not published on the site: message us with the age and we'll give it to you the same day. Payment in instalments available."),
     ("Dinar",
      "Inclòs a la jornada completa. La mitja jornada acaba abans de dinar.",
      "Comida",
@@ -161,12 +160,14 @@ T = {
         h2p="Preus",
         ledep=("Dues modalitats segons horari, amb àpat inclòs a la jornada completa. Places obertes a "
                "jugadors i jugadores del Barna i de fora del club."),
-        tag1="Recomanat", sched1="Setmana completa · 9h a 17h",
+        tag1="Recomanat", head1="Setmana completa", sched1="9h a 17h",
         li1a="Àpat de migdia inclòs", li1b="Servei d'acollida des de les 9h",
-        tag2="Mitja jornada", sched2="9h a 13:30h",
+        tag2="Alternativa", head2="Mitja jornada", sched2="9h a 13:30h",
         li2a="Mateixos grups i mateix focus setmanal",
-        notap=('Reserva de plaça amb pagament fraccionat en fins a 3 terminis. Cada any s\'obre un '
-               'descompte per inscripció anticipada; les dates i el codi es publiquen a aquesta pàgina i a '
+        notap=(f'La quota no es publica al web: escriu-nos per WhatsApp al {WA} o per correu amb l\'edat '
+               'del jugador o jugadora i te la diem el mateix dia. Es pot reservar plaça amb pagament '
+               'fraccionat en fins a 3 terminis, i cada any s\'obre un descompte per inscripció '
+               f'anticipada; les dates i el codi es publiquen aquí i a '
                f'<a href="{IG}" target="_blank" rel="noopener">@cbgrupbarna</a> quan s\'obren les inscripcions.'),
     ),
     "es": dict(
@@ -178,12 +179,14 @@ T = {
         h2p="Precios",
         ledep=("Dos modalidades según horario, con comida incluida en la jornada completa. Plazas abiertas a "
                "jugadores y jugadoras del Barna y de fuera del club."),
-        tag1="Recomendado", sched1="Semana completa · 9h a 17h",
+        tag1="Recomendado", head1="Semana completa", sched1="9h a 17h",
         li1a="Comida de mediodía incluida", li1b="Servicio de acogida desde las 9h",
-        tag2="Media jornada", sched2="9h a 13:30h",
+        tag2="Alternativa", head2="Media jornada", sched2="9h a 13:30h",
         li2a="Mismos grupos y mismo foco semanal",
-        notap=('Reserva de plaza con pago fraccionado en hasta 3 plazos. Cada año se abre un descuento por '
-               'inscripción anticipada; las fechas y el código se publican en esta página y en '
+        notap=(f'La cuota no se publica en la web: escríbenos por WhatsApp al {WA} o por correo con la '
+               'edad del jugador o jugadora y te la damos el mismo día. Se puede reservar plaza con pago '
+               'fraccionado en hasta 3 plazos, y cada año se abre un descuento por inscripción '
+               'anticipada; las fechas y el código se publican en esta página y en '
                f'<a href="{IG}" target="_blank" rel="noopener">@cbgrupbarna</a> cuando se abren las inscripciones.'),
     ),
     "en": dict(
@@ -195,13 +198,15 @@ T = {
         h2p="Prices",
         ledep=("Two options depending on hours, with lunch included on the full day. Open to Barna players "
                "and to players from any other club."),
-        tag1="Most chosen", sched1="Full week · 9 to 17",
+        tag1="Most chosen", head1="Full week", sched1="9 to 17",
         li1a="Lunch included", li1b="Early drop-off from 9",
-        tag2="Half day", sched2="9 to 13:30",
+        tag2="Alternative", head2="Half day", sched2="9 to 13:30",
         li2a="Same groups, same weekly focus",
-        notap=('Places can be held with payment in up to 3 instalments. Every year there is an early-bird '
-               'discount; the dates and the code go up on this page and on '
-               f'<a href="{IG}" target="_blank" rel="noopener">@cbgrupbarna</a> when sign-ups open.'),
+        notap=(f'The price is not published on the site: message us on WhatsApp at {WA} or by email with '
+               'the age and we\'ll give it to you the same day. Places can be held with payment in up to '
+               '3 instalments. Every year there is an early-bird discount; the dates and the code go up '
+               f'on this page and on <a href="{IG}" target="_blank" rel="noopener">@cbgrupbarna</a> '
+               'when sign-ups open.'),
     ),
 }
 
@@ -230,15 +235,13 @@ def bloc_fitxa(lang):
 
 def bloc_preus(lang):
     t = T[lang]
-    preu_c = "%s €" % PREU_COMPLETA if lang != "en" else "€%s" % PREU_COMPLETA
-    preu_m = "%s €" % PREU_MITJA if lang != "en" else "€%s" % PREU_MITJA
     return f"""{P_INICI}
     <h2>{esc(t['h2p'])}</h2>
     <p>{esc(t['ledep'])}</p>
     <div class="price-cards">
       <div class="price-card top">
         <span class="tag">{esc(t['tag1'])}</span>
-        <b>{preu_c}</b>
+        <b>{esc(t['head1'])}</b>
         <p class="sched">{esc(t['sched1'])}</p>
         <ul>
           <li>{esc(t['li1a'])}</li>
@@ -247,7 +250,7 @@ def bloc_preus(lang):
       </div>
       <div class="price-card">
         <span class="tag">{esc(t['tag2'])}</span>
-        <b>{preu_m}</b>
+        <b>{esc(t['head2'])}</b>
         <p class="sched">{esc(t['sched2'])}</p>
         <ul>
           <li>{esc(t['li2a'])}</li>

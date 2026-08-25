@@ -113,6 +113,12 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 - **Escoleta:** foto o vídeo d'en Willy Hernangómez entrenant a La Nau amb Time Chamber
   (el forat és a `escoleta/index.html:944`), i confirmar la fitxa del circuit 3x3 amb la
   selecció espanyola (línia 744).
+- **Sessió de fotos de l'Escoleta (4-7 anys):** és el punt més feble de l'apartat
+  d'estètica de la web i no es resol amb codi. Avui només hi ha una foto
+  (`img/escoleta@2x.webp`) per representar tot aquest pilar, i és la imatge que carrega
+  amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
+  material d'acció real (no posat), llum natural, enquadrat des de dalt sense tallar
+  cares, i diverses tomes perquè es pugui rotar en comptes de repetir sempre la mateixa.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
 - **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
@@ -1174,6 +1180,77 @@ mencions eren prosa d'aquest document i un comentari de
 **Com recuperar-los si mai calen:** són a l'historial de git, al commit
 `c589e7f4`. Amb `git show c589e7f4:mascota/mascota-reel.mp4 > mascota-reel.mp4`
 en surt qualsevol, byte a byte.
+
+## 24-08-2026 — Camí cap al 10: la resta de pendents
+
+Auditoria feta per veure què separa cada apartat de la nota màxima, partint
+del 9,4 global de l'últim informe. La sessió de fotos de l'Escoleta ja hi és,
+a «Pendent de material de l'Ana»; això és la resta.
+
+### UX
+
+- ~~**Preus encara publicats a tres pàgines de campus.**~~ **Fet (24/08/2026).**
+  Tret de `campus/index.html` (+ `/es/` i `/en/`), `campus-basquet-barcelona/index.html`
+  i `campus/setmana-santa/index.html`: meta descriptions, `dl-row` de preu,
+  targetes de preu i totes les dades estructurades (`offers`/`AggregateOffer`
+  a 4 fitxers). El generador `scripts/build-campus-fitxa.py` ja no coneix cap
+  xifra. Es queden intactes els 2.000 € de premis del 3x3 (no és una quota) i
+  el rang de mercat «150-250 €/setmana» de `campus-basquet-barcelona/`, que és
+  informació de tercers, no el preu del club.
+- **`/campus/` no té formulari propi.** Els CTA d'inscripció reenvien tots al
+  WhatsApp del club o al bloc `#info` genèric de portada. Cal decidir quines
+  dades demanar i on van a parar abans de construir-lo.
+- **La «inscripció en línia» de portada depèn que la família confirmi a mà
+  dins de WhatsApp.** El formulari envia les dades a Formspree i obre `wa.me`
+  precarregat, però si el navegador bloqueja el pop-up només arriba el
+  correu, sense número de referència. Cal decidir si el club vol un registre
+  estructurat en comptes del gest manual.
+
+### Seguretat i legal
+
+- ~~**La política de privacitat no esmenta Formspree.**~~ **Fet (24/08/2026).**
+  Afegit als tres idiomes (`politica-de-privacitat/`, `es/politica-de-privacidad/`,
+  `en/privacy-policy/`): el paràgraf del formulari de portada ja diu que les
+  dades s'envien també a Formspree, i apareix a la llista d'encarregats del
+  tractament. Data d'«última actualització» pujada al 24/08/2026.
+- **El PIN del dossier de Premi Dona i Esport és «1965» en clar.**
+  `premidonaesport/assets/js/auth.js` el guarda sense ofuscar, visible amb
+  «Veure codi font». No és el mateix problema que es va resoldre el
+  23/08/2026 (la doble reixa i la indexació): aquí cal que l'Ana confirmi si
+  aquestes 72 pàgines necessiten protecció real o si el gest simbòlic ja és
+  prou.
+
+### SEO
+
+- ~~**`/jugadors/` és indexable i buida.**~~ **Fet (24/08/2026).** `noindex,follow`
+  a les tres versions (`jugadors/`, `es/jugadors/`, `en/jugadors/`) i tretes
+  del `sitemap.xml` (363 URL). Segueix pendent omplir `jugadors/jugadors.js`
+  quan hi hagi plantilla — a «Pendent de decisió»—; quan es faci, cal treure
+  també el `noindex`.
+- **39 dels 43 objectius d'enllaços externs segueixen «pendents».** Segons
+  `POSICIONAMENT-CAMPUS-SEO.md`, l'arquitectura on-page ja està resolta; el
+  que falta és autoritat externa real, i això no és una tasca de codi.
+
+### Accessibilitat
+
+- **Les miniatures de `/fotos/` no descriuen la foto.** Totes porten
+  `alt="Foto 1"`, `alt="Foto 2"`… i el visor a pantalla completa sempre diu
+  `alt="Foto del club"`. Un lector de pantalla no rep cap contingut real.
+  Arreglar-ho és mecànic però lent: cal redactar text alternatiu àlbum a
+  àlbum.
+
+### Idiomes
+
+- **`/campus/` només té 9 de 15 seccions traduïdes** a `/es/` i `/en/`, ~1.500
+  paraules per idioma. (El cas de `/femeni/`, 6 de 9 seccions, ja és pendent
+  a «Pendent de decisió · reestructuració del menú».)
+
+### Velocitat
+
+- **Falta confirmar amb dades de camp.** Tot el que es va mesurar a la fase
+  de velocitat és de navegador local. Els Core Web Vitals reals de Search
+  Console —els que compten per al posicionament— triguen uns dies a
+  reflectir el canvi de les imatges. Revisar quan hi hagi prou dades.
 
 ## 24-08-2026 — El que queda obert d'aquesta tanda de traducció
 
