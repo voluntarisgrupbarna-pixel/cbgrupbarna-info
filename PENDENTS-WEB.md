@@ -1350,8 +1350,14 @@ a Artifact, fora del repositori:
   crema i blanc, les franges que abans es distingien només per aquest
   contrast (Escoleta/Femení/El club) es van quedar sense separació visual.
   S'hi ha afegit una línia fina entre files.
-- **Discrepància d'edat sense resoldre**: el flyer A6 d'Escoleta diu «4 a 7
-  anys»; la web i el prototip diuen «4 a 8 anys». No s'ha triat per l'Ana.
+- **Discrepància d'edat ✅ resolta** (Ana, 25-08-2026): **«4 a 8 anys»,
+  sempre**. Aplicat a tot el lloc en els tres idiomes (blogs, franges de
+  3x3/campus/màgics, patrocinadors, JSON-LD `suggestedMaxAge`, fitxers de
+  traducció d'`i18n/feina/` i `cerca-index.json`) i al full informatiu en
+  PDF. Atenció: `tests/README.md` explica una decisió anterior en sentit
+  contrari (4-7, per la lògica del pas a premini) — aquella queda superada
+  per aquesta decisió expressa. El flyer A6 imprès continua dient 4-7:
+  si es reimprimeix, actualitzar-lo.
 - **Fotos noves de la sessió d'agost** (quatre jugadors fent broma, el grup de
   quatre assenyalant a càmera, l'alcalde Jaume Collboni amb un jugador
   d'Escoleta, tres seguidors a la grada) viuen només al prototip, no a
@@ -1367,8 +1373,18 @@ a Artifact, fora del repositori:
    d'heroi (Vine a provar / Entrenaments / Descarrega info) amb els panells
    desplegables, i el diàleg de mapa de navegació de l'hamburguesa.
 2. ✅ Fet: `--cream`/`--paper-2`/`--ground` a blanc a `css/barna.css`.
-3. Decidir 4-7 o 4-8 anys per a l'Escoleta (flyer vs. web).
+3. ✅ Fet: «4 a 8 anys» a tot arreu, per decisió expressa de l'Ana
+   (25-08-2026).
 4. Processar i pujar les fotos noves amb el pipeline de sempre.
-5. Connectar el formulari de descàrrega a una eina real (JotForm, ja
-   integrat al repositori per a altres formularis — vegeu
-   `scripts/add-jotform-secret.sh`).
+5. **Parcialment fet** (25-08-2026): el full informatiu de l'Escoleta ja es
+   pot descarregar de debò — `escoleta/materials/escoleta-info.pdf`, enllaçat
+   amb botó «⬇ Descarrega info» al hero de franges i a la secció Escoleta de
+   l'extensa, en els tres idiomes. A la versió catalana passa per la porta
+   de captura que el lloc ja tenia (`js/descarrega.js`: nom, correu, casella
+   de newsletter i RGPD, cap al full de càlcul del club via Apps Script).
+   **Queda pendent, per a l'Ana**: decidir l'eina definitiva del formulari
+   (mantenir la porta d'Apps Script o migrar a JotForm — vegeu
+   `scripts/add-jotform-secret.sh`), i si es vol la porta també a `/es/` i
+   `/en/` caldrà traduir el diàleg de `js/descarrega.js`, que avui només
+   existeix en català (ara mateix en castellà i anglès la descàrrega és
+   directa, sense captura).
