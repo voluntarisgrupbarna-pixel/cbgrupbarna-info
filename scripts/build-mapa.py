@@ -169,8 +169,17 @@ PLANTILLA = r"""/* Mapa de navegació · generat per scripts/build-mapa.py — N
   // A la resta —heros d'una peça, portades autònomes— el botó va flotant a
   // dalt a la dreta, que és el «no es perd mai» de la guia.
   var seu = document.querySelector('.head-in');
-  if (seu) { seu.insertBefore(btn, seu.firstChild); }
-  else { btn.className = 'mapa-flotant'; document.body.appendChild(btn); }
+  if (seu) {
+    seu.insertBefore(btn, seu.firstChild);
+    // Algunes capçaleres ja anaven plenes: si el botó fa vessar la pàgina
+    // per la dreta (p. ex. /partits/ a 1280), passa a flotant i no trenca res.
+    var doc = document.documentElement;
+    if (doc.scrollWidth > doc.clientWidth) {
+      seu.removeChild(btn);
+      btn.className = 'mapa-flotant';
+      document.body.appendChild(btn);
+    }
+  } else { btn.className = 'mapa-flotant'; document.body.appendChild(btn); }
 
   var ov = document.createElement('div');
   ov.id = 'mapa-ov';
