@@ -182,9 +182,10 @@ seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
   (noindex) a `/femeni/` i `/femeni/#metode`: eren dues pàgines completes amb
   el mateix contingut i el mateix `<title>` objectiu ("Bàsquet femení a
   Barcelona"), i s'ha triat `/femeni/` com a canònica per decisió de l'Ana.
-  **Pendent:** `/es/baloncesto-femenino/` i `/en/womens-basketball/` encara
-  són traduccions de la pàgina antiga (`/basquet-femeni/`), no de `/femeni/`.
-  No s'han tocat perquè traduir `/femeni/` és una feina de contingut a part.
+  ~~**Pendent:** `/es/baloncesto-femenino/` i `/en/womens-basketball/` encara
+  eren traduccions de la pàgina antiga.~~ **Fet.** Les dues ja tradueixen
+  `/femeni/`: 9 de 9 seccions als tres idiomes, i `i18n-contingut.py` no hi
+  troba cap avís.
 - **"Tecnificació"** (dins Activitats) i **"Notícies"** (dins Actualitat) són
   a l'arbre de l'Ana però no tenen cap pàgina real al lloc ni contingut al
   repositori. No s'han afegit al menú per no inventar-hi programa, preus o
@@ -1241,9 +1242,10 @@ a «Pendent de material de l'Ana»; això és la resta.
 
 ### Idiomes
 
-- **`/campus/` només té 9 de 15 seccions traduïdes** a `/es/` i `/en/`, ~1.500
-  paraules per idioma. (El cas de `/femeni/`, 6 de 9 seccions, ja és pendent
-  a «Pendent de decisió · reestructuració del menú».)
+- ~~**`/campus/` només té 9 de 15 seccions traduïdes** a `/es/` i `/en/`.~~
+  **Fet.** Les 15 seccions ja hi són als tres idiomes (mateix nombre
+  d'`<h2>`) i `i18n-contingut.py` no hi troba cap avís. El cas de `/femeni/`
+  —a «Pendent de decisió · reestructuració del menú»— també ho està.
 
 ### Velocitat
 
