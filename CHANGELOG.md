@@ -22,6 +22,16 @@ només l'hi posa nom.
 
 ---
 
+## 1.3.1 — 2026-08-25
+
+**Prova d'UX** sobre 16 pàgines × 2 amples amb navegador real, i els arreglos
+que en surten: el botó ≡ passa a flotant tot sol quan una capçalera ja anava
+plena i el feia vessar (/partits/ i /portes-obertes/ a 1280); cap foto es
+mostra més gran que el fitxer (marc limitat a /escoleta/ als tres idiomes,
+`srcset` amb el @2x a la foto de /femeni/, i `sizes` corregits al hero de
+/patrocinadors/ —servia el fitxer de 800 en un marc de 1120— i a la franja de
+la portada).
+
 ## 1.3.0 — 2026-08-25
 
 **L'estètica definitiva, completa.** Les tres peces que quedaven del document
