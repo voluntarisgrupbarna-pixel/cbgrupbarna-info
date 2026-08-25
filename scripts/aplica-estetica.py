@@ -5,8 +5,9 @@ Fa dues coses, i només dues, perquè es puguin revisar d'una llegida:
 
 1. COLOR  · tradueix els valors que no són del sistema als de la taula de la
             skill web-cbgb: un sol vermell (#E20613), el seu fosc (#A8040E),
-            la tinta (#10100E), la crema (#F4F1EC) i el gris d'etiqueta
-            (#6B6560). Sobre fons fosc el vermell s'aclareix a #FF3B41.
+            la tinta (#10100E), el blanc pur (#FFFFFF, que des del 25/08/2026
+            substitueix la crema a tot arreu) i el gris d'etiqueta (#6B6560).
+            Sobre fons fosc el vermell s'aclareix a #FF3B41.
 2. LLETRA · deixa dues famílies i prou: Anton per a display i Inter per a text.
             Treu Jost, Bebas Neue, Outfit i Cormorant Garamond dels enllaços de
             Google Fonts i de les declaracions de `font-family`.
@@ -52,7 +53,13 @@ VERMELLS_FOSCOS = ["b7231b", "8f0d16", "a30510"]
 # tradueixen, el fons queda més clar que el panell que hi va a sobre.
 TINTES = ["0a0a0a", "0f0f0f", "0a0908", "0e1116"]
 # Cremes i papers trencats.
-CREMES = ["f2ede6", "ede7de", "f6f4f1", "faf9f5", "f7f4f0", "f4f1ea"]
+# Cremes i papers trencats. Des del 25/08/2026 («Estètica definitiva»,
+# decisió 1: sense crema enlloc) totes van a parar a BLANC PUR, el del logo,
+# i la mateixa crema del sistema —#F4F1EC— hi entra com una més. De retruc el
+# vermell de l'escut hi guanya contrast: sobre crema es quedava en 4,36:1 i
+# sobre blanc arriba a 4,92:1, que és el mínim AA.
+CREMES = ["f2ede6", "ede7de", "f6f4f1", "faf9f5", "f7f4f0", "f4f1ea", "f4f1ec",
+          "ede8e0"]
 # Grisos d'etiqueta que no arriben al contrast mínim.
 # #706c67 va arribar d'una revisió d'accessibilitat i també passa AA, però el
 # gris de la guia és el #6B6560: un de sol, com el vermell.
@@ -64,7 +71,7 @@ SUBSTITUCIONS_HEX = (
     [(h, "#E20613") for h in VERMELLS + ACCENTS_FORA]
     + [(h, "#A8040E") for h in VERMELLS_FOSCOS]
     + [(h, "#10100E") for h in TINTES]
-    + [(h, "#F4F1EC") for h in CREMES]
+    + [(h, "#FFFFFF") for h in CREMES]
     + [(h, "#6B6560") for h in GRISOS]
 )
 
@@ -86,7 +93,10 @@ SUBSTITUCIONS_RGBA = [
     _rgb("230,51,41", "226,6,19"),
     _rgb("227,30,36", "226,6,19"),
     _rgb("232,0,45", "226,6,19"),
-    _rgb("242,237,230", "244,241,236"),
+    _rgb("242,237,230", "255,255,255"),
+    # La crema escrita en rgba() fa de lletra i de vel sobre les superfícies
+    # fosques. Passa a blanc pur com la resta: sobre tinta hi guanya contrast.
+    _rgb("244,241,236", "255,255,255"),
     _rgb("10,10,10", "16,16,14"),
     _rgb("15,15,15", "16,16,14"),
     _rgb("14,17,22", "16,16,14"),

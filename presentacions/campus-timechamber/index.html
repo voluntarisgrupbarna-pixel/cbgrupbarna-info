@@ -79,7 +79,7 @@
   :root[data-theme="light"]{
     --red:#E20613; --red-ink:#A8040E; --red-solid:#E20613;
     --ink:#10100E; --muted:#6B6560;
-    --ground:#F4F1EC; --panel:#FFFFFF; --cream:#F4F1EC; --paper:#FFFFFF;
+    --ground:#FFFFFF; --panel:#FFFFFF; --cream:#FFFFFF; --paper:#FFFFFF;
     --line:rgba(16,16,14,.14);
     --shadow:0 24px 60px -28px rgba(16,16,14,.34);
   }
@@ -542,7 +542,7 @@
     lbl.textContent = (mode==='light') ? 'Mode clar' : 'Mode fosc';
     btn.setAttribute('title', (mode==='light') ? 'Canviar a mode fosc' : 'Canviar a mode clar');
     var meta=document.querySelector('meta[name="theme-color"]');
-    if(meta) meta.setAttribute('content', mode==='light'?'#F4F1EC':'#10100E');
+    if(meta) meta.setAttribute('content', mode==='light'?'#FFFFFF':'#10100E');
   }
   btn.addEventListener('click',function(){
     var next = current()==='light' ? 'dark' : 'light';
