@@ -1511,3 +1511,19 @@ portada»). Aplicat a les tres portades (ca/es/en):
   #SOMCLOT · El diari del Clot → · CA ES EN.
 - **El burger vell de la capçalera es retira** (display:none): duplicava el
   mapa ≡ a dos dits de distància. El menú antic queda al marcatge.
+
+### 25-08-2026 (nit) · Proves d'UX de la portada nova i arreglo del cercador
+
+Bateria de proves amb Playwright sobre les dues vistes, els dos amples i
+els tres idiomes: cercador (obrir, escriure, resultats, tancar amb Esc),
+panell d'Entrenaments, diàleg de descàrrega, mapa ≡, commutador de vista,
+càrrega del calendari a l'extensa, enllaços de totes les franges (tots 200)
+i desbordament a 390 px. Tot en verd menys una cosa, que era exactament el
+que l'Ana veia al mòbil:
+
+- **El cercador no existia al mòbil.** `js/cerca.js` injecta el botó dins
+  de `.head-nav` de la capçalera, i a la portada aquell nav és
+  `display:none` per sota de ~1080 px: s'enduia el cercador. Arreglat
+  posant un botó propi `data-cerca-obrir` (que cerca.js respecta) fora del
+  nav, al costat del commutador d'idioma, a les tres portades. A mòbil es
+  queda en lupa sola (regla que css/cerca.css ja tenia).
