@@ -101,7 +101,7 @@ html.cerca-oberta { overflow: hidden; }
 /* ---- Resposta ràpida ---- */
 .cerca-resposta {
   display: block; padding: 14px 16px; margin-bottom: 12px;
-  background: var(--cream, #F4F1EC);
+  background: var(--cream, #ffffff);
   border-left: 3px solid var(--red, #E20613);
 }
 .cerca-resposta strong {
@@ -118,7 +118,7 @@ html.cerca-oberta { overflow: hidden; }
   font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--red-dark, #A8040E);
 }
-.cerca-resposta.es-actiu, .cerca-resposta:hover { background: #EDE8E0; }
+.cerca-resposta.es-actiu, .cerca-resposta:hover { background: #FFFFFF; }
 
 /* ---- La resposta escrita pel club ----
    És la peça que ha de manar a la pantalla: primer la resposta, i els
@@ -126,7 +126,7 @@ html.cerca-oberta { overflow: hidden; }
    com els títols de secció d'un article. */
 .cerca-faq {
   padding: 15px 17px; margin-bottom: 10px;
-  background: var(--cream, #F4F1EC);
+  background: var(--cream, #ffffff);
   border-left: 3px solid var(--red, #E20613);
 }
 .cerca-faq-q {
@@ -154,7 +154,7 @@ html.cerca-oberta { overflow: hidden; }
   border-left: 3px solid transparent;
 }
 .cerca-llista a.es-actiu, .cerca-llista a:hover {
-  background: var(--cream, #F4F1EC); border-left-color: var(--red, #E20613);
+  background: var(--cream, #ffffff); border-left-color: var(--red, #E20613);
 }
 .cerca-r-t {
   display: block; font-family: var(--display, 'Anton', 'Arial Narrow', sans-serif);
@@ -191,14 +191,14 @@ html.cerca-oberta { overflow: hidden; }
 }
 .cerca-fitxa:hover, .cerca-fitxa.es-actiu {
   border-color: var(--red, #E20613); color: var(--red-dark, #A8040E);
-  background: var(--cream, #F4F1EC);
+  background: var(--cream, #ffffff);
 }
 
 /* ---- Peu ---- */
 .cerca-pista {
   flex: none; padding: 9px 18px;
   border-top: 1px solid var(--line, rgba(16, 16, 14, 0.14));
-  background: var(--cream, #F4F1EC);
+  background: var(--cream, #ffffff);
   font-size: 10px; letter-spacing: 0.08em; color: var(--muted, #6B6560);
 }
 .cerca-pista kbd {
@@ -223,7 +223,7 @@ html.cerca-oberta { overflow: hidden; }
    està escrita, i el club té una persona a l'altra banda del WhatsApp. */
 .cerca-preguntaho {
   display: block; margin: 12px 0 4px; padding: 13px 15px;
-  background: var(--cream, #F4F1EC);
+  background: var(--cream, #ffffff);
   border-left: 3px solid var(--red, #E20613);
 }
 .cerca-preguntaho strong {
@@ -237,7 +237,7 @@ html.cerca-oberta { overflow: hidden; }
   font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--red-dark, #A8040E);
 }
-.cerca-preguntaho:hover, .cerca-preguntaho.es-actiu { background: #EDE8E0; }
+.cerca-preguntaho:hover, .cerca-preguntaho.es-actiu { border-left-width: 6px; }
 
 /* ---- Quan el web no ho diu: el formulari ----------------------------
    Ha de semblar poca cosa. Qui hi arriba ja ve d'una decepció —ha buscat
@@ -245,7 +245,7 @@ html.cerca-oberta { overflow: hidden; }
    d'espantar. Tres camps, un botó, i el WhatsApp només després.        */
 .cerca-form {
   margin: 12px 0 4px; padding: 15px;
-  background: var(--cream, #F4F1EC);
+  background: var(--cream, #ffffff);
   border-left: 3px solid var(--red, #E20613);
 }
 .cerca-form-t strong {
@@ -297,7 +297,7 @@ html.cerca-oberta { overflow: hidden; }
 .cerca-form-avis a { color: inherit; text-decoration: underline; }
 .cerca-form-fet {
   margin: 12px 0 4px; padding: 15px;
-  background: var(--cream, #F4F1EC);
+  background: var(--cream, #ffffff);
   border-left: 3px solid var(--red, #E20613);
 }
 .cerca-form-fet > strong {

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Flyer de l'Escoleta · A5 · CB Grup Barna</title>
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* ============================================================
+   FLYER ESCOLETA · A5 vertical · es renderitza amb Playwright a
+   deviceScaleFactor 2 → 1748×2480 px = A5 a 300 ppp.
+   Estètica definitiva (25/08/2026): blanc pur, Anton + Inter,
+   vermell de l'escut, groc NOMÉS a la lletra i sobre fosc.
+   ============================================================ */
+:root{
+  --ink:#10100E; --ink-2:#46433f; --muted:#6B6560;
+  --red:#E20613; --red-dark:#A8040E; --red-glow:#FF3B41; --yel:#EEFF00;
+  --paper:#fff; --line:rgba(16,16,14,.14);
+  --disp:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
+  --body:'Inter',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#3a3a38}
+.flyer{
+  width:874px;height:1240px;margin:0 auto;background:var(--paper);
+  color:var(--ink-2);font-family:var(--body);position:relative;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+/* barra de novetats: groc a la lletra, fons tinta */
+.tick{background:var(--ink);color:var(--yel);display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:13px 20px;font-size:13.5px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;flex:none}
+.tick i{font-style:normal;width:8px;height:8px;border-radius:50%;background:var(--yel)}
+/* capçalera de marca */
+.brand{display:flex;align-items:center;gap:12px;padding:22px 44px 0;flex:none}
+.brand::before{content:"";width:20px;height:24px;background:var(--red);clip-path:polygon(0 0,100% 0,50% 100%)}
+.brand b{font-weight:800;letter-spacing:.24em;font-size:15px;color:var(--ink)}
+.brand span{margin-left:auto;font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+/* cos: titular + foto */
+.hero{flex:1;display:grid;grid-template-columns:1fr 340px;gap:0;align-items:stretch;min-height:0}
+.hero-tx{padding:34px 20px 0 44px;display:flex;flex-direction:column}
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--red-dark)}
+h1{font-family:var(--disp);font-weight:400;text-transform:uppercase;color:var(--ink);
+  font-size:132px;line-height:.9;letter-spacing:.005em;margin:16px 0 6px}
+.age{font-family:var(--disp);font-weight:400;text-transform:uppercase;color:var(--red);font-size:56px;line-height:1;margin-bottom:22px}
+.lead{font-size:17.5px;line-height:1.5;max-width:34ch;color:var(--ink-2)}
+.lead b{color:var(--ink)}
+/* entrenaments */
+.chips{margin-top:auto;display:flex;flex-direction:column;gap:0;border-top:2px solid var(--ink)}
+.chip{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.chip b{font-family:var(--disp);font-weight:400;font-size:44px;color:var(--red);line-height:.9}
+.chip span{font-size:15px;color:var(--ink-2)}
+.sched{margin-top:26px;padding-bottom:30px}
+.sched h2{font-family:var(--body);font-weight:800;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--red-dark);margin-bottom:12px}
+.srow{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:15.5px}
+.srow b{font-family:var(--disp);font-weight:400;text-transform:uppercase;font-size:19px;color:var(--ink);letter-spacing:.02em}
+.srow span{align-self:center;color:var(--ink-2)}
+.srow span em{font-style:normal;color:var(--muted);font-size:13.5px;display:block}
+.ph{position:relative;overflow:hidden;background:var(--ink)}
+.ph img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.ph figcaption{position:absolute;left:0;right:0;bottom:0;background:var(--ink);color:rgba(255,255,255,.75);
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:10px 16px}
+/* franja vermella de crida */
+.cta{flex:none;background:var(--red);color:#fff;display:grid;grid-template-columns:1fr auto;gap:8px 24px;
+  align-items:center;padding:26px 44px}
+.cta .big{font-family:var(--disp);font-weight:400;text-transform:uppercase;font-size:34px;line-height:1.04;color:#fff}
+.cta .sub{font-size:15px;color:rgba(255,255,255,.92);margin-top:6px}
+.cta .tel{text-align:right}
+.cta .tel b{display:block;font-family:var(--disp);font-weight:400;font-size:37px;color:#fff;letter-spacing:.02em}
+.cta .tel span{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.92)}
+/* peu */
+.ft{flex:none;background:var(--ink);color:rgba(255,255,255,.7);display:flex;align-items:center;gap:18px;
+  padding:16px 44px;font-size:13px;font-weight:600}
+.ft b{color:#fff;font-weight:800;letter-spacing:.06em}
+.ft b em{font-style:normal;color:var(--red-glow)}
+.ft .web{margin-left:auto;color:var(--yel);font-weight:800;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div class="flyer">
+  <div class="tick"><i></i>Inscripcions obertes · Temporada 2026-27<i></i></div>
+  <div class="brand"><b>CB GRUP BARNA</b><span>El Clot · Barcelona · Des de 1965</span></div>
+  <div class="hero">
+    <div class="hero-tx">
+      <p class="eyebrow">L'escola de bàsquet del Clot</p>
+      <h1>Escoleta</h1>
+      <p class="age">De 4 a 8 anys</p>
+      <p class="lead">Per on comença tothom, <b>sense saber-ne gens</b>. Equips mixtos, tres grups
+      per edat i la pista d'on han sortit jugadores i jugadors d'ACB i de Lliga Femenina Endesa.</p>
+      <div class="chips">
+        <div class="chip"><b>1965</b><span>La mateixa pista, seixanta-un anys</span></div>
+        <div class="chip"><b>3</b><span>Grups per edat, equips mixtos</span></div>
+        <div class="chip"><b>0 €</b><span>El primer entrenament, de prova</span></div>
+      </div>
+      <div class="sched">
+        <h2>Entrenaments · de setembre a juny</h2>
+        <div class="srow"><b>Dimecres</b><span>17:30 – 18:40 · Escola Casas<em>Plaça de Valentí Almirall</em></span></div>
+        <div class="srow"><b>Dissabtes</b><span>09:00 – 10:30 · La Nau del Clot<em>Carrer de la Llacuna, 170-172</em></span></div>
+      </div>
+    </div>
+    <figure class="ph">
+      <img src="/fotos/web/escola-basquet-julio-torralba-msuey2fd/1786800684268-xyvqb.webp" alt="Nen de l'Escoleta amb la pilota i la mascota del club a La Nau del Clot">
+      <figcaption>La Nau del Clot</figcaption>
+    </figure>
+  </div>
+  <div class="cta">
+    <div>
+      <p class="big">Vine a provar — el primer<br>entrenament és gratuït</p>
+      <p class="sub">Escriu o truca a Julio Torralba, fundador del club, i reserva dia.</p>
+    </div>
+    <div class="tel"><span>WhatsApp · Telèfon</span><b>646 205 526</b></div>
+  </div>
+  <div class="ft"><b>#Som<em>Clot</em></b><span>La Nau del Clot · Sant Martí</span><span class="web">cbgrupbarna.info/escoleta</span></div>
+</div>
+</body>
+</html>

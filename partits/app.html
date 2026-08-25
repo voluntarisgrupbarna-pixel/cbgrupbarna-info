@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>App de partits · Administració · CB Grup Barna</title>
 <meta name="description" content="Calendari de partits, resultats i ratxes de tots els equips del CB Grup Barna. Jornada a jornada, dissabte i diumenge, casa i fora.">
-<meta name="theme-color" content="#F4F1EC">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="../logo.png">
 <meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.json">
@@ -20,7 +20,7 @@
   --red: #E20613;          /* identitat, emoció */
   --red-ink: #A8040E;      /* text vermell sobre crema, contrast AA */
   --ink: #10100E;          /* negre premium */
-  --cream: #F4F1EC;        /* crema, el que trenca el bloc */
+  --cream: #FFFFFF;        /* crema, el que trenca el bloc */
   --paper: #FFFFFF;
   --border: rgba(16,16,14,0.12);
   --border-soft: rgba(16,16,14,0.07);
@@ -31,7 +31,7 @@
   --win: #1B7F4B;
   --loss: #A8040E;
   /* compatibilitat amb noms antics */
-  --black: #F4F1EC;
+  --black: #FFFFFF;
   --panel: #FFFFFF;
   --panel2: #EFEBE4;
 }
@@ -69,7 +69,7 @@ h1 span { color: var(--red); }
 .tabs {
   position:sticky; top:0; z-index:50;
   display:flex; gap:6px; padding:10px 12px; overflow-x:auto; scroll-behavior:smooth;
-  background: rgba(244,241,236,0.94); backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.94); backdrop-filter: blur(10px);
   border-bottom:1px solid var(--border);
   scrollbar-width:none;
   /* a tauleta/mòbil (on encara no caben totes les pestanyes) s'indica amb un
@@ -339,7 +339,7 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 .bottomnav {
   display: none;
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
-  background: rgba(244,241,236,0.96); backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(10px);
   border-top: 1px solid var(--border);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   box-shadow: 0 -2px 14px rgba(16,16,14,.06);
@@ -1819,7 +1819,7 @@ async function genCartell() {
   cv.width = W; cv.height = H;
   const S = H / 1350;                    // escala respecte al disseny original
   const px = n => Math.round(n * S);     // mides tipogràfiques proporcionals
-  const RED='#E20613', INK='#10100E', CREAM='#F4F1EC', WHITE='#ffffff';
+  const RED='#E20613', INK='#10100E', CREAM='#FFFFFF', WHITE='#ffffff';
   const mode = document.getElementById('c-bgm').value || 'cream';
   const BG   = mode==='red' ? RED : mode==='ink' ? INK : CREAM;      // fons de la peça
   const FG   = mode==='cream' ? INK : WHITE;                          // tinta principal
@@ -1870,7 +1870,7 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     } else {
       const g = ctx.createRadialGradient(W*0.3,H*0.4,80,W*0.3,H*0.4,1000);
-      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#3a0a0c'); g.addColorStop(1, BG);
+      g.addColorStop(0, mode==='cream'?'#FFFFFF':'#3a0a0c'); g.addColorStop(1, BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     // mes gegant a l'esquerra
@@ -1921,7 +1921,7 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     } else {
       const g = ctx.createRadialGradient(W/2,H*0.42,px(80),W/2,H*0.42,Math.max(W,H));
-      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#2a0709'); g.addColorStop(1,BG);
+      g.addColorStop(0, mode==='cream'?'#FFFFFF':'#2a0709'); g.addColorStop(1,BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     ctx.textAlign='center';
@@ -1962,7 +1962,7 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     } else {
       const g = ctx.createRadialGradient(W/2,H/2,px(80),W/2,H/2,Math.max(W,H));
-      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#2a0709'); g.addColorStop(1,BG);
+      g.addColorStop(0, mode==='cream'?'#FFFFFF':'#2a0709'); g.addColorStop(1,BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     ctx.textAlign='center';
@@ -2089,11 +2089,11 @@ async function genCartell() {
     if (cPhoto) {
       drawCover(ctx, cPhoto, 0, 0, W, fotoH);
       const g = ctx.createLinearGradient(0, fotoH - px(260), 0, fotoH);
-      g.addColorStop(0, mode==='cream'?'rgba(244,241,236,0)':'rgba(16,16,14,0)'); g.addColorStop(1, mode==='cream'?'rgba(244,241,236,.92)':'rgba(16,16,14,.9)');
+      g.addColorStop(0, mode==='cream'?'rgba(255,255,255,0)':'rgba(16,16,14,0)'); g.addColorStop(1, mode==='cream'?'rgba(255,255,255,.92)':'rgba(16,16,14,.9)');
       ctx.fillStyle=g; ctx.fillRect(0, fotoH - px(260), W, px(260));
     } else {
       const g = ctx.createRadialGradient(W/2, fotoH/2, px(100), W/2, fotoH/2, Math.max(W,fotoH));
-      g.addColorStop(0, mode==='cream'?'#F4F1EC':'#3a0a0c'); g.addColorStop(1, BG);
+      g.addColorStop(0, mode==='cream'?'#FFFFFF':'#3a0a0c'); g.addColorStop(1, BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,fotoH);
     }
     ctx.fillStyle = INK; ctx.fillRect(0, fotoH, W, H - fotoH);
@@ -2124,7 +2124,7 @@ async function genCartell() {
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     } else {
       const g = ctx.createRadialGradient(W/2,H*0.4,80,W/2,H*0.4,900);
-      g.addColorStop(0, mode==='cream' ? '#F4F1EC' : (tpl==='victoria' ? '#4d0d10' : '#1a1a1a')); g.addColorStop(1, BG);
+      g.addColorStop(0, mode==='cream' ? '#FFFFFF' : (tpl==='victoria' ? '#4d0d10' : '#1a1a1a')); g.addColorStop(1, BG);
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     }
     ctx.textAlign='center'; ctx.fillStyle = FG;
@@ -2514,5 +2514,6 @@ document.getElementById('pdf-file').addEventListener('change', e=>importPdf([...
   if (/iphone|ipad/i.test(navigator.userAgent) && !navigator.standalone) pwaBtn.style.display='inline-block';
 })();
 </script>
+<script src="/js/mapa.js" defer></script>
 </body>
 </html>

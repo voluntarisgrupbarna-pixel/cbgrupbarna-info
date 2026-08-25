@@ -549,12 +549,17 @@
   --line: rgba(16, 16, 14, 0.14);
   --line-dark: rgba(255,255,255,0.15);
   --paper: #ffffff;
-  --paper-2: #F4F1EC;
+  --paper-2: #FFFFFF;
   --red: #E20613;
   --red-dark: #A8040E;
   /* Sobre fons fosc el vermell de l'escut es queda en 3,87:1 i no arriba al
      mínim per a text petit. El sistema el preveu aclarit a #FF3B41 (5,4:1). */
   --red-light: #FF3B41;
+  /* El groc de la campanya d'Escoleta («Estètica definitiva», decisió 2). Va
+     SEMPRE a la lletra i MAI al fons: sobre tinta dona 17,9:1 i sobre el
+     vermell 5,4:1, però sobre blanc es queda en 1,1:1 i no s'hi pot escriure.
+     Només als dos punts d'entrada a la campanya: el ticker i el seu CTA. */
+  --yel: #EEFF00;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --display: 'Anton', 'Haettenschweiler', 'Arial Narrow', sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -846,6 +851,20 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-33.3333%); } }
 
+/* ==== EL GROC, AMB REGLA ====
+   Els dos únics llocs on apareix #EEFF00, i tots dos sobre fons fosc o
+   vermell. Si algun dia se'n vol un tercer, primer es comprova el contrast:
+   sobre paper blanc el groc no es llegeix. */
+.tk-it--yel { color: var(--yel); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.tk-it--yel:hover { text-decoration-thickness: 2px; }
+/* El groc sobre el vermell de l'escut es queda en 4,44:1 —el document de
+   l'estètica hi deia 5,4:1, que és la xifra del #FF3B41 sobre tinta, no
+   aquesta— i el text del botó fa 10 px, o sigui que li cal el 4,5:1 sencer.
+   Amb el vermell fosc del sistema, el mateix que ja fa de vermell portador de
+   text a tot el lloc, puja a 7,04:1 i el botó no deixa de ser vermell. */
+.btn.red.yel { background: var(--red-dark); border-color: var(--red-dark); color: var(--yel); }
+.btn.red.yel:hover { background: var(--ink); border-color: var(--ink); color: var(--yel); }
+
 /* ==== CAPÇALERA ==== */
 .head { position: sticky; top: 0; z-index: 110; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
 .head-in { display: flex; align-items: center; gap: clamp(10px, 2.2vw, 36px); max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: 72px; }
@@ -910,6 +929,16 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .lead-url:hover { color: var(--ink); border-color: var(--ink); }
 .lead-tel { margin-top: 20px; font-size: 13px; color: var(--ink-2); }
 .lead-tel b { font-family: var(--body); font-weight: 400; letter-spacing: 0.1em; color: var(--ink); }
+/* ==== PANELLS DE L'ESCOLETA · «Estètica definitiva», maqueta de portada ==== */
+.entren-panel{margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--red);background:var(--paper);padding:4px 18px 2px}
+.entren-row{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
+.entren-row:last-of-type{border-bottom:none}
+.entren-row b{font-family:var(--display);font-weight:400;letter-spacing:.04em;text-transform:uppercase;font-size:15px;color:var(--ink)}
+.entren-foot{padding:10px 0 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+.lg-hero-btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center;max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) clamp(22px,3.5vw,34px)}
+.lg-hero-btns .entren-panel{flex-basis:100%;max-width:560px}
+
+
 @media (max-width: 900px) { .lead { grid-template-columns: 1fr; } .lead-media { aspect-ratio: 16 / 10; } }
 @media (max-width: 560px) { .lead-media { aspect-ratio: 4 / 3; } .lead-body .btn-row .btn { flex: 1 1 100%; } }
 
@@ -1183,13 +1212,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <div class="tk-lab"><span class="pdot"></span>Novetats</div>
   <div class="tk-trk">
     <div class="tk-cnt">
-      <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
+      <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
       <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
-      <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
+      <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
       <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
-      <span class="tk-it">Escoleta 4-8 anys · Inscripcions obertes</span>
+      <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
       <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
     </div>
@@ -1346,8 +1375,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <h2>Acadèmia i Club de Bàsquet Base a Barcelona<small>CB Grup Barna · Escoleta 4-8 anys · El Clot</small></h2>
       <p class="lede">Equips mixtos, tres grups per edat i trobades amb altres clubs. Vine a provar un entrenament sense compromís: seixanta-un anys formant nens i nenes del barri.</p>
       <div class="btn-row">
-        <a href="https://wa.me/34646205526?text=Hola%20Julio!%20M%27interessa%20l%27Escoleta%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna%20per%20a%20nens%20i%20nenes%20de%204%20a%208%20anys.%20Podeu%20informar-me%3F" target="_blank" rel="noopener" class="btn red" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
+        <a href="https://wa.me/34646205526?text=Hola%20Julio!%20M%27interessa%20l%27Escoleta%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna%20per%20a%20nens%20i%20nenes%20de%204%20a%208%20anys.%20Podeu%20informar-me%3F" target="_blank" rel="noopener" class="btn red yel" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
         <a href="tel:+34646205526" class="btn ghost" data-cta="escoleta-tel">646 205 526</a>
+        <button type="button" class="btn ghost" id="entrenBtn" aria-expanded="false" aria-controls="entrenPanel" data-cta="escoleta-entrenaments">Entrenaments</button>
+        <a href="/escoleta/flyer/flyer-escoleta-a5.pdf" download class="btn ghost" data-descarrega="Full de l'Escoleta" data-cta="escoleta-full">&#11015; Descarrega el full (PDF)</a>
+      </div>
+      <div class="entren-panel" id="entrenPanel" hidden>
+        <div class="entren-row"><b>Dimecres · 17:30–18:40</b><span>Escola Casas · plaça de Valentí Almirall</span></div>
+        <div class="entren-row"><b>Dissabtes · 9:00–10:30</b><span>La Nau del Clot · c/ de la Llacuna, 170-172</span></div>
+        <div class="entren-foot">De setembre a juny. El primer entrenament és de prova i gratuït.</div>
       </div>
       <p class="lead-tel">Contacte de l'Escoleta: <b>Julio Torralba</b> · 646 205 526</p>
       <a href="/escoleta/" class="lead-url" data-cta="escoleta">cbgrupbarna.info/escoleta <span aria-hidden="true">→</span></a>
@@ -1365,6 +1401,18 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
          a franges: acadèmia i club de bàsquet base a Barcelona. Una línia, en
          petit, perquè el hero segueixi sent el de la guia. -->
     <p class="lg-hero-seo">Acadèmia i club de bàsquet base a Barcelona: Escoleta de 4 a 8 anys, equips federats a la FCBQ, campus, tecnificació i bàsquet inclusiu amb els Barna Màgics, al Clot de Sant Martí.</p>
+  </div>
+  <!-- Botons de la maqueta de l'estètica definitiva: també a la vista de
+       franges, que és la que veu tothom per defecte. -->
+  <div class="lg-hero-btns only-light">
+    <a href="/escoleta/" class="btn red" data-cta="hero-prova">Vine a provar</a>
+    <button type="button" class="btn ghost" id="entrenBtn2" aria-expanded="false" aria-controls="entrenPanel2" data-cta="hero-entrenaments">Entrenaments</button>
+    <a href="/escoleta/flyer/flyer-escoleta-a5.pdf" download class="btn ghost" data-descarrega="Full de l'Escoleta" data-cta="hero-full">&#11015; Descarrega el full (PDF)</a>
+    <div class="entren-panel" id="entrenPanel2" hidden>
+      <div class="entren-row"><b>Dimecres · 17:30–18:40</b><span>Escola Casas · plaça de Valentí Almirall</span></div>
+      <div class="entren-row"><b>Dissabtes · 9:00–10:30</b><span>La Nau del Clot · c/ de la Llacuna, 170-172</span></div>
+      <div class="entren-foot">De setembre a juny. El primer entrenament és de prova i gratuït.</div>
+    </div>
   </div>
 
   <section class="franges only-light" aria-label="Accés ràpid al club">
@@ -1430,6 +1478,32 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       </div>
     </div>
   </section>
+  <!-- ==== SÈNIORS ==== -->
+  <section class="section" id="seniors">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow red">Supercopa FCBQ · Temporada 26·27</p>
+        <div class="rule"></div>
+        <h2>Els sèniors</h2>
+        <p>L'únic club de Barcelona amb els <b>dos equips sènior a la Supercopa</b> de la Federació Catalana de Bàsquet la mateixa temporada. El masculí i el femení.</p>
+      </div>
+
+      <div class="sn-txt reveal">
+        <p>La Supercopa FCBQ no és un torneig d'estiu: és la lliga d'elit de Catalunya, el nivell més alt del bàsquet federat català. Per sobre només hi ha les competicions estatals —la Liga EBA i l'ACB en masculí, la LF2 i la Liga Femenina en femení—, i per sota, tots els graons que s'han hagut de superar abans d'arribar-hi.</p>
+        <p>El <b>sènior femení</b> hi va tancar la temporada regular en <b>quarta posició</b>, amb 17 victòries i 7 derrotes. La <b>Judit Ortiz</b> va entrar a l'All Star de la Supercopa Femenina i la <b>Marta Zori</b> va ser una de les màximes anotadores de perímetre de tota la competició. El <b>sènior masculí</b> competeix a la mateixa categoria sense moure's del barri.</p>
+        <p>Darrere hi ha els segons equips, que són els que fan que això se sostingui: el <b>sènior B masculí juga a Primera Territorial</b> i el <b>sènior B femení, a Primera Catalana</b>.</p>
+        <p>La voluntat del club és formar el planter perquè arribi a dalt: que les jugadores i els jugadors que comencen a l'Escoleta acabin al primer equip, i que cada temporada calgui fitxar menys gent de fora. Arribar a la Supercopa amb els dos equips no és un premi: és la conseqüència de fer-ho així durant molt de temps.</p>
+      </div>
+      <div class="ig-embed-wrap two">
+        <div class="igf" data-auto data-ig="https://www.instagram.com/p/DbgJvwuCCNv/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbgJvwuCCNv/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
+        <div class="igf sn-ig2" data-auto data-ig="https://www.instagram.com/p/DbiuXarCIpz/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbiuXarCIpz/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
+      </div>
+      <p class="center reveal" style="margin-top:clamp(26px,4vw,42px)">
+        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" class="cta" data-cta="ig-follow">Segueix @cbgrupbarna</a>
+      </p>
+    </div>
+  </section>
+
 
   <!-- ==== PARITAT · una franja, no una xifra ==== -->
   <div class="wrap only-extensa">
@@ -1584,32 +1658,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ==== SÈNIORS ==== -->
-  <section class="section" id="seniors">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <p class="eyebrow red">Supercopa FCBQ · Temporada 25·26</p>
-        <div class="rule"></div>
-        <h2>Els sèniors</h2>
-        <p>L'únic club de Barcelona amb els <b>dos equips sènior a la Supercopa</b> de la Federació Catalana de Bàsquet la mateixa temporada. El masculí i el femení.</p>
-      </div>
-
-      <div class="sn-txt reveal">
-        <p>La Supercopa FCBQ no és un torneig d'estiu: és la lliga d'elit de Catalunya, el nivell més alt del bàsquet federat català. Per sobre només hi ha les competicions estatals —la Liga EBA i l'ACB en masculí, la LF2 i la Liga Femenina en femení—, i per sota, tots els graons que s'han hagut de superar abans d'arribar-hi.</p>
-        <p>El <b>sènior femení</b> hi va tancar la temporada regular en <b>quarta posició</b>, amb 17 victòries i 7 derrotes. La <b>Judit Ortiz</b> va entrar a l'All Star de la Supercopa Femenina i la <b>Marta Zori</b> va ser una de les màximes anotadores de perímetre de tota la competició. El <b>sènior masculí</b> competeix a la mateixa categoria sense moure's del barri.</p>
-        <p>Darrere hi ha els segons equips, que són els que fan que això se sostingui: el <b>sènior B masculí juga a Primera Territorial</b> i el <b>sènior B femení, a Primera Catalana</b>.</p>
-        <p>La voluntat del club és formar el planter perquè arribi a dalt: que les jugadores i els jugadors que comencen a l'Escoleta acabin al primer equip, i que cada temporada calgui fitxar menys gent de fora. Arribar a la Supercopa amb els dos equips no és un premi: és la conseqüència de fer-ho així durant molt de temps.</p>
-      </div>
-      <div class="ig-embed-wrap two">
-        <div class="igf" data-auto data-ig="https://www.instagram.com/p/DbgJvwuCCNv/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbgJvwuCCNv/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
-        <div class="igf sn-ig2" data-auto data-ig="https://www.instagram.com/p/DbiuXarCIpz/"><span class="igf-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.24 2.2.4.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1.2-.24 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.05-1.8-.24-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.05-1.2.24-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4 1.2-.07 1.6-.07 4.8-.07zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 2a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm5-2.6a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg></span><span class="igf-t">Publicació d'Instagram</span><span class="igf-s">Es carrega quan la demanes, per no gastar-te dades sense permís.</span><span class="igf-btns"><button type="button" data-cta="ig-load">Veure aquí</button><a href="https://www.instagram.com/p/DbiuXarCIpz/" target="_blank" rel="noopener" data-cta="ig-open">Obrir a Instagram</a></span></div>
-      </div>
-      <p class="center reveal" style="margin-top:clamp(26px,4vw,42px)">
-        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" class="cta" data-cta="ig-follow">Segueix @cbgrupbarna</a>
-      </p>
     </div>
   </section>
 
@@ -2393,5 +2441,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
 <script src="/js/descarrega.js" defer></script>
 <script src="/js/cerca.js" defer></script>
+<script src="/js/mapa.js" defer></script>
+<script>
+(function(){
+  ['','2'].forEach(function(n){
+    var b=document.getElementById('entrenBtn'+n),p=document.getElementById('entrenPanel'+n);
+    if(!b||!p)return;
+    b.addEventListener('click',function(){var o=p.hidden;p.hidden=!o;b.setAttribute('aria-expanded',String(o));});
+  });
+})();
+</script>
 </body>
 </html>

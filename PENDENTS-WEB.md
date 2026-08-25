@@ -113,7 +113,7 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 - **Escoleta:** foto o vídeo d'en Willy Hernangómez entrenant a La Nau amb Time Chamber
   (el forat és a `escoleta/index.html:944`), i confirmar la fitxa del circuit 3x3 amb la
   selecció espanyola (línia 744).
-- **Sessió de fotos de l'Escoleta (4-7 anys):** és el punt més feble de l'apartat
+- **Sessió de fotos de l'Escoleta (4-8 anys):** és el punt més feble de l'apartat
   d'estètica de la web i no es resol amb codi. Avui només hi ha una foto
   (`img/escoleta@2x.webp`) per representar tot aquest pilar, i és la imatge que carrega
   amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
@@ -1403,3 +1403,65 @@ perquè es poden llegir com una garantia legal que no es té.
 Res específic d'aquest canvi. Els 5 punts pendents de la passada
 d'accessibilitat del 24/08/2026 (llista de dalt) segueixen oberts tal com
 estaven.
+---
+
+## 25-08-2026 — L'estètica definitiva, aplicada (v1.2.0 – 1.2.1)
+
+El document «Estètica definitiva» del 25/08 substitueix «Franges i Extensa»
+com a guia. De les seves quatre decisions tancades, aplicades avui:
+
+- **Sense crema enlloc** — `#F4F1EC` fora de tot el lloc: tokens de
+  `css/barna.css`, `css/cerca.css`, i 179 fitxers passats per
+  `aplica-estetica.py`, que des d'ara tradueix qualsevol crema a blanc pur.
+  El vermell de l'escut hi guanya contrast (4,36:1 → 4,92:1, entra a l'AA).
+- **Groc només a la lletra, mai al fons** — token `--yel` amb la regla i els
+  contrastos escrits al costat. Al ticker (ara enllaç amb `data-cta`) i al
+  CTA d'Escoleta, tres portades. Correcció mesurada sobre el document: groc
+  sobre el vermell de l'escut dona 4,44:1, no 5,4:1; el botó groc va sobre
+  `--red-dark` (7,04:1).
+
+I de la tanda de decisions de l'Ana del mateix dia:
+
+- **Escoleta: de 4 a 8 anys** («nos quedamos de 4 a 8»). Corregides les dues
+  pàgines que deien 4-7 (blog «Quants equips» i /patrocinadors/, tres
+  idiomes). El flyer nou ja va amb 4-8.
+- **/premsa/moments/ traduïda**: /es/premsa/momentos/ i /en/premsa/highlights/,
+  pel circuit de la font única. 38 entrades per idioma, sitemap a 366 URL.
+- **Briefing refet per a la 26-27**: temporada i data noves, resultats del
+  sènior femení datats com a 2025-26, els dos sèniors inscrits a la Supercopa
+  segons el robot FCBQ, i xifres quadrades amb data.json (fora les «~2M
+  d'impressions»; dins les 439.000 visualitzacions verificades; 34+ equips
+  amb l'abast real; 400 jugadores i jugadors · 450 famílies).
+- **Flyer nou de l'Escoleta**: font HTML a `escoleta/flyer/` (noindex) +
+  PNG/PDF A5 a 300 ppp. Foto real de l'àlbum de la galeria.
+- **Vídeos de la mascota**: ja eren fora des del 24/08 (commit c589e7f4 per
+  recuperar-los). El tauler de pendents anava endarrerit en aquest punt.
+- **Panell d'analítica**: delegat («haz lo que consideres»). Proposta
+  triada: GitHub Action diària → GA4 Data API → JSON al repositori →
+  panell a /admin/. Pendent de construir i d'un service account de GA4.
+- **Newsletter**: el club ja té Brevo. Pendent que l'Ana passi l'URL del
+  formulari (la clau API no pot viure en un lloc estàtic).
+
+### Pendent de les quatre decisions de l'estètica — TANCAT (mateix dia, v1.3.0)
+
+- ~~**Mapa de navegació ≡ a totes les capçaleres**~~ **Fet.** `js/mapa.js`
+  (generat per `scripts/build-mapa.py` des de `i18n/routes.yml`) a 377
+  pàgines més via `scripts/mapa-aplica.py`; 108 saltades amb motiu (admin,
+  impremta, redireccions, galeria, mirall del Premi).
+- ~~**Els panells «Entrenaments» i «Descarrega info»**~~ **Fet.** A les tres
+  portades i a les dues vistes. La descàrrega tira de la porta existent
+  (Apps Script + casella de butlletí); quan arribi l'URL de Brevo s'hi
+  connecta l'enviament.
+- ~~**Els primers equips abans de la base**~~ **Fet.** #seniors puja per
+  sobre del formulari a les tres portades. La fitxa amb plantilla i staff
+  segueix esperant material (/jugadors/ buit).
+
+### Material · l'Ana avui no té temps (dit explícitament el 25/08)
+
+Tot el bloc de material queda aparcat sense data: sessió de fotos de
+l'Escoleta (ara mateix el millor material és l'àlbum
+escola-basquet-julio-torralba de la galeria, 91 fotos a 1772 px — el flyer
+ja en tira), Willy Hernangómez, galeries d'esdeveniments, nivells
+or/plata/bronze, Instagram de 6 partners, fitxes de Nova Farmàcia Clot i
+Clínica Dental 26, plantilla de /jugadors/, Tecnificació i Notícies, fotos
+de La Nau, logo de la Wilson.

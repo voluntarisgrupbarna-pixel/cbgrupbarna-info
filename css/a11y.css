@@ -128,7 +128,9 @@ body { text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 
    Contrastos, per si algú els vol tornar a comprovar:
      #E20613 sobre #10100E → 3,87:1  ✗      #FF3B41 sobre #10100E → 5,40:1  ✓
-     #E20613 sobre #F4F1EC → 4,36:1  ✗      #A8040E sobre #F4F1EC → 6,93:1  ✓
+     #E20613 sobre #FFFFFF → 4,92:1  ✓      #A8040E sobre #FFFFFF → 7,81:1  ✓
+   (La crema #FFFFFF, on el vermell es quedava en 4,36:1, va desaparèixer del
+    lloc el 25/08/2026: totes les superfícies clares són blanc pur.)
      #10100E sobre #E20613 → 3,87:1  ✗      #FFFFFF sobre #E20613 → 4,92:1  ✓
    Sobre el vermell no hi ha cap blanc rebaixat que hi arribi: ni al 92%
    d'opacitat (4,28:1). Per això, a sobre del vermell, blanc pur.           */
