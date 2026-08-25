@@ -22,6 +22,12 @@ només l'hi posa nom.
 
 ---
 
+## 1.1.3 — 2026-08-25
+
+`PENDENTS-WEB.md` posat al dia: registrat el fet i el pendent de la icona a
+l'enllaç d'accessibilitat del peu (1.1.2), amb la resposta a per què no hi
+ha logo oficial de «web accessible».
+
 ## 1.1.2 — 2026-08-25
 
 L'enllaç «Accessibilitat» del peu (i el seu equivalent en castellà i
