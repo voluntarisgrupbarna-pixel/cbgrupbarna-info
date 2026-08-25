@@ -1377,3 +1377,29 @@ axe-core sobre l'estat actual.
    `pagLlista` al repositori: es crea sencer en JavaScript en temps
    d'execució, i tocar-ho a cegues sense poder-ho provar a fons és més risc
    que valor. Queda apuntat perquè qui toqui `cerca.js` ho vegi.
+
+## Accessibilitat · 25/08/2026 — icona a l'enllaç del peu
+
+L'Ana va preguntar si hi havia un logo de «web accessible» per posar al peu.
+No n'hi ha cap d'oficial: el que exigeixen les normatives (WCAG 2.2, EN 301
+549, RD 1112/2018) és una declaració enllaçada, no un segell, i el W3C
+desaconsella els logos de conformitat auto-atorgats sense auditoria externa
+perquè es poden llegir com una garantia legal que no es té.
+
+### Fet
+
+- L'enllaç «Accessibilitat» del peu (`scripts/i18n_chrome.py`) porta ara una
+  icona i el nivell de conformitat visible: **♿ Accessibilitat — WCAG 2.2
+  AA** (`Accesibilidad` / `Accessibility` en castellà i anglès), en comptes
+  del text pla. Icona marcada `aria-hidden="true"`: el lector de pantalla
+  només anuncia el text.
+- Nova regla `.foot-a11y` a `css/a11y.css` (secció 9), amb el vermell
+  aclarit de marca (`#FF3B41`, 5,40:1 sobre el peu fosc).
+- Aplicat a les 277 pàgines (ca/es/en) que enllacen `/accessibilitat/`.
+  Versió **1.1.2**.
+
+### Pendent
+
+Res específic d'aquest canvi. Els 5 punts pendents de la passada
+d'accessibilitat del 24/08/2026 (llista de dalt) segueixen oberts tal com
+estaven.
