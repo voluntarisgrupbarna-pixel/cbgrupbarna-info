@@ -197,6 +197,8 @@ TEXTOS = [
     ("Organigrama", "Organigrama", "Who's who"),
     ("Els equips", "Los equipos", "The teams"),
     ("La jornada", "La jornada", "The round"),
+    ("Bústia de suggeriments", "Buzón de sugerencias", "Suggestions box"),
+    ("Accessibilitat", "Accesibilidad", "Accessibility"),
     ("Avís legal", "Aviso legal", "Legal notice"),
     ("Per equip", "Por equipo", "By team"),
     ("Temporada", "Temporada", "Season"),

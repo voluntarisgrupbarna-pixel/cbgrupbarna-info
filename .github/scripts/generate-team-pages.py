@@ -181,7 +181,34 @@ def resultat(p):
     return "W" if barna > rival else ("L" if barna < rival else "E")
 
 
-def head_html(title, desc, canonical, og_image, extra_ld, idioma):
+def hreflang_html(ruta_ca):
+    """Els tres idiomes d'una pàgina d'equip viuen en rutes paral·leles
+    (/…, /es/…, /en/…), així que es poden declarar per patró sense passar
+    per routes.yml. Sense aquests link, Google no sap que són la mateixa."""
+    return (
+        f'<link rel="alternate" hreflang="ca" href="{BASE_URL}{ruta_ca}">\n'
+        f'<link rel="alternate" hreflang="es" href="{BASE_URL}/es{ruta_ca}">\n'
+        f'<link rel="alternate" hreflang="en" href="{BASE_URL}/en{ruta_ca}">\n'
+        f'<link rel="alternate" hreflang="x-default" href="{BASE_URL}{ruta_ca}">'
+    )
+
+
+def lang_switch_html(ruta_ca, idioma):
+    """El mateix component que la resta del web (l'estil viu a css/barna.css)."""
+    noms = [("ca", "", "Català", "CA"), ("es", "/es", "Castellano", "ES"),
+            ("en", "/en", "English", "EN")]
+    peces = []
+    for codi, pre, nom, rotul in noms:
+        actiu = ' class="active" aria-current="true"' if codi == idioma else ""
+        peces.append(f'<a href="{pre}{ruta_ca}" hreflang="{codi}" lang="{codi}" '
+                     f'aria-label="{nom}"{actiu}>{rotul}</a>')
+    sep = '<span class="sep" aria-hidden="true">·</span>'
+    return ('    <nav class="lang-switch" aria-label="Canvia d\'idioma · '
+            'Cambiar idioma · Change language">\n      '
+            + sep.join(peces) + '\n    </nav>')
+
+
+def head_html(title, desc, canonical, og_image, extra_ld, idioma, ruta_ca):
     return f"""<!DOCTYPE html>
 <html lang="{idioma}">
 <head>
@@ -191,6 +218,7 @@ def head_html(title, desc, canonical, og_image, extra_ld, idioma):
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canonical}">
+{hreflang_html(ruta_ca)}
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -209,6 +237,7 @@ def head_html(title, desc, canonical, og_image, extra_ld, idioma):
 <!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
      aquí, el planta /js/cerca.js dins de la capçalera. -->
 <link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/a11y.css">
 <script type="application/ld+json">{json.dumps(extra_ld, ensure_ascii=False)}</script>
 <script src="/js/galetes.js"></script>
 <script src="/js/cerca.js" defer></script>
@@ -216,7 +245,7 @@ def head_html(title, desc, canonical, og_image, extra_ld, idioma):
 """
 
 
-def header_html(idioma):
+def header_html(idioma, ruta_ca):
     return f"""<body>
 <a href="#main" class="skip">{_chrome.text("salta", idioma)}</a>
 <header class="head">
@@ -226,6 +255,7 @@ def header_html(idioma):
       <span>CB Grup Barna</span>
     </a>
 {_chrome.navegacio(idioma)}
+{lang_switch_html(ruta_ca, idioma)}
   </div>
 </header>
 """
@@ -288,7 +318,8 @@ def team_page(e, data, avui, idioma):
     calendari_html = ("<ul>" + "".join(match_line(p, nom, idioma) for p in partits) + "</ul>") \
         if partits else f"<p class=\"lede\">{t['sense_calendari']}</p>"
 
-    body = f"""{header_html(idioma)}
+    ruta_ca = f"/partits/equips/{e['id']}/"
+    body = f"""{header_html(idioma, ruta_ca)}
 <main id="main">
 <div class="wrap"><nav class="crumb" aria-label="{t['crumb_aria']}"><a href="{pre}/">{t['inici']}</a> · <a href="{pre}/partits/">{t['partits']}</a> · <a href="{pre}/partits/equips/">{t['equips']}</a> · <span>{esc(nom)}</span></nav></div>
 <div class="wrap">
@@ -313,7 +344,7 @@ def team_page(e, data, avui, idioma):
 </div>
 </main>
 {_chrome.peu(idioma).replace("</main>", "", 1)}"""
-    return head_html(title, desc, canonical, og_image, ld, idioma) + body
+    return head_html(title, desc, canonical, og_image, ld, idioma, ruta_ca) + body
 
 
 def index_page(data, avui, idioma):
@@ -357,7 +388,7 @@ def index_page(data, avui, idioma):
             ]},
         ],
     }
-    body = f"""{header_html(idioma)}
+    body = f"""{header_html(idioma, "/partits/equips/")}
 <main id="main">
 <div class="wrap"><nav class="crumb" aria-label="{t['crumb_aria']}"><a href="{pre}/">{t['inici']}</a> · <a href="{pre}/partits/">{t['partits']}</a> · <span>{t['equips']}</span></nav></div>
 <div class="wrap">
@@ -370,7 +401,7 @@ def index_page(data, avui, idioma):
 </div>
 </main>
 {_chrome.peu(idioma).replace("</main>", "", 1)}"""
-    return head_html(title, desc, canonical, f"{BASE_URL}/og-image.jpg", ld, idioma) + body
+    return head_html(title, desc, canonical, f"{BASE_URL}/og-image.jpg", ld, idioma, "/partits/equips/") + body
 
 
 def main():

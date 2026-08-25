@@ -22,6 +22,34 @@ només l'hi posa nom.
 
 ---
 
+## 1.1.2 — 2026-08-25
+
+El robot diari de la FCBQ portava **dos dies mort** (runs #123-135, tots en
+vermell des del 23/08 a les 15:16) i la fallada, de retruc, protegia una
+regressió: en arreglar-lo sense mirar més, l'endemà hauria esborrat millores
+de 45 pàgines publicades.
+
+- **Causa de la fallada:** `generate-team-pages.py` carrega
+  `scripts/i18n_chrome.py`, que fa `import yaml`, i el workflow només
+  instal·lava `pillow`. Afegit `pyyaml` a `update-partits.yml`.
+- **La regressió que hauria vingut després:** el generador de fitxes d'equip
+  anava per darrere de les pàgines publicades — no emetia els `hreflang`,
+  ni el selector d'idioma, ni `css/a11y.css`. Actualitzat el generador
+  perquè ho emeti tot; ara la seva sortida coincideix amb el publicat i
+  hi afegeix el que faltava a `/es/` i `/en/`.
+- **El peu de les fitxes**, via `i18n/diccionari.yml`: Newsletter, Bústia de
+  suggeriments i Preguntes freqüents a la columna Contacte dels tres
+  idiomes (abans només al català, i a `/es/partits/` sortien en català).
+- **El traductor de `/partits/`** apren «Accessibilitat» i «Bústia de
+  suggeriments»: les versions castellana i anglesa ja no ensenyen aquests
+  dos rètols en català.
+- Regenerades les 48 pàgines d'equip, `/es/partits/` i `/en/partits/` (que
+  arrosegaven les FAQ amb restes de català del fix #86 mai aplicat pel
+  robot mort) i l'índex del cercador.
+
+Comprovat: axe 0 violacions a les fitxes dels tres idiomes a 390 px,
+`a11y-revisa` 458/458, lint i18n 0, motor 74/74.
+
 ## 1.1.1 — 2026-08-25
 
 El cercador, net d'ARIA inventada i amb el panell que ja no es desborda.

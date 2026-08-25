@@ -47,8 +47,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # pyyaml: generate-team-pages.py carrega scripts/i18n_chrome.py, que
+      # llegeix i18n/diccionari.yml. Sense ell, el robot moria aquí cada dia
+      # (del 23 al 25/08/2026, runs #123-135, tots en vermell).
       - name: Instal·lar dependències
-        run: pip install --quiet pillow
+        run: pip install --quiet pillow pyyaml
       - name: Baixar i comparar el calendari FCBQ
         run: python .github/scripts/update-partits.py
       - name: Regenerar fitxes de calendari per equip
