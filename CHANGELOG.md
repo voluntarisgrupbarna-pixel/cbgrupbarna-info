@@ -22,6 +22,14 @@ només l'hi posa nom.
 
 ---
 
+## 1.1.2 — 2026-08-25
+
+L'enllaç «Accessibilitat» del peu (i el seu equivalent en castellà i
+anglès) ara porta una icona i el nivell de conformitat visible:
+«♿ Accessibilitat — WCAG 2.2 AA». No hi ha cap logo oficial de web
+accessible que certificar-se pugui; el que fa falta és que la declaració
+enllaçada es vegi sense haver de clicar-hi, i ara es veu.
+
 ## 1.1.1 — 2026-08-24
 
 Primera tanda de codi del «Camí cap al 10» (auditoria d'estètica i de la

@@ -122,6 +122,25 @@ for _idioma, _t in {
     )
 
 
+A11Y_ETIQUETA = {
+    "ca": "Accessibilitat — WCAG 2.2 AA",
+    "es": "Accesibilidad — WCAG 2.2 AA",
+    "en": "Accessibility — WCAG 2.2 AA",
+}
+
+
+def _enllac_peu(clau, idioma):
+    """Un enllaç normal del peu. El d'accessibilitat porta a més la icona i
+    el nivell de conformitat: és l'única prova visible que el lloc compleix
+    WCAG 2.2 AA, i val la pena que es vegi sense haver-hi de clicar."""
+    href = _comprova(clau, idioma)
+    if clau == "accessibilitat":
+        return (f'<a href="{href}" class="foot-a11y">'
+                 '<span class="foot-a11y-i" aria-hidden="true">&#9855;</span>'
+                 f'{A11Y_ETIQUETA[idioma]}</a>')
+    return f'<a href="{href}">{text(clau, idioma)}</a>'
+
+
 def peu(idioma):
     """El <footer> sencer.
 
@@ -133,7 +152,7 @@ def peu(idioma):
     columnes = []
     for titol, claus in ESTRUCTURA[idioma]["peu"]:
         enllacos = "\n".join(
-            f'        <a href="{_comprova(c, idioma)}">{text(c, idioma)}</a>' for c in claus)
+            f'        {_enllac_peu(c, idioma)}' for c in claus)
         extra = ""
         if titol == "titol_contacte":
             extra = ('\n        <a href="mailto:marqueting@cbgrupbarna.info">'
