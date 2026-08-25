@@ -1298,3 +1298,67 @@ axe-core sobre l'estat actual.
    `pagLlista` al repositori: es crea sencer en JavaScript en temps
    d'execució, i tocar-ho a cegues sense poder-ho provar a fons és més risc
    que valor. Queda apuntat perquè qui toqui `cerca.js` ho vegi.
+
+---
+
+## Auditoria general · 25/08/2026 — on és realment el 10
+
+Repàs crític fet sobre `main` (v1.1.0) i el lloc publicat de debò (HTTP 200,
+164 KB i 0,5 s a la portada), no només sobre el codi. Objectiu: no repetir
+res del que ja diuen les auditories anteriors d'aquest mateix fitxer, i
+trobar el que encara falta per passar d'un web tècnicament excel·lent a un
+10 sencer. Informe complet i amb el desglossament per àrea, per a l'Ana:
+https://claude.ai/code/artifact/19e853e2-e587-4c32-ab0c-eb3b596cfd86
+
+**Conclusió en una frase:** el codi ja s'audita sol i es corregeix ràpid
+(accessibilitat, i18n, contrast, rendiment — tot per sobre de 8,5/10). El
+que falta no és tècnic, és que la web encara **s'obre com a web de club
+formatiu** quan l'objectiu declarat des del 20/08 («Fase de marca», més
+amunt) és **plataforma de marca esportiva i comercial**, i tres punts
+d'aquella fase segueixen sense tancar-se.
+
+### Comprovat en viu, i segueix obert (no és cosa nova, és seguiment)
+
+1. **El primer equip encara no obre la portada.** A `index.html`, tant a la
+   vista Franges com a l'Extensa, la franja/targeta d'Escoleta (línies 1371
+   i 1463) va abans que la de Sèniors (1380 i 1469). És exactament el punt 2
+   de «Fase de marca · 20/08/2026», encara no fet.
+2. **`/empreses/` no té `/es/` ni `/en/`.** Comprovat: no existeixen els
+   directoris. És la pàgina que llegeix una empresa de fora abans de
+   decidir patrocinar.
+3. **Els 22 partners de `data.json` segueixen amb `"nivell": null`.** Sense
+   aquesta dada no es pot mostrar cap jerarquia or/plata/bronze enlloc.
+
+### Trobat nou en aquesta passada
+
+4. **No hi ha cap panell d'analítica.** GA4 recull dades (correctament,
+   darrere el consentiment) però no hi ha res a `/admin/` que digui quina
+   franja converteix, quants `.ics` es descarreguen o d'on ve el trànsit.
+   Ja estava anotat a «Pendent de desenvolupar» (més amunt) fa dies; aquesta
+   auditoria el puja a prioritat màxima perquè, sense mesura, cap dels
+   altres punts d'aquesta llista es pot validar un cop fet.
+5. **331 MB de `fotos/` viuen dins del repositori de git.** No és un
+   detall estètic: cada pujada des de `/fotos/admin.html` és un commit, i
+   una tanda de fotos ja ha provocat *timeouts* reals de `push` (documentat
+   a la skill `mapa-web-cbgb`, §8 i §11). És un risc d'infraestructura, no
+   només de pes de pàgina.
+
+### Prioritzat, i qui el pot destrabar
+
+| # | Què falta | Qui el destrapa |
+|---|---|---|
+| 1 | Sèniors (equip A femení i masculí) abans que l'Escoleta a la portada | Tècnic |
+| 2 | `/empreses/` en castellà i anglès | Tècnic |
+| 3 | Nivell or/plata/bronze dels 22 partners | **L'Ana** |
+| 4 | Panell d'analítica a `/admin/` (llegint la GA4 Data API) | Tècnic |
+| 5 | Treure `fotos/` del pes del repositori (Git LFS o emmagatzematge extern) | Tècnic |
+| 6 | La Nau del Clot com a actiu de marca (sessió de fotos) | **L'Ana** |
+| 7 | Eina d'enviament de newsletter (es recull consentiment i no s'envia res) | **L'Ana** |
+| 8 | Logotip de Wilson | **L'Ana** |
+
+Els punts 6-8 ja eren aquí (més amunt); es repeteixen a la taula perquè
+formen part de la mateixa ruta cap al 10, no perquè siguin nous.
+
+El que **no** cal tocar: accessibilitat (9,5/10, 0 violacions), i18n (bloquejat
+per CI), FAQ/cercador (546 preguntes, font única), legal/RGPD i automatització
+de partits. Repetir-hi feina seria fer dues vegades el que ja està fet.
