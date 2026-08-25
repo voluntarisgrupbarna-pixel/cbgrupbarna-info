@@ -929,6 +929,16 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .lead-url:hover { color: var(--ink); border-color: var(--ink); }
 .lead-tel { margin-top: 20px; font-size: 13px; color: var(--ink-2); }
 .lead-tel b { font-family: var(--body); font-weight: 400; letter-spacing: 0.1em; color: var(--ink); }
+/* ==== PANELLS DE L'ESCOLETA · «Estètica definitiva», maqueta de portada ==== */
+.entren-panel{margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--red);background:var(--paper);padding:4px 18px 2px}
+.entren-row{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
+.entren-row:last-of-type{border-bottom:none}
+.entren-row b{font-family:var(--display);font-weight:400;letter-spacing:.04em;text-transform:uppercase;font-size:15px;color:var(--ink)}
+.entren-foot{padding:10px 0 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+.lg-hero-btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center;max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) clamp(22px,3.5vw,34px)}
+.lg-hero-btns .entren-panel{flex-basis:100%;max-width:560px}
+
+
 @media (max-width: 900px) { .lead { grid-template-columns: 1fr; } .lead-media { aspect-ratio: 16 / 10; } }
 @media (max-width: 560px) { .lead-media { aspect-ratio: 4 / 3; } .lead-body .btn-row .btn { flex: 1 1 100%; } }
 
@@ -1367,6 +1377,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <div class="btn-row">
         <a href="https://wa.me/34646205526?text=Hola%20Julio!%20M%27interessa%20l%27Escoleta%20de%20b%C3%A0squet%20del%20CB%20Grup%20Barna%20per%20a%20nens%20i%20nenes%20de%204%20a%208%20anys.%20Podeu%20informar-me%3F" target="_blank" rel="noopener" class="btn red yel" data-cta="escoleta-wa">WhatsApp · Julio Torralba</a>
         <a href="tel:+34646205526" class="btn ghost" data-cta="escoleta-tel">646 205 526</a>
+        <button type="button" class="btn ghost" id="entrenBtn" aria-expanded="false" aria-controls="entrenPanel" data-cta="escoleta-entrenaments">Entrenaments</button>
+        <a href="/escoleta/flyer/flyer-escoleta-a5.pdf" download class="btn ghost" data-descarrega="Full de l'Escoleta" data-cta="escoleta-full">&#11015; Descarrega el full (PDF)</a>
+      </div>
+      <div class="entren-panel" id="entrenPanel" hidden>
+        <div class="entren-row"><b>Dimecres · 17:30–18:40</b><span>Escola Casas · plaça de Valentí Almirall</span></div>
+        <div class="entren-row"><b>Dissabtes · 9:00–10:30</b><span>La Nau del Clot · c/ de la Llacuna, 170-172</span></div>
+        <div class="entren-foot">De setembre a juny. El primer entrenament és de prova i gratuït.</div>
       </div>
       <p class="lead-tel">Contacte de l'Escoleta: <b>Julio Torralba</b> · 646 205 526</p>
       <a href="/escoleta/" class="lead-url" data-cta="escoleta">cbgrupbarna.info/escoleta <span aria-hidden="true">→</span></a>
@@ -1384,6 +1401,18 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
          a franges: acadèmia i club de bàsquet base a Barcelona. Una línia, en
          petit, perquè el hero segueixi sent el de la guia. -->
     <p class="lg-hero-seo">Acadèmia i club de bàsquet base a Barcelona: Escoleta de 4 a 8 anys, equips federats a la FCBQ, campus, tecnificació i bàsquet inclusiu amb els Barna Màgics, al Clot de Sant Martí.</p>
+  </div>
+  <!-- Botons de la maqueta de l'estètica definitiva: també a la vista de
+       franges, que és la que veu tothom per defecte. -->
+  <div class="lg-hero-btns only-light">
+    <a href="/escoleta/" class="btn red" data-cta="hero-prova">Vine a provar</a>
+    <button type="button" class="btn ghost" id="entrenBtn2" aria-expanded="false" aria-controls="entrenPanel2" data-cta="hero-entrenaments">Entrenaments</button>
+    <a href="/escoleta/flyer/flyer-escoleta-a5.pdf" download class="btn ghost" data-descarrega="Full de l'Escoleta" data-cta="hero-full">&#11015; Descarrega el full (PDF)</a>
+    <div class="entren-panel" id="entrenPanel2" hidden>
+      <div class="entren-row"><b>Dimecres · 17:30–18:40</b><span>Escola Casas · plaça de Valentí Almirall</span></div>
+      <div class="entren-row"><b>Dissabtes · 9:00–10:30</b><span>La Nau del Clot · c/ de la Llacuna, 170-172</span></div>
+      <div class="entren-foot">De setembre a juny. El primer entrenament és de prova i gratuït.</div>
+    </div>
   </div>
 
   <section class="franges only-light" aria-label="Accés ràpid al club">
@@ -2413,5 +2442,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 <script src="/js/descarrega.js" defer></script>
 <script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
+<script>
+(function(){
+  ['','2'].forEach(function(n){
+    var b=document.getElementById('entrenBtn'+n),p=document.getElementById('entrenPanel'+n);
+    if(!b||!p)return;
+    b.addEventListener('click',function(){var o=p.hidden;p.hidden=!o;b.setAttribute('aria-expanded',String(o));});
+  });
+})();
+</script>
 </body>
 </html>
