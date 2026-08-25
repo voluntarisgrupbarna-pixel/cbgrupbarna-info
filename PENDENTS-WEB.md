@@ -1490,7 +1490,25 @@ repositori, com a Artifacts):
 - «Estètica definitiva» (mockup viu + decisions): https://claude.ai/code/artifact/b51f10df-cb1d-47b7-867c-c8168a0225ea
 
 **Fotos noves que només viuen al prototip** (no són a `img/` ni `photos/`):
-quatre jugadors fent broma, el grup de quatre assenyalant a càmera,
-l'alcalde Jaume Collboni amb un jugador d'Escoleta, tres seguidors a la
-grada. Si es volen a producció, passar-les per
-`scripts/build-blog-images.py`.
+quatre jugadors fent broma, l'alcalde Jaume Collboni amb un jugador
+d'Escoleta, tres seguidors a la grada. Si es volen a producció, passar-les
+per `scripts/build-blog-images.py`. ✅ La del grup de quatre assenyalant a
+càmera ja hi és: `photos/seniors_grup.jpg` → `img/blog/seniors-grup.webp`.
+
+### 25-08-2026 (nit) · La portada de franges, al disseny sencer de la proposta A
+
+Demanat expressament per l'Ana amb la captura del prototip («Quiero esta
+portada»). Aplicat a les tres portades (ca/es/en):
+
+- **Hero a dues columnes**: titular gran amb el primer bot, foto de
+  l'Escoleta amb peu i filet vermell, i el trio de botons (Vine a provar /
+  Entrenaments / ⬇ Descarrega el full) sota la foto.
+- **Cinc franges grans** amb aire (Escoleta sense foto —la foto ja és al
+  hero—, sèniors sobre tinta amb la foto nova de grup, femení amb les cares
+  centrades, calendari en vermell, el club) i el peu de pila
+  #SOMCLOT · El diari del Clot → · CA ES EN.
+- Les portes que surten de la pila (Portes obertes, Observatori/blog,
+  Galeria, Escriu-nos) segueixen al mapa ≡, al peu i a l'extensa; el blog
+  té la porta del peu de pila.
+- **El burger vell de la capçalera es retira** (display:none): duplicava el
+  mapa ≡ a dos dits de distància. El menú antic queda al marcatge.

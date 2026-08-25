@@ -59,6 +59,9 @@ ASSETS = [
     ("clot-entrada", "photos/s2c_entrada.jpg", 3 / 2, 375, 0.05),
     ("clot-mascota", "photos/s2b_mascota.jpg", 3 / 2, 375, 0.05),
 
+    # ── portada · franja dels sèniors (sessió d'estudi, agost 2026) ──
+    ("seniors-grup", "photos/seniors_grup.jpg", 3 / 4, 440, 0.15),
+
     # ── el Barna entre els grans ──
     ("formacio-senior", "photos/hero_sf16.jpg", 16 / 9, 780, 0.16),
     ("formacio-junior", f"{EQUIPS}/1781613084063-x60f3.jpg", 3 / 2, 600, 0.05),
