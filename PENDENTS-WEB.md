@@ -1490,7 +1490,24 @@ repositori, com a Artifacts):
 - «Estètica definitiva» (mockup viu + decisions): https://claude.ai/code/artifact/b51f10df-cb1d-47b7-867c-c8168a0225ea
 
 **Fotos noves que només viuen al prototip** (no són a `img/` ni `photos/`):
-quatre jugadors fent broma, el grup de quatre assenyalant a càmera,
-l'alcalde Jaume Collboni amb un jugador d'Escoleta, tres seguidors a la
-grada. Si es volen a producció, passar-les per
-`scripts/build-blog-images.py`.
+quatre jugadors fent broma, l'alcalde Jaume Collboni amb un jugador
+d'Escoleta, tres seguidors a la grada. Si es volen a producció, passar-les
+per `scripts/build-blog-images.py`. ✅ La del grup de quatre assenyalant a
+càmera ja hi és: `photos/seniors_grup.jpg` → `img/blog/seniors-grup.webp`.
+
+### 25-08-2026 (nit) · La portada de franges, al disseny sencer de la proposta A
+
+Demanat expressament per l'Ana amb la captura del prototip («Quiero esta
+portada»). Aplicat a les tres portades (ca/es/en):
+
+- **Hero a dues columnes**: titular gran amb el primer bot, foto de
+  l'Escoleta amb peu i filet vermell, i el trio de botons (Vine a provar /
+  Entrenaments / ⬇ Descarrega el full) sota la foto.
+- **Les nou franges de la guia, en gran i amb aire** (l'Ana va demanar
+  recuperar-les totes: «es la guia»). Ordre intacte: Escoleta (sense foto
+  —la foto ja és al hero—), Portes obertes, sèniors sobre tinta amb la
+  foto nova de grup, femení amb les cares centrades, calendari en vermell,
+  el club, Observatori, Galeria i Escriu-nos. I el peu de pila
+  #SOMCLOT · El diari del Clot → · CA ES EN.
+- **El burger vell de la capçalera es retira** (display:none): duplicava el
+  mapa ≡ a dos dits de distància. El menú antic queda al marcatge.
