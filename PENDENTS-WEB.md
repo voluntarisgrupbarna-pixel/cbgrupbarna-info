@@ -1527,3 +1527,25 @@ que l'Ana veia al mòbil:
   posant un botó propi `data-cerca-obrir` (que cerca.js respecta) fora del
   nav, al costat del commutador d'idioma, a les tres portades. A mòbil es
   queda en lupa sola (regla que css/cerca.css ja tenia).
+
+### 26-08-2026 · Auditoria completa d'UX i navegació
+
+Rastreig de 400 rutes internes (cap 404 real) + qualitat de 22 pàgines clau
+a 390 px (errors de JS, desbordament, imatges trencades, mapa ≡, tornada a
+inici) + interaccions (cerca des d'interiors, mapa, app de partits,
+formulari d'escriu-nos, fitxers .ics/.pdf de calendaris) + coherència del
+commutador d'idioma + teclat (enfocables i «salta al contingut»). Tot en
+verd amb una excepció real, arreglada:
+
+- **`/es/partners-mapa/` i `/en/partners-mapa/` trencats**: el circuit
+  d'i18n havia prefixat `/partners-mapa/` dins de les plantilles de
+  JavaScript (`href="${p.ig}"` → `href="/partners-mapa/${p.ig}"`), i això
+  trencava els 21 logos dels partners, els enllaços d'Instagram, els de
+  Google Maps i les fitxes. Restaurat com al català (8 casos per fitxer).
+  **Atenció si es torna a muntar la pàgina amb i18n-munta**: vigilar que
+  no reintrodueixi el prefix dins dels `${…}` — comprovar-ho al diff.
+
+Falsos positius coneguts del sandbox (a producció funcionen): les rajoles
+d'OpenStreetMap del mapa de partners i l'embed.js d'Instagram (extern,
+sense sortida a internet als tests); els `webcal://` de calendaris són el
+protocol de subscripció, no enllaços trencats.
