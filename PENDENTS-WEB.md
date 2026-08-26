@@ -1597,3 +1597,39 @@ el que semblava una altra web. Ara, a les tres llengües:
   botons i de secció vermella alhora; la superfície vermella ara és només
   de la secció (abans pintava una banda vermella espúria a «L'Escoleta,
   avui»).
+
+---
+
+## 26-08-2026 — Camí cap al 10 (accessibilitat, rendiment, estètica): el que depèn de l'Ana
+
+De la proposta per pujar del 9 al 10 les tres àrees, aquest és el bloc que
+no és codi. La resta (9 accions: alts de la galeria, avís del cercador,
+versió accessible dels PDF, axe a l'app de galeria, compressió dels 4 PDF,
+pressupost de rendiment a CI, panell d'analítica, flyer en WebP, hero de
+l'Escoleta amb les fotos de l'àlbum de 1772 px) es pot fer sense esperar
+cap d'aquests punts.
+
+### Material
+
+- **Sessió de fotos de l'Escoleta** — ja apuntada més amunt; segueix sent
+  la inversió més rendible de tota la web. Mentrestant el hero es cobreix
+  amb les millors fotos de l'àlbum `escola-basquet-julio-torralba` (91 a
+  1772 px).
+- **Sessió de fotos de La Nau** — per convertir `/instal-lacions/` en la
+  casa del club. L'estructura de la pàgina es pot muntar abans amb el
+  material actual, deixant els forats de foto marcats.
+- **Nivells or/plata/bronze dels 22 partners** — ja apuntat; cada fitxa es
+  toca en minuts quan arribi la dada.
+- **Logotip de la Wilson** (SVG o PNG amb fons transparent, demanar-lo a
+  la marca) i **fitxes de Nova Farmàcia Clot i Clínica Dental 26** — ja
+  apuntats.
+
+### Decisions d'un minut
+
+- **Service account de GA4** per al panell d'analítica d'`/admin/`
+  (proposta ja triada el 25/08: Action diària → GA4 Data API → JSON →
+  panell). Hi ha guia de 10 minuts preparada; sense això el panell no pot
+  llegir dades.
+- **Nom canònic del blog**: la portada diu «Observatori Barna» i el mapa ≡
+  diu «Coneixement Barna». Quan es triï, es fixa a `i18n/etiquetes.yml` i
+  es regenera el mapa.
