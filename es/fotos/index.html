@@ -1082,7 +1082,7 @@ function loadMorePhotos() {
       video.src = photoThumb(ev, id);
     } else {
       const img = new Image();
-      img.alt = `Foto ${i + 1}`;
+      img.alt = (ev.alts && ev.alts[id]) || `${ev.title} — foto ${i + 1} de ${ev.photos.length}`;
       img.loading = 'lazy';
       img.onload = () => { shimmer.remove(); item.appendChild(img); };
       img.onerror = () => { shimmer.style.opacity = '.3'; };
@@ -1112,7 +1112,7 @@ function loadMorePhotos() {
     // pantalla no les anunciava com a res. Ara son botons de debo.
     item.setAttribute('role', 'button');
     item.setAttribute('tabindex', '0');
-    item.setAttribute('aria-label', 'Abrir la foto ' + (i + 1) + ' a pantalla completa');
+    item.setAttribute('aria-label', (ev.alts && ev.alts[id]) || ('Abrir la foto ' + (i + 1) + ' de ' + ev.photos.length + ' · ' + ev.title));
     item.addEventListener('click', () => openLightbox(i));
     item.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
@@ -1155,7 +1155,7 @@ function closeLightbox() {
   document.body.style.overflow = '';
   const video = document.getElementById('lb-video');
   video.pause();
-  video.src = '';
+  video.removeAttribute('src');
   if (lbObridor && document.body.contains(lbObridor)) lbObridor.focus();
   lbObridor = null;
 }
@@ -1177,15 +1177,16 @@ function updateLightbox() {
 
   if (isVideoRef(id)) {
     img.style.display = 'none';
-    img.src = '';
+    img.removeAttribute('src');
     video.style.display = 'block';
     video.src = photoFull(currentEvent, id);
     video.load();
   } else {
     video.pause();
     video.style.display = 'none';
-    video.src = '';
+    video.removeAttribute('src');
     img.style.display = '';
+    img.alt = (currentEvent.alts && currentEvent.alts[id]) || `${currentEvent.title} — foto ${lbIndex + 1} de ${photos.length}`;
     img.classList.add('loading');
     img.onload = () => img.classList.remove('loading');
     img.src = photoFull(currentEvent, id);
