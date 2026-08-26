@@ -112,7 +112,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
      aquí, el planta /js/cerca.js dins de la capçalera. -->
 <link rel="stylesheet" href="/css/cerca.css">
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
-<script src="/js/galetes.js"></script>
+<script src="/js/galetes.js" defer></script>
 <script src="/js/cerca.js" defer></script>
 </head>
 <body>
@@ -1847,8 +1847,8 @@ def build_article(a):
     ]}
     hero = ''
     if a.get("hero_alt"):
-        hero = (f'\n    <div class="phead-media"><img src="/img/blog/{a["slug"]}-hero.jpg" '
-                f'alt="{a["hero_alt"]}" loading="lazy" decoding="async" width="1200" height="675"></div>')
+        hero = (f'\n    <div class="phead-media"><img src="/img/blog/{a["slug"]}-hero.webp" '
+                f'alt="{a["hero_alt"]}" fetchpriority="high" decoding="async" width="1200" height="675"></div>')
     if a.get("related"):
         rel = ''.join(
             f'<a class="card" href="{href}"><div class="card-body"><span class="card-tag">{tag}</span>'
