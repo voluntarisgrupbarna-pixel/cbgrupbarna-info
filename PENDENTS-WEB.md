@@ -1549,3 +1549,28 @@ Falsos positius coneguts del sandbox (a producció funcionen): les rajoles
 d'OpenStreetMap del mapa de partners i l'embed.js d'Instagram (extern,
 sense sortida a internet als tests); els `webcal://` de calendaris són el
 protocol de subscripció, no enllaços trencats.
+
+### 26-08-2026 · Tanda P1 del camí cap al 10 d'UX
+
+De la crítica d'UX demanada per l'Ana («sé crítico»), els quatre punts que
+costaven conversions, aplicats a les tres portades:
+
+1. **El CTA torna a la primera pantalla del mòbil**: «Vine a provar» era a
+   976 px (fold a 844); ara els botons van abans de la foto i cau a 454 px.
+2. **El calendari ja no es baixa a la vista franges**: 130 KB que només es
+   veien a l'extensa; ara es demanen quan la secció és visible o en
+   canviar de vista. (L'índex del cercador ja anava en «idle» i amb
+   excepció per a 2G/estalvi de dades: es deixa com està, és bon disseny.)
+3. **La barra d'acció inferior arreglada**: observava `#escoleta`, ocult a
+   franges, i sortia des del primer segon tapant contingut. Ara el
+   sentinella és el hero de la vista activa: surt en passar-lo i s'amaga
+   a dalt i al formulari.
+4. **Un sol nom per a /blog/ a la portada**: la franja i el peu de pila
+   diuen tots dos «Observatori Barna» (abans el peu deia «El diari del
+   Clot»). Pendent de vocabulari: el mapa ≡ encara en diu «Coneixement
+   Barna» — decidir el nom canònic a i18n/etiquetes.yml i regenerar el
+   mapa quan es toqui.
+
+Queden de la crítica: P2.5 (/escoleta/ al sistema visual — l'obra gran),
+P2.6 (contingut sota el peu #SOMCLOT), P2.7 (mesurar l'ús del commutador
+amb GA4 abans de decidir res), P3 (logo x3, menú vell al codi).

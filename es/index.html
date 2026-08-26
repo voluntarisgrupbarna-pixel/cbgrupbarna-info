@@ -797,6 +797,10 @@ html[data-view="extensa"] .lg-hero.only-light, html[data-view="extensa"] .lg-str
 @media (max-width: 900px) {
   .lg-hero { grid-template-columns: 1fr; padding: clamp(26px, 5vw, 48px) 20px; }
   .lg-ph { justify-self: start; max-width: 440px; }
+  /* Al mòbil, l'acció abans que la foto: sense això «Vine a provar» queia
+     a 976 px i la primera pantalla es quedava sense cap botó. */
+  .lg-hero > div:last-child { display: flex; flex-direction: column; }
+  .lg-hero-btns { order: -1; margin: 4px 0 22px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .lg-hero .eyebrow { animation: hero-fade 0.25s var(--ease) both; }
@@ -1156,7 +1160,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   </section>
   <div class="lg-strip only-light">
     <span><b>#SOMCLOT</b> · La Nau del Clot, Sant Martí</span>
-    <a href="/es/blog/" data-cta="strip-diari">El diario del Clot →</a>
+    <a href="/es/blog/" data-cta="strip-diari">Observatori Barna →</a>
     <span class="lg-strip-lang"><a href="/" lang="ca" hreflang="ca">CA</a><b>ES</b><a href="/en/" lang="en" hreflang="en">EN</a></span>
   </div>
 
@@ -1904,19 +1908,31 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   // formulari a pantalla: allà ja hi ha la crida i taparia els camps.
   (function () {
     var bar = document.getElementById('actionbar');
-    var lead = document.getElementById('escoleta');
     var info = document.getElementById('info');
-    if (!bar || !lead || !('IntersectionObserver' in window)) return;
-    var passatLead = false, formVisible = false;
-    function pinta() { bar.classList.toggle('on', passatLead && !formVisible); }
-    new IntersectionObserver(function (e) {
-      passatLead = !e[0].isIntersecting; pinta();
-    }, { threshold: 0.2 }).observe(lead);
-    if (info) {
+    if (!bar) return;
+    // El sentinella depèn de la vista: a franges és el hero de franges i a
+    // l'extensa la secció d'Escoleta. Amb l'observador fix sobre #escoleta
+    // (ocult a franges) la barra sortia des del primer segon.
+    function sentinella() {
+      var lg = document.querySelector('.lg-hero');
+      if (lg && lg.offsetParent !== null) return lg;
+      return document.getElementById('escoleta');
+    }
+    var formVisible = false;
+    function pinta() {
+      var s = sentinella();
+      var passat = s ? s.getBoundingClientRect().bottom < 0 : false;
+      bar.classList.toggle('on', passat && !formVisible);
+    }
+    window.addEventListener('scroll', pinta, { passive: true });
+    window.addEventListener('resize', pinta);
+    new MutationObserver(pinta).observe(document.documentElement, { attributes: true, attributeFilter: ['data-view'] });
+    if (info && 'IntersectionObserver' in window) {
       new IntersectionObserver(function (e) {
         formVisible = e[0].isIntersecting; pinta();
       }, { threshold: 0.12 }).observe(info);
     }
+    pinta();
   })();
 
   // ==== CALENDARI · propers partits des de /partits/data.json ====
@@ -1962,10 +1978,20 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
           + '</div>';
       }).join('');
     }
-    fetch('/partits/data.json?t=' + Math.floor(Date.now() / 3600000))
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) { if (d) render(d); else buit(); })
-      .catch(buit);
+    // El calendari només viu a la vista extensa: a franges no cal baixar
+    // 130 KB que no es veuran. Es demana quan la secció és visible, i si
+    // l'usuari canvia de vista, en aquell moment.
+    var demanat = false;
+    function demana() {
+      if (demanat || box.offsetParent === null) return;
+      demanat = true;
+      fetch('/partits/data.json?t=' + Math.floor(Date.now() / 3600000))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { if (d) render(d); else buit(); })
+        .catch(buit);
+    }
+    demana();
+    new MutationObserver(demana).observe(document.documentElement, { attributes: true, attributeFilter: ['data-view'] });
   })();
 
   // ==== VALORACIÓ DE LA WEB ====
