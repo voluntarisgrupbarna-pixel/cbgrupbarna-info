@@ -1670,3 +1670,34 @@ documentada del pressupost de pes.
 **El que segueix esperant l'Ana** és el bloc del 26/08 de més amunt:
 service account de GA4, nom canònic del blog, sessions de fotos (Escoleta i
 La Nau) i dades de partners.
+
+---
+
+## 26-08-2026 (tarda) — Segon barrido de codi: el tablón, net (v1.4.1)
+
+Repassat TOT el tablón buscant el que fos codi i seguís obert. Fet: Zapic
+fora de les 6 tires de partners i del repositori (la baixa era decisió
+tancada), P2.6 (la tira #SOMCLOT ja no fa de fals final: és l'últim bloc
+abans del peu), P2.7 (esdeveniment `canvi_vista` a GA4), P3-logo (capçalera
+amb `logo-head.png` de 8 KB en lloc de l'escut sencer), i la neteja
+d'/escoleta/ (113 elements de castellà ocult, `data-lang` i el JS del
+commutador antic, sense tocar cap text català). Comprovat amb navegador a
+1280/390 i tota la bateria en verd. El paràgraf desfasat de `mapa-web-cbgb`
+ja estava corregit d'una sessió anterior.
+
+**P3 (menú vell): es queda, i és una decisió.** El `nav#menu` ocult de les
+portades no es treu: el codi ja deia «queda al marcatge per si es recupera»
+i són ~30 enllaços interns en HTML servit que els cercadors llegeixen (el
+mapa ≡ els pinta amb JavaScript). Si l'Ana el vol fora igualment, és un
+canvi de cinc minuts — però que consti el cost SEO.
+
+**Si s'obre pull request d'aquesta branca**: la neteja d'/escoleta/ toca
+només la pàgina catalana (marcatge, cap text). Si la comprovació de paritat
+la marca, la línia per a la descripció del PR és
+`i18n-nomes-un-idioma: neteja de marcatge sense canvi de text`.
+
+**El que queda al tablón ja NO és codi**: secrets de GA4, nom del blog,
+sessions de fotos, dades de partners, URL de Brevo, columna newsletter a
+l'Apps Script, decisions de campus/formulari/PIN, autoritat SEO externa i la
+migració de les notícies antigues de cbgrupbarna.com (projecte de contingut,
+no un arreglo).

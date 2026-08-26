@@ -22,6 +22,29 @@ només l'hi posa nom.
 
 ---
 
+## 1.4.1 — 2026-08-26
+
+**Barrido «todo lo que sea código» del tablón de pendientes:**
+
+- **Zapic fora de les tires de partners** de la presentació i el dossier de
+  patrocinis (6 pàgines, ca/es/en) i el seu logo fora del repositori: la
+  baixa estava decidida des del 14/08 i les pàgines encara l'ensenyaven.
+- **P2.6** — la tira #SOMCLOT deixa de fer de fals final de pàgina a la
+  vista franges: ara és l'últim bloc abans del peu real, a les tres portades.
+- **P2.7** — el commutador Franges/Extensa ja es mesura: esdeveniment
+  `canvi_vista` a GA4 a cada canvi, per decidir amb dades.
+- **P3 (logo)** — la capçalera de les tres portades servia l'escut de
+  226×300 px per a una casella de 32: ara va `img/logo-head.png` (48×64,
+  8 KB, també al preload). El `logo.png` gran queda per a les icones.
+- **Neteja d'/escoleta/**: fora els 113 elements de castellà ocult
+  (`data-lang="es"`), l'atribut `data-lang` i el JS del commutador antic.
+  El castellà viu només a /es/escoleta/. Cap text català tocat.
+- **P3 (menú vell): decisió, no oblit** — el `nav#menu` ocult de les
+  portades NO es treu: el codi ja registrava «queda al marcatge per si es
+  recupera» i són ~30 enllaços interns servits que els cercadors llegeixen.
+
+---
+
 ## 1.4.0 — 2026-08-26
 
 **El bloc de codi del camí cap al 10** (accessibilitat, rendiment, estètica):

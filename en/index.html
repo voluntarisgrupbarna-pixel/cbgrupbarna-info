@@ -59,7 +59,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
 <link rel="shortcut icon" href="/logo.png">
 <!-- Preload recursos crítics -->
-<link rel="preload" href="/logo.png" as="image" fetchpriority="high">
+<link rel="preload" href="/img/logo-head.png" as="image" fetchpriority="high">
 <!-- DNS prefetch per a recursos externs -->
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//www.instagram.com">
@@ -985,7 +985,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       </nav>
     </div>
     <a class="head-brand" href="#top" aria-label="CB Grup Barna · home">
-      <img src="/logo.png" alt="CB Grup Barna crest" width="32" height="32" fetchpriority="high" decoding="async">
+      <img src="/img/logo-head.png" alt="CB Grup Barna crest" width="32" height="32" fetchpriority="high" decoding="async">
       <span>CB Grup Barna</span>
     </a>
     <div class="head-side r">
@@ -1161,11 +1161,6 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       <span class="franja-go"><em>With a form</em><i></i></span>
     </a>
   </section>
-  <div class="lg-strip only-light">
-    <span><b>#SOMCLOT</b> · La Nau del Clot, Sant Martí</span>
-    <a href="/en/blog/" data-cta="strip-diari">Observatori Barna →</a>
-    <span class="lg-strip-lang"><a href="/" lang="ca" hreflang="ca">CA</a><a href="/es/" lang="es" hreflang="es">ES</a><b>EN</b></span>
-  </div>
 
   <!-- ==== SÈNIORS ==== -->
   <section class="section" id="seniors">
@@ -1658,6 +1653,12 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   </div>
 </section>
 <!-- /CRIDA DE COMUNITAT -->
+<div class="lg-strip only-light">
+    <span><b>#SOMCLOT</b> · La Nau del Clot, Sant Martí</span>
+    <a href="/en/blog/" data-cta="strip-diari">Observatori Barna →</a>
+    <span class="lg-strip-lang"><a href="/" lang="ca" hreflang="ca">CA</a><a href="/es/" lang="es" hreflang="es">ES</a><b>EN</b></span>
+  </div>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-partners">
@@ -2122,6 +2123,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
       view = efectiu() === 'light' ? 'extensa' : 'light';
       try { sessionStorage.setItem(KEY, view); } catch (e) {}
       pinta();
+      if (window.gtag) window.gtag('event', 'canvi_vista', { vista: view });
     });
     pinta();
   })();

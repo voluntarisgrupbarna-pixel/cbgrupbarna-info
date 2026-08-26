@@ -57,7 +57,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
 <link rel="shortcut icon" href="logo.png">
 <!-- Preload recursos crítics -->
-<link rel="preload" href="logo.png" as="image" fetchpriority="high">
+<link rel="preload" href="img/logo-head.png" as="image" fetchpriority="high">
 <!-- DNS prefetch per a recursos externs -->
 <link rel="dns-prefetch" href="//www.instagram.com">
 <link rel="dns-prefetch" href="//www.tiktok.com">
@@ -1277,7 +1277,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       </nav>
     </div>
     <a class="head-brand" href="#top" aria-label="CB Grup Barna · inici">
-      <img src="logo.png" alt="Escut del CB Grup Barna" width="32" height="32" fetchpriority="high" decoding="async">
+      <img src="img/logo-head.png" alt="Escut del CB Grup Barna" width="32" height="32" fetchpriority="high" decoding="async">
       <span>CB Grup Barna</span>
     </a>
     <div class="head-side r">
@@ -1501,11 +1501,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <span class="franja-go"><em>Amb formulari</em><i></i></span>
     </a>
   </section>
-  <div class="lg-strip only-light">
-    <span><b>#SOMCLOT</b> · La Nau del Clot, Sant Martí</span>
-    <a href="/blog/" data-cta="strip-diari">Observatori Barna →</a>
-    <span class="lg-strip-lang"><b>CA</b><a href="/es/" lang="es" hreflang="es">ES</a><a href="/en/" lang="en" hreflang="en">EN</a></span>
-  </div>
 
   <!-- ==== CALENDARI DEL BARNA · només a l'extensa, com la jornada d'un diari ==== -->
   <section class="e-jornada only-extensa" id="calendari">
@@ -2010,6 +2005,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   </div>
 </section>
 <!-- /CRIDA DE COMUNITAT -->
+<div class="lg-strip only-light">
+    <span><b>#SOMCLOT</b> · La Nau del Clot, Sant Martí</span>
+    <a href="/blog/" data-cta="strip-diari">Observatori Barna →</a>
+    <span class="lg-strip-lang"><b>CA</b><a href="/es/" lang="es" hreflang="es">ES</a><a href="/en/" lang="en" hreflang="en">EN</a></span>
+  </div>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-partners">
@@ -2182,6 +2183,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       view = efectiu() === 'light' ? 'extensa' : 'light';
       try { sessionStorage.setItem(KEY, view); } catch (e) {}
       pinta();
+      if (window.gtag) window.gtag('event', 'canvi_vista', { vista: view });
     });
     pinta();
   })();
