@@ -1633,3 +1633,40 @@ cap d'aquests punts.
 - **Nom canònic del blog**: la portada diu «Observatori Barna» i el mapa ≡
   diu «Coneixement Barna». Quan es triï, es fixa a `i18n/etiquetes.yml` i
   es regenera el mapa.
+
+---
+
+## 26-08-2026 — El bloc de codi del camí cap al 10, fet (v1.4.0)
+
+Les 9 accions de codi de la proposta, executades i comprovades (a11y-revisa
+459 pàgines a 0, paritat i contingut d'i18n nets, lint 0, cercador 74/74,
+pressupost de pes en verd):
+
+- **Alts reals a la galeria** (3 idiomes) amb àlbum i posició, i suport
+  `ev.alts` per a descripcions per foto — quan es vulgui, el pas següent és
+  el camp de descripció al pujador d'admin, que ja té on desar.
+- **El listbox buit del cercador**, arreglat a `js/cerca.js`.
+- **Els 4 PDF grans comprimits** (12,6 → 6,2 MB) amb Title/Lang conservats,
+  pesos actualitzats i, als 3 sense arbre d'etiquetes, la nota que la versió
+  accessible és la mateixa pàgina.
+- **Hero de l'Escoleta**: 4 fotos reals de l'àlbum d'estudi en rotació
+  diària a les tres portades (h1 al marcatge; variants h2-h4 pel dia del
+  mes). Les fonts són `img/escoleta-h{1..4}[@2x].webp`.
+- **Pressupost de pes a CI**: `pes-pressupost.yml` falla el PR si un fitxer
+  passa del sostre del seu tipus; excepcions amb motiu a `pes-excepcions.txt`.
+- **Panell d'analítica** a `/admin/analitica/` + workflow `analitica.yml`
+  (cada matinada) + `.github/scripts/ga4-informe.py`. **Espera els dos
+  secrets de l'Ana** (`GA4_SERVICE_ACCOUNT_JSON`, `GA4_PROPERTY_ID`);
+  instruccions de 10 minuts a la capçalera de l'script. Fins llavors el
+  panell ho explica i el cron surt en verd.
+- **L'app de galeria** (Next.js): caselles amb teclat i botons amb nom;
+  type-check en verd.
+
+**Una troballa que desfà un pendent**: el PNG d'1,5 MB del flyer de
+l'Escoleta no l'enllaça cap pàgina — és el màster d'impremta (la web només
+serveix el PDF de 456 KB). No hi havia res a arreglar; queda com a excepció
+documentada del pressupost de pes.
+
+**El que segueix esperant l'Ana** és el bloc del 26/08 de més amunt:
+service account de GA4, nom canònic del blog, sessions de fotos (Escoleta i
+La Nau) i dades de partners.

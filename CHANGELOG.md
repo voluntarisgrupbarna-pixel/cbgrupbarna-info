@@ -22,6 +22,35 @@ només l'hi posa nom.
 
 ---
 
+## 1.4.0 — 2026-08-26
+
+**El bloc de codi del camí cap al 10** (accessibilitat, rendiment, estètica):
+
+- **Galeria amb alts reals**: cada foto diu l'àlbum i la posició («Escoleta
+  amb Julio Torralba — foto 3 de 91») a la casella, al botó i al visor, en
+  els tres idiomes; si un àlbum porta descripcions per foto (`ev.alts`),
+  manen aquestes. Els `src` buits del visor ja no re-demanen la pàgina.
+- **El cercador sense resultats ja no és un listbox buit** (l'últim avís
+  d'axe-core que quedava, a /cerca/ i el 404 dels tres idiomes).
+- **Els 4 PDF grans, comprimits** amb Title i Lang conservats: 12,6 MB → 6,2
+  MB en total; pesos actualitzats als enllaços. A les pàgines dels 3 PDF
+  sense arbre d'etiquetes, nota visible i aria dient que la versió
+  accessible és la mateixa pàgina.
+- **Hero de l'Escoleta amb 4 fotos reals** de l'àlbum d'estudi (1772×2362,
+  retall 3:4 des de dalt, 600/1200 px sense ampliar), en rotació diària a
+  les tres portades. Provat amb navegador a 1280 i 390 px.
+- **Pressupost de pes a CI** (`scripts/pes-pressupost.py` +
+  `pes-pressupost.yml`): cap fitxer servit per sobre del sostre del seu
+  tipus; excepcions amb motiu obligatori a `pes-excepcions.txt`.
+- **Panell d'analítica** a `/admin/analitica/`: workflow diari que baixa 28
+  dies de la GA4 Data API a `dades.json` i panell estàtic darrere la porta
+  de l'admin. Sense els dos secrets (pendents de l'Ana) no falla: explica
+  què falta.
+- **L'app de galeria** (Next.js) passa la mateixa revisió que /fotos/:
+  caselles amb teclat i botons d'icona amb nom. Type-check en verd.
+
+---
+
 ## 1.3.1 — 2026-08-25
 
 **Prova d'UX** sobre 16 pàgines × 2 amples amb navegador real, i els arreglos
