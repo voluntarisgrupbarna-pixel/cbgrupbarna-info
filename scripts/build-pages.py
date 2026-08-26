@@ -39,6 +39,19 @@ def clamp_desc(text, limit=160):
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def mida_imatge(ruta, per_defecte):
+    """Mida real d'una imatge, per escriure width/height honestos al marcatge.
+
+    Si Pillow no hi és o el fitxer encara no s'ha generat, torna el valor per
+    defecte: el marcatge segueix sortint i només hi perd precisió."""
+    try:
+        from PIL import Image
+        with Image.open(ruta) as im:
+            return im.size
+    except Exception:
+        return per_defecte
 SITE = "https://cbgrupbarna.info"
 WA_CLUB = "https://api.whatsapp.com/send?phone=+34698425153"
 WA_ESCOLETA = "https://wa.me/34646205526"
@@ -1847,8 +1860,11 @@ def build_article(a):
     ]}
     hero = ''
     if a.get("hero_alt"):
+        # Els atributs han de dir la mida real del fitxer: els heros es retallen a 4:3
+        # (el marc més alt que fa servir el CSS) i cada un acaba amb una mida diferent.
+        hw, hh = mida_imatge(ROOT / "img" / "blog" / f'{a["slug"]}-hero.webp', (1200, 900))
         hero = (f'\n    <div class="phead-media"><img src="/img/blog/{a["slug"]}-hero.webp" '
-                f'alt="{a["hero_alt"]}" fetchpriority="high" decoding="async" width="1200" height="675"></div>')
+                f'alt="{a["hero_alt"]}" fetchpriority="high" decoding="async" width="{hw}" height="{hh}"></div>')
     if a.get("related"):
         rel = ''.join(
             f'<a class="card" href="{href}"><div class="card-body"><span class="card-tag">{tag}</span>'
