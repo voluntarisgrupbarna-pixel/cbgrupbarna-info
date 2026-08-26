@@ -204,6 +204,7 @@ export function UploadZone({ eventId, userId, onUploadComplete }: UploadZoneProp
                 {f.status !== 'uploading' && (
                   <button
                     onClick={() => removeFile(i)}
+                    aria-label={`Treure ${f.file.name}`}
                     className="absolute top-1 right-1 bg-black/60 text-white/80 hover:text-white hover:bg-black/80 p-0.5 rounded transition-colors"
                   >
                     <X className="w-3.5 h-3.5" />

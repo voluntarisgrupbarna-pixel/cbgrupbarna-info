@@ -43,12 +43,14 @@ export function SearchBar({ placeholder = 'Cerca...', className = '' }: SearchBa
         value={value}
         onChange={e => setValue(e.target.value)}
         placeholder={placeholder}
+        aria-label={placeholder}
         className="input pl-10 pr-10"
       />
       {value && (
         <button
           type="button"
           onClick={handleClear}
+          aria-label="Esborrar la cerca"
           className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
         >
           <X className="w-4 h-4" />
