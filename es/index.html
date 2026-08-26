@@ -1067,7 +1067,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   <!-- ==== ESCOLETA · el que toca aquest mes ==== -->
   <section class="lead only-extensa" id="escoleta">
     <div class="lead-media">
-      <img src="/img/escoleta.webp" alt="Niña de la Escoleta del CB Grup Barna con la pelota y la mascota del club" fetchpriority="high" decoding="async">
+      <img class="rota-escoleta" src="/img/escoleta-h1.webp" alt="Niño o niña de la Escoleta del CB Grup Barna con la pelota y la mascota del club" fetchpriority="high" decoding="async">
       <span class="tagline">Inscripciones abiertas</span>
     </div>
     <div class="lead-body">
@@ -1100,7 +1100,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     </div>
     <div>
       <figure class="lg-ph">
-        <img src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="(max-width: 900px) 90vw, 440px" width="600" height="800" fetchpriority="high" decoding="async" alt="Niña de la Escoleta con la pelota y la mascota del club">
+        <img class="rota-escoleta" src="/img/escoleta-h1.webp" srcset="/img/escoleta-h1.webp 600w, /img/escoleta-h1@2x.webp 1200w" sizes="(max-width: 900px) 90vw, 440px" width="600" height="800" fetchpriority="high" decoding="async" alt="Niño o niña de la Escoleta del CB Grup Barna con la pelota y la mascota del club">
         <figcaption>Escoleta · La Nau del Clot</figcaption>
       </figure>
       <div class="lg-hero-btns">
@@ -1209,7 +1209,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     <div class="e-sech"><h2>El Barna por dentro</h2><em>Tres puertas</em></div>
     <div class="e-feat">
       <a class="e-art wide" href="/es/escoleta/" data-cta="extensa-escoleta">
-        <span class="im"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="(max-width:860px) 100vw, 40vw" width="600" height="800" loading="lazy" decoding="async" alt="Niña de la Escoleta del CB Grup Barna con la pelota"></span>
+        <span class="im"><img class="rota-escoleta" src="/img/escoleta-h1.webp" srcset="/img/escoleta-h1.webp 600w, /img/escoleta-h1@2x.webp 1200w" sizes="(max-width:860px) 100vw, 40vw" width="600" height="800" loading="lazy" decoding="async" alt="Niño o niña de la Escoleta del CB Grup Barna con la pelota y la mascota del club"></span>
         <span class="cap"><span class="kick">Escoleta</span>
           <h3>De 4 a 8 años: por donde empieza todo el mundo, sin saber nada</h3>
           <p>Equipos mixtos, tres grupos por edad y encuentros con otros clubes.</p></span>
@@ -2132,6 +2132,19 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     var b=document.getElementById('entrenBtn'+n),p=document.getElementById('entrenPanel'+n);
     if(!b||!p)return;
     b.addEventListener('click',function(){var o=p.hidden;p.hidden=!o;b.setAttribute('aria-expanded',String(o));});
+  });
+})();
+</script>
+<script>
+// Rotacio diaria de la foto de l'Escoleta: 4 variants reals del mateix album.
+(function () {
+  var n = new Date().getDate() % 4 + 1;
+  if (n === 1) return;
+  var b = 'escoleta-h' + n;
+  document.querySelectorAll('img.rota-escoleta').forEach(function (img) {
+    var pre = img.getAttribute('src').indexOf('/img/') === 0 ? '/img/' : 'img/';
+    if (img.hasAttribute('srcset')) img.srcset = pre + b + '.webp 600w, ' + pre + b + '@2x.webp 1200w';
+    img.src = pre + b + '.webp';
   });
 })();
 </script>
