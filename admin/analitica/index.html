@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Analítica · Administració · CB Grup Barna</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+  :root{--red:#E20613;--red-l:#FF3B41;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--mut:#A6A29C}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh}
+  nav{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav img{width:36px;height:36px;object-fit:contain}
+  nav .t{font-family:'Anton',sans-serif;font-size:1.15rem;letter-spacing:.06em}
+  nav .t span{color:var(--red-l)}
+  .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--mut)}
+  .who img{width:26px;height:26px;border-radius:50%}
+  .btn{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:.4rem .8rem;font-family:inherit;font-size:.75rem;cursor:pointer}
+  .btn:hover{border-color:var(--red-l);color:var(--txt)}
+  .wrap{max-width:960px;margin:0 auto;padding:2rem 1.2rem 4rem}
+  h1{font-family:'Anton',sans-serif;font-size:2.2rem;line-height:1;letter-spacing:.02em}
+  h1 span{color:var(--red-l)}
+  .sub{color:var(--mut);font-size:.9rem;margin:.5rem 0 2rem}
+  .sub a{color:var(--red-l)}
+  h2{font-family:'Anton',sans-serif;font-size:1.15rem;letter-spacing:.05em;color:var(--mut);border-bottom:1px solid var(--line);padding-bottom:.4rem;margin:2.4rem 0 1rem}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem}
+  .tile b{display:block;font-family:'Anton',sans-serif;font-size:1.9rem;font-weight:400}
+  .tile span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+  .fila{display:grid;grid-template-columns:minmax(120px,38%) 1fr auto;gap:.7rem;align-items:center;padding:.34rem 0;font-size:.85rem}
+  .fila .nom{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt)}
+  .fila .pista{background:rgba(255,255,255,.06);border-radius:4px;height:14px;overflow:hidden}
+  .fila .barra{height:100%;background:var(--red-l);border-radius:4px;min-width:2px}
+  .fila:not(.top) .barra{background:rgba(255,255,255,.35)}
+  .fila .val{font-variant-numeric:tabular-nums;color:var(--mut);min-width:3.5ch;text-align:right}
+  .fila.top .val{color:var(--txt)}
+  .dies{display:flex;align-items:flex-end;gap:3px;height:120px;margin-top:.6rem}
+  .dies .dia{flex:1;background:rgba(255,255,255,.28);border-radius:2px 2px 0 0;min-height:2px;position:relative}
+  .dies .dia.max{background:var(--red-l)}
+  .dies .dia.max i{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-style:normal;font-size:.68rem;color:var(--red-l);padding-bottom:2px;white-space:nowrap}
+  .peu-dies{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mut);margin-top:.35rem}
+  details{margin-top:.8rem;font-size:.8rem;color:var(--mut)}
+  details summary{cursor:pointer}
+  table{border-collapse:collapse;margin-top:.6rem;width:100%;font-variant-numeric:tabular-nums}
+  th,td{border-bottom:1px solid var(--line);padding:.3rem .5rem;text-align:left;font-weight:400}
+  th{color:var(--mut);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+  .avis{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--red-l);border-radius:10px;padding:1.2rem 1.4rem;line-height:1.6;font-size:.9rem}
+  .avis code{background:rgba(255,255,255,.08);padding:.1rem .35rem;border-radius:4px;font-size:.82rem}
+  .avis ol{margin:.7rem 0 0 1.2rem}
+  a{color:var(--red-l)}
+</style>
+<link rel="stylesheet" href="/css/a11y.css">
+</head>
+<body>
+<a class="skip" href="#contingut">Salta al contingut</a>
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna">
+  <div class="t">CB GRUP <span>BARNA</span> · ADMIN</div>
+  <div class="who" id="who"></div>
+</nav>
+<main id="contingut" tabindex="-1">
+<div class="wrap">
+  <h1>ANALÍTICA DE LA <span>WEB</span></h1>
+  <p class="sub" id="sub">Els últims 28 dies de cbgrupbarna.info, del panell de GA4 a aquesta pàgina, sense sortir de l'admin. <a href="/admin/">← Tornar a l'admin</a></p>
+  <div id="cos" aria-live="polite"><p style="color:var(--mut)">Carregant l'informe…</p></div>
+</div>
+</main>
+<script src="/scripts/admin-gate.js"></script>
+<script>
+CBGBGate.protect(function (user) {
+  var w = document.getElementById('who');
+  w.innerHTML = (user.picture ? '<img src="' + user.picture + '" alt="" loading="lazy" decoding="async">' : '')
+    + '<span>' + (user.email || '') + '</span>'
+    + '<button class="btn" onclick="CBGBGate.signOut()">Sortir</button>';
+  carrega();
+});
+
+function n(x) { return Number(x) || 0; }
+function fmt(x) { return n(x).toLocaleString('ca-ES'); }
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+
+// Barres horitzontals: el vermell marca NOMÉS la primera (la regla del
+// sistema: un sol accent, i el número sempre al costat, mai només el color).
+function barres(files, nomFn, valFn) {
+  var max = Math.max.apply(null, files.map(valFn).concat([1]));
+  return files.map(function (f, i) {
+    var v = valFn(f);
+    return '<div class="fila' + (i === 0 ? ' top' : '') + '">' +
+      '<span class="nom">' + esc(nomFn(f)) + '</span>' +
+      '<span class="pista"><span class="barra" style="width:' + (v / max * 100).toFixed(1) + '%"></span></span>' +
+      '<span class="val">' + fmt(v) + '</span></div>';
+  }).join('');
+}
+
+function carrega() {
+  fetch('dades.json', { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(pinta)
+    .catch(function () {
+      document.getElementById('cos').innerHTML =
+        '<div class="avis"><strong>Encara no hi ha informe.</strong> El workflow ' +
+        '<code>analitica.yml</code> el genera cada matinada, però necessita dos ' +
+        'secrets que només pot donar d’alta l’Ana (10 minuts, un sol cop):' +
+        '<ol><li>Crear un <em>service account</em> a Google Cloud i baixar-ne la clau JSON.</li>' +
+        '<li>Donar-li accés de lector («Viewer») a la propietat de GA4.</li>' +
+        '<li>Guardar <code>GA4_SERVICE_ACCOUNT_JSON</code> i <code>GA4_PROPERTY_ID</code> als secrets del repositori.</li></ol>' +
+        'Les instruccions pas a pas són a la capçalera de <code>.github/scripts/ga4-informe.py</code>.</div>';
+    });
+}
+
+function pinta(d) {
+  var dies = d.dies || [];
+  var totU = 0, totS = 0, totV = 0, maxI = 0, maxV = -1;
+  dies.forEach(function (f, i) {
+    totU += n(f.m[0]); totS += n(f.m[1]); totV += n(f.m[2]);
+    if (n(f.m[0]) > maxV) { maxV = n(f.m[0]); maxI = i; }
+  });
+  var u7 = dies.slice(-7).reduce(function (a, f) { return a + n(f.m[0]); }, 0);
+
+  var html = '<div class="tiles">' +
+    '<div class="tile"><b>' + fmt(totU) + '</b><span>usuaris · 28 dies</span></div>' +
+    '<div class="tile"><b>' + fmt(u7) + '</b><span>usuaris · últims 7</span></div>' +
+    '<div class="tile"><b>' + fmt(totS) + '</b><span>sessions</span></div>' +
+    '<div class="tile"><b>' + fmt(totV) + '</b><span>pàgines vistes</span></div>' +
+    '</div>';
+
+  // Tendència diària: alçada = usuaris; el dia més alt, en vermell i amb el número.
+  var maxD = Math.max.apply(null, dies.map(function (f) { return n(f.m[0]); }).concat([1]));
+  html += '<h2>Usuaris per dia</h2><div class="dies" role="img" aria-label="Usuaris per dia, 28 dies">';
+  dies.forEach(function (f, i) {
+    var v = n(f.m[0]);
+    html += '<div class="dia' + (i === maxI ? ' max' : '') + '" style="height:' + (v / maxD * 100).toFixed(1) + '%" title="' + esc(f.d[0]) + ': ' + fmt(v) + '">' +
+      (i === maxI ? '<i>' + fmt(v) + '</i>' : '') + '</div>';
+  });
+  html += '</div>';
+  if (dies.length) {
+    html += '<div class="peu-dies"><span>' + esc(dies[0].d[0]) + '</span><span>' + esc(dies[dies.length - 1].d[0]) + '</span></div>';
+    html += '<details><summary>Les xifres, dia a dia</summary><table><tr><th scope="col">Dia</th><th scope="col">Usuaris</th><th scope="col">Sessions</th><th scope="col">Vistes</th></tr>' +
+      dies.map(function (f) { return '<tr><td>' + esc(f.d[0]) + '</td><td>' + fmt(f.m[0]) + '</td><td>' + fmt(f.m[1]) + '</td><td>' + fmt(f.m[2]) + '</td></tr>'; }).join('') +
+      '</table></details>';
+  }
+
+  var pag = (d.pagines || []).slice(0, 15);
+  html += '<h2>Pàgines més vistes</h2>' + barres(pag,
+    function (f) { return f.d[0]; }, function (f) { return n(f.m[0]); });
+
+  // Idiomes, comptats pel prefix de la ruta: /es/, /en/ i la resta català.
+  var idio = { ca: 0, es: 0, en: 0 };
+  (d.pagines || []).forEach(function (f) {
+    var p = f.d[0] || '';
+    idio[p.indexOf('/es/') === 0 ? 'es' : p.indexOf('/en/') === 0 ? 'en' : 'ca'] += n(f.m[0]);
+  });
+  html += '<h2>Vistes per idioma (top pàgines)</h2>' + barres(
+    [{ k: 'Català', v: idio.ca }, { k: 'Castellà', v: idio.es }, { k: 'Anglès', v: idio.en }]
+      .sort(function (a, b) { return b.v - a.v; }),
+    function (f) { return f.k; }, function (f) { return f.v; });
+
+  html += '<h2>D’on ve la gent</h2>' + barres(d.fonts || [],
+    function (f) { return f.d[0]; }, function (f) { return n(f.m[0]); });
+
+  var ev = (d.events || []).filter(function (f) {
+    return !/^(page_view|session_start|first_visit|user_engagement|scroll)$/.test(f.d[0]);
+  }).slice(0, 12);
+  html += '<h2>Què s’hi fa (esdeveniments)</h2>' +
+    (ev.length ? barres(ev, function (f) { return f.d[0]; }, function (f) { return n(f.m[0]); })
+               : '<p style="color:var(--mut);font-size:.85rem">Cap esdeveniment més enllà dels automàtics.</p>');
+
+  html += '<h2>Dispositius</h2>' + barres(d.dispositius || [],
+    function (f) { return f.d[0]; }, function (f) { return n(f.m[0]); });
+
+  document.getElementById('sub').innerHTML = 'Els últims 28 dies de cbgrupbarna.info. Informe generat el ' +
+    esc((d.generat || '').replace('T', ' ').replace('Z', ' UTC')) + '. <a href="/admin/">← Tornar a l’admin</a>';
+  document.getElementById('cos').innerHTML = html;
+}
+</script>
+</body>
+</html>
