@@ -1,0 +1,26 @@
+name: pes · cap fitxer per sobre del sostre
+
+# El pressupost de pes de la web, vigilat per una maquina.
+#
+# La fase de rendiment del 23-24/08/2026 va aprimar el lloc (imatges
+# responsives, PDF comprimits, videos fora); aixo es el que impedeix que
+# torni a engreixar-se sense que ningu ho vegi: un original de camera de
+# 14 MB, un PDF sense comprimir o un video sencer no passen d'aqui.
+#
+# Els sostres per tipus i les carpetes excloses son a
+# scripts/pes-pressupost.py; les excepcions, amb motiu obligatori, a
+# pes-excepcions.txt.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  pes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pressupost de pes
+        run: python3 scripts/pes-pressupost.py
