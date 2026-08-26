@@ -631,7 +631,7 @@ function initials(nom){
 function hash(str){ let h = 0; for (let i=0;i<str.length;i++){ h = (h*31 + str.charCodeAt(i)) >>> 0; } return h; }
 function logoBadge(p, size){
   const s = size || 44;
-  if (p.logo) return `<div class="logo-badge" style="width:${s}px;height:${s}px;"><img src="/partners-mapa/${p.logo}" alt="Logo de ${p.nom}" loading="lazy"></div>`;
+  if (p.logo) return `<div class="logo-badge" style="width:${s}px;height:${s}px;"><img src="${p.logo}" alt="Logo de ${p.nom}" loading="lazy"></div>`;
   const bg = (hash(p.nom) % 2 === 0) ? RED : INK;
   return `<div class="logo-badge" style="width:${s}px;height:${s}px;background:${bg};">${initials(p.nom)}</div>`;
 }
@@ -707,18 +707,18 @@ function playReel(btn, reelId){
 }
 function cardHtml(p){
   return logoBadge(p) + `<div class="body"><b>${p.nom}</b><span class="addr">${p.addr}</span>` +
-    (p.ig ? `<a class="ig" href="/partners-mapa/${p.ig}" target="_blank" rel="noopener">${t('instagram')}</a>` : `<span style="color:rgba(16,16,14,.72);font-size:13px;">${p.ig_note || t('igPendingCard')}</span>`) +
-    `<a class="gmaps" href="/partners-mapa/${gmaps(p.addr)}" target="_blank" rel="noopener">${t('gmaps')}</a>` +
-    (p.fitxa ? `<a class="gmaps" href="/partners-mapa/${p.fitxa}">${t('fitxa')}</a>` : '') +
+    (p.ig ? `<a class="ig" href="${p.ig}" target="_blank" rel="noopener">${t('instagram')}</a>` : `<span style="color:rgba(16,16,14,.72);font-size:13px;">${p.ig_note || t('igPendingCard')}</span>`) +
+    `<a class="gmaps" href="${gmaps(p.addr)}" target="_blank" rel="noopener">${t('gmaps')}</a>` +
+    (p.fitxa ? `<a class="gmaps" href="${p.fitxa}">${t('fitxa')}</a>` : '') +
     (p.reel ? `<br><button class="ig-play" onclick="playReel(this,'${p.reel}')">▶ ${t('reel')}</button>` : '') + `</div>`;
 }
 function popupHtml(p){
-  const igLine = p.ig ? `<a href="/partners-mapa/${p.ig}" target="_blank" rel="noopener">${t('instagram')} →</a>` : (p.ig_note || '');
-  const fitxaLine = p.fitxa ? `<br><a href="/partners-mapa/${p.fitxa}">${t('fitxaPopup')}</a>` : '';
-  return `<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">${logoBadge(p,32)}<b>${p.nom}</b></div>${p.addr}<br>${igLine}<br><a href="/partners-mapa/${gmaps(p.addr)}" target="_blank" rel="noopener">${t('gmaps')}</a>${fitxaLine}`;
+  const igLine = p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">${t('instagram')} →</a>` : (p.ig_note || '');
+  const fitxaLine = p.fitxa ? `<br><a href="${p.fitxa}">${t('fitxaPopup')}</a>` : '';
+  return `<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">${logoBadge(p,32)}<b>${p.nom}</b></div>${p.addr}<br>${igLine}<br><a href="${gmaps(p.addr)}" target="_blank" rel="noopener">${t('gmaps')}</a>${fitxaLine}`;
 }
 function chipHtml(p){
-  return logoBadge(p, 30) + `<span>${p.nom}</span>` + (p.ig ? `<a href="/partners-mapa/${p.ig}" target="_blank" rel="noopener">${t('ig')}</a>` : `<span class="tag">${p.ig_note || t('igPendingChip')}</span>`) + (p.fitxa ? ` <a href="/partners-mapa/${p.fitxa}" style="margin-left:4px;">${t('fitxaChip')}</a>` : '');
+  return logoBadge(p, 30) + `<span>${p.nom}</span>` + (p.ig ? `<a href="${p.ig}" target="_blank" rel="noopener">${t('ig')}</a>` : `<span class="tag">${p.ig_note || t('igPendingChip')}</span>`) + (p.fitxa ? ` <a href="${p.fitxa}" style="margin-left:4px;">${t('fitxaChip')}</a>` : '');
 }
 
 const mapEntries = [];
