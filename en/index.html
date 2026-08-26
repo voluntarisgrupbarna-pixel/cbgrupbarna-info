@@ -469,10 +469,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; flex-shrink: 0; }
 .head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--display); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
-.head-burger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
-.head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
-.menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
-.menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
 @media (max-width: 2000px) { .head-side .head-nav a.opt { display: none; } }
 @media (max-width: 1080px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
@@ -480,15 +476,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 /* ==== SELECTOR D'IDIOMA ==== */
 
 /* Menú desplegat · el mapa complet del club */
-.menu { position: fixed; inset: 0; z-index: 105; background: var(--paper); padding: 126px clamp(20px, 6vw, 70px) 48px; transform: translateY(-101%); transition: transform 0.6s var(--ease); overflow-y: auto; visibility: hidden; }
-.menu.open { transform: none; visibility: visible; }
-.menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
 @media (min-width: 780px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
-.menu-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: var(--red); margin-bottom: 14px; }
-.menu-col a { display: flex; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 300; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.16em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
-.menu-col a:hover { color: var(--red); padding-left: 10px; }
-.menu-col a small { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.06em; text-transform: none; color: #6B6560; margin-left: auto; white-space: nowrap; }
-.menu-foot { margin-top: 34px; text-align: center; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; }
 
 /* ==== LEAD · Escoleta ==== */
 .lead { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 0; }
@@ -705,7 +693,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   .stars { gap: 6px; }
   .opi-card { padding: 22px 14px; }
   .btn { padding: 17px clamp(20px, 5vw, 32px); }
-  .head-burger { width: 44px; height: 44px; align-items: flex-start; justify-content: center; padding: 12px 9px; }
   .fab-wa { width: 56px; height: 56px; }
   .sg-action, .igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; }
 }
@@ -822,7 +809,10 @@ html[data-view="extensa"] .lg-hero.only-light, html[data-view="extensa"] .lg-str
 }
 
 /* El peu de la pila: la firma del barri, el diari i els idiomes. */
-.lg-strip { background: var(--ink); color: rgba(255,255,255,0.66); padding: 22px clamp(24px, 5vw, 72px); display: flex; justify-content: space-between; align-items: center; gap: 14px; font-size: 12px; flex-wrap: wrap; }
+/* Tanca la pila de portes i, sobretot, empeny cap al formulari: abans
+   duia el commutador d'idioma i semblava el peu de la pàgina, i tot el
+   que venia després (formulari inclòs) es llegia com a mort. */
+.lg-strip { background: var(--ink); color: rgba(255,255,255,0.66); padding: 16px clamp(24px, 5vw, 72px); display: flex; justify-content: space-between; align-items: center; gap: 14px; font-size: 12px; flex-wrap: wrap; }
 .lg-strip b { color: #fff; font-weight: 700; }
 .lg-strip > a { color: var(--red-light); font-weight: 700; }
 .lg-strip > a:hover { color: #fff; }
@@ -972,7 +962,6 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 <header class="head" id="top">
   <div class="head-in">
     <div class="head-side">
-      <button class="head-burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <nav class="head-nav" aria-label="Main navigation">
         <a href="/en/escoleta/">Escoleta</a>
         <a href="/en/campus/" class="opt">Camp</a>
@@ -1008,34 +997,6 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 </header>
 
 <!-- ==== MENÚ · el mapa complet del club ==== -->
-<nav class="menu" id="menu" aria-label="Full menu">
-  <div class="menu-grid">
-    <div class="menu-col">
-      <h3>This month</h3>
-      <a href="#info">Request information <small>form</small></a>
-      <a href="/en/escoleta/">Escoleta <small>ages 4 to 8</small></a>
-      <a href="/en/partits/">Calendar</a>
-      <a href="#seniors">The seniors</a>
-      <a href="/en/fotos/" data-cta="menu-galeria">Photo gallery</a>
-      <a href="#instagram">Instagram</a>
-      <a href="#opinions">Reviews and ratings</a>
-    </div>
-    <div class="menu-col">
-      <h3>The Barna</h3>
-      <a href="/en/campus/" data-cta="menu-campus">Basketball camp</a>
-      <a href="/en/3x3/" data-cta="menu-3x3">3x3 tournament</a>
-      <a href="/en/blog/" data-cta="menu-blog">Blog <small>guides</small></a>
-      <a href="/en/premsa/" data-cta="menu-premsa">Articles and press <small>Guia Clot</small></a>
-      <a href="/en/grup-barna-dades-oficials/" data-cta="menu-club">The club <small>official data</small></a>
-      <a href="/en/premidonaesport/" data-cta="menu-premi">Women and Sport Award</a>
-      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Club presentation</a>
-      <a href="/en/patrocinadors/" data-cta="menu-partners">Sponsors and partners</a>
-      <a href="/en/blog/" data-cta="menu-noticies">News</a>
-      <a href="#acces">All links</a>
-    </div>
-  </div>
-  <div class="menu-foot">@cbgrupbarna · +34 698 425 153 · El Clot, Barcelona</div>
-</nav>
 
 <a href="#contingut" class="skip">Skip to content</a>
 
@@ -1163,8 +1124,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   </section>
   <div class="lg-strip only-light">
     <span><b>#SOMCLOT</b> · La Nau del Clot, Sant Martí</span>
-    <a href="/en/blog/" data-cta="strip-diari">Observatori Barna →</a>
-    <span class="lg-strip-lang"><a href="/" lang="ca" hreflang="ca">CA</a><a href="/es/" lang="es" hreflang="es">ES</a><b>EN</b></span>
+    <a href="#info" data-cta="strip-info">Want information? <span aria-hidden="true">↓</span></a>
   </div>
 
   <!-- ==== SÈNIORS ==== -->
@@ -1403,7 +1363,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   </section>
 
   <!-- ==== ACCÉS RÀPID · tot el club a mà ==== -->
-  <section class="section band-soft" id="acces">
+  <section class="section band-soft only-extensa" id="acces">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow">Everything at hand</p>
@@ -1472,7 +1432,7 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 
 
   <!-- ==== PRESENTACIONS · documents institucionals del club ==== -->
-  <section class="section" id="presentacions" aria-labelledby="presentacions-title">
+  <section class="section only-extensa" id="presentacions" aria-labelledby="presentacions-title">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow red">What the Grup Barna is</p>
@@ -1733,43 +1693,6 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 </a>
 
 <script>
-  // ==== MENÚ ====
-  (function () {
-    var burger = document.getElementById('burger');
-    var menu = document.getElementById('menu');
-    if (!burger || !menu) return;
-    function toggle(open) {
-      menu.classList.toggle('open', open);
-      document.body.classList.toggle('menu-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      // El menú tapa tota la pantalla, però amb el tabulador se'n sortia cap
-      // a la pàgina de sota, que no es veu: qui navega amb teclat es perdia
-      // en enllaços invisibles. Ara el focus hi entra en obrir-lo, hi dona
-      // voltes mentre és obert, i torna al botó en tancar-lo.
-      if (open) {
-        var primer = menu.querySelector('a, button');
-        if (primer) primer.focus();
-      } else if (menu.contains(document.activeElement)) {
-        burger.focus();
-      }
-    }
-    burger.addEventListener('click', function () { toggle(!menu.classList.contains('open')); });
-    menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { toggle(false); return; }
-      if (e.key !== 'Tab' || !menu.classList.contains('open')) return;
-      var f = [].slice.call(menu.querySelectorAll('a[href], button:not([disabled])'))
-                .filter(function (el) { return el.offsetParent !== null; });
-      if (!f.length) return;
-      var primer = f[0], ultim = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === primer) { e.preventDefault(); ultim.focus(); }
-      else if (!e.shiftKey && document.activeElement === ultim) { e.preventDefault(); primer.focus(); }
-      else if (!menu.contains(document.activeElement)) { e.preventDefault(); primer.focus(); }
-    });
-  })();
-
   // ==== CTA tracking ====
   document.querySelectorAll('[data-cta]').forEach(function (el) {
     el.addEventListener('click', function () {

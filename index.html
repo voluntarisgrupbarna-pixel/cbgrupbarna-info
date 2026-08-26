@@ -55,7 +55,6 @@
 <meta name="apple-mobile-web-app-title" content="CB Grup Barna">
 <link rel="icon" type="image/png" sizes="192x192" href="logo.png">
 <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
-<link rel="shortcut icon" href="logo.png">
 <!-- Preload recursos crítics -->
 <link rel="preload" href="logo.png" as="image" fetchpriority="high">
 <!-- DNS prefetch per a recursos externs -->
@@ -798,7 +797,10 @@ html[data-view="extensa"] .lg-hero.only-light, html[data-view="extensa"] .lg-str
 }
 
 /* El peu de la pila: la firma del barri, el diari i els idiomes. */
-.lg-strip { background: var(--ink); color: rgba(255,255,255,0.66); padding: 22px clamp(24px, 5vw, 72px); display: flex; justify-content: space-between; align-items: center; gap: 14px; font-size: 12px; flex-wrap: wrap; }
+/* Tanca la pila de portes i, sobretot, empeny cap al formulari: abans
+   duia el commutador d'idioma i semblava el peu de la pàgina, i tot el
+   que venia després (formulari inclòs) es llegia com a mort. */
+.lg-strip { background: var(--ink); color: rgba(255,255,255,0.66); padding: 16px clamp(24px, 5vw, 72px); display: flex; justify-content: space-between; align-items: center; gap: 14px; font-size: 12px; flex-wrap: wrap; }
 .lg-strip b { color: #fff; font-weight: 700; }
 .lg-strip > a { color: var(--red-light); font-weight: 700; }
 .lg-strip > a:hover { color: #fff; }
@@ -918,10 +920,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 /* Des que el mapa ≡ és a la capçalera (estètica definitiva), el burger vell
    duplicava el gest a dos dits de distància: se'n va. El menú antic queda al
    marcatge per si es recupera. */
-.head-burger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
-.head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
-.menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
-.menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
 /* Franja estreta: es retiren primer els enllaços secundaris (.opt), que per això
    estan marcats, abans d'amagar tot el menú i deixar només el botó de menú. */
 @media (max-width: 2000px) { .head-side .head-nav a.opt { display: none; } }
@@ -929,20 +927,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
 
 /* Menú desplegat · el mapa complet del club */
-.menu { position: fixed; inset: 0; z-index: 105; background: var(--paper); padding: 126px clamp(20px, 6vw, 70px) 48px; transform: translateY(-101%); transition: transform 0.6s var(--ease); overflow-y: auto; visibility: hidden; }
-.menu.open { transform: none; visibility: visible; }
-.menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
 @media (min-width: 780px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1100px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
-.menu-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: var(--red); margin-bottom: 14px; }
-.menu-col a { display: flex; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 400; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.02em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
-.menu-col a:hover { color: var(--red); padding-left: 10px; }
-.menu-col a small { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.06em; text-transform: none; color: #6B6560; margin-left: auto; white-space: nowrap; }
 /* Zona admin: hi ha de ser al menú per poder-hi arribar, però no competeix
    amb els destins del club. La protegeix admin-gate.js amb contrasenya. */
-.menu-col a.menu-admin { color: #6B6560; }
-.menu-col a.menu-admin:hover { color: var(--red); }
-.menu-foot { margin-top: 34px; text-align: center; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; }
 
 /* ==== LEAD · Escoleta ==== */
 .lead { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 0; }
@@ -1182,7 +1170,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   .stars { gap: 6px; }
   .opi-card { padding: 22px 14px; }
   .btn { padding: 17px clamp(20px, 5vw, 32px); }
-  .head-burger { width: 44px; height: 44px; align-items: flex-start; justify-content: center; padding: 12px 9px; }
   .fab-wa { width: 56px; height: 56px; }
   .sg-action, .igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; }
 }
@@ -1266,7 +1253,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 <header class="head" id="top">
   <div class="head-in">
     <div class="head-side">
-      <button class="head-burger" id="burger" aria-label="Obrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <nav class="head-nav" aria-label="Navegació principal">
         <a href="/partits/equips/">Equips</a>
         <a href="/club/">Club</a>
@@ -1312,59 +1298,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 </header>
 
 <!-- ==== MENÚ · el mapa complet del club ==== -->
-<nav class="menu" id="menu" aria-label="Menú complet">
-  <div class="menu-grid">
-    <div class="menu-col">
-      <h3>Juga al Barna</h3>
-      <a href="/escoleta/" data-cta="menu-escoleta">Escoleta <small>4 a 8 anys</small></a>
-      <a href="/basquet-formatiu/" data-cta="menu-formatiu">Bàsquet formatiu <small>quina edat té?</small></a>
-      <a href="/portes-obertes/" data-cta="menu-portes-obertes">Portes obertes <small>tot el setembre, vine a provar</small></a>
-      <a href="/femeni/" data-cta="menu-femeni">Bàsquet femení <small>8 equips</small></a>
-      <a href="/magics/" data-cta="menu-magics">Barna Màgics <small>bàsquet inclusiu</small></a>
-      <a href="/faq/" data-cta="menu-faq">Preguntes freqüents</a>
-    </div>
-    <div class="menu-col">
-      <h3>Equips i temporada</h3>
-      <a href="/partits/equips/" data-cta="menu-equips">Equips <small>sènior, júnior, cadet…</small></a>
-      <a href="/partits/" data-cta="menu-partits">Calendari</a>
-      <a href="/partits/calendaris/" data-cta="menu-calendaris">Calendari <small>per equip</small></a>
-      <a href="/fotos/" data-cta="menu-galeria">Galeria <small>fotos de temporada</small></a>
-    </div>
-    <div class="menu-col">
-      <h3>Activitats</h3>
-      <a href="/campus/" data-cta="menu-campus">Campus de bàsquet</a>
-      <a href="/tecnificacio-basquet-barcelona/" data-cta="menu-tecnificacio">Tecnificació <small>amb Time Chamber</small></a>
-      <a href="/3x3/" data-cta="menu-3x3">Torneig 3x3</a>
-      <a href="/cistella-petita/" data-cta="menu-cistella">Cistella Petita <small>3 a 8 anys</small></a>
-    </div>
-    <div class="menu-col">
-      <h3>El Club</h3>
-      <a href="/club/" data-cta="menu-club">Qui som</a>
-      <a href="/historia/" data-cta="menu-historia">Història <small>des de 1965</small></a>
-      <a href="/organigrama/" data-cta="menu-organigrama">Organigrama <small>junta directiva</small></a>
-      <a href="/instal-lacions/" data-cta="menu-installacions">Instal·lacions</a>
-      <a href="/posicionament/" data-cta="menu-posicionament">Posicionament <small>vs. Barça, Penya…</small></a>
-      <a href="/grup-barna-dades-oficials/" data-cta="menu-dades">Dades oficials</a>
-      <a href="/proteccio-menor/" data-cta="menu-proteccio">Protecció del menor</a>
-      <a href="/documents/" data-cta="menu-documents">Documents</a>
-    </div>
-    <div class="menu-col">
-      <h3>Actualitat</h3>
-      <a href="/blog/" data-cta="menu-blog">Coneixement Barna <small>formació, famílies, dades…</small></a>
-      <a href="/premsa/" data-cta="menu-premsa">Premsa <small>arxiu 1988–2026</small></a>
-      <a href="/premidonaesport/" data-cta="menu-premi">Premi Dona i Esport</a>
-    </div>
-    <div class="menu-col">
-      <h3>Empreses</h3>
-      <a href="/empreses/" data-cta="menu-empreses">Empreses <small>per què invertir al Barna</small></a>
-      <a href="/patrocinadors/" data-cta="menu-partners">Partners <small>qui hi és avui</small></a>
-      <a href="/partners-mapa/" data-cta="menu-partners-mapa">Mapa de partners</a>
-      <a href="/dossier-patrocinis/" data-cta="menu-dossier">Dossier comercial</a>
-      <a href="/admin/" class="menu-admin" rel="nofollow" data-cta="menu-admin">Zona admin <small>amb contrasenya</small></a>
-    </div>
-  </div>
-  <div class="menu-foot">@cbgrupbarna · +34 698 425 153 · El Clot, Barcelona</div>
-</nav>
 
 <a href="#contingut" class="skip">Saltar al contingut</a>
 
@@ -1503,8 +1436,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   </section>
   <div class="lg-strip only-light">
     <span><b>#SOMCLOT</b> · La Nau del Clot, Sant Martí</span>
-    <a href="/blog/" data-cta="strip-diari">Observatori Barna →</a>
-    <span class="lg-strip-lang"><b>CA</b><a href="/es/" lang="es" hreflang="es">ES</a><a href="/en/" lang="en" hreflang="en">EN</a></span>
+    <a href="#info" data-cta="strip-info">Vols informació? <span aria-hidden="true">↓</span></a>
   </div>
 
   <!-- ==== CALENDARI DEL BARNA · només a l'extensa, com la jornada d'un diari ==== -->
@@ -1740,7 +1672,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   </section>
 
   <!-- ==== ACCÉS RÀPID · tot el club a mà ==== -->
-  <section class="section band-soft" id="acces">
+  <section class="section band-soft only-extensa" id="acces">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow">Tot a mà</p>
@@ -1823,7 +1755,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   </section>
 
   <!-- ==== PRESENTACIONS · documents institucionals del club ==== -->
-  <section class="section" id="presentacions" aria-labelledby="presentacions-title">
+  <section class="section only-extensa" id="presentacions" aria-labelledby="presentacions-title">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow red">Què és el Grup Barna</p>
@@ -2086,43 +2018,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 </a>
 
 <script>
-  // ==== MENÚ ====
-  (function () {
-    var burger = document.getElementById('burger');
-    var menu = document.getElementById('menu');
-    if (!burger || !menu) return;
-    function toggle(open) {
-      menu.classList.toggle('open', open);
-      document.body.classList.toggle('menu-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      burger.setAttribute('aria-label', open ? 'Tancar el menú' : 'Obrir el menú');
-      // El menú tapa tota la pantalla, però amb el tabulador se'n sortia cap
-      // a la pàgina de sota, que no es veu: qui navega amb teclat es perdia
-      // en enllaços invisibles. Ara el focus hi entra en obrir-lo, hi dona
-      // voltes mentre és obert, i torna al botó en tancar-lo.
-      if (open) {
-        var primer = menu.querySelector('a, button');
-        if (primer) primer.focus();
-      } else if (menu.contains(document.activeElement)) {
-        burger.focus();
-      }
-    }
-    burger.addEventListener('click', function () { toggle(!menu.classList.contains('open')); });
-    menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { toggle(false); return; }
-      if (e.key !== 'Tab' || !menu.classList.contains('open')) return;
-      var f = [].slice.call(menu.querySelectorAll('a[href], button:not([disabled])'))
-                .filter(function (el) { return el.offsetParent !== null; });
-      if (!f.length) return;
-      var primer = f[0], ultim = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === primer) { e.preventDefault(); ultim.focus(); }
-      else if (!e.shiftKey && document.activeElement === ultim) { e.preventDefault(); primer.focus(); }
-      else if (!menu.contains(document.activeElement)) { e.preventDefault(); primer.focus(); }
-    });
-  })();
-
   // ==== LA PORTADA · data real, no escrita a mà ====
   (function () {
     var el = document.getElementById('e-date');
