@@ -642,6 +642,17 @@ img { max-width: 100%; height: auto; display: block; }
   .franja-ph--alta { height: 280px; }
 }
 
+/* A partir de l'escriptori, el títol i la frase deixen de compartir columna:
+   la franja passa a quatre columnes de diari (foto · títol · frase · porta) i
+   el text ocupa l'amplada que abans quedava buida entre el títol i l'enllaç.
+   `display: contents` treu el contenidor del mig sense tocar el marcatge. */
+@media (min-width: 1100px) {
+  .franja { grid-template-columns: 230px minmax(0, 0.8fr) minmax(0, 1fr) auto; }
+  .franja:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr) auto; }
+  .franja-tx { display: contents; }
+  .franja-s { margin-top: 0; max-width: none; }
+}
+
 .franja--red { background: var(--red); }
 .franja--red { border-bottom-color: rgba(255,255,255,0.25); }
 .franja--red .franja-t { color: #fff; }
@@ -817,10 +828,17 @@ html[data-view="extensa"] .lg-hero.only-light, html[data-view="extensa"] .lg-str
 .view-toggle:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 .view-toggle .vt-ic { width: 14px; height: 14px; display: block; flex-shrink: 0; }
 .view-toggle .vt-ic svg { width: 100%; height: 100%; display: block; fill: currentColor; }
-.view-toggle .vt-ic .vt-extensa { display: none; }
-html[data-view="extensa"] .view-toggle .vt-ic .vt-franges { display: none; }
-html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
-@media (max-width: 620px) { .view-toggle { padding: 7px 10px; font-size: 8.5px; gap: 6px; } .view-toggle span:last-child { display: none; } }
+/* El botó dibuixa la vista on PORTA, no la que ja s'està veient: en franges
+   ensenya els blocs de l'extensa. Si dibuixés la vista actual, en franges
+   serien tres barres dins d'una caixa —el mateix que el burger del costat
+   esquerre— i el dit va al botó que no toca. */
+.view-toggle .vt-ic .vt-franges { display: none; }
+.view-toggle .vt-ic .vt-extensa { display: block; }
+html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: none; }
+html[data-view="extensa"] .view-toggle .vt-ic .vt-franges { display: block; }
+/* L'etiqueta es queda també al mòbil: és el que acaba de separar aquest botó
+   del burger. Només s'escurça la caixa. */
+@media (max-width: 620px) { .view-toggle { padding: 7px 9px; font-size: 8px; gap: 5px; letter-spacing: 0.1em; } }
 
 /* Selector d'idioma, sempre visible al costat del commutador de vista. */
 @media (max-width: 480px) {.head-brand span { display: none; } }
@@ -1525,7 +1543,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
           <h3>La primera plantilla encara la temporada 26·27</h3>
           <p>On acaba el camí que comença a l'Escoleta.</p></span>
       </a>
-      <a class="e-art" href="/premidonaesport/" data-cta="extensa-femeni">
+      <a class="e-art" href="/femeni/" data-cta="extensa-femeni">
         <span class="im"><img src="img/team-action.webp" srcset="img/team-action.webp 375w, img/team-action@2x.webp 750w" sizes="(max-width:860px) 100vw, 25vw" width="375" height="500" loading="lazy" decoding="async" alt="Jugadores del CB Grup Barna amb l'equipació del club"></span>
         <span class="cap"><span class="kick">Femení</span>
           <h3>El projecte femení, equip a equip</h3>
@@ -2068,8 +2086,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     function efectiu() { return view || 'light'; }
     function pinta() {
       var actual = efectiu();
-      lbl.textContent = actual === 'light' ? 'Franges' : 'Extensa';
-      btn.setAttribute('aria-label', 'Ara veus la versió ' + lbl.textContent.toLowerCase() + '. Toca per canviar a l\'altra.');
+      // El botó anuncia on porta, no on ets: així el dibuix, l'etiqueta i el
+      // que passa en tocar-lo diuen tots tres la mateixa cosa.
+      var desti = actual === 'light' ? 'Extensa' : 'Franges';
+      lbl.textContent = desti;
+      btn.setAttribute('aria-label', 'Canvia a la versió ' + desti.toLowerCase() + ' de la portada.');
       if (view) root.setAttribute('data-view', view);
       else root.removeAttribute('data-view');
     }

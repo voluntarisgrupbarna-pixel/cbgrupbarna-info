@@ -142,9 +142,28 @@ del mínim. Per a vídeo és correcte; per a web, no.
 
 Sobre fons fosc el vermell s'aclareix a `#FF3B41`, que hi recupera contrast.
 
+### El groc de l'equipació
+
+| Token | Valor | Ús |
+|---|---|---|
+| `--yel` | `#EEFF00` | Accent puntual, **només sobre tinta o sobre `--red-dark`** |
+
+El groc **sí que és del club**: és el de l'equipació, i per això té token propi
+a `css/barna.css` i a la portada. Ara bé, no és un segon accent que competeixi
+amb el vermell: és un senyal escàs, i té una regla que no es negocia.
+
+**Només sobre fons fosc.** Sobre paper blanc el groc no arriba ni de lluny al
+mínim llegible; sobre tinta i sobre el vermell fosc, sí. Els dos llocs on surt
+avui són la paraula destacada de la barra de novetats i el botó
+`.btn.red.yel` — i aquest fa servir `--red-dark`, no `--red`, precisament per
+això: sobre `--red` el groc es queda en 4,44:1 i el text del botó fa 10 px, o
+sigui que li cal el 4,5:1 sencer; sobre `--red-dark` puja a 7,04:1.
+
+**Si en vols un tercer lloc, mesura'l primer.** I mai per a text llarg: el groc
+subratlla una paraula, no escriu un paràgraf.
+
 ### El que no hi va
-Groc, verd, blau i taronja **no són colors de marca**. Excepcions, i només
-aquestes:
+Verd, blau i taronja **no són colors de marca**. Excepcions, i només aquestes:
 - **Semàntics de resultat**: `--win` i `--loss` a `/partits/`. Serveixen per dir
   si un partit s'ha guanyat o s'ha perdut, mai per decorar.
 - **Marques d'altri**: Instagram, WhatsApp i TikTok porten el seu color.

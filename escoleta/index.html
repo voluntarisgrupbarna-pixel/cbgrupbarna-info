@@ -68,7 +68,10 @@ body[data-active="es"] [data-lang="ca"]{display:none !important}
 .brandmark{font-family:var(--display);font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:var(--ink)}
 .brandmark span{color:var(--red-dark)}
 @media(max-width:400px){.brandmark .bm-sub{display:none}}
-.site-nav{display:flex;align-items:center;gap:16px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.site-nav{display:flex;align-items:center;gap:16px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;
+  padding-right:26px;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent 100%);
+          mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent 100%)}
 .site-nav::-webkit-scrollbar{display:none}
 .site-nav a{font-family:var(--body-f);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;text-decoration:none;transition:color .15s}
 .site-nav a:hover{color:var(--ink)}
@@ -988,5 +991,6 @@ document.addEventListener('click',function(e){
 <script src="/js/descarrega.js" defer></script>
 <script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
+<script src="/js/index-pagina.js" defer></script>
 </body>
 </html>

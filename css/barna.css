@@ -102,6 +102,19 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
    560px es retira i el menú recupera l'espai. .head-nav necessita min-width:0
    perquè un fill flexible amb overflow-x pugui encongir de veritat. */
 @media (max-width: 1080px) { .head-nav { min-width: 0; } }
+
+/* El menú que es desplaça de costat no ho deia enlloc: l'últim enllaç quedava
+   tallat a mitja lletra («CALENDAR») i semblava una errada, no un menú amb
+   més coses. El degradat del final és el que ho explica sense afegir-hi res:
+   la lletra s'apaga en comptes de trencar-se. El padding és perquè l'últim
+   enllaç pugui arribar a sortir del degradat quan s'hi desplaça. */
+@media (max-width: 1080px) {
+  .head-nav {
+    padding-right: 26px;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 30px), transparent 100%);
+            mask-image: linear-gradient(90deg, #000 calc(100% - 30px), transparent 100%);
+  }
+}
 @media (max-width: 560px) { .head-brand span { display: none; } }
 
 /* ==== SELECTOR D'IDIOMA ====
@@ -130,6 +143,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .btn.ghost { background: transparent; color: var(--ink); }
 .btn.ghost:hover { background: var(--ink); color: #fff; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* Quan una capçalera té més d'una porta secundària, els botons deixen de
+   distingir-se entre ells i el vermell ja no mana. A partir del tercer, els
+   enllaços baixen aquí: segueixen sent la mateixa llista, però en pes de text,
+   i el botó vermell torna a ser l'única crida. */
+.head-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; margin-top: 16px; font-size: 13.5px; }
+.head-links a { color: var(--red-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.head-links a:hover { color: var(--ink); }
 @media (max-width: 560px) { .btn-row .btn { flex: 1 1 100%; } }
 
 /* ==== FIL D'ARIADNA ==== */

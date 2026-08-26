@@ -106,7 +106,9 @@
   .fem-hero-media { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: var(--paper-2); }
   .fem-hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   .fem-hero h1 { font-size: clamp(26px, 4.6vw, 50px); margin: 16px 0 0; max-width: 16ch; }
-  .fem-hero h1 em { font-style: normal; color: var(--red); }
+  /* El tros vermell no es parteix mai: si «de veritat» cau a cavall de dues
+     línies, l'èmfasi deixa de llegir-se com una unitat i sembla una errata. */
+  .fem-hero h1 em { font-style: normal; color: var(--red); white-space: nowrap; }
   .fem-hero .lede { margin-top: 22px; font-size: clamp(14px, 1.6vw, 16.5px); color: var(--ink-2); max-width: 52ch; }
   .fem-hero .btn-row { margin-top: 30px; }
 
