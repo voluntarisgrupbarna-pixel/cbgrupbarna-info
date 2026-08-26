@@ -5,152 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Escola de Bàsquet a Barcelona · Escoleta CB Grup Barna (4-8 anys)</title>
 <link rel="preload" href="/fonts/anton-400-2686.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/cerca.css">
 <style>
-/* Tipografies auto-allotjades (Anton + Inter). Sense CDN de Google:
-   evita transferir IPs de les famílies a tercers (criteri RGPD del club). */
-@font-face {
-  font-family: 'Anton';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/anton-400-2686.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Anton';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/anton-400-1354.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/inter-400-4592.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/inter-400-8117.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(/fonts/inter-400-4592.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(/fonts/inter-400-8117.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(/fonts/inter-400-4592.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(/fonts/inter-400-8117.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 /* ===================================================================
-   CB GRUP BARNA · tokens de marca (sistema-visual-cbgb)
-   Vermell Barna #E20613 · Tinta #10100E · Blanc/crema #FFFFFF
-   Display: Anton · Cos: Inter · NOMÉS 3 COLORS. Sense degradats decoratius.
+   CB GRUP BARNA · /escoleta/ sobre el sistema visual compartit
+   («Estètica definitiva», 25-08-2026): paper blanc, tinta negra i el
+   vermell de l'escut com a únic accent. El hero és l'única superfície
+   de tinta, com el masthead de la portada; Portes Obertes i el tanca-
+   ment són superfícies vermelles, com les franges. Tipografia i tokens
+   idèntics a css/barna.css.
    =================================================================== */
 :root{
   --red:#E20613;
-  /* Aquesta pagina va sobre fons fosc: el vermell de l'escut hi dona 3,87:1 i
-     no arriba al minim per a text petit. El sistema el preveu aclarit a
-     #FF3B41 (5,4:1 sobre tinta). Els fons plens segueixen amb --red. */
-  --red-light:#FF3B41;
-  --black:#10100E;
-  --ink:#171B21;
-  --paper:#FFFFFF;
-  --grey:#8A8F98;
-  --line:rgba(255,255,255,.14);
+  --red-dark:#A8040E;   /* text vermell sobre fons clar (7,81:1) */
+  --red-light:#FF3B41;  /* text vermell sobre tinta (5,4:1) */
+  --ink:#10100E;
+  --ink-2:#46433f;
+  --muted:#6B6560;
+  --paper:#ffffff;
+  --line:rgba(16,16,14,.14);
+  --line-inv:rgba(255,255,255,.16);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
+  --body-f:'Inter',system-ui,-apple-system,sans-serif;
   --maxw:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  background:var(--black);color:var(--paper);
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--paper);color:var(--ink);
+  font-family:var(--body-f);
   font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding-bottom:66px;
 }
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 18px;z-index:200}
+.skip:focus{left:0}
 
-/* ---------- PORTES OBERTES ---------- */
-.po{background:var(--red);color:#fff;border-top:none;padding:64px 0 68px}
-.po .kicker{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
-.po h2{font-family:'Anton',sans-serif;font-size:clamp(34px,6vw,60px);line-height:1.02;text-transform:uppercase;margin-bottom:16px}
-.po p{font-size:18px;max-width:640px;opacity:.95;margin-bottom:26px}
-.po .btn{background:#fff;color:var(--red)}
-.po .btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.8)}
-.po .cta{display:flex;gap:12px;flex-wrap:wrap}
-.po .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28)}
-.po .facts div{font-size:15px}
-.po .facts b{display:block;font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.04em;text-transform:uppercase}
-.pobar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--red);
-  display:flex;align-items:center;justify-content:center;gap:14px;padding:11px 16px;flex-wrap:wrap;
-  box-shadow:0 -8px 24px rgba(0,0,0,.35)}
-.pobar span{font-family:'Anton',sans-serif;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
-.pobar a{background:#fff;color:var(--red);text-decoration:none;font-family:'Anton',sans-serif;font-size:13px;
-  letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px}
-body{padding-bottom:66px}
-@media(max-width:520px){.pobar span{font-size:12px}.pobar{gap:10px}}
+/* Bilingüe antic: l'idioma inactiu queda ocult fins que es netegi el marcatge. */
+body[data-active="ca"] [data-lang="es"],
+body[data-active="es"] [data-lang="ca"]{display:none !important}
 
-/* ---------- LANG SWITCH + SITE NAV (una sola barra fixa) ---------- */
+/* ---------- BARRA SUPERIOR · com la capçalera de la resta del web ---------- */
 .langbar{
   position:fixed;top:0;left:0;right:0;z-index:60;
-  background:rgba(16,16,14,.88);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);color:var(--ink);
 }
 .langbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;height:56px}
-/* Selector d'idioma, com a la resta del web (tres adreces, no un commutador
-   de text). Caselles de 24px mínim perquè un dit hi arribi. */
-.lang-switch{display:flex;align-items:center;gap:2px;font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;flex-shrink:0}
-.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;opacity:.55;color:var(--paper);text-decoration:none;transition:opacity .3s,color .3s}
-.lang-switch a.active{opacity:1;color:var(--red-light)}
-.lang-switch a:hover,.lang-switch a:focus-visible{opacity:1;color:var(--red-light)}
-.lang-switch .sep{opacity:.25;pointer-events:none}
-.brandmark{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:inherit}
-.brandmark span{color:var(--red-light)}
+.lang-switch{display:flex;align-items:center;gap:2px;font-family:var(--body-f);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;flex-shrink:0}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;color:var(--muted);text-decoration:none;transition:color .3s}
+.lang-switch a.active{color:var(--red-dark)}
+.lang-switch a:hover,.lang-switch a:focus-visible{color:var(--red-dark)}
+.lang-switch .sep{opacity:.4;pointer-events:none}
+.brandmark{font-family:var(--display);font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:var(--ink)}
+.brandmark span{color:var(--red-dark)}
 @media(max-width:400px){.brandmark .bm-sub{display:none}}
 .site-nav{display:flex;align-items:center;gap:16px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 .site-nav::-webkit-scrollbar{display:none}
-.site-nav a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);white-space:nowrap;text-decoration:none;transition:color .15s}
-.site-nav a:hover{color:#fff}
+.site-nav a{font-family:var(--body-f);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;text-decoration:none;transition:color .15s}
+.site-nav a:hover{color:var(--ink)}
 @media(max-width:1080px){.site-nav a.opt{display:none}}
-/* Per sota de 640 px la barra s'amagava del tot i no hi havia cap hamburguesa
-   que la substituís: al mòbil aquesta pàgina es quedava sense navegació. Com
-   que ja és una barra amb desplaçament horitzontal, només li cal una segona
-   línia per a ella sola. Hi tornen també els enllaços .opt, que amb el
-   desplaçament hi caben. */
 @media(max-width:640px){
   .langbar .wrap{flex-wrap:wrap;height:auto;gap:0 14px;padding-top:11px;padding-bottom:9px}
   .site-nav{order:3;flex-basis:100%;gap:14px;padding-top:9px;margin-top:9px;
@@ -158,24 +80,11 @@ body{padding-bottom:66px}
   .site-nav a.opt{display:inline}
   .hero{padding-top:96px}
 }
-.langs{display:flex;gap:4px;flex-shrink:0}
-.langs button{
-  font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;
-  background:transparent;color:var(--grey);border:1px solid var(--line);
-  padding:7px 13px;border-radius:2px;cursor:pointer;transition:.15s;
-}
-.langs button:hover{color:#fff;border-color:rgba(255,255,255,.4)}
-.langs button[aria-pressed="true"]{background:var(--red);color:#fff;border-color:var(--red)}
 
-/* Bilingue: nomes s'amaga l'idioma inactiu, aixi cada element conserva
-   el seu display natural (block, inline-block, grid...). */
-body[data-active="ca"] [data-lang="es"],
-body[data-active="es"] [data-lang="ca"]{display:none !important}
-
-/* ---------- HERO ---------- */
-.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;padding-top:56px;overflow:hidden}
+/* ---------- HERO · l'única superfície de tinta de la pàgina ---------- */
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;padding-top:56px;overflow:hidden;background:var(--ink);color:#fff}
 .hero-img{position:absolute;inset:0}
-/* Tractament de foto de marca: B/N alt contrast, la foto és textura, no protagonista */
+/* Foto d'arxiu en B/N: textura, no protagonista. */
 .hero-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.22) brightness(.78) blur(.5px)}
 .hero-img::after{
   content:"";position:absolute;inset:0;
@@ -186,55 +95,76 @@ body[data-active="es"] [data-lang="ca"]{display:none !important}
 .hero .wrap{position:relative;z-index:2;padding-bottom:72px;padding-top:120px}
 .eyebrow{
   display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:#fff;background:var(--red);padding:7px 13px;border-radius:2px;margin-bottom:26px;
+  color:#fff;background:var(--red);padding:7px 13px;margin-bottom:26px;
 }
 h1,.h1-alt{
-  font-family:'Anton',sans-serif;font-weight:400;
-  font-size:clamp(46px,8.6vw,118px);line-height:.88;letter-spacing:-.02em;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(46px,8.6vw,108px);line-height:.9;letter-spacing:.01em;
   text-transform:uppercase;
 }
 h1 em,.h1-alt em{font-style:normal;color:var(--red-light)}
 .subhook{
-  display:inline-block;margin-top:24px;font-family:'Anton',sans-serif;text-transform:uppercase;
-  font-size:clamp(19px,2.6vw,30px);letter-spacing:.01em;color:var(--paper);line-height:1.15;
+  display:inline-block;margin-top:24px;font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(19px,2.6vw,30px);letter-spacing:.01em;color:#fff;line-height:1.15;
   background:rgba(16,16,14,.86);border-left:5px solid var(--red);
-  padding:11px 20px 12px;border-radius:2px;
+  padding:11px 20px 12px;
 }
-.hero p{max-width:620px;margin-top:26px;font-size:19px;color:#CFCBC4}
-.hero p.nota-molts{font-size:16px;color:#A9A5A0;border-left:3px solid rgba(226,6,19,.65);padding-left:14px;margin-top:20px}
-.hero .credit{margin-top:20px;font-size:12px;color:var(--grey);letter-spacing:.04em}
+.hero p{max-width:620px;margin-top:26px;font-size:19px;color:rgba(255,255,255,.82)}
+.hero p.nota-molts{font-size:16px;color:rgba(255,255,255,.66);border-left:3px solid rgba(255,59,65,.75);padding-left:14px;margin-top:20px}
+.hero .credit{margin-top:20px;font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.04em}
 
-/* ---------- SECTIONS ---------- */
-section{padding:88px 0;border-top:1px solid var(--line)}
+/* ---------- PORTES OBERTES · superfície vermella ---------- */
+.po{background:var(--red);color:#fff;border-top:none;padding:64px 0 68px}
+.po .kicker{font-family:var(--display);font-size:13px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+.po h2{color:#fff;margin-bottom:16px}
+.po p{font-size:18px;max-width:640px;opacity:.95;margin-bottom:26px}
+.po .btn{background:#fff;color:var(--red-dark)}
+.po .btn:hover{background:var(--ink);color:#fff}
+.po .btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.8)}
+.po .btn.ghost:hover{background:#fff;color:var(--ink)}
+.po .cta{display:flex;gap:12px;flex-wrap:wrap}
+.po .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28)}
+.po .facts div{font-size:15px}
+.po .facts b{display:block;font-family:var(--display);font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.pobar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--red);
+  display:flex;align-items:center;justify-content:center;gap:14px;padding:11px 16px;flex-wrap:wrap;
+  box-shadow:0 -8px 24px rgba(16,16,14,.25)}
+.pobar span{font-family:var(--display);font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.pobar a{background:#fff;color:var(--red-dark);text-decoration:none;font-family:var(--display);font-size:13px;
+  letter-spacing:.1em;text-transform:uppercase;padding:10px 18px}
+@media(max-width:520px){.pobar span{font-size:12px}.pobar{gap:10px}}
+
+/* ---------- SECCIONS · paper blanc, filet fi, com les interiors ---------- */
+section,.section{padding:88px 0;border-top:1px solid var(--line)}
 .sec-num{
-  font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.2em;
-  color:var(--red-light);text-transform:uppercase;margin-bottom:14px;
+  font-family:var(--display);font-size:13px;letter-spacing:.2em;
+  color:var(--red-dark);text-transform:uppercase;margin-bottom:14px;
 }
 h2{
-  font-family:'Anton',sans-serif;font-weight:400;
-  font-size:clamp(34px,5.6vw,66px);line-height:.94;letter-spacing:-.01em;
-  text-transform:uppercase;margin-bottom:24px;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(34px,5.6vw,66px);line-height:.94;letter-spacing:.01em;
+  text-transform:uppercase;margin-bottom:24px;color:var(--ink);
 }
 h3{
-  font-family:'Anton',sans-serif;font-weight:400;font-size:26px;
-  text-transform:uppercase;letter-spacing:.01em;margin-bottom:10px;
+  font-family:var(--display);font-weight:400;font-size:26px;
+  text-transform:uppercase;letter-spacing:.01em;margin-bottom:10px;color:var(--ink);
 }
-.lead{font-size:20px;color:#CFCBC4;max-width:720px}
+.lead{font-size:20px;color:var(--ink-2);max-width:720px}
 p+p{margin-top:18px}
-.body{max-width:720px;color:#B2AEA8}
-.body strong{color:#fff;font-weight:700}
+.body{max-width:720px;color:var(--ink-2)}
+.body strong{color:var(--ink);font-weight:700}
 
 .pull{
   border-left:3px solid var(--red);padding:6px 0 6px 22px;margin:34px 0;
-  font-family:'Anton',sans-serif;font-size:clamp(22px,3.2vw,34px);line-height:1.15;
-  text-transform:uppercase;max-width:760px;
+  font-family:var(--display);font-size:clamp(22px,3.2vw,34px);line-height:1.15;
+  text-transform:uppercase;max-width:760px;color:var(--ink);
 }
 
 /* ---------- FIGURES ---------- */
 figure{margin:38px 0}
-figure img{width:100%;border-radius:2px}
-figcaption{margin-top:12px;font-size:13.5px;color:var(--grey);line-height:1.55;max-width:720px}
-figcaption b{color:#CFCBC4;font-weight:700}
+figure img{width:100%}
+figcaption{margin-top:12px;font-size:13.5px;color:var(--muted);line-height:1.55;max-width:720px}
+figcaption b{color:var(--ink);font-weight:700}
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:38px 0}
 .grid2 figure{margin:0}
@@ -243,107 +173,113 @@ figcaption b{color:#CFCBC4;font-weight:700}
 .grid3 img,.grid2 img{aspect-ratio:4/3;object-fit:cover}
 .tall img{aspect-ratio:3/4;object-fit:cover;object-position:center top}
 
-/* ---------- DOC HIGHLIGHT ---------- */
+/* ---------- EL DOCUMENT ---------- */
 .doc{
-  background:var(--ink);border:1px solid var(--line);border-radius:3px;
+  background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--red);
   padding:30px;margin:40px 0;
 }
 .doc .tag{
   display:inline-block;background:var(--red);color:#fff;
   font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  padding:5px 11px;border-radius:2px;margin-bottom:18px;
+  padding:5px 11px;margin-bottom:18px;
 }
-.doc img{border-radius:2px}
 .doc dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;margin-top:22px;font-size:14.5px}
-.doc dt{color:var(--grey);text-transform:uppercase;font-size:11.5px;letter-spacing:.12em;font-weight:700;padding-top:3px}
-.doc dd{color:var(--paper);font-weight:500}
+.doc dt{color:var(--muted);text-transform:uppercase;font-size:11.5px;letter-spacing:.12em;font-weight:700;padding-top:3px}
+.doc dd{color:var(--ink);font-weight:500}
 
 /* ---------- ALUMNI ---------- */
 .alumni{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1px;background:var(--line);margin-top:44px;border:1px solid var(--line)}
-.alum{background:var(--ink);display:flex;flex-direction:column}
-.alum .shot{position:relative;aspect-ratio:3/4;overflow:hidden;background:#0A0C10}
-.alum .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.alum{background:var(--paper);display:flex;flex-direction:column}
+.alum .shot{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--paper)}
+.alum .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 .alum:hover .shot img{transform:scale(1.04)}
-.alum .shot::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(16,16,14,0) 45%,rgba(23,27,33,.96) 100%)}
 .alum .noshot{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;
-  background:repeating-linear-gradient(135deg,#12161C 0 10px,#171B21 10px 20px);position:relative}
-.alum .noshot span{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.16em;
-  text-transform:uppercase;color:#9AA1AF;text-align:center;padding:0 22px;line-height:1.5}
+  background:repeating-linear-gradient(135deg,#fff 0 10px,#f2f1ef 10px 20px);position:relative}
+.alum .noshot span{font-family:var(--display);font-size:13px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);text-align:center;padding:0 22px;line-height:1.5}
 .alum .txt{padding:22px 22px 26px}
-.alum .who{font-family:'Anton',sans-serif;font-size:23px;text-transform:uppercase;line-height:1.05}
-.alum .now{color:var(--red-light);font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-top:9px}
-.alum p{font-size:14px;color:#A6A29C;margin-top:13px;line-height:1.6}
+.alum .who{font-family:var(--display);font-size:23px;text-transform:uppercase;line-height:1.05;color:var(--ink)}
+.alum .now{color:var(--red-dark);font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-top:9px}
+.alum p{font-size:14px;color:var(--ink-2);margin-top:13px;line-height:1.6}
 .alum .ara{
   margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
   display:flex;gap:10px;align-items:flex-start;
 }
 .alum .ara .tag{
-  flex:0 0 auto;font-family:'Anton',sans-serif;font-size:10.5px;letter-spacing:.14em;
-  background:var(--red);color:#fff;padding:5px 8px;border-radius:2px;margin-top:2px;
+  flex:0 0 auto;font-family:var(--display);font-size:10.5px;letter-spacing:.14em;
+  background:var(--red);color:#fff;padding:5px 8px;margin-top:2px;
 }
-.alum .ara .val{font-size:13.5px;color:var(--paper);line-height:1.5;font-weight:500}
-.alum .ara .val em{display:block;font-style:normal;color:var(--grey);font-weight:400;font-size:12.5px;margin-top:2px}
-.alum .ara.pend .tag{background:#3A3F47}
-.alum .ara.pend .val{color:var(--grey);font-weight:400}
+.alum .ara .val{font-size:13.5px;color:var(--ink);line-height:1.5;font-weight:500}
+.alum .ara .val em{display:block;font-style:normal;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:2px}
+.alum .ara.pend .tag{background:var(--muted)}
+.alum .ara.pend .val{color:var(--muted);font-weight:400}
 
 /* ---------- STATS ---------- */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:44px 0}
-.stat{background:var(--ink);padding:30px 24px;text-align:center}
-.stat b{display:block;font-family:'Anton',sans-serif;font-size:52px;line-height:1;color:var(--red-light)}
-.stat span{display:block;margin-top:10px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--grey)}
+.stat{background:var(--paper);padding:30px 24px;text-align:center}
+.stat b{display:block;font-family:var(--display);font-size:52px;line-height:1;color:var(--red)}
+.stat span{display:block;margin-top:10px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 
-/* ---------- CTA ---------- */
-.cta{background:var(--red);border-top:0}
-.cta h2{color:#fff}
-.cta .body{color:#fff}
+/* ---------- CTA FINAL · superfície vermella ----------
+   La classe .cta fa doble feina al marcatge: fila de botons dins de
+   seccions i secció vermella de tancament. La superfície és només per
+   a la secció. */
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+section.cta{display:block;background:var(--red);border-top:0}
+section.cta h2{color:#fff}
+section.cta .body{color:#fff}
 .btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
 .btn{
-  display:inline-block;background:var(--black);color:var(--paper);text-decoration:none;
-  font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
-  padding:17px 30px;border-radius:2px;transition:.15s;
+  display:inline-block;background:var(--ink);color:#fff;text-decoration:none;
+  font-family:var(--display);font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  padding:17px 30px;transition:transform .15s,background .3s,color .3s;
 }
 .btn:hover{transform:translateY(-2px)}
-/* Blanc pur, no crema: sobre la franja vermella el crema es queda en 4,37:1
-   i el blanc hi dona 4,92:1. */
-.btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.75)}
+/* Fora de les superfícies vermelles, el fantasma és de tinta. */
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+section.cta .btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.75)}
+section.cta .btn.ghost:hover{background:#fff;color:var(--ink)}
 .btn.wa{display:inline-flex;align-items:center;gap:12px}
 .btn.wa svg{width:22px;height:22px;fill:currentColor;flex:0 0 auto}
 
-footer{padding:52px 0;font-size:13px;color:var(--grey);border-top:1px solid var(--line)}
+footer{padding:52px 0;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
-footer a{color:#CFCBC4}
+footer a{color:var(--ink-2)}
 
 .note{
-  background:rgba(226,6,19,.10);border:1px dashed rgba(226,6,19,.55);
-  padding:16px 20px;border-radius:3px;margin:30px 0;font-size:14px;color:#E9A9A3;
+  background:rgba(226,6,19,.05);border:1px dashed rgba(226,6,19,.5);
+  padding:16px 20px;margin:30px 0;font-size:14px;color:var(--ink-2);
 }
-.note b{color:#fff}
+.note b{color:var(--ink)}
 
 @media(max-width:780px){
   body{font-size:16px}
-  section{padding:62px 0}
+  section,.section{padding:62px 0}
   .grid3,.grid2{grid-template-columns:1fr}
   .hero .wrap{padding-top:90px;padding-bottom:50px}
   .doc{padding:20px}
   .doc dl{grid-template-columns:1fr;gap:4px 0}
   .doc dd{margin-bottom:12px}
 }
+@media (prefers-reduced-motion: reduce){
+  .alum .shot img,.btn{transition:none}
+}
 
 /* FAQ visible · ha de coincidir sempre amb el FAQPage del JSON-LD */
-.faq-sec{padding:clamp(40px,6vw,84px) 0;border-top:1px solid rgba(255,255,255,.12)}
+.faq-sec{padding:clamp(40px,6vw,84px) 0;border-top:1px solid var(--line)}
 .faq-sec h2{font-size:clamp(18px,4vw,26px);margin-bottom:26px}
-.faq-q{border-bottom:1px solid rgba(255,255,255,.12)}
+.faq-q{border-bottom:1px solid var(--line)}
 .faq-q summary{list-style:none;cursor:pointer;min-height:48px;display:flex;align-items:center;
-  padding:14px 40px 14px 0;position:relative;font-weight:600;font-size:15px}
+  padding:14px 40px 14px 0;position:relative;font-weight:600;font-size:15px;color:var(--ink)}
 .faq-q summary::-webkit-details-marker{display:none}
-.faq-q summary::after{content:'+';position:absolute;right:6px;color:var(--red-light);font-weight:400;font-size:20px}
+.faq-q summary::after{content:'+';position:absolute;right:6px;color:var(--red-dark);font-weight:400;font-size:20px}
 .faq-q[open] summary::after{content:'–'}
-.mes-info{margin-top:34px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+.mes-info{margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
 .mes-info h3{font-size:clamp(15px,3vw,18px);margin-bottom:10px}
-.mes-info p{font-size:15px;line-height:1.65;max-width:62ch}
-.mes-info a{color:var(--red-light);text-decoration:underline;text-underline-offset:3px}
-.faq-q p{padding:0 0 20px;font-size:14.5px;opacity:.8;line-height:1.75;max-width:70ch}
+.mes-info p{font-size:15px;line-height:1.65;max-width:62ch;color:var(--ink-2)}
+.mes-info a{color:var(--red-dark);text-decoration:underline;text-underline-offset:3px}
+.faq-q p{padding:0 0 20px;font-size:14.5px;color:var(--ink-2);line-height:1.75;max-width:70ch}
 </style>
 <meta name="description" content="Escoleta del CB Grup Barna (4-8 anys) al Clot. D'aquí han sortit un entrenador i capitana de la Lliga Femenina Endesa, un jugador d'ACB i jugadors del Barça.">
 <meta name="keywords" content="academia de baloncesto Barcelona, acadèmia de bàsquet Barcelona, escola de bàsquet Barcelona, escuela de baloncesto Barcelona, escoleta bàsquet infantil, baloncesto infantil El Clot">
@@ -472,6 +408,7 @@ footer a{color:#CFCBC4}
       <a href="/campus/" class="opt">Campus</a>
       <a href="/empreses/" class="opt">Empreses</a>
     </nav>
+    <button class="cerca-boto" type="button" data-cerca-obrir aria-label="Cerca al web"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.5 3a7.5 7.5 0 1 1-4.6 13.4l-3.2 3.2a1 1 0 0 1-1.4-1.4l3.2-3.2A7.5 7.5 0 0 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg><span>Cerca</span></button>
     <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/escoleta/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/escoleta/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/escoleta/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
@@ -1163,6 +1100,7 @@ document.addEventListener('click',function(e){
 },true);
 </script>
 <script src="/js/descarrega.js" defer></script>
+<script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
 </body>
 </html>

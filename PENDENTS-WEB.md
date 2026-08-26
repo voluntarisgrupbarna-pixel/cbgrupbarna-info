@@ -1574,3 +1574,26 @@ costaven conversions, aplicats a les tres portades:
 Queden de la crítica: P2.5 (/escoleta/ al sistema visual — l'obra gran),
 P2.6 (contingut sota el peu #SOMCLOT), P2.7 (mesurar l'ús del commutador
 amb GA4 abans de decidir res), P3 (logo x3, menú vell al codi).
+
+### 26-08-2026 · /escoleta/ entra al sistema visual (P2.5 — l'obra gran, feta)
+
+La pàgina d'Escoleta tenia un vestit fosc propi, desconnectat del sistema:
+la família clicava «Vine a provar» des de la portada blanca i aterrava en
+el que semblava una altra web. Ara, a les tres llengües:
+
+- **Pell nova sobre els tokens del sistema** (paper blanc, tinta, vermell
+  de l'escut, Anton/Inter des de /css/fonts.css): el hero fosc es queda
+  com a única superfície de tinta —com el masthead de la portada— amb la
+  foto d'arxiu en B/N; Portes Obertes i el tancament són superfícies
+  vermelles; la resta, paper blanc amb filets, targetes d'alumni i stats
+  amb vora fina, i el mateix llenguatge que les interiors.
+- **Barra superior clara** com la resta del web, amb **cercador** (abans
+  aquesta pàgina no en tenia: cerca.js no trobava on penjar el botó) i el
+  «Salta al contingut» ara ocult fins al focus, com toca.
+- Marcatge intacte: tot el contingut, ancoratges (#historia, #portes-
+  obertes), JSON-LD i FAQ es queden com eren. El castellà encastat al
+  marcatge català (data-lang="es", ocult) segueix pendent de neteja.
+- Arreglada de pas una col·lisió antiga: la classe .cta feia de fila de
+  botons i de secció vermella alhora; la superfície vermella ara és només
+  de la secció (abans pintava una banda vermella espúria a «L'Escoleta,
+  avui»).
