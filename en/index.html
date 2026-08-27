@@ -505,6 +505,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .lead-url:hover { color: var(--ink); border-color: var(--ink); }
 .lead-tel { margin-top: 20px; font-size: 13px; color: var(--ink-2); }
 .lead-tel b { font-family: var(--display); font-weight: 400; letter-spacing: 0.1em; color: var(--ink); }
+
+
+
 /* ==== PANELLS DE L'ESCOLETA · «Estètica definitiva», maqueta de portada ==== */
 .entren-panel{margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--red);background:var(--paper);padding:4px 18px 2px}
 .entren-row{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
@@ -895,6 +898,48 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 @media (max-width: 640px) { .e-par .halves { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .e-par .rule { height: 1px; } }
 
+/* ==== HERO I FRANGES DE LA MAQUETA · «Estètica definitiva» (25/08/2026) ==== */
+html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
+.lg-hero{grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:center;max-width:1400px;margin:0 auto;padding:clamp(40px,6vw,84px) clamp(16px,4vw,48px) clamp(30px,4vw,54px);text-align:left;border-bottom:0}
+.lg-hero h1{font-size:clamp(52px,7.2vw,108px);letter-spacing:.01em;line-height:.92;margin:16px 0 20px}
+.lg-hero h1 em{font-style:normal;color:var(--red)}
+.lg-hero .lg-hero-s{font-size:clamp(15px,1.4vw,18px);max-width:44ch;margin:0 0 18px}
+.lg-hero .lg-hero-seo{margin:0;max-width:52ch}
+.lg-ph{position:relative;max-width:520px;width:100%;margin:0}
+.lg-ph img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top}
+.lg-ph::after{content:"";position:absolute;left:0;bottom:-14px;width:38%;height:6px;background:var(--red)}
+.lg-ph figcaption{margin-top:24px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.lg-hero .lg-hero-btns{margin-top:34px;padding:0;max-width:none}
+.lg-hero>div{min-width:0}
+@media(max-width:900px){.lg-hero{grid-template-columns:1fr}.lg-ph{max-width:440px}}
+.fr2{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.fr2 .fr{display:grid;grid-template-columns:230px 1fr auto;gap:clamp(20px,3.4vw,48px);align-items:center;padding:clamp(22px,3vw,34px) clamp(24px,5vw,72px);text-decoration:none;position:relative;transition:background .25s;border-bottom:1px solid var(--line)}
+.fr2 .fr .im{width:230px;height:150px;overflow:hidden;display:block}
+.fr2 .fr .im img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s var(--ease)}
+.fr2 .fr .im.im--faces img{object-position:center 22%}
+.fr2 .fr .im.im--group{height:280px}
+.fr2 .fr .im.im--group img{object-position:center 30%}
+.fr2 .fr:hover .im img{transform:scale(1.04)}
+.fr2 .fr h3{font-size:clamp(26px,3vw,40px);line-height:1;margin:0 0 6px}
+.fr2 .fr p{margin:0;font-size:14.5px;max-width:52ch}
+.fr2 .fr .st{display:flex;align-items:center;gap:14px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+.fr2 .fr .st::after{content:"";width:36px;height:2px;background:currentColor;transition:width .3s var(--ease)}
+.fr2 .fr:hover .st::after{width:64px}
+.fr2 .fr--paper{background:var(--paper)}
+.fr2 .fr--paper h3{color:var(--ink)} .fr2 .fr--paper p{color:var(--ink-2)} .fr2 .fr--paper .st{color:var(--red-dark)}
+.fr2 .fr--ink{background:var(--ink);border-bottom-color:var(--line-dark)}
+.fr2 .fr--ink h3{color:#fff} .fr2 .fr--ink p{color:rgba(255,255,255,.72)} .fr2 .fr--ink .st{color:var(--red-light)}
+.fr2 .fr--red{background:var(--red);border-bottom-color:rgba(255,255,255,.25)}
+.fr2 .fr--red h3,.fr2 .fr--red p{color:#fff} .fr2 .fr--red p{opacity:.9} .fr2 .fr--red .st{color:#fff}
+.fr2 .fr--red:hover{background:var(--red-dark)}
+.fr2 .fr:not(:has(.im)){grid-template-columns:1fr auto}
+.a-foot{background:var(--ink);color:rgba(255,255,255,.62);padding:22px clamp(24px,5vw,72px);display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:12px;flex-wrap:wrap}
+.a-foot b{color:#fff;font-weight:700}
+.a-foot b em{font-style:normal;color:var(--red-light)}
+.a-foot .diari{color:var(--red-light);text-decoration:none;font-weight:700}
+.a-foot .langs{letter-spacing:.12em}
+.a-foot .langs a{color:rgba(255,255,255,.62);text-decoration:none}
+@media(max-width:700px){.fr2 .fr{grid-template-columns:1fr;gap:14px}.fr2 .fr .st{white-space:normal}.fr2 .fr .im{width:100%;height:180px;max-width:440px}.fr2 .fr .im.im--group{height:200px}}
 </style>
 <script src="/js/galetes.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
@@ -907,12 +952,12 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
   <div class="tk-lab"><span class="pdot"></span>News</div>
   <div class="tk-trk">
     <div class="tk-cnt">
-      <a class="tk-it tk-it--yel" href="/en/escoleta/" data-cta="ticker-escoleta">Escoleta ages 4-8 · Registration open</a>
+      <a class="tk-it tk-it--yel" href="/en/open-days/" data-cta="ticker-escoleta">Open days · Escoleta, ages 4 to 8, at the club →</a>
       <span class="tk-it">Seniors · New season</span>
       <span class="tk-it">Calendar updated</span>
       <span class="tk-it">Club photo gallery</span>
       <span class="tk-it">#SomClot · 61 years of basketball</span>
-      <a class="tk-it tk-it--yel" href="/en/escoleta/" data-cta="ticker-escoleta">Escoleta ages 4-8 · Registration open</a>
+      <a class="tk-it tk-it--yel" href="/en/open-days/" data-cta="ticker-escoleta">Open days · Escoleta, ages 4 to 8, at the club →</a>
       <span class="tk-it">Seniors · New season</span>
       <span class="tk-it">Calendar updated</span>
       <span class="tk-it">Club photo gallery</span>
@@ -1045,6 +1090,58 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     </div>
   </section>
   <!-- ==== SÈNIORS ==== -->
+
+  <div class="lg-hero only-light">
+    <div>
+      <p class="eyebrow red">CB Grup Barna · El Clot · Barcelona</p>
+      <h1>Basketball in El Clot.<br><em>Since 1965.</em></h1>
+      <p class="lg-hero-s">38 teams. The same number of players, and the same budget, for both sides.</p>
+      <p class="lg-hero-seo">Youth basketball club and academy in Barcelona: an Escoleta for ages 4 to 8, teams registered with the FCBQ, camps, skills work and inclusive basketball with the Barna Màgics, in El Clot, Sant Martí.</p>
+    </div>
+    <div>
+      <figure class="lg-ph">
+        <img src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="(max-width: 900px) 100vw, 520px" width="600" height="800" fetchpriority="high" decoding="async" alt="Escoleta girl with the ball and the club mascot">
+        <figcaption>Escoleta · La Nau del Clot</figcaption>
+      </figure>
+      <div class="lg-hero-btns">
+        <a href="/en/escoleta/" class="btn red yel" data-cta="hero-prova">Come and try</a>
+        <button type="button" class="btn ghost" id="entrenBtn2" aria-expanded="false" aria-controls="entrenPanel2" data-cta="hero-entrenaments">Training times</button>
+        <a href="/escoleta/flyer/flyer-escoleta-a5.pdf" download class="btn ghost" data-descarrega="Escoleta info sheet" data-cta="hero-full">&#11015; Download the info sheet (PDF)</a>
+        <div class="entren-panel" id="entrenPanel2" hidden>
+      <div class="entren-row"><b>Wednesdays · 17:30–18:40</b><span>Escola Casas · Plaça de Valentí Almirall</span></div>
+      <div class="entren-row"><b>Saturdays · 9:00–10:30</b><span>La Nau del Clot · Carrer de la Llacuna, 170-172</span></div>
+      <div class="entren-foot">September to June. The first training session is a free trial.</div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="fr2 only-light" aria-label="Quick access to the club">
+    <a class="fr fr--paper" href="/en/escoleta/" data-cta="franja-escoleta">
+      <span><h3>Escoleta</h3><p>Ages 4 to 8. Where everyone starts, knowing nothing at all.</p></span>
+      <span class="st">Registration open</span>
+    </a>
+    <a class="fr fr--ink" href="#seniors" data-cta="franja-seniors">
+      <span class="im im--group"><img src="/img/seniors.webp" srcset="/img/seniors.webp 600w, /img/seniors@2x.webp 1200w" sizes="230px" width="600" height="900" loading="lazy" decoding="async" alt="First-team CB Grup Barna player with the ball"></span>
+      <span><h3>The seniors</h3><p>The club's first team.</p></span>
+      <span class="st">2026-27 season</span>
+    </a>
+    <a class="fr fr--paper" href="/en/womens-basketball/" data-cta="franja-femeni">
+      <span class="im im--faces"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="230px" width="375" height="500" loading="lazy" decoding="async" alt="Two CB Grup Barna players in the club kit"></span>
+      <span><h3>Women's</h3><p>Same number of teams and same budget as the men's line.</p></span>
+      <span class="st">Real parity</span>
+    </a>
+    <a class="fr fr--red" href="/en/partits/" data-cta="franja-dies-partit">
+      <span><h3>Calendar</h3><p>Match days and results for every team, every week.</p></span>
+      <span class="st">This weekend</span>
+    </a>
+    <a class="fr fr--paper" href="/en/club/" data-cta="franja-club">
+      <span class="im"><img src="/img/club.webp" srcset="/img/club.webp 550w, /img/club@2x.webp 1100w" sizes="230px" width="550" height="366" loading="lazy" decoding="async" alt="CB Grup Barna group photo under the club banner"></span>
+      <span><h3>The club</h3><p>Sixty-one years developing the neighbourhood's boys and girls.</p></span>
+      <span class="st">Since 1965</span>
+    </a>
+    <div class="a-foot"><span><b>#Som<em>Clot</em></b> · La Nau del Clot, Sant Martí</span><a class="diari" href="/en/blog/">The Clot journal →</a><span class="langs"><a href="/" hreflang="ca" lang="ca">CA</a> · <a href="/es/" hreflang="es" lang="es">ES</a> · <b>EN</b></span></div>
+  </section>
   <section class="section" id="seniors">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -1060,65 +1157,6 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
     </div>
   </section>
 
-
-  <div class="lg-hero only-light">
-    <p class="eyebrow red">CB Grup Barna · El Clot · Barcelona</p>
-    <h1>Basketball in Clot.<br><em>Since 1965.</em></h1>
-    <p class="lg-hero-s">38 teams. The same number of players, and the same budget, for both sides.</p>
-    <p class="lg-hero-seo">Youth basketball club and academy in Barcelona: an Escoleta for ages 4 to 8, teams registered with the FCBQ, camps, skills work and inclusive basketball with the Barna Màgics, in El Clot, Sant Martí.</p>
-  </div>
-  <!-- Botons de la maqueta de l'estètica definitiva: també a la vista de
-       franges, que és la que veu tothom per defecte. -->
-  <div class="lg-hero-btns only-light">
-    <a href="/en/escoleta/" class="btn red" data-cta="hero-prova">Come and try</a>
-    <button type="button" class="btn ghost" id="entrenBtn2" aria-expanded="false" aria-controls="entrenPanel2" data-cta="hero-entrenaments">Training times</button>
-    <a href="/escoleta/flyer/flyer-escoleta-a5.pdf" download class="btn ghost" data-descarrega="Escoleta info sheet" data-cta="hero-full">&#11015; Download the info sheet (PDF)</a>
-    <div class="entren-panel" id="entrenPanel2" hidden>
-      <div class="entren-row"><b>Wednesdays · 17:30–18:40</b><span>Escola Casas · Plaça de Valentí Almirall</span></div>
-      <div class="entren-row"><b>Saturdays · 9:00–10:30</b><span>La Nau del Clot · Carrer de la Llacuna, 170-172</span></div>
-      <div class="entren-foot">September to June. The first training session is a free trial.</div>
-    </div>
-  </div>
-
-  <section class="franges only-light" aria-label="Quick access to the club">
-    <a class="franja franja--lead" href="/en/escoleta/" data-cta="franja-escoleta">
-      <span class="franja-ph"><img src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Escoleta girl with the ball and the club mascot"></span>
-      <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Ages 4 to 8. Where everyone starts, knowing nothing yet.</span></span>
-      <span class="franja-go"><em>Enrolment open</em><i></i></span>
-    </a>
-    <a class="franja franja--red" href="/en/partits/" data-cta="franja-dies-partit">
-      <span class="franja-tx"><span class="franja-t">Calendar</span><span class="franja-s">Calendar and results for every team, every week.</span></span>
-      <span class="franja-go"><em>This weekend</em><i></i></span>
-    </a>
-    <a class="franja" href="#seniors" data-cta="franja-seniors">
-      <span class="franja-ph"><img src="/img/hero-player.webp" srcset="/img/hero-player.webp 600w, /img/hero-player@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="CB Grup Barna senior player with the ball"></span>
-      <span class="franja-tx"><span class="franja-t">The seniors</span><span class="franja-s">The club's first team.</span></span>
-      <span class="franja-go"><em>Season 26·27</em><i></i></span>
-    </a>
-    <a class="franja" href="/en/womens-basketball/" data-cta="franja-femeni">
-      <span class="franja-ph"><img src="/img/team-action.webp" srcset="/img/team-action.webp 600w, /img/team-action@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Two CB Grup Barna players in club kit"></span>
-      <span class="franja-tx"><span class="franja-t">Women's basketball</span><span class="franja-s">Same number of teams and the same budget as the men's line.</span></span>
-      <span class="franja-go"><em>Real parity</em><i></i></span>
-    </a>
-    <a class="franja franja--ink" href="#info" data-cta="franja-portes-obertes">
-      <span class="franja-tx"><span class="franja-t">Open house</span><span class="franja-s">A trial training session, no commitment.</span></span>
-      <span class="franja-go"><em>All year round</em><i></i></span>
-    </a>
-    <a class="franja" href="/en/grup-barna-dades-oficials/" data-cta="franja-club">
-      <span class="franja-ph"><img src="/img/club.webp" srcset="/img/club.webp 600w, /img/club@2x.webp 1200w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="CB Grup Barna group photo under the club banner"></span>
-      <span class="franja-tx"><span class="franja-t">The club</span><span class="franja-s">sixty-one years training children from the neighbourhood.</span></span>
-      <span class="franja-go"><em>Since 1965</em><i></i></span>
-    </a>
-    <a class="franja" href="/en/fotos/" data-cta="franja-galeria">
-      <span class="franja-ph"><img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 1200w, /img/campus-hero@2x.webp 2048w" sizes="190px" width="600" height="800" loading="lazy" decoding="async" alt="Session at the CB Grup Barna basketball camp in La Nau del Clot"></span>
-      <span class="franja-tx"><span class="franja-t">Gallery</span><span class="franja-s">Photos from the season.</span></span>
-      <span class="franja-go"><em>Match days and events</em><i></i></span>
-    </a>
-    <a class="franja franja--red" href="https://api.whatsapp.com/send?phone=+34698425153&text=Hi!%20I%27d%20like%20info%20about%20CB%20Grup%20Barna" target="_blank" rel="noopener" data-cta="franja-whatsapp">
-      <span class="franja-tx"><span class="franja-t">Message us</span><span class="franja-s">We reply the same day.</span></span>
-      <span class="franja-go"><em>WhatsApp</em><i></i></span>
-    </a>
-  </section>
 
 
 
