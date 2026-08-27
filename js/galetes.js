@@ -259,4 +259,32 @@
     e.preventDefault();
     window.CBGB_GALETES.obrir();
   });
+
+  // ── 6. Accés ràpid al panell d'admin ──
+  // Aquest fitxer es carrega a gairebé totes les pàgines (és el punt d'entrada
+  // més universal que hi ha, sense build step), per això s'hi enganxa aquesta
+  // pestanya discreta cap a /admin/ en lloc d'haver de tocar cada HTML.
+  // L'enllaç només hi és visible; l'accés real el segueix controlant el login
+  // de Google d'admin/auth.js.
+  function pintarAdmin() {
+    if (location.pathname.indexOf('/admin/') === 0) return; // ja hi som
+    var est = document.createElement('style');
+    est.textContent = '.cbgb-admin-tab{position:fixed;top:12px;right:12px;' +
+      "z-index:2147483000;font-family:'Anton','Futura',sans-serif;font-weight:400;" +
+      'font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;' +
+      'background:#10100E;border:1px solid rgba(255,255,255,.25);border-radius:999px;' +
+      'padding:9px 16px;text-decoration:none;opacity:.55;transition:opacity .25s}' +
+      '.cbgb-admin-tab:hover,.cbgb-admin-tab:focus-visible{opacity:1;border-color:#E20613}';
+    document.head.appendChild(est);
+    var link = document.createElement('a');
+    link.href = '/admin/';
+    link.className = 'cbgb-admin-tab';
+    link.textContent = 'Admin';
+    document.body.appendChild(link);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', pintarAdmin);
+  } else {
+    pintarAdmin();
+  }
 })();
