@@ -22,6 +22,27 @@ només l'hi posa nom.
 
 ---
 
+## 1.5.1 — 2026-08-27
+
+**Reconciliació de dues tandes paral·leles** (aquesta branca ↔ el PR #103
+de la maqueta). En fusionar ha manat el que ja era a `main` on les dues
+tandes tocaven el mateix amb intencions diferents, i s'hi ha sumat el que
+només tenia aquesta branca:
+
+- **Mana la maqueta**: el menú vell de les portades surt del marcatge (la
+  decisió de conservar-lo queda revocada pel PR), i la banda #SOMCLOT es
+  queda al seu lloc convertida en crida cap al formulari («Vols
+  informació? ↓») — la reubicació davant del peu d'aquesta branca es
+  descarta perquè resolia el mateix problema.
+- **Se suma d'aquesta branca**: la rotació del hero de l'Escoleta, el logo
+  de capçalera a mida, l'esdeveniment `canvi_vista`, la neteja COMPLETA
+  d'/escoleta/ (la de la maqueta deixava els atributs i el CSS del
+  commutador), els alts redactats a mà de la galeria amb tota la seva
+  maquinària, i el cas «carregant/error» del cercador que la maqueta no
+  cobria.
+
+---
+
 ## 1.5.0 — 2026-08-27
 
 **Textos alternatius reals a la galeria** — la fase final de l'apartat:

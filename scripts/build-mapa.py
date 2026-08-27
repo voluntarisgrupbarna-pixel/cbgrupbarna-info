@@ -54,6 +54,7 @@ ARBRE = [
         ("/grup-barna-dades-oficials/", "Dades oficials", "Datos oficiales", "Official data"),
         ("/proteccio-menor/", "Protecció del menor", "Protección del menor", "Child protection"),
         ("/documents/", "Documents", "Documentos", "Documents"),
+        ("/posicionament/", "Posicionament del club", "Posicionamiento del club", "Club positioning"),
     ]),
     ("Actualitat", "Actualidad", "News", [
         ("/blog/", "Coneixement Barna", "Conocimiento Barna", "Barna knowledge"),
@@ -65,6 +66,7 @@ ARBRE = [
         ("/empreses/", "Empreses", "Empresas", "Companies"),
         ("/patrocinadors/", "Partners", "Partners", "Partners"),
         ("/partners-mapa/", "Mapa de partners", "Mapa de partners", "Partner map"),
+        ("/briefing/", "Briefing del club", "Briefing del club", "Club briefing"),
     ]),
 ]
 

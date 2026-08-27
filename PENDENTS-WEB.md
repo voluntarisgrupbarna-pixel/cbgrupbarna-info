@@ -1753,3 +1753,42 @@ Roger Fornas, David Mejía o Daniel Iruela) **no són un error i no es
 treuen**: l'Ana ho ha confirmat en veure-les. Expliquen on han arribat els
 que van començar en aquesta pista. Ja tenen text alternatiu propi que diu
 que són captures. Que ningú les «netegi».
+### 26-08-2026 · El contingut enterrat i la neteja (bloc groc del camí cap al 10)
+
+**El fals final.** El peu negre #SOMCLOT tancava la pila de portes i, com
+que duia el commutador d'idioma, es llegia com el peu de la pàgina: tot el
+que venia després —formulari inclòs— quedava mort. Ara la banda és més
+prima, no duu idiomes (ja hi són a la capçalera i al peu real) i el seu
+enllaç empeny cap al formulari: «Vols informació? ↓».
+
+**La navegació duplicada surt de la vista ràpida.** `#acces` («Tot a mà»,
+3.113 px) tenia 23 enllaços, 19 dels quals ja eren al mapa ≡ — és el bloc
+de llista plana que la guia diu que les franges van substituir. Passa a
+`only-extensa`, igual que `#presentacions`. Els quatre enllaços que només
+vivien allà (`/briefing/`, `/posicionament/` i dos PDF) entren al mapa ≡
+via `scripts/build-mapa.py`. La FAQ es queda visible a les dues vistes a
+propòsit: el `FAQPage` del JSON-LD ha de correspondre a contingut visible.
+
+Resultat a la vista de franges: **15.254 px → 11.569 px** i **1.392 KB →
+989 KB** al mòbil (comptant també la tanda P1).
+
+**Galeria accessible de debò.** Les miniatures deien «Foto 1», «Foto 2»…
+i el visor sempre «Foto del club». Ara el text alternatiu porta context
+real: «Foto 3 de 192 · JUGADORS/ES 2526 · La Nau del Clot», tant a les
+miniatures com al visor, als tres idiomes. **No és descripció foto a
+foto** —això segueix necessitant que algú les escrigui—, però qui fa
+servir lector de pantalla passa de no rebre res a saber on és.
+
+**Neteja.** Fora el menú vell de la portada (marcatge, CSS i JS: era
+inabastable des que hi ha el mapa ≡) i el `rel="shortcut icon"` redundant.
+A `/escoleta/`, fora els 113 blocs de castellà encastat i ocult que
+quedaven del commutador antic: 75,3 KB → 59,1 KB, amb el text visible
+verificat idèntic abans i després.
+
+**`js/cerca.js`**: el `role="listbox"` ara només s'aplica quan hi ha
+opcions de debò (abans era fix i axe-core hi marcava
+`aria-required-children` en els estats sense resultats). Tanca el punt 5
+de la llista d'accessibilitat del 24/08.
+
+**Ja no calia**: el paràgraf desfasat de la skill `mapa-web-cbgb` sobre
+`/femeni/` ja s'havia corregit en una passada anterior.

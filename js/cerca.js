@@ -1165,6 +1165,10 @@
           'aria-controls="' + idPrefix + 'Llista" spellcheck="false">' +
         '<button type="button" class="cerca-neteja" hidden aria-label="' + escapa(T.esborrar) + '">&times;</button>' +
       '</form>' +
+      /* Sense role="listbox" de sortida: quan no hi ha resultats el contenidor
+         porta ajuda i targetes, no opcions, i axe-core hi marcava
+         aria-required-children. El rol l'hi posa recolliEnllacos() només
+         quan hi ha opcions de debò. */
       '<div class="cerca-cos" id="' + idPrefix + 'Llista" aria-label="' + escapa(T.resultats) + '"></div>' +
       '<p class="cerca-pista"><kbd>&uarr;</kbd><kbd>&darr;</kbd> ' + escapa(T.pista) + '</p>';
   }
@@ -1243,14 +1247,8 @@
       a.setAttribute('aria-selected', 'false');
     });
     this.actiu = this.enllacos.length ? 0 : -1;
-    // El rol de listbox nomes hi es quan hi ha opcions de debo: un listbox
-    // sense cap option (cerca sense resultats) es un error d'ARIA.
-    if (this.enllacos.length) {
-      this.cos.setAttribute('role', 'listbox');
-    } else {
-      this.cos.removeAttribute('role');
-      this.input.removeAttribute('aria-activedescendant');
-    }
+    if (this.enllacos.length) this.cos.setAttribute('role', 'listbox');
+    else { this.cos.removeAttribute('role'); this.input.removeAttribute('aria-activedescendant'); }
     this.input.setAttribute('aria-expanded', this.enllacos.length ? 'true' : 'false');
     this.marcaActiu();
   };
