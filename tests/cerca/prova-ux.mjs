@@ -83,13 +83,13 @@ console.log('\n3 · Teclat dins de la cerca');
 
   comprova('el primer element navegable surt marcat',
     await p.evaluate(() =>
-      document.querySelector('[data-cerca-r]')?.getAttribute('aria-selected') === 'true'));
+      document.querySelector('[data-cerca-r]')?.classList.contains('es-actiu')));
 
   await p.keyboard.press('ArrowDown');
   comprova('la fletxa avall mou la selecció',
     await p.evaluate(() => {
       const a = [...document.querySelectorAll('[data-cerca-r]')];
-      return a.findIndex(x => x.getAttribute('aria-selected') === 'true') === 1;
+      return a.findIndex(x => x.classList.contains('es-actiu')) === 1;
     }));
 
   await p.keyboard.press('ArrowUp');
@@ -97,20 +97,19 @@ console.log('\n3 · Teclat dins de la cerca');
   comprova('la fletxa amunt dona la volta pel final',
     await p.evaluate(() => {
       const a = [...document.querySelectorAll('[data-cerca-r]')];
-      return a.findIndex(x => x.getAttribute('aria-selected') === 'true') === a.length - 1;
+      return a.findIndex(x => x.classList.contains('es-actiu')) === a.length - 1;
     }));
 
-  comprova('el camp diu quin resultat està seleccionat (aria-activedescendant)',
+  comprova('el recompte de resultats s\'anuncia al lector de pantalla (role="status")',
     await p.evaluate(() => {
-      const inp = document.querySelector('.cerca-input');
-      const id = inp.getAttribute('aria-activedescendant');
-      return !!id && document.getElementById(id)?.getAttribute('aria-selected') === 'true';
+      const sr = document.querySelector('.cerca-sr');
+      return sr?.getAttribute('role') === 'status' && /\d/.test(sr.textContent);
     }));
 
   // Enter obre el resultat seleccionat
   await p.keyboard.press('ArrowDown');
   const desti = await p.evaluate(() =>
-    document.querySelector('[data-cerca-r][aria-selected="true"]')?.getAttribute('href'));
+    document.querySelector('[data-cerca-r].es-actiu')?.getAttribute('href'));
   await Promise.all([p.waitForURL('**' + desti, { timeout: 5000 }).catch(() => {}), p.keyboard.press('Enter')]);
   comprova('Enter obre el resultat seleccionat',
     new URL(p.url()).pathname === desti, p.url() + ' vs ' + desti);
@@ -302,9 +301,14 @@ console.log('\n11 · Lector de pantalla');
   });
   comprova('la capa és un diàleg modal amb nom',
     a.dialog === 'dialog' && a.modal === 'true' && a.etiquetaCapa, JSON.stringify(a));
-  comprova('el camp és un combobox amb nom i lligat a la llista',
-    a.combobox === 'combobox' && a.etiquetaCamp && a.controls);
-  comprova('la llista de resultats és una listbox', a.llistaRol === 'listbox');
+  /* Sense combobox ni listbox: el contenidor barreja títols, respostes i
+     botons, i un listbox només admet opcions com a fills (axe-core:
+     aria-required-children). El camp té nom i aria-controls; els resultats
+     són enllaços normals i el recompte va per role="status". */
+  comprova('el camp té nom accessible i està lligat a la llista',
+    !a.combobox && a.etiquetaCamp && a.controls);
+  comprova('la llista no es declara listbox (fills que no són opcions)',
+    a.llistaRol !== 'listbox');
   comprova('la lupa té nom accessible', a.botoEtiqueta);
   await p.fill('.cerca-input', 'zzzzqqq');
   await p.waitForTimeout(300);

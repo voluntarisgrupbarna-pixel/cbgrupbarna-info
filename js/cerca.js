@@ -1161,15 +1161,16 @@
         '<svg class="cerca-lupa" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 1-4.6 13.4l-3.2 3.2a1 1 0 0 1-1.4-1.4l3.2-3.2A7.5 7.5 0 0 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>' +
         '<input type="search" id="' + idPrefix + 'Input" class="cerca-input" ' +
           'placeholder="' + escapa(T.placeholder) + '" aria-label="' + escapa(T.titol) + '" ' +
-          'role="combobox" aria-expanded="false" aria-autocomplete="list" ' +
           'aria-controls="' + idPrefix + 'Llista" spellcheck="false">' +
         '<button type="button" class="cerca-neteja" hidden aria-label="' + escapa(T.esborrar) + '">&times;</button>' +
       '</form>' +
-      /* Sense role="listbox" de sortida: quan no hi ha resultats el contenidor
-         porta ajuda i targetes, no opcions, i axe-core hi marcava
-         aria-required-children. El rol l'hi posa recolliEnllacos() només
-         quan hi ha opcions de debò. */
+      /* Sense role="listbox" ni combobox: el contenidor barreja títols,
+         blocs de resposta i botons en tots els estats, i un listbox només
+         admet opcions com a fills (axe-core: aria-required-children). Les
+         fletxes segueixen funcionant com a drecera; el lector de pantalla
+         hi veu enllaços normals i el recompte l'anuncia el role="status". */
       '<div class="cerca-cos" id="' + idPrefix + 'Llista" aria-label="' + escapa(T.resultats) + '"></div>' +
+      '<p class="cerca-sr" role="status"></p>' +
       '<p class="cerca-pista"><kbd>&uarr;</kbd><kbd>&darr;</kbd> ' + escapa(T.pista) + '</p>';
   }
 
@@ -1183,6 +1184,7 @@
     arrel.innerHTML = construeixHTML(idPrefix);
     this.input = arrel.querySelector('.cerca-input');
     this.cos = arrel.querySelector('.cerca-cos');
+    this.sr = arrel.querySelector('.cerca-sr');
     this.neteja = arrel.querySelector('.cerca-neteja');
     this.form = arrel.querySelector('.cerca-camp');
     this.actiu = -1;
@@ -1231,26 +1233,20 @@
     this.enllacos.forEach(function (a, i) {
       var sel = i === self.actiu;
       a.classList.toggle('es-actiu', sel);
-      a.setAttribute('aria-selected', sel ? 'true' : 'false');
-      if (sel) {
-        self.input.setAttribute('aria-activedescendant', a.id);
-        if (a.scrollIntoView) a.scrollIntoView({ block: 'nearest' });
-      }
+      if (sel && a.scrollIntoView) a.scrollIntoView({ block: 'nearest' });
     });
   };
 
   Cercador.prototype.recolliEnllacos = function () {
     this.enllacos = Array.prototype.slice.call(this.cos.querySelectorAll('a[data-cerca-r]'));
-    this.enllacos.forEach(function (a, i) {
-      a.id = a.id || 'cerca-r-' + i;
-      a.setAttribute('role', 'option');
-      a.setAttribute('aria-selected', 'false');
-    });
     this.actiu = this.enllacos.length ? 0 : -1;
-    if (this.enllacos.length) this.cos.setAttribute('role', 'listbox');
-    else { this.cos.removeAttribute('role'); this.input.removeAttribute('aria-activedescendant'); }
-    this.input.setAttribute('aria-expanded', this.enllacos.length ? 'true' : 'false');
     this.marcaActiu();
+  };
+
+  /* El que sent qui no veu la capa: el recompte de resultats, un cop per
+     tecleig, sense llegir-li tota la llista. */
+  Cercador.prototype.anuncia = function (text) {
+    if (this.sr) this.sr.textContent = text || '';
   };
 
   Cercador.prototype.estatBuit = function () {
@@ -1282,6 +1278,7 @@
       });
     });
     this.recolliEnllacos();
+    this.anuncia('');
   };
 
   Cercador.prototype.pinta = function () {
@@ -1353,6 +1350,7 @@
     var mostra = res.llista.slice(0, MAX_RESULTATS);
 
     if (!mostra.length && !html) {
+        this.anuncia(T.cap + ' «' + q + '»');
       var buit = '<div class="cerca-bloc"><p class="cerca-estat"><strong>' +
         escapa(T.cap) + ' «' + escapa(q) + '»</strong><br>' + escapa(T.capAjuda) + '</p>';
       var proposta = voliesDir(q);
@@ -1419,6 +1417,7 @@
       });
     });
     this.recolliEnllacos();
+    this.anuncia(this.enllacos.length === 1 ? T.unResultat : this.enllacos.length + ' ' + T.resultats);
 
     if (this.esPagina) {
       var url = new URL(location.href);
@@ -1550,7 +1549,15 @@
     // Al final de la navegació, no al principi: a les pàgines amb la
     // capçalera llarga (deu enllaços i el commutador d'idioma), posat al
     // principi el botó se solapava amb el nom del club.
-    costat.appendChild(b);
+    // Però mai A DINS d'un .head-nav: per sota de 1080 px aquell menú es
+    // torna una tira amb scroll ocult i el botó quedava retallat fora de
+    // la vista, amb el punt de toc ocupat pel commutador d'idioma. Com a
+    // germà, just després del menú, es veu a qualsevol amplada.
+    if (costat.classList.contains('head-nav') && costat.parentElement) {
+      costat.parentElement.insertBefore(b, costat.nextSibling);
+    } else {
+      costat.appendChild(b);
+    }
 
     var ajusta = function () {
       b.classList.remove('cerca-boto--icona');

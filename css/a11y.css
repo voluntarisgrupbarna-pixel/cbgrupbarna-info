@@ -53,6 +53,11 @@ main:focus-visible, [tabindex="-1"]:focus-visible { outline: none !important; bo
   top: 0;
   z-index: 2000;
   font-family: var(--body, "Inter", system-ui, sans-serif);
+  /* Els mateixos colors que en rebre el focus: fora de pantalla no es veu,
+     però així cap eina de contrast no hi mesura el blau per defecte de
+     l'enllaç sobre un fons fosc. */
+  background: var(--ink, #10100E);
+  color: #fff;
 }
 .skip:focus {
   left: 50%;

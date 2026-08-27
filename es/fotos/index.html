@@ -439,6 +439,27 @@
     .lang-switch a.active { opacity: 1; font-weight: 600; }
     .lang-switch a:hover { opacity: 1; }
     .lang-switch .sep { opacity: 0.25; }
+
+    /* El commutador d'idioma es un <nav> dins del <nav> de capçalera: sense
+       aixo heretava position:fixed de l'estil de l'element i cobria tota la
+       barra, matant els clics al cercador i al logo. */
+    nav nav { position: static; left: auto; right: auto; height: auto; padding: 0; background: none; backdrop-filter: none; border-bottom: 0; }
+
+    /* Preguntes frequents (bloc que injecta generate-faq.py): la pagina no
+       carrega barna.css, i sense aquests estils els <summary> quedaven com
+       linies de text de 19 px, per sota del minim tocable. */
+    .faq { border-top: 1px solid var(--line); margin-top: 2rem; }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq summary { position: relative; list-style: none; cursor: pointer; min-height: 48px; display: flex; align-items: center; padding: 14px 44px 14px 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: var(--red); }
+    .faq summary::after { content: ''; position: absolute; right: 8px; top: 50%; width: 12px; height: 1px; background: var(--red); transform: translateY(-50%); }
+    .faq summary::before { content: ''; position: absolute; right: 13.5px; top: 50%; width: 1px; height: 12px; background: var(--red); transform: translateY(-50%); transition: opacity 0.3s; }
+    .faq details[open] summary::before { opacity: 0; }
+    .faq p { padding: 0 0 22px; font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+    .wrap.section { padding: 2rem clamp(16px, 4vw, 44px) 3rem; }
+    .wrap.section .narrow { max-width: 720px; margin: 0 auto; }
+    .wrap.section h2 { font-family: var(--display); font-weight: 400; font-size: 1.1rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .5rem; }
   </style>
   <link rel="canonical" href="https://cbgrupbarna.info/es/fotos/">
   <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/fotos/">
@@ -708,7 +729,7 @@
 </main>
 <footer>
   <p>CB Grup Barna · Baloncesto en El Clot · Sant Martí, Barcelona · desde 1965</p>
-  <p style="margin-top:.4rem">#somclot · <a href="/es/">cbgrupbarna.info</a> · <a href="/fotos/admin.html" style="color:rgba(255,255,255,.2);font-size:.72rem">Admin</a></p>
+  <p style="margin-top:.4rem">#somclot · <a href="/es/">cbgrupbarna.info</a> · <a href="/fotos/admin.html" style="color:rgba(255,255,255,.62);font-size:.72rem">Admin</a></p>
 </footer>
 
 <script src="/fotos/config.js"></script>

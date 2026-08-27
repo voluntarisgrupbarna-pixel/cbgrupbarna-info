@@ -352,7 +352,7 @@ details.tpl[open] summary::after { content: '–'; }
 
 <a class="skip" href="#contingut" data-t="skip">Skip to content</a>
 
-<div class="ticker">
+<div class="ticker" role="region" aria-label="Club news">
   <div class="tk-lab"><span class="pdot"></span><span data-t="tkLab">Help us</span></div>
   <div class="tk-trk">
     <div class="tk-cnt">
@@ -1035,7 +1035,7 @@ https://cbgrupbarna.info/opina
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
   }
 
-  fetch('opina.json?t=' + Math.floor(Date.now() / 60000))
+  fetch('/opina/opina.json?t=' + Math.floor(Date.now() / 60000))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (data) {
       if (data) {

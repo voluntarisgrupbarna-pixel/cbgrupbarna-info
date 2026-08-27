@@ -1251,7 +1251,7 @@ def _vs(key, tres, cinc):
 CHART_VS = ('\n<figure class="chart">\n'
             '  <p class="chart-t">3x3 i 5x5, punt per punt</p>\n'
             '  <table class="vs chart-b">\n'
-            '    <thead><tr><th scope="col">&nbsp;</th><th scope="col" class="a">3x3</th>'
+            '    <thead><tr><th scope="col"><span class="visually-hidden">Aspecte</span></th><th scope="col" class="a">3x3</th>'
             '<th scope="col">5x5</th></tr></thead>\n'
             '    <tbody>\n'
             + _vs("Jugadors a pista", "3 per equip", "5 per equip")

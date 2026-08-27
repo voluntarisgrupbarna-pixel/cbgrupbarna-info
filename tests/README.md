@@ -6,6 +6,7 @@ servir el Chromium i el Playwright que ja hi ha a l'entorn.
 ```bash
 node tests/audit-seo-geo.mjs                  # SEO i GEO, anàlisi estàtica
 node tests/audit-browser.mjs                  # renderitzat real a 5 amplades
+node tests/axe.mjs                            # WCAG AA amb axe-core
 node tests/report.mjs --md tests/out/INFORME.md
 node tests/screenshots.mjs --full             # captures per mirar-s'ho
 ```
@@ -58,6 +59,31 @@ per aparèixer.
 - Errors de consola, peticions fallides, IDs duplicats, punts de referència
   (`main`, `nav`, `footer`), salts de nivell d'encapçalament, controls sense
   nom accessible, taules que desborden i pes del DOM.
+
+### `axe.mjs`
+La mateixa passada que faria l'extensió axe DevTools, sobre les 485 pàgines:
+regles WCAG 2.x A/AA i bones pràctiques d'axe-core (Deque, MPL-2.0,
+vendoritzat a `tests/lib/axe.min.js` perquè no calgui instal·lar res).
+Complementa `audit-browser.mjs`: aquell mesura geometria i contrast reals a
+cinc amplades; aquest aporta les regles d'ARIA (rols mal imbricats, diàlegs
+sense nom, landmarks duplicats, capçaleres de taula buides) que cap dels
+altres dos cobreix.
+
+Cada pàgina es carrega amb `prefers-reduced-motion: reduce` i 400 ms de
+marge. Sense això, les targetes amb entrada `fadeIn` esglaonada (com les de
+`/fotos/`) es capturen a mig camí i el contrast surt barrejat amb el fons:
+el 26/08/2026 això va produir 560 falsos positius de contrast que van
+desaparèixer amb el moviment reduït activat. Si un dia axe torna a treure
+molts contrastos «impossibles» (un blanc que surt rosa, un gris que surt
+clar), sospita primer de l'animació, no del color.
+
+El que queda obert a propòsit després de la neteja del 26/08/2026, perquè és
+del nivell «bona pràctica» o viu en peces especials: `region` (el salt al
+contingut i el botó flotant de WhatsApp queden fora de landmark; els blocs
+d'`/admin/` i dels accessos amb PIN, també), `heading-order` (salts h2→h4 en
+targetes i presentacions), `landmark-one-main` (els artefactes d'impressió
+d'`/opina/print/` i el flyer de l'Escoleta no són pàgines de navegar), i el
+mirall de `premidonaesport/`, que no s'edita com a font aquí.
 
 ## Sobre auditories externes rebudes com a PDF
 

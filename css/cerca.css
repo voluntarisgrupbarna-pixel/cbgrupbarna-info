@@ -11,6 +11,7 @@
 /* ---- El botó de la capçalera ---- */
 .cerca-boto {
   display: inline-flex; align-items: center; gap: 7px;
+  flex: none;
   padding: 7px 12px; border-radius: 999px;
   border: 1px solid var(--line, rgba(16, 16, 14, 0.14));
   background: var(--paper, #fff);
@@ -26,6 +27,14 @@
 @media (max-width: 720px) { .cerca-boto span { display: none; } .cerca-boto { padding: 8px; } }
 .cerca-boto--icona span { display: none; }
 .cerca-boto--icona { padding: 8px; }
+
+/* Recompte de resultats per al lector de pantalla (role="status"):
+   present al DOM, invisible a la vista. */
+.cerca-sr {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
 
 /* ---- La capa ---- */
 html.cerca-oberta { overflow: hidden; }
