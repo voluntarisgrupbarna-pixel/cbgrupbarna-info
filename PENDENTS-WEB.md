@@ -1701,3 +1701,25 @@ sessions de fotos, dades de partners, URL de Brevo, columna newsletter a
 l'Apps Script, decisions de campus/formulari/PIN, autoritat SEO externa i la
 migració de les notícies antigues de cbgrupbarna.com (projecte de contingut,
 no un arreglo).
+
+---
+
+## 27-08-2026 — Decisió de l'Ana: NO hi ha nivells or/plata/bronze
+
+«No se funciona així»: les col·laboracions del club no van per nivells, i el
+concepte desapareix de tot arreu. No cal esperar cap dada — el pendent
+«nivells dels 22 partners» queda TANCAT per decisió, no per resposta.
+
+Comprovat on era de veritat: **cap pàgina pública ho deia** (els packs de
+/patrocinadors/ es diuen «Entrada · Presència digital…» i no s'han tocat).
+El rastre era intern i s'ha tret:
+
+- `data.json`: fora el camp `nivell` dels 21 partners i la nota `_nivells`.
+- La skill `mapa-web-cbgb`, que ho llistava com a pendent de confirmar.
+- Aquest tauler: totes les mencions anteriors a «nivells or/plata/bronze
+  pendents» queden anul·lades per aquesta decisió (les entrades velles es
+  conserven com a històric).
+
+> Les skills personals de captació (fora d'aquest repositori) encara parlen
+> de nivells Oro/Plata/Bronce com a plantilla: si l'Ana vol, s'actualitzen
+> en una sessió on estiguin carregades com a fitxers.
