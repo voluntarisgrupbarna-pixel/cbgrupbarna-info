@@ -119,6 +119,11 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
   material d'acció real (no posat), llum natural, enquadrat des de dalt sense tallar
   cares, i diverses tomes perquè es pugui rotar en comptes de repetir sempre la mateixa.
+- **Sessió de fotos dels 4 sèniors (setembre 2026), confirmada per l'Ana:**
+  Fem A, Fem B, Masc A i Masc B. Vegeu el brief de captura complet a la secció
+  «Benchmark de webs professionals» del 27/08/2026, al final d'aquest document.
+  Amb aquest material es tanquen les fitxes de `/jugadors/` i el bloc de sèniors
+  a la portada.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
 - **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
@@ -1792,3 +1797,77 @@ de la llista d'accessibilitat del 24/08.
 
 **Ja no calia**: el paràgraf desfasat de la skill `mapa-web-cbgb` sobre
 `/femeni/` ja s'havia corregit en una passada anterior.
+
+---
+
+# Benchmark de webs professionals · Valencia Basket, Real Madrid i FC Barcelona (27/08/2026)
+
+Anàlisi demanada per l'Ana: «per ser una web professional, què ens falta?».
+Comparades les webs de Valencia Basket (valenciabasket.com), Real Madrid
+bàsquet (realmadrid.com) i FC Barcelona bàsquet (fcbarcelona.cat) amb
+l'inventari complet de cbgrupbarna.info (`llms.txt` + aquest document).
+
+## El que ja tenim al seu nivell (o millor)
+
+Calendari i resultats automatitzats amb la FCBQ, fitxes d'equip, calendaris
+descarregables + `.ics`, tres idiomes (el Valencia només en té un), història,
+organigrama, instal·lacions, galeria, kit de premsa, pàgina d'empreses amb
+Barna Business, mapa de partners, FAQ amb cercador que respon, legal i
+accessibilitat complets. Cap dels tres grans té cercador que respon ni `.ics`
+per equip.
+
+## El que els tres tenen i a nosaltres ens falta
+
+Per ordre d'impacte realista per a un club de barri:
+
+| # | Gap | Qui el té | Què seria al Barna | Estat |
+|---|---|---|---|---|
+| 1 | Plantilla amb fitxes de jugador/a | Els 3 (foto, dorsal, perfil) | `/jugadors/` amb foto i fitxa, com a mínim dels dos Sènior A | Ja pendent: `/jugadors/` sense acabar. **Es desbloqueja amb la sessió de setembre** |
+| 2 | Actualitat/Notícies (cròniques, fitxatges, comunicats) | Els 3, a diari | El blog són guies, no notícies. Crònica del cap de setmana + anuncis = la secció «Notícies» que va quedar buida al menú | Pendent de decisió de l'Ana (18/08) |
+| 3 | Primer equip a dalt | Els 3 obren amb el primer equip | Sènior Fem A i Masc A a portada abans que la base | Ja a la llista de marca, punt 2. **Es desbloqueja amb la sessió de setembre** |
+| 4 | Vídeo propi (RM Play, Barça Play) | Els 3 amb OTT | No un streaming: una pàgina `/video/` amb highlights embeguts (YouTube/IG) per partit | No existeix ni estava anotat |
+| 5 | Palmarès | Els 3 com a secció pròpia | Pàgina `/palmares/`: títols, ascensos, Supercopa, sotscampionat dels Màgics | No existeix (està diluït a història). Una tarda de feina; és el que més «club gran» transmet a un patrocinador |
+| 6 | Zona de socis/afició (Culers, Madridistas, Socios VB) | Els 3 | Versió barri: «Avantatges de la família Barna» empaquetant els descomptes que ja hi ha a les 22 fitxes de partner. Cost gairebé zero, i argument de venda per captar més partners | Zona de socis sense migrar de la web antiga |
+| 7 | Botiga | Els 3 | Bloquejada amb motiu: última temporada amb Wintym, marca nova per negociar. Preparar `/botiga/` per al dia que es firmi | Anotat a MIGRACIO-WEB-ANTIGA.md |
+| 8 | Newsletter operativa | Els 3 | Ja es recull el consentiment; falta triar eina (Brevo és gratuït fins a 300 enviaments/dia) | Pendent |
+| 9 | Experiències/matchday (tour, gameday) | Sobretot el Valencia | La Nau del Clot com a actiu de marca: dia de partit, com viure'l, activacions | Ja a la llista de marca, punt 3 — falta la sessió de fotos |
+| 10 | App | Els 3 | No compensa: els `.ics` + WhatsApp ja cobreixen el que la seva app fa per una família | Descartada |
+
+## Lectura estratègica
+
+- El benchmark **confirma la llista de la fase de marca**: els punts 1, 3 i 9
+  ja estaven identificats aquí. El que els grans afegeixen de nou són
+  **palmarès, vídeo, notícies i el carnet d'afició** (gaps 2, 4, 5, 6).
+- **La palanca més barata i diferencial és la 6**: el Valencia ven «descuentos
+  para miembros» com a benefici premium; nosaltres ja tenim 22 fitxes de
+  partner amb ofertes. Empaquetar-ho és ordenar el que existeix.
+- Les que depenen de material de l'Ana: notícies (definir què és «Notícies»),
+  fitxes de jugadors (fotos de plantilla), botiga (marca nova).
+
+## Sessió de fotos dels 4 sèniors · setembre 2026 (decisió de l'Ana, 27/08)
+
+L'Ana farà fotos als quatre equips sènior al setembre. Amb aquest material es
+tanquen d'un cop els gaps 1 i 3 i es renova la imatge dels equips. Brief de
+captura perquè la sessió serveixi per a tot d'una vegada:
+
+**Què treure per cada equip** (×4: Fem A, Fem B, Masc A, Masc B):
+
+1. **Foto d'equip horitzontal** — per a la fitxa de `/partits/equips/` i el
+   bloc de sèniors de la portada. Aire per dalt: la web retalla des de dalt
+   (es perd terra, mai caps).
+2. **Foto d'equip vertical (9:16)** — la mateixa per a Instagram (post fixat /
+   destacada): web i perfil amb la mateixa imatge, com mana el sistema.
+3. **Retrat individual de cada jugador/a** — mateix fons i mateixa llum per a
+   tothom, per a `/jugadors/`. Pla mitjà; millor tots iguals que tots creatius.
+4. **3-4 d'acció/ambient a La Nau** — per al hero editorial de portada i la
+   franja «Els sèniors» (va sobre tinta amb foto alta: millor si n'hi ha
+   alguna de vertical amb força).
+
+**Regles tècniques** (del sistema visual, `web-cbgb` §3): originals de càmera
+sense passar per WhatsApp (cap foto ampliada), nítides i ben exposades, cap
+cara tallada per l'enquadrament. Es processen amb
+`scripts/build-blog-images.py`. Els originals, amb còpia fora del repositori.
+
+**Aprofitar el mateix dia de càmera per a l'Escoleta (4-8 anys)** si ja hi ha
+entrenaments: és la sessió pendent més antiga d'aquest document i la foto que
+obre les tres portades.
