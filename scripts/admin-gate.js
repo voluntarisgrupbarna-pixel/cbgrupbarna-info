@@ -17,7 +17,7 @@
 (function (global) {
   'use strict';
 
-  var PASS_HASH = '41d74e142b2d9d8b18514cfcc1154932370803ba82c30fb7f9088a1535312422';
+  var PASS_HASH = 'aacec295278c03c1b539a1b68ee8084c1d850c6d86ba50f7e3cc79bc88f33658';
   var KEY = 'cbgb_admin_pass_ok';
 
   /* La caixa forta del token de GitHub: admin/token.enc.json guarda el token
