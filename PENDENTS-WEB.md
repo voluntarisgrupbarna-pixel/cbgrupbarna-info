@@ -1744,3 +1744,12 @@ més, ara és només omplir `ev.alts` — la maquinària ja hi és.
 pantalla de mòbil (cerques de Google i fitxes federatives de jugadors,
 posicions 25-34 de l'àlbum) que semblen pujades per error entre les fotos.
 No s'ha esborrat res — digues si les treus o s'hi queden.
+
+## 27-08-2026 — Decisió de l'Ana: les captures de l'àlbum de l'Escola es queden
+
+Les 10 captures de pantalla de mòbil de l'àlbum «Escola de Bàsquet – Julio
+Torralba» (posicions 26-35: cerques i fitxes federatives d'exjugadors com
+Roger Fornas, David Mejía o Daniel Iruela) **no són un error i no es
+treuen**: l'Ana ho ha confirmat en veure-les. Expliquen on han arribat els
+que van començar en aquesta pista. Ja tenen text alternatiu propi que diu
+que són captures. Que ningú les «netegi».
