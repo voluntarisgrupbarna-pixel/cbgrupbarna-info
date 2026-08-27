@@ -104,6 +104,16 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 @media (max-width: 1080px) { .head-nav { min-width: 0; } }
 @media (max-width: 560px) { .head-brand span { display: none; } }
 
+/* Fins i tot sense el nom del club, a mòbil el head-nav sol quedar-se just
+   (els enllaços sense «opt» + el botó de cerca de js/cerca.js ja desborden
+   el que li toca dins d'un flex amb head-brand i lang-switch), i sense cap
+   pista visual l'últim enllaç i la lupa queden fora de la vista, dins del
+   desplaçament horitzontal, com si no hi fossin. El mateix difuminat que
+   ja porta .idx-nav (vegeu més avall) fa evident que hi ha més a desplaçar.
+   Només amb overflow-x:auto actiu (≤1080px): a escriptori .head-nav no es
+   desplaça i el difuminat només taparia el primer i l'últim enllaç. */
+@media (max-width: 1080px) { .head-nav { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%); } }
+
 /* ==== SELECTOR D'IDIOMA ====
    Fins ara cada pàgina que el duia es repintava aquest bloc a dins del seu
    <style>, i les que no el copiaven el treien sense estil. Ara viu aquí una
