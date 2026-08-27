@@ -156,6 +156,7 @@
 
     /* UPLOAD QUEUE */
     .upload-queue { display: grid; gap: .5rem; margin-bottom: 1.5rem; }
+    .qi-alt { width: 100%; margin-top: .35rem; padding: .35rem .5rem; font: inherit; font-size: .78rem; border: 1px solid rgba(16,16,14,.18); border-radius: 6px; }
     .upload-item {
       background: var(--paper); border: 1px solid var(--line);
       display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: .75rem; padding: .5rem;
@@ -1020,10 +1021,14 @@ function renderUploadQueue() {
       <div>
         <div class="upload-item-name">${item.file.name}</div>
         <div class="upload-item-size">${size}</div>
+        ${item.status === 'pending' ? `<input type="text" class="qi-alt" data-qi="${i}" maxlength="160" placeholder="Descripció de la foto (text alternatiu) — opcional" aria-label="Descripció de la foto ${item.file.name}" value="${(item.alt || '').replace(/"/g, '&quot;')}">` : ''}
         ${item.status === 'uploading' ? `<div class="progress-bar"><div class="progress-fill" id="prog-${i}" style="width:${item.progress}%"></div></div>` : ''}
       </div>
       ${statusHtml}`;
     container.appendChild(div);
+    // La cua es repinta a cada canvi d'estat: la descripcio viu a item.alt.
+    const altInput = div.querySelector('.qi-alt');
+    if (altInput) altInput.addEventListener('input', () => { item.alt = altInput.value; });
   });
 }
 
@@ -1054,6 +1059,10 @@ async function uploadAll() {
       const ev = currentEvent;
       if (!ev.photos) ev.photos = [];
       ev.photos.push(filename);
+      if (item.alt && item.alt.trim()) {
+        if (!ev.alts) ev.alts = {};
+        ev.alts[filename] = item.alt.trim();
+      }
       if (!ev.cover && !isVideoFile(filename)) ev.cover = filename;
 
       // Update events index entry

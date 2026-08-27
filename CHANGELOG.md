@@ -22,6 +22,25 @@ només l'hi posa nom.
 
 ---
 
+## 1.5.0 — 2026-08-27
+
+**Textos alternatius reals a la galeria** — la fase final de l'apartat:
+
+- **141 fotos amb alt redactat a mà, en els tres idiomes** (423 textos):
+  l'àlbum de l'Escola de Bàsquet – Julio Torralba (91) i la visita de
+  l'alcalde Collboni (50), mirades una a una. Les 1.900 restants segueixen
+  amb l'alt contextual automàtic (àlbum + posició), també trilingüe.
+- **El pujador d'admin ja demana la descripció**: camp opcional per foto a
+  la cua de pujada; es desa a `ev.alts` i el generador la conserva entre
+  execucions. Les fotos noves poden néixer descrites.
+- **Cada idioma llegeix el seu alt**: `alts` (ca), `alts_es`, `alts_en`,
+  amb el català de reserva.
+- **Els enllaços directes a un àlbum ja funcionen en castellà i anglès**:
+  les galeries `/es/` i `/en/` no obrien l'àlbum del `#id` de l'adreça
+  (la funció només existia en català). Portada a totes dues.
+
+---
+
 ## 1.4.1 — 2026-08-26
 
 **Barrido «todo lo que sea código» del tablón de pendientes:**

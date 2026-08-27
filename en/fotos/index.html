@@ -862,6 +862,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildStats();
   buildSeasonFilters();
   renderEvents();
+  obreAlbumDeLAdreca();
 
   document.getElementById('search-input').addEventListener('input', e => {
     searchQuery = e.target.value.trim().toLowerCase();
@@ -1082,7 +1083,7 @@ function loadMorePhotos() {
       video.src = photoThumb(ev, id);
     } else {
       const img = new Image();
-      img.alt = (ev.alts && ev.alts[id]) || `${ev.title} — photo ${i + 1} of ${ev.photos.length}`;
+      img.alt = (ev.alts_en && ev.alts_en[id]) || (ev.alts && ev.alts[id]) || `${ev.title} — photo ${i + 1} of ${ev.photos.length}`;
       img.loading = 'lazy';
       img.onload = () => { shimmer.remove(); item.appendChild(img); };
       img.onerror = () => { shimmer.style.opacity = '.3'; };
@@ -1112,7 +1113,7 @@ function loadMorePhotos() {
     // pantalla no les anunciava com a res. Ara son botons de debo.
     item.setAttribute('role', 'button');
     item.setAttribute('tabindex', '0');
-    item.setAttribute('aria-label', (ev.alts && ev.alts[id]) || ('Open photo ' + (i + 1) + ' of ' + ev.photos.length + ' · ' + ev.title));
+    item.setAttribute('aria-label', (ev.alts_en && ev.alts_en[id]) || (ev.alts && ev.alts[id]) || ('Open photo ' + (i + 1) + ' of ' + ev.photos.length + ' · ' + ev.title));
     item.addEventListener('click', () => openLightbox(i));
     item.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
@@ -1131,6 +1132,13 @@ function showEvents() {
   document.getElementById('events-view').style.display = 'block';
   document.getElementById('search-wrap').style.display = 'flex';
   window.scrollTo(0, 0);
+}
+
+function obreAlbumDeLAdreca() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  const ev = window.GALERIA_EVENTS.filter(e => e.visibility !== 'private').find(e => e.id === id);
+  if (ev) showPhotos(ev);
 }
 
 // ── LIGHTBOX ──
@@ -1186,7 +1194,7 @@ function updateLightbox() {
     video.style.display = 'none';
     video.removeAttribute('src');
     img.style.display = '';
-    img.alt = (currentEvent.alts && currentEvent.alts[id]) || `${currentEvent.title} — photo ${lbIndex + 1} of ${photos.length}`;
+    img.alt = (currentEvent.alts_en && currentEvent.alts_en[id]) || (currentEvent.alts && currentEvent.alts[id]) || `${currentEvent.title} — photo ${lbIndex + 1} of ${photos.length}`;
     img.classList.add('loading');
     img.onload = () => img.classList.remove('loading');
     img.src = photoFull(currentEvent, id);

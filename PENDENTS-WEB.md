@@ -1723,3 +1723,24 @@ El rastre era intern i s'ha tret:
 > Les skills personals de captació (fora d'aquest repositori) encara parlen
 > de nivells Oro/Plata/Bronce com a plantilla: si l'Ana vol, s'actualitzen
 > en una sessió on estiguin carregades com a fitxers.
+
+---
+
+## 27-08-2026 — Alts reals a la galeria, fase final (v1.5.0)
+
+Fet: 141 fotos amb text alternatiu redactat a mà en els tres idiomes
+(Escola de Bàsquet 91 + visita Collboni 50), camp de descripció opcional al
+pujador d'admin (es desa a `ev.alts`, el generador el conserva), cada
+idioma amb el seu joc (`alts`/`alts_es`/`alts_en`) i, de passada, els
+enllaços directes `#album` arreglats a `/es/fotos/` i `/en/fotos/` (no
+obrien res). Bateria completa en verd.
+
+**Criteri per a la resta (1.900 fotos)**: són ràfegues d'esdeveniment on la
+descripció a mà no diria gaire més que l'alt contextual automàtic que ja
+tenen («Àlbum — foto N de M», trilingüe). Si es vol alt a mà en algun àlbum
+més, ara és només omplir `ev.alts` — la maquinària ja hi és.
+
+**Per a l'Ana · trobat mirant l'àlbum de l'Escola**: hi ha ~11 captures de
+pantalla de mòbil (cerques de Google i fitxes federatives de jugadors,
+posicions 25-34 de l'àlbum) que semblen pujades per error entre les fotos.
+No s'ha esborrat res — digues si les treus o s'hi queden.
