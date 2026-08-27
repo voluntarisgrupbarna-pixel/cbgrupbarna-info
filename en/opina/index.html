@@ -1035,7 +1035,7 @@ https://cbgrupbarna.info/opina
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
   }
 
-  fetch('opina.json?t=' + Math.floor(Date.now() / 60000))
+  fetch('/opina/opina.json?t=' + Math.floor(Date.now() / 60000))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (data) {
       if (data) {

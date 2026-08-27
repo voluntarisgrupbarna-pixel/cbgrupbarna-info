@@ -268,9 +268,11 @@
   // de Google d'admin/auth.js.
   function pintarAdmin() {
     if (location.pathname.indexOf('/admin/') === 0) return; // ja hi som
+    // z-index baix a propòsit: aquesta pestanya no pot tapar mai el cercador,
+    // el selector d'idioma ni el botó del mapa del web (#mapa-btn, z-index:990).
     var est = document.createElement('style');
     est.textContent = '.cbgb-admin-tab{position:fixed;top:12px;right:12px;' +
-      "z-index:2147483000;font-family:'Anton','Futura',sans-serif;font-weight:400;" +
+      "z-index:80;font-family:'Anton','Futura',sans-serif;font-weight:400;" +
       'font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;' +
       'background:#10100E;border:1px solid rgba(255,255,255,.25);border-radius:999px;' +
       'padding:9px 16px;text-decoration:none;opacity:.55;transition:opacity .25s}' +
