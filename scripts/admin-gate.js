@@ -10,9 +10,27 @@
  * tingui la contrasenya té el token: si es filtra, revoca el token a GitHub
  * i canvia la contrasenya.
  *
- * Per canviar la contrasenya: genera el hash SHA-256 del text nou (per exemple,
- * amb `echo -n "LaMevaContrasenya" | shasum -a 256` a un terminal) i substitueix
- * el valor de PASS_HASH.
+ * Per canviar la contrasenya (recomanat, format nou): aquest fitxer és públic,
+ * i PASS_HASH en format antic (una sola passada de SHA-256, sense sal) es pot
+ * trencar per força bruta fora de línia si la contrasenya no és prou llarga.
+ * Genera un hash nou, reforçat amb PBKDF2 (210.000 iteracions, com la caixa
+ * forta del token), obrint la consola del navegador en QUALSEVOL pàgina
+ * d'aquest lloc i enganxant-hi:
+ *
+ *   (async () => {
+ *     const enc = new TextEncoder(), hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+ *     const pass = prompt('Contrasenya nova:'); if (!pass) return;
+ *     const salt = crypto.getRandomValues(new Uint8Array(16));
+ *     const base = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveBits']);
+ *     const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: 210000, hash: 'SHA-256' }, base, 256);
+ *     console.log(JSON.stringify({ v: 2, salt: hex(salt), iterations: 210000, hash: hex(bits) }));
+ *   })();
+ *
+ * i substitueix TOT el valor de PASS_HASH (String) per l'objecte que imprimeixi.
+ *
+ * Mètode antic (segueix funcionant, però només per compatibilitat): hash
+ * SHA-256 d'una sola passada (`echo -n "LaMevaContrasenya" | shasum -a 256`),
+ * com a cadena de text a PASS_HASH.
  */
 (function (global) {
   'use strict';
@@ -79,6 +97,29 @@
   async function sha256(text) {
     var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
     return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+  }
+
+  function hexToBytes(hex) {
+    var out = new Uint8Array(hex.length / 2);
+    for (var i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i * 2, 2), 16);
+    return out;
+  }
+
+  /* Verifica la contrasenya contra PASS_HASH, tant si és el format antic
+   * (String: SHA-256 d'una passada) com el nou (Object: PBKDF2 reforçat —
+   * vegeu la capçalera del fitxer per generar-ne un). Cap dels dos formats
+   * requereix canviar res més: totes dues coses que fan servir el resultat
+   * (la porta i vault.checkPass) criden aquesta única funció. */
+  async function verifyPass(pass) {
+    if (PASS_HASH && typeof PASS_HASH === 'object') {
+      var base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveBits']);
+      var bits = await crypto.subtle.deriveBits(
+        { name: 'PBKDF2', salt: hexToBytes(PASS_HASH.salt), iterations: PASS_HASH.iterations, hash: 'SHA-256' },
+        base, 256);
+      var hex = Array.from(new Uint8Array(bits)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+      return hex === PASS_HASH.hash;
+    }
+    return (await sha256(pass)) === PASS_HASH;
   }
 
   function saved() {
@@ -151,8 +192,7 @@
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         btn.disabled = true;
-        var hash = await sha256(input.value);
-        if (hash === PASS_HASH) {
+        if (await verifyPass(input.value)) {
           // La mateixa contrasenya obre la caixa forta del token de GitHub,
           // si n'hi ha: així no cal enganxar el token a cada dispositiu.
           await openVault(input.value);
@@ -207,7 +247,7 @@
     vault: {
       open: openVault,
       seal: sealVault,
-      checkPass: async function (pass) { return (await sha256(pass)) === PASS_HASH; },
+      checkPass: verifyPass,
     },
   };
 })(window);
