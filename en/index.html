@@ -275,7 +275,7 @@
       "audience": {
         "@type": "PeopleAudience",
         "suggestedMinAge": 4,
-        "suggestedMaxAge": 7
+        "suggestedMaxAge": 8
       },
       "availableChannel": {
         "@type": "ServiceChannel",
@@ -469,10 +469,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; flex-shrink: 0; }
 .head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--display); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
-.head-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 26px; height: 26px; }
-.head-burger i { display: block; width: 100%; height: 1px; background: var(--ink); transition: transform 0.35s var(--ease); }
-.menu-open .head-burger i:first-child { transform: translateY(3.5px) rotate(45deg); }
-.menu-open .head-burger i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
 @media (max-width: 2000px) { .head-side .head-nav a.opt { display: none; } }
 @media (max-width: 1080px) { .head-side .head-nav { display: none; } }
 @media (max-width: 560px) { .head-side.r .head-nav { display: none; } }
@@ -480,15 +476,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 /* ==== SELECTOR D'IDIOMA ==== */
 
 /* Menú desplegat · el mapa complet del club */
-.menu { position: fixed; inset: 0; z-index: 105; background: var(--paper); padding: 126px clamp(20px, 6vw, 70px) 48px; transform: translateY(-101%); transition: transform 0.6s var(--ease); overflow-y: auto; visibility: hidden; }
-.menu.open { transform: none; visibility: visible; }
-.menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 56px); max-width: 1180px; margin: 0 auto; }
 @media (min-width: 780px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
-.menu-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: var(--red); margin-bottom: 14px; }
-.menu-col a { display: flex; align-items: baseline; gap: 12px; padding: clamp(11px, 1.6vw, 15px) 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 300; font-size: clamp(15px, 2.4vw, 20px); letter-spacing: 0.16em; text-transform: uppercase; transition: color 0.3s, padding-left 0.4s var(--ease); }
-.menu-col a:hover { color: var(--red); padding-left: 10px; }
-.menu-col a small { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.06em; text-transform: none; color: #6B6560; margin-left: auto; white-space: nowrap; }
-.menu-foot { margin-top: 34px; text-align: center; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; }
 
 /* ==== LEAD · Escoleta ==== */
 .lead { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 0; }
@@ -505,16 +493,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .lead-url:hover { color: var(--ink); border-color: var(--ink); }
 .lead-tel { margin-top: 20px; font-size: 13px; color: var(--ink-2); }
 .lead-tel b { font-family: var(--display); font-weight: 400; letter-spacing: 0.1em; color: var(--ink); }
-
-
-
 /* ==== PANELLS DE L'ESCOLETA · «Estètica definitiva», maqueta de portada ==== */
 .entren-panel{margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--red);background:var(--paper);padding:4px 18px 2px}
 .entren-row{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
 .entren-row:last-of-type{border-bottom:none}
 .entren-row b{font-family:var(--display);font-weight:400;letter-spacing:.04em;text-transform:uppercase;font-size:15px;color:var(--ink)}
 .entren-foot{padding:10px 0 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
-.lg-hero-btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center;max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) clamp(22px,3.5vw,34px)}
+/* El trio de botons viu sota la foto del hero, com a la maqueta. */
+.lg-hero-btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:26px}
 .lg-hero-btns .entren-panel{flex-basis:100%;max-width:560px}
 
 
@@ -707,7 +693,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   .stars { gap: 6px; }
   .opi-card { padding: 22px 14px; }
   .btn { padding: 17px clamp(20px, 5vw, 32px); }
-  .head-burger { width: 44px; height: 44px; align-items: flex-start; justify-content: center; padding: 12px 9px; }
   .fab-wa { width: 56px; height: 56px; }
   .sg-action, .igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; }
 }
@@ -729,48 +714,49 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   .reveal { opacity: 1; transform: none; }
 }
 
-.franges { display: flex; flex-direction: column; gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.franja { position: relative; display: grid; grid-template-columns: 190px minmax(0, 1fr) auto; align-items: stretch; background: var(--paper); min-height: 108px; overflow: hidden; transition: background 0.35s var(--ease); }
-.franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr) auto; }
-.franja:nth-child(even):not(.franja--red):not(.franja--ink):hover { background: var(--ink); }
-.franja:nth-child(even):not(.franja--red):not(.franja--ink) { background: var(--paper-2); }
-.franja:hover { background: var(--ink); }
-.franja:hover .franja-t, .franja:hover .franja-go em { color: #fff; }
-.franja:hover .franja-s { color: rgba(255,255,255,0.7); }
-.franja:hover .franja-go i { background: var(--red); width: 46px; }
-.franja-ph { position: relative; overflow: hidden; background: var(--paper-2); }
-.franja-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.7s var(--ease); }
-.franja:hover .franja-ph img { transform: scale(1.05); }
-.franja-tx { padding: 20px 26px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-.franja-t { display: block; font-family: var(--display); font-size: clamp(18px, 2.4vw, 27px); font-weight: 400; letter-spacing: 0.01em; text-transform: uppercase; line-height: 0.98; transition: color 0.3s; }
-.franja-s { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 6px; max-width: 46ch; }
-.franja-go { padding: 0 26px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
-.franja-go em { font-style: normal; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6560; white-space: nowrap; }
-.franja-go i { display: block; width: 26px; height: 1px; background: var(--ink); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
+/* ==== FRANGES · el disseny de l'«Estètica definitiva» (proposta A) ====
+   Cinc portes grans amb aire, no una llista compacta: foto de 230 px,
+   titol Anton gran i la crida amb el guionet que s'allarga en passar-hi.
+   Les portes que surten de la pila (Portes obertes, Observatori, Galeria,
+   Escriu-nos) segueixen al mapa ≡, al peu i a l'extensa. */
+.franges { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.franja { position: relative; display: grid; grid-template-columns: 230px minmax(0, 1fr) auto; gap: clamp(20px, 3.4vw, 48px); align-items: center; padding: clamp(22px, 3vw, 34px) clamp(24px, 5vw, 72px); background: var(--paper); border-bottom: 1px solid var(--line); }
+/* Sense foto, la columna de la foto no s'ha de reservar. */
+.franja:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr) auto; }
+.franja-ph { position: relative; overflow: hidden; width: 230px; height: 150px; }
+.franja-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.5s var(--ease); }
+.franja:hover .franja-ph img { transform: scale(1.04); }
+/* La foto de grup dels sèniors és vertical: el marc alt li deixa els quatre
+   sencers. Les cares del femení són al terç alt de la foto: s'hi baixa el
+   punt de tall perquè quedin centrades al marc. */
+.franja-ph--alta { height: 280px; }
+.franja-ph--alta img { object-position: center 30%; }
+.franja-ph--cares img { object-position: center 22%; }
+.franja-tx { min-width: 0; }
+.franja-t { display: block; font-family: var(--display); font-size: clamp(26px, 3vw, 40px); font-weight: 400; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1; }
+.franja-s { display: block; font-size: 14.5px; color: var(--ink-2); margin-top: 6px; max-width: 52ch; }
+.franja-go { display: flex; align-items: center; gap: 14px; flex-shrink: 0; color: var(--red-ink); }
+.franja-go em { font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; white-space: nowrap; }
+.franja-go i { display: block; width: 36px; height: 2px; background: currentColor; transition: width 0.3s var(--ease); }
+.franja:hover .franja-go i { width: 64px; }
 
-/* A 390 px la franja conservava les tres columnes fixes —190 px d'imatge, el
-   text, i la crida de la dreta, que porta white-space: nowrap i no encongeix—:
-   al text li quedaven vint píxels i queia una paraula per línia. És la primera
-   cosa que es veu des del mòbil, que és per on entra gairebé tothom. Per sota
-   de 700 px la crida baixa sota el text i la foto es fa petita. */
-@media (max-width: 700px) {
-  .franja { grid-template-columns: 104px minmax(0, 1fr); grid-template-areas: "ph tx" "ph go"; }
-  .franja-ph { grid-area: ph; }
-  .franja-tx { grid-area: tx; padding: 16px 18px 2px; }
-  .franja-go { grid-area: go; padding: 4px 18px 16px; align-items: center; }
-  .franja--red:not(:has(.franja-ph)), .franja--ink:not(:has(.franja-ph)) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tx" "go"; }
+@media (max-width: 900px) {
+  .franja { grid-template-columns: 1fr; gap: 14px; }
+  .franja:not(:has(.franja-ph)) { grid-template-columns: 1fr; }
+  .franja-ph { width: 100%; max-width: 440px; height: 180px; }
+  .franja-ph--alta { height: 280px; }
 }
 
 .franja--red { background: var(--red); }
-.franja--red .franja-t, .franja--red .franja-s, .franja--red .franja-go em { color: #fff; }
-.franja--red .franja-s { color: rgba(255,255,255,0.82); }
-.franja--red .franja-go i { background: #fff; }
-.franja--red:hover { background: var(--red-dark); }
+.franja--red { border-bottom-color: rgba(255,255,255,0.25); }
+.franja--red .franja-t { color: #fff; }
+.franja--red .franja-s { color: rgba(255,255,255,0.9); }
+.franja--red .franja-go { color: #fff; }
 .franja--ink { background: var(--ink); }
+.franja--ink { border-bottom-color: var(--line-dark); }
 .franja--ink .franja-t { color: #fff; }
-.franja--ink .franja-s, .franja--ink .franja-go em { color: rgba(255,255,255,0.7); }
-.franja--ink .franja-go i { background: #fff; }
-.franja--ink:hover { background: #000; }
+.franja--ink .franja-s { color: rgba(255,255,255,0.72); }
+.franja--ink .franja-go { color: var(--red-light); }
 html .only-light { display: block; }
 html .only-extensa { display: none; }
 html[data-view="light"] .only-light { display: block; }
@@ -778,12 +764,60 @@ html[data-view="light"] .only-extensa { display: none; }
 html[data-view="extensa"] .only-light { display: none; }
 html[data-view="extensa"] .only-extensa { display: block; }
 html[data-view="extensa"] .lead.only-extensa { display: grid; }
-.lg-hero { padding: clamp(26px, 4vw, 40px) 20px clamp(20px, 3vw, 28px); text-align: center; border-bottom: 1px solid var(--line); }
-.lg-hero h1, .lg-hero h2 { font-size: clamp(26px, 4.4vw, 44px); line-height: 0.94; margin: 8px 0 8px; }
+/* Els blocs de vista que no són block: el selector amb html davant guanya
+   a la classe sola i els aixafaria a display:block. */
+html .lg-hero.only-light, html[data-view="light"] .lg-hero.only-light { display: grid; }
+html .lg-strip.only-light, html[data-view="light"] .lg-strip.only-light { display: flex; }
+html[data-view="extensa"] .lg-hero.only-light, html[data-view="extensa"] .lg-strip.only-light { display: none; }
+/* Hero de la vista de franges: el de l'«Estètica definitiva» (proposta A).
+   Dues columnes: el titular gran a l'esquerra i la foto de l'Escoleta amb el
+   trio de botons a la dreta. El titular fa el primer bot en carregar. */
+.lg-hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(28px, 5vw, 72px); align-items: center; padding: clamp(36px, 6vw, 84px) clamp(24px, 5vw, 72px); border-bottom: 1px solid var(--line); }
+.lg-hero h1 { font-size: clamp(40px, 7vw, 96px); letter-spacing: 0.01em; line-height: 0.92; margin: 16px 0 20px; }
 .lg-hero h1 em { font-style: normal; color: var(--red); }
-.lg-hero-seo { font-size: 11.5px; color: var(--muted); margin: 10px auto 0; max-width: 62ch; line-height: 1.65; }
-.lg-hero-s { font-size: 13px; color: #6B6560; margin: 0 auto; max-width: 46ch; line-height: 1.6; }
-.franja--lead .franja-t { font-size: clamp(26px, 4vw, 46px); }
+.lg-hero h1 .lg-l1, .lg-hero h1 em { display: inline-block; }
+.lg-hero-s { font-size: clamp(15px, 1.4vw, 18px); color: var(--ink-2); margin: 0; max-width: 44ch; line-height: 1.6; }
+.lg-hero-seo { font-size: 11.5px; color: var(--muted); margin: 14px 0 0; max-width: 62ch; line-height: 1.65; }
+.lg-ph { position: relative; width: 100%; max-width: 520px; justify-self: end; margin: 0; }
+.lg-ph img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center top; }
+/* El filet vermell penja de la foto; va davant del peu perquè el peu no
+   l'empenyi avall. */
+.lg-ph figcaption::before { content: ""; display: block; width: 38%; height: 6px; background: var(--red); margin-bottom: 18px; }
+.lg-ph figcaption { margin-top: 14px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 900px) {
+  .lg-hero { grid-template-columns: 1fr; padding: clamp(26px, 5vw, 48px) 20px; }
+  .lg-ph { justify-self: start; max-width: 440px; }
+  /* Al mòbil, l'acció abans que la foto: sense això «Vine a provar» queia
+     a 976 px i la primera pantalla es quedava sense cap botó. */
+  .lg-hero > div:last-child { display: flex; flex-direction: column; }
+  .lg-hero-btns { order: -1; margin: 4px 0 22px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lg-hero .eyebrow { animation: hero-fade 0.25s var(--ease) both; }
+  .lg-hero h1 .lg-l1 { animation: hero-rise 0.4s var(--ease) 0.15s both; }
+  .lg-hero h1 em { animation: hero-bounce 0.55s 0.35s both; }
+}
+@keyframes hero-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes hero-bounce {
+  0% { opacity: 0; transform: translateY(-44px); }
+  55% { opacity: 1; transform: translateY(0); }
+  75% { transform: translateY(-12px); }
+  88% { transform: translateY(0); }
+  96% { transform: translateY(-4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* El peu de la pila: la firma del barri, el diari i els idiomes. */
+/* Tanca la pila de portes i, sobretot, empeny cap al formulari: abans
+   duia el commutador d'idioma i semblava el peu de la pàgina, i tot el
+   que venia després (formulari inclòs) es llegia com a mort. */
+.lg-strip { background: var(--ink); color: rgba(255,255,255,0.66); padding: 16px clamp(24px, 5vw, 72px); display: flex; justify-content: space-between; align-items: center; gap: 14px; font-size: 12px; flex-wrap: wrap; }
+.lg-strip b { color: #fff; font-weight: 700; }
+.lg-strip > a { color: var(--red-light); font-weight: 700; }
+.lg-strip > a:hover { color: #fff; }
+.lg-strip-lang { display: flex; gap: 12px; letter-spacing: 0.1em; }
+.lg-strip-lang a:hover { color: #fff; }
 .view-toggle { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-family: var(--body); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; padding: 8px 12px; min-height: 34px; transition: border-color 0.3s var(--ease), color 0.3s var(--ease); }
 .view-toggle:hover { border-color: var(--red); color: var(--red); }
 .view-toggle:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
@@ -898,48 +932,6 @@ html[data-view="extensa"] .view-toggle .vt-ic .vt-extensa { display: block; }
 @media (max-width: 640px) { .e-par .halves { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .e-par .rule { height: 1px; } }
 
-/* ==== HERO I FRANGES DE LA MAQUETA · «Estètica definitiva» (25/08/2026) ==== */
-html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
-.lg-hero{grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:center;max-width:1400px;margin:0 auto;padding:clamp(40px,6vw,84px) clamp(16px,4vw,48px) clamp(30px,4vw,54px);text-align:left;border-bottom:0}
-.lg-hero h1{font-size:clamp(52px,7.2vw,108px);letter-spacing:.01em;line-height:.92;margin:16px 0 20px}
-.lg-hero h1 em{font-style:normal;color:var(--red)}
-.lg-hero .lg-hero-s{font-size:clamp(15px,1.4vw,18px);max-width:44ch;margin:0 0 18px}
-.lg-hero .lg-hero-seo{margin:0;max-width:52ch}
-.lg-ph{position:relative;max-width:520px;width:100%;margin:0}
-.lg-ph img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top}
-.lg-ph::after{content:"";position:absolute;left:0;bottom:-14px;width:38%;height:6px;background:var(--red)}
-.lg-ph figcaption{margin-top:24px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.lg-hero .lg-hero-btns{margin-top:34px;padding:0;max-width:none}
-.lg-hero>div{min-width:0}
-@media(max-width:900px){.lg-hero{grid-template-columns:1fr}.lg-ph{max-width:440px}}
-.fr2{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-.fr2 .fr{display:grid;grid-template-columns:230px 1fr auto;gap:clamp(20px,3.4vw,48px);align-items:center;padding:clamp(22px,3vw,34px) clamp(24px,5vw,72px);text-decoration:none;position:relative;transition:background .25s;border-bottom:1px solid var(--line)}
-.fr2 .fr .im{width:230px;height:150px;overflow:hidden;display:block}
-.fr2 .fr .im img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s var(--ease)}
-.fr2 .fr .im.im--faces img{object-position:center 22%}
-.fr2 .fr .im.im--group{height:280px}
-.fr2 .fr .im.im--group img{object-position:center 30%}
-.fr2 .fr:hover .im img{transform:scale(1.04)}
-.fr2 .fr h3{font-size:clamp(26px,3vw,40px);line-height:1;margin:0 0 6px}
-.fr2 .fr p{margin:0;font-size:14.5px;max-width:52ch}
-.fr2 .fr .st{display:flex;align-items:center;gap:14px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
-.fr2 .fr .st::after{content:"";width:36px;height:2px;background:currentColor;transition:width .3s var(--ease)}
-.fr2 .fr:hover .st::after{width:64px}
-.fr2 .fr--paper{background:var(--paper)}
-.fr2 .fr--paper h3{color:var(--ink)} .fr2 .fr--paper p{color:var(--ink-2)} .fr2 .fr--paper .st{color:var(--red-dark)}
-.fr2 .fr--ink{background:var(--ink);border-bottom-color:var(--line-dark)}
-.fr2 .fr--ink h3{color:#fff} .fr2 .fr--ink p{color:rgba(255,255,255,.72)} .fr2 .fr--ink .st{color:var(--red-light)}
-.fr2 .fr--red{background:var(--red);border-bottom-color:rgba(255,255,255,.25)}
-.fr2 .fr--red h3,.fr2 .fr--red p{color:#fff} .fr2 .fr--red p{opacity:.9} .fr2 .fr--red .st{color:#fff}
-.fr2 .fr--red:hover{background:var(--red-dark)}
-.fr2 .fr:not(:has(.im)){grid-template-columns:1fr auto}
-.a-foot{background:var(--ink);color:rgba(255,255,255,.62);padding:22px clamp(24px,5vw,72px);display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:12px;flex-wrap:wrap}
-.a-foot b{color:#fff;font-weight:700}
-.a-foot b em{font-style:normal;color:var(--red-light)}
-.a-foot .diari{color:var(--red-light);text-decoration:none;font-weight:700}
-.a-foot .langs{letter-spacing:.12em}
-.a-foot .langs a{color:rgba(255,255,255,.62);text-decoration:none}
-@media(max-width:700px){.fr2 .fr{grid-template-columns:1fr;gap:14px}.fr2 .fr .st{white-space:normal}.fr2 .fr .im{width:100%;height:180px;max-width:440px}.fr2 .fr .im.im--group{height:200px}}
 </style>
 <script src="/js/galetes.js"></script>
 <link rel="stylesheet" href="/css/cerca.css">
@@ -952,12 +944,12 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
   <div class="tk-lab"><span class="pdot"></span>News</div>
   <div class="tk-trk">
     <div class="tk-cnt">
-      <a class="tk-it tk-it--yel" href="/en/open-days/" data-cta="ticker-escoleta">Open days · Escoleta, ages 4 to 8, at the club →</a>
+      <a class="tk-it tk-it--yel" href="/en/escoleta/" data-cta="ticker-escoleta">Escoleta ages 4-8 · Registration open</a>
       <span class="tk-it">Seniors · New season</span>
       <span class="tk-it">Calendar updated</span>
       <span class="tk-it">Club photo gallery</span>
       <span class="tk-it">#SomClot · 61 years of basketball</span>
-      <a class="tk-it tk-it--yel" href="/en/open-days/" data-cta="ticker-escoleta">Open days · Escoleta, ages 4 to 8, at the club →</a>
+      <a class="tk-it tk-it--yel" href="/en/escoleta/" data-cta="ticker-escoleta">Escoleta ages 4-8 · Registration open</a>
       <span class="tk-it">Seniors · New season</span>
       <span class="tk-it">Calendar updated</span>
       <span class="tk-it">Club photo gallery</span>
@@ -970,7 +962,6 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
 <header class="head" id="top">
   <div class="head-in">
     <div class="head-side">
-      <button class="head-burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <nav class="head-nav" aria-label="Main navigation">
         <a href="/en/escoleta/">Escoleta</a>
         <a href="/en/campus/" class="opt">Camp</a>
@@ -997,6 +988,7 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
           <svg class="vt-extensa" viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="16"/><rect x="13" y="4" width="8" height="7"/><rect x="13" y="13" width="8" height="7"/></svg>
         </span><span id="viewToggleLbl">Bands</span>
       </button>
+      <button class="cerca-boto" type="button" data-cerca-obrir aria-label="Search the site"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.5 3a7.5 7.5 0 1 1-4.6 13.4l-3.2 3.2a1 1 0 0 1-1.4-1.4l3.2-3.2A7.5 7.5 0 0 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg><span>Search</span></button>
       <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/" hreflang="en" lang="en" aria-label="English" class="active" aria-current="true">EN</a>
     </nav>
@@ -1005,34 +997,6 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
 </header>
 
 <!-- ==== MENÚ · el mapa complet del club ==== -->
-<nav class="menu" id="menu" aria-label="Full menu">
-  <div class="menu-grid">
-    <div class="menu-col">
-      <h3>This month</h3>
-      <a href="#info">Request information <small>form</small></a>
-      <a href="/en/escoleta/">Escoleta <small>ages 4 to 8</small></a>
-      <a href="/en/partits/">Calendar</a>
-      <a href="#seniors">The seniors</a>
-      <a href="/en/fotos/" data-cta="menu-galeria">Photo gallery</a>
-      <a href="#instagram">Instagram</a>
-      <a href="#opinions">Reviews and ratings</a>
-    </div>
-    <div class="menu-col">
-      <h3>The Barna</h3>
-      <a href="/en/campus/" data-cta="menu-campus">Basketball camp</a>
-      <a href="/en/3x3/" data-cta="menu-3x3">3x3 tournament</a>
-      <a href="/en/blog/" data-cta="menu-blog">Blog <small>guides</small></a>
-      <a href="/en/premsa/" data-cta="menu-premsa">Articles and press <small>Guia Clot</small></a>
-      <a href="/en/grup-barna-dades-oficials/" data-cta="menu-club">The club <small>official data</small></a>
-      <a href="/en/premidonaesport/" data-cta="menu-premi">Women and Sport Award</a>
-      <a href="https://presentaciocbgrupbarna.skywork.website" target="_blank" rel="noopener" data-cta="menu-presentacio">Club presentation</a>
-      <a href="/en/patrocinadors/" data-cta="menu-partners">Sponsors and partners</a>
-      <a href="/en/blog/" data-cta="menu-noticies">News</a>
-      <a href="#acces">All links</a>
-    </div>
-  </div>
-  <div class="menu-foot">@cbgrupbarna · +34 698 425 153 · El Clot, Barcelona</div>
-</nav>
 
 <a href="#contingut" class="skip">Skip to content</a>
 
@@ -1089,59 +1053,81 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
       <a href="/en/escoleta/" class="lead-url" data-cta="escoleta">cbgrupbarna.info/escoleta <span aria-hidden="true">→</span></a>
     </div>
   </section>
-  <!-- ==== SÈNIORS ==== -->
+
 
   <div class="lg-hero only-light">
     <div>
       <p class="eyebrow red">CB Grup Barna · El Clot · Barcelona</p>
-      <h1>Basketball in El Clot.<br><em>Since 1965.</em></h1>
+      <h1><span class="lg-l1">Basketball in Clot.</span><br><em>Since 1965.</em></h1>
       <p class="lg-hero-s">38 teams. The same number of players, and the same budget, for both sides.</p>
       <p class="lg-hero-seo">Youth basketball club and academy in Barcelona: an Escoleta for ages 4 to 8, teams registered with the FCBQ, camps, skills work and inclusive basketball with the Barna Màgics, in El Clot, Sant Martí.</p>
     </div>
     <div>
       <figure class="lg-ph">
-        <img src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="(max-width: 900px) 100vw, 520px" width="600" height="800" fetchpriority="high" decoding="async" alt="Escoleta girl with the ball and the club mascot">
+        <img src="/img/escoleta.webp" srcset="/img/escoleta.webp 600w, /img/escoleta@2x.webp 1200w" sizes="(max-width: 900px) 90vw, 440px" width="600" height="800" fetchpriority="high" decoding="async" alt="Escoleta girl with the ball and the club mascot">
         <figcaption>Escoleta · La Nau del Clot</figcaption>
       </figure>
       <div class="lg-hero-btns">
-        <a href="/en/escoleta/" class="btn red yel" data-cta="hero-prova">Come and try</a>
+        <a href="/en/escoleta/" class="btn red" data-cta="hero-prova">Come and try</a>
         <button type="button" class="btn ghost" id="entrenBtn2" aria-expanded="false" aria-controls="entrenPanel2" data-cta="hero-entrenaments">Training times</button>
         <a href="/escoleta/flyer/flyer-escoleta-a5.pdf" download class="btn ghost" data-descarrega="Escoleta info sheet" data-cta="hero-full">&#11015; Download the info sheet (PDF)</a>
         <div class="entren-panel" id="entrenPanel2" hidden>
-      <div class="entren-row"><b>Wednesdays · 17:30–18:40</b><span>Escola Casas · Plaça de Valentí Almirall</span></div>
-      <div class="entren-row"><b>Saturdays · 9:00–10:30</b><span>La Nau del Clot · Carrer de la Llacuna, 170-172</span></div>
-      <div class="entren-foot">September to June. The first training session is a free trial.</div>
-      </div>
+          <div class="entren-row"><b>Wednesdays · 17:30–18:40</b><span>Escola Casas · Plaça de Valentí Almirall</span></div>
+          <div class="entren-row"><b>Saturdays · 9:00–10:30</b><span>La Nau del Clot · Carrer de la Llacuna, 170-172</span></div>
+          <div class="entren-foot">September to June. The first training session is a free trial.</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <section class="fr2 only-light" aria-label="Quick access to the club">
-    <a class="fr fr--paper" href="/en/escoleta/" data-cta="franja-escoleta">
-      <span><h3>Escoleta</h3><p>Ages 4 to 8. Where everyone starts, knowing nothing at all.</p></span>
-      <span class="st">Registration open</span>
+  <section class="franges only-light" aria-label="Quick access to the club">
+    <a class="franja" href="/en/escoleta/" data-cta="franja-escoleta">
+      <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">Ages 4 to 8. Where everyone starts, knowing nothing yet.</span></span>
+      <span class="franja-go"><em>Enrolment open</em><i></i></span>
     </a>
-    <a class="fr fr--ink" href="#seniors" data-cta="franja-seniors">
-      <span class="im im--group"><img src="/img/seniors.webp" srcset="/img/seniors.webp 600w, /img/seniors@2x.webp 1200w" sizes="230px" width="600" height="900" loading="lazy" decoding="async" alt="First-team CB Grup Barna player with the ball"></span>
-      <span><h3>The seniors</h3><p>The club's first team.</p></span>
-      <span class="st">2026-27 season</span>
+    <a class="franja franja--ink" href="/en/open-days/" data-cta="franja-portes-obertes">
+      <span class="franja-tx"><span class="franja-t">Open days</span><span class="franja-s">All September. Come and try a training session, from the Escoleta to the seniors.</span></span>
+      <span class="franja-go"><em>Ask for a day</em><i></i></span>
     </a>
-    <a class="fr fr--paper" href="/en/womens-basketball/" data-cta="franja-femeni">
-      <span class="im im--faces"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="230px" width="375" height="500" loading="lazy" decoding="async" alt="Two CB Grup Barna players in the club kit"></span>
-      <span><h3>Women's</h3><p>Same number of teams and same budget as the men's line.</p></span>
-      <span class="st">Real parity</span>
+    <a class="franja franja--ink" href="#seniors" data-cta="franja-seniors">
+      <span class="franja-ph franja-ph--alta"><img src="/img/blog/seniors-grup.webp" srcset="/img/blog/seniors-grup.webp 440w, /img/blog/seniors-grup@2x.webp 880w" sizes="(max-width: 900px) 90vw, 230px" width="440" height="587" loading="lazy" decoding="async" alt="Four first-team players of CB Grup Barna"></span>
+      <span class="franja-tx"><span class="franja-t">The seniors</span><span class="franja-s">The club's first team.</span></span>
+      <span class="franja-go"><em>Season 26·27</em><i></i></span>
     </a>
-    <a class="fr fr--red" href="/en/partits/" data-cta="franja-dies-partit">
-      <span><h3>Calendar</h3><p>Match days and results for every team, every week.</p></span>
-      <span class="st">This weekend</span>
+    <a class="franja" href="/en/womens-basketball/" data-cta="franja-femeni">
+      <span class="franja-ph franja-ph--cares"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="(max-width: 900px) 90vw, 230px" width="375" height="500" loading="lazy" decoding="async" alt="Two CB Grup Barna players in club kit"></span>
+      <span class="franja-tx"><span class="franja-t">Women's basketball</span><span class="franja-s">Same number of teams and the same budget as the men's line.</span></span>
+      <span class="franja-go"><em>Real parity</em><i></i></span>
     </a>
-    <a class="fr fr--paper" href="/en/club/" data-cta="franja-club">
-      <span class="im"><img src="/img/club.webp" srcset="/img/club.webp 550w, /img/club@2x.webp 1100w" sizes="230px" width="550" height="366" loading="lazy" decoding="async" alt="CB Grup Barna group photo under the club banner"></span>
-      <span><h3>The club</h3><p>Sixty-one years developing the neighbourhood's boys and girls.</p></span>
-      <span class="st">Since 1965</span>
+    <a class="franja franja--red" href="/en/partits/" data-cta="franja-dies-partit">
+      <span class="franja-tx"><span class="franja-t">Calendar</span><span class="franja-s">Calendar and results for every team, every week.</span></span>
+      <span class="franja-go"><em>This weekend</em><i></i></span>
     </a>
-    <div class="a-foot"><span><b>#Som<em>Clot</em></b> · La Nau del Clot, Sant Martí</span><a class="diari" href="/en/blog/">The Clot journal →</a><span class="langs"><a href="/" hreflang="ca" lang="ca">CA</a> · <a href="/es/" hreflang="es" lang="es">ES</a> · <b>EN</b></span></div>
+    <a class="franja" href="/en/grup-barna-dades-oficials/" data-cta="franja-club">
+      <span class="franja-ph"><img src="/img/club.webp" srcset="/img/club.webp 550w, /img/club@2x.webp 1100w" sizes="(max-width: 900px) 90vw, 230px" width="550" height="366" loading="lazy" decoding="async" alt="CB Grup Barna group photo under the club banner"></span>
+      <span class="franja-tx"><span class="franja-t">The club</span><span class="franja-s">Sixty-one years training children from the neighbourhood.</span></span>
+      <span class="franja-go"><em>Since 1965</em><i></i></span>
+    </a>
+    <a class="franja franja--ink" href="/en/blog/" data-cta="franja-observatori">
+      <span class="franja-tx"><span class="franja-t">Observatori Barna</span><span class="franja-s">The club's thinking on youth basketball, in eight series.</span></span>
+      <span class="franja-go"><em>New</em><i></i></span>
+    </a>
+    <a class="franja" href="/en/fotos/" data-cta="franja-galeria">
+      <span class="franja-ph"><img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 1200w, /img/campus-hero@2x.webp 2048w" sizes="(max-width: 900px) 90vw, 230px" width="360" height="202" loading="lazy" decoding="async" alt="CB Grup Barna basketball camp session at La Nau del Clot"></span>
+      <span class="franja-tx"><span class="franja-t">Gallery</span><span class="franja-s">Photos from the season.</span></span>
+      <span class="franja-go"><em>Match days and events</em><i></i></span>
+    </a>
+    <a class="franja franja--red" href="/en/contact-us/" data-cta="franja-escriu-nos">
+      <span class="franja-tx"><span class="franja-t">Contact us</span><span class="franja-s">Ask for information — we reply the same day — or leave an anonymous suggestion.</span></span>
+      <span class="franja-go"><em>With a form</em><i></i></span>
+    </a>
   </section>
+  <div class="lg-strip only-light">
+    <span><b>#SOMCLOT</b> · La Nau del Clot, Sant Martí</span>
+    <a href="#info" data-cta="strip-info">Want information? <span aria-hidden="true">↓</span></a>
+  </div>
+
+  <!-- ==== SÈNIORS ==== -->
   <section class="section" id="seniors">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -1156,7 +1142,6 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
       </div>
     </div>
   </section>
-
 
 
 
@@ -1378,7 +1363,7 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
   </section>
 
   <!-- ==== ACCÉS RÀPID · tot el club a mà ==== -->
-  <section class="section band-soft" id="acces">
+  <section class="section band-soft only-extensa" id="acces">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow">Everything at hand</p>
@@ -1447,7 +1432,7 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
 
 
   <!-- ==== PRESENTACIONS · documents institucionals del club ==== -->
-  <section class="section" id="presentacions" aria-labelledby="presentacions-title">
+  <section class="section only-extensa" id="presentacions" aria-labelledby="presentacions-title">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow red">What the Grup Barna is</p>
@@ -1708,43 +1693,6 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
 </a>
 
 <script>
-  // ==== MENÚ ====
-  (function () {
-    var burger = document.getElementById('burger');
-    var menu = document.getElementById('menu');
-    if (!burger || !menu) return;
-    function toggle(open) {
-      menu.classList.toggle('open', open);
-      document.body.classList.toggle('menu-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      // El menú tapa tota la pantalla, però amb el tabulador se'n sortia cap
-      // a la pàgina de sota, que no es veu: qui navega amb teclat es perdia
-      // en enllaços invisibles. Ara el focus hi entra en obrir-lo, hi dona
-      // voltes mentre és obert, i torna al botó en tancar-lo.
-      if (open) {
-        var primer = menu.querySelector('a, button');
-        if (primer) primer.focus();
-      } else if (menu.contains(document.activeElement)) {
-        burger.focus();
-      }
-    }
-    burger.addEventListener('click', function () { toggle(!menu.classList.contains('open')); });
-    menu.addEventListener('click', function (e) { if (e.target.closest('a')) toggle(false); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { toggle(false); return; }
-      if (e.key !== 'Tab' || !menu.classList.contains('open')) return;
-      var f = [].slice.call(menu.querySelectorAll('a[href], button:not([disabled])'))
-                .filter(function (el) { return el.offsetParent !== null; });
-      if (!f.length) return;
-      var primer = f[0], ultim = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === primer) { e.preventDefault(); ultim.focus(); }
-      else if (!e.shiftKey && document.activeElement === ultim) { e.preventDefault(); primer.focus(); }
-      else if (!menu.contains(document.activeElement)) { e.preventDefault(); primer.focus(); }
-    });
-  })();
-
   // ==== CTA tracking ====
   document.querySelectorAll('[data-cta]').forEach(function (el) {
     el.addEventListener('click', function () {
@@ -1885,19 +1833,31 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
   // formulari a pantalla: allà ja hi ha la crida i taparia els camps.
   (function () {
     var bar = document.getElementById('actionbar');
-    var lead = document.getElementById('escoleta');
     var info = document.getElementById('info');
-    if (!bar || !lead || !('IntersectionObserver' in window)) return;
-    var passatLead = false, formVisible = false;
-    function pinta() { bar.classList.toggle('on', passatLead && !formVisible); }
-    new IntersectionObserver(function (e) {
-      passatLead = !e[0].isIntersecting; pinta();
-    }, { threshold: 0.2 }).observe(lead);
-    if (info) {
+    if (!bar) return;
+    // El sentinella depèn de la vista: a franges és el hero de franges i a
+    // l'extensa la secció d'Escoleta. Amb l'observador fix sobre #escoleta
+    // (ocult a franges) la barra sortia des del primer segon.
+    function sentinella() {
+      var lg = document.querySelector('.lg-hero');
+      if (lg && lg.offsetParent !== null) return lg;
+      return document.getElementById('escoleta');
+    }
+    var formVisible = false;
+    function pinta() {
+      var s = sentinella();
+      var passat = s ? s.getBoundingClientRect().bottom < 0 : false;
+      bar.classList.toggle('on', passat && !formVisible);
+    }
+    window.addEventListener('scroll', pinta, { passive: true });
+    window.addEventListener('resize', pinta);
+    new MutationObserver(pinta).observe(document.documentElement, { attributes: true, attributeFilter: ['data-view'] });
+    if (info && 'IntersectionObserver' in window) {
       new IntersectionObserver(function (e) {
         formVisible = e[0].isIntersecting; pinta();
       }, { threshold: 0.12 }).observe(info);
     }
+    pinta();
   })();
 
   // ==== CALENDARI · propers partits des de /partits/data.json ====
@@ -1943,10 +1903,20 @@ html:not([data-view="extensa"]) .lg-hero.only-light{display:grid}
           + '</div>';
       }).join('');
     }
-    fetch('/partits/data.json?t=' + Math.floor(Date.now() / 3600000))
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) { if (d) render(d); else buit(); })
-      .catch(buit);
+    // El calendari només viu a la vista extensa: a franges no cal baixar
+    // 130 KB que no es veuran. Es demana quan la secció és visible, i si
+    // l'usuari canvia de vista, en aquell moment.
+    var demanat = false;
+    function demana() {
+      if (demanat || box.offsetParent === null) return;
+      demanat = true;
+      fetch('/partits/data.json?t=' + Math.floor(Date.now() / 3600000))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { if (d) render(d); else buit(); })
+        .catch(buit);
+    }
+    demana();
+    new MutationObserver(demana).observe(document.documentElement, { attributes: true, attributeFilter: ['data-view'] });
   })();
 
   // ==== VALORACIÓ DE LA WEB ====

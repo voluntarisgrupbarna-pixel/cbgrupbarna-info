@@ -22,16 +22,6 @@ només l'hi posa nom.
 
 ---
 
-## 1.4.0 — 2026-08-25
-
-**La portada, calcada de la maqueta.** L'estètica aplicada al matí quadrava
-els tokens però no la portada: la vista de franges seguia amb el hero curt i
-les nou franges petites. Ara és la maqueta del document als tres idiomes:
-hero de dues columnes amb la foto de l'Escoleta i els botons, les **cinc
-franges grans** (Escoleta · Els sèniors · Femení · Calendari · El club), la
-barra #SomClot i el ticker amb el text de la maqueta. Skill `web-cbgb`
-actualitzada perquè la guia nova quedi escrita.
-
 ## 1.3.1 — 2026-08-25
 
 **Prova d'UX** sobre 16 pàgines × 2 amples amb navegador real, i els arreglos

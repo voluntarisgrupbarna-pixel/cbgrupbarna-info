@@ -629,7 +629,7 @@
       <path d="m15 18-6-6 6-6"/>
     </svg>
   </button>
-  <img id="lb-img" alt="Foto del club" loading="eager">
+  <img id="lb-img" alt="Foto de l'àlbum" loading="eager">
   <video id="lb-video" controls playsinline style="display:none;max-width:min(92vw, 1200px);max-height:85vh"></video>
   <button class="lb-next" id="lb-next" aria-label="Següent">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1053,7 +1053,9 @@ function loadMorePhotos() {
       video.src = photoThumb(ev, id);
     } else {
       const img = new Image();
-      img.alt = `Foto ${i + 1}`;
+      // Context real per a qui fa servir lector de pantalla: abans totes les
+      // miniatures deien «Foto 1», «Foto 2»… i no aportaven res.
+      img.alt = altFoto(ev, i);
       img.loading = 'lazy';
       img.onload = () => { shimmer.remove(); item.appendChild(img); };
       img.onerror = () => { shimmer.style.opacity = '.3'; };
@@ -1149,10 +1151,18 @@ function navigateLightbox(dir) {
   updateLightbox();
 }
 
+function altFoto(ev, i) {
+  var parts = ['Foto ' + (i + 1) + ' de ' + ev.photos.length];
+  if (ev.title) parts.push(ev.title);
+  if (ev.location) parts.push(ev.location);
+  return parts.join(' · ');
+}
+
 function updateLightbox() {
   const photos = currentEvent.photos;
   const id = photos[lbIndex];
   const img = document.getElementById('lb-img');
+  img.alt = altFoto(currentEvent, lbIndex);
   const video = document.getElementById('lb-video');
 
   if (isVideoRef(id)) {

@@ -5,152 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Escola de Bàsquet a Barcelona · Escoleta CB Grup Barna (4-8 anys)</title>
 <link rel="preload" href="/fonts/anton-400-2686.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/cerca.css">
 <style>
-/* Tipografies auto-allotjades (Anton + Inter). Sense CDN de Google:
-   evita transferir IPs de les famílies a tercers (criteri RGPD del club). */
-@font-face {
-  font-family: 'Anton';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/anton-400-2686.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Anton';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/anton-400-1354.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/inter-400-4592.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/inter-400-8117.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(/fonts/inter-400-4592.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(/fonts/inter-400-8117.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(/fonts/inter-400-4592.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(/fonts/inter-400-8117.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 /* ===================================================================
-   CB GRUP BARNA · tokens de marca (sistema-visual-cbgb)
-   Vermell Barna #E20613 · Tinta #10100E · Blanc/crema #FFFFFF
-   Display: Anton · Cos: Inter · NOMÉS 3 COLORS. Sense degradats decoratius.
+   CB GRUP BARNA · /escoleta/ sobre el sistema visual compartit
+   («Estètica definitiva», 25-08-2026): paper blanc, tinta negra i el
+   vermell de l'escut com a únic accent. El hero és l'única superfície
+   de tinta, com el masthead de la portada; Portes Obertes i el tanca-
+   ment són superfícies vermelles, com les franges. Tipografia i tokens
+   idèntics a css/barna.css.
    =================================================================== */
 :root{
   --red:#E20613;
-  /* Aquesta pagina va sobre fons fosc: el vermell de l'escut hi dona 3,87:1 i
-     no arriba al minim per a text petit. El sistema el preveu aclarit a
-     #FF3B41 (5,4:1 sobre tinta). Els fons plens segueixen amb --red. */
-  --red-light:#FF3B41;
-  --black:#10100E;
-  --ink:#171B21;
-  --paper:#FFFFFF;
-  --grey:#8A8F98;
-  --line:rgba(255,255,255,.14);
+  --red-dark:#A8040E;   /* text vermell sobre fons clar (7,81:1) */
+  --red-light:#FF3B41;  /* text vermell sobre tinta (5,4:1) */
+  --ink:#10100E;
+  --ink-2:#46433f;
+  --muted:#6B6560;
+  --paper:#ffffff;
+  --line:rgba(16,16,14,.14);
+  --line-inv:rgba(255,255,255,.16);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
+  --body-f:'Inter',system-ui,-apple-system,sans-serif;
   --maxw:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  background:var(--black);color:var(--paper);
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--paper);color:var(--ink);
+  font-family:var(--body-f);
   font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding-bottom:66px;
 }
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 18px;z-index:200}
+.skip:focus{left:0}
 
-/* ---------- PORTES OBERTES ---------- */
-.po{background:var(--red);color:#fff;border-top:none;padding:64px 0 68px}
-.po .kicker{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
-.po h2{font-family:'Anton',sans-serif;font-size:clamp(34px,6vw,60px);line-height:1.02;text-transform:uppercase;margin-bottom:16px}
-.po p{font-size:18px;max-width:640px;opacity:.95;margin-bottom:26px}
-.po .btn{background:#fff;color:var(--red)}
-.po .btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.8)}
-.po .cta{display:flex;gap:12px;flex-wrap:wrap}
-.po .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28)}
-.po .facts div{font-size:15px}
-.po .facts b{display:block;font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.04em;text-transform:uppercase}
-.pobar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--red);
-  display:flex;align-items:center;justify-content:center;gap:14px;padding:11px 16px;flex-wrap:wrap;
-  box-shadow:0 -8px 24px rgba(0,0,0,.35)}
-.pobar span{font-family:'Anton',sans-serif;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
-.pobar a{background:#fff;color:var(--red);text-decoration:none;font-family:'Anton',sans-serif;font-size:13px;
-  letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px}
-body{padding-bottom:66px}
-@media(max-width:520px){.pobar span{font-size:12px}.pobar{gap:10px}}
+/* Bilingüe antic: l'idioma inactiu queda ocult fins que es netegi el marcatge. */
+body[data-active="ca"] [data-lang="es"],
+body[data-active="es"] [data-lang="ca"]{display:none !important}
 
-/* ---------- LANG SWITCH + SITE NAV (una sola barra fixa) ---------- */
+/* ---------- BARRA SUPERIOR · com la capçalera de la resta del web ---------- */
 .langbar{
   position:fixed;top:0;left:0;right:0;z-index:60;
-  background:rgba(16,16,14,.88);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);color:var(--ink);
 }
 .langbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;height:56px}
-/* Selector d'idioma, com a la resta del web (tres adreces, no un commutador
-   de text). Caselles de 24px mínim perquè un dit hi arribi. */
-.lang-switch{display:flex;align-items:center;gap:2px;font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;flex-shrink:0}
-.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;opacity:.55;color:var(--paper);text-decoration:none;transition:opacity .3s,color .3s}
-.lang-switch a.active{opacity:1;color:var(--red-light)}
-.lang-switch a:hover,.lang-switch a:focus-visible{opacity:1;color:var(--red-light)}
-.lang-switch .sep{opacity:.25;pointer-events:none}
-.brandmark{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:inherit}
-.brandmark span{color:var(--red-light)}
+.lang-switch{display:flex;align-items:center;gap:2px;font-family:var(--body-f);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;flex-shrink:0}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;padding:7px 4px;color:var(--muted);text-decoration:none;transition:color .3s}
+.lang-switch a.active{color:var(--red-dark)}
+.lang-switch a:hover,.lang-switch a:focus-visible{color:var(--red-dark)}
+.lang-switch .sep{opacity:.4;pointer-events:none}
+.brandmark{font-family:var(--display);font-size:15px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;text-decoration:none;color:var(--ink)}
+.brandmark span{color:var(--red-dark)}
 @media(max-width:400px){.brandmark .bm-sub{display:none}}
 .site-nav{display:flex;align-items:center;gap:16px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 .site-nav::-webkit-scrollbar{display:none}
-.site-nav a{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);white-space:nowrap;text-decoration:none;transition:color .15s}
-.site-nav a:hover{color:#fff}
+.site-nav a{font-family:var(--body-f);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;text-decoration:none;transition:color .15s}
+.site-nav a:hover{color:var(--ink)}
 @media(max-width:1080px){.site-nav a.opt{display:none}}
-/* Per sota de 640 px la barra s'amagava del tot i no hi havia cap hamburguesa
-   que la substituís: al mòbil aquesta pàgina es quedava sense navegació. Com
-   que ja és una barra amb desplaçament horitzontal, només li cal una segona
-   línia per a ella sola. Hi tornen també els enllaços .opt, que amb el
-   desplaçament hi caben. */
 @media(max-width:640px){
   .langbar .wrap{flex-wrap:wrap;height:auto;gap:0 14px;padding-top:11px;padding-bottom:9px}
   .site-nav{order:3;flex-basis:100%;gap:14px;padding-top:9px;margin-top:9px;
@@ -158,24 +80,11 @@ body{padding-bottom:66px}
   .site-nav a.opt{display:inline}
   .hero{padding-top:96px}
 }
-.langs{display:flex;gap:4px;flex-shrink:0}
-.langs button{
-  font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;
-  background:transparent;color:var(--grey);border:1px solid var(--line);
-  padding:7px 13px;border-radius:2px;cursor:pointer;transition:.15s;
-}
-.langs button:hover{color:#fff;border-color:rgba(255,255,255,.4)}
-.langs button[aria-pressed="true"]{background:var(--red);color:#fff;border-color:var(--red)}
 
-/* Bilingue: nomes s'amaga l'idioma inactiu, aixi cada element conserva
-   el seu display natural (block, inline-block, grid...). */
-body[data-active="ca"] [data-lang="es"],
-body[data-active="es"] [data-lang="ca"]{display:none !important}
-
-/* ---------- HERO ---------- */
-.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;padding-top:56px;overflow:hidden}
+/* ---------- HERO · l'única superfície de tinta de la pàgina ---------- */
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;padding-top:56px;overflow:hidden;background:var(--ink);color:#fff}
 .hero-img{position:absolute;inset:0}
-/* Tractament de foto de marca: B/N alt contrast, la foto és textura, no protagonista */
+/* Foto d'arxiu en B/N: textura, no protagonista. */
 .hero-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.22) brightness(.78) blur(.5px)}
 .hero-img::after{
   content:"";position:absolute;inset:0;
@@ -186,55 +95,76 @@ body[data-active="es"] [data-lang="ca"]{display:none !important}
 .hero .wrap{position:relative;z-index:2;padding-bottom:72px;padding-top:120px}
 .eyebrow{
   display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:#fff;background:var(--red);padding:7px 13px;border-radius:2px;margin-bottom:26px;
+  color:#fff;background:var(--red);padding:7px 13px;margin-bottom:26px;
 }
 h1,.h1-alt{
-  font-family:'Anton',sans-serif;font-weight:400;
-  font-size:clamp(46px,8.6vw,118px);line-height:.88;letter-spacing:-.02em;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(46px,8.6vw,108px);line-height:.9;letter-spacing:.01em;
   text-transform:uppercase;
 }
 h1 em,.h1-alt em{font-style:normal;color:var(--red-light)}
 .subhook{
-  display:inline-block;margin-top:24px;font-family:'Anton',sans-serif;text-transform:uppercase;
-  font-size:clamp(19px,2.6vw,30px);letter-spacing:.01em;color:var(--paper);line-height:1.15;
+  display:inline-block;margin-top:24px;font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(19px,2.6vw,30px);letter-spacing:.01em;color:#fff;line-height:1.15;
   background:rgba(16,16,14,.86);border-left:5px solid var(--red);
-  padding:11px 20px 12px;border-radius:2px;
+  padding:11px 20px 12px;
 }
-.hero p{max-width:620px;margin-top:26px;font-size:19px;color:#CFCBC4}
-.hero p.nota-molts{font-size:16px;color:#A9A5A0;border-left:3px solid rgba(226,6,19,.65);padding-left:14px;margin-top:20px}
-.hero .credit{margin-top:20px;font-size:12px;color:var(--grey);letter-spacing:.04em}
+.hero p{max-width:620px;margin-top:26px;font-size:19px;color:rgba(255,255,255,.82)}
+.hero p.nota-molts{font-size:16px;color:rgba(255,255,255,.66);border-left:3px solid rgba(255,59,65,.75);padding-left:14px;margin-top:20px}
+.hero .credit{margin-top:20px;font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.04em}
 
-/* ---------- SECTIONS ---------- */
-section{padding:88px 0;border-top:1px solid var(--line)}
+/* ---------- PORTES OBERTES · superfície vermella ---------- */
+.po{background:var(--red);color:#fff;border-top:none;padding:64px 0 68px}
+.po .kicker{font-family:var(--display);font-size:13px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+.po h2{color:#fff;margin-bottom:16px}
+.po p{font-size:18px;max-width:640px;opacity:.95;margin-bottom:26px}
+.po .btn{background:#fff;color:var(--red-dark)}
+.po .btn:hover{background:var(--ink);color:#fff}
+.po .btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.8)}
+.po .btn.ghost:hover{background:#fff;color:var(--ink)}
+.po .cta{display:flex;gap:12px;flex-wrap:wrap}
+.po .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28)}
+.po .facts div{font-size:15px}
+.po .facts b{display:block;font-family:var(--display);font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.pobar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--red);
+  display:flex;align-items:center;justify-content:center;gap:14px;padding:11px 16px;flex-wrap:wrap;
+  box-shadow:0 -8px 24px rgba(16,16,14,.25)}
+.pobar span{font-family:var(--display);font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.pobar a{background:#fff;color:var(--red-dark);text-decoration:none;font-family:var(--display);font-size:13px;
+  letter-spacing:.1em;text-transform:uppercase;padding:10px 18px}
+@media(max-width:520px){.pobar span{font-size:12px}.pobar{gap:10px}}
+
+/* ---------- SECCIONS · paper blanc, filet fi, com les interiors ---------- */
+section,.section{padding:88px 0;border-top:1px solid var(--line)}
 .sec-num{
-  font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.2em;
-  color:var(--red-light);text-transform:uppercase;margin-bottom:14px;
+  font-family:var(--display);font-size:13px;letter-spacing:.2em;
+  color:var(--red-dark);text-transform:uppercase;margin-bottom:14px;
 }
 h2{
-  font-family:'Anton',sans-serif;font-weight:400;
-  font-size:clamp(34px,5.6vw,66px);line-height:.94;letter-spacing:-.01em;
-  text-transform:uppercase;margin-bottom:24px;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(34px,5.6vw,66px);line-height:.94;letter-spacing:.01em;
+  text-transform:uppercase;margin-bottom:24px;color:var(--ink);
 }
 h3{
-  font-family:'Anton',sans-serif;font-weight:400;font-size:26px;
-  text-transform:uppercase;letter-spacing:.01em;margin-bottom:10px;
+  font-family:var(--display);font-weight:400;font-size:26px;
+  text-transform:uppercase;letter-spacing:.01em;margin-bottom:10px;color:var(--ink);
 }
-.lead{font-size:20px;color:#CFCBC4;max-width:720px}
+.lead{font-size:20px;color:var(--ink-2);max-width:720px}
 p+p{margin-top:18px}
-.body{max-width:720px;color:#B2AEA8}
-.body strong{color:#fff;font-weight:700}
+.body{max-width:720px;color:var(--ink-2)}
+.body strong{color:var(--ink);font-weight:700}
 
 .pull{
   border-left:3px solid var(--red);padding:6px 0 6px 22px;margin:34px 0;
-  font-family:'Anton',sans-serif;font-size:clamp(22px,3.2vw,34px);line-height:1.15;
-  text-transform:uppercase;max-width:760px;
+  font-family:var(--display);font-size:clamp(22px,3.2vw,34px);line-height:1.15;
+  text-transform:uppercase;max-width:760px;color:var(--ink);
 }
 
 /* ---------- FIGURES ---------- */
 figure{margin:38px 0}
-figure img{width:100%;border-radius:2px}
-figcaption{margin-top:12px;font-size:13.5px;color:var(--grey);line-height:1.55;max-width:720px}
-figcaption b{color:#CFCBC4;font-weight:700}
+figure img{width:100%}
+figcaption{margin-top:12px;font-size:13.5px;color:var(--muted);line-height:1.55;max-width:720px}
+figcaption b{color:var(--ink);font-weight:700}
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:38px 0}
 .grid2 figure{margin:0}
@@ -243,107 +173,113 @@ figcaption b{color:#CFCBC4;font-weight:700}
 .grid3 img,.grid2 img{aspect-ratio:4/3;object-fit:cover}
 .tall img{aspect-ratio:3/4;object-fit:cover;object-position:center top}
 
-/* ---------- DOC HIGHLIGHT ---------- */
+/* ---------- EL DOCUMENT ---------- */
 .doc{
-  background:var(--ink);border:1px solid var(--line);border-radius:3px;
+  background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--red);
   padding:30px;margin:40px 0;
 }
 .doc .tag{
   display:inline-block;background:var(--red);color:#fff;
   font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  padding:5px 11px;border-radius:2px;margin-bottom:18px;
+  padding:5px 11px;margin-bottom:18px;
 }
-.doc img{border-radius:2px}
 .doc dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;margin-top:22px;font-size:14.5px}
-.doc dt{color:var(--grey);text-transform:uppercase;font-size:11.5px;letter-spacing:.12em;font-weight:700;padding-top:3px}
-.doc dd{color:var(--paper);font-weight:500}
+.doc dt{color:var(--muted);text-transform:uppercase;font-size:11.5px;letter-spacing:.12em;font-weight:700;padding-top:3px}
+.doc dd{color:var(--ink);font-weight:500}
 
 /* ---------- ALUMNI ---------- */
 .alumni{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1px;background:var(--line);margin-top:44px;border:1px solid var(--line)}
-.alum{background:var(--ink);display:flex;flex-direction:column}
-.alum .shot{position:relative;aspect-ratio:3/4;overflow:hidden;background:#0A0C10}
-.alum .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.alum{background:var(--paper);display:flex;flex-direction:column}
+.alum .shot{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--paper)}
+.alum .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 .alum:hover .shot img{transform:scale(1.04)}
-.alum .shot::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(16,16,14,0) 45%,rgba(23,27,33,.96) 100%)}
 .alum .noshot{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;
-  background:repeating-linear-gradient(135deg,#12161C 0 10px,#171B21 10px 20px);position:relative}
-.alum .noshot span{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.16em;
-  text-transform:uppercase;color:#9AA1AF;text-align:center;padding:0 22px;line-height:1.5}
+  background:repeating-linear-gradient(135deg,#fff 0 10px,#f2f1ef 10px 20px);position:relative}
+.alum .noshot span{font-family:var(--display);font-size:13px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);text-align:center;padding:0 22px;line-height:1.5}
 .alum .txt{padding:22px 22px 26px}
-.alum .who{font-family:'Anton',sans-serif;font-size:23px;text-transform:uppercase;line-height:1.05}
-.alum .now{color:var(--red-light);font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-top:9px}
-.alum p{font-size:14px;color:#A6A29C;margin-top:13px;line-height:1.6}
+.alum .who{font-family:var(--display);font-size:23px;text-transform:uppercase;line-height:1.05;color:var(--ink)}
+.alum .now{color:var(--red-dark);font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-top:9px}
+.alum p{font-size:14px;color:var(--ink-2);margin-top:13px;line-height:1.6}
 .alum .ara{
   margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
   display:flex;gap:10px;align-items:flex-start;
 }
 .alum .ara .tag{
-  flex:0 0 auto;font-family:'Anton',sans-serif;font-size:10.5px;letter-spacing:.14em;
-  background:var(--red);color:#fff;padding:5px 8px;border-radius:2px;margin-top:2px;
+  flex:0 0 auto;font-family:var(--display);font-size:10.5px;letter-spacing:.14em;
+  background:var(--red);color:#fff;padding:5px 8px;margin-top:2px;
 }
-.alum .ara .val{font-size:13.5px;color:var(--paper);line-height:1.5;font-weight:500}
-.alum .ara .val em{display:block;font-style:normal;color:var(--grey);font-weight:400;font-size:12.5px;margin-top:2px}
-.alum .ara.pend .tag{background:#3A3F47}
-.alum .ara.pend .val{color:var(--grey);font-weight:400}
+.alum .ara .val{font-size:13.5px;color:var(--ink);line-height:1.5;font-weight:500}
+.alum .ara .val em{display:block;font-style:normal;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:2px}
+.alum .ara.pend .tag{background:var(--muted)}
+.alum .ara.pend .val{color:var(--muted);font-weight:400}
 
 /* ---------- STATS ---------- */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:44px 0}
-.stat{background:var(--ink);padding:30px 24px;text-align:center}
-.stat b{display:block;font-family:'Anton',sans-serif;font-size:52px;line-height:1;color:var(--red-light)}
-.stat span{display:block;margin-top:10px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--grey)}
+.stat{background:var(--paper);padding:30px 24px;text-align:center}
+.stat b{display:block;font-family:var(--display);font-size:52px;line-height:1;color:var(--red)}
+.stat span{display:block;margin-top:10px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 
-/* ---------- CTA ---------- */
-.cta{background:var(--red);border-top:0}
-.cta h2{color:#fff}
-.cta .body{color:#fff}
+/* ---------- CTA FINAL · superfície vermella ----------
+   La classe .cta fa doble feina al marcatge: fila de botons dins de
+   seccions i secció vermella de tancament. La superfície és només per
+   a la secció. */
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+section.cta{display:block;background:var(--red);border-top:0}
+section.cta h2{color:#fff}
+section.cta .body{color:#fff}
 .btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
 .btn{
-  display:inline-block;background:var(--black);color:var(--paper);text-decoration:none;
-  font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
-  padding:17px 30px;border-radius:2px;transition:.15s;
+  display:inline-block;background:var(--ink);color:#fff;text-decoration:none;
+  font-family:var(--display);font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  padding:17px 30px;transition:transform .15s,background .3s,color .3s;
 }
 .btn:hover{transform:translateY(-2px)}
-/* Blanc pur, no crema: sobre la franja vermella el crema es queda en 4,37:1
-   i el blanc hi dona 4,92:1. */
-.btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.75)}
+/* Fora de les superfícies vermelles, el fantasma és de tinta. */
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+section.cta .btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.75)}
+section.cta .btn.ghost:hover{background:#fff;color:var(--ink)}
 .btn.wa{display:inline-flex;align-items:center;gap:12px}
 .btn.wa svg{width:22px;height:22px;fill:currentColor;flex:0 0 auto}
 
-footer{padding:52px 0;font-size:13px;color:var(--grey);border-top:1px solid var(--line)}
+footer{padding:52px 0;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
-footer a{color:#CFCBC4}
+footer a{color:var(--ink-2)}
 
 .note{
-  background:rgba(226,6,19,.10);border:1px dashed rgba(226,6,19,.55);
-  padding:16px 20px;border-radius:3px;margin:30px 0;font-size:14px;color:#E9A9A3;
+  background:rgba(226,6,19,.05);border:1px dashed rgba(226,6,19,.5);
+  padding:16px 20px;margin:30px 0;font-size:14px;color:var(--ink-2);
 }
-.note b{color:#fff}
+.note b{color:var(--ink)}
 
 @media(max-width:780px){
   body{font-size:16px}
-  section{padding:62px 0}
+  section,.section{padding:62px 0}
   .grid3,.grid2{grid-template-columns:1fr}
   .hero .wrap{padding-top:90px;padding-bottom:50px}
   .doc{padding:20px}
   .doc dl{grid-template-columns:1fr;gap:4px 0}
   .doc dd{margin-bottom:12px}
 }
+@media (prefers-reduced-motion: reduce){
+  .alum .shot img,.btn{transition:none}
+}
 
 /* FAQ visible · ha de coincidir sempre amb el FAQPage del JSON-LD */
-.faq-sec{padding:clamp(40px,6vw,84px) 0;border-top:1px solid rgba(255,255,255,.12)}
+.faq-sec{padding:clamp(40px,6vw,84px) 0;border-top:1px solid var(--line)}
 .faq-sec h2{font-size:clamp(18px,4vw,26px);margin-bottom:26px}
-.faq-q{border-bottom:1px solid rgba(255,255,255,.12)}
+.faq-q{border-bottom:1px solid var(--line)}
 .faq-q summary{list-style:none;cursor:pointer;min-height:48px;display:flex;align-items:center;
-  padding:14px 40px 14px 0;position:relative;font-weight:600;font-size:15px}
+  padding:14px 40px 14px 0;position:relative;font-weight:600;font-size:15px;color:var(--ink)}
 .faq-q summary::-webkit-details-marker{display:none}
-.faq-q summary::after{content:'+';position:absolute;right:6px;color:var(--red-light);font-weight:400;font-size:20px}
+.faq-q summary::after{content:'+';position:absolute;right:6px;color:var(--red-dark);font-weight:400;font-size:20px}
 .faq-q[open] summary::after{content:'–'}
-.mes-info{margin-top:34px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+.mes-info{margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
 .mes-info h3{font-size:clamp(15px,3vw,18px);margin-bottom:10px}
-.mes-info p{font-size:15px;line-height:1.65;max-width:62ch}
-.mes-info a{color:var(--red-light);text-decoration:underline;text-underline-offset:3px}
-.faq-q p{padding:0 0 20px;font-size:14.5px;opacity:.8;line-height:1.75;max-width:70ch}
+.mes-info p{font-size:15px;line-height:1.65;max-width:62ch;color:var(--ink-2)}
+.mes-info a{color:var(--red-dark);text-decoration:underline;text-underline-offset:3px}
+.faq-q p{padding:0 0 20px;font-size:14.5px;color:var(--ink-2);line-height:1.75;max-width:70ch}
 </style>
 <meta name="description" content="Escoleta del CB Grup Barna (4-8 anys) al Clot. D'aquí han sortit un entrenador i capitana de la Lliga Femenina Endesa, un jugador d'ACB i jugadors del Barça.">
 <meta name="keywords" content="academia de baloncesto Barcelona, acadèmia de bàsquet Barcelona, escola de bàsquet Barcelona, escuela de baloncesto Barcelona, escoleta bàsquet infantil, baloncesto infantil El Clot">
@@ -472,6 +408,7 @@ footer a{color:#CFCBC4}
       <a href="/campus/" class="opt">Campus</a>
       <a href="/empreses/" class="opt">Empreses</a>
     </nav>
+    <button class="cerca-boto" type="button" data-cerca-obrir aria-label="Cerca al web"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.5 3a7.5 7.5 0 1 1-4.6 13.4l-3.2 3.2a1 1 0 0 1-1.4-1.4l3.2-3.2A7.5 7.5 0 0 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg><span>Cerca</span></button>
     <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/escoleta/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/escoleta/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/escoleta/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
@@ -486,21 +423,15 @@ footer a{color:#CFCBC4}
   </div>
   <div class="wrap">
     <div class="eyebrow" data-lang="ca">Escoleta CB Grup Barna · des de 1965</div>
-    <div class="eyebrow" data-lang="es">Escoleta CB Grup Barna · desde 1965</div>
 
     <h1 data-lang="ca">Deu van<br>començar en<br><em>aquesta pista</em></h1>
-    <div class="h1-alt" data-lang="es" role="heading" aria-level="1">Diez empezaron<br>en <em>esta misma<br>pista</em></div>
 
     <p class="subhook" data-lang="ca">I cap d’ells ho sabia als sis anys.</p>
-    <p class="subhook" data-lang="es">Y ninguno lo sabía a los seis años.</p>
 
     <p data-lang="ca">Un entrenador de la Lliga Femenina Endesa i una capitana de la mateixa lliga. Un jugador d’ACB. Un campió de la Tercera FEB. Quatre del Barça. Tots van tenir la primera llicència aquí, i cap d’ells ho recorda com un tràmit: ho recorden com una pista de pati i un senyor que els va ensenyar a botar.</p>
     <p data-lang="ca" class="nota-molts">I no són només aquests deu. En són molts més: desenes de jugadors i jugadores formats en aquesta pista al llarg de seixanta-un anys. Aquí n’hem triat uns quants per donar a conèixer gent especial per al club, però la llista real no cabria en una pàgina.</p>
-    <p data-lang="es">Un entrenador de la Liga Femenina Endesa y una capitana de la misma liga. Un jugador de ACB. Un campeón de la Tercera FEB. Cuatro del Barça. Todos tuvieron su primera licencia aquí, y ninguno lo recuerda como un trámite: lo recuerdan como una pista de patio y un señor que les enseñó a botar.</p>
-    <p data-lang="es" class="nota-molts">Y no son solo estos diez. Son muchos más: decenas de jugadores y jugadoras formados en esta pista a lo largo de sesenta y un años. Aquí hemos elegido a unos cuantos para dar a conocer a gente especial para el club, pero la lista real no cabría en una página.</p>
 
     <div class="credit" data-lang="ca">Escola de Bàsquet Grup Barna · Sant Martí, Barcelona</div>
-    <div class="credit" data-lang="es">Escuela de Baloncesto Grup Barna · Sant Martí, Barcelona</div>
   </div>
 </header>
 
@@ -508,38 +439,25 @@ footer a{color:#CFCBC4}
 <section class="po" id="portes-obertes">
   <div class="wrap">
     <div class="kicker" data-lang="ca">Portes Obertes · Escoleta</div>
-    <div class="kicker" data-lang="es">Puertas Abiertas · Escoleta</div>
 
     <h2 data-lang="ca">Vine a provar<br>un entrenament</h2>
-    <h2 data-lang="es">Ven a probar<br>un entrenamiento</h2>
 
     <p data-lang="ca">Sense compromís i sense pagar res. El teu fill o filla entrena amb nosaltres un dia,
     coneix els entrenadors i la resta de la colla, i després decidiu. Així va començar tothom qui surt en aquesta pàgina.</p>
-    <p data-lang="es">Sin compromiso y sin pagar nada. Tu hijo o hija entrena con nosotros un día,
-    conoce a los entrenadores y al resto del grupo, y después decidís. Así empezaron todos los que salen en esta página.</p>
 
     <div class="cta">
       <a class="btn" data-lang="ca" href="/#info" data-cta="portes-obertes">Apunta't a Portes Obertes</a>
-      <a class="btn" data-lang="es" href="/#info" data-cta="portes-obertes">Apúntate a Puertas Abiertas</a>
       <a class="btn ghost" data-lang="ca" href="#historia">Història de l'Escoleta</a>
-      <a class="btn ghost" data-lang="es" href="#historia">Historia de la Escoleta</a>
       <a class="btn ghost" data-lang="ca" href="/historia/" data-cta="escoleta-historia-club">Història del club</a>
-      <a class="btn ghost" data-lang="es" href="/historia/" data-cta="escoleta-historia-club">Historia del club</a>
       <a class="btn ghost" data-lang="ca" href="/fotos/" data-cta="escoleta-galeria">Galeria de fotos</a>
-      <a class="btn ghost" data-lang="es" href="/fotos/" data-cta="escoleta-galeria">Galería de fotos</a>
       <a class="btn ghost" data-lang="ca" href="/escoleta/materials/escoleta-cb-grup-barna.pdf" download data-cta="escoleta-pdf" data-descarrega="El dossier de l'Escoleta">Descarrega el PDF</a>
-      <a class="btn ghost" data-lang="es" href="/escoleta/materials/escoleta-cb-grup-barna.pdf" download data-cta="escoleta-pdf" data-descarrega="El dossier de l'Escoleta">Descargar el PDF</a>
     </div>
 
     <div class="facts">
       <div data-lang="ca"><b>4 a 8 anys</b>Escoleta d'iniciació</div>
-      <div data-lang="es"><b>4 a 8 años</b>Escoleta de iniciación</div>
       <div data-lang="ca"><b>Dc 17:30-18:40</b>Escola Casas</div>
-      <div data-lang="es"><b>Mié 17:30-18:40</b>Escola Casas</div>
       <div data-lang="ca"><b>Ds 09:00-10:30</b>La Nau del Clot</div>
-      <div data-lang="es"><b>Sáb 09:00-10:30</b>La Nau del Clot</div>
       <div data-lang="ca"><b>Des de 1965</b>Formant nens i nenes del barri</div>
-      <div data-lang="es"><b>Desde 1965</b>Formando niños y niñas del barrio</div>
     </div>
   </div>
 </section>
@@ -549,11 +467,9 @@ footer a{color:#CFCBC4}
 <section id="avui">
   <div class="wrap">
     <h2 data-lang="ca">L'Escoleta,<br>avui</h2>
-    <h2 data-lang="es">La Escoleta,<br>hoy</h2>
 
     <div class="body">
       <p data-lang="ca" class="lead">seixanta-un anys després d'aquell pati, la mateixa pista, la mateixa mascota i les mateixes ganes de jugar.</p>
-      <p data-lang="es" class="lead">sesenta y un años después de aquel patio, la misma pista, la misma mascota y las mismas ganas de jugar.</p>
     </div>
 
     <div class="grid3 tall">
@@ -566,7 +482,6 @@ footer a{color:#CFCBC4}
     </div>
     <div class="cta">
       <a class="btn ghost" data-lang="ca" href="/fotos/" data-cta="escoleta-avui-galeria">Veure més fotos a la Galeria →</a>
-      <a class="btn ghost" data-lang="es" href="/fotos/" data-cta="escoleta-avui-galeria">Ver más fotos en la Galería →</a>
     </div>
   </div>
 </section>
@@ -576,37 +491,30 @@ footer a{color:#CFCBC4}
   <div class="wrap">
     <div class="sec-num">01</div>
     <h2 data-lang="ca">Tot va començar<br>en un pati</h2>
-    <h2 data-lang="es">Todo empezó<br>en un patio</h2>
 
     <div class="body">
       <p data-lang="ca" class="lead">No hi havia parquet. No hi havia grada. Hi havia una cistella clavada a la paret, un terra de ciment i onze nens amb samarreta negra i pantaló vermell.</p>
-      <p data-lang="es" class="lead">No había parqué. No había grada. Había una canasta clavada en la pared, un suelo de cemento y once niños con camiseta negra y pantalón rojo.</p>
 
       <p data-lang="ca">El club i l’Escoleta van néixer l’any <strong>1965</strong>. A l’esquerra de la foto, amb ulleres i jersei, hi ha <strong>en Julio Torralba</strong>, fundador del club i entrenador de referència durant dècades. Avui, seixanta-un anys després, continua a la pista cada setmana amb els nens i nenes de 4 a 8 anys de l’Escoleta.</p>
-      <p data-lang="es">El club y la Escoleta nacieron en <strong>1965</strong>. A la izquierda de la foto, con gafas y jersey, está <strong>Julio Torralba</strong>, fundador del club y entrenador de referencia durante décadas. Hoy, sesenta y un años después, sigue en la pista cada semana con los niños y niñas de 4 a 8 años de la Escoleta.</p>
     </div>
 
     <figure>
       <img src="img/partit-pati-anys90.webp" alt="Partit de bàsquet en una pista de pati als anys 90" loading="lazy" decoding="async" width="1200" height="900">
       <figcaption data-lang="ca"><b>Anys 90.</b> El nen que porta la pilota és en <b>Javier Torralba</b>, avui entrenador del Valencia Basket Femení a la Lliga Femenina Endesa. Partit en pista exterior; el públic, assegut a la vorera.</figcaption>
-      <figcaption data-lang="es"><b>Años 90.</b> El niño que lleva el balón es <b>Javier Torralba</b>, hoy entrenador del Valencia Basket Femenino en la Liga Femenina Endesa. Partido en pista exterior; el público, sentado en el bordillo.</figcaption>
     </figure>
 
     <div class="grid2">
       <figure>
         <img src="img/campions-anys90.webp" alt="Nens del Grup Barna celebrant amb un trofeu als anys 90" loading="lazy" decoding="async" width="1200" height="865">
         <figcaption data-lang="ca"><b>Un trofeu, deu mans.</b> La celebració no ha canviat gens.</figcaption>
-        <figcaption data-lang="es"><b>Un trofeo, diez manos.</b> La celebración no ha cambiado nada.</figcaption>
       </figure>
       <figure>
         <img src="img/equip-medalles.webp" alt="Equip del Grup Barna amb medalles i Julio Torralba" loading="lazy" decoding="async" width="863" height="638">
         <figcaption data-lang="ca"><b>Generació rere generació.</b> En Julio, a la dreta, en una altra promoció.</figcaption>
-        <figcaption data-lang="es"><b>Generación tras generación.</b> Julio, a la derecha, en otra promoción.</figcaption>
       </figure>
     </div>
 
     <div class="pull" data-lang="ca">El club no va néixer en un pavelló.<br>Va néixer en un pati.</div>
-    <div class="pull" data-lang="es">El club no nació en un pabellón.<br>Nació en un patio.</div>
   </div>
 </section>
 
@@ -615,41 +523,35 @@ footer a{color:#CFCBC4}
   <div class="wrap">
     <div class="sec-num">02</div>
     <h2 data-lang="ca">El document<br>que ho demostra</h2>
-    <h2 data-lang="es">El documento<br>que lo demuestra</h2>
 
     <div class="body">
       <p data-lang="ca" class="lead">Temporada 1993-94. Campionat Mini Masculí Nivell A. Un nen d’onze anys tramita la seva primera llicència federativa.</p>
-      <p data-lang="es" class="lead">Temporada 1993-94. Campeonato Mini Masculino Nivel A. Un niño de once años tramita su primera licencia federativa.</p>
     </div>
 
     <div class="doc">
       <span class="tag" data-lang="ca">Document original</span>
-      <span class="tag" data-lang="es">Documento original</span>
       <img src="img/fitxa-federativa-xavier-torralba.webp" alt="Llicència federativa de la Federació Catalana de Basquetbol de Xavier Torralba Liso, Grup Barna, temporada 1993-94" loading="lazy" decoding="async" width="1200" height="899">
       <dl>
-        <dt data-lang="ca">Jugador</dt><dt data-lang="es">Jugador</dt>
+        <dt data-lang="ca">Jugador</dt>
         <dd>Torralba Liso, Xavier</dd>
-        <dt data-lang="ca">Naixement</dt><dt data-lang="es">Nacimiento</dt>
+        <dt data-lang="ca">Naixement</dt>
         <dd>06.03.1982</dd>
-        <dt data-lang="ca">Club</dt><dt data-lang="es">Club</dt>
+        <dt data-lang="ca">Club</dt>
         <dd>Grup Barna · Barcelona</dd>
-        <dt data-lang="ca">Categoria</dt><dt data-lang="es">Categoría</dt>
+        <dt data-lang="ca">Categoria</dt>
         <dd>Camp. Mini Masculí Nivell "A"</dd>
-        <dt data-lang="ca">Temporada</dt><dt data-lang="es">Temporada</dt>
+        <dt data-lang="ca">Temporada</dt>
         <dd>1993-94 · Tramitada el 7.10.93</dd>
       </dl>
     </div>
 
     <div class="body">
       <p data-lang="ca">Aquell nen és avui <strong>Javier Torralba</strong>, entrenador del <strong>Valencia Basket Femení</strong>. Abans va dirigir el Segle XXI, un dels principals centres de formació del bàsquet femení espanyol, i ha treballat amb les categories inferiors de la selecció espanyola.</p>
-      <p data-lang="es">Ese niño es hoy <strong>Javier Torralba</strong>, entrenador del <strong>Valencia Basket Femenino</strong>. Antes dirigió el Segle XXI, uno de los principales centros de formación del baloncesto femenino español, y ha trabajado con las categorías inferiores de la selección española.</p>
 
       <p data-lang="ca">Quan va ser presentat a València va dir que se sentia «molt identificat amb la formació i el creixement de les jugadores joves». No és una frase de circumstàncies. És el que va veure a casa: el seu pare, en Julio, encara ho fa cada dimarts.</p>
-      <p data-lang="es">Cuando fue presentado en Valencia dijo que se sentía «muy identificado con la formación y el crecimiento de las jugadoras jóvenes». No es una frase de circunstancias. Es lo que vio en casa: su padre, Julio, todavía lo hace cada martes.</p>
     </div>
 
     <div class="pull" data-lang="ca">Pare i fill.<br>El mateix ofici, trenta anys de distància.</div>
-    <div class="pull" data-lang="es">Padre e hijo.<br>El mismo oficio, treinta años de distancia.</div>
   </div>
 </section>
 
@@ -658,11 +560,9 @@ footer a{color:#CFCBC4}
   <div class="wrap">
     <div class="sec-num">03</div>
     <h2 data-lang="ca">Els que van<br>arribar lluny</h2>
-    <h2 data-lang="es">Los que llegaron<br>lejos</h2>
 
     <div class="body">
       <p data-lang="ca" class="lead">Cap escoleta pot prometre que un nen arribi a l’elit. El que sí pot demostrar el Barna és que d’aquí n’han sortit.</p>
-      <p data-lang="es" class="lead">Ninguna escuela puede prometer que un niño llegue a la élite. Lo que sí puede demostrar el Barna es que de aquí han salido.</p>
     </div>
 
     <div class="alumni">
@@ -672,11 +572,8 @@ footer a{color:#CFCBC4}
         <div class="txt">
           <div class="who">Javier Torralba</div>
           <div class="now" data-lang="ca">Entrenador · Valencia Basket · LF Endesa</div>
-          <div class="now" data-lang="es">Entrenador · Valencia Basket · LF Endesa</div>
           <p data-lang="ca">Aquesta és la foto de la seva primera llicència, temporada 93-94. Va dirigir el Segle XXI i ha treballat amb la selecció espanyola de formació. Avui entrena a la màxima categoria del bàsquet femení espanyol.</p>
-          <p data-lang="es">Esta es la foto de su primera licencia, temporada 93-94. Dirigió el Segle XXI y ha trabajado con la selección española de formación. Hoy entrena en la máxima categoría del baloncesto femenino español.</p>
           <div class="ara" data-lang="ca"><span class="tag">ARA</span><span class="val">Entrenador del Valencia Basket Femení<em>Lliga Femenina Endesa · contracte fins al 2029</em></span></div>
-          <div class="ara" data-lang="es"><span class="tag">AHORA</span><span class="val">Entrenador del Valencia Basket Femenino<em>Liga Femenina Endesa · contrato hasta 2029</em></span></div>
         </div>
       </div>
 
@@ -685,11 +582,8 @@ footer a{color:#CFCBC4}
         <div class="txt">
           <div class="who">Roger Fornas</div>
           <div class="now" data-lang="ca">Pivot · ACB i LEB Or</div>
-          <div class="now" data-lang="es">Pívot · ACB y LEB Oro</div>
           <p data-lang="ca">Barcelona, 1982. Pivot de 2,02 m i la mateixa quinta que en Javier: surten a la mateixa foto d’equip. Va debutar a l’ACB amb el Caprabo Lleida el 2003 i va fer tota la carrera a la LEB — Tarragona, Breogán, Lleida, Valladolid, Cáceres, Andorra, Palència, Burgos i Palma. El 2018 era el novè jugador amb més partits de la història de la LEB Or.</p>
-          <p data-lang="es">Barcelona, 1982. Pívot de 2,02 m y la misma quinta que Javier: salen en la misma foto de equipo. Debutó en ACB con el Caprabo Lleida en 2003 e hizo toda su carrera en la LEB — Tarragona, Breogán, Lleida, Valladolid, Cáceres, Andorra, Palencia, Burgos y Palma. En 2018 era el noveno jugador con más partidos de la historia de la LEB Oro.</p>
           <div class="ara" data-lang="ca"><span class="tag">ARA</span><span class="val">Carrera a l’ACB i la LEB<em>Últim club conegut: Palma Air Europa</em></span></div>
-          <div class="ara" data-lang="es"><span class="tag">AHORA</span><span class="val">Carrera en ACB y LEB<em>Último club conocido: Palma Air Europa</em></span></div>
         </div>
       </div>
 
@@ -698,11 +592,8 @@ footer a{color:#CFCBC4}
         <div class="txt">
           <div class="who">David Mejía</div>
           <div class="now" data-lang="ca">Campió Tercera FEB 2026</div>
-          <div class="now" data-lang="es">Campeón Tercera FEB 2026</div>
           <p data-lang="ca">Àngel David Mejía Beriguete. Base, 1,79 m, nascut l’abril del 2000. Va entrar a l’Escoleta amb 4 anys. Ha passat per Villarrobledo, Martinenc, Santfeliuenc i La Roda; el juny de 2026 va pujar a Segona FEB amb el Badajoz i el primer que va fer va ser retrobar-se amb en Julio.</p>
-          <p data-lang="es">Ángel David Mejía Beriguete. Base, 1,79 m, nacido en abril de 2000. Entró en la Escoleta con 4 años. Ha pasado por Villarrobledo, Martinenc, Santfeliuenc y La Roda; en junio de 2026 ascendió a Segunda FEB con el Badajoz y lo primero que hizo fue reencontrarse con Julio.</p>
           <div class="ara" data-lang="ca"><span class="tag">ARA</span><span class="val">Bàsquet Ciutat de Badajoz · Segona FEB<em>Vítaly La Mar BCBadajoz · ascens el juny del 2026</em></span></div>
-          <div class="ara" data-lang="es"><span class="tag">AHORA</span><span class="val">Baloncesto Ciudad de Badajoz · Segunda FEB<em>Vítaly La Mar BCBadajoz · ascenso en junio de 2026</em></span></div>
         </div>
       </div>
 
@@ -711,11 +602,8 @@ footer a{color:#CFCBC4}
         <div class="txt">
           <div class="who">Ainhoa López</div>
           <div class="now" data-lang="ca">Escorta · Spar Girona · LF Endesa</div>
-          <div class="now" data-lang="es">Escolta · Spar Girona · LF Endesa</div>
           <p data-lang="ca">Barcelona, 1997. Escorta d’1,82 m i capitana de l’Spar Girona a la Lliga Femenina Endesa. Va començar a jugar aquí i es va formar al CB Femení Sant Adrià. Va debutar a l’elit el 2016-17 amb l’Uni Girona; després, Quesos El Pastor, Ensino i el Barça CBS, amb qui va pujar a Lliga Femenina. El 2023-24 va tornar a Fontajau.</p>
-          <p data-lang="es">Barcelona, 1997. Escolta de 1,82 m y capitana del Spar Girona en la Liga Femenina Endesa. Empezó a jugar aquí y se formó en el CB Femenino Sant Adrià. Debutó en la élite en 2016-17 con el Uni Girona; después, Quesos El Pastor, Ensino y el Barça CBS, con quien ascendió a Liga Femenina. En 2023-24 volvió a Fontajau.</p>
           <div class="ara" data-lang="ca"><span class="tag">ARA</span><span class="val">Spar Girona · Lliga Femenina Endesa<em>Capitana · renovada el juliol del 2026 per a la 26-27</em></span></div>
-          <div class="ara" data-lang="es"><span class="tag">AHORA</span><span class="val">Spar Girona · Liga Femenina Endesa<em>Capitana · renovada en julio de 2026 para la 26-27</em></span></div>
         </div>
       </div>
 
@@ -724,11 +612,8 @@ footer a{color:#CFCBC4}
         <div class="txt">
           <div class="who">Darío Naharro</div>
           <div class="now" data-lang="ca">DCA Academy · tecnificació</div>
-          <div class="now" data-lang="es">DCA Academy · tecnificación</div>
           <p data-lang="ca">Una de les veus més seguides del bàsquet formatiu en castellà. Dirigeix la <strong>DCA Academy</strong>, acadèmia de tecnificació a les Franqueses del Vallès, amb acadèmia en línia i campus a Girona i Tarragona. Ha entrenat jugadors com Marc Gasol, Thomas Heurtel i Anna Cruz, ha acompanyat més de mil famílies i ha escrit un llibre sobre el que hi ha més enllà del resultat.</p>
-          <p data-lang="es">Una de las voces más seguidas del baloncesto formativo en castellano. Dirige la <strong>DCA Academy</strong>, academia de tecnificación en Les Franqueses del Vallès, con academia online y campus en Girona y Tarragona. Ha entrenado a jugadores como Marc Gasol, Thomas Heurtel y Anna Cruz, ha acompañado a más de mil familias y ha escrito un libro sobre lo que hay más allá del resultado.</p>
           <div class="ara" data-lang="ca"><span class="tag">ARA</span><span class="val">Director de la DCA Academy<em>Tecnificació · les Franqueses del Vallès</em></span></div>
-          <div class="ara" data-lang="es"><span class="tag">AHORA</span><span class="val">Director de la DCA Academy<em>Tecnificación · Les Franqueses del Vallès</em></span></div>
         </div>
       </div>
 
@@ -737,27 +622,20 @@ footer a{color:#CFCBC4}
         <div class="txt">
           <div class="who">Daniel Iruela</div>
           <div class="now" data-lang="ca">Formació FC Barcelona</div>
-          <div class="now" data-lang="es">Formación FC Barcelona</div>
           <p data-lang="ca">Neix el 2005. Va passar per aquesta pista abans de vestir de blaugrana: amb el Barça va jugar el Campionat d’Espanya de clubs i l’Eurolliga ANGT. Després, Lliga EBA amb el Castelldefels i Tercera FEB amb l’SD Espanyol, el Cuarte de Huerva i la UE Sant Cugat.</p>
-          <p data-lang="es">Nacido en 2005. Pasó por esta pista antes de vestir de blaugrana: con el Barça jugó el Campeonato de España de clubes y la Euroliga ANGT. Después, Liga EBA con el Castelldefels y Tercera FEB con el SD Espanyol, el Cuarte de Huerva y la UE Sant Cugat.</p>
           <div class="ara" data-lang="ca"><span class="tag">ARA</span><span class="val">UE Sant Cugat · Tercera FEB<em>Des del novembre del 2025, segons la fitxa de la FEB</em></span></div>
-          <div class="ara" data-lang="es"><span class="tag">AHORA</span><span class="val">UE Sant Cugat · Tercera FEB<em>Desde noviembre de 2025, según la ficha de la FEB</em></span></div>
         </div>
       </div>
 
       <div class="alum">
         <div class="noshot">
           <span data-lang="ca">Sense foto:<br>encara és menor</span>
-          <span data-lang="es">Sin foto:<br>todavía es menor</span>
         </div>
         <div class="txt">
           <div class="who">Eric Montaner</div>
           <div class="now" data-lang="ca">FC Barcelona · Selecció catalana</div>
-          <div class="now" data-lang="es">FC Barcelona · Selección catalana</div>
           <p data-lang="ca">Nascut el 2009. De l’Escoleta a les categories de formació del Barça: hi va jugar el Campionat d’Espanya de clubs infantil. També ha passat per la selecció catalana. No en publiquem la imatge: encara és menor.</p>
-          <p data-lang="es">Nacido en 2009. De la Escoleta a las categorías de formación del Barça: allí jugó el Campeonato de España de clubes infantil. También ha pasado por la selección catalana. No publicamos su imagen: todavía es menor.</p>
           <div class="ara" data-lang="ca"><span class="tag">ARA</span><span class="val">Formació del FC Barcelona<em>Categoria juvenil · fitxa FEB</em></span></div>
-          <div class="ara" data-lang="es"><span class="tag">AHORA</span><span class="val">Formación del FC Barcelona<em>Categoría juvenil · ficha FEB</em></span></div>
         </div>
       </div>
 
@@ -765,61 +643,46 @@ footer a{color:#CFCBC4}
         <div class="shot"><img src="img/alumni-seleccio-3x3.webp" alt="Exjugador de l'Escoleta amb la samarreta de la selecció espanyola de 3x3" loading="lazy" decoding="async" width="900" height="1200"></div>
         <div class="txt">
           <div class="who" data-lang="ca">Selecció 3x3</div>
-          <div class="who" data-lang="es">Selección 3x3</div>
           <div class="now" data-lang="ca">Espanya · 3x3 FCBQ PRO</div>
-          <div class="now" data-lang="es">España · 3x3 FCBQ PRO</div>
           <p data-lang="ca">També va començar aquí. Avui competeix amb la samarreta d’Espanya al circuit 3x3.</p>
-          <p data-lang="es">También empezó aquí. Hoy compite con la camiseta de España en el circuito 3x3.</p>
           <div class="ara pend" data-lang="ca"><span class="tag">ARA</span><span class="val">Pendent de confirmar<em>Circuit 3x3 amb la selecció espanyola</em></span></div>
-          <div class="ara pend" data-lang="es"><span class="tag">AHORA</span><span class="val">Pendiente de confirmar<em>Circuito 3x3 con la selección española</em></span></div>
         </div>
       </div>
 
       <div class="alum">
         <div class="noshot">
           <span data-lang="ca">Sense foto:<br>encara són menors</span>
-          <span data-lang="es">Sin foto:<br>todavía son menores</span>
         </div>
         <div class="txt">
           <div class="who">Marc i Oriol Julià</div>
           <div class="now" data-lang="ca">FC Barcelona · Joventut Badalona</div>
-          <div class="now" data-lang="es">FC Barcelona · Joventut Badalona</div>
           <p data-lang="ca">Bessons, nascuts el 2009. Van sortir de l’Escoleta: l’Oriol continua a les categories de formació del FC Barcelona i en Marc juga ara al Joventut Badalona. No en publiquem la imatge: encara són menors i la seva carrera és seva.</p>
-          <p data-lang="es">Gemelos, nacidos en 2009. Salieron de la Escoleta: Oriol sigue en las categorías de formación del FC Barcelona y Marc juega ahora en el Joventut Badalona. No publicamos su imagen: todavía son menores y su carrera es suya.</p>
           <div class="ara" data-lang="ca"><span class="tag">ARA</span><span class="val">FC Barcelona i Joventut Badalona<em>Categoria juvenil · 17 anys</em></span></div>
-          <div class="ara" data-lang="es"><span class="tag">AHORA</span><span class="val">FC Barcelona y Joventut Badalona<em>Categoría juvenil · 17 años</em></span></div>
         </div>
       </div>
 
     </div>
 
     <div class="pull" data-lang="ca">De la pista del Clot<br>a la Lliga Femenina Endesa.</div>
-    <div class="pull" data-lang="es">De la pista del Clot<br>a la Liga Femenina Endesa.</div>
 
     <div class="body">
       <p data-lang="ca" class="lead">L’<strong>Ainhoa López</strong> va començar a jugar aquí. Avui és capitana de l’Spar Girona i juga a la mateixa lliga que entrena en Javier Torralba.</p>
-      <p data-lang="es" class="lead">La <strong>Ainhoa López</strong> empezó a jugar aquí. Hoy es capitana del Spar Girona y juega en la misma liga que entrena Javier Torralba.</p>
 
       <p data-lang="ca">Al pre-mini femení de la temporada 2004-05 tenia set anys. Onze anys després debutava a la màxima categoria del bàsquet femení espanyol.</p>
-      <p data-lang="es">En el pre-mini femenino de la temporada 2004-05 tenía siete años. Once años después debutaba en la máxima categoría del baloncesto femenino español.</p>
 
       <p data-lang="ca">La seva carrera, però, no s’explica només amb els partits. El febrer del 2022, jugant al Barça CBS, va anunciar que tenia un limfoma de Hodgkin, i el va superar. El setembre del 2024 va passar vint-i-cinc dies ingressada per una anèmia hemolítica greu i va necessitar dotze transfusions. Va tornar a la pista les dues vegades. Avui és ambaixadora de la donació de sang i porta una frase per bandera: <strong>«Viure és urgent»</strong>.</p>
-      <p data-lang="es">Su carrera, sin embargo, no se explica solo con los partidos. En febrero de 2022, jugando en el Barça CBS, anunció que tenía un linfoma de Hodgkin, y lo superó. En septiembre de 2024 pasó veinticinco días ingresada por una anemia hemolítica grave y necesitó doce transfusiones. Volvió a la pista las dos veces. Hoy es embajadora de la donación de sangre y lleva una frase por bandera: <strong>«Viure és urgent»</strong>.</p>
 
       <p data-lang="ca">És el nom que millor explica per què existeix una escoleta: perquè no saps qui tens al davant.</p>
-      <p data-lang="es">Es el nombre que mejor explica por qué existe una escoleta: porque no sabes a quién tienes delante.</p>
     </div>
 
     <div class="grid2">
       <figure>
         <img src="img/ainhoa-premini-2004.webp" alt="Equip pre-mini femení del CB Grup Barna, temporada 2004-2005" loading="lazy" decoding="async" width="1200" height="900">
         <figcaption data-lang="ca"><b>Pre-mini femení, 2004-05.</b> Set anys. La seva primera temporada al club.</figcaption>
-        <figcaption data-lang="es"><b>Pre-mini femenino, 2004-05.</b> Siete años. Su primera temporada en el club.</figcaption>
       </figure>
       <figure>
         <img src="img/ainhoa-equip-barna.webp" alt="Equip femení de formació del CB Grup Barna" loading="lazy" decoding="async" width="1200" height="900">
         <figcaption data-lang="ca"><b>Formació al Barna.</b> Abans del Sant Adrià, del Barça CBS i de Fontajau.</figcaption>
-        <figcaption data-lang="es"><b>Formación en el Barna.</b> Antes del Sant Adrià, del Barça CBS y de Fontajau.</figcaption>
       </figure>
     </div>
 
@@ -827,19 +690,16 @@ footer a{color:#CFCBC4}
       <figure>
         <img src="img/ainhoa-jugant.webp" alt="Partit de bàsquet femení de formació del CB Grup Barna" loading="lazy" decoding="async" width="1200" height="900">
         <figcaption data-lang="ca"><b>Jugant.</b> Bàsquet femení de formació al Barna, fa més de vint anys.</figcaption>
-        <figcaption data-lang="es"><b>Jugando.</b> Baloncesto femenino de formación en el Barna, hace más de veinte años.</figcaption>
       </figure>
       <figure>
         <img src="img/ainhoa-escoleta-grup.webp" alt="L'Escoleta del CB Grup Barna al complet" loading="lazy" decoding="async" width="1200" height="900">
         <figcaption data-lang="ca"><b>L’Escoleta.</b> Enmig d’aquests nens hi havia una futura capitana de LF Endesa.</figcaption>
-        <figcaption data-lang="es"><b>La Escoleta.</b> Entre estos niños había una futura capitana de LF Endesa.</figcaption>
       </figure>
     </div>
 
     <figure>
       <img style="max-width:1200px;margin:0 auto" src="img/equip-anys90-julio.webp" alt="Equip mini del Grup Barna dels anys 90" loading="lazy" decoding="async" width="1200" height="836">
       <figcaption data-lang="ca"><b>La mateixa foto, dues carreres.</b> En aquest equip dels anys 90 hi ha en Javier Torralba i en Roger Fornas. Cap dels dos ho sabia encara.</figcaption>
-      <figcaption data-lang="es"><b>La misma foto, dos carreras.</b> En este equipo de los años 90 están Javier Torralba y Roger Fornas. Ninguno de los dos lo sabía todavía.</figcaption>
     </figure>
   </div>
 </section>
@@ -849,36 +709,30 @@ footer a{color:#CFCBC4}
   <div class="wrap">
     <div class="sec-num">04</div>
     <h2 data-lang="ca">Dinou anys<br>després</h2>
-    <h2 data-lang="es">Diecinueve años<br>después</h2>
 
     <div class="body">
       <p data-lang="ca" class="lead">El febrer de 2007 un nen de sis anys es va fer una foto amb la mascota del club. El juny de 2026 el mateix noi aixecava un trofeu a Badajoz.</p>
-      <p data-lang="es" class="lead">En febrero de 2007 un niño de seis años se hizo una foto con la mascota del club. En junio de 2026 el mismo chico levantaba un trofeo en Badajoz.</p>
     </div>
 
     <div class="grid2">
       <figure class="tall">
         <img src="img/david-mejia-nen-2007.webp" alt="David Mejía de nen a l'Escola de Bàsquet Grup Barna, febrer de 2007" loading="lazy" decoding="async" width="1050" height="1400">
         <figcaption data-lang="ca"><b>24 · 02 · 2007.</b> Escola de Bàsquet Grup Barna.</figcaption>
-        <figcaption data-lang="es"><b>24 · 02 · 2007.</b> Escuela de Baloncesto Grup Barna.</figcaption>
       </figure>
       <figure class="tall">
         <img src="img/david-mejia-trofeu.webp" alt="David Mejía amb el trofeu de campió de la Fase Final Tercera FEB 2025/26" loading="lazy" decoding="async" width="789" height="1400">
         <figcaption data-lang="ca"><b>Juny de 2026.</b> Campió de la Fase Final Tercera FEB. Ascens a Segona FEB.</figcaption>
-        <figcaption data-lang="es"><b>Junio de 2026.</b> Campeón de la Fase Final Tercera FEB. Ascenso a Segunda FEB.</figcaption>
       </figure>
     </div>
 
     <figure>
       <img style="max-width:833px;margin:0 auto" src="img/julio-david-retrobament.webp" alt="Julio Torralba i David Mejía retrobant-se" loading="lazy" decoding="async" width="833" height="1400">
       <figcaption data-lang="ca"><b>El retrobament.</b> L’entrenador que el va rebre amb 4 anys i el jugador que acaba de pujar de categoria. Hi ha històries que defineixen què és el Barna.</figcaption>
-      <figcaption data-lang="es"><b>El reencuentro.</b> El entrenador que lo recibió con 4 años y el jugador que acaba de ascender de categoría. Hay historias que definen lo que es el Barna.</figcaption>
     </figure>
 
     <figure>
       <img src="img/campions-tercera-feb.webp" alt="Celebració del campionat de la Fase Final Tercera FEB 2025/26" loading="lazy" decoding="async" width="1200" height="800">
       <figcaption data-lang="ca"><b>«Hemos vuelto».</b> Fase Final Tercera FEB 2025/26, Badajoz.</figcaption>
-      <figcaption data-lang="es"><b>«Hemos vuelto».</b> Fase Final Tercera FEB 2025/26, Badajoz.</figcaption>
     </figure>
   </div>
 </section>
@@ -888,29 +742,24 @@ footer a{color:#CFCBC4}
   <div class="wrap">
     <div class="sec-num">05</div>
     <h2 data-lang="ca">Els que<br>venen ara</h2>
-    <h2 data-lang="es">Los que<br>vienen ahora</h2>
 
     <div class="body">
       <p data-lang="ca" class="lead">La Marta va entrar a l’Escoleta de petita. Aquest any n’ha fet divuit i marxa de casa. L’Escoleta la va acomiadar com s’acomiada la família.</p>
-      <p data-lang="es" class="lead">Marta entró en la Escoleta de pequeña. Este año ha cumplido dieciocho y se va de casa. La Escoleta la despidió como se despide a la familia.</p>
     </div>
 
     <div class="grid2">
       <figure>
         <img src="img/marta-18-escoleta.webp" alt="Els nens i nenes de l'Escoleta asseguts a la pista escoltant" loading="lazy" decoding="async" width="1200" height="1066">
         <figcaption data-lang="ca"><b>Els petits miren.</b> El que veuen avui és el que voldran ser demà.</figcaption>
-        <figcaption data-lang="es"><b>Los pequeños miran.</b> Lo que ven hoy es lo que querrán ser mañana.</figcaption>
       </figure>
       <figure>
         <img src="img/marta-felicitats.webp" alt="L'Escoleta felicitant la Marta pels seus 18 anys" loading="lazy" decoding="async" width="1200" height="1051">
         <figcaption data-lang="ca"><b>Divuit.</b> L’Escoleta al complet, en Julio al mig.</figcaption>
-        <figcaption data-lang="es"><b>Dieciocho.</b> La Escoleta al completo, Julio en medio.</figcaption>
       </figure>
     </div>
 
     <div class="body">
       <p data-lang="ca">I al seu darrere ja en ve una altra promoció. Hi ha exjugadors de l’Escoleta jugant a les categories de formació del <strong>FC Barcelona</strong> i al circuit <strong>3x3 de la selecció espanyola</strong>. Alguns encara són menors i per això no els posem cara ni nom aquí: la seva carrera és seva, no del nostre màrqueting.</p>
-      <p data-lang="es">Y detrás ya viene otra promoción. Hay exjugadores de la Escoleta jugando en las categorías de formación del <strong>FC Barcelona</strong> y en el circuito <strong>3x3 de la selección española</strong>. Algunos todavía son menores y por eso no les ponemos cara ni nombre aquí: su carrera es suya, no de nuestro marketing.</p>
     </div>
   </div>
 </section>
@@ -920,36 +769,31 @@ footer a{color:#CFCBC4}
   <div class="wrap">
     <div class="sec-num">06</div>
     <h2 data-lang="ca">L’Escoleta,<br>avui</h2>
-    <h2 data-lang="es">La Escoleta,<br>hoy</h2>
 
     <div class="stats">
-      <div class="stat"><b>1965</b><span data-lang="ca">Neix l’Escoleta</span><span data-lang="es">Nace la Escoleta</span></div>
-      <div class="stat"><b>4-8</b><span data-lang="ca">Anys · Escoleta</span><span data-lang="es">Años · Escoleta</span></div>
-      <div class="stat"><b>+450</b><span data-lang="ca">Famílies al club</span><span data-lang="es">Familias en el club</span></div>
-      <div class="stat"><b>50%</b><span data-lang="ca">Nenes i nens</span><span data-lang="es">Niñas y niños</span></div>
+      <div class="stat"><b>1965</b><span data-lang="ca">Neix l’Escoleta</span></div>
+      <div class="stat"><b>4-8</b><span data-lang="ca">Anys · Escoleta</span></div>
+      <div class="stat"><b>+450</b><span data-lang="ca">Famílies al club</span></div>
+      <div class="stat"><b>50%</b><span data-lang="ca">Nenes i nens</span></div>
     </div>
 
     <figure>
       <img src="img/cistella-petita.webp" alt="Dia de la Cistella Petita 2026 al CB Grup Barna" loading="lazy" decoding="async" width="1200" height="808">
       <figcaption data-lang="ca"><b>Dia de la Cistella Petita · 13.06.2026.</b> Segona edició. Petits grans jugadors.</figcaption>
-      <figcaption data-lang="es"><b>Día de la Cistella Petita · 13.06.2026.</b> Segunda edición. Pequeños grandes jugadores.</figcaption>
     </figure>
 
     <div class="grid2">
       <figure>
         <img src="img/trobada-solozabal.webp" alt="Trobada de l'Escola Grup Barna amb l'Escola Nacho Solozabal" loading="lazy" decoding="async" width="1200" height="637">
         <figcaption data-lang="ca"><b>21.05.2026.</b> Trobada amb l’Escola Nacho Solozabal.</figcaption>
-        <figcaption data-lang="es"><b>21.05.2026.</b> Encuentro con la Escuela Nacho Solozabal.</figcaption>
       </figure>
       <figure>
         <img src="img/visita-alcalde.webp" alt="Visita de l'alcalde de Barcelona Jaume Collboni al CB Grup Barna" loading="lazy" decoding="async" width="1199" height="946">
         <figcaption data-lang="ca"><b>14.02.2026.</b> Visita de l’alcalde de Barcelona, Sr. Collboni, i del regidor d’Esports, Sr. Escudé.</figcaption>
-        <figcaption data-lang="es"><b>14.02.2026.</b> Visita del alcalde de Barcelona, Sr. Collboni, y del concejal de Deportes, Sr. Escudé.</figcaption>
       </figure>
     </div>
 
     <div class="pull" data-lang="ca">Aquí no fitxem talent.<br>El criem.</div>
-    <div class="pull" data-lang="es">Aquí no fichamos talento.<br>Lo criamos.</div>
   </div>
 </section>
 
@@ -958,23 +802,18 @@ footer a{color:#CFCBC4}
   <div class="wrap">
     <div class="sec-num">07</div>
     <h2 data-lang="ca">Qui entrena<br>a La Nau</h2>
-    <h2 data-lang="es">Quién entrena<br>en La Nau</h2>
 
     <div class="body">
       <p data-lang="ca" class="lead">La mateixa pista on un nen de quatre anys aprèn a botar és on s’entrenen jugadors professionals fora de temporada.</p>
-      <p data-lang="es" class="lead">La misma pista donde un niño de cuatro años aprende a botar es donde entrenan jugadores profesionales fuera de temporada.</p>
 
       <p data-lang="ca">A <strong>La Nau</strong> hi treballa <strong>Time Chamber</strong>, partner del club, amb <strong>Iandrey Panisa</strong> al capdavant. Per aquí hi han passat internacionals com <strong>Willy Hernangómez</strong>, campió d’Europa amb la selecció espanyola i jugador d’NBA i d’Eurolliga.</p>
-      <p data-lang="es">En <strong>La Nau</strong> trabaja <strong>Time Chamber</strong>, partner del club, con <strong>Iandrey Panisa</strong> al frente. Por aquí han pasado internacionales como <strong>Willy Hernangómez</strong>, campeón de Europa con la selección española y jugador de NBA y de Euroliga.</p>
 
       <p data-lang="ca">No és una anècdota per a Instagram. És el que fa que un nen de l’Escoleta creui la porta i vegi, amb els seus ulls, què vol dir dedicar-s’hi de veritat.</p>
-      <p data-lang="es">No es una anécdota para Instagram. Es lo que hace que un niño de la Escoleta cruce la puerta y vea, con sus propios ojos, qué significa dedicarse a esto de verdad.</p>
     </div>
     <!-- PENDENT: quan tinguis el video o la foto d'en Willy Hernangomez entrenant
          a La Nau amb Time Chamber, posa aqui un <figure> amb la imatge. -->
 
     <div class="pull" data-lang="ca">La mateixa pista.<br>El nen de quatre anys i l’internacional.</div>
-    <div class="pull" data-lang="es">La misma pista.<br>El niño de cuatro años y el internacional.</div>
   </div>
 </section>
 
@@ -982,11 +821,9 @@ footer a{color:#CFCBC4}
 <section class="cta">
   <div class="wrap">
     <h2 data-lang="ca">El proper<br>que surti d’aquí<br>encara no sap botar</h2>
-    <h2 data-lang="es">El próximo<br>que salga de aquí<br>todavía no sabe botar</h2>
 
     <div class="body">
       <p data-lang="ca">L’Escoleta del CB Grup Barna és per a nens i nenes de 4 a 8 anys. No busquem els millors: busquem que hi vulguin tornar la setmana següent. La resta ja ho hem vist passar unes quantes vegades.</p>
-      <p data-lang="es">La Escoleta del CB Grup Barna es para niños y niñas de 4 a 8 años. No buscamos a los mejores: buscamos que quieran volver la semana siguiente. Lo demás ya lo hemos visto pasar unas cuantas veces.</p>
     </div>
 
     <!-- Formulari d'informació (guarda les dades i després envia el WhatsApp) -->
@@ -995,11 +832,6 @@ footer a{color:#CFCBC4}
          href="/#info">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4a3.2 3.2 0 0 0-1 2.4A5.6 5.6 0 0 0 7 12a12.7 12.7 0 0 0 4.9 4.3c.7.3 1.2.5 1.6.6a3.9 3.9 0 0 0 1.8.1 3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4l-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
         Vull informació
-      </a>
-      <a class="btn wa" data-lang="es"
-         href="/#info">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4a3.2 3.2 0 0 0-1 2.4A5.6 5.6 0 0 0 7 12a12.7 12.7 0 0 0 4.9 4.3c.7.3 1.2.5 1.6.6a3.9 3.9 0 0 0 1.8.1 3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4l-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
-        Quiero información
       </a>
       <a class="btn ghost" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>
     </div>
@@ -1016,12 +848,6 @@ footer a{color:#CFCBC4}
         <p>Dues guies del club per a famílies que encara ho estan decidint:
         <a href="/blog/a-quina-edat-comencar-basquet/">a quina edat pot començar un nen o nena a jugar a bàsquet</a>
         i <a href="/blog/com-triar-escola-basquet-barcelona/">com triar una escola de bàsquet a Barcelona</a>.</p>
-      </div>
-      <div data-lang="es">
-        <h3>Para saber más</h3>
-        <p>Dos guías del club para familias que aún lo están decidiendo:
-        <a href="/es/blog/a-que-edad-empezar-baloncesto/">a qué edad puede empezar un niño o niña a jugar a baloncesto</a>
-        y <a href="/es/blog/como-elegir-escuela-baloncesto-barcelona/">cómo elegir una escuela de baloncesto en Barcelona</a>.</p>
       </div>
     </div>
   </div>
@@ -1121,7 +947,6 @@ footer a{color:#CFCBC4}
 <footer>
   <div class="wrap">
     <div data-lang="ca">© CB Grup Barna · Sant Martí, Barcelona</div>
-    <div data-lang="es">© CB Grup Barna · Sant Martí, Barcelona</div>
     <div><a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a> · <a href="https://cbgrupbarna.info">cbgrupbarna.info</a> · <a href="https://cbgrupbarna.info/grup-barna-dades-oficials/">Dades oficials del club</a></div>
   </div>
 </footer>
@@ -1146,9 +971,7 @@ footer a{color:#CFCBC4}
 
 <div class="pobar">
   <span data-lang="ca">Portes Obertes · Prova un entrenament</span>
-  <span data-lang="es">Puertas Abiertas · Prueba un entrenamiento</span>
   <a data-lang="ca" href="/#info" data-cta="portes-obertes-barra">Vull provar un entrenament</a>
-  <a data-lang="es" href="/#info" data-cta="portes-obertes-barra">Quiero probar un entrenamiento</a>
 </div>
 
 <script src="/js/galetes.js"></script>
@@ -1163,6 +986,7 @@ document.addEventListener('click',function(e){
 },true);
 </script>
 <script src="/js/descarrega.js" defer></script>
+<script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
 </body>
 </html>

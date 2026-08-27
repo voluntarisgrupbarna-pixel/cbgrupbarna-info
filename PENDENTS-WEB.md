@@ -1465,3 +1465,175 @@ ja en tira), Willy Hernangómez, galeries d'esdeveniments, nivells
 or/plata/bronze, Instagram de 6 partners, fitxes de Nova Farmàcia Clot i
 Clínica Dental 26, plantilla de /jugadors/, Tecnificació i Notícies, fotos
 de La Nau, logo de la Wilson.
+
+---
+
+## 25-08-2026 · Nota de reconciliació — dues sessions van aplicar l'estètica alhora
+
+La branca del prototip (`claude/web-design-proposals-yd18ir`) i la tanda
+v1.2.0–1.3.1 de dalt van fer la mateixa feina en paral·lel el mateix dia. En
+fusionar-les ha manat la tanda v1.2.0–1.3.1, que era més completa; de la
+branca del prototip s'hi ha sumat el que faltava:
+
+- **«4 a 8 anys» als llocs que la tanda no cobria**: `suggestedMaxAge` del
+  JSON-LD de les tres portades, franges d'Escoleta de 3x3/campus/màgics en
+  castellà i anglès, els dos blogs afectats en es/en, els fitxers
+  d'`i18n/feina/` i `cerca-index.json`, i l'avís a `tests/README.md` perquè
+  ningú ho «arregli» de tornada a 4-7.
+- El PDF provisional `escoleta/materials/escoleta-info.pdf` de la branca
+  s'ha retirat: el supera el flyer real d'`escoleta/flyer/` (A5, 300 ppp).
+
+Referències del prototip que van originar les decisions (viuen fora del
+repositori, com a Artifacts):
+
+- Prototip navegable de 4 vistes: https://claude.ai/code/artifact/639494fb-9f78-4210-bede-ca28e4649565
+- «Estètica definitiva» (mockup viu + decisions): https://claude.ai/code/artifact/b51f10df-cb1d-47b7-867c-c8168a0225ea
+
+**Fotos noves que només viuen al prototip** (no són a `img/` ni `photos/`):
+quatre jugadors fent broma, l'alcalde Jaume Collboni amb un jugador
+d'Escoleta, tres seguidors a la grada. Si es volen a producció, passar-les
+per `scripts/build-blog-images.py`. ✅ La del grup de quatre assenyalant a
+càmera ja hi és: `photos/seniors_grup.jpg` → `img/blog/seniors-grup.webp`.
+
+### 25-08-2026 (nit) · La portada de franges, al disseny sencer de la proposta A
+
+Demanat expressament per l'Ana amb la captura del prototip («Quiero esta
+portada»). Aplicat a les tres portades (ca/es/en):
+
+- **Hero a dues columnes**: titular gran amb el primer bot, foto de
+  l'Escoleta amb peu i filet vermell, i el trio de botons (Vine a provar /
+  Entrenaments / ⬇ Descarrega el full) sota la foto.
+- **Les nou franges de la guia, en gran i amb aire** (l'Ana va demanar
+  recuperar-les totes: «es la guia»). Ordre intacte: Escoleta (sense foto
+  —la foto ja és al hero—), Portes obertes, sèniors sobre tinta amb la
+  foto nova de grup, femení amb les cares centrades, calendari en vermell,
+  el club, Observatori, Galeria i Escriu-nos. I el peu de pila
+  #SOMCLOT · El diari del Clot → · CA ES EN.
+- **El burger vell de la capçalera es retira** (display:none): duplicava el
+  mapa ≡ a dos dits de distància. El menú antic queda al marcatge.
+
+### 25-08-2026 (nit) · Proves d'UX de la portada nova i arreglo del cercador
+
+Bateria de proves amb Playwright sobre les dues vistes, els dos amples i
+els tres idiomes: cercador (obrir, escriure, resultats, tancar amb Esc),
+panell d'Entrenaments, diàleg de descàrrega, mapa ≡, commutador de vista,
+càrrega del calendari a l'extensa, enllaços de totes les franges (tots 200)
+i desbordament a 390 px. Tot en verd menys una cosa, que era exactament el
+que l'Ana veia al mòbil:
+
+- **El cercador no existia al mòbil.** `js/cerca.js` injecta el botó dins
+  de `.head-nav` de la capçalera, i a la portada aquell nav és
+  `display:none` per sota de ~1080 px: s'enduia el cercador. Arreglat
+  posant un botó propi `data-cerca-obrir` (que cerca.js respecta) fora del
+  nav, al costat del commutador d'idioma, a les tres portades. A mòbil es
+  queda en lupa sola (regla que css/cerca.css ja tenia).
+
+### 26-08-2026 · Auditoria completa d'UX i navegació
+
+Rastreig de 400 rutes internes (cap 404 real) + qualitat de 22 pàgines clau
+a 390 px (errors de JS, desbordament, imatges trencades, mapa ≡, tornada a
+inici) + interaccions (cerca des d'interiors, mapa, app de partits,
+formulari d'escriu-nos, fitxers .ics/.pdf de calendaris) + coherència del
+commutador d'idioma + teclat (enfocables i «salta al contingut»). Tot en
+verd amb una excepció real, arreglada:
+
+- **`/es/partners-mapa/` i `/en/partners-mapa/` trencats**: el circuit
+  d'i18n havia prefixat `/partners-mapa/` dins de les plantilles de
+  JavaScript (`href="${p.ig}"` → `href="/partners-mapa/${p.ig}"`), i això
+  trencava els 21 logos dels partners, els enllaços d'Instagram, els de
+  Google Maps i les fitxes. Restaurat com al català (8 casos per fitxer).
+  **Atenció si es torna a muntar la pàgina amb i18n-munta**: vigilar que
+  no reintrodueixi el prefix dins dels `${…}` — comprovar-ho al diff.
+
+Falsos positius coneguts del sandbox (a producció funcionen): les rajoles
+d'OpenStreetMap del mapa de partners i l'embed.js d'Instagram (extern,
+sense sortida a internet als tests); els `webcal://` de calendaris són el
+protocol de subscripció, no enllaços trencats.
+
+### 26-08-2026 · Tanda P1 del camí cap al 10 d'UX
+
+De la crítica d'UX demanada per l'Ana («sé crítico»), els quatre punts que
+costaven conversions, aplicats a les tres portades:
+
+1. **El CTA torna a la primera pantalla del mòbil**: «Vine a provar» era a
+   976 px (fold a 844); ara els botons van abans de la foto i cau a 454 px.
+2. **El calendari ja no es baixa a la vista franges**: 130 KB que només es
+   veien a l'extensa; ara es demanen quan la secció és visible o en
+   canviar de vista. (L'índex del cercador ja anava en «idle» i amb
+   excepció per a 2G/estalvi de dades: es deixa com està, és bon disseny.)
+3. **La barra d'acció inferior arreglada**: observava `#escoleta`, ocult a
+   franges, i sortia des del primer segon tapant contingut. Ara el
+   sentinella és el hero de la vista activa: surt en passar-lo i s'amaga
+   a dalt i al formulari.
+4. **Un sol nom per a /blog/ a la portada**: la franja i el peu de pila
+   diuen tots dos «Observatori Barna» (abans el peu deia «El diari del
+   Clot»). Pendent de vocabulari: el mapa ≡ encara en diu «Coneixement
+   Barna» — decidir el nom canònic a i18n/etiquetes.yml i regenerar el
+   mapa quan es toqui.
+
+Queden de la crítica: P2.5 (/escoleta/ al sistema visual — l'obra gran),
+P2.6 (contingut sota el peu #SOMCLOT), P2.7 (mesurar l'ús del commutador
+amb GA4 abans de decidir res), P3 (logo x3, menú vell al codi).
+
+### 26-08-2026 · /escoleta/ entra al sistema visual (P2.5 — l'obra gran, feta)
+
+La pàgina d'Escoleta tenia un vestit fosc propi, desconnectat del sistema:
+la família clicava «Vine a provar» des de la portada blanca i aterrava en
+el que semblava una altra web. Ara, a les tres llengües:
+
+- **Pell nova sobre els tokens del sistema** (paper blanc, tinta, vermell
+  de l'escut, Anton/Inter des de /css/fonts.css): el hero fosc es queda
+  com a única superfície de tinta —com el masthead de la portada— amb la
+  foto d'arxiu en B/N; Portes Obertes i el tancament són superfícies
+  vermelles; la resta, paper blanc amb filets, targetes d'alumni i stats
+  amb vora fina, i el mateix llenguatge que les interiors.
+- **Barra superior clara** com la resta del web, amb **cercador** (abans
+  aquesta pàgina no en tenia: cerca.js no trobava on penjar el botó) i el
+  «Salta al contingut» ara ocult fins al focus, com toca.
+- Marcatge intacte: tot el contingut, ancoratges (#historia, #portes-
+  obertes), JSON-LD i FAQ es queden com eren. El castellà encastat al
+  marcatge català (data-lang="es", ocult) segueix pendent de neteja.
+- Arreglada de pas una col·lisió antiga: la classe .cta feia de fila de
+  botons i de secció vermella alhora; la superfície vermella ara és només
+  de la secció (abans pintava una banda vermella espúria a «L'Escoleta,
+  avui»).
+
+### 26-08-2026 · El contingut enterrat i la neteja (bloc groc del camí cap al 10)
+
+**El fals final.** El peu negre #SOMCLOT tancava la pila de portes i, com
+que duia el commutador d'idioma, es llegia com el peu de la pàgina: tot el
+que venia després —formulari inclòs— quedava mort. Ara la banda és més
+prima, no duu idiomes (ja hi són a la capçalera i al peu real) i el seu
+enllaç empeny cap al formulari: «Vols informació? ↓».
+
+**La navegació duplicada surt de la vista ràpida.** `#acces` («Tot a mà»,
+3.113 px) tenia 23 enllaços, 19 dels quals ja eren al mapa ≡ — és el bloc
+de llista plana que la guia diu que les franges van substituir. Passa a
+`only-extensa`, igual que `#presentacions`. Els quatre enllaços que només
+vivien allà (`/briefing/`, `/posicionament/` i dos PDF) entren al mapa ≡
+via `scripts/build-mapa.py`. La FAQ es queda visible a les dues vistes a
+propòsit: el `FAQPage` del JSON-LD ha de correspondre a contingut visible.
+
+Resultat a la vista de franges: **15.254 px → 11.569 px** i **1.392 KB →
+989 KB** al mòbil (comptant també la tanda P1).
+
+**Galeria accessible de debò.** Les miniatures deien «Foto 1», «Foto 2»…
+i el visor sempre «Foto del club». Ara el text alternatiu porta context
+real: «Foto 3 de 192 · JUGADORS/ES 2526 · La Nau del Clot», tant a les
+miniatures com al visor, als tres idiomes. **No és descripció foto a
+foto** —això segueix necessitant que algú les escrigui—, però qui fa
+servir lector de pantalla passa de no rebre res a saber on és.
+
+**Neteja.** Fora el menú vell de la portada (marcatge, CSS i JS: era
+inabastable des que hi ha el mapa ≡) i el `rel="shortcut icon"` redundant.
+A `/escoleta/`, fora els 113 blocs de castellà encastat i ocult que
+quedaven del commutador antic: 75,3 KB → 59,1 KB, amb el text visible
+verificat idèntic abans i després.
+
+**`js/cerca.js`**: el `role="listbox"` ara només s'aplica quan hi ha
+opcions de debò (abans era fix i axe-core hi marcava
+`aria-required-children` en els estats sense resultats). Tanca el punt 5
+de la llista d'accessibilitat del 24/08.
+
+**Ja no calia**: el paràgraf desfasat de la skill `mapa-web-cbgb` sobre
+`/femeni/` ja s'havia corregit en una passada anterior.
