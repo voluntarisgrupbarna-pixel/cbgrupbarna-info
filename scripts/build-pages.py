@@ -18,10 +18,20 @@ a mà perquè tenen lògica pròpia.
 """
 import json
 import re
+import struct
 from pathlib import Path
 from urllib.parse import quote
 
 from i18n_chrome import alternatives, navegacio, peu, text
+
+
+def png_size(path):
+    """Amplada i alçada reals d'un PNG, llegint només la capçalera IHDR
+    (24 bytes) — evita dependre de Pillow només per saber una mida.
+    Cap logo de patrocinador no s'ha de mostrar més gran del que és."""
+    with open(path, "rb") as f:
+        head = f.read(24)
+    return struct.unpack(">II", head[16:24])
 
 
 def clamp_desc(text, limit=160):
@@ -815,6 +825,13 @@ def build_partner_landing(img, nom, ig):
     web_btn = (f'<a href="{info["web"]}" class="btn ghost" target="_blank" rel="noopener" '
                f'data-cta="partner-web">Visitar la seva web</a>' if info.get("web") else '')
 
+    # Logos rebuts a mida petita (molts, 80x80) no s'han d'ampliar més enllà
+    # d'un marge raonable: el cap en px sempre guanya al 70%/60% del
+    # contenidor quan el logo és més petit que el contenidor, i no fa res
+    # quan ja n'hi ha prou resolució (el 70%/60% torna a ser el límit petit).
+    logo_w, logo_h = png_size(ROOT / "partners" / img)
+    max_w, max_h = round(logo_w * 1.4), round(logo_h * 1.4)
+
     # ── Contacte: web / telèfon / email, només els camps que tenim confirmats ──
     dl_rows = []
     if info.get("web"):
@@ -869,7 +886,7 @@ def build_partner_landing(img, nom, ig):
     <p class="eyebrow red">Partner del CB Grup Barna</p>
     <h1 style="margin-left:auto;margin-right:auto">{nom}</h1>
     <div class="phead-media" style="aspect-ratio:16/9;max-width:420px;margin-left:auto;margin-right:auto;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid var(--line)">
-      <img src="/partners/{img}" alt="{nom}" style="max-width:70%;max-height:60%;object-fit:contain" width="300" height="169">
+      <img src="/partners/{img}" alt="{nom}" style="max-width:min(70%,{max_w}px);max-height:min(60%,{max_h}px);object-fit:contain" width="{logo_w}" height="{logo_h}">
     </div>
     <p class="lede" style="margin-left:auto;margin-right:auto">{nom} forma part de l'ecosistema de
     partners i col·laboradors que fan possible el CB Grup Barna, el club de bàsquet base del Clot,
