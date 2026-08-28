@@ -191,7 +191,7 @@ for S in SEASONS:
 </div>
 </main>
 {FTR}
-<script src="/js/galetes.js"></script>
+<script src="/js/galetes.js" defer></script>
 </body>
 </html>
 '''

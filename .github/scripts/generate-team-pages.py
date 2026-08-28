@@ -210,7 +210,7 @@ def head_html(title, desc, canonical, og_image, extra_ld, idioma):
      aquí, el planta /js/cerca.js dins de la capçalera. -->
 <link rel="stylesheet" href="/css/cerca.css">
 <script type="application/ld+json">{json.dumps(extra_ld, ensure_ascii=False)}</script>
-<script src="/js/galetes.js"></script>
+<script src="/js/galetes.js" defer></script>
 <script src="/js/cerca.js" defer></script>
 </head>
 """

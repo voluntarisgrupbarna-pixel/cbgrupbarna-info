@@ -30,6 +30,11 @@ ROOT = Path(__file__).resolve().parents[1]
 EXCLOU = re.compile(
     r"(^|/)(admin\.html|token\.html|app\.html|estadistiques\.html|404\.html)$"
     r"|/admin/|/print/|/cartell\.html$|migrar-flickr"
+    # partits/equips/ i partits/calendaris/ es regeneren cada dia amb dades
+    # de la FCBQ (.github/scripts/generate-team-pages.py i
+    # generate-calendaris.py): posar-hi una dateModified d'avui és mentida
+    # demà, i el robot la desfaria de totes maneres.
+    r"|/partits/equips/|/partits/calendaris/"
 )
 
 TIPUS_PAGINA = {"WebPage", "BlogPosting", "Article", "CollectionPage"}

@@ -1899,6 +1899,64 @@ El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
 
 ---
 
+## 26-08-2026 · Auditoria de rendiment, SEO, GEO i contingut (v1.3.2)
+
+Passada completa sobre les 408 pàgines HTML: rendiment (scripts blocants,
+format i pes d'imatge, `width`/`height`, `fetchpriority`), SEO (títols,
+meta descriptions, og:image, h1, JSON-LD), i contingut (paritat d'índexs
+de blog, textos tallats amb «…»).
+
+### Fet
+
+- **`js/galetes.js` en `defer`** a les 382 pàgines i als tres generadors.
+  Verificat amb navegador real que el consentiment i GA funcionen igual.
+- **34 imatges del blog de JPG a WebP** (heros retallats a 4:3, cards a
+  16:10, ancoratge a dalt). 2617 KB en total, −34 % respecte als JPG
+  originals. `width`/`height` HTML actualitzats a 42 pàgines.
+- **Hero d'article: de `loading="lazy"` a `fetchpriority="high"`**, perquè
+  és l'LCP de la pàgina.
+- **604 imatges reben `width`/`height`** per evitar el CLS mentre
+  carreguen.
+- **84 meta descriptions tallades amb «…»** reescrites com a frases
+  senceres de ≤165 caràcters, també als JSON d'`i18n/feina/` perquè cap
+  `munta` les reverteixi.
+- **8 `og:image` de /es/ i /en/** apuntaven a fitxers inexistents; ara
+  apunten a l'actiu real.
+- **Portada: dos `h1` → un.** El del masthead passa a `<p>` (classe i id
+  preservats).
+- **Títols i descriptions llargs** escurçats (campus, empreses, 3x3,
+  briefing, blog, tres idiomes).
+- **Fitxes de fotos del 3x3** en castellà i anglès: recuperen el JSON-LD
+  que només tenia la catalana.
+- **Índex del blog en castellà i anglès**: 17 targetes amb imatge i text
+  complet (abans, 14 sense imatge i amb text tallat amb «…»).
+- **Fitxa de Melosa** en es/en: descriptions curtes (66 car.) ampliades
+  fins als ~134 del català.
+- **`scripts/build-pages.py`** actualitzat: `defer` a galetes, heros en
+  WebP amb `fetchpriority="high"`, helper `mida_imatge()` per llegir
+  dimensions reals.
+- Sitemap, hreflang, paritat i18n: comprovats, cap error.
+
+### Pendent de material de l'Ana
+
+- **Dues fotos del blog amb gra**: `entrenadores-basquet-barcelona-hero`
+  (~272 KB en WebP) i `campus-basquet-barcelona-guia-hero` (~175 KB) surten
+  pesades perquè l'original té gra fotogràfic, que és incompressible. La
+  solució no és codi: cal reexportar des dels originals de càmera sense
+  gra, o triar una altra foto.
+
+### Pendent de desenvolupar
+
+- **Sincronitzar `scripts/build-pages.py` amb l'HTML publicat del blog.**
+  El generador està desincronitzat: executar-lo avui esborra el commutador
+  d'idioma, l'enllaç a `a11y.css`, les fotos inline dels articles i els
+  heros actuals. Tots els canvis d'aquesta tanda s'han fet tant al
+  generador com a les pàgines, però el generador segueix sense saber de les
+  peces afegides posteriorment (nav d'idiomes, capa d'accessibilitat, fotos
+  d'article). Cal una sessió dedicada per posar-lo al dia.
+
+---
+
 ## 28-08-2026 — Posicionament invers i SEO/GEO indirecte: fet i pendent
 
 Fet en aquesta tanda (branca `claude/posicionamiento-inverso-seo-geo-w1loqt`):
