@@ -22,6 +22,19 @@ només l'hi posa nom.
 
 ---
 
+## 1.5.3 — 2026-08-28
+
+**El panell `/admin/` ja deixa entrar.** `GOOGLE_CLIENT_ID` posat a
+`admin/config.js` amb un client OAuth dedicat («CB Grup Barna Admin»,
+orígens `cbgrupbarna.info`/`www.cbgrupbarna.info`) creat expressament —
+no s'ha reutilitzat un client existent d'una altra app que hauria fet
+fallar el login per origen incorrecte. Treure el duplicat de
+`marqueting@cbgrupbarna.info` a `ALLOWED_EMAILS`.
+
+Pendent d'un pas de l'Ana a Cloud Console: donar d'alta els comptes com a
+«Test users» a la pantalla de consentiment (l'app hi és en mode Prova),
+o el login es bloquejarà igualment. Detall a `PENDENTS-WEB.md`.
+
 ## 1.5.2 — 2026-08-28
 
 **Decisió de l'Ana: cap eina externa d'enviament per al butlletí — tot a

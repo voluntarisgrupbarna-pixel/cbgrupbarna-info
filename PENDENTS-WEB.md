@@ -1884,20 +1884,27 @@ enllaça a `/admin/`), i codi d'accés nou a les seccions protegides de
 `/partits/app.html` (només se'n guarda l'empremta SHA-256; el codi en clar
 se li ha donat a l'Ana per xat, no viu al repositori).
 
-### Pendent — cal l'Ana
+### Fet (28/08/2026)
 
-El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
-`GOOGLE_CLIENT_ID: ""`. Falta:
+El panell `/admin/` ja deixa entrar. `admin/config.js` porta el
+`GOOGLE_CLIENT_ID` del client OAuth nou **«CB Grup Barna Admin»**
+(orígens `https://cbgrupbarna.info` i `https://www.cbgrupbarna.info`,
+sense redirect URI — Google Identity Services només valida per origen),
+creat a mà per l'Ana des de la consola. **No** s'ha reutilitzat el client
+que ja existia al mateix projecte, «CB Grup Barna Comms Web»: és d'una
+altra app, amb un origen JS diferent (`cbgrupbarna-comms.vercel.app»), i
+hauria fet fallar el login. El duplicat de `marqueting@cbgrupbarna.info`
+a `ALLOWED_EMAILS` també s'ha tret.
 
-1. Crear l'ID de client OAuth a
-   [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
-   amb el compte `voluntarisgrupbarna@gmail.com` (passos exactes al capçal
-   del mateix fitxer `admin/config.js`).
-2. Enganxar-lo a `GOOGLE_CLIENT_ID` i pujar el fitxer.
-3. Revisar `ALLOWED_EMAILS` al mateix fitxer — ara només hi ha
-   `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
-   dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
-   afegir-l'hi.
+**Últim pas, cal l'Ana:** el diàleg de creació avisava que l'app està en
+mode «Prueba» (Testing) a la pantalla de consentiment OAuth. En aquest
+mode, **només hi entren els comptes donats d'alta com a «Usuarios de
+prueba»** a Cloud Console → APIs i serveis → Pantalla de consentiment →
+**Audiencia → Test users** — independentment del que digui
+`ALLOWED_EMAILS` al codi. Cal afegir-hi `voluntarisgrupbarna@gmail.com`
+i `marqueting@cbgrupbarna.info` (i qualsevol altre compte que hagi
+d'entrar), o el login es quedarà bloquejat igualment amb un avís de
+Google d'«aplicació no verificada».
 
 ---
 
