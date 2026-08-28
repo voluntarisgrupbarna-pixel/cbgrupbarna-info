@@ -68,7 +68,6 @@ def pagina(event, fitxers):
         {
             "@type": "ImageObject",
             "contentUrl": f"{BASE}/fotos/web/{slug}/{f}",
-            "url": f"{BASE}/fotos/web/{slug}/{f}",
         }
         for f in fitxers
     ]
@@ -82,7 +81,7 @@ def pagina(event, fitxers):
             "inLanguage": "ca",
             "isPartOf": {"@id": f"{BASE}/#website"},
             "about": {"@id": f"{BASE}/#club"},
-            "hasPart": [{"@id": io["url"]} for io in image_objects],
+            "hasPart": [{"@id": io["contentUrl"]} for io in image_objects],
         },
         {
             "@type": "BreadcrumbList",
