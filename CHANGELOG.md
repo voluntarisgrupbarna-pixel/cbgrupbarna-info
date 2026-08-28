@@ -22,6 +22,25 @@ només l'hi posa nom.
 
 ---
 
+## 1.5.2 — 2026-08-28
+
+**Decisió de l'Ana: cap eina externa d'enviament per al butlletí — tot a
+Sheets, com la resta de formularis del web.** La newsletter ja no diu que
+l'enviament es fa amb Brevo (no s'havia arribat a activar mai: l'`action`
+sempre havia estat buit). S'ha tret l'opció sencera del codi en comptes de
+deixar-la a mig fer:
+
+- `js/canals.js` i `js/newsletter.js`: fora `brevoAction`/`brevoCamps` i la
+  branca que els feia servir. Les altes ja anaven, per defecte, a la full
+  de càlcul compartida (`bustiaEndpoint`, `source: 'newsletter-web'`) —
+  ara és l'únic camí, no un pedaç mentre s'esperava la URL de Brevo.
+- `/newsletter/` (ca/es/en): el paràgraf que citava Brevo per nom ara diu
+  la veritat — full de càlcul del club a Google Drive.
+- `/politica-de-privacitat/` (ca/es/en): secció «Newsletter» nova, amb la
+  mateixa base jurídica i redactat que la resta de formularis. No hi havia
+  cap secció pròpia per a aquesta pàgina i calia una, ara que es corregeix
+  el que deia la pàgina mateixa.
+
 ## 1.5.1 — 2026-08-27
 
 **Reconciliació de dues tandes paral·leles** (aquesta branca ↔ el PR #103

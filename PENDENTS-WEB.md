@@ -149,8 +149,10 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   dades al mateix Apps Script que la galeria del 3x3 (`action=register`), amb dos camps
   nous: `newsletter` (si/no) i el document demanat dins de `font`. Cal comprovar que
   l'Apps Script els desa en una columna pròpia; si no, queden només dins de `font`.
-- **Butlletí:** encara no hi ha eina d'enviament (Mailchimp, Brevo o similar). De moment
-  només es recull el consentiment; cal decidir amb què s'envia.
+- ~~**Butlletí:** encara no hi ha eina d'enviament (Mailchimp, Brevo o similar). De moment
+  només es recull el consentiment; cal decidir amb què s'envia.~~ **Decidit (28/08/2026):**
+  cap eina externa — es queda a la full de càlcul, com la resta de formularis. Detall a
+  «Decisió de l'Ana: cap eina externa d'enviament, tot a Sheets», més avall.
 
 ## Pendent de decisió
 
@@ -1944,6 +1946,37 @@ de blog, textos tallats amb «…»).
   pesades perquè l'original té gra fotogràfic, que és incompressible. La
   solució no és codi: cal reexportar des dels originals de càmera sense
   gra, o triar una altra foto.
+
+---
+
+## 28-08-2026 — Decisió de l'Ana: cap eina externa d'enviament, tot a Sheets (v1.5.2)
+
+«Sheets a formularis de tota la web»: el butlletí no s'enviarà amb Brevo ni
+cap altre ESP. Es queda amb el mateix mecanisme que ja fan servir la
+bústia, «Vols informació?», portes obertes i ressenyes — Apps Script cap a
+la full de càlcul compartida del club.
+
+Comprovat que és el que ja passava de fet: `brevoAction` sempre havia
+estat buit, així que les altes de `/newsletter/` ja anaven a la full amb
+`source: 'newsletter-web'`. El que calia arreglar no era el mecanisme, era
+que **la pàgina deia una mentida**: el paràgraf legal de `/newsletter/`
+(ca/es/en) afirmava que l'enviament es feia amb Brevo, que mai s'havia
+arribat a activar. Corregit als tres idiomes, i eliminada l'opció sencera
+de `js/canals.js` i `js/newsletter.js` en comptes de deixar-la a mig fer
+esperant una URL que ja no arribarà.
+
+De passada, `/politica-de-privacitat/` (ca/es/en) guanya una secció
+«Newsletter» pròpia — no n'hi havia cap i calia una, ara que es corregia
+què deia la pàgina mateixa sobre on van les dades.
+
+**Que queda tancat d'aquest tauler:** el pendent «Butlletí: encara no hi ha
+eina d'enviament» i el bloqueig de «passar la URL del formulari de Brevo».
+**El que segueix obert:** l'enviament del correu mensual és manual des de
+la full de càlcul. Si mai es vol automatitzar sense sortir de Sheets, la
+via és Google Apps Script + Gmail (`MailApp`/`GmailApp`) des del mateix
+full, no un ESP extern.
+
+---
 
 ### Pendent de desenvolupar
 

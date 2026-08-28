@@ -5,33 +5,24 @@ no cal tocar cap HTML.
 
 | Pàgina | Va a | Estat |
 |---|---|---|
-| `/newsletter/` · `/es/newsletter/` · `/en/newsletter/` | Brevo | Cal enganxar l'`action` |
+| `/newsletter/` · `/es/newsletter/` · `/en/newsletter/` | Apps Script compartida, `source: 'newsletter-web'` | Funciona |
 | `/bustia/` · `/es/buzon/` · `/en/suggestions/` | Apps Script compartida, `source: 'bustia'` | Funciona |
 | `/proteccio-menor/comunicar/` (+ es/en) | Apps Script **pròpia** de la Delegada | Desactivat a posta |
 
 ---
 
-## 1 · Newsletter (Brevo)
+## 1 · Newsletter
 
-Mentre `brevoAction` estigui buit **les altes no es perden**: van a la mateixa
-full de càlcul que la resta de formularis, amb `source: 'newsletter-web'`. El que
-no hi ha és enviament automàtic ni baixa amb un clic.
+**Decisió del club (28/08/2026): sense eina externa d'enviament (Brevo,
+Mailchimp...).** Totes les altes —de `/newsletter/` i de la casella de
+butlletí a la porta de descàrrega de PDF— van a la mateixa full de càlcul
+que la resta de formularis, amb `source: 'newsletter-web'`. L'enviament del
+correu mensual es fa a mà des d'aquesta full.
 
-Per activar-ho:
-
-1. Entra a [brevo.com](https://www.brevo.com) amb el compte del club.
-2. **Contactes → Formularis → Crea un formulari**.
-3. Posa-hi només dos camps: `EMAIL` (obligatori) i `NOM` (opcional).
-4. Publica'l i obre **Comparteix → Codi HTML**.
-5. Del codi que et dona, copia el valor de `action="…"` de l'etiqueta `<form>`.
-   Fa aquesta pinta: `https://sibforms.com/serve/MUIFAK…`
-6. Enganxa'l a `brevoAction` dins de `/js/canals.js` i desa.
-
-Si a Brevo has anomenat els atributs d'una altra manera, canvia-ho a `brevoCamps`.
-
-**Abans del primer enviament**, migra a Brevo els correus que ja hi ha a la full
-de càlcul: hi ha altes des de `/fotos/`, `/fotos-3x3/` i `/galeria-3x3-glories/`,
-totes amb `newsletter: 'Sí'`.
+Si mai es vol automatitzar l'enviament sense sortir de Sheets, l'eina a
+mirar és **Google Apps Script + Gmail** (enviar des del mateix full amb
+`MailApp`/`GmailApp`), no un ESP extern: manté tot al mateix lloc i sense
+donar les dades a un tercer nou.
 
 ---
 
