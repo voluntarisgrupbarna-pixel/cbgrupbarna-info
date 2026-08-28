@@ -1954,3 +1954,38 @@ de blog, textos tallats amb «…»).
   generador com a les pàgines, però el generador segueix sense saber de les
   peces afegides posteriorment (nav d'idiomes, capa d'accessibilitat, fotos
   d'article). Cal una sessió dedicada per posar-lo al dia.
+
+---
+
+## 28-08-2026 · Google Search Console, primera lectura
+
+L'Ana ha donat d'alta la propietat a **Google Search Console** i n'ha
+compartit les primeres captures. És una eina nova per al club: **fins ara
+només hi havia GA4** (§ «Pendent de desenvolupar» → Dashboard d'analítica),
+que mesura visites; Search Console mesura **com et troba Google abans que
+la gent arribi al web** (impressions, clics, posicions, consultes).
+
+### Primera lectura (últims 28 dies)
+
+Tot el panell marca «Anteriorment: 0» — és la propietat acabada de
+verificar, sense històric previ, no un salt real d'un dia per l'altre.
+
+- **41 clics / 2,2 mil impressions** → CTR ~1,9%.
+- **La portada concentra el 37% dels clics** (15 de 41). `/es/baloncesto-
+  femenino/` (3) i `/campus/` (2) ja en generen per compte propi, no només
+  via portada.
+- **`/en/3x3/` hi apareix**, i explica el 17% de clics fora d'Espanya
+  (Itàlia, Suïssa, R. Dominicana, França): trànsit del torneig, no de marca.
+- **Consultes:** gairebé totes de marca («grup barna basquet», «grup
+  barna»); «baloncesto 3x3» i «barcelona 3x3 basketball» ja hi entren sense
+  dir el nom del club. Encara no hi apareixen cerques genèriques del tipus
+  «club bàsquet Barcelona».
+
+### Pendent de decisió
+
+- **Amb qui queda vinculada la propietat de Search Console** (compte de
+  Google del club, com GA4) i si convé donar-hi accés a més d'una persona.
+- Si val la pena incorporar Search Console al «Dashboard d'analítica de la
+  web» pendent (GA4 mesura què fa la gent al web; Search Console, com hi
+  arriba des de la cerca) o fer-ne seguiment manual mensual mentre el
+  dashboard no existeix.
