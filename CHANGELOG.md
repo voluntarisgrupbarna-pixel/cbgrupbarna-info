@@ -151,6 +151,25 @@ només tenia aquesta branca:
 
 ---
 
+## 1.3.2 — 2026-08-26
+
+**Auditoria de rendiment, SEO, GEO i contingut** sobre les 408 pàgines, i els
+arreglos que en surten. Rendiment: `js/galetes.js` passa a `defer` a les 382
+pàgines i als tres generadors (deixa de bloquejar el primer dibuix; el
+consentiment i l'RGPD queden igual, verificat amb navegador real); els heros i
+targetes del blog passen de JPG a WebP (−34% de pes) i el hero d'article deixa
+el `loading="lazy"` per `fetchpriority="high"` perquè és l'LCP; 604 imatges
+reben `width`/`height` per no moure la pàgina mentre carreguen. SEO: es
+completen les **84 meta descriptions que acabaven tallades amb «…»** (ara
+frases senceres de ≤165 caràcters, també als JSON de `i18n/feina/` perquè cap
+`munta` les reverteixi); vuit `og:image` de /es/ i /en/ apuntaven a fitxers
+inexistents i ara apunten a l'actiu real; la portada deixa de tenir dos `h1`
+(el del masthead passa a `p`, mateixa classe); i s'escurcen els títols i
+descripcions més llargs (campus, empreses, 3x3, briefing i blog, als tres
+idiomes). Les fitxes de fotos del 3x3 en castellà i anglès recuperen el
+JSON-LD que només tenia la catalana. Sitemap, enllaços interns, hreflang i
+paritat i18n: comprovats, cap error.
+
 ## 1.3.1 — 2026-08-25
 
 **Prova d'UX** sobre 16 pàgines × 2 amples amb navegador real, i els arreglos
