@@ -11,8 +11,9 @@ import os
 import re
 import sys
 import urllib.request
-from datetime import datetime, timezone, timedelta
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 CAMPUS_FORM_ID = '260962500106347'
 DATA_PATH = Path(__file__).resolve().parents[2] / 'data.json'
@@ -117,8 +118,9 @@ def main():
 
     # Update timestamp si alguna cosa ha canviat
     if changed:
-        # Hora local Madrid (UTC+2 a estiu)
-        now = datetime.now(timezone(timedelta(hours=2)))
+        # Hora local Madrid: ZoneInfo ja aplica CET (UTC+1) o CEST (UTC+2)
+        # segons la data, no cal decidir-ho a mà ni oblidar-se'n a l'hivern.
+        now = datetime.now(ZoneInfo("Europe/Madrid"))
         config['lastUpdate'] = now.replace(microsecond=0).isoformat()
         DATA_PATH.write_text(json.dumps(config, indent=2, ensure_ascii=False) + '\n')
         print(f"data.json updated at {config['lastUpdate']}")
