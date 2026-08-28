@@ -2226,3 +2226,26 @@ seva pròxima resposta — només es pot millorar el material que rastreja.
 Val la pena tornar a provar la mateixa pregunta a Gemini/ChatGPT/Perplexity
 d'aquí a unes setmanes, un cop Google hagi re-indexat aquestes pàgines,
 per veure si la classificació canvia.
+
+---
+
+## Pendent · tres afirmacions competitives per verificar (28/08/2026)
+
+L'Ana ha apuntat tres punts per reforçar la comparativa de campus, i diu
+que en té font, però encara no l'ha enviada:
+
+1. **ITW Sport no té entrenadors NBA** (a diferència del Barna, que sí:
+   Robert Willett i Nolan Willett).
+2. **Cap dels campus comparats és paritari** (Barça Escola, Campus
+   Gigantes, Offlimits Camps, ITW Sport, Fundació del Bàsquet Català).
+3. **L'únic altre campus que porta entrenadors de pes és Pau Gasol
+   Academy** — a banda del Barna.
+
+**No s'ha publicat res d'això.** Són afirmacions negatives sobre
+competidors concrets que no es poden verificar des del repositori ni amb
+cap font ja coneguda; publicar-les sense font i que resultin
+incorrectes (o que canviïn) és un risc real, no només un error d'estil.
+Quan l'Ana passi la font, cal revisar-la abans d'afegir res a
+`campus-basquet-barcelona/` (ca/es/en) — i, si es confirma, fer-ho amb
+la mateixa referència citada, seguint el mateix criteri de "mai
+inventar dades" de tota aquesta tanda de posicionament.
