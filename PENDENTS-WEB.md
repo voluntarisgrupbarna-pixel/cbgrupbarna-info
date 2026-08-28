@@ -1896,3 +1896,82 @@ El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
    `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
    dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
    afegir-l'hi.
+
+---
+
+## 28-08-2026 — Posicionament invers i SEO/GEO indirecte: fet i pendent
+
+Fet en aquesta tanda (branca `claude/posicionamiento-inverso-seo-geo-w1loqt`):
+secció «Per què el CB Grup Barna i no un altre club» a `llms.txt`, FAQ del
+doble flanc a `/posicionament/` (ca/es/en), article nou de blog «Com triar un
+club de bàsquet a Barcelona» (ca/es/en, amb 5 FAQ pròpies) i `Person` schema
+per a l'Ana Fernández a `/proteccio-menor/` (ca/es/en) — en Julio Torralba ja
+en tenia a `/escoleta/`. Tot validat amb `i18n-lint.py`, `i18n-paritat.py`,
+`i18n-contingut.py` i comprovació d'enllaços interns.
+
+Auditant l'SEO/GEO de tot el lloc per aprofundir-hi, han sortit quatre coses
+més grosses que **no s'han tocat** perquè cadascuna necessita una decisió o
+una verificació que no es pot fer des d'aquí:
+
+### 1. Viquipèdia — el club no en té, el CB Roser sí
+
+El CB Roser (Fort Pienc) té fitxa a la Viquipèdia en català; el CB Grup
+Barna, no. És una de les fonts amb més pes en l'entrenament dels models de
+llenguatge, per davant de qualsevol pàgina pròpia. **No s'ha de crear des
+d'aquí ni per un compte lligat al club**: Viquipèdia exigeix to neutral i
+fonts secundàries independents (premsa, federació), i esborra articles que
+sonen a autopromoció o que ve escrits per algú amb conflicte d'interès no
+declarat. Si es vol tirar endavant, cal:
+- Algú sense conflicte d'interès directe que l'escrigui, o
+- Declarar obertament el conflicte d'interès a la pàgina de discussió si
+  l'escriu algú del club (és el procediment que demana Viquipèdia, no el
+  prohibeix).
+- Fonts com l'article de la revista *Guia Clot · Camp de l'Arpa* («El CB
+  Grup Barna: seixanta anys fent bategar el Clot») ja servirien de font
+  secundària real.
+
+### 2. `dateModified` inconsistent a tot el lloc — 169 pàgines sense el camp, 132 desquadrades amb el sitemap
+
+Una auditoria completa (`WebPage`/`BlogPosting`/`Article` del JSON-LD contra
+`lastmod` de `sitemap.xml`) dona:
+- **169 pàgines** amb `WebPage` o similar al JSON-LD però **sense
+  `dateModified`** (sobretot versions `/en/`).
+- **132 pàgines** on el `dateModified` del JSON-LD i el `lastmod` del
+  sitemap **no coincideixen** — la majoria versions `/en/` amb una data molt
+  més antiga que el `2026-08-25` que porta el sitemap a gairebé tot arreu,
+  senyal que el sitemap es va tocar en bloc sense repassar cada pàgina.
+
+**Per què no s'ha arreglat aquí:** amb aquest volum, fer-ho a mà pàgina per
+pàgina no és fiable (999 canvis just en aquesta tanda ja toquen 11 fitxers;
+300 més seria un diff gegant sense revisió real), i no està clar quina data
+és la de veritat en cada desquadrament —el sitemap en bloc pot ser el
+incorrecte, no el JSON-LD—, així que decidir-ho pàgina a pàgina sense mirar
+l'historial real seria inventar-se dades nou. **La solució correcta és un
+script**, en la línia de `generate-seo-snapshot.py`: llegir la data del
+darrer commit real que ha tocat cada pàgina (`git log -1 --format=%cd`) i
+escriure-la als dos llocs alhora, entre marcadors. Val la pena fer-ho com a
+feina pròpia, no com a efecte secundari d'una altra tanda.
+
+### 3. `VideoObject` als reels d'Instagram incrustats — bloquejat per falta de dades reals
+
+`/premsa/instagram/` (43 publicacions) i `/premsa/moments/` (35) incrusten
+posts d'Instagram sense marcatge `VideoObject`. **No s'ha afegit** perquè
+faria falta saber, per a cadascuna, si és vídeo o foto, la data real de
+publicació i una miniatura —dades que no són al repositori i que caldria
+anar a buscar a Instagram un per un, amb el risc real d'inventar-se-les si
+es fa de pressa. Si es vol fer bé, cal un script que llegeixi les dades reals
+de cada publicació (per exemple amb l'API d'Instagram o revisant-les a mà) i
+no assumir-les.
+
+### 4. La galeria de fotos és invisible als robots que no executen JavaScript
+
+`/fotos/` és **una sola URL amb 1.709 fotos** repartides en 10 àlbums,
+carregades totes per JavaScript des de `fotos/events.js` (generat per
+`scripts/build-gallery-events.py`). No hi ha cap URL ni `<img>` estàtica per
+àlbum ni per foto: Googlebot sol executar el JavaScript i pot arribar-hi,
+però un cercador o un assistent d'IA que no ho faci —i molts no ho fan— no
+veu cap de les 1.709 fotos. Un sitemap d'imatges per si sol **no ho arregla
+del tot**: cal, com a mínim, que cada àlbum tingui una URL pròpia
+rastrejable (encara que sigui amb un `<noscript>` de reforç), i llavors sí
+que té sentit un sitemap d'imatges damunt d'això. És un canvi d'arquitectura
+de la galeria, no un pedaç d'una tarda.
