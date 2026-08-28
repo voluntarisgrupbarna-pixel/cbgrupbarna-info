@@ -1,0 +1,20 @@
+# Vigila dependencies desfasades o amb CVE conegut. Gratuit i natiu de
+# GitHub, sense cap servei extern. Nomes galeria/ te dependencies de veritat
+# (Next.js, Supabase, React): la resta del web es HTML/CSS/JS pla, sense
+# package.json.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/galeria"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"

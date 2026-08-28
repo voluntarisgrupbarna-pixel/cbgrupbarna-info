@@ -13,11 +13,21 @@
  * Per canviar la contrasenya: genera el hash SHA-256 del text nou (per exemple,
  * amb `echo -n "LaMevaContrasenya" | shasum -a 256` a un terminal) i substitueix
  * el valor de PASS_HASH.
+ *
+ * GATE_ENDPOINT (opcional): un cop desplegat el Worker de
+ * workers/admin-gate/ (vegeu el seu README.md), enganxa'n aquí la URL. A
+ * partir d'aleshores la contrasenya es comprova allà, amb límit d'intents
+ * per IP — PASS_HASH deixa de ser l'única barrera (un hash públic sense sal
+ * ni iteracions és atacable offline; el Worker ho evita perquè cada intent
+ * ha de passar per la xarxa i en un moment queda bloquejat). Mentre
+ * GATE_ENDPOINT sigui buit, o si el Worker no respon, es cau a la
+ * comprovació local d'sempre: mai es bloqueja l'accés real per això.
  */
 (function (global) {
   'use strict';
 
   var PASS_HASH = '6949e1321ebbe50d7b025573b8cdda4ae32f6a2611b71a0483f3496fdb531573';
+  var GATE_ENDPOINT = '';
   var KEY = 'cbgb_admin_pass_ok';
 
   /* La caixa forta del token de GitHub: admin/token.enc.json guarda el token
@@ -83,6 +93,27 @@
 
   function saved() {
     try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; }
+  }
+
+  /** Comprova un hash contra el Worker de límit d'intents si està
+   * configurat; si no, o si el Worker no respon, contra PASS_HASH en local. */
+  async function verificaHash(hash) {
+    if (!GATE_ENDPOINT) return { ok: hash === PASS_HASH };
+    try {
+      var r = await fetch(GATE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hash: hash })
+      });
+      if (r.status === 429) {
+        var bloc = await r.json().catch(function () { return {}; });
+        return { ok: false, blocked: true, retryAfter: bloc.retryAfter || 900 };
+      }
+      var res = await r.json();
+      return { ok: !!res.ok };
+    } catch (e) {
+      return { ok: hash === PASS_HASH };
+    }
   }
 
   /**
@@ -152,12 +183,16 @@
         e.preventDefault();
         btn.disabled = true;
         var hash = await sha256(input.value);
-        if (hash === PASS_HASH) {
+        var res = await verificaHash(hash);
+        if (res.ok) {
           // La mateixa contrasenya obre la caixa forta del token de GitHub,
           // si n'hi ha: així no cal enganxar el token a cada dispositiu.
           await openVault(input.value);
           unlock();
         } else {
+          err.textContent = res.blocked
+            ? 'Massa intents. Torna-ho a provar d\'aquí ' + Math.ceil(res.retryAfter / 60) + ' minuts.'
+            : 'Contrasenya incorrecta.';
           err.style.display = 'block';
           input.value = '';
           input.focus();
@@ -207,7 +242,7 @@
     vault: {
       open: openVault,
       seal: sealVault,
-      checkPass: async function (pass) { return (await sha256(pass)) === PASS_HASH; },
+      checkPass: async function (pass) { return (await verificaHash(await sha256(pass))).ok; },
     },
   };
 })(window);

@@ -1,56 +1,58 @@
-name: Galeria · generar versions web i miniatures
+name: backup · mirall del repositori
 
-# Els originals els puja l'admin (/fotos/admin.html) un per un via l'API de
-# GitHub, amb "[skip ci]" al missatge. Això és a posta: una pujada de 300 fotos
-# són 300 commits en pocs minuts, i no volem 300 execucions.
+# Copia incremental de main cap a un repositori de backup separat, per si
+# mai es perd l'accés a aquest (compte robat, repositori esborrat per error,
+# etc.). Substitueix el mirall manual descrit a la skill mapa-web-cbgb §9:
+# ara corre sol cada nit, un push incremental, sense haver-se'n de recordar.
 #
-# Per això aquí no s'escolta el push: es passa cada quart d'hora, agafa tot el
-# que s'hagi pujat des de l'última vegada i en genera les derivades d'una
-# tacada. Si no hi ha res nou, no fa cap commit.
+# Necessita dos secrets que cal donar d'alta a mà UN COP (Settings > Secrets
+# and variables > Actions), vegeu BACKUP-REPOSITORI.md per als passos:
+#   BACKUP_REPO_URL   -> https://github.com/<usuari>/cbgrupbarna-info-backup.git
+#   BACKUP_REPO_TOKEN -> Personal Access Token amb permis "Contents: Read and
+#                        write" nomes sobre aquell repo de backup
+#
+# Si algun dels dos falta, el workflow ho diu i surt en verd sense fer res
+# (no es un error, nomes falta el pas manual d'un cop).
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
-  workflow_dispatch:        # per generar-les a mà quan convingui
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   issues: write
 
-concurrency:
-  group: galeria-imatges     # mai dues execucions alhora sobre els mateixos fitxers
-  cancel-in-progress: false
-
 jobs:
-  generar:
+  mirall:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Instal·lar Pillow
-        run: pip install --quiet Pillow
-
-      - name: Generar el que falti
-        run: python3 scripts/build-gallery-images.py
-
-      - name: Desar si hi ha res nou
+      - name: Comprovar que hi ha els secrets
+        env:
+          URL: ${{ secrets.BACKUP_REPO_URL }}
+          TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add fotos/web fotos/thumb
-          if git diff --cached --quiet; then
-            echo "::notice::Cap foto nova: no hi ha res a generar."
-            exit 0
+          if [ -z "$URL" ] || [ -z "$TOKEN" ]; then
+            echo "::notice::Falten BACKUP_REPO_URL i/o BACKUP_REPO_TOKEN. Vegeu BACKUP-REPOSITORI.md per donar-los d'alta. Sortint sense fer res."
+            echo "SKIP=1" >> "$GITHUB_ENV"
           fi
-          n=$(git diff --cached --name-only | wc -l)
-          git commit -m "galeria: generar versions web de $n fitxers nous [skip ci]"
-          git push
+
+      - uses: actions/checkout@v4
+        if: env.SKIP != '1'
+        with:
+          fetch-depth: 0
+
+      - name: Push incremental cap al mirall
+        if: env.SKIP != '1'
+        env:
+          URL: ${{ secrets.BACKUP_REPO_URL }}
+          TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+        run: |
+          set -e
+          authed=$(echo "$URL" | sed "s#https://#https://x-access-token:${TOKEN}@#")
+          git remote add backup "$authed"
+          git push backup "HEAD:refs/heads/main"
 
       - name: Avisa si el robot ha fallat
         if: failure()
@@ -60,7 +62,8 @@ jobs:
             const titol = '🔴 Robot caigut: ${{ github.workflow }}';
             const cos = 'El workflow **${{ github.workflow }}** ha fallat: ' +
               context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo +
-              '/actions/runs/' + context.runId + ' (' + new Date().toISOString() + ').';
+              '/actions/runs/' + context.runId + ' (' + new Date().toISOString() + '). ' +
+              'El backup no s\'ha actualitzat aquesta nit.';
             const { data: oberts } = await github.rest.issues.listForRepo({
               owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'robot-caigut'
             });

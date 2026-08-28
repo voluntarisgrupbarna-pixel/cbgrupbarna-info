@@ -2096,3 +2096,72 @@ peticions.
    no LCP/CLS/INP reals en cada pull request.
 6. **Backup del repositori manual** — el mirall incremental (§9 de la
    skill `mapa-web-cbgb`) no té cap `cron` que el faci sol.
+
+---
+
+## Els 6 punts pendents de l'auditoria, fets (28/08/2026, tarda)
+
+Resposta de l'Ana a la llista de dalt, punt per punt.
+
+**1. Límit d'intents a `/admin/`, amb un Cloudflare Worker gratuït.**
+Comprovat: Cloudflare Workers és gratuït fins a 100.000 peticions/dia i
+Workers KV fins a 100.000 lectures + 1.000 escriptures/dia — molt per sobre
+del que farà servir mai un club de barri. Codi i instruccions a
+`workers/admin-gate/` (`worker.js`, `wrangler.toml`, `README.md`, mateix
+patró que `workers/fotos-upload/`, que el club ja fa servir per a R2).
+`scripts/admin-gate.js` ja porta el camp `GATE_ENDPOINT`: buit, tot segueix
+igual que fins ara; un cop desplegat el Worker (3 comandes `wrangler`, amb
+els passos exactes al README), s'hi enganxa la URL i la porta comença a
+bloquejar després de 8 intents fallits en 15 minuts des de la mateixa IP.
+**Pendent (cal el compte de Cloudflare del club):** desplegar-lo — són 3
+comandes, veure `workers/admin-gate/README.md`. El README també explica
+sincerament el que això NO arregla del tot (el hash local segueix sent el
+pla B si el Worker cau; qui llegeixi el codi encara pot intentar-ho offline
+contra aquell hash, no contra el Worker).
+
+**3. Dependabot afegit** — `.github/dependabot.yml`, `npm` per `galeria/` i
+`github-actions` per als workflows, revisió setmanal. Natiu de GitHub,
+gratuït, sense res a desplegar.
+
+**4. `cerca-index.json` ja no es precarrega** — tret el
+`<link rel="preload" as="fetch">` de `/cerca/`, `/es/busqueda/` i
+`/en/search/`. El cercador el continua baixant igual de de pressa (el crida
+`js/cerca.js` en iniciar la pàgina), però ara amb prioritat normal, sense
+competir per l'ample de banda amb els recursos crítics de la primera
+pintada.
+
+**5. Lighthouse CI afegit** — `.github/workflows/lighthouse.yml` +
+`.github/lighthouserc.json`, sobre portada, `/partits/`, `/campus/`,
+`/escoleta/` i `/blog/` a cada pull request. Accessibilitat i SEO
+bloquegen (mínim 0,9); rendiment només avisa (mínim 0,8, sense bloquejar)
+perquè els runners compartits de GitHub no donen un rendiment prou
+constant per fer-lo una barrera dura.
+
+**6. `tests/` enganxat a CI** — `.github/workflows/tests-web.yml` corre
+`audit-seo-geo.mjs` + `audit-browser.mjs` a cada pull request (i cada
+dilluns, per si un enllaç extern ha caigut sol sense cap canvi de codi),
+deixa l'informe com a comentari a la proposta de canvi (mateix mecanisme de
+`<!-- marca -->` que ja fa servir `i18n-paritat.yml`) i com a fitxer
+descarregable. No fa fallar la PR: aquestes eines són auditories, no
+comprovacions estrictes com `a11y-revisa.py`.
+
+**7. Avís de fallada als robots programats — arreglat, i corregit el
+diagnòstic.** Revisant-ho de debò (no per una paraula que hi sortia de
+casualitat), **cap** dels 12 workflows avisava de res en fallar — la xifra
+de «6 de 12» de l'auditoria original eren falsos positius (coincidències
+amb «mail» dins d'una adreça de `git config`). Ara els 5 que corren sols
+per `cron` (`analitica.yml`, `build-gallery-images.yml`,
+`sync-r2-uploads.yml`, `sync-r2.yml`, `update-partits.yml`) obren un issue
+etiquetat `robot-caigut` si fallen (un de sol per robot, que es va
+actualitzant amb un comentari si torna a fallar) i el tanquen sols quan
+torna a anar bé. Els workflows que ja corren enganxats a un `push`/PR no
+s'han tocat: allà ja hi ha algú mirant la pantalla en aquell moment.
+
+**8. Backup automatitzat.** `.github/workflows/backup-mirror.yml`
+substitueix el procediment manual de `mapa-web-cbgb` §9: cada nit fa un
+`git push` incremental cap a un repositori de backup. **Pendent (cal donar
+d'alta 2 secrets un sol cop, 10 minuts):** passos exactes a
+`BACKUP-REPOSITORI.md` (crear el repositori de backup si no existeix ja,
+crear un token limitat a aquell repositori, i donar d'alta
+`BACKUP_REPO_URL` i `BACKUP_REPO_TOKEN`). Fins que no es faci, el workflow
+ho diu (`::notice::`) i surt en verd sense fer res — no és un error.
