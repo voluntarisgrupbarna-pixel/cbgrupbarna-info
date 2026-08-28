@@ -22,6 +22,58 @@ només l'hi posa nom.
 
 ---
 
+## 1.5.2 — 2026-08-28
+
+**Barrida de bugs de tres hores**, executant totes les bateries de proves
+del repositori (`tests/`, `scripts/a11y-*`, `scripts/i18n-*`) i llegint el
+codi fins al detall que les proves no arriben a veure:
+
+- **La pestanya d'Admin tapava el cercador, l'idioma i el mapa del web**
+  a gairebé tot el lloc: `z-index:2147483000` guanyava sempre l'apilament,
+  encara que ocupés el mateix racó que controls reals. Baixat a 80.
+- **Menú mòbil sense pista de scroll**, al lloc principal i a les 21
+  pàgines de «presentacions» (que no carreguen barna.css): l'últim
+  enllaç i el cercador quedaven fora de vista sense cap indici. Difuminat
+  de vora afegit; a «presentacions» detecta l'overflow real per JS
+  perquè una pàgina amb més enllaços no es quedi sense pista a l'ample
+  on totes les altres ja hi caben.
+- **FAQ duplicada a `/model-formatiu/`** (ca/es/en): dues seccions
+  «Preguntes freqüents» seguides amb el mateix `id="faq"`, una escrita a
+  mà i redundant amb l'article de dalt, l'altra la de veritat que manté
+  el generador. Treta la duplicada.
+- **`/presentacions/evidencia-i-posicio/`** declarava `lang="ca"` amb tot
+  el cos en castellà (còpia de l'`/es/`). Traduït sencer.
+- **Logos de partners ampliats fins a 3,6×** la seva resolució real a
+  les fitxes individuals: ara el límit en px mai supera 1,4× la mida
+  real (min() amb el 70%/60% de sempre), amb el mateix càlcul preparat
+  al generador per si mai es torna a fer servir.
+- **`/jugadors/`** no tenia cap `<footer>`, única pàgina pública del
+  lloc en aquest cas. Afegit un peu mínim, com ja fa `/partits/app.html`.
+- **Enllaç trencat a `llms.txt`** (`/es/cerca/` → `/es/busqueda/`),
+  **xifra prohibida** («40 equips») filtrada a la traducció anglesa
+  d'una notícia de premsa, **adreça truncada** a la mateixa notícia
+  (es/en), **enllaç sobrant al domini antic** `cbgrupbarna.com` al peu
+  d'11 landing pages, **`opina.json` amb ruta relativa** trencada a
+  `/en/` i `/es/`, **twitter:card i JSON-LD absents** a la traducció de
+  `/fotos-esdeveniments/3x3-westfield-2026/` (es/en), i el **nombre de
+  partners inconsistent** (22 vs. 23 a la mateixa pàgina d'`/empreses/`).
+- **Fora del web**: el secret de pujada de fotos a R2 (Cloudflare Worker)
+  es comparava amb `===`, filtrant per temps quantes lletres inicials
+  s'han encertat; ara és en temps constant. `lastUpdate` de `data.json`
+  portava sempre un offset fix de +2 UTC, també a l'hivern (CET és +1);
+  substituït per `ZoneInfo("Europe/Madrid")`.
+- **Preparat, no aplicat**: el gate de contrasenya d'`/admin/` accepta
+  ja un format de hash molt més fort (PBKDF2, 210.000 iteracions) per a
+  la propera vegada que es canviï la contrasenya — anotat a
+  `PENDENTS-WEB.md` perquè només ho pot fer qui la sap.
+
+**Provat, sense res a corregir**: `tests/cerca/` (74+95+56 casos),
+`scripts/i18n-lint.py`, `scripts/i18n-paritat.py --tot`,
+`scripts/i18n-contingut.py`, `scripts/i18n-enllacos.py`,
+`scripts/a11y-revisa.py` i `scripts/pes-pressupost.py` — tots nets.
+
+---
+
 ## 1.5.1 — 2026-08-27
 
 **Reconciliació de dues tandes paral·leles** (aquesta branca ↔ el PR #103
