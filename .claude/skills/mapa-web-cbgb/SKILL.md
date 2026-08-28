@@ -187,8 +187,9 @@ el seu propi cicle de vida:
 - **Institucional/premsa**: `/briefing/` (kit de premsa + PDF de 16 pàgines),
   `/premsa/`, `/documents/` (assegurança, protecció del menor, instal·
   lacions), `/club/` (història, organigrama).
-- **Patrocinis**: `/patrocinadors/` (22 fitxes de partner, nivells or/plata/
-  bronze pendents de confirmar per l'Ana), `/partners-mapa/`.
+- **Patrocinis**: `/patrocinadors/` (22 fitxes de partner; sense nivells
+  or/plata/bronze — decisió de l'Ana, 27/08/2026: les col·laboracions no van
+  per nivells), `/partners-mapa/`.
 - **Legal**: `/avis-legal/`, `/politica-de-privacitat/`.
 
 ---

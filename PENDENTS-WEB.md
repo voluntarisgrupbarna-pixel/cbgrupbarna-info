@@ -119,6 +119,11 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
   material d'acció real (no posat), llum natural, enquadrat des de dalt sense tallar
   cares, i diverses tomes perquè es pugui rotar en comptes de repetir sempre la mateixa.
+- **Sessió de fotos dels 4 sèniors (setembre 2026), confirmada per l'Ana:**
+  Fem A, Fem B, Masc A i Masc B. Vegeu el brief de captura complet a la secció
+  «Benchmark de webs professionals» del 27/08/2026, al final d'aquest document.
+  Amb aquest material es tanquen les fitxes de `/jugadors/` i el bloc de sèniors
+  a la portada.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
 - **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
@@ -1574,6 +1579,323 @@ costaven conversions, aplicats a les tres portades:
 Queden de la crítica: P2.5 (/escoleta/ al sistema visual — l'obra gran),
 P2.6 (contingut sota el peu #SOMCLOT), P2.7 (mesurar l'ús del commutador
 amb GA4 abans de decidir res), P3 (logo x3, menú vell al codi).
+
+### 26-08-2026 · /escoleta/ entra al sistema visual (P2.5 — l'obra gran, feta)
+
+La pàgina d'Escoleta tenia un vestit fosc propi, desconnectat del sistema:
+la família clicava «Vine a provar» des de la portada blanca i aterrava en
+el que semblava una altra web. Ara, a les tres llengües:
+
+- **Pell nova sobre els tokens del sistema** (paper blanc, tinta, vermell
+  de l'escut, Anton/Inter des de /css/fonts.css): el hero fosc es queda
+  com a única superfície de tinta —com el masthead de la portada— amb la
+  foto d'arxiu en B/N; Portes Obertes i el tancament són superfícies
+  vermelles; la resta, paper blanc amb filets, targetes d'alumni i stats
+  amb vora fina, i el mateix llenguatge que les interiors.
+- **Barra superior clara** com la resta del web, amb **cercador** (abans
+  aquesta pàgina no en tenia: cerca.js no trobava on penjar el botó) i el
+  «Salta al contingut» ara ocult fins al focus, com toca.
+- Marcatge intacte: tot el contingut, ancoratges (#historia, #portes-
+  obertes), JSON-LD i FAQ es queden com eren. El castellà encastat al
+  marcatge català (data-lang="es", ocult) segueix pendent de neteja.
+- Arreglada de pas una col·lisió antiga: la classe .cta feia de fila de
+  botons i de secció vermella alhora; la superfície vermella ara és només
+  de la secció (abans pintava una banda vermella espúria a «L'Escoleta,
+  avui»).
+
+---
+
+## 26-08-2026 — Camí cap al 10 (accessibilitat, rendiment, estètica): el que depèn de l'Ana
+
+De la proposta per pujar del 9 al 10 les tres àrees, aquest és el bloc que
+no és codi. La resta (9 accions: alts de la galeria, avís del cercador,
+versió accessible dels PDF, axe a l'app de galeria, compressió dels 4 PDF,
+pressupost de rendiment a CI, panell d'analítica, flyer en WebP, hero de
+l'Escoleta amb les fotos de l'àlbum de 1772 px) es pot fer sense esperar
+cap d'aquests punts.
+
+### Material
+
+- **Sessió de fotos de l'Escoleta** — ja apuntada més amunt; segueix sent
+  la inversió més rendible de tota la web. Mentrestant el hero es cobreix
+  amb les millors fotos de l'àlbum `escola-basquet-julio-torralba` (91 a
+  1772 px).
+- **Sessió de fotos de La Nau** — per convertir `/instal-lacions/` en la
+  casa del club. L'estructura de la pàgina es pot muntar abans amb el
+  material actual, deixant els forats de foto marcats.
+- **Nivells or/plata/bronze dels 22 partners** — ja apuntat; cada fitxa es
+  toca en minuts quan arribi la dada.
+- **Logotip de la Wilson** (SVG o PNG amb fons transparent, demanar-lo a
+  la marca) i **fitxes de Nova Farmàcia Clot i Clínica Dental 26** — ja
+  apuntats.
+
+### Decisions d'un minut
+
+- **Service account de GA4** per al panell d'analítica d'`/admin/`
+  (proposta ja triada el 25/08: Action diària → GA4 Data API → JSON →
+  panell). Hi ha guia de 10 minuts preparada; sense això el panell no pot
+  llegir dades.
+- **Nom canònic del blog**: la portada diu «Observatori Barna» i el mapa ≡
+  diu «Coneixement Barna». Quan es triï, es fixa a `i18n/etiquetes.yml` i
+  es regenera el mapa.
+
+---
+
+## 26-08-2026 — El bloc de codi del camí cap al 10, fet (v1.4.0)
+
+Les 9 accions de codi de la proposta, executades i comprovades (a11y-revisa
+459 pàgines a 0, paritat i contingut d'i18n nets, lint 0, cercador 74/74,
+pressupost de pes en verd):
+
+- **Alts reals a la galeria** (3 idiomes) amb àlbum i posició, i suport
+  `ev.alts` per a descripcions per foto — quan es vulgui, el pas següent és
+  el camp de descripció al pujador d'admin, que ja té on desar.
+- **El listbox buit del cercador**, arreglat a `js/cerca.js`.
+- **Els 4 PDF grans comprimits** (12,6 → 6,2 MB) amb Title/Lang conservats,
+  pesos actualitzats i, als 3 sense arbre d'etiquetes, la nota que la versió
+  accessible és la mateixa pàgina.
+- **Hero de l'Escoleta**: 4 fotos reals de l'àlbum d'estudi en rotació
+  diària a les tres portades (h1 al marcatge; variants h2-h4 pel dia del
+  mes). Les fonts són `img/escoleta-h{1..4}[@2x].webp`.
+- **Pressupost de pes a CI**: `pes-pressupost.yml` falla el PR si un fitxer
+  passa del sostre del seu tipus; excepcions amb motiu a `pes-excepcions.txt`.
+- **Panell d'analítica** a `/admin/analitica/` + workflow `analitica.yml`
+  (cada matinada) + `.github/scripts/ga4-informe.py`. **Espera els dos
+  secrets de l'Ana** (`GA4_SERVICE_ACCOUNT_JSON`, `GA4_PROPERTY_ID`);
+  instruccions de 10 minuts a la capçalera de l'script. Fins llavors el
+  panell ho explica i el cron surt en verd.
+- **L'app de galeria** (Next.js): caselles amb teclat i botons amb nom;
+  type-check en verd.
+
+**Una troballa que desfà un pendent**: el PNG d'1,5 MB del flyer de
+l'Escoleta no l'enllaça cap pàgina — és el màster d'impremta (la web només
+serveix el PDF de 456 KB). No hi havia res a arreglar; queda com a excepció
+documentada del pressupost de pes.
+
+**El que segueix esperant l'Ana** és el bloc del 26/08 de més amunt:
+service account de GA4, nom canònic del blog, sessions de fotos (Escoleta i
+La Nau) i dades de partners.
+
+---
+
+## 26-08-2026 (tarda) — Segon barrido de codi: el tablón, net (v1.4.1)
+
+Repassat TOT el tablón buscant el que fos codi i seguís obert. Fet: Zapic
+fora de les 6 tires de partners i del repositori (la baixa era decisió
+tancada), P2.6 (la tira #SOMCLOT ja no fa de fals final: és l'últim bloc
+abans del peu), P2.7 (esdeveniment `canvi_vista` a GA4), P3-logo (capçalera
+amb `logo-head.png` de 8 KB en lloc de l'escut sencer), i la neteja
+d'/escoleta/ (113 elements de castellà ocult, `data-lang` i el JS del
+commutador antic, sense tocar cap text català). Comprovat amb navegador a
+1280/390 i tota la bateria en verd. El paràgraf desfasat de `mapa-web-cbgb`
+ja estava corregit d'una sessió anterior.
+
+**P3 (menú vell): es queda, i és una decisió.** El `nav#menu` ocult de les
+portades no es treu: el codi ja deia «queda al marcatge per si es recupera»
+i són ~30 enllaços interns en HTML servit que els cercadors llegeixen (el
+mapa ≡ els pinta amb JavaScript). Si l'Ana el vol fora igualment, és un
+canvi de cinc minuts — però que consti el cost SEO.
+
+**Si s'obre pull request d'aquesta branca**: la neteja d'/escoleta/ toca
+només la pàgina catalana (marcatge, cap text). Si la comprovació de paritat
+la marca, la línia per a la descripció del PR és
+`i18n-nomes-un-idioma: neteja de marcatge sense canvi de text`.
+
+**El que queda al tablón ja NO és codi**: secrets de GA4, nom del blog,
+sessions de fotos, dades de partners, URL de Brevo, columna newsletter a
+l'Apps Script, decisions de campus/formulari/PIN, autoritat SEO externa i la
+migració de les notícies antigues de cbgrupbarna.com (projecte de contingut,
+no un arreglo).
+
+---
+
+## 27-08-2026 — Decisió de l'Ana: NO hi ha nivells or/plata/bronze
+
+«No se funciona així»: les col·laboracions del club no van per nivells, i el
+concepte desapareix de tot arreu. No cal esperar cap dada — el pendent
+«nivells dels 22 partners» queda TANCAT per decisió, no per resposta.
+
+Comprovat on era de veritat: **cap pàgina pública ho deia** (els packs de
+/patrocinadors/ es diuen «Entrada · Presència digital…» i no s'han tocat).
+El rastre era intern i s'ha tret:
+
+- `data.json`: fora el camp `nivell` dels 21 partners i la nota `_nivells`.
+- La skill `mapa-web-cbgb`, que ho llistava com a pendent de confirmar.
+- Aquest tauler: totes les mencions anteriors a «nivells or/plata/bronze
+  pendents» queden anul·lades per aquesta decisió (les entrades velles es
+  conserven com a històric).
+
+> Les skills personals de captació (fora d'aquest repositori) encara parlen
+> de nivells Oro/Plata/Bronce com a plantilla: si l'Ana vol, s'actualitzen
+> en una sessió on estiguin carregades com a fitxers.
+
+---
+
+## 27-08-2026 — Alts reals a la galeria, fase final (v1.5.0)
+
+Fet: 141 fotos amb text alternatiu redactat a mà en els tres idiomes
+(Escola de Bàsquet 91 + visita Collboni 50), camp de descripció opcional al
+pujador d'admin (es desa a `ev.alts`, el generador el conserva), cada
+idioma amb el seu joc (`alts`/`alts_es`/`alts_en`) i, de passada, els
+enllaços directes `#album` arreglats a `/es/fotos/` i `/en/fotos/` (no
+obrien res). Bateria completa en verd.
+
+**Criteri per a la resta (1.900 fotos)**: són ràfegues d'esdeveniment on la
+descripció a mà no diria gaire més que l'alt contextual automàtic que ja
+tenen («Àlbum — foto N de M», trilingüe). Si es vol alt a mà en algun àlbum
+més, ara és només omplir `ev.alts` — la maquinària ja hi és.
+
+**Per a l'Ana · trobat mirant l'àlbum de l'Escola**: hi ha ~11 captures de
+pantalla de mòbil (cerques de Google i fitxes federatives de jugadors,
+posicions 25-34 de l'àlbum) que semblen pujades per error entre les fotos.
+No s'ha esborrat res — digues si les treus o s'hi queden.
+
+## 27-08-2026 — Decisió de l'Ana: les captures de l'àlbum de l'Escola es queden
+
+Les 10 captures de pantalla de mòbil de l'àlbum «Escola de Bàsquet – Julio
+Torralba» (posicions 26-35: cerques i fitxes federatives d'exjugadors com
+Roger Fornas, David Mejía o Daniel Iruela) **no són un error i no es
+treuen**: l'Ana ho ha confirmat en veure-les. Expliquen on han arribat els
+que van començar en aquesta pista. Ja tenen text alternatiu propi que diu
+que són captures. Que ningú les «netegi».
+### 26-08-2026 · El contingut enterrat i la neteja (bloc groc del camí cap al 10)
+
+**El fals final.** El peu negre #SOMCLOT tancava la pila de portes i, com
+que duia el commutador d'idioma, es llegia com el peu de la pàgina: tot el
+que venia després —formulari inclòs— quedava mort. Ara la banda és més
+prima, no duu idiomes (ja hi són a la capçalera i al peu real) i el seu
+enllaç empeny cap al formulari: «Vols informació? ↓».
+
+**La navegació duplicada surt de la vista ràpida.** `#acces` («Tot a mà»,
+3.113 px) tenia 23 enllaços, 19 dels quals ja eren al mapa ≡ — és el bloc
+de llista plana que la guia diu que les franges van substituir. Passa a
+`only-extensa`, igual que `#presentacions`. Els quatre enllaços que només
+vivien allà (`/briefing/`, `/posicionament/` i dos PDF) entren al mapa ≡
+via `scripts/build-mapa.py`. La FAQ es queda visible a les dues vistes a
+propòsit: el `FAQPage` del JSON-LD ha de correspondre a contingut visible.
+
+Resultat a la vista de franges: **15.254 px → 11.569 px** i **1.392 KB →
+989 KB** al mòbil (comptant també la tanda P1).
+
+**Galeria accessible de debò.** Les miniatures deien «Foto 1», «Foto 2»…
+i el visor sempre «Foto del club». Ara el text alternatiu porta context
+real: «Foto 3 de 192 · JUGADORS/ES 2526 · La Nau del Clot», tant a les
+miniatures com al visor, als tres idiomes. **No és descripció foto a
+foto** —això segueix necessitant que algú les escrigui—, però qui fa
+servir lector de pantalla passa de no rebre res a saber on és.
+
+**Neteja.** Fora el menú vell de la portada (marcatge, CSS i JS: era
+inabastable des que hi ha el mapa ≡) i el `rel="shortcut icon"` redundant.
+A `/escoleta/`, fora els 113 blocs de castellà encastat i ocult que
+quedaven del commutador antic: 75,3 KB → 59,1 KB, amb el text visible
+verificat idèntic abans i després.
+
+**`js/cerca.js`**: el `role="listbox"` ara només s'aplica quan hi ha
+opcions de debò (abans era fix i axe-core hi marcava
+`aria-required-children` en els estats sense resultats). Tanca el punt 5
+de la llista d'accessibilitat del 24/08.
+
+**Ja no calia**: el paràgraf desfasat de la skill `mapa-web-cbgb` sobre
+`/femeni/` ja s'havia corregit en una passada anterior.
+
+---
+
+# Benchmark de webs professionals · Valencia Basket, Real Madrid i FC Barcelona (27/08/2026)
+
+Anàlisi demanada per l'Ana: «per ser una web professional, què ens falta?».
+Comparades les webs de Valencia Basket (valenciabasket.com), Real Madrid
+bàsquet (realmadrid.com) i FC Barcelona bàsquet (fcbarcelona.cat) amb
+l'inventari complet de cbgrupbarna.info (`llms.txt` + aquest document).
+
+## El que ja tenim al seu nivell (o millor)
+
+Calendari i resultats automatitzats amb la FCBQ, fitxes d'equip, calendaris
+descarregables + `.ics`, tres idiomes (el Valencia només en té un), història,
+organigrama, instal·lacions, galeria, kit de premsa, pàgina d'empreses amb
+Barna Business, mapa de partners, FAQ amb cercador que respon, legal i
+accessibilitat complets. Cap dels tres grans té cercador que respon ni `.ics`
+per equip.
+
+## El que els tres tenen i a nosaltres ens falta
+
+Per ordre d'impacte realista per a un club de barri:
+
+| # | Gap | Qui el té | Què seria al Barna | Estat |
+|---|---|---|---|---|
+| 1 | Plantilla amb fitxes de jugador/a | Els 3 (foto, dorsal, perfil) | `/jugadors/` amb foto i fitxa, com a mínim dels dos Sènior A | Ja pendent: `/jugadors/` sense acabar. **Es desbloqueja amb la sessió de setembre** |
+| 2 | Actualitat/Notícies (cròniques, fitxatges, comunicats) | Els 3, a diari | El blog són guies, no notícies. Crònica del cap de setmana + anuncis = la secció «Notícies» que va quedar buida al menú | Pendent de decisió de l'Ana (18/08) |
+| 3 | Primer equip a dalt | Els 3 obren amb el primer equip | Sènior Fem A i Masc A a portada abans que la base | Ja a la llista de marca, punt 2. **Es desbloqueja amb la sessió de setembre** |
+| 4 | Vídeo propi (RM Play, Barça Play) | Els 3 amb OTT | No un streaming: una pàgina `/video/` amb highlights embeguts (YouTube/IG) per partit | No existeix ni estava anotat |
+| 5 | Palmarès | Els 3 com a secció pròpia | Pàgina `/palmares/`: títols, ascensos, Supercopa, sotscampionat dels Màgics | No existeix (està diluït a història). Una tarda de feina; és el que més «club gran» transmet a un patrocinador |
+| 6 | Zona de socis/afició (Culers, Madridistas, Socios VB) | Els 3 | Versió barri: «Avantatges de la família Barna» empaquetant els descomptes que ja hi ha a les 22 fitxes de partner. Cost gairebé zero, i argument de venda per captar més partners | Zona de socis sense migrar de la web antiga |
+| 7 | Botiga | Els 3 | Bloquejada amb motiu: última temporada amb Wintym, marca nova per negociar. Preparar `/botiga/` per al dia que es firmi | Anotat a MIGRACIO-WEB-ANTIGA.md |
+| 8 | Newsletter operativa | Els 3 | Ja es recull el consentiment; falta triar eina (Brevo és gratuït fins a 300 enviaments/dia) | Pendent |
+| 9 | Experiències/matchday (tour, gameday) | Sobretot el Valencia | La Nau del Clot com a actiu de marca: dia de partit, com viure'l, activacions | Ja a la llista de marca, punt 3 — falta la sessió de fotos |
+| 10 | App | Els 3 | No compensa: els `.ics` + WhatsApp ja cobreixen el que la seva app fa per una família | Descartada |
+
+## Lectura estratègica
+
+- El benchmark **confirma la llista de la fase de marca**: els punts 1, 3 i 9
+  ja estaven identificats aquí. El que els grans afegeixen de nou són
+  **palmarès, vídeo, notícies i el carnet d'afició** (gaps 2, 4, 5, 6).
+- **La palanca més barata i diferencial és la 6**: el Valencia ven «descuentos
+  para miembros» com a benefici premium; nosaltres ja tenim 22 fitxes de
+  partner amb ofertes. Empaquetar-ho és ordenar el que existeix.
+- Les que depenen de material de l'Ana: notícies (definir què és «Notícies»),
+  fitxes de jugadors (fotos de plantilla), botiga (marca nova).
+
+## Sessió de fotos dels 4 sèniors · setembre 2026 (decisió de l'Ana, 27/08)
+
+L'Ana farà fotos als quatre equips sènior al setembre. Amb aquest material es
+tanquen d'un cop els gaps 1 i 3 i es renova la imatge dels equips. Brief de
+captura perquè la sessió serveixi per a tot d'una vegada:
+
+**Què treure per cada equip** (×4: Fem A, Fem B, Masc A, Masc B):
+
+1. **Foto d'equip horitzontal** — per a la fitxa de `/partits/equips/` i el
+   bloc de sèniors de la portada. Aire per dalt: la web retalla des de dalt
+   (es perd terra, mai caps).
+2. **Foto d'equip vertical (9:16)** — la mateixa per a Instagram (post fixat /
+   destacada): web i perfil amb la mateixa imatge, com mana el sistema.
+3. **Retrat individual de cada jugador/a** — mateix fons i mateixa llum per a
+   tothom, per a `/jugadors/`. Pla mitjà; millor tots iguals que tots creatius.
+4. **3-4 d'acció/ambient a La Nau** — per al hero editorial de portada i la
+   franja «Els sèniors» (va sobre tinta amb foto alta: millor si n'hi ha
+   alguna de vertical amb força).
+
+**Regles tècniques** (del sistema visual, `web-cbgb` §3): originals de càmera
+sense passar per WhatsApp (cap foto ampliada), nítides i ben exposades, cap
+cara tallada per l'enquadrament. Es processen amb
+`scripts/build-blog-images.py`. Els originals, amb còpia fora del repositori.
+
+**Aprofitar el mateix dia de càmera per a l'Escoleta (4-8 anys)** si ja hi ha
+entrenaments: és la sessió pendent més antiga d'aquest document i la foto que
+obre les tres portades.
+
+---
+
+## 27-08-2026 (nit) — Accés al panell d'admin: falta el `GOOGLE_CLIENT_ID`
+
+Fusionat a `main` (#105): pestanya discreta «Admin» a la cantonada superior
+dreta de gairebé totes les pàgines (injectada des de `js/galetes.js`,
+enllaça a `/admin/`), i codi d'accés nou a les seccions protegides de
+`/partits/app.html` (només se'n guarda l'empremta SHA-256; el codi en clar
+se li ha donat a l'Ana per xat, no viu al repositori).
+
+### Pendent — cal l'Ana
+
+El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
+`GOOGLE_CLIENT_ID: ""`. Falta:
+
+1. Crear l'ID de client OAuth a
+   [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
+   amb el compte `voluntarisgrupbarna@gmail.com` (passos exactes al capçal
+   del mateix fitxer `admin/config.js`).
+2. Enganxar-lo a `GOOGLE_CLIENT_ID` i pujar el fitxer.
+3. Revisar `ALLOWED_EMAILS` al mateix fitxer — ara només hi ha
+   `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
+   dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
+   afegir-l'hi.
 
 ---
 

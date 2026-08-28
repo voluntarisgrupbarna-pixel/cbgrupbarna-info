@@ -1,0 +1,40 @@
+name: analitica · informe diari de GA4
+
+# Cada matinada baixa l'informe de GA4 (28 dies) i el deixa a
+# admin/analitica/dades.json, que és l'únic que llegeix el panell
+# d'/admin/analitica/. La clau del service account només viu als secrets;
+# si encara no hi és, l'script ho diu i surt en verd (instruccions per
+# donar-la d'alta a la capçalera de .github/scripts/ga4-informe.py).
+
+on:
+  schedule:
+    - cron: '38 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  informe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependència de signatura (RS256)
+        run: pip install --quiet cryptography
+      - name: Baixar l'informe
+        env:
+          GA4_SERVICE_ACCOUNT_JSON: ${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        run: python3 .github/scripts/ga4-informe.py
+      - name: Publicar si ha canviat
+        run: |
+          if git diff --quiet -- admin/analitica/dades.json; then
+            echo "Cap canvi a l'informe."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add admin/analitica/dades.json
+          git commit -m "analitica: informe diari [skip ci]"
+          git push

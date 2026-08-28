@@ -88,6 +88,27 @@ L'estructura de les franges està calcada de la guia visual. **Si canvies l'ordr
 o els textos d'una, canvia'ls a l'altra**: la portada i la guia han de dir el
 mateix.
 
+### L'«Estètica definitiva» (25/08/2026) mana sobre «Franges i Extensa»
+
+El document «L'estètica definitiva» substitueix la guia «Franges i Extensa».
+Quatre decisions tancades, totes aplicades al lloc:
+
+1. **Sense crema enlloc** — totes les superfícies clares són blanc pur.
+2. **Groc `#EEFF00` només a la lletra, mai al fons**, i només als dos punts
+   d'entrada a la campanya d'Escoleta (el ticker i el seu CTA). Sobre tinta
+   17,2:1; sobre blanc no s'hi pot escriure (1,1:1). El botó groc va sobre
+   `--red-dark` perquè sobre el vermell de l'escut es queda en 4,44:1.
+3. **Quatre vestits, una sola marca** — mateixos tokens a tot arreu.
+4. **Botó ≡ amb el mapa complet a totes les capçaleres** — `js/mapa.js`,
+   generat per `scripts/build-mapa.py` des de `i18n/routes.yml`.
+
+La portada de franges és la maqueta del document: hero de dues columnes amb
+la foto de l'Escoleta (filet vermell a sota), botons «Vine a provar» /
+«Entrenaments» / «Descarrega info», i **cinc franges grans** (`.fr2`):
+Escoleta · Els sèniors (tinta, foto alta) · Femení · Calendari (vermell) ·
+El club, tancades amb la barra fosca #SomClot. Si canvies l'ordre o els
+textos, canvia'ls també a la guia.
+
 ### Nota sobre les guies antigues
 
 Hi ha una guia anterior —«Web + Instagram: dues propostes», agost 2026— que
@@ -119,7 +140,7 @@ femení, `/es/`, `/en/` i `partits/equips/`.
 | `--muted` | `#6B6560` | Etiquetes petites i text secundari. Passa AA. |
 | `--line` | `rgba(16, 16, 14, 0.14)` | Filets. |
 | `--paper` | `#ffffff` | Paper. |
-| `--paper-2` / `--cream` / `--ground` | `#F4F1EC` | Crema. |
+| `--paper-2` / `--cream` / `--ground` | `#FFFFFF` | Blanc pur. Era la crema `#F4F1EC` fins al 25/08/2026: l'«Estètica definitiva» la retira («sense crema enlloc») i les bandes alternes se separen amb filet, no amb fons. |
 
 **Els noms de `/partits/` són àlies del mateix joc**: `--cream`, `--red-ink`,
 `--panel` i `--ground` estan declarats a `css/barna.css` amb aquests valors, de

@@ -22,6 +22,98 @@ només l'hi posa nom.
 
 ---
 
+## 1.5.1 — 2026-08-27
+
+**Reconciliació de dues tandes paral·leles** (aquesta branca ↔ el PR #103
+de la maqueta). En fusionar ha manat el que ja era a `main` on les dues
+tandes tocaven el mateix amb intencions diferents, i s'hi ha sumat el que
+només tenia aquesta branca:
+
+- **Mana la maqueta**: el menú vell de les portades surt del marcatge (la
+  decisió de conservar-lo queda revocada pel PR), i la banda #SOMCLOT es
+  queda al seu lloc convertida en crida cap al formulari («Vols
+  informació? ↓») — la reubicació davant del peu d'aquesta branca es
+  descarta perquè resolia el mateix problema.
+- **Se suma d'aquesta branca**: la rotació del hero de l'Escoleta, el logo
+  de capçalera a mida, l'esdeveniment `canvi_vista`, la neteja COMPLETA
+  d'/escoleta/ (la de la maqueta deixava els atributs i el CSS del
+  commutador), els alts redactats a mà de la galeria amb tota la seva
+  maquinària, i el cas «carregant/error» del cercador que la maqueta no
+  cobria.
+
+---
+
+## 1.5.0 — 2026-08-27
+
+**Textos alternatius reals a la galeria** — la fase final de l'apartat:
+
+- **141 fotos amb alt redactat a mà, en els tres idiomes** (423 textos):
+  l'àlbum de l'Escola de Bàsquet – Julio Torralba (91) i la visita de
+  l'alcalde Collboni (50), mirades una a una. Les 1.900 restants segueixen
+  amb l'alt contextual automàtic (àlbum + posició), també trilingüe.
+- **El pujador d'admin ja demana la descripció**: camp opcional per foto a
+  la cua de pujada; es desa a `ev.alts` i el generador la conserva entre
+  execucions. Les fotos noves poden néixer descrites.
+- **Cada idioma llegeix el seu alt**: `alts` (ca), `alts_es`, `alts_en`,
+  amb el català de reserva.
+- **Els enllaços directes a un àlbum ja funcionen en castellà i anglès**:
+  les galeries `/es/` i `/en/` no obrien l'àlbum del `#id` de l'adreça
+  (la funció només existia en català). Portada a totes dues.
+
+---
+
+## 1.4.1 — 2026-08-26
+
+**Barrido «todo lo que sea código» del tablón de pendientes:**
+
+- **Zapic fora de les tires de partners** de la presentació i el dossier de
+  patrocinis (6 pàgines, ca/es/en) i el seu logo fora del repositori: la
+  baixa estava decidida des del 14/08 i les pàgines encara l'ensenyaven.
+- **P2.6** — la tira #SOMCLOT deixa de fer de fals final de pàgina a la
+  vista franges: ara és l'últim bloc abans del peu real, a les tres portades.
+- **P2.7** — el commutador Franges/Extensa ja es mesura: esdeveniment
+  `canvi_vista` a GA4 a cada canvi, per decidir amb dades.
+- **P3 (logo)** — la capçalera de les tres portades servia l'escut de
+  226×300 px per a una casella de 32: ara va `img/logo-head.png` (48×64,
+  8 KB, també al preload). El `logo.png` gran queda per a les icones.
+- **Neteja d'/escoleta/**: fora els 113 elements de castellà ocult
+  (`data-lang="es"`), l'atribut `data-lang` i el JS del commutador antic.
+  El castellà viu només a /es/escoleta/. Cap text català tocat.
+- **P3 (menú vell): decisió, no oblit** — el `nav#menu` ocult de les
+  portades NO es treu: el codi ja registrava «queda al marcatge per si es
+  recupera» i són ~30 enllaços interns servits que els cercadors llegeixen.
+
+---
+
+## 1.4.0 — 2026-08-26
+
+**El bloc de codi del camí cap al 10** (accessibilitat, rendiment, estètica):
+
+- **Galeria amb alts reals**: cada foto diu l'àlbum i la posició («Escoleta
+  amb Julio Torralba — foto 3 de 91») a la casella, al botó i al visor, en
+  els tres idiomes; si un àlbum porta descripcions per foto (`ev.alts`),
+  manen aquestes. Els `src` buits del visor ja no re-demanen la pàgina.
+- **El cercador sense resultats ja no és un listbox buit** (l'últim avís
+  d'axe-core que quedava, a /cerca/ i el 404 dels tres idiomes).
+- **Els 4 PDF grans, comprimits** amb Title i Lang conservats: 12,6 MB → 6,2
+  MB en total; pesos actualitzats als enllaços. A les pàgines dels 3 PDF
+  sense arbre d'etiquetes, nota visible i aria dient que la versió
+  accessible és la mateixa pàgina.
+- **Hero de l'Escoleta amb 4 fotos reals** de l'àlbum d'estudi (1772×2362,
+  retall 3:4 des de dalt, 600/1200 px sense ampliar), en rotació diària a
+  les tres portades. Provat amb navegador a 1280 i 390 px.
+- **Pressupost de pes a CI** (`scripts/pes-pressupost.py` +
+  `pes-pressupost.yml`): cap fitxer servit per sobre del sostre del seu
+  tipus; excepcions amb motiu obligatori a `pes-excepcions.txt`.
+- **Panell d'analítica** a `/admin/analitica/`: workflow diari que baixa 28
+  dies de la GA4 Data API a `dades.json` i panell estàtic darrere la porta
+  de l'admin. Sense els dos secrets (pendents de l'Ana) no falla: explica
+  què falta.
+- **L'app de galeria** (Next.js) passa la mateixa revisió que /fotos/:
+  caselles amb teclat i botons d'icona amb nom. Type-check en verd.
+
+---
+
 ## 1.3.2 — 2026-08-26
 
 **Auditoria de rendiment, SEO, GEO i contingut** sobre les 408 pàgines, i els

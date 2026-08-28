@@ -110,6 +110,15 @@ export function PhotoGrid({
               key={photo.id}
               className="photo-grid-item relative group cursor-pointer rounded overflow-hidden"
               onClick={() => setLightboxIndex(index)}
+              role="button"
+              tabIndex={0}
+              aria-label={photo.caption ?? `Obrir la foto ${index + 1} de ${photos.length}`}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setLightboxIndex(index)
+                }
+              }}
             >
               <Image
                 src={src}
@@ -126,6 +135,8 @@ export function PhotoGrid({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={e => handleLike(e, photo.id)}
+                      aria-label={isLiked ? "Treure el m'agrada" : "M'agrada"}
+                      aria-pressed={isLiked}
                       className={`flex items-center gap-1 text-xs backdrop-blur-sm px-2 py-1 rounded transition-colors ${
                         isLiked
                           ? 'bg-club-red/80 text-white'
@@ -141,6 +152,7 @@ export function PhotoGrid({
                         href={`${supabaseUrl}/storage/v1/object/public/photos/${photo.storage_path}`}
                         download={photo.original_name ?? true}
                         onClick={e => e.stopPropagation()}
+                        aria-label="Descarregar la foto"
                         className="bg-black/60 text-white/80 hover:bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-xs flex items-center gap-1 transition-colors"
                       >
                         <DownloadIcon className="w-3 h-3" />
@@ -151,6 +163,7 @@ export function PhotoGrid({
                   {canDelete(photo) && (
                     <button
                       onClick={e => handleDelete(e, photo.id)}
+                      aria-label="Esborrar la foto"
                       className="bg-black/60 text-red-400 hover:bg-red-900/60 backdrop-blur-sm p-1.5 rounded transition-colors"
                     >
                       <Trash2 className="w-3 h-3" />
