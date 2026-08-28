@@ -2020,3 +2020,51 @@ Dues actualitzacions de material, directes de l'Ana:
   de `/jugadors/` i el bloc de sèniors de portada, i el material de
   fotografia per a `/instal-lacions/` de la fase de marca (punt 3, «La Nau
   del Clot com a actiu de marca»).
+
+---
+
+## 28-08-2026 — Especificació del dashboard d'analítica (a petició de l'Ana)
+
+L'Ana demana explícitament, per al panell `/admin/analitica/` del **web**
+(cbgrupbarna.info, no el 3x3): què es visita més i menys, què es busca més
+i menys, paraules buscades, formularis inscrits, i «tot el que se
+m'acudeixi». Apunt de què ja hi ha i què falta, perquè quan arribi la
+propietat GA4 correcta (vegeu més amunt) es pugui construir sencer d'una
+tirada.
+
+### Ja fet, surt en quant hi hagi els secrets i la propietat correcta
+
+`.github/scripts/ga4-informe.py` ja demana, cada matinada, 28 dies de:
+visites/sessions/usuaris per dia, **rànquing de les 30 pàgines més
+vistes**, **fonts de trànsit** (cerca orgànica, directe, social,
+referral), dispositiu, i el rànquing dels 25 noms d'event més freqüents
+(sense desglossar-ne els paràmetres encara).
+
+### Cal ampliar — codi
+
+- **Paraules buscades al cercador del web:** avui **no es guarda cap
+  terme**, ni dels que troben resposta ni dels que no. Només hi ha un
+  event pla (`cerca_sense_resposta_enviada`, a `js/cerca.js`) sense el
+  text de la cerca. És exactament la dada que fa falta per saber quines
+  preguntes noves escriure a `i18n/faq.yml` — cal decidir si es registra
+  el terme (amb cura: si algú escriu un nom o un correu buscant, no s'ha
+  de guardar tal qual).
+- **Desglossar `cta_click` per `cta_id`** (quin botó es clica més) i
+  `canvi_vista` per franges/extensa. Als events ja hi viatja el paràmetre,
+  però GA4 no el reporta per l'API fins que es registra com a **dimensió
+  personalitzada** a GA4 Admin (pas manual a Analytics, no codi).
+- **Formularis: falten dos events.** `js/newsletter.js` (alta al
+  butlletí) i `js/bustia.js` (bústia de suggeriments) no envien cap event
+  de GA4 avui — només arriben a la full de càlcul. La resta ja ho fa:
+  `generate_lead` (portada i descàrrega de PDF), `informacio_enviada`,
+  `portes_obertes_enviat`, `ressenya_al_lloc`, `newsletter_signup` (només
+  des de la descàrrega de PDF, no des de `/newsletter/`).
+- **Descàrregues de calendaris `.ics` per equip:** cap event avui.
+
+### Decisió pendent de l'Ana
+
+GA4 és aproximat (es perd si hi ha bloquejador d'anuncis o sense
+consentiment de galetes); **la full de càlcul sempre serà el número real**
+de formularis rebuts. Proposta: GA4 al panell per a la tendència ràpida
+(quants, d'on, quin dia), i la full de càlcul com a font oficial del
+recompte — no cal triar-ne una sola.
