@@ -47,42 +47,38 @@ la que s'hi ha d'alinear, no al revés.
 |---|---|
 | Pilar «Escoleta» | Destacada «Escoleta» |
 | Bloc «Dies de partit» | Sèrie de stories del cap de setmana |
-| Hero editorial de l'extensa | Mateixa foto que la portada del post fixat |
+| Hero de la portada | Mateixa foto que la portada del post fixat |
 | Fitxa d'entrenador/a | Sèrie «La feina que no es veu» |
 
 **Els quatre destacats del perfil són els quatre pilars de la web.** Si canvien
 al perfil, canvien a la web.
 
-### Les dues velocitats de lectura
+### Una sola velocitat de lectura: franges
 
-No són propostes excloents: **la portada té les dues i un commutador**, perquè
-serveixen públics diferents.
+**Decisió tancada (27/08/2026, v2.0.0): la portada és NOMÉS la vista de
+franges.** Hi va haver un temps amb dues vistes intercanviables —Franges
+(per defecte) i Extensa (editorial, portada de diari amb `.masthead`,
+paritat, lema i articles)— i un botó de commutador a la capçalera. El
+pla per decidir-ho era mesurar amb GA4 quanta gent canviava de vista
+(l'esdeveniment `canvi_vista`) abans de triar-ne una; els secrets de GA4
+mai es van arribar a donar d'alta, així que aquesta dada no ha existit
+mai. L'Ana ha decidit sense esperar-la: «Quiero esta portada no dos».
+El commutador, l'extensa sencera i tot el JS que hi anava (`data-view`,
+`sessionStorage`, `canvi_vista`) surten de les tres portades.
 
-| | **Franges** (per defecte) | **Extensa** (editorial) |
-|---|---|---|
-| Per a qui | El dit que acaba de tocar l'enllaç de la bio: mòbil, tres segons de paciència | Qui investiga: famílies, premsa, patrocinadors |
-| Forma | Rectangles amples, una porta per franja, tot a un toc | Portada de diari: foto gran, titular editorial, pilars |
-| Guanya | Conversió. Menys d'un segon per entendre on tocar | Autoritat i SEO real: la web té contingut propi, no només enllaços |
-| Costa | Gairebé res de manteniment | Una foto editorial bona cada temporada i el bloc de partits viu |
-| Risc | Davant un patrocinador, una graella d'enllaços no sosté el discurs | Si l'IG canvia de sèries i la web no, es tornen a separar |
+La portada obre com la guia visual: barra de novetats, menú, el hero curt
+(etiqueta vermella, «Bàsquet al Clot. / Des de 1965.» amb la segona línia
+en vermell i una sola frase) i les nou franges, tancades amb la barra
+`#SOMCLOT`. **No hi ha bloc fosc de marca**: el `.masthead` que abans hi
+havia amagat per a l'extensa ha sortit del marcatge de les tres llengües.
 
-**Les peces de totes dues viuen a `css/barna.css`**, no només a la portada: les
-franges (`.franges`, `.franja`, `.franja--red`, `.franja--ink`, `.franja--lead`)
-i el joc de l'extensa (`.e-sech` amb el filet vermell, `.e-feat`/`.e-art`,
-`.e-guides`, `.e-par` de paritat, `.e-lema` sobre tinta i la barra de novetats
-`.ticker`). Una pàgina interior que enllaci el full ja les té: no en refacis cap
-de nova. Els títols de secció d'un article (`.prose h2`) porten el mateix filet
-vermell, que és el gest que lliga una interior amb la portada.
-
-A la vista de franges la portada obre com a la guia: barra de novetats, menú,
-el hero curt (etiqueta vermella, «Bàsquet al Clot. / Des de 1965.» amb la segona
-línia en vermell i una sola frase) i les nou franges. **El bloc fosc de marca
-—el `.masthead`— només surt a l'extensa**: a franges hi és al marcatge però
-amagat, perquè la guia diu que davant hi va la porta, no la presentació.
-L'única cosa que el hero de franges afegeix a la guia és una línia petita
-sota la frase amb les paraules de cerca que abans portava el bloc fosc
-(`.lg-hero-seo`): sense ella, l'h1 visible deixaria de dir «bàsquet base a
-Barcelona» i això es paga al cercador.
+**Les classes de franges viuen a `css/barna.css`**: `.franges`, `.franja`,
+`.franja--red`, `.franja--ink`. Les de l'antiga extensa (`.e-sech`,
+`.e-feat`/`.e-art`, `.e-guides`, `.e-par`, `.e-lema`) **ja no les fa servir
+la portada**, però es queden a `css/barna.css` perquè una pàgina interior
+que enllaci el full (blog, premsa…) encara les té — no en refacis cap de
+nova. Els títols de secció d'un article (`.prose h2`) porten el mateix
+filet vermell, que és el gest que lliga una interior amb la portada.
 
 L'estructura de les franges està calcada de la guia visual. **Si canvies l'ordre
 o els textos d'una, canvia'ls a l'altra**: la portada i la guia han de dir el
@@ -366,10 +362,10 @@ de `@media (prefers-color-scheme: dark)` amb el guard
 Cap color pot tenir la seva única definició dins d'un bloc de mode. I el vermell
 s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
 
-> **No ho confonguis amb «el commutador» de la portada**, que sí que existeix i
-> no té res a veure amb el color: tria entre dues maquetacions, *Light* (les
-> franges apilades, per defecte per sota de 900 px) i *Extensa* (la portada
-> llarga, per defecte a escriptori). Totes dues són clares.
+> No ho confonguis amb «el commutador» de la portada: existia, triava entre
+> dues maquetacions (Franges i Extensa) i no tenia res a veure amb el color.
+> Va desaparèixer el 27/08/2026 (v2.0.0, vegeu §0 bis): ara la portada només
+> té la vista de franges.
 
 ---
 
