@@ -2078,3 +2078,17 @@ webp (un `.jpg` que ara és `.webp` al disc). No és cap fitxer perdut —els
 490 de «Màgics», per exemple, hi eren tots— però un script que es refiï
 cegament del nom exacte de `events.js` publicarà URL trencades. Per això
 `build-fotos-albums.py` llegeix el directori real, no la llista.
+
+---
+
+## En seguiment · PR #110 (28/08/2026)
+
+Tota la feina d'aquesta tanda —doble flanc, article nou, `Person` schema,
+`VideoObject`/`ImageObject` a Instagram, pàgines d'àlbum de fotos, sitemap
+d'imatges, sincronització de `dateModified`— és a
+[PR #110](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/110),
+branca `claude/posicionamiento-inverso-seo-geo-w1loqt`. Sessió subscrita a
+l'activitat del PR (CI, comentaris): en marxa fins que es fusioni o es
+tanqui. Els tres pendents concrets que en depenen (Viquipèdia, JSON-LD que
+falta a cinc articles en anglès, i el formulari de correu que no porten les
+pàgines noves d'àlbum) ja són documentats més amunt, cadascun al seu lloc.
