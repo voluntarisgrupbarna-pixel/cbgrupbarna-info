@@ -2159,3 +2159,36 @@ el blog té 23 articles publicats en ca, tots amb la seva parella es/en
 (paritat verificada amb `scripts/i18n-contingut.py`), tots indexables i
 enllaçats des de `/blog/`. Els cinc articles en anglès sense JSON-LD que
 ja constaven més amunt com a pendent no han canviat en aquesta tanda.
+
+---
+
+## Pendent recurrent · revisió setmanal de posicionament a Google (28/08/2026)
+
+Cada setmana caldria comprovar a Google (o a Search Console, un cop hi hagi
+prou dades) en quina posició surt la web per a les frases objectiu de cada
+pàgina treballada en aquesta tanda de posicionament. No hi ha cap
+automatització muntada per a això (es va decidir expressament que fos
+només una nota, no una rutina): la revisió la fa una persona.
+
+Frases a comprovar (les mateixes `keywords` que ja porten les pàgines):
+
+- **Campus**: campus bàsquet Barcelona / campus baloncesto Barcelona,
+  millors campus de bàsquet Barcelona / mejores campus de baloncesto
+  Barcelona, campus tecnificació bàsquet Barcelona
+- **Escola**: escola de bàsquet Barcelona / escuela de baloncesto
+  Barcelona, millor escola de bàsquet Barcelona / mejor escuela de
+  baloncesto Barcelona
+- **Club**: club de bàsquet Barcelona / club de baloncesto Barcelona,
+  triar club de bàsquet / elegir club baloncesto Barcelona
+- **Tecnificació**: tecnificació bàsquet Barcelona / tecnificación
+  baloncesto Barcelona
+- **3x3**: 3x3 Barcelona / torneig 3x3 Barcelona / torneo 3x3 Barcelona
+- **Posicionament**: CB Grup Barna vs Barça, comparativa clubs bàsquet
+  Catalunya
+
+En cada revisió val la pena anotar posició (o "fora de les 100 primeres"),
+si hi ha canvis respecte a la setmana anterior, i si apareix algun
+featured snippet o resposta d'IA (GEO) citant la web. Ja hi ha una
+comprovació puntual programada per al 12/09/2026 (comparant contra el
+baseline de Search Console d'abans de l'auditoria); aquesta nota és per
+al seguiment setmanal que ve després, no per substituir-la.
