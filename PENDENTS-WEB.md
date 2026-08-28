@@ -1909,9 +1909,10 @@ per a l'Ana Fernández a `/proteccio-menor/` (ca/es/en) — en Julio Torralba ja
 en tenia a `/escoleta/`. Tot validat amb `i18n-lint.py`, `i18n-paritat.py`,
 `i18n-contingut.py` i comprovació d'enllaços interns.
 
-Auditant l'SEO/GEO de tot el lloc per aprofundir-hi, han sortit quatre coses
-més grosses que **no s'han tocat** perquè cadascuna necessita una decisió o
-una verificació que no es pot fer des d'aquí:
+Auditant l'SEO/GEO de tot el lloc per aprofundir-hi, van sortir quatre coses
+més grosses. Demanat fer-les totes tret de la Viquipèdia (que queda pendent
+expressament), es van fer les tres restants amb scripts nous, reutilitzables
+i documentats — no pedaços d'una tarda:
 
 ### 1. Viquipèdia — el club no en té, el CB Roser sí
 
@@ -1930,48 +1931,92 @@ declarat. Si es vol tirar endavant, cal:
   Grup Barna: seixanta anys fent bategar el Clot») ja servirien de font
   secundària real.
 
-### 2. `dateModified` inconsistent a tot el lloc — 169 pàgines sense el camp, 132 desquadrades amb el sitemap
+### 2. `dateModified` desquadrat — arreglat amb `scripts/sync-datemodified.py`
 
-Una auditoria completa (`WebPage`/`BlogPosting`/`Article` del JSON-LD contra
-`lastmod` de `sitemap.xml`) dona:
-- **169 pàgines** amb `WebPage` o similar al JSON-LD però **sense
-  `dateModified`** (sobretot versions `/en/`).
-- **132 pàgines** on el `dateModified` del JSON-LD i el `lastmod` del
-  sitemap **no coincideixen** — la majoria versions `/en/` amb una data molt
-  més antiga que el `2026-08-25` que porta el sitemap a gairebé tot arreu,
-  senyal que el sitemap es va tocar en bloc sense repassar cada pàgina.
+Una auditoria completa (`WebPage`/`BlogPosting`/`Article`/`CollectionPage`
+del JSON-LD contra `lastmod` de `sitemap.xml`) havia trobat 169 pàgines
+sense el camp i 132 amb una data que no coincidia amb el sitemap.
 
-**Per què no s'ha arreglat aquí:** amb aquest volum, fer-ho a mà pàgina per
-pàgina no és fiable (999 canvis just en aquesta tanda ja toquen 11 fitxers;
-300 més seria un diff gegant sense revisió real), i no està clar quina data
-és la de veritat en cada desquadrament —el sitemap en bloc pot ser el
-incorrecte, no el JSON-LD—, així que decidir-ho pàgina a pàgina sense mirar
-l'historial real seria inventar-se dades nou. **La solució correcta és un
-script**, en la línia de `generate-seo-snapshot.py`: llegir la data del
-darrer commit real que ha tocat cada pàgina (`git log -1 --format=%cd`) i
-escriure-la als dos llocs alhora, entre marcadors. Val la pena fer-ho com a
-feina pròpia, no com a efecte secundari d'una altra tanda.
+**Arreglat (28/08/2026, tarda):** `scripts/sync-datemodified.py` llegeix,
+per a cada pàgina, la data del darrer commit real que l'ha tocada (`git log
+-1 --format=%cs`) — la mateixa font que ja fa servir `build-sitemap.py` per
+al `<lastmod>` — i l'escriu al node de tipus pàgina del primer bloc
+JSON-LD: si el camp ja hi és, només en canvia el valor; si no hi és,
+l'insereix parsejant només aquell bloc. Mai toca el `FAQPage` ni cap
+`Person`. Resultat: **355 pàgines actualitzades**, 9 ja al dia, 112 sense
+cap node aplicable (pàgines de fitxa d'equip, galeries i similars, que no
+en porten). Els 622 blocs JSON-LD de tot el lloc validats com a JSON
+correcte, `i18n-lint.py` a 0 errors nous i `i18n-contingut.py` sense avisos
+sobre les 296 traduccions.
 
-### 3. `VideoObject` als reels d'Instagram incrustats — bloquejat per falta de dades reals
+Una cosa que val la pena saber: moltes pàgines van quedar amb la mateixa
+data (2026-08-25) perquè aquell dia hi va haver un canvi real de capçalera
+a tot el lloc («Estètica definitiva · fase 5: el botó ≡ a totes les
+capçaleres»), que va tocar gairebé cada fitxer. No és un error del script:
+és el mateix criteri de «lastmod» que ja fa servir el sitemap des de fa
+setmanes, ara consistent als dos llocs.
 
-`/premsa/instagram/` (43 publicacions) i `/premsa/moments/` (35) incrusten
-posts d'Instagram sense marcatge `VideoObject`. **No s'ha afegit** perquè
-faria falta saber, per a cadascuna, si és vídeo o foto, la data real de
-publicació i una miniatura —dades que no són al repositori i que caldria
-anar a buscar a Instagram un per un, amb el risc real d'inventar-se-les si
-es fa de pressa. Si es vol fer bé, cal un script que llegeixi les dades reals
-de cada publicació (per exemple amb l'API d'Instagram o revisant-les a mà) i
-no assumir-les.
+**Pendent nou, trobat de rebot:** alguns articles del blog en anglès no
+porten **cap** bloc JSON-LD (p. ex. `/en/blog/a-quina-edat-comencar-basquet/`,
+`/en/blog/com-triar-escola-basquet-barcelona/`, `/en/blog/campus-basquet-
+barcelona-guia/`, `/en/blog/basquet-base-sant-marti-clot/`, `/en/blog/que-
+es-basquet-3x3/`), a diferència de les seves versions catalana i castellana.
+El script no els ha pogut tocar perquè no hi ha node on inserir res. Caldria
+donar-los`BlogPosting` + `BreadcrumbList`, seguint el patró exacte de la
+seva pròpia versió en català.
 
-### 4. La galeria de fotos és invisible als robots que no executen JavaScript
+### 3. `VideoObject`/`ImageObject` als reels d'Instagram — arreglat a `/premsa/instagram/`
 
-`/fotos/` és **una sola URL amb 1.709 fotos** repartides en 10 àlbums,
-carregades totes per JavaScript des de `fotos/events.js` (generat per
-`scripts/build-gallery-events.py`). No hi ha cap URL ni `<img>` estàtica per
-àlbum ni per foto: Googlebot sol executar el JavaScript i pot arribar-hi,
-però un cercador o un assistent d'IA que no ho faci —i molts no ho fan— no
-veu cap de les 1.709 fotos. Un sitemap d'imatges per si sol **no ho arregla
-del tot**: cal, com a mínim, que cada àlbum tingui una URL pròpia
-rastrejable (encara que sigui amb un `<noscript>` de reforç), i llavors sí
-que té sentit un sitemap d'imatges damunt d'això. És un canvi d'arquitectura
-de la galeria, no un pedaç d'una tarda.
+**Arreglat (28/08/2026, tarda):** `scripts/inject-ig-schema.py` llegeix
+`/premsa/instagram/` (ca/es/en) i, per a cadascuna de les **42 publicacions**
+ja incrustades, afegeix un `VideoObject` (si la URL és `/reel/`) o un
+`ImageObject` (si és `/p/`) — la URL mateixa ja diu quin dels dos és, no cal
+endevinar-ho. Reutilitza només el que ja hi havia al fitxer: URL, tag i peu
+de foto. **No inclou `uploadDate` ni `thumbnailUrl`**: Instagram no els dona
+sense anar a buscar-los publicació a publicació, i posar-los inventats seria
+pitjor que no posar-los — per això aquest bloc no és candidat als resultats
+enriquits de vídeo de Google, però segueix sent estructura real per a
+qualsevol assistent d'IA que llegeixi el JSON-LD. Resultat: 13 `VideoObject`
++ 29 `ImageObject` per idioma, entre els marcadors `<!-- IG-SCHEMA:START/
+END -->`.
+
+**Queda fora:** `/premsa/moments/` (35 publicacions), que és només en
+català i té una estructura d'enllaç diferent (titular + nota de premsa, no
+la graella `.igx`), no rebuda el mateix tractament — faria falta un
+extractor propi, no reutilitzar aquest.
+
+### 4. La galeria de fotos era invisible als robots que no executen JavaScript — 9 pàgines d'àlbum noves
+
+**Arreglat (28/08/2026, tarda):** `scripts/build-fotos-albums.py` genera,
+per a cada àlbum real de `fotos/web/` (els que tenen `"source": "repo"` a
+`fotos/events.js` — vuit fitxers, un total de **1.709 fotos**), una pàgina
+prima i rastrejable a `/fotos/<id>/`, amb graella d'`<img>` reals i el seu
+propi `CollectionPage` + `ImageObject` per foto. No toca la galeria
+interactiva existent. L'àlbum «3x3-westfield-glories-2026» (377 fotos) es
+queda fora expressament: les seves fotos vénen de Google Drive
+(`"source": null`), no del repositori, i no se'ls inventa cap URL.
+
+`scripts/build-sitemap.py` s'ha ampliat perquè, per a **qualsevol** pàgina
+del lloc (no només aquestes 9), llegeixi els `<img src>` reals de dins de
+`<main>` que vinguin de `/img/` o `/fotos/web/` i els afegeixi com a
+`<image:image>` — l'extensió d'imatges de Google. Resultat: **80 pàgines
+amb imatges al sitemap, 1.856 `<image:image>` en total** (les 9 galeries
+noves hi aporten 1.709; la resta —blog, campus, 3x3, portada...— ja tenien
+`<img>` reals que abans no sortien enlloc al sitemap).
+
+**Una cosa a decidir, no tècnica:** `/fotos/` porta un formulari d'accés
+que demana el correu abans d'entrar a la galeria interactiva (captació de
+contactes). Les 9 pàgines noves **no porten cap gate**: són pàgines
+estàtiques normals, perquè un robot no pot omplir un formulari. És a dir,
+qualsevol persona que hi arribi per cerca (Google, un assistent d'IA) pot
+veure totes les fotos d'un àlbum sense deixar el correu, cosa que no passa
+avui si hi arriba per `/fotos/`. Val la pena que l'Ana ho sàpiga i digui si
+li sembla bé: és el compromís necessari perquè les fotos siguin trobables,
+però redueix l'incentiu a deixar el correu per a qui ja sap què busca.
+
+**Trampa de events.js, per si torna a passar:** els noms de fitxer que hi
+ha a `fotos/events.js` porten l'extensió d'ABANS de convertir les fotos a
+webp (un `.jpg` que ara és `.webp` al disc). No és cap fitxer perdut —els
+490 de «Màgics», per exemple, hi eren tots— però un script que es refiï
+cegament del nom exacte de `events.js` publicarà URL trencades. Per això
+`build-fotos-albums.py` llegeix el directori real, no la llista.
