@@ -1896,3 +1896,34 @@ El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
    `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
    dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
    afegir-l'hi.
+
+---
+
+## 28-08-2026 — Decisió: les presentacions institucionals, només ca/es
+
+**Decisió de l'Ana:** les «presentacions» del club (documents institucionals,
+no contingut normal de la web) es publiquen només en català i castellà. No
+es tradueixen a l'anglès.
+
+Abans d'aquesta decisió les tres coses hi eren en els tres idiomes; ara
+l'anglès s'ha tret de:
+
+- La secció **`#presentacions`** de la portada (`index.html` / `es/index.html`
+  la mantenen; `en/index.html` ja no la porta).
+- El hub **`/presentacions/`** i les seves 5 subpàgines (campus-timechamber,
+  dossier-patrocinis, evidencia-i-posicio, fons-barna-8m, visio-global):
+  esborrats `en/presentations/` sencer.
+- La pàgina institucional **`/presentacio/`** («Des de 1965 · Model
+  Català»): esborrat `en/presentation/`.
+
+Fet amb els generadors, no a mà: `i18n/routes.yml` marca les 7 rutes amb
+`en: null` i una `nota` amb el motiu (perquè `scripts/i18n-lint.py` no ho
+torni a marcar com a pendent), i `scripts/i18n-hreflang.py` +
+`scripts/build-sitemap.py` han regenerat els `hreflang` i el `sitemap.xml`
+sense les 7 URL angleses. També s'han tret els dos enllaços morts «See the
+presentation» d'`en/campus/index.html`, que apuntaven al hub esborrat.
+
+Verificat amb `i18n-paritat.py --tot`, `i18n-contingut.py` (tot el lloc) i
+`i18n-lint.py`: cap error, cap pendent nou. La resta del lloc segueix
+exactament igual en els tres idiomes — aquesta és l'única excepció
+declarada.
