@@ -26,7 +26,6 @@ window.CBGB_ADMIN = {
   ALLOWED_EMAILS: [
     "voluntarisgrupbarna@gmail.com",
     "marqueting@cbgrupbarna.info",
-    "marqueting@cbgrupbarna.info",
   ],
 
   // Domini de Google Workspace autoritzat (opcional, deixa'l buit si no en teniu)
