@@ -2139,3 +2139,23 @@ l'activitat del PR (CI, comentaris): en marxa fins que es fusioni o es
 tanqui. Els tres pendents concrets que en depenen (Viquipèdia, JSON-LD que
 falta a cinc articles en anglès, i el formulari de correu que no porten les
 pàgines noves d'àlbum) ja són documentats més amunt, cadascun al seu lloc.
+
+**Afegit el 28/08/2026, a partir d'una captura d'Instagram que va passar
+l'Ana:** el llenguatge de "club de barri" (ambient, preu) a les pàgines de
+campus i tecnificació (ca/es/en, prosa + `i18n/faq.yml`) es va reformular
+com a estructura del **club de bàsquet més gran de Barcelona**, mantenint
+només la ubicació geogràfica real al Clot on calia — es degradava el club
+just a les pàgines pensades per convèncer famílies. També s'ha publicat un
+article nou de blog sobre en Robert Willett (entrenador de tecnificació
+NBA, @bballwillett) i la seva sessió al campus dins de *Time Chamber
+Experience × CB Grup Barna*, amb les dues reels reals ja enllaçades des de
+`/campus/` i la xifra de 29.700 reproduccions de la publicació conjunta amb
+@cbgrupbarna. **No s'hi ha posat cap URL per al missatge concret "Dear
+Barna family..." que la captura mostrava**: no en tenim l'enllaç exacte i
+no ens l'hem d'inventar; l'article el descriu de manera genèrica.
+
+**Comptatge del blog, per si es torna a preguntar:** amb aquest article,
+el blog té 23 articles publicats en ca, tots amb la seva parella es/en
+(paritat verificada amb `scripts/i18n-contingut.py`), tots indexables i
+enllaçats des de `/blog/`. Els cinc articles en anglès sense JSON-LD que
+ja constaven més amunt com a pendent no han canviat en aquesta tanda.
