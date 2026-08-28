@@ -1871,3 +1871,27 @@ cara tallada per l'enquadrament. Es processen amb
 **Aprofitar el mateix dia de càmera per a l'Escoleta (4-8 anys)** si ja hi ha
 entrenaments: és la sessió pendent més antiga d'aquest document i la foto que
 obre les tres portades.
+
+## 28-08-2026 — Pendent de l'Ana: canviar la contrasenya del panell d'admin
+
+Auditoria de bugs del lloc (branca `claude/cbgrupbarna-bugs-yt1lp2`): la porta
+d'accés a `/admin/` (`scripts/admin-gate.js`) guarda `PASS_HASH` com un SHA-256
+d'una sola passada, sense sal, en un fitxer públic — si algú se'l baixa, trencar
+la contrasenya per força bruta fora de línia és ràpid si no és prou llarga. No
+s'ha tocat la contrasenya actual perquè no es coneix i canviar l'algorisme de
+verificació sense saber-la hauria bloquejat l'accés a `/admin/` i a la gestió
+de partits.
+
+**Ja fet:** `verifyPass()` accepta tant el format antic (String, compatibilitat)
+com un format nou reforçat amb PBKDF2 a 210.000 iteracions (Object `{v:2, salt,
+iterations, hash}`) — el mateix cost que ja protegeix la caixa forta del token
+a `admin/token.enc.json`. Verificat amb un cas de prova per a cada format.
+
+**El que falta, i només ho pot fer qui sap la contrasenya actual:** la propera
+vegada que es canviï la contrasenya del club, generar-la amb el mètode nou en
+lloc de l'antic. La capçalera del mateix fitxer (`scripts/admin-gate.js`) porta
+l'snippet exacte per enganxar a la consola del navegador i el hash que en surt
+substitueix tot el valor de `PASS_HASH`. Fins que això no passi, la contrasenya
+actual segueix protegida només pel mètode antic (menys robust, però amb una
+contrasenya llarga i no òbvia el risc és pràcticament teòric: ara mateix no hi
+ha cap token guardat a `admin/token.enc.json`).
