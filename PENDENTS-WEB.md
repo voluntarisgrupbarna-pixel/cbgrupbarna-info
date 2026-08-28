@@ -113,17 +113,21 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 - **Escoleta:** foto o vídeo d'en Willy Hernangómez entrenant a La Nau amb Time Chamber
   (el forat és a `escoleta/index.html:944`), i confirmar la fitxa del circuit 3x3 amb la
   selecció espanyola (línia 744).
-- **Sessió de fotos de l'Escoleta (4-8 anys):** és el punt més feble de l'apartat
-  d'estètica de la web i no es resol amb codi. Avui només hi ha una foto
-  (`img/escoleta@2x.webp`) per representar tot aquest pilar, i és la imatge que carrega
-  amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
-  material d'acció real (no posat), llum natural, enquadrat des de dalt sense tallar
-  cares, i diverses tomes perquè es pugui rotar en comptes de repetir sempre la mateixa.
-- **Sessió de fotos dels 4 sèniors (setembre 2026), confirmada per l'Ana:**
-  Fem A, Fem B, Masc A i Masc B. Vegeu el brief de captura complet a la secció
-  «Benchmark de webs professionals» del 27/08/2026, al final d'aquest document.
-  Amb aquest material es tanquen les fitxes de `/jugadors/` i el bloc de sèniors
-  a la portada.
+- **Sessió de fotos de l'Escoleta (4-8 anys) — actualitzat 28/08/2026:** l'Ana diu
+  que ja hi ha una sessió de maig 2026, pujada a l'app `galeria/` (Supabase, no
+  aquest repositori — no s'hi pot mirar des d'aquí). El que fa servir avui el hero
+  de les tres portades (`img/escoleta-h1..4.webp`) surt encara de l'àlbum més antic
+  «Escola Bàsquet · Julio Torralba» (setembre 2025, a `/fotos/`). **Falta:**
+  triar les millors preses de la sessió de maig i passar-les per
+  `scripts/build-blog-images.py` per substituir/ampliar les 4 actuals — no és
+  feina de codi, és selecció d'imatge.
+- **Sessió de fotos dels 4 sèniors — dilluns i dimarts (31/08–01/09/2026),
+  confirmada per l'Ana, combinada amb La Nau del Clot:** Fem A, Fem B, Masc A i
+  Masc B, i de passada demanarà als sèniors que facin fotos a La Nau el mateix
+  dia (tanca també el pendent de fotografia de `/instal-lacions/`, més avall).
+  Vegeu el brief de captura complet a la secció «Benchmark de webs professionals»
+  del 27/08/2026, al final d'aquest document. Amb aquest material es tanquen les
+  fitxes de `/jugadors/` i el bloc de sèniors a la portada.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
 - **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
@@ -1994,3 +1998,25 @@ full, no un ESP extern.
   generador com a les pàgines, però el generador segueix sense saber de les
   peces afegides posteriorment (nav d'idiomes, capa d'accessibilitat, fotos
   d'article). Cal una sessió dedicada per posar-lo al dia.
+
+---
+
+## 28-08-2026 — Calendari de fotos: Escoleta ja gravada, sèniors + La Nau dilluns-dimarts
+
+Dues actualitzacions de material, directes de l'Ana:
+
+- **Escoleta:** ja hi ha una sessió de maig 2026, pujada a l'app `galeria/`
+  (Supabase — no és visible des d'aquest repositori). El hero de les tres
+  portades segueix servint encara les 4 fotos de l'àlbum més antic
+  d'setembre 2025 (`img/escoleta-h1..4.webp`, de «Escola Bàsquet · Julio
+  Torralba» a `/fotos/`). **Queda per fer:** triar les millors preses de
+  la sessió de maig dins de `galeria/` i passar-les per
+  `scripts/build-blog-images.py` per substituir-les — selecció d'imatge,
+  no codi.
+- **Sèniors + La Nau, dilluns i dimarts (31/08–01/09/2026):** la sessió
+  dels 4 sèniors (brief complet a «Sessió de fotos dels 4 sèniors», més
+  amunt) es combina amb demanar als jugadors i jugadores que facin fotos a
+  La Nau del Clot el mateix dia. **Tanca dos pendents alhora:** el material
+  de `/jugadors/` i el bloc de sèniors de portada, i el material de
+  fotografia per a `/instal-lacions/` de la fase de marca (punt 3, «La Nau
+  del Clot com a actiu de marca»).
