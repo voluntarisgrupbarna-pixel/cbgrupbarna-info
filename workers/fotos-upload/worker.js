@@ -36,10 +36,20 @@ function corsHeaders(origin) {
   };
 }
 
+function timingSafeEqual(a, b) {
+  // === surt tan bon punt troba la primera lletra diferent: qui pugui
+  // mesurar la resposta amb prou precisió podria endevinar el secret
+  // lletra a lletra. Aquí sempre es recorren totes dues cadenes senceres.
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
 function checkAuth(request, url, env) {
   if (!env.UPLOAD_TOKEN) return false;
   const given = request.headers.get('X-Upload-Secret') || url.searchParams.get('secret') || '';
-  return given === env.UPLOAD_TOKEN;
+  return timingSafeEqual(given, env.UPLOAD_TOKEN);
 }
 
 async function handleHealth(env, cors) {
