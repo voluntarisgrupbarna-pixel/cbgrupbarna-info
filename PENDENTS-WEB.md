@@ -2192,3 +2192,37 @@ featured snippet o resposta d'IA (GEO) citant la web. Ja hi ha una
 comprovació puntual programada per al 12/09/2026 (comparant contra el
 baseline de Search Console d'abans de l'auditoria); aquesta nota és per
 al seguiment setmanal que ve després, no per substituir-la.
+
+---
+
+## Neteja de «club de barri» com a autodescripció (28/08/2026)
+
+L'Ana va ensenyar una captura de Google Gemini que classificava el CB
+Grup Barna dins «Campus de Clubs Locals de Barcelona (Barri i
+Formació)», al mateix calaix que SESE Basket o Lluïsos de Gràcia, en
+lloc d'entre els campus de referència (Barça Escola, ITW Sport...).
+
+En revisar-ho es va trobar el motiu probable: encara que a `campus/`,
+`campus-basquet-barcelona/` i `tecnificacio-basquet-barcelona/` ja
+s'havia tret l'etiqueta «club de barri» aquest mateix dia, moltes altres
+pàgines "sobre el club" —`/historia/`, `/club/`, `/posicionament/`, els
+dossiers de presentacions (`campus-timechamber`, `visio-global`,
+`dossier-patrocinis`, `fons-barna-8m`) i el dossier del Premi Dona i
+Esport— encara descrivien el Barna com «un club de barri» en frase
+literal, sovint com a recurs retòric ("som un club de barri, però...").
+Un humà hi llegeix la ironia; un motor de resposta d'IA sol quedar-se
+amb la frase literal i classificar-hi el club en conseqüència.
+
+S'ha fet una neteja (ca/es/en) substituint aquestes frases per «el club
+de bàsquet més gran de Barcelona», mantenint sempre la ubicació real al
+Clot com a fet geogràfic. **No s'ha tocat** cap menció a «club de barri»
+que descrigui altres clubs (CB Roser, CB Pedagogium, SESE...) ni
+comparatives genèriques ("és millor un club gran o un club de barri?"),
+que sí que són correctes.
+
+**Pendent real, no resolt per aquesta neteja:** no hi ha manera de forçar
+que Gemini (ni cap altre motor generatiu) reclassifiqui el club en la
+seva pròxima resposta — només es pot millorar el material que rastreja.
+Val la pena tornar a provar la mateixa pregunta a Gemini/ChatGPT/Perplexity
+d'aquí a unes setmanes, un cop Google hagi re-indexat aquestes pàgines,
+per veure si la classificació canvia.
