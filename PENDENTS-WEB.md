@@ -1927,3 +1927,10 @@ Verificat amb `i18n-paritat.py --tot`, `i18n-contingut.py` (tot el lloc) i
 `i18n-lint.py`: cap error, cap pendent nou. La resta del lloc segueix
 exactament igual en els tres idiomes — aquesta és l'única excepció
 declarada.
+
+### Pendent — cal l'Ana
+
+El canvi és a la branca `claude/translation-system-languages-g5i61v`,
+**encara no hi ha pull request obert ni s'ha fusionat a `main`**: mentre no
+es fusioni, la web publicada segueix ensenyant les presentacions en anglès.
+Falta que l'Ana digui si es crea el PR o es fusiona directament.
