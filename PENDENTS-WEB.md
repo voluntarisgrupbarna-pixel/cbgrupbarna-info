@@ -1895,3 +1895,87 @@ substitueix tot el valor de `PASS_HASH`. Fins que això no passi, la contrasenya
 actual segueix protegida només pel mètode antic (menys robust, però amb una
 contrasenya llarga i no òbvia el risc és pràcticament teòric: ara mateix no hi
 ha cap token guardat a `admin/token.enc.json`).
+
+## 28-08-2026 — Pendent de l'Ana: logos de patrocinadors en baixa resolució
+
+Mateixa auditoria de bugs (branca `claude/cbgrupbarna-bugs-yt1lp2`). Les fitxes
+de patrocinador (`/patrocinadors/partners/<slug>/`, i les seves versions `/es/`
+i `/en/`) mostraven el logo estirat fins a un `max-width:70%` del contenidor
+sense tenir en compte la resolució real del PNG d'origen — en pantalles
+retina/DPR alt el navegador havia d'ampliar imatges de només 80-180px d'ample
+fins a 3-10 vegades la seva mida nativa, i es veien clarament borroses.
+
+**Ja fet:** el `<img>` de cada fitxa (i el generador `scripts/build-pages.py`,
+encara que ara mateix no s'executa per a aquestes pàgines) limita l'ampliació
+a un màxim d'1,4x la mida nativa del PNG (`style="max-width:min(70%,{1.4x}px)"`
++ `width`/`height` reals), en lloc de deixar-la lliure. Això talla el pitjor
+dels casos, però no elimina el problema de fons: un logo de 80x80px continua
+sense tenir prou píxels per omplir-se net a una pantalla retina encara que
+ara només s'ampliï 1,4x en lloc de 10x.
+
+**El que falta, i només ho pot aconseguir qui tracta amb els patrocinadors:**
+demanar-los el logo original en una resolució més alta (idealment ≥400px pel
+costat curt, PNG amb fons transparent). Els que es veuen més afectats ara
+mateix (mida nativa del PNG actual):
+
+- `foto-jane.png`, `tot-salut.png`, `panteres-grogues.png`, `gbk-globabasket.png`,
+  `armand-optics.png`, `stepback-podologia.png` — al voltant de 80x80px
+- `herbolaris-montserrat.png` (148x80), `westfield-glories.png` (153x80),
+  `clinica-dental-bac-de-roda.png` (96x80), `eix-clot.png` (151x80),
+  `illa-fantasia.png` (171x80), `ovella-negra.png` (175x80),
+  `fundacio-mullor.png`, `manual-colors.png` (~180px d'ample)
+
+Fins que arribin fitxers nous, el logo es veurà una mica tou en pantalles d'alta
+densitat, però ja no es veurà artificialment estirat com abans.
+
+## 28-08-2026 — Registre complet de l'auditoria de bugs (branca claude/cbgrupbarna-bugs-yt1lp2)
+
+Sessió llarga de cerca i correcció de bugs a tot el lloc, més les 3 hores de
+repàs exhaustiu demanades expressament. Detall complet a `CHANGELOG.md`
+(versió 1.5.2). Resum del que es va trobar i corregir, ja tancat i desplegat:
+
+- **Navegació mòbil:** la pestanya "Admin" tenia un z-index absurdament alt
+  (2147483000) i podia tapar el cercador, el selector d'idioma i el botó de
+  mapa en mòbil. Ara `z-index:80`, sempre per sota dels controls principals.
+- **Nav horitzontal amb scroll** (capçaleres de les pàgines de presentacions
+  i, en mòbil, la nav principal): no hi havia cap pista visual que es podia
+  desplaçar lateralment. Afegit un difuminat de vora (`mask-image`) que només
+  apareix quan de veritat sobra contingut (detectat per JS comparant
+  `scrollWidth` i `clientWidth`, pàgina a pàgina).
+- **Contingut:** xifra prohibida "40 equips federats" a la versió anglesa
+  d'un article de premsa (havia de ser 15, com ca/es); adreça truncada
+  "Llacuna, 172" en 2 articles (havia de ser "Llacuna, 170-172"); "22 partners"
+  desactualitzat en 3 pàgines (empreses/companies/empresas) quan ja n'hi ha 23;
+  enllaços morts a l'antic domini `cbgrupbarna.com` al peu d'11 pàgines de
+  campanya; URL incorrecta a `llms.txt`.
+- **Traducció:** la pàgina `/presentacions/evidencia-i-posicio/` estava sencera
+  en castellà tot i declarar `lang="ca"` — traduïda íntegrament al català.
+- **Bugs funcionals:** el formulari d'opinió (`/opina/` ca i en) no trobava el
+  seu `opina.json` per una ruta relativa incorrecta; capçalera `<h2 id="faq">`
+  duplicada a 3 pàgines de model formatiu (xocava amb el bloc de FAQ generat
+  automàticament); faltava peu de pàgina a `/jugadors/` (i ca/es/en); faltaven
+  metadades Twitter Card i JSON-LD a 2 pàgines de fotos d'esdeveniment.
+- **Seguretat:** comparació del secret de pujada de fotos
+  (`workers/fotos-upload/worker.js`) ara és a temps constant (evita atacs de
+  temporització); hash de contrasenya de `/admin/` reforçat amb PBKDF2 (veure
+  entrada anterior, encara pendent que l'Ana la faci servir).
+- **Manteniment:** el càlcul d'hora local del recompte de resultats
+  (`.github/scripts/update-counters.py`) feia servir un UTC+2 fix en lloc de
+  la zona horària real d'Europa/Madrid (trencava a l'hivern amb l'horari
+  d'hivern).
+- **Provat sense trobar res a corregir:** els 12 fluxos de cerca interna
+  (`tests/cerca/`), tots els workflows de GitHub Actions (revisats per risc
+  d'injecció d'scripts), contrast de color i mida de zones tàctils en 5 amples
+  de pantalla diferents, paritat estructural i d'enllaços entre ca/es/en,
+  sitemap i hreflang.
+
+**Deixat conscientment sense tocar, per ser deute de disseny i no un bug puntual:**
+uns 28 casos on una targeta o cita salta de `<h2>` a `<h4>` sense passar per
+`<h3>` (jerarquia d'encapçalats). No trenca res visualment ni per a l'usuari,
+però convindria revisar-ho el dia que es toqui el sistema de disseny d'aquests
+components, perquè afecta diverses plantilles alhora i val la pena fer-ho de
+cop en lloc de pedaç a pedaç.
+
+La xifra de "21 partners" a `/partners-mapa/` ja portava el seu propi comentari
+intern («confirmar con Ana si hay que añadirlos») abans d'aquesta auditoria:
+no és un bug nou, ja estava senyalada.
