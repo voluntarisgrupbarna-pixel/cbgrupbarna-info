@@ -22,6 +22,29 @@ només l'hi posa nom.
 
 ---
 
+## 1.5.2 — 2026-08-28
+
+**Auditoria d'SEO local i GEO**, amb `tests/audit-seo-geo.mjs` (486 pàgines):
+arreglats els punts que l'eina i una revisió manual van confirmar contra el
+disc.
+
+- `llms.txt` enllaçava `/es/cerca/`, que no existeix — corregit a
+  `/es/busqueda/`.
+- 3 articles del blog («Quants equips té el Barna?», ca/es/en) sense `image`
+  al `BlogPosting` — afegida.
+- El `Service` de l'Escoleta no declarava horari (`hoursAvailable`), tot i
+  que ja és a la pàgina: dimecres 17:30-18:40 a l'Escola Casas i dissabtes
+  9:00-10:30 a La Nau del Clot. Afegit a ca/es/en.
+- El `hasMap` de portada (ca/es/en) apuntava a una cerca genèrica de Google
+  Maps; canviat pel CID real del club (ja en ús a `/opina/`) i afegit també
+  a `sameAs`, per reforçar el lligam amb la fitxa de Google Business
+  Profile.
+
+Detall complet, amb el que queda obert i pendent de decisió de l'Ana, a
+`PENDENTS-WEB.md`.
+
+---
+
 ## 1.5.1 — 2026-08-27
 
 **Reconciliació de dues tandes paral·leles** (aquesta branca ↔ el PR #103

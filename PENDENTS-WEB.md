@@ -1871,3 +1871,76 @@ cara tallada per l'enquadrament. Es processen amb
 **Aprofitar el mateix dia de càmera per a l'Escoleta (4-8 anys)** si ja hi ha
 entrenaments: és la sessió pendent més antiga d'aquest document i la foto que
 obre les tres portades.
+
+---
+
+# Auditoria d'SEO local i GEO (28/08/2026, 12:32 UTC) · v1.5.2
+
+Demanat per l'Ana: «Haz pruebas seo local, SEO inteligente y geo para
+posicionar la web en lo mejor». En lloc de tornar a construir res, s'ha
+executat l'eina pròpia del repositori (`node tests/audit-seo-geo.mjs`, 486
+pàgines) i s'ha arreglat el que quedava verificat contra el disc.
+
+## Fet (al commit d'aquesta versió)
+
+- **`llms.txt`** enllaçava `/es/cerca/`, que no existeix — corregit a
+  `/es/busqueda/`. És l'arxiu clau de GEO (el llegeixen els assistents
+  d'IA); un enllaç mort aquí pesa més que en una pàgina normal.
+- **3 articles del blog** («Quants equips té el Barna?», a ca/es/en) sense
+  `image` al `BlogPosting` — afegida (`og-image.jpg`, com fa la resta
+  d'articles). Sense això Google no dona resultat enriquit.
+- **L'Escoleta (`Service`)** no declarava horari (`hoursAvailable`), tot i
+  que ja és a la pàgina en text: dimecres 17:30-18:40 a l'Escola Casas i
+  dissabtes 9:00-10:30 a La Nau del Clot. Afegit a ca/es/en amb aquestes
+  dades reals, no inventades.
+- **`hasMap` de portada** (ca/es/en) apuntava a una cerca genèrica de
+  Google Maps (`?q=...`); canviat pel CID real i verificat del club
+  (`cid=8202845242262325022`, el mateix que ja fa servir `/opina/` com a
+  enllaç de ressenya) i afegit també a `sameAs` — lliga l'entitat de la web
+  amb la fitxa de Google Business Profile, la senyal d'SEO local més forta
+  que es pot posar des del propi HTML.
+
+Verificat: JSON-LD vàlid als sis fitxers tocats, auditoria tornada a
+passar (2 errors → 1, l'que queda és a propòsit, vegeu sota), i
+`i18n-paritat.py` / `i18n-contingut.py` en verd per als canvis de
+l'Escoleta.
+
+## Obert, pendent de decisió de l'Ana
+
+- **Bug real d'idioma**: `/presentacions/evidencia-i-posicio/` declara
+  `lang="ca"` però tot el cos (~940 línies, l'informe «El Barna, amb
+  dades») és en castellà — comparat amb `es/presentaciones/evidencia-y-
+  posicion/`, les metadades sí que estan traduïdes, el cos no. Traduir-lo
+  bé és feina de contingut d'un informe amb xifres, no un ajust mecànic:
+  cal el vistiplau abans de tocar-lo per no arriscar una mala traducció
+  d'una dada.
+- **Sense horari general a la portada** (avís `entitat-incompleta` de
+  l'auditoria): no s'ha inventat perquè el club no en té un de fix —34
+  equips, 6 pistes, horaris que canvien cada setmana per equip. Si hi ha un
+  horari d'atenció/oficina real, es pot afegir en cinc minuts.
+- **`/fotos-esdeveniments/3x3-westfield-2026/`** (es/en): és indexable
+  (`index,follow`) i surt al `sitemap.xml`, tot i que la pròpia descripció
+  diu «Galeria privada... Registra't per accedir» i la skill `mapa-web-cbgb`
+  documenta aquesta URL com a `noindex`. Contradicció entre el que diu la
+  documentació i el que hi ha publicat — no s'ha tocat la indexació sense
+  confirmar quina és la política correcta; per això tampoc no s'hi ha
+  afegit el JSON-LD ni el `twitter:card` que li falten.
+- **72 pàgines amb títol o descripció massa llargs** (Google els retalla):
+  35 títols >60 caràcters, 37 descripcions >155-160. Cap és un trencament
+  —es retallen bé a cerca—, però és marge de millora real. És una tanda de
+  retoc de contingut pàgina a pàgina (triar què tallar sense perdre la
+  paraula clau), no una cosa per fer de pressa; es fa quan Ana ho digui.
+- Ja coneguts i sense duplicar aquí: els 39/43 objectius d'enllaços externs
+  pendents (autoritat, no codi) i els `alt` genèrics de `/fotos/`
+  (accessibilitat).
+
+## Revisat i descartat (falsos positius de l'auditoria)
+
+- **`nom-inconstant`**: el club «s'anomena» de diverses maneres a les dades
+  estructurades, però és perquè `Bàsquet femení` i `Barna Màgics` són
+  sub-entitats reals amb `@id` propi (`parentOrganization` cap al club) —
+  jerarquia correcta, no inconsistència.
+- **`title-duplicat`** a ~20 fitxes de partner (ca/es amb el mateix
+  títol): el mot «Partner» ja s'usa com a manlleu al castellà a tot el
+  lloc (24 vegades només a la fitxa d'Aquamiga en castellà) — és estil
+  editorial deliberat, no una traducció oblidada.
