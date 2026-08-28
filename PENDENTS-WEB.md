@@ -110,6 +110,12 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 
 ## Pendent de material de l'Ana
 
+- **Post nou de Robert Willett per a `/campus/` (Estrelles) — 28/08/2026:** missatge
+  de bona sort per a la temporada («Dear Barna family...»), compartit el
+  12/09/2025, ~29,7 mil reproduccions. És diferent dels dos reels seus que ja hi
+  ha catalogats (`DQOhe0qjAPb`, `DL-n0ZeMaOq`). **Falta l'enllaç real del post**:
+  una captura del QR de compartir no es pot descodificar de forma fiable per a un
+  enllaç que quedarà fixat al web — cal el «Copiar enlace» d'Instagram, no el QR.
 - **Escoleta:** foto o vídeo d'en Willy Hernangómez entrenant a La Nau amb Time Chamber
   (el forat és a `escoleta/index.html:944`), i confirmar la fitxa del circuit 3x3 amb la
   selecció espanyola (línia 744).
