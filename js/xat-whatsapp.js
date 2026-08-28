@@ -79,7 +79,7 @@
     '</svg>';
 
   var CSS = [
-    '.cbgb-wa-launcher{position:fixed;right:18px;bottom:var(--cbgb-wa-bottom,18px);z-index:2147482900;',
+    '.cbgb-wa-launcher{position:fixed;left:18px;bottom:var(--cbgb-wa-bottom,18px);z-index:2147482900;',
     'width:58px;height:58px;border-radius:50%;background:#25D366;border:none;cursor:pointer;',
     'display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(16,16,14,.32);',
     'transition:bottom .25s ease,transform .2s ease,box-shadow .2s ease}',
@@ -88,11 +88,11 @@
     '.cbgb-wa-launcher .x{display:none}',
     '.cbgb-wa-open .cbgb-wa-launcher .wa{display:none}',
     '.cbgb-wa-open .cbgb-wa-launcher .x{display:block}',
-    '.cbgb-wa-panel{position:fixed;right:18px;bottom:calc(var(--cbgb-wa-bottom,18px) + 72px);z-index:2147482900;',
+    '.cbgb-wa-panel{position:fixed;left:18px;bottom:calc(var(--cbgb-wa-bottom,18px) + 72px);z-index:2147482900;',
     'width:min(324px,calc(100vw - 32px));background:#fff;border-radius:16px;overflow:hidden;',
     "font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;",
     'box-shadow:0 20px 60px rgba(16,16,14,.28);border:1px solid rgba(16,16,14,.1);',
-    'transform-origin:bottom right;transform:scale(.92) translateY(8px);opacity:0;pointer-events:none;',
+    'transform-origin:bottom left;transform:scale(.92) translateY(8px);opacity:0;pointer-events:none;',
     'transition:transform .2s cubic-bezier(.22,1,.36,1),opacity .2s ease}',
     '.cbgb-wa-open .cbgb-wa-panel{transform:scale(1) translateY(0);opacity:1;pointer-events:auto}',
     '.cbgb-wa-head{background:#10100E;color:#fff;padding:16px 18px;border-left:3px solid #E20613;',
@@ -121,8 +121,8 @@
     '.cbgb-wa-foot{margin:0;font-size:11.5px;color:#6B6560;text-align:center}',
     '.cbgb-wa-foot a{color:#46433f;border-bottom:1px solid rgba(16,16,14,.25);text-decoration:none}',
     '.cbgb-wa-foot a:hover{color:#A8040E;border-color:#A8040E}',
-    '@media(max-width:380px){.cbgb-wa-launcher{right:14px;width:52px;height:52px}',
-    '.cbgb-wa-panel{right:14px;width:calc(100vw - 28px)}}'
+    '@media(max-width:380px){.cbgb-wa-launcher{left:14px;width:52px;height:52px}',
+    '.cbgb-wa-panel{left:14px;width:calc(100vw - 28px)}}'
   ].join('');
 
   var launcher, panel, wrap;
