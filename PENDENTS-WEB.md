@@ -2001,3 +2001,98 @@ desbordament horitzontal.
 
 Versió **2.0.0** (MAJOR): canvia com es fa servir la portada, no és un
 arreglo ni una funcionalitat nova.
+
+---
+
+## Dues correccions de seguretat i privacitat (28/08/2026)
+
+D'una auditoria tècnica ràpida (arquitectura, seguretat, rendiment). Els dos
+punts amb impacte real i arreglo barat s'han fet al moment; la resta queda
+llistat més avall com a pendent, per prioritat.
+
+### ✅ Fet
+
+**1. El xat Tawk.to, eliminat del tot (no només gatejat).**
+El `<script>` d'`embed.tawk.to` estava enganxat literalment, sense passar
+per `js/galetes.js`, a **379 pàgines HTML** (probablement d'un enganxat
+manual d'una tanda antiga, no d'un generador — no hi ha cap script que
+l'escrigui). Posava galetes de tercers abans que ningú acceptés res,
+inconsistent amb com ja es tracta Google Analytics.
+
+Decisió de l'Ana: en lloc de gatejar-lo darrere el consentiment, **treure'l
+del tot** i concentrar el xat en WhatsApp, que és per on respon de veritat
+la persona. S'ha tret l'`<script>` literal de les 379 pàgines (reemplaç
+mecànic, text idèntic a totes) i `js/galetes.js` es queda exactament com
+estava (Analytics, res més) — no calia tocar-lo ni pujar la versió del
+consentiment, perquè no hi ha cap finalitat nova a declarar.
+
+**2. El botó de WhatsApp, ara amb formulari i doble via de contacte.**
+Abans (`js/xat-whatsapp.js`) era només un llançador rodó amb 4 temes que
+obrien WhatsApp amb un missatge fix — discret i sense recollir cap dada.
+Ara:
+
+- **Es veu més**: el botó és una píndola amb icona + text («Contacta'ns» /
+  «Contáctanos» / «Contact us», segons idioma), no només una icona rodona, i
+  fa un petit rebot 1,2 s després de carregar la pàgina perquè no passi
+  desapercebut.
+- **Demana nom, telèfon, tema i missatge** abans d'obrir WhatsApp, amb la
+  seva pròpia casella de consentiment (enllaça a la política de privacitat,
+  igual que la resta de formularis del web — aquest consentiment és propi
+  del formulari, no té a veure amb el banner de galetes).
+- **En enviar-lo, arriba per dues vies**: (a) es desa a un Google Sheet i
+  arriba un correu a l'Ana, via un Apps Script fet expressament — codi i
+  passos de desplegament a **`FORMULARI-CONTACTE-WHATSAPP.md`**; (b) **sempre**,
+  encara que el pas (a) falli o no s'hagi desplegat, s'obre WhatsApp en una
+  pestanya nova amb el mateix missatge ja escrit — el full de càlcul mai
+  bloqueja el contacte real.
+
+**Pendent, no fet avui (cal accés al compte de Google del club):** desplegar
+l'Apps Script i enganxar la URL a `SHEETS_ENDPOINT` a dalt de
+`js/xat-whatsapp.js` — tots els passos, amb el codi a copiar i enganxar,
+són a `FORMULARI-CONTACTE-WHATSAPP.md`. Fins que no es faci, el formulari
+ja funciona (WhatsApp s'obre igual), només que sense la còpia al full de
+càlcul ni el correu.
+
+**3. Contrasenya de `/admin/` renovada.**
+`scripts/admin-gate.js` protegia el panell amb un SHA-256 **sense sal ni
+iteracions** d'una contrasenya, guardat en clar en un fitxer públic del
+repositori — atacable offline amb GPU si la contrasenya no és prou llarga.
+Si es recuperés, també obriria el vault xifrat del token de GitHub
+(`admin/token.html`, AES-GCM/PBKDF2 210k iteracions) perquè aquest xifrat és
+tan fort com la contrasenya que el protegeix, i un atacant que ja la sap no
+necessita trencar les iteracions.
+
+S'ha generat una contrasenya nova de 24 caràcters aleatoris i s'ha
+substituït el `PASS_HASH`. **La contrasenya nova s'ha donat a l'Ana pel
+xat, no queda escrita enlloc del repositori** (mai ho ha d'estar: qui
+llegeixi aquest fitxer llegiria el que calia hackejar-la). Com que encara
+no hi havia cap `admin/token.enc.json` pujat, no calia re-xifrar res — el
+primer que entri el token a `/admin/token.html` amb la contrasenya nova
+crea el vault de zero.
+
+**Pendent, no fet avui:** guardar aquesta contrasenya nova en un gestor de
+contrasenyes del club (no només en la memòria de qui l'ha rebuda), i si mai
+es refà l'arquitectura de `/admin/`, moure aquest control a un servidor
+petit (p. ex. Cloudflare Worker) que apliqui límit d'intents, en lloc d'un
+hash estàtic i públic — la limitació de fons (autenticació sense backend en
+un lloc 100% estàtic) es queda igual mentre no hi hagi res que respongui
+peticions.
+
+### Pendent de la mateixa auditoria, per prioritat
+
+1. **Dependabot/Renovate a `galeria/`** — és l'única app amb dependències
+   de veritat (Next 14, Supabase, React) i ningú avisa de CVEs.
+2. **`update-partits.yml` sense avís de fallada** — el robot més crític
+   (corre diverses vegades al dia) no notifica si la FCBQ canvia de format
+   i comença a fallar en silenci. Només 6 dels 12 workflows avisen en cas
+   d'error.
+3. **`tests/` (Playwright: `audit-browser.mjs`, `audit-seo-geo.mjs`,
+   `screenshots.mjs`) no està enganxat a cap workflow** — només corre si
+   algú se'n recorda a mà.
+4. **`cerca-index.json` (745 KB) es precarrega sencer** a `/cerca/`,
+   `/es/busqueda/` i `/en/search/` amb `<link rel="preload" as="fetch">` —
+   pes innecessari per a qui no fa servir el cercador a la primera visita.
+5. **Sense Lighthouse CI** — `pes-pressupost.yml` vigila mida de fitxer,
+   no LCP/CLS/INP reals en cada pull request.
+6. **Backup del repositori manual** — el mirall incremental (§9 de la
+   skill `mapa-web-cbgb`) no té cap `cron` que el faci sol.
