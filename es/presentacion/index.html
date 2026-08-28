@@ -123,6 +123,7 @@
   .head-brand{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#fff;flex-shrink:0}
   .head-brand img{width:26px;height:26px}
   .head-nav{display:flex;align-items:center;gap:18px;overflow-x:auto;scrollbar-width:none;flex:1}
+  .head-nav.desborda{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
   .head-nav::-webkit-scrollbar{display:none}
   .head-nav a{font-family:var(--display);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap;transition:color .15s}
   .head-nav a:hover{color:#fff}
@@ -945,5 +946,15 @@
 </script>
 <script src="/js/galetes.js"></script>
 <script src="/js/mapa.js" defer></script>
+<script>
+/* Marca .head-nav com a "desborda" nomes quan de veritat li falta espai,
+   perque el difuminat de vora nomes es vegi quan hi ha res a desplacar. */
+(function(){
+  var nav=document.querySelector(".head-nav"); if(!nav) return;
+  function marca(){ nav.classList.toggle("desborda", nav.scrollWidth > nav.clientWidth + 1); }
+  marca();
+  window.addEventListener("resize", marca);
+})();
+</script>
 </body>
 </html>
