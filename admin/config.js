@@ -20,7 +20,7 @@
 
 window.CBGB_ADMIN = {
   // ── Enganxa aquí l'ID de client de Google ──
-  GOOGLE_CLIENT_ID: "",
+  GOOGLE_CLIENT_ID: "45192959369-c9o88v7ip9lc53rlmng6n5m5g3dc7lsr.apps.googleusercontent.com",
 
   // Comptes autoritzats a entrar al panell (afegeix-ne els que calgui)
   ALLOWED_EMAILS: [
