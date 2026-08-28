@@ -2074,3 +2074,52 @@ consentiment de galetes); **la full de càlcul sempre serà el número real**
 de formularis rebuts. Proposta: GA4 al panell per a la tendència ràpida
 (quants, d'on, quin dia), i la full de càlcul com a font oficial del
 recompte — no cal triar-ne una sola.
+
+---
+
+## 28-08-2026 (nit) — Propietat GA4 trobada, secrets a mig posar, bug del workflow arreglat
+
+Sessió llarga per activar el dashboard, amb dos falsos positius abans
+d'encertar la propietat i un incident de seguretat pel camí. Estat real
+en acabar:
+
+### Fet
+
+- **Propietat GA4 correcta trobada i confirmada**: `534862357` (nom intern
+  «premidonaesport-96889», Measurement ID `G-R6XYR7G1WF` — coincideix
+  exactament amb el que porta `index.html`). Les dues propietats provades
+  abans eren errònies: la del 3x3 Westfield (`537345608`, sense dades) i
+  una altra de `cbgrupbarna-3x3timechamber.com`.
+- **Service account `ga4-analytics-reader@cb-grup-barna-comms.iam.gserviceaccount.com`**
+  afegit com a Viewer a la propietat correcta.
+- **Google Analytics Data API activada** al projecte `cb-grup-barna-comms`.
+- **Secret `GA4_PROPERTY_ID` = `534862357`** creat i actualitzat a GitHub
+  Actions.
+- **Bug del workflow arreglat** (`.github/workflows/analitica.yml`):
+  `git diff --quiet` sobre un fitxer que encara no existeix al repositori
+  sempre deia «sense canvis» (un fitxer no rastrejat no surt a `git diff`,
+  només a `git status`), així que el primer informe mai s'hauria arribat
+  a publicar. Ara fa `git add` abans de comprovar.
+
+### Incident de seguretat — clau del service account exposada
+
+Editant un fitxer des de l'editor web de GitHub amb trucs de consola
+JS/portapapers, el contingut de la clau privada del `.json` (la mateixa
+que s'havia enganxat al secret `GA4_SERVICE_ACCOUNT_JSON`) va aparèixer
+en un resultat d'eina fora de l'entorn previst. **Decisió: rotar la
+clau.** No s'ha de tornar a editar codi des de l'editor de GitHub amb
+aquesta mena de trucs — qualsevol edició de fitxer hauria de passar per
+una sessió amb accés normal al repositori (com aquesta), no per
+manipulacions de portapapers al navegador.
+
+### Pendent — cal l'Ana
+
+1. **Rotar la clau**: esborrar la clau vella del service account a Cloud
+   Console (Service Accounts → `ga4-analytics-reader@...` → Claves →
+   eliminar la que s'ha exposat) i crear-ne una de nova.
+2. **Actualitzar el secret `GA4_SERVICE_ACCOUNT_JSON`** a GitHub amb el
+   contingut del `.json` nou — fet directament per l'Ana a la interfície
+   de GitHub, sense passar-lo per cap altra eina ni pel xat.
+3. **Disparar `analitica.yml`** (workflow_dispatch) i comprovar que
+   `admin/analitica/dades.json` es publica de veritat amb un commit —
+   aquest cop amb el bug del `git diff` ja resolt.
