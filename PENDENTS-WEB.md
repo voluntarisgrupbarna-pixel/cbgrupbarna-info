@@ -1874,6 +1874,31 @@ obre les tres portades.
 
 ---
 
+## 27-08-2026 (nit) — Accés al panell d'admin: falta el `GOOGLE_CLIENT_ID`
+
+Fusionat a `main` (#105): pestanya discreta «Admin» a la cantonada superior
+dreta de gairebé totes les pàgines (injectada des de `js/galetes.js`,
+enllaça a `/admin/`), i codi d'accés nou a les seccions protegides de
+`/partits/app.html` (només se'n guarda l'empremta SHA-256; el codi en clar
+se li ha donat a l'Ana per xat, no viu al repositori).
+
+### Pendent — cal l'Ana
+
+El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
+`GOOGLE_CLIENT_ID: ""`. Falta:
+
+1. Crear l'ID de client OAuth a
+   [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
+   amb el compte `voluntarisgrupbarna@gmail.com` (passos exactes al capçal
+   del mateix fitxer `admin/config.js`).
+2. Enganxar-lo a `GOOGLE_CLIENT_ID` i pujar el fitxer.
+3. Revisar `ALLOWED_EMAILS` al mateix fitxer — ara només hi ha
+   `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
+   dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
+   afegir-l'hi.
+
+---
+
 ## 27-08-2026 — Decisió de l'Ana: una sola portada, sense commutador (v2.0.0)
 
 «Quiero esta portada no dos.» Fora el commutador Franges/Extensa a les tres
