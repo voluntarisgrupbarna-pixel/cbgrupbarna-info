@@ -1871,3 +1871,133 @@ cara tallada per l'enquadrament. Es processen amb
 **Aprofitar el mateix dia de càmera per a l'Escoleta (4-8 anys)** si ja hi ha
 entrenaments: és la sessió pendent més antiga d'aquest document i la foto que
 obre les tres portades.
+
+---
+
+## 27-08-2026 (nit) — Accés al panell d'admin: falta el `GOOGLE_CLIENT_ID`
+
+Fusionat a `main` (#105): pestanya discreta «Admin» a la cantonada superior
+dreta de gairebé totes les pàgines (injectada des de `js/galetes.js`,
+enllaça a `/admin/`), i codi d'accés nou a les seccions protegides de
+`/partits/app.html` (només se'n guarda l'empremta SHA-256; el codi en clar
+se li ha donat a l'Ana per xat, no viu al repositori).
+
+### Pendent — cal l'Ana
+
+El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
+`GOOGLE_CLIENT_ID: ""`. Falta:
+
+1. Crear l'ID de client OAuth a
+   [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
+   amb el compte `voluntarisgrupbarna@gmail.com` (passos exactes al capçal
+   del mateix fitxer `admin/config.js`).
+2. Enganxar-lo a `GOOGLE_CLIENT_ID` i pujar el fitxer.
+3. Revisar `ALLOWED_EMAILS` al mateix fitxer — ara només hi ha
+   `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
+   dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
+   afegir-l'hi.
+
+---
+
+## 26-08-2026 · Auditoria de rendiment, SEO, GEO i contingut (v1.3.2)
+
+Passada completa sobre les 408 pàgines HTML: rendiment (scripts blocants,
+format i pes d'imatge, `width`/`height`, `fetchpriority`), SEO (títols,
+meta descriptions, og:image, h1, JSON-LD), i contingut (paritat d'índexs
+de blog, textos tallats amb «…»).
+
+### Fet
+
+- **`js/galetes.js` en `defer`** a les 382 pàgines i als tres generadors.
+  Verificat amb navegador real que el consentiment i GA funcionen igual.
+- **34 imatges del blog de JPG a WebP** (heros retallats a 4:3, cards a
+  16:10, ancoratge a dalt). 2617 KB en total, −34 % respecte als JPG
+  originals. `width`/`height` HTML actualitzats a 42 pàgines.
+- **Hero d'article: de `loading="lazy"` a `fetchpriority="high"`**, perquè
+  és l'LCP de la pàgina.
+- **604 imatges reben `width`/`height`** per evitar el CLS mentre
+  carreguen.
+- **84 meta descriptions tallades amb «…»** reescrites com a frases
+  senceres de ≤165 caràcters, també als JSON d'`i18n/feina/` perquè cap
+  `munta` les reverteixi.
+- **8 `og:image` de /es/ i /en/** apuntaven a fitxers inexistents; ara
+  apunten a l'actiu real.
+- **Portada: dos `h1` → un.** El del masthead passa a `<p>` (classe i id
+  preservats).
+- **Títols i descriptions llargs** escurçats (campus, empreses, 3x3,
+  briefing, blog, tres idiomes).
+- **Fitxes de fotos del 3x3** en castellà i anglès: recuperen el JSON-LD
+  que només tenia la catalana.
+- **Índex del blog en castellà i anglès**: 17 targetes amb imatge i text
+  complet (abans, 14 sense imatge i amb text tallat amb «…»).
+- **Fitxa de Melosa** en es/en: descriptions curtes (66 car.) ampliades
+  fins als ~134 del català.
+- **`scripts/build-pages.py`** actualitzat: `defer` a galetes, heros en
+  WebP amb `fetchpriority="high"`, helper `mida_imatge()` per llegir
+  dimensions reals.
+- Sitemap, hreflang, paritat i18n: comprovats, cap error.
+
+### Pendent de material de l'Ana
+
+- **Dues fotos del blog amb gra**: `entrenadores-basquet-barcelona-hero`
+  (~272 KB en WebP) i `campus-basquet-barcelona-guia-hero` (~175 KB) surten
+  pesades perquè l'original té gra fotogràfic, que és incompressible. La
+  solució no és codi: cal reexportar des dels originals de càmera sense
+  gra, o triar una altra foto.
+
+### Pendent de desenvolupar
+
+- **Sincronitzar `scripts/build-pages.py` amb l'HTML publicat del blog.**
+  El generador està desincronitzat: executar-lo avui esborra el commutador
+  d'idioma, l'enllaç a `a11y.css`, les fotos inline dels articles i els
+  heros actuals. Tots els canvis d'aquesta tanda s'han fet tant al
+  generador com a les pàgines, però el generador segueix sense saber de les
+  peces afegides posteriorment (nav d'idiomes, capa d'accessibilitat, fotos
+  d'article). Cal una sessió dedicada per posar-lo al dia.
+
+---
+
+## 27-08-2026 — Decisió de l'Ana: una sola portada, sense commutador (v2.0.0)
+
+«Quiero esta portada no dos.» Fora el commutador Franges/Extensa a les tres
+portades: es queda només la vista de franges (el hero de dues columnes, les
+nou franges i la barra `#SOMCLOT`), i desapareix la vista extensa sencera amb
+el seu botó de canvi de vista.
+
+**Tanca P2.7 per decisió, no per dada.** El pendent deia «mesurar l'ús del
+commutador amb GA4 abans de decidir res» (l'esdeveniment `canvi_vista` es va
+afegir el 26/08 expressament per això). Els secrets de GA4
+(`GA4_SERVICE_ACCOUNT_JSON`, `GA4_PROPERTY_ID`) mai s'han arribat a donar
+d'alta, així que no hi ha hagut mai cap xifra real de quanta gent canviava de
+vista. L'Ana ha decidit sense esperar-la — és la seva prerrogativa, i el
+pendent queda tancat aquí, no reobert.
+
+**Què surt de les tres portades** (`index.html`, `es/index.html`,
+`en/index.html`):
+
+- El `.masthead` fosc («Qui som»), que repetia el hero de franges i només
+  sortia a l'extensa.
+- El calendari encastat de la catalana (`#calendari` / `.e-jornada`,
+  `only-extensa`). **No es toca** el `#calendari` de la castellana i
+  l'anglesa: en aquelles dues mai va portar el commutador (era una secció
+  normal, sempre visible) — no formava part del sistema que es desmunta.
+- Els blocs «Paritat», «Cultura del Progrés», «El Barna per dins» i
+  «Observatori Barna».
+- `#acces` («Tot a mà») i `#presentacions`: tots els enllaços que només hi
+  vivien ja són al mapa ≡ o tenen pàgina pròpia (`/presentacions/`,
+  `/briefing/`, `/posicionament/`), així que no calia migrar-ne cap.
+- El botó `.view-toggle` i tot el JS del commutador: `sessionStorage`,
+  l'esdeveniment `canvi_vista`, l'atribut `data-view` a `<html>`.
+
+Es queden: les nou franges, el hero, la barra `#SOMCLOT`, el formulari i la
+FAQ — tot el que ja era comú a les dues vistes.
+
+**Comprovat**: `i18n-paritat.py` (147 pàgines, cap endarrerida),
+`i18n-contingut.py` (294 traduccions, cap avís), `i18n-lint.py` (0 errors
+nous), `a11y-revisa.py` (459 pàgines, 0 amb res a mirar) i
+`pes-pressupost.py` (tot dins del sostre), tots en verd. Playwright a 1280 i
+390 px als tres idiomes: sense commutador, sense `.masthead`, sense
+desbordament horitzontal.
+
+Versió **2.0.0** (MAJOR): canvia com es fa servir la portada, no és un
+arreglo ni una funcionalitat nova.

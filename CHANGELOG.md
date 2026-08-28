@@ -22,6 +22,43 @@ només l'hi posa nom.
 
 ---
 
+## 2.0.0 — 2026-08-27
+
+**Decisió de l'Ana: una sola portada, sense commutador.** Fora el
+Franges/Extensa: la portada de les tres llengües es queda amb la vista de
+franges tal com es publicava per defecte —el hero de dues columnes, les nou
+franges i la barra `#SOMCLOT`—, i desapareix del tot la vista extensa amb el
+seu botó de commutador. És un canvi MAJOR perquè altera com es fa servir la
+web (una sola maquetació de portada, no dues intercanviables).
+
+Es tanca així, per decisió i no per dada, el pendent P2.7 («mesurar l'ús del
+commutador amb GA4 abans de decidir res»): els secrets de GA4 no s'han arribat
+a donar d'alta, així que mai hi ha hagut cap xifra real d'ús — l'Ana ha
+decidit sense esperar-la.
+
+Fora de les tres portades (`index.html`, `es/index.html`, `en/index.html`):
+
+- El `.masthead` fosc («Qui som»), que només sortia a l'extensa i repetia el
+  hero de franges.
+- El calendari encastat (`#calendari` / `.e-jornada`, únicament a la
+  catalana — la castellana i l'anglesa el tenien com a secció normal, sense
+  commutador, i es queden igual: no formava part del sistema de vistes).
+- Els blocs editorials «Paritat», «Cultura del Progrés», «El Barna per dins»
+  i «Observatori Barna».
+- La secció `#acces` («Tot a mà», llista plana d'enllaços) i `#presentacions`:
+  tot el que hi enllaçaven ja és al mapa ≡ o a pàgines pròpies
+  (`/presentacions/`, `/briefing/`, `/posicionament/`).
+- El botó `.view-toggle` de la capçalera i tot el JS del commutador
+  (`sessionStorage`, l'esdeveniment `canvi_vista`, el `data-view` a `<html>`).
+
+Es queden intactes: les nou franges, el hero, la barra `#SOMCLOT`, el
+formulari, la FAQ i tot el contingut que ja era comú a les dues vistes.
+Verificat amb `i18n-paritat.py`, `i18n-contingut.py`, `i18n-lint.py`,
+`a11y-revisa.py` i `pes-pressupost.py` en verd, i Playwright a 1280/390 px
+als tres idiomes.
+
+---
+
 ## 1.5.1 — 2026-08-27
 
 **Reconciliació de dues tandes paral·leles** (aquesta branca ↔ el PR #103
@@ -113,6 +150,25 @@ només tenia aquesta branca:
   caselles amb teclat i botons d'icona amb nom. Type-check en verd.
 
 ---
+
+## 1.3.2 — 2026-08-26
+
+**Auditoria de rendiment, SEO, GEO i contingut** sobre les 408 pàgines, i els
+arreglos que en surten. Rendiment: `js/galetes.js` passa a `defer` a les 382
+pàgines i als tres generadors (deixa de bloquejar el primer dibuix; el
+consentiment i l'RGPD queden igual, verificat amb navegador real); els heros i
+targetes del blog passen de JPG a WebP (−34% de pes) i el hero d'article deixa
+el `loading="lazy"` per `fetchpriority="high"` perquè és l'LCP; 604 imatges
+reben `width`/`height` per no moure la pàgina mentre carreguen. SEO: es
+completen les **84 meta descriptions que acabaven tallades amb «…»** (ara
+frases senceres de ≤165 caràcters, també als JSON de `i18n/feina/` perquè cap
+`munta` les reverteixi); vuit `og:image` de /es/ i /en/ apuntaven a fitxers
+inexistents i ara apunten a l'actiu real; la portada deixa de tenir dos `h1`
+(el del masthead passa a `p`, mateixa classe); i s'escurcen els títols i
+descripcions més llargs (campus, empreses, 3x3, briefing i blog, als tres
+idiomes). Les fitxes de fotos del 3x3 en castellà i anglès recuperen el
+JSON-LD que només tenia la catalana. Sitemap, enllaços interns, hreflang i
+paritat i18n: comprovats, cap error.
 
 ## 1.3.1 — 2026-08-25
 
