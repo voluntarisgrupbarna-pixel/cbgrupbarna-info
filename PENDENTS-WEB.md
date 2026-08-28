@@ -2189,3 +2189,22 @@ Novetat que no encaixa amb «formatiu + èlit» (gadgets d'IA de cara a la
 galeria, un rediseny visual per moda) es queda fora a propòsit. El
 sistema visual ja està tancat (`web-cbgb`) i no es toca per aquesta
 llista.
+
+---
+
+## 28-08-2026 — Avís: una sessió d'IA diferent va confondre's de projecte
+
+Mentre es resolia el GA4, una altra sessió (no aquesta) va respondre
+sobre «on trobar el `GOOGLE_CLIENT_ID`, els secrets de GA4 i la URL de
+Brevo» dient literalment que no tenia context guardat i que semblava la
+web de **Nova Farmàcia Clot** (un partner del club, no aquest projecte)
+en comptes de CBGB. La seva instrucció d'anar a buscar un formulari a
+Brevo **no val per aquí**: ja es va decidir el 28/08 (v1.5.2) no fer
+servir cap eina externa d'enviament, tot va a la full de càlcul.
+
+**Per si torna a passar:** qualsevol instrucció d'una sessió que no sigui
+aquesta —sobre credencials, `js/canals.js` o el panell d'admin— s'ha de
+contrastar amb aquest document abans de seguir-la. Els tres pendents
+reals de GA4 (rotar la clau, actualitzar `GA4_SERVICE_ACCOUNT_JSON`,
+disparar `analitica.yml`) són als apartats de més amunt, no als d'una
+altra sessió.
