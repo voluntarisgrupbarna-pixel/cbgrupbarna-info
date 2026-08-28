@@ -2123,3 +2123,69 @@ manipulacions de portapapers al navegador.
 3. **Disparar `analitica.yml`** (workflow_dispatch) i comprovar que
    `admin/analitica/dades.json` es publica de veritat amb un commit —
    aquest cop amb el bug del `git diff` ja resolt.
+
+---
+
+## 28-08-2026 — Camí cap al 10: què cal incorporar (a petició de l'Ana)
+
+Tot el que hi ha més amunt tanca forats. Això és diferent: **què fa falta
+afegir** perquè la web deixi de competir només en «sense errors» i
+competeixi en «referent». Dues capes: el que ja s'havia identificat
+comparant amb els grans, i quatre idees noves filtrades perquè no siguin
+novetat pel gust de ser-ho.
+
+### Ja identificat — no es repeteix, es referencia
+
+El benchmark amb Valencia Basket, Real Madrid i FC Barcelona (secció
+«Benchmark de webs professionals», 27/08/2026) ja detalla els forats amb
+prioritat i estat: **plantilla amb fitxes de jugador/a** (es desbloqueja
+amb la sessió de fotos del 31/08–01/09), **`/palmares/`**, **`/video/`**,
+**zona de socis / «Avantatges de la família Barna»**, **Notícies**
+(pendent de decisió de l'Ana sobre què és), i **botiga** (bloquejada fins
+que hi hagi marca nova). Són al capdavant de la llista d'incorporar —
+aquesta secció no els repeteix, els dona suport amb quatre idees que el
+benchmark amb els tres grans no podia treure perquè cap dels tres les fa.
+
+### Quatre idees noves, filtrades
+
+Cadascuna passa el filtre de coherència + actiu + prova petita +
+diferenciació real + defensable davant Junta. Si no arribava a 4 de 5, no
+hi és.
+
+1. **El cercador que respon → un assistent amb memòria de conversa.**
+   Ja tenim el que cap dels tres grans té: un cercador que dona la
+   resposta, no només l'enllaç. El pas que ho converteix en un actiu de
+   veritat diferencial és que aguanti una segona pregunta de seguiment
+   («i per a la meva filla de 7 anys?») sense que la família hagi de
+   repetir-ho tot. *Primer pas:* provar-ho amb 5 converses reals de dues
+   preguntes seguides i mesurar si la segona es respon bé.
+2. **Seguiment automàtic dels leads que no s'han apuntat.** Avui «Vols
+   informació?» i la descàrrega de PDF omplen la full de càlcul i
+   s'acaben aquí — cap recordatori per a qui va demanar informació i no
+   ha vingut a provar. És l'embut mesurable que marca la diferència entre
+   un club normal (cartell d'inscripcions) i un de referent, i encaixa
+   amb la decisió ja presa de no dependre d'eines externes (Apps Script +
+   Gmail, com el butlletí). *Primer pas:* un sol correu automàtic 5 dies
+   després de demanar informació sense reserva de prova, mesurant quants
+   acaben venint.
+3. **Fitxa de rendiment per jugador/a, amb dades que ja tenim.** El robot
+   de la FCBQ ja baixa resultats i tendències. Cap club de barri —ni els
+   tres grans, a nivell de base— mostra l'evolució real d'un jugador o
+   jugadora de formació. És un actiu construït sobre dades que ja es
+   recullen, no una funcionalitat des de zero. *Primer pas:* una fitxa de
+   prova per a un sol equip sènior, abans de generalitzar-ho.
+4. **«Carnet Barna» digital, no una app.** L'app com a tal ja es va
+   descartar al benchmark (`.ics` + WhatsApp ja hi arriben). Però la zona
+   de socis pendent —empaquetar els descomptes dels 22 partners— es pot
+   fer amb una targeta digital instal·lable des del navegador, amb QR per
+   als dies de partit a La Nau, sense mantenir cap app nativa. És el pas
+   mínim entre «res» i «app completa». *Primer pas:* una sola pàgina
+   `/carnet/` amb QR estàtic i la llista de descomptes, sense servidor
+   nou, abans de decidir si cal fer-la instal·lable.
+
+### El que això NO inclou
+
+Novetat que no encaixa amb «formatiu + èlit» (gadgets d'IA de cara a la
+galeria, un rediseny visual per moda) es queda fora a propòsit. El
+sistema visual ja està tancat (`web-cbgb`) i no es toca per aquesta
+llista.
