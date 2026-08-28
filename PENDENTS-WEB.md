@@ -1896,3 +1896,97 @@ El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
    `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
    dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
    afegir-l'hi.
+
+---
+
+## 28-08-2026 — Auditoria SEO/GEO (escoleta, campus, sèniors/Supercopa, patrocinis)
+
+Encàrrec de l'Ana: proves extensives de SEO i GEO per posicionar el club,
+centrades en escola i campus, sèniors/Supercopa, i (ampliat durant la
+sessió) patrocinadors i empreses. Resultat a la branca
+`claude/club-geo-seo-testing-x6h4yy`, PR
+[#109](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/109)
+(oberta, pendent de revisió/merge).
+
+**Diagnòstic previ:** `/escoleta/` i `/campus/` ja tenien FAQPage, Service/
+Course al JSON-LD, hreflang complet i keywords — cap canvi necessari.
+
+**Canvis fets (2 commits a la PR):**
+
+1. **FAQ de la Supercopa a `/partits/equips/scf/` i `/scm/`** (ca/es/en):
+   les fitxes dels dos primers equips només mostraven un balanç genèric
+   «0-0» sense explicar la competició. S'hi ha afegit a mà una FAQ visible +
+   `FAQPage` explicant què és la Super Copa FCBQ — **a mà i no via el
+   generador**, vegeu el pendent tècnic més avall.
+2. **FAQ contradictòria corregida** (`i18n/faq.yml`, entrada
+   `seniors-te-el-club`): hi havia una pregunta duplicada a `/seniors/` que
+   deia que **només** el sènior masculí juga la Supercopa, contradient la
+   resta de la mateixa pàgina (que diu correctament que hi juguen els dos).
+   Moguda a `/club/` —que no mencionava els sèniors a la seva FAQ— amb el
+   fet corregit. Regenerada amb `generate-faq.py` (aquest sí que està al dia).
+3. **`/seniors/` afegida a `llms.txt`**: la pàgina dedicada als dos primers
+   equips i la Supercopa hi era absent tot i ser al sitemap — l'índex que
+   s'ofereix als robots d'IA no la citava.
+4. **Schema `Service` + `Organization` (Barna Business)** afegit al JSON-LD
+   de `/patrocinadors/` i `/empreses/` (ca/es/en): cap entitat marcava
+   explícitament que això és una oferta de patrocini, tot i que el text
+   (FAQ, keywords) ja apuntava bé a «patrocinar club de bàsquet Barcelona».
+
+### Pendent tècnic — `generate-team-pages.py` desfasat
+
+Descobert en revisar el `git diff` abans de commitejar (procediment de
+`mapa-web-cbgb` §2): el generador de `/partits/equips/*` **no reflecteix la
+plantilla real publicada**. Li falten l'hreflang, el selector d'idioma,
+`/js/mapa.js` i `/css/a11y.css`, tots afegits a mà directament a la sortida
+el 25/08 («Estètica definitiva · fase 5»), sense actualitzar mai el
+generador. Comprovat executant-lo: regenera els 45 fitxers (15 equips × 3
+idiomes) i **reverteix** aquests quatre elements. Per això la FAQ de la
+Supercopa s'ha aplicat a mà als 6 fitxers de scf/scm, no via el generador.
+
+**Cal, abans que el robot diari torni a tocar aquestes pàgines:**
+actualitzar `head_html()` i `header_html()` a
+`.github/scripts/generate-team-pages.py` perquè emetin l'hreflang, el
+`nav.lang-switch`, `/css/a11y.css` i `/js/mapa.js`, agafant com a referència
+el que ja hi ha a `partits/equips/cadet-femeni-a/index.html`. Fins que
+això no es faci, **no executar el generador sencer**: la propera vegada
+que canviïn resultats de partits d'aquests 15 equips, el robot diari
+(`update-partits.yml`) el tornarà a cridar i regressarà les 45 pàgines
+sense que ningú se n'adoni.
+
+### Pendent de dades — discrepància 22 vs 23 partners
+
+`data.json` (`xifres.partners`, font de veritat) diu **22**; la FAQ visible
+de `/patrocinadors/` diu **23** («El CB Grup Barna té 23 partners...»). No
+s'ha tocat en aquesta sessió (fora d'abast de l'encàrrec SEO), però val la
+pena quadrar-ho: o bé falta una fitxa a `data.json.patrocinadors.llistat`,
+o bé la FAQ arrossega un compte antic.
+
+### Pendent obert — captació activa de sponsors (no és SEO web)
+
+L'Ana ha demanat també «que ens arribin patrocinadors», entès com a
+captació activa, no posicionament web. Aportat fora d'aquest repositori:
+
+- **Skills `captacio-pack-cbgb` i `patrocinis-club` actualitzades**
+  (28/08/2026): tenien tota l'estratègia construïda sobre nivells
+  Oro/Plata/Bronze amb cupos d'exclusivitat, contradient la decisió de
+  l'Ana del 27/08 (vegeu entrada anterior d'aquest mateix document, que ja
+  avisava que «les skills personals de captació encara en parlen»). Reescrites
+  amb el model real de 3 formats (Presència digital / Marca en moviment /
+  Patrocini esportiu) + espècie, sense ranking ni escassetat artificial.
+- **Pack de captació 2026-27 generat i lliurat a l'Ana** (no viu al
+  repositori): Pla estratègic (Word), Dossier de venda de 8 diapositives
+  sense preus (PPTX) i Full de targets/CRM amb pipeline ponderat (Excel,
+  amb una fila d'exemple i 15 files plantilla per sector per completar amb
+  empreses reals).
+- **Nota tècnica de l'entorn:** en aquesta sessió, LibreOffice (`soffice`)
+  no ha pogut carregar cap document en mode headless (falla «source file
+  could not be loaded» fins i tot amb un `.txt` trivial, o penja
+  indefinidament en el flux de recàlcul de macros de `xlsx/scripts/recalc.py`).
+  No s'ha pogut fer la vista prèvia en PDF ni el recàlcul automàtic de
+  fórmules de l'Excel que exigeixen les skills `docx`/`pptx`/`xlsx`; s'ha
+  validat en substitució amb `python-docx`, `markitdown` i
+  `pptx/scripts/office/validate.py` (tots passen), i les fórmules (sumes i
+  multiplicacions simples) s'han revisat a mà. Un Excel/Word/PowerPoint
+  real les recalcula sol en obrir-lo, així que no afecta l'Ana — només vol
+  dir que la comprovació visual automàtica no s'ha pogut fer en aquesta
+  sessió concreta.
