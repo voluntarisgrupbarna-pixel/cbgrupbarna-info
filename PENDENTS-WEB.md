@@ -4,6 +4,38 @@ Auditoria del repositori a 14/08/2026, revisada amb les decisions de l'Ana.
 
 ---
 
+## 🔴 Pendent · Accés admin i token de GitHub (29/08/2026)
+
+Arran de recuperar l'accés al panell `/admin/`, queden tres coses obertes de
+**seguretat** (cap secret no s'escriu aquí; això és públic):
+
+1. **Canviar la contrasenya del club.** La contrasenya d'accés a `/admin/`
+   (i a l'editor de `partits/app.html`) es va restablir el 29/08/2026 —hash a
+   `scripts/admin-gate.js` (`PASS_HASH`) i `partits/app.html`
+   (`EDIT_KEY_HASH`)— però el valor en clar es va compartir per xat, així que
+   **s'ha de tornar a canviar per un de privat**. Es fa generant el
+   SHA-256 de la nova contrasenya i substituint els dos hash (instruccions al
+   capdamunt de `scripts/admin-gate.js`).
+2. **Revocar dos tokens de GitHub exposats.** Durant el procés es van
+   enganxar dos *personal access tokens* (un `github_pat_…` fine-grained i un
+   `ghp_…` clàssic) al xat. Tots dos són de la cuenta `voluntarisgrupbarna-pixel`
+   i **s'han de revocar** a <https://github.com/settings/tokens> (a més,
+   cap dels dos tenia permís d'escriptura, així que no servien).
+3. **Desar el token bo a la caixa forta.** Un cop creat un token **clàssic amb
+   scope `repo`** (el fine-grained sortia amb `push=False`), desar-lo una sola
+   vegada a `/admin/token.html` perquè quedi xifrat a `admin/token.enc.json` i
+   no calgui tornar-lo a enganxar a cap dispositiu. **Quan es canviï la
+   contrasenya del punt 1, cal tornar a desar el token** (la caixa forta va
+   lligada a la contrasenya). Confirmar que el fitxer `admin/token.enc.json`
+   apareix al repositori (ara no hi és).
+
+**Causa arrel del bucle "em demana el token 1000 vegades":** el token es
+desava a la cajita de cada panell (només `localStorage` d'aquell navegador),
+no a la caixa forta compartida; i a sobre no tenia permís d'escriptura. La via
+bona és sempre `/admin/token.html` amb un token amb `repo`.
+
+---
+
 ## ✅ Fet
 
 ### 1. Els tres enllaços trencats del Premi Dona i Esport
