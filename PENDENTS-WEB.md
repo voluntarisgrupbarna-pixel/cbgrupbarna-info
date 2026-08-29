@@ -166,6 +166,16 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   club, que queda digne, però és l'única de les 21 fitxes que no té marca gràfica. Si
   l'Ana en pot demanar un SVG o un PNG amb fons transparent, es posa en un minut. Mentre
   no arribi, la fitxa no queda coixa: no cal fer-hi res.
+- **Logos de partner en baixa resolució (28/08/2026, auditoria mòbil):** els 22 fitxers
+  de `partners/*.png` fan entre 80×80 i 180×80 px — mides de xarxes socials, no de web.
+  A la fitxa de cada partner el logo es mostra dins un marc que, per petit que es faci,
+  no pot amagar del tot la manca de resolució en pantalles retina: amb el marc ja reduït
+  al mínim raonable (`patrocinadors/partners/*/index.html`, `.phead-media` a 220px), els
+  logos amples (Aquamiga, Eix Clot...) ja es veuen nítids, però els quadrats petits
+  (Armand Òptics, GBK Globabasket, Panteres Grogues, Stepback Podologia, Tot Salut) es
+  queden lleugerament per sota del doble de píxels que calen. No es pot arreglar amb
+  codi: cal demanar a cada partner un logo en PNG/SVG transparent d'almenys 360px
+  d'ample (720px si pot ser, per pantalles retina) per substituir el fitxer petit.
 
 ## Pendent de desenvolupar
 
