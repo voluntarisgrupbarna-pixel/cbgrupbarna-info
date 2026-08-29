@@ -1,0 +1,103 @@
+name: proves · SEO/GEO i renderitzat real
+
+# Enganxa les eines de tests/ (fins ara només corrien si algú se'n recordava
+# a mà) a un workflow. Són auditories, no comprovacions estrictes com
+# a11y-revisa.py o i18n-paritat.py: no tenen "torna 1 si troba res", per
+# això aquest workflow no fa fallar la PR — deixa l'informe com a comentari
+# i com a fitxer descarregable perquè algú el llegeixi i decideixi.
+
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - 'css/**'
+      - 'js/**'
+      - 'sitemap.xml'
+      - 'llms.txt'
+  schedule:
+    - cron: '0 5 * * 1'   # cada dilluns: cap canvi de codi no avisa d'un enllaç extern que ha caigut sol
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  proves:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instal·lar Playwright
+        working-directory: tests
+        run: |
+          npm install --no-audit --no-fund --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: SEO i GEO (anàlisi estàtica)
+        run: node tests/audit-seo-geo.mjs
+
+      - name: Renderitzat real (Chromium, 5 amplades)
+        run: node tests/audit-browser.mjs
+
+      - name: Informe conjunt
+        run: node tests/report.mjs --md tests/out/INFORME.md
+
+      - name: Resum de l'execució
+        run: cat tests/out/INFORME.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: informe-proves
+          path: tests/out/
+          retention-days: 30
+
+      - name: Deixar l'informe a la proposta de canvi
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.pull_request.number }}
+        run: |
+          # Un sol comentari, que es va reescrivint (igual que fa i18n-paritat.yml).
+          MARCA="<!-- proves-web -->"
+          {
+            echo "$MARCA"
+            echo "### Informe de proves (SEO/GEO i renderitzat real)"
+            echo
+            head -c 60000 tests/out/INFORME.md
+            echo
+            echo "_Informe complet a l'artefacte \`informe-proves\` d'aquesta execució._"
+          } > /tmp/comentari.md
+          id=$(gh api "repos/${{ github.repository }}/issues/$NUM/comments" \
+                 --jq ".[] | select(.body | contains(\"$MARCA\")) | .id" | head -1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" \
+              -f body="$(cat /tmp/comentari.md)" >/dev/null
+          else
+            gh pr comment "$NUM" --body-file /tmp/comentari.md
+          fi
+
+      - name: Avisa si el robot ha fallat
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const titol = '🔴 Robot caigut: ${{ github.workflow }}';
+            const cos = 'El workflow **${{ github.workflow }}** ha fallat: ' +
+              context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo +
+              '/actions/runs/' + context.runId + ' (' + new Date().toISOString() + ').';
+            const { data: oberts } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'robot-caigut'
+            });
+            const existent = oberts.find(i => i.title === titol);
+            if (existent) {
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existent.number, body: cos });
+            } else {
+              await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title: titol, body: cos, labels: ['robot-caigut'] });
+            }

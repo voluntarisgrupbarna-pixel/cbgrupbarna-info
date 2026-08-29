@@ -1,0 +1,10 @@
+name = "admin-gate"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+[[kv_namespaces]]
+binding = "INTENTS"
+id = ""   # omple-ho amb l'id que et dona `wrangler kv namespace create INTENTS`
+
+# PASS_HASH es desa amb `wrangler secret put PASS_HASH` (o des del
+# dashboard, marcat com a "Secret") — no va aquí.

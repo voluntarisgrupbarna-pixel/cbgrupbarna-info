@@ -3124,3 +3124,164 @@ contrastar amb aquest document abans de seguir-la. Els tres pendents
 reals de GA4 (rotar la clau, actualitzar `GA4_SERVICE_ACCOUNT_JSON`,
 disparar `analitica.yml`) són als apartats de més amunt, no als d'una
 altra sessió.
+## Dues correccions de seguretat i privacitat (28/08/2026)
+
+D'una auditoria tècnica ràpida (arquitectura, seguretat, rendiment). Els dos
+punts amb impacte real i arreglo barat s'han fet al moment; la resta queda
+llistat més avall com a pendent, per prioritat.
+
+### ✅ Fet
+
+**1. El xat Tawk.to, eliminat del tot (no només gatejat).**
+El `<script>` d'`embed.tawk.to` estava enganxat literalment, sense passar
+per `js/galetes.js`, a **379 pàgines HTML** (probablement d'un enganxat
+manual d'una tanda antiga, no d'un generador — no hi ha cap script que
+l'escrigui). Posava galetes de tercers abans que ningú acceptés res,
+inconsistent amb com ja es tracta Google Analytics.
+
+Decisió de l'Ana: en lloc de gatejar-lo darrere el consentiment, **treure'l
+del tot** i concentrar el xat en WhatsApp, que és per on respon de veritat
+la persona. S'ha tret l'`<script>` literal de les 379 pàgines (reemplaç
+mecànic, text idèntic a totes) i `js/galetes.js` es queda exactament com
+estava (Analytics, res més) — no calia tocar-lo ni pujar la versió del
+consentiment, perquè no hi ha cap finalitat nova a declarar.
+
+**2. El botó de WhatsApp, ara amb formulari i doble via de contacte.**
+Abans (`js/xat-whatsapp.js`) era només un llançador rodó amb 4 temes que
+obrien WhatsApp amb un missatge fix — discret i sense recollir cap dada.
+Ara:
+
+- **Es veu més**: el botó és una píndola amb icona + text («Contacta'ns» /
+  «Contáctanos» / «Contact us», segons idioma), no només una icona rodona, i
+  fa un petit rebot 1,2 s després de carregar la pàgina perquè no passi
+  desapercebut.
+- **Demana nom, telèfon, tema i missatge** abans d'obrir WhatsApp, amb la
+  seva pròpia casella de consentiment (enllaça a la política de privacitat,
+  igual que la resta de formularis del web — aquest consentiment és propi
+  del formulari, no té a veure amb el banner de galetes).
+- **En enviar-lo, arriba per dues vies**: (a) es desa a un Google Sheet i
+  arriba un correu a l'Ana, via un Apps Script fet expressament — codi i
+  passos de desplegament a **`FORMULARI-CONTACTE-WHATSAPP.md`**; (b) **sempre**,
+  encara que el pas (a) falli o no s'hagi desplegat, s'obre WhatsApp en una
+  pestanya nova amb el mateix missatge ja escrit — el full de càlcul mai
+  bloqueja el contacte real.
+
+**Pendent, no fet avui (cal accés al compte de Google del club):** desplegar
+l'Apps Script i enganxar la URL a `SHEETS_ENDPOINT` a dalt de
+`js/xat-whatsapp.js` — tots els passos, amb el codi a copiar i enganxar,
+són a `FORMULARI-CONTACTE-WHATSAPP.md`. Fins que no es faci, el formulari
+ja funciona (WhatsApp s'obre igual), només que sense la còpia al full de
+càlcul ni el correu.
+
+**3. Contrasenya de `/admin/` renovada.**
+`scripts/admin-gate.js` protegia el panell amb un SHA-256 **sense sal ni
+iteracions** d'una contrasenya, guardat en clar en un fitxer públic del
+repositori — atacable offline amb GPU si la contrasenya no és prou llarga.
+Si es recuperés, també obriria el vault xifrat del token de GitHub
+(`admin/token.html`, AES-GCM/PBKDF2 210k iteracions) perquè aquest xifrat és
+tan fort com la contrasenya que el protegeix, i un atacant que ja la sap no
+necessita trencar les iteracions.
+
+S'ha generat una contrasenya nova de 24 caràcters aleatoris i s'ha
+substituït el `PASS_HASH`. **La contrasenya nova s'ha donat a l'Ana pel
+xat, no queda escrita enlloc del repositori** (mai ho ha d'estar: qui
+llegeixi aquest fitxer llegiria el que calia hackejar-la). Com que encara
+no hi havia cap `admin/token.enc.json` pujat, no calia re-xifrar res — el
+primer que entri el token a `/admin/token.html` amb la contrasenya nova
+crea el vault de zero.
+
+**Pendent, no fet avui:** guardar aquesta contrasenya nova en un gestor de
+contrasenyes del club (no només en la memòria de qui l'ha rebuda), i si mai
+es refà l'arquitectura de `/admin/`, moure aquest control a un servidor
+petit (p. ex. Cloudflare Worker) que apliqui límit d'intents, en lloc d'un
+hash estàtic i públic — la limitació de fons (autenticació sense backend en
+un lloc 100% estàtic) es queda igual mentre no hi hagi res que respongui
+peticions.
+
+### Pendent de la mateixa auditoria, per prioritat
+
+1. **Dependabot/Renovate a `galeria/`** — és l'única app amb dependències
+   de veritat (Next 14, Supabase, React) i ningú avisa de CVEs.
+2. **`update-partits.yml` sense avís de fallada** — el robot més crític
+   (corre diverses vegades al dia) no notifica si la FCBQ canvia de format
+   i comença a fallar en silenci. Només 6 dels 12 workflows avisen en cas
+   d'error.
+3. **`tests/` (Playwright: `audit-browser.mjs`, `audit-seo-geo.mjs`,
+   `screenshots.mjs`) no està enganxat a cap workflow** — només corre si
+   algú se'n recorda a mà.
+4. **`cerca-index.json` (745 KB) es precarrega sencer** a `/cerca/`,
+   `/es/busqueda/` i `/en/search/` amb `<link rel="preload" as="fetch">` —
+   pes innecessari per a qui no fa servir el cercador a la primera visita.
+5. **Sense Lighthouse CI** — `pes-pressupost.yml` vigila mida de fitxer,
+   no LCP/CLS/INP reals en cada pull request.
+6. **Backup del repositori manual** — el mirall incremental (§9 de la
+   skill `mapa-web-cbgb`) no té cap `cron` que el faci sol.
+
+---
+
+## Els 6 punts pendents de l'auditoria, fets (28/08/2026, tarda)
+
+Resposta de l'Ana a la llista de dalt, punt per punt.
+
+**1. Límit d'intents a `/admin/`, amb un Cloudflare Worker gratuït.**
+Comprovat: Cloudflare Workers és gratuït fins a 100.000 peticions/dia i
+Workers KV fins a 100.000 lectures + 1.000 escriptures/dia — molt per sobre
+del que farà servir mai un club de barri. Codi i instruccions a
+`workers/admin-gate/` (`worker.js`, `wrangler.toml`, `README.md`, mateix
+patró que `workers/fotos-upload/`, que el club ja fa servir per a R2).
+`scripts/admin-gate.js` ja porta el camp `GATE_ENDPOINT`: buit, tot segueix
+igual que fins ara; un cop desplegat el Worker (3 comandes `wrangler`, amb
+els passos exactes al README), s'hi enganxa la URL i la porta comença a
+bloquejar després de 8 intents fallits en 15 minuts des de la mateixa IP.
+**Pendent (cal el compte de Cloudflare del club):** desplegar-lo — són 3
+comandes, veure `workers/admin-gate/README.md`. El README també explica
+sincerament el que això NO arregla del tot (el hash local segueix sent el
+pla B si el Worker cau; qui llegeixi el codi encara pot intentar-ho offline
+contra aquell hash, no contra el Worker).
+
+**3. Dependabot afegit** — `.github/dependabot.yml`, `npm` per `galeria/` i
+`github-actions` per als workflows, revisió setmanal. Natiu de GitHub,
+gratuït, sense res a desplegar.
+
+**4. `cerca-index.json` ja no es precarrega** — tret el
+`<link rel="preload" as="fetch">` de `/cerca/`, `/es/busqueda/` i
+`/en/search/`. El cercador el continua baixant igual de de pressa (el crida
+`js/cerca.js` en iniciar la pàgina), però ara amb prioritat normal, sense
+competir per l'ample de banda amb els recursos crítics de la primera
+pintada.
+
+**5. Lighthouse CI afegit** — `.github/workflows/lighthouse.yml` +
+`.github/lighthouserc.json`, sobre portada, `/partits/`, `/campus/`,
+`/escoleta/` i `/blog/` a cada pull request. Accessibilitat i SEO
+bloquegen (mínim 0,9); rendiment només avisa (mínim 0,8, sense bloquejar)
+perquè els runners compartits de GitHub no donen un rendiment prou
+constant per fer-lo una barrera dura.
+
+**6. `tests/` enganxat a CI** — `.github/workflows/tests-web.yml` corre
+`audit-seo-geo.mjs` + `audit-browser.mjs` a cada pull request (i cada
+dilluns, per si un enllaç extern ha caigut sol sense cap canvi de codi),
+deixa l'informe com a comentari a la proposta de canvi (mateix mecanisme de
+`<!-- marca -->` que ja fa servir `i18n-paritat.yml`) i com a fitxer
+descarregable. No fa fallar la PR: aquestes eines són auditories, no
+comprovacions estrictes com `a11y-revisa.py`.
+
+**7. Avís de fallada als robots programats — arreglat, i corregit el
+diagnòstic.** Revisant-ho de debò (no per una paraula que hi sortia de
+casualitat), **cap** dels 12 workflows avisava de res en fallar — la xifra
+de «6 de 12» de l'auditoria original eren falsos positius (coincidències
+amb «mail» dins d'una adreça de `git config`). Ara els 5 que corren sols
+per `cron` (`analitica.yml`, `build-gallery-images.yml`,
+`sync-r2-uploads.yml`, `sync-r2.yml`, `update-partits.yml`) obren un issue
+etiquetat `robot-caigut` si fallen (un de sol per robot, que es va
+actualitzant amb un comentari si torna a fallar) i el tanquen sols quan
+torna a anar bé. Els workflows que ja corren enganxats a un `push`/PR no
+s'han tocat: allà ja hi ha algú mirant la pantalla en aquell moment.
+
+**8. Backup automatitzat.** `.github/workflows/backup-mirror.yml`
+substitueix el procediment manual de `mapa-web-cbgb` §9: cada nit fa un
+`git push` incremental cap a un repositori de backup. **Pendent (cal donar
+d'alta 2 secrets un sol cop, 10 minuts):** passos exactes a
+`BACKUP-REPOSITORI.md` (crear el repositori de backup si no existeix ja,
+crear un token limitat a aquell repositori, i donar d'alta
+`BACKUP_REPO_URL` i `BACKUP_REPO_TOKEN`). Fins que no es faci, el workflow
+ho diu (`::notice::`) i surt en verd sense fer res — no és un error.
