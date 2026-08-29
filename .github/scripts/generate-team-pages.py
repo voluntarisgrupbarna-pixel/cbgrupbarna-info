@@ -22,6 +22,7 @@ import importlib.util
 import json
 import re
 import sys
+import unicodedata
 from datetime import date
 from pathlib import Path
 
@@ -166,6 +167,35 @@ def esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
+ESCUTS_FILE = ROOT / "partits" / "escuts.json"
+try:
+    ESCUTS = {k: v for k, v in json.loads(ESCUTS_FILE.read_text(encoding="utf-8")).items()
+              if not k.startswith("_")}
+except Exception:
+    ESCUTS = {}
+
+
+def norm_nom(s):
+    s = unicodedata.normalize("NFD", s or "")
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn").upper()
+    return re.sub(r"[^A-Z0-9]+", " ", s).strip()
+
+
+def escut(nom):
+    """Escut del club: el propi surt de /logo.png, els rivals de partits/escuts.json
+    i, mentre no hi siguin, un escut d'inicials perquè cada partit porti els dos."""
+    if re.search(r"GRUP\s*BARNA", nom or "", re.I):
+        return ('<span class="esc propi"><img src="/logo.png" alt="" width="22" height="22" '
+                'loading="lazy" decoding="async"></span>')
+    fitxer = ESCUTS.get(norm_nom(nom))
+    if fitxer:
+        return (f'<span class="esc"><img src="{esc(fitxer)}" alt="" width="22" height="22" '
+                'loading="lazy" decoding="async"></span>')
+    mots = [m for m in norm_nom(nom).split(" ") if len(m) > 1]
+    iniciales = "".join(m[0] for m in mots[:2]) or "?"
+    return f'<span class="esc ini" aria-hidden="true">{esc(iniciales)}</span>'
+
+
 def categoria_de(nom):
     for c in CATEGORIES:
         if (nom or "").startswith(c):
@@ -239,7 +269,8 @@ def match_line(p, eq_nom, idioma):
         com = t["victoria"] if r == "W" else t["derrota"] if r == "L" else t["empat"]
         resultat_txt = f" · <strong>{p['puntsLocal']}-{p['puntsVisitant']}</strong> ({com})"
     return (f"<li>{fmt_dia(p['data'], idioma)}, {esc(p['hora'])} — "
-            f"{esc(p['local'])} vs {esc(p['visitant'])} · {esc(p.get('pista', ''))}{resultat_txt}</li>")
+            f"{escut(p['local'])} {esc(p['local'])} vs {escut(p['visitant'])} {esc(p['visitant'])}"
+            f" · {esc(p.get('pista', ''))}{resultat_txt}</li>")
 
 
 def team_page(e, data, avui, idioma):

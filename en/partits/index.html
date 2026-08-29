@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calendar · match days and fixtures · CB Grup Barna</title>
+<title>Calendar · games and results · CB Grup Barna</title>
 <meta name="description" content="CB Grup Barna match days: fixtures and results for every federated team, updated daily from the Catalan Basketball Federation.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/logo.png">
@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="CB Grup Barna">
 <meta property="og:locale" content="en_GB">
 <meta property="og:url" content="https://cbgrupbarna.info/en/partits/">
-<meta property="og:title" content="Calendar · match days and fixtures · CB Grup Barna">
+<meta property="og:title" content="Calendar · games and results · CB Grup Barna">
 <meta property="og:description" content="CB Grup Barna match days: fixtures and results for every federated team, updated daily from the Catalan Basketball Federation.">
 <meta property="og:image" content="https://cbgrupbarna.info/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -43,6 +43,12 @@
   .mrow .on { text-align: right; }
   .chip { display: inline-block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--line); padding: 4px 10px; white-space: nowrap; }
   .chip.casa { border-color: rgba(226,6,19,0.4); color: var(--red-dark); }
+  .esc { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #fff; border: 1px solid var(--line); }
+  .esc img { width: 100%; height: 100%; object-fit: contain; }
+  .esc.ini { font-family: var(--display); font-weight: 400; font-size: 8.5px; letter-spacing: 0.04em; color: #6B6560; background: var(--paper); }
+  .esc.propi { border-color: rgba(226,6,19,0.35); }
+  .mrow .qui span.parella { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+  .mrow .qui span.parella .sep { color: var(--line); }
   /* Semàntics de resultat: només per dir guanyat o perdut (skill web-cbgb). */
   .marc { font-family: var(--display); font-weight: 400; font-size: 17px; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .marc.win { color: #1B7F4B; }
@@ -115,7 +121,7 @@
   <section class="section" style="padding-bottom:clamp(20px,3vw,36px)">
     <div class="wrap">
       <nav class="crumb" aria-label="Breadcrumb">
-        <a href="/en/">Home</a> · Match days
+        <a href="/en/">Home</a> · Calendar
       </nav>
       <div class="phead" style="padding-bottom:0">
         <p class="eyebrow red">2026-2027 season · #SomClot</p>
@@ -401,6 +407,35 @@
     return da.getDate() + ' ' + MESOS[da.getMonth()] + ' and ' + db.getDate() + ' ' + MESOS[db.getMonth()];
   }
 
+  /* Escuts · el del club surt de /logo.png; els rivals, de partits/escuts.json
+     (mapa nom normalitzat -> fitxer). Mentre un rival no hi sigui, es pinta un
+     escut amb les seves inicials, de manera que la fila sempre porta els dos. */
+  var ESCUTS = {};
+  var ES_BARNA = /GRUP\s*BARNA/i;
+
+  function normNom(s) {
+    return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim();
+  }
+  function inicials(nom) {
+    var mots = normNom(nom).split(' ').filter(function (m) { return m.length > 1; });
+    return mots.slice(0, 2).map(function (m) { return m[0]; }).join('') || '?';
+  }
+  function escut(nom) {
+    if (ES_BARNA.test(nom || '')) {
+      return '<span class="esc propi"><img src="/logo.png" alt="" width="22" height="22" loading="lazy" decoding="async"></span>';
+    }
+    var fitxer = ESCUTS[normNom(nom)];
+    if (fitxer) {
+      return '<span class="esc"><img src="' + esc(fitxer) + '" alt="" width="22" height="22" loading="lazy" decoding="async"></span>';
+    }
+    return '<span class="esc ini" aria-hidden="true">' + esc(inicials(nom)) + '</span>';
+  }
+  function parella(p) {
+    return '<span class="parella">' + escut(p.local) + esc(p.local) +
+      '<span class="sep">-</span>' + escut(p.visitant) + esc(p.visitant) + '</span>';
+  }
+
   function filaJornada(p, nomEquip) {
     var lloc = p.casa
       ? '<span class="chip casa">Home</span>'
@@ -409,7 +444,7 @@
     return '<div class="mrow">' +
       '<div class="hora">' + esc(p.hora) + '</div>' +
       '<div class="qui"><b>' + esc(nomEquip) + '</b>' +
-      '<span>' + esc(p.local) + ' — ' + esc(p.visitant) + '</span>' + pista + '</div>' +
+      parella(p) + pista + '</div>' +
       '<div class="on">' + lloc + '</div>' +
       '</div>';
   }
@@ -418,7 +453,7 @@
     var html = '<div class="mrow">' +
       '<div class="hora">' + esc(p.hora) + '</div>' +
       '<div class="qui"><b>' + esc(nomEquip) + '</b>' +
-      '<span>' + esc(p.local) + ' — ' + esc(p.visitant) + '</span></div>';
+      parella(p) + '</div>';
     if (p.puntsLocal != null && p.puntsVisitant != null) {
       var nostres = p.casa ? p.puntsLocal : p.puntsVisitant;
       var seus = p.casa ? p.puntsVisitant : p.puntsLocal;
@@ -507,7 +542,7 @@
             '<div class="dia">' + diaCurt(p.data) + '</div>' +
             '<div class="hora">' + esc(p.hora) + '</div>' +
             '<div class="qui"><b>' + esc(equips[p.equipId]) + '</b>' +
-            '<span>' + (p.casa ? 'Home vs ' : 'Away at ') + esc(rival) + '</span>' +
+            '<span class="parella">' + (p.casa ? 'Home vs ' : 'Away at ') + escut(rival) + esc(rival) + '</span>' +
             (p.pista ? '<small>' + esc(p.pista) + '</small>' : '') + '</div>' +
             '</div>';
         }).join('') +
@@ -515,7 +550,12 @@
     }).join('');
   }
 
-  fetch('/partits/data.json')
+  fetch('/partits/escuts.json')
+    .then(function (r) { return r.ok ? r.json() : {}; })
+    .catch(function () { return {}; })
+    .then(function (m) { ESCUTS = m || {}; })
+    .catch(function () {})
+    .then(function () { return fetch('/partits/data.json'); })
     .then(function (r) { return r.json(); })
     .then(render)
     .catch(function () {

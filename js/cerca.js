@@ -329,13 +329,13 @@
 
   /* Suggeriments de l'estat buit: les portes d'entrada reals. */
   var SUGGERIMENTS = {
-    ca: [['Escoleta 4-8 anys', '/escoleta/'], ['Dies de partit', '/partits/calendaris/'],
+    ca: [['Escoleta 4-8 anys', '/escoleta/'], ['Calendari', '/partits/calendaris/'],
          ['Els equips', '/partits/equips/'], ['Campus', '/campus/'],
          ['Bàsquet femení', '/femeni/'], ['Preguntes freqüents', '/faq/']],
-    es: [['Escoleta 4-8 años', '/es/escoleta/'], ['Días de partido', '/partits/calendaris/'],
+    es: [['Escoleta 4-8 años', '/es/escoleta/'], ['Calendario', '/partits/calendaris/'],
          ['Los equipos', '/partits/equips/'], ['Campus', '/es/campus/'],
          ['Baloncesto femenino', '/femeni/'], ['Preguntas frecuentes', '/es/faq/']],
-    en: [['Escoleta, ages 4-8', '/en/escoleta/'], ['Match days', '/partits/calendaris/'],
+    en: [['Escoleta, ages 4-8', '/en/escoleta/'], ['Calendar', '/partits/calendaris/'],
          ['The teams', '/partits/equips/'], ['Camps', '/en/campus/'],
          ["Women's basketball", '/femeni/'], ['FAQ', '/en/faq/']]
   }[lang];
