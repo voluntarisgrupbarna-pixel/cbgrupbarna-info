@@ -3331,3 +3331,46 @@ d'alta 2 secrets un sol cop, 10 minuts):** passos exactes a
 crear un token limitat a aquell repositori, i donar d'alta
 `BACKUP_REPO_URL` i `BACKUP_REPO_TOKEN`). Fins que no es faci, el workflow
 ho diu (`::notice::`) i surt en verd sense fer res — no és un error.
+---
+
+## 24-08-2026 — Campus: publicat, dues coses pendents fora del repositori
+
+El PR #66 (comparativa de campus de Barcelona, landing de Nadal, secció
+d'estrelles del campus amb Ainhoa López / Robert Willet / Malak Shady, i el
+pla d'autoritat externa) ja està **fusionat a `main` i en producció**.
+Documents de referència al repositori: `POSICIONAMENT-CAMPUS-SEO.md`,
+`CAMPUS-FITXA-GOOGLE-I-AGENDES.md`, `AUTORITAT-EXTERNA-CAMPUS.md` i
+`autoritat-externa-targets.csv`.
+
+### Pendent 1 · dates i preu del campus de Nadal (octubre)
+
+`/campus-nadal-basquet-barcelona/` i `/es/campus-navidad-baloncesto-barcelona/`
+són vives però sense dates. Quan l'Ana les confirmi, a l'octubre:
+
+1. Omplir dates i preu al `<h2>Dates, horaris i preu</h2>` de les dues pàgines.
+2. Enganxar el node `Event` del schema (plantilla llesta a
+   `POSICIONAMENT-CAMPUS-SEO.md`, secció "Campus de Nadal · pla per a
+   l'octubre") dins del `@graph` de cada pàgina.
+3. Actualitzar `lastmod` de les dues URL al `sitemap.xml`.
+4. Enviar els correus a agendes/federació/premsa (plantilles a
+   `CAMPUS-FITXA-GOOGLE-I-AGENDES.md`, secció 5).
+
+### Pendent 2 · autoritat externa (fora del repositori, no és codi)
+
+`autoritat-externa-targets.csv` porta 43 targets en sis onades. Estat actual:
+
+- **Globasket** i **Centre Bac de Roda**: renovats — demanar l'enllaç des de
+  la seva web dins de l'onboarding de renovació.
+- **Nova Farmàcia del Clot**: signat, arrencada del projecte la setmana
+  vinent — entra amb menció des del primer dia.
+- **Resta de partners (20)**: pendents, missatge tipus a
+  `AUTORITAT-EXTERNA-CAMPUS.md` (onada 1).
+- **Fitxa de Google Business Profile**: encara sense tocar — descripcions,
+  categories, serveis i sis preguntes precarregades ja redactades a
+  `CAMPUS-FITXA-GOOGLE-I-AGENDES.md`, llestes per copiar.
+- **Institucional/federatiu, premsa de barri, Wikidata, ex-jugadors**: cap
+  onada iniciada encara.
+
+Aquesta segona part no és feina de repositori: és gestió (WhatsApp, correu,
+trucades). El CSV és el full de seguiment; s'actualitza a mà quan hi hagi
+resposta.
