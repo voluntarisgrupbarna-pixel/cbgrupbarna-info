@@ -148,3 +148,14 @@ Si la propuesta no supera 3 de los 5 filtros, reformular antes de entregar.
 ## Recordatorio identitario
 
 CB Grup Barna es el **club de baloncesto más grande de Barcelona**, con **+450 familias**, paridad real masculina/femenina (incluida sección LF2), y se gestiona como **marca + comunidad + ecosistema**, no como entidad deportiva pequeña. Toda recomendación debe estar a la altura de ese tamaño y ambición.
+
+## ⛔ Regla transversal — cartela de partners en todo vídeo
+
+Toda pieza de vídeo del club (reel, highlight, recap, presentación, teaser,
+cobertura de evento) **cierra con la cartela de partners** de
+**`partners-outro-cbgb`**: todos los partners + institucionales, 3 s, 9:16.
+
+Es una regla de **contraprestación**, no de diseño: alimenta directamente la
+renovación de sponsors (`patrocinis-club`) y el informe de retorno. Se aplica en
+todos los flujos integrados de arriba — cubrir un partido, presentar un fichaje,
+lanzar un evento o campus, captar o renovar un sponsor.
