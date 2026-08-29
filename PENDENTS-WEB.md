@@ -2169,3 +2169,45 @@ d'una auditoria d'accessibilitat, i es queda fora.
   `npm install`), amb temps per provar que no trenca res.
 - **Configurar ESLint a `galeria/`** (`next lint` no té config i demana
   triar-ne una).
+
+---
+
+## 29-08-2026 · `/campus/enllacos/` — tot el rastre del campus en una pàgina
+
+Fet i publicat (PR #115): `/campus/enllacos/`, `/es/campus/enlaces/` i
+`/en/campus/links/`, amb els **vint vídeos del campus incrustats** —els setze
+de les estrelles en els tres grups de sempre i les quatre convocatòries
+d'edició—, la taula de totes les pàgines del campus en els tres idiomes i els
+dos articles del blog. Enllaçada des de les tres `/campus/`, i amb
+`i18n/routes.yml`, `sitemap.xml` i `cerca-index.json` al dia.
+
+Es genera amb `scripts/build-campus-enllacos.py`, que **importa** les taules de
+vídeos de `build-campus-estrelles.py` en comptes de copiar-les, i llegeix la
+capçalera i el peu de les pàgines de Setmana Santa: no hi ha cap tercera còpia
+del menú ni de la llista d'estrelles per mantenir.
+
+### El que queda obert
+
+- **Els vídeos es carreguen al clic, no sols.** És la mateixa decisió que a
+  `/campus/` —fins que algú no en vol veure un, no es demana res a Instagram—
+  i evita vint iframes de tercers en una sola pàgina. Si es vol que es
+  carreguin sols, és un canvi de tres línies al generador, però llavors la
+  pàgina passa a fer vint peticions a Instagram en obrir-se. **Decisió de
+  l'Ana.**
+- **La fila «Comparativa de campus de Barcelona» de la taula.** El mateix dia
+  es va fusionar `8a90c12`, que reposiciona
+  `/campus-basquet-barcelona/` com a tecnificació d'alt rendiment. Si la pàgina
+  ja no es diu ni es ven com una comparativa, cal canviar-ne el text a
+  `PAGINES` dins `scripts/build-campus-enllacos.py` i tornar a executar-lo:
+  ara mateix la taula la segueix presentant com a comparativa.
+- **Falta `i18n/feina/es/campus-nadal-basquet-barcelona.json`.** L'anglès el té
+  i el castellà no, tot i que `/es/campus-navidad-baloncesto-barcelona/` està
+  publicada: el dia que es torni a muntar aquella pàgina des del català, la
+  traducció castellana no tindrà d'on sortir.
+- **`data.json`, bloc `campus`: les places no quadren.** `limitPerWeek` diu 50
+  i quatre de les sis setmanes hi consten amb 54, 55, 58 i 60 inscrits. O el
+  límit real no és 50, o les xifres són d'una altra cosa. Cal confirmar-ho amb
+  l'Ana abans que aquestes dades acabin en una pàgina que les mostri.
+- **No és al mapa ≡**, i és a propòsit: l'arbre de `scripts/build-mapa.py` és
+  una tria de pàgines principals i cap subpàgina del campus (Setmana Santa,
+  Nadal) hi surt. Si algun dia s'hi posen, aquesta hi va amb elles.
