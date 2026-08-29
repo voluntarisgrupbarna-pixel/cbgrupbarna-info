@@ -2375,40 +2375,51 @@ document publicat. Tots es recullen ara aquí, amb la seva procedència.
 
 ---
 
-## 1. Feina escrita que NO és a `main` · 8 propostes obertes
+## 1. Feina escrita que NO era a `main` · fusionada el 29/08/2026 (tarda)
 
-Cap d'aquestes s'ha fusionat. Són pendents de decisió (fusionar, refer o tancar), no
-de programar.
+**Actualització del mateix dia:** totes les branques d'aquesta llista ja s'han fusionat
+a la branca de recapitulació, comprovades amb `i18n-lint.py` (0 errors nous),
+`i18n-paritat.py` (155 pàgines, cap endarrerida), `i18n-contingut.py` (cap avís),
+`a11y-revisa.py` (489 pàgines, 0 amb res a mirar) i validació de tots els blocs
+JSON-LD del lloc (0 trencats). Queda pendent que algú amb permisos obri la
+pull request cap a `main` i la revisi — el contingut ja no viu només en branques soltes.
 
-| PR | Branca / xat | Què hi ha | Estat real |
+| PR | Branca / xat | Què hi ha | Estat |
 |---|---|---|---|
-| [#113](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/113) | `mobile-optimization` · «Optimització mòbil» | La pestanya d'Admin tapava el commutador d'idioma a mòbil i botons tàctils per sota de la mida AA | Arreglo petit i acotat. **Fusionar** |
-| [#110](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/110) | `posicionamiento-inverso-seo-geo` | Doble flanc a `llms.txt` i `/posicionament/`, article «Com triar un club», `Person` de l'Ana, `VideoObject`/`ImageObject` a les 42 publicacions d'Instagram, 9 pàgines d'àlbum rastrejables + 1.856 imatges al sitemap, `dateModified` sincronitzat a 355 pàgines, neteja de «club de barri», article d'en Robert Willett | És la tanda més gran que queda fora. **Fusionar amb prioritat**; porta una decisió a dins (§2.4) |
-| [#109](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/109) | `club-geo-seo-testing` | FAQ de la Supercopa a les fitxes dels dos Sènior A, FAQ contradictòria corregida, `/seniors/` a `llms.txt`, schema de patrocini a `/patrocinadors/` i `/empreses/` | **Fusionar**. Porta el pendent tècnic urgent del generador d'equips (§2.6) |
-| [#106](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/106) | `ahora-navigation-ux` | `sizes` obsolet que ampliava fotos hero a 3x3, premsa i presentacions; logos de partner nítids | **Fusionar** |
-| [#85](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/85) | `barcelona-basketball-camps` (24/08) | Notes de l'estat del campus (Nadal i autoritat externa) | Del 24/08: la sessió del campus del 29/08 ja el supera. **Revisar i tancar** |
-| [#71](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/71) | `cbgrupbarna-magics-error` (21/08) | Màgics, article de la trobada, neteja d'Escoleta, fix del token d'admin | Anterior a l'estètica definitiva i al panell d'admin actual. **Comprovar què hi queda de viu abans de fusionar res** |
-| [#70](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/70) | `sitemap-indexacion` (21/08) | Redireccions 301 de la web antiga | Lligat a `MIGRACIO-WEB-ANTIGA.md` i al pendent «Migració tancada» de la fase de marca. **Decidir** |
-| [#9](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/9) | `busy-allen` (13/06) | Galeria amb PIN, butlletí, Flickr, admin | De juny. La galeria d'avui (app Next.js + Supabase + R2) no s'assembla a allò. **Tancar-la** si no es rescata res |
+| [#113](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/113) | `mobile-optimization` · «Optimització mòbil» | La pestanya d'Admin tapava el commutador d'idioma a mòbil i botons tàctils per sota de la mida AA | Ja era a `main` (fusionada abans d'aquesta tanda) |
+| [#110](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/110) | `posicionamiento-inverso-seo-geo` | Doble flanc a `llms.txt` i `/posicionament/`, article «Com triar un club», `Person` de l'Ana, `VideoObject`/`ImageObject` a les 42 publicacions d'Instagram, 9 pàgines d'àlbum rastrejables + 1.856 imatges al sitemap, `dateModified` sincronitzat a 355 pàgines, neteja de «club de barri», article d'en Robert Willett | **Fusionada.** Conflictes al blog i al campus resolts a favor del reposicionament del 29/08 (tecnificació d'alt rendiment); manté una decisió pendent a dins (§2.4) |
+| [#109](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/109) | `club-geo-seo-testing` | FAQ de la Supercopa a les fitxes dels dos Sènior A, FAQ contradictòria corregida, `/seniors/` a `llms.txt`, schema de patrocini a `/patrocinadors/` i `/empreses/` | **Fusionada.** Segueix pendent el generador d'equips desfasat (§2.6) |
+| [#106](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/106) | `ahora-navigation-ux` | `sizes` obsolet que ampliava fotos hero a 3x3, premsa i presentacions; logos de partner nítids | **Fusionada** sense conflictes |
+| [#85](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/85) | `barcelona-basketball-camps` (24/08) | Notes de l'estat del campus (Nadal i autoritat externa) | No fusionada: la sessió del campus del 29/08 ja el supera. **Revisar i tancar sense fusionar** |
+| [#71](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/71) | `cbgrupbarna-magics-error` (21/08) | Màgics, article de la trobada, neteja d'Escoleta, fix del token d'admin | No fusionada: anterior a l'estètica definitiva i al panell d'admin actual. **Comprovar què hi queda de viu abans de fusionar res** |
+| [#70](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/70) | `sitemap-indexacion` (21/08) | Redireccions 301 de la web antiga | No fusionada: lligat a `MIGRACIO-WEB-ANTIGA.md` i al pendent «Migració tancada» de la fase de marca. **Decidir** |
+| [#9](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/9) | `busy-allen` (13/06) | Galeria amb PIN, butlletí, Flickr, admin | No fusionada: de juny, la galeria d'avui (app Next.js + Supabase + R2) no s'assembla a allò. **Tancar-la** si no es rescata res |
 
-**A més, feina en branques sense proposta oberta:**
+**Branques sense proposta oberta, també fusionades:**
 
 - `web-technical-architecture` · «Mesures tècniques i arquitectura web» — Dependabot,
   Lighthouse CI, `tests/` enganxat a CI, avís de robots caiguts, backup automàtic,
   Worker de límit d'intents per a `/admin/`, retirada de Tawk.to i formulari al xat de
-  WhatsApp. **És la tanda d'infraestructura més completa que hi ha, i no és a `main`.**
+  WhatsApp.
 - `admin-panel-photo-gallery` — v2.2.0, grups privats amb enllaç propi a la galeria.
 - `cbgrupbarna-technical-audit` — enllaç de revocació de galetes a les 109 pàgines que
   no en tenien i analytics realment gatejat a les 63 pàgines del dossier del Premi.
-- `button-carousel-ui` — secció d'esdeveniments, menú reordenat, moments d'Instagram
-  encastats, escuts dels dos equips a cada partit.
-- `bots-reservas-config` i `chatbot-web-integration` — el xat flotant. **Atenció al
-  conflicte:** una sessió va afegir Tawk.to i dues sessions posteriors el treuen. La
-  decisió vàlida és la darrera (fora Tawk.to, tot per WhatsApp); si es fusionés
-  `chatbot-web-integration` es tornaria a posar.
+- `button-carousel-ui` — secció d'esdeveniments a la portada, menú reordenat, moments
+  d'Instagram encastats, escuts dels dos equips a cada partit.
+- `bots-reservas-config` — retirada del giny de xat Tawk.to i franges de portada
+  desplaçades. **El conflicte del xat ja està resolt**: aquesta branca i
+  `web-technical-architecture` coincideixen a treure Tawk.to del tot (WhatsApp com a
+  únic canal); `chatbot-web-integration`, que l'havia afegit, **no s'ha fusionat** a
+  propòsit perquè el tornaria a posar.
 - `web-positioning-types` — `MISSATGES-PARTNERS-LLESTOS.md`, els missatges llestos per
   demanar enllaç als 22 partners. És l'única peça d'autoritat externa que ja està
   escrita i només cal enviar-la.
+- `formularios-notificaciones-marketing` — altes de la galeria cap a
+  `marqueting@cbgrupbarna.info`.
+- `pendientes-dependencias-fases` — `GOOGLE_CLIENT_ID` del panell d'admin, decisió del
+  butlletí (tot a Sheets) i el bug del workflow d'analítica arreglat.
+- `campus-artefactos` — la mateixa recapitulació de la sessió del campus del 29/08 (el
+  contingut ja hi era, incorporat a `main` pel PR #117).
 
 ---
 
