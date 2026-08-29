@@ -2270,3 +2270,270 @@ https://claude.ai/code/artifact/5f3af974-01e9-423b-9dde-d0604f39365d
   (demanar mencions una per una) i `CAMPUS-FITXA-GOOGLE-I-AGENDES.md` (alta a la
   fitxa de Google i a les agendes) són feina de fora del web que segueix sense
   fer. El web ja està a l'altura; això no.
+
+---
+
+# Recapitulació de tots els xats del projecte · 29/08/2026
+
+Encàrrec de l'Ana: «recapitula en tots els xats de cbgrupbarna.info del projecte i
+afegeix tot el pendent a pendents». Repassades **les 51 sessions del compte lligades a
+aquest repositori** (de l'11/06/2026 al 29/08/2026), les **8 propostes de canvi
+obertes** i les branques que cadascuna va deixar enrere.
+
+**Com s'ha fet, i què vol dir això.** No es pot llegir la conversa d'una altra sessió
+des d'aquí: el que sí es pot llegir és el rastre que va deixar cada xat —la seva
+branca, els seus commits i, sobretot, el que va escriure en aquest mateix document.
+D'aquí surt el descobriment important d'aquesta passada: **hi ha sessions senceres
+que van anotar els seus pendents a `PENDENTS-WEB.md` en la seva branca i mai es van
+fusionar**, o sigui que aquells pendents no existien per a ningú que llegís el
+document publicat. Tots es recullen ara aquí, amb la seva procedència.
+
+---
+
+## 1. Feina escrita que NO és a `main` · 8 propostes obertes
+
+Cap d'aquestes s'ha fusionat. Són pendents de decisió (fusionar, refer o tancar), no
+de programar.
+
+| PR | Branca / xat | Què hi ha | Estat real |
+|---|---|---|---|
+| [#113](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/113) | `mobile-optimization` · «Optimització mòbil» | La pestanya d'Admin tapava el commutador d'idioma a mòbil i botons tàctils per sota de la mida AA | Arreglo petit i acotat. **Fusionar** |
+| [#110](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/110) | `posicionamiento-inverso-seo-geo` | Doble flanc a `llms.txt` i `/posicionament/`, article «Com triar un club», `Person` de l'Ana, `VideoObject`/`ImageObject` a les 42 publicacions d'Instagram, 9 pàgines d'àlbum rastrejables + 1.856 imatges al sitemap, `dateModified` sincronitzat a 355 pàgines, neteja de «club de barri», article d'en Robert Willett | És la tanda més gran que queda fora. **Fusionar amb prioritat**; porta una decisió a dins (§2.4) |
+| [#109](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/109) | `club-geo-seo-testing` | FAQ de la Supercopa a les fitxes dels dos Sènior A, FAQ contradictòria corregida, `/seniors/` a `llms.txt`, schema de patrocini a `/patrocinadors/` i `/empreses/` | **Fusionar**. Porta el pendent tècnic urgent del generador d'equips (§2.6) |
+| [#106](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/106) | `ahora-navigation-ux` | `sizes` obsolet que ampliava fotos hero a 3x3, premsa i presentacions; logos de partner nítids | **Fusionar** |
+| [#85](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/85) | `barcelona-basketball-camps` (24/08) | Notes de l'estat del campus (Nadal i autoritat externa) | Del 24/08: la sessió del campus del 29/08 ja el supera. **Revisar i tancar** |
+| [#71](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/71) | `cbgrupbarna-magics-error` (21/08) | Màgics, article de la trobada, neteja d'Escoleta, fix del token d'admin | Anterior a l'estètica definitiva i al panell d'admin actual. **Comprovar què hi queda de viu abans de fusionar res** |
+| [#70](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/70) | `sitemap-indexacion` (21/08) | Redireccions 301 de la web antiga | Lligat a `MIGRACIO-WEB-ANTIGA.md` i al pendent «Migració tancada» de la fase de marca. **Decidir** |
+| [#9](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/9) | `busy-allen` (13/06) | Galeria amb PIN, butlletí, Flickr, admin | De juny. La galeria d'avui (app Next.js + Supabase + R2) no s'assembla a allò. **Tancar-la** si no es rescata res |
+
+**A més, feina en branques sense proposta oberta:**
+
+- `web-technical-architecture` · «Mesures tècniques i arquitectura web» — Dependabot,
+  Lighthouse CI, `tests/` enganxat a CI, avís de robots caiguts, backup automàtic,
+  Worker de límit d'intents per a `/admin/`, retirada de Tawk.to i formulari al xat de
+  WhatsApp. **És la tanda d'infraestructura més completa que hi ha, i no és a `main`.**
+- `admin-panel-photo-gallery` — v2.2.0, grups privats amb enllaç propi a la galeria.
+- `cbgrupbarna-technical-audit` — enllaç de revocació de galetes a les 109 pàgines que
+  no en tenien i analytics realment gatejat a les 63 pàgines del dossier del Premi.
+- `button-carousel-ui` — secció d'esdeveniments, menú reordenat, moments d'Instagram
+  encastats, escuts dels dos equips a cada partit.
+- `bots-reservas-config` i `chatbot-web-integration` — el xat flotant. **Atenció al
+  conflicte:** una sessió va afegir Tawk.to i dues sessions posteriors el treuen. La
+  decisió vàlida és la darrera (fora Tawk.to, tot per WhatsApp); si es fusionés
+  `chatbot-web-integration` es tornaria a posar.
+- `web-positioning-types` — `MISSATGES-PARTNERS-LLESTOS.md`, els missatges llestos per
+  demanar enllaç als 22 partners. És l'única peça d'autoritat externa que ja està
+  escrita i només cal enviar-la.
+
+---
+
+## 2. Pendents que només vivien en branques i fins avui no eren en aquest document
+
+### 2.1 GA4 · l'analítica es va quedar a mig activar (sessió del 28/08, nit)
+
+La propietat correcta és **`534862357`** (`G-R6XYR7G1WF`, coincideix amb `index.html`);
+el service account `ga4-analytics-reader@cb-grup-barna-comms…` ja hi és com a Viewer,
+l'API està activada i el bug del workflow (`git diff` sobre un fitxer no rastrejat, que
+feia que el primer informe no es publiqués mai) està arreglat en aquella branca.
+
+**Cal l'Ana, i és seguretat, no comoditat:**
+
+1. **Rotar la clau del service account.** Durant aquella sessió, editant des de
+   l'editor web de GitHub amb trucs de portapapers, el contingut de la clau privada va
+   quedar exposat. Esborrar la clau vella a Cloud Console i crear-ne una de nova.
+2. **Actualitzar el secret `GA4_SERVICE_ACCOUNT_JSON`** a GitHub amb el `.json` nou,
+   enganxat directament a la interfície de GitHub i sense passar-lo per cap xat ni cap
+   altra eina.
+3. **Disparar `analitica.yml`** a mà i comprovar que `admin/analitica/dades.json` es
+   publica de debò.
+
+> **Norma que en surt:** no s'edita codi des de l'editor web de GitHub amb trucs de
+> consola o de portapapers. Qualsevol edició passa per una sessió amb accés normal al
+> repositori.
+
+### 2.2 Panell d'admin · l'últim pas que falta
+
+El `GOOGLE_CLIENT_ID` ja es va crear («CB Grup Barna Admin») i el correu duplicat
+d'`ALLOWED_EMAILS` es va treure. **Però l'app està en mode «Prova» a la pantalla de
+consentiment d'OAuth**: només hi entren els comptes donats d'alta com a *Test users* a
+Cloud Console → Pantalla de consentiment → Audiència, digui el que digui
+`ALLOWED_EMAILS`. Cal afegir-hi `voluntarisgrupbarna@gmail.com` i
+`marqueting@cbgrupbarna.info`, o el login seguirà bloquejat amb l'avís d'«aplicació no
+verificada».
+
+### 2.3 Dashboard d'analítica · el que falta per fer-lo sencer
+
+Amb els secrets posats, l'informe diari ja donarà visites, 30 pàgines més vistes, fonts
+de trànsit, dispositiu i events. **El que encara no hi serà:**
+
+- **Cap paraula buscada al cercador es guarda avui.** Només hi ha un event pla
+  (`cerca_sense_resposta_enviada`) sense el text. És exactament la dada que diu quines
+  preguntes escriure a `i18n/faq.yml`. Cal decidir si es registra el terme, amb cura
+  (algú pot escriure-hi un nom o un correu).
+- **`cta_click` per `cta_id`** no es pot llegir fins que es registri com a **dimensió
+  personalitzada** a GA4 Admin — pas manual a Analytics, no codi.
+- **`js/newsletter.js` i `js/bustia.js` no envien cap event**: aquelles dues altes no
+  es veuran mai al panell, només a la full de càlcul.
+- **Descàrregues de `.ics` per equip:** cap event.
+- **Decisió:** GA4 és aproximat (bloquejadors, consentiment); la full de càlcul és el
+  número real. Proposta: GA4 per a la tendència, la full com a font oficial.
+
+### 2.4 SEO/GEO · el que va quedar obert a la tanda de posicionament (PR #110)
+
+- **Viquipèdia:** el CB Roser en té fitxa i el Barna no, i és una de les fonts amb més
+  pes per als models de llenguatge. **No s'ha de crear des d'un compte del club**:
+  cal algú sense conflicte d'interès, o declarar-lo obertament a la pàgina de
+  discussió. L'article de la *Guia Clot · Camp de l'Arpa* ja serviria de font
+  secundària.
+- **Cinc articles del blog en anglès no porten cap bloc JSON-LD**
+  (`a-quina-edat-comencar-basquet`, `com-triar-escola-basquet-barcelona`,
+  `campus-basquet-barcelona-guia`, `basquet-base-sant-marti-clot`, `que-es-basquet-3x3`),
+  a diferència de les seves versions catalana i castellana. Cal donar-los
+  `BlogPosting` + `BreadcrumbList` seguint el patró del català.
+- **`/premsa/moments/` (35 publicacions) es queda sense schema:** té una estructura
+  diferent de la graella `.igx` i necessitaria un extractor propi.
+- **Decisió de l'Ana:** les 9 pàgines d'àlbum noves **no porten el formulari de correu**
+  que sí que hi ha a `/fotos/`. És el preu perquè les fotos siguin trobables per cerca,
+  però qui hi arribi des de Google veurà l'àlbum sencer sense deixar cap contacte.
+- **Revisió setmanal de posicionament**, a mà (es va decidir expressament no
+  automatitzar-la): campus, escola, club, tecnificació, 3x3 i comparativa amb el Barça.
+  Hi ha una comprovació puntual programada per al **12/09/2026** contra el baseline de
+  Search Console.
+- **Tornar a preguntar a Gemini/ChatGPT/Perplexity d'aquí a unes setmanes**: la neteja
+  de «club de barri» com a autodescripció ja està feta, però no hi ha manera de forçar
+  que un motor generatiu reclassifiqui el club; només es pot mirar si ha canviat.
+- **Tres afirmacions competitives esperant font de l'Ana**, no publicades: que ITW Sport
+  no té entrenadors NBA, que cap dels campus comparats és paritari, i que l'únic altre
+  campus amb entrenadors de pes és la Pau Gasol Academy. Són afirmacions negatives
+  sobre competidors concrets: sense font no es publiquen.
+
+### 2.5 Dues xifres que no quadren
+
+- **22 o 23 partners.** `data.json` (`xifres.partners`, la font de veritat) diu **22**;
+  `i18n/faq.yml` diu **23** en tres respostes publicades. O falta una fitxa al llistat o
+  la FAQ arrossega un compte antic.
+- **Places del campus** (ja anotat a la sessió del campus): `limitPerWeek` diu 50 i
+  quatre setmanes hi consten amb 54, 55, 58 i 60.
+
+### 2.6 Pendent tècnic urgent · `generate-team-pages.py` desfasat
+
+Comprovat avui a `main`: el generador de `/partits/equips/*` **no emet l'hreflang, el
+selector d'idioma, `/css/a11y.css` ni `/js/mapa.js`**, que es van afegir a mà a la
+sortida el 25/08. Regenera 45 fitxers (15 equips × 3 idiomes) i els **reverteix**.
+
+**El risc no és teòric:** el robot diari `update-partits.yml` crida aquest generador
+cada vegada que canvien resultats. La propera jornada amb partits jugats, les 45
+pàgines perdran aquelles quatre peces sense que ningú se n'adoni. Cal actualitzar
+`head_html()` i `header_html()` prenent com a referència
+`partits/equips/cadet-femeni-a/index.html`, **abans del 5 de setembre**, que és quan
+comença la competició.
+
+### 2.7 Seguretat i infraestructura (branca `web-technical-architecture`)
+
+- **Desplegar el Worker de `workers/admin-gate/`** (3 comandes `wrangler`, cal el compte
+  de Cloudflare del club) i enganxar la URL a `GATE_ENDPOINT` de
+  `scripts/admin-gate.js`: sense això, la porta d'`/admin/` no té límit d'intents.
+- **Guardar la contrasenya nova d'`/admin/`** (24 caràcters, donada per xat) en un
+  gestor de contrasenyes del club, no només a la memòria de qui la va rebre.
+- **Desplegar l'Apps Script del formulari del xat de WhatsApp** i enganxar la URL a
+  `SHEETS_ENDPOINT` de `js/xat-whatsapp.js` (passos a `FORMULARI-CONTACTE-WHATSAPP.md`).
+  Mentre no es faci, el contacte funciona igual però no queda registrat enlloc.
+- **Dos secrets per al backup automàtic**: `BACKUP_REPO_URL` i `BACKUP_REPO_TOKEN`
+  (passos a `BACKUP-REPOSITORI.md`). El workflow ja hi és i surt en verd sense fer res
+  fins que hi siguin.
+
+### 2.8 Material · el que es va concretar el 28/08 i encara no s'ha aplicat
+
+- **Escoleta:** ja hi ha una **sessió de maig 2026 pujada a l'app `galeria/`** (Supabase,
+  no visible des d'aquest repositori). Les tres portades segueixen servint les 4 fotos
+  de l'àlbum de setembre 2025. Cal **triar les millors preses de maig** i passar-les per
+  `scripts/build-blog-images.py`. És selecció d'imatge, no codi.
+- **Sèniors + La Nau:** la sessió estava prevista per al **31/08–01/09/2026**, combinada
+  amb demanar als jugadors i jugadores fotos de La Nau el mateix dia. Tanca alhora
+  `/jugadors/`, el bloc de sèniors de portada i el material d'`/instal·lacions/`.
+  **Confirmar si es va fer.**
+- **Logos de partner en baixa resolució:** els 22 fitxers de `partners/*.png` fan entre
+  80×80 i 180×80 px (mides de xarxes socials). Cinc es veuen tous a pantalla retina
+  (Armand Òptics, GBK Globabasket, Panteres Grogues, Stepback Podologia, Tot Salut). Cal
+  demanar a cada partner un PNG/SVG transparent de 360 px d'ample com a mínim, 720 px
+  millor.
+- **Les dues fotos del blog amb gra** (`entrenadores-basquet-barcelona-hero`,
+  `campus-basquet-barcelona-guia-hero`): reexportar-les sense gra o triar-ne una altra.
+
+### 2.9 Butlletí · decisió presa que encara no era en aquest document
+
+**Cap eina externa d'enviament** (ni Brevo ni cap altre): tot va a la full de càlcul del
+club, com la resta de formularis. La pàgina de `/newsletter/` deia que s'enviava amb
+Brevo, cosa que mai va ser certa, i es va corregir als tres idiomes. **Queda tancat** el
+pendent «falta triar eina d'enviament». **Queda obert:** l'enviament del correu mensual
+és **manual** des de la full. Si mai es vol automatitzar, la via és Apps Script + Gmail
+des del mateix full, no un ESP.
+
+### 2.10 Quatre idees per pujar de «sense errors» a «referent» (28/08, filtrades)
+
+1. **El cercador que respon → assistent amb memòria de conversa**: que aguanti una
+   segona pregunta («i per a la meva filla de 7 anys?»). Prova: 5 converses de dues
+   preguntes.
+2. **Seguiment automàtic dels leads que no s'han apuntat**: avui qui demana informació i
+   no ve a provar no rep res. Un sol correu automàtic als 5 dies, amb Apps Script +
+   Gmail.
+3. **Fitxa de rendiment per jugador/a** amb les dades que el robot de la FCBQ ja baixa.
+   Prova amb un sol equip sènior.
+4. **«Carnet Barna» digital** (no una app): una pàgina `/carnet/` amb QR i els
+   descomptes dels partners, com a pas mínim entre res i una app nativa.
+
+### 2.11 Avís · una sessió d'IA es va confondre de projecte
+
+El 28/08 una sessió diferent va respondre sobre els secrets de GA4 i el
+`GOOGLE_CLIENT_ID` **creient que treballava a la web de Nova Farmàcia Clot** (un
+partner, no aquest projecte) i va donar instruccions d'anar a buscar un formulari a
+Brevo, contra la decisió ja presa. Qualsevol instrucció sobre credencials,
+`js/canals.js` o el panell d'admin que vingui d'una altra sessió s'ha de contrastar amb
+aquest document abans de seguir-la.
+
+---
+
+## 3. El que ja era en aquest document i segueix obert
+
+No es repeteix el detall; cada punt té la seva secció més amunt.
+
+**Material de l'Ana:** sessió de fotos de l'Escoleta (la més antiga de tot el tauler,
+ara parcialment desbloquejada per la sessió de maig), fotos de La Nau, plantilla de
+`/jugadors/`, galeries de `/fotos-esdeveniments/` que falten, logo de la Wilson,
+Instagram de 6 partners, fitxes de Nova Farmàcia Clot i Clínica Dental 26, Willy
+Hernangómez a l'Escoleta, els tres àudios de `/premidonaesport/patrocinis/`.
+
+**Decisions de l'Ana:** què són exactament «Tecnificació» i «Notícies» (van quedar
+buides al menú del 18/08 i el benchmark amb els tres grans les torna a demanar),
+`/premsa/moments/` en castellà i anglès, `/briefing/` per a la 26-27, el PIN «1965» en
+clar del dossier del Premi, si la norma de «cap preu al web» abasta també el campus,
+nom canònic del blog (Observatori Barna / Coneixement Barna), amb qui queda vinculada
+la propietat de Search Console, si els vídeos de `/campus/enllacos/` s'han de carregar
+sols.
+
+**Desenvolupament:** posar `scripts/build-pages.py` (`ARTICLES`) al dia amb el text
+publicat i separar-ne el `FAQPage`; actualitzar `next` a `galeria/` (vulnerabilitat
+coneguda) i configurar-hi ESLint; `/empreses/` en castellà i anglès; La Nau del Clot
+com a actiu de marca; Barna Media; migració del que queda a `cbgrupbarna.com/noticies/`;
+text alternatiu foto a foto de la galeria; formulari propi de `/campus/`;
+`i18n/feina/es/campus-nadal-basquet-barcelona.json`, que falta; la fila «Comparativa» de
+`/campus/enllacos/`, que ja no descriu la pàgina; `AUTORITAT-EXTERNA-CAMPUS.md` i
+`CAMPUS-FITXA-GOOGLE-I-AGENDES.md`, que segueixen sense executar-se.
+
+**Prova imprescindible abans del 5 de setembre:** hi ha 274 partits carregats i cap
+resultat. Cal comprovar amb un partit jugat de debò que el robot de la FCBQ, les fitxes
+descarregables, els 16 `.ics` i el cartell del cap de setmana funcionen — i fer-ho
+**després** d'arreglar `generate-team-pages.py` (§2.6), que és el mateix robot.
+
+---
+
+## 4. Si només es fan cinc coses, aquestes
+
+1. **`generate-team-pages.py`** (§2.6) — té data límit real i es regressa sol.
+2. **Rotar la clau de GA4** (§2.1) — és una credencial exposada.
+3. **Fusionar o tancar les 8 propostes obertes** (§1) — hi ha setmanes de feina bona
+   escrita que avui no és publicada, i com més temps passa, més cara és cada fusió.
+4. **Els *test users* d'OAuth** (§2.2) — dos minuts, i desbloqueja el panell d'admin
+   sencer.
+5. **Confirmar la sessió de fotos del 31/08–01/09** (§2.8) — desbloqueja `/jugadors/`,
+   el bloc de sèniors i `/instal·lacions/` de cop.
