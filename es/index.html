@@ -426,7 +426,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
 /* ==== TICKER ==== */
-.ticker { position: relative; z-index: 120; height: 32px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
+.ticker { position: relative; z-index: 120; height: 46px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
 .tk-lab {
   flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px); background: var(--red); color: #fff;
   display: flex; align-items: center; gap: 9px;
@@ -437,7 +437,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
 .tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
-.tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.tk-it { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ==== EL GROC, AMB REGLA ====
@@ -841,7 +841,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 @media (max-width: 480px) { .head-brand span { display: none; } }
 
 </style>
-<script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script><script type="text/javascript">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/6a9197107f2d2f343fa7fabd/1k14bc6i0';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script>
+<script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <link rel="stylesheet" href="/css/cerca.css">
 <link rel="stylesheet" href="/css/a11y.css">
 </head>
@@ -936,14 +936,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">De 4 a 8 años. Por donde empieza todo el mundo, sin saber nada.</span></span>
       <span class="franja-go"><em>Inscripciones abiertas</em><i></i></span>
     </a>
-    <a class="franja franja--red" href="/es/puertas-abiertas/" data-cta="franja-portes-obertes">
-      <span class="franja-tx"><span class="franja-t">Puertas abiertas</span><span class="franja-s">Todo septiembre. Ven a probar un entrenamiento, de la Escoleta al sénior.</span></span>
-      <span class="franja-go"><em>Pide el día</em><i></i></span>
-    </a>
     <a class="franja franja--ink" href="#seniors" data-cta="franja-seniors">
       <span class="franja-ph franja-ph--alta"><img src="/img/blog/seniors-grup.webp" srcset="/img/blog/seniors-grup.webp 440w, /img/blog/seniors-grup@2x.webp 880w" sizes="(max-width: 900px) 90vw, 230px" width="440" height="587" loading="lazy" decoding="async" alt="Cuatro jugadores del primer equipo del CB Grup Barna"></span>
       <span class="franja-tx"><span class="franja-t">Los séniors</span><span class="franja-s">La primera plantilla del club.</span></span>
       <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
+    </a>
+    <a class="franja franja--red" href="/es/puertas-abiertas/" data-cta="franja-portes-obertes">
+      <span class="franja-tx"><span class="franja-t">Puertas abiertas</span><span class="franja-s">Todo septiembre. Ven a probar un entrenamiento, de la Escoleta al sénior.</span></span>
+      <span class="franja-go"><em>Pide el día</em><i></i></span>
     </a>
     <a class="franja" href="/es/baloncesto-femenino/" data-cta="franja-femeni">
       <span class="franja-ph franja-ph--cares"><img src="/img/team-action.webp" srcset="/img/team-action.webp 375w, /img/team-action@2x.webp 750w" sizes="(max-width: 900px) 90vw, 230px" width="375" height="500" loading="lazy" decoding="async" alt="Dos jugadoras del CB Grup Barna con la equipación del club"></span>
