@@ -6,6 +6,31 @@ Auditoria del repositori a 14/08/2026, revisada amb les decisions de l'Ana.
 
 ## ✅ Fet
 
+### 0. Galetes: revocar el consentiment des de qualsevol pàgina · 29/08/2026
+
+Retirar el consentiment ha de ser tan fàcil com donar-lo. **279 pàgines** ja
+portaven l'enllaç «Galetes» escrit al peu de l'HTML, però **109 que carreguen
+`js/galetes.js` no en tenien cap** —i entre elles les que recullen dades:
+`/fotos/`, `/fotos-3x3/`, `/galeria-3x3-glories/`, `/escoleta/`, `/opina/` i
+`/premidonaesport/`—. Ara el peu **«Preferències de galetes»** el dibuixa el
+mateix `js/galetes.js` (secció 5 bis) quan la pàgina no en porta cap, en
+l'idioma de la pàgina i cap a la política que li toca. Les pàgines que ja
+tenien l'enllaç a mà no canvien.
+
+També s'ha tancat un forat de mesura: **63 pàgines de `/premidonaesport/`**
+cridaven `gtag('config', …)` sense carregar mai `gtag.js`, així que les
+visites del jurat i l'esdeveniment `visita_jurat` **no s'enviaven enlloc**.
+Ara carreguen `js/galetes.js`, que injecta `gtag.js` només amb consentiment i
+detecta el `config` inline per no comptar la visita dues vegades.
+
+Comprovat amb Chromium: cap petició a Google abans d'acceptar, a cap de les
+pàgines revisades, i l'enllaç del peu reobre el panell.
+
+**Queda fora, a propòsit:** `partits/app.html` (eina interna) dispara events
+`gtag` protegits amb `if (window.gtag)` i no configura res; sense analytics
+carregat són crides que no fan res, i no hi entra cap dada.
+
+
 ### 1. Els tres enllaços trencats del Premi Dona i Esport
 
 La web oficial del Premi Dona i Esport és
