@@ -31,22 +31,23 @@ ARBRE = [
         ("/basquet-formatiu/", "Bàsquet formatiu", "Baloncesto formativo", "Development basketball"),
         ("/portes-obertes/", "Portes obertes", "Puertas abiertas", "Open days"),
         ("/femeni/", "Bàsquet femení", "Baloncesto femenino", "Women's basketball"),
+        ("/tecnificacio-basquet-barcelona/", "Tecnificació", "Tecnificación", "Skills training"),
         ("/magics/", "Barna Màgics", "Barna Màgics", "Barna Màgics"),
         ("/faq/", "Preguntes freqüents", "Preguntas frecuentes", "FAQ"),
     ]),
-    ("Equips i temporada", "Equipos y temporada", "Teams and season", [
+    ("Equips i calendari", "Equipos y calendario", "Teams and calendar", [
         ("/partits/equips/", "Equips", "Equipos", "Teams"),
         ("/partits/", "Calendari", "Calendario", "Calendar"),
         ("/partits/calendaris/", "Calendari per equip", "Calendario por equipo", "Calendar by team"),
         ("/fotos/", "Galeria de fotos", "Galería de fotos", "Photo gallery"),
     ]),
-    ("Activitats", "Actividades", "Activities", [
+    ("Esdeveniments", "Eventos", "Events", [
         ("/campus/", "Campus de bàsquet", "Campus de baloncesto", "Basketball camp"),
-        ("/tecnificacio-basquet-barcelona/", "Tecnificació", "Tecnificación", "Skills training"),
         ("/3x3/", "Torneig 3x3", "Torneo 3x3", "3x3 tournament"),
         ("/cistella-petita/", "Cistella Petita", "Cistella Petita", "Cistella Petita"),
+        ("/fotos/#presentacio-equips-25-26-msufdc03", "Presentació d'equips", "Presentación de equipos", "Team presentation"),
     ]),
-    ("El Club", "El Club", "The Club", [
+    ("El club", "El club", "The club", [
         ("/club/", "Qui som", "Quiénes somos", "Who we are"),
         ("/historia/", "Història", "Historia", "History"),
         ("/palmares/", "Palmarès", "Palmarés", "Honours"),
@@ -64,7 +65,7 @@ ARBRE = [
         ("/premsa/moments/", "Moments a Instagram", "Momentos en Instagram", "Instagram highlights"),
         ("/premidonaesport/", "Premi Dona i Esport", "Premi Dona i Esport", "Premi Dona i Esport"),
     ]),
-    ("Empreses", "Empresas", "Companies", [
+    ("Empreses i partners", "Empresas y partners", "Companies and partners", [
         ("/empreses/", "Empreses", "Empresas", "Companies"),
         ("/patrocinadors/", "Partners", "Partners", "Partners"),
         ("/avantatges-familia/", "Avantatges de la família", "Ventajas de la familia", "Family benefits"),
@@ -101,8 +102,13 @@ def construeix_dades():
             enllacos = []
             for ruta_ca, ca, es, en in branca[3]:
                 etiqueta = {"ca": ca, "es": es, "en": en}[lang]
-                r = idx.get(ruta_ca)
-                url = ruta_ca if lang == "ca" else (r[lang] if r else ruta_ca)
+                # Una entrada pot apuntar a una àncora dins d'una pàgina
+                # traduïda (/fotos/#album): la ruta es tradueix, l'àncora no.
+                base, _, ancora = ruta_ca.partition("#")
+                r = idx.get(base)
+                url = base if lang == "ca" else (r[lang] if r else base)
+                if ancora:
+                    url += "#" + ancora
                 enllacos.append([url, etiqueta])
             cols.append([branca[0] if lang == "ca" else titol, enllacos])
         dades[lang] = {

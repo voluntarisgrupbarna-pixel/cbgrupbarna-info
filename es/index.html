@@ -427,7 +427,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
 /* ==== TICKER ==== */
-.ticker { position: relative; z-index: 120; height: 32px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
+.ticker { position: relative; z-index: 120; height: 46px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
 .tk-lab {
   flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px); background: var(--red); color: #fff;
   display: flex; align-items: center; gap: 9px;
@@ -438,7 +438,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
 .tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
-.tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.tk-it { font-family: var(--body); font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ==== EL GROC, AMB REGLA ====
@@ -962,6 +962,36 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
     <a class="franja franja--red" href="/es/escoleta/" data-cta="franja-escoleta">
       <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">De 4 a 8 años. Por donde empieza todo el mundo, sin saber nada.</span></span>
       <span class="franja-go"><em>Inscripciones abiertas</em><i></i></span>
+    </a>
+  </section>
+
+  <!-- ==== ESDEVENIMENTS ==== -->
+  <section class="section" id="esdeveniments" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow red">Los actos del club</p>
+        <div class="rule"></div>
+        <h2>Eventos</h2>
+        <p>Cuatro citas que no son entrenamiento: lo que el club abre al barrio y a la ciudad cada temporada.</p>
+      </div>
+    </div>
+  </section>
+  <section class="franges" aria-label="Eventos del club">
+    <a class="franja" href="/es/campus/" data-cta="esdev-campus">
+      <span class="franja-tx"><span class="franja-t">Campus de baloncesto</span><span class="franja-s">Seis semanas en el Clot, por edades y niveles, con entrenadores del club y de Time Chamber.</span></span>
+      <span class="franja-go"><em>Cada verano</em><i></i></span>
+    </a>
+    <a class="franja franja--red" href="/es/3x3/" data-cta="esdev-3x3">
+      <span class="franja-tx"><span class="franja-t">Torneo 3x3</span><span class="franja-s">El 3×3 Westfield Glòries: torneo FIBA, 2.000 € en premios y reparto paritario.</span></span>
+      <span class="franja-go"><em>Cada junio</em><i></i></span>
+    </a>
+    <a class="franja" href="/es/cistella-petita/" data-cta="esdev-cistella">
+      <span class="franja-tx"><span class="franja-t">Cistella Petita</span><span class="franja-s">El festival de minibasket del barrio: el gran día de los niños y niñas de 3 a 8 años.</span></span>
+      <span class="franja-go"><em>Cada primavera</em><i></i></span>
+    </a>
+    <a class="franja franja--ink" href="/es/fotos/#presentacio-equips-25-26-msufdc03" data-cta="esdev-presentacio">
+      <span class="franja-tx"><span class="franja-t">Presentación de equipos</span><span class="franja-s">Todos los equipos de la temporada, una noche en La Nau del Clot.</span></span>
+      <span class="franja-go"><em>Cada otoño</em><i></i></span>
     </a>
   </section>
   <div class="lg-strip">
