@@ -8,6 +8,7 @@ no cal tocar cap HTML.
 | `/newsletter/` · `/es/newsletter/` · `/en/newsletter/` | Brevo | Cal enganxar l'`action` |
 | `/bustia/` · `/es/buzon/` · `/en/suggestions/` | Apps Script compartida, `source: 'bustia'` | Funciona |
 | `/proteccio-menor/comunicar/` (+ es/en) | Apps Script **pròpia** de la Delegada | Desactivat a posta |
+| `/campus/#llista-espera` (+ es/en) | Apps Script **pròpia** del campus, `source: 'campus-llista-espera'` | Cal desplegar-la |
 
 ---
 
@@ -81,3 +82,40 @@ inscripcions:
 - Si hi ha indici de risc per a un infant, es comunica a les autoritats encara
   que qui ho envia demani que no. Això la pàgina ja ho diu obertament: no és una
   lletra petita.
+
+---
+
+## 4 · Llista d'espera del campus
+
+**Estat: les altes es guarden, però encara no surt cap correu.**
+
+Mentre `campusEndpoint` estigui buit, el formulari cau a la mateixa Apps Script
+de la bústia amb `source: 'campus-llista-espera'`. Això vol dir que **no es perd
+ningú** —la fila hi és, es pot filtrar per aquell `source`— però ni el club rep
+l'avís ni la família rep la confirmació. S'han d'escriure a mà.
+
+Per activar-ho cal una Apps Script pròpia, perquè aquesta fa dues coses que la de
+la bústia no fa: enviar correu al club i enviar confirmació a qui s'apunta, en el
+seu idioma. El codi sencer, comentat, és a **`scripts/apps-script-campus.gs`**.
+
+Això no ho pot fer un agent: Google demana que una persona autoritzi amb el seu
+compte els permisos de full de càlcul i d'enviament de correu. Són sis passos:
+
+1. Full de càlcul nou al Drive del club, de nom **«Campus · llista d'espera»**.
+2. Dins del full: **Extensions → Apps Script**.
+3. Esborra el que hi hagi i enganxa tot `scripts/apps-script-campus.gs`.
+4. Revisa `AVIS_A` a dalt de tot (ara mateix, `marqueting@cbgrupbarna.info`).
+5. **Desplega → Nou desplegament → Aplicació web**, amb
+   *Executa com a:* **jo** i *Qui hi té accés:* **qualsevol**.
+   Google demanarà els permisos: accepta'ls.
+6. Copia l'URL que acaba en `/exec` i enganxa'l a `campusEndpoint` de
+   `js/canals.js`.
+
+Per provar-ho, apunta't tu mateixa des de `/campus/#llista-espera` i comprova
+que arriben els dos correus i la fila.
+
+**Compte amb una cosa:** el correu de confirmació surt del compte de Google que
+desplega l'script, amb el seu límit diari d'enviaments (100 al dia en un compte
+gratuït, 1.500 en un de Workspace). Per a una llista d'espera de campus sobra de
+llarg, però si algun dia s'omple, la fila es desa igualment i el que falla és
+només el correu.
