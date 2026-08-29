@@ -2398,3 +2398,36 @@ perquè el generador està desfasat respecte al publicat (li falten
 `hreflang`, el selector d'idioma, `a11y.css` i el canvi de `/basquet-femeni/`
 a `/femeni/`): fer-ho hauria revertit feina real. Només s'ha corregit el text
 del generador per a la propera vegada que algú el posi al dia sencer.
+
+### Pendent d'aquesta mateixa sessió — autocrítica, no s'ha fet encara
+
+- **`400 jugadors` a `/empreses/` es va escapar a la primera passada.**
+  Estava literalment a la llista de contradiccions de l'Ana i el primer
+  escombrat amb `grep` no el va trobar fins a una segona revisió, en
+  contrastar el que s'havia arreglat contra cada punt de l'auditoria un per
+  un. **Pendent real:** no hi ha garantia que aquesta segona passada hagi
+  estat l'última — falta una revisió exhaustiva pàgina a pàgina (no per
+  patró de `grep`) de tota la web per a xifres soltes que no encaixin amb
+  `/grup-barna-dades-oficials/`.
+- **`generate-team-pages.py` és ara la segona instància coneguda del mateix
+  parany que `scripts/build-pages.py`** (documentat a `web-cbgb` §7 i
+  `mapa-web-cbgb` §2): el generador ha quedat desfasat respecte al que hi ha
+  publicat de debò (li falten `hreflang`, el selector d'idioma i
+  `css/a11y.css`), i executar-lo sense mirar el `git diff` abans hauria
+  revertit feina real d'accessibilitat i SEO en aquesta mateixa sessió. Es
+  va detectar a temps revisant el diff *després* d'executar-lo, no abans:
+  **pendent real** és posar aquest generador al dia (com ja es va fer
+  parcialment amb `build-pages.py` el 29/08, punt «Els cinc punts "purament
+  tècnics"»), perquè el pròxim que el toqui no hagi de confiar en revisar el
+  diff a temps.
+- **Cap dels canvis d'aquesta sessió s'ha comprovat visualment al
+  navegador.** Són canvis de text (no de maquetació), però no hi ha
+  confirmació que cap frase reescrita —especialment les més llargues, com
+  la de «15 equips amb calendari a la web, dels més de 34 que té el club»—
+  no desbordi el seu contenidor a mòbil. Pendent d'una revisió visual abans
+  de donar-ho per tancat del tot.
+- **El redactat de les frases al voltant de les xifres corregides no l'ha
+  validat l'Ana.** El número ja és correcte, però la manera d'explicar-ho
+  («dels més de 34 que té el club», «amb calendari a la web») és una
+  decisió de to que s'ha pres sense confirmar-la — val la pena que l'Ana hi
+  passi el filtre abans que es fusioni a `main`.
