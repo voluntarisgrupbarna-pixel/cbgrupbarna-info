@@ -296,6 +296,7 @@ export function AdminClient({ profile, seasons: initialSeasons, events: initialE
                     onClick={() => router.push(`/events/${event.id}`)}
                     className="p-1.5 text-white/30 hover:text-white/70 transition-colors"
                     title="Veure event"
+                    aria-label="Veure event"
                   >
                     <Eye className="w-4 h-4" />
                   </button>
@@ -303,6 +304,7 @@ export function AdminClient({ profile, seasons: initialSeasons, events: initialE
                     onClick={() => handleTogglePublish(event.id, event.is_published)}
                     className="p-1.5 text-white/30 hover:text-white/70 transition-colors"
                     title={event.is_published ? 'Ocultar' : 'Publicar'}
+                    aria-label={event.is_published ? 'Ocultar event' : 'Publicar event'}
                   >
                     {event.is_published ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                   </button>
@@ -311,6 +313,7 @@ export function AdminClient({ profile, seasons: initialSeasons, events: initialE
                       onClick={() => handleDeleteEvent(event.id)}
                       className="p-1.5 text-white/30 hover:text-red-400 transition-colors"
                       title="Eliminar"
+                      aria-label="Eliminar event"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

@@ -177,7 +177,10 @@ def peu(idioma):
             '    <div class="foot-btm">\n'
             '      <div class="foot-mark">#Som<em>Clot</em></div>\n'
             f'      <div class="foot-legal">{text("peu_legal", idioma)}</div>\n'
-            '    </div>\n  </div>\n</footer>\n</body>\n</html>\n')
+            '    </div>\n  </div>\n</footer>\n'
+            '<script src="/js/cerca.js" defer></script>\n'
+            '<script src="/js/mapa.js" defer></script>\n'
+            '</body>\n</html>\n')
 
 
 def alternatives(url):

@@ -161,7 +161,7 @@ function LoginForm() {
                 className="input"
               />
             </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full justify-center mt-2">
+            <button type="submit" disabled={loading} aria-label={loading ? 'Entrant...' : undefined} className="btn-primary w-full justify-center mt-2">
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Entrar'}
             </button>
           </form>
@@ -209,7 +209,7 @@ function LoginForm() {
                 className="input"
               />
             </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full justify-center mt-2">
+            <button type="submit" disabled={loading} aria-label={loading ? 'Creant compte...' : undefined} className="btn-primary w-full justify-center mt-2">
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Crear compte'}
             </button>
           </form>
@@ -233,7 +233,7 @@ function LoginForm() {
             <p className="text-white/30 text-xs font-body">
               Et enviarem un enllaç per entrar sense contrasenya.
             </p>
-            <button type="submit" disabled={loading} className="btn-primary w-full justify-center mt-2">
+            <button type="submit" disabled={loading} aria-label={loading ? 'Enviant...' : undefined} className="btn-primary w-full justify-center mt-2">
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Enviar enllaç'}
             </button>
           </form>

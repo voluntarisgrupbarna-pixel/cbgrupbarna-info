@@ -49,6 +49,7 @@ ARBRE = [
     ("El Club", "El Club", "The Club", [
         ("/club/", "Qui som", "Quiénes somos", "Who we are"),
         ("/historia/", "Història", "Historia", "History"),
+        ("/palmares/", "Palmarès", "Palmarés", "Honours"),
         ("/organigrama/", "Organigrama", "Organigrama", "Organisation"),
         ("/instal-lacions/", "Instal·lacions", "Instalaciones", "Facilities"),
         ("/grup-barna-dades-oficials/", "Dades oficials", "Datos oficiales", "Official data"),
@@ -58,6 +59,7 @@ ARBRE = [
     ]),
     ("Actualitat", "Actualidad", "News", [
         ("/blog/", "Coneixement Barna", "Conocimiento Barna", "Barna knowledge"),
+        ("/video/", "Vídeo", "Vídeo", "Videos"),
         ("/premsa/", "Premsa", "Prensa", "Press"),
         ("/premsa/moments/", "Moments a Instagram", "Momentos en Instagram", "Instagram highlights"),
         ("/premidonaesport/", "Premi Dona i Esport", "Premi Dona i Esport", "Premi Dona i Esport"),
@@ -65,6 +67,7 @@ ARBRE = [
     ("Empreses", "Empresas", "Companies", [
         ("/empreses/", "Empreses", "Empresas", "Companies"),
         ("/patrocinadors/", "Partners", "Partners", "Partners"),
+        ("/avantatges-familia/", "Avantatges de la família", "Ventajas de la familia", "Family benefits"),
         ("/partners-mapa/", "Mapa de partners", "Mapa de partners", "Partner map"),
         ("/briefing/", "Briefing del club", "Briefing del club", "Club briefing"),
     ]),
