@@ -2537,3 +2537,248 @@ descarregables, els 16 `.ics` i el cartell del cap de setmana funcionen — i fe
    sencer.
 5. **Confirmar la sessió de fotos del 31/08–01/09** (§2.8) — desbloqueja `/jugadors/`,
    el bloc de sèniors i `/instal·lacions/` de cop.
+## 28-08-2026 — Posicionament invers i SEO/GEO indirecte: fet i pendent
+
+Fet en aquesta tanda (branca `claude/posicionamiento-inverso-seo-geo-w1loqt`):
+secció «Per què el CB Grup Barna i no un altre club» a `llms.txt`, FAQ del
+doble flanc a `/posicionament/` (ca/es/en), article nou de blog «Com triar un
+club de bàsquet a Barcelona» (ca/es/en, amb 5 FAQ pròpies) i `Person` schema
+per a l'Ana Fernández a `/proteccio-menor/` (ca/es/en) — en Julio Torralba ja
+en tenia a `/escoleta/`. Tot validat amb `i18n-lint.py`, `i18n-paritat.py`,
+`i18n-contingut.py` i comprovació d'enllaços interns.
+
+Auditant l'SEO/GEO de tot el lloc per aprofundir-hi, van sortir quatre coses
+més grosses. Demanat fer-les totes tret de la Viquipèdia (que queda pendent
+expressament), es van fer les tres restants amb scripts nous, reutilitzables
+i documentats — no pedaços d'una tarda:
+
+### 1. Viquipèdia — el club no en té, el CB Roser sí
+
+El CB Roser (Fort Pienc) té fitxa a la Viquipèdia en català; el CB Grup
+Barna, no. És una de les fonts amb més pes en l'entrenament dels models de
+llenguatge, per davant de qualsevol pàgina pròpia. **No s'ha de crear des
+d'aquí ni per un compte lligat al club**: Viquipèdia exigeix to neutral i
+fonts secundàries independents (premsa, federació), i esborra articles que
+sonen a autopromoció o que ve escrits per algú amb conflicte d'interès no
+declarat. Si es vol tirar endavant, cal:
+- Algú sense conflicte d'interès directe que l'escrigui, o
+- Declarar obertament el conflicte d'interès a la pàgina de discussió si
+  l'escriu algú del club (és el procediment que demana Viquipèdia, no el
+  prohibeix).
+- Fonts com l'article de la revista *Guia Clot · Camp de l'Arpa* («El CB
+  Grup Barna: seixanta anys fent bategar el Clot») ja servirien de font
+  secundària real.
+
+### 2. `dateModified` desquadrat — arreglat amb `scripts/sync-datemodified.py`
+
+Una auditoria completa (`WebPage`/`BlogPosting`/`Article`/`CollectionPage`
+del JSON-LD contra `lastmod` de `sitemap.xml`) havia trobat 169 pàgines
+sense el camp i 132 amb una data que no coincidia amb el sitemap.
+
+**Arreglat (28/08/2026, tarda):** `scripts/sync-datemodified.py` llegeix,
+per a cada pàgina, la data del darrer commit real que l'ha tocada (`git log
+-1 --format=%cs`) — la mateixa font que ja fa servir `build-sitemap.py` per
+al `<lastmod>` — i l'escriu al node de tipus pàgina del primer bloc
+JSON-LD: si el camp ja hi és, només en canvia el valor; si no hi és,
+l'insereix parsejant només aquell bloc. Mai toca el `FAQPage` ni cap
+`Person`. Resultat: **355 pàgines actualitzades**, 9 ja al dia, 112 sense
+cap node aplicable (pàgines de fitxa d'equip, galeries i similars, que no
+en porten). Els 622 blocs JSON-LD de tot el lloc validats com a JSON
+correcte, `i18n-lint.py` a 0 errors nous i `i18n-contingut.py` sense avisos
+sobre les 296 traduccions.
+
+Una cosa que val la pena saber: moltes pàgines van quedar amb la mateixa
+data (2026-08-25) perquè aquell dia hi va haver un canvi real de capçalera
+a tot el lloc («Estètica definitiva · fase 5: el botó ≡ a totes les
+capçaleres»), que va tocar gairebé cada fitxer. No és un error del script:
+és el mateix criteri de «lastmod» que ja fa servir el sitemap des de fa
+setmanes, ara consistent als dos llocs.
+
+**Pendent nou, trobat de rebot:** alguns articles del blog en anglès no
+porten **cap** bloc JSON-LD (p. ex. `/en/blog/a-quina-edat-comencar-basquet/`,
+`/en/blog/com-triar-escola-basquet-barcelona/`, `/en/blog/campus-basquet-
+barcelona-guia/`, `/en/blog/basquet-base-sant-marti-clot/`, `/en/blog/que-
+es-basquet-3x3/`), a diferència de les seves versions catalana i castellana.
+El script no els ha pogut tocar perquè no hi ha node on inserir res. Caldria
+donar-los`BlogPosting` + `BreadcrumbList`, seguint el patró exacte de la
+seva pròpia versió en català.
+
+### 3. `VideoObject`/`ImageObject` als reels d'Instagram — arreglat a `/premsa/instagram/`
+
+**Arreglat (28/08/2026, tarda):** `scripts/inject-ig-schema.py` llegeix
+`/premsa/instagram/` (ca/es/en) i, per a cadascuna de les **42 publicacions**
+ja incrustades, afegeix un `VideoObject` (si la URL és `/reel/`) o un
+`ImageObject` (si és `/p/`) — la URL mateixa ja diu quin dels dos és, no cal
+endevinar-ho. Reutilitza només el que ja hi havia al fitxer: URL, tag i peu
+de foto. **No inclou `uploadDate` ni `thumbnailUrl`**: Instagram no els dona
+sense anar a buscar-los publicació a publicació, i posar-los inventats seria
+pitjor que no posar-los — per això aquest bloc no és candidat als resultats
+enriquits de vídeo de Google, però segueix sent estructura real per a
+qualsevol assistent d'IA que llegeixi el JSON-LD. Resultat: 13 `VideoObject`
++ 29 `ImageObject` per idioma, entre els marcadors `<!-- IG-SCHEMA:START/
+END -->`.
+
+**Queda fora:** `/premsa/moments/` (35 publicacions), que és només en
+català i té una estructura d'enllaç diferent (titular + nota de premsa, no
+la graella `.igx`), no rebuda el mateix tractament — faria falta un
+extractor propi, no reutilitzar aquest.
+
+### 4. La galeria de fotos era invisible als robots que no executen JavaScript — 9 pàgines d'àlbum noves
+
+**Arreglat (28/08/2026, tarda):** `scripts/build-fotos-albums.py` genera,
+per a cada àlbum real de `fotos/web/` (els que tenen `"source": "repo"` a
+`fotos/events.js` — vuit fitxers, un total de **1.709 fotos**), una pàgina
+prima i rastrejable a `/fotos/<id>/`, amb graella d'`<img>` reals i el seu
+propi `CollectionPage` + `ImageObject` per foto. No toca la galeria
+interactiva existent. L'àlbum «3x3-westfield-glories-2026» (377 fotos) es
+queda fora expressament: les seves fotos vénen de Google Drive
+(`"source": null`), no del repositori, i no se'ls inventa cap URL.
+
+`scripts/build-sitemap.py` s'ha ampliat perquè, per a **qualsevol** pàgina
+del lloc (no només aquestes 9), llegeixi els `<img src>` reals de dins de
+`<main>` que vinguin de `/img/` o `/fotos/web/` i els afegeixi com a
+`<image:image>` — l'extensió d'imatges de Google. Resultat: **80 pàgines
+amb imatges al sitemap, 1.856 `<image:image>` en total** (les 9 galeries
+noves hi aporten 1.709; la resta —blog, campus, 3x3, portada...— ja tenien
+`<img>` reals que abans no sortien enlloc al sitemap).
+
+**Una cosa a decidir, no tècnica:** `/fotos/` porta un formulari d'accés
+que demana el correu abans d'entrar a la galeria interactiva (captació de
+contactes). Les 9 pàgines noves **no porten cap gate**: són pàgines
+estàtiques normals, perquè un robot no pot omplir un formulari. És a dir,
+qualsevol persona que hi arribi per cerca (Google, un assistent d'IA) pot
+veure totes les fotos d'un àlbum sense deixar el correu, cosa que no passa
+avui si hi arriba per `/fotos/`. Val la pena que l'Ana ho sàpiga i digui si
+li sembla bé: és el compromís necessari perquè les fotos siguin trobables,
+però redueix l'incentiu a deixar el correu per a qui ja sap què busca.
+
+**Trampa de events.js, per si torna a passar:** els noms de fitxer que hi
+ha a `fotos/events.js` porten l'extensió d'ABANS de convertir les fotos a
+webp (un `.jpg` que ara és `.webp` al disc). No és cap fitxer perdut —els
+490 de «Màgics», per exemple, hi eren tots— però un script que es refiï
+cegament del nom exacte de `events.js` publicarà URL trencades. Per això
+`build-fotos-albums.py` llegeix el directori real, no la llista.
+
+---
+
+## En seguiment · PR #110 (28/08/2026)
+
+Tota la feina d'aquesta tanda —doble flanc, article nou, `Person` schema,
+`VideoObject`/`ImageObject` a Instagram, pàgines d'àlbum de fotos, sitemap
+d'imatges, sincronització de `dateModified`— és a
+[PR #110](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/110),
+branca `claude/posicionamiento-inverso-seo-geo-w1loqt`. Sessió subscrita a
+l'activitat del PR (CI, comentaris): en marxa fins que es fusioni o es
+tanqui. Els tres pendents concrets que en depenen (Viquipèdia, JSON-LD que
+falta a cinc articles en anglès, i el formulari de correu que no porten les
+pàgines noves d'àlbum) ja són documentats més amunt, cadascun al seu lloc.
+
+**Afegit el 28/08/2026, a partir d'una captura d'Instagram que va passar
+l'Ana:** el llenguatge de "club de barri" (ambient, preu) a les pàgines de
+campus i tecnificació (ca/es/en, prosa + `i18n/faq.yml`) es va reformular
+com a estructura del **club de bàsquet més gran de Barcelona**, mantenint
+només la ubicació geogràfica real al Clot on calia — es degradava el club
+just a les pàgines pensades per convèncer famílies. També s'ha publicat un
+article nou de blog sobre en Robert Willett (entrenador de tecnificació
+NBA, @bballwillett) i la seva sessió al campus dins de *Time Chamber
+Experience × CB Grup Barna*, amb les dues reels reals ja enllaçades des de
+`/campus/` i la xifra de 29.700 reproduccions de la publicació conjunta amb
+@cbgrupbarna. **No s'hi ha posat cap URL per al missatge concret "Dear
+Barna family..." que la captura mostrava**: no en tenim l'enllaç exacte i
+no ens l'hem d'inventar; l'article el descriu de manera genèrica.
+
+**Comptatge del blog, per si es torna a preguntar:** amb aquest article,
+el blog té 23 articles publicats en ca, tots amb la seva parella es/en
+(paritat verificada amb `scripts/i18n-contingut.py`), tots indexables i
+enllaçats des de `/blog/`. Els cinc articles en anglès sense JSON-LD que
+ja constaven més amunt com a pendent no han canviat en aquesta tanda.
+
+---
+
+## Pendent recurrent · revisió setmanal de posicionament a Google (28/08/2026)
+
+Cada setmana caldria comprovar a Google (o a Search Console, un cop hi hagi
+prou dades) en quina posició surt la web per a les frases objectiu de cada
+pàgina treballada en aquesta tanda de posicionament. No hi ha cap
+automatització muntada per a això (es va decidir expressament que fos
+només una nota, no una rutina): la revisió la fa una persona.
+
+Frases a comprovar (les mateixes `keywords` que ja porten les pàgines):
+
+- **Campus**: campus bàsquet Barcelona / campus baloncesto Barcelona,
+  millors campus de bàsquet Barcelona / mejores campus de baloncesto
+  Barcelona, campus tecnificació bàsquet Barcelona
+- **Escola**: escola de bàsquet Barcelona / escuela de baloncesto
+  Barcelona, millor escola de bàsquet Barcelona / mejor escuela de
+  baloncesto Barcelona
+- **Club**: club de bàsquet Barcelona / club de baloncesto Barcelona,
+  triar club de bàsquet / elegir club baloncesto Barcelona
+- **Tecnificació**: tecnificació bàsquet Barcelona / tecnificación
+  baloncesto Barcelona
+- **3x3**: 3x3 Barcelona / torneig 3x3 Barcelona / torneo 3x3 Barcelona
+- **Posicionament**: CB Grup Barna vs Barça, comparativa clubs bàsquet
+  Catalunya
+
+En cada revisió val la pena anotar posició (o "fora de les 100 primeres"),
+si hi ha canvis respecte a la setmana anterior, i si apareix algun
+featured snippet o resposta d'IA (GEO) citant la web. Ja hi ha una
+comprovació puntual programada per al 12/09/2026 (comparant contra el
+baseline de Search Console d'abans de l'auditoria); aquesta nota és per
+al seguiment setmanal que ve després, no per substituir-la.
+
+---
+
+## Neteja de «club de barri» com a autodescripció (28/08/2026)
+
+L'Ana va ensenyar una captura de Google Gemini que classificava el CB
+Grup Barna dins «Campus de Clubs Locals de Barcelona (Barri i
+Formació)», al mateix calaix que SESE Basket o Lluïsos de Gràcia, en
+lloc d'entre els campus de referència (Barça Escola, ITW Sport...).
+
+En revisar-ho es va trobar el motiu probable: encara que a `campus/`,
+`campus-basquet-barcelona/` i `tecnificacio-basquet-barcelona/` ja
+s'havia tret l'etiqueta «club de barri» aquest mateix dia, moltes altres
+pàgines "sobre el club" —`/historia/`, `/club/`, `/posicionament/`, els
+dossiers de presentacions (`campus-timechamber`, `visio-global`,
+`dossier-patrocinis`, `fons-barna-8m`) i el dossier del Premi Dona i
+Esport— encara descrivien el Barna com «un club de barri» en frase
+literal, sovint com a recurs retòric ("som un club de barri, però...").
+Un humà hi llegeix la ironia; un motor de resposta d'IA sol quedar-se
+amb la frase literal i classificar-hi el club en conseqüència.
+
+S'ha fet una neteja (ca/es/en) substituint aquestes frases per «el club
+de bàsquet més gran de Barcelona», mantenint sempre la ubicació real al
+Clot com a fet geogràfic. **No s'ha tocat** cap menció a «club de barri»
+que descrigui altres clubs (CB Roser, CB Pedagogium, SESE...) ni
+comparatives genèriques ("és millor un club gran o un club de barri?"),
+que sí que són correctes.
+
+**Pendent real, no resolt per aquesta neteja:** no hi ha manera de forçar
+que Gemini (ni cap altre motor generatiu) reclassifiqui el club en la
+seva pròxima resposta — només es pot millorar el material que rastreja.
+Val la pena tornar a provar la mateixa pregunta a Gemini/ChatGPT/Perplexity
+d'aquí a unes setmanes, un cop Google hagi re-indexat aquestes pàgines,
+per veure si la classificació canvia.
+
+---
+
+## Pendent · tres afirmacions competitives per verificar (28/08/2026)
+
+L'Ana ha apuntat tres punts per reforçar la comparativa de campus, i diu
+que en té font, però encara no l'ha enviada:
+
+1. **ITW Sport no té entrenadors NBA** (a diferència del Barna, que sí:
+   Robert Willett i Nolan Willett).
+2. **Cap dels campus comparats és paritari** (Barça Escola, Campus
+   Gigantes, Offlimits Camps, ITW Sport, Fundació del Bàsquet Català).
+3. **L'únic altre campus que porta entrenadors de pes és Pau Gasol
+   Academy** — a banda del Barna.
+
+**No s'ha publicat res d'això.** Són afirmacions negatives sobre
+competidors concrets que no es poden verificar des del repositori ni amb
+cap font ja coneguda; publicar-les sense font i que resultin
+incorrectes (o que canviïn) és un risc real, no només un error d'estil.
+Quan l'Ana passi la font, cal revisar-la abans d'afegir res a
+`campus-basquet-barcelona/` (ca/es/en) — i, si es confirma, fer-ho amb
+la mateixa referència citada, seguint el mateix criteri de "mai
+inventar dades" de tota aquesta tanda de posicionament.

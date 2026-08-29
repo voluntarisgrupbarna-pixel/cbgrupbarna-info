@@ -27,6 +27,13 @@ Què inclou i què no:
     llegint els <link rel="alternate"> de la pàgina. Google entén així que
     /blog/, /es/blog/ i /en/blog/ són la mateixa pàgina en tres idiomes i no
     les tracta com a contingut duplicat.
+  · Cada pàgina hi porta les seves pròpies imatges de contingut com a
+    <image:image> (extensió d'imatges de Google), llegides dels <img src>
+    reals de dins de <main> — mai inventades. Només compten les imatges
+    servides des del mateix domini a /img/ o /fotos/web/ (les fotos de
+    veritat, no el logotip ni les icones de la interfície). És el que fa
+    que les 9 galeries d'àlbum de /fotos/<id>/ (scripts/build-fotos-
+    albums.py) puguin sortir a la Cerca d'imatges de Google.
 """
 import html
 import re
@@ -50,6 +57,10 @@ RE_ALTERNATE = re.compile(
     r'<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\']([^"\']+)["\'][^>]*href=["\']([^"\']+)["\']',
     re.I,
 )
+RE_MAIN = re.compile(r"<main\b[^>]*>(.*?)</main>", re.I | re.S)
+RE_IMG_SRC = re.compile(r'<img[^>]+src=["\'](/(?:img|fotos/web)/[^"\']+)["\']', re.I)
+# Fins a 1.000 <image:image> per URL: és el límit del protocol de Google.
+LIMIT_IMATGES = 1000
 
 # Amb quina freqüència canvia de veritat cada zona, i quin pes té per al club.
 PRIORITATS = [
@@ -124,11 +135,24 @@ def recollir():
         ]
         cami = loc[len(SITE):] or "/"
         freq, prio = pes(cami)
+
+        main = RE_MAIN.search(text)
+        imatges = []
+        if main:
+            vistes = set()
+            for src in RE_IMG_SRC.findall(main.group(1)):
+                url_img = SITE + html.unescape(src)
+                if url_img not in vistes:
+                    vistes.add(url_img)
+                    imatges.append(url_img)
+            imatges = imatges[:LIMIT_IMATGES]
+
         pagines[loc] = {
             "lastmod": data_git(fitxer),
             "changefreq": freq,
             "priority": prio,
             "alternates": alternates,
+            "imatges": imatges,
         }
     return pagines
 
@@ -138,7 +162,8 @@ def escriure(pagines):
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<!-- Generat per scripts/build-sitemap.py · no editar a mà -->',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
-        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+        '        xmlns:xhtml="http://www.w3.org/1999/xhtml"',
+        '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
     ]
     # Primer les de més pes, que és l'ordre en què volem que les llegeixi.
     for loc in sorted(pagines, key=lambda u: (-float(pagines[u]["priority"]), u)):
@@ -153,6 +178,10 @@ def escriure(pagines):
                 f'    <xhtml:link rel="alternate" hreflang="{html.escape(idioma)}" '
                 f'href="{html.escape(href)}"/>'
             )
+        for url_img in d.get("imatges", []):
+            linies.append("    <image:image>")
+            linies.append(f"      <image:loc>{html.escape(url_img)}</image:loc>")
+            linies.append("    </image:image>")
         linies.append("  </url>")
     linies.append("</urlset>")
     (ROOT / "sitemap.xml").write_text("\n".join(linies) + "\n", encoding="utf-8")
