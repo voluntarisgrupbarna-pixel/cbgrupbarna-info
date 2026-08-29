@@ -2172,21 +2172,76 @@ d'una auditoria d'accessibilitat, i es queda fora.
 
 ---
 
-## 29-08-2026 · `/campus/enllacos/` — tot el rastre del campus en una pàgina
+## 29-08-2026 · Sessió del campus — inventari, pàgina d'enllaços i el que queda
 
-Fet i publicat (PR #115): `/campus/enllacos/`, `/es/campus/enlaces/` i
-`/en/campus/links/`, amb els **vint vídeos del campus incrustats** —els setze
-de les estrelles en els tres grups de sempre i les quatre convocatòries
-d'edició—, la taula de totes les pàgines del campus en els tres idiomes i els
-dos articles del blog. Enllaçada des de les tres `/campus/`, i amb
-`i18n/routes.yml`, `sitemap.xml` i `cerca-index.json` al dia.
+Encàrrec de l'Ana: «recupera artefactes relatius al campus». Va acabar en una
+pàgina publicada. Queda tot apuntat aquí perquè la propera sessió no hagi de
+tornar a inventariar res.
+
+### 1. Inventari · tot el que hi ha del campus
+
+**Res perdut.** `git log --diff-filter=D` sobre `*campus*` no torna cap fitxer
+esborrat: el rastre estava escampat, no perdut.
+
+**15 pàgines publicades**, cinc productes × tres idiomes:
+
+| Pàgina | CA | ES | EN |
+|---|---|---|---|
+| Campus d'estiu (Time Chamber) | `/campus/` | `/es/campus/` | `/en/campus/` |
+| Setmana Santa | `/campus/setmana-santa/` | `/es/campus/semana-santa/` | `/en/campus/easter/` |
+| Nadal | `/campus-nadal-basquet-barcelona/` | `/es/campus-navidad-baloncesto-barcelona/` | `/en/christmas-basketball-camp-barcelona/` |
+| Comparativa de la ciutat | `/campus-basquet-barcelona/` | `/es/campus-baloncesto-barcelona/` | `/en/basketball-camps-barcelona/` |
+| Presentació × Time Chamber | `/presentacions/campus-timechamber/` | `/es/presentaciones/campus-timechamber/` | `/en/presentations/campus-timechamber/` |
+
+**6 articles de blog**: la crònica *Campus Time Chamber 2026* i la guia *com
+triar un campus*, cadascuna en els tres idiomes. Les adreces velles
+`/es/blog/campus-basquet-barcelona-guia/` i `/en/blog/campus-basquet-barcelona-guia/`
+són **només redireccions** (uns 550 bytes): no s'enllacen mai.
+
+**20 enllaços d'Instagram**: 16 vídeos d'estrelles i 4 convocatòries d'edició,
+tots a les taules de `scripts/build-campus-estrelles.py`.
+
+**3 documents interns de treball**, a l'arrel i no publicats:
+`POSICIONAMENT-CAMPUS-SEO.md` (mapa de paraules clau),
+`AUTORITAT-EXTERNA-CAMPUS.md` (+ `autoritat-externa-targets.csv`) i
+`CAMPUS-FITXA-GOOGLE-I-AGENDES.md` (textos NAP per a la fitxa de Google).
+
+**3 generadors**: `build-campus-fitxa.py` (fitxa i preus als tres idiomes; sense
+xifres des de la decisió del 23/08), `build-campus-estrelles.py` (el bloc
+d'estrelles) i `build-campus-temporades.py` (`/campus/setmana-santa/`).
+
+**Dades i material**: el bloc `campus` de `data.json` (sis setmanes amb nom,
+dates i places), 171 fotos a
+`fotos/web/summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9/`,
+`img/campus-hero.webp`, sis fotos a `campus/img/` i nou peces a `img/blog/`.
+
+### 2. Fet i publicat · `/campus/enllacos/`
+
+De les tres opcions que hi havia (un bloc dins de `/campus/`, una pàgina pròpia
+o un document intern), **l'Ana va triar la pàgina pròpia**, amb tots els vídeos
+incrustats. Publicat a producció el mateix dia (PR #115):
+
+`/campus/enllacos/` · `/es/campus/enlaces/` · `/en/campus/links/`
+
+Hi ha els **vint vídeos incrustats** —els setze de les estrelles en els tres
+grups de sempre i les quatre convocatòries d'edició—, la taula de totes les
+pàgines del campus en els tres idiomes i els dos articles del blog. Enllaçada
+des de les tres `/campus/`, amb `i18n/routes.yml`, `sitemap.xml` (378 URL) i
+`cerca-index.json` al dia. Comprovat en verd: paritat («151 pàgines, cap
+traducció endarrerida»), lint sense errors nous i obert amb Chromium a 1280 i
+390 px sense desbordament.
 
 Es genera amb `scripts/build-campus-enllacos.py`, que **importa** les taules de
 vídeos de `build-campus-estrelles.py` en comptes de copiar-les, i llegeix la
 capçalera i el peu de les pàgines de Setmana Santa: no hi ha cap tercera còpia
 del menú ni de la llista d'estrelles per mantenir.
 
-### El que queda obert
+També existeix, a part del web, un **índex de treball amb tots els enllaços**
+(pàgines, articles, convocatòries, perfils d'entrenadors i documents interns),
+per copiar i enganxar en stories, premsa o sponsors:
+https://claude.ai/code/artifact/5f3af974-01e9-423b-9dde-d0604f39365d
+
+### 3. El que queda obert
 
 - **Els vídeos es carreguen al clic, no sols.** És la mateixa decisió que a
   `/campus/` —fins que algú no en vol veure un, no es demana res a Instagram—
@@ -2195,11 +2250,11 @@ del menú ni de la llista d'estrelles per mantenir.
   pàgina passa a fer vint peticions a Instagram en obrir-se. **Decisió de
   l'Ana.**
 - **La fila «Comparativa de campus de Barcelona» de la taula.** El mateix dia
-  es va fusionar `8a90c12`, que reposiciona
-  `/campus-basquet-barcelona/` com a tecnificació d'alt rendiment. Si la pàgina
-  ja no es diu ni es ven com una comparativa, cal canviar-ne el text a
-  `PAGINES` dins `scripts/build-campus-enllacos.py` i tornar a executar-lo:
-  ara mateix la taula la segueix presentant com a comparativa.
+  es va fusionar `8a90c12`, que reposiciona `/campus-basquet-barcelona/` com a
+  tecnificació d'alt rendiment. Si la pàgina ja no es diu ni es ven com una
+  comparativa, cal canviar-ne el text a `PAGINES` dins
+  `scripts/build-campus-enllacos.py` i tornar a executar-lo: ara mateix la
+  taula la segueix presentant com a comparativa.
 - **Falta `i18n/feina/es/campus-nadal-basquet-barcelona.json`.** L'anglès el té
   i el castellà no, tot i que `/es/campus-navidad-baloncesto-barcelona/` està
   publicada: el dia que es torni a muntar aquella pàgina des del català, la
@@ -2211,3 +2266,7 @@ del menú ni de la llista d'estrelles per mantenir.
 - **No és al mapa ≡**, i és a propòsit: l'arbre de `scripts/build-mapa.py` és
   una tria de pàgines principals i cap subpàgina del campus (Setmana Santa,
   Nadal) hi surt. Si algun dia s'hi posen, aquesta hi va amb elles.
+- **Els documents de campus encara no s'han executat.** `AUTORITAT-EXTERNA-CAMPUS.md`
+  (demanar mencions una per una) i `CAMPUS-FITXA-GOOGLE-I-AGENDES.md` (alta a la
+  fitxa de Google i a les agendes) són feina de fora del web que segueix sense
+  fer. El web ja està a l'altura; això no.
