@@ -2426,8 +2426,77 @@ del generador per a la propera vegada que algú el posi al dia sencer.
   la de «15 equips amb calendari a la web, dels més de 34 que té el club»—
   no desbordi el seu contenidor a mòbil. Pendent d'una revisió visual abans
   de donar-ho per tancat del tot.
+- ~~**Cap dels canvis d'aquesta sessió s'ha comprovat visualment.**~~ **Fet**
+  el 29/08 al vespre — vegeu el bloc «QA visual» de sota, que va destapar
+  tres coses que els escombrats de text no havien vist.
 - **El redactat de les frases al voltant de les xifres corregides no l'ha
   validat l'Ana.** El número ja és correcte, però la manera d'explicar-ho
   («dels més de 34 que té el club», «amb calendari a la web») és una
   decisió de to que s'ha pres sense confirmar-la — val la pena que l'Ana hi
   passi el filtre abans que es fusioni a `main`.
+
+---
+
+## 29-08-2026 (vespre) — QA visual: el que els `grep` no podien veure
+
+Passades les pàgines tocades per Chromium/Playwright a 390, 768 i 1280 px
+amb detecció programàtica de desbordament (`scrollWidth` vs viewport i
+element per element), i mirant després les captures dels blocs reescrits.
+
+**Resultat de maquetació: net.** Cap de les 25 pàgines revisades desborda
+horitzontalment en cap dels tres amples, i cap dels textos reescrits
+—inclosa la frase llarga de `/partits/equips/`— retalla ni surt de la seva
+caixa. Els canvis de la passada anterior no han trencat res.
+
+**Però el QA visual va destapar tres errors de dada que els escombrats per
+patró de text no podien trobar**, perquè el número viu en un element HTML
+separat de la seva etiqueta (`<b>400</b><span>Jugadors i jugadores</span>`):
+un `grep` de «400 jugadors» no hi arriba mai.
+
+1. **`<b>400</b>` a la fitxa de dades de `/empreses/` (ca/es/en).** La prosa
+   ja s'havia corregit a 450 al matí; el número gran de la fitxa seguia dient
+   400, just al costat. Corregit.
+2. **Contradicció interna creada en aquesta mateixa auditoria.** A
+   `/presentacio/` la prosa es va passar a «34+ equips» al matí però la fitxa
+   de la mateixa pàgina seguia dient `38`. La pàgina es contradeia a si
+   mateixa a dos cops de scroll. Corregit a ca/es/en (i de passada, un
+   `+34+` malformat que ja hi havia a la versió castellana).
+3. **La família «equips de formació» anava per lliure a tot el lloc:** `38`
+   (ca), `+40` (es/en) i `35–40` deien coses diferents per a la mateixa
+   xifra a `/presentacio/`, `/presentacions/visio-global/`,
+   `/presentacions/dossier-patrocinis/` i els seus miralls es/en —totes
+   pàgines **indexables**, és a dir, totes alimentant Google i els motors de
+   resposta amb xifres que no quadren. Unificat tot a `34+`.
+
+També corregida a `/posicionament/` (ca/es/en) i `/empreses/` (ca/es/en) una
+etiqueta que deia «34+ equips al club · **15 amb competició federada FCBQ**»:
+donava a entendre que només 15 dels 34+ estan federats, quan segons
+`/grup-barna-dades-oficials/` ho estan tots. Ara diu «15 amb calendari a la
+web», que és el que aquests 15 realment són.
+
+### El que segueix obert després del QA visual
+
+- **El `32` federats dels dossiers i el benchmark.** `visio-global`,
+  `/blog/barna-amb-dades-informe/` i el blog dels 32+6 diuen «32 equips
+  federats FCBQ», amb font i context comparatiu («3r del seu univers
+  comparable»), mentre la portada diu «34+ federats». És una contradicció
+  real i visible per a Google, però **no s'ha tocat**: el 32 és una xifra
+  datada i citada de la temporada 2025-26 i substituir-la per 34+ sense un
+  recompte federatiu real de la 2026-27 seria inventar-se la dada i, de
+  passada, trencar l'aritmètica del benchmark (32 = 3r del seu univers).
+  **Necessita el recompte real de l'Ana**, com el desglossament per gènere
+  del fons 8M.
+- **Cosmètic, sense resoldre: `+34` vs `34+`.** La portada escriu `+34` i la
+  resta del lloc `34+`. Volen dir el mateix i cap dels dos és un error, però
+  són dues convencions per a la mateixa xifra. Val la pena triar-ne una el
+  dia que es faci el fitxer de dades mestres.
+- **El defecte visual del `.here` als escalafons de `/briefing/`.** El
+  requadre negre de «SUPERCOPA FCBQ ← aquí juga el sènior masculí» es parteix
+  lleig quan salta de línia a mòbil: l'última paraula queda en una línia
+  pròpia amb el seu propi fragment de fons negre. **Comprovat que és previ i
+  no una regressió** d'aquesta sessió (capturada la versió d'abans dels
+  canvis: es parteix exactament igual, i l'escalafó femení, que no s'ha
+  tocat, fa el mateix). No s'ha arreglat perquè és un tema de CSS
+  (`box-decoration-break: clone` al `.here`, o evitar el salt) i no de dades,
+  i queda fora de l'encàrrec d'aquesta auditoria. Anotat aquí perquè és una
+  millora barata i visible.
