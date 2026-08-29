@@ -32,7 +32,23 @@ window.CANALS = {
   bustiaEndpoint: 'https://script.google.com/macros/s/AKfycbwXY1zBr9TH-gwOS3fo6tUqj9Sj7ExHv33un3VLtBHz58QNThlR3DdUnrB-xjtQri9g/exec',
 
 
-  /* 3 · CANAL DE PROTECCIÓ DEL MENOR ──────────────────────────────
+  /* 3 · LLISTA D'ESPERA DEL CAMPUS ────────────────────────────────
+     Formulari de /campus/#llista-espera. Va a una Apps Script PRÒPIA,
+     no a la bústia, perquè aquesta fa tres coses que la bústia no fa:
+     escriu a la full de la llista d'espera, avisa el club i envia una
+     confirmació a la família.
+
+     El codi que s'ha d'enganxar a Apps Script, i les instruccions per
+     desplegar-lo, són a scripts/apps-script-campus.gs. Quan estigui
+     desplegat, enganxa aquí l'URL que acaba en /exec.
+
+     Mentre estigui buit, el formulari cau a `bustiaEndpoint`: la
+     inscripció s'apunta igual, però NO surten els dos correus i s'han
+     d'escriure a mà des de la full de la bústia.                      */
+  campusEndpoint: '',
+
+
+  /* 4 · CANAL DE PROTECCIÓ DEL MENOR ──────────────────────────────
      ⚠️  DELIBERADAMENT BUIT. No hi posis l'endpoint de dalt.
 
      El que s'envia per aquest canal són comunicacions sobre la

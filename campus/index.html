@@ -37,6 +37,30 @@
   .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
   @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
 
+  /* Estat de les inscripcions: el primer que ha de veure qui arriba fora de
+     temporada. Caixa, no banner de colors: ha de llegir-se, no cridar. */
+  .campus-estat { border: 1px solid var(--line); border-left: 3px solid var(--red);
+    background: var(--paper-2); padding: clamp(20px, 3vw, 30px); }
+  .campus-estat h2 { margin-top: 0; }
+  .campus-estat .dl { margin: 14px 0 0; }
+
+  /* Caselles de la llista d'espera i mapa que no es carrega tot sol. */
+  .form fieldset { border: 0; padding: 0; margin: 0; }
+  .form fieldset legend { font-family: var(--display); font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-2); padding: 0; margin-bottom: 10px; }
+  .form fieldset .check { display: flex; align-items: center; gap: 10px; font-size: 15px;
+    letter-spacing: 0; text-transform: none; font-family: inherit; color: var(--ink);
+    padding: 7px 0; cursor: pointer; }
+  .form fieldset .check input { width: 17px; height: 17px; margin: 0; flex: 0 0 auto;
+    accent-color: var(--red); }
+  /* Dins de la caixa d'estat els enllaços han de semblar-ho: no hereten
+     l'estil de .prose perquè la caixa viu fora de l'article. */
+  .campus-estat a:not(.btn) { color: var(--red-dark); text-decoration: underline;
+    text-underline-offset: 3px; }
+  .campus-estat a:not(.btn):hover { text-decoration-thickness: 2px; }
+  .mapa-lazy { margin: 18px 0 clamp(26px, 4vw, 40px); }
+  .mapa-lazy iframe { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--line); }
+
   /* Programa setmanal en targetes: número + dates + focus, com el
      calendari del microsite de Time Chamber però amb el llenguatge del Barna. */
   .weeks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: clamp(26px, 4vw, 44px) 0; }
@@ -80,6 +104,7 @@
   .star-embed { aspect-ratio: 9/14; }
   .star-embed iframe { width: 100%; height: 100%; border: 0; }
   .star-tx { padding: 18px 18px 20px; }
+  .star-tx h5 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
   .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
@@ -506,6 +531,28 @@
   </div>
 
 
+
+<!-- ESTAT-CAMPUS:inici · generat per scripts/build-campus-estat.py -->
+  <div class="narrow" style="margin-top:clamp(28px,4vw,44px)">
+    <div class="campus-estat">
+      <p class="eyebrow red">Inscripcions tancades</p>
+      <h2 style="margin-top:6px">Ara mateix no hi ha cap campus obert</h2>
+      <p>Les inscripcions de l'edició d'estiu de 2026 estan <strong>tancades</strong>. La web amb què es van obrir segueix consultable: <a href="https://timechamber.skywork.website/" target="_blank" rel="noopener" data-cta="campus-web-2026">web del Campus Timechamber 2026 →</a>. Tot el que hi deia també és més avall en aquesta pàgina, perquè no depengui d'una web que no és nostra.</p>
+      <h3 style="margin-top:26px">Què ve ara</h3>
+      <dl class="dl">
+      <div class="dl-row"><dt>Molt aviat</dt><dd><strong>Campus de Nadal</strong><br>L'anunciem en qüestió de dies, aquí i a @cbgrupbarna.</dd></div>
+      <div class="dl-row"><dt>Al gener</dt><dd><strong>Setmana Santa i estiu</strong><br>Publiquem les dues edicions alhora: dates, setmanes i obertura d'inscripcions.</dd></div>
+      </dl>
+      <p style="margin-top:18px">Si no te'l vols perdre, apunta't a la llista d'espera: escrivim a qui hi és <strong>un dia abans</strong> de publicar-ho.</p>
+      <div class="btn-row">
+        <a href="#llista-espera" class="btn red" data-cta="campus-estat-llista">Apuntar-me a la llista d'espera</a>
+        <a href="https://wa.me/34698425153" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-estat-wa">Preguntar per WhatsApp</a>
+        <a href="https://timechamber.skywork.website/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-estat-web2026">Web del campus 2026 →</a>
+      </div>
+    </div>
+  </div>
+  <!-- ESTAT-CAMPUS:final -->
+
   <div class="narrow prose" id="fitxa">
 <!-- FITXA-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
     <h2>Fitxa del campus</h2>
@@ -541,6 +588,17 @@
     <p>El club el treballa amb <strong>Time Chamber</strong>, que aporta la metodologia de treball
     individual. La combinació és la que defineix el campus: el volum de repeticions d'una escola de
     tecnificació amb l'ambient d'equip d'un club de barri amb seixanta-un anys d'història.</p>
+
+
+<!-- DIFERENCIA-CAMPUS:inici · generat per scripts/build-campus-estat.py -->
+    <h2>Per què en un club, i no en un espai llogat</h2>
+    <dl class="dl">
+      <div class="dl-row"><dt>Un campus dins d'un club, no en una pista de pas</dt><dd>El campus es fa a <strong>La Nau del Clot</strong>, que és la instal·lació del club, no un espai llogat per a l'ocasió. Els grans campus de la ciutat treballen en seus alquilades i canvien de pista segons l'any; nosaltres entrenem tot l'any al mateix lloc, amb els mateixos entrenadors i el mateix escut a la paret.</dd></div>
+      <div class="dl-row"><dt>La tecnificació que no torna a cap equip es perd</dt><dd>Una setmana intensiva millora el tir o el bot d'un jugador. Si el setembre torna a un lloc on ningú sap què hi va treballar, allò s'esvaeix. Aquí, els entrenadors del campus i els de temporada són la mateixa gent i parlen entre ells: el que es treballa al juliol continua a l'octubre.</dd></div>
+      <div class="dl-row"><dt>Fem seguiment, també durant el campus</dt><dd>Els jugadors i jugadores del club no deixen de tenir seguiment perquè sigui estiu: el que es veu al campus entra a la seva fitxa i arriba al seu entrenador o entrenadora de temporada.</dd></div>
+      <div class="dl-row"><dt>I mirem qui ve de fora</dt><dd>El campus és obert a qualsevol club, i per al Barna també és la millor manera de conèixer jugadors i jugadores que encara no coneixem. Qui ve de fora entrena i se'n va igual; però si hi encaixa i li interessa, la porta del club ja la coneix.</dd></div>
+    </dl>
+    <!-- DIFERENCIA-CAMPUS:final -->
 
     <h2>Qui hi entrena</h2>
     <p>El que separa un campus de tecnificació d'un casal amb pilota no és el que diu el fullet:
@@ -670,6 +728,200 @@
       <a href="/fotos/#summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9" class="btn ghost" data-cta="campus-galeria-completa">Veure la galeria de l'estiu →</a>
     </div>
 
+
+<!-- ARXIU-CAMPUS:inici · generat per scripts/build-campus-estat.py -->
+    <h2 id="llista-espera">Llista d'espera del campus</h2>
+    <p>Deixa'ns el contacte i t'escrivim quan obrim inscripcions, abans de publicar-ho. Rebràs un correu de confirmació de seguida; si no arriba, mira la carpeta de brossa.</p>
+    <form class="form" id="le-form" novalidate>
+      <div class="form-row">
+        <label for="le-nom">Nom del jugador o jugadora <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="le-nom" name="nom" required autocomplete="off" aria-describedby="le-nom-err">
+        <p class="form-err" id="le-nom-err" role="alert">Digues-nos com es diu.</p>
+      </div>
+      <div class="form-row">
+        <label for="le-any">Any de naixement <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" inputmode="numeric" id="le-any" name="any" required autocomplete="off" aria-describedby="le-any-err">
+        <p class="form-err" id="le-any-err" role="alert">Posa l'any de naixement (per exemple, 2014).</p>
+      </div>
+      <div class="form-row">
+        <label for="le-tutor">El teu nom <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="le-tutor" name="tutor" required autocomplete="name" aria-describedby="le-tutor-err">
+        <p class="form-err" id="le-tutor-err" role="alert">Digues-nos qui ens escriu.</p>
+      </div>
+      <div class="form-row">
+        <label for="le-mail">El teu correu <span class="req" aria-hidden="true">*</span></label>
+        <span class="hint">Aquí t'enviem la confirmació i l'avís d'obertura.</span>
+        <input type="email" id="le-mail" name="correu" required autocomplete="email" aria-describedby="le-mail-err">
+        <p class="form-err" id="le-mail-err" role="alert">Fa falta un correu vàlid per poder-te avisar.</p>
+      </div>
+      <div class="form-row">
+        <label for="le-tel">Telèfon</label>
+        <span class="hint">Opcional. Només si prefereixes que t'avisem per WhatsApp.</span>
+        <input type="tel" id="le-tel" name="telefon" autocomplete="tel">
+      </div>
+      <fieldset class="form-row">
+        <legend>Quines edicions t'interessen</legend>
+        <label class="check"><input type="checkbox" name="edicions" value="nadal"> Campus de Nadal</label>
+        <label class="check"><input type="checkbox" name="edicions" value="setmana-santa"> Setmana Santa</label>
+        <label class="check"><input type="checkbox" name="edicions" value="estiu"> Estiu</label>
+      </fieldset>
+      <div class="form-row">
+        <label for="le-msg">Alguna cosa que hàgim de saber</label>
+        <span class="hint">Opcional. Categoria, club de procedència, si ve amb algun amic…</span>
+        <textarea id="le-msg" name="missatge"></textarea>
+      </div>
+      <div class="btn-row" style="margin-top:22px">
+        <button type="submit" class="btn red">Hi entro</button>
+      </div>
+    </form>
+    <div class="form-done" id="le-done" role="status">
+      <h3>Ja hi ets</h3>
+      <p>T'hem apuntat a la llista. Rebràs un correu de confirmació i t'escrivim quan obrim inscripcions. Si tens pressa, el <a href="https://wa.me/34698425153">WhatsApp del club</a> és el camí ràpid.</p>
+    </div>
+    <p style="font-size:13.5px;color:var(--ink-2)">El que escrius aquí el llegeix la direcció del club i només serveix per avisar-te del campus. No et posem a cap altra llista. El detall és a la <a href="/politica-de-privacitat/">política de privacitat</a>.</p>
+
+    <h2>L'edició 2026, tal com es va publicar</h2>
+    <p>Això és el que deia la web del <strong>Timechamber Experience 2026</strong>, recollit aquí sencer. Serveix per saber com és el campus quan s'obre: les xifres, les setmanes, els preus i els serveis van ser aquests. <strong>Les dates i els preus de la propera edició s'anunciaran de nou</strong>.</p>
+    <p style="font-size:19px;line-height:1.45"><em>«El campus d'estiu de bàsquet més innovador de Barcelona.»</em><br>
+    <span style="font-size:14.5px;color:var(--ink-2)">Del 23 de juny a l'1 d'agost · La Nau del Clot</span></p>
+
+    <div class="facts">
+      <div><b>6</b><span>setmanes temàtiques</span></div>
+      <div><b>+200</b><span>jugadors per edició</span></div>
+      <div><b>NBA</b><span>metodologia d'elit</span></div>
+      <div><b>100%</b><span>satisfacció de les famílies</span></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--ink-2)">Xifres tal com les publicava la web de l'edició 2026. El recompte propi del club per a l'estiu de 2026 és de 150 participants al llarg de les sis setmanes; el «+200 per edició» és la xifra de la campanya.</p>
+
+    <h3>Sis setmanes, sis experiències</h3>
+    <p>Cada setmana tenia identitat pròpia. S'hi podia anar una setmana o totes.</p>
+    <div class="weeks">
+      <div class="week">
+        <b>01</b>
+        <time>23–27 juny</time>
+        <h4>FLOW CAMP</h4>
+        <p>Fluïdesa ofensiva i joc en moviment.</p>
+      </div>
+      <div class="week">
+        <b>02</b>
+        <time>30–4 juny–juliol</time>
+        <h4>TIMECHAMBER BASICS</h4>
+        <p>Fonaments sòlids per a un joc d'elit.</p>
+      </div>
+      <div class="week">
+        <b>03</b>
+        <time>7–11 juliol</time>
+        <h4>SHOOTING ACADEMY</h4>
+        <p>Mecànica, ritme i confiança de tir.</p>
+      </div>
+      <div class="week">
+        <b>04</b>
+        <time>14–18 juliol</time>
+        <h4>ONE ON ONE MASTERY</h4>
+        <p>Dominar l'1x1. Fintes i creativitat ofensiva.</p>
+      </div>
+      <div class="week">
+        <b>05</b>
+        <time>21–25 juliol</time>
+        <h4>BALLHANDLING LAB</h4>
+        <p>Control de pilota al màxim nivell.</p>
+      </div>
+      <div class="week">
+        <b>06</b>
+        <time>28–1 juliol–agost</time>
+        <h4>SKILLS LAB EXPERIENCE</h4>
+        <p>Integració total. El colofó de l'edició.</p>
+      </div>
+    </div>
+
+    <h3>Els preus que es van publicar</h3>
+    <p>Aquests van ser els preus de l'edició 2026. Els de la propera es publicaran quan s'obrin les inscripcions.</p>
+    <div class="price-cards">
+      <div class="price-card top">
+        <span class="tag">Recomanat</span>
+        <b>Setmana completa</b>
+        <p class="sched"><strong>195 €</strong> · 9 h a 17 h</p>
+        <ul>
+          <li>Dinar inclòs</li>
+          <li>Servei d'acollida</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tag">Alternativa</span>
+        <b>Mitja jornada</b>
+        <p class="sched"><strong>160 €</strong> · 9 h a 13:30 h</p>
+        <ul>
+          <li>Mateixos grups i mateix focus setmanal</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">Descompte del 10% per inscripció anticipada, abans del 20 d'abril, amb el codi <b>BARNAAVIAT</b>. I reserva amb pagament en 3 terminis: un primer pagament reserva la plaça i la resta es fracciona.</p>
+
+    <h3>Els serveis</h3>
+    <dl class="dl">
+      <div class="dl-row"><dt>Horaris</dt><dd>9–13:30 h en mitja jornada · 9–17 h en jornada completa</dd></div>
+      <div class="dl-row"><dt>Acollida</dt><dd>Servei d'acollida al matí</dd></div>
+      <div class="dl-row"><dt>Dinar</dt><dd>Àpat de migdia inclòs a la jornada completa</dd></div>
+      <div class="dl-row"><dt>Divendres</dt><dd>Excursió a Illa Fantasia</dd></div>
+    </dl>
+
+    <h3>La seu</h3>
+    <p><strong>Instal·lació oficial del club.</strong> La Nau del Clot · Carrer de la Llacuna 172, 08018 Barcelona.</p>
+    <div class="btn-row">
+      <a href="https://maps.google.com/?q=La+Nau+del+Clot+Carrer+de+la+Llacuna+172+Barcelona" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-com-arribar">Com arribar-hi →</a>
+    </div>
+    <h4>La Nau, en vídeo</h4>
+    <p>Tres peces gravades a la pista del club: la instal·lació abans de res, i el campus fent-la servir. Es carreguen soles quan hi arribes.</p>
+    <div class="stars">
+      <div class="star">
+        <button type="button" class="star-play" data-reel="DLA0wKxsM2c" aria-label="La Nau del Clot">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>La Nau del Clot</span>
+        </button>
+        <div class="star-tx">
+          <h5>La Nau del Clot</h5>
+          <span class="role">El pavello, en video</span>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="El campus, de dins">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>El campus, de dins</span>
+        </button>
+        <div class="star-tx">
+          <h5>El campus, de dins</h5>
+          <span class="role">Totes les setmanes a la pista</span>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-reel="Datex2OxHcS" aria-label="Shooting Academy">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Shooting Academy</span>
+        </button>
+        <div class="star-tx">
+          <h5>Shooting Academy</h5>
+          <span class="role">Una setmana, a la mateixa pista</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapa-lazy" data-mapa="La Nau del Clot · Carrer de la Llacuna 172, 08018 Barcelona">
+      <button type="button" class="btn ghost" id="mapa-carrega">Carregar el mapa de Google</button>
+      <p style="font-size:13px;color:var(--ink-2);margin-top:8px">El mapa és de Google i posa galetes: només es carrega si el demanes.</p>
+    </div>
+
+    <h3>Els hashtags i els comptes</h3>
+    <p>La conversa del campus va per aquí. Són els comptes i les etiquetes amb què es va publicar tot el que has vist en aquesta pàgina.</p>
+    <div class="btn-row">
+      <a href="https://www.instagram.com/cbgrupbarna/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-ig-club">@cbgrupbarna</a>
+      <a href="https://www.instagram.com/timechamber_es/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-ig-tc">@timechamber_es</a>
+      <a href="https://www.instagram.com/explore/tags/campustimechamber/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-hash-1">#campustimechamber</a>
+      <a href="https://www.instagram.com/explore/tags/timechamber/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-hash-2">#timechamber</a>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">La web original de l'edició 2026 continua en línia mentre el proveïdor la mantingui: <a href="https://timechamber.skywork.website/" target="_blank" rel="noopener">timechamber.skywork.website</a>. Aquesta pàgina no en depèn.</p>
+    <!-- ARXIU-CAMPUS:final -->
+
 <!-- ESTRELLES-CAMPUS:inici · generat per scripts/build-campus-estrelles.py -->
     <h2>Estrelles del campus</h2>
     <p>Una cosa que no fa tothom: al campus hi han passat referents del bàsquet a entrenar amb els nostres jugadors i jugadores. No de visita per a la foto — a pista, dirigint sessió. Ho separem en tres grups perquè no tot es va gravar al mateix lloc: primer el que va passar <strong>a La Nau del Clot</strong>, després la feina dels entrenadors i dels jugadors d'elit <strong>amb Time Chamber</strong>, que és el nostre soci del campus.</p>
@@ -739,6 +991,18 @@
           </div>
         </div>
         <div class="star">
+          <button type="button" class="star-play" data-reel="DMcpUFgst4L" data-kind="p" aria-label="Reproduir el vídeo amb Ainhoa López">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Ainhoa López</span>
+          </button>
+          <div class="star-tx">
+            <h4>Ainhoa López</h4>
+            <span class="role">Segona peça · publicació de feed</span>
+            <p>La segona publicació de la seva visita, la que el club va fer servir a la web del campus.</p>
+            <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official →</a>
+          </div>
+        </div>
+        <div class="star">
           <button type="button" class="star-play" data-reel="DJXMrhzsqYg" aria-label="Reproduir el vídeo amb Malak Shady">
             <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
             <span>Malak Shady</span>
@@ -750,27 +1014,17 @@
             <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
           </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-embed="reel/DO4KaZxCLqY" aria-label="Reproduir el reel amb Serge Ibaka">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Serge Ibaka</span>
-        </button>
-        <div class="star-tx">
-          <h3>Serge Ibaka</h3>
-          <p>Campió de l'NBA 2019, de visita al Clot.</p>
-          <a href="https://www.instagram.com/reel/DO4KaZxCLqY/" target="_blank" rel="noopener">Veure a Instagram →</a>
-        </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-embed="reel/DN1a1DvUGhg" aria-label="Reproduir el reel amb Yankuba Sima">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Yankuba Sima</span>
-        </button>
-        <div class="star-tx">
-          <h3>Yankuba Sima</h3>
-          <p>Jugador d'Eurolliga, al campus del Barna.</p>
-          <a href="https://www.instagram.com/reel/DN1a1DvUGhg/" target="_blank" rel="noopener">Veure a Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DFiwKWIMz2q" aria-label="Reproduir el vídeo amb Malak Shady">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Malak Shady</span>
+          </button>
+          <div class="star-tx">
+            <h4>Malak Shady</h4>
+            <span class="role">MVP de 3x3 · segona peça</span>
+            <p>La segona peça seva que el club va publicar a la web del campus.</p>
+            <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -813,6 +1067,30 @@
             <span class="role">Entrenador NBA</span>
             <p>Tercera sessió del bloc de tecnificació.</p>
             <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMqb9P8sUic" aria-label="Reproduir el vídeo amb Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>Una de les dues peces seves que encapçalaven la web del campus 2026.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL0UkAfMJsI" aria-label="Reproduir el vídeo amb Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">Entrenador NBA</span>
+            <p>La segona, també publicada a la web del campus 2026.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
           </div>
         </div>
       </div>
@@ -910,6 +1188,85 @@
     </div>
 
     <div class="stars-group">
+      <h3>El recull de la web del campus</h3>
+      <p>Les peces que la web del campus 2026 tenia a la graella de <strong>#campustimechamber</strong> i de <strong>@cbgrupbarna</strong>. Són aquí perquè no es perdin quan aquella web deixi d'existir.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DLA0wKxsM2c" aria-label="Reproduir el vídeo amb La Nau del Clot">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>La Nau del Clot</span>
+          </button>
+          <div class="star-tx">
+            <h4>La Nau del Clot</h4>
+            <span class="role">El pavelló, en vídeo</span>
+            <p>El reel de la seu que la web del campus feia servir per ensenyar la pista.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DWrubLpDIU0" aria-label="Reproduir el vídeo amb Del campus">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Del campus</span>
+          </button>
+          <div class="star-tx">
+            <h4>Del campus</h4>
+            <span class="role">Recull #campustimechamber</span>
+            <p>Peça de la graella de la web del campus 2026.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DSk2otLiDVo" aria-label="Reproduir el vídeo amb Del campus">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Del campus</span>
+          </button>
+          <div class="star-tx">
+            <h4>Del campus</h4>
+            <span class="role">Recull #campustimechamber</span>
+            <p>Peça de la graella de la web del campus 2026.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DNjFQX1Mm1X" aria-label="Reproduir el vídeo amb Del campus">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Del campus</span>
+          </button>
+          <div class="star-tx">
+            <h4>Del campus</h4>
+            <span class="role">Publicat a @cbgrupbarna</span>
+            <p>Peça del perfil del club dins la graella de la web del campus.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DW2Iuj-jKwB" data-kind="p" aria-label="Reproduir el vídeo amb Del campus">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Del campus</span>
+          </button>
+          <div class="star-tx">
+            <h4>Del campus</h4>
+            <span class="role">Publicació de feed</span>
+            <p>Publicació de la graella de la web del campus 2026.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DIb0HSfMud_" data-kind="p" aria-label="Reproduir el vídeo amb Del campus">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Del campus</span>
+          </button>
+          <div class="star-tx">
+            <h4>Del campus</h4>
+            <span class="role">Publicació de feed</span>
+            <p>Publicació de la graella de la web del campus 2026.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Veure a Instagram →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stars-group">
       <h3>Les convocatòries publicades</h3>
       <p>Cada edició del campus s'anuncia amb <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es</a>. Aquestes són les quatre darreres.</p>
       <div class="convos">
@@ -924,22 +1281,8 @@
       </div>
     </div>
 
-    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Els vídeos són d'Instagram i només es carreguen si hi cliques. Tot el recull de l'edició és a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Els vídeos són d'Instagram i es carreguen a mesura que baixes, no tots de cop. Tot el recull de l'edició és a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
     <!-- ESTRELLES-CAMPUS:final -->
-    <script>
-      // Els reels i posts d'Instagram només es carreguen si l'usuari hi clica.
-      document.querySelectorAll('.star-play').forEach(function (b) {
-        b.addEventListener('click', function () {
-          var d = document.createElement('div');
-          d.className = 'star-embed';
-          // Uns són reels i uns altres publicacions de feed: data-kind="p" ho marca.
-          var kind = b.dataset.kind === 'p' ? 'p' : 'reel';
-          d.innerHTML = '<iframe src="https://www.instagram.com/' + kind + '/' + b.dataset.reel +
-            '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
-          b.replaceWith(d);
-        });
-      });
-    </script>
 
     <h2>El campus a Instagram</h2>
     <p>Les convocatòries de cada edició, publicades i enllaçades — no una promesa, un rastre que es pot comprovar.</p>
@@ -1148,5 +1491,8 @@
 </footer>
 <script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
+<script src="/js/canals.js" defer></script>
+<script src="/js/llista-espera.js" defer></script>
+<script src="/js/reels.js" defer></script>
 </body>
 </html>

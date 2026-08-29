@@ -58,11 +58,23 @@ NAU = [
      "Jugadora profesional. Salió de esta pista y ha vuelto a entrenar en ella.",
      "A professional player. She came up on this court and has come back to train on it.",
      "ainhoalopez_official"),
+    ("DMcpUFgst4L", "p", "Ainhoa López", "Ainhoa López", "Ainhoa López",
+     "Segona peça · publicació de feed", "Segunda pieza · publicación de feed",
+     "Second piece · feed post",
+     "La segona publicació de la seva visita, la que el club va fer servir a la web del campus.",
+     "La segunda publicación de su visita, la que el club usó en la web del campus.",
+     "The second post from her visit, the one used on the camp site.",
+     "ainhoalopez_official"),
     ("DJXMrhzsqYg", "reel", "Malak Shady", "Malak Shady", "Malak Shady",
      "MVP de 3x3", "MVP de 3x3", "3x3 MVP",
      "Referent del bàsquet a xarxes i MVP de 3x3.",
      "Referente del baloncesto en redes y MVP de 3x3.",
      "A basketball voice online and a 3x3 MVP.", "malakshady_22"),
+    ("DFiwKWIMz2q", "reel", "Malak Shady", "Malak Shady", "Malak Shady",
+     "MVP de 3x3 · segona peça", "MVP de 3x3 · segunda pieza", "3x3 MVP · second piece",
+     "La segona peça seva que el club va publicar a la web del campus.",
+     "La segunda pieza suya que el club publicó en la web del campus.",
+     "The second piece of hers the club published on the camp site.", "malakshady_22"),
 ]
 
 COACHES = [
@@ -81,6 +93,16 @@ COACHES = [
      "Tercera sessió del bloc de tecnificació.",
      "Tercera sesión del bloque de tecnificación.",
      "A third session in the skills block.", "nolanwillett3"),
+    ("DMqb9P8sUic", "reel", "Robert Willett", "Robert Willett", "Robert Willett",
+     "Entrenador NBA", "Entrenador NBA", "NBA coach",
+     "Una de les dues peces seves que encapçalaven la web del campus 2026.",
+     "Una de las dos piezas suyas que encabezaban la web del campus 2026.",
+     "One of the two pieces of his that headed the 2026 camp site.", "bballwillett"),
+    ("DL0UkAfMJsI", "reel", "Robert Willett", "Robert Willett", "Robert Willett",
+     "Entrenador NBA", "Entrenador NBA", "NBA coach",
+     "La segona, també publicada a la web del campus 2026.",
+     "La segunda, también publicada en la web del campus 2026.",
+     "The second, also published on the 2026 camp site.", "bballwillett"),
 ]
 
 ELIT = [
@@ -121,6 +143,44 @@ ELIT = [
      "A session with Time Chamber at the Badalona Olympic Arena, not at La Nau.", "joelparra"),
 ]
 
+# El graella de #campustimechamber i @cbgrupbarna de la web del campus 2026
+# (timechamber.skywork.website). No hi diem on es va gravar cada peça perquè
+# la font no ho diu: diem d'on surt, que sí que ho sabem.
+RECULL = [
+    ("DLA0wKxsM2c", "reel", "La Nau del Clot", "La Nau del Clot", "La Nau del Clot",
+     "El pavelló, en vídeo", "El pabellón, en vídeo", "The venue, on video",
+     "El reel de la seu que la web del campus feia servir per ensenyar la pista.",
+     "El reel de la sede que la web del campus usaba para enseñar la pista.",
+     "The venue reel the camp site used to show the court.", None),
+    ("DWrubLpDIU0", "reel", "Del campus", "Del campus", "From the camp",
+     "Recull #campustimechamber", "Recopilatorio #campustimechamber",
+     "#campustimechamber round-up",
+     "Peça de la graella de la web del campus 2026.",
+     "Pieza de la parrilla de la web del campus 2026.",
+     "A piece from the 2026 camp site grid.", None),
+    ("DSk2otLiDVo", "reel", "Del campus", "Del campus", "From the camp",
+     "Recull #campustimechamber", "Recopilatorio #campustimechamber",
+     "#campustimechamber round-up",
+     "Peça de la graella de la web del campus 2026.",
+     "Pieza de la parrilla de la web del campus 2026.",
+     "A piece from the 2026 camp site grid.", None),
+    ("DNjFQX1Mm1X", "reel", "Del campus", "Del campus", "From the camp",
+     "Publicat a @cbgrupbarna", "Publicado en @cbgrupbarna", "Posted on @cbgrupbarna",
+     "Peça del perfil del club dins la graella de la web del campus.",
+     "Pieza del perfil del club dentro de la parrilla de la web del campus.",
+     "A club-profile piece from the camp site grid.", None),
+    ("DW2Iuj-jKwB", "p", "Del campus", "Del campus", "From the camp",
+     "Publicació de feed", "Publicación de feed", "Feed post",
+     "Publicació de la graella de la web del campus 2026.",
+     "Publicación de la parrilla de la web del campus 2026.",
+     "A post from the 2026 camp site grid.", None),
+    ("DIb0HSfMud_", "p", "Del campus", "Del campus", "From the camp",
+     "Publicació de feed", "Publicación de feed", "Feed post",
+     "Publicació de la graella de la web del campus 2026.",
+     "Publicación de la parrilla de la web del campus 2026.",
+     "A post from the 2026 camp site grid.", None),
+]
+
 CONVOS = [
     ("DXKxd7VjCJK", "Campus d'estiu · La Nau del Clot", "Campus de verano · La Nau del Clot",
      "Summer camp · La Nau del Clot",
@@ -149,11 +209,13 @@ T = {
         g3="Jugadors d'elit que hi han entrenat",
         g3p=("Sessions amb Time Chamber, el soci del campus. No totes es van gravar a La Nau: quan no hi "
              "va ser, ho diem."),
+        g5="El recull de la web del campus",
+        g5p=("Les peces que la web del campus 2026 tenia a la graella de <strong>#campustimechamber</strong> i de <strong>@cbgrupbarna</strong>. Són aquí perquè no es perdin quan aquella web deixi d'existir."),
         g4="Les convocatòries publicades",
         g4p=('Cada edició del campus s\'anuncia amb <a href="%s/timechamber_es/" target="_blank" '
              'rel="noopener">@timechamber_es</a>. Aquestes són les quatre darreres.' % IG),
         play="Reproduir el vídeo amb", veure="Veure a Instagram →",
-        peu=('Els vídeos són d\'Instagram i només es carreguen si hi cliques. Tot el recull de l\'edició '
+        peu=('Els vídeos són d\'Instagram i es carreguen a mesura que baixes, no tots de cop. Tot el recull de l\'edició '
              'és a <a href="%s/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.' % IG),
     ),
     "es": dict(
@@ -171,11 +233,13 @@ T = {
         g3="Jugadores de élite que han entrenado",
         g3p=("Sesiones con Time Chamber, el socio del campus. No todas se grabaron en La Nau: cuando no "
              "fue así, lo decimos."),
+        g5="El recopilatorio de la web del campus",
+        g5p=("Las piezas que la web del campus 2026 tenía en la parrilla de <strong>#campustimechamber</strong> y de <strong>@cbgrupbarna</strong>. Están aquí para que no se pierdan cuando aquella web deje de existir."),
         g4="Las convocatorias publicadas",
         g4p=('Cada edición del campus se anuncia con <a href="%s/timechamber_es/" target="_blank" '
              'rel="noopener">@timechamber_es</a>. Estas son las cuatro últimas.' % IG),
         play="Reproducir el vídeo con", veure="Ver en Instagram →",
-        peu=('Los vídeos son de Instagram y solo se cargan si haces clic. Todo el recopilatorio de la '
+        peu=('Los vídeos son de Instagram y se cargan a medida que bajas, no todos de golpe. Todo el recopilatorio de la '
              'edición está en <a href="%s/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.' % IG),
     ),
     "en": dict(
@@ -192,11 +256,13 @@ T = {
         g3="Elite players who have trained there",
         g3p=("Sessions with Time Chamber, the camp partner. Not all of them were filmed at La Nau — where "
              "they weren't, we say so."),
+        g5="The camp site round-up",
+        g5p=("The pieces the 2026 camp site carried in its <strong>#campustimechamber</strong> and <strong>@cbgrupbarna</strong> grids. They live here so they don't vanish with that site."),
         g4="The camps we've announced",
         g4p=('Every edition is announced with <a href="%s/timechamber_es/" target="_blank" '
              'rel="noopener">@timechamber_es</a>. These are the last four.' % IG),
         play="Play the video with", veure="View on Instagram →",
-        peu=('The videos are hosted on Instagram and only load if you click. The full set for each edition '
+        peu=('The videos are hosted on Instagram and load as you scroll, not all at once. The full set for each edition '
              'is on <a href="%s/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.' % IG),
     ),
 }
@@ -257,6 +323,7 @@ def bloc(lang):
 {grup(t['g1'], esc(t['g1p']), NAU, t)}
 {grup(t['g2'], esc(t['g2p']), COACHES, t)}
 {grup(t['g3'], esc(t['g3p']), ELIT, t)}
+{grup(t['g5'], t['g5p'], RECULL, t)}
     <div class="stars-group">
       <h3>{esc(t['g4'])}</h3>
       <p>{t['g4p']}</p>
@@ -289,7 +356,7 @@ def main():
             text,
             flags=re.S,
         )
-        peces = len(NAU) + len(COACHES) + len(ELIT)
+        peces = len(NAU) + len(COACHES) + len(ELIT) + len(RECULL)
         if nou == text:
             print(f"  sense canvis: {cami}")
         elif dry:

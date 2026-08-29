@@ -454,6 +454,8 @@ def cap(t):
   ]
 }}
 </script>
+<link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/a11y.css">
 </head>"""
 
 
