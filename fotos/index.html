@@ -762,6 +762,16 @@ function eventCover(ev) {
   return THUMB(ev.cover);
 }
 
+// La miniatura 'thumb' (400px) es queda curta en targetes de pantalla completa
+// a mòbil i en pantalles retina: la 'web' fa de candidata @2x quan hi és.
+function eventCover2x(ev) {
+  const coverRef = ev.cover || (ev.photos || []).find(p => !isVideoRef(p));
+  if (isRepoRef(ev, coverRef) && coverRef && !isVideoRef(coverRef)) {
+    return derivada('web', ev, coverRef);
+  }
+  return null;
+}
+
 // ── STATE ──
 let currentEvent = null;
 let displayedCount = 0;
@@ -954,9 +964,10 @@ function renderEvents() {
 
     const dateStr = ev.date ? new Date(ev.date + 'T12:00:00').toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
 
+    const cover2x = eventCover2x(ev);
     card.innerHTML = `
       <div class="event-thumb">
-        <img src="${eventCover(ev)}" alt="${ev.title}" loading="lazy">
+        <img src="${eventCover(ev)}"${cover2x ? ` srcset="${eventCover(ev)} 1x, ${cover2x} 2x"` : ''} alt="${ev.title}" loading="lazy">
         <div class="event-thumb-overlay"></div>
         ${ev.season ? `<div class="event-season-tag">${ev.season}</div>` : ''}
         <div class="event-thumb-count">
