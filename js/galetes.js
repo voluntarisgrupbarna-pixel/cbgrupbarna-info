@@ -128,18 +128,21 @@
       aria: 'Consentiment de galetes', titol: 'Galetes', mes: 'Més informació',
       text: 'Fem servir Google Analytics per saber quines pàgines interessen més, sense galetes de publicitat.',
       nomes: 'Només les necessàries', accepta: 'Accepta-les',
+      peu: 'Preferències de galetes',
       enllac: '/politica-de-privacitat/#galetes'
     },
     es: {
       aria: 'Consentimiento de cookies', titol: 'Cookies', mes: 'Más información',
       text: 'Usamos Google Analytics para saber qué páginas interesan más, sin cookies de publicidad.',
       nomes: 'Solo las necesarias', accepta: 'Aceptarlas',
+      peu: 'Preferencias de cookies',
       enllac: '/es/politica-de-privacidad/#galetes'
     },
     en: {
       aria: 'Cookie consent', titol: 'Cookies', mes: 'More information',
       text: 'We use Google Analytics to see which pages people read most. No advertising cookies.',
       nomes: 'Only the necessary ones', accepta: 'Accept them',
+      peu: 'Cookie preferences',
       enllac: '/en/privacy-policy/#galetes'
     }
   };
@@ -259,6 +262,63 @@
     e.preventDefault();
     window.CBGB_GALETES.obrir();
   });
+
+  // ── 5 bis. L'enllaç del peu per tornar a decidir ──
+  //
+  // Retirar el consentiment ha de ser tan fàcil com donar-lo: si la barra
+  // només surt un cop i després no hi ha manera de tornar-hi, el «no» i el
+  // «sí» no valen igual. 279 pàgines ja porten l'enllaç «Galetes» al peu
+  // escrit a l'HTML, però 109 que carreguen aquest fitxer no en tenien cap
+  // —i entre elles hi ha les que recullen dades: /fotos/, /fotos-3x3/,
+  // /galeria-3x3-glories/, /escoleta/, /opina/ i /premidonaesport/—. En lloc
+  // d'anar a tocar 109 fitxers per tres idiomes (i que la pròxima pàgina nova
+  // torni a néixer sense l'enllaç), el posa aquí qui ja sap l'idioma de la
+  // pàgina i com reobrir el panell. Si l'HTML ja en porta un, no en dibuixa
+  // cap: manen les pàgines fetes a mà.
+  function pintarPeuGaletes() {
+    if (POLITIQUES.indexOf(location.pathname) !== -1) return;   // allà hi ha la secció de veritat
+    // El «Més informació» de la pròpia barra també acaba en #galetes i, com
+    // que la barra es pinta abans que això, comptava com si la pàgina ja
+    // tingués l'enllaç i no se n'injectava cap enlloc. Només valen els
+    // enllaços de fora de l'avís.
+    if (document.querySelector('a[href$="#galetes"]:not([data-cbgb-mes])')) return;
+
+    var est = document.createElement('style');
+    est.textContent =
+      '.cbgb-gal-peu{margin:0;padding:14px 20px;text-align:center;' +
+      "font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;" +
+      'font-size:12px;line-height:1.5;font-weight:300}' +
+      // Els peus del lloc són foscos (.foot) però n'hi ha de clars: heretant
+      // el color de l'element on s'enganxa, l'enllaç es llegeix als dos.
+      '.cbgb-gal-peu a{color:inherit;opacity:.72;text-decoration:none;' +
+      'border-bottom:1px solid currentColor;padding-bottom:1px}' +
+      '.cbgb-gal-peu a:hover,.cbgb-gal-peu a:focus-visible{opacity:1}' +
+      // Sense peu on encabir-lo (briefing, jugadors, un 404), va al final del
+      // document amb un filet que el separi del contingut.
+      '.cbgb-gal-peu--sol{border-top:1px solid rgba(128,128,128,.28);margin-top:24px}';
+    document.head.appendChild(est);
+
+    var t = textos();
+    var cont = document.createElement('p');
+    cont.className = 'cbgb-gal-peu';
+    var a = document.createElement('a');
+    a.href = t.enllac;   // sense JS, l'enllaç segueix portant a la política
+    a.textContent = t.peu;
+    cont.appendChild(a);
+
+    var peus = document.querySelectorAll('footer');
+    if (peus.length) {
+      peus[peus.length - 1].appendChild(cont);
+    } else {
+      cont.className += ' cbgb-gal-peu--sol';
+      document.body.appendChild(cont);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', pintarPeuGaletes);
+  } else {
+    pintarPeuGaletes();
+  }
 
   // ── 6. Accés ràpid al panell d'admin ──
   // Aquest fitxer es carrega a gairebé totes les pàgines (és el punt d'entrada
