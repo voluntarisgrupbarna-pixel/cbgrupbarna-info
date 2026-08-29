@@ -111,8 +111,28 @@ compte els permisos de full de càlcul i d'enviament de correu. Són sis passos:
 6. Copia l'URL que acaba en `/exec` i enganxa'l a `campusEndpoint` de
    `js/canals.js`.
 
-Per provar-ho, apunta't tu mateixa des de `/campus/#llista-espera` i comprova
-que arriben els dos correus i la fila.
+### Com saber si ha anat bé
+
+Obre l'URL `/exec` al navegador, tal qual. Ha de respondre un JSON amb
+`"ok": true`, si veu la full i quants correus pot enviar avui. Si vols provar
+els correus de debò, a l'editor d'Apps Script tria la funció **`provaCorreu`**
+al desplegable i clica Executa: envia els dos correus a `AVIS_A` i escriu una
+fila de prova que després pots esborrar a mà.
+
+### Si algú fa servir una versió pròpia de l'script
+
+Els noms dels camps són un contracte amb `js/llista-espera.js`. El formulari
+envia sempre aquest JSON, i qualsevol script que el rebi ha de llegir aquestes
+claus exactes:
+
+```
+nom · any · tutor · correu · telefon · edicions · missatge · idioma · source
+```
+
+`edicions` arriba com a text separat per comes (`nadal, estiu`), `idioma` és
+`ca`, `es` o `en` —serveix per triar l'idioma del correu de confirmació— i
+`source` sempre val `campus-llista-espera`. Si es canvia un nom d'aquests a
+l'script, cal canviar-lo també al JavaScript, o les files sortiran buides.
 
 **Compte amb una cosa:** el correu de confirmació surt del compte de Google que
 desplega l'script, amb el seu límit diari d'enviaments (100 al dia en un compte

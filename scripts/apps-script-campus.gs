@@ -25,8 +25,10 @@
  *  6. Copia l'URL que acaba en /exec i enganxa'l a js/canals.js, al camp
  *     `campusEndpoint`. Res més: el formulari ja hi apunta.
  *
- * Per provar-ho: apunta't tu mateix des de /campus/#llista-espera i mira
- * que arribin els dos correus i la fila.
+ * Per saber si ha anat be, sense omplir res: obre l'URL /exec al
+ * navegador. Ha de respondre "ok": true, dir si veu la full i quants
+ * correus pot enviar avui. Si vols provar els correus de veritat, tria
+ * la funcio provaCorreu al desplegable de l'editor i clica Executa.
  * ─────────────────────────────────────────────────────────────────────────
  */
 
@@ -43,6 +45,54 @@ var CAPCALERES = [
   'Data', 'Jugador/a', 'Any', 'Qui apunta', 'Correu', 'Telèfon',
   'Edicions', 'Missatge', 'Idioma', 'Origen'
 ];
+
+/**
+ * Obrir l'URL /exec al navegador respon aqui. Serveix per saber, sense
+ * omplir cap formulari, si el desplegament ha anat be: comprova que
+ * l'script veu la full de calcul i que te permis per enviar correu, i
+ * diu quantes altes hi ha.
+ */
+function doGet() {
+  var estat = { ok: true, servei: 'Llista d\'espera del campus · CB Grup Barna' };
+  try {
+    var full = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(FULLA);
+    estat.full = full ? 'sí' : 'encara no (es crea a la primera alta)';
+    estat.altes = full ? Math.max(0, full.getLastRow() - 1) : 0;
+  } catch (err) {
+    estat.ok = false;
+    estat.full = 'ERROR: ' + err;
+  }
+  try {
+    estat.correus_que_puc_enviar_avui = MailApp.getRemainingDailyQuota();
+  } catch (err) {
+    estat.ok = false;
+    estat.correus_que_puc_enviar_avui = 'ERROR: ' + err;
+  }
+  estat.avis_a = AVIS_A;
+  estat.seguent_pas = estat.ok
+    ? 'Tot correcte. Enganxa aquest URL a campusEndpoint de js/canals.js.'
+    : 'Alguna cosa falla: mira els ERROR de sobre.';
+  return resposta(estat);
+}
+
+/**
+ * Prova d'enviament, per executar-la des de l'editor d'Apps Script
+ * (tria «provaCorreu» al desplegable i clica Executa). Envia els dos
+ * correus a AVIS_A amb dades inventades i escriu una fila de prova, que
+ * pots esborrar despres a ma.
+ */
+function provaCorreu() {
+  var fals = {
+    nom: 'PROVA · esborra aquesta fila', any: '2014', tutor: 'Prova',
+    correu: AVIS_A, telefon: '', edicions: 'nadal', missatge: 'Fila de prova.',
+    idioma: 'ca', source: 'prova'
+  };
+  desa([new Date(), fals.nom, fals.any, fals.tutor, fals.correu, fals.telefon,
+        fals.edicions, fals.missatge, fals.idioma, fals.source]);
+  avisaClub(fals);
+  confirmaFamilia(fals);
+  Logger.log('Enviats els dos correus a ' + AVIS_A + ' i escrita la fila de prova.');
+}
 
 function doPost(e) {
   var d = {};
