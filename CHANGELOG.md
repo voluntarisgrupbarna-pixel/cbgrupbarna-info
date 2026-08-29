@@ -22,6 +22,33 @@ només l'hi posa nom.
 
 ---
 
+## 2.2.0 — 2026-08-29
+
+**Grups privats amb enllaç propi a la galeria.** Fins ara un àlbum marcat com a
+privat des de `/fotos/admin.html` només el podia veure qui tingués la clau
+mestra de màrqueting, que obre tots els grups alhora: no hi havia manera de
+donar un àlbum a un equip o a una família sense donar-los-ho tot. Ara cada grup
+privat neix amb la seva clau (`access_key` a `fotos/events.js`) i el seu enllaç
+—`/fotos/?clau=<clau>#<grup>`—, que obre aquell grup i cap altre. El panell el
+genera en fer privat l'àlbum, el mostra en un quadre amb botó de copiar i en pot
+generar un de nou si l'enllaç es filtra. La clau mestra segueix obrint-los tots
+i ara s'edita des de la configuració del panell.
+
+Dues coses més que hi anaven de la mà. Les galeries en castellà i anglès
+(`/es/fotos/` i `/en/fotos/`) no havien rebut mai el filtre de privacitat: els
+grups privats hi sortien al llistat, als comptadors i als filtres de temporada.
+Ja no. I desar la configuració des del panell esborrava del `config.js` la clau
+de màrqueting i les dues adreces d'R2, que el formulari no editava però tampoc
+tornava a escriure; ara les conserva.
+
+**El que això protegeix i el que no.** La web és estàtica i no hi ha cap
+servidor que validi res: és un enllaç **no llistat**, no un mur amb
+contrasenya. Treu el grup de la galeria per a qui no en tingui l'enllaç, però
+els fitxers segueixen vivint en URL públiques i qui ja tingui l'adreça d'una
+foto hi arribarà igualment. Ho diu el mateix panell en generar la clau.
+
+---
+
 ## 2.1.0 — 2026-08-29
 
 **Els cinc punts «purament tècnics» del tauler de pendents.** Tres pàgines
