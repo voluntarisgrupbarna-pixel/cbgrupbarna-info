@@ -58,6 +58,7 @@ ARBRE = [
         ("/posicionament/", "Posicionament del club", "Posicionamiento del club", "Club positioning"),
     ]),
     ("Actualitat", "Actualidad", "News", [
+        ("/observatori/", "Observatori Barna", "Observatori Barna", "Observatori Barna"),
         ("/blog/", "Coneixement Barna", "Conocimiento Barna", "Barna knowledge"),
         ("/video/", "Vídeo", "Vídeo", "Videos"),
         ("/premsa/", "Premsa", "Prensa", "Press"),

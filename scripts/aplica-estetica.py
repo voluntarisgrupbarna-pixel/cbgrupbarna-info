@@ -15,6 +15,9 @@ Fa dues coses, i només dues, perquè es puguin revisar d'una llegida:
 El que NO toca, a posta:
   · /orgull/            la bandera de l'Orgull no és decoració
   · /opina/print/       peces per imprimir, altre mitjà
+  · /observatori/       tercera família (Jost) triada expressament per a
+                        aquesta línia editorial, per sobre de la regla
+                        general — vegeu css/observatori.css
   · admin i eines       pàgines internes, no són cara pública
   · marques d'altri     Instagram, WhatsApp i TikTok porten el seu color
   · semàntics de partit --win i --loss de /partits/
@@ -37,6 +40,8 @@ EXCLOU_PATRONS = (
     "css/fonts.css",
     "orgull/",
     "opina/print/",
+    "observatori/",
+    "css/observatori.css",
     "admin/",
     "/admin.html",
     "briefing/admin.html",

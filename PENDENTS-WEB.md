@@ -230,10 +230,20 @@ seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
   eren traduccions de la pàgina antiga.~~ **Fet.** Les dues ja tradueixen
   `/femeni/`: 9 de 9 seccions als tres idiomes, i `i18n-contingut.py` no hi
   troba cap avís.
-- **"Tecnificació"** (dins Activitats) i **"Notícies"** (dins Actualitat) són
-  a l'arbre de l'Ana però no tenen cap pàgina real al lloc ni contingut al
-  repositori. No s'han afegit al menú per no inventar-hi programa, preus o
-  notícies. Falta que l'Ana digui què són exactament i doni el material.
+- **"Tecnificació"** (dins Activitats) segueix sense pàgina real ni contingut
+  al repositori. No s'ha afegit al menú per no inventar-hi programa ni preus.
+- ~~**"Notícies"** (dins Actualitat) sense pàgina real~~ **Decidit i
+  implementat (29/08/2026):** és **Observatori Barna**
+  (`/observatori/`, `/es/observatori/`, `/en/observatori/`), línia
+  d'anàlisi i criteri —no notícies puntuals— amb un article nou cada
+  setmana, en vuit sèries (vegeu `llms.txt`). Ja al menú ≡ dins
+  «Actualitat» (`scripts/build-mapa.py`). Primer article publicat:
+  «Què és realment un bon club de bàsquet formatiu?», amb els deu
+  criteris de l'Índex Barna. Estètica pròpia amb una tercera família
+  tipogràfica (Jost, autohostatjada a `/fonts/jost-400-500.woff2`):
+  excepció deliberada a la regla de dues famílies de `web-cbgb` §2,
+  exclosa expressament d'`scripts/aplica-estetica.py`. La resta de les
+  set sèries encara no tenen article: s'aniran escrivint una per setmana.
 
 ## Sense acció
 
