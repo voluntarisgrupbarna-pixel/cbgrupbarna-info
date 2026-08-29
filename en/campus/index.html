@@ -37,6 +37,30 @@
   .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
   @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
 
+  /* Estat de les inscripcions: el primer que ha de veure qui arriba fora de
+     temporada. Caixa, no banner de colors: ha de llegir-se, no cridar. */
+  .campus-estat { border: 1px solid var(--line); border-left: 3px solid var(--red);
+    background: var(--paper-2); padding: clamp(20px, 3vw, 30px); }
+  .campus-estat h2 { margin-top: 0; }
+  .campus-estat .dl { margin: 14px 0 0; }
+
+  /* Caselles de la llista d'espera i mapa que no es carrega tot sol. */
+  .form fieldset { border: 0; padding: 0; margin: 0; }
+  .form fieldset legend { font-family: var(--display); font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-2); padding: 0; margin-bottom: 10px; }
+  .form fieldset .check { display: flex; align-items: center; gap: 10px; font-size: 15px;
+    letter-spacing: 0; text-transform: none; font-family: inherit; color: var(--ink);
+    padding: 7px 0; cursor: pointer; }
+  .form fieldset .check input { width: 17px; height: 17px; margin: 0; flex: 0 0 auto;
+    accent-color: var(--red); }
+  /* Dins de la caixa d'estat els enllaços han de semblar-ho: no hereten
+     l'estil de .prose perquè la caixa viu fora de l'article. */
+  .campus-estat a:not(.btn) { color: var(--red-dark); text-decoration: underline;
+    text-underline-offset: 3px; }
+  .campus-estat a:not(.btn):hover { text-decoration-thickness: 2px; }
+  .mapa-lazy { margin: 18px 0 clamp(26px, 4vw, 40px); }
+  .mapa-lazy iframe { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--line); }
+
   /* Programa setmanal en targetes: número + dates + focus, com el
      calendari del microsite de Time Chamber però amb el llenguatge del Barna. */
   .weeks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: clamp(26px, 4vw, 44px) 0; }
@@ -501,6 +525,28 @@
   </div>
 
 
+
+<!-- ESTAT-CAMPUS:inici · generat per scripts/build-campus-estat.py -->
+  <div class="narrow" style="margin-top:clamp(28px,4vw,44px)">
+    <div class="campus-estat">
+      <p class="eyebrow red">Registration closed</p>
+      <h2 style="margin-top:6px">No camp is open right now</h2>
+      <p>Registration for the summer 2026 edition is <strong>closed</strong>. The site it opened with is still up: <a href="https://timechamber.skywork.website/" target="_blank" rel="noopener" data-cta="campus-web-2026">the 2026 Timechamber Camp site →</a>. Everything it said is also further down this page, so it does not depend on a site that is not ours.</p>
+      <h3 style="margin-top:26px">What comes next</h3>
+      <dl class="dl">
+      <div class="dl-row"><dt>Very soon</dt><dd><strong>Christmas camp</strong><br>We announce it within days, here and on @cbgrupbarna.</dd></div>
+      <div class="dl-row"><dt>In January</dt><dd><strong>Easter and summer</strong><br>Both editions at once: dates, weeks and when registration opens.</dd></div>
+      </dl>
+      <p style="margin-top:18px">If you don't want to miss it, join the waiting list: we write to everyone on it <strong>a day before</strong> we publish.</p>
+      <div class="btn-row">
+        <a href="#llista-espera" class="btn red" data-cta="campus-estat-llista">Join the waiting list</a>
+        <a href="https://wa.me/34698425153" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-estat-wa">Ask on WhatsApp</a>
+        <a href="https://timechamber.skywork.website/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-estat-web2026">2026 camp site →</a>
+      </div>
+    </div>
+  </div>
+  <!-- ESTAT-CAMPUS:final -->
+
   <div class="narrow prose" id="fitxa">
 <!-- FITXA-CAMPUS:inici · generat per scripts/build-campus-fitxa.py -->
     <h2>Camp fact sheet</h2>
@@ -536,6 +582,17 @@
     <p>The club runs it with <strong>Time Chamber</strong>, which brings the individual training
     methodology. That combination is what defines the camp: the repetition volume of a skills
     academy with the team atmosphere of a neighbourhood club with sixty-one years of history.</p>
+
+
+<!-- DIFERENCIA-CAMPUS:inici · generat per scripts/build-campus-estat.py -->
+    <h2>Why inside a club, and not in a rented venue</h2>
+    <dl class="dl">
+      <div class="dl-row"><dt>A camp inside a club, not on a court passed through</dt><dd>The camp runs at <strong>La Nau del Clot</strong>, the club's own facility, not a space hired for the occasion. The city's big camps work out of rented venues and change courts from year to year; we train there all season, with the same coaches and the same badge on the wall.</dd></div>
+      <div class="dl-row"><dt>Skills work that goes back to no team gets lost</dt><dd>An intensive week improves a player's shot or handle. If in September they go back somewhere nobody knows what they worked on, it fades. Here the camp coaches and the season coaches are the same people and they talk to each other: what is worked on in July carries into October.</dd></div>
+      <div class="dl-row"><dt>We keep tracking players during the camp too</dt><dd>Our players don't stop being followed because it is summer: what shows up at the camp goes into their record and reaches their season coach.</dd></div>
+      <div class="dl-row"><dt>And we watch the ones who come from outside</dt><dd>The camp is open to any club, and for the Barna it is also the best way to meet players we don't know yet. Someone from another club trains and goes home just the same; but if they fit and they're interested, they already know where the door is.</dd></div>
+    </dl>
+    <!-- DIFERENCIA-CAMPUS:final -->
 
     <h2>Who coaches</h2>
     <p>What separates a skills camp from a holiday club with a ball is not what the leaflet says:
@@ -665,24 +722,183 @@
       <a href="/en/fotos/#summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9" class="btn ghost" data-cta="campus-galeria-completa">See the summer gallery →</a>
     </div>
 
+
+<!-- ARXIU-CAMPUS:inici · generat per scripts/build-campus-estat.py -->
+    <h2 id="llista-espera">Camp waiting list</h2>
+    <p>Leave us your contact and we will write when registration opens, before we publish it. You will get a confirmation email straight away; if it does not arrive, check your spam folder.</p>
+    <form class="form" id="le-form" novalidate>
+      <div class="form-row">
+        <label for="le-nom">Player's name <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="le-nom" name="nom" required autocomplete="off" aria-describedby="le-nom-err">
+        <p class="form-err" id="le-nom-err" role="alert">Tell us their name.</p>
+      </div>
+      <div class="form-row">
+        <label for="le-any">Year of birth <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" inputmode="numeric" id="le-any" name="any" required autocomplete="off" aria-describedby="le-any-err">
+        <p class="form-err" id="le-any-err" role="alert">Please give the year of birth (for example, 2014).</p>
+      </div>
+      <div class="form-row">
+        <label for="le-tutor">Your name <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="le-tutor" name="tutor" required autocomplete="name" aria-describedby="le-tutor-err">
+        <p class="form-err" id="le-tutor-err" role="alert">Tell us who is writing.</p>
+      </div>
+      <div class="form-row">
+        <label for="le-mail">Your email <span class="req" aria-hidden="true">*</span></label>
+        <span class="hint">This is where the confirmation and the opening notice go.</span>
+        <input type="email" id="le-mail" name="correu" required autocomplete="email" aria-describedby="le-mail-err">
+        <p class="form-err" id="le-mail-err" role="alert">We need a valid email to be able to tell you.</p>
+      </div>
+      <div class="form-row">
+        <label for="le-tel">Phone</label>
+        <span class="hint">Optional. Only if you would rather hear from us on WhatsApp.</span>
+        <input type="tel" id="le-tel" name="telefon" autocomplete="tel">
+      </div>
+      <fieldset class="form-row">
+        <legend>Which editions interest you</legend>
+        <label class="check"><input type="checkbox" name="edicions" value="nadal"> Christmas camp</label>
+        <label class="check"><input type="checkbox" name="edicions" value="setmana-santa"> Easter</label>
+        <label class="check"><input type="checkbox" name="edicions" value="estiu"> Summer</label>
+      </fieldset>
+      <div class="form-row">
+        <label for="le-msg">Anything we should know</label>
+        <span class="hint">Optional. Age group, current club, whether they are coming with a friend…</span>
+        <textarea id="le-msg" name="missatge"></textarea>
+      </div>
+      <div class="btn-row" style="margin-top:22px">
+        <button type="submit" class="btn red">Add me to the list</button>
+      </div>
+    </form>
+    <div class="form-done" id="le-done" role="status">
+      <h3>You're on the list</h3>
+      <p>You are on the list. You will get a confirmation email and we will write when registration opens. In a hurry? The <a href="https://wa.me/34698425153">club WhatsApp</a> is the fast route.</p>
+    </div>
+    <p style="font-size:13.5px;color:var(--ink-2)">What you write here is read by the club and is used only to tell you about the camp. We do not add you to any other list. The detail is in the <a href="/en/privacy-policy/">privacy policy</a>.</p>
+
+    <h2>The 2026 edition, as it was published</h2>
+    <p>This is what the <strong>Timechamber Experience 2026</strong> site said, kept here in full. It tells you what the camp looks like when it opens: these were the numbers, the weeks, the prices and the services. <strong>Dates and prices for the next edition will be announced afresh</strong>.</p>
+    <p style="font-size:19px;line-height:1.45"><em>“The most innovative summer basketball camp in Barcelona.”</em><br>
+    <span style="font-size:14.5px;color:var(--ink-2)">23 June to 1 August · La Nau del Clot</span></p>
+
+    <div class="facts">
+      <div><b>6</b><span>themed weeks</span></div>
+      <div><b>+200</b><span>players per edition</span></div>
+      <div><b>NBA</b><span>elite methodology</span></div>
+      <div><b>100%</b><span>family satisfaction</span></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--ink-2)">Figures as published on the 2026 camp site. The club's own count for summer 2026 is 150 participants across the six weeks; the “+200 per edition” is the campaign figure.</p>
+
+    <h3>Six weeks, six experiences</h3>
+    <p>Each week had its own identity. You could come for one week or for all of them.</p>
+    <div class="weeks">
+      <div class="week">
+        <b>01</b>
+        <time>23–27 June</time>
+        <h4>FLOW CAMP</h4>
+        <p>Attacking flow and playing on the move.</p>
+      </div>
+      <div class="week">
+        <b>02</b>
+        <time>30–4 June–July</time>
+        <h4>TIMECHAMBER BASICS</h4>
+        <p>Solid fundamentals for an elite game.</p>
+      </div>
+      <div class="week">
+        <b>03</b>
+        <time>7–11 July</time>
+        <h4>SHOOTING ACADEMY</h4>
+        <p>Shooting mechanics, rhythm and confidence.</p>
+      </div>
+      <div class="week">
+        <b>04</b>
+        <time>14–18 July</time>
+        <h4>ONE ON ONE MASTERY</h4>
+        <p>Owning the 1-on-1. Fakes and attacking creativity.</p>
+      </div>
+      <div class="week">
+        <b>05</b>
+        <time>21–25 July</time>
+        <h4>BALLHANDLING LAB</h4>
+        <p>Ball control at the highest level.</p>
+      </div>
+      <div class="week">
+        <b>06</b>
+        <time>28–1 July–August</time>
+        <h4>SKILLS LAB EXPERIENCE</h4>
+        <p>Everything together. The closing week.</p>
+      </div>
+    </div>
+
+    <h3>The prices that were published</h3>
+    <p>These were the 2026 prices. Next edition's will be published when registration opens.</p>
+    <div class="price-cards">
+      <div class="price-card top">
+        <span class="tag">Recommended</span>
+        <b>Full week</b>
+        <p class="sched"><strong>€195</strong> · 9 am to 5 pm</p>
+        <ul>
+          <li>Lunch included</li>
+          <li>Early drop-off</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tag">Alternative</span>
+        <b>Half day</b>
+        <p class="sched"><strong>€160</strong> · 9 am to 1:30 pm</p>
+        <ul>
+          <li>Same groups, same weekly focus</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">A 10% early-bird discount before 20 April with the code <b>BARNAAVIAT</b>. And you could book in 3 instalments: a first payment holds the place and the rest is split.</p>
+
+    <h3>What was included</h3>
+    <dl class="dl">
+      <div class="dl-row"><dt>Hours</dt><dd>9 am–1:30 pm half day · 9 am–5 pm full day</dd></div>
+      <div class="dl-row"><dt>Drop-off</dt><dd>Early morning drop-off</dd></div>
+      <div class="dl-row"><dt>Lunch</dt><dd>Lunch included on the full day</dd></div>
+      <div class="dl-row"><dt>Friday</dt><dd>Trip to Illa Fantasia</dd></div>
+    </dl>
+
+    <h3>The venue</h3>
+    <p><strong>The club's own facility.</strong> La Nau del Clot · Carrer de la Llacuna 172, 08018 Barcelona.</p>
+    <div class="btn-row">
+      <a href="https://maps.google.com/?q=La+Nau+del+Clot+Carrer+de+la+Llacuna+172+Barcelona" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-com-arribar">Directions →</a>
+    </div>
+    <div class="mapa-lazy" data-mapa="La Nau del Clot · Carrer de la Llacuna 172, 08018 Barcelona">
+      <button type="button" class="btn ghost" id="mapa-carrega">Load the Google map</button>
+      <p style="font-size:13px;color:var(--ink-2);margin-top:8px">The map is Google's and sets cookies: it only loads if you ask for it.</p>
+    </div>
+
+    <h3>Hashtags and accounts</h3>
+    <p>The camp conversation lives here. These are the accounts and tags everything on this page was published under.</p>
+    <div class="btn-row">
+      <a href="https://www.instagram.com/cbgrupbarna/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-ig-club">@cbgrupbarna</a>
+      <a href="https://www.instagram.com/timechamber_es/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-ig-tc">@timechamber_es</a>
+      <a href="https://www.instagram.com/explore/tags/campustimechamber/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-hash-1">#campustimechamber</a>
+      <a href="https://www.instagram.com/explore/tags/timechamber/" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-hash-2">#timechamber</a>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">The original 2026 site stays online for as long as its provider keeps it: <a href="https://timechamber.skywork.website/" target="_blank" rel="noopener">timechamber.skywork.website</a>. This page does not depend on it.</p>
+    <!-- ARXIU-CAMPUS:final -->
+
 <!-- ESTRELLES-CAMPUS:inici · generat per scripts/build-campus-estrelles.py -->
     <h2>Camp guests</h2>
-    <p>Something not everyone does: leading figures in basketball have come to the camp to train with our players. Not a visit for the photo — on court, running the session. We split it into three groups because it was not all filmed in the same place: first what happened <strong>at La Nau del Clot</strong>, then the work of the coaches and the elite players <strong>with Time Chamber</strong>, which is our camp partner.</p>
+    <p>Something not every club can say: players and coaches at the top of the game have come to the camp to train with our kids. Not a photo visit — on court, running the session. We split them into three groups because not everything was filmed in the same place: first what happened <strong>at La Nau del Clot</strong>, then the work by coaches and elite players <strong>with Time Chamber</strong>, our camp partner.</p>
 
     <div class="stars-group">
       <h3>At La Nau del Clot</h3>
-      <p>Filmed at the club's venue, with our own players on court.</p>
+      <p>Filmed at the club's own court, with our players on it.</p>
       <div class="stars">
         <div class="star">
-          <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="Play the video with The edition round-up">
+          <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="Play the video with The season recap">
             <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-            <span>The edition round-up</span>
+            <span>The season recap</span>
           </button>
           <div class="star-tx">
-            <h4>The edition round-up</h4>
-            <span class="role">Final camp reel</span>
+            <h4>The season recap</h4>
+            <span class="role">Camp closing reel</span>
             <p>How the Timechamber Camp ended: every week in one video.</p>
-            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">See on Instagram →</a>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
           </div>
         </div>
         <div class="star">
@@ -692,9 +908,9 @@
           </button>
           <div class="star-tx">
             <h4>Shooting Academy</h4>
-            <span class="role">Week 3 of the camp</span>
-            <p>The week devoted to shooting, from inside the court.</p>
-            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">See on Instagram →</a>
+            <span class="role">Camp week 3</span>
+            <p>The week devoted to shooting, from the court.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
           </div>
         </div>
         <div class="star">
@@ -717,7 +933,7 @@
           <div class="star-tx">
             <h4>Robert Willett</h4>
             <span class="role">NBA coach · at the camp</span>
-            <p>Second session, another block of work.</p>
+            <p>A second session, a different block of work.</p>
             <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
           </div>
         </div>
@@ -728,8 +944,20 @@
           </button>
           <div class="star-tx">
             <h4>Ainhoa López</h4>
-            <span class="role">Spain international · developed in El Clot</span>
-            <p>Professional player. She came off this court and has come back to train on it.</p>
+            <span class="role">Spanish national team · trained at El Clot</span>
+            <p>A professional player. She came up on this court and has come back to train on it.</p>
+            <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMcpUFgst4L" data-kind="p" aria-label="Play the video with Ainhoa López">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Ainhoa López</span>
+          </button>
+          <div class="star-tx">
+            <h4>Ainhoa López</h4>
+            <span class="role">Second piece · feed post</span>
+            <p>The second post from her visit, the one used on the camp site.</p>
             <a href="https://www.instagram.com/ainhoalopez_official/" target="_blank" rel="noopener">@ainhoalopez_official →</a>
           </div>
         </div>
@@ -741,38 +969,28 @@
           <div class="star-tx">
             <h4>Malak Shady</h4>
             <span class="role">3x3 MVP</span>
-            <p>A leading figure in basketball on social media and a 3x3 MVP.</p>
+            <p>A basketball voice online and a 3x3 MVP.</p>
             <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
           </div>
         </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-embed="reel/DO4KaZxCLqY" aria-label="Play the reel with Serge Ibaka">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Serge Ibaka</span>
-        </button>
-        <div class="star-tx">
-          <h3>Serge Ibaka</h3>
-          <p>2019 NBA champion, visiting El Clot.</p>
-          <a href="https://www.instagram.com/reel/DO4KaZxCLqY/" target="_blank" rel="noopener">See on Instagram →</a>
-        </div>
-      </div>
-      <div class="star">
-        <button type="button" class="star-play" data-embed="reel/DN1a1DvUGhg" aria-label="Play the reel with Yankuba Sima">
-          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
-          <span>Yankuba Sima</span>
-        </button>
-        <div class="star-tx">
-          <h3>Yankuba Sima</h3>
-          <p>EuroLeague player, at the Barna camp.</p>
-          <a href="https://www.instagram.com/reel/DN1a1DvUGhg/" target="_blank" rel="noopener">See on Instagram →</a>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DFiwKWIMz2q" aria-label="Play the video with Malak Shady">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Malak Shady</span>
+          </button>
+          <div class="star-tx">
+            <h4>Malak Shady</h4>
+            <span class="role">3x3 MVP · second piece</span>
+            <p>The second piece of hers the club published on the camp site.</p>
+            <a href="https://www.instagram.com/malakshady_22/" target="_blank" rel="noopener">@malakshady_22 →</a>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="stars-group">
       <h3>NBA coaches with Time Chamber</h3>
-      <p>The individual training methodology the camp uses comes from here.</p>
+      <p>The individual-work method the camp is built on comes from here.</p>
       <div class="stars">
         <div class="star">
           <button type="button" class="star-play" data-reel="DMLipXBsMMe" aria-label="Play the video with Nolan Willett">
@@ -794,7 +1012,7 @@
           <div class="star-tx">
             <h4>Nolan Willett</h4>
             <span class="role">NBA coach</span>
-            <p>Second session: game reading and finishing near the basket.</p>
+            <p>A second session: reading the game and finishing near the rim.</p>
             <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
           </div>
         </div>
@@ -806,16 +1024,40 @@
           <div class="star-tx">
             <h4>Nolan Willett</h4>
             <span class="role">NBA coach</span>
-            <p>Third session of the skills block.</p>
+            <p>A third session in the skills block.</p>
             <a href="https://www.instagram.com/nolanwillett3/" target="_blank" rel="noopener">@nolanwillett3 →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DMqb9P8sUic" aria-label="Play the video with Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">NBA coach</span>
+            <p>One of the two pieces of his that headed the 2026 camp site.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DL0UkAfMJsI" aria-label="Play the video with Robert Willett">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>Robert Willett</span>
+          </button>
+          <div class="star-tx">
+            <h4>Robert Willett</h4>
+            <span class="role">NBA coach</span>
+            <p>The second, also published on the 2026 camp site.</p>
+            <a href="https://www.instagram.com/bballwillett/" target="_blank" rel="noopener">@bballwillett →</a>
           </div>
         </div>
       </div>
     </div>
 
     <div class="stars-group">
-      <h3>Elite players who have trained here</h3>
-      <p>Sessions with Time Chamber, the camp partner. Not all of them were filmed at La Nau: where they were not, we say so.</p>
+      <h3>Elite players who have trained there</h3>
+      <p>Sessions with Time Chamber, the camp partner. Not all of them were filmed at La Nau — where they weren't, we say so.</p>
       <div class="stars">
         <div class="star">
           <button type="button" class="star-play" data-reel="DO4KaZxCLqY" aria-label="Play the video with Serge Ibaka">
@@ -825,7 +1067,7 @@
           <div class="star-tx">
             <h4>Serge Ibaka</h4>
             <span class="role">2019 NBA champion</span>
-            <p>Training session with Time Chamber.</p>
+            <p>A working session with Time Chamber.</p>
             <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
           </div>
         </div>
@@ -837,7 +1079,7 @@
           <div class="star-tx">
             <h4>Yankuba Sima</h4>
             <span class="role">EuroLeague</span>
-            <p>Post work with Time Chamber.</p>
+            <p>Big-man work with Time Chamber.</p>
             <a href="https://www.instagram.com/yankubasima/" target="_blank" rel="noopener">@yankubasima →</a>
           </div>
         </div>
@@ -849,7 +1091,7 @@
           <div class="star-tx">
             <h4>Pedro Marhuenda</h4>
             <span class="role">Professional player</span>
-            <p>Individual session with Time Chamber.</p>
+            <p>An individual session with Time Chamber.</p>
             <a href="https://www.instagram.com/4future_pedromarhuenda/" target="_blank" rel="noopener">@4future_pedromarhuenda →</a>
           </div>
         </div>
@@ -861,7 +1103,7 @@
           <div class="star-tx">
             <h4>Dani Carrasco</h4>
             <span class="role">Professional player</span>
-            <p>Training session with Time Chamber.</p>
+            <p>A working session with Time Chamber.</p>
             <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es →</a>
           </div>
         </div>
@@ -873,7 +1115,7 @@
           <div class="star-tx">
             <h4>Salo 23</h4>
             <span class="role">Player</span>
-            <p>Skills session with Time Chamber.</p>
+            <p>A skills session with Time Chamber.</p>
             <a href="https://www.instagram.com/salo23_/" target="_blank" rel="noopener">@salo23_ →</a>
           </div>
         </div>
@@ -885,7 +1127,7 @@
           <div class="star-tx">
             <h4>Kassius</h4>
             <span class="role">Player</span>
-            <p>Skills session with Time Chamber.</p>
+            <p>A skills session with Time Chamber.</p>
             <a href="https://www.instagram.com/kassius_r/" target="_blank" rel="noopener">@kassius_r →</a>
           </div>
         </div>
@@ -897,7 +1139,7 @@
           <div class="star-tx">
             <h4>Joel Parra</h4>
             <span class="role">ACB · Joventut</span>
-            <p>Session with Time Chamber at the Badalona Olympic Arena, not at La Nau.</p>
+            <p>A session with Time Chamber at the Badalona Olympic Arena, not at La Nau.</p>
             <a href="https://www.instagram.com/joelparra/" target="_blank" rel="noopener">@joelparra →</a>
           </div>
         </div>
@@ -905,21 +1147,100 @@
     </div>
 
     <div class="stars-group">
-      <h3>The published announcements</h3>
-      <p>Every edition of the camp is announced with <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es</a>. These are the last four.</p>
-      <div class="convos">
-        <a href="https://www.instagram.com/p/DXKxd7VjCJK/" target="_blank" rel="noopener">
-          <b>Summer camp · La Nau del Clot</b><span>Announcement of 16 April</span></a>
-        <a href="https://www.instagram.com/p/DUtmAbHjFIs/" target="_blank" rel="noopener">
-          <b>Flow Camp · Easter</b><span>From 30 March to 3 April</span></a>
-        <a href="https://www.instagram.com/p/DUT5hyjDD7S/" target="_blank" rel="noopener">
-          <b>Carnival camp</b><span>Announcement of 3 February</span></a>
-        <a href="https://www.instagram.com/p/DQ7nLmkjINq/" target="_blank" rel="noopener">
-          <b>Limited Edition 2025</b><span>Announcement of 11 November 2025</span></a>
+      <h3>The camp site round-up</h3>
+      <p>The pieces the 2026 camp site carried in its <strong>#campustimechamber</strong> and <strong>@cbgrupbarna</strong> grids. They live here so they don't vanish with that site.</p>
+      <div class="stars">
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DLA0wKxsM2c" aria-label="Play the video with La Nau del Clot">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>La Nau del Clot</span>
+          </button>
+          <div class="star-tx">
+            <h4>La Nau del Clot</h4>
+            <span class="role">The venue, on video</span>
+            <p>The venue reel the camp site used to show the court.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DWrubLpDIU0" aria-label="Play the video with From the camp">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>From the camp</span>
+          </button>
+          <div class="star-tx">
+            <h4>From the camp</h4>
+            <span class="role">#campustimechamber round-up</span>
+            <p>A piece from the 2026 camp site grid.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DSk2otLiDVo" aria-label="Play the video with From the camp">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>From the camp</span>
+          </button>
+          <div class="star-tx">
+            <h4>From the camp</h4>
+            <span class="role">#campustimechamber round-up</span>
+            <p>A piece from the 2026 camp site grid.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DNjFQX1Mm1X" aria-label="Play the video with From the camp">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>From the camp</span>
+          </button>
+          <div class="star-tx">
+            <h4>From the camp</h4>
+            <span class="role">Posted on @cbgrupbarna</span>
+            <p>A club-profile piece from the camp site grid.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DW2Iuj-jKwB" data-kind="p" aria-label="Play the video with From the camp">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>From the camp</span>
+          </button>
+          <div class="star-tx">
+            <h4>From the camp</h4>
+            <span class="role">Feed post</span>
+            <p>A post from the 2026 camp site grid.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
+          </div>
+        </div>
+        <div class="star">
+          <button type="button" class="star-play" data-reel="DIb0HSfMud_" data-kind="p" aria-label="Play the video with From the camp">
+            <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+            <span>From the camp</span>
+          </button>
+          <div class="star-tx">
+            <h4>From the camp</h4>
+            <span class="role">Feed post</span>
+            <p>A post from the 2026 camp site grid.</p>
+            <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">View on Instagram →</a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">The videos are from Instagram and only load if you click. The full round-up of the edition is on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <div class="stars-group">
+      <h3>The camps we've announced</h3>
+      <p>Every edition is announced with <a href="https://www.instagram.com/timechamber_es/" target="_blank" rel="noopener">@timechamber_es</a>. These are the last four.</p>
+      <div class="convos">
+        <a href="https://www.instagram.com/p/DXKxd7VjCJK/" target="_blank" rel="noopener">
+          <b>Summer camp · La Nau del Clot</b><span>Announced 16 April</span></a>
+        <a href="https://www.instagram.com/p/DUtmAbHjFIs/" target="_blank" rel="noopener">
+          <b>Flow Camp · Easter</b><span>30 March to 3 April</span></a>
+        <a href="https://www.instagram.com/p/DUT5hyjDD7S/" target="_blank" rel="noopener">
+          <b>Carnival camp</b><span>Announced 3 February</span></a>
+        <a href="https://www.instagram.com/p/DQ7nLmkjINq/" target="_blank" rel="noopener">
+          <b>Limited Edition 2025</b><span>Announced 11 November 2025</span></a>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">The videos are hosted on Instagram and only load if you click. The full set for each edition is on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
     <!-- ESTRELLES-CAMPUS:final -->
     <script>
       // Els reels i posts d'Instagram només es carreguen si l'usuari hi clica.
@@ -1123,5 +1444,7 @@
 </footer>
 <script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
+<script src="/js/canals.js" defer></script>
+<script src="/js/llista-espera.js" defer></script>
 </body>
 </html>
