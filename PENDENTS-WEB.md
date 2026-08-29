@@ -1882,20 +1882,25 @@ enllaça a `/admin/`), i codi d'accés nou a les seccions protegides de
 `/partits/app.html` (només se'n guarda l'empremta SHA-256; el codi en clar
 se li ha donat a l'Ana per xat, no viu al repositori).
 
-### Pendent — cal l'Ana
+### ~~Pendent — cal l'Ana~~ · ANUL·LAT el 29/08/2026
 
-El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
-`GOOGLE_CLIENT_ID: ""`. Falta:
+> **Decisió de l'Ana (29/08): l'`/admin/` no anirà amb Google, sinó amb
+> contrasenya.** Els tres punts d'aquí sota ja no s'han de fer. Vegeu el bloc
+> «Decisió de l'Ana (29/08) · `/admin/` amb contrasenya» al final d'aquest
+> document.
 
-1. Crear l'ID de client OAuth a
+~~El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
+`GOOGLE_CLIENT_ID: ""`. Falta:~~
+
+1. ~~Crear l'ID de client OAuth a
    [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
    amb el compte `voluntarisgrupbarna@gmail.com` (passos exactes al capçal
-   del mateix fitxer `admin/config.js`).
-2. Enganxar-lo a `GOOGLE_CLIENT_ID` i pujar el fitxer.
-3. Revisar `ALLOWED_EMAILS` al mateix fitxer — ara només hi ha
-   `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
-   dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
-   afegir-l'hi.
+   del mateix fitxer `admin/config.js`).~~
+2. ~~Enganxar-lo a `GOOGLE_CLIENT_ID` i pujar el fitxer.~~
+3. ~~Revisar `ALLOWED_EMAILS` al mateix fitxer.~~ Això **sí** que segueix
+   valent quan es faci la contrasenya: cal decidir qui hi entra. Ara el
+   fitxer hi té `voluntarisgrupbarna@gmail.com` i
+   `marqueting@cbgrupbarna.info` (repetit dues vegades per error).
 
 ---
 
@@ -2108,3 +2113,108 @@ llista i la prova és que `--dry-run` digui «igual».
 Comprovat: paritat i18n (147 pàgines), contingut i18n (294 traduccions), lint
 (0 errors nous, mateix nombre de pendents que abans), a11y (459 pàgines, 0),
 pressupost de pes, cercador (74/74) i navegador a 1280 i 390 px.
+
+---
+
+# 29-08-2026 · Examen de la web i el que queda obert
+
+Repàs complet demanat per l'Ana («posa nota i digues què cal per a un 10»),
+fet sobre l'inventari (`llms.txt`), aquest tauler i la portada real.
+
+## Nota: 8,5
+
+El que hi ha construït està molt per damunt del que li tocaria a un club de
+barri: paritat d'i18n vigilada per CI, 0 errors d'accessibilitat en 459
+pàgines, pressupost de pes a CI, calendaris i fitxes generats cada dia des de
+la FCBQ, i un cercador que RESPON sobre 546 preguntes indexades. Dels tres
+grans (Valencia, Madrid, Barça) cap té cercador que respongui ni `.ics` per
+equip.
+
+**El que separa del 10 no és enginyeria: és material i decisions.** El coll
+d'ampolla ja no és el codi.
+
+## Les set coses que pugen la nota, per ordre d'impacte
+
+1. **Sessió de fotos** (Escoleta + els 4 sèniors + La Nau). És la inversió no-
+   codi més rendible: desbloqueja de cop el hero de les tres portades, les
+   fitxes de `/jugadors/`, el bloc de sèniors a dalt i `/instal-lacions/` com
+   a casa del club. Ja apuntada més amunt; segueix sent el punt més feble.
+2. **Connectar l'analítica.** Vegeu el bloc de credencials aquí sota.
+3. **Pujar els primers equips per damunt de la base a la portada.** Avui
+   `#seniors` queda molt avall i és el que veu un patrocinador els primers
+   cinc segons. Ja era el punt 2 de la fase de marca.
+4. **«Avantatges de la família Barna»** — vegeu el bloc propi aquí sota.
+5. **Decidir què és «Notícies»** i obrir la secció, encara que sigui amb una
+   crònica setmanal. El blog són guies, no actualitat. Obert des del 18/08.
+6. ~~**Sincronitzar `build-pages.py`**~~ **Fet** (vegeu el bloc anterior).
+7. **`/palmares/` com a pàgina pròpia.** Avui els títols estan diluïts dins
+   d'`/historia/`. És una tarda de feina i és el que més «club gran»
+   transmet a una empresa. Ve del benchmark del 27/08, gap 5.
+
+---
+
+## Decisió de l'Ana (29/08) · `/admin/` amb contrasenya, no amb Google
+
+**«No vull Google ID, només vull entrar amb contrasenya.»** El panell
+`/admin/` fa mesos que no deixa entrar ningú perquè `admin/config.js` té
+`GOOGLE_CLIENT_ID: ""`, i la decisió és no omplir-lo: es canvia el porter.
+
+**Això anul·la** el pendent del 27/08 («cal crear l'ID de client OAuth»): ja
+no cal per a entrar a l'`/admin/`. El `GOOGLE_CLIENT_ID` de la llista de
+credencials de més avall era per a això i queda fora.
+
+Quan es faci, ha de complir això —i no és burocràcia, és que `/admin/` obre
+la gestió de partits, la pujada de fotos i el panell d'analítica:
+
+- **Cap contrasenya en clar al repositori.** Es desa només l'empremta
+  (SHA-256 amb sal), com ja es va fer amb el codi d'accés de
+  `/partits/app.html` el 27/08 — aquell patró ja existeix i es pot copiar.
+- **Límit d'intents**, perquè una contrasenya curta no es pugui endevinar a
+  força bruta des del navegador.
+- **La contrasenya se li dona a l'Ana per xat**, no viu enlloc del codi.
+- Tenir present què protegeix de debò: és una web estàtica a GitHub Pages,
+  o sigui que això barra l'accés a la interfície, no xifra res del que hi ha
+  publicat. Per a la gestió de partits i fotos és proporcionat; si algun dia
+  l'`/admin/` ha de guardar dades de menors, caldrà una altra cosa.
+
+## Credencials de GA4 · l'Ana diu que ja les té (29/08)
+
+L'Ana confirma que el 28/08 va crear el service account, va activar la Google
+Analytics Data API i li va donar permís de Lector a la propietat de GA4.
+Falten **dues coses per poder-ho endollar**, i cap és feina d'ella:
+
+| Cal | On va |
+|---|---|
+| `GA4_SERVICE_ACCOUNT_JSON` (el fitxer JSON sencer, enganxat com a secret) | Secrets del repositori → el llegeix `.github/workflows/analitica.yml` |
+| `GA4_PROPERTY_ID` (el número de la propietat, format `123456789`) | El mateix lloc |
+
+**Resposta a la seva pregunta «on va l'script»:** a **GitHub Actions**, no a
+Vercel ni a cap servidor. Ja està escrit i programat des del 26/08
+(`analitica.yml` s'executa cada matinada i crida
+`.github/scripts/ga4-informe.py`, que desa un JSON que llegeix el panell
+`/admin/analitica/`). Fins que no hi hagi els dos secrets, el cron surt en
+verd i el panell ho explica en lloc d'ensenyar dades.
+
+Els secrets es donen d'alta a
+`Settings → Secrets and variables → Actions → New repository secret` del
+repositori, i **no** al codi: un JSON de service account dins del repositori
+seria una clau publicada.
+
+## «Avantatges de la família Barna» · en espera (decisió de l'Ana, 29/08)
+
+**L'Ana està firmant partners ara mateix i els descomptes els han de
+confirmar ells.** Fins llavors no es munta la pàgina: publicar un avantatge
+que un partner no ha confirmat és pitjor que no tenir-la.
+
+Què hi ha ja fet, per no repetir feina el dia que arribin les confirmacions:
+les **22 fitxes de partner** ja porten cadascuna el seu camp d'oferta o
+avantatge per a la família del Barna. Empaquetar-ho és ordenar el que
+existeix, no crear-ho: d'aquí que sigui de cost quasi zero.
+
+És el gap 6 del benchmark del 27/08, i la palanca més barata i diferencial
+que en va sortir: el Valencia ven «descuentos para miembros» com a benefici
+premium i nosaltres ja tenim el contingut escrit.
+
+> **Quan arribin els descomptes confirmats**, cal decidir també si la pàgina
+> és pública (argument de captació per a empreses noves: «entra i la teva
+> oferta la veuen 450 famílies») o només per a famílies del club.
