@@ -104,6 +104,7 @@
   .star-embed { aspect-ratio: 9/14; }
   .star-embed iframe { width: 100%; height: 100%; border: 0; }
   .star-tx { padding: 18px 18px 20px; }
+  .star-tx h5 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
   .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
@@ -869,6 +870,41 @@
     <div class="btn-row">
       <a href="https://maps.google.com/?q=La+Nau+del+Clot+Carrer+de+la+Llacuna+172+Barcelona" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-com-arribar">Com arribar-hi →</a>
     </div>
+    <h4>La Nau, en vídeo</h4>
+    <p>Tres peces gravades a la pista del club: la instal·lació abans de res, i el campus fent-la servir. Es carreguen soles quan hi arribes.</p>
+    <div class="stars">
+      <div class="star">
+        <button type="button" class="star-play" data-reel="DLA0wKxsM2c" aria-label="La Nau del Clot">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>La Nau del Clot</span>
+        </button>
+        <div class="star-tx">
+          <h5>La Nau del Clot</h5>
+          <span class="role">El pavello, en video</span>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="El campus, de dins">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>El campus, de dins</span>
+        </button>
+        <div class="star-tx">
+          <h5>El campus, de dins</h5>
+          <span class="role">Totes les setmanes a la pista</span>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-reel="Datex2OxHcS" aria-label="Shooting Academy">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Shooting Academy</span>
+        </button>
+        <div class="star-tx">
+          <h5>Shooting Academy</h5>
+          <span class="role">Una setmana, a la mateixa pista</span>
+        </div>
+      </div>
+    </div>
+
     <div class="mapa-lazy" data-mapa="La Nau del Clot · Carrer de la Llacuna 172, 08018 Barcelona">
       <button type="button" class="btn ghost" id="mapa-carrega">Carregar el mapa de Google</button>
       <p style="font-size:13px;color:var(--ink-2);margin-top:8px">El mapa és de Google i posa galetes: només es carrega si el demanes.</p>
@@ -1245,22 +1281,8 @@
       </div>
     </div>
 
-    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Els vídeos són d'Instagram i només es carreguen si hi cliques. Tot el recull de l'edició és a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">Els vídeos són d'Instagram i es carreguen a mesura que baixes, no tots de cop. Tot el recull de l'edició és a <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
     <!-- ESTRELLES-CAMPUS:final -->
-    <script>
-      // Els reels i posts d'Instagram només es carreguen si l'usuari hi clica.
-      document.querySelectorAll('.star-play').forEach(function (b) {
-        b.addEventListener('click', function () {
-          var d = document.createElement('div');
-          d.className = 'star-embed';
-          // Uns són reels i uns altres publicacions de feed: data-kind="p" ho marca.
-          var kind = b.dataset.kind === 'p' ? 'p' : 'reel';
-          d.innerHTML = '<iframe src="https://www.instagram.com/' + kind + '/' + b.dataset.reel +
-            '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
-          b.replaceWith(d);
-        });
-      });
-    </script>
 
     <h2>El campus a Instagram</h2>
     <p>Les convocatòries de cada edició, publicades i enllaçades — no una promesa, un rastre que es pot comprovar.</p>
@@ -1470,5 +1492,6 @@
 <script src="/js/mapa.js" defer></script>
 <script src="/js/canals.js" defer></script>
 <script src="/js/llista-espera.js" defer></script>
+<script src="/js/reels.js" defer></script>
 </body>
 </html>

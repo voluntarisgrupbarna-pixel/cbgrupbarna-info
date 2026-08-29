@@ -215,7 +215,7 @@ T = {
         g4p=('Cada edició del campus s\'anuncia amb <a href="%s/timechamber_es/" target="_blank" '
              'rel="noopener">@timechamber_es</a>. Aquestes són les quatre darreres.' % IG),
         play="Reproduir el vídeo amb", veure="Veure a Instagram →",
-        peu=('Els vídeos són d\'Instagram i només es carreguen si hi cliques. Tot el recull de l\'edició '
+        peu=('Els vídeos són d\'Instagram i es carreguen a mesura que baixes, no tots de cop. Tot el recull de l\'edició '
              'és a <a href="%s/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.' % IG),
     ),
     "es": dict(
@@ -239,7 +239,7 @@ T = {
         g4p=('Cada edición del campus se anuncia con <a href="%s/timechamber_es/" target="_blank" '
              'rel="noopener">@timechamber_es</a>. Estas son las cuatro últimas.' % IG),
         play="Reproducir el vídeo con", veure="Ver en Instagram →",
-        peu=('Los vídeos son de Instagram y solo se cargan si haces clic. Todo el recopilatorio de la '
+        peu=('Los vídeos son de Instagram y se cargan a medida que bajas, no todos de golpe. Todo el recopilatorio de la '
              'edición está en <a href="%s/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.' % IG),
     ),
     "en": dict(
@@ -262,7 +262,7 @@ T = {
         g4p=('Every edition is announced with <a href="%s/timechamber_es/" target="_blank" '
              'rel="noopener">@timechamber_es</a>. These are the last four.' % IG),
         play="Play the video with", veure="View on Instagram →",
-        peu=('The videos are hosted on Instagram and only load if you click. The full set for each edition '
+        peu=('The videos are hosted on Instagram and load as you scroll, not all at once. The full set for each edition '
              'is on <a href="%s/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.' % IG),
     ),
 }

@@ -104,6 +104,7 @@
   .star-embed { aspect-ratio: 9/14; }
   .star-embed iframe { width: 100%; height: 100%; border: 0; }
   .star-tx { padding: 18px 18px 20px; }
+  .star-tx h5 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx h4 { font-size: 14px; letter-spacing: 0.1em; margin: 0 0 4px; font-family: var(--display); font-weight: 400; text-transform: uppercase; }
   .star-tx p { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
   .star-tx a { font-family: var(--display); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; }
@@ -864,6 +865,41 @@
     <div class="btn-row">
       <a href="https://maps.google.com/?q=La+Nau+del+Clot+Carrer+de+la+Llacuna+172+Barcelona" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-com-arribar">Directions →</a>
     </div>
+    <h4>La Nau, on video</h4>
+    <p>Three pieces filmed on the club's own court: the venue first, then the camp using it. They load by themselves as you reach them.</p>
+    <div class="stars">
+      <div class="star">
+        <button type="button" class="star-play" data-reel="DLA0wKxsM2c" aria-label="La Nau del Clot">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>La Nau del Clot</span>
+        </button>
+        <div class="star-tx">
+          <h5>La Nau del Clot</h5>
+          <span class="role">The venue, on video</span>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-reel="Dbn8AMsIebZ" aria-label="Inside the camp">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Inside the camp</span>
+        </button>
+        <div class="star-tx">
+          <h5>Inside the camp</h5>
+          <span class="role">Every week on the court</span>
+        </div>
+      </div>
+      <div class="star">
+        <button type="button" class="star-play" data-reel="Datex2OxHcS" aria-label="Shooting Academy">
+          <em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></em>
+          <span>Shooting Academy</span>
+        </button>
+        <div class="star-tx">
+          <h5>Shooting Academy</h5>
+          <span class="role">One week, on the same court</span>
+        </div>
+      </div>
+    </div>
+
     <div class="mapa-lazy" data-mapa="La Nau del Clot · Carrer de la Llacuna 172, 08018 Barcelona">
       <button type="button" class="btn ghost" id="mapa-carrega">Load the Google map</button>
       <p style="font-size:13px;color:var(--ink-2);margin-top:8px">The map is Google's and sets cookies: it only loads if you ask for it.</p>
@@ -1240,22 +1276,8 @@
       </div>
     </div>
 
-    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">The videos are hosted on Instagram and only load if you click. The full set for each edition is on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:clamp(22px,3vw,32px)">The videos are hosted on Instagram and load as you scroll, not all at once. The full set for each edition is on <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">@cbgrupbarna</a>.</p>
     <!-- ESTRELLES-CAMPUS:final -->
-    <script>
-      // Els reels i posts d'Instagram només es carreguen si l'usuari hi clica.
-      document.querySelectorAll('.star-play').forEach(function (b) {
-        b.addEventListener('click', function () {
-          var d = document.createElement('div');
-          d.className = 'star-embed';
-          // Uns són reels i uns altres publicacions de feed: data-kind="p" ho marca.
-          var kind = b.dataset.kind === 'p' ? 'p' : 'reel';
-          d.innerHTML = '<iframe src="https://www.instagram.com/' + kind + '/' + b.dataset.reel +
-            '/embed/" loading="lazy" allowtransparency="true" allowfullscreen title="Reel"></iframe>';
-          b.replaceWith(d);
-        });
-      });
-    </script>
 
     <h2>The camp on Instagram</h2>
     <p>The announcements for each edition, published and linked — not a promise, a trail you can check.</p>
@@ -1446,5 +1468,6 @@
 <script src="/js/mapa.js" defer></script>
 <script src="/js/canals.js" defer></script>
 <script src="/js/llista-espera.js" defer></script>
+<script src="/js/reels.js" defer></script>
 </body>
 </html>

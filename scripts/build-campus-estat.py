@@ -39,6 +39,23 @@ WA = "https://wa.me/34698425153"
 IG = "https://www.instagram.com"
 MAPA = ("https://maps.google.com/?q=La+Nau+del+Clot+Carrer+de+la+Llacuna+172+Barcelona")
 
+# Videos de la instal.lacio. Tots tres estan gravats a La Nau del Clot: el
+# primer es el reel que la web del campus 2026 feia servir a «LA SEDE», i els
+# altres dos son del campus mateix, a la pista del club.
+VIDEOS_SEU = [
+    ("DLA0wKxsM2c", "reel",
+     "La Nau del Clot", "La Nau del Clot", "La Nau del Clot",
+     "El pavello, en video", "El pabellon, en video", "The venue, on video"),
+    ("Dbn8AMsIebZ", "reel",
+     "El campus, de dins", "El campus, por dentro", "Inside the camp",
+     "Totes les setmanes a la pista", "Todas las semanas en la pista",
+     "Every week on the court"),
+    ("Datex2OxHcS", "reel",
+     "Shooting Academy", "Shooting Academy", "Shooting Academy",
+     "Una setmana, a la mateixa pista", "Una semana, en la misma pista",
+     "One week, on the same court"),
+]
+
 # Les sis setmanes tal com les anomenava la web de l'edicio 2026.
 SETMANES = [
     ("01", "23–27", "FLOW CAMP",
@@ -70,6 +87,8 @@ SETMANES = [
 T = {
     "ca": dict(
         lang="ca",
+        seu_vid_h="La Nau, en vídeo",
+        seu_vid_p="Tres peces gravades a la pista del club: la instal·lació abans de res, i el campus fent-la servir. Es carreguen soles quan hi arribes.",
         dif_h="Per què en un club, i no en un espai llogat",
         dif=[
             ("Un campus dins d'un club, no en una pista de pas",
@@ -174,6 +193,8 @@ T = {
     ),
     "es": dict(
         lang="es",
+        seu_vid_h="La Nau, en vídeo",
+        seu_vid_p="Tres piezas grabadas en la pista del club: la instalación primero, y el campus usándola. Se cargan solas cuando llegas.",
         dif_h="Por qué dentro de un club, y no en un espacio alquilado",
         dif=[
             ("Un campus dentro de un club, no en una pista de paso",
@@ -275,6 +296,8 @@ T = {
     ),
     "en": dict(
         lang="en",
+        seu_vid_h="La Nau, on video",
+        seu_vid_p="Three pieces filmed on the club's own court: the venue first, then the camp using it. They load by themselves as you reach them.",
         dif_h="Why inside a club, and not in a rented venue",
         dif=[
             ("A camp inside a club, not on a court passed through",
@@ -454,6 +477,21 @@ def bloc_arxiu(lang):
       </div>"""
         for k, (tag, nom, preu, hora, items) in enumerate(t["preus"])
     )
+    play = ('<em><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">'
+            '<path d="M8 5v14l11-7z"/></svg></em>')
+    videos_seu = "\n".join(
+        f"""      <div class="star">
+        <button type="button" class="star-play" data-reel="{v[0]}" aria-label="{esc(v[i - 1])}">
+          {play}
+          <span>{esc(v[i - 1])}</span>
+        </button>
+        <div class="star-tx">
+          <h5>{esc(v[i - 1])}</h5>
+          <span class="role">{esc(v[i + 2])}</span>
+        </div>
+      </div>"""
+        for v in VIDEOS_SEU
+    )
     serv = "\n".join(
         f'      <div class="dl-row"><dt>{esc(a)}</dt><dd>{esc(b)}</dd></div>' for a, b in t["serv"]
     )
@@ -540,6 +578,12 @@ def bloc_arxiu(lang):
     <div class="btn-row">
       <a href="{MAPA}" class="btn ghost" target="_blank" rel="noopener" data-cta="campus-com-arribar">{esc(t['seu_com'])}</a>
     </div>
+    <h4>{esc(t['seu_vid_h'])}</h4>
+    <p>{esc(t['seu_vid_p'])}</p>
+    <div class="stars">
+{videos_seu}
+    </div>
+
     <div class="mapa-lazy" data-mapa="{esc(t['seu_adr'])}">
       <button type="button" class="btn ghost" id="mapa-carrega">{esc(t['mapa_btn'])}</button>
       <p style="font-size:13px;color:var(--ink-2);margin-top:8px">{esc(t['mapa_nota'])}</p>
