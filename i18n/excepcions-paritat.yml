@@ -19,4 +19,24 @@
 # Quan l'excepció deixi de fer falta, treu-la. És més fàcil treure una línia
 # ara que endevinar d'aquí a un any per què hi era.
 
-nomes_un_idioma: []
+nomes_un_idioma:
+  - ruta: /blog/entrenadores-basquet-barcelona/
+    motiu: >
+      Auditoria de coherència de dades del 29/08/2026: la versió catalana deia
+      «entrenen 38 equips cada setmana», confonent el nombre d'entrenadores
+      actives (38) amb el nombre d'equips del club (34+). Les versions es/en
+      ja deien «34+ equipos»/«34+ teams» correctament; només calia corregir
+      el català perquè torni a quadrar amb la resta.
+  - ruta: /club/
+    motiu: >
+      Mateixa auditoria del 29/08/2026: «38 equips» corregit a «34+ equips»
+      per quadrar amb la xifra federativa que fa servir la resta de la web
+      (dades-oficials, portada). Les versions es/en ja ho deien bé.
+  - ruta: /historia/
+    motiu: >
+      Mateixa auditoria del 29/08/2026: «38 equips» corregit a «més de 34
+      equips». Les versions es/en ja ho deien bé.
+  - ruta: /presentacio/
+    motiu: >
+      Mateixa auditoria del 29/08/2026: «38 equips» corregit a «34+ equips».
+      Les versions es/en ja ho deien bé.

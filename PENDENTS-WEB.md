@@ -2309,3 +2309,92 @@ https://claude.ai/code/artifact/5f3af974-01e9-423b-9dde-d0604f39365d
   (demanar mencions una per una) i `CAMPUS-FITXA-GOOGLE-I-AGENDES.md` (alta a la
   fitxa de Google i a les agendes) són feina de fora del web que segueix sense
   fer. El web ja està a l'altura; això no.
+
+---
+
+## 29-08-2026 (nit) — Auditoria de coherència de dades de l'Ana, corregida
+
+L'Ana va fer una auditoria completa de la web avui (nota 8,6/10) i el seu
+problema número 1 era **coherència de dades**: la mateixa xifra dient coses
+diferents segons la pàgina. Revisat fil per fil i corregit el que es podia
+confirmar contra una font fiable del propi repositori:
+
+- **Partners: 21, no 22 ni 23.** `data.json` en té 21 (confirmat el 29/08 al
+  punt «Avantatges de la família»), però una desena de pàgines —`/empreses/`,
+  `/patrocinadors/`, portada, blog de partners, blog de la Nova Farmàcia—
+  encara deien 22 o 23, als tres idiomes. Corregit a totes.
+- **Equips: «34+» és la xifra federativa vigent (temporada 2026-27), font
+  `/grup-barna-dades-oficials/`.** Trobades quatre confusions diferents que
+  Ana havia detectat:
+  - La portada en `/es/` i `/en/` deia «38 equipos»/«38 teams» al titular —
+    error de traducció, ja que el català deia «34». Corregit als dos.
+  - `/femeni/`, `/baloncesto-femenino/` i `/womens-basketball/` confonien
+    «38 entrenadores actives» (dada real) amb «entrenen 38 equips» (fals:
+    barrejava el nombre d'entrenadores amb el d'equips). Reescrit perquè no
+    afirmi un nombre d'equips que no és cert.
+  - El mateix error solt, sense el context d'entrenadores, a `/historia/`,
+    `/club/`, `/presentacio/` i al blog «Quantes entrenadores...». Alineat
+    tot a «34+».
+  - `/partits/equips/` deia «15 equips federats», donant a entendre que
+    aquests 15 són tots els equips federats del club. En realitat són els 15
+    equips amb pàgina i calendari propis a la web (el robot
+    `generate-team-pages.py` només en genera per als que tenen fitxa amb
+    calendari carregable) — un subconjunt dels 34+. Reescrit el text del
+    generador i de les tres pàgines publicades perquè digui «15 equips amb
+    calendari a la web, dels més de 34 que té el club» en comptes de
+    «federats», que era el que confonia.
+- **Supercopa FCBQ: fora «Liga EBA».** La portada i el `/briefing/`
+  descrivien l'escala per sobre de la Supercopa com «Liga EBA i ACB»
+  (masculí). La Lliga EBA ja no existeix amb aquest nom des de la reforma
+  de la FEB del 2021: l'escala real avui és Tercera FEB → Segona FEB →
+  Primera FEB → Lliga Endesa (ACB). Corregit a `index.html` i a les tres
+  versions de `/briefing/`.
+
+### El que queda obert — cal la xifra real de l'Ana, no s'ha inventat res
+
+- **Audiència per gènere a Instagram: dues xifres que no es poden fer
+  quadrar sense saber a què correspon cadascuna.** `/empreses/` diu
+  «58,8% homes, 41,2% dones» (font: panell professional d'Instagram / Meta
+  Business Suite, amb desglossament d'edat i geografia al costat). `/femeni/`
+  i el dossier Premi Dona i Esport (Teoria T5) diuen «53,7% d'audiència
+  femenina» —és a dir, l'invers gairebé exacte. Cap dels dos textos diu de
+  quina data és la mesura ni si `/empreses/` parla de seguidors i `/femeni/`
+  parla d'una altra cosa (abast, visualitzacions, un post concret). **No
+  s'ha tocat cap de les dues xifres** perquè triar-ne una a ulls clucs seria
+  inventar-se una dada, no corregir-ne un error. Cal que l'Ana digui quina
+  és la lectura vigent del panell d'Instagram i, si són coses diferents,
+  que el text ho digui explícitament (p. ex. «53,7% de l'audiència de les
+  publicacions de bàsquet femení» vs. «41,2% del total de seguidores»).
+- **El desglossament d'equips per gènere de `/presentacions/fons-barna-8m/`
+  («El club té entre 35 i 38 equips... 20 femenins sobre 35, 57%») és d'una
+  temporada anterior i no s'ha tocat.** Canviar només el «35»/«38» cap a
+  «34+» hauria trencat l'aritmètica pròpia de la pàgina (20/35 = 57%) sense
+  saber quants dels equips actuals són femenins. Necessita un recompte real
+  de la temporada 2026-27, no una substitució de xifra.
+- **El desglossament sencer de `/blog/quants-equips-te-el-barna/` (32
+  federats + 6 fora de fitxa = 38 en total) és real, està citat amb font
+  («fitxa oficial del club a basquetcatala.cat, temporada 2025-26») i
+  explica per què el web parla d'una altra xifra en altres llocs. No s'ha
+  tocat perquè no és un error: és un article ben sostingut, però **d'una
+  temporada enrere**. Val la pena refer-lo amb el desglossament 2026-27
+  (probablement ja no serà 32+6=38) quan hi hagi temps, perquè avui és
+  l'únic lloc de la web que explica la diferència entre «equips federats» i
+  «equips que entrenen al club» que fa que 34+ i altres xifres puguin
+  conviure sense contradir-se.
+- **`58,8%`/`53,7%` i el recompte d'equips per gènere del fons 8M són el
+  tipus exacte de feina que demana la recomanació #1 de l'Ana: un fitxer
+  únic de dades mestres (equips, jugadors, partners, seguidors, anys,
+  audiències) del qual surtin totes les xifres, en lloc d'escriure-les a mà
+  a 25 pàgines.** Ara mateix `data.json` només té partners i temporada; no
+  té equips, jugadors ni xarxes. Ampliar-lo és la següent feina estructural,
+  no una correcció puntual.
+
+Verificat amb `scripts/i18n-paritat.py` (14 pàgines tocades, totes als tres
+idiomes o amb excepció escrita a `i18n/excepcions-paritat.yml`) i
+`scripts/i18n-lint.py` (0 errors nous). Regenerats `cerca-index.json` i, per
+a `/partits/equips/`, les tres pàgines d'índex a mà —**no** s'ha tornat a
+executar `generate-team-pages.py` sobre les 15 fitxes d'equip individuals
+perquè el generador està desfasat respecte al publicat (li falten
+`hreflang`, el selector d'idioma, `a11y.css` i el canvi de `/basquet-femeni/`
+a `/femeni/`): fer-ho hauria revertit feina real. Només s'ha corregit el text
+del generador per a la propera vegada que algú el posi al dia sencer.

@@ -92,10 +92,11 @@ T = {
                   "Actualitzat cada dia des del calendari oficial de la FCBQ.",
     "titol_index": "Tots els equips · CB Grup Barna", "h1_index": "Tots els equips",
     "temporada": "Temporada {t}",
-    "desc_index": "Tots els equips federats del CB Grup Barna, per categoria: cadet, infantil, "
-                  "júnior i sènior, femení i masculí. Calendari, resultats i balanç de cadascun.",
-    "lede_index": "{n} equips federats del CB Grup Barna. Toca un equip per veure el seu calendari, "
-                  "els últims resultats i subscriure't per rebre els canvis automàticament.",
+    "desc_index": "Equips del CB Grup Barna amb calendari i resultats a la web, per categoria: cadet, "
+                  "infantil, júnior i sènior, femení i masculí. Balanç de cadascun.",
+    "lede_index": "{n} equips del CB Grup Barna amb calendari a la web, dels més de 34 que té el club. "
+                  "Toca un equip per veure el seu calendari, els últims resultats i subscriure't per "
+                  "rebre els canvis automàticament.",
   },
   "es": {
     "locale": "es_ES", "inici": "Inicio", "partits": "Calendario", "equips": "Equipos",
@@ -116,10 +117,11 @@ T = {
                   "Actualizado cada día desde el calendario oficial de la FCBQ.",
     "titol_index": "Todos los equipos · CB Grup Barna", "h1_index": "Todos los equipos",
     "temporada": "Temporada {t}",
-    "desc_index": "Todos los equipos federados del CB Grup Barna, por categoría: cadete, infantil, "
-                  "júnior y sénior, femenino y masculino. Calendario, resultados y balance de cada uno.",
-    "lede_index": "{n} equipos federados del CB Grup Barna. Toca un equipo para ver su calendario, "
-                  "los últimos resultados y suscribirte para recibir los cambios automáticamente.",
+    "desc_index": "Equipos del CB Grup Barna con calendario y resultados en la web, por categoría: "
+                  "cadete, infantil, júnior y sénior, femenino y masculino. Balance de cada uno.",
+    "lede_index": "{n} equipos del CB Grup Barna con calendario en la web, de los más de 34 que tiene "
+                  "el club. Toca un equipo para ver su calendario, los últimos resultados y "
+                  "suscribirte para recibir los cambios automáticamente.",
   },
   "en": {
     "locale": "en_US", "inici": "Home", "partits": "Calendar", "equips": "Teams",
@@ -140,10 +142,11 @@ T = {
                   "Updated daily from the official FCBQ calendar.",
     "titol_index": "All teams · CB Grup Barna", "h1_index": "All teams",
     "temporada": "{t} season",
-    "desc_index": "Every registered CB Grup Barna team, by age group: under-14 to senior, girls' and "
-                  "boys'. Fixtures, results and record for each one.",
-    "lede_index": "{n} registered CB Grup Barna teams. Tap a team to see its fixtures, its latest "
-                  "results and to subscribe for changes automatically.",
+    "desc_index": "CB Grup Barna teams with fixtures and results on the website, by age group: "
+                  "under-14 to senior, girls' and boys'. Record for each one.",
+    "lede_index": "{n} CB Grup Barna teams with fixtures on the website, out of the club's 34+. Tap a "
+                  "team to see its fixtures, its latest results and to subscribe for changes "
+                  "automatically.",
   },
 }
 IDIOMES = ("ca", "es", "en")
