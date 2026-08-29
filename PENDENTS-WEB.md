@@ -2036,3 +2036,75 @@ verificar, sense històric previ, no un salt real d'un dia per l'altre.
   web» pendent (GA4 mesura què fa la gent al web; Search Console, com hi
   arriba des de la cerca) o fer-ne seguiment manual mensual mentre el
   dashboard no existeix.
+
+---
+
+## 29-08-2026 · Els generadors, sincronitzats amb el que hi ha publicat
+
+`scripts/build-pages.py` portava des del 26/08 marcat com a «pendent de
+desenvolupar»: estava desincronitzat i executar-lo esborrava feina real. Ja no.
+**Les set pàgines que genera surten idèntiques, caràcter a caràcter, a les
+publicades** (`--dry-run` diu «ja iguals» a totes set).
+
+### El que hi faltava
+
+El generador no sabia de res del que se li havia afegit al lloc després:
+`/css/a11y.css`, el xat flotant (WhatsApp + Tawk.to), `/js/mapa.js` al final
+del `<body>`, el commutador d'idioma com a `<nav>` amb `lang` i `aria-current`,
+i els marcadors `FAQ:START` / `FAQ-LD:START`. També duia dades velles: «32
+equips» on el web ja deia «més de 34», «4 a 7 anys» a l'Escoleta, i dos títols
+i una descripció d'abans de la tanda d'SEO.
+
+### Dues coses que s'han trobat pel camí, i eren pitjors
+
+**1. `/partits/calendaris/` hauria perdut quatre preguntes publicades.** El
+generador en duia una còpia pròpia de la llista, i s'havia quedat enrere
+respecte a `i18n/faq.yml`. Entre les que hauria esborrat hi havia «quants
+partits es juguen fora de casa», que va costar comptar (274 partits, 137 i
+137). **Arreglat de soca-rel: el generador ja no manté cap còpia de les
+preguntes, les llegeix de `i18n/faq.yml`.** Els dos scripts es poden executar
+en qualsevol ordre i donen el mateix fitxer.
+
+**2. `.github/scripts/generate-team-pages.py` ja estava destruint les 45
+pàgines d'equip, i el passa un robot cada dia.** Cada execució els esborrava
+els quatre `hreflang`, el commutador d'idioma sencer, `/css/a11y.css` i el
+xat, i tornava el `theme-color` a la crema que l'«Estètica definitiva» va
+retirar. No s'havia vist perquè el robot només fa commit quan la FCBQ canvia
+alguna cosa: hauria passat el primer cap de setmana de competició. Arreglat i
+comprovat que és idempotent.
+
+De passada, un error de picatge publicat a 16 pàgines: l'`aria-label` de
+l'escut en castellà deia «CB Grup Barna · inicioo».
+
+### La protecció ja no depèn de recordar-se'n
+
+Abans, el procediment segur era «executa'l, mira el `git diff` sencer i
+restaura el que no volguessis tocar». Ara ho fa el codi:
+
+- `write()` **es nega** a tocar les pàgines de `MANTINGUDES_A_MA` (les set que
+  el generador encara no sap reproduir: campus, patrocinadors, 3x3, índex de
+  blog, els dos de premsa i l'article de premsa).
+- I, per a qualsevol altra, s'atura si hi perdria deu línies més de les que hi
+  afegeix, o si hi perdria els `hreflang`, el commutador d'idioma o les
+  preguntes freqüents.
+- `--dry-run` diu què canviaria sense desar; `--force` se salta les
+  proteccions, i llavors sí que cal mirar el diff.
+
+També s'ha tret la dependència de Pillow per llegir la mida de les imatges: hi
+havia un `except` silenciós que, si Pillow no hi era, escrivia `1200x900` a
+qualsevol foto —una mida inventada, que provoca justament el salt de
+maquetació que aquells atributs havien d'evitar. Ara es llegeix de la
+capçalera del fitxer (comprovat contra Pillow a les 3.964 imatges del
+repositori) i, si la foto no hi és, s'atura.
+
+### El que segueix pendent
+
+Les **set pàgines de `MANTINGUDES_A_MA`** segueixen fora del generador: hi
+perdrien entre 24 i 623 línies. Posar-les al dia és una sessió per pàgina
+—són contingut escrit a mà que el generador no sap reproduir—, i ara al menys
+és impossible fer-ho sense voler. Quan una es posi al dia, es treu de la
+llista i la prova és que `--dry-run` digui «igual».
+
+Comprovat: paritat i18n (147 pàgines), contingut i18n (294 traduccions), lint
+(0 errors nous, mateix nombre de pendents que abans), a11y (459 pàgines, 0),
+pressupost de pes, cercador (74/74) i navegador a 1280 i 390 px.

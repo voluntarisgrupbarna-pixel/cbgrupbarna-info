@@ -54,12 +54,22 @@ textos:
   posicionament:   {href: /posicionament/,     ca: Posicionament del club,  es: Posicionamiento del club,  en: Club positioning}
   dades_oficials:  {href: /grup-barna-dades-oficials/, ca: Dades oficials,  es: Datos oficiales,           en: Official data}
   proteccio_menor: {href: /proteccio-menor/,   ca: Protecció del Menor,     es: Protección del Menor,      en: Child protection}
-  basquet_femeni:  {href: /basquet-femeni/,    ca: Bàsquet femení,          es: Baloncesto femenino,       en: Women's basketball}
+  # /femeni/ és la canònica (decisió de l'Ana, 18/08/2026): /basquet-femeni/
+  # hi redirigeix. Les traduccions no segueixen el patró /es/<ruta-catalana>/,
+  # per això porten href_es i href_en propis: sense ells, el peu castellà
+  # apuntava a /es/basquet-femeni/, que no existeix, i l'anglès enviava a la
+  # pàgina catalana.
+  basquet_femeni:  {href: /femeni/, href_es: /es/baloncesto-femenino/, href_en: /en/womens-basketball/,
+                    ca: Bàsquet femení,          es: Baloncesto femenino,       en: Women's basketball}
   fotos:           {href: /fotos/,             ca: Galeria de fotos,        es: Galería de fotos,          en: Photo gallery}
   premidonaesport: {href: /premidonaesport/,   ca: Premi Dona i Esport,     es: Premio Mujer y Deporte,    en: Women and Sport Award}
   blog:            {href: /blog/,              ca: Blog,                    es: Blog,                      en: Blog}
   premsa_llarg:    {href: /premsa/,            ca: Articles i premsa,       es: Artículos y prensa,        en: Articles and press}
   info_demanar:    {href: /#info,              ca: Demanar informació,      es: Pedir información,         en: Request information}
+  newsletter:      {href: /newsletter/,        ca: Newsletter,              es: Newsletter,                en: Newsletter}
+  # La bústia té l'adreça traduïda a cada idioma, com les legals.
+  bustia:          {href: /bustia/, href_es: /es/buzon/, href_en: /en/suggestions/,
+                    ca: Bústia de suggeriments, es: Buzón de sugerencias,    en: Suggestion box}
   faq:             {href: /faq/,               ca: Preguntes freqüents,     es: Preguntas frecuentes,      en: Frequently asked questions}
   privacitat:      {href: /politica-de-privacitat/, href_es: /es/politica-de-privacidad/, href_en: /en/privacy-policy/,
                     ca: Política de privacitat, es: Política de privacidad, en: Privacy policy}
@@ -95,7 +105,7 @@ estructura:
                           empreses, partners, installacions, organigrama, posicionament,
                           dades_oficials, proteccio_menor, basquet_femeni]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
-      - [titol_contacte, [info_demanar, faq]]
+      - [titol_contacte, [info_demanar, newsletter, bustia, faq]]
       - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]
   es:
     nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
@@ -103,7 +113,7 @@ estructura:
     peu:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
-      - [titol_contacte, [info_demanar]]
+      - [titol_contacte, [info_demanar, newsletter, bustia]]
       - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]
   en:
     nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
@@ -111,5 +121,5 @@ estructura:
     peu:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
-      - [titol_contacte, [info_demanar]]
+      - [titol_contacte, [info_demanar, newsletter, bustia]]
       - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]

@@ -122,6 +122,54 @@ for _idioma, _t in {
     )
 
 
+# El cercador i el mapa ≡ van al final del <body>, després del peu, a totes
+# les pàgines del lloc. Viuen aquí perquè els dos generadors que fan servir
+# aquest peu (build-pages.py i generate-team-pages.py) els emetin igual.
+PEU_SCRIPTS = ('<script src="/js/cerca.js" defer></script>\n'
+               '<script src="/js/mapa.js" defer></script>\n')
+
+# El consentiment, el xat flotant de WhatsApp i el widget en directe de
+# Tawk.to, tal com van a les 379 pàgines del lloc (commit d2f31ce). En una
+# sola línia perquè és així com són a disc: un generador ha de poder tornar a
+# escriure la pàgina publicada caràcter a caràcter.
+XAT = (
+    '<script src="/js/galetes.js" defer></script>'
+    '<script src="/js/xat-whatsapp.js" defer></script>'
+    '<script type="text/javascript">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();'
+    '(function(){var s1=document.createElement("script"),'
+    's0=document.getElementsByTagName("script")[0];s1.async=true;'
+    "s1.src='https://embed.tawk.to/6a9197107f2d2f343fa7fabd/1k14bc6i0';"
+    "s1.charset='UTF-8';s1.setAttribute('crossorigin','*');"
+    's0.parentNode.insertBefore(s1,s0);})();</script>'
+)
+
+LANG_NOMS = {"ca": "CA", "es": "ES", "en": "EN"}
+LANG_ARIA = {"ca": "Català", "es": "Castellano", "en": "English"}
+
+
+def commutador(alternatives_, idioma):
+    """El <nav> per canviar d'idioma. `alternatives_` és la llista de
+    (codi, adreça) que torna alternatives(); el full viu a /css/barna.css."""
+    tria = [(c, h) for c, h in alternatives_ if c in LANG_NOMS]
+    if not tria:
+        return ""
+    enllacos = '<span class="sep" aria-hidden="true">·</span>'.join(
+        f'<a href="{h.replace(SITE, "")}" hreflang="{c}" lang="{c}" '
+        f'aria-label="{LANG_ARIA[c]}"'
+        + (' class="active" aria-current="true"' if c == idioma else '')
+        + f'>{LANG_NOMS[c]}</a>'
+        for c, h in tria)
+    return ('\n    <nav class="lang-switch" aria-label="Canvia d\'idioma · '
+            'Cambiar idioma · Change language">\n      '
+            + enllacos + '\n    </nav>')
+
+
+def hreflangs(alternatives_):
+    """Les etiquetes <link rel=alternate> de la capçalera."""
+    return ''.join(f'\n<link rel="alternate" hreflang="{c}" href="{h}">'
+                   for c, h in alternatives_)
+
+
 A11Y_ETIQUETA = {
     "ca": "Accessibilitat — WCAG 2.2 AA",
     "es": "Accesibilidad — WCAG 2.2 AA",
@@ -177,7 +225,7 @@ def peu(idioma):
             '    <div class="foot-btm">\n'
             '      <div class="foot-mark">#Som<em>Clot</em></div>\n'
             f'      <div class="foot-legal">{text("peu_legal", idioma)}</div>\n'
-            '    </div>\n  </div>\n</footer>\n</body>\n</html>\n')
+            '    </div>\n  </div>\n</footer>\n' + PEU_SCRIPTS + '</body>\n</html>\n')
 
 
 def alternatives(url):

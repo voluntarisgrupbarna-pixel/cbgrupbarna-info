@@ -1,27 +1,51 @@
 #!/usr/bin/env python3
 """
-Generador de les pàgines interiors de cbgrupbarna.info (campus, 3x3, blog).
+Generador de les pàgines interiors de cbgrupbarna.info (blog i calendaris).
 
 Totes comparteixen capçalera, peu, JSON-LD i /css/barna.css, de manera que
-afegir una pàgina o un article nou és afegir una entrada aquí i executar:
+afegir un article nou és afegir una entrada aquí i executar:
 
-    python3 scripts/build-pages.py
+    python3 scripts/build-pages.py --dry-run   # què canviaria
+    python3 scripts/build-pages.py             # ho fa
 
-Les fotos del blog surten de /img/blog/, que genera un script a part:
-
-    python3 scripts/build-blog-images.py
-
-Cal executar-lo abans si s'hi afegeix una foto nova o se'n canvia el marc.
+Les fotos del blog surten de /img/blog/, que genera un script a part
+(`scripts/build-blog-images.py`). Cal passar-lo abans si s'hi afegeix una foto
+nova o se'n canvia el marc: aquest generador llegeix la mida real de cada
+fitxer per escriure width/height honestos, i s'atura si la foto no hi és.
 
 No toca ni la portada ni /partits/ ni /escoleta/: aquelles pàgines es mantenen
 a mà perquè tenen lògica pròpia.
+
+ES POT EXECUTAR SENSE POR — i abans no
+--------------------------------------
+Aquest script va arribar a anar tan endarrerit respecte al que hi havia
+publicat que executar-lo esborrava feina real, i l'única protecció era que
+algú se'n recordés i mirés el `git diff`. El 29/08/2026 es va posar al dia i
+la protecció va passar a ser del codi:
+
+  · `write()` es nega a tocar les pàgines de MANTINGUDES_A_MA, que el
+    generador encara no sap reproduir, i qualsevol altra que hi perdi
+    contingut de manera desproporcionada o que hi perdi els hreflang, el
+    commutador d'idioma o les preguntes freqüents. Amb --force se salta, i
+    llavors sí que cal mirar el diff sencer.
+  · Les preguntes no es dupliquen aquí: surten de `i18n/faq.yml`, la mateixa
+    font que reparteix `.github/scripts/generate-faq.py`. Els dos scripts es
+    poden executar en qualsevol ordre i donen el mateix fitxer.
+  · La capçalera, el peu, el xat i el commutador surten de
+    `scripts/i18n_chrome.py`, compartit amb `generate-team-pages.py`, perquè
+    una peça nova al lloc no s'hagi d'afegir a dos generadors.
+
+Si hi afegeixes res a una pàgina que aquest script genera, afegeix-ho aquí
+també: la prova és que `--dry-run` digui «ja iguals» a tot.
 """
+import difflib
 import json
 import re
 from pathlib import Path
 from urllib.parse import quote
 
-from i18n_chrome import alternatives, navegacio, peu, text
+from i18n_chrome import (XAT, alternatives, commutador, hreflangs, navegacio,
+                         peu, text)
 
 
 def clamp_desc(text, limit=160):
@@ -41,17 +65,70 @@ def clamp_desc(text, limit=160):
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def mida_imatge(ruta, per_defecte):
+def _mida_webp(b):
+    if b[:4] != b"RIFF" or b[8:12] != b"WEBP":
+        return None
+    tipus = b[12:16]
+    if tipus == b"VP8 ":
+        return (int.from_bytes(b[26:28], "little") & 0x3FFF,
+                int.from_bytes(b[28:30], "little") & 0x3FFF)
+    if tipus == b"VP8L":
+        n = int.from_bytes(b[21:25], "little")
+        return ((n & 0x3FFF) + 1, ((n >> 14) & 0x3FFF) + 1)
+    if tipus == b"VP8X":
+        return (int.from_bytes(b[24:27], "little") + 1,
+                int.from_bytes(b[27:30], "little") + 1)
+    return None
+
+
+def _mida_png(b):
+    if b[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return (int.from_bytes(b[16:20], "big"), int.from_bytes(b[20:24], "big"))
+
+
+def _mida_jpeg(b):
+    if b[:2] != b"\xff\xd8":
+        return None
+    i = 2
+    while i < len(b) - 9:
+        if b[i] != 0xFF:
+            i += 1
+            continue
+        marca = b[i + 1]
+        # SOF0-SOF15, excloent-hi els marcadors que no porten mides.
+        if 0xC0 <= marca <= 0xCF and marca not in (0xC4, 0xC8, 0xCC):
+            return (int.from_bytes(b[i + 7:i + 9], "big"),
+                    int.from_bytes(b[i + 5:i + 7], "big"))
+        i += 2 + int.from_bytes(b[i + 2:i + 4], "big")
+    return None
+
+
+def mida_imatge(ruta, per_defecte=None):
     """Mida real d'una imatge, per escriure width/height honestos al marcatge.
 
-    Si Pillow no hi és o el fitxer encara no s'ha generat, torna el valor per
-    defecte: el marcatge segueix sortint i només hi perd precisió."""
+    Es llegeix de la capçalera del fitxer, sense dependre de Pillow: abans el
+    `except` silenciós tornava un valor per defecte i el marcatge sortia amb
+    unes mides inventades, que és justament el que provoca el salt de
+    maquetació (CLS) que aquests atributs havien d'evitar. Val més aturar-se
+    que publicar una mida falsa."""
+    ruta = Path(ruta)
     try:
-        from PIL import Image
-        with Image.open(ruta) as im:
-            return im.size
-    except Exception:
+        capcalera = ruta.read_bytes()[:64 * 1024]
+    except OSError:
+        capcalera = None
+    if capcalera:
+        for lector in (_mida_webp, _mida_png, _mida_jpeg):
+            mida = lector(capcalera)
+            if mida:
+                return mida
+    if per_defecte is not None:
         return per_defecte
+    raise SystemExit(
+        f"No es pot llegir la mida de {ruta}. Genera-la amb "
+        "scripts/build-blog-images.py abans de tornar a executar el generador.")
+
+
 SITE = "https://cbgrupbarna.info"
 WA_CLUB = "https://api.whatsapp.com/send?phone=+34698425153"
 WA_ESCOLETA = "https://wa.me/34646205526"
@@ -73,29 +150,14 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
     desc = meta_desc or clamp_desc(desc)
     ld = json.dumps(extra_ld, ensure_ascii=False, indent=2) if extra_ld else None
     kw = f'\n<meta name="keywords" content="{keywords}">' if keywords else ''
-    alt = ''.join(f'\n<link rel="alternate" hreflang="{code}" href="{href}">'
-                  for code, href in (alternates or []))
+    alt = hreflangs(alternates or [])
     locale = {"ca": "ca_ES", "es": "es_ES", "en": "en_US"}.get(lang, "ca_ES")
-    LANG_NAMES = {"ca": "CA", "es": "ES", "en": "EN"}
-    switch_langs = [(c, h) for c, h in (alternates or []) if c in LANG_NAMES]
-    if switch_langs and show_lang_switch:
-        ACT = ' class="active"'
-        links = '<span class="sep">·</span>'.join(
-            f'<a href="{h.replace(SITE, "")}" hreflang="{c}"{ACT if c == lang else ""}>{LANG_NAMES[c]}</a>'
-            for c, h in switch_langs)
-        lang_switch = ('\n    <div class="lang-switch" aria-label="Canvia d\'idioma · Cambiar idioma · Change language">\n      '
-                       + links + '\n    </div>')
-        lang_style = '''
-<style>
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-.lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; }
-.lang-switch .sep { opacity: 0.25; }{EXTRA}
-</style>'''.replace("{EXTRA}", "\n.head-in .lang-switch { margin-left: auto; }" if lang_switch_auto else "")
-    else:
-        lang_switch = ''
-        lang_style = ''
+    # El full del commutador viu a /css/barna.css des que se'n van retirar les
+    # vuit còpies inline (24/08/2026): aquí només s'emet el marcatge.
+    lang_switch = commutador(alternates or [], lang) if show_lang_switch else ''
+    lang_style = ('\n<style>\n' + (
+        ".head-in .lang-switch { margin-left: auto; }\n" if lang_switch_auto else "")
+        + '</style>') if lang_switch else ''
 
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
@@ -121,12 +183,10 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">{lang_style}
-<!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
-     aquí, el planta /js/cerca.js dins de la capçalera. -->
-<link rel="stylesheet" href="/css/cerca.css">
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
-<script src="/js/galetes.js" defer></script>
-<script src="/js/cerca.js" defer></script>
+{XAT}
+<link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
 <a href="#main" class="skip">{text("salta", lang)}</a>
@@ -154,13 +214,64 @@ def crumbs(items):
 FOOT = peu("ca")
 
 
-def faq_block(pairs):
-    """FAQ visible + el JSON-LD corresponent, sempre sincronitzats."""
-    html = '<div class="faq">' + ''.join(
-        f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in pairs) + '</div>'
-    ld = {"@type": "FAQPage", "mainEntity": [
-        {"@type": "Question", "name": q,
-         "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a)}} for q, a in pairs]}
+def _faq_de_la_font(ruta):
+    """Les preguntes d'una pàgina, tal com són a `i18n/faq.yml`.
+
+    Torna None si la pàgina encara no hi és. Les que porten `pendent:` no es
+    publiquen enlloc, ni en català: esperen una dada."""
+    global _FAQ_FONT
+    if _FAQ_FONT is None:
+        import yaml
+        dades = yaml.safe_load((ROOT / "i18n" / "faq.yml").read_text(encoding="utf-8")) or {}
+        _FAQ_FONT = {}
+        for e in dades.get("preguntes", []):
+            if e.get("pendent") or not e.get("ca"):
+                continue
+            _FAQ_FONT.setdefault(e["pagina"], []).append((e["ca"]["q"], e["ca"]["r"]))
+    return _FAQ_FONT.get(ruta)
+
+
+_FAQ_FONT = None
+
+
+def faq_block(pairs, url, lang="ca"):
+    """FAQ visible + el seu FAQPage, tots dos entre marcadors.
+
+    La font de veritat de les preguntes és `i18n/faq.yml`, i qui les reparteix
+    als tres idiomes és `.github/scripts/generate-faq.py`. Aquest generador NO
+    en manté una còpia: si la pàgina és a la font única, s'agafen d'allà i la
+    llista escrita al costat de la pàgina només fa de recanvi per a les que
+    encara no hi són.
+
+    Sense això, els dos scripts es trepitgen. El 29/08/2026, executar
+    `build_calendaris()` hauria esborrat quatre preguntes publicades de
+    /partits/calendaris/ —entre elles «quants partits es juguen fora de casa»,
+    que va costar comptar -— perquè la llista d'aquí s'havia quedat enrere.
+
+    El FAQPage va en un <script> propi i FORA del @graph de la pàgina. Si anés
+    a dins, la pàgina acabaria amb dos FAQPage —el del @graph i el que hi
+    escriu generate-faq.py—, que és exactament el desquadrament que la font
+    única va venir a resoldre."""
+    if lang == "ca":
+        de_la_font = _faq_de_la_font(url.replace(SITE, "") or "/")
+        if de_la_font:
+            pairs = de_la_font
+    visible = ''.join(
+        f'<details class="faq-q"><summary>{q}</summary><p>{a}</p></details>' for q, a in pairs)
+    html = f'<div class="faq"><!-- FAQ:START -->{visible}<!-- FAQ:END --></div>'
+    dades = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": url + "#faq",
+        "inLanguage": lang,
+        "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a)}}
+            for q, a in pairs],
+    }
+    ld = ('<!-- FAQ-LD:START --><script type="application/ld+json">'
+          + json.dumps(dades, ensure_ascii=False, indent=2)
+          + '</script><!-- FAQ-LD:END -->')
     return html, ld
 
 
@@ -175,11 +286,81 @@ def closer(title, text, buttons):
     return f'<div class="closer"><h2>{title}</h2><p>{text}</p><div class="btn-row">{b}</div></div>'
 
 
+# Pàgines que aquest generador NO sap tornar a escriure: es van redissenyar a
+# mà i aquí només n'hi queda una versió antiga. Executar-les hi esborraria
+# contingut real —l'apartat de posicionament de /patrocinadors/, les fotos i
+# el commutador d'idioma del blog, paraules clau de /campus/ i /premsa/—, així
+# que `write()` s'hi nega. El dia que es tornin a portar al generador, es
+# treuen d'aquí i el diff ha de sortir buit.
+MANTINGUDES_A_MA = {
+    "campus/index.html",
+    "patrocinadors/index.html",
+    "3x3/index.html",
+    "blog/index.html",
+    "premsa/index.html",
+    "premsa/instagram/index.html",
+    # L'article de premsa hi va per la mateixa raó: el generador no sap dels
+    # seus hreflang ni del commutador d'idioma, i encara diu «60 anys» on la
+    # pàgina publicada ja diu 61.
+    "premsa/guia-clot-seixanta-anys-fent-bategar-el-clot/index.html",
+}
+
+DRY_RUN = False
+FORCE = False
+
+
+def _diferencia(vell, nou):
+    """Quantes línies s'esborrarien i quantes s'afegirien."""
+    d = list(difflib.unified_diff(vell.split("\n"), nou.split("\n"), lineterm="", n=0))
+    fora = sum(1 for l in d if l.startswith("-") and not l.startswith("---"))
+    dins = sum(1 for l in d if l.startswith("+") and not l.startswith("+++"))
+    return fora, dins
+
+
 def write(path, html):
+    """Desa una pàgina, però no a cegues.
+
+    El generador ha arribat a anar tan endarrerit respecte al que hi ha
+    publicat que executar-lo esborrava feina real, i la protecció era que algú
+    se'n recordés i mirés el `git diff`. Ara la protecció és del codi: una
+    pàgina de la llista de dalt no s'escriu mai, i qualsevol altra que perdi
+    contingut de manera desproporcionada s'atura i ho explica."""
     p = ROOT / path
+    vell = p.read_text(encoding="utf-8") if p.exists() else ""
+
+    if vell == html:
+        return f"  = {path}  (igual)"
+
+    if path in MANTINGUDES_A_MA and not FORCE:
+        fora, dins = _diferencia(vell, html)
+        return (f"  ⨯ {path}  NO s'escriu: es manté a mà i el generador va endarrerit "
+                f"(-{fora}/+{dins} línies). Amb --force si de debò ho vols.")
+
+    if vell and not FORCE:
+        fora, dins = _diferencia(vell, html)
+        # Xarxa de seguretat per a les pàgines que encara no són a la llista.
+        # Una actualització normal d'aquest generador toca poques línies i
+        # n'escriu tantes com n'esborra; perdre'n deu més de les que s'hi
+        # posen vol dir que la pàgina ha crescut fora del generador.
+        if fora >= 10 and fora > dins:
+            return (f"  ⨯ {path}  NO s'escriu: hi perdria {fora} línies i només n'hi "
+                    f"afegiria {dins}. Mira-ho abans (--force per saltar-ho).")
+        # I la comprovació que no depèn de comptar línies: aquestes peces no
+        # es perden mai en una actualització legítima.
+        for tros, nom in (("<link rel=\"alternate\" hreflang=", "els hreflang"),
+                          ("class=\"lang-switch\"", "el commutador d'idioma"),
+                          ("FAQ:START", "les preguntes freqüents")):
+            if vell.count(tros) > html.count(tros):
+                return (f"  ⨯ {path}  NO s'escriu: hi perdria {nom}. "
+                        "Mira-ho abans (--force per saltar-ho).")
+
+    if DRY_RUN:
+        fora, dins = _diferencia(vell, html)
+        return f"  ~ {path}  canviaria (-{fora}/+{dins})"
+
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(html, encoding='utf-8')
-    return f"  {path}  ({len(html)//1024} KB)"
+    return f"  ✓ {path}  ({len(html)//1024} KB)"
 
 
 BREADCRUMB = lambda items: {"@type": "BreadcrumbList", "itemListElement": [
@@ -219,7 +400,7 @@ def build_campus():
          "(Districte de Sant Martí), obert a jugadors i jugadores de qualsevol club de la ciutat. És "
          "una alternativa de barri, amb grups reduïts i tecnificació individual amb Time Chamber, als "
          "campus de la Fundació del Bàsquet Català."),
-    ])
+    ], url, "ca")
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "Service", "@id": url + "#campus",
          "name": "Campus de bàsquet · CB Grup Barna",
@@ -266,7 +447,6 @@ def build_campus():
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
          "description": desc, "inLanguage": ["ca-ES", "es-ES"],
          "about": {"@id": url + "#campus"}, "isPartOf": {"@id": SITE + "/#website"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Campus de bàsquet", "/campus/")]),
     ]}
 
@@ -423,6 +603,7 @@ def build_campus():
     </div>
   </div>
 </div>
+{faq_ld}
 """
     return write("campus/index.html",
                  head(title, desc, url, SITE + "/img/campus-hero.webp", ld,
@@ -492,7 +673,7 @@ def build_patrocinadors():
          "medida con entregables concretos para cada marca."),
         ("¿Producción de lonas o material específico incluida?",
          "No, salvo acuerdo expreso: se presupuesta aparte según lo que necesite la activación."),
-    ])
+    ], url, "es")
 
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "SportsOrganization", "@id": SITE + "/#club", "name": "CB Grup Barna",
@@ -512,7 +693,6 @@ def build_patrocinadors():
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
          "description": desc, "inLanguage": ["es-ES", "ca-ES"],
          "about": {"@id": url + "#patrocini"}, "isPartOf": {"@id": SITE + "/#website"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Patrocinadors", "/patrocinadors/")]),
     ]}
 
@@ -673,6 +853,7 @@ def build_patrocinadors():
   </div>
   </div>
 </div>
+{faq_ld}
 """
     return write("patrocinadors/index.html",
                  head(title, desc, url, SITE + ph + "hero_sf16.jpg", ld,
@@ -952,7 +1133,7 @@ def build_3x3():
         ("On és exactament?",
          "A Westfield Glòries, a la plaça de les Glòries Catalanes de Barcelona, a tocar del barri "
          "del Clot i del Districte de Sant Martí."),
-    ])
+    ], url, "ca")
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "SportsEvent", "@id": url + "#torneig",
          "name": "3x3 Barcelona · Torneig de bàsquet 3x3 a Westfield Glòries",
@@ -970,7 +1151,6 @@ def build_3x3():
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": title,
          "description": desc, "inLanguage": ["ca-ES", "es-ES"],
          "about": {"@id": url + "#torneig"}, "isPartOf": {"@id": SITE + "/#website"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("3x3 Barcelona", "/3x3/")]),
     ]}
 
@@ -1058,6 +1238,7 @@ def build_3x3():
     </div>
   </div>
 </div>
+{faq_ld}
 """
     return write("3x3/index.html",
                  head(title, desc, url, SITE + "/og-image.jpg", ld,
@@ -1075,10 +1256,12 @@ def build_3x3():
 
 def ph(name, alt, shape="32", width=None):
     w = f" ph-w{width}" if width else ""
+    iw, ih = mida_imatge(ROOT / "img" / "blog" / f"{name}.webp")
     return (f'<span class="ph-f ph-{shape}{w}">'
             f'<img src="/img/blog/{name}.webp" '
             f'srcset="/img/blog/{name}.webp 1x, /img/blog/{name}@2x.webp 2x" '
-            f'alt="{alt}" loading="lazy" decoding="async"></span>')
+            f'alt="{alt}" loading="lazy" decoding="async" '
+            f'width="{iw}" height="{ih}"></span>')
 
 
 def fig(inner, caption):
@@ -1319,7 +1502,7 @@ ARTICLES = [
    ("en", SITE + "/en/blog/formation-and-competitive-club-catalonia/"),
    ("x-default", SITE + "/blog/club-formacio-i-competitiu-catalunya/"),
   ],
-  "trans_note": ('\n    <p style="font-size:12.5px;color:var(--muted);margin-top:10px">'
+  "trans_note": ('\n    <p style="font-size:12.5px;color:#6B6560;margin-top:10px">'
                  'També disponible en:\n'
                  '    <a href="/es/blog/club-formacion-y-competitivo-cataluna/">castellano</a> ·\n'
                  '    <a href="/en/blog/formation-and-competitive-club-catalonia/">English</a></p>'),
@@ -1351,7 +1534,7 @@ del nivell més alt. Un club "de formació" és el que fa servir aquesta escala 
 dades de la federació ho demostren millor que qualsevol frase de presentació.</p>
 """ + FIG_FORMACIO_SENIOR + """
 <h2>La piràmide del Barna, per dins</h2>
-<p>La fitxa oficial del club a basquetcatala.cat mostra <strong>32 equips federats</strong>,
+<p>La fitxa oficial del club a basquetcatala.cat mostra <strong>més de 34 equips federats</strong>,
 de Pre-Mini (8-9 anys) fins a Sènior, amb estructura masculina i femenina paral·lela i, en la
 majoria de categories, fins a <strong>tres nivells</strong>: un equip A al sostre competitiu
 (Interterritorial, o Preferent quan no n'hi ha), un equip B format per jugadors i jugadores en el
@@ -1405,7 +1588,7 @@ passen pel mateix club, sense trencar mai el fil.</p>
 """,
   "faq": [
    ("Quants equips té el CB Grup Barna?",
-    "32 equips federats, de Pre-Mini a Sènior, amb estructura masculina i femenina i fins a "
+    "Més de 34 equips federats, de Pre-Mini a Sènior, amb estructura masculina i femenina i fins a "
     "tres nivells per categoria (A, B i Negre), segons la fitxa oficial del club a basquetcatala.cat."),
    ("Què és la Súper Copa de la FCBQ?",
     "És la màxima categoria sènior territorial organitzada per la Federació Catalana de Bàsquet. "
@@ -1528,7 +1711,7 @@ sense competició federada pròpia. Una <strong>escola de bàsquet</strong> és 
 nens i nenes de 4 a 8 anys. Un <strong>club</strong> és el que hi ha darrere: equips federats a totes
 les categories, entrenadors titulats i continuïtat de dècades. El CB Grup Barna és les tres coses
 alhora: funciona com una acadèmia de bàsquet a Barcelona (formació i tecnificació des de ben petits)
-i és, alhora, un club amb 38 equips i seixanta-un anys al mateix barri.</p>
+i és, alhora, un club amb 34 equips federats i seixanta-un anys al mateix barri.</p>
 """ + FIG_TRIAR_CLUB + """
 <h2>1. Quants entrenadors hi ha per grup</h2>
 <p>És el primer que s'ha de preguntar i el que menys es pregunta. Un grup de vint criatures de cinc
@@ -1606,7 +1789,7 @@ continuïtat del lloc.</p>
   "date": "2026-08-05",
   "tag": "Guia per a famílies",
   "title": "Campus de bàsquet a Barcelona: què mirar abans d'apuntar-hi ningú",
-  "seo_title": "Com triar un campus de bàsquet a Barcelona: guia per a famílies | CB Grup Barna",
+  "seo_title": "Com triar un campus de bàsquet a Barcelona | CB Grup Barna",
   "desc": ("Guia per triar campus de bàsquet a Barcelona: diferència entre campus de lleure i de "
            "tecnificació, ràtios, grups per edat, horaris i preu. Amb la informació del campus del "
            "CB Grup Barna al Clot."),
@@ -1751,15 +1934,14 @@ s'obren pot <a href="/#info">deixar el contacte</a> o escriure al WhatsApp del c
  },
  {
   "slug": "basquet-base-sant-marti-clot",
-  "meta_desc": "Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa federativa, calendari i què significa jugar en un club de barri amb seixanta-un anys d'història.",
+  "meta_desc": "Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa federativa, calendari i què vol dir jugar en un club de barri des de 1965.",
   "hero_alt": 'Jugador del CB Grup Barna, club de bàsquet base del barri del Clot',
   "date": "2026-08-05",
   "tag": "El barri",
   "title": "Bàsquet base al Clot i a Sant Martí: com funciona un club de barri",
   "seo_title": "Bàsquet base al Clot i Sant Martí, Barcelona | CB Grup Barna",
   "desc": ("Com funciona el bàsquet base al Districte de Sant Martí de Barcelona: categories, fitxa "
-           "federativa, calendari i què vol dir jugar en un club de barri amb seixanta-un anys "
-           "d'història."),
+           "federativa, calendari i què vol dir jugar en un club de barri des de 1965."),
   "kw": "bàsquet base Barcelona, bàsquet Sant Martí, club bàsquet Clot, baloncesto base Barcelona, "
         "club bàsquet barri Barcelona",
   "lede": ("Un club de barri no és una versió petita d'un club gran. És una altra cosa, i val la pena "
@@ -1806,7 +1988,7 @@ per a la línia femenina i la masculina. El model femení està documentat al do
 </ul>
 
 <h2>Per on començar</h2>
-<p>Si el nen o la nena té entre 4 i 7 anys, el camí és l'escola d'iniciació: al Barna, l'Escoleta amb
+<p>Si el nen o la nena té entre 4 i 8 anys, el camí és l'escola d'iniciació: al Barna, l'Escoleta amb
 en <strong>Julio Torralba</strong> (646 205 526). A partir dels 8, l'entrada és directament a un
 equip federat. En tots dos casos, el primer pas és el mateix: anar a fer un
 <a href="/#info">entrenament de prova</a> i veure-ho des de dins.</p>
@@ -1817,7 +1999,7 @@ equip federat. En tots dos casos, el primer pas és el mateix: anar a fer un
     "no és el resultat sinó formar jugadors i jugadores que segueixin jugant."),
    ("Quin club de bàsquet hi ha al barri del Clot?",
     "El CB Grup Barna, fundat el 1965, és el club de bàsquet base del Clot, al Districte de Sant "
-    "Martí de Barcelona, amb 32 equips federats i unes 450 jugadores i jugadors."),
+    "Martí de Barcelona, amb més de 34 equips federats i unes 450 jugadores i jugadors."),
    ("Cal fitxa federativa per jugar a bàsquet base?",
     "Sí, per a la competició federada. La tramita el club davant la Federació Catalana de Basquetbol "
     "i inclou l'assegurança esportiva. A l'escola d'iniciació (4 a 8 anys) no cal."),
@@ -1844,7 +2026,7 @@ def blog_card(a, with_text):
 def build_article(a):
     url = f"{SITE}/blog/{a['slug']}/"
     url_relativa = f"/blog/{a['slug']}/"
-    faq_html, faq_ld = faq_block(a["faq"])
+    faq_html, faq_ld = faq_block(a["faq"], url)
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "BlogPosting", "@id": url + "#article",
          "headline": a["title"], "description": a["desc"], "url": url,
@@ -1854,7 +2036,6 @@ def build_article(a):
          "image": SITE + "/og-image.jpg",
          "isPartOf": {"@id": SITE + "/blog/#blog"},
          "mainEntityOfPage": {"@type": "WebPage", "@id": url}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Blog", "/blog/"),
                     (a.get("bc_name", a["title"]), "/blog/" + a["slug"] + "/")]),
     ]}
@@ -1862,7 +2043,7 @@ def build_article(a):
     if a.get("hero_alt"):
         # Els atributs han de dir la mida real del fitxer: els heros es retallen a 4:3
         # (el marc més alt que fa servir el CSS) i cada un acaba amb una mida diferent.
-        hw, hh = mida_imatge(ROOT / "img" / "blog" / f'{a["slug"]}-hero.webp', (1200, 900))
+        hw, hh = mida_imatge(ROOT / "img" / "blog" / f'{a["slug"]}-hero.webp')
         hero = (f'\n    <div class="phead-media"><img src="/img/blog/{a["slug"]}-hero.webp" '
                 f'alt="{a["hero_alt"]}" fetchpriority="high" decoding="async" width="{hw}" height="{hh}"></div>')
     if a.get("related"):
@@ -1904,6 +2085,7 @@ def build_article(a):
     <div class="cards c3">{rel}</div>
   </div>
 </div>
+{faq_ld}
 """
     return write(f"blog/{a['slug']}/index.html",
                  head(a["seo_title"], a["desc"], url, SITE + "/og-image.jpg", ld, a["kw"],
@@ -2053,7 +2235,7 @@ entitats del barri. Un article i una fitxa al mateix número: gràcies per fer-n
 
 def build_press_article(a):
     url = f"{SITE}/premsa/{a['slug']}/"
-    faq_html, faq_ld = faq_block(a["faq"])
+    faq_html, faq_ld = faq_block(a["faq"], url)
 
     gallery = ''.join(
         f'<figure><img src="/premsa/img/{fn}" alt="{alt}" loading="lazy" decoding="async" '
@@ -2088,7 +2270,6 @@ def build_press_article(a):
                         "url": a["publisher_url"], "sameAs": [a["publisher_ig"]]},
          },
          "about": {"@id": SITE + "/#club"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Premsa", "/premsa/"), (a["title"], "/premsa/" + a["slug"] + "/")]),
     ]}
 
@@ -2128,6 +2309,7 @@ def build_press_article(a):
     </div>
   </article>
 </div>
+{faq_ld}
 """
     return write(f"premsa/{a['slug']}/index.html",
                  head(a["seo_title"], a["desc"], url, SITE + f"/premsa/img/{a['images'][0][0]}", ld, a["kw"])
@@ -2463,12 +2645,11 @@ def build_calendaris():
         ("Amb quina freqüència s'actualitzen els calendaris?",
          "El calendari en directe de /partits/ es sincronitza cada dia amb el calendari oficial de la FCBQ. "
          "Les fitxes descarregables són fixes: si un partit concret canvia, l'app sempre té la dada correcta."),
-    ])
+    ], url, "ca")
 
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "CollectionPage", "@id": url + "#calendaris", "name": title, "description": desc, "url": url,
          "inLanguage": "ca-ES", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": SITE + "/#club"}},
-        faq_ld,
         BREADCRUMB([("CB Grup Barna", "/"), ("Calendari", "/partits/"), ("Calendari per equip", "/partits/calendaris/")]),
     ]}
 
@@ -2593,6 +2774,7 @@ def build_calendaris():
   }});
 }})();
 </script>
+{faq_ld}
 """
     alternates = alternatives("/partits/calendaris/")
     return write("partits/calendaris/index.html",
@@ -2601,17 +2783,28 @@ def build_calendaris():
                       alternates=alternates, lang_switch_auto=True) + body + FOOT)
 
 
-# Pàgines que el generador JA NO escriu perquè s'han redissenyat a mà i aquí
-# només hi queda una versió antiga: regenerar-les esborraria contingut real
-# (hreflang, JSON-LD i estils que el generador encara no sap posar).
-# El dia que es tornin a portar al generador, treure-les d'aquesta llista.
-MANTINGUDES_A_MA = ["campus/", "patrocinadors/ (índex i fitxes de partner)",
-                     "premsa/ (índex, articles i recull d'Instagram)", "3x3/", "blog/ (índex)"]
-
 if __name__ == "__main__":
-    print("Generant pàgines:")
-    for a in ARTICLES:
-        print(build_article(a))
-    print(build_calendaris())
-    print(f"\n{len(ARTICLES) + 1} pàgines generades.")
-    print("NO generades (mantingudes a mà, vegeu MANTINGUDES_A_MA):", ", ".join(MANTINGUDES_A_MA))
+    import argparse
+
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--dry-run", action="store_true",
+                    help="diu què canviaria i no desa res")
+    ap.add_argument("--force", action="store_true",
+                    help="salta les proteccions de write(). Mira el git diff sencer després.")
+    args = ap.parse_args()
+    DRY_RUN, FORCE = args.dry_run, args.force
+
+    print("Generant pàgines:" if not DRY_RUN else "Prova en sec (no es desa res):")
+    linies = [build_article(a) for a in ARTICLES]
+    linies.append(build_calendaris())
+    for l in linies:
+        print(l)
+
+    iguals = sum(1 for l in linies if l.startswith("  ="))
+    aturats = sum(1 for l in linies if l.startswith("  ⨯"))
+    print(f"\n{len(linies)} pàgines: {len(linies) - iguals - aturats} amb canvis, "
+          f"{iguals} ja iguals, {aturats} aturades.")
+    if aturats:
+        print("Les aturades no s'han tocat. Mira per què abans de fer servir --force.")
+    print("Fora del generador, mantingudes a mà:", ", ".join(sorted(MANTINGUDES_A_MA)))
