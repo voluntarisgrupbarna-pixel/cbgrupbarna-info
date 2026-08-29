@@ -78,21 +78,18 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
     locale = {"ca": "ca_ES", "es": "es_ES", "en": "en_US"}.get(lang, "ca_ES")
     LANG_NAMES = {"ca": "CA", "es": "ES", "en": "EN"}
     switch_langs = [(c, h) for c, h in (alternates or []) if c in LANG_NAMES]
+    LANG_LABELS = {"ca": "Català", "es": "Castellano", "en": "English"}
     if switch_langs and show_lang_switch:
-        ACT = ' class="active"'
-        links = '<span class="sep">·</span>'.join(
-            f'<a href="{h.replace(SITE, "")}" hreflang="{c}"{ACT if c == lang else ""}>{LANG_NAMES[c]}</a>'
+        links = '<span class="sep" aria-hidden="true">·</span>'.join(
+            f'<a href="{h.replace(SITE, "")}" hreflang="{c}" lang="{c}" aria-label="{LANG_LABELS[c]}"'
+            + (' class="active" aria-current="true"' if c == lang else '') + f'>{LANG_NAMES[c]}</a>'
             for c, h in switch_langs)
-        lang_switch = ('\n    <div class="lang-switch" aria-label="Canvia d\'idioma · Cambiar idioma · Change language">\n      '
-                       + links + '\n    </div>')
-        lang_style = '''
-<style>
-.lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--display, inherit); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-.lang-switch a { padding: 7px 2px; opacity: 0.55; transition: opacity 0.3s, color 0.3s; }
-.lang-switch a.active { opacity: 1; font-weight: 600; }
-.lang-switch a:hover { opacity: 1; }
-.lang-switch .sep { opacity: 0.25; }{EXTRA}
-</style>'''.replace("{EXTRA}", "\n.head-in .lang-switch { margin-left: auto; }" if lang_switch_auto else "")
+        lang_switch = ('\n    <nav class="lang-switch" aria-label="Canvia d\'idioma · Cambiar idioma · Change language">\n      '
+                       + links + '\n    </nav>')
+        # Els estils de .lang-switch ja viuen a css/barna.css (mides tàctils
+        # AA incloses); aquí no cal cap <style> propi.
+        lang_style = ('\n<style>.head-in .lang-switch { margin-left: auto; }</style>'
+                      if lang_switch_auto else '')
     else:
         lang_switch = ''
         lang_style = ''
@@ -121,12 +118,13 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">{lang_style}
-<!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
-     aquí, el planta /js/cerca.js dins de la capçalera. -->
-<link rel="stylesheet" href="/css/cerca.css">
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
-<script src="/js/galetes.js" defer></script>
-<script src="/js/cerca.js" defer></script>
+<script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script><script type="text/javascript">var Tawk_API=Tawk_API||{{}},Tawk_LoadStart=new Date();(function(){{var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/6a9197107f2d2f343fa7fabd/1k14bc6i0';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);}})();</script>
+<!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
+     aquí, el planta /js/cerca.js dins de la capçalera; el fitxer JS
+     s'enllaça al final del <body>, amb peu() (i18n_chrome.py). -->
+<link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
 <a href="#main" class="skip">{text("salta", lang)}</a>

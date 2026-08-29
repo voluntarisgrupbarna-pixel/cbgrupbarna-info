@@ -87,6 +87,8 @@ export function Navbar() {
                   className={`text-white/50 hover:text-white transition-colors ${
                     pathname.startsWith('/admin') ? 'text-white' : ''
                   }`}
+                  aria-label="Administració"
+                  title="Administració"
                 >
                   <Settings className="w-4.5 h-4.5" />
                 </Link>
@@ -95,6 +97,7 @@ export function Navbar() {
                 onClick={handleSignOut}
                 className="text-white/40 hover:text-white/80 transition-colors"
                 title="Tancar sessió"
+                aria-label="Tancar sessió"
               >
                 <LogOut className="w-4 h-4" />
               </button>

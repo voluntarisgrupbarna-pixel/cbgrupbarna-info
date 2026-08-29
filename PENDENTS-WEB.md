@@ -2036,3 +2036,136 @@ verificar, sense històric previ, no un salt real d'un dia per l'altre.
   web» pendent (GA4 mesura què fa la gent al web; Search Console, com hi
   arriba des de la cerca) o fer-ne seguiment manual mensual mentre el
   dashboard no existeix.
+
+---
+
+## 29-08-2026 — Els cinc punts «purament tècnics», fets
+
+L'auditoria d'aquest mateix document (§ inici) en va destriar cinc que no
+necessitaven cap decisió, material ni compte extern de l'Ana. Fets tots cinc,
+amb una correcció important pel camí: **dos d'ells no eren tan «purs» com
+semblava sobre el paper**, i val la pena explicar per què.
+
+### 1. `scripts/build-pages.py` sincronitzat (parcial, i documentat el que no)
+
+Comparat el que genera el script amb el que hi ha publicat de debò (sis
+articles del blog + `partits/calendaris/`), regenerant-ho en una còpia i fent
+`diff` línia a línia. Trobats i arreglats al `head()` compartit —toca totes
+les pàgines que generi el script, no només el blog—:
+
+- **Faltava `css/a11y.css`, `js/mapa.js` i el giny de xat de WhatsApp
+  (Tawk.to)**: si s'executés avui, les pàgines regenerades sortirien sense
+  cap dels tres.
+- **El selector d'idioma sortia com `<div>` sense `aria-label` ni
+  `aria-current`**, amb un `<style>` propi que xoca amb `.lang-switch` de
+  `css/barna.css` (que ja té les mides tàctils AA). Ara és `<nav>`, amb els
+  mateixos atributs que porten les pàgines reals, i sense estil duplicat.
+- El peu (`i18n_chrome.py → peu()`) ara emet `cerca.js` i `mapa.js` al final
+  del `<body>`, com fan les pàgines publicades (abans `cerca.js` només
+  sortia dins de `<head>` i `mapa.js` no sortia mai).
+- **`i18n/diccionari.yml` tenia el peu desactualitzat**: enllaçava
+  `/basquet-femeni/` (avui una redirecció `noindex`) en comptes de `/femeni/`,
+  i li faltaven els enllaços a Newsletter i Bústia de suggeriments —presents
+  a totes les pàgines reals— a les tres estructures (ca/es/en). Corregit.
+
+**El que NO s'ha tocat, i per què.** Regenerar els sis articles de debò
+—no només comparar-los— hauria esborrat contingut real: el `FAQPage` que
+avui gestiona `generate-faq.py` (amb marcadors `FAQ:START`/`FAQ-LD:START`)
+xoca amb el `FAQPage` que el propi generador construeix inline dins del
+`@graph`, i les dades de l'`ARTICLES` de Python han quedat desfasades
+respecte al text publicat (per exemple, «32 equips federats» al codi font
+davant dels «34» que diu avui la pàgina real, i les dimensions de la foto de
+capçalera no coincideixen amb el fitxer real). Posar-ho tot al dia sense
+perdre cap d'aquests canvis fets a mà necessita revisar article per article,
+no és una sola sessió. Queda anotat com a pendent real de desenvolupament,
+més concret que abans.
+
+### 2. `/palmares/` (ca/es/en) — fet sencer
+
+Pàgina nova amb el que el club ha guanyat de debò, sense inventar-hi res: els
+dos sèniors a la Supercopa FCBQ 2025-26 i 2026-27 (únic club de Barcelona amb
+els dos alhora), el sènior femení 4t amb 17-7, la Judit Ortiz a l'All Star i
+la Marta Zori entre les màximes anotadores de perímetre, el sotscampionat dels
+Barna Màgics a la Lliga Catalana ACELL i el tercer lloc a La Seu d'Urgell, i
+—com a arrel històrica— els tres Campionats de Barcelona i el Campionat
+d'Espanya de tennis de taula dels anys seixanta. Amb JSON-LD, sitemap,
+`llms.txt`, mapa ≡ i quatre preguntes noves a `i18n/faq.yml`. Comprovat amb
+`i18n-paritat`, `i18n-contingut`, `i18n-lint`, `a11y-revisa` i Playwright a
+390 px: tot en verd.
+
+### 3. «Avantatges de la família Barna» — la infraestructura, no els avantatges
+
+**Aquí el document original s'equivocava.** Deia «ja tenim 22 fitxes de
+partner amb ofertes», donant per fet que n'hi havia. Comprovat fitxa a fitxa:
+**cap dels 22 partners té avui cap avantatge publicat** —les 22 fitxes porten,
+des de fa temps, el mateix text de reserva («X encara no té cap avantatge
+publicat per a la família del Barna») amb un botó de WhatsApp perquè
+l'ofereixin. No hi havia res a empaquetar.
+
+En comptes de fabricar descomptes que no existeixen, s'ha construït el que
+sí és tècnic i real: `scripts/build-avantatges-familia.py`, que llegeix la
+secció «Oferta per a la família del Barna» de les tres versions de cada
+fitxa, descarta el text de reserva i publica només les ofertes autèntiques a
+`/avantatges-familia/` (`/es/ventajas-familia/`, `/en/family-benefits/`).
+Avui la pàgina surt honesta: cap avantatge encara, la graella dels 21
+partners (data.json en té 21, no 22) i una crida perquè qui en vulgui oferir
+un escrigui pel WhatsApp del club. El dia que un partner en confirmi un,
+tornar a executar l'script el hi treu sol. De pas, corregit a `llms.txt` un
+altre residu vell: encara hi deia «Nivells Or, Plata i Bronze», decisió
+revertida el 27/08/2026.
+
+### 4. `/video/` — no `/premsa/instagram/` duplicat, un tema a part
+
+Abans de construir-lo, comprovat a `llms.txt`: **ja existia una pàgina que fa
+gairebé el mateix**, `/premsa/instagram/`, amb 42 publicacions embegudes i
+pensada per a premsa. Duplicar-la hauria estat exactament l'error que
+`mapa-web-cbgb` demana evitar. La diferència real: aquella barreja fotos i
+vídeos per a periodistes; el que faltava —i el que demanava el benchmark—
+és un aparador només de vídeo, per a famílies i aficionats, al menú
+principal. `/video/` (`/es/video/`, `/en/videos/`) reutilitza els mateixos
+13 reels ja verificats (relat nou, no còpia literal), organitzats per tema
+—temporada, Escoleta i Campus, el club per dins, comunitat i partners—, amb
+el mateix mecanisme d'`embed.js` que ja funcionava a `/premsa/instagram/`, i
+enllaça cap allà per a qui vulgui el recull complet. Amb JSON-LD, sitemap,
+`llms.txt`, mapa ≡ i dues preguntes noves a `i18n/faq.yml`.
+
+### 5. Accessibilitat de `galeria/` (Next.js) — auditoria estàtica, feta i amb arreglos
+
+No hi ha credencials de Supabase en aquesta sessió (el mateix bloqueig
+apuntat al panell d'analítica), així que no s'ha pogut fer una passada amb
+navegador real i dades reals. **Sí que s'ha pogut auditar tot el codi font**:
+`npx tsc --noEmit` en verd, i un repàs de tots els `<button>` i enllaços
+amb icona sense text visible. Trobats i arreglats **set casos reals** on
+l'única pista per a un lector de pantalla era un atribut `title` (que no es
+llegeix sempre) o, en un cas, res de res:
+
+- `Navbar.tsx`: l'enllaç a `/admin` (icona d'engranatge) no tenia ni `title`
+  ni `aria-label` — ara en té.
+- `Navbar.tsx`: el botó de tancar sessió només tenia `title` — ara també
+  `aria-label`.
+- `AdminClient.tsx`: els tres botons d'accions d'un event (veure, publicar/
+  ocultar, eliminar) només tenien `title` — ara també `aria-label`.
+- `login/page.tsx`: els tres botons d'enviar formulari perdien tot el text
+  accessible mentre carregaven (només quedava la icona giratòria) — ara
+  porten un `aria-label` amb l'estat de càrrega.
+
+La resta del codi ja seguia bé el patró (`PhotoGrid.tsx`, el botó de treure
+foto d'`UploadZone.tsx`, el menú mòbil): és on es va copiar el patró
+correcte per als nous. De pas, `next@14.2.15` avisa d'una vulnerabilitat de
+seguretat coneguda en fer `npm install` — actualitzar-lo és un canvi més gran
+(pot tocar l'API de rutes) i queda apuntat, no fet, perquè no formava part
+d'aquest encàrrec. No hi ha `.eslintrc` configurat (`next lint` demana
+triar-ne un interactivament): és una millora de qualitat de codi diferent
+d'una auditoria d'accessibilitat, i es queda fora.
+
+### Pendent real de desenvolupar (sortit d'avui)
+
+- **Posar `scripts/build-pages.py` (`ARTICLES`) al dia amb el text publicat
+  actual** dels sis articles que genera, i separar el `FAQPage` inline del
+  que ja gestiona `generate-faq.py`, perquè es puguin tornar a regenerar sense
+  perdre cap correcció feta a mà des que es van escriure. Candidat concret
+  per a la propera sessió dedicada que ja demanava `web-cbgb` §8.
+- **Actualitzar `next` a `galeria/`** (avisa de vulnerabilitat coneguda en
+  `npm install`), amb temps per provar que no trenca res.
+- **Configurar ESLint a `galeria/`** (`next lint` no té config i demana
+  triar-ne una).

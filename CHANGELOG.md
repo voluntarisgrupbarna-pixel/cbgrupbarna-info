@@ -22,6 +22,19 @@ només l'hi posa nom.
 
 ---
 
+## 2.1.0 — 2026-08-29
+
+**Els cinc punts «purament tècnics» del tauler de pendents.** Tres pàgines
+noves en tres idiomes —`/palmares/`, `/avantatges-familia/`, `/video/`—, un
+arreglo del generador de pàgines i del seu diccionari compartit (`css/a11y.css`,
+`js/mapa.js` i el giny de WhatsApp que faltaven a `head()`; el peu amb l'enllaç
+vell a `/basquet-femeni/` i sense Newsletter ni Bústia), i set arreglos
+d'accessibilitat a l'app `galeria/` (botons i enllaços amb icona que només
+tenien `title`, o cap atribut). Detall complet a `PENDENTS-WEB.md`,
+«29-08-2026 — Els cinc punts "purament tècnics", fets».
+
+---
+
 ## 2.0.0 — 2026-08-27
 
 **Decisió de l'Ana: una sola portada, sense commutador.** Fora el
