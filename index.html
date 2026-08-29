@@ -62,7 +62,7 @@
 <link rel="dns-prefetch" href="//www.tiktok.com">
 
 <!-- Google Analytics 4 (mateixa propietat que el site del 3x3) -->
-<script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script><script type="text/javascript">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/6a9197107f2d2f343fa7fabd/1k14bc6i0';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script>
+<script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -944,7 +944,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .field label { display: block; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.28em; text-transform: uppercase; color: #6B6560; margin-bottom: 8px; }
 .field input, .field select, .field textarea {
   width: 100%; min-height: 48px; padding: 13px 2px; border: 0; border-bottom: 1px solid var(--line);
-  background: transparent; font-family: var(--body); font-size: 15px; font-weight: 300; color: var(--ink);
+  /* 16px, no 15px: per sota d'això Safari a iOS fa zoom en sol tocar el camp. */
+  background: transparent; font-family: var(--body); font-size: 16px; font-weight: 300; color: var(--ink);
   border-radius: 0; -webkit-appearance: none; appearance: none; transition: border-color 0.3s;
 }
 .field textarea { min-height: 80px; resize: vertical; }
@@ -981,7 +982,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 @media (max-width: 760px) {
   .actionbar { display: flex; }
   body { padding-bottom: 56px; }
-  .fab-wa { bottom: 70px; }
 }
 
 /* ==== EL CLUB EN BREU · text indexable ==== */
@@ -1025,11 +1025,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .foot-mark em { font-style: normal; color: var(--red-light); }
 .foot-legal { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
-/* ==== FAB WHATSAPP ==== */
-.fab-wa { position: fixed; right: clamp(14px, 3vw, 30px); bottom: clamp(14px, 3vw, 30px); z-index: 90; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--ink); color: #fff; border: 1px solid var(--ink); transition: background 0.35s var(--ease), border-color 0.35s var(--ease); }
-.fab-wa:hover { background: var(--red); border-color: var(--red); }
-.fab-wa svg { width: 21px; height: 21px; fill: currentColor; }
-
 /* ==== ACCESSIBILITAT I TOC ==== */
 .skip { position: absolute; left: -9999px; top: 0; z-index: 200; }
 .skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; padding: 12px 22px; font-family: var(--body); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; }
@@ -1050,7 +1045,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   .stars { gap: 6px; }
   .opi-card { padding: 22px 14px; }
   .btn { padding: 17px clamp(20px, 5vw, 32px); }
-  .fab-wa { width: 56px; height: 56px; }
   .sg-action, .igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; }
 }
 /* Tauleta: un sol punt de ruptura per a totes les graelles. */
@@ -1058,9 +1052,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   .opi, .list { grid-template-columns: repeat(2, 1fr); }
   .ed-grid { grid-template-columns: repeat(2, 1fr); }
 }
-.fab-wa { opacity: 1; transform: none; transition: background 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.35s var(--ease), transform 0.35s var(--ease); }
-.fab-wa.hidden { opacity: 0; transform: translateY(14px) scale(0.9); pointer-events: none; }
-
 /* ==== REVELAT ==== */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
@@ -1204,45 +1195,45 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   </div>
 
   <section class="franges" aria-label="Accés ràpid al club">
-    <a class="franja" href="/escoleta/" data-cta="franja-escoleta">
-      <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">De 4 a 8 anys. Per on comença tothom, sense saber-ne gens.</span></span>
-      <span class="franja-go"><em>Inscripcions obertes</em><i></i></span>
-    </a>
-    <a class="franja franja--red" href="/portes-obertes/" data-cta="franja-portes-obertes">
+    <a class="franja" href="/portes-obertes/" data-cta="franja-portes-obertes">
       <span class="franja-tx"><span class="franja-t">Portes obertes</span><span class="franja-s">Tot el setembre. Vine a provar un entrenament, de l'Escoleta al sènior.</span></span>
-      <span class="franja-go"><em>Demana el dia</em><i></i></span>
+      <span class="franja-go"><em>Reserva el dia</em><i></i></span>
     </a>
-    <a class="franja franja--ink" href="#seniors" data-cta="franja-seniors">
+    <a class="franja franja--red" href="#seniors" data-cta="franja-seniors">
       <span class="franja-ph franja-ph--alta"><img src="img/blog/seniors-grup.webp" srcset="img/blog/seniors-grup.webp 440w, img/blog/seniors-grup@2x.webp 880w" sizes="(max-width: 900px) 90vw, 230px" width="440" height="587" loading="lazy" decoding="async" alt="Quatre jugadors del primer equip del CB Grup Barna"></span>
       <span class="franja-tx"><span class="franja-t">Els sèniors</span><span class="franja-s">La primera plantilla del club.</span></span>
       <span class="franja-go"><em>Temporada 26·27</em><i></i></span>
     </a>
-    <a class="franja" href="/femeni/" data-cta="franja-femeni">
+    <a class="franja franja--ink" href="/femeni/" data-cta="franja-femeni">
       <span class="franja-ph franja-ph--cares"><img src="img/team-action.webp" srcset="img/team-action.webp 375w, img/team-action@2x.webp 750w" sizes="(max-width: 900px) 90vw, 230px" width="375" height="500" loading="lazy" decoding="async" alt="Dues jugadores del CB Grup Barna amb l'equipació del club"></span>
       <span class="franja-tx"><span class="franja-t">Femení</span><span class="franja-s">Mateix nombre d'equips i mateix pressupost que la línia masculina.</span></span>
       <span class="franja-go"><em>Paritat real</em><i></i></span>
     </a>
-    <a class="franja franja--red" href="/partits/" data-cta="franja-dies-partit">
+    <a class="franja" href="/partits/" data-cta="franja-dies-partit">
       <span class="franja-tx"><span class="franja-t">Calendari</span><span class="franja-s">Dies de partit i resultats de tots els equips, cada setmana.</span></span>
       <span class="franja-go"><em>Aquest cap de setmana</em><i></i></span>
     </a>
-    <a class="franja franja--ink" href="/grup-barna-dades-oficials/" data-cta="franja-club">
+    <a class="franja franja--red" href="/grup-barna-dades-oficials/" data-cta="franja-club">
       <span class="franja-ph"><img src="img/club.webp" srcset="img/club.webp 550w, img/club@2x.webp 1100w" sizes="(max-width: 900px) 90vw, 230px" width="550" height="366" loading="lazy" decoding="async" alt="Foto de grup del CB Grup Barna sota la pancarta del club"></span>
       <span class="franja-tx"><span class="franja-t">El club</span><span class="franja-s">Seixanta-un anys formant nens i nenes del barri.</span></span>
       <span class="franja-go"><em>Des de 1965</em><i></i></span>
     </a>
-    <a class="franja" href="/blog/" data-cta="franja-observatori">
+    <a class="franja franja--ink" href="/blog/" data-cta="franja-observatori">
       <span class="franja-tx"><span class="franja-t">Observatori Barna</span><span class="franja-s">El criteri del club sobre bàsquet de formació, en vuit sèries.</span></span>
       <span class="franja-go"><em>Nou</em><i></i></span>
     </a>
-    <a class="franja franja--ink" href="/fotos/" data-cta="franja-galeria">
+    <a class="franja" href="/fotos/" data-cta="franja-galeria">
       <span class="franja-ph"><img src="/img/campus-hero.webp" srcset="/img/campus-hero.webp 1200w, /img/campus-hero@2x.webp 2048w" sizes="(max-width: 900px) 90vw, 230px" width="360" height="202" loading="lazy" decoding="async" alt="Sessió del campus de bàsquet del CB Grup Barna a La Nau del Clot"></span>
       <span class="franja-tx"><span class="franja-t">Galeria</span><span class="franja-s">Les fotos de la temporada.</span></span>
       <span class="franja-go"><em>Dies de partit i events</em><i></i></span>
     </a>
-    <a class="franja franja--red" href="/escriu-nos/" data-cta="franja-escriu-nos">
+    <a class="franja franja--ink" href="/escriu-nos/" data-cta="franja-escriu-nos">
       <span class="franja-tx"><span class="franja-t">Escriu-nos</span><span class="franja-s">Demana informació —et responem el mateix dia— o deixa'ns un suggeriment anònim.</span></span>
       <span class="franja-go"><em>Amb formulari</em><i></i></span>
+    </a>
+    <a class="franja franja--red" href="/escoleta/" data-cta="franja-escoleta">
+      <span class="franja-tx"><span class="franja-t">Escoleta</span><span class="franja-s">De 4 a 8 anys. Per on comença tothom, sense saber-ne gens.</span></span>
+      <span class="franja-go"><em>Inscripcions obertes</em><i></i></span>
     </a>
   </section>
   <div class="lg-strip">
@@ -1646,10 +1637,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <a href="https://wa.me/34646205526?text=Hola%20Julio!%20Vull%20info%20de%20l%27Escoleta" target="_blank" rel="noopener" data-cta="bar-wa">WhatsApp Escoleta</a>
 </nav>
 
-<a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20info%20del%20CB%20Grup%20Barna%20%F0%9F%8F%80" target="_blank" rel="noopener" class="fab-wa" aria-label="Escriure'ns per WhatsApp" data-cta="fab-wa">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
 <script>
   // ==== CTA tracking ====
   document.querySelectorAll('[data-cta]').forEach(function (el) {
@@ -1799,7 +1786,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     function pinta() {
       var s = sentinella();
       var passat = s ? s.getBoundingClientRect().bottom < 0 : false;
-      bar.classList.toggle('on', passat && !formVisible);
+      var on = passat && !formVisible;
+      bar.classList.toggle('on', on);
+      // La barra fixa (56px) tapa la bombolla de WhatsApp de js/xat-whatsapp.js,
+      // que és a l'esquerra amb el mateix marge inferior: la puja per damunt.
+      document.documentElement.style.setProperty('--cbgb-wa-bottom', on ? '74px' : '');
     }
     window.addEventListener('scroll', pinta, { passive: true });
     window.addEventListener('resize', pinta);
@@ -1831,20 +1822,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       });
     });
     box.addEventListener('mouseleave', function () { paint(0); });
-  })();
-
-  // ==== El botó flotant s'aparta on ja hi ha un WhatsApp visible ====
-  (function () {
-    var fab = document.querySelector('.fab-wa');
-    if (!fab || !('IntersectionObserver' in window)) return;
-    var zones = ['escoleta', 'info'].map(function (id) { return document.getElementById(id); })
-                                    .filter(Boolean);
-    var dins = zones.map(function () { return false; });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { dins[zones.indexOf(e.target)] = e.isIntersecting; });
-      fab.classList.toggle('hidden', dins.some(Boolean));
-    }, { threshold: 0.3 });
-    zones.forEach(function (z) { io.observe(z); });
   })();
 
   // ==== REVELAT ====
