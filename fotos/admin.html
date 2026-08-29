@@ -122,6 +122,17 @@
     .btn-icon { background: transparent; border: 1px solid var(--line); color: var(--ink-2); padding: .4rem; cursor: pointer; transition: all .15s; display: flex; align-items: center; }
     .btn-icon:hover { border-color: var(--ink); color: var(--ink); }
     .btn-icon.danger:hover { background: rgba(226,6,19,.06); border-color: #E20613; color: #E20613; }
+    .btn-key { display: inline-flex; align-items: center; gap: .35rem; background: none;
+      border: 1px solid var(--line); color: #6B6560;
+      font-family: var(--display); font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase;
+      padding: .45rem .6rem; cursor: pointer; white-space: nowrap; transition: all .15s; }
+    .btn-key:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-key:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    @media (max-width: 560px) { .btn-key { font-size: 0; gap: 0; padding: .45rem; } }
+    .clau-box { background: var(--paper-2); border: 1px solid var(--line); padding: .7rem .85rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8rem;
+      color: var(--ink); word-break: break-all; user-select: all; }
+    .clau-nota { font-size: .72rem; color: #6B6560; margin-top: .35rem; line-height: 1.5; }
     .season-chip { font-family: var(--display); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: #E20613; border: 1px solid var(--line); padding: .2rem .4rem; }
 
     /* UPLOAD PANEL */
@@ -449,6 +460,15 @@
         </label>
       </div>
       <div>
+        <label class="field-label" for="cfg-pin">Clau mestra de màrqueting</label>
+        <input class="field-input" type="text" id="cfg-pin" placeholder="Ex: barna-mk-1965">
+        <p style="font-size:.72rem;color:#8a8681;margin-top:.3rem;">
+          Obre <strong>tots</strong> els grups privats de cop:
+          cbgrupbarna.info/fotos/?marqueting=&lt;clau&gt;. Cada grup té a més el seu
+          propi enllaç, que només obre aquell grup.
+        </p>
+      </div>
+      <div>
         <label class="field-label" for="cfg-email">Correu per rebre subscripcions newsletter</label>
         <input class="field-input" type="email" id="cfg-email" placeholder="Ex: marqueting@cbgrupbarna.info">
         <p style="font-size:.72rem;color:#8a8681;margin-top:.3rem;">S'usa FormSubmit.co — el primer correu rebrà una confirmació d'activació.</p>
@@ -463,6 +483,50 @@
         </svg>
         Desar canvis
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- ENLLAÇ D'UN GRUP PRIVAT -->
+<div class="modal-backdrop" id="clau-modal">
+  <div class="modal">
+    <h2>Enllaç del grup privat</h2>
+    <p style="font-size:.85rem;color:#46433f;margin-bottom:1.2rem;line-height:1.6;">
+      <strong id="clau-titol"></strong> no surt a la galeria pública. Passa aquest
+      enllaç només a qui hi hagi de tenir accés: obre aquest grup i cap altre.
+    </p>
+    <div class="field-group">
+      <div>
+        <label class="field-label">Enllaç per compartir</label>
+        <div class="clau-box" id="clau-enllac"></div>
+        <p class="clau-nota">
+          L'accés dura mentre la pestanya estigui oberta. Si l'enllaç es filtra,
+          genera'n un de nou aquí i el vell deixa de servir.
+        </p>
+      </div>
+      <div>
+        <label class="field-label">Clau del grup</label>
+        <div class="clau-box" id="clau-valor"></div>
+      </div>
+      <p class="clau-nota" style="border-left:2px solid #E20613;padding-left:.7rem;">
+        La web és estàtica: això és un enllaç <strong>no llistat</strong>, no un mur
+        amb contrasenya. Amaga el grup de la galeria, però els fitxers viuen en URL
+        públiques i qui ja tingui l'adreça d'una foto hi arribarà igualment. El que
+        no pugui sortir de cap manera, no el pugis aquí.
+      </p>
+    </div>
+    <div id="clau-error" class="login-error"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="clau-regenera" onclick="regeneraClau()">Generar-ne una de nova</button>
+      <button class="btn-save" onclick="copiaEnllacClau()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+        Copiar l'enllaç
+      </button>
+    </div>
+    <div class="modal-actions" style="margin-top:.6rem;">
+      <button class="btn-cancel" style="flex:1" onclick="closeClauModal()">Tancar</button>
     </div>
   </div>
 </div>
@@ -767,12 +831,17 @@ function renderEventsList() {
       </div>
       <div class="event-row-actions">
         <button class="btn-vis ${ev.visibility === 'private' ? 'is-private' : 'is-public'}"
-                title="${ev.visibility === 'private' ? 'Privat: només amb la contrasenya de màrqueting' : 'Públic: el veu tothom'}"
+                title="${ev.visibility === 'private' ? 'Privat: fora de la galeria, només amb el seu enllaç' : 'Públic: el veu tothom'}"
                 onclick="event.stopPropagation(); toggleVisibility(${i})">
           ${ev.visibility === 'private'
             ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Privat`
             : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Públic`}
         </button>
+        ${ev.visibility === 'private'
+          ? `<button class="btn-key" title="Enllaç per compartir aquest grup" onclick="event.stopPropagation(); openClauModal(${i})">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Enllaç
+            </button>`
+          : ''}
         <button class="btn-icon" title="Afegir fotos" onclick="event.stopPropagation(); openUploadForEvent(${i})">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -871,20 +940,97 @@ async function saveNewEvent() {
 
 // ── DELETE EVENT ──
 // ── PÚBLIC / PRIVAT ──
-// Un grup privat no surt a /fotos/ per a ningú: ni amb el PIN de famílies ni
-// amb la subscripció. Només s'hi arriba des d'aquí o amb la contrasenya de
-// màrqueting, que dona accés a tots els grups.
-async function toggleVisibility(index) {
+// Un grup privat no surt al llistat de /fotos/, ni als comptadors, ni als
+// filtres. S'hi entra de dues maneres: amb la clau mestra de màrqueting
+// (?marqueting=…), que obre tots els grups privats, o amb l'enllaç propi del
+// grup (?clau=…), que obre només aquell. L'enllaç del grup és el que es passa
+// a un equip o a una família.
+//
+// Compte amb què promet: la web és estàtica i no hi ha cap servidor que validi
+// res, així que és un enllaç NO LLISTAT, no un mur. Amaga el grup, però els
+// fitxers viuen en URL públiques.
+
+// Clau curta i llegible per dictar-la per telèfon: sense i/l/1/o/0.
+function clauNova() {
+  const lletres = 'abcdefghjkmnpqrstuvwxyz23456789';
+  const bytes = crypto.getRandomValues(new Uint8Array(12));
+  const cru = [...bytes].map(b => lletres[b % lletres.length]).join('');
+  return `${cru.slice(0, 4)}-${cru.slice(4, 8)}-${cru.slice(8, 12)}`;
+}
+
+function enllacDelGrup(ev) {
+  return `https://cbgrupbarna.info/fotos/?clau=${encodeURIComponent(ev.access_key)}#${ev.id}`;
+}
+
+let clauEvent = null;
+
+function openClauModal(index) {
   const ev = events[index];
-  const aPrivat = ev.visibility !== 'private';
-  if (aPrivat && !confirm(`Fer PRIVAT "${ev.title}"?\n\nDeixarà de veure's a la galeria pública. Només hi accedirà màrqueting.`)) return;
-  ev.visibility = aPrivat ? 'private' : 'public';
+  if (!ev.access_key) { regeneraClau(index); return; }
+  clauEvent = ev;
+  document.getElementById('clau-titol').textContent = ev.title;
+  document.getElementById('clau-enllac').textContent = enllacDelGrup(ev);
+  document.getElementById('clau-valor').textContent = ev.access_key;
+  document.getElementById('clau-error').style.display = 'none';
+  document.getElementById('clau-modal').classList.add('open');
+}
+
+function closeClauModal() {
+  document.getElementById('clau-modal').classList.remove('open');
+  clauEvent = null;
+}
+
+// Sense índex, regenera la del grup que hi ha obert al modal.
+async function regeneraClau(index) {
+  const ev = index === undefined ? clauEvent : events[index];
+  if (!ev) return;
+  if (ev.access_key && !confirm(`Generar una clau nova per a "${ev.title}"?\n\nL'enllaç d'abans deixarà de funcionar.`)) return;
+  const anterior = ev.access_key || null;
+  ev.access_key = clauNova();
   try {
     await saveEvents();
     renderEventsList();
-    toast(aPrivat ? 'Grup privat: fora de la galeria pública' : 'Grup públic: el veu tothom', 'success');
+    openClauModal(events.indexOf(ev));
+    toast('Clau nova generada', 'success');
+  } catch (e) {
+    ev.access_key = anterior;
+    const err = document.getElementById('clau-error');
+    err.textContent = 'No s\'ha pogut desar la clau: ' + e.message;
+    err.style.display = 'block';
+  }
+}
+
+async function copiaEnllacClau() {
+  if (!clauEvent) return;
+  try {
+    await navigator.clipboard.writeText(enllacDelGrup(clauEvent));
+    toast('Enllaç copiat', 'success');
+  } catch (e) {
+    toast('Copia\'l a mà del quadre de dalt', 'error');
+  }
+}
+
+async function toggleVisibility(index) {
+  const ev = events[index];
+  const aPrivat = ev.visibility !== 'private';
+  if (aPrivat && !confirm(`Fer PRIVAT "${ev.title}"?\n\nSortirà de la galeria pública i només s'hi entrarà amb el seu enllaç, que et donaré tot seguit.`)) return;
+  const clauAnterior = ev.access_key || null;
+  ev.visibility = aPrivat ? 'private' : 'public';
+  // Cada grup privat neix amb la seva clau; en tornar-lo públic ja no cal.
+  if (aPrivat && !ev.access_key) ev.access_key = clauNova();
+  if (!aPrivat) delete ev.access_key;
+  try {
+    await saveEvents();
+    renderEventsList();
+    if (aPrivat) {
+      openClauModal(index);
+      toast('Grup privat: fora de la galeria, s\'hi entra amb l\'enllaç', 'success');
+    } else {
+      toast('Grup públic: el veu tothom', 'success');
+    }
   } catch (e) {
     ev.visibility = aPrivat ? 'public' : 'private';   // desfés si no s'ha desat
+    if (clauAnterior) ev.access_key = clauAnterior; else delete ev.access_key;
     renderEventsList();
     toast('No s\'ha pogut desar el canvi', 'error');
   }
@@ -1219,6 +1365,10 @@ function photoUrl(ev, filename) {
 
 // ── SETTINGS ──
 const CONFIG_PATH = 'fotos/config.js';
+// Es llegeixen de config.js i es tornen a escriure igual: aquest formulari no
+// els edita, però abans els esborrava en desar.
+let cfgR2Base = '';
+let cfgR2Worker = '';
 
 async function openSettingsModal() {
   // Load current config from GitHub
@@ -1228,11 +1378,19 @@ async function openSettingsModal() {
     // Extract values via regex
     const emailMatch = raw.match(/newsletter_email:\s*['"]([^'"]*)['"]/);
     const reqMatch = raw.match(/require_access:\s*(true|false)/);
+    const pinMatch = raw.match(/marketing_pin:\s*['"]([^'"]*)['"]/);
+    // Els camps d'R2 no es toquen des d'aquí, però s'han de tornar a escriure
+    // tal com estaven: si es perden, la galeria deixa de servir des d'R2.
+    cfgR2Base = (raw.match(/r2_public_base:\s*['"]([^'"]*)['"]/) || [, ''])[1];
+    cfgR2Worker = (raw.match(/r2_worker_url:\s*['"]([^'"]*)['"]/) || [, ''])[1];
     document.getElementById('cfg-email').value = emailMatch ? emailMatch[1] : '';
+    document.getElementById('cfg-pin').value = pinMatch ? pinMatch[1] : '';
     document.getElementById('cfg-require').checked = reqMatch ? reqMatch[1] === 'true' : true;
   } catch {
     document.getElementById('cfg-email').value = '';
+    document.getElementById('cfg-pin').value = '';
     document.getElementById('cfg-require').checked = true;
+    cfgR2Base = cfgR2Worker = '';
   }
   document.getElementById('settings-error').style.display = 'none';
   document.getElementById('settings-modal').classList.add('open');
@@ -1244,6 +1402,7 @@ function closeSettingsModal() {
 
 async function saveSettings() {
   const email = document.getElementById('cfg-email').value.trim();
+  const pin = document.getElementById('cfg-pin').value.trim();
   const require_access = document.getElementById('cfg-require').checked;
   const errEl = document.getElementById('settings-error');
 
@@ -1251,7 +1410,24 @@ async function saveSettings() {
   btn.disabled = true;
   errEl.style.display = 'none';
 
-  const content = `// CB Grup Barna · Galeria · Configuració\n// Editable des del panell d'administrador: /fotos/admin.html\n\nwindow.GALERIA_CONFIG = {\n  require_access: ${require_access},\n  newsletter_email: '${email.replace(/'/g, "\\'")}',\n};\n`;
+  const esc = s => String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  const content = [
+    "// CB Grup Barna · Galeria · Configuració",
+    "// Editable des del panell d'administrador: /fotos/admin.html",
+    "",
+    "window.GALERIA_CONFIG = {",
+    `  require_access: ${require_access},`,
+    "  // Obre TOTS els grups privats: /fotos/?marqueting=<aquesta clau>.",
+    "  // Cada grup privat té a més el seu propi enllaç, que només obre aquell.",
+    `  marketing_pin: '${esc(pin)}',`,
+    `  newsletter_email: '${esc(email)}',`,
+    "  // R2: buits = les fotos es serveixen des del repositori.",
+    "  // Vegeu workers/fotos-upload/README.md.",
+    `  r2_public_base: '${esc(cfgR2Base)}',`,
+    `  r2_worker_url: '${esc(cfgR2Worker)}',`,
+    "};",
+    "",
+  ].join("\n");
 
   try {
     const sha = await getFileSHA(CONFIG_PATH);

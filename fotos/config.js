@@ -3,7 +3,10 @@
 
 window.GALERIA_CONFIG = {
   require_access: false,
-  // Dona accés als grups privats: /fotos/?marqueting=<aquesta clau>
+  // Clau mestra: obre TOTS els grups privats de cop amb
+  // /fotos/?marqueting=<aquesta clau>. Cada grup privat té a més la seva
+  // pròpia clau (`access_key` a events.js) i el seu enllaç, que només obre
+  // aquell grup: és el que es passa a un equip o a una família.
   marketing_pin: 'barna-mk-1965',
   newsletter_email: 'voluntarisgrupbarna@gmail.com',
   // R2: buits = tot funciona com fins ara (fotos al repositori, pujada via

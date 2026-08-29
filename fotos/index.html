@@ -824,15 +824,17 @@ async function submitSubscription() {
 
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
-  // Check gate — hidden by default, only show if access required
-  if (CFG.require_access && !localStorage.getItem(GATE_KEY)) {
+  // Qui arriba amb l'enllaç d'un grup privat ja ve convidat: no se li demana
+  // la subscripció.
+  const grupObert = obreGrupAmbClau();
+  if (CFG.require_access && !localStorage.getItem(GATE_KEY) && !grupObert && !esMarqueting()) {
     document.getElementById('access-gate').classList.add('visible');
   }
 
   buildStats();
   buildSeasonFilters();
   renderEvents();
-  obreAlbumDeLAdreca();
+  obreAlbumDeLAdreca(grupObert);
 
   document.getElementById('search-input').addEventListener('input', e => {
     searchQuery = e.target.value.trim().toLowerCase();
@@ -909,10 +911,26 @@ function setSeasonFilter(season) {
 }
 
 // ── PÚBLIC / PRIVAT ──
-// Els grups marcats com a privats des de /fotos/admin.html no surten a la
-// galeria per a ningú. Màrqueting els veu afegint ?marqueting=<contrasenya>
-// un sol cop: es desa a la sessió, i es tanca en tancar la pestanya.
+// Un grup privat no surt enlloc de la galeria: ni al llistat, ni als
+// comptadors, ni als filtres de temporada. S'hi entra de dues maneres:
+//
+//   1. Amb la clau mestra de màrqueting —?marqueting=<clau>—, que obre de
+//      cop TOTS els grups privats. És la del club.
+//   2. Amb l'enllaç propi del grup —?clau=<clau del grup>—, que obre NOMÉS
+//      aquell grup. És el que es passa a un equip o a una família.
+//
+// Totes dues es desen a la sessió (cauen en tancar la pestanya) i la clau
+// es treu de la barra d'adreces un cop feta servir, perquè no acabi en una
+// captura de pantalla.
+//
+// Compte amb què promet això: la web és estàtica i no hi ha cap servidor
+// que validi res, així que és un enllaç NO LLISTAT, no un mur. Els fitxers
+// viuen en URL públiques i qui ja tingui l'adreça d'una foto hi arribarà
+// igualment. Serveix per no ensenyar un àlbum a qui no toca; el que no pugui
+// sortir de cap manera, no es puja aquí.
 const MK_KEY = 'cbgb-marqueting';
+const GRUPS_KEY = 'cbgb-grups-oberts';
+
 function esMarqueting() {
   try {
     const p = new URLSearchParams(location.search).get('marqueting');
@@ -921,8 +939,35 @@ function esMarqueting() {
     return sessionStorage.getItem(MK_KEY) === '1';
   } catch (e) { return false; }
 }
+
+function grupsOberts() {
+  try { return new Set(JSON.parse(sessionStorage.getItem(GRUPS_KEY) || '[]')); }
+  catch (e) { return new Set(); }
+}
+
+// Consumeix la ?clau= de l'adreça i obre els grups privats que hi coincideixin.
+// Torna l'id del primer, per poder-lo obrir de seguida.
+function obreGrupAmbClau() {
+  try {
+    const p = new URLSearchParams(location.search);
+    const clau = (p.get('clau') || '').trim();
+    if (!clau) return null;
+    const coincidents = (window.GALERIA_EVENTS || []).filter(
+      e => e.visibility === 'private' && e.access_key && e.access_key === clau);
+    if (!coincidents.length) return null;
+    const oberts = grupsOberts();
+    coincidents.forEach(e => oberts.add(e.id));
+    sessionStorage.setItem(GRUPS_KEY, JSON.stringify([...oberts]));
+    p.delete('clau');
+    const q = p.toString();
+    history.replaceState(null, '', location.pathname + (q ? '?' + q : '') + location.hash);
+    return coincidents[0].id;
+  } catch (e) { return null; }
+}
+
 function esVisible(e) {
-  return e.visibility !== 'private' || esMarqueting();
+  if (e.visibility !== 'private') return true;
+  return esMarqueting() || grupsOberts().has(e.id);
 }
 
 // ── EVENTS GRID ──
@@ -1106,8 +1151,8 @@ function showEvents() {
 }
 
 // Si l'adreça ja porta un àlbum, obre'l directament.
-function obreAlbumDeLAdreca() {
-  const id = decodeURIComponent(location.hash.slice(1));
+function obreAlbumDeLAdreca(idPreferit) {
+  const id = idPreferit || decodeURIComponent(location.hash.slice(1));
   if (!id) return;
   const ev = window.GALERIA_EVENTS.filter(esVisible).find(e => e.id === id);
   if (ev) showPhotos(ev);
