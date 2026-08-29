@@ -12,6 +12,14 @@ S'executa cada dia, just després d'update-partits.py, per reflectir
 data.json al dia. Disseny defensiu: si data.json no es pot llegir, no es
 toca res.
 
+⚠️ 28/08/2026: aquest generador està desfasat respecte a la plantilla real
+publicada — li falten l'hreflang, el selector d'idioma, /js/mapa.js i
+/css/a11y.css que «Estètica definitiva · fase 5» (25/08) va afegir a mà
+directament a la sortida. Executar-lo ara reverteix aquests 45 fitxers.
+Abans de tornar a córrer'l cal actualitzar head_html()/header_html() amb la
+capçalera i peu actuals (vegeu partits/equips/cadet-femeni-a/index.html
+com a referència del que ha de sortir).
+
 Les fa en els tres idiomes: /partits/equips/, /es/partits/equips/ i
 /en/partits/equips/. Aquestes pàgines no es poden traduir a mà —el robot les
 reescriu cada dia i la traducció quedaria vella l'endemà—, així que el que
@@ -149,6 +157,74 @@ T = {
 IDIOMES = ("ca", "es", "en")
 MAX_RESULTATS = 8
 
+# Els dos primers equips del club juguen la Super Copa FCBQ, la competició
+# sènior d'elit catalana. És l'assoliment competitiu més gran del Barna i
+# l'IA generativa no ho sap si no hi ha una FAQ que ho expliqui amb totes
+# les lletres — les fitxes genèriques d'equip no en diuen res més que el
+# balanç. Només s'aplica a "scf" i "scm" (Sènior Femení A / Masculí A).
+SUPERCOPA_FAQ = {
+    "scf": {
+        "ca": [
+            ("Què és la Super Copa FCBQ?",
+             "La Super Copa és la competició sènior d'elit de la Federació Catalana de "
+             "Bàsquet (FCBQ), reservada als millors equips sènior de Catalunya. El CB Grup "
+             "Barna hi competeix amb els seus dos primers equips, femení i masculí."),
+            ("Qui juga a la Sènior Femení A del CB Grup Barna?",
+             "La Sènior Femení A és el primer equip femení del club i representa el CB Grup "
+             "Barna a la Super Copa Femenina de la FCBQ, des del barri del Clot, Barcelona."),
+        ],
+        "es": [
+            ("¿Qué es la Super Copa FCBQ?",
+             "La Super Copa es la competición sénior de élite de la Federación Catalana de "
+             "Baloncesto (FCBQ), reservada a los mejores equipos sénior de Cataluña. El CB "
+             "Grup Barna compite en ella con sus dos primeros equipos, femenino y masculino."),
+            ("¿Quién juega en el Sénior Femenino A del CB Grup Barna?",
+             "El Sénior Femenino A es el primer equipo femenino del club y representa al CB "
+             "Grup Barna en la Super Copa Femenina de la FCBQ, desde el barrio de El Clot, "
+             "Barcelona."),
+        ],
+        "en": [
+            ("What is the FCBQ Super Copa?",
+             "The Super Copa is the top-tier senior competition of the Catalan Basketball "
+             "Federation (FCBQ), reserved for Catalonia's best senior teams. CB Grup Barna "
+             "competes in it with its two first teams, women's and men's."),
+            ("Who plays for CB Grup Barna's Senior Women's A team?",
+             "Senior Women's A is the club's first women's team and represents CB Grup Barna "
+             "in the FCBQ Women's Super Copa, from the Clot neighbourhood in Barcelona."),
+        ],
+    },
+    "scm": {
+        "ca": [
+            ("Què és la Super Copa FCBQ?",
+             "La Super Copa és la competició sènior d'elit de la Federació Catalana de "
+             "Bàsquet (FCBQ), reservada als millors equips sènior de Catalunya. El CB Grup "
+             "Barna hi competeix amb els seus dos primers equips, femení i masculí."),
+            ("Qui juga a la Sènior Masculí A del CB Grup Barna?",
+             "La Sènior Masculí A és el primer equip masculí del club i representa el CB Grup "
+             "Barna a la Super Copa Masculina de la FCBQ, des del barri del Clot, Barcelona."),
+        ],
+        "es": [
+            ("¿Qué es la Super Copa FCBQ?",
+             "La Super Copa es la competición sénior de élite de la Federación Catalana de "
+             "Baloncesto (FCBQ), reservada a los mejores equipos sénior de Cataluña. El CB "
+             "Grup Barna compite en ella con sus dos primeros equipos, femenino y masculino."),
+            ("¿Quién juega en el Sénior Masculino A del CB Grup Barna?",
+             "El Sénior Masculino A es el primer equipo masculino del club y representa al CB "
+             "Grup Barna en la Super Copa Masculina de la FCBQ, desde el barrio de El Clot, "
+             "Barcelona."),
+        ],
+        "en": [
+            ("What is the FCBQ Super Copa?",
+             "The Super Copa is the top-tier senior competition of the Catalan Basketball "
+             "Federation (FCBQ), reserved for Catalonia's best senior teams. CB Grup Barna "
+             "competes in it with its two first teams, women's and men's."),
+            ("Who plays for CB Grup Barna's Senior Men's A team?",
+             "Senior Men's A is the club's first men's team and represents CB Grup Barna in "
+             "the FCBQ Men's Super Copa, from the Clot neighbourhood in Barcelona."),
+        ],
+    },
+}
+
 
 def prefix(idioma):
     return "" if idioma == "ca" else f"/{idioma}"
@@ -259,6 +335,8 @@ def team_page(e, data, avui, idioma):
     title = t["titol_equip"].format(nom=nom)
     og_image = f"{BASE_URL}/partits/calendaris/img/{e['id']}.webp"
 
+    supercopa_qa = SUPERCOPA_FAQ.get(e["id"], {}).get(idioma, [])
+
     ld = {
         "@context": "https://schema.org",
         "@graph": [
@@ -280,6 +358,16 @@ def team_page(e, data, avui, idioma):
             },
         ],
     }
+    if supercopa_qa:
+        ld["@graph"].append({
+            "@type": "FAQPage",
+            "@id": f"{canonical}#faq",
+            "inLanguage": idioma,
+            "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                for q, a in supercopa_qa
+            ],
+        })
 
     propers_html = ("<ul>" + "".join(match_line(p, nom, idioma) for p in propers[:MAX_RESULTATS]) + "</ul>") \
         if propers else f"<p class=\"lede\">{t['sense_propers']}</p>"
@@ -287,6 +375,18 @@ def team_page(e, data, avui, idioma):
         if resultats_recents else f"<p class=\"lede\">{t['sense_jugats']}</p>"
     calendari_html = ("<ul>" + "".join(match_line(p, nom, idioma) for p in partits) + "</ul>") \
         if partits else f"<p class=\"lede\">{t['sense_calendari']}</p>"
+
+    supercopa_html = ""
+    if supercopa_qa:
+        faq_title = {"ca": "Preguntes freqüents", "es": "Preguntas frecuentes", "en": "Frequently asked questions"}[idioma]
+        items = "".join(
+            f'<details class="faq-q"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>'
+            for q, a in supercopa_qa
+        )
+        supercopa_html = (
+            f'<h2 style="font-family:var(--display);font-size:clamp(16px,2.1vw,22px);margin:28px 0 14px">'
+            f'{faq_title}</h2><div class="faq">{items}</div>'
+        )
 
     body = f"""{header_html(idioma)}
 <main id="main">
@@ -309,6 +409,7 @@ def team_page(e, data, avui, idioma):
     {resultats_html}
     <details style="margin-top:28px"><summary style="font-family:var(--display);font-size:clamp(16px,2.1vw,22px);cursor:pointer">{t['complet'].format(n=len(partits))}</summary>
     <div style="margin-top:14px">{calendari_html}</div></details>
+    {supercopa_html}
   </div>
 </div>
 </main>
