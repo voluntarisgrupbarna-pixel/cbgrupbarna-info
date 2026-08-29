@@ -132,6 +132,45 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   l'Ana en pot demanar un SVG o un PNG amb fons transparent, es posa en un minut. Mentre
   no arribi, la fitxa no queda coixa: no cal fer-hi res.
 
+## Pendent d'acció de l'Ana · llista d'espera del campus (29/08/2026)
+
+Tota la secció `/campus/` (ca/es/en) ja té publicat: l'estat d'inscripcions
+tancades, el calendari d'anuncis (Nadal aviat, Setmana Santa i estiu al
+gener), l'arxiu complet de la web de l'edició 2026
+(`timechamber.skywork.website`), 26 vídeos que es carreguen sols en
+baixar la pàgina, el bloc «Per què en un club, i no en un espai llogat»,
+i el formulari de llista d'espera a `/campus/#llista-espera`.
+
+**L'única peça que falta no és codi: és un permís de Google que només pot
+donar una persona.** El formulari ja escriu a la full de sempre (la de
+`/bustia/`) amb `source: 'campus-llista-espera'` — **no es perd cap
+alta** — però mentre no es faci el pas de sota, ni el club rep l'avís
+per correu ni la família rep la confirmació.
+
+Tres clics, dins del compte de Google del club:
+
+1. Obrir l'Apps Script de la bústia (el full de sempre → Extensions →
+   Apps Script).
+2. Enganxar **`scripts/apps-script-bustia-afegit.gs`** sencer al final
+   del codi que ja hi ha, i afegir una sola línia al `doPost` existent,
+   just abans del `return`: `avisaSiEsLlistaEspera(d);` (o `data`, segons
+   com es digui la variable allà).
+3. Desplegar → Gestionar desplegaments → editar l'existent → «Nova
+   versió» → Desplegar. Demanarà permís per a `MailApp`: acceptar-lo.
+
+Per comprovar-ho sense tocar el formulari públic: a l'editor d'Apps
+Script, triar la funció `provaLlistaEspera` al desplegable i clicar
+Executa. Envia els dos correus a `marqueting@cbgrupbarna.info` i escriu
+una fila de prova (esborrable a mà després).
+
+Per què no ho pot fer un agent: Google exigeix que una persona autoritzi
+amb el seu propi compte els permisos de full de càlcul i d'enviament de
+correu — no hi ha cap eina ni credencial en aquest repositori que ho
+substitueixi. S'ha comprovat que el connector de Google Drive disponible
+només permet compartir, moure a la paperera i canviar el nom d'arxius:
+no crea fulls ni desplega Apps Script. Instruccions completes i el camí
+alternatiu (full i projecte propis) a `js/README-canals.md`.
+
 ## Pendent de desenvolupar
 
 - **Dashboard d'analítica de la web.** Sistema que analitzi el trànsit i l'ús de
