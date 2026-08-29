@@ -1957,6 +1957,53 @@ de blog, textos tallats amb «…»).
 
 ---
 
+## 27-08-2026 — Decisió de l'Ana: una sola portada, sense commutador (v2.0.0)
+
+«Quiero esta portada no dos.» Fora el commutador Franges/Extensa a les tres
+portades: es queda només la vista de franges (el hero de dues columnes, les
+nou franges i la barra `#SOMCLOT`), i desapareix la vista extensa sencera amb
+el seu botó de canvi de vista.
+
+**Tanca P2.7 per decisió, no per dada.** El pendent deia «mesurar l'ús del
+commutador amb GA4 abans de decidir res» (l'esdeveniment `canvi_vista` es va
+afegir el 26/08 expressament per això). Els secrets de GA4
+(`GA4_SERVICE_ACCOUNT_JSON`, `GA4_PROPERTY_ID`) mai s'han arribat a donar
+d'alta, així que no hi ha hagut mai cap xifra real de quanta gent canviava de
+vista. L'Ana ha decidit sense esperar-la — és la seva prerrogativa, i el
+pendent queda tancat aquí, no reobert.
+
+**Què surt de les tres portades** (`index.html`, `es/index.html`,
+`en/index.html`):
+
+- El `.masthead` fosc («Qui som»), que repetia el hero de franges i només
+  sortia a l'extensa.
+- El calendari encastat de la catalana (`#calendari` / `.e-jornada`,
+  `only-extensa`). **No es toca** el `#calendari` de la castellana i
+  l'anglesa: en aquelles dues mai va portar el commutador (era una secció
+  normal, sempre visible) — no formava part del sistema que es desmunta.
+- Els blocs «Paritat», «Cultura del Progrés», «El Barna per dins» i
+  «Observatori Barna».
+- `#acces` («Tot a mà») i `#presentacions`: tots els enllaços que només hi
+  vivien ja són al mapa ≡ o tenen pàgina pròpia (`/presentacions/`,
+  `/briefing/`, `/posicionament/`), així que no calia migrar-ne cap.
+- El botó `.view-toggle` i tot el JS del commutador: `sessionStorage`,
+  l'esdeveniment `canvi_vista`, l'atribut `data-view` a `<html>`.
+
+Es queden: les nou franges, el hero, la barra `#SOMCLOT`, el formulari i la
+FAQ — tot el que ja era comú a les dues vistes.
+
+**Comprovat**: `i18n-paritat.py` (147 pàgines, cap endarrerida),
+`i18n-contingut.py` (294 traduccions, cap avís), `i18n-lint.py` (0 errors
+nous), `a11y-revisa.py` (459 pàgines, 0 amb res a mirar) i
+`pes-pressupost.py` (tot dins del sostre), tots en verd. Playwright a 1280 i
+390 px als tres idiomes: sense commutador, sense `.masthead`, sense
+desbordament horitzontal.
+
+Versió **2.0.0** (MAJOR): canvia com es fa servir la portada, no és un
+arreglo ni una funcionalitat nova.
+
+---
+
 ## 28-08-2026 · Google Search Console, primera lectura
 
 L'Ana ha donat d'alta la propietat a **Google Search Console** i n'ha

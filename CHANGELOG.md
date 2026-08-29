@@ -22,6 +22,43 @@ només l'hi posa nom.
 
 ---
 
+## 2.0.0 — 2026-08-27
+
+**Decisió de l'Ana: una sola portada, sense commutador.** Fora el
+Franges/Extensa: la portada de les tres llengües es queda amb la vista de
+franges tal com es publicava per defecte —el hero de dues columnes, les nou
+franges i la barra `#SOMCLOT`—, i desapareix del tot la vista extensa amb el
+seu botó de commutador. És un canvi MAJOR perquè altera com es fa servir la
+web (una sola maquetació de portada, no dues intercanviables).
+
+Es tanca així, per decisió i no per dada, el pendent P2.7 («mesurar l'ús del
+commutador amb GA4 abans de decidir res»): els secrets de GA4 no s'han arribat
+a donar d'alta, així que mai hi ha hagut cap xifra real d'ús — l'Ana ha
+decidit sense esperar-la.
+
+Fora de les tres portades (`index.html`, `es/index.html`, `en/index.html`):
+
+- El `.masthead` fosc («Qui som»), que només sortia a l'extensa i repetia el
+  hero de franges.
+- El calendari encastat (`#calendari` / `.e-jornada`, únicament a la
+  catalana — la castellana i l'anglesa el tenien com a secció normal, sense
+  commutador, i es queden igual: no formava part del sistema de vistes).
+- Els blocs editorials «Paritat», «Cultura del Progrés», «El Barna per dins»
+  i «Observatori Barna».
+- La secció `#acces` («Tot a mà», llista plana d'enllaços) i `#presentacions`:
+  tot el que hi enllaçaven ja és al mapa ≡ o a pàgines pròpies
+  (`/presentacions/`, `/briefing/`, `/posicionament/`).
+- El botó `.view-toggle` de la capçalera i tot el JS del commutador
+  (`sessionStorage`, l'esdeveniment `canvi_vista`, el `data-view` a `<html>`).
+
+Es queden intactes: les nou franges, el hero, la barra `#SOMCLOT`, el
+formulari, la FAQ i tot el contingut que ja era comú a les dues vistes.
+Verificat amb `i18n-paritat.py`, `i18n-contingut.py`, `i18n-lint.py`,
+`a11y-revisa.py` i `pes-pressupost.py` en verd, i Playwright a 1280/390 px
+als tres idiomes.
+
+---
+
 ## 1.5.1 — 2026-08-27
 
 **Reconciliació de dues tandes paral·leles** (aquesta branca ↔ el PR #103
