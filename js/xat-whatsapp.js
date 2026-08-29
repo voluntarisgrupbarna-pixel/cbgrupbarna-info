@@ -106,7 +106,7 @@
     '@media(prefers-reduced-motion:reduce){.cbgb-wa-dot{animation:none}}',
     '@keyframes cbgbWaPulse{0%,100%{opacity:1}50%{opacity:.35}}',
     '.cbgb-wa-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.7);',
-    'cursor:pointer;padding:6px;line-height:0;flex-shrink:0}',
+    'cursor:pointer;padding:13px;margin-right:-13px;line-height:0;flex-shrink:0}',
     '.cbgb-wa-close:hover,.cbgb-wa-close:focus-visible{color:#fff}',
     '.cbgb-wa-body{padding:16px 18px 18px}',
     '.cbgb-wa-bubble{background:#F4F1EC;color:#10100E;border-radius:4px 14px 14px 14px;',

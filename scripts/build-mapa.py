@@ -125,7 +125,7 @@ PLANTILLA = r"""/* Mapa de navegació · generat per scripts/build-mapa.py — N
 
   var css = ''
     + '#mapa-btn{appearance:none;border:1px solid currentColor;background:transparent;color:inherit;'
-    + 'width:38px;height:38px;min-width:38px;display:inline-flex;flex-direction:column;align-items:center;'
+    + 'width:44px;height:44px;min-width:44px;display:inline-flex;flex-direction:column;align-items:center;'
     + 'justify-content:center;gap:4px;cursor:pointer;padding:0;flex:none}'
     + '#mapa-btn span{display:block;width:16px;height:2px;background:currentColor}'
     + '#mapa-btn:focus-visible{outline:3px solid #E20613;outline-offset:2px}'
@@ -142,7 +142,7 @@ PLANTILLA = r"""/* Mapa de navegació · generat per scripts/build-mapa.py — N
     + "#mapa-hd strong{font-family:'Anton','Haettenschweiler','Arial Narrow',sans-serif;font-weight:400;"
     + 'font-size:21px;letter-spacing:.02em;text-transform:uppercase}'
     + '#mapa-x{appearance:none;border:1px solid #10100E;background:transparent;color:#10100E;'
-    + 'width:36px;height:36px;font-size:17px;cursor:pointer;line-height:1}'
+    + 'width:44px;height:44px;font-size:17px;cursor:pointer;line-height:1}'
     + '#mapa-x:focus-visible{outline:3px solid #E20613;outline-offset:2px}'
     + '.mapa-grid{display:grid;grid-template-columns:repeat(3,1fr)}'
     + '.mapa-col{padding:20px 26px;border-right:1px solid rgba(16,16,14,.14);border-bottom:1px solid rgba(16,16,14,.14)}'
@@ -150,7 +150,7 @@ PLANTILLA = r"""/* Mapa de navegació · generat per scripts/build-mapa.py — N
     + '.mapa-col h3{margin:0 0 11px;font-family:inherit;font-weight:800;font-size:10.5px;'
     + 'letter-spacing:.2em;text-transform:uppercase;color:#A8040E}'
     + '.mapa-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}'
-    + '.mapa-col a{color:#46433f;text-decoration:none;font-weight:600;font-size:14.5px;display:block;padding:2px 0}'
+    + '.mapa-col a{color:#46433f;text-decoration:none;font-weight:600;font-size:14.5px;display:block;padding:8px 0}'
     + '.mapa-col a:hover{color:#A8040E}'
     + '.mapa-col a:focus-visible{outline:3px solid #E20613;outline-offset:2px}'
     + '#mapa-ft{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding:14px 26px;'

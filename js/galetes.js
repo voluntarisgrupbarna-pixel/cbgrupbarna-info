@@ -274,7 +274,11 @@
       'font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;' +
       'background:#10100E;border:1px solid rgba(255,255,255,.25);border-radius:999px;' +
       'padding:9px 16px;text-decoration:none;opacity:.55;transition:opacity .25s}' +
-      '.cbgb-admin-tab:hover,.cbgb-admin-tab:focus-visible{opacity:1;border-color:#E20613}';
+      '.cbgb-admin-tab:hover,.cbgb-admin-tab:focus-visible{opacity:1;border-color:#E20613}' +
+      /* A mòbil la capçalera ja va justa (menú ≡, cercador, idioma): aquesta
+         pestanya flotant queda just a sobre i tapa el canvi d'idioma. És un
+         accés d'equip, no de club, així que a mòbil es queda amagada. */
+      '@media(max-width:900px){.cbgb-admin-tab{display:none}}';
     document.head.appendChild(est);
     var link = document.createElement('a');
     link.href = '/admin/';
