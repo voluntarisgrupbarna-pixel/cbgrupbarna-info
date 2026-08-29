@@ -110,20 +110,30 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 
 ## Pendent de material de l'Ana
 
+- **Post nou de Robert Willett per a `/campus/` (Estrelles) — 28/08/2026:** missatge
+  de bona sort per a la temporada («Dear Barna family...»), compartit el
+  12/09/2025, ~29,7 mil reproduccions. És diferent dels dos reels seus que ja hi
+  ha catalogats (`DQOhe0qjAPb`, `DL-n0ZeMaOq`). **Falta l'enllaç real del post**:
+  una captura del QR de compartir no es pot descodificar de forma fiable per a un
+  enllaç que quedarà fixat al web — cal el «Copiar enlace» d'Instagram, no el QR.
 - **Escoleta:** foto o vídeo d'en Willy Hernangómez entrenant a La Nau amb Time Chamber
   (el forat és a `escoleta/index.html:944`), i confirmar la fitxa del circuit 3x3 amb la
   selecció espanyola (línia 744).
-- **Sessió de fotos de l'Escoleta (4-8 anys):** és el punt més feble de l'apartat
-  d'estètica de la web i no es resol amb codi. Avui només hi ha una foto
-  (`img/escoleta@2x.webp`) per representar tot aquest pilar, i és la imatge que carrega
-  amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
-  material d'acció real (no posat), llum natural, enquadrat des de dalt sense tallar
-  cares, i diverses tomes perquè es pugui rotar en comptes de repetir sempre la mateixa.
-- **Sessió de fotos dels 4 sèniors (setembre 2026), confirmada per l'Ana:**
-  Fem A, Fem B, Masc A i Masc B. Vegeu el brief de captura complet a la secció
-  «Benchmark de webs professionals» del 27/08/2026, al final d'aquest document.
-  Amb aquest material es tanquen les fitxes de `/jugadors/` i el bloc de sèniors
-  a la portada.
+- **Sessió de fotos de l'Escoleta (4-8 anys) — actualitzat 28/08/2026:** l'Ana diu
+  que ja hi ha una sessió de maig 2026, pujada a l'app `galeria/` (Supabase, no
+  aquest repositori — no s'hi pot mirar des d'aquí). El que fa servir avui el hero
+  de les tres portades (`img/escoleta-h1..4.webp`) surt encara de l'àlbum més antic
+  «Escola Bàsquet · Julio Torralba» (setembre 2025, a `/fotos/`). **Falta:**
+  triar les millors preses de la sessió de maig i passar-les per
+  `scripts/build-blog-images.py` per substituir/ampliar les 4 actuals — no és
+  feina de codi, és selecció d'imatge.
+- **Sessió de fotos dels 4 sèniors — dilluns i dimarts (31/08–01/09/2026),
+  confirmada per l'Ana, combinada amb La Nau del Clot:** Fem A, Fem B, Masc A i
+  Masc B, i de passada demanarà als sèniors que facin fotos a La Nau el mateix
+  dia (tanca també el pendent de fotografia de `/instal-lacions/`, més avall).
+  Vegeu el brief de captura complet a la secció «Benchmark de webs professionals»
+  del 27/08/2026, al final d'aquest document. Amb aquest material es tanquen les
+  fitxes de `/jugadors/` i el bloc de sèniors a la portada.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
 - **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
@@ -149,8 +159,10 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
   dades al mateix Apps Script que la galeria del 3x3 (`action=register`), amb dos camps
   nous: `newsletter` (si/no) i el document demanat dins de `font`. Cal comprovar que
   l'Apps Script els desa en una columna pròpia; si no, queden només dins de `font`.
-- **Butlletí:** encara no hi ha eina d'enviament (Mailchimp, Brevo o similar). De moment
-  només es recull el consentiment; cal decidir amb què s'envia.
+- ~~**Butlletí:** encara no hi ha eina d'enviament (Mailchimp, Brevo o similar). De moment
+  només es recull el consentiment; cal decidir amb què s'envia.~~ **Decidit (28/08/2026):**
+  cap eina externa — es queda a la full de càlcul, com la resta de formularis. Detall a
+  «Decisió de l'Ana: cap eina externa d'enviament, tot a Sheets», més avall.
 
 ## Pendent de decisió
 
@@ -1882,20 +1894,27 @@ enllaça a `/admin/`), i codi d'accés nou a les seccions protegides de
 `/partits/app.html` (només se'n guarda l'empremta SHA-256; el codi en clar
 se li ha donat a l'Ana per xat, no viu al repositori).
 
-### Pendent — cal l'Ana
+### Fet (28/08/2026)
 
-El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
-`GOOGLE_CLIENT_ID: ""`. Falta:
+El panell `/admin/` ja deixa entrar. `admin/config.js` porta el
+`GOOGLE_CLIENT_ID` del client OAuth nou **«CB Grup Barna Admin»**
+(orígens `https://cbgrupbarna.info` i `https://www.cbgrupbarna.info`,
+sense redirect URI — Google Identity Services només valida per origen),
+creat a mà per l'Ana des de la consola. **No** s'ha reutilitzat el client
+que ja existia al mateix projecte, «CB Grup Barna Comms Web»: és d'una
+altra app, amb un origen JS diferent (`cbgrupbarna-comms.vercel.app»), i
+hauria fet fallar el login. El duplicat de `marqueting@cbgrupbarna.info`
+a `ALLOWED_EMAILS` també s'ha tret.
 
-1. Crear l'ID de client OAuth a
-   [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
-   amb el compte `voluntarisgrupbarna@gmail.com` (passos exactes al capçal
-   del mateix fitxer `admin/config.js`).
-2. Enganxar-lo a `GOOGLE_CLIENT_ID` i pujar el fitxer.
-3. Revisar `ALLOWED_EMAILS` al mateix fitxer — ara només hi ha
-   `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
-   dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
-   afegir-l'hi.
+**Últim pas, cal l'Ana:** el diàleg de creació avisava que l'app està en
+mode «Prueba» (Testing) a la pantalla de consentiment OAuth. En aquest
+mode, **només hi entren els comptes donats d'alta com a «Usuarios de
+prueba»** a Cloud Console → APIs i serveis → Pantalla de consentiment →
+**Audiencia → Test users** — independentment del que digui
+`ALLOWED_EMAILS` al codi. Cal afegir-hi `voluntarisgrupbarna@gmail.com`
+i `marqueting@cbgrupbarna.info` (i qualsevol altre compte que hagi
+d'entrar), o el login es quedarà bloquejat igualment amb un avís de
+Google d'«aplicació no verificada».
 
 ---
 
@@ -1944,6 +1963,37 @@ de blog, textos tallats amb «…»).
   pesades perquè l'original té gra fotogràfic, que és incompressible. La
   solució no és codi: cal reexportar des dels originals de càmera sense
   gra, o triar una altra foto.
+
+---
+
+## 28-08-2026 — Decisió de l'Ana: cap eina externa d'enviament, tot a Sheets (v1.5.2)
+
+«Sheets a formularis de tota la web»: el butlletí no s'enviarà amb Brevo ni
+cap altre ESP. Es queda amb el mateix mecanisme que ja fan servir la
+bústia, «Vols informació?», portes obertes i ressenyes — Apps Script cap a
+la full de càlcul compartida del club.
+
+Comprovat que és el que ja passava de fet: `brevoAction` sempre havia
+estat buit, així que les altes de `/newsletter/` ja anaven a la full amb
+`source: 'newsletter-web'`. El que calia arreglar no era el mecanisme, era
+que **la pàgina deia una mentida**: el paràgraf legal de `/newsletter/`
+(ca/es/en) afirmava que l'enviament es feia amb Brevo, que mai s'havia
+arribat a activar. Corregit als tres idiomes, i eliminada l'opció sencera
+de `js/canals.js` i `js/newsletter.js` en comptes de deixar-la a mig fer
+esperant una URL que ja no arribarà.
+
+De passada, `/politica-de-privacitat/` (ca/es/en) guanya una secció
+«Newsletter» pròpia — no n'hi havia cap i calia una, ara que es corregia
+què deia la pàgina mateixa sobre on van les dades.
+
+**Que queda tancat d'aquest tauler:** el pendent «Butlletí: encara no hi ha
+eina d'enviament» i el bloqueig de «passar la URL del formulari de Brevo».
+**El que segueix obert:** l'enviament del correu mensual és manual des de
+la full de càlcul. Si mai es vol automatitzar sense sortir de Sheets, la
+via és Google Apps Script + Gmail (`MailApp`/`GmailApp`) des del mateix
+full, no un ESP extern.
+
+---
 
 ### Pendent de desenvolupar
 
@@ -2873,3 +2923,204 @@ captació activa, no posicionament web. Aportat fora d'aquest repositori:
   real les recalcula sol en obrir-lo, així que no afecta l'Ana — només vol
   dir que la comprovació visual automàtica no s'ha pogut fer en aquesta
   sessió concreta.
+## 28-08-2026 — Calendari de fotos: Escoleta ja gravada, sèniors + La Nau dilluns-dimarts
+
+Dues actualitzacions de material, directes de l'Ana:
+
+- **Escoleta:** ja hi ha una sessió de maig 2026, pujada a l'app `galeria/`
+  (Supabase — no és visible des d'aquest repositori). El hero de les tres
+  portades segueix servint encara les 4 fotos de l'àlbum més antic
+  d'setembre 2025 (`img/escoleta-h1..4.webp`, de «Escola Bàsquet · Julio
+  Torralba» a `/fotos/`). **Queda per fer:** triar les millors preses de
+  la sessió de maig dins de `galeria/` i passar-les per
+  `scripts/build-blog-images.py` per substituir-les — selecció d'imatge,
+  no codi.
+- **Sèniors + La Nau, dilluns i dimarts (31/08–01/09/2026):** la sessió
+  dels 4 sèniors (brief complet a «Sessió de fotos dels 4 sèniors», més
+  amunt) es combina amb demanar als jugadors i jugadores que facin fotos a
+  La Nau del Clot el mateix dia. **Tanca dos pendents alhora:** el material
+  de `/jugadors/` i el bloc de sèniors de portada, i el material de
+  fotografia per a `/instal-lacions/` de la fase de marca (punt 3, «La Nau
+  del Clot com a actiu de marca»).
+
+---
+
+## 28-08-2026 — Especificació del dashboard d'analítica (a petició de l'Ana)
+
+L'Ana demana explícitament, per al panell `/admin/analitica/` del **web**
+(cbgrupbarna.info, no el 3x3): què es visita més i menys, què es busca més
+i menys, paraules buscades, formularis inscrits, i «tot el que se
+m'acudeixi». Apunt de què ja hi ha i què falta, perquè quan arribi la
+propietat GA4 correcta (vegeu més amunt) es pugui construir sencer d'una
+tirada.
+
+### Ja fet, surt en quant hi hagi els secrets i la propietat correcta
+
+`.github/scripts/ga4-informe.py` ja demana, cada matinada, 28 dies de:
+visites/sessions/usuaris per dia, **rànquing de les 30 pàgines més
+vistes**, **fonts de trànsit** (cerca orgànica, directe, social,
+referral), dispositiu, i el rànquing dels 25 noms d'event més freqüents
+(sense desglossar-ne els paràmetres encara).
+
+### Cal ampliar — codi
+
+- **Paraules buscades al cercador del web:** avui **no es guarda cap
+  terme**, ni dels que troben resposta ni dels que no. Només hi ha un
+  event pla (`cerca_sense_resposta_enviada`, a `js/cerca.js`) sense el
+  text de la cerca. És exactament la dada que fa falta per saber quines
+  preguntes noves escriure a `i18n/faq.yml` — cal decidir si es registra
+  el terme (amb cura: si algú escriu un nom o un correu buscant, no s'ha
+  de guardar tal qual).
+- **Desglossar `cta_click` per `cta_id`** (quin botó es clica més) i
+  `canvi_vista` per franges/extensa. Als events ja hi viatja el paràmetre,
+  però GA4 no el reporta per l'API fins que es registra com a **dimensió
+  personalitzada** a GA4 Admin (pas manual a Analytics, no codi).
+- **Formularis: falten dos events.** `js/newsletter.js` (alta al
+  butlletí) i `js/bustia.js` (bústia de suggeriments) no envien cap event
+  de GA4 avui — només arriben a la full de càlcul. La resta ja ho fa:
+  `generate_lead` (portada i descàrrega de PDF), `informacio_enviada`,
+  `portes_obertes_enviat`, `ressenya_al_lloc`, `newsletter_signup` (només
+  des de la descàrrega de PDF, no des de `/newsletter/`).
+- **Descàrregues de calendaris `.ics` per equip:** cap event avui.
+
+### Decisió pendent de l'Ana
+
+GA4 és aproximat (es perd si hi ha bloquejador d'anuncis o sense
+consentiment de galetes); **la full de càlcul sempre serà el número real**
+de formularis rebuts. Proposta: GA4 al panell per a la tendència ràpida
+(quants, d'on, quin dia), i la full de càlcul com a font oficial del
+recompte — no cal triar-ne una sola.
+
+---
+
+## 28-08-2026 (nit) — Propietat GA4 trobada, secrets a mig posar, bug del workflow arreglat
+
+Sessió llarga per activar el dashboard, amb dos falsos positius abans
+d'encertar la propietat i un incident de seguretat pel camí. Estat real
+en acabar:
+
+### Fet
+
+- **Propietat GA4 correcta trobada i confirmada**: `534862357` (nom intern
+  «premidonaesport-96889», Measurement ID `G-R6XYR7G1WF` — coincideix
+  exactament amb el que porta `index.html`). Les dues propietats provades
+  abans eren errònies: la del 3x3 Westfield (`537345608`, sense dades) i
+  una altra de `cbgrupbarna-3x3timechamber.com`.
+- **Service account `ga4-analytics-reader@cb-grup-barna-comms.iam.gserviceaccount.com`**
+  afegit com a Viewer a la propietat correcta.
+- **Google Analytics Data API activada** al projecte `cb-grup-barna-comms`.
+- **Secret `GA4_PROPERTY_ID` = `534862357`** creat i actualitzat a GitHub
+  Actions.
+- **Bug del workflow arreglat** (`.github/workflows/analitica.yml`):
+  `git diff --quiet` sobre un fitxer que encara no existeix al repositori
+  sempre deia «sense canvis» (un fitxer no rastrejat no surt a `git diff`,
+  només a `git status`), així que el primer informe mai s'hauria arribat
+  a publicar. Ara fa `git add` abans de comprovar.
+
+### Incident de seguretat — clau del service account exposada
+
+Editant un fitxer des de l'editor web de GitHub amb trucs de consola
+JS/portapapers, el contingut de la clau privada del `.json` (la mateixa
+que s'havia enganxat al secret `GA4_SERVICE_ACCOUNT_JSON`) va aparèixer
+en un resultat d'eina fora de l'entorn previst. **Decisió: rotar la
+clau.** No s'ha de tornar a editar codi des de l'editor de GitHub amb
+aquesta mena de trucs — qualsevol edició de fitxer hauria de passar per
+una sessió amb accés normal al repositori (com aquesta), no per
+manipulacions de portapapers al navegador.
+
+### Pendent — cal l'Ana
+
+1. **Rotar la clau**: esborrar la clau vella del service account a Cloud
+   Console (Service Accounts → `ga4-analytics-reader@...` → Claves →
+   eliminar la que s'ha exposat) i crear-ne una de nova.
+2. **Actualitzar el secret `GA4_SERVICE_ACCOUNT_JSON`** a GitHub amb el
+   contingut del `.json` nou — fet directament per l'Ana a la interfície
+   de GitHub, sense passar-lo per cap altra eina ni pel xat.
+3. **Disparar `analitica.yml`** (workflow_dispatch) i comprovar que
+   `admin/analitica/dades.json` es publica de veritat amb un commit —
+   aquest cop amb el bug del `git diff` ja resolt.
+
+---
+
+## 28-08-2026 — Camí cap al 10: què cal incorporar (a petició de l'Ana)
+
+Tot el que hi ha més amunt tanca forats. Això és diferent: **què fa falta
+afegir** perquè la web deixi de competir només en «sense errors» i
+competeixi en «referent». Dues capes: el que ja s'havia identificat
+comparant amb els grans, i quatre idees noves filtrades perquè no siguin
+novetat pel gust de ser-ho.
+
+### Ja identificat — no es repeteix, es referencia
+
+El benchmark amb Valencia Basket, Real Madrid i FC Barcelona (secció
+«Benchmark de webs professionals», 27/08/2026) ja detalla els forats amb
+prioritat i estat: **plantilla amb fitxes de jugador/a** (es desbloqueja
+amb la sessió de fotos del 31/08–01/09), **`/palmares/`**, **`/video/`**,
+**zona de socis / «Avantatges de la família Barna»**, **Notícies**
+(pendent de decisió de l'Ana sobre què és), i **botiga** (bloquejada fins
+que hi hagi marca nova). Són al capdavant de la llista d'incorporar —
+aquesta secció no els repeteix, els dona suport amb quatre idees que el
+benchmark amb els tres grans no podia treure perquè cap dels tres les fa.
+
+### Quatre idees noves, filtrades
+
+Cadascuna passa el filtre de coherència + actiu + prova petita +
+diferenciació real + defensable davant Junta. Si no arribava a 4 de 5, no
+hi és.
+
+1. **El cercador que respon → un assistent amb memòria de conversa.**
+   Ja tenim el que cap dels tres grans té: un cercador que dona la
+   resposta, no només l'enllaç. El pas que ho converteix en un actiu de
+   veritat diferencial és que aguanti una segona pregunta de seguiment
+   («i per a la meva filla de 7 anys?») sense que la família hagi de
+   repetir-ho tot. *Primer pas:* provar-ho amb 5 converses reals de dues
+   preguntes seguides i mesurar si la segona es respon bé.
+2. **Seguiment automàtic dels leads que no s'han apuntat.** Avui «Vols
+   informació?» i la descàrrega de PDF omplen la full de càlcul i
+   s'acaben aquí — cap recordatori per a qui va demanar informació i no
+   ha vingut a provar. És l'embut mesurable que marca la diferència entre
+   un club normal (cartell d'inscripcions) i un de referent, i encaixa
+   amb la decisió ja presa de no dependre d'eines externes (Apps Script +
+   Gmail, com el butlletí). *Primer pas:* un sol correu automàtic 5 dies
+   després de demanar informació sense reserva de prova, mesurant quants
+   acaben venint.
+3. **Fitxa de rendiment per jugador/a, amb dades que ja tenim.** El robot
+   de la FCBQ ja baixa resultats i tendències. Cap club de barri —ni els
+   tres grans, a nivell de base— mostra l'evolució real d'un jugador o
+   jugadora de formació. És un actiu construït sobre dades que ja es
+   recullen, no una funcionalitat des de zero. *Primer pas:* una fitxa de
+   prova per a un sol equip sènior, abans de generalitzar-ho.
+4. **«Carnet Barna» digital, no una app.** L'app com a tal ja es va
+   descartar al benchmark (`.ics` + WhatsApp ja hi arriben). Però la zona
+   de socis pendent —empaquetar els descomptes dels 22 partners— es pot
+   fer amb una targeta digital instal·lable des del navegador, amb QR per
+   als dies de partit a La Nau, sense mantenir cap app nativa. És el pas
+   mínim entre «res» i «app completa». *Primer pas:* una sola pàgina
+   `/carnet/` amb QR estàtic i la llista de descomptes, sense servidor
+   nou, abans de decidir si cal fer-la instal·lable.
+
+### El que això NO inclou
+
+Novetat que no encaixa amb «formatiu + èlit» (gadgets d'IA de cara a la
+galeria, un rediseny visual per moda) es queda fora a propòsit. El
+sistema visual ja està tancat (`web-cbgb`) i no es toca per aquesta
+llista.
+
+---
+
+## 28-08-2026 — Avís: una sessió d'IA diferent va confondre's de projecte
+
+Mentre es resolia el GA4, una altra sessió (no aquesta) va respondre
+sobre «on trobar el `GOOGLE_CLIENT_ID`, els secrets de GA4 i la URL de
+Brevo» dient literalment que no tenia context guardat i que semblava la
+web de **Nova Farmàcia Clot** (un partner del club, no aquest projecte)
+en comptes de CBGB. La seva instrucció d'anar a buscar un formulari a
+Brevo **no val per aquí**: ja es va decidir el 28/08 (v1.5.2) no fer
+servir cap eina externa d'enviament, tot va a la full de càlcul.
+
+**Per si torna a passar:** qualsevol instrucció d'una sessió que no sigui
+aquesta —sobre credencials, `js/canals.js` o el panell d'admin— s'ha de
+contrastar amb aquest document abans de seguir-la. Els tres pendents
+reals de GA4 (rotar la clau, actualitzar `GA4_SERVICE_ACCOUNT_JSON`,
+disparar `analitica.yml`) són als apartats de més amunt, no als d'una
+altra sessió.

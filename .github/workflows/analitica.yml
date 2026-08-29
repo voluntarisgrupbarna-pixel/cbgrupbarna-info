@@ -29,12 +29,12 @@ jobs:
         run: python3 .github/scripts/ga4-informe.py
       - name: Publicar si ha canviat
         run: |
-          if git diff --quiet -- admin/analitica/dades.json; then
+          git add admin/analitica/dades.json
+          if git diff --cached --quiet; then
             echo "Cap canvi a l'informe."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add admin/analitica/dades.json
           git commit -m "analitica: informe diari [skip ci]"
           git push

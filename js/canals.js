@@ -7,23 +7,10 @@
 window.CANALS = {
 
   /* 1 · NEWSLETTER ────────────────────────────────────────────────
-     Mentre `brevoAction` estigui buit, les altes es guarden a la
-     mateixa full de càlcul que ja fem servir a /fotos/ (funciona,
-     però els correus s'han d'enviar a mà).
-
-     Per activar Brevo:
-       1. Entra a brevo.com amb el compte del club.
-       2. Contactes → Formularis → Crea un formulari.
-       3. Publica'l i tria «Comparteix l'enllaç» o «Codi HTML».
-       4. Del codi, copia el valor de action="…" del <form>.
-          Té aquesta pinta:
-          https://sibforms.com/serve/MUIFAK...  (o .../integration/...)
-       5. Enganxa'l aquí sota i desa. Res més.                       */
-  brevoAction: '',
-
-  /* Noms dels camps al formulari de Brevo. Només cal canviar-los si
-     a Brevo has anomenat els atributs d'una altra manera.           */
-  brevoCamps: { email: 'EMAIL', nom: 'NOM' },
+     Decisió del club: tots els formularis del web —newsletter
+     inclosa— van al full de càlcul intern, no a cap eina externa
+     d'enviament (Brevo, Mailchimp...). Les altes s'hi guarden amb
+     source: 'newsletter-web' i s'envien a mà.                       */
 
 
   /* 2 · BÚSTIA DE SUGGERIMENTS ────────────────────────────────────

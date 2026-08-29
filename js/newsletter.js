@@ -1,6 +1,6 @@
 /* CB Grup Barna · Alta a la newsletter
-   Envia a Brevo si CANALS.brevoAction està configurat; si no, guarda
-   l'alta a la full de càlcul de sempre perquè no es perdi cap correu. */
+   Decisió del club: sense eina externa d'enviament. L'alta es guarda
+   a la mateixa full de càlcul que la resta de formularis del web. */
 (function () {
   var form = document.getElementById('nl-form');
   if (!form) return;
@@ -38,15 +38,7 @@
       done.focus();
     };
 
-    if (cfg.brevoAction) {
-      // Brevo espera un enviament de formulari clàssic, no JSON.
-      var camps = cfg.brevoCamps || { email: 'EMAIL', nom: 'NOM' };
-      var fd = new FormData();
-      fd.append(camps.email, email.value.trim());
-      if (nom.value.trim()) fd.append(camps.nom, nom.value.trim());
-      fetch(cfg.brevoAction, { method: 'POST', mode: 'no-cors', body: fd })
-        .then(acabat, acabat);
-    } else if (cfg.bustiaEndpoint) {
+    if (cfg.bustiaEndpoint) {
       fetch(cfg.bustiaEndpoint, {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },

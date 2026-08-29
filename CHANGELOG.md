@@ -71,6 +71,37 @@ Verificat amb `i18n-paritat.py`, `i18n-contingut.py`, `i18n-lint.py`,
 als tres idiomes.
 
 ---
+## 1.5.3 — 2026-08-28
+
+**El panell `/admin/` ja deixa entrar.** `GOOGLE_CLIENT_ID` posat a
+`admin/config.js` amb un client OAuth dedicat («CB Grup Barna Admin»,
+orígens `cbgrupbarna.info`/`www.cbgrupbarna.info`) creat expressament —
+no s'ha reutilitzat un client existent d'una altra app que hauria fet
+fallar el login per origen incorrecte. Treure el duplicat de
+`marqueting@cbgrupbarna.info` a `ALLOWED_EMAILS`.
+
+Pendent d'un pas de l'Ana a Cloud Console: donar d'alta els comptes com a
+«Test users» a la pantalla de consentiment (l'app hi és en mode Prova),
+o el login es bloquejarà igualment. Detall a `PENDENTS-WEB.md`.
+
+## 1.5.2 — 2026-08-28
+
+**Decisió de l'Ana: cap eina externa d'enviament per al butlletí — tot a
+Sheets, com la resta de formularis del web.** La newsletter ja no diu que
+l'enviament es fa amb Brevo (no s'havia arribat a activar mai: l'`action`
+sempre havia estat buit). S'ha tret l'opció sencera del codi en comptes de
+deixar-la a mig fer:
+
+- `js/canals.js` i `js/newsletter.js`: fora `brevoAction`/`brevoCamps` i la
+  branca que els feia servir. Les altes ja anaven, per defecte, a la full
+  de càlcul compartida (`bustiaEndpoint`, `source: 'newsletter-web'`) —
+  ara és l'únic camí, no un pedaç mentre s'esperava la URL de Brevo.
+- `/newsletter/` (ca/es/en): el paràgraf que citava Brevo per nom ara diu
+  la veritat — full de càlcul del club a Google Drive.
+- `/politica-de-privacitat/` (ca/es/en): secció «Newsletter» nova, amb la
+  mateixa base jurídica i redactat que la resta de formularis. No hi havia
+  cap secció pròpia per a aquesta pàgina i calia una, ara que es corregeix
+  el que deia la pàgina mateixa.
 
 ## 1.5.1 — 2026-08-27
 
