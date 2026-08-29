@@ -189,10 +189,10 @@ BREADCRUMB = lambda items: {"@type": "BreadcrumbList", "itemListElement": [
 
 def build_campus():
     url = SITE + "/campus/"
-    title = "Campus de Bàsquet a Barcelona | CB Grup Barna × Time Chamber"
-    desc = ("Campus de bàsquet a Barcelona per a nens i nenes de base. El campus d'estiu del "
-            "CB Grup Barna al Clot, Districte de Sant Martí: setmanes intensives de tecnificació, "
-            "grups per edat i places limitades. Informació i llista d'espera.")
+    title = "Campus de bàsquet a Barcelona · tecnificació d'alt rendiment | CB Grup Barna × Time Chamber"
+    desc = ("Campus de tecnificació d'alt rendiment a Barcelona, al Clot: sessions dirigides per "
+            "entrenadors de tecnificació de l'NBA, grups per edat i nivell i unes 50 places per "
+            "setmana. Obert a qualsevol club. Informació i llista d'espera.")
     faq_html, faq_ld = faq_block([
         ("Per a quines edats és el campus de bàsquet?",
          "El campus del CB Grup Barna és per a jugadors i jugadores de base, des de l'edat de "
