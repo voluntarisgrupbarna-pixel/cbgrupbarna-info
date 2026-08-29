@@ -99,7 +99,23 @@ la bústia no fa: enviar correu al club i enviar confirmació a qui s'apunta, en
 seu idioma. El codi sencer, comentat, és a **`scripts/apps-script-campus.gs`**.
 
 Això no ho pot fer un agent: Google demana que una persona autoritzi amb el seu
-compte els permisos de full de càlcul i d'enviament de correu. Són sis passos:
+compte els permisos de full de càlcul i d'enviament de correu. Hi ha dos camins.
+
+### Camí curt (tres passos, recomanat)
+
+Aprofitar l'Apps Script que el club **ja té desplegada** —la de la bústia— en
+comptes de crear-ne una de nova. Les instruccions són a dalt de
+**`scripts/apps-script-bustia-afegit.gs`**: enganxar el fitxer al final del codi
+que ja hi ha, afegir una línia al `doPost` existent i tornar a desplegar. L'URL
+no canvia i no cal tocar `js/canals.js`.
+
+Les altes van a la full de sempre amb `source: 'campus-llista-espera'`. No és cap
+novetat de protecció de dades: `/portes-obertes/` ja hi envia nom i any de
+naixement de criatures.
+
+### Camí llarg (full i projecte propis)
+
+Si es vol la llista d'espera separada de la resta, són sis passos:
 
 1. Full de càlcul nou al Drive del club, de nom **«Campus · llista d'espera»**.
 2. Dins del full: **Extensions → Apps Script**.
