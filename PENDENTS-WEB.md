@@ -2165,3 +2165,24 @@ d'alta 2 secrets un sol cop, 10 minuts):** passos exactes a
 crear un token limitat a aquell repositori, i donar d'alta
 `BACKUP_REPO_URL` i `BACKUP_REPO_TOKEN`). Fins que no es faci, el workflow
 ho diu (`::notice::`) i surt en verd sense fer res — no és un error.
+
+---
+
+## Estat del desplegament del Worker d'admin (28/08/2026, vespre)
+
+L'Ana ha començat a desplegar `workers/admin-gate/` seguint el README (pas
+a pas des del dashboard de Cloudflare, sense `wrangler`). **En curs, no fet
+del tot encara**: falta que torni amb la URL final del Worker
+(`admin-gate.<subdomini>.workers.dev`) perquè es pugui enganxar a
+`GATE_ENDPOINT` dins `scripts/admin-gate.js` i fer el push que ho activa.
+
+**Confusió trobada pel camí, resolta sense conseqüències:** en buscar on
+desplegar l'script de Google del formulari de WhatsApp
+(`FORMULARI-CONTACTE-WHATSAPP.md`), es va anar a script.google.com i es va
+obrir, entre 40 projectes sense títol, un que **no era el nostre**: un
+script ja existent i en ús, «3×3 Westfield Glòries». Es va aturar abans
+d'autoritzar-lo — **no s'hi ha desplegat ni tocat res**. Nota per a la
+propera vegada: el punt de partida correcte per a l'script del formulari
+de WhatsApp és sempre un **Google Sheet nou en blanc → Extensions → Apps
+Script** (sheets.google.com, no script.google.com directament), perquè
+mai calgui triar entre projectes existents del compte.
