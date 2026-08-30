@@ -2443,3 +2443,25 @@ que és el que es carrega abans de tocar res visual: hi ha un bloc al capdamunt
 que assenyala la guia i la taula de destins, i el llinatge dels quatre
 documents amb què queda de cadascun. **Si canvies un dels dos, canvia l'altre.**
 
+### 5. Els destins, precisats per l'Ana (mateix dia)
+
+Dues correccions sobre el que s'havia apuntat al punt 2:
+
+- **La B no és només la portada del calendari.** És **tot el calendari amb la
+  mateixa estètica**: `/partits/`, `/partits/calendaris/` i les fitxes de
+  `/partits/equips/`, als tres idiomes. Són 59 fitxers HTML, però la majoria
+  són fitxes d'equip que genera `.github/scripts/generate-team-pages.py`: allà
+  es toca el generador, no la sortida.
+- **La D no és `/premsa/` amb peces setmanals.** «L'Edició» és la
+  **newsletter mensual**. És l'única de les quatre que no és una pàgina web:
+  és el número que arriba per correu, un cop al mes. Segueix sent l'única que
+  viu igual de bé impresa.
+
+La guia i la skill ja ho diuen. **Queda per fer:** la maqueta de la D dins de
+«Quatre portades» encara està escrita en clau setmanal («número nou cada
+setmana», «es publica cada cap de setmana», els breus amb Dv./Ds./Dm.). Cal
+passar-la a mensual perquè digui el mateix que la guia.
+
+I la newsletter segueix bloquejada pel mateix d'abans: **falta l'URL del
+formulari de Brevo**. La clau API no pot viure en un lloc estàtic.
+
