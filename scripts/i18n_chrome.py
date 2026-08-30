@@ -92,15 +92,15 @@ for _idioma, _t in {
     "ca": ("Segueix el CB Grup Barna", "Segueix-nos a Instagram",
            "@cbgrupbarna · el dia a dia del club, cada setmana.",
            "Apunta't a la newsletter",
-           "Un correu al mes amb el que val la pena saber. Res més.", "/newsletter/"),
+           "Un correu la setmana amb el que val la pena saber. Res més.", "/newsletter/"),
     "es": ("Sigue al CB Grup Barna", "Síguenos en Instagram",
            "@cbgrupbarna · el día a día del club, cada semana.",
            "Apúntate a la newsletter",
-           "Un correo al mes con lo que vale la pena saber. Nada más.", "/es/newsletter/"),
+           "Un correo a la semana con lo que vale la pena saber. Nada más.", "/es/newsletter/"),
     "en": ("Follow CB Grup Barna", "Follow us on Instagram",
            "@cbgrupbarna · the club's week, as it happens.",
            "Join the newsletter",
-           "One email a month with what's worth knowing. Nothing else.", "/en/newsletter/"),
+           "One email a week with what's worth knowing. Nothing else.", "/en/newsletter/"),
 }.items():
     _aria, _igt, _igs, _nlt, _nls, _nlurl = _t
     CRIDA[_idioma] = (
