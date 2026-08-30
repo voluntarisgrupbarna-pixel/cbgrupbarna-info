@@ -31,6 +31,12 @@
   .photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; }
   @media (max-width: 640px) { .photo-strip { grid-template-columns: repeat(2, 1fr); } }
 
+  .video-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 38px 0; }
+  .video-strip figure { margin: 0; }
+  .video-strip video { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; background: var(--ink); display: block; }
+  .video-strip figcaption { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  @media (max-width: 900px) { .video-strip { grid-template-columns: repeat(2, 1fr); } }
+
   /* Programa setmanal en targetes: número + dates + focus, com el
      calendari del microsite de Time Chamber però amb el llenguatge del Barna. */
   .weeks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: clamp(26px, 4vw, 44px) 0; }
@@ -334,8 +340,29 @@
       <figure><img src="img/campus-2026-05.jpg" alt="Jugador del campus botant la pilota entre companys" loading="lazy" decoding="async" width="900" height="1350"></figure>
       <figure><img src="img/campus-2026-06.jpg" alt="Grup de jugadors del campus fent un exercici de tir" loading="lazy" decoding="async" width="900" height="1350"></figure>
     </div>
+    <h3 style="font-size:18px;font-weight:700;margin:30px 0 6px">El campus, en vídeo</h3>
+    <p style="font-size:13.5px;color:var(--ink-2);margin-bottom:14px">Iandrey Panisa explicant l'exercici, l'equip fent pinya i tot el pavelló ple durant una sessió a La Nau del Clot.</p>
+    <div class="video-strip">
+      <figure>
+        <video src="video/campus-2026-iandrey.mp4" poster="video/campus-2026-iandrey-poster.jpg" controls muted loop playsinline preload="none" aria-label="Iandrey Panisa parlant amb els jugadors i jugadores del campus"></video>
+        <figcaption>Iandrey explicant l'exercici</figcaption>
+      </figure>
+      <figure>
+        <video src="video/campus-2026-grup.mp4" poster="video/campus-2026-grup-poster.jpg" controls muted loop playsinline preload="none" aria-label="Grup de jugadores de diversos clubs rient junts al campus"></video>
+        <figcaption>Jugadores de diversos clubs, juntes</figcaption>
+      </figure>
+      <figure>
+        <video src="video/campus-2026-equip.mp4" poster="video/campus-2026-equip-poster.jpg" controls muted loop playsinline preload="none" aria-label="Equip del campus fent una fila de xocar les mans"></video>
+        <figcaption>Fent pinya entre setmanes</figcaption>
+      </figure>
+      <figure>
+        <video src="video/campus-2026-pavello.mp4" poster="video/campus-2026-pavello-poster.jpg" controls muted loop playsinline preload="none" aria-label="Vista general del pavelló de La Nau del Clot ple de jugadors del campus"></video>
+        <figcaption>La Nau del Clot, plena</figcaption>
+      </figure>
+    </div>
+
     <div class="gal-cta">
-      <p><strong>Aquestes són sis fotos triades.</strong> La galeria completa de l'estiu — totes les setmanes,
+      <p><strong>Aquestes són sis fotos i quatre vídeos triats.</strong> La galeria completa de l'estiu — totes les setmanes,
       amb foto i vídeo — és a la Galeria Fotogràfica del club.</p>
       <a href="/fotos/" class="btn ghost" data-cta="campus-galeria-completa">Veure la galeria de l'estiu →</a>
     </div>
