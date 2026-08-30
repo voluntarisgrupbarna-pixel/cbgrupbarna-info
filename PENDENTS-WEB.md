@@ -2590,6 +2590,63 @@ Criteri que s'ha fet servir per a tot el que hi ha aquí sota:
 Tot el que és «comprovable» s'ha llegit **del fitxer que genera la dada**,
 no de la pàgina que la mostra.
 
+### El llibre de xifres complet
+
+Transcripció íntegra de l'artefacte a aquest document, perquè no depengui
+només d'un enllaç extern. Cada fila, amb la seva font i el seu estat.
+
+**Estructura esportiva** — és l'apartat amb més soroll, i té una explicació
+concreta: la FCBQ programa les categories petites més tard, i encara no ha
+publicat tots els calendaris.
+
+| Xifra | Què és | Font | Estat |
+|---|---|---|---|
+| **34+** equips | Equips del club, la xifra de portada | `/grup-barna-dades-oficials/` la presenta com a «font federativa», i avui no la pot confirmar: no perquè sigui falsa, sinó perquè encara no hi són tots els equips | Dada interna |
+| **15** amb calendari | Cadet, Infantil, Júnior i Sènior. Ni un Premini, Mini ni Preinfantil: la federació encara no els ha programat. Creixerà sol durant la temporada | `partits/data.json`, baixat el 13/08/2026 | Comprovable |
+| **32** federats 25-26 | 17 masculins i 15 femenins, amb desglossament complet per categoria | Fitxa oficial del club a basquetcatala.cat, temporada 2025-26, citada a `/blog/quants-equips-te-el-barna/` | Comprovable |
+| **38** totals 25-26 | Els 32 federats més 6 que no surten a cap fitxa: tres d'Escoleta (la FCBQ no federa fins a premini), els Barna Màgics (federats a l'ACELL, no a la FCBQ) i dos de lliga escolar | Mateix article — l'única pàgina que explica per què conviuen xifres diferents sense contradir-se | Comprovable |
+| **9** categories | Premini, Mini, Preinfantil, Infantil, Cadet, Júnior, Sub-22, Sènior i Open | `data.json` → `temporada.categoriesActives` | Comprovable |
+| **120+** partits/any | Partits com a local per temporada | Calendari oficial de la FCBQ, recollit a `/partits/` | Comprovable |
+
+**Persones** — cap d'aquestes xifres té font externa. No vol dir que
+estiguin malament: vol dir que el club n'és l'única font i que s'han de
+presentar com a tals.
+
+| Xifra | Què és | Nota | Estat |
+|---|---|---|---|
+| **450** aprox. | Jugadors i jugadores, la xifra canònica | Durant un temps `/empreses/` deia 400; corregit avui | Dada interna |
+| **450+** famílies | Famílies actives | Coincideix numèricament amb la de jugadors —hi ha germans al club, una de les dues necessita repàs | Dada interna |
+| **200+** | Jugadores en competició | Temporada 2026-27 | Dada interna |
+| **38** entrenadores | Entrenadores en actiu | No té res a veure amb els 38 equips: coincidència que ja ha provocat frases falses tipus «entrenen 38 equips», corregides avui a quatre pàgines | Dada interna |
+| **65,5%** | Dones a l'staff tècnic | La mitjana del sector que cita el web és ~35% | Dada interna |
+| **50%** | Pressupost dedicat a la línia femenina | Sobre un pressupost declarat de 140.000–160.000 € anuals | Dada interna |
+
+**Patrocini**
+
+| Xifra | Què és | Font | Estat |
+|---|---|---|---|
+| **21** partners | Partners actius amb fitxa pròpia: Aquamiga, Armand Òptics, Clínica Dental Bac de Roda, Eix Clot, Eix Comercial Sant Martí, Foto Jané, Fundació Mullor, GBK·Globasket, Herbolaris Montserrat, Illa Fantasia, Instax Fujifilm, Manual Colors, La Melosa, Mercat dels Encants, Ovella Negra, Panteres Grogues, Romeo Abogados, Stepback Podologia, Time Chamber, Tot Salut i Westfield Glòries | `data.json` → `patrocinadors.llistat`. L'única xifra del web que es pot comptar un a un; fins avui hi havia pàgines que deien 22 i 23 | Comprovable |
+
+**Comunitat digital** — l'apartat amb més contradiccions vives del web.
+
+| Xifra | Què és | Nota | Estat |
+|---|---|---|---|
+| **7.096** seguidors | Seguidors a Instagram, agost 2026 | Perfil públic @cbgrupbarna, usat al benchmark. `/grup-barna-dades-oficials/` diu «supera els 7.100» — 7.096 no supera 7.100 | En conflicte |
+| **5.382** seguidors | La xifra dels dossiers de patrocinis | Més de 1.700 seguidors per sota de la real. Segueix viva en pàgines indexables | Obsoleta |
+| **439.000** visualitzacions/mes | Mitjana mensual | Panell professional d'Instagram; el briefing la va triar expressament el 25/08 perquè es podia verificar | Comprovable |
+| **~2M** impressions/mes | Impressions mensuals | Es va retirar del briefing el 25/08 precisament per no ser verificable, i encara viu a dades oficials | En conflicte |
+| **8M** visualitzacions 25-26 | Visualitzacions de la temporada, dada de l'Ana (29/08) | Substitueix els 6,44M publicats. Amb 1,97M de comptes assolits i els compartits ×3,9. Sobre els 4,86M de la temporada anterior, el creixement és +65% | Comprovable |
+| **8,91M** «acumulades» | Visualitzacions acumulades des de l'obertura | Aritmèticament impossible: 6,44M + 4,86M ja sumaven 11,3M abans dels 8M; amb els 8M confirmats, dues temporades fan 12,86M com a mínim | En conflicte |
+| **58,8%** homes / 41,2% dones | Audiència per gènere | Decisió de l'Ana (29/08): lectura vigent, es queda tal com està | Comprovable |
+
+**Identitat**
+
+| Xifra | Què és | Font | Estat |
+|---|---|---|---|
+| **1965** | Any de fundació — 61 anys el 2026 | `data.json` → `club.fundacioAny`. El web diu indistintament «seixanta anys» i «més de seixanta-un»: les dues són certes; «seixanta anys» surt sobretot en el títol citat d'un article de premsa | Comprovable |
+| **24** | Número de club a la FCBQ, la clau de tot l'automatisme | `partits/data.json` → `clubIdFCBQ` | Comprovable |
+| **2** sèniors a Supercopa | Masculí i femení alhora, temporada 2026-27. Per sobre: Tercera FEB → Segona FEB → Primera FEB → Lliga Endesa (ACB) | Robot de la FCBQ: `scm` i `scf` a Super Copa | Comprovable |
+
 ### Per què el robot només veu 15 equips — explicat per l'Ana
 
 Això mereix quedar escrit perquè és la clau de tot l'embolic dels equips, i
