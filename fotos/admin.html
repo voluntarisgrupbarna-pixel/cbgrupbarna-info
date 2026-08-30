@@ -1169,7 +1169,9 @@ function renderUploadedPhotos(ev) {
   photos.forEach((filename, i) => {
     const wrapper = document.createElement('div');
     wrapper.className = 'uploaded-photo';
-    const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`;
+    const url = isVideoFile(filename)
+      ? `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`
+      : `/fotos/web/${ev.id}/${filename.replace(/\.[^.]+$/, '.webp')}`;
     const mediaHtml = isVideoFile(filename)
       ? `<div class="uploaded-photo-media-wrap"><video src="${url}" muted preload="metadata"></video><div class="video-thumb-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
       : `<img src="${url}" alt="Foto ${i+1}" loading="lazy">`;
@@ -1211,10 +1213,14 @@ async function deleteUploadedPhoto(eventId, filename, photoIndex) {
 // ── PHOTO URL ──
 function photoUrl(ev, filename) {
   if (!filename) return null;
-  if (ev.source === 'repo' || filename.includes('.')) {
+  // Els videos es serveixen des de uploads/; les imatges, des de la derivada
+  // webp que genera build-gallery-images.py (fotos/thumb/), que es el que
+  // realment existeix al repositori i el que veu la galeria publica.
+  if (isVideoFile(filename)) {
     return `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/fotos/uploads/${ev.id}/${filename}`;
   }
-  return `https://drive.google.com/thumbnail?id=${filename}&sz=w400`; // Drive fallback
+  const webp = filename.replace(/\.[^.]+$/, '.webp');
+  return `/fotos/thumb/${ev.id}/${webp}`;
 }
 
 // ── SETTINGS ──
