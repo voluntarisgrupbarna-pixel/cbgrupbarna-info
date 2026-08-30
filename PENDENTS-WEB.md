@@ -2309,3 +2309,103 @@ https://claude.ai/code/artifact/5f3af974-01e9-423b-9dde-d0604f39365d
   (demanar mencions una per una) i `CAMPUS-FITXA-GOOGLE-I-AGENDES.md` (alta a la
   fitxa de Google i a les agendes) són feina de fora del web que segueix sense
   fer. El web ja està a l'altura; això no.
+
+---
+
+## 30-08-2026 · Galeria amb grups privats, les quatre portades i la capçalera
+
+Sessió de l'Ana. Tres encàrrecs, per ordre en què van sortir.
+
+### 1. La galeria: grups visibles i grups invisibles — FET
+
+L'encàrrec era «grups de fotos visibles i un altre invisible, amb aquesta
+acció a cada grup de la galeria a l'admin».
+
+Resulta que **tot el codi ja existia i no funcionava**. El botó Públic/Privat
+de cada fila és a `fotos/admin.html` (funció `toggleVisibility`), el filtre
+públic és a `fotos/index.html` (`esVisible`, que deixa passar el que no és
+`private`) i el PIN de màrqueting és a `fotos/config.js`
+(`marketing_pin: 'barna-mk-1965'`). El que faltava era el camp a les dades:
+cap dels deu àlbums de `fotos/events.js` portava `visibility`, i amb el valor
+indefinit la comparació `e.visibility !== 'private'` era certa per a tothom.
+La funció hi era i no feia res.
+
+Ara els deu àlbums porten el camp escrit. Nou són `"public"`. **«JUGADORS/ES
+2526»** (192 retrats de plantilla, material intern) arrenca `"private"`: no
+surt a `/fotos/` i només s'hi arriba des de l'admin o amb
+`/fotos/?marqueting=<clau>`. Es torna públic amb un clic.
+
+`scripts/build-gallery-events.py` els manté: els àlbums nous neixen
+`"public"` i els que venien d'abans es completen amb `setdefault`, així cap
+execució torna a deixar un grup sense visibilitat declarada.
+
+Comprovat amb navegador sobre el lloc servit: la galeria pública pinta 9
+targetes i cap és la privada; amb el PIN en pinta 10. El regex amb què l'admin
+llegeix `events.js` hi casa i el desat del propi admin (`JSON.stringify`)
+conserva el camp anada i tornada.
+
+Commit `5c437b47`.
+
+### 2. Les quatre portades: cada una amb el seu destí — FET (a l'Artifact)
+
+Decisió de l'Ana sobre la maqueta
+[Quatre portades](https://claude.ai/code/artifact/a4a53f45-e2d3-4e9a-aadb-ee89be001087):
+
+| | Destí |
+|---|---|
+| **A · L'Afinat** | La portada de cada dia |
+| **B · Dia de partit** | El calendari |
+| **C · La Jugada** | Tal com està, amb l'Escoleta, i un **submenú «Història de l'escola»** |
+| **D · L'Edició** | La **premsa escrita**: open day dels preferents el cap de setmana, obertura del calendari de partits i un post del blog cada setmana |
+
+El menú no s'ha tocat: només aquestes quatre.
+
+**La foto de la D.** L'Ana va demanar que hi anés una foto institucional
+concreta —tres directius asseguts a la grada amb la bufanda del club— al lloc
+de les jugadores. **Ja era a la galeria**: és
+`fotos/web/presentacio-equips-25-26-msufdc03/1786803048160-zpte6.webp`
+(2048×1365), retallada a 16:10 i posada en duotò vermell com la resta de la D.
+No calia pujar-la.
+
+> **Nota de reconciliació.** Dues sessions treballaven la mateixa maqueta
+> alhora. L'altra va publicar primer els rètols de les pestanyes, el submenú
+> de la C i tot el text editorial de la D, i hi va posar **una foto que no era
+> la demanada** (l'alcalde dret a la sala de trofeus). La publicació d'aquí
+> es va fer sobre la seva versió, canviant només la foto. No s'ha perdut res
+> del seu text.
+
+### 3. La capçalera de la portada — FET
+
+Dues coses que l'Ana va veure mirant el web publicat.
+
+- **El ticker de novetats no destacava.** Feia 32 px d'alt amb lletra de
+  8,5 px espaiada a 0,3em. Puja a **46 px** i la lletra a **11,5 px** amb
+  menys espaiat, el text passa del 70% al 85% d'opacitat i la màscara dels
+  extrems s'estreny (5% → 2%) perquè la pista sigui més ampla. Als tres
+  idiomes.
+- **L'«Admin» no sortia a dalt a la dreta.** Ja existia una pestanya flotant
+  que `js/galetes.js` enganxa a gairebé totes les pàgines, però estava a
+  `top:12px; right:12px` — **a sobre del ticker, i del mateix negre**
+  (`#10100E`) amb un 55% d'opacitat: negre sobre negre. Ara les tres portades
+  porten l'enllaç dins la capçalera, al costat del commutador d'idioma; la
+  pestanya flotant baixa a baix a la dreta, on el fons és blanc; i allà on ja
+  hi ha l'enllaç de capçalera, la pestanya no es pinta.
+
+Commit `5957887c`.
+
+### El que queda obert d'aquesta sessió
+
+- **L'enllaç «Admin» de capçalera només és a les tres portades.** A la resta
+  de pàgines l'accés segueix sent la pestanya flotant de `galetes.js`, que a
+  mòbil està amagada a posta (`@media(max-width:900px)`). Si es vol a la
+  capçalera de tot el lloc, són ~380 fitxers i val més fer-ho amb un script.
+- **El grup privat de la galeria és una tria d'aquí, no de l'Ana.** Es va
+  triar «JUGADORS/ES 2526» per ser el més clarament intern dels deu. Si n'ha
+  de ser un altre, es canvia amb el botó de `/fotos/admin.html`.
+- **Les quatre portades viuen només a l'Artifact.** Cap de les quatre s'ha
+  portat encara a producció: la portada publicada segueix sent la de franges
+  de la v2.0.0. Passar-hi la D (premsa escrita) implicaria una secció nova
+  `/premsa/` amb calendari editorial setmanal, que és una decisió de contingut,
+  no de codi.
+- **La foto institucional només és a la maqueta.** Si es vol a producció, cal
+  passar-la per `scripts/build-blog-images.py` com les altres.
