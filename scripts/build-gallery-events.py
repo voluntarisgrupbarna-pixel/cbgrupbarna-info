@@ -124,11 +124,17 @@ def main():
                 "cover_url": None,
                 "photos": [],
                 "allow_download": True,
+                # Un album nou neix public. Es fa privat des de /fotos/admin.html
+                # amb el boto Public/Privat de cada grup, i el valor es conserva
+                # entre execucions perque mes avall es copia l'album sencer.
+                "visibility": "public",
                 "source": "repo",
             }
             ev["photos"] = fitxers
         else:
             ev = dict(previ)
+            # Albums d'abans que hi hagues el flag: publics, com es veien.
+            ev.setdefault("visibility", "public")
             declarades = list(previ.get("photos") or [])
             # Es compara sense extensio; si ja hi era, es conserva el nom declarat.
             per_arrel = {os.path.splitext(f)[0]: f for f in declarades}
