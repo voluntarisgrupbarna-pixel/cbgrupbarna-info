@@ -105,7 +105,7 @@
     '.cbgb-gal-b button.si:hover{background:#fff;border-color:#fff;color:#10100E}',
     '@media(max-width:620px){.cbgb-gal{padding:14px 16px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}',
     '.cbgb-gal-in{gap:12px}.cbgb-gal-t p{font-size:12.5px}',
-    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;min-width:0;padding:12px 10px;min-height:42px}}',
+    '.cbgb-gal-b{width:100%}.cbgb-gal-b button{flex:1 1 0;min-width:0;padding:12px 10px;min-height:44px}}',
     // A 320 px la barra feia 342 px d'ample i el boto d'acceptar quedava
     // partit fora de la pantalla: els botons son flex:1 1 0 pero el seu
     // contingut (majuscules amb .24em d'interlletratge) no encongeix, i sense

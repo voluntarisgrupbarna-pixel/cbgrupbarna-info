@@ -1827,15 +1827,20 @@ equip federat. En tots dos casos, el primer pas és el mateix: anar a fer un
 ]
 
 
-def blog_card(a, with_text):
-    """Targeta d'article. La foto és opcional: si no n'hi ha, la targeta és de text."""
+def blog_card(a, with_text, nivell=3):
+    """Targeta d'article. La foto és opcional: si no n'hi ha, la targeta és de text.
+
+    `nivell` és el de l'encapçalament del títol. Depèn d'on va la targeta: a la
+    portada del blog penja de l'h1 i ha de ser h2; dins d'un article penja de
+    l'h2 «Articles relacionats» i ha de ser h3. Escriure'l fix feia que la
+    portada saltés de l'h1 a l'h3."""
     media = (f'<span class="card-media"><img src="/img/blog/{a["card_img"]}.webp" '
              f'srcset="/img/blog/{a["card_img"]}.webp 1x, /img/blog/{a["card_img"]}@2x.webp 2x" '
              f'alt="{a["card_alt"]}" width="450" height="281" loading="lazy" decoding="async"></span>'
              ) if a.get("card_img") else ''
     text = f'<p>{a.get("card_text", a["lede"])}</p>' if with_text else ''
     return (f'<a class="card" href="/blog/{a["slug"]}/">{media}<div class="card-body">'
-            f'<span class="card-tag">{a["tag"]}</span><h3>{a["title"]}</h3>'
+            f'<span class="card-tag">{a["tag"]}</span><h{nivell}>{a["title"]}</h{nivell}>'
             f'{text}<span class="cta">Llegir</span></div></a>')
 
 
@@ -1922,7 +1927,7 @@ def build_blog_index():
                        "description": a["desc"]} for a in ARTICLES]},
         BREADCRUMB([("CB Grup Barna", "/"), ("Blog", "/blog/")]),
     ]}
-    cards = ''.join(blog_card(a, with_text=True) for a in ARTICLES)
+    cards = ''.join(blog_card(a, with_text=True, nivell=2) for a in ARTICLES)
     body = f"""
 {crumbs([("Inici", "/"), ("Blog", None)])}
 <div class="wrap">
