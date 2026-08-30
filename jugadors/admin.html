@@ -10,27 +10,27 @@
 <style>
   :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:rgba(255,255,255,.45)}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--black);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh}
-  .bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em}
+  body{background:var(--black);color:var(--txt);font-family:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;min-height:100vh}
+  .bebas{font-family:"Anton","Haettenschweiler","Arial Narrow",sans-serif;letter-spacing:.04em}
   nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
   nav .brand{display:flex;align-items:center;gap:.6rem}
   nav img{width:34px;height:34px;object-fit:contain}
-  nav .t{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t{font-family:"Anton","Haettenschweiler","Arial Narrow",sans-serif;font-size:1.25rem;letter-spacing:.06em}
   nav .t span{color:#FF3B41}
   nav .links{display:flex;align-items:center;gap:1rem}
   nav .links a{color:#A6A29C;font-size:.8rem;text-decoration:none}
   .nav-user{display:none;align-items:center;gap:.7rem;font-size:.8rem;color:#A6A29C}
-  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-family:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
   .btn:disabled{opacity:.5;cursor:default}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:#A6A29C}
   .btn.small{padding:.35rem .7rem;font-size:.75rem}
   .wrap{max-width:860px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
   /* login */
   #login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;gap:.9rem;padding:1rem}
-  .login-title{font-family:'Bebas Neue',sans-serif;font-size:2rem}
+  .login-title{font-family:"Anton","Haettenschweiler","Arial Narrow",sans-serif;font-size:2rem}
   .login-sub{color:#A6A29C;font-size:.85rem;text-align:center}
   .field-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#A6A29C}
-  .field-input,select.field-input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.65rem .8rem;font-family:'Outfit',sans-serif;font-size:.9rem}
+  .field-input,select.field-input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.65rem .8rem;font-family:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;font-size:.9rem}
   .field-input:focus{outline:none;border-color:#FF3B41}
   #login-box{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.6rem}
   .err{display:none;background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#ff8fa0;border-radius:8px;padding:.6rem .8rem;font-size:.82rem}
@@ -38,7 +38,7 @@
   .hint a{color:#FF3B41;text-decoration:underline;text-underline-offset:3px}
   /* main */
   #main-screen{display:none}
-  h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;margin:1.4rem 0 .8rem}
+  h2{font-family:"Anton","Haettenschweiler","Arial Narrow",sans-serif;font-size:1.6rem;margin:1.4rem 0 .8rem}
   h2 span{color:#FF3B41}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
@@ -48,10 +48,10 @@
   .ok-banner{display:none;background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a;border-radius:8px;padding:.6rem .8rem;font-size:.82rem;margin-top:.8rem}
   /* list */
   .team-block{margin-top:1.2rem}
-  .team-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#FF3B41;border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.5rem}
+  .team-name{font-family:"Anton","Haettenschweiler","Arial Narrow",sans-serif;font-size:1.15rem;color:#FF3B41;border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.5rem}
   .player-row{display:flex;align-items:center;gap:.8rem;padding:.5rem 0;border-bottom:1px dashed var(--line);font-size:.88rem}
   .player-row:last-child{border-bottom:none}
-  .dorsal{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;min-width:2.2rem;text-align:center;background:rgba(226,6,19,.15);border-radius:6px;padding:.15rem 0}
+  .dorsal{font-family:"Anton","Haettenschweiler","Arial Narrow",sans-serif;font-size:1.1rem;min-width:2.2rem;text-align:center;background:rgba(226,6,19,.15);border-radius:6px;padding:.15rem 0}
   .pname{flex:1}
   .ppos{color:#A6A29C;font-size:.75rem}
   .pfoto{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#222}

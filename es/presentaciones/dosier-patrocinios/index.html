@@ -30,7 +30,7 @@
 /* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
    component es pinta aquí amb els mateixos tokens, i per tant segueix el
    mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
-.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
 .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 44px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
 .lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
@@ -116,7 +116,7 @@
   .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
   .skip{position:absolute;left:-999px}
   .skip:focus{left:16px;top:16px;background:var(--red-solid);color:#fff;padding:10px 16px;z-index:999}
-  .lab{font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
+  .lab{font-family:var(--body);font-size:11.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
 
   /* HEADER · capçalera fosca constant, com a la resta de pàgines interiors */
   .head{position:sticky;top:0;z-index:100;background:rgba(16,16,14,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}
@@ -125,16 +125,16 @@
   .head-brand img{width:26px;height:26px}
   .head-nav{display:flex;align-items:center;gap:18px;overflow-x:auto;scrollbar-width:none;flex:1}
   .head-nav::-webkit-scrollbar{display:none}
-  .head-nav a{font-family:var(--display);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap;transition:color .15s}
+  .head-nav a{font-family:var(--display);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap;transition:color .15s}
   .head-nav a:hover{color:#fff}
   @media(max-width:900px){.head-nav a.opt{display:none}}
 
   /* Selector de mode: fosc (el d'aquesta peça) i clar, per a qui el necessiti */
   .theme{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;cursor:pointer;
-    font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:8px 12px;transition:border-color .3s var(--ease)}
+    font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:8px 12px;transition:border-color .3s var(--ease)}
   .theme:hover{border-color:var(--red)}
   .theme .ic{width:11px;height:11px;border-radius:50%;border:1.5px solid currentColor;display:block;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);flex-shrink:0}
-  @media(max-width:620px){.theme{padding:7px 9px;font-size:8.5px}}
+  @media(max-width:620px){.theme{padding:7px 9px;font-size:11px}}
   /* A 320 px la capçalera —nom, menú, commutador de mode i selector
      d'idioma— no hi cabia: el navegador eixamplava la finestra de disseny
      fins a 411 px i el botó de mode quedava fora de la pantalla, sense
@@ -151,7 +151,7 @@
      Diu on ets i deixa saltar a qualsevol secció sense tornar amunt. */
   .idx{position:sticky;top:60px;z-index:99;background:var(--panel);border-bottom:1px solid var(--line)}
   .idx-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:18px}
-  .idx-lab{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);flex-shrink:0}
+  .idx-lab{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);flex-shrink:0}
   @media(max-width:820px){.idx-lab{display:none}}
   /* Els extrems s'esvaeixen: diu que la barra es pot arrossegar i evita que
      una etiqueta tallada quedi seccionada en sec. */
@@ -159,11 +159,11 @@
     -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
     mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
   .idx-nav::-webkit-scrollbar{display:none}
-  .idx-nav a{position:relative;font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  .idx-nav a{position:relative;font-family:var(--body);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
     color:var(--muted);text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
   .idx-nav a:hover{color:var(--ink)}
   .idx-nav a[aria-current="true"]{color:var(--red);border-bottom-color:var(--red)}
-  .idx-more{flex-shrink:0;font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  .idx-more{flex-shrink:0;font-family:var(--body);font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
     color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:8px 13px;transition:border-color .2s var(--ease),color .2s var(--ease)}
   .idx-more:hover{border-color:var(--red);color:var(--red)}
   /* El salt s'atura per sota de les dues barres, no a sota seu. */
@@ -197,7 +197,7 @@
   /* FILETS DE SECCIÓ · el que fa que llegeixi com un diari */
   .sech{border-top:3px solid var(--red);padding:16px 0 14px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .sech h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;letter-spacing:.05em;line-height:1}
-  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .sech em{font-style:normal;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
   .sec{padding:clamp(44px,7vw,80px) 0 0}
   .sec:last-of-type{padding-bottom:clamp(44px,7vw,80px)}
 
@@ -210,7 +210,7 @@
   .b-num div:hover{background:var(--cream)}
   .b-num b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(28px,4.6vw,52px);line-height:.9;font-variant-numeric:tabular-nums;color:var(--ink)}
   .b-num .r b{color:var(--red)}
-  .b-num span{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+  .b-num span{display:block;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 
   /* SPLIT · foto + text sobre panell */
   .split{display:grid;grid-template-columns:1fr;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);margin-top:26px}
@@ -238,7 +238,7 @@
   .par .rule{background:rgba(255,255,255,.42)}
   @media(max-width:640px){.par .rule{height:1px}}
   .par .h{padding:30px 26px}
-  .par .h span{display:block;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.85}
+  .par .h span{display:block;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.85}
   .par .h b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(24px,3.6vw,40px);text-transform:uppercase;line-height:.96;margin-top:10px}
   /* .par-note i no .foot: el peu del lloc fa servir .foot amb fons negre i
      li pintava una franja fosca al mig del vermell. */
@@ -263,7 +263,7 @@
   .panel>p strong{color:var(--ink);font-weight:600}
   .two-col{display:grid;grid-template-columns:1fr;gap:8px 40px;margin-top:14px}
   @media(min-width:700px){.two-col{grid-template-columns:1fr 1fr}}
-  .two-col h4{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+  .two-col h3, .two-col h4{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
 
   /* BARRI · entitats i escoles */
   .partners-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:22px}
@@ -292,7 +292,7 @@
   .visit-card .vc-body{padding:18px}
   .visit-card h3{font-family:var(--display);font-weight:400;font-size:14px;letter-spacing:.02em;text-transform:uppercase;margin-bottom:6px}
   .visit-card p{font-size:12.5px;color:var(--muted);margin-bottom:12px}
-  .visit-card a{font-family:var(--body);font-weight:700;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink);text-decoration:none}
+  .visit-card a{font-family:var(--body);font-weight:700;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink);text-decoration:none}
 
   /* PATROCINADORS · mateixa graella i mides que /patrocinadors/, sobre placa
      blanca perquè els logos no es facin malbé en mode fosc. Els fitxers fan
@@ -321,7 +321,7 @@
   .closer h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,44px);text-transform:uppercase;margin-bottom:14px}
   .closer p{color:var(--muted);max-width:44ch;margin:0 auto 30px}
   .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:15px 30px;transition:all .2s}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:15px 30px;transition:all .2s}
   .btn.red{background:var(--red-solid);color:#fff}
   .btn.red:hover{background:#A8040E;color:#fff}
   .btn.ghost{border:1px solid var(--ink);color:var(--ink)}
@@ -330,7 +330,7 @@
   /* FOOTER · fosc constant, com a la resta del lloc */
   .foot{background:#10100E;color:#F5F5F5;border-top:1px solid rgba(255,255,255,.1);padding:50px 0 30px}
   .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;margin-bottom:34px}
-  .foot-col h3{font-family:var(--display);font-weight:400;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px}
+  .foot-col h3{font-family:var(--display);font-weight:400;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px}
   .foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px}
   .foot-col a:hover{color:#fff}
   .foot-btm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:11.5px;color:rgba(255,255,255,.55)}
@@ -393,7 +393,7 @@
     #proteccio .panel{padding:28px 34px}
     #proteccio .panel>p{font-size:12.5px}
     #proteccio .p-list li{padding:7px 0 7px 26px;font-size:12.5px}
-    #proteccio .two-col h4{margin-top:10px}
+    #proteccio .two-col h3, .two-col h4{margin-top:10px}
     .p-list{margin-top:12px}
     .p-list li{padding:10px 0 10px 28px}
     .sponsor img{filter:none;opacity:1}
@@ -407,7 +407,7 @@
   .tbl-wrap{overflow-x:auto;margin-top:26px;border:1px solid var(--line)}
   .tbl{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
   .tbl th,.tbl td{padding:14px 16px;text-align:right;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
-  .tbl thead th{border-top:0;font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.18em;
+  .tbl thead th{border-top:0;font-family:var(--body);font-size:11.5px;font-weight:700;letter-spacing:.18em;
     text-transform:uppercase;color:var(--muted);text-align:right}
   .tbl th:first-child,.tbl td:first-child{text-align:left;font-family:var(--display);font-weight:400;
     font-size:16px;letter-spacing:.03em;white-space:nowrap}
@@ -420,7 +420,7 @@
      llegeixi també quan la barra és curta. */
   .aud{display:grid;grid-template-columns:1fr;gap:30px;margin-top:26px}
   @media(min-width:820px){.aud{grid-template-columns:1fr 1fr}}
-  .aud h4{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.14em;
+  .aud h3, .aud h4{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--muted);margin-bottom:16px}
   .bar{display:grid;grid-template-columns:82px 1fr 52px;align-items:center;gap:12px;margin-bottom:9px;font-size:13px}
   .bar .k{color:var(--ink)}
@@ -444,8 +444,8 @@
   @media(min-width:1040px){.packs{grid-template-columns:repeat(4,1fr)}}
   .pack{background:var(--panel);border:1px solid var(--line);padding:26px 22px;display:flex;flex-direction:column}
   .pack.top{border-color:var(--red)}
-  .pack h4{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.4vw,26px);text-transform:uppercase;margin:10px 0 4px}
-  .pack .tag{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .pack h3, .pack h4{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.4vw,26px);text-transform:uppercase;margin:10px 0 4px}
+  .pack .tag{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
   .pack.top .tag{color:var(--red)}
   .pack p{font-size:13.5px;color:var(--muted);margin-top:10px}
   .pack ul{list-style:none;margin-top:16px}
@@ -571,7 +571,7 @@
       <a href="/presentacions/dossier-patrocinis/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/presentaciones/dosier-patrocinios/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/presentations/sponsorship-pack/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
-      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
+      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Modo oscuro</span>
     </button>
   </div>
 </header>
@@ -691,7 +691,7 @@
     <p class="tbl-note">En 2023·24 Instagram todavía no daba el dato de visualizaciones para fotos y carruseles, por eso aquella temporada solo es comparable en likes y volumen. Además del feed, en la temporada 2025·26 hay <strong>1.634 historias</strong>, con 1,63M de visualizaciones y 1,21M de cuentas alcanzadas.</p>
     <div class="aud" style="grid-template-columns:1fr">
       <div>
-        <h4>Seguidores al final de cada temporada</h4>
+        <h3>Seguidores al final de cada temporada</h3>
         <div class="bar"><span class="k">2023·24</span><span class="t"><span class="f alt" style="width:52%"></span></span><span class="v">2.800</span></div>
         <div class="bar"><span class="k">2024·25</span><span class="t"><span class="f alt" style="width:69%"></span></span><span class="v">3.700</span></div>
         <div class="bar"><span class="k">2025·26</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">5.382</span></div>
@@ -779,12 +779,12 @@
       </ul>
       <div class="two-col">
         <div>
-          <h4>Red de colaboraciones</h4>
+          <h3>Red de colaboraciones</h3>
           <p style="font-size:14px;color:var(--muted)">La temporada 25·26 hemos mencionado o colaborado con
           <strong style="color:var(--ink)">197 cuentas diferentes</strong>: comercios del barrio, fotografía y prensa local, la Federació Catalana de Bàsquet y otros clubes.</p>
         </div>
         <div>
-          <h4>Lo que más alcance hace</h4>
+          <h3>Lo que más alcance hace</h3>
           <p style="font-size:14px;color:var(--muted)">Evento, jugadora destacada y valores de barrio. La pieza más vista de la temporada llega a <strong style="color:var(--ink)">35,6K visualizaciones</strong>, y tres de las cinco primeras son de equipos femeninos.</p>
         </div>
       </div>
@@ -926,7 +926,7 @@
     <div class="packs">
       <div class="pack">
         <span class="tag">Bronce</span>
-        <h4>Presencia digital</h4>
+        <h3>Presencia digital</h3>
         <p>La manera sencilla de empezar.</p>
         <ul>
           <li>Logo en las stories semanales</li>
@@ -936,7 +936,7 @@
       </div>
       <div class="pack">
         <span class="tag">Plata</span>
-        <h4>Digital y pabellón</h4>
+        <h3>Digital y pabellón</h3>
         <p>La marca también se ve en los días de partido.</p>
         <ul>
           <li>Banderola en La Nau del Clot</li>
@@ -946,7 +946,7 @@
       </div>
       <div class="pack top">
         <span class="tag">Oro</span>
-        <h4>Máxima visibilidad</h4>
+        <h3>Máxima visibilidad</h3>
         <p>La marca, ligada a los eventos del club.</p>
         <ul>
           <li>Naming de un evento</li>
@@ -956,7 +956,7 @@
       </div>
       <div class="pack">
         <span class="tag">A medida</span>
-        <h4>Lo hablamos</h4>
+        <h3>Lo hablamos</h3>
         <p>Colaboraciones en especie incluidas.</p>
         <ul>
           <li>Propuesta hecha para tu empresa</li>
@@ -1041,7 +1041,7 @@
   function apply(mode){
     if(mode==='light'){ document.documentElement.setAttribute('data-theme','light'); }
     else{ document.documentElement.removeAttribute('data-theme'); }
-    lbl.textContent = (mode==='light') ? 'Mode clar' : 'Mode fosc';
+    lbl.textContent = (mode==='light') ? 'Modo claro' : 'Modo oscuro';
     btn.setAttribute('title', (mode==='light') ? 'Canviar a mode fosc' : 'Canviar a mode clar');
     var meta=document.querySelector('meta[name="theme-color"]');
     if(meta) meta.setAttribute('content', mode==='light'?'#FFFFFF':'#10100E');

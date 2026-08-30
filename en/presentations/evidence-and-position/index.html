@@ -27,7 +27,7 @@
 /* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
    component es pinta aquí amb els mateixos tokens, i per tant segueix el
    mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
-.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
 .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 44px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
 .lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
@@ -103,7 +103,7 @@ p strong,li strong{color:var(--paper);font-weight:600}
 .card{background:var(--panell);padding:22px 20px}
 .card .k{font-family:'Anton',sans-serif;color:var(--vermell);font-size:12px;letter-spacing:.14em;
   text-transform:uppercase;margin-bottom:8px}
-.card h4{font-size:15.5px;color:var(--paper);font-weight:600;line-height:1.35;margin-bottom:8px}
+.card h3, .card h4{font-size:15.5px;color:var(--paper);font-weight:600;line-height:1.35;margin-bottom:8px}
 .card p{font-size:14px;color:#A6A29C}
 .card .d{font-family:'Anton',sans-serif;font-size:30px;color:var(--vermell);line-height:1;margin-bottom:6px;
   font-variant-numeric:tabular-nums}
@@ -156,7 +156,7 @@ footer p{font-size:12.5px;color:var(--gris)}
 .part p{margin-top:10px}
 .iv{background:var(--panell);border:1px solid var(--linia);border-radius:3px;padding:20px 22px;margin:14px 0}
 .iv .d{font-family:'Anton',sans-serif;font-size:12.5px;color:var(--vermell);letter-spacing:.12em;text-transform:uppercase}
-.iv h4{font-size:16px;color:var(--paper);font-weight:600;margin:6px 0 8px;line-height:1.35}
+.iv h3, .iv h4{font-size:16px;color:var(--paper);font-weight:600;margin:6px 0 8px;line-height:1.35}
 .iv p{font-size:14.5px;color:#A6A29C}
 .iv .q2{margin-top:10px;padding-left:14px;border-left:2px solid var(--vermell);font-style:italic;color:var(--cos);font-size:15px}
 .iv a{font-size:13px;color:var(--gris)}
@@ -187,9 +187,9 @@ ol.caps li b{color:var(--paper);display:block;margin-bottom:2px}
 .gapl span{font-size:15px;color:var(--cos)}
 .quad{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--linia);border:1px solid var(--linia);margin:22px 0}
 .quad>div{background:var(--panell);padding:20px}
-.quad h4{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--vermell);margin-bottom:8px}
+.quad h3, .quad h4{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--vermell);margin-bottom:8px}
 .quad p{font-size:14.5px;color:#A6A29C;margin:0}
-.tag2{display:inline-block;font-family:'Anton',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+.tag2{display:inline-block;font-family:'Anton',sans-serif;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
   padding:3px 7px;border:1px solid var(--linia);color:var(--gris);white-space:nowrap}
 .warn{background:rgba(184,130,42,.10);border:1px dashed rgba(184,130,42,.6);padding:18px 20px;border-radius:3px;margin:24px 0;font-size:14.5px;color:#D9B778}
 .warn b{color:#fff}
@@ -204,23 +204,23 @@ ol.caps li b{color:var(--paper);display:block;margin-bottom:2px}
   .head-brand img{width:26px;height:26px}
   .head-nav{display:flex;align-items:center;gap:18px;overflow-x:auto;scrollbar-width:none;flex:1}
   .head-nav::-webkit-scrollbar{display:none}
-  .head-nav a{font-family:'Anton',sans-serif;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  .head-nav a{font-family:'Anton',sans-serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
     color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap}
   .head-nav a:hover{color:#fff}
   @media(max-width:900px){.head-nav a.opt{display:none}}
   .idx{position:sticky;top:60px;z-index:99;background:var(--panell);border-bottom:1px solid var(--linia)}
   .idx-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:18px}
-  .idx-lab{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gris);flex-shrink:0}
+  .idx-lab{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gris);flex-shrink:0}
   @media(max-width:820px){.idx-lab{display:none}}
   .idx-nav{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;scroll-behavior:smooth;
     -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
     mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
   .idx-nav::-webkit-scrollbar{display:none}
-  .idx-nav a{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);
+  .idx-nav a{font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);
     text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent}
   .idx-nav a:hover{color:var(--paper)}
   .idx-nav a[aria-current="true"]{color:var(--vermell);border-bottom-color:var(--vermell)}
-  .idx-more{flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  .idx-more{flex-shrink:0;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
     color:var(--paper);text-decoration:none;border:1px solid var(--linia);border-radius:8px;padding:8px 13px}
   .idx-more:hover{border-color:var(--vermell);color:var(--vermell)}
   [id]{scroll-margin-top:112px}
@@ -229,7 +229,7 @@ ol.caps li b{color:var(--paper);display:block;margin-bottom:2px}
   .crumb a:hover{color:var(--paper)}
   .foot{border-top:1px solid var(--linia);padding:44px 0 30px;margin-top:40px}
   .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;margin-bottom:30px}
-  .foot-col h3{font-family:'Anton',sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  .foot-col h3{font-family:'Anton',sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--gris);margin:0 0 12px}
   .foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px}
   .foot-col a:hover{color:#fff}
@@ -586,7 +586,7 @@ ol.caps li b{color:var(--paper);display:block;margin-bottom:2px}
     <h2>Interviews and statements, 2014–2026</h2>
 
     <div class="iv"><div class="d">20 · 05 · 2014 · FEB.es · official launch</div>
-      <h4>«Marc Gasol founds a school club in Girona»</h4>
+      <h3>«Marc Gasol founds a school club in Girona»</h3>
       <p>Launch of the Club Escola de Bàsquet Marc Gasol alongside the mayor of Girona, Carles Puigdemont. The school is created to develop players «in sporting, academic and personal terms».</p>
       <div class="q2">«We start with the utmost humility, with commitment, effort and a methodology of our own.»</div>
       <div class="q2">«I have made my dream come true. I have always wanted to give the people of Girona back everything they gave me.»</div>
@@ -594,75 +594,75 @@ ol.caps li b{color:var(--paper);display:block;margin-bottom:2px}
     </div>
 
     <div class="iv"><div class="d">26 · 10 · 2017 · FEB.es · institutional feature</div>
-      <h4>«Bàsquet Girona: a team, a youth system, a city… and Marc Gasol»</h4>
+      <h3>«Bàsquet Girona: a team, a youth system, a city… and Marc Gasol»</h3>
       <p>The feature that sets out the project's three guiding principles —<strong>effort, commitment and methodology</strong>— and their order: the youth system as starting point and foundation, the elite as the goal «but without rushing». That same year the club created its first senior team (EBA, coached by Quim Costa): three seasons after the school, not before.</p>
       <p><a href="http://www.feb.es/2017/10/26/baloncesto/basquet-girona-equipo-una-cantera-una-ciudad-marc-gasol/72539.aspx" target="_blank" rel="noopener">feb.es/2017/10/26 · article 72539</a></p>
     </div>
 
     <div class="iv"><div class="d">08 · 03 · 2019 · Deia</div>
-      <h4>«Marc Gasol sets an example in Girona»</h4>
+      <h3>«Marc Gasol sets an example in Girona»</h3>
       <p>A piece on his personal involvement with the club and the city while he was still playing in the NBA (the championship season with Toronto).</p>
       <p><a href="https://www.deia.eus/deportes/2019/03/08/marc-gasol-da-ejemplo-girona-4796732.html" target="_blank" rel="noopener">deia.eus · 08/03/2019</a></p>
     </div>
 
     <div class="iv"><div class="d">2019 · El Desmarque · after winning the World Cup with Spain</div>
-      <h4>«What matters is inspiring young people to be good people»</h4>
+      <h3>«What matters is inspiring young people to be good people»</h3>
       <div class="q2">«Basketball is not as important as the message we can send to the younger generations to inspire them to be good people.»</div>
       <p>A statement after the 2019 World Cup in China — the most quoted formulation of his philosophy: sport as the vehicle, the person as the end.</p>
       <p><a href="https://eldesmarque.com/actualidad/baloncesto/mundial-2019/1342307-marc-gasol-y-los-valores-en-el-deportes-lo-importante-es-inspirar-a-los-jovenes-a-ser-buenas-personas" target="_blank" rel="noopener">eldesmarque.com · 2019 World Cup</a></p>
     </div>
 
     <div class="iv"><div class="d">Interview · Unisport</div>
-      <h4>Marc Gasol on his own development as a player</h4>
+      <h3>Marc Gasol on his own development as a player</h3>
       <p>An in-depth interview about his formative years (Barça, Lausanne, Girona) and how they shaped his understanding of how a young player develops.</p>
       <p><a href="https://unisport.es/entrevista-con-marc-gasol/" target="_blank" rel="noopener">unisport.es · interview</a></p>
     </div>
 
     <div class="iv"><div class="d">11 · 2021 · ESPN / CBS Sports</div>
-      <h4>He returns from the NBA to play for his own club, in LEB Oro</h4>
+      <h3>He returns from the NBA to play for his own club, in LEB Oro</h3>
       <p>After 13 NBA seasons and two championship rings, he decides not to retire: he signs as a player for the club he founded and presides over, in Spain's second division. The opposite of the usual move: the star drops down to the project's level, not the other way round.</p>
       <p><a href="https://www.espn.com/nba/story/_/id/32714742/marc-gasol-play-spanish-club-girona-which-founded-2014" target="_blank" rel="noopener">espn.com · Nov. 2021</a></p>
     </div>
 
     <div class="iv"><div class="d">05 · 2022 · HoyMagazine</div>
-      <h4>«We are not going to rush to reach the ACB»</h4>
+      <h3>«We are not going to rush to reach the ACB»</h3>
       <div class="q2">«We are not going to rush to reach the ACB.»</div>
       <p>The line that defines the project's doctrine weeks before, precisely, winning promotion: the pace is set by the club's solidity, not by the urgency of the result. That same year he had launched the 3x3 section (2021) and then the women's 3x3, described as «one of the main lines of growth».</p>
       <p><a href="https://www.hoymagazine.es/marc-gasol-sobre-el-basquet-girona-no-vamos-a-correr-para-llegar-a-la-acb/" target="_blank" rel="noopener">hoymagazine.es · May 2022</a></p>
     </div>
 
     <div class="iv"><div class="d">06 · 2022 · CBS Sports</div>
-      <h4>He wins promotion to the ACB as player, owner and president</h4>
+      <h3>He wins promotion to the ACB as player, owner and president</h3>
       <p>The LEB Oro playoff final: Bàsquet Girona 66 – Estudiantes 60, with Gasol on court (11 points, 8 rebounds, 4 steals, 2 blocks; averaging 14.5 points and 8.2 rebounds over the season). Eight years after founding the school, the first team reaches the top tier.</p>
       <p><a href="https://www.cbssports.com/nba/news/marc-gasol-leads-girona-to-spanish-league-promotion-as-player-owner-and-team-president" target="_blank" rel="noopener">cbssports.com · Jun. 2022</a> · Esport3: <a href="https://www.3cat.cat/esport3/el-projecte-de-marc-gasol-descola-de-basquet-a-equip-dacb-en-vuit-anys/noticia/3170964/" target="_blank" rel="noopener">«D'escola de bàsquet a equip d'ACB en vuit anys»</a></p>
     </div>
 
     <div class="iv"><div class="d">L'Esportiu de Catalunya · as president</div>
-      <h4>«Ens vam marcar l'objectiu de tenir un equip amb caràcter i ara mateix no ho estem veient»</h4>
+      <h3>«Ens vam marcar l'objectiu de tenir un equip amb caràcter i ara mateix no ho estem veient»</h3>
       <p>An interview at a low point for the first team: the demanding president applying to the senior side the same standard of commitment he asks of the youth system.</p>
       <p><a href="https://www.lesportiudecatalunya.cat/basquet/article/2476632-marc-gasol-ens-vam-marcar-l-objectiu-de-tenir-un-equip-amb-caracter-i-ara-mateix-no-ho-estem-veient.html" target="_blank" rel="noopener">lesportiudecatalunya.cat</a></p>
     </div>
 
     <div class="iv"><div class="d">FIATC / El Nacional · video interview</div>
-      <h4>Marc Gasol, president of Bàsquet Girona</h4>
+      <h3>Marc Gasol, president of Bàsquet Girona</h3>
       <p>An interview on running the club and the constant evolution professional sport demands (excerpts also in El Nacional, Feb. 2026).</p>
       <p><a href="https://www.facebook.com/fiatcseguros/videos/4410984002513153/" target="_blank" rel="noopener">video · FIATC Facebook</a></p>
     </div>
 
     <div class="iv"><div class="d">01 · 2024 · Público / general press</div>
-      <h4>He announces his definitive retirement as a player</h4>
+      <h3>He announces his definitive retirement as a player</h3>
       <p>Press conference at the Cinema Texas in Barcelona: 39 years old, 20 seasons, one ring, two World Cups, two EuroBaskets, two Olympic silvers. The player retires; the president of the development project carries on.</p>
       <p><a href="https://www.publico.es/sociedad/marc-gasol-anuncia-retirada-baloncesto.html" target="_blank" rel="noopener">publico.es · Jan. 2024</a></p>
     </div>
 
     <div class="iv"><div class="d">26 · 12 · 2024 · El Español</div>
-      <h4>«Marc Gasol's life now: from keeping basketball alive in Girona to his Hall of Fame candidacy»</h4>
+      <h3>«Marc Gasol's life now: from keeping basketball alive in Girona to his Hall of Fame candidacy»</h3>
       <p>A profile of his present: focused on sustaining Bàsquet Girona (which after its ACB spell competes in LEB Oro) and a Hall of Fame candidate alongside Pau.</p>
       <p><a href="https://www.elespanol.com/deportes/baloncesto/20241226/vida-actual-marc-gasol-no-dejar-caer-baloncesto-girona-candidatura-hall-of-fame-nba-junto-pau/911659244_0.html" target="_blank" rel="noopener">elespanol.com · Dec. 2024</a></p>
     </div>
 
     <div class="iv"><div class="d">Quoted in the club's thesis</div>
-      <h4>«L'esport és una eina per educar»</h4>
+      <h3>«L'esport és una eina per educar»</h3>
       <div class="q2">«L'esport és una eina per educar.»</div>
       <p>The quote CB Grup Barna's research chose as its closing line, explaining why his project started with a school and not with a first team. Paired in the report with Coalter's: a tool, not a miracle.</p>
       <p>Executive summary of the state of the art · CB Grup Barna, August 2026</p>
@@ -837,10 +837,10 @@ ol.caps li b{color:var(--paper);display:block;margin-bottom:2px}
     <div class="secn">VI·1 · Diagnosis</div>
     <h2>Four honest readings</h2>
     <div class="quad">
-      <div><h4>What the data proves</h4><p>That the club communicates above its sporting category and in line with the real size of its structure. That the brand —neighbourhood, development, women's basketball, values— generates attachment without needing an FEB senior side to tow the audience along. And that the argument is twofold: community <em>and</em> structure, both verifiable in public sources.</p></div>
-      <div><h4>What the data does NOT prove</h4><p>Neither reach, nor engagement, nor commercial value equivalent to a professional club. UEM and Prat have federation television and FEB gate receipts; Sant Adrià has a women's story of a purity a mixed account cannot replicate. Community size is one variable, not the whole picture.</p></div>
-      <div><h4>The internal anomaly</h4><p>32 federated teams and around 450 families sustain 7,096 followers: <strong>222 per team</strong>. The specialists convert at twice that rate (Sant Adrià, 532; Almeda, 455). The ceiling is not set by the market or by the structure —it is the third largest in the field compared— it is set by the conversion of identity into audience.</p></div>
-      <div><h4>The advantage not yet used</h4><p>Those ahead are ahead by one of two routes: an FEB senior side (UEM, Prat, Cornellà) or niche purity (Sant Adrià, Almeda). The Barna has a third route nobody in the group occupies: being the <strong>medium</strong> of youth basketball —tactics, health, families, coaches— from the single account of a club that does all of it.</p></div>
+      <div><h3>What the data proves</h3><p>That the club communicates above its sporting category and in line with the real size of its structure. That the brand —neighbourhood, development, women's basketball, values— generates attachment without needing an FEB senior side to tow the audience along. And that the argument is twofold: community <em>and</em> structure, both verifiable in public sources.</p></div>
+      <div><h3>What the data does NOT prove</h3><p>Neither reach, nor engagement, nor commercial value equivalent to a professional club. UEM and Prat have federation television and FEB gate receipts; Sant Adrià has a women's story of a purity a mixed account cannot replicate. Community size is one variable, not the whole picture.</p></div>
+      <div><h3>The internal anomaly</h3><p>32 federated teams and around 450 families sustain 7,096 followers: <strong>222 per team</strong>. The specialists convert at twice that rate (Sant Adrià, 532; Almeda, 455). The ceiling is not set by the market or by the structure —it is the third largest in the field compared— it is set by the conversion of identity into audience.</p></div>
+      <div><h3>The advantage not yet used</h3><p>Those ahead are ahead by one of two routes: an FEB senior side (UEM, Prat, Cornellà) or niche purity (Sant Adrià, Almeda). The Barna has a third route nobody in the group occupies: being the <strong>medium</strong> of youth basketball —tactics, health, families, coaches— from the single account of a club that does all of it.</p></div>
     </div>
   </div>
 </section>

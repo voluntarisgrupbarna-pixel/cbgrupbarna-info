@@ -30,7 +30,7 @@
 /* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
    component es pinta aquí amb els mateixos tokens, i per tant segueix el
    mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
-.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
 .lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 44px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
 .lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
@@ -115,7 +115,7 @@
   .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
   .skip{position:absolute;left:-999px}
   .skip:focus{left:16px;top:16px;background:var(--red-solid);color:#fff;padding:10px 16px;z-index:999}
-  .lab{font-family:var(--body);font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
+  .lab{font-family:var(--body);font-size:11.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
 
   .head{position:sticky;top:0;z-index:100;background:rgba(16,16,14,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}
   .head-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);height:60px;display:flex;align-items:center;gap:24px}
@@ -123,14 +123,14 @@
   .head-brand img{width:26px;height:26px}
   .head-nav{display:flex;align-items:center;gap:18px;overflow-x:auto;scrollbar-width:none;flex:1}
   .head-nav::-webkit-scrollbar{display:none}
-  .head-nav a{font-family:var(--display);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap;transition:color .15s}
+  .head-nav a{font-family:var(--display);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap;transition:color .15s}
   .head-nav a:hover{color:#fff}
   @media(max-width:900px){.head-nav a.opt{display:none}}
   .theme{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;cursor:pointer;
-    font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:8px 12px;transition:border-color .3s var(--ease)}
+    font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:8px 12px;transition:border-color .3s var(--ease)}
   .theme:hover{border-color:var(--red)}
   .theme .ic{width:11px;height:11px;border-radius:50%;border:1.5px solid currentColor;display:block;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);flex-shrink:0}
-  @media(max-width:620px){.theme{padding:7px 9px;font-size:8.5px}}
+  @media(max-width:620px){.theme{padding:7px 9px;font-size:11px}}
   /* A 320 px la capçalera —nom, menú, commutador de mode i selector
      d'idioma— no hi cabia: el navegador eixamplava la finestra de disseny
      fins a 411 px i el botó de mode quedava fora de la pantalla, sense
@@ -155,7 +155,7 @@
 
   .sech{border-top:3px solid var(--red);padding:16px 0 14px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .sech h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;letter-spacing:.05em;line-height:1}
-  .sech em{font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .sech em{font-style:normal;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
   /* Una presentació per fila: foto a l'esquerra, de què va a la dreta.
      Afegir-ne una de nova és copiar un bloc .pres. */
@@ -172,8 +172,8 @@
   .pres-body h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,3.2vw,38px);text-transform:uppercase;line-height:1.02;margin:10px 0 12px}
   .pres-body p{font-size:15px;color:var(--muted);max-width:52ch}
   .pres-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-  .pres-meta span{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 11px}
-  .pres-go{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red-ink)}
+  .pres-meta span{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 11px}
+  .pres-go{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red-ink)}
   .pres-go i{display:block;width:26px;height:1px;background:var(--red);transition:width .3s var(--ease)}
   .pres:hover .pres-go i{width:44px}
 
@@ -185,7 +185,7 @@
   .closer h2{font-family:var(--display);font-weight:400;font-size:clamp(26px,3.6vw,40px);text-transform:uppercase;margin-bottom:14px}
   .closer p{color:var(--muted);max-width:44ch;margin:0 auto 28px}
   .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:15px 30px;transition:all .2s}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:15px 30px;transition:all .2s}
   .btn.red{background:var(--red-solid);color:#fff}
   .btn.red:hover{background:#A8040E;color:#fff}
   .btn.ghost{border:1px solid var(--ink);color:var(--ink)}
@@ -193,7 +193,7 @@
 
   .foot{background:#10100E;color:#F5F5F5;border-top:1px solid rgba(255,255,255,.1);padding:50px 0 30px}
   .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;margin-bottom:34px}
-  .foot-col h3{font-family:var(--display);font-weight:400;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px}
+  .foot-col h3{font-family:var(--display);font-weight:400;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px}
   .foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px}
   .foot-col a:hover{color:#fff}
   .foot-btm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:11.5px;color:rgba(255,255,255,.55)}
@@ -286,7 +286,7 @@
       <a href="/presentacions/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/presentaciones/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/presentations/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
     <button class="theme" id="theme" type="button" aria-live="polite">
-      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Mode fosc</span>
+      <span class="ic" aria-hidden="true"></span><span id="theme-lbl">Modo oscuro</span>
     </button>
   </div>
 </header>
@@ -465,7 +465,7 @@
   function apply(mode){
     if(mode==='light'){ document.documentElement.setAttribute('data-theme','light'); }
     else{ document.documentElement.removeAttribute('data-theme'); }
-    lbl.textContent = (mode==='light') ? 'Mode clar' : 'Mode fosc';
+    lbl.textContent = (mode==='light') ? 'Modo claro' : 'Modo oscuro';
     btn.setAttribute('title', (mode==='light') ? 'Canviar a mode fosc' : 'Canviar a mode clar');
     var meta=document.querySelector('meta[name="theme-color"]');
     if(meta) meta.setAttribute('content', mode==='light'?'#FFFFFF':'#10100E');
