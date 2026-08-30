@@ -159,6 +159,7 @@
     var teniaFocus = barra.contains(document.activeElement);
     barra.remove();
     barra = null;
+    document.body.classList.remove('cbgb-gal-obert');
     document.removeEventListener('keydown', escapa);
     if (teniaFocus) {
       var desti = document.getElementById('contingut') || document.querySelector('main');
@@ -207,6 +208,12 @@
     });
 
     document.body.appendChild(barra);
+    // La pestanya d'admin viu a baix a la dreta, just on hi ha els botons de
+    // consentiment. No es pot amagar (ha de ser sempre visible) ni pot tapar
+    // un boto de consentiment: se li publica l'alcada de la barra perque
+    // pugui pujar per sobre mentre la barra hi sigui.
+    document.documentElement.style.setProperty('--cbgb-gal-h', barra.offsetHeight + 'px');
+    document.body.classList.add('cbgb-gal-obert');
     document.addEventListener('keydown', escapa);
     barra.querySelector('[data-cbgb="si"]').focus();
   }
@@ -282,8 +289,12 @@
       'background:#10100E;border:1px solid rgba(255,255,255,.25);border-radius:999px;' +
       'padding:9px 16px;text-decoration:none;opacity:.62;transition:opacity .25s}' +
       '.cbgb-admin-tab:hover,.cbgb-admin-tab:focus-visible{opacity:1;border-color:#E20613}' +
-      /* A mòbil la pantalla ja va justa i és un accés d'equip, no de club. */
-      '@media(max-width:900px){.cbgb-admin-tab{display:none}}';
+      /* Es veu SEMPRE, també a mòbil: decisió de l'Ana. S'amagava perquè, quan
+         estava a dalt, tapava el commutador d'idioma; ara que és a baix a la
+         dreta ja no tapa res. El WhatsApp va a l'altre costat. */
+      'body.cbgb-gal-obert .cbgb-admin-tab{bottom:calc(var(--cbgb-gal-h,0px) + 12px)}' +
+      '@media(max-width:900px){.cbgb-admin-tab{bottom:12px;right:12px;padding:10px 15px}' +
+      'body.cbgb-gal-obert .cbgb-admin-tab{bottom:calc(var(--cbgb-gal-h,0px) + 10px)}}';
     document.head.appendChild(est);
     var link = document.createElement('a');
     link.href = '/admin/';
