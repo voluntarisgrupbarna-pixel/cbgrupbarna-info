@@ -2561,3 +2561,108 @@ contradicció aritmètica més gran que li queda al web.
 que ja estava anotat com a obsolet (el real és 7.096, agost 2026). Quan es
 toqui el 8,91M convindria arreglar els dos alhora, que viuen a la mateixa
 graella de xifres.
+
+---
+
+## 29-08-2026 (tancament) — Inventari de «les dades de la veritat»
+
+Resum consolidat de tota la sessió d'auditoria de dades, perquè no quedi
+repartit en cinc blocs. **Referència visual publicada** (xifra a xifra, amb
+procedència i estat de cadascuna):
+<https://claude.ai/code/artifact/8c674f79-ffc5-4531-8280-e2727bb8519d>
+
+Criteri que s'ha fet servir per a tot el que hi ha aquí sota:
+
+- **Comprovable** — hi ha una font al repositori (`data.json`,
+  `partits/data.json`) o citada públicament.
+- **Dada interna** — la manté el club, no la valida ningú de fora. No és
+  pitjor, però s'ha de dir.
+- **En conflicte** — el web diu dues coses alhora.
+
+Tot el que és «comprovable» s'ha llegit **del fitxer que genera la dada**,
+no de la pàgina que la mostra.
+
+### Per què el robot només veu 15 equips — explicat per l'Ana
+
+Això mereix quedar escrit perquè és la clau de tot l'embolic dels equips, i
+no és cap error del web ni del robot:
+
+> **«En funció d'edat i categoria es programen els partits més tard, i la
+> federació encara no els ha pujat tots.»** (Ana, 29/08/2026)
+
+`partits/data.json` (temporada 2026-27, baixat el 13/08/2026) porta **15
+equips**, i tots són **Cadet, Infantil, Júnior i Sènior**. Ni un Premini,
+Mini ni Preinfantil. **El 15 no és la mida del club: és quants calendaris
+ha publicat la FCBQ a dia d'avui**, i creixerà sol cada setmana que la
+federació en pengi més. Per això `/partits/equips/` i les fitxes de
+`/empreses/` i `/posicionament/` ara diuen «15 amb calendari a la web» i no
+«15 equips federats», que era el que feia pensar que el club només en tenia
+quinze.
+
+Les quatre xifres d'equips, doncs, **no es contradiuen: són quatre coses**:
+
+| Xifra | Què és | Estat |
+|---|---|---|
+| **15** | Calendaris publicats per la FCBQ avui. Subconjunt temporal. | Comprovable |
+| **32** | Equips federats la temporada 2025-26 (17 M + 15 F). | Comprovable, citat |
+| **38** | Tot el que entrenava al club 25-26: 32 federats + 6 sense fitxa (3 d'Escoleta, Barna Màgics a l'ACELL, 2 de lliga escolar). | Comprovable, citat |
+| **34+** | La xifra viva d'aquesta temporada. | **Dada interna** |
+
+### Decisions preses per l'Ana avui
+
+1. **Audiència per gènere: es queda el 58,8% homes / 41,2% dones.**
+   («deja el 58,8».) És la lectura vigent i no s'hi toca res.
+2. **Visualitzacions de la temporada 25-26: 8 milions.** Confirmat que el
+   període és la temporada, no l'any natural, i per tant substitueix el
+   6,44M que hi havia publicat. Aplicat, amb el creixement recalculat a
+   +65%.
+
+### El que queda obert, per ordre de gravetat
+
+1. **Les «8,91M de visualitzacions acumulades des de l'obertura» són
+   aritmèticament impossibles.** Dues temporades ja sumen 12,86M. O està
+   mal etiquetat (i és una finestra de 12 mesos, cosa que explicaria per
+   què s'assembla als 8M), o és un acumulat antic. Viu a **set pàgines**.
+   Detall complet al bloc de les 20:00 d'avui.
+2. **El 34+ es presenta com a «font federativa» i avui no ho és.** La
+   xifra pot ser bona; l'etiqueta no s'aguanta fins que la FCBQ hagi
+   publicat tots els calendaris. Mentrestant, de fet, és una dada interna.
+   O es canvia l'etiqueta, o s'espera i s'actualitza quan la federació
+   acabi de penjar-los.
+3. **`/grup-barna-dades-oficials/` diu «supera els 7.100 seguidors» i la
+   xifra citada és 7.096.** No supera 7.100. És poca cosa, però és un
+   arrodoniment cap amunt **a la pàgina que el web presenta com a font de
+   veritat**, que és precisament on no es pot fer.
+4. **El 5.382 de seguidors segueix viu als dossiers de patrocinis** (ca/es/en
+   i els blogs «Per què patrocinar un club de barri»). El real és 7.096:
+   més de 1.700 de diferència, en pàgines indexables. Es pot arreglar avui,
+   la font ja existeix. Convé fer-ho **alhora que el 8,91M**, que viu a la
+   mateixa graella de xifres.
+5. **«450 jugadors» i «450 famílies» no poden ser la mateixa xifra.** Hi ha
+   germans al club. Una de les dues necessita repàs.
+6. **Les «~2 milions d'impressions mensuals» segueixen a dades oficials.**
+   Es van retirar del briefing el 25/08 *precisament per no ser
+   verificables*. És una decisió ja presa que falta aplicar aquí.
+7. **El 53,7% d'audiència femenina necessita etiqueta, no esborrat.** El
+   58,8% ja està decidit; al 53,7% només li falta dir quin període i quina
+   mètrica mesura, per deixar de semblar-ne el contrari. Sosté la Teoria T5
+   sencera del dossier: no es toca la xifra.
+8. **El desglossament per gènere del fons 8M** («entre 35 i 38 equips, 20
+   femenins sobre 35, 57%») és d'una temporada anterior i té aritmètica
+   pròpia. Necessita un recompte real 2026-27, no una substitució de xifra.
+9. **El `32 federats` dels dossiers i el benchmark** contradiu el 34+ de
+   portada. És una xifra datada i citada de 2025-26 i canviar-la sense
+   recompte real trencaria el benchmark («32 = 3r del seu univers»).
+10. **Cosmètic: `+34` vs `34+`.** La portada escriu una forma i la resta del
+    lloc l'altra. Cap és un error; són dues convencions per a la mateixa
+    xifra. Triar-ne una el dia del fitxer mestre.
+
+### I la feina de fons que tot això assenyala
+
+Cap d'aquestes contradiccions s'hauria pogut escriure si les xifres
+sortissin d'un sol lloc. **Avui `data.json` només té partners i temporada**:
+no té equips, ni jugadors, ni xarxes, ni audiències. Ampliar-lo —amb el
+`llms.txt` i `/grup-barna-dades-oficials/` alimentant-se'n— és la
+recomanació #1 de l'auditoria de l'Ana i l'única manera que això no torni a
+passar d'aquí a tres mesos. Aquesta sessió ha apedaçat unes vint pàgines a
+mà, que és exactament el patró que crea el problema.
