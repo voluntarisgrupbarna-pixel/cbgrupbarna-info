@@ -72,8 +72,8 @@ img { max-width: 100%; height: auto; display: block; }
 .center { text-align: center; }
 
 h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.04; }
-.eyebrow { font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted); }
-/* L'etiqueta va a 9,5-10 px: amb --red sobre crema es queda en 4,37:1, just per
+.eyebrow { font-family: var(--body); font-size: 11.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted); }
+/* L'etiqueta és text petit: amb --red sobre crema es queda en 4,37:1, just per
    sota del minim. --red-ink es el token que el sistema reserva per a text
    vermell sobre fons clar (6,93:1 sobre crema, 7,81:1 sobre blanc). */
 .eyebrow.red { color: var(--red-ink); }
@@ -88,7 +88,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 /* flex-shrink:0: el nom del club porta white-space:nowrap, i si la caixa
    s'encongeix el text en surt per la dreta i se solapa amb el menú. Qui ha
    de cedir espai és .head-nav, que sap fer scroll. */
-.head-brand { display: flex; align-items: center; flex-shrink: 0; min-height: 44px; gap: 11px; }
+.head-brand { display: flex; align-items: center; flex-shrink: 0; min-width: 44px; min-height: 44px; gap: 11px; }
 .head-brand img { width: 30px; height: 30px; object-fit: contain; }
 .head-brand span { font-family: var(--body); font-size: clamp(10px, 1.5vw, 12.5px); letter-spacing: 0.32em; text-transform: uppercase; white-space: nowrap; }
 /* min-width:0 desfà el mínim per defecte d'un fill de flex (min-width:auto),
@@ -100,7 +100,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
    igual que ja feia per sota de 1080px, però sense esperar-hi. */
 .head-nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 28px); min-width: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .head-nav::-webkit-scrollbar { display: none; }
-.head-nav a { position: relative; display: inline-flex; align-items: center; flex-shrink: 0; min-height: 44px; padding: 10px 0; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; }
+.head-nav a { position: relative; display: inline-flex; align-items: center; flex-shrink: 0; min-height: 44px; padding: 10px 0; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 4px; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
 @media (max-width: 1080px) { .head-nav a.opt { display: none; } }
@@ -119,22 +119,24 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
    Fins ara cada pàgina que el duia es repintava aquest bloc a dins del seu
    <style>, i les que no el copiaven el treien sense estil. Ara viu aquí una
    sola vegada: qualsevol pàgina que carregui barna.css el té ben pintat.
-   Les caselles fan 24px d'amplada mínima perquè un dit hi arribi: amb el
-   text sol («CA») feien 15-17px i incomplien la mida mínima de diana de la
-   WCAG 2.2. Els separadors són decoratius i no es poden tocar. */
-.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
-.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color 0.3s var(--ease); }
+   Les caselles fan 34x44px perquè un dit hi arribi de debò: amb el text sol
+   («CA») feien 15-17px, i fins al 30/08/2026 es van quedar en 24x28px, que
+   passa el mínim de la WCAG 2.2 (24px) però no la mida de dit de 44px que fa
+   servir la resta del lloc. L'alçada surt de franc: la fila de la capçalera ja
+   feia 44px. Els separadors són decoratius i no es poden tocar. */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 11.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 44px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color 0.3s var(--ease); }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
 .lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
 .lang-switch .sep { color: var(--line); pointer-events: none; }
 .lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
 .lang-switch.light a.active { color: #fff; }
-@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 11.5px; } .lang-switch a { min-width: 32px; padding: 7px 3px; } }
 
 /* ==== BOTONS ==== */
-.cta { display: inline-block; font-family: var(--body); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid currentColor; transition: color 0.35s var(--ease), border-color 0.35s var(--ease); }
+.cta { display: inline-block; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.3em; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid currentColor; transition: color 0.35s var(--ease), border-color 0.35s var(--ease); }
 .cta:hover { color: var(--red); border-color: var(--red); }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 15px clamp(20px, 3vw, 32px); font-family: var(--body); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; background: var(--ink); color: #fff; border: 1px solid var(--ink); transition: background 0.35s var(--ease), border-color 0.35s var(--ease); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 15px clamp(20px, 3vw, 32px); font-family: var(--body); font-size: 11.5px; letter-spacing: 0.3em; text-transform: uppercase; background: var(--ink); color: #fff; border: 1px solid var(--ink); transition: background 0.35s var(--ease), border-color 0.35s var(--ease); }
 .btn:hover { background: var(--red); border-color: var(--red); }
 .btn.red { background: var(--red); border-color: var(--red); }
 .btn.red:hover { background: var(--ink); border-color: var(--ink); }
@@ -144,7 +146,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 @media (max-width: 560px) { .btn-row .btn { flex: 1 1 100%; } }
 
 /* ==== FIL D'ARIADNA ==== */
-.crumb { font-family: var(--body); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); padding: 22px 0 0; }
+.crumb { font-family: var(--body); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); padding: 22px 0 0; }
 .crumb a { border-bottom: 1px solid transparent; transition: border-color 0.3s, color 0.3s; }
 .crumb a:hover { color: var(--red); border-color: var(--red); }
 
@@ -172,7 +174,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .prose blockquote { margin: 28px 0; padding: 22px 26px; border-left: 2px solid var(--red); background: var(--paper-2); font-size: 15.5px; color: var(--ink); }
 .prose figure { margin: clamp(26px, 4vw, 44px) 0; }
 .prose figure img { width: 100%; }
-.prose figcaption { margin-top: 12px; font-family: var(--body); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+.prose figcaption { margin-top: 12px; font-family: var(--body); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
 
 /* ==== FITXA DE DADES ==== */
 .facts { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); margin: clamp(26px, 4vw, 44px) 0; }
@@ -180,7 +182,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .facts div { padding: clamp(16px, 2.4vw, 26px) 12px; text-align: center; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .facts b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(20px, 3vw, 32px); letter-spacing: 0.05em; }
 .facts b em { font-style: normal; color: var(--red); }
-.facts span { display: block; margin-top: 8px; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
+.facts span { display: block; margin-top: 8px; font-family: var(--body); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
 
 /* ==== FRANGES · altres portes del club, en rectangles apilats ====
    Mateix component que a la portada (index.html): el vermell fa de
@@ -201,7 +203,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .franja-t { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(18px, 2.4vw, 27px); letter-spacing: 0.01em; text-transform: uppercase; line-height: 0.98; transition: color 0.3s; }
 .franja-s { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 6px; max-width: 46ch; }
 .franja-go { padding: 0 26px; display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-.franja-go em { font-style: normal; font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.franja-go em { font-style: normal; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 .franja-go i { display: block; width: 22px; height: 1px; background: var(--ink); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
 
 /* A 390 px la franja conservava les tres columnes fixes —190 px d'imatge, el
@@ -243,7 +245,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 @media (prefers-reduced-motion: reduce) { .franja, .franja-ph img, .franja-go i { transition: none; } }
 
 /* ==== PREMSA · galeria de pàgines i cita de l'article ==== */
-.press-badge { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 10px 18px; border: 1px solid var(--line); font-family: var(--body); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
+.press-badge { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 10px 18px; border: 1px solid var(--line); font-family: var(--body); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
 .press-badge b { color: var(--ink); font-weight: 500; }
 .press-grid { display: grid; grid-template-columns: 1fr; gap: clamp(14px, 2vw, 22px); margin: clamp(28px, 4vw, 46px) 0; }
 @media (min-width: 680px) { .press-grid.two { grid-template-columns: 1fr 1fr; } }
@@ -253,7 +255,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .press-quote .eyebrow { margin-bottom: 16px; }
 .press-quote p { font-size: 15px; color: var(--ink); }
 .press-quote p + p { margin-top: 14px; }
-.press-quote-by { display: block; margin-top: 22px; font-family: var(--body); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.press-quote-by { display: block; margin-top: 22px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 .press-quote-by b { color: var(--ink); }
 
 /* ==== CALENDARIS PER EQUIP · targetes descarregables ==== */
@@ -266,9 +268,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .cal-card:hover { border-color: var(--ink); }
 .cal-card img { width: 100%; height: auto; display: block; border-bottom: 1px solid var(--line); }
 .cal-card-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.cal-card-tag { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); }
+.cal-card-tag { font-family: var(--body); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); }
 .cal-card h3 { font-family: var(--display); font-size: 13.5px; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 400; }
-.cal-card-meta { font-family: var(--body); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.cal-card-meta { font-family: var(--body); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 .cal-card .btn { margin-top: 10px; width: 100%; }
 .cal-notice { display: none; align-items: center; gap: 8px; margin-top: 4px; padding: 8px 10px; border: 1px solid rgba(226,6,19,0.35); background: rgba(226,6,19,0.06); font-size: 11px; line-height: 1.5; color: var(--ink); }
 .cal-notice.on { display: flex; }
@@ -312,10 +314,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .po-dia-n { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(34px, 5vw, 46px); line-height: 0.9; color: var(--ink); }
 .po-dia input:checked + .po-dia-in .po-dia-n { color: var(--red); }
 .po-dia-m { display: block; font-size: 12.5px; line-height: 1.35; color: var(--ink-2); margin-top: 6px; }
-.po-dia-h { display: block; font-family: var(--body); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+.po-dia-h { display: block; font-family: var(--body); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
 /* Les places que queden. En vermell quan en queden poques: és una dada
    real que ve del servidor, no un adorn. */
-.po-dia-p { display: block; font-family: var(--body); font-size: 10.5px; letter-spacing: 0.08em; margin-top: 8px; color: var(--muted); }
+.po-dia-p { display: block; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.08em; margin-top: 8px; color: var(--muted); }
 .po-dia-p.poques { color: var(--red-ink); font-weight: 650; }
 .po-dia-p.ple { color: var(--muted); }
 /* Un torn ple no es pot triar: es desactiva de veritat, no només a la vista. */
@@ -339,7 +341,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 /* ==== TAULA DE DADES ==== */
 .dl { border-top: 1px solid var(--ink); margin: clamp(24px, 3.4vw, 40px) 0; }
 .dl-row { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding: 15px 2px; border-bottom: 1px solid var(--line); }
-.dl-row dt { flex: 0 0 190px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+.dl-row dt { flex: 0 0 190px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
 .dl-row dd { flex: 1 1 220px; font-size: 14.5px; color: var(--ink); }
 
 /* ==== TARGETES ==== */
@@ -352,7 +354,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .card-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 1.4s var(--ease); }
 .card:hover .card-media img { transform: scale(1.05); }
 .card-body { padding: clamp(20px, 2.6vw, 30px); display: flex; flex-direction: column; gap: 11px; flex: 1; }
-.card-tag { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); }
+.card-tag { font-family: var(--body); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); }
 .card h3 { font-family: var(--display); font-size: clamp(13px, 1.5vw, 15.5px); letter-spacing: 0.02em; line-height: 1.6; }
 .card p { font-size: 13.5px; color: var(--ink-2); }
 .card .cta { margin-top: auto; padding-top: 8px; align-self: flex-start; }
@@ -403,22 +405,27 @@ a.partner-logo:hover img { filter: none; opacity: 1; }
 /* ==== PEU ==== */
 .foot { background: var(--ink); color: #fff; padding: clamp(44px, 6.5vw, 80px) 0 32px; margin-top: clamp(40px, 6vw, 80px); }
 .foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(24px, 4vw, 48px); padding-bottom: clamp(30px, 5vw, 54px); border-bottom: 1px solid var(--line-dark); }
-.foot-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: rgba(255,255,255,0.45); margin-bottom: 15px; }
+.foot-col h3 { font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.62); margin-bottom: 15px; }
 .foot-col a, .foot-col p { display: block; padding: 7px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
 .foot-col a { display: flex; align-items: center; min-height: 44px; }
 .foot-col a:hover { color: var(--red-light); }
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 28px; }
 .foot-mark { font-family: var(--body); font-size: clamp(12px, 2vw, 15px); letter-spacing: 0.4em; text-transform: uppercase; }
 .foot-mark em { font-style: normal; color: var(--red-light); }
-.foot-legal { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.foot-legal { font-family: var(--body); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
 
 /* ==== ACCESSIBILITAT ==== */
 .skip { position: absolute; left: -9999px; top: 0; z-index: 200; }
-.skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; padding: 12px 22px; font-family: var(--body); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; }
+.skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; min-height: 44px; padding: 12px 22px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; }
 @media (max-width: 900px) { .cta { padding: 12px 0 10px; } }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto !important; }
 }
 
 /* ==== FOTOGRAFIA DEL BLOG ====
@@ -453,17 +460,17 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
    resta són tinta i grisos. Cap dada no es distingeix només pel color: sempre
    porta el número o l'etiqueta al costat. */
 .chart { margin: clamp(30px, 4.5vw, 54px) 0; padding: clamp(20px, 3vw, 30px); border: 1px solid var(--line); background: var(--paper); }
-.chart p.chart-t { display: block; font-family: var(--display); font-weight: 400; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink); }
+.chart p.chart-t { display: block; font-family: var(--display); font-weight: 400; font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink); }
 .chart p.chart-s { display: block; margin-top: 9px; font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
 .chart-b { margin-top: clamp(20px, 3vw, 28px); }
-.chart figcaption { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; line-height: 1.9; text-transform: uppercase; color: var(--muted); }
+.chart figcaption { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--display); font-size: 11px; letter-spacing: 0.2em; line-height: 1.9; text-transform: uppercase; color: var(--muted); }
 .chart ul, .chart ol { margin: 0; padding: 0; list-style: none; }
 .chart li { font-size: inherit; color: inherit; margin-bottom: 0; }
 
 /* Barres horitzontals · magnitud comparada */
 .bars { display: grid; gap: 16px; }
 .bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 7px 14px; }
-.bar-k { font-family: var(--display); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.bar-k { font-family: var(--display); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
 .bar-v { font-family: var(--display); font-weight: 300; font-size: 16px; letter-spacing: 0.04em; color: var(--ink); text-align: right; }
 .bar-t { grid-column: 1 / -1; height: 10px; background: rgba(16,16,14, 0.09); }
 .bar-f { display: block; height: 100%; background: var(--ink-2); }
@@ -476,7 +483,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 .scale li { position: relative; padding: 13px 13px 15px; background: var(--paper-2); border-top: 3px solid var(--line); }
 .scale li.on { border-top-color: var(--red); }
 .scale-a { display: block; font-family: var(--display); font-weight: 300; font-size: 15px; letter-spacing: 0.04em; color: var(--ink); }
-.scale-n { display: block; margin-top: 7px; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.scale-n { display: block; margin-top: 7px; font-family: var(--display); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 .scale li.on .scale-n { color: var(--red-dark); }
 @media (min-width: 680px) {
   .scale { flex-direction: row; align-items: stretch; }
@@ -487,7 +494,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 /* Ràtio · quantes persones per adult, comptades una a una */
 .ratio { display: grid; gap: clamp(22px, 3vw, 30px); }
 @media (min-width: 620px) { .ratio { grid-template-columns: 1fr 1fr; } }
-.chart p.ratio-h { font-family: var(--display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+.chart p.ratio-h { font-family: var(--display); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
 .dots { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; max-width: 210px; }
 .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--muted); }
 .dot.ad { width: 18px; height: 18px; background: var(--red); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px rgba(226, 6, 19, 0.35); }
@@ -500,7 +507,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 .split span { display: block; }
 .split .f { background: var(--red); }
 .split .m { background: var(--ink-2); }
-.chart p.split-k { display: flex; justify-content: space-between; gap: 14px; margin-top: 13px; font-family: var(--display); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.chart p.split-k { display: flex; justify-content: space-between; gap: 14px; margin-top: 13px; font-family: var(--display); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; }
 .chart p.split-k b { font-weight: 400; color: var(--red-dark); }
 .chart p.split-k i { font-style: normal; color: var(--ink); }
 
@@ -508,7 +515,7 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 .gauge { margin-top: 6px; }
 .gauge-t { position: relative; height: 16px; background: rgba(16,16,14, 0.09); }
 .gauge-z { position: absolute; top: -7px; bottom: -7px; background: rgba(226, 6, 19, 0.12); border-left: 2px solid var(--red); border-right: 2px solid var(--red); }
-.gauge-x { display: flex; justify-content: space-between; margin-top: 12px; font-family: var(--display); font-size: 9px; letter-spacing: 0.18em; color: var(--muted); }
+.gauge-x { display: flex; justify-content: space-between; margin-top: 12px; font-family: var(--display); font-size: 11px; letter-spacing: 0.18em; color: var(--muted); }
 .chart p.gauge-n { margin-top: 20px; font-size: 13px; line-height: 1.7; color: var(--ink-2); }
 .chart p.gauge-n b { font-weight: 500; color: var(--ink); }
 
@@ -522,9 +529,9 @@ figure.ph .ph-f img { position: absolute; inset: 0; width: 100%; height: 100%; o
 /* Comparativa · taula de dues columnes enfrontades */
 table.vs { width: 100%; border-collapse: collapse; margin-top: 6px; }
 table.vs th, table.vs td { padding: 11px 8px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
-table.vs thead th { font-family: var(--display); font-weight: 400; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--ink); }
+table.vs thead th { font-family: var(--display); font-weight: 400; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--ink); }
 table.vs thead th.a { color: var(--red-dark); }
-table.vs tbody th { font-family: var(--display); font-weight: 400; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+table.vs tbody th { font-family: var(--display); font-weight: 400; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
 table.vs td { font-size: 13.5px; color: var(--ink-2); }
 table.vs td.a { color: var(--red-dark); }
 
@@ -539,7 +546,7 @@ table.vs td.a { color: var(--red-dark); }
 .e-sech-wrap { padding-top: clamp(20px, 3vw, 34px); }
 .e-sech { border-top: 2px solid var(--red); padding: 14px 0 12px; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .e-sech h2 { font-family: var(--display); font-weight: 400; font-size: clamp(15px, 2vw, 20px); letter-spacing: 0.02em; text-transform: uppercase; }
-.e-sech em { font-style: normal; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.e-sech em { font-style: normal; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
 
 /* Els títols de secció d'un article porten el mateix filet vermell: és el
    gest que lliga una pàgina interior amb la portada extensa sense afegir cap
@@ -554,7 +561,7 @@ table.vs td.a { color: var(--red-dark); }
 .e-art .im img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.7s var(--ease); }
 .e-art:hover .im img { transform: scale(1.04); }
 .e-art .cap { display: block; padding: 14px 2px 0; }
-.e-art .kick { font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
+.e-art .kick { font-family: var(--body); font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
 .e-art h3 { font-size: clamp(17px, 2.1vw, 24px); letter-spacing: 0.02em; text-transform: none; font-weight: 500; margin: 8px 0 6px; line-height: 1.15; }
 .e-art.wide h3 { font-size: clamp(20px, 2.8vw, 32px); }
 .e-art p { font-size: 13px; color: var(--ink-2); }
@@ -564,7 +571,7 @@ table.vs td.a { color: var(--red-dark); }
 @media (min-width: 760px) { .e-guides { grid-template-columns: repeat(3, 1fr); } }
 .e-guide { display: block; background: var(--paper); padding: clamp(20px, 2.6vw, 28px); transition: background 0.3s var(--ease); }
 .e-guide:hover { background: var(--paper-2); }
-.e-guide .kick { font-family: var(--body); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); }
+.e-guide .kick { font-family: var(--body); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); }
 .e-guide h3 { font-size: 15.5px; font-weight: 500; text-transform: none; letter-spacing: 0.01em; margin: 9px 0 8px; line-height: 1.25; }
 .e-guide p { font-size: 12.5px; color: var(--ink-2); margin: 0; }
 
@@ -576,7 +583,7 @@ table.vs td.a { color: var(--red-dark); }
 .e-par .rule { background: rgba(255,255,255,0.4); width: auto; height: auto; margin: 0; }
 @media (max-width: 640px) { .e-par .rule { height: 1px; } }
 .e-par .h { padding: clamp(22px, 3.2vw, 32px) clamp(20px, 4vw, 40px); }
-.e-par .h span { display: block; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.82; }
+.e-par .h span { display: block; font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.82; }
 .e-par .h b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.8vw, 30px); text-transform: uppercase; line-height: 1; margin-top: 10px; }
 .e-par .foot { border-top: 1px solid rgba(255,255,255,0.4); padding: 16px clamp(20px, 4vw, 40px); font-size: 13px; }
 .e-par .foot a { color: #fff; }
@@ -593,11 +600,11 @@ table.vs td.a { color: var(--red-dark); }
 
 /* Barra de novetats · lliga qualsevol pàgina amb la portada. */
 .ticker { position: relative; z-index: 120; height: 32px; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
-.tk-lab { flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px); background: var(--red); color: #fff; display: flex; align-items: center; gap: 9px; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
+.tk-lab { flex-shrink: 0; height: 100%; padding: 0 clamp(12px, 3vw, 20px); background: var(--red); color: #fff; display: flex; align-items: center; gap: 9px; font-family: var(--body); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; }
 .tk-trk { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%); }
 .tk-cnt { display: inline-flex; gap: clamp(30px, 6vw, 60px); white-space: nowrap; animation: tkScroll 46s linear infinite; }
 .ticker:hover .tk-cnt { animation-play-state: paused; }
-.tk-it { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.tk-it { font-family: var(--body); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @keyframes tkScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 /* ============================================================
    Formularis · component compartit
@@ -672,7 +679,7 @@ table.vs td.a { color: var(--red-dark); }
   display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
   padding: 8px clamp(14px, 3vw, 22px);
   border-bottom: 3px solid var(--ink);
-  font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
 }
 .ed-bar .r { color: var(--red-dark); }
 
@@ -698,7 +705,7 @@ table.vs td.a { color: var(--red-dark); }
   position: absolute; right: clamp(12px, 4vw, 52px); top: clamp(18px, 3vw, 40px);
   border: 3px solid var(--red); color: var(--red-dark); background: var(--paper);
   padding: 9px 13px; transform: rotate(6deg);
-  font-weight: 800; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  font-weight: 800; font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase;
   text-align: center; line-height: 1.5;
 }
 @media (max-width: 640px) { .ed-mast .stamp { position: static; display: inline-block; transform: none; margin-top: 16px; } }
@@ -722,7 +729,7 @@ table.vs td.a { color: var(--red-dark); }
 .ed-duo img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 22%; filter: grayscale(1) contrast(1.35) brightness(0.94); mix-blend-mode: multiply; display: block; }
 .ed-main h2 { font-size: clamp(26px, 3.6vw, 50px); line-height: .94; margin: 18px 0 10px; }
 .ed-main .stand { font-size: 15px; color: var(--ink-2); max-width: 60ch; margin: 0; }
-.ed-main .folio { margin-top: 14px; font-size: 10.5px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--red-dark); }
+.ed-main .folio { margin-top: 14px; font-size: 11.5px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--red-dark); }
 
 .ed-side { display: flex; flex-direction: column; }
 .ed-side .hd { padding: 12px 20px; border-bottom: 3px solid var(--ink); font-family: var(--display); font-weight: 400; font-size: 19px; text-transform: uppercase; background: var(--paper-2); }
@@ -730,7 +737,7 @@ table.vs td.a { color: var(--red-dark); }
 .ed-brief:last-of-type { border-bottom: none; }
 .ed-brief b { display: block; font-weight: 800; font-size: 14px; color: var(--ink); }
 .ed-brief span { font-size: 12.5px; color: var(--muted); }
-.ed-brief .pg { float: right; font-size: 10px; font-weight: 800; letter-spacing: .14em; color: var(--red-dark); }
+.ed-brief .pg { float: right; font-size: 11.5px; font-weight: 800; letter-spacing: .14em; color: var(--red-dark); }
 .ed-num { margin-top: auto; padding: 18px 20px; border-top: 3px solid var(--ink); display: flex; align-items: baseline; gap: 14px; }
 .ed-num .n { font-family: var(--display); font-weight: 400; font-size: clamp(52px, 6vw, 90px); line-height: .9; color: var(--red); }
 .ed-num span { font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2); }
@@ -745,7 +752,7 @@ table.vs td.a { color: var(--red-dark); }
 .ed-foot .say p { margin: 0; font-size: 13.5px; color: rgba(255, 255, 255, 0.72); max-width: 50ch; }
 
 /* El colofó, com el peu d'impremta d'un diari. */
-.ed-colo { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 10px clamp(14px, 3vw, 18px); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); border-top: 3px solid var(--ink); }
+.ed-colo { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 10px clamp(14px, 3vw, 18px); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); border-top: 3px solid var(--ink); }
 
 @media (max-width: 860px) {
   .ed-grid { grid-template-columns: 1fr; }

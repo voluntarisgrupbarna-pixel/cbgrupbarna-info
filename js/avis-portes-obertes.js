@@ -79,17 +79,20 @@
     '.cbgb-po p{margin:0;font-size:13px;line-height:1.45;flex:1 1 auto;min-width:0}' +
     /* El groc només a la lletra i sobre el vermell fosc, mai al fons blanc:
        és la regla del sistema (web-cbgb, punt 1). */
-    '.cbgb-po a.cbgb-po-cta{color:#EEFF00;font-weight:700;text-decoration:underline;' +
-    'text-underline-offset:3px;font-size:12.5px;letter-spacing:.06em;white-space:nowrap;' +
-    'flex-shrink:0;padding:4px 0}' +
+    '.cbgb-po a.cbgb-po-cta{color:#EEFF00;background:#A8040E;font-weight:700;' +
+    'text-decoration:underline;text-underline-offset:3px;font-size:12.5px;' +
+    'letter-spacing:.06em;white-space:nowrap;flex-shrink:0;' +
+    'display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border-radius:3px}' +
     '.cbgb-po a.cbgb-po-cta:hover{color:#fff}' +
     '.cbgb-po button{appearance:none;background:transparent;border:1px solid rgba(255,255,255,.45);' +
-    'color:#fff;width:30px;height:30px;min-width:30px;cursor:pointer;font-size:15px;line-height:1;' +
-    'flex-shrink:0;margin-left:auto;border-radius:50%}' +
+    'color:#fff;width:44px;height:44px;min-width:44px;cursor:pointer;font-size:17px;line-height:1;' +
+    'flex-shrink:0;margin-left:auto;border-radius:50%;display:flex;align-items:center;' +
+    'justify-content:center}' +
     '.cbgb-po button:hover{background:#fff;color:#E20613;border-color:#fff}' +
     '.cbgb-po :focus-visible{outline:3px solid #fff;outline-offset:2px}' +
     '@media(max-width:560px){.cbgb-po p{font-size:12px;flex-basis:100%;order:3}' +
-    '.cbgb-po button{order:2}}' +
+    '.cbgb-po button{order:2}' +
+    '.cbgb-po a.cbgb-po-cta{order:4;flex-basis:100%;justify-content:center;min-height:44px}}' +
     '@media print{.cbgb-po{display:none}}';
   document.head.appendChild(est);
 

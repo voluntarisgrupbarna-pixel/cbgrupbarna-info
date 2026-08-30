@@ -103,7 +103,7 @@
    el component es pinta aquí amb els mateixos valors. Caselles de 24px
    mínim perquè un dit hi arribi (WCAG 2.2, mida mínima de diana). */
 .lang-switch { display: flex; align-items: center; gap: 2px; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
-.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color .3s ease; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 44px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color .3s ease; }
 .lang-switch a.active { color: #10100E; font-weight: 600; }
 .lang-switch a:hover, .lang-switch a:focus-visible { color: #E20613; }
 .lang-switch .sep { color: rgba(16,16,14,.2); pointer-events: none; }
@@ -1035,7 +1035,7 @@ https://cbgrupbarna.info/opina
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
   }
 
-  fetch('opina.json?t=' + Math.floor(Date.now() / 60000))
+  fetch('/opina/opina.json?t=' + Math.floor(Date.now() / 60000))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (data) {
       if (data) {

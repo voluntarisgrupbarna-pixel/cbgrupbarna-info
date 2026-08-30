@@ -609,7 +609,7 @@ img { max-width: 100%; height: auto; display: block; }
 .franja-t { display: block; font-family: var(--display); font-size: clamp(26px, 3vw, 40px); font-weight: 400; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1; }
 .franja-s { display: block; font-size: 14.5px; color: var(--ink-2); margin-top: 6px; max-width: 52ch; }
 .franja-go { display: flex; align-items: center; gap: 14px; flex-shrink: 0; color: var(--red-ink); }
-.franja-go em { font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; white-space: nowrap; }
+.franja-go em { font-style: normal; font-size: 11.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; white-space: nowrap; }
 .franja-go i { display: block; width: 36px; height: 2px; background: currentColor; transition: width 0.3s var(--ease); }
 .franja:hover .franja-go i { width: 64px; }
 
@@ -635,7 +635,7 @@ img { max-width: 100%; height: auto; display: block; }
 .franja-par { display: block; background: var(--red); color: #fff; min-height: 0; }
 .par-halves { display: grid; grid-template-columns: 1fr 1px 1fr; }
 .par-half { padding: 26px clamp(20px, 4vw, 40px); }
-.par-half span { display: block; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.82; }
+.par-half span { display: block; font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.82; }
 .par-half b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(19px, 2.6vw, 28px); text-transform: uppercase; line-height: 0.98; margin-top: 9px; }
 .par-rule { background: rgba(255,255,255,0.42); }
 .par-foot { border-top: 1px solid rgba(255,255,255,0.42); padding: 16px clamp(20px, 4vw, 40px); font-size: 13px; }
@@ -663,7 +663,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* El filet vermell penja de la foto; va davant del peu perquè el peu no
    l'empenyi avall. */
 .lg-ph figcaption::before { content: ""; display: block; width: 38%; height: 6px; background: var(--red); margin-bottom: 18px; }
-.lg-ph figcaption { margin-top: 14px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.lg-ph figcaption { margin-top: 14px; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 @media (max-width: 900px) {
   .lg-hero { grid-template-columns: 1fr; padding: clamp(26px, 5vw, 48px) 20px; }
   .lg-ph { justify-self: start; max-width: 440px; }
@@ -708,12 +708,12 @@ img { max-width: 100%; height: auto; display: block; }
 /* Aquesta línia no va sobre paper: va sobre el fons de la graella de franges
    —el color de filet al 14% sobre blanc, que dona un gris #DEDEDD—, i allà
    --muted es queda en 4,27:1. Amb --ink-2 puja a 7,31:1. */
-.lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); }
+.lg-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 20px; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); }
 @media (prefers-reduced-motion: reduce) { .lg-c, .lg-c img { transition: none; } }
 
 /* ==== TIPOGRAFIA ==== */
 h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.04; }
-.eyebrow { font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: #6B6560; }
+.eyebrow { font-family: var(--body); font-size: 11.5px; font-weight: 400; letter-spacing: 0.36em; text-transform: uppercase; color: #6B6560; }
 /* 9,5-10 px: --red sobre crema es queda en 4,37:1. --red-ink és el token
    que el sistema reserva per a text vermell sobre fons clar. */
 .eyebrow.red { color: var(--red-ink, #A8040E); }
@@ -728,7 +728,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 /* ==== ENLLAÇOS I BOTONS ==== */
 .cta {
   display: inline-block; font-family: var(--body);
-  font-size: 10px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase;
   padding-bottom: 6px; border-bottom: 1px solid currentColor;
   transition: color 0.35s var(--ease), border-color 0.35s var(--ease);
 }
@@ -738,7 +738,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   padding: 15px clamp(20px, 3vw, 32px);
-  font-family: var(--body); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  font-family: var(--body); font-size: 11.5px; letter-spacing: 0.3em; text-transform: uppercase;
   background: var(--ink); color: #fff; border: 1px solid var(--ink);
   transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
 }
@@ -755,7 +755,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .tk-lab {
   flex-shrink: 0; height: 100%; padding: 0 clamp(10px, 2vw, 16px); background: var(--red); color: #fff;
   display: flex; align-items: center; gap: 9px;
-  font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase;
+  font-family: var(--body); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
 }
 .tk-lab .pdot { width: 5px; height: 5px; border-radius: 50%; background: #fff; animation: pulseDot 2.2s ease-in-out infinite; }
 @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { box-shadow: 0 0 0 6px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
@@ -785,7 +785,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .head-side { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); flex-shrink: 0; }
 .head-side.r { justify-content: flex-end; margin-left: auto; }
 .head-nav { display: flex; align-items: center; gap: clamp(14px, 1.7vw, 22px); }
-.head-nav a { position: relative; padding: 7px 0; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; white-space: nowrap; }
+.head-nav a { position: relative; padding: 7px 0; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; white-space: nowrap; }
 /* Icones socials: monocromes, vermell del club en passar-hi. Cap fitxer extern. */
 .soc { display: inline-flex; align-items: center; gap: 13px; }
 .soc a { padding: 0; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; color: var(--ink); transition: color 0.3s var(--ease), transform 0.3s var(--ease); }
@@ -794,7 +794,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .soc a::after { content: none; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
-.head-brand { display: flex; align-items: center; min-height: 44px; gap: 12px; flex-shrink: 0; }
+.head-brand { display: flex; align-items: center; min-width: 44px; min-height: 44px; gap: 12px; flex-shrink: 0; }
 .head-brand img { width: 32px; height: 32px; object-fit: contain; }
 .head-brand span { font-family: var(--body); font-size: clamp(10px, 1.5vw, 13px); font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
 /* Des que el mapa ≡ és a la capçalera (estètica definitiva), el burger vell
@@ -819,7 +819,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 /* Zoom molt contingut: la foto d'origen és de 375x500 i qualsevol ampliació
    extra en delata la manca de definició. */
 @keyframes leadZoom { from { transform: scale(1.02); } to { transform: scale(1); } }
-.lead-media .tagline { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; }
+.lead-media .tagline { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: var(--red); color: #fff; font-family: var(--body); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; }
 .lead-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 6vw, 88px) clamp(22px, 5vw, 76px); }
 .lead-body h1, .lead-body h2 { font-size: clamp(25px, 3.4vw, 44px); margin: 18px 0 0; }
 .lead-body h1 small, .lead-body h2 small { display: block; margin-top: 14px; font-size: 0.44em; letter-spacing: 0.32em; color: #6B6560; font-weight: 300; }
@@ -850,14 +850,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 /* ==== CALENDARI ==== */
 .cal { border-top: 1px solid var(--ink); }
 .cal-row { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 30px); padding: 17px 0; border-bottom: 1px solid var(--line); }
-.cal-date { width: 68px; flex-shrink: 0; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
+.cal-date { width: 68px; flex-shrink: 0; font-family: var(--body); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
 .cal-date b { display: block; font-size: 25px; font-weight: 200; letter-spacing: 0.02em; color: var(--ink); line-height: 1.1; }
 .cal-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .cal-team { font-family: var(--body); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
 .cal-meta { font-size: 12px; color: #6B6560; }
-.cal-when { font-family: var(--body); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; text-align: right; white-space: nowrap; }
+.cal-when { font-family: var(--body); font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; text-align: right; white-space: nowrap; }
 /* 8,5 px sobre crema: --red hi dona 4,37:1. */
-.cal-cond { width: 66px; flex-shrink: 0; text-align: right; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red-ink, #A8040E); }
+.cal-cond { width: 66px; flex-shrink: 0; text-align: right; font-family: var(--body); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red-ink, #A8040E); }
 .cal-empty { padding: 34px 4px; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); text-align: center; }
 .cal-empty a { border-bottom: 1px solid var(--red); }
 @media (max-width: 640px) { .cal-when { display: none; } .cal-cond { width: auto; } }
@@ -884,11 +884,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .igf-t { font-family: var(--body); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
 .igf-s { font-size: 12.5px; color: #6B6560; max-width: 30ch; }
 .igf-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 4px; }
-.igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; padding: 12px 20px; border: 1px solid var(--ink); font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+.igf-btns button, .igf-btns a { min-height: 44px; display: inline-flex; align-items: center; padding: 12px 20px; border: 1px solid var(--ink); font-family: var(--body); font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
 .igf-btns button { background: var(--ink); color: #fff; border-color: var(--ink); }
 .igf-btns button:hover { background: var(--red); border-color: var(--red); }
 .igf-btns a:hover { background: var(--ink); color: #fff; }
-.igf-all { margin-top: 6px; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
+.igf-all { margin-top: 6px; font-family: var(--body); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; }
 
 /* ==== OPINIONS ==== */
 .opi { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); align-items: stretch; }
@@ -901,7 +901,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .stars button { font-size: 27px; line-height: 1; color: var(--line); transition: color 0.2s, transform 0.2s; }
 .stars button:hover { transform: translateY(-2px); }
 .stars button.on { color: var(--red); }
-.stars-note { font-family: var(--body); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; }
+.stars-note { font-family: var(--body); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; }
 
 /* ==== LLISTA · accés ràpid ==== */
 .list { display: grid; grid-template-columns: 1fr; column-gap: clamp(24px, 4vw, 70px); border-top: 1px solid var(--line); }
@@ -909,7 +909,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .list a { display: flex; align-items: center; gap: 18px; padding: 19px 6px; border-bottom: 1px solid var(--line); transition: padding-left 0.4s var(--ease), color 0.3s; }
 .list a:hover { padding-left: 16px; color: var(--red); }
 .list-t { font-family: var(--body); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; }
-.list-s { margin-left: auto; text-align: right; font-family: var(--body); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; }
+.list-s { margin-left: auto; text-align: right; font-family: var(--body); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; }
 /* A 320 px la fila d'una sola línia —etiqueta a l'esquerra, detall a la
    dreta, totes dues en majúscules amb interlletratge— no hi cabia i
    estirava la pàgina. Per sota de 420 px el detall baixa a la línia de
@@ -923,7 +923,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
 /* ==== PARTNERS ==== */
 .partners { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(16px, 3vw, 42px); }
-.partners span { font-family: var(--body); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.partners span { font-family: var(--body); font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
 
 /* ==== FORMULARI D'INFORMACIÓ ==== */
 .info { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 3.4vw, 52px); }
@@ -933,7 +933,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .info-intro .direct { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 22px; }
 .info-intro .direct a { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; transition: padding-left 0.4s var(--ease), color 0.3s; }
 .info-intro .direct a:hover { padding-left: 12px; color: var(--red); }
-.info-intro .direct a span { margin-left: auto; font-size: 9px; letter-spacing: 0.22em; color: #6B6560; }
+.info-intro .direct a span { margin-left: auto; font-size: 11px; letter-spacing: 0.22em; color: #6B6560; }
 .wa-ic { width: 16px; height: 16px; flex-shrink: 0; fill: #25D366; }
 
 .form { border: 1px solid var(--line); padding: clamp(22px, 3.2vw, 40px); background: var(--paper); }
@@ -941,7 +941,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .field { min-width: 0; }
 .field input, .field select, .field textarea { max-width: 100%; }
 @media (min-width: 620px) { .form-grid.two { grid-template-columns: 1fr 1fr; } }
-.field label { display: block; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.28em; text-transform: uppercase; color: #6B6560; margin-bottom: 8px; }
+.field label { display: block; font-family: var(--body); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #6B6560; margin-bottom: 8px; }
 .field input, .field select, .field textarea {
   width: 100%; min-height: 48px; padding: 13px 2px; border: 0; border-bottom: 1px solid var(--line);
   /* 16px, no 15px: per sota d'això Safari a iOS fa zoom en sol tocar el camp. */
@@ -960,14 +960,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips input { position: absolute; width: 1px; height: 1px; min-height: 0; margin: -1px; padding: 0;
   border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-.chips label { display: inline-flex; align-items: center; min-height: 44px; margin: 0; padding: 10px 16px; border: 1px solid var(--line); cursor: pointer; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); transition: background 0.3s, color 0.3s, border-color 0.3s; }
+.chips label { display: inline-flex; align-items: center; min-height: 44px; margin: 0; padding: 10px 16px; border: 1px solid var(--line); cursor: pointer; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); transition: background 0.3s, color 0.3s, border-color 0.3s; }
 .chips input:checked + label { background: var(--ink); border-color: var(--ink); color: #fff; }
 .chips input:focus-visible + label { outline: 1px solid var(--red); outline-offset: 3px; }
 .consent { display: flex; align-items: flex-start; gap: 11px; font-size: 12px; color: #6B6560; line-height: 1.65; }
 .consent input { width: 18px; height: 18px; min-height: 0; flex-shrink: 0; margin-top: 2px; accent-color: var(--red); }
 .consent a { border-bottom: 1px solid var(--line); }
 .form .btn { width: 100%; }
-.form-note { margin-top: 14px; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; text-align: center; }
+.form-note { margin-top: 14px; font-family: var(--body); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6560; text-align: center; }
 .form-ok { display: none; padding: clamp(24px, 4vw, 44px); text-align: center; border: 1px solid var(--red); }
 .form-ok.on { display: block; }
 .form-ok h3 { font-size: 14px; letter-spacing: 0.18em; margin-bottom: 14px; }
@@ -977,7 +977,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 /* ==== BARRA D'ACCIÓ INFERIOR (mòbil) ==== */
 .actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 95; display: none; gap: 1px; background: var(--line); transform: translateY(100%); transition: transform 0.4s var(--ease); }
 .actionbar.on { transform: none; }
-.actionbar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; padding: 10px 8px; background: var(--ink); color: #fff; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; }
+.actionbar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; padding: 10px 8px; background: var(--ink); color: #fff; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; }
 .actionbar a.red { background: var(--red); }
 @media (max-width: 760px) {
   .actionbar { display: flex; }
@@ -994,7 +994,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .brief-facts div { padding: clamp(16px, 2.4vw, 26px) 12px; text-align: center; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .brief-facts b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(21px, 3vw, 34px); letter-spacing: 0.05em; }
 .brief-facts b em { font-style: normal; color: var(--red); }
-.brief-facts span { display: block; margin-top: 8px; font-family: var(--body); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; }
+.brief-facts span { display: block; margin-top: 8px; font-family: var(--body); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; }
 
 /* ==== FAQ ==== */
 .faq { max-width: 940px; margin: 0 auto; border-top: 1px solid var(--line); }
@@ -1013,7 +1013,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .foot-partners { padding-bottom: clamp(32px, 5vw, 54px); border-bottom: 1px solid var(--line-dark); text-align: center; }
 .foot-partners .eyebrow { color: rgba(255,255,255,0.4); margin-bottom: 20px; }
 .foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: clamp(26px, 4vw, 52px); padding: clamp(34px, 5vw, 58px) 0; border-bottom: 1px solid var(--line-dark); }
-.foot-col h3 { font-size: 8.5px; letter-spacing: 0.3em; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+.foot-col h3 { font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.62); margin-bottom: 16px; }
 .foot-col a, .foot-col p { display: block; padding: 6px 0; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); }
 .foot-col a { display: flex; align-items: center; min-height: 44px; }
 .foot-col a { transition: color 0.3s; }
@@ -1023,11 +1023,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .foot-btm { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 30px; }
 .foot-mark { font-family: var(--body); font-weight: 300; font-size: clamp(12px, 2vw, 16px); letter-spacing: 0.4em; text-transform: uppercase; }
 .foot-mark em { font-style: normal; color: var(--red-light); }
-.foot-legal { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.foot-legal { font-family: var(--body); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
 
 /* ==== ACCESSIBILITAT I TOC ==== */
 .skip { position: absolute; left: -9999px; top: 0; z-index: 200; }
-.skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; padding: 12px 22px; font-family: var(--body); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; }
+.skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; min-height: 44px; padding: 12px 22px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; }
 /* Objectius de toc: res per sota de 44 px a mòbil i tauleta. */
 .btn, .list a, .faq summary, .head-nav a, .menu-col a { min-height: 44px; }
 .head-nav a { display: inline-flex; align-items: center; }
@@ -1085,22 +1085,23 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
    component es pinta aquí amb els mateixos valors. Les caselles fan 24px
    mínim perquè un dit hi arribi (mida mínima de diana, WCAG 2.2): amb el
    text sol feien 15-17px. */
-.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
-.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color 0.3s var(--ease, ease); }
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 11.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 44px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color 0.3s var(--ease, ease); }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
-.head-admin { margin-left: clamp(8px, 1.2vw, 16px); font-family: var(--body); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; text-decoration: none; display: inline-flex; align-items: center; min-height: 26px; padding: 7px 4px; white-space: nowrap; transition: color 0.3s var(--ease, ease); }
+.head-admin { margin-left: clamp(8px, 1.2vw, 16px); font-family: var(--body); font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 7px 4px; white-space: nowrap; transition: color 0.3s var(--ease, ease); }
 .head-admin:hover, .head-admin:focus-visible { color: var(--red-ink); }
 
 .lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
 .lang-switch .sep { color: var(--line); pointer-events: none; }
 .lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
 .lang-switch.light a.active { color: #fff; }
-@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 11.5px; } .lang-switch a { min-width: 32px; padding: 7px 3px; } }
 </style>
 <link rel="stylesheet" href="/css/cerca.css">
 <link rel="stylesheet" href="/css/a11y.css">
 </head>
 <body>
+<a href="#contingut" class="skip">Saltar al contingut</a>
 
 <!-- ==== TICKER ==== -->
 <div class="ticker" aria-label="Novetats del club">
@@ -1110,12 +1111,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
       <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
-      <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
-      <span class="tk-it">Calendari actualitzat</span>
-      <span class="tk-it">Temporada 26·27</span>
-      <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
-      <span class="tk-it">Calendari actualitzat</span>
-      <span class="tk-it">Temporada 26·27</span>
+      <a tabindex="-1" aria-hidden="true" class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
+      <span aria-hidden="true" class="tk-it">Calendari actualitzat</span>
+      <span aria-hidden="true" class="tk-it">Temporada 26·27</span>
+      <a tabindex="-1" aria-hidden="true" class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
+      <span aria-hidden="true" class="tk-it">Calendari actualitzat</span>
+      <span aria-hidden="true" class="tk-it">Temporada 26·27</span>
     </div>
   </div>
 </div>
@@ -1163,7 +1164,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
 <!-- ==== MENÚ · el mapa complet del club ==== -->
 
-<a href="#contingut" class="skip">Saltar al contingut</a>
 
 <main id="contingut">
 
@@ -1287,8 +1287,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
             <a href="https://api.whatsapp.com/send?phone=+34698425153&text=Hola!%20Vull%20informaci%C3%B3%20del%20club" target="_blank" rel="noopener" data-cta="info-wa-club">
               <svg class="wa-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               WhatsApp del club <span>+34 698 425 153</span></a>
-            <a href="/cdn-cgi/l/email-protection#f09d918281859584999e97b09392978285809291829e91de999e969f" data-cta="info-email">
-              Correu <span><span class="__cf_email__" data-cfemail="cba6aab9babeaebfa2a5ac8ba8a9acb9bebba9aab9a5aae5a2a5ada4">[email&#160;protected]</span></span></a>
+            <a href="mailto:marqueting@cbgrupbarna.info" data-cta="info-email">
+              Correu <span>marqueting@cbgrupbarna.info</span></a>
           </div>
         </div>
 
@@ -1336,7 +1336,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
               <input type="checkbox" id="f-ok" required>
               <span>Accepto que el CB Grup Barna es posi en contacte amb mi i guardi aquestes dades
               per informar-me de les seves activitats. Pots demanar-ne la baixa quan vulguis a
-              <a href="/cdn-cgi/l/email-protection#89e4e8fbf8fcecfde0e7eec9eaebeefbfcf9ebe8fbe7e8a7e0e7efe6"><span class="__cf_email__" data-cfemail="771a1605060212031e1910371415100502071516051916591e191118">[email&#160;protected]</span></a>.
+              <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>.
               <a href="/politica-de-privacitat/">Política de privacitat</a>.</span>
             </label>
             <button type="submit" class="btn red" data-cta="info-submit">Enviar i obrir WhatsApp</button>
@@ -1349,7 +1349,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
             <h3>Rebut. Gràcies!</h3>
             <p>T'hem obert el WhatsApp amb les teves dades. Si no s'ha obert, escriu-nos directament al
             <a href="https://wa.me/34698425153">+34 698 425 153</a> o a
-            <a href="/cdn-cgi/l/email-protection#a0cdc1d2d1d5c5d4c9cec7e0c3c2c7d2d5d0c2c1d2cec18ec9cec6cf"><span class="__cf_email__" data-cfemail="adc0ccdfdcd8c8d9c4c3caedcecfcadfd8ddcfccdfc3cc83c4c3cbc2">[email&#160;protected]</span></a>.</p>
+            <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>.</p>
           </div>
         </div>
       </div>
@@ -1607,7 +1607,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       </div>
       <div class="foot-col">
         <h3>Contacte</h3>
-        <a href="/cdn-cgi/l/email-protection#93fef2e1e2e6f6e7fafdf4d3f0f1f4e1e6e3f1f2e1fdf2bdfafdf5fc"><span class="__cf_email__" data-cfemail="9df0fcefece8f8e9f4f3faddfefffaefe8edfffceff3fcb3f4f3fbf2">[email&#160;protected]</span></a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
         <a href="https://wa.me/34698425153">+34 698 425 153</a>
         <a href="tel:+34646205526">Escoleta · 646 205 526</a>
         <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
@@ -1631,7 +1631,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       <nav class="lang-switch light" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/" hreflang="en" lang="en" aria-label="English">EN</a>
     </nav>
-      <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965 · <a href="/admin/" rel="nofollow noopener" style="color:inherit;text-decoration:none;opacity:.55">Admin</a></div>
+      <div class="foot-legal">© 2026 CB Grup Barna · Bàsquet base al Clot des de 1965 · <a href="/admin/" rel="nofollow noopener" style="color:inherit;text-decoration:none;display:inline-block;padding:8px 6px">Admin</a></div>
     </div>
   </div>
 </footer>
@@ -1641,7 +1641,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <a href="https://wa.me/34646205526?text=Hola%20Julio!%20Vull%20info%20de%20l%27Escoleta" target="_blank" rel="noopener" data-cta="bar-wa">WhatsApp Escoleta</a>
 </nav>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // ==== CTA tracking ====
   document.querySelectorAll('[data-cta]').forEach(function (el) {
     el.addEventListener('click', function () {
@@ -1665,7 +1665,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
     // sense saber per què. Amb role="alert" es llegeix tot sol.
     t.setAttribute('role', 'alert');
     t.textContent = msg;
-    t.style.cssText = "position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#10100E;color:#fff;padding:14px 26px;font-family:'Anton',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;z-index:1000";
+    t.style.cssText = "position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#10100E;color:#fff;padding:14px 26px;font-family:'Anton',sans-serif;font-size: 11.5px;letter-spacing:0.3em;text-transform:uppercase;z-index:1000";
     document.body.appendChild(t);
     setTimeout(function () { t.remove(); }, 2200);
   }

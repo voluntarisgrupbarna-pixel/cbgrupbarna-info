@@ -31,7 +31,7 @@
    component es pinta aquí amb els mateixos tokens, i per tant segueix el
    mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
 .lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
-.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 44px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
 .lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
 .lang-switch .sep { color: var(--line); pointer-events: none; }
@@ -411,7 +411,10 @@
   }
   :root[data-theme="light"]{--radius:14px}
 
-  .split,.panel,.visit-card,.partner-card,.sponsor,.pack,.facts,.tbl-wrap,.pres,.b-num{border-radius:var(--radius);overflow:hidden}
+  .split,.panel,.visit-card,.partner-card,.sponsor,.pack,.facts,.pres,.b-num{border-radius:var(--radius);overflow:hidden}
+  /* .tbl-wrap va a part: ha de poder desplaçar-se en horitzontal al mòbil,
+     i un overflow:hidden aquí li retallava la taula sense sortida. */
+  .tbl-wrap{border-radius:var(--radius);overflow-x:auto;-webkit-overflow-scrolling:touch}
   .badge-lopivi{border-radius:99px}
 
   /* Xifres com a KPI: cada casella és una targeta, no una cel·la de graella. */

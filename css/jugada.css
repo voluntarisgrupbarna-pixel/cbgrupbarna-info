@@ -32,7 +32,7 @@
   transition: background .3s var(--ease);
 }
 .jug-clock .lbl {
-  font-size: 10px; font-weight: 800; letter-spacing: .22em;
+  font-size: 11.5px; font-weight: 800; letter-spacing: .22em;
   text-transform: uppercase; color: rgba(255, 255, 255, .62);
   min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
@@ -72,7 +72,7 @@
 .jug-sub a:hover .tag { background: var(--red); color: #fff; }
 .jug-sub .tag {
   background: var(--red-light); color: var(--ink);
-  font-size: 9px; font-weight: 800; letter-spacing: .18em; padding: 3px 7px;
+  font-size: 11px; font-weight: 800; letter-spacing: .18em; padding: 3px 7px;
   transition: background .2s var(--ease), color .2s var(--ease);
 }
 
@@ -96,7 +96,7 @@
 }
 .jug-tm small {
   display: block; font-family: var(--body-f); font-weight: 800;
-  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase;
   color: var(--muted); margin-top: 7px;
 }
 /* Sobre les superfícies fosques i vermelles el fosc no es llegeix. */

@@ -24,7 +24,13 @@ const argVal = (name, def) => {
 };
 const OUT = path.resolve(ROOT, argVal('out', 'tests/out'));
 const LIMIT = +argVal('pages', 0) || Infinity;
+const SKIP_N = +argVal('skip', 0) || 0;
 const CONCURRENCY = +argVal('workers', 5);
+// Filtre d'amplades: `--viewports mobil,tauleta`. Serveix per repassar només
+// mòbil i tauleta sense pagar les càrregues d'escriptori, i per trossejar la
+// tanda sencera quan la memòria de l'entorn no dona per a 500 pàgines de cop.
+const VP_FILTER = (argVal('viewports', '') || '')
+  .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
 
 const VIEWPORTS = [
   { name: 'mòbil', width: 360, height: 740, dpr: 3, mobile: true },
@@ -198,22 +204,32 @@ async function auditOne(context, origin, page, viewport) {
   };
 }
 
+// «mòbil-gran» s'ha de poder demanar escrivint «mobil-gran».
+const plain = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const VIEWPORTS_ON = VP_FILTER.length
+  ? VIEWPORTS.filter((v) => VP_FILTER.some((f) => plain(v.name) === plain(f)))
+  : VIEWPORTS;
+
 async function main() {
+  if (!VIEWPORTS_ON.length) {
+    console.error(`Cap amplada coincideix amb --viewports. N'hi ha: ${VIEWPORTS.map((v) => v.name).join(', ')}`);
+    process.exit(2);
+  }
   fs.mkdirSync(OUT, { recursive: true });
   const { origin, close } = await startServer(ROOT);
-  const pages = findPages().slice(0, LIMIT);
+  const pages = findPages().slice(SKIP_N, SKIP_N + LIMIT);
   const browser = await chromium.launch();
 
   console.log(`Servint ${ROOT} a ${origin}`);
-  console.log(`${pages.length} pàgines × ${VIEWPORTS.length} amplades = ${pages.length * VIEWPORTS.length} càrregues\n`);
+  console.log(`${pages.length} pàgines × ${VIEWPORTS_ON.length} amplades = ${pages.length * VIEWPORTS_ON.length} càrregues\n`);
 
   const jobs = [];
-  for (const page of pages) for (const vp of VIEWPORTS) jobs.push({ page, vp });
+  for (const page of pages) for (const vp of VIEWPORTS_ON) jobs.push({ page, vp });
 
   const results = [];
   let done = 0;
   const contexts = await Promise.all(
-    VIEWPORTS.map((vp) => browser.newContext({
+    VIEWPORTS_ON.map((vp) => browser.newContext({
       viewport: { width: vp.width, height: vp.height },
       deviceScaleFactor: vp.dpr,
       isMobile: vp.mobile,
@@ -223,7 +239,7 @@ async function main() {
       reducedMotion: 'reduce',
     }))
   );
-  const ctxFor = new Map(VIEWPORTS.map((vp, i) => [vp.name, contexts[i]]));
+  const ctxFor = new Map(VIEWPORTS_ON.map((vp, i) => [vp.name, contexts[i]]));
 
   const queue = jobs.slice();
   const worker = async () => {
@@ -243,7 +259,7 @@ async function main() {
   await browser.close();
   await close();
 
-  fs.writeFileSync(path.join(OUT, 'browser.json'), JSON.stringify({ generated: new Date().toISOString(), viewports: VIEWPORTS, results }, null, 1));
+  fs.writeFileSync(path.join(OUT, 'browser.json'), JSON.stringify({ generated: new Date().toISOString(), viewports: VIEWPORTS_ON, results }, null, 1));
   console.log(`\nDesat a ${path.relative(ROOT, path.join(OUT, 'browser.json'))}`);
 }
 

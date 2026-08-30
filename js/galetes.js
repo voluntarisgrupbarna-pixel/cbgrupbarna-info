@@ -92,12 +92,12 @@
     'align-items:center;justify-content:space-between;flex-wrap:wrap}',
     '.cbgb-gal-t{flex:1 1 340px;min-width:0}',
     '.cbgb-gal-t b{display:block;font-family:\'Anton\',\'Futura\',sans-serif;font-weight:400;',
-    'font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#FF3B41;margin-bottom:7px}',
+    'font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#FF3B41;margin-bottom:7px}',
     '.cbgb-gal-t p{margin:0;color:rgba(255,255,255,.82)}',
     '.cbgb-gal-t a{color:#fff;border-bottom:1px solid #FF3B41;text-decoration:none}',
     '.cbgb-gal-t a:hover{color:#FF3B41}',
     '.cbgb-gal-b{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}',
-    '.cbgb-gal-b button{font-family:\'Anton\',\'Futura\',sans-serif;font-size:10px;letter-spacing:.24em;',
+    '.cbgb-gal-b button{font-family:\'Anton\',\'Futura\',sans-serif;font-size:11.5px;letter-spacing:.24em;',
     'text-transform:uppercase;padding:13px 22px;min-height:46px;border:1px solid #fff;cursor:pointer;',
     'background:transparent;color:#fff;transition:background .3s,border-color .3s,color .3s}',
     '.cbgb-gal-b button:hover{background:#fff;color:#10100E}',
@@ -113,7 +113,7 @@
     // avis es la primera cosa que es toca en entrar; no pot sortir tallat.
     '@media(max-width:380px){.cbgb-gal{padding:12px 12px;padding-bottom:calc(12px + env(safe-area-inset-bottom))}',
     '.cbgb-gal-b{gap:8px}',
-    '.cbgb-gal-b button{font-size:9px;letter-spacing:.12em;padding:12px 6px;hyphens:auto}}',
+    '.cbgb-gal-b button{font-size:11px;letter-spacing:.12em;padding:12px 6px;hyphens:auto}}',
     '@media(prefers-reduced-motion:reduce){.cbgb-gal{animation:none}}'
   ].join('');
 
@@ -285,15 +285,16 @@
     // costat, aixi que aqui no tapa res.
     est.textContent = '.cbgb-admin-tab{position:fixed;bottom:14px;right:14px;' +
       "z-index:2147483000;font-family:'Anton','Futura',sans-serif;font-weight:400;" +
-      'font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;' +
+      'font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#fff;' +
       'background:#10100E;border:1px solid rgba(255,255,255,.25);border-radius:999px;' +
-      'padding:9px 16px;text-decoration:none;opacity:.62;transition:opacity .25s}' +
+      'padding:0 16px;min-height:44px;display:inline-flex;align-items:center;' +
+      'text-decoration:none;opacity:.62;transition:opacity .25s}' +
       '.cbgb-admin-tab:hover,.cbgb-admin-tab:focus-visible{opacity:1;border-color:#E20613}' +
       /* Es veu SEMPRE, també a mòbil: decisió de l'Ana. S'amagava perquè, quan
          estava a dalt, tapava el commutador d'idioma; ara que és a baix a la
          dreta ja no tapa res. El WhatsApp va a l'altre costat. */
       'body.cbgb-gal-obert .cbgb-admin-tab{bottom:calc(var(--cbgb-gal-h,0px) + 12px)}' +
-      '@media(max-width:900px){.cbgb-admin-tab{bottom:12px;right:12px;padding:10px 15px}' +
+      '@media(max-width:900px){.cbgb-admin-tab{bottom:12px;right:12px;padding:0 15px}' +
       'body.cbgb-gal-obert .cbgb-admin-tab{bottom:calc(var(--cbgb-gal-h,0px) + 10px)}}';
     document.head.appendChild(est);
     var link = document.createElement('a');

@@ -26,9 +26,16 @@ export function collect(opts) {
 
   const vw = window.innerWidth;
 
+  // Un element és visible si ell i TOTS els seus pares ho són. Mirar només
+  // l'element enganya: els fills d'un panell amb opacity:0 diuen opacity:1
+  // cadascun, i el panell tancat del xat es colava a totes les llistes.
   const visible = (el) => {
-    const cs = getComputedStyle(el);
-    if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return false;
+    for (let n = el; n && n.nodeType === 1; n = n.parentElement) {
+      const cs = getComputedStyle(n);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return false;
+      if (n.hasAttribute('hidden') || n.getAttribute('aria-hidden') === 'true') return false;
+      if (cs.contentVisibility === 'hidden') return false;
+    }
     const r = el.getBoundingClientRect();
     return r.width > 0 && r.height > 0;
   };
@@ -79,8 +86,11 @@ export function collect(opts) {
     let r = el.getBoundingClientRect();
     // Una casella d'1×1 amb una etiqueta gran al costat es toca per l'etiqueta:
     // la zona real és la unió de totes dues.
-    if (el.id && /^(input|select|textarea)$/.test(el.tagName.toLowerCase())) {
-      const lab = document.querySelector(`label[for="${CSS.escape(el.id)}"]`);
+    if (/^(input|select|textarea)$/.test(el.tagName.toLowerCase())) {
+      // Dues formes d'associar una etiqueta, i totes dues fan de zona tocable:
+      // label[for=id] al costat, o un <label> que embolcalla el camp.
+      const lab = (el.id && document.querySelector(`label[for="${CSS.escape(el.id)}"]`))
+        || el.closest('label');
       if (lab && visible(lab)) {
         const lr = lab.getBoundingClientRect();
         r = {

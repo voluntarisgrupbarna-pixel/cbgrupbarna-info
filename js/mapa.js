@@ -33,7 +33,7 @@
     + '.mapa-grid{display:grid;grid-template-columns:repeat(3,1fr)}'
     + '.mapa-col{padding:20px 26px;border-right:1px solid rgba(16,16,14,.14);border-bottom:1px solid rgba(16,16,14,.14)}'
     + '.mapa-col:nth-child(3n){border-right:none}'
-    + '.mapa-col h3{margin:0 0 11px;font-family:inherit;font-weight:800;font-size:10.5px;'
+    + '.mapa-col h3{margin:0 0 11px;font-family:inherit;font-weight:800;font-size:11.5px;'
     + 'letter-spacing:.2em;text-transform:uppercase;color:#A8040E}'
     + '.mapa-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}'
     + '.mapa-col a{color:#46433f;text-decoration:none;font-weight:600;font-size:14.5px;display:block;padding:8px 0}'

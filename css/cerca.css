@@ -27,6 +27,10 @@
 @media (max-width: 720px) { .cerca-boto span { display: none; } .cerca-boto { padding: 8px; min-width: 44px; min-height: 44px; justify-content: center; } }
 .cerca-boto--icona span { display: none; }
 .cerca-boto--icona { padding: 8px; min-width: 44px; min-height: 44px; justify-content: center; }
+/* La tauleta és ampla i, tot i així, es toca amb el dit: el que mana per a
+   la mida del botó és el tipus de punter, no els píxels d'amplada. Sense
+   això, entre 720 i 1024 px el botó es quedava en 31 px d'alt. */
+@media (pointer: coarse) { .cerca-boto { min-height: 44px; } }
 
 /* ---- La capa ---- */
 html.cerca-oberta { overflow: hidden; }
@@ -85,11 +89,11 @@ html.cerca-oberta { overflow: hidden; }
 .cerca-titol {
   display: flex; align-items: baseline; gap: 10px;
   font-family: var(--body, 'Inter', system-ui, sans-serif);
-  font-size: 9.5px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--muted, #6B6560); margin: 0 0 10px;
 }
 .cerca-esborra-recents {
-  font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--red-dark, #A8040E); text-decoration: underline;
 }
 
@@ -141,7 +145,7 @@ html.cerca-oberta { overflow: hidden; }
 }
 .cerca-faq-font {
   display: inline-block; margin-top: 11px;
-  font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--muted, #6B6560);
 }
 .cerca-faq-font b { font-weight: 600; color: var(--red-dark, #A8040E); }
@@ -168,7 +172,7 @@ html.cerca-oberta { overflow: hidden; }
   margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--ink-2, #46433f);
 }
 .cerca-r-u {
-  display: block; margin-top: 5px; font-size: 10.5px; letter-spacing: 0.1em;
+  display: block; margin-top: 5px; font-size: 11.5px; letter-spacing: 0.1em;
   color: var(--muted, #6B6560); word-break: break-word;
 }
 .cerca-idioma {
@@ -200,12 +204,12 @@ html.cerca-oberta { overflow: hidden; }
   flex: none; padding: 9px 18px;
   border-top: 1px solid var(--line, rgba(16, 16, 14, 0.14));
   background: var(--cream, #ffffff);
-  font-size: 10px; letter-spacing: 0.08em; color: var(--muted, #6B6560);
+  font-size: 11.5px; letter-spacing: 0.08em; color: var(--muted, #6B6560);
 }
 .cerca-pista kbd {
   display: inline-block; min-width: 17px; margin-right: 3px; padding: 1px 4px;
   border: 1px solid var(--line, rgba(16, 16, 14, 0.14)); border-radius: 3px;
-  background: var(--paper, #fff); font-family: inherit; font-size: 10px; text-align: center;
+  background: var(--paper, #fff); font-family: inherit; font-size: 11.5px; text-align: center;
 }
 /* Sense teclat físic la pista no diu res útil. */
 @media (pointer: coarse) { .cerca-pista { display: none; } }
@@ -235,7 +239,7 @@ html.cerca-oberta { overflow: hidden; }
 }
 .cerca-preguntaho span {
   display: block; margin-top: 4px;
-  font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--red-dark, #A8040E);
 }
 .cerca-preguntaho:hover, .cerca-preguntaho.es-actiu { border-left-width: 6px; }
@@ -261,7 +265,7 @@ html.cerca-oberta { overflow: hidden; }
 }
 .cerca-form-camps { display: grid; gap: 4px; margin: 12px 0 0; }
 .cerca-form-camps label {
-  font-size: 9.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
   color: var(--muted, #6B6560); margin-top: 6px;
 }
 .cerca-form-camps input,
@@ -329,7 +333,7 @@ html.cerca-oberta { overflow: hidden; }
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
 .cerca-mapa h3 {
   font-family: var(--body, 'Inter', system-ui, sans-serif);
-  font-size: 9.5px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--muted, #6B6560); margin: 0 0 8px;
 }
 .cerca-mapa a {
