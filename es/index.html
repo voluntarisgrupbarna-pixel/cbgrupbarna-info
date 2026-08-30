@@ -1434,6 +1434,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   // ══════════════════════════════════════════════════════════════════════
   var FORM_ENDPOINT = 'https://formspree.io/f/xeajwzlv';
   var WA_CLUB_NUM = '34698425153';
+  //  I a la FULL DE CÀLCUL: el mateix Apps Script de la bústia, marcat amb
+  //  source 'info-portada' perquè es pugui filtrar. Fins ara el formulari
+  //  només obria el WhatsApp i enviava un correu: si la persona tancava
+  //  l'emergent o el correu es perdia, la dada no quedava enlloc. Ara cada
+  //  sol·licitud queda escrita a la full, que és l'únic lloc que no depèn
+  //  que ningú miri res.
+  var SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXY1zBr9TH-gwOS3fo6tUqj9Sj7ExHv33un3VLtBHz58QNThlR3DdUnrB-xjtQri9g/exec';
 
   (function () {
     var form = document.getElementById('infoForm');
@@ -1486,6 +1493,24 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
           }).catch(function () {
             if (window.gtag) window.gtag('event', 'form_email_error', { codi: 'xarxa' });
           });
+        } catch (_) {}
+      }
+
+      // 1 bis · A la full de càlcul, perquè la dada no depengui del correu
+      // ni que s'obri el WhatsApp. Va en no-cors: no en sabrem la resposta,
+      // però el que importa és que hi arribi.
+      if (SHEETS_ENDPOINT) {
+        try {
+          fetch(SHEETS_ENDPOINT, {
+            method: 'POST', mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              source: 'info-portada',
+              idioma: document.documentElement.lang,
+              nom: nom, mobil: mobil, correu: correu,
+              interes: interesTxt, missatge: msg, origen: location.pathname
+            })
+          }).catch(function () {});
         } catch (_) {}
       }
 

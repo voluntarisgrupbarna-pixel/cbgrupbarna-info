@@ -1437,6 +1437,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   // ══════════════════════════════════════════════════════════════════════
   var FORM_ENDPOINT = 'https://formspree.io/f/xeajwzlv';
   var WA_CLUB_NUM = '34698425153';
+  //  And to the SPREADSHEET: the same bustia Apps Script, tagged with
+  //  source 'info-portada' so it can be filtered. Until now the form only
+  //  opened WhatsApp and sent an email: if the person closed the popup or
+  //  the email got lost, the enquiry was nowhere. Now every enquiry is
+  //  written to the sheet, which is the one place that does not depend on
+  //  anyone looking at anything.
+  var SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXY1zBr9TH-gwOS3fo6tUqj9Sj7ExHv33un3VLtBHz58QNThlR3DdUnrB-xjtQri9g/exec';
 
   (function () {
     var form = document.getElementById('infoForm');
@@ -1489,6 +1496,24 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
           }).catch(function () {
             if (window.gtag) window.gtag('event', 'form_email_error', { codi: 'xarxa' });
           });
+        } catch (_) {}
+      }
+
+      // 1 bis · To the spreadsheet, so the enquiry does not depend on the
+      // email nor on WhatsApp opening. Sent no-cors: we will not know the
+      // response, but what matters is that it arrives.
+      if (SHEETS_ENDPOINT) {
+        try {
+          fetch(SHEETS_ENDPOINT, {
+            method: 'POST', mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              source: 'info-portada',
+              idioma: document.documentElement.lang,
+              nom: nom, mobil: mobil, correu: correu,
+              interes: interesTxt, missatge: msg, origen: location.pathname
+            })
+          }).catch(function () {});
         } catch (_) {}
       }
 
