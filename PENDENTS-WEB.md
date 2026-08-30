@@ -2567,9 +2567,17 @@ graella de xifres.
 ## 29-08-2026 (tancament) — Inventari de «les dades de la veritat»
 
 Resum consolidat de tota la sessió d'auditoria de dades, perquè no quedi
-repartit en cinc blocs. **Referència visual publicada** (xifra a xifra, amb
-procedència i estat de cadascuna):
+repartit en cinc blocs.
+
+**Document complet publicat com a artefacte:**
 <https://claude.ai/code/artifact/8c674f79-ffc5-4531-8280-e2727bb8519d>
+
+No és només la taula de xifres: hi ha **tota l'auditoria**. Xifra a xifra amb
+la seva procedència i el seu estat, les dues decisions de l'Ana, les set
+correccions aplicades avui i els deu punts oberts ordenats per gravetat amb
+etiqueta de severitat. Es manté a la mateixa URL: quan es tanqui un punt,
+s'hi torna a publicar a sobre i l'enllaç no canvia. Comprovat en clar i en
+fosc, a 390 i 1280 px.
 
 Criteri que s'ha fet servir per a tot el que hi ha aquí sota:
 
@@ -2607,6 +2615,31 @@ Les quatre xifres d'equips, doncs, **no es contradiuen: són quatre coses**:
 | **32** | Equips federats la temporada 2025-26 (17 M + 15 F). | Comprovable, citat |
 | **38** | Tot el que entrenava al club 25-26: 32 federats + 6 sense fitxa (3 d'Escoleta, Barna Màgics a l'ACELL, 2 de lliga escolar). | Comprovable, citat |
 | **34+** | La xifra viva d'aquesta temporada. | **Dada interna** |
+
+### Les set correccions aplicades avui
+
+Totes verificades contra el fitxer que genera la dada —no contra la pàgina
+que la mostra— i passades pel QA visual: zero desbordaments en 25 pàgines a
+390, 768 i 1280 px.
+
+1. **Partners: 21 a tot arreu.** Hi havia pàgines dient 22 i altres 23; la
+   llista nominal de `data.json` en té 21. Una desena de pàgines, tres idiomes.
+2. **Jugadors: 450, també a la fitxa gran.** `/empreses/` deia 400 al text i
+   seguia dient 400 al número gran de la graella, que és un element HTML a
+   part —per això el primer escombrat per text no el va trobar.
+3. **Equips: 34+ com a xifra única.** Quatre confusions diferents: «38
+   equipos/teams» al titular de les portades es/en (error de traducció),
+   «entrenen 38 equips» confonent entrenadores amb equips a quatre pàgines, i
+   «15 equips federats» a `/partits/equips/`.
+4. **Fora la «Liga EBA».** Portada i les tres versions del briefing ara diuen
+   l'escala real: Tercera FEB → Segona FEB → Primera FEB → Lliga Endesa (ACB).
+5. **«15 amb competició federada FCBQ» → «15 amb calendari a la web»**, a
+   `/posicionament/` i `/empreses/`, tres idiomes.
+6. **La família «equips de formació», unificada.** Deia 38 en català, +40 en
+   es/en i 35–40 en una altra, en pàgines indexables dels dossiers.
+   `/presentacio/` arribava a contradir-se a si mateixa entre el text i la
+   seva pròpia fitxa.
+7. **Visualitzacions 25-26: 8M, amb el creixement recalculat a +65%.**
 
 ### Decisions preses per l'Ana avui
 
