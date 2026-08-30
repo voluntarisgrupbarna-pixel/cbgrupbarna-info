@@ -44,7 +44,7 @@
 <body>
 <a class="skip" href="#contingut">Salta al contingut</a>
 <script src="/scripts/admin-gate.js"></script>
-<script>CBGBGate.protect(init);</script>
+<script>CBGBGate.protect(function(){ window.__gateOk = true; if (typeof init === "function") init(); });</script>
 
 <nav>
   <img src="/logo.png" alt="CB Grup Barna" width="226" height="300">
@@ -195,6 +195,10 @@ function init() {
     $('del').disabled = false;
   };
 }
+
+// El gate (a dalt) s'executa abans que aquest bloc existeixi: si ja ha passat,
+// arrenquem aqui. Si no, sera protect() qui cridi init() en desbloquejar.
+if (window.__gateOk) init();
 </script>
 </body>
 </html>
