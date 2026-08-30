@@ -668,7 +668,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .foot-legal { font-family: var(--display); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
 
 /* ==== ACCESSIBILITAT I TOC ==== */
-.skip { position: absolute; left: -9999px; top: 0; z-index: 200; }
+.skip { position: absolute; left: -9999px; top: 0; z-index: 200; min-height: 44px; }
 .skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; min-height: 44px; padding: 12px 22px; font-family: var(--display); font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; }
 /* Objectius de toc: res per sota de 44 px a mòbil i tauleta. */
 .btn, .list a, .faq summary, .head-nav a, .menu-col a { min-height: 44px; }
@@ -821,7 +821,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
    mínim perquè un dit hi arribi (mida mínima de diana, WCAG 2.2): amb el
    text sol feien 15-17px. */
 .lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 11.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
-.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 44px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color 0.3s var(--ease, ease); }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 44px; padding: 7px 4px; color: #6B6560; text-decoration: none; transition: color 0.3s var(--ease, ease); }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
 .head-admin { margin-left: clamp(8px, 1.2vw, 16px); font-family: var(--body); font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #6B6560; text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 7px 4px; white-space: nowrap; transition: color 0.3s var(--ease, ease); }
 .head-admin:hover, .head-admin:focus-visible { color: var(--red-ink); }
@@ -830,7 +830,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .lang-switch .sep { color: var(--line); pointer-events: none; }
 .lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
 .lang-switch.light a.active { color: #fff; }
-@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 11.5px; } .lang-switch a { min-width: 32px; padding: 7px 3px; } }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 11.5px; } .lang-switch a { min-width: 26px; padding: 7px 3px; } }
 /* El nom del club al costat de l'escut no cabia amb el commutador de vista i
    el selector d'idioma: la capçalera estirava la pàgina i l'avís de galetes
    en sortia tallat. L'escut ja és l'enllaç a l'inici. */

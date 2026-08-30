@@ -76,6 +76,20 @@ export function collect(opts) {
     out.overflow = { docWidth: docW, viewport: vw, excess: docW - vw, elements: guilty };
   }
 
+  // Un enllaç «en línia» és el que va enmig d'un text corrent: es pinta com a
+  // inline i el seu pare té text propi a banda de l'enllaç mateix.
+  const isInlineInText = (el) => {
+    if (el.tagName !== 'A') return false;
+    const d = getComputedStyle(el).display;
+    if (d !== 'inline' && d !== 'inline-block') return false;
+    const par = el.parentElement;
+    if (!par) return false;
+    for (const n of par.childNodes) {
+      if (n.nodeType === 3 && n.textContent.trim().length > 1) return true;
+    }
+    return false;
+  };
+
   // ---------- zones tocables ----------
   const interactive = document.querySelectorAll(
     'a[href], button, input:not([type=hidden]), select, textarea, summary, [role=button], [role=link], [tabindex]:not([tabindex="-1"])'
@@ -102,6 +116,12 @@ export function collect(opts) {
     }
     const w = r.width, h = r.height;
     if (w >= MIN_TAP && h >= MIN_TAP) continue;
+    // Excepció «inline» de la WCAG 2.2 (2.5.8): un enllaç dins d'una frase no
+    // té mida pròpia —l'hi dona la línia de text— i no se'n pot demanar. Si no
+    // s'exclou, cada enllaç enmig d'un paràgraf compta com un error i
+    // n'enterra els de debò. Es reconeix perquè es pinta en línia i el seu
+    // pare té text propi al voltant.
+    if (isInlineInText(el)) continue;
     const key = where(el) + Math.round(r.top);
     if (seenTap.has(key)) continue;
     seenTap.add(key);

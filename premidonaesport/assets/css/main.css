@@ -92,7 +92,7 @@ body { max-width: 100%; }
 /* Selector d'idioma del dossier. Les versions castellana i anglesa ja el
    duien; la catalana, no, i des d'aquí no hi havia manera d'arribar-hi. */
 .lang-switch { display: flex; align-items: center; gap: 2px; font-family: inherit; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; }
-.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 44px; padding: 7px 4px; opacity: .55; text-decoration: none; transition: opacity .3s, color .3s; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 44px; padding: 7px 4px; opacity: .55; text-decoration: none; transition: opacity .3s, color .3s; }
 .lang-switch a.active { opacity: 1; font-weight: 600; }
 .lang-switch a:hover, .lang-switch a:focus-visible { opacity: 1; color: #FF3B41; }
 .lang-switch .sep { opacity: .25; pointer-events: none; }
@@ -325,7 +325,7 @@ footer { padding: 3rem 1.5rem; border-top: 1px solid var(--bd); background: #020
 .ft-contact { font-size:0.72rem; color: rgba(255,255,255,.72); letter-spacing: .05em; margin-bottom: 2rem; line-height: 1.8; }
 .ft-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
 .ft-ct { font-size:0.69rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.72); margin-bottom: .75rem; }
-.ft-lk { display: block; font-size: .7rem; color: rgba(255,255,255,.72); text-decoration: none; margin-bottom: .35rem; transition: color .2s; }
+.ft-lk { display: flex; align-items: center; min-height: 40px; font-size: .7rem; color: rgba(255,255,255,.72); text-decoration: none; transition: color .2s; }
 .ft-lk:hover { color: var(--cream); }
 .ft-bot { font-size:0.69rem; color: rgba(255,255,255,.72); letter-spacing: .1em; border-top: 1px solid var(--bd); padding-top: 1.5rem; }
 

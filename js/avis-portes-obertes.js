@@ -82,7 +82,7 @@
     '.cbgb-po a.cbgb-po-cta{color:#EEFF00;background:#A8040E;font-weight:700;' +
     'text-decoration:underline;text-underline-offset:3px;font-size:12.5px;' +
     'letter-spacing:.06em;white-space:nowrap;flex-shrink:0;' +
-    'display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border-radius:3px}' +
+    'display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:3px}' +
     '.cbgb-po a.cbgb-po-cta:hover{color:#fff}' +
     '.cbgb-po button{appearance:none;background:transparent;border:1px solid rgba(255,255,255,.45);' +
     'color:#fff;width:44px;height:44px;min-width:44px;cursor:pointer;font-size:17px;line-height:1;' +

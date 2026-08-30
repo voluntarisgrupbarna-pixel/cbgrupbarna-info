@@ -100,6 +100,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
    igual que ja feia per sota de 1080px, però sense esperar-hi. */
 .head-nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 28px); min-width: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .head-nav::-webkit-scrollbar { display: none; }
+/* Al mòbil i a la tauleta la tira de navegació fa scroll i només se'n veu
+   un tros: el botó de cerca, que hi anava al final, no el trobava ningú.
+   Va primer, que és l'únic lloc on es veu sense arrossegar res. */
+@media (max-width: 1024px) {
+  .head-nav { gap: 16px; }
+  .head-nav .cerca-boto { order: -1; }
+}
 .head-nav a { position: relative; display: inline-flex; align-items: center; flex-shrink: 0; min-height: 44px; padding: 10px 0; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 4px; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
@@ -125,13 +132,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
    servir la resta del lloc. L'alçada surt de franc: la fila de la capçalera ja
    feia 44px. Els separadors són decoratius i no es poden tocar. */
 .lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 11.5px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
-.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 44px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color 0.3s var(--ease); }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 44px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color 0.3s var(--ease); }
 .lang-switch a.active { color: var(--ink); font-weight: 600; }
 .lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
 .lang-switch .sep { color: var(--line); pointer-events: none; }
 .lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
 .lang-switch.light a.active { color: #fff; }
-@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 11.5px; } .lang-switch a { min-width: 32px; padding: 7px 3px; } }
+@media (max-width: 480px) { .lang-switch { gap: 0; font-size: 11.5px; } .lang-switch a { min-width: 26px; padding: 7px 3px; } }
 
 /* ==== BOTONS ==== */
 .cta { display: inline-block; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.3em; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid currentColor; transition: color 0.35s var(--ease), border-color 0.35s var(--ease); }
@@ -415,7 +422,7 @@ a.partner-logo:hover img { filter: none; opacity: 1; }
 .foot-legal { font-family: var(--body); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
 
 /* ==== ACCESSIBILITAT ==== */
-.skip { position: absolute; left: -9999px; top: 0; z-index: 200; }
+.skip { position: absolute; left: -9999px; top: 0; z-index: 200; min-height: 44px; }
 .skip:focus { left: 50%; transform: translateX(-50%); top: 8px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; min-height: 44px; padding: 12px 22px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.26em; text-transform: uppercase; }
 @media (max-width: 900px) { .cta { padding: 12px 0 10px; } }
 
