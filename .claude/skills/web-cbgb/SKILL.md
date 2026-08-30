@@ -8,6 +8,33 @@ description: Sistema de disseny de les webs del CB Grup Barna (cbgrupbarna.info 
 Val per a `cbgrupbarna.info` i per a tot el que en pengi. Si una peça respecta
 aquestes regles, es reconeix com del club sense veure l'escut.
 
+> ## La guia principal és «El Sistema Barna»
+>
+> **https://claude.ai/code/artifact/c22e9418-788b-43af-94c6-de7ab81b7f27**
+>
+> Del 30/08/2026. És la guia visual **definitiva** del lloc, i la que mana
+> quan hi hagi dubte. Surt de les quatre portades i recull el que segueix
+> viu dels tres documents anteriors —«L'estètica definitiva», «Franges i
+> Extensa» i «Web + Instagram: dues propostes»—, que queden com a història.
+>
+> Aquest fitxer i aquella guia han de dir el mateix: **si en canvies un,
+> canvia l'altre.** Aquí hi ha el detall d'enginyeria (generadors, trampes
+> del repositori, circuit d'i18n); allà hi ha el sistema visual amb els
+> contrastos mesurats per la pàgina mateixa i el destí decidit de cada
+> portada.
+>
+> **El destí de cada portada** (decisió de l'Ana, 30/08/2026):
+>
+> | | Proposta | Va a | Estat |
+> |---|---|---|---|
+> | A | L'Afinat | La portada, `cbgrupbarna.info` | **Publicada** (v1.4.0) |
+> | B | Dia de partit | El calendari, `/partits/` | Pendent |
+> | C | La Jugada | L'Escoleta, `/escoleta/`, amb submenú «Història de l'escola» | Pendent |
+> | D | L'Edició | La premsa escrita, `/premsa/` | Pendent |
+>
+> Les maquetes navegables:
+> https://claude.ai/code/artifact/a4a53f45-e2d3-4e9a-aadb-ee89be001087
+
 ---
 
 ## 0. Abans de tocar res
@@ -84,10 +111,13 @@ L'estructura de les franges està calcada de la guia visual. **Si canvies l'ordr
 o els textos d'una, canvia'ls a l'altra**: la portada i la guia han de dir el
 mateix.
 
-### L'«Estètica definitiva» (25/08/2026) mana sobre «Franges i Extensa»
+### Les quatre decisions de l'«Estètica definitiva», vigents
 
-El document «L'estètica definitiva» substitueix la guia «Franges i Extensa».
-Quatre decisions tancades, totes aplicades al lloc:
+«L'estètica definitiva» (25/08/2026) va substituir «Franges i Extensa», i des
+del 30/08/2026 totes dues queden sota «El Sistema Barna» (vegeu el bloc de
+dalt), que és la guia principal. Aquestes quatre decisions **segueixen
+vigents** i estan recollides allà; es deixen aquí perquè és on es va apuntar
+com s'apliquen al codi:
 
 1. **Sense crema enlloc** — totes les superfícies clares són blanc pur.
 2. **Groc `#EEFF00` només a la lletra, mai al fons**, i només als dos punts
@@ -114,6 +144,22 @@ Anton i `#E20613` (punts 1 i 2), perquè el vermell està mostrejat de l'escut i
 `#E31E24` no arriba al contrast mínim sobre crema. La resta d'aquella guia —la
 tesi, el diagnòstic i les dues propostes— sí que val, i és el que hi ha aquí
 sobre.
+
+El llinatge sencer, per si algú es troba un d'aquests documents i no sap si
+encara mana. **Només l'últim mana**, i els altres tres es guarden com a
+història:
+
+| | Document | Què en queda |
+|---|---|---|
+| 1 | Web + Instagram: dues propostes | La tesi i el diagnòstic. **Els valors, no.** |
+| 2 | Franges i Extensa | Els valors de color. La part de les dues vistes va caducar a la v2.0.0. |
+| 3 | L'estètica definitiva (25/08) | Les quatre decisions, totes vigents. |
+| 4 | **El Sistema Barna (30/08)** | **La guia principal.** Ho recull tot. |
+
+> Mesurat per la pàgina de la guia: `#E31E24` sobre la crema d'abans dona
+> 4,16:1 i no passa —aquell era el motiu de descartar-lo—; sobre el blanc
+> d'avui dona 4,69:1 i sí que passaria. Segueix fora igualment, perquè el
+> color de marca és el de l'escut i no una tria de gust.
 
 ---
 

@@ -2409,3 +2409,37 @@ Commit `5957887c`.
   no de codi.
 - **La foto institucional només és a la maqueta.** Si es vol a producció, cal
   passar-la per `scripts/build-blog-images.py` com les altres.
+
+### 4. La guia visual definitiva — FETA
+
+Encàrrec de l'Ana: «amb les 4 portades has de fer una guia visual definitiva
+de la web i que quedi com a principal».
+
+**«El Sistema Barna»** —
+https://claude.ai/code/artifact/c22e9418-788b-43af-94c6-de7ab81b7f27
+
+Surt de les quatre portades: el que les fa quatre *vestits* i no quatre
+marques. Onze seccions —la tesi, les quatre portades amb el seu destí, els
+invariants, color, lletra, foto, dades, vocabulari, els tres idiomes, la
+llista d'abans de publicar i el llinatge de guies.
+
+Tres coses que val la pena saber-ne:
+
+- **La guia és el sistema que descriu.** Mateixos tokens, Anton i Inter
+  incrustades des de `fonts/` del repositori amb els `unicode-range` copiats
+  de `css/fonts.css`, i el filet vermell com a gest estructural. El mode fosc
+  no és una excepció al sistema: és la regla §1 («sobre fons fosc el vermell
+  s'aclareix a `#FF3B41`») aplicada a la pàgina.
+- **Els contrastos no són números copiats.** Els mesura la pàgina en obrir-se
+  amb la fórmula de la WCAG 2.1. Quadren amb els que hi havia escrits, amb
+  **una correcció**: el `#E31E24` de la guia vella es descartava «per contrast»,
+  i sobre el blanc d'avui dona 4,69:1 i **passaria**. Falla sobre la crema
+  d'abans (4,16:1), que és on es va mesurar. Segueix fora, però pel motiu bo:
+  el color de marca és el mostrejat de l'escut.
+- **Les quatre miniatures són captures reals** de les maquetes, no dibuixos.
+
+**Que quedi com a principal** s'ha fet a `.claude/skills/web-cbgb/SKILL.md`,
+que és el que es carrega abans de tocar res visual: hi ha un bloc al capdamunt
+que assenyala la guia i la taula de destins, i el llinatge dels quatre
+documents amb què queda de cadascun. **Si canvies un dels dos, canvia l'altre.**
+
