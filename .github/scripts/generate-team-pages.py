@@ -290,18 +290,26 @@ def team_page(e, data, avui, idioma):
 
     body = f"""{header_html(idioma)}
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="{t['crumb_aria']}"><a href="{pre}/">{t['inici']}</a> · <a href="{pre}/partits/">{t['partits']}</a> · <a href="{pre}/partits/equips/">{t['equips']}</a> · <span>{esc(nom)}</span></nav></div>
-<div class="wrap">
-  <div class="phead narrow">
-    <p class="eyebrow red">{esc(competicio)}</p>
-    <h1>{esc(nom)}</h1>
-    <p class="lede">{t['balanc'].format(w=w, l=l, pos=posicio_txt)}</p>
-    <div class="btn-row">
-      <a href="{pre}/partits/" class="btn red" data-cta="team-app-{e['id']}">{t['tots_partits']}</a>
-      <a href="webcal://cbgrupbarna.info/partits/calendaris/ics/{e['id']}.ics" class="btn ghost" data-cta="team-ics-{e['id']}">{t['subscriu']}</a>
+<section class="p-dark">
+  <div class="p-dark-court" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="1.6" vector-effect="non-scaling-stroke">
+      <circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="180"/><line x1="10" y1="200" x2="390" y2="200"/>
+    </svg>
+  </div>
+  <div class="wrap p-dark-in">
+    <nav class="crumb" aria-label="{t['crumb_aria']}"><a href="{pre}/">{t['inici']}</a> · <a href="{pre}/partits/">{t['partits']}</a> · <a href="{pre}/partits/equips/">{t['equips']}</a> · <span>{esc(nom)}</span></nav>
+    <div class="phead narrow">
+      <p class="eyebrow red">{esc(competicio)}</p>
+      <h1>{esc(nom)}</h1>
+      <p class="lede">{t['balanc'].format(w=w, l=l, pos=posicio_txt)}</p>
+      <div class="btn-row">
+        <a href="{pre}/partits/" class="btn red" data-cta="team-app-{e['id']}">{t['tots_partits']}</a>
+        <a href="webcal://cbgrupbarna.info/partits/calendaris/ics/{e['id']}.ics" class="btn ghost" data-cta="team-ics-{e['id']}">{t['subscriu']}</a>
+      </div>
     </div>
   </div>
-
+</section>
+<div class="wrap">
   <div class="narrow">
     <h2 style="font-family:var(--display);font-size:clamp(16px,2.1vw,22px);margin:28px 0 14px">{t['propers']}</h2>
     {propers_html}
@@ -359,13 +367,22 @@ def index_page(data, avui, idioma):
     }
     body = f"""{header_html(idioma)}
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="{t['crumb_aria']}"><a href="{pre}/">{t['inici']}</a> · <a href="{pre}/partits/">{t['partits']}</a> · <span>{t['equips']}</span></nav></div>
-<div class="wrap">
-  <div class="phead narrow">
-    <p class="eyebrow red">{t['temporada'].format(t=esc(data.get('temporada', '')))}</p>
-    <h1>{t['h1_index']}</h1>
-    <p class="lede">{t['lede_index'].format(n=len(data['equips']))}</p>
+<section class="p-dark">
+  <div class="p-dark-court" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="1.6" vector-effect="non-scaling-stroke">
+      <circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="180"/><line x1="10" y1="200" x2="390" y2="200"/>
+    </svg>
   </div>
+  <div class="wrap p-dark-in">
+    <nav class="crumb" aria-label="{t['crumb_aria']}"><a href="{pre}/">{t['inici']}</a> · <a href="{pre}/partits/">{t['partits']}</a> · <span>{t['equips']}</span></nav>
+    <div class="phead narrow">
+      <p class="eyebrow red">{t['temporada'].format(t=esc(data.get('temporada', '')))}</p>
+      <h1>{t['h1_index']}</h1>
+      <p class="lede">{t['lede_index'].format(n=len(data['equips']))}</p>
+    </div>
+  </div>
+</section>
+<div class="wrap">
   <div class="narrow">{''.join(sections)}</div>
 </div>
 </main>

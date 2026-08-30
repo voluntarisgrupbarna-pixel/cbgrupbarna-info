@@ -85,15 +85,26 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 /* ==== CAPÇALERA ==== */
 .head { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
 .head-in { display: flex; align-items: center; justify-content: space-between; gap: 14px; max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 44px); height: 68px; }
-.head-brand { display: flex; align-items: center; min-height: 44px; gap: 11px; }
+/* flex-shrink:0: el nom del club porta white-space:nowrap, i si la caixa
+   s'encongeix el text en surt per la dreta i se solapa amb el menú. Qui ha
+   de cedir espai és .head-nav, que sap fer scroll. */
+.head-brand { display: flex; align-items: center; flex-shrink: 0; min-height: 44px; gap: 11px; }
 .head-brand img { width: 30px; height: 30px; object-fit: contain; }
 .head-brand span { font-family: var(--body); font-size: clamp(10px, 1.5vw, 12.5px); letter-spacing: 0.32em; text-transform: uppercase; white-space: nowrap; }
-.head-nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 28px); }
-.head-nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 10px 0; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; }
+/* min-width:0 desfà el mínim per defecte d'un fill de flex (min-width:auto),
+   que amb .head-nav a en white-space heretat es fixa a la suma de l'amplada
+   de tots els enllaços i no es pot encongir mai per sota. Sense això, a les
+   pàgines amb un .head-nav llarg (deu enllaços, com /partits/), la capçalera
+   no cap entre ~1080 i 1280px i «CB Grup Barna» s'encavalca amb el primer
+   enllaç. Ara, en lloc d'encavalcar-se, el menú fa scroll horitzontal —
+   igual que ja feia per sota de 1080px, però sense esperar-hi. */
+.head-nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 28px); min-width: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.head-nav::-webkit-scrollbar { display: none; }
+.head-nav a { position: relative; display: inline-flex; align-items: center; flex-shrink: 0; min-height: 44px; padding: 10px 0; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; }
 .head-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 4px; height: 1px; background: var(--red); transition: right 0.4s var(--ease); }
 .head-nav a:hover::after { right: 0; }
 @media (max-width: 1080px) { .head-nav a.opt { display: none; } }
-@media (max-width: 1080px) { .head-in { flex-wrap: nowrap; } .head-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; } .head-nav::-webkit-scrollbar { display: none; } }
+@media (max-width: 1080px) { .head-in { flex-wrap: nowrap; } }
 
 /* A mòbil, la capçalera no hi cabia: el nom del club («CB GRUP BARNA») té
    white-space: nowrap i el menú s'hi encavalcava a sobre, lletra sobre
@@ -264,6 +275,25 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .cal-notice a { border-bottom: 1px solid var(--red); white-space: nowrap; }
 .cal-pending { border-style: dashed; opacity: 0.6; }
 .cal-pending .cal-card-body { align-items: flex-start; }
+
+/* ==== CAPÇAL FOSC (proposta B) ====
+   Un phead sobre tinta amb el vermell aclarit, per a les pàgines del
+   calendari que volen lligar visualment amb /partits/. Es fa servir a
+   /partits/, /partits/calendaris/ i les pàgines d'equip que genera
+   .github/scripts/generate-team-pages.py — d'aquí surt perquè cap
+   d'aquestes pàgines generades porta <style> propi. */
+.p-dark { position: relative; background: var(--ink); overflow: clip; }
+.p-dark-court { position: absolute; inset: 0; opacity: 0.5; pointer-events: none; }
+.p-dark-court svg { position: absolute; top: 50%; right: -8%; width: min(46vw, 460px); height: auto; transform: translateY(-50%); }
+.p-dark-in { position: relative; z-index: 1; }
+.p-dark .crumb { color: rgba(255,255,255,0.45); }
+.p-dark .crumb a:hover { color: var(--red-light); border-color: var(--red-light); }
+.p-dark .eyebrow.red { color: var(--red-light); }
+.p-dark .phead h1 { color: #fff; }
+.p-dark .phead .lede { color: rgba(255,255,255,0.68); }
+.p-dark .phead .lede strong { color: #fff; }
+.p-dark .btn.ghost { color: #fff; border-color: rgba(255,255,255,0.32); }
+.p-dark .btn.ghost:hover { background: #fff; color: var(--ink); border-color: #fff; }
 
 /* ==== TAULA DE DADES ==== */
 .dl { border-top: 1px solid var(--ink); margin: clamp(24px, 3.4vw, 40px) 0; }

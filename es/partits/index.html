@@ -78,6 +78,65 @@
     .mes .mrow .hora { grid-column: 1; }
     .mes .mrow .qui { grid-column: 2; grid-row: 1 / span 2; }
   }
+
+  /* ==== Proposta B «Dia de partit», aplicada a tot el calendari ====
+     La jornada s'obre en fosc —vermell aclarit sobre tinta, com mana el
+     sistema quan el fons és fosc (skill web-cbgb, punt 1)— i la resta de
+     seccions es queda en clar amb el mateix llenguatge de targeta amb
+     capçalera que el «board» de la maqueta. Res de nou: mateixos tokens,
+     mateixes classes .mrow/.chip/.marc que ja pintava el JS. */
+  .p-dark { position: relative; background: var(--ink); color: rgba(255,255,255,0.86); overflow: clip; }
+  .p-dark-court { position: absolute; inset: 0; opacity: 0.5; pointer-events: none; }
+  .p-dark-court svg { position: absolute; top: 50%; right: -6%; width: min(64vw, 640px); height: auto; transform: translateY(-50%); }
+  .p-dark-in { position: relative; z-index: 1; }
+  .p-dark .crumb { color: rgba(255,255,255,0.45); }
+  .p-dark .crumb a:hover { color: var(--red-light); border-color: var(--red-light); }
+  .p-dark .eyebrow.red { color: var(--red-light); }
+  .p-dark-hero { display: grid; grid-template-columns: 1.1fr 0.7fr; gap: clamp(28px, 5vw, 64px); align-items: end; padding: clamp(28px, 4vw, 44px) 0 clamp(40px, 6vw, 64px); }
+  .p-dark-hero h1 { color: #fff; font-size: clamp(30px, 5.4vw, 60px); margin: 14px 0 0; }
+  .p-dark-hero .lede { margin-top: 20px; font-size: clamp(14px, 1.6vw, 16.5px); color: rgba(255,255,255,0.68); max-width: 56ch; }
+  .p-dark-hero .btn-row { margin-top: clamp(22px, 3vw, 30px); }
+  .p-dark-hero .btn.ghost { color: #fff; border-color: rgba(255,255,255,0.32); }
+  .p-dark-hero .btn.ghost:hover { background: #fff; color: var(--ink); border-color: #fff; }
+  .p-dark-ph { margin: 0; position: relative; border-bottom: 3px solid var(--red-light); }
+  .p-dark-ph img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center top; }
+  @media (max-width: 760px) {
+    .p-dark-hero { grid-template-columns: 1fr; align-items: start; }
+    .p-dark-ph { max-width: 280px; }
+    .p-dark-court svg { opacity: 0.6; }
+  }
+
+  .p-board { border-top: 1px solid rgba(255,255,255,0.16); padding: clamp(26px, 3.6vw, 40px) 0; }
+  .p-board:last-child { padding-bottom: clamp(36px, 5vw, 56px); }
+  .p-board-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin-bottom: 6px; }
+  .p-board-h h2 { font-size: clamp(16px, 2vw, 21px); color: #fff; }
+  .p-board-h p { font-size: 12.5px; color: rgba(255,255,255,0.55); margin: 0; max-width: 42ch; }
+  .p-dark .mrow { border-bottom-color: rgba(255,255,255,0.14); }
+  .p-dark .mrow .qui span { color: rgba(255,255,255,0.66); }
+  .p-dark .mrow .qui small { color: rgba(255,255,255,0.4); }
+  .p-dark .chip { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.7); }
+  .p-dark .chip.casa { border-color: rgba(255,59,65,0.55); color: var(--red-light); }
+  .p-dark .day-h { color: var(--red-light); border-bottom-color: rgba(255,255,255,0.2); }
+  .p-dark .empty-note { color: rgba(255,255,255,0.6); }
+
+  /* La secció clara que segueix (Resultats) porta el mateix «board»,
+     sense envermellir res que ja funcionava: .marc.win/.loss són
+     l'excepció semàntica que ja preveu el sistema. */
+  .p-board.light { border: 1px solid var(--line); border-top: 3px solid var(--red); padding: clamp(22px, 3.2vw, 34px) clamp(20px, 3vw, 30px); }
+  .p-board.light .p-board-h h2 { color: var(--ink); }
+  .p-board.light .p-board-h p { color: var(--muted); }
+
+  /* Per equip: de llista plana a graella de fitxes, com les b-tile
+     de la maqueta. El robot que manté <ul> entre SEO-EQUIPS no es toca:
+     només en canvia la presentació. */
+  /* Graella amb vores pròpies a cada fitxa (no el truc del gap-com-a-línia,
+     que amb 15 fitxes en 4 columnes deixava una cel·la buida amb el color
+     de fons del contenidor vist a través del forat). */
+  .equips-list ul { list-style: none; margin: 0; padding: 0; border-top: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0; }
+  .equips-list li { background: var(--paper); padding: 18px 20px; border: 1px solid var(--line); margin: 0 -1px -1px 0; font-size: 12.5px; color: var(--muted); display: flex; flex-direction: column; gap: 7px; transition: background 0.3s var(--ease); }
+  .equips-list li:hover { background: var(--paper-2); }
+  .equips-list li a { font-family: var(--display); font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink); border-bottom: 2px solid var(--red); padding-bottom: 3px; align-self: flex-start; transition: color 0.3s; }
+  .equips-list li a:hover { color: var(--red); }
 </style>
 <script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <link rel="stylesheet" href="/css/cerca.css">
@@ -111,67 +170,79 @@
 
 <main id="main">
 
-  <!-- ==== CAPÇAL ==== -->
-  <section class="section" style="padding-bottom:clamp(20px,3vw,36px)">
-    <div class="wrap">
-      <nav class="crumb" aria-label="Ruta de navegación">
-        <a href="/es/">Inicio</a> · Días de partido
+  <!-- ==== JORNADA (fosc, proposta B) ====
+       Capçal + Gameday Seniors + Aquest cap de setmana, fosos en un sol bloc
+       fosc: és el «pavelló en dissabte» de la maqueta. Mateixos ids
+       (gameday-seniors, finde) perquè els botons d'aquí i els enllaços de
+       /partits/calendaris/ segueixin funcionant. -->
+  <section class="p-dark">
+    <div class="p-dark-court" aria-hidden="true">
+      <svg viewBox="0 0 400 400" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="1.6" vector-effect="non-scaling-stroke">
+        <circle cx="200" cy="200" r="60"/>
+        <circle cx="200" cy="200" r="180"/>
+        <line x1="10" y1="200" x2="390" y2="200"/>
+        <rect x="128" y="8" width="144" height="118"/>
+        <rect x="128" y="274" width="144" height="118"/>
+      </svg>
+    </div>
+    <div class="wrap p-dark-in">
+      <nav class="crumb" aria-label="Fil d'Ariadna">
+        <a href="/">Inici</a> · Días de partido
       </nav>
-      <div class="phead" style="padding-bottom:0">
-        <p class="eyebrow red">Temporada 2026-2027 · #SomClot</p>
-        <h1>Calendario</h1>
-        <p class="lede">
-          Todos los equipos federados del club, en un solo calendario. Se actualiza cada día a partir
-          del calendario oficial de la <strong>Federación Catalana de Baloncesto</strong>: día, hora,
-          rival, casa o fuera y pista, y los resultados de la jornada anterior.
-        </p>
-        <div class="btn-row" style="margin-top:26px">
-          <a class="btn red" href="#gameday-seniors">Gameday Seniors</a>
-          <a class="btn ghost" href="#finde">Este fin de semana</a>
-          <a class="btn ghost" href="/es/partits/calendaris/">Calendario por equipo</a>
+      <div class="p-dark-hero">
+        <div>
+          <p class="eyebrow red">Temporada 2026-2027 · #SomClot</p>
+          <h1>Calendario</h1>
+          <p class="lede">
+            Todos los equipos federados del club, en un solo calendario. Se actualiza cada día a partir
+            del calendario oficial de la <strong>Federación Catalana de Baloncesto</strong>: día, hora,
+            rival, casa o fuera y pista, y los resultados de la jornada anterior.
+          </p>
+          <div class="btn-row">
+            <a class="btn red" href="#gameday-seniors">Gameday Seniors</a>
+            <a class="btn ghost" href="#finde">Este fin de semana</a>
+            <a class="btn ghost" href="/es/partits/calendaris/">Calendario por equipo</a>
+          </div>
+        </div>
+        <figure class="p-dark-ph">
+          <img src="/img/seniors@2x.webp" width="600" height="900" loading="eager"
+               alt="Jugadora de la primera plantilla sénior del CB Grup Barna">
+        </figure>
+      </div>
+
+      <div class="p-board" id="gameday-seniors">
+        <div class="p-board-h">
+          <h2>Gameday Seniors</h2>
+          <p>La primera plantilla del club, femenina y masculina, y sus próximos partidos.</p>
+        </div>
+        <div id="gameday-list" class="gameday">
+          <p class="empty-note">Hay que activar JavaScript para ver el Gameday Seniors.</p>
+        </div>
+      </div>
+
+      <div class="p-board" id="finde">
+        <div class="p-board-h">
+          <h2>Este fin de semana</h2>
+          <p id="finde-dates"></p>
+        </div>
+        <div id="finde-list">
+          <noscript><!-- SEO-SNAPSHOT:START --><h2>Próximos partidos del CB Grup Barna</h2><ul><li><strong>Dissabte 5 set, 10:45</strong> — C.B GRUP BARNA B vs CB BOET MATARÓ 2012 (Cadet Femení B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 10:45</strong> — C.B GRUP BARNA B vs C.B. L'HOSPITALET 2014 (Infantil Masculí B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 11:00</strong> — TGN BÀSQUET F14A vs C.B GRUP BARNA B (Infantil Femení B) · TARRAGONA - COL. SAGRAT COR</li><li><strong>Dissabte 5 set, 12:30</strong> — C.B GRUP BARNA B vs BASQUET ATENEU MONTSERRAT (Júnior Femení B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 16:00</strong> — NAYOX FORÇA LLEIDA B vs C.B GRUP BARNA B (Cadet Masculí B) · PAVELLO MUNICIPAL AGNES GREGORI DE LLEIDA</li><li><strong>Diumenge 6 set, 09:00</strong> — C.B GRUP BARNA A vs SABADELL BQ VALLÈS U16F (Cadet Femení A) · CIUTAT ESPORTIVA BLANES</li><li><strong>Diumenge 6 set, 15:15</strong> — TGN BÀSQUET F09A vs C.B GRUP BARNA A (Júnior Femení A) · CIUTAT ESPORTIVA BLANES</li></ul><!-- SEO-SNAPSHOT:END --></noscript>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==== GAMEDAY SENIORS ==== -->
-  <section class="section band-soft" id="gameday-seniors" style="padding-top:clamp(24px,3.4vw,44px)">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow red">Gameday</p>
-        <h2>Gameday Seniors</h2>
-        <p class="sub">La primera plantilla del club, femenina y masculina, y sus próximos partidos.</p>
-      </div>
-      <div id="gameday-list" class="gameday">
-        <p class="empty-note">Hay que activar JavaScript para ver el Gameday Seniors.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==== AQUEST CAP DE SETMANA ==== -->
-  <section class="section" id="finde" style="padding-top:clamp(24px,3.4vw,44px)">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow red">La jornada</p>
-        <h2>Este fin de semana</h2>
-        <p class="sub" id="finde-dates"></p>
-      </div>
-      <div id="finde-list">
-        <noscript><!-- SEO-SNAPSHOT:START --><h2>Próximos partidos del CB Grup Barna</h2><ul><li><strong>Dissabte 5 set, 10:45</strong> — C.B GRUP BARNA B vs CB BOET MATARÓ 2012 (Cadet Femení B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 10:45</strong> — C.B GRUP BARNA B vs C.B. L'HOSPITALET 2014 (Infantil Masculí B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 11:00</strong> — TGN BÀSQUET F14A vs C.B GRUP BARNA B (Infantil Femení B) · TARRAGONA - COL. SAGRAT COR</li><li><strong>Dissabte 5 set, 12:30</strong> — C.B GRUP BARNA B vs BASQUET ATENEU MONTSERRAT (Júnior Femení B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 16:00</strong> — NAYOX FORÇA LLEIDA B vs C.B GRUP BARNA B (Cadet Masculí B) · PAVELLO MUNICIPAL AGNES GREGORI DE LLEIDA</li><li><strong>Diumenge 6 set, 09:00</strong> — C.B GRUP BARNA A vs SABADELL BQ VALLÈS U16F (Cadet Femení A) · CIUTAT ESPORTIVA BLANES</li><li><strong>Diumenge 6 set, 15:15</strong> — TGN BÀSQUET F09A vs C.B GRUP BARNA A (Júnior Femení A) · CIUTAT ESPORTIVA BLANES</li></ul><!-- SEO-SNAPSHOT:END --></noscript>
-      </div>
-    </div>
-  </section>
-
   <!-- ==== RESULTATS DEL CAP DE SETMANA ANTERIOR ==== -->
-  <section class="section band-soft" id="resultats">
+  <section class="section" id="resultats">
     <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow red">La jornada anterior</p>
-        <h2>Resultados del fin de semana anterior</h2>
-        <p class="sub" id="res-dates"></p>
-      </div>
-      <div id="res-list">
-        <p class="empty-note">Hay que activar JavaScript para ver los resultados.</p>
+      <div class="p-board light">
+        <div class="p-board-h">
+          <h2>Resultados del fin de semana anterior</h2>
+          <p id="res-dates"></p>
+        </div>
+        <div id="res-list">
+          <p class="empty-note">Hay que activar JavaScript para ver los resultados.</p>
+        </div>
       </div>
     </div>
   </section>
