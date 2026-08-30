@@ -39,3 +39,11 @@ nomes_un_idioma:
     motiu: El mateix cas que /presentacio/.
   - ruta: /presentacions/visio-global/
     motiu: El mateix cas que /presentacio/.
+  - ruta: /avantatges-familia/
+    motiu: >
+      Es corregeix NOMÉS a es/en la URL que la pàgina diu de si mateixa
+      (canonical, og:url i els @id/url/breadcrumb del JSON-LD), que havia
+      quedat sense el prefix d'idioma i apuntava a /ventajas-familia/ i
+      /family-benefits/ a l'arrel —adreces que no existeixen i donen 404.
+      La versió catalana ja era correcta i el text no canvia en cap idioma.
+      Arreglat el 30/08/2026; treu això quan es fusioni.
