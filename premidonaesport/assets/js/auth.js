@@ -92,7 +92,7 @@
       +'.cbgb-btn:hover{background:#a50d26}'
       +'.cbgb-err{color:#ff4060;font-size:0.72rem;letter-spacing:.1em;display:none;margin-top:.25rem}'
       +'.cbgb-foot{margin-top:2.5rem;font-size:0.69rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.78)}'
-      +'.cbgb-out{display:inline-block;margin-top:1.6rem;font-size:.72rem;color:rgba(255,255,255,.72);border-bottom:1px solid rgba(226,6,19,.6);text-decoration:none;padding-bottom:2px}'
+      +'.cbgb-out{display:inline-flex;align-items:center;min-height:44px;margin-top:1.6rem;font-size:.72rem;color:rgba(255,255,255,.72);border-bottom:1px solid rgba(226,6,19,.6);text-decoration:none;padding-bottom:2px}'
       +'.cbgb-out:hover,.cbgb-out:focus-visible{color:#FFFFFF;border-color:#FF3B41}'
       +'.cbgb-input:focus-visible,.cbgb-btn:focus-visible{outline:2px solid #FF3B41;outline-offset:2px}'
       +'</style>'

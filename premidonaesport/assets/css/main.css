@@ -682,3 +682,7 @@ html {
     padding: .9rem .8rem !important;
   }
 }
+
+/* Enllaç de descàrrega d'un document: va sol dins de la fitxa i es prem
+   amb el dit, no és un enllaç enmig d'una frase. Feia 17 px d'alt. */
+a.tl { display: inline-flex; align-items: center; min-height: 44px; }
