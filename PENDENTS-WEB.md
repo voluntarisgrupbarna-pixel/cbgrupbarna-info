@@ -2632,14 +2632,46 @@ tanca les quatre portades: **ja no en queda cap de pendent.**
 
 ### Blocatges tècnics que segueixen igual
 
-- **`.github/scripts/generate-team-pages.py` no es pot executar tal com
-  està**: esborraria el canviador d'idioma, els `hreflang`, `css/a11y.css`
-  i el `theme-color` bo de 48 pàgines publicades. Per això la proposta B
-  viu a `css/barna.css` com a component i les fitxes d'equip encara no la
-  porten: primer s'ha de posar el generador al dia.
+- ~~`generate-team-pages.py` no es pot executar~~ **Resolt el 30/08
+  (tanda 4)**: el generador està al dia —commutador d'idioma, `hreflang`,
+  `a11y.css`, capçal fosc de la B i escuts de rivals— i les 48 fitxes
+  d'equip s'han regenerat amb ell. Vegeu la tanda 4 més avall.
 - **`scripts/build-pages.py` també està desfasat.**
 - **El pressupost de pes (`pes`) surt en vermell**, i ve d'abans d'aquesta
   feina: set fitxers de `main` passen del sostre —`docs/welcome-pack`
   (3,3 MB), tres logos de `assets/marca` i tres fotos de galeria que van
   entrar per l'admin. Cap no l'ha tocat aquesta feina. O es comprimeixen,
   o van a `pes-excepcions.txt` amb el motiu.
+
+
+---
+
+## Tanda 4 del 30/08/2026 · el generador de fitxes d'equip, al dia
+
+El blocatge tècnic que quedava, resolt. `generate-team-pages.py` tornava a
+escriure les 48 pàgines de `/partits/equips/` cada dia des del robot, però
+la seva sortida havia quedat enrere del que hi havia publicat: executar-lo
+esborrava el commutador d'idioma, els `hreflang`, `css/a11y.css` i el
+`theme-color`. Ara el generador emet tot això i més, i s'ha executat.
+
+### Què porten ara les fitxes d'equip (els 3 idiomes, 48 pàgines)
+
+- **El capçal fosc de la proposta B** amb el `theme-color` fosc que toca.
+- **Files de partit amb escuts**: l'escut del Barna i el del rival a cada
+  partit. Els rivals es resolen amb `scripts/escuts_partits.py` des de
+  l'inventari de `partits/logos/` (map.json → alias.json → emparellament
+  automàtic pel nom, provant també el nom sense sufixos d'equip):
+  **119 de 120 rivals** de la temporada tenen escut. L'únic sense (CB
+  Mollet B, no és a l'inventari) surt amb un cercle d'inicials — mai
+  l'escut d'un altre i mai un forat.
+- Commutador d'idioma, `hreflang` amb x-default, `a11y.css`,
+  `xat-whatsapp.js` i l'avís de Portes Obertes.
+- La crida de comunitat de les pàgines generades (`scripts/i18n_chrome.py`)
+  també deia «Un correu al mes»: corregida a setmanal.
+
+### Per afegir l'escut d'un rival que falti
+
+Deixar el PNG a `partits/logos/clubs/` amb el nom del club, donar-lo
+d'alta a `partits/logos/index.json` i, si el nom del calendari FCBQ no
+s'assembla al fitxer, afegir l'àlies exacte a `partits/logos/alias.json`.
+El robot diari el recollirà a la següent passada.

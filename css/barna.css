@@ -753,3 +753,43 @@ table.vs td.a { color: var(--red-dark); }
   .ed-foot { grid-template-columns: 1fr; }
   .ed-foot .duo img { aspect-ratio: 16 / 9; height: auto; }
 }
+
+/* ==== FITXES D'EQUIP · files de partit amb escuts =========================
+   Les pinta .github/scripts/generate-team-pages.py a /partits/equips/.
+   Cada fila és qui juga contra qui: l'escut del Barna i el del rival,
+   resolt per scripts/escuts_partits.py. Quan un club no té escut a
+   l'inventari, hi va un cercle amb les seves inicials — mai l'escut d'un
+   altre i mai un forat. */
+
+.vsq { list-style: none; margin: 0; padding: 0; }
+.vsq > li {
+  display: grid;
+  grid-template-columns: minmax(96px, 130px) 1fr auto;
+  gap: 8px clamp(10px, 2vw, 20px);
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+.vsq-quan { font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.4; }
+.vsq-quan b { display: block; color: var(--ink); font-weight: 650; }
+
+.vsq-duel { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; font-size: 13.5px; }
+.vsq-duel .nom { font-weight: 650; color: var(--ink); }
+.vsq-duel .contra { font-family: var(--display); font-size: 10.5px; color: var(--muted); letter-spacing: .12em; flex-shrink: 0; }
+.vsq-escut { width: 24px; height: 24px; object-fit: contain; flex-shrink: 0; }
+/* El substitut de qui no té escut: les inicials, no un forat. */
+.vsq-sense {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--paper-2); border: 1px solid var(--line);
+  font-size: 8.5px; font-weight: 800; letter-spacing: .04em; color: var(--muted);
+}
+.vsq-fi { text-align: right; font-size: 12.5px; color: var(--muted); }
+.vsq-fi strong { display: block; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.vsq-fi .guany { color: var(--red-dark); }
+
+@media (max-width: 560px) {
+  .vsq > li { grid-template-columns: 1fr auto; }
+  .vsq-quan { grid-column: 1 / -1; display: flex; gap: 8px; }
+  .vsq-quan b { display: inline; }
+}
