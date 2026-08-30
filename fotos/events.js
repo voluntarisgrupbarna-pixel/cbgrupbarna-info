@@ -1,10 +1,20 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Generat per scripts/build-gallery-events.py a partir de fotos/web/.
-// No l'editis a ma per afegir fotos: posa-les a fotos/web/<album>/ i torna
-// a executar l'script. Els metadades (titol, data, lloc...) si que es
-// conserven entre execucions.
+// Actualitzat: 2026-08-30
 
 window.GALERIA_EVENTS = [
+  {
+    "id": "fotos-clot-mtfvaol4",
+    "title": "FOTOS CLOT",
+    "description": null,
+    "date": null,
+    "season": "2025-2026",
+    "location": "BARRI",
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo"
+  },
   {
     "id": "jugadors-es-2526-msyqgnil",
     "title": "JUGADORS/ES 2526",
