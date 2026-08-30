@@ -268,16 +268,21 @@
   // de Google d'admin/auth.js.
   function pintarAdmin() {
     if (location.pathname.indexOf('/admin/') === 0) return; // ja hi som
+    // Les portades porten l'enllaç «Admin» dins de la capçalera, a dalt a la
+    // dreta. Alla no cal la pestanya flotant: seria el mateix enllac dos cops.
+    if (document.querySelector('.head-admin')) return;
     var est = document.createElement('style');
-    est.textContent = '.cbgb-admin-tab{position:fixed;top:12px;right:12px;' +
+    // A baix a la dreta, no a dalt. A dalt queia sobre el ticker de novetats,
+    // que es del mateix negre que la pestanya: negre sobre negre, invisible.
+    // A baix el fons es blanc i s'hi llegeix. El boto de WhatsApp va a l'altre
+    // costat, aixi que aqui no tapa res.
+    est.textContent = '.cbgb-admin-tab{position:fixed;bottom:14px;right:14px;' +
       "z-index:2147483000;font-family:'Anton','Futura',sans-serif;font-weight:400;" +
       'font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;' +
       'background:#10100E;border:1px solid rgba(255,255,255,.25);border-radius:999px;' +
-      'padding:9px 16px;text-decoration:none;opacity:.55;transition:opacity .25s}' +
+      'padding:9px 16px;text-decoration:none;opacity:.62;transition:opacity .25s}' +
       '.cbgb-admin-tab:hover,.cbgb-admin-tab:focus-visible{opacity:1;border-color:#E20613}' +
-      /* A mòbil la capçalera ja va justa (menú ≡, cercador, idioma): aquesta
-         pestanya flotant queda just a sobre i tapa el canvi d'idioma. És un
-         accés d'equip, no de club, així que a mòbil es queda amagada. */
+      /* A mòbil la pantalla ja va justa i és un accés d'equip, no de club. */
       '@media(max-width:900px){.cbgb-admin-tab{display:none}}';
     document.head.appendChild(est);
     var link = document.createElement('a');
