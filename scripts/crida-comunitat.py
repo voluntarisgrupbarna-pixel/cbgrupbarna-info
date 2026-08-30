@@ -30,7 +30,7 @@ TEXTOS = {
         "ig_t": "Segueix-nos a Instagram",
         "ig_s": "@cbgrupbarna · el dia a dia del club, cada setmana.",
         "nl_t": "Apunta't a la newsletter",
-        "nl_s": "Un correu al mes amb el que val la pena saber. Res més.",
+        "nl_s": "Un correu la setmana amb el que val la pena saber. Res més.",
         "nl_url": "/newsletter/",
     },
     "es": {
@@ -38,7 +38,7 @@ TEXTOS = {
         "ig_t": "Síguenos en Instagram",
         "ig_s": "@cbgrupbarna · el día a día del club, cada semana.",
         "nl_t": "Apúntate a la newsletter",
-        "nl_s": "Un correo al mes con lo que vale la pena saber. Nada más.",
+        "nl_s": "Un correo a la semana con lo que vale la pena saber. Nada más.",
         "nl_url": "/es/newsletter/",
     },
     "en": {
@@ -46,7 +46,7 @@ TEXTOS = {
         "ig_t": "Follow us on Instagram",
         "ig_s": "@cbgrupbarna · the club's week, as it happens.",
         "nl_t": "Join the newsletter",
-        "nl_s": "One email a month with what's worth knowing. Nothing else.",
+        "nl_s": "One email a week with what's worth knowing. Nothing else.",
         "nl_url": "/en/newsletter/",
     },
 }
