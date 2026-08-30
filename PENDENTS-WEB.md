@@ -2582,3 +2582,64 @@ el SEO clàssic encara no.
 - **Google Business Profile**: segueix pendent des del campus, i amb les dades
   noves és la segona jugada més important, no la primera.
 - **El generador de fitxes d'equip**, al dia (punt 3).
+
+---
+
+## Tanda 3 del 30/08/2026 · les portades C i D
+
+La tanda anterior (PR #121) va anar a producció amb la campanya de Portes
+Obertes, la proposta B a tot el calendari i el menú reorganitzat. Aquesta
+tanca les quatre portades: **ja no en queda cap de pendent.**
+
+### Fet
+
+- **Portada C, «La Jugada», a l'Escoleta** (`/escoleta/`, `/es/escoleta/`,
+  `/en/escoleta/`). La pàgina és una possessió de 24 segons: el rellotge
+  baixa amb l'scroll, cada tram de la història porta el segon en què passa
+  i el tancament vermell és el `:00`. El submenú que faltava, **«Història
+  de l'escola»**, és al hero i porta a `#historia`; les traduccions no
+  tenien aquesta àncora i ara la porten.
+
+  Peces: `css/jugada.css`, `js/jugada.js`, `scripts/jugada-aplica.py`.
+  **No s'ha tocat el contingut de l'Escoleta.** La història, les fotos,
+  les FAQ i el JSON-LD són els mateixos: hi ha una estratègia de SEO que
+  hi depèn i la portada és la portada, no la pàgina.
+
+- **Portada D, «L'Edició», a la newsletter setmanal.** Dues peces:
+  `/newsletter/` als tres idiomes amb la capçalera de diari (cinta del
+  número, masthead buidat, teletip, primera plana en duotò i sumari de les
+  tres peces fixes), i `docs/newsletter/plantilla.html`, el número de debò
+  llest per enganxar a Brevo.
+
+  La foto institucional que va demanar l'Ana —els tres directius amb la
+  bufanda a la grada de La Nau— és la d'obertura.
+
+- **La cadència, corregida a setmanal.** Les tres pàgines de newsletter
+  deien «un enviament al mes» a nou llocs (meta, og, JSON-LD, text i la
+  FAQ generada). Ara no ho diu enlloc. El canvi de la FAQ s'ha fet a
+  `i18n/faq.yml`, que és d'on surt.
+
+### Pendent, i de qui és
+
+| Què | De qui | Nota |
+|---|---|---|
+| Desplegar l'Apps Script de Portes Obertes i enganxar el seu `/exec` a `portesObertesEndpoint` de `js/canals.js` | **Ana** | Fins llavors les reserves cauen a la bústia: s'apunten, però no surten ni els correus ni l'esdeveniment de calendari |
+| Comprovar que `RESERVES_FORA_DEL_WEB` (ara 35 per torn) quadra amb la realitat | **Ana** | És el que fa que el comptador de places digui la veritat |
+| Enganxar `docs/newsletter/plantilla.html` a Brevo i enviar-se una prova | **Ana** | Instruccions a dalt del fitxer mateix |
+| L'article i la newsletter de Portes Obertes | Pendent | Demanat el 30/08, encara no escrit |
+| Google Business Profile | **Ana** | Ve de la tanda del campus |
+| `proteccioEndpoint` de `js/canals.js`, buit a posta | **Ana** | Cal un Apps Script NOU amb un full NOU compartit NOMÉS amb la Delegada de Protecció al Menor. No pot anar al mateix full que inscripcions i suggeriments: hi té accés més gent de la que hauria de veure això. L'Ana ha dit que el correu és `protecciomenor@cbgrupbarna.info`; encara no està connectat |
+
+### Blocatges tècnics que segueixen igual
+
+- **`.github/scripts/generate-team-pages.py` no es pot executar tal com
+  està**: esborraria el canviador d'idioma, els `hreflang`, `css/a11y.css`
+  i el `theme-color` bo de 48 pàgines publicades. Per això la proposta B
+  viu a `css/barna.css` com a component i les fitxes d'equip encara no la
+  porten: primer s'ha de posar el generador al dia.
+- **`scripts/build-pages.py` també està desfasat.**
+- **El pressupost de pes (`pes`) surt en vermell**, i ve d'abans d'aquesta
+  feina: set fitxers de `main` passen del sostre —`docs/welcome-pack`
+  (3,3 MB), tres logos de `assets/marca` i tres fotos de galeria que van
+  entrar per l'admin. Cap no l'ha tocat aquesta feina. O es comprimeixen,
+  o van a `pes-excepcions.txt` amb el motiu.
