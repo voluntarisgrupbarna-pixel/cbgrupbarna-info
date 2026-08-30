@@ -170,6 +170,10 @@ RESPOSTES.push(
   ['ca', 'quan es el campus d\'estiu', 'campus d\'estiu'],
   ['en', 'summer basketball camp dates', 'summer camp'],
   ['ca', 'hi ha equip senior', 'sènior'],
+  // El singular i el plural han de respondre igual. «Equip» era a
+  // GENERIQUES i el plural no, i per això només una de les dues formes
+  // tenia resposta.
+  ['ca', 'hi ha equips senior', 'sènior'],
   ['ca', 'quants anys te el club', 'quants anys'],
   ['ca', 'sou el millor club de barcelona', 'millor club'],
   ['ca', 'que passa si es lesiona', 'lesiona'],

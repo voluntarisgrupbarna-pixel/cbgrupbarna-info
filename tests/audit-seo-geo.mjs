@@ -92,12 +92,30 @@ function auditPage(rel) {
   const prop = metas(html, 'property');
   const ls = links(html);
   const noindex = /noindex/i.test(name.robots || '');
+  // Un cartell de mudança: quatre línies amb <meta http-equiv="refresh"> que
+  // porten a l'adreça nova. No és una pàgina de contingut i no se li poden
+  // demanar descripció, h1, Open Graph ni entrar al sitemap — el que se li ha
+  // d'exigir es comprova a part, més avall.
+  const refresh = html.match(/<meta[^>]+http-equiv=["']refresh["'][^>]*>/i)?.[0];
+  const redirect = refresh ? (attr(refresh, 'content') || '').match(/url\s*=\s*(\S+)/i)?.[1] : undefined;
   // Una pàgina que demana no ser indexada no necessita Open Graph, ni
   // descripció, ni dades estructurades: exigir-li-ho és soroll. Val tant per
   // a les eines internes com per a les redireccions amb canonical.
-  const isAdmin = noindex || NOINDEX_OK.some((p) => url.startsWith(p) || url === p);
+  const isAdmin = noindex || !!redirect || NOINDEX_OK.some((p) => url.startsWith(p) || url === p);
   r.info.noindex = noindex;
   r.info.admin = isAdmin;
+  r.info.redirect = redirect;
+
+  // --- redireccions: el que sí que se'ls ha d'exigir ---
+  if (redirect) {
+    const dest = resolveLocal(redirect, rel);
+    if (dest && !dest.exists) add('error', 'redireccio-trencada', `redirigeix a un lloc que no existeix: ${redirect}`);
+    const canonHref = links(html).find((l) => l.rel === 'canonical')?.href;
+    if (!canonHref) add('error', 'redireccio-sense-canonical', 'una redirecció ha de portar canonical al destí');
+    else if (canonHref.replace(SITE, '').replace(/\/$/, '') !== redirect.replace(SITE, '').replace(/\/$/, '')) {
+      add('avís', 'redireccio-canonical', 'la canonical no coincideix amb el destí de la redirecció', { canonHref, redirect });
+    }
+  }
 
   // --- bàsics ---
   if (!/^<!doctype html>/i.test(html.trim())) add('error', 'doctype', 'sense <!DOCTYPE html>');
@@ -142,7 +160,7 @@ function auditPage(rel) {
       const got = canon.href.replace(/\/$/, '') || canon.href;
       // Una redirecció amb noindex ha d'apuntar al seu destí: és el que la fa
       // correcta, no un error.
-      if (!noindex && got.replace(/\/$/, '') !== expect.replace(/\/$/, '')) {
+      if (!noindex && !redirect && got.replace(/\/$/, '') !== expect.replace(/\/$/, '')) {
         add('avís', 'canonical-divergent', 'la canonical no apunta a la pròpia URL', { href: canon.href, expect });
       }
     }
@@ -255,8 +273,17 @@ function auditPage(rel) {
   const declared = (langVal || '').slice(0, 2);
   const [winner, top] = Object.entries(score).sort((a, b) => b[1] - a[1])[0];
   // Només ho diem si la diferència és clara i hi ha text de sobres.
+  // Un bloc que porta el seu propi `lang` ja diu en quina llengua està: no és
+  // el mateix que una pàgina que declara una cosa i n'escriu una altra. El
+  // primer és correcte (i és el que fa un lector de pantalla servir per
+  // pronunciar-ho bé); el segon és el defecte que es busca aquí.
+  const blocsAmbLang = [...html.matchAll(/<(?:main|section|article|div|body)\b[^>]*\blang\s*=\s*["']([a-z]{2})/gi)].map((m) => m[1]);
   if (declared && MARKERS[declared] && top >= 25 && winner !== declared && top > score[declared] * 1.6) {
-    add('error', 'idioma-divergent', `declara \`lang="${langVal}"\` però el text sembla ${winner}`, { score });
+    if (blocsAmbLang.includes(winner)) {
+      add('avís', 'idioma-declarat-a-part', `el cos està en ${winner} i així ho declara, però la pàgina és la versió ${declared}: falta traduir-la`, { score });
+    } else {
+      add('error', 'idioma-divergent', `declara \`lang="${langVal}"\` però el text sembla ${winner}`, { score });
+    }
   }
 
   // --- text útil ---

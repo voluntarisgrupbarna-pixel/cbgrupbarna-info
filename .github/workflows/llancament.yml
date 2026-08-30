@@ -1,0 +1,79 @@
+name: Llançament · es pot publicar?
+
+# La bateria de proves existia però s'havia d'executar a mà, i per tant només
+# s'executava quan algú se'n recordava. Això la posa a cada proposta de canvi.
+#
+# Corre en mode ràpid (sense navegador): triga un parell de minuts i cobreix
+# tot el que es pot saber llegint el disc —actius que no existeixen, JSON-LD
+# que no es pot llegir, formularis sense destí, <script> amb error de sintaxi,
+# enllaços i sitemap trencats, el cercador i els tres idiomes. El pas del
+# navegador, que triga vint minuts, es fa a mà abans de publicar:
+#
+#     node tests/llancament.mjs
+#
+# Si això surt en vermell, no és un detall d'estil: és alguna cosa que una
+# persona veuria el primer dia.
+
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - '**.js'
+      - '**.css'
+      - '**.json'
+      - 'llms.txt'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'tests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: llancament-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  porter:
+    runs-on: ubuntu-latest
+    steps:
+      # Les fotos són al repositori (5,5 GB d'historial). Aquesta comprovació
+      # només llegeix text: s'exclouen per extensió, no per carpeta, perquè
+      # /fotos/ i /mascota/ tenen pàgines HTML a dins que sí que s'han de
+      # llegir. Els SVG s'hi queden: n'hi ha que són icones dins de l'HTML.
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !*.jpg
+            !*.jpeg
+            !*.png
+            !*.webp
+            !*.gif
+            !*.avif
+            !*.mp4
+            !*.mov
+            !*.pdf
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install --quiet pyyaml
+
+      # `--sense-binaris` hi és perquè el checkout d'aquí sobre no baixa les
+      # imatges: sense l'interruptor, la comprovació d'actius les donaria totes
+      # per absents i el veredicte seria vermell per un motiu fals. Les rutes
+      # d'imatge sí que es comproven a la bateria sencera, en local.
+      - name: El porter, en mode ràpid
+        run: node tests/llancament.mjs --rapid --sense-binaris --md llancament.md
+
+      - name: Deixar l'informe a la vista
+        if: always()
+        run: cat llancament.md >> "$GITHUB_STEP_SUMMARY" || true
