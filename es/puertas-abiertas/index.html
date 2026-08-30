@@ -115,25 +115,67 @@ Viene, se pone, y al final deciden.</p>
 <p>Entrenamos en <strong>La Nau del Clot</strong>, en el Distrito de Sant Martí. Si prefiere venir a
 verlo antes de decir nada a la criatura, también puede: solo hace falta que nos lo diga.</p>
 
-<h2>Pida el día</h2>
+<h2>Reserve el sábado</h2>
 <div class="form-note">
-  <p>Con el nombre y una manera de contactarle ya basta. Le respondemos el mismo día con el día y
-  la hora que le tocan.</p>
+  <p>Elija el sábado que les vaya bien y reserve la plaza. <strong>Cada sábado solo admite 50 criaturas</strong>: cuando un turno se llena, se cierra. Recibirá la confirmación al momento.</p>
 </div>
 
 <form class="form" id="po-form" novalidate>
+  <fieldset class="po-cal" aria-describedby="po-dies-err">
+    <legend>¿Qué sábado de septiembre? <span class="req" aria-hidden="true">*</span></legend>
+    <span class="hint">Puede elegir más de uno: pueden venir a probar tantos sábados como quieran durante todo septiembre.</span>
+    <div class="po-dies" id="po-dies">
+      <label class="po-dia">
+        <input type="checkbox" name="dissabtes" value="2026-09-19">
+        <span class="po-dia-in">
+          <b class="po-dia-n">19</b>
+          <span class="po-dia-m">sábado<br>de septiembre</span>
+          <span class="po-dia-h">9.00 h · La Nau</span>
+          <span class="po-dia-p" data-places="2026-09-19">Cargando…</span>
+        </span>
+      </label>
+      <label class="po-dia">
+        <input type="checkbox" name="dissabtes" value="2026-09-26">
+        <span class="po-dia-in">
+          <b class="po-dia-n">26</b>
+          <span class="po-dia-m">sábado<br>de septiembre</span>
+          <span class="po-dia-h">9.00 h · La Nau</span>
+          <span class="po-dia-p" data-places="2026-09-26">Cargando…</span>
+        </span>
+      </label>
+    </div>
+    <p class="form-err" id="po-dies-err" role="alert">Elija al menos un sábado.</p>
+  </fieldset>
+
   <div class="form-row">
     <label for="po-nom">Nombre de la criatura <span class="req" aria-hidden="true">*</span></label>
     <input type="text" id="po-nom" name="nom" required autocomplete="off" aria-describedby="po-nom-err">
     <p class="form-err" id="po-nom-err" role="alert">Díganos cómo se llama, por favor.</p>
   </div>
-  <div class="form-row">
-    <label for="po-any">Año de nacimiento <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">Es lo que usa la federación para formar los equipos: por año, no por curso.</span>
-    <input type="text" id="po-any" name="any" inputmode="numeric" required
-           placeholder="2017" aria-describedby="po-any-err">
-    <p class="form-err" id="po-any-err" role="alert">Ponga el año de nacimiento, con cuatro cifras.</p>
+  <div class="form-row form-row--parell">
+    <div>
+      <label for="po-edat">Edad <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="po-edat" name="edat" inputmode="numeric" required
+             placeholder="6" aria-describedby="po-edat-err">
+      <p class="form-err" id="po-edat-err" role="alert">Ponga la edad.</p>
+    </div>
+    <div>
+      <label for="po-any">Año de nacimiento <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="po-any" name="any" inputmode="numeric" required
+             placeholder="2020" aria-describedby="po-any-err">
+      <p class="form-err" id="po-any-err" role="alert">Con cuatro cifras.</p>
+    </div>
   </div>
+  <span class="hint" style="margin-top:-8px">El año es lo que usa la federación para formar los equipos: por año, no por curso.</span>
+
+  <fieldset class="form-row">
+    <legend>¿Ha jugado a baloncesto antes? <span class="req" aria-hidden="true">*</span></legend>
+    <div class="po-tria">
+      <label class="po-op"><input type="radio" name="jugat" value="no" checked><span>No, empieza de cero</span></label>
+      <label class="po-op"><input type="radio" name="jugat" value="si"><span>Sí, ya ha jugado</span></label>
+    </div>
+  </fieldset>
+
   <div class="form-row">
     <label for="po-contacte">Su nombre <span class="req" aria-hidden="true">*</span></label>
     <input type="text" id="po-contacte" name="contacte" required autocomplete="name"
@@ -141,19 +183,24 @@ verlo antes de decir nada a la criatura, también puede: solo hace falta que nos
     <p class="form-err" id="po-contacte-err" role="alert">Díganos quién nos escribe.</p>
   </div>
   <div class="form-row">
-    <label for="po-tel">Teléfono o correo <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">El que le vaya mejor. Solo lo usamos para responderle a esto.</span>
-    <input type="text" id="po-tel" name="contacteVia" required autocomplete="tel"
-           aria-describedby="po-tel-err">
-    <p class="form-err" id="po-tel-err" role="alert">Déjenos un teléfono o un correo para poder decirle el día.</p>
+    <label for="po-correu">Correo <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Ahí le enviamos la confirmación de la plaza.</span>
+    <input type="email" id="po-correu" name="correu" required autocomplete="email"
+           aria-describedby="po-correu-err">
+    <p class="form-err" id="po-correu-err" role="alert">Hace falta un correo para poder confirmarle la plaza.</p>
+  </div>
+  <div class="form-row">
+    <label for="po-tel">Teléfono</label>
+    <span class="hint">Opcional. Para avisarle si hay algún cambio de última hora.</span>
+    <input type="tel" id="po-tel" name="telefon" autocomplete="tel">
   </div>
   <div class="form-row">
     <label for="po-msg">Algo que debamos saber</label>
-    <span class="hint">Opcional. Si ya ha jugado antes, si viene con algún amigo, si hay días que no pueden…</span>
+    <span class="hint">Opcional. Si viene con algún amigo, si tiene alguna alergia, si hay días que no pueden…</span>
     <textarea id="po-msg" name="missatge" placeholder="Cuéntelo con sus palabras…"></textarea>
   </div>
   <div class="btn-row" style="margin-top:22px">
-    <button type="submit" class="btn red">Pedir venir a probar</button>
+    <button type="submit" class="btn red">Reservar la plaza</button>
   </div>
 </form>
 <div class="form-done" id="po-done" role="status">
@@ -294,5 +341,6 @@ menores, en <a href="/es/proteccion-menor/">Protección del Menor</a>.</p>
 <script src="/js/portes-obertes.js"></script>
 <script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
+<script src="/js/avis-portes-obertes.js" defer></script>
 </body>
 </html>

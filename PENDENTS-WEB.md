@@ -2309,3 +2309,276 @@ https://claude.ai/code/artifact/5f3af974-01e9-423b-9dde-d0604f39365d
   (demanar mencions una per una) i `CAMPUS-FITXA-GOOGLE-I-AGENDES.md` (alta a la
   fitxa de Google i a les agendes) són feina de fora del web que segueix sense
   fer. El web ja està a l'altura; això no.
+
+---
+
+## 30-08-2026 · Galeria amb grups privats, les quatre portades i la capçalera
+
+Sessió de l'Ana. Tres encàrrecs, per ordre en què van sortir.
+
+### 1. La galeria: grups visibles i grups invisibles — FET
+
+L'encàrrec era «grups de fotos visibles i un altre invisible, amb aquesta
+acció a cada grup de la galeria a l'admin».
+
+Resulta que **tot el codi ja existia i no funcionava**. El botó Públic/Privat
+de cada fila és a `fotos/admin.html` (funció `toggleVisibility`), el filtre
+públic és a `fotos/index.html` (`esVisible`, que deixa passar el que no és
+`private`) i el PIN de màrqueting és a `fotos/config.js`
+(`marketing_pin: 'barna-mk-1965'`). El que faltava era el camp a les dades:
+cap dels deu àlbums de `fotos/events.js` portava `visibility`, i amb el valor
+indefinit la comparació `e.visibility !== 'private'` era certa per a tothom.
+La funció hi era i no feia res.
+
+Ara els deu àlbums porten el camp escrit. Nou són `"public"`. **«JUGADORS/ES
+2526»** (192 retrats de plantilla, material intern) arrenca `"private"`: no
+surt a `/fotos/` i només s'hi arriba des de l'admin o amb
+`/fotos/?marqueting=<clau>`. Es torna públic amb un clic.
+
+`scripts/build-gallery-events.py` els manté: els àlbums nous neixen
+`"public"` i els que venien d'abans es completen amb `setdefault`, així cap
+execució torna a deixar un grup sense visibilitat declarada.
+
+Comprovat amb navegador sobre el lloc servit: la galeria pública pinta 9
+targetes i cap és la privada; amb el PIN en pinta 10. El regex amb què l'admin
+llegeix `events.js` hi casa i el desat del propi admin (`JSON.stringify`)
+conserva el camp anada i tornada.
+
+Commit `5c437b47`.
+
+### 2. Les quatre portades: cada una amb el seu destí — FET (a l'Artifact)
+
+Decisió de l'Ana sobre la maqueta
+[Quatre portades](https://claude.ai/code/artifact/a4a53f45-e2d3-4e9a-aadb-ee89be001087):
+
+| | Destí |
+|---|---|
+| **A · L'Afinat** | La portada de cada dia |
+| **B · Dia de partit** | El calendari |
+| **C · La Jugada** | Tal com està, amb l'Escoleta, i un **submenú «Història de l'escola»** |
+| **D · L'Edició** | La **premsa escrita**: open day dels preferents el cap de setmana, obertura del calendari de partits i un post del blog cada setmana |
+
+El menú no s'ha tocat: només aquestes quatre.
+
+**La foto de la D.** L'Ana va demanar que hi anés una foto institucional
+concreta —tres directius asseguts a la grada amb la bufanda del club— al lloc
+de les jugadores. **Ja era a la galeria**: és
+`fotos/web/presentacio-equips-25-26-msufdc03/1786803048160-zpte6.webp`
+(2048×1365), retallada a 16:10 i posada en duotò vermell com la resta de la D.
+No calia pujar-la.
+
+> **Nota de reconciliació.** Dues sessions treballaven la mateixa maqueta
+> alhora. L'altra va publicar primer els rètols de les pestanyes, el submenú
+> de la C i tot el text editorial de la D, i hi va posar **una foto que no era
+> la demanada** (l'alcalde dret a la sala de trofeus). La publicació d'aquí
+> es va fer sobre la seva versió, canviant només la foto. No s'ha perdut res
+> del seu text.
+
+### 3. La capçalera de la portada — FET
+
+Dues coses que l'Ana va veure mirant el web publicat.
+
+- **El ticker de novetats no destacava.** Feia 32 px d'alt amb lletra de
+  8,5 px espaiada a 0,3em. Puja a **46 px** i la lletra a **11,5 px** amb
+  menys espaiat, el text passa del 70% al 85% d'opacitat i la màscara dels
+  extrems s'estreny (5% → 2%) perquè la pista sigui més ampla. Als tres
+  idiomes.
+- **L'«Admin» no sortia a dalt a la dreta.** Ja existia una pestanya flotant
+  que `js/galetes.js` enganxa a gairebé totes les pàgines, però estava a
+  `top:12px; right:12px` — **a sobre del ticker, i del mateix negre**
+  (`#10100E`) amb un 55% d'opacitat: negre sobre negre. Ara les tres portades
+  porten l'enllaç dins la capçalera, al costat del commutador d'idioma; la
+  pestanya flotant baixa a baix a la dreta, on el fons és blanc; i allà on ja
+  hi ha l'enllaç de capçalera, la pestanya no es pinta.
+
+Commit `5957887c`.
+
+### El que queda obert d'aquesta sessió
+
+- **L'enllaç «Admin» de capçalera només és a les tres portades.** A la resta
+  de pàgines l'accés segueix sent la pestanya flotant de `galetes.js`, que a
+  mòbil està amagada a posta (`@media(max-width:900px)`). Si es vol a la
+  capçalera de tot el lloc, són ~380 fitxers i val més fer-ho amb un script.
+- **El grup privat de la galeria és una tria d'aquí, no de l'Ana.** Es va
+  triar «JUGADORS/ES 2526» per ser el més clarament intern dels deu. Si n'ha
+  de ser un altre, es canvia amb el botó de `/fotos/admin.html`.
+- **Les quatre portades viuen només a l'Artifact.** Cap de les quatre s'ha
+  portat encara a producció: la portada publicada segueix sent la de franges
+  de la v2.0.0. Passar-hi la D (premsa escrita) implicaria una secció nova
+  `/premsa/` amb calendari editorial setmanal, que és una decisió de contingut,
+  no de codi.
+- **La foto institucional només és a la maqueta.** Si es vol a producció, cal
+  passar-la per `scripts/build-blog-images.py` com les altres.
+
+### 4. La guia visual definitiva — FETA
+
+Encàrrec de l'Ana: «amb les 4 portades has de fer una guia visual definitiva
+de la web i que quedi com a principal».
+
+**«El Sistema Barna»** —
+https://claude.ai/code/artifact/c22e9418-788b-43af-94c6-de7ab81b7f27
+
+Surt de les quatre portades: el que les fa quatre *vestits* i no quatre
+marques. Onze seccions —la tesi, les quatre portades amb el seu destí, els
+invariants, color, lletra, foto, dades, vocabulari, els tres idiomes, la
+llista d'abans de publicar i el llinatge de guies.
+
+Tres coses que val la pena saber-ne:
+
+- **La guia és el sistema que descriu.** Mateixos tokens, Anton i Inter
+  incrustades des de `fonts/` del repositori amb els `unicode-range` copiats
+  de `css/fonts.css`, i el filet vermell com a gest estructural. El mode fosc
+  no és una excepció al sistema: és la regla §1 («sobre fons fosc el vermell
+  s'aclareix a `#FF3B41`») aplicada a la pàgina.
+- **Els contrastos no són números copiats.** Els mesura la pàgina en obrir-se
+  amb la fórmula de la WCAG 2.1. Quadren amb els que hi havia escrits, amb
+  **una correcció**: el `#E31E24` de la guia vella es descartava «per contrast»,
+  i sobre el blanc d'avui dona 4,69:1 i **passaria**. Falla sobre la crema
+  d'abans (4,16:1), que és on es va mesurar. Segueix fora, però pel motiu bo:
+  el color de marca és el mostrejat de l'escut.
+- **Les quatre miniatures són captures reals** de les maquetes, no dibuixos.
+
+**Que quedi com a principal** s'ha fet a `.claude/skills/web-cbgb/SKILL.md`,
+que és el que es carrega abans de tocar res visual: hi ha un bloc al capdamunt
+que assenyala la guia i la taula de destins, i el llinatge dels quatre
+documents amb què queda de cadascun. **Si canvies un dels dos, canvia l'altre.**
+
+### 5. Els destins, precisats per l'Ana (mateix dia)
+
+Dues correccions sobre el que s'havia apuntat al punt 2:
+
+- **La B no és només la portada del calendari.** És **tot el calendari amb la
+  mateixa estètica**: `/partits/`, `/partits/calendaris/` i les fitxes de
+  `/partits/equips/`, als tres idiomes. Són 59 fitxers HTML, però la majoria
+  són fitxes d'equip que genera `.github/scripts/generate-team-pages.py`: allà
+  es toca el generador, no la sortida.
+- **La D no és `/premsa/`.** «L'Edició» és la **newsletter setmanal**. És
+  l'única de les quatre que no és una pàgina web: és el número que arriba per
+  correu cada setmana. Segueix sent l'única que viu igual de bé impresa.
+  (Rectificat el mateix dia: es va apuntar «mensual» per un lapsus.)
+
+La guia i la skill ja ho diuen. **Queda per fer:** la maqueta de la D dins de
+«Quatre portades» encara està escrita en clau setmanal («número nou cada
+setmana», «es publica cada cap de setmana», els breus amb Dv./Ds./Dm.). Cal
+passar-la a mensual perquè digui el mateix que la guia.
+
+I la newsletter segueix bloquejada pel mateix d'abans: **falta l'URL del
+formulari de Brevo**. La clau API no pot viure en un lloc estàtic.
+
+### Rectificació del mateix dia: la newsletter és setmanal, no mensual
+
+Al punt 5 d'aquest mateix registre es va apuntar «mensual» per un lapsus.
+L'Ana ho ha corregit: **és setmanal**. Ja està arreglat a la guia («El
+Sistema Barna», nota `newsletter-setmanal`) i a la skill `web-cbgb`.
+
+
+---
+
+## 30-08-2026 (tarda) · Portes Obertes, el calendari i els embuts que perdien dades
+
+Segona tanda del mateix dia. Tot a la branca `claude/quatre-portades-3wrns7`
+i a la **PR #121**, pendent de fusionar a `main`.
+
+### 1. Portes Obertes de l'Escoleta — FET (falta desplegar l'Apps Script)
+
+Campanya sencera: dissabtes **19 i 26 de setembre a les 9 h**, 50 places
+**per dissabte** (no 50 en total).
+
+- **`scripts/apps-script-portes-obertes.gs`** — el motor. Escriu a la full,
+  avisa el club amb un botó «Obrir al WhatsApp» amb el resum ja escrit, crea
+  l'esdeveniment al calendari de cada dissabte triat amb la família com a
+  convidada, i confirma a la família en el seu idioma.
+- **El calendari desplegat** a `/portes-obertes/` i les dues traduccions: els
+  dissabtes com a targetes grans amb les places lliures i el % d'ocupació. Es
+  pot triar més d'un dia. Camps nous: edat, si ha jugat abans, i **correu i
+  telèfon separats** (el correu obligatori, que és on va la confirmació).
+- **`js/avis-portes-obertes.js` + `scripts/avis-aplica.py`** — la barra
+  vermella a **392 pàgines**, als tres idiomes. Caduca sola el 27/09, es pot
+  tancar, i no surt a la pàgina de destinació.
+
+**Sobre el «en queden 15»:** no va escrit a mà. `RESERVES_FORA_DEL_WEB` té les
+places ja compromeses fora del web (ara **35 per torn**) i el comptador les
+suma a les files de la full. Així el que es publica és la disponibilitat real
+i baixa sola. **Si el nombre real és un altre, es canvia allà.**
+
+> **Pendent d'acció de l'Ana:** desplegar l'Apps Script (instruccions dins del
+> fitxer, 10 minuts) i enganxar l'URL a `portesObertesEndpoint` de
+> `js/canals.js`. Mentre estigui buit el formulari recull reserves igual, però
+> **sense comptador, sense correus i sense esdeveniment de calendari**.
+
+### 2. Dos embuts que perdien dades — FET
+
+- **El contacte de la portada** obria el WhatsApp i enviava un correu, però
+  **no desava res**. Si es blocava l'emergent o el correu es perdia, la
+  família desapareixia. Ara la sol·licitud s'escriu a la full ABANS d'obrir el
+  WhatsApp, marcada amb `source: 'info-portada'`. Als tres idiomes.
+- **La galeria** ja té grups visibles i invisibles de veritat (primera tanda).
+  A 30/08 ja hi ha **4 àlbums marcats privats** des de l'admin: la funció
+  s'està fent servir.
+
+### 3. Proposta B a tot el calendari — FET
+
+`/partits/`, `/partits/calendaris/` i el generador de les fitxes d'equip
+(`.github/scripts/generate-team-pages.py`). El capçal fosc viu a
+`css/barna.css` com a component `.p-dark` perquè les pàgines generades no
+porten `<style>` propi.
+
+> ⚠️ **El generador de fitxes d'equip està desfasat respecte al publicat.**
+> Executar-lo esborraria de les 48 pàgines el commutador d'idioma, els
+> `hreflang`, `css/a11y.css` i el `theme-color` correcte. Per això el capçal
+> fosc es va posar al generador però **no es va executar**: les fitxes
+> publicades encara no el tenen. Cal posar el generador al dia abans de
+> tornar-lo a executar.
+
+### 4. Menú ≡ reorganitzat — FET
+
+Decisió de l'Ana: Màgics a «Equips i temporada», Galeria a «El Club»,
+3x3/Cistella Petita/Campus sota «Esdeveniments», i «Actualitat» passa a
+«Premsa» amb el Blog i la Newsletter a dins. Es fa a `scripts/build-mapa.py`,
+que genera `js/mapa.js`.
+
+### 5. Dos errors de capçalera anteriors a la sessió — ARREGLATS
+
+- **El nom del club se solapava amb el menú** entre ~1080 i 1280 px a les
+  pàgines amb `.head-nav` llarg. `.head-brand` s'encongia per sota del seu
+  propi text.
+- **L'«Admin» no es veia**: la pestanya flotant era a `top:12px`, sobre el
+  ticker, i del mateix negre. Ara va a baix a la dreta, es veu també a mòbil i
+  no tapa els botons de consentiment de galetes.
+
+### 6. Estratègia SEO i GEO per omplir l'Escoleta — FETA
+
+**https://claude.ai/code/artifact/a4abebc8-730f-4229-a7bd-f3cad11ab36a**
+
+Reescrita amb les **dades reals de Search Console** que va passar l'Ana, que
+contradiuen la primera versió. Tres troballes que manen sobre qualsevol
+intuïció:
+
+1. **No hi ha CAP cerca d'Escoleta** entre les 10 primeres de 157. El club
+   posiciona per **campus i 3x3** —el producte d'estiu— i no pel de tot l'any.
+2. **Les cinc cerques amb més impressions tenen ZERO clics** (117 impressions
+   en total). No és un problema de posició sinó de **títol i descripció**: és
+   l'única jugada on el trànsit ja passa per davant, i la més barata de totes.
+3. **«barna», amb 48 impressions, és trànsit escombraria**: qui ho escriu
+   busca Barcelona o el Barça.
+
+I una cosa bona verificada el mateix dia: **el mode IA de Google cita
+`/blog/com-triar-escola-basquet-barcelona/` com a font [2] per a «escola
+basquet barcelona», al costat del FC Barcelona**. El GEO ja funciona mentre
+el SEO clàssic encara no.
+
+> **Pendent:** només es van veure 10 files de 157 i no se sap el rang de
+> dates. Amb la llista sencera es poden dir exactament quins cinc títols
+> reescriure i amb quin text.
+
+### El que queda obert d'aquesta tanda
+
+- **Fusionar la PR #121.** Tot està verificat amb navegador i ja porta `main`
+  fusionat. No es va poder fer des de la sessió: un control de seguretat de
+  l'entorn impedeix tocar `main`.
+- **Desplegar l'Apps Script** de Portes Obertes (punt 1).
+- **L'article del blog i la newsletter** de les Portes Obertes: demanats i no
+  fets.
+- **Google Business Profile**: segueix pendent des del campus, i amb les dades
+  noves és la segona jugada més important, no la primera.
+- **El generador de fitxes d'equip**, al dia (punt 3).

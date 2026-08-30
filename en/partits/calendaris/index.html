@@ -31,6 +31,20 @@
 <link rel="stylesheet" href="/css/barna.css">
 <style>
 .head-in .lang-switch { margin-left: auto; }
+
+/* ==== Capçal fosc de la proposta B, com a /partits/ ====
+   Aquí no hi ha hero amb foto: és una subpàgina i el protagonista és la
+   graella de fitxes (.cal-card, ja al sistema). Només el capçal es posa
+   fosc, per lligar visualment amb /partits/. */
+.p-dark { position: relative; background: var(--ink); overflow: clip; }
+.p-dark-court { position: absolute; inset: 0; opacity: 0.5; pointer-events: none; }
+.p-dark-court svg { position: absolute; top: 50%; right: -8%; width: min(46vw, 460px); height: auto; transform: translateY(-50%); }
+.p-dark-in { position: relative; z-index: 1; }
+.p-dark .crumb { color: rgba(255,255,255,0.45); }
+.p-dark .crumb a:hover { color: var(--red-light); border-color: var(--red-light); }
+.p-dark .eyebrow.red { color: var(--red-light); }
+.p-dark .phead h1 { color: #fff; }
+.p-dark .phead .lede { color: rgba(255,255,255,0.68); }
 </style>
 <script type="application/ld+json">
 {
@@ -103,17 +117,27 @@
   </div>
 </header>
 <main id="main">
-<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="/en/">Home</a> · <a href="/en/partits/">Calendar</a> · <span>Team calendars</span></nav></div>
-<div class="wrap">
-  <div class="phead narrow">
+<section class="p-dark">
+  <div class="p-dark-court" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="1.6" vector-effect="non-scaling-stroke">
+      <circle cx="200" cy="200" r="60"/>
+      <circle cx="200" cy="200" r="180"/>
+      <line x1="10" y1="200" x2="390" y2="200"/>
+    </svg>
+  </div>
+  <div class="wrap p-dark-in">
+    <nav class="crumb" aria-label="Fil d'Ariadna"><a href="/">Inici</a> · <a href="/partits/">Calendar</a> · <span>Team calendars</span></nav>
+    <div class="phead narrow">
     <p class="eyebrow red" id="cal-temporada">Season</p>
     <h1>Team calendars</h1>
     <p class="lede">Each team's full calendar, ready to download and save. It's generated every day from
     the official FCBQ calendar: development teams (pre-mini, mini, pre-youth) appear here only once the
     federation publishes their calendar.</p>
   </div>
-
-  <div id="cal-groups"><noscript><!-- SEO-CALENDARIS:START --><ul><li><a href="/partits/calendaris/descarrega/cadet-femeni-a.png">Cadet Femení A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/cadet-femeni-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/cadet-femeni-b.png">Cadet Femení B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/cadet-femeni-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/cadet-masculi-a.png">Cadet Masculí A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/cadet-masculi-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/cadet-masculi-b.png">Cadet Masculí B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/cadet-masculi-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/infantil-femeni-a.pdf">Infantil Femení A — download the calendar (PDF, 22 matchdays)</a> · <a href="/partits/calendaris/ics/infantil-femeni-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/infantil-femeni-b.png">Infantil Femení B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/infantil-femeni-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/infantil-masculi-a.png">Infantil Masculí A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/infantil-masculi-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/infantil-masculi-b.png">Infantil Masculí B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/infantil-masculi-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/junior-femeni-a.png">Júnior Femení A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/junior-femeni-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/junior-femeni-b.png">Júnior Femení B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/junior-femeni-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/junior-masculi-a.png">Júnior Masculí A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/junior-masculi-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/scf.pdf">Sènior Femení A — download the calendar (PDF, 30 matchdays)</a> · <a href="/partits/calendaris/ics/scf.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/senior-femeni-b.pdf">Sènior Femení B — download the calendar (PDF, 26 matchdays)</a> · <a href="/partits/calendaris/ics/senior-femeni-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/scm.pdf">Sènior Masculí A — download the calendar (PDF, 30 matchdays)</a> · <a href="/partits/calendaris/ics/scm.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/senior-masculi-b.pdf">Sènior Masculí B — download the calendar (PDF, 26 matchdays)</a> · <a href="/partits/calendaris/ics/senior-masculi-b.ics">subscribe to the calendar (.ics)</a></li></ul><!-- SEO-CALENDARIS:END --></noscript></div>
+  </div>
+</section>
+<div class="wrap">
+<div id="cal-groups"><noscript><!-- SEO-CALENDARIS:START --><ul><li><a href="/partits/calendaris/descarrega/cadet-femeni-a.png">Cadet Femení A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/cadet-femeni-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/cadet-femeni-b.png">Cadet Femení B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/cadet-femeni-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/cadet-masculi-a.png">Cadet Masculí A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/cadet-masculi-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/cadet-masculi-b.png">Cadet Masculí B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/cadet-masculi-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/infantil-femeni-a.pdf">Infantil Femení A — download the calendar (PDF, 22 matchdays)</a> · <a href="/partits/calendaris/ics/infantil-femeni-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/infantil-femeni-b.png">Infantil Femení B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/infantil-femeni-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/infantil-masculi-a.png">Infantil Masculí A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/infantil-masculi-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/infantil-masculi-b.png">Infantil Masculí B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/infantil-masculi-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/junior-femeni-a.png">Júnior Femení A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/junior-femeni-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/junior-femeni-b.png">Júnior Femení B — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/junior-femeni-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/junior-masculi-a.png">Júnior Masculí A — download the calendar (PNG, 14 matchdays)</a> · <a href="/partits/calendaris/ics/junior-masculi-a.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/scf.pdf">Sènior Femení A — download the calendar (PDF, 30 matchdays)</a> · <a href="/partits/calendaris/ics/scf.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/senior-femeni-b.pdf">Sènior Femení B — download the calendar (PDF, 26 matchdays)</a> · <a href="/partits/calendaris/ics/senior-femeni-b.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/scm.pdf">Sènior Masculí A — download the calendar (PDF, 30 matchdays)</a> · <a href="/partits/calendaris/ics/scm.ics">subscribe to the calendar (.ics)</a></li><li><a href="/partits/calendaris/descarrega/senior-masculi-b.pdf">Sènior Masculí B — download the calendar (PDF, 26 matchdays)</a> · <a href="/partits/calendaris/ics/senior-masculi-b.ics">subscribe to the calendar (.ics)</a></li></ul><!-- SEO-CALENDARIS:END --></noscript></div>
   <noscript><style>#cal-loading{display:none}</style></noscript>
   <p id="cal-loading" class="narrow lede">Loading calendars…</p>
   <p id="cal-error" class="narrow lede" style="display:none">The calendars couldn't be loaded right now.
@@ -351,5 +375,6 @@
 </footer>
 <script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
+<script src="/js/avis-portes-obertes.js" defer></script>
 </body>
 </html>

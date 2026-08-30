@@ -25,22 +25,29 @@ ARREL = Path(__file__).resolve().parent.parent
 # segueixen el vocabulari de i18n/etiquetes.yml (Calendari · Calendario ·
 # Calendar). /dossier-patrocinis/ i /admin/ no hi són: l'un és una
 # redirecció noindex i l'altre és intern.
+#
+# Reorganitzat el 30/08/2026 (decisió de l'Ana, sobre la mateixa forma de sis
+# columnes que ja hi havia): els Màgics són un equip, no una porta d'entrada,
+# i passen a «Equips i temporada»; la Galeria és del Club, no de temporada;
+# 3x3/Cistella Petita/Campus són esdeveniments, d'aquí el nom nou de la
+# columna; i Premsa deixa de ser una «Actualitat» genèrica per tenir secció
+# pròpia, amb el Blog i la Newsletter a dins. El menú no s'allarga: només es
+# mouen ítems que ja hi eren, més un de sol (Newsletter).
 ARBRE = [
     ("Juga al Barna", "Juega en el Barna", "Play at Barna", [
         ("/escoleta/", "Escoleta", "Escoleta", "Escoleta"),
         ("/basquet-formatiu/", "Bàsquet formatiu", "Baloncesto formativo", "Development basketball"),
         ("/portes-obertes/", "Portes obertes", "Puertas abiertas", "Open days"),
         ("/femeni/", "Bàsquet femení", "Baloncesto femenino", "Women's basketball"),
-        ("/magics/", "Barna Màgics", "Barna Màgics", "Barna Màgics"),
         ("/faq/", "Preguntes freqüents", "Preguntas frecuentes", "FAQ"),
     ]),
     ("Equips i temporada", "Equipos y temporada", "Teams and season", [
         ("/partits/equips/", "Equips", "Equipos", "Teams"),
         ("/partits/", "Calendari", "Calendario", "Calendar"),
         ("/partits/calendaris/", "Calendari per equip", "Calendario por equipo", "Calendar by team"),
-        ("/fotos/", "Galeria de fotos", "Galería de fotos", "Photo gallery"),
+        ("/magics/", "Barna Màgics", "Barna Màgics", "Barna Màgics"),
     ]),
-    ("Activitats", "Actividades", "Activities", [
+    ("Esdeveniments", "Eventos", "Events", [
         ("/campus/", "Campus de bàsquet", "Campus de baloncesto", "Basketball camp"),
         ("/tecnificacio-basquet-barcelona/", "Tecnificació", "Tecnificación", "Skills training"),
         ("/3x3/", "Torneig 3x3", "Torneo 3x3", "3x3 tournament"),
@@ -48,6 +55,7 @@ ARBRE = [
     ]),
     ("El Club", "El Club", "The Club", [
         ("/club/", "Qui som", "Quiénes somos", "Who we are"),
+        ("/fotos/", "Galeria de fotos", "Galería de fotos", "Photo gallery"),
         ("/historia/", "Història", "Historia", "History"),
         ("/palmares/", "Palmarès", "Palmarés", "Honours"),
         ("/organigrama/", "Organigrama", "Organigrama", "Organisation"),
@@ -57,10 +65,13 @@ ARBRE = [
         ("/documents/", "Documents", "Documentos", "Documents"),
         ("/posicionament/", "Posicionament del club", "Posicionamiento del club", "Club positioning"),
     ]),
-    ("Actualitat", "Actualidad", "News", [
-        ("/blog/", "Coneixement Barna", "Conocimiento Barna", "Barna knowledge"),
-        ("/video/", "Vídeo", "Vídeo", "Videos"),
+    ("Premsa", "Prensa", "Press", [
         ("/premsa/", "Premsa", "Prensa", "Press"),
+        ("/blog/", "Coneixement Barna", "Conocimiento Barna", "Barna knowledge"),
+        # Sense URL pròpia encara: apunta a /premsa/, on viurà la subscripció
+        # quan arribi l'URL del formulari de Brevo (PENDENTS-WEB.md).
+        ("/premsa/", "Newsletter", "Newsletter", "Newsletter"),
+        ("/video/", "Vídeo", "Vídeo", "Videos"),
         ("/premsa/moments/", "Moments a Instagram", "Momentos en Instagram", "Instagram highlights"),
         ("/premidonaesport/", "Premi Dona i Esport", "Premi Dona i Esport", "Premi Dona i Esport"),
     ]),

@@ -483,6 +483,7 @@ window.GALERIA_EVENTS = [
       "1787060233491-2h1tl.jpg"
     ],
     "allow_download": true,
+    "visibility": "public",
     "source": "repo",
     "alts": {
       "1786971097047-qims6.webp": "La mascota i un infant entrant a la pista durant la visita institucional",
@@ -1143,6 +1144,7 @@ window.GALERIA_EVENTS = [
       "1786889128701-se531.jpg"
     ],
     "allow_download": true,
+    "visibility": "public",
     "source": "repo"
   },
   {
@@ -1340,6 +1342,7 @@ window.GALERIA_EVENTS = [
       "1786805465412-14fn5.jpg"
     ],
     "allow_download": false,
+    "visibility": "public",
     "source": "repo"
   },
   {
@@ -1445,6 +1448,7 @@ window.GALERIA_EVENTS = [
       "1786801157965-dircm.jpg"
     ],
     "allow_download": true,
+    "visibility": "public",
     "source": "repo",
     "alts": {
       "1786800684268-xyvqb.jpg": "Nen de l'Escoleta amb pitrall vermell i pilota, amb la mascota del club, a La Nau del Clot",
@@ -1909,6 +1913,7 @@ window.GALERIA_EVENTS = [
       "1786540543440-g3h5l.webp"
     ],
     "allow_download": true,
+    "visibility": "public",
     "source": "repo"
   },
   {
@@ -2058,7 +2063,8 @@ window.GALERIA_EVENTS = [
       "1786891290856-knk9o.webp",
       "1786891321927-gxb7v.webp"
     ],
-    "allow_download": true
+    "allow_download": true,
+    "visibility": "public"
   },
   {
     "id": "cistella-petita-2a-edicio-2026",
@@ -2175,7 +2181,8 @@ window.GALERIA_EVENTS = [
       "1781453953708-nt1g3.jpeg",
       "1781453954833-wtac2.jpeg"
     ],
-    "allow_download": true
+    "allow_download": true,
+    "visibility": "public"
   },
   {
     "id": "3x3-westfield-glories-2026",
@@ -2564,7 +2571,8 @@ window.GALERIA_EVENTS = [
       "1R11FbcP2IkHcrQ_k2yCWrGuvQqEcuFzZ",
       "1kkNd9Xn05_ZSgrc-U7vKrZoIaD-wv47A"
     ],
-    "allow_download": true
+    "allow_download": true,
+    "visibility": "public"
   },
   {
     "id": "fotos-seniors-2526-msyp7yr5",
@@ -2870,6 +2878,7 @@ window.GALERIA_EVENTS = [
       "1787069866001-7toay.webp"
     ],
     "allow_download": true,
+    "visibility": "public",
     "source": "repo"
   }
 ];
