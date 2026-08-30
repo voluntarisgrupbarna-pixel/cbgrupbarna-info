@@ -3,6 +3,26 @@
 
 window.GALERIA_EVENTS = [
   {
+    "id": "la-nau-del-clot-6a9443e9",
+    "title": "La Nau del Clot",
+    "description": null,
+    "date": null,
+    "season": null,
+    "location": "Nau del Clot",
+    "cover": "img-0608.webp",
+    "cover_url": null,
+    "photos": [
+      "img-0608.webp",
+      "img-0617.webp",
+      "img-0718.webp",
+      "img-0719.webp",
+      "video-la-nau-copia.mov"
+    ],
+    "allow_download": true,
+    "source": "repo",
+    "visibility": "private"
+  },
+  {
     "id": "sant-jordi-mtfvksoy",
     "title": "SANT JORDI",
     "description": null,
