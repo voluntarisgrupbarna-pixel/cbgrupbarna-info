@@ -34,6 +34,8 @@ FITXERS = [
     ROOT / "patrocinis" / "photos" / "hero_sf16.jpg",
     ROOT / "presentacions" / "fons-barna-8m" / "img" / "staff-06.jpg",
     ROOT / "3x3" / "img" / "hero-bg-1.jpg",
+    ROOT / "3x3" / "img" / "hero-bg-2.jpg",
+    ROOT / "3x3" / "img" / "hero-bg-3.jpg",
     ROOT / "premsa" / "img" / "article-guia-clot-pagina-1.webp",
 ]
 AMPLADES = (400, 800, 1400)
