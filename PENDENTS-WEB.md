@@ -3374,3 +3374,58 @@ són vives però sense dates. Quan l'Ana les confirmi, a l'octubre:
 Aquesta segona part no és feina de repositori: és gestió (WhatsApp, correu,
 trucades). El CSV és el full de seguiment; s'actualitza a mà quan hi hagi
 resposta.
+
+---
+
+## 29-08-2026 (nit) — Recapitulació pujada a producció: PR #118
+
+Fusionades a la branca `claude/cbgrupbarna-chat-recap-ftds7c` i obertes cap a
+`main` a la [PR #118](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/118)
+les **13 branques** amb feina viva que la recapitulació d'aquest mateix
+document (§ «Recapitulació de tots els xats del projecte») havia trobat sense
+fusionar: `posicionamiento-inverso-seo-geo-w1loqt` (#110), `club-geo-seo-testing-x6h4yy`
+(#109), `web-positioning-types-k9g8v5`, `formularios-notificaciones-marketing-u7rzwv`,
+`pendientes-dependencias-fases-e140t0`, `web-technical-architecture-jr3oac`,
+`cbgrupbarna-technical-audit-3i3nj6`, `admin-panel-photo-gallery-wdw0ju`,
+`bots-reservas-config-5bv72z`, `button-carousel-ui-fdubq5`,
+`ahora-navigation-ux-gm6d1f` (#106), `campus-artefactos-angpbh` i
+`barcelona-basketball-camps-srapta` (#85).
+
+**Conflictes resolts a mà**, sempre a favor de la decisió més recent: Tawk.to
+fora (dues sessions el van afegir, dues el van treure; guanya la retirada),
+el campus com a tecnificació d'alt rendiment (no «club de barri») al blog i
+a les pàgines de campus en els tres idiomes, `VERSION`/`CHANGELOG.md` a
+2.1.0, i les targetes noves del blog (Robert Willett + «com triar club»)
+integrades sense duplicar-se.
+
+### Pendent · aquesta PR
+
+- **[PR #118](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/118) esperant CI i revisió.** Cal que `i18n-lint`, `i18n-paritat`,
+  `i18n-contingut`, `a11y-revisa`, Lighthouse i `tests-web` (workflows nous,
+  fusionats en aquesta mateixa PR) passin en verd abans de fusionar-la a
+  `main`.
+- Un cop fusionada, **revisar la llista de pendents que arrossega** cadascuna
+  d'aquestes branques (rotar la clau de GA4, *test users* d'OAuth,
+  `generate-team-pages.py` desfasat, secrets del backup i del Worker
+  d'admin...): ja són a la secció «Recapitulació de tots els xats», § 2,
+  d'aquest mateix document, i no canvien pel fet de fusionar-se.
+
+### No fusionades a propòsit · necessiten mà humana, no un merge automàtic
+
+Tres branques amb PR oberta **no tenen `merge-base` amb `main`**: la seva
+història és incompatible amb la de la branca principal (semblen anteriors a
+una reescriptura de l'historial del repositori, o van néixer d'un punt que
+ja no hi és). Un merge normal hi falla (`fatal: no merge base`), i forçar-lo
+(unrelated histories) és arriscat sense revisar-ho fitxer a fitxer:
+
+- **[#71](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/71)** `cbgrupbarna-magics-error-tdtkqu` — Màgics, article de la
+  trobada, neteja d'Escoleta, fix del token d'admin.
+- **[#70](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/70)** `sitemap-indexacion-cbgrupbarna-bfhr2i` — redireccions 301 de la
+  web antiga.
+- **[#9](https://github.com/voluntarisgrupbarna-pixel/cbgrupbarna-info/pull/9)** `busy-allen-du24tz` — galeria amb PIN/Flickr/admin, de juny 2026;
+  la galeria d'avui (Next.js + Supabase + R2) no s'hi assembla.
+
+**Per rescatar-les:** mirar el diff de cadascuna contra `main` de fitxer en
+fitxer (no `git merge`), copiar a mà només el que encara aporti alguna cosa
+que `main` no tingui ja, i tancar la PR vella. Si res hi val la pena, tancar-
+les directament sense fusionar res.
