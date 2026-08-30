@@ -529,6 +529,128 @@ patrocini, dossiers, xarxes). Al repositori ja no hi és.
 
 ---
 
+## 🌐 Recompte de pàgines per idioma i salut del multiidioma · 30/08/2026
+
+Es va demanar quantes pàgines té la web en cada idioma. El recompte porta a
+trobar-hi quatre coses trencades i a deixar-ne dues obertes.
+
+### El recompte
+
+| | Fitxers `.html` | Pàgines públiques | `noindex` | Redireccions |
+|---|---|---|---|---|
+| Català (arrel) | 178 | **128** | 46 | 4 |
+| Castellà `/es/` | 165 | **128** | 28 | 9 |
+| Anglès `/en/` | 165 | **128** | 28 | 9 |
+| **Total** | **508** | **384** | 102 | 22 |
+
+**Els tres idiomes estan a la par: 128 pàgines públiques cadascun.** Els 13
+fitxers de més que té el català no són contingut sense traduir, són peces que
+només tenen sentit en un idioma: `/admin/`, les versions d'impressió de
+`/opina/print/`, el flyer de l'escoleta, el `404.html` i les redireccions
+velles. Els 508 fitxers declaren `<html lang>` i cap se'l deixa.
+
+`i18n/routes.yml` declara **154 trios** i **153 són complets**; l'únic
+monolingüe és `/escoleta/flyer/`, que és `noindex`.
+
+Per seccions (cada una × 3 idiomes): blog 24 · patrocinadors 24 · Premi Dona i
+Esport 23 · partits 18 · presentacions 6 · premsa 5 · campus 3 · i 51 pàgines
+soltes.
+
+### ✅ Arreglat
+
+1. **`/es/ventajas-familia/` i `/en/family-benefits/` deien una adreça que no
+   existeix.** El `canonical`, l'`og:url` i els camps `@id`, `url` i
+   `breadcrumb` del JSON-LD —5 llocs a cada fitxer— havien quedat sense el
+   prefix d'idioma i apuntaven a `/ventajas-familia/` i `/family-benefits/` a
+   l'arrel, que donen 404. Com que `build-sitemap.py` treu el `<loc>` del
+   canonical, el sitemap heretava l'error: anunciava a Google les dues adreces
+   mortes i deixava fora les bones (130 ca / 127 es / 127 en). Ara: **128 per
+   idioma**. Eren els únics dos casos de tot el repositori.
+
+2. **El peu de `/es/busqueda/` i `/en/search/` era sencer en català** —cinc
+   columnes, 24 enllaços i les capçaleres («Temporada», «Xarxes»…). El lint
+   només en veia dos, perquè el vocabulari tancat només cobreix `/partits/` i
+   `/escoleta/`; la resta era invisible. Traduït conservant l'estructura i tots
+   els enllaços intactes. Les etiquetes no s'han inventat: s'han pres de com
+   anomena el lloc cada enllaç a la resta de peus del mateix idioma, i les cinc
+   que no sortien enlloc, de l'`<h1>` de la pàgina de destí.
+
+3. **27 avisos del lint que no es podien arreglar.** El commutador d'idioma
+   («CA · ES · EN») són enllaços a la mateixa secció en un altre idioma i el
+   seu text és un codi, no el nom de la secció; el lint el comparava amb el
+   vocabulari i demanava escriure-hi «Escoleta» tres vegades. Ara
+   `scripts/i18n-lint.py` deixa estar els enllaços que porten `hreflang`.
+
+4. **4 pendents que eren falsos.** `/es/palmares/` i `/es/video/` sortien com a
+   «slug sense traduir» quan en castellà s'escriuen igual un cop tret l'accent
+   (com `club` o `faq`, que ja hi eren): afegits a `i18n/excepcions.yml`. I
+   `/escoleta/flyer/` sortia com a «sense traducció» quan és un cartell
+   imprimible que només es reparteix en català: se li ha posat la `nota` de
+   `routes.yml`, que és el mecanisme previst per a això.
+
+**Total: 439 → 404 pendents del lint, 0 errors.** Els tres controls que
+bloquegen la CI passen: `i18n-paritat`, `i18n-contingut` (306 traduccions) i
+`i18n-lint`.
+
+### ⚠️ Pendent de decisió de l'Ana
+
+5. **Com es diu l'Escoleta als enllaços · 342 enllaços.** És el 84% del que
+   queda. `i18n/etiquetes.yml` diu que un enllaç a `/escoleta/` s'ha de dir
+   **«Escoleta»** en els tres idiomes, i 385 enllaços ho compleixen. Però
+   n'hi ha **106 que diuen «Escola de bàsquet»**, **118 «Escuela de
+   baloncesto»** i **118 «Basketball school»**, la majoria al menú i al peu.
+   No és un descuit: són dues decisions possibles i totes dues defensables.
+
+   - **Nom propi** («Escoleta» a tot arreu): coherent amb el fet que l'adreça
+     `/escoleta/` no es tradueix i que `escoleta` ja és a la llista de paraules
+     que no es tradueixen mai. Reforça la marca.
+   - **Descriptiu** («Escuela de baloncesto», «Basketball school»): qui no
+     coneix el club no sap què és una «escoleta», i «escuela de baloncesto» és
+     el que la gent busca a Google.
+
+   Si es tria la primera, el canvi és mecànic i el fa `scripts/i18n-aplica-
+   etiquetes.py` afegint les tres variants a `prohibides`. Si es tria la
+   segona, el que s'ha de canviar és `i18n/etiquetes.yml`, no les 400 pàgines.
+   **Fins que no es decideixi, el lint seguirà comptant 342 pendents que no són
+   feina, són una pregunta sense respondre.**
+
+6. **El botó de les 45 fitxes d'equip.** Diu «Tots els dies de partit del club»
+   / «Todos los días de partido del club» / «Every club match day», i l'agost
+   del 2026 la direcció va decidir que l'etiqueta de `/partits/` és
+   «Calendari». La decisió deixa «dies de partit» com a terme de cerca als
+   `<title>` i descripcions, però això és una etiqueta d'enllaç. Cal decidir si
+   el botó passa a dir «Calendari» —més curt, però perd la crida— o si es
+   deixa com està i s'anota l'excepció. **Si es canvia, es toca
+   `.github/scripts/generate-team-pages.py` (línia ~132), no les 45 pàgines: el
+   robot les regenera cada dia i qualsevol edició a mà es perdria.**
+
+7. **`/presentacio/` i `/presentacions/dossier-patrocinis/` no surten al
+   cercador del web, però les seves traduccions sí.**
+   `.github/scripts/generate-search-index.py` porta una llista `EXCLOSES` amb
+   noms de carpeta **en català** i la fa servir per podar el recorregut a
+   qualsevol profunditat. Resultat: la carpeta catalana queda fora de l'índex i
+   la castellana i l'anglesa no, perquè el seu nom és un altre
+   (`presentacion`, `presentation`, `dosier-patrocinios`,
+   `sponsorship-pack`). Amb `patrocinis` no passa perquè s'escriu igual en els
+   tres idiomes.
+
+   Abans de tocar res cal decidir **què han de ser aquestes pàgines**: aquest
+   mateix document i la skill `mapa-web-cbgb` les donen per redireccions
+   `noindex` cap a `/patrocinadors/`, però al disc són sis pàgines normals i
+   indexables. O es tornen a tancar (i llavors s'hi afegeixen els noms
+   castellans i anglesos a `EXCLOSES`), o s'obren del tot (i llavors se'n
+   treuen els catalans). Ara mateix són dues coses a mitges.
+
+### Nota per a qui fusioni
+
+`i18n/excepcions-paritat.yml` porta dues entrades noves —`/avantatges-familia/`
+i `/cerca/`— amb el motiu escrit. **Les dues s'han de treure en fusionar**: hi
+són perquè `i18n-paritat.py` atura, amb raó, els canvis que toquen un sol
+idioma, i aquests dos el tocaven amb motiu (arreglar text que només estava
+malament en castellà i anglès).
+
+---
+
 ## Pendent de decisió
 
 - **🔴 Token de GitHub sense revocar.** El 30/08/2026 es va enganxar un Personal Access

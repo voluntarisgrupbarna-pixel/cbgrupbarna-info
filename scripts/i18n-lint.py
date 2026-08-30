@@ -62,7 +62,8 @@ RE_ALTERNATE = re.compile(
     r'<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\']([^"\']+)["\'][^>]*href=["\']([^"\']+)["\']',
     re.I,
 )
-RE_ENLLAC = re.compile(r'<a\b[^>]*\bhref=["\']([^"\']+)["\'][^>]*>(.*?)</a>', re.I | re.S)
+RE_ENLLAC = re.compile(
+    r'<a\b([^>]*)\bhref=["\']([^"\']+)["\']([^>]*)>(.*?)</a>', re.I | re.S)
 RE_ETIQUETA = re.compile(r"<[^>]+>")
 RE_NOINDEX = re.compile(r'<meta[^>]+name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', re.I)
 
@@ -227,7 +228,15 @@ def revisa():
         if text is None:
             continue
         idioma = idioma_de(url)
-        for desti, etiqueta in RE_ENLLAC.findall(text):
+        for abans, desti, despres, etiqueta in RE_ENLLAC.findall(text):
+            # El commutador d'idioma («CA · ES · EN», al peu de cada pàgina)
+            # són enllaços a la mateixa secció en un altre idioma, i porten
+            # hreflang per dir-ho. El seu text és un codi d'idioma, no el nom
+            # de la secció: comparar-lo amb el vocabulari donava 27 avisos
+            # que no es podien arreglar sense escriure «Escoleta» tres cops
+            # allà on hi ha d'anar «CA · ES · EN».
+            if "hreflang" in (abans + despres).lower():
+                continue
             desti = desti.replace(SITE, "").split("#")[0].split("?")[0]
             desti = re.sub(r"^/(es|en)/", "/", desti)
             regla = permeses.get(desti)

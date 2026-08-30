@@ -55,6 +55,11 @@ rutes_exemptes_de_renom:
 segments_exempts:
   es: [3x3, blog, campus, campus-time-chamber-2026, fons-barna-8m-fcbq, newsletter, escoleta, briefing, fotos, mascota, jugadors, partners-mapa,
        fotos-3x3, galeria-3x3-glories, grup-barna-dades-oficials, dossier-patrocinis,
-       club, faq, seniors, historia, cistella-petita, organigrama]
+       club, faq, seniors, historia, cistella-petita, organigrama,
+       palmares, video]
+  # palmares i video: en castellà s'escriuen «palmarés» i «vídeo», que un cop
+  # tret l'accent —com es fa a totes les URL— donen exactament el mateix
+  # segment que el català. No són slugs sense traduir: ja estan traduïts i
+  # la traducció coincideix, com passa amb «club», «faq» o «historia».
   en: [3x3, blog, campus-time-chamber-2026, fons-barna-8m-fcbq, newsletter, escoleta, briefing, partners-mapa, fotos-3x3, galeria-3x3-glories,
        club, faq, seniors, cistella-petita, documents]
