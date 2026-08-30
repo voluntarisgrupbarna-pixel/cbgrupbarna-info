@@ -19,4 +19,23 @@
 # Quan l'excepció deixi de fer falta, treu-la. És més fàcil treure una línia
 # ara que endevinar d'aquí a un any per què hi era.
 
-nomes_un_idioma: []
+nomes_un_idioma:
+  - ruta: /presentacio/
+    motiu: >
+      Es treu la crida de comunitat NOMÉS d'es/en perquè el català no l'ha
+      duta mai: scripts/crida-comunitat.py exclou les presentacions (fons
+      fosc, la crida hi sortiria blanca sobre blanc), però l'exclusió només
+      cobria les carpetes catalanes i les traduccions l'havien rebuda per
+      error. Arreglat el 30/08/2026; treu això quan es fusioni.
+  - ruta: /presentacions/
+    motiu: El mateix cas que /presentacio/.
+  - ruta: /presentacions/campus-timechamber/
+    motiu: El mateix cas que /presentacio/.
+  - ruta: /presentacions/dossier-patrocinis/
+    motiu: El mateix cas que /presentacio/.
+  - ruta: /presentacions/evidencia-i-posicio/
+    motiu: El mateix cas que /presentacio/.
+  - ruta: /presentacions/fons-barna-8m/
+    motiu: El mateix cas que /presentacio/.
+  - ruta: /presentacions/visio-global/
+    motiu: El mateix cas que /presentacio/.
