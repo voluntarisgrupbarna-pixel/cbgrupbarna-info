@@ -41,7 +41,22 @@ const VIEWPORTS = [
 ];
 
 // Carpetes que no formen part del lloc públic.
-const SKIP = [/^\.git\//, /^node_modules\//, /^tests\//, /^\.github\//];
+//
+// A part de les òbvies, se n'exclouen tres menes de fitxer que SÓN HTML però
+// que no són pàgines que ningú obri amb el mòbil, i mesurar-les amb les regles
+// de la pantalla és un error de categoria:
+//   · /opina/print/ i /escoleta/flyer/ — fulls per imprimir i imatges per a
+//     xarxes, maquetats en mm i pt sobre un full A4 o un llenç de 1080×1920.
+//     La «zona tocable» d'un cartell imprès no vol dir res.
+//   · /docs/newsletter/ — plantilles de correu per a Brevo. Al correu no hi ha
+//     ni tipografies carregades ni punts de referència ni enllaç de salt, i
+//     posar-n'hi seria pitjor que no fer-ho (vegeu la skill web-cbgb).
+// La resta del lloc, inclosos els documents interns i les àrees protegides,
+// sí que s'hi mesura: es llegeixen des del telèfon com qualsevol altra pàgina.
+const SKIP = [
+  /^\.git\//, /^node_modules\//, /^tests\//, /^\.github\//,
+  /^opina\/print\//, /^escoleta\/flyer\//, /^docs\/newsletter\//,
+];
 
 function findPages() {
   const pages = [];

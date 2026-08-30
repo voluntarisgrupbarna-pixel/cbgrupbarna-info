@@ -123,7 +123,7 @@
       box.appendChild(el('img', 'height:60px;margin-bottom:1.5rem'));
       box.firstChild.src = '/logo.png';
       box.firstChild.alt = 'CB Grup Barna';
-      box.appendChild(el('div', 'font-family:Jost,\'Futura\',sans-serif;font-weight:300;text-transform:uppercase;font-size:1.4rem;letter-spacing:.08em', 'ÀREA D\'<span style="color:#E20613">ADMINISTRACIÓ</span>'));
+      box.appendChild(el('div', 'font-family:Anton,\'Haettenschweiler\',sans-serif;font-weight:400;text-transform:uppercase;font-size:1.4rem;letter-spacing:.08em', 'ÀREA D\'<span style="color:#A8040E">ADMINISTRACIÓ</span>'));
       box.appendChild(el('p', 'color:#46433f;font-size:.85rem;margin:.6rem 0 1.75rem', 'Introdueix la contrasenya del club per continuar.'));
 
       var form = el('form', 'display:flex;flex-direction:column;gap:.75rem');
@@ -133,16 +133,16 @@
       input.autocomplete = 'current-password';
       form.appendChild(input);
 
-      var btn = el('button', 'width:100%;background:#10100E;border:1px solid #10100E;color:#fff;padding:.75rem 1rem;font-family:Jost,sans-serif;font-size:10px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer', 'Entrar');
+      var btn = el('button', 'width:100%;background:#10100E;border:1px solid #10100E;color:#fff;padding:.75rem 1rem;font-family:Inter,-apple-system,system-ui,sans-serif;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer', 'Entrar');
       btn.type = 'submit';
       form.appendChild(btn);
 
-      var err = el('p', 'display:none;color:#E20613;font-size:.8rem;margin-top:1rem;line-height:1.4', 'Contrasenya incorrecta.');
+      var err = el('p', 'display:none;color:#A8040E;font-size:.8rem;margin-top:1rem;line-height:1.4', 'Contrasenya incorrecta.');
       err.id = 'cbgb-pgerr';
 
       box.appendChild(form);
       box.appendChild(err);
-      box.appendChild(el('p', 'font-family:Jost,sans-serif;color:#6B6560;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-top:2rem;line-height:1.6',
+      box.appendChild(el('p', 'font-family:Inter,-apple-system,system-ui,sans-serif;color:#6B6560;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-top:2rem;line-height:1.6',
         'Accés reservat a l\'equip del CB Grup Barna.'));
 
       gate.appendChild(box);

@@ -101,7 +101,7 @@
   .head-brand img{width:26px;height:26px}
   .head-nav{display:flex;align-items:center;gap:18px;overflow-x:auto;scrollbar-width:none;flex:1}
   .head-nav::-webkit-scrollbar{display:none}
-  .head-nav a{font-family:var(--display);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap;transition:color .15s}
+  .head-nav a{display:inline-flex;align-items:center;min-height:44px;font-family:var(--display);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap;transition:color .15s}
   .head-nav a:hover{color:#fff}
   @media(max-width:900px){.head-nav a.opt{display:none}}
   .theme{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;cursor:pointer;
@@ -141,8 +141,8 @@
 
   /* La pagina te mode fosc propi: el gris fix es quedava en 3,14:1 sobre el
      fons fosc. Amb el token segueix el mode. */
-  .crumb{padding:14px 0;font-size:11.5px;color:var(--muted)}
-  .crumb a{color:var(--muted);text-decoration:none}
+  .crumb{padding:0;font-size:11.5px;color:var(--muted)}
+  .crumb a{display:inline-flex;align-items:center;min-height:44px;color:var(--muted);text-decoration:none}
   .crumb a:hover{color:var(--ink)}
   .crumb span{color:var(--ink)}
 
