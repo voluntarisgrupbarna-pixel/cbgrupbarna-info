@@ -2515,3 +2515,49 @@ web», que és el que aquests 15 realment són.
   (`box-decoration-break: clone` al `.here`, o evitar el salt) i no de dades,
   i queda fora de l'encàrrec d'aquesta auditoria. Anotat aquí perquè és una
   millora barata i visible.
+
+---
+
+## 29-08-2026 (nit) — Dada nova de l'Ana: 8 milions de visualitzacions
+
+L'Ana aporta la xifra real: **8 milions de visualitzacions la temporada
+2025-26**. Confirmat per ella que el període és la temporada (no l'any
+natural), i per tant substitueix el 6,44M que hi havia publicat, que era la
+mateixa finestra.
+
+**Aplicat** a les sis pàgines que la portaven, als tres idiomes:
+`/empreses/`, `/es/empresas/`, `/en/companies/` i els tres dossiers de
+patrocinis. De passada, a `/empreses/` el creixement respecte a la
+temporada anterior s'ha recalculat: amb 8M sobre els 4,86M que la mateixa
+pàgina declara com a temporada anterior, el creixement és del **65%**, no
+del 32-33% que deia (aquell percentatge era aritmètica del 6,44M).
+
+### El que aquesta xifra deixa trencat i NO s'ha tocat
+
+**Les «8,91M de visualitzacions acumulades des de l'obertura» ara són
+impossibles.** Ja ho eren abans, de fet: la mateixa pàgina deia 6,44M
+aquesta temporada i 4,86M l'anterior, que sumen 11,3M —més que el suposat
+acumulat de tota la vida del compte. Amb els 8M confirmats, el mínim
+acumulat de dues temporades passa a ser **12,86M**, i el 8,91M queda encara
+més lluny.
+
+Hi ha dues lectures possibles i **cap es pot triar sense l'Ana**:
+
+1. **El 8,91M està mal etiquetat** i no és «acumulat des de l'obertura»
+   sinó la lectura d'una finestra de 12 mesos —cosa que explicaria per què
+   s'assembla tant als 8M que ha donat l'Ana. Seria el mateix número dit
+   dues vegades amb dos noms.
+2. **El 8,91M és un acumulat real però antic**, i el que cal és demanar al
+   panell l'acumulat d'avui, que hauria de ser clarament superior a 13M.
+
+Mentre no es resolgui, el 8,91M segueix publicat a set pàgines
+(`/empreses/` i miralls, els tres dossiers de patrocinis, els tres
+`visio-global` i els blogs «Per què patrocinar un club de barri»). **No
+s'ha esborrat** perquè esborrar una xifra que potser només està mal
+etiquetada és pitjor que arreglar-li l'etiqueta —però és, ara mateix, la
+contradicció aritmètica més gran que li queda al web.
+
+**Relacionat i encara obert:** els mateixos blocs porten «5.382 seguidors»,
+que ja estava anotat com a obsolet (el real és 7.096, agost 2026). Quan es
+toqui el 8,91M convindria arreglar els dos alhora, que viuen a la mateixa
+graella de xifres.
