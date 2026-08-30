@@ -21,7 +21,10 @@ EXCLOU = (
     "admin/", "/admin.html", "opina/print/", "briefing/admin.html",
     # Les presentacions són peces fosques amb el seu propi joc de tokens:
     # allà --ink és blanc i la crida hi sortiria blanca sobre blanc.
+    # ...i les seves traduccions: mateixa pàgina, mateixos tokens foscos.
     "presentacions/", "presentacio/",
+    "presentaciones/", "presentacion/",
+    "presentations/", "presentation/",
 )
 
 TEXTOS = {
