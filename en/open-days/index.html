@@ -115,25 +115,67 @@ They come along, join in, and then you decide.</p>
 <p>We train at <strong>La Nau del Clot</strong>, in the Sant Martí district. If you would rather come and
 watch before saying anything to your child, you can: just let us know.</p>
 
-<h2>Ask for a day</h2>
+<h2>Book your Saturday</h2>
 <div class="form-note">
-  <p>Your name and a way of contacting you is enough. We will reply the same day with the day and
-  time that fit.</p>
+  <p>Pick the Saturday that suits you and book the place. <strong>Each Saturday only takes 50 children</strong>: once a session fills up, it closes. You will get the confirmation straight away.</p>
 </div>
 
 <form class="form" id="po-form" novalidate>
+  <fieldset class="po-cal" aria-describedby="po-dies-err">
+    <legend>Which Saturday in September? <span class="req" aria-hidden="true">*</span></legend>
+    <span class="hint">You can pick more than one: you are welcome to come and try as many Saturdays as you like throughout September.</span>
+    <div class="po-dies" id="po-dies">
+      <label class="po-dia">
+        <input type="checkbox" name="dissabtes" value="2026-09-19">
+        <span class="po-dia-in">
+          <b class="po-dia-n">19</b>
+          <span class="po-dia-m">Saturday<br>September</span>
+          <span class="po-dia-h">9.00 am · La Nau</span>
+          <span class="po-dia-p" data-places="2026-09-19">Loading…</span>
+        </span>
+      </label>
+      <label class="po-dia">
+        <input type="checkbox" name="dissabtes" value="2026-09-26">
+        <span class="po-dia-in">
+          <b class="po-dia-n">26</b>
+          <span class="po-dia-m">Saturday<br>September</span>
+          <span class="po-dia-h">9.00 am · La Nau</span>
+          <span class="po-dia-p" data-places="2026-09-26">Loading…</span>
+        </span>
+      </label>
+    </div>
+    <p class="form-err" id="po-dies-err" role="alert">Pick at least one Saturday.</p>
+  </fieldset>
+
   <div class="form-row">
     <label for="po-nom">Child's name <span class="req" aria-hidden="true">*</span></label>
     <input type="text" id="po-nom" name="nom" required autocomplete="off" aria-describedby="po-nom-err">
     <p class="form-err" id="po-nom-err" role="alert">Please tell us their name.</p>
   </div>
-  <div class="form-row">
-    <label for="po-any">Year of birth <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">It is what the federation uses to make up the teams: by year, not by school year.</span>
-    <input type="text" id="po-any" name="any" inputmode="numeric" required
-           placeholder="2017" aria-describedby="po-any-err">
-    <p class="form-err" id="po-any-err" role="alert">Please enter the year of birth, with four digits.</p>
+  <div class="form-row form-row--parell">
+    <div>
+      <label for="po-edat">Age <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="po-edat" name="edat" inputmode="numeric" required
+             placeholder="6" aria-describedby="po-edat-err">
+      <p class="form-err" id="po-edat-err" role="alert">Please add the age.</p>
+    </div>
+    <div>
+      <label for="po-any">Year of birth <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="po-any" name="any" inputmode="numeric" required
+             placeholder="2020" aria-describedby="po-any-err">
+      <p class="form-err" id="po-any-err" role="alert">Four digits.</p>
+    </div>
   </div>
+  <span class="hint" style="margin-top:-8px">The federation uses the year of birth to form teams, not the school year.</span>
+
+  <fieldset class="form-row">
+    <legend>Have they played basketball before? <span class="req" aria-hidden="true">*</span></legend>
+    <div class="po-tria">
+      <label class="po-op"><input type="radio" name="jugat" value="no" checked><span>No, starting from scratch</span></label>
+      <label class="po-op"><input type="radio" name="jugat" value="si"><span>Yes, they have played</span></label>
+    </div>
+  </fieldset>
+
   <div class="form-row">
     <label for="po-contacte">Your name <span class="req" aria-hidden="true">*</span></label>
     <input type="text" id="po-contacte" name="contacte" required autocomplete="name"
@@ -141,19 +183,24 @@ watch before saying anything to your child, you can: just let us know.</p>
     <p class="form-err" id="po-contacte-err" role="alert">Please tell us who is writing.</p>
   </div>
   <div class="form-row">
-    <label for="po-tel">Phone or email <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">Whichever suits you. We only use it to reply to this.</span>
-    <input type="text" id="po-tel" name="contacteVia" required autocomplete="tel"
-           aria-describedby="po-tel-err">
-    <p class="form-err" id="po-tel-err" role="alert">Please leave a phone number or email so we can tell you the day.</p>
+    <label for="po-correu">Email <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">This is where we send the confirmation of the place.</span>
+    <input type="email" id="po-correu" name="correu" required autocomplete="email"
+           aria-describedby="po-correu-err">
+    <p class="form-err" id="po-correu-err" role="alert">We need an email to confirm the place.</p>
+  </div>
+  <div class="form-row">
+    <label for="po-tel">Phone</label>
+    <span class="hint">Optional. So we can let you know about any last-minute change.</span>
+    <input type="tel" id="po-tel" name="telefon" autocomplete="tel">
   </div>
   <div class="form-row">
     <label for="po-msg">Anything we should know</label>
-    <span class="hint">Optional. If they have played before, if they are coming with a friend, if there are days you cannot make…</span>
+    <span class="hint">Optional. If they are coming with a friend, any allergies, days you cannot make…</span>
     <textarea id="po-msg" name="missatge" placeholder="Tell us in your own words…"></textarea>
   </div>
   <div class="btn-row" style="margin-top:22px">
-    <button type="submit" class="btn red">Ask to come and try</button>
+    <button type="submit" class="btn red">Book the place</button>
   </div>
 </form>
 <div class="form-done" id="po-done" role="status">

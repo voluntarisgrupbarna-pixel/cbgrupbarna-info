@@ -38,6 +38,17 @@
 
   var TOTAL_PER_TORN = 50;
 
+  /* El comptador es construeix aquí, no al marcatge, així que ha de saber
+     l'idioma: si no, una família que llegeix la pàgina en castellà veu
+     «Queden 15 places» enmig del seu formulari. */
+  var T = {
+    ca: { una: 'Queda 1 plaça', moltes: 'Queden {n} places', ple: 'Complet', ocup: '{p}% ple' },
+    es: { una: 'Queda 1 plaza', moltes: 'Quedan {n} plazas', ple: 'Completo', ocup: '{p}% lleno' },
+    en: { una: '1 place left', moltes: '{n} places left', ple: 'Full', ocup: '{p}% full' }
+  };
+  var codi = (document.documentElement.lang || 'ca').slice(0, 2).toLowerCase();
+  var t = T[codi] || T.ca;
+
   function pintaPlaces(lliures, ocupacio) {
     caselles.forEach(function (cb) {
       var clau = cb.value;
@@ -53,14 +64,13 @@
 
       cartell.classList.remove('poques', 'ple');
       if (n <= 0) {
-        cartell.textContent = 'Complet';
+        cartell.textContent = t.ple;
         cartell.classList.add('ple');
         cb.disabled = true;
         cb.checked = false;
       } else {
-        cartell.textContent = n === 1
-          ? 'Queda 1 plaça · ' + pct + '% ple'
-          : 'Queden ' + n + ' places · ' + pct + '% ple';
+        var quantes = n === 1 ? t.una : t.moltes.replace('{n}', n);
+        cartell.textContent = quantes + ' · ' + t.ocup.replace('{p}', pct);
         // «Poques» a partir de la meitat plena: el vermell ha de voler dir
         // alguna cosa, i si hi és sempre no vol dir res.
         if (pct >= 50) cartell.classList.add('poques');
