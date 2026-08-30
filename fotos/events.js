@@ -13,7 +13,8 @@ window.GALERIA_EVENTS = [
     "cover_url": null,
     "photos": [],
     "allow_download": true,
-    "source": "repo"
+    "source": "repo",
+    "visibility": "private"
   },
   {
     "id": "jugadors-es-2526-msyqgnil",
