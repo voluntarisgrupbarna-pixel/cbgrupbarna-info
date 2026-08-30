@@ -48,6 +48,13 @@ export function collect(opts) {
     return false;
   };
 
+  // Aparcat fora de la pantalla: no es veu i no es pot prémer, i el seu estat
+  // en repòs no és cap dels que viu l'usuari.
+  const foraDePantalla = (el) => {
+    const r = el.getBoundingClientRect();
+    return r.right < -200 || r.left > vw + 200 || r.bottom < -2000;
+  };
+
   const where = (el) => {
     const id = el.id ? `#${el.id}` : '';
     const cls = typeof el.className === 'string' && el.className
@@ -96,7 +103,7 @@ export function collect(opts) {
   );
   const seenTap = new Set();
   for (const el of interactive) {
-    if (!visible(el)) continue;
+    if (!visible(el) || foraDePantalla(el)) continue;
     let r = el.getBoundingClientRect();
     // Una casella d'1×1 amb una etiqueta gran al costat es toca per l'etiqueta:
     // la zona real és la unió de totes dues.
@@ -235,7 +242,7 @@ export function collect(opts) {
 
   const seenContrast = new Set();
   for (const el of document.querySelectorAll('body *')) {
-    if (!hasOwnText(el) || !visible(el)) continue;
+    if (!hasOwnText(el) || !visible(el) || foraDePantalla(el)) continue;
     const cs = getComputedStyle(el);
     const size = parseFloat(cs.fontSize);
     const weight = parseInt(cs.fontWeight, 10) || 400;
@@ -247,6 +254,9 @@ export function collect(opts) {
     const fg = parseColor(cs.color);
     const bg = bgOf(el);
     if (!fg || bg.unknown) continue;
+    // Lletra buidada: el que es veu és el contorn, no el farciment.
+    const traç = cs.webkitTextStrokeWidth || cs.WebkitTextStrokeWidth || '0px';
+    if (fg.a === 0 && parseFloat(traç) > 0) continue;
     const eff = fg.a < 1 ? over(fg, bg) : fg;
     const r = ratio(eff, bg);
     const large = size >= 24 || (size >= 18.66 && weight >= 700);

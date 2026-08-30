@@ -153,7 +153,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 @media (max-width: 560px) { .btn-row .btn { flex: 1 1 100%; } }
 
 /* ==== FIL D'ARIADNA ==== */
-.crumb { font-family: var(--body); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); padding: 22px 0 0; }
+.crumb { font-family: var(--body); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); padding: 4px 0 0; }
+/* La molla de pa és el camí de tornada, i al mòbil es prem amb el dit: els
+   enllaços feien 15 px d'alt. El marge de sobre passa del contenidor als
+   enllaços, així que la molla queda on era i el dit hi arriba. */
+.crumb a { display: inline-flex; align-items: center; min-height: 44px; }
 .crumb a { border-bottom: 1px solid transparent; transition: border-color 0.3s, color 0.3s; }
 .crumb a:hover { color: var(--red); border-color: var(--red); }
 
@@ -359,6 +363,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .dl-row { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding: 15px 2px; border-bottom: 1px solid var(--line); }
 .dl-row dt { flex: 0 0 190px; font-family: var(--body); font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
 .dl-row dd { flex: 1 1 220px; font-size: 14.5px; color: var(--ink); }
+/* El web, el telèfon i el correu d'un partner són el que es prem des del
+   mòbil: han de tenir mida de dit, no la de la línia de text. */
+.dl-row dd > a:only-child { display: inline-flex; align-items: center; min-height: 44px; }
 
 /* ==== TARGETES ==== */
 .cards { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 30px); }

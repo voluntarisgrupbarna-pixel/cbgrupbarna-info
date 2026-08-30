@@ -76,7 +76,7 @@
     ".cbgb-po b{font-family:'Anton','Haettenschweiler','Arial Narrow',sans-serif;" +
     'font-weight:400;font-size:11px;letter-spacing:.22em;text-transform:uppercase;' +
     'background:#10100E;color:#fff;padding:5px 10px;flex-shrink:0}' +
-    '.cbgb-po p{margin:0;font-size:13px;line-height:1.45;flex:1 1 auto;min-width:0}' +
+    '.cbgb-po p{margin:0;color:#fff;font-size:13px;line-height:1.45;flex:1 1 auto;min-width:0}' +
     /* El groc només a la lletra i sobre el vermell fosc, mai al fons blanc:
        és la regla del sistema (web-cbgb, punt 1). */
     '.cbgb-po a.cbgb-po-cta{color:#EEFF00;background:#A8040E;font-weight:700;' +

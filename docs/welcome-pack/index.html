@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CB Grup Barna · Playbook intern de Màrqueting & Comunicació 2026-27</title>
 <style>
-:root{--red:#E31E24;--black:#0A0A0C;--white:#fff;--gray:#6B6F76;--line:#d9d9dc;--soft:#f4f4f5;--max:1180px;}
+:root{--red:#E20613;--red-fosc:#FF3B41;--red-clar:#A8040E;--black:#0A0A0C;--white:#fff;--gray:#6B6F76;--line:#d9d9dc;--soft:#f4f4f5;--max:1180px;}
 *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--white);color:var(--black);font-family:Inter,Arial,Helvetica,sans-serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit} .wrap{max-width:var(--max);margin:0 auto;padding:0 56px} .display{font-family:Anton,Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.015em;line-height:.91}
 .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800} .red{color:var(--red)}
@@ -51,6 +51,31 @@ a{color:inherit} .wrap{max-width:var(--max);margin:0 auto;padding:0 56px} .displ
 .skip:focus{left:50%;transform:translateX(-50%);top:8px;display:inline-flex;
   align-items:center;min-height:44px;background:#10100E;color:#fff;
   padding:12px 22px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase}
+
+/* Contrast · repàs del 30/08/2026.
+   El vermell canvia amb el fons, que és la regla del sistema: l'aclarit
+   (#FF3B41) sobre les seccions negres i el fosc (#A8040E) sobre les clares.
+   Amb el de l'escut, les etiquetes es quedaven entre 4,02 i 4,48:1.
+   I els números de secció eren decoració massa fluixa: a 44-58 px es veien
+   com una taca clara, no com un número. Els selectors porten la secció al
+   davant per no atrapar text que ja anava bé — la primera versió d'aquest
+   bloc va pintar de gris un paràgraf que anava en blanc sobre vermell. */
+.section .eyebrow.red,
+.wrap .eyebrow.red,
+.asset-panel .asset-copy .eyebrow.red { color: var(--red-clar); }
+.section.black .eyebrow.red,
+.cover-title .kicker,
+.brand-item .brand-icon { color: var(--red-fosc); }
+/* Dins d'una secció negra hi ha targetes blanques: el gris clar només val per
+   al text que va sobre el negre, i a les targetes hi ha d'anar el gris fosc.
+   Barrejar-los va deixar text gris clar sobre blanc a 1,95:1. */
+.section.black .section-head p,
+.section.black .steps .step p { color: #b6bac1; }
+.section.black .brief-grid .brief p { color: #4a4d54; }
+.section.black .asset-panel .asset-copy .eyebrow.red { color: var(--red-clar); }
+.section .resource-row .num { color: #7c7c83; }
+.section .brief .doc-no,
+.photo-grid .photo-card .photo-index { color: #83838a; }
 </style>
 </head>
 <body>

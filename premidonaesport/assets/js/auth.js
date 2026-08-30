@@ -82,7 +82,7 @@
       +'.cbgb-logo{height:72px;width:auto;filter:drop-shadow(0 0 18px rgba(226,6,19,.45));margin-bottom:1.75rem}'
       +'.cbgb-ey{font-size:0.69rem;letter-spacing:.4em;text-transform:uppercase;color:#FF3B41;margin-bottom:1.1rem}'
       +'.cbgb-title{font-family:\'Anton\',\'Haettenschweiler\',\'Arial Narrow\',sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700;color:#FFFFFF;line-height:1.1;margin-bottom:.4rem}'
-      +'.cbgb-title .r{color:#E20613;font-style:italic}'
+      +'.cbgb-title .r{color:#FF3B41;font-style:italic}'
       +'.cbgb-sub{font-family:\'Anton\',\'Haettenschweiler\',\'Arial Narrow\',sans-serif;font-size:clamp(.85rem,2.5vw,1rem);color:rgba(255,255,255,.78);margin-bottom:2.25rem}'
       +'.cbgb-form{display:flex;flex-direction:column;gap:.75rem;align-items:center}'
       +'.cbgb-input{background:transparent;border:1px solid rgba(226,6,19,.35);color:#FFFFFF;padding:.85rem 1.25rem;font-family:\'Inter\',system-ui,sans-serif;font-size:1.1rem;letter-spacing:.35em;text-align:center;width:min(260px,85vw);outline:none;transition:border-color .25s ease}'

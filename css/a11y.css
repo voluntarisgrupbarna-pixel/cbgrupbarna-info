@@ -53,6 +53,7 @@ main:focus-visible, [tabindex="-1"]:focus-visible { outline: none !important; bo
   top: 0;
   z-index: 2000;
   min-height: 44px;
+  color: #fff;
   font-family: var(--body, "Inter", system-ui, sans-serif);
 }
 .skip:focus {
