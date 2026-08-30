@@ -92,7 +92,7 @@ articles que no existien, escrits per a famílies i no com a resum del document:
 Cadascun porta FAQ indexable, JSON-LD (`BlogPosting` + `FAQPage` + `BreadcrumbList`) i enllaços
 interns creuats. El blog passa de 5 a 12 articles. Actualitzats també l'índex del blog, el
 `sitemap.xml` (97 URL) i el `llms.txt`. La xifra de l'staff tècnic femení s'unifica a **65,5%**
-(abans el briefing i les dades oficials deien 68%), i l'adreça del club a **C/ Llacuna 170-172**
+(abans el briefing i les dades oficials deien 68%), i l'adreça del club a **C/ Llacuna 170**
 (53 ocurrències en 27 fitxers deien 170), seguint la candidatura.
 
 ### 7. `noindex` a l'eina interna
@@ -113,63 +113,8 @@ Era un fals positiu del meu script de comprovació. No hi ha res a fer.
 - **Escoleta:** foto o vídeo d'en Willy Hernangómez entrenant a La Nau amb Time Chamber
   (el forat és a `escoleta/index.html:944`), i confirmar la fitxa del circuit 3x3 amb la
   selecció espanyola (línia 744).
-- **Sessió de fotos de l'Escoleta (4-8 anys):** és el punt més feble de l'apartat
-  d'estètica de la web i no es resol amb codi. Avui només hi ha una foto
-  (`img/escoleta@2x.webp`) per representar tot aquest pilar, i és la imatge que carrega
-  amb prioritat alta a les tres portades (ca/es/en): la primera que veu tothom. Cal
-  material d'acció real (no posat), llum natural, enquadrat des de dalt sense tallar
-  cares, i diverses tomes perquè es pugui rotar en comptes de repetir sempre la mateixa.
-- **Sessió de fotos dels 4 sèniors (setembre 2026), confirmada per l'Ana:**
-  Fem A, Fem B, Masc A i Masc B. Vegeu el brief de captura complet a la secció
-  «Benchmark de webs professionals» del 27/08/2026, al final d'aquest document.
-  Amb aquest material es tanquen les fitxes de `/jugadors/` i el bloc de sèniors
-  a la portada.
 - **Galeries:** `/fotos-esdeveniments/` només té publicada la del 3x3. Falta pujar la resta.
 - **Nivells dels patrocinadors:** or / plata / bronze per als 22 partners.
-- **Logotip de la Wilson:** no n'hi ha cap fitxer al repositori. La fitxa
-  `patrocinadors/partners/wilson/` se'n surt amb el nom escrit amb la tipografia del
-  club, que queda digne, però és l'única de les 21 fitxes que no té marca gràfica. Si
-  l'Ana en pot demanar un SVG o un PNG amb fons transparent, es posa en un minut. Mentre
-  no arribi, la fitxa no queda coixa: no cal fer-hi res.
-
-## Pendent d'acció de l'Ana · llista d'espera del campus (29/08/2026)
-
-Tota la secció `/campus/` (ca/es/en) ja té publicat: l'estat d'inscripcions
-tancades, el calendari d'anuncis (Nadal aviat, Setmana Santa i estiu al
-gener), l'arxiu complet de la web de l'edició 2026
-(`timechamber.skywork.website`), 26 vídeos que es carreguen sols en
-baixar la pàgina, el bloc «Per què en un club, i no en un espai llogat»,
-i el formulari de llista d'espera a `/campus/#llista-espera`.
-
-**L'única peça que falta no és codi: és un permís de Google que només pot
-donar una persona.** El formulari ja escriu a la full de sempre (la de
-`/bustia/`) amb `source: 'campus-llista-espera'` — **no es perd cap
-alta** — però mentre no es faci el pas de sota, ni el club rep l'avís
-per correu ni la família rep la confirmació.
-
-Tres clics, dins del compte de Google del club:
-
-1. Obrir l'Apps Script de la bústia (el full de sempre → Extensions →
-   Apps Script).
-2. Enganxar **`scripts/apps-script-bustia-afegit.gs`** sencer al final
-   del codi que ja hi ha, i afegir una sola línia al `doPost` existent,
-   just abans del `return`: `avisaSiEsLlistaEspera(d);` (o `data`, segons
-   com es digui la variable allà).
-3. Desplegar → Gestionar desplegaments → editar l'existent → «Nova
-   versió» → Desplegar. Demanarà permís per a `MailApp`: acceptar-lo.
-
-Per comprovar-ho sense tocar el formulari públic: a l'editor d'Apps
-Script, triar la funció `provaLlistaEspera` al desplegable i clicar
-Executa. Envia els dos correus a `marqueting@cbgrupbarna.info` i escriu
-una fila de prova (esborrable a mà després).
-
-Per què no ho pot fer un agent: Google exigeix que una persona autoritzi
-amb el seu propi compte els permisos de full de càlcul i d'enviament de
-correu — no hi ha cap eina ni credencial en aquest repositori que ho
-substitueixi. S'ha comprovat que el connector de Google Drive disponible
-només permet compartir, moure a la paperera i canviar el nom d'arxius:
-no crea fulls ni desplega Apps Script. Instruccions completes i el camí
-alternatiu (full i projecte propis) a `js/README-canals.md`.
 
 ## Pendent de desenvolupar
 
@@ -182,6 +127,99 @@ alternatiu (full i projecte propis) a `js/README-canals.md`.
   valorar una alternativa lleugera sense galetes (Plausible/GoatCounter) que
   simplificaria el banner. Decidir eina, dissenyar el panell i connectar-lo.
 
+- **SEO · el problema no és el CTR, és el TIPUS de visita.** Export de Search Console
+  analitzat el 30/08/2026 (`Queries.csv` + `Pages.csv`, propietat de DOMINI, compte del
+  club u/1). Totals: 2.910 impressions, 49 clics, CTR 1,7%, posició 8,4 — però **només
+  hi ha 11 dies de dades (18→28/08)**, la propietat és nova. Tot és provisional.
+
+  **Diagnòstic:** tres articles informatius s'emporten el 40% de totes les impressions i
+  gairebé cap clic, i arrosseguen la mitjana avall:
+
+  | Pàgina | Impr. | Clics | Pos. |
+  |---|---|---|---|
+  | `/es/blog/a-quina-edat-comencar-basquet/` | 732 | **0** | 6,5 |
+  | `/en/blog/que-es-basquet-3x3/` | 387 | 1 | 12,2 |
+  | `/en/blog/a-quina-edat-comencar-basquet/` | 152 | 1 | 6,6 |
+
+  Són consultes globals i informatives («what is 3x3», «how long is a 3x3 game», «edad
+  cadete baloncesto») que Google respon al mateix resultat o a l'AI Overview: compten
+  impressió i ningú clica. No porten famílies — porten trànsit d'Iran, Tailàndia, Japó
+  i el món àrab. **No s'han d'optimitzar: s'han d'ignorar.**
+
+  **On sí hi ha diners (i estem a pàgina 2):** 16 consultes de campus sumen 119
+  impressions i **1 clic**, totes entre la posició 12 i la 16 — «campus basket barcelona»
+  (26 impr, pos 14,6), «campus baloncesto barcelona» (20, pos 12), «campus de basket
+  barcelona» (19, pos 14,4), «tecnificacion baloncesto barcelona» (17, **pos 57**).
+  Les pàgines: `/es/campus/` pos 16,7 · `/campus/` pos 23,6 · `/en/campus/` pos 14,3.
+
+  **El català guanya i ningú ho diria:**
+
+  | Idioma | Impr. | Clics | CTR |
+  |---|---|---|---|
+  | CA | 906 | 27 | **2,98%** |
+  | ES | 1.412 | 14 | 0,99% |
+  | EN | 939 | 10 | 1,06% |
+
+  El castellà té el 48% de les impressions i el 27% dels clics. La portada `/es/` fa 127
+  impressions i 2 clics (pos 10,6) contra `/` amb 317 i 18 (pos 4,3).
+
+  **La marca està sana:** «grup barna basquet» pos 2,06 amb CTR 17,6%, «grup barna» pos
+  2,05, «club barna» pos 2. Qui ens busca, ens troba. El forat és qui **encara no ens
+  coneix**.
+
+  **A fer, per ordre:**
+  1. **Campus a la 1a pàgina.** És l'única acció que porta inscripcions. Consolidar les
+     pàgines de campus i atacar «campus basquet/baloncesto Barcelona». Passar de la
+     posició 14 a la 4 en aquestes 3-4 consultes val més que tota la resta junta.
+  2. **Auditar `/es/`.** Meitat de les impressions, un terç dels clics i pitjor posició
+     que el català. Mirar si els `<title>`/`<meta>` en castellà són traduccions febles,
+     i si l'`hreflang` reparteix bé.
+  3. **Local, no global.** Reforçar «bàsquet base Sant Martí / Clot / Barcelona» i
+     «escola de bàsquet per a nens Barcelona» (ja hi ha impressions soltes: «basketball
+     for kids near me» pos 3, «escuela de basketball para niños» pos 4).
+  4. **No tocar** els articles de 3x3 en anglès. Fan bonic al panell i no serveixen de res.
+
+  **Dada per al dossier de patrocini:** les fitxes de partner posicionen pel nom propi
+  del negoci — «nova farmacia clot» pos 5,2 (6 impr), «clinica bac de roda» i «dentista
+  bac de roda» pos 9-10, «totsalut» pos 9. Argument directe de venda per a
+  `dossier-patrocini-cbgb`: patrocinar el club els dóna SEO local.
+
+  **Curiositat a vigilar:** apareixen consultes que són fragments de conversa («busca
+  mas», «si porfavor», «mas opciones», «gib mir mehr infos», «cuando empieza», «hay
+  foto ?»). Són sessions d'AI Mode / cerca conversacional. El `llms.txt` està fent
+  feina; val la pena mesurar-ho a part.
+
+  **🔴 Contingut duplicat entre idiomes: el 84% de les impressions.** El mateix contingut
+  viu en 2-3 versions d'idioma que competeixen entre elles (2.739 impressions repartides
+  en 19 slugs duplicats, 40 clics). Auditat `campus/index.html`: **no hi ha cap
+  `hreflang`, només `canonical`**. Posar hreflang a les tres versions és la correcció
+  d'un sol camp amb més impacte de tota la llista.
+
+  **Auditoria de la pàgina de campus** (`campus/index.html`, 30/08/2026). Bé: títol,
+  meta, H1, 1.088 paraules i JSON-LD ric (`Service`, `FAQPage`, `BreadcrumbList`…).
+  Falta: (a) `hreflang`; (b) schema **`Event` + `Offer`** — hi ha secció de preus i
+  «propera edició» visibles però sense marcar, i un campus és exactament el resultat
+  enriquit d'esdeveniment que Google mostra; (c) **dates concretes indexables** (es
+  busca «campus baloncesto 2025 barcelona» i «campus navidad barcelona»); (d) secció
+  pròpia de **tecnificació** — «tecnificacion baloncesto barcelona» té 17 impressions i
+  som a la **posició 57**; (e) `/campus-nadal-basquet-barcelona/` existeix, té **1 sola
+  impressió** i no està enllaçat des de `/campus/`.
+
+  **🔴 BLOQUEJANT:** al repo local només hi ha `campus/`. **No hi ha `es/campus/` ni
+  `en/campus/`**, però totes dues existeixen a la live (136 i 21 impressions). Torna a
+  confirmar que aquest repositori **no és la font de la web live**, i `/es/campus/` és
+  justament la pàgina amb més potencial desaprofitat. **No es pot arreglar el campus
+  editant aquest repo: cal localitzar primer la font real.**
+
+  📄 **Anàlisi completa, amb totes les taules de dades:
+  [`SEO-SEARCH-CONSOLE-2026-08.md`](SEO-SEARCH-CONSOLE-2026-08.md)** — evolució diària,
+  pàgines, idiomes, duplicats, 113 països, dispositius, les 177 consultes per tema,
+  auditoria del campus i pla d'acció ordenat.
+
+  Export desat a: `~/Downloads/cbgrupbarna.info-Performance-on-Search-2026-08-30.zip`
+  **Repetir aquesta anàlisi a finals de setembre**, quan hi hagi 3 mesos reals i s'hagi
+  vist l'efecte de la campanya de captació.
+
 ## Pendent de material de l'Ana · descàrregues
 
 - **Columna `newsletter` al full de càlcul.** La porta de descàrrega de PDF envia les
@@ -191,23 +229,328 @@ alternatiu (full i projecte propis) a `js/README-canals.md`.
 - **Butlletí:** encara no hi ha eina d'enviament (Mailchimp, Brevo o similar). De moment
   només es recull el consentiment; cal decidir amb què s'envia.
 
+## 🔴 Trobat el 30/08/2026 · mentre s'investigava el SEO
+
+### A. cbgrupbarna.info no respon des d'aquest ordinador
+
+Comprovat el 30/08/2026 a la tarda:
+
+```
+cbgrupbarna.info          → DNS OK (188.114.96.5 / 188.114.97.5, Cloudflare)
+                            però TCP a :443 i :80 fa TIMEOUT
+cistella.cbgrupbarna.info → igual, no respon
+cbgrupbarna.com           → HTTP 200 ✅
+cbgrupbarna-3x3timechamber.com → HTTP 307 ✅
+cloudflare.com            → HTTP 200 ✅   (descarta que sigui la xarxa d'aquí)
+example.com               → HTTP 200 ✅
+```
+
+El domini **resol** cap a IP de Cloudflare, però aquestes IP no accepten connexió.
+Els altres dominis del club funcionen des de la mateixa màquina i al mateix moment, o
+sigui que **no és la connexió d'aquí**.
+
+⚠️ **Cal verificar-ho des del mòbil amb dades (no wifi) abans de moure res.** Si també
+falla, la web està caiguda.
+
+Context que fa que corri: Search Console tenia impressions **fins al 28/08**, o sigui que
+si està caiguda ho està des de fa molt poc. I **som a l'inici de la temporada i de la
+captació de setembre**: és el pitjor moment possible per tenir la web principal fora.
+
+**Diagnòstic ampliat (30/08/2026, confirmat també des del mòbil de l'Ana amb dades):**
+
+```
+cbgrupbarna.info                 NS: margo/zita.ns.cloudflare.com   → CLOUDFLARE
+                                 A:  188.114.96.5 / 188.114.97.5    (IP de proxy CF)
+                                 whois: ACTIVE   ·  SOA correcte    ·  DNS OK
+                                 :443 timeout · :80 timeout · IPv6 timeout
+                                 TLS: connect errno 60 (no arriba a saludar)
+                                 la MATEIXA IP tampoc respon amb un altre Host
+                                 → no és config del lloc: l'IP no contesta
+
+cbgrupbarna-3x3timechamber.com   NS: dns97/dns98.servidoresdns.net  → ARSYS
+                                 A:  216.198.79.1                    → VERCEL
+                                 HTTP 307 ✅ funciona
+```
+
+**El domini no ha caducat i el DNS funciona.** El que no funciona és el servei que hi ha
+darrere de les IP de Cloudflare.
+
+**Conclusió: el problema és a CLOUDFLARE, no a Arsys.** El registre resol bé; el que falla
+és que l'edge de Cloudflare no serveix la zona. A Arsys només hi ha **un camp que importi**:
+els *name servers*, i ara mateix apunten correctament a Cloudflare.
+
+**Comparació que ho aclareix:** el domini del 3x3, que **sí** funciona, no passa per
+Cloudflare — fa servir els DNS d'Arsys apuntant directament a Vercel. I
+`.vercel/project.json` diu que el projecte del `.info` també és a Vercel. O sigui que el
+`.info` hauria d'estar servit igual que el del 3x3, i en canvi té una capa de Cloudflare
+pel mig que ara no respon.
+
+**Què mirar, per ordre:**
+
+1. **Cloudflare** (compte propietari de la zona `cbgrupbarna.info`):
+   - Estat de la zona: ha de dir **Active**. Si diu *Pending*, *Moved* o hi ha un avís de
+     compte, aquí tens la causa.
+   - Registres DNS: mirar cap a on apunta el registre arrel i si té el **núvol taronja**
+     (proxy) activat. Si el proxy apunta a un origen de Vercel que ja no existeix, dóna
+     exactament aquest símptoma.
+   - Prova ràpida: posar el núvol en **gris** (DNS only). Si torna, era el proxy.
+2. **Vercel** (projecte `prj_yD9VgtbA13GrIg8jPBKLTFjgG5u6`, equip
+   `team_Pp23ffahzD4Myfhb675GAqfd`): estat de l'últim desplegament i si el domini
+   `cbgrupbarna.info` hi segueix assignat.
+3. **Arsys**: comprovar només que els NS segueixen sent
+   `margo.ns.cloudflare.com` i `zita.ns.cloudflare.com`. No cal tocar res més.
+
+**Pla B si s'ha perdut l'accés a Cloudflare:** replicar el que fa el domini del 3x3 —
+canviar els NS a Arsys (`dns97`/`dns98.servidoresdns.net`) i apuntar el registre a Vercel,
+saltant-se Cloudflare. ⚠️ Això propaga en 24-48 h i deixa la web fora mentrestant, o sigui
+que **és l'última opció, no la primera**, i en plena captació de setembre val la pena
+esgotar abans la via de Cloudflare.
+
+Pistes addicionals:
+- El DNS apunta a **Cloudflare**, però `.vercel/project.json` diu que el projecte és a
+  **Vercel** (`prj_yD9VgtbA13GrIg8jPBKLTFjgG5u6`, equip `team_Pp23ffahzD4Myfhb675GAqfd`).
+  Si el registre de Cloudflare està en mode *proxy* (núvol taronja) apuntant a un origen
+  que ja no existeix, dóna exactament aquest símptoma.
+- Mirar l'estat del deploy al panell de Vercel i el registre DNS a Cloudflare.
+
+### B. `build-pages.py` esborraria els preus del campus
+
+`campus/index.html` conté tres seccions que el generador **no** produeix: **«Preus»**,
+**«El campus, en imatges»** i **«La seu»**. Es van afegir a mà. Executar
+`python3 scripts/build-pages.py` les esborraria sense avisar — inclosos els preus
+(**195 €** setmana completa / **160 €** mitja jornada) i l'adreça de La Nau del Clot.
+
+Ja s'ha posat un **avís ben visible a la capçalera de `scripts/build-pages.py`** perquè
+no passi. Queda pendent decidir: portar les tres seccions dins de `build_campus()`, o
+treure `campus/` de les pàgines generades.
+
+### C. El repositori local està desincronitzat de la live (confirmat)
+
+Proves acumulades:
+- `git fetch origin` **es penja** (espera credencials; lliga amb el bloqueig conegut de
+  GitHub 2FA i amb el token mai revocat del punt de sota).
+- El sitemap local només té **8 URL** sota `/es/` o `/en/`, i al disc només hi ha aquests
+  8 fitxers. Però Search Console veu `/es/campus/` (136 impr.), `/es/3x3/`,
+  `/es/escoleta/`, `/es/patrocinadors/`, `/es/partits/calendaris/`,
+  `/es/grup-barna-dades-oficials/`, `/es/premidonaesport/…`, `/en/campus/`, `/en/partits/`,
+  `/en/briefing/`… **cap d'elles és al repositori.**
+- `/campus-nadal-basquet-barcelona/` té impressions a Google i **no existeix al disc**.
+
+**Conclusió: no es poden arreglar les pàgines `/es/` i `/en/` des d'aquest repositori.**
+Fins que no se sàpiga d'on surt la live, qualsevol edició aquí és a cegues.
+
+### D. Estat real de l'`hreflang`
+
+Només **14 fitxers** en tenen, i cobreixen únicament 4 parelles (bàsquet femení, el mètode,
+protecció del menor i un article del blog). **No en tenen:** `campus/`, `3x3/`, `escoleta/`,
+`patrocinadors/`, `partits/`, `grup-barna-dades-oficials/` — totes amb versió `/es/` i
+`/en/` viva segons Search Console. I la portada declara només `ca` i `x-default`, sense
+`es` ni `en`.
+
+Això explica el 84% d'impressions en contingut duplicat de
+[`SEO-SEARCH-CONSOLE-2026-08.md`](SEO-SEARCH-CONSOLE-2026-08.md).
+
+**No s'ha tocat res**: posar `hreflang` cap a URL que no es poden verificar, amb la web
+caiguda i el repositori desincronitzat, faria més mal que bé. Depèn de resoldre A i C.
+
+### E. Correcció a l'anàlisi de SEO
+
+Vaig escriure que «tecnificació» sortia un sol cop a `campus/index.html`. **Surt 8 cops.**
+El problema de «tecnificacion baloncesto barcelona» (posició 57) no és que la paraula no
+hi sigui: és que no té secció ni pàgina pròpia, i la consulta és **en castellà** mentre que
+la pàgina forta és la catalana.
+
+### F. Perfil de Google del club · 30/08/2026
+
+Investigat el perfil de Google Business del club mentre es preparava un missatge per
+demanar ressenyes a les famílies.
+
+**Dades de la fitxa** (per no tornar-les a buscar):
+
+| Camp | Valor |
+|---|---|
+| Nom a Google | C.B. Grup Barna |
+| Place ID | `ChIJj-ZWRSSjpBIRHoeMjElc1nE` |
+| CID | `8202845242262325022` |
+| Adreça | Carrer de la Llacuna, 170, Sant Martí, 08018 Barcelona |
+| Telèfon | 933 09 04 54 |
+| Estat | **3,9 ★ · 190 ressenyes** |
+
+**Enllaç per demanar ressenyes** (verificat, obre el formulari d'estrelles directament):
+`https://search.google.com/local/writereview?placeid=ChIJj-ZWRSSjpBIRHoeMjElc1nE`
+
+#### 🔴 F.1 · La fitxa NO està verificada — bloqueja tota la resta
+
+El perfil és del club (surt «Gestiones este Perfil de Empresa»), però Google avisa:
+«La fitxa no està verificada. És possible que alguns dels canvis que facis no siguin
+visibles per als clients», i al gestor de ressenyes: **«Verifica el teu compte per
+respondre a ressenyes»**.
+
+Conseqüències mentre no es verifiqui:
+- **No es pot respondre cap ressenya.** Hi ha 2 ressenyes noves i 2 de crítiques sense
+  contestar.
+- Els canvis del perfil (horaris, fotos, web) poden no arribar a mostrar-se.
+
+Verificar a **https://business.google.com/verifications** — mètode vídeo in situ a la Nau
+del Clot o telèfon. És el pas que desbloqueja tota la resta.
+
+#### F.2 · Respostes a ressenyes ja redactades, pendents de publicar
+
+Tres respostes escrites i llestes per enganxar quan es desbloquegi, totes signades
+«Ana, coordinació — CB Grup Barna» i amb `voluntaris@cbgrupbarna.info` com a contacte:
+
+1. **Cristina Alaminos Pérez** (⭐1, fa un mes) — Cistella Petita, competitivitat per
+   damunt del desenvolupament. ⚠️ El text de la ressenya queda **truncat** sense sessió
+   iniciada; llegir-lo sencer abans de publicar la resposta.
+2. **«Mal educados / están mal enseñados»** — toca conducta cap a menors, així que la
+   resposta remet explícitament al **canal de protecció del menor** (LOPIVI) del club,
+   `voluntaris@cbgrupbarna.info`.
+3. **Jordi Gili** (⭐4, fa 6 dies, Local Guide amb 285 ressenyes) — positiva, en català,
+   destaca la secció femenina. Val la pena contestar-la aviat.
+
+Regles fixades: mai el nom de l'entrenador, del jugador ni de l'equip concret; mai
+«això no és cert» ni «ja ho vam parlar amb vostè».
+
+#### 🔴 F.3 · Dades de contacte descuadrades a quatre fonts
+
+Quatre llocs públics diuen quatre coses diferents. Cal decidir el joc de dades canònic i
+unificar-lo:
+
+| Font | Telèfon | Correu |
+|---|---|---|
+| Fitxa de Google | 933 09 04 54 | — |
+| Guia Barcelona / barcelona.cat | 688 26 52 30 | coordinaciocbgrupbarna@gmail.com |
+| cbgrupbarna.com (WordPress) | 688 26 52 30 | cbgrupbarna@gmail.com |
+| Badgie | +34 933 09 04 54 | 30cbgrupbarna@gmail.com |
+
+**Decisió ja presa:** el correu públic del club és **`voluntaris@cbgrupbarna.info`**, que
+és també el canal per a situacions de protecció del menor. Cap dels gmail antics s'ha de
+fer servir en comunicació pública.
+
+Pendent: corregir-ho a la fitxa de Google, a la Guia Barcelona (cal escriure al Districte),
+a Badgie i a cbgrupbarna.com — aquest últim bloquejat perquè no hi ha accés a wp-admin.
+
+#### F.4 · Google Ads · compte `747-139-0991` — decidit: NO tocar
+
+Penja del Gmail personal d'Ana (anafernandezduran78@gmail.com), amb l'alta **incompleta**.
+- **No hi ha saldo.** Els «400 € de crèdit» són promo condicionada: gastes 400 € i te'n
+  donen 400. No és diner regalat.
+- Hi ha un esborrany d'anunci autogenerat i **fora de marca**: *«CLUB DE BASQUET GRUP
+  BARNA - Eleva tu Fitness / Equipos de última generación y entrenadores expertos»*,
+  apuntant a `cbgrupbarna.com` en lloc de `.info`. No s'ha publicat mai.
+- La targeta «Termina de crear la campanya» del perfil **no es pot descartar** (no té menú
+  ⋮). L'única manera de treure-la seria cancel·lar el compte d'Ads.
+- **Decisió d'Ana (30/08/2026): deixar-ho com està.** El compte és inert — sense mètode de
+  pagament, sense campanya activa, risc de despesa zero.
+- Qualsevol despesa en Ads (400 €) és **decisió de junta**, no d'Ana en solitari.
+
+#### F.5 · Ordre recomanat
+
+1. Verificar la fitxa (gratis) ← desbloqueja tot
+2. Enviar el missatge de ressenyes a les famílies (ja es pot fer, no depèn de verificar) —
+   individual, 10-15 al dia, no al grup gran
+3. Respondre les ressenyes pendents + pujar fotos
+4. Unificar les dades de contacte (F.3)
+
+---
+
+## 📱 Proves de mòbil en els 3 idiomes · 30/08/2026
+
+Fetes a **375×812 (iPhone)** servint el repositori a `localhost` (la web live no responia,
+vegeu el punt A). Provades les **4 pàgines que existeixen en les tres llengües**, ×3
+idiomes = 12 pàgines: bàsquet femení, el Mètode, protecció del menor i l'article de blog
+de formació/competitiu.
+
+Recordatori del perquè: **el 65% de les impressions i el 73% dels clics són de mòbil**, i
+al mòbil posicionem 3 llocs millor que a escriptori (7,37 vs 10,41).
+
+### ✅ El que està bé
+
+- **Cap desbordament horitzontal** en cap idioma ni cap plantilla: `scrollWidth` = 375 px
+  exactes a les 12 pàgines. La pàgina no es mou de costat enlloc.
+- **`hreflang` perfecte** on hi és: les 4 parelles declaren `ca` / `es` / `en` /
+  `x-default`, **totes amb auto-referència**, i coincideixen amb el `canonical`. Ben fet.
+- **`lang` i `og:locale` correctes** a cada versió (`ca`/`ca_ES`, `es`/`es_ES`,
+  `en`/`en_US`).
+- **Títols i descripcions traduïts de veritat**, no calcats: «Bàsquet femení a
+  Barcelona» / «Baloncesto femenino en Barcelona» / «Women's Basketball in Barcelona».
+  Longituds entre 41 i 70 caràcters — dins del que Google ensenya.
+- `viewport` correcte a totes. Imatges amb `width`/`height` (cap salt de layout).
+
+### ⚠️ El que falla — igual a les 12 pàgines (és de plantilla)
+
+1. **El selector d'idioma és el botó més petit de la pàgina: 15 px d'alçada.**
+   `català` 34×15 · `castellano` 59×15 · `English` 42×15.
+   El mínim recomanat és 44×44 (Apple) o 48×48 (Google). **Amb el dit no s'encerta.**
+   És irònic: la peça que serveix per canviar d'idioma és la que pitjor funciona al mòbil,
+   i el castellà és justament la llengua que rendeix pitjor a Google.
+2. **Menú de navegació a 9,5 px.** «CLUB», «Escoleta», «Patrocinadors», «Campus»,
+   «Màgics», «3x3» i «CB GRUP BARNA» (10 px). Google ho marca com *text massa petit per
+   llegir-lo*. El text del cos sí que està bé (16 px).
+3. **Molla de pa de 14 px d'alçada**: `INICI` 30×14 · `INICIO` 39×14 · `HOME` 34×14 ·
+   `BLOG` 31×14.
+4. **6-7 objectius tàctils per sota del mínim a cada pàgina**, en els tres idiomes.
+5. **Menor:** la capçalera es parteix en dues línies en català («DIES DE PARTIT») i en
+   castellà («DÍAS DE PARTIDO»); en anglès («MATCH DAYS») hi cap. En castellà l'avanttítol
+   també passa a dues línies («PUERTAS ABIERTAS AHORA»). No trenca res, però es veu
+   desendreçat.
+
+> Cap d'aquests problemes és d'idioma: **són tots de la plantilla compartida**. Es
+> corregeixen una vegada al CSS i queden arreglades les tres llengües alhora.
+
+### 🔴 I una cosa que no és de mòbil, però ha sortit provant
+
+### ✅ RESOLT · La xifra de dones a l'staff tècnic (68% → 65,5%)
+
+Les pàgines de bàsquet femení i del Mètode publicaven **68%** mentre que la resta del lloc
+deia **65,5%** (la xifra de la candidatura al 19è Premi Dona i Esport).
+
+**L'Ana ha confirmat el 30/08/2026 que la bona és 65,5%.** Unificat a **6 fitxers, 15
+ocurrències** — descripcions, `og:description`, JSON-LD i el bloc de dades visible:
+
+| Fitxer | Canvis |
+|---|---|
+| `basquet-femeni/index.html` | 4 |
+| `basquet-femeni/el-metode-barna/index.html` | 1 |
+| `es/baloncesto-femenino/index.html` | 4 |
+| `es/baloncesto-femenino/el-metodo-barna/index.html` | 1 |
+| `en/womens-basketball/index.html` | 4 → `65.5%` (decimal anglès) |
+| `en/womens-basketball/the-barna-method/index.html` | 1 → `65.5%` |
+
+Ara **23 fitxers** diuen 65,5% i cap en diu 68 com a estadística.
+
+⚠️ **Correcció d'una anàlisi anterior:** vaig dir que 11 fitxers deien 68% i que dos es
+contradeien a si mateixos. **Era fals.** Els 5 fitxers de `presentacio/` i `presentacions/`
+tenen `68%` dins d'un `radial-gradient` de CSS (`transparent 68%`), que no té res a veure
+amb la dada. Els fitxers afectats de debò eren 6, i cap es contradeia.
+
+**Pendent fora del web:** revisar si la xifra 68% surt en materials ja repartits (PDF de
+patrocini, dossiers, xarxes). Al repositori ja no hi és.
+
+---
+
 ## Pendent de decisió
 
-- **`/premsa/moments/` en castellà i anglès.** La pàgina nova (36 moments d'Instagram
-  verificats un a un, de febrer a desembre de 2025) només existeix en català. `/premsa/`
-  ja té versions a `/es/` i `/en/`; decidir si es tradueix aquesta secció també.
-- **Cronologia real vs. «temporada 2025-26».** De les 36 publicacions que l'Ana va
-  proposar com a "els temes més importants de la 25/26", la verificació amb data real
-  (WebFetch a cada post) va trobar que només ~20 són de tardor 2025 (setembre en
-  endavant). La resta són de l'estiu 2025 (majoritàriament la campanya del 60è
-  aniversari) o de la temporada 2024-25 (febrer-maig 2025). La pàgina les organitza amb
-  les dates reals en tres blocs («Tardor 2025», «Estiu 2025 · 60 anys», «Abans de
-  l'estiu»), no com un sol bloc de «temporada 25-26». Revisar si aquesta classificació
-  li sembla bé o si en prefereix una altra.
+- **🔴 Token de GitHub sense revocar.** El 30/08/2026 es va enganxar un Personal Access
+  Token al xat de Claude Code per fer canvis urgents (admin de fotos, galeria, marca).
+  S'ha fet servir i esborrat del disc, però **mai s'ha revocat**. Cal:
+  1. Revocar-lo a github.com/settings/tokens
+  2. Crear-ne un de fine-grained nou, limitat a `cbgrupbarna-info`, `Contents: Read and write`
+  3. Guardar-lo xifrat a `/admin/token.html` amb la contrasenya del club — i no tornar-lo
+     a enganxar mai en text pla enlloc.
 - **Els tres àudios de `/premidonaesport/patrocinis/`** (`musica.mp3`, `veu-jugadora.mp3`,
   `mix.mp3`) no són al repositori **ni a la web oficial** (comprovat: 404). La pàgina obre
   amb un overlay «Activa el so · 2 minuts» que depèn d'ells, o sigui que l'experiència
   sonora no funciona. Cal pujar els arxius o treure l'overlay.
+- **`/escoleta/basquet-nens-clot/` (30/08/2026):** nova landing de captació, ja amb
+  l'estètica real del club (Anton/Inter, vermell #E20613, mateixa capçalera/peu que la
+  resta del lloc — la primera versió, feta en un altre artefacte amb Barlow Condensed +
+  Lora, no encaixava). Pendent que Ana confirmi:
+  - Anys de naixement de Premini, Mini, Preinfantil, Infantil i Cadet (temporada 26-27)
+  - Quota mensual de l'Escoleta i si hi ha matrícula
+  - Mesos d'inici i final de temporada
+  Un cop confirmat, buscar i reemplaçar els `___` de l'HTML. La resta (edats 4-8, horari
+  Dc/Ds, alumni) surt de dades ja publicades a `/escoleta/`.
 - **`/jugadors/`:** encara no està acabat. Quan hi hagi plantilla, cal omplir
   `jugadors/jugadors.js` i canviar el «Temporada 2025-2026» de la pàgina.
 - **`/briefing/`:** encara diu «Temporada 2025-26». Decidir si es refà per a la 26-27 o es
@@ -215,2463 +558,45 @@ alternatiu (full i projecte propis) a `js/README-canals.md`.
 - **Abans del 5 de setembre:** hi ha 274 partits carregats (05/09/26 → 16/05/27) i cap
   resultat. Convé provar amb un partit jugat de debò que el robot de la FCBQ, les fitxes
   descarregables, els 16 `.ics` i el cartell del cap de setmana funcionen.
-
-## Pendent de decisió · reestructuració del menú (18/08/2026)
-
-Reorganitzat el menú complet (`#menu` a `index.html`) en 6 branques —Juga al
-Barna / Equips i temporada / Activitats / El Club / Actualitat / Partners—
-seguint l'arbre de continguts que proposa l'Ana. Queden tres coses obertes:
-
-- **`/basquet-femeni/` i `/basquet-femeni/el-metode-barna/`** ara redirigeixen
-  (noindex) a `/femeni/` i `/femeni/#metode`: eren dues pàgines completes amb
-  el mateix contingut i el mateix `<title>` objectiu ("Bàsquet femení a
-  Barcelona"), i s'ha triat `/femeni/` com a canònica per decisió de l'Ana.
-  ~~**Pendent:** `/es/baloncesto-femenino/` i `/en/womens-basketball/` encara
-  eren traduccions de la pàgina antiga.~~ **Fet.** Les dues ja tradueixen
-  `/femeni/`: 9 de 9 seccions als tres idiomes, i `i18n-contingut.py` no hi
-  troba cap avís.
-- **"Tecnificació"** (dins Activitats) i **"Notícies"** (dins Actualitat) són
-  a l'arbre de l'Ana però no tenen cap pàgina real al lloc ni contingut al
-  repositori. No s'han afegit al menú per no inventar-hi programa, preus o
-  notícies. Falta que l'Ana digui què són exactament i doni el material.
+- **🔴 `git fetch` es penja en aquest repositori (30/08/2026).** El `push` funciona bé,
+  però `git fetch origin main` no acaba mai: es queda a `git index-pack --stdin
+  --fix-thin --pack_header=2,32249` i s'hi està minuts sense progressar (provat sis
+  cops, també en segon pla i amb el credential helper del `gh`). Això bloqueja qualsevol
+  cosa que necessiti comparar amb `origin/main` — per exemple resoldre conflictes de
+  merge. Sospita: el repositori té molts objectes (32.249 en un sol pack) i desenes de
+  branques `claude/…` acumulades. Val la pena provar `git gc --aggressive`, esborrar
+  branques remotes ja fusionades, o reclonar amb `--filter=blob:none`.
+- **PR #120 (article Time Chamber, CA/ES/EN) té conflicte amb `main`.** No s'ha pogut
+  resoldre per culpa del punt anterior. Els PR #122 (vídeos del campus) i #124 (landing
+  de l'Escoleta) sí que es poden fusionar sense conflicte.
+- **Vuit fitxers modificats i sense committejar al repositori local (30/08/2026),**
+  d'una altra sessió: `basquet-femeni/index.html`,
+  `basquet-femeni/el-metode-barna/index.html`, `es/baloncesto-femenino/` (2 fitxers),
+  `en/womens-basketball/` (2 fitxers) i `scripts/build-pages.py`. Decidir si es
+  committegen o es descarten abans que es perdin o entrin en un commit equivocat.
 
 ## Sense acció
 
 - **Esdeveniments «passats»** (3x3 Glòries, Mes de l'Orgull, Campus Time Chamber,
   Little Basket Day): són esdeveniments anuals del club i es queden com estan.
 
----
-
-## Fase de marca · 20/08/2026
-
-Canvi d'objectiu: la web deixa de mesurar-se com a web de club formatiu i passa a
-mesurar-se com a **plataforma de marca esportiva i comercial**. La formació hi és, però
-com a prova de dimensió, no com a definició de la marca.
-
-### ✅ Fet en aquesta tanda
-
-- **Coherència de dades.** `data.json` guanya el bloc `xifres`, que fa de font de veritat.
-  Desapareixen «40 equips», «20F+20M» i «60 anys» de tot el lloc. L'LF2 deixa de ser una
-  contradicció dins la mateixa pàgina: el club hi va jugar, avui compet a Supercopa.
-- **El peu deixa d'enllaçar cbgrupbarna.com** (165 pàgines i els dos generadors). El
-  `sameAs` de schema.org es manté: allà sí que consolida entitat.
-- **Capçalera de marca a la portada** i navegació de sis entrades amb Empreses.
-- **`/empreses/`**, amb Barna Business i FAQPage.
-
-### Pendent, per ordre
-
-1. **`/empreses/` en castellà i anglès.** `/patrocinadors/` ja té `/es/` i `/en/`; la
-   nova pàgina, no. És la pàgina que llegirà una marca de fora de Barcelona.
-2. **Els primers equips a la portada.** Sènior Femení A i Sènior Masculí A amb foto,
-   plantilla, staff, pròxim partit i resultat, **abans** de la base. L'ordre comunica
-   jerarquia, i és el que veu un patrocinador els primers cinc segons. Avui `#seniors`
-   queda molt avall.
-3. **La Nau del Clot com a actiu de marca.** Avui `/instal-lacions/` és una adreça. Hauria
-   de ser la casa del club: fotografia, història, dies de partit, esdeveniments,
-   activacions i com arribar-hi. Cal una sessió de fotos.
-4. **Barna Media.** El blog ja no és «notícies del club»: és autoritat temàtica. Canviar-li
-   el nom implica canviar URL, així que només amb redireccions ben fetes i després de tot
-   l'anterior.
-5. **Xifres d'audiència verificables.** `data.json → audiencia` cita 439.000
-   visualitzacions mensuals a Instagram i no té els seguidors. Revisar cada trimestre amb
-   una captura del panell; el que no es pugui justificar, fora de `/empreses/`.
-6. **Migració tancada.** Queden enllaços a `cbgrupbarna.com/noticies/`, que és contingut
-   real encara no migrat. Fins que no es migri, no es poden treure.
-7. ~~**Guia visual «Franges i Extensa».** La portada ja no porta el hero
-   `.lg-hero` de les franges (el repetia la capçalera de marca). Cal reflectir-ho a la guia.~~
-   **Resolt (21/08/2026):** decisió de l'Ana és mantenir el `.lg-hero` de les Franges tal com
-   diu la guia visual, malgrat la repetició amb la capçalera de marca. Restaurat a `index.html`.
-
-### Nota sobre el nom «Patrocinadors» (20/08/2026)
-
-El nom desapareix com a **nom de secció**: la secció es diu **Empreses** (`/empreses/`) i
-la llista de qui hi és avui es diu **Partners** (`/patrocinadors/`). S'han canviat les 362
-etiquetes visibles, els fils d'Ariadna i el generador.
-
-**La URL `/patrocinadors/` no s'ha tocat**, i és una decisió, no un oblit: hi pengen 22
-fitxes de partner més les versions `/es/` i `/en/`, i GitHub Pages no fa redireccions de
-servidor —només `<meta refresh>` o JavaScript, que passen molt pitjor l'autoritat. Moure
-la URL avui, amb el domini acabat d'estrenar i encara sense posicions guanyades, és
-regalar el poc que hi ha. Es podrà fer quan `/patrocinadors/` ja posicioni i valgui la
-pena arriscar-hi, i llavors amb redireccions per a totes les fitxes alhora.
-
----
-
-## Preguntes freqüents · fase 1 del cercador que respon (23/08/2026)
-
-Des que el cercador ensenya la resposta i no només l'enllaç, **cada pregunta
-freqüent que s'escriu val el doble**: surt a Google com a `FAQPage` i el
-cercador del web la dona a l'instant, en el seu idioma. Per tant, la manera de
-fer el cercador més llest ja no és tocar codi.
-
-### D'on surt aquesta llista
-
-De comptar què hi ha. El web té **460 preguntes amb resposta** (219 en català),
-i estan molt ben repartides per identitat, escoleta, campus, femení,
-patrocinis i posicionament d'SEO. **El forat és un altre**: quan una família
-ja s'ha convençut i vol entrar, no hi ha res escrit. Nou pàgines de pes no
-tenen ni una sola pregunta:
-
-| Pàgina | Pes | Preguntes |
-|---|---|---|
-| `/partits/equips/` | 90 | 0 |
-| `/portes-obertes/` | 88 | 0 |
-| `/club/` | 84 | 0 |
-| `/fotos/` | 76 | 0 |
-| `/blog/`, `/historia/`, `/instal-lacions/`, `/organigrama/` | 72 | 0 |
-| `/documents/` | 70 | 0 |
-
-**La asimetria més cridanera és el preu.** El web diu que una setmana de campus
-val 195 €, la mitja jornada 160 € i la de Setmana Santa 150 €; diu que un
-patrocini d'equip són 500 €. Però a la pregunta «quant costa apuntar-se al
-club» —la primera que fa qualsevol família— l'única resposta que hi ha és
-*«cal contactar directament amb el club»*. Es publica el preu d'una setmana i
-no el de la temporada.
-
-### Bloc A · Diners i compromís — **cal decisió de l'Ana**
-
-Sis preguntes que no es poden escriure sense que algú digui el número. Són les
-més buscades i les úniques que avui fan abandonar la pàgina.
-
-1. Quant costa la temporada, per categoria?
-2. Què inclou la quota? (fitxa federativa, assegurança, equipació, pistes)
-3. Com es paga: un sol cop, mensual o trimestral? Es domicilia?
-4. Hi ha descompte per a germans?
-5. Hi ha ajuts o beques si una família no hi arriba?
-6. Què passa si ens hem de donar de baixa a mig any?
-
-> La 5 no és informació, és marca: un club que diu en veu alta que cap infant
-> es queda fora per diners diu una cosa que els seus veïns no diuen.
-
-**On van:** `/faq/` i, la 1 i la 2, també a `/escoleta/` i `/basquet-formatiu/`.
-
-### Bloc B · El primer dia → `/portes-obertes/`
-
-La pàgina amb més pes del web sense cap pregunta, i just la que llegeix qui
-està a punt de venir.
-
-7. Què he de portar el primer dia?
-8. Cal avisar abans o em puc presentar directament?
-9. Quants dies pot venir a provar?
-10. El meu fill no ha jugat mai. Hi encaixarà?
-11. Em puc quedar a mirar l'entrenament?
-
-### Bloc C · Quin equip li toca → `/basquet-formatiu/` i `/partits/equips/`
-
-Hi ha «Què vol dir Premini, Mini, Infantil, Cadet i Júnior?», que explica el
-vocabulari. Falta la resposta directa: *el meu fill del 2015, on va?*
-
-12. Quin equip li toca segons l'any de naixement?
-13. Qui decideix a quin equip va? Hi ha proves de nivell?
-14. Què vol dir equip A i equip B?
-15. Es pot canviar d'equip durant la temporada?
-16. Quants entrenaments a la setmana té cada categoria?
-
-### Bloc D · On és tot això → `/instal-lacions/`
-
-17. On és exactament la Nau del Clot i com s'hi arriba?
-18. A quines altres pistes entrena el club?
-19. Quin metro o bus hi va? Es pot aparcar?
-20. Les famílies poden entrar a veure els entrenaments?
-
-### Bloc E · La vida d'un equip — el que ningú ha escrit
-
-Això no és a cap pàgina i és el que més es pregunta pel WhatsApp del club.
-Anirien a `/faq/` i a `/partits/calendaris/`.
-
-21. Els partits són sempre en cap de setmana? Quants desplaçaments hi ha?
-22. Qui porta els nens als partits de fora?
-23. Com ens avisen si canvia una hora o una pista?
-24. Què passa si un dia no pot anar a entrenar?
-25. És compatible amb els estudis o amb una altra activitat?
-26. Cal revisió mèdica? Els jugadors estan assegurats?
-27. Què passa si es lesiona en un entrenament?
-
-### Bloc F · Equipació — **cal decisió de l'Ana** (preu)
-
-28. Quina equipació cal comprar i quant costa?
-29. On es compra i quan arriba?
-
-### Bloc G · Confiança → `/proteccio-menor/` i `/fotos/`
-
-El contingut de protecció del menor existeix, però escrit com a política de
-club. Falta escrit com el pregunta una mare.
-
-30. Els entrenadors i entrenadores tenen el certificat de delictes sexuals?
-31. Puc demanar que el meu fill no surti a les fotos del club?
-32. Amb qui parlo si tinc un problema amb un entrenador?
-
-### Bloc H · Qui és qui → `/club/` i `/organigrama/`
-
-33. Amb qui parlo de la meva categoria? (coordinador/a)
-34. Com puc ser voluntari o entrenador al club?
-
-### I tot això, per tres · el que costa de debò
-
-**34 preguntes no són 34 textos: en són 102**, i cada un ha d'anar a dos llocs
-(el `<details>` visible i el `FAQPage` del JSON-LD). Són ~204 insercions
-repartides per una trentena de fitxers, i el repositori no té cap framework
-d'i18n: cada traducció és un HTML independent que s'actualitza a mà.
-
-Fet a mà, això no es manté. **Ja no s'està mantenint**: comptades sobre
-l'índex, **28 pàgines tenen avui les tres versions desquadrades**.
-
-| Pàgina | CA | ES | EN |
-|---|---|---|---|
-| Portada | 15 | 11 | 11 |
-| `/escoleta/` | 8 | 6 | 6 |
-| `/grup-barna-dades-oficials/` | 8 | 0 | 0 |
-| `/patrocinadors/` | 8 | 5 | 5 |
-| `/femeni/` | 5 | 3 | 3 |
-| `/posicionament/`, `/empreses/`, `/model-formatiu/`, `/magics/`, 12 articles del blog | 1–6 | 0 | 0 |
-
-I `escoleta/index.html` porta escrita, en un comentari, la regla que avui es
-compleix a mà: *«FAQ visible · ha de coincidir sempre amb el FAQPage del
-JSON-LD»*. Afegir-hi 102 textos més per la mateixa via empitjora el problema.
-
-**La proposta és no escriure-ho tres vegades a tres llocs.** Una sola font
-—`i18n/faq.yml`, una pregunta per entrada amb els seus tres idiomes i la
-pàgina on va— i un generador que escrigui tots dos blocs (el `<details>` i el
-JSON-LD) entre marcadors, com ja fa `generate-seo-snapshot.py` a `/partits/`.
-D'una tacada: s'acaba la desincronització, es poden quadrar les 28 pàgines
-d'ara, i el cercador se n'assabenta tot sol perquè llegeix el JSON-LD.
-
-### Un blocatge concret
-
-**`/portes-obertes/` no té versió en castellà ni en anglès.** És la pàgina del
-bloc B —cinc preguntes—, té pes 88 i és la porta d'entrada de setembre. Cal
-crear `/es/portes-obertes/` i `/en/open-days/` (i donar-les d'alta a
-`i18n/routes.yml`) abans o alhora que les preguntes.
-
-La resta de pàgines de la llista sí que tenen les tres versions, amb els noms
-de `routes.yml`: `/es/instalaciones/` i `/en/facilities/`,
-`/es/baloncesto-formativo/` i `/en/development-basketball/`,
-`/es/proteccion-menor/` i `/en/child-protection/`, `/es/organigrama/` i
-`/en/organisation/`.
-
-### La regla, perquè serveixi de res
-
-Cada pregunta ha d'anar **a dos llocs alhora**: al `<details>` visible dins
-d'una secció `.faq` **i** al JSON-LD `FAQPage` de la mateixa pàgina. Si només
-va al `<details>`, ni Google ni el cercador del web la veuen. Els generadors
-ja ho fan bé; a les pàgines fetes a mà, cal recordar-ho.
-
-Després, `/es/` i `/en/`: el cercador ensenya la catalana a qui llegeix en
-castellà si no n'hi ha versió, però és un pedaç, no la solució.
-
-### Com sabrem si ha funcionat
-
-Les 34 d'aquesta llista portarien el web a prop de 500 preguntes en català. La
-prova real no és el número: és que `node tests/cerca/prova-motor.mjs` es pugui
-ampliar amb un cas per bloc —«quant costa la temporada», «què porto el primer
-dia», «el meu fill del 2015 a quin equip va»— i que totes tornin una resposta.
-Avui, cap de les tres en té.
-
-
----
-
-## Preguntes freqüents · on som (23/08/2026, final del dia)
-
-La font única existeix (`i18n/faq.yml` + `.github/scripts/generate-faq.py`) i
-ja hi ha **16 preguntes publicades en els tres idiomes**. Cap inventada: totes
-surten del que el web ja deia, escrit al cos del text o en una altra pàgina, i
-que el cercador no podia trobar perquè no constava com a pregunta.
-
-| Pàgina | Preguntes | D'on surt la resposta |
-|---|---|---|
-| `/portes-obertes/` | 5 | El cos de la mateixa pàgina |
-| `/instal-lacions/` | 3 | El cos de la mateixa pàgina |
-| `/basquet-formatiu/` | 7 | 5 migrades de la pàgina + 2 noves del seu propi quadre de categories |
-| `/fotos/` | 1 | `/politica-de-privacitat/` |
-
-`/basquet-formatiu/` anava **5 en català, 5 en castellà i 4 en anglès**.
-Passada per la font única, va 7/7/7. És la primera pàgina amb el descuadre
-resolt; en queden 27.
-
-**Les traduccions ja no s'escriuen a mà**: `scripts/faq-tradueix.py` reutilitza
-el traductor del web (`scripts/i18n-tradueix.py`) amb el mateix glossari i el
-mateix to. Sense `ANTHROPIC_API_KEY` no falla: diu què falta. I
-`scripts/i18n-lint.py` ara també les vigila (`faq-sense-traduccio`,
-`faq-sense-resposta`), o sigui que una pregunta sense traduir surt a la mateixa
-llista que una pàgina sense traduir.
-
-### El que segueix bloquejat · 14 preguntes
-
-Escrites, amb `pendent:`, i **no publicades enlloc, ni en català**. Val més cap
-resposta que mitja. `python3 .github/scripts/generate-faq.py --pendents`.
-
-**Vuit números de l'Ana** (7 de diners, 1 d'equipació): quant costa la
-temporada per categoria, què inclou la quota, com es paga, descompte de
-germans, si hi ha ajuts, què passa amb una baixa a mig any, i quina equipació
-cal i quant val. Són les que més es busquen.
-
-**Sis dades del club**: què vol dir equip A i equip B i qui ho decideix; quants
-desplaçaments hi ha i qui hi porta els nens; per quin canal s'avisa una família
-d'un canvi d'hora o de pista; què fer si un dia no pot anar a entrenar; si cal
-revisió mèdica; qui és la persona de contacte de cada categoria; i com s'apunta
-qui vol ser entrenador o voluntari.
-
-### Dos temes oberts que no són d'aquesta llista
-
-- **`/portes-obertes/` segueix sense `/es/` ni `/en/`.** Les seves cinc
-  preguntes ja estan traduïdes al YAML i esperen la pàgina on viure. Avui, qui
-  busca en anglès «what do we bring the first day» no troba res.
-- **`scripts/i18n-lint.py` dona 91 errors, tots anteriors a aquesta feina** (hi
-  eren igual abans de tocar res: comprovat comparant amb la branca neta). N'hi
-  ha un que val la pena mirar perquè és una contradicció amb una decisió ja
-  presa: el lint exigeix dir «Dies de partit per equip» a `/partits/calendaris/`,
-  però `web-cbgb` §6 diu que l'etiqueta decidida per la direcció l'agost del
-  2026 és **«Calendari»**. Sembla que `i18n/etiquetes.yml` va quedar amb el
-  vocabulari antic.
-
-
----
-
-## Arreglat el 23/08/2026 (tarda)
-
-### Els 91 errors del lint eren un sol error, i el tenia la llista
-
-`i18n/etiquetes.yml` i `i18n/diccionari.yml` s'havien quedat amb el vocabulari
-anterior a la decisió de la direcció del club de l'agost del 2026, que va
-canviar l'etiqueta a **«Calendari»** (i «Calendari per equip»). El lint
-demanava el nom antic a 91 pàgines que ja feien servir el nou: **la web tenia
-raó i la llista, no.**
-
-Corregits els dos fitxers i passat `scripts/i18n-aplica-etiquetes.py`. De
-passada ha sortit una cosa que el lint no podia veure: **el castellà i l'anglès
-s'havien quedat amb el nom antic** («Días de partido», «Match days») mentre el
-català ja deia «Calendari» a 240 enllaços. Ara les tres versions diuen el
-mateix: **Calendari · Calendario · Calendar**, i **Calendari per equip ·
-Calendario por equipo · Calendar by team**. Són 203 enllaços de 150 pàgines.
-
-> És l'únic canvi d'aquesta tanda que es veu a la navegació del web, i és
-> reversible: es desfà tornant els dos fitxers enrere i tornant a passar
-> l'aplicador.
-
-**El lint ha passat de 91 errors a 0.** Els pendents, de 497 a 392.
-
-### /portes-obertes/ ja té les tres versions
-
-Creades **`/es/puertas-abiertas/`** i **`/en/open-days/`**, amb la pàgina
-sencera traduïda: text, formulari (mateixos identificadors, o sigui que
-`/js/portes-obertes.js` hi funciona igual), avís de dades i preguntes. La
-capçalera i el peu no s'han traduït a mà: els dibuixa `scripts/i18n_chrome.py`
-des d'`i18n/diccionari.yml`.
-
-Les seves **cinc preguntes ja surten en els tres idiomes**. Ara «what do we
-bring the first day» troba resposta.
-
-De passada, dues coses trencades a la pàgina catalana:
-- Els seus `hreflang` apuntaven a `/es/portes-obertes/` i `/en/portes-obertes/`,
-  que no han existit mai.
-- **El commutador d'idioma portava a un article del blog**
-  (`/blog/a-quina-edat-comencar-basquet/`), no a la pàgina. Error de copiar i
-  enganxar.
-
-També s'ha afegit `/portes-obertes/` a `llms.txt`, on no hi era.
-
-### El que segueix pendent, i per què
-
-Les **14 preguntes amb `pendent:`** no s'han pogut escriure perquè la seva
-resposta no és a cap pàgina del web ni la sap ningú d'aquí: vuit són números
-(les quotes i l'equipació) i sis són dades de funcionament del club (equip A i
-B, desplaçaments, canal d'avisos, revisió mèdica, coordinació per categoria,
-voluntariat). Inventar-les seria pitjor que no tenir-les.
-
-Queden **27 pàgines amb les FAQ desquadrades entre idiomes**. Passar-les per la
-font única és mecànic i es pot fer en tandes; la primera, `/basquet-formatiu/`,
-ja està feta i va de 5/5/4 a 7/7/7.
-
-
----
-
-## Preguntes freqüents · tancat el 23/08/2026
-
-**Les 28 pàgines desquadrades ja no existeixen.** Totes les preguntes del web
-han passat per `i18n/faq.yml`, i les 98 pàgines amb FAQ tenen el `<details>`
-visible i el `FAQPage` del JSON-LD quadrats, amb exactament un `FAQPage` per
-pàgina. Cap pàgina amb versió traduïda té un nombre de preguntes diferent del
-català.
-
-| | Abans | Ara |
-|---|---|---|
-| Preguntes indexades pel cercador | 493 | **546** |
-| Pàgines desquadrades entre idiomes | 28 | **0** |
-| Errors del lint d'i18n | 91 | **0** |
-| Traduccions que falten i tenen on anar | 42 | **0** |
-| Portada | 15 / 11 / 11 | **15 / 15 / 15** |
-
-Comprovat que la migració no ha canviat cap contingut: **0 preguntes
-perdudes i 0 respostes canviades sota la mateixa pregunta**, comparant l'índex
-de cerca abans i després.
-
-### El que va costar, per si torna a passar
-
-- **Aparellar, no perdre.** El perill no era perdre una pregunta —això es
-  compta— sinó publicar la resposta d'una sota una altra en un altre idioma.
-  `scripts/faq-migra.py` alinea com un diff, respectant l'ordre, i es nega a
-  fer-ho quan l'ordre no encaixa.
-- **Dues pàgines no eren traduccions.** A `/femeni/` i a
-  `/blog/cultura-esforc-club-progres/` el castellà i l'anglès tenien
-  preguntes DIFERENTS, no les mateixes traduïdes. S'han fet a mà: cap resposta
-  s'ha descartat, i on faltava la contrària s'ha escrit.
-- **La portada es va duplicar i es va desfer.** El migrador buscava
-  `class="faq"` exacte i la portada la tenia com a `class="faq reveal"`: hi va
-  crear una segona secció i durant una estona va ensenyar les quinze
-  preguntes dues vegades. Trobat obrint-la al navegador i comparant els
-  `<details>` visibles amb els del JSON-LD. Arreglat a les cinc pàgines
-  afectades i al regex del migrador.
-
-### El que segueix pendent
-
-Les **14 preguntes amb `pendent:`**, que no es publiquen enlloc perquè la seva
-resposta no és a cap pàgina del web: vuit números (les quotes i l'equipació) i
-sis dades de funcionament del club. `--pendents` les llista.
-
-
----
-
-## Les 9 preguntes que falten · formulari per contestar-les (23/08/2026)
-
-De les 14 que esperaven una dada, **cinc s'han pogut contestar** mirant millor
-què sap el web, sense inventar-ne cap:
-
-| Pregunta | D'on ha sortit la resposta |
-|---|---|
-| Quant costa la temporada? | No la xifra, però sí el que decideix una família: la prova és gratuïta, hi ha beques i el preu exacte de la seva categoria el té el mateix dia si escriu. |
-| Quants partits es juguen fora de casa? | **De `partits/data.json`**: 274 partits, 137 a casa i 137 a fora, en 80 pistes. Ningú els havia comptat. |
-| Com sé si canvia l'hora o la pista? | El robot diari, la marca «MODIFICAT» set dies i la subscripció `.ics`, que ja existien. |
-| Hi ha beques o ajuts? | Ho deia `/femeni/`, on cap família ho busca. |
-| Com puc ser entrenador o voluntari? | El canal del club + les 38 entrenadores en actiu + el certificat LOPIVI. |
-
-**En queden nou, i totes demanen un sí o un no que no és enlloc del web.**
-Contestar-les aquí és tot el que separa el cercador d'un 10: les redacto en
-els tres idiomes el mateix dia.
-
-### Diners · 5 preguntes
-
-1. **Què inclou la quota?** Marca el que hi entra: fitxa federativa ☐ ·
-   assegurança FCBQ ☐ · equipació ☐ · lloguer de pistes ☐ · altres:
-2. **Com es paga?** Un sol pagament ☐ · mensual ☐ · trimestral ☐ ·
-   Es domicilia? ☐ sí ☐ no
-3. **Hi ha descompte per a germans?** ☐ sí, de _____ ☐ no
-4. **Si es dona de baixa a mig any, què passa amb la quota?**
-5. **Equipació:** què és obligatori comprar, què val i on es compra.
-
-### Funcionament · 4 preguntes
-
-6. **Equip A i equip B: què vol dir, i qui ho decideix?** (Hi ha proves de
-   nivell? Ho decideix la direcció tècnica, la coordinació de la secció?)
-7. **Si un dia no pot anar a entrenar, què s'espera de la família?**
-   (Avisar l'entrenador? Per quin canal?)
-8. **Cal revisió mèdica per federar-se?** ☐ sí ☐ no
-   *(L'assegurança ja està resolta: la de la FCBQ, i ja està publicada.)*
-9. **Qui porta els nens als partits de fora?** (Les famílies? Cotxes
-   compartits? Hi posa transport el club?)
-
-> Amb aquestes nou respostes, l'auditoria passaria de 75 consultes resoltes
-> sobre 98 a prop de 90, i el bloc de diners —que és el que més es busca i el
-> que fa marxar més gent— quedaria tancat.
-
-
----
-
-## Decisió · els preus no es publiquen (23/08/2026)
-
-**Decisió de l'Ana, presa i tancada.** Les quotes van per **franges d'edat i
-per categoria**, i **no es publiquen al web**: fer-ho donaria als clubs del
-voltant l'argument econòmic per competir amb el Barna pel preu. No es reobre.
-
-### Com queda contestada, sense cap xifra
-
-La pregunta «quant costa» segueix sent la que més es busca, i ara té resposta
-sencera. El que una família necessita per decidir no és el número: és saber
-que hi ha una estructura clara, que provar no costa res, que hi ha beques i
-que el preu de la SEVA categoria el té el mateix dia si escriu.
-
-> La quota va per franges d'edat i per categoria: l'Escoleta, els equips
-> federats i el campus tenen preus diferents […] No publiquem la taula de
-> preus al web, però te la donem de seguida: escriu-nos […] amb l'any de
-> naixement i et diem la quota exacta que li tocaria, el mateix dia. Abans de
-> decidir res, el primer entrenament és de prova i gratuït, i el club manté
-> beques socials perquè cap infant es quedi fora per motius econòmics.
-
-**Dir per què no hi és val més que ometre-la.** Un preu absent i sense
-explicació sembla un oblit —o que hi ha alquna cosa a amagar—; dit així, és
-una política, i la resposta acaba amb tres motius per venir igualment.
-
-Les tres versions d'idioma diuen el mateix, i la pregunta porta les paraules
-amb què es busca de debò: *apuntar-se*, *costa* i *temporada*.
-
-### El que segueix faltant NO és el preu
-
-Cinc de les nou pendents eren «de diners», i **cap necessita una xifra**:
-necessiten la POLÍTICA, que no dona cap argument econòmic a ningú.
-
-| Pregunta | Què cal, exactament |
-|---|---|
-| Què inclou la quota? | Si hi entren fitxa federativa, assegurança FCBQ, equipació i pistes. Serveix per comparar què hi ha inclòs, no per saber el preu. |
-| Com es paga? | Un sol pagament, mensual o trimestral, i si es domicilia. **Poder pagar a terminis és sovint el que decideix**, i dir-ho no dona cap xifra. |
-| Descompte per a germans? | Només si n'hi ha o no. «Sí, escriu-nos i te'l diem» respon sense publicar el percentatge. |
-| Baixa a mig any? | La política. És una de les pors que frenen una família que dubta. |
-| Equipació | Què és obligatori i on es compra. El preu es pot ometre igual que la quota. |
-
-I quatre de funcionament, que tampoc tenen res a veure amb diners: equip A i
-equip B, faltar a un entrenament, revisió mèdica i qui porta els nens als
-partits de fora.
-
-
----
-
-## Tancat · les nou preguntes, contestades (24/08/2026)
-
-L'Ana les va contestar totes. **Cap pregunta del web queda sense resposta.**
-
-| | Resposta publicada |
-|---|---|
-| Què inclou la quota? | Tot, excepte l'equipació, que va a part |
-| Com es paga? | **Mensualment**, i l'import depèn de l'edat i la categoria |
-| Descompte per a germans? | **Sí** (el percentatge, no; es diu escrivint) |
-| Baixa a mig any? | La temporada es paga sencera |
-| Equipació | Va a part; **ho explica qui porta la inscripció**, sense preu al web |
-| Equip A i equip B | L'any de naixement decideix la categoria; dins d'una categoria, **l'entrenador** decideix segons el nivell |
-| Faltar a un entrenament | Avisar l'entrenador; **amb el justificant de la família n'hi ha prou** |
-| Revisió mèdica | **Sí, i la gestiona el club: és gratuïta per a les famílies** |
-| Desplaçaments | **Les famílies**, organitzant-se entre els pares del mateix equip |
-
-### Tres coses que val la pena mirar
-
-- **La revisió mèdica gratuïta i gestionada pel club era un actiu amagat.**
-  És una fricció que altres clubs deixen a la família (buscar-la, pagar-la,
-  demanar dia) i aquí no existeix. Ara ho diu la web.
-- **El pagament mensual, també.** Poder-ho pagar a terminis és sovint el que
-  decideix una família que dubta, i no dona cap argument econòmic a ningú.
-- **L'equip A i B** s'ha redactat perquè no soni a divisió entre qui val i qui
-  no: són la mateixa categoria en competicions diferents, tothom entrena,
-  tothom juga i es pot canviar al llarg de la formació.
-
-### Wintym · no s'anomena, i menys s'enllaça (24/08/2026)
-
-**L'Ana avisa que aquesta és l'última temporada amb Wintym**: les famílies ja
-han comprat l'equipació d'enguany i el club ha de negociar una marca i un
-disseny nous.
-
-Per això la resposta de l'equipació **no diu cap nom de proveïdor**. Parla de
-«la botiga oficial del club» i remet al moment en què es dona la plaça, que és
-quan la família ho necessita saber de debò. Així la resposta segueix sent
-certa el dia que canviï la marca, i no cal recordar-se d'anar-la a buscar.
-
-> **Regla que val per a tot el web:** un nom de tercer dins d'una resposta és
-> una data de caducitat amagada. Si el que la família necessita és *com*
-> aconseguir una cosa, la resposta ha de dir el «com», no el «qui».
-
-**El preu tampoc hi és** (24/08/2026, decisió de l'Ana): cap xifra al web, i
-ho explica la persona que porta la inscripció quan es dona la plaça. Amb la
-marca nova el preu canviarà igualment, i així la resposta no caduca.
-
-### Inventari de preus que SÍ segueixen publicats
-
-La norma «cap preu al web» val per al que paga una família per jugar: quota i
-equipació. Però al web hi ha altres xifres, i convé saber-ho per decidir si la
-norma les abasta o no. **No s'han tocat: són decisions anteriors.**
-
-| On | Xifra | Què és |
-|---|---|---|
-| `/campus/`, `/campus-basquet-barcelona/`, `/campus/setmana-santa/` | 195 € / 160 € / 150 € | Preu del campus, per setmana i per jornada |
-| `/3x3/`, `/3x3-barcelona/` | 2.000 € en premis | Premi del torneig, paritari |
-| `/patrocinadors/` | des de 300 € l'any | Nivells de patrocini |
-| `/blog/basquet-femeni-…/` | 140.000-160.000 € | Pressupost anual del club, com a argument de posicionament |
-
-Els tres últims no són el que paga una família per jugar. **El del campus
-sí**, i és el cas que caldria decidir: avui el campus es ven amb el preu
-davant —i el preu és, de fet, un dels seus arguments— mentre que la temporada
-no en diu cap. Si la norma ha de valer també per al campus, es treu en un
-moment; si no, val la pena que quedi escrit per què no.
-
-### On queda el cercador
-
-| | Al començar | Ara |
-|---|---|---|
-| Consultes provades | 85 | **109** |
-| Amb resposta a dalt de tot | 46 | **90** |
-| Només amb enllaços | 36 | **17** |
-| Sense cap resultat | 2 | **0** |
-| Preguntes pendents d'una dada | 14 | **0** |
-
-# Auditoria d'experiència d'usuari als tres idiomes · 23/08/2026
-
-Repàs complet de navegació, usabilitat i UX/UI de `cbgrupbarna.info` en
-**català, castellà i anglès** (478 fitxers HTML), fet amb el web servit de
-debò i obert amb un navegador a 390 px, no només llegint el codi. Aquí hi ha
-el que s'ha arreglat i el que queda per decidir.
-
-## Arreglat
-
-### 1. El calendari de partits no existia en castellà ni en anglès
-
-`/es/partits/` i `/en/partits/` no eren la pàgina pública traduïda: eren una
-còpia antiga que portava enganxada **l'eina interna de gestió del club**
-(92 KB de JavaScript amb entrada de resultats, generador de cartells i
-importació de PDF). A sobre, aquell codi declarava dues vegades les mateixes
-variables (`MESOS`, `DIES`), i això és un **error de sintaxi**: el navegador
-descartava el bloc sencer i no s'executava res. Resultat: al lloc del
-calendari hi sortia «Hay que activar JavaScript para ver el calendario
-completo», sempre, encara que el JavaScript estigués activat. Ni un partit,
-ni un resultat, ni un horari, per a qui llegeix la web en castellà o anglès.
-
-Ja existia el generador `scripts/build-partits-idiomes.py`, escrit per a
-això, però no s'havia arribat a executar. S'ha executat i, de passada,
-arreglat i millorat:
-
-- **Els enllaços interns ja no s'endevinen, es llegeixen.** Abans hi havia
-  una llista fixa que donava per fet que l'adreça era la mateixa en els tres
-  idiomes (`/escoleta/` → `/es/escoleta/`). No sempre ho és: la política de
-  privacitat és `/es/politica-de-privacidad/` i `/en/privacy-policy/`, i
-  protecció del menor és `/en/child-protection/`. Amb la llista fixa, el peu
-  de la pàgina castellana enviava a la política **en català**. Ara cada
-  destí es resol amb el `hreflang` de la pàgina catalana corresponent, així
-  que quan es tradueixi una secció nova això ho seguirà sol.
-- **Substitucions en dues passades.** Una regla curta es menjava el resultat
-  d'una de llarga i deixava coses com «Calendarioo global».
-- **Textos que quedaven en català** a la pàgina traduïda: el fil d'Ariadna,
-  «A casa»/«Fora» de cada partit, el recompte de partits i l'avís de quan
-  encara no hi ha resultats.
-- **El text que només senten els lectors de pantalla** (`alt` de l'escut,
-  «inici», «Fil d'Ariadna») ara també es tradueix.
-
-### 2. El selector d'idioma no hi era a 2 de cada 3 pàgines
-
-De 391 pàgines públiques, **251 no tenien selector d'idioma**. Qui entrava a
-`/en/faq/` o a `/campus/` no tenia cap manera de canviar de llengua sense
-tornar a la portada. Ara el porten totes (les úniques excepcions són el
-panell d'`/admin/`, els fitxers d'impressió d'`/opina/print/` i les
-redireccions).
-
-I on hi era, sovint estava trencat:
-
-- **15 pàgines enviaven a un article del blog.** A `/portes-obertes/`,
-  `/bustia/`, `/escriu-nos/`, `/newsletter/` i `/proteccio-menor/comunicar/`
-  —en els tres idiomes— els tres botons CA · ES · EN apuntaven tots a
-  «A quina edat començar a jugar a bàsquet». Clicar «ES» a Portes obertes et
-  deixava, després d'un salt de redirecció, en un article sobre l'edat
-  d'iniciació. Són justament les cinc pàgines on la gent escriu al club.
-- **22 pàgines el pintaven sense estil** perquè el CSS del component estava
-  copiat a mà dins de cada pàgina i allà no s'havia copiat.
-- **Hi havia vuit versions diferents del mateix CSS**: en 84 pàgines sortia
-  amb l'Anton i en la resta amb la Inter. Ara el component viu una sola
-  vegada a `css/barna.css` i s'han retirat 472 regles duplicades.
-- **Les caselles feien 15-17 px d'ample.** Per sota del mínim de 24×24 px
-  que demana la WCAG 2.2 per a qualsevol cosa que s'hagi de tocar amb el
-  dit. Ara en fan 26.
-- A `/orgull/` i a `/premidonaesport/` el selector quedava **fora de la
-  pantalla** a mòbil: hi era al codi, però no s'hi podia arribar.
-
-### 3. 599 enllaços que et treien de la teva llengua
-
-Enllaços dins de pàgines `/es/` i `/en/` que apuntaven a la versió catalana
-**tot i existir-ne la traducció**. Inclou els menús sencers d'algunes
-pàgines, el «Demanar informació» de la portada i, sobretot, això:
-
-> **El blog en castellà i en anglès amagava dos terços dels seus articles.**
-> Sota un títol que deia «Estos artículos están publicados en catalán» /
-> «These articles are published in Catalan» hi havia 14 i 15 fitxes amb el
-> títol en català i l'enllaç a la versió catalana. **Totes tenien traducció
-> completa publicada.** El lector en anglès veia 6 articles disponibles i 15
-> «només en català» que en realitat podia llegir en anglès.
-
-### 4. La capçalera es trencava a mòbil
-
-A ~190 pàgines, el nom del club de la capçalera («CB GRUP BARNA», amb
-`white-space: nowrap`) i el menú se solapaven, lletra sobre lletra, a
-qualsevol mòbil. Per sota de 560 px el nom es retira —l'escut ja hi és, i és
-enllaç a l'inici— i el menú recupera l'espai.
-
-### 5. Consentiment i legal
-
-- **L'enllaç «Més informació» de l'avís de galetes no anava enlloc**, en cap
-  dels tres idiomes. Un gestor genèric interceptava qualsevol enllaç acabat
-  en `#galetes` per reobrir el plafó, i s'enduia també el del propi avís:
-  es cancel·lava la navegació, es tornava a obrir un plafó que ja era obert
-  i, de propina, s'esborrava el consentiment desat.
-- El mateix gestor **segrestava l'àncora real** de `#galetes` a
-  `/es/politica-de-privacidad/` i `/en/privacy-policy/`: només s'excloïa la
-  catalana.
-- **Els peus en castellà i anglès no tenien columna «Legal».** Cap enllaç a
-  la política de privacitat, ni a l'avís legal, ni a les galetes, en cap de
-  les ~290 pàgines. Afegida als 218 peus que tenen l'estructura estàndard.
-- **Dos formularis deien «Más info» / «More info» i portaven al dossier del
-  Premi Dona i Esport**, no a la política de privacitat: `/es/fotos-3x3/`,
-  `/en/fotos-3x3/` i els dos `3x3-westfield-2026/`.
-- **`/galeria-3x3-glories/` recollia nom, cognoms, correu, mòbil i club
-  sense casella de consentiment ni cap enllaç a la política**, en els tres
-  idiomes. Ara la casella és obligatòria per continuar.
-
-### 6. Accessibilitat i rendiment
-
-- L'`alt` de l'escut i l'`aria-label` de la capçalera eren en català a 255
-  llocs de `/es/` i `/en/`: qui fa servir un lector de pantalla sentia
-  català llegint la pàgina en un altre idioma.
-- **El menú de la portada no retenia el focus**: amb el tabulador se'n
-  sortia cap a la pàgina de sota, que està tapada. Ara el focus hi entra en
-  obrir-lo, hi dona voltes i torna al botó en tancar-lo.
-- **Els errors del formulari de la portada no es llegien.** El missatge
-  sortia en un rètol sense `role`, i desapareixia als 2,2 s.
-- **El 404 sortia sempre en català.** GitHub Pages el serveix per a
-  qualsevol adreça inexistent, també `/es/…` i `/en/…`: qui s'equivocava
-  dins la versió castellana o anglesa quedava expulsat a un menú català. Ara
-  es reescriu sol segons el camí.
-- **Es precarregava `og-image.jpg` (84 KB) a les tres portades** i aquella
-  imatge no es veu mai: és la de compartir a xarxes. 84 KB de prioritat alta
-  competint amb el que sí que es veu.
-- **Les tipografies es baixaven dues vegades.** `/escoleta/` i
-  `/partners-mapa/` les demanaven a `/escoleta/fonts/`, una còpia amb URL
-  diferent i, per tant, memòria cau diferent: ~130 KB que ja eren al
-  navegador.
-- Tres `<audio>` de `/premidonaesport/patrocinis/` apuntaven a fitxers
-  `.mp3` que no existeixen (els reals són `.m4a`): l'experiència sonora no
-  sonava.
-- `rel="noopener"` a 9 enllaços `target="_blank"`; `src=""` retirat dels
-  visors de `/fotos/` (un `src` buit fa que el navegador torni a demanar la
-  pàgina sencera); `noindex` i `viewport` a les 12 redireccions.
-
-### 7. `/escoleta/` tenia el seu propi commutador CAT/CAST
-
-Canviava el text sense canviar l'adreça i, amb el navegador en castellà,
-s'obria en castellà tot i que la URL, el `canonical` i el `hreflang` deien
-que era la catalana. Al mateix temps ja existeixen `/es/escoleta/` i
-`/en/escoleta/`, traduïdes senceres: hi havia **dues versions castellanes en
-dues adreces diferents** i cap manera d'arribar a l'anglesa. Ara fa servir
-el selector de sempre. El text castellà segueix al marcatge, ocult; es pot
-netejar quan es vulgui.
-
-## Els quatre punts que quedaven per decidir · resolts el 23/08/2026
-
-L'Ana va demanar tancar-los tots. Això és el que s'ha fet i per què.
-
-### 1. El dossier del Premi demanava un PIN i alhora era al sitemap
-
-Hi havia **dues reixes**, no una: les tres portades (`/premidonaesport/` i les
-seves versions `/es/` i `/en/`) portaven, a més de la d'`assets/js/auth.js`, una
-segona reixa de quatre caselles escrita dins de l'HTML, amb **el mateix codi** i
-una clau de sessió diferent. Qui hi arribava havia de teclejar 1965 dues vegades
-seguides per entrar al mateix lloc. I qui no el tenia es quedava en un carreró
-sense un sol enllaç.
-
-Ara la porta és una: la d'`auth.js`, que cobreix les 72 pàgines del dossier,
-reconeix les dues claus antigues (ningú no ha de tornar a entrar-hi), **surt en
-l'idioma de la pàgina** —abans sempre en català— i ofereix una sortida a qui no
-té el codi: la pàgina pública de bàsquet femení de cada idioma.
-
-Sobre l'indexació: **no s'ha obert el dossier** —això és una decisió de
-contingut— però s'ha desfet la contradicció. Les 72 pàgines porten
-`noindex,follow` i les seves **69 adreces han sortit del `sitemap.xml`** (de 433
-a 364). Ningú no arribarà des d'una cerca a una paret amb un PIN. Si algun dia es
-vol obrir, és treure el `<script>` d'`auth.js` i tornar-les a posar al sitemap.
-
-També s'ha corregit `llms.txt`, que descrivia aquest corpus com a «obert i sense
-registre» quan no ho és. Ara diu que aquest mirall demana codi i assenyala les
-dues versions realment obertes: la web oficial de la candidatura i `/femeni/`.
-
-### 2. El vídeo de la mascota en castellà
-
-`/es/mascota/` ja serveix `mascota-reel-es.mp4`, que era al repositori sense fer
-servir. Els rètols del vídeo no són una transcripció de la veu: són targetes en
-pantalla, i per tant es poden traduir. Se n'han fet dos `.vtt` nous
-—`subtitols-es.vtt` i `subtitols-en.vtt`— amb els mateixos temps que l'original.
-`/en/mascota/` segueix amb el muntatge català, que és l'únic que hi ha, però ara
-amb els rètols en anglès per defecte i el català com a segona pista.
-
-> **Per confirmar mirant-lo:** el fitxer castellà no s'ha pogut obrir des d'aquí
-> per comprovar-ne l'àudio. El nom, la durada (90 s contra els 80 s del català) i
-> el germà `-es-capcut.mp4` diuen que és el doblatge, però val la pena veure'n
-> deu segons abans de donar-ho per fet.
-
-### 3. Les portades en castellà i en anglès
-
-Tenien el commutador Franges/Extensa, però **l'extensa quedava buida**: hi
-faltaven set blocs que només existien en català. Ara hi són tots, traduïts:
-
-- el **masthead** («CB Grup Barna · Bàsquet a Barcelona des de 1965»), amb els
-  cinc pilars i les dues crides;
-- la capçalera **«La portada»** amb la data del dia, en castellà i en anglès;
-- la franja de **paritat**;
-- el bloc del lema, **Cultura del Progrés**;
-- **El Barna per dins**, amb les tres portes;
-- **l'Observatori Barna**, amb tres guies del blog;
-- i la secció **Presentacions**.
-
-Pel camí van sortir dues coses més:
-
-- **Cap de les dues portades tenia un `h1` visible a la vista per defecte.** El
-  titular de les franges era un `<h2>` i l'únic `h1` vivia en un bloc que només
-  surt a l'extensa. Ara les tres portades es comporten igual: un `h1` visible a
-  cada vista.
-- El titular de la fitxa de l'Escoleta era un segon `h1` («Escoleta de
-  baloncesto»), que a més era el que Google llegia com a títol de la portada.
-  Ara és un `h2`, com en català.
-
-I una que afectava les tres: **la primera franja no es podia llegir a mòbil**.
-La graella manté tres columnes fixes —190 px de foto, el text i la crida de la
-dreta, que no parteix—, i a 390 px al text li quedaven vint píxels: queia una
-paraula per línia. És la primera cosa que veu qui entra des del mòbil. Per sota
-de 700 px la crida ara baixa sota el text.
-
-### 4. El contrast del vermell
-
-Repassat amb el navegador, no a ull: 72 pàgines dels tres idiomes, comparant el
-color de cada text amb el fons **compositat** de sota (les capes translúcides
-menteixen si es miren pel seu compte). Hi havia **38 combinacions** per sota del
-mínim AA. Ara no en queda cap.
-
-El sistema ja tenia la resposta escrita i no s'aplicava:
-
-| On | Abans | Ara |
-|---|---|---|
-| Text vermell petit sobre crema | `--red` #E20613 · 4,37:1 | `--red-ink` #A8040E · 6,93:1 |
-| Text vermell sobre tinta | `--red` #E20613 · 3,87:1 | `--red-light` #FF3B41 · 5,40:1 |
-| Botó vermell dins d'un article | tinta sobre vermell · 3,87:1 | blanc · 4,92:1 |
-
-Aquell botó era un cas d'especificitat de manual, del que avisa la guia visual:
-`.prose a` (0,1,1) guanyava a `.btn` (0,1,0), i qualsevol botó dins d'un article
-es quedava amb el text en tinta i un subratllat que no li tocava.
-
-I quatre pàgines fosques feien servir els grisos pensats per a fons clar:
-`/jugadors/` (#6B6560 sobre tinta, 3,32:1), `/presentacions/` (un gris fix que
-ignorava el seu propi mode fosc), `/galeria-3x3-glories/` (#2e2e2e sobre negre,
-**1,39:1** — text que directament no es veu) i `/mascota/` (blanc sobre el verd
-de WhatsApp, 1,98:1). El verd de WhatsApp és seu i s'hi queda; el que ha canviat
-és el text, que ara hi va en tinta.
-
----
-
-## Tercera passada · el que va sortir mirant més endins (23/08/2026)
-
-Amb els punts grossos tancats, un repàs a coses que no es veuen llegint el codi:
-dades estructurades, teclat, pantalles de 320 px i pes de pàgina.
-
-### Dades estructurades: 45 pàgines deien a Google que eren en català
-
-El JSON-LD de `/es/` i `/en/` portava `"inLanguage": "ca-ES"` copiat de
-l'original. Afectava tot el blog traduït, les fitxes de partner, premsa i les
-tres portades. A més, `WebPage` i `FAQPage` declaraven la llista dels tres
-idiomes, que només té sentit al node `WebSite`: el lloc és trilingüe; una
-pàgina concreta, no. Els 439 blocs de JSON-LD del repositori queden validats i
-amb l'idioma correcte.
-
-El generador que ho provocava (`scripts/i18n-munta.py`) només traduïa la forma
-curta (`"ca"`), no la llarga ni la llista. Ara les cobreix totes tres, i la
-llista la resol llegint el JSON per no tocar el node `WebSite`.
-
-### Teclat
-
-Els camps de text del formulari de la portada anul·laven el contorn de focus i
-el substituïen per un filet d'un píxel que només canvia de color. Amb teclat ara
-recuperen el contorn vermell de la resta del web; amb ratolí segueix sortint
-només el filet. Revisat tabulant de debò per 24 pàgines: no queda cap element
-focusable sense indicador visible.
-
-**La galeria no es podia fer servir amb el teclat.** Les caselles de `/fotos/`
-eren `<div>` amb un `click` i prou: no s'hi podia arribar ni obrir cap foto, i
-un lector de pantalla no les anunciava com a res. Ara són botons de debò, amb
-etiqueta («Obrir la foto 3 a pantalla completa»), i s'obren amb Enter o espai.
-El visor mou el focus al botó de tancar en obrir-se, el manté a dins mentre es
-fa servir i el torna a la mateixa foto en tancar-se.
-
-### Pantalles de 320 px
-
-Sis famílies de pàgina hi desbordaven. El cas més gros era **l'avís de
-galetes**: feia 342 px d'ample en una pantalla de 320 i el botó d'acceptar
-sortia partit. És la primera cosa que es toca en entrar.
-
-La causa de fons no era la barra. Hi havia contingut més ample que la pantalla,
-el navegador eixamplava la finestra de disseny, i la barra —que és
-`position: fixed`— l'heretava:
-
-- les cinc estrelles de la valoració (5 dianes de 44 px i les separacions) no hi
-  cabien amb els marges de la targeta;
-- les capçaleres de `/es/` i `/en/` no retiraven el nom del club, com sí que fa
-  la catalana;
-- a `/presentacions/` el botó de mode clar/fosc quedava fora de pantalla, sense
-  manera d'arribar-hi;
-- a `/fotos/` l'enllaç de tornada sortia de la pantalla;
-- les files de `/#acces` no cabien en una línia.
-
-Cap diana tàctil baixa dels 44 px: el que s'estreny és l'aire, i el que es
-retira són etiquetes que ja diu l'`aria-label`.
-
-### Pes
-
-Cinc imatges es servien senceres, sense `srcset`, en pàgines on mai es mostren a
-més de 700 px. `hero-equip.jpg` feia 2100 px i 468 KB per a un marc de 348. És
-la regla del sistema de disseny llegida per l'altra banda: si cap foto no s'ha
-de mostrar més gran del que és, tampoc no se n'han de baixar més píxels dels que
-caben. `scripts/build-imatges-responsives.py` en fa versions WebP a 400, 800 i
-1400 px —mai per sobre de l'original— i els `<img>` ja les demanen.
-
-| Pàgina | Abans | Ara |
-|---|---|---|
-| `/presentacions/` | 1.146 KB | 242 KB |
-| `/patrocinadors/` | 548 KB | 240 KB |
-| `/3x3/` | 439 KB | 226 KB |
-| `/premsa/` | 407 KB | 231 KB |
-
-I `/mascota/` arrencava el vídeo sol. Pesa entre 31 i 50 MB i, arrencant, es
-baixa sencer. Ara només ho fa si el vídeo és a pantalla i si qui mira no ha
-demanat menys moviment ni té l'estalvi de dades activat.
-
-> **Pendent, i això no és codi:** el reel de la mascota hauria de sortir
-> re-codificat. Un vertical de 90 segons no hauria de passar de 10-12 MB, i ara
-> en fa 31 (català) i 50 (castellà).
-
----
-
-## Per decidir (redactat el 23/08/2026, abans de resoldre'ls) — vegeu més amunt
-
-1. **`/premidonaesport/` demana un PIN i alhora és al `sitemap.xml`.** Són
-   ~115 adreces que es donen a Google com a indexables i que, quan algú hi
-   clica, ensenyen una paret amb un PIN. A més el codi és a la vista dins
-   d'`assets/js/auth.js`. O s'obre (i es treu la paret) o es treu del
-   sitemap amb `noindex`. És una decisió de l'Ana, no un error.
-2. **Hi ha un vídeo de la mascota en castellà que no fa servir ningú.**
-   `/mascota/mascota-reel-es.mp4` (50 MB) és al repositori, però
-   `/es/mascota/` i `/en/mascota/` serveixen el català amb subtítols
-   catalans per defecte. Abans de canviar-ho cal confirmar que el fitxer és
-   el doblatge bo.
-3. **Les portades en castellà i anglès són més pobres que la catalana.** La
-   catalana té «La portada», «Cultura del Progrés», «El Barna per dins»,
-   «Observatori Barna» i «Presentacions»; les altres dues no, i el seu `h1`
-   és «Escoleta de baloncesto» en comptes del club. Són ~45 KB menys de
-   pàgina.
-4. **El `--red` de l'escut (#E20613) sobre crema (#F4F1EC) dona 4,37:1**,
-   just per sota del 4,5:1 que demana la WCAG per a text petit. Per a
-   titulars grans és correcte; per a text petit convindria el `--red-dark`
-   (#A8040E, 7,81:1).
-
-## 24-08-2026 — El vídeo de la mascota no arrencava
-
-**Símptoma que veia la gent:** entres a `/mascota/` i no hi ha vídeo. Ni un
-fotograma, ni la durada, res: un rectangle buit.
-
-**Causa real:** `mascota/mascota-reel.mp4` era l'únic MP4 del web amb l'índex
-(`moov`) DESPRÉS de les dades (`mdat`). Ordre dels àtoms: `ftyp, free, mdat,
-moov`. Un navegador no pot pintar res fins que no té l'índex, i amb l'índex al
-final això vol dir baixar-se els 30 MB sencers primer. Verificat també en
-producció amb `curl -r 0-63`, o sigui que no era cosa de la branca.
-
-**Arreglat:** `scripts/mp4-faststart.py` (qt-faststart en Python pur, sense
-dependències). Mou el `moov` al davant i reescriu totes les taules de posicions
-`stco`/`co64`. En el cas del reel: 3758 posicions desplaçades 61075 bytes,
-totes comprovades byte a byte abans d'escriure. Mida final idèntica i contingut
-de vídeo (`mdat`) idèntic — no és una reconversió, és una reordenació.
-
-Comprovats tots els MP4 del repositori: la resta ja tenien l'índex al davant.
-
-**Encara pendent per l'Ana (no es pot fer des d'aquí):** els reels pesen massa.
-30 MB el català i 48 MB el castellà per a 90 segons verticals; ben codificat
-haurien de ser 10–12 MB. Cal reexportar-los, no reordenar-los.
-
-## 24-08-2026 — Fora el vídeo de la mascota
-
-Decisió de l'Ana: la pàgina de la mascota es queda sense vídeo, en els tres
-idiomes.
-
-No n'hi havia prou amb treure l'etiqueta `<video>`. També se n'han anat:
-
-- els comandaments que només servien per al reproductor (botó de reproduir,
-  botó de so, l'avís de «Toca per sentir la veu») i tot el seu JavaScript;
-- les etiquetes que anunciaven un vídeo a fora — `og:video`, `twitter:player`,
-  `og:type: video.other` i `twitter:card: player` —, perquè si no, WhatsApp i
-  X continuarien intentant reproduir-ne un que ja no hi és;
-- el JSON-LD, que declarava un `VideoObject` amb durada i URL del fitxer. Ara
-  és un `WebPage`;
-- el CSS que vestia tot això.
-
-**El marc del hero era vertical** (480×848) perquè hi anava un reel 9:16. La
-foto de la mascota que tenim és apaisada, i encabir-la-hi retallada donava un
-primer pla il·legible. El marc passa a apaisat (750×500) i hi va
-`img/blog/clot-mascota@2x.webp`, amb `srcset` per no servir el doble del que
-es veu.
-
-Comprovat amb navegador a 390 px en els tres idiomes: cap `<video>`, cap error
-de JavaScript, cap petició fallida, res que desbordi, i el commutador d'idioma
-damunt la foto a 5,87:1 de contrast. **La pàgina passa de ~62 MB transferits a
-133 KB.**
-
-**Pendent de decidir:** els cinc MP4 de `mascota/` (186 MB en total) ja no els
-enllaça cap pàgina. Es queden al repositori fins que l'Ana digui, perquè són
-els originals; però cada desplegament els ha d'empaquetar.
-
-## 24-08-2026 — Fora també els vídeos del repositori
-
-Decisió de l'Ana. Traguda la reproducció de la pàgina, els fitxers ja no els
-enllaçava ningú i cada desplegament els havia d'empaquetar.
-
-Esborrats de `mascota/` (180 MB):
-
-| Fitxer | Mida |
-|---|---|
-| `mascota-reel-es-capcut.mp4` | 48,2 MB |
-| `mascota-reel-es.mp4` | 48,1 MB |
-| `mascota-reel.mp4` | 30,2 MB |
-| `mascota-teleprompter.mp4` | 38,6 MB |
-| `mascota.mp4` | 14,1 MB |
-| `subtitols.vtt`, `subtitols-es.vtt`, `subtitols-en.vtt` | els subtítols dels vídeos |
-
-Abans d'esborrar es va buscar cada nom per tot el repositori: cap pàgina,
-full d'estil, guió ni el `sitemap.xml` no en referencien cap. Les úniques
-mencions eren prosa d'aquest document i un comentari de
-`scripts/mp4-faststart.py`, que és una eina general i no en depèn.
-
-**Com recuperar-los si mai calen:** són a l'historial de git, al commit
-`c589e7f4`. Amb `git show c589e7f4:mascota/mascota-reel.mp4 > mascota-reel.mp4`
-en surt qualsevol, byte a byte.
-
-## 24-08-2026 — Camí cap al 10: la resta de pendents
-
-Auditoria feta per veure què separa cada apartat de la nota màxima, partint
-del 9,4 global de l'últim informe. La sessió de fotos de l'Escoleta ja hi és,
-a «Pendent de material de l'Ana»; això és la resta.
-
-### UX
-
-- ~~**Preus encara publicats a tres pàgines de campus.**~~ **Fet (24/08/2026).**
-  Tret de `campus/index.html` (+ `/es/` i `/en/`), `campus-basquet-barcelona/index.html`
-  i `campus/setmana-santa/index.html`: meta descriptions, `dl-row` de preu,
-  targetes de preu i totes les dades estructurades (`offers`/`AggregateOffer`
-  a 4 fitxers). El generador `scripts/build-campus-fitxa.py` ja no coneix cap
-  xifra. Es queden intactes els 2.000 € de premis del 3x3 (no és una quota) i
-  el rang de mercat «150-250 €/setmana» de `campus-basquet-barcelona/`, que és
-  informació de tercers, no el preu del club.
-- **`/campus/` no té formulari propi.** Els CTA d'inscripció reenvien tots al
-  WhatsApp del club o al bloc `#info` genèric de portada. Cal decidir quines
-  dades demanar i on van a parar abans de construir-lo.
-- **La «inscripció en línia» de portada depèn que la família confirmi a mà
-  dins de WhatsApp.** El formulari envia les dades a Formspree i obre `wa.me`
-  precarregat, però si el navegador bloqueja el pop-up només arriba el
-  correu, sense número de referència. Cal decidir si el club vol un registre
-  estructurat en comptes del gest manual.
-
-### Seguretat i legal
-
-- ~~**La política de privacitat no esmenta Formspree.**~~ **Fet (24/08/2026).**
-  Afegit als tres idiomes (`politica-de-privacitat/`, `es/politica-de-privacidad/`,
-  `en/privacy-policy/`): el paràgraf del formulari de portada ja diu que les
-  dades s'envien també a Formspree, i apareix a la llista d'encarregats del
-  tractament. Data d'«última actualització» pujada al 24/08/2026.
-- **El PIN del dossier de Premi Dona i Esport és «1965» en clar.**
-  `premidonaesport/assets/js/auth.js` el guarda sense ofuscar, visible amb
-  «Veure codi font». No és el mateix problema que es va resoldre el
-  23/08/2026 (la doble reixa i la indexació): aquí cal que l'Ana confirmi si
-  aquestes 72 pàgines necessiten protecció real o si el gest simbòlic ja és
-  prou.
-
-### SEO
-
-- ~~**`/jugadors/` és indexable i buida.**~~ **Fet (24/08/2026).** `noindex,follow`
-  a les tres versions (`jugadors/`, `es/jugadors/`, `en/jugadors/`) i tretes
-  del `sitemap.xml` (363 URL). Segueix pendent omplir `jugadors/jugadors.js`
-  quan hi hagi plantilla — a «Pendent de decisió»—; quan es faci, cal treure
-  també el `noindex`.
-- **39 dels 43 objectius d'enllaços externs segueixen «pendents».** Segons
-  `POSICIONAMENT-CAMPUS-SEO.md`, l'arquitectura on-page ja està resolta; el
-  que falta és autoritat externa real, i això no és una tasca de codi.
-
-### Accessibilitat
-
-- **Les miniatures de `/fotos/` no descriuen la foto.** Totes porten
-  `alt="Foto 1"`, `alt="Foto 2"`… i el visor a pantalla completa sempre diu
-  `alt="Foto del club"`. Un lector de pantalla no rep cap contingut real.
-  Arreglar-ho és mecànic però lent: cal redactar text alternatiu àlbum a
-  àlbum.
-
-### Idiomes
-
-- ~~**`/campus/` només té 9 de 15 seccions traduïdes** a `/es/` i `/en/`.~~
-  **Fet.** Les 15 seccions ja hi són als tres idiomes (mateix nombre
-  d'`<h2>`) i `i18n-contingut.py` no hi troba cap avís. El cas de `/femeni/`
-  —a «Pendent de decisió · reestructuració del menú»— també ho està.
-
-### Velocitat
-
-- **Falta confirmar amb dades de camp.** Tot el que es va mesurar a la fase
-  de velocitat és de navegador local. Els Core Web Vitals reals de Search
-  Console —els que compten per al posicionament— triguen uns dies a
-  reflectir el canvi de les imatges. Revisar quan hi hagi prou dades.
-
-## 24-08-2026 — El que queda obert d'aquesta tanda de traducció
-
-Tres coses apuntades i no fetes, perquè cap de les tres és una decisió tècnica:
-
-- **Redirect de L'Aquàrium de Barcelona.** Quan es va esborrar el partner, les
-  seves tres fitxes (`ca`, `es`, `en`) van passar a 404. GitHub Pages no fa
-  redireccions de servidor, així que l'única manera és una pàgina estàtica amb
-  `<meta http-equiv="refresh">`, que ja és el mecanisme que fem servir a la
-  resta del web per a aquest cas (vegeu `web-cbgb`). No s'ha fet perquè no hi
-  ha cap enllaç conegut, intern ni extern, que hi apunti — les tres fitxes
-  només sortien del propi `partits/` i del sitemap, i totes dues coses ja
-  estan netes. Si l'Ana sap d'algun enllaç extern (una nota de premsa, un post
-  antic) que encara hi porti gent, avisa-ho i es posa el redirect en cinc
-  minuts.
-- **Logotip de la Wilson**, ja apuntat més amunt, a «Pendent de material de
-  l'Ana».
-- **La skill `mapa-web-cbgb` parla d'una desincronització que ja no existeix.**
-  Diu que `/femeni/` és «encara sense traduir» com a exemple del que passa
-  quan es toca una pàgina catalana i no es reflecteix a `/es/` i `/en/`. Des
-  d'aquesta tanda, `/femeni/` està traduïda sencera i, sobretot, ja no cal fer
-  aquesta comprovació a mà: `i18n-paritat.py` i `i18n-contingut.py` ho vigilen
-  soles a cada `push` i bloquegen el pull request si es desincronitza. Cal
-  actualitzar aquell paràgraf perquè no enviï a ningú a buscar un problema que
-  ja no hi és.
-
-## 24-08-2026 — Comença el versionat: `VERSION` i `CHANGELOG.md`
-
-Fins ara l'única manera de dir «això és el que hi havia publicat en tal data»
-era el missatge d'un commit. A partir d'ara hi ha una versió amb nom:
-**1.0.0**, fixada al commit `205f0861` — el cercador intel·ligent, ja
-publicat i comprovat.
-
-**Com queda.** `VERSION`, a l'arrel, porta el número. `CHANGELOG.md` en porta
-l'explicació i la convenció, a l'estil habitual `MAJOR.MENOR.PEDAÇ`: un pedaç
-per un arreglo o contingut nou que no canvia com funciona res, un menor per
-una funcionalitat que s'afegeix sense trencar la que ja hi havia, un major
-per un canvi de com es fa servir la web o el repositori. Cada versió nova
-puja `VERSION`, hi afegeix l'entrada a `CHANGELOG.md` i es publica a `main`
-en el mateix commit.
-
-**Per què no és un tag de git.** Es va intentar primer amb un tag anotat
-(`v1.0-cercador`): el `git push` del tag el va rebutjar GitHub amb un 403, i
-no hi ha cap eina de GitHub disponible en aquesta sessió per crear-ne un per
-API. Un fitxer dins del repositori no depèn d'aquest permís i, de retruc,
-queda a l'historial de qualsevol clonatge sense haver de demanar els tags a
-part.
-
-**Norma confirmada per l'Ana:** a partir d'ara, cada vegada que es tanqui una
-feina es puja la subversió corresponent (`VERSION` + entrada a
-`CHANGELOG.md`) en el mateix commit, sense haver-ho de demanar cada cop.
-
----
-
-## Accessibilitat · 24/08/2026
-
-Passada d'accessibilitat de tot el lloc, mesurada amb axe-core sobre el lloc
-servit i comprovada amb teclat a 1280 i 390 px. La declaració pública és a
-**`/accessibilitat/`** (`/es/accesibilidad/`, `/en/accessibility/`), enllaçada
-des del peu de totes les pàgines i llistada a `llms.txt` i al `sitemap.xml`.
-
-Aquesta passada s'ha fet en paral·lel a «Auditoria d'experiència d'usuari als
-tres idiomes» (#78), que ja va arreglar de forma independent bona part del
-mateix terreny: els 38 combos de color per sota d'AA d'aleshores, el peu en
-castellà/anglès sense columna Legal, el `lang-switch` amb `aria-current` i
-`lang` per enllaç, i la navegació per teclat de la galeria. El que segueix és
-el que quedava sense cobrir després d'aquella auditoria, mesurat de nou amb
-axe-core sobre l'estat actual.
-
-### Fet
-
-- **`css/a11y.css`** — capa compartida, enllaçada des de totes les pàgines
-  reals i carregada l'última perquè les seves regles manin: focus visible de
-  3 px (amb `!important`, perquè hi havia una trentena de pàgines amb
-  `outline:none` a l'atribut `style`), enllaç de salt, `prefers-reduced-motion`,
-  mode d'alt contrast del sistema, `.visually-hidden` i les correccions de
-  contrast que l'auditoria #78 no cobria.
-- **Salt al contingut i `<main>`** a les pàgines que encara no en tenien
-  (`scripts/a11y-aplica.py`, idempotent: es pot tornar a passar sempre).
-- **~90 camps de formulari** amb nom accessible (`scripts/a11y-etiquetes.py`).
-- **Contrast addicional**: `/admin/`, `/briefing/`, `/partners-mapa/`,
-  `/mascota/`, `/opina/`, `/jugadors/`, `/fotos-3x3/`, `/fotos-esdeveniments/`,
-  el mirall de `/premidonaesport/` (3 idiomes) i les fitxes de partner. Mateix
-  criteri que l'auditoria #78: `#FF3B41` sobre fons foscos, `--red-ink` sobre
-  fons clars, blanc pur sobre el vermell.
-- **`<dt>`/`<dd>` dins d'una `<dl>` de debò** a les 21 fitxes de partner i al
-  campus (abans, dins d'un `<div>` pla). `scripts/build-pages.py` i
-  `scripts/build-campus-fitxa.py` corregits al mateix lloc.
-- **Marcadors del mapa de partners amb nom** (`title`/`alt` a cada `L.marker`);
-  iframes d'Instagram amb `title`.
-- **PDF**: dels 7 documents enllaçats, 3 ja tenien l'arbre d'etiquetes complet.
-  Als altres 4 (presentació de club, dossier de patrocinis, «El Barna amb
-  dades» i el dossier de premsa orfe) se'ls ha posat `/Title` i `/Lang`, i els
-  enllaços que en deien només «PDF» ara porten nom, pàgines i pes.
-- **Vídeo d'`/opina/`**: no hi ha cap vídeo actiu (funcionalitat preparada i
-  apagada). `setupVideo()` ara exigeix `CFG.video.captions` a més
-  d'`enabled` i `src`, així que no es podrà activar mai sense subtítols.
-- **Menús amb `aria-expanded`** i Escape que en retorna el focus; galetes amb
-  el mateix comportament i el focus gestionat en tancar.
-- **Comprovació repetible**: `scripts/a11y-revisa.py` passa totes les pàgines
-  sense navegador (salt, `<main>`, `<h1>`, `alt`, formularis, iframes). Avui
-  torna zero.
-
-### Pendent
-
-1. **PDF sense arbre d'etiquetes complet** (ordre de lectura, encapçalaments):
-   la presentació de club, el dossier de patrocinis i «El Barna amb dades» són
-   exportacions d'una eina de disseny sense accés en aquest entorn. Mentre no
-   es refacin, l'alternativa accessible és la pàgina HTML equivalent, que ja
-   existeix per a cadascun.
-2. **`galeria/`** (l'app Next.js) no ha passat aquesta revisió.
-3. **Pàgines de cartells i materials per imprimir** (`partits/cartell.html`,
-   `opina/print/*`): generen una imatge, no es llegeixen. Queden fora.
-4. Els calendaris per equip són imatges pures (`generate-calendaris.py`,
-   Pillow): mai tindran text seleccionable; l'alternativa accessible és la
-   fitxa HTML de l'equip i el fitxer `.ics`.
-5. **`#pagLlista` del cercador** (`/cerca/`, `/404.html`, `/en/search/`,
-   `/es/busqueda/`) — trobat amb axe-core, `aria-required-children`: un
-   contenidor amb rol de llista sense cap `role="listitem"` a dins quan no hi
-   ha resultats. És a `js/cerca.js`, la funcionalitat de cerca de #78/#84, no
-   d'aquesta passada. No s'ha tocat perquè no hi ha cap ocurrència estàtica de
-   `pagLlista` al repositori: es crea sencer en JavaScript en temps
-   d'execució, i tocar-ho a cegues sense poder-ho provar a fons és més risc
-   que valor. Queda apuntat perquè qui toqui `cerca.js` ho vegi.
-
-## Accessibilitat · 25/08/2026 — icona a l'enllaç del peu
-
-L'Ana va preguntar si hi havia un logo de «web accessible» per posar al peu.
-No n'hi ha cap d'oficial: el que exigeixen les normatives (WCAG 2.2, EN 301
-549, RD 1112/2018) és una declaració enllaçada, no un segell, i el W3C
-desaconsella els logos de conformitat auto-atorgats sense auditoria externa
-perquè es poden llegir com una garantia legal que no es té.
-
-### Fet
-
-- L'enllaç «Accessibilitat» del peu (`scripts/i18n_chrome.py`) porta ara una
-  icona i el nivell de conformitat visible: **♿ Accessibilitat — WCAG 2.2
-  AA** (`Accesibilidad` / `Accessibility` en castellà i anglès), en comptes
-  del text pla. Icona marcada `aria-hidden="true"`: el lector de pantalla
-  només anuncia el text.
-- Nova regla `.foot-a11y` a `css/a11y.css` (secció 9), amb el vermell
-  aclarit de marca (`#FF3B41`, 5,40:1 sobre el peu fosc).
-- Aplicat a les 277 pàgines (ca/es/en) que enllacen `/accessibilitat/`.
-  Versió **1.1.2**.
-
-### Pendent
-
-Res específic d'aquest canvi. Els 5 punts pendents de la passada
-d'accessibilitat del 24/08/2026 (llista de dalt) segueixen oberts tal com
-estaven.
----
-
-## 25-08-2026 — L'estètica definitiva, aplicada (v1.2.0 – 1.2.1)
-
-El document «Estètica definitiva» del 25/08 substitueix «Franges i Extensa»
-com a guia. De les seves quatre decisions tancades, aplicades avui:
-
-- **Sense crema enlloc** — `#F4F1EC` fora de tot el lloc: tokens de
-  `css/barna.css`, `css/cerca.css`, i 179 fitxers passats per
-  `aplica-estetica.py`, que des d'ara tradueix qualsevol crema a blanc pur.
-  El vermell de l'escut hi guanya contrast (4,36:1 → 4,92:1, entra a l'AA).
-- **Groc només a la lletra, mai al fons** — token `--yel` amb la regla i els
-  contrastos escrits al costat. Al ticker (ara enllaç amb `data-cta`) i al
-  CTA d'Escoleta, tres portades. Correcció mesurada sobre el document: groc
-  sobre el vermell de l'escut dona 4,44:1, no 5,4:1; el botó groc va sobre
-  `--red-dark` (7,04:1).
-
-I de la tanda de decisions de l'Ana del mateix dia:
-
-- **Escoleta: de 4 a 8 anys** («nos quedamos de 4 a 8»). Corregides les dues
-  pàgines que deien 4-7 (blog «Quants equips» i /patrocinadors/, tres
-  idiomes). El flyer nou ja va amb 4-8.
-- **/premsa/moments/ traduïda**: /es/premsa/momentos/ i /en/premsa/highlights/,
-  pel circuit de la font única. 38 entrades per idioma, sitemap a 366 URL.
-- **Briefing refet per a la 26-27**: temporada i data noves, resultats del
-  sènior femení datats com a 2025-26, els dos sèniors inscrits a la Supercopa
-  segons el robot FCBQ, i xifres quadrades amb data.json (fora les «~2M
-  d'impressions»; dins les 439.000 visualitzacions verificades; 34+ equips
-  amb l'abast real; 400 jugadores i jugadors · 450 famílies).
-- **Flyer nou de l'Escoleta**: font HTML a `escoleta/flyer/` (noindex) +
-  PNG/PDF A5 a 300 ppp. Foto real de l'àlbum de la galeria.
-- **Vídeos de la mascota**: ja eren fora des del 24/08 (commit c589e7f4 per
-  recuperar-los). El tauler de pendents anava endarrerit en aquest punt.
-- **Panell d'analítica**: delegat («haz lo que consideres»). Proposta
-  triada: GitHub Action diària → GA4 Data API → JSON al repositori →
-  panell a /admin/. Pendent de construir i d'un service account de GA4.
-- **Newsletter**: el club ja té Brevo. Pendent que l'Ana passi l'URL del
-  formulari (la clau API no pot viure en un lloc estàtic).
-
-### Pendent de les quatre decisions de l'estètica — TANCAT (mateix dia, v1.3.0)
-
-- ~~**Mapa de navegació ≡ a totes les capçaleres**~~ **Fet.** `js/mapa.js`
-  (generat per `scripts/build-mapa.py` des de `i18n/routes.yml`) a 377
-  pàgines més via `scripts/mapa-aplica.py`; 108 saltades amb motiu (admin,
-  impremta, redireccions, galeria, mirall del Premi).
-- ~~**Els panells «Entrenaments» i «Descarrega info»**~~ **Fet.** A les tres
-  portades i a les dues vistes. La descàrrega tira de la porta existent
-  (Apps Script + casella de butlletí); quan arribi l'URL de Brevo s'hi
-  connecta l'enviament.
-- ~~**Els primers equips abans de la base**~~ **Fet.** #seniors puja per
-  sobre del formulari a les tres portades. La fitxa amb plantilla i staff
-  segueix esperant material (/jugadors/ buit).
-
-### Material · l'Ana avui no té temps (dit explícitament el 25/08)
-
-Tot el bloc de material queda aparcat sense data: sessió de fotos de
-l'Escoleta (ara mateix el millor material és l'àlbum
-escola-basquet-julio-torralba de la galeria, 91 fotos a 1772 px — el flyer
-ja en tira), Willy Hernangómez, galeries d'esdeveniments, nivells
-or/plata/bronze, Instagram de 6 partners, fitxes de Nova Farmàcia Clot i
-Clínica Dental 26, plantilla de /jugadors/, Tecnificació i Notícies, fotos
-de La Nau, logo de la Wilson.
-
----
-
-## 25-08-2026 · Nota de reconciliació — dues sessions van aplicar l'estètica alhora
-
-La branca del prototip (`claude/web-design-proposals-yd18ir`) i la tanda
-v1.2.0–1.3.1 de dalt van fer la mateixa feina en paral·lel el mateix dia. En
-fusionar-les ha manat la tanda v1.2.0–1.3.1, que era més completa; de la
-branca del prototip s'hi ha sumat el que faltava:
-
-- **«4 a 8 anys» als llocs que la tanda no cobria**: `suggestedMaxAge` del
-  JSON-LD de les tres portades, franges d'Escoleta de 3x3/campus/màgics en
-  castellà i anglès, els dos blogs afectats en es/en, els fitxers
-  d'`i18n/feina/` i `cerca-index.json`, i l'avís a `tests/README.md` perquè
-  ningú ho «arregli» de tornada a 4-7.
-- El PDF provisional `escoleta/materials/escoleta-info.pdf` de la branca
-  s'ha retirat: el supera el flyer real d'`escoleta/flyer/` (A5, 300 ppp).
-
-Referències del prototip que van originar les decisions (viuen fora del
-repositori, com a Artifacts):
-
-- Prototip navegable de 4 vistes: https://claude.ai/code/artifact/639494fb-9f78-4210-bede-ca28e4649565
-- «Estètica definitiva» (mockup viu + decisions): https://claude.ai/code/artifact/b51f10df-cb1d-47b7-867c-c8168a0225ea
-
-**Fotos noves que només viuen al prototip** (no són a `img/` ni `photos/`):
-quatre jugadors fent broma, l'alcalde Jaume Collboni amb un jugador
-d'Escoleta, tres seguidors a la grada. Si es volen a producció, passar-les
-per `scripts/build-blog-images.py`. ✅ La del grup de quatre assenyalant a
-càmera ja hi és: `photos/seniors_grup.jpg` → `img/blog/seniors-grup.webp`.
-
-### 25-08-2026 (nit) · La portada de franges, al disseny sencer de la proposta A
-
-Demanat expressament per l'Ana amb la captura del prototip («Quiero esta
-portada»). Aplicat a les tres portades (ca/es/en):
-
-- **Hero a dues columnes**: titular gran amb el primer bot, foto de
-  l'Escoleta amb peu i filet vermell, i el trio de botons (Vine a provar /
-  Entrenaments / ⬇ Descarrega el full) sota la foto.
-- **Les nou franges de la guia, en gran i amb aire** (l'Ana va demanar
-  recuperar-les totes: «es la guia»). Ordre intacte: Escoleta (sense foto
-  —la foto ja és al hero—), Portes obertes, sèniors sobre tinta amb la
-  foto nova de grup, femení amb les cares centrades, calendari en vermell,
-  el club, Observatori, Galeria i Escriu-nos. I el peu de pila
-  #SOMCLOT · El diari del Clot → · CA ES EN.
-- **El burger vell de la capçalera es retira** (display:none): duplicava el
-  mapa ≡ a dos dits de distància. El menú antic queda al marcatge.
-
-### 25-08-2026 (nit) · Proves d'UX de la portada nova i arreglo del cercador
-
-Bateria de proves amb Playwright sobre les dues vistes, els dos amples i
-els tres idiomes: cercador (obrir, escriure, resultats, tancar amb Esc),
-panell d'Entrenaments, diàleg de descàrrega, mapa ≡, commutador de vista,
-càrrega del calendari a l'extensa, enllaços de totes les franges (tots 200)
-i desbordament a 390 px. Tot en verd menys una cosa, que era exactament el
-que l'Ana veia al mòbil:
-
-- **El cercador no existia al mòbil.** `js/cerca.js` injecta el botó dins
-  de `.head-nav` de la capçalera, i a la portada aquell nav és
-  `display:none` per sota de ~1080 px: s'enduia el cercador. Arreglat
-  posant un botó propi `data-cerca-obrir` (que cerca.js respecta) fora del
-  nav, al costat del commutador d'idioma, a les tres portades. A mòbil es
-  queda en lupa sola (regla que css/cerca.css ja tenia).
-
-### 26-08-2026 · Auditoria completa d'UX i navegació
-
-Rastreig de 400 rutes internes (cap 404 real) + qualitat de 22 pàgines clau
-a 390 px (errors de JS, desbordament, imatges trencades, mapa ≡, tornada a
-inici) + interaccions (cerca des d'interiors, mapa, app de partits,
-formulari d'escriu-nos, fitxers .ics/.pdf de calendaris) + coherència del
-commutador d'idioma + teclat (enfocables i «salta al contingut»). Tot en
-verd amb una excepció real, arreglada:
-
-- **`/es/partners-mapa/` i `/en/partners-mapa/` trencats**: el circuit
-  d'i18n havia prefixat `/partners-mapa/` dins de les plantilles de
-  JavaScript (`href="${p.ig}"` → `href="/partners-mapa/${p.ig}"`), i això
-  trencava els 21 logos dels partners, els enllaços d'Instagram, els de
-  Google Maps i les fitxes. Restaurat com al català (8 casos per fitxer).
-  **Atenció si es torna a muntar la pàgina amb i18n-munta**: vigilar que
-  no reintrodueixi el prefix dins dels `${…}` — comprovar-ho al diff.
-
-Falsos positius coneguts del sandbox (a producció funcionen): les rajoles
-d'OpenStreetMap del mapa de partners i l'embed.js d'Instagram (extern,
-sense sortida a internet als tests); els `webcal://` de calendaris són el
-protocol de subscripció, no enllaços trencats.
-
-### 26-08-2026 · Tanda P1 del camí cap al 10 d'UX
-
-De la crítica d'UX demanada per l'Ana («sé crítico»), els quatre punts que
-costaven conversions, aplicats a les tres portades:
-
-1. **El CTA torna a la primera pantalla del mòbil**: «Vine a provar» era a
-   976 px (fold a 844); ara els botons van abans de la foto i cau a 454 px.
-2. **El calendari ja no es baixa a la vista franges**: 130 KB que només es
-   veien a l'extensa; ara es demanen quan la secció és visible o en
-   canviar de vista. (L'índex del cercador ja anava en «idle» i amb
-   excepció per a 2G/estalvi de dades: es deixa com està, és bon disseny.)
-3. **La barra d'acció inferior arreglada**: observava `#escoleta`, ocult a
-   franges, i sortia des del primer segon tapant contingut. Ara el
-   sentinella és el hero de la vista activa: surt en passar-lo i s'amaga
-   a dalt i al formulari.
-4. **Un sol nom per a /blog/ a la portada**: la franja i el peu de pila
-   diuen tots dos «Observatori Barna» (abans el peu deia «El diari del
-   Clot»). Pendent de vocabulari: el mapa ≡ encara en diu «Coneixement
-   Barna» — decidir el nom canònic a i18n/etiquetes.yml i regenerar el
-   mapa quan es toqui.
-
-Queden de la crítica: P2.5 (/escoleta/ al sistema visual — l'obra gran),
-P2.6 (contingut sota el peu #SOMCLOT), P2.7 (mesurar l'ús del commutador
-amb GA4 abans de decidir res), P3 (logo x3, menú vell al codi).
-
-### 26-08-2026 · /escoleta/ entra al sistema visual (P2.5 — l'obra gran, feta)
-
-La pàgina d'Escoleta tenia un vestit fosc propi, desconnectat del sistema:
-la família clicava «Vine a provar» des de la portada blanca i aterrava en
-el que semblava una altra web. Ara, a les tres llengües:
-
-- **Pell nova sobre els tokens del sistema** (paper blanc, tinta, vermell
-  de l'escut, Anton/Inter des de /css/fonts.css): el hero fosc es queda
-  com a única superfície de tinta —com el masthead de la portada— amb la
-  foto d'arxiu en B/N; Portes Obertes i el tancament són superfícies
-  vermelles; la resta, paper blanc amb filets, targetes d'alumni i stats
-  amb vora fina, i el mateix llenguatge que les interiors.
-- **Barra superior clara** com la resta del web, amb **cercador** (abans
-  aquesta pàgina no en tenia: cerca.js no trobava on penjar el botó) i el
-  «Salta al contingut» ara ocult fins al focus, com toca.
-- Marcatge intacte: tot el contingut, ancoratges (#historia, #portes-
-  obertes), JSON-LD i FAQ es queden com eren. El castellà encastat al
-  marcatge català (data-lang="es", ocult) segueix pendent de neteja.
-- Arreglada de pas una col·lisió antiga: la classe .cta feia de fila de
-  botons i de secció vermella alhora; la superfície vermella ara és només
-  de la secció (abans pintava una banda vermella espúria a «L'Escoleta,
-  avui»).
-
----
-
-## 26-08-2026 — Camí cap al 10 (accessibilitat, rendiment, estètica): el que depèn de l'Ana
-
-De la proposta per pujar del 9 al 10 les tres àrees, aquest és el bloc que
-no és codi. La resta (9 accions: alts de la galeria, avís del cercador,
-versió accessible dels PDF, axe a l'app de galeria, compressió dels 4 PDF,
-pressupost de rendiment a CI, panell d'analítica, flyer en WebP, hero de
-l'Escoleta amb les fotos de l'àlbum de 1772 px) es pot fer sense esperar
-cap d'aquests punts.
-
-### Material
-
-- **Sessió de fotos de l'Escoleta** — ja apuntada més amunt; segueix sent
-  la inversió més rendible de tota la web. Mentrestant el hero es cobreix
-  amb les millors fotos de l'àlbum `escola-basquet-julio-torralba` (91 a
-  1772 px).
-- **Sessió de fotos de La Nau** — per convertir `/instal-lacions/` en la
-  casa del club. L'estructura de la pàgina es pot muntar abans amb el
-  material actual, deixant els forats de foto marcats.
-- **Nivells or/plata/bronze dels 22 partners** — ja apuntat; cada fitxa es
-  toca en minuts quan arribi la dada.
-- **Logotip de la Wilson** (SVG o PNG amb fons transparent, demanar-lo a
-  la marca) i **fitxes de Nova Farmàcia Clot i Clínica Dental 26** — ja
-  apuntats.
-
-### Decisions d'un minut
-
-- **Service account de GA4** per al panell d'analítica d'`/admin/`
-  (proposta ja triada el 25/08: Action diària → GA4 Data API → JSON →
-  panell). Hi ha guia de 10 minuts preparada; sense això el panell no pot
-  llegir dades.
-- **Nom canònic del blog**: la portada diu «Observatori Barna» i el mapa ≡
-  diu «Coneixement Barna». Quan es triï, es fixa a `i18n/etiquetes.yml` i
-  es regenera el mapa.
-
----
-
-## 26-08-2026 — El bloc de codi del camí cap al 10, fet (v1.4.0)
-
-Les 9 accions de codi de la proposta, executades i comprovades (a11y-revisa
-459 pàgines a 0, paritat i contingut d'i18n nets, lint 0, cercador 74/74,
-pressupost de pes en verd):
-
-- **Alts reals a la galeria** (3 idiomes) amb àlbum i posició, i suport
-  `ev.alts` per a descripcions per foto — quan es vulgui, el pas següent és
-  el camp de descripció al pujador d'admin, que ja té on desar.
-- **El listbox buit del cercador**, arreglat a `js/cerca.js`.
-- **Els 4 PDF grans comprimits** (12,6 → 6,2 MB) amb Title/Lang conservats,
-  pesos actualitzats i, als 3 sense arbre d'etiquetes, la nota que la versió
-  accessible és la mateixa pàgina.
-- **Hero de l'Escoleta**: 4 fotos reals de l'àlbum d'estudi en rotació
-  diària a les tres portades (h1 al marcatge; variants h2-h4 pel dia del
-  mes). Les fonts són `img/escoleta-h{1..4}[@2x].webp`.
-- **Pressupost de pes a CI**: `pes-pressupost.yml` falla el PR si un fitxer
-  passa del sostre del seu tipus; excepcions amb motiu a `pes-excepcions.txt`.
-- **Panell d'analítica** a `/admin/analitica/` + workflow `analitica.yml`
-  (cada matinada) + `.github/scripts/ga4-informe.py`. **Espera els dos
-  secrets de l'Ana** (`GA4_SERVICE_ACCOUNT_JSON`, `GA4_PROPERTY_ID`);
-  instruccions de 10 minuts a la capçalera de l'script. Fins llavors el
-  panell ho explica i el cron surt en verd.
-- **L'app de galeria** (Next.js): caselles amb teclat i botons amb nom;
-  type-check en verd.
-
-**Una troballa que desfà un pendent**: el PNG d'1,5 MB del flyer de
-l'Escoleta no l'enllaça cap pàgina — és el màster d'impremta (la web només
-serveix el PDF de 456 KB). No hi havia res a arreglar; queda com a excepció
-documentada del pressupost de pes.
-
-**El que segueix esperant l'Ana** és el bloc del 26/08 de més amunt:
-service account de GA4, nom canònic del blog, sessions de fotos (Escoleta i
-La Nau) i dades de partners.
-
----
-
-## 26-08-2026 (tarda) — Segon barrido de codi: el tablón, net (v1.4.1)
-
-Repassat TOT el tablón buscant el que fos codi i seguís obert. Fet: Zapic
-fora de les 6 tires de partners i del repositori (la baixa era decisió
-tancada), P2.6 (la tira #SOMCLOT ja no fa de fals final: és l'últim bloc
-abans del peu), P2.7 (esdeveniment `canvi_vista` a GA4), P3-logo (capçalera
-amb `logo-head.png` de 8 KB en lloc de l'escut sencer), i la neteja
-d'/escoleta/ (113 elements de castellà ocult, `data-lang` i el JS del
-commutador antic, sense tocar cap text català). Comprovat amb navegador a
-1280/390 i tota la bateria en verd. El paràgraf desfasat de `mapa-web-cbgb`
-ja estava corregit d'una sessió anterior.
-
-**P3 (menú vell): es queda, i és una decisió.** El `nav#menu` ocult de les
-portades no es treu: el codi ja deia «queda al marcatge per si es recupera»
-i són ~30 enllaços interns en HTML servit que els cercadors llegeixen (el
-mapa ≡ els pinta amb JavaScript). Si l'Ana el vol fora igualment, és un
-canvi de cinc minuts — però que consti el cost SEO.
-
-**Si s'obre pull request d'aquesta branca**: la neteja d'/escoleta/ toca
-només la pàgina catalana (marcatge, cap text). Si la comprovació de paritat
-la marca, la línia per a la descripció del PR és
-`i18n-nomes-un-idioma: neteja de marcatge sense canvi de text`.
-
-**El que queda al tablón ja NO és codi**: secrets de GA4, nom del blog,
-sessions de fotos, dades de partners, URL de Brevo, columna newsletter a
-l'Apps Script, decisions de campus/formulari/PIN, autoritat SEO externa i la
-migració de les notícies antigues de cbgrupbarna.com (projecte de contingut,
-no un arreglo).
-
----
-
-## 27-08-2026 — Decisió de l'Ana: NO hi ha nivells or/plata/bronze
-
-«No se funciona així»: les col·laboracions del club no van per nivells, i el
-concepte desapareix de tot arreu. No cal esperar cap dada — el pendent
-«nivells dels 22 partners» queda TANCAT per decisió, no per resposta.
-
-Comprovat on era de veritat: **cap pàgina pública ho deia** (els packs de
-/patrocinadors/ es diuen «Entrada · Presència digital…» i no s'han tocat).
-El rastre era intern i s'ha tret:
-
-- `data.json`: fora el camp `nivell` dels 21 partners i la nota `_nivells`.
-- La skill `mapa-web-cbgb`, que ho llistava com a pendent de confirmar.
-- Aquest tauler: totes les mencions anteriors a «nivells or/plata/bronze
-  pendents» queden anul·lades per aquesta decisió (les entrades velles es
-  conserven com a històric).
-
-> Les skills personals de captació (fora d'aquest repositori) encara parlen
-> de nivells Oro/Plata/Bronce com a plantilla: si l'Ana vol, s'actualitzen
-> en una sessió on estiguin carregades com a fitxers.
-
----
-
-## 27-08-2026 — Alts reals a la galeria, fase final (v1.5.0)
-
-Fet: 141 fotos amb text alternatiu redactat a mà en els tres idiomes
-(Escola de Bàsquet 91 + visita Collboni 50), camp de descripció opcional al
-pujador d'admin (es desa a `ev.alts`, el generador el conserva), cada
-idioma amb el seu joc (`alts`/`alts_es`/`alts_en`) i, de passada, els
-enllaços directes `#album` arreglats a `/es/fotos/` i `/en/fotos/` (no
-obrien res). Bateria completa en verd.
-
-**Criteri per a la resta (1.900 fotos)**: són ràfegues d'esdeveniment on la
-descripció a mà no diria gaire més que l'alt contextual automàtic que ja
-tenen («Àlbum — foto N de M», trilingüe). Si es vol alt a mà en algun àlbum
-més, ara és només omplir `ev.alts` — la maquinària ja hi és.
-
-**Per a l'Ana · trobat mirant l'àlbum de l'Escola**: hi ha ~11 captures de
-pantalla de mòbil (cerques de Google i fitxes federatives de jugadors,
-posicions 25-34 de l'àlbum) que semblen pujades per error entre les fotos.
-No s'ha esborrat res — digues si les treus o s'hi queden.
-
-## 27-08-2026 — Decisió de l'Ana: les captures de l'àlbum de l'Escola es queden
-
-Les 10 captures de pantalla de mòbil de l'àlbum «Escola de Bàsquet – Julio
-Torralba» (posicions 26-35: cerques i fitxes federatives d'exjugadors com
-Roger Fornas, David Mejía o Daniel Iruela) **no són un error i no es
-treuen**: l'Ana ho ha confirmat en veure-les. Expliquen on han arribat els
-que van començar en aquesta pista. Ja tenen text alternatiu propi que diu
-que són captures. Que ningú les «netegi».
-### 26-08-2026 · El contingut enterrat i la neteja (bloc groc del camí cap al 10)
-
-**El fals final.** El peu negre #SOMCLOT tancava la pila de portes i, com
-que duia el commutador d'idioma, es llegia com el peu de la pàgina: tot el
-que venia després —formulari inclòs— quedava mort. Ara la banda és més
-prima, no duu idiomes (ja hi són a la capçalera i al peu real) i el seu
-enllaç empeny cap al formulari: «Vols informació? ↓».
-
-**La navegació duplicada surt de la vista ràpida.** `#acces` («Tot a mà»,
-3.113 px) tenia 23 enllaços, 19 dels quals ja eren al mapa ≡ — és el bloc
-de llista plana que la guia diu que les franges van substituir. Passa a
-`only-extensa`, igual que `#presentacions`. Els quatre enllaços que només
-vivien allà (`/briefing/`, `/posicionament/` i dos PDF) entren al mapa ≡
-via `scripts/build-mapa.py`. La FAQ es queda visible a les dues vistes a
-propòsit: el `FAQPage` del JSON-LD ha de correspondre a contingut visible.
-
-Resultat a la vista de franges: **15.254 px → 11.569 px** i **1.392 KB →
-989 KB** al mòbil (comptant també la tanda P1).
-
-**Galeria accessible de debò.** Les miniatures deien «Foto 1», «Foto 2»…
-i el visor sempre «Foto del club». Ara el text alternatiu porta context
-real: «Foto 3 de 192 · JUGADORS/ES 2526 · La Nau del Clot», tant a les
-miniatures com al visor, als tres idiomes. **No és descripció foto a
-foto** —això segueix necessitant que algú les escrigui—, però qui fa
-servir lector de pantalla passa de no rebre res a saber on és.
-
-**Neteja.** Fora el menú vell de la portada (marcatge, CSS i JS: era
-inabastable des que hi ha el mapa ≡) i el `rel="shortcut icon"` redundant.
-A `/escoleta/`, fora els 113 blocs de castellà encastat i ocult que
-quedaven del commutador antic: 75,3 KB → 59,1 KB, amb el text visible
-verificat idèntic abans i després.
-
-**`js/cerca.js`**: el `role="listbox"` ara només s'aplica quan hi ha
-opcions de debò (abans era fix i axe-core hi marcava
-`aria-required-children` en els estats sense resultats). Tanca el punt 5
-de la llista d'accessibilitat del 24/08.
-
-**Ja no calia**: el paràgraf desfasat de la skill `mapa-web-cbgb` sobre
-`/femeni/` ja s'havia corregit en una passada anterior.
-
----
-
-# Benchmark de webs professionals · Valencia Basket, Real Madrid i FC Barcelona (27/08/2026)
-
-Anàlisi demanada per l'Ana: «per ser una web professional, què ens falta?».
-Comparades les webs de Valencia Basket (valenciabasket.com), Real Madrid
-bàsquet (realmadrid.com) i FC Barcelona bàsquet (fcbarcelona.cat) amb
-l'inventari complet de cbgrupbarna.info (`llms.txt` + aquest document).
-
-## El que ja tenim al seu nivell (o millor)
-
-Calendari i resultats automatitzats amb la FCBQ, fitxes d'equip, calendaris
-descarregables + `.ics`, tres idiomes (el Valencia només en té un), història,
-organigrama, instal·lacions, galeria, kit de premsa, pàgina d'empreses amb
-Barna Business, mapa de partners, FAQ amb cercador que respon, legal i
-accessibilitat complets. Cap dels tres grans té cercador que respon ni `.ics`
-per equip.
-
-## El que els tres tenen i a nosaltres ens falta
-
-Per ordre d'impacte realista per a un club de barri:
-
-| # | Gap | Qui el té | Què seria al Barna | Estat |
-|---|---|---|---|---|
-| 1 | Plantilla amb fitxes de jugador/a | Els 3 (foto, dorsal, perfil) | `/jugadors/` amb foto i fitxa, com a mínim dels dos Sènior A | Ja pendent: `/jugadors/` sense acabar. **Es desbloqueja amb la sessió de setembre** |
-| 2 | Actualitat/Notícies (cròniques, fitxatges, comunicats) | Els 3, a diari | El blog són guies, no notícies. Crònica del cap de setmana + anuncis = la secció «Notícies» que va quedar buida al menú | Pendent de decisió de l'Ana (18/08) |
-| 3 | Primer equip a dalt | Els 3 obren amb el primer equip | Sènior Fem A i Masc A a portada abans que la base | Ja a la llista de marca, punt 2. **Es desbloqueja amb la sessió de setembre** |
-| 4 | Vídeo propi (RM Play, Barça Play) | Els 3 amb OTT | No un streaming: una pàgina `/video/` amb highlights embeguts (YouTube/IG) per partit | No existeix ni estava anotat |
-| 5 | Palmarès | Els 3 com a secció pròpia | Pàgina `/palmares/`: títols, ascensos, Supercopa, sotscampionat dels Màgics | No existeix (està diluït a història). Una tarda de feina; és el que més «club gran» transmet a un patrocinador |
-| 6 | Zona de socis/afició (Culers, Madridistas, Socios VB) | Els 3 | Versió barri: «Avantatges de la família Barna» empaquetant els descomptes que ja hi ha a les 22 fitxes de partner. Cost gairebé zero, i argument de venda per captar més partners | Zona de socis sense migrar de la web antiga |
-| 7 | Botiga | Els 3 | Bloquejada amb motiu: última temporada amb Wintym, marca nova per negociar. Preparar `/botiga/` per al dia que es firmi | Anotat a MIGRACIO-WEB-ANTIGA.md |
-| 8 | Newsletter operativa | Els 3 | Ja es recull el consentiment; falta triar eina (Brevo és gratuït fins a 300 enviaments/dia) | Pendent |
-| 9 | Experiències/matchday (tour, gameday) | Sobretot el Valencia | La Nau del Clot com a actiu de marca: dia de partit, com viure'l, activacions | Ja a la llista de marca, punt 3 — falta la sessió de fotos |
-| 10 | App | Els 3 | No compensa: els `.ics` + WhatsApp ja cobreixen el que la seva app fa per una família | Descartada |
-
-## Lectura estratègica
-
-- El benchmark **confirma la llista de la fase de marca**: els punts 1, 3 i 9
-  ja estaven identificats aquí. El que els grans afegeixen de nou són
-  **palmarès, vídeo, notícies i el carnet d'afició** (gaps 2, 4, 5, 6).
-- **La palanca més barata i diferencial és la 6**: el Valencia ven «descuentos
-  para miembros» com a benefici premium; nosaltres ja tenim 22 fitxes de
-  partner amb ofertes. Empaquetar-ho és ordenar el que existeix.
-- Les que depenen de material de l'Ana: notícies (definir què és «Notícies»),
-  fitxes de jugadors (fotos de plantilla), botiga (marca nova).
-
-## Sessió de fotos dels 4 sèniors · setembre 2026 (decisió de l'Ana, 27/08)
-
-L'Ana farà fotos als quatre equips sènior al setembre. Amb aquest material es
-tanquen d'un cop els gaps 1 i 3 i es renova la imatge dels equips. Brief de
-captura perquè la sessió serveixi per a tot d'una vegada:
-
-**Què treure per cada equip** (×4: Fem A, Fem B, Masc A, Masc B):
-
-1. **Foto d'equip horitzontal** — per a la fitxa de `/partits/equips/` i el
-   bloc de sèniors de la portada. Aire per dalt: la web retalla des de dalt
-   (es perd terra, mai caps).
-2. **Foto d'equip vertical (9:16)** — la mateixa per a Instagram (post fixat /
-   destacada): web i perfil amb la mateixa imatge, com mana el sistema.
-3. **Retrat individual de cada jugador/a** — mateix fons i mateixa llum per a
-   tothom, per a `/jugadors/`. Pla mitjà; millor tots iguals que tots creatius.
-4. **3-4 d'acció/ambient a La Nau** — per al hero editorial de portada i la
-   franja «Els sèniors» (va sobre tinta amb foto alta: millor si n'hi ha
-   alguna de vertical amb força).
-
-**Regles tècniques** (del sistema visual, `web-cbgb` §3): originals de càmera
-sense passar per WhatsApp (cap foto ampliada), nítides i ben exposades, cap
-cara tallada per l'enquadrament. Es processen amb
-`scripts/build-blog-images.py`. Els originals, amb còpia fora del repositori.
-
-**Aprofitar el mateix dia de càmera per a l'Escoleta (4-8 anys)** si ja hi ha
-entrenaments: és la sessió pendent més antiga d'aquest document i la foto que
-obre les tres portades.
-
----
-
-## 27-08-2026 (nit) — Accés al panell d'admin: falta el `GOOGLE_CLIENT_ID`
-
-Fusionat a `main` (#105): pestanya discreta «Admin» a la cantonada superior
-dreta de gairebé totes les pàgines (injectada des de `js/galetes.js`,
-enllaça a `/admin/`), i codi d'accés nou a les seccions protegides de
-`/partits/app.html` (només se'n guarda l'empremta SHA-256; el codi en clar
-se li ha donat a l'Ana per xat, no viu al repositori).
-
-### Pendent — cal l'Ana
-
-El panell `/admin/` **encara no deixa entrar ningú**: `admin/config.js` té
-`GOOGLE_CLIENT_ID: ""`. Falta:
-
-1. Crear l'ID de client OAuth a
-   [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
-   amb el compte `voluntarisgrupbarna@gmail.com` (passos exactes al capçal
-   del mateix fitxer `admin/config.js`).
-2. Enganxar-lo a `GOOGLE_CLIENT_ID` i pujar el fitxer.
-3. Revisar `ALLOWED_EMAILS` al mateix fitxer — ara només hi ha
-   `voluntarisgrupbarna@gmail.com` i `marqueting@cbgrupbarna.info` (repetit
-   dues vegades per error). Si l'Ana ha d'entrar amb un altre correu, cal
-   afegir-l'hi.
-
----
-
-## 26-08-2026 · Auditoria de rendiment, SEO, GEO i contingut (v1.3.2)
-
-Passada completa sobre les 408 pàgines HTML: rendiment (scripts blocants,
-format i pes d'imatge, `width`/`height`, `fetchpriority`), SEO (títols,
-meta descriptions, og:image, h1, JSON-LD), i contingut (paritat d'índexs
-de blog, textos tallats amb «…»).
-
-### Fet
-
-- **`js/galetes.js` en `defer`** a les 382 pàgines i als tres generadors.
-  Verificat amb navegador real que el consentiment i GA funcionen igual.
-- **34 imatges del blog de JPG a WebP** (heros retallats a 4:3, cards a
-  16:10, ancoratge a dalt). 2617 KB en total, −34 % respecte als JPG
-  originals. `width`/`height` HTML actualitzats a 42 pàgines.
-- **Hero d'article: de `loading="lazy"` a `fetchpriority="high"`**, perquè
-  és l'LCP de la pàgina.
-- **604 imatges reben `width`/`height`** per evitar el CLS mentre
-  carreguen.
-- **84 meta descriptions tallades amb «…»** reescrites com a frases
-  senceres de ≤165 caràcters, també als JSON d'`i18n/feina/` perquè cap
-  `munta` les reverteixi.
-- **8 `og:image` de /es/ i /en/** apuntaven a fitxers inexistents; ara
-  apunten a l'actiu real.
-- **Portada: dos `h1` → un.** El del masthead passa a `<p>` (classe i id
-  preservats).
-- **Títols i descriptions llargs** escurçats (campus, empreses, 3x3,
-  briefing, blog, tres idiomes).
-- **Fitxes de fotos del 3x3** en castellà i anglès: recuperen el JSON-LD
-  que només tenia la catalana.
-- **Índex del blog en castellà i anglès**: 17 targetes amb imatge i text
-  complet (abans, 14 sense imatge i amb text tallat amb «…»).
-- **Fitxa de Melosa** en es/en: descriptions curtes (66 car.) ampliades
-  fins als ~134 del català.
-- **`scripts/build-pages.py`** actualitzat: `defer` a galetes, heros en
-  WebP amb `fetchpriority="high"`, helper `mida_imatge()` per llegir
-  dimensions reals.
-- Sitemap, hreflang, paritat i18n: comprovats, cap error.
-
-### Pendent de material de l'Ana
-
-- **Dues fotos del blog amb gra**: `entrenadores-basquet-barcelona-hero`
-  (~272 KB en WebP) i `campus-basquet-barcelona-guia-hero` (~175 KB) surten
-  pesades perquè l'original té gra fotogràfic, que és incompressible. La
-  solució no és codi: cal reexportar des dels originals de càmera sense
-  gra, o triar una altra foto.
-
-### Pendent de desenvolupar
-
-- **Sincronitzar `scripts/build-pages.py` amb l'HTML publicat del blog.**
-  El generador està desincronitzat: executar-lo avui esborra el commutador
-  d'idioma, l'enllaç a `a11y.css`, les fotos inline dels articles i els
-  heros actuals. Tots els canvis d'aquesta tanda s'han fet tant al
-  generador com a les pàgines, però el generador segueix sense saber de les
-  peces afegides posteriorment (nav d'idiomes, capa d'accessibilitat, fotos
-  d'article). Cal una sessió dedicada per posar-lo al dia.
-
----
-
-## 27-08-2026 — Decisió de l'Ana: una sola portada, sense commutador (v2.0.0)
-
-«Quiero esta portada no dos.» Fora el commutador Franges/Extensa a les tres
-portades: es queda només la vista de franges (el hero de dues columnes, les
-nou franges i la barra `#SOMCLOT`), i desapareix la vista extensa sencera amb
-el seu botó de canvi de vista.
-
-**Tanca P2.7 per decisió, no per dada.** El pendent deia «mesurar l'ús del
-commutador amb GA4 abans de decidir res» (l'esdeveniment `canvi_vista` es va
-afegir el 26/08 expressament per això). Els secrets de GA4
-(`GA4_SERVICE_ACCOUNT_JSON`, `GA4_PROPERTY_ID`) mai s'han arribat a donar
-d'alta, així que no hi ha hagut mai cap xifra real de quanta gent canviava de
-vista. L'Ana ha decidit sense esperar-la — és la seva prerrogativa, i el
-pendent queda tancat aquí, no reobert.
-
-**Què surt de les tres portades** (`index.html`, `es/index.html`,
-`en/index.html`):
-
-- El `.masthead` fosc («Qui som»), que repetia el hero de franges i només
-  sortia a l'extensa.
-- El calendari encastat de la catalana (`#calendari` / `.e-jornada`,
-  `only-extensa`). **No es toca** el `#calendari` de la castellana i
-  l'anglesa: en aquelles dues mai va portar el commutador (era una secció
-  normal, sempre visible) — no formava part del sistema que es desmunta.
-- Els blocs «Paritat», «Cultura del Progrés», «El Barna per dins» i
-  «Observatori Barna».
-- `#acces` («Tot a mà») i `#presentacions`: tots els enllaços que només hi
-  vivien ja són al mapa ≡ o tenen pàgina pròpia (`/presentacions/`,
-  `/briefing/`, `/posicionament/`), així que no calia migrar-ne cap.
-- El botó `.view-toggle` i tot el JS del commutador: `sessionStorage`,
-  l'esdeveniment `canvi_vista`, l'atribut `data-view` a `<html>`.
-
-Es queden: les nou franges, el hero, la barra `#SOMCLOT`, el formulari i la
-FAQ — tot el que ja era comú a les dues vistes.
-
-**Comprovat**: `i18n-paritat.py` (147 pàgines, cap endarrerida),
-`i18n-contingut.py` (294 traduccions, cap avís), `i18n-lint.py` (0 errors
-nous), `a11y-revisa.py` (459 pàgines, 0 amb res a mirar) i
-`pes-pressupost.py` (tot dins del sostre), tots en verd. Playwright a 1280 i
-390 px als tres idiomes: sense commutador, sense `.masthead`, sense
-desbordament horitzontal.
-
-Versió **2.0.0** (MAJOR): canvia com es fa servir la portada, no és un
-arreglo ni una funcionalitat nova.
-
----
-
-## 28-08-2026 · Google Search Console, primera lectura
-
-L'Ana ha donat d'alta la propietat a **Google Search Console** i n'ha
-compartit les primeres captures. És una eina nova per al club: **fins ara
-només hi havia GA4** (§ «Pendent de desenvolupar» → Dashboard d'analítica),
-que mesura visites; Search Console mesura **com et troba Google abans que
-la gent arribi al web** (impressions, clics, posicions, consultes).
-
-### Primera lectura (últims 28 dies)
-
-Tot el panell marca «Anteriorment: 0» — és la propietat acabada de
-verificar, sense històric previ, no un salt real d'un dia per l'altre.
-
-- **41 clics / 2,2 mil impressions** → CTR ~1,9%.
-- **La portada concentra el 37% dels clics** (15 de 41). `/es/baloncesto-
-  femenino/` (3) i `/campus/` (2) ja en generen per compte propi, no només
-  via portada.
-- **`/en/3x3/` hi apareix**, i explica el 17% de clics fora d'Espanya
-  (Itàlia, Suïssa, R. Dominicana, França): trànsit del torneig, no de marca.
-- **Consultes:** gairebé totes de marca («grup barna basquet», «grup
-  barna»); «baloncesto 3x3» i «barcelona 3x3 basketball» ja hi entren sense
-  dir el nom del club. Encara no hi apareixen cerques genèriques del tipus
-  «club bàsquet Barcelona».
-
-### Pendent de decisió
-
-- **Amb qui queda vinculada la propietat de Search Console** (compte de
-  Google del club, com GA4) i si convé donar-hi accés a més d'una persona.
-- Si val la pena incorporar Search Console al «Dashboard d'analítica de la
-  web» pendent (GA4 mesura què fa la gent al web; Search Console, com hi
-  arriba des de la cerca) o fer-ne seguiment manual mensual mentre el
-  dashboard no existeix.
-
----
-
-## 29-08-2026 — Els cinc punts «purament tècnics», fets
-
-L'auditoria d'aquest mateix document (§ inici) en va destriar cinc que no
-necessitaven cap decisió, material ni compte extern de l'Ana. Fets tots cinc,
-amb una correcció important pel camí: **dos d'ells no eren tan «purs» com
-semblava sobre el paper**, i val la pena explicar per què.
-
-### 1. `scripts/build-pages.py` sincronitzat (parcial, i documentat el que no)
-
-Comparat el que genera el script amb el que hi ha publicat de debò (sis
-articles del blog + `partits/calendaris/`), regenerant-ho en una còpia i fent
-`diff` línia a línia. Trobats i arreglats al `head()` compartit —toca totes
-les pàgines que generi el script, no només el blog—:
-
-- **Faltava `css/a11y.css`, `js/mapa.js` i el giny de xat de WhatsApp
-  (Tawk.to)**: si s'executés avui, les pàgines regenerades sortirien sense
-  cap dels tres.
-- **El selector d'idioma sortia com `<div>` sense `aria-label` ni
-  `aria-current`**, amb un `<style>` propi que xoca amb `.lang-switch` de
-  `css/barna.css` (que ja té les mides tàctils AA). Ara és `<nav>`, amb els
-  mateixos atributs que porten les pàgines reals, i sense estil duplicat.
-- El peu (`i18n_chrome.py → peu()`) ara emet `cerca.js` i `mapa.js` al final
-  del `<body>`, com fan les pàgines publicades (abans `cerca.js` només
-  sortia dins de `<head>` i `mapa.js` no sortia mai).
-- **`i18n/diccionari.yml` tenia el peu desactualitzat**: enllaçava
-  `/basquet-femeni/` (avui una redirecció `noindex`) en comptes de `/femeni/`,
-  i li faltaven els enllaços a Newsletter i Bústia de suggeriments —presents
-  a totes les pàgines reals— a les tres estructures (ca/es/en). Corregit.
-
-**El que NO s'ha tocat, i per què.** Regenerar els sis articles de debò
-—no només comparar-los— hauria esborrat contingut real: el `FAQPage` que
-avui gestiona `generate-faq.py` (amb marcadors `FAQ:START`/`FAQ-LD:START`)
-xoca amb el `FAQPage` que el propi generador construeix inline dins del
-`@graph`, i les dades de l'`ARTICLES` de Python han quedat desfasades
-respecte al text publicat (per exemple, «32 equips federats» al codi font
-davant dels «34» que diu avui la pàgina real, i les dimensions de la foto de
-capçalera no coincideixen amb el fitxer real). Posar-ho tot al dia sense
-perdre cap d'aquests canvis fets a mà necessita revisar article per article,
-no és una sola sessió. Queda anotat com a pendent real de desenvolupament,
-més concret que abans.
-
-### 2. `/palmares/` (ca/es/en) — fet sencer
-
-Pàgina nova amb el que el club ha guanyat de debò, sense inventar-hi res: els
-dos sèniors a la Supercopa FCBQ 2025-26 i 2026-27 (únic club de Barcelona amb
-els dos alhora), el sènior femení 4t amb 17-7, la Judit Ortiz a l'All Star i
-la Marta Zori entre les màximes anotadores de perímetre, el sotscampionat dels
-Barna Màgics a la Lliga Catalana ACELL i el tercer lloc a La Seu d'Urgell, i
-—com a arrel històrica— els tres Campionats de Barcelona i el Campionat
-d'Espanya de tennis de taula dels anys seixanta. Amb JSON-LD, sitemap,
-`llms.txt`, mapa ≡ i quatre preguntes noves a `i18n/faq.yml`. Comprovat amb
-`i18n-paritat`, `i18n-contingut`, `i18n-lint`, `a11y-revisa` i Playwright a
-390 px: tot en verd.
-
-### 3. «Avantatges de la família Barna» — la infraestructura, no els avantatges
-
-**Aquí el document original s'equivocava.** Deia «ja tenim 22 fitxes de
-partner amb ofertes», donant per fet que n'hi havia. Comprovat fitxa a fitxa:
-**cap dels 22 partners té avui cap avantatge publicat** —les 22 fitxes porten,
-des de fa temps, el mateix text de reserva («X encara no té cap avantatge
-publicat per a la família del Barna») amb un botó de WhatsApp perquè
-l'ofereixin. No hi havia res a empaquetar.
-
-En comptes de fabricar descomptes que no existeixen, s'ha construït el que
-sí és tècnic i real: `scripts/build-avantatges-familia.py`, que llegeix la
-secció «Oferta per a la família del Barna» de les tres versions de cada
-fitxa, descarta el text de reserva i publica només les ofertes autèntiques a
-`/avantatges-familia/` (`/es/ventajas-familia/`, `/en/family-benefits/`).
-Avui la pàgina surt honesta: cap avantatge encara, la graella dels 21
-partners (data.json en té 21, no 22) i una crida perquè qui en vulgui oferir
-un escrigui pel WhatsApp del club. El dia que un partner en confirmi un,
-tornar a executar l'script el hi treu sol. De pas, corregit a `llms.txt` un
-altre residu vell: encara hi deia «Nivells Or, Plata i Bronze», decisió
-revertida el 27/08/2026.
-
-### 4. `/video/` — no `/premsa/instagram/` duplicat, un tema a part
-
-Abans de construir-lo, comprovat a `llms.txt`: **ja existia una pàgina que fa
-gairebé el mateix**, `/premsa/instagram/`, amb 42 publicacions embegudes i
-pensada per a premsa. Duplicar-la hauria estat exactament l'error que
-`mapa-web-cbgb` demana evitar. La diferència real: aquella barreja fotos i
-vídeos per a periodistes; el que faltava —i el que demanava el benchmark—
-és un aparador només de vídeo, per a famílies i aficionats, al menú
-principal. `/video/` (`/es/video/`, `/en/videos/`) reutilitza els mateixos
-13 reels ja verificats (relat nou, no còpia literal), organitzats per tema
-—temporada, Escoleta i Campus, el club per dins, comunitat i partners—, amb
-el mateix mecanisme d'`embed.js` que ja funcionava a `/premsa/instagram/`, i
-enllaça cap allà per a qui vulgui el recull complet. Amb JSON-LD, sitemap,
-`llms.txt`, mapa ≡ i dues preguntes noves a `i18n/faq.yml`.
-
-### 5. Accessibilitat de `galeria/` (Next.js) — auditoria estàtica, feta i amb arreglos
-
-No hi ha credencials de Supabase en aquesta sessió (el mateix bloqueig
-apuntat al panell d'analítica), així que no s'ha pogut fer una passada amb
-navegador real i dades reals. **Sí que s'ha pogut auditar tot el codi font**:
-`npx tsc --noEmit` en verd, i un repàs de tots els `<button>` i enllaços
-amb icona sense text visible. Trobats i arreglats **set casos reals** on
-l'única pista per a un lector de pantalla era un atribut `title` (que no es
-llegeix sempre) o, en un cas, res de res:
-
-- `Navbar.tsx`: l'enllaç a `/admin` (icona d'engranatge) no tenia ni `title`
-  ni `aria-label` — ara en té.
-- `Navbar.tsx`: el botó de tancar sessió només tenia `title` — ara també
-  `aria-label`.
-- `AdminClient.tsx`: els tres botons d'accions d'un event (veure, publicar/
-  ocultar, eliminar) només tenien `title` — ara també `aria-label`.
-- `login/page.tsx`: els tres botons d'enviar formulari perdien tot el text
-  accessible mentre carregaven (només quedava la icona giratòria) — ara
-  porten un `aria-label` amb l'estat de càrrega.
-
-La resta del codi ja seguia bé el patró (`PhotoGrid.tsx`, el botó de treure
-foto d'`UploadZone.tsx`, el menú mòbil): és on es va copiar el patró
-correcte per als nous. De pas, `next@14.2.15` avisa d'una vulnerabilitat de
-seguretat coneguda en fer `npm install` — actualitzar-lo és un canvi més gran
-(pot tocar l'API de rutes) i queda apuntat, no fet, perquè no formava part
-d'aquest encàrrec. No hi ha `.eslintrc` configurat (`next lint` demana
-triar-ne un interactivament): és una millora de qualitat de codi diferent
-d'una auditoria d'accessibilitat, i es queda fora.
-
-### Pendent real de desenvolupar (sortit d'avui)
-
-- **Posar `scripts/build-pages.py` (`ARTICLES`) al dia amb el text publicat
-  actual** dels sis articles que genera, i separar el `FAQPage` inline del
-  que ja gestiona `generate-faq.py`, perquè es puguin tornar a regenerar sense
-  perdre cap correcció feta a mà des que es van escriure. Candidat concret
-  per a la propera sessió dedicada que ja demanava `web-cbgb` §8.
-- **Actualitzar `next` a `galeria/`** (avisa de vulnerabilitat coneguda en
-  `npm install`), amb temps per provar que no trenca res.
-- **Configurar ESLint a `galeria/`** (`next lint` no té config i demana
-  triar-ne una).
-
----
-
-## 29-08-2026 · Sessió del campus — inventari, pàgina d'enllaços i el que queda
-
-Encàrrec de l'Ana: «recupera artefactes relatius al campus». Va acabar en una
-pàgina publicada. Queda tot apuntat aquí perquè la propera sessió no hagi de
-tornar a inventariar res.
-
-### 1. Inventari · tot el que hi ha del campus
-
-**Res perdut.** `git log --diff-filter=D` sobre `*campus*` no torna cap fitxer
-esborrat: el rastre estava escampat, no perdut.
-
-**15 pàgines publicades**, cinc productes × tres idiomes:
-
-| Pàgina | CA | ES | EN |
-|---|---|---|---|
-| Campus d'estiu (Time Chamber) | `/campus/` | `/es/campus/` | `/en/campus/` |
-| Setmana Santa | `/campus/setmana-santa/` | `/es/campus/semana-santa/` | `/en/campus/easter/` |
-| Nadal | `/campus-nadal-basquet-barcelona/` | `/es/campus-navidad-baloncesto-barcelona/` | `/en/christmas-basketball-camp-barcelona/` |
-| Comparativa de la ciutat | `/campus-basquet-barcelona/` | `/es/campus-baloncesto-barcelona/` | `/en/basketball-camps-barcelona/` |
-| Presentació × Time Chamber | `/presentacions/campus-timechamber/` | `/es/presentaciones/campus-timechamber/` | `/en/presentations/campus-timechamber/` |
-
-**6 articles de blog**: la crònica *Campus Time Chamber 2026* i la guia *com
-triar un campus*, cadascuna en els tres idiomes. Les adreces velles
-`/es/blog/campus-basquet-barcelona-guia/` i `/en/blog/campus-basquet-barcelona-guia/`
-són **només redireccions** (uns 550 bytes): no s'enllacen mai.
-
-**20 enllaços d'Instagram**: 16 vídeos d'estrelles i 4 convocatòries d'edició,
-tots a les taules de `scripts/build-campus-estrelles.py`.
-
-**3 documents interns de treball**, a l'arrel i no publicats:
-`POSICIONAMENT-CAMPUS-SEO.md` (mapa de paraules clau),
-`AUTORITAT-EXTERNA-CAMPUS.md` (+ `autoritat-externa-targets.csv`) i
-`CAMPUS-FITXA-GOOGLE-I-AGENDES.md` (textos NAP per a la fitxa de Google).
-
-**3 generadors**: `build-campus-fitxa.py` (fitxa i preus als tres idiomes; sense
-xifres des de la decisió del 23/08), `build-campus-estrelles.py` (el bloc
-d'estrelles) i `build-campus-temporades.py` (`/campus/setmana-santa/`).
-
-**Dades i material**: el bloc `campus` de `data.json` (sis setmanes amb nom,
-dates i places), 171 fotos a
-`fotos/web/summer-camp-2526-grup-barna-time-chamber-experience-mslvztq9/`,
-`img/campus-hero.webp`, sis fotos a `campus/img/` i nou peces a `img/blog/`.
-
-### 2. Fet i publicat · `/campus/enllacos/`
-
-De les tres opcions que hi havia (un bloc dins de `/campus/`, una pàgina pròpia
-o un document intern), **l'Ana va triar la pàgina pròpia**, amb tots els vídeos
-incrustats. Publicat a producció el mateix dia (PR #115):
-
-`/campus/enllacos/` · `/es/campus/enlaces/` · `/en/campus/links/`
-
-Hi ha els **vint vídeos incrustats** —els setze de les estrelles en els tres
-grups de sempre i les quatre convocatòries d'edició—, la taula de totes les
-pàgines del campus en els tres idiomes i els dos articles del blog. Enllaçada
-des de les tres `/campus/`, amb `i18n/routes.yml`, `sitemap.xml` (378 URL) i
-`cerca-index.json` al dia. Comprovat en verd: paritat («151 pàgines, cap
-traducció endarrerida»), lint sense errors nous i obert amb Chromium a 1280 i
-390 px sense desbordament.
-
-Es genera amb `scripts/build-campus-enllacos.py`, que **importa** les taules de
-vídeos de `build-campus-estrelles.py` en comptes de copiar-les, i llegeix la
-capçalera i el peu de les pàgines de Setmana Santa: no hi ha cap tercera còpia
-del menú ni de la llista d'estrelles per mantenir.
-
-També existeix, a part del web, un **índex de treball amb tots els enllaços**
-(pàgines, articles, convocatòries, perfils d'entrenadors i documents interns),
-per copiar i enganxar en stories, premsa o sponsors:
-https://claude.ai/code/artifact/5f3af974-01e9-423b-9dde-d0604f39365d
-
-### 3. El que queda obert
-
-- **Els vídeos es carreguen al clic, no sols.** És la mateixa decisió que a
-  `/campus/` —fins que algú no en vol veure un, no es demana res a Instagram—
-  i evita vint iframes de tercers en una sola pàgina. Si es vol que es
-  carreguin sols, és un canvi de tres línies al generador, però llavors la
-  pàgina passa a fer vint peticions a Instagram en obrir-se. **Decisió de
-  l'Ana.**
-- **La fila «Comparativa de campus de Barcelona» de la taula.** El mateix dia
-  es va fusionar `8a90c12`, que reposiciona `/campus-basquet-barcelona/` com a
-  tecnificació d'alt rendiment. Si la pàgina ja no es diu ni es ven com una
-  comparativa, cal canviar-ne el text a `PAGINES` dins
-  `scripts/build-campus-enllacos.py` i tornar a executar-lo: ara mateix la
-  taula la segueix presentant com a comparativa.
-- **Falta `i18n/feina/es/campus-nadal-basquet-barcelona.json`.** L'anglès el té
-  i el castellà no, tot i que `/es/campus-navidad-baloncesto-barcelona/` està
-  publicada: el dia que es torni a muntar aquella pàgina des del català, la
-  traducció castellana no tindrà d'on sortir.
-- **`data.json`, bloc `campus`: les places no quadren.** `limitPerWeek` diu 50
-  i quatre de les sis setmanes hi consten amb 54, 55, 58 i 60 inscrits. O el
-  límit real no és 50, o les xifres són d'una altra cosa. Cal confirmar-ho amb
-  l'Ana abans que aquestes dades acabin en una pàgina que les mostri.
-- **No és al mapa ≡**, i és a propòsit: l'arbre de `scripts/build-mapa.py` és
-  una tria de pàgines principals i cap subpàgina del campus (Setmana Santa,
-  Nadal) hi surt. Si algun dia s'hi posen, aquesta hi va amb elles.
-- **Els documents de campus encara no s'han executat.** `AUTORITAT-EXTERNA-CAMPUS.md`
-  (demanar mencions una per una) i `CAMPUS-FITXA-GOOGLE-I-AGENDES.md` (alta a la
-  fitxa de Google i a les agendes) són feina de fora del web que segueix sense
-  fer. El web ja està a l'altura; això no.
-
----
-
-## 30-08-2026 · Galeria amb grups privats, les quatre portades i la capçalera
-
-Sessió de l'Ana. Tres encàrrecs, per ordre en què van sortir.
-
-### 1. La galeria: grups visibles i grups invisibles — FET
-
-L'encàrrec era «grups de fotos visibles i un altre invisible, amb aquesta
-acció a cada grup de la galeria a l'admin».
-
-Resulta que **tot el codi ja existia i no funcionava**. El botó Públic/Privat
-de cada fila és a `fotos/admin.html` (funció `toggleVisibility`), el filtre
-públic és a `fotos/index.html` (`esVisible`, que deixa passar el que no és
-`private`) i el PIN de màrqueting és a `fotos/config.js`
-(`marketing_pin: 'barna-mk-1965'`). El que faltava era el camp a les dades:
-cap dels deu àlbums de `fotos/events.js` portava `visibility`, i amb el valor
-indefinit la comparació `e.visibility !== 'private'` era certa per a tothom.
-La funció hi era i no feia res.
-
-Ara els deu àlbums porten el camp escrit. Nou són `"public"`. **«JUGADORS/ES
-2526»** (192 retrats de plantilla, material intern) arrenca `"private"`: no
-surt a `/fotos/` i només s'hi arriba des de l'admin o amb
-`/fotos/?marqueting=<clau>`. Es torna públic amb un clic.
-
-`scripts/build-gallery-events.py` els manté: els àlbums nous neixen
-`"public"` i els que venien d'abans es completen amb `setdefault`, així cap
-execució torna a deixar un grup sense visibilitat declarada.
-
-Comprovat amb navegador sobre el lloc servit: la galeria pública pinta 9
-targetes i cap és la privada; amb el PIN en pinta 10. El regex amb què l'admin
-llegeix `events.js` hi casa i el desat del propi admin (`JSON.stringify`)
-conserva el camp anada i tornada.
-
-Commit `5c437b47`.
-
-### 2. Les quatre portades: cada una amb el seu destí — FET (a l'Artifact)
-
-Decisió de l'Ana sobre la maqueta
-[Quatre portades](https://claude.ai/code/artifact/a4a53f45-e2d3-4e9a-aadb-ee89be001087):
-
-| | Destí |
-|---|---|
-| **A · L'Afinat** | La portada de cada dia |
-| **B · Dia de partit** | El calendari |
-| **C · La Jugada** | Tal com està, amb l'Escoleta, i un **submenú «Història de l'escola»** |
-| **D · L'Edició** | La **premsa escrita**: open day dels preferents el cap de setmana, obertura del calendari de partits i un post del blog cada setmana |
-
-El menú no s'ha tocat: només aquestes quatre.
-
-**La foto de la D.** L'Ana va demanar que hi anés una foto institucional
-concreta —tres directius asseguts a la grada amb la bufanda del club— al lloc
-de les jugadores. **Ja era a la galeria**: és
-`fotos/web/presentacio-equips-25-26-msufdc03/1786803048160-zpte6.webp`
-(2048×1365), retallada a 16:10 i posada en duotò vermell com la resta de la D.
-No calia pujar-la.
-
-> **Nota de reconciliació.** Dues sessions treballaven la mateixa maqueta
-> alhora. L'altra va publicar primer els rètols de les pestanyes, el submenú
-> de la C i tot el text editorial de la D, i hi va posar **una foto que no era
-> la demanada** (l'alcalde dret a la sala de trofeus). La publicació d'aquí
-> es va fer sobre la seva versió, canviant només la foto. No s'ha perdut res
-> del seu text.
-
-### 3. La capçalera de la portada — FET
-
-Dues coses que l'Ana va veure mirant el web publicat.
-
-- **El ticker de novetats no destacava.** Feia 32 px d'alt amb lletra de
-  8,5 px espaiada a 0,3em. Puja a **46 px** i la lletra a **11,5 px** amb
-  menys espaiat, el text passa del 70% al 85% d'opacitat i la màscara dels
-  extrems s'estreny (5% → 2%) perquè la pista sigui més ampla. Als tres
-  idiomes.
-- **L'«Admin» no sortia a dalt a la dreta.** Ja existia una pestanya flotant
-  que `js/galetes.js` enganxa a gairebé totes les pàgines, però estava a
-  `top:12px; right:12px` — **a sobre del ticker, i del mateix negre**
-  (`#10100E`) amb un 55% d'opacitat: negre sobre negre. Ara les tres portades
-  porten l'enllaç dins la capçalera, al costat del commutador d'idioma; la
-  pestanya flotant baixa a baix a la dreta, on el fons és blanc; i allà on ja
-  hi ha l'enllaç de capçalera, la pestanya no es pinta.
-
-Commit `5957887c`.
-
-### El que queda obert d'aquesta sessió
-
-- **L'enllaç «Admin» de capçalera només és a les tres portades.** A la resta
-  de pàgines l'accés segueix sent la pestanya flotant de `galetes.js`, que a
-  mòbil està amagada a posta (`@media(max-width:900px)`). Si es vol a la
-  capçalera de tot el lloc, són ~380 fitxers i val més fer-ho amb un script.
-- **El grup privat de la galeria és una tria d'aquí, no de l'Ana.** Es va
-  triar «JUGADORS/ES 2526» per ser el més clarament intern dels deu. Si n'ha
-  de ser un altre, es canvia amb el botó de `/fotos/admin.html`.
-- **Les quatre portades viuen només a l'Artifact.** Cap de les quatre s'ha
-  portat encara a producció: la portada publicada segueix sent la de franges
-  de la v2.0.0. Passar-hi la D (premsa escrita) implicaria una secció nova
-  `/premsa/` amb calendari editorial setmanal, que és una decisió de contingut,
-  no de codi.
-- **La foto institucional només és a la maqueta.** Si es vol a producció, cal
-  passar-la per `scripts/build-blog-images.py` com les altres.
-
-### 4. La guia visual definitiva — FETA
-
-Encàrrec de l'Ana: «amb les 4 portades has de fer una guia visual definitiva
-de la web i que quedi com a principal».
-
-**«El Sistema Barna»** —
-https://claude.ai/code/artifact/c22e9418-788b-43af-94c6-de7ab81b7f27
-
-Surt de les quatre portades: el que les fa quatre *vestits* i no quatre
-marques. Onze seccions —la tesi, les quatre portades amb el seu destí, els
-invariants, color, lletra, foto, dades, vocabulari, els tres idiomes, la
-llista d'abans de publicar i el llinatge de guies.
-
-Tres coses que val la pena saber-ne:
-
-- **La guia és el sistema que descriu.** Mateixos tokens, Anton i Inter
-  incrustades des de `fonts/` del repositori amb els `unicode-range` copiats
-  de `css/fonts.css`, i el filet vermell com a gest estructural. El mode fosc
-  no és una excepció al sistema: és la regla §1 («sobre fons fosc el vermell
-  s'aclareix a `#FF3B41`») aplicada a la pàgina.
-- **Els contrastos no són números copiats.** Els mesura la pàgina en obrir-se
-  amb la fórmula de la WCAG 2.1. Quadren amb els que hi havia escrits, amb
-  **una correcció**: el `#E31E24` de la guia vella es descartava «per contrast»,
-  i sobre el blanc d'avui dona 4,69:1 i **passaria**. Falla sobre la crema
-  d'abans (4,16:1), que és on es va mesurar. Segueix fora, però pel motiu bo:
-  el color de marca és el mostrejat de l'escut.
-- **Les quatre miniatures són captures reals** de les maquetes, no dibuixos.
-
-**Que quedi com a principal** s'ha fet a `.claude/skills/web-cbgb/SKILL.md`,
-que és el que es carrega abans de tocar res visual: hi ha un bloc al capdamunt
-que assenyala la guia i la taula de destins, i el llinatge dels quatre
-documents amb què queda de cadascun. **Si canvies un dels dos, canvia l'altre.**
-
-### 5. Els destins, precisats per l'Ana (mateix dia)
-
-Dues correccions sobre el que s'havia apuntat al punt 2:
-
-- **La B no és només la portada del calendari.** És **tot el calendari amb la
-  mateixa estètica**: `/partits/`, `/partits/calendaris/` i les fitxes de
-  `/partits/equips/`, als tres idiomes. Són 59 fitxers HTML, però la majoria
-  són fitxes d'equip que genera `.github/scripts/generate-team-pages.py`: allà
-  es toca el generador, no la sortida.
-- **La D no és `/premsa/`.** «L'Edició» és la **newsletter setmanal**. És
-  l'única de les quatre que no és una pàgina web: és el número que arriba per
-  correu cada setmana. Segueix sent l'única que viu igual de bé impresa.
-  (Rectificat el mateix dia: es va apuntar «mensual» per un lapsus.)
-
-La guia i la skill ja ho diuen. **Queda per fer:** la maqueta de la D dins de
-«Quatre portades» encara està escrita en clau setmanal («número nou cada
-setmana», «es publica cada cap de setmana», els breus amb Dv./Ds./Dm.). Cal
-passar-la a mensual perquè digui el mateix que la guia.
-
-I la newsletter segueix bloquejada pel mateix d'abans: **falta l'URL del
-formulari de Brevo**. La clau API no pot viure en un lloc estàtic.
-
-### Rectificació del mateix dia: la newsletter és setmanal, no mensual
-
-Al punt 5 d'aquest mateix registre es va apuntar «mensual» per un lapsus.
-L'Ana ho ha corregit: **és setmanal**. Ja està arreglat a la guia («El
-Sistema Barna», nota `newsletter-setmanal`) i a la skill `web-cbgb`.
-
-
----
-
-## 30-08-2026 (tarda) · Portes Obertes, el calendari i els embuts que perdien dades
-
-Segona tanda del mateix dia. Tot a la branca `claude/quatre-portades-3wrns7`
-i a la **PR #121**, pendent de fusionar a `main`.
-
-### 1. Portes Obertes de l'Escoleta — FET (falta desplegar l'Apps Script)
-
-Campanya sencera: dissabtes **19 i 26 de setembre a les 9 h**, 50 places
-**per dissabte** (no 50 en total).
-
-- **`scripts/apps-script-portes-obertes.gs`** — el motor. Escriu a la full,
-  avisa el club amb un botó «Obrir al WhatsApp» amb el resum ja escrit, crea
-  l'esdeveniment al calendari de cada dissabte triat amb la família com a
-  convidada, i confirma a la família en el seu idioma.
-- **El calendari desplegat** a `/portes-obertes/` i les dues traduccions: els
-  dissabtes com a targetes grans amb les places lliures i el % d'ocupació. Es
-  pot triar més d'un dia. Camps nous: edat, si ha jugat abans, i **correu i
-  telèfon separats** (el correu obligatori, que és on va la confirmació).
-- **`js/avis-portes-obertes.js` + `scripts/avis-aplica.py`** — la barra
-  vermella a **392 pàgines**, als tres idiomes. Caduca sola el 27/09, es pot
-  tancar, i no surt a la pàgina de destinació.
-
-**Sobre el «en queden 15»:** no va escrit a mà. `RESERVES_FORA_DEL_WEB` té les
-places ja compromeses fora del web (ara **35 per torn**) i el comptador les
-suma a les files de la full. Així el que es publica és la disponibilitat real
-i baixa sola. **Si el nombre real és un altre, es canvia allà.**
-
-> **Pendent d'acció de l'Ana:** desplegar l'Apps Script (instruccions dins del
-> fitxer, 10 minuts) i enganxar l'URL a `portesObertesEndpoint` de
-> `js/canals.js`. Mentre estigui buit el formulari recull reserves igual, però
-> **sense comptador, sense correus i sense esdeveniment de calendari**.
-
-### 2. Dos embuts que perdien dades — FET
-
-- **El contacte de la portada** obria el WhatsApp i enviava un correu, però
-  **no desava res**. Si es blocava l'emergent o el correu es perdia, la
-  família desapareixia. Ara la sol·licitud s'escriu a la full ABANS d'obrir el
-  WhatsApp, marcada amb `source: 'info-portada'`. Als tres idiomes.
-- **La galeria** ja té grups visibles i invisibles de veritat (primera tanda).
-  A 30/08 ja hi ha **4 àlbums marcats privats** des de l'admin: la funció
-  s'està fent servir.
-
-### 3. Proposta B a tot el calendari — FET
-
-`/partits/`, `/partits/calendaris/` i el generador de les fitxes d'equip
-(`.github/scripts/generate-team-pages.py`). El capçal fosc viu a
-`css/barna.css` com a component `.p-dark` perquè les pàgines generades no
-porten `<style>` propi.
-
-> ⚠️ **El generador de fitxes d'equip està desfasat respecte al publicat.**
-> Executar-lo esborraria de les 48 pàgines el commutador d'idioma, els
-> `hreflang`, `css/a11y.css` i el `theme-color` correcte. Per això el capçal
-> fosc es va posar al generador però **no es va executar**: les fitxes
-> publicades encara no el tenen. Cal posar el generador al dia abans de
-> tornar-lo a executar.
-
-### 4. Menú ≡ reorganitzat — FET
-
-Decisió de l'Ana: Màgics a «Equips i temporada», Galeria a «El Club»,
-3x3/Cistella Petita/Campus sota «Esdeveniments», i «Actualitat» passa a
-«Premsa» amb el Blog i la Newsletter a dins. Es fa a `scripts/build-mapa.py`,
-que genera `js/mapa.js`.
-
-### 5. Dos errors de capçalera anteriors a la sessió — ARREGLATS
-
-- **El nom del club se solapava amb el menú** entre ~1080 i 1280 px a les
-  pàgines amb `.head-nav` llarg. `.head-brand` s'encongia per sota del seu
-  propi text.
-- **L'«Admin» no es veia**: la pestanya flotant era a `top:12px`, sobre el
-  ticker, i del mateix negre. Ara va a baix a la dreta, es veu també a mòbil i
-  no tapa els botons de consentiment de galetes.
-
-### 6. Estratègia SEO i GEO per omplir l'Escoleta — FETA
-
-**https://claude.ai/code/artifact/a4abebc8-730f-4229-a7bd-f3cad11ab36a**
-
-Reescrita amb les **dades reals de Search Console** que va passar l'Ana, que
-contradiuen la primera versió. Tres troballes que manen sobre qualsevol
-intuïció:
-
-1. **No hi ha CAP cerca d'Escoleta** entre les 10 primeres de 157. El club
-   posiciona per **campus i 3x3** —el producte d'estiu— i no pel de tot l'any.
-2. **Les cinc cerques amb més impressions tenen ZERO clics** (117 impressions
-   en total). No és un problema de posició sinó de **títol i descripció**: és
-   l'única jugada on el trànsit ja passa per davant, i la més barata de totes.
-3. **«barna», amb 48 impressions, és trànsit escombraria**: qui ho escriu
-   busca Barcelona o el Barça.
-
-I una cosa bona verificada el mateix dia: **el mode IA de Google cita
-`/blog/com-triar-escola-basquet-barcelona/` com a font [2] per a «escola
-basquet barcelona», al costat del FC Barcelona**. El GEO ja funciona mentre
-el SEO clàssic encara no.
-
-> **Pendent:** només es van veure 10 files de 157 i no se sap el rang de
-> dates. Amb la llista sencera es poden dir exactament quins cinc títols
-> reescriure i amb quin text.
-
-### El que queda obert d'aquesta tanda
-
-- **Fusionar la PR #121.** Tot està verificat amb navegador i ja porta `main`
-  fusionat. No es va poder fer des de la sessió: un control de seguretat de
-  l'entorn impedeix tocar `main`.
-- **Desplegar l'Apps Script** de Portes Obertes (punt 1).
-- **L'article del blog i la newsletter** de les Portes Obertes: demanats i no
-  fets.
-- **Google Business Profile**: segueix pendent des del campus, i amb les dades
-  noves és la segona jugada més important, no la primera.
-- **El generador de fitxes d'equip**, al dia (punt 3).
-
----
-
-## Tanda 3 del 30/08/2026 · les portades C i D
-
-La tanda anterior (PR #121) va anar a producció amb la campanya de Portes
-Obertes, la proposta B a tot el calendari i el menú reorganitzat. Aquesta
-tanca les quatre portades: **ja no en queda cap de pendent.**
-
-### Fet
-
-- **Portada C, «La Jugada», a l'Escoleta** (`/escoleta/`, `/es/escoleta/`,
-  `/en/escoleta/`). La pàgina és una possessió de 24 segons: el rellotge
-  baixa amb l'scroll, cada tram de la història porta el segon en què passa
-  i el tancament vermell és el `:00`. El submenú que faltava, **«Història
-  de l'escola»**, és al hero i porta a `#historia`; les traduccions no
-  tenien aquesta àncora i ara la porten.
-
-  Peces: `css/jugada.css`, `js/jugada.js`, `scripts/jugada-aplica.py`.
-  **No s'ha tocat el contingut de l'Escoleta.** La història, les fotos,
-  les FAQ i el JSON-LD són els mateixos: hi ha una estratègia de SEO que
-  hi depèn i la portada és la portada, no la pàgina.
-
-- **Portada D, «L'Edició», a la newsletter setmanal.** Dues peces:
-  `/newsletter/` als tres idiomes amb la capçalera de diari (cinta del
-  número, masthead buidat, teletip, primera plana en duotò i sumari de les
-  tres peces fixes), i `docs/newsletter/plantilla.html`, el número de debò
-  llest per enganxar a Brevo.
-
-  La foto institucional que va demanar l'Ana —els tres directius amb la
-  bufanda a la grada de La Nau— és la d'obertura.
-
-- **La cadència, corregida a setmanal.** Les tres pàgines de newsletter
-  deien «un enviament al mes» a nou llocs (meta, og, JSON-LD, text i la
-  FAQ generada). Ara no ho diu enlloc. El canvi de la FAQ s'ha fet a
-  `i18n/faq.yml`, que és d'on surt.
-
-### Pendent, i de qui és
-
-| Què | De qui | Nota |
-|---|---|---|
-| Desplegar l'Apps Script de Portes Obertes i enganxar el seu `/exec` a `portesObertesEndpoint` de `js/canals.js` | **Ana** | Fins llavors les reserves cauen a la bústia: s'apunten, però no surten ni els correus ni l'esdeveniment de calendari |
-| Comprovar que `RESERVES_FORA_DEL_WEB` (ara 35 per torn) quadra amb la realitat | **Ana** | És el que fa que el comptador de places digui la veritat |
-| Enganxar `docs/newsletter/plantilla.html` a Brevo i enviar-se una prova | **Ana** | Instruccions a dalt del fitxer mateix |
-| L'article i la newsletter de Portes Obertes | Pendent | Demanat el 30/08, encara no escrit |
-| Google Business Profile | **Ana** | Ve de la tanda del campus |
-| `proteccioEndpoint` de `js/canals.js`, buit a posta | **Ana** | Cal un Apps Script NOU amb un full NOU compartit NOMÉS amb la Delegada de Protecció al Menor. No pot anar al mateix full que inscripcions i suggeriments: hi té accés més gent de la que hauria de veure això. L'Ana ha dit que el correu és `protecciomenor@cbgrupbarna.info`; encara no està connectat |
-
-### Blocatges tècnics que segueixen igual
-
-- ~~`generate-team-pages.py` no es pot executar~~ **Resolt el 30/08
-  (tanda 4)**: el generador està al dia —commutador d'idioma, `hreflang`,
-  `a11y.css`, capçal fosc de la B i escuts de rivals— i les 48 fitxes
-  d'equip s'han regenerat amb ell. Vegeu la tanda 4 més avall.
-- **`scripts/build-pages.py` també està desfasat.**
-- **El pressupost de pes (`pes`) surt en vermell**, i ve d'abans d'aquesta
-  feina: set fitxers de `main` passen del sostre —`docs/welcome-pack`
-  (3,3 MB), tres logos de `assets/marca` i tres fotos de galeria que van
-  entrar per l'admin. Cap no l'ha tocat aquesta feina. O es comprimeixen,
-  o van a `pes-excepcions.txt` amb el motiu.
-
-
----
-
-## Tanda 4 del 30/08/2026 · el generador de fitxes d'equip, al dia
-
-El blocatge tècnic que quedava, resolt. `generate-team-pages.py` tornava a
-escriure les 48 pàgines de `/partits/equips/` cada dia des del robot, però
-la seva sortida havia quedat enrere del que hi havia publicat: executar-lo
-esborrava el commutador d'idioma, els `hreflang`, `css/a11y.css` i el
-`theme-color`. Ara el generador emet tot això i més, i s'ha executat.
-
-### Què porten ara les fitxes d'equip (els 3 idiomes, 48 pàgines)
-
-- **El capçal fosc de la proposta B** amb el `theme-color` fosc que toca.
-- **Files de partit amb escuts**: l'escut del Barna i el del rival a cada
-  partit. Els rivals es resolen amb `scripts/escuts_partits.py` des de
-  l'inventari de `partits/logos/` (map.json → alias.json → emparellament
-  automàtic pel nom, provant també el nom sense sufixos d'equip):
-  **119 de 120 rivals** de la temporada tenen escut. L'únic sense (CB
-  Mollet B, no és a l'inventari) surt amb un cercle d'inicials — mai
-  l'escut d'un altre i mai un forat.
-- Commutador d'idioma, `hreflang` amb x-default, `a11y.css`,
-  `xat-whatsapp.js` i l'avís de Portes Obertes.
-- La crida de comunitat de les pàgines generades (`scripts/i18n_chrome.py`)
-  també deia «Un correu al mes»: corregida a setmanal.
-
-### Per afegir l'escut d'un rival que falti
-
-Deixar el PNG a `partits/logos/clubs/` amb el nom del club, donar-lo
-d'alta a `partits/logos/index.json` i, si el nom del calendari FCBQ no
-s'assembla al fitxer, afegir l'àlies exacte a `partits/logos/alias.json`.
-El robot diari el recollirà a la següent passada.
+## ✅ Fet el 30/08/2026 · les quatre portades i el generador d'equips (aquesta sessió)
+
+En producció via PR #121, #123 i #125: la campanya de Portes Obertes sencera
+(calendari de reserves amb comptador real, motor d'Apps Script pendent de
+desplegar per l'Ana, avís a tot el web), la proposta B a `/partits/` i
+`/partits/calendaris/`, el menú reorganitzat, la portada C («La Jugada») a
+l'Escoleta, la D («L'Edició») a la newsletter amb la plantilla i el número 1
+per a Brevo (`docs/newsletter/`), l'article de Portes Obertes als tres
+idiomes, la cadència setmanal pertot i les 12 redireccions sense `noindex`.
+
+**Tanda 4 — `generate-team-pages.py`, al dia i executat.** Era l'últim
+blocatge tècnic: el generador esborrava el commutador d'idioma, els
+`hreflang`, `a11y.css` i el `theme-color` de les 48 fitxes de
+`/partits/equips/`. Ara ho emet tot i, a més, **cada fila de partit porta
+l'escut del Barna i el del rival**: el nou `scripts/escuts_partits.py`
+resol el nom FCBQ contra l'inventari de `partits/logos/` (map → alias →
+emparellament automàtic, provant també el nom sense sufixos d'equip).
+119 de 120 rivals amb escut; l'únic sense (CB Mollet B) surt amb
+inicials. Per afegir-ne un: PNG a `partits/logos/clubs/`, alta a
+`index.json` i, si cal, l'àlies a `alias.json`.
