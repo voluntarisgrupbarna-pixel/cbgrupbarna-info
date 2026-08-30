@@ -3,6 +3,19 @@
 
 window.GALERIA_EVENTS = [
   {
+    "id": "voluntaris-mtfvgc3i",
+    "title": "VOLUNTARIS",
+    "description": null,
+    "date": null,
+    "season": "2025-2026",
+    "location": null,
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo"
+  },
+  {
     "id": "fotos-clot-mtfvaol4",
     "title": "FOTOS CLOT",
     "description": null,
@@ -220,7 +233,8 @@ window.GALERIA_EVENTS = [
       "1787067890444-wyly8.webp"
     ],
     "allow_download": true,
-    "source": "repo"
+    "source": "repo",
+    "visibility": "public"
   },
   {
     "id": "vista-sr-collboni-alcade-barcelona-9-feb-26-msx895lw",
