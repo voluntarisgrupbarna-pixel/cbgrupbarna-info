@@ -2471,3 +2471,114 @@ Al punt 5 d'aquest mateix registre es va apuntar «mensual» per un lapsus.
 L'Ana ho ha corregit: **és setmanal**. Ja està arreglat a la guia («El
 Sistema Barna», nota `newsletter-setmanal`) i a la skill `web-cbgb`.
 
+
+---
+
+## 30-08-2026 (tarda) · Portes Obertes, el calendari i els embuts que perdien dades
+
+Segona tanda del mateix dia. Tot a la branca `claude/quatre-portades-3wrns7`
+i a la **PR #121**, pendent de fusionar a `main`.
+
+### 1. Portes Obertes de l'Escoleta — FET (falta desplegar l'Apps Script)
+
+Campanya sencera: dissabtes **19 i 26 de setembre a les 9 h**, 50 places
+**per dissabte** (no 50 en total).
+
+- **`scripts/apps-script-portes-obertes.gs`** — el motor. Escriu a la full,
+  avisa el club amb un botó «Obrir al WhatsApp» amb el resum ja escrit, crea
+  l'esdeveniment al calendari de cada dissabte triat amb la família com a
+  convidada, i confirma a la família en el seu idioma.
+- **El calendari desplegat** a `/portes-obertes/` i les dues traduccions: els
+  dissabtes com a targetes grans amb les places lliures i el % d'ocupació. Es
+  pot triar més d'un dia. Camps nous: edat, si ha jugat abans, i **correu i
+  telèfon separats** (el correu obligatori, que és on va la confirmació).
+- **`js/avis-portes-obertes.js` + `scripts/avis-aplica.py`** — la barra
+  vermella a **392 pàgines**, als tres idiomes. Caduca sola el 27/09, es pot
+  tancar, i no surt a la pàgina de destinació.
+
+**Sobre el «en queden 15»:** no va escrit a mà. `RESERVES_FORA_DEL_WEB` té les
+places ja compromeses fora del web (ara **35 per torn**) i el comptador les
+suma a les files de la full. Així el que es publica és la disponibilitat real
+i baixa sola. **Si el nombre real és un altre, es canvia allà.**
+
+> **Pendent d'acció de l'Ana:** desplegar l'Apps Script (instruccions dins del
+> fitxer, 10 minuts) i enganxar l'URL a `portesObertesEndpoint` de
+> `js/canals.js`. Mentre estigui buit el formulari recull reserves igual, però
+> **sense comptador, sense correus i sense esdeveniment de calendari**.
+
+### 2. Dos embuts que perdien dades — FET
+
+- **El contacte de la portada** obria el WhatsApp i enviava un correu, però
+  **no desava res**. Si es blocava l'emergent o el correu es perdia, la
+  família desapareixia. Ara la sol·licitud s'escriu a la full ABANS d'obrir el
+  WhatsApp, marcada amb `source: 'info-portada'`. Als tres idiomes.
+- **La galeria** ja té grups visibles i invisibles de veritat (primera tanda).
+  A 30/08 ja hi ha **4 àlbums marcats privats** des de l'admin: la funció
+  s'està fent servir.
+
+### 3. Proposta B a tot el calendari — FET
+
+`/partits/`, `/partits/calendaris/` i el generador de les fitxes d'equip
+(`.github/scripts/generate-team-pages.py`). El capçal fosc viu a
+`css/barna.css` com a component `.p-dark` perquè les pàgines generades no
+porten `<style>` propi.
+
+> ⚠️ **El generador de fitxes d'equip està desfasat respecte al publicat.**
+> Executar-lo esborraria de les 48 pàgines el commutador d'idioma, els
+> `hreflang`, `css/a11y.css` i el `theme-color` correcte. Per això el capçal
+> fosc es va posar al generador però **no es va executar**: les fitxes
+> publicades encara no el tenen. Cal posar el generador al dia abans de
+> tornar-lo a executar.
+
+### 4. Menú ≡ reorganitzat — FET
+
+Decisió de l'Ana: Màgics a «Equips i temporada», Galeria a «El Club»,
+3x3/Cistella Petita/Campus sota «Esdeveniments», i «Actualitat» passa a
+«Premsa» amb el Blog i la Newsletter a dins. Es fa a `scripts/build-mapa.py`,
+que genera `js/mapa.js`.
+
+### 5. Dos errors de capçalera anteriors a la sessió — ARREGLATS
+
+- **El nom del club se solapava amb el menú** entre ~1080 i 1280 px a les
+  pàgines amb `.head-nav` llarg. `.head-brand` s'encongia per sota del seu
+  propi text.
+- **L'«Admin» no es veia**: la pestanya flotant era a `top:12px`, sobre el
+  ticker, i del mateix negre. Ara va a baix a la dreta, es veu també a mòbil i
+  no tapa els botons de consentiment de galetes.
+
+### 6. Estratègia SEO i GEO per omplir l'Escoleta — FETA
+
+**https://claude.ai/code/artifact/a4abebc8-730f-4229-a7bd-f3cad11ab36a**
+
+Reescrita amb les **dades reals de Search Console** que va passar l'Ana, que
+contradiuen la primera versió. Tres troballes que manen sobre qualsevol
+intuïció:
+
+1. **No hi ha CAP cerca d'Escoleta** entre les 10 primeres de 157. El club
+   posiciona per **campus i 3x3** —el producte d'estiu— i no pel de tot l'any.
+2. **Les cinc cerques amb més impressions tenen ZERO clics** (117 impressions
+   en total). No és un problema de posició sinó de **títol i descripció**: és
+   l'única jugada on el trànsit ja passa per davant, i la més barata de totes.
+3. **«barna», amb 48 impressions, és trànsit escombraria**: qui ho escriu
+   busca Barcelona o el Barça.
+
+I una cosa bona verificada el mateix dia: **el mode IA de Google cita
+`/blog/com-triar-escola-basquet-barcelona/` com a font [2] per a «escola
+basquet barcelona», al costat del FC Barcelona**. El GEO ja funciona mentre
+el SEO clàssic encara no.
+
+> **Pendent:** només es van veure 10 files de 157 i no se sap el rang de
+> dates. Amb la llista sencera es poden dir exactament quins cinc títols
+> reescriure i amb quin text.
+
+### El que queda obert d'aquesta tanda
+
+- **Fusionar la PR #121.** Tot està verificat amb navegador i ja porta `main`
+  fusionat. No es va poder fer des de la sessió: un control de seguretat de
+  l'entorn impedeix tocar `main`.
+- **Desplegar l'Apps Script** de Portes Obertes (punt 1).
+- **L'article del blog i la newsletter** de les Portes Obertes: demanats i no
+  fets.
+- **Google Business Profile**: segueix pendent des del campus, i amb les dades
+  noves és la segona jugada més important, no la primera.
+- **El generador de fitxes d'equip**, al dia (punt 3).
