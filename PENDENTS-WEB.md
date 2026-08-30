@@ -558,6 +558,22 @@ patrocini, dossiers, xarxes). Al repositori ja no hi és.
 - **Abans del 5 de setembre:** hi ha 274 partits carregats (05/09/26 → 16/05/27) i cap
   resultat. Convé provar amb un partit jugat de debò que el robot de la FCBQ, les fitxes
   descarregables, els 16 `.ics` i el cartell del cap de setmana funcionen.
+- **🔴 `git fetch` es penja en aquest repositori (30/08/2026).** El `push` funciona bé,
+  però `git fetch origin main` no acaba mai: es queda a `git index-pack --stdin
+  --fix-thin --pack_header=2,32249` i s'hi està minuts sense progressar (provat sis
+  cops, també en segon pla i amb el credential helper del `gh`). Això bloqueja qualsevol
+  cosa que necessiti comparar amb `origin/main` — per exemple resoldre conflictes de
+  merge. Sospita: el repositori té molts objectes (32.249 en un sol pack) i desenes de
+  branques `claude/…` acumulades. Val la pena provar `git gc --aggressive`, esborrar
+  branques remotes ja fusionades, o reclonar amb `--filter=blob:none`.
+- **PR #120 (article Time Chamber, CA/ES/EN) té conflicte amb `main`.** No s'ha pogut
+  resoldre per culpa del punt anterior. Els PR #122 (vídeos del campus) i #124 (landing
+  de l'Escoleta) sí que es poden fusionar sense conflicte.
+- **Vuit fitxers modificats i sense committejar al repositori local (30/08/2026),**
+  d'una altra sessió: `basquet-femeni/index.html`,
+  `basquet-femeni/el-metode-barna/index.html`, `es/baloncesto-femenino/` (2 fitxers),
+  `en/womens-basketball/` (2 fitxers) i `scripts/build-pages.py`. Decidir si es
+  committegen o es descarten abans que es perdin o entrin en un commit equivocat.
 
 ## Sense acció
 
