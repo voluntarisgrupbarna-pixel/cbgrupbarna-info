@@ -295,6 +295,47 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .p-dark .btn.ghost { color: #fff; border-color: rgba(255,255,255,0.32); }
 .p-dark .btn.ghost:hover { background: #fff; color: var(--ink); border-color: #fff; }
 
+/* ==== PORTES OBERTES · tria de dissabte ====
+   El calendari desplegat: en lloc d'un desplegable, els dissabtes es veuen
+   tots alhora com a targetes grans, amb les places que queden a cadascuna.
+   La disponibilitat la mana el servidor (scripts/apps-script-portes-obertes.gs);
+   això només la pinta. */
+.po-cal { border: 0; padding: 0; margin: 0 0 clamp(20px, 3vw, 30px); }
+.po-cal legend { font-family: var(--body); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); padding: 0; margin-bottom: 6px; }
+.po-dies { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 14px; }
+.po-dia { position: relative; display: block; cursor: pointer; }
+.po-dia input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.po-dia-in { display: block; border: 2px solid var(--line); padding: 18px 20px 16px; transition: border-color 0.25s var(--ease), background 0.25s var(--ease); }
+.po-dia:hover .po-dia-in { border-color: var(--ink); }
+.po-dia input:focus-visible + .po-dia-in { outline: 3px solid var(--red); outline-offset: 3px; }
+.po-dia input:checked + .po-dia-in { border-color: var(--red); background: rgba(226, 6, 19, 0.04); }
+.po-dia-n { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(34px, 5vw, 46px); line-height: 0.9; color: var(--ink); }
+.po-dia input:checked + .po-dia-in .po-dia-n { color: var(--red); }
+.po-dia-m { display: block; font-size: 12.5px; line-height: 1.35; color: var(--ink-2); margin-top: 6px; }
+.po-dia-h { display: block; font-family: var(--body); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+/* Les places que queden. En vermell quan en queden poques: és una dada
+   real que ve del servidor, no un adorn. */
+.po-dia-p { display: block; font-family: var(--body); font-size: 10.5px; letter-spacing: 0.08em; margin-top: 8px; color: var(--muted); }
+.po-dia-p.poques { color: var(--red-ink); font-weight: 650; }
+.po-dia-p.ple { color: var(--muted); }
+/* Un torn ple no es pot triar: es desactiva de veritat, no només a la vista. */
+.po-dia input:disabled + .po-dia-in { opacity: 0.5; cursor: not-allowed; border-style: dashed; }
+.po-dia:has(input:disabled) { cursor: not-allowed; }
+
+/* Barra d'ocupació: el mateix número, en forma. */
+.po-barra { display: block; height: 4px; background: var(--line); margin-top: 9px; overflow: hidden; }
+.po-barra i { display: block; height: 100%; background: var(--red); transition: width 0.5s var(--ease); }
+
+.po-tria { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.po-op { position: relative; }
+.po-op input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.po-op span { display: inline-block; border: 2px solid var(--line); padding: 11px 18px; font-size: 13px; color: var(--ink-2); cursor: pointer; transition: border-color 0.25s, color 0.25s; }
+.po-op input:checked + span { border-color: var(--red); color: var(--ink); font-weight: 600; }
+.po-op input:focus-visible + span { outline: 3px solid var(--red); outline-offset: 3px; }
+
+.form-row--parell { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 480px) { .form-row--parell { grid-template-columns: 1fr; } }
+
 /* ==== TAULA DE DADES ==== */
 .dl { border-top: 1px solid var(--ink); margin: clamp(24px, 3.4vw, 40px) 0; }
 .dl-row { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding: 15px 2px; border-bottom: 1px solid var(--line); }

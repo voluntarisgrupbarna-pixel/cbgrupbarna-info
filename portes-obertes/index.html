@@ -84,25 +84,70 @@ Ve, s'hi posa, i al final decidiu.</p>
 <p>Entrenem a <strong>La Nau del Clot</strong>, al Districte de Sant Martí. Si prefereixes venir a
 mirar-ho abans de dir res a la criatura, també pots: només cal que ens ho diguis.</p>
 
-<h2>Demana el dia</h2>
+<h2>Reserva el dissabte</h2>
 <div class="form-note">
-  <p>Amb el nom i una manera de contactar-te n'hi ha prou. Et responem el mateix dia amb el dia i
-  l'hora que li toquen.</p>
+  <p>Tria el dissabte que us va bé i reserva la plaça. <strong>Cada dissabte només admet 50
+  criatures</strong>: quan un torn s'omple, es tanca. Rebràs la confirmació al moment.</p>
 </div>
 
 <form class="form" id="po-form" novalidate>
+  <fieldset class="po-cal" aria-describedby="po-dies-err">
+    <legend>Quin dissabte de setembre? <span class="req" aria-hidden="true">*</span></legend>
+    <span class="hint">Pots triar-ne més d'un: podeu venir a provar tants dissabtes com vulgueu
+    durant tot el setembre.</span>
+    <div class="po-dies" id="po-dies">
+      <label class="po-dia">
+        <input type="checkbox" name="dissabtes" value="2026-09-19">
+        <span class="po-dia-in">
+          <b class="po-dia-n">19</b>
+          <span class="po-dia-m">dissabte<br>de setembre</span>
+          <span class="po-dia-h">9.00 h · La Nau</span>
+          <span class="po-dia-p" data-places="2026-09-19">Carregant…</span>
+        </span>
+      </label>
+      <label class="po-dia">
+        <input type="checkbox" name="dissabtes" value="2026-09-26">
+        <span class="po-dia-in">
+          <b class="po-dia-n">26</b>
+          <span class="po-dia-m">dissabte<br>de setembre</span>
+          <span class="po-dia-h">9.00 h · La Nau</span>
+          <span class="po-dia-p" data-places="2026-09-26">Carregant…</span>
+        </span>
+      </label>
+    </div>
+    <p class="form-err" id="po-dies-err" role="alert">Tria almenys un dissabte.</p>
+  </fieldset>
+
   <div class="form-row">
     <label for="po-nom">Nom de la criatura <span class="req" aria-hidden="true">*</span></label>
     <input type="text" id="po-nom" name="nom" required autocomplete="off" aria-describedby="po-nom-err">
     <p class="form-err" id="po-nom-err" role="alert">Digue'ns com es diu, si us plau.</p>
   </div>
-  <div class="form-row">
-    <label for="po-any">Any de naixement <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">És el que fa servir la federació per posar els equips: per any, no per curs.</span>
-    <input type="text" id="po-any" name="any" inputmode="numeric" required
-           placeholder="2017" aria-describedby="po-any-err">
-    <p class="form-err" id="po-any-err" role="alert">Posa-hi l'any de naixement, amb quatre xifres.</p>
+  <div class="form-row form-row--parell">
+    <div>
+      <label for="po-edat">Edat <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="po-edat" name="edat" inputmode="numeric" required
+             placeholder="6" aria-describedby="po-edat-err">
+      <p class="form-err" id="po-edat-err" role="alert">Posa-hi l'edat.</p>
+    </div>
+    <div>
+      <label for="po-any">Any de naixement <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="po-any" name="any" inputmode="numeric" required
+             placeholder="2020" aria-describedby="po-any-err">
+      <p class="form-err" id="po-any-err" role="alert">Amb quatre xifres.</p>
+    </div>
   </div>
+  <span class="hint" style="margin-top:-8px">L'any és el que fa servir la federació per posar els
+  equips: per any, no per curs.</span>
+
+  <fieldset class="form-row">
+    <legend>Ha jugat a bàsquet abans? <span class="req" aria-hidden="true">*</span></legend>
+    <div class="po-tria">
+      <label class="po-op"><input type="radio" name="jugat" value="no" checked><span>No, comença de zero</span></label>
+      <label class="po-op"><input type="radio" name="jugat" value="si"><span>Sí, ja ha jugat</span></label>
+    </div>
+  </fieldset>
+
   <div class="form-row">
     <label for="po-contacte">El teu nom <span class="req" aria-hidden="true">*</span></label>
     <input type="text" id="po-contacte" name="contacte" required autocomplete="name"
@@ -110,19 +155,24 @@ mirar-ho abans de dir res a la criatura, també pots: només cal que ens ho digu
     <p class="form-err" id="po-contacte-err" role="alert">Digue'ns qui ens escriu.</p>
   </div>
   <div class="form-row">
-    <label for="po-tel">Telèfon o correu <span class="req" aria-hidden="true">*</span></label>
-    <span class="hint">El que et vagi millor. Només el fem servir per respondre't això.</span>
-    <input type="text" id="po-tel" name="contacteVia" required autocomplete="tel"
-           aria-describedby="po-tel-err">
-    <p class="form-err" id="po-tel-err" role="alert">Deixa'ns un telèfon o un correu per poder-te dir el dia.</p>
+    <label for="po-correu">Correu <span class="req" aria-hidden="true">*</span></label>
+    <span class="hint">Hi enviem la confirmació de la plaça.</span>
+    <input type="email" id="po-correu" name="correu" required autocomplete="email"
+           aria-describedby="po-correu-err">
+    <p class="form-err" id="po-correu-err" role="alert">Cal un correu per poder-te confirmar la plaça.</p>
+  </div>
+  <div class="form-row">
+    <label for="po-tel">Telèfon</label>
+    <span class="hint">Opcional. Per avisar-te si hi ha cap canvi d'última hora.</span>
+    <input type="tel" id="po-tel" name="telefon" autocomplete="tel">
   </div>
   <div class="form-row">
     <label for="po-msg">Alguna cosa que hàgim de saber</label>
-    <span class="hint">Opcional. Si ja ha jugat abans, si ve amb algun amic, si hi ha dies que no podeu…</span>
+    <span class="hint">Opcional. Si ve amb algun amic, si té alguna al·lèrgia, si hi ha dies que no podeu…</span>
     <textarea id="po-msg" name="missatge" placeholder="Explica-ho amb les teves paraules…"></textarea>
   </div>
   <div class="btn-row" style="margin-top:22px">
-    <button type="submit" class="btn red">Demana venir a provar</button>
+    <button type="submit" class="btn red">Reserva la plaça</button>
   </div>
 </form>
 <div class="form-done" id="po-done" role="status">

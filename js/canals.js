@@ -48,6 +48,25 @@ window.CANALS = {
   campusEndpoint: '',
 
 
+  /* 3 bis · RESERVA DE LES PORTES OBERTES ─────────────────────────
+     Formulari de /portes-obertes/. Va a una Apps Script PRÒPIA, que
+     fa quatre coses que la bústia no fa: escriu a la full de
+     reserves, avisa el club amb un botó de WhatsApp, crea
+     l'esdeveniment al calendari del dissabte triat i confirma a la
+     família. També és qui compta les places de cada torn (50 per
+     dissabte) i rebutja la 51.
+
+     El codi i les instruccions són a
+     scripts/apps-script-portes-obertes.gs. Quan estigui desplegat,
+     enganxa aquí l'URL que acaba en /exec.
+
+     Mentre estigui buit: el formulari FUNCIONA igual i la reserva cau
+     a `bustiaEndpoint`, però el comptador de places no surt (no hi ha
+     d'on llegir-lo) i els correus, l'esdeveniment de calendari i el
+     control de places s'han de fer a mà des de la full.            */
+  portesObertesEndpoint: '',
+
+
   /* 4 · CANAL DE PROTECCIÓ DEL MENOR ──────────────────────────────
      ⚠️  DELIBERADAMENT BUIT. No hi posis l'endpoint de dalt.
 
