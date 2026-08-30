@@ -28,9 +28,9 @@ aquestes regles, es reconeix com del club sense veure l'escut.
 > | | Proposta | Va a | Estat |
 > |---|---|---|---|
 > | A | L'Afinat | La portada, `cbgrupbarna.info` | **Publicada** (v1.4.0) |
-> | B | Dia de partit | **Tot el calendari**: `/partits/`, `/partits/calendaris/` i les fitxes de `/partits/equips/`, als tres idiomes | Pendent |
-> | C | La Jugada | L'Escoleta, `/escoleta/`, amb submenú «Història de l'escola» | Pendent |
-> | D | L'Edició | **La newsletter setmanal** (Brevo) — no és una pàgina web | Pendent |
+> | B | Dia de partit | **Tot el calendari**: `/partits/`, `/partits/calendaris/` i les fitxes de `/partits/equips/`, als tres idiomes | **Publicada** (30/08) · les fitxes d'equip esperen el generador |
+> | C | La Jugada | L'Escoleta, `/escoleta/`, amb submenú «Història de l'escola» | **Publicada** (30/08) |
+> | D | L'Edició | **La newsletter setmanal** (Brevo) | **Publicada** (30/08): `/newsletter/` als tres idiomes + `docs/newsletter/plantilla.html` per a Brevo |
 >
 > Dues precisions de l'Ana del 30/08 que canvien el que s'havia apuntat abans:
 > la **B no és només la portada del calendari**, és tot el calendari amb la
@@ -40,6 +40,20 @@ aquestes regles, es reconeix com del club sense veure l'escut.
 > bona). Les fitxes de `/partits/equips/` les genera
 > `.github/scripts/generate-team-pages.py`: allà es toca el generador, no la
 > sortida.
+>
+> **Com s'han aplicat C i D** (30/08, per si s'han de tocar):
+>
+> - **C** és `css/jugada.css` + `js/jugada.js`, plantats a les tres pàgines
+>   per `scripts/jugada-aplica.py`. El rellotge de possessió es reparteix
+>   sol entre les seccions que porten `data-jugada`: afegir o treure una
+>   secció NO obliga a recalcular els segons. S'enganxa sota la `.langbar`
+>   amb l'alçada mesurada (`--jug-top`), no amb un número escrit.
+>   El contingut de l'Escoleta no s'ha tocat: hi ha SEO que hi depèn.
+> - **D** són els components `.ed-*` de `css/barna.css`, plantats per
+>   `scripts/edicio-aplica.py`, i la plantilla de correu
+>   `docs/newsletter/plantilla.html`. La plantilla NO fa servir Anton ni
+>   Inter ni duotò: al correu no hi ha tipografies carregades ni
+>   `mix-blend-mode`, i un efecte a mitges és pitjor que cap.
 >
 > Les maquetes navegables:
 > https://claude.ai/code/artifact/a4a53f45-e2d3-4e9a-aadb-ee89be001087

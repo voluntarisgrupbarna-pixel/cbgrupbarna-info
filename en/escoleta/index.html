@@ -7,6 +7,7 @@
 <link rel="preload" href="/fonts/anton-400-2686.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/jugada.css">
 <style>
 /* ===================================================================
    CB GRUP BARNA · /escoleta/ sobre el sistema visual compartit
@@ -417,6 +418,7 @@ footer a{color:var(--ink-2)}
 <!-- ============ HERO ============ -->
 <main id="contingut" tabindex="-1">
 <header class="hero">
+  <div class="jug-court" aria-hidden="true"><svg viewBox="0 0 600 1400" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#ffffff" stroke-width="2"><rect x="40" y="40" width="520" height="1320"/><line x1="40" y1="700" x2="560" y2="700"/><circle cx="300" cy="700" r="90"/><rect x="190" y="40" width="220" height="180"/><rect x="190" y="1180" width="220" height="180"/><path d="M 90 40 A 260 260 0 0 0 510 40"/><path d="M 90 1360 A 260 260 0 0 1 510 1360"/></svg></div>
   <div class="hero-img">
     <img src="/escoleta/img/equip-anys90-julio.webp" alt="Grup Barna mini team in the 90s on a playground court, with Julio Torralba" fetchpriority="high" decoding="async" width="1200" height="836">
   </div>
@@ -436,6 +438,7 @@ footer a{color:var(--ink-2)}
     <p class="nota-molts">And it isn't just these ten. There are many more: dozens of players trained on this court over sixty-one years. Here we've picked out a few to introduce people who are special to the club, but the real list wouldn't fit on one page.</p>
 
     
+        <nav class="jug-sub" aria-label="Inside the Escoleta"><a href="#historia"><span class="tag">01</span>History of the school</a><a href="/en/history/" data-cta="escoleta-historia-club"><span class="tag">02</span>History of the club</a><a href="/en/fotos/" data-cta="escoleta-galeria"><span class="tag">03</span>Photo gallery</a></nav>
     <div class="credit">Grup Barna Basketball School · Sant Martí, Barcelona</div>
   </div>
 </header>
@@ -472,7 +475,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <!-- ============ 01 EL PATI ============ -->
-<section>
+<section data-jugada="The first dribble" id="historia">
   <div class="wrap">
     <div class="sec-num">01</div>
     
@@ -511,7 +514,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <!-- ============ 02 LA FITXA ============ -->
-<section>
+<section data-jugada="The proof">
   <div class="wrap">
     <div class="sec-num">02</div>
     
@@ -554,7 +557,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <!-- ============ 03 ELS QUE VAN ARRIBAR LLUNY ============ -->
-<section>
+<section data-jugada="The pass">
   <div class="wrap">
     <div class="sec-num">03</div>
     
@@ -745,7 +748,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <!-- ============ 04 DAVID MEJIA ============ -->
-<section>
+<section data-jugada="The rebound">
   <div class="wrap">
     <div class="sec-num">04</div>
     
@@ -784,7 +787,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <!-- ============ 05 ELS QUE VENEN ============ -->
-<section>
+<section data-jugada="The fast break">
   <div class="wrap">
     <div class="sec-num">05</div>
     
@@ -816,7 +819,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <!-- ============ 06 L'ESCOLETA AVUI ============ -->
-<section>
+<section data-jugada="The screen">
   <div class="wrap">
     <div class="sec-num">06</div>
     
@@ -854,7 +857,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <!-- ============ 07 LA NAU ============ -->
-<section id="la-nau">
+<section id="la-nau" data-jugada="The shot">
   <div class="wrap">
     <div class="sec-num">07</div>
     
@@ -879,7 +882,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <!-- ============ CTA ============ -->
-<section class="cta">
+<section class="cta jug-vermell" data-jugada="Basket">
   <div class="wrap">
     
     <h2>The next one<br>to come out of here<br>doesn't know how to dribble yet</h2>
@@ -1027,5 +1030,6 @@ document.addEventListener('click',function(e){
 <script src="/js/cerca.js" defer></script>
 <script src="/js/mapa.js" defer></script>
 <script src="/js/avis-portes-obertes.js" defer></script>
+<script src="/js/jugada.js" defer></script>
 </body>
 </html>

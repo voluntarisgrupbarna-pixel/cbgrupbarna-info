@@ -1,0 +1,113 @@
+/* CB Grup Barna · Proposta C «La Jugada»
+   ─────────────────────────────────────────────────────────────────────
+   La quarta de les quatre portades del 30/08/2026, i la que va a
+   l'Escoleta per decisió de l'Ana. La idea: la pàgina és una possessió
+   de 24 segons. El rellotge baixa mentre fas scroll i cada tram de la
+   història és un moment de la jugada — del primer bot a la cistella.
+
+   Es fa servir a /escoleta/ i les seves dues traduccions. La pàgina hi
+   posa els seus tokens (--red, --ink, --display…), que són els mateixos
+   de css/barna.css; aquí només hi ha el que és propi de la Jugada, per
+   no repetir-ho tres vegades a mà.
+
+   Dues regles del sistema que aquí es noten:
+     · El groc no hi surt. L'accent és el vermell de l'escut i prou.
+     · Amb prefers-reduced-motion tot es veu quiet i sencer: el rellotge
+       es queda a :24.0 i cap tram no s'amaga esperant l'scroll.
+   ───────────────────────────────────────────────────────────────────── */
+
+/* ── El rellotge de possessió ─────────────────────────────────────── */
+
+/* S'enganxa SOTA la barra del web, no a dalt de tot: la .langbar es
+   fixa i, si el rellotge s'enganxes a 0, li quedaria a sota i no es
+   veuria. L'alcada real de la barra la mesura js/jugada.js i la deixa a
+   --jug-top, perque al mobil la barra fa dues linies i creix. El 57 es
+   nomes el valor de reserva mentre el JavaScript no ha arribat. */
+.jug-clock {
+  position: sticky; top: var(--jug-top, 57px); z-index: 61;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+  background: var(--ink); color: #fff;
+  padding: 9px clamp(14px, 4vw, 26px);
+  transition: background .3s var(--ease);
+}
+.jug-clock .lbl {
+  font-size: 10px; font-weight: 800; letter-spacing: .22em;
+  text-transform: uppercase; color: rgba(255, 255, 255, .62);
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.jug-clock .t {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(26px, 4vw, 34px); line-height: 1;
+  /* El vermell clar és el que es llegeix sobre tinta (5,4:1). El fosc
+     no; per això aquí no hi va --red. */
+  color: var(--red-light);
+  font-variant-numeric: tabular-nums;
+  min-width: 112px; text-align: right; flex-shrink: 0;
+}
+/* Quan la jugada entra, la barra sencera es torna vermella. */
+.jug-clock.zero { background: var(--red); }
+.jug-clock.zero .t { color: #fff; }
+.jug-clock.zero .lbl { color: rgba(255, 255, 255, .82); }
+
+@media print { .jug-clock { display: none; } }
+
+/* ── La pista de fons ─────────────────────────────────────────────── */
+
+.jug-court { position: absolute; inset: 0; pointer-events: none; opacity: .10; z-index: 1; }
+.jug-court svg { width: 100%; height: 100%; }
+
+/* ── El submenú de l'Escoleta ─────────────────────────────────────── */
+
+.jug-sub { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+.jug-sub a {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid var(--line-inv); border-left: 3px solid var(--red-light);
+  padding: 10px 16px; text-decoration: none; color: #fff;
+  font-weight: 800; font-size: 11.5px; letter-spacing: .14em;
+  text-transform: uppercase; background: rgba(255, 255, 255, .04);
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.jug-sub a:hover { background: #fff; border-color: #fff; color: var(--ink); }
+.jug-sub a:hover .tag { background: var(--red); color: #fff; }
+.jug-sub .tag {
+  background: var(--red-light); color: var(--ink);
+  font-size: 9px; font-weight: 800; letter-spacing: .18em; padding: 3px 7px;
+  transition: background .2s var(--ease), color .2s var(--ease);
+}
+
+/* Sobre fons clar (les traduccions el poden fer servir fora del hero). */
+.jug-sub.on-clar a { color: var(--ink); border-color: var(--line); border-left-color: var(--red); background: var(--paper); }
+.jug-sub.on-clar a:hover { background: var(--red); border-color: var(--red); color: #fff; }
+.jug-sub.on-clar .tag { background: var(--red); color: #fff; }
+.jug-sub.on-clar a:hover .tag { background: #fff; color: var(--red-dark); }
+
+/* ── El marcador del tram ─────────────────────────────────────────── */
+
+/* Cada secció de la història porta el segon en què passa. Es planta amb
+   JavaScript sobre les seccions que ja hi eren, així el marcatge de la
+   pàgina no s'ha de tocar tram per tram. */
+.jug-tm {
+  display: block;
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 46px); line-height: 1;
+  color: var(--red-dark); font-variant-numeric: tabular-nums;
+  margin-bottom: 6px;
+}
+.jug-tm small {
+  display: block; font-family: var(--body-f); font-weight: 800;
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--muted); margin-top: 7px;
+}
+/* Sobre les superfícies fosques i vermelles el fosc no es llegeix. */
+.jug-fosc .jug-tm { color: var(--red-light); }
+.jug-fosc .jug-tm small { color: rgba(255, 255, 255, .62); }
+.jug-vermell .jug-tm { color: #fff; }
+.jug-vermell .jug-tm small { color: rgba(255, 255, 255, .78); }
+
+/* ── El revelat per scroll ────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .jug-reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .jug-reveal.in { opacity: 1; transform: none; }
+}
