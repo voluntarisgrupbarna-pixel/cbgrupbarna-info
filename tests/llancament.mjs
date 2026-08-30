@@ -150,8 +150,13 @@ if (!RAPID) {
     for (const f of r.failed || []) {
       if (!/^https?:/.test(f.url)) anota(`${r.page} demana ${f.url} i rep ${f.status}`);
     }
-    for (const im of r.images || []) {
-      if (im.broken) anota(`${r.page} · imatge trencada: ${im.src}`);
+    // `images` ve per calaixos (`broken`, `upscaled`, `noAlt`…). Del de les
+    // trencades només compten les pròpies: la prova talla el trànsit extern a
+    // posta, i per tant tota imatge de fora hi surt com a trencada encara que
+    // funcioni. Que n'hi hagi és una altra conversa —90 fotos servides des de
+    // Google Drive—, però no és un defecte del lloc que aturi una publicació.
+    for (const im of (r.images || {}).broken || []) {
+      if (!/^(https?:)?\/\//.test(im.src || '')) anota(`${r.page} · imatge trencada: ${im.src}`);
     }
   }
   registra('Com es veu de debò', problema.length === 0,

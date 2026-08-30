@@ -619,6 +619,14 @@ publicació, contingut a mig fer, secrets, pes i **sintaxi del JavaScript de cad
   lloc (327 kB). És la landing de captació de l'Escoleta: val la pena aprimar-la.
 - **Horaris d'atenció**: l'entitat de la portada no en declara cap a les dades
   estructurades. Google els ensenya a la fitxa del club si hi són.
+- **Les fotos de les galeries del 3x3 venen de Google Drive.** El renderitzat real
+  compta **90 imatges úniques** servides des de `drive.google.com/thumbnail?id=…` a
+  `/fotos/`, `/fotos-3x3/`, `/3x3/` i `/fotos-esdeveniments/3x3-westfield-2026/`, en els
+  tres idiomes. Si Drive canvia la política d'enllaç directe, limita les peticions o
+  algú mou la carpeta, aquelles galeries es queden en blanc i no hi ha res a fer des del
+  repositori. La resta del lloc no depèn de ningú de fora (tipografies pròpies, Leaflet
+  vendoritzat): aquestes són l'excepció. Val la pena passar-les pel pipeline de
+  `fotos/uploads/` com les altres.
 - **18 enllaços surten per `http://`** cap a dos partners (`ovellanegrabcn.net`,
   `centretotsalut.es`) i dues notícies velles de `feb.es`. No es pot arreglar des d'aquí
   —depèn del seu servidor—, però convé avisar els dos partners.
