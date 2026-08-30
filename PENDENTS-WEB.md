@@ -2365,6 +2365,21 @@ confirmar contra una font fiable del propi repositori:
   és la lectura vigent del panell d'Instagram i, si són coses diferents,
   que el text ho digui explícitament (p. ex. «53,7% de l'audiència de les
   publicacions de bàsquet femení» vs. «41,2% del total de seguidores»).
+
+  **RESOLT (29/08/2026, decisió de l'Ana: «deja el 58,8»).** El
+  **58,8% homes / 41,2% dones** de `/empreses/` és la lectura vigent i es
+  queda tal com està. No s'hi toca res.
+
+  El que **segueix obert no és quina xifra val, sinó què mesura el 53,7%**:
+  segueix publicat a `/femeni/`, a `/es/baloncesto-femenino/`, a
+  `/en/womens-basketball/` i a tot el dossier del Premi Dona i Esport, on
+  sosté una tesi sencera (Teoria T5, «Autenticitat Productiva: 53,7%
+  d'audiència femenina sense cap campanya»). **No s'esborra** —seria
+  carregar-se l'argument central del dossier—, però mentre les dues xifres
+  convisquin sense dir cadascuna de què parlen, un lector segueix veient
+  dues dades incompatibles. La feina pendent és d'una línia: etiquetar el
+  53,7% amb el que realment mesura (quin període, i si és abast,
+  visualitzacions o audiència d'un contingut concret, no seguidors).
 - **El desglossament d'equips per gènere de `/presentacions/fons-barna-8m/`
   («El club té entre 35 i 38 equips... 20 femenins sobre 35, 57%») és d'una
   temporada anterior i no s'ha tocat.** Canviar només el «35»/«38» cap a
