@@ -30,14 +30,16 @@ aquestes regles, es reconeix com del club sense veure l'escut.
 > | A | L'Afinat | La portada, `cbgrupbarna.info` | **Publicada** (v1.4.0) |
 > | B | Dia de partit | **Tot el calendari**: `/partits/`, `/partits/calendaris/` i les fitxes de `/partits/equips/`, als tres idiomes | Pendent |
 > | C | La Jugada | L'Escoleta, `/escoleta/`, amb submenú «Història de l'escola» | Pendent |
-> | D | L'Edició | **La newsletter mensual** (Brevo) — no és una pàgina web | Pendent |
+> | D | L'Edició | **La newsletter setmanal** (Brevo) — no és una pàgina web | Pendent |
 >
 > Dues precisions de l'Ana del 30/08 que canvien el que s'havia apuntat abans:
 > la **B no és només la portada del calendari**, és tot el calendari amb la
-> mateixa estètica; i la **D no és `/premsa/` amb peces setmanals**, és el
-> número mensual que arriba per correu. Les fitxes de `/partits/equips/` les
-> genera `.github/scripts/generate-team-pages.py`: allà es toca el generador,
-> no la sortida.
+> mateixa estètica; i la **D no és `/premsa/`**, és la newsletter que arriba
+> per correu — **setmanal** (rectificat el mateix dia: es va apuntar
+> «mensual» per un lapsus i s'ha corregit a «setmanal», que és la decisió
+> bona). Les fitxes de `/partits/equips/` les genera
+> `.github/scripts/generate-team-pages.py`: allà es toca el generador, no la
+> sortida.
 >
 > Les maquetes navegables:
 > https://claude.ai/code/artifact/a4a53f45-e2d3-4e9a-aadb-ee89be001087

@@ -2452,10 +2452,10 @@ Dues correccions sobre el que s'havia apuntat al punt 2:
   `/partits/equips/`, als tres idiomes. Són 59 fitxers HTML, però la majoria
   són fitxes d'equip que genera `.github/scripts/generate-team-pages.py`: allà
   es toca el generador, no la sortida.
-- **La D no és `/premsa/` amb peces setmanals.** «L'Edició» és la
-  **newsletter mensual**. És l'única de les quatre que no és una pàgina web:
-  és el número que arriba per correu, un cop al mes. Segueix sent l'única que
-  viu igual de bé impresa.
+- **La D no és `/premsa/`.** «L'Edició» és la **newsletter setmanal**. És
+  l'única de les quatre que no és una pàgina web: és el número que arriba per
+  correu cada setmana. Segueix sent l'única que viu igual de bé impresa.
+  (Rectificat el mateix dia: es va apuntar «mensual» per un lapsus.)
 
 La guia i la skill ja ho diuen. **Queda per fer:** la maqueta de la D dins de
 «Quatre portades» encara està escrita en clau setmanal («número nou cada
@@ -2464,4 +2464,10 @@ passar-la a mensual perquè digui el mateix que la guia.
 
 I la newsletter segueix bloquejada pel mateix d'abans: **falta l'URL del
 formulari de Brevo**. La clau API no pot viure en un lloc estàtic.
+
+### Rectificació del mateix dia: la newsletter és setmanal, no mensual
+
+Al punt 5 d'aquest mateix registre es va apuntar «mensual» per un lapsus.
+L'Ana ho ha corregit: **és setmanal**. Ja està arreglat a la guia («El
+Sistema Barna», nota `newsletter-setmanal`) i a la skill `web-cbgb`.
 
