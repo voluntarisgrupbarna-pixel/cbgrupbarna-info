@@ -309,6 +309,10 @@
           </svg>
           Nou Esdeveniment
         </button>
+        <button class="btn-new-event" onclick="openZipAlbumModal()" style="background:#141414">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Àlbum des de ZIP
+        </button>
       </div>
     </div>
     <div class="events-list" id="events-list">
@@ -422,6 +426,17 @@
         <input type="checkbox" id="ev-dl" checked style="accent-color:#E20613;width:15px;height:15px;">
         <label for="ev-dl" style="font-size:.85rem;color:#46433f;cursor:pointer;">Permetre descàrrega de fotos</label>
       </div>
+      <div>
+        <label class="field-label">Visibilitat</label>
+        <div style="display:flex;gap:1.2rem;margin-top:.35rem;">
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:#46433f;cursor:pointer;">
+            <input type="radio" name="ev-vis" value="public" style="accent-color:#E20613;"> Públic (el veu tothom)
+          </label>
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:#46433f;cursor:pointer;">
+            <input type="radio" name="ev-vis" value="private" checked style="accent-color:#E20613;"> Privat (només màrqueting)
+          </label>
+        </div>
+      </div>
     </div>
     <div id="modal-error" class="login-error"></div>
     <div class="modal-actions">
@@ -462,6 +477,55 @@
           <polyline points="20 6 9 17 4 12"/>
         </svg>
         Desar canvis
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ZIP ALBUM MODAL -->
+<div class="modal-backdrop" id="zip-album-modal">
+  <div class="modal">
+    <h2>Àlbum nou <span style="color:#E20613">des de ZIP</span></h2>
+    <p style="font-size:.82rem;color:#8a8681;margin:-.4rem 0 1rem;">Tria un ZIP amb fotos: es crea l'àlbum sol, es generen les miniatures i es puja tot en un sol pas.</p>
+    <div class="field-group">
+      <div>
+        <label class="field-label" for="za-title">Títol de l'àlbum *</label>
+        <input class="field-input" type="text" id="za-title" placeholder="Ex: Fotos oficials equips 25-26">
+      </div>
+      <div class="field-row">
+        <div>
+          <label class="field-label" for="za-date">Data</label>
+          <input class="field-input" type="date" id="za-date">
+        </div>
+        <div>
+          <label class="field-label" for="za-season">Temporada</label>
+          <input class="field-input" type="text" id="za-season" placeholder="Ex: 2025-2026">
+        </div>
+      </div>
+      <div>
+        <label class="field-label" for="za-zip">Fitxer ZIP *</label>
+        <input class="field-input" type="file" id="za-zip" accept=".zip,application/zip" style="padding:.5rem;">
+        <p style="font-size:.72rem;color:#8a8681;margin-top:.3rem;">JPG, PNG o WebP dins del ZIP. Es generen les versions web i miniatura automàticament.</p>
+      </div>
+      <div>
+        <label class="field-label">Visibilitat</label>
+        <div style="display:flex;gap:1.2rem;margin-top:.35rem;">
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:#46433f;cursor:pointer;">
+            <input type="radio" name="za-vis" value="public" id="za-vis-public" style="accent-color:#E20613;"> Públic
+          </label>
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:#46433f;cursor:pointer;">
+            <input type="radio" name="za-vis" value="private" id="za-vis-private" checked style="accent-color:#E20613;"> Privat (només màrqueting)
+          </label>
+        </div>
+      </div>
+      <p id="za-progress" style="font-size:.8rem;color:#E20613;min-height:1.1em;margin:0;"></p>
+    </div>
+    <div id="za-error" class="login-error"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeZipAlbumModal()">Cancel·lar</button>
+      <button class="btn-save" id="za-create-btn" onclick="crearAlbumDesDeZip()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Crear àlbum
       </button>
     </div>
   </div>
@@ -844,6 +908,10 @@ async function saveNewEvent() {
     allow_download: document.getElementById('ev-dl').checked,
     source: 'repo',
   };
+  if (document.querySelector('input[name="ev-vis"]:checked') &&
+      document.querySelector('input[name="ev-vis"]:checked').value === 'private') {
+    newEvent.visibility = 'private';
+  }
 
   events.unshift(newEvent);
 
@@ -1112,10 +1180,8 @@ async function uploadAll() {
 
 async function uploadPhoto(file, queueIndex) {
   const ev = currentEvent;
-  const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
-  const filename = `${Date.now()}-${Math.random().toString(36).slice(2,7)}.${ext}`;
 
-  // Simulate progress (cap API tampoc ens en dona una de real)
+  // Progrés simulat (l'API no en dona de real).
   let prog = 0;
   const progInterval = setInterval(() => {
     prog = Math.min(prog + 15, 85);
@@ -1123,23 +1189,208 @@ async function uploadPhoto(file, queueIndex) {
     if (el) el.style.width = prog + '%';
   }, 200);
 
-  try {
-    if (r2Enabled()) {
-      // Directe a R2: cap commit al repositori per aquesta foto.
-      await uploadToR2(`uploads/${ev.id}/${filename}`, file);
-    } else {
-      // Camí antic: un commit per foto via l'API de contingut de GitHub.
-      const path = `fotos/uploads/${ev.id}/${filename}`;
-      const base64 = await fileToBase64(file);
-      await writeFileBinary(path, base64, `foto: add ${filename} to ${ev.id} [skip ci]`);
-    }
+  const acabar = () => {
     clearInterval(progInterval);
     const el = document.getElementById(`prog-${queueIndex}`);
     if (el) el.style.width = '100%';
-    return filename;
-  } catch(e) {
+  };
+
+  try {
+    // Vídeos: es pugen tal com són a uploads/ (no tenen derivada webp).
+    if (isVideoFile(file.name)) {
+      const ext = file.name.split('.').pop().toLowerCase() || 'mp4';
+      const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}.${ext}`;
+      const base64 = await fileToBase64(file);
+      if (r2Enabled()) await uploadToR2(`uploads/${ev.id}/${filename}`, file);
+      else await writeFileBinary(`fotos/uploads/${ev.id}/${filename}`, base64, `video: add ${filename} to ${ev.id} [skip ci]`);
+      acabar();
+      return filename;
+    }
+
+    // Imatges: generem les derivades webp al navegador i les pugem a
+    // uploads/ (full), web/ (visor) i thumb/ (graella) — que és el que la
+    // galeria pública mostra realment. Un sol commit per foto.
+    const ref = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}.webp`;
+    const d = await ferDerivades(file);
+    if (r2Enabled()) {
+      // Amb R2 el worker ja genera les derivades: hi deixem l'original.
+      await uploadToR2(`uploads/${ev.id}/${ref}`, file);
+    } else {
+      await commitBatch([
+        { path: `fotos/uploads/${ev.id}/${ref}`, base64: d.full },
+        { path: `fotos/web/${ev.id}/${ref}`, base64: d.web },
+        { path: `fotos/thumb/${ev.id}/${ref}`, base64: d.thumb },
+      ], `foto: add ${ref} to ${ev.id}`);
+    }
+    acabar();
+    return ref;
+  } catch (e) {
     clearInterval(progInterval);
     throw e;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// GALERIA · Generació de derivades webp al navegador + commit atòmic
+// + Nou àlbum automàtic des de ZIP amb tria Públic/Privat.
+// ═══════════════════════════════════════════════════════════════════
+
+// Slug net per a ids i noms de fitxer.
+function _slug(s) {
+  return (s || '').toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+function _mime(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  return ({ jpg:'image/jpeg', jpeg:'image/jpeg', png:'image/png', webp:'image/webp',
+    gif:'image/gif', bmp:'image/bmp', tif:'image/tiff', tiff:'image/tiff' })[ext] || 'image/jpeg';
+}
+function _utf8b64(str) { return btoa(unescape(encodeURIComponent(str))); }
+function _blobB64(blob) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(blob);
+  });
+}
+
+// D'una imatge en treu 3 mides webp: full (descàrrega), web (visor), thumb (graella).
+async function ferDerivades(file) {
+  const bitmap = await createImageBitmap(file).catch(() => null);
+  if (!bitmap) throw new Error('No s\'ha pogut llegir la imatge: ' + file.name);
+  const fer = (maxW, q) => {
+    const escala = Math.min(1, maxW / bitmap.width);
+    const w = Math.max(1, Math.round(bitmap.width * escala));
+    const h = Math.max(1, Math.round(bitmap.height * escala));
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    c.getContext('2d').drawImage(bitmap, 0, 0, w, h);
+    return new Promise((res, rej) =>
+      c.toBlob(b => b ? res(b) : rej(new Error('El navegador no pot generar WebP. Prova amb Chrome.')), 'image/webp', q));
+  };
+  const [full, web, thumb] = await Promise.all([fer(3000, 0.90), fer(2048, 0.88), fer(400, 0.80)]);
+  bitmap.close && bitmap.close();
+  return { full: await _blobB64(full), web: await _blobB64(web), thumb: await _blobB64(thumb) };
+}
+
+// Commit atòmic de N fitxers (Git Data API): un sol commit per a tot l'àlbum.
+async function commitBatch(fitxers, message) {
+  const ref = await gh(`/repos/${OWNER}/${REPO}/git/ref/heads/${BRANCH}`);
+  const baseSha = ref.object.sha;
+  const baseCommit = await gh(`/repos/${OWNER}/${REPO}/git/commits/${baseSha}`);
+  const tree = [];
+  for (const f of fitxers) {
+    const blob = await gh(`/repos/${OWNER}/${REPO}/git/blobs`, 'POST', { content: f.base64, encoding: 'base64' });
+    tree.push({ path: f.path, mode: '100644', type: 'blob', sha: blob.sha });
+  }
+  const novaTree = await gh(`/repos/${OWNER}/${REPO}/git/trees`, 'POST', { base_tree: baseCommit.tree.sha, tree });
+  const commit = await gh(`/repos/${OWNER}/${REPO}/git/commits`, 'POST', { message, tree: novaTree.sha, parents: [baseSha] });
+  await gh(`/repos/${OWNER}/${REPO}/git/refs/heads/${BRANCH}`, 'PATCH', { sha: commit.sha });
+  return commit.sha;
+}
+
+function _eventsJs() {
+  return `// CB Grup Barna · Galeria · Dades d'esdeveniments\n// Actualitzat: ${new Date().toISOString().slice(0, 10)}\n\nwindow.GALERIA_EVENTS = ${JSON.stringify(events, null, 2)};\n`;
+}
+
+// ── NOU ÀLBUM DES DE ZIP ──
+function openZipAlbumModal() {
+  ['za-title', 'za-season', 'za-date'].forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('za-zip').value = '';
+  document.getElementById('za-vis-private').checked = true;
+  document.getElementById('za-error').style.display = 'none';
+  document.getElementById('za-progress').textContent = '';
+  const btn = document.getElementById('za-create-btn');
+  btn.disabled = false;
+  document.getElementById('zip-album-modal').classList.add('open');
+}
+function closeZipAlbumModal() { document.getElementById('zip-album-modal').classList.remove('open'); }
+function _zaErr(msg) {
+  const e = document.getElementById('za-error');
+  e.textContent = msg; e.style.display = 'block';
+}
+function _zaProg(msg) { document.getElementById('za-progress').textContent = msg; }
+
+async function crearAlbumDesDeZip() {
+  const title = document.getElementById('za-title').value.trim();
+  const zipFile = document.getElementById('za-zip').files[0];
+  document.getElementById('za-error').style.display = 'none';
+  if (!title) return _zaErr('El títol és obligatori.');
+  if (!zipFile) return _zaErr('Tria un fitxer ZIP amb les fotos.');
+  if (typeof JSZip === 'undefined') return _zaErr('JSZip no carregat. Refresca la pàgina.');
+
+  const visibility = document.querySelector('input[name="za-vis"]:checked').value;
+  const btn = document.getElementById('za-create-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg class="spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Creant…';
+
+  try {
+    _zaProg('Llegint el ZIP…');
+    const zip = await JSZip.loadAsync(zipFile);
+    const entries = [];
+    zip.forEach((p, e) => {
+      if (!e.dir && /\.(jpe?g|png|webp|gif|bmp|tiff?)$/i.test(p) && !p.startsWith('__MACOSX') && !p.split('/').pop().startsWith('.'))
+        entries.push({ p, e });
+    });
+    entries.sort((a, b) => a.p.localeCompare(b.p, undefined, { numeric: true }));
+    if (!entries.length) throw new Error('El ZIP no conté imatges (JPG, PNG, WebP…).');
+
+    const id = (_slug(title) || 'album') + '-' + Date.now().toString(36);
+    const fitxers = [];
+    const photos = [];
+    const usats = new Set();
+
+    for (let i = 0; i < entries.length; i++) {
+      _zaProg(`Processant foto ${i + 1} de ${entries.length}…`);
+      const blob = await entries[i].e.async('blob');
+      const name = entries[i].p.split('/').pop();
+      let base = _slug(name.replace(/\.[^.]+$/, '')) || ('foto-' + (i + 1));
+      let ref = base + '.webp';
+      let n = 2;
+      while (usats.has(ref)) { ref = base + '-' + n + '.webp'; n++; }
+      usats.add(ref);
+      const file = new File([blob], name, { type: _mime(name) });
+      const d = await ferDerivades(file);
+      fitxers.push({ path: `fotos/uploads/${id}/${ref}`, base64: d.full });
+      fitxers.push({ path: `fotos/web/${id}/${ref}`, base64: d.web });
+      fitxers.push({ path: `fotos/thumb/${id}/${ref}`, base64: d.thumb });
+      photos.push(ref);
+    }
+
+    const nou = {
+      id, title,
+      description: null,
+      date: document.getElementById('za-date').value || null,
+      season: document.getElementById('za-season').value.trim() || null,
+      location: null,
+      cover: photos[0] || null,
+      cover_url: null,
+      photos,
+      allow_download: true,
+      source: 'repo',
+    };
+    if (visibility === 'private') nou.visibility = 'private';
+    events.unshift(nou);
+    fitxers.push({ path: 'fotos/events.js', base64: _utf8b64(_eventsJs()) });
+
+    _zaProg(`Pujant ${photos.length} fotos al repositori (un sol commit)…`);
+    try {
+      await commitBatch(fitxers, `galeria: nou àlbum "${title}" (${photos.length} fotos) des de ZIP`);
+    } catch (e) {
+      events.shift();
+      throw e;
+    }
+
+    closeZipAlbumModal();
+    renderEventsList();
+    toast(`Àlbum "${title}" creat amb ${photos.length} fotos${visibility === 'private' ? ' · PRIVAT' : ''}. Visible a la galeria en 1-2 min.`, 'success');
+  } catch (e) {
+    _zaErr('Error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Crear àlbum';
   }
 }
 
