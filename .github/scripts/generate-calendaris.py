@@ -105,7 +105,9 @@ def _escut_img(ruta_abs, mida):
     return _ESCUT_CACHE[clau]
 
 
-_ESCUT_BARNA = ROOT / "logo.png"
+# L'escut oficial en alta (683x908, el mateix que el welcome pack de
+# l'Ana): a la fitxa impresa es nota respecte del logo petit del web.
+_ESCUT_BARNA = ROOT / "assets" / "marca" / "club" / "escut_transp.png"
 
 
 def dibuixa_escut(im, dr, nom, es_barna, x, cy, mida):
@@ -224,7 +226,7 @@ def hash_equip(equip, partits, temporada):
     payload = {
         # Puja quan canvia el DIBUIX de la fitxa (no les dades), perquè
         # les fitxes velles no es quedin publicades amb l'aspecte antic.
-        "disseny": 2,
+        "disseny": 3,
         "temporada": temporada,
         "nom": equip["nom"],
         "competicio": equip.get("competicio") or "",
