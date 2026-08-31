@@ -166,7 +166,7 @@ def pagina(equip, partits, pag_idx, n_pags, temporada):
 
     # ── files ──
     row_h = (H - y - 150) / ROWS_MAX
-    row_h = min(row_h, 78)
+    row_h = min(row_h, 92)
     f_j = font(F_ANTON, 24)
     f_dt = font(F_MED, 17)
     f_rv = font(F_BOLD, 22)
@@ -187,7 +187,7 @@ def pagina(equip, partits, pag_idx, n_pags, temporada):
         # fila, a fora l'obre el rival. La barra vermella/tinta de
         # l'esquerra ja diu casa o fora; els escuts ho fan llegible d'un
         # cop d'ull a la fitxa impresa.
-        mida_e = min(44, round(row_h) - 22)
+        mida_e = min(70, round(row_h) - 14)
         cy = ry + (row_h - 6) / 2
         ex = MARGIN + jw
         parells = [("barna", True), (rival(p), False)] if p["casa"]             else [(rival(p), False), ("barna", True)]
@@ -266,7 +266,7 @@ def pagina_jornada(etiqueta, files, equips_nom, pag_idx, n_pags, temporada):
     dr.text((MARGIN + 23, y + 11), label, font=f_pill, fill=PAPER)
     y += 74
 
-    row_h = min(88.0, (H - y - 130) / max(1, len(files)))
+    row_h = min(112.0, (H - y - 130) / max(1, len(files)))
     f_h = font(F_ANTON, 22)
     f_eq = font(F_BOLD, 19)
     f_rv = font(F_MED, 18)
@@ -290,8 +290,9 @@ def pagina_jornada(etiqueta, files, equips_nom, pag_idx, n_pags, temporada):
                      fill=RED if p["casa"] else INK)
         cy = ry + (row_h - 5) / 2
         dr.text((MARGIN, cy - 12), p["hora"], font=f_h, fill=INK)
+        modificat = bool(p.get("avis")) and p["avis"].get("expira", "") >= avui_iso()
 
-        mida_e = min(34, round(row_h) - 16)
+        mida_e = min(64, round(row_h) - 14)
         ex = MARGIN + 92
         parells = [("barna", True), (rival(p), False)] if p["casa"]             else [(rival(p), False), ("barna", True)]
         for nom_e, es_barna in parells:
@@ -306,10 +307,14 @@ def pagina_jornada(etiqueta, files, equips_nom, pag_idx, n_pags, temporada):
         dr.text((tx, cy + 2), truncate(dr, rival(p), f_rv, amplada_text),
                 font=f_rv, fill=MUTED)
 
-        tag = "CASA" if p["casa"] else "FORA"
+        tag = "MODIFICAT" if modificat else ("CASA" if p["casa"] else "FORA")
         tw = text_w(dr, tag, f_tag)
-        dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag,
-                fill=RED_INK if p["casa"] else MUTED)
+        if modificat:
+            dr.rectangle([W - MARGIN - tw - 10, cy - 13, W - MARGIN + 4, cy + 11], fill=RED)
+            dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag, fill=PAPER)
+        else:
+            dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag,
+                    fill=RED_INK if p["casa"] else MUTED)
         i += 1
 
     fy = H - 96
@@ -320,6 +325,10 @@ def pagina_jornada(etiqueta, files, equips_nom, pag_idx, n_pags, temporada):
     hw = text_w(dr, handle, font(F_BOLD, 16))
     dr.text((W - MARGIN - hw, fy + 18), handle, font=font(F_BOLD, 16), fill=RED_INK)
     return im
+
+
+def avui_iso():
+    return date.today().isoformat()
 
 
 def genera_jornades(data, temporada):
@@ -380,7 +389,7 @@ def hash_equip(equip, partits, temporada):
     payload = {
         # Puja quan canvia el DIBUIX de la fitxa (no les dades), perquè
         # les fitxes velles no es quedin publicades amb l'aspecte antic.
-        "disseny": 3,
+        "disseny": 5,
         "temporada": temporada,
         "nom": equip["nom"],
         "competicio": equip.get("competicio") or "",
@@ -474,7 +483,7 @@ def main():
     # canvien de debò.
     try:
         h_j = hashlib.sha1(json.dumps(
-            {"disseny": 3, "temporada": temporada,
+            {"disseny": 6, "temporada": temporada,
              "partits": [{"data": p["data"], "hora": p["hora"], "casa": p["casa"],
                           "local": p["local"], "visitant": p["visitant"],
                           "equipId": p["equipId"]} for p in
