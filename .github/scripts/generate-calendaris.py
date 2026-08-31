@@ -26,6 +26,14 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
+
+# L'escut de cada partit: el del Barna i el del rival, com a les fitxes
+# d'equip del web. El resolutor és el mateix (scripts/escuts_partits.py).
+import importlib.util as _ilu
+_spec = _ilu.spec_from_file_location("escuts_partits", ROOT / "scripts" / "escuts_partits.py")
+_escuts_mod = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(_escuts_mod)
+ESCUTS = _escuts_mod.Escuts()
 DATA = ROOT / "partits" / "data.json"
 OUT_IMG = ROOT / "partits" / "calendaris" / "img"
 OUT_DL = ROOT / "partits" / "calendaris" / "descarrega"
@@ -82,6 +90,50 @@ def rival(p):
     return p["visitant"] if p["casa"] else p["local"]
 
 
+# Es carreguen un cop i es reencaixen per mida quan calen: la fitxa en
+# dibuixa centenars i obrir el PNG a cada fila seria llençar el temps.
+_ESCUT_CACHE = {}
+
+
+def _escut_img(ruta_abs, mida):
+    clau = (str(ruta_abs), mida)
+    if clau not in _ESCUT_CACHE:
+        img = Image.open(ruta_abs).convert("RGBA")
+        # Encaix "contain": l'escut sencer dins del quadrat, mai retallat.
+        img.thumbnail((mida, mida), Image.LANCZOS)
+        _ESCUT_CACHE[clau] = img
+    return _ESCUT_CACHE[clau]
+
+
+# L'escut oficial en alta (683x908, el mateix que el welcome pack de
+# l'Ana): a la fitxa impresa es nota respecte del logo petit del web.
+_ESCUT_BARNA = ROOT / "assets" / "marca" / "club" / "escut_transp.png"
+
+
+def dibuixa_escut(im, dr, nom, es_barna, x, cy, mida):
+    """Enganxa l'escut d'un equip centrat verticalment a cy. Qui no en té,
+    duu un cercle amb les inicials — mai l'escut d'un altre i mai un forat.
+    Retorna l'amplada ocupada."""
+    ruta = _ESCUT_BARNA if es_barna else None
+    if not es_barna:
+        rel = ESCUTS.escut(nom)
+        if rel:
+            ruta = ROOT / "partits" / rel
+    if ruta and ruta.exists():
+        img = _escut_img(ruta, mida)
+        im.paste(img, (round(x + (mida - img.width) / 2),
+                       round(cy - img.height / 2)), img)
+    else:
+        r = mida / 2
+        dr.ellipse([x + 1, cy - r + 1, x + mida - 1, cy + r - 1],
+                   fill=CREAM, outline=(210, 205, 198), width=2)
+        ini = _escuts_mod.inicials(nom)
+        f_ini = font(F_BOLD, max(11, round(mida * 0.34)))
+        iw = text_w(dr, ini, f_ini)
+        dr.text((x + (mida - iw) / 2, cy - mida * 0.21), ini, font=f_ini, fill=MUTED)
+    return mida
+
+
 def pagina(equip, partits, pag_idx, n_pags, temporada):
     im = Image.new("RGB", (W, H), PAPER)
     dr = ImageDraw.Draw(im)
@@ -131,10 +183,23 @@ def pagina(equip, partits, pag_idx, n_pags, temporada):
         dr.text((MARGIN, ry + row_h / 2 - 16), jx, font=f_j, fill=INK)
         jw = 62
 
+        # Els dos escuts, amb el local primer: a casa el Barna obre la
+        # fila, a fora l'obre el rival. La barra vermella/tinta de
+        # l'esquerra ja diu casa o fora; els escuts ho fan llegible d'un
+        # cop d'ull a la fitxa impresa.
+        mida_e = min(44, round(row_h) - 22)
+        cy = ry + (row_h - 6) / 2
+        ex = MARGIN + jw
+        parells = [("barna", True), (rival(p), False)] if p["casa"]             else [(rival(p), False), ("barna", True)]
+        for nom_e, es_barna in parells:
+            dibuixa_escut(im, dr, nom_e, es_barna, ex, cy, mida_e)
+            ex += mida_e + 8
+        tx = ex + 6
+
         dt = f'{fmt_data(p["data"])} · {p["hora"]}'
-        dr.text((MARGIN + jw, ry + 8), dt, font=f_dt, fill=MUTED)
-        rv = truncate(dr, rival(p), f_rv, W - 2 * MARGIN - jw - 150)
-        dr.text((MARGIN + jw, ry + 27), rv, font=f_rv, fill=INK)
+        dr.text((tx, ry + 8), dt, font=f_dt, fill=MUTED)
+        rv = truncate(dr, rival(p), f_rv, W - MARGIN - tx - 130)
+        dr.text((tx, ry + 27), rv, font=f_rv, fill=INK)
 
         tag = "CASA" if p["casa"] else "FORA"
         tw = text_w(dr, tag, f_tag)
@@ -159,6 +224,9 @@ def hash_equip(equip, partits, temporada):
     Pillow) quan la FCBQ no ha canviat res per a aquest equip."""
     partits = sorted(partits, key=lambda p: (p["data"], p["hora"]))
     payload = {
+        # Puja quan canvia el DIBUIX de la fitxa (no les dades), perquè
+        # les fitxes velles no es quedin publicades amb l'aspecte antic.
+        "disseny": 3,
         "temporada": temporada,
         "nom": equip["nom"],
         "competicio": equip.get("competicio") or "",
