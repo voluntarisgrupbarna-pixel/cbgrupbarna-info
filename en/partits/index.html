@@ -623,12 +623,12 @@
         '<summary>' + titol + '<i>' + llista.length + ' fixtures</i></summary>' +
         '<div class="mes-body">' +
         llista.map(function (p) {
-          var rival = p.casa ? p.visitant : p.local;
           return '<div class="mrow">' +
             '<div class="dia">' + diaCurt(p.data) + '</div>' +
             '<div class="hora">' + esc(p.hora) + '</div>' +
             '<div class="qui"><b>' + esc(equips[p.equipId]) + '</b>' +
-            '<span>' + (p.casa ? 'Home vs ' : 'Away at ') + esc(rival) + '</span>' +
+            '<span>' + (p.casa ? 'Home' : 'Fora') + '</span>' +
+            duel(p) +
             (p.pista ? '<small>' + esc(p.pista) + '</small>' : '') + '</div>' +
             '</div>';
         }).join('') +
