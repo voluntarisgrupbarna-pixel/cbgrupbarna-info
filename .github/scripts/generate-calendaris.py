@@ -229,16 +229,6 @@ def dia_llarg(iso):
     return f"{DIES_CAT[d.weekday()]} {d.day} de {MESOS_CAT[d.month - 1]}"
 
 
-def etiqueta_jornada(dates):
-    """«5 i 6 de setembre», o «31 d'agost i 1 de setembre» si canvia el mes."""
-    a, b = date.fromisoformat(min(dates)), date.fromisoformat(max(dates))
-    if a == b:
-        return f"{a.day} de {MESOS_CAT[a.month - 1]}"
-    if a.month == b.month:
-        return f"{a.day} i {b.day} de {MESOS_CAT[a.month - 1]}"
-    return f"{a.day} de {MESOS_CAT[a.month - 1]} i {b.day} de {MESOS_CAT[b.month - 1]}"
-
-
 JORNADA_MAX = 19  # files (partits + capçaleres de dia) per pàgina del cartell
 
 
@@ -332,37 +322,30 @@ def avui_iso():
 
 
 def genera_jornades(data, temporada):
-    """Un cartell per cap de setmana amb partits, tota la temporada.
-    Retorna el bloc per al manifest ("_jornades")."""
-    from datetime import timedelta
+    """Un cartell per DIA amb partits — dissabte i diumenge, per separat.
+    Cada un és el seu propi post 4:5, perquè es puguin descarregar i
+    compartir l'un sense l'altre. Retorna el bloc per al manifest
+    ("_jornades")."""
     equips_nom = {e["id"]: e.get("nom") or e.get("curt") or e["id"]
                   for e in data.get("equips", [])}
-    per_setmana = {}
+    per_dia = {}
     for p in data.get("partits", []):
-        d = date.fromisoformat(p["data"])
-        dilluns = (d - timedelta(days=d.weekday())).isoformat()
-        per_setmana.setdefault(dilluns, []).append(p)
+        per_dia.setdefault(p["data"], []).append(p)
 
     (OUT_DL / "jornades").mkdir(exist_ok=True)
     (OUT_IMG / "jornades").mkdir(exist_ok=True)
     sortida = []
-    for clau in sorted(per_setmana):
-        partits = sorted(per_setmana[clau], key=lambda p: (p["data"], p["hora"]))
-        etiqueta = etiqueta_jornada([p["data"] for p in partits])
-        files = []
-        dia_previ = None
-        for p in partits:
-            if p["data"] != dia_previ:
-                files.append(("dia", p["data"]))
-                dia_previ = p["data"]
-            files.append(("partit", p))
+    for iso in sorted(per_dia):
+        partits = sorted(per_dia[iso], key=lambda p: p["hora"])
+        etiqueta = dia_llarg(iso)
+        files = [("partit", p) for p in partits]
         n_pags = -(-len(files) // JORNADA_MAX)
         per_pag = -(-len(files) // n_pags)
         pags = [files[i:i + per_pag] for i in range(0, len(files), per_pag)]
         images = [pagina_jornada(etiqueta, pag, equips_nom, i, len(pags), temporada)
                   for i, pag in enumerate(pags)]
 
-        slug = f"jornada-{clau}"
+        slug = f"jornada-{iso}"
         thumb = images[0].resize((700, round(700 * H / W)), Image.LANCZOS)
         thumb.save(OUT_IMG / "jornades" / f"{slug}.webp", "WEBP", quality=84, method=6)
         for old in (OUT_DL / "jornades" / f"{slug}.png", OUT_DL / "jornades" / f"{slug}.pdf"):
@@ -374,10 +357,9 @@ def genera_jornades(data, temporada):
             images[0].save(OUT_DL / "jornades" / f"{slug}.pdf", "PDF",
                            save_all=True, append_images=images[1:])
             tipus = "pdf"
-        sortida.append({"clau": clau, "etiqueta": etiqueta, "tipus": tipus,
-                        "partits": len(partits),
-                        "dates": sorted({p["data"] for p in partits})})
-    print(f"[jornades] {len(sortida)} cartells de jornada")
+        sortida.append({"clau": iso, "etiqueta": etiqueta, "tipus": tipus,
+                        "partits": len(partits), "dates": [iso]})
+    print(f"[jornades] {len(sortida)} cartells, un per dia")
     return sortida
 
 
@@ -483,7 +465,7 @@ def main():
     # canvien de debò.
     try:
         h_j = hashlib.sha1(json.dumps(
-            {"disseny": 6, "temporada": temporada,
+            {"disseny": 7, "temporada": temporada,
              "partits": [{"data": p["data"], "hora": p["hora"], "casa": p["casa"],
                           "local": p["local"], "visitant": p["visitant"],
                           "equipId": p["equipId"]} for p in

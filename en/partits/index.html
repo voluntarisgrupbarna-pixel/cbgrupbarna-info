@@ -34,7 +34,9 @@
   .sec-head { margin-bottom: clamp(22px, 3.4vw, 38px); }
   .sec-head h2 { font-size: clamp(17px, 2.4vw, 26px); margin-top: 14px; }
   .sec-head .sub { margin-top: 12px; font-size: 14.5px; color: var(--ink-2); max-width: 60ch; }
-  .day-h { font-family: var(--display); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin: clamp(26px, 4vw, 40px) 0 4px; }
+  .day-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--display); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin: clamp(26px, 4vw, 40px) 0 4px; }
+  .day-dl { font-family: var(--body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: var(--ink-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .day-dl:hover, .day-dl:focus-visible { color: var(--red-dark); border-bottom-style: solid; }
   .mrow { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px 16px; align-items: baseline; padding: 14px 2px; border-bottom: 1px solid var(--line); }
   .mrow .hora { font-family: var(--display); font-weight: 400; font-size: 15px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
   .mrow .qui b { display: block; font-family: var(--display); font-weight: 400; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.5; }
@@ -42,6 +44,9 @@
   .mrow .qui small { display: block; font-size: 11.5px; color: #6B6560; margin-top: 2px; }
   .pista-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
   .pista-link:hover, .pista-link:focus-visible { color: var(--red-dark); border-bottom-style: solid; }
+  /* Previsualització petita del mapa: només una miniatura clicable, no cal API key. */
+  .mini-mapa { display: block; width: 120px; height: 80px; margin-top: 6px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  .mini-mapa iframe { width: 100%; height: 100%; border: 0; pointer-events: none; }
   .mrow .on { text-align: right; }
   /* Qui juga contra qui, amb l'escut de cadascú (rivals: logos/rivals.json). */
   .mrow .qui .duel { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-top: 4px; }
@@ -232,7 +237,6 @@
         <div class="p-board-h">
           <h2>This weekend</h2>
           <p id="finde-dates"></p>
-          <a id="finde-dl" class="btn ghost" style="display:none" target="_blank" rel="noopener" data-cta="finde-descarrega">⬇ Download the poster</a>
         </div>
         <div id="finde-list">
           <noscript><!-- SEO-SNAPSHOT:START --><h2>Upcoming CB Grup Barna fixtures</h2><ul><li><strong>Dissabte 5 set, 10:45</strong> — C.B GRUP BARNA B vs CB BOET MATARÓ 2012 (Cadet Femení B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 10:45</strong> — C.B GRUP BARNA B vs C.B. L'HOSPITALET 2014 (Infantil Masculí B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 11:00</strong> — TGN BÀSQUET F14A vs C.B GRUP BARNA B (Infantil Femení B) · TARRAGONA - COL. SAGRAT COR</li><li><strong>Dissabte 5 set, 12:30</strong> — C.B GRUP BARNA B vs BASQUET ATENEU MONTSERRAT (Júnior Femení B) · NAU PARC CLOT</li><li><strong>Dissabte 5 set, 16:00</strong> — NAYOX FORÇA LLEIDA B vs C.B GRUP BARNA B (Cadet Masculí B) · PAVELLO MUNICIPAL AGNES GREGORI DE LLEIDA</li><li><strong>Diumenge 6 set, 09:00</strong> — C.B GRUP BARNA A vs SABADELL BQ VALLÈS U16F (Cadet Femení A) · CIUTAT ESPORTIVA BLANES</li><li><strong>Diumenge 6 set, 15:15</strong> — TGN BÀSQUET F09A vs C.B GRUP BARNA A (Júnior Femení A) · CIUTAT ESPORTIVA BLANES</li></ul><!-- SEO-SNAPSHOT:END --></noscript>
@@ -508,10 +512,14 @@
       : '<span class="chip">Away</span>';
     var pista = '';
     if (p.pista) {
-      var lloc = p.pista + (p.adreca ? ', ' + p.adreca : '');
-      var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(lloc);
+      var adrecaText = p.pista + (p.adreca ? ', ' + p.adreca : '');
+      var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(adrecaText);
+      var mapsEmbed = 'https://www.google.com/maps?q=' + encodeURIComponent(adrecaText) + '&output=embed';
       pista = '<small><a class="pista-link" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
-        'data-cta="mapa-partit">📍 ' + esc(p.pista) + (p.adreca ? ' · ' + esc(p.adreca) : '') + '</a></small>';
+        'data-cta="mapa-partit">📍 ' + esc(p.pista) + (p.adreca ? ' · ' + esc(p.adreca) : '') + '</a></small>' +
+        '<a class="mini-mapa" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
+        'aria-label="Obre el mapa de ' + esc(p.pista) + ' a Google Maps" data-cta="mapa-preview">' +
+        '<iframe src="' + esc(mapsEmbed) + '" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></a>';
     }
     /* Al Gameday cada equip juga un dia diferent: sense el dia, l'hora
        sola no diu res. A la llista del cap de setmana el dia ja fa de
@@ -577,22 +585,14 @@
       var dies = {};
       finde.forEach(function (p) { (dies[p.data] = dies[p.data] || []).push(p); });
       findeBox.innerHTML = Object.keys(dies).sort().map(function (dia) {
-        return '<h3 class="day-h">' + diaLlarg(dia) + '</h3>' +
+        var jor = JORNADES[dia];
+        var dl = jor ? ' <a class="day-dl" href="/partits/calendaris/descarrega/jornades/jornada-' + dia + '.' + jor.tipus +
+          '" target="_blank" rel="noopener" data-cta="finde-descarrega">⬇ Download the poster</a>' : '';
+        return '<h3 class="day-h">' + diaLlarg(dia) + dl + '</h3>' +
           dies[dia].map(function (p) { return filaJornada(p, equips[p.equipId]); }).join('');
       }).join('');
-
-      var dlBtn = document.getElementById('finde-dl');
-      var jor = JORNADES[clau];
-      if (dlBtn && jor) {
-        dlBtn.href = 'calendaris/descarrega/jornades/jornada-' + clau + '.' + jor.tipus;
-        dlBtn.style.display = '';
-      } else if (dlBtn) {
-        dlBtn.style.display = 'none';
-      }
     } else {
       findeBox.innerHTML = '<p class="empty-note">No fixtures scheduled from today. See the full calendar below.</p>';
-      var dlBtnBuit = document.getElementById('finde-dl');
-      if (dlBtnBuit) dlBtnBuit.style.display = 'none';
     }
 
     /* --- 2 · Last weekend's results --- */
@@ -640,14 +640,14 @@
   Promise.all([
     fetch('/partits/data.json').then(function (r) { return r.json(); }),
     // Sense el fitxer d'escuts la pàgina segueix: files sense escut, no en blanc.
-    fetch('logos/rivals.json').then(function (r) { return r.json(); }).catch(function () { return {}; }),
+    fetch('/partits/logos/rivals.json').then(function (r) { return r.json(); }).catch(function () { return {}; }),
     // El cartell de cada jornada per descarregar: si no arriba, el botó no surt.
-    fetch('calendaris/manifest.json').then(function (r) { return r.json(); }).catch(function () { return {}; })
+    fetch('/partits/calendaris/manifest.json').then(function (r) { return r.json(); }).catch(function () { return {}; })
   ])
     .then(function (tot) {
       var rivals = tot[1] || {};
       Object.keys(rivals).forEach(function (k) {
-        if (rivals[k]) RIVALS[k] = 'logos/' + String(rivals[k]).replace(/^logos\//, '');
+        if (rivals[k]) RIVALS[k] = '/partits/logos/' + String(rivals[k]).replace(/^logos\//, '');
       });
       ((tot[2] || {})._jornades || {}).llista &&
         tot[2]._jornades.llista.forEach(function (j) { JORNADES[j.clau] = j; });
