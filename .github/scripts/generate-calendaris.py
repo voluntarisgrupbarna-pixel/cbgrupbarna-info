@@ -20,6 +20,7 @@ per consola i es continua amb la resta — mai talla tot el procés.
 """
 import hashlib
 import json
+import re
 from datetime import date
 from pathlib import Path
 
@@ -229,10 +230,19 @@ def dia_llarg(iso):
     return f"{DIES_CAT[d.weekday()]} {d.day} de {MESOS_CAT[d.month - 1]}"
 
 
+def neteja_competicio(s):
+    """Ve tota en majúscules del fitxer de la Federació: la convertim a
+    frase normal perquè no sembli un crit al costat del nom de l'equip."""
+    s = re.sub(r"^C\.?\s*C\.?\s+", "", s or "", flags=re.IGNORECASE).strip()
+    if not s:
+        return ""
+    return re.sub(r"(^|[\s.'-])(\S)", lambda m: m.group(1) + m.group(2).upper(), s.lower())
+
+
 JORNADA_MAX = 19  # files (partits + capçaleres de dia) per pàgina del cartell
 
 
-def pagina_jornada(etiqueta, files, equips_nom, pag_idx, n_pags, temporada):
+def pagina_jornada(etiqueta, files, equips_nom, equips_comp, pag_idx, n_pags, temporada):
     """El cartell d'una jornada sencera: tots els partits del club aquell
     cap de setmana, en format post (1080x1350), amb l'escut de cada equip.
     `files` barreja capçaleres de dia ("dia", iso) i partits ("partit", p)."""
@@ -260,6 +270,7 @@ def pagina_jornada(etiqueta, files, equips_nom, pag_idx, n_pags, temporada):
     f_h = font(F_ANTON, 22)
     f_eq = font(F_BOLD, 19)
     f_rv = font(F_MED, 18)
+    f_cp = font(F_MED, 15)
     f_tag = font(F_BOLD, 14)
     f_dia = font(F_BOLD, 17)
 
@@ -291,11 +302,18 @@ def pagina_jornada(etiqueta, files, equips_nom, pag_idx, n_pags, temporada):
         tx = ex + 8
 
         nom_eq = (equips_nom.get(p["equipId"]) or p["equipId"]).upper()
+        # Amb files molt atapeïdes (un dia amb moltíssims partits) no hi ha
+        # prou alçada per a la tercera línia sense trepitjar la fila veïna.
+        comp = neteja_competicio(equips_comp.get(p["equipId"])) if row_h >= 65 else ""
         amplada_text = W - MARGIN - tx - 92
-        dr.text((tx, cy - 19), truncate(dr, nom_eq, f_eq, amplada_text),
+        yt = cy - 28 if comp else cy - 19
+        dr.text((tx, yt), truncate(dr, nom_eq, f_eq, amplada_text),
                 font=f_eq, fill=INK)
-        dr.text((tx, cy + 2), truncate(dr, rival(p), f_rv, amplada_text),
+        dr.text((tx, yt + 21), truncate(dr, rival(p), f_rv, amplada_text),
                 font=f_rv, fill=MUTED)
+        if comp:
+            dr.text((tx, yt + 42), truncate(dr, comp, f_cp, amplada_text),
+                    font=f_cp, fill=MUTED)
 
         tag = "MODIFICAT" if modificat else ("CASA" if p["casa"] else "FORA")
         tw = text_w(dr, tag, f_tag)
@@ -328,6 +346,7 @@ def genera_jornades(data, temporada):
     ("_jornades")."""
     equips_nom = {e["id"]: e.get("nom") or e.get("curt") or e["id"]
                   for e in data.get("equips", [])}
+    equips_comp = {e["id"]: e.get("competicio") or "" for e in data.get("equips", [])}
     per_dia = {}
     for p in data.get("partits", []):
         per_dia.setdefault(p["data"], []).append(p)
@@ -342,7 +361,7 @@ def genera_jornades(data, temporada):
         n_pags = -(-len(files) // JORNADA_MAX)
         per_pag = -(-len(files) // n_pags)
         pags = [files[i:i + per_pag] for i in range(0, len(files), per_pag)]
-        images = [pagina_jornada(etiqueta, pag, equips_nom, i, len(pags), temporada)
+        images = [pagina_jornada(etiqueta, pag, equips_nom, equips_comp, i, len(pags), temporada)
                   for i, pag in enumerate(pags)]
 
         slug = f"jornada-{iso}"
@@ -465,7 +484,7 @@ def main():
     # canvien de debò.
     try:
         h_j = hashlib.sha1(json.dumps(
-            {"disseny": 7, "temporada": temporada,
+            {"disseny": 8, "temporada": temporada,
              "partits": [{"data": p["data"], "hora": p["hora"], "casa": p["casa"],
                           "local": p["local"], "visitant": p["visitant"],
                           "equipId": p["equipId"]} for p in
