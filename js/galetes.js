@@ -275,9 +275,13 @@
   // de Google d'admin/auth.js.
   function pintarAdmin() {
     if (location.pathname.indexOf('/admin/') === 0) return; // ja hi som
-    // Les portades porten l'enllaç «Admin» dins de la capçalera, a dalt a la
-    // dreta. Alla no cal la pestanya flotant: seria el mateix enllac dos cops.
-    if (document.querySelector('.head-admin')) return;
+    // 31/08/2026: abans, a les tres portades, aquesta pestanya no sortia
+    // perquè la capçalera ja porta un enllaç «Admin» propi (per no repetir-lo).
+    // Però aquell enllaç fa 9,5 px i un gris apagat, i és l'ÚNICA pàgina on
+    // l'accés a l'admin no és la pestanya negra de sota a la dreta que es veu
+    // a tota la resta del lloc. Qui hi entra sempre pel mateix lloc no la
+    // troba just a la portada. Es manté l'enllaç petit de la capçalera —no fa
+    // mal— i s'hi afegeix també la pestanya, com a tot arreu.
     var est = document.createElement('style');
     // A baix a la dreta, no a dalt. A dalt queia sobre el ticker de novetats,
     // que es del mateix negre que la pestanya: negre sobre negre, invisible.

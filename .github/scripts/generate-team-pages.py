@@ -181,16 +181,25 @@ def resultat(p):
     return "W" if barna > rival else ("L" if barna < rival else "E")
 
 
-def head_html(title, desc, canonical, og_image, extra_ld, idioma):
+def hreflang_html(ruta, idioma):
+    """Els quatre alternate: un per idioma i l'x-default cap al català."""
+    del idioma  # el bloc és el mateix per als tres idiomes
+    linies = [f'<link rel="alternate" hreflang="{i}" href="{BASE_URL}{prefix(i)}{ruta}">' for i in IDIOMES]
+    linies.append(f'<link rel="alternate" hreflang="x-default" href="{BASE_URL}{ruta}">')
+    return "\n".join(linies)
+
+
+def head_html(title, desc, canonical, og_image, extra_ld, idioma, ruta):
     return f"""<!DOCTYPE html>
 <html lang="{idioma}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#F4F1EC">
+<meta name="theme-color" content="#ffffff">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canonical}">
+{hreflang_html(ruta, idioma)}
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -206,17 +215,39 @@ def head_html(title, desc, canonical, og_image, extra_ld, idioma):
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">
+<link rel="stylesheet" href="/css/a11y.css">
 <!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
      aquí, el planta /js/cerca.js dins de la capçalera. -->
 <link rel="stylesheet" href="/css/cerca.css">
 <script type="application/ld+json">{json.dumps(extra_ld, ensure_ascii=False)}</script>
 <script src="/js/galetes.js" defer></script>
+<script src="/js/xat-whatsapp.js" defer></script>
 <script src="/js/cerca.js" defer></script>
 </head>
 """
 
 
-def header_html(idioma):
+def lang_switch_html(ruta, idioma):
+    NOMS = {"ca": "Català", "es": "Castellano", "en": "English"}
+    ETIQUETES = {"ca": "CA", "es": "ES", "en": "EN"}
+    trossos = []
+    for i, ling in enumerate(IDIOMES):
+        classe = ' class="active" aria-current="true"' if ling == idioma else ''
+        trossos.append(
+            f'<a href="{prefix(ling)}{ruta}" hreflang="{ling}" lang="{ling}" '
+            f'aria-label="{NOMS[ling]}"{classe}>{ETIQUETES[ling]}</a>'
+        )
+        if i < len(IDIOMES) - 1:
+            trossos.append('<span class="sep" aria-hidden="true">·</span>')
+    return (
+        '    <nav class="lang-switch" '
+        "aria-label=\"Canvia d'idioma · Cambiar idioma · Change language\">\n"
+        f'      {"".join(trossos)}\n'
+        '    </nav>'
+    )
+
+
+def header_html(idioma, ruta):
     return f"""<body>
 <a href="#main" class="skip">{_chrome.text("salta", idioma)}</a>
 <header class="head">
@@ -226,6 +257,7 @@ def header_html(idioma):
       <span>CB Grup Barna</span>
     </a>
 {_chrome.navegacio(idioma)}
+{lang_switch_html(ruta, idioma)}
   </div>
 </header>
 """
@@ -254,6 +286,7 @@ def team_page(e, data, avui, idioma):
     nom = e.get("nom", e["id"])
     competicio = e.get("competicio", "")
     canonical = f"{BASE_URL}{pre}/partits/equips/{e['id']}/"
+    ruta = f"/partits/equips/{e['id']}/"
     posicio_txt = " · " + t["posicio"].format(n=e["posicio"]) if e.get("posicio") else ""
     desc = clamp_desc(t["desc_equip"].format(nom=nom, comp=competicio, w=w, l=l, pos=posicio_txt))
     title = t["titol_equip"].format(nom=nom)
@@ -288,7 +321,7 @@ def team_page(e, data, avui, idioma):
     calendari_html = ("<ul>" + "".join(match_line(p, nom, idioma) for p in partits) + "</ul>") \
         if partits else f"<p class=\"lede\">{t['sense_calendari']}</p>"
 
-    body = f"""{header_html(idioma)}
+    body = f"""{header_html(idioma, ruta)}
 <main id="main">
 <section class="p-dark">
   <div class="p-dark-court" aria-hidden="true">
@@ -321,7 +354,7 @@ def team_page(e, data, avui, idioma):
 </div>
 </main>
 {_chrome.peu(idioma).replace("</main>", "", 1)}"""
-    return head_html(title, desc, canonical, og_image, ld, idioma) + body
+    return head_html(title, desc, canonical, og_image, ld, idioma, ruta) + body
 
 
 def index_page(data, avui, idioma):
@@ -351,6 +384,7 @@ def index_page(data, avui, idioma):
         sections.append(f"<h2 style=\"font-family:var(--display);font-size:clamp(16px,2.1vw,22px);margin:28px 0 14px\">{esc(titol_cat)}</h2><ul>" + "".join(items) + "</ul>")
 
     canonical = f"{BASE_URL}{pre}/partits/equips/"
+    ruta = "/partits/equips/"
     title = t["titol_index"]
     desc = clamp_desc(t["desc_index"])
     ld = {
@@ -365,7 +399,7 @@ def index_page(data, avui, idioma):
             ]},
         ],
     }
-    body = f"""{header_html(idioma)}
+    body = f"""{header_html(idioma, ruta)}
 <main id="main">
 <section class="p-dark">
   <div class="p-dark-court" aria-hidden="true">
@@ -387,7 +421,7 @@ def index_page(data, avui, idioma):
 </div>
 </main>
 {_chrome.peu(idioma).replace("</main>", "", 1)}"""
-    return head_html(title, desc, canonical, f"{BASE_URL}/og-image.jpg", ld, idioma) + body
+    return head_html(title, desc, canonical, f"{BASE_URL}/og-image.jpg", ld, idioma, ruta) + body
 
 
 def main():
