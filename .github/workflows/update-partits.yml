@@ -55,10 +55,14 @@ jobs:
         run: python .github/scripts/generate-calendaris.py
       - name: Actualitzar resum estàtic per a SEO / SEO-IA
         run: python .github/scripts/generate-seo-snapshot.py
+      - name: Escuts dels rivals per a la pàgina de partits
+        run: python scripts/build-escuts-rivals.py
       # Ha d'anar just després: /es/partits/ i /en/partits/ es generen a partir
       # de la catalana, i si no, es queden amb la instantània del dia abans.
       - name: Regenerar Dies de partit en castellà i anglès
         run: python scripts/build-partits-idiomes.py
+      - name: Les FAQ de /partits/ en el seu idioma (el traductor de pàgina no les sap)
+        run: python .github/scripts/generate-faq.py
       - name: Regenerar calendaris .ics per equip
         run: python .github/scripts/generate-ics.py
       - name: Regenerar pàgines pròpies per equip

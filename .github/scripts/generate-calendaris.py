@@ -218,6 +218,160 @@ def pagina(equip, partits, pag_idx, n_pags, temporada):
     return im
 
 
+MESOS_CAT = ["gener", "febrer", "març", "abril", "maig", "juny", "juliol",
+             "agost", "setembre", "octubre", "novembre", "desembre"]
+DIES_CAT = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres",
+            "Dissabte", "Diumenge"]
+
+
+def dia_llarg(iso):
+    d = date.fromisoformat(iso)
+    return f"{DIES_CAT[d.weekday()]} {d.day} de {MESOS_CAT[d.month - 1]}"
+
+
+def etiqueta_jornada(dates):
+    """«5 i 6 de setembre», o «31 d'agost i 1 de setembre» si canvia el mes."""
+    a, b = date.fromisoformat(min(dates)), date.fromisoformat(max(dates))
+    if a == b:
+        return f"{a.day} de {MESOS_CAT[a.month - 1]}"
+    if a.month == b.month:
+        return f"{a.day} i {b.day} de {MESOS_CAT[a.month - 1]}"
+    return f"{a.day} de {MESOS_CAT[a.month - 1]} i {b.day} de {MESOS_CAT[b.month - 1]}"
+
+
+JORNADA_MAX = 19  # files (partits + capçaleres de dia) per pàgina del cartell
+
+
+def pagina_jornada(etiqueta, files, equips_nom, pag_idx, n_pags, temporada):
+    """El cartell d'una jornada sencera: tots els partits del club aquell
+    cap de setmana, en format post (1080x1350), amb l'escut de cada equip.
+    `files` barreja capçaleres de dia ("dia", iso) i partits ("partit", p)."""
+    im = Image.new("RGB", (W, H), PAPER)
+    dr = ImageDraw.Draw(im)
+
+    dr.rectangle([MARGIN, 74, MARGIN + 70, 80], fill=RED)
+    y = 96
+    dr.text((MARGIN, y), f"TEMPORADA {temporada} · TOTS ELS EQUIPS".upper(),
+            font=font(F_BOLD, 20), fill=MUTED)
+    y += 40
+    dr.text((MARGIN, y), "LA JORNADA", font=font(F_ANTON, 50), fill=INK)
+    y += 58
+    dr.text((MARGIN, y), etiqueta.upper(), font=font(F_ANTON, 50), fill=RED)
+    y += 70
+    n_partits = sum(1 for t, _ in files if t == "partit")
+    label = f"{n_pags > 1 and f'PÀGINA {pag_idx + 1}/{n_pags} · ' or ''}{n_partits} PARTITS"
+    f_pill = font(F_BOLD, 22)
+    pw = text_w(dr, label, f_pill) + 46
+    dr.rounded_rectangle([MARGIN, y, MARGIN + pw, y + 46], radius=23, fill=INK)
+    dr.text((MARGIN + 23, y + 11), label, font=f_pill, fill=PAPER)
+    y += 74
+
+    row_h = min(88.0, (H - y - 130) / max(1, len(files)))
+    f_h = font(F_ANTON, 22)
+    f_eq = font(F_BOLD, 19)
+    f_rv = font(F_MED, 18)
+    f_tag = font(F_BOLD, 14)
+    f_dia = font(F_BOLD, 17)
+
+    i = 0
+    for tipus, dada in files:
+        ry = y + i * row_h
+        if tipus == "dia":
+            dr.text((MARGIN, ry + row_h / 2 - 10), dia_llarg(dada).upper(),
+                    font=f_dia, fill=RED_INK)
+            dr.line([MARGIN, ry + row_h - 8, W - MARGIN, ry + row_h - 8],
+                    fill=(220, 216, 210), width=2)
+            i += 1
+            continue
+        p = dada
+        if i % 2 == 1:
+            dr.rectangle([MARGIN - 14, ry, W - MARGIN + 14, ry + row_h - 5], fill=ROW_ALT)
+        dr.rectangle([MARGIN - 14, ry, MARGIN - 8, ry + row_h - 5],
+                     fill=RED if p["casa"] else INK)
+        cy = ry + (row_h - 5) / 2
+        dr.text((MARGIN, cy - 12), p["hora"], font=f_h, fill=INK)
+
+        mida_e = min(34, round(row_h) - 16)
+        ex = MARGIN + 92
+        parells = [("barna", True), (rival(p), False)] if p["casa"]             else [(rival(p), False), ("barna", True)]
+        for nom_e, es_barna in parells:
+            dibuixa_escut(im, dr, nom_e, es_barna, ex, cy, mida_e)
+            ex += mida_e + 7
+        tx = ex + 8
+
+        nom_eq = (equips_nom.get(p["equipId"]) or p["equipId"]).upper()
+        amplada_text = W - MARGIN - tx - 92
+        dr.text((tx, cy - 19), truncate(dr, nom_eq, f_eq, amplada_text),
+                font=f_eq, fill=INK)
+        dr.text((tx, cy + 2), truncate(dr, rival(p), f_rv, amplada_text),
+                font=f_rv, fill=MUTED)
+
+        tag = "CASA" if p["casa"] else "FORA"
+        tw = text_w(dr, tag, f_tag)
+        dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag,
+                fill=RED_INK if p["casa"] else MUTED)
+        i += 1
+
+    fy = H - 96
+    dr.line([MARGIN, fy, W - MARGIN, fy], fill=(220, 216, 210), width=2)
+    dr.text((MARGIN, fy + 18), "CLUB BÀSQUET GRUP BARNA · Nau Parc Clot, El Clot",
+            font=font(F_BOLD, 16), fill=INK)
+    handle = "@cbgrupbarna"
+    hw = text_w(dr, handle, font(F_BOLD, 16))
+    dr.text((W - MARGIN - hw, fy + 18), handle, font=font(F_BOLD, 16), fill=RED_INK)
+    return im
+
+
+def genera_jornades(data, temporada):
+    """Un cartell per cap de setmana amb partits, tota la temporada.
+    Retorna el bloc per al manifest ("_jornades")."""
+    from datetime import timedelta
+    equips_nom = {e["id"]: e.get("nom") or e.get("curt") or e["id"]
+                  for e in data.get("equips", [])}
+    per_setmana = {}
+    for p in data.get("partits", []):
+        d = date.fromisoformat(p["data"])
+        dilluns = (d - timedelta(days=d.weekday())).isoformat()
+        per_setmana.setdefault(dilluns, []).append(p)
+
+    (OUT_DL / "jornades").mkdir(exist_ok=True)
+    (OUT_IMG / "jornades").mkdir(exist_ok=True)
+    sortida = []
+    for clau in sorted(per_setmana):
+        partits = sorted(per_setmana[clau], key=lambda p: (p["data"], p["hora"]))
+        etiqueta = etiqueta_jornada([p["data"] for p in partits])
+        files = []
+        dia_previ = None
+        for p in partits:
+            if p["data"] != dia_previ:
+                files.append(("dia", p["data"]))
+                dia_previ = p["data"]
+            files.append(("partit", p))
+        n_pags = -(-len(files) // JORNADA_MAX)
+        per_pag = -(-len(files) // n_pags)
+        pags = [files[i:i + per_pag] for i in range(0, len(files), per_pag)]
+        images = [pagina_jornada(etiqueta, pag, equips_nom, i, len(pags), temporada)
+                  for i, pag in enumerate(pags)]
+
+        slug = f"jornada-{clau}"
+        thumb = images[0].resize((700, round(700 * H / W)), Image.LANCZOS)
+        thumb.save(OUT_IMG / "jornades" / f"{slug}.webp", "WEBP", quality=84, method=6)
+        for old in (OUT_DL / "jornades" / f"{slug}.png", OUT_DL / "jornades" / f"{slug}.pdf"):
+            old.unlink(missing_ok=True)
+        if len(images) == 1:
+            images[0].save(OUT_DL / "jornades" / f"{slug}.png", "PNG", optimize=True)
+            tipus = "png"
+        else:
+            images[0].save(OUT_DL / "jornades" / f"{slug}.pdf", "PDF",
+                           save_all=True, append_images=images[1:])
+            tipus = "pdf"
+        sortida.append({"clau": clau, "etiqueta": etiqueta, "tipus": tipus,
+                        "partits": len(partits),
+                        "dates": sorted({p["data"] for p in partits})})
+    print(f"[jornades] {len(sortida)} cartells de jornada")
+    return sortida
+
+
 def hash_equip(equip, partits, temporada):
     """Empremta estable de tot el que pot canviar l'aspecte de la fitxa,
     perquè es pugui saltar la regeneració (i el PDF no determinista de
@@ -315,6 +469,28 @@ def main():
             info["actualitzat"] = date.today().isoformat()
             manifest[equip["id"]] = info
             fets += 1
+    # El cartell de cada jornada (tots els equips d'un cap de setmana),
+    # amb la seva pròpia empremta perquè només es redibuixin les que
+    # canvien de debò.
+    try:
+        h_j = hashlib.sha1(json.dumps(
+            {"disseny": 3, "temporada": temporada,
+             "partits": [{"data": p["data"], "hora": p["hora"], "casa": p["casa"],
+                          "local": p["local"], "visitant": p["visitant"],
+                          "equipId": p["equipId"]} for p in
+                         sorted(d["partits"], key=lambda x: (x["data"], x["hora"]))]},
+            sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+        antic_j = manifest_antic.get("_jornades") or {}
+        if antic_j.get("hash") == h_j and (OUT_DL / "jornades").exists():
+            manifest["_jornades"] = antic_j
+            print("[jornades] sense canvis")
+        else:
+            manifest["_jornades"] = {"hash": h_j,
+                                     "actualitzat": date.today().isoformat(),
+                                     "llista": genera_jornades(d, temporada)}
+    except Exception as exc:
+        print(f"[jornades] ✗ {exc}")
+
 
     MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"[calendaris] {fets} fitxes regenerades, {reutilitzats} sense canvis, "
