@@ -48,7 +48,9 @@
   .pista-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
   .pista-link:hover, .pista-link:focus-visible { color: var(--red-dark); border-bottom-style: solid; }
   /* Previsualització petita del mapa: només una miniatura clicable, no cal API key. */
-  .mini-mapa { display: block; width: 120px; height: 80px; margin-top: 6px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  /* Dins del .duel (flex), al costat del rival: aprofita l'ample abans
+     d'afegir alçada. Només surt fora de casa (dins, ja se sap on és). */
+  .mini-mapa { display: block; flex-shrink: 0; width: 90px; height: 60px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
   .mini-mapa iframe { width: 100%; height: 100%; border: 0; pointer-events: none; }
   .mrow .on { text-align: right; }
   /* Qui juga contra qui, amb l'escut de cadascú (rivals: logos/rivals.json). */
@@ -321,7 +323,7 @@
 <div class="wrap section">
   <div class="narrow">
     <h2 id="faq">Frequently asked questions</h2>
-    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>When does CB Grup Barna play this weekend?</summary><p>The full calendar for every CB Grup Barna team (under-16 to senior, girls' and boys') is refreshed daily from the official Catalan Basketball Federation calendar and can be seen at cbgrupbarna.info/en/partits/, with the weekend's fixtures, the previous round's results and the season-wide calendar.</p></details><details class="faq-q"><summary>Where does CB Grup Barna play its home games?</summary><p>Most CB Grup Barna home games are played at La Nau del Clot and the Parc del Clot sports hall, in the Clot neighbourhood, Sant Martí district of Barcelona. The exact venue for each game appears in the calendar at cbgrupbarna.info/en/partits/.</p></details><details class="faq-q"><summary>Where can I see the result of a CB Grup Barna game?</summary><p>Results for every CB Grup Barna team are published at cbgrupbarna.info/en/partits/, under last weekend's results, and on each team's own page.</p></details><details class="faq-q"><summary>What teams does CB Grup Barna have?</summary><p>CB Grup Barna has federated teams in the under-16, under-14, under-18 and senior age groups, both women's and men's, with real parity in the number of teams and the budget between the women's and men's programmes. The full list, with each team's record, is in the "By team" section of cbgrupbarna.info/en/partits/.</p></details><!-- FAQ:END --></div>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>When does CB Grup Barna play this weekend?</summary><p>The full calendar for every CB Grup Barna team (cadet, infantil, junior and senior, women's and men's) is updated daily from the official Catalan Basketball Federation calendar and can be seen at cbgrupbarna.info/en/partits/, with this weekend's fixtures, last round's results and the full season calendar.</p></details><details class="faq-q"><summary>Where does CB Grup Barna play its home games?</summary><p>Most CB Grup Barna home games are played at La Nau del Clot and the Parc del Clot sports hall, in the Clot neighbourhood, Sant Martí district of Barcelona. The exact venue for each game appears in the calendar at cbgrupbarna.info/en/partits/.</p></details><details class="faq-q"><summary>Where can I see the result of a CB Grup Barna game?</summary><p>Results for every CB Grup Barna team are published at cbgrupbarna.info/en/partits/, under last weekend's results, and on each team's own page.</p></details><details class="faq-q"><summary>What teams does CB Grup Barna have?</summary><p>CB Grup Barna has federated teams in the Cadet, Infantil, Junior and Senior age groups, both women's and men's, amb paritat real de nombre d'equips i pressupost entre la línia femenina i la masculina. El llistat complet, amb el balanç de cada equip, es pot consultar a l'apartat «By team» de cbgrupbarna.info/en/partits/.</p></details><!-- FAQ:END --></div>
   </div>
 </div>
 <!-- FAQ-LD:START --><script type="application/ld+json">{
@@ -335,7 +337,7 @@
       "name": "When does CB Grup Barna play this weekend?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The full calendar for every CB Grup Barna team (under-16 to senior, girls' and boys') is refreshed daily from the official Catalan Basketball Federation calendar and can be seen at cbgrupbarna.info/en/partits/, with the weekend's fixtures, the previous round's results and the season-wide calendar."
+        "text": "The full calendar for every CB Grup Barna team (cadet, infantil, junior and senior, women's and men's) is updated daily from the official Catalan Basketball Federation calendar and can be seen at cbgrupbarna.info/en/partits/, with this weekend's fixtures, last round's results and the full season calendar."
       }
     },
     {
@@ -359,7 +361,7 @@
       "name": "What teams does CB Grup Barna have?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "CB Grup Barna has federated teams in the under-16, under-14, under-18 and senior age groups, both women's and men's, with real parity in the number of teams and the budget between the women's and men's programmes. The full list, with each team's record, is in the \"By team\" section of cbgrupbarna.info/en/partits/."
+        "text": "CB Grup Barna has federated teams in the Cadet, Infantil, Junior and Senior age groups, both women's and men's, amb paritat real de nombre d'equips i pressupost entre la línia femenina i la masculina. El llistat complet, amb el balanç de cada equip, es pot consultar a l'apartat «By team» de cbgrupbarna.info/en/partits/."
       }
     }
   ]
@@ -519,9 +521,9 @@
     if (ruta) return '<img class="m-escut" src="' + esc(ruta) + '" alt="" loading="lazy" decoding="async">';
     return '<span class="m-escut sense" aria-hidden="true">' + esc(inicials(nom)) + '</span>';
   }
-  function duel(p) {
+  function duel(p, extra) {
     return '<span class="duel">' + escutHTML(p.local, p.casa) + esc(p.local) +
-      '<i>—</i>' + escutHTML(p.visitant, !p.casa) + esc(p.visitant) + '</span>';
+      '<i>—</i>' + escutHTML(p.visitant, !p.casa) + esc(p.visitant) + (extra || '') + '</span>';
   }
 
   function filaJornada(p, nomEquip, ambDia) {
@@ -529,18 +531,22 @@
       ? '<span class="chip casa">Home</span>'
       : '<span class="chip">Away</span>';
     var pista = '';
+    var miniMapa = '';
     if (p.pista) {
       // A casa la Nau ja diu prou: no cal repetir l'adreça exacta. Fora,
       // sí, perquè les famílies han de trobar un pavelló que no coneixen.
+      // El mateix criteri val per al mapa: a casa no cal, ja se sap on és.
       var mostraAdreca = !p.casa && p.adreca;
       var adrecaText = p.pista + (p.adreca ? ', ' + p.adreca : '');
       var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(adrecaText);
-      var mapsEmbed = 'https://www.google.com/maps?q=' + encodeURIComponent(adrecaText) + '&output=embed';
       pista = '<small><a class="pista-link" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
-        'data-cta="mapa-partit">📍 ' + esc(p.pista) + (mostraAdreca ? ' · ' + esc(p.adreca) : '') + '</a></small>' +
-        '<a class="mini-mapa" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
-        'aria-label="Obre el mapa de ' + esc(p.pista) + ' a Google Maps" data-cta="mapa-preview">' +
-        '<iframe src="' + esc(mapsEmbed) + '" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></a>';
+        'data-cta="mapa-partit">📍 ' + esc(p.pista) + (mostraAdreca ? ' · ' + esc(p.adreca) : '') + '</a></small>';
+      if (!p.casa) {
+        var mapsEmbed = 'https://www.google.com/maps?q=' + encodeURIComponent(adrecaText) + '&output=embed';
+        miniMapa = '<a class="mini-mapa" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
+          'aria-label="Obre el mapa de ' + esc(p.pista) + ' a Google Maps" data-cta="mapa-preview">' +
+          '<iframe src="' + esc(mapsEmbed) + '" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></a>';
+      }
     }
     /* Al Gameday cada equip juga un dia diferent: sense el dia, l'hora
        sola no diu res. A la llista del cap de setmana el dia ja fa de
@@ -549,7 +555,7 @@
     return '<div class="mrow">' +
       '<div class="hora">' + quan + '</div>' +
       '<div class="qui"><b>' + esc(nomEquip) + '</b>' + compHTML(p.equipId) +
-      duel(p) + pista + '</div>' +
+      duel(p, miniMapa) + pista + '</div>' +
       '<div class="on">' + lloc + '</div>' +
       '</div>';
   }
