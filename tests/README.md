@@ -6,12 +6,64 @@ servir el Chromium i el Playwright que ja hi ha a l'entorn.
 ```bash
 node tests/audit-seo-geo.mjs                  # SEO i GEO, anàlisi estàtica
 node tests/audit-browser.mjs                  # renderitzat real a 5 amplades
+node tests/aggrega.mjs tests/out/chunks       # ajunta una tanda trossejada
 node tests/report.mjs --md tests/out/INFORME.md
 node tests/screenshots.mjs --full             # captures per mirar-s'ho
 ```
 
 Els resultats en brut queden a `tests/out/` (`seo-geo.json` i `browser.json`),
 i `report.mjs` els ajunta en un informe llegible.
+
+## La tanda sencera s'ha de passar per trossos
+
+Amb 500 pàgines el navegador es queda sense memòria cap a la pàgina 250 i el
+procés **mor amb codi 144 sense dir res**. No està trencat: no hi cap. Per
+això `audit-browser.mjs` accepta `--skip` i `--viewports`, i
+`aggrega.mjs` ajunta els trossos:
+
+```bash
+for skip in $(seq 0 50 550); do
+  node tests/audit-browser.mjs --workers 4 --skip "$skip" --pages 50 \
+    --viewports mobil,mobil-gran,tauleta,tauleta-apaisada \
+    --out tests/out/chunks/c$skip
+done
+node tests/aggrega.mjs tests/out/chunks --out tests/out/browser.json
+```
+
+Una tanda de mòbil i tauleta sobre tot el lloc són ~2.000 càrregues i triga
+poc més d'una hora. `aggrega.mjs` treu el resum **per famílies de problema**,
+no per pàgina: tres-cents avisos de la mateixa regla de CSS són una feina, no
+tres-cents. Amb `TOP=60` es veuen més causes concretes.
+
+## El que la tanda no mira, i per què
+
+Tres menes de fitxer HTML queden fora a propòsit (llista a dalt de
+`audit-browser.mjs`, amb el motiu al costat):
+
+- **`/opina/print/` i `/escoleta/flyer/`** — fulls per imprimir i imatges per
+  a xarxes, maquetats en `mm` i `pt` sobre un A4 o un llenç de 1080×1920. La
+  «zona tocable» d'un cartell imprès no vol dir res, i el preu de mirar-ho
+  seria canviar el color d'una peça impresa per acontentar una regla de
+  pantalla.
+- **`/docs/newsletter/`** — plantilles de correu per a Brevo. Al correu no hi
+  ha tipografies carregades ni punts de referència, i posar-hi un enllaç de
+  «salta al contingut» seria pitjor que no fer-ho.
+
+La resta del lloc **sí** que s'hi mesura, documents interns i àrees protegides
+incloses: es llegeixen des del telèfon com qualsevol altra pàgina.
+
+## Un test que crida el llop no el mira ningú
+
+Si una tanda torna milers d'avisos, mira primer si la prova s'equivoca abans
+de canviar el web. Falsos positius ja corregits, per si en surten de nous:
+
+| Ho donava per dolent | Per què no ho era |
+|---|---|
+| Els sis controls del xat de WhatsApp, «tapats», a totes les pàgines | `visible()` mirava l'element i no els pares: els fills d'un panell amb `opacity:0` diuen `opacity:1` cadascun |
+| La casella de consentiment, 18×18 px | La unió amb l'etiqueta només buscava `label[for=…]`, i allà el `<label>` embolcalla el camp |
+| Cada enllaç enmig d'un paràgraf | La WCAG 2.5.8 excusa expressament els enllaços «inline»: la mida l'hi dona la línia de text |
+| L'enllaç de «salta al contingut», 2:1 de contrast | En repòs viu a `left:-9999px`: aquell estat no el veu ningú |
+| La lletra buidada del capçal de la newsletter, 1:1 | És transparent a propòsit i el que es veu és el contorn (`-webkit-text-stroke`) |
 
 ## Què comprova cadascuna
 

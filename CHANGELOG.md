@@ -22,6 +22,61 @@ només l'hi posa nom.
 
 ---
 
+## 2.2.0 — 2026-08-30
+
+**Repàs de mòbil i tauleta de tot el lloc.** Tanda de proves de 501 pàgines
+per quatre amplades (360, 430, 820 i 1024 px), 2.004 càrregues amb Chromium.
+
+**El que estava trencat, no només incòmode:**
+
+- La portada catalana servia els **quatre enllaços de correu del club** com a
+  `/cdn-cgi/l/email-protection#…` i ensenyava «[email protected]» com a text.
+  Són restes de l'ofuscació de correu de Cloudflare, que aquí no hi ha: el lloc
+  és a GitHub Pages. Qui volia escriure al club des del mòbil clicava un 404 i
+  no podia ni copiar l'adreça. `/es/` i `/en/` ja ho tenien bé amb `mailto:`.
+- **`/es/opina/` i `/en/opina/`** demanaven `opina.json` amb ruta relativa, però
+  el fitxer només és a `/opina/`: les ressenyes de Google no s'hi han vist mai.
+- El **panell tancat del xat de WhatsApp** només s'amagava amb `opacity:0`: els
+  seus sis controls seguien a l'ordre de tabulació de totes les pàgines.
+- **Taules de 640-700 px retallades sense poder desplaçar-les** a
+  `/presentacions/` i `/premidonaesport/`: a 360 px les columnes de la dreta no
+  es podien llegir de cap manera.
+- El **botó de cerca** era l'últim element d'una tira que fa scroll i que a
+  390 px només n'ensenya 140 de 278: al telèfon, la cerca no existia.
+- Dues seccions de preguntes freqüents amb el **mateix `id="faq"`** a
+  `/model-formatiu/` i les seves traduccions.
+
+**Llegibilitat i mida de dit** (les regles noves són ara a la skill `web-cbgb`,
+punts 2 i 7 bis):
+
+- **Terra d'11 px** per a tota la lletra del lloc. Hi havia text a 8 px —i a
+  7,7 a `/premidonaesport/`— en caixa alta i amb `0,3em` d'interlletratge.
+- **44 px d'alçada** per a tot el que es prem: barra d'idiomes, molles de pa,
+  peu, botons del consentiment, pins del mapa de partners, contacte de cada
+  fitxa de partner. Els enllaços enmig d'una frase es queden com anaven: la
+  WCAG els excusa expressament.
+- **Cap fallada de contrast a tot el lloc** (n'hi havia 2.012). La causa
+  principal era el vermell de l'escut sobre fons foscos, que ha d'aclarir-se a
+  `#FF3B41`; `/docs/welcome-pack/` encara feia servir `#E31E24`, el vermell de
+  la guia vella que la decisió del club va descartar.
+- Cap nivell d'encapçalament saltat (n'hi havia 196), cap desbordament
+  horitzontal, cap petició interna fallida.
+
+**Marca i RGPD:** `/admin/marca/` era l'única pàgina que demanava tipografies a
+`fonts.googleapis.com` —justament la pàgina de la MARCA—, i sis fitxers més
+demanaven Bebas Neue, Outfit o Jost, que van sortir del sistema i que aquelles
+pàgines ni tan sols carregaven.
+
+**Pes:** la graella de `/3x3/` passa de 468 KB a 47 KB en un telèfon de
+densitat 2x, amb `srcset` i el generador d'imatges responsives.
+
+**La bateria de proves** (`tests/`) guanya `--viewports` i `--skip`, un
+agregador (`tests/aggrega.mjs`) que resumeix per famílies de problema, i cinc
+falsos positius menys. Els fulls per imprimir i les plantilles de correu en
+queden fora a propòsit, amb el motiu escrit al costat de la llista.
+
+---
+
 ## 2.1.0 — 2026-08-29
 
 **Els cinc punts «purament tècnics» del tauler de pendents.** Tres pàgines

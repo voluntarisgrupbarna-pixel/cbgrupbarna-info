@@ -1,6 +1,6 @@
 ---
 name: mapa-web-cbgb
-description: Mapa complet de cbgrupbarna.info i satèl·lits — què hi ha (totes les seccions, idiomes i pàgines) i com està construït (stack, generadors, robots de GitHub Actions, hosting, fonts de dades). Carrega-la sempre que calgui saber on viu un contingut, quin fitxer o script el genera, com s'actualitza sol, quina és la font de veritat d'una dada, o abans de proposar una pàgina/secció nova per no duplicar el que ja existeix o el que ja s'ha decidit en contra. Complementa web-cbgb, que dona el sistema visual (colors, tipografia, fotografia), no l'inventari ni l'arquitectura.
+description: Mapa complet de cbgrupbarna.info i satèl·lits — què hi ha (totes les seccions, idiomes i pàgines) i com està construït (stack, generadors, robots de GitHub Actions, hosting, fonts de dades). Carrega-la sempre que calgui saber on viu un contingut, quin fitxer o script el genera, com s'actualitza sol, quina és la font de veritat d'una dada, o abans de proposar una pàgina/secció nova per no duplicar el que ja existeix o el que ja s'ha decidit en contra. Complementa web-cbgb, que dona el sistema visual (colors, tipografia, fotografia), no l'inventari ni l'arquitectura. Inclou també com es prova el lloc: la bateria de tests/ que el serveix amb Chromium i el mira a quatre amplades de mòbil i tauleta, per què la tanda sencera s'ha de passar per trossos, i quines pàgines n'estan excloses a propòsit.
 ---
 
 # Mapa · cbgrupbarna.info
@@ -10,7 +10,7 @@ Inventari de contingut + arquitectura tècnica del web del club. `web-cbgb` diu
 funciona per dins**, perquè no es proposi de nou el que ja existeix, no es
 trenqui un automatisme sense saber-ho, i es toqui la font real de cada dada.
 
-*Última actualització: 23/08/2026.*
+*Última actualització: 30/08/2026.*
 
 ---
 
@@ -208,6 +208,54 @@ el seu propi cicle de vida:
 5. **Si és contingut nou de veritat**, decideix on viu: HTML estàtic normal
    (la immensa majoria), entrada nova a `data.json` si és una dada
    reutilitzable, o s'ha de traduir a `/es/` i `/en/` també.
+
+---
+
+## 7 bis. La bateria de proves del repositori
+
+El repositori es prova ell mateix, sense instal·lar res: fa servir el Chromium
+i el Playwright que ja hi ha a l'entorn. Viu a `tests/`, i el detall és a
+`tests/README.md`.
+
+| Eina | Què fa |
+|---|---|
+| `tests/audit-seo-geo.mjs` | Anàlisi estàtica: metadades, enllaços interns, sitemap, hreflang, GEO. No obre cap navegador. |
+| `tests/audit-browser.mjs` | Serveix el lloc i el carrega de debò a cinc amplades. Desbordament, mida de dit, contrast, mida de lletra, fotos ampliades, focus de teclat, errors de consola. |
+| `tests/aggrega.mjs` | Ajunta els trossos d'una tanda i en treu el resum **per famílies de problema**, no per pàgina. |
+| `tests/report.mjs` · `tests/screenshots.mjs` | Informe llegible i captures. |
+
+**La tanda sencera no cap en una sola execució.** Amb 500 pàgines el navegador
+es queda sense memòria cap a la 250 i el procés mor amb codi 144 sense dir
+res. Es passa per trossos i s'ajunta:
+
+```bash
+for skip in $(seq 0 50 550); do
+  node tests/audit-browser.mjs --workers 4 --skip "$skip" --pages 50 \
+    --viewports mobil,mobil-gran,tauleta,tauleta-apaisada --out tests/out/chunks/c$skip
+done
+node tests/aggrega.mjs tests/out/chunks --out tests/out/browser.json
+```
+
+Una tanda sencera de mòbil i tauleta són unes 2.000 càrregues i **triga poc
+més d'una hora**. Per a un repàs ràpid, `--pages 40` sobre les pàgines que
+has tocat.
+
+**Tres menes de fitxer HTML que la tanda exclou a propòsit**, perquè no són
+pàgines que ningú obri amb el mòbil i mesurar-les amb les regles de la
+pantalla és un error de categoria: `/opina/print/` i `/escoleta/flyer/` (fulls
+A4 i imatges per a xarxes, maquetats en `mm` i `pt`) i `/docs/newsletter/`
+(plantilles de correu per a Brevo). La llista és a dalt de
+`tests/audit-browser.mjs`, amb el motiu escrit al costat. **La resta del lloc
+sí que s'hi mesura**, documents interns i àrees protegides incloses: es
+llegeixen des del telèfon com qualsevol altra pàgina.
+
+> **Un test que crida el llop no el mira ningú.** Si una tanda torna milers
+> d'avisos, mira primer si la prova s'equivoca abans de canviar el web. Tres
+> falsos positius ja corregits, per si en surten de nous: els fills d'un
+> panell amb `opacity:0` comptaven com a visibles; la unió amb l'etiqueta
+> només trobava `label[for=…]` i no el `<label>` que embolcalla; i els
+> enllaços enmig d'una frase es comptaven com a zones tocables petites quan
+> la WCAG els excusa expressament.
 
 ---
 

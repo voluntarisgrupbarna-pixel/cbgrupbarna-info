@@ -1,6 +1,6 @@
 ---
 name: web-cbgb
-description: Sistema de disseny de les webs del CB Grup Barna (cbgrupbarna.info i satèl·lits). Carrega-la SEMPRE abans de tocar HTML, CSS o qualsevol peça visual del club: colors, tipografia, fotografia, gràfics i dades, vocabulari, modes de color i les trampes tècniques del repositori. Diu quin és el vermell oficial mostrejat de l'escut i per què no és el de vídeo; quins són els valors únics dels tokens i els seus àlies, i per què la display és sempre l'Anton i el text sempre la Inter, servides des del mateix domini; on són els originals de foto i com passar-los pel script perquè cap surti ampliada; i quines pàgines generades encara no es poden regenerar sense perdre-hi contingut.
+description: Sistema de disseny de les webs del CB Grup Barna (cbgrupbarna.info i satèl·lits). Carrega-la SEMPRE abans de tocar HTML, CSS o qualsevol peça visual del club: colors, tipografia, mida de lletra i de dit, fotografia, gràfics i dades, vocabulari, modes de color i les trampes tècniques del repositori. Diu quin dels tres vermells toca segons el fons que hi ha a sota i per què el de vídeo no val per a web; per què la display és sempre l'Anton i el text sempre la Inter, servides des del mateix domini; que cap text baixa d'11 px i que el que es prem fa 44, amb l'excepció dels enllaços enmig d'una frase; que /presentacions/ té mode fosc propi encara que la resta del lloc no en tingui; que mig lloc porta el CSS compartit copiat a dins, o sigui que arreglar css/barna.css només arriba a la meitat; on són els originals de foto i com passar-los pel script perquè cap surti ampliada; i quines pàgines generades encara no es poden regenerar sense perdre-hi contingut.
 ---
 
 # Sistema de disseny · web CB Grup Barna
@@ -226,7 +226,41 @@ dos passen el mínim AA per a text. Blanc sobre `--red` també dona 4,92:1.
 `sistema-visual-cbgb`. Sobre blanc dona 4,04:1 i sobre crema 3,59:1, per sota
 del mínim. Per a vídeo és correcte; per a web, no.
 
-Sobre fons fosc el vermell s'aclareix a `#FF3B41`, que hi recupera contrast.
+### Quin dels tres vermells, segons el fons
+
+No és una tria de gust: el fons la decideix. És l'error de contrast que més
+vegades ha sortit al lloc —la tanda del 30/08/2026 en va trobar **2.012
+avisos**, i el vermell mal triat sobre fons fosc n'era la causa principal.
+
+| Fons | Vermell | Contrast |
+|---|---|---|
+| Blanc o clar, **text gran** o filet | `--red` `#E20613` | 4,92:1 |
+| Blanc o clar, **text per llegir** | `--red-dark` / `--red-ink` `#A8040E` | 7,81:1 |
+| **Fosc** (tinta, negre) | `#FF3B41` | 5,81:1 sobre `#040404` |
+
+Amb `#E20613` sobre un fons gairebé negre en surten **4,17:1**, per sota del
+mínim. Els llocs on havia passat: la porta d'accés de `/premidonaesport/` (72
+pàgines), `/admin/marca/`, el diàleg de `scripts/admin-gate.js` i
+`/docs/welcome-pack/` —aquest últim, a sobre, encara feia servir `#E31E24`,
+el vermell de la guia vella que la decisió del club va descartar
+expressament.
+
+I el revés també mossega: el diàleg d'accés va sobre **blanc**, i aclarir-hi
+el vermell «perquè és un diàleg fosc» el deixava en 3,53:1. Mira el fons de
+debò, no el que et sembla que hi ha.
+
+### Un component que viatja ha de dir de quin color va
+
+L'avís de portes obertes (`js/avis-portes-obertes.js`) s'injecta a pàgines que
+no controla. El seu paràgraf no declarava color i comptava d'heretar el blanc
+de la barra vermella. A `/presentacions/`, que defineix `p{color:var(--cos)}`,
+la regla de la pàgina guanya per especificitat i el text quedava **gris damunt
+del vermell, 2,52:1**.
+
+**Cap peça que s'injecti amb JavaScript pot heretar el color, la mida ni la
+família de la pàgina que la rep.** Ha de declarar-ho tot, i amb el selector
+prou específic (`.cbgb-po p`, no `p`).
+
 
 ### El que no hi va
 Groc, verd, blau i taronja **no són colors de marca**. Excepcions, i només
@@ -243,6 +277,23 @@ aquestes:
 Dues famílies, i prou. **Anton** per a display i **Inter** per a tota la resta.
 No hi ha cap tercera: Jost, Bebas Neue, Outfit, Cormorant Garamond i Fraunces
 han sortit del lloc.
+
+> **Fins al 30/08/2026 això era una intenció, no un fet.** Les famílies
+> retirades seguien demanades a vuit llocs, tots fora del camí que es mira
+> quan es toca el disseny: `/admin/`, `/admin/marca/`, `/admin/token.html`,
+> `/briefing/admin.html`, `/jugadors/admin.html`, `js/descarrega.js`,
+> `scripts/admin-gate.js` i `premidonaesport/assets/js/auth.js`. Com que cap
+> d'aquelles pàgines carregava la família, el navegador queia a la lletra del
+> sistema i cada telèfon les ensenyava d'una manera. **`/admin/marca/` era, a
+> més, l'única pàgina del lloc que demanava tipografies a
+> `fonts.googleapis.com`** —justament la pàgina de la MARCA, i contra el
+> criteri RGPD de dos paràgrafs més avall. Tot corregit; si tornes a veure
+> «Bebas», «Outfit» o «Jost» en un diff, ve d'una d'aquestes peces.
+>
+> Comprovació d'una línia:
+> ```bash
+> grep -rn "Bebas\|Outfit\|Jost\|googleapis" --include=*.html --include=*.css --include=*.js . | grep -v tests/
+> ```
 
 - **Anton** (`--display`, amb `Haettenschweiler` i `Arial Narrow` de recanvi) va
   en caixa alta. És la de la portada, la de `css/barna.css` i la de les pàgines
@@ -262,6 +313,32 @@ Si fas una pàgina nova, enllaça `/css/fonts.css` i prou.
 Els `.ttf` de `.github/scripts/fonts/` (`anton.ttf`, `inter-*.ttf`) **no són per
 al web**: els fan servir `generate-og-image.py` i `generate-calendaris.py` per
 dibuixar imatges amb Pillow.
+
+### El terra: res per sota d'11 px
+
+**Cap text del lloc baixa d'11 px**, i el graó de sobre és 11,5. És una regla
+d'aquest repositori, no un estàndard: la WCAG no fixa cap mida mínima.
+
+Ve d'una tanda de proves del 30/08/2026 que va trobar **46.382 avisos de text
+per sota d'11 px** a 501 pàgines, amb el més petit a **7,7 px** —en caixa alta
+i amb `0,3em` d'interlletratge, que és el pitjor cas possible per llegir. Hi
+havia titolets (`h3`), el peu legal i etiquetes de formulari a 8,5 px.
+
+El sistema d'etiquetes petites del club **no canvia**: segueixen sent en caixa
+alta, amb interlletratge, i el que les distingeix entre elles és el color i
+l'interlletratge, no la mida. El que va canviar és el terra. Els cinc graons
+de sota (8,5 · 9 · 9,5 · 10 · 10,5) es van repartir en dos:
+
+| Abans | Ara |
+|---|---|
+| 8,5 px · 9 px | **11 px** |
+| 9,5 px · 10 px · 10,5 px | **11,5 px** |
+
+En `rem` amb l'arrel a 16 px, el terra és `.69rem`; en `clamp()`, **el mínim és
+el que mana al mòbil** i és el que s'ha de mirar.
+
+> **Trampa.** Pujar-ho a `css/barna.css` només arriba a mitja web: vegeu la
+> trampa del CSS copiat, al punt 9.
 
 ---
 
@@ -414,16 +491,37 @@ llista d'excepcions sense motius acaba sent la regla.
 
 ## 7. Modes clar i fosc
 
-**Avui no n'hi ha cap.** Cap fitxer del repositori té `prefers-color-scheme` ni
-`data-theme`: tot el lloc és clar, i el fosc només hi surt com a superfície
-puntual (`.foot`, `.franja--ink`). No afegeixis mig mode fosc a una pàgina
-solta: o es fa a `css/barna.css` per a tot el sistema, o no es fa.
+**Correcció del 30/08/2026.** Fins avui aquesta secció deia que no n'hi havia
+cap i que cap fitxer del repositori tenia `data-theme`. **No era cert**, i qui
+s'ho hagués cregut hauria pogut trencar divuit pàgines sense saber-ho:
 
-Si algun dia s'hi posa, això és el que ha de complir. La pàgina s'adapta al mode
-del dispositiu, però **qui la llegeix ha de saber en quin està i poder-lo
-canviar**: un control visible amb tres estats, *sistema*, *clar* i *fosc*.
-«Sistema» no és el mateix que «clar» —pot canviar sol al vespre—, i per això
-s'ha d'anomenar a part i indicar a què resol ara mateix.
+- **La major part del lloc sí que és només clara**, i el fosc hi surt com a
+  superfície puntual (`.foot`, `.franja--ink`). Aquí la regla es manté: no
+  afegeixis mig mode fosc a una pàgina solta.
+- **`/presentacions/` és una excepció que ja existia**: divuit pàgines (les
+  sis catalanes i les seves traduccions) són **fosques de mena** i porten un
+  commutador propi que les passa a clar, amb `:root[data-theme="light"]` i
+  la tria desada a `localStorage`. Cap fitxer del lloc fa servir
+  `prefers-color-scheme`.
+
+Aquell commutador **no compleix el que demana la resta d'aquesta secció**, i es
+deixa dit perquè es decideixi, no perquè s'imiti:
+
+| | Què hauria de fer | Què fa |
+|---|---|---|
+| Estats | tres: sistema, clar, fosc | dos: fosc (per defecte) i clar |
+| Punt de partida | el del dispositiu | sempre fosc, ignora el telèfon |
+| Etiqueta | diu en quin estat s'és | ho diu, però estava en català a les pàgines en castellà i en anglès (corregit el 30/08) |
+
+Que ignori el mode del telèfon és defensable en un micro-lloc de presentació,
+que és una peça de marca amb un vestit triat; convertir-lo en el mode fosc del
+sistema, no. **Si algun dia el mode fosc es fa de debò, es fa a
+`css/barna.css` per a tot el lloc**, i llavors això és el que ha de complir.
+La pàgina s'adapta al mode del dispositiu, però **qui la llegeix ha de saber
+en quin està i poder-lo canviar**: un control visible amb tres estats,
+*sistema*, *clar* i *fosc*. «Sistema» no és el mateix que «clar» —pot canviar
+sol al vespre—, i per això s'ha d'anomenar a part i indicar a què resol ara
+mateix.
 
 Defineix la paleta clara al `:root` pelat, i redefineix **només els tokens** dins
 de `@media (prefers-color-scheme: dark)` amb el guard
@@ -435,6 +533,47 @@ s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
 > dues maquetacions (Franges i Extensa) i no tenia res a veure amb el color.
 > Va desaparèixer el 27/08/2026 (v2.0.0, vegeu §0 bis): ara la portada només
 > té la vista de franges.
+
+---
+
+## 7 bis. Mida de dit
+
+**44 px d'alçada per a tot el que es prem.** El mínim de la WCAG 2.2 (criteri
+2.5.8, nivell AA) és 24×24 px; 44 és la mida de dit que fa servir la resta del
+sistema i el que hi ha d'haver per defecte. Entre els dos números, el criteri
+és: **24 és el terra que no es pot baixar mai; 44 és el que s'ha de posar si
+no costa res.**
+
+I gairebé mai costa res en vertical. La fila de la capçalera ja fa 44 px:
+posar-hi la barra d'idiomes, l'enllaç d'administració o el botó de cerca a
+44 d'alçada **no mou res de lloc**. En horitzontal sí que costa, i per això la
+barra d'idiomes es queda a 26 px d'ample: eixamplar-la a 34 es menjava 27 px
+de la tira de navegació, que a 360 px ja només n'ensenya 110 de 278.
+
+### L'excepció que cal respectar: els enllaços dins d'una frase
+
+La WCAG 2.5.8 **excusa expressament els enllaços «inline»**: un enllaç enmig
+d'un paràgraf no té mida pròpia —l'hi dona la línia de text— i no se n'hi pot
+demanar. Forçar-los a 44 px trencaria la interlínia de tots els articles.
+
+La distinció que val, i que la bateria de proves ja aplica:
+
+| | Mida de dit |
+|---|---|
+| Enllaç enmig d'una frase (el pare té text al voltant) | **no**, es queda com va |
+| Enllaç que ocupa el paràgraf sencer, o va sol dins d'un `<dd>`, un `<li>`, una targeta o el peu | **sí** |
+| Molla de pa, menú, barra d'idiomes, botons, pins de mapa | **sí**, sempre |
+
+Els llocs on això havia fallat, per si tornen a sortir: les molles de pa
+(15 px), els enllaços del peu de les pàgines amb el peu copiat a dins (21 px),
+el web/telèfon/correu de cada fitxa de partner (19 px), els pins del mapa de
+partners (16×16) i els botons del consentiment de galetes, que es quedaven en
+43,59 px per un `min-height:42px` en un bloc estret.
+
+> **Un truc que serveix sovint.** Si créixer taparia el dibuix —els pins del
+> mapa— no facis créixer el dibuix: fes créixer **la caixa que respon**. El
+> pin es dibuixa de 16 px dins d'una caixa transparent de 44×44, i el mapa
+> segueix llegible.
 
 ---
 
@@ -481,6 +620,30 @@ s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
 - **Especificitat dins de `.prose`**: `.prose p` (0,1,1) guanya a una classe sola
   (0,1,0). Qualsevol `<p>` d'un component que visqui dins d'un article s'ha
   d'escriure `.chart p.la-classe`, si no s'hi perden la mida i el color.
+- **Mig lloc porta el CSS compartit copiat a dins.** És la trampa que més
+  temps fa perdre, i no es veu mirant `css/barna.css`. La barra d'idiomes és
+  a dins del `<style>` de **118 pàgines**; el peu, de **27**; la capçalera i
+  la molla de pa de `/presentacions/`, de 18; i les tres portades no
+  carreguen `css/barna.css` en absolut —porten el seu propi full sencer.
+  Arreglar una cosa al full compartit i donar-la per feta deixa **la meitat
+  del lloc igual**, i el resultat és pitjor que no tocar res: el que es prova
+  funciona i el que no es prova, no.
+
+  Abans de donar per bo un arreglo de CSS compartit, compta quantes còpies
+  n'hi ha:
+  ```bash
+  grep -rl "\.lang-switch a" --include=*.html . | grep -v tests/ | wc -l
+  ```
+  I comprova'l en tres pàgines de famílies diferents: la portada,
+  una interior que carregui `css/barna.css` (`/avis-legal/`) i una de
+  `/presentacions/` o `/premidonaesport/`, que tenen full propi.
+- **Un panell tancat amb `opacity:0` segueix a l'ordre de tabulació.** El xat
+  de WhatsApp s'amagava així, i els seus sis controls es podien enfocar amb el
+  teclat a **totes** les pàgines del lloc, just al començament i amb
+  `aria-hidden="true"` a sobre —que damunt d'elements enfocables és una
+  contradicció que els lectors de pantalla no saben resoldre. `visibility:
+  hidden` els en treu i es pot animar igual (`transition: … , visibility .2s`).
+  El mateix val per a `pointer-events:none`: amaga del dit, no del teclat.
 
 ---
 
@@ -499,11 +662,25 @@ s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
    Comprova-ho amb `python3 scripts/i18n-paritat.py --tot` (punt 6 bis); si no,
    t'ho aturarà la comprovació de la proposta de canvi.
 9. Sense desbordament horitzontal a 390 px, i amb focus visible al teclat?
+10. Cap text per sota d'11 px, i el que es prem a 44 px d'alçada (punts 2 i
+    7 bis)? Els enllaços enmig d'una frase no compten.
+11. El vermell que toca per al fons que hi ha a sota (punt 1)?
+12. Si has tocat CSS compartit, l'has tocat també a les còpies que en porten
+    les pàgines amb full propi (punt 9)?
 
-Val la pena obrir-ho de debò abans de donar-ho per fet. Amb Chromium ja
-instal·lat, `python3 -m http.server` i Playwright n'hi ha prou per mirar una
-pàgina a 1280 i a 390 px i comprovar d'una tirada que no desborda, que no hi ha
-cap imatge trencada i que cap no es mostra més gran del que és.
+Val la pena obrir-ho de debò abans de donar-ho per fet, i **no cal fer-ho a
+mà**: el repositori porta la seva pròpia bateria de proves a `tests/`, que
+serveix el lloc amb Chromium i el mira a quatre amplades de mòbil i tauleta.
+
+```bash
+node tests/audit-browser.mjs --viewports mobil,tauleta --pages 40   # una tanda curta
+node tests/aggrega.mjs tests/out/chunks --out tests/out/browser.json
+```
+
+La tanda sencera (500 pàgines) no cap en una sola execució —el navegador es
+queda sense memòria cap a la pàgina 250—, i per això s'hi passa per trossos
+amb `--skip`; `tests/aggrega.mjs` els ajunta i en treu el resum per famílies
+de problema. Els detalls, a `tests/README.md`.
 
 ---
 

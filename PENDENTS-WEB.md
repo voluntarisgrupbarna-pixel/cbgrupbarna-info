@@ -531,6 +531,43 @@ patrocini, dossiers, xarxes). Al repositori ja no hi és.
 
 ## Pendent de decisió
 
+### Del repàs de mòbil i tauleta del 30/08/2026
+
+Tot el que era un error està arreglat (vegeu el CHANGELOG 2.2.0). Aquí queda
+el que **no és un error sinó una decisió**, i que per tant és de l'Ana:
+
+- **La duplicació de les preguntes freqüents a `/model-formatiu/`.** La pàgina
+  porta DUES seccions de preguntes freqüents amb les mateixes preguntes: una
+  escrita a mà i, més avall, la que manté `.github/scripts/generate-faq.py`
+  des de `i18n/faq.yml`. La col·lisió d'`id` ja està resolta —les àncores
+  funcionen—, però **el contingut segueix duplicat als tres idiomes**.
+  Decidir quina de les dues es publica no és cosa d'un arreglo de maquetació:
+  la de dalt té redacció pròpia, la de baix s'actualitza sola.
+- **El mode fosc de `/presentacions/`.** Divuit pàgines són fosques de mena i
+  porten un commutador propi de dos estats que **ignora el mode del telèfon**:
+  qui tingui el mòbil en clar rep igualment la pàgina fosca. És defensable en
+  un micro-lloc de presentació, que és una peça de marca amb un vestit triat.
+  Si es vol que respecti el dispositiu, la skill `web-cbgb` §7 diu què hauria
+  de complir (tres estats: sistema, clar i fosc).
+- **Les fotos que es mostren més grans del que són.** La tanda en compta ~1.860
+  avisos, i **no es resolen amb codi**: en una pantalla retina calen el doble
+  de píxels dels que ocupa la foto, i molts originals no hi arriben. La regla
+  del club dona dues sortides honestes —canviar la foto o fer més petit el
+  marc—, i la primera vol una sessió de fotos. La que més es nota segueix sent
+  la de l'Escoleta: l'única que hi ha és de 750 px.
+- **Les imatges que vénen de Google Drive.** `/3x3/` i altres pàgines
+  n'enllacen unes quantes amb `drive.google.com/thumbnail?id=…`. Funcionen,
+  però depenen d'un tercer per aparèixer, es veuen més lentes des del mòbil i
+  transfereixen la IP de qui llegeix a Google abans de cap consentiment —el
+  mateix criteri pel qual les tipografies es serveixen des del propi domini.
+  Passar-les a `fotos/` és una tarda de feina, no un arreglo.
+- **`/opina/print/`, `/escoleta/flyer/` i `/docs/newsletter/`** han quedat fora
+  de la bateria de proves de mòbil a propòsit: són fulls A4, imatges per a
+  xarxes i plantilles de correu, no pàgines que ningú obri amb el telèfon. Si
+  algun dia una d'aquestes peces es publica com a pàgina de debò, cal
+  treure-la de la llista d'exclusions de `tests/audit-browser.mjs`.
+
+
 - **🔴 Token de GitHub sense revocar.** El 30/08/2026 es va enganxar un Personal Access
   Token al xat de Claude Code per fer canvis urgents (admin de fotos, galeria, marca).
   S'ha fet servir i esborrat del disc, però **mai s'ha revocat**. Cal:
