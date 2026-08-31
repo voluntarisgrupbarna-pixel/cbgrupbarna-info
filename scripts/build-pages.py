@@ -9,6 +9,23 @@ afegir una pàgina o un article nou és afegir una entrada aquí i executar:
 
 No toca ni la portada ni /partits/ ni /escoleta/: aquelles pàgines es mantenen
 a mà perquè tenen lògica pròpia.
+
+⚠️  AVÍS (30/08/2026) — NO EXECUTIS AQUEST SCRIPT SENSE LLEGIR AIXÒ.
+
+    `campus/index.html` del repositori conté tres seccions que aquest generador
+    NO produeix:  «Preus»  ·  «El campus, en imatges»  ·  «La seu».
+    Es van afegir a mà després de generar la pàgina. Executar
+    `python3 scripts/build-pages.py` les esborraria totes tres sense avisar,
+    inclosos els preus (195 € setmana completa / 160 € mitja jornada) i
+    l'adreça de La Nau del Clot.
+
+    Abans de tornar a executar el script cal decidir una de dues:
+      (a) portar aquestes tres seccions a build_campus() aquí dins, o
+      (b) treure campus/ de la llista de pàgines generades.
+
+    Comprova també si li ha passat el mateix a alguna altra pàgina generada:
+        python3 scripts/build-pages.py   →  git diff --stat
+    i mira que el diff només toqui el que esperes.
 """
 import json
 import re
