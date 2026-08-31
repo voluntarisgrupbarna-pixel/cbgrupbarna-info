@@ -478,13 +478,10 @@ footer { text-align:center; padding:30px 16px; font-family:'Inter', sans-serif; 
 
   <!-- ===== VISTA CARTELLS ===== -->
   <section class="view" id="v-cartells">
-    <div class="g-box" id="cartells-lock">
-      <h3>🔐 Cartells del club</h3>
-      <p>La generació i descàrrega de cartells és només per a l'staff de comunicació.</p>
-      <input aria-label="Codi d'accés" type="password" id="c-pass" placeholder="Codi d'accés" autocapitalize="off" spellcheck="false" autocomplete="off">
-      <button class="g-btn" id="c-unlock">Entrar</button>
-    </div>
-    <div id="cartells-open" style="display:none">
+    <!-- Els cartells són oberts (decisió de l'Ana, 31/08/2026): generar
+         un cartell no toca cap dada del club. El codi es queda per a
+         Gestió i l'entrada de resultats, que sí que n'escriuen. -->
+    <div id="cartells-open">
     <div class="g-box">
       <h3>🎨 Generador de cartells per Instagram</h3>
       <p>Estètica de club gran (referència Barça Basket) amb els colors CBGB: vermell, negre i blanc. Tria plantilla i partit, puja la foto del jugador/a i descarrega el post llest per publicar (1080×1350).</p>
@@ -2458,8 +2455,8 @@ function tryUnlock(inputId) {
 }
 document.getElementById('g-unlock').addEventListener('click', ()=>tryUnlock('g-pass'));
 document.getElementById('g-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('g-pass'); });
-document.getElementById('c-unlock').addEventListener('click', ()=>tryUnlock('c-pass'));
-document.getElementById('c-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('c-pass'); });
+/* Cartells oberts: sense codi (31/08/2026). */
+
 document.getElementById('r-unlock').addEventListener('click', ()=>tryUnlock('r-pass'));
 document.getElementById('r-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock('r-pass'); });
 document.getElementById('a-unlock').addEventListener('click', ()=>tryUnlock('a-pass'));

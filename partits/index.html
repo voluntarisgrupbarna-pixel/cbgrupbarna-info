@@ -41,6 +41,12 @@
   .mrow .qui span { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
   .mrow .qui small { display: block; font-size: 11.5px; color: #6B6560; margin-top: 2px; }
   .mrow .on { text-align: right; }
+  /* Qui juga contra qui, amb l'escut de cadascú (rivals: logos/rivals.json). */
+  .mrow .qui .duel { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+  .mrow .qui .duel i { font-style: normal; opacity: 0.55; }
+  .m-escut { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
+  span.m-escut.sense { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid currentColor; opacity: 0.65; font-size: 8px; font-weight: 800; letter-spacing: 0.03em; }
+  .mrow .hora .dia { display: block; font-family: var(--body); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-bottom: 2px; }
   .chip { display: inline-block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--line); padding: 4px 10px; white-space: nowrap; }
   .chip.casa { border-color: rgba(226,6,19,0.4); color: var(--red-dark); }
   /* Semàntics de resultat: només per dir guanyat o perdut (skill web-cbgb). */
@@ -151,16 +157,12 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
+      <a href="/partits/equips/">Equips</a>
       <a href="/club/">Club</a>
-      <a href="/escoleta/" class="opt">Escoleta</a>
       <a href="/partits/" aria-current="page">Calendari</a>
-      <a href="/patrocinadors/" class="opt">Partners</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
       <a href="/campus/" class="opt">Campus</a>
-      <a href="/magics/" class="opt">Màgics</a>
-      <a href="/3x3/" class="opt">3x3</a>
-      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
-      <a href="/fotos/" class="opt">Galeria</a>
-      <a href="/premsa/">Premsa</a>
+      <a href="/empreses/" class="opt">Empreses</a>
     </nav>
     <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/partits/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/partits/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/partits/" hreflang="en" lang="en" aria-label="English">EN</a>
@@ -472,15 +474,40 @@
     return da.getDate() + ' de ' + MESOS[da.getMonth()] + ' i ' + db.getDate() + ' de ' + MESOS[db.getMonth()];
   }
 
-  function filaJornada(p, nomEquip) {
+  /* Els escuts dels rivals els precalcula el robot diari a
+     logos/rivals.json (scripts/build-escuts-rivals.py), amb el mateix
+     resolutor que les fitxes d'equip. Aquí només es consulta. */
+  var RIVALS = {};
+  function inicials(nom) {
+    var toks = (nom || '').toUpperCase().replace(/[^A-ZÀ-Ü0-9 ]/g, ' ').split(/\s+/)
+      .filter(function (t) { return t && ['CB','CLUB','BASQUET','BASKET','AE','UE','AB','BC','A','B','C','E'].indexOf(t) === -1 && !/^\d+$/.test(t); });
+    if (!toks.length) return '?';
+    return toks.length === 1 ? toks[0].slice(0, 2) : toks[0][0] + toks[1][0];
+  }
+  function escutHTML(nom, esBarna) {
+    if (esBarna) return '<img class="m-escut" src="/logo.png" alt="" loading="lazy" decoding="async">';
+    var ruta = RIVALS[nom];
+    if (ruta) return '<img class="m-escut" src="' + esc(ruta) + '" alt="" loading="lazy" decoding="async">';
+    return '<span class="m-escut sense" aria-hidden="true">' + esc(inicials(nom)) + '</span>';
+  }
+  function duel(p) {
+    return '<span class="duel">' + escutHTML(p.local, p.casa) + esc(p.local) +
+      '<i>—</i>' + escutHTML(p.visitant, !p.casa) + esc(p.visitant) + '</span>';
+  }
+
+  function filaJornada(p, nomEquip, ambDia) {
     var lloc = p.casa
       ? '<span class="chip casa">A casa</span>'
       : '<span class="chip">Fora</span>';
     var pista = p.pista ? '<small>' + esc(p.pista) + (p.adreca ? ' · ' + esc(p.adreca) : '') + '</small>' : '';
+    /* Al Gameday cada equip juga un dia diferent: sense el dia, l'hora
+       sola no diu res. A la llista del cap de setmana el dia ja fa de
+       capçalera i no cal repetir-lo. */
+    var quan = (ambDia ? '<small class="dia">' + esc(diaCurt(p.data)) + '</small>' : '') + esc(p.hora);
     return '<div class="mrow">' +
-      '<div class="hora">' + esc(p.hora) + '</div>' +
+      '<div class="hora">' + quan + '</div>' +
       '<div class="qui"><b>' + esc(nomEquip) + '</b>' +
-      '<span>' + esc(p.local) + ' — ' + esc(p.visitant) + '</span>' + pista + '</div>' +
+      duel(p) + pista + '</div>' +
       '<div class="on">' + lloc + '</div>' +
       '</div>';
   }
@@ -488,8 +515,7 @@
   function filaResultat(p, nomEquip) {
     var html = '<div class="mrow">' +
       '<div class="hora">' + esc(p.hora) + '</div>' +
-      '<div class="qui"><b>' + esc(nomEquip) + '</b>' +
-      '<span>' + esc(p.local) + ' — ' + esc(p.visitant) + '</span></div>';
+      '<div class="qui"><b>' + esc(nomEquip) + '</b>' + duel(p) + '</div>';
     if (p.puntsLocal != null && p.puntsVisitant != null) {
       var nostres = p.casa ? p.puntsLocal : p.puntsVisitant;
       var seus = p.casa ? p.puntsVisitant : p.puntsLocal;
@@ -521,7 +547,7 @@
     }).filter(Boolean);
     if (propersSenior.length) {
       gamedayBox.innerHTML = propersSenior.map(function (p) {
-        return filaJornada(p, equips[p.equipId]);
+        return filaJornada(p, equips[p.equipId], true);
       }).join('');
     } else {
       gamedayBox.innerHTML = '<p class="empty-note">Encara no hi ha partits programats per als equips sèniors.</p>';
@@ -586,9 +612,18 @@
     }).join('');
   }
 
-  fetch('data.json')
-    .then(function (r) { return r.json(); })
-    .then(render)
+  Promise.all([
+    fetch('data.json').then(function (r) { return r.json(); }),
+    // Sense el fitxer d'escuts la pàgina segueix: files sense escut, no en blanc.
+    fetch('logos/rivals.json').then(function (r) { return r.json(); }).catch(function () { return {}; })
+  ])
+    .then(function (tot) {
+      var rivals = tot[1] || {};
+      Object.keys(rivals).forEach(function (k) {
+        if (rivals[k]) RIVALS[k] = 'logos/' + String(rivals[k]).replace(/^logos\//, '');
+      });
+      render(tot[0]);
+    })
     .catch(function () {
       document.getElementById('finde-list').innerHTML =
         '<p class="empty-note">No s\'ha pogut carregar el calendari. Torna-ho a provar d\'aquí una estona.</p>';

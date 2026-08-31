@@ -28,7 +28,7 @@ textos:
   nav_club:        {href: /club/,            ca: Club,            es: Club,             en: Club}
   nav_escoleta:    {href: /escoleta/,        ca: Escoleta,        es: Escoleta,         en: Escoleta}
   nav_campus:      {href: /campus/,          ca: Campus,          es: Campus,           en: Camp}
-  nav_empreses:    {href: /empreses/,        ca: Empreses,        es: Empresas,         en: Companies}
+  nav_empreses:    {href: /empreses/, href_es: /es/empresas/, href_en: /en/companies/, ca: Empreses, es: Empresas, en: Companies}
   nav_3x3:         {href: /3x3/,             ca: 3x3,             es: 3x3,              en: 3x3}
   nav_blog:        {href: /blog/,            ca: Blog,            es: Blog,             en: Blog}
   nav_premsa:      {href: /premsa/,          ca: Premsa,          es: Prensa,           en: Press}
@@ -101,16 +101,14 @@ estructura:
       - [titol_contacte, [info_demanar, newsletter, bustia, faq]]
       - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]
   es:
-    nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
-          "nav_partners.opt", nav_info]
+    nav: [nav_equips, nav_club, partits, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
     peu:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
       - [titol_contacte, [info_demanar, newsletter, bustia, faq]]
       - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]
   en:
-    nav: [nav_escoleta, "nav_campus.opt", "nav_3x3.opt", "nav_blog.opt", "nav_premsa.opt",
-          "nav_partners.opt", nav_info]
+    nav: [nav_equips, nav_club, partits, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
     peu:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
