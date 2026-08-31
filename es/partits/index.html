@@ -48,11 +48,11 @@
   .pista-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
   .pista-link:hover, .pista-link:focus-visible { color: var(--red-dark); border-bottom-style: solid; }
   /* Previsualització petita del mapa: només una miniatura clicable, no cal API key. */
-  /* Dins del .duel (flex), al costat del rival: aprofita l'ample abans
-     d'afegir alçada. Només surt fora de casa (dins, ja se sap on és). */
-  .mini-mapa { display: block; flex-shrink: 0; width: 90px; height: 60px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  /* A la dreta del partit, sota el xip de casa/fora: no interromp el nom
+     de l'equip ni el duel. Només surt fora de casa (dins, ja se sap on és). */
+  .mini-mapa { display: block; width: 90px; height: 60px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
   .mini-mapa iframe { width: 100%; height: 100%; border: 0; pointer-events: none; }
-  .mrow .on { text-align: right; }
+  .mrow .on { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; text-align: right; }
   /* Qui juga contra qui, amb l'escut de cadascú (rivals: logos/rivals.json). */
   .mrow .qui .duel { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-top: 4px; }
   .mrow .qui .duel i { font-style: normal; opacity: 0.55; }
@@ -94,7 +94,7 @@
   .gameday .mrow:last-child { border-bottom: 0; }
   @media (max-width: 560px) {
     .mrow { grid-template-columns: 52px minmax(0, 1fr); }
-    .mrow .on { grid-column: 2; text-align: left; }
+    .mrow .on { grid-column: 2; text-align: left; align-items: flex-start; }
     .marc-tag { text-align: left; }
     .mes .mrow { grid-template-columns: 78px minmax(0, 1fr); }
     .mes .mrow .hora { grid-column: 1; }
@@ -323,7 +323,7 @@
 <div class="wrap section">
   <div class="narrow">
     <h2 id="faq">Preguntas frecuentes</h2>
-    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Cuándo juega el CB Grup Barna este fin de semana?</summary><p>El calendario completo de todos los equipos del CB Grup Barna (cadete, infantil, júnior y sénior, femenino y masculino) se actualiza cada día a partir del calendario oficial de la Federación Catalana de Baloncesto y se puede consultar en cbgrupbarna.info/es/partits/, con los partidos del fin de semana, los resultados de la jornada anterior y el calendario global de la temporada.</p></details><details class="faq-q"><summary>¿Dónde juega sus partidos el CB Grup Barna?</summary><p>La mayoría de partidos de casa del CB Grup Barna se juegan en la Nau del Clot y en el Pabellón del Parc del Clot, en el barrio del Clot, Distrito de Sant Martí de Barcelona. El pabellón exacto de cada partido aparece en el calendario de cbgrupbarna.info/es/partits/.</p></details><details class="faq-q"><summary>¿Dónde se puede ver el resultado de un partido del CB Grup Barna?</summary><p>Los resultados de todos los equipos del CB Grup Barna se publican en cbgrupbarna.info/es/partits/, en el apartado de resultados del fin de semana anterior, y en la página de cada equipo.</p></details><details class="faq-q"><summary>¿Qué equipos tiene el CB Grup Barna?</summary><p>El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos, con paridad real de número de equipos y presupuesto entre la línea femenina y la masculina. La lista completa, con el balance de cada equipo, se puede consultar en el apartado «Por equipo» de cbgrupbarna.info/es/partits/.</p></details><!-- FAQ:END --></div>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Cuándo juega el CB Grup Barna este fin de semana?</summary><p>El calendario completo de todos los equipos del CB Grup Barna (cadete, infantil, júnior y sénior, femenino y masculino) se actualiza cada día a partir del calendario oficial de la Federación Catalana de Baloncesto y se puede consultar en cbgrupbarna.info/es/partits/, con los partidos del fin de semana, los resultados de la jornada anterior y el calendario global de la temporada.</p></details><details class="faq-q"><summary>¿Dónde juega sus partidos el CB Grup Barna?</summary><p>La mayoría de partidos de casa del CB Grup Barna se juegan en la Nau del Clot y en el Pabellón del Parc del Clot, en el barrio del Clot, Distrito de Sant Martí de Barcelona. El pabellón exacto de cada partido aparece en el calendario de cbgrupbarna.info/es/partits/.</p></details><details class="faq-q"><summary>¿Dónde se puede ver el resultado de un partido del CB Grup Barna?</summary><p>Los resultados de todos los equipos del CB Grup Barna se publican en cbgrupbarna.info/es/partits/, en el apartado de resultados del fin de semana anterior, y en la página de cada equipo.</p></details><details class="faq-q"><summary>¿Qué equipos tiene el CB Grup Barna?</summary><p>El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos, amb paritat real de nombre d'equips i pressupost entre la línia femenina i la masculina. El llistat complet, amb el balanç de cada equip, es pot consultar a l'apartat «Por equipo» de cbgrupbarna.info/es/partits/.</p></details><!-- FAQ:END --></div>
   </div>
 </div>
 <!-- FAQ-LD:START --><script type="application/ld+json">{
@@ -361,7 +361,7 @@
       "name": "¿Qué equipos tiene el CB Grup Barna?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos, con paridad real de número de equipos y presupuesto entre la línea femenina y la masculina. La lista completa, con el balance de cada equipo, se puede consultar en el apartado «Por equipo» de cbgrupbarna.info/es/partits/."
+        "text": "El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos, amb paritat real de nombre d'equips i pressupost entre la línia femenina i la masculina. El llistat complet, amb el balanç de cada equip, es pot consultar a l'apartat «Por equipo» de cbgrupbarna.info/es/partits/."
       }
     }
   ]
@@ -521,9 +521,9 @@
     if (ruta) return '<img class="m-escut" src="' + esc(ruta) + '" alt="" loading="lazy" decoding="async">';
     return '<span class="m-escut sense" aria-hidden="true">' + esc(inicials(nom)) + '</span>';
   }
-  function duel(p, extra) {
+  function duel(p) {
     return '<span class="duel">' + escutHTML(p.local, p.casa) + esc(p.local) +
-      '<i>—</i>' + escutHTML(p.visitant, !p.casa) + esc(p.visitant) + (extra || '') + '</span>';
+      '<i>—</i>' + escutHTML(p.visitant, !p.casa) + esc(p.visitant) + '</span>';
   }
 
   function filaJornada(p, nomEquip, ambDia) {
@@ -555,8 +555,8 @@
     return '<div class="mrow">' +
       '<div class="hora">' + quan + '</div>' +
       '<div class="qui"><b>' + esc(nomEquip) + '</b>' + compHTML(p.equipId) +
-      duel(p, miniMapa) + pista + '</div>' +
-      '<div class="on">' + lloc + '</div>' +
+      duel(p) + pista + '</div>' +
+      '<div class="on">' + lloc + miniMapa + '</div>' +
       '</div>';
   }
 
