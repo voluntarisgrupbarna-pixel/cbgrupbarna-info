@@ -39,7 +39,12 @@ aquestes regles, es reconeix com del club sense veure l'escut.
 > «mensual» per un lapsus i s'ha corregit a «setmanal», que és la decisió
 > bona). Les fitxes de `/partits/equips/` les genera
 > `.github/scripts/generate-team-pages.py`: allà es toca el generador, no la
-> sortida.
+> sortida. **Trampa trobada el 31/08/2026, en córrer-lo per primer cop des de
+> la Portada B**: el generador ja portava el capçal fosc nou però s'havia
+> quedat enrere en tota la resta —hreflang, selector d'idioma, `css/a11y.css`,
+> el xat de WhatsApp— i encara vestia `theme-color` amb la crema retirada.
+> Corregit i verificat a les 48 pàgines; si es torna a córrer, comprova-ho de
+> nou abans de fiar-te'n cegament.
 >
 > **Com s'han aplicat C i D** (30/08, per si s'han de tocar):
 >

@@ -531,6 +531,23 @@ patrocini, dossiers, xarxes). Al repositori ja no hi és.
 
 ## Pendent de decisió
 
+### Del 31/08/2026: dues coses que no havien arribat a producció
+
+Reportades directament per l'Ana en veure la web publicada, i ja
+resoltes (vegeu el CHANGELOG i la skill `web-cbgb`):
+
+- **Les 15 fitxes de `/partits/equips/`** no tenien encara la Portada B:
+  el generador ja estava preparat però mai s'havia executat des del canvi
+  de disseny, i en córrer-lo per primer cop es va descobrir que s'havia
+  quedat enrere respecte a la resta del lloc (treia el hreflang, el
+  selector d'idioma i el xat, i posava la crema retirada). Corregit el
+  generador i regenerades les 48 pàgines.
+- **L'accés d'administració no es veia a la portada.** A tota la resta
+  del lloc hi ha una pestanya negra fixa a baix a la dreta; a les tres
+  portades se suprimia expressament perquè ja hi havia un enllaç «Admin»
+  a la capçalera —però aquell fa 9,5 px i un gris apagat, i just la
+  pàgina on més gent hi entra era l'única sense l'accés fiable de sempre.
+
 ### Del repàs de mòbil i tauleta del 30/08/2026
 
 Tot el que era un error està arreglat (vegeu el CHANGELOG 2.2.0). Aquí queda
