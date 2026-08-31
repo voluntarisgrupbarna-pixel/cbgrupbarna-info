@@ -211,6 +211,35 @@
 
     var order = CATEGORIES.concat(['Otros']);
     var html = '';
+
+    /* El cartel de cada día: todos los partidos del club de un día
+       (sábado y domingo, por separado) en un solo post, listo para
+       descargar y compartir. Lo mantiene el mismo robot diario
+       (generate-calendaris.py). */
+    var jor = manifest._jornades && manifest._jornades.llista;
+    if (jor && jor.length) {
+      var avuiJ = new Date().toISOString().slice(0, 10);
+      var futures = jor.filter(function (j) { return j.dates[j.dates.length - 1] >= avuiJ; });
+      var passades = jor.filter(function (j) { return j.dates[j.dates.length - 1] < avuiJ; }).reverse();
+      var cardsJ = futures.concat(passades).map(function (j) {
+        var slug = 'jornada-' + j.clau;
+        var fitxer = '/partits/calendaris/descarrega/jornades/' + slug + '.' + j.tipus;
+        var etiqueta = j.tipus === 'pdf' ? 'Descarga el PDF' : 'Guarda la imagen';
+        return '<div class="cal-card">'
+          + '<a href="' + fitxer + '" target="_blank" rel="noopener" data-cta="cal-jor-img-' + j.clau + '">'
+          + '<img src="/partits/calendaris/img/jornades/' + slug + '.webp?v=' + t + '" alt="Cartel de la jornada del '
+          + esc(j.etiqueta) + '" loading="lazy" decoding="async"></a>'
+          + '<div class="cal-card-body">'
+          + '<span class="cal-card-tag">Todos los equipos</span><h3>' + esc(j.etiqueta) + '</h3>'
+          + '<span class="cal-card-meta">' + j.partits + ' partidos</span>'
+          + '<a href="' + fitxer + '" target="_blank" rel="noopener" class="btn ghost" data-cta="cal-jor-dl-' + j.clau
+          + '">' + etiqueta + '</a></div></div>';
+      }).join('');
+      html += '<div class="cal-group"><h2>La jornada, en un solo post</h2>'
+        + '<p class="lede" style="max-width:62ch">Todos los partidos del club de cada día, sábado y domingo por '
+        + 'separado, en un solo cartel, con el escudo de cada rival. Para compartir en el grupo o publicar tal cual.</p>'
+        + '<div class="cal-grid">' + cardsJ + '</div></div>';
+    }
     order.forEach(function (cat) {
       var list = groups[cat];
       if (!list || !list.length) return;

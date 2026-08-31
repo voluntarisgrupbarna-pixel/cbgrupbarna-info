@@ -210,9 +210,9 @@
     var order = CATEGORIES.concat(['Altres']);
     var html = '';
 
-    /* El cartell de cada jornada: tots els partits del club d'un cap de
-       setmana en un sol post, llest per descarregar i compartir. El manté
-       el mateix robot diari (generate-calendaris.py). */
+    /* El cartell de cada dia: tots els partits del club d'un dia (dissabte
+       i diumenge, per separat) en un sol post, llest per descarregar i
+       compartir. El manté el mateix robot diari (generate-calendaris.py). */
     var jor = manifest._jornades && manifest._jornades.llista;
     if (jor && jor.length) {
       var avuiJ = new Date().toISOString().slice(0, 10);
@@ -234,8 +234,8 @@
           + '">' + etiqueta + '</a></div></div>';
       }).join('');
       html += '<div class="cal-group"><h2>La jornada, en un post</h2>'
-        + '<p class="lede" style="max-width:62ch">Tots els partits del club de cada cap de setmana en un sol cartell, '
-        + 'amb l\'escut de cada rival. Per compartir al grup o publicar tal qual.</p>'
+        + '<p class="lede" style="max-width:62ch">Tots els partits del club de cada dia, dissabte i diumenge per '
+        + 'separat, en un sol cartell, amb l\'escut de cada rival. Per compartir al grup o publicar tal qual.</p>'
         + '<div class="cal-grid">' + cardsJ + '</div></div>';
     }
     order.forEach(function (cat) {

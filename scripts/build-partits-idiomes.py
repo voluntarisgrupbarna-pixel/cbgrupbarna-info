@@ -408,9 +408,15 @@ def tradueix(html, idx, lang):
     html = html.replace('content="ca_ES"', f'content="{lang}_ES"' if lang == "es"
                         else 'content="en_GB"')
 
-    # data.json es relatiu a l'original: des de /es/ i /en/ ha de ser absolut.
+    # data.json, els escuts dels rivals, el manifest dels cartells i els
+    # enllaços de descàrrega son relatius a l'original: des de /es/ i /en/
+    # han de ser absoluts, si no, no es troben (i els escuts o el botó de
+    # descàrrega desapareixen en silenci).
     html = html.replace("'data.json'", "'/partits/data.json'")
     html = html.replace('"data.json"', '"/partits/data.json"')
+    html = html.replace("'logos/rivals.json'", "'/partits/logos/rivals.json'")
+    html = html.replace("'calendaris/manifest.json'", "'/partits/calendaris/manifest.json'")
+    html = html.replace('href="calendaris/descarrega/', 'href="/partits/calendaris/descarrega/')
 
     # Enllaços interns cap a la versio de l'idioma, nomes on existeix. El
     # selector d'idioma es queda tal qual: els seus tres enllaços ja apunten,
