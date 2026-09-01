@@ -28,7 +28,7 @@ aquestes regles, es reconeix com del club sense veure l'escut.
 > | | Proposta | Va a | Estat |
 > |---|---|---|---|
 > | A | L'Afinat | La portada, `cbgrupbarna.info` | **Publicada** (v1.4.0) |
-> | B | Dia de partit | **Tot el calendari**: `/partits/`, `/partits/calendaris/` i les fitxes de `/partits/equips/`, als tres idiomes | **Publicada** (30/08) · les fitxes d'equip esperen el generador |
+> | B | Dia de partit | **Tot el calendari**: `/partits/`, `/partits/calendaris/` i les fitxes de `/partits/equips/`, als tres idiomes | **Publicada** sencera (31/08), amb escuts a cada partit |
 > | C | La Jugada | L'Escoleta, `/escoleta/`, amb submenú «Història de l'escola» | **Publicada** (30/08) |
 > | D | L'Edició | **La newsletter setmanal** (Brevo) | **Publicada** (30/08): `/newsletter/` als tres idiomes + `docs/newsletter/plantilla.html` per a Brevo |
 >
@@ -40,11 +40,14 @@ aquestes regles, es reconeix com del club sense veure l'escut.
 > bona). Les fitxes de `/partits/equips/` les genera
 > `.github/scripts/generate-team-pages.py`: allà es toca el generador, no la
 > sortida. **Trampa trobada el 31/08/2026, en córrer-lo per primer cop des de
-> la Portada B**: el generador ja portava el capçal fosc nou però s'havia
-> quedat enrere en tota la resta —hreflang, selector d'idioma, `css/a11y.css`,
-> el xat de WhatsApp— i encara vestia `theme-color` amb la crema retirada.
-> Corregit i verificat a les 48 pàgines; si es torna a córrer, comprova-ho de
-> nou abans de fiar-te'n cegament.
+> la Portada B**: es va quedar enrere respecte a la resta del lloc —hreflang,
+> selector d'idioma, `css/a11y.css`, el xat de WhatsApp— i encara vestia
+> `theme-color` amb la crema retirada. Es va corregir dues vegades en
+> paral·lel, en dues sessions diferents: aquesta i una altra que, a més
+> d'arreglar el mateix, hi va afegir els escuts de cada equip a cada partit
+> (`scripts/escuts_partits.py`) i el disseny `.vsq`. La segona versió és la
+> que ha quedat: més completa i ja verificada a les 48 pàgines. Des del
+> 31/08 el generador està al dia i emet la B amb escuts.
 >
 > **Com s'han aplicat C i D** (30/08, per si s'han de tocar):
 >
@@ -599,7 +602,12 @@ partners (16×16) i els botons del consentiment de galetes, que es quedaven en
   de Protecció del Menor i Bàsquet femení, però `/campus/`, `/premsa/`, `/3x3/`,
   `partits/calendaris/` i les fitxes de partners encara tenen a disc el peu antic
   de 17 enllaços. S'igualarà el dia que es puguin regenerar sense pèrdues.
-- **`.github/scripts/generate-team-pages.py`** genera `partits/equips/`.
+- **`.github/scripts/generate-team-pages.py`** genera `partits/equips/` als
+  tres idiomes. **Al dia des del 30/08/2026**: emet commutador d'idioma,
+  `hreflang`, `a11y.css`, el capçal fosc de la proposta B i les files de
+  partit amb l'escut del Barna i el del rival (resolts per
+  `scripts/escuts_partits.py` des de `partits/logos/`). Es pot executar
+  sense por: no perd res del que hi ha publicat.
 - **`.github/scripts/generate-seo-snapshot.py`** només reescriu entre els
   marcadors `SEO-SNAPSHOT`, `SEO-EVENTS` i `SEO-EQUIPS`. Fora d'aquí és segur.
 - **`partits/data.json`** el refresca un robot diari. Els canvis manuals hi duren poc.

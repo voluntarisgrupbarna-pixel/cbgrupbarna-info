@@ -633,3 +633,24 @@ el que **no és un error sinó una decisió**, i que per tant és de l'Ana:
 
 - **Esdeveniments «passats»** (3x3 Glòries, Mes de l'Orgull, Campus Time Chamber,
   Little Basket Day): són esdeveniments anuals del club i es queden com estan.
+
+## ✅ Fet el 30/08/2026 · les quatre portades i el generador d'equips (aquesta sessió)
+
+En producció via PR #121, #123 i #125: la campanya de Portes Obertes sencera
+(calendari de reserves amb comptador real, motor d'Apps Script pendent de
+desplegar per l'Ana, avís a tot el web), la proposta B a `/partits/` i
+`/partits/calendaris/`, el menú reorganitzat, la portada C («La Jugada») a
+l'Escoleta, la D («L'Edició») a la newsletter amb la plantilla i el número 1
+per a Brevo (`docs/newsletter/`), l'article de Portes Obertes als tres
+idiomes, la cadència setmanal pertot i les 12 redireccions sense `noindex`.
+
+**Tanda 4 — `generate-team-pages.py`, al dia i executat.** Era l'últim
+blocatge tècnic: el generador esborrava el commutador d'idioma, els
+`hreflang`, `a11y.css` i el `theme-color` de les 48 fitxes de
+`/partits/equips/`. Ara ho emet tot i, a més, **cada fila de partit porta
+l'escut del Barna i el del rival**: el nou `scripts/escuts_partits.py`
+resol el nom FCBQ contra l'inventari de `partits/logos/` (map → alias →
+emparellament automàtic, provant també el nom sense sufixos d'equip).
+119 de 120 rivals amb escut; l'únic sense (CB Mollet B) surt amb
+inicials. Per afegir-ne un: PNG a `partits/logos/clubs/`, alta a
+`index.json` i, si cal, l'àlies a `alias.json`.

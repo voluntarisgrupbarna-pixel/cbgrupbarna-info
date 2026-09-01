@@ -48,6 +48,10 @@ ROOT = Path(__file__).resolve().parents[2]
 _spec = importlib.util.spec_from_file_location("i18n_chrome", ROOT / "scripts" / "i18n_chrome.py")
 _chrome = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_chrome)
+_spec2 = importlib.util.spec_from_file_location("escuts_partits", ROOT / "scripts" / "escuts_partits.py")
+_escuts_mod = importlib.util.module_from_spec(_spec2)
+_spec2.loader.exec_module(_escuts_mod)
+ESCUTS = _escuts_mod.Escuts()
 DATA = ROOT / "partits" / "data.json"
 OUT_DIR = ROOT / "partits" / "equips"
 BASE_URL = "https://cbgrupbarna.info"
@@ -181,11 +185,14 @@ def resultat(p):
     return "W" if barna > rival else ("L" if barna < rival else "E")
 
 
-def hreflang_html(ruta, idioma):
-    """Els quatre alternate: un per idioma i l'x-default cap al català."""
-    del idioma  # el bloc és el mateix per als tres idiomes
-    linies = [f'<link rel="alternate" hreflang="{i}" href="{BASE_URL}{prefix(i)}{ruta}">' for i in IDIOMES]
-    linies.append(f'<link rel="alternate" hreflang="x-default" href="{BASE_URL}{ruta}">')
+def alternates_html(ruta):
+    """Els hreflang d'una pàgina d'equips. Les tres versions comparteixen
+    ruta (/partits/equips/... amb el prefix d'idioma), així que es poden
+    escriure directament sense passar per routes.yml — que no coneix les
+    pàgines generades."""
+    urls = {i: f"{BASE_URL}{prefix(i)}{ruta}" for i in IDIOMES}
+    linies = [f'<link rel="alternate" hreflang="{i}" href="{u}">' for i, u in urls.items()]
+    linies.append(f'<link rel="alternate" hreflang="x-default" href="{urls["ca"]}">')
     return "\n".join(linies)
 
 
@@ -195,11 +202,11 @@ def head_html(title, desc, canonical, og_image, extra_ld, idioma, ruta):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#10100E">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canonical}">
-{hreflang_html(ruta, idioma)}
+{alternates_html(ruta)}
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="CB Grup Barna">
@@ -215,36 +222,27 @@ def head_html(title, desc, canonical, og_image, extra_ld, idioma, ruta):
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">
-<link rel="stylesheet" href="/css/a11y.css">
 <!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
      aquí, el planta /js/cerca.js dins de la capçalera. -->
 <link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/a11y.css">
 <script type="application/ld+json">{json.dumps(extra_ld, ensure_ascii=False)}</script>
 <script src="/js/galetes.js" defer></script>
 <script src="/js/xat-whatsapp.js" defer></script>
-<script src="/js/cerca.js" defer></script>
+<script src="/js/avis-portes-obertes.js" defer></script>
 </head>
 """
 
 
 def lang_switch_html(ruta, idioma):
-    NOMS = {"ca": "Català", "es": "Castellano", "en": "English"}
-    ETIQUETES = {"ca": "CA", "es": "ES", "en": "EN"}
-    trossos = []
-    for i, ling in enumerate(IDIOMES):
-        classe = ' class="active" aria-current="true"' if ling == idioma else ''
-        trossos.append(
-            f'<a href="{prefix(ling)}{ruta}" hreflang="{ling}" lang="{ling}" '
-            f'aria-label="{NOMS[ling]}"{classe}>{ETIQUETES[ling]}</a>'
-        )
-        if i < len(IDIOMES) - 1:
-            trossos.append('<span class="sep" aria-hidden="true">·</span>')
-    return (
-        '    <nav class="lang-switch" '
-        "aria-label=\"Canvia d'idioma · Cambiar idioma · Change language\">\n"
-        f'      {"".join(trossos)}\n'
-        '    </nav>'
-    )
+    def un(i, etiqueta, aria):
+        actiu = ' class="active" aria-current="true"' if i == idioma else ""
+        return (f'<a href="{prefix(i)}{ruta}" hreflang="{i}" lang="{i}" '
+                f'aria-label="{aria}"{actiu}>{etiqueta}</a>')
+    sep = '<span class="sep" aria-hidden="true">·</span>'
+    return ('    <nav class="lang-switch" aria-label="Canvia d\'idioma · Cambiar idioma · Change language">\n'
+            f'      {un("ca", "CA", "Català")}{sep}{un("es", "ES", "Castellano")}{sep}{un("en", "EN", "English")}\n'
+            '    </nav>')
 
 
 def header_html(idioma, ruta):
@@ -263,15 +261,39 @@ def header_html(idioma, ruta):
 """
 
 
+def escut_html(nom, es_barna):
+    """L'escut d'un dels dos equips de la fila. El del Barna és el del
+    lloc; el del rival el resol scripts/escuts_partits.py des de
+    l'inventari de /partits/logos/. Qui no en té, duu les seves inicials:
+    mai l'escut d'un altre i mai un forat."""
+    if es_barna:
+        return ('<img class="vsq-escut" src="/logo.png" alt="" '
+                'width="24" height="24" loading="lazy" decoding="async">')
+    ruta = ESCUTS.escut(nom)
+    if ruta:
+        return (f'<img class="vsq-escut" src="/partits/{esc(ruta)}" alt="" '
+                'width="24" height="24" loading="lazy" decoding="async">')
+    return f'<span class="vsq-sense" aria-hidden="true">{esc(_escuts_mod.inicials(nom))}</span>'
+
+
 def match_line(p, eq_nom, idioma):
     t = T[idioma]
-    resultat_txt = ""
+    fi = ""
     r = resultat(p)
     if r:
         com = t["victoria"] if r == "W" else t["derrota"] if r == "L" else t["empat"]
-        resultat_txt = f" · <strong>{p['puntsLocal']}-{p['puntsVisitant']}</strong> ({com})"
-    return (f"<li>{fmt_dia(p['data'], idioma)}, {esc(p['hora'])} — "
-            f"{esc(p['local'])} vs {esc(p['visitant'])} · {esc(p.get('pista', ''))}{resultat_txt}</li>")
+        classe = ' class="guany"' if r == "W" else ""
+        fi = (f'<span class="vsq-fi"><strong{classe}>'
+              f"{p['puntsLocal']}-{p['puntsVisitant']}</strong>{com}</span>")
+    else:
+        fi = f'<span class="vsq-fi">{esc(p.get("pista", ""))}</span>'
+    local_escut = escut_html(p["local"], p["casa"])
+    visitant_escut = escut_html(p["visitant"], not p["casa"])
+    return (f'<li><span class="vsq-quan"><b>{fmt_dia(p["data"], idioma)}</b>{esc(p["hora"])}</span>'
+            f'<span class="vsq-duel">{local_escut}<span class="nom">{esc(p["local"])}</span>'
+            f'<span class="contra">VS</span>'
+            f'{visitant_escut}<span class="nom">{esc(p["visitant"])}</span></span>'
+            f"{fi}</li>")
 
 
 def team_page(e, data, avui, idioma):
@@ -314,11 +336,11 @@ def team_page(e, data, avui, idioma):
         ],
     }
 
-    propers_html = ("<ul>" + "".join(match_line(p, nom, idioma) for p in propers[:MAX_RESULTATS]) + "</ul>") \
+    propers_html = ('<ul class="vsq">' + "".join(match_line(p, nom, idioma) for p in propers[:MAX_RESULTATS]) + "</ul>") \
         if propers else f"<p class=\"lede\">{t['sense_propers']}</p>"
-    resultats_html = ("<ul>" + "".join(match_line(p, nom, idioma) for p in resultats_recents) + "</ul>") \
+    resultats_html = ('<ul class="vsq">' + "".join(match_line(p, nom, idioma) for p in resultats_recents) + "</ul>") \
         if resultats_recents else f"<p class=\"lede\">{t['sense_jugats']}</p>"
-    calendari_html = ("<ul>" + "".join(match_line(p, nom, idioma) for p in partits) + "</ul>") \
+    calendari_html = ('<ul class="vsq">' + "".join(match_line(p, nom, idioma) for p in partits) + "</ul>") \
         if partits else f"<p class=\"lede\">{t['sense_calendari']}</p>"
 
     body = f"""{header_html(idioma, ruta)}

@@ -34,20 +34,42 @@
   .sec-head { margin-bottom: clamp(22px, 3.4vw, 38px); }
   .sec-head h2 { font-size: clamp(17px, 2.4vw, 26px); margin-top: 14px; }
   .sec-head .sub { margin-top: 12px; font-size: 14.5px; color: var(--ink-2); max-width: 60ch; }
-  .day-h { font-family: var(--display); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin: clamp(26px, 4vw, 40px) 0 4px; }
+  .day-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--display); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin: clamp(26px, 4vw, 40px) 0 4px; }
+  .day-dl { font-family: var(--body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: var(--ink-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .day-dl:hover, .day-dl:focus-visible { color: var(--red-dark); border-bottom-style: solid; }
   .mrow { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px 16px; align-items: baseline; padding: 14px 2px; border-bottom: 1px solid var(--line); }
   .mrow .hora { font-family: var(--display); font-weight: 400; font-size: 15px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
   .mrow .qui b { display: block; font-family: var(--display); font-weight: 400; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.5; }
   .mrow .qui span { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
   .mrow .qui small { display: block; font-size: 11.5px; color: #6B6560; margin-top: 2px; }
-  .mrow .on { text-align: right; }
-  .chip { display: inline-block; font-family: var(--display); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--line); padding: 4px 10px; white-space: nowrap; }
+  /* La categoria de joc (Preferent, Interterritorial...), no l'edat/gènere,
+     que ja surt al nom de l'equip en majúscules just a sobre. */
+  .mrow .qui small.comp { letter-spacing: 0.02em; }
+  .pista-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .pista-link:hover, .pista-link:focus-visible { color: var(--red-dark); border-bottom-style: solid; }
+  /* Previsualització petita del mapa: només una miniatura clicable, no cal API key. */
+  /* A la dreta del partit, sota el xip de casa/fora: no interromp el nom
+     de l'equip ni el duel. Només surt fora de casa (dins, ja se sap on és). */
+  .mini-mapa { display: block; width: 90px; height: 60px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  .mini-mapa iframe { width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .mrow .on { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; text-align: right; }
+  /* Qui juga contra qui, amb l'escut de cadascú (rivals: logos/rivals.json). */
+  .mrow .qui .duel { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+  .mrow .qui .duel i { font-style: normal; opacity: 0.55; }
+  /* Protagonistes, no un detall: l'escut és tan gran com el text, com pertoca
+     a un club gran. */
+  .m-escut { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; }
+  span.m-escut.sense { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid currentColor; opacity: 0.75; font-size: 12px; font-weight: 800; letter-spacing: 0.02em; }
+  .mrow .qui .duel { gap: 10px; }
+  .mrow .qui .duel img.m-escut, .mrow .qui .duel span.m-escut { margin: 2px 0; }
+  .mrow .hora .dia { display: block; font-family: var(--body); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-bottom: 2px; }
+  .chip { display: inline-block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--line); padding: 4px 10px; white-space: nowrap; }
   .chip.casa { border-color: rgba(226,6,19,0.4); color: var(--red-dark); }
   /* Semàntics de resultat: només per dir guanyat o perdut (skill web-cbgb). */
   .marc { font-family: var(--display); font-weight: 400; font-size: 17px; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .marc.win { color: #1B7F4B; }
   .marc.loss { color: #A8040E; }
-  .marc-tag { display: block; font-family: var(--display); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; margin-top: 2px; text-align: right; }
+  .marc-tag { display: block; font-family: var(--display); font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6560; margin-top: 2px; text-align: right; }
   .empty-note { padding: 18px 0; font-size: 14.5px; color: var(--ink-2); }
   /* Calendario global: un desplegable per mes */
   .mes { border: 1px solid var(--line); border-bottom: 0; }
@@ -55,11 +77,11 @@
   .mes summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 54px; padding: 12px clamp(14px, 2.4vw, 24px); font-family: var(--display); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s; }
   .mes summary::-webkit-details-marker { display: none; }
   .mes summary:hover { color: var(--red); }
-  .mes summary i { font-style: normal; font-family: var(--display); font-size: 11px; letter-spacing: 0.2em; color: #6B6560; }
+  .mes summary i { font-style: normal; font-family: var(--display); font-size: 9px; letter-spacing: 0.2em; color: #6B6560; }
   .mes[open] summary { border-bottom: 1px solid var(--line); }
   .mes-body { padding: 4px clamp(14px, 2.4vw, 24px) 18px; }
   .mes .mrow { grid-template-columns: 92px 64px minmax(0, 1fr); }
-  .mes .mrow .dia { font-family: var(--display); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6560; white-space: nowrap; }
+  .mes .mrow .dia { font-family: var(--display); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6560; white-space: nowrap; }
   .mes .mrow:last-child { border-bottom: 0; }
   /* Llistat per equip (el manté el robot diari entre els marcadors SEO-EQUIPS) */
   .equips-list ul { list-style: none; margin: 0; border-top: 1px solid var(--ink); }
@@ -72,7 +94,7 @@
   .gameday .mrow:last-child { border-bottom: 0; }
   @media (max-width: 560px) {
     .mrow { grid-template-columns: 52px minmax(0, 1fr); }
-    .mrow .on { grid-column: 2; text-align: left; }
+    .mrow .on { grid-column: 2; text-align: left; align-items: flex-start; }
     .marc-tag { text-align: left; }
     .mes .mrow { grid-template-columns: 78px minmax(0, 1fr); }
     .mes .mrow .hora { grid-column: 1; }
@@ -113,7 +135,7 @@
   .p-board-h p { font-size: 12.5px; color: rgba(255,255,255,0.55); margin: 0; max-width: 42ch; }
   .p-dark .mrow { border-bottom-color: rgba(255,255,255,0.14); }
   .p-dark .mrow .qui span { color: rgba(255,255,255,0.66); }
-  .p-dark .mrow .qui small { color: rgba(255,255,255,.62); }
+  .p-dark .mrow .qui small { color: rgba(255,255,255,0.4); }
   .p-dark .chip { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.7); }
   .p-dark .chip.casa { border-color: rgba(255,59,65,0.55); color: var(--red-light); }
   .p-dark .day-h { color: var(--red-light); border-bottom-color: rgba(255,255,255,0.2); }
@@ -126,7 +148,7 @@
   .p-board.light .p-board-h h2 { color: var(--ink); }
   .p-board.light .p-board-h p { color: var(--muted); }
 
-  /* Per equip: de llista plana a graella de fitxes, com les b-tile
+  /* Por equipo: de llista plana a graella de fitxes, com les b-tile
      de la maqueta. El robot que manté <ul> entre SEO-EQUIPS no es toca:
      només en canvia la presentació. */
   /* Graella amb vores pròpies a cada fitxa (no el truc del gap-com-a-línia,
@@ -151,16 +173,12 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
+      <a href="/es/partits/equips/">Equips</a>
       <a href="/es/club/">Club</a>
-      <a href="/es/escoleta/" class="opt">Escoleta</a>
       <a href="/es/partits/" aria-current="page">Calendario</a>
-      <a href="/es/patrocinadors/" class="opt">Partners</a>
+      <a href="/es/escoleta/" class="opt">Escoleta</a>
       <a href="/es/campus/" class="opt">Campus</a>
-      <a href="/es/magics/" class="opt">Màgics</a>
-      <a href="/es/3x3/" class="opt">3x3</a>
-      <a href="/es/cistella-petita/" class="opt">Cistella Petita</a>
-      <a href="/es/fotos/" class="opt">Galería</a>
-      <a href="/es/premsa/">Prensa</a>
+      <a href="/es/empresas/" class="opt">Empresas</a>
     </nav>
     <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/partits/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/partits/" hreflang="es" lang="es" aria-label="Castellano" class="active" aria-current="true">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/partits/" hreflang="en" lang="en" aria-label="English">EN</a>
@@ -171,7 +189,7 @@
 <main id="main">
 
   <!-- ==== JORNADA (fosc, proposta B) ====
-       Capçal + Gameday Seniors + Aquest cap de setmana, fosos en un sol bloc
+       Capçal + Gameday Seniors + Este fin de semana, fosos en un sol bloc
        fosc: és el «pavelló en dissabte» de la maqueta. Mateixos ids
        (gameday-seniors, finde) perquè els botons d'aquí i els enllaços de
        /partits/calendaris/ segueixin funcionant. -->
@@ -186,8 +204,8 @@
       </svg>
     </div>
     <div class="wrap p-dark-in">
-      <nav class="crumb" aria-label="Fil d'Ariadna">
-        <a href="/">Inici</a> · Días de partido
+      <nav class="crumb" aria-label="Ruta de navegación">
+        <a href="/es/">Inicio</a> · Días de partido
       </nav>
       <div class="p-dark-hero">
         <div>
@@ -196,7 +214,7 @@
           <p class="lede">
             Todos los equipos federados del club, en un solo calendario. Se actualiza cada día a partir
             del calendario oficial de la <strong>Federación Catalana de Baloncesto</strong>: día, hora,
-            rival, casa o fuera y pista, y los resultados de la jornada anterior.
+          rival, casa o fuera y pista, y los resultados de la jornada anterior.
           </p>
           <div class="btn-row">
             <a class="btn red" href="#gameday-seniors">Gameday Seniors</a>
@@ -206,7 +224,7 @@
         </div>
         <figure class="p-dark-ph">
           <img src="/img/seniors@2x.webp" width="600" height="900" loading="eager"
-               alt="Jugadora de la primera plantilla sénior del CB Grup Barna">
+               alt="Jugadora de la primera plantilla sènior del CB Grup Barna">
         </figure>
       </div>
 
@@ -305,7 +323,7 @@
 <div class="wrap section">
   <div class="narrow">
     <h2 id="faq">Preguntas frecuentes</h2>
-    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Cuándo juega el CB Grup Barna este fin de semana?</summary><p>El calendari complet de tots els equips del CB Grup Barna (cadet, infantil, júnior i sènior, femení i masculí) s'actualitza cada dia a partir del calendario oficial de la Federación Catalana de Baloncesto y se puede consultar en cbgrupbarna.info/es/partits/, amb els partits del cap de setmana, els resultats de la jornada anterior i el calendari global de la temporada.</p></details><details class="faq-q"><summary>¿Dónde juega sus partidos el CB Grup Barna?</summary><p>La mayoría de partidos de casa del CB Grup Barna se juegan en la Nau del Clot y en el Pabellón del Parc del Clot, en el barrio del Clot, Distrito de Sant Martí de Barcelona. El pabellón exacto de cada partido aparece en el calendario de cbgrupbarna.info/es/partits/.</p></details><details class="faq-q"><summary>¿Dónde se puede ver el resultado de un partido del CB Grup Barna?</summary><p>Los resultados de todos los equipos del CB Grup Barna se publican en cbgrupbarna.info/es/partits/, en el apartado de resultados del fin de semana anterior, y en la página de cada equipo.</p></details><details class="faq-q"><summary>¿Qué equipos tiene el CB Grup Barna?</summary><p>El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos, amb paritat real de nombre d'equips i pressupost entre la línia femenina i la masculina. El llistat complet, amb el balanç de cada equip, es pot consultar a l'apartat «Por equipo» de cbgrupbarna.info/es/partits/.</p></details><!-- FAQ:END --></div>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Cuándo juega el CB Grup Barna este fin de semana?</summary><p>El calendario completo de todos los equipos del CB Grup Barna (cadete, infantil, júnior y sénior, femenino y masculino) se actualiza cada día a partir del calendario oficial de la Federación Catalana de Baloncesto y se puede consultar en cbgrupbarna.info/es/partits/, con los partidos del fin de semana, los resultados de la jornada anterior y el calendario global de la temporada.</p></details><details class="faq-q"><summary>¿Dónde juega sus partidos el CB Grup Barna?</summary><p>La mayoría de partidos de casa del CB Grup Barna se juegan en la Nau del Clot y en el Pabellón del Parc del Clot, en el barrio del Clot, Distrito de Sant Martí de Barcelona. El pabellón exacto de cada partido aparece en el calendario de cbgrupbarna.info/es/partits/.</p></details><details class="faq-q"><summary>¿Dónde se puede ver el resultado de un partido del CB Grup Barna?</summary><p>Los resultados de todos los equipos del CB Grup Barna se publican en cbgrupbarna.info/es/partits/, en el apartado de resultados del fin de semana anterior, y en la página de cada equipo.</p></details><details class="faq-q"><summary>¿Qué equipos tiene el CB Grup Barna?</summary><p>El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos, con paridad real de número de equipos y presupuesto entre la línea femenina y la masculina. La lista completa, con el balance de cada equipo, se puede consultar en el apartado «Por equipo» de cbgrupbarna.info/es/partits/.</p></details><!-- FAQ:END --></div>
   </div>
 </div>
 <!-- FAQ-LD:START --><script type="application/ld+json">{
@@ -319,7 +337,7 @@
       "name": "¿Cuándo juega el CB Grup Barna este fin de semana?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "El calendari complet de tots els equips del CB Grup Barna (cadet, infantil, júnior i sènior, femení i masculí) s'actualitza cada dia a partir del calendario oficial de la Federación Catalana de Baloncesto y se puede consultar en cbgrupbarna.info/es/partits/, amb els partits del cap de setmana, els resultats de la jornada anterior i el calendari global de la temporada."
+        "text": "El calendario completo de todos los equipos del CB Grup Barna (cadete, infantil, júnior y sénior, femenino y masculino) se actualiza cada día a partir del calendario oficial de la Federación Catalana de Baloncesto y se puede consultar en cbgrupbarna.info/es/partits/, con los partidos del fin de semana, los resultados de la jornada anterior y el calendario global de la temporada."
       }
     },
     {
@@ -343,7 +361,7 @@
       "name": "¿Qué equipos tiene el CB Grup Barna?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos, amb paritat real de nombre d'equips i pressupost entre la línia femenina i la masculina. El llistat complet, amb el balanç de cada equip, es pot consultar a l'apartat «Por equipo» de cbgrupbarna.info/es/partits/."
+        "text": "El CB Grup Barna tiene equipos federados en categorías Cadete, Infantil, Júnior y Sénior, tanto femeninos como masculinos, con paridad real de número de equipos y presupuesto entre la línea femenina y la masculina. La lista completa, con el balance de cada equipo, se puede consultar en el apartado «Por equipo» de cbgrupbarna.info/es/partits/."
       }
     }
   ]
@@ -351,15 +369,15 @@
 </main>
 
 <!-- CRIDA DE COMUNITAT · scripts/crida-comunitat.py -->
-<section class="comunitat" aria-label="Sigue al CB Grup Barna">
+<section class="comunitat" aria-label="Segueix el CB Grup Barna">
   <div class="comunitat-in">
     <a class="comunitat-porta" href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener" data-cta="crida-instagram">
-      <span class="comunitat-t">Síguenos en Instagram</span>
-      <span class="comunitat-s">@cbgrupbarna · el día a día del club, cada semana.</span>
+      <span class="comunitat-t">Segueix-nos a Instagram</span>
+      <span class="comunitat-s">@cbgrupbarna · el dia a dia del club, cada setmana.</span>
     </a>
     <a class="comunitat-porta comunitat-porta--red" href="/es/newsletter/" data-cta="crida-newsletter">
-      <span class="comunitat-t">Apúntate a la newsletter</span>
-      <span class="comunitat-s">Un correo a la semana con lo que vale la pena saber. Nada más.</span>
+      <span class="comunitat-t">Apunta't a la newsletter</span>
+      <span class="comunitat-s">Un correu la setmana amb el que val la pena saber. Res més.</span>
     </a>
   </div>
 </section>
@@ -408,7 +426,7 @@
         <a href="/es/politica-de-privacidad/">Política de privacidad</a>
         <a href="/es/aviso-legal/">Aviso legal</a>
         <a href="/es/politica-de-privacidad/#galetes">Cookies</a>
-        <a href="/es/accesibilidad/" class="foot-a11y"><span class="foot-a11y-i" aria-hidden="true">&#9855;</span>Accesibilidad — WCAG 2.2 AA</a>
+        <a href="/es/accesibilidad/" class="foot-a11y"><span class="foot-a11y-i" aria-hidden="true">&#9855;</span>Accessibilitat — WCAG 2.2 AA</a>
       </div>
       <div class="foot-col">
         <h3>Redes</h3>
@@ -472,24 +490,80 @@
     return da.getDate() + ' de ' + MESOS[da.getMonth()] + ' y ' + db.getDate() + ' de ' + MESOS[db.getMonth()];
   }
 
-  function filaJornada(p, nomEquip) {
+  /* Els escuts dels rivals els precalcula el robot diari a
+     logos/rivals.json (scripts/build-escuts-rivals.py), amb el mateix
+     resolutor que les fitxes d'equip. Aquí només es consulta. */
+  var RIVALS = {};
+  /* La categoria de joc de cada equip (Preferent, Interterritorial...),
+     tal com la publica la Federació — no la de l'edat/gènere, que ja surt
+     al nom de l'equip. */
+  var EQUIPS_COMP = {};
+  function netejaCompeticio(s) {
+    var t = (s || '').replace(/^C\.?\s*C\.?\s+/i, '').trim();
+    if (!t) return '';
+    // Ve tota en majúscules del fitxer de la Federació: la convertim a
+    // frase normal perquè no sembli un crit al costat del nom de l'equip.
+    return t.toLowerCase().replace(/(^|[\s.'-])\S/g, function (c) { return c.toUpperCase(); });
+  }
+  function compHTML(equipId) {
+    var text = netejaCompeticio(EQUIPS_COMP[equipId]);
+    return text ? '<small class="comp">' + esc(text) + '</small>' : '';
+  }
+  function inicials(nom) {
+    var toks = (nom || '').toUpperCase().replace(/[^A-ZÀ-Ü0-9 ]/g, ' ').split(/\s+/)
+      .filter(function (t) { return t && ['CB','CLUB','BASQUET','BASKET','AE','UE','AB','BC','A','B','C','E'].indexOf(t) === -1 && !/^\d+$/.test(t); });
+    if (!toks.length) return '?';
+    return toks.length === 1 ? toks[0].slice(0, 2) : toks[0][0] + toks[1][0];
+  }
+  function escutHTML(nom, esBarna) {
+    if (esBarna) return '<img class="m-escut" src="/logo.png" alt="" loading="lazy" decoding="async">';
+    var ruta = RIVALS[nom];
+    if (ruta) return '<img class="m-escut" src="' + esc(ruta) + '" alt="" loading="lazy" decoding="async">';
+    return '<span class="m-escut sense" aria-hidden="true">' + esc(inicials(nom)) + '</span>';
+  }
+  function duel(p) {
+    return '<span class="duel">' + escutHTML(p.local, p.casa) + esc(p.local) +
+      '<i>—</i>' + escutHTML(p.visitant, !p.casa) + esc(p.visitant) + '</span>';
+  }
+
+  function filaJornada(p, nomEquip, ambDia) {
     var lloc = p.casa
       ? '<span class="chip casa">En casa</span>'
       : '<span class="chip">Fuera</span>';
-    var pista = p.pista ? '<small>' + esc(p.pista) + (p.adreca ? ' · ' + esc(p.adreca) : '') + '</small>' : '';
+    var pista = '';
+    var miniMapa = '';
+    if (p.pista) {
+      // A casa la Nau ja diu prou: no cal repetir l'adreça exacta. Fora,
+      // sí, perquè les famílies han de trobar un pavelló que no coneixen.
+      // El mateix criteri val per al mapa: a casa no cal, ja se sap on és.
+      var mostraAdreca = !p.casa && p.adreca;
+      var adrecaText = p.pista + (p.adreca ? ', ' + p.adreca : '');
+      var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(adrecaText);
+      pista = '<small><a class="pista-link" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
+        'data-cta="mapa-partit">📍 ' + esc(p.pista) + (mostraAdreca ? ' · ' + esc(p.adreca) : '') + '</a></small>';
+      if (!p.casa) {
+        var mapsEmbed = 'https://www.google.com/maps?q=' + encodeURIComponent(adrecaText) + '&output=embed';
+        miniMapa = '<a class="mini-mapa" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
+          'aria-label="Obre el mapa de ' + esc(p.pista) + ' a Google Maps" data-cta="mapa-preview">' +
+          '<iframe src="' + esc(mapsEmbed) + '" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></a>';
+      }
+    }
+    /* Al Gameday cada equip juga un dia diferent: sense el dia, l'hora
+       sola no diu res. A la llista del cap de setmana el dia ja fa de
+       capçalera i no cal repetir-lo. */
+    var quan = (ambDia ? '<small class="dia">' + esc(diaCurt(p.data)) + '</small>' : '') + esc(p.hora);
     return '<div class="mrow">' +
-      '<div class="hora">' + esc(p.hora) + '</div>' +
-      '<div class="qui"><b>' + esc(nomEquip) + '</b>' +
-      '<span>' + esc(p.local) + ' — ' + esc(p.visitant) + '</span>' + pista + '</div>' +
-      '<div class="on">' + lloc + '</div>' +
+      '<div class="hora">' + quan + '</div>' +
+      '<div class="qui"><b>' + esc(nomEquip) + '</b>' + compHTML(p.equipId) +
+      duel(p) + pista + '</div>' +
+      '<div class="on">' + lloc + miniMapa + '</div>' +
       '</div>';
   }
 
   function filaResultat(p, nomEquip) {
     var html = '<div class="mrow">' +
       '<div class="hora">' + esc(p.hora) + '</div>' +
-      '<div class="qui"><b>' + esc(nomEquip) + '</b>' +
-      '<span>' + esc(p.local) + ' — ' + esc(p.visitant) + '</span></div>';
+      '<div class="qui"><b>' + esc(nomEquip) + '</b>' + compHTML(p.equipId) + duel(p) + '</div>';
     if (p.puntsLocal != null && p.puntsVisitant != null) {
       var nostres = p.casa ? p.puntsLocal : p.puntsVisitant;
       var seus = p.casa ? p.puntsVisitant : p.puntsLocal;
@@ -508,7 +582,10 @@
 
   function render(data) {
     var equips = {};
-    (data.equips || []).forEach(function (e) { equips[e.id] = e.nom || e.curt || e.id; });
+    (data.equips || []).forEach(function (e) {
+      equips[e.id] = e.nom || e.curt || e.id;
+      EQUIPS_COMP[e.id] = e.competicio || '';
+    });
     var partits = (data.partits || []).slice().sort(function (a, b) {
       return (a.data + a.hora).localeCompare(b.data + b.hora);
     });
@@ -521,7 +598,7 @@
     }).filter(Boolean);
     if (propersSenior.length) {
       gamedayBox.innerHTML = propersSenior.map(function (p) {
-        return filaJornada(p, equips[p.equipId]);
+        return filaJornada(p, equips[p.equipId], true);
       }).join('');
     } else {
       gamedayBox.innerHTML = '<p class="empty-note">Todavía no hay partidos programados para los equipos sénior.</p>';
@@ -538,7 +615,10 @@
       var dies = {};
       finde.forEach(function (p) { (dies[p.data] = dies[p.data] || []).push(p); });
       findeBox.innerHTML = Object.keys(dies).sort().map(function (dia) {
-        return '<h3 class="day-h">' + diaLlarg(dia) + '</h3>' +
+        var jor = JORNADES[dia];
+        var dl = jor ? ' <a class="day-dl" href="/partits/calendaris/descarrega/jornades/jornada-' + dia + '.' + jor.tipus +
+          '" target="_blank" rel="noopener" data-cta="finde-descarrega">⬇ Descarga el cartel</a>' : '';
+        return '<h3 class="day-h">' + diaLlarg(dia) + dl + '</h3>' +
           dies[dia].map(function (p) { return filaJornada(p, equips[p.equipId]); }).join('');
       }).join('');
     } else {
@@ -573,12 +653,12 @@
         '<summary>' + titol + '<i>' + llista.length + ' partidos</i></summary>' +
         '<div class="mes-body">' +
         llista.map(function (p) {
-          var rival = p.casa ? p.visitant : p.local;
           return '<div class="mrow">' +
             '<div class="dia">' + diaCurt(p.data) + '</div>' +
             '<div class="hora">' + esc(p.hora) + '</div>' +
-            '<div class="qui"><b>' + esc(equips[p.equipId]) + '</b>' +
-            '<span>' + (p.casa ? 'En casa contra ' : 'Fuera contra ') + esc(rival) + '</span>' +
+            '<div class="qui"><b>' + esc(equips[p.equipId]) + '</b>' + compHTML(p.equipId) +
+            '<span>' + (p.casa ? 'En casa' : 'Fora') + '</span>' +
+            duel(p) +
             (p.pista ? '<small>' + esc(p.pista) + '</small>' : '') + '</div>' +
             '</div>';
         }).join('') +
@@ -586,9 +666,23 @@
     }).join('');
   }
 
-  fetch('/partits/data.json')
-    .then(function (r) { return r.json(); })
-    .then(render)
+  var JORNADES = {};
+  Promise.all([
+    fetch('/partits/data.json').then(function (r) { return r.json(); }),
+    // Sense el fitxer d'escuts la pàgina segueix: files sense escut, no en blanc.
+    fetch('/partits/logos/rivals.json').then(function (r) { return r.json(); }).catch(function () { return {}; }),
+    // El cartell de cada jornada per descarregar: si no arriba, el botó no surt.
+    fetch('/partits/calendaris/manifest.json').then(function (r) { return r.json(); }).catch(function () { return {}; })
+  ])
+    .then(function (tot) {
+      var rivals = tot[1] || {};
+      Object.keys(rivals).forEach(function (k) {
+        if (rivals[k]) RIVALS[k] = '/partits/logos/' + String(rivals[k]).replace(/^logos\//, '');
+      });
+      ((tot[2] || {})._jornades || {}).llista &&
+        tot[2]._jornades.llista.forEach(function (j) { JORNADES[j.clau] = j; });
+      render(tot[0]);
+    })
     .catch(function () {
       document.getElementById('finde-list').innerHTML =
         '<p class="empty-note">No se ha podido cargar el calendario. Vuelve a probarlo dentro de un rato.</p>';
