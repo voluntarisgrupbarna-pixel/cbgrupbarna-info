@@ -22,11 +22,14 @@ Aquest repositori porta la seva pròpia auditoria viva, en català, a l'arrel:
   entenguin la web sense navegar-la. És la **font de veritat del que existeix
   i de les dades de contacte**. S'actualitza cada vegada que es publica o es
   retira una pàgina.
-- **`PENDENTS-WEB.md`** — auditoria de temes oberts amb data, ja revisada amb
-  les decisions de l'Ana: què falta material, què està pendent de decidir, i
-  què **s'ha decidit expressament que no es fa** (p. ex. no enllaçar Wintym,
+- **`PENDENTS.md`** — auditoria de temes oberts amb data, ja revisada amb les
+  decisions de l'Ana: què falta material, què està pendent de decidir, i què
+  **s'ha decidit expressament que no es fa** (p. ex. no enllaçar Wintym,
   Flickr ni Facebook; `/femeni/` és la canònica i `/basquet-femeni/` hi
-  redirigeix). Llegir-lo evita reobrir un debat ja tancat.
+  redirigeix). Unifica el que abans anava repartit entre `PENDENTS-WEB.md`
+  (pendents del web) i els documents de treball de màrqueting del campus
+  (pendents fora del web: fitxa de Google, enllaços externs, agendes,
+  premsa). Llegir-lo evita reobrir un debat ja tancat.
 - **`MIGRACIO-WEB-ANTIGA.md`** — comparativa amb l'antiga web WordPress
   (`cbgrupbarna.com`), amb el que ja s'ha migrat i el que encara falta
   (documents històrics amb data concreta, zona de socis, botiga).
@@ -198,7 +201,7 @@ el seu propi cicle de vida:
 
 1. **Busca-la a `llms.txt` i al `sitemap.xml`.** Pot ja existir amb un altre
    nom (vocabulari unificat a `web-cbgb` §5).
-2. **Busca-la a `PENDENTS-WEB.md`.** Pot estar ja decidida en contra (amb el
+2. **Busca-la a `PENDENTS.md`.** Pot estar ja decidida en contra (amb el
    motiu), pendent d'un material concret de l'Ana, o ja duta a terme i només
    falta enllaçar-la.
 3. **Comprova si la dada ve d'un robot** (§3) abans de proposar editar-la a
@@ -325,7 +328,7 @@ A més, fora dels *secrets* de GitHub:
 
 Aquí la skill deixa de ser una xarxa de seguretat completa. El que **sí**
 es podria reconstruir amb els tres documents del punt §0
-(`llms.txt`, `PENDENTS-WEB.md`, `MIGRACIO-WEB-ANTIGA.md`) i aquesta skill
+(`llms.txt`, `PENDENTS.md`, `MIGRACIO-WEB-ANTIGA.md`) i aquesta skill
 és **el text i l'estructura**: quines pàgines hi havia, què deien, com
 s'organitzaven, quin sistema visual seguien (`web-cbgb`). El que **no** es
 pot reconstruir a partir de text:
