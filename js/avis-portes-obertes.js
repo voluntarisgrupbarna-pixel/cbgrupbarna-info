@@ -26,7 +26,7 @@
      veure una vegada, perquè l'avís nou no neix ja amagat. */
   var CLAU = 'cbgb-avis-po-2026-09';
 
-  var DESTI = { ca: '/portes-obertes/', es: '/es/puertas-abiertas/', en: '/en/open-days/' };
+  var DESTI = { ca: '/portes-obertes/#po-form', es: '/es/puertas-abiertas/#po-form', en: '/en/open-days/#po-form' };
 
   var TEXTOS = {
     ca: {

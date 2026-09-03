@@ -21,10 +21,11 @@ name: update-partits
 # calendari com a HTML real i indexable, no només dins l'estat de l'app.
 #
 # Cap de setmana, quan hi ha partits, es repeteix cada 20 minuts entre les
-# 08:00 i les 21:00 (hora de Barcelona, aprox. — GitHub Actions treballa en
-# UTC) per intentar recollir els resultats abans. És un intent de màxim
-# esforç: si la federació no ha penjat encara el resultat, simplement no hi
-# ha res nou i no es fa cap commit.
+# 08:00 i les 22:00 (hora de Barcelona, aprox. — GitHub Actions treballa en
+# UTC) per intentar recollir els resultats abans, amb una passada garantida
+# a les 22:00 el diumenge perquè els resultats de la tarda tinguin temps de
+# publicar-se. És un intent de màxim esforç: si la federació no ha penjat
+# encara el resultat, simplement no hi ha res nou i no es fa cap commit.
 #
 # Si la federació no respon o bloqueja el robot, no passa res: la via manual
 # de /partits/ → Gestió segueix activa i no es toca res.
@@ -33,7 +34,7 @@ name: update-partits
 on:
   schedule:
     - cron: "0 6 * * *"
-    - cron: "*/20 7-19 * * 6,0"
+    - cron: "*/20 7-20 * * 6,0"
   workflow_dispatch:
 
 permissions:
@@ -55,10 +56,14 @@ jobs:
         run: python .github/scripts/generate-calendaris.py
       - name: Actualitzar resum estàtic per a SEO / SEO-IA
         run: python .github/scripts/generate-seo-snapshot.py
+      - name: Escuts dels rivals per a la pàgina de partits
+        run: python scripts/build-escuts-rivals.py
       # Ha d'anar just després: /es/partits/ i /en/partits/ es generen a partir
       # de la catalana, i si no, es queden amb la instantània del dia abans.
       - name: Regenerar Dies de partit en castellà i anglès
         run: python scripts/build-partits-idiomes.py
+      - name: Les FAQ de /partits/ en el seu idioma (el traductor de pàgina no les sap)
+        run: python .github/scripts/generate-faq.py
       - name: Regenerar calendaris .ics per equip
         run: python .github/scripts/generate-ics.py
       - name: Regenerar pàgines pròpies per equip

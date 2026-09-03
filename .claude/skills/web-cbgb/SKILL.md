@@ -39,7 +39,7 @@ aquestes regles, es reconeix com del club sense veure l'escut.
 > «mensual» per un lapsus i s'ha corregit a «setmanal», que és la decisió
 > bona). Les fitxes de `/partits/equips/` les genera
 > `.github/scripts/generate-team-pages.py`: allà es toca el generador, no la
-> sortida.
+> sortida. Des del 30/08 el generador està al dia i emet la B amb escuts.
 >
 > **Com s'han aplicat C i D** (30/08, per si s'han de tocar):
 >
@@ -455,7 +455,12 @@ s'hi ha d'aclarir a `#FF3B41`, com diu el punt 1.
   de Protecció del Menor i Bàsquet femení, però `/campus/`, `/premsa/`, `/3x3/`,
   `partits/calendaris/` i les fitxes de partners encara tenen a disc el peu antic
   de 17 enllaços. S'igualarà el dia que es puguin regenerar sense pèrdues.
-- **`.github/scripts/generate-team-pages.py`** genera `partits/equips/`.
+- **`.github/scripts/generate-team-pages.py`** genera `partits/equips/` als
+  tres idiomes. **Al dia des del 30/08/2026**: emet commutador d'idioma,
+  `hreflang`, `a11y.css`, el capçal fosc de la proposta B i les files de
+  partit amb l'escut del Barna i el del rival (resolts per
+  `scripts/escuts_partits.py` des de `partits/logos/`). Es pot executar
+  sense por: no perd res del que hi ha publicat.
 - **`.github/scripts/generate-seo-snapshot.py`** només reescriu entre els
   marcadors `SEO-SNAPSHOT`, `SEO-EVENTS` i `SEO-EQUIPS`. Fora d'aquí és segur.
 - **`partits/data.json`** el refresca un robot diari. Els canvis manuals hi duren poc.

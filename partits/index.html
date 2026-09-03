@@ -34,13 +34,35 @@
   .sec-head { margin-bottom: clamp(22px, 3.4vw, 38px); }
   .sec-head h2 { font-size: clamp(17px, 2.4vw, 26px); margin-top: 14px; }
   .sec-head .sub { margin-top: 12px; font-size: 14.5px; color: var(--ink-2); max-width: 60ch; }
-  .day-h { font-family: var(--display); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin: clamp(26px, 4vw, 40px) 0 4px; }
+  .day-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--display); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin: clamp(26px, 4vw, 40px) 0 4px; }
+  .day-dl { font-family: var(--body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: var(--ink-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .day-dl:hover, .day-dl:focus-visible { color: var(--red-dark); border-bottom-style: solid; }
   .mrow { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px 16px; align-items: baseline; padding: 14px 2px; border-bottom: 1px solid var(--line); }
   .mrow .hora { font-family: var(--display); font-weight: 400; font-size: 15px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
   .mrow .qui b { display: block; font-family: var(--display); font-weight: 400; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.5; }
   .mrow .qui span { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
   .mrow .qui small { display: block; font-size: 11.5px; color: #6B6560; margin-top: 2px; }
-  .mrow .on { text-align: right; }
+  /* La categoria de joc (Preferent, Interterritorial...), no l'edat/gènere,
+     que ja surt al nom de l'equip en majúscules just a sobre. */
+  .mrow .qui small.comp { letter-spacing: 0.02em; }
+  .pista-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .pista-link:hover, .pista-link:focus-visible { color: var(--red-dark); border-bottom-style: solid; }
+  /* Previsualització petita del mapa: només una miniatura clicable, no cal API key. */
+  /* A la dreta del partit, sota el xip de casa/fora: no interromp el nom
+     de l'equip ni el duel. Només surt fora de casa (dins, ja se sap on és). */
+  .mini-mapa { display: block; width: 90px; height: 60px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  .mini-mapa iframe { width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .mrow .on { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; text-align: right; }
+  /* Qui juga contra qui, amb l'escut de cadascú (rivals: logos/rivals.json). */
+  .mrow .qui .duel { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+  .mrow .qui .duel i { font-style: normal; opacity: 0.55; }
+  /* Protagonistes, no un detall: l'escut és tan gran com el text, com pertoca
+     a un club gran. */
+  .m-escut { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; }
+  span.m-escut.sense { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid currentColor; opacity: 0.75; font-size: 12px; font-weight: 800; letter-spacing: 0.02em; }
+  .mrow .qui .duel { gap: 10px; }
+  .mrow .qui .duel img.m-escut, .mrow .qui .duel span.m-escut { margin: 2px 0; }
+  .mrow .hora .dia { display: block; font-family: var(--body); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-bottom: 2px; }
   .chip { display: inline-block; font-family: var(--display); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--line); padding: 4px 10px; white-space: nowrap; }
   .chip.casa { border-color: rgba(226,6,19,0.4); color: var(--red-dark); }
   /* Semàntics de resultat: només per dir guanyat o perdut (skill web-cbgb). */
@@ -72,7 +94,7 @@
   .gameday .mrow:last-child { border-bottom: 0; }
   @media (max-width: 560px) {
     .mrow { grid-template-columns: 52px minmax(0, 1fr); }
-    .mrow .on { grid-column: 2; text-align: left; }
+    .mrow .on { grid-column: 2; text-align: left; align-items: flex-start; }
     .marc-tag { text-align: left; }
     .mes .mrow { grid-template-columns: 78px minmax(0, 1fr); }
     .mes .mrow .hora { grid-column: 1; }
@@ -151,16 +173,12 @@
       <span>CB Grup Barna</span>
     </a>
     <nav class="head-nav" aria-label="Navegació principal">
+      <a href="/partits/equips/">Equips</a>
       <a href="/club/">Club</a>
-      <a href="/escoleta/" class="opt">Escoleta</a>
       <a href="/partits/" aria-current="page">Calendari</a>
-      <a href="/patrocinadors/" class="opt">Partners</a>
+      <a href="/escoleta/" class="opt">Escoleta</a>
       <a href="/campus/" class="opt">Campus</a>
-      <a href="/magics/" class="opt">Màgics</a>
-      <a href="/3x3/" class="opt">3x3</a>
-      <a href="/cistella-petita/" class="opt">Cistella Petita</a>
-      <a href="/fotos/" class="opt">Galeria</a>
-      <a href="/premsa/">Premsa</a>
+      <a href="/empreses/" class="opt">Empreses</a>
     </nav>
     <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language">
       <a href="/partits/" hreflang="ca" lang="ca" aria-label="Català" class="active" aria-current="true">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/partits/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/partits/" hreflang="en" lang="en" aria-label="English">EN</a>
@@ -472,24 +490,80 @@
     return da.getDate() + ' de ' + MESOS[da.getMonth()] + ' i ' + db.getDate() + ' de ' + MESOS[db.getMonth()];
   }
 
-  function filaJornada(p, nomEquip) {
+  /* Els escuts dels rivals els precalcula el robot diari a
+     logos/rivals.json (scripts/build-escuts-rivals.py), amb el mateix
+     resolutor que les fitxes d'equip. Aquí només es consulta. */
+  var RIVALS = {};
+  /* La categoria de joc de cada equip (Preferent, Interterritorial...),
+     tal com la publica la Federació — no la de l'edat/gènere, que ja surt
+     al nom de l'equip. */
+  var EQUIPS_COMP = {};
+  function netejaCompeticio(s) {
+    var t = (s || '').replace(/^C\.?\s*C\.?\s+/i, '').trim();
+    if (!t) return '';
+    // Ve tota en majúscules del fitxer de la Federació: la convertim a
+    // frase normal perquè no sembli un crit al costat del nom de l'equip.
+    return t.toLowerCase().replace(/(^|[\s.'-])\S/g, function (c) { return c.toUpperCase(); });
+  }
+  function compHTML(equipId) {
+    var text = netejaCompeticio(EQUIPS_COMP[equipId]);
+    return text ? '<small class="comp">' + esc(text) + '</small>' : '';
+  }
+  function inicials(nom) {
+    var toks = (nom || '').toUpperCase().replace(/[^A-ZÀ-Ü0-9 ]/g, ' ').split(/\s+/)
+      .filter(function (t) { return t && ['CB','CLUB','BASQUET','BASKET','AE','UE','AB','BC','A','B','C','E'].indexOf(t) === -1 && !/^\d+$/.test(t); });
+    if (!toks.length) return '?';
+    return toks.length === 1 ? toks[0].slice(0, 2) : toks[0][0] + toks[1][0];
+  }
+  function escutHTML(nom, esBarna) {
+    if (esBarna) return '<img class="m-escut" src="/logo.png" alt="" loading="lazy" decoding="async">';
+    var ruta = RIVALS[nom];
+    if (ruta) return '<img class="m-escut" src="' + esc(ruta) + '" alt="" loading="lazy" decoding="async">';
+    return '<span class="m-escut sense" aria-hidden="true">' + esc(inicials(nom)) + '</span>';
+  }
+  function duel(p) {
+    return '<span class="duel">' + escutHTML(p.local, p.casa) + esc(p.local) +
+      '<i>—</i>' + escutHTML(p.visitant, !p.casa) + esc(p.visitant) + '</span>';
+  }
+
+  function filaJornada(p, nomEquip, ambDia) {
     var lloc = p.casa
       ? '<span class="chip casa">A casa</span>'
       : '<span class="chip">Fora</span>';
-    var pista = p.pista ? '<small>' + esc(p.pista) + (p.adreca ? ' · ' + esc(p.adreca) : '') + '</small>' : '';
+    var pista = '';
+    var miniMapa = '';
+    if (p.pista) {
+      // A casa la Nau ja diu prou: no cal repetir l'adreça exacta. Fora,
+      // sí, perquè les famílies han de trobar un pavelló que no coneixen.
+      // El mateix criteri val per al mapa: a casa no cal, ja se sap on és.
+      var mostraAdreca = !p.casa && p.adreca;
+      var adrecaText = p.pista + (p.adreca ? ', ' + p.adreca : '');
+      var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(adrecaText);
+      pista = '<small><a class="pista-link" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
+        'data-cta="mapa-partit">📍 ' + esc(p.pista) + (mostraAdreca ? ' · ' + esc(p.adreca) : '') + '</a></small>';
+      if (!p.casa) {
+        var mapsEmbed = 'https://www.google.com/maps?q=' + encodeURIComponent(adrecaText) + '&output=embed';
+        miniMapa = '<a class="mini-mapa" href="' + esc(mapsUrl) + '" target="_blank" rel="noopener" ' +
+          'aria-label="Obre el mapa de ' + esc(p.pista) + ' a Google Maps" data-cta="mapa-preview">' +
+          '<iframe src="' + esc(mapsEmbed) + '" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></a>';
+      }
+    }
+    /* Al Gameday cada equip juga un dia diferent: sense el dia, l'hora
+       sola no diu res. A la llista del cap de setmana el dia ja fa de
+       capçalera i no cal repetir-lo. */
+    var quan = (ambDia ? '<small class="dia">' + esc(diaCurt(p.data)) + '</small>' : '') + esc(p.hora);
     return '<div class="mrow">' +
-      '<div class="hora">' + esc(p.hora) + '</div>' +
-      '<div class="qui"><b>' + esc(nomEquip) + '</b>' +
-      '<span>' + esc(p.local) + ' — ' + esc(p.visitant) + '</span>' + pista + '</div>' +
-      '<div class="on">' + lloc + '</div>' +
+      '<div class="hora">' + quan + '</div>' +
+      '<div class="qui"><b>' + esc(nomEquip) + '</b>' + compHTML(p.equipId) +
+      duel(p) + pista + '</div>' +
+      '<div class="on">' + lloc + miniMapa + '</div>' +
       '</div>';
   }
 
   function filaResultat(p, nomEquip) {
     var html = '<div class="mrow">' +
       '<div class="hora">' + esc(p.hora) + '</div>' +
-      '<div class="qui"><b>' + esc(nomEquip) + '</b>' +
-      '<span>' + esc(p.local) + ' — ' + esc(p.visitant) + '</span></div>';
+      '<div class="qui"><b>' + esc(nomEquip) + '</b>' + compHTML(p.equipId) + duel(p) + '</div>';
     if (p.puntsLocal != null && p.puntsVisitant != null) {
       var nostres = p.casa ? p.puntsLocal : p.puntsVisitant;
       var seus = p.casa ? p.puntsVisitant : p.puntsLocal;
@@ -508,7 +582,10 @@
 
   function render(data) {
     var equips = {};
-    (data.equips || []).forEach(function (e) { equips[e.id] = e.nom || e.curt || e.id; });
+    (data.equips || []).forEach(function (e) {
+      equips[e.id] = e.nom || e.curt || e.id;
+      EQUIPS_COMP[e.id] = e.competicio || '';
+    });
     var partits = (data.partits || []).slice().sort(function (a, b) {
       return (a.data + a.hora).localeCompare(b.data + b.hora);
     });
@@ -521,7 +598,7 @@
     }).filter(Boolean);
     if (propersSenior.length) {
       gamedayBox.innerHTML = propersSenior.map(function (p) {
-        return filaJornada(p, equips[p.equipId]);
+        return filaJornada(p, equips[p.equipId], true);
       }).join('');
     } else {
       gamedayBox.innerHTML = '<p class="empty-note">Encara no hi ha partits programats per als equips sèniors.</p>';
@@ -538,7 +615,10 @@
       var dies = {};
       finde.forEach(function (p) { (dies[p.data] = dies[p.data] || []).push(p); });
       findeBox.innerHTML = Object.keys(dies).sort().map(function (dia) {
-        return '<h3 class="day-h">' + diaLlarg(dia) + '</h3>' +
+        var jor = JORNADES[dia];
+        var dl = jor ? ' <a class="day-dl" href="calendaris/descarrega/jornades/jornada-' + dia + '.' + jor.tipus +
+          '" target="_blank" rel="noopener" data-cta="finde-descarrega">⬇ Descarrega el cartell</a>' : '';
+        return '<h3 class="day-h">' + diaLlarg(dia) + dl + '</h3>' +
           dies[dia].map(function (p) { return filaJornada(p, equips[p.equipId]); }).join('');
       }).join('');
     } else {
@@ -573,12 +653,12 @@
         '<summary>' + titol + '<i>' + llista.length + ' partits</i></summary>' +
         '<div class="mes-body">' +
         llista.map(function (p) {
-          var rival = p.casa ? p.visitant : p.local;
           return '<div class="mrow">' +
             '<div class="dia">' + diaCurt(p.data) + '</div>' +
             '<div class="hora">' + esc(p.hora) + '</div>' +
-            '<div class="qui"><b>' + esc(equips[p.equipId]) + '</b>' +
-            '<span>' + (p.casa ? 'A casa contra ' : 'Fora contra ') + esc(rival) + '</span>' +
+            '<div class="qui"><b>' + esc(equips[p.equipId]) + '</b>' + compHTML(p.equipId) +
+            '<span>' + (p.casa ? 'A casa' : 'Fora') + '</span>' +
+            duel(p) +
             (p.pista ? '<small>' + esc(p.pista) + '</small>' : '') + '</div>' +
             '</div>';
         }).join('') +
@@ -586,9 +666,23 @@
     }).join('');
   }
 
-  fetch('data.json')
-    .then(function (r) { return r.json(); })
-    .then(render)
+  var JORNADES = {};
+  Promise.all([
+    fetch('data.json').then(function (r) { return r.json(); }),
+    // Sense el fitxer d'escuts la pàgina segueix: files sense escut, no en blanc.
+    fetch('logos/rivals.json').then(function (r) { return r.json(); }).catch(function () { return {}; }),
+    // El cartell de cada jornada per descarregar: si no arriba, el botó no surt.
+    fetch('calendaris/manifest.json').then(function (r) { return r.json(); }).catch(function () { return {}; })
+  ])
+    .then(function (tot) {
+      var rivals = tot[1] || {};
+      Object.keys(rivals).forEach(function (k) {
+        if (rivals[k]) RIVALS[k] = '/partits/logos/' + String(rivals[k]).replace(/^logos\//, '');
+      });
+      ((tot[2] || {})._jornades || {}).llista &&
+        tot[2]._jornades.llista.forEach(function (j) { JORNADES[j.clau] = j; });
+      render(tot[0]);
+    })
     .catch(function () {
       document.getElementById('finde-list').innerHTML =
         '<p class="empty-note">No s\'ha pogut carregar el calendari. Torna-ho a provar d\'aquí una estona.</p>';
