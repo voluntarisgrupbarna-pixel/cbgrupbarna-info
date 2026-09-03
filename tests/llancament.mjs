@@ -124,9 +124,35 @@ executa('SEO i GEO', process.execPath, ['tests/audit-seo-geo.mjs']);
    ------------------------------------------------------------------ */
 {
   const r = executa('paritat dels tres idiomes', 'python3', ['scripts/i18n-paritat.py', '--tot']);
-  registra('Els tres idiomes', r.codi === 0,
-    r.sortida.trim().split('\n').pop() || '',
-    r.codi === 0 ? [] : r.sortida.trim().split('\n').slice(-8));
+  // `--tot` torna 1 sempre que troba una traducció endarrerida, també quan el
+  // motiu ja és escrit a i18n/excepcions-paritat.yml: les excepcions només li
+  // canvien la marca de la línia, no el codi de sortida (el que sí que les
+  // respecta és el mode de diferència, que és el que fa servir el workflow
+  // i18n-paritat.yml a cada proposta de canvi). Aquí, doncs, el codi de
+  // sortida no serveix: cal mirar línia per línia i quedar-se les que NO
+  // porten el ✓ d'excepció justificada.
+  const linies = r.sortida.trim().split('\n');
+  const endarrerides = linies.filter((l) => /→ (es|en):/.test(l));
+  const senseMotiu = endarrerides.filter((l) => !l.trimStart().startsWith('✓'));
+  const excepcions = endarrerides.length - senseMotiu.length;
+  // Una eina que peta no és una eina que diu que tot va bé. Si torna error i
+  // no ha arribat ni a imprimir el veredicte que se li coneix, el que falla és
+  // ella —un YAML mal format, una dependència que falta— i això ha de sortir
+  // en vermell, no passar per «cap traducció endarrerida». És l'error que
+  // costa més de veure: un porter que dorm sembla exactament un porter que no
+  // té res a dir.
+  const haRespost = endarrerides.length > 0 || /Tot al dia/.test(r.sortida);
+  if (!haRespost) {
+    registra('Els tres idiomes', false, 'la comprovació no ha pogut executar-se',
+      ['scripts/i18n-paritat.py no ha donat cap veredicte: ' +
+       (r.sortida.trim().split('\n').slice(-2).join(' · ') || 'sense sortida')]);
+  } else {
+    registra('Els tres idiomes', senseMotiu.length === 0,
+      endarrerides.length === 0
+        ? (linies[linies.length - 1] || '')
+        : `${senseMotiu.length} sense motiu · ${excepcions} amb motiu escrit a i18n/excepcions-paritat.yml`,
+      senseMotiu.map((l) => `traducció endarrerida sense motiu: ${l.trim()}`));
+  }
 }
 
 /* ------------------------------------------------------------------
