@@ -20,6 +20,15 @@
 # ara que endevinar d'aquí a un any per què hi era.
 
 nomes_un_idioma:
+  - ruta: /
+    motiu: >
+      La correcció del correu de contacte de la portada només toca el
+      català: /es/ i /en/ ja tenien el mailto: correcte, i el que hi havia
+      a l'arrel era codi d'ofuscació de Cloudflare
+      (/cdn-cgi/l/email-protection) desat al repositori per error, que
+      servit per GitHub Pages ensenyava «[email protected]» amb l'enllaç
+      mort. Portar el canvi a les traduccions voldria dir trencar-les.
+      Arreglat el 03/09/2026; treu això quan es fusioni.
   - ruta: /presentacio/
     motiu: >
       Es treu la crida de comunitat NOMÉS d'es/en perquè el català no l'ha

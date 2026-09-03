@@ -575,6 +575,62 @@ patrocini, dossiers, xarxes). Al repositori ja no hi és.
   `en/womens-basketball/` (2 fitxers) i `scripts/build-pages.py`. Decidir si es
   committegen o es descarten abans que es perdin o entrin en un commit equivocat.
 
+## 🚀 Bateria de llançament · 30/08/2026
+
+S'ha muntat un **porter de llançament** (`node tests/llancament.mjs`) que executa tota la
+bateria i respon una sola pregunta: es pot publicar o no. Torna `0` si és APTE i `1` si
+no. El que bloqueja i el que no està escrit a la constant `BLOQUEIGS` del fitxer, no és
+un criteri que canviï cada vegada. També s'hi ha afegit una auditoria nova,
+`tests/audit-llancament.mjs`, que mira el que les altres dues no miraven: actius que no
+existeixen, contingut mixt, JSON-LD que no es pot llegir, formularis i RGPD, fitxers de
+publicació, contingut a mig fer, secrets, pes i **sintaxi del JavaScript de cada pàgina**.
+
+### Arreglat en aquesta tanda
+
+| Què | On | Per què importava |
+|---|---|---|
+| Correu del club invisible a la portada | `index.html` | La portada publicada mostrava literalment **`[email protected]`** en tres llocs visibles, amb l'enllaç mort. Era codi de Cloudflare (`/cdn-cgi/l/email-protection`) desat al repositori; servit per GitHub Pages, el script que el desxifra dona **404** (comprovat en directe el 30/08). Les versions `/es/` i `/en/` ja tenien el `mailto:` correcte: només la catalana estava contaminada. |
+| Generador de cartells mort en 3 idiomes | `partits/cartell.html` (+ es, en) | `x.font='170px Anton, 'Anton', sans-serif'` — una cometa de més deixava tot el `<script>` sense executar. Un error de sintaxi no dona cap avís: la pàgina carrega i simplement no fa res. |
+| Formulari de ressenyes mort en castellà i anglès | `es/opina/`, `en/opina/` | Els faltaven `/js/canals.js` i `/js/ressenya.js`, que la versió catalana sí que carrega. El formulari es podia omplir i no enviava res. També demanaven un `opina.json` que no existeix a la seva carpeta: ara llegeixen `/opina/opina.json`, que és el fitxer únic de configuració. |
+| `/opina/` sense enllaços legals | `opina/index.html` | El peu no tenia la columna «Legal» que sí tenen `/es/opina/` i `/en/opina/`: una pàgina que demana nom i correu sense política de privacitat enlloc. |
+| Canonical de dues pàgines apuntant a adreces inexistents | `en/family-benefits/`, `es/ventajas-familia/` | Deien `/family-benefits/` i `/ventajas-familia/` sense el prefix d'idioma. Google descarta una pàgina amb la canonical trencada, i el sitemap (que la llegeix) publicava aquestes dues adreces fantasma. |
+| L'adreça antiga del Mètode Barna portava al lloc equivocat | `basquet-femeni/el-metode-barna/` | Es contradeia sola: el `<meta refresh>` i l'enllaç visible anaven a `/femeni/el-metode-barna/`, i el `location.replace()` i la canonical, a una àncora d'una altra pàgina. Guanyava el JavaScript. |
+| FAQ duplicada a la mateixa pàgina | `/model-formatiu/` (+ es, en) | Sortien dues vegades les mateixes quatre preguntes, les dues amb `id="faq"`. S'ha tret la versió escrita a mà i s'ha deixat la que manté `generate-faq.py`. |
+| `llms.txt` citava una pàgina de cerca inexistent | `llms.txt` | Deia `/es/cerca/`. La pàgina castellana del cercador és `/es/busqueda/`, que és el que diu `i18n/routes.yml` i el que existeix al repositori. |
+| «Hi ha equip sènior» no tenia resposta | `js/cerca.js` | `equip` era a `GENERIQUES` i es descartava del tot; el plural `equips` no hi era. La mateixa pregunta en singular es quedava sense resposta i en plural sí que en tenia. Ara «equip» compta però no decideix sola. |
+| Logo de partner inexistent a les dades estructurades | `index.html`, `/patrocinadors/` | Es donava a Google `partners/nova-farmacia-clot.png`, que no existeix. S'ha tret el camp, com ja es feia amb Wilson. |
+| Coses petites | vàries | `twitter:card` a `/es/` i `/en/` de la galeria del 3x3; `image` al `BlogPosting` de «Quants equips té el Barna» en els tres idiomes; sitemap regenerat. |
+
+### Pendent de decisió de l'Ana
+
+- **19 formularis demanen dades personals sense casella ni text de consentiment**
+  (`/bustia/`, `/campus/`, `/portes-obertes/`, `/escriu-nos/`, `/opina/` i les seves
+  traduccions). No és necessàriament un error —respondre qui t'escriu té una base legal
+  diferent del consentiment—, però **és una decisió que s'ha de prendre expressament**,
+  no per omissió. Els altres sis formularis (portada, galeries) sí que en tenen.
+  En 20 casos la política de privacitat només s'enllaça des del peu, no al costat del camp.
+- **`/presentacions/evidencia-i-posicio/`**: la pàgina catalana té tot el cos escrit en
+  castellà (38.000 caràcters). S'hi ha posat `lang="es"` al `<main>` perquè un lector de
+  pantalla no el llegeixi amb fonètica catalana, però **la traducció segueix pendent**.
+  És una pàgina indexable i al sitemap.
+- **Dos partners sense logo**: `nova-farmacia-clot` i `wilson` no tenen fitxer a
+  `partners/`. Fan falta els dos arxius.
+- **`/escoleta/` pesa 3,1 MB** de contingut propi, quatre vegades més que la mitjana del
+  lloc (327 kB). És la landing de captació de l'Escoleta: val la pena aprimar-la.
+- **Horaris d'atenció**: l'entitat de la portada no en declara cap a les dades
+  estructurades. Google els ensenya a la fitxa del club si hi són.
+- **Les fotos de les galeries del 3x3 venen de Google Drive.** El renderitzat real
+  compta **90 imatges úniques** servides des de `drive.google.com/thumbnail?id=…` a
+  `/fotos/`, `/fotos-3x3/`, `/3x3/` i `/fotos-esdeveniments/3x3-westfield-2026/`, en els
+  tres idiomes. Si Drive canvia la política d'enllaç directe, limita les peticions o
+  algú mou la carpeta, aquelles galeries es queden en blanc i no hi ha res a fer des del
+  repositori. La resta del lloc no depèn de ningú de fora (tipografies pròpies, Leaflet
+  vendoritzat): aquestes són l'excepció. Val la pena passar-les pel pipeline de
+  `fotos/uploads/` com les altres.
+- **18 enllaços surten per `http://`** cap a dos partners (`ovellanegrabcn.net`,
+  `centretotsalut.es`) i dues notícies velles de `feb.es`. No es pot arreglar des d'aquí
+  —depèn del seu servidor—, però convé avisar els dos partners.
+
 ## Sense acció
 
 - **Esdeveniments «passats»** (3x3 Glòries, Mes de l'Orgull, Campus Time Chamber,

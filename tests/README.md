@@ -1,19 +1,80 @@
 # Bateria de proves de cbgrupbarna.info
 
-Tres eines que no necessiten cap dependència instal·lada al repositori: fan
-servir el Chromium i el Playwright que ja hi ha a l'entorn.
+Eines que no necessiten cap dependència instal·lada al repositori: fan servir
+el Chromium i el Playwright que ja hi ha a l'entorn.
+
+## El dia que es publica: una sola ordre
 
 ```bash
+node tests/llancament.mjs                     # tot; ~20 min (obre el navegador)
+node tests/llancament.mjs --rapid             # sense navegador; ~2 min
+node tests/llancament.mjs --md tests/out/LLANCAMENT.md
+```
+
+Executa tota la bateria i respon **una** pregunta: es pot treure a fora o no.
+Torna `0` si és APTE i `1` si no ho és, de manera que serveix igual com a
+últim pas abans de publicar i com a comprovació automàtica.
+
+La diferència entre el que atura un llançament i el que no és una decisió
+presa i escrita a la constant `BLOQUEIGS` de `llancament.mjs`, no un criteri
+que canviï cada vegada. **Bloquegen**: tot el que `audit-llancament.mjs` marca
+com a error, els errors durs de l'SEO (enllaç trencat, sitemap o `llms.txt`
+que citen adreces inexistents, redirecció morta, canonical absent, accents
+trencats, idioma mal declarat), que el cercador falli cap cas, que els tres
+idiomes no vagin junts, i qualsevol pàgina que al navegador respongui diferent
+de 200, es desbordi, tingui una imatge trencada, demani un fitxer propi que no
+existeix o li peti el JavaScript. **No bloquegen** els avisos: un títol massa
+llarg fa que una pàgina surti pitjor a Google, no que la web no es pugui
+publicar. Es llegeixen a part, amb `report.mjs`.
+
+## Cada peça per separat
+
+```bash
+node tests/audit-llancament.mjs               # preparació per publicar
 node tests/audit-seo-geo.mjs                  # SEO i GEO, anàlisi estàtica
 node tests/audit-browser.mjs                  # renderitzat real a 5 amplades
 node tests/report.mjs --md tests/out/INFORME.md
 node tests/screenshots.mjs --full             # captures per mirar-s'ho
 ```
 
-Els resultats en brut queden a `tests/out/` (`seo-geo.json` i `browser.json`),
-i `report.mjs` els ajunta en un informe llegible.
+Els resultats en brut queden a `tests/out/` (`llancament.json`, `seo-geo.json`
+i `browser.json`), i `report.mjs` ajunta els dos últims en un informe llegible.
 
 ## Què comprova cadascuna
+
+### `audit-llancament.mjs`
+Les altres dues miren si el lloc està ben fet; aquesta mira si està **llest per
+sortir**, que és una pregunta diferent. Una pàgina pot tenir un SEO impecable i
+alhora demanar una foto que ningú ha pujat.
+
+- **Actius**: cada `srcset`, `poster`, `<source>`, `<video>`, `<iframe>` i cada
+  `url()` del CSS es resol contra el disc. (Els `<a href>`, els `<img src>` i
+  els `<script src>` ja els mira `audit-seo-geo.mjs`.)
+- **Dependències de tercers**: qualsevol recurs demanat per `http://` dins
+  d'una pàgina servida per `https://` —que el navegador bloqueja i deixa la
+  pàgina trencada— i, com a avís, els `<a>` que porten a llocs sense xifrar i
+  els CDN externs, que la norma del club és no tenir-ne.
+- **Dades estructurades**: que cada JSON-LD es pugui llegir de debò (una coma
+  de més no dona cap error visible: simplement Google no en fa cas) i que les
+  adreces que cita existeixin.
+- **Formularis**: que tinguin destí —seguint els `<script src>` propis, perquè
+  el gestor sol viure a `/js/`—, botó d'enviar, camps amb etiqueta (compta
+  tant `<label for>` com el camp embolcallat dins d'un `<label>`) i, quan
+  demanen dades personals, política de privacitat a l'abast i consentiment.
+- **Publicació**: `CNAME`, `.nojekyll`, `robots.txt`, `404.html`, mides i
+  domini del `sitemap.xml`, i el `manifest.json` amb les seves icones.
+- **Res a mig fer**: «lorem ipsum», TODO, «pendent de confirmar»,
+  «properament» sense data, dates sense omplir, enllaços amb `href` buit.
+- **Secrets**: claus i tokens que s'haurien publicat sense voler. Descarta els
+  exemples escrits expressament (`placeholder="ghp_xxxxxxxx"`).
+- **Pes**: el HTML més els fitxers propis que necessita per pintar-se.
+- **Codi**: cada `<script>` de cada pàgina i cada `.js` propi passen per
+  `node --check`. Un error de sintaxi no dona cap avís al navegador: el bloc
+  simplement no s'executa i el que en depenia deixa de funcionar en silenci.
+  Així es va trobar que una cometa de més a
+  `x.font='170px Anton, 'Anton', sans-serif'` tenia mort el generador de
+  cartells de `/partits/cartell.html` en els tres idiomes.
+- **Idiomes**: que cap canvi d'idioma porti a una adreça morta.
 
 ### `audit-seo-geo.mjs`
 Recorre totes les pàgines `.html` del repositori sense obrir cap navegador.

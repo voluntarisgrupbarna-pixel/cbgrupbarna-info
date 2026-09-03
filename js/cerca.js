@@ -598,13 +598,21 @@
   /* «Club», «Barna» i «bàsquet» surten a gairebé totes les preguntes del web.
      Comptar-les fa que qualsevol consulta sembli que encaixa amb tot. */
   var GENERIQUES = {};
-  ('club clubs barna cb grup cbgrupbarna basquet baloncesto basket basketball ' +
-   'equip equipo team').split(' ').forEach(function (p) { GENERIQUES[p] = 1; });
+  ('club clubs barna cb grup cbgrupbarna basquet baloncesto basket basketball')
+    .split(' ').forEach(function (p) { GENERIQUES[p] = 1; });
 
   /* Paraules que sí que compten, però que no poden decidir tota soles. */
   var NO_DECIDEIXEN = {};
   ('fill filla fills filles hijo hija hijos hijas nino nina child children ' +
-   'son daughter kid kids nen nena nens nenes').split(' ').forEach(function (p) {
+   'son daughter kid kids nen nena nens nenes ' +
+   // «Equip» era a GENERIQUES, i allà es descartava del tot. Amb això, «hi ha
+   // equip sènior» es quedava amb una sola paraula —«sènior»— i la regla que
+   // demana que una consulta d'una paraula sigui distintiva la deixava sense
+   // resposta, mentre que «hi ha equipS sènior», amb el plural, sí que en
+   // tenia: el plural no era a la llista. Dir que no pot DECIDIR sola, en
+   // comptes de fer-la desaparèixer, arregla les dues formes alhora i manté
+   // el motiu original —que «equip» no faci que tot encaixi amb tot.
+   'equip equips equipo equipos team teams').split(' ').forEach(function (p) {
     NO_DECIDEIXEN[p] = 1;
   });
 

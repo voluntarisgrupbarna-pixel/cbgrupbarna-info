@@ -13,6 +13,14 @@ const OUT = path.resolve(ROOT, (args[args.indexOf('--out') + 1] && args.includes
 const SITE = 'https://cbgrupbarna.info';
 
 const SKIP = [/^\.git\//, /^node_modules\//, /^tests\//, /^\.github\//];
+// A GitHub Actions el repositori es baixa sense imatges, vídeos ni PDF: no
+// els obre cap comprovació d'aquí i són 515 MB. Amb això, els enllaços que hi
+// apunten no es donen per trencats — si es donessin, el veredicte seria
+// vermell per centenars de fitxers que sí que hi són al repositori.
+const SENSE_BINARIS = process.argv.includes('--sense-binaris');
+const ES_BINARI = /\.(jpe?g|png|webp|gif|avif|mp4|mov|pdf|ico|woff2?|ttf|otf|mp3|m4a)$/i;
+const esBinari = (u) => ES_BINARI.test(String(u).split('#')[0].split('?')[0]);
+
 const NOINDEX_OK = ['/admin/', '/fotos/admin.html', '/jugadors/admin.html', '/partits/admin.html', '/briefing/'];
 
 // ---------- utilitats de lectura d'HTML ----------
@@ -60,6 +68,9 @@ const urlOf = (rel) => '/' + rel.replace(/index\.html$/, '');
 // ---------- enllaços interns ----------
 function resolveLocal(href, fromRel) {
   if (!href) return null;
+  // Vegeu la nota de audit-llancament.mjs: el filtre va al resolutor, no a
+  // cada comprovació, perquè no se'n pugui escapar cap.
+  if (SENSE_BINARIS && esBinari(href)) return null;
   if (/^[a-z][a-z0-9+.-]*:/i.test(href)) return null;   // qualsevol esquema: http, mailto, webcal, tel…
   if (href.startsWith('//')) return null;               // relatiu al protocol, però extern
   if (/^#/.test(href)) return null;
@@ -92,12 +103,30 @@ function auditPage(rel) {
   const prop = metas(html, 'property');
   const ls = links(html);
   const noindex = /noindex/i.test(name.robots || '');
+  // Un cartell de mudança: quatre línies amb <meta http-equiv="refresh"> que
+  // porten a l'adreça nova. No és una pàgina de contingut i no se li poden
+  // demanar descripció, h1, Open Graph ni entrar al sitemap — el que se li ha
+  // d'exigir es comprova a part, més avall.
+  const refresh = html.match(/<meta[^>]+http-equiv=["']refresh["'][^>]*>/i)?.[0];
+  const redirect = refresh ? (attr(refresh, 'content') || '').match(/url\s*=\s*(\S+)/i)?.[1] : undefined;
   // Una pàgina que demana no ser indexada no necessita Open Graph, ni
   // descripció, ni dades estructurades: exigir-li-ho és soroll. Val tant per
   // a les eines internes com per a les redireccions amb canonical.
-  const isAdmin = noindex || NOINDEX_OK.some((p) => url.startsWith(p) || url === p);
+  const isAdmin = noindex || !!redirect || NOINDEX_OK.some((p) => url.startsWith(p) || url === p);
   r.info.noindex = noindex;
   r.info.admin = isAdmin;
+  r.info.redirect = redirect;
+
+  // --- redireccions: el que sí que se'ls ha d'exigir ---
+  if (redirect) {
+    const dest = resolveLocal(redirect, rel);
+    if (dest && !dest.exists) add('error', 'redireccio-trencada', `redirigeix a un lloc que no existeix: ${redirect}`);
+    const canonHref = links(html).find((l) => l.rel === 'canonical')?.href;
+    if (!canonHref) add('error', 'redireccio-sense-canonical', 'una redirecció ha de portar canonical al destí');
+    else if (canonHref.replace(SITE, '').replace(/\/$/, '') !== redirect.replace(SITE, '').replace(/\/$/, '')) {
+      add('avís', 'redireccio-canonical', 'la canonical no coincideix amb el destí de la redirecció', { canonHref, redirect });
+    }
+  }
 
   // --- bàsics ---
   if (!/^<!doctype html>/i.test(html.trim())) add('error', 'doctype', 'sense <!DOCTYPE html>');
@@ -142,7 +171,7 @@ function auditPage(rel) {
       const got = canon.href.replace(/\/$/, '') || canon.href;
       // Una redirecció amb noindex ha d'apuntar al seu destí: és el que la fa
       // correcta, no un error.
-      if (!noindex && got.replace(/\/$/, '') !== expect.replace(/\/$/, '')) {
+      if (!noindex && !redirect && got.replace(/\/$/, '') !== expect.replace(/\/$/, '')) {
         add('avís', 'canonical-divergent', 'la canonical no apunta a la pròpia URL', { href: canon.href, expect });
       }
     }
@@ -255,8 +284,17 @@ function auditPage(rel) {
   const declared = (langVal || '').slice(0, 2);
   const [winner, top] = Object.entries(score).sort((a, b) => b[1] - a[1])[0];
   // Només ho diem si la diferència és clara i hi ha text de sobres.
+  // Un bloc que porta el seu propi `lang` ja diu en quina llengua està: no és
+  // el mateix que una pàgina que declara una cosa i n'escriu una altra. El
+  // primer és correcte (i és el que fa un lector de pantalla servir per
+  // pronunciar-ho bé); el segon és el defecte que es busca aquí.
+  const blocsAmbLang = [...html.matchAll(/<(?:main|section|article|div|body)\b[^>]*\blang\s*=\s*["']([a-z]{2})/gi)].map((m) => m[1]);
   if (declared && MARKERS[declared] && top >= 25 && winner !== declared && top > score[declared] * 1.6) {
-    add('error', 'idioma-divergent', `declara \`lang="${langVal}"\` però el text sembla ${winner}`, { score });
+    if (blocsAmbLang.includes(winner)) {
+      add('avís', 'idioma-declarat-a-part', `el cos està en ${winner} i així ho declara, però la pàgina és la versió ${declared}: falta traduir-la`, { score });
+    } else {
+      add('error', 'idioma-divergent', `declara \`lang="${langVal}"\` però el text sembla ${winner}`, { score });
+    }
   }
 
   // --- text útil ---
@@ -345,6 +383,7 @@ function auditLlms() {
     const clean = u.split('#')[0].split('?')[0];
     const asFile = clean.endsWith('/') ? clean + 'index.html' : clean;
     const abs = path.join(ROOT, asFile.replace(/^\//, ''));
+    if (SENSE_BINARIS && esBinari(u)) continue;
     if (!fs.existsSync(abs) && !fs.existsSync(abs + '.html') && !fs.existsSync(path.join(abs, 'index.html'))) broken.push(u);
   }
   if (broken.length) out.issues.push({ level: 'error', code: 'llms-404', msg: `${broken.length} URLs del llms.txt no existeixen`, sample: broken.slice(0, 8) });
