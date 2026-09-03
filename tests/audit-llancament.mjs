@@ -73,10 +73,16 @@ const textVisible = (html) => html
   .replace(/\s+/g, ' ');
 
 // Resol una ruta local tal com ho faria GitHub Pages.
+let binarisOmesos = 0;
 function existeixLocal(href, desDe) {
   if (!href) return null;
   const h = href.trim();
   if (!h || h.startsWith('#')) return null;
+  // El filtre viu aquí i no a cada comprovació: així no se'n pot escapar cap.
+  // Va costar una passada de CI en vermell descobrir-ho — l'interruptor tapava
+  // el bloc d'actius i deixava fora el JSON-LD i les icones del manifest, que
+  // miren l'existència dels mateixos fitxers per un altre camí.
+  if (SENSE_BINARIS && ES_BINARI.test(h.split('#')[0].split('?')[0])) { binarisOmesos++; return null; }
   if (/^[a-z][a-z0-9+.-]*:/i.test(h) || h.startsWith('//')) return null;  // extern o amb esquema
   if (/\$\{|<%|\{\{|['"]\s*\+/.test(h)) return null;                      // el munta un script
   const net = h.split('#')[0].split('?')[0];
@@ -139,15 +145,9 @@ const afegeix = (nivell, bloc, codi, msg, extra = {}) =>
       if (!u[1].startsWith('data:')) anota(existeixLocal(u[1], css), css);
     }
   }
-  let omesos = 0;
   for (const [href, on] of falten) {
-    if (SENSE_BINARIS && ES_BINARI.test(href.split('?')[0])) { omesos++; continue; }
     afegeix('error', 'actius', 'actiu-inexistent', `no existeix al repositori: ${href}`,
       { demanat_per: [...new Set(on)].slice(0, 5), pagines: new Set(on).size });
-  }
-  if (omesos) {
-    afegeix('informatiu', 'actius', 'binaris-omesos',
-      `${omesos} rutes d'imatge, vídeo o tipografia no s'han comprovat: el repositori s'ha baixat sense binaris (--sense-binaris)`);
   }
 }
 
@@ -597,6 +597,11 @@ for (const t of troballes) {
   else if (t.nivell === 'avís') resum.avisos++;
   else resum.informatius++;
 }
+if (binarisOmesos) {
+  afegeix('informatiu', 'actius', 'binaris-omesos',
+    `${binarisOmesos} rutes d'imatge, vídeo, PDF o tipografia no s'han comprovat: el repositori s'ha baixat sense binaris (--sense-binaris)`);
+}
+
 const sortida = {
   generated: new Date().toISOString(),
   pages: pagines.filter(esPublica).length,

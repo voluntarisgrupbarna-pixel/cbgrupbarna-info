@@ -13,6 +13,14 @@ const OUT = path.resolve(ROOT, (args[args.indexOf('--out') + 1] && args.includes
 const SITE = 'https://cbgrupbarna.info';
 
 const SKIP = [/^\.git\//, /^node_modules\//, /^tests\//, /^\.github\//];
+// A GitHub Actions el repositori es baixa sense imatges, vídeos ni PDF: no
+// els obre cap comprovació d'aquí i són 515 MB. Amb això, els enllaços que hi
+// apunten no es donen per trencats — si es donessin, el veredicte seria
+// vermell per centenars de fitxers que sí que hi són al repositori.
+const SENSE_BINARIS = process.argv.includes('--sense-binaris');
+const ES_BINARI = /\.(jpe?g|png|webp|gif|avif|mp4|mov|pdf|ico|woff2?|ttf|otf|mp3|m4a)$/i;
+const esBinari = (u) => ES_BINARI.test(String(u).split('#')[0].split('?')[0]);
+
 const NOINDEX_OK = ['/admin/', '/fotos/admin.html', '/jugadors/admin.html', '/partits/admin.html', '/briefing/'];
 
 // ---------- utilitats de lectura d'HTML ----------
@@ -60,6 +68,9 @@ const urlOf = (rel) => '/' + rel.replace(/index\.html$/, '');
 // ---------- enllaços interns ----------
 function resolveLocal(href, fromRel) {
   if (!href) return null;
+  // Vegeu la nota de audit-llancament.mjs: el filtre va al resolutor, no a
+  // cada comprovació, perquè no se'n pugui escapar cap.
+  if (SENSE_BINARIS && esBinari(href)) return null;
   if (/^[a-z][a-z0-9+.-]*:/i.test(href)) return null;   // qualsevol esquema: http, mailto, webcal, tel…
   if (href.startsWith('//')) return null;               // relatiu al protocol, però extern
   if (/^#/.test(href)) return null;
@@ -372,6 +383,7 @@ function auditLlms() {
     const clean = u.split('#')[0].split('?')[0];
     const asFile = clean.endsWith('/') ? clean + 'index.html' : clean;
     const abs = path.join(ROOT, asFile.replace(/^\//, ''));
+    if (SENSE_BINARIS && esBinari(u)) continue;
     if (!fs.existsSync(abs) && !fs.existsSync(abs + '.html') && !fs.existsSync(path.join(abs, 'index.html'))) broken.push(u);
   }
   if (broken.length) out.issues.push({ level: 'error', code: 'llms-404', msg: `${broken.length} URLs del llms.txt no existeixen`, sample: broken.slice(0, 8) });

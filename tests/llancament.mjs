@@ -87,7 +87,7 @@ executa('preparació per publicar', process.execPath, ['tests/audit-llancament.m
 /* ------------------------------------------------------------------
    2 · SEO i GEO
    ------------------------------------------------------------------ */
-executa('SEO i GEO', process.execPath, ['tests/audit-seo-geo.mjs']);
+executa('SEO i GEO', process.execPath, ['tests/audit-seo-geo.mjs', ...(SENSE_BINARIS ? ['--sense-binaris'] : [])]);
 {
   const d = llegeix('seo-geo.json');
   const totes = [];
