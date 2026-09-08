@@ -633,7 +633,17 @@
       var anterior = passats.filter(function (p) { return setmana(p.data) === clauAnt; });
       document.getElementById('res-dates').textContent =
         'Cap de setmana del ' + rangSetmana(anterior) + '.';
-      resBox.innerHTML = anterior.map(function (p) { return filaResultat(p, equips[p.equipId]); }).join('');
+      /* Mateix format que «Aquest cap de setmana»: agrupat per dia, amb la
+         capçalera del dia i el cartell de resultats per descarregar. */
+      var diesR = {};
+      anterior.forEach(function (p) { (diesR[p.data] = diesR[p.data] || []).push(p); });
+      resBox.innerHTML = Object.keys(diesR).sort().map(function (dia) {
+        var jorR = RESULTATS_J[dia];
+        var dlR = jorR ? ' <a class="day-dl" href="calendaris/descarrega/jornades/resultats-' + dia + '.' + jorR.tipus +
+          '" target="_blank" rel="noopener" data-cta="resultats-descarrega">⬇ Descarrega el cartell</a>' : '';
+        return '<h3 class="day-h">' + diaLlarg(dia) + dlR + '</h3>' +
+          diesR[dia].map(function (p) { return filaResultat(p, equips[p.equipId]); }).join('');
+      }).join('');
     } else {
       resBox.innerHTML = '<p class="empty-note">La temporada 2026-2027 encara no ha començat: el primer cap de setmana amb partits és el del 5 i 6 de setembre. Els resultats sortiran aquí l\'endemà de cada jornada.</p>';
     }
@@ -667,6 +677,7 @@
   }
 
   var JORNADES = {};
+  var RESULTATS_J = {};
   Promise.all([
     fetch('data.json').then(function (r) { return r.json(); }),
     // Sense el fitxer d'escuts la pàgina segueix: files sense escut, no en blanc.
@@ -681,6 +692,8 @@
       });
       ((tot[2] || {})._jornades || {}).llista &&
         tot[2]._jornades.llista.forEach(function (j) { JORNADES[j.clau] = j; });
+      ((tot[2] || {})._resultats || {}).llista &&
+        tot[2]._resultats.llista.forEach(function (j) { RESULTATS_J[j.clau] = j; });
       render(tot[0]);
     })
     .catch(function () {
