@@ -95,6 +95,11 @@ TEXTOS = [
     ("La primera plantilla del club, femenina i masculina, els seus propers partits.",
      "La primera plantilla del club, femenina y masculina, y sus próximos partidos.",
      "The club's first teams, women's and men's, and their next fixtures."),
+    # El resum SEO nomes escriu aquest titol quan ja hi ha partits jugats:
+    # va apareixer el primer cap de setmana amb resultats de la 2026-2027.
+    ("Últims resultats",
+     "Últimos resultados",
+     "Latest results"),
     ("⬇ Descarrega el cartell",
      "⬇ Descarga el cartel",
      "⬇ Download the poster"),
