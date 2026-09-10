@@ -49,7 +49,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Instal·lar dependències
-        run: pip install --quiet pillow
+        run: pip install --quiet pillow pyyaml
       - name: Baixar i comparar el calendari FCBQ
         run: python .github/scripts/update-partits.py
       - name: Regenerar fitxes de calendari per equip
