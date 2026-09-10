@@ -50,6 +50,9 @@ PAPER = (255, 255, 255)
 MUTED = (107, 101, 96)
 BORDER = (14, 17, 22, 18)
 ROW_ALT = (244, 241, 236)
+# Semàntics de resultat, els mateixos que .marc.win/.loss del web.
+VERD = (27, 127, 75)
+DERROTA = (168, 4, 14)
 
 W, H = 1080, 1350
 MARGIN = 62
@@ -242,10 +245,13 @@ def neteja_competicio(s):
 JORNADA_MAX = 19  # files (partits + capçaleres de dia) per pàgina del cartell
 
 
-def pagina_jornada(etiqueta, files, equips_nom, equips_comp, pag_idx, n_pags, temporada):
+def pagina_jornada(etiqueta, files, equips_nom, equips_comp, pag_idx, n_pags, temporada,
+                   titol="LA JORNADA", resultats=False):
     """El cartell d'una jornada sencera: tots els partits del club aquell
     cap de setmana, en format post (1080x1350), amb l'escut de cada equip.
-    `files` barreja capçaleres de dia ("dia", iso) i partits ("partit", p)."""
+    `files` barreja capçaleres de dia ("dia", iso) i partits ("partit", p).
+    Amb resultats=True, la columna dreta duu el marcador (verd victòria,
+    vermell derrota) en lloc del CASA/FORA — mateix format, l'endemà."""
     im = Image.new("RGB", (W, H), PAPER)
     dr = ImageDraw.Draw(im)
 
@@ -254,12 +260,13 @@ def pagina_jornada(etiqueta, files, equips_nom, equips_comp, pag_idx, n_pags, te
     dr.text((MARGIN, y), f"TEMPORADA {temporada} · TOTS ELS EQUIPS".upper(),
             font=font(F_BOLD, 20), fill=MUTED)
     y += 40
-    dr.text((MARGIN, y), "LA JORNADA", font=font(F_ANTON, 50), fill=INK)
+    dr.text((MARGIN, y), titol, font=font(F_ANTON, 50), fill=INK)
     y += 58
     dr.text((MARGIN, y), etiqueta.upper(), font=font(F_ANTON, 50), fill=RED)
     y += 70
     n_partits = sum(1 for t, _ in files if t == "partit")
-    label = f"{n_pags > 1 and f'PÀGINA {pag_idx + 1}/{n_pags} · ' or ''}{n_partits} PARTITS"
+    unitat = "RESULTATS" if resultats else "PARTITS"
+    label = f"{n_pags > 1 and f'PÀGINA {pag_idx + 1}/{n_pags} · ' or ''}{n_partits} {unitat}"
     f_pill = font(F_BOLD, 22)
     pw = text_w(dr, label, f_pill) + 46
     dr.rounded_rectangle([MARGIN, y, MARGIN + pw, y + 46], radius=23, fill=INK)
@@ -305,7 +312,8 @@ def pagina_jornada(etiqueta, files, equips_nom, equips_comp, pag_idx, n_pags, te
         # Amb files molt atapeïdes (un dia amb moltíssims partits) no hi ha
         # prou alçada per a la tercera línia sense trepitjar la fila veïna.
         comp = neteja_competicio(equips_comp.get(p["equipId"])) if row_h >= 65 else ""
-        amplada_text = W - MARGIN - tx - 92
+        # Amb marcador a la dreta cal deixar-li més lloc que al xip CASA/FORA.
+        amplada_text = W - MARGIN - tx - (150 if resultats else 92)
         yt = cy - 28 if comp else cy - 19
         dr.text((tx, yt), truncate(dr, nom_eq, f_eq, amplada_text),
                 font=f_eq, fill=INK)
@@ -315,14 +323,35 @@ def pagina_jornada(etiqueta, files, equips_nom, equips_comp, pag_idx, n_pags, te
             dr.text((tx, yt + 42), truncate(dr, comp, f_cp, amplada_text),
                     font=f_cp, fill=MUTED)
 
-        tag = "MODIFICAT" if modificat else ("CASA" if p["casa"] else "FORA")
-        tw = text_w(dr, tag, f_tag)
-        if modificat:
-            dr.rectangle([W - MARGIN - tw - 10, cy - 13, W - MARGIN + 4, cy + 11], fill=RED)
-            dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag, fill=PAPER)
+        if resultats:
+            pl, pv = p.get("puntsLocal"), p.get("puntsVisitant")
+            if pl is not None and pv is not None:
+                nostres, seus = (pl, pv) if p["casa"] else (pv, pl)
+                if nostres > seus:
+                    color, tag = VERD, "VICTÒRIA"
+                elif nostres < seus:
+                    color, tag = DERROTA, "DERROTA"
+                else:
+                    color, tag = INK, "EMPAT"
+                marc = f"{pl} - {pv}"
+                f_marc = font(F_ANTON, 32)
+                mw = text_w(dr, marc, f_marc)
+                dr.text((W - MARGIN - mw, cy - 28), marc, font=f_marc, fill=color)
+                tw = text_w(dr, tag, f_tag)
+                dr.text((W - MARGIN - tw, cy + 14), tag, font=f_tag, fill=MUTED)
+            else:
+                tag = "PENDENT"
+                tw = text_w(dr, tag, f_tag)
+                dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag, fill=MUTED)
         else:
-            dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag,
-                    fill=RED_INK if p["casa"] else MUTED)
+            tag = "MODIFICAT" if modificat else ("CASA" if p["casa"] else "FORA")
+            tw = text_w(dr, tag, f_tag)
+            if modificat:
+                dr.rectangle([W - MARGIN - tw - 10, cy - 13, W - MARGIN + 4, cy + 11], fill=RED)
+                dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag, fill=PAPER)
+            else:
+                dr.text((W - MARGIN - tw, cy - 8), tag, font=f_tag,
+                        fill=RED_INK if p["casa"] else MUTED)
         i += 1
 
     fy = H - 96
@@ -379,6 +408,55 @@ def genera_jornades(data, temporada):
         sortida.append({"clau": iso, "etiqueta": etiqueta, "tipus": tipus,
                         "partits": len(partits), "dates": [iso]})
     print(f"[jornades] {len(sortida)} cartells, un per dia")
+    return sortida
+
+
+def genera_resultats(data, temporada):
+    """El cartell de resultats de cada DIA ja jugat: mateix format que el
+    de la jornada (escuts, equip, rival i categoria) però amb el marcador a
+    la dreta. Només els dies amb algun resultat publicat per la FCBQ.
+    Retorna el bloc per al manifest ("_resultats")."""
+    equips_nom = {e["id"]: e.get("nom") or e.get("curt") or e["id"]
+                  for e in data.get("equips", [])}
+    equips_comp = {e["id"]: e.get("competicio") or "" for e in data.get("equips", [])}
+    per_dia = {}
+    for p in data.get("partits", []):
+        per_dia.setdefault(p["data"], []).append(p)
+
+    (OUT_DL / "jornades").mkdir(exist_ok=True)
+    (OUT_IMG / "jornades").mkdir(exist_ok=True)
+    sortida = []
+    for iso in sorted(per_dia):
+        partits = sorted(per_dia[iso], key=lambda p: p["hora"])
+        # El cartell surt quan la jornada ja té algun marcador: dissabte a
+        # la tarda amb els de dissabte, diumenge amb els de diumenge.
+        if not any(p.get("puntsLocal") is not None and p.get("puntsVisitant") is not None
+                   for p in partits):
+            continue
+        etiqueta = dia_llarg(iso)
+        files = [("partit", p) for p in partits]
+        n_pags = -(-len(files) // JORNADA_MAX)
+        per_pag = -(-len(files) // n_pags)
+        pags = [files[i:i + per_pag] for i in range(0, len(files), per_pag)]
+        images = [pagina_jornada(etiqueta, pag, equips_nom, equips_comp, i, len(pags),
+                                 temporada, titol="ELS RESULTATS", resultats=True)
+                  for i, pag in enumerate(pags)]
+
+        slug = f"resultats-{iso}"
+        thumb = images[0].resize((700, round(700 * H / W)), Image.LANCZOS)
+        thumb.save(OUT_IMG / "jornades" / f"{slug}.webp", "WEBP", quality=84, method=6)
+        for old in (OUT_DL / "jornades" / f"{slug}.png", OUT_DL / "jornades" / f"{slug}.pdf"):
+            old.unlink(missing_ok=True)
+        if len(images) == 1:
+            images[0].save(OUT_DL / "jornades" / f"{slug}.png", "PNG", optimize=True)
+            tipus = "png"
+        else:
+            images[0].save(OUT_DL / "jornades" / f"{slug}.pdf", "PDF",
+                           save_all=True, append_images=images[1:])
+            tipus = "pdf"
+        sortida.append({"clau": iso, "etiqueta": etiqueta, "tipus": tipus,
+                        "partits": len(partits), "dates": [iso]})
+    print(f"[resultats] {len(sortida)} cartells de resultats")
     return sortida
 
 
@@ -501,6 +579,28 @@ def main():
     except Exception as exc:
         print(f"[jornades] ✗ {exc}")
 
+    # El cartell de resultats de cada dia jugat, amb la seva empremta:
+    # inclou els marcadors, de manera que quan el robot del cap de setmana
+    # recull un resultat nou, el cartell es redibuixa tot sol.
+    try:
+        h_r = hashlib.sha1(json.dumps(
+            {"disseny": 1, "temporada": temporada,
+             "partits": [{"data": p["data"], "hora": p["hora"], "casa": p["casa"],
+                          "local": p["local"], "visitant": p["visitant"],
+                          "equipId": p["equipId"],
+                          "pl": p.get("puntsLocal"), "pv": p.get("puntsVisitant")}
+                         for p in sorted(d["partits"], key=lambda x: (x["data"], x["hora"]))]},
+            sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+        antic_r = manifest_antic.get("_resultats") or {}
+        if antic_r.get("hash") == h_r and (OUT_DL / "jornades").exists():
+            manifest["_resultats"] = antic_r
+            print("[resultats] sense canvis")
+        else:
+            manifest["_resultats"] = {"hash": h_r,
+                                      "actualitzat": date.today().isoformat(),
+                                      "llista": genera_resultats(d, temporada)}
+    except Exception as exc:
+        print(f"[resultats] ✗ {exc}")
 
     MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"[calendaris] {fets} fitxes regenerades, {reutilitzats} sense canvis, "
