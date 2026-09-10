@@ -6,12 +6,9 @@ lo pisa una sincronización externa: un borrado, un cambio de máquina o un sync
 se lleva años de criterio acumulado. Esto lo arregla — cada push a GitHub es una
 copia fuera del ordenador.
 
-**Última sincronización: 2026-08-29 15:30 UTC.** `synced/` trajo una sección
-ampliada de la norma de partners en `cbgb` (fusionada). Y algo más serio: tras
-un reinicio de contenedor, **`doctrina-juliol-2026-cbgb` y `memoria-cbgb`
-habían desaparecido** de `~/.claude/skills/` — restauradas desde aquí el mismo
-día (incidencia O-15, confirma lo que O-14 solo advertía). Cierra la incidencia
-O-12 de `.claude/knowledge/bbdd/obertes.md`.
+**Última sincronización: 2026-09-10 11:57 UTC** (sin cambios desde el 29/08:
+las dos skills fuera de `synced/` seguían presentes y las 38 del club, idénticas
+al backup). Cierra la incidencia O-12 de `.claude/knowledge/bbdd/obertes.md`.
 
 ## Qué hay y qué no
 
