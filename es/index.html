@@ -861,11 +861,31 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .p2018 .form .sub { font-size: 13px; color: #6B6560; margin-bottom: 22px; }
 .p2018 .form-err { display: none; margin-top: 7px; font-size: 12px; color: var(--red-dark, #A8040E); }
 .p2018 .form-err.on { display: block; }
+
+/* ==== El reel de l'Escoleta, al costat de la foto del hero ====
+   No es carrega res d'Instagram fins que algú el demana: abans hi ha
+   una caixa del club amb el botó. Així la portada no obre connexions
+   a un tercer sense permís i no arrossega el pes del reproductor. */
+.lg-media { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: 1fr; width: 100%; max-width: 520px; justify-self: end; }
+@media (min-width: 1100px) { .lg-media { grid-template-columns: 1.05fr 0.95fr; align-items: start; } }
+.lg-media .lg-ph { max-width: none; justify-self: stretch; }
+.lg-reel { margin: 0; }
+.lg-reel .reel-box { position: relative; aspect-ratio: 9 / 16; max-width: 100%; background: var(--ink); overflow: hidden; }
+.lg-reel iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.reel-play { position: absolute; inset: 0; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; background: var(--ink); color: #fff; border: 0; cursor: pointer; text-align: center; }
+.reel-play:hover .reel-ico, .reel-play:focus-visible .reel-ico { background: var(--red); border-color: var(--red); }
+.reel-play:focus-visible { outline: 3px solid var(--red); outline-offset: -3px; }
+.reel-ico { display: flex; align-items: center; justify-content: center; width: 54px; height: 54px; border: 2px solid #fff; border-radius: 50%; transition: background 0.3s, border-color 0.3s; }
+.reel-ico svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+.reel-t { font-family: var(--display); font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; }
+.reel-s { font-size: 11.5px; line-height: 1.5; color: rgba(255,255,255,0.66); max-width: 24ch; }
+.lg-reel figcaption { margin-top: 12px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 </style>
 <script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <link rel="stylesheet" href="/css/cerca.css">
 <link rel="stylesheet" href="/css/a11y.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"Prueba abierta de baloncesto para chicas nacidas en 2018 · CB Grup Barna","startDate":"2026-09-19T09:00:00+02:00","endDate":"2026-09-19T10:30:00+02:00","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","description":"Entrenamiento de prueba gratuito para chicas nacidas en 2018, dentro de la sesión de sábado de la Escoleta del CB Grup Barna en La Nau del Clot. Hay que reservar plaza en la web.","inLanguage":"es","isAccessibleForFree":true,"url":"https://cbgrupbarna.info/es/#prova-2018","image":"https://cbgrupbarna.info/og-image.jpg","location":{"@type":"Place","name":"La Nau del Clot","address":{"@type":"PostalAddress","streetAddress":"Carrer de la Llacuna, 170-172","addressLocality":"Barcelona","postalCode":"08018","addressRegion":"Catalunya","addressCountry":"ES"}},"organizer":{"@type":"SportsOrganization","name":"CB Grup Barna","url":"https://cbgrupbarna.info"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://cbgrupbarna.info/es/#prova-2018","validFrom":"2026-09-10T00:00:00+02:00"},"audience":{"@type":"PeopleAudience","suggestedGender":"female","suggestedMinAge":7,"suggestedMaxAge":9},"sport":"Basketball"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"La Escoleta del CB Grup Barna, en vídeo","description":"Vídeo de la Escoleta del CB Grup Barna, la escuela de baloncesto para niños y niñas de 4 a 8 años en La Nau del Clot, Barcelona.","inLanguage":"es","embedUrl":"https://www.instagram.com/reel/Dcv-xF8IIUM/embed/","url":"https://www.instagram.com/reel/Dcv-xF8IIUM/","thumbnailUrl":"https://cbgrupbarna.info/img/escoleta-h1@2x.webp","publisher":{"@type":"SportsOrganization","name":"CB Grup Barna","url":"https://cbgrupbarna.info"}}</script>
 </head>
 <body>
 
@@ -938,10 +958,22 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       <p class="lg-hero-seo">Academia y club de baloncesto base en Barcelona: Escoleta de 4 a 8 años, equipos federados en la FCBQ, campus, tecnificación y baloncesto inclusivo con los Barna Màgics, en El Clot de Sant Martí.</p>
     </div>
     <div>
+      <div class="lg-media">
       <figure class="lg-ph">
         <img class="rota-escoleta" src="/img/escoleta-h1.webp" srcset="/img/escoleta-h1.webp 600w, /img/escoleta-h1@2x.webp 1200w" sizes="(max-width: 900px) 90vw, 440px" width="600" height="800" fetchpriority="high" decoding="async" alt="Niño o niña de la Escoleta del CB Grup Barna con la pelota y la mascota del club">
         <figcaption>Escoleta · La Nau del Clot</figcaption>
       </figure>
+      <figure class="lg-reel">
+        <div class="reel-box" data-reel="Dcv-xF8IIUM" data-titol="Reel de la Escoleta del CB Grup Barna en Instagram">
+          <button type="button" class="reel-play" aria-label="Reproduce el vídeo de la Escoleta" data-cta="hero-reel">
+            <span class="reel-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="reel-t">Vídeo de la Escoleta</span>
+            <span class="reel-s">Se carga cuando lo pides, para no gastarte datos sin permiso.</span>
+          </button>
+        </div>
+        <figcaption>Reel · @cbgrupbarna</figcaption>
+      </figure>
+      </div>
       <div class="lg-hero-btns">
         <a href="/es/escoleta/" class="btn red" data-cta="hero-prova">Ven a probar</a>
         <button type="button" class="btn ghost" id="entrenBtn2" aria-expanded="false" aria-controls="entrenPanel2" data-cta="hero-entrenaments">Entrenamientos</button>
@@ -1846,5 +1878,26 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 })();
 </script>
 <script src="/js/reserva-prova.js" defer></script>
+
+<script>
+/* El reel del hero · un iframe només quan algú el demana. */
+(function () {
+  var box = document.querySelector('.lg-reel .reel-box[data-reel]');
+  if (!box) return;
+  var boto = box.querySelector('.reel-play');
+  if (!boto) return;
+  boto.addEventListener('click', function () {
+    var id = box.getAttribute('data-reel');
+    var f = document.createElement('iframe');
+    f.src = 'https://www.instagram.com/reel/' + id + '/embed/';
+    f.loading = 'lazy';
+    f.title = box.getAttribute('data-titol') || 'Instagram';
+    f.setAttribute('allowtransparency', 'true');
+    f.setAttribute('allowfullscreen', '');
+    boto.replaceWith(f);
+    if (window.gtag) window.gtag('event', 'hero_reel_obert', { reel: id });
+  });
+})();
+</script>
 </body>
 </html>
