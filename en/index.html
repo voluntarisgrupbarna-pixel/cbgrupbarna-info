@@ -883,6 +883,23 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 .reel-t { font-family: var(--display); font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; }
 .reel-s { font-size: 11.5px; line-height: 1.5; color: rgba(255,255,255,0.66); max-width: 24ch; }
 .lg-reel figcaption { margin-top: 12px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+/* ==== Comptador de la campanya ====
+   Tres xifres i una barra: els dies que falten, quanta gent s'hi ha
+   apuntat aquest setembre i quant queda per omplir. Els números viuen
+   als data- del bloc: es canvien en un sol lloc i a mà, perquè el que
+   diu el web ha de ser el que hi ha al full de reserves. Els dies els
+   calcula el navegador; si no hi ha JS, el text que ja hi és serveix. */
+.compte { margin-top: 26px; border: 1px solid var(--line); border-left: 4px solid var(--red); padding: clamp(16px, 2.4vw, 24px); }
+.compte-xifres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.compte-x { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.compte-x b { font-family: var(--display); font-weight: 400; font-size: clamp(28px, 5.2vw, 46px); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.compte-x.ara b { color: var(--red); }
+.compte-x span { font-family: var(--body); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6560; line-height: 1.5; }
+.compte-barra { margin-top: 18px; height: 10px; background: var(--line); overflow: hidden; }
+.compte-barra i { display: block; height: 100%; background: var(--red); }
+.compte-peu { margin-top: 10px; font-size: 12.5px; color: #6B6560; }
+@media (max-width: 480px) { .compte-xifres { grid-template-columns: 1fr 1fr; } .compte-x.places { grid-column: span 2; flex-direction: row; align-items: baseline; gap: 10px; } }
 </style>
 <script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <link rel="stylesheet" href="/css/cerca.css">
@@ -1006,6 +1023,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
         <li><b>Who</b><span>Girls born in 2018. Every other age, all September</span></li>
         <li><b>Cost</b><span>Free: the first session is a trial</span></li>
           </ul>
+          <div class="compte" id="compte-2018" data-fins="2026-09-19" data-apuntats="45" data-places="50">
+            <div class="compte-xifres">
+              <p class="compte-x ara"><b data-dies>9</b><span>Days to the trial</span></p>
+              <p class="compte-x"><b>45</b><span>Children signed up</span></p>
+              <p class="compte-x places"><b>90%</b><span>of 50 September places</span></p>
+            </div>
+            <div class="compte-barra" role="img" aria-label="90% full"><i style="width:90%"></i></div>
+            <p class="compte-peu">Open-day places for the whole of September, Escoleta and federated teams. The trial for the 2018 girls is on Saturday the 19th.</p>
+          </div>
           <p class="p2018-mes">If the 19th does not work for you, the whole of September is <a href="/en/open-days/">open days</a>: tell us in the form and we will give you another day. All the details about <a href="/en/escoleta/">the Escoleta</a>.</p>
         </div>
         <div>
@@ -1880,6 +1906,24 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
 })();
 </script>
 <script src="/js/reserva-prova.js" defer></script>
+<script>
+  /* El comptador de la campanya: els dies els compta el navegador des de
+     la data del bloc; les places i els apuntats surten dels data-, que és
+     l'únic lloc on es toquen. */
+  (function () {
+    var c = document.getElementById('compte-2018');
+    if (!c) return;
+    var fins = c.getAttribute('data-fins');
+    var el = c.querySelector('[data-dies]');
+    if (!fins || !el) return;
+    var avui = new Date(); avui.setHours(0, 0, 0, 0);
+    var dia = new Date(fins + 'T00:00:00');
+    var dies = Math.round((dia - avui) / 86400000);
+    if (dies > 0) el.textContent = dies;
+    else if (dies === 0) { el.textContent = '0'; c.setAttribute('data-avui', 'si'); }
+    else el.textContent = '0';
+  })();
+</script>
 
 <script>
 /* El reel del hero · un iframe només quan algú el demana. */
