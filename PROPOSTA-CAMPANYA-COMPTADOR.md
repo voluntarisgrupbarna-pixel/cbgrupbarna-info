@@ -22,8 +22,8 @@ omplint un grup concret abans d'una data concreta.
 **Un comptador a la portada, dins del bloc de la prova del 19 de setembre.**
 
 Tres xifres i una barra: **els dies que falten** (els compta el navegador sol),
-**els 45 nens i nenes ja apuntats** i el **90% de les 50 places** de portes
-obertes del setembre. Quan arriba a zero s'atura sol, i el 20 de setembre el
+**les places lliures del grup del 2018** —el grup surt amb 5 i ara en queden
+3— i el **90% de les 50 places** de portes obertes del setembre. Quan arriba a zero s'atura sol, i el 20 de setembre el
 bloc passa a ser arxiu.
 
 Tres coses que això fa i un cartell no fa:
@@ -31,7 +31,7 @@ Tres coses que això fa i un cartell no fa:
 | | Cartell | Comptador |
 |---|---|---|
 | **Prova social** | Ningú sap si algú s'hi ha apuntat | Es veu que 45 famílies ja hi són |
-| **Urgència** | «Setembre» | «90% ple i falten 9 dies» |
+| **Urgència** | «Setembre» | «Queden 3 places i 9 dies» |
 | **Motiu per tornar-hi** | Cap | Els dies baixen sols cada matinada |
 
 I una quarta, la important: **dona a Instagram una notícia diària sense produir
@@ -42,7 +42,7 @@ reserva per als tres o quatre moments que ho mereixen.
 
 | Dia | Web | Instagram |
 |---|---|---|
-| D-9 | El comptador s'obre: 9 · 45 · 90% | Reel ja publicat, amb l'enllaç a la bio |
+| D-9 | El comptador s'obre: 9 dies · 3 places · 90% | Reel ja publicat, amb l'enllaç a la bio |
 | D-7 | | Reel «el primer bot»: com és una sessió de l'Escoleta |
 | D-6 a D-1 | Els dies baixen sols | Story diària amb el comptador. Sense disseny nou |
 | D-3 | | Vídeo de 20 s d'en Julio a càmera: qui hi entrena i per què |
@@ -88,7 +88,8 @@ Tot al repositori que ja tenim. No cal cap servei nou ni cap plataforma de pagam
 
 No amb visualitzacions. Amb això:
 
-1. **Apuntats el 19 de setembre.** Objectiu: les 50 places. Avui, 45.
+1. **Places del 2018 cobertes el 19 de setembre.** Objectiu: les 5. Avui en
+   queden 3. I, de fons, les 50 places de setembre: avui 45.
 2. **Quantes segueixen entrenant el 15 d'octubre.** És l'única xifra que importa
    de veritat: una prova no és una jugadora.
 3. **% d'abast a no-seguidors** dels reels de la campanya, i **seguidors nous**.
@@ -106,6 +107,6 @@ Això és el que cap club de barri de Barcelona fa avui.
 
 ---
 
-*Estat: el comptador ja és a la portada (9 dies · 45 apuntats · 90%). L'única
+*Estat: el comptador ja és a la portada (9 dies · 3 places lliures del 2018 · 90%). L'única
 cosa pendent és que els 45 surtin sols del full de reserves en comptes de
 canviar-se a mà.*
