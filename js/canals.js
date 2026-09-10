@@ -64,7 +64,7 @@ window.CANALS = {
      a `bustiaEndpoint`, però el comptador de places no surt (no hi ha
      d'on llegir-lo) i els correus, l'esdeveniment de calendari i el
      control de places s'han de fer a mà des de la full.            */
-  portesObertesEndpoint: '',
+  portesObertesEndpoint: 'https://script.google.com/macros/s/AKfycbwlrdgYopQ5etRi3DUd3wYr-Yy1oKY9GGM4NCv5jVtGFZ_MbhtjFvw_UZs7JR7oRhI/exec',
 
 
   /* 4 · CANAL DE PROTECCIÓ DEL MENOR ──────────────────────────────
