@@ -119,7 +119,7 @@ def head(title, desc, url, image, extra_ld=None, keywords=None, alternates=None,
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/barna.css">{lang_style}
 {'<script type="application/ld+json">' + chr(10) + ld + chr(10) + '</script>' if ld else ''}
-<script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script><script type="text/javascript">var Tawk_API=Tawk_API||{{}},Tawk_LoadStart=new Date();(function(){{var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/6a9197107f2d2f343fa7fabd/1k14bc6i0';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);}})();</script>
+<script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <!-- El cercador: el full i el motor. El botó de la lupa no s'escriu
      aquí, el planta /js/cerca.js dins de la capçalera; el fitxer JS
      s'enllaça al final del <body>, amb peu() (i18n_chrome.py). -->
@@ -1304,6 +1304,90 @@ CHART_PARITAT = ('\n<figure class="chart">\n'
 
 
 ARTICLES = [
+ {
+  "slug": "basquet-nenes-2018-barcelona",
+  "meta_desc": 'Per què un club va a buscar un any de naixement sencer: les nenes del 2018 al Clot, la prova oberta del 19 de setembre i com funciona entrar a un equip femení de base.',
+  "hero_alt": "Nena de l'Escoleta del CB Grup Barna amb la pilota, a La Nau del Clot",
+  "date": "2026-09-10",
+  "tag": "Bàsquet femení",
+  "title": "Busquem les del 2018: per què un club sencer va a buscar un any de naixement",
+  "seo_title": "Bàsquet per a nenes nascudes el 2018 a Barcelona | CB Grup Barna",
+  "desc": ("El CB Grup Barna obre la sessió del dissabte 19 de setembre a les nenes nascudes el 2018. "
+           "No és una promoció: és com se sosté un equip femení de base, any per any."),
+  "kw": "bàsquet nenes 2018 Barcelona, equip femení bàsquet base Barcelona, baloncesto niñas 2018, "
+        "escola de bàsquet femenina Clot, prova de bàsquet gratuïta Barcelona",
+  "lede": ("El dissabte 19 de setembre, a La Nau del Clot, entrenen amb nosaltres les nenes nascudes "
+           "el 2018 que vulguin provar-ho. Val la pena explicar per què un club es fixa en un any "
+           "concret, i què hi ha darrere d'aquesta mena de crides."),
+  "card_img": "card-nenes-2018",
+  "card_alt": "Nena de l'Escoleta del CB Grup Barna amb la pilota",
+  "card_text": ("Un equip de base no es fa amb bones intencions: es fa amb un grup prou nombrós d'un "
+                "mateix any de naixement. Això és el que estem construint amb les del 2018."),
+  "body": """
+<h2>Un equip de base es fa per any de naixement</h2>
+<p>Al bàsquet català els equips no es formen per curs escolar sinó per <strong>any de
+naixement</strong>. Vol dir que totes les jugadores nascudes el 2018 competiran juntes, temporada
+rere temporada, fins que arribin a sènior. I vol dir també una cosa menys evident: si un any queda
+curt de jugadores, aquell grup arrossega el problema durant deu anys.</p>
+<p>Amb vuit o nou jugadores un equip entrena bé, roda, i pot perdre'n una per una lesió o un canvi
+d'escola sense que s'ensorri res. Amb cinc, cada absència és un entrenament a mitges. Per això, quan
+un club veu que un any de naixement va just, no espera: hi va a buscar jugadores.</p>
+
+<h2>Per què el 2018, i per què noies</h2>
+<p>El CB Grup Barna té <a href="/femeni/">el mateix nombre d'equips i el mateix pressupost</a> per a
+la línia femenina i la masculina, i un 65,5% d'entrenadores a l'staff tècnic. Això no se sosté sol:
+se sosté si cada any de naixement té prou nenes. El 2018 és, ara mateix, el que necessita créixer.</p>
+<p>No és un cas particular d'aquest club. Als equips de base catalans hi ha històricament menys nenes
+que nens, i la diferència es fa gran just a les edats en què elles comencen a deixar-ho. Ho vam
+explicar amb dades a
+<a href="/blog/per-que-les-noies-deixen-el-basquet/">per què les noies deixen el bàsquet</a>. La
+resposta d'un club de barri no pot ser lamentar-ho: ha de ser obrir la porta i anar-les a buscar,
+any per any.</p>
+
+<blockquote>El primer bot d'una jugadora de Supercopa és igual que el de qualsevol altra criatura:
+malament, amb dues mans i mirant-se la pilota.</blockquote>
+
+<h2>Què passa el dissabte 19 de setembre</h2>
+<p>Aquell dia, de <strong>09:00 a 10:30 a La Nau del Clot</strong> (carrer de la Llacuna 170-172),
+hi ha la sessió de dissabte de <a href="/escoleta/">l'Escoleta</a>, que és on prova tothom qui ve
+per primer cop. Les nenes del 2018 entrenen dins d'aquesta sessió, amb el grup que els tocaria.</p>
+<ul>
+  <li><strong>És gratuïta</strong> i no compromet a res: es prova un dia i després es decideix.</li>
+  <li><strong>No cal saber-ne gens.</strong> Ni botar, ni haver jugat mai, ni cap fitxa federativa.</li>
+  <li><strong>Cal portar</strong> roba d'esport, sabatilles de pista i una ampolla d'aigua. La pilota
+  la posem nosaltres.</li>
+  <li><strong>Es reserva plaça</strong> al formulari de la portada, per poder preparar els grups:
+  <a href="/#prova-2018">cbgrupbarna.info</a>.</li>
+</ul>
+<p>Qui no pugui el 19 no es queda fora de res: <a href="/portes-obertes/">tot el setembre és de
+portes obertes</a> i es dona un altre dia, de l'Escoleta al sènior.</p>
+
+<h2>I després de la prova, què</h2>
+<p>Si s'hi queda, s'entrena dos dies per setmana —dimecres a l'Escola Casas i dissabte a La Nau— i
+es fa la inscripció amb el club, que explica la quota i què inclou abans de comprometre res. Cap
+família ha de decidir res el mateix dia de la prova.</p>
+<p>I si no s'hi queda, també està bé. Una criatura que prova un esport i decideix que no és el seu
+ha après alguna cosa igualment. El que no volem és que no ho hagi pogut provar mai perquè al seu any
+de naixement no hi havia prou nenes per fer equip.</p>
+""",
+  "faq": [
+   ("Quan és la prova de bàsquet per a nenes nascudes el 2018?",
+    "El dissabte 19 de setembre de 2026, de 09:00 a 10:30, a La Nau del Clot (carrer de la Llacuna "
+    "170-172, Barcelona), dins de la sessió de dissabte de l'Escoleta. És gratuïta i cal reservar "
+    "plaça al formulari de cbgrupbarna.info."),
+   ("Cal haver jugat abans a bàsquet per venir?",
+    "No. La prova és per començar de zero: no cal saber botar, ni portar equipació, ni tenir fitxa "
+    "federativa. Només roba d'esport, sabatilles de pista i una ampolla d'aigua."),
+   ("Per què els equips es fan per any de naixement i no per curs?",
+    "Perquè és el criteri de la Federació Catalana de Basquetbol: totes les jugadores nascudes el "
+    "mateix any competeixen a la mateixa categoria, independentment del curs escolar que facin."),
+   ("Què passa si el 19 de setembre no podem venir?",
+    "Tot el setembre és de portes obertes al CB Grup Barna. Al mateix formulari es pot demanar un "
+    "altre dia i el club respon amb el dia i l'hora que li tocarien."),
+  ],
+  "closer": ("Voleu venir a provar-ho?",
+             "Deixa'ns el nom i el contacte i et diem el dia i l'hora. La primera sessió és gratuïta."),
+ },
  {
   "slug": "club-formacio-i-competitiu-catalunya",
   "meta_desc": 'Quins clubs de bàsquet catalans tenen equip a totes les edats i arriben a sènior amb els dos gèneres, segons la fitxa oficial de la FCBQ.',

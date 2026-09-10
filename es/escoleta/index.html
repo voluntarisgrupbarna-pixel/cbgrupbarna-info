@@ -280,8 +280,25 @@ footer a{color:var(--ink-2)}
 .mes-info p{font-size:15px;line-height:1.65;max-width:62ch;color:var(--ink-2)}
 .mes-info a{color:var(--red-dark);text-decoration:underline;text-underline-offset:3px}
 .faq-q p{padding:0 0 20px;font-size:14.5px;color:var(--ink-2);line-height:1.75;max-width:70ch}
+
+/* ==== La crida del 2018 i la informació pràctica ====
+   Dues seccions afegides el setembre del 2026: la campanya de les
+   noies nascudes el 2018 i el que una família necessita saber abans
+   de venir (horaris, què cal portar, com s'hi entra). */
+/* L'Anton no té cursiva: si se n'hi demana, el navegador se la inventa. */
+.n2018 h2 em{font-style:normal;color:var(--red)}
+.n2018{border-left:4px solid var(--red);padding-left:clamp(16px,3vw,28px)}
+.n2018 .dia{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;padding:9px 16px;background:var(--red);color:#fff;font-family:var(--display);font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+.practica{display:grid;gap:22px;margin-top:34px;grid-template-columns:1fr}
+@media(min-width:760px){.practica{grid-template-columns:1fr 1fr}}
+.practica article{border-top:2px solid var(--ink);padding-top:16px}
+.practica h3{font-family:var(--display);font-size:clamp(15px,2.4vw,19px);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.practica p,.practica li{font-size:15px;line-height:1.7;color:var(--ink-2)}
+.practica ul{margin:0;padding-left:18px}
+.practica li{margin-bottom:6px}
 </style>
-<meta name="description" content="Escoleta del CB Grup Barna (4 a 8 años) en El Clot, Barcelona. Puertas Abiertas: ven a probar un entrenamiento sin compromiso.">
+<meta name="description" content="Escoleta del CB Grup Barna (4 a 8 años) en El Clot, Barcelona. Buscamos chicas nacidas en 2018: prueba gratuita el sábado 19 de septiembre en La Nau del Clot. Horarios, qué llevar y cómo apuntarse.">
+<meta name="keywords" content="escuela de baloncesto Barcelona, escoleta baloncesto 4 a 8 años, baloncesto niñas 2018 Barcelona, equipo femenino 2018 baloncesto Clot, prueba de baloncesto gratuita Barcelona, puertas abiertas baloncesto septiembre, academia de baloncesto Barcelona, baloncesto infantil El Clot">
 <link rel="canonical" href="https://cbgrupbarna.info/es/escoleta/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/escoleta/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/escoleta/">
@@ -295,7 +312,7 @@ footer a{color:var(--ink-2)}
 <meta property="og:url" content="https://cbgrupbarna.info/es/escoleta/">
 <meta property="og:image" content="https://cbgrupbarna.info/escoleta/img/equip-anys90-julio.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:description" content="Escuela de baloncesto para niños y niñas de 4 a 8 años en El Clot, Barcelona. De esta pista han salido jugadores de ACB, de Liga Femenina Endesa y del Barça.">
+<meta property="og:description" content="Escoleta del CB Grup Barna (4 a 8 años) en El Clot, Barcelona. Buscamos chicas nacidas en 2018: prueba gratuita el sábado 19 de septiembre en La Nau del Clot. Horarios, qué llevar y cómo apuntarse.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info/es/escoleta/">
 <link rel="icon" type="image/png" href="/logo.png">
@@ -396,6 +413,7 @@ footer a{color:var(--ink-2)}
 </script>
 <script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <link rel="stylesheet" href="/css/a11y.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"Prueba abierta de baloncesto para chicas nacidas en 2018 · CB Grup Barna","startDate":"2026-09-19T09:00:00+02:00","endDate":"2026-09-19T10:30:00+02:00","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","isAccessibleForFree":true,"inLanguage":"es","description":"Entrenamiento de prueba gratuito para chicas nacidas en 2018, dentro de la sesión de sábado de la Escoleta del CB Grup Barna en La Nau del Clot, en el Clot de Barcelona. Hay que reservar plaza en la web.","url":"https://cbgrupbarna.info/es/escoleta/#noies-2018","image":"https://cbgrupbarna.info/og-image.jpg","location":{"@type":"Place","name":"La Nau del Clot","address":{"@type":"PostalAddress","streetAddress":"Carrer de la Llacuna, 170-172","addressLocality":"Barcelona","postalCode":"08018","addressRegion":"Catalunya","addressCountry":"ES"}},"organizer":{"@type":"SportsOrganization","name":"CB Grup Barna","url":"https://cbgrupbarna.info"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://cbgrupbarna.info/es/#prova-2018","validFrom":"2026-09-10T00:00:00+02:00"},"sport":"Basketball"}</script>
 </head>
 <body>
 <a class="skip" href="#contingut">Saltar al contenido</a>
@@ -466,6 +484,43 @@ footer a{color:var(--ink-2)}
       <div><b>El Clot</b>Sant Martí, Barcelona</div>
       
       <div><b>Desde 1965</b>61 años formando en el barrio</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LES NASCUDES EL 2018 ============ -->
+<section id="noies-2018">
+  <div class="wrap">
+    <div class="n2018">
+      <p class="dia">Sábado 19 de septiembre · 09:00–10:30</p>
+      <h2>Buscamos a las<br>nacidas en <em>2018</em></h2>
+      <div class="body">
+        <p class="lead">Este septiembre el club hace crecer el grupo de chicas nacidas en 2018. Queremos que sean suficientes para entrenar juntas toda la temporada, y por eso abrimos la sesión del sábado a cualquier niña de ese año que quiera probarlo.</p>
+        <p>El <strong>sábado 19 de septiembre, de 09:00 a 10:30, en La Nau del Clot</strong>, entrenan con nosotros dentro de la misma sesión en la que prueba la Escoleta. No hace falta saber nada: la mitad de las que están empezaron sin haber botado nunca un balón.</p>
+        <p>La prueba es <strong>gratuita y sin compromiso</strong>. Se reserva plaza en el formulario de la portada para que podamos preparar los grupos y nadie se quede mirando desde la banda.</p>
+      </div>
+      <div class="cta">
+        <a class="btn" href="/es/#prova-2018" data-cta="escoleta-reserva-2018">Reserva la prueba del 19</a>
+        <a class="btn ghost" href="/es/puertas-abiertas/" data-cta="escoleta-portes-obertes">Puertas abiertas de septiembre</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INFORMACIÓ PRÀCTICA ============ -->
+<section id="info-practica">
+  <div class="wrap">
+    <h2>Lo que hay que saber<br>antes de venir</h2>
+    <div class="body">
+      <p class="lead">Las preguntas que siempre nos hacen las familias que llegan por primera vez, respondidas antes de que las tengáis que hacer.</p>
+    </div>
+    <div class="practica">
+      <article><h3>Cuándo se entrena</h3><ul><li><b>Miércoles, 17:30–18:40</b> · Escola Casas, plaça de Valentí Almirall.</li><li><b>Sábados, 09:00–10:30</b> · La Nau del Clot, c/ de la Llacuna 170-172.</li><li>De septiembre a junio, siguiendo el calendario escolar.</li></ul></article>
+      <article><h3>Quién va</h3><p>Niñas y niños de 4 a 8 años, en equipos mixtos y tres grupos por edad, de manera que quien empieza no entrena con quien lleva ya tres años jugando. A partir de los 8 años, y cuando están preparados, pasan a los equipos federados del club.</p></article>
+      <article><h3>Qué hay que llevar</h3><p>Ropa de deporte, zapatillas de pista y una botella de agua. El balón lo ponemos nosotros. Para la prueba no hace falta ninguna equipación ni ficha federativa.</p></article>
+      <article><h3>Cómo se entra</h3><p>Se prueba un día y después decidís. Quien se queda hace la inscripción con el club: te decimos la cuota, lo que incluye y cómo se paga antes de comprometer nada. Para hablarlo, Julio Torralba, en el <a href="https://wa.me/34646205526">646 205 526</a>.</p></article>
+      <article><h3>Quién está en la pista</h3><p>Julio Torralba, fundador del club en 1965, sigue dirigiendo la Escoleta cada semana, con entrenadoras y entrenadores del club. Todos con el certificado de delitos de naturaleza sexual al día, como marca el <a href="/es/proteccion-menor/">protocolo de protección del menor</a>.</p></article>
+      <article><h3>Si aún dudáis</h3><p>Podéis venir a mirar un entrenamiento sin que la criatura entre. También podéis leer <a href="/es/blog/a-que-edad-empezar-baloncesto/">a qué edad se puede empezar</a> o descargar el <a href="/escoleta/materials/escoleta-cb-grup-barna.pdf" download>dosier de la Escoleta</a>.</p></article>
     </div>
   </div>
 </section>
@@ -915,7 +970,7 @@ footer a{color:var(--ink-2)}
 <div class="wrap section">
   <div class="narrow">
     <h2 id="faq">Preguntas frecuentes</h2>
-    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Cuáles son las escuelas de baloncesto destacadas de Barcelona?</summary><p>Entre las escuelas y clubes de baloncesto base de Barcelona está la Escoleta del CB Grup Barna, en el barrio de El Clot, escuela de baloncesto para niños y niñas de 4 a 8 años en marcha desde 1965, con continuidad directa hacia los equipos federados del club a partir de los 8 años y una cantera que ha llegado a la ACB y a la Liga Femenina Endesa.</p></details><details class="faq-q"><summary>¿Cuál es la escuela de baloncesto del CB Grup Barna?</summary><p>La Escoleta es la escuela de baloncesto del CB Grup Barna para niños y niñas de 4 a 8 años, en el barrio de El Clot, Distrito de Sant Martí de Barcelona. Funciona con equipos mixtos y tres grupos por edad.</p></details><details class="faq-q"><summary>¿Quién dirige la Escoleta del CB Grup Barna?</summary><p>La Escoleta la dirige Julio Torralba. Se puede contactar con él por teléfono o WhatsApp al 646 205 526.</p></details><details class="faq-q"><summary>¿Qué jugadores conocidos se han formado en la Escoleta del CB Grup Barna?</summary><p>De esta misma pista han salido Javier Torralba, hoy entrenador del Valencia Basket Femenino en la Liga Femenina Endesa; Ainhoa López, capitana del Spar Girona en la misma liga; Roger Fornas, pívot de ACB y LEB Oro; David Mejía, campeón de Tercera FEB; y varios jugadores formados después en las categorías inferiores del FC Barcelona. Todos los detalles, con fotos y fichas federativas, están en esta misma página.</p></details><details class="faq-q"><summary>¿A partir de qué edad se puede empezar a jugar a baloncesto en el Barna?</summary><p>Desde los 4 años. La Escoleta acoge a niños y niñas de 4 a 8 años. A partir de los 8 y a medida que están preparados, pasan a los equipos federados del club (premini, mini y el resto de categorías).</p></details><details class="faq-q"><summary>¿Qué horario tiene la Escoleta del CB Grup Barna?</summary><p>Dos entrenamientos semanales: los miércoles de 17:30 a 18:40 en la Escola Casas, y los sábados de 09:00 a 10:30 en La Nau del Clot.</p></details><details class="faq-q"><summary>¿Se puede probar un entrenamiento antes de apuntarse?</summary><p>Sí. El primer entrenamiento es de prueba y sin compromiso. Hay que escribir o llamar a Julio Torralba al 646 205 526 para reservar día.</p></details><details class="faq-q"><summary>¿Dónde entrena la Escoleta del CB Grup Barna?</summary><p>En el barrio de El Clot, en el Distrito de Sant Martí de Barcelona. La Nau del Clot es el punto deportivo principal del club.</p></details><details class="faq-q"><summary>¿Quién es Julio Torralba?</summary><p>El fundador del CB Grup Barna, en 1965, y quien dirige la Escoleta sesenta y un años después: sigue entrenando cada semana a los niños y niñas de 4 a 8 años. Es también con quien se habla para venir a probar un entrenamiento de la Escoleta, en el 646 205 526.</p></details><!-- FAQ:END --></div>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>¿Cuándo es la prueba de baloncesto para chicas nacidas en 2018?</summary><p>El sábado 19 de septiembre de 2026, de 09:00 a 10:30, en La Nau del Clot (calle de la Llacuna 170-172, Barcelona), dentro de la misma sesión en la que prueban las niñas y los niños de la Escoleta. Es gratuita y se reserva plaza en el formulario de cbgrupbarna.info. Quien no pueda ese día tiene todo septiembre de puertas abiertas.</p></details><details class="faq-q"><summary>¿Por qué el CB Grup Barna busca chicas nacidas en 2018?</summary><p>Porque el club quiere que el grupo de chicas de ese año sea lo bastante numeroso para entrenar y competir junto toda la temporada. El Barna tiene el mismo número de equipos y el mismo presupuesto para la línea femenina y la masculina, y para sostenerlo hace falta que cada año de nacimiento tenga suficientes jugadoras.</p></details><details class="faq-q"><summary>¿Hay que haber jugado antes a baloncesto para venir a la prueba?</summary><p>No. La prueba es para empezar de cero: no hace falta saber botar ni haber jugado nunca, ni llevar equipación ni ficha federativa. Solo ropa de deporte, zapatillas de pista y una botella de agua; el balón lo pone el club.</p></details><details class="faq-q"><summary>¿Cuáles son las escuelas de baloncesto destacadas de Barcelona?</summary><p>Entre las escuelas y clubes de baloncesto base de Barcelona está la Escoleta del CB Grup Barna, en el barrio de El Clot, escuela de baloncesto para niños y niñas de 4 a 8 años en marcha desde 1965, con continuidad directa hacia los equipos federados del club a partir de los 8 años y una cantera que ha llegado a la ACB y a la Liga Femenina Endesa.</p></details><details class="faq-q"><summary>¿Cuál es la escuela de baloncesto del CB Grup Barna?</summary><p>La Escoleta es la escuela de baloncesto del CB Grup Barna para niños y niñas de 4 a 8 años, en el barrio de El Clot, Distrito de Sant Martí de Barcelona. Funciona con equipos mixtos y tres grupos por edad.</p></details><details class="faq-q"><summary>¿Quién dirige la Escoleta del CB Grup Barna?</summary><p>La Escoleta la dirige Julio Torralba. Se puede contactar con él por teléfono o WhatsApp al 646 205 526.</p></details><details class="faq-q"><summary>¿Qué jugadores conocidos se han formado en la Escoleta del CB Grup Barna?</summary><p>De esta misma pista han salido Javier Torralba, hoy entrenador del Valencia Basket Femenino en la Liga Femenina Endesa; Ainhoa López, capitana del Spar Girona en la misma liga; Roger Fornas, pívot de ACB y LEB Oro; David Mejía, campeón de Tercera FEB; y varios jugadores formados después en las categorías inferiores del FC Barcelona. Todos los detalles, con fotos y fichas federativas, están en esta misma página.</p></details><details class="faq-q"><summary>¿A partir de qué edad se puede empezar a jugar a baloncesto en el Barna?</summary><p>Desde los 4 años. La Escoleta acoge a niños y niñas de 4 a 8 años. A partir de los 8 y a medida que están preparados, pasan a los equipos federados del club (premini, mini y el resto de categorías).</p></details><details class="faq-q"><summary>¿Qué horario tiene la Escoleta del CB Grup Barna?</summary><p>Dos entrenamientos semanales: los miércoles de 17:30 a 18:40 en la Escola Casas, y los sábados de 09:00 a 10:30 en La Nau del Clot.</p></details><details class="faq-q"><summary>¿Se puede probar un entrenamiento antes de apuntarse?</summary><p>Sí. El primer entrenamiento es de prueba y sin compromiso. Hay que escribir o llamar a Julio Torralba al 646 205 526 para reservar día.</p></details><details class="faq-q"><summary>¿Dónde entrena la Escoleta del CB Grup Barna?</summary><p>En el barrio de El Clot, en el Distrito de Sant Martí de Barcelona. La Nau del Clot es el punto deportivo principal del club.</p></details><details class="faq-q"><summary>¿Quién es Julio Torralba?</summary><p>El fundador del CB Grup Barna, en 1965, y quien dirige la Escoleta sesenta y un años después: sigue entrenando cada semana a los niños y niñas de 4 a 8 años. Es también con quien se habla para venir a probar un entrenamiento de la Escoleta, en el 646 205 526.</p></details><!-- FAQ:END --></div>
   </div>
 </div>
 <!-- FAQ-LD:START --><script type="application/ld+json">{
@@ -924,6 +979,30 @@ footer a{color:var(--ink-2)}
   "@id": "https://cbgrupbarna.info/es/escoleta/#faq",
   "inLanguage": "es",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuándo es la prueba de baloncesto para chicas nacidas en 2018?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El sábado 19 de septiembre de 2026, de 09:00 a 10:30, en La Nau del Clot (calle de la Llacuna 170-172, Barcelona), dentro de la misma sesión en la que prueban las niñas y los niños de la Escoleta. Es gratuita y se reserva plaza en el formulario de cbgrupbarna.info. Quien no pueda ese día tiene todo septiembre de puertas abiertas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué el CB Grup Barna busca chicas nacidas en 2018?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Porque el club quiere que el grupo de chicas de ese año sea lo bastante numeroso para entrenar y competir junto toda la temporada. El Barna tiene el mismo número de equipos y el mismo presupuesto para la línea femenina y la masculina, y para sostenerlo hace falta que cada año de nacimiento tenga suficientes jugadoras."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay que haber jugado antes a baloncesto para venir a la prueba?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. La prueba es para empezar de cero: no hace falta saber botar ni haber jugado nunca, ni llevar equipación ni ficha federativa. Solo ropa de deporte, zapatillas de pista y una botella de agua; el balón lo pone el club."
+      }
+    },
     {
       "@type": "Question",
       "name": "¿Cuáles son las escuelas de baloncesto destacadas de Barcelona?",

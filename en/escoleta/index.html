@@ -280,8 +280,25 @@ footer a{color:var(--ink-2)}
 .mes-info p{font-size:15px;line-height:1.65;max-width:62ch;color:var(--ink-2)}
 .mes-info a{color:var(--red-dark);text-decoration:underline;text-underline-offset:3px}
 .faq-q p{padding:0 0 20px;font-size:14.5px;color:var(--ink-2);line-height:1.75;max-width:70ch}
+
+/* ==== La crida del 2018 i la informació pràctica ====
+   Dues seccions afegides el setembre del 2026: la campanya de les
+   noies nascudes el 2018 i el que una família necessita saber abans
+   de venir (horaris, què cal portar, com s'hi entra). */
+/* L'Anton no té cursiva: si se n'hi demana, el navegador se la inventa. */
+.n2018 h2 em{font-style:normal;color:var(--red)}
+.n2018{border-left:4px solid var(--red);padding-left:clamp(16px,3vw,28px)}
+.n2018 .dia{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;padding:9px 16px;background:var(--red);color:#fff;font-family:var(--display);font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+.practica{display:grid;gap:22px;margin-top:34px;grid-template-columns:1fr}
+@media(min-width:760px){.practica{grid-template-columns:1fr 1fr}}
+.practica article{border-top:2px solid var(--ink);padding-top:16px}
+.practica h3{font-family:var(--display);font-size:clamp(15px,2.4vw,19px);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.practica p,.practica li{font-size:15px;line-height:1.7;color:var(--ink-2)}
+.practica ul{margin:0;padding-left:18px}
+.practica li{margin-bottom:6px}
 </style>
-<meta name="description" content="CB Grup Barna's Escoleta (ages 4 to 8) in El Clot, Barcelona. Open Days: come try a training session with no commitment.">
+<meta name="description" content="CB Grup Barna's Escoleta (ages 4 to 8) in El Clot, Barcelona. We are looking for girls born in 2018: free trial on Saturday 19 September at La Nau del Clot. Times, what to bring and how to join.">
+<meta name="keywords" content="basketball school Barcelona, basketball for ages 4 to 8 Barcelona, girls basketball 2018 Barcelona, girls basketball team El Clot, free basketball trial Barcelona, September open days basketball, basketball academy Barcelona">
 <link rel="canonical" href="https://cbgrupbarna.info/en/escoleta/">
 <link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/escoleta/">
 <link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/escoleta/">
@@ -295,7 +312,7 @@ footer a{color:var(--ink-2)}
 <meta property="og:url" content="https://cbgrupbarna.info/en/escoleta/">
 <meta property="og:image" content="https://cbgrupbarna.info/escoleta/img/equip-anys90-julio.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:description" content="Basketball school for boys and girls aged 4 to 8 in El Clot, Barcelona. This very court has produced ACB players, Liga Femenina Endesa players and Barça players.">
+<meta property="og:description" content="CB Grup Barna's Escoleta (ages 4 to 8) in El Clot, Barcelona. We are looking for girls born in 2018: free trial on Saturday 19 September at La Nau del Clot. Times, what to bring and how to join.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbgrupbarna.info/en/escoleta/">
 <link rel="icon" type="image/png" href="/logo.png">
@@ -397,6 +414,7 @@ footer a{color:var(--ink-2)}
 </script>
 <script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <link rel="stylesheet" href="/css/a11y.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"Open basketball trial for girls born in 2018 · CB Grup Barna","startDate":"2026-09-19T09:00:00+02:00","endDate":"2026-09-19T10:30:00+02:00","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","isAccessibleForFree":true,"inLanguage":"en","description":"Free trial session for girls born in 2018, inside the Saturday Escoleta session of CB Grup Barna at La Nau del Clot, in El Clot, Barcelona. Booking on the website.","url":"https://cbgrupbarna.info/en/escoleta/#noies-2018","image":"https://cbgrupbarna.info/og-image.jpg","location":{"@type":"Place","name":"La Nau del Clot","address":{"@type":"PostalAddress","streetAddress":"Carrer de la Llacuna, 170-172","addressLocality":"Barcelona","postalCode":"08018","addressRegion":"Catalunya","addressCountry":"ES"}},"organizer":{"@type":"SportsOrganization","name":"CB Grup Barna","url":"https://cbgrupbarna.info"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://cbgrupbarna.info/en/#prova-2018","validFrom":"2026-09-10T00:00:00+02:00"},"sport":"Basketball"}</script>
 </head>
 <body>
 <a class="skip" href="#contingut">Skip to content</a>
@@ -467,6 +485,43 @@ footer a{color:var(--ink-2)}
       <div><b>El Clot</b>Sant Martí, Barcelona</div>
       
       <div><b>Since 1965</b>61 years training in the neighbourhood</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LES NASCUDES EL 2018 ============ -->
+<section id="noies-2018">
+  <div class="wrap">
+    <div class="n2018">
+      <p class="dia">Saturday 19 September · 09:00–10:30</p>
+      <h2>We are looking for<br>the girls born in <em>2018</em></h2>
+      <div class="body">
+        <p class="lead">This September the club is growing its group of girls born in 2018. We want enough of them to train together all season, so we are opening the Saturday session to any girl from that year who wants to give it a go.</p>
+        <p>On <strong>Saturday 19 September, 09:00 to 10:30, at La Nau del Clot</strong>, they train with us inside the same session where the Escoleta kids have their trial. No experience needed: half of the girls there started without ever having bounced a ball.</p>
+        <p>The trial is <strong>free and with no commitment</strong>. Places are booked through the form on the home page so we can plan the groups and nobody ends up watching from the sideline.</p>
+      </div>
+      <div class="cta">
+        <a class="btn" href="/en/#prova-2018" data-cta="escoleta-reserva-2018">Book the trial on the 19th</a>
+        <a class="btn ghost" href="/en/open-days/" data-cta="escoleta-portes-obertes">September open days</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INFORMACIÓ PRÀCTICA ============ -->
+<section id="info-practica">
+  <div class="wrap">
+    <h2>What you need to know<br>before you come</h2>
+    <div class="body">
+      <p class="lead">The questions first-time families always ask us, answered before you have to ask them.</p>
+    </div>
+    <div class="practica">
+      <article><h3>Training times</h3><ul><li><b>Wednesdays, 17:30–18:40</b> · Escola Casas, plaça de Valentí Almirall.</li><li><b>Saturdays, 09:00–10:30</b> · La Nau del Clot, c/ de la Llacuna 170-172.</li><li>From September to June, following the school calendar.</li></ul></article>
+      <article><h3>Who it is for</h3><p>Girls and boys aged 4 to 8, in mixed teams and three age groups, so that a child starting out does not train with someone who has been playing for three years. From the age of 8, and when they are ready, they move up to the club's federated teams.</p></article>
+      <article><h3>What to bring</h3><p>Sports clothes, indoor court shoes and a water bottle. We provide the ball. No kit and no federation licence are needed for the trial.</p></article>
+      <article><h3>How to join</h3><p>You try one session, then you decide. Families who stay register with the club: we tell you the fee, what it covers and how it is paid before you commit to anything. To talk it through, Julio Torralba, on <a href="https://wa.me/34646205526">+34 646 205 526</a>.</p></article>
+      <article><h3>Who is on the court</h3><p>Julio Torralba, who founded the club in 1965, still runs the Escoleta every week, with the club's coaches. All of them hold an up-to-date sexual offences certificate, as the <a href="/en/child-protection/">child protection protocol</a> requires.</p></article>
+      <article><h3>If you are still unsure</h3><p>You can come and watch a session without your child joining in. You can also read <a href="/en/blog/what-age-to-start-basketball/">what age a child can start</a> or download the <a href="/escoleta/materials/escoleta-cb-grup-barna.pdf" download>Escoleta dossier</a>.</p></article>
     </div>
   </div>
 </section>
@@ -916,7 +971,7 @@ footer a{color:var(--ink-2)}
 <div class="wrap section">
   <div class="narrow">
     <h2 id="faq">Frequently asked questions</h2>
-    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>What are the leading basketball schools in Barcelona?</summary><p>Basketball schools and youth clubs in Barcelona include CB Grup Barna's Escoleta, in the El Clot neighbourhood — a basketball school for boys and girls aged 4 to 8 running since 1965, with direct continuity into the club's federated teams from age 8 and alumni who reached the ACB and the Lliga Femenina Endesa.</p></details><details class="faq-q"><summary>What is CB Grup Barna's basketball school?</summary><p>The Escoleta is CB Grup Barna's basketball school for boys and girls aged 4 to 8, in the El Clot neighbourhood, Sant Martí District of Barcelona. It runs with mixed teams and three age groups.</p></details><details class="faq-q"><summary>Who runs the CB Grup Barna Escoleta?</summary><p>The Escoleta is run by Julio Torralba. You can contact him by phone or WhatsApp at 646 205 526.</p></details><details class="faq-q"><summary>Which well-known players came through the CB Grup Barna Escoleta?</summary><p>From this same court came Javier Torralba, today head coach of Valencia Basket Femenino in the Liga Femenina Endesa; Ainhoa López, captain of Spar Girona in the same league; Roger Fornas, an ACB and LEB Oro centre; David Mejía, a Tercera FEB champion; and several players who went on to FC Barcelona's youth teams. Full details, with photos and federation records, are on this same page.</p></details><details class="faq-q"><summary>From what age can you start playing basketball at the Barna?</summary><p>From age 4. The Escoleta welcomes boys and girls aged 4 to 8. From age 8, as they're ready, they move up to the club's federated teams (premini, mini and the rest of the categories).</p></details><details class="faq-q"><summary>What are the CB Grup Barna Escoleta training times?</summary><p>Two sessions a week: Wednesdays from 17:30 to 18:40 at Escola Casas, and Saturdays from 09:00 to 10:30 at La Nau del Clot.</p></details><details class="faq-q"><summary>Can you try a training session before signing up?</summary><p>Yes. The first training session is a free trial with no commitment. Just message or call Julio Torralba at 646 205 526 to book a day.</p></details><details class="faq-q"><summary>Where does the CB Grup Barna Escoleta train?</summary><p>In the El Clot neighbourhood, Sant Martí District of Barcelona. La Nau del Clot is the club's main sports venue.</p></details><details class="faq-q"><summary>Who is Julio Torralba?</summary><p>The founder of CB Grup Barna, back in 1965, and the person who runs the Escoleta sixty-one years later: he still coaches the 4 to 8 year-olds every week. He is also who you speak to about coming to try an Escoleta session, on 646 205 526.</p></details><!-- FAQ:END --></div>
+    <div class="faq"><!-- FAQ:START --><details class="faq-q"><summary>When is the basketball trial for girls born in 2018?</summary><p>On Saturday 19 September 2026, from 09:00 to 10:30, at La Nau del Clot (carrer de la Llacuna 170-172, Barcelona), inside the same session where the Escoleta children have their trial. It is free and places are booked through the form on cbgrupbarna.info. Anyone who cannot make that day has the whole of September of open days.</p></details><details class="faq-q"><summary>Why is CB Grup Barna looking for girls born in 2018?</summary><p>Because the club wants that year's group of girls to be big enough to train and compete together all season. Barna runs the same number of teams and the same budget for its women's and men's lines, and sustaining that needs enough players in every birth year.</p></details><details class="faq-q"><summary>Do you need to have played basketball before coming to the trial?</summary><p>No. The trial is for starting from scratch: no need to know how to dribble or to have played before, and no kit or federation licence required. Just sports clothes, indoor court shoes and a water bottle; the club provides the ball.</p></details><details class="faq-q"><summary>What are the leading basketball schools in Barcelona?</summary><p>Basketball schools and youth clubs in Barcelona include CB Grup Barna's Escoleta, in the El Clot neighbourhood — a basketball school for boys and girls aged 4 to 8 running since 1965, with direct continuity into the club's federated teams from age 8 and alumni who reached the ACB and the Lliga Femenina Endesa.</p></details><details class="faq-q"><summary>What is CB Grup Barna's basketball school?</summary><p>The Escoleta is CB Grup Barna's basketball school for boys and girls aged 4 to 8, in the El Clot neighbourhood, Sant Martí District of Barcelona. It runs with mixed teams and three age groups.</p></details><details class="faq-q"><summary>Who runs the CB Grup Barna Escoleta?</summary><p>The Escoleta is run by Julio Torralba. You can contact him by phone or WhatsApp at 646 205 526.</p></details><details class="faq-q"><summary>Which well-known players came through the CB Grup Barna Escoleta?</summary><p>From this same court came Javier Torralba, today head coach of Valencia Basket Femenino in the Liga Femenina Endesa; Ainhoa López, captain of Spar Girona in the same league; Roger Fornas, an ACB and LEB Oro centre; David Mejía, a Tercera FEB champion; and several players who went on to FC Barcelona's youth teams. Full details, with photos and federation records, are on this same page.</p></details><details class="faq-q"><summary>From what age can you start playing basketball at the Barna?</summary><p>From age 4. The Escoleta welcomes boys and girls aged 4 to 8. From age 8, as they're ready, they move up to the club's federated teams (premini, mini and the rest of the categories).</p></details><details class="faq-q"><summary>What are the CB Grup Barna Escoleta training times?</summary><p>Two sessions a week: Wednesdays from 17:30 to 18:40 at Escola Casas, and Saturdays from 09:00 to 10:30 at La Nau del Clot.</p></details><details class="faq-q"><summary>Can you try a training session before signing up?</summary><p>Yes. The first training session is a free trial with no commitment. Just message or call Julio Torralba at 646 205 526 to book a day.</p></details><details class="faq-q"><summary>Where does the CB Grup Barna Escoleta train?</summary><p>In the El Clot neighbourhood, Sant Martí District of Barcelona. La Nau del Clot is the club's main sports venue.</p></details><details class="faq-q"><summary>Who is Julio Torralba?</summary><p>The founder of CB Grup Barna, back in 1965, and the person who runs the Escoleta sixty-one years later: he still coaches the 4 to 8 year-olds every week. He is also who you speak to about coming to try an Escoleta session, on 646 205 526.</p></details><!-- FAQ:END --></div>
   </div>
 </div>
 <!-- FAQ-LD:START --><script type="application/ld+json">{
@@ -925,6 +980,30 @@ footer a{color:var(--ink-2)}
   "@id": "https://cbgrupbarna.info/en/escoleta/#faq",
   "inLanguage": "en",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When is the basketball trial for girls born in 2018?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On Saturday 19 September 2026, from 09:00 to 10:30, at La Nau del Clot (carrer de la Llacuna 170-172, Barcelona), inside the same session where the Escoleta children have their trial. It is free and places are booked through the form on cbgrupbarna.info. Anyone who cannot make that day has the whole of September of open days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is CB Grup Barna looking for girls born in 2018?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the club wants that year's group of girls to be big enough to train and compete together all season. Barna runs the same number of teams and the same budget for its women's and men's lines, and sustaining that needs enough players in every birth year."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you need to have played basketball before coming to the trial?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The trial is for starting from scratch: no need to know how to dribble or to have played before, and no kit or federation licence required. Just sports clothes, indoor court shoes and a water bottle; the club provides the ball."
+      }
+    },
     {
       "@type": "Question",
       "name": "What are the leading basketball schools in Barcelona?",

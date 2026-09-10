@@ -7,7 +7,7 @@
 <meta name="application-name" content="CB Grup Barna">
 <meta name="classification" content="Club de basquet base, academia de baloncesto, acadèmia de bàsquet, club de baloncesto base, Barcelona, Sant Marti, El Clot">
 <title>CB Grup Barna · El Club de Bàsquet Més Gran de Barcelona</title>
-<meta name="description" content="El club de bàsquet més gran de Barcelona: formatiu i competitiu des de 1965 al Clot. +34 equips, 450 jugadores i jugadors, escoleta 4-8 anys i bàsquet femení.">
+<meta name="description" content="El club de bàsquet més gran de Barcelona, al Clot des de 1965: 34 equips i escoleta de 4 a 8 anys. Busquem noies del 2018: prova gratuïta el 19 de setembre.">
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="CB Grup Barna">
@@ -1102,9 +1102,31 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 .lang-switch.light a { color: rgba(255, 255, 255, 0.62); }
 .lang-switch.light a.active { color: #fff; }
 @media (max-width: 480px) { .lang-switch { gap: 0; font-size: 8.5px; } .lang-switch a { min-width: 24px; padding: 7px 2px; } }
+
+/* ==== Prova oberta · les nascudes el 2018 ====
+   La campanya de setembre: la crida a les noies del 2018 i el
+   formulari per reservar la prova del dia 19, tot en un bloc. */
+.p2018 { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper); }
+.p2018-in { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 54px); align-items: start; }
+@media (min-width: 900px) { .p2018-in { grid-template-columns: 1.05fr 0.95fr; } }
+.p2018 h2 { margin-top: 12px; }
+.p2018 h2 em { font-style: normal; color: var(--red); }
+.p2018-lede { margin-top: 16px; font-size: clamp(15px, 1.7vw, 17px); color: var(--ink-2); max-width: 52ch; }
+.p2018-facts { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.p2018-facts li { display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.p2018-facts b { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+.p2018-facts span { font-size: 13.5px; color: var(--ink-2); }
+.p2018-mes { margin-top: 18px; font-size: 13px; color: #6B6560; }
+.p2018-mes a { border-bottom: 1px solid var(--red); }
+.p2018 .form { background: var(--paper); }
+.p2018 .form h3 { font-family: var(--display); font-weight: 400; font-size: clamp(17px, 2.2vw, 21px); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+.p2018 .form .sub { font-size: 13px; color: #6B6560; margin-bottom: 22px; }
+.p2018 .form-err { display: none; margin-top: 7px; font-size: 12px; color: var(--red-dark, #A8040E); }
+.p2018 .form-err.on { display: block; }
 </style>
 <link rel="stylesheet" href="/css/cerca.css">
 <link rel="stylesheet" href="/css/a11y.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"Prova oberta de bàsquet per a noies nascudes el 2018 · CB Grup Barna","startDate":"2026-09-19T09:00:00+02:00","endDate":"2026-09-19T10:30:00+02:00","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","description":"Entrenament de prova gratuït per a noies nascudes el 2018, dins de la sessió de dissabte de l'Escoleta del CB Grup Barna a La Nau del Clot. Cal reservar plaça al web.","inLanguage":"ca","isAccessibleForFree":true,"url":"https://cbgrupbarna.info/#prova-2018","image":"https://cbgrupbarna.info/og-image.jpg","location":{"@type":"Place","name":"La Nau del Clot","address":{"@type":"PostalAddress","streetAddress":"Carrer de la Llacuna, 170-172","addressLocality":"Barcelona","postalCode":"08018","addressRegion":"Catalunya","addressCountry":"ES"}},"organizer":{"@type":"SportsOrganization","name":"CB Grup Barna","url":"https://cbgrupbarna.info"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://cbgrupbarna.info/#prova-2018","validFrom":"2026-09-10T00:00:00+02:00"},"audience":{"@type":"PeopleAudience","suggestedGender":"female","suggestedMinAge":7,"suggestedMaxAge":9},"sport":"Basketball"}</script>
 </head>
 <body>
 
@@ -1113,12 +1135,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <div class="tk-lab"><span class="pdot"></span>Novetats</div>
   <div class="tk-trk">
     <div class="tk-cnt">
+      <a class="tk-it tk-it--yel" href="/#prova-2018" data-cta="ticker-prova-2018">Noies del 2018 · Prova el 19 de setembre</a>
       <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
       <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
+      <a class="tk-it tk-it--yel" href="/#prova-2018" data-cta="ticker-prova-2018">Noies del 2018 · Prova el 19 de setembre</a>
       <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
       <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
+      <a class="tk-it tk-it--yel" href="/#prova-2018" data-cta="ticker-prova-2018">Noies del 2018 · Prova el 19 de setembre</a>
       <a class="tk-it tk-it--yel" href="/escoleta/" data-cta="ticker-escoleta">Escoleta 4-8 anys · Inscripcions obertes</a>
       <span class="tk-it">Calendari actualitzat</span>
       <span class="tk-it">Temporada 26·27</span>
@@ -1202,6 +1227,81 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
       </div>
     </div>
   </div>
+
+
+  <!-- ==== PROVA OBERTA · LES NASCUDES EL 2018 ==== -->
+  <section class="section p2018" id="prova-2018" aria-label="Prova oberta per a les nascudes el 2018">
+    <div class="wrap">
+      <div class="p2018-in">
+        <div>
+          <p class="eyebrow red">Portes obertes · Dissabte 19 de setembre</p>
+          <div class="rule"></div>
+          <h2>Busquem les nascudes el <em>2018</em></h2>
+          <p class="p2018-lede">Estem fent créixer el grup de noies del 2018 al Clot. Si la teva filla va néixer aquell any i vol provar el bàsquet, el <strong>dissabte 19 de setembre</strong> entrena amb nosaltres a La Nau del Clot, a la mateixa sessió on es proven les nenes i els nens de l'Escoleta. Gratuït i sense compromís de quedar-s'hi.</p>
+          <ul class="p2018-facts">
+        <li><b>Quan</b><span>Dissabte 19 de setembre, 09:00–10:30</span></li>
+        <li><b>On</b><span>La Nau del Clot · c/ de la Llacuna, 170-172</span></li>
+        <li><b>Qui</b><span>Noies nascudes el 2018. La resta d'edats, tot el setembre</span></li>
+        <li><b>Quant</b><span>Gratuït: el primer entrenament és de prova</span></li>
+          </ul>
+          <p class="p2018-mes">Si el 19 no us va bé, tot el setembre són <a href="/portes-obertes/">portes obertes</a>: digues-nos-ho al formulari i et donem un altre dia. Tota la informació de <a href="/escoleta/">l'Escoleta</a>.</p>
+        </div>
+        <div>
+          <form class="form" id="rp-form" novalidate>
+            <h3>Reserva la prova</h3>
+            <p class="sub">Et confirmem el dia i l'hora el mateix dia que ens escrius.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label for="rp-nom">Nom de la jugadora *</label>
+                <input type="text" id="rp-nom" name="nom" required autocomplete="off" aria-describedby="rp-nom-err" placeholder="&nbsp;">
+                <p class="form-err" id="rp-nom-err" role="alert">Digue'ns com es diu, si us plau.</p>
+              </div>
+              <div class="field">
+                <label for="rp-any">Any de naixement *</label>
+                <input type="text" id="rp-any" name="any" inputmode="numeric" required value="2018"
+                       aria-describedby="rp-any-hint rp-any-err" placeholder="&nbsp;">
+                <p class="sub" id="rp-any-hint" style="margin:6px 0 0">La federació fa els equips per any de naixement, no per curs.</p>
+                <p class="form-err" id="rp-any-err" role="alert">Posa-hi l'any amb quatre xifres.</p>
+              </div>
+              <div class="field">
+                <label for="rp-tutor">El teu nom *</label>
+                <input type="text" id="rp-tutor" name="contacte" required autocomplete="name" aria-describedby="rp-tutor-err" placeholder="&nbsp;">
+                <p class="form-err" id="rp-tutor-err" role="alert">Digue'ns qui ens escriu.</p>
+              </div>
+              <div class="field">
+                <label for="rp-via">Telèfon o correu *</label>
+                <input type="text" id="rp-via" name="contacteVia" required autocomplete="tel" aria-describedby="rp-via-hint rp-via-err" placeholder="&nbsp;">
+                <p class="sub" id="rp-via-hint" style="margin:6px 0 0">Només el fem servir per respondre't això.</p>
+                <p class="form-err" id="rp-via-err" role="alert">Deixa'ns un telèfon o un correu per poder-te confirmar el dia.</p>
+              </div>
+              <div class="field">
+                <label id="rp-dia-label">Quin dia</label>
+                <div class="chips" role="group" aria-labelledby="rp-dia-label">
+                  <input type="radio" id="rp-d1" name="dia" value="19 de setembre" checked><label for="rp-d1">19 de setembre</label>
+                  <input type="radio" id="rp-d2" name="dia" value="Un altre dia"><label for="rp-d2">Un altre dia</label>
+                </div>
+              </div>
+              <div class="field">
+                <label for="rp-msg">Alguna cosa que hàgim de saber</label>
+                <textarea id="rp-msg" name="missatge" rows="2" placeholder="&nbsp;"></textarea>
+                <p class="sub" style="margin:6px 0 0">Opcional. Si ja ha jugat abans, si ve amb una amiga, si hi ha dies que no podeu…</p>
+              </div>
+              <label class="consent">
+                <input type="checkbox" id="rp-ok" required>
+                <span>He llegit i accepto la <a href="/politica-de-privacitat/">política de privacitat</a>.</span>
+              </label>
+              <button type="submit" class="btn red" data-cta="reserva-prova-2018">Reserva la prova</button>
+            </div>
+            <p class="form-note">Et responem el mateix dia</p>
+          </form>
+          <div class="form-ok" id="rp-done" role="status">
+            <h3>Reservat</h3>
+            <p>Gràcies. Et confirmem el dia i l'hora el mateix dia. Si tens pressa, escriu-nos al WhatsApp del club: <a href="https://wa.me/34698425153">698 425 153</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="franges" aria-label="Accés ràpid al club">
     <a class="franja" href="/escoleta/" data-cta="franja-escoleta">
@@ -1962,5 +2062,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   });
 })();
 </script>
+<script src="/js/reserva-prova.js" defer></script>
 </body>
 </html>

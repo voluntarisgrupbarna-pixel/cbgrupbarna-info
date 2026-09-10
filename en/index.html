@@ -8,7 +8,7 @@
 <meta name="application-name" content="CB Grup Barna">
 <meta name="classification" content="Youth basketball club, Barcelona, Sant Martí, El Clot">
 <title>CB Grup Barna · Barcelona's Biggest Basketball Club</title>
-<meta name="description" content="Barcelona's biggest basketball club: youth-focused and competitive since 1965. 34+ teams, ~450 players (2026-27 season) · Escoleta ages 4-8 · Match calendar.">
+<meta name="description" content="Barcelona's biggest basketball club, in El Clot since 1965: 34 teams and an Escoleta for ages 4-8. Girls born in 2018: free trial on 19 September.">
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="CB Grup Barna">
@@ -843,10 +843,32 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
    en sortia tallat. L'escut ja és l'enllaç a l'inici. */
 @media (max-width: 480px) { .head-brand span { display: none; } }
 
+
+/* ==== Prova oberta · les nascudes el 2018 ====
+   La campanya de setembre: la crida a les noies del 2018 i el
+   formulari per reservar la prova del dia 19, tot en un bloc. */
+.p2018 { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper); }
+.p2018-in { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 54px); align-items: start; }
+@media (min-width: 900px) { .p2018-in { grid-template-columns: 1.05fr 0.95fr; } }
+.p2018 h2 { margin-top: 12px; }
+.p2018 h2 em { font-style: normal; color: var(--red); }
+.p2018-lede { margin-top: 16px; font-size: clamp(15px, 1.7vw, 17px); color: var(--ink-2); max-width: 52ch; }
+.p2018-facts { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.p2018-facts li { display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.p2018-facts b { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+.p2018-facts span { font-size: 13.5px; color: var(--ink-2); }
+.p2018-mes { margin-top: 18px; font-size: 13px; color: #6B6560; }
+.p2018-mes a { border-bottom: 1px solid var(--red); }
+.p2018 .form { background: var(--paper); }
+.p2018 .form h3 { font-family: var(--display); font-weight: 400; font-size: clamp(17px, 2.2vw, 21px); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+.p2018 .form .sub { font-size: 13px; color: #6B6560; margin-bottom: 22px; }
+.p2018 .form-err { display: none; margin-top: 7px; font-size: 12px; color: var(--red-dark, #A8040E); }
+.p2018 .form-err.on { display: block; }
 </style>
 <script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
 <link rel="stylesheet" href="/css/cerca.css">
 <link rel="stylesheet" href="/css/a11y.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"Open basketball trial for girls born in 2018 · CB Grup Barna","startDate":"2026-09-19T09:00:00+02:00","endDate":"2026-09-19T10:30:00+02:00","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","description":"Free trial session for girls born in 2018, inside the Saturday Escoleta session of CB Grup Barna at La Nau del Clot. Booking on the website.","inLanguage":"en","isAccessibleForFree":true,"url":"https://cbgrupbarna.info/en/#prova-2018","image":"https://cbgrupbarna.info/og-image.jpg","location":{"@type":"Place","name":"La Nau del Clot","address":{"@type":"PostalAddress","streetAddress":"Carrer de la Llacuna, 170-172","addressLocality":"Barcelona","postalCode":"08018","addressRegion":"Catalunya","addressCountry":"ES"}},"organizer":{"@type":"SportsOrganization","name":"CB Grup Barna","url":"https://cbgrupbarna.info"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://cbgrupbarna.info/en/#prova-2018","validFrom":"2026-09-10T00:00:00+02:00"},"audience":{"@type":"PeopleAudience","suggestedGender":"female","suggestedMinAge":7,"suggestedMaxAge":9},"sport":"Basketball"}</script>
 </head>
 <body>
 
@@ -855,11 +877,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   <div class="tk-lab"><span class="pdot"></span>News</div>
   <div class="tk-trk">
     <div class="tk-cnt">
+      <a class="tk-it tk-it--yel" href="/en/#prova-2018" data-cta="ticker-prova-2018">Girls born in 2018 · Trial on 19 September</a>
       <a class="tk-it tk-it--yel" href="/en/escoleta/" data-cta="ticker-escoleta">Escoleta ages 4-8 · Registration open</a>
       <span class="tk-it">Seniors · New season</span>
       <span class="tk-it">Calendar updated</span>
       <span class="tk-it">Club photo gallery</span>
       <span class="tk-it">#SomClot · 61 years of basketball</span>
+      <a class="tk-it tk-it--yel" href="/en/#prova-2018" data-cta="ticker-prova-2018">Girls born in 2018 · Trial on 19 September</a>
       <a class="tk-it tk-it--yel" href="/en/escoleta/" data-cta="ticker-escoleta">Escoleta ages 4-8 · Registration open</a>
       <span class="tk-it">Seniors · New season</span>
       <span class="tk-it">Calendar updated</span>
@@ -933,6 +957,81 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
       </div>
     </div>
   </div>
+
+
+  <!-- ==== PROVA OBERTA · LES NASCUDES EL 2018 ==== -->
+  <section class="section p2018" id="prova-2018" aria-label="Open session for girls born in 2018">
+    <div class="wrap">
+      <div class="p2018-in">
+        <div>
+          <p class="eyebrow red">Open days · Saturday 19 September</p>
+          <div class="rule"></div>
+          <h2>We are looking for the girls born in <em>2018</em></h2>
+          <p class="p2018-lede">We are building up the 2018 girls' group in El Clot. If your daughter was born that year and wants to try basketball, on <strong>Saturday 19 September</strong> she trains with us at La Nau del Clot, in the same session where the Escoleta kids have their trial. Free, with no commitment to stay.</p>
+          <ul class="p2018-facts">
+        <li><b>When</b><span>Saturday 19 September, 09:00–10:30</span></li>
+        <li><b>Where</b><span>La Nau del Clot · c/ de la Llacuna, 170-172</span></li>
+        <li><b>Who</b><span>Girls born in 2018. Every other age, all September</span></li>
+        <li><b>Cost</b><span>Free: the first session is a trial</span></li>
+          </ul>
+          <p class="p2018-mes">If the 19th does not work for you, the whole of September is <a href="/en/open-days/">open days</a>: tell us in the form and we will give you another day. All the details about <a href="/en/escoleta/">the Escoleta</a>.</p>
+        </div>
+        <div>
+          <form class="form" id="rp-form" novalidate>
+            <h3>Book the trial</h3>
+            <p class="sub">We confirm the day and time the same day you write to us.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label for="rp-nom">Player's name *</label>
+                <input type="text" id="rp-nom" name="nom" required autocomplete="off" aria-describedby="rp-nom-err" placeholder="&nbsp;">
+                <p class="form-err" id="rp-nom-err" role="alert">Please tell us her name.</p>
+              </div>
+              <div class="field">
+                <label for="rp-any">Year of birth *</label>
+                <input type="text" id="rp-any" name="any" inputmode="numeric" required value="2018"
+                       aria-describedby="rp-any-hint rp-any-err" placeholder="&nbsp;">
+                <p class="sub" id="rp-any-hint" style="margin:6px 0 0">The federation builds teams by year of birth, not school year.</p>
+                <p class="form-err" id="rp-any-err" role="alert">Please write the year with four digits.</p>
+              </div>
+              <div class="field">
+                <label for="rp-tutor">Your name *</label>
+                <input type="text" id="rp-tutor" name="contacte" required autocomplete="name" aria-describedby="rp-tutor-err" placeholder="&nbsp;">
+                <p class="form-err" id="rp-tutor-err" role="alert">Please tell us who is writing.</p>
+              </div>
+              <div class="field">
+                <label for="rp-via">Phone or email *</label>
+                <input type="text" id="rp-via" name="contacteVia" required autocomplete="tel" aria-describedby="rp-via-hint rp-via-err" placeholder="&nbsp;">
+                <p class="sub" id="rp-via-hint" style="margin:6px 0 0">We only use it to answer this.</p>
+                <p class="form-err" id="rp-via-err" role="alert">Leave us a phone or an email so we can confirm the day.</p>
+              </div>
+              <div class="field">
+                <label id="rp-dia-label">Which day</label>
+                <div class="chips" role="group" aria-labelledby="rp-dia-label">
+                  <input type="radio" id="rp-d1" name="dia" value="19 September" checked><label for="rp-d1">19 September</label>
+                  <input type="radio" id="rp-d2" name="dia" value="Another day"><label for="rp-d2">Another day</label>
+                </div>
+              </div>
+              <div class="field">
+                <label for="rp-msg">Anything we should know</label>
+                <textarea id="rp-msg" name="missatge" rows="2" placeholder="&nbsp;"></textarea>
+                <p class="sub" style="margin:6px 0 0">Optional. If she has played before, if she comes with a friend, if there are days you cannot make…</p>
+              </div>
+              <label class="consent">
+                <input type="checkbox" id="rp-ok" required>
+                <span>I have read and accept the <a href="/en/privacy-policy/">privacy policy</a>.</span>
+              </label>
+              <button type="submit" class="btn red" data-cta="reserva-prova-2018">Book the trial</button>
+            </div>
+            <p class="form-note">We reply the same day</p>
+          </form>
+          <div class="form-ok" id="rp-done" role="status">
+            <h3>Booked</h3>
+            <p>Thank you. We confirm the day and time the same day. If you are in a hurry, write to the club on WhatsApp: <a href="https://wa.me/34698425153">698 425 153</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="franges" aria-label="Quick access to the club">
     <a class="franja" href="/en/escoleta/" data-cta="franja-escoleta">
@@ -1748,5 +1847,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   });
 })();
 </script>
+<script src="/js/reserva-prova.js" defer></script>
 </body>
 </html>
