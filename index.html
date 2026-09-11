@@ -485,6 +485,26 @@
       }
     },
     {
+      "@type": ["Event", "SportsEvent"],
+      "@id": "https://cbgrupbarna.info/portes-obertes/#event-19",
+      "name": "Portes obertes de l'Escoleta i proves per a nenes del 2018 · 19 de setembre",
+      "description": "Entrenament de prova gratuït a La Nau del Clot: nens i nenes de 4 a 8 anys a l'Escoleta, i proves per a nenes nascudes el 2018. 50 places, amb reserva prèvia.",
+      "startDate": "2026-09-19T09:00:00+02:00",
+      "endDate": "2026-09-19T10:30:00+02:00",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "isAccessibleForFree": true,
+      "inLanguage": "ca",
+      "maximumAttendeeCapacity": 50,
+      "sport": "Basketball",
+      "location": {"@type": "Place", "name": "La Nau del Clot", "address": {"@type": "PostalAddress", "streetAddress": "Carrer de la Llacuna, 170-172", "addressLocality": "Barcelona", "addressRegion": "Catalunya", "postalCode": "08018", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": "41.4036", "longitude": "2.1878"}},
+      "organizer": {"@id": "https://cbgrupbarna.info/#club"},
+      "performer": {"@id": "https://cbgrupbarna.info/#club"},
+      "image": ["https://cbgrupbarna.info/og-image.jpg"],
+      "url": "https://cbgrupbarna.info/portes-obertes/",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR", "availability": "https://schema.org/LimitedAvailability", "url": "https://cbgrupbarna.info/portes-obertes/"}
+    },
+    {
       "@type": "ItemList",
       "@id": "https://cbgrupbarna.info/#seccions",
       "name": "Seccions oficials del CB Grup Barna",
@@ -1200,7 +1220,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
 
   <section class="franges" aria-label="Accés ràpid al club">
     <a class="franja" href="/portes-obertes/" data-cta="franja-portes-obertes">
-      <span class="franja-tx"><span class="franja-t">Portes obertes</span><span class="franja-s">Tot el setembre. Vine a provar un entrenament, de l'Escoleta al sènior.</span></span>
+      <span class="franja-tx"><span class="franja-t">Portes obertes</span><span class="franja-s">Dissabte 19 de setembre, a les 9 h. Prova gratuïta de 4 a 8 anys i nenes del 2018.</span></span>
       <span class="franja-go"><em>Reserva el dia</em><i></i></span>
     </a>
     <a class="franja franja--red" href="#seniors" data-cta="franja-seniors">
@@ -1641,7 +1661,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02
   <a href="https://wa.me/34646205526?text=Hola%20Julio!%20Vull%20info%20de%20l%27Escoleta" target="_blank" rel="noopener" data-cta="bar-wa">WhatsApp Escoleta</a>
 </nav>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // ==== CTA tracking ====
   document.querySelectorAll('[data-cta]').forEach(function (el) {
     el.addEventListener('click', function () {

@@ -138,7 +138,7 @@ que ja ens coneixen.
 
 ---
 
-### P1.5 — Els títols fan 82 caràcters i Google en talla cap a 60
+### P1.5 — ✅ FET (v2.2.1) · Els títols feien 82 caràcters i Google en talla cap a 60
 
 **Mesurat:** el `<title>` de `/portes-obertes/` fa **82 caràcters** i la
 `meta description`, **235**. Google talla el títol cap als 60 i la descripció
@@ -151,7 +151,7 @@ Clot | Barna».
 
 ---
 
-### P1.6 — La portada, que és la pàgina forta, no diu la data i no porta l'Event
+### P1.6 — ✅ FET (v2.2.1) · La portada no deia la data ni portava l'Event
 
 **Comprovat:** `index.html` enllaça `/portes-obertes/` **una sola vegada**, i
 la franja diu *«Tot el setembre. Vine a provar un entrenament»* — **sense la
@@ -207,7 +207,8 @@ sortir al mapa per «bàsquet nens Clot» molt més enllà del 19.
 1. **301 del `.com`** (P0.1) — panell del domini. La més important, i no és codi.
 2. **Adreça de la fitxa de Google** (P0.3) i **publicació de l'esdeveniment**.
 3. **Correcció de la fitxa de `guia.barcelona.cat`** (P0.2) — un correu.
-4. Em dius que sí i faig P1.5 i P1.6 (títols i portada) en una estona.
+4. ~~Em dius que sí i faig P1.5 i P1.6 (títols i portada).~~ **Fet a la v2.2.1**, i de
+   passada un 404 de Cloudflare que hi havia a la portada.
 5. IndexNow i Search Console el dia que es publiqui.
 
 ---

@@ -22,6 +22,32 @@ només l'hi posa nom.
 
 ---
 
+## 2.2.1 — 2026-09-11
+
+**Els dos arreglos d'on-page que sortien de les propostes** (P1.5 i P1.6 de
+`PROPOSTES-POSICIONAMENT-19-SETEMBRE.md`), i un 404 que hi havia a la portada.
+
+- **Títols i descripcions escurçats** a les sis pàgines de la campanya. Els
+  `<title>` feien **82 caràcters** i les descripcions fins a **235**; Google en
+  talla cap a 60 i 160, o sigui que el nom del club i mitja descripció no
+  s'arribaven a llegir mai. Ara tots els títols queden entre 54 i 60, i les
+  descripcions entre 127 i 143, amb la data sempre al davant. Els fitxers de
+  `i18n/feina/` s'han sincronitzat perquè un muntatge futur no torni a plantar
+  els llargs.
+- **La portada diu la data.** La franja de Portes Obertes deia «Tot el
+  setembre» i prou; ara diu «Dissabte 19 de setembre, a les 9 h» i anomena les
+  nenes del 2018, als tres idiomes.
+- **`Event` a la portada**, amb el **mateix `@id`** que el de
+  `/portes-obertes/`: no és un segon esdeveniment, és el mateix vist des de la
+  pàgina amb més autoritat del domini, que és la que Google rastreja més sovint.
+- **Tret un `<script>` de Cloudflare** (`/cdn-cgi/scripts/…/email-decode.min.js`)
+  que era escrit a mà a `index.html`. Cloudflare l'injecta ell mateix quan
+  serveix un lloc; aquest web va per GitHub Pages, o sigui que `/cdn-cgi/` no
+  existeix i era un **404 garantit a cada visita de la portada**. Comprovat amb
+  el navegador: ara la portada carrega sense cap petició fallida.
+
+---
+
 ## 2.2.0 — 2026-09-11
 
 **SEO i GEO de les portes obertes del 19 de setembre, i una porta nova per a
