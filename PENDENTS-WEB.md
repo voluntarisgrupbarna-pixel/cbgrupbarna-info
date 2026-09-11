@@ -531,6 +531,42 @@ patrocini, dossiers, xarxes). Al repositori ja no hi és.
 
 ## Pendent de decisió
 
+- **🔴 Portes obertes del 19 de setembre · el que queda FORA del web (11/09/2026).**
+  El web ja està fet (vegeu `POSICIONAMENT-PORTES-OBERTES-SEO.md` i la v2.2.0 del
+  `CHANGELOG.md`). A vuit dies, això és el que mou més l'agulla i **no ho pot fer cap
+  canvi de codi**, per ordre:
+  1. **Fitxa de Google del club** → publicar l'esdeveniment com a *publicació* de Google
+     Business Profile amb data, hora i enllaç a `/portes-obertes/`. Comprovar abans que
+     l'adreça de la fitxa digui exactament «carrer de la Llacuna, 170-172», igual que el
+     web: si no coincideixen, cap IA s'arrisca a citar-ne cap.
+  2. **IndexNow** → `python3 scripts/indexnow.py` amb les URL noves i les tocades, el
+     mateix dia de publicar. I inspeccionar-les a mà a Search Console, que a vuit dies
+     val la pena una per una.
+  3. **Instagram** → enllaç de la bio cap a `/portes-obertes/` fins al 27. Stories el
+     dijous 17, el divendres 18 i el mateix dissabte al matí. El contingut de nenes del
+     2018 ara, per primera vegada, té una pàgina on aterrar.
+  4. **WhatsApp de famílies** → demanar a les famílies actuals que ho passin a una amiga
+     de la filla. És el canal amb més conversió del club i el que no es mesura enlloc.
+  5. **Escoles del barri** → Escola Casas (on ja s'entrena els dimecres), Provençals, La
+     Farigola del Clot, La Rambleta. Un cartell a l'AFA arriba abans que una pàgina nova.
+
+- **Comprovar si les IA ens citen, el 18 i el 25.** Preguntar literalment a ChatGPT,
+  Perplexity i l'AI Mode de Google: «on pot jugar a bàsquet una nena de 8 anys al Clot?».
+  Dos minuts, i és l'única manera de saber si la capa GEO ha entrat.
+
+- **Quan passi el 27 de setembre**, treure les dues línies de campanya de
+  `scripts/build-sitemap.py` (hi ha un comentari que ho diu) perquè `/portes-obertes/` i
+  `/basquet-nenes-2018-barcelona/` tornin a la prioritat general. L'avís de dalt de tot
+  del web ja caduca sol.
+
+- **🔴 `scripts/i18n-munta.py` esborra els `hreflang` (comprovat l'11/09/2026).** Muntant
+  `/femeni/` per afegir-hi un botó, la sortida va perdre els quatre
+  `<link rel="alternate" hreflang>` i va revertir vuit respostes de la FAQ a una redacció
+  antiga (el fitxer de `i18n/feina/` va per darrere de `i18n/faq.yml`). Es va desfer i el
+  botó s'hi va posar a mà. **Mentre això no s'arregli**: després de qualsevol `i18n-munta`,
+  passar `scripts/i18n-hreflang.py` i `generate-faq.py`, i mirar el `git diff` sencer.
+  Les pàgines de la campanya es van comprovar i tenen els quatre `hreflang` correctes.
+
 - **🔴 Token de GitHub sense revocar.** El 30/08/2026 es va enganxar un Personal Access
   Token al xat de Claude Code per fer canvis urgents (admin de fotos, galeria, marca).
   S'ha fet servir i esborrat del disc, però **mai s'ha revocat**. Cal:

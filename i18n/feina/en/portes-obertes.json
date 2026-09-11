@@ -4,51 +4,60 @@
  "trossos": [
   {
    "de": 183,
-   "a": 256,
+   "a": 265,
    "tipus": "atribut",
    "context": "títol de la pestanya i de Google",
-   "ca": "Portes obertes de setembre · Prova un entrenament | CB Grup Barna",
+   "ca": "Portes obertes dissabte 19 de setembre · Escoleta i nenes del 2018 | CB Grup Barna",
    "id": "s000",
-   "en": "September open days · Come and try a session | CB Grup Barna"
+   "en": "Open day Saturday 19 September · Escoleta and girls born in 2018 | CB Grup Barna"
   },
   {
-   "de": 299,
-   "a": 438,
+   "de": 308,
+   "a": 543,
    "tipus": "atribut",
    "context": "descripció de Google",
-   "ca": "Tot el setembre són portes obertes al CB Grup Barna: vine a provar un entrenament, de l'Escoleta al sènior. Demana el dia amb el formulari.",
+   "ca": "Portes obertes del CB Grup Barna: dissabtes 19 i 26 de setembre de 2026, de 9.00 a 10.30 h, a La Nau del Clot. Entrenament de prova gratuït per a nens i nenes de 4 a 8 anys i proves per a nenes nascudes el 2018. 50 places per dissabte.",
    "id": "s001",
-   "en": "The whole of September is open days at CB Grup Barna: come and try a training session, from the Escoleta to the senior team. Ask for a day using the form."
+   "en": "CB Grup Barna open days: Saturdays 19 and 26 September 2026, 9.00 to 10.30 am, at La Nau del Clot. Free trial session for children aged 4 to 8 and trials for girls born in 2018. 50 places per Saturday."
   },
   {
-   "de": 678,
-   "a": 691,
+   "de": 577,
+   "a": 928,
+   "tipus": "atribut",
+   "context": "paraules clau",
+   "ca": "portes obertes bàsquet Barcelona, portes obertes 19 de setembre, portes obertes escoleta setembre, entrenament de prova gratuït bàsquet, provar un entrenament de bàsquet Barcelona, bàsquet per a nenes Barcelona, bàsquet nenes 2018, bàsquet nenes 8 anys, bàsquet Clot, bàsquet Sant Martí, extraescolar de bàsquet Barcelona, CB Grup Barna portes obertes",
+   "id": "s002",
+   "en": "basketball open day Barcelona, open day 19 September, escoleta open days September, free basketball trial Barcelona, try a basketball session Barcelona, basketball for girls Barcelona, girls basketball 2018, basketball for 8 year olds, basketball El Clot, basketball Sant Martí, after-school basketball Barcelona, CB Grup Barna open days"
+  },
+  {
+   "de": 1518,
+   "a": 1531,
    "tipus": "atribut",
    "context": "text en compartir l'enllaç",
    "ca": "CB Grup Barna",
-   "id": "s002",
+   "id": "s003",
    "en": "CB Grup Barna"
   },
   {
-   "de": 773,
-   "a": 815,
+   "de": 1613,
+   "a": 1661,
    "tipus": "atribut",
    "context": "text en compartir l'enllaç",
-   "ca": "Portes obertes de setembre · CB Grup Barna",
-   "id": "s003",
-   "en": "September open days · CB Grup Barna"
-  },
-  {
-   "de": 859,
-   "a": 951,
-   "tipus": "atribut",
-   "context": "text en compartir l'enllaç",
-   "ca": "Tot el setembre, vine a provar un entrenament al Clot. De 4 anys al sènior, sense compromís.",
+   "ca": "Portes obertes · dissabte 19 de setembre al Clot",
    "id": "s004",
-   "en": "All through September, come and try a training session in the Clot. From age 4 to senior, with no commitment."
+   "en": "Open day · Saturday 19 September in El Clot"
   },
   {
-   "json_ld": 1469,
+   "de": 1705,
+   "a": 1827,
+   "tipus": "atribut",
+   "context": "text en compartir l'enllaç",
+   "ca": "Dissabte 19 de setembre, de 9.00 a 10.30 h, a La Nau del Clot. Prova gratuïta de 4 a 8 anys i proves per a nenes del 2018.",
+   "id": "s005",
+   "en": "Saturday 19 September, 9.00 to 10.30 am, at La Nau del Clot. Free trial for ages 4 to 8 and trials for girls born in 2018."
+  },
+  {
+   "json_ld": 2345,
    "cami": [
     "@graph",
     0,
@@ -56,443 +65,1190 @@
    ],
    "tipus": "json-ld",
    "ca": "Portes obertes",
-   "id": "s005",
+   "id": "s006",
    "en": "Open days"
   },
   {
-   "json_ld": 1469,
+   "json_ld": 2345,
    "cami": [
     "@graph",
     0,
     "description"
    ],
    "tipus": "json-ld",
-   "ca": "Tot el setembre són portes obertes al CB Grup Barna: vine a provar un entrenament, de l'Escoleta al sènior.",
-   "id": "s006",
-   "en": "The whole of September is open days at CB Grup Barna: come and try a training session, from the Escoleta to the senior team."
+   "ca": "Portes obertes del CB Grup Barna els dissabtes 19 i 26 de setembre de 2026, de 9.00 a 10.30 h, a La Nau del Clot: entrenament de prova gratuït per a nens i nenes de 4 a 8 anys i proves per a nenes nascudes el 2018.",
+   "id": "s007",
+   "en": "CB Grup Barna open days on Saturdays 19 and 26 September 2026, 9.00 to 10.30 am, at La Nau del Clot: a free trial session for children aged 4 to 8 and trials for girls born in 2018."
   },
   {
-   "json_ld": 1469,
+   "json_ld": 2345,
    "cami": [
     "@graph",
     1,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Portes obertes de l'Escoleta i proves per a nenes del 2018 · 19 de setembre",
+   "id": "s008",
+   "en": "Escoleta open day and trials for girls born in 2018 · 19 September"
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    1,
+    "description"
+   ],
+   "tipus": "json-ld",
+   "ca": "Entrenament de prova gratuït a La Nau del Clot: nens i nenes de 4 a 8 anys a l'Escoleta, i proves per a nenes nascudes el 2018 que vulguin entrar a l'equip. 50 places per torn, amb reserva prèvia.",
+   "id": "s009",
+   "en": "Free trial session at La Nau del Clot: children aged 4 to 8 in the Escoleta, and trials for girls born in 2018 who would like to join the team. 50 places per session, booking required."
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    1,
+    "audience",
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Nens i nenes de 4 a 8 anys i nenes nascudes el 2018",
+   "id": "s010",
+   "en": "Children aged 4 to 8 and girls born in 2018"
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    1,
+    "location",
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "La Nau del Clot",
+   "id": "s011",
+   "en": "La Nau del Clot"
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    1,
+    "offers",
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Entrenament de prova",
+   "id": "s012",
+   "en": "Trial session"
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    2,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Portes obertes de l'Escoleta i proves per a nenes del 2018 · 26 de setembre",
+   "id": "s013",
+   "en": "Escoleta open day and trials for girls born in 2018 · 26 September"
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    2,
+    "description"
+   ],
+   "tipus": "json-ld",
+   "ca": "Entrenament de prova gratuït a La Nau del Clot: nens i nenes de 4 a 8 anys a l'Escoleta, i proves per a nenes nascudes el 2018 que vulguin entrar a l'equip. 50 places per torn, amb reserva prèvia.",
+   "id": "s014",
+   "en": "Free trial session at La Nau del Clot: children aged 4 to 8 in the Escoleta, and trials for girls born in 2018 who would like to join the team. 50 places per session, booking required."
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    2,
+    "audience",
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Nens i nenes de 4 a 8 anys i nenes nascudes el 2018",
+   "id": "s015",
+   "en": "Children aged 4 to 8 and girls born in 2018"
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    2,
+    "location",
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "La Nau del Clot",
+   "id": "s016",
+   "en": "La Nau del Clot"
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    2,
+    "offers",
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Entrenament de prova",
+   "id": "s017",
+   "en": "Trial session"
+  },
+  {
+   "json_ld": 2345,
+   "cami": [
+    "@graph",
+    3,
     "itemListElement",
     0,
     "name"
    ],
    "tipus": "json-ld",
    "ca": "Inici",
-   "id": "s007",
+   "id": "s018",
    "en": "Home"
   },
   {
-   "json_ld": 1469,
+   "json_ld": 2345,
    "cami": [
     "@graph",
-    1,
+    3,
     "itemListElement",
     1,
     "name"
    ],
    "tipus": "json-ld",
    "ca": "Portes obertes",
-   "id": "s008",
+   "id": "s019",
    "en": "Open days"
   },
   {
-   "de": 3536,
-   "a": 3549,
+   "de": 7552,
+   "a": 7565,
    "tipus": "atribut",
    "context": "etiqueta per a lectors de pantalla",
    "ca": "Fil d'Ariadna",
-   "id": "s009",
+   "id": "s020",
    "en": "Breadcrumb"
   },
   {
-   "de": 3563,
-   "a": 3568,
+   "de": 7579,
+   "a": 7584,
    "tipus": "text",
    "ca": "Inici",
-   "id": "s010",
+   "id": "s021",
    "en": "Home"
   },
   {
-   "de": 3581,
-   "a": 3595,
+   "de": 7597,
+   "a": 7611,
    "tipus": "text",
    "ca": "Portes obertes",
-   "id": "s011",
+   "id": "s022",
    "en": "Open days"
   },
   {
-   "de": 3690,
-   "a": 3711,
+   "de": 7706,
+   "a": 7756,
    "tipus": "text",
-   "ca": "Setembre · tot el mes",
-   "id": "s012",
-   "en": "September · all month"
+   "ca": "Dissabte 19 de setembre · 9.00 h · La Nau del Clot",
+   "id": "s023",
+   "en": "Saturday 19 September · 9.00 am · La Nau del Clot"
   },
   {
-   "de": 3724,
-   "a": 3753,
+   "de": 7769,
+   "a": 7798,
    "tipus": "text",
    "ca": "Portes obertes: vine a provar",
-   "id": "s013",
+   "id": "s024",
    "en": "Open days: come and try"
   },
   {
-   "de": 3779,
-   "a": 3923,
+   "de": 7824,
+   "a": 8064,
    "tipus": "text",
-   "ca": "Durant tot el setembre, qualsevol nen o nena pot venir a fer un entrenament\n    amb nosaltres. Sense pagar res i sense compromís de quedar-s'hi.",
-   "id": "s014",
-   "en": "All through September, any child can come and do a training session\n    with us. Free of charge and with no commitment to stay."
+   "ca": "El dissabte 19 de setembre, de 9.00 a 10.30 h, qualsevol nen o nena de 4 a 8 anys\n    pot venir a fer un entrenament amb nosaltres, i les nenes nascudes el 2018 poden provar amb\n    l'equip. Sense pagar res i sense compromís de quedar-s'hi.",
+   "id": "s025",
+   "en": "On Saturday 19 September, 9.00 to 10.30 am, any child aged 4 to 8\n    can come and train with us, and girls born in 2018 can try out with\n    the team. Free of charge and with no commitment to stay."
   },
   {
-   "de": 3975,
-   "a": 3987,
+   "de": 8156,
+   "a": 8206,
    "tipus": "text",
-   "ca": "Com funciona",
-   "id": "s015",
-   "en": "How it works"
+   "ca": "Dissabte 19 de setembre de 2026, de 9.00 a 10.30 h",
+   "id": "s026",
+   "en": "Saturday 19 September 2026, 9.00 to 10.30 am"
   },
   {
-   "de": 3996,
-   "a": 4044,
+   "de": 8215,
+   "a": 8339,
    "tipus": "text",
-   "ca": "No hi ha una jornada de portes obertes d'un dia:",
-   "id": "s016",
-   "en": "There is no single open day:"
+   "ca": ", a La Nau del Clot\n  (carrer de la Llacuna, 170-172). Cinquanta places, per ordre de reserva. Hi ha un segon\n  dissabte, el",
+   "id": "s027",
+   "en": ", at La Nau del Clot\n  (carrer de la Llacuna, 170-172). Fifty places, in booking order. There is a second\n  Saturday, on"
   },
   {
-   "de": 4053,
-   "a": 4081,
+   "de": 8348,
+   "a": 8362,
    "tipus": "text",
-   "ca": "tot el mes de setembre ho és",
-   "id": "s017",
-   "en": "the whole month of September is one"
+   "ca": "26 de setembre",
+   "id": "s028",
+   "en": "26 September"
   },
   {
-   "de": 4090,
-   "a": 4228,
+   "de": 8371,
+   "a": 8411,
    "tipus": "text",
-   "ca": ".\nEns dius quina edat té la criatura, mirem quin grup li toca i et diem el dia i l'hora en què entrena.\nVe, s'hi posa, i al final decidiu.",
-   "id": "s018",
-   "en": ".\nTell us how old your child is, we will look at which group they belong to and tell you the day and time it trains.\nThey come along, join in, and then you decide."
+   "ca": ", amb el mateix horari i al mateix lloc.",
+   "id": "s029",
+   "en": ", same time and same place."
   },
   {
-   "de": 4252,
-   "a": 4265,
+   "de": 8428,
+   "a": 8463,
    "tipus": "text",
-   "ca": "De 4 a 8 anys",
-   "id": "s019",
-   "en": "Ages 4 to 8"
+   "ca": "El dissabte 19 de setembre, en curt",
+   "id": "s030",
+   "en": "Saturday 19 September, in short"
   },
   {
-   "de": 4275,
-   "a": 4323,
+   "de": 8522,
+   "a": 8525,
    "tipus": "text",
-   "ca": "— Escoleta. Equips mixtos i tres grups per edat.",
-   "id": "s020",
-   "en": "— Escoleta. Mixed teams and three groups by age."
+   "ca": "Dia",
+   "id": "s031",
+   "en": "Day"
   },
   {
-   "de": 4343,
-   "a": 4361,
+   "de": 8534,
+   "a": 8565,
    "tipus": "text",
-   "ca": "De 9 anys en amunt",
-   "id": "s021",
-   "en": "From age 9 upwards"
+   "ca": "Dissabte 19 de setembre de 2026",
+   "id": "s032",
+   "en": "Saturday 19 September 2026"
   },
   {
-   "de": 4371,
-   "a": 4411,
+   "de": 8600,
+   "a": 8604,
    "tipus": "text",
-   "ca": "— equips federats, per any de naixement.",
-   "id": "s022",
-   "en": "— federated teams, by year of birth."
+   "ca": "Hora",
+   "id": "s033",
+   "en": "Time"
   },
   {
-   "de": 4431,
-   "a": 4445,
+   "de": 8613,
+   "a": 8630,
+   "tipus": "text",
+   "ca": "De 9.00 a 10.30 h",
+   "id": "s034",
+   "en": "9.00 to 10.30 am"
+  },
+  {
+   "de": 8665,
+   "a": 8667,
+   "tipus": "text",
+   "ca": "On",
+   "id": "s035",
+   "en": "Where"
+  },
+  {
+   "de": 8676,
+   "a": 8772,
+   "tipus": "text",
+   "ca": "La Nau del Clot · carrer de la Llacuna, 170-172, 08018 Barcelona\n      (Districte de Sant Martí)",
+   "id": "s036",
+   "en": "La Nau del Clot · carrer de la Llacuna, 170-172, 08018 Barcelona\n      (Sant Martí district)"
+  },
+  {
+   "de": 8807,
+   "a": 8823,
+   "tipus": "text",
+   "ca": "Qui hi pot venir",
+   "id": "s037",
+   "en": "Who can come"
+  },
+  {
+   "de": 8832,
+   "a": 8935,
+   "tipus": "text",
+   "ca": "Nens i nenes de 4 a 8 anys, a l'Escoleta, i nenes\n      nascudes el 2018 que vulguin provar amb l'equip",
+   "id": "s038",
+   "en": "Children aged 4 to 8, in the Escoleta, and girls\n      born in 2018 who would like to try out with the team"
+  },
+  {
+   "de": 8970,
+   "a": 8974,
+   "tipus": "text",
+   "ca": "Preu",
+   "id": "s039",
+   "en": "Price"
+  },
+  {
+   "de": 8983,
+   "a": 8990,
+   "tipus": "text",
+   "ca": "Gratuït",
+   "id": "s040",
+   "en": "Free"
+  },
+  {
+   "de": 9025,
+   "a": 9031,
+   "tipus": "text",
+   "ca": "Places",
+   "id": "s041",
+   "en": "Places"
+  },
+  {
+   "de": 9040,
+   "a": 9084,
+   "tipus": "text",
+   "ca": "50 per dissabte i torn, per ordre de reserva",
+   "id": "s042",
+   "en": "50 per Saturday and session, in booking order"
+  },
+  {
+   "de": 9119,
+   "a": 9133,
    "tipus": "text",
    "ca": "Què cal portar",
-   "id": "s023",
+   "id": "s043",
    "en": "What to bring"
   },
   {
-   "de": 4455,
-   "a": 4546,
+   "de": 9142,
+   "a": 9234,
+   "tipus": "text",
+   "ca": "Roba d'esport, sabatilles de pista i una ampolla\n      d'aigua. La pilota la posem nosaltres",
+   "id": "s044",
+   "en": "Sports clothes, indoor court shoes and a water\n      bottle. We provide the ball"
+  },
+  {
+   "de": 9269,
+   "a": 9280,
+   "tipus": "text",
+   "ca": "Com s'hi ve",
+   "id": "s045",
+   "en": "How to come"
+  },
+  {
+   "de": 9289,
+   "a": 9366,
+   "tipus": "text",
+   "ca": "Reservant plaça al formulari d'aquesta pàgina, o pel\n      WhatsApp del club:",
+   "id": "s046",
+   "en": "By booking a place on the form on this page, or through the\n      club's WhatsApp:"
+  },
+  {
+   "de": 9453,
+   "a": 9467,
+   "tipus": "text",
+   "ca": "Segon dissabte",
+   "id": "s047",
+   "en": "Second Saturday"
+  },
+  {
+   "de": 9476,
+   "a": 9527,
+   "tipus": "text",
+   "ca": "26 de setembre de 2026, mateix horari i mateix lloc",
+   "id": "s048",
+   "en": "26 September 2026, same time and same place"
+  },
+  {
+   "de": 9563,
+   "a": 9575,
+   "tipus": "text",
+   "ca": "Com funciona",
+   "id": "s049",
+   "en": "How it works"
+  },
+  {
+   "de": 9584,
+   "a": 9632,
+   "tipus": "text",
+   "ca": "No hi ha una jornada de portes obertes d'un dia:",
+   "id": "s050",
+   "en": "There is no single open day:"
+  },
+  {
+   "de": 9641,
+   "a": 9669,
+   "tipus": "text",
+   "ca": "tot el mes de setembre ho és",
+   "id": "s051",
+   "en": "the whole month of September is one"
+  },
+  {
+   "de": 9678,
+   "a": 9816,
+   "tipus": "text",
+   "ca": ".\nEns dius quina edat té la criatura, mirem quin grup li toca i et diem el dia i l'hora en què entrena.\nVe, s'hi posa, i al final decidiu.",
+   "id": "s052",
+   "en": ".\nTell us how old your child is, we will look at which group they belong to and tell you the day and time it trains.\nThey come along, join in, and then you decide."
+  },
+  {
+   "de": 9840,
+   "a": 9853,
+   "tipus": "text",
+   "ca": "De 4 a 8 anys",
+   "id": "s053",
+   "en": "Ages 4 to 8"
+  },
+  {
+   "de": 9863,
+   "a": 9911,
+   "tipus": "text",
+   "ca": "— Escoleta. Equips mixtos i tres grups per edat.",
+   "id": "s054",
+   "en": "— Escoleta. Mixed teams and three groups by age."
+  },
+  {
+   "de": 9931,
+   "a": 9949,
+   "tipus": "text",
+   "ca": "De 9 anys en amunt",
+   "id": "s055",
+   "en": "From age 9 upwards"
+  },
+  {
+   "de": 9959,
+   "a": 9999,
+   "tipus": "text",
+   "ca": "— equips federats, per any de naixement.",
+   "id": "s056",
+   "en": "— federated teams, by year of birth."
+  },
+  {
+   "de": 10019,
+   "a": 10033,
+   "tipus": "text",
+   "ca": "Què cal portar",
+   "id": "s057",
+   "en": "What to bring"
+  },
+  {
+   "de": 10043,
+   "a": 10134,
    "tipus": "text",
    "ca": "— roba d'esport, sabatilles de pista i una ampolla d'aigua.\n  La pilota la posem nosaltres.",
-   "id": "s024",
+   "id": "s058",
    "en": "— sports clothes, indoor trainers and a bottle of water.\n  We provide the ball."
   },
   {
-   "de": 4566,
-   "a": 4577,
+   "de": 10154,
+   "a": 10165,
    "tipus": "text",
    "ca": "Quant costa",
-   "id": "s025",
+   "id": "s059",
    "en": "What it costs"
   },
   {
-   "de": 4587,
-   "a": 4623,
+   "de": 10175,
+   "a": 10211,
    "tipus": "text",
    "ca": "— l'entrenament de prova és gratuït.",
-   "id": "s026",
+   "id": "s060",
    "en": "— the trial session is free."
   },
   {
-   "de": 4638,
-   "a": 4648,
+   "de": 10226,
+   "a": 10236,
    "tipus": "text",
    "ca": "Entrenem a",
-   "id": "s027",
+   "id": "s061",
    "en": "We train at"
   },
   {
-   "de": 4657,
-   "a": 4672,
+   "de": 10245,
+   "a": 10260,
    "tipus": "text",
    "ca": "La Nau del Clot",
-   "id": "s028",
+   "id": "s062",
    "en": "La Nau del Clot"
   },
   {
-   "de": 4681,
-   "a": 4815,
+   "de": 10269,
+   "a": 10403,
    "tipus": "text",
    "ca": ", al Districte de Sant Martí. Si prefereixes venir a\nmirar-ho abans de dir res a la criatura, també pots: només cal que ens ho diguis.",
-   "id": "s029",
+   "id": "s063",
    "en": ", in the Sant Martí district. If you would rather come and\nwatch before saying anything to your child, you can: just let us know."
   },
   {
-   "de": 4825,
-   "a": 4838,
+   "de": 10413,
+   "a": 10460,
    "tipus": "text",
-   "ca": "Demana el dia",
-   "id": "s030",
-   "en": "Ask for a day"
+   "ca": "Nenes nascudes el 2018: queden places a l'equip",
+   "id": "s064",
+   "en": "Girls born in 2018: there are places in the team"
   },
   {
-   "de": 4873,
-   "a": 4989,
+   "de": 10469,
+   "a": 10557,
    "tipus": "text",
-   "ca": "Amb el nom i una manera de contactar-te n'hi ha prou. Et responem el mateix dia amb el dia i\n  l'hora que li toquen.",
-   "id": "s031",
-   "en": "Your name and a way of contacting you is enough. We will reply the same day with the day and\n  time that fit."
+   "ca": "L'equip de nenes del 2018 ja existeix i ja entrena. El que busquem el 19 de setembre són",
+   "id": "s065",
+   "en": "The 2018 girls' team already exists and already trains. What we are looking for on 19 September are"
   },
   {
-   "de": 5095,
-   "a": 5113,
+   "de": 10566,
+   "a": 10580,
+   "tipus": "text",
+   "ca": "incorporacions",
+   "id": "s066",
+   "en": "new players"
+  },
+  {
+   "de": 10589,
+   "a": 10748,
+   "tipus": "text",
+   "ca": ": nenes que no hagin jugat mai i vulguin provar-ho, i nenes que ja\njuguin en un altre lloc i vulguin canviar. No cal experiència ni haver tocat mai una pilota.",
+   "id": "s067",
+   "en": ": girls who have never played and want to try it, and girls who already\nplay somewhere else and want to move. No experience needed, and no need to have ever touched a ball."
+  },
+  {
+   "de": 10756,
+   "a": 10805,
+   "tipus": "text",
+   "ca": "Al Barna, el bàsquet femení no és una secció: són",
+   "id": "s068",
+   "en": "At the Barna, women's basketball is not a section: it is"
+  },
+  {
+   "de": 10814,
+   "a": 10843,
+   "tipus": "text",
+   "ca": "vuit equips femenins federats",
+   "id": "s069",
+   "en": "eight league teams"
+  },
+  {
+   "de": 10852,
+   "a": 11122,
+   "tipus": "text",
+   "ca": ",\nel mateix nombre de jugadores que de jugadors, el mateix pressupost per a la línia femenina que per\na la masculina i un 65,5% d'entrenadores a l'staff tècnic. Una nena que comenci el 2018 té el camí\nsencer fet fins al sènior, dins del mateix club i a la mateixa pista.",
+   "id": "s070",
+   "en": ",\nthe same number of female players as male ones, the same budget for the women's side as for\nthe men's and 65.5% female coaches on the technical staff. A girl who starts in 2018 has the whole\npath laid out up to the senior team, inside the same club and on the same court."
+  },
+  {
+   "de": 11171,
+   "a": 11220,
+   "tipus": "text",
+   "ca": "Tota la informació de l'equip de nenes del 2018 →",
+   "id": "s071",
+   "en": "Everything about the 2018 girls' team →"
+  },
+  {
+   "de": 11234,
+   "a": 11253,
+   "tipus": "text",
+   "ca": "Reserva el dissabte",
+   "id": "s072",
+   "en": "Book your Saturday"
+  },
+  {
+   "de": 11288,
+   "a": 11337,
+   "tipus": "text",
+   "ca": "Tria el dissabte que us va bé i reserva la plaça.",
+   "id": "s073",
+   "en": "Pick the Saturday that suits you and book the place."
+  },
+  {
+   "de": 11346,
+   "a": 11386,
+   "tipus": "text",
+   "ca": "Cada dissabte només admet 50\n  criatures",
+   "id": "s074",
+   "en": "Each Saturday only takes 50\n  children"
+  },
+  {
+   "de": 11395,
+   "a": 11461,
+   "tipus": "text",
+   "ca": ": quan un torn s'omple, es tanca. Rebràs la confirmació al moment.",
+   "id": "s075",
+   "en": ": once a session fills up, it closes. You will get the confirmation straight away."
+  },
+  {
+   "de": 11589,
+   "a": 11615,
+   "tipus": "text",
+   "ca": "Quin dissabte de setembre?",
+   "id": "s076",
+   "en": "Which Saturday in September?"
+  },
+  {
+   "de": 11694,
+   "a": 11794,
+   "tipus": "text",
+   "ca": "Pots triar-ne més d'un: podeu venir a provar tants dissabtes com vulgueu\n    durant tot el setembre.",
+   "id": "s077",
+   "en": "You can pick more than one: you are welcome to come and try as many Saturdays as you like\n    through September."
+  },
+  {
+   "de": 12041,
+   "a": 12049,
+   "tipus": "text",
+   "ca": "dissabte",
+   "id": "s078",
+   "en": "Saturday"
+  },
+  {
+   "de": 12053,
+   "a": 12064,
+   "tipus": "text",
+   "ca": "de setembre",
+   "id": "s079",
+   "en": "September"
+  },
+  {
+   "de": 12105,
+   "a": 12120,
+   "tipus": "text",
+   "ca": "9.00 h · La Nau",
+   "id": "s080",
+   "en": "9.00 am · La Nau"
+  },
+  {
+   "de": 12186,
+   "a": 12196,
+   "tipus": "text",
+   "ca": "Carregant…",
+   "id": "s081",
+   "en": "Loading…"
+  },
+  {
+   "de": 12435,
+   "a": 12443,
+   "tipus": "text",
+   "ca": "dissabte",
+   "id": "s082",
+   "en": "Saturday"
+  },
+  {
+   "de": 12447,
+   "a": 12458,
+   "tipus": "text",
+   "ca": "de setembre",
+   "id": "s083",
+   "en": "September"
+  },
+  {
+   "de": 12499,
+   "a": 12514,
+   "tipus": "text",
+   "ca": "9.00 h · La Nau",
+   "id": "s084",
+   "en": "9.00 am · La Nau"
+  },
+  {
+   "de": 12580,
+   "a": 12590,
+   "tipus": "text",
+   "ca": "Carregant…",
+   "id": "s085",
+   "en": "Loading…"
+  },
+  {
+   "de": 12694,
+   "a": 12719,
+   "tipus": "text",
+   "ca": "Tria almenys un dissabte.",
+   "id": "s086",
+   "en": "Pick at least one Saturday."
+  },
+  {
+   "de": 12788,
+   "a": 12806,
    "tipus": "text",
    "ca": "Nom de la criatura",
-   "id": "s032",
+   "id": "s087",
    "en": "Child's name"
   },
   {
-   "de": 5326,
-   "a": 5358,
+   "de": 13019,
+   "a": 13051,
    "tipus": "text",
    "ca": "Digue'ns com es diu, si us plau.",
-   "id": "s033",
+   "id": "s088",
    "en": "Please tell us their name."
   },
   {
-   "de": 5421,
-   "a": 5437,
+   "de": 13144,
+   "a": 13148,
+   "tipus": "text",
+   "ca": "Edat",
+   "id": "s089",
+   "en": "Age"
+  },
+  {
+   "de": 13399,
+   "a": 13414,
+   "tipus": "text",
+   "ca": "Posa-hi l'edat.",
+   "id": "s090",
+   "en": "Please add the age."
+  },
+  {
+   "de": 13466,
+   "a": 13482,
    "tipus": "text",
    "ca": "Any de naixement",
-   "id": "s034",
+   "id": "s091",
    "en": "Year of birth"
   },
   {
-   "de": 5515,
-   "a": 5591,
+   "de": 13732,
+   "a": 13750,
    "tipus": "text",
-   "ca": "És el que fa servir la federació per posar els equips: per any, no per curs.",
-   "id": "s035",
-   "en": "It is what the federation uses to make up the teams: by year, not by school year."
+   "ca": "Amb quatre xifres.",
+   "id": "s092",
+   "en": "Four digits."
   },
   {
-   "de": 5788,
-   "a": 5834,
+   "de": 13820,
+   "a": 13904,
    "tipus": "text",
-   "ca": "Posa-hi l'any de naixement, amb quatre xifres.",
-   "id": "s036",
-   "en": "Please enter the year of birth, with four digits."
+   "ca": "L'any és el que fa servir la federació per posar els\n  equips: per any, no per curs.",
+   "id": "s093",
+   "en": "The federation uses the year of birth to form\n  teams, not the school year."
   },
   {
-   "de": 5902,
-   "a": 5912,
+   "de": 13955,
+   "a": 13980,
+   "tipus": "text",
+   "ca": "Ha jugat a bàsquet abans?",
+   "id": "s094",
+   "en": "Have they played basketball before?"
+  },
+  {
+   "de": 14147,
+   "a": 14166,
+   "tipus": "text",
+   "ca": "No, comença de zero",
+   "id": "s095",
+   "en": "No, starting from scratch"
+  },
+  {
+   "de": 14259,
+   "a": 14274,
+   "tipus": "text",
+   "ca": "Sí, ja ha jugat",
+   "id": "s096",
+   "en": "Yes, they have played"
+  },
+  {
+   "de": 14370,
+   "a": 14380,
    "tipus": "text",
    "ca": "El teu nom",
-   "id": "s037",
+   "id": "s097",
    "en": "Your name"
   },
   {
-   "de": 6157,
-   "a": 6181,
+   "de": 14625,
+   "a": 14649,
    "tipus": "text",
    "ca": "Digue'ns qui ens escriu.",
-   "id": "s038",
+   "id": "s098",
    "en": "Please tell us who is writing."
   },
   {
-   "de": 6244,
-   "a": 6260,
+   "de": 14715,
+   "a": 14721,
    "tipus": "text",
-   "ca": "Telèfon o correu",
-   "id": "s039",
-   "en": "Phone or email"
+   "ca": "Correu",
+   "id": "s099",
+   "en": "Email"
   },
   {
-   "de": 6338,
-   "a": 6402,
+   "de": 14799,
+   "a": 14836,
    "tipus": "text",
-   "ca": "El que et vagi millor. Només el fem servir per respondre't això.",
-   "id": "s040",
-   "en": "Whichever suits you. We only use it to reply to this."
+   "ca": "Hi enviem la confirmació de la plaça.",
+   "id": "s100",
+   "en": "This is where we send the confirmation of the place."
   },
   {
-   "de": 6587,
-   "a": 6643,
+   "de": 15028,
+   "a": 15074,
    "tipus": "text",
-   "ca": "Deixa'ns un telèfon o un correu per poder-te dir el dia.",
-   "id": "s041",
-   "en": "Please leave a phone number or email so we can tell you the day."
+   "ca": "Cal un correu per poder-te confirmar la plaça.",
+   "id": "s101",
+   "en": "We need an email to confirm the place."
   },
   {
-   "de": 6706,
-   "a": 6736,
+   "de": 15137,
+   "a": 15144,
+   "tipus": "text",
+   "ca": "Telèfon",
+   "id": "s102",
+   "en": "Phone"
+  },
+  {
+   "de": 15176,
+   "a": 15233,
+   "tipus": "text",
+   "ca": "Opcional. Per avisar-te si hi ha cap canvi d'última hora.",
+   "id": "s103",
+   "en": "Optional. So we can let you know about any last-minute change."
+  },
+  {
+   "de": 15368,
+   "a": 15398,
    "tipus": "text",
    "ca": "Alguna cosa que hàgim de saber",
-   "id": "s042",
+   "id": "s104",
    "en": "Anything we should know"
   },
   {
-   "de": 6768,
-   "a": 6849,
+   "de": 15430,
+   "a": 15513,
    "tipus": "text",
-   "ca": "Opcional. Si ja ha jugat abans, si ve amb algun amic, si hi ha dies que no podeu…",
-   "id": "s043",
-   "en": "Optional. If they have played before, if they are coming with a friend, if there are days you cannot make…"
+   "ca": "Opcional. Si ve amb algun amic, si té alguna al·lèrgia, si hi ha dies que no podeu…",
+   "id": "s105",
+   "en": "Optional. If they are coming with a friend, any allergies, days you cannot make…"
   },
   {
-   "de": 6912,
-   "a": 6946,
+   "de": 15576,
+   "a": 15610,
    "tipus": "atribut",
    "context": "text d'exemple d'un camp",
    "ca": "Explica-ho amb les teves paraules…",
-   "id": "s044",
+   "id": "s106",
    "en": "Tell us in your own words…"
   },
   {
-   "de": 7059,
-   "a": 7080,
+   "de": 15723,
+   "a": 15739,
    "tipus": "text",
-   "ca": "Demana venir a provar",
-   "id": "s045",
-   "en": "Ask to come and try"
+   "ca": "Reserva la plaça",
+   "id": "s107",
+   "en": "Book the place"
   },
   {
-   "de": 7164,
-   "a": 7169,
+   "de": 15823,
+   "a": 15828,
    "tipus": "text",
    "ca": "Rebut",
-   "id": "s046",
+   "id": "s108",
    "en": "Received"
   },
   {
-   "de": 7180,
-   "a": 7276,
+   "de": 15839,
+   "a": 15935,
    "tipus": "text",
    "ca": "Gràcies. Et diem el dia i l'hora el mateix dia. Si tens pressa, escriu-nos al WhatsApp del club:",
-   "id": "s047",
+   "id": "s109",
    "en": "Thank you. We will tell you the day and time today. If you are in a hurry, write to us on the club's WhatsApp:"
   },
   {
-   "de": 7348,
-   "a": 7371,
+   "de": 16007,
+   "a": 16030,
    "tipus": "text",
    "ca": "Què passa amb les dades",
-   "id": "s048",
+   "id": "s110",
    "en": "What happens to your data"
   },
   {
-   "de": 7380,
-   "a": 7571,
+   "de": 16039,
+   "a": 16230,
    "tipus": "text",
    "ca": "El que escrius aquí el llegeix la direcció esportiva del club i serveix només per organitzar la\nprova i respondre't. No l'afegim a cap llista ni el fem servir per res més. Tens el detall a la",
-   "id": "s049",
+   "id": "s111",
    "en": "What you write here is read by the club's sporting management and is used only to arrange the\ntrial and reply to you. We do not add it to any list or use it for anything else. The detail is in the"
   },
   {
-   "de": 7607,
-   "a": 7629,
+   "de": 16266,
+   "a": 16288,
    "tipus": "text",
    "ca": "política de privacitat",
-   "id": "s050",
+   "id": "s112",
    "en": "privacy policy"
   },
   {
-   "de": 7633,
-   "a": 7674,
+   "de": 16292,
+   "a": 16333,
    "tipus": "text",
    "ca": ", i com protegim les dades dels\nmenors, a",
-   "id": "s051",
+   "id": "s113",
    "en": ", and how we protect children's data is in"
   },
   {
-   "de": 7703,
-   "a": 7722,
+   "de": 16362,
+   "a": 16381,
    "tipus": "text",
    "ca": "Protecció del Menor",
-   "id": "s052",
+   "id": "s114",
    "en": "Child Protection"
   },
   {
-   "de": 7857,
-   "a": 7881,
+   "de": 16764,
+   "a": 16783,
+   "tipus": "text",
+   "ca": "Preguntes freqüents",
+   "id": "s115",
+   "en": "Frequently asked questions"
+  },
+  {
+   "de": 16860,
+   "a": 16906,
+   "tipus": "text",
+   "ca": "Quan són les portes obertes del CB Grup Barna?",
+   "id": "s116",
+   "en": "When are CB Grup Barna's open days?"
+  },
+  {
+   "de": 16919,
+   "a": 17123,
+   "tipus": "text",
+   "ca": "Tot el setembre. No hi ha una jornada de portes obertes d'un sol dia: durant tot el mes qualsevol nen o nena pot venir a fer un entrenament amb nosaltres, sense pagar res i sense compromís de quedar-s'hi.",
+   "id": "s117",
+   "en": "All through September. There is no single open day: for the whole month any child can come and train with us, free of charge and with no commitment to stay."
+  },
+  {
+   "de": 17169,
+   "a": 17212,
+   "tipus": "text",
+   "ca": "Què cal portar el primer dia d'entrenament?",
+   "id": "s118",
+   "en": "What should we bring on the first training session?"
+  },
+  {
+   "de": 17225,
+   "a": 17347,
+   "tipus": "text",
+   "ca": "Roba d'esport, sabatilles de pista i una ampolla d'aigua. La pilota la posem nosaltres. L'entrenament de prova és gratuït.",
+   "id": "s119",
+   "en": "Sports clothes, indoor court shoes and a water bottle. We provide the ball. The trial session is free."
+  },
+  {
+   "de": 17393,
+   "a": 17462,
+   "tipus": "text",
+   "ca": "Cal avisar abans de venir a provar un entrenament o em puc presentar?",
+   "id": "s120",
+   "en": "Do we need to book a trial session in advance, or can we just turn up?"
+  },
+  {
+   "de": 17475,
+   "a": 17697,
+   "tipus": "text",
+   "ca": "Cal demanar dia abans, perquè cada edat entrena un dia i una hora diferents. Amb el nom de la criatura, l'any de naixement i un telèfon o un correu n'hi ha prou: et responem el mateix dia amb el dia i l'hora que li toquen.",
+   "id": "s121",
+   "en": "You need to book, because each age group trains on a different day and time. Just send us the child's name, year of birth and a phone number or email: we reply the same day with their day and time."
+  },
+  {
+   "de": 17743,
+   "a": 17795,
+   "tipus": "text",
+   "ca": "El meu fill no ha jugat mai a bàsquet. Hi encaixarà?",
+   "id": "s122",
+   "en": "My child has never played basketball. Will they fit in?"
+  },
+  {
+   "de": 17808,
+   "a": 18083,
+   "tipus": "text",
+   "ca": "Sí. No cal experiència prèvia: hi ha jugadors i jugadores que hi arriben sense haver jugat mai. De 4 a 8 anys van a l'Escoleta, amb equips mixtos i tres grups per edat; de 9 anys en amunt, als equips federats per any de naixement. El primer entrenament és de prova i gratuït.",
+   "id": "s123",
+   "en": "Yes. No previous experience is needed: plenty of our players arrived having never played. Ages 4 to 8 join the Escoleta, in mixed groups by age; from 9 upwards they join the league teams, grouped by year of birth. The first session is a free trial."
+  },
+  {
+   "de": 18129,
+   "a": 18165,
+   "tipus": "text",
+   "ca": "Em puc quedar a mirar l'entrenament?",
+   "id": "s124",
+   "en": "Can I stay and watch the session?"
+  },
+  {
+   "de": 18178,
+   "a": 18307,
+   "tipus": "text",
+   "ca": "Sí. Si prefereixes venir a veure-ho abans de dir-li res a la criatura, també pots: només cal que ens ho diguis en demanar el dia.",
+   "id": "s125",
+   "en": "Yes. If you would rather come and see it before telling your child anything, that is fine too: just say so when you book the day."
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    0,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Quan són les portes obertes del CB Grup Barna?",
+   "id": "s126",
+   "en": "When are CB Grup Barna's open days?"
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    0,
+    "acceptedAnswer",
+    "text"
+   ],
+   "tipus": "json-ld",
+   "ca": "Tot el setembre. No hi ha una jornada de portes obertes d'un sol dia: durant tot el mes qualsevol nen o nena pot venir a fer un entrenament amb nosaltres, sense pagar res i sense compromís de quedar-s'hi.",
+   "id": "s127",
+   "en": "All through September. There is no single open day: for the whole month any child can come and train with us, free of charge and with no commitment to stay."
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    1,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Què cal portar el primer dia d'entrenament?",
+   "id": "s128",
+   "en": "What should we bring on the first training session?"
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    1,
+    "acceptedAnswer",
+    "text"
+   ],
+   "tipus": "json-ld",
+   "ca": "Roba d'esport, sabatilles de pista i una ampolla d'aigua. La pilota la posem nosaltres. L'entrenament de prova és gratuït.",
+   "id": "s129",
+   "en": "Sports clothes, indoor court shoes and a water bottle. We provide the ball. The trial session is free."
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    2,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Cal avisar abans de venir a provar un entrenament o em puc presentar?",
+   "id": "s130",
+   "en": "Do we need to book a trial session in advance, or can we just turn up?"
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    2,
+    "acceptedAnswer",
+    "text"
+   ],
+   "tipus": "json-ld",
+   "ca": "Cal demanar dia abans, perquè cada edat entrena un dia i una hora diferents. Amb el nom de la criatura, l'any de naixement i un telèfon o un correu n'hi ha prou: et responem el mateix dia amb el dia i l'hora que li toquen.",
+   "id": "s131",
+   "en": "You need to book, because each age group trains on a different day and time. Just send us the child's name, year of birth and a phone number or email: we reply the same day with their day and time."
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    3,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "El meu fill no ha jugat mai a bàsquet. Hi encaixarà?",
+   "id": "s132",
+   "en": "My child has never played basketball. Will they fit in?"
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    3,
+    "acceptedAnswer",
+    "text"
+   ],
+   "tipus": "json-ld",
+   "ca": "Sí. No cal experiència prèvia: hi ha jugadors i jugadores que hi arriben sense haver jugat mai. De 4 a 8 anys van a l'Escoleta, amb equips mixtos i tres grups per edat; de 9 anys en amunt, als equips federats per any de naixement. El primer entrenament és de prova i gratuït.",
+   "id": "s133",
+   "en": "Yes. No previous experience is needed: plenty of our players arrived having never played. Ages 4 to 8 join the Escoleta, in mixed groups by age; from 9 upwards they join the league teams, grouped by year of birth. The first session is a free trial."
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    4,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Em puc quedar a mirar l'entrenament?",
+   "id": "s134",
+   "en": "Can I stay and watch the session?"
+  },
+  {
+   "json_ld": 18416,
+   "cami": [
+    "mainEntity",
+    4,
+    "acceptedAnswer",
+    "text"
+   ],
+   "tipus": "json-ld",
+   "ca": "Sí. Si prefereixes venir a veure-ho abans de dir-li res a la criatura, també pots: només cal que ens ho diguis en demanar el dia.",
+   "id": "s135",
+   "en": "Yes. If you would rather come and see it before telling your child anything, that is fine too: just say so when you book the day."
+  },
+  {
+   "de": 20598,
+   "a": 20622,
    "tipus": "atribut",
    "context": "etiqueta per a lectors de pantalla",
    "ca": "Segueix el CB Grup Barna",
-   "id": "s053",
+   "id": "s136",
    "en": "Follow CB Grup Barna"
   },
   {
-   "de": 8081,
-   "a": 8104,
+   "de": 20822,
+   "a": 20845,
    "tipus": "text",
    "ca": "Segueix-nos a Instagram",
-   "id": "s054",
+   "id": "s137",
    "en": "Follow us on Instagram"
   },
   {
-   "de": 8144,
-   "a": 8195,
+   "de": 20885,
+   "a": 20936,
    "tipus": "text",
    "ca": "@cbgrupbarna · el dia a dia del club, cada setmana.",
-   "id": "s055",
+   "id": "s138",
    "en": "@cbgrupbarna · the club's week, every week."
   },
   {
-   "de": 8345,
-   "a": 8369,
+   "de": 21086,
+   "a": 21110,
    "tipus": "text",
    "ca": "Apunta't a la newsletter",
-   "id": "s056",
+   "id": "s139",
    "en": "Sign up to the newsletter"
   },
   {
-   "de": 8409,
-   "a": 8464,
+   "de": 21150,
+   "a": 21209,
    "tipus": "text",
-   "ca": "Un correu al mes amb el que val la pena saber. Res més.",
-   "id": "s057",
-   "en": "One email a month with what is worth knowing. Nothing else."
+   "ca": "Un correu la setmana amb el que val la pena saber. Res més.",
+   "id": "s140",
+   "en": "One email a week with what is worth knowing. Nothing else."
   }
  ]
 }

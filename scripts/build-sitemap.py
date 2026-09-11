@@ -57,6 +57,13 @@ PRIORITATS = [
     (re.compile(r"^/partits/"),                       "daily",   "0.8"),
     (re.compile(r"^/(es|en)/partits/"),               "daily",   "0.6"),
     (re.compile(r"^/(campus|escoleta|3x3)/"),         "monthly", "0.9"),
+    # Campanya viva de captació: mentre duri, pesen com l'Escoleta i canvien
+    # cada setmana (s'hi omplen places). Quan la campanya passi, tornen a la
+    # regla general traient aquestes tres línies.
+    (re.compile(r"^/(portes-obertes|basquet-nenes-2018-barcelona)/"),
+                                                      "weekly",  "0.9"),
+    (re.compile(r"^/(es|en)/(puertas-abiertas|open-days|baloncesto-ninas-2018-barcelona|girls-basketball-2018-barcelona)/"),
+                                                      "weekly",  "0.7"),
     (re.compile(r"^/blog/"),                          "monthly", "0.8"),
     (re.compile(r"^/(es|en)/blog/"),                  "monthly", "0.6"),
     (re.compile(r"^/patrocinadors/"),                 "monthly", "0.7"),

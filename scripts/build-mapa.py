@@ -39,6 +39,7 @@ ARBRE = [
         ("/basquet-formatiu/", "Bàsquet formatiu", "Baloncesto formativo", "Development basketball"),
         ("/portes-obertes/", "Portes obertes", "Puertas abiertas", "Open days"),
         ("/femeni/", "Bàsquet femení", "Baloncesto femenino", "Women's basketball"),
+        ("/basquet-nenes-2018-barcelona/", "Bàsquet per a nenes (2018)", "Baloncesto para niñas (2018)", "Basketball for girls (2018)"),
         ("/faq/", "Preguntes freqüents", "Preguntas frecuentes", "FAQ"),
     ]),
     ("Equips i temporada", "Equipos y temporada", "Teams and season", [

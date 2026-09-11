@@ -24,26 +24,26 @@
 
   /* Puja aquesta clau si es canvia el text: qui l'havia tancat el torna a
      veure una vegada, perquè l'avís nou no neix ja amagat. */
-  var CLAU = 'cbgb-avis-po-2026-09';
+  var CLAU = 'cbgb-avis-po-2026-09-nenes2018';
 
   var DESTI = { ca: '/portes-obertes/#po-form', es: '/es/puertas-abiertas/#po-form', en: '/en/open-days/#po-form' };
 
   var TEXTOS = {
     ca: {
       etiqueta: 'Escoleta',
-      text: 'Portes obertes els dissabtes 19 i 26 de setembre, a les 9 h',
+      text: 'Portes obertes dissabte 19 de setembre, a les 9 h · també hi ha proves per a nenes del 2018',
       crida: 'Reserva la plaça',
       tanca: 'Tanca l\'avís'
     },
     es: {
       etiqueta: 'Escoleta',
-      text: 'Puertas abiertas los sábados 19 y 26 de septiembre, a las 9 h',
+      text: 'Puertas abiertas sábado 19 de septiembre, a las 9 h · también hay pruebas para niñas del 2018',
       crida: 'Reserva la plaza',
       tanca: 'Cerrar el aviso'
     },
     en: {
       etiqueta: 'Escoleta',
-      text: 'Open days on Saturday 19 and 26 September, at 9 am',
+      text: 'Open day on Saturday 19 September, 9 am · there are also trials for girls born in 2018',
       crida: 'Book a place',
       tanca: 'Close this notice'
     }
@@ -55,6 +55,7 @@
   // A la pàgina de destinació no hi pinta res.
   var ruta = location.pathname;
   if (/\/(portes-obertes|puertas-abiertas|open-days)\//.test(ruta)) return;
+  if (/-2018-barcelona\//.test(ruta)) return;
 
   // Ni a l'admin ni a les peces per imprimir.
   if (ruta.indexOf('/admin/') === 0 || /\/(flyer|print)\//.test(ruta)) return;

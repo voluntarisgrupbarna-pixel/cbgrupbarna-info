@@ -22,6 +22,48 @@ només l'hi posa nom.
 
 ---
 
+## 2.2.0 — 2026-09-11
+
+**SEO i GEO de les portes obertes del 19 de setembre, i una porta nova per a
+les nenes del 2018.** A vuit dies de la jornada, el web tenia la campanya ben
+escrita però mal col·locada: la pàgina de l'esdeveniment i de la reserva
+—`/portes-obertes/`— era l'única del bloc **sense cap `Event` al JSON-LD**, i
+l'únic `Event` del lloc vivia a l'article del blog declarant `startDate` del 19
+i `endDate` del 26, o sigui **un esdeveniment de set dies seguits** en comptes
+de dos dissabtes de 90 minuts. A més, no hi havia enlloc del web ni una línia
+sobre les proves per a nenes nascudes el 2018.
+
+El que s'ha fet, als tres idiomes:
+
+- **`Event` a `/portes-obertes/`**, partit en **dos esdeveniments reals**
+  (19 i 26 de setembre, de 9.00 a 10.30 h), amb `location` complet
+  —`streetAddress` i `geo`, que són el que fa servir Google per a les cerques
+  de «a prop meu»—, `offers` a preu 0, `maximumAttendeeCapacity` i `audience`.
+  El mateix arreglo s'ha aplicat a l'`Event` de set dies de l'article del blog.
+- **Pàgina nova `/basquet-nenes-2018-barcelona/`**
+  (`/es/baloncesto-ninas-2018-barcelona/`, `/en/girls-basketball-2018-barcelona/`):
+  landing de captació de l'equip de nenes del 2018, que ja existeix i busca
+  incorporacions. Porta `SportsTeam`, dos `Event`, `FAQPage` i una taula de
+  dades dures pensada perquè una IA en pugui extreure data, hora, adreça, preu
+  i requisits sense deduir res.
+- **Capa GEO**: bloc de dades dures del 19 de setembre i de les nenes del 2018
+  a `llms.txt`; vuit preguntes noves a `i18n/faq.yml` —la font única— i la
+  resposta de «quan són les portes obertes» reescrita perquè **comenci per la
+  data**, que és la frase que una IA copia.
+- **Títols i descripcions** de `/portes-obertes/` amb la data literal: la gent
+  cerca «portes obertes 19 de setembre», i abans la data no hi era.
+- **`scripts/build-sitemap.py`**: regla nova perquè les dues pàgines de
+  campanya pesin com l'Escoleta (0.9) i es declarin `weekly` mentre duri.
+- **Enllaçat intern** des de l'Escoleta, el femení, el menú ≡ i l'avís de dalt
+  de tot del web, que ara diu el 19 i anomena les nenes del 2018.
+- **`POSICIONAMENT-PORTES-OBERTES-SEO.md`**: el diagnòstic sencer dels set
+  forats, el mapa de paraules clau als tres idiomes, l'arquitectura
+  una-intenció-una-pàgina i el que queda **fora del web** (fitxa de Google,
+  IndexNow, Instagram, WhatsApp de famílies, escoles del barri), que a vuit
+  dies val tant com el codi.
+
+---
+
 ## 2.1.0 — 2026-08-29
 
 **Els cinc punts «purament tècnics» del tauler de pendents.** Tres pàgines
