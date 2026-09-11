@@ -21,7 +21,12 @@ window.GALERIA_EVENTS = [
       "1789137649806-vhk73.webp",
       "1789137713154-fkui6.webp",
       "1789137776232-7srsm.webp",
-      "1789137839780-aunx5.webp"
+      "1789137839780-aunx5.webp",
+      "1789140488356-q27nm.webp",
+      "1789140553220-oxbvb.webp",
+      "1789140613578-teham.webp",
+      "1789140676693-d9lu1.webp",
+      "1789140736475-ap129.webp"
     ],
     "allow_download": true,
     "source": "repo",
