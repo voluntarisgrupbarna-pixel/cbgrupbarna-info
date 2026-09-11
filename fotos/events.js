@@ -3,19 +3,35 @@
 
 window.GALERIA_EVENTS = [
   {
+    "id": "saf-1-sessio-mtx1x1al",
+    "title": "SAF 1 SESSIO",
+    "description": null,
+    "date": null,
+    "season": "2026-2027",
+    "location": null,
+    "cover": "1789136924490-4sg32.webp",
+    "cover_url": null,
+    "photos": [
+      "1789136924490-4sg32.webp",
+      "1789137046368-3chk1.webp",
+      "1789137167464-cwpbn.webp",
+      "1789137290711-8dtbr.webp",
+      "1789137353217-rss5a.webp"
+    ],
+    "allow_download": true,
+    "source": "repo",
+    "visibility": "private"
+  },
+  {
     "id": "saf-amb-roba-entrenament-mtx1r4tl",
     "title": "SAF AMB ROBA ENTRENAMENT",
     "description": null,
     "date": null,
     "season": "2026-2027",
     "location": null,
-    "cover": "1789136984444-ullch.webp",
+    "cover": null,
     "cover_url": null,
-    "photos": [
-      "1789136984444-ullch.webp",
-      "1789137106473-ldzxx.webp",
-      "1789137228362-x6xtf.webp"
-    ],
+    "photos": [],
     "allow_download": true,
     "source": "repo",
     "visibility": "private"
