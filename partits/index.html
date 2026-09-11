@@ -641,6 +641,12 @@
         var jorR = RESULTATS_J[dia];
         var dlR = jorR ? ' <a class="day-dl" href="calendaris/descarrega/jornades/resultats-' + dia + '.' + jorR.tipus +
           '" target="_blank" rel="noopener" data-cta="resultats-descarrega">⬇ Descarrega el cartell</a>' : '';
+        /* La portada del carrusel penja del primer dia del cap de setmana:
+           és la slide 1 i les dels dies van després. */
+        if (jorR && jorR.portada) {
+          dlR += ' <a class="day-dl" href="calendaris/descarrega/jornades/' + jorR.portada +
+            '" target="_blank" rel="noopener" data-cta="resultats-portada">⬇ Portada del carrusel</a>';
+        }
         return '<h3 class="day-h">' + diaLlarg(dia) + dlR + '</h3>' +
           diesR[dia].map(function (p) { return filaResultat(p, equips[p.equipId]); }).join('');
       }).join('');

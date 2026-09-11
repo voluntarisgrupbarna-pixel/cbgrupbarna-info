@@ -21,7 +21,7 @@ per consola i es continua amb la resta — mai talla tot el procés.
 import hashlib
 import json
 import re
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -327,18 +327,21 @@ def pagina_jornada(etiqueta, files, equips_nom, equips_comp, pag_idx, n_pags, te
             pl, pv = p.get("puntsLocal"), p.get("puntsVisitant")
             if pl is not None and pv is not None:
                 nostres, seus = (pl, pv) if p["casa"] else (pv, pl)
-                if nostres > seus:
-                    color, tag = VERD, "VICTÒRIA"
-                elif nostres < seus:
-                    color, tag = DERROTA, "DERROTA"
-                else:
-                    color, tag = INK, "EMPAT"
+                # Només es marca la VICTÒRIA (decisió de l'Ana, 07/09/2026).
+                # Als partits perduts no s'hi escriu «derrota»: el marcador ja
+                # ho diu i repetir-ho és fer sang. Per això el seu marcador va
+                # en tinta normal i no en vermell — així el que es perd no
+                # queda distingit només pel color, que és la regla del sistema
+                # visual, i el que es guanya destaca de debò.
+                color, tag = (VERD, "VICTÒRIA") if nostres > seus else (INK, "")
                 marc = f"{pl} - {pv}"
                 f_marc = font(F_ANTON, 32)
                 mw = text_w(dr, marc, f_marc)
-                dr.text((W - MARGIN - mw, cy - 28), marc, font=f_marc, fill=color)
-                tw = text_w(dr, tag, f_tag)
-                dr.text((W - MARGIN - tw, cy + 14), tag, font=f_tag, fill=MUTED)
+                dr.text((W - MARGIN - mw, cy - 28 if tag else cy - 12), marc,
+                        font=f_marc, fill=color)
+                if tag:
+                    tw = text_w(dr, tag, f_tag)
+                    dr.text((W - MARGIN - tw, cy + 14), tag, font=f_tag, fill=VERD)
             else:
                 tag = "PENDENT"
                 tw = text_w(dr, tag, f_tag)
@@ -411,6 +414,71 @@ def genera_jornades(data, temporada):
     return sortida
 
 
+def portada_resultats(dies, n_equips, temporada):
+    """La slide 1 del carrusel de resultats: UNA per cap de setmana.
+
+    NO avança res (decisió de l'Ana, 07/09/2026): ni el balanç ni un titular
+    que digui com ha anat. Si la portada ja ho diu, ningú llisca — i el que ha
+    de fer és obrir el carrusel, no resumir-lo. Per això hi surt què s'ha
+    jugat i quants equips, i prou.
+
+    Mateix llenç i mateix llenguatge que els cartells de dia: es publiquen
+    seguits i s'han de veure de la mateixa família."""
+    im = Image.new("RGB", (W, H), PAPER)
+    dr = ImageDraw.Draw(im)
+
+    dr.rectangle([MARGIN, 74, MARGIN + 70, 80], fill=RED)
+    dr.text((MARGIN, 96), f"TEMPORADA {temporada} · TOTS ELS EQUIPS".upper(),
+            font=font(F_BOLD, 20), fill=MUTED)
+
+    # Les dues paraules manen i ocupen l'amplada; la resta penja a sota, de
+    # manera que el conjunt reparteix el llenç en comptes de quedar-se a dalt.
+    y = 300
+    dr.text((MARGIN, y), "ELS", font=font(F_ANTON, 150), fill=INK)
+    dr.text((MARGIN, y + 156), "RESULTATS", font=font(F_ANTON, 150), fill=RED)
+
+    # El bloc de dades baixa fins a prop del peu: amb tot arrapat sota el
+    # títol quedava un terç del cartell buit.
+    y = H - 470
+    dr.rectangle([MARGIN, y, MARGIN + 110, y + 7], fill=RED)
+
+    y += 54
+    # La data, curta. Amb el dia sencer dues vegades sortia «5 I DIUMENGE 6
+    # DE SETEMBRE»; els noms dels dies ja els diuen les slides següents.
+    if len(dies) == 1:
+        quan = dia_llarg(dies[0]).upper()
+    else:
+        d0, d1 = date.fromisoformat(dies[0]), date.fromisoformat(dies[-1])
+        if d0.month == d1.month:
+            # «diumenge 6 de setembre» → «6 de setembre»
+            sense_dia = dia_llarg(dies[-1]).split(" ", 1)[1]
+            quan = f"{d0.day} I {sense_dia}".upper()
+        else:
+            quan = f"{dia_llarg(dies[0]).upper()} I {dia_llarg(dies[-1]).upper()}"
+    dr.text((MARGIN, y), quan, font=font(F_ANTON, 40), fill=INK)
+
+    y += 66
+    dr.text((MARGIN, y), f"{n_equips} EQUIP{'' if n_equips == 1 else 'S'} DEL BARNA A LA PISTA",
+            font=font(F_BOLD, 24), fill=MUTED)
+
+    y += 62
+    # Sense fletxa: les fonts del generador no en tenen el glifo i sortia un
+    # quadrat buit. La píndola ja fa d'indicador.
+    crida = "LLISCA PER VEURE COM HA ANAT"
+    f_pill = font(F_BOLD, 22)
+    pw = text_w(dr, crida, f_pill) + 46
+    dr.rounded_rectangle([MARGIN, y, MARGIN + pw, y + 46], radius=23, fill=INK)
+    dr.text((MARGIN + 23, y + 11), crida, font=f_pill, fill=PAPER)
+
+    dr.line([MARGIN, H - 118, W - MARGIN, H - 118], fill=(220, 216, 210), width=2)
+    dr.text((MARGIN, H - 96), "CLUB BÀSQUET GRUP BARNA · Nau Parc Clot, El Clot",
+            font=font(F_MED, 20), fill=INK)
+    marca = "@cbgrupbarna"
+    dr.text((W - MARGIN - text_w(dr, marca, font(F_MED, 20)), H - 96), marca,
+            font=font(F_MED, 20), fill=RED)
+    return im
+
+
 def genera_resultats(data, temporada):
     """El cartell de resultats de cada DIA ja jugat: mateix format que el
     de la jornada (escuts, equip, rival i categoria) però amb el marcador a
@@ -456,7 +524,35 @@ def genera_resultats(data, temporada):
             tipus = "pdf"
         sortida.append({"clau": iso, "etiqueta": etiqueta, "tipus": tipus,
                         "partits": len(partits), "dates": [iso]})
-    print(f"[resultats] {len(sortida)} cartells de resultats")
+
+    # La portada del carrusel: una per cap de setmana, no una per dia. El
+    # carrusel d'Instagram és portada + un dia per slide, i per això s'agrupa
+    # pel dilluns de la setmana de cada dia amb resultats.
+    per_setmana = {}
+    for e in sortida:
+        iso = e["clau"]
+        d = date.fromisoformat(iso)
+        dilluns = (d - timedelta(days=d.weekday())).isoformat()
+        per_setmana.setdefault(dilluns, []).append(iso)
+    portades = 0
+    for dilluns, dies in sorted(per_setmana.items()):
+        dies = sorted(dies)
+        equips = {p["equipId"] for iso in dies for p in per_dia[iso]
+                  if p.get("puntsLocal") is not None and p.get("puntsVisitant") is not None}
+        im = portada_resultats(dies, len(equips), temporada)
+        slug = f"resultats-portada-{dilluns}"
+        im.resize((700, round(700 * H / W)), Image.LANCZOS).save(
+            OUT_IMG / "jornades" / f"{slug}.webp", "WEBP", quality=84, method=6)
+        im.save(OUT_DL / "jornades" / f"{slug}.png", "PNG", optimize=True)
+        portades += 1
+        # La portada va PRIMER a la llista del seu cap de setmana: és la
+        # slide 1 i l'ordre de la llista és l'ordre de publicació.
+        for e in sortida:
+            if e["clau"] == dies[0]:
+                e["portada"] = f"{slug}.png"
+                break
+
+    print(f"[resultats] {len(sortida)} cartells de resultats · {portades} portades")
     return sortida
 
 
@@ -584,7 +680,10 @@ def main():
     # recull un resultat nou, el cartell es redibuixa tot sol.
     try:
         h_r = hashlib.sha1(json.dumps(
-            {"disseny": 1, "temporada": temporada,
+            # disseny 2 (07/09/2026): només es marca la victòria i s'hi afegeix
+            # la portada del carrusel. Pujar-lo és el que fa que els cartells
+            # ja publicats es tornin a dibuixar amb el disseny nou.
+            {"disseny": 3, "temporada": temporada,
              "partits": [{"data": p["data"], "hora": p["hora"], "casa": p["casa"],
                           "local": p["local"], "visitant": p["visitant"],
                           "equipId": p["equipId"],
