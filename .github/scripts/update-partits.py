@@ -8,8 +8,16 @@ perquè la app mostri un rètol "MODIFICAT" durant uns dies, i queda registrat
 a partits/canvis.json com a historial per a l'avís diari.
 
 Disseny defensiu: si la federació no respon, bloqueja el robot o el format
-canvia i no es troba cap partit, surt amb codi 0 SENSE tocar res — la via
-manual (pujar el PDF a /partits/ → Gestió) sempre segueix funcionant.
+canvia i no es troba cap partit, NO es toca data.json — la via manual (pujar
+el PDF a /partits/ → Gestió) sempre segueix funcionant.
+
+Ara bé, no tocar res no vol dir callar. Un dia solt sense resposta no vol dir
+gaire (manteniments, i els caps de setmana el robot corre cada 20 minuts),
+però a partir de DIES_PER_AVISAR dies seguits surt amb codi 1 i escriu un
+::error:: perquè el workflow quedi en vermell. Fins al setembre del 2026
+sortia sempre amb codi 0 i, a la llista d'Actions, un dia que no feia res es
+veia igual que un dia que anava bé: el robot va estar setmanes sense poder
+entrar sense que ningú se n'assabentés.
 """
 import json, re, sys, unicodedata, urllib.request
 from datetime import date, timedelta
@@ -23,6 +31,7 @@ CLUB_RE = re.compile(r"(?:[A-Z0-9]+-)?C[.,]?\s*B[.,]?\s*GRUP\s*BARNA(?:\s+[A-Z0-
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 DIES_AVIS = 7          # quants dies es manté el rètol "MODIFICAT" a la fitxa
+DIES_PER_AVISAR = 2    # dies seguits sense poder entrar abans de posar el workflow en vermell
 
 def fetch(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "ca,es;q=0.8"})
@@ -109,7 +118,16 @@ def main():
     avui = date.today().isoformat()
     if not scraped:
         print("[robot] cap partit trobat — no es toca data.json (via PDF segueix activa)")
-        _actualitza_canvis([], avui, contactat=False)
+        dies = _actualitza_canvis([], avui, contactat=False)
+        # Un dia solt no vol dir res: la federació té manteniments i el robot
+        # corre cada 20 minuts els caps de setmana. Dos dies seguits, sí.
+        if dies >= DIES_PER_AVISAR:
+            print(f"::error title=El robot de la FCBQ fa {dies} dies que no pot entrar::"
+                  f"basquetcatala.cat no retorna cap partit des de fa {dies} dies. "
+                  f"Mentrestant els resultats s'han d'entrar a mà des de /partits/ → Gestió. "
+                  f"Si respon 403 amb una verificació de seguretat, és el captcha: "
+                  f"vegeu PENDENTS-WEB.md.")
+            return 1
         return 0
 
     data = json.loads(DATA.read_text(encoding="utf-8"))
@@ -179,19 +197,36 @@ def main():
     return 0
 
 def _actualitza_canvis(canvis_avui, avui, contactat):
-    """Manté un historial curt (30 dies) dels canvis detectats, per a la app i l'avís diari."""
+    """Manté un historial curt (30 dies) dels canvis detectats, per a la app i l'avís diari.
+
+    Hi porta també el compte de dies seguits sense poder entrar a la FCBQ.
+    Serveix per a una cosa concreta: que el silenci faci soroll. Aquest robot
+    és defensiu a propòsit —si no troba partits no toca data.json, perquè val
+    més quedar-se amb les dades velles que esborrar-les— però fins ara sortia
+    amb codi 0 igualment, i a GitHub Actions un dia que no fa res i un dia que
+    va bé es veien iguals. El setembre del 2026 això va costar setmanes sense
+    resultats sense que ningú se n'assabentés."""
     hist = {"ultimaComprovacio": avui, "connexioOk": contactat, "canvis": []}
+    dies_fallats = 0
     if CANVIS.exists():
         try:
             hist_previ = json.loads(CANVIS.read_text(encoding="utf-8"))
             hist["canvis"] = hist_previ.get("canvis", [])
+            dies_fallats = hist_previ.get("diesSenseConnexio", 0)
+            # Només compta un cop per dia: el robot corre cada 20 minuts els
+            # caps de setmana i, si no, un cap de setmana dolent semblaria
+            # una avaria de setmanes.
+            if hist_previ.get("ultimaComprovacio") == avui:
+                dies_fallats = max(0, dies_fallats - 1)
         except Exception:
             pass
+    hist["diesSenseConnexio"] = 0 if contactat else dies_fallats + 1
     if canvis_avui:
         hist["canvis"].append({"data": avui, "items": canvis_avui})
     fa_30_dies = (date.today() - timedelta(days=30)).isoformat()
     hist["canvis"] = [c for c in hist["canvis"] if c["data"] >= fa_30_dies]
     CANVIS.write_text(json.dumps(hist, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return hist["diesSenseConnexio"]
 
 if __name__ == "__main__":
     sys.exit(main())
