@@ -3,6 +3,20 @@
 
 window.GALERIA_EVENTS = [
   {
+    "id": "saf-1-sessio-mtx1x1al",
+    "title": "SAF 1 SESSIO",
+    "description": null,
+    "date": null,
+    "season": "2026-2027",
+    "location": null,
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo",
+    "visibility": "private"
+  },
+  {
     "id": "saf-amb-roba-entrenament-mtx1r4tl",
     "title": "SAF AMB ROBA ENTRENAMENT",
     "description": null,
