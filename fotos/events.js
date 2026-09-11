@@ -1,7 +1,21 @@
 // CB Grup Barna · Galeria · Dades d'esdeveniments
-// Actualitzat: 2026-09-01
+// Actualitzat: 2026-09-11
 
 window.GALERIA_EVENTS = [
+  {
+    "id": "saf-amb-roba-entrenament-mtx1r4tl",
+    "title": "SAF AMB ROBA ENTRENAMENT",
+    "description": null,
+    "date": null,
+    "season": "2026-2027",
+    "location": null,
+    "cover": null,
+    "cover_url": null,
+    "photos": [],
+    "allow_download": true,
+    "source": "repo",
+    "visibility": "private"
+  },
   {
     "id": "entrenadors-2627-6a96dcff",
     "title": "Entrenadors 2627",
