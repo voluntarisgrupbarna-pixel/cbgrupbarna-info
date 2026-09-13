@@ -103,6 +103,9 @@ TEXTOS = [
     ("⬇ Descarrega el cartell",
      "⬇ Descarga el cartel",
      "⬇ Download the poster"),
+    ("⬇ Portada del carrusel",
+     "⬇ Portada del carrusel",
+     "⬇ Carousel cover"),
     ("Cal activar JavaScript per veure el Gameday Seniors.",
      "Hay que activar JavaScript para ver el Gameday Seniors.",
      "JavaScript needs to be enabled to see the Seniors Gameday."),
@@ -127,9 +130,9 @@ TEXTOS = [
     ("els resultats i les millors jugades surten a l'Instagram del club.",
      "los resultados y las mejores jugadas salen en el Instagram del club.",
      "the results and the best plays go up on the club's Instagram."),
-    ("Resultats del cap de setmana anterior",
-     "Resultados del fin de semana anterior",
-     "Last weekend's results"),
+    ("Els resultats de la jornada",
+     "Los resultados de la jornada",
+     "The round's results"),
     ("Pròxims partits del CB Grup Barna",
      "Próximos partidos del CB Grup Barna",
      "Upcoming CB Grup Barna fixtures"),
@@ -166,9 +169,9 @@ TEXTOS = [
     # Trossos que quedaven en català a la pàgina traduïda (vistos amb el
     # navegador, no llegint el fitxer): el fil d'Ariadna, l'etiqueta de local
     # o visitant de cada partit i l'avís de quan encara no hi ha resultats.
-    ("La temporada 2026-2027 encara no ha començat: el primer cap de setmana amb partits és el del 5 i 6 de setembre. Els resultats sortiran aquí l\\'endemà de cada jornada.",
-     "La temporada 2026-2027 todavía no ha empezado: el primer fin de semana con partidos es el del 5 y 6 de septiembre. Los resultados saldrán aquí al día siguiente de cada jornada.",
-     "The 2026-2027 season has not started yet: the first weekend with matches is 5 and 6 September. Results will appear here the day after each round."),
+    ("La temporada 2026-2027 encara no ha començat: el primer cap de setmana amb partits és el del 5 i 6 de setembre. Cada partit surt aquí quan s\\'ha jugat, el mateix dia.",
+     "La temporada 2026-2027 todavía no ha empezado: el primer fin de semana con partidos es el del 5 y 6 de septiembre. Cada partido sale aquí cuando se ha jugado, el mismo día.",
+     "The 2026-2027 season has not started yet: the first weekend with matches is 5 and 6 September. Each match appears here once it has been played, the same day."),
     # Els avisos de quan no hi ha res a ensenyar. Es veuen poc, pero es veuen:
     # fora de temporada la pagina es NOMES aixo, i qui la llegia en angles la
     # trobava en catala sencera.
