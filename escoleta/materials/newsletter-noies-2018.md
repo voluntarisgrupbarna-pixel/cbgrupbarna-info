@@ -154,3 +154,27 @@ Frase a la pantalla els dos primers segons: **«Vaig fundar el club el 1965.»**
 2. Quantes segueixen entrenant el 15 d'octubre. **És l'única xifra que importa.**
 3. Dels reels: % d'abast a NO-seguidors i seguidors nous.
 4. Del web: formularis començats contra formularis enviats.
+
+---
+
+## La story diària, feta amb un sol comandament
+
+No cal dissenyar res cada matí. Al repositori hi ha
+`scripts/story-comptador.py`, que treu la peça de 1080×1920 a punt de pujar:
+
+```bash
+python3 scripts/story-comptador.py --places 3      # queden 3 places
+python3 scripts/story-comptador.py --places 1      # «1 de 5», i «Demà» si toca
+python3 scripts/story-comptador.py --places 0      # «COMPLETES»
+python3 scripts/story-comptador.py --places 2 --foto 3   # una altra foto
+```
+
+Surt a `escoleta/materials/story-comptador.png`.
+
+Els dies els compta sol des d'avui: el 18 dirà «Demà», el 19 dirà «AVUI» i a
+partir del 20 canvia a «GRÀCIES» tot sol. Així la peça no pot quedar mai
+anunciant una cosa que ja ha passat, encara que algú la generi tard.
+
+Les cinc fotos són les de l'Escoleta que ja hi ha al web, i cap es mostra més
+gran del que és: si un dia se'n posa una de petita, l'script avisa en comptes
+de deixar-la borrosa.
