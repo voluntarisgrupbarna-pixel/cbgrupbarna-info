@@ -35,6 +35,14 @@ SORTIDES = [("fotos/web", 2048, 88), ("fotos/thumb", 400, 80)]
 IMATGES = (".jpg", ".jpeg", ".png", ".webp", ".heic")
 VIDEOS = (".mp4", ".mov", ".webm")
 
+# El mateix sostre que fa complir scripts/pes-pressupost.py per a .webp: cap
+# fitxer servit no hi pot passar per sobre. Una foto amb molt de detall a
+# 2048 px i qualitat 88 s'hi pot enfilar; en lloc de descobrir-ho quan el
+# CI ja ha fallat, el generador es limita sol.
+SOSTRE_PES = 700_000
+QUALITAT_MINIMA = 60
+AMPLE_MINIM = 1400  # mai per sota d'això: encara s'ha de veure bé a pantalla completa
+
 force = "--force" in sys.argv
 
 
@@ -55,11 +63,29 @@ def versions(origen, event, nom):
         for desti, ample, qualitat in calen:
             os.makedirs(os.path.dirname(desti), exist_ok=True)
             copia = im.copy()
+            ample_actual = ample
             if copia.width > ample:
                 copia.thumbnail((ample, ample * 10), Image.LANCZOS)
             else:
                 evitades += 1  # ja és més petita: es desa tal qual, mai s'amplia
             copia.save(desti, "WEBP", quality=qualitat, method=6)
+            # Si una foto molt detallada s'enfila per sobre del sostre de pes,
+            # es reintenta amb menys qualitat fins que hi cap. Si ni al mínim
+            # de qualitat n'hi ha prou (fotos molt carregades de detall), es
+            # retalla també l'amplada un 10% i es torna a provar tota la
+            # gamma de qualitat, sense baixar mai del mínim publicable.
+            q = qualitat
+            while os.path.getsize(desti) > SOSTRE_PES:
+                if q > QUALITAT_MINIMA:
+                    q = max(QUALITAT_MINIMA, q - 8)
+                elif ample_actual > AMPLE_MINIM and copia.width > AMPLE_MINIM:
+                    ample_actual = max(AMPLE_MINIM, round(ample_actual * 0.9))
+                    copia = im.copy()
+                    copia.thumbnail((ample_actual, ample_actual * 10), Image.LANCZOS)
+                    q = qualitat
+                else:
+                    break  # ja no es pot fer més petit sense passar-se
+                copia.save(desti, "WEBP", quality=q, method=6)
             fetes += 1
     return fetes, evitades
 
