@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Resultats FCBQ → web · CB Grup Barna</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+  :root{--red:#E20613;--black:#0A0A0A;--panel:#141414;--line:rgba(255,255,255,.08);--txt:#F5F5F5;--muted:#A6A29C;--green:#2ea043}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh}
+  nav{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
+  nav img{width:34px;height:34px;object-fit:contain}
+  nav .t{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.06em}
+  nav .t span{color:#FF3B41}
+  .who{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--muted)}
+  .wrap{max-width:760px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  h1{font-family:'Anton',sans-serif;font-size:2rem;line-height:1.1}
+  h1 span{color:#FF3B41}
+  .sub{color:var(--muted);font-size:.88rem;margin:.5rem 0 1.4rem;line-height:1.55}
+  .sub a{color:#FF3B41}
+  h2{font-family:'Anton',sans-serif;font-size:1.3rem;margin:1.8rem 0 .7rem;letter-spacing:.03em}
+  h2 span{color:#FF3B41}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
+  textarea{width:100%;min-height:150px;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:.7rem .8rem;font-family:ui-monospace,Menlo,monospace;font-size:.72rem;resize:vertical}
+  textarea:focus{outline:none;border-color:#FF3B41}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--red);color:#fff;border:none;border-radius:8px;padding:.7rem 1.2rem;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .btn.small{padding:.3rem .65rem;font-size:.72rem}
+  .err,.ok,.info{display:none;border-radius:8px;padding:.7rem .9rem;font-size:.84rem;margin-top:.9rem;line-height:1.5}
+  .err{background:rgba(226,6,19,.12);border:1px solid rgba(226,6,19,.4);color:#FF3B41}
+  .ok{background:rgba(46,160,67,.12);border:1px solid rgba(46,160,67,.4);color:#7ee29a}
+  .info{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--txt)}
+  .ok a,.info a{color:#fff}
+  .hint{font-size:.76rem;color:var(--muted);margin-top:.7rem;line-height:1.55}
+  .hint a{color:#FF3B41}
+  ol{padding-left:1.2rem;font-size:.86rem;line-height:1.7;color:var(--txt)}
+  ol li{margin-bottom:.35rem}
+  ol b{color:#fff}
+  .marcador{display:inline-flex;align-items:center;gap:.5rem;background:#1d1d1d;border:1px dashed rgba(255,59,65,.6);color:#fff;border-radius:10px;padding:.7rem 1rem;font-weight:600;text-decoration:none;cursor:grab;margin:.4rem 0}
+  .marcador small{font-weight:400;color:var(--muted)}
+  .preview{margin-top:1rem;border-top:1px solid var(--line);padding-top:.8rem;font-size:.84rem}
+  .preview .row{display:flex;justify-content:space-between;gap:.8rem;padding:.35rem 0;border-bottom:1px dashed var(--line)}
+  .preview .row:last-child{border-bottom:none}
+  .preview .m{font-family:'Anton',sans-serif;letter-spacing:.05em;flex:none}
+  .preview .m.pend{color:var(--muted);font-family:'Inter',sans-serif;font-size:.72rem}
+  .preview .d{color:var(--muted);font-size:.72rem}
+  code{background:#0e0e0e;border:1px solid var(--line);border-radius:5px;padding:.1rem .35rem;font-size:.78rem}
+</style>
+<link rel="stylesheet" href="/css/a11y.css">
+</head>
+<body>
+<nav>
+  <img src="/logo.png" alt="CB Grup Barna" width="226" height="300">
+  <div class="t">RESULTATS <span>FCBQ → WEB</span></div>
+  <div class="who" id="who"></div>
+</nav>
+
+<main id="contingut" tabindex="-1">
+<div class="wrap">
+  <h1>PUBLICAR ELS <span>RESULTATS</span></h1>
+  <p class="sub">La federació posa un reCAPTCHA davant del seu web que atura el robot automàtic, però no
+    el teu navegador. Aquesta pàgina agafa la fitxa <i>Resultats de l'última setmana</i> de
+    <a href="https://www.basquetcatala.cat/club/24" target="_blank" rel="noopener">basquetcatala.cat/club/24</a>
+    i la puja al web: en 3-4 minuts els marcadors surten a <a href="/partits/">Dies de partit</a>,
+    a les fitxes de cada equip i als cartells. Només s'afegeixen resultats; res més canvia.</p>
+
+  <div class="card" id="publica">
+    <div class="info" id="carregat"></div>
+    <textarea id="html" placeholder="Si no has vingut pel marcador, enganxa aquí el codi de la fitxa de resultats (o fes servir el marcador de sota, que és més ràpid)." spellcheck="false"></textarea>
+    <div class="preview" id="preview" style="display:none"></div>
+    <div class="err" id="err"></div>
+    <div class="ok" id="ok"></div>
+    <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+      <button class="btn" id="pub-btn" onclick="publica()">Publicar resultats</button>
+      <a class="btn ghost" href="https://www.basquetcatala.cat/club/24" target="_blank" rel="noopener">Obrir la pàgina del club a la FCBQ ↗</a>
+    </div>
+    <div class="hint">Cal la contrasenya del club (la mateixa que a Gestió); el token de GitHub es recupera sol.</div>
+  </div>
+
+  <h2>EL MARCADOR <span>«RESULTATS → WEB»</span></h2>
+  <div class="card">
+    <p class="hint" style="margin:0 0 .6rem">Un cop instal·lat, publicar els resultats són 10 segons: obres la pàgina del club a la
+      FCBQ, toques el marcador i confirmes aquí. Funciona al Mac i al mòbil.</p>
+    <a class="marcador" id="bookmarklet" href="#">🏀 Resultats → web <small>(arrossega'm a la barra de marcadors)</small></a>
+    <ol style="margin-top:.8rem">
+      <li><b>Mac (Chrome/Safari):</b> arrossega el botó de dalt a la barra de marcadors. Després, a
+        <code>basquetcatala.cat/club/24</code>, clica el marcador.</li>
+      <li><b>iPhone (Safari):</b> desa qualsevol pàgina com a marcador, edita'l i enganxa com a adreça
+        el codi de sota. Després, a la pàgina del club, obre els marcadors i toca'l.</li>
+    </ol>
+    <div style="margin-top:.8rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+      <button class="btn ghost small" onclick="copiaCodi()">Copiar el codi del marcador</button>
+      <span class="hint" id="copiat" style="margin:0"></span>
+    </div>
+    <textarea id="codi" readonly style="min-height:70px;margin-top:.6rem;font-size:.66rem;color:var(--muted)"></textarea>
+  </div>
+</div>
+</main>
+
+<script src="/scripts/admin-gate.js"></script>
+<script>
+const OWNER='voluntarisgrupbarna-pixel', REPO='cbgrupbarna-info', BRANCH='main';
+const FITXER='partits/fcbq-resultats.html';
+const DESTI='https://cbgrupbarna.info/partits/resultats-fcbq/';
+let ghToken=null;
+
+// El marcador: a la pàgina del club de la FCBQ demana la fitxa de resultats
+// (la mateixa crida que fa el botó "Resultats") i porta el codi aquí dins
+// del fragment de la URL (#h=...), que no viatja a cap servidor.
+const BOOKMARKLET = "javascript:(async()=>{try{if(!location.hostname.endsWith('basquetcatala.cat')){location.href='https://www.basquetcatala.cat/club/24';return;}"
+ + "const r=await fetch('/club/24/resultats',{method:'POST',headers:{'X-Requested-With':'XMLHttpRequest'}});const t=await r.text();"
+ + "if(!t.includes('class=\"score\"')){alert('No he trobat la fitxa de resultats ('+r.status+'). Recarrega la p\\u00e0gina del club i torna-ho a provar.');return;}"
+ + "location.href='" + DESTI + "#h='+encodeURIComponent(t.replace(/\\s+/g,' '));}catch(e){alert('Error: '+e.message);}})();";
+
+document.getElementById('bookmarklet').setAttribute('href', BOOKMARKLET);
+document.getElementById('bookmarklet').addEventListener('click', e => { e.preventDefault(); alert("Arrossega'm a la barra de marcadors (no cal clicar-me aquí)."); });
+document.getElementById('codi').value = BOOKMARKLET;
+
+function copiaCodi(){
+  navigator.clipboard.writeText(BOOKMARKLET).then(()=>{ document.getElementById('copiat').textContent='✔ Copiat'; },
+    ()=>{ document.getElementById('codi').select(); document.getElementById('copiat').textContent='Selecciona el codi i copia\'l (Cmd+C)'; });
+}
+
+CBGBGate.protect(function(user){
+  document.getElementById('who').innerHTML='<span>'+(user.email||'')+'</span>'
+    +'<button class="btn ghost small" onclick="CBGBGate.signOut()">Sortir</button>';
+  ghToken=localStorage.getItem('gh_admin_token');
+  if(!ghToken){ mostra('err','No tinc el token de GitHub en aquest navegador. Entra primer a <a href="/partits/admin.html">Gestió</a> amb la contrasenya del club i torna.'); }
+  const m=location.hash.match(/^#h=(.+)$/);
+  if(m){
+    try{ document.getElementById('html').value=decodeURIComponent(m[1]); history.replaceState(null,'',location.pathname); }catch(e){}
+    mostra('carregat','✔ Fitxa de resultats rebuda de basquetcatala.cat. Revisa la llista i prem <b>Publicar resultats</b>.');
+    previsualitza();
+  }
+});
+document.getElementById('html').addEventListener('input', previsualitza);
+
+function mostra(id, html){ const el=document.getElementById(id); el.innerHTML=html; el.style.display='block'; }
+function amaga(id){ document.getElementById(id).style.display='none'; }
+
+// Mateixa lectura que fa el robot (update-resultats.py), només per ensenyar què es publicarà.
+function parseja(html){
+  const out=[]; const blocs=html.split('<div id="fila">').slice(1);
+  for(const b of blocs){
+    const equips=[...b.matchAll(/class="teamNameLink"[^>]*>(.*?)<\/a>/g)].map(x=>x[1].replace(/&amp;/g,'&').trim());
+    const h=b.match(/class="time2"[^>]*>\s*(\d{2})-(\d{2})-(\d{4})\s+(\d{2}:\d{2})/);
+    const c=b.match(/class="fs-12">(.*?)<\/div>/);
+    const s=[...b.matchAll(/class="score">\s*([^<]*?)\s*</g)].map(x=>x[1].trim());
+    if(equips.length<2||!h||!c) continue;
+    out.push({local:equips[0],visitant:equips[1],data:`${h[1]}/${h[2]}`,hora:h[4],cat:c[1].trim(),
+      pl:/^\d+$/.test(s[0]||'')?+s[0]:null, pv:/^\d+$/.test(s[1]||'')?+s[1]:null});
+  }
+  return out;
+}
+function previsualitza(){
+  const html=document.getElementById('html').value, pv=document.getElementById('preview');
+  const r=parseja(html);
+  if(!r.length){ pv.style.display='none'; return; }
+  const amb=r.filter(x=>x.pl!==null).length;
+  pv.innerHTML=`<div class="d" style="margin-bottom:.4rem">${r.length} partits a la fitxa · <b style="color:#7ee29a">${amb} amb marcador</b> (els altres queden pendents)</div>`
+    + r.map(x=>`<div class="row"><div><div>${x.local} – ${x.visitant}</div><div class="d">${x.data} · ${x.hora} · ${x.cat}</div></div>`
+      + (x.pl!==null?`<div class="m">${x.pl} - ${x.pv}</div>`:`<div class="m pend">PENDENT</div>`)+`</div>`).join('');
+  pv.style.display='block';
+}
+
+async function gh(path,method='GET',body=null){
+  const res=await fetch(`https://api.github.com${path}`,{method,headers:{'Authorization':`Bearer ${ghToken}`,
+    'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},
+    body:body?JSON.stringify(body):null});
+  if(!res.ok) throw new Error(`GitHub ${res.status}: ${(await res.text()).slice(0,180)}`);
+  return res.status===204?null:res.json();
+}
+function b64(s){ return btoa(unescape(encodeURIComponent(s))); }
+
+async function publica(){
+  amaga('err'); amaga('ok');
+  const btn=document.getElementById('pub-btn');
+  const html=document.getElementById('html').value.trim();
+  if(!ghToken){ mostra('err','Falta el token de GitHub: entra a <a href="/partits/admin.html">Gestió</a> amb la contrasenya del club i torna.'); return; }
+  if(!html.includes('class="score"')){ mostra('err','Això no sembla la fitxa de resultats de la FCBQ. Fes servir el marcador des de basquetcatala.cat/club/24.'); return; }
+  const r=parseja(html); const amb=r.filter(x=>x.pl!==null).length;
+  if(!amb){ mostra('err','La fitxa no té cap marcador encara: la federació no ha penjat res. Torna-ho a provar més tard.'); return; }
+  btn.disabled=true; btn.textContent='Publicant…';
+  try{
+    let sha=null;
+    try{ const f=await gh(`/repos/${OWNER}/${REPO}/contents/${FITXER}?ref=${BRANCH}`); sha=f&&f.sha; }catch(e){}
+    const ara=new Date();
+    const cap=`<!-- Fitxa "Resultats de l'última setmana" de https://www.basquetcatala.cat/club/24, pujada des del navegador el ${ara.toLocaleString('ca-ES')} -->\n`;
+    const body={message:`partits: fitxa de resultats FCBQ pujada des del navegador (${amb} marcadors)`,content:b64(cap+html),branch:BRANCH};
+    if(sha) body.sha=sha;
+    await gh(`/repos/${OWNER}/${REPO}/contents/${FITXER}`,'PUT',body);
+    mostra('ok',`✔ Fitxa pujada amb ${amb} marcadors. El robot els està aplicant: en 3-4 minuts seran a <a href="/partits/">Dies de partit</a> i a les fitxes d'equip. `
+      +`<a href="https://github.com/${OWNER}/${REPO}/actions/workflows/update-partits.yml" target="_blank" rel="noopener">Veure el robot ↗</a>`);
+  }catch(e){ mostra('err','No s\'ha pogut pujar: '+e.message); }
+  btn.disabled=false; btn.textContent='Publicar resultats';
+}
+</script>
+</body>
+</html>

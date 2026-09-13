@@ -19,7 +19,7 @@ sortia sempre amb codi 0 i, a la llista d'Actions, un dia que no feia res es
 veia igual que un dia que anava bé: el robot va estar setmanes sense poder
 entrar sense que ningú se n'assabentés.
 """
-import json, re, sys, unicodedata, urllib.request
+import json, re, sys, unicodedata
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -33,10 +33,17 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 DIES_AVIS = 7          # quants dies es manté el rètol "MODIFICAT" a la fitxa
 DIES_PER_AVISAR = 2    # dies seguits sense poder entrar abans de posar el workflow en vermell
 
+# Des del setembre de 2026 la FCBQ té una verificació de seguretat (reCAPTCHA)
+# davant de totes les pàgines: la baixada es fa amb fcbq_client, que passa
+# per la verificació amb un navegador headless si cal. Vegeu fcbq_client.py.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import fcbq_client  # noqa: E402
+
 def fetch(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "ca,es;q=0.8"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read().decode("utf-8", "replace")
+    html = fcbq_client.fetch(url, "GET")
+    if not html:
+        raise RuntimeError("sense resposta (security-check o error de xarxa)")
+    return html
 
 def strip_tags(html):
     html = re.sub(r"<script.*?</script>|<style.*?</style>", " ", html, flags=re.S | re.I)
@@ -116,6 +123,7 @@ def main():
         print(f"[robot] {url}: {len(found)} partits detectats")
         scraped += found
     avui = date.today().isoformat()
+    fcbq_client.close()
     if not scraped:
         print("[robot] cap partit trobat — no es toca data.json (via PDF segueix activa)")
         dies = _actualitza_canvis([], avui, contactat=False)

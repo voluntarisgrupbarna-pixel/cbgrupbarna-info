@@ -240,6 +240,54 @@
         + 'separado, en un solo cartel, con el escudo de cada rival. Para compartir en el grupo o publicar tal cual.</p>'
         + '<div class="cal-grid">' + cardsJ + '</div></div>';
     }
+
+    /* I el mateix un cop jugat: el cartell de resultats de cada dia, amb la
+       portada del carrusel al davant. Al cartell hi surten només els partits
+       que ja tenen marcador, o sigui que el del diumenge al migdia ja es pot
+       publicar i es torna a dibuixar sol quan arriben els de la tarda. */
+    var res = manifest._resultats && manifest._resultats.llista;
+    if (res && res.length) {
+      var blocs = [];
+      res.forEach(function (r) {
+        if (r.portada || !blocs.length) blocs.push([]);
+        blocs[blocs.length - 1].push(r);
+      });
+      var cardsR = '';
+      blocs.reverse().forEach(function (bloc) {
+        var amb = bloc.filter(function (r) { return r.portada; })[0];
+        if (amb) {
+          var slugP = amb.portada.replace('.png', '');
+          var fitxerP = '/partits/calendaris/descarrega/jornades/' + amb.portada;
+          cardsR += '<div class="cal-card">'
+            + '<a href="' + fitxerP + '" target="_blank" rel="noopener" data-cta="cal-res-portada-img-' + amb.clau + '">'
+            + '<img src="/partits/calendaris/img/jornades/' + slugP + '.webp?v=' + t
+            + '" alt="Portada del carrusel de resultados" loading="lazy" decoding="async"></a>'
+            + '<div class="cal-card-body">'
+            + '<span class="cal-card-tag">Carrusel</span><h3>Portada</h3>'
+            + '<span class="cal-card-meta">La primera imagen</span>'
+            + '<a href="' + fitxerP + '" target="_blank" rel="noopener" class="btn ghost" data-cta="cal-res-portada-dl-'
+            + amb.clau + '">Guarda la imagen</a></div></div>';
+        }
+        bloc.forEach(function (r) {
+          var slugR = 'resultats-' + r.clau;
+          var fitxerR = '/partits/calendaris/descarrega/jornades/' + slugR + '.' + r.tipus;
+          var etiquetaR = r.tipus === 'pdf' ? 'Descarga el PDF' : 'Guarda la imagen';
+          cardsR += '<div class="cal-card">'
+            + '<a href="' + fitxerR + '" target="_blank" rel="noopener" data-cta="cal-res-img-' + r.clau + '">'
+            + '<img src="/partits/calendaris/img/jornades/' + slugR + '.webp?v=' + t
+            + '" alt="Cartel de los resultados del ' + esc(r.etiqueta) + '" loading="lazy" decoding="async"></a>'
+            + '<div class="cal-card-body">'
+            + '<span class="cal-card-tag">Todos los equipos</span><h3>' + esc(r.etiqueta) + '</h3>'
+            + '<span class="cal-card-meta">' + r.partits + ' resultados</span>'
+            + '<a href="' + fitxerR + '" target="_blank" rel="noopener" class="btn ghost" data-cta="cal-res-dl-'
+            + r.clau + '">' + etiquetaR + '</a></div></div>';
+        });
+      });
+      html += '<div class="cal-group"><h2>Los resultados, en un solo post</h2>'
+        + '<p class="lede" style="max-width:62ch">El mismo cartel una vez jugado: los marcadores del día con '
+        + 'el escudo de cada rival, y la portada para abrir el carrusel. Solo salen los partidos con resultado.</p>'
+        + '<div class="cal-grid">' + cardsR + '</div></div>';
+    }
     order.forEach(function (cat) {
       var list = groups[cat];
       if (!list || !list.length) return;
