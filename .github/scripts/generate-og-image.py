@@ -16,7 +16,13 @@ Regles del sistema visual que aplica (i que no s'han de trencar aquí):
     l'hem de canviar.
   · La foto va en columna estreta a propòsit: així no s'amplia i no es veu tova.
 
-Ús:  python3 .github/scripts/generate-og-image.py
+Ús:  python3 .github/scripts/generate-og-image.py            → og-image.jpg
+     python3 .github/scripts/generate-og-image.py --campanya → og-prova-2018.jpg
+
+La variant `--campanya` fa la imatge de la prova del 19 de setembre, que és la
+que les tres portades ensenyen mentre dura. **Caduca el 20 de setembre**: aquell
+dia s'ha de treure `og-prova-2018.jpg` de les tres portades i deixar-hi
+`og-image.jpg` una altra vegada. Està apuntat a PENDENTS-WEB.md.
 """
 
 from pathlib import Path
@@ -33,6 +39,19 @@ NOM_1, NOM_2 = "CB GRUP", "BARNA"
 CLAIM = "Acadèmia i club de bàsquet base."
 SOTA_1 = "34 equips federats i paritat real entre la"
 SOTA_2 = "línia femenina i la masculina."
+
+# ---------- CONTINGUT DE LA CAMPANYA (--campanya) ----------
+# Res de números de places aquí: una imatge compartida per WhatsApp es queda
+# guardada a la conversa i el número canvia cada dia. El que no caduca en sis
+# dies és la crida i la data.
+C_FOTO = ROOT / "img" / "escoleta@2x.webp"
+C_EYEBROW = "PORTES OBERTES  ·  ESCOLETA"
+C_EYEBROW_2 = "LA NAU DEL CLOT  ·  BARCELONA"
+C_NOM_1, C_NOM_2 = "LES DEL", "2018"
+C_CLAIM = "Dissabte 19 de setembre, de 9 a 10.30 h."
+C_SOTA_1 = "Prova de bàsquet gratuïta per a noies"
+C_SOTA_2 = "nascudes el 2018. Places comptades."
+C_SORTIDA = "og-prova-2018.jpg"
 
 # ---------- SISTEMA ----------
 W, H = 1200, 630
@@ -58,12 +77,22 @@ def _tracked(draw, xy, text, font, fill, spacing):
     return x
 
 
-def build():
+def build(campanya=False):
+    foto = C_FOTO if campanya else FOTO
+    eyebrow = C_EYEBROW if campanya else EYEBROW
+    eyebrow_2 = C_EYEBROW_2 if campanya else EYEBROW_2
+    nom_1 = C_NOM_1 if campanya else NOM_1
+    nom_2 = C_NOM_2 if campanya else NOM_2
+    claim = C_CLAIM if campanya else CLAIM
+    sota_1 = C_SOTA_1 if campanya else SOTA_1
+    sota_2 = C_SOTA_2 if campanya else SOTA_2
+    sortida = C_SORTIDA if campanya else "og-image.jpg"
+
     im = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(im)
 
     # Foto: retall ancorat a DALT perquè el cap no es toqui mai.
-    ph = Image.open(FOTO).convert("RGB")
+    ph = Image.open(foto).convert("RGB")
     pw, phh = ph.size
     ratio = COL_FOTO / H
     if pw / phh > ratio:
@@ -84,13 +113,13 @@ def build():
     logo.thumbnail((62, 62), Image.LANCZOS)
     im.paste(logo, (MARGIN, 50), logo)
 
-    _tracked(d, (MARGIN + 80, 52), EYEBROW, inter_b(15), RED, 3.4)
-    _tracked(d, (MARGIN + 80, 76), EYEBROW_2, inter(15), MUTED, 3.0)
+    _tracked(d, (MARGIN + 80, 52), eyebrow, inter_b(15), RED, 3.4)
+    _tracked(d, (MARGIN + 80, 76), eyebrow_2, inter(15), MUTED, 3.0)
 
     # El nom, col·locat per la caixa real de cada línia i no a ull.
     f = anton(126)
     y = 158
-    for line in (NOM_1, NOM_2):
+    for line in (nom_1, nom_2):
         top, bottom = f.getbbox(line)[1], f.getbbox(line)[3]
         d.text((MARGIN, y - top), line, font=f, fill=INK)
         y += bottom - top + 12
@@ -100,16 +129,16 @@ def build():
     d.rectangle([MARGIN, y, MARGIN + 92, y + 5], fill=RED)
     y += 39
 
-    d.text((MARGIN, y), CLAIM, font=inter_b(22), fill=INK)
-    d.text((MARGIN, y + 32), SOTA_1, font=inter(22), fill=MUTED)
-    d.text((MARGIN, y + 61), SOTA_2, font=inter(22), fill=MUTED)
+    d.text((MARGIN, y), claim, font=inter_b(22), fill=INK)
+    d.text((MARGIN, y + 32), sota_1, font=inter(22), fill=MUTED)
+    d.text((MARGIN, y + 61), sota_2, font=inter(22), fill=MUTED)
 
     right = W - COL_FOTO - 56
     d.rectangle([MARGIN, H - 84, right, H - 83], fill=HAIRLINE)
     _tracked(d, (MARGIN, H - 58), "CBGRUPBARNA.INFO", inter_b(15), INK, 3.2)
     _tracked(d, (MARGIN + 322, H - 58), "@CBGRUPBARNA", inter(15), MUTED, 3.2)
 
-    out = ROOT / "og-image.jpg"
+    out = ROOT / sortida
     im.save(out, "JPEG", quality=90, optimize=True, progressive=True)
     print(f"[og] {out.relative_to(ROOT)} · {W}x{H} · "
           f"{out.stat().st_size // 1024} KB · foto a escala {escala:.2f}")
@@ -118,4 +147,5 @@ def build():
 
 
 if __name__ == "__main__":
-    build()
+    import sys
+    build(campanya="--campanya" in sys.argv)

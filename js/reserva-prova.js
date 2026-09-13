@@ -81,10 +81,15 @@
 
     var dia = form.querySelector('input[name="dia"]:checked');
     var msg = document.getElementById('rp-msg');
+    /* Qui ve amb una amiga ocupa dues places: el club ha de saber-ho abans,
+       no el dia de la prova. */
+    var amiga = document.getElementById('rp-amiga');
     var dades = {
       source: 'prova-escoleta',
       idioma: document.documentElement.lang,
       dia: dia ? dia.value : '',
+      amiga: amiga && amiga.checked ? 'si' : '',
+      places: amiga && amiga.checked ? 2 : 1,
       missatge: msg && msg.value.trim() ? msg.value.trim() : ''
     };
     camps.forEach(function (c) { dades[c.nom] = c.el.value.trim(); });

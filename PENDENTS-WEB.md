@@ -4,6 +4,30 @@ Auditoria del repositori a 14/08/2026, revisada amb les decisions de l'Ana.
 
 ---
 
+## ⏳ El 20 de setembre de 2026 · desmuntar la campanya del 2018
+
+La campanya de la prova de les noies del 2018 té data de caducitat. L'endemà de
+la prova, aquestes quatre coses han de deixar d'estar a la portada, o el web
+estarà anunciant una cosa que ja ha passat (és la regla 5 del sistema visual:
+res caducat a la portada).
+
+1. **La imatge de compartir.** A `index.html`, `es/index.html` i `en/index.html`,
+   les cinc línies que diuen `og-prova-2018.jpg` tornen a dir `og-image.jpg`
+   (`og:image`, `og:image:secure_url`, `twitter:image` i els dos `…:alt`).
+2. **El comptador.** El bloc `#compte-2018` de les tres portades: o fora, o
+   substituït per la foto de grup del dia, que és el que la campanya prometia.
+3. **El ticker.** Treure l'ítem «Noies del 2018 · Prova el 19 de setembre» de
+   les tres portades.
+4. **La secció `#prova-2018`.** Pot quedar-s'hi uns dies com a arxiu —«això va
+   passar»— però el formulari de reserva s'ha de treure o apuntar a les portes
+   obertes generals, no a una data passada.
+
+El que **no** s'ha de tocar: la secció `#noies-2018` de `/escoleta/`, l'article
+del blog i les preguntes freqüents. Allò explica per què el club va a buscar un
+any de naixement, i això no caduca.
+
+---
+
 ## ✅ Fet
 
 ### 1. Els tres enllaços trencats del Premi Dona i Esport

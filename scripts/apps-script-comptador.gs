@@ -19,7 +19,10 @@
  *
  * Per això el número final és:
  *
- *     reserves del web  +  les que s'apunten a mà a la pestanya «Comptador»
+ *     places reservades pel web  +  les que s'apunten a mà a «Comptador»
+ *
+ * I una reserva pot valer dues places: qui marca «ve amb una amiga» al
+ * formulari ocupa dues, i el comptador les descompta totes dues.
  *
  * ─── COM ES POSA EN MARXA (10 minuts, una sola vegada) ────────────────────
  *  1. Obre el full de càlcul on cauen els formularis del web.
@@ -89,15 +92,25 @@ function compta() {
     var files = fulla.getDataRange().getValues();
     var cap = files.length ? files[0].map(normalitza) : [];
     var iData = indexDe(cap, ['data']);
-    var iAny = indexDe(cap, ['any', 'any de naixement']);
+    var iAny = indexDe(cap, ['any', 'anydenaixement']);
     var iFont = indexDe(cap, ['origen', 'source', 'font']);
+    /* Qui marca «ve amb una amiga» ocupa dues places, no una. Si el full
+       encara no té aquesta columna, cada fila compta com una plaça. */
+    var iPlaces = indexDe(cap, ['places']);
+    var iAmiga = indexDe(cap, ['amiga']);
 
     for (var i = 1; i < files.length; i++) {
       var f = files[i];
       var font = iFont >= 0 ? String(f[iFont]).trim() : '';
       if (!esDelMes(iData >= 0 ? f[iData] : null)) continue;
-      if (SOURCES_SETEMBRE.indexOf(font) >= 0) webSetembre++;
-      if (font === SOURCE_PROVA && iAny >= 0 && String(f[iAny]).trim() === ANY_GRUP) web2018++;
+
+      var places = 1;
+      if (iPlaces >= 0 && parseInt(f[iPlaces], 10) > 0) places = parseInt(f[iPlaces], 10);
+      else if (iAmiga >= 0 && String(f[iAmiga]).trim()) places = 2;
+      places = Math.min(4, places);           // ningú reserva mitja classe
+
+      if (SOURCES_SETEMBRE.indexOf(font) >= 0) webSetembre += places;
+      if (font === SOURCE_PROVA && iAny >= 0 && String(f[iAny]).trim() === ANY_GRUP) web2018 += places;
     }
   }
 

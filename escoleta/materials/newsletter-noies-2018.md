@@ -106,3 +106,51 @@ Nos vemos en la Nau.
 **Peu de post (ca):** Un equip no es fa amb bones intencions: es fa amb prou
 jugadores del mateix any. Estem fent el grup del 2018 i la pista és oberta el
 dissabte 19. Reserva la prova al web (enllaç a la bio).
+
+---
+
+## Calendari de publicació · del 13 al 20 de setembre
+
+Tot el que s'ha de publicar fins a la prova, escrit. La regla: **una story
+diària amb el número, i només tres peces produïdes**. El contingut car es
+reserva per als moments que ho mereixen.
+
+| Dia | Peça | Text |
+|---|---|---|
+| **Ds 13** | Story | «Queden 3 places per a les del 2018. Dissabte que ve entrenen amb nosaltres. Enllaç a la bio.» |
+| **Dg 14** | Newsletter | El correu d'aquest mateix fitxer |
+| **Dl 15** | **Reel** | «El primer bot» · com és una sessió de l'Escoleta, 20-30 s |
+| **Dt 16** | Story | «Queden N places · falten 3 dies» + enquesta «La teva filla és del 2018?» |
+| **Dc 17** | **Vídeo d'en Julio**, 20 s a càmera | Guió a sota |
+| **Dj 18** | Story | «Demà. Queden N places.» + compte enrere d'Instagram |
+| **Dv 19** | Stories en directe | Abans: la pista buida. Durant: 3-4 clips. Després: la colla |
+| **Ds 20** | **Reel** del dia | Cares, no gràfics. I la frase final del club |
+
+### El guió d'en Julio (Dc 17, 20 segons, mòbil vertical)
+
+> «Sóc en Julio, vaig fundar aquest club el 1965 i encara entreno l'Escoleta cada
+> dissabte. Aquest any busquem nenes del 2018 perquè el grup pugui entrenar
+> junt tota la temporada. No cal que en sàpiga: aquí tothom va començar igual.
+> Dissabte a les nou, a La Nau del Clot. T'hi esperem.»
+
+Frase a la pantalla els dos primers segons: **«Vaig fundar el club el 1965.»**
+
+### Peus de post
+
+**Reel del 15 (ca):**
+> El primer bot d'una jugadora de Supercopa és igual que el de qualsevol altra
+> criatura: malament, amb dues mans i mirant-se la pilota. Això és una sessió de
+> l'Escoleta. Dissabte 19 obrim la pista a les nenes del 2018 — places comptades,
+> reserva al web (enllaç a la bio). 🔴⚫ #SomClot
+
+**Reel del 20 (ca):**
+> Dissabte van venir. No sabien botar, no es coneixien, i van acabar rient les
+> unes de les altres. Això és l'Escoleta. Gràcies a les famílies que us hi vau
+> atrevir. 🔴⚫ #SomClot
+
+### Què mirar el dilluns 21
+
+1. Places del 2018 cobertes de les 5.
+2. Quantes segueixen entrenant el 15 d'octubre. **És l'única xifra que importa.**
+3. Dels reels: % d'abast a NO-seguidors i seguidors nous.
+4. Del web: formularis començats contra formularis enviats.
