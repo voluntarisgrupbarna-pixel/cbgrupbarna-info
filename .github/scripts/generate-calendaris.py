@@ -273,6 +273,10 @@ def pagina_jornada(etiqueta, files, equips_nom, equips_comp, pag_idx, n_pags, te
     dr.text((MARGIN + 23, y + 11), label, font=f_pill, fill=PAPER)
     y += 74
 
+    # La graella arrenca sempre just sota la píndola, també quan hi ha pocs
+    # partits: provat de centrar-la verticalment i amb dos resultats queda
+    # un bloc surant al mig amb forat a dalt i a baix. Alineada a dalt, com
+    # el cartell de la jornada, es llegeix com una llista i el peu tanca.
     row_h = min(112.0, (H - y - 130) / max(1, len(files)))
     f_h = font(F_ANTON, 22)
     f_eq = font(F_BOLD, 19)
@@ -483,6 +487,12 @@ def genera_resultats(data, temporada):
     """El cartell de resultats de cada DIA ja jugat: mateix format que el
     de la jornada (escuts, equip, rival i categoria) però amb el marcador a
     la dreta. Només els dies amb algun resultat publicat per la FCBQ.
+
+    Hi surten NOMÉS els partits que ja tenen marcador. Els que encara es
+    juguen no hi apareixen: el cartell del diumenge al migdia porta els del
+    matí i prou, i es torna a dibuixar sencer quan arriben els de la tarda.
+    Així sempre és publicable —mai amb forats— i no cal esperar al dilluns.
+
     Retorna el bloc per al manifest ("_resultats")."""
     equips_nom = {e["id"]: e.get("nom") or e.get("curt") or e["id"]
                   for e in data.get("equips", [])}
@@ -495,12 +505,11 @@ def genera_resultats(data, temporada):
     (OUT_IMG / "jornades").mkdir(exist_ok=True)
     sortida = []
     for iso in sorted(per_dia):
-        partits = sorted(per_dia[iso], key=lambda p: p["hora"])
-        # El cartell surt quan la jornada ja té algun marcador: dissabte a
-        # la tarda amb els de dissabte, diumenge amb els de diumenge.
-        if not any(p.get("puntsLocal") is not None and p.get("puntsVisitant") is not None
-                   for p in partits):
+        jugats = [p for p in per_dia[iso]
+                  if p.get("puntsLocal") is not None and p.get("puntsVisitant") is not None]
+        if not jugats:
             continue
+        partits = sorted(jugats, key=lambda p: p["hora"])
         etiqueta = dia_llarg(iso)
         files = [("partit", p) for p in partits]
         n_pags = -(-len(files) // JORNADA_MAX)
@@ -680,10 +689,12 @@ def main():
     # recull un resultat nou, el cartell es redibuixa tot sol.
     try:
         h_r = hashlib.sha1(json.dumps(
-            # disseny 2 (07/09/2026): només es marca la victòria i s'hi afegeix
-            # la portada del carrusel. Pujar-lo és el que fa que els cartells
-            # ja publicats es tornin a dibuixar amb el disseny nou.
-            {"disseny": 3, "temporada": temporada,
+            # disseny 3 (07/09/2026): només es marca la victòria i s'hi afegeix
+            # la portada del carrusel. disseny 4 (13/09/2026): al cartell hi
+            # surten només els partits ja jugats, cap fila «PENDENT». Pujar el
+            # número és el que fa que els cartells ja publicats es tornin a
+            # dibuixar amb el disseny nou.
+            {"disseny": 4, "temporada": temporada,
              "partits": [{"data": p["data"], "hora": p["hora"], "casa": p["casa"],
                           "local": p["local"], "visitant": p["visitant"],
                           "equipId": p["equipId"],

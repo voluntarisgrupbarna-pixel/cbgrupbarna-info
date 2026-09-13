@@ -638,3 +638,36 @@ automàtic. Les sortides legítimes són tres:
 > Val la pena reintentar-ho uns dies abans de donar el robot per mort: pot
 > ser una protecció que s'activa per pics de trànsit i no una decisió
 > permanent.
+
+### 13/09/2026 · Reintentat: el captcha hi segueix
+
+Provat des de fora del robot, amb navegador simulat i seguint redireccions:
+
+| URL | Resposta |
+|---|---|
+| `/club/24` | 302 → `/security-check` (reCAPTCHA) |
+| `/club/24/calendari` | 403 |
+| `/resultats` | 403 |
+
+`partits/canvis.json` d'aquell dia: `connexioOk: false`. Cap dels 12 partits
+del 12 i 13 de setembre tenia marcador. La sortida 3 (que el robot avisi) és
+el PR #154; la 1 (demanar accés a la FCBQ) segueix sense fer-se i és l'única
+que torna a deixar-ho automàtic.
+
+## 13/09/2026 · Els resultats surten el mateix dia, no l'endemà
+
+El bloc «Resultats» de `/partits/` repartia els partits per data: `data <
+avui` eren resultats i la resta, propers. Diumenge al migdia, doncs, els
+partits del matí ja jugats seguien a «Aquest cap de setmana» i el bloc de
+resultats només ensenyava el dissabte. Fins dilluns no sortia res del
+diumenge.
+
+Ara el repartiment és per **partit jugat**, no per data: compta com a jugat
+si té marcador o si fa més de dues hores que va començar. I el cartell de
+resultats de cada dia hi porta **només els partits amb marcador** — res de
+files «PENDENT»: el del diumenge al migdia surt amb els del matí, i es
+redibuixa sencer quan arriben els de la tarda. Un enllaç de descàrrega per
+dia, com abans.
+
+Perquè surti res, però, hi ha d'haver marcadors: amb el captcha posat, o
+s'entren a `/partits/` → Gestió o no n'hi ha.
