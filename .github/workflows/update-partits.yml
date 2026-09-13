@@ -36,6 +36,12 @@ name: update-partits
 # el resum estàtic SEO de partits/index.html, les versions ES/EN, les FAQ,
 # els .ics per equip, les pàgines pròpies per equip i l'índex del cercador.
 #
+# VIA MANUAL DE 10 SEGONS (l'única que la FCBQ no bloqueja avui): des del
+# navegador d'Ana, el marcador "Resultats → web" agafa la fitxa de resultats de
+# basquetcatala.cat/club/24 i la porta a /partits/resultats-fcbq/, que la puja a
+# partits/fcbq-resultats.html. Aquest push dispara el workflow, que aplica els
+# marcadors amb el mateix update-resultats.py (--fitxer) i regenera tot.
+#
 # Es pot llançar a mà des de la pestanya Actions (workflow_dispatch), triant
 # el mode: complet (per defecte) o resultats.
 
@@ -43,6 +49,9 @@ on:
   schedule:
     - cron: "0 6 * * *"            # robot complet, diari
     - cron: "*/30 8-23 * * 6,0"    # cap de setmana: finestra migdia + final del dia (hora BCN)
+  push:
+    branches: [main]
+    paths: ["partits/fcbq-resultats.html"]   # fitxa pujada des de /partits/resultats-fcbq/
   workflow_dispatch:
     inputs:
       mode:
@@ -75,8 +84,11 @@ jobs:
 
       - name: Instal·lar dependències
         if: steps.finestra.outputs.run == 'true'
+        run: pip install --quiet pillow pyyaml
+      - name: Navegador per passar la verificació de seguretat de la FCBQ
+        if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode != 'fitxer'
         run: |
-          pip install --quiet pillow pyyaml playwright
+          pip install --quiet playwright
           python -m playwright install --with-deps chromium
 
       - name: Baixar i comparar el calendari FCBQ (robot complet)
@@ -86,6 +98,10 @@ jobs:
       - name: Afegir només els resultats de la setmana (fitxa del club)
         if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode == 'resultats'
         run: python .github/scripts/update-resultats.py
+
+      - name: Aplicar la fitxa de resultats pujada des del navegador
+        if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode == 'fitxer'
+        run: python .github/scripts/update-resultats.py --fitxer partits/fcbq-resultats.html
 
       - name: Regenerar fitxes de calendari per equip
         if: steps.finestra.outputs.run == 'true'
@@ -129,7 +145,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Sense canvis"
           else
-            if [ "$MODE" = "resultats" ]; then
+            if [ "$MODE" = "resultats" ] || [ "$MODE" = "fitxer" ]; then
               git commit -m "partits: resultats del dia (fitxa FCBQ) [skip ci]"
             else
               git commit -m "partits: actualitzacio diaria FCBQ [skip ci]"

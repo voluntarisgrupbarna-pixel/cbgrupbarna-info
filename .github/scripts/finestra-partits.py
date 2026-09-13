@@ -19,6 +19,9 @@ partits/data.json, si TOCA fer una passada i de quin tipus:
                      hora fins que tots els partits del dia tenen resultat o
                      s'acaba el cron. Així "quan acaben els partits" és
                      literal, encara que la federació trigui a penjar-los.
+  · fitxer    → algú ha pujat la fitxa de resultats des del navegador
+                (/partits/resultats-fcbq/ → partits/fcbq-resultats.html): el
+                workflow s'ha disparat pel push i s'apliquen aquells resultats.
   · res       → fora de finestra, o no hi ha partits avui, o ja tenim tots
                 els resultats. El workflow acaba sense fer res (uns segons).
 
@@ -45,6 +48,8 @@ HORA_UTC_DIARI = 6              # cron del robot complet ("0 6 * * *")
 
 def decideix(ara_local, ara_utc, event, mode_forcat, partits):
     """Torna (run, mode, motiu). Pura, per poder-la provar."""
+    if event == "push":
+        return True, "fitxer", "fitxa de resultats pujada des del navegador"
     if event == "workflow_dispatch":
         mode = mode_forcat if mode_forcat in ("complet", "resultats") else "complet"
         return True, mode, "llançat a mà"

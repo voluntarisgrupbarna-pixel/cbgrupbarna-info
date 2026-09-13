@@ -19,6 +19,12 @@ Es llança els caps de setmana al migdia i quan acaba l'últim partit del dia
 (vegeu finestra-partits.py i update-partits.yml). Si la federació encara no
 ha penjat un resultat, simplement no hi ha res nou i no es fa cap commit.
 
+També accepta la fitxa de resultats ENGANXADA des del navegador d'Ana:
+    python update-resultats.py --fitxer partits/fcbq-resultats.html
+Aquest fitxer el puja la pàgina /partits/resultats-fcbq/ (via el marcador
+"Resultats → web" des de basquetcatala.cat), perquè el reCAPTCHA de la FCBQ
+no deixa passar navegadors automatitzats però sí el d'una persona.
+
 Defensiu com el diari: si no s'hi pot arribar o el format canvia, surt amb
 codi 0 sense tocar res.
 """
@@ -110,10 +116,16 @@ def aplica_resultats(data, resultats):
     return aplicats
 
 
-def main():
-    html = fcbq_client.fetch(URL_RESULTATS, "POST")
-    fcbq_client.close()
+def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
     avui = date.today().isoformat()
+    if len(argv) >= 2 and argv[0] == "--fitxer":
+        fitxer = ROOT / argv[1]
+        html = fitxer.read_text(encoding="utf-8", errors="replace") if fitxer.exists() else ""
+        print(f"[resultats] fitxa enganxada des del navegador: {argv[1]} ({len(html)} caràcters)")
+    else:
+        html = fcbq_client.fetch(URL_RESULTATS, "POST")
+        fcbq_client.close()
     if not html:
         print("[resultats] sense resposta de la FCBQ — no es toca res")
         _marca_comprovacio(avui, contactat=False)
