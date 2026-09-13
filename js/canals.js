@@ -65,4 +65,18 @@ window.CANALS = {
      NOU, compartit NOMÉS amb la Delegada de Protecció al Menor.
      Instruccions a /js/README-canals.md                            */
   proteccioEndpoint: '',
+
+
+  /* 5 · COMPTADOR DE LA CAMPANYA DE SETEMBRE ──────────────────────
+     Les xifres del bloc de la portada: places lliures del grup de
+     noies del 2018 i apuntats de portes obertes del setembre.
+
+     Mentre estigui buit, la portada pinta els números escrits a mà
+     als data- del bloc `#compte-2018` d'index.html (i de /es/ i
+     /en/). Funciona igual: només s'han de canviar a mà.
+
+     Per activar-lo: desplega scripts/apps-script-comptador.gs al
+     full on cauen els formularis —les instruccions són al capdamunt
+     d'aquell fitxer— i enganxa aquí l'URL que acaba en /exec.       */
+  comptadorEndpoint: '',
 };

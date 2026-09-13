@@ -81,3 +81,37 @@ inscripcions:
 - Si hi ha indici de risc per a un infant, es comunica a les autoritats encara
   que qui ho envia demani que no. Això la pàgina ja ho diu obertament: no és una
   lletra petita.
+
+---
+
+## 4 · Comptador de la campanya de setembre
+
+El bloc `#compte-2018` de les tres portades ensenya tres xifres: els **dies**
+que falten per a la prova, les **places lliures** del grup de noies del 2018 i
+els **apuntats** de portes obertes del setembre, amb la barra.
+
+- **Els dies no depenen de res**: els calcula `js/comptador.js` a partir de
+  `data-fins` del bloc. Quan arriba a zero s'atura.
+- **Les altres dues xifres** surten del full de reserves si `comptadorEndpoint`
+  està configurat a `js/canals.js`. Mentre estigui buit, el web pinta els
+  números escrits als `data-` del bloc: es canvien a mà i prou.
+
+### Per activar-lo
+
+1. Desplega `scripts/apps-script-comptador.gs` al full on cauen els formularis.
+   Les instruccions, pas a pas, són al capdamunt d'aquell fitxer.
+2. Crea-hi la pestanya **«Comptador»** amb les quatre claus que hi diu
+   (`grup2018`, `fora2018`, `placesSetembre`, `foraSetembre`).
+3. Enganxa l'URL `/exec` a `comptadorEndpoint`.
+
+### Per què hi ha una pestanya manual
+
+Perquè no tothom reserva pel web: hi ha famílies que ho fan pel WhatsApp del
+club o parlant amb en Julio a la pista. Aquelles reserves s'apunten a
+`fora2018` / `foraSetembre` i el comptador les suma. Un comptador que diu que
+queden places que ja no hi són fa més mal que no tenir-ne cap.
+
+### Si la crida falla
+
+No passa res: els números que ja hi ha escrits a l'HTML es queden. La pàgina no
+ensenya mai un «carregant…» penjat ni un zero que no és cert.

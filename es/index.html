@@ -1023,11 +1023,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
           <div class="compte" id="compte-2018" data-fins="2026-09-19"
                data-lliures="3" data-grup="5" data-apuntats="45" data-places="50">
             <div class="compte-xifres">
-              <p class="compte-x"><b data-dies>9</b><span>Días para la prueba</span></p>
-              <p class="compte-x ara"><b>3</b><span>Plazas libres para las de 2018 · de 5</span></p>
-              <p class="compte-x places"><b>90%</b><span>45 de 50 plazas de septiembre</span></p>
+              <p class="compte-x"><b data-dies>6</b><span>Días para la prueba</span></p>
+              <p class="compte-x ara"><b data-lliures-n>3</b><span>Plazas libres para las de 2018 · de <span data-grup-n>5</span></span></p>
+              <p class="compte-x places"><b data-pct>90%</b><span><span data-apuntats-n>45</span> de <span data-places-n>50</span> plazas de septiembre</span></p>
             </div>
-            <div class="compte-barra" role="img" aria-label="45 / 50 · 90% lleno"><i style="width:90%"></i></div>
+            <div class="compte-barra" role="img" aria-label="45 / 50 · 90%"><i style="width:90%"></i></div>
             <p class="compte-peu">Las plazas de 2018 son las de la sesión del sábado 19. El resto de edades tienen todo septiembre de puertas abiertas.</p>
           </div>
           <p class="p2018-mes">Si el 19 no os va bien, todo septiembre son <a href="/es/puertas-abiertas/">puertas abiertas</a>: dínoslo en el formulario y te damos otro día. Toda la información de <a href="/es/escoleta/">la Escoleta</a>.</p>
@@ -1904,25 +1904,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: 0.2e
   });
 })();
 </script>
+<!-- canals.js ha d'anar davant: hi viuen els endpoints dels formularis. -->
+<script src="/js/canals.js" defer></script>
 <script src="/js/reserva-prova.js" defer></script>
-<script>
-  /* El comptador de la campanya: els dies els compta el navegador des de
-     la data del bloc; les places i els apuntats surten dels data-, que és
-     l'únic lloc on es toquen. */
-  (function () {
-    var c = document.getElementById('compte-2018');
-    if (!c) return;
-    var fins = c.getAttribute('data-fins');
-    var el = c.querySelector('[data-dies]');
-    if (!fins || !el) return;
-    var avui = new Date(); avui.setHours(0, 0, 0, 0);
-    var dia = new Date(fins + 'T00:00:00');
-    var dies = Math.round((dia - avui) / 86400000);
-    if (dies > 0) el.textContent = dies;
-    else if (dies === 0) { el.textContent = '0'; c.setAttribute('data-avui', 'si'); }
-    else el.textContent = '0';
-  })();
-</script>
+<script src="/js/comptador.js" defer></script>
 
 <script>
 /* El reel del hero · un iframe només quan algú el demana. */
