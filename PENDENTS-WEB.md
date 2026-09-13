@@ -600,3 +600,74 @@ emparellament automàtic, provant també el nom sense sufixos d'equip).
 119 de 120 rivals amb escut; l'únic sense (CB Mollet B) surt amb
 inicials. Per afegir-ne un: PNG a `partits/logos/clubs/`, alta a
 `index.json` i, si cal, l'àlies a `alias.json`.
+
+---
+
+## 07-09-2026 · El robot de la FCBQ està bloquejat per un captcha
+
+**La federació ha posat una verificació de seguretat amb reCAPTCHA.**
+`basquetcatala.cat` respon **HTTP 403 · «Verificació de seguretat · Bàsquet
+Català»** a qualsevol petició automàtica, tant a `/club/24` com a les dues
+adreces que consulta el robot (`calendari_club_global/24` i
+`calendari_club_mensual/24`).
+
+**Conseqüència:** `update-partits.py` no pot portar resultats. Els de la
+jornada 1 s'han entrat a mà.
+
+**I no ho diu ningú.** El robot és defensiu a propòsit —si no troba cap
+partit, surt amb codi 0 i no toca el fitxer, perquè val més quedar-se amb
+les dades velles que esborrar-les— però **surt en verd**. A GitHub Actions
+un workflow que no fa res i un que funciona es veuen igual. Aquesta és la
+part que cal arreglar, més que el robot mateix.
+
+### El captcha no es pot saltar, i no s'ha d'intentar
+
+És exactament la mesura que la federació ha posat per barrar l'accés
+automàtic. Les sortides legítimes són tres:
+
+1. **Demanar accés a la FCBQ** (una API, una clau, o que posin el club a la
+   llista blanca). És l'única que torna a deixar el robot com estava.
+2. **La via manual que ja existeix**: `/partits/` → Gestió permet pujar el
+   PDF de la federació i entrar resultats a mà.
+3. **Que el robot avisi quan no pot entrar**, en comptes de callar: si no
+   troba cap partit dos dies seguits, que deixi una incidència al
+   repositori (com fa `i18n-tradueix.yml`) o un avís al panell d'`/admin/`.
+   Avui `partits/canvis.json` ja hi desa `connexioOk: false`, però no ho
+   llegeix ningú.
+
+> Val la pena reintentar-ho uns dies abans de donar el robot per mort: pot
+> ser una protecció que s'activa per pics de trànsit i no una decisió
+> permanent.
+
+### 13/09/2026 · Reintentat: el captcha hi segueix
+
+Provat des de fora del robot, amb navegador simulat i seguint redireccions:
+
+| URL | Resposta |
+|---|---|
+| `/club/24` | 302 → `/security-check` (reCAPTCHA) |
+| `/club/24/calendari` | 403 |
+| `/resultats` | 403 |
+
+`partits/canvis.json` d'aquell dia: `connexioOk: false`. Cap dels 12 partits
+del 12 i 13 de setembre tenia marcador. La sortida 3 (que el robot avisi) és
+el PR #154; la 1 (demanar accés a la FCBQ) segueix sense fer-se i és l'única
+que torna a deixar-ho automàtic.
+
+## 13/09/2026 · Els resultats surten el mateix dia, no l'endemà
+
+El bloc «Resultats» de `/partits/` repartia els partits per data: `data <
+avui` eren resultats i la resta, propers. Diumenge al migdia, doncs, els
+partits del matí ja jugats seguien a «Aquest cap de setmana» i el bloc de
+resultats només ensenyava el dissabte. Fins dilluns no sortia res del
+diumenge.
+
+Ara el repartiment és per **partit jugat**, no per data: compta com a jugat
+si té marcador o si fa més de dues hores que va començar. I el cartell de
+resultats de cada dia hi porta **només els partits amb marcador** — res de
+files «PENDENT»: el del diumenge al migdia surt amb els del matí, i es
+redibuixa sencer quan arriben els de la tarda. Un enllaç de descàrrega per
+dia, com abans.
+
+Perquè surti res, però, hi ha d'haver marcadors: amb el captcha posat, o
+s'entren a `/partits/` → Gestió o no n'hi ha.
