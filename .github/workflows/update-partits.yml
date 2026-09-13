@@ -1,44 +1,62 @@
 name: update-partits
 
-# Robot FCBQ: cada dia a les 06:00 UTC (8:00 a Barcelona en horari d'estiu;
-# 7:00 en horari d'hivern — GitHub Actions només programa en UTC, no hi ha
-# manera de seguir el canvi d'hora espanyol amb un sol cron) es connecta a
-# basquetcatala.cat (calendari global i mensual del club 24), compara amb
-# partits/data.json i actualitza hores, pistes, dates i resultats. Els
-# canvis queden marcats a cada partit (rètol "MODIFICAT" durant 7 dies) i
-# registrats a partits/canvis.json perquè la app els mostri i perquè la
-# rutina diària n'informi. Després, regenera les fitxes descarregables de
-# /partits/calendaris/ (una imatge o PDF per equip): només es torna a
-# dibuixar la fitxa d'un equip si les seves dades han canviat de debò.
-# Finalment, torna a escriure el resum estàtic (SEO/SEO-IA) de propers
-# partits, resultats i JSON-LD dins partits/index.html i els enllaços de
-# descàrrega dins partits/calendaris/index.html, perquè els bots que no
-# executen JavaScript vegin dades reals i actuals. També regenera un
-# calendari .ics per equip (partits/calendaris/ics/) perquè les famílies
-# s'hi subscriguin des de Google/Apple/Outlook i rebin sols els canvis. I
-# genera una pàgina estàtica pròpia per equip a partits/equips/{id}/ (més
-# un índex a partits/equips/), amb el nom, la competició, el balanç i el
-# calendari com a HTML real i indexable, no només dins l'estat de l'app.
+# Robot FCBQ · dues passades diferents sobre basquetcatala.cat (club 24):
 #
-# Cap de setmana, quan hi ha partits, es repeteix cada 20 minuts entre les
-# 08:00 i les 22:00 (hora de Barcelona, aprox. — GitHub Actions treballa en
-# UTC) per intentar recollir els resultats abans, amb una passada garantida
-# a les 22:00 el diumenge perquè els resultats de la tarda tinguin temps de
-# publicar-se. És un intent de màxim esforç: si la federació no ha penjat
-# encara el resultat, simplement no hi ha res nou i no es fa cap commit.
+# 1) ROBOT COMPLET, cada dia a les 06:00 UTC (8:00 a Barcelona a l'estiu, 7:00
+#    a l'hivern). Baixa el calendari global i mensual del club, el compara
+#    amb partits/data.json i actualitza hores, pistes, dates, partits nous i
+#    resultats. Els canvis queden marcats a cada partit (rètol "MODIFICAT"
+#    durant 7 dies) i registrats a partits/canvis.json.
 #
-# Si la federació no respon o bloqueja el robot, no passa res: la via manual
-# de /partits/ → Gestió segueix activa i no es toca res.
-# També es pot llançar a mà des de la pestanya Actions (workflow_dispatch).
+# 2) NOMÉS RESULTATS, els dies de partit (dissabte i diumenge), en hora de
+#    Barcelona: al MIGDIA (13:00-14:00) i QUAN ACABA L'ÚLTIM PARTIT del dia
+#    (hora d'inici + 1h45), repetint cada mitja hora fins que tots els
+#    partits del dia tenen marcador. Llegeix la fitxa "Resultats de l'última
+#    setmana" de la pàgina del club (POST /club/24/resultats) i només omple
+#    els marcadors dels partits que ja tenim: no toca hores, pistes ni
+#    dates, no afegeix partits ni marca "MODIFICAT". La fitxa de calendari
+#    de cada equip es reaprofita tal com està i només s'hi afegeixen els
+#    resultats.
+#
+# Com que GitHub Actions només programa en UTC (i amb retard), el cron del
+# cap de setmana es dispara cada 30 minuts i és .github/scripts/
+# finestra-partits.py qui decideix, mirant data.json i l'hora de Barcelona,
+# si toca fer una passada i de quin tipus. Fora de finestra el workflow
+# acaba en pocs segons sense instal·lar res.
+#
+# Des del setembre de 2026 la FCBQ té una "verificació de seguretat"
+# (reCAPTCHA) davant de totes les pàgines. Les baixades passen per
+# .github/scripts/fcbq_client.py, que primer ho prova en directe i, si
+# troba la verificació, obre un Chromium headless (Playwright) sense cap
+# disfressa i deixa que la federació decideixi. Si no deixa passar el robot,
+# no es toca res i la via manual de /partits/ → Gestió segueix activa.
+#
+# Després de cada passada amb canvis es regeneren: les fitxes de calendari
+# per equip (/partits/calendaris/, només les dels equips que han canviat),
+# el resum estàtic SEO de partits/index.html, les versions ES/EN, les FAQ,
+# els .ics per equip, les pàgines pròpies per equip i l'índex del cercador.
+#
+# Es pot llançar a mà des de la pestanya Actions (workflow_dispatch), triant
+# el mode: complet (per defecte) o resultats.
 
 on:
   schedule:
-    - cron: "0 6 * * *"
-    - cron: "*/20 7-20 * * 6,0"
+    - cron: "0 6 * * *"            # robot complet, diari
+    - cron: "*/30 8-23 * * 6,0"    # cap de setmana: finestra migdia + final del dia (hora BCN)
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "Passada: complet (calendari + resultats) o resultats (només marcadors)"
+        type: choice
+        default: complet
+        options: [complet, resultats]
 
 permissions:
   contents: write
+
+concurrency:
+  group: update-partits
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -48,33 +66,62 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Toca fer passada? (hora de Barcelona + partits d'avui)
+        id: finestra
+        env:
+          INPUT_MODE: ${{ inputs.mode }}
+        run: python .github/scripts/finestra-partits.py
+
       - name: Instal·lar dependències
-        run: pip install --quiet pillow pyyaml
-      - name: Baixar i comparar el calendari FCBQ
+        if: steps.finestra.outputs.run == 'true'
+        run: |
+          pip install --quiet pillow pyyaml playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Baixar i comparar el calendari FCBQ (robot complet)
+        if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode == 'complet'
         run: python .github/scripts/update-partits.py
+
+      - name: Afegir només els resultats de la setmana (fitxa del club)
+        if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode == 'resultats'
+        run: python .github/scripts/update-resultats.py
+
       - name: Regenerar fitxes de calendari per equip
+        if: steps.finestra.outputs.run == 'true'
         run: python .github/scripts/generate-calendaris.py
       - name: Actualitzar resum estàtic per a SEO / SEO-IA
+        if: steps.finestra.outputs.run == 'true'
         run: python .github/scripts/generate-seo-snapshot.py
       - name: Escuts dels rivals per a la pàgina de partits
+        if: steps.finestra.outputs.run == 'true'
         run: python scripts/build-escuts-rivals.py
       # Ha d'anar just després: /es/partits/ i /en/partits/ es generen a partir
       # de la catalana, i si no, es queden amb la instantània del dia abans.
       - name: Regenerar Dies de partit en castellà i anglès
+        if: steps.finestra.outputs.run == 'true'
         run: python scripts/build-partits-idiomes.py
       - name: Les FAQ de /partits/ en el seu idioma (el traductor de pàgina no les sap)
+        if: steps.finestra.outputs.run == 'true'
         run: python .github/scripts/generate-faq.py
       - name: Regenerar calendaris .ics per equip
+        if: steps.finestra.outputs.run == 'true'
         run: python .github/scripts/generate-ics.py
       - name: Regenerar pàgines pròpies per equip
+        if: steps.finestra.outputs.run == 'true'
         run: python .github/scripts/generate-team-pages.py
 
       # Les fitxes d'equip que s'acaben de generar també s'han de poder
       # cercar. Aquest commit porta [skip ci], o sigui que el workflow del
       # sitemap no s'engegarà: l'índex s'ha de refer aquí mateix.
       - name: Refer l'índex del cercador
+        if: steps.finestra.outputs.run == 'true'
         run: python .github/scripts/generate-search-index.py
+
       - name: Commit si hi ha canvis
+        if: steps.finestra.outputs.run == 'true'
+        env:
+          MODE: ${{ steps.finestra.outputs.mode }}
         run: |
           git config user.name "cbgb-robot"
           git config user.email "cbgrupbarna@gmail.com"
@@ -82,6 +129,11 @@ jobs:
           if git diff --cached --quiet; then
             echo "Sense canvis"
           else
-            git commit -m "partits: actualitzacio diaria FCBQ [skip ci]"
+            if [ "$MODE" = "resultats" ]; then
+              git commit -m "partits: resultats del dia (fitxa FCBQ) [skip ci]"
+            else
+              git commit -m "partits: actualitzacio diaria FCBQ [skip ci]"
+            fi
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
             git push
           fi

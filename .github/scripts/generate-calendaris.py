@@ -202,13 +202,35 @@ def pagina(equip, partits, pag_idx, n_pags, temporada):
 
         dt = f'{fmt_data(p["data"])} · {p["hora"]}'
         dr.text((tx, ry + 8), dt, font=f_dt, fill=MUTED)
-        rv = truncate(dr, rival(p), f_rv, W - MARGIN - tx - 130)
+
+        # La mateixa fitxa serveix tota la temporada: quan un partit ja s'ha
+        # jugat, s'hi AFEGEIX el marcador (i VICTÒRIA/DERROTA en comptes de
+        # CASA/FORA). La resta de la fila no canvia gens: la fitxa que les
+        # famílies tenen guardada es va omplint de resultats jornada a jornada.
+        pl, pv = p.get("puntsLocal"), p.get("puntsVisitant")
+        jugat = pl is not None and pv is not None
+        rv = truncate(dr, rival(p), f_rv, W - MARGIN - tx - (170 if jugat else 130))
         dr.text((tx, ry + 27), rv, font=f_rv, fill=INK)
 
-        tag = "CASA" if p["casa"] else "FORA"
-        tw = text_w(dr, tag, f_tag)
-        dr.text((W - MARGIN - tw, ry + row_h / 2 - 9), tag,
-                 font=f_tag, fill=RED_INK if p["casa"] else MUTED)
+        if jugat:
+            nostres, seus = (pl, pv) if p["casa"] else (pv, pl)
+            if nostres > seus:
+                color, tag = VERD, "VICTÒRIA"
+            elif nostres < seus:
+                color, tag = DERROTA, "DERROTA"
+            else:
+                color, tag = INK, "EMPAT"
+            marc = f"{pl} - {pv}"
+            f_marc = font(F_ANTON, 30)
+            mw = text_w(dr, marc, f_marc)
+            dr.text((W - MARGIN - mw, ry + 6), marc, font=f_marc, fill=color)
+            tw = text_w(dr, tag, f_tag)
+            dr.text((W - MARGIN - tw, ry + 44), tag, font=f_tag, fill=color)
+        else:
+            tag = "CASA" if p["casa"] else "FORA"
+            tw = text_w(dr, tag, f_tag)
+            dr.text((W - MARGIN - tw, ry + row_h / 2 - 9), tag,
+                     font=f_tag, fill=RED_INK if p["casa"] else MUTED)
 
     # ── peu ──
     fy = H - 96
@@ -468,13 +490,16 @@ def hash_equip(equip, partits, temporada):
     payload = {
         # Puja quan canvia el DIBUIX de la fitxa (no les dades), perquè
         # les fitxes velles no es quedin publicades amb l'aspecte antic.
-        "disseny": 5,
+        "disseny": 6,
         "temporada": temporada,
         "nom": equip["nom"],
         "competicio": equip.get("competicio") or "",
+        # Els punts hi són perquè la fitxa es torni a dibuixar quan arriba
+        # un resultat nou (és l'únic que hi afegeix el robot de resultats).
         "partits": [
             {"data": p["data"], "hora": p["hora"], "casa": p["casa"],
-             "local": p["local"], "visitant": p["visitant"]}
+             "local": p["local"], "visitant": p["visitant"],
+             "pl": p.get("puntsLocal"), "pv": p.get("puntsVisitant")}
             for p in partits
         ],
     }
