@@ -170,6 +170,8 @@
     .status-done { color: var(--green); }
     .status-error { color: #E20613; }
     .status-duplicate { color: #b8860b; }
+    .upload-item-error { font-size: .72rem; color: #E20613; margin-top: .25rem; white-space: normal; line-height: 1.35; }
+    .upload-item-error a { color: #E20613; font-weight: 600; text-decoration: underline; margin-left: .35rem; }
     .upload-item.is-duplicate { opacity: .55; }
     .progress-bar { height: 2px; background: var(--line); margin-top: .3rem; overflow: hidden; }
     .progress-fill { height: 100%; background: var(--red); transition: width .3s; }
@@ -380,6 +382,7 @@
         </svg>
         <span id="upload-btn-text">Pujar fotos</span>
       </button>
+      <button class="btn-zip" id="retry-btn" style="display:none" onclick="reintentarFallits()">Reintentar els fallits</button>
       <span class="upload-status-text" id="upload-status"></span>
     </div>
 
@@ -703,7 +706,7 @@ function showUploadPanel(ev) {
 }
 
 // ── GITHUB API ──
-async function gh(path, method = 'GET', body = null) {
+async function gh(path, method = 'GET', body = null, _intent = 0) {
   const url = path.startsWith('http') ? path : `https://api.github.com${path}`;
   const res = await fetch(url, {
     method,
@@ -717,10 +720,38 @@ async function gh(path, method = 'GET', body = null) {
   });
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`GitHub API ${res.status}: ${text}`);
+    // Límit de peticions (GitHub en posa un de «secundari» quan es puja molt
+    // seguit) o caiguda puntual: esperem el que ens diu i tornem a provar.
+    const limit = res.status === 429 || (res.status === 403 && /rate limit|abuse|secondary/i.test(text));
+    if ((limit || res.status >= 500) && _intent < 3) {
+      const ra = parseInt(res.headers.get('retry-after') || '', 10);
+      const ms = (Number.isFinite(ra) && ra > 0 ? ra : 60 * (_intent + 1)) * 1000;
+      ghAvis(`GitHub demana esperar ${Math.round(ms / 1000)} s (límit de peticions)… es reprèn sol`);
+      await new Promise(r => setTimeout(r, ms));
+      ghAvis('');
+      return gh(path, method, body, _intent + 1);
+    }
+    throw new Error(explicaErrorGitHub(res.status, text));
   }
   if (res.status === 204) return null;
   return res.json();
+}
+
+function ghAvis(msg) {
+  const el = document.getElementById('upload-status');
+  if (el && msg) el.textContent = msg;
+}
+
+// Tradueix la resposta de GitHub a una frase que digui què cal fer.
+function explicaErrorGitHub(status, text) {
+  const curt = (text || '').replace(/\s+/g, ' ').slice(0, 140);
+  if (status === 401) return 'El token de GitHub ha caducat o no és vàlid: surt i torna a entrar amb un token nou.';
+  if (status === 403 && /rate limit|abuse|secondary/i.test(text)) return 'GitHub ha limitat les peticions: espera 2-3 minuts i prem «Reintentar els fallits».';
+  if (status === 403 || status === 404) return 'El token no té permís d\'escriptura en aquest repositori (cal «Contents: Read and write»).';
+  if (status === 409) return 'Conflicte: algú altre ha escrit al repositori alhora. Prem «Reintentar els fallits».';
+  if (status === 413 || status === 422) return `GitHub no ha acceptat el fitxer (${status}): ${curt}`;
+  if (status >= 500) return 'GitHub no respon ara mateix: torna-ho a provar en uns minuts.';
+  return `GitHub API ${status}: ${curt}`;
 }
 
 async function getFileSHA(path) {
@@ -788,8 +819,37 @@ async function loadEvents() {
   renderEventsList();
 }
 
+// Àlbums esborrats en aquesta sessió: la fusió no els ha de ressuscitar.
+const albumsEsborrats = new Set();
+
 async function saveEvents() {
-  const sha = await getFileSHA(EVENTS_PATH);
+  // Fusiona amb el que hi ha al repositori: si una altra pestanya o sessió ha
+  // pujat fotos mentrestant (o una pujada anterior no va arribar a desar),
+  // no es perden en sobreescriure el fitxer.
+  let sha = null;
+  try {
+    const data = await gh(`/repos/${OWNER}/${REPO}/contents/${EVENTS_PATH}?ref=${BRANCH}`);
+    sha = data.sha;
+    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+    const m = raw.match(/window\.GALERIA_EVENTS\s*=\s*(\[[\s\S]*?\]);/);
+    if (m) {
+      const base = p => p.replace(/\.[^.]+$/, '');
+      for (const r of JSON.parse(m[1])) {
+        if (albumsEsborrats.has(r.id)) continue;
+        const l = events.find(e => e.id === r.id);
+        if (!l) { events.push(r); continue; }
+        const vist = new Set((l.photos || []).map(base));
+        for (const p of (r.photos || [])) {
+          if (!vist.has(base(p))) { (l.photos = l.photos || []).push(p); vist.add(base(p)); }
+        }
+        if (r.alts) l.alts = Object.assign({}, r.alts, l.alts || {});
+        if (!l.cover && r.cover) l.cover = r.cover;
+      }
+    }
+  } catch (e) {
+    console.warn('No s\'ha pogut fusionar events.js, es desa el local:', e);
+    sha = await getFileSHA(EVENTS_PATH);
+  }
   const js = `// CB Grup Barna · Galeria · Dades d'esdeveniments\n// Actualitzat: ${new Date().toISOString().slice(0,10)}\n\nwindow.GALERIA_EVENTS = ${JSON.stringify(events, null, 2)};\n`;
   await writeFile(EVENTS_PATH, js, `data: update events.js [skip ci]`, sha);
 }
@@ -968,6 +1028,7 @@ async function deleteEvent(index) {
     try { await deleteFile(path, `foto: remove from ${ev.id} [skip ci]`); } catch {}
   }
 
+  albumsEsborrats.add(ev.id);
   events.splice(index, 1);
   await saveEvents();
   renderEventsList();
@@ -1091,12 +1152,21 @@ function renderUploadQueue() {
         <div class="upload-item-size">${size}</div>
         ${item.status === 'pending' ? `<input type="text" class="qi-alt" data-qi="${i}" maxlength="160" placeholder="Descripció de la foto (text alternatiu) — opcional" aria-label="Descripció de la foto ${item.file.name}" value="${(item.alt || '').replace(/"/g, '&quot;')}">` : ''}
         ${item.status === 'uploading' ? `<div class="progress-bar"><div class="progress-fill" id="prog-${i}" style="width:${item.progress}%"></div></div>` : ''}
+        ${item.status === 'error' ? `<div class="upload-item-error">${(item.error || 'Error desconegut').replace(/</g, '&lt;')}<a href="#" data-retry="${i}">Reintenta</a></div>` : ''}
       </div>
       ${statusHtml}`;
     container.appendChild(div);
     // La cua es repinta a cada canvi d'estat: la descripcio viu a item.alt.
     const altInput = div.querySelector('.qi-alt');
     if (altInput) altInput.addEventListener('input', () => { item.alt = altInput.value; });
+    const retry = div.querySelector('[data-retry]');
+    if (retry) retry.addEventListener('click', ev => {
+      ev.preventDefault();
+      item.status = 'pending'; item.error = '';
+      renderUploadQueue();
+      document.getElementById('upload-actions').style.display = 'flex';
+      document.getElementById('upload-btn').disabled = false;
+    });
   });
 }
 
@@ -1138,8 +1208,11 @@ async function uploadAll() {
       if (idx !== -1) events[idx] = ev;
 
       done++;
+      // Desa el registre cada 5 fotos: si després falla alguna cosa, les pujades no queden invisibles.
+      if (done % 5 === 0) { try { await saveEvents(); } catch (e) { console.warn('saveEvents parcial:', e); } }
     } catch(e) {
       item.status = 'error';
+      item.error = (e && e.message) || String(e);
       errors++;
       console.error(e);
     }
@@ -1175,7 +1248,19 @@ async function uploadAll() {
   document.getElementById('upload-actions').style.display = uploadQueue.length ? 'flex' : 'none';
   btn.disabled = uploadQueue.filter(f => f.status === 'pending').length === 0;
 
-  if (errors > 0) toast(`${errors} fitxer${errors !== 1 ? 's' : ''} no s'ha${errors !== 1 ? 'n' : ''} pogut pujar`, 'error');
+  const retryBtn = document.getElementById('retry-btn');
+  if (retryBtn) retryBtn.style.display = errors > 0 ? '' : 'none';
+  if (errors > 0) toast(`${errors} fitxer${errors !== 1 ? 's' : ''} no s'ha${errors !== 1 ? 'n' : ''} pogut pujar. Mira el motiu sota cada foto i prem «Reintentar els fallits».`, 'error');
+}
+
+// Torna a posar a la cua les fotos que han fallat i les puja de nou.
+function reintentarFallits() {
+  let n = 0;
+  for (const item of uploadQueue) if (item.status === 'error') { item.status = 'pending'; item.error = ''; n++; }
+  const retryBtn = document.getElementById('retry-btn');
+  if (retryBtn) retryBtn.style.display = 'none';
+  renderUploadQueue();
+  if (n) uploadAll();
 }
 
 async function uploadPhoto(file, queueIndex) {
