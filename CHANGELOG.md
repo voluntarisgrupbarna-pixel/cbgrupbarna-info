@@ -22,6 +22,37 @@ només l'hi posa nom.
 
 ---
 
+## 2.2.2 — 2026-09-13
+
+**El vocabulari que sí es pot guanyar** (P1.4 de
+`PROPOSTES-POSICIONAMENT-19-SETEMBRE.md`), i una correcció d'una cosa que
+aquest fitxer havia donat per bona.
+
+- **Dues seccions noves a `/portes-obertes/`**, als tres idiomes: «Com és un
+  entrenament de prova» i «On som i com s'hi arriba». Surten del diagnòstic
+  que «portes obertes», en català i a Barcelona, és un terme del sistema
+  educatiu i no es pot guanyar; les consultes veïnes —«provar un entrenament
+  de bàsquet Barcelona», «extraescolar de bàsquet Clot»— sí. A més, la pàgina
+  no deia com arribar-hi: ara hi consta l'adreça sencera, els barris del
+  voltant i el transport (metro L1 Glòries, L2 Clot i Rodalies a Clot-Aragó),
+  que és informació que les famílies busquen de debò.
+- **Corregida una frase de la landing de nenes que afirmava més del que es pot
+  sostenir.** Deia «El club entrena aquí des de 1965»; `/instal-lacions/` diu
+  que el club fa servir cinc pistes més del barri, o sigui que no consta que
+  s'entreni a La Nau des del 1965. Ara diu «El club és al Clot des de 1965»,
+  que és el que el peu de tot el web ja afirma.
+- **Corregida la nota de `PENDENTS-WEB.md` sobre `i18n-munta.py`.** L'11/09 es
+  va apuntar com un error que l'script esborrés els `hreflang`. **No ho és.**
+  Els treu expressament (codi, línies 245-252) perquè el pas següent reescriu
+  les adreces de la pàgina i se'ls enduria, i els torna a escriure
+  `i18n-hreflang.py` des del mapa de rutes; el mateix script ho documenta i ho
+  recorda a cada execució. El que sí que cal recordar és que són **tres**
+  passos i no un: després de muntar, `i18n-hreflang.py` **i**
+  `generate-faq.py`, perquè si el fitxer de `i18n/feina/` va per darrere de
+  `i18n/faq.yml` el muntatge planta una redacció antiga de les respostes.
+
+---
+
 ## 2.2.1 — 2026-09-11
 
 **Els dos arreglos d'on-page que sortien de les propostes** (P1.5 i P1.6 de

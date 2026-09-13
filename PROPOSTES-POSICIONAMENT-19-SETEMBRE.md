@@ -106,7 +106,7 @@ data, hora i enllaç a `/portes-obertes/`.
 
 ## P1 · El que encara es pot guanyar dins del web
 
-### P1.4 — «Portes obertes», en català i a Barcelona, vol dir *escola*
+### P1.4 — ✅ FET (v2.2.2) · «Portes obertes», en català i a Barcelona, vol dir *escola*
 
 **Comprovat l'11/09/2026.** Buscant «portes obertes escoleta bàsquet Barcelona
 setembre 2026», el que surt a dalt és: `edubcn.cat` («Jornades de portes

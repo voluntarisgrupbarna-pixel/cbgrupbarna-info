@@ -559,13 +559,28 @@ patrocini, dossiers, xarxes). Al repositori ja no hi és.
   `/basquet-nenes-2018-barcelona/` tornin a la prioritat general. L'avís de dalt de tot
   del web ja caduca sol.
 
-- **🔴 `scripts/i18n-munta.py` esborra els `hreflang` (comprovat l'11/09/2026).** Muntant
-  `/femeni/` per afegir-hi un botó, la sortida va perdre els quatre
-  `<link rel="alternate" hreflang>` i va revertir vuit respostes de la FAQ a una redacció
-  antiga (el fitxer de `i18n/feina/` va per darrere de `i18n/faq.yml`). Es va desfer i el
-  botó s'hi va posar a mà. **Mentre això no s'arregli**: després de qualsevol `i18n-munta`,
-  passar `scripts/i18n-hreflang.py` i `generate-faq.py`, i mirar el `git diff` sencer.
-  Les pàgines de la campanya es van comprovar i tenen els quatre `hreflang` correctes.
+- **`scripts/i18n-munta.py` treu els `hreflang` a propòsit: cal passar
+  `i18n-hreflang.py` després.** L'11/09/2026 això es va apuntar aquí com si fos un error;
+  **no ho és, i la nota d'abans era equivocada.** Mirant el codi (línies 245-252), els treu
+  expressament perquè el pas següent reescriu les adreces de la pàgina i, si els `hreflang`
+  hi fossin, se'ls enduria i la versió catalana acabaria dient que la seva pàgina en català
+  és la castellana. Els torna a escriure `i18n-hreflang.py` des del mapa de rutes, que és qui
+  sap com es diu cada versió. El mateix script ho diu a la capçalera i ho recorda a cada
+  execució («Ara toca: …»).
+
+  **El que sí que cal recordar** és que són dos passos, no un, i que n'hi ha un tercer:
+
+  ```
+  python3 scripts/i18n-munta.py <ruta> es en
+  python3 scripts/i18n-hreflang.py        # torna a posar els hreflang
+  python3 .github/scripts/generate-faq.py # torna a posar la FAQ bona
+  python3 scripts/build-sitemap.py
+  ```
+
+  El tercer pas és el que gairebé es perd: si el fitxer de `i18n/feina/` va per darrere de
+  `i18n/faq.yml` —que és la font única de les preguntes—, el muntatge planta a la pàgina una
+  redacció antiga de les respostes. Va passar el 13/09/2026 amb vuit respostes de `/femeni/`.
+  Passar `generate-faq.py` després ho torna a deixar bé.
 
 - **🔴 Token de GitHub sense revocar.** El 30/08/2026 es va enganxar un Personal Access
   Token al xat de Claude Code per fer canvis urgents (admin de fotos, galeria, marca).
