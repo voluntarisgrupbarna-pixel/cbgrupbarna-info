@@ -45,7 +45,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 RENOMS = ROOT / "i18n" / "renoms.yml"
 MAPA = ROOT / "i18n" / "routes.yml"
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 
 REDIRECCIO = """<!doctype html>
 <html lang="{idioma}">

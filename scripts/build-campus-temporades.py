@@ -8,7 +8,7 @@ s'anuncia, no s'inventa."""
 import json, os
 HDR = open('/tmp/claude-0/c_hdr.txt', encoding='utf-8').read()
 FTR = open('/tmp/claude-0/c_ftr.txt', encoding='utf-8').read()
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 WA = ("https://api.whatsapp.com/send?phone=+34698425153&amp;text=Hola!%20Vull%20informaci%C3%B3%20"
       "del%20campus%20de%20{q}%20del%20CB%20Grup%20Barna")
 CATS = ("Escoleta, Premini, Mini, Preinfantil, Infantil, Cadet i Júnior")

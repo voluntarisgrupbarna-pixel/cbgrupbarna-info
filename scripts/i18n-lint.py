@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Revisa la salut del multiidioma de cbgrupbarna.info. No toca cap fitxer.
+Revisa la salut del multiidioma de linksbio.cbgrupbarna.info. No toca cap fitxer.
 
     python3 scripts/i18n-lint.py                    # informe complet
     python3 scripts/i18n-lint.py --nomes-errors     # només el que atura la CI
@@ -47,7 +47,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 MAPA = ROOT / "i18n" / "routes.yml"
 ETIQUETES = ROOT / "i18n" / "etiquetes.yml"
 EXCEPCIONS = ROOT / "i18n" / "excepcions.yml"

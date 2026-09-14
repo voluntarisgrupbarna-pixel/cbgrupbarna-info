@@ -106,7 +106,7 @@ var CAMPUS_TEXTOS = {
       'publicar-ho. El campus de Nadal s\'anuncia molt aviat; al gener ' +
       'publiquem Setmana Santa i estiu.\n\n' +
       'Tota la informació del campus:\n' +
-      'https://cbgrupbarna.info/campus/\n\n' +
+      'https://linksbio.cbgrupbarna.info/campus/\n\n' +
       'Qualsevol dubte, respon aquest correu o escriu-nos al WhatsApp del ' +
       'club: +34 698 425 153.\n\n' +
       'CB Grup Barna · La Nau del Clot\n' +
@@ -122,7 +122,7 @@ var CAMPUS_TEXTOS = {
       'antes de publicarlo. El campus de Navidad se anuncia muy pronto; en ' +
       'enero publicamos Semana Santa y verano.\n\n' +
       'Toda la información del campus:\n' +
-      'https://cbgrupbarna.info/es/campus/\n\n' +
+      'https://linksbio.cbgrupbarna.info/es/campus/\n\n' +
       'Cualquier duda, responde a este correo o escríbenos al WhatsApp del ' +
       'club: +34 698 425 153.\n\n' +
       'CB Grup Barna · La Nau del Clot\n' +
@@ -138,7 +138,7 @@ var CAMPUS_TEXTOS = {
       'before we publish it. The Christmas camp is announced very soon; in ' +
       'January we publish Easter and summer.\n\n' +
       'Everything about the camp:\n' +
-      'https://cbgrupbarna.info/en/campus/\n\n' +
+      'https://linksbio.cbgrupbarna.info/en/campus/\n\n' +
       'Any questions, reply to this email or write to the club on WhatsApp: ' +
       '+34 698 425 153.\n\n' +
       'CB Grup Barna · La Nau del Clot\n' +

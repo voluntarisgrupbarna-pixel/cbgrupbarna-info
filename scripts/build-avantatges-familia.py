@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 DRY = "--dry-run" in sys.argv
 
 # El text exacte del placeholder a cada idioma: si l'oferta d'una fitxa

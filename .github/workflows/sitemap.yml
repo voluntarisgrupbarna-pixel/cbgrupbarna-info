@@ -69,7 +69,7 @@ jobs:
             case "$f" in
               */admin.html|admin/*|*/print/*|*/cartell.html|*/estadistiques.html|*/app.html) continue ;;
             esac
-            echo "https://cbgrupbarna.info/${f%index.html}" >> /tmp/urls.txt
+            echo "https://linksbio.cbgrupbarna.info/${f%index.html}" >> /tmp/urls.txt
           done
           echo "::notice::$(wc -l < /tmp/urls.txt) pàgines públiques tocades en aquest push."
 

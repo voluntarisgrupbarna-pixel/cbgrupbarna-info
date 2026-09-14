@@ -59,7 +59,7 @@ IDIOMES = ("ca", "es", "en")
 # (marcador visible, marcador del JSON-LD)
 MARCADORS = ("FAQ", "FAQ-LD")
 
-BASE = "https://cbgrupbarna.info"
+BASE = "https://linksbio.cbgrupbarna.info"
 
 
 def carrega_rutes():

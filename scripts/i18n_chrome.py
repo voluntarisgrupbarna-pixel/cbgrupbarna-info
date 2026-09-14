@@ -23,7 +23,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 DICCIONARI = ROOT / "i18n" / "diccionari.yml"
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 
 _dades = yaml.safe_load(DICCIONARI.read_text(encoding="utf-8"))
 TEXTOS = _dades["textos"]

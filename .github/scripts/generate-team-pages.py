@@ -54,7 +54,7 @@ _spec2.loader.exec_module(_escuts_mod)
 ESCUTS = _escuts_mod.Escuts()
 DATA = ROOT / "partits" / "data.json"
 OUT_DIR = ROOT / "partits" / "equips"
-BASE_URL = "https://cbgrupbarna.info"
+BASE_URL = "https://linksbio.cbgrupbarna.info"
 
 DIES = {
     "ca": ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte", "Diumenge"],
@@ -359,7 +359,7 @@ def team_page(e, data, avui, idioma):
       <p class="lede">{t['balanc'].format(w=w, l=l, pos=posicio_txt)}</p>
       <div class="btn-row">
         <a href="{pre}/partits/" class="btn red" data-cta="team-app-{e['id']}">{t['tots_partits']}</a>
-        <a href="webcal://cbgrupbarna.info/partits/calendaris/ics/{e['id']}.ics" class="btn ghost" data-cta="team-ics-{e['id']}">{t['subscriu']}</a>
+        <a href="webcal://linksbio.cbgrupbarna.info/partits/calendaris/ics/{e['id']}.ics" class="btn ghost" data-cta="team-ics-{e['id']}">{t['subscriu']}</a>
       </div>
     </div>
   </div>

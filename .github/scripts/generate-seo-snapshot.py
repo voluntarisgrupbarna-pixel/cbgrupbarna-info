@@ -149,7 +149,7 @@ def build_events(data, avui):
             },
             "homeTeam": {"@type": "SportsTeam", "name": p["local"]},
             "awayTeam": {"@type": "SportsTeam", "name": p["visitant"]},
-            "organizer": {"@type": "SportsOrganization", "name": "CB Grup Barna", "url": "https://cbgrupbarna.info"},
+            "organizer": {"@type": "SportsOrganization", "name": "CB Grup Barna", "url": "https://linksbio.cbgrupbarna.info"},
         })
     if not events:
         return "", 0

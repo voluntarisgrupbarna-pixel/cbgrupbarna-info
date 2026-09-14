@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const OUT = path.resolve(ROOT, (args[args.indexOf('--out') + 1] && args.includes('--out')) ? args[args.indexOf('--out') + 1] : 'tests/out');
-const SITE = 'https://cbgrupbarna.info';
+const SITE = 'https://linksbio.cbgrupbarna.info';
 
 const SKIP = [/^\.git\//, /^node_modules\//, /^tests\//, /^\.github\//];
 const NOINDEX_OK = ['/admin/', '/fotos/admin.html', '/jugadors/admin.html', '/partits/admin.html', '/briefing/'];
@@ -542,7 +542,7 @@ function auditGenerative(pageResults) {
   if (noModified.length) out.issues.push({ level: 'avís', code: 'article-sense-data', msg: `${noModified.length} articles sense \`dateModified\``, sample: [...new Set(noModified)].slice(0, 6) });
 
   // Consolidació d'entitat: quantes pàgines pengen del mateix @id del club.
-  const clubId = 'https://cbgrupbarna.info/#club';
+  const clubId = 'https://linksbio.cbgrupbarna.info/#club';
   const linked = all.filter((p) => JSON.stringify(p.info.jsonld || []).includes(clubId)).length;
   out.signals.pagesLinkedToClubEntity = `${linked} de ${all.length}`;
   if (linked / all.length < 0.6) {

@@ -34,7 +34,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 MAPA = ROOT / "i18n" / "routes.yml"
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 
 RE_CANONICAL = re.compile(r'([ \t]*)<link[^>]+rel=["\']canonical["\'][^>]*>', re.I)
 RE_ALTERNATE = re.compile(

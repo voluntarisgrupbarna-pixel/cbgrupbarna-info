@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generador del sitemap.xml de cbgrupbarna.info.
+Generador del sitemap.xml de linksbio.cbgrupbarna.info.
 
 Fins ara el sitemap es mantenia a mà, i per això anava quedant enrere: hi
 havia pàgines publicades que no hi sortien (i per tant Google no les trobava
@@ -35,7 +35,7 @@ from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 
 # Les mateixes rutes que robots.txt manté fora de l'índex.
 EXCLOU = re.compile(

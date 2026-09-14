@@ -44,7 +44,7 @@ DESTI = {
     "en": "en/blog/%s/index.html" % SLUG["en"],
 }
 PREFIX = {"ca": "", "es": "/es", "en": "/en"}
-BASE = "https://cbgrupbarna.info"
+BASE = "https://linksbio.cbgrupbarna.info"
 DATA = "2026-08-29"
 IG = "https://www.instagram.com"
 PGA = "https://paugasolacademy.com/ca/pau-friends/"
