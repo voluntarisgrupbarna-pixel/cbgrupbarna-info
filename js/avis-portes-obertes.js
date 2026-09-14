@@ -24,26 +24,26 @@
 
   /* Puja aquesta clau si es canvia el text: qui l'havia tancat el torna a
      veure una vegada, perquè l'avís nou no neix ja amagat. */
-  var CLAU = 'cbgb-avis-po-2026-09';
+  var CLAU = 'cbgb-avis-po-2026-09b';
 
   var DESTI = { ca: '/portes-obertes/#po-form', es: '/es/puertas-abiertas/#po-form', en: '/en/open-days/#po-form' };
 
   var TEXTOS = {
     ca: {
-      etiqueta: 'Escoleta',
-      text: 'Portes obertes els dissabtes 19 i 26 de setembre, a les 9 h',
+      etiqueta: 'Escoleta · Nenes 2018',
+      text: 'Portes obertes els dissabtes 19 i 26 de setembre, a les 9 h. Escoleta (4-8 anys) i nenes nascudes el 2018',
       crida: 'Reserva la plaça',
       tanca: 'Tanca l\'avís'
     },
     es: {
-      etiqueta: 'Escoleta',
-      text: 'Puertas abiertas los sábados 19 y 26 de septiembre, a las 9 h',
+      etiqueta: 'Escoleta · Niñas 2018',
+      text: 'Puertas abiertas los sábados 19 y 26 de septiembre, a las 9 h. Escoleta (4-8 años) y niñas nacidas en 2018',
       crida: 'Reserva la plaza',
       tanca: 'Cerrar el aviso'
     },
     en: {
-      etiqueta: 'Escoleta',
-      text: 'Open days on Saturday 19 and 26 September, at 9 am',
+      etiqueta: 'Escoleta · Girls 2018',
+      text: 'Open days on Saturday 19 and 26 September, 9 am. Escoleta (ages 4-8) and girls born in 2018',
       crida: 'Book a place',
       tanca: 'Close this notice'
     }

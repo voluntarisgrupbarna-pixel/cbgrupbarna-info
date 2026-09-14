@@ -1,5 +1,11 @@
 /* CB Grup Barna · Portes obertes de setembre · reserva de plaça
    ─────────────────────────────────────────────────────────────────────────
+   DES DEL 13/09/2026 només reserven dos grups: l'Escoleta (4 a 8 anys) i
+   les nenes nascudes el 2018 (Premini femení). La resta de categories no
+   reserva aquí: se les porta a /proves-acces/ (Setmana Santa 2027). El
+   formulari ho diu a la cara quan l'any de naixement no quadra amb el grup,
+   i l'Apps Script ho torna a comprovar al servidor.
+
    Dues feines:
      1. Llegir del servidor quantes places queden a cada dissabte i pintar-ho
         a les targetes (comptador i barra d'ocupació). Un torn ple es
@@ -30,6 +36,17 @@
 
   var msg = document.getElementById('po-msg');
   var tel = document.getElementById('po-tel');
+  var grups = [].slice.call(form.querySelectorAll('input[name="grup"]'));
+  var grupErr = document.getElementById('po-grup-err');
+  var anyAvis = document.getElementById('po-any-avis');
+
+  /* Quins anys de naixement admet cada grup. El mateix mapa és a l'Apps
+     Script (GRUPS): si es canvia aquí, es canvia allà. */
+  var ANYS = {
+    'escoleta':   [2018, 2019, 2020, 2021, 2022],
+    'nenes-2018': [2018]
+  };
+  var PROVES = { ca: '/proves-acces/', es: '/es/pruebas-de-acceso/', en: '/en/tryouts/' };
   var done = document.getElementById('po-done');
   var diesErr = document.getElementById('po-dies-err');
   var caselles = [].slice.call(form.querySelectorAll('input[name="dissabtes"]'));
@@ -42,9 +59,18 @@
      l'idioma: si no, una família que llegeix la pàgina en castellà veu
      «Queden 15 places» enmig del seu formulari. */
   var T = {
-    ca: { una: 'Queda 1 plaça', moltes: 'Queden {n} places', ple: 'Complet', ocup: '{p}% ple' },
-    es: { una: 'Queda 1 plaza', moltes: 'Quedan {n} plazas', ple: 'Completo', ocup: '{p}% lleno' },
-    en: { una: '1 place left', moltes: '{n} places left', ple: 'Full', ocup: '{p}% full' }
+    ca: { una: 'Queda 1 plaça', moltes: 'Queden {n} places', ple: 'Complet', ocup: '{p}% ple',
+          gran: 'Amb aquest any de naixement no li toca Portes Obertes: li toca la <a href="{u}">prova d\'accés de Setmana Santa 2027</a>.',
+          no2018: 'Aquest grup és només per a nenes nascudes el 2018. Si té una altra edat, tria Escoleta (2018-2022) o demana <a href="{u}">prova d\'accés</a>.',
+          petit: 'Fins als 4 anys (nascuts el 2022) encara no hi ha grup. Escriu-nos i t\'avisem quan en tingui.' },
+    es: { una: 'Queda 1 plaza', moltes: 'Quedan {n} plazas', ple: 'Completo', ocup: '{p}% lleno',
+          gran: 'Con este año de nacimiento no le tocan las Puertas Abiertas: le toca la <a href="{u}">prueba de acceso de Semana Santa 2027</a>.',
+          no2018: 'Este grupo es solo para niñas nacidas en 2018. Si tiene otra edad, elige Escoleta (2018-2022) o pide <a href="{u}">prueba de acceso</a>.',
+          petit: 'Hasta los 4 años (nacidos en 2022) todavía no hay grupo. Escríbenos y te avisamos cuando lo haya.' },
+    en: { una: '1 place left', moltes: '{n} places left', ple: 'Full', ocup: '{p}% full',
+          gran: 'With this year of birth the Open Days are not the right door: apply for the <a href="{u}">Easter 2027 tryout</a> instead.',
+          no2018: 'This group is only for girls born in 2018. For any other age, choose Escoleta (2018-2022) or apply for a <a href="{u}">tryout</a>.',
+          petit: 'Children born after 2022 do not have a group yet. Write to us and we will let you know when there is one.' }
   };
   var codi = (document.documentElement.lang || 'ca').slice(0, 2).toLowerCase();
   var t = T[codi] || T.ca;
@@ -109,11 +135,43 @@
     c.el.setAttribute('aria-invalid', mal ? 'true' : 'false');
   }
 
+  function grupTriat() {
+    var g = null;
+    grups.forEach(function (r) { if (r.checked) g = r.value; });
+    return g;
+  }
+
+  /* L'any de naixement mana. Si no quadra amb el grup, s'explica a sota del
+     camp per què i cap a on s'ha d'anar, en comptes d'un «any no vàlid» mut. */
+  function avisAny() {
+    if (!anyAvis) return false;
+    var v = (document.getElementById('po-any') || {}).value || '';
+    v = v.trim();
+    var g = grupTriat();
+    anyAvis.innerHTML = '';
+    anyAvis.classList.remove('on');
+    if (!/^(19|20)\d{2}$/.test(v) || !g) return false;
+    var a = parseInt(v, 10);
+    if (ANYS[g].indexOf(a) !== -1) return false;
+    var u = PROVES[codi] || PROVES.ca;
+    var text = g === 'nenes-2018' && a <= 2022 && a >= 2018 ? t.no2018
+             : a > 2022 ? t.petit
+             : t.gran;
+    anyAvis.innerHTML = text.replace('{u}', u);
+    anyAvis.classList.add('on');
+    return true;
+  }
+
   function malament(c) {
     var v = c.el.value.trim();
     if (!v) return true;
-    // L'any de naixement ha de ser un any de veritat, no una edat.
-    if (c.nom === 'any') return !/^(19|20)\d{2}$/.test(v);
+    // L'any de naixement ha de ser un any de veritat, no una edat, i ha de
+    // quadrar amb el grup triat (Escoleta 2018-2022 · nenes 2018).
+    if (c.nom === 'any') {
+      if (!/^(19|20)\d{2}$/.test(v)) return true;
+      var g = grupTriat();
+      return !g || ANYS[g].indexOf(parseInt(v, 10)) === -1;
+    }
     if (c.nom === 'edat') return !/^\d{1,2}$/.test(v);
     if (c.nom === 'correu') return !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
     return false;
@@ -133,6 +191,16 @@
     });
   });
 
+  var campAny = camps.filter(function (c) { return c.nom === 'any'; })[0];
+  grups.forEach(function (r) {
+    r.addEventListener('change', function () {
+      if (grupErr) grupErr.classList.remove('on');
+      avisAny();
+      if (campAny && campAny.err.classList.contains('on')) mostra(campAny, malament(campAny));
+    });
+  });
+  if (campAny) campAny.el.addEventListener('input', avisAny);
+
   function triats() {
     return caselles.filter(function (cb) { return cb.checked && !cb.disabled; })
                    .map(function (cb) { return cb.value; });
@@ -147,6 +215,9 @@
     var capDia = dies.length === 0;
     diesErr.classList.toggle('on', capDia);
 
+    var capGrup = grups.length > 0 && !grupTriat();
+    if (grupErr) grupErr.classList.toggle('on', capGrup);
+
     var primer = null;
     camps.forEach(function (c) {
       var mal = malament(c);
@@ -155,7 +226,8 @@
     });
 
     if (capDia) { (primer || caselles[0]).focus(); return; }
-    if (primer) { primer.focus(); return; }
+    if (capGrup) { grups[0].focus(); return; }
+    if (primer) { avisAny(); primer.focus(); return; }
 
     form.querySelector('button[type="submit"]').disabled = true;
 
@@ -177,6 +249,7 @@
       source: 'portes-obertes',
       idioma: document.documentElement.lang,
       dissabtes: dies.join(','),
+      grup: grupTriat() || '',
       jugat: jugat ? jugat.value : 'no',
       telefon: tel && tel.value.trim() ? tel.value.trim() : '',
       missatge: msg && msg.value.trim() ? msg.value.trim() : ''

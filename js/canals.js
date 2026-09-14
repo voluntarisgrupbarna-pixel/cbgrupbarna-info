@@ -67,6 +67,21 @@ window.CANALS = {
   portesObertesEndpoint: 'https://script.google.com/macros/s/AKfycbwlrdgYopQ5etRi3DUd3wYr-Yy1oKY9GGM4NCv5jVtGFZ_MbhtjFvw_UZs7JR7oRhI/exec',
 
 
+  /* 3 ter · PROVES D'ACCÉS · SETMANA SANTA 2027 ────────────────────
+     Formulari de /proves-acces/ (i /es/pruebas-de-acceso/, /en/tryouts/).
+     És per a totes les categories que NO reserven a Portes Obertes
+     (tothom que no sigui Escoleta ni nena del 2018).
+
+     Va al MATEIX Apps Script que les Portes Obertes, marcat amb
+     source: 'proves-acces': allà es despatxa a un full a part
+     («Proves d'accés»), avisa el club i confirma a la família. No hi ha
+     comptador de places ni esdeveniment de calendari.
+
+     Si algun dia es vol un script propi, enganxa aquí l'altre URL /exec.
+     Mentre estigui buit, el formulari fa servir portesObertesEndpoint.  */
+  provesAccesEndpoint: '',
+
+
   /* 4 · CANAL DE PROTECCIÓ DEL MENOR ──────────────────────────────
      ⚠️  DELIBERADAMENT BUIT. No hi posis l'endpoint de dalt.
 
