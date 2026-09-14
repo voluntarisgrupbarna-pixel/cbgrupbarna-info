@@ -671,3 +671,38 @@ dia, com abans.
 
 Perquè surti res, però, hi ha d'haver marcadors: amb el captcha posat, o
 s'entren a `/partits/` → Gestió o no n'hi ha.
+
+## 14/09/2026 · El captcha també guanya al navegador del robot
+
+Ahir semblava resolt: el pas «Navegador per passar la verificació de
+seguretat de la FCBQ» (Playwright, PR #160) acabava en verd i el workflow
+també. **No ho estava.** El log de la passada de les 07:03 UTC ho diu:
+
+```
+[fcbq] .../club/24/resultats: security-check — es prova amb navegador
+[fcbq] la federació no deixa passar el robot (/access-denied?redirect=/club/24) — no s'insisteix
+[resultats] sense resposta de la FCBQ — no es toca res
+```
+
+O sigui que el Chromium headless tampoc passa: la FCBQ el fa fora a
+`/access-denied`. L'únic camí que funciona segueix sent el manual —
+`/partits/resultats-fcbq/`, amb la fitxa enganxada des del navegador d'una
+persona.
+
+**Per què semblava que anava bé:** `update-resultats.py` sortia amb codi 0
+quan la federació el bloquejava. El pas quedava verd, el workflow quedava
+verd, i a Actions no es distingia d'un dia bo. És exactament la malaltia
+que el PR #154 va obrir per curar, però el PR només tocava el robot diari
+(`update-partits.py`), no el de resultats, que és el que corre els caps de
+setmana.
+
+**Pitjor:** `_marca_comprovacio()` de `update-resultats.py` reescrivia
+`partits/canvis.json` sencer i hi **esborrava el camp `diesSenseConnexio`**
+que porta el comptador del PR #154. Corrent cada mitja hora els caps de
+setmana, el comptador no hauria arribat mai a dos i l'avís no hauria saltat
+mai. Arreglat al mateix PR: ara els dos scripts mantenen el comptador amb
+la mateixa regla i tots dos posen el workflow en vermell al segon dia.
+
+**Conseqüència pràctica:** els tres partits del 13/09 a la tarda (Infantil
+Masculí A, Sènior Femení A i Júnior Masculí A) no entraran sols. O es fa
+servir la via manual, o s'entren a mà.
