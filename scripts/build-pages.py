@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generador de les pàgines interiors de cbgrupbarna.info (campus, 3x3, blog).
+Generador de les pàgines interiors de linksbio.cbgrupbarna.info (campus, 3x3, blog).
 
 Totes comparteixen capçalera, peu, JSON-LD i /css/barna.css, de manera que
 afegir una pàgina o un article nou és afegir una entrada aquí i executar:
@@ -52,7 +52,7 @@ def mida_imatge(ruta, per_defecte):
             return im.size
     except Exception:
         return per_defecte
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 WA_CLUB = "https://api.whatsapp.com/send?phone=+34698425153"
 WA_ESCOLETA = "https://wa.me/34646205526"
 WEB_3X3 = "https://cbgrupbarna-3x3timechamber.com"
@@ -2541,7 +2541,7 @@ def build_calendaris():
       + 'partit d\\'aquest equip després de fer aquesta fitxa. <a href="/partits/#calendari">Comprova-ho al calendari</a>.</div>'
       + '<a href="' + fitxer + '" target="_blank" rel="noopener" class="btn ghost" data-cta="cal-dl-' + equipId
       + '">' + etiqueta + '</a> '
-      + '<a href="webcal://cbgrupbarna.info/partits/calendaris/ics/' + equipId + '.ics" class="btn ghost" '
+      + '<a href="webcal://linksbio.cbgrupbarna.info/partits/calendaris/ics/' + equipId + '.ics" class="btn ghost" '
       + 'title="S\\'obre a l\\'app de calendari i s\\'actualitza sola cada dia" data-cta="cal-ics-' + equipId
       + '">🔔 Subscriu-te</a></div></div>';
   }}

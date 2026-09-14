@@ -186,3 +186,14 @@ La conclusió no és «tornar enrere», és que la migració va deixar fora la p
      calendaris de qui ja els té sincronitzats. I les tres mencions dins de l'article de premsa de
      la Guia del Clot (Gemma Collell) es mantenen tal com les va publicar la periodista: és una cita
      literal amb autoria, no contingut del club.
+
+## Actualització 14/09/2026 — decisió de direcció, canvia el sentit d'aquest document
+
+**Direcció ha revertit la decisió del 23/08/2026.** Ara és `cbgrupbarna.com` qui es queda com la
+web convencional del club (la manté una altra persona, sense accés wp-admin des d'aquí), i
+**tot el contingut que hi havia a `cbgrupbarna.info` es trasllada a `linksbio.cbgrupbarna.info`**
+(campanyes, formularis, resultats, eines). L'arrel `cbgrupbarna.info` deixa de tenir web pròpia:
+reenvia `/` cap a `cbgrupbarna.com` i qualsevol altra ruta cap a la mateixa ruta a `linksbio.`.
+
+Executat el mateix 14/09/2026. Les seccions anteriors d'aquest document (comparativa d'agost)
+queden com a històric de la decisió prèvia.

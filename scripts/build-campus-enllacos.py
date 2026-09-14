@@ -34,7 +34,7 @@ import re
 import sys
 
 ARREL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 IG = "https://www.instagram.com"
 
 

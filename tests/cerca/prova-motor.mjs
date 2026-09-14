@@ -19,7 +19,7 @@ const codi = fs.readFileSync('js/cerca.js', 'utf8');
 function motor(lang) {
   const sandbox = {
     console,
-    location: { pathname: lang === 'ca' ? '/' : '/' + lang + '/', href: 'https://cbgrupbarna.info/', search: '' },
+    location: { pathname: lang === 'ca' ? '/' : '/' + lang + '/', href: 'https://linksbio.cbgrupbarna.info/', search: '' },
     navigator: { connection: { saveData: true } },
     localStorage: { getItem: () => null, setItem: () => {}, removeItem: () => {} },
     fetch: () => Promise.resolve({ ok: true, json: () => Promise.resolve(index) }),

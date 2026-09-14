@@ -392,7 +392,7 @@ def tradueix(html, idx, lang):
         html = html.replace(vell, nou)
 
     # Les adreces de dins del JSON-LD han d'apuntar a la pagina d'aquest idioma.
-    html = html.replace("cbgrupbarna.info/partits/", f"cbgrupbarna.info/{lang}/partits/")
+    html = html.replace("linksbio.cbgrupbarna.info/partits/", f"linksbio.cbgrupbarna.info/{lang}/partits/")
 
     # Idioma del document i de les dades estructurades.
     html = html.replace('<html lang="ca">', f'<html lang="{lang}">')
@@ -455,12 +455,12 @@ def tradueix(html, idx, lang):
     # substitucions d'adreces d'abans se'ls emportaven per davant: el hreflang
     # del catala acabava apuntant a /es/partits/.
     html = re.sub(r'<link rel="canonical"[^>]*>',
-                  f'<link rel="canonical" href="https://cbgrupbarna.info/{lang}/partits/"/>',
+                  f'<link rel="canonical" href="https://linksbio.cbgrupbarna.info/{lang}/partits/"/>',
                   html, count=1)
-    ALT = ('<link rel="alternate" hreflang="ca" href="https://cbgrupbarna.info/partits/">\n'
-           '<link rel="alternate" hreflang="es" href="https://cbgrupbarna.info/es/partits/">\n'
-           '<link rel="alternate" hreflang="en" href="https://cbgrupbarna.info/en/partits/">\n'
-           '<link rel="alternate" hreflang="x-default" href="https://cbgrupbarna.info/partits/">')
+    ALT = ('<link rel="alternate" hreflang="ca" href="https://linksbio.cbgrupbarna.info/partits/">\n'
+           '<link rel="alternate" hreflang="es" href="https://linksbio.cbgrupbarna.info/es/partits/">\n'
+           '<link rel="alternate" hreflang="en" href="https://linksbio.cbgrupbarna.info/en/partits/">\n'
+           '<link rel="alternate" hreflang="x-default" href="https://linksbio.cbgrupbarna.info/partits/">')
     html = re.sub(r'<link rel="alternate" hreflang="ca"[^>]*>\s*'
                   r'<link rel="alternate" hreflang="es"[^>]*>\s*'
                   r'<link rel="alternate" hreflang="en"[^>]*>\s*'
@@ -490,7 +490,7 @@ def _comprova(html, lang):
 
     Les etiquetes, el JavaScript i els comentaris no compten: alli el catala
     hi pot ser i no el llegeix ningu. El que no pot passar es que una frase
-    quedi mig traduida —«…and can be seen at cbgrupbarna.info/en/partits/, amb
+    quedi mig traduida —«…and can be seen at linksbio.cbgrupbarna.info/en/partits/, amb
     els partits del cap de setmana…»—, que es exactament el que passava quan
     una regla curta es menjava el principi d'una de llarga.
     """

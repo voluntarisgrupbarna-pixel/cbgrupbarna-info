@@ -115,7 +115,7 @@ def carrega_excepcions():
 
 def sense_soroll(text, noms):
     """Treu el que legítimament pot anar en català dins d'una traducció."""
-    text = RE_ADRECA.sub(" ", text)        # cbgrupbarna.info/partits/equips/
+    text = RE_ADRECA.sub(" ", text)        # linksbio.cbgrupbarna.info/partits/equips/
     for n in noms:
         text = text.replace(n, " ")        # noms propis del glossari
     return text

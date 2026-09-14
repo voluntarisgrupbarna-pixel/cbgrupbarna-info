@@ -175,9 +175,9 @@ var TEXTOS = {
       'publicar-ho. El campus de Nadal s\'anuncia molt aviat; al gener ' +
       'publiquem Setmana Santa i estiu.\n\n' +
       'Mentrestant, tota la informació del campus és aquí:\n' +
-      'https://cbgrupbarna.info/campus/\n' +
+      'https://linksbio.cbgrupbarna.info/campus/\n' +
       'I la presentació del campus, aquí:\n' +
-      'https://cbgrupbarna.info/presentacions/campus-timechamber/\n\n' +
+      'https://linksbio.cbgrupbarna.info/presentacions/campus-timechamber/\n\n' +
       'Si tens qualsevol dubte, respon aquest correu o escriu-nos al ' +
       'WhatsApp del club: +34 698 425 153.\n\n' +
       'CB Grup Barna · La Nau del Clot\n' +
@@ -194,9 +194,9 @@ var TEXTOS = {
       'antes de publicarlo. El campus de Navidad se anuncia muy pronto; en ' +
       'enero publicamos Semana Santa y verano.\n\n' +
       'Mientras tanto, toda la información del campus está aquí:\n' +
-      'https://cbgrupbarna.info/es/campus/\n' +
+      'https://linksbio.cbgrupbarna.info/es/campus/\n' +
       'Y la presentación del campus, aquí:\n' +
-      'https://cbgrupbarna.info/es/presentaciones/campus-timechamber/\n\n' +
+      'https://linksbio.cbgrupbarna.info/es/presentaciones/campus-timechamber/\n\n' +
       'Si tienes cualquier duda, responde a este correo o escríbenos al ' +
       'WhatsApp del club: +34 698 425 153.\n\n' +
       'CB Grup Barna · La Nau del Clot\n' +
@@ -213,9 +213,9 @@ var TEXTOS = {
       'before we publish it. The Christmas camp is announced very soon; in ' +
       'January we publish Easter and summer.\n\n' +
       'In the meantime, everything about the camp is here:\n' +
-      'https://cbgrupbarna.info/en/campus/\n' +
+      'https://linksbio.cbgrupbarna.info/en/campus/\n' +
       'And the camp presentation is here:\n' +
-      'https://cbgrupbarna.info/en/presentations/campus-timechamber/\n\n' +
+      'https://linksbio.cbgrupbarna.info/en/presentations/campus-timechamber/\n\n' +
       'Any questions, reply to this email or write to the club on WhatsApp: ' +
       '+34 698 425 153.\n\n' +
       'CB Grup Barna · La Nau del Clot\n' +

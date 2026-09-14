@@ -54,7 +54,7 @@ RE_ALTERNATE = re.compile(
     r'<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\']([^"\']+)["\'][^>]*href=["\']([^"\']+)["\']',
     re.I,
 )
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 
 
 def url_de(fitxer):
@@ -173,7 +173,7 @@ def construeix():
 
 
 CAPCALERA = """\
-# Mapa d'idiomes de cbgrupbarna.info — quina pàgina és quina en cada idioma.
+# Mapa d'idiomes de linksbio.cbgrupbarna.info — quina pàgina és quina en cada idioma.
 #
 # El genera scripts/i18n-routes.py i el llegeix scripts/i18n-lint.py. D'aquí
 # n'han de sortir, més endavant, els hreflang i el commutador d'idioma, que

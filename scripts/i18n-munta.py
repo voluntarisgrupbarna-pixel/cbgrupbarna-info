@@ -44,7 +44,7 @@ _spec.loader.exec_module(_extreu)
 
 ROOT = Path(__file__).resolve().parents[1]
 FEINA = ROOT / "i18n" / "feina"
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 LOCALE = {"ca": "ca_ES", "es": "es_ES", "en": "en_US"}
 
 RE_HTML_LANG = re.compile(r'(<html[^>]*\blang=["\'])([^"\']*)(["\'])', re.I)

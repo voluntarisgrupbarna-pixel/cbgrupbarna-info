@@ -7,8 +7,8 @@
       · "Crear credenciales" → "ID de cliente de OAuth" → Tipus: Aplicación web
       · Nom: CB Grup Barna Admin
       · "Orígenes autorizados de JavaScript", afegeix-hi EXACTAMENT:
-            https://cbgrupbarna.info
-            https://www.cbgrupbarna.info
+            https://linksbio.cbgrupbarna.info
+            https://linksbio.cbgrupbarna.info
       · Crear → copia l'ID (acaba en .apps.googleusercontent.com)
    2) Enganxa'l aquí sota a GOOGLE_CLIENT_ID i puja el fitxer a GitHub.
 

@@ -32,7 +32,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 ETIQUETES = ROOT / "i18n" / "etiquetes.yml"
-SITE = "https://cbgrupbarna.info"
+SITE = "https://linksbio.cbgrupbarna.info"
 
 EXCLOU = re.compile(
     r"(^|/)(admin\.html|token\.html|app\.html|estadistiques\.html)$"

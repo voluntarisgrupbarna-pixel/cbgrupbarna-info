@@ -57,7 +57,7 @@ def build_event(p, eq_nom, ara):
     if p.get("puntsLocal") is not None and p.get("puntsVisitant") is not None:
         resultat = f" ({p['puntsLocal']}-{p['puntsVisitant']})"
     summary = f"{p['local']} - {p['visitant']}{resultat}"
-    desc = f"{eq_nom} · {p.get('categoria', '')}\nMés informació: https://cbgrupbarna.info/partits/"
+    desc = f"{eq_nom} · {p.get('categoria', '')}\nMés informació: https://linksbio.cbgrupbarna.info/partits/"
     loc = ", ".join(x for x in [p.get("pista"), p.get("adreca")] if x)
     return "\r\n".join([
         "BEGIN:VEVENT",
@@ -68,7 +68,7 @@ def build_event(p, eq_nom, ara):
         fold(f"SUMMARY:{esc(summary)}"),
         fold(f"DESCRIPTION:{esc(desc)}"),
         fold(f"LOCATION:{esc(loc)}"),
-        fold("URL:https://cbgrupbarna.info/partits/"),
+        fold("URL:https://linksbio.cbgrupbarna.info/partits/"),
         "END:VEVENT",
     ])
 
@@ -82,7 +82,7 @@ def build_calendar(nom, partits, equips_index, ara):
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
         fold(f"X-WR-CALNAME:{esc(nom)}"),
-        fold("X-WR-CALDESC:" + esc(f"Calendari de {nom} · CB Grup Barna. Font: cbgrupbarna.info/partits/")),
+        fold("X-WR-CALDESC:" + esc(f"Calendari de {nom} · CB Grup Barna. Font: linksbio.cbgrupbarna.info/partits/")),
         "X-WR-TIMEZONE:Europe/Madrid",
         "REFRESH-INTERVAL;VALUE=DURATION:P1D",
         "X-PUBLISHED-TTL:P1D",

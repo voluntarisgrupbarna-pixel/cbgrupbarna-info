@@ -4,7 +4,7 @@
 S'usa per als materials impresos del club (cartells, samarretes, taulell del
 pavello). Genera un SVG vectorial: escala be a qualsevol mida d'impressio.
 
-  python3 scripts/qr.py "https://cbgrupbarna.info/opina" opina/qr.svg
+  python3 scripts/qr.py "https://linksbio.cbgrupbarna.info/opina" opina/qr.svg
 
 Executar-lo sense arguments passa la bateria de validacions (vectors coneguts
 de l'estandard ISO/IEC 18004 + descodificacio de la propia matriu).
@@ -478,8 +478,8 @@ def run_tests():
     assert version_info_bits(10) == 0x0A4D3
 
     # 4. Anada i tornada: codificar i tornar a llegir la matriu.
-    for txt, lvl in [('https://cbgrupbarna.info/opina', 'Q'),
-                     ('https://cbgrupbarna.info/', 'H'),
+    for txt, lvl in [('https://linksbio.cbgrupbarna.info/opina', 'Q'),
+                     ('https://linksbio.cbgrupbarna.info/', 'H'),
                      ('CB GRUP BARNA 1965 · El Clot, Barcelona', 'M'),
                      ('x' * 100, 'L')]:
         matrix, size, version, mask = make_matrix(txt, lvl)

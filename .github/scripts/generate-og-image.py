@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Genera og-image.jpg, la imatge que surt quan algú comparteix cbgrupbarna.info
+Genera og-image.jpg, la imatge que surt quan algú comparteix linksbio.cbgrupbarna.info
 per WhatsApp o quan la pàgina apareix a Google.
 
 És un script i no un fitxer fet a mà perquè la portada rota cada temporada i

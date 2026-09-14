@@ -22,12 +22,12 @@
  */
 
 const ALLOWED_ORIGINS = new Set([
-  'https://cbgrupbarna.info',
-  'https://www.cbgrupbarna.info',
+  'https://linksbio.cbgrupbarna.info',
+  'https://linksbio.cbgrupbarna.info',
 ]);
 
 function corsHeaders(origin) {
-  const allow = ALLOWED_ORIGINS.has(origin) ? origin : 'https://cbgrupbarna.info';
+  const allow = ALLOWED_ORIGINS.has(origin) ? origin : 'https://linksbio.cbgrupbarna.info';
   return {
     'Access-Control-Allow-Origin': allow,
     'Access-Control-Allow-Methods': 'PUT, GET, OPTIONS',

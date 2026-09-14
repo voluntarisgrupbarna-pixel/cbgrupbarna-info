@@ -12,7 +12,7 @@ Com funciona: es publica un fitxer <clau>.txt a l'arrel del web amb la clau a
 dins, i cada avís referencia aquesta clau. Així el cercador comprova que qui
 avisa és qui mana al domini.
 
-    python3 scripts/indexnow.py https://cbgrupbarna.info/blog/una-pagina/ ...
+    python3 scripts/indexnow.py https://linksbio.cbgrupbarna.info/blog/una-pagina/ ...
 
 Sense arguments, avisa de tot el que hi ha al sitemap.
 """
@@ -23,7 +23,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-HOST = "cbgrupbarna.info"
+HOST = "linksbio.cbgrupbarna.info"
 SITE = f"https://{HOST}"
 LIMIT = 10000          # el màxim que accepta l'API en una tanda
 
@@ -63,7 +63,7 @@ def avisar(urls, k):
             # Sense User-Agent propi, urllib s'anuncia com a "Python-urllib/3.x"
             # i el servidor de Microsoft respon 403 sense mirar-s'ho. Amb un
             # d'identificable, accepta l'avís.
-            "User-Agent": "CBGrupBarna-IndexNow/1.0 (+https://cbgrupbarna.info/)",
+            "User-Agent": "CBGrupBarna-IndexNow/1.0 (+https://linksbio.cbgrupbarna.info/)",
         },
     )
     try:

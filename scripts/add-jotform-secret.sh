@@ -83,5 +83,5 @@ curl -s -X POST -H "Authorization: token $TOKEN" -H "Accept: application/vnd.git
   -d '{"ref":"main"}' > /dev/null
 
 echo ""
-echo "🎉 Tot llest. En 30-60 segons cbgrupbarna.info mostrarà els números reals de JotForm."
+echo "🎉 Tot llest. En 30-60 segons linksbio.cbgrupbarna.info mostrarà els números reals de JotForm."
 echo "   Comprova-ho a: https://github.com/$REPO/actions"
