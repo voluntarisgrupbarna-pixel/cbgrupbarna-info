@@ -20,6 +20,42 @@ l'entrada a dalt de tot d'aquest fitxer amb la data i el resum, i es
 puja a `main` en el mateix commit. La versió és el commit; el número
 només l'hi posa nom.
 
+**Edicions amb nom.** A partir de la 1.5.4 hi ha dues edicions del lloc,
+i el nom va al costat del número: **«Completa»** és el lloc sencer tal com
+viu a `cbgrupbarna.info` (tot el contingut, tres idiomes, totes les
+seccions); **«Reduïda»** serà una versió retallada, pensada per a un
+domini nou. Quan una entrada no porti nom, és que val per a les dues.
+
+---
+
+## 1.5.4 «Completa» — 2026-09-14
+
+**Punt de tancament del lloc sencer, abans de tocar res del domini.**
+Aquesta versió no afegeix funcionalitat: fixa un estat conegut i
+anomenat de tot el que hi ha publicat avui, perquè la futura edició
+«Reduïda» i el canvi de domini tinguin un abans clar amb què comparar-se.
+
+Què entra respecte de la 1.5.3:
+
+- **Arreglat el workflow d'analítica** (`.github/workflows/analitica.yml`):
+  `git diff --quiet` sobre un fitxer que encara no existeix al repositori
+  sempre deia «sense canvis», així que el primer informe de GA4 mai
+  s'hauria arribat a publicar. Ara fa `git add` abans de comprovar amb
+  `git diff --cached --quiet`, que detecta tant un fitxer nou com un de
+  modificat.
+- **`PENDENTS-WEB.md` al dia**: especificació completa del dashboard
+  d'analítica, calendari real de les sessions de fotos (Escoleta ja
+  gravada al maig, sèniors + La Nau del 31/08–01/09), la secció «Camí cap
+  al 10: què cal incorporar», el pendent del post nou de Robert Willett i
+  l'avís sobre una sessió d'IA que es va confondre de projecte.
+
+**El que aquesta versió deixa apuntat per a la migració de domini.** El
+domini no viu només al `CNAME`: hi ha **11.316 ocurrències de
+`cbgrupbarna.info` repartides per 553 fitxers** (8.899 a HTML —canonical,
+hreflang, `og:url` i JSON-LD—, 1.830 al `sitemap.xml`, més `llms.txt`,
+els generadors de `scripts/` i els workflows). Moure el lloc de domini és
+una passada sistemàtica amb redireccions, no un canvi de fitxer.
+
 ---
 
 ## 1.5.3 — 2026-08-28
