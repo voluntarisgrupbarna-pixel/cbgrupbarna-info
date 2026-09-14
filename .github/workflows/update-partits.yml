@@ -102,7 +102,12 @@ jobs:
         if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode == 'complet'
         run: python .github/scripts/update-partits.py
 
+      # Mateix tracte que el robot complet: si la FCBQ no el deixa entrar,
+      # l'script surt amb error però la resta de passos han de córrer igual.
+      # L'avís es cobra al final, amb el workflow en vermell.
       - name: Afegir només els resultats de la setmana (fitxa del club)
+        id: resultats
+        continue-on-error: true
         if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode == 'resultats'
         run: python .github/scripts/update-resultats.py
 
@@ -166,7 +171,7 @@ jobs:
       # llista d'Actions, un dia que el robot no ha pogut entrar no es vegi
       # igual que un dia que ha anat bé.
       - name: El robot no ha pogut entrar a la FCBQ
-        if: steps.robot.outcome == 'failure'
+        if: steps.robot.outcome == 'failure' || steps.resultats.outcome == 'failure'
         run: |
           echo "El pas «Baixar i comparar el calendari FCBQ» ha fallat."
           echo "Els partits i resultats no s'estan actualitzant sols."
