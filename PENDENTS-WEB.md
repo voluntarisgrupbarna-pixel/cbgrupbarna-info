@@ -671,3 +671,25 @@ dia, com abans.
 
 Perquè surti res, però, hi ha d'haver marcadors: amb el captcha posat, o
 s'entren a `/partits/` → Gestió o no n'hi ha.
+
+---
+
+## 29-09-2026 — Pla SEO/GEO cap als 1.000 clics/mes
+
+Encàrrec de l'Ana: pla d'actualització SEO i GEO per arribar a 1.000 clics/mes.
+Document sencer a **[`PLA-SEO-GEO-1000-CLICS.md`](PLA-SEO-GEO-1000-CLICS.md)**.
+
+**🔴 El fet que canvia tot el pla, trobat fent-lo:** el 14/09/2026 la web es va
+traslladar de `cbgrupbarna.info` a **`linksbio.cbgrupbarna.info`** (decisió de
+direcció; `cbgrupbarna.com` es queda com la web convencional). No hi ha cap rastre
+en aquest document ni al `CHANGELOG.md` que digui si **Search Console segueix una
+propietat del domini nou**. Si no ho fa, cap xifra d'aquest pla —ni l'última
+fotografia real que tenim (49 clics / 2.910 impressions en 11 dies, 18→28/08, abans
+del trasllat)— es pot mesurar d'aquí endavant.
+
+**Acció 0, cal l'Ana aquesta setmana, abans de res més:** confirmar o crear la
+propietat de Search Console per a `linksbio.cbgrupbarna.info`, enviar-hi el sitemap
+(392 URL) i demanar indexació manual de la portada. Detall complet, amb el
+calendari de les fases següents (schema d'esdeveniment al campus, fitxa de Google
+Business per verificar, missatges als partners ja redactats, contingut nou dirigit
+i GEO), al document enllaçat.
