@@ -693,3 +693,63 @@ propietat de Search Console per a `linksbio.cbgrupbarna.info`, enviar-hi el site
 calendari de les fases següents (schema d'esdeveniment al campus, fitxa de Google
 Business per verificar, missatges als partners ja redactats, contingut nou dirigit
 i GEO), al document enllaçat.
+
+---
+
+## 29-09-2026 (tarda) — Fase 1 del pla SEO/GEO: fet el que es podia fer sense l'Ana
+
+Revisió punt per punt del bloc «Fase 1» del pla. Bona notícia: **la majoria ja
+estava feta**, per sessions d'entre el 30/08 i avui que no ho havien anotat aquí.
+Verificat en directe, no només al codi:
+
+- **Secció pròpia de tecnificació:** `/tecnificacio-basquet-barcelona/` existeix
+  als tres idiomes (`es/tecnificacion-baloncesto-barcelona/`,
+  `en/basketball-skills-training-barcelona/`), amb `hreflang` correcte i al
+  sitemap. El pendent del 30/08 («tecnificacion baloncesto barcelona» sense
+  pàgina pròpia, posició 57) ja no aplica.
+- **`/campus-nadal-basquet-barcelona/` ja enllaçada des de `/campus/`**, de
+  `/campus-basquet-barcelona/` i de `/tecnificacio-basquet-barcelona/`. El
+  pendent del 30/08 també queda tancat.
+- **Títols i metadescripcions en castellà revisats**: comparat `campus/` vs
+  `es/campus/`, `campus-basquet-barcelona/` vs `es/campus-baloncesto-barcelona/`,
+  `tecnificacio-basquet-barcelona/` vs la seva parella, `escola-basquet-
+  barcelona/` vs `es/escola-baloncesto-barcelona/` i la portada. Cap és una
+  traducció literal feble: fan servir «baloncesto», «manejo de balón» i
+  paraules clau pròpies del castellà, no calcs del català. El diagnòstic del
+  30/08 («el CTR de `/es/` és un terç del de `/ca/`») calia revisar-lo amb dades
+  nous, no amb una auditoria de còpia — que ja estava bé.
+- **`Event`+`Offer` al campus: NO fet, i no toca fer-ho encara.** Hi ha una
+  plantilla ja escrita a `POSICIONAMENT-CAMPUS-SEO.md` («Campus de Nadal · pla
+  per a l'octubre»), però **sense les dates i el preu reals de l'edició de
+  Nadal** —que la mateixa pàgina diu que «es publiquen durant el mes
+  d'octubre»— posar-hi el node seria inventar una dada. Pendent real: **que
+  l'Ana confirmi les dates i el preu del campus de Nadal 2026** perquè es
+  pugui enganxar la plantilla tal com estava previst.
+- **🔴 Bug real trobat i arreglat**: `es/ventajas-familia/` i
+  `en/family-benefits/` tenien el `canonical`, `og:url` i el node `@id`/`url`
+  del JSON-LD **apuntant a una URL sense el prefix d'idioma**
+  (`.../ventajas-familia/` i `.../family-benefits/`, totes dues 404 en
+  comprovar-ho en directe) en comptes de `.../es/ventajas-familia/` i
+  `.../en/family-benefits/`. Causa: `scripts/build-avantatges-familia.py`
+  construïa el `canonical` sense el `PREFIX[lang]` que sí que feia servir per
+  a l'`hreflang` i el selector d'idioma. **Arreglat al generador** (una línia)
+  i **als dos fitxers publicats** (canonical, `og:url`, `@id`/`url` i l'`item`
+  del `BreadcrumbList` — 5 llocs per pàgina). No s'ha regenerat la pàgina
+  sencera perquè el generador té la capçalera desactualitzada respecte al
+  publicat (com avisa `web-cbgb` §8): el pedaç s'ha aplicat només als camps
+  afectats, deixant intacta la navegació que ja s'havia tocat a mà després.
+- **Auditoria completa d'`hreflang` a les 471 pàgines que en porten**: escrit
+  un comprovador que valida reciprocitat (cada idioma apunta als altres dos i
+  a si mateix) i canonicals coherents. Resultat: **0 errors reals** després
+  del pedaç d'`avantatges-familia`. Els 18 «errors» que sortien abans eren
+  falsos positius de pàgines de redirecció antigues (`es/blog/que-es-
+  basquet-3x3/`, `en/blog/campus-basquet-barcelona-guia/`...) que comparteixen
+  `canonical` amb la pàgina nova a què redirigeixen — és el patró correcte,
+  no un bug.
+- **Consolidació `campus/` vs `campus-basquet-barcelona/`**: ja diferenciades
+  amb claredat (`campus/` = producte i inscripció; `campus-basquet-
+  barcelona/` = comparativa de l'oferta de la ciutat). No calia tocar res.
+
+**Pendent real d'aquest bloc, i és per a l'Ana:** les dates i el preu del
+campus de Nadal (§ Fase 1, punt de l'`Event`+`Offer`), que és octubre —
+literalment ara.

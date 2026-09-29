@@ -72,29 +72,40 @@ buida.
 
 ## 2. Fase 1 (setmanes 1-2) · Fonaments tècnics — codi, sense esperar l'Ana
 
-Tot això es pot fer des del repositori, no depèn de cap decisió ni compte extern:
+**Estat el 29/09/2026, revisat en directe:** quatre dels sis punts ja estaven fets
+per sessions posteriors al 30/08 que no ho havien anotat en aquest document —
+verificat i registrat a `PENDENTS-WEB.md`. Els que quedaven per fer avui:
 
-1. **Schema `Event` + `Offer` a les pàgines de campus** (`campus/`, `es/campus/`,
-   `en/campus/`, `campus-nadal-basquet-barcelona/` i equivalents). Avui hi ha
-   `Course`/`CourseInstance` amb dates i preus **visibles** però no marcats com a
-   dades estructurades d'esdeveniment — exactament el resultat enriquit que Google
-   mostra per a un campus amb dates concretes. Pendent des del 30/08/2026.
-2. **Auditoria de títols i metes en castellà.** El `/es/` té gairebé el mateix volum
-   d'impressions que el català i un terç del CTR: revisar si són traduccions
-   literals en comptes de còpia pensada per castellanoparlants (paraules clau
-   diferents: «baloncesto» vs «básquet», «cerca de mí» local).
-3. **Verificar reciprocitat de l'`hreflang`** a les 473 pàgines que ja en porten:
-   que cada versió apunti a les altres dues i a si mateixa, sense cap 404 ni cap
-   parella trencada (Search Console → «Focalización internacional» ho marca sol un
-   cop hi hagi dades nous del domini nou).
-4. **`/campus-nadal-basquet-barcelona/` enllaçada des de `/campus/`** (pendent
-   assenyalat el 30/08: existia i no hi tenia cap enllaç d'entrada).
-5. **Secció pròpia de tecnificació.** «tecnificacion baloncesto barcelona» té
-   impressions i estem a posició 57 perquè la paraula surt dins del text però no
-   té secció ni pàgina pròpia amb aquest focus.
-6. **Consolidar `campus-basquet-barcelona/`** (la pàgina de comparativa/tecnificació
-   d'alt rendiment) i `campus/` perquè no es reparteixin la mateixa consulta entre
-   dues pàgines pròpies — avui compten per separat i cap arriba a primera pàgina.
+1. ~~**Schema `Event` + `Offer` a les pàgines de campus.**~~ **No es pot fer
+   encara, i és correcte que no s'hagi fet.** El campus d'estiu 2026 ja és una
+   edició tancada (l'`Event` hi tindria dates passades) i el de Nadal encara no
+   té dates ni preu confirmats per l'Ana —la pàgina mateixa ho diu: «es
+   publiquen durant el mes d'octubre». Hi ha una plantilla llesta a
+   `POSICIONAMENT-CAMPUS-SEO.md`. **Pendent real: que l'Ana doni les dates i el
+   preu del campus de Nadal** (és literalment ara, octubre), i llavors s'enganxa
+   en cinc minuts.
+2. ~~**Auditoria de títols i metes en castellà.**~~ **Fet, revisat i ja estava
+   bé.** Comparats `campus/`, `campus-basquet-barcelona/`,
+   `tecnificacio-basquet-barcelona/`, `escola-basquet-barcelona/` i la portada
+   contra la seva parella en castellà: cap és una traducció literal, totes fan
+   servir vocabulari propi («baloncesto», «manejo de balón»). El CTR baix
+   d'`/es/` del 30/08 no es pot atribuir a còpia feble; caldrà tornar-ho a
+   mirar amb dades del domini nou.
+3. ~~**Verificar reciprocitat de l'`hreflang`.**~~ **Fet.** Auditades les 471
+   pàgines amb `hreflang`: **0 errors reals**. Però ha sortit d'aquí un 🔴
+   **bug real i arreglat**: `es/ventajas-familia/` i `en/family-benefits/`
+   tenien el `canonical` sense el prefix d'idioma (apuntaven a URL que donen
+   404 en directe). Arreglat al generador
+   (`scripts/build-avantatges-familia.py`) i a les dues pàgines publicades.
+4. ~~**`/campus-nadal-basquet-barcelona/` enllaçada des de `/campus/`.**~~
+   **Ja ho estava** (i també des de `campus-basquet-barcelona/` i
+   `tecnificacio-basquet-barcelona/`).
+5. ~~**Secció pròpia de tecnificació.**~~ **Ja existeix**:
+   `/tecnificacio-basquet-barcelona/` als tres idiomes, amb `hreflang` i al
+   sitemap.
+6. ~~**Consolidar `campus-basquet-barcelona/` i `campus/`.**~~ **Ja estan
+   diferenciades**: una és el producte i la inscripció, l'altra la comparativa
+   amb l'oferta de la ciutat. No calia tocar-hi res.
 
 ---
 
