@@ -671,3 +671,119 @@ dia, com abans.
 
 Perquè surti res, però, hi ha d'haver marcadors: amb el captcha posat, o
 s'entren a `/partits/` → Gestió o no n'hi ha.
+
+---
+
+## 29-09-2026 — Pla SEO/GEO cap als 1.000 clics/mes
+
+Encàrrec de l'Ana: pla d'actualització SEO i GEO per arribar a 1.000 clics/mes.
+Document sencer a **[`PLA-SEO-GEO-1000-CLICS.md`](PLA-SEO-GEO-1000-CLICS.md)**.
+
+**🔴 El fet que canvia tot el pla, trobat fent-lo:** el 14/09/2026 la web es va
+traslladar de `cbgrupbarna.info` a **`linksbio.cbgrupbarna.info`** (decisió de
+direcció; `cbgrupbarna.com` es queda com la web convencional). No hi ha cap rastre
+en aquest document ni al `CHANGELOG.md` que digui si **Search Console segueix una
+propietat del domini nou**. Si no ho fa, cap xifra d'aquest pla —ni l'última
+fotografia real que tenim (49 clics / 2.910 impressions en 11 dies, 18→28/08, abans
+del trasllat)— es pot mesurar d'aquí endavant.
+
+**Acció 0, cal l'Ana aquesta setmana, abans de res més:** confirmar o crear la
+propietat de Search Console per a `linksbio.cbgrupbarna.info`, enviar-hi el sitemap
+(392 URL) i demanar indexació manual de la portada. Detall complet, amb el
+calendari de les fases següents (schema d'esdeveniment al campus, fitxa de Google
+Business per verificar, missatges als partners ja redactats, contingut nou dirigit
+i GEO), al document enllaçat.
+
+---
+
+## 29-09-2026 (tarda) — Fase 1 del pla SEO/GEO: fet el que es podia fer sense l'Ana
+
+Revisió punt per punt del bloc «Fase 1» del pla. Bona notícia: **la majoria ja
+estava feta**, per sessions d'entre el 30/08 i avui que no ho havien anotat aquí.
+Verificat en directe, no només al codi:
+
+- **Secció pròpia de tecnificació:** `/tecnificacio-basquet-barcelona/` existeix
+  als tres idiomes (`es/tecnificacion-baloncesto-barcelona/`,
+  `en/basketball-skills-training-barcelona/`), amb `hreflang` correcte i al
+  sitemap. El pendent del 30/08 («tecnificacion baloncesto barcelona» sense
+  pàgina pròpia, posició 57) ja no aplica.
+- **`/campus-nadal-basquet-barcelona/` ja enllaçada des de `/campus/`**, de
+  `/campus-basquet-barcelona/` i de `/tecnificacio-basquet-barcelona/`. El
+  pendent del 30/08 també queda tancat.
+- **Títols i metadescripcions en castellà revisats**: comparat `campus/` vs
+  `es/campus/`, `campus-basquet-barcelona/` vs `es/campus-baloncesto-barcelona/`,
+  `tecnificacio-basquet-barcelona/` vs la seva parella, `escola-basquet-
+  barcelona/` vs `es/escola-baloncesto-barcelona/` i la portada. Cap és una
+  traducció literal feble: fan servir «baloncesto», «manejo de balón» i
+  paraules clau pròpies del castellà, no calcs del català. El diagnòstic del
+  30/08 («el CTR de `/es/` és un terç del de `/ca/`») calia revisar-lo amb dades
+  nous, no amb una auditoria de còpia — que ja estava bé.
+- **`Event`+`Offer` al campus: NO fet, i no toca fer-ho encara.** Hi ha una
+  plantilla ja escrita a `POSICIONAMENT-CAMPUS-SEO.md` («Campus de Nadal · pla
+  per a l'octubre»), però **sense les dates i el preu reals de l'edició de
+  Nadal** —que la mateixa pàgina diu que «es publiquen durant el mes
+  d'octubre»— posar-hi el node seria inventar una dada. Pendent real: **que
+  l'Ana confirmi les dates i el preu del campus de Nadal 2026** perquè es
+  pugui enganxar la plantilla tal com estava previst.
+- **🔴 Bug real trobat i arreglat**: `es/ventajas-familia/` i
+  `en/family-benefits/` tenien el `canonical`, `og:url` i el node `@id`/`url`
+  del JSON-LD **apuntant a una URL sense el prefix d'idioma**
+  (`.../ventajas-familia/` i `.../family-benefits/`, totes dues 404 en
+  comprovar-ho en directe) en comptes de `.../es/ventajas-familia/` i
+  `.../en/family-benefits/`. Causa: `scripts/build-avantatges-familia.py`
+  construïa el `canonical` sense el `PREFIX[lang]` que sí que feia servir per
+  a l'`hreflang` i el selector d'idioma. **Arreglat al generador** (una línia)
+  i **als dos fitxers publicats** (canonical, `og:url`, `@id`/`url` i l'`item`
+  del `BreadcrumbList` — 5 llocs per pàgina). No s'ha regenerat la pàgina
+  sencera perquè el generador té la capçalera desactualitzada respecte al
+  publicat (com avisa `web-cbgb` §8): el pedaç s'ha aplicat només als camps
+  afectats, deixant intacta la navegació que ja s'havia tocat a mà després.
+- **Auditoria completa d'`hreflang` a les 471 pàgines que en porten**: escrit
+  un comprovador que valida reciprocitat (cada idioma apunta als altres dos i
+  a si mateix) i canonicals coherents. Resultat: **0 errors reals** després
+  del pedaç d'`avantatges-familia`. Els 18 «errors» que sortien abans eren
+  falsos positius de pàgines de redirecció antigues (`es/blog/que-es-
+  basquet-3x3/`, `en/blog/campus-basquet-barcelona-guia/`...) que comparteixen
+  `canonical` amb la pàgina nova a què redirigeixen — és el patró correcte,
+  no un bug.
+- **Consolidació `campus/` vs `campus-basquet-barcelona/`**: ja diferenciades
+  amb claredat (`campus/` = producte i inscripció; `campus-basquet-
+  barcelona/` = comparativa de l'oferta de la ciutat). No calia tocar res.
+
+**Pendent real d'aquest bloc, i és per a l'Ana:** les dates i el preu del
+campus de Nadal (§ Fase 1, punt de l'`Event`+`Offer`), que és octubre —
+literalment ara.
+
+---
+
+## 08-10-2026 — Desactivat «Equips» i «Calendari» de la navegació
+
+Encàrrec de l'Ana: treure la part de saber com van els equips i el calendari
+de partits. Desactivat, no esborrat: **`/partits/`, `/partits/equips/` i
+`/partits/calendaris/` segueixen publicades i funcionant igual** (robot diari
+de la FCBQ, `.ics` subscrits al mòbil de les famílies, fitxes de 15 equips).
+Només se n'ha tret la **visibilitat des de la navegació**:
+
+- **`i18n/diccionari.yml`**: tret `nav_equips` i `partits` de l'`estructura.nav`
+  dels tres idiomes (eren la font única del `<nav class="head-nav">`).
+  Aplicat a disc amb `python3 scripts/nav-aplica.py`: **339 capçaleres**
+  reescrites directament des de la font, sense tocar res més de cada pàgina.
+- **`scripts/build-mapa.py`**: la columna «Equips i temporada» del mapa ≡ es
+  queda només amb **Barna Màgics** (Equips, Calendari i Calendari per equip,
+  fora). Regenerat `js/mapa.js` (un sol fitxer, el carreguen totes les
+  pàgines).
+- **Les tres portades**: treta la franja «Calendari» (la que deia «Dies de
+  partit i resultats de tots els equips, cada setmana» i enllaçava `/partits/`).
+  De nou franges a vuit.
+
+**El que NO s'ha tocat, i per què:** el peu de pàgina («Temporada» → Calendari
+· Calendari per equip) encara hi enllaça. A diferència de la capçalera, el
+peu **no té cap script equivalent a `nav-aplica.py`** que el reescrigui a
+totes les pàgines des d'una font única (`web-cbgb` §8 ja avisa que «el peu
+va per dues velocitats»): treure-ho d'allà voldria dir editar a mà centenars
+de fitxers amb estats diferents, un risc molt més gran que el que demanava
+l'encàrrec. Si també s'ha de treure del peu, cal fer-ho com a tasca pròpia.
+
+Comprovat: `i18n-lint.py` (0 errors nous), `i18n-contingut.py` (306
+traduccions comparades, cap avís), i a les tres portades segueixen 8
+franges equilibrades als tres idiomes.
