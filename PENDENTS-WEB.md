@@ -753,3 +753,37 @@ Verificat en directe, no només al codi:
 **Pendent real d'aquest bloc, i és per a l'Ana:** les dates i el preu del
 campus de Nadal (§ Fase 1, punt de l'`Event`+`Offer`), que és octubre —
 literalment ara.
+
+---
+
+## 08-10-2026 — Desactivat «Equips» i «Calendari» de la navegació
+
+Encàrrec de l'Ana: treure la part de saber com van els equips i el calendari
+de partits. Desactivat, no esborrat: **`/partits/`, `/partits/equips/` i
+`/partits/calendaris/` segueixen publicades i funcionant igual** (robot diari
+de la FCBQ, `.ics` subscrits al mòbil de les famílies, fitxes de 15 equips).
+Només se n'ha tret la **visibilitat des de la navegació**:
+
+- **`i18n/diccionari.yml`**: tret `nav_equips` i `partits` de l'`estructura.nav`
+  dels tres idiomes (eren la font única del `<nav class="head-nav">`).
+  Aplicat a disc amb `python3 scripts/nav-aplica.py`: **339 capçaleres**
+  reescrites directament des de la font, sense tocar res més de cada pàgina.
+- **`scripts/build-mapa.py`**: la columna «Equips i temporada» del mapa ≡ es
+  queda només amb **Barna Màgics** (Equips, Calendari i Calendari per equip,
+  fora). Regenerat `js/mapa.js` (un sol fitxer, el carreguen totes les
+  pàgines).
+- **Les tres portades**: treta la franja «Calendari» (la que deia «Dies de
+  partit i resultats de tots els equips, cada setmana» i enllaçava `/partits/`).
+  De nou franges a vuit.
+
+**El que NO s'ha tocat, i per què:** el peu de pàgina («Temporada» → Calendari
+· Calendari per equip) encara hi enllaça. A diferència de la capçalera, el
+peu **no té cap script equivalent a `nav-aplica.py`** que el reescrigui a
+totes les pàgines des d'una font única (`web-cbgb` §8 ja avisa que «el peu
+va per dues velocitats»): treure-ho d'allà voldria dir editar a mà centenars
+de fitxers amb estats diferents, un risc molt més gran que el que demanava
+l'encàrrec. Si també s'ha de treure del peu, cal fer-ho com a tasca pròpia.
+
+Comprovat: `i18n-lint.py` (0 errors nous), `i18n-contingut.py` (306
+traduccions comparades, cap avís), i a les tres portades segueixen 8
+franges equilibrades als tres idiomes.
