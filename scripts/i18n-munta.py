@@ -45,7 +45,8 @@ _spec.loader.exec_module(_extreu)
 ROOT = Path(__file__).resolve().parents[1]
 FEINA = ROOT / "i18n" / "feina"
 SITE = "https://linksbio.cbgrupbarna.info"
-LOCALE = {"ca": "ca_ES", "es": "es_ES", "en": "en_US", "ja": "ja_JP", "ko": "ko_KR"}
+LOCALE = {"ca": "ca_ES", "es": "es_ES", "en": "en_US", "ja": "ja_JP", "ko": "ko_KR",
+          "de": "de_DE", "it": "it_IT", "nl": "nl_NL", "fr": "fr_FR"}
 
 RE_HTML_LANG = re.compile(r'(<html[^>]*\blang=["\'])([^"\']*)(["\'])', re.I)
 RE_OG_LOCALE = re.compile(r'(<meta[^>]+property=["\']og:locale["\'][^>]+content=["\'])([^"\']*)(["\'])', re.I)
@@ -123,7 +124,7 @@ def tradueix_enllacos(html, idioma):
 
     def canvia(m):
         obre, ruta, cua, tanca = m.groups()
-        if ruta.startswith(("/es/", "/en/", "/ja/", "/ko/")):
+        if ruta.startswith(("/es/", "/en/", "/ja/", "/ko/", "/de/", "/it/", "/nl/", "/fr/")):
             return m.group(0)
         # Fitxers (imatges, PDF, .ics) i rutes tècniques no tenen versió.
         if re.search(r"\.[a-z0-9]{2,5}$", ruta) and not ruta.endswith(".html"):
@@ -137,7 +138,7 @@ def tradueix_enllacos(html, idioma):
             return f"{obre}{candidat}{cua}{tanca}"
         # Japonès i coreà només tenen les presentacions: la resta d'enllaços
         # van a la versió anglesa, que és millor que un 404 o que el català.
-        if idioma in ("ja", "ko"):
+        if idioma in ("ja", "ko", "de", "it", "nl", "fr"):
             en = desti_del_mapa(ruta, "en") or f"/en{ruta}"
             if fitxer_de(en).exists():
                 return f"{obre}{en}{cua}{tanca}"
@@ -169,7 +170,9 @@ def munta(ruta, idioma):
         return None, ("la pàgina catalana ha canviat des que es va extreure "
                       f"({len(ara)} trossos ara, {len(feina['trossos'])} a la feina). "
                       f"Torna a executar:  python3 scripts/i18n-extreu.py {ruta} {idioma}")
-    trossos = [dict(nou, **{idioma: vell[idioma]})
+    # Es desa a «_tr» i no a trossos[idioma]: «de» (alemany) és també la clau
+    # on el tros guarda la posició d'inici.
+    trossos = [dict(nou, _tr=vell[idioma])
                for nou, vell in zip(ara, feina["trossos"])]
 
     # 1. El JSON-LD, clau per clau, abans de tocar les posicions del text.
@@ -184,7 +187,7 @@ def munta(ruta, idioma):
                 return m.group(0)
             dades = json.loads(m.group(2))
             for t in trossets:
-                per_camins(dades, t["cami"], t[idioma])
+                per_camins(dades, t["cami"], t["_tr"])
             return m.group(1) + json.dumps(dades, ensure_ascii=False, indent=2) + m.group(3)
         html = RE_LD.sub(canvia_ld, html)
 
@@ -200,19 +203,19 @@ def munta(ruta, idioma):
         # català i s'hi torna a aplicar el JSON-LD al final.
         cos = catala
         for t in plans:
-            cos = cos[:t["de"]] + t[idioma] + cos[t["a"]:]
+            cos = cos[:t["de"]] + t["_tr"] + cos[t["a"]:]
         for m in RE_LD.finditer(catala):
             trossets = per_ld.get(m.start(2))
             if not trossets:
                 continue
             dades = json.loads(m.group(2))
             for t in trossets:
-                per_camins(dades, t["cami"], t[idioma])
+                per_camins(dades, t["cami"], t["_tr"])
             cos = cos.replace(m.group(2), json.dumps(dades, ensure_ascii=False, indent=2))
         html = cos
     else:
         for t in plans:
-            html = html[:t["de"]] + t[idioma] + html[t["a"]:]
+            html = html[:t["de"]] + t["_tr"] + html[t["a"]:]
 
     # 3. L'idioma de la pàgina.
     html = RE_HTML_LANG.sub(lambda m: m.group(1) + idioma + m.group(3), html, count=1)
@@ -227,7 +230,8 @@ def munta(ruta, idioma):
     # partners i de premsa fan servir la llarga ("ca-ES") i deien a Google que
     # la versió anglesa era en català; les portades fan servir una llista.
     # BCP-47: el castellà d'aquí és es-ES i l'anglès el servim com a en-US.
-    llarg = {"ca": "ca-ES", "es": "es-ES", "en": "en-US", "ja": "ja-JP", "ko": "ko-KR"}[idioma]
+    llarg = {"ca": "ca-ES", "es": "es-ES", "en": "en-US", "ja": "ja-JP", "ko": "ko-KR",
+             "de": "de-DE", "it": "it-IT", "nl": "nl-NL", "fr": "fr-FR"}[idioma]
     html = html.replace('"inLanguage": "ca"', f'"inLanguage": "{idioma}"')
     html = html.replace('"inLanguage":"ca"', f'"inLanguage":"{idioma}"')
     html = html.replace('"inLanguage": "ca-ES"', f'"inLanguage": "{llarg}"')
@@ -328,7 +332,7 @@ def punt_japonesa(html):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ruta", nargs="?", help="ruta catalana, p. ex. /club/")
-    ap.add_argument("idioma", choices=["es", "en", "ja", "ko"])
+    ap.add_argument("idioma", choices=["es", "en", "ja", "ko", "de", "it", "nl", "fr"])
     ap.add_argument("--tot", action="store_true", help="totes les que tinguin la feina feta")
     ap.add_argument("--ruta-desti", help="ruta de la pàgina traduïda si no ha de dur el nom "
                                          "català: --ruta-desti /en/history/")

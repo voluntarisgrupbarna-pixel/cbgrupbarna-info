@@ -157,7 +157,7 @@ def extreu(html):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ruta", help="ruta de la pàgina catalana, p. ex. /club/")
-    ap.add_argument("idiomes", nargs="+", choices=["es", "en", "ja", "ko"])
+    ap.add_argument("idiomes", nargs="+", choices=["es", "en", "ja", "ko", "de", "it", "nl", "fr"])
     args = ap.parse_args()
 
     resta = args.ruta.lstrip("/")
