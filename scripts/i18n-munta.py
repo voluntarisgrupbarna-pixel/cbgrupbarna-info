@@ -45,7 +45,7 @@ _spec.loader.exec_module(_extreu)
 ROOT = Path(__file__).resolve().parents[1]
 FEINA = ROOT / "i18n" / "feina"
 SITE = "https://linksbio.cbgrupbarna.info"
-LOCALE = {"ca": "ca_ES", "es": "es_ES", "en": "en_US"}
+LOCALE = {"ca": "ca_ES", "es": "es_ES", "en": "en_US", "ja": "ja_JP", "ko": "ko_KR"}
 
 RE_HTML_LANG = re.compile(r'(<html[^>]*\blang=["\'])([^"\']*)(["\'])', re.I)
 RE_OG_LOCALE = re.compile(r'(<meta[^>]+property=["\']og:locale["\'][^>]+content=["\'])([^"\']*)(["\'])', re.I)
@@ -67,6 +67,17 @@ RE_LD = re.compile(r'(?is)(<script[^>]*ld\+json[^>]*>)(.*?)(</script>)')
 RE_ALTERNATE = re.compile(
     r'[ \t]*<link[^>]+rel=["\']alternate["\'][^>]*hreflang=["\'][^"\']+["\'][^>]*>[ \t]*\n?', re.I)
 
+
+CJK_CSS = {
+    "ja": '<style id="cjk-ja">html[lang="ja"] body,html[lang="ja"] h1,html[lang="ja"] h2,html[lang="ja"] h3,'
+          'html[lang="ja"] h4,html[lang="ja"] button,html[lang="ja"] input{font-family:"Inter",'
+          '"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP","Meiryo",sans-serif}'
+          'html[lang="ja"] *{letter-spacing:normal;word-break:auto-phrase;line-break:strict}</style>',
+    "ko": '<style id="cjk-ko">html[lang="ko"] body,html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,'
+          'html[lang="ko"] h4,html[lang="ko"] button,html[lang="ko"] input{font-family:"Inter",'
+          '"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Nanum Gothic",sans-serif}'
+          'html[lang="ko"] *{letter-spacing:normal;word-break:keep-all}</style>',
+}
 
 _MAPA = None
 
@@ -112,7 +123,7 @@ def tradueix_enllacos(html, idioma):
 
     def canvia(m):
         obre, ruta, cua, tanca = m.groups()
-        if ruta.startswith(("/es/", "/en/")):
+        if ruta.startswith(("/es/", "/en/", "/ja/", "/ko/")):
             return m.group(0)
         # Fitxers (imatges, PDF, .ics) i rutes tècniques no tenen versió.
         if re.search(r"\.[a-z0-9]{2,5}$", ruta) and not ruta.endswith(".html"):
@@ -124,6 +135,12 @@ def tradueix_enllacos(html, idioma):
         candidat = desti_del_mapa(ruta, idioma) or f"/{idioma}{ruta}"
         if fitxer_de(candidat).exists():
             return f"{obre}{candidat}{cua}{tanca}"
+        # Japonès i coreà només tenen les presentacions: la resta d'enllaços
+        # van a la versió anglesa, que és millor que un 404 o que el català.
+        if idioma in ("ja", "ko"):
+            en = desti_del_mapa(ruta, "en") or f"/en{ruta}"
+            if fitxer_de(en).exists():
+                return f"{obre}{en}{cua}{tanca}"
         sense.add(ruta)
         return m.group(0)
 
@@ -199,13 +216,18 @@ def munta(ruta, idioma):
 
     # 3. L'idioma de la pàgina.
     html = RE_HTML_LANG.sub(lambda m: m.group(1) + idioma + m.group(3), html, count=1)
+    if idioma in CJK_CSS and "</head>" in html:
+        # Anton i Inter no porten ideogrames ni hangul: sense això el navegador
+        # tria una tipografia qualsevol. S'afegeix la pila de sistema de cada
+        # idioma darrere de les fonts del club, que continuen manant en llatí.
+        html = html.replace("</head>", CJK_CSS[idioma] + "\n</head>", 1)
     html = RE_OG_LOCALE.sub(lambda m: m.group(1) + LOCALE[idioma] + m.group(3), html)
     # L'inLanguage del JSON-LD s'escriu de tres maneres pel repositori i abans
     # només se'n traduïa una: la curta. Les pàgines generades del blog, dels
     # partners i de premsa fan servir la llarga ("ca-ES") i deien a Google que
     # la versió anglesa era en català; les portades fan servir una llista.
     # BCP-47: el castellà d'aquí és es-ES i l'anglès el servim com a en-US.
-    llarg = {"ca": "ca-ES", "es": "es-ES", "en": "en-US"}[idioma]
+    llarg = {"ca": "ca-ES", "es": "es-ES", "en": "en-US", "ja": "ja-JP", "ko": "ko-KR"}[idioma]
     html = html.replace('"inLanguage": "ca"', f'"inLanguage": "{idioma}"')
     html = html.replace('"inLanguage":"ca"', f'"inLanguage":"{idioma}"')
     html = html.replace('"inLanguage": "ca-ES"', f'"inLanguage": "{llarg}"')
@@ -284,13 +306,29 @@ def munta(ruta, idioma):
     else:
         print(f"  avís: {ruta} no té un <footer class=\"foot\">; el peu s'ha deixat com era")
 
+    if idioma == "ja":
+        html = punt_japonesa(html)
+
     return (html, sense_versio), None
+
+
+RE_ZONA_CODI = re.compile(r'(?is)(<(?:script|style)\b.*?</(?:script|style)>)')
+# Un punt ASCII enganxat al tancament d'una etiqueta en línia (…</strong>.)
+# és el punt de la frase catalana original; en japonès és «。».
+RE_PUNT_JA = re.compile(r'(</(?:strong|b|em|i|a|span)>)\.(?=\s*(?:<|$))')
+
+
+def punt_japonesa(html):
+    parts = RE_ZONA_CODI.split(html)
+    for i in range(0, len(parts), 2):          # només el que no és <script>/<style>
+        parts[i] = RE_PUNT_JA.sub(lambda m: m.group(1) + "。", parts[i])
+    return "".join(parts)
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ruta", nargs="?", help="ruta catalana, p. ex. /club/")
-    ap.add_argument("idioma", choices=["es", "en"])
+    ap.add_argument("idioma", choices=["es", "en", "ja", "ko"])
     ap.add_argument("--tot", action="store_true", help="totes les que tinguin la feina feta")
     ap.add_argument("--ruta-desti", help="ruta de la pàgina traduïda si no ha de dur el nom "
                                          "català: --ruta-desti /en/history/")

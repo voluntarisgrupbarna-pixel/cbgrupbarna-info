@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0A0A0C">
+<title>데이터로 보는 Barna · CB Grup Barna</title>
+<meta name="description" content="CB Grup Barna 보고서: 육성 농구에 관한 연구(이탈, 재능, 건강, 클럽 문화)와 도시 내 클럽의 위치.">
+<link rel="canonical" href="https://linksbio.cbgrupbarna.info/ko/presentations/evidence-and-position/">
+<link rel="alternate" hreflang="ca" href="https://linksbio.cbgrupbarna.info/presentacions/evidencia-i-posicio/">
+<link rel="alternate" hreflang="es" href="https://linksbio.cbgrupbarna.info/es/presentaciones/evidencia-y-posicion/">
+<link rel="alternate" hreflang="en" href="https://linksbio.cbgrupbarna.info/en/presentations/evidence-and-position/">
+<link rel="alternate" hreflang="ja" href="https://linksbio.cbgrupbarna.info/ja/presentations/evidence-and-position/">
+<link rel="alternate" hreflang="ko" href="https://linksbio.cbgrupbarna.info/ko/presentations/evidence-and-position/">
+<link rel="alternate" hreflang="x-default" href="https://linksbio.cbgrupbarna.info/presentacions/evidencia-i-posicio/">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CB Grup Barna">
+<meta property="og:title" content="데이터로 보는 Barna">
+<meta property="og:description" content="육성 농구에 관한 클럽의 연구와 순위표에서 Barna의 위치.">
+<meta property="og:url" content="https://linksbio.cbgrupbarna.info/ko/presentations/evidence-and-position/">
+<meta property="og:image" content="https://linksbio.cbgrupbarna.info/presentacio/img/hero-equip.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/logo.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+/* Selector d'idioma. Aquestes presentacions no carreguen barna.css: el
+   component es pinta aquí amb els mateixos tokens, i per tant segueix el
+   mode clar/fosc de la pàgina. Caselles de 24px mínim (WCAG 2.2). */
+.lang-switch { display: flex; align-items: center; gap: 2px; font-family: var(--body); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+.lang-switch a { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; padding: 7px 4px; color: var(--muted); text-decoration: none; transition: color .3s var(--ease, ease); }
+.lang-switch a.active { color: var(--ink); font-weight: 600; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--red); }
+.lang-switch .sep { color: var(--line); pointer-events: none; }
+</style>
+<style>
+
+@font-face{
+  font-family:'Anton';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url(data:font/woff2;base64,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) format('woff2');
+}
+:root{
+  --tinta:#0A0A0C;
+  --panell:#16161A;
+  --paper:#FFFFFF;
+  --vermell:#FF2A30;   /* vermell de text sobre negre */
+  --vermell-ple:#E20613;  /* el de l'escut, per a fons plens */
+  --gris:#9C9C9C;
+  --linia:rgba(255,255,255,.15);
+  --cos:#B9B9BD;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--tinta);color:var(--paper);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding-bottom:80px;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+a{color:var(--paper);text-underline-offset:3px;text-decoration-color:rgba(226,6,19,.6)}
+a:hover{text-decoration-color:var(--vermell)}
+
+header{padding:72px 0 56px;border-bottom:1px solid var(--linia);
+  background:radial-gradient(110% 120% at 15% 0%,#1A1E25 0%,#10100E 65%)}
+.eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:#fff;background:var(--vermell-ple);padding:7px 13px;border-radius:2px;margin-bottom:24px}
+h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(42px,7.5vw,84px);
+  line-height:.94;letter-spacing:-.015em;text-transform:uppercase;text-wrap:balance}
+h1 em{font-style:normal;color:var(--vermell)}
+.lede{margin-top:24px;font-size:18.5px;color:var(--cos);max-width:62ch}
+.meta{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;font-size:13px;color:var(--gris)}
+.meta b{display:block;font-family:'Anton',sans-serif;font-size:22px;color:var(--vermell);letter-spacing:.02em}
+
+section{padding:56px 0;border-top:1px solid var(--linia)}
+section:first-of-type{border-top:none}
+.secn{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--vermell);
+  text-transform:uppercase;margin-bottom:12px}
+h2{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(28px,4.4vw,46px);
+  line-height:1;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:20px;text-wrap:balance}
+h3{font-family:'Anton',sans-serif;font-weight:400;font-size:21px;text-transform:uppercase;
+  letter-spacing:.02em;margin:34px 0 12px;color:var(--paper)}
+h3 .tag{font-size:11px;background:var(--vermell-ple);color:#fff;padding:4px 9px;border-radius:2px;
+  vertical-align:3px;margin-left:10px;letter-spacing:.14em;font-family:'Inter',system-ui,sans-serif;font-weight:700}
+p{max-width:70ch;color:var(--cos)}
+p+p{margin-top:14px}
+p strong,li strong{color:var(--paper);font-weight:600}
+.note{background:rgba(226,6,19,.09);border:1px dashed rgba(226,6,19,.5);padding:16px 20px;
+  border-radius:3px;margin:26px 0;font-size:14.5px;color:#E4A69F}
+.note strong{color:#fff}
+
+.pull{border-left:3px solid var(--vermell);padding:8px 0 8px 22px;margin:30px 0;
+  font-family:'Anton',sans-serif;font-size:clamp(19px,2.8vw,27px);line-height:1.2;
+  text-transform:uppercase;max-width:34ch;color:var(--paper)}
+.pull small{display:block;font-family:'Inter',system-ui,sans-serif;text-transform:none;
+  font-size:13px;color:var(--gris);margin-top:8px;letter-spacing:0}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;
+  background:var(--linia);border:1px solid var(--linia);margin:26px 0}
+.card{background:var(--panell);padding:22px 20px}
+.card .k{font-family:'Anton',sans-serif;color:var(--vermell);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:8px}
+.card h4{font-size:15.5px;color:var(--paper);font-weight:600;line-height:1.35;margin-bottom:8px}
+.card p{font-size:14px;color:#A6A29C}
+.card .d{font-family:'Anton',sans-serif;font-size:30px;color:var(--vermell);line-height:1;margin-bottom:6px;
+  font-variant-numeric:tabular-nums}
+
+.tblwrap{overflow-x:auto;margin:26px 0;border:1px solid var(--linia)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14.5px}
+th{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.08em;
+  font-size:12.5px;color:var(--gris);text-align:left;padding:12px 16px;border-bottom:1px solid var(--linia);
+  background:var(--panell)}
+td{padding:12px 16px;border-bottom:1px solid var(--linia);vertical-align:top;color:var(--cos)}
+tr:last-child td{border-bottom:none}
+td b{color:var(--paper);font-weight:600}
+td.num{font-family:'Anton',sans-serif;color:var(--vermell);font-variant-numeric:tabular-nums;font-size:16px}
+.cost0{color:#7FB069;font-weight:600}
+
+ul.checks{list-style:none;margin:18px 0}
+ul.checks li{padding:10px 0 10px 30px;position:relative;border-top:1px solid var(--linia);
+  font-size:15px;color:var(--cos);max-width:75ch}
+ul.checks li:first-child{border-top:none}
+ul.checks li::before{content:"";position:absolute;left:2px;top:17px;width:9px;height:9px;
+  border-radius:50%;background:var(--vermell)}
+ul.checks.no li::before{background:transparent;border:2px solid var(--vermell);width:7px;height:7px}
+
+.veto{background:var(--panell);border:1px solid var(--linia);border-radius:3px;padding:18px 22px;margin:14px 0}
+.veto .bad{font-size:15px;color:var(--paper);font-weight:600}
+.veto .bad::before{content:"✕ ";color:var(--vermell)}
+.veto .use{font-size:14px;color:#A6A29C;margin-top:6px}
+.veto .use b{color:#7FB069;font-weight:600}
+
+.quote{background:var(--panell);border:1px solid var(--linia);border-left:3px solid var(--vermell);
+  padding:26px 28px;margin:26px 0;border-radius:2px}
+.quote .q{font-family:'Anton',sans-serif;font-size:clamp(22px,3.4vw,32px);line-height:1.15;
+  text-transform:uppercase;color:var(--paper)}
+.quote .who{margin-top:12px;font-size:13px;color:var(--gris);letter-spacing:.04em}
+
+.tl{margin:26px 0;border-left:2px solid var(--linia);padding-left:24px;display:flex;flex-direction:column;gap:18px}
+.tli{position:relative}
+.tli::before{content:"";position:absolute;left:-30px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--vermell)}
+.tli .y{font-family:'Anton',sans-serif;font-size:13.5px;color:var(--vermell);letter-spacing:.08em}
+.tli .t{font-size:14.5px;color:var(--cos);margin-top:2px;max-width:70ch}
+.tli .t b{color:var(--paper)}
+
+footer{padding:44px 0 0;border-top:1px solid var(--linia);margin-top:20px}
+footer p{font-size:12.5px;color:var(--gris)}
+@media(max-width:640px){body{font-size:15.5px}section{padding:44px 0}}
+
+.part{padding:64px 0 8px;border-top:3px solid var(--vermell)}
+.part .pn{font-family:'Anton',sans-serif;font-size:14px;letter-spacing:.24em;color:var(--vermell);text-transform:uppercase}
+.part h2{font-size:clamp(34px,5.6vw,58px);margin-top:8px}
+.part p{margin-top:10px}
+.iv{background:var(--panell);border:1px solid var(--linia);border-radius:3px;padding:20px 22px;margin:14px 0}
+.iv .d{font-family:'Anton',sans-serif;font-size:12.5px;color:var(--vermell);letter-spacing:.12em;text-transform:uppercase}
+.iv h4{font-size:16px;color:var(--paper);font-weight:600;margin:6px 0 8px;line-height:1.35}
+.iv p{font-size:14.5px;color:#A6A29C}
+.iv .q2{margin-top:10px;padding-left:14px;border-left:2px solid var(--vermell);font-style:italic;color:var(--cos);font-size:15px}
+.iv a{font-size:13px;color:var(--gris)}
+ol.caps{list-style:none;counter-reset:cap;margin:20px 0}
+ol.caps li{counter-increment:cap;padding:14px 0 14px 58px;position:relative;border-top:1px solid var(--linia);font-size:15px;color:var(--cos);max-width:75ch}
+ol.caps li:first-child{border-top:none}
+ol.caps li::before{content:counter(cap,decimal-leading-zero);position:absolute;left:0;top:12px;
+  font-family:'Anton',sans-serif;font-size:22px;color:var(--vermell);font-variant-numeric:tabular-nums}
+ol.caps li b{color:var(--paper);display:block;margin-bottom:2px}
+
+.rank{width:100%;border-collapse:collapse;font-size:14.5px;margin:18px 0}
+.rank th{background:#0A0C10;color:var(--paper);text-align:left;font-family:'Anton',sans-serif;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:10px 11px;font-weight:400;white-space:nowrap}
+.rank th.r,.rank td.v{text-align:right;font-variant-numeric:tabular-nums}
+.rank td{padding:9px 11px;border-top:1px solid var(--linia);color:var(--cos);vertical-align:middle}
+.rank td.p{color:var(--gris);width:32px;font-variant-numeric:tabular-nums}
+.rank td.c{color:var(--paper)}
+.rank td.n{font-size:13px;color:var(--gris)}
+.rank tr.me td{background:rgba(226,6,19,.13);color:var(--paper);font-weight:600}
+.rank tr.me td.c{box-shadow:inset 3px 0 0 var(--vermell)}
+.rank tr.nw td.c{box-shadow:inset 3px 0 0 #B8822A}
+.bar{height:8px;background:#12161C;position:relative;min-width:90px}
+.bar i{display:block;height:100%;background:#4E86D6}
+.bar i.me{background:var(--vermell)}
+.gapl{display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid var(--linia)}
+.gapl:last-child{border-bottom:0}
+.gapn{font-family:'Anton',sans-serif;font-size:26px;color:var(--vermell);min-width:86px;font-variant-numeric:tabular-nums}
+.gapl span{font-size:15px;color:var(--cos)}
+.quad{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--linia);border:1px solid var(--linia);margin:22px 0}
+.quad>div{background:var(--panell);padding:20px}
+.quad h4{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--vermell);margin-bottom:8px}
+.quad p{font-size:14.5px;color:#A6A29C;margin:0}
+.tag2{display:inline-block;font-family:'Anton',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 7px;border:1px solid var(--linia);color:var(--gris);white-space:nowrap}
+.warn{background:rgba(184,130,42,.10);border:1px dashed rgba(184,130,42,.6);padding:18px 20px;border-radius:3px;margin:24px 0;font-size:14.5px;color:#D9B778}
+.warn b{color:#fff}
+
+  /* --- Encaix al lloc: capçalera, barra de seccions i impressió --- */
+  body{padding-bottom:0}
+  .head{position:sticky;top:0;z-index:100;background:rgba(16,16,14,.92);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--linia)}
+  .head-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);height:60px;display:flex;align-items:center;gap:24px}
+  .head-brand{display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif;font-size:13px;
+    letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#fff;flex-shrink:0}
+  .head-brand img{width:26px;height:26px}
+  .head-nav{display:flex;align-items:center;gap:18px;overflow-x:auto;scrollbar-width:none;flex:1}
+  .head-nav::-webkit-scrollbar{display:none}
+  .head-nav a{font-family:'Anton',sans-serif;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(255,255,255,.55);text-decoration:none;white-space:nowrap}
+  .head-nav a:hover{color:#fff}
+  @media(max-width:900px){.head-nav a.opt{display:none}}
+  .idx{position:sticky;top:60px;z-index:99;background:var(--panell);border-bottom:1px solid var(--linia)}
+  .idx-in{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:18px}
+  .idx-lab{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gris);flex-shrink:0}
+  @media(max-width:820px){.idx-lab{display:none}}
+  .idx-nav{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;scroll-behavior:smooth;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
+  .idx-nav::-webkit-scrollbar{display:none}
+  .idx-nav a{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);
+    text-decoration:none;white-space:nowrap;padding:15px 11px;border-bottom:2px solid transparent}
+  .idx-nav a:hover{color:var(--paper)}
+  .idx-nav a[aria-current="true"]{color:var(--vermell);border-bottom-color:var(--vermell)}
+  .idx-more{flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--paper);text-decoration:none;border:1px solid var(--linia);border-radius:8px;padding:8px 13px}
+  .idx-more:hover{border-color:var(--vermell);color:var(--vermell)}
+  [id]{scroll-margin-top:112px}
+  .crumb{max-width:880px;margin:0 auto;padding:14px 24px;font-size:11.5px;color:var(--gris)}
+  .crumb a{color:var(--gris);text-decoration:none}
+  .crumb a:hover{color:var(--paper)}
+  .foot{border-top:1px solid var(--linia);padding:44px 0 30px;margin-top:40px}
+  .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;margin-bottom:30px}
+  .foot-col h3{font-family:'Anton',sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gris);margin:0 0 12px}
+  .foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px}
+  .foot-col a:hover{color:#fff}
+  .foot-btm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;
+    border-top:1px solid var(--linia);font-size:11.5px;color:var(--gris)}
+  .foot .wrap{max-width:1180px}
+  @page{size:1280px 720px;margin:0}
+  @media print{
+    .head,.idx,.crumb,.foot,.cbgb-gal{display:none!important}
+    header{padding:80px 0}
+    section,.part{break-inside:avoid}
+    .wrap{max-width:none;padding:0 62px}
+  }
+</style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://linksbio.cbgrupbarna.info/ko/presentations/evidence-and-position/#webpage",
+      "url": "https://linksbio.cbgrupbarna.info/ko/presentations/evidence-and-position/",
+      "name": "데이터로 보는 Barna · CB Grup Barna",
+      "description": "CB Grup Barna 보고서: 육성 농구에 관한 연구(이탈, 재능, 건강, 클럽 문화), 논문 지도, 그리고 클럽의 위치.",
+      "inLanguage": "ko",
+      "isPartOf": {
+        "@id": "https://linksbio.cbgrupbarna.info/#website"
+      },
+      "about": {
+        "@id": "https://linksbio.cbgrupbarna.info/#club"
+      },
+      "publisher": {
+        "@id": "https://linksbio.cbgrupbarna.info/#club"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://linksbio.cbgrupbarna.info/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "프레젠테이션",
+          "item": "https://linksbio.cbgrupbarna.info/presentacions/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "데이터로 보는 Barna",
+          "item": "https://linksbio.cbgrupbarna.info/ko/presentations/evidence-and-position/"
+        }
+      ]
+    }
+  ]
+}</script>
+<link rel="stylesheet" href="/css/cerca.css">
+<link rel="stylesheet" href="/css/a11y.css">
+<style id="cjk-ko">html[lang="ko"] body,html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,html[lang="ko"] button,html[lang="ko"] input{font-family:"Inter","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Nanum Gothic",sans-serif}html[lang="ko"] *{letter-spacing:normal;word-break:keep-all}</style>
+</head>
+<body>
+<a href="#main" class="skip" style="position:absolute;left:-999px">본문으로 건너뛰기</a>
+<header class="head">
+  <div class="head-in">
+    <a class="head-brand" href="/en/" aria-label="CB Grup Barna · inici">
+      <img src="/logo.png" alt="Escut del CB Grup Barna" width="226" height="300"><span>CB Grup Barna</span>
+    </a>
+    <nav class="head-nav" aria-label="주 메뉴">
+      <a href="/en/partits/equips/">팀</a>
+      <a href="/en/club/">클럽</a>
+      <a href="/en/partits/">캘린더</a>
+      <a href="/en/escoleta/" class="opt">Escoleta</a>
+      <a href="/en/campus/" class="opt">캠프</a>
+      <a href="/en/companies/" class="opt">기업</a>
+    </nav>
+    <nav class="lang-switch" aria-label="Canvia d'idioma · Cambiar idioma · Change language · 言語を変更 · 언어 변경">
+      <a href="/presentacions/evidencia-i-posicio/" hreflang="ca" lang="ca" aria-label="Català">CA</a><span class="sep" aria-hidden="true">·</span><a href="/es/presentaciones/evidencia-y-posicion/" hreflang="es" lang="es" aria-label="Castellano">ES</a><span class="sep" aria-hidden="true">·</span><a href="/en/presentations/evidence-and-position/" hreflang="en" lang="en" aria-label="English">EN</a><span class="sep" aria-hidden="true">·</span><a href="/ja/presentations/evidence-and-position/" hreflang="ja" lang="ja" aria-label="日本語">JA</a><span class="sep" aria-hidden="true">·</span><a href="/ko/presentations/evidence-and-position/" hreflang="ko" lang="ko" aria-label="한국어" class="active" aria-current="true">KO</a>
+    </nav>
+  </div>
+</header>
+<nav class="idx" aria-label="보고서 섹션">
+  <div class="idx-in">
+    <span class="idx-lab">보고서</span>
+    <div class="idx-nav" id="idxNav">
+      <a href="#dalt">표지</a>
+      <a href="#s1">결론</a>
+      <a href="#s3">연구</a>
+      <a href="#s4">15가지 발견</a>
+      <a href="#s6">10가지 실행안</a>
+      <a href="#s7">주장의 근거</a>
+      <a href="#s8">인용하면 안 되는 것</a>
+      <a href="#s10">논문</a>
+      <a href="#s13">카탈루냐 지도</a>
+      <a href="#s14">미결 사항</a>
+    </div>
+    <a class="idx-more" href="/presentacions/evidencia-i-posicio/cb-grup-barna-evidencia-i-posicio.pdf" download="CB-Grup-Barna-El-Barna-amb-dades.pdf" aria-label="『데이터로 보는 Barna』 다운로드(PDF, 49쪽, 0.5 MB, 원어판) — 접근성 버전은 바로 이 페이지입니다">PDF</a>
+    <a class="idx-more" href="/ko/presentations/">프레젠테이션</a>
+  </div>
+</nav>
+<nav class="crumb" aria-label="경로 표시"><a href="/en/">홈</a> · <a href="/ko/presentations/">프레젠테이션</a> · <span style="color:var(--paper)">데이터로 보는 Barna</span></nav>
+<main id="main">
+<header id="dalt">
+  <div class="wrap">
+    <span class="eyebrow">CB Grup Barna · 마스터 보고서 · 2026년 8월</span>
+    <h1>BARNA를<br>데이터로 <em>보다</em></h1>
+    <p class="lede">클럽의 세 가지 연구를 하나의 문서로 합쳤습니다: 왜 이렇게 육성하는가(과학적 근거), 이전에 누가 해 왔고 어떻게 이야기했는가(마르크 가솔), 그리고 다른 클럽과 비교해 우리가 정확히 어디에 있는가(디지털 커뮤니티와 연맹 체계, 클럽별).</p>
+    <div class="meta">
+      <div><b>3</b>통합된 연구</div>
+      <div><b>32</b>FCBQ 등록 팀</div>
+      <div><b>7.096</b>팔로워 · 바르셀로나 1위</div>
+      <div><b>13</b>검증된 가솔 관련 자료</div>
+    </div>
+  </div>
+</header>
+
+<section id="s1">
+  <div class="wrap">
+    <div class="secn">요약 보고서</div>
+    <h2>문서 전체를 뒷받침하는 6가지 결론</h2>
+    <ol class="caps">
+      <li><b>"육성 우선"은 이념이 아닙니다. 근거가 말해 주는 것입니다.</b> 재미는 경기력(r = 0.18)보다 운동 지속을 약 3배 더 잘 예측합니다(r = 0.45). 주니어에서 두각을 나타내는 선수의 92.8%는 시니어에서 두각을 나타내는 선수가 아닙니다. 승리로 선수를 붙잡는 클럽은 존재하는 수단 중 가장 약한 것을 쓰고 있는 셈입니다.</li>
+      <li><b>이 모델에는 유명하고 기록으로 남은 선례가 있습니다.</b> 마르크 가솔은 2014년에 팀이 아닌 학교를 세웠고, 첫 시니어 팀은 2017년에야 만들었습니다. 2014년부터 2026년까지 검증된 13건의 공개 발언이 그의 철학을 뒷받침합니다. "우리는 최대한의 겸손, 헌신, 노력, 그리고 우리만의 방법론으로 시작했습니다", "ACB에 가려고 달리는 것이 아닙니다".</li>
+      <li><b>Barna는 비교 가능한 그룹에서 세 번째로 큰 육성 조직입니다.</b> 2026-27 시즌 FCBQ 등록 팀은 32개(육성 28 + 시니어 4)입니다. 이보다 많은 곳은 Boet Mataró(42)와 UE Mataró(37)뿐이며, 이 세 곳 중 FEB 카테고리에 팀이 없는 곳은 Barna뿐입니다.</li>
+      <li><b>바르셀로나 시내 육성 클럽 중 디지털 커뮤니티 1위.</b> 팔로워 7,096명으로, 검증된 카탈루냐와 스페인 육성 클럽 22곳 중 6위입니다. 앞선 다섯 곳은 모두 바르셀로나 시가 아닌 광역권 클럽입니다.</li>
+      <li><b>다른 곳이 두세 개 조직이 필요한 일을, Barna는 하나로 합니다.</b> 바르사, 지로나, 만레사, 산트 아드리아, 코르넬라, 오스피탈레트는 남자, 여자, 육성을 서로 다른 법인과 계정으로 나누고 있습니다. Barna는 모든 것을 하나의 브랜드로 담당합니다. 후원 측면에서는 커뮤니티 전체로 들어가는 단일 창구입니다.</li>
+      <li><b>한계는 조직이 아니라 전환에 있습니다.</b> 팀당 팔로워는 222명으로, 산트 아드리아의 532명이나 Almeda의 455명에 못 미칩니다. 조직은 이미 갖춰져 있습니다. 부족한 것은 편집상의 정체성입니다.</li>
+    </ol>
+    <div class="note"><b>이 보고서를 읽는 방법.</b> 제I부~제III부는 답합니다: <em>왜</em> 이렇게 육성하는지, 그리고 이 모델이 어디에서 왔는지. 제IV부~제VI부는 답합니다: <em>우리의 현재 위치</em> 를 비교 가능한 수치로. 마지막 방법론 노트에서는 자료 간 불일치와 각 경우에 어느 것을 우선했는지를 기록했습니다.</div>
+  </div>
+</section>
+<div class="part"><div class="wrap"><div class="pn">제I부</div><h2>요약 보고서 전문</h2><p>다음 문서의 전문 수록: <em>『현황에 관한 요약 보고서』</em> (Ana Fernández Durán, 2026년 8월). 이번 세션에 첨부된 연구 관련 유일한 문서입니다.</p></div></div>
+
+<section id="s2">
+  <div class="wrap">
+    <div class="secn">I·1 · 이 문서는 무엇인가</div>
+    <h2>박사 수준의 스코핑 리뷰</h2>
+    <p>육성 농구 클럽에 관한 박사 수준 문헌 스코핑 리뷰의 요약: <strong>병행하는 11개의 연구 주제</strong>, 그리고 <strong>900건 이상의 검색</strong> 을 학술 검색 엔진, 기관 저장소, 서지 API, 연맹·법률·정부의 1차 자료를 대상으로 수행했습니다. 전체 보고서는 약 61,000 단어, 18개 장으로 이루어져 있습니다.</p>
+    <p>청소년 선수의 심리, 이탈, 재능 발달, 성숙과 건강, 학부모와 코치, 미성년자 보호, 클럽의 사회학, 국제 모델, 운영과 거버넌스, 스포츠 이론, 젠더와 페미니즘, 농구 클럽의 경제를 다룹니다. 카탈루냐 농구 지도와 CB Grup Barna에 적용한 장도 포함되어 있습니다.</p>
+    <p><strong>가장 큰 특징은 추적 가능성입니다.</strong> 모든 참고문헌에는 검증 표시가 있으며, 부록 III은 확인 <strong>하지 못한</strong> 것을 빠짐없이 나열합니다. 업계에서 널리 유통되지만 인용해서는 안 되는 다섯 가지 수치도 포함합니다.</p>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="wrap">
+    <div class="secn">I·2 · 발견</div>
+    <h2>가장 중요한 15가지 발견</h2>
+
+    <h3>이탈에 대하여</h3>
+    <div class="cards">
+      <div class="card"><div class="k">발견 1</div><div class="d">12,93</div><h4>이탈은 11세가 아니라 12~14세에 집중된다</h4><p>실제 평균 연령은 12.93세입니다. 스페인 육성 농구의 인판틸 → 카데트 전환기와 정확히 일치합니다.</p></div>
+      <div class="card"><div class="k">발견 2</div><div class="d">r = 0.45</div><h4>재미는 지속을 예측하는 가장 큰 요인</h4><p>경기 능력은 가장 약한 요인 중 하나입니다(r = 0.18). 성적으로 붙잡는 클럽은 존재하는 수단 중 가장 약한 것을 쓰고 있습니다.</p></div>
+      <div class="card"><div class="k">발견 3</div><div class="d">86% 대 58%</div><h4>선수를 붙잡는 것은 압박이 아니라 곁에 있어 주는 것</h4><p>농구 선수들은 분석된 모든 종목 중 학부모의 부정적 행동 수준이 가장 높다고 보고합니다. 그리고 붙잡아 주는 요인은, 현역 선수 학부모의 86%가 경기에 오는 반면 전직 선수 학부모는 58%라는 차이입니다.</p></div>
+      <div class="card"><div class="k">발견 4</div><div class="d">70 · 59 %</div><h4>흥미를 잃은 것이 아니라 환경에 밀려난 것</h4><p>카탈루냐 소녀의 70%가 사춘기가 되면 그만두지만, 그만둔 소녀의 59%는 여전히 경쟁 스포츠를 즐기고 있습니다.</p></div>
+    </div>
+
+    <h3>재능에 대하여</h3>
+    <div class="cards">
+      <div class="card"><div class="k">발견 5</div><div class="d">92,8 %</div><h4>조기 발굴은 효과가 없다</h4><p>주니어와 시니어 엘리트 집단의 92.8%는 서로 다른 사람들입니다.</p></div>
+      <div class="card"><div class="k">발견 6</div><div class="d">50,3 / 6,8</div><h4>상대 연령은 선발에는 영향을 주지만 성과는 예측하지 못한다</h4><p>스페인에서는 극단적이어서, 자치주 대표팀(n = 1,368)에서 1분기 출생이 50.3%, 4분기 출생은 6.8%입니다.</p></div>
+      <div class="card"><div class="k">발견 7</div><div class="d">U12~U15</div><h4>성숙도는 체격을 예측하지만 기술은 예측하지 못한다</h4><p>생물학적 성숙도는 파워, 속도, 민첩성을 예측하지만 기술적 능력은 예측하지 못합니다. U12~U15에서 체격으로 선발하는 것은 사실상 생물학적 생일로 선발하는 것과 같습니다.</p></div>
+    </div>
+
+    <h3>건강과 클럽 문화에 대하여</h3>
+    <div class="cards">
+      <div class="card"><div class="k">발견 8</div><div class="d">−36 %</div><h4>10분간의 신경근 워밍업</h4><p>을 주 2~3회 하면 청소년 농구에서 발목과 무릎 부상이 36% 줄어듭니다. 외부 지도자가 있든 없든 효과는 동일합니다.</p></div>
+      <div class="card"><div class="k">발견 9</div><div class="d">엘리트</div><h4>심각한 문제는 가장 뛰어난 선수들에게서 나온다</h4><p>휴스와 코클리의 <em>sport ethic</em> 는 과잉 동조로 인한 피해를 설명합니다: 고통을 숨기는 선수는 클럽 문화를 깨뜨리는 것이 아니라 구현하고 있는 것입니다. 번아웃은 선수 개인의 실패가 아니라 클럽의 사회적 조직 방식의 문제입니다.</p></div>
+      <div class="card"><div class="k">발견 10</div><div class="d">78,1 %</div><h4>폭력과 긍정적 경험이 공존한다</h4><p>유럽 CASES 프로젝트에 참여한 스페인 응답자의 78.1%가 18세 이전에 스포츠 안에서 대인 폭력을 겪었다고 보고했고(심리적 폭력 69.4%), 동시에 85%는 긍정적인 경험도 했다고 답했습니다. 두 데이터가 공존합니다.</p></div>
+    </div>
+
+    <h3>경제에 대하여</h3>
+    <div class="cards">
+      <div class="card"><div class="k">발견 11</div><div class="d">×5 · ×36</div><h4>승격에 따른 비용 계단은 불연속적이다</h4><p>전국 단위로의 첫 승격에서 ×5, 이후 단계마다 ×2~3입니다. 동네 클럽이 치르는 첫 단계가 상대적으로 가장 가혹합니다. 테르세라에서 프리메라 FEB까지 회비는 36배, 보증금은 거의 19배가 됩니다.</p></div>
+      <div class="card"><div class="k">발견 12</div><div class="d">2건의 사례</div><h4>조정은 육성 부문과 여자 부문에서 이루어진다</h4><p>Força Lleida, 2024년: 남자팀의 ACB 승격 자금을 마련하는 방법 중 하나가 여자팀을 여자 리그 2에서 철수시키는 것이었습니다. Betis / Baloncesto Sevilla, 2023년: 유소년 팀 2개와 미니바스켓, 프리인판틸 카테고리를 없애 260만 유로를 감축했지만, 그럼에도 2026년에 채권자 협의에 들어가 클럽이 사라졌습니다.</p></div>
+      <div class="card"><div class="k">발견 13</div><div class="d">0,61 %</div><h4>FEB는 예산의 0.61%만 육성에 쓴다</h4><p>193,762유로 대 최상위 경기에 800만 유로 이상.</p></div>
+    </div>
+
+    <h3>젠더와 운영에 대하여</h3>
+    <div class="cards">
+      <div class="card"><div class="k">발견 14</div><div class="d">90 → 40 %</div><h4>접근의 평등이 권력의 평등을 낳지는 않는다</h4><p>타이틀 IX는 미국 중등학교 여자 선수를 9배로 늘렸지만 여성 코치는 90%에서 40%로 줄었습니다. 카탈루냐에서는 여성 라이선스가 늘고 있는데도 스포츠 클럽의 남성 회장 비율이 6년째 88%에 머물러 있습니다.</p></div>
+      <div class="card"><div class="k">발견 15</div><div class="d">~84 %</div><h4>가장 큰 제약은 돈이 아니라 이사회</h4><p>세 개의 독립된 자료가 인식되는 문제로서 재원보다 이사회를 더 위에 두고 있으며, 카탈루냐 스포츠 자원봉사의 경제적 가치의 약 84%는 이사회에 귀속됩니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="wrap">
+    <div class="secn">I·3 · 개입</div>
+    <h2>기록된 것 중 비용 대비 효과가 가장 좋은 방법</h2>
+    <div class="quote">
+      <div class="q">코치 대상 행동 교육(75분~2시간 워크숍)으로 대조군을 둔 설계에서 이탈이 26%에서 5%로 줄었습니다</div>
+      <div class="who">Barnett, Smoll y Smith, 1992</div>
+    </div>
+    <p>이와 일치하는 세 가지 독립된 흐름이 있습니다: <strong>지도자의 자질이 지속률을 가장 잘 예측하는 요인</strong> 임이 스페인 스포츠 시설에서 확인되었습니다. 또한 <strong>배려·변혁형 분위기</strong> 는 청소년 성과의 예측 변수로서 다른 모든 것을 앞섭니다(r = 0.43, 177건의 연구). 그리고 SPLISS 모델에서 세르비아와 리투아니아를 구별하는 기둥은 <strong>재정이 아니라 지도자 양성에 있습니다</strong>.</p>
+    <p><strong>꼭 짚어야 할 뉘앙스:</strong> 스페인의 4개월간 연구에서는 처벌적 행동이 절반 이하로 줄었지만 <em>선수들이 느끼는 분위기는 개선되지 않았습니다</em>. 또한 두 건의 체계적 문헌고찰은 제도적 유지가 거의 기록되지 않는다고 지적합니다. <strong>한 번의 교육으로는 부족합니다. 반복적으로 실시하고, 지도자의 출석이 아니라 선수들이 느끼는 분위기를 측정해야 합니다.</strong></p>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="wrap">
+    <div class="secn">I·4 · 실행 계획</div>
+    <h2>권장하는 10가지 실행안</h2>
+    <div class="tblwrap"><table>
+      <thead><tr><th>#</th><th>실행안</th><th>비용</th><th>효과 근거</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td><b>지도자 대상 관계 중심 교육을 정기적으로 실시</b></td><td>매우 낮음</td><td>이탈 5% 대 26%</td></tr>
+        <tr><td class="num">2</td><td><b>10분간의 신경근 워밍업</b>(주 2~3회)</td><td class="cost0">없음</td><td>발목·무릎 부상 −36%</td></tr>
+        <tr><td class="num">3</td><td><b>클럽 자체의 지속률 곡선</b> (코호트별, 성별)</td><td class="cost0">없음</td><td>FEB도 갖고 있지 않은 데이터를 얻을 수 있음</td></tr>
+        <tr><td class="num">4</td><td><b>생일과 성숙도 점검</b></td><td>매우 낮음</td><td>50.3% / 6.8%의 편향을 바로잡음</td></tr>
+        <tr><td class="num">5</td><td><b>승격에 관한 문서화된 방침</b> (재정 기준과 다른 부문을 잠식하지 않는다는 조항 포함)</td><td class="cost0">없음</td><td>Força Lleida와 Betis 같은 사례를 예방</td></tr>
+        <tr><td class="num">6</td><td><b>측정 가능한 다섯 가지 질문으로 하는 젠더 점검</b></td><td class="cost0">없음</td><td>법률 39/2022를 충족하고, 여자 선수 이탈률 70%에 대응</td></tr>
+        <tr><td class="num">7</td><td><b>재미와 동기 분위기 측정</b> (시즌 2회)</td><td>낮음</td><td>지속률을 가장 잘 예측하는 두 지표</td></tr>
+        <tr><td class="num">8</td><td><b>LOPIVI의 완전하고 눈에 보이는 준수</b></td><td>낮음</td><td>2021년부터 법적 의무</td></tr>
+        <tr><td class="num">9</td><td><b>학부모(어머니·아버지)의 스포츠 활동</b></td><td>낮음</td><td>장학금보다 격차를 줄이는 효과가 큼</td></tr>
+        <tr><td class="num">10</td><td><b>변화 이론을 명시한 기관용 주장의 근거</b></td><td class="cost0">없음</td><td>연간 보고서를 재원 확보의 수단으로 바꿈</td></tr>
+      </tbody>
+    </table></div>
+    <p class="pull">열 가지 중 여덟 가지는 비용이 전혀 들지 않거나 거의 들지 않습니다. 어느 것도 카테고리 승격을 필요로 하지 않으며, 어느 것도 승리에 의존하지 않습니다.</p>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="wrap">
+    <div class="secn">I·5 · 주장의 근거</div>
+    <h2>이사회, 구청, 후원사 앞에서 주장할 수 있는 것</h2>
+    <h3>주장해도 되는 것</h3>
+    <ul class="checks">
+      <li><strong>팀 스포츠는 개인 스포츠와 반대로 작용한다</strong> 청소년 정신 건강에 대해: 불안·우울 −10%, 여학생의 위축을 동반한 우울 증상 −19%, 문제 행동 −20%. 반면 개인 스포츠에서는 불안·우울 +16%(n = 11,235). <em>농구 클럽이 가질 수 있는 가장 구체적인 논거입니다.</em></li>
+      <li><strong>활동적인 미성년자의 사회적 가치는 활동적인 성인의 거의 두 배</strong>: 연간 4,300파운드(11~16세) 대 2,600파운드.</li>
+      <li><strong>자원봉사자가 만들어 내는 사회적 가치는 참가자의 두 배 이상</strong> (2,663파운드 대 1,274파운드).</li>
+      <li><strong>스포츠의 사회적 수익은 방법론적으로 공표된 측정치가 있다</strong>: 투자 1파운드당 SROI는 1.91(2019년), 3.28(2020년), 4.38(2025년).</li>
+      <li><strong>클럽 네트워크는 물려받은, 재현할 수 없는 자본이다.</strong> 엘 클로트에서 61년의 역사를 가진 클럽은 대체 가능한 서비스 제공자가 아닙니다.</li>
+      <li><strong>산트 마르티에서는 같은 구 안의 동네 간 소득 격차가 거의 3:1</strong> (비야 올림피카는 바르셀로나 평균보다 41% 높고, 베소스와 마레스메는 63% 낮음). 회비, 용품, 이동은 행정상의 사소한 문제가 아닙니다. 그 자체가 장벽입니다.</li>
+      <li><strong>농구는 스페인 단체 종목 중 젠더 면에서 가장 좋은 흐름을 보이는 종목</strong>: 2025년 여성 라이선스 비율은 36.1%이며, 2024년 여성의 증가율은 남성의 두 배 이상이었습니다.</li>
+    </ul>
+    <h3>주장해서는 안 되는 것</h3>
+    <ul class="checks no">
+      <li>스포츠 참여가 <strong>원인이 되어</strong> 사회적 통합, 학업 성취 향상, 정신 건강 개선을 가져온다고 말하는 것. 연구 설계는 대부분 횡단적이고 효과도 작습니다(10~20%).</li>
+      <li>다음과 같이 말하는 것: <strong>스포츠가 성적을 올려 준다</strong>고 말하는 것. 학업 성취에 대한 효과는 일관되지 않습니다. 확실한 효과는 수업 중 지속적인 주의 행동(d = 0.77)과 자존감에 있습니다. 이쪽이 더 나은 논거이고, 게다가 사실입니다.</li>
+    </ul>
+    <p>방어할 수 있는 표현은 코올터의 것입니다: <strong>스포츠는 필요조건이지만 충분조건은 아니다</strong>. 효과를 만들어 내는 것은 지속적인 사회적 관계와 클럽이 스포츠 주변에 마련하는 보완적 지원입니다.</p>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="wrap">
+    <div class="secn">I·6 · 사용 금지 구역</div>
+    <h2>유통되고 있지만 인용해서는 안 되는 다섯 가지 수치</h2>
+    <div class="veto"><div class="bad">"아이들의 70%는 13세 이전에 그만둔다"</div><div class="use">검증 가능한 1차 자료가 없습니다. <b>대신 이렇게 쓰세요:</b> 이탈 평균 연령 12.93세, 그리고 적어도 한 클럽을 매년 떠나는 비율 30%.</div></div>
+    <div class="veto"><div class="bad">"성숙도 편차는 ±5년"</div><div class="use">검증할 수 없습니다. <b>대신 이렇게 쓰세요:</b> 이미 선발된 한 아카데미 안에서 PHV의 범위는 12.8세에서 16.5세.</div></div>
+    <div class="veto"><div class="bad">"1만 시간의 법칙"</div><div class="use">언론이 대중화한 이야기입니다. 계획적 연습이 설명하는 것은 스포츠 전반에서 분산의 <b>18 %</b> , 그리고 엘리트 선수들 사이에서는 <b>1%(유의하지 않음)</b>에 그칩니다.</div></div>
+    <div class="veto"><div class="bad">여자 스포츠의 TV 중계 비율에 관한 구체적인 수치</div><div class="use">전문에서 검증되지 않았습니다. <b>검증된 것은:</b> "지난 30년간 거의 변화가 없다", "참담할 정도로 낮다".</div></div>
+    <div class="veto"><div class="bad">"스포츠에 1유로를 투자하면 2유로의 사회적 수익"(스페인)</div><div class="use">언론에 실린 기관의 발언일 뿐 공표된 연구 결과가 아닙니다. <b>대신 이렇게 쓰세요:</b> 영국의 비율을 사용할 것.</div></div>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="wrap">
+    <div class="secn">I·7 · 맺음말</div>
+    <h2>이 연구를 요약하는 한마디</h2>
+    <div class="quote">
+      <div class="q">"스포츠 참여는 기대되는 이점을 얻기 위한 필요조건이지만 충분조건은 아니다"</div>
+      <div class="who">프레드 코올터, 스포츠의 사회적 가치에 관한 증거를 8년간 검증한 뒤</div>
+    </div>
+    <div class="quote">
+      <div class="q">"스포츠는 교육을 위한 도구다"</div>
+      <div class="who">마르크 가솔, 그의 프로젝트가 1군 팀이 아니라 학교에서 시작된 이유를 설명하며</div>
+    </div>
+    <p><strong>도구이지, 기적이 아닙니다.</strong> 무엇을 만들어 내는지는 전적으로 어떻게 쓰느냐에 달려 있습니다. 그리고 그것이 바로 육성 클럽의 책임이자 기회입니다.</p>
+  </div>
+</section>
+<div class="part"><div class="wrap"><div class="pn">제II부</div><h2>논문을 장별로</h2><p>전체 보고서 133쪽, 약 61,500 단어의 지도입니다. 목차와 작성 당시 세션의 작업 노트로 재구성했습니다. PDF 전문은 이번 세션에 첨부되어 있지 않습니다. 어느 장이든 한 글자도 빠짐없이 재현하려면 다시 첨부하기만 하면 됩니다.</p></div></div>
+
+<section id="s9">
+  <div class="wrap">
+    <div class="secn">II·1 · 구성</div>
+    <h2>11개의 연구 주제, 18개 장, 3개의 부록</h2>
+    <ol class="caps">
+      <li><b>청소년 선수의 심리</b> 동기, 동기 분위기, 자기결정이론. 왜 재미는 지속을 예측하고 경기력은 그렇지 않은가.</li>
+      <li><b>스포츠 이탈</b> 실제 연령(12.93세), 인판틸→카데트 전환기, 적어도 한 클럽을 매년 떠나는 30%, 그리고 환경에 의한 밀려남으로서의 여자 선수 이탈이라는 특수한 사례.</li>
+      <li><b>재능 발달</b> 조기 발굴(92.8%), 상대 연령 효과(50.3%/6.8%), 조기 전문화와 그 대안.</li>
+      <li><b>성숙과 건강</b> PHV(선발된 아카데미 안에서 12.8~16.5세 범위), 부상과 신경근 워밍업(−36%), 훈련 부하.</li>
+      <li><b>학부모와 코치</b> 학부모의 행동(농구는 분석된 종목 중 최악), 곁에 있어 주는 것이 지속으로 이어짐(86% 대 58%), 그리고 코치 행동 교육(26%→5%).</li>
+      <li><b>미성년자 보호</b> LOPIVI, 유럽 CASES 프로젝트(78.1% / 69.4% / 85%), 보호 담당자, 클럽 문화.</li>
+      <li><b>클럽의 사회학</b> 물려받은 재현 불가능한 사회적 자본으로서의 클럽. 자원봉사(가치의 약 84%가 이사회에). 지배적 제약으로서의 이사회.</li>
+      <li><b>국제 모델</b> SPLISS 모델. 세르비아와 리투아니아가 예산이 아니라 코치 양성으로 두각을 나타내는 이유.</li>
+      <li><b>운영과 거버넌스</b> 전문화, 변화 이론, 재원 확보 수단으로서의 연간 보고서.</li>
+      <li><b>스포츠 이론</b> 부르디외(자본과 장), 엘리아스(문명화 과정과 스포츠), 휴스와 코클리의 <em>sport ethic</em> (과잉 동조), 그리고 브론펜브레너(발달의 생태학적 모델). 번아웃이 개인의 문제가 아니라 조직의 문제인 이유를 설명하는 틀입니다.</li>
+      <li><b>페미니즘과 젠더</b> 앤 홀과 아이리스 매리언 영부터 메스너와 테버지까지. <em>gender-bland sexism</em>, 법률 39/2022의 의무. 가장 활용하기 좋은 것은 영을 코트 위의 기술 목표로 옮긴 것입니다 — <strong>"공이 나를 찾아온다"</strong>, 슈팅 동작의 끊기지 않는 흐름, <strong>공간을 차지하는 것을 시즌 목표로 삼기</strong>.</li>
+    </ol>
+    <p>이 외에 횡단적인 장으로 <strong>마르크 가솔을 다룬 제11장</strong> (제III부), <strong>승격의 딜레마</strong> (제14장), <strong>카탈루냐 농구 지도</strong> (제15장), CB Grup Barna에 적용한 장, 어떤 근거가 어떤 발신을 뒷받침하는지 표로 정리한 12개 장의 편집 시리즈(§17.12), 그리고 3개의 부록이 있습니다.</p>
+  </div>
+</section>
+
+<section id="s10">
+  <div class="wrap">
+    <div class="secn">II·2 · 제14장</div>
+    <h2>승격의 딜레마</h2>
+    <p>FEB와 ACB의 공식 수치를 바탕으로, 불연속적인 비용 계단(전국 단위 첫 승격에서 ×5, 테르세라에서 프리메라 FEB까지 회비 ×36, 보증금 ×19)과 클럽의 논문 그 자체인 기록된 두 가지 사례를 제시합니다:</p>
+    <ul class="checks">
+      <li><strong>Força Lleida, 2024년.</strong> 남자팀의 ACB 승격 자금을 마련하는 방법 중 하나가 여자팀을 여자 리그 2에서 철수시키는 것이었습니다.</li>
+      <li><strong>Betis / Baloncesto Sevilla, 2023년.</strong> 유소년 팀 2개와 미니바스켓, 프리인판틸 카테고리를 없애 260만 유로를 감축했지만, 그럼에도 2026년에 채권자 협의에 들어가 클럽이 사라졌습니다.</li>
+    </ul>
+    <p>이 장의 실천적 결론: <strong>승격에 관한 문서화된 방침</strong> 은 재정 기준과 다른 부문을 잠식하지 않는다는 조항(실행안 5)을 갖추고 있으며, 같은 일이 Barna에 일어나지 않도록 하기 위한 것입니다.</p>
+  </div>
+</section>
+
+<section id="s11">
+  <div class="wrap">
+    <div class="secn">II·3 · 제15장</div>
+    <h2>카탈루냐 농구 지도</h2>
+    <p>전국 단위 클럽은 전부 확인되었지만, 지역 단위 클럽은 일부만 확인되었습니다. FCBQ 웹사이트가 캡차로 자동 접근을 차단했기 때문입니다. 이 장에서 가장 눈에 띄는 사실: <strong>프리메라 FEB에는 카탈루냐 클럽이 하나도 없다</strong>.</p>
+    <p>이 부분은 이후 다음 보고서로 보완되었습니다: <em>『Piràmide CB Grup Barna』</em> (2026년 8월 13일, basquetcatala.cat의 클럽 자료): Barna의 등록 팀은 33개입니다. 비교하면 Fundació Bàsquet Girona의 육성 팀 23개, Boet Mataró의 40개(여자 시니어 B 없음), Santfeliuenc의 24개입니다. 네 클럽 중 같은 조직 안에서 남녀 모두 시니어 2팀(A+B)을 가진 곳은 Barna뿐입니다.</p>
+  </div>
+</section>
+
+<section id="s12">
+  <div class="wrap">
+    <div class="secn">II·4 · 부록</div>
+    <h2>연구가 미결로 남긴 것</h2>
+    <p>부록 III에는 사용 금지 수치 다섯 가지(제I부·6) 외에, 추가 연구가 아니라 전화 한 통으로 해결되는 세 가지 미결 사항이 있습니다:</p>
+    <ul class="checks no">
+      <li>미결: <strong>이번 시즌 CBGB의 정확한 카테고리</strong> (이후 해결: 남녀 시니어 A 모두 FCBQ 슈퍼컵, El Clotenc와 연맹 일정으로 확인).</li>
+      <li>미결: <strong>FCBQ의 요금</strong> (공개 웹사이트가 자동 접근을 차단).</li>
+      <li>미결: 해당되는 <strong>보조금 공모</strong> (공공기관 도메인이 자동 접근을 차단).</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part"><div class="wrap"><div class="pn">제III부</div><h2>마르크 가솔: 확인된 모든 것</h2><p>논문의 제11장 — 그의 발언의 20가지 핵심과 근거와 짝지은 12가지 원칙 — 은 첨부되지 않은 PDF 전문에 들어 있습니다. 아래는 이번 세션에서 독자적으로 확인·검증한, 육성에 관한 마르크 가솔의 인터뷰, 발언, 공개 자료의 전체 목록으로, 시간순으로 정리하고 원문 인용을 붙였습니다.</p></div></div>
+
+<section id="s13">
+  <div class="wrap">
+    <div class="secn">III·1 · 목록</div>
+    <h2>인터뷰와 발언, 2014~2026년</h2>
+
+    <div class="iv"><div class="d">2014년 5월 20일 · FEB.es · 공식 발표</div>
+      <h4>"마르크 가솔, 지로나에 클럽 겸 스쿨 설립"</h4>
+      <p>지로나 시장 카를레스 푸지데몬과 함께 Club Escola de Bàsquet Marc Gasol을 발표했습니다. 이 스쿨은 "스포츠, 학업, 인성 측면에서" 선수들을 키우기 위해 만들어졌습니다.</p>
+      <div class="q2">"우리는 최대한의 겸손, 헌신, 노력, 그리고 우리만의 방법론으로 시작했습니다."</div>
+      <div class="q2">"꿈을 이뤘습니다. 저는 늘 지로나 사람들에게 제가 받은 모든 것을 돌려주고 싶었습니다."</div>
+      <p><a href="http://www.feb.es/2014/5/20/baloncesto/marc-gasol-funda-club-escuela-girona/54065.aspx" target="_blank" rel="noopener">feb.es/2014/5/20 · 뉴스 54065</a> · FCBQ도 보도(뉴스 4280과 4284, basquetcatala.cat)</p>
+    </div>
+
+    <div class="iv"><div class="d">2017년 10월 26일 · FEB.es · 공식 특집</div>
+      <h4>"바스켓 지로나: 하나의 팀, 하나의 유소년 육성, 하나의 도시… 그리고 마르크 가솔"</h4>
+      <p>프로젝트의 세 가지 지도 원칙을 정리한 특집입니다 —<strong>노력, 헌신, 방법론</strong>— 그리고 그 순서. 유소년 육성이 출발점이자 토대이고, 정상은 목표이지만 "서두르지 않고". 같은 해 클럽은 첫 시니어 팀(EBA, 감독 킴 코스타)을 만들었습니다. 학교 설립 3년 뒤이며, 그 이전이 아닙니다.</p>
+      <p><a href="http://www.feb.es/2017/10/26/baloncesto/basquet-girona-equipo-una-cantera-una-ciudad-marc-gasol/72539.aspx" target="_blank" rel="noopener">feb.es/2017/10/26 · 뉴스 72539</a></p>
+    </div>
+
+    <div class="iv"><div class="d">2019년 3월 8일 · Deia</div>
+      <h4>"마르크 가솔, 지로나에서 본보기를 보이다"</h4>
+      <p>NBA에서 계속 뛰면서도 클럽과 도시에 개인적으로 헌신한 모습을 다룬 기사(토론토에서 우승 반지를 얻은 시즌).</p>
+      <p><a href="https://www.deia.eus/deportes/2019/03/08/marc-gasol-da-ejemplo-girona-4796732.html" target="_blank" rel="noopener">deia.eus · 2019년 3월 8일</a></p>
+    </div>
+
+    <div class="iv"><div class="d">2019년 · El Desmarque · 스페인 대표팀으로 월드컵 우승 후</div>
+      <h4>"중요한 것은 젊은이들이 좋은 사람이 되도록 영감을 주는 것"</h4>
+      <div class="q2">"농구는 젊은 세대가 좋은 사람이 되도록 영감을 주기 위해 우리가 보낼 수 있는 메시지만큼 중요하지 않다."</div>
+      <p>2019년 중국 월드컵 후의 발언 — 그의 철학을 가장 많이 인용되는 표현으로 담았습니다: 스포츠는 수단이고 사람이 목적이다.</p>
+      <p><a href="https://eldesmarque.com/actualidad/baloncesto/mundial-2019/1342307-marc-gasol-y-los-valores-en-el-deportes-lo-importante-es-inspirar-a-los-jovenes-a-ser-buenas-personas" target="_blank" rel="noopener">eldesmarque.com · 2019년 월드컵</a></p>
+    </div>
+
+    <div class="iv"><div class="d">인터뷰 · Unisport</div>
+      <h4>마르크 가솔, 선수로서의 성장 과정에 대해</h4>
+      <p>성장기(바르사, 로잔, 지로나)와 그것이 어린 선수의 발전을 바라보는 그의 관점에 어떤 영향을 주었는지를 깊이 다룬 인터뷰.</p>
+      <p><a href="https://unisport.es/entrevista-con-marc-gasol/" target="_blank" rel="noopener">unisport.es · 인터뷰</a></p>
+    </div>
+
+    <div class="iv"><div class="d">2021년 11월 · ESPN / CBS Sports</div>
+      <h4>NBA에서 돌아와 자신의 클럽에서 LEB 오로로 뛰다</h4>
+      <p>NBA에서 13시즌, 우승 반지 2개를 거친 뒤 은퇴하지 않고 선택했습니다. 자신이 설립하고 회장을 맡은 클럽과 스페인 2부 리그에서 선수 계약을 맺었습니다. 일반적인 흐름과 반대입니다: 스타가 프로젝트의 카테고리로 내려오는 것이지 그 반대가 아닙니다.</p>
+      <p><a href="https://www.espn.com/nba/story/_/id/32714742/marc-gasol-play-spanish-club-girona-which-founded-2014" target="_blank" rel="noopener">espn.com · 2021년 11월</a></p>
+    </div>
+
+    <div class="iv"><div class="d">2022년 5월 · HoyMagazine</div>
+      <h4>"ACB에 가려고 달리는 것이 아닙니다"</h4>
+      <div class="q2">"ACB에 가려고 달리는 것이 아닙니다."</div>
+      <p>바로 승격 몇 주 전에 나온, 프로젝트의 철학을 규정하는 말: 속도를 정하는 것은 클럽의 견실함이지 결과를 서두르는 것이 아닙니다. 같은 해 3x3 부문(2021년)을 출범시켰고 이후 3x3 여자 부문을 만들어 "주요 성장 분야 중 하나"라고 설명했습니다.</p>
+      <p><a href="https://www.hoymagazine.es/marc-gasol-sobre-el-basquet-girona-no-vamos-a-correr-para-llegar-a-la-acb/" target="_blank" rel="noopener">hoymagazine.es · 2022년 5월</a></p>
+    </div>
+
+    <div class="iv"><div class="d">2022년 6월 · CBS Sports</div>
+      <h4>선수, 구단주, 회장으로서 ACB 승격</h4>
+      <p>LEB 오로 플레이오프 결승: 바스켓 지로나 66 - 에스투디안테스 60, 가솔 출전(11득점, 8리바운드, 4스틸, 2블록. 시즌 평균 14.5득점, 8.2리바운드). 학교 설립 8년 만에 1군 팀이 최고 무대에 올랐습니다.</p>
+      <p><a href="https://www.cbssports.com/nba/news/marc-gasol-leads-girona-to-spanish-league-promotion-as-player-owner-and-team-president" target="_blank" rel="noopener">cbssports.com · 2022년 6월</a> · Esport3: <a href="https://www.3cat.cat/esport3/el-projecte-de-marc-gasol-descola-de-basquet-a-equip-dacb-en-vuit-anys/noticia/3170964/" target="_blank" rel="noopener">"농구 학교에서 ACB 팀으로, 8년 만에"</a></p>
+    </div>
+
+    <div class="iv"><div class="d">L'Esportiu de Catalunya · 회장으로서</div>
+      <h4>"개성 있는 팀을 갖는 것을 목표로 삼았는데, 지금은 그것이 보이지 않는다"</h4>
+      <p>1군 팀이 부진한 시기의 인터뷰: 유소년 부문에 요구하는 것과 같은 헌신의 기준을 시니어에게도 적용하는 엄격한 회장의 모습입니다.</p>
+      <p><a href="https://www.lesportiudecatalunya.cat/basquet/article/2476632-marc-gasol-ens-vam-marcar-l-objectiu-de-tenir-un-equip-amb-caracter-i-ara-mateix-no-ho-estem-veient.html" target="_blank" rel="noopener">lesportiudecatalunya.cat</a></p>
+    </div>
+
+    <div class="iv"><div class="d">FIATC / El Nacional · 영상 인터뷰</div>
+      <h4>마르크 가솔, 바스켓 지로나 회장</h4>
+      <p>클럽 운영과 프로 스포츠가 요구하는 끊임없는 진화에 대한 인터뷰(발췌본은 2026년 2월 El Nacional에도 게재).</p>
+      <p><a href="https://www.facebook.com/fiatcseguros/videos/4410984002513153/" target="_blank" rel="noopener">영상 · Facebook FIATC</a></p>
+    </div>
+
+    <div class="iv"><div class="d">2024년 1월 · Público / 일반 언론</div>
+      <h4>선수 은퇴를 최종 발표</h4>
+      <p>바르셀로나 시네마 텍사스에서의 기자회견: 39세, 20시즌, 우승 반지 1개, 월드컵 2회, 유로바스켓 2회, 올림픽 은메달 2개. 선수는 은퇴하지만 육성 프로젝트의 회장직은 이어집니다.</p>
+      <p><a href="https://www.publico.es/sociedad/marc-gasol-anuncia-retirada-baloncesto.html" target="_blank" rel="noopener">publico.es · 2024년 1월</a></p>
+    </div>
+
+    <div class="iv"><div class="d">2024년 12월 26일 · El Español</div>
+      <h4>"마르크 가솔의 지금: 지로나 농구를 지켜 낸 일부터 명예의 전당 후보까지"</h4>
+      <p>현재 모습을 다룬 프로필: 바스켓 지로나(ACB 시절을 거쳐 LEB 오로에서 경쟁 중)를 지키는 데 매진하고 있으며, 파우와 함께 명예의 전당 후보에도 올랐습니다.</p>
+      <p><a href="https://www.elespanol.com/deportes/baloncesto/20241226/vida-actual-marc-gasol-no-dejar-caer-baloncesto-girona-candidatura-hall-of-fame-nba-junto-pau/911659244_0.html" target="_blank" rel="noopener">elespanol.com · 2024년 12월</a></p>
+    </div>
+
+    <div class="iv"><div class="d">클럽 논문에서 인용</div>
+      <h4>"스포츠는 교육을 위한 도구다"</h4>
+      <div class="q2">"스포츠는 교육을 위한 도구다."</div>
+      <p>CB Grup Barna의 연구가 마무리로 선택한 말로, 그의 프로젝트가 1군 팀이 아니라 학교에서 시작된 이유를 설명합니다. 보고서에서는 코올터의 말과 짝을 이룹니다: 도구이지, 기적이 아니다.</p>
+      <p>현황에 관한 요약 보고서 · CB Grup Barna, 2026년 8월</p>
+    </div>
+  </div>
+</section>
+
+<section id="s14">
+  <div class="wrap">
+    <div class="secn">III·2 · 종합</div>
+    <h2>가솔 모델의 다섯 가지 아이디어, 모두 출처 포함</h2>
+    <ul class="checks">
+      <li><strong>먼저 학교, 그다음 팀.</strong> 2014년에 학교를 설립했고, 첫 시니어 팀은 2017년(EBA)에야 만들었습니다. 큰 팀을 갖기 전 3년간 기초를 다졌습니다. <em>(FEB 2014년·2017년, Esport3)</em></li>
+      <li><strong>구호가 아니라 세 가지 원칙:</strong> 노력, 헌신, 방법론 — 모든 카테고리가 공유하는 "자체" 방법론. <em>(FEB 2014년·2017년, UdG에서의 클럽 강연. 헤수스 에스코사, 마르크 페나와 함께)</em></li>
+      <li><strong>이기고 있어도 서두르지 않는다:</strong> "ACB에 가려고 달리는 것이 아닙니다" — 승격 몇 주 전에 한 말. 속도를 정하는 것은 견실함이지 결과가 아닙니다. <em>(HoyMagazine, 2022년)</em></li>
+      <li><strong>스포츠보다 사람이 먼저:</strong> "농구는 젊은 세대가 좋은 사람이 되도록 영감을 주기 위해 우리가 보낼 수 있는 메시지만큼 중요하지 않다." <em>(El Desmarque, 2019년)</em></li>
+      <li><strong>교육을 위한 도구로서의 스포츠:</strong> "스포츠는 교육을 위한 도구다" — Barna의 연구가 전체를 요약하는 말로 선택한 표현. <em>(CBGB 논문, 2026년)</em></li>
+    </ul>
+    <p>이것은 CB Grup Barna가 자신의 <strong>스포츠 프로젝트</strong> 에서 내세우는 순서와 하나하나 같습니다. 측정 가능한 차이는 Barna가 61년 동안 이를 해 왔고 육성과 시니어를 같은 조직 안에 유지하고 있다는 점입니다.</p>
+    <div class="note"><strong>목록을 보완하면:</strong> 논문 제11장에는 가솔 발언의 20가지 핵심과 그의 모델의 12가지 원칙이 있으며, 각각 같은 이야기를 하는 과학 연구와 짝지어져 있습니다. 여기에 12개 장의 편집 시리즈(§17.12)도 있습니다. 이 자료는 완전한 문서에 존재하며 검증되었습니다. 논문 PDF를 다시 첨부하면 여기에 전부 수록됩니다.</div>
+  </div>
+</section>
+
+<div class="part"><div class="wrap"><div class="pn">제IV부</div><h2>순위표 속의 Barna: 커뮤니티</h2><p>마케팅 부서 연구, 제2판, 2026년 8월 16일 마감: 인스타그램 계정 92개를 프로필별로 검증. 클럽의 디지털 커뮤니티는 실제 육성 클럽들과 비교해 어디에 있는가.</p></div></div>
+
+<section id="s15">
+  <div class="wrap">
+    <div class="secn">IV·1 · 벤치마크</div>
+    <h2>육성 클럽 22곳, 순위순</h2>
+    <p class="lead body">유소년 육성, 지역, 가족 커뮤니티를 가진 육성 조직 — Barna에게 올바른 비교 대상입니다. 제2판에서는 UE Mataró(선두로 올라섬), L'Hospitalet, Santfeliuenc, Roser, 그리고 Cornellà와 Sant Adrià의 분리된 부문을 추가했습니다.</p>
+    <div class="tblwrap"><table class="rank">
+      <thead><tr><th class="r">#</th><th>클럽</th><th class="r">팔로워</th><th class="r">FCBQ 팀</th><th>규모</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr class="nw"><td class="p">1</td><td class="c">UE Mataró</td><td class="v">9.225</td><td class="v">37</td><td><div class="bar"><i style="width:100%"></i></div></td><td class="n">테르세라 FEB + LF2</td></tr>
+        <tr><td class="p">2</td><td class="c">Bàsquet Femení Sant Adrià</td><td class="v">8.517</td><td class="v">16</td><td><div class="bar"><i style="width:92%"></i></div></td><td class="n">여자 전용</td></tr>
+        <tr><td class="p">3</td><td class="c">Basket Almeda</td><td class="v">7.727</td><td class="v">17</td><td><div class="bar"><i style="width:84%"></i></div></td><td class="n">Cornellà · LF2</td></tr>
+        <tr><td class="p">4</td><td class="c">CB Prat</td><td class="v">7.451</td><td class="v">26</td><td><div class="bar"><i style="width:81%"></i></div></td><td class="n">세군다 FEB</td></tr>
+        <tr><td class="p">5</td><td class="c">CB Cornellà</td><td class="v">7.233</td><td class="v">24</td><td><div class="bar"><i style="width:78%"></i></div></td><td class="n">테르세라 FEB</td></tr>
+        <tr class="me"><td class="p">6</td><td class="c">CB GRUP BARNA</td><td class="v">7.096</td><td class="v">32</td><td><div class="bar"><i class="me" style="width:77%"></i></div></td><td class="n">바르셀로나 시내 1위</td></tr>
+        <tr><td class="p">7</td><td class="c">Cesur Distrito Olímpico</td><td class="v">6.617</td><td class="v">—</td><td><div class="bar"><i style="width:72%"></i></div></td><td class="n">마드리드</td></tr>
+        <tr class="nw"><td class="p">8</td><td class="c">CB L'Hospitalet</td><td class="v">6.541</td><td class="v">20</td><td><div class="bar"><i style="width:71%"></i></div></td><td class="n">테르세라 FEB</td></tr>
+        <tr><td class="p">9</td><td class="c">CB Granollers</td><td class="v">6.108</td><td class="v">—</td><td><div class="bar"><i style="width:66%"></i></div></td><td class="n">ACB 창립 멤버</td></tr>
+        <tr><td class="p">10</td><td class="c">CB Boet Maresme Mataró</td><td class="v">5.946</td><td class="v">42</td><td><div class="bar"><i style="width:64%"></i></div></td><td class="n">가장 큰 조직</td></tr>
+        <tr><td class="p">11</td><td class="c">Bisbal Bàsquet</td><td class="v">5.617</td><td class="v">—</td><td><div class="bar"><i style="width:61%"></i></div></td><td class="n">지로나</td></tr>
+        <tr><td class="p">12</td><td class="c">CB Alcobendas</td><td class="v">5.543</td><td class="v">—</td><td><div class="bar"><i style="width:60%"></i></div></td><td class="n">마드리드</td></tr>
+        <tr><td class="p">13</td><td class="c">CE Laietà</td><td class="v">5.302</td><td class="v">—</td><td><div class="bar"><i style="width:57%"></i></div></td><td class="n">바르셀로나</td></tr>
+        <tr><td class="p">14</td><td class="c">SESE</td><td class="v">5.114</td><td class="v">—</td><td><div class="bar"><i style="width:55%"></i></div></td><td class="n">바르셀로나</td></tr>
+        <tr><td class="p">15</td><td class="c">CB Las Rozas</td><td class="v">4.898</td><td class="v">—</td><td><div class="bar"><i style="width:53%"></i></div></td><td class="n">마드리드</td></tr>
+        <tr><td class="p">16</td><td class="c">TGN Bàsquet</td><td class="v">4.850</td><td class="v">—</td><td><div class="bar"><i style="width:53%"></i></div></td><td class="n">타라고나</td></tr>
+        <tr class="nw"><td class="p">17</td><td class="c">CB Santfeliuenc</td><td class="v">4.832</td><td class="v">24</td><td><div class="bar"><i style="width:52%"></i></div></td><td class="n">여자 부문은 별도: 18,400</td></tr>
+        <tr><td class="p">18</td><td class="c">Vilabàsquet Viladecans</td><td class="v">4.802</td><td class="v">—</td><td><div class="bar"><i style="width:52%"></i></div></td><td class="n">LF2</td></tr>
+        <tr class="nw"><td class="p">19</td><td class="c">CB Roser</td><td class="v">3.449</td><td class="v">30</td><td><div class="bar"><i style="width:37%"></i></div></td><td class="n">바르셀로나 · 테르세라 FEB</td></tr>
+        <tr class="nw"><td class="p">20</td><td class="c">UB Sant Adrià(남자)</td><td class="v">3.255</td><td class="v">20</td><td><div class="bar"><i style="width:35%"></i></div></td><td class="n">카탈루냐컵</td></tr>
+        <tr class="nw"><td class="p">21</td><td class="c">BF Cornellà(여자)</td><td class="v">1.926</td><td class="v">14</td><td><div class="bar"><i style="width:21%"></i></div></td><td class="n">—</td></tr>
+        <tr class="nw"><td class="p">22</td><td class="c">GEiEG Bàsquet</td><td class="v">1.343</td><td class="v">7</td><td><div class="bar"><i style="width:15%"></i></div></td><td class="n">지로나 · LF2</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>격차</h3>
+    <div class="gapl"><span class="gapn">137</span><span>→ <b>CB Cornellà</b>까지. 이번 분기에 따라잡을 수 있는 상대입니다.</span></div>
+    <div class="gapl"><span class="gapn">355</span><span>→ <b>CB Prat</b>까지. 제대로 작동하는 두 가지 시도로 닿을 수 있습니다.</span></div>
+    <div class="gapl"><span class="gapn">631</span><span>→ <b>Basket Almeda</b>까지. 남부 지역의 선두입니다.</span></div>
+    <div class="gapl"><span class="gapn">1.421</span><span>→ <b>Sant Adrià</b>까지. 여자·육성 분야의 선두입니다.</span></div>
+    <div class="gapl"><span class="gapn">2.129</span><span>→ <b>UE Mataró</b>까지. 이로써 벤치마크 전체에서 단독 선두가 됩니다.</span></div>
+    <p class="body">앞선 다섯 클럽은 모두 바르셀로나 시가 아닌 광역권 클럽입니다. 시내만 놓고 보면 Barna는 CB L'Hospitalet(오스피탈레트의 클럽)보다 555 앞서 있고, 엄밀히 시내에서 그다음은 Laietà로 1,794(+34%)입니다.</p>
+  </div>
+</section>
+
+<section id="s16">
+  <div class="wrap">
+    <div class="secn">IV·2 · 여자 리그</div>
+    <h2>전국 순위표에서의 Barna</h2>
+    <p class="body">리그별 순위: <strong>LF Endesa</strong>에서는 디지털 커뮤니티 기준 16개 클럽 중 11위로, 우승팀(발렌시아, 여자 계정, 6,954)과 최상위 리그 5개 클럽보다 앞서 있습니다. <strong>LF Challenge</strong> 와 <strong>LF2</strong>에서는 둘 다 4위입니다.</p>
+    <div class="tblwrap"><table class="rank">
+      <thead><tr><th class="r">#</th><th>LF Challenge 2026-27</th><th class="r">팔로워</th><th>계정 유형</th></tr></thead>
+      <tbody>
+        <tr><td class="p">1</td><td class="c">Unicaja Mijas</td><td class="v">92.000</td><td class="n"><span class="tag2">대형 계정</span></td></tr>
+        <tr><td class="p">2</td><td class="c">Club Joventut Badalona</td><td class="v">68.600</td><td class="n"><span class="tag2">대형 계정</span></td></tr>
+        <tr class="nw"><td class="p">3</td><td class="c">Barça CBS Femení</td><td class="v">18.400</td><td class="n">바르사의 여자 2군(팜) 팀</td></tr>
+        <tr class="me"><td class="p">4</td><td class="c">CB GRUP BARNA</td><td class="v">7.096</td><td class="n">클럽 계정</td></tr>
+        <tr><td class="p">5</td><td class="c">Valencia Basket <span class="tag2">산하 팀</span></td><td class="v">6.954</td><td class="n">여자 전용</td></tr>
+        <tr><td class="p">6</td><td class="c">Domusa Teknik ISB (Iraurgi)</td><td class="v">5.257</td><td class="n">클럽 계정</td></tr>
+        <tr><td class="p">7</td><td class="c">SPAR Gran Canaria</td><td class="v">5.080</td><td class="n">여자 전용</td></tr>
+        <tr><td class="p">8</td><td class="c">Recoletas Zamora</td><td class="v">4.348</td><td class="n">여자 전용</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">9위~18위는 변동 없음(Al-Qázeres 4,027 … Melilla 162). ACB 클럽의 대형 계정과 산하 팀을 제외하면, 비교 가능한 클럽 중에서 Barna가 이 카테고리 1위입니다.</p>
+
+    <div class="tblwrap"><table class="rank">
+      <thead><tr><th class="r">#</th><th>여자 리그 2 2026-27</th><th class="r">팔로워</th><th>계정 유형</th></tr></thead>
+      <tbody>
+        <tr><td class="p">1</td><td class="c">HLA / Lucentum Alicante</td><td class="v">13.000</td><td class="n"><span class="tag2">대형 계정</span></td></tr>
+        <tr class="nw"><td class="p">2</td><td class="c">UE Mataró</td><td class="v">9.225</td><td class="n">8월 16일 확인</td></tr>
+        <tr><td class="p">3</td><td class="c">Basket Almeda</td><td class="v">7.727</td><td class="n">클럽 계정</td></tr>
+        <tr class="me"><td class="p">4</td><td class="c">CB GRUP BARNA</td><td class="v">7.096</td><td class="n">클럽 계정</td></tr>
+        <tr><td class="p">5</td><td class="c">Cesur Distrito Olímpico</td><td class="v">6.617</td><td class="n">클럽 계정</td></tr>
+        <tr><td class="p">6</td><td class="c">Grupo Interbus Alcobendas</td><td class="v">5.543</td><td class="n">클럽 계정</td></tr>
+        <tr><td class="p">7</td><td class="c">SPAR Gran Canaria <span class="tag2">산하 팀</span></td><td class="v">5.080</td><td class="n">여자 전용</td></tr>
+        <tr><td class="p">8</td><td class="c">CB Las Rozas</td><td class="v">4.898</td><td class="n">클럽 계정</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">9위~24위는 변동 없음(TGN 4,850, Viladecans 4,802, Móstoles 3,725, Manresa CBF 3,560 … Stadium Casablanca 1,102). GEiEG는 1,343으로 갱신. 수치 미확인: Siroko Gijón, ADBA Sanfer, CB Isla Bonita, El Cochinillo Segoviano — 어느 곳도 Barna의 7,096을 넘을 징후는 없습니다.</p>
+    <div class="pull">여자 전국 3부 카테고리에서 Barna보다 큰 커뮤니티를 가진 곳은 대형 계정 1곳과 두 클럽 — UEM과 Almeda — 뿐입니다. 그리고 이 두 곳은 바로 육성 벤치마크의 선두 클럽입니다.</div>
+  </div>
+</section>
+
+<div class="part"><div class="wrap"><div class="pn">제V부</div><h2>조직 체계: 각 클럽이 코트에 내보내는 팀 수</h2><p>카탈루냐 농구연맹(FCBQ)의 공식 클럽 자료(2026-27 시즌, 23건)를 수작업으로 집계했습니다. 육성 프로젝트의 규모를 보여 주는 진짜 척도입니다.</p></div></div>
+
+<section id="s17">
+  <div class="wrap">
+    <div class="secn">V·1 · 등록 팀</div>
+    <h2>홍보에 좌우되지 않는 표</h2>
+    <div class="tblwrap"><table class="rank">
+      <thead><tr><th>클럽</th><th class="r">합계</th><th class="r">육성</th><th class="r">시니어 + U20/U25</th><th>코트에 서는 최상위 카테고리</th></tr></thead>
+      <tbody>
+        <tr><td class="c">CB Boet Maresme Mataró</td><td class="v">42</td><td class="v">37</td><td class="v">5</td><td class="n">Super Copa Catalunya 남녀</td></tr>
+        <tr><td class="c">UE Mataró</td><td class="v">37</td><td class="v">33</td><td class="v">4</td><td class="n">테르세라 FEB + 여자 리그 2</td></tr>
+        <tr class="me"><td class="c">CB GRUP BARNA</td><td class="v">32</td><td class="v">28</td><td class="v">4</td><td class="n">Super Copa Catalunya 남녀</td></tr>
+        <tr><td class="c">CB Roser</td><td class="v">30</td><td class="v">22</td><td class="v">8</td><td class="n">테르세라 FEB + Super Copa 여자</td></tr>
+        <tr><td class="c">CB Prat</td><td class="v">26</td><td class="v">21</td><td class="v">5</td><td class="n">세군다 FEB</td></tr>
+        <tr><td class="c">CB Cornellà</td><td class="v">24</td><td class="v">20</td><td class="v">4</td><td class="n">테르세라 FEB + Copa Catalunya 여자</td></tr>
+        <tr><td class="c">CB Santfeliuenc</td><td class="v">24</td><td class="v">20</td><td class="v">4</td><td class="n">Super Copa 남자 · 여자는 Barça CBS</td></tr>
+        <tr><td class="c">CB L'Hospitalet</td><td class="v">20</td><td class="v">17</td><td class="v">3</td><td class="n">테르세라 FEB</td></tr>
+        <tr><td class="c">UB Sant Adrià</td><td class="v">20</td><td class="v">16</td><td class="v">4</td><td class="n">Copa Catalunya 남자</td></tr>
+        <tr><td class="c">Basket Almeda</td><td class="v">17</td><td class="v">15</td><td class="v">2</td><td class="n">여자 리그 2</td></tr>
+        <tr><td class="c">BF Sant Adrià</td><td class="v">16</td><td class="v">15</td><td class="v">1</td><td class="n">Super Copa Catalunya 여자</td></tr>
+        <tr><td class="c">BF Cornellà</td><td class="v">14</td><td class="v">10</td><td class="v">4</td><td class="n">세군다 카탈라나 여자</td></tr>
+        <tr><td class="c">GEiEG</td><td class="v">7</td><td class="v">5</td><td class="v">2</td><td class="n">여자 리그 2</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">"육성"은 주니어부터 프리미니까지입니다. "시니어 + U20/U25"는 모든 카테고리의 시니어 팀과 U20·U25 팀을 합친 것입니다. 두 대회(리그 + Super Copa)에 등록된 팀은 기재된 등록마다 한 번씩 집계했습니다.</p>
+    <div class="pull">Barna는 비교 대상 중 세 번째로 큰 육성 조직이며, 상위 세 곳 중 FEB 카테고리에 팀이 없는 곳은 Barna뿐입니다. 이 디지털 커뮤니티는 프로 시니어 팀이 끌어온 것이 아니라 육성 부문이 만들어 낸 것입니다.</div>
+  </div>
+</section>
+
+<section id="s18">
+  <div class="wrap">
+    <div class="secn">V·2 · 법인</div>
+    <h2>법인 지도: 정확히 누구와 비교하는가</h2>
+    <p class="lead body">카탈루냐 농구의 유명한 이름 여러 개는 하나의 클럽이 아닙니다. 별도의 계정을 가진 두세 개의 연맹 등록 단체입니다. 그 수치를 합산하거나 엉뚱한 상대와 비교하는 것은 순위를 부풀리거나 가라앉히는 가장 빠른 방법입니다.</p>
+    <div class="tblwrap"><table class="rank">
+      <thead><tr><th>체계</th><th>연맹 등록 단체</th><th>출전 리그</th><th class="r">팀 수</th><th class="r">팔로워</th></tr></thead>
+      <tbody>
+        <tr><td class="c">Joventut Badalona</td><td class="n">Club Joventut Badalona SAD</td><td class="n">ACB + LF Challenge</td><td class="v">2</td><td class="v">68.600</td></tr>
+        <tr><td></td><td class="n">Fundació Privada Joventut</td><td class="n">육성 전체</td><td class="v">53</td><td class="n">같은 계정</td></tr>
+        <tr><td class="c">Barça</td><td class="n">Futbol Club Barcelona</td><td class="n">ACB + 남자 육성</td><td class="v">10</td><td class="v">≈1.000.000</td></tr>
+        <tr><td></td><td class="n">여자는 CB Santfeliuenc를 통해</td><td class="n">LF Challenge("Barça CBS")</td><td class="v">—</td><td class="v">18.400</td></tr>
+        <tr><td class="c">Girona</td><td class="n">CB Girona 2014 SAD</td><td class="n">ACB + LF Endesa</td><td class="v">2</td><td class="v">35.000 / 24.000</td></tr>
+        <tr><td></td><td class="n">Fundació Bàsquet Girona</td><td class="n">육성 전체</td><td class="v">24</td><td class="v">5.118</td></tr>
+        <tr><td></td><td class="n">GEiEG</td><td class="n">LF2 + 여자 육성</td><td class="v">7</td><td class="v">1.343</td></tr>
+        <tr><td class="c">Manresa</td><td class="n">Bàsquet Manresa SAD</td><td class="n">ACB</td><td class="v">1</td><td class="v">36.000</td></tr>
+        <tr><td></td><td class="n">CB Manresa 2015</td><td class="n">남자 육성</td><td class="v">18</td><td class="n">같은 계정</td></tr>
+        <tr><td></td><td class="n">Manresa CBF 2021</td><td class="n">LF2 + 여자 육성</td><td class="v">20</td><td class="v">3.560</td></tr>
+        <tr><td class="c">Lleida</td><td class="n">Força Lleida CE</td><td class="n">ACB + 여자 + 육성</td><td class="v">33</td><td class="v">27.000</td></tr>
+        <tr><td></td><td class="n">여자/육성 부문</td><td class="n">—</td><td class="v">—</td><td class="v">3.921 / 3.860</td></tr>
+        <tr><td class="c">Sant Adrià</td><td class="n">CB Femení Sant Adrià</td><td class="n">Super Copa 여자 + 여자 육성</td><td class="v">16</td><td class="v">8.517</td></tr>
+        <tr><td></td><td class="n">UB Sant Adrià</td><td class="n">Copa Catalunya 남자 + 남자 육성</td><td class="v">20</td><td class="v">3.255</td></tr>
+        <tr><td class="c">Cornellà</td><td class="n">CB Cornellà</td><td class="n">테르세라 FEB + 혼성</td><td class="v">24</td><td class="v">7.233</td></tr>
+        <tr><td></td><td class="n">BF Cornellà</td><td class="n">전통의 여자 부문</td><td class="v">14</td><td class="v">1.926</td></tr>
+        <tr><td class="c">L'Hospitalet</td><td class="n">CB L'Hospitalet</td><td class="n">테르세라 FEB + 남자 육성</td><td class="v">20</td><td class="v">6.541</td></tr>
+        <tr><td></td><td class="n">CE Joventut L'Hospitalet</td><td class="n">여자</td><td class="v">9</td><td class="v">513</td></tr>
+        <tr class="me"><td class="c">CB GRUP BARNA</td><td class="n">단일 조직</td><td class="n">Super Copa 남녀 + 육성 전체</td><td class="v">32</td><td class="v">7.096</td></tr>
+      </tbody>
+    </table></div>
+    <div class="pull">다른 클럽들이 남자, 여자, 육성을 아우르기 위해 두세 개의 조직과 나뉜 계정을 필요로 하는 곳에서, Barna는 하나의 브랜드와 하나의 계정으로 해냅니다. 후원 측면에서 이것은 커뮤니티 전체로 들어가는 단일 창구라고 부릅니다. 관중의 절반만 사는 사람은 없으니까요.</div>
+  </div>
+</section>
+<div class="part"><div class="wrap"><div class="pn">제VI부</div><h2>진단, 목표, 주장의 근거</h2><p>데이터가 무엇을 보여 주고 무엇을 보여 주지 않는지, 그리고 이사회, 구청, 후원사 앞에서 숫자 하나도 부풀리지 않고 무엇을 말할 수 있는지.</p></div></div>
+
+<section id="s19">
+  <div class="wrap">
+    <div class="secn">VI·1 · 진단</div>
+    <h2>솔직한 네 가지 해석</h2>
+    <div class="quad">
+      <div><h4>데이터가 보여 주는 것</h4><p>클럽이 경기 카테고리 이상으로, 그리고 실제 조직 규모에 걸맞게 발신하고 있다는 것. 브랜드 — 동네, 육성, 여자, 가치 — 가 관중을 끌어올 FEB 시니어 팀 없이도 공감을 만들어 낸다는 것. 그리고 논거가 이중이라는 것: 커뮤니티 <em>와</em> 조직 체계이며, 둘 다 공개 자료로 검증할 수 있습니다.</p></div>
+      <div><h4>데이터가 보여 주지 않는 것</h4><p>프로 클럽에 해당하는 도달 범위도, 참여도도, 상업적 가치도 보여 주지 않습니다. UEM과 Prat에는 연맹 TV 중계와 FEB 입장 수입이 있고, Sant Adrià에는 혼합 계정이 재현할 수 없는 순수한 여자 농구의 서사가 있습니다. 커뮤니티 규모는 하나의 변수이지 전체 그림이 아닙니다.</p></div>
+      <div><h4>내부의 이상치</h4><p>등록 팀 32개와 약 450가구가 팔로워 7,096명을 지탱하고 있습니다: <strong>팀당 222명</strong>. 전문 클럽들은 두 배로 전환합니다(Sant Adrià 532, Almeda 455). 한계를 정하는 것은 시장도 조직도 아닙니다 — 비교 대상 중 세 번째로 큽니다 — 정체성을 오디언스로 전환하는 힘이 한계를 정합니다.</p></div>
+      <div><h4>활용되지 않은 강점</h4><p>위에 있는 클럽은 두 가지 길 중 하나로 그 자리에 있습니다: FEB 시니어 팀(UEM, Prat, Cornellà) 또는 틈새의 순도(Sant Adrià, Almeda). Barna에게는 이 그룹의 누구도 차지하지 못한 세 번째 길이 있습니다: <strong>미디어</strong> 가 되는 것 — 전술, 건강, 가족, 코치 — 모든 일을 하는 클럽의 단일 계정으로.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s20">
+  <div class="wrap">
+    <div class="secn">VI·2 · 목표</div>
+    <h2>2026/27 단계</h2>
+    <div class="tblwrap"><table class="rank">
+      <thead><tr><th>이정표</th><th class="r">목표</th><th class="r">남은 것</th><th>열리는 것</th></tr></thead>
+      <tbody>
+        <tr><td class="c">작전 7,500</td><td class="v">7.500</td><td class="v">404</td><td class="n">Cornellà와 Prat를 넘어서기. 분기 목표.</td></tr>
+        <tr><td class="c">작전 7,800</td><td class="v">7.800</td><td class="v">704</td><td class="n">Almeda를 넘어서기: 남부 지역 선두.</td></tr>
+        <tr><td class="c">여자·육성 분야 선두</td><td class="v">8.600</td><td class="v">1.504</td><td class="n">Sant Adrià를 넘어서기.</td></tr>
+        <tr><td class="c">작전 Mataró</td><td class="v">9.300</td><td class="v">2.204</td><td class="n">UEM을 넘어서기: 육성 벤치마크 종합 1위.</td></tr>
+        <tr><td class="c">규모의 전환</td><td class="v">10.000</td><td class="v">2.904</td><td class="n">LF Challenge와 LF2에서 비교 가능한 모든 클럽보다 앞서기.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="s21">
+  <div class="wrap">
+    <div class="secn">VI·3 · 주장의 근거</div>
+    <h2>후원 자료를 위한 한 문장</h2>
+    <div class="quote">
+      <div class="q">"CB Grup Barna는 등록 팀 32개를 갖추고 7,000명이 넘는 디지털 커뮤니티를 이루고 있습니다. 비교 대상 중 세 번째로 큰 육성 조직이며, 커뮤니티 규모로는 바르셀로나 시내 1위입니다. LF Endesa의 5개 클럽과 LF Challenge의 비교 가능한 모든 클럽보다 앞서 있고, LF2의 선두와는 퍼센트로 한 자릿수 차이입니다. 모든 것을 단일 계정으로, 프로 팀 없이 이뤄 냈습니다."</div>
+      <div class="who">공개 자료로 검증 가능 · 숫자 하나도 부풀리지 않음</div>
+    </div>
+    <p class="body">이 문장에 제I부~제III부의 근거 블록이 더하는 것은 <em>이유</em>입니다: 클럽이 크다는 것만이 아니라, 클럽이 육성하는 방식 — 결과보다 재미, 조기 선별 없음, 완전한 연속성 — 이 연구가 뒷받침하는 방식이며, 마르크 가솔 같은 프로젝트가 어떤 선택지든 고를 수 있었을 때 택한 방식이라는 것입니다.</p>
+    <div class="note"><b>무언가에 서명하기 전에:</b> 실제 프로필을 확인하세요. 팔로워 수는 매주 변합니다. "16/08 확인"이라고 표시한 수치는 날짜와 함께 프로필 화면에서 읽은 것입니다. 나머지는 제1판의 8월 검증에서 가져온 것입니다.</div>
+  </div>
+</section>
+
+<section id="s22">
+  <div class="wrap">
+    <div class="secn">방법론 노트</div>
+    <h2>자료 간 불일치와 어느 것을 우선했는지</h2>
+    <p class="lead body">이 보고서는 서로 다른 날짜와 서로 다른 기준으로 이루어진 세 건의 연구를 통합합니다. 서로 일치하지 않는 수치가 있습니다. 이를 숨기면 검증하는 사람에게 문서가 쓸모없어집니다. 무엇이 다르고 무엇을 채택했는지 밝힙니다.</p>
+    <div class="tblwrap"><table class="rank">
+      <thead><tr><th>데이터</th><th class="r">"Piràmide" 8월 13일</th><th class="r">"순위표 속에서" 8월 16일</th><th>채택한 기준</th></tr></thead>
+      <tbody>
+        <tr class="me"><td class="c">CB Grup Barna의 팀 수</td><td class="v">33</td><td class="v">32</td><td class="n"><b>32</b> — 가장 최근 집계이며 육성/시니어 내역이 명시되어 있음</td></tr>
+        <tr><td class="c">CB Boet Maresme Mataró</td><td class="v">40</td><td class="v">42</td><td class="n"><b>42</b> — 같은 이유</td></tr>
+        <tr><td class="c">Bàsquet Girona의 육성 부문</td><td class="v">23</td><td class="v">24</td><td class="n"><b>24</b> — 같은 이유</td></tr>
+        <tr><td class="c">CB Santfeliuenc</td><td class="v">24</td><td class="v">24</td><td class="n">일치</td></tr>
+      </tbody>
+    </table></div>
+    <div class="warn"><b>차이가 생긴 이유.</b> 연맹 등록 기간 한가운데서 사흘의 차이가 있고, 집계 기준도 다릅니다. 리그와 Super Copa 모두에 등록된 팀은 자료를 어떻게 읽느냐에 따라 한 번 또는 두 번으로 집계될 수 있습니다. 차이는 클럽당 1~2팀이며 <b>순위에는 어떤 변동도 주지 않습니다</b> — Barna는 32개든 33개든 조직 규모로 3위입니다. 외부에서 사용할 때는 항상 <b>32개 팀, FCBQ 자료(2026년 8월 16일)</b>라고 인용하고, 서명하기 전에 basquetcatala.cat에서 확인하세요.</div>
+    <h3>이미 반영한 다른 정정</h3>
+    <ul class="checks no">
+      <li><b>UE Mataró</b>: 벤치마크 제1판에서는 수치 없음 → 9,225 확인. 육성 순위의 선두가 바뀌고 Barna는 5위에서 6위로 내려갑니다.</li>
+      <li><b>Barça CBS Femení</b>: 제1판에서 누락 → 18,400. Barna는 LF Challenge에서 3위에서 4위가 됩니다.</li>
+      <li><b>L'Hospitalet의 여자 부문</b>: 계정 @celhospitaletfemeni(2,952)는 CE L'Hospitalet의 <em>축구</em>계정입니다. 농구는 @ce_joventut_lhospitalet(513)입니다.</li>
+      <li><b>Uni Girona</b>: 더 이상 독립 클럽이 아닙니다. LF Endesa 라이선스는 CB Girona 2014 SAD에 속해 있습니다.</li>
+      <li><b>"Marta Zori가 Grup Barna와 재계약"(FEB.es)</b>: 외부 언론 모음에 실려 있던 내용입니다. 어떤 경로로도 확인되지 않았으며 이 보고서와 클럽 웹사이트에서 <b>사용하지 않습니다</b> .</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>1차 자료.</b> 『현황에 관한 요약 보고서』(CB Grup Barna · Ana Fernández Durán, 2026년 8월) · 『Piràmide CB Grup Barna』(FCBQ 클럽 글로벌 캘린더, 2026년 8월 13일) · 『순위표 속의 Barna』 제2판(마케팅 부서, 2026년 8월 16일: 인스타그램 계정 92개와 FCBQ 클럽 자료 23건을 프로필별·자료별로 검증).</p>
+    <p><b>검증된 2차 자료.</b> FEB.es(2014년, 2017년) · basquetcatala.cat · Esport3/3cat · HoyMagazine · CBS Sports · ESPN · El Desmarque · L'Esportiu de Catalunya · Deia · Público · El Español · Gigantes del Basket · Unisport · FIATC/El Nacional · Metrópoli Abierta (El Español) · El Clotenc · Guia Clot (Eix Clot).</p>
+    <p>CB Grup Barna 내부 작업 문서 · 엘 클로트, 산트 마르티, 바르셀로나 · 1965년 창립.</p>
+  </div>
+</footer></main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h3>Barna</h3>
+        <a href="/en/escoleta/">농구 스쿨</a>
+        <a href="/en/campus/">농구 캠프</a>
+        <a href="/en/3x3/">3x3 토너먼트</a>
+        <a href="/en/patrocinadors/">파트너</a>
+        <a href="/en/grup-barna-dades-oficials/">공식 데이터</a>
+      </div>
+      <div class="foot-col">
+        <h3>시즌</h3>
+        <a href="/en/partits/">캘린더</a>
+        <a href="/en/partits/calendaris/">팀별 캘린더</a>
+        <a href="/en/fotos/">포토 갤러리</a>
+        <a href="/en/premidonaesport/">여성과 스포츠상</a>
+        <a href="/en/blog/">블로그</a>
+        <a href="/en/premsa/">기사 및 언론</a>
+      </div>
+      <div class="foot-col">
+        <h3>연락처</h3>
+        <a href="/en/#info">정보 문의</a>
+        <a href="/en/newsletter/">뉴스레터</a>
+        <a href="/en/suggestions/">건의함</a>
+        <a href="/en/faq/">자주 묻는 질문</a>
+        <a href="mailto:marqueting@cbgrupbarna.info">marqueting@cbgrupbarna.info</a>
+        <a href="https://wa.me/34698425153">+34 698 425 153</a>
+        <p>La Nau del Clot · Sant Martí<br>08018 Barcelona</p>
+      </div>
+      <div class="foot-col">
+        <h3>법적 정보</h3>
+        <a href="/en/privacy-policy/">개인정보 처리방침</a>
+        <a href="/en/legal-notice/">법적 고지</a>
+        <a href="/en/privacy-policy/#galetes">쿠키</a>
+        <a href="/en/accessibility/" class="foot-a11y"><span class="foot-a11y-i" aria-hidden="true">&#9855;</span>접근성 — WCAG 2.2 AA</a>
+      </div>
+      <div class="foot-col">
+        <h3>소셜 미디어</h3>
+        <a href="https://www.instagram.com/cbgrupbarna/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@cbgrupbarna" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+    <div class="foot-btm">
+      <div class="foot-mark">#Som<em>Clot</em></div>
+      <div class="foot-legal">© 2026 CB Grup Barna · 1965년부터 엘 클로트에서 이어 온 유소년 농구</div>
+    </div>
+  </div>
+</footer>
+<script>
+/* Marca la secció que s'està llegint a la barra de l'informe. */
+(function(){
+  var nav=document.getElementById('idxNav'); if(!nav||!('IntersectionObserver' in window)) return;
+  var links=[].slice.call(nav.querySelectorAll('a')), map={}, targets=[];
+  links.forEach(function(a){var el=document.getElementById(a.getAttribute('href').slice(1));
+    if(el){map[el.id]=a;targets.push(el);}});
+  var active=null, seen={};
+  function mark(id){ if(id===active) return; active=id;
+    links.forEach(function(a){a.removeAttribute('aria-current');});
+    var a=map[id]; if(!a) return; a.setAttribute('aria-current','true');
+    var l=a.offsetLeft, r=l+a.offsetWidth;
+    if(l<nav.scrollLeft+16) nav.scrollLeft=l-16;
+    else if(r>nav.scrollLeft+nav.clientWidth-16) nav.scrollLeft=r-nav.clientWidth+16; }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){seen[e.target.id]=e.isIntersecting?e.intersectionRatio:0;});
+    var best=null,bv=0; targets.forEach(function(t){var v=seen[t.id]||0; if(v>bv){bv=v;best=t.id;}});
+    if(best) mark(best);
+  },{rootMargin:'-118px 0px -55% 0px',threshold:[0,.15,.4,.75,1]});
+  targets.forEach(function(t){io.observe(t);});
+})();
+</script>
+<script src="/js/galetes.js" defer></script><script src="/js/xat-whatsapp.js" defer></script>
+<script src="/js/cerca.js" defer></script>
+<script src="/js/mapa.js" defer></script>
+<script src="/js/avis-portes-obertes.js" defer></script>
+</body>
+</html>
