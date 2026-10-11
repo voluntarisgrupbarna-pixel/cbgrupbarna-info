@@ -46,7 +46,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FEINA = ROOT / "i18n" / "feina"
 SITE = "https://linksbio.cbgrupbarna.info"
 LOCALE = {"ca": "ca_ES", "es": "es_ES", "en": "en_US", "ja": "ja_JP", "ko": "ko_KR",
-          "de": "de_DE", "it": "it_IT", "nl": "nl_NL", "fr": "fr_FR"}
+          "de": "de_DE", "it": "it_IT", "nl": "nl_NL", "fr": "fr_FR", "ar": "ar_AE"}
 
 RE_HTML_LANG = re.compile(r'(<html[^>]*\blang=["\'])([^"\']*)(["\'])', re.I)
 RE_OG_LOCALE = re.compile(r'(<meta[^>]+property=["\']og:locale["\'][^>]+content=["\'])([^"\']*)(["\'])', re.I)
@@ -79,6 +79,21 @@ CJK_CSS = {
           '"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Nanum Gothic",sans-serif}'
           'html[lang="ko"] *{letter-spacing:normal;word-break:keep-all}</style>',
 }
+
+CJK_CSS["ar"] = (
+    '<style id="rtl-ar">html[lang="ar"] body,html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3,'
+    'html[lang="ar"] h4,html[lang="ar"] button,html[lang="ar"] input{font-family:"Noto Sans Arabic","Segoe UI",'
+    '"Geeza Pro","Tahoma","Arial",sans-serif}'
+    'html[lang="ar"] *{letter-spacing:0!important;text-transform:none!important}'
+    # El «skip link» s'amaga amb left:-9999px: en RTL això allarga l'àrea de
+    # desplaçament cap a l'esquerra i la pàgina s'obre a una zona buida.
+    'html[lang="ar"]{overflow-x:hidden}'
+    'html[lang="ar"] .skip{left:auto!important;right:-9999px}'
+    'html[lang="ar"] .skip:focus{right:12px;left:auto!important}'
+    # .split.rev inverteix la graella amb direction:rtl i torna a posar ltr als
+    # fills; en àrab ha de ser al revés perquè el text continuï anant en RTL.
+    'html[lang="ar"] .split.rev{direction:ltr}'
+    'html[lang="ar"] .split.rev>*{direction:rtl}</style>')
 
 _MAPA = None
 
@@ -124,7 +139,7 @@ def tradueix_enllacos(html, idioma):
 
     def canvia(m):
         obre, ruta, cua, tanca = m.groups()
-        if ruta.startswith(("/es/", "/en/", "/ja/", "/ko/", "/de/", "/it/", "/nl/", "/fr/")):
+        if ruta.startswith(("/es/", "/en/", "/ja/", "/ko/", "/de/", "/it/", "/nl/", "/fr/", "/ar/")):
             return m.group(0)
         # Fitxers (imatges, PDF, .ics) i rutes tècniques no tenen versió.
         if re.search(r"\.[a-z0-9]{2,5}$", ruta) and not ruta.endswith(".html"):
@@ -138,7 +153,7 @@ def tradueix_enllacos(html, idioma):
             return f"{obre}{candidat}{cua}{tanca}"
         # Japonès i coreà només tenen les presentacions: la resta d'enllaços
         # van a la versió anglesa, que és millor que un 404 o que el català.
-        if idioma in ("ja", "ko", "de", "it", "nl", "fr"):
+        if idioma in ("ja", "ko", "de", "it", "nl", "fr", "ar"):
             en = desti_del_mapa(ruta, "en") or f"/en{ruta}"
             if fitxer_de(en).exists():
                 return f"{obre}{en}{cua}{tanca}"
@@ -219,6 +234,8 @@ def munta(ruta, idioma):
 
     # 3. L'idioma de la pàgina.
     html = RE_HTML_LANG.sub(lambda m: m.group(1) + idioma + m.group(3), html, count=1)
+    if idioma == "ar":
+        html = re.sub(r'<html\b(?![^>]*\bdir=)', '<html dir="rtl"', html, count=1)
     if idioma in CJK_CSS and "</head>" in html:
         # Anton i Inter no porten ideogrames ni hangul: sense això el navegador
         # tria una tipografia qualsevol. S'afegeix la pila de sistema de cada
@@ -231,7 +248,7 @@ def munta(ruta, idioma):
     # la versió anglesa era en català; les portades fan servir una llista.
     # BCP-47: el castellà d'aquí és es-ES i l'anglès el servim com a en-US.
     llarg = {"ca": "ca-ES", "es": "es-ES", "en": "en-US", "ja": "ja-JP", "ko": "ko-KR",
-             "de": "de-DE", "it": "it-IT", "nl": "nl-NL", "fr": "fr-FR"}[idioma]
+             "de": "de-DE", "it": "it-IT", "nl": "nl-NL", "fr": "fr-FR", "ar": "ar-AE"}[idioma]
     html = html.replace('"inLanguage": "ca"', f'"inLanguage": "{idioma}"')
     html = html.replace('"inLanguage":"ca"', f'"inLanguage":"{idioma}"')
     html = html.replace('"inLanguage": "ca-ES"', f'"inLanguage": "{llarg}"')
@@ -332,7 +349,7 @@ def punt_japonesa(html):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ruta", nargs="?", help="ruta catalana, p. ex. /club/")
-    ap.add_argument("idioma", choices=["es", "en", "ja", "ko", "de", "it", "nl", "fr"])
+    ap.add_argument("idioma", choices=["es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar"])
     ap.add_argument("--tot", action="store_true", help="totes les que tinguin la feina feta")
     ap.add_argument("--ruta-desti", help="ruta de la pàgina traduïda si no ha de dur el nom "
                                          "català: --ruta-desti /en/history/")

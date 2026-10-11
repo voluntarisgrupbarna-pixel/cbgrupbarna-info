@@ -19,9 +19,16 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 IDIOMES = [("ca", "CA", "Català"), ("es", "ES", "Castellano"), ("en", "EN", "English"),
            ("ja", "JA", "日本語"), ("ko", "KO", "한국어"),
-           ("de", "DE", "Deutsch"), ("it", "IT", "Italiano"), ("nl", "NL", "Nederlands"), ("fr", "FR", "Français")]
-ARIA = "Canvia d'idioma · Cambiar idioma · Change language · 言語を変更 · 언어 변경 · Sprache ändern · Cambia lingua · Taal wijzigen · Changer de langue"
+           ("de", "DE", "Deutsch"), ("it", "IT", "Italiano"), ("nl", "NL", "Nederlands"), ("fr", "FR", "Français"), ("ar", "AR", "العربية")]
+ARIA = "Canvia d'idioma · Cambiar idioma · Change language · 言語を変更 · 언어 변경 · Sprache ändern · Cambia lingua · Taal wijzigen · Changer de langue · تغيير اللغة"
 RE_BLOC = re.compile(r'(?is)<(div|nav)(\s+class="lang-switch"[^>]*)>(.*?)</\1>')
+# Amb nou idiomes el commutador ja no cap en un mòbil: sense separadors i amb
+# menys marge ocupa uns 200 px en lloc de 330.
+ESTIL = ('<style id="lang-switch-compact">@media(max-width:640px){'
+         '.lang-switch .sep{display:none}'
+         '.lang-switch a{min-width:22px;padding:7px 2px}'
+         '.lang-switch{flex-shrink:1;flex-wrap:wrap;justify-content:flex-end;letter-spacing:0}}</style>')
+RE_ESTIL = re.compile(r'<style id="lang-switch-compact">.*?</style>')
 SEP = '<span class="sep" aria-hidden="true">·</span>'
 
 
@@ -33,7 +40,7 @@ def main():
     rutes = (yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}).get("rutes", [])
     tocades = 0
     for grup in rutes:
-        if not any(grup.get(i) for i in ("ja", "ko", "de", "it", "nl", "fr")):
+        if not any(grup.get(i) for i in ("ja", "ko", "de", "it", "nl", "fr", "ar")):
             continue
         for idioma, _, _ in IDIOMES:
             url = grup.get(idioma)
@@ -54,6 +61,9 @@ def main():
                 return f'<{m.group(1)}{obre}>\n      {SEP.join(enllacos)}\n    </{m.group(1)}>'
 
             nou, n = RE_BLOC.subn(canvia, text, count=1)
+            if n and "</head>" in nou:
+                nou = RE_ESTIL.sub("", nou)
+                nou = nou.replace("</head>", ESTIL + "\n</head>", 1)
             if n and nou != text:
                 fitxer.write_text(nou, encoding="utf-8")
                 tocades += 1
