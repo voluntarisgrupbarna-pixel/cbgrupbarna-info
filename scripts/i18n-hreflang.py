@@ -59,7 +59,7 @@ def bloc(grup, sagnat=""):
     indentat i d'altres sense, i el bloc s'ha de posar com estigui la seva.
     """
     linies = [f'{sagnat}<link rel="alternate" hreflang="{idioma}" href="{SITE}{grup[idioma]}">'
-              for idioma in ("ca", "es", "en") if grup.get(idioma)]
+              for idioma in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar") if grup.get(idioma)]
     linies.append(f'{sagnat}<link rel="alternate" hreflang="x-default" href="{SITE}{grup["ca"]}">')
     return "\n".join(linies)
 
@@ -79,7 +79,7 @@ def main():
             saltades.append(grup["ca"])
             continue
 
-        for idioma in ("ca", "es", "en"):
+        for idioma in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar"):
             url = grup.get(idioma)
             if not url:
                 continue

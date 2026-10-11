@@ -1,0 +1,60 @@
+# El mateix vocabulari que diccionari.yml, per al japonès (ja) i el coreà (ko).
+#
+# Va a part a posta: aquests dos idiomes només tenen les presentacions
+# (/ja/presentations/, /ko/presentations/). La resta de pàgines no existeixen
+# en ja/ko; per això scripts/i18n_chrome.py, quan un enllaç no té pàgina en ja
+# o ko, el porta a la versió anglesa en comptes de deixar un 404. A mesura que
+# es tradueixin més pàgines, els enllaços passen sols a la versió ja/ko.
+#
+# L'estructura (quins enllaços surten al menú i al peu) és la de l'anglès.
+
+textos:
+  nav_equips:      {ja: チーム,                 ko: 팀}
+  nav_club:        {ja: クラブ,                 ko: 클럽}
+  nav_escoleta:    {ja: Escoleta,               ko: Escoleta}
+  nav_campus:      {ja: キャンプ,               ko: 캠프}
+  nav_empreses:    {ja: 企業,                   ko: 기업}
+  nav_3x3:         {ja: 3x3,                    ko: 3x3}
+  nav_blog:        {ja: ブログ,                 ko: 블로그}
+  nav_premsa:      {ja: プレス,                 ko: 언론}
+  nav_partners:    {ja: パートナー,             ko: 파트너}
+  nav_info:        {ja: 詳細情報,               ko: 정보}
+  partits:         {ja: カレンダー,             ko: 캘린더}
+  calendaris:      {ja: チーム別カレンダー,     ko: 팀별 캘린더}
+  escoleta_llarg:  {ja: バスケットボールスクール, ko: 농구 스쿨}
+  campus_llarg:    {ja: バスケットボールキャンプ, ko: 농구 캠프}
+  magics:          {ja: Barna Màgics,           ko: Barna Màgics}
+  torneig_3x3:     {ja: 3x3トーナメント,        ko: 3x3 토너먼트}
+  cistella_petita: {ja: Cistella Petita,        ko: Cistella Petita}
+  empreses:        {ja: 企業,                   ko: 기업}
+  partners:        {ja: パートナー,             ko: 파트너}
+  installacions:   {ja: 施設,                   ko: 시설}
+  organigrama:     {ja: 組織図,                 ko: 조직도}
+  posicionament:   {ja: クラブのポジショニング, ko: 클럽 포지셔닝}
+  dades_oficials:  {ja: 公式データ,             ko: 공식 데이터}
+  proteccio_menor: {ja: 未成年者の保護,         ko: 미성년자 보호}
+  basquet_femeni:  {ja: 女子バスケットボール,   ko: 여자 농구}
+  fotos:           {ja: フォトギャラリー,       ko: 포토 갤러리}
+  premidonaesport: {ja: 女性とスポーツ賞,       ko: 여성과 스포츠상}
+  blog:            {ja: ブログ,                 ko: 블로그}
+  premsa_llarg:    {ja: 記事・プレス,           ko: 기사 및 언론}
+  info_demanar:    {ja: お問い合わせ,           ko: 정보 문의}
+  faq:             {ja: よくある質問,           ko: 자주 묻는 질문}
+  newsletter:      {ja: ニュースレター,         ko: 뉴스레터}
+  bustia:          {ja: 提案ボックス,           ko: 건의함}
+  privacitat:      {ja: プライバシーポリシー,   ko: 개인정보 처리방침}
+  avis_legal:      {ja: 法的通知,               ko: 법적 고지}
+  galetes:         {ja: Cookie,                 ko: 쿠키}
+  accessibilitat:  {ja: アクセシビリティ,       ko: 접근성}
+  titol_el_barna:  {ja: Barna,                  ko: Barna}
+  titol_temporada: {ja: シーズン,               ko: 시즌}
+  titol_contacte:  {ja: お問い合わせ,           ko: 연락처}
+  titol_legal:     {ja: 法務情報,               ko: 법적 정보}
+  titol_xarxes:    {ja: SNS,                    ko: 소셜 미디어}
+  salta:           {ja: コンテンツへスキップ,   ko: 본문으로 건너뛰기}
+  nav_aria:        {ja: メインナビゲーション,   ko: 주 메뉴}
+  inici_aria:      {ja: "CB Grup Barna · ホーム", ko: "CB Grup Barna · 홈"}
+  escut_alt:       {ja: CB Grup Barnaのエンブレム, ko: CB Grup Barna 엠블럼}
+  peu_legal:
+    ja: "© 2026 CB Grup Barna · 1965年からエル・クロットで続くユースバスケットボール"
+    ko: "© 2026 CB Grup Barna · 1965년부터 엘 클로트에서 이어 온 유소년 농구"

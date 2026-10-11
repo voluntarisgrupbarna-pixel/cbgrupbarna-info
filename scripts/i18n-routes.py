@@ -162,7 +162,7 @@ def construeix():
                 continue
             per_ruta = f"/{idioma}{ca}"
             entrada[idioma] = per_ruta if per_ruta in existents[idioma] else None
-        rutes.append({k: entrada[k] for k in ("ca", "es", "en") if k in entrada}
+        rutes.append({k: entrada[k] for k in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar") if k in entrada}
                      | ({"nota": entrada["nota"]} if entrada.get("nota") else {}))
 
     # Pàgines en castellà o anglès que no pengen de cap catalana: o són

@@ -1,0 +1,613 @@
+{
+ "origen": "/presentacions/",
+ "idioma": "ar",
+ "trossos": [
+  {
+   "de": 183,
+   "a": 214,
+   "tipus": "atribut",
+   "context": "títol de la pestanya i de Google",
+   "ca": "Presentacions del CB Grup Barna",
+   "id": "s000",
+   "ar": "عروض CB Grup Barna التقديمية"
+  },
+  {
+   "de": 257,
+   "a": 402,
+   "tipus": "atribut",
+   "context": "descripció de Google",
+   "ca": "Totes les presentacions del CB Grup Barna en un sol lloc: la institucional dels 61 anys i les noves per a famílies, patrocinadors i institucions.",
+   "id": "s001",
+   "ar": "جميع عروض CB Grup Barna في مكان واحد: العرض المؤسسي لـ 61 عامًا من التاريخ، والعروض الجديدة الموجّهة للعائلات والرعاة والمؤسسات."
+  },
+  {
+   "de": 436,
+   "a": 527,
+   "tipus": "atribut",
+   "context": "paraules clau",
+   "ca": "presentacions CB Grup Barna, dossier club bàsquet Barcelona, presentació institucional Clot",
+   "id": "s002",
+   "ar": "عروض CB Grup Barna، ملف نادي كرة السلة برشلونة، العرض المؤسسي إل كلوت"
+  },
+  {
+   "de": 1737,
+   "a": 1750,
+   "tipus": "atribut",
+   "context": "text en compartir l'enllaç",
+   "ca": "CB Grup Barna",
+   "id": "s003",
+   "ar": "CB Grup Barna"
+  },
+  {
+   "de": 1832,
+   "a": 1863,
+   "tipus": "atribut",
+   "context": "text en compartir l'enllaç",
+   "ca": "Presentacions del CB Grup Barna",
+   "id": "s004",
+   "ar": "عروض CB Grup Barna التقديمية"
+  },
+  {
+   "de": 1907,
+   "a": 1955,
+   "tipus": "atribut",
+   "context": "text en compartir l'enllaç",
+   "ca": "Totes les presentacions del club en un sol lloc.",
+   "id": "s005",
+   "ar": "جميع عروض النادي في مكان واحد."
+  },
+  {
+   "json_ld": 3295,
+   "cami": [
+    "@graph",
+    0,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Presentacions del CB Grup Barna",
+   "id": "s006",
+   "ar": "عروض CB Grup Barna التقديمية"
+  },
+  {
+   "json_ld": 3295,
+   "cami": [
+    "@graph",
+    0,
+    "description"
+   ],
+   "tipus": "json-ld",
+   "ca": "Totes les presentacions del CB Grup Barna en un sol lloc.",
+   "id": "s007",
+   "ar": "جميع عروض CB Grup Barna في مكان واحد."
+  },
+  {
+   "json_ld": 3295,
+   "cami": [
+    "@graph",
+    1,
+    "itemListElement",
+    0,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Inici",
+   "id": "s008",
+   "ar": "الرئيسية"
+  },
+  {
+   "json_ld": 3295,
+   "cami": [
+    "@graph",
+    1,
+    "itemListElement",
+    1,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "El Club",
+   "id": "s009",
+   "ar": "النادي"
+  },
+  {
+   "json_ld": 3295,
+   "cami": [
+    "@graph",
+    1,
+    "itemListElement",
+    2,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Presentacions",
+   "id": "s010",
+   "ar": "العروض التقديمية"
+  },
+  {
+   "de": 17325,
+   "a": 17338,
+   "tipus": "atribut",
+   "context": "etiqueta per a lectors de pantalla",
+   "ca": "Fil d'Ariadna",
+   "id": "s011",
+   "ar": "مسار التنقل"
+  },
+  {
+   "de": 17352,
+   "a": 17357,
+   "tipus": "text",
+   "ca": "Inici",
+   "id": "s012",
+   "ar": "الرئيسية"
+  },
+  {
+   "de": 17381,
+   "a": 17388,
+   "tipus": "text",
+   "ca": "El Club",
+   "id": "s013",
+   "ar": "النادي"
+  },
+  {
+   "de": 17401,
+   "a": 17414,
+   "tipus": "text",
+   "ca": "Presentacions",
+   "id": "s014",
+   "ar": "العروض التقديمية"
+  },
+  {
+   "de": 17475,
+   "a": 17493,
+   "tipus": "text",
+   "ca": "· El club explicat",
+   "id": "s015",
+   "ar": "· النادي بالتفصيل"
+  },
+  {
+   "de": 17504,
+   "a": 17517,
+   "tipus": "text",
+   "ca": "Presentacions",
+   "id": "s016",
+   "ar": "العروض التقديمية"
+  },
+  {
+   "de": 17521,
+   "a": 17524,
+   "tipus": "text",
+   "ca": "del",
+   "id": "s017",
+   "ar": "لنادي"
+  },
+  {
+   "de": 17529,
+   "a": 17534,
+   "tipus": "text",
+   "ca": "Barna",
+   "id": "s018",
+   "ar": "Barna"
+  },
+  {
+   "de": 17550,
+   "a": 17706,
+   "tipus": "text",
+   "ca": "Les presentacions del club, cadascuna en una pàgina que es llegeix baixant i que\n  es pot enviar per WhatsApp o ensenyar en una reunió sense instal·lar res.",
+   "id": "s019",
+   "ar": "عروض النادي، كل منها في صفحة تُقرأ بالتمرير ويمكن إرسالها عبر واتساب أو عرضها في اجتماع دون تثبيت أي برنامج."
+  },
+  {
+   "de": 17766,
+   "a": 17777,
+   "tipus": "text",
+   "ca": "Disponibles",
+   "id": "s020",
+   "ar": "متاحة"
+  },
+  {
+   "de": 17786,
+   "a": 17802,
+   "tipus": "text",
+   "ca": "Obertes a tothom",
+   "id": "s021",
+   "ar": "مفتوحة للجميع"
+  },
+  {
+   "de": 18140,
+   "a": 18192,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Jugadores del CB Grup Barna amb l'equipació del club",
+   "id": "s022",
+   "ar": "لاعبات CB Grup Barna بزي النادي"
+  },
+  {
+   "de": 18313,
+   "a": 18328,
+   "tipus": "text",
+   "ca": "· Institucional",
+   "id": "s023",
+   "ar": "· مؤسسي"
+  },
+  {
+   "de": 18345,
+   "a": 18367,
+   "tipus": "text",
+   "ca": "61 anys · Model Català",
+   "id": "s024",
+   "ar": "61 عامًا · النموذج الكاتالوني"
+  },
+  {
+   "de": 18384,
+   "a": 18547,
+   "tipus": "text",
+   "ca": "Qui som i com treballem: les xifres del club, el lideratge femení, els Màgics,\n        la protecció del menor, la implicació al barri, el 3×3 i els reconeixements.",
+   "id": "s025",
+   "ar": "من نحن وكيف نعمل: أرقام النادي، والقيادة النسائية، وفريق Màgics، وحماية القاصرين، والارتباط بالحي، وبطولة 3×3، والتكريمات."
+  },
+  {
+   "de": 18600,
+   "a": 18611,
+   "tipus": "text",
+   "ca": "22 seccions",
+   "id": "s026",
+   "ar": "22 قسمًا"
+  },
+  {
+   "de": 18635,
+   "a": 18673,
+   "tipus": "text",
+   "ca": "Famílies, institucions i patrocinadors",
+   "id": "s027",
+   "ar": "للعائلات والمؤسسات والرعاة"
+  },
+  {
+   "de": 18726,
+   "a": 18746,
+   "tipus": "text",
+   "ca": "Obrir la presentació",
+   "id": "s028",
+   "ar": "افتح العرض"
+  },
+  {
+   "de": 19106,
+   "a": 19143,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Torneig 3x3 Barna a Westfield Glòries",
+   "id": "s029",
+   "ar": "بطولة 3x3 Barna في Westfield Glòries"
+  },
+  {
+   "de": 19264,
+   "a": 19276,
+   "tipus": "text",
+   "ca": "· Patrocinis",
+   "id": "s030",
+   "ar": "· الرعاية"
+  },
+  {
+   "de": 19293,
+   "a": 19314,
+   "tipus": "text",
+   "ca": "Dossier de patrocinis",
+   "id": "s031",
+   "ar": "ملف الرعاية"
+  },
+  {
+   "de": 19331,
+   "a": 19540,
+   "tipus": "text",
+   "ca": "El que enviem a una empresa que encara no ens coneix: qui som, a quanta gent\n        arribem i de quines maneres es pot col·laborar. Amb les xifres reals del panell\n        d'Instagram de la temporada 2025·26.",
+   "id": "s032",
+   "ar": "ما نرسله إلى شركة لا تعرفنا بعد: من نحن، وكم عدد من نصل إليهم، وبأي طرق يمكن التعاون. مع الأرقام الحقيقية من لوحة إنستغرام لموسم 2025·26."
+  },
+  {
+   "de": 19593,
+   "a": 19604,
+   "tipus": "text",
+   "ca": "14 seccions",
+   "id": "s033",
+   "ar": "14 قسمًا"
+  },
+  {
+   "de": 19628,
+   "a": 19647,
+   "tipus": "text",
+   "ca": "Empreses i comerços",
+   "id": "s034",
+   "ar": "للشركات والمتاجر"
+  },
+  {
+   "de": 19700,
+   "a": 19716,
+   "tipus": "text",
+   "ca": "Obrir el dossier",
+   "id": "s035",
+   "ar": "افتح الملف"
+  },
+  {
+   "de": 20085,
+   "a": 20123,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Jugadors i jugadores del CB Grup Barna",
+   "id": "s036",
+   "ar": "لاعبو ولاعبات CB Grup Barna"
+  },
+  {
+   "de": 20244,
+   "a": 20253,
+   "tipus": "text",
+   "ca": "· Recerca",
+   "id": "s037",
+   "ar": "· البحث"
+  },
+  {
+   "de": 20270,
+   "a": 20289,
+   "tipus": "text",
+   "ca": "El Barna, amb dades",
+   "id": "s038",
+   "ar": "Barna بالأرقام"
+  },
+  {
+   "de": 20306,
+   "a": 20532,
+   "tipus": "text",
+   "ca": "Les dues recerques del club en una sola lectura: el resum executiu íntegre de la\n        investigació sobre bàsquet de formació, el mapa de la tesi capítol a capítol i la\n        posició del Barna a la taula de clubs catalans.",
+   "id": "s039",
+   "ar": "بحثا النادي في قراءة واحدة: الملخص التنفيذي الكامل للبحث حول كرة السلة التكوينية، وخريطة الأطروحة فصلًا فصلًا، وموقع Barna في جدول الأندية الكاتالونية."
+  },
+  {
+   "de": 20585,
+   "a": 20596,
+   "tipus": "text",
+   "ca": "22 seccions",
+   "id": "s040",
+   "ar": "22 قسمًا"
+  },
+  {
+   "de": 20620,
+   "a": 20640,
+   "tipus": "text",
+   "ca": "Junta i institucions",
+   "id": "s041",
+   "ar": "للمجلس والمؤسسات"
+  },
+  {
+   "de": 20693,
+   "a": 20713,
+   "tipus": "text",
+   "ca": "Obrir la presentació",
+   "id": "s042",
+   "ar": "افتح العرض"
+  },
+  {
+   "de": 20892,
+   "a": 20988,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Jugadors i jugadores del campus de bàsquet del CB Grup Barna tirant a cistella a La Nau del Clot",
+   "id": "s043",
+   "ar": "لاعبو ولاعبات معسكر كرة السلة في CB Grup Barna يسددون نحو السلة في La Nau del Clot"
+  },
+  {
+   "de": 21107,
+   "a": 21123,
+   "tipus": "text",
+   "ca": "· Campus d'estiu",
+   "id": "s044",
+   "ar": "· المعسكر الصيفي"
+  },
+  {
+   "de": 21140,
+   "a": 21161,
+   "tipus": "text",
+   "ca": "Campus × Time Chamber",
+   "id": "s045",
+   "ar": "Campus × Time Chamber"
+  },
+  {
+   "de": 21178,
+   "a": 21330,
+   "tipus": "text",
+   "ca": "Les sis setmanes de tecnificació del campus d'estiu: programa, metodologia amb\n        Time Chamber, la seu a La Nau del Clot, preus i com apuntar-s'hi.",
+   "id": "s046",
+   "ar": "أسابيع التطوير الفني الستة للمعسكر الصيفي: البرنامج، والمنهجية مع Time Chamber، والمقر في La Nau del Clot، والأسعار، وكيفية التسجيل."
+  },
+  {
+   "de": 21383,
+   "a": 21393,
+   "tipus": "text",
+   "ca": "8 seccions",
+   "id": "s047",
+   "ar": "8 أقسام"
+  },
+  {
+   "de": 21417,
+   "a": 21425,
+   "tipus": "text",
+   "ca": "Famílies",
+   "id": "s048",
+   "ar": "للعائلات"
+  },
+  {
+   "de": 21478,
+   "a": 21498,
+   "tipus": "text",
+   "ca": "Obrir la presentació",
+   "id": "s049",
+   "ar": "افتح العرض"
+  },
+  {
+   "de": 21913,
+   "a": 21968,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Staff tècnic intergeneracional i mixt del CB Grup Barna",
+   "id": "s050",
+   "ar": "الطاقم الفني المختلط والمتعدد الأجيال في CB Grup Barna"
+  },
+  {
+   "de": 22089,
+   "a": 22110,
+   "tipus": "text",
+   "ca": "· 8M · Bàsquet femení",
+   "id": "s051",
+   "ar": "· 8 مارس · كرة السلة النسائية"
+  },
+  {
+   "de": 22127,
+   "a": 22140,
+   "tipus": "text",
+   "ca": "Fons Barna 8M",
+   "id": "s052",
+   "ar": "Fons Barna 8M"
+  },
+  {
+   "de": 22157,
+   "a": 22330,
+   "tipus": "text",
+   "ca": "La petició formal del club a la FCBQ pel 8M 2026: 38 entrenadores en actiu sense carnet\n        federatiu, el Mètode Barna i la proposta d'un fons de beques per titular-les.",
+   "id": "s053",
+   "ar": "الطلب الرسمي من النادي إلى FCBQ بمناسبة 8 مارس 2026: 38 مدرّبة عاملة بلا رخصة اتحادية، ومنهج Barna، واقتراح صندوق منح لتأهيلهن."
+  },
+  {
+   "de": 22383,
+   "a": 22393,
+   "tipus": "text",
+   "ca": "9 seccions",
+   "id": "s054",
+   "ar": "9 أقسام"
+  },
+  {
+   "de": 22417,
+   "a": 22436,
+   "tipus": "text",
+   "ca": "FCBQ i institucions",
+   "id": "s055",
+   "ar": "FCBQ والمؤسسات"
+  },
+  {
+   "de": 22489,
+   "a": 22509,
+   "tipus": "text",
+   "ca": "Obrir la presentació",
+   "id": "s056",
+   "ar": "افتح العرض"
+  },
+  {
+   "de": 22867,
+   "a": 22919,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Jugadores del CB Grup Barna amb l'equipació del club",
+   "id": "s057",
+   "ar": "لاعبات CB Grup Barna بزي النادي"
+  },
+  {
+   "de": 23040,
+   "a": 23058,
+   "tipus": "text",
+   "ca": "· El club, complet",
+   "id": "s058",
+   "ar": "· النادي كاملًا"
+  },
+  {
+   "de": 23075,
+   "a": 23087,
+   "tipus": "text",
+   "ca": "Visió Global",
+   "id": "s059",
+   "ar": "الرؤية الشاملة"
+  },
+  {
+   "de": 23104,
+   "a": 23272,
+   "tipus": "text",
+   "ca": "Les quatre presentacions fusionades en una sola lectura: qui som, el Fons Barna 8M, el\n        campus amb Time Chamber, la recerca amb dades i el dossier de patrocinis.",
+   "id": "s060",
+   "ar": "العروض الأربعة مدمجة في قراءة واحدة: من نحن، وFons Barna 8M، والمعسكر مع Time Chamber، والبحث بالبيانات، وملف الرعاية."
+  },
+  {
+   "de": 23325,
+   "a": 23335,
+   "tipus": "text",
+   "ca": "6 seccions",
+   "id": "s061",
+   "ar": "6 أقسام"
+  },
+  {
+   "de": 23359,
+   "a": 23382,
+   "tipus": "text",
+   "ca": "Visió completa del club",
+   "id": "s062",
+   "ar": "الرؤية الكاملة للنادي"
+  },
+  {
+   "de": 23435,
+   "a": 23455,
+   "tipus": "text",
+   "ca": "Obrir la presentació",
+   "id": "s063",
+   "ar": "افتح العرض"
+  },
+  {
+   "de": 23532,
+   "a": 23568,
+   "tipus": "text",
+   "ca": "Aquí aniran apareixent les següents.",
+   "id": "s064",
+   "ar": "ستظهر هنا العروض القادمة."
+  },
+  {
+   "de": 23583,
+   "a": 23719,
+   "tipus": "text",
+   "ca": "Cada presentació nova s'afegeix com una fila més d'aquesta llista i queda\n    enllaçada des de la barra de seccions de totes les altres.",
+   "id": "s065",
+   "ar": "يُضاف كل عرض جديد كسطر إضافي في هذه القائمة، ويُربط من شريط الأقسام في جميع العروض الأخرى."
+  },
+  {
+   "de": 23813,
+   "a": 23836,
+   "tipus": "text",
+   "ca": "· Us falta alguna cosa?",
+   "id": "s066",
+   "ar": "· هل ينقصكم شيء؟"
+  },
+  {
+   "de": 23849,
+   "a": 23863,
+   "tipus": "text",
+   "ca": "Us la preparem",
+   "id": "s067",
+   "ar": "نُعدّه لكم"
+  },
+  {
+   "de": 23876,
+   "a": 23966,
+   "tipus": "text",
+   "ca": "Digueu-nos per a qui és i què hi ha d'explicar, i muntem la presentació que us faci falta.",
+   "id": "s068",
+   "ar": "أخبرونا لمن هو وما الذي يجب أن يشرحه، ونُعدّ العرض الذي تحتاجونه."
+  },
+  {
+   "de": 24066,
+   "a": 24084,
+   "tipus": "text",
+   "ca": "Demanar informació",
+   "id": "s069",
+   "ar": "طلب معلومات"
+  },
+  {
+   "de": 24231,
+   "a": 24248,
+   "tipus": "text",
+   "ca": "WhatsApp del club",
+   "id": "s070",
+   "ar": "واتساب النادي"
+  }
+ ]
+}

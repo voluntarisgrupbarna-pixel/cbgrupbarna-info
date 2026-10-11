@@ -1,0 +1,927 @@
+{
+ "origen": "/presentacions/campus-timechamber/",
+ "idioma": "de",
+ "trossos": [
+  {
+   "de": "Camp × Time Chamber · CB Grup Barna | Präsentation",
+   "a": 234,
+   "tipus": "atribut",
+   "context": "títol de la pestanya i de Google",
+   "ca": "Campus × Time Chamber · CB Grup Barna | Presentació",
+   "id": "s000"
+  },
+  {
+   "de": "Präsentation des Basketballcamps des CB Grup Barna mit Time Chamber: 6 Wochen Techniktraining in La Nau del Clot, Programm, Preise und Anmeldung.",
+   "a": 428,
+   "tipus": "atribut",
+   "context": "descripció de Google",
+   "ca": "Presentació del Campus de bàsquet del CB Grup Barna amb Time Chamber: 6 setmanes de tecnificació a La Nau del Clot, programa, preus i com apuntar-s'hi.",
+   "id": "s001"
+  },
+  {
+   "de": "Basketballcamp Barcelona, Time Chamber CB Grup Barna, Präsentation Sommer-Basketballcamp, Basketball-Techniktraining El Clot",
+   "a": 575,
+   "tipus": "atribut",
+   "context": "paraules clau",
+   "ca": "campus bàsquet Barcelona, Time Chamber CB Grup Barna, presentació campus estiu bàsquet, tecnificació bàsquet Clot",
+   "id": "s002"
+  },
+  {
+   "de": "CB Grup Barna",
+   "a": 1547,
+   "tipus": "atribut",
+   "context": "text en compartir l'enllaç",
+   "ca": "CB Grup Barna",
+   "id": "s003"
+  },
+  {
+   "de": "Campus × Time Chamber · CB Grup Barna",
+   "a": 1666,
+   "tipus": "atribut",
+   "context": "text en compartir l'enllaç",
+   "ca": "Campus × Time Chamber · CB Grup Barna",
+   "id": "s004"
+  },
+  {
+   "de": "6 Wochen Basketball-Techniktraining in La Nau del Clot, mit Time Chamber. Programm, Preise und Anmeldung.",
+   "a": 1814,
+   "tipus": "atribut",
+   "context": "text en compartir l'enllaç",
+   "ca": "6 setmanes de tecnificació de bàsquet a La Nau del Clot, amb Time Chamber. Programa, preus i inscripció.",
+   "id": "s005"
+  },
+  {
+   "json_ld": 3172,
+   "cami": [
+    "@graph",
+    0,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Campus × Time Chamber · CB Grup Barna",
+   "id": "s006",
+   "de": "Campus × Time Chamber · CB Grup Barna"
+  },
+  {
+   "json_ld": 3172,
+   "cami": [
+    "@graph",
+    0,
+    "description"
+   ],
+   "tipus": "json-ld",
+   "ca": "Presentació del Campus de bàsquet del CB Grup Barna amb Time Chamber.",
+   "id": "s007",
+   "de": "Präsentation des Basketballcamps des CB Grup Barna mit Time Chamber."
+  },
+  {
+   "json_ld": 3172,
+   "cami": [
+    "@graph",
+    1,
+    "itemListElement",
+    0,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Inici",
+   "id": "s008",
+   "de": "Start"
+  },
+  {
+   "json_ld": 3172,
+   "cami": [
+    "@graph",
+    1,
+    "itemListElement",
+    1,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Presentacions",
+   "id": "s009",
+   "de": "Präsentationen"
+  },
+  {
+   "json_ld": 3172,
+   "cami": [
+    "@graph",
+    1,
+    "itemListElement",
+    2,
+    "name"
+   ],
+   "tipus": "json-ld",
+   "ca": "Campus × Time Chamber",
+   "id": "s010",
+   "de": "Campus × Time Chamber"
+  },
+  {
+   "de": "Abschnitte der Präsentation",
+   "a": 21769,
+   "tipus": "atribut",
+   "context": "etiqueta per a lectors de pantalla",
+   "ca": "Seccions de la presentació",
+   "id": "s011"
+  },
+  {
+   "de": "Campus × Time Chamber",
+   "a": 21842,
+   "tipus": "text",
+   "ca": "Campus × Time Chamber",
+   "id": "s012"
+  },
+  {
+   "de": "Titel",
+   "a": 21920,
+   "tipus": "text",
+   "ca": "Portada",
+   "id": "s013"
+  },
+  {
+   "de": "Das Camp",
+   "a": 21958,
+   "tipus": "text",
+   "ca": "El campus",
+   "id": "s014"
+  },
+  {
+   "de": "Programm",
+   "a": 21997,
+   "tipus": "text",
+   "ca": "Programa",
+   "id": "s015"
+  },
+  {
+   "de": "Methodik",
+   "a": 22042,
+   "tipus": "text",
+   "ca": "Metodologia",
+   "id": "s016"
+  },
+  {
+   "de": "Der Standort",
+   "a": 22074,
+   "tipus": "text",
+   "ca": "La seu",
+   "id": "s017"
+  },
+  {
+   "de": "Preise",
+   "a": 22107,
+   "tipus": "text",
+   "ca": "Preus",
+   "id": "s018"
+  },
+  {
+   "de": "Galerie",
+   "a": 22144,
+   "tipus": "text",
+   "ca": "Galeria",
+   "id": "s019"
+  },
+  {
+   "de": "Anmeldung",
+   "a": 22185,
+   "tipus": "text",
+   "ca": "Inscripció",
+   "id": "s020"
+  },
+  {
+   "de": "Seite des Camps",
+   "a": 22258,
+   "tipus": "text",
+   "ca": "Pàgina del campus",
+   "id": "s021"
+  },
+  {
+   "de": "Präsentationen",
+   "a": 22323,
+   "tipus": "text",
+   "ca": "Presentacions",
+   "id": "s022"
+  },
+  {
+   "de": "Brotkrumennavigation",
+   "a": 22424,
+   "tipus": "atribut",
+   "context": "etiqueta per a lectors de pantalla",
+   "ca": "Fil d'Ariadna",
+   "id": "s023"
+  },
+  {
+   "de": "Start",
+   "a": 22443,
+   "tipus": "text",
+   "ca": "Inici",
+   "id": "s024"
+  },
+  {
+   "de": "Präsentationen",
+   "a": 22489,
+   "tipus": "text",
+   "ca": "Presentacions",
+   "id": "s025"
+  },
+  {
+   "de": "Campus × Time Chamber",
+   "a": 22523,
+   "tipus": "text",
+   "ca": "Campus × Time Chamber",
+   "id": "s026"
+  },
+  {
+   "de": "Spieler und Spielerinnen des Basketballcamps des CB Grup Barna beim Wurf in La Nau del Clot",
+   "a": 22763,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Jugadors i jugadores del campus de bàsquet del CB Grup Barna tirant a cistella a La Nau del Clot",
+   "id": "s027"
+  },
+  {
+   "de": "Sommer · La Nau del Clot",
+   "a": 23005,
+   "tipus": "text",
+   "ca": "Estiu · La Nau del Clot",
+   "id": "s028"
+  },
+  {
+   "de": "CAMP",
+   "a": 23044,
+   "tipus": "text",
+   "ca": "CAMPUS",
+   "id": "s029"
+  },
+  {
+   "de": "Time Chamber",
+   "a": 23064,
+   "tipus": "text",
+   "ca": "Time Chamber",
+   "id": "s030"
+  },
+  {
+   "de": "CB Grup Barna",
+   "a": 23114,
+   "tipus": "text",
+   "ca": "CB Grup Barna",
+   "id": "s031"
+  },
+  {
+   "de": "6 Wochen Techniktraining",
+   "a": 23174,
+   "tipus": "text",
+   "ca": "6 setmanes de tecnificació",
+   "id": "s032"
+  },
+  {
+   "de": "Sechs Wochen, sechs verschiedene Schwerpunkte, ein Ziel: dass jeder, der eine Woche oder alle sechs kommt, mit mehr Rüstzeug zurück aufs Feld geht, als er mitgebracht hat.",
+   "a": 23344,
+   "tipus": "text",
+   "ca": "Sis setmanes, sis focus diferents, un sol objectiu: que qui hi ve una setmana o sis\n    torni a jugar amb més recursos que quan va arribar.",
+   "id": "s033"
+  },
+  {
+   "de": "Das Camp in Zahlen",
+   "a": 23490,
+   "tipus": "text",
+   "ca": "El campus, en xifres",
+   "id": "s034"
+  },
+  {
+   "de": "Sommer · El Clot, Barcelona",
+   "a": 23525,
+   "tipus": "text",
+   "ca": "Estiu · el Clot, Barcelona",
+   "id": "s035"
+  },
+  {
+   "de": "Themenwochen",
+   "a": 23615,
+   "tipus": "text",
+   "ca": "Setmanes temàtiques",
+   "id": "s036"
+  },
+  {
+   "de": "Plätze pro Woche",
+   "a": 23673,
+   "tipus": "text",
+   "ca": "Places per setmana",
+   "id": "s037"
+  },
+  {
+   "de": "Gründungsjahr des Vereins",
+   "a": 23739,
+   "tipus": "text",
+   "ca": "Any de fundació del club",
+   "id": "s038"
+  },
+  {
+   "de": "Standort: La Nau del Clot",
+   "a": 23808,
+   "tipus": "text",
+   "ca": "Seu: La Nau del Clot",
+   "id": "s039"
+  },
+  {
+   "de": "Videositzung mit dem Trainer während des Basketballcamps des CB Grup Barna",
+   "a": 24013,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Sessió de vídeo amb l'entrenador durant el campus de bàsquet del CB Grup Barna",
+   "id": "s040"
+  },
+  {
+   "de": "· Kein Spielen mit dem Ball",
+   "a": 24141,
+   "tipus": "text",
+   "ca": "· No és lleure amb pilota",
+   "id": "s041"
+  },
+  {
+   "de": "Techniktraining, keine Betreuung",
+   "a": 24183,
+   "tipus": "text",
+   "ca": "Tecnificació, no un casal",
+   "id": "s042"
+  },
+  {
+   "de": "Das Camp des",
+   "a": 24213,
+   "tipus": "text",
+   "ca": "El campus del",
+   "id": "s043"
+  },
+  {
+   "de": "CB Grup Barna",
+   "a": 24235,
+   "tipus": "text",
+   "ca": "CB Grup Barna",
+   "id": "s044"
+  },
+  {
+   "de": "ist das intensive Trainingsprogramm des Vereins während der Schulferien. Jede Woche arbeitet es an",
+   "a": 24351,
+   "tipus": "text",
+   "ca": "és el programa d'entrenament intensiu del club durant\n        les vacances escolars. Cada setmana treballa",
+   "id": "s045"
+  },
+  {
+   "de": "einem bestimmten Aspekt des Spiels",
+   "a": 24386,
+   "tipus": "text",
+   "ca": "un aspecte concret del joc",
+   "id": "s046"
+  },
+  {
+   "de": ", mit Gruppen nach Alter und Niveau, damit niemand über oder unter seinem Stand trainiert.",
+   "a": 24497,
+   "tipus": "text",
+   "ca": ", amb grups\n        fets per edat i nivell perquè ningú entreni per sobre ni per sota del que li toca.",
+   "id": "s047"
+  },
+  {
+   "de": "Es steht Spielern und Spielerinnen jedes Vereins in Barcelona und der Provinz offen, nicht nur denen von Barna.",
+   "a": 24626,
+   "tipus": "text",
+   "ca": "És obert a jugadors i jugadores de qualsevol club de Barcelona i de la província, no només als del\n        Barna.",
+   "id": "s048"
+  },
+  {
+   "de": "Programm",
+   "a": 24785,
+   "tipus": "text",
+   "ca": "Programa",
+   "id": "s049"
+  },
+  {
+   "de": "6 Wochen · 6 Erlebnisse",
+   "a": 24821,
+   "tipus": "text",
+   "ca": "6 setmanes · 6 experiències",
+   "id": "s050"
+  },
+  {
+   "de": "Jede Woche hat ihre eigene Identität. Man kann für eine oder für alle kommen.",
+   "a": 24982,
+   "tipus": "text",
+   "ca": "Cada setmana té identitat\n    pròpia. Es pot venir a una o a totes.",
+   "id": "s051"
+  },
+  {
+   "de": "23.–27. Juni",
+   "a": 25060,
+   "tipus": "text",
+   "ca": "23–27 juny",
+   "id": "s052"
+  },
+  {
+   "de": "Flow Camp",
+   "a": 25080,
+   "tipus": "text",
+   "ca": "Flow Camp",
+   "id": "s053"
+  },
+  {
+   "de": "Offensiver Fluss und Spiel in Bewegung.",
+   "a": 25124,
+   "tipus": "text",
+   "ca": "Fluïdesa ofensiva i joc en moviment.",
+   "id": "s054"
+  },
+  {
+   "de": "30. Juni–4. Juli",
+   "a": 25187,
+   "tipus": "text",
+   "ca": "30 juny–4 jul",
+   "id": "s055"
+  },
+  {
+   "de": "TC Basics",
+   "a": 25207,
+   "tipus": "text",
+   "ca": "TC Basics",
+   "id": "s056"
+  },
+  {
+   "de": "Solide Grundlagen für ein Spiel auf Spitzenniveau.",
+   "a": 25252,
+   "tipus": "text",
+   "ca": "Fonaments sòlids per a un joc d'elit.",
+   "id": "s057"
+  },
+  {
+   "de": "7.–11. Juli",
+   "a": 25310,
+   "tipus": "text",
+   "ca": "7–11 jul",
+   "id": "s058"
+  },
+  {
+   "de": "Shooting Academy",
+   "a": 25337,
+   "tipus": "text",
+   "ca": "Shooting Academy",
+   "id": "s059"
+  },
+  {
+   "de": "Wurfmechanik, Rhythmus und Selbstvertrauen.",
+   "a": 25380,
+   "tipus": "text",
+   "ca": "Mecànica, ritme i confiança de tir.",
+   "id": "s060"
+  },
+  {
+   "de": "14.–18. Juli",
+   "a": 25439,
+   "tipus": "text",
+   "ca": "14–18 jul",
+   "id": "s061"
+  },
+  {
+   "de": "One &amp; One Mastery",
+   "a": 25471,
+   "tipus": "text",
+   "ca": "One &amp; One Mastery",
+   "id": "s062"
+  },
+  {
+   "de": "Das 1-gegen-1 meistern: Finten und offensive Kreativität.",
+   "a": 25530,
+   "tipus": "text",
+   "ca": "Domina l'1 contra 1: fintes i creativitat ofensiva.",
+   "id": "s063"
+  },
+  {
+   "de": "21.–25. Juli",
+   "a": 25589,
+   "tipus": "text",
+   "ca": "21–25 jul",
+   "id": "s064"
+  },
+  {
+   "de": "Ballhandling Lab",
+   "a": 25616,
+   "tipus": "text",
+   "ca": "Ballhandling Lab",
+   "id": "s065"
+  },
+  {
+   "de": "Ballkontrolle auf höchstem Niveau.",
+   "a": 25658,
+   "tipus": "text",
+   "ca": "Control de pilota al màxim nivell.",
+   "id": "s066"
+  },
+  {
+   "de": "28. Juli–1. Aug.",
+   "a": 25720,
+   "tipus": "text",
+   "ca": "28 jul–1 ago",
+   "id": "s067"
+  },
+  {
+   "de": "Skills Lab Experience",
+   "a": 25752,
+   "tipus": "text",
+   "ca": "Skills Lab Experience",
+   "id": "s068"
+  },
+  {
+   "de": "Vollständige Integration. Der Abschluss der Ausgabe.",
+   "a": 25800,
+   "tipus": "text",
+   "ca": "Integració total. El broche de l'edició.",
+   "id": "s069"
+  },
+  {
+   "de": "Warum mit Time Chamber",
+   "a": 25974,
+   "tipus": "text",
+   "ca": "Per què amb Time Chamber",
+   "id": "s070"
+  },
+  {
+   "de": "Methodik für das Einzeltraining",
+   "a": 26016,
+   "tipus": "text",
+   "ca": "Metodologia de treball individual",
+   "id": "s071"
+  },
+  {
+   "de": "Trainer des Camps erklärt eine Übung mit dem Ball",
+   "a": 26191,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Entrenador del campus explicant un exercici amb la pilota",
+   "id": "s072"
+  },
+  {
+   "de": "· Die Kombination, die es ausmacht",
+   "a": 26325,
+   "tipus": "text",
+   "ca": "· La combinació que el defineix",
+   "id": "s073"
+  },
+  {
+   "de": "Viele Wiederholungen, Vereinsgeist",
+   "a": 26379,
+   "tipus": "text",
+   "ca": "Volum de repeticions, esperit de club",
+   "id": "s074"
+  },
+  {
+   "de": "Der Verein führt das Camp mit",
+   "a": 26426,
+   "tipus": "text",
+   "ca": "El club treballa el campus amb",
+   "id": "s075"
+  },
+  {
+   "de": "Time Chamber",
+   "a": 26447,
+   "tipus": "text",
+   "ca": "Time Chamber",
+   "id": "s076"
+  },
+  {
+   "de": "durch, das die Methodik des Einzeltrainings einbringt: kurze, sehr wiederholungsreiche Einheiten, die auf einen einzigen Aspekt des Spiels ausgelegt sind.",
+   "a": 26592,
+   "tipus": "text",
+   "ca": ", que aporta la metodologia de treball\n        individual: sessions curtes, molt repetitives, dissenyades per a un únic aspecte del joc.",
+   "id": "s077"
+  },
+  {
+   "de": "Barna steuert die andere Hälfte bei:",
+   "a": 26640,
+   "tipus": "text",
+   "ca": "El Barna hi posa l'altra meitat:",
+   "id": "s078"
+  },
+  {
+   "de": "einundsechzig Jahre Teamgeist",
+   "a": 26683,
+   "tipus": "text",
+   "ca": "seixanta-un anys d'ambient d'equip",
+   "id": "s079"
+  },
+  {
+   "de": "eines Stadtteilvereins, Gruppen nach Alter und Niveau und Trainer, die jeden Spieler und jede Spielerin beim Namen kennen.",
+   "a": 26803,
+   "tipus": "text",
+   "ca": "de club de barri,\n        grups per edat i nivell, i entrenadors que coneixen cada jugador i jugadora pel nom.",
+   "id": "s080"
+  },
+  {
+   "de": "Einheiten, die einem einzigen Aspekt des Spiels gewidmet sind, kein Durcheinander",
+   "a": 26932,
+   "tipus": "text",
+   "ca": "Sessions dedicades a un sol aspecte del joc, no un totum revolutum",
+   "id": "s081"
+  },
+  {
+   "de": "Gruppen nach Alter und Niveau: Wer anfängt, trainiert nicht mit denen, die schon seit Jahren Wettkämpfe bestreiten",
+   "a": 27031,
+   "tipus": "text",
+   "ca": "Grups per edat i nivell: qui comença no entrena amb qui ja competeix des de fa anys",
+   "id": "s082"
+  },
+  {
+   "de": "Jede Woche Plätze für Spieler von Barna und für Spieler von außerhalb",
+   "a": 27117,
+   "tipus": "text",
+   "ca": "Places per a jugadors del Barna i per a jugadors de fora, cada setmana",
+   "id": "s083"
+  },
+  {
+   "de": "Der Standort",
+   "a": 27254,
+   "tipus": "text",
+   "ca": "La seu",
+   "id": "s084"
+  },
+  {
+   "de": "La Nau del Clot · Barcelona",
+   "a": 27290,
+   "tipus": "text",
+   "ca": "La Nau del Clot · Barcelona",
+   "id": "s085"
+  },
+  {
+   "de": "Spieler des Camps dribbelt mit Mitspielern in La Nau del Clot",
+   "a": 27472,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Jugador del campus botant la pilota entre companys a La Nau del Clot",
+   "id": "s086"
+  },
+  {
+   "de": "· Wo es stattfindet",
+   "a": 27585,
+   "tipus": "text",
+   "ca": "· On es fa",
+   "id": "s087"
+  },
+  {
+   "de": "La Nau del Clot",
+   "a": 27617,
+   "tipus": "text",
+   "ca": "La Nau del Clot",
+   "id": "s088"
+  },
+  {
+   "de": "Carrer de la Llacuna 170-172, 08018 Barcelona – der wichtigste Sportstandort des CB Grup Barna, im Stadtteil El Clot, Bezirk Sant Martí.",
+   "a": 27779,
+   "tipus": "text",
+   "ca": "Carrer de la Llacuna 170-172, 08018 Barcelona — el punt esportiu principal del CB Grup Barna, al barri\n        del Clot, Districte de Sant Martí.",
+   "id": "s089"
+  },
+  {
+   "de": "Zeiten:",
+   "a": 27811,
+   "tipus": "text",
+   "ca": "Horaris:",
+   "id": "s090"
+  },
+  {
+   "de": "9:00–13:30 Uhr halbtags · 9:00–17:00 Uhr ganztags, mit Frühbetreuung und Mittagessen.",
+   "a": 27932,
+   "tipus": "text",
+   "ca": "9h–13:30h en mitja jornada · 9h–17h en jornada completa, amb servei\n        d'acollida i àpat de migdia inclòs.",
+   "id": "s091"
+  },
+  {
+   "de": "Preise",
+   "a": 28082,
+   "tipus": "text",
+   "ca": "Preus",
+   "id": "s092"
+  },
+  {
+   "de": "Zwei Varianten · Ratenzahlung",
+   "a": 28128,
+   "tipus": "text",
+   "ca": "Dues modalitats · pagament fraccionat",
+   "id": "s093"
+  },
+  {
+   "de": "Empfohlen",
+   "a": 28228,
+   "tipus": "text",
+   "ca": "Recomanat",
+   "id": "s094"
+  },
+  {
+   "de": "Ganze Woche · 9:00 bis 17:00 Uhr, mit Mittagessen und Frühbetreuung.",
+   "a": 28345,
+   "tipus": "text",
+   "ca": "Setmana completa · 9h a 17h, amb àpat de migdia inclòs i servei d'acollida.",
+   "id": "s095"
+  },
+  {
+   "de": "Mittagessen inklusive",
+   "a": 28398,
+   "tipus": "text",
+   "ca": "Àpat de migdia inclòs",
+   "id": "s096"
+  },
+  {
+   "de": "Betreuung ab 9:00 Uhr",
+   "a": 28449,
+   "tipus": "text",
+   "ca": "Servei d'acollida des de les 9h",
+   "id": "s097"
+  },
+  {
+   "de": "Zahlung in bis zu 3 Raten",
+   "a": 28498,
+   "tipus": "text",
+   "ca": "Pagament en fins a 3 terminis",
+   "id": "s098"
+  },
+  {
+   "de": "Halbtags",
+   "a": 28595,
+   "tipus": "text",
+   "ca": "Mitja jornada",
+   "id": "s099"
+  },
+  {
+   "de": "9:00 bis 13:30 Uhr, mit demselben Programm und denselben Gruppen nach Alter und Niveau.",
+   "a": 28712,
+   "tipus": "text",
+   "ca": "9h a 13:30h, amb el mateix programa i els mateixos grups per edat i nivell.",
+   "id": "s100"
+  },
+  {
+   "de": "Derselbe Wochenschwerpunkt wie ganztags",
+   "a": 28789,
+   "tipus": "text",
+   "ca": "Mateix focus setmanal que la jornada completa",
+   "id": "s101"
+  },
+  {
+   "de": "Zahlung in bis zu 3 Raten",
+   "a": 28838,
+   "tipus": "text",
+   "ca": "Pagament en fins a 3 terminis",
+   "id": "s102"
+  },
+  {
+   "de": "Plätze pro Woche",
+   "a": 28950,
+   "tipus": "text",
+   "ca": "Places per setmana",
+   "id": "s103"
+  },
+  {
+   "de": "Zahlungsraten",
+   "a": 29009,
+   "tipus": "text",
+   "ca": "Terminis de pagament",
+   "id": "s104"
+  },
+  {
+   "de": "Gemeldete Teams des Vereins",
+   "a": 29074,
+   "tipus": "text",
+   "ca": "Equips federats del club",
+   "id": "s105"
+  },
+  {
+   "de": "BCN",
+   "a": 29105,
+   "tipus": "text",
+   "ca": "BCN",
+   "id": "s106"
+  },
+  {
+   "de": "El Clot · Sant Martí",
+   "a": 29135,
+   "tipus": "text",
+   "ca": "El Clot · Sant Martí",
+   "id": "s107"
+  },
+  {
+   "de": "Jedes Jahr gibt es einen Frühbucherrabatt: Die Daten und der Code werden bei Anmeldebeginn auf",
+   "a": 29336,
+   "tipus": "text",
+   "ca": "Cada any s'obre un\n    descompte per inscripció anticipada: les dates i el codi es publiquen a",
+   "id": "s108"
+  },
+  {
+   "de": "der Seite des Camps",
+   "a": 29485,
+   "tipus": "text",
+   "ca": "la pàgina del campus",
+   "id": "s109"
+  },
+  {
+   "de": "und auf Instagram veröffentlicht.",
+   "a": 29538,
+   "tipus": "text",
+   "ca": "i a Instagram quan s'obren les inscripcions.",
+   "id": "s110"
+  },
+  {
+   "de": "Das Camp in Bildern",
+   "a": 29684,
+   "tipus": "text",
+   "ca": "El campus, en imatges",
+   "id": "s111"
+  },
+  {
+   "de": "Letzte Ausgabe mit Time Chamber",
+   "a": 29724,
+   "tipus": "text",
+   "ca": "Darrera edició amb Time Chamber",
+   "id": "s112"
+  },
+  {
+   "de": "Spielerin des Camps in Wurfposition",
+   "a": 29881,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Jugadora del campus en posició de tir",
+   "id": "s113"
+  },
+  {
+   "de": "Gruppe von Spielern des Camps bei einer Wurfübung",
+   "a": 30066,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Grup de jugadors del campus fent un exercici de tir",
+   "id": "s114"
+  },
+  {
+   "de": "Trainer des Camps erklärt eine Übung mit dem Ball",
+   "a": 30257,
+   "tipus": "atribut",
+   "context": "descripció de la imatge",
+   "ca": "Entrenador del campus explicant un exercici amb la pilota",
+   "id": "s115"
+  },
+  {
+   "de": "Das sind drei ausgewählte Fotos.",
+   "a": 30391,
+   "tipus": "text",
+   "ca": "Aquestes són tres fotos triades.",
+   "id": "s116"
+  },
+  {
+   "de": "Die vollständige Sommergalerie – alle Wochen, mit Foto und Video – finden Sie in der Fotogalerie des Vereins.",
+   "a": 30516,
+   "tipus": "text",
+   "ca": "La galeria completa de l'estiu — totes les\n      setmanes, amb foto i vídeo — és a la Galeria Fotogràfica del club.",
+   "id": "s117"
+  },
+  {
+   "de": "Sommergalerie ansehen →",
+   "a": 30630,
+   "tipus": "text",
+   "ca": "Veure la galeria de l'estiu →",
+   "id": "s118"
+  },
+  {
+   "de": "· Begrenzte Plätze",
+   "a": 30782,
+   "tipus": "text",
+   "ca": "· Places limitades",
+   "id": "s119"
+  },
+  {
+   "de": "Reservieren Sie Ihren Platz",
+   "a": 30816,
+   "tipus": "text",
+   "ca": "Reserva la teva plaça",
+   "id": "s120"
+  },
+  {
+   "de": "Sagen Sie uns, welche Woche Sie interessiert, und wir bestätigen freie Plätze und Zahlungsweise.",
+   "a": 30917,
+   "tipus": "text",
+   "ca": "Digues-nos quina setmana us interessa i us confirmem places lliures i forma de pagament.",
+   "id": "s121"
+  },
+  {
+   "de": "WhatsApp des Vereins",
+   "a": 31202,
+   "tipus": "text",
+   "ca": "WhatsApp del club",
+   "id": "s122"
+  },
+  {
+   "de": "Vollständige Seite des Camps",
+   "a": 31304,
+   "tipus": "text",
+   "ca": "Pàgina completa del campus",
+   "id": "s123"
+  },
+  {
+   "de": "Originalwebsite von Time Chamber →",
+   "a": 31472,
+   "tipus": "text",
+   "ca": "Web original Time Chamber →",
+   "id": "s124"
+  }
+ ]
+}

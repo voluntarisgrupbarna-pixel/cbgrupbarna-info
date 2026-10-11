@@ -29,6 +29,19 @@ _dades = yaml.safe_load(DICCIONARI.read_text(encoding="utf-8"))
 TEXTOS = _dades["textos"]
 ESTRUCTURA = _dades["estructura"]
 
+# Japonès i coreà: només tenen les presentacions. El vocabulari va a part
+# (i18n/diccionari-cjk.yml) i l'estructura de menú i peu és la de l'anglès.
+CJK = ("ja", "ko", "de", "it", "nl", "fr", "ar")   # idiomes sense pàgines pròpies: enllacen a l'anglès
+_cjk = yaml.safe_load((ROOT / "i18n" / "diccionari-cjk.yml").read_text(encoding="utf-8"))
+_ar = yaml.safe_load((ROOT / "i18n" / "diccionari-ar.yml").read_text(encoding="utf-8"))
+_eur = yaml.safe_load((ROOT / "i18n" / "diccionari-eur.yml").read_text(encoding="utf-8"))
+for _clau, _valors in _cjk["textos"].items():
+    TEXTOS[_clau].update(_valors)
+    TEXTOS[_clau].update(_eur["textos"][_clau])
+    TEXTOS[_clau].update(_ar["textos"][_clau])
+for _idioma in CJK:
+    ESTRUCTURA[_idioma] = ESTRUCTURA["en"]
+
 
 def text(clau, idioma):
     entrada = TEXTOS.get(clau)
@@ -56,7 +69,20 @@ def enllac(clau, idioma):
         raise KeyError(f"i18n: la clau «{clau}» no és un enllaç")
     if idioma == "ca" or href.startswith(("http", "mailto:")):
         return href
+    if idioma in CJK:
+        # Pàgina en ja/ko si n'hi ha; si no, l'anglesa. Mai un 404.
+        propi = f"/{idioma}{href}"
+        if _existeix(propi):
+            return propi
+        return TEXTOS[clau].get("href_en") or f"/en{href}"
     return f"/{idioma}{href}"
+
+
+def _existeix(href):
+    ruta = href.split("#")[0]
+    if not ruta:
+        return True
+    return (ROOT / (ruta.lstrip("/") + "index.html" if ruta.endswith("/") else ruta.lstrip("/"))).exists()
 
 
 def _comprova(clau, idioma):
@@ -101,6 +127,34 @@ for _idioma, _t in {
            "@cbgrupbarna · the club's week, as it happens.",
            "Join the newsletter",
            "One email a week with what's worth knowing. Nothing else.", "/en/newsletter/"),
+    "ja": ("CB Grup Barnaをフォロー", "Instagramでフォロー",
+           "@cbgrupbarna · クラブの毎日を、毎週お届けします。",
+           "ニュースレターに登録",
+           "知っておきたいことを週に1通。それだけです。", "/en/newsletter/"),
+    "ko": ("CB Grup Barna 팔로우", "인스타그램에서 팔로우",
+           "@cbgrupbarna · 클럽의 일상을 매주 전해 드립니다.",
+           "뉴스레터 구독",
+           "알아둘 만한 소식을 일주일에 한 통. 그게 전부입니다.", "/en/newsletter/"),
+    "de": ("Folge dem CB Grup Barna", "Folge uns auf Instagram",
+           "@cbgrupbarna · der Vereinsalltag, jede Woche.",
+           "Newsletter abonnieren",
+           "Eine E-Mail pro Woche mit dem, was man wissen sollte. Sonst nichts.", "/en/newsletter/"),
+    "it": ("Segui il CB Grup Barna", "Seguici su Instagram",
+           "@cbgrupbarna · la vita del club, ogni settimana.",
+           "Iscriviti alla newsletter",
+           "Una email a settimana con ciò che vale la pena sapere. Nient'altro.", "/en/newsletter/"),
+    "nl": ("Volg CB Grup Barna", "Volg ons op Instagram",
+           "@cbgrupbarna · het clubleven, elke week.",
+           "Schrijf je in voor de nieuwsbrief",
+           "Eén e-mail per week met wat het weten waard is. Niets meer.", "/en/newsletter/"),
+    "fr": ("Suivez le CB Grup Barna", "Suivez-nous sur Instagram",
+           "@cbgrupbarna · la vie du club, chaque semaine.",
+           "Abonnez-vous à la newsletter",
+           "Un e-mail par semaine avec ce qui vaut la peine d'être su. Rien de plus.", "/en/newsletter/"),
+    "ar": ("تابع CB Grup Barna", "تابعنا على إنستغرام",
+           "@cbgrupbarna · حياة النادي كل أسبوع.",
+           "اشترك في النشرة البريدية",
+           "رسالة واحدة في الأسبوع بما يستحق المعرفة. لا شيء آخر.", "/en/newsletter/"),
 }.items():
     _aria, _igt, _igs, _nlt, _nls, _nlurl = _t
     CRIDA[_idioma] = (
@@ -126,6 +180,13 @@ A11Y_ETIQUETA = {
     "ca": "Accessibilitat — WCAG 2.2 AA",
     "es": "Accesibilidad — WCAG 2.2 AA",
     "en": "Accessibility — WCAG 2.2 AA",
+    "ja": "アクセシビリティ — WCAG 2.2 AA",
+    "ko": "접근성 — WCAG 2.2 AA",
+    "de": "Barrierefreiheit — WCAG 2.2 AA",
+    "it": "Accessibilità — WCAG 2.2 AA",
+    "nl": "Toegankelijkheid — WCAG 2.2 AA",
+    "fr": "Accessibilité — WCAG 2.2 AA",
+    "ar": "إمكانية الوصول — WCAG 2.2 AA",
 }
 
 
@@ -193,10 +254,10 @@ def alternatives(url):
     """
     mapa = yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}
     for grup in mapa.get("rutes", []):
-        if url not in (grup.get("ca"), grup.get("es"), grup.get("en")):
+        if url not in (grup.get(i) for i in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar")):
             continue
         llista = [(idioma, SITE + grup[idioma])
-                  for idioma in ("ca", "es", "en") if grup.get(idioma)]
+                  for idioma in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar") if grup.get(idioma)]
         if len(llista) == 1:
             return []          # sense traduccions no cal declarar res
         return llista + [("x-default", SITE + grup["ca"])]
