@@ -31,14 +31,16 @@ ESTRUCTURA = _dades["estructura"]
 
 # Japonès i coreà: només tenen les presentacions. El vocabulari va a part
 # (i18n/diccionari-cjk.yml) i l'estructura de menú i peu és la de l'anglès.
-CJK = ("ja", "ko", "de", "it", "nl", "fr", "ar")   # idiomes sense pàgines pròpies: enllacen a l'anglès
+CJK = ("ja", "ko", "de", "it", "nl", "fr", "ar", "tr", "pt")   # idiomes sense pàgines pròpies: enllacen a l'anglès
 _cjk = yaml.safe_load((ROOT / "i18n" / "diccionari-cjk.yml").read_text(encoding="utf-8"))
 _ar = yaml.safe_load((ROOT / "i18n" / "diccionari-ar.yml").read_text(encoding="utf-8"))
 _eur = yaml.safe_load((ROOT / "i18n" / "diccionari-eur.yml").read_text(encoding="utf-8"))
+_trpt = yaml.safe_load((ROOT / "i18n" / "diccionari-trpt.yml").read_text(encoding="utf-8"))
 for _clau, _valors in _cjk["textos"].items():
     TEXTOS[_clau].update(_valors)
     TEXTOS[_clau].update(_eur["textos"][_clau])
     TEXTOS[_clau].update(_ar["textos"][_clau])
+    TEXTOS[_clau].update(_trpt["textos"][_clau])
 for _idioma in CJK:
     ESTRUCTURA[_idioma] = ESTRUCTURA["en"]
 
@@ -151,6 +153,14 @@ for _idioma, _t in {
            "@cbgrupbarna · la vie du club, chaque semaine.",
            "Abonnez-vous à la newsletter",
            "Un e-mail par semaine avec ce qui vaut la peine d'être su. Rien de plus.", "/en/newsletter/"),
+    "tr": ("CB Grup Barna'yı takip edin", "Instagram'da bizi takip edin",
+           "@cbgrupbarna · kulübün hayatı, her hafta.",
+           "Bültene abone olun",
+           "Haftada bir e-posta, bilmeye değer olanlarla. Başka hiçbir şey.", "/en/newsletter/"),
+    "pt": ("Siga o CB Grup Barna", "Siga-nos no Instagram",
+           "@cbgrupbarna · o dia a dia do clube, todas as semanas.",
+           "Subscreva a newsletter",
+           "Um e-mail por semana com o que vale a pena saber. Mais nada.", "/en/newsletter/"),
     "ar": ("تابع CB Grup Barna", "تابعنا على إنستغرام",
            "@cbgrupbarna · حياة النادي كل أسبوع.",
            "اشترك في النشرة البريدية",
@@ -187,6 +197,8 @@ A11Y_ETIQUETA = {
     "nl": "Toegankelijkheid — WCAG 2.2 AA",
     "fr": "Accessibilité — WCAG 2.2 AA",
     "ar": "إمكانية الوصول — WCAG 2.2 AA",
+    "tr": "Erişilebilirlik — WCAG 2.2 AA",
+    "pt": "Acessibilidade — WCAG 2.2 AA",
 }
 
 
@@ -254,10 +266,10 @@ def alternatives(url):
     """
     mapa = yaml.safe_load((ROOT / "i18n" / "routes.yml").read_text(encoding="utf-8")) or {}
     for grup in mapa.get("rutes", []):
-        if url not in (grup.get(i) for i in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar")):
+        if url not in (grup.get(i) for i in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar", "tr", "pt")):
             continue
         llista = [(idioma, SITE + grup[idioma])
-                  for idioma in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar") if grup.get(idioma)]
+                  for idioma in ("ca", "es", "en", "ja", "ko", "de", "it", "nl", "fr", "ar", "tr", "pt") if grup.get(idioma)]
         if len(llista) == 1:
             return []          # sense traduccions no cal declarar res
         return llista + [("x-default", SITE + grup["ca"])]
