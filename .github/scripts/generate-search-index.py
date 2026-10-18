@@ -37,6 +37,7 @@ from html.parser import HTMLParser
 
 ARREL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SORTIDA = os.path.join(ARREL, "cerca-index.json")
+IDIOMES_SENSE_CERCADOR = {"ja", "ko", "de", "it", "nl", "fr", "ar", "tr", "pt"}
 
 # Carpetes que no s'indexen mai.
 EXCLOSES = (
@@ -287,7 +288,7 @@ def main():
     pagines = []
     faq = []
     vistes_faq = set()
-    saltades = {"noindex": 0, "redireccio": 0, "buida": 0}
+    saltades = {"noindex": 0, "redireccio": 0, "buida": 0, "idioma-sense-cercador": 0}
 
     for arrel, dirs, fitxers in os.walk(ARREL):
         dirs[:] = [d for d in dirs if d not in EXCLOSES and not d.startswith(".")]
@@ -312,6 +313,13 @@ def main():
                 p.feed(cru)
             except Exception:
                 pass
+
+            # El cercador només té ca, es i en. Les presentacions en japonès,
+            # coreà, alemany, italià, neerlandès, francès, àrab, turc i portuguès
+            # sortirien etiquetades com a català i inflarien el fitxer.
+            if url.split("/")[1] in IDIOMES_SENSE_CERCADOR:
+                saltades["idioma-sense-cercador"] += 1
+                continue
 
             if "noindex" in p.robots:
                 saltades["noindex"] += 1
