@@ -218,7 +218,7 @@ CRUMB_ARIA = {"ca": "Fil d'Ariadna", "es": "Migas de pan", "en": "Breadcrumb"}
 def pagina(lang):
     ruta_relativa = {"ca": "/avantatges-familia/", "es": "/ventajas-familia/",
                      "en": "/family-benefits/"}[lang]
-    canonical = SITE + ruta_relativa
+    canonical = SITE + PREFIX[lang] + ruta_relativa
     lang_links = "".join(
         f'<a href="{SITE}{PREFIX[c]}{p}" hreflang="{c}" lang="{c}" aria-label="{n}"'
         + (' class="active" aria-current="true"' if c == lang else '') + f'>{c.upper()}</a>'

@@ -41,8 +41,18 @@ anotat com a pendent d'un material concret de l'Ana.
 
 **HTML/CSS/JS estàtic al nucli, sense framework.** No hi ha `package.json` a
 l'arrel ni build step per a les pàgines del club: cada `.html` és el fitxer
-que es serveix. Allotjat a **GitHub Pages**, domini propi via `CNAME`
-(`cbgrupbarna.info`).
+que es serveix. Allotjat a **GitHub Pages**, domini propi via `CNAME`.
+
+**⚠️ Des del 14/09/2026 el `CNAME` diu `linksbio.cbgrupbarna.info`, no
+`cbgrupbarna.info`.** Decisió de direcció (commit `0435df4`): la web es va
+traslladar a aquest subdomini; `cbgrupbarna.info` (arrel) ara redirigeix a
+`cbgrupbarna.com` (la web WordPress, que es queda com la web convencional
+del club), i les rutes internes de `cbgrupbarna.info/<pàgina>` redirigeixen
+al mateix camí sota `linksbio.cbgrupbarna.info`. Sitemap, `robots.txt` i
+`llms.txt` ja fan servir el domini nou arreu. **Els passos de recuperació
+del punt §9 d'aquesta skill encara diuen `cbgrupbarna.info`**: si mai cal
+fer-los servir de debò, el domini a revincular a GitHub Pages i al DNS és
+`linksbio.cbgrupbarna.info`.
 
 - **`css/barna.css`** — full d'estils compartit per totes les pàgines
   generades i moltes de manuals (campus, 3x3, blog, patrocinadors, femení).
