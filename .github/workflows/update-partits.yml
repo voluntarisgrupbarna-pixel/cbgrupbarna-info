@@ -91,11 +91,23 @@ jobs:
           pip install --quiet playwright
           python -m playwright install --with-deps chromium
 
+      # Si la FCBQ porta dies sense deixar entrar, l'script surt amb error per
+      # deixar-ho dit. Però la resta de passos han de córrer igualment: les
+      # fitxes, els .ics i el commit es fan amb les dades que ja hi ha, i
+      # aturar-los aquí seria canviar un problema silenciós per un de pitjor.
+      # L'avís es cobra al final, amb el workflow en vermell.
       - name: Baixar i comparar el calendari FCBQ (robot complet)
+        id: robot
+        continue-on-error: true
         if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode == 'complet'
         run: python .github/scripts/update-partits.py
 
+      # Mateix tracte que el robot complet: si la FCBQ no el deixa entrar,
+      # l'script surt amb error però la resta de passos han de córrer igual.
+      # L'avís es cobra al final, amb el workflow en vermell.
       - name: Afegir només els resultats de la setmana (fitxa del club)
+        id: resultats
+        continue-on-error: true
         if: steps.finestra.outputs.run == 'true' && steps.finestra.outputs.mode == 'resultats'
         run: python .github/scripts/update-resultats.py
 
@@ -153,3 +165,16 @@ jobs:
             git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
             git push
           fi
+
+      # L'últim pas, a posta: tot el que es podia fer ja s'ha fet i s'ha
+      # commitejat. Això només posa el workflow en vermell perquè, a la
+      # llista d'Actions, un dia que el robot no ha pogut entrar no es vegi
+      # igual que un dia que ha anat bé.
+      - name: El robot no ha pogut entrar a la FCBQ
+        if: steps.robot.outcome == 'failure' || steps.resultats.outcome == 'failure'
+        run: |
+          echo "El pas «Baixar i comparar el calendari FCBQ» ha fallat."
+          echo "Els partits i resultats no s'estan actualitzant sols."
+          echo "Via manual mentrestant: /partits/ → Gestió (pujar el PDF de la federació)."
+          echo "Diagnòstic i sortides possibles: PENDENTS-WEB.md."
+          exit 1
