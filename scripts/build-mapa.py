@@ -42,9 +42,6 @@ ARBRE = [
         ("/faq/", "Preguntes freqüents", "Preguntas frecuentes", "FAQ"),
     ]),
     ("Equips i temporada", "Equipos y temporada", "Teams and season", [
-        ("/partits/equips/", "Equips", "Equipos", "Teams"),
-        ("/partits/", "Calendari", "Calendario", "Calendar"),
-        ("/partits/calendaris/", "Calendari per equip", "Calendario por equipo", "Calendar by team"),
         ("/magics/", "Barna Màgics", "Barna Màgics", "Barna Màgics"),
     ]),
     ("Esdeveniments", "Eventos", "Events", [

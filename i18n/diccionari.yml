@@ -92,7 +92,7 @@ textos:
 # secundaris, que són els primers que cauen quan el menú no hi cap.
 estructura:
   ca:
-    nav: [nav_equips, nav_club, partits, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
+    nav: [nav_club, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
     peu:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, magics, torneig_3x3, cistella_petita,
                           empreses, partners, installacions, organigrama, posicionament,
@@ -101,14 +101,14 @@ estructura:
       - [titol_contacte, [info_demanar, newsletter, bustia, faq]]
       - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]
   es:
-    nav: [nav_equips, nav_club, partits, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
+    nav: [nav_club, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
     peu:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
       - [titol_contacte, [info_demanar, newsletter, bustia, faq]]
       - [titol_legal, [privacitat, avis_legal, galetes, accessibilitat]]
   en:
-    nav: [nav_equips, nav_club, partits, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
+    nav: [nav_club, "nav_escoleta.opt", "nav_campus.opt", "nav_empreses.opt"]
     peu:
       - [titol_el_barna, [escoleta_llarg, campus_llarg, torneig_3x3, partners, dades_oficials]]
       - [titol_temporada, [partits, calendaris, fotos, premidonaesport, blog, premsa_llarg]]
