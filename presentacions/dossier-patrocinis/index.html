@@ -255,10 +255,11 @@
   /* PATROCINADORS · mateixa graella i mides que /patrocinadors/, sobre placa
      blanca perquè els logos no es facin malbé en mode fosc. Els fitxers fan
      entre 80 i 180 px: el marc es queda petit a posta, no s'amplien. */
-  .sponsor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:12px;margin-top:26px}
+  .sponsor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:26px}
   .sponsor{display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);aspect-ratio:16/10;padding:14px;text-decoration:none;transition:border-color .3s var(--ease)}
+  .sponsor.on-dark{background:#0A0908}
   a.sponsor:hover{border-color:var(--red)}
-  .sponsor img{max-width:88px;max-height:40px;width:auto;object-fit:contain}
+  .sponsor img{max-width:140px;max-height:68px;width:auto;object-fit:contain}
   .sponsor.txt span{font-family:var(--display);font-size:15px;letter-spacing:.14em;color:#10100E;text-transform:uppercase}
   .sponsor-note{margin-top:18px;font-size:13px;color:var(--muted)}
 
@@ -860,7 +861,7 @@
       <a class="sponsor" href="/patrocinadors/partners/fundacio-mullor/"><img src="/partners/fundacio-mullor.png" alt="Fundació Mullor" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/romeo-abogados/"><img src="/partners/romeo-abogados.png" alt="Romeo Abogados" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/westfield-glories/"><img src="/partners/westfield-glories.png" alt="Westfield Glòries" loading="lazy"></a>
-      <span class="sponsor txt"><span>Loteria Clot</span></span>
+      <span class="sponsor"><img src="/partners/catalog/loteria-clot.png" alt="Loteria Clot" loading="lazy"></span>
       <span class="sponsor txt"><span>Your Beauty Corner</span></span>
       <a class="sponsor" href="/patrocinadors/partners/gbk-globabasket/"><img src="/partners/gbk-globabasket.png" alt="GBK · Globasket" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/panteres-grogues/"><img src="/partners/panteres-grogues.png" alt="Panteres Grogues" loading="lazy"></a>
@@ -871,10 +872,10 @@
       <a class="sponsor" href="/patrocinadors/partners/melosa-hamburgueseria/"><img src="/partners/melosa-hamburgueseria.png" alt="Melosa" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/ovella-negra/"><img src="/partners/ovella-negra.png" alt="Ovella Negra" loading="lazy"></a>
       <span class="sponsor"><img src="/partners/catalog/enlaza.png" alt="Enlaza" loading="lazy"></span>
-      <a class="sponsor" href="/patrocinadors/partners/manual-colors/"><img src="/partners/manual-colors.png" alt="Manual Colors" loading="lazy"></a>
+      <a class="sponsor on-dark" href="/patrocinadors/partners/manual-colors/"><img src="/partners/manual-colors.png" alt="Manual Colors" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/armand-optics/"><img src="/partners/armand-optics.png" alt="Armand Òptics" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/clinica-dental-bac-de-roda/"><img src="/partners/clinica-dental-bac-de-roda.png" alt="Clínica Bac de Roda" loading="lazy"></a>
-      <span class="sponsor"><img src="/partners/catalog/compex.svg" alt="Compex" loading="lazy"></span>
+      <span class="sponsor on-dark"><img src="/partners/catalog/compex.svg" alt="Compex" loading="lazy"></span>
       <span class="sponsor"><img src="/partners/catalog/elite-bags.png" alt="Elite Bags / Bags Up" loading="lazy"></span>
       <span class="sponsor txt"><span>Nova Farmàcia Clot</span></span>
       <span class="sponsor"><img src="/partners/catalog/euno-display.svg" alt="EUNO Display" loading="lazy"></span>
@@ -882,8 +883,8 @@
       <a class="sponsor" href="/patrocinadors/partners/instax-fujifilm/"><img src="/partners/instax-fujifilm.png" alt="Instax Fujifilm" loading="lazy"></a>
       <span class="sponsor"><img src="/partners/catalog/roamix.svg" alt="Roamix" loading="lazy"></span>
       <span class="sponsor"><img src="/partners/catalog/zoho.png" alt="Zoho" loading="lazy"></span>
-      <span class="sponsor txt"><span>Salesforce</span></span>
-      <span class="sponsor txt"><span>Claude</span></span>
+      <span class="sponsor on-dark"><img src="/partners/catalog/salesforce.svg" alt="Salesforce" loading="lazy"></span>
+      <span class="sponsor"><img src="/partners/catalog/anthropic.svg" alt="Claude" loading="lazy"></span>
       <span class="sponsor txt"><span>GBK Teamswear</span></span>
     </div>
 
