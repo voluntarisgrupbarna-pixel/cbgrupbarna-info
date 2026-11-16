@@ -406,6 +406,8 @@
   .pack .tag{font-family:var(--body);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
   .pack.top .tag{color:var(--red)}
   .pack p{font-size:13.5px;color:var(--muted);margin-top:10px}
+  .pack .price{font-family:var(--display);font-size:clamp(22px,2.6vw,28px);color:var(--ink);margin-top:14px;text-transform:uppercase}
+  .pack .price span{font-family:var(--body);font-size:11px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0;margin-left:6px}
   .pack ul{list-style:none;margin-top:16px}
   .pack li{position:relative;padding:8px 0 8px 010px;padding-left:22px;font-size:13px;border-top:1px solid var(--line)}
   .pack li::before{content:'·';position:absolute;left:6px;color:var(--red);font-weight:700}
@@ -847,35 +849,106 @@
 <!-- PARTNERS -->
 <section class="sec" id="partners">
   <div class="wrap">
-    <div class="sech"><h2>Qui ja ens acompanya</h2><em>24 empreses i entitats</em></div>
+    <div class="sech"><h2>Qui ja ens acompanya</h2><em>87 marques · partners i col·laboradors</em></div>
+
+    <p class="lab" style="margin-top:4px">· Partners · aportació econòmica (33)</p>
     <div class="sponsor-grid">
-      <a class="sponsor" href="/patrocinadors/partners/instax-fujifilm/"><img src="/partners/instax-fujifilm.png" alt="Instax Fujifilm" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/westfield-glories/"><img src="/partners/westfield-glories.png" alt="Westfield Glòries" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/time-chamber/"><img src="/partners/time-chamber.png" alt="Time Chamber" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/clinica-dental-bac-de-roda/"><img src="/partners/clinica-dental-bac-de-roda.png" alt="Clínica Dental Bac de Roda" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/gbk-globabasket/"><img src="/partners/gbk-globabasket.png" alt="GBK · Globasket" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/eix-clot/"><img src="/partners/eix-clot.png" alt="Eix Clot" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/herbolaris-montserrat/"><img src="/partners/herbolaris-montserrat.png" alt="Herbolaris Montserrat" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/stepback-podologia/"><img src="/partners/stepback-podologia.png" alt="Stepback Podologia" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/aquamiga/"><img src="/partners/aquamiga.png" alt="Aquamiga" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/armand-optics/"><img src="/partners/armand-optics.png" alt="Armand Òptics" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/manual-colors/"><img src="/partners/manual-colors.png" alt="Manual Colors" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/melosa-hamburgueseria/"><img src="/partners/melosa-hamburgueseria.png" alt="La Melosa" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/foto-jane/"><img src="/partners/foto-jane.png" alt="Foto Jané" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/mercat-dels-encants/"><img src="/partners/mercat-dels-encants.png" alt="Mercat dels Encants" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/tot-salut/"><img src="/partners/tot-salut.png" alt="Tot Salut" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/ovella-negra/"><img src="/partners/ovella-negra.png" alt="Ovella Negra" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/romeo-abogados/"><img src="/partners/romeo-abogados.png" alt="Romeo Abogados" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/fundacio-mullor/"><img src="/partners/fundacio-mullor.png" alt="Fundació Mullor" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/l-aquarium-de-barcelona/"><img src="/partners/l-aquarium-de-barcelona.png" alt="L'Aquàrium de Barcelona" loading="lazy"></a>
-      <span class="sponsor txt"><span>Wilson</span></span>
+      <span class="sponsor txt"><span>OSHEE</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/eix-clot/"><img src="/partners/eix-clot.png" alt="Eix Clot" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/eix-comercial-sant-marti/"><img src="/partners/eix-comercial-sant-marti.png" alt="Eix Comercial Sant Martí" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/illa-fantasia/"><img src="/partners/illa-fantasia.png" alt="Illa Fantasia" loading="lazy"></a>
+      <span class="sponsor txt"><span>Encants Glòries</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/fundacio-mullor/"><img src="/partners/fundacio-mullor.png" alt="Fundació Mullor" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/romeo-abogados/"><img src="/partners/romeo-abogados.png" alt="Romeo Abogados" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/westfield-glories/"><img src="/partners/westfield-glories.png" alt="Westfield Glòries" loading="lazy"></a>
+      <span class="sponsor txt"><span>Loteria Clot</span></span>
+      <span class="sponsor txt"><span>Your Beauty Corner</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/gbk-globabasket/"><img src="/partners/gbk-globabasket.png" alt="GBK · Globasket" loading="lazy"></a>
       <a class="sponsor" href="/patrocinadors/partners/panteres-grogues/"><img src="/partners/panteres-grogues.png" alt="Panteres Grogues" loading="lazy"></a>
-      <a class="sponsor" href="/patrocinadors/partners/zapic-ai/"><img src="/partners/zapic-ai.png" alt="Zapic AI" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/time-chamber/"><img src="/partners/time-chamber.png" alt="Time Chamber" loading="lazy"></a>
+      <span class="sponsor txt"><span>Wilson</span></span>
+      <span class="sponsor txt"><span>Today School</span></span>
+      <span class="sponsor txt"><span>ESEI</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/melosa-hamburgueseria/"><img src="/partners/melosa-hamburgueseria.png" alt="Melosa" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/ovella-negra/"><img src="/partners/ovella-negra.png" alt="Ovella Negra" loading="lazy"></a>
+      <span class="sponsor txt"><span>Enlaza</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/manual-colors/"><img src="/partners/manual-colors.png" alt="Manual Colors" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/armand-optics/"><img src="/partners/armand-optics.png" alt="Armand Òptics" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/clinica-dental-bac-de-roda/"><img src="/partners/clinica-dental-bac-de-roda.png" alt="Clínica Bac de Roda" loading="lazy"></a>
+      <span class="sponsor txt"><span>Compex</span></span>
+      <span class="sponsor txt"><span>Elite Bags / Bags Up</span></span>
+      <span class="sponsor txt"><span>Nova Farmàcia Clot</span></span>
+      <span class="sponsor txt"><span>EUNO Display</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/foto-jane/"><img src="/partners/foto-jane.png" alt="Foto Jané" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/instax-fujifilm/"><img src="/partners/instax-fujifilm.png" alt="Instax Fujifilm" loading="lazy"></a>
+      <span class="sponsor txt"><span>Roamix</span></span>
+      <span class="sponsor txt"><span>Zoho</span></span>
+      <span class="sponsor txt"><span>Salesforce</span></span>
+      <span class="sponsor txt"><span>Claude</span></span>
+      <span class="sponsor txt"><span>GBK Teamswear</span></span>
     </div>
+
+    <p class="lab" style="margin-top:30px">· Col·laboradors · productes i serveis (54)</p>
+    <div class="sponsor-grid">
+      <span class="sponsor txt"><span>Frutitas</span></span>
+      <span class="sponsor txt"><span>Go-Go Cream</span></span>
+      <span class="sponsor txt"><span>Quely</span></span>
+      <span class="sponsor txt"><span>Aloud Music</span></span>
+      <span class="sponsor txt"><span>Antic Teatre</span></span>
+      <span class="sponsor txt"><span>Balañá</span></span>
+      <span class="sponsor txt"><span>Gran Teatre del Liceu</span></span>
+      <span class="sponsor txt"><span>Ibercamera</span></span>
+      <span class="sponsor txt"><span>Infanta Isabel</span></span>
+      <span class="sponsor txt"><span>La Bona Party</span></span>
+      <span class="sponsor txt"><span>MPC Management</span></span>
+      <span class="sponsor txt"><span>Montebello</span></span>
+      <span class="sponsor txt"><span>Octubre Producciones</span></span>
+      <span class="sponsor txt"><span>Palau de la Música Catalana</span></span>
+      <span class="sponsor txt"><span>Poliorama</span></span>
+      <span class="sponsor txt"><span>Tantarantana</span></span>
+      <span class="sponsor txt"><span>Teatre Texas</span></span>
+      <span class="sponsor txt"><span>Tyl Tyl</span></span>
+      <span class="sponsor txt"><span>Copa Colegial</span></span>
+      <span class="sponsor txt"><span>Armony</span></span>
+      <span class="sponsor txt"><span>Bayeco</span></span>
+      <span class="sponsor txt"><span>Four Points</span></span>
+      <span class="sponsor txt"><span>ILUNION Hotels</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/illa-fantasia/"><img src="/partners/illa-fantasia.png" alt="Illa Fantasia" loading="lazy"></a>
+      <span class="sponsor txt"><span>Laserzone / Salting</span></span>
+      <span class="sponsor txt"><span>Mas Marcè</span></span>
+      <span class="sponsor txt"><span>Acuarela Discos</span></span>
+      <span class="sponsor txt"><span>Duomo Ediciones</span></span>
+      <span class="sponsor txt"><span>Editorial Mediterrània</span></span>
+      <span class="sponsor txt"><span>Kasba Music</span></span>
+      <span class="sponsor txt"><span>Difont / Logikard</span></span>
+      <span class="sponsor txt"><span>Embalajes Carbonell</span></span>
+      <span class="sponsor txt"><span>Impact3D Studio</span></span>
+      <span class="sponsor txt"><span>Sustain Awards</span></span>
+      <span class="sponsor txt"><span>Todotrofeo</span></span>
+      <span class="sponsor txt"><span>Kamiiso</span></span>
+      <span class="sponsor txt"><span>Safta</span></span>
+      <span class="sponsor txt"><span>Stikets</span></span>
+      <span class="sponsor txt"><span>ArnauPsicoDeporte</span></span>
+      <span class="sponsor txt"><span>Clínica Podològica M.O.</span></span>
+      <span class="sponsor txt"><span>FARDI</span></span>
+      <span class="sponsor txt"><span>Fisaude</span></span>
+      <span class="sponsor txt"><span>Keepgoing</span></span>
+      <span class="sponsor txt"><span>Onlywell</span></span>
+      <a class="sponsor" href="/patrocinadors/partners/stepback-podologia/"><img src="/partners/stepback-podologia.png" alt="Stepback Podologia" loading="lazy"></a>
+      <a class="sponsor" href="/patrocinadors/partners/tot-salut/"><img src="/partners/tot-salut.png" alt="Tot Salut" loading="lazy"></a>
+      <span class="sponsor txt"><span>ZAMST</span></span>
+      <span class="sponsor txt"><span>BLUETTI</span></span>
+      <span class="sponsor txt"><span>NordVPN</span></span>
+      <span class="sponsor txt"><span>PGYTECH</span></span>
+      <span class="sponsor txt"><span>Shoulderpod</span></span>
+      <span class="sponsor txt"><span>CMAX</span></span>
+      <span class="sponsor txt"><span>KIRINCO</span></span>
+      <span class="sponsor txt"><span>Sorio / MySorio</span></span>
+    </div>
+
     <p class="sponsor-note">Totes les fitxes, a <a class="inline-link" href="/patrocinadors/">Patrocinadors</a>
-    i al <a class="inline-link" href="/partners-mapa/">mapa de partners</a>.</p>
+    i al <a class="inline-link" href="/partners-mapa/">mapa de partners</a>. Falta la identitat gràfica
+    d'algunes marques noves — es van afegint a mesura que arriben els logos.</p>
   </div>
 </section>
 
@@ -887,6 +960,7 @@
       <div class="pack">
         <span class="tag">Bronze</span>
         <h4>Presència digital</h4>
+        <p class="price">500 € <span>/ temporada</span></p>
         <p>La manera senzilla de començar.</p>
         <ul>
           <li>Logo a les stories setmanals</li>
@@ -897,6 +971,7 @@
       <div class="pack">
         <span class="tag">Plata</span>
         <h4>Digital i pavelló</h4>
+        <p class="price">1.000 € <span>/ temporada</span></p>
         <p>La marca també es veu als dies de partit.</p>
         <ul>
           <li>Banderola a La Nau del Clot</li>
@@ -907,6 +982,7 @@
       <div class="pack top">
         <span class="tag">Or</span>
         <h4>Màxima visibilitat</h4>
+        <p class="price">2.500 € <span>/ temporada</span></p>
         <p>La marca, lligada als events del club.</p>
         <ul>
           <li>Naming d'un event</li>
